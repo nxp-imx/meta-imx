@@ -15,6 +15,9 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://glesv1_cm_x11.pc \
            file://glesv2.pc \
            file://glesv2_x11.pc \
+           file://gc_wayland_protocol.pc \
+           file://wayland-egl.pc \
+           file://wayland-viv.pc \
            file://gpu-viv-bin-mx6q.sh \
           "
 
@@ -24,6 +27,9 @@ SRC_URI[sha256sum] = "18148fe6ba20439aae41083a60073ce0ebf57d228a911cfd2bcf5b7c6e
 PACKAGES =+ "libvivante-dfb-mx6"
 
 USE_HFP = "${@base_contains("TUNE_FEATURES", "callconvention-hard", "yes", "no", d)}"
+
+# FIXME: community install is broken, always picks WL
+USE_WL = "no"
 
 do_configure () {
 
