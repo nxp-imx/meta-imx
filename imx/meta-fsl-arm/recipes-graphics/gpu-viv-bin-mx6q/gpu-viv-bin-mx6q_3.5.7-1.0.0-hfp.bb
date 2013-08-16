@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://usr/include/gc_vdk.h;endline=11;md5=19f5925343fa3da65
 
 PE = "1"
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
+SRC_URI = "${FSL_MIRROR}/${PN}-3.5.7-1.0.0-alpha.2-hfp.bin;fsl-eula=true \
            file://0001-change-header-path-to-HAL.patch \
            file://gc_hal_eglplatform-remove-xlib-undefs.patch \
            file://egl.pc \
@@ -18,11 +18,12 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://gc_wayland_protocol.pc \
            file://wayland-egl.pc \
            file://wayland-viv.pc \
-           file://gpu-viv-bin-mx6q.sh \
           "
 
-SRC_URI[md5sum] = "080225adc7aa61af7bfdab17527e62e3"
-SRC_URI[sha256sum] = "b0ece40672933127b774b8ea6c45ef02ba6fc85af4679285e5bc5022502714bc"
+SRC_URI[md5sum] = "f5f4e2e7767c784315461c132929e7d3"
+SRC_URI[sha256sum] = "f16747ee5ae2e88631cc1494db98f7b5762940c7db25795906b7cc8f87405caf"
+
+S = "${WORKDIR}/${PN}-3.5.7-1.0.0-alpha.2-hfp"
 
 PACKAGES =+ "libvivante-dfb-mx6"
 
@@ -45,18 +46,11 @@ do_install_append () {
         cp -r ${S}/usr/lib/directfb-1.6-0 ${D}${libdir}
     fi
 
-    if [ "${USE_X11}" = "yes" ]; then
-        install -d ${D}${sysconfdir}/profile.d/
-        install -m 0755 ${WORKDIR}/gpu-viv-bin-mx6q.sh ${D}${sysconfdir}/profile.d/
-    fi
-
     mv ${D}${libdir}/libEGL.so.1 ${D}${libdir}/libEGL.so.1.0
     ln -sf libEGL.so.1.0 ${D}${libdir}/libEGL.so
     ln -sf libEGL.so.1.0 ${D}${libdir}/libEGL.so.1
 
     find ${D}${libdir} -type f -exec chmod 644 {} \;
 }
-
-FILES_${PN}-conf = "${sysconfdir}/profile.d/gpu-viv-bin-mx6q.sh"
 
 FILES_libvivante-dfb-mx6 = "${libdir}/directfb-1.6-0/gfxdrivers/libdirectfb_gal.so"
