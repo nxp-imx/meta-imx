@@ -18,89 +18,59 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-usage()
-{
-    echo -e "\nUsage: source ${BASH_SOURCE[0]} <-m machine>
-    Optional parameters: [-j jobs] [-t tasks] [-p] [-h]"
-    if [ -e "$META_FSL_ARM_LAYER_PATH" ]; then
-        echo -e -n "\n    Supported arm machines: `ls ${META_FSL_ARM_LAYER_PATH}/conf/machine \
-        | grep -v "^include" | sed s/\.conf//g | xargs echo`"
-    fi
-echo "
-    * [-j jobs]:  number of jobs for make to spawn during the compilation stage.
-    * [-t tasks]: number of BitBake tasks that can be issued in parallel.
-    * [-k version]:  Specify preferred kernel version
-    * [-g tag]:   Specify a tag to build from
-    * [-r release]  This is the release version so for 3.0.35 would be 3.0.35_4.0.0 (would be 4.0.0)
-    * [-d path]:  non-default DL_DIR path (download dir)
-    * [-b path]:  non-default build dir location
-    * [-s path]:  append an extra path to build_machine_release folder
-    * [-l]:       lite mode. To help conserve disk space, deletes the building
-                  directory once the package is built.
-    * [-p ]:      Build from internal git - for Freescale Development team only
-    * [-h]:       help
-"
-}
+CWD=`pwd`
 
 exit_message ()
 {
-    echo "Run the following commands to start a build:"
-    local i=''
-
-    if [[ "${BOARD}" =~ "imx" ]]; then
-        if [ -e "${META_FSL_MULTIMEDIA_LAYER_PATH}" ]; then
-            for i in `find ${META_FSL_MULTIMEDIA_LAYER_PATH}/ -name "fsl-image-*.bb"`;do
-            i=${i##*/};i=${i%.bb};
-                echo "    bitbake $i";
-            done
-        fi
-    fi
-
    echo "To return to this build environment later please run:"
-   echo "    source setup-environment build"
+   echo "    source setup-environment <build_dir>" 
+
 }
+
+usage()
+{
+    echo -e "\nUsage: source $PROGNAME
+    Optional parameters: [-b build-dir] [-e back-end] [-h]"
+echo "
+    * [-b build-dir]: Build directory, if unspecified script uses 'build' as output directory
+    * [-e back-end]: Options are 'fb', 'dfb', 'x11'. If unspecified, defaults to X11
+    * [-h]: help
+"
+}
+
 
 clean_up()
 {
-    unset ARM_DIR META_FSL_MULTIMEDIA_LAYER_PATH META_FSL_ARM_LAYER_PATH META_FSL_BSP_RELEASE
-    unset fsl_setup_j fsl_setup_t fsl_setup_help fsl_setup_error
-    unset fsl_setup_lite fsl_setup_flag SKIP_CONFIG OPTIND OLD_OPTIND VALID_BOARD
-    unset fsl_private_build BOARD JOBS THREADS exit_message usage clean_up
-    unset fsl_setup_extra_path fsl_setup_build_path fsl_setup_dl_path
-    unset ARM_BOARD ARCH fsl_preferred_version fsl_release_tag  fsl_release_tag_set
-    unset EULA fsl_kernel_version fsl_release_version fsl_release_version_set
+
+    unset CWD BUILD_DIR BACKEND DIST_FEATURES
+    unset fsl_setup_help fsl_setup_error fsl_setup_flag
+    unset usage clean_up
+    unset ARM_DIR META_FSL_BSP_RELEASE
+    exit_message clean_up
 }
-
-# ARM_DIR is the directory that script fsl_setup exists
-ARM_DIR=`readlink -f ${BASH_SOURCE[0]}`
-ARM_DIR=`dirname $ARM_DIR`
-
-META_FSL_MULTIMEDIA_LAYER_PATH="${ARM_DIR}/sources/meta-fsl-demos"
-META_FSL_ARM_LAYER_PATH="${ARM_DIR}/sources/meta-fsl-arm"
-
-if [ -z "$ZSH_NAME" ] && [ "$0" = "${BASH_SOURCE[0]}" ]; then
-    echo "Error: This script needs to be sourced."
-    usage && exit 1
-fi
 
 # get command line options
 OLD_OPTIND=$OPTIND
-while getopts "m:k:r:g:j:t:ph" fsl_setup_flag
+while getopts "k:r:t:b:e:gh" fsl_setup_flag
 do
     case $fsl_setup_flag in
-        m) BOARD="$OPTARG";
+        b) BUILD_DIR="$OPTARG";
+           echo -e "\n Build directory is " $BUILD_DIR
            ;;
-        j) fsl_setup_j="$OPTARG";
-           ;;
-        t) fsl_setup_t="$OPTARG";
-           ;;
-        k) fsl_preferred_version="$OPTARG";
-           ;;
-        r) fsl_release_version="$OPTARG"; fsl_release_version_set='true';
-           ;;
-        p) fsl_private_build='true';
-           ;;
-        g) fsl_release_tag="$OPTARG"; fsl_release_tag_set='true'; 
+        e)
+            BACKEND="$OPTARG"
+            if [ "$BACKEND" = "fb" ]; then
+                DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g \${DISTRO_FEATURES_LIBC}"
+                 echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
+            elif [ "$BACKEND" = "dfb" ]; then
+                DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g directfb \${DISTRO_FEATURES_LIBC}"
+                 echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
+            elif [ "$BACKEND" = "x11" ]; then
+                 echo -e  "\n Using X11 backend with poky DIST_FEATURES"
+            else
+                echo -e "\n Invalid backend specified - use fb, dfb or x11"
+                fsl_setup_error='true'
+            fi
            ;;
         h) fsl_setup_help='true';
            ;;
@@ -115,119 +85,39 @@ if test $fsl_setup_error || test $fsl_setup_help; then
     usage && clean_up && return 1
 fi
 
-# Check board correction
-if [ -e "$META_FSL_ARM_LAYER_PATH" ]; then
-    ARM_BOARD=`ls ${META_FSL_ARM_LAYER_PATH}/conf/machine`
+if [ -z "$BUILD_DIR" ]; then
+    BUILD_DIR='build'
 fi
-VALID_BOARD=`echo -e "$ARM_BOARD" | grep ${BOARD}.conf$ | wc -l`
-if [ "x$BOARD" = "x" ] || [ "$VALID_BOARD" = "0" ]; then
-    echo "Invalid board type!"
-    usage && clean_up
+if [ ! -e $BUILD_DIR/conf/local.conf ]; then
+    echo -e "\n ERROR - No build directory is set yet. Run the 'setup-environment' script before running this script to create " $BUILD_DIR
+    echo -e "\n"
     return 1
-else
-    echo "Configuring for ${BOARD} board type"
 fi
 
-# set default jobs and threads
-JOBS="2"
-THREADS="2"
-# Validate optional jobs and threads
-if [ -n "$fsl_setup_j" ] && [[ "$fsl_setup_j" =~ ^[0-9]+$ ]]; then
-    JOBS=$fsl_setup_j
-fi
-if [ -n "$fsl_setup_t" ] && [[ "$fsl_setup_t" =~ ^[0-9]+$ ]]; then
-    THREADS=$fsl_setup_t
-fi
+# Run this part only the first time the script is executed
+if [ ! -e $BUILD_DIR/conf/local.conf.org ]; then
+    cp $BUILD_DIR/conf/local.conf $BUILD_DIR/conf/local.conf.org
 
-# setup all configurable items: mirrors, dl_dir, sscache dir, machine, etc
-# setup machine type
-echo >> build/conf/local.conf
-echo "# Machine Selection" >> build/conf/local.conf
-echo "MACHINE = \"${BOARD}\"" >> build/conf/local.conf
-echo >> build/conf/local.conf
+    META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-fsl-arm"
+    echo "##Freescale Yocto Release layer" >> $BUILD_DIR/conf/bblayers.conf
+    echo "BBLAYERS += \"${META_FSL_BSP_RELEASE}\"" >> $BUILD_DIR/conf/bblayers.conf
 
-# setup parallel jobs and tasks
-echo "# Parallelism Options" >> build/conf/local.conf
-echo "BB_NUMBER_THREADS = \"$THREADS\"" >> build/conf/local.conf
-echo "PARALLEL_MAKE = \"-j $JOBS\"" >> build/conf/local.conf
-echo >> build/conf/local.conf
+    META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-fsl-demos"
+    echo "BBLAYERS += \"${META_FSL_BSP_RELEASE}\"" >> $BUILD_DIR/conf/bblayers.conf
 
+    echo >> $BUILD_DIR/conf/local.conf
 
-if [[ "${BOARD}" =~ "imx" ]]; then
-
-    META_FSL_BSP_RELEASE="${ARM_DIR}/sources/meta-fsl-bsp-release/imx"
-    echo "##Add in Freescale release layer" >> build/conf/bblayers.conf
-    echo "BBLAYERS += \"${META_FSL_BSP_RELEASE}\"" >> build/conf/bblayers.conf
-
-    if [ ! -z "$fsl_private_build" ];then
-       export ftp_proxy="wwwgate0.freescale.net:1080/"
-       # setup internal build servers
-       echo "# Internal Build servers" >> build/conf/local.conf
-       echo "FSL_ARM_GIT_SERVER = \"sw-git.freescale.net\"" >> build/conf/local.conf
-       echo >> build/conf/local.conf
-
-       # setup Build from Tip
-       echo "# Freescale Tag " >> build/conf/local.conf
-       echo "FSL_ARM_RELEASE_TAG = \"\${AUTOREV}\"" >> build/conf/local.conf
-       echo >> build/conf/local.conf
-
-       if [ ! -z "$fsl_release_tag_set" ];then
-            echo "# Freescale Tag " >> build/conf/local.conf
-            echo "FSL_ARM_BRANCH_TAG = \"tag\"" >> build/conf/local.conf
-            echo "FSL_ARM_GIT_TAGBRANCH = \"$fsl_release_tag\"" >> build/conf/local.conf
-            echo "FSL_ARM_GIT_VERSION = \"\"" >> build/conf/local.conf
-            echo "FSL_ARM_VERSION_GIT_TAGBRANCH = \"$fsl_release_tag\"" >> build/conf/local.conf
-            echo >> build/conf/local.conf
-       else
-           # setup Build from Branch
-           echo "# Freescale Branch " >> build/conf/local.conf
-           echo "FSL_ARM_BRANCH_TAG = \"branch\"" >> build/conf/local.conf
-           echo "FSL_ARM_GIT_TAGBRANCH = \"imx_$fsl_preferred_version\"" >> build/conf/local.conf
-           if [ ! -z "$fsl_release_version_set" ] ; then
-               echo "FSL_ARM_GIT_VERSION = \"_$fsl_release_version\"" >> build/conf/local.conf
-               echo "FSL_ARM_VERSION_GIT_TAGBRANCH = \"imx_$fsl_preferred_version\"" >> build/conf/local.conf
-           else
-               echo "FSL_ARM_GIT_VERSION = \"\"" >> build/conf/local.conf
-               echo "FSL_ARM_VERSION_GIT_TAGBRANCH = \"master\"" >> build/conf/local.conf
-           fi
-           echo >> build/conf/local.conf
-       fi
-
-        echo "# Preferred Versions" >> build/conf/local.conf
-        echo "PREFERRED_VERSION_linux-imx = \"$fsl_preferred_version\"" >> build/conf/local.conf
-        echo >> build/conf/local.conf
-    else
-       # setup external build servers
-       echo "# Freescale Build servers" >> build/conf/local.conf
-       echo "FSL_ARM_GIT_SERVER = \"git.freescale.com/imx\"" >> build/conf/local.conf
-       echo >> build/conf/local.conf
-
-       # setup Build from Tag
-       echo "# Freescale Tag " >> build/conf/local.conf
-       #### Change AUTOREV to tag for release
-       echo "FSL_ARM_RELEASE_TAG = \"\${AUTOREV}\"" >> build/conf/local.conf
-       echo >> build/conf/local.conf
-
-       # setup Build from Tag if tag is specified
-       ### Change branch=<> to tag=<>
-       if [ ! -z "$fsl_release_tag_set" ] ; then
-            echo "# Freescale Tag " >> build/conf/local.conf
-            echo "FSL_ARM_BRANCH_TAG = \"tag\"" >> build/conf/local.conf
-            echo "FSL_ARM_GIT_TAGBRANCH = \"$fsl_release_tag\"" >> build/conf/local.conf
-            echo >> build/conf/local.conf
-            echo "FSL_ARM_GIT_VERSION = \"\"" >> build/conf/local.conf
-       elif [ ! -z "$fsl_release_version" ] ; then
-            echo "FSL_ARM_GIT_VERSION = \"_$fsl_release_version\"" >> build/conf/local.conf
-       else
-            echo "FSL_ARM_GIT_VERSION = \"\"" >> build/conf/local.conf
-       fi
-
-       echo "# Preferred Version"
-       echo "PREFERRED_VERSION_linux-imx = \"$fsl_preferred_version\"" >> build/conf/local.conf
-       echo >> build/conf/local.conf
+    if [ ! -z "$BACKEND" ]; then
+        echo "DISTRO_FEATURES = \"$DIST_FEATURES\"" >> $BUILD_DIR/conf/local.conf
+        echo >> $BUILD_DIR/conf/local.conf
     fi
+else 
+    echo -e "\n Existing build already configured - to reconfigure - delete " $BUILD_DIR
+    echo -e "\n Rerun setup-environment then rerun fsl-setup-release.sh"
+    echo -e "\n Configure multiple backends with different directory names like build-fb, build-dfb"
+    return 1
 fi
 
-exit_message
-cd build
+
+cd  $BUILD_DIR
 clean_up
