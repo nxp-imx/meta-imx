@@ -4,7 +4,7 @@ include recipes-sato/images/core-image-sato.bb
 inherit distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
-CONFLICT_DISTRO_FEATURES = "directfb wayland"
+CONFLICT_DISTRO_FEATURES = "directfb"
 
 IMAGE_FEATURES += "debug-tweaks"
 DISTRO_FEATURES += "pulseaudio"
