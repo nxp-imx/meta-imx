@@ -6,10 +6,11 @@ DESCRIPTION = "Freescale VPU library"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://EULA;md5=6df184a9b1950b68e17fdcd7513bdb97"
 
-SRC_URI = "${FSL_MIRROR}/imx-vpu-${PV}-1.0.0.bin;fsl-eula=true"
-SRC_URI[md5sum] = "03872c64cc503996d82f309f29298c32"
-SRC_URI[sha256sum] = "1b49703c24a792ae7a5b302fad0b2dec762762a981e86c3468788a41c72a3821"
-S = "${WORKDIR}/${PN}-${PV}-1.0.0"
+PE = "1"
+
+SRC_URI = "${FSL_MIRROR}/imx-vpu-${PV}.bin;fsl-eula=true"
+SRC_URI[md5sum] = "f824bed66759cbf10952ae5a880c484b"
+SRC_URI[sha256sum] = "452f3d294861a5a0f85f6be393a1f003864e6beb5ad2a76f14cc9365bbf1a9e0"
 
 do_compile () {
     INCLUDE_DIR="-I${STAGING_INCDIR}/uapi -I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include"
