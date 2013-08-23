@@ -1,6 +1,10 @@
 DESCRIPTION = "Freescale X11 Image"
 
 include recipes-sato/images/core-image-sato.bb
+inherit distro_features_check
+
+REQUIRED_DISTRO_FEATURES = "x11"
+CONFLICT_DISTRO_FEATURES = "directfb wayland"
 
 IMAGE_FEATURES += "debug-tweaks"
 DISTRO_FEATURES += "pulseaudio"
@@ -19,7 +23,7 @@ EXTRA_IMAGE_FEATURES += " \
 
 SOC_IMAGE_INSTALL = ""
 SOC_IMAGE_INSTALL_mx5 = "glcubes-demo"
-SOC_IMAGE_INSTALL_mx6 = "gpu-viv-g2d"
+SOC_IMAGE_INSTALL_mx6 = "gpu-viv-g2d glmark2"
 
 IMAGE_INSTALL += " \
     ${SOC_IMAGE_INSTALL} \
@@ -34,5 +38,8 @@ IMAGE_INSTALL += " \
     qt4-examples \
     fsl-gui-extrafiles \
     "
+
+RDEPENDS_packagegroup-fsl-gstreamer_append_mx6 = " gst-plugins-gl \
+"
 
 export IMAGE_BASENAME = "fsl-image-x11"
