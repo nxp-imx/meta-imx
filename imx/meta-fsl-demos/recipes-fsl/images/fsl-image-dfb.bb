@@ -1,22 +1,15 @@
 DESCRIPTION = "Freescale Image Direct Frame Buffer Image"
 
-#include recipes-graphics/images/core-image-directfb.bb
-
-LICENSE = "MIT"
-
-inherit core-image
-
-IMAGE_FEATURES += "splash package-management ssh-server-dropbear"
-IMAGE_INSTALL += "\
-	${CORE_IMAGE_BASE_INSTALL} \
-	packagegroup-core-basic \
-	packagegroup-core-directfb \
-"
+include recipes-graphics/images/core-image-directfb.bb
+inherit distro_features_check
 
 
 ## Must reset to remove x11
 # Distro Features must be set in local.conf for build to work
 #####DISTRO_FEATURES = "alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g directfb ${DISTRO_FEATURES_LIBC}"
+
+REQUIRED_DISTRO_FEATURES = "directfb"
+CONFLICT_DISTRO_FEATURES = "x11 wayland"
 
 DISTRO_FEATURES += "pulseaudio "
 WEB = "web-webkit"
@@ -34,11 +27,9 @@ IMAGE_INSTALL += " \
     ${SOC_IMAGE_INSTALL} \
     cpufrequtils \
     nano \
+    packagegroup-fsl-tools-testapps \
+    packagegroup-fsl-tools-benchmark \
     "
-
-# remove until alsa-tools break if fixed
-#   packagegroup-fsl-tools-testapps 
-#    packagegroup-fsl-tools-benchmark 
 
 export IMAGE_BASENAME = "fsl-image-dfb"
 
