@@ -1,6 +1,6 @@
 # Copyright (C) 2013 Freescale Semiconductor
 
-require recipes-bsp/imx-test/imx-test.inc
+include imx-test.inc
 
 PE = "1"
 
