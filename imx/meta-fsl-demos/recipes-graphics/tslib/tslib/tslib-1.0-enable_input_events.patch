@@ -1,0 +1,10 @@
+diff --exclude CVS -uNr tslib-1.0/etc/ts.conf tslib-1.0.modified/etc/ts.conf
+--- tslib-1.0/etc/ts.conf	2006-08-24 16:02:55.000000000 -0500
++++ tslib-1.0.modified/etc/ts.conf	2006-12-06 18:10:20.000000000 -0600
+@@ -1,5 +1,5 @@
+ # Uncomment if you wish to use the linux input layer event interface
+-# module_raw input
++module_raw input
+ 
+ # Uncomment if you're using a Sharp Zaurus SL-5500/SL-5000d
+ # module_raw collie
