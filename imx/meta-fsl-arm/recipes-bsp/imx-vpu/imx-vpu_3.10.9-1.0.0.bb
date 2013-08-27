@@ -4,7 +4,7 @@ require recipes-bsp/imx-lib/imx-lib.inc
 
 DESCRIPTION = "Freescale VPU library"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://EULA;md5=6df184a9b1950b68e17fdcd7513bdb97"
+LIC_FILES_CHKSUM = "file://vpu/EULA.txt;md5=b063366b066c9f10037c59756a9ced54"
 
 PE = "1"
 
