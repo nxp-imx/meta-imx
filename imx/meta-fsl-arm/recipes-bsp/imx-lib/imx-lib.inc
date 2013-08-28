@@ -28,5 +28,5 @@ do_install () {
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx6|mx5)"
+
 
