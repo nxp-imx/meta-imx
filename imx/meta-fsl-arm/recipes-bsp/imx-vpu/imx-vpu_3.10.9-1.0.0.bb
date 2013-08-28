@@ -2,6 +2,8 @@
 
 require recipes-bsp/imx-lib/imx-lib.inc
 
+inherit fsl-eula-unpack
+
 DESCRIPTION = "Freescale VPU library"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://vpu/EULA.txt;md5=b063366b066c9f10037c59756a9ced54"
