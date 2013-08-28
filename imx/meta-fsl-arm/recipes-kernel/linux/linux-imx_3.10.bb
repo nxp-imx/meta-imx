@@ -17,8 +17,8 @@ IMX_TEST_SUPPORT = "y"
 
 do_configure_prepend() {
     echo " Internal Kernel build - copy latest defconfig"
-    cp ${S}/arch/arm/configs/imx_v6_v7_defconfig ${S}/.config
-    cp ${S}/arch/arm/configs/imx_v6_v7_defconfig ${S}/../defconfig
+    cp ${S}/arch/arm/configs/imx_v7_defconfig ${S}/.config
+    cp ${S}/arch/arm/configs/imx_v7_defconfig ${S}/../defconfig
 }
 
 do_configure_append() {
