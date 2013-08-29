@@ -12,8 +12,7 @@ PLATFORM_mx53 = "IMX53"
 PLATFORM_mx51 = "IMX51"
 
 SRC_URI = "${FSL_MIRROR}/imx-test-${PV}.tar.gz \
-           file://clocks.sh \
-           file://mxc_x11_test-exclude-IMX-5-6-platforms.patch"
+           file://clocks.sh"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
