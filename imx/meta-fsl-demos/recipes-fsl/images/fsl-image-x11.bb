@@ -23,7 +23,8 @@ EXTRA_IMAGE_FEATURES += " \
 
 SOC_IMAGE_INSTALL = ""
 SOC_IMAGE_INSTALL_mx5 = "glcubes-demo"
-SOC_IMAGE_INSTALL_mx6 = "gpu-viv-g2d glmark2"
+SOC_IMAGE_INSTALL_mx6 = "gpu-viv-g2d glmark2 gst-plugins-gl-meta"
+
 
 IMAGE_INSTALL += " \
     ${SOC_IMAGE_INSTALL} \
@@ -39,7 +40,5 @@ IMAGE_INSTALL += " \
     fsl-gui-extrafiles \
     "
 
-RDEPENDS_packagegroup-fsl-gstreamer_append_mx6 = " gst-plugins-gl \
-"
 
 export IMAGE_BASENAME = "fsl-image-x11"

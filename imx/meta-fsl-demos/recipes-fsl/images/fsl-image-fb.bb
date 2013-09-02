@@ -23,7 +23,7 @@ EXTRA_IMAGE_FEATURES += " \
     tools-profile \
 "
 
-SOC_IMAGE_INSTALL = "gpu-viv-bin-mx6q gpu-viv-g2d"
+SOC_IMAGE_INSTALL = "gpu-viv-bin-mx6q gpu-viv-g2d gst-plugins-gl-meta"
 
 IMAGE_INSTALL += " \
     ${SOC_IMAGE_INSTALL} \
