@@ -1,7 +1,7 @@
 # Copyright (C) 2013 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "Freescale Multimedia VPU wrapper"
-DEPENDS = "imx-lib"
+DEPENDS = "imx-vpu"
 LICENSE = "Proprietary"
 SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://EULA.txt;md5=93b784b1c11b3fffb1638498a8dde3f6"
