@@ -3,6 +3,7 @@
 # Add it into tools & Test applications group
 RDEPENDS_${PN}-tools-testapps += "\
     imx-kobs \
+    imx-vpu \
     canutils \
     bluez4 \
 "
