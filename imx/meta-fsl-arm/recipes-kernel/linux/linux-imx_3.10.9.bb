@@ -29,13 +29,10 @@ do_configure_append() {
     printf "+%s%s"  $head > ${S}/.scmversion
 }
 
-# install nedded headers for imx-test compilation
-do_install_append() {
+#copy zImage to deploy directory
+do_deploy_append() {
 
-    make headers_install
-    if [ -d include/uapi/linux ]; then
-        cp include/uapi/linux/mxc*.h ${STAGING_INCDIR}/uapi
-    fi
+    cp arch/arm/boot/zImage ${DEPLOY_DIR}/images
 }
 
 
