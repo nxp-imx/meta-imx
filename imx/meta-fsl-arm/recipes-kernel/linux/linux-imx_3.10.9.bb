@@ -32,6 +32,9 @@ do_configure_append() {
 #copy zImage to deploy directory
 do_deploy_append() {
 
+   if [! -d "${DEPLOY_DIR}/images" ]; then
+        mkdir ${DEPLOY_DIR}/images
+    fi
     cp arch/arm/boot/zImage ${DEPLOY_DIR}/images
 }
 
