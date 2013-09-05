@@ -29,13 +29,9 @@ do_configure_append() {
     printf "+%s%s"  $head > ${S}/.scmversion
 }
 
-#copy zImage to deploy directory
-do_deploy_append() {
 
-   if [! -d "${DEPLOY_DIR}/images" ]; then
-        mkdir ${DEPLOY_DIR}/images
-    fi
-    cp arch/arm/boot/zImage ${DEPLOY_DIR}/images
+do_deploy_append () {
+    install -d ${DEPLOY_DIR}
+    install -d ${DEPLOY_DIR}/images
+    install  arch/arm/boot/zImage ${DEPLOY_DIR}/images/zImage
 }
-
-
