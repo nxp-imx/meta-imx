@@ -2,8 +2,8 @@
 
 include imx-lib.inc
 
-SRC_URI[md5sum] = "673c5bba47e3a57bd970e9d1240f8b87"
-SRC_URI[sha256sum] = "a9bae3eb57363af1831c159d490f5b246d6e2baa508aa84e8f31ea38ad3aaf0e"
+SRC_URI[md5sum] = "218408606a00770f4a78bf9fe48fa689"
+SRC_URI[sha256sum] = "5955b4950687132ef5abbaed1340e75a3e0107ecb134a93bb1eaf46b33d216b7"
 
 PE = "1"
 
