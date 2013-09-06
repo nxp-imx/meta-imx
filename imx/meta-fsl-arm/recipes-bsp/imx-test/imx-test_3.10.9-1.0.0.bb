@@ -4,8 +4,8 @@ include imx-test.inc
 
 PE = "1"
 
-SRC_URI[md5sum] = "196f95610f1f839dcd01a56a09cd856e"
-SRC_URI[sha256sum] = "27985e09712ea315e7a704bd069aaa9c47e2fdf072e8c2dfa877d95fb19e227d"
+SRC_URI[md5sum] = "d5782a1fbb4a64d2d76617de31a5e3f2"
+SRC_URI[sha256sum] = "599a798348fdbcd0ed162813b8e1ec6cc764dfe14e7c7a069f96f3abbfa75f72"
 
 SRC_URI += "file://imx-test-disable-components-to-fix-build-breaks-in-y.patch"
 
