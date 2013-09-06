@@ -6,7 +6,7 @@ require libfslcodec.inc
 SRC_URI = "${FSL_MIRROR}/${PN}-3.10.9-1.0.0.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-3.10.9-1.0.0"
 
-SRC_URI[md5sum] = "7a2f4f93545cd02950323ce175cd73d9"
-SRC_URI[sha256sum] = "4dfc1103f6d8b2c595451a07757ba6f55e03366ec568dcd1dd47de53986c58f9"
+SRC_URI[md5sum] = "8fd6f1f4f7a504adfc27c1f73de554b4"
+SRC_URI[sha256sum] = "76a8a93d452db07e2531fbbc6dc1cbdf21943e6b3dfa1b2435faf5b356819f95"
 
 COMPATIBLE_MACHINE = "(mx28|mx5|mx6)"
