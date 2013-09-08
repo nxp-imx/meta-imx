@@ -5,7 +5,6 @@ RDEPENDS_${PN}-tools-testapps += "\
     imx-kobs \
     canutils \
     bluez4 \
-    gtkperf \
 "
 
 RDEPENDS_${PN}-gstreamer += " \

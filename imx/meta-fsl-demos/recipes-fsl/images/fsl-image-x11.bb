@@ -38,6 +38,7 @@ IMAGE_INSTALL += " \
     qt4-demos \
     qt4-examples \
     fsl-gui-extrafiles \
+    gtkperf \
     "
 
 
