@@ -5,7 +5,7 @@ DEPENDS = "virtual/kernel imx-lib imx-vpu"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-INC_PR = "r7"
+INC_PR = "r8"
 
 PLATFORM_mx6 = "IMX6Q"
 PLATFORM_mx53 = "IMX53"
@@ -17,7 +17,7 @@ SRC_URI = "${FSL_MIRROR}/imx-test-${PV}.tar.gz \
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
 INCLUDE_DIR="-I${STAGING_INCDIR} \
-             -I${STAGING_INCDIR}/uapi \
+             -I${STAGING_KERNEL_DIR}/include/uapi \
              -I${STAGING_KERNEL_DIR}/include \
              -I${STAGING_KERNEL_DIR}/arch/arm/include \
              -I${STAGING_KERNEL_DIR}/drivers/mxc/security/rng/include \

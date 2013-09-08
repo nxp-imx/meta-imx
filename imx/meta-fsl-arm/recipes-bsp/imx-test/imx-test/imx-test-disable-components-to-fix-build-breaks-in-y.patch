@@ -25,18 +25,6 @@ index 6179922..c92d922 100644
  ifeq ($(CONFIG_FB_MXC_SIPIX_PANEL),y)
  module_list-y += spdc_test_driver.o
  endif
-diff --git a/test/mxc_asrc_test/Makefile b/test/mxc_asrc_test/Makefile
-index 42554d3..cffda39 100644
---- a/test/mxc_asrc_test/Makefile
-+++ b/test/mxc_asrc_test/Makefile
-@@ -2,7 +2,7 @@
- # Makefile for OSS sound driver test app.
- #
- # list of platforms which did not want this test case
--EXCLUDE_LIST:= IMX21ADS IMX27ADS IMX31ADS IMX32ADS IMX37_3STACK IMX25_3STACK
-+EXCLUDE_LIST:= IMX21ADS IMX27ADS IMX31ADS IMX32ADS IMX37_3STACK IMX25_3STACK IMX6Q
- 
- CFLAGS += -lpthread
  
 -- 
 1.7.9.5
