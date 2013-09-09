@@ -18,6 +18,7 @@ SRC_URI = "${FSL_MIRROR}/imx-test-${PV}.tar.gz \
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
 INCLUDE_DIR="-I${STAGING_INCDIR} \
+             -I${S}/include \
              -I${STAGING_KERNEL_DIR}/include/uapi \
              -I${STAGING_KERNEL_DIR}/include \
              -I${STAGING_KERNEL_DIR}/arch/arm/include \
