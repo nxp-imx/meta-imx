@@ -7,9 +7,7 @@ SECTION = "multimedia"
 
 DEPENDS = "gstreamer gst-plugins-base libfslcodec libfslparser virtual/kernel"
 DEPENDS_append_mx5 = " imx-lib"
-DEPENDS_append_mx6q = " imx-lib imx-vpu libfslvpuwrap"
-DEPENDS_append_mx6dl = " imx-lib imx-vpu libfslvpuwrap"
-DEPENDS_append_mx6s = " imx-lib imx-vpu libfslvpuwrap"
+DEPENDS_append_mx6 = " imx-lib imx-vpu libfslvpuwrap"
 DEPENDS_append_mx6sl = " imx-lib"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
@@ -23,9 +21,7 @@ SRC_URI = "${FSL_MIRROR}/gst-fsl-plugins-${PV}.tar.gz"
 inherit autotools pkgconfig
 
 PLATFORM_mx5 = "MX51"
-PLATFORM_mx6q = "MX6"
-PLATFORM_mx6dl = "MX6"
-PLATFORM_mx6s = "MX6"
+PLATFORM_mx6 = "MX6"
 PLATFORM_mx6sl = "MX6SL"
 PLATFORM_mx28 = "MX28"
 
