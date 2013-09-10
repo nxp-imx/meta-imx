@@ -3,8 +3,8 @@
 
 require gst-fsl-plugin.inc
 
-SRC_URI[md5sum] = "8afd05cd215eac90d898da75a20828ae"
-SRC_URI[sha256sum] = "d17f1d8abade93f9e642e95a51c294f43ba3f63567f0b937ba01b2c7504e2a8c"
+SRC_URI[md5sum] = "a338a5c25225c765ae5f44af82fe7413"
+SRC_URI[sha256sum] = "e809daa0cd60381f05a79f34a53305a5ee53bfed22192a1cda6d998acc84a6fd"
 
 
 SRC_URI = "${FSL_MIRROR}/gst-fsl-plugins-3.10.9-1.0.0.tar.gz"
