@@ -3,9 +3,9 @@
 
 require recipes-graphics/gpu-viv-bin-mx6q/gpu-viv-bin-mx6q.inc
 
-SRC_URI[md5sum] = "52f5ebbb6a9b5d0eafdb952246de584e"
-SRC_URI[sha256sum] = "8b0386e13d4a7c770f8bc8e7a6119629c5ed379488dd5ef635bc92353f906003"
+SRC_URI[md5sum] = "1ff2249a2633635ea8c375d9e83ca520"
+SRC_URI[sha256sum] = "b0e3c84f749aac3dab4ec328d19dbd3bba06ccc6ef8b7d4eefe3d79474be5055"
 
-PACKAGE_FP_TYPE = "hardfp"
+PACKAGE_FP_TYPE = "softfp"
 
 RDEPENDS_libgl-mx6-dev = "libgl-mesa-dev"
