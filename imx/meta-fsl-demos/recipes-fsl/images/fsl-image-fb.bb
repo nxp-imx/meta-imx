@@ -7,10 +7,6 @@ LICENSE = "MIT"
 inherit core-image
 inherit distro_features_check
 
-## Must reset to remove x11
-# Distro Features must be set in local.conf for build to work
-##DISTRO_FEATURES = "alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g ${DISTRO_FEATURES_LIBC}"
-
 CONFLICT_DISTRO_FEATURES = "x11 wayland directfb"
 
 DISTRO_FEATURES += "pulseaudio "
@@ -23,7 +19,7 @@ EXTRA_IMAGE_FEATURES += " \
     tools-profile \
 "
 
-SOC_IMAGE_INSTALL = "gpu-viv-bin-mx6q gpu-viv-g2d gst-plugins-gl-meta"
+SOC_IMAGE_INSTALL = "gpu-viv-bin-mx6q gpu-viv-g2d"
 
 IMAGE_INSTALL += " \
     ${SOC_IMAGE_INSTALL} \
@@ -32,9 +28,6 @@ IMAGE_INSTALL += " \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
     "
-
-RDEPENDS_packagegroup-fsl-gstreamer_append_mx6 = " gst-plugins-gl \
-"
 
 export IMAGE_BASENAME = "fsl-image-fb"
 
