@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE = "(mx6)"
 
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=imx_3.10.9_1.0.0_alpha"
 
-SRCREV = "e4407a8e837c66839c1f8264cb856e10807af6e7"
+SRCREV = "d5b3e378553d7bde4debc2b78fac6972c77ad815"
 
 LOCALVERSION = "-1.0.0_alpha"
 
@@ -29,9 +29,18 @@ do_configure_append() {
     printf "+%s%s"  $head > ${S}/.scmversion
 }
 
+# install mxc headers to usr/include/linux
+# TODO: go to all recipes that include uapi and remove since headers are in usr/include/linux now
+do_install_append() {
+     make headers_install INSTALL_HDR_PATH=${D}/${exec_prefix}
+}
 
+# copy zImage to deploy directory
 do_deploy_append () {
     install -d ${DEPLOY_DIR}
     install -d ${DEPLOY_DIR}/images
     install  arch/arm/boot/zImage ${DEPLOY_DIR}/images/zImage
 }
+
+# this fixes QA error from installing headers
+FILES_kernel += "${includedir}"
