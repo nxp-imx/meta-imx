@@ -29,18 +29,9 @@ do_configure_append() {
     printf "+%s%s"  $head > ${S}/.scmversion
 }
 
-# install mxc headers to usr/include/linux
-# TODO: go to all recipes that include uapi and remove since headers are in usr/include/linux now
-do_install_append() {
-     make headers_install INSTALL_HDR_PATH=${D}/${exec_prefix}
-}
-
 # copy zImage to deploy directory
 do_deploy_append () {
     install -d ${DEPLOY_DIR}
     install -d ${DEPLOY_DIR}/images
     install  arch/arm/boot/zImage ${DEPLOY_DIR}/images/zImage
 }
-
-# this fixes QA error from installing headers
-FILES_kernel += "${includedir}"
