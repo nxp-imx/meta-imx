@@ -4,8 +4,6 @@ Date: Tue, 10 Sep 2013 10:58:28 -0500
 Subject: [PATCH] ENGR00279068-2 epdc_test_driver: Update header name change
  of mxc_epdc.h
 
-Upstream-Status: Pending
-
 Signed-off-by: Lauren Post <lauren.post@freescale.com>
 Signed-off-by: Frank Li <Frank.li@freescale.com>
 ---
