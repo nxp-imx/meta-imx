@@ -38,3 +38,10 @@ do_deploy_append () {
     install -d ${DEPLOY_DIR}/images
     install  arch/arm/boot/zImage ${DEPLOY_DIR}/images/zImage
 }
+
+# install nedded headers for gstreamer configuration
+do_install_append() {
+    if [ -d include/uapi/linux ]; then
+        cp include/uapi/linux/mxc*.h ${STAGING_INCDIR}/uapi
+    fi
+}
