@@ -33,7 +33,7 @@ usage()
     Optional parameters: [-b build-dir] [-e back-end] [-h]"
 echo "
     * [-b build-dir]: Build directory, if unspecified script uses 'build' as output directory
-    * [-e back-end]: Options are 'fb', 'dfb', 'x11'. If unspecified, defaults to X11
+    * [-e back-end]: Options are 'fb', 'dfb', 'wayland'. If unspecified, default to X11
     * [-h]: help
 "
 }
@@ -65,6 +65,8 @@ do
             elif [ "$BACKEND" = "dfb" ]; then
                 DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g directfb \${DISTRO_FEATURES_LIBC}"
                  echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
+            elif [ "$BACKEND" = "wayland" ]; then
+                DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g \${DISTRO_FEATURES_LIBC} \${POKY_DEFAULT_DISTRO_FEATURES}"
             elif [ "$BACKEND" = "x11" ]; then
                  echo -e  "\n Using X11 backend with poky DIST_FEATURES"
             else
