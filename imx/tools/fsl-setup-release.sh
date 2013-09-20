@@ -33,7 +33,7 @@ usage()
     Optional parameters: [-b build-dir] [-e back-end] [-h]"
 echo "
     * [-b build-dir]: Build directory, if unspecified script uses 'build' as output directory
-    * [-e back-end]: Options are 'fb', 'dfb', 'wayland'. If unspecified, default to X11
+    * [-e back-end]: Options are 'fb', 'dfb', 'x11, 'wayland'
     * [-h]: help
 "
 }
@@ -70,7 +70,7 @@ do
             elif [ "$BACKEND" = "x11" ]; then
                  echo -e  "\n Using X11 backend with poky DIST_FEATURES"
             else
-                echo -e "\n Invalid backend specified - use fb, dfb or x11"
+                echo -e "\n Invalid backend specified - use fb, dfb, wayland, or x11"
                 fsl_setup_error='true'
             fi
            ;;
