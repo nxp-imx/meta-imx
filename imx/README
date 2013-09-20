@@ -1,4 +1,4 @@
-Freescale's 3.10.9-1.0.0 Yocto BSP
+Freescale's 3.10.9-1.0.0-alpha Yocto BSP
 ==================================
 
 This BSP is a Freescale release providing support for the following processors
@@ -32,7 +32,6 @@ This BSP is a Freescale release providing support for the following processors
    * imx6q-sabresd-hdcp.dtb
    * imx6q-sabreauto-gpmi-weim.dtb
    * imx6dl-sabreauto-gpmi-weim.dtb
-
 
 Quick Start Guide
 -----------------
@@ -87,7 +86,8 @@ Build Configurations
 Freescale has created new images to support multiple graphics back ends.  
 Below is the setup for all the backends with the new image recipes.
 
-Wayland binaries are provided but image builds are not supported in this release.
+Note that <build directory> is the same directory specified in the setup-environment.  If not specified it is a
+directory called "build".
 
 Building X11
 ------------
@@ -112,6 +112,16 @@ different binaries for each backend, it is recommended to build a clean system t
 $: MACHINE=<machine name>. ./fsl-setup-release.sh -b <build directory> -e dfb
 $: bitbake fsl-image-dfb
 
+Building Wayland-Weston (wayland)
+---------------------------
+Wayland Weston requires a DISTRO_FEATURES change which our setup script will provide in local.conf
+fsl-image-wayland provides the wayland weston image.  Note that since gpu-viv-bin-mx6q provides
+different binaries for each backend, it is recommended to build a clean system to pick up the right gpu frame buffer libraries.
+
+$: MACHINE=<machine name>. ./fsl-setup-release.sh -b <build directory> -e wayland
+$: bitbake fsl-image-weston
+
+
 Hardware Floating Point
 -----------------------
 3.10.9-1.0.0 is our second release that enables hardware floating point.  This feature is enabled in both the machine 
@@ -128,6 +138,10 @@ Restricted Codecs
 -----------------
 Some codecs have recipes in the layer but binaries are not provided in the Yocto fetch system (microsoft, ac3 and aacp)
 These codecs have contractual restrictions that require separate distribution.
+
+Manufacturing Tool
+------------------
+The manufacturing tool support will be provided in the beta release.
 
 End User License Agreement
 --------------------------
