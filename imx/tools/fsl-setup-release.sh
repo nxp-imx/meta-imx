@@ -60,10 +60,10 @@ do
         e)
             BACKEND="$OPTARG"
             if [ "$BACKEND" = "fb" ]; then
-                DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g \${DISTRO_FEATURES_LIBC}"
+                DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g \${DISTRO_FEATURES_LIBC} \${POKY_DEFAULT_DISTRO_FEATURES}"
                  echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "dfb" ]; then
-                DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g directfb \${DISTRO_FEATURES_LIBC}"
+                DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g directfb \${DISTRO_FEATURES_LIBC} \${POKY_DEFAULT_DISTRO_FEATURES}"
                  echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "wayland" ]; then
                 DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g \${DISTRO_FEATURES_LIBC} \${POKY_DEFAULT_DISTRO_FEATURES}"
