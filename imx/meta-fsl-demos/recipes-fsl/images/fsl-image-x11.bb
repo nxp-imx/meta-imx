@@ -41,5 +41,8 @@ IMAGE_INSTALL += " \
     gtkperf \
     "
 
+#pull this out of package group since v4l-utils now is x11 dependent
+# and breaks non-x11 builds
+RDEPENDS_${PN}-tools-testapps += " v4l-utils "
 
 export IMAGE_BASENAME = "fsl-image-x11"
