@@ -36,7 +36,7 @@ do_configure_append() {
 do_deploy_append () {
     install -d ${DEPLOY_DIR}
     install -d ${DEPLOY_DIR}/images
-    install  arch/arm/boot/zImage ${DEPLOY_DIR}/images/zImage
+    install  arch/arm/boot/zImage ${DEPLOY_DIR_IMAGE}/zImage
 }
 
 # install nedded headers for gstreamer configuration
