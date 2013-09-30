@@ -1,7 +1,12 @@
 SUMMARY = "Test programs for IMX BSP"
 DESCRIPTION = "Unit tests for the IMX BSP"
 SECTION = "base"
-DEPENDS = "virtual/kernel imx-lib imx-vpu"
+
+DEPENDS_mx6q  = "virtual/kernel imx-lib imx-vpu"
+DEPENDS_mx6dl = "virtual/kernel imx-lib imx-vpu"
+DEPENDS_mx6s  = "virtual/kernel imx-lib imx-vpu"
+DEPENDS_mx6sl = "virtual/kernel imx-lib"
+
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
