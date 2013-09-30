@@ -34,8 +34,7 @@ do_configure_append() {
 
 # copy zImage to deploy directory
 do_deploy_append () {
-    install -d ${DEPLOY_DIR}
-    install -d ${DEPLOY_DIR}/images
+    install -d ${DEPLOY_DIR_IMAGE}
     install  arch/arm/boot/zImage ${DEPLOY_DIR_IMAGE}/zImage
 }
 
