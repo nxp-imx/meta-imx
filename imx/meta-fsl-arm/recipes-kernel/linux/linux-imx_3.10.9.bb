@@ -6,7 +6,7 @@ require recipes-kernel/linux/linux-dtb.inc
 
 COMPATIBLE_MACHINE = "(mx6)"
 
-SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=imx_3.10.9_1.0.0_alpha"
+SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=imx_3.10.9"
 
 SRCREV = "${AUTOREV}"
 
