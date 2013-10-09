@@ -23,7 +23,7 @@ EXTRA_IMAGE_FEATURES += " \
 
 SOC_IMAGE_INSTALL = ""
 SOC_IMAGE_INSTALL_mx5 = "glcubes-demo"
-SOC_IMAGE_INSTALL_mx6 = "gpu-viv-g2d glmark2 gst-plugins-gl-meta"
+SOC_IMAGE_INSTALL_mx6 = "gpu-viv-g2d glmark2 fsl-gpu-sdk gst-plugins-gl-meta"
 
 
 IMAGE_INSTALL += " \
