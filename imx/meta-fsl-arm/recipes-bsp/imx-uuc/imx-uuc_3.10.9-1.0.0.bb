@@ -11,8 +11,8 @@ PE = "1"
 
 SRC_URI = "${FSL_MIRROR}/imx-uuc-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "6431a0c932ff5421abab3fbc0317b1c2"
-SRC_URI[sha256sum] = "668fdd0e1351170edef94ab1ea363e4cc10fcf082e7e7c9f66e4f9d0fbe20189"
+SRC_URI[md5sum] = "e2658f905742dc4b252083ae1cf7fa2c"
+SRC_URI[sha256sum] = "7a17beb03b0c008851dab42af4698360a07d9c7204b5755492ecb588e28acfcb"
 
 FILES_${PN} += "linuxrc ${bindir}/uuc ${bindir}/sdimage "
 FILES_${PN}-dbg += "${bindir}/.debug"
