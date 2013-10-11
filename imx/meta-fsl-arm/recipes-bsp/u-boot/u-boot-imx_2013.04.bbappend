@@ -10,7 +10,7 @@ DEPENDS_mxs += "elftosb-native"
 
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/uboot-imx.git;protocol=git;branch=imx_v2013.04"
 
-SRCREV = "d20319c25d27c38fd531e0ea97b5661268449de6"
+SRCREV = "${AUTOREV}"
 S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
