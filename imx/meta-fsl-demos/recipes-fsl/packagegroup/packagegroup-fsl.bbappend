@@ -6,6 +6,7 @@ RDEPENDS_${PN}-gstreamer += " \
 
 RDEPENDS_${PN}-tools-testapps = " \
     ${SOC_TOOLS_TESTAPPS} \
+    ${@base_contains("MACHINE_GSTREAMER_PLUGIN", "gst-fsl-plugin", "gst-fsl-plugin-gplay", "", d)} \
     alsa-utils \
     alsa-tools \
     dosfstools \
