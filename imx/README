@@ -25,8 +25,13 @@ that might affect these boards.
    * Freescale i.MX6SOLO SABRE Smart Device (imx6solosabresd )
    * Freescale i.MX6SOLO SABRE Auto (imx6solosabreauto )
 
- * i.MX Device Tree configurations for each machine
-    Each machine files lists the associated device trees for that machine.
+Quick Start Guide
+-----------------
+First install the Freescale Community BSP
+$: repo init -u http://github.com/Freescale/fsl-community-bsp-platform -b dora
+
+Add in the release layer into the community manifest.
+$: nano .repo/manifest.xml
 
  * i.MX U-Boot configurations for each machine
     imx6qpsabreauto - sd, eim-nor, nand, spi-nor, sata
@@ -42,6 +47,9 @@ that might affect these boards.
     imx6solosabreauto - sd, eim-nor, spi-nor, nand
     imx6slevk - sd, spi-nor
 
+  <project remote="fsl-release" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" revision="dora_3.10.9-1.0.0" >
+     <copyfile src="imx/tools/fsl-setup-release.sh" dest="fsl-setup-release.sh"/>
+  </project>
 
 Quick Start Guide
 -----------------
