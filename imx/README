@@ -15,6 +15,44 @@ This BSP is a Freescale release providing support for the following processors
    * Freescale i.MXSX 19x19 lpddr arm2 (imx6sx19x19lpddrarm2)
    * Freescale i.MX6SOLO SABRE Smart Device (imx6solosabresd )
    * Freescale i.MX6SOLO SABRE Auto (imx6solosabreauto )
+   * Freescale i.MX6 Solo Lite EVK (imx6slevk)
+
+ * i.MX6 U-boot options based on 2013.04 u-boot
+   * Freescale i.MX6SOLO SABRE Auto SPI-NOR (imx6solosabreauto-spi-nor )
+   * Freescale i.MX6SOLO SABRE Auto NAND (imx6solosabreauto-nand )
+   * Freescale i.MX6SOLO SABRE Auto EIM-NOR (imx6solosabreauto-eim-nor )
+   * Freescale i.MX6DL SABRE Auto SPI-NOR (imx6dlsabreauto-spi-nor)
+   * Freescale i.MX6DL SABRE Auto NAND (imx6dlsabreauto-nand)
+   * Freescale i.MX6DL SABRE Auto EIM-NOR (imx6dlsabreauto-eim-nor)
+   * Freescale i.MX6Q SABRE Auto SPI-NOR (imx6qsabreauto-spi-nor)
+   * Freescale i.MX6Q SABRE Auto NAND (imx6qsabreauto-nand-nor)
+   * Freescale i.MX6Q SABRE Auto EIM-NOR (imx6qsabreauto-eim-nor)
+   * Freescale i.MX6Q SABRE SD SATA (imx6qsabresd-sata)
+
+ * i.MX6 new Device Tree configurations
+   * imx6sl-evk.dtb
+   * imx6q-sabresd-ldo.dtb 
+   * imx6sl-evk-ldo.dtb
+   * imx6dl-sabresd-ldo.dtb
+   * imx6dl-sabresd-hdcp.dtb
+   * imx6q-sabresd-hdcp.dtb
+   * imx6q-sabreauto-gpmi-weim.dtb
+   * imx6dl-sabreauto-gpmi-weim.dtb
+
+Quick Start Guide
+-----------------
+First install the Freescale Community BSP
+$: repo init -u http://github.com/Freescale/fsl-community-bsp-platform -b dora
+
+Add in the release layer into the community manifest.
+$: nano .repo/manifest.xml
+
+Add in the following lines
+  <remote fetch="git://git.freescale.com/imx" name="fsl-release"/>
+
+  <project remote="fsl-release" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" revision="dora_3.10.9-1.0.0" >
+     <copyfile src="imx/tools/fsl-setup-release.sh" dest="fsl-setup-release.sh"/>
+  </project>
 
  * i.MX 6 Device Tree configurations for each machine
     imx6sxsabresd - imx6sx-sdb.dtb imx6sx-sdb-emmc.dtb imx6sx-sdb-lcdif1.dtb imx6sx-sdb-ldo.dtb imx6sx-sdb-m4.dtb imx6sx-sdb-reva.dtb imx6sx-sdb-reva-ldo.dtb imx6sx-sdb-sai.dtb
