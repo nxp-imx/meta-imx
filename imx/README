@@ -45,7 +45,22 @@ that might affect these boards.
 
 Quick Start Guide
 -----------------
-See the Freescale Yocto Project User's Guide for instructions on installing repo.
+First install the Freescale Community BSP
+$: repo init -u http://github.com/Freescale/fsl-community-bsp-platform -b dora
+
+Add in the release layer into the community manifest.
+$: nano .repo/manifest.xml
+
+Add in the following lines
+  <remote fetch="git://git.freescale.com/imx" name="fsl-release"/>
+
+  <project remote="fsl-release" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" revision="dora_3.10.9-1.0.0" >
+     <copyfile src="imx/tools/fsl-setup-release.sh" dest="fsl-setup-release.sh"/>
+  </project>
+
+
+OR copy the fsl-yocto-release-manifest.xml over the community manifest using the following instructions.
+The fsl-yocto-release-manifest.xml is provided in the Freescale Yocto Release package for 3.10.9-1.0.0
 
 First install the i.MX Freescale BSP repo
 $: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.14.38-6UL_ga
