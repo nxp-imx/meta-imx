@@ -36,7 +36,7 @@ This BSP is a Freescale release providing support for the following processors
 Quick Start Guide
 -----------------
 First install the Freescale Community BSP
-$: repo init -u http://github.com/Freescale/fsl-community-bsp-platform -b master
+$: repo init -u http://github.com/Freescale/fsl-community-bsp-platform -b dora
 
 Add in the release layer into the community manifest.
 $: nano .repo/manifest.xml
@@ -44,7 +44,7 @@ $: nano .repo/manifest.xml
 Add in the following lines
   <remote fetch="git://git.freescale.com/imx" name="fsl-release"/>
 
-  <project remote="fsl-release" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" revision="master_3.10.9-1.0.0" >
+  <project remote="fsl-release" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" revision="dora_3.10.9-1.0.0" >
      <copyfile src="imx/tools/fsl-setup-release.sh" dest="fsl-setup-release.sh"/>
   </project>
 
