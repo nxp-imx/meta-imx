@@ -13,7 +13,7 @@ DEPENDS += "openssl"
 SRCREV = "1c24a0aa996630518d47826a2e3fea129ea094c7"
 
 SRC_URI = "git://repo.or.cz/cryptodev-linux.git;protocol=git \
-           file://makefile_fixup.patch \
+           file://makefile-fixup.patch \
            file://Add-the-compile-and-install-rules-for-cryptodev-test.patch"
 
 EXTRA_OEMAKE='KERNEL_DIR="${STAGING_KERNEL_DIR}" PREFIX="${D}"'
