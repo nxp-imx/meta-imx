@@ -26,5 +26,7 @@ RDEPENDS_${PN}-tools-testapps = " \
     mtd-utils-ubifs \
     imx-kobs \
     canutils \
-    bluez4 obexftp \
+    bluez4 \
+    obexftp \
+    procps \
 "
