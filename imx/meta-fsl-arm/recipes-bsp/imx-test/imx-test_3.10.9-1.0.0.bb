@@ -7,7 +7,4 @@ PE = "1"
 SRC_URI[md5sum] = "518ce3fba668a09993d53b3b0df85944"
 SRC_URI[sha256sum] = "576ffd963cc8ea82e6f17e55ac467448286df014408b23a59ecf9d8072955d7a"
 
-# for 3.0.35 revert header name change
-SRC_URI += "file://revert_epdc_hdr_change.patch"
-
 COMPATIBLE_MACHINE = "(mx6)"
