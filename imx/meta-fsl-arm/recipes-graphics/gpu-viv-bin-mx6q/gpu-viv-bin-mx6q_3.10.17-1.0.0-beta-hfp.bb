@@ -3,8 +3,8 @@
 
 require recipes-graphics/gpu-viv-bin-mx6q/gpu-viv-bin-mx6q.inc
 
-SRC_URI[md5sum] = "769df5e2f635c7e3f375bb608be50a7d"
-SRC_URI[sha256sum] = "775d10bf20ac7d5130d9a2358737341d67f0c748e4cc3352947d1719b44aeb38"
+SRC_URI[md5sum] = "8dd86972f94215f1628df5becadd3fe2"
+SRC_URI[sha256sum] = "53ed723dcf86b8d745c0ef87c63c5be9fe266a59d5e9bd4dc876f89b7433ef38"
 
 PACKAGE_FP_TYPE = "hardfp"
 
@@ -49,7 +49,7 @@ do_install () {
         install -m 0644 ${WORKDIR}/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
 
         if [ "${USE_DFB}" = "yes" ]; then
-            cp -r ${S}/usr/lib/directfb-1.6-3 ${D}${libdir}
+            cp -r ${S}/usr/lib/directfb-1.6-0 ${D}${libdir}
             backend=dfb
         else
             # Regular framebuffer
@@ -76,4 +76,4 @@ do_install () {
     find ${D}${includedir} -type f -exec chmod 644 {} \;
 }
 
-FILES_libvivante-dfb-mx6 = "${libdir}/directfb-1.6-3/gfxdrivers/libdirectfb_gal.so"
+FILES_libvivante-dfb-mx6 = "${libdir}/directfb-1.6-0/gfxdrivers/libdirectfb_gal.so"
