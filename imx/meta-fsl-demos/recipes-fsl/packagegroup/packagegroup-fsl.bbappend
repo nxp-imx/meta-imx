@@ -35,3 +35,8 @@ RDEPENDS_${PN}-tools-testapps = " \
 SOC_TOOLS_TESTAPPS_mx6q += "cryptodev"
 SOC_TOOLS_TESTAPPS_mx6dl += "cryptodev"
 SOC_TOOLS_TESTAPPS_mx6s += "cryptodev"
+
+SOC_TOOLS_TESTAPPS_mx6 += " \
+    iw \
+    can-utils \
+"
