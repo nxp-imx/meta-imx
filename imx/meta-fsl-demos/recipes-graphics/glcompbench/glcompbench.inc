@@ -3,6 +3,8 @@ DESCRIPTION = "A benchmark for GL(ES)2 based compositing operations"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
 
+DEPENDS += "virtual/egl virtual/libgl virtual/libgal-x11 virtual/egl virtual/libgles1 virtual/libgles2 "
+
 inherit pkgconfig
 
 do_configure () {
