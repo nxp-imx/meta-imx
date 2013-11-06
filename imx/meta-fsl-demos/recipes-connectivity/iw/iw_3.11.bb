@@ -1,4 +1,0 @@
-require iw.inc
-
-SRC_URI[md5sum] = "e536d5472bf4833950cc7e41b67ad719"
-SRC_URI[sha256sum] = "e90327323821a8219abac56298919076c4bac6636464ca91356f02cfe40530ff"
