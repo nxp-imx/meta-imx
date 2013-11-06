@@ -1,0 +1,2004 @@
+From 8245906582b552d9586bf13f23f9a7053b325c6f Mon Sep 17 00:00:00 2001
+From: Yong Gan <B45748@freescale.com>
+Date: Wed, 6 Nov 2013 10:50:50 +0800
+Subject: [PATCH] Add support for vivante GPU
+
+---
+ src/Makefile.am        |    4 +-
+ src/compositor-fbdev.c |  440 +++++++++++------
+ src/gal2d-renderer.c   | 1276 ++++++++++++++++++++++++++++++++++++++++++++++++
+ src/gal2d-renderer.h   |   41 ++
+ src/launcher-util.c    |    8 +-
+ 5 files changed, 1621 insertions(+), 148 deletions(-)
+ create mode 100644 src/gal2d-renderer.c
+ create mode 100644 src/gal2d-renderer.h
+
+diff --git a/src/Makefile.am b/src/Makefile.am
+index d33ebc5..7d09ca0 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -212,7 +212,9 @@ fbdev_backend_la_SOURCES = \
+ 	evdev.c \
+ 	evdev.h \
+ 	evdev-touchpad.c \
+-	launcher-util.c
++	launcher-util.c \
++	gal2d-renderer.h \
++	gal2d-renderer.c
+ endif
+ 
+ if ENABLE_RDP_COMPOSITOR
+diff --git a/src/compositor-fbdev.c b/src/compositor-fbdev.c
+index 9d9eff5..0f20e59 100644
+--- a/src/compositor-fbdev.c
++++ b/src/compositor-fbdev.c
+@@ -44,6 +44,9 @@
+ #include "compositor.h"
+ #include "launcher-util.h"
+ #include "pixman-renderer.h"
++#include <EGL/egl.h>
++#include "gl-renderer.h"
++#include "gal2d-renderer.h"
+ #include "udev-seat.h"
+ 
+ struct fbdev_compositor {
+@@ -52,6 +55,8 @@ struct fbdev_compositor {
+ 
+ 	struct udev *udev;
+ 	struct tty *tty;
++	int			 use_pixman;
++    int          use_gal2d;
+ };
+ 
+ struct fbdev_screeninfo {
+@@ -86,6 +91,9 @@ struct fbdev_output {
+ 	pixman_image_t *shadow_surface;
+ 	void *shadow_buf;
+ 	uint8_t depth;
++
++	NativeDisplayType display;
++	NativeWindowType  window;
+ };
+ 
+ struct fbdev_seat {
+@@ -138,63 +146,71 @@ fbdev_output_repaint(struct weston_output *base, pixman_region32_t *damage)
+ {
+ 	struct fbdev_output *output = to_fbdev_output(base);
+ 	struct weston_compositor *ec = output->base.compositor;
+-	pixman_box32_t *rects;
+-	int nrects, i, src_x, src_y, x1, y1, x2, y2, width, height;
+-
+-	/* Repaint the damaged region onto the back buffer. */
+-	pixman_renderer_output_set_buffer(base, output->shadow_surface);
+-	ec->renderer->repaint_output(base, damage);
+-
+-	/* Transform and composite onto the frame buffer. */
+-	width = pixman_image_get_width(output->shadow_surface);
+-	height = pixman_image_get_height(output->shadow_surface);
+-	rects = pixman_region32_rectangles(damage, &nrects);
+-
+-	for (i = 0; i < nrects; i++) {
+-		switch (base->transform) {
+-		default:
+-		case WL_OUTPUT_TRANSFORM_NORMAL:
+-			x1 = rects[i].x1;
+-			x2 = rects[i].x2;
+-			y1 = rects[i].y1;
+-			y2 = rects[i].y2;
+-			break;
+-		case WL_OUTPUT_TRANSFORM_180:
+-			x1 = width - rects[i].x2;
+-			x2 = width - rects[i].x1;
+-			y1 = height - rects[i].y2;
+-			y2 = height - rects[i].y1;
+-			break;
+-		case WL_OUTPUT_TRANSFORM_90:
+-			x1 = height - rects[i].y2;
+-			x2 = height - rects[i].y1;
+-			y1 = rects[i].x1;
+-			y2 = rects[i].x2;
+-			break;
+-		case WL_OUTPUT_TRANSFORM_270:
+-			x1 = rects[i].y1;
+-			x2 = rects[i].y2;
+-			y1 = width - rects[i].x2;
+-			y2 = width - rects[i].x1;
+-			break;
++	struct fbdev_compositor *compositor = to_fbdev_compositor(ec);	
++
++	if (compositor->use_pixman) 
++	{
++		pixman_box32_t *rects;
++		int nrects, i, src_x, src_y, x1, y1, x2, y2, width, height;
++		/* Repaint the damaged region onto the back buffer. */
++		pixman_renderer_output_set_buffer(base, output->shadow_surface);		
++		ec->renderer->repaint_output(base, damage);
++	
++		/* Transform and composite onto the frame buffer. */
++		width = pixman_image_get_width(output->shadow_surface);
++		height = pixman_image_get_height(output->shadow_surface);
++		rects = pixman_region32_rectangles(damage, &nrects);
++
++		for (i = 0; i < nrects; i++) {
++			switch (base->transform) {
++			default:
++			case WL_OUTPUT_TRANSFORM_NORMAL:
++				x1 = rects[i].x1;
++				x2 = rects[i].x2;
++				y1 = rects[i].y1;
++				y2 = rects[i].y2;
++				break;
++			case WL_OUTPUT_TRANSFORM_180:
++				x1 = width - rects[i].x2;
++				x2 = width - rects[i].x1;
++				y1 = height - rects[i].y2;
++				y2 = height - rects[i].y1;
++				break;
++			case WL_OUTPUT_TRANSFORM_90:
++				x1 = height - rects[i].y2;
++				x2 = height - rects[i].y1;
++				y1 = rects[i].x1;
++				y2 = rects[i].x2;
++				break;
++			case WL_OUTPUT_TRANSFORM_270:
++				x1 = rects[i].y1;
++				x2 = rects[i].y2;
++				y1 = width - rects[i].x2;
++				y2 = width - rects[i].x1;
++				break;
++			}
++			src_x = x1;
++			src_y = y1;
++
++			pixman_image_composite32(PIXMAN_OP_SRC,
++				output->shadow_surface, /* src */
++				NULL /* mask */,
++				output->hw_surface, /* dest */
++				src_x, src_y, /* src_x, src_y */
++				0, 0, /* mask_x, mask_y */
++				x1, y1, /* dest_x, dest_y */
++				x2 - x1, /* width */
++				y2 - y1 /* height */);
+ 		}
+-		src_x = x1;
+-		src_y = y1;
+-
+-		pixman_image_composite32(PIXMAN_OP_SRC,
+-			output->shadow_surface, /* src */
+-			NULL /* mask */,
+-			output->hw_surface, /* dest */
+-			src_x, src_y, /* src_x, src_y */
+-			0, 0, /* mask_x, mask_y */
+-			x1, y1, /* dest_x, dest_y */
+-			x2 - x1, /* width */
+-			y2 - y1 /* height */);
+-	}
+ 
+-	/* Update the damage region. */
+-	pixman_region32_subtract(&ec->primary_plane.damage,
+-	                         &ec->primary_plane.damage, damage);
++		/* Update the damage region. */
++		pixman_region32_subtract(&ec->primary_plane.damage,
++		                         &ec->primary_plane.damage, damage);
++	}
++	else
++	{
++		ec->renderer->repaint_output(base, damage);
++	}
+ 
+ 	/* Schedule the end of the frame. We do not sync this to the frame
+ 	 * buffer clock because users who want that should be using the DRM
+@@ -203,8 +219,9 @@ fbdev_output_repaint(struct weston_output *base, pixman_region32_t *damage)
+ 	 *
+ 	 * Finish the frame synchronised to the specified refresh rate. The
+ 	 * refresh rate is given in mHz and the interval in ms. */
+-	wl_event_source_timer_update(output->finish_frame_timer,
+-	                             1000000 / output->mode.refresh);
++	/*wl_event_source_timer_update(output->finish_frame_timer,
++	                             1000000 / output->mode.refresh);*/
++	wl_event_source_timer_update(output->finish_frame_timer, 1);
+ }
+ 
+ static int
+@@ -313,6 +330,51 @@ calculate_refresh_rate(struct fb_var_screeninfo *vinfo)
+ }
+ 
+ static int
++fbdev_init_egl(struct fbdev_compositor *compositor,
++		 struct fbdev_output *output)
++{
++
++	static const EGLint config_attrs[] = {
++	        EGL_SAMPLES,         0,
++			EGL_RED_SIZE,        8,
++			EGL_GREEN_SIZE,      8,
++	        EGL_BLUE_SIZE,       8,
++	        EGL_ALPHA_SIZE,      EGL_DONT_CARE,
++	        EGL_DEPTH_SIZE,      0,
++	        EGL_SURFACE_TYPE,    EGL_WINDOW_BIT,
++	        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
++	        EGL_NONE,
++	};
++
++    if(compositor->use_gal2d)
++    {
++        if (gal2d_renderer_create(&compositor->base,
++        		output->display) < 0)
++            return -1;
++        if (gal2d_renderer_output_create(&output->base,
++        		output->window) < 0) {
++            compositor->base.renderer->destroy(&compositor->base);
++            return -1;
++        }
++    }
++    else
++    {
++        EGLint visual_id = 0;
++        if (gl_renderer_create(&compositor->base,
++        		output->display, config_attrs,
++                &visual_id) < 0)
++            return -1;
++
++        if (gl_renderer_output_create(&output->base,
++        		output->window) < 0) {
++            compositor->base.renderer->destroy(&compositor->base);
++            return -1;
++        }
++    }
++	return 0;
++}
++
++static int
+ fbdev_query_screen_info(struct fbdev_output *output, int fd,
+                         struct fbdev_screeninfo *info)
+ {
+@@ -468,11 +530,14 @@ fbdev_frame_buffer_destroy(struct fbdev_output *output)
+ {
+ 	weston_log("Destroying fbdev frame buffer.\n");
+ 
+-	if (munmap(output->fb, output->fb_info.buffer_length) < 0)
+-		weston_log("Failed to munmap frame buffer: %s\n",
+-		           strerror(errno));
++	if(output->compositor->use_pixman)
++	{
++		if (munmap(output->fb, output->fb_info.buffer_length) < 0)
++			weston_log("Failed to munmap frame buffer: %s\n",
++					   strerror(errno));
+ 
+-	output->fb = NULL;
++		output->fb = NULL;
++	}
+ }
+ 
+ static void fbdev_output_destroy(struct weston_output *base);
+@@ -480,7 +545,7 @@ static void fbdev_output_disable(struct weston_output *base);
+ 
+ static int
+ fbdev_output_create(struct fbdev_compositor *compositor,
+-                    const char *device)
++                   int x, int y, const char *device)
+ {
+ 	struct fbdev_output *output;
+ 	pixman_transform_t transform;
+@@ -490,7 +555,7 @@ fbdev_output_create(struct fbdev_compositor *compositor,
+ 	unsigned int bytes_per_pixel;
+ 	struct wl_event_loop *loop;
+ 
+-	weston_log("Creating fbdev output.\n");
++	weston_log("Creating fbdev output. %s x=%d\n", device, x);
+ 
+ 	output = calloc(1, sizeof *output);
+ 	if (!output)
+@@ -506,9 +571,28 @@ fbdev_output_create(struct fbdev_compositor *compositor,
+ 		goto out_free;
+ 	}
+ 
++	if(compositor->use_pixman)
++	{
+ 	if (fbdev_frame_buffer_map(output, fb_fd) < 0) {
+ 		weston_log("Mapping frame buffer failed.\n");
+ 		goto out_free;
++		}
++	}
++	else
++	{
++		char* fbenv = getenv("FB_FRAMEBUFFER_0");
++		setenv("FB_FRAMEBUFFER_0", device, 1);
++		output->display = fbGetDisplay(compositor->base.wl_display);
++	    if (output->display == NULL) {
++	       fprintf(stderr, "failed to get display\n");
++	       return 0;
++	    }
++	    output->window = fbCreateWindow(output->display, -1, -1, 0, 0);
++	    if (output->window == NULL) {
++	       fprintf(stderr, "failed to create window\n");
++	       return 0;
++	    }
++	    setenv("FB_FRAMEBUFFER_0", fbenv, 1);
+ 	}
+ 
+ 	output->base.start_repaint_loop = fbdev_output_start_repaint_loop;
+@@ -535,75 +619,77 @@ fbdev_output_create(struct fbdev_compositor *compositor,
+ 	output->base.model = output->fb_info.id;
+ 
+ 	weston_output_init(&output->base, &compositor->base,
+-	                   0, 0, output->fb_info.width_mm,
++	                   x, y, output->fb_info.width_mm,
+ 	                   output->fb_info.height_mm,
+ 	                   WL_OUTPUT_TRANSFORM_NORMAL);
+ 
+-	width = output->fb_info.x_resolution;
+-	height = output->fb_info.y_resolution;
+-
+-	pixman_transform_init_identity(&transform);
+-	switch (output->base.transform) {
+-	default:
+-	case WL_OUTPUT_TRANSFORM_NORMAL:
+-		shadow_width = width;
+-		shadow_height = height;
+-		pixman_transform_rotate(&transform,
+-			NULL, 0, 0);
+-		pixman_transform_translate(&transform, NULL,
+-			0, 0);
+-		break;
+-	case WL_OUTPUT_TRANSFORM_180:
+-		shadow_width = width;
+-		shadow_height = height;
+-		pixman_transform_rotate(&transform,
+-			NULL, -pixman_fixed_1, 0);
+-		pixman_transform_translate(NULL, &transform,
+-			pixman_int_to_fixed(shadow_width),
+-			pixman_int_to_fixed(shadow_height));
+-		break;
+-	case WL_OUTPUT_TRANSFORM_270:
+-		shadow_width = height;
+-		shadow_height = width;
+-		pixman_transform_rotate(&transform,
+-			NULL, 0, pixman_fixed_1);
+-		pixman_transform_translate(&transform,
+-			NULL,
+-			pixman_int_to_fixed(shadow_width),
+-			0);
+-		break;
+-	case WL_OUTPUT_TRANSFORM_90:
+-		shadow_width = height;
+-		shadow_height = width;
+-		pixman_transform_rotate(&transform,
+-			NULL, 0, -pixman_fixed_1);
+-		pixman_transform_translate(&transform,
+-			NULL,
+-			0,
+-			pixman_int_to_fixed(shadow_height));
+-		break;
+-	}
+-
+-	bytes_per_pixel = output->fb_info.bits_per_pixel / 8;
++	if(compositor->use_pixman)
++	{
++		width = output->fb_info.x_resolution;
++		height = output->fb_info.y_resolution;
+ 
+-	output->shadow_buf = malloc(width * height * bytes_per_pixel);
+-	output->shadow_surface =
+-		pixman_image_create_bits(output->fb_info.pixel_format,
+-		                         shadow_width, shadow_height,
+-		                         output->shadow_buf,
+-		                         shadow_width * bytes_per_pixel);
+-	if (output->shadow_buf == NULL || output->shadow_surface == NULL) {
+-		weston_log("Failed to create surface for frame buffer.\n");
+-		goto out_hw_surface;
+-	}
++		pixman_transform_init_identity(&transform);
++		switch (output->base.transform) {
++		default:
++		case WL_OUTPUT_TRANSFORM_NORMAL:
++			shadow_width = width;
++			shadow_height = height;
++			pixman_transform_rotate(&transform,
++				NULL, 0, 0);
++			pixman_transform_translate(&transform, NULL,
++				0, 0);
++			break;
++		case WL_OUTPUT_TRANSFORM_180:
++			shadow_width = width;
++			shadow_height = height;
++			pixman_transform_rotate(&transform,
++				NULL, -pixman_fixed_1, 0);
++			pixman_transform_translate(NULL, &transform,
++				pixman_int_to_fixed(shadow_width),
++				pixman_int_to_fixed(shadow_height));
++			break;
++		case WL_OUTPUT_TRANSFORM_270:
++			shadow_width = height;
++			shadow_height = width;
++			pixman_transform_rotate(&transform,
++				NULL, 0, pixman_fixed_1);
++			pixman_transform_translate(&transform,
++				NULL,
++				pixman_int_to_fixed(shadow_width),
++				0);
++			break;
++		case WL_OUTPUT_TRANSFORM_90:
++			shadow_width = height;
++			shadow_height = width;
++			pixman_transform_rotate(&transform,
++				NULL, 0, -pixman_fixed_1);
++			pixman_transform_translate(&transform,
++				NULL,
++				0,
++				pixman_int_to_fixed(shadow_height));
++			break;
++		}
+ 
+-	/* No need in transform for normal output */
+-	if (output->base.transform != WL_OUTPUT_TRANSFORM_NORMAL)
+-		pixman_image_set_transform(output->shadow_surface, &transform);
++		bytes_per_pixel = output->fb_info.bits_per_pixel / 8;
++
++		output->shadow_buf = malloc(width * height * bytes_per_pixel);
++		output->shadow_surface =
++			pixman_image_create_bits(output->fb_info.pixel_format,
++			                         shadow_width, shadow_height,
++			                         output->shadow_buf,
++			                         shadow_width * bytes_per_pixel);
++		if (output->shadow_buf == NULL || output->shadow_surface == NULL) {
++			weston_log("Failed to create surface for frame buffer.\n");
++			goto out_hw_surface;
++		}
+ 
+-	if (pixman_renderer_output_create(&output->base) < 0)
+-		goto out_shadow_surface;
++		/* No need in transform for normal output */
++		if (output->base.transform != WL_OUTPUT_TRANSFORM_NORMAL)
++			pixman_image_set_transform(output->shadow_surface, &transform);
+ 
++		if (pixman_renderer_output_create(&output->base) < 0)
++			goto out_shadow_surface;
++	}
+ 	loop = wl_display_get_event_loop(compositor->base.wl_display);
+ 	output->finish_frame_timer =
+ 		wl_event_loop_add_timer(loop, finish_frame_handler, output);
+@@ -615,15 +701,25 @@ fbdev_output_create(struct fbdev_compositor *compositor,
+ 	weston_log_continue(STAMP_SPACE "guessing %d Hz and 96 dpi\n",
+ 	                    output->mode.refresh / 1000);
+ 
++    weston_log("compositor->use_pixman=%d\n",compositor->use_pixman);
++	if(!compositor->use_pixman)
++	{				   
++		if (fbdev_init_egl(compositor, output) < 0)
++			goto out_hw_surface;
++	}
+ 	return 0;
+ 
+ out_shadow_surface:
+ 	pixman_image_unref(output->shadow_surface);
+ 	output->shadow_surface = NULL;
+ out_hw_surface:
+-	free(output->shadow_buf);
+-	pixman_image_unref(output->hw_surface);
+-	output->hw_surface = NULL;
++	
++	if(compositor->use_pixman)
++	{
++		free(output->shadow_buf);
++		pixman_image_unref(output->hw_surface);
++		output->hw_surface = NULL;
++	}
+ 	weston_output_destroy(&output->base);
+ 	fbdev_frame_buffer_destroy(output);
+ out_free:
+@@ -636,24 +732,43 @@ static void
+ fbdev_output_destroy(struct weston_output *base)
+ {
+ 	struct fbdev_output *output = to_fbdev_output(base);
++	struct fbdev_compositor *compositor = to_fbdev_compositor(output->base.compositor);
+ 
+ 	weston_log("Destroying fbdev output.\n");
+ 
+ 	/* Close the frame buffer. */
+ 	fbdev_output_disable(base);
++	if(compositor->use_pixman)
++	{
+ 
+-	if (base->renderer_state != NULL)
+-		pixman_renderer_output_destroy(base);
+ 
+-	if (output->shadow_surface != NULL) {
+-		pixman_image_unref(output->shadow_surface);
+-		output->shadow_surface = NULL;
+-	}
++		if (base->renderer_state != NULL)
++			pixman_renderer_output_destroy(base);
+ 
+-	if (output->shadow_buf != NULL) {
+-		free(output->shadow_buf);
+-		output->shadow_buf = NULL;
++		if (output->shadow_surface != NULL) {
++			pixman_image_unref(output->shadow_surface);
++			output->shadow_surface = NULL;
++		}
++
++		if (output->shadow_buf != NULL) {
++			free(output->shadow_buf);
++			output->shadow_buf = NULL;
++		}
+ 	}
++	else
++    {
++        fbDestroyDisplay(output->display);
++	    fbDestroyWindow(output->window);
++        
++        if(compositor->use_gal2d)
++        {
++            gal2d_renderer_output_destroy(base);
++        }
++        else
++        {
++            gl_renderer_output_destroy(base);
++        }
++    }
+ 
+ 	/* Remove the output. */
+ 	wl_list_remove(&output->base.link);
+@@ -711,7 +826,7 @@ fbdev_output_reenable(struct fbdev_compositor *compositor,
+ 		 * the frame buffer X/Y resolution (such as the shadow buffer)
+ 		 * are re-initialised. */
+ 		fbdev_output_destroy(base);
+-		fbdev_output_create(compositor, output->device);
++		fbdev_output_create(compositor, 0, 0, output->device);
+ 
+ 		return 0;
+ 	}
+@@ -834,7 +949,9 @@ switch_vt_binding(struct wl_seat *seat, uint32_t time, uint32_t key, void *data)
+ }
+ 
+ static struct weston_compositor *
+-fbdev_compositor_create(struct wl_display *display, int *argc, char *argv[],
++fbdev_compositor_create(struct wl_display *display, 
++						 int use_pixman,  int use_gal2d, 
++						int argc, char *argv[],
+                         const char *config_file, struct fbdev_parameters *param)
+ {
+ 	struct fbdev_compositor *compositor;
+@@ -863,6 +980,10 @@ fbdev_compositor_create(struct wl_display *display, int *argc, char *argv[],
+ 		weston_log("Failed to initialize tty.\n");
+ 		goto out_udev;
+ 	}
++	weston_log("Using %s renderer\n", use_pixman ? "pixman" : "gl");
++    weston_log("use_pixman=%d use_gal2d=%d\n", use_pixman, use_gal2d);
++	compositor->use_pixman = use_pixman;
++    compositor->use_gal2d = use_gal2d;
+ 
+ 	compositor->base.destroy = fbdev_compositor_destroy;
+ 	compositor->base.restore = fbdev_restore;
+@@ -875,12 +996,37 @@ fbdev_compositor_create(struct wl_display *display, int *argc, char *argv[],
+ 		                                  MODIFIER_CTRL | MODIFIER_ALT,
+ 		                                  switch_vt_binding,
+ 		                                  compositor);
++	if (compositor->use_pixman) {
++		if (pixman_renderer_init(&compositor->base) < 0)
++			goto out_tty;
++	}
+ 
+-	if (pixman_renderer_init(&compositor->base) < 0)
+-		goto out_tty;
+-
+-	if (fbdev_output_create(compositor, param->device) < 0)
+-		goto out_pixman;
++	int x = 0, y = 0;
++	int i=0;
++	int count = strlen(param->device);
++	int k=0, dispCount = 0;
++	char displays[5][32];
++	weston_log("param->device=%s\n",param->device);
++	for(i= 0; i < count; i++) {
++		if(param->device[i] == ',')	{
++			displays[dispCount][k] = '\0';
++			dispCount++;
++			k = 0;
++			continue;
++		}
++		displays[dispCount][k++] = param->device[i];
++	}
++	displays[dispCount][k] = '\0';
++	dispCount++;
++
++	for(i=0; i<dispCount; i++)
++	{
++		if (fbdev_output_create(compositor, x, y, displays[i]) < 0)
++			goto out_pixman;
++		x += container_of(compositor->base.output_list.prev,
++							  struct weston_output,
++							  link)->width;
++	}
+ 
+ 	udev_seat_create(&compositor->base, compositor->udev, seat);
+ 
+@@ -908,6 +1054,8 @@ WL_EXPORT struct weston_compositor *
+ backend_init(struct wl_display *display, int *argc, char *argv[],
+ 	     const char *config_file)
+ {
++	int use_pixman = 0;
++    int use_gal2d = 1;
+ 	/* TODO: Ideally, available frame buffers should be enumerated using
+ 	 * udev, rather than passing a device node in as a parameter. */
+ 	struct fbdev_parameters param = {
+@@ -918,10 +1066,12 @@ backend_init(struct wl_display *display, int *argc, char *argv[],
+ 	const struct weston_option fbdev_options[] = {
+ 		{ WESTON_OPTION_INTEGER, "tty", 0, &param.tty },
+ 		{ WESTON_OPTION_STRING, "device", 0, &param.device },
++		{ WESTON_OPTION_INTEGER, "use-pixman", 0, &use_pixman },
++		{ WESTON_OPTION_INTEGER, "use-gal2d", 0, &use_gal2d },
+ 	};
+ 
+ 	parse_options(fbdev_options, ARRAY_LENGTH(fbdev_options), argc, argv);
+ 
+-	return fbdev_compositor_create(display, argc, argv, config_file,
++	return fbdev_compositor_create(display, use_pixman, use_gal2d, argc, argv, config_file,
+ 	                               &param);
+ }
+diff --git a/src/gal2d-renderer.c b/src/gal2d-renderer.c
+new file mode 100644
+index 0000000..84facf7
+--- /dev/null
++++ b/src/gal2d-renderer.c
+@@ -0,0 +1,1276 @@
++/*
++ * Copyright © 2012 Intel Corporation
++ *
++ * Permission to use, copy, modify, distribute, and sell this software and
++ * its documentation for any purpose is hereby granted without fee, provided
++ * that the above copyright notice appear in all copies and that both that
++ * copyright notice and this permission notice appear in supporting
++ * documentation, and that the name of the copyright holders not be used in
++ * advertising or publicity pertaining to distribution of the software
++ * without specific, written prior permission.  The copyright holders make
++ * no representations about the suitability of this software for any
++ * purpose.  It is provided "as is" without express or implied warranty.
++ *
++ * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS
++ * SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
++ * FITNESS, IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
++ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
++ * RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
++ * CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
++ * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
++ */
++
++#define _GNU_SOURCE
++
++#include <stdlib.h>
++#include <string.h>
++#include <ctype.h>
++#include <float.h>
++#include <assert.h>
++#include "compositor.h"
++#include "gal2d-renderer.h"
++#include "HAL/gc_hal.h"
++#include "HAL/gc_hal_raster.h"
++#include "HAL/gc_hal_eglplatform.h"
++
++#define galONERROR(x)  if(status < 0) printf("Error in function %s\n", __func__);
++
++
++struct gal2d_output_state {
++	
++	int current_buffer;
++	pixman_region32_t buffer_damage[2];
++    
++    gcoSURF* renderSurf;
++	gctUINT32 nNumBuffers;
++	int activebuffer;
++	gcoSURF offscreenSurface;
++	gceSURF_FORMAT format;
++	gcoSURF tempSurf;
++};
++
++struct gal2d_surface_state {
++	float color[4];
++	struct weston_buffer_reference buffer_ref;
++	int pitch; /* in pixels */
++    pixman_region32_t texture_damage;
++    gcoSURF gco_Surface;
++};
++
++struct gal2d_renderer {
++	struct weston_renderer base;
++	EGLNativeDisplayType display;
++    
++    gcoOS gcos;
++	gcoHAL gcoHal;
++	gco2D gcoEngine2d;
++    gctPOINTER  localInfo;
++};
++
++struct polygon8 {
++	float x[8];
++	float y[8];
++	int n;
++};
++
++struct clip_context {
++	struct {
++		float x;
++		float y;
++	} prev;
++
++	struct {
++		float x1, y1;
++		float x2, y2;
++	} clip;
++
++	struct {
++		float *x;
++		float *y;
++	} vertices;
++};
++
++static float
++float_difference(float a, float b)
++{
++	/* http://www.altdevblogaday.com/2012/02/22/comparing-floating-point-numbers-2012-edition/ */
++	static const float max_diff = 4.0f * FLT_MIN;
++	static const float max_rel_diff = 4.0e-5;
++	float diff = a - b;
++	float adiff = fabsf(diff);
++
++	if (adiff <= max_diff)
++		return 0.0f;
++
++	a = fabsf(a);
++	b = fabsf(b);
++	if (adiff <= (a > b ? a : b) * max_rel_diff)
++		return 0.0f;
++
++	return diff;
++}
++
++/* A line segment (p1x, p1y)-(p2x, p2y) intersects the line x = x_arg.
++ * Compute the y coordinate of the intersection.
++ */
++static float
++clip_intersect_y(float p1x, float p1y, float p2x, float p2y,
++		 float x_arg)
++{
++	float a;
++	float diff = float_difference(p1x, p2x);
++
++	/* Practically vertical line segment, yet the end points have already
++	 * been determined to be on different sides of the line. Therefore
++	 * the line segment is part of the line and intersects everywhere.
++	 * Return the end point, so we use the whole line segment.
++	 */
++	if (diff == 0.0f)
++		return p2y;
++
++	a = (x_arg - p2x) / diff;
++	return p2y + (p1y - p2y) * a;
++}
++
++/* A line segment (p1x, p1y)-(p2x, p2y) intersects the line y = y_arg.
++ * Compute the x coordinate of the intersection.
++ */
++static float
++clip_intersect_x(float p1x, float p1y, float p2x, float p2y,
++		 float y_arg)
++{
++	float a;
++	float diff = float_difference(p1y, p2y);
++
++	/* Practically horizontal line segment, yet the end points have already
++	 * been determined to be on different sides of the line. Therefore
++	 * the line segment is part of the line and intersects everywhere.
++	 * Return the end point, so we use the whole line segment.
++	 */
++	if (diff == 0.0f)
++		return p2x;
++
++	a = (y_arg - p2y) / diff;
++	return p2x + (p1x - p2x) * a;
++}
++
++enum path_transition {
++	PATH_TRANSITION_OUT_TO_OUT = 0,
++	PATH_TRANSITION_OUT_TO_IN = 1,
++	PATH_TRANSITION_IN_TO_OUT = 2,
++	PATH_TRANSITION_IN_TO_IN = 3,
++};
++
++static void
++clip_append_vertex(struct clip_context *ctx, float x, float y)
++{
++	*ctx->vertices.x++ = x;
++	*ctx->vertices.y++ = y;
++}
++
++static enum path_transition
++path_transition_left_edge(struct clip_context *ctx, float x, float y)
++{
++	return ((ctx->prev.x >= ctx->clip.x1) << 1) | (x >= ctx->clip.x1);
++}
++
++static enum path_transition
++path_transition_right_edge(struct clip_context *ctx, float x, float y)
++{
++	return ((ctx->prev.x < ctx->clip.x2) << 1) | (x < ctx->clip.x2);
++}
++
++static enum path_transition
++path_transition_top_edge(struct clip_context *ctx, float x, float y)
++{
++	return ((ctx->prev.y >= ctx->clip.y1) << 1) | (y >= ctx->clip.y1);
++}
++
++static enum path_transition
++path_transition_bottom_edge(struct clip_context *ctx, float x, float y)
++{
++	return ((ctx->prev.y < ctx->clip.y2) << 1) | (y < ctx->clip.y2);
++}
++
++static void
++clip_polygon_leftright(struct clip_context *ctx,
++		       enum path_transition transition,
++		       float x, float y, float clip_x)
++{
++	float yi;
++
++	switch (transition) {
++	case PATH_TRANSITION_IN_TO_IN:
++		clip_append_vertex(ctx, x, y);
++		break;
++	case PATH_TRANSITION_IN_TO_OUT:
++		yi = clip_intersect_y(ctx->prev.x, ctx->prev.y, x, y, clip_x);
++		clip_append_vertex(ctx, clip_x, yi);
++		break;
++	case PATH_TRANSITION_OUT_TO_IN:
++		yi = clip_intersect_y(ctx->prev.x, ctx->prev.y, x, y, clip_x);
++		clip_append_vertex(ctx, clip_x, yi);
++		clip_append_vertex(ctx, x, y);
++		break;
++	case PATH_TRANSITION_OUT_TO_OUT:
++		/* nothing */
++		break;
++	default:
++		assert(0 && "bad enum path_transition");
++	}
++
++	ctx->prev.x = x;
++	ctx->prev.y = y;
++}
++
++static void
++clip_polygon_topbottom(struct clip_context *ctx,
++		       enum path_transition transition,
++		       float x, float y, float clip_y)
++{
++	float xi;
++
++	switch (transition) {
++	case PATH_TRANSITION_IN_TO_IN:
++		clip_append_vertex(ctx, x, y);
++		break;
++	case PATH_TRANSITION_IN_TO_OUT:
++		xi = clip_intersect_x(ctx->prev.x, ctx->prev.y, x, y, clip_y);
++		clip_append_vertex(ctx, xi, clip_y);
++		break;
++	case PATH_TRANSITION_OUT_TO_IN:
++		xi = clip_intersect_x(ctx->prev.x, ctx->prev.y, x, y, clip_y);
++		clip_append_vertex(ctx, xi, clip_y);
++		clip_append_vertex(ctx, x, y);
++		break;
++	case PATH_TRANSITION_OUT_TO_OUT:
++		/* nothing */
++		break;
++	default:
++		assert(0 && "bad enum path_transition");
++	}
++
++	ctx->prev.x = x;
++	ctx->prev.y = y;
++}
++
++static void
++clip_context_prepare(struct clip_context *ctx, const struct polygon8 *src,
++		      float *dst_x, float *dst_y)
++{
++	ctx->prev.x = src->x[src->n - 1];
++	ctx->prev.y = src->y[src->n - 1];
++	ctx->vertices.x = dst_x;
++	ctx->vertices.y = dst_y;
++}
++
++static int
++clip_polygon_left(struct clip_context *ctx, const struct polygon8 *src,
++		  float *dst_x, float *dst_y)
++{
++	enum path_transition trans;
++	int i;
++
++	clip_context_prepare(ctx, src, dst_x, dst_y);
++	for (i = 0; i < src->n; i++) {
++		trans = path_transition_left_edge(ctx, src->x[i], src->y[i]);
++		clip_polygon_leftright(ctx, trans, src->x[i], src->y[i],
++				       ctx->clip.x1);
++	}
++	return ctx->vertices.x - dst_x;
++}
++
++static int
++clip_polygon_right(struct clip_context *ctx, const struct polygon8 *src,
++		   float *dst_x, float *dst_y)
++{
++	enum path_transition trans;
++	int i;
++
++	clip_context_prepare(ctx, src, dst_x, dst_y);
++	for (i = 0; i < src->n; i++) {
++		trans = path_transition_right_edge(ctx, src->x[i], src->y[i]);
++		clip_polygon_leftright(ctx, trans, src->x[i], src->y[i],
++				       ctx->clip.x2);
++	}
++	return ctx->vertices.x - dst_x;
++}
++
++static int
++clip_polygon_top(struct clip_context *ctx, const struct polygon8 *src,
++		 float *dst_x, float *dst_y)
++{
++	enum path_transition trans;
++	int i;
++
++	clip_context_prepare(ctx, src, dst_x, dst_y);
++	for (i = 0; i < src->n; i++) {
++		trans = path_transition_top_edge(ctx, src->x[i], src->y[i]);
++		clip_polygon_topbottom(ctx, trans, src->x[i], src->y[i],
++				       ctx->clip.y1);
++	}
++	return ctx->vertices.x - dst_x;
++}
++
++static int
++clip_polygon_bottom(struct clip_context *ctx, const struct polygon8 *src,
++		    float *dst_x, float *dst_y)
++{
++	enum path_transition trans;
++	int i;
++
++	clip_context_prepare(ctx, src, dst_x, dst_y);
++	for (i = 0; i < src->n; i++) {
++		trans = path_transition_bottom_edge(ctx, src->x[i], src->y[i]);
++		clip_polygon_topbottom(ctx, trans, src->x[i], src->y[i],
++				       ctx->clip.y2);
++	}
++	return ctx->vertices.x - dst_x;
++}
++
++#define max(a, b) (((a) > (b)) ? (a) : (b))
++#define min(a, b) (((a) > (b)) ? (b) : (a))
++#define clip(x, a, b)  min(max(x, a), b)
++
++/*
++ * Compute the boundary vertices of the intersection of the global coordinate
++ * aligned rectangle 'rect', and an arbitrary quadrilateral produced from
++ * 'surf_rect' when transformed from surface coordinates into global coordinates.
++ * The vertices are written to 'ex' and 'ey', and the return value is the
++ * number of vertices. Vertices are produced in clockwise winding order.
++ * Guarantees to produce either zero vertices, or 3-8 vertices with non-zero
++ * polygon area.
++ */
++static int
++calculate_edges(struct weston_surface *es, pixman_box32_t *rect,
++		pixman_box32_t *surf_rect, float *ex, float *ey)
++{
++	struct polygon8 polygon;
++	struct clip_context ctx;
++	int i, n;
++	float min_x, max_x, min_y, max_y;
++	struct polygon8 surf = {
++		{ surf_rect->x1, surf_rect->x2, surf_rect->x2, surf_rect->x1 },
++		{ surf_rect->y1, surf_rect->y1, surf_rect->y2, surf_rect->y2 },
++		4
++	};
++
++	ctx.clip.x1 = rect->x1;
++	ctx.clip.y1 = rect->y1;
++	ctx.clip.x2 = rect->x2;
++	ctx.clip.y2 = rect->y2;
++
++	/* transform surface to screen space: */
++	for (i = 0; i < surf.n; i++)
++		weston_surface_to_global_float(es, surf.x[i], surf.y[i],
++					       &surf.x[i], &surf.y[i]);
++
++	/* find bounding box: */
++	min_x = max_x = surf.x[0];
++	min_y = max_y = surf.y[0];
++
++	for (i = 1; i < surf.n; i++) {
++		min_x = min(min_x, surf.x[i]);
++		max_x = max(max_x, surf.x[i]);
++		min_y = min(min_y, surf.y[i]);
++		max_y = max(max_y, surf.y[i]);
++	}
++
++	/* First, simple bounding box check to discard early transformed
++	 * surface rects that do not intersect with the clip region:
++	 */
++	if ((min_x >= ctx.clip.x2) || (max_x <= ctx.clip.x1) ||
++	    (min_y >= ctx.clip.y2) || (max_y <= ctx.clip.y1))
++		return 0;
++
++	/* Simple case, bounding box edges are parallel to surface edges,
++	 * there will be only four edges.  We just need to clip the surface
++	 * vertices to the clip rect bounds:
++	 */
++
++	if (!es->transform.enabled) {
++		for (i = 0; i < surf.n; i++) {
++			ex[i] = clip(surf.x[i], ctx.clip.x1, ctx.clip.x2);
++			ey[i] = clip(surf.y[i], ctx.clip.y1, ctx.clip.y2);
++		}
++		return surf.n;
++	}
++
++	/* Transformed case: use a general polygon clipping algorithm to
++	 * clip the surface rectangle with each side of 'rect'.
++	 * The algorithm is Sutherland-Hodgman, as explained in
++	 * http://www.codeguru.com/cpp/misc/misc/graphics/article.php/c8965/Polygon-Clipping.htm
++	 * but without looking at any of that code.
++	 */
++	polygon.n = clip_polygon_left(&ctx, &surf, polygon.x, polygon.y);
++	surf.n = clip_polygon_right(&ctx, &polygon, surf.x, surf.y);
++	polygon.n = clip_polygon_top(&ctx, &surf, polygon.x, polygon.y);
++	surf.n = clip_polygon_bottom(&ctx, &polygon, surf.x, surf.y);
++
++	/* Get rid of duplicate vertices */
++	ex[0] = surf.x[0];
++	ey[0] = surf.y[0];
++	n = 1;
++	for (i = 1; i < surf.n; i++) {
++		if (float_difference(ex[n - 1], surf.x[i]) == 0.0f &&
++		    float_difference(ey[n - 1], surf.y[i]) == 0.0f)
++			continue;
++		ex[n] = surf.x[i];
++		ey[n] = surf.y[i];
++		n++;
++	}
++	if (float_difference(ex[n - 1], surf.x[0]) == 0.0f &&
++	    float_difference(ey[n - 1], surf.y[0]) == 0.0f)
++		n--;
++
++	if (n < 3)
++		return 0;
++
++	return n;
++}
++
++static inline struct gal2d_output_state *
++get_output_state(struct weston_output *output)
++{
++	return (struct gal2d_output_state *)output->renderer_state;
++}
++
++static inline struct gal2d_surface_state *
++get_surface_state(struct weston_surface *surface)
++{
++	return (struct gal2d_surface_state *)surface->renderer_state;
++}
++
++static inline struct gal2d_renderer *
++get_renderer(struct weston_compositor *ec)
++{
++	return (struct gal2d_renderer *)ec->renderer;
++}
++
++static gctUINT32
++galGetStretchFactor(gctINT32 SrcSize, gctINT32 DestSize)
++{
++	gctUINT stretchFactor;
++	if ( (SrcSize > 0) && (DestSize > 1) )
++	{
++		stretchFactor = ((SrcSize - 1) << 16) / (DestSize - 1);
++	}
++	else
++	{
++		stretchFactor = 0;
++	}
++	return stretchFactor;
++}
++
++static gceSTATUS
++galGetStretchFactors(
++	IN gcsRECT_PTR SrcRect,
++	IN gcsRECT_PTR DestRect,
++	OUT gctUINT32 * HorFactor,
++	OUT gctUINT32 * VerFactor
++	)
++{
++	if (HorFactor != gcvNULL)
++	{
++        gctINT32 src, dest;
++
++        /* Compute width of rectangles. */
++        gcmVERIFY_OK(gcsRECT_Width(SrcRect, &src));
++        gcmVERIFY_OK(gcsRECT_Width(DestRect, &dest));
++
++        /* Compute and return horizontal stretch factor. */
++		*HorFactor = galGetStretchFactor(src, dest);
++	}
++
++	if (VerFactor != gcvNULL)
++	{
++		gctINT32 src, dest;
++
++		/* Compute height of rectangles. */
++		gcmVERIFY_OK(gcsRECT_Height(SrcRect, &src));
++		gcmVERIFY_OK(gcsRECT_Height(DestRect, &dest));
++
++		/* Compute and return vertical stretch factor. */
++		*VerFactor = galGetStretchFactor(src, dest);
++	}
++    /* Success. */
++    return gcvSTATUS_OK;
++}
++
++static gceSTATUS
++gal2d_getSurfaceFormat(halDISPLAY_INFO info, gceSURF_FORMAT * Format)
++{
++	/* Get the color format. */
++    switch (info.greenLength)
++    {
++    case 4:
++        if (info.blueOffset == 0)
++        {
++            *Format = (info.alphaLength == 0) ? gcvSURF_X4R4G4B4 : gcvSURF_A4R4G4B4;
++        }
++        else
++        {
++            *Format = (info.alphaLength == 0) ? gcvSURF_X4B4G4R4 : gcvSURF_A4B4G4R4;
++        }
++        break;
++
++    case 5:
++        if (info.blueOffset == 0)
++        {
++            *Format = (info.alphaLength == 0) ? gcvSURF_X1R5G5B5 : gcvSURF_A1R5G5B5;
++        }
++        else
++        {
++            *Format = (info.alphaLength == 0) ? gcvSURF_X1B5G5R5 : gcvSURF_A1B5G5R5;
++        }
++        break;
++
++    case 6:
++        *Format = gcvSURF_R5G6B5;
++        break;
++
++    case 8:
++        if (info.blueOffset == 0)
++        {
++            *Format = (info.alphaLength == 0) ? gcvSURF_X8R8G8B8 : gcvSURF_A8R8G8B8;
++        }
++        else
++        {
++            *Format = (info.alphaLength == 0) ? gcvSURF_X8B8G8R8 : gcvSURF_A8B8G8R8;
++        }
++        break;
++
++    default:
++        /* Unsupported color depth. */
++        return gcvSTATUS_INVALID_ARGUMENT;
++    }
++	/* Success. */
++    return gcvSTATUS_OK;
++}
++
++static int
++make_current(struct gal2d_renderer *gr, gcoSURF surface)
++{    
++	gceSTATUS status = gcvSTATUS_OK;
++	gctUINT width = 0;
++	gctUINT height = 0;
++	gctINT stride = 0;
++	gctUINT32 physical;
++	gctPOINTER va =0;
++
++	if(!surface)
++		goto OnError;
++    
++
++	gcmONERROR(gcoSURF_GetAlignedSize(surface, &width, &height, &stride));
++    
++	gcmONERROR(gcoSURF_Lock(surface, &physical, (gctPOINTER *)&va));
++
++	gcmONERROR(gco2D_SetTargetEx(gr->gcoEngine2d, physical, stride,
++									gcvSURF_0_DEGREE, width, height));
++                                   
++	gcmONERROR(gcoSURF_Unlock(surface, (gctPOINTER *)&va));
++    
++OnError:
++    galONERROR(status);
++	return status;
++}
++
++static gceSTATUS
++gal2d_clear(struct weston_output *base)
++{
++    struct gal2d_renderer *gr = get_renderer(base->compositor);
++	struct gal2d_output_state *go = get_output_state(base);    
++	gceSTATUS status = gcvSTATUS_OK;
++	
++	gctINT stride = 0;
++	gctUINT width = 0, height = 0;
++	gcsRECT dstRect = {0};
++	gcmONERROR(gcoSURF_GetAlignedSize(go->renderSurf[go->activebuffer],
++					&width, &height, &stride));
++	dstRect.right = width;
++	dstRect.bottom = height;
++	gcmONERROR(gco2D_SetSource(gr->gcoEngine2d, &dstRect));
++	gcmONERROR(gco2D_SetClipping(gr->gcoEngine2d, &dstRect));
++	gcmONERROR(gco2D_Clear(gr->gcoEngine2d, 1, &dstRect, 0xff0000ff, 0xCC, 0xCC, go->format));
++
++	gcmONERROR(gcoHAL_Commit(gr->gcoHal, gcvFALSE));
++
++OnError:
++	galONERROR(status);
++    
++	return status;
++}
++
++#define GAL2D_MAP_SURFACE 0
++static gcoSURF getSurfaceFromShm(struct weston_surface *es, struct wl_buffer *buffer)
++{	
++    struct gal2d_renderer *gr = get_renderer(es->compositor);
++	
++	gcoSURF surface = 0;
++	gceSURF_FORMAT format;
++	gcePOOL pool = gcvPOOL_DEFAULT;
++
++	if (wl_shm_buffer_get_format(buffer) == WL_SHM_FORMAT_XRGB8888)
++		format = gcvSURF_X8R8G8B8;
++	else
++		format = gcvSURF_A8R8G8B8;
++
++	if(GAL2D_MAP_SURFACE == 1)
++	{
++		pool = gcvPOOL_USER;
++	}
++	gcmVERIFY_OK(gcoSURF_Construct(gr->gcoHal,
++						  (gctUINT) buffer->width,
++						  (gctUINT) buffer->height,
++						  1, gcvSURF_BITMAP,
++						  format, pool, &surface));
++
++	if(GAL2D_MAP_SURFACE == 1)
++	{
++		gcmVERIFY_OK(gcoSURF_CPUCacheOperation(surface, gcvCACHE_CLEAN));
++		gcmVERIFY_OK(gcoSURF_MapUserSurface(surface, 0,
++					(gctPOINTER)wl_shm_buffer_get_data(buffer), gcvINVALID_ADDRESS));
++
++		gcmVERIFY_OK(gcoSURF_CPUCacheOperation(surface, gcvCACHE_CLEAN));
++	}
++	return surface;
++}
++
++static int
++gal2dBindBuffer(struct weston_surface* es)
++{
++    struct gal2d_surface_state *gs = get_surface_state(es);    
++	gctPOINTER logical;
++	gceSTATUS status = gcvSTATUS_OK;
++	gcoSURF surface = gs->gco_Surface;	
++    struct wl_buffer *buffer = gs->buffer_ref.buffer;
++    
++	logical = (gctPOINTER)wl_shm_buffer_get_data(buffer);
++	gctUINT32 physical;
++	gctPOINTER va =0;
++	gctUINT alignedWidth, alignedHeight;
++	gctINT alignedStride;
++	int size = wl_shm_buffer_get_stride(buffer)*buffer->height;
++
++	if(GAL2D_MAP_SURFACE == 1)
++	{
++		gcmVERIFY_OK(gcoSURF_MapUserSurface(surface, 0,
++					(gctPOINTER)wl_shm_buffer_get_data(buffer), gcvINVALID_ADDRESS));
++
++		gcmVERIFY_OK(gcoSURF_CPUCacheOperation(surface, gcvCACHE_FLUSH));
++	}
++	else
++	{
++		gcmONERROR(gcoSURF_GetAlignedSize(surface, &alignedWidth, &alignedHeight, &alignedStride));
++		gcmONERROR(gcoSURF_Lock(surface, &physical, (gctPOINTER *)&va));
++      
++		if(alignedWidth == (unsigned int)buffer->width && alignedHeight == (unsigned int)buffer->height)
++		{
++			memcpy(va, logical, size);
++		}
++		else
++		{
++			int i, j;
++			for (i = 0; i < buffer->height; i++)
++			{
++				for (j = 0; j < buffer->width; j++)
++				{
++					gctUINT dstOff = i * alignedWidth + j;
++					gctUINT srcOff = (i * buffer->width + j);
++
++					memcpy(va + dstOff * 4, logical + srcOff * 4, 4);
++				}
++			}
++		}
++	}
++
++	gcmONERROR(gcoSURF_Unlock(surface, (gctPOINTER)va));
++
++OnError:
++    galONERROR(status);
++	return status;
++}
++
++static void
++gal2d_flip_surface(struct weston_output *output)
++{
++	struct gal2d_renderer *gr = get_renderer(output->compositor);
++	struct gal2d_output_state *go = get_output_state(output);
++	gceSTATUS status = gcvSTATUS_OK;
++
++	gcoHAL_Commit(gr->gcoHal, gcvTRUE);
++	if(go->nNumBuffers > 1)
++	{
++		gctUINT Offset;
++		gctINT X;
++		gctINT Y;
++
++		gcmONERROR(gcoOS_GetDisplayBackbuffer(gr->display, gcvNULL,
++									gcvNULL, gcvNULL, &Offset, &X, &Y));
++
++		gcmONERROR(gcoOS_SetDisplayVirtual(gr->display, gcvNULL,
++									Offset, X, Y));
++
++		go->activebuffer = (go->activebuffer+1) % go->nNumBuffers;
++	}
++OnError:
++	galONERROR(status);
++}
++
++static int
++update_surface(struct weston_output *output)
++{
++    struct gal2d_renderer *gr = get_renderer(output->compositor);
++	struct gal2d_output_state *go = get_output_state(output);
++    gceSTATUS status = gcvSTATUS_OK;
++    
++    if(go->offscreenSurface && go->nNumBuffers == 1)
++	{
++		make_current(gr, go->renderSurf[go->activebuffer]);
++
++		gctUINT srcWidth = 0;
++		gctUINT srcHeight = 0;
++		gctINT srcStride = 0;
++		gceSURF_FORMAT srcFormat;;
++		gcsRECT dstRect = {0};
++		gcoSURF srcSurface = go->offscreenSurface;
++		gctUINT32 physical;
++		gctPOINTER va =0;
++
++		gcmONERROR(gcoSURF_GetAlignedSize(srcSurface, &srcWidth, &srcHeight, &srcStride));
++		gcmONERROR(gcoSURF_GetFormat(srcSurface, gcvNULL, &srcFormat));
++		gcmONERROR(gcoSURF_Lock(srcSurface, &physical, (gctPOINTER *)&va));
++		gcmONERROR(gco2D_SetColorSource(gr->gcoEngine2d, physical, srcStride, srcFormat,
++							gcvFALSE, srcWidth, gcvFALSE, gcvSURF_OPAQUE, 0));
++
++		dstRect.left 	= 0;
++		dstRect.top		= 0;
++		dstRect.right 	= srcWidth;
++		dstRect.bottom 	= srcHeight;
++
++		gcmONERROR(gco2D_SetSource(gr->gcoEngine2d, &dstRect));
++		gcmONERROR(gco2D_SetClipping(gr->gcoEngine2d, &dstRect));
++		gcmONERROR(gco2D_Blit(gr->gcoEngine2d, 1, &dstRect, 0xCC, 0xCC, go->format));
++		gcmONERROR(gcoSURF_Unlock(srcSurface, (gctPOINTER *)&va));
++		gcmONERROR(gcoHAL_Commit(gr->gcoHal, gcvFALSE));
++	}
++    
++    gal2d_flip_surface(output);
++    
++OnError:
++	galONERROR(status);
++	return status;
++ }
++ 
++static int
++use_output(struct weston_output *output)
++{
++    struct gal2d_output_state *go = get_output_state(output);	
++	struct gal2d_renderer *gr = get_renderer(output->compositor);    
++    gceSTATUS status = gcvSTATUS_OK;
++
++    gcoSURF surface;
++	surface = go->nNumBuffers > 1 ?
++						go->renderSurf[go->activebuffer] :
++						go->offscreenSurface;  /*go->renderSurf[0];*/
++    make_current(gr, surface); 
++    return status;
++}
++
++static int
++gal2d_renderer_read_pixels(struct weston_output *output,
++			       pixman_format_code_t format, void *pixels,
++			       uint32_t x, uint32_t y,
++			       uint32_t width, uint32_t height)
++{
++	return 0;
++}
++
++static int gal2d_int_from_double(double d)
++{
++	return wl_fixed_to_int(wl_fixed_from_double(d));
++}
++
++static void
++repaint_region(struct weston_surface *es, struct weston_output *output, struct gal2d_output_state *go, pixman_region32_t *region,
++		pixman_region32_t *surf_region){
++
++    struct gal2d_renderer *gr = get_renderer(es->compositor);
++    struct gal2d_surface_state *gs = get_surface_state(es);
++
++	pixman_box32_t *rects, *surf_rects, *bb_rects;
++	int i, j, nrects, nsurf, nbb=0;
++	gceSTATUS status = gcvSTATUS_OK;
++	gcoSURF srcSurface = gs->gco_Surface;
++	gcsRECT srcRect = {0};
++	gcsRECT dstrect = {0};
++	gctUINT32 horFactor, verFactor;
++	bb_rects = pixman_region32_rectangles(&es->transform.boundingbox, &nbb);
++
++	if(!srcSurface || nbb <= 0)
++		goto OnError;
++	rects = pixman_region32_rectangles(region, &nrects);
++	surf_rects = pixman_region32_rectangles(surf_region, &nsurf);
++
++	{
++		gctUINT srcWidth = 0;
++		gctUINT srcHeight = 0;
++		gctINT srcStride = 0;
++		gceSURF_FORMAT srcFormat;;
++		gctUINT32 physical;
++		gctPOINTER va =0;
++		gcmONERROR(gcoSURF_GetAlignedSize(srcSurface, &srcWidth, &srcHeight, &srcStride));
++		gcmONERROR(gcoSURF_GetFormat(srcSurface, gcvNULL, &srcFormat));
++
++		gcmONERROR(gcoSURF_Lock(srcSurface, &physical, (gctPOINTER *)&va));
++		gcmONERROR(gco2D_SetColorSource(gr->gcoEngine2d, physical, srcStride, srcFormat,
++							gcvFALSE, srcWidth, gcvFALSE, gcvSURF_OPAQUE, 0));
++		srcRect.left = es->geometry.x < 0.0 ? gal2d_int_from_double(fabsf(es->geometry.x)) : 0;
++		//srcRect.top = es->geometry.y < 0.0 ? gal2d_int_from_double(fabsf(es->geometry.y)) : 0;
++		srcRect.top = 0;
++
++		srcRect.right = es->geometry.width;
++		srcRect.bottom = es->geometry.height;
++
++		gcmONERROR(gco2D_SetSource(gr->gcoEngine2d, &srcRect));
++
++		gcmONERROR(gcoSURF_Unlock(srcSurface, (gctPOINTER)va));
++	}
++	for (i = 0; i < nrects; i++)
++	{
++		pixman_box32_t *rect = &rects[i];
++		float min_x, max_x, min_y, max_y;
++
++		dstrect.left = (bb_rects[0].x1 < 0) ? rect->x1 : bb_rects[0].x1;
++		dstrect.top = (bb_rects[0].y1 < 0) ? rect->y1 : bb_rects[0].y1;
++		dstrect.right = bb_rects[0].x2;
++		dstrect.bottom = bb_rects[0].y2;
++		if(dstrect.right < 0 || dstrect.bottom < 0)
++		{
++			break;
++		}
++
++		for (j = 0; j < nsurf; j++)
++		{
++			pixman_box32_t *surf_rect = &surf_rects[j];
++			float ex[8], ey[8];          /* edge points in screen space */
++			int n;
++			gcsRECT clipRect = {0};
++			int m=0;
++			n = calculate_edges(es, rect, surf_rect, ex, ey);
++			if (n < 3)
++				continue;
++
++			min_x = max_x = ex[0];
++			min_y = max_y = ey[0];
++			for (m = 1; m < n; m++)
++			{
++				min_x = min(min_x, ex[m]);
++				max_x = max(max_x, ex[m]);
++				min_y = min(min_y, ey[m]);
++				max_y = max(max_y, ey[m]);
++			}
++
++			clipRect.left = gal2d_int_from_double(min_x);
++			clipRect.top = gal2d_int_from_double(min_y);
++			clipRect.right = gal2d_int_from_double(max_x);
++			clipRect.bottom = gal2d_int_from_double(max_y);
++
++			if(output->x > 0)
++			{
++				dstrect.left = dstrect.left - output->x;
++				dstrect.right = dstrect.right - output->x;
++				clipRect.left = clipRect.left - output->x;
++				clipRect.right = clipRect.right - output->x;
++			}
++
++
++			dstrect.left = (dstrect.left < 0) ? 0 : dstrect.left;
++
++			gcmONERROR(gco2D_SetClipping(gr->gcoEngine2d, &clipRect));
++			
++			galGetStretchFactors(&srcRect, &dstrect, &horFactor, &verFactor);            
++			if(verFactor == 65536 && horFactor == 65536)
++			{
++				status = gco2D_Blit(gr->gcoEngine2d, 1, &dstrect,
++                                        0xCC, 0xCC, go->format);
++			}
++			else
++			{
++				/* Program the stretch factors. */
++				status = (gco2D_SetStretchFactors(gr->gcoEngine2d, horFactor, verFactor));
++				if(status < 0)
++				{
++					printf("Error in gco2D_SetStretchFactors %s\n", __func__);
++					goto OnError;
++				}
++				status = (gco2D_StretchBlit(gr->gcoEngine2d, 1, &dstrect,
++						0xCC, 0xCC, go->format));
++			}
++			if(status < 0)
++			{
++				printf("Error in Blit %s\n", __func__);
++				printf("cr l=%d r=%d t=%d b=%d w=%d h=%d\n",
++					clipRect.left, clipRect.right, clipRect.top ,clipRect.bottom,
++					clipRect.right - clipRect.left, clipRect.bottom -clipRect.top);
++				printf("dr l=%d r=%d t=%d b=%d w=%d h=%d\n",
++						dstrect.left, dstrect.right, dstrect.top ,dstrect.bottom,
++						dstrect.right - dstrect.left, dstrect.bottom -dstrect.top);
++				printf("horFactor=%d, verFactor=%d\n",horFactor, verFactor);
++
++				printf("geo x=%f y=%f x=%d y=%d w=%d h=%d \n",
++						es->geometry.x, es->geometry.y,
++						gal2d_int_from_double(es->geometry.x),
++						gal2d_int_from_double(es->geometry.y),
++					 es->geometry.width,es->geometry.height);
++				goto OnError;
++			}
++			gcmONERROR(gcoHAL_Commit(gr->gcoHal, gcvFALSE));
++		}
++	}
++    
++OnError:
++	galONERROR(status);
++}
++
++static void
++draw_surface(struct weston_surface *es, struct weston_output *output,
++	     pixman_region32_t *damage) /* in global coordinates */
++{
++	struct weston_compositor *ec = es->compositor;	
++	struct gal2d_output_state *go = get_output_state(output);
++	/* repaint bounding region in global coordinates: */
++	pixman_region32_t repaint;
++	/* non-opaque region in surface coordinates: */
++	pixman_region32_t surface_blend;
++	pixman_region32_t *buffer_damage;
++
++    pixman_region32_init(&repaint);
++	pixman_region32_intersect(&repaint,
++				  &es->transform.boundingbox, damage);
++	pixman_region32_subtract(&repaint, &repaint, &es->clip);
++
++	if (!pixman_region32_not_empty(&repaint))
++		goto out;
++
++	buffer_damage = &go->buffer_damage[go->current_buffer];
++	pixman_region32_subtract(buffer_damage, buffer_damage, &repaint);
++
++	/* blended region is whole surface minus opaque region: */
++	pixman_region32_init_rect(&surface_blend, 0, 0,
++				  es->geometry.width, es->geometry.height);
++	pixman_region32_subtract(&surface_blend, &surface_blend, &es->opaque);
++
++	if (pixman_region32_not_empty(&es->opaque)) {			
++
++		repaint_region(es, output, go, &repaint, &es->opaque);
++	}
++
++	if (pixman_region32_not_empty(&surface_blend)) {
++        struct gal2d_renderer *gr = get_renderer(ec);
++        
++        gco2D_EnableAlphaBlend(gr->gcoEngine2d,
++			es->alpha * 0xFF, es->alpha * 0xFF,
++			gcvSURF_PIXEL_ALPHA_STRAIGHT, gcvSURF_PIXEL_ALPHA_STRAIGHT,
++			gcvSURF_GLOBAL_ALPHA_OFF, gcvSURF_GLOBAL_ALPHA_OFF,
++			gcvSURF_BLEND_ONE, gcvSURF_BLEND_INVERSED,
++			gcvSURF_COLOR_STRAIGHT, gcvSURF_COLOR_STRAIGHT);
++            
++		repaint_region(es, output, go, &repaint, &surface_blend);
++	}
++
++	pixman_region32_fini(&surface_blend);
++
++out:
++	pixman_region32_fini(&repaint);
++}
++
++static void
++repaint_surfaces(struct weston_output *output, pixman_region32_t *damage)
++{
++	struct weston_compositor *compositor = output->compositor;
++	struct weston_surface *surface;
++
++	wl_list_for_each_reverse(surface, &compositor->surface_list, link)
++		if (surface->plane == &compositor->primary_plane)
++			draw_surface(surface, output, damage);
++            
++}
++
++static void
++gal2d_renderer_repaint_output(struct weston_output *output,
++			     pixman_region32_t *output_damage)
++{
++    struct gal2d_output_state *go = get_output_state(output);	
++ 	gctUINT32 i;
++
++	if (use_output(output) < 0)
++		return;
++        
++	for (i = 0; i < 2; i++)
++		pixman_region32_union(&go->buffer_damage[i],
++				      &go->buffer_damage[i],
++				      output_damage);
++
++	pixman_region32_union(output_damage, output_damage,
++			      &go->buffer_damage[go->current_buffer]);
++
++	repaint_surfaces(output, output_damage);
++
++	/*if (gr->border.texture)
++		draw_border(output);*/
++
++	pixman_region32_copy(&output->previous_damage, output_damage);
++	wl_signal_emit(&output->frame_signal, output);
++    
++    update_surface(output);
++
++	go->current_buffer ^= 1;
++}
++
++static void
++gal2d_renderer_flush_damage(struct weston_surface *surface)
++{
++	struct gal2d_surface_state *gs = get_surface_state(surface);
++	struct wl_buffer *buffer = gs->buffer_ref.buffer;
++
++	pixman_region32_union(&gs->texture_damage,
++			      &gs->texture_damage, &surface->damage);
++
++	if (!buffer)
++		return;
++
++	/* Avoid upload, if the texture won't be used this time.
++	 * We still accumulate the damage in texture_damage, and
++	 * hold the reference to the buffer, in case the surface
++	 * migrates back to the primary plane.
++	 */
++	if (surface->plane != &surface->compositor->primary_plane)
++		return;
++	if (!pixman_region32_not_empty(&gs->texture_damage))
++		goto done;
++
++    if(wl_buffer_is_shm(buffer))
++	{
++		if(gs->gco_Surface==NULL)
++		{
++			gs->gco_Surface = getSurfaceFromShm(surface, buffer);
++		}
++		gal2dBindBuffer(surface);
++	}
++	else
++	{
++		gcsWL_VIV_BUFFER *vivBuffer = (gcsWL_VIV_BUFFER *)buffer;
++		gs->gco_Surface = vivBuffer->surface;
++	}
++done:
++	pixman_region32_fini(&gs->texture_damage);
++	pixman_region32_init(&gs->texture_damage);
++
++	weston_buffer_reference(&gs->buffer_ref, NULL);
++}
++
++static void
++gal2d_renderer_attach(struct weston_surface *es, struct wl_buffer *buffer)
++{
++	struct gal2d_surface_state *gs = get_surface_state(es);
++
++	weston_buffer_reference(&gs->buffer_ref, buffer);
++
++	if(buffer==NULL)
++		return;
++
++	if(wl_buffer_is_shm(buffer))
++	{
++		if(gs->gco_Surface)
++		{
++			gcoSURF_Destroy(gs->gco_Surface);
++            gs->gco_Surface = getSurfaceFromShm(es, buffer);
++		}
++	}
++	else
++	{
++		gcsWL_VIV_BUFFER *vivBuffer = (gcsWL_VIV_BUFFER *)buffer;
++		gs->gco_Surface = vivBuffer->surface;
++	}
++    
++}
++
++static int
++gal2d_renderer_create_surface(struct weston_surface *surface)
++{
++    struct gal2d_surface_state *gs;
++
++	gs = calloc(1, sizeof *gs);
++	if (!gs)
++		return -1;
++
++	/* A buffer is never attached to solid color surfaces, yet
++	 * they still go through texcoord computations. Do not divide
++	 * by zero there.
++	 */
++	gs->pitch = 1;
++
++	pixman_region32_init(&gs->texture_damage);
++	surface->renderer_state = gs;
++
++	return 0;
++}
++
++static void
++gal2d_renderer_surface_set_color(struct weston_surface *surface,
++		 float red, float green, float blue, float alpha)
++{
++    struct gal2d_surface_state *gs = get_surface_state(surface);
++
++	gs->color[0] = red;
++	gs->color[1] = green;
++	gs->color[2] = blue;
++	gs->color[3] = alpha;
++}
++
++static void
++gal2d_renderer_destroy_surface(struct weston_surface *surface)
++{
++}
++
++WL_EXPORT void
++gal2d_renderer_output_destroy(struct weston_output *output)
++{
++    struct gal2d_output_state *go = get_output_state(output);
++    gctUINT32 i;
++    
++	if(go->nNumBuffers <= 1 )
++	{
++		if(go->offscreenSurface)
++			gcmVERIFY_OK(gcoSURF_Destroy(go->offscreenSurface));
++	}
++
++	for(i=0; i < go->nNumBuffers; i++)
++	{
++		gcmVERIFY_OK(gcoSURF_Destroy(go->renderSurf[i]));
++	}
++
++	free(go->renderSurf);
++	go->renderSurf = gcvNULL;
++
++	free(go);
++}
++
++static void
++gal2d_renderer_destroy(struct weston_compositor *ec)
++{    
++	free(ec->renderer);
++	ec->renderer = NULL;
++}
++
++
++WL_EXPORT int
++gal2d_renderer_create(struct weston_compositor *ec, EGLNativeDisplayType display)
++{
++    struct gal2d_renderer *gr;
++    gceSTATUS status = gcvSTATUS_OK;
++	gr = malloc(sizeof *gr);
++	if (gr == NULL)
++		return -1;
++
++	gr->base.read_pixels = gal2d_renderer_read_pixels;
++	gr->base.repaint_output = gal2d_renderer_repaint_output;
++	gr->base.flush_damage = gal2d_renderer_flush_damage;
++	gr->base.attach = gal2d_renderer_attach;
++	gr->base.create_surface = gal2d_renderer_create_surface;
++	gr->base.surface_set_color = gal2d_renderer_surface_set_color;
++	gr->base.destroy_surface = gal2d_renderer_destroy_surface;
++	gr->base.destroy = gal2d_renderer_destroy;
++    gr->display = display;
++    
++    /* Construct the gcoOS object. */
++	gcmONERROR(gcoOS_Construct(gcvNULL, &gr->gcos));
++
++	/* Construct the gcoHAL object. */
++	gcmONERROR(gcoHAL_Construct(gcvNULL, gr->gcos, &gr->gcoHal));
++	gcmONERROR(gcoHAL_Get2DEngine(gr->gcoHal, &gr->gcoEngine2d));
++	gcmONERROR(gcoHAL_SetHardwareType(gr->gcoHal, gcvHARDWARE_2D));
++    
++	gcmONERROR(gcoOS_InitLocalDisplayInfo(gr->display, &gr->localInfo));
++    
++	ec->renderer = &gr->base; 
++OnError:
++    galONERROR(status);
++    
++    /* Return the status. */    
++    return status;
++	
++}
++
++WL_EXPORT int
++gal2d_renderer_output_create(struct weston_output *output,
++				    EGLNativeWindowType window)
++ {
++    struct gal2d_renderer *gr = get_renderer(output->compositor);
++	struct gal2d_output_state *go = calloc(1, sizeof *go);
++    halDISPLAY_INFO info;
++    gctUINT32 backOffset = 0;
++    gctINT width, height;
++    gceSTATUS status = gcvSTATUS_OK;
++	gctUINT32 i;
++    
++    if (!go)
++		return -1;
++     
++    output->renderer_state = go;
++
++    /* Get display information. */
++	gcmONERROR(gcoOS_GetDisplayInfoEx2(
++					gr->display, gcvNULL, gr->localInfo,
++					sizeof(info), &info));
++	go->nNumBuffers = info.multiBuffer;
++    
++    weston_log("Number of buffers=%d\n",go->nNumBuffers);
++
++	gcmONERROR(gal2d_getSurfaceFormat(info, &go->format));    
++	backOffset = (gctUINT32)(info.stride * info.height );
++
++	go->activebuffer = 0;
++
++	go->renderSurf = malloc(sizeof(gcoSURF) * go->nNumBuffers);
++	gcoOS_GetDisplayVirtual(gr->display, &width, &height);
++	for(i=0; i < go->nNumBuffers; i++)
++	{
++		
++        gcmONERROR(gcoSURF_Construct(gr->gcoHal, info.width, info.height, 1, 
++            gcvSURF_BITMAP, go->format, gcvPOOL_USER, &go->renderSurf[i]));
++        
++        gcoSURF_MapUserSurface(go->renderSurf[i], 0,info.logical + (i * backOffset),
++						info.physical + (i * backOffset));
++		
++		//Clear surfaces
++		make_current(gr, go->renderSurf[go->activebuffer]);
++		gal2d_clear(output);
++		gal2d_flip_surface(output);
++	}
++	if(go->nNumBuffers <= 1)
++		go->activebuffer = 0;
++	else
++		go->activebuffer = 1;
++
++	if(go->nNumBuffers <= 1 )
++	{
++		gcmVERIFY_OK(gcoSURF_Construct(gr->gcoHal,
++							  (gctUINT) info.width,
++							  (gctUINT) info.height,
++							  1,
++							  gcvSURF_BITMAP,
++							  go->format,
++							  gcvPOOL_DEFAULT,
++							  &go->offscreenSurface));
++		make_current(gr, go->offscreenSurface);
++		gal2d_clear(output);
++		gal2d_flip_surface(output);
++	}
++OnError:
++    galONERROR(status);
++    /* Return the status. */
++    return status;  
++ }
+diff --git a/src/gal2d-renderer.h b/src/gal2d-renderer.h
+new file mode 100644
+index 0000000..3c84cd2
+--- /dev/null
++++ b/src/gal2d-renderer.h
+@@ -0,0 +1,41 @@
++/*
++ * Copyright © 2013 Vasily Khoruzhick <anarsoul@gmail.com>
++ *
++ * Permission to use, copy, modify, distribute, and sell this software and
++ * its documentation for any purpose is hereby granted without fee, provided
++ * that the above copyright notice appear in all copies and that both that
++ * copyright notice and this permission notice appear in supporting
++ * documentation, and that the name of the copyright holders not be used in
++ * advertising or publicity pertaining to distribution of the software
++ * without specific, written prior permission.  The copyright holders make
++ * no representations about the suitability of this software for any
++ * purpose.  It is provided "as is" without express or implied warranty.
++ *
++ * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD TO THIS
++ * SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
++ * FITNESS, IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY
++ * SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
++ * RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
++ * CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
++ * CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
++ */
++#ifndef __gal_2d_renderer_h_
++#define __gal_2d_renderer_h_
++
++#include  "compositor.h"
++#include <EGL/egl.h>
++
++int
++gal2d_renderer_create(struct weston_compositor *ec, EGLNativeDisplayType display);
++
++int
++gal2d_renderer_output_create(struct weston_output *output, 
++				    EGLNativeWindowType window);
++
++void
++gal2d_renderer_output_set_buffer(struct weston_output *output, pixman_image_t *buffer);
++
++void
++gal2d_renderer_output_destroy(struct weston_output *output);
++
++#endif
+diff --git a/src/launcher-util.c b/src/launcher-util.c
+index 9196e4f..7168f60 100644
+--- a/src/launcher-util.c
++++ b/src/launcher-util.c
+@@ -30,9 +30,9 @@
+ #include <sys/stat.h>
+ #include <sys/uio.h>
+ #include <fcntl.h>
+-
++#if defined(DRM)
+ #include <xf86drm.h>
+-
++#endif
+ #include "compositor.h"
+ #include "launcher-util.h"
+ #include "weston-launch.h"
+@@ -107,6 +107,7 @@ int
+ weston_launcher_drm_set_master(struct weston_compositor *compositor,
+ 			       int drm_fd, char master)
+ {
++#if defined(DRM)
+ 	struct msghdr msg;
+ 	struct cmsghdr *cmsg;
+ 	struct iovec iov;
+@@ -156,5 +157,8 @@ weston_launcher_drm_set_master(struct weston_compositor *compositor,
+ 		return -1;
+ 
+ 	return ret;
++#else
++    return 0;
++#endif    
+ }
+ 
+-- 
+1.7.9.5
+
