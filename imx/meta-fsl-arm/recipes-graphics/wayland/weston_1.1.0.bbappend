@@ -1,7 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://0001-DRM-condition.patch \
-            file://0002-Add-support-for-Vivante-3D-GPU.patch \
+SRC_URI += "file://0001-Add-support-for-vivante-GPU.patch \
             file://weston.sh"
 
 PACKAGECONFIG = "fbdev"
