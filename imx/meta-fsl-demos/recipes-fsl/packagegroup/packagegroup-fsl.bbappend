@@ -4,7 +4,7 @@ RDEPENDS_${PN}-gstreamer += " \
     gst-meta-debug \
 "
 
-RDEPENDS_${PN}-tools-testapps = " \
+RDEPENDS_${PN}-tools-testapps_mx6 = " \
     ${SOC_TOOLS_TESTAPPS} \
     ${@base_contains("MACHINE_GSTREAMER_PLUGIN", "gst-fsl-plugin", "gst-fsl-plugin-gplay", "", d)} \
     alsa-utils \
