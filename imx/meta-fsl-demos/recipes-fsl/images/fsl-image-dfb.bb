@@ -21,7 +21,8 @@ EXTRA_IMAGE_FEATURES += " \
     tools-profile \
 "
 
-SOC_IMAGE_INSTALL = "gpu-viv-bin-mx6q libvivante-dfb-mx6 gpu-viv-g2d"
+SOC_IMAGE_INSTALL = ""
+SOC_IMAGE_INSTALL_mx6 = "gpu-viv-bin-mx6q libvivante-dfb-mx6 gpu-viv-g2d"
 
 IMAGE_INSTALL += " \
     ${SOC_IMAGE_INSTALL} \
