@@ -7,7 +7,10 @@ inherit autotools pkgconfig
 
 DEPENDS += "openobex"
 
-SRC_URI = "http://triq.net/obexftp/obexftp-${PV}.tar.bz2"
+SRC_URI = "http://triq.net/obexftp/obexftp-${PV}.tar.bz2 \
+	file://Remove_some_printf_in_obexftpd.patch \
+"
+
 SRC_URI[md5sum] = "f20762061b68bc921e80be4aebc349eb"
 SRC_URI[sha256sum] = "44a74ff288d38c0f75354d6bc2efe7d6dec10112eaff2e7b10e292b0d2105b36"
 
