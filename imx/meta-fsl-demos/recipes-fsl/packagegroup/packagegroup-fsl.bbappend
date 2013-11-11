@@ -29,9 +29,12 @@ RDEPENDS_${PN}-tools-testapps_mx6 = " \
     procps \
 "
 
-SOC_TOOLS_TESTAPPS_mx6 += " \
+SOC_TOOLS_TESTAPPS += " \
     iw \
     can-utils \
+"
+
+SOC_TOOLS_TESTAPPS_mx6 += " \
     imx-kobs \
 "
 
