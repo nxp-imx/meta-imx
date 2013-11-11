@@ -19,8 +19,8 @@ index 2be8825..b36d68c 100644
  	make -C $(KERNEL_DIR) SUBDIRS=`pwd` modules_install
 -	@echo "Installing cryptodev.h in /usr/include/crypto ..."
 -	@install -D crypto/cryptodev.h /usr/include/crypto/cryptodev.h
-+	@echo "Installing cryptodev.h in $(PREFIX)/usr/include/crypto ..."
-+	@install -D crypto/cryptodev.h $(PREFIX)/usr/include/crypto/cryptodev.h
++#	@echo "Installing cryptodev.h in $(PREFIX)/usr/include/crypto ..."
++#	@install -D crypto/cryptodev.h $(PREFIX)/usr/include/crypto/cryptodev.h
  
  clean:
  	make -C $(KERNEL_DIR) SUBDIRS=`pwd` clean
