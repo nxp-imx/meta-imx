@@ -1,47 +1,39 @@
-Freescale's 3.14.38-6UL_ga Yocto Project BSP
-================================================
+Freescale's 3.10.17-1.0.0_beta Yocto BSP
+==================================
 
 This BSP is a Freescale release providing support for the following processors
 
-Ths release is a standalone release that is only tested on Freescale i.MX 6UltraLite EVK (imx6ulevk)
+   * Freescale i.MX6Q SABRE Smart Device (imx6qsabresd)
+   * Freescale i.MX6Q SABRE Auto (imx6qsabreauto)
+   * Freescale i.MX6DL SABRE Smart Device (imx6dlsabresd)
+   * Freescale i.MX6DL SABRE Auto (imx6dlsabreauto)
+   * Freescale i.MX6SOLO SABRE Smart Device(imx6solosabresd )
+   * Freescale i.MX6SOLO SABRE Auto (imx6solosabreauto )
+   * Freescale i.MX6 Solo Lite EVK (imx6slevk)
 
-   *  Freescale i.MX 6UltraLite EVK (imx6ulevk)
+ * i.MX6 U-boot options based on 2013.04 u-boot
+   * Freescale i.MX6SOLO SABRE Auto SPI-NOR (imx6solosabreauto-spi-nor )
+   * Freescale i.MX6SOLO SABRE Auto NAND (imx6solosabreauto-nand )
+   * Freescale i.MX6SOLO SABRE Auto EIM-NOR (imx6solosabreauto-eim-nor )
+   * Freescale i.MX6DL SABRE Auto SPI-NOR (imx6dlsabreauto-spi-nor)
+   * Freescale i.MX6DL SABRE Auto NAND (imx6dlsabreauto-nand)
+   * Freescale i.MX6DL SABRE Auto EIM-NOR (imx6dlsabreauto-eim-nor)
+   * Freescale i.MX6Q SABRE Auto SPI-NOR (imx6qsabreauto-spi-nor)
+   * Freescale i.MX6Q SABRE Auto NAND (imx6qsabreauto-nand-nor)
+   * Freescale i.MX6Q SABRE Auto EIM-NOR (imx6qsabreauto-eim-nor)
+   * Freescale i.MX6Q SABRE SD SATA (imx6qsabresd-sata)
+   * Freescale i.MX6Q SABRE Auto SATA (imx6qsabreauto-sata)
 
-The following boards were not tested in this release but this release contains updates
-that might affect these boards.
-
-   * Freescale i.MX 7Dual SABRE Smart Device (imx7dsabresd)
-   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
-   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
-   * Freescale i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
-   * Freescale i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
-   * Freescale i.MX 6Quad SABRE Smart Device (imx6qsabresd)
-   * Freescale i.MX 6Quad SABRE Auto (imx6qsabreauto)
-   * Freescale i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
-   * Freescale i.MX 6DualLite SABRE Auto (imx6dlsabreauto)
-   * Freescale i.MX 6SoloLite EVK (imx6slevk)
-   * Freescale i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
-   * Freescale i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
-   * Freescale i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
-   * Freescale i.MX 6SOLO SABRE Auto (imx6solosabreauto )
-
- * i.MX Device Tree configurations for each machine
-    Each machine files lists the associated device trees for that machine.
-
- * i.MX U-Boot configurations for each machine
-    imx6qpsabreauto - sd, eim-nor, nand, spi-nor, sata
-    imx7dsabresd - sd, qspi1, nand
-    imx6ulevk - sd, qspi1
-    imx6sxsabresd - sd, qspi2, m4fastup, emmc
-    imx6sxsabreauto - sd, qspi1, nand
-    imx6qsabresd - sd, sata
-    imx6qsabreauto - sd, eim-nor, spi-nor, nand, sata
-    imx6dlsabresd - sd
-    imx6dlsabreauto - sd, eim-nor, spi-nor, nand
-    imx6solosabresd - sd
-    imx6solosabreauto - sd, eim-nor, spi-nor, nand
-    imx6slevk - sd, spi-nor
-
+ * i.MX6 new Device Tree configurations
+   * imx6sl-evk.dtb
+   * imx6q-sabresd-ldo.dtb
+   * imx6sl-evk-ldo.dtb
+   * imx6dl-sabresd-ldo.dtb
+   * imx6dl-sabresd-hdcp.dtb
+   * imx6dl-sabreauto-ecspi.dtb
+   * imx6q-sabresd-hdcp.dtb
+   * imx6q-sabreauto-gpmi-weim.dtb
+   * imx6dl-sabreauto-gpmi-weim.dtb
 
 Quick Start Guide
 -----------------
@@ -54,13 +46,13 @@ $: nano .repo/manifest.xml
 Add in the following lines
   <remote fetch="git://git.freescale.com/imx" name="fsl-release"/>
 
-  <project remote="fsl-release" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" revision="dora_3.10.9-1.0.0" >
+  <project remote="fsl-release" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" revision="dora_3.10.17-1.0.0_beta" >
      <copyfile src="imx/tools/fsl-setup-release.sh" dest="fsl-setup-release.sh"/>
   </project>
 
 
 OR copy the fsl-yocto-release-manifest.xml over the community manifest using the following instructions.
-The fsl-yocto-release-manifest.xml is provided in the Freescale Yocto Release package for 3.10.9-1.0.0
+The fsl-yocto-release-manifest.xml is provided in the Freescale Yocto Release package for 3.10.17-1.0.0
 
 First install the i.MX Freescale BSP repo
 $: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.14.38-6UL_ga
@@ -68,10 +60,18 @@ $: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.14.38
 Download the Yocto Freescale Layers:
 $: repo sync
 
-Run i.MX Freescale Yocto Project Setup:
-$: MACHINE=< machine name> source fsl-setup-release.sh -b <build directory> -e <backend fb, dfb, wayland, x11>
+Copy the new machine configuration files from meta-fsl-bsp-release into meta-fsl-arm
+This is required for community setup to find the new machine configurations provided in 3.10.17-1.0.0_beta
 
-After this your system will be configured to start a Yocto Project build.
+$: cp -r sources/meta-fsl-bsp-release/imx/meta-fsl-arm/conf/machine sources/meta-fsl-arm/conf
+
+
+Run Yocto Community Setup
+$: MACHINE=< machine name> source setup-environment <build directory>
+$: cd ..
+
+Run 3.10.16-1.0.0 Release Layer setup
+$: source fsl-setup-release.sh -b <build directory>  -e <backend fb, dfb or x11>
 
 Build images
 ---------------------
@@ -124,8 +124,8 @@ To run the QT5 examples use the following parameters:
 
 Hardware Floating Point
 -----------------------
-This release enables hardware floating point by default.  This feature is enabled in both the machine 
-configurations and in the layer.conf. (Some machine files exist in the community meta-fsl-arm without this setting.)
+This release enables hardware floating point.  This feature is enabled in both the machine 
+configurations and in the layer.conf (because some machine files exist in community meta-fsl-arm.
 DEFAULTTUNE_mx6 = "cortexa9hf-neon
 
 To build with software floating point, add the following to local.conf
@@ -138,12 +138,10 @@ Restricted Codecs
 -----------------
 These codecs have contractual restrictions that require separate distribution.
 
-The Manufacturing Tool - MFGTool
---------------------------------
-In this release MFGTool uses the community setup.  
-To build MFGTool, build the following:
-
-   bitbake fsl-image-mfgtool-initramfs
+Manufacturing Tool
+------------------
+The manufacturing tool image is provided in the 3.10.17-1.0.0_beta release.  This includes the fsl-image-manufacturing that is used
+to flash the target device.  
 
 End User License Agreement
 --------------------------
@@ -155,23 +153,19 @@ setup process because, once accepted, all further work in the Yocto environment 
 Chromium
 ---------
 The Chromium browser requires additional layers added in the fsl-release-setup.sh script.   
-To enable chromium requires the following steps:
+To enable chromium requires the following steps
 
 In local.conf 
-- Add chromium into your install list:
-CORE_IMAGE_EXTRA_INSTALL += "chromium libexif"
+- Add in chromium into your list
+CORE_IMAGE_EXTRA_INSTALL += "chromium"
 
-- Add commercial into the white list:
+- Add the commercial white list into local.conf. 
 LICENSE_FLAGS_WHITELIST="commercial"
 
-QTWebkit
---------
-To start go to /usr/share/qt5/examples/webkitwidgets/browser and run browser
+- To enable rendering of WebGL do the following steps after boot.  Add the following lines to  /etc/profile or /usr/bin/google-chrome
+export LD_PRELOAD=/usr/lib/libGAL.so:/usr/lib/libEGL.so:/usr/lib/libGLSLC.so:/usr/lib/libCLC.so:/usr/lib/libGLESv2.so
 
-Qt
---
-Note that Qt has both a commercial and open source license options.  Make the decision about which license
-to use before starting work on custom Qt applications.  Once custom Qt applications are started with an open source
-Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
-the differences between each license.   Default builds use an open source Qt license.
+- Start the Chromium browser
+$google-chrome --use-gl=egl 
+
 

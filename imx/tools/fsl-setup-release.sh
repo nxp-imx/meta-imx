@@ -167,12 +167,13 @@ else
     cp $BUILD_DIR/conf/local.conf.org $BUILD_DIR/conf/local.conf
 fi
 
+    META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-fsl-arm"
+    echo "##Freescale Yocto Release layer" >> $BUILD_DIR/conf/bblayers.conf
+    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-arm \"" >> $BUILD_DIR/conf/bblayers.conf
+    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-demos \"" >> $BUILD_DIR/conf/bblayers.conf
 
-if [ ! -e $BUILD_DIR/conf/bblayers.conf.org ]; then
-    cp $BUILD_DIR/conf/bblayers.conf $BUILD_DIR/conf/bblayers.conf.org
-else
-    cp $BUILD_DIR/conf/bblayers.conf.org $BUILD_DIR/conf/bblayers.conf
-fi
+    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-browser \"" >> $BUILD_DIR/conf/bblayers.conf
+    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-gnome \"" >> $BUILD_DIR/conf/bblayers.conf
 
 
 META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-bsp"
