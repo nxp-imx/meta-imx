@@ -39,7 +39,6 @@ SOC_TOOLS_TESTAPPS_mx6 += " \
 "
 
 # only add in cryptodev for non solo-lite mx6 devices
-# removing for now until cryptodev kernel module installation is resolved
-#SOC_TOOLS_TESTAPPS_mx6q += " cryptodev "
-#SOC_TOOLS_TESTAPPS_mx6dl += " cryptodev "
-#SOC_TOOLS_TESTAPPS_mx6s += " cryptodev "
+SOC_TOOLS_TESTAPPS_mx6q += " cryptodev "
+SOC_TOOLS_TESTAPPS_mx6dl += " cryptodev "
+SOC_TOOLS_TESTAPPS_mx6s += " cryptodev "
