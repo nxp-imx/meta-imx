@@ -1,4 +1,4 @@
-Freescale's 3.10.9-1.0.0-alpha Yocto BSP
+Freescale's 3.10.17-1.0.0_beta Yocto BSP
 ==================================
 
 This BSP is a Freescale release providing support for the following processors
@@ -22,13 +22,15 @@ This BSP is a Freescale release providing support for the following processors
    * Freescale i.MX6Q SABRE Auto NAND (imx6qsabreauto-nand-nor)
    * Freescale i.MX6Q SABRE Auto EIM-NOR (imx6qsabreauto-eim-nor)
    * Freescale i.MX6Q SABRE SD SATA (imx6qsabresd-sata)
+   * Freescale i.MX6Q SABRE Auto SATA (imx6qsabreauto-sata)
 
  * i.MX6 new Device Tree configurations
    * imx6sl-evk.dtb
-   * imx6q-sabresd-ldo.dtb 
+   * imx6q-sabresd-ldo.dtb
    * imx6sl-evk-ldo.dtb
    * imx6dl-sabresd-ldo.dtb
    * imx6dl-sabresd-hdcp.dtb
+   * imx6dl-sabreauto-ecspi.dtb
    * imx6q-sabresd-hdcp.dtb
    * imx6q-sabreauto-gpmi-weim.dtb
    * imx6dl-sabreauto-gpmi-weim.dtb
@@ -44,13 +46,13 @@ $: nano .repo/manifest.xml
 Add in the following lines
   <remote fetch="git://git.freescale.com/imx" name="fsl-release"/>
 
-  <project remote="fsl-release" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" revision="dora_3.10.9-1.0.0" >
+  <project remote="fsl-release" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" revision="dora_3.10.17-1.0.0_beta" >
      <copyfile src="imx/tools/fsl-setup-release.sh" dest="fsl-setup-release.sh"/>
   </project>
 
 
 OR copy the fsl-yocto-release-manifest.xml over the community manifest using the following instructions.
-The fsl-yocto-release-manifest.xml is provided in the Freescale Yocto Release package for 3.10.9-1.0.0
+The fsl-yocto-release-manifest.xml is provided in the Freescale Yocto Release package for 3.10.17-1.0.0
 
 $: cp fsl-yocto-release-manifest.xml .repo
 $: cd .repo
@@ -64,7 +66,7 @@ Download the Yocto Freescale Layers
 $: repo sync
 
 Copy the new machine configuration files from meta-fsl-bsp-release into meta-fsl-arm
-This is required for community setup to find the new machine configurations provided in 3.10.9-1.0.0
+This is required for community setup to find the new machine configurations provided in 3.10.17-1.0.0_beta
 
 $: cp -r sources/meta-fsl-bsp-release/imx/meta-fsl-arm/conf/machine sources/meta-fsl-arm/conf
 
@@ -73,7 +75,7 @@ Run Yocto Community Setup
 $: MACHINE=< machine name> source setup-environment <build directory>
 $: cd ..
 
-Run 3.10.9-1.0.0 Release Layer setup
+Run 3.10.16-1.0.0 Release Layer setup
 $: source fsl-setup-release.sh -b <build directory>  -e <backend fb, dfb or x11>
 
 This will sync in the layer and update local.conf and bblayer.conf in build directory.
@@ -124,7 +126,7 @@ $: bitbake fsl-image-weston
 
 Hardware Floating Point
 -----------------------
-3.10.9-1.0.0 is our second release that enables hardware floating point.  This feature is enabled in both the machine 
+This release enables hardware floating point.  This feature is enabled in both the machine 
 configurations and in the layer.conf (because some machine files exist in community meta-fsl-arm.
 DEFAULTTUNE_mx6 = "cortexa9hf-neon
 
@@ -141,7 +143,8 @@ These codecs have contractual restrictions that require separate distribution.
 
 Manufacturing Tool
 ------------------
-The manufacturing tool support will be provided in the beta release.
+The manufacturing tool image is provided in the 3.10.17-1.0.0_beta release.  This includes the fsl-image-manufacturing that is used
+to flash the target device.  
 
 End User License Agreement
 --------------------------
@@ -149,3 +152,23 @@ During the Freescale Yocto Community BSP setup-environment process, the Freescal
 is displayed. To continue, users must agree to the conditions of this license. The agreement to the terms allows the 
 Yocto build to untar packages from the Freescale mirror. Please read this license agreement carefully during the 
 setup process because, once accepted, all further work in the Yocto environment is tied to this accepted agreement.
+
+Chromium
+---------
+The Chromium browser requires additional layers added in the fsl-release-setup.sh script.   
+To enable chromium requires the following steps
+
+In local.conf 
+- Add in chromium into your list
+CORE_IMAGE_EXTRA_INSTALL += "chromium"
+
+- Add the commercial white list into local.conf. 
+LICENSE_FLAGS_WHITELIST="commercial"
+
+- To enable rendering of WebGL do the following steps after boot.  Add the following lines to  /etc/profile or /usr/bin/google-chrome
+export LD_PRELOAD=/usr/lib/libGAL.so:/usr/lib/libEGL.so:/usr/lib/libGLSLC.so:/usr/lib/libCLC.so:/usr/lib/libGLESv2.so
+
+- Start the Chromium browser
+$google-chrome --use-gl=egl 
+
+
