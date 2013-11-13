@@ -2,8 +2,14 @@
 
 require recipes-bsp/imx-test/imx-test.inc
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_beta.tar.gz \
-           file://clocks.sh"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_beta.tar.gz"
+
+# use clocks on older kernels only - also fix imx-test issue with hdr name change
+SRC_URI_mx5 += "file://revert_epdc_hdr_change.patch \
+                file://clocks.sh"
+
+SRC_URI_mx28 += "file://revert_epdc_hdr_change.patch \
+                 file://clocks.sh"
 
 S="${WORKDIR}/${PN}-${PV}_beta"
 
