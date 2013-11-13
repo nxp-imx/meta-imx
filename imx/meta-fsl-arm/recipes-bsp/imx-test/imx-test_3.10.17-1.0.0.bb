@@ -14,3 +14,9 @@ SRC_URI[md5sum] = "a1e1d1caa71b10e3caa4328a7ecb4cc2"
 SRC_URI[sha256sum] = "8c6f328a685d3a59c0eab9e4ebde8d2cfbb2f676d92d3839a586c23c8ef530ec"
 
 COMPATIBLE_MACHINE = "(mx6|mx5)"
+
+do_install_mx6() {
+        install -d ${D}/unit_tests
+        install -m 755 test-utils.sh ${D}/unit_tests/test-utils.sh
+        install -m 755 ${S}/platform/${PLATFORM}/* ${D}/unit_tests/
+}
