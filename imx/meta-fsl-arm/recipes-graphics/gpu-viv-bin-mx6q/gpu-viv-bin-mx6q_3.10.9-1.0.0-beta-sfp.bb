@@ -8,4 +8,3 @@ SRC_URI[sha256sum] = "eb9cd673e270b32ed4df9425101346d01d57df27d2ce26f74ff4fa9efd
 
 PACKAGE_FP_TYPE = "softfp"
 
-RDEPENDS_libgl-mx6-dev = "libgl-mesa-dev"
