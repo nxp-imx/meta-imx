@@ -26,10 +26,8 @@ PLATFORM_mx6sl = "MX6SL"
 PLATFORM_mx28 = "MX28"
 
 # Todo add a mechanism to map posible build targets
-INCLUDE_DIR = "-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include"
-EXTRA_OEMAKE = "INCLUDES="${INCLUDE_DIR}""
-EXTRA_OECONF = "PLATFORM=${PLATFORM} --disable-valgrind --disable-examples --disable-debug CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
-CACHED_CONFIGUREVARS += "CROSS_ROOT=${STAGING_DIR_TARGET}"
+EXTRA_OECONF = "PLATFORM=${PLATFORM} --disable-valgrind --disable-examples --disable-debug \
+                CPPFLAGS="-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include""
 
 PACKAGES += "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
              ${PN}-libme ${PN}-libgstbufmeta ${PN}-libmfwba \
@@ -38,6 +36,7 @@ PACKAGES += "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
 # FIXME: Add all features
 # feature from excluded mm packages
 PACKAGECONFIG[ac3] += "--enable-ac3dec,--disable-ac3dec,libfslac3codec,libfslac3codec"
+PACKAGECONFIG[ddp] += "--enable-ddpdec,--disable-ddpdec,libfslddpcodec,libfslddpcodec"
 # feature from special mm packages
 PACKAGECONFIG[aacp] += "--enable-aacpdec,--disable-aacpdec,libfslaacpcodec,libfslaacpcodec"
 MSDEPENDS = "libfslmsparser libfslmscodec"
