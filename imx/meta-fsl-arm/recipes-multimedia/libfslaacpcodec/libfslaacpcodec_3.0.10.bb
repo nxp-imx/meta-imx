@@ -11,12 +11,11 @@ DEPENDS = "libfslcodec"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
-SRC_URI = "${FSL_MIRROR}/${PN}-3.10.9-1.0.0.bin;fsl-eula=true"
-S = "${WORKDIR}/${PN}-3.10.9-1.0.0"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "747c6f8210e8641d64b6ef18dc928d2a"
-SRC_URI[sha256sum] = "cd4bcb8ba382d20032d4793af4bfca88dd2d5bd5b7e91c643ad1872c77abf0a7"
-
+SRC_URI[md5sum] = "bccb26c5023ecc1965bda307d400ace5"
+SRC_URI[sha256sum] = "4045c86fa689a27bc8b98bcd1908b9f691da8e341253cb4683e34f1ef158ffd2"
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
 
@@ -31,11 +30,14 @@ do_install_append() {
 INSANE_SKIP_${PN} = "ldflags textrel dev-so"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+PACKAGES += "${PN}-testapps"
 
 FILES_${PN} += "${libdir}/*${SOLIBSDEV} ${libdir}/imx-mm/audio-codec/wrap/*${SOLIBS} \
-				${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV} ${datadir}/imx-mm/*"
+				${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV}"
 FILES_${PN}-dev = "${libdir}/pkgconfig/*.pc ${includedir}/imx-mm/*"
 FILES_${PN}-dbg += "${libdir}/imx-mm/audio-codec/.debug  ${libdir}/imx-mm/audio-codec/wrap/.debug"
+# Add examples to -testapps PACKAGE
+FILES_${PN}-testapps += "${datadir}/imx-mm/*"
 
 COMPATIBLE_MACHINE = "(mx28|mx5|mx6)"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
