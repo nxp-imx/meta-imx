@@ -8,7 +8,7 @@ RCONFLICTS_${PN} = "ocf-linux"
 inherit module
 
 PR = "r1"
-DEPENDS += "openssl"
+DEPENDS += "openssl virtual/kernel"
 
 SRCREV = "1c24a0aa996630518d47826a2e3fea129ea094c7"
 
