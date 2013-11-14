@@ -11,8 +11,7 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 PACKAGES_DYNAMIC = "${PN}-*"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-
-PACKAGES += "${PN}-meta"
+PACKAGES += "${PN}-meta ${PN}-testapps"
 
 ALLOW_EMPTY_${PN} = "1"
 ALLOW_EMPTY_${PN}-meta = "1"
@@ -30,14 +29,12 @@ do_install_append() {
     done
     rmdir ${D}${libdir}/imx-mm/video-codec
 
-	# FIXME: Drop examples
-#      rm -r ${D}${datadir}/imx-mm
 }
 
 python populate_packages_prepend() {
     codecdir = bb.data.expand('${libdir}', d)
     do_split_packages(d, codecdir, '^lib_([^_]*).*_arm.*_elinux\.so\..*',
-                      aux_files_pattern='${libdir}/imx-mm/audio-codec/wrap/lib_%sd_wrap_arm*_elinux.so.*',
+                      aux_files_pattern='${libdir}/imx-mm/audio-codec/wrap/lib_%sd_wrap_arm*_elinux.so*',
                       output_pattern='libfslcodec-%s',
                       description='Freescale i.MX Codec (%s)',
                       extra_depends='')
@@ -58,13 +55,19 @@ python populate_packages_prepend() {
 
 # Ensure we get warnings if we miss something
 FILES_${PN} = ""
-# FIXME: The wrap and lib names does not match
-FILES_${PN}-oggvorbis += "${libdir}/imx-mm/audio-codec/wrap/lib_vorbisd_wrap_arm*_elinux.so.*"
+#FILES_${PN} += "${libdir}/*${SOLIBSDEV} ${libdir}/imx-mm/audio-codec/wrap/*${SOLIBS}"
+#FILES_${PN} += "${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV}"
 
-FILES_${PN} += "${libdir}/*${SOLIBSDEV} ${libdir}/imx-mm/audio-codec/wrap/*${SOLIBS} \
-				${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV} ${datadir}/imx-mm/*"
-FILES_${PN}-dev += "${libdir}/imx-mm/*/*${SOLIBSDEV} \
-                    ${libdir}/imx-mm/*/*/*${SOLIBSDEV}"
+#FILES_${PN}-dev = ""
+#FILES_${PN}-dev += "${libdir}/imx-mm/*/*${SOLIBSDEV}"
+#FILES_${PN}-dev += "${libdir}/imx-mm/*/*/*${SOLIBSDEV}"
 FILES_${PN}-dev += "${libdir}/pkgconfig/*.pc ${includedir}/imx-mm/*"
+
+# Add examples to -testapps PACKAGE
+FILES_${PN}-testapps += "${datadir}/imx-mm/*"
+
+# FIXME: The wrap and lib names does not match
+FILES_${PN}-oggvorbis += "${libdir}/imx-mm/audio-codec/wrap/lib_vorbisd_wrap_arm*_elinux.so*"
+
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
