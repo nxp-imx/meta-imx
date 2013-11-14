@@ -4,18 +4,18 @@
 DESCRIPTION = "Microsoft component library, including WMA and WMV789 decoder libraries"
 SECTION = "multimedia"
 LICENSE = "Proprietary"
-LICENSE_FLAGS = "license_${PN}-${PV}"
+LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://EULA.txt;md5=93b784b1c11b3fffb1638498a8dde3f6"
 
 DEPENDS = "libfslcodec"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
-SRC_URI = "${FSL_MIRROR}/${PN}-3.10.9-1.0.0.bin;fsl-eula=true"
-S = "${WORKDIR}/${PN}-3.10.9-1.0.0"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "1d500798321287c1cefa60712b7b656c"
-SRC_URI[sha256sum] = "1b0200dc082fd8711a2ecbdbc37c53ca2a386ba98b44c0f428bd3a27700ba633"
+SRC_URI[md5sum] = "aae150356642025610a904994e8ba419"
+SRC_URI[sha256sum] = "dd6f97bf8967dffd0abf7c842f550395ff892f86da3d8c152732f794264d8ef6"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
@@ -28,6 +28,7 @@ do_install_append() {
 }
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+PACKAGES += "${PN}-testapps"
 
 python populate_packages_prepend() {
     # FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
@@ -36,13 +37,11 @@ python populate_packages_prepend() {
         d.setVar("INSANE_SKIP_%s" % p, "ldflags textrel dev-so")
 }
 
-
 FILES_${PN} += "${libdir}/*${SOLIBSDEV} ${libdir}/imx-mm/audio-codec/wrap/*${SOLIBS} \
-				${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV} ${datadir}/imx-mm/*"
+				${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV}"
 FILES_${PN}-dev = "${libdir}/pkgconfig/*.pc ${includedir}/imx-mm/*"
-FILES_${PN}-dbg += "${libdir}/imx-mm/video-codec/.debug \
-                    ${libdir}/imx-mm/audio-codec/.debug \
-                    ${libdir}/imx-mm/audio-codec/wrap/.debug"
+# Add examples to -testapps PACKAGE
+FILES_${PN}-testapps += "${datadir}/imx-mm/*"
 
 COMPATIBLE_MACHINE = "(mx28|mx5|mx6)"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
