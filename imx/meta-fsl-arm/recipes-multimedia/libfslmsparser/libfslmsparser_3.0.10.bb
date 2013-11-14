@@ -3,7 +3,7 @@
 # This parser requires special licensing with Freescale marketing
 DESCRIPTION = "Microsoft compnent library, including WMA and WMV789 decoder libraries"
 SECTION = "multimedia"
-LICENSE_FLAGS = "license_${PN}-${PV}"
+LICENSE_FLAGS = "commercial"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=93b784b1c11b3fffb1638498a8dde3f6"
 
@@ -11,11 +11,11 @@ DEPENDS = "libfslparser"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
-SRC_URI = "${FSL_MIRROR}/${PN}-3.10.9-1.0.0.bin;fsl-eula=true"
-S = "${WORKDIR}/${PN}-3.10.9-1.0.0"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "de9d9e1fb894fe45b7584745ce6a65fd"
-SRC_URI[sha256sum] = "5c18e91941e6f84aa9984c253b716198a8ff1831e96a7df0976d9af611b42130"
+SRC_URI[md5sum] = "3559bfc3ea442066a2d0a830db4a251e"
+SRC_URI[sha256sum] = "de66926a0d93a6a225103979de7c51ea12a95a4220d77507bb09790d2131cd3e"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '--enable-fsw', d)}"
