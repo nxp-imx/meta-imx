@@ -36,6 +36,7 @@ SOC_TOOLS_TESTAPPS += " \
 
 SOC_TOOLS_TESTAPPS_mx6 += " \
     imx-kobs \
+    vlan \
 "
 
 # only add in cryptodev for non solo-lite mx6 devices
