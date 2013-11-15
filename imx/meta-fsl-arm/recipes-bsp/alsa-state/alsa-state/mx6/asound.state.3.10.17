@@ -1294,7 +1294,11 @@ state.wm8962audio {
 	control.109 {
 		iface MIXER
 		name 'INPGAR IN1R Switch'
+<<<<<<< HEAD
 		value false
+=======
+		value true
+>>>>>>> 09db8df... alsa-state: Update asound.conf&.state for MX6
 		comment {
 			access 'read write'
 			type BOOLEAN
