@@ -6,6 +6,8 @@ require recipes-graphics/gpu-viv-bin-mx6q/gpu-viv-bin-mx6q.inc
 SRC_URI[md5sum] = "4055600295ee0f0766e45553729f3464"
 SRC_URI[sha256sum] = "20cc484e4de6e9c420adc0926cc73f4ccebeb992ee64ae672e75c8446ae08868"
 
+SRC_URI += "file://directfbrc"
+
 PACKAGE_FP_TYPE = "hardfp"
 
 do_install_append () {
@@ -20,6 +22,7 @@ do_install_append () {
     else
         if [ "${USE_DFB}" = "yes" ]; then
             backend=dfb
+            cp -a ${WORKDIR}/directfb.rc ${D}/home/root
         else
             # Regular framebuffer
             backend=fb
