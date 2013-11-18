@@ -22,6 +22,7 @@ do_install_append () {
     else
         if [ "${USE_DFB}" = "yes" ]; then
             backend=dfb
+            install -d ${D}/home/root
             cp -a ${WORKDIR}/directfbrc ${D}/home/root
         else
             # Regular framebuffer
