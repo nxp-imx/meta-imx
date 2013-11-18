@@ -35,3 +35,5 @@ do_install_append () {
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so.2
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 }
+
+FILES_libvivante-dfb-mx6 += "/home/root/directfbrc"
