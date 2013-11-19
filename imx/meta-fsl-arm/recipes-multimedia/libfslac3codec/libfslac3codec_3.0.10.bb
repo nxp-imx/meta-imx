@@ -32,6 +32,7 @@ PACKAGES += "${PN}-testapps"
 # FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
 # the source we cannot fix it. Disable the insane check for now.
 INSANE_SKIP_${PN} = "ldflags textrel dev-so"
+INSANE_SKIP_${PN}-testapps = "ldflags"
 
 FILES_${PN} += "${libdir}/*${SOLIBSDEV} ${libdir}/imx-mm/audio-codec/wrap/*${SOLIBS} \
 				${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV}"
