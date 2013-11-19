@@ -28,6 +28,7 @@ do_install_append() {
 # FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
 # the source we cannot fix it. Disable the insane check for now.
 INSANE_SKIP_${PN} = "ldflags textrel dev-so"
+INSANE_SKIP_${PN}-testapps = "ldflags"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 PACKAGES += "${PN}-testapps"
