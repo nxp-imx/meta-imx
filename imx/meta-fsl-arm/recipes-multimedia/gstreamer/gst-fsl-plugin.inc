@@ -36,7 +36,12 @@ PACKAGES += "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
 # FIXME: Add all features
 # feature from excluded mm packages
 PACKAGECONFIG[ac3] += "--enable-ac3dec,--disable-ac3dec,libfslac3codec,libfslac3codec"
-PACKAGECONFIG[ddp] += "--enable-ddpdec,--disable-ddpdec,libfslddpcodec,libfslddpcodec"
+#   The ddplus codec does not support mx28
+DDPDEPENDS = "libfslddpcodec"
+DDPDEPENDS_mx28 = ""
+DDP_CONFIG_ARGS = "--enable-ddpdec"
+DDP_CONFIG_ARGS_mx28 = "--disable-ddpdec"
+PACKAGECONFIG[ddp] += "${DDP_CONFIG_ARGS},--disable-ddpdec,${DDPDEPENDS},${DDPDEPENDS}"
 # feature from special mm packages
 PACKAGECONFIG[aacp] += "--enable-aacpdec,--disable-aacpdec,libfslaacpcodec,libfslaacpcodec"
 MSDEPENDS = "libfslmsparser libfslmscodec"
