@@ -14,8 +14,9 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "bccb26c5023ecc1965bda307d400ace5"
-SRC_URI[sha256sum] = "4045c86fa689a27bc8b98bcd1908b9f691da8e341253cb4683e34f1ef158ffd2"
+SRC_URI[md5sum] = "976c203bd0920f2cbc1e85843f612213"
+SRC_URI[sha256sum] = "0d5b0dce3ededfd2b1e395b5248e156d60bde4a03c3204aa1ff60966352dd8ac"
+
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
 
@@ -27,15 +28,15 @@ do_install_append() {
 
 # FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
 # the source we cannot fix it. Disable the insane check for now.
-INSANE_SKIP_${PN} = "ldflags textrel dev-so"
+INSANE_SKIP_${PN} = "ldflags textrel"
 INSANE_SKIP_${PN}-testapps = "ldflags"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 PACKAGES += "${PN}-testapps"
 
-FILES_${PN} += "${libdir}/*${SOLIBSDEV} ${libdir}/imx-mm/audio-codec/wrap/*${SOLIBS} \
-				${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV}"
-FILES_${PN}-dev = "${libdir}/pkgconfig/*.pc ${includedir}/imx-mm/*"
+FILES_${PN} += "${libdir}/imx-mm/audio-codec/wrap/*${SOLIBS}"
+FILES_${PN}-dev += "${libdir}/pkgconfig/*.pc ${includedir}/imx-mm/* \
+                    ${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV}"
 FILES_${PN}-dbg += "${libdir}/imx-mm/audio-codec/.debug  ${libdir}/imx-mm/audio-codec/wrap/.debug"
 # Add examples to -testapps PACKAGE
 FILES_${PN}-testapps += "${datadir}/imx-mm/*"

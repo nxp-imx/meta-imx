@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "aae150356642025610a904994e8ba419"
-SRC_URI[sha256sum] = "dd6f97bf8967dffd0abf7c842f550395ff892f86da3d8c152732f794264d8ef6"
+SRC_URI[md5sum] = "7fb9c530363372ab8cde96930d7aec0c"
+SRC_URI[sha256sum] = "ef2c00bc1407a851bb1aa6ce518eaef7596a32635ff6f5405b2bce13add0a7cb"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
@@ -34,12 +34,13 @@ python populate_packages_prepend() {
     # FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
     # the source we cannot fix it. Disable the insane check for now.
     for p in d.getVar('PACKAGES', True).split():
-        d.setVar("INSANE_SKIP_%s" % p, "ldflags textrel dev-so")
+        d.setVar("INSANE_SKIP_%s" % p, "ldflags textrel libdir")
 }
 
-FILES_${PN} += "${libdir}/*${SOLIBSDEV} ${libdir}/imx-mm/audio-codec/wrap/*${SOLIBS} \
-				${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV}"
-FILES_${PN}-dev = "${libdir}/pkgconfig/*.pc ${includedir}/imx-mm/*"
+FILES_${PN} += "${libdir}/imx-mm/audio-codec/wrap/*${SOLIBS} \
+"
+FILES_${PN}-dev += "${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV} \
+	            ${libdir}/pkgconfig/*.pc ${includedir}/imx-mm/*"
 # Add examples to -testapps PACKAGE
 FILES_${PN}-testapps += "${datadir}/imx-mm/*"
 
