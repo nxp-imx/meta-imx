@@ -107,6 +107,7 @@ if [ ! -e $BUILD_DIR/conf/local.conf.org ]; then
 
     echo "BBLAYERS += \" \${BSPDIR}/sources/meta-browser \"" >> $BUILD_DIR/conf/bblayers.conf
     echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-gnome \"" >> $BUILD_DIR/conf/bblayers.conf
+    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-networking \"" >> $BUILD_DIR/conf/bblayers.conf
 
     echo >> $BUILD_DIR/conf/local.conf
 
