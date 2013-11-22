@@ -58,10 +58,3 @@ do_deploy_append () {
     install  arch/arm/boot/uImage ${DEPLOY_DIR_IMAGE}/uImage_$fsl_defconfig
     install  arch/arm/boot/zImage ${DEPLOY_DIR_IMAGE}/zImage_$fsl_defconfig
 }
-
-# install nedded headers for gstreamer configuration
-do_install_append() {
-    if [ -d include/uapi/linux ]; then
-        cp include/uapi/linux/mxc*.h ${STAGING_INCDIR}/uapi
-    fi
-}
