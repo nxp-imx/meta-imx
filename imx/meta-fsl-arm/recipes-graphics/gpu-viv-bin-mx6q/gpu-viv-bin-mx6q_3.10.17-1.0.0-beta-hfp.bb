@@ -3,10 +3,10 @@
 
 require recipes-graphics/gpu-viv-bin-mx6q/gpu-viv-bin-mx6q.inc
 
-SRC_URI[md5sum] = "4055600295ee0f0766e45553729f3464"
-SRC_URI[sha256sum] = "20cc484e4de6e9c420adc0926cc73f4ccebeb992ee64ae672e75c8446ae08868"
+SRC_URI[md5sum] = "db5c7e3d461dddca10713cdd16e58de3"
+SRC_URI[sha256sum] = "913550da53c80d87f3463720d15c7391652ce3ba0966e6a8c52e10a880b178af"
 
-SRC_URI += "file://directfbrc"
+SRC_URI += "file://.directfbrc"
 
 PACKAGE_FP_TYPE = "hardfp"
 
@@ -23,7 +23,7 @@ do_install_append () {
         if [ "${USE_DFB}" = "yes" ]; then
             backend=dfb
             install -d ${D}/home/root
-            cp -a ${WORKDIR}/directfbrc ${D}/home/root
+            cp -a ${WORKDIR}/.directfbrc ${D}/home/root
         else
             # Regular framebuffer
             backend=fb
@@ -36,4 +36,4 @@ do_install_append () {
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 }
 
-FILES_libvivante-dfb-mx6 += "/home/root/directfbrc"
+FILES_libvivante-dfb-mx6 += "/home/root/.directfbrc"
