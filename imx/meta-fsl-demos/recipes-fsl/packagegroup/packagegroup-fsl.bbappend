@@ -27,6 +27,7 @@ RDEPENDS_${PN}-tools-testapps_mx6 = " \
     bluez4 \
     obexftp \
     procps \
+    ptpd \
 "
 
 SOC_TOOLS_TESTAPPS += " \
