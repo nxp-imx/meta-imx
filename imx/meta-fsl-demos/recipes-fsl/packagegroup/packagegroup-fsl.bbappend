@@ -28,6 +28,7 @@ RDEPENDS_${PN}-tools-testapps_mx6 = " \
     obexftp \
     procps \
     ptpd \
+    linuxptp \
 "
 
 SOC_TOOLS_TESTAPPS += " \
