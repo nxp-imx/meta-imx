@@ -5,8 +5,8 @@ require gst-fsl-plugin.inc
 
 EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 
-SRC_URI[md5sum] = "570e2aa9b64efd030e9950563e4eba4a"
-SRC_URI[sha256sum] = "e048b7fc5cb2cb407c9a718a81847db2bd80a46f40df55fa7e69f564d3fb02a5"
+SRC_URI[md5sum] = "6be5ee8f6f2b41b0f7cd3f2691665617"
+SRC_URI[sha256sum] = "d76b74b50abae5a214b482ba9a7342c21cb9e7698c6723ae07f9d615cb962d9f"
 
 SRC_URI = "${FSL_MIRROR}/gst-fsl-plugins-${PV}.tar.gz"
 S = "${WORKDIR}/gst-fsl-plugins-${PV}"
