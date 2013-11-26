@@ -5,7 +5,8 @@ require recipes-bsp/imx-lib/imx-lib.inc
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_beta.tar.gz"
 S="${WORKDIR}/${PN}-${PV}_beta"
 
-SRC_URI[md5sum] = "995cc8112d36a0c680867c4ea2eb6303"
-SRC_URI[sha256sum] = "20084c0e921c16b199734aadb98f01435ac263f3a4ae8421129bef41191a33bf"
+SRC_URI[md5sum] = "5eb40bfc58d84b0e189993bb281d5b45"
+SRC_URI[sha256sum] = "e82d7f920b94d3784af2d365efa2182687d98c07e545154cda81658f3b8b5d40"
 
 COMPATIBLE_MACHINE = "(mx6)"
+
