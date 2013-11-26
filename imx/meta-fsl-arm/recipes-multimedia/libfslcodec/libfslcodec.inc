@@ -18,6 +18,10 @@ ALLOW_EMPTY_${PN}-meta = "1"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
+# Enable the jpeg decoder library version with VPU Hardware acceleration
+HAS_VPU = " --enable-vpu"
+HAS_VPU_mx28 = " --disable-vpu"
+EXTRA_OECONF += "${HAS_VPU}"
 
 do_install_append() {
 	# FIXME: This link points to nowhere
