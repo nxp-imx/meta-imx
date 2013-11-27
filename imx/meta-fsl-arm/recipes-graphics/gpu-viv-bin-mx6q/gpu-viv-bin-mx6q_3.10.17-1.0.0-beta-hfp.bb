@@ -14,16 +14,9 @@ do_install_append () {
 
     rm -rf ${D}${libdir}/libGLESv2*
 
-    # Default use 355-VG
-    rm -rf ${D}${libdir}/libOpenVG.so
-    cp -a ${S}/usr/lib/libOpenVG_355.so ${D}${libdir}/libOpenVG.so
-
     # The preference order, based in DISTRO_FEATURES, is x11, wayland, directfb and fb
     if [ "${USE_X11}" = "yes" ]; then
         backend=x11
-	# X11 uses 3D-VG only
-        rm -rf ${D}${libdir}/libOpenVG.so
-        cp -a ${S}/usr/lib/libOpenVG_3D.so ${D}${libdir}/libOpenVG.so
     elif [ "${USE_WL}" = "yes" ]; then
         backend=wl
     else
