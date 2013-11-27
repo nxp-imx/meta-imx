@@ -3,8 +3,8 @@
 
 require recipes-graphics/gpu-viv-bin-mx6q/gpu-viv-bin-mx6q.inc
 
-SRC_URI[md5sum] = "db5c7e3d461dddca10713cdd16e58de3"
-SRC_URI[sha256sum] = "913550da53c80d87f3463720d15c7391652ce3ba0966e6a8c52e10a880b178af"
+SRC_URI[md5sum] = "05e8e7e73ec4c1bea41f18d14cb23b42"
+SRC_URI[sha256sum] = "21870dcaa40effe47518e48c5a8375e56f844218de09dd75e6c18583ed26854b"
 
 SRC_URI += "file://.directfbrc"
 
