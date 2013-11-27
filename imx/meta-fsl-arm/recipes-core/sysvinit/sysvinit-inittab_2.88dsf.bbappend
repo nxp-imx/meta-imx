@@ -3,7 +3,9 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 PRINC := "${@int(PRINC) + 1}"
 
-SRC_URI_append_mx6 = " file://rc_mxc.S"
+SRC_URI_append_mx6 = " file://rc_mxc.S file://rc_gpu.S"
+
+USE_X11 = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 
 # overirde do_install
 do_install_mx6() {
@@ -45,12 +47,19 @@ EOF
         done
         echo "" >> ${D}${sysconfdir}/inittab
     fi
+
+    # Add rc_gpu.s for non-X11 backend
+    if [ "${USE_X11}" = "no" ]; then
+	echo "gpu::sysinit:/etc/init.d/rc_gpu.S"
+        echo "gpu::sysinit:/etc/init.d/rc_gpu.S" >> ${D}${sysconfdir}/inittab
+	install -m 0755 ${WORKDIR}/rc_gpu.S ${D}${sysconfdir}/init.d
+    else
+	echo "X11 -- no gpu::sysinit:/etc/init.d/rc_gpu.S"
+    fi
+
 }
 
-#FILES_${PN} = "${sysconfdir}/inittab"
-#CONFFILES_${PN} = "${sysconfdir}/inittab"
-
-FILES_${PN}_append = " ${sysconfdir}/init.d/rc_mxc.S"
+FILES_${PN}_append_mx6 = " ${sysconfdir}/init.d/rc_mxc.S ${sysconfdir}/init.d/rc_gpu.S"
 
 PACKAGE_ARCH_mx6 = "${MACHINE_ARCH}"
 
