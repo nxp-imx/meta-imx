@@ -13,7 +13,7 @@ then
   then
         ln -s $FILEVG3D $FILEVG
   fi
-  if [ $CPUREV == "i.MX6Q" ] || [$CPUREV == "i.MX6SL"]
+  if [ $CPUREV == "i.MX6Q" ] || [ $CPUREV == "i.MX6SL" ]
   then
         ln -s $FILEVG355 $FILEVG
   fi
