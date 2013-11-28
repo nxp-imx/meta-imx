@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE = "(mx6)"
 
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=imx_3.10.17_1.0.0_beta"
 
-SRCREV = "ef660829b41cd4ce7a1465ecb503d22d19442fcc"
+SRCREV = "465aa30deea0cc927186170e63180cb7307366d0"
 
 LOCALVERSION = "-1.0.0_beta"
 
