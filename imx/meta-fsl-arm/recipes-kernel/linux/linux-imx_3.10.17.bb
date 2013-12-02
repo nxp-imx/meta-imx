@@ -33,8 +33,8 @@ do_configure_prepend() {
    fi
 
 
-    cp ${S}/arch/arm/configs/imx_v7_defconfig ${S}/.config
-    cp ${S}/arch/arm/configs/imx_v7_defconfig ${S}/../defconfig
+    cp ${S}/arch/arm/configs/${fsl_defconfig} ${S}/.config
+    cp ${S}/arch/arm/configs/${fsl_defconfig} ${S}/../defconfig
 }
 
 # copy zImage to deploy directory
