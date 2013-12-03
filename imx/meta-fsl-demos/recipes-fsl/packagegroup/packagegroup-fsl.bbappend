@@ -1,8 +1,18 @@
 # Add needed Freescale packages and definitions
 
-RDEPENDS_${PN}-gstreamer += " \
-    gst-meta-debug \
+PACKAGES += " \
+    ${PN}-fslcodec-testapps \
 "
+
+RDEPENDS_${PN}-fslcodec-testapps_mx6 += " \
+    libfslcodec-testapps \
+"
+
+RDEPENDS_${PN}-gstreamer += " \
+    ${PN}-fslcodec-testapps \
+"
+
+ALLOW_EMPTY_${PN}-fslcodec-testapps_mx6 = "1"
 
 RDEPENDS_${PN}-tools-testapps_mx6 = " \
     ${SOC_TOOLS_TESTAPPS} \
