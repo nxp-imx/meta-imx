@@ -209,7 +209,7 @@ index 5114295..81a5b00 100644
  		{ WESTON_OPTION_INTEGER, "tty", 0, &param.tty },
  		{ WESTON_OPTION_STRING, "device", 0, &param.device },
  		{ WESTON_OPTION_BOOLEAN, "use-gl", 0, &param.use_gl },
-+		{ WESTON_OPTION_BOOLEAN, "use-gal2d", 0, &param.use_gal2d },
++		{ WESTON_OPTION_INTEGER, "use-gal2d", 0, &param.use_gal2d },
  	};
  
  	parse_options(fbdev_options, ARRAY_LENGTH(fbdev_options), argc, argv);
