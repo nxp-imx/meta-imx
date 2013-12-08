@@ -3,6 +3,8 @@ SRC_URI += "file://0001-change_engines_loc.patch"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+DEPENDS = "perl-native-runtime"
+DEPENDS += "cryptodev-native"
 
 files_${PN} += "${sysconfdir}/ssl/openssl.cnf"
 FILES_${PN}-misc = "${sysconfdir}/ssl/misc ${sysconfdir}/ssl/certs ${sysconfdir}/ssl/private"
@@ -89,6 +91,10 @@ do_configure () {
 
 }
 
+
+do_compile () {
+	oe_runmake ZLIB_INCLUDE="-I${STAGING_INCDIR}"
+}
 
 do_install () {
         oe_runmake INSTALL_PREFIX="${D}" MANDIR="${mandir}" install
