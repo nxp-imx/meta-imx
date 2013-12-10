@@ -1,4 +1,3 @@
-SECTION = "devel"
 SUMMARY = "Linux Cryptodev"
 DESCRIPTION = "The Cryptodev native headers for openssl"
 LICENSE = "GPLv2"
@@ -25,5 +24,3 @@ do_install() {
     install -m 0644 ${S}/crypto/*.h  ${STAGING_INCDIR}/crypto/
 }
 
-ALLOW_EMPTY_${PN} = "1"
-BBCLASSEXTEND = "native nativesdk"
