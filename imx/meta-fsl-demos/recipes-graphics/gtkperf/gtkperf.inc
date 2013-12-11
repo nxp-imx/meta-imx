@@ -21,6 +21,6 @@ do_install_append () {
 }
 
 FILES_${PN}-dbg += "${bindir}/gtkperf}/*/.debug/gtkperf"
-FILES_${PN}-dev += "${bindir}/gtkperf"
+#FILES_${PN}-dev += "${bindir}/gtkperf"
 FILES_${PN} += "${bindir}/gtkperf ${exec_prefix}/share/duck.png"
 
