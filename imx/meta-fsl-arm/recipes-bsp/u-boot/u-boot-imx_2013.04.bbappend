@@ -5,5 +5,5 @@ SRCREV = "2013c87b86e1c493270dc7d810adff821331abfb"
 
 # save UBOOT_CONFIG as separate names
 do_deploy_append() {
-    install ${S}/${UBOOT_BINARY} ${DEPLOYDIR}/${UBOOT_IMAGE}-${UBOOT_CONFIG}
+    install ${S}/${UBOOT_BINARY} ${DEPLOYDIR}/${UBOOT_IMAGE}_${UBOOT_CONFIG}
 }
