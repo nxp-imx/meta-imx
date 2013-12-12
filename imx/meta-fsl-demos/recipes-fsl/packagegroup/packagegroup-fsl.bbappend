@@ -39,9 +39,6 @@ RDEPENDS_${PN}-tools-testapps_mx6 = " \
     procps \
     ptpd \
     linuxptp \
-"
-
-SOC_TOOLS_TESTAPPS += " \
     iw \
     can-utils \
 "
