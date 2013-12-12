@@ -14,8 +14,8 @@ SRC_URI_append_mx28 = " file://clocks.sh"
 
 S="${WORKDIR}/${PN}-${PV}_beta"
 
-SRC_URI[md5sum] = "147d31783efe31e558e1054debb41054"
-SRC_URI[sha256sum] = "6d9301e8df379cfee9caf224622c4428da8514fe060727c212754792832fa129"
+SRC_URI[md5sum] = "fd3de6e882a7b5425853083ec8d4951e"
+SRC_URI[sha256sum] = "1e86cfe800fbf2db2a52ce0155ab2d2ba70913a30974b3f66879198eaf9da21b"
 
 COMPATIBLE_MACHINE = "(mx6|mx5|mx28)"
 
