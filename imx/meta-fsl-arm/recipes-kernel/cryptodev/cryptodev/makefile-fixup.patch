@@ -6,7 +6,7 @@ index 2be8825..b36d68c 100644
  KBUILD_CFLAGS += -I$(src)
  KERNEL_DIR = /lib/modules/$(shell uname -r)/build
  VERSION = 1.5
-+PREFIX =
++PREFIX =$(KERNEL_DIR)
  
  cryptodev-objs = ioctl.o main.o cryptlib.o authenc.o zc.o util.o
  

@@ -23,7 +23,7 @@ index 2be8825..4cbb865 100644
  	@install -D crypto/cryptodev.h /usr/include/crypto/cryptodev.h
  
 +install_tests:
-+	make -C tests install DESTDIR=$(PREFIX)
++	make -C tests install DESTDIR=$(KERNEL_DIR)
 +
  clean:
  	make -C $(KERNEL_DIR) SUBDIRS=`pwd` clean
