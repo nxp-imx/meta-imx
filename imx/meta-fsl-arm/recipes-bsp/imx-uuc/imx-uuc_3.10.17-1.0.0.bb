@@ -9,10 +9,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 PE = "1"
 
-SRC_URI = "${FSL_MIRROR}/imx-uuc-${PV}.tar.gz"
+SRC_URI = "${FSL_MIRROR}/imx-uuc-${PV}_beta.tar.gz"
+S="${WORKDIR}/${PN}-${PV}_beta"
 
-SRC_URI[md5sum] = "e2658f905742dc4b252083ae1cf7fa2c"
-SRC_URI[sha256sum] = "7a17beb03b0c008851dab42af4698360a07d9c7204b5755492ecb588e28acfcb"
+SRC_URI[md5sum] = "22cc43c9a3b1a0eb1a82e0fcbade8c37"
+SRC_URI[sha256sum] = "bd96d19ec0399fbebf09c3692f77ee8c76b27988c3bf616d3cecb67a8552ba96"
 
 FILES_${PN} += "linuxrc ${bindir}/uuc ${bindir}/sdimage "
 FILES_${PN}-dbg += "${bindir}/.debug"
