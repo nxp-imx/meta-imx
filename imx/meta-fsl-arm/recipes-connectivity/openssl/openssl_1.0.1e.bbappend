@@ -3,8 +3,9 @@ SRC_URI += "file://0001-change_engines_loc.patch"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-DEPENDS = "perl-native-runtime"
-DEPENDS += "cryptodev-native"
+DEPENDS = "perl-native-runtime cryptodev-headers"
+DEPENDS_class-native = "perl-native-runtime"
+DEPENDS_class-nativesdk = "perl-native-runtime"
 
 files_${PN} += "${sysconfdir}/ssl/openssl.cnf"
 FILES_${PN}-misc = "${sysconfdir}/ssl/misc ${sysconfdir}/ssl/certs ${sysconfdir}/ssl/private"
