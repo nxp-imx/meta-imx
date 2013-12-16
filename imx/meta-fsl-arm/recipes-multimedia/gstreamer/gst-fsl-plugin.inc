@@ -6,7 +6,7 @@ LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
 DEPENDS = "gstreamer gst-plugins-base libfslcodec libfslparser virtual/kernel"
-DEPENDS_append_mx5 = " imx-lib"
+DEPENDS_append_mx5 = " imx-lib imx-vpu"
 DEPENDS_append_mx6 = " imx-lib imx-vpu libfslvpuwrap"
 DEPENDS_append_mx6sl = " imx-lib"
 
