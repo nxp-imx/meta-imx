@@ -35,7 +35,6 @@ RDEPENDS_${PN}-tools-testapps_mx6 = " \
     mtd-utils \
     mtd-utils-ubifs \
     bluez4 \
-    obexftp \
     procps \
     ptpd \
     linuxptp \
