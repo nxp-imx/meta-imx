@@ -67,8 +67,8 @@ Run Yocto Community Setup
 $: MACHINE=< machine name> source setup-environment <build directory>
 $: cd ..
 
-Run 3.10.16-1.0.0 Release Layer setup
-$: source fsl-setup-release.sh -b <build directory>  -e <backend fb, dfb or x11>
+Run 3.10.17-1.0.0 Release Layer setup
+$: source fsl-setup-release.sh -b <build directory>  -e <backend fb, dfb or wayland>
 
 This will sync in the layer and update local.conf and bblayer.conf in build directory.
 
