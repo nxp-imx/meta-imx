@@ -116,11 +116,11 @@ if [ ! -e $BUILD_DIR/conf/local.conf.org ]; then
 
     echo >> $BUILD_DIR/conf/local.conf
 
-    if [ ! -z "$BACKEND" ]; then
+    if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ] || [ "$BACKEND" = "dfb" ]  ; then
         echo "DISTRO_FEATURES = \"$DIST_FEATURES\"" >> $BUILD_DIR/conf/local.conf
         echo >> $BUILD_DIR/conf/local.conf
-    fi
-else 
+     fi
+else
     echo -e "\n Existing build already configured - to reconfigure - delete " $BUILD_DIR
     echo -e "\n Rerun setup-environment then rerun fsl-setup-release.sh"
     echo -e "\n Configure multiple backends with different directory names like build-fb, build-dfb"
