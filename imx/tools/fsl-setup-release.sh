@@ -182,17 +182,16 @@ fi
     echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-networking \"" >> $BUILD_DIR/conf/bblayers.conf
 
 
-META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-bsp"
-echo "##Freescale Yocto Release layer" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-bsp \"" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-sdk \"" >> $BUILD_DIR/conf/bblayers.conf
-
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-browser \"" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-gnome \"" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-networking \"" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-python \"" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-ruby \"" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-filesystems \"" >> $BUILD_DIR/conf/bblayers.conf
+    if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ] || [ "$BACKEND" = "dfb" ]  ; then
+        echo "DISTRO_FEATURES = \"$DIST_FEATURES\"" >> $BUILD_DIR/conf/local.conf
+        echo >> $BUILD_DIR/conf/local.conf
+     fi
+else
+    echo -e "\n Existing build already configured - to reconfigure - delete " $BUILD_DIR
+    echo -e "\n Rerun setup-environment then rerun fsl-setup-release.sh"
+    echo -e "\n Configure multiple backends with different directory names like build-fb, build-dfb"
+    return 1
+fi
 
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-qt5 \"" >> $BUILD_DIR/conf/bblayers.conf
 
