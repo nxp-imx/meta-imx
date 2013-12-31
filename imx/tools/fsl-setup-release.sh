@@ -155,14 +155,15 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-qt5 \"" >> $BUILD_DIR/conf/bblayers
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-qt5 \"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-bluez \"" >> $BUILD_DIR/conf/bblayers.conf
 
-echo >> $BUILD_DIR/conf/local.conf
-
-if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ] || [ "$BACKEND" = "dfb" ]  ; then
-    echo "DISTRO_FEATURES_remove = \"$DIST_FEATURES_remove\"" >> $BUILD_DIR/conf/local.conf
-    if [ !  -z "$DIST_FEATURES_add" ] ; then
-        echo "DISTRO_FEATURES_append = \"$DIST_FEATURES_add\"" >> $BUILD_DIR/conf/local.conf
-    fi
-    echo >> $BUILD_DIR/conf/local.conf
+    if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ] || [ "$BACKEND" = "dfb" ]  ; then
+        echo "DISTRO_FEATURES = \"$DIST_FEATURES\"" >> $BUILD_DIR/conf/local.conf
+        echo >> $BUILD_DIR/conf/local.conf
+     fi
+else
+    echo -e "\n Existing build already configured - to reconfigure - delete " $BUILD_DIR
+    echo -e "\n Rerun setup-environment then rerun fsl-setup-release.sh"
+    echo -e "\n Configure multiple backends with different directory names like build-fb, build-dfb"
+    return 1
 fi
 
 cd  $BUILD_DIR
