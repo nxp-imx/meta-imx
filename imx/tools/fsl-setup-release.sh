@@ -167,6 +167,11 @@ else
     cp $BUILD_DIR/conf/local.conf.org $BUILD_DIR/conf/local.conf
 fi
 
+    # set mesa preferred provider in case of FB or wayland backends
+    if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ]; then
+        echo "PREFERRED_PROVIDER_virtual/mesa = \"\"" >> $BUILD_DIR/conf/local.conf
+    fi
+
     META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-fsl-arm"
     echo "##Freescale Yocto Release layer" >> $BUILD_DIR/conf/bblayers.conf
     echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-arm \"" >> $BUILD_DIR/conf/bblayers.conf
