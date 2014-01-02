@@ -1,10 +1,10 @@
-# Copyright (C) 2013 Freescale Semiconductor
+# Copyright (C) 2013-2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require recipes-graphics/gpu-viv-bin-mx6q/gpu-viv-bin-mx6q.inc
 
-SRC_URI[md5sum] = "11e844bb6ba04295cdcd78731076c96d"
-SRC_URI[sha256sum] = "863d20ecba3ed5865c12a77717aa61b492ff93c9c81f6bb3f051322291631e0c"
+SRC_URI[md5sum] = "e7af6d042b8fda9e68395ec91e792688"
+SRC_URI[sha256sum] = "60af8a7763c1dbe3d1058ccf87aa22e5c3fae0ece82e0894aec2bd88e7ccbca9"
 
 SRC_URI += "file://.directfbrc"
 
