@@ -3,10 +3,10 @@
 require recipes-bsp/imx-lib/imx-lib.inc
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_beta.tar.gz"
-S="${WORKDIR}/${PN}-${PV}_beta"
+S="${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "6c6769c2e6a2918a57a3754adcebff12"
-SRC_URI[sha256sum] = "abb025eeab9e8191f4089e70716a1695dc263c5b68f42a8b28329e81889b3312"
+SRC_URI[md5sum] = "7980e614dfefb7b257b18b046f47422c"
+SRC_URI[sha256sum] = "6a967b9dd99cd103f917f1f7403959235b8d224e4e055b3533f7be72eed9b98c"
 
 COMPATIBLE_MACHINE = "(mx6)"
 
