@@ -56,7 +56,6 @@ python populate_packages_prepend() {
     d.appendVar('RDEPENDS_libfslcodec-meta', ' ' + ' '.join(codec_pkgs))
 }
 
-
 # Ensure we get warnings if we miss something
 FILES_${PN} = ""
 
@@ -69,6 +68,5 @@ FILES_${PN}-testapps += "${datadir}/imx-mm/*"
 
 # FIXME: The wrap and lib names does not match
 FILES_${PN}-oggvorbis += "${libdir}/imx-mm/audio-codec/wrap/lib_vorbisd_wrap_arm*_elinux.so.*"
-
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
