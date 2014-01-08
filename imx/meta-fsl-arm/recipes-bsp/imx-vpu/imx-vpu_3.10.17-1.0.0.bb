@@ -2,11 +2,11 @@
 
 require recipes-bsp/imx-vpu/imx-vpu.inc
 
-inherit fsl-eula-unpack
-
 PLATFORM_mx6 = "IMX6Q"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_beta.bin;fsl-eula=true"
+
+PE = "1"
 
 S="${WORKDIR}/${PN}-${PV}_beta"
 
