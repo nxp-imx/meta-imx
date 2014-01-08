@@ -7,10 +7,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_beta.tar.gz "
 DEPENDS_mx28   = "virtual/kernel"
 
 # use clocks on older kernels only - also fix imx-test issue with hdr name change
-SRC_URI_append_mx5 = " file://revert_epdc_hdr_change.patch \
-                      file://clocks.sh"
-
-SRC_URI_append_mx28 = " file://clocks.sh"
+SRC_URI_append_mx5 = "  file://clocks.sh "
+SRC_URI_append_mx28 = " file://clocks.sh "
 
 PE = "1"
 
