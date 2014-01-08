@@ -20,7 +20,7 @@ FILES_${PN}-dbg += "${bindir}/.debug"
 
 do_compile() {
     INCLUDE_DIR="-I${STAGING_INCDIR}"
-    oe_runmake CROSS_COMPILE="${HOST_PREFIX}" PLATFORM="${PLATFORM}" INCLUDE="${INCLUDE_DIR}" all
+    oe_runmake CROSS_COMPILE="${HOST_PREFIX}" INCLUDE="${INCLUDE_DIR}" all
 }
 
 do_install () {
