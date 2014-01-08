@@ -1,8 +1,12 @@
 # As it can not overwrite the version in the layer meta-fsl-arm, we have to use
 #   another file extension for new patch to the append in the meta-fsl-arm
 
-# Append path for freescale layer to include alsa-state asound.conf 
+# Append path for freescale layer to include alsa-state asound.conf
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+PACKAGE_ARCH_mx6 = "${MACHINE_ARCH}"
+PACKAGE_ARCH_mx5 = "${MACHINE_ARCH}"
+PACKAGE_ARCH_mxs = "${MACHINE_ARCH}"
 
 PRINC := "${@int(PRINC) + 1}"
 
