@@ -12,6 +12,8 @@ SRC_URI_append_mx5 = " file://revert_epdc_hdr_change.patch \
 
 SRC_URI_append_mx28 = " file://clocks.sh"
 
+PE = "1"
+
 S="${WORKDIR}/${PN}-${PV}_beta"
 
 SRC_URI[md5sum] = "fd3de6e882a7b5425853083ec8d4951e"
