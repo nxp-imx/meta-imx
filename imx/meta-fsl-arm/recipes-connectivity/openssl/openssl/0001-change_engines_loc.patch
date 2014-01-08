@@ -1,3 +1,7 @@
+Fix to install into same location as designated by patch engines-install-in-libdir-ssl.patch
+
+Signed-off-by: Jay Monkman <jay.monkman@freescale.com>
+
 diff -Naupr openssl-1.0.1e-orig/Configure openssl-1.0.1e/Configure
 --- openssl-1.0.1e-orig/Configure	2013-11-11 11:47:20.763349345 -0600
 +++ openssl-1.0.1e/Configure	2013-11-12 15:24:21.299692886 -0600
