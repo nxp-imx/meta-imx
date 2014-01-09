@@ -1,6 +1,6 @@
 
 SRCBRANCH = "imx_v2013.04"
-SRC_URI = "git://${FSL_ARM_GIT_SERVER}/imx/uboot-imx.git;protocol=git;branch=${SRCBRANCH}"
+SRC_URI = "git://${FSL_ARM_GIT_SERVER}//uboot-imx.git;protocol=git;branch=${SRCBRANCH}"
 SRCREV = "${AUTOREV}"
 
 # save UBOOT_CONFIG as separate names
