@@ -1,7 +1,7 @@
 SUMMARY = "Extra machine specific configuration files"
 DESCRIPTION = "Extra machine specific configuration files for udev, specifically blacklist information."
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=05e8a004b59343f3696caa9afad3f21ab86148a6 \
+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
 PR = "r8"
