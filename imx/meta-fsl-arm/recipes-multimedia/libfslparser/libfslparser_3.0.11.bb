@@ -1,12 +1,13 @@
 # Copyright (C) 2013 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require libfslcodec.inc
+require recipes-multimedia/libfslparser/libfslparser.inc
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "59c81f7da3440409e7e058edd0cdbb2a"
-SRC_URI[sha256sum] = "130f69e47b52a02988df64211c2e42c54f0d07f00d8c1229d20d41b2a9d784a2"
+SRC_URI[md5sum] = "e94b289347fbf74892bd55d68ca0459b"
+SRC_URI[sha256sum] = "43abd3da24c3f3d27cedfbc5949b68b4a4e09c99e2da3d61e6ca5b1dbad2d1eb"
+
 
 COMPATIBLE_MACHINE = "(mx28|mx5|mx6)"
