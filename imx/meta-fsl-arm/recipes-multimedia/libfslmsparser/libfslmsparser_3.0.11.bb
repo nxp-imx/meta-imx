@@ -1,7 +1,7 @@
 # Copyright (C) 2013 Freescale Semiconductor
 
 # This parser requires special licensing with Freescale marketing
-DESCRIPTION = "Microsoft compnent library, including WMA and WMV789 decoder libraries"
+DESCRIPTION = "Microsoft ASF parser library"
 SECTION = "multimedia"
 LICENSE_FLAGS = "commercial"
 LICENSE = "Proprietary"
@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "a83dd83d20acd255b47cf81fa4ca6f2a"
-SRC_URI[sha256sum] = "8251680a53383cfafbef89ccee189dc5559f7e1f9c90daeef93de776b3886532"
+SRC_URI[md5sum] = "5876e106980e88fb30b93360d6a0841f"
+SRC_URI[sha256sum] = "542c1ac77947c5f33e331f7f690a57affc0b09bfd41ef45b025b68020ad426e4"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '--enable-fsw', d)}"

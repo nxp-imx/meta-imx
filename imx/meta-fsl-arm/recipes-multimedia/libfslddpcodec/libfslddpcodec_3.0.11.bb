@@ -1,7 +1,7 @@
 # Copyright (C) 2013 Freescale Semiconductor
 
 # Note this codec requires special licensing through Freescale marketing
-DESCRIPTION = "This package provides AC3 decoder library"
+DESCRIPTION = "This package provides DDPlus decoder library"
 SECTION = "multimedia"
 LICENSE = "Proprietary"
 LICENSE_FLAGS = "commercial"
@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "23ea3797c7bba800594fe0ee3881f158"
-SRC_URI[sha256sum] = "535ede46532085ec2dcb2048a5bf80ab2913c828e54dddd6cd524762473e1251"
+SRC_URI[md5sum] = "8e13c3c503283276ab31b211febeb26f"
+SRC_URI[sha256sum] = "7dcc6f67e3ae2296a56b366af1ef50104e2a949082bd11551a5ff2cb9c042bcb"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
@@ -40,5 +40,5 @@ FILES_${PN}-dev += "${libdir}/pkgconfig/*.pc ${includedir}/imx-mm/* \
 # Add examples to -testapps PACKAGE
 FILES_${PN}-testapps += "${datadir}/imx-mm/*"
 
-COMPATIBLE_MACHINE = "(mx28|mx5|mx6)"
+COMPATIBLE_MACHINE = "(mx5|mx6)"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
