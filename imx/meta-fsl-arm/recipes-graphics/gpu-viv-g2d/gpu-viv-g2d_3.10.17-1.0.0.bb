@@ -9,3 +9,4 @@ SRC_URI[sha256sum] = "2b9f6c6b9fd2bee7f5145e17433d3f0ef1463be7ef393af10d77d84219
 
 FILES_${PN} += " ${bindir}/gmem_info "
 FILES_${PN}-dbg += "$ {bindir}/.debug/gmem_info"
+FILES_${PN} += " ${libdir}/libg2d-viv${SOLIBS} "
