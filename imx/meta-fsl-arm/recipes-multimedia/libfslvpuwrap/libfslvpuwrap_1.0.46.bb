@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Freescale Semiconductor
+# Copyright (C) 2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "Freescale Multimedia VPU wrapper"
 DEPENDS = "imx-vpu"
@@ -8,8 +8,9 @@ LIC_FILES_CHKSUM = "file://EULA.txt;md5=93b784b1c11b3fffb1638498a8dde3f6"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
-SRC_URI[md5sum] = "99d866c979c8a798c843f32632293f14"
-SRC_URI[sha256sum] = "c6ca189216bc60c53d342bcd9d9e7899229b96b54ae48ebfcf5f573096c34dcd"
+
+SRC_URI[md5sum] = "a9fd3006faa64cdb91c72ad3e398bbb5"
+SRC_URI[sha256sum] = "4d6188f762d5fb8cbe50e67ba151cf224c70d603e2ab92fb761436e84915ef9c"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
