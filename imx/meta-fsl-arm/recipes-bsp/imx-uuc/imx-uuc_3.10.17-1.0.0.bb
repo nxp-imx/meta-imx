@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Freescale Semiconductor
+# Copyright (C) 2013-14 Freescale Semiconductor
 
 SUMMARY = "Universal Adapter source"
 DESCRIPTION = "Universal Adapter source for IMX BSP"
@@ -10,11 +10,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 
 PE = "1"
 
-SRC_URI = "${FSL_MIRROR}/imx-uuc-${PV}_beta.tar.gz"
-S="${WORKDIR}/${PN}-${PV}_beta"
+SRC_URI = "${FSL_MIRROR}/imx-uuc-${PV}.tar.gz"
+S="${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "22cc43c9a3b1a0eb1a82e0fcbade8c37"
-SRC_URI[sha256sum] = "bd96d19ec0399fbebf09c3692f77ee8c76b27988c3bf616d3cecb67a8552ba96"
+SRC_URI[md5sum] = "c111a44b436a5715babef897fc13ca2d"
+SRC_URI[sha256sum] = "7f398aa3e735ad7176986c1c8cb08a8d9bd4d9c989b2e129ae8c9fd718f9b669"
 
 FILES_${PN} += "linuxrc ${bindir}/uuc ${bindir}/sdimage "
 FILES_${PN}-dbg += "${bindir}/.debug"
