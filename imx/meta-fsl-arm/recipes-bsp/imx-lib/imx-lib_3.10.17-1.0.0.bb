@@ -1,12 +1,9 @@
-# Copyright (C) 2013 Freescale Semiconductor
+# Copyright (C) 2013-14 Freescale Semiconductor
 
 require recipes-bsp/imx-lib/imx-lib.inc
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
-S="${WORKDIR}/${PN}-${PV}"
-
-SRC_URI[md5sum] = "7980e614dfefb7b257b18b046f47422c"
-SRC_URI[sha256sum] = "6a967b9dd99cd103f917f1f7403959235b8d224e4e055b3533f7be72eed9b98c"
+SRC_URI[md5sum] = "c8f3fa5c2fcdfca41cdb3b84782957db"
+SRC_URI[sha256sum] = "33f6ad85b81473874729c2d2cadd085e149c248c02d8ac358d119c6ed8a6535a"
 
 PE = "1"
 
