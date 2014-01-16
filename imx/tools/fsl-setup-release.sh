@@ -63,11 +63,11 @@ do
             unset DIST_FEATURES_remove
             if [ "$BACKEND" = "fb" ]; then
                 DIST_FEATURES_remove="x11 wayland directfb "
-                echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
+                 echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "dfb" ]; then
                 DIST_FEATURES_remove="x11 wayland "
-                DIST_FEATURES_add=" directfb "
-                echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
+                DIST_FEATURES_add="directfb"
+                 echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "wayland" ]; then
                 DIST_FEATURES_remove="x11 directfb "
             elif [ "$BACKEND" = "x11" ]; then
@@ -156,7 +156,10 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-qt5 \"
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-bluez \"" >> $BUILD_DIR/conf/bblayers.conf
 
     if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ] || [ "$BACKEND" = "dfb" ]  ; then
-        echo "DISTRO_FEATURES = \"$DIST_FEATURES\"" >> $BUILD_DIR/conf/local.conf
+        echo "DISTRO_FEATURES_remove = \"$DIST_FEATURES_remove\"" >> $BUILD_DIR/conf/local.conf
+        if [ !  -z "$DIST_FEATURES_add" ] ; then
+            echo "DISTRO_FEATURES_append = \"$DIST_FEATURES_add\"" >> $BUILD_DIR/conf/local.conf
+        fi
         echo >> $BUILD_DIR/conf/local.conf
      fi
 else
