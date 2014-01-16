@@ -2,8 +2,6 @@
 
 require recipes-bsp/imx-test/imx-test.inc
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_beta.tar.gz "
-
 DEPENDS_mx28   = "virtual/kernel"
 
 # use clocks on older kernels only - also fix imx-test issue with hdr name change
@@ -12,10 +10,8 @@ SRC_URI_append_mx28 = " file://clocks.sh "
 
 PE = "1"
 
-S="${WORKDIR}/${PN}-${PV}_beta"
-
-SRC_URI[md5sum] = "fd3de6e882a7b5425853083ec8d4951e"
-SRC_URI[sha256sum] = "1e86cfe800fbf2db2a52ce0155ab2d2ba70913a30974b3f66879198eaf9da21b"
+SRC_URI[md5sum] = "51168d3d30b8fff84b3552b399362023"
+SRC_URI[sha256sum] = "9627d6874d2d5e23710763e2011be8b3a4cbe60356bec166fde5dc26acc5c2d4"
 
 COMPATIBLE_MACHINE = "(mx6|mx5|mx28)"
 
