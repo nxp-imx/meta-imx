@@ -42,7 +42,7 @@ echo "
 clean_up()
 {
 
-    unset CWD BUILD_DIR BACKEND DIST_FEATURES
+    unset CWD BUILD_DIR BACKEND DIST_FEATURES_remove DIST_FEATURES_add
     unset fsl_setup_help fsl_setup_error fsl_setup_flag
     unset usage clean_up
     unset ARM_DIR META_FSL_BSP_RELEASE
@@ -60,13 +60,14 @@ do
         e)
             BACKEND="$OPTARG"
             if [ "$BACKEND" = "fb" ]; then
-                DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g largefile opengl multiarch \${DISTRO_FEATURES_LIBC} "
+                DIST_FEATURES_remove="x11 wayland directfb "
                  echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "dfb" ]; then
-                DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g directfb largefile opengl multiarch \${DISTRO_FEATURES_LIBC} "
+                DIST_FEATURES_remove="x11 wayland "
+                DIST_FEATURES_add="directfb"
                  echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "wayland" ]; then
-                DIST_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhost wifi xattr nfs zeroconf pci 3g \${DISTRO_FEATURES_LIBC} \${POKY_DEFAULT_DISTRO_FEATURES}"
+                DIST_FEATURES_remove="x11 directfb "
             elif [ "$BACKEND" = "x11" ]; then
                  echo -e  "\n Using X11 backend with poky DIST_FEATURES"
             else
@@ -117,7 +118,10 @@ if [ ! -e $BUILD_DIR/conf/local.conf.org ]; then
     echo >> $BUILD_DIR/conf/local.conf
 
     if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ] || [ "$BACKEND" = "dfb" ]  ; then
-        echo "DISTRO_FEATURES = \"$DIST_FEATURES\"" >> $BUILD_DIR/conf/local.conf
+        echo "DISTRO_FEATURES_remove = \"$DIST_FEATURES_remove\"" >> $BUILD_DIR/conf/local.conf
+        if [ !  -z "$DIST_FEATURES_add" ] ; then
+            echo "DISTRO_FEATURES_append = \"$DIST_FEATURES_add\"" >> $BUILD_DIR/conf/local.conf
+        fi
         echo >> $BUILD_DIR/conf/local.conf
      fi
 else
