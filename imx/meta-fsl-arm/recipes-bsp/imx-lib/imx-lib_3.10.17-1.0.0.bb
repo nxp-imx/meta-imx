@@ -9,3 +9,6 @@ PE = "1"
 
 COMPATIBLE_MACHINE = "(mx6)"
 
+do_configure () {
+    rm -rf ${S}/g2d
+}
