@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2013 Freescale Semiconductor
+# Copyright (C) 2012-2014 Freescale Semiconductor
 # Copyright (C) 2012-2013 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 
@@ -10,11 +10,11 @@ DEPENDS += "virtual/xserver virtual/libx11 virtual/libgal-x11 gpu-viv-bin-mx6q p
 
 LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=641ac6e6d013833e36290797f4d7089c"
 
-SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}_beta.tar.gz"
-S="${WORKDIR}/xserver-xorg-video-imx-viv-${PV}_beta/"
+SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}.tar.gz"
+S="${WORKDIR}/xserver-xorg-video-imx-viv-${PV}/"
 
-SRC_URI[md5sum] = "fee0e4820fe3f89e5f36a0b343e4a33f"
-SRC_URI[sha256sum] = "b65aef86943cb0fcd2dd7ded01215038dcf2761779ce39186ab3c8c2d4b010b1"
+SRC_URI[md5sum] = "f650ca46381b09b9149ede0aae786cc2"
+SRC_URI[sha256sum] = "fdc3d6fc26803033c2448258b37bd6531320943d7e5f9c0495c5f1523671ae2a"
 
 EXTRA_OEMAKE += "-C EXA/src -f makefile.linux prefix=${D}/usr \
                  sysroot=${STAGING_DIR_TARGET} \
