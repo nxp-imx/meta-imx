@@ -42,7 +42,7 @@ echo "
 clean_up()
 {
 
-    unset CWD BUILD_DIR BACKEND FSLDISTRO
+    unset CWD BUILD_DIR BACKEND DIST_FEATURES_remove DIST_FEATURES_add
     unset fsl_setup_help fsl_setup_error fsl_setup_flag
     unset usage clean_up
     unset ARM_DIR META_FSL_BSP_RELEASE
@@ -63,32 +63,14 @@ do
             # Determine what distro needs to be used.
             BACKEND="$OPTARG"
             if [ "$BACKEND" = "fb" ]; then
-                if [ -z "$DISTRO" ]; then
-                    FSLDISTRO='fsl-imx-release-fb'
-                    echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
-                elif [ ! "$DISTRO" = "fsl-imx-release-fb" ]; then
-                    echo -e "\n DISTRO specified conflicts with -e. Please use just one or the other."
-                    fsl_setup_error='true'
-                fi
-
+                DIST_FEATURES_remove="x11 wayland directfb "
+                 echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "dfb" ]; then
-                if [ -z "$DISTRO" ]; then
-                    FSLDISTRO='fsl-imx-release-dfb'
-                    echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
-                elif [ ! "$DISTRO" = "fsl-imx-release-dfb" ]; then
-                    echo -e "\n DISTRO specified conflicts with -e. Please use just one or the other."
-                    fsl_setup_error='true'
-                fi
-
+                DIST_FEATURES_remove="x11 wayland "
+                DIST_FEATURES_add="directfb"
+                 echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "wayland" ]; then
-                if [ -z "$DISTRO" ]; then
-                    FSLDISTRO='fsl-imx-release-wayland'
-                    echo -e "\n Using Wayland backend."
-                elif [ ! "$DISTRO" = "fsl-imx-release-wayland" ]; then
-                    echo -e "\n DISTRO specified conflicts with -e. Please use just one or the other."
-                    fsl_setup_error='true'
-                fi
-
+                DIST_FEATURES_remove="x11 directfb "
             elif [ "$BACKEND" = "x11" ]; then
                 if [ -z "$DISTRO" ]; then
                     FSLDISTRO='fsl-imx-release-x11'
@@ -183,7 +165,10 @@ fi
 
 
     if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ] || [ "$BACKEND" = "dfb" ]  ; then
-        echo "DISTRO_FEATURES = \"$DIST_FEATURES\"" >> $BUILD_DIR/conf/local.conf
+        echo "DISTRO_FEATURES_remove = \"$DIST_FEATURES_remove\"" >> $BUILD_DIR/conf/local.conf
+        if [ !  -z "$DIST_FEATURES_add" ] ; then
+            echo "DISTRO_FEATURES_append = \"$DIST_FEATURES_add\"" >> $BUILD_DIR/conf/local.conf
+        fi
         echo >> $BUILD_DIR/conf/local.conf
      fi
 else
