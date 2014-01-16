@@ -64,7 +64,7 @@ do
                  echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "dfb" ]; then
                 DIST_FEATURES_remove="x11 wayland "
-                DIST_FEATURES_add="directfb"
+                DIST_FEATURES_add=" directfb "
                  echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "wayland" ]; then
                 DIST_FEATURES_remove="x11 directfb "
