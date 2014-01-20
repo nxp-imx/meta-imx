@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Freescale Semiconductor
+# Copyright (C) 2013-14 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require recipes-kernel/linux/linux-imx.inc
@@ -8,7 +8,7 @@ COMPATIBLE_MACHINE = "(mx6)"
 
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=imx_3.10.17_1.0.0_ga"
 
-SRCREV = "${AUTOREV}"
+SRCREV = "c42398f826da81e1edbaf1ab9d02689ba5b25613"
 
 LOCALVERSION = "-1.0.0_ga"
 
