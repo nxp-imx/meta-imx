@@ -8,7 +8,7 @@ EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 SRC_URI = "${FSL_MIRROR}/gst-fsl-plugins-${PV}.tar.gz"
 S = "${WORKDIR}/gst-fsl-plugins-${PV}"
 
-SRC_URI[md5sum] = "12cee7b5ed27f5e4e94e59fc1b74d4a9"
-SRC_URI[sha256sum] = "13a7290431c258e0e42ba4e8fd6d945304effb642c206fcc471e4e37d37fcd80"
+SRC_URI[md5sum] = "8c09d0c9a619313e36be0fef29cffd7a"
+SRC_URI[sha256sum] = "ace5f8d24417c0c50994d42bf712e5c7d801afab2837c280c44bb86f4a46f52e"
 
 COMPATIBLE_MACHINE = "(mx28|mx5|mx6)"
