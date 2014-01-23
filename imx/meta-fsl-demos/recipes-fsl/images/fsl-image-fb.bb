@@ -17,6 +17,7 @@ EXTRA_IMAGE_FEATURES += " \
     nfs-server \
     tools-debug \
     tools-profile \
+    ssh-server-dropbear \
 "
 
 SOC_IMAGE_INSTALL = ""
