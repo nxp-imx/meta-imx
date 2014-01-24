@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Freescale Semiconductor
+# Copyright (C) 2013-14 Freescale Semiconductor
 
 # Note this codec must be downloaded from freescale.com/imx
 DESCRIPTION = "Freescale AAC+ decoder libraries "
@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "a40e59ae9fabfe33e9544f0e4ac95ca5"
-SRC_URI[sha256sum] = "5afe7d315b2d83f20d0d071d574dc53b4d362470488b9b1eaf7fa7faf44ad7ee"
+SRC_URI[md5sum] = "578381b45fe89d353a300d0539052d3d"
+SRC_URI[sha256sum] = "b74e78289881a82faabd2c47ad66f943f184bf093cf146aea6276c8ee8673442"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
