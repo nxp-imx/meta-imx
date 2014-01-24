@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Freescale Semiconductor
+# Copyright (C) 2013-14 Freescale Semiconductor
 
 # This parser requires special licensing with Freescale marketing
 DESCRIPTION = "Microsoft ASF parser library"
@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "5bf90c96f64550eeaec2b65e88ebb406"
-SRC_URI[sha256sum] = "5f49a03a50e9ea823bf16faf94282c384779c8e7c5c66e4a6c052865fd651c1e"
+SRC_URI[md5sum] = "e6596884f2d14716c5c7a41772e20e22"
+SRC_URI[sha256sum] = "17faf197b7fc0fd3e326e8805bf297df3295380a7d5891d38114dd2ddd09cff7"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '--enable-fsw', d)}"
