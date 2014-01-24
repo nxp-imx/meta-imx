@@ -14,11 +14,12 @@ do_install () {
      cp ${S}/vconfig ${D}/${exec_prefix}/bin
 }
 
+# ignore strip to avoid yocto errors in stripping
 do_compile () {
     oe_runmake PLATFORM=ARM 'STRIP=echo' all
-
 }
 
+# comment out MakeInclude in Makefile which sets build environment
 do_configure_append () {
     sed -i 's/^ include/#^include/' ${S}/Makefile
 }
