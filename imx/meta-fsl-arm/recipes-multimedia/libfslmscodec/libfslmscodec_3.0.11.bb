@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Freescale Semiconductor
+# Copyright (C) 2013-14 Freescale Semiconductor
 
 # Note this codec requires special licensing with Freescale marketing to use this codec
 DESCRIPTION = "Microsoft component library, including WMA and WMV789 decoder libraries"
@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "f9d35f4422a3610ad961bba196c0fa80"
-SRC_URI[sha256sum] = "069e46ec390e52d6ddcd186833bf573af3fbf452162a89b99f51744d8d177570"
+SRC_URI[md5sum] = "edb8a0f73c4cc49c6e9e2a0b5b3dbac6"
+SRC_URI[sha256sum] = "d80d2aa94eb1a56272532850c1451bea67dc2fda80250abb4238ac0c29c93b1d"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
