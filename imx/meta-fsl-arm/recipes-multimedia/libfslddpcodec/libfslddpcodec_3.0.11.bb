@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Freescale Semiconductor
+# Copyright (C) 2013-14 Freescale Semiconductor
 
 # Note this codec requires special licensing through Freescale marketing
 DESCRIPTION = "This package provides DDPlus decoder library"
@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "0190d1d8e18803203e602fab67a89e00"
-SRC_URI[sha256sum] = "f6dc6a5603b800678e1b67b9f183d9d7ed573fea6321557d24b32af566eb453e"
+SRC_URI[md5sum] = "4f37cf08d49df95d38b103d386902b52"
+SRC_URI[sha256sum] = "1b2aa8ca0099c2ffa664bc873e648c6b6932767b48fcbe38642e3b35e716b55e"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
