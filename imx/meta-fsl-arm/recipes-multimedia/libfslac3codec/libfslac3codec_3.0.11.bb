@@ -1,4 +1,4 @@
-# Copyright (C) 2013 Freescale Semiconductor
+# Copyright (C) 2013-14 Freescale Semiconductor
 
 # Note this codec requires special licensing through Freescale marketing
 DESCRIPTION = "This package provides AC3 decoder library"
@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "124aaed811938ba0bf891430cd700dfc"
-SRC_URI[sha256sum] = "8a91f25f8bfe1e2317ef56c6432ebce242d1c9445a7b64e3217e9102c9c470db"
+SRC_URI[md5sum] = "2dc0b82a9d851d41a5d1f464304cfa28"
+SRC_URI[sha256sum] = "194dc773e657db550b929fe964add9667d116c479b0185c6102aaa947632ef08"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
