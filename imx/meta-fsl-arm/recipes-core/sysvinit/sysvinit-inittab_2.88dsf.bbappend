@@ -1,6 +1,8 @@
 # Freescale imx extra configuration 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+RDEPENDS_${PN} += " bash "
+
 PRINC := "${@int(PRINC) + 1}"
 
 SRC_URI_append_mx6 = " file://rc_mxc.S file://rc_gpu.S"
