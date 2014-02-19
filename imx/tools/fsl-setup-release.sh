@@ -97,40 +97,43 @@ if [ ! -e $BUILD_DIR/conf/local.conf ]; then
     return 1
 fi
 
-# Run this part only the first time the script is executed
+# On the first script run, backup the local.conf file
+# Consecutive runs, it restores the backup and changes are appended on this one.
 if [ ! -e $BUILD_DIR/conf/local.conf.org ]; then
     cp $BUILD_DIR/conf/local.conf $BUILD_DIR/conf/local.conf.org
-
-    # set mesa preferred provider in case of FB or wayland backends
-    if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ]; then
-        echo "PREFERRED_PROVIDER_virtual/mesa = \"\"" >> $BUILD_DIR/conf/local.conf
-    fi
-
-    META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-fsl-arm"
-    echo "##Freescale Yocto Release layer" >> $BUILD_DIR/conf/bblayers.conf
-    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-arm \"" >> $BUILD_DIR/conf/bblayers.conf
-    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-demos \"" >> $BUILD_DIR/conf/bblayers.conf
-
-    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-browser \"" >> $BUILD_DIR/conf/bblayers.conf
-    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-gnome \"" >> $BUILD_DIR/conf/bblayers.conf
-    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-networking \"" >> $BUILD_DIR/conf/bblayers.conf
-
-    echo >> $BUILD_DIR/conf/local.conf
-
-    if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ] || [ "$BACKEND" = "dfb" ]  ; then
-        echo "DISTRO_FEATURES_remove = \"$DIST_FEATURES_remove\"" >> $BUILD_DIR/conf/local.conf
-        if [ !  -z "$DIST_FEATURES_add" ] ; then
-            echo "DISTRO_FEATURES_append = \"$DIST_FEATURES_add\"" >> $BUILD_DIR/conf/local.conf
-        fi
-        echo >> $BUILD_DIR/conf/local.conf
-     fi
 else
-    echo -e "\n Existing build already configured - to reconfigure - delete " $BUILD_DIR
-    echo -e "\n Rerun setup-environment then rerun fsl-setup-release.sh"
-    echo -e "\n Configure multiple backends with different directory names like build-fb, build-dfb"
-    return 1
+    cp $BUILD_DIR/conf/local.conf.org $BUILD_DIR/conf/local.conf
 fi
 
+if [ ! -e $BUILD_DIR/conf/bblayers.conf.org ]; then
+    cp $BUILD_DIR/conf/bblayers.conf $BUILD_DIR/conf/bblayers.conf.org
+else
+    cp $BUILD_DIR/conf/bblayers.conf.org $BUILD_DIR/conf/bblayers.conf
+fi
+
+# set mesa preferred provider in case of FB or wayland backends
+if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ]; then
+     echo "PREFERRED_PROVIDER_virtual/mesa = \"\"" >> $BUILD_DIR/conf/local.conf
+fi
+
+META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-fsl-arm"
+echo "##Freescale Yocto Release layer" >> $BUILD_DIR/conf/bblayers.conf
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-arm \"" >> $BUILD_DIR/conf/bblayers.conf
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-demos \"" >> $BUILD_DIR/conf/bblayers.conf
+
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-browser \"" >> $BUILD_DIR/conf/bblayers.conf
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-gnome \"" >> $BUILD_DIR/conf/bblayers.conf
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-networking \"" >> $BUILD_DIR/conf/bblayers.conf
+
+echo >> $BUILD_DIR/conf/local.conf
+
+if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ] || [ "$BACKEND" = "dfb" ]  ; then
+    echo "DISTRO_FEATURES_remove = \"$DIST_FEATURES_remove\"" >> $BUILD_DIR/conf/local.conf
+    if [ !  -z "$DIST_FEATURES_add" ] ; then
+        echo "DISTRO_FEATURES_append = \"$DIST_FEATURES_add\"" >> $BUILD_DIR/conf/local.conf
+    fi
+    echo >> $BUILD_DIR/conf/local.conf
+fi
 
 cd  $BUILD_DIR
 clean_up
