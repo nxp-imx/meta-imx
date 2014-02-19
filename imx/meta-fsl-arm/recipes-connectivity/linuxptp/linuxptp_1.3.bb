@@ -6,7 +6,7 @@ inherit autotools pkgconfig
 
 DEPENDS = "virtual/kernel"
 
-SRC_URI = "http://sourceforge.net/projects/linuxptp/files/latest/linuxptp-${PV}.tgz"
+SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz"
 
 SRC_URI[md5sum] = "664706a86fe1413391d4536080548501"
 SRC_URI[sha256sum] = "b1651186689ef06e56add506bd9bb55a700ca56e3f92ba71d08f3ad12fad3085"
