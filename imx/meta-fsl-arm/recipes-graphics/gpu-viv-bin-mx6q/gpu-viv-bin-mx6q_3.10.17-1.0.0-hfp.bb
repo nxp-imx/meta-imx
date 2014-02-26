@@ -6,9 +6,6 @@ require recipes-graphics/gpu-viv-bin-mx6q/gpu-viv-bin-mx6q.inc
 SRC_URI[md5sum] = "51ddf20ae417465c46273afdc58644ab"
 SRC_URI[sha256sum] = "1143cc83d834359d4190a83a85390cab99c34bad22e574a4861364edb46bfbed"
 
-#FIXME required for QT5 Wayland/Weston compositor
-PROVIDES += "virtual/libgles"
-
 SRC_URI += "file://directfbrc"
 
 PACKAGE_FP_TYPE = "hardfp"
