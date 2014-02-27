@@ -37,9 +37,6 @@ echo "DISTRO_FEATURES_add = \"qt5\"" >> conf/local.conf
 if [ ! -d "../sources/meta-qt5" ]; then
     cd ../sources
     git clone -b jansa/qt5-5.2.1 https://github.com/meta-qt5/meta-qt5.git
-    mv meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_5.1.1.bbappend  meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_5.2.1.bbappend
-    rm -f meta-qt5/recipes-devtools/cmake/cmake_2.8.12.1.bbappend
-    rm -f meta-qt5/recipes-devtools/cmake/cmake-native_2.8.12.1.bbappend
     cd $CWD
 fi
 
