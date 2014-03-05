@@ -1,4 +1,4 @@
-Freescale's 3.10.17-1.0.0_beta Yocto BSP
+Freescale's 3.10.17-1.0.0 Yocto BSP
 ==================================
 
 This BSP is a Freescale release providing support for the following processors
@@ -58,7 +58,7 @@ Download the Yocto Freescale Layers
 $: repo sync
 
 Copy the new machine configuration files from meta-fsl-bsp-release into meta-fsl-arm
-This is required for community setup to find the new machine configurations provided in 3.10.17-1.0.0_beta
+This is required for community setup to find the new machine configurations provided in 3.10.17-1.0.0
 
 $: cp -r sources/meta-fsl-bsp-release/imx/meta-fsl-arm/conf/machine sources/meta-fsl-arm/conf
 
@@ -135,7 +135,7 @@ These codecs have contractual restrictions that require separate distribution.
 
 Manufacturing Tool
 ------------------
-The manufacturing tool image is provided in the 3.10.17-1.0.0_beta release.  This includes the fsl-image-manufacturing that is used
+The manufacturing tool image is provided in the 3.10.17-1.0.0 release.  This includes the fsl-image-manufacturing that is used
 to flash the target device.  
 
 End User License Agreement
@@ -164,3 +164,23 @@ export LD_PRELOAD=/usr/lib/libGAL.so:/usr/lib/libEGL.so:/usr/lib/libGLSLC.so:/us
 $google-chrome --use-gl=egl 
 
 
+QT5
+---
+The meta-fsl-qt5 layer is not enabled for default builds.    The layer demonstrates changes needed for QT5 5.2.1 to work on the dora branch.
+This layer will not work on the master branch.
+
+To integrate meta-fsl-qt5, from the build directory run the fsl-qt5-demo.sh
+../sources/meta-fsl-bsp-release/imx/meta-fsl-qt5/tools/fsl-qt5-setup-demo.sh
+
+This will donwload the meta-qt5 layer, checkout the 5.2.1 branch and add qt5 to the distro features.  The meta-fsl-qt5 layer provides
+new image recipes for x11, wayland, fb and directfb.   Examples provided with the image recipes is the Cinematic Experience.  Each backend requires
+a different set of parameters.  Below are the parameters for QT5  Cinematic Experience.
+
+-- Frame buffer
+Qt5_CinematicExperience -platform eglfs -plugin evdevtouch:/dev/input/event0
+
+---Wayland
+Qt5_CinematicExperience -platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
+
+--- X11
+Qt5_CinematicExperience -platform xcb -plugin evdevtouch:/dev/input/event0
