@@ -31,7 +31,6 @@ CWD=`pwd`
 # Add meta-qt5 layer to BBLAYERS
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-qt5 \"" >> conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-qt5 \"" >> conf/bblayers.conf
-echo "DISTRO_FEATURES_add = \"qt5\"" >> conf/local.conf
 
 # Clone and check out meta-qt5 layer if does not exist
 if [ ! -d "../sources/meta-qt5" ]; then

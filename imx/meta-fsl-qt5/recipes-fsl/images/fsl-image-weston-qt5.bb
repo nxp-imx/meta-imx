@@ -2,8 +2,6 @@ DESCRIPTION = "Freescale Image Weston Image QT5"
 
 require recipes-fsl/images/fsl-image-weston.bb
 
-REQUIRED_DISTRO_FEATURES = "wayland qt5"
-
 IMAGE_INSTALL += " \
     qtbase \
     qtwayland \
