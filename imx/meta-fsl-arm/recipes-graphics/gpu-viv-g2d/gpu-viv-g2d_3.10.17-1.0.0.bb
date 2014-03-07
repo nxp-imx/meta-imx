@@ -4,8 +4,8 @@ require recipes-graphics/gpu-viv-g2d/gpu-viv-g2d.inc
 
 LIC_FILES_CHKSUM = "file://usr/include/g2d.h;endline=7;md5=861ebad4adc7236f8d1905338abd7eb2"
 
-SRC_URI[md5sum] = "1e3f6e6f24c754d797f31c94949d5fc0"
-SRC_URI[sha256sum] = "5552e72ff7141a3e71631c239e282b42ebc542d062ed42541e947c018dfbccf1"
+SRC_URI[md5sum] = "710a23fd6f3b966a7887169af39a509b"
+SRC_URI[sha256sum] = "5eab1e0b280ac2840e7519eed69a1bc373b06a67fc990a6495722129dd32ce4d"
 
 # Inhibit warnings about files being stripped.
 INHIBIT_PACKAGE_STRIP = "1"
