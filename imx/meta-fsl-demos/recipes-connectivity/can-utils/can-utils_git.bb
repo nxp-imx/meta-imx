@@ -8,11 +8,7 @@ inherit autotools pkgconfig
 DEPENDS = "libsocketcan"
 
 SRC_URI = "git://git.gitorious.org/linux-can/can-utils.git;protocol=git;branch=master"
-SRCREV = "16c970d40e6c19dde705bad4751bab1a3a4f3a0d"
+SRCREV = "67a2bdcd336e6becfa5784742e18c88dbeddc973"
 
 S="${WORKDIR}/git"
-
-do_install () {
-    oe_runmake DESTDIR="${D}" install
-}
 
