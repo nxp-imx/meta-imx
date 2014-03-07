@@ -8,8 +8,8 @@ DEPENDS = "virtual/kernel"
 
 SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz"
 
-SRC_URI[md5sum] = "664706a86fe1413391d4536080548501"
-SRC_URI[sha256sum] = "b1651186689ef06e56add506bd9bb55a700ca56e3f92ba71d08f3ad12fad3085"
+SRC_URI[md5sum] = "a37ad2b2ef7d1ebc4d64a66d3fe55cdf"
+SRC_URI[sha256sum] = "6cfd5291fb7394cc9f25458927874a203971b66b76d1c9d6568e007d0cbd81f2"
 
 do_configure_append () {
     find ${S} -name makefile | xargs sed -i 's,^\(CC\|CFLAGS\|prefix\|AR\)=,\1 ?=,g'
