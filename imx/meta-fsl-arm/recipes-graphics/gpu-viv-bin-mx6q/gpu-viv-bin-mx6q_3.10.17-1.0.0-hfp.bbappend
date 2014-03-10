@@ -1,16 +1,22 @@
-# Copyright (C) 2013-2014 Freescale Semiconductor
-# Released under the MIT license (see COPYING.MIT for the terms)
-
-require recipes-graphics/gpu-viv-bin-mx6q/gpu-viv-bin-mx6q.inc
-
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
 
-SRC_URI[md5sum] = "197dcc32300eed2b9966f2c0bfcc1ee4"
-SRC_URI[sha256sum] = "9c782b55264d8aa55db03d9ef2dba5b0a9212c10fb0f28a3cabf437672afba89"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
+           file://egl.pc \
+           file://egl_x11.pc \
+           file://glesv1_cm.pc \
+           file://glesv1_cm_x11.pc \
+           file://glesv2.pc \
+           file://glesv2_x11.pc \
+           file://vg.pc \
+           file://vg_x11.pc \
+           file://gc_wayland_protocol.pc \
+           file://wayland-egl.pc \
+           file://wayland-viv.pc \
+           file://directfbrc \
+          "
 
-SRC_URI += "file://directfbrc"
-
-PACKAGE_FP_TYPE = "hardfp"
+SRC_URI[md5sum] = "11e844bb6ba04295cdcd78731076c96d"
+SRC_URI[sha256sum] = "863d20ecba3ed5865c12a77717aa61b492ff93c9c81f6bb3f051322291631e0c"
 
 do_install_append () {
 
