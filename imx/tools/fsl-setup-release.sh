@@ -112,27 +112,10 @@ if [ -z "$BUILD_DIR" ]; then
     BUILD_DIR='build'
 fi
 
-if [ -z "$MACHINE" ]; then
-    echo setting to default machine
-    MACHINE='imx6qsabresd'
-fi
+#Sets up the basic yocto environment
+source $PROGNAME $BUILD_DIR
 
-# New machine definitions may need to be added to the expected location
-cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-fsl-arm/conf/machine
-
-# copy new EULA into community so setup uses latest i.MX EULA
-cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-fsl-arm/EULA
-# copy unpack class with md5sum that matches new EULA
-cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-fsl-arm/classes
-
-# Set up the basic yocto environment
-if [ -z "$DISTRO" ]; then
-   DISTRO=$FSLDISTRO MACHINE=$MACHINE . ./$PROGNAME $BUILD_DIR
-else
-   MACHINE=$MACHINE . ./$PROGNAME $BUILD_DIR
-fi
-
-# Point to the current directory since the last command changed the directory to $BUILD_DIR
+# Points to the current directory since the last command changed the directory to $BUILD_DIR
 BUILD_DIR=.
 
 if [ ! -e $BUILD_DIR/conf/local.conf ]; then
