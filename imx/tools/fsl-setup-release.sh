@@ -19,7 +19,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 CWD=`pwd`
-
+PROGNAME="setup-environment"
 exit_message ()
 {
    echo "To return to this build environment later please run:"
@@ -29,7 +29,7 @@ exit_message ()
 
 usage()
 {
-    echo -e "\nUsage: source $PROGNAME
+    echo -e "\nUsage: source fsl-setup-release.sh
     Optional parameters: [-b build-dir] [-e back-end] [-h]"
 echo "
     * [-b build-dir]: Build directory, if unspecified script uses 'build' as output directory
@@ -91,6 +91,13 @@ fi
 if [ -z "$BUILD_DIR" ]; then
     BUILD_DIR='build'
 fi
+
+#Sets up the basic yocto environment
+source $PROGNAME $BUILD_DIR
+
+# Points to the current directory since the last command changed the directory to $BUILD_DIR
+BUILD_DIR=.
+
 if [ ! -e $BUILD_DIR/conf/local.conf ]; then
     echo -e "\n ERROR - No build directory is set yet. Run the 'setup-environment' script before running this script to create " $BUILD_DIR
     echo -e "\n"
