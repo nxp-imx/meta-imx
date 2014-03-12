@@ -17,8 +17,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
 
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "197dcc32300eed2b9966f2c0bfcc1ee4"
-SRC_URI[sha256sum] = "9c782b55264d8aa55db03d9ef2dba5b0a9212c10fb0f28a3cabf437672afba89"
+SRC_URI[md5sum] = "19dfab8d30cc28dd0e6684bcda3c15c2"
+SRC_URI[sha256sum] = "517d0a503bec9fef9ed26a91d3f4328ca531471b4a622ec0c5128ef0ff7658de"
 
 do_install_append () {
 
