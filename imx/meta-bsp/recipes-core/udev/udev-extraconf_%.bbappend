@@ -1,7 +1,7 @@
 # Freescale imx extra configuration udev rules
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append_mx6 = " file://local.rules file://blacklist.conf file://udev-cache.default"
+SRC_URI_append_mx6 = " file://local.rules file://blacklist.conf"
 
 do_install_prepend_mx6 () {
 	if [ -e "${WORKDIR}/local.rules" ]; then

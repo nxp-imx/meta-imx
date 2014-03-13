@@ -3,8 +3,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 RDEPENDS_${PN} += " bash "
 
-PRINC := "${@int(PRINC) + 1}"
-
 SRC_URI_append_mx6 = " file://rc_mxc.S file://rc_gpu.S"
 
 USE_X11 = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
