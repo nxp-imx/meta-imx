@@ -92,10 +92,13 @@ if [ -z "$BUILD_DIR" ]; then
     BUILD_DIR='build'
 fi
 
-#Sets up the basic yocto environment
+# New machine definitions may need to be added to the expected location
+cp sources/meta-fsl-bsp-release/imx/meta-fsl-arm/conf/machine/* sources/meta-fsl-arm/conf/machine
+
+# Set up the basic yocto environment
 source $PROGNAME $BUILD_DIR
 
-# Points to the current directory since the last command changed the directory to $BUILD_DIR
+# Point to the current directory since the last command changed the directory to $BUILD_DIR
 BUILD_DIR=.
 
 if [ ! -e $BUILD_DIR/conf/local.conf ]; then
