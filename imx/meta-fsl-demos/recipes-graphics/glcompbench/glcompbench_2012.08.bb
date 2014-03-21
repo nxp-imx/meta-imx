@@ -3,11 +3,11 @@ DESCRIPTION = "A benchmark for GL(ES)2 based compositing operations"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
 
-DEPENDS += "virtual/egl virtual/libgl virtual/libgal-x11 virtual/egl virtual/libgles1 virtual/libgles2 "
+DEPENDS += "virtual/egl virtual/libgl virtual/egl virtual/libgles1 virtual/libgles2 virtual/libx11 "
 
 inherit pkgconfig waf
 
-SRC_URI = "https://launchpad.net/glcompbench/trunk/2012.08/+download/glcompbench-2012.08.tar.gz \
+SRC_URI = "https://launchpad.net/glcompbench/trunk/${PV}/+download/${BPN}-${PV}.tar.gz \
            file://glbench-compile-fix.patch"
 
 SRC_URI[md5sum] = "c939d9156fe940960098f38707fea827"
