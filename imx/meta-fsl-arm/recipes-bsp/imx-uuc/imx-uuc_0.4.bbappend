@@ -1,7 +1,8 @@
 SRC_URI = "${FSL_MIRROR}/imx-uuc-3.10.17-1.0.0.tar.gz \
            file://COPYING-Add-license-file.patch \
            file://sdimage.c-uu.c-update-license-header.patch \
-           file://Makefile-adapt-to-work-out-of-box-with-OE-Core.patch"
+           file://Makefile-adapt-to-work-out-of-box-with-OE-Core.patch \
+           file://linuxrc-Use-devtmpfs-and-general-cleanup.patch"
 
 S = "${WORKDIR}/${PN}-3.10.17-1.0.0"
 
