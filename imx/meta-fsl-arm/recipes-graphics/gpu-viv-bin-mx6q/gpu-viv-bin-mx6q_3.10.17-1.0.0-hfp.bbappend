@@ -1,5 +1,5 @@
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}}.bin;fsl-eula=true \
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://egl.pc \
            file://egl_x11.pc \
            file://glesv1_cm.pc \
