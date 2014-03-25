@@ -7,8 +7,7 @@ DEPENDS = "virtual/kernel"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-# FIXME: From source code inspection this is the 0.4 release
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
 S = "${WORKDIR}/${PN}-${PV}"
 
 SRC_URI[md5sum] = "4a82f106f85199c91a058ee54c127477"
