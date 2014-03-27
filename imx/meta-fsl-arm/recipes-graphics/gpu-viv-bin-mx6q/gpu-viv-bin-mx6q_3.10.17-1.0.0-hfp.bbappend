@@ -16,5 +16,5 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
 
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "275e62c587632876f95f858dd4f1b01e"
-SRC_URI[sha256sum] = "340095f18b12eeb70a46dc06d763940b1da06d3c5023b54afe0147d02d484a52"
+SRC_URI[md5sum] = "66a873a4bde6d6a383e3b1216f00bd0c"
+SRC_URI[sha256sum] = "95e3d5f90c707d17a7d489e6fb06bf48c4366a73b04247cdb68b8888bdc23dae"
