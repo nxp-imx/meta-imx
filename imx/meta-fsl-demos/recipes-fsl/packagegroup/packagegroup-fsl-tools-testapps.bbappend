@@ -14,7 +14,7 @@ RDEPENDS_${PN}-gstreamer += " \
 
 ALLOW_EMPTY_${PN}-fslcodec-testapps_mx6 = "1"
 
-RDEPENDS_${PN}-tools-testapps_mx6 = " \
+RDEPENDS_${PN}_mx6 = " \
     ${SOC_TOOLS_TESTAPPS} \
     ${@base_contains("MACHINE_GSTREAMER_PLUGIN", "gst-fsl-plugin", "gst-fsl-plugin-gplay", "", d)} \
     alsa-utils \
