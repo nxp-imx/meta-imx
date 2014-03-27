@@ -18,7 +18,6 @@ RDEPENDS_${PN}-tools-testapps_mx6 = " \
     ${SOC_TOOLS_TESTAPPS} \
     ${@base_contains("MACHINE_GSTREAMER_PLUGIN", "gst-fsl-plugin", "gst-fsl-plugin-gplay", "", d)} \
     alsa-utils \
-    alsa-tools \
     dosfstools \
     evtest \
     e2fsprogs-mke2fs \
@@ -41,6 +40,8 @@ RDEPENDS_${PN}-tools-testapps_mx6 = " \
     iw \
     can-utils \
 "
+# exclude it for poky master build error
+#    alsa-tools 
 
 SOC_TOOLS_TESTAPPS_mx6 += " \
     imx-kobs \
