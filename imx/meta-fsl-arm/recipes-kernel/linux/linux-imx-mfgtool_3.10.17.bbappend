@@ -14,7 +14,7 @@ do_configure_prepend() {
 # this is since build script can build multiple ways
 # and will overwrite previous builds
 
-do_deploy_append () {
+do_deploy () {
     install -d ${DEPLOY_DIR_IMAGE}
 
     install  arch/arm/boot/uImage ${DEPLOY_DIR_IMAGE}/uImage_mfgtool
