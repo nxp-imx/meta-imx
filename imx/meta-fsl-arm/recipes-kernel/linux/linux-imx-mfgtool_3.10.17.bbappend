@@ -4,6 +4,8 @@ SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=imx
 
 SRCREV = "${AUTOREV}"
 
+S = "${WORKDIR}/git"
+
 do_configure_prepend() {
     cp ${S}/arch/arm/configs/imx_v7_mfg_defconfig ${S}/.config
     cp ${S}/arch/arm/configs/imx_v7_mfg_defconfig ${S}/../defconfig
