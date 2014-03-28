@@ -1,3 +1,5 @@
+LICENSE = "MIT"
+
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=imx_3.10.17"
 
 SRCREV = "${AUTOREV}"
