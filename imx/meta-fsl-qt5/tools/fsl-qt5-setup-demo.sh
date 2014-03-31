@@ -35,7 +35,7 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-qt5 \"
 # Clone and check out meta-qt5 layer if does not exist
 if [ ! -d "../sources/meta-qt5" ]; then
     cd ../sources
-    git clone -b jansa/qt5-5.2.1 https://github.com/meta-qt5/meta-qt5.git
+    git clone -b master https://github.com/meta-qt5/meta-qt5.git
     cd $CWD
 fi
 
