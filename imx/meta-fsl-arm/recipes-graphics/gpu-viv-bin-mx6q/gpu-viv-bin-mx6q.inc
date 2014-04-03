@@ -123,6 +123,10 @@ do_install () {
     # The preference order, based in DISTRO_FEATURES, is x11, wayland, directfb and fb
     if [ "${USE_X11}" = "yes" ]; then
 #        cp -r ${S}/usr/lib/dri ${D}${libdir}
+####FIXME - dri not provided but many dependencies in other packages require it so copy a dummy version
+        install -d ${D}${libdir}/dri
+        cp ${D}${libdir}/libVIVANTE.so ${D}${libdir}/dri/vivante_dri.so
+
         backend=x11
 
         install -m 0644 ${WORKDIR}/egl_x11.pc ${D}${libdir}/pkgconfig/egl.pc
