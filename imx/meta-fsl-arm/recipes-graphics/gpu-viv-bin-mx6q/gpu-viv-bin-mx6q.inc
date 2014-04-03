@@ -114,6 +114,10 @@ do_install () {
     cp -axr ${S}/usr/include/* ${D}${includedir}
     cp -axr ${S}/opt ${D}
 
+### FIXME - disable CM and CL
+    rm ${D}/${libdir}/libGLES_CM*
+    rm ${D}/${libdir}/libGLES_CL*
+
     install -d ${D}${libdir}/pkgconfig
 
     # The preference order, based in DISTRO_FEATURES, is x11, wayland, directfb and fb
@@ -208,7 +212,7 @@ FILES_libgl-mx6-dbg = "${libdir}/.debug/libGL.${SOLIBS}"
 
 # libEGL needs to open libGLESv1.so
 INSANE_SKIP_libgles-mx6 += "dev-so"
-FILES_libgles-mx6 = "${libdir}/libGLESv1*${REALSOLIBS} ${libdir}/libGLESv1*${SOLIBS} ${libdir}/libGLES_*${SOLIBS}"
+FILES_libgles-mx6 = "${libdir}/libGLESv1*${REALSOLIBS} ${libdir}/libGLESv1*${SOLIBS} ${libdir}/libGLES_${REALSOLIBS}"
 FILES_libgles-mx6-dev = "${includedir}/GLES ${libdir}/libGLESv1*${SOLIBS} ${libdir}/libGLES_*${SOLIBSDEV} ${libdir}/pkgconfig/glesv1_cm.pc"
 FILES_libgles-mx6-dbg = "${libdir}/.debug/libGLESv1*${SOLIBS} ${libdir}/.debug/libGLES_*${SOLIBS}"
 
