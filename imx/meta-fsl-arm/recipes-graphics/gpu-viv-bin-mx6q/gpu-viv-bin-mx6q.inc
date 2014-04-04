@@ -153,7 +153,7 @@ do_install () {
             install -d ${D}/${sysconfdir}
             install -m 644 ${WORKDIR}/directfbrc ${D}/${sysconfdir}/directfbrc
 
-            cp -r ${S}/usr/lib/directfb-1.6-0 ${D}${libdir}
+            cp -r ${S}/usr/lib/directfb-1.7-1 ${D}${libdir}
             backend=dfb
         else
             # Regular framebuffer
