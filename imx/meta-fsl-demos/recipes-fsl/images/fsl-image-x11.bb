@@ -32,11 +32,9 @@ IMAGE_INSTALL += " \
     packagegroup-fsl-gstreamer-full \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
-    packagegroup-qt-in-use-demos \
     qt4-plugin-phonon-backend-gstreamer \
     qt4-demos \
     qt4-examples \
-    fsl-gui-extrafiles \
     gtkperf \
     "
 
