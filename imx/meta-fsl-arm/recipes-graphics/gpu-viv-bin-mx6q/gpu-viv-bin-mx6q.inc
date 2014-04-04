@@ -244,7 +244,7 @@ FILES_libvivante-mx6-dbg = "${libdir}/.debug/libVIVANTE${SOLIBS}"
 
 FILES_libvivante-dri-mx6 = "${libdir}/dri/vivante_dri.so"
 
-FILES_libvivante-dfb-mx6 = "${libdir}/directfb-1.6-0/gfxdrivers/libdirectfb_gal.so"
+FILES_libvivante-dfb-mx6 = "${libdir}/directfb-1.7-1/gfxdrivers/libdirectfb_gal.so"
 
 INSANE_SKIP_libwayland-viv-mx6 += "dev-so"
 FILES_libwayland-viv-mx6 =  "${libdir}/libwayland-viv${REALSOLIBS}  ${libdir}/libwayland-viv${SOLIBS}"
