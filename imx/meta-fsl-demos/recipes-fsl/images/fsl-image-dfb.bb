@@ -25,7 +25,6 @@ IMAGE_INSTALL += " \
     cpufrequtils \
     nano \
     packagegroup-fsl-tools-testapps \
-    packagegroup-fsl-tools-benchmark \
     "
 
 export IMAGE_BASENAME = "fsl-image-dfb"
