@@ -21,14 +21,13 @@ EXTRA_IMAGE_FEATURES += " \
 "
 
 SOC_IMAGE_INSTALL = ""
-SOC_IMAGE_INSTALL_mx6 = "gpu-viv-bin-mx6q gpu-viv-g2d fsl-gpu-sdk"
+SOC_IMAGE_INSTALL_mx6 = "gpu-viv-bin-mx6q gpu-viv-g2d"
 
 IMAGE_INSTALL += " \
     ${SOC_IMAGE_INSTALL} \
     cpufrequtils \
     nano \
     packagegroup-fsl-tools-testapps \
-    packagegroup-fsl-tools-benchmark \
     "
 
 export IMAGE_BASENAME = "fsl-image-fb"
