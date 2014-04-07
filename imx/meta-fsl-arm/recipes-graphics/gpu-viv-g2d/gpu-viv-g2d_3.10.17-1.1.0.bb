@@ -2,5 +2,11 @@
 
 require recipes-graphics/gpu-viv-g2d/gpu-viv-g2d.inc
 
-SRC_URI[md5sum] = "9b0e6f329538885c230a3e27b024da7a"
-SRC_URI[sha256sum] = "7027cb6a16a696a779b197f4dd5562634988d6c3c1095d9dc01c5672f7bc6006"
+LIC_FILES_CHKSUM = "file://usr/include/g2d.h;endline=7;md5=53b61e015f8e1c386057c5ba8b081d53"
+
+SRC_URI[md5sum] = "c54d31daca79e2af0283c0a3f460620c"
+SRC_URI[sha256sum] = "3109e5258e7d170222a3c537aa144de8fb6ec70034dbff88ca900aa1042f4f69"
+
+FILES_${PN} += " ${bindir}/gmem_info "
+FILES_${PN}-dbg += "$ {bindir}/.debug/gmem_info"
+FILES_${PN} += " ${libdir}/libg2d-viv${SOLIBS} "
