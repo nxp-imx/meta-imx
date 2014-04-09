@@ -1,0 +1,55 @@
+From 29650ad1df441131d9be4bb149d04287ac84b153 Mon Sep 17 00:00:00 2001
+From: Nicolas Dufresne <nicolas.dufresne@collabora.com>
+Date: Thu, 27 Mar 2014 18:53:53 -0400
+Subject: [PATCH] videodec: Don't use non-growable pool
+
+As we don't know how many output buffer we need to operate, we need to
+avoid pool that can't grow. Otherwise the pipeline may stall, waiting
+for buffers.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=726299
+---
+ ext/libav/gstavviddec.c | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
+
+diff --git a/ext/libav/gstavviddec.c b/ext/libav/gstavviddec.c
+index 6c9c0c9..6d5ccaf 100644
+--- a/ext/libav/gstavviddec.c
++++ b/ext/libav/gstavviddec.c
+@@ -1620,7 +1620,7 @@ gst_ffmpegviddec_decide_allocation (GstVideoDecoder * decoder, GstQuery * query)
+   GstBufferPool *pool;
+   guint size, min, max;
+   GstStructure *config;
+-  gboolean have_videometa, have_alignment;
++  gboolean have_videometa, have_alignment, update_pool;
+   GstAllocator *allocator = NULL;
+   GstAllocationParams params = { 0, 15, 0, 0, };
+ 
+@@ -1639,6 +1639,17 @@ gst_ffmpegviddec_decide_allocation (GstVideoDecoder * decoder, GstQuery * query)
+ 
+   gst_query_parse_nth_allocation_pool (query, 0, &pool, &size, &min, &max);
+ 
++  /* Don't use pool that can't grow, as we don't know how many buffer we'll
++   * need, otherwise we may stall */
++  if (max != 0) {
++    gst_object_unref (pool);
++    pool = gst_video_buffer_pool_new ();
++    gst_object_unref (allocator);
++    allocator = NULL;
++    max = 0;
++    update_pool = TRUE;
++  }
++
+   config = gst_buffer_pool_get_config (pool);
+   gst_buffer_pool_config_set_params (config, state->caps, size, min, max);
+   /* we are happy with the default allocator but we would like to have 16 bytes
+@@ -1726,6 +1737,9 @@ gst_ffmpegviddec_decide_allocation (GstVideoDecoder * decoder, GstQuery * query)
+   /* and store */
+   gst_buffer_pool_set_config (pool, config);
+ 
++  if (update_pool)
++    gst_query_set_nth_allocation_pool (query, 0, pool, size, min, max);
++
+   gst_object_unref (pool);
+   if (allocator)
+     gst_object_unref (allocator);
