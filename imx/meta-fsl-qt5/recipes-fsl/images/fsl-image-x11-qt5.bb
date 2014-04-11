@@ -35,6 +35,11 @@ IMAGE_INSTALL += " \
     qtbase-fonts \
     qtbase-plugins \
     qtbase-examples \
+    qtdeclarative \
+    qtdeclarative-plugins \
+    qtdeclarative-tools \
+    qtdeclarative-examples \
+    qtdeclarative-qmlplugins \
     cinematicexperience \
     "
 

@@ -1,6 +1,6 @@
 DESCRIPTION = "Freescale Image Frame Buffer Image QT5"
 
-require recipes-fsl/images/fsl-image-fb.bb
+require recipes-fsl/images/fsl-image-dfb.bb
 
 IMAGE_INSTALL += " \
     qtbase \
@@ -22,6 +22,6 @@ IMAGE_INSTALL += " \
     freetype \
 "
 
-export IMAGE_BASENAME = "fsl-image-fb-qt5"
+export IMAGE_BASENAME = "fsl-image-dfb-qt5"
 
 
