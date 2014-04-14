@@ -5,7 +5,8 @@ PACKAGES += " \
 "
 
 RDEPENDS_${PN}-fslcodec-testapps_mx6 += " \
-    libfslcodec-testapps \
+    libfslcodec-test-bin \
+    libfslcodec-test-source \
 "
 
 ALLOW_EMPTY_${PN}-fslcodec-testapps_mx6 = "1"
