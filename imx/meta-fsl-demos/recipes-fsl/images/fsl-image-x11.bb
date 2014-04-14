@@ -30,6 +30,7 @@ IMAGE_INSTALL += " \
     cpufrequtils \
     nano \
     packagegroup-fsl-gstreamer \
+    packagegroup-fsl-gstreamer1.0 \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
     qt4-plugin-phonon-backend-gstreamer \
