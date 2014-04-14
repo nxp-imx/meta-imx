@@ -1,9 +1,9 @@
 
-SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=imx_3.10.17"
+SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=imx_3.10.17_1.1.0_alpha"
 
 SRCREV = "${AUTOREV}"
 
-LOCALVERSION = "postGA"
+LOCALVERSION = "3.10.17-1.1.0"
 
 DEFAULT_PREFERENCE = "1"
 
