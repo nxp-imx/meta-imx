@@ -11,5 +11,10 @@ SRC_URI_append = " file://daemon.conf \
 do_install_append() {
     install -m 0644 ${WORKDIR}/daemon.conf ${D}${sysconfdir}/pulse/daemon.conf
     install -m 0644 ${WORKDIR}/default.pa ${D}${sysconfdir}/pulse/default.pa
+
+    #Fix me: Remove the kde desktop, because there are two destop in default
+    #        (pulseaudio-kde.destop, pulseaudio.destop), then the pulseaudio server
+    #        will be started twice, pulseaudio will have issue to switch to default input/output.
+    rm ${D}${sysconfdir}/xdg/autostart/pulseaudio-kde.desktop
 }
 
