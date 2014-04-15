@@ -15,6 +15,9 @@ do_install_append() {
     #Fix me: Remove the kde desktop, because there are two destop in default
     #        (pulseaudio-kde.destop, pulseaudio.destop), then the pulseaudio server
     #        will be started twice, pulseaudio will have issue to switch to default input/output.
-    rm ${D}${sysconfdir}/xdg/autostart/pulseaudio-kde.desktop
+    if [ -e ${D}${sysconfdir}/xdg/autostart/pulseaudio-kde.desktop ]
+    then
+        rm ${D}${sysconfdir}/xdg/autostart/pulseaudio-kde.desktop
+    fi
 }
 
