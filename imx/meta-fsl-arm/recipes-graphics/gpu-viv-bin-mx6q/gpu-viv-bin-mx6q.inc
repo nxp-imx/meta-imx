@@ -116,10 +116,7 @@ do_install () {
 
     # The preference order, based in DISTRO_FEATURES, is x11, wayland, directfb and fb
     if [ "${USE_X11}" = "yes" ]; then
-#        cp -r ${S}/usr/lib/dri ${D}${libdir}
-####FIXME - dri not provided but many dependencies in other packages require it so copy a dummy version
-        install -d ${D}${libdir}/dri
-        cp ${D}${libdir}/libVIVANTE.so ${D}${libdir}/dri/vivante_dri.so
+        cp -r ${S}/usr/lib/dri ${D}${libdir}
 
         backend=x11
 
