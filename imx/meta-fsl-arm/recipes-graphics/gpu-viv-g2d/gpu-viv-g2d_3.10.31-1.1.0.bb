@@ -2,7 +2,7 @@
 
 require recipes-graphics/gpu-viv-g2d/gpu-viv-g2d.inc
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}-alpha.tar.gz"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_alpha.bin;fsl-eula=true"
 S="${WORKDIR}/${PN}-${PV}_alpha"
 
 LIC_FILES_CHKSUM = "file://usr/include/g2d.h;endline=7;md5=53b61e015f8e1c386057c5ba8b081d53"
