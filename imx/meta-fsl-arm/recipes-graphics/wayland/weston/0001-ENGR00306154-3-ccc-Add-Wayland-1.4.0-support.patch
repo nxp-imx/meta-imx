@@ -1,0 +1,30 @@
+From ae0d4776691c7b6e53243f6e45f54aa4c3abcc86 Mon Sep 17 00:00:00 2001
+From: Yong Gan <b45748@freescale.com>
+Date: Thu, 10 Apr 2014 11:30:26 +0800
+Subject: [PATCH] ENGR00306154-3 [#ccc] Add Wayland 1.4.0 support
+
+Release wl_buffer in surface_state_destroy for GAL2D compositor.
+
+Date: Mar 31, 2014
+Signed-off-by Yong Gan <B45748@freescale.com>
+---
+ src/gal2d-renderer.c |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/gal2d-renderer.c b/src/gal2d-renderer.c
+index be7af3c..c651573 100644
+--- a/src/gal2d-renderer.c
++++ b/src/gal2d-renderer.c
+@@ -953,7 +953,8 @@ surface_state_destroy(struct gal2d_surface_state *gs, struct gal2d_renderer *gr)
+ 	wl_list_remove(&gs->renderer_destroy_listener.link);
+ 	if(gs->surface)
+ 		gs->surface->renderer_state = NULL;
+-    
++
++	weston_buffer_reference(&gs->buffer_ref, NULL);
+ 	free(gs);
+ }
+ 
+-- 
+1.7.9.5
+
