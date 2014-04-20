@@ -3,7 +3,7 @@
 
 require gpu-viv-bin-mx6q.inc
 
-SRC_URI = "${FSL_MIRROR}/${PN}-3.10.31-1.1.0-alpha-hfp.bin;fsl-eula=true \
+SRC_URI = "${FSL_MIRROR}/${PN}-3.10.31-1.1.0_alpha-hfp.bin;fsl-eula=true \
            file://egl.pc \
            file://egl_x11.pc \
            file://glesv1_cm.pc \
