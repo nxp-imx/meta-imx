@@ -4,7 +4,7 @@ DESCRIPTION = "Linux Kernel provided and supported by Freescale that produces a 
 Manufacturing Tool compatible Linux Kernel to be used in updater environment"
 
 require linux-imx_${PV}.bb
-require linux-mfgtool.inc
+require recipes-kernel/linux/linux-mfgtool.inc
 
 do_configure_prepend() {
     cp ${S}/arch/arm/configs/imx_v7_mfg_defconfig ${S}/.config
