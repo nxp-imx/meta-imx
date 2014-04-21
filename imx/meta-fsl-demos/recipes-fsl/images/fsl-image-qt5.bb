@@ -4,9 +4,9 @@ LICENSE = "MIT"
 require recipes-fsl/images/fsl-image-gui.bb
 
 IMAGE_INSTALL += " \
-    packagegroup-fsl-qt5-core \
-    packagegroup-fsl-qt5-qtdeclarative \
-    packagegroup-fsl-qt5-demos \
+    packagegroup-qt5-core \
+    packagegroup-qt5-qtdeclarative \
+    packagegroup-qt5-demos \
 "
 
 export IMAGE_BASENAME = "fsl-image-qt5"
