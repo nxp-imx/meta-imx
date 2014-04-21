@@ -1,14 +1,48 @@
-DESCRIPTION = "Freescale Image - determines the backend automatically"
-# X11 fails to build.  Wayland GUI not right
+DESCRIPTION = "Freescale Image"
 LICENSE = "MIT"
 
 inherit core-image
 
 IMAGE_FEATURES += " splash"
-IMAGE_FEATURES += "${@base_contains('DISTRO_FEATURES', 'x11', ' package-management x11-base', '', d)}"
-IMAGE_FEATURES += "${@base_contains('DISTRO_FEATURES', 'wayland', ' package-management', '', d)}"
+IMAGE_FEATURES += "${@base_contains('DISTRO_FEATURES', 'x11', ' package-management x11-base x11-sato hwcodecs', '', d)}"
+IMAGE_FEATURES += "${@base_contains('DISTRO_FEATURES', 'wayland', \
+                            base_contains('DISTRO_FEATURES', 'x11', '', ' package-management hwcodecs', d), \
+                            '', d)}"
+ 
 
 # require recipes-fsl/images/fsl-image-multimedia.bb
+
+SOC_TOOLS_GPU = ""
+SOC_TOOLS_GPU_mx5 = " \
+    ${@base_contains('DISTRO_FEATURES', 'x11', 'amd-gpu-x11-bin-mx51', 'amd-gpu-bin-mx51', d)} \
+    "
+
+SOC_TOOLS_GPU_mx6 = " \
+    gpu-viv-bin-mx6q \
+    gpu-viv-g2d \
+"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+# Backend-specific packages
+# Direct FB packages
+DFB_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'dfb', 
+    'packagegroup-core-full-cmdline packagegroup-core-directfb libvivante-dfb-mx6', '', d)}"
+
+# Wayland packages
+WAYLAND_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'wayland', \
+    base_contains('DISTRO_FEATURES', 'x11', '', \
+    ' weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', d),\
+    '', d)}"
+
+# X11 packages
+X11_IMAGE_INSTALL = ""
+X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
+    'gst-plugins-gl-meta packagegroup-fsl-pulseaudio', '', d)}"
+
+# Add in Graphics
+X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
+    'glmark2 glcompbench packagegroup-core-x11-sato-games gtkperf', '', d)}"
 
 # Add extra image features
 EXTRA_IMAGE_FEATURES += " \
@@ -16,23 +50,14 @@ EXTRA_IMAGE_FEATURES += " \
     tools-debug \
     tools-profile \
     ssh-server-dropbear \
-"
-
-SOC_TOOLS_GPU_mx6_remove = "fsl-gpu-sdk"
-
-# Backend-specific packages
-DFB_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'dfb', 'packagegroup-core-directfb libvivante-dfb-mx6', '', d)}"
-
-WAYLAND_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'wayland', 'weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', '', d)}"
-
-X11_IMAGE_INSTALL = ""
-X11_IMAGE_INSTALL_mx5 = "${@base_contains('DISTRO_FEATURES', 'x11', 'glcubes-demo', '', d)}"
-X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', 'gpu-viv-g2d glmark2 gst-plugins-gl-meta glcompbench packagegroup-fsl-pulseaudio', '', d)}"
+    "
 
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
+    ${X11_IMAGE_INSTALL_GRAPHICS} \
     ${DFB_IMAGE_INSTALL} \
     ${WAYLAND_IMAGE_INSTALL} \
+    ${SOC_TOOLS_GPU} \
     cpufrequtils \
     nano \
     packagegroup-fsl-tools-testapps \
@@ -40,6 +65,6 @@ IMAGE_INSTALL += " \
     packagegroup-fsl-tools-benchmark \
     "
 
-export IMAGE_BASENAME = "fsl-image"
+export IMAGE_BASENAME = "fsl-image-gui"
 
 
