@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2013 Freescale Semiconductor
+# Copyright (C) 2012-2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "Freescale Multimedia codec libs"
 LICENSE = "Proprietary"
@@ -10,18 +10,24 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 PACKAGES_DYNAMIC = "${PN}-*"
+INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-PACKAGES += "${PN}-meta ${PN}-testapps"
+
+PACKAGES += "${PN}-meta ${PN}-test-bin ${PN}-test-source"
 
 ALLOW_EMPTY_${PN} = "1"
 ALLOW_EMPTY_${PN}-meta = "1"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
-# Enable the jpeg decoder library version with VPU Hardware acceleration
-HAS_VPU = " --enable-vpu"
-HAS_VPU_mx28 = " --disable-vpu"
-EXTRA_OECONF += "${HAS_VPU}"
+
+# VPU Hardware acceleration
+VPU_SUPPORT = "--disable-vpu"
+VPU_SUPPORT_mx6 = "--enable-vpu"
+VPU_SUPPORT_mx6sl = "--disable-vpu"
+VPU_SUPPORT_mx6sx = "--disable-vpu"
+VPU_SUPPORT_mx5 = "--enable-vpu"
+EXTRA_OECONF += "${VPU_SUPPORT}"
 
 do_install_append() {
 	# FIXME: This link points to nowhere
@@ -45,14 +51,20 @@ python populate_packages_prepend() {
 
     # FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
     # the source we cannot fix it. Disable the insane check for now.
-    # FIXME: -testapps includes the DUT .so files so we need to deploy those
     for p in d.getVar('PACKAGES', True).split():
         d.setVar("DEBIAN_NOAUTONAME_%s" % p, "1")
-        d.setVar("INSANE_SKIP_%s" % p, "ldflags textrel libdir")
+
+        if p == 'libfslcodec-test-bin':
+            # FIXME: includes the DUT .so files so we need to deploy those
+            d.setVar("INSANE_SKIP_%s" % p, "ldflags textrel libdir")
+        else:
+            d.setVar("INSANE_SKIP_%s" % p, "ldflags textrel")
 
     # Allow addition of all codecs in a image; useful specially for
     # debugging.
     codec_pkgs = oe.utils.packages_filter_out_system(d)
+    codec_pkgs = filter(lambda x: x not in ['libfslcodec-test-bin', 'libfslcodec-test-source'],
+                        codec_pkgs)
     d.appendVar('RDEPENDS_libfslcodec-meta', ' ' + ' '.join(codec_pkgs))
 }
 
@@ -63,10 +75,13 @@ FILES_${PN}-dev += "${libdir}/imx-mm/*/*${SOLIBSDEV} \
                     ${libdir}/imx-mm/*/*/*${SOLIBSDEV} \
                     ${libdir}/pkgconfig/*.pc ${includedir}/imx-mm/*"
 
-# Add examples to PACKAGE -testapps
-FILES_${PN}-testapps += "${datadir}/imx-mm/*"
+FILES_${PN}-test-bin += "${datadir}/imx-mm/*/examples/*/bin"
+
+FILES_${PN}-test-source += "${datadir}/imx-mm/*"
 
 # FIXME: The wrap and lib names does not match
 FILES_${PN}-oggvorbis += "${libdir}/imx-mm/audio-codec/wrap/lib_vorbisd_wrap_arm*_elinux.so.*"
+FILES_${PN}-nb += "${libdir}/imx-mm/audio-codec/wrap/lib_nbamrd_wrap_arm*_elinux.so.*"
+FILES_${PN}-wb += "${libdir}/imx-mm/audio-codec/wrap/lib_wbamrd_wrap_arm*_elinux.so.*"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
