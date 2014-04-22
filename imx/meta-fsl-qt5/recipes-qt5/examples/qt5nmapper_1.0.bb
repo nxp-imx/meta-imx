@@ -11,6 +11,9 @@ SRC_URI[sha256sum] = "607fbf4c448f00d3c563f9ef8a582bcb6e8fe550e80b56bf8d9127a417
 
 S = "${WORKDIR}/Qt5_NMapper_1.0"
 
+DEPENDS = "qtdeclarative qtgraphicaleffects"
+RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
+
 require recipes-qt/qt5/qt5.inc
 
 do_install() {
