@@ -11,6 +11,9 @@ SRC_URI[sha256sum] = "fa4759b70a5fa148a901a3f9a659f7bd2503d73774022012bded880dff
 
 S = "${WORKDIR}/ledscreen_1.0"
 
+DEPENDS = "qtdeclarative qtgraphicaleffects"
+RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
+
 #require recipes-qt/qt5/qt5.inc
 
 do_install() {
