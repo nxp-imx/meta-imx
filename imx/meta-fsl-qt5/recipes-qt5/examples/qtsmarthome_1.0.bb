@@ -14,6 +14,9 @@ SRC_URI[sha256sum] = "fceaa813c33e462bad6c0383eaef81a6f6e586c15d1fa73898173b517f
 
 S = "${WORKDIR}/smarthome_src"
 
+DEPENDS = "qtdeclarative qtgraphicaleffects"
+RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
+
 require recipes-qt/qt5/qt5.inc
 
 do_install() {

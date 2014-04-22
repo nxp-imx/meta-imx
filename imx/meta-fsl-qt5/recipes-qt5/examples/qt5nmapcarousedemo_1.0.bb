@@ -13,6 +13,9 @@ SRC_URI[sha256sum] = "445da212074a10a432f4508d125814212bbe7a967bfa47b015b92dfac6
 
 S = "${WORKDIR}/Qt5_NMap_CarouselDemo_1.0"
 
+DEPENDS = "qtdeclarative qtgraphicaleffects"
+RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
+
 require recipes-qt/qt5/qt5.inc
 
 do_install() {

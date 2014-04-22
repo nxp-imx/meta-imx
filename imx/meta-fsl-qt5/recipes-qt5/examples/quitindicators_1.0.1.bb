@@ -11,6 +11,9 @@ SRC_URI[sha256sum] = "db84112adbde9b6f28c129e8fb37a6912f4bc34bed18e57f570fb78ea0
 
 S = "${WORKDIR}/QUItIndicators_1.0.1"
 
+DEPENDS = "qtdeclarative qtgraphicaleffects"
+RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
+
 require recipes-qt/qt5/qt5.inc
 
 do_install() {

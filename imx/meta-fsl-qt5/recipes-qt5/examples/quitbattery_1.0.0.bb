@@ -11,6 +11,9 @@ SRC_URI[sha256sum] = "38dcb7630553c397f9d8a53c6411b1a6237956ed8dd4859e01487b1dd8
 
 S = "${WORKDIR}/QUItBattery_1.0.0"
 
+DEPENDS = "qtdeclarative qtgraphicaleffects"
+RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
+
 require recipes-qt/qt5/qt5.inc
 
 do_install() {
