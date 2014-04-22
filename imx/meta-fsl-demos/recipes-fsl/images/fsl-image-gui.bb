@@ -2,16 +2,15 @@ DESCRIPTION = "Freescale Image"
 LICENSE = "MIT"
 
 inherit core-image
+# require recipes-fsl/images/fsl-image-multimedia.bb
 
 IMAGE_FEATURES += " splash"
-IMAGE_FEATURES += "${@base_contains('DISTRO_FEATURES', 'x11', ' package-management x11-base x11-sato hwcodecs', '', d)}"
+IMAGE_FEATURES += "${@base_contains('DISTRO_FEATURES', 'x11', \
+                            ' package-management x11-base x11-sato hwcodecs', '', d)}"
 IMAGE_FEATURES += "${@base_contains('DISTRO_FEATURES', 'wayland', \
                             base_contains('DISTRO_FEATURES', 'x11', '', ' package-management hwcodecs', d), \
                             '', d)}"
  
-
-# require recipes-fsl/images/fsl-image-multimedia.bb
-
 SOC_TOOLS_GPU = ""
 SOC_TOOLS_GPU_mx5 = " \
     ${@base_contains('DISTRO_FEATURES', 'x11', 'amd-gpu-x11-bin-mx51', 'amd-gpu-bin-mx51', d)} \
@@ -44,8 +43,12 @@ X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'glmark2 glcompbench packagegroup-core-x11-sato-games gtkperf', '', d)}"
 
+X11_EXTRA_IMAGE_FEATURES ?= "${@base_contains('DISTRO_FEATURES', 'x11', \
+    ' tools-testapps', '', d)}"
+
 # Add extra image features
 EXTRA_IMAGE_FEATURES += " \
+    ${X11_EXTRA_IMAGE_FEATURES} \
     nfs-server \
     tools-debug \
     tools-profile \
@@ -60,10 +63,16 @@ IMAGE_INSTALL += " \
     ${SOC_TOOLS_GPU} \
     cpufrequtils \
     nano \
-    packagegroup-fsl-tools-testapps \
+    packagegroup-fsl-gstreamer \
     packagegroup-fsl-gstreamer1.0 \
+    packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
     "
+
+#pull this out of package group since v4l-utils now is x11 dependent
+# and breaks non-x11 builds
+RDEPENDS_${PN}-tools-testapps += "${@base_contains('DISTRO_FEATURES', 'x11', \
+    ' v4l-utils ', '', d)}"
 
 export IMAGE_BASENAME = "fsl-image-gui"
 
