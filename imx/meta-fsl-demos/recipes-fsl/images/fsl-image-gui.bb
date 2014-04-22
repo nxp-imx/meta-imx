@@ -11,6 +11,18 @@ IMAGE_FEATURES += "${@base_contains('DISTRO_FEATURES', 'wayland', \
                             base_contains('DISTRO_FEATURES', 'x11', '', ' package-management hwcodecs', d), \
                             '', d)}"
  
+X11_EXTRA_IMAGE_FEATURES ?= "${@base_contains('DISTRO_FEATURES', 'x11', \
+    ' tools-testapps', '', d)}"
+
+# Add extra image features
+EXTRA_IMAGE_FEATURES += " \
+    ${X11_EXTRA_IMAGE_FEATURES} \
+    nfs-server \
+    tools-debug \
+    tools-profile \
+    ssh-server-dropbear \
+    "
+
 SOC_TOOLS_GPU = ""
 SOC_TOOLS_GPU_mx5 = " \
     ${@base_contains('DISTRO_FEATURES', 'x11', 'amd-gpu-x11-bin-mx51', 'amd-gpu-bin-mx51', d)} \
@@ -41,19 +53,11 @@ X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
 
 # Add in Graphics
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
-    'glmark2 glcompbench packagegroup-core-x11-sato-games gtkperf', '', d)}"
-
-X11_EXTRA_IMAGE_FEATURES ?= "${@base_contains('DISTRO_FEATURES', 'x11', \
-    ' tools-testapps', '', d)}"
-
-# Add extra image features
-EXTRA_IMAGE_FEATURES += " \
-    ${X11_EXTRA_IMAGE_FEATURES} \
-    nfs-server \
-    tools-debug \
-    tools-profile \
-    ssh-server-dropbear \
-    "
+    'glmark2 \
+    glcompbench \
+    packagegroup-fsl-gstreamer \
+    packagegroup-core-x11-sato-games \
+    gtkperf', '', d)}"
 
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
@@ -63,7 +67,6 @@ IMAGE_INSTALL += " \
     ${SOC_TOOLS_GPU} \
     cpufrequtils \
     nano \
-    packagegroup-fsl-gstreamer \
     packagegroup-fsl-gstreamer1.0 \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
