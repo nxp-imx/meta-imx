@@ -60,14 +60,13 @@ do
         e)
             BACKEND="$OPTARG"
             unset DIST_FEATURES_add
-            unset DIST_FEATURES_remove
             if [ "$BACKEND" = "fb" ]; then
                 DIST_FEATURES_remove="x11 wayland directfb "
-                 echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
+                echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "dfb" ]; then
                 DIST_FEATURES_remove="x11 wayland "
                 DIST_FEATURES_add=" directfb "
-                 echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
+                echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
             elif [ "$BACKEND" = "wayland" ]; then
                 DIST_FEATURES_remove="x11 directfb "
             elif [ "$BACKEND" = "x11" ]; then
