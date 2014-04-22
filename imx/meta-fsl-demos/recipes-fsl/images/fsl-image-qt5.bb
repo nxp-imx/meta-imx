@@ -8,6 +8,7 @@ IMAGE_INSTALL += " \
     packagegroup-qt5-qtdeclarative \
     packagegroup-qt5-qtdeclarative-qml \
     packagegroup-qt5-demos \
+    libxkbcommon \
 "
 
 export IMAGE_BASENAME = "fsl-image-qt5"
