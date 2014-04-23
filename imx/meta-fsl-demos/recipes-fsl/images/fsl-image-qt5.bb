@@ -15,6 +15,7 @@ IMAGE_INSTALL += " \
     packagegroup-qt5-qtdeclarative \
     packagegroup-qt5-qtdeclarative-qml \
     packagegroup-qt5-demos \
+    packagegroup-qt5-webkit \
     ${X11_IMAGE_INSTALL} \
     "
 
