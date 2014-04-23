@@ -1,4 +1,4 @@
-# Copyright (C) 2013-14 Freescale Semiconductor
+# Copyright (C) 2014 Freescale Semiconductor
 
 # This parser requires special licensing with Freescale marketing
 DESCRIPTION = "Microsoft ASF parser library"
@@ -14,15 +14,15 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "18a5e1c9832e8dbb4ddcd5e451c63ed3"
-SRC_URI[sha256sum] = "e7cbd27da1c9fbbf3f9a0af0df96c2fb925694948742bf92045c214474e98725"
+SRC_URI[md5sum] = "fb0c967a5090c9c78c28b84afe27093e"
+SRC_URI[sha256sum] = "4d878dc885a90a29f983ecc17ca23a7fb3c12ce0b603b96e1546ba4a2a041f9e"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '--enable-fsw', d)}"
 
 # FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
 # the source we cannot fix it. Disable the insane check for now.
-INSANE_SKIP_${PN} = "ldflags textrel"
+INSANE_SKIP_${PN} = "ldflags textrel already-stripped"
 INSANE_SKIP_${PN}-dev = "ldflags"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 

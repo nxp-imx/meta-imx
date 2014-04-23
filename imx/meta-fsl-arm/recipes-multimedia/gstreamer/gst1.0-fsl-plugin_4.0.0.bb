@@ -1,4 +1,4 @@
-# Copyright (C) 2013-14 Freescale Semiconductor
+# Copyright (C) 2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require gst1.0-fsl-plugin.inc
@@ -8,7 +8,7 @@ EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 SRC_URI = "${FSL_MIRROR}/gst1.0-fsl-plugins-${PV}.tar.gz"
 S = "${WORKDIR}/gst1.0-fsl-plugins-${PV}"
 
-SRC_URI[md5sum] = "079cd90b23e2d6cac702ba3cb8d26b54"
-SRC_URI[sha256sum] = "2043b78e9888c4cb33e6616f2f1add7e8747a727317bcdf891050744d178afe2"
+SRC_URI[md5sum] = "9f716217e271d69d109a51f16e736825"
+SRC_URI[sha256sum] = "24eaf51c45fab01e4f01618d270885affa474fb7dc6fb87a4cc8b99cea1d738b"
 
 COMPATIBLE_MACHINE = "(mx6)"
