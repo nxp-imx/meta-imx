@@ -60,6 +60,7 @@ do
         e)
             BACKEND="$OPTARG"
             unset DIST_FEATURES_add
+            unset DIST_FEATURES_remove
             if [ "$BACKEND" = "fb" ]; then
                 DIST_FEATURES_remove="x11 wayland directfb "
                 echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
