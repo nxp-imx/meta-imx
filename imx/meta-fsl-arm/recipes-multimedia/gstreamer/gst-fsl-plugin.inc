@@ -23,6 +23,7 @@ inherit autotools pkgconfig
 PLATFORM_mx5 = "MX51"
 PLATFORM_mx6 = "MX6"
 PLATFORM_mx6sl = "MX6SL"
+PLATFORM_mx6sx = "MX6SX"
 PLATFORM_mx28 = "MX28"
 
 # Todo add a mechanism to map posible build targets
