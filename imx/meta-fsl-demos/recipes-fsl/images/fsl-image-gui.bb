@@ -67,6 +67,7 @@ IMAGE_INSTALL += " \
     ${SOC_TOOLS_GPU} \
     cpufrequtils \
     nano \
+    ntp \
     packagegroup-fsl-gstreamer1.0 \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
