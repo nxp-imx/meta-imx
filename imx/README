@@ -40,19 +40,8 @@ This BSP is a Freescale release providing support for the following processors
 
 Quick Start Guide
 -----------------
-First install the Freescale Community BSP
-$: repo init -u http://github.com/Freescale/fsl-community-bsp-platform -b dora
-
-Copy the fsl-yocto-release-manifest.xml over the community manifest using the following instructions.
-The fsl-yocto-release-manifest.xml is provided in the Freescale Yocto Release package for 3.10.17-1.0.0
-
-$: cp fsl-yocto-release-manifest.xml .repo
-$: cd .repo
-$: cp manifest.xml manifest-community.xml
-$: rm manifest.xml
-$: cp fsl-yocto-release-manifest.xml manifest.xml
-$: cd ..
-
+First install the i.MX Freescale BSP repo
+$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.10.17-1.0.0_ga
 
 Download the Yocto Freescale Layers
 $: repo sync
@@ -63,12 +52,8 @@ This is required for community setup to find the new machine configurations prov
 $: cp -r sources/meta-fsl-bsp-release/imx/meta-fsl-arm/conf/machine sources/meta-fsl-arm/conf
 
 
-Run Yocto Community Setup
-$: MACHINE=< machine name> source setup-environment <build directory>
-$: cd ..
-
-Run 3.10.17-1.0.0 Release Layer setup
-$: source fsl-setup-release.sh -b <build directory>  -e <backend fb, dfb or wayland>
+Run i.MX Yocto Project Setup
+$: MACHINE=< machine name> source fsl-setup-release.sh -b <build directory> -e <backend fb, dfb, wayland, x11>
 
 This will sync in the layer and update local.conf and bblayer.conf in build directory.
 
@@ -163,24 +148,14 @@ export LD_PRELOAD=/usr/lib/libGAL.so:/usr/lib/libEGL.so:/usr/lib/libGLSLC.so:/us
 - Start the Chromium browser
 $google-chrome --use-gl=egl 
 
+QTWebkit
+--------
+To start go to /usr/share/qt5/examples/webkitwidgets/browser and run browser
+
 
 QT5
 ---
-The meta-fsl-qt5 layer is not enabled for default builds.    The layer demonstrates changes needed for QT5 5.2.1 to work on the dora branch.
-This layer will not work on the master branch.
+Two image recipes are provided
+fsl-image-gui is a non QT5 recipe that works on all backends - x11, directfb, frame buffer and wayland
+fsl-image-qt5 is a QT5 image recipe that works on x11, frame buffer and wayland.
 
-To integrate meta-fsl-qt5, from the build directory run the fsl-qt5-demo.sh
-../sources/meta-fsl-bsp-release/imx/meta-fsl-qt5/tools/fsl-qt5-setup-demo.sh
-
-This will donwload the meta-qt5 layer, checkout the 5.2.1 branch and add qt5 to the distro features.  The meta-fsl-qt5 layer provides
-new image recipes for x11, wayland, fb and directfb.   Examples provided with the image recipes is the Cinematic Experience.  Each backend requires
-a different set of parameters.  Below are the parameters for QT5  Cinematic Experience.
-
--- Frame buffer
-Qt5_CinematicExperience -platform eglfs -plugin evdevtouch:/dev/input/event0
-
----Wayland
-Qt5_CinematicExperience -platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
-
---- X11
-Qt5_CinematicExperience -platform xcb -plugin evdevtouch:/dev/input/event0
