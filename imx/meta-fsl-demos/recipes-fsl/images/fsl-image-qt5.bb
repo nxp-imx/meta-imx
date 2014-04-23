@@ -10,6 +10,10 @@ CONFLICT_DISTRO_FEATURES = "directfb"
 X11_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'libxkbcommon', '', d)}"
 
+WLD_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'wayland', \
+    'qtwayland \
+     qtwayland-plugins', '', d)}"
+
 IMAGE_INSTALL += " \
     packagegroup-qt5-core \
     packagegroup-qt5-qtdeclarative \
@@ -17,6 +21,7 @@ IMAGE_INSTALL += " \
     packagegroup-qt5-demos \
     packagegroup-qt5-webkit \
     ${X11_IMAGE_INSTALL} \
+    ${WLD_IMAGE_INSTALL} \
     "
 
 export IMAGE_BASENAME = "fsl-image-qt5"
