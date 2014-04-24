@@ -7,11 +7,13 @@ DEPENDS += "virtual/kernel xf86-video-imxfb-vivante"
 
 LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=641ac6e6d013833e36290797f4d7089c"
 
-SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}.tar.gz"
-S="${WORKDIR}/xserver-xorg-video-imx-viv-${PV}/"
+SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}_alpha.tar.gz \
+            file://rc.local.etc"
 
-SRC_URI[md5sum] = "f494f8862a016cba315795b061a338ea"
-SRC_URI[sha256sum] = "5470308eaabedb5585bbf02e4117a421ec8e8951e4033e9e1afa387937b3a5f9"
+S="${WORKDIR}/xserver-xorg-video-imx-viv-${PV}_alpha/"
+
+SRC_URI[md5sum] = "e2a952f99affc77204ddc2c307d668e1"
+SRC_URI[sha256sum] = "bbd4aca864d290fa37f40325b68fc294c168d4d5574e3746671f9234621cff58"
 
 inherit autotools pkgconfig
 
@@ -20,7 +22,6 @@ EXTRA_OEMAKE += "-f makefile.linux prefix=${D}/usr \
                  BUSID_HAS_NUMBER=1 \
                  BUILD_IN_YOCTO=1 \
                  XSERVER_GREATER_THAN_13=1"
-
 
 CFLAGS += "-I${STAGING_INCDIR}/xorg \
            -I${STAGING_INCDIR}/drm \
@@ -48,8 +49,11 @@ do_compile () {
     oe_runmake
 }
 
-
 do_install () {
+
+    install -d ${D}/${sysconfdir}/init.d
+    install -m 755 ${WORKDIR}/rc.local.etc ${D}/${sysconfdir}/rc.local.hdmi
+
     install -d ${D}${libdir}
     cp -axr ${S}/FslExt/src/libfsl_x11_ext.so ${D}${libdir}
 
@@ -67,9 +71,7 @@ RDEPENDS_${PN} += "libvivante-dri-mx6 \
 REALSOLIBS := "${SOLIBS}"
 SOLIBS = "${SOLIBSDEV}"
 
-FILES_${PN} = " ${libdir}/libfsl_x11_ext${SOLIBS} ${exec_prefix}/sbin/autohdmi "
-#FILES_${PN}-dbg = "${libdir}/.debug/ "
-#FILES_${PN}-dbg += "${exec_prefix}/sbin/.debug/"
+FILES_${PN} = " ${libdir}/libfsl_x11_ext${SOLIBS} ${exec_prefix}/sbin/autohdmi ${sysconfdir}/init.d ${sysconfdir}/rc.local.hdmi"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx6)"
