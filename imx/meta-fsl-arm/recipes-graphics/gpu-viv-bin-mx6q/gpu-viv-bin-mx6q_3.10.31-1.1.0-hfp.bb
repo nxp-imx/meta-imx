@@ -20,7 +20,7 @@ SRC_URI = "${FSL_MIRROR}/${PN}-3.10.31-1.1.0_alpha-hfp.bin;fsl-eula=true \
 
 S="${WORKDIR}/${PN}-3.10.31-1.1.0_alpha-hfp"
 
-SRC_URI[md5sum] = "d2d134307a892de46f245c898ccf3a4b"
-SRC_URI[sha256sum] = "06afa1bb29be698b44a02193b2fb2d543f9065c064e3a47cdc7eb99236106edb"
+SRC_URI[md5sum] = "01b77f83acdc085d55bc18a2d304b5e1"
+SRC_URI[sha256sum] = "ad4e44d58240d78cec9b806526c0b62a3293e8550c1c6548fd63ec9dc1754917"
 
 PACKAGE_FP_TYPE = "hardfp"
