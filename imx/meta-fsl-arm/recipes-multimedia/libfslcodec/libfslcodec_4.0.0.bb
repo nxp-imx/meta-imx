@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Freescale Semiconductor
+# Copyright (C) 2013, 2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require libfslcodec.inc
