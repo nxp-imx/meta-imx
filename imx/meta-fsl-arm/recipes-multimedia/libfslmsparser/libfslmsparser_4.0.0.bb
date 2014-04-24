@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Freescale Semiconductor
+# Copyright (C) 2013, 2014 Freescale Semiconductor
 
 # This parser requires special licensing with Freescale marketing
 DESCRIPTION = "Microsoft ASF parser library"
