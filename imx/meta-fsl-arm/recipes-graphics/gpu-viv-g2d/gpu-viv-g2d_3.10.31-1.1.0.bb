@@ -11,5 +11,5 @@ SRC_URI[md5sum] = "fbddfdff930644b521300ab870f50668"
 SRC_URI[sha256sum] = "12322d60ca7ef41a490c314902c15d76e3a9f905044c0320da2bc9ddc22d3998"
 
 FILES_${PN} += " ${bindir}/gmem_info "
-FILES_libg2d =  "${libdir}/libg2d-viv.so ${libdir}/libg2d${SOLIBS}"
+FILES_libg2d =  "${libdir}/libg2d-viv${SOLIBS} ${libdir}/libg2d${SOLIBS}"
 FILES_${PN}-dbg += "$ {bindir}/.debug/gmem_info"
