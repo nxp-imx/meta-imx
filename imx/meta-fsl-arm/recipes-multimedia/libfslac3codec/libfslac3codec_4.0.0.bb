@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Freescale Semiconductor
+# Copyright (C) 2013, 2014 Freescale Semiconductor
 
 # Note this codec requires special licensing through Freescale marketing
 DESCRIPTION = "This package provides AC3 decoder library"
@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "0591da5cd51924aaadc55266042eec7f"
-SRC_URI[sha256sum] = "91978b7a11d74339c98a24bdceb03eb2e15d0a9967a2230680b33247518ccfc1"
+SRC_URI[md5sum] = "0ba46913cdd250070713f69db18b872a"
+SRC_URI[sha256sum] = "1d78820af9430e79e7035b823ec0d60bd4ffdfae1dd036c539d35dbe16b7a491"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
@@ -23,7 +23,6 @@ EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--
 do_install_append() {
     # LTIB move the files around or gst-fsl-plugin won't find them
     mv $p ${D}${libdir}/imx-mm/audio-codec/*.so* ${D}${libdir}
-
 }
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
