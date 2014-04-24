@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Freescale Semiconductor
+# Copyright (C) 2013,2014 Freescale Semiconductor
 
 # Note this codec requires special licensing through Freescale marketing
 DESCRIPTION = "This package provides DDPlus decoder library"
@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "f8cad7396332f9e7c9f24aa91aa8f879"
-SRC_URI[sha256sum] = "3cdbc787685e471b32623d9cd72d433ec9076492c5e9f81f2dc72478440fade7"
+SRC_URI[md5sum] = "fe8393571c7d630ba68d56bf035f18d8"
+SRC_URI[sha256sum] = "63ce490cb7a5e6a7c80d5ab1074e307959c4290b2717a69f1bfcebad892a92c7"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
@@ -23,7 +23,6 @@ EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--
 do_install_append() {
     # LTIB move the files around or gst-fsl-plugin won't find them
     mv $p ${D}${libdir}/imx-mm/audio-codec/*.so* ${D}${libdir}
-
 }
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
