@@ -55,6 +55,7 @@ X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'glmark2 \
     glcompbench \
+    xserver-xorg-extension-viv-hdmi \
     packagegroup-fsl-gstreamer \
     packagegroup-core-x11-sato-games \
     gtkperf', '', d)}"
