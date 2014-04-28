@@ -9,7 +9,7 @@ then
   then
         rm -f $FILEVG
   fi
-  if [ $CPUREV == "i.MX6DL" ]
+  if [ $CPUREV == "i.MX6DL" ] || [ $CPUREV == "i.MX6SX" ]
   then
         ln -s $FILEVG3D $FILEVG
   fi
