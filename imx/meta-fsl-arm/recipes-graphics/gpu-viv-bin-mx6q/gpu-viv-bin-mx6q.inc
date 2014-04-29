@@ -178,7 +178,7 @@ do_install () {
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so.2
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 
-    for backend in wl x11 fb dfb; do
+    for backend in wl x11 fb dfb dri; do
         find ${D}${libdir} -name "*-$backend.so" -exec rm '{}' ';'
         find ${D}${libdir} -name "*.$backend.so" -exec rm '{}' ';'
     done
