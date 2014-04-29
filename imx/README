@@ -1,7 +1,12 @@
-Freescale's 3.10.17-1.0.0 Yocto BSP
+Freescale's 3.10.31-1.1.0 Alpha Yocto BSP
 ==================================
 
 This BSP is a Freescale release providing support for the following processors
+
+   * Freescale i.MXSX SABRE Smart Device (imx6sxsabresd)
+   * Freescale i.MXSX 17x17 arm2 (imx6sx17x17arm2)
+   * Freescale i.MXSX 19x19 ddr3 arm2 (imx6sx19x19ddr3arm2)
+   * Freescale i.MXSX 19x19 lpddr arm2 (imx6sx19x19lpddrarm2)
 
    * Freescale i.MX6Q SABRE Smart Device (imx6qsabresd)
    * Freescale i.MX6Q SABRE Auto (imx6qsabreauto)
@@ -11,95 +16,94 @@ This BSP is a Freescale release providing support for the following processors
    * Freescale i.MX6SOLO SABRE Auto (imx6solosabreauto )
    * Freescale i.MX6 Solo Lite EVK (imx6slevk)
 
- * i.MX6 U-boot options based on 2013.04 u-boot
-   * Freescale i.MX6SOLO SABRE Auto SPI-NOR (imx6solosabreauto-spi-nor )
-   * Freescale i.MX6SOLO SABRE Auto NAND (imx6solosabreauto-nand )
-   * Freescale i.MX6SOLO SABRE Auto EIM-NOR (imx6solosabreauto-eim-nor )
-   * Freescale i.MX6DL SABRE Auto SPI-NOR (imx6dlsabreauto-spi-nor)
-   * Freescale i.MX6DL SABRE Auto NAND (imx6dlsabreauto-nand)
-   * Freescale i.MX6DL SABRE Auto EIM-NOR (imx6dlsabreauto-eim-nor)
-   * Freescale i.MX6Q SABRE Auto SPI-NOR (imx6qsabreauto-spi-nor)
-   * Freescale i.MX6Q SABRE Auto NAND (imx6qsabreauto-nand-nor)
-   * Freescale i.MX6Q SABRE Auto EIM-NOR (imx6qsabreauto-eim-nor)
-   * Freescale i.MX6Q SABRE SD SATA (imx6qsabresd-sata)
-   * Freescale i.MX6Q SABRE Auto SATA (imx6qsabreauto-sata)
+ * i.MX6 Device Tree configurations for each machine
+    imx6sxsabresd - imx6sx-sdb.dtb imx6sx-sdb-emmc.dtb imx6sx-sdb-m4.dtb
+    imx6sx17x17arm2 - imx6sx-17x17-arm2.dtb imx6sx-17x17-arm2-mlb.dtb imx6sx-17x17-arm2-sai.dtb imx6sx-17x17-arm2-spdif.dtb imx6sx-17x17-arm2-ssi.dtb
+    imx6sx19x19ddr3arm2 - imx6sx-19x19-arm2.dtb imx6sx-19x19-arm2-lcdif1.dtb imx6sx-19x19-arm2-sai.dtb
+    imx6sx19x19lpddr2arm2 - imx6sx-19x19-arm2.dtb imx6sx-19x19-arm2-lcdif1.dtb imx6sx-19x19-arm2-sai.dtb
 
- * i.MX6 new Device Tree configurations
-   * imx6q-sabresd-ldo.dtb
-   * imx6dl-sabresd-ldo.dtb
-   * imx6q-sabresd-hdcp.dtb
-   * imx6dl-sabresd-hdcp.dtb
-   * imx6q-sabreauto-ecspi.dtb
-   * imx6dl-sabreauto-ecspi.dtb
-   * imx6q-sabreauto-gpmi-weim.dtb
-   * imx6dl-sabreauto-gpmi-weim.dtb
-   * imx6sl-evk-ldo.dtb
-   * imx6sl-evk-csi.dtb
-   * imx6q-sabreauto-flexcan1.dtb
-   * imx6dl-sabreauto-flexcan1.dtb
+    imx6qsabresd - imx6q-sabresd.dtb imx6q-sabresd-ldo.dtb imx6q-sabresd-hdcp.dtb
+    imx6qsabreauto - imx6q-sabreauto.dtb imx6q-sabreauto-gpmi-weim.dtb imx6q-sabreauto-ecspi.dtb
+    imx6dlsabresd - imx6dl-sabresd.dtb imx6dl-sabresd-ldo.dtb imx6dl-sabresd-hdcp.dtb
+    imx6dlsabreauto - imx6dl-sabreauto.dtb imx6dl-sabreauto-gpmi-weim.dtb imx6dl-sabreauto-ecspi.dtb
+    imx6solosabresd -imx6dl-sabresd.dtb imx6dl-sabresd-ldo.dtb
+    imx6solosabreauto - imx6dl-sabreauto.dtb
+    imx6slevk - imx6sl-evk.dtb imx6sl-evk-csi.dtb imx6sl-evk-ldo.dtb
+
+ * i.MX6 Uboot configurations for each machine
+    imx6sxsabresd - sd, qspi2, m4fastup
+    imx6sx17x17arm2 - sd, qspi2, spinor, nand
+    imx6sx19x19ddr3arm2 - sd, qspi2, eimnor
+    imx6sx19x19lpddr2arm2 - sd, qspi2
+ 
+    imx6qsabresd - sd, sata
+    imx6qsabreauto - sd, eimnor, spinor, nand, sata
+    imx6dlsabresd - sd
+    imx6dlsabreauto - sd, eimnor, spinor, nand
+    imx6solosabresd - sd
+    imx6solosabreauto - sd, eimnor, spinor, snand
+    imx6slevk - sd, spinor
 
 Quick Start Guide
 -----------------
 First install the i.MX Freescale BSP repo
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.10.17-1.0.0_ga
+$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.10.31-1.1.0_alpha
 
 Download the Yocto Freescale Layers
 $: repo sync
 
-Copy the new machine configuration files from meta-fsl-bsp-release into meta-fsl-arm
-This is required for community setup to find the new machine configurations provided in 3.10.17-1.0.0
-
-$: cp -r sources/meta-fsl-bsp-release/imx/meta-fsl-arm/conf/machine sources/meta-fsl-arm/conf
-
-
-Run i.MX Yocto Project Setup
+Run i.MX Freescale Yocto Project Setup
 $: MACHINE=< machine name> source fsl-setup-release.sh -b <build directory> -e <backend fb, dfb, wayland, x11>
 
-This will sync in the layer and update local.conf and bblayer.conf in build directory.
+After this your system will be configured to start a Yocto Project build.
 
-After this step, you will have everything to build an image.
-
-
-Build Configurations
+Build images
 ---------------------
-Freescale has created new images to support multiple graphics back ends.  
-Below is the setup for all the backends with the new image recipes.
+Each graphical backend X11, Frame buffer, DirectFB and Wayland must be in a separate build directory.
+So the setup script above must be run for each backend to configure the build correctly.
+In the 3.10.31-1.1.0_alpha release two new image recipes are provided that work on all backends.
 
-Note that <build directory> is the same directory specified in the setup-environment.  If not specified it is a
-directory called "build".
+   fsl-image-gui provides a gui image without QT.
+   fsl-image-qt5 provides a Qt5 image for X11, FB and Wayland backends.
+
+Here are examples
 
 Building X11
 ------------
-X11 is default so existing community will work using existing images.    
-$: bitbake fsl-image-x11
+  MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-x11 -e x11
+  bitbake fsl-image-gui
+or
+  bitbake fsl-image-qt5
+
+Note for running QT5 examples use the following parameters
+<QT5 example> -platform xcb -plugin evdevtouch:/dev/input/event0
 
 Building Frame Buffer (FB)
 ---------------------------
-Frame buffer requires a DISTRO_FEATURES change which our setup script will provide in local.conf
-fsl-image-fb provides the frame buffer image.  Note that since gpu-viv-bin-mx6q provides 
-different binaries for each backend, it is recommended to build a clean system to pick up the right gpu frame buffer libraries.
+  MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-fb -e fb
+  bitbake fsl-image-gui
+or
+  bitbake fsl-image-qt5
 
-$: MACHINE=<machine name>. ./fsl-setup-release.sh -b <build directory> -e fb
-$: bitbake fsl-image-fb
+Note for running QT5 examples use the following parameters
+<QT5 Example> -platform eglfs -plugin evdevtouch:/dev/input/event0
 
 Building Direct FB (DFB)
 ---------------------------
-Direct FB requires a DISTRO_FEATURES change which our setup script will provide in local.conf
-fsl-image-dfb provides the direct frame buffer image.  Note that since gpu-viv-bin-mx6q provides 
-different binaries for each backend, it is recommended to build a clean system to pick up the right gpu directfb libraries.
+  MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-dfb -e dfb
+  bitbake fsl-image-gui
 
-$: MACHINE=<machine name>. ./fsl-setup-release.sh -b <build directory> -e dfb
-$: bitbake fsl-image-dfb
+Direct FB does not support QT5 for this release
 
 Building Wayland-Weston (wayland)
 ---------------------------
-Wayland Weston requires a DISTRO_FEATURES change which our setup script will provide in local.conf
-fsl-image-wayland provides the wayland weston image.  Note that since gpu-viv-bin-mx6q provides
-different binaries for each backend, it is recommended to build a clean system to pick up the right gpu frame buffer libraries.
+  MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-wayland -e wayland
+  bitbake fsl-image-gui
+or
+  bitbake fsl-image-qt5
 
-$: MACHINE=<machine name>. ./fsl-setup-release.sh -b <build directory> -e wayland
-$: bitbake fsl-image-weston
-
+Note for running QT5 examples use the following parameters
+<QT5 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
 
 Hardware Floating Point
 -----------------------
@@ -120,8 +124,11 @@ These codecs have contractual restrictions that require separate distribution.
 
 Manufacturing Tool
 ------------------
-The manufacturing tool image is provided in the 3.10.17-1.0.0 release.  This includes the fsl-image-manufacturing that is used
-to flash the target device.  
+The manufacturing recipes have changed since 3.10.17-1.0.0_GA.  In this release the mfgtools is using the community
+setup.  To build for mfgtools build the following components
+
+   bitbake linux-imx-mfgtool
+   bitbake u-boot-imx-mfgtool
 
 End User License Agreement
 --------------------------
@@ -142,20 +149,6 @@ CORE_IMAGE_EXTRA_INSTALL += "chromium"
 - Add the commercial white list into local.conf. 
 LICENSE_FLAGS_WHITELIST="commercial"
 
-- To enable rendering of WebGL do the following steps after boot.  Add the following lines to  /etc/profile or /usr/bin/google-chrome
-export LD_PRELOAD=/usr/lib/libGAL.so:/usr/lib/libEGL.so:/usr/lib/libGLSLC.so:/usr/lib/libCLC.so:/usr/lib/libGLESv2.so
-
-- Start the Chromium browser
-$google-chrome --use-gl=egl 
-
 QTWebkit
 --------
 To start go to /usr/share/qt5/examples/webkitwidgets/browser and run browser
-
-
-QT5
----
-Two image recipes are provided
-fsl-image-gui is a non QT5 recipe that works on all backends - x11, directfb, frame buffer and wayland
-fsl-image-qt5 is a QT5 image recipe that works on x11, frame buffer and wayland.
-
