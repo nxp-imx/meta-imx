@@ -58,6 +58,8 @@ X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
     xserver-xorg-extension-viv-hdmi \
     packagegroup-fsl-gstreamer \
     packagegroup-core-x11-sato-games \
+    xorg-minimal-fonts \
+    liberation-fonts \
     gtkperf', '', d)}"
 
 IMAGE_INSTALL += " \
