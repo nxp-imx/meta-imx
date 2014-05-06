@@ -1,0 +1,124 @@
+From 7dfff7e62296779dca9831598af082ee72bfed41 Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <b02247@freescale.com>
+Date: Mon, 5 May 2014 14:21:16 +0800
+Subject: [PATCH] Fix issue: there is no sound after plugin/plugout headphone
+
+In default config, when switching headphone with speaker, the unused one will
+be switch off. And pulseaudio will store the setting in the database for
+restore, when switch back to the output path.
+But the core-subscribe.c has a defer queue for these event, like sink|new,
+sink|change, which will read the current switch status and store it in
+the database. because it is a defer queue, So sometimes, the stored status is
+changed don't as user's requirement. below is the call flow.
+
+init:
+        store on for speaker to database.
+        store on for headphone to database.
+---Activating analog-output-speaker
+	switch on speaker
+	switch off headphone
+----headphone plugin
+   ---analog-output-speaker status no
+   ---Activating analog-output
+      Queued event (SINK|CHANGE|0)
+      switch off speaker
+      switch off headphone
+   ---analog-output-headphone status yes
+   ---Activating analog-output-headphone
+      switch off speaker
+      switch off headphone
+      Dispatched event (SINK|CHANGE|0)
+       store off for headphone to database.
+
+I think it is pulseaudio's issue, So here I just workaround it by change the
+config file.
+
+Another change is remain the volume same as the asound.state.
+
+Signed-off-by: Shengjiu Wang <b02247@freescale.com>
+---
+ .../alsa/mixer/paths/analog-output-headphones.conf |    8 ++++----
+ .../alsa/mixer/paths/analog-output-speaker.conf    |    8 ++++----
+ src/modules/alsa/mixer/paths/analog-output.conf    |    8 ++++----
+ 3 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/src/modules/alsa/mixer/paths/analog-output-headphones.conf b/src/modules/alsa/mixer/paths/analog-output-headphones.conf
+index b1a349a..7bfa79e 100644
+--- a/src/modules/alsa/mixer/paths/analog-output-headphones.conf
++++ b/src/modules/alsa/mixer/paths/analog-output-headphones.conf
+@@ -63,8 +63,8 @@ volume = off
+ 
+ [Element Headphone]
+ required-any = any
+-switch = mute
+-volume = merge
++switch = on
++volume = ignore
+ override-map.1 = all
+ override-map.2 = all-left,all-right
+ 
+@@ -86,8 +86,8 @@ switch = mute
+ volume = zero
+ 
+ [Element Speaker]
+-switch = off
+-volume = off
++switch = on
++volume = ignore
+ 
+ [Element Desktop Speaker]
+ switch = off
+diff --git a/src/modules/alsa/mixer/paths/analog-output-speaker.conf b/src/modules/alsa/mixer/paths/analog-output-speaker.conf
+index d79fad1..eae40a0 100644
+--- a/src/modules/alsa/mixer/paths/analog-output-speaker.conf
++++ b/src/modules/alsa/mixer/paths/analog-output-speaker.conf
+@@ -62,8 +62,8 @@ volume = off
+ ; This profile path is intended to control the speaker, let's mute headphones
+ ; else there will be a spike when plugging in headphones
+ [Element Headphone]
+-switch = off
+-volume = off
++switch = on
++volume = ignore
+ 
+ [Element Headphone2]
+ switch = off
+@@ -71,8 +71,8 @@ volume = off
+ 
+ [Element Speaker]
+ required-any = any
+-switch = mute
+-volume = merge
++switch = on
++volume = ignore
+ override-map.1 = all
+ override-map.2 = all-left,all-right
+ 
+diff --git a/src/modules/alsa/mixer/paths/analog-output.conf b/src/modules/alsa/mixer/paths/analog-output.conf
+index 3a552c9..bd5c12b 100644
+--- a/src/modules/alsa/mixer/paths/analog-output.conf
++++ b/src/modules/alsa/mixer/paths/analog-output.conf
+@@ -53,16 +53,16 @@ switch = off
+ ; headphones. But it should not hurt if we leave the headphone jack
+ ; enabled nonetheless.
+ [Element Headphone]
+-switch = mute
+-volume = zero
++switch = on
++volume = ignore
+ 
+ [Element Headphone2]
+ switch = mute
+ volume = zero
+ 
+ [Element Speaker]
+-switch = mute
+-volume = off
++switch = on
++volume = ignore
+ 
+ [Element Desktop Speaker]
+ switch = mute
+-- 
+1.7.9.5
+
