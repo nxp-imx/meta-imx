@@ -1,4 +1,4 @@
-SUMMARY = "Sanitized set of kernel headers for the C library's use"
+DESCRIPTION = "Sanitized set of kernel headers for the C library's use."
 SECTION = "devel"
 LICENSE = "GPLv2"
 
@@ -41,9 +41,7 @@ python __anonymous () {
 
 inherit kernel-arch
 
-KORG_ARCHIVE_COMPRESSION ?= "bz2"
-
-SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v${HEADER_FETCH_VER}/linux-${PV}.tar.${KORG_ARCHIVE_COMPRESSION}"
+SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v${HEADER_FETCH_VER}/linux-${PV}.tar.bz2"
 
 S = "${WORKDIR}/linux-${PV}"
 
