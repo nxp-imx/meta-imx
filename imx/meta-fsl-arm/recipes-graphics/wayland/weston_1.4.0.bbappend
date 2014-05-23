@@ -1,7 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://0001-ENGR00306154-3-ccc-Add-Wayland-1.4.0-support.patch \
-            file://weston.sh"
+SRC_URI += "file://weston.sh"
 
 do_install_append () {
     install -d ${D}${sysconfdir}/profile.d/
