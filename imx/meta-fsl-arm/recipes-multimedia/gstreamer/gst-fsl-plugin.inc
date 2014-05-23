@@ -27,7 +27,7 @@ PLATFORM_mx6sx = "MX6SX"
 PLATFORM_mx28 = "MX28"
 
 # Todo add a mechanism to map posible build targets
-EXTRA_OECONF = "PLATFORM=${PLATFORM} --disable-valgrind --disable-examples --disable-debug \
+EXTRA_OECONF = "PLATFORM=${PLATFORM} \
                 CPPFLAGS="-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include""
 
 PACKAGES =+ "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
@@ -39,10 +39,7 @@ PACKAGES =+ "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
 PACKAGECONFIG[ac3] += "--enable-ac3dec,--disable-ac3dec,libfslac3codec,libfslac3codec"
 #   The ddplus codec does not support mx28
 DDPDEPENDS = "libfslddpcodec"
-DDPDEPENDS_mx28 = ""
-DDP_CONFIG_ARGS = "--enable-ddpdec"
-DDP_CONFIG_ARGS_mx28 = "--disable-ddpdec"
-PACKAGECONFIG[ddp] += "${DDP_CONFIG_ARGS},--disable-ddpdec,${DDPDEPENDS},${DDPDEPENDS}"
+PACKAGECONFIG[ddp] += ",,${DDPDEPENDS},${DDPDEPENDS}"
 # feature from special mm packages
 PACKAGECONFIG[aacp] += "--enable-aacpdec,--disable-aacpdec,libfslaacpcodec,libfslaacpcodec"
 MSDEPENDS = "libfslmsparser libfslmscodec"
