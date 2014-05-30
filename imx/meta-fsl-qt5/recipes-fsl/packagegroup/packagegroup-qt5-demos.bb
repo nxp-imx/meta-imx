@@ -12,6 +12,7 @@ RDEPENDS_${PN} += " \
     qt3d \
     qt3d-examples \
     qt3d-tools \
+    qt3d-qmlplugins \
     qtsmarthome \
     qt5ledscreen \
     quitbattery \
