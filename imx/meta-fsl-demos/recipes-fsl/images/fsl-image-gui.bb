@@ -61,6 +61,10 @@ X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
     liberation-fonts \
     gtkperf', '', d)}"
 
+# set mm image install specific to SOC
+MM_IMAGE_INSTALL = ""
+MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-gstreamer1.0"
+
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
     ${X11_IMAGE_INSTALL_GRAPHICS} \
@@ -70,7 +74,7 @@ IMAGE_INSTALL += " \
     cpufrequtils \
     nano \
     ntp \
-    packagegroup-fsl-gstreamer1.0 \
+    ${MM_IMAGE_INSTALL} \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
     "
