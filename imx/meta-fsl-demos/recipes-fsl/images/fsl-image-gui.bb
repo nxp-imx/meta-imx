@@ -49,13 +49,12 @@ WAYLAND_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'wayland', \
 # X11 packages
 X11_IMAGE_INSTALL = ""
 X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
-    'gst-plugins-gl-meta packagegroup-fsl-pulseaudio', '', d)}"
+    'gst-plugins-gl-meta packagegroup-fsl-pulseaudio xserver-xorg-extension-viv-hdmi ', '', d)}"
 
 # Add in Graphics
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'glmark2 \
     glcompbench \
-    xserver-xorg-extension-viv-hdmi \
     packagegroup-fsl-gstreamer \
     packagegroup-core-x11-sato-games \
     xorg-minimal-fonts \
