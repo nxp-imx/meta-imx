@@ -73,7 +73,7 @@ IMAGE_INSTALL += " \
     ${SOC_TOOLS_GPU} \
     cpufrequtils \
     nano \
-    ntp \
+    ntpdate \
     ${MM_IMAGE_INSTALL} \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
