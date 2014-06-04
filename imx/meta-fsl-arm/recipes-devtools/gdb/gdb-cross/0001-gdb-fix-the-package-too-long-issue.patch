@@ -1,0 +1,44 @@
+From 70aa047f3e8a4c45baafbfbf895e3567d431a9b2 Mon Sep 17 00:00:00 2001
+From: Huang Shijie <b32955@freescale.com>
+Date: Fri, 30 May 2014 12:30:18 +0800
+Subject: [PATCH] gdb: fix the package too long issue
+
+this code is from web.
+
+Signed-off-by: Huang Shijie <b32955@freescale.com>
+---
+ gdb/remote.c |   16 +++++++++++++++-
+ 1 files changed, 15 insertions(+), 1 deletions(-)
+
+diff --git a/gdb/remote.c b/gdb/remote.c
+index 7761e00..b1c772c 100644
+--- a/gdb/remote.c
++++ b/gdb/remote.c
+@@ -6110,9 +6110,23 @@ process_g_packet (struct regcache *regcache)
+   buf_len = strlen (rs->buf);
+ 
+   /* Further sanity checks, with knowledge of the architecture.  */
++  /*
+   if (buf_len > 2 * rsa->sizeof_g_packet)
+     error (_("Remote 'g' packet reply is too long: %s"), rs->buf);
+-
++    */
++
++	if (buf_len > 2 * rsa->sizeof_g_packet) {
++		rsa->sizeof_g_packet = buf_len ;
++		for (i = 0; i < gdbarch_num_regs (gdbarch); i++) {
++			if (rsa->regs[i].pnum == -1)
++				continue;
++
++			if (rsa->regs[i].offset >= rsa->sizeof_g_packet)
++				rsa->regs[i].in_g_packet = 0;
++			else
++				rsa->regs[i].in_g_packet = 1;
++		}
++	}
+   /* Save the size of the packet sent to us by the target.  It is used
+      as a heuristic when determining the max size of packets that the
+      target can safely receive.  */
+-- 
+1.7.8
+
