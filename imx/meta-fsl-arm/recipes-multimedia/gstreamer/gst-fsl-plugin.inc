@@ -39,6 +39,7 @@ PACKAGES =+ "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
 PACKAGECONFIG[ac3] += "--enable-ac3dec,--disable-ac3dec,libfslac3codec,libfslac3codec"
 #   The ddplus codec does not support mx28
 DDPDEPENDS = "libfslddpcodec"
+DDPDEPENDS_mx28 = ""
 PACKAGECONFIG[ddp] += ",,${DDPDEPENDS},${DDPDEPENDS}"
 # feature from special mm packages
 PACKAGECONFIG[aacp] += "--enable-aacpdec,--disable-aacpdec,libfslaacpcodec,libfslaacpcodec"
