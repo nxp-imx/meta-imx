@@ -1,11 +1,11 @@
-# Copyright (C) 2011-2013 Freescale Semiconductor
+# Copyright (C) 2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "Gstreamer freescale plugins"
+DESCRIPTION = "Gstreamer Gstreamer1.x freescale plugins"
 LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
-DEPENDS = "gstreamer gst-plugins-base libfslcodec libfslparser virtual/kernel"
+DEPENDS = "libfslcodec libfslparser virtual/kernel"
 DEPENDS_append_mx5 = " imx-lib imx-vpu"
 DEPENDS_append_mx6 = " imx-lib imx-vpu libfslvpuwrap"
 DEPENDS_remove_mx6sl = "imx-vpu libfslvpuwrap"
@@ -14,10 +14,6 @@ DEPENDS_remove_mx6sx = "imx-vpu libfslvpuwrap"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
                     file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
                     file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
-
-S = "${WORKDIR}/gst-fsl-plugins-${PV}"
-
-SRC_URI = "${FSL_MIRROR}/gst-fsl-plugins-${PV}.tar.gz"
 
 inherit autotools pkgconfig
 
@@ -29,7 +25,8 @@ PLATFORM_mx28 = "MX28"
 
 # Todo add a mechanism to map posible build targets
 EXTRA_OECONF = "PLATFORM=${PLATFORM} \
-                CPPFLAGS="-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include""
+                CPPFLAGS="-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include" \
+                CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 
 PACKAGES =+ "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
              ${PN}-libme ${PN}-libgstbufmeta ${PN}-libmfwba \
@@ -37,32 +34,25 @@ PACKAGES =+ "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
 
 # FIXME: Add all features
 # feature from excluded mm packages
-PACKAGECONFIG[ac3] += "--enable-ac3dec,--disable-ac3dec,libfslac3codec,libfslac3codec"
-#   The ddplus codec does not support mx28
+PACKAGECONFIG[ac3] += "--enable-ac3dec,--disable-ac3dec,,libfslac3codec"
+
+# The ddplus codec does not support mx28
 DDPDEPENDS = "libfslddpcodec"
 DDPDEPENDS_mx28 = ""
-PACKAGECONFIG[ddp] += ",,${DDPDEPENDS},${DDPDEPENDS}"
-# feature from special mm packages
-PACKAGECONFIG[aacp] += "--enable-aacpdec,--disable-aacpdec,libfslaacpcodec,libfslaacpcodec"
-MSDEPENDS = "libfslmsparser libfslmscodec"
-PACKAGECONFIG[wma10dec] +="--enable-wma10dec,--disable-wma10dec,${MSDEPENDS},${MSDEPENDS}"
-PACKAGECONFIG[wma8enc] +="--enable-wma8enc,--disable-wma8enc,${MSDEPENDS},${MSDEPENDS}"
-PACKAGECONFIG[wmv9mpdec] +="--enable-wmv9mpdec,--disable-wmv9mpdec,${MSDEPENDS},${MSDEPENDS}"
-PACKAGECONFIG[wmv78dec] +="--enable-wmv78dec,--disable-wmv78dec,${MSDEPENDS},${MSDEPENDS}"
+PACKAGECONFIG[ddp] += "--enable-ddpdec,--disable-ddpdec,,${DDPDEPENDS}"
 
-FILES_${PN} = "${libdir}/gstreamer-0.10/*.so ${datadir}"
+# feature from special mm packages
+PACKAGECONFIG[aacp] += "--enable-aacpdec,--disable-aacpdec,,libfslaacpcodec"
+
+MSDEPENDS = "libfslmsparser libfslmscodec"
+PACKAGECONFIG[wma10dec] += "--enable-wma10dec,--disable-wma10dec,,${MSDEPENDS}"
+PACKAGECONFIG[wma8enc] += "--enable-wma8enc,--disable-wma8enc,,${MSDEPENDS}"
+
 # Add codec list that the beep plugin run-time depended
 BEEP_RDEPENDS = "libfslcodec-aac libfslcodec-mp3 libfslcodec-oggvorbis"
 RDEPENDS_${PN} += "gst-plugins-good-id3demux libfslparser ${BEEP_RDEPENDS}"
 
-FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
-FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la ${libdir}/pkgconfig/*.pc"
-FILES_${PN}-staticdev += "${libdir}/gstreamer-0.10/*.a"
-
-FILES_${PN}-gplay = "${bindir}/gplay"
 FILES_${PN}-libmfwsconf = "${libdir}/libmfwsconf${SOLIBS}"
-FILES_${PN}-libgplaycore = "${libdir}/libgplaycore${SOLIBS}"
-FILES_${PN}-libgstfsl = "${libdir}/libgstfsl-0.10${SOLIBS}"
 FILES_${PN}-libme = "${libdir}/libme${SOLIBS}"
 FILES_${PN}-libgstbufmeta = "${libdir}/libgstbufmeta${SOLIBS}"
 FILES_${PN}-libmfwba =  "${libdir}/libmfwba${SOLIBS}"
