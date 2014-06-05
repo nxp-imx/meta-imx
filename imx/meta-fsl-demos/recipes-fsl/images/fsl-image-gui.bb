@@ -31,7 +31,6 @@ SOC_TOOLS_GPU_mx5 = " \
 SOC_TOOLS_GPU_mx6 = " \
     gpu-viv-bin-mx6q \
     gpu-viv-g2d \
-    fsl-gpu-sdk \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
