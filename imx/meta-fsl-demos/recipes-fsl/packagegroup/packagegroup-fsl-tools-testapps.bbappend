@@ -43,7 +43,7 @@ RDEPENDS_${PN}_mx6 = " \
 SOC_TOOLS_TESTAPPS_mx6 += " \
     imx-kobs \
     vlan \
-    cryptodev-modules \
+    cryptodev-module \
     cryptodev-tests \
     ${PN}-fslcodec-testapps \
 "
