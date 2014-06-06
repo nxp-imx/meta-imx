@@ -31,7 +31,6 @@ SOC_TOOLS_GPU_mx5 = " \
 SOC_TOOLS_GPU_mx6 = " \
     gpu-viv-bin-mx6q \
     gpu-viv-g2d \
-    fsl-gpu-sdk \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -50,7 +49,7 @@ WAYLAND_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'wayland', \
 # X11 packages
 X11_IMAGE_INSTALL = ""
 X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
-    'gst-plugins-gl-meta packagegroup-fsl-pulseaudio xserver-xorg-extension-viv-hdmi ', '', d)}"
+    'gst-plugins-gl-meta packagegroup-fsl-pulseaudio xserver-xorg-extension-viv-hdmi fsl-gpu-sdk ', '', d)}"
 
 # Add in Graphics
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
