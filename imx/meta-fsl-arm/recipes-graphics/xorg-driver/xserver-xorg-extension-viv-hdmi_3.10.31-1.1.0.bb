@@ -5,7 +5,7 @@ LICENSE = "MIT-X"
 
 DEPENDS += "virtual/kernel xf86-video-imxfb-vivante"
 
-LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=95cf961a2ceacdf7cf43caef25766779"
+LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=641ac6e6d013833e36290797f4d7089c"
 
 SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}_alpha.tar.gz \
             file://rc.local.etc \
