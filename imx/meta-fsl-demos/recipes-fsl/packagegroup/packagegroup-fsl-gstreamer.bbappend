@@ -6,6 +6,10 @@ RDEPENDS_${PN} += " \
     gst-plugins-good-meta \
 "
 
+RDEPENDS_${PN}_mx6 = " \
+    gst-plugins-base-tcp \
+"
+
 RDEPENDS_${PN}-audio += " \
     gst-plugins-good-audioparsers \
 "
