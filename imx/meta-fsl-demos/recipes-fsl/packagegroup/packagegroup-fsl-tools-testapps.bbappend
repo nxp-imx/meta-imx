@@ -11,7 +11,7 @@ RDEPENDS_${PN}-fslcodec-testapps_mx6 += " \
 
 ALLOW_EMPTY_${PN}-fslcodec-testapps_mx6 = "1"
 
-RDEPENDS_${PN}_mx6 = " \
+RDEPENDS_${PN} += " \
     ${SOC_TOOLS_TESTAPPS} \
     obexftp \
     procps \
