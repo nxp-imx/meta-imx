@@ -1,7 +1,8 @@
-# Copyright (C) 2014 Freescale Semiconductor
+# Copyright (C) 2011-2013 Freescale Semiconductor
+# Copytight (C) 2012-2014 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "Gstreamer Gstreamer1.x freescale plugins"
+DESCRIPTION = "Gstreamer freescale plugins"
 LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
@@ -25,8 +26,7 @@ PLATFORM_mx28 = "MX28"
 
 # Todo add a mechanism to map posible build targets
 EXTRA_OECONF = "PLATFORM=${PLATFORM} \
-                CPPFLAGS="-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include" \
-                CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
+                CPPFLAGS="-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include""
 
 PACKAGES =+ "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
              ${PN}-libme ${PN}-libgstbufmeta ${PN}-libmfwba \
@@ -36,17 +36,12 @@ PACKAGES =+ "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
 # feature from excluded mm packages
 PACKAGECONFIG[ac3] += "--enable-ac3dec,--disable-ac3dec,,libfslac3codec"
 
-# The ddplus codec does not support mx28
-DDPDEPENDS = "libfslddpcodec"
-DDPDEPENDS_mx28 = ""
-PACKAGECONFIG[ddp] += "--enable-ddpdec,--disable-ddpdec,,${DDPDEPENDS}"
-
 # feature from special mm packages
 PACKAGECONFIG[aacp] += "--enable-aacpdec,--disable-aacpdec,,libfslaacpcodec"
 
 MSDEPENDS = "libfslmsparser libfslmscodec"
 PACKAGECONFIG[wma10dec] += "--enable-wma10dec,--disable-wma10dec,,${MSDEPENDS}"
-PACKAGECONFIG[wma8enc] += "--enable-wma8enc,--disable-wma8enc,,${MSDEPENDS}"
+PACKAGECONFIG[wma8enc] += "--enable-wma8enc,--disable-wma8enc,${MSDEPENDS},${MSDEPENDS}"
 
 # Add codec list that the beep plugin run-time depended
 BEEP_RDEPENDS = "libfslcodec-aac libfslcodec-mp3 libfslcodec-oggvorbis"
