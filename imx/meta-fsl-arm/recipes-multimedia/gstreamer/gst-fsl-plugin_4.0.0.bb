@@ -1,7 +1,9 @@
-# Copyright (C) 2014, 2014 Freescale Semiconductor
+# Copyright (C) 2013-2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require gst-fsl-plugin.inc
+
+EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 
 SRC_URI = "${FSL_MIRROR}/gst-fsl-plugins-${PV}.tar.gz"
 S = "${WORKDIR}/gst-fsl-plugins-${PV}"
