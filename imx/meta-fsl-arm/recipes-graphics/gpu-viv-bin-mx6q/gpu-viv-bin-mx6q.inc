@@ -195,6 +195,7 @@ do_install () {
 FILES_${PN} += "/opt"
 FILES_${PN}-dev = "${includedir}"
 FILES_${PN}-dbg = "${libdir}/.debug /opt/viv_samples/*/*/.debug"
+INSANE_SKIP_${PN} += "rpaths"
 
 FILES_libclc-mx6 = "${libdir}/libCLC${SOLIBS}"
 FILES_libclc-mx6-dev = "${includedir}/CL ${libdir}/libCLC${SOLIBSDEV}"
