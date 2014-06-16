@@ -16,6 +16,7 @@ SRC_URI = "${FSL_MIRROR}/${PN}-3.10.31-1.1.0-beta-hfp.bin;fsl-eula=true \
            file://wayland-egl.pc \
            file://wayland-viv.pc \
            file://directfbrc \
+           file://Vivante.icd \
           "
 
 S="${WORKDIR}/${PN}-3.10.31-1.1.0-beta-hfp"

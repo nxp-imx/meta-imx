@@ -31,6 +31,7 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://wayland-egl.pc \
            file://wayland-viv.pc \
            file://directfbrc \
+           file://Vivante.icd \
           "
 PACKAGES =+ "libclc-mx6 libclc-mx6-dev libclc-mx6-dbg \
 	libgl-mx6 libgl-mx6-dev libgl-mx6-dbg \
@@ -160,6 +161,10 @@ do_install () {
         fi
         mv ${D}${libdir}/libGAL_egl.${backend}.so ${D}${libdir}/libGAL_egl.so
     fi
+
+    # Install Vendor ICDs for OpenCL's installable client driver loader (ICDs Loader)
+    install -d ${D}${sysconfdir}/OpenCL/Vendors/
+    install -m 0644 ${WORKDIR}/Vivante.icd ${D}${sysconfdir}/OpenCL/Vendors/Vivante.icd
 
     # We'll only have one backend here so we rename it to generic name
     # and avoid rework in other packages, when possible
