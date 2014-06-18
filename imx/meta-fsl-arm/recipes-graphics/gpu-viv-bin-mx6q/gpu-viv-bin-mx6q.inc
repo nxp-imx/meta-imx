@@ -163,8 +163,8 @@ do_install () {
     fi
 
     # Install Vendor ICDs for OpenCL's installable client driver loader (ICDs Loader)
-    install -d ${D}${sysconfdir}/OpenCL/Vendors/
-    install -m 0644 ${WORKDIR}/Vivante.icd ${D}${sysconfdir}/OpenCL/Vendors/Vivante.icd
+    install -d ${D}${sysconfdir}/OpenCL/vendors/
+    install -m 0644 ${WORKDIR}/Vivante.icd ${D}${sysconfdir}/OpenCL/vendors/Vivante.icd
 
     # We'll only have one backend here so we rename it to generic name
     # and avoid rework in other packages, when possible
