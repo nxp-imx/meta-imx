@@ -24,6 +24,7 @@ RDEPENDS_${PN} += " \
     ntpdate \
 "
 
+SOC_TOOLS_TESTAPPS = ""
 SOC_TOOLS_TESTAPPS_mx6 += " \
     imx-kobs \
     vlan \
