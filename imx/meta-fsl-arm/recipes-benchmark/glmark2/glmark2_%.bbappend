@@ -1,3 +1,2 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://glmark2.patch"
+PACKAGECONFIG_remove_mx6sl = "gles2"
