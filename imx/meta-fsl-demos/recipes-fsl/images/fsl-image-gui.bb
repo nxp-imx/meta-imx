@@ -31,15 +31,19 @@ DFB_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'directfb', \
     'packagegroup-core-full-cmdline packagegroup-core-directfb libvivante-dfb-mx6', '', d)}"
 
 # Wayland packages
-WAYLAND_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'wayland', \
+WAYLAND_IMAGE_INSTALL = ""
+WAYLAND_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'wayland', \
     base_contains('DISTRO_FEATURES', 'x11', '', \
     ' weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', d),\
     '', d)}"
+WAYLAND_IMAGE_INSTALL_remove_mx6sl = "clutter-1.0-examples"
 
 # X11 packages
 X11_IMAGE_INSTALL = ""
 X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'gst-plugins-gl-meta packagegroup-fsl-pulseaudio', '', d)}"
+X11_IMAGE_INSTALL_remove_mx6sl = "gst-plugins-gl-meta"
+X11_IMAGE_INSTALL_append_mx6sl = " libopenvg-mx6"
 
 # Add in Graphics
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
@@ -63,7 +67,6 @@ IMAGE_INSTALL += " \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
     "
-
 export IMAGE_BASENAME = "fsl-image-gui"
 
 

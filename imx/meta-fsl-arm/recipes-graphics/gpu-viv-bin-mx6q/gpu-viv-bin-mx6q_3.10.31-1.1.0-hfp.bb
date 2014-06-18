@@ -3,22 +3,6 @@
 
 require gpu-viv-bin-mx6q.inc
 
-SRC_URI = "${FSL_MIRROR}/${PN}-3.10.31-1.1.0-beta-hfp.bin;fsl-eula=true \
-           file://egl.pc \
-           file://egl_x11.pc \
-           file://glesv1_cm.pc \
-           file://glesv1_cm_x11.pc \
-           file://glesv2.pc \
-           file://glesv2_x11.pc \
-           file://vg.pc \
-           file://vg_x11.pc \
-           file://gc_wayland_protocol.pc \
-           file://wayland-egl.pc \
-           file://wayland-viv.pc \
-           file://directfbrc \
-           file://Vivante.icd \
-          "
-
 S="${WORKDIR}/${PN}-3.10.31-1.1.0-beta-hfp"
 
 SRC_URI[md5sum] = "19f2f4555a7e49744a41c4a6d9520dd8"
