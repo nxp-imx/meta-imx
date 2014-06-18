@@ -16,18 +16,4 @@ RDEPENDS_${PN} += " \
     ${X11_TOOLS_INSTALL} \
 "
 
-SOC_TOOLS_GPU_mx6 += " fsl-gpu-sdk"
-
-SOC_TOOLS_GPU_remove_mx6 = " \
-    gpu-viv-bin-mx6q \
-    gpu-viv-g2d \
-"
-SOC_TOOLS_GPU_append_mx6 = " \
-    imx-gpu-viv-g2d \
-    imx-gpu-viv-tools \
-    imx-gpu-viv-tools-apitrace \
-"
-SOC_TOOLS_GPU_remove_mx6sl = " \
-    fsl-gpu-sdk \
-    imx-gpu-viv-tools-apitrace \
-"
+SOC_TOOLS_GPU_mx6 += "fsl-gpu-sdk"
