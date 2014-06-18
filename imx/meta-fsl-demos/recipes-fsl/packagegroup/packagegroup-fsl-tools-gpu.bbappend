@@ -7,7 +7,7 @@ X11_TOOLS_INSTALL = ""
 X11_TOOLS_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
    'xserver-xorg-extension-viv-hdmi', '', d)}"
 
-RDEPENDS_${PN} = " \
+RDEPNEDS +=
     ${DFB_TOOLS_INSTALL} \
     ${X11_TOOLS_INSTALL} \
 "
