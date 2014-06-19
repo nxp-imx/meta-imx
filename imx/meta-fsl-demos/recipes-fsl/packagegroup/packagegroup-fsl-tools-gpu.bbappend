@@ -16,3 +16,4 @@ RDEPENDS_${PN} += " \
     ${X11_TOOLS_INSTALL} \
 "
 
+SOC_TOOLS_GPU_mx6 += " fsl-gpu-sdk"
