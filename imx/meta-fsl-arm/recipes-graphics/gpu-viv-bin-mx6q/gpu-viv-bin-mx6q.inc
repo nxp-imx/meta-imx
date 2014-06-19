@@ -4,7 +4,7 @@
 
 DESCRIPTION = "GPU driver and apps for full GPU"
 
-require common.inc
+require gpu-viv-bin-common.inc
 
 PROVIDES += "virtual/libgl virtual/libgles1 virtual/libgles2"
 
