@@ -1,7 +1,7 @@
 # Copyright (C) 2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require common.inc
+require gpu-viv-bin-common.inc
 
 S="${WORKDIR}/${PN}-3.10.31-1.1.0-beta-hfp"
 
