@@ -11,6 +11,7 @@ RDEPENDS_${PN} += " \
     gstreamer1.0-plugins-base-meta \
     gst1.0-fsl-plugin \
     gst1.0-fsl-plugin-gplay \
+    gstreamer1.0-plugins-bad-rawparse \
 "
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
