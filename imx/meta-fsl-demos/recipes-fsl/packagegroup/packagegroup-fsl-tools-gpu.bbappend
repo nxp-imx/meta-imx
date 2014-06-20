@@ -17,3 +17,4 @@ RDEPENDS_${PN} += " \
 "
 
 SOC_TOOLS_GPU_mx6 += " fsl-gpu-sdk"
+SOC_TOOLS_GPU_remove_mx6sl = "fsl-gpu-sdk"
