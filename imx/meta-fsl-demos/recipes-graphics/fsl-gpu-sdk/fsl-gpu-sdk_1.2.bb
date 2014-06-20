@@ -44,3 +44,5 @@ do_install () {
 
 FILES_${PN} += "/opt/${PN}"
 FILES_${PN}-dbg += "/opt/${PN}/*/.debug"
+
+COMPATIBLE_MACHINE = "(mx6sx|mx6q|mx6dl)"
