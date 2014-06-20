@@ -18,8 +18,9 @@ SRC_URI[sha256sum] = "a9529c103618c1e62dfc52cda14611c015bff739c6c6733c1c5854635d
 
 S = "${WORKDIR}/${PN}-${PV}"
 
-SUPPORTED_APIS = "GLES1.1 GLES2.0 ${@base_contains('DISTRO_FEATURES', 'x11', '', 'OpenVG', d)}"
-MAKEFILE_NO_X11 = "${@base_contains('DISTRO_FEATURES', 'wayland', 'Makefile.wl', 'Makefile.fbdev', d)}"
+SUPPORTED_APIS = "GLES1.1 GLES2.0 ${@base_contains('DISTRO_FEATURES', 'directfb', '', 'OpenVG', d)}"
+MAKEFILE_NO_X11 = "${@base_contains('DISTRO_FEATURES', 'wayland', 'Makefile.wl', \
+                                     base_contains('DISTRO_FEATURES', 'directfb', 'Makefile.Dfb', 'Makefile.fbdev', d), d)}"
 MAKEFILE = "${@base_contains('DISTRO_FEATURES', 'x11', 'Makefile.x11', '${MAKEFILE_NO_X11}', d)}"
 
 EXTRA_OEMAKE += "YOCTO_BUILD=1"
