@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Freescale Semiconductor
+# Copyright (C) 2013, 2014 Freescale Semiconductor
 
 include recipes-bsp/imx-lib/imx-lib.inc
 
