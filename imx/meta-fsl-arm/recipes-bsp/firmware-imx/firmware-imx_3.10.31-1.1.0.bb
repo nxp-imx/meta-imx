@@ -1,4 +1,4 @@
-Copyright (C) 2012-2014 Freescale Semiconductor
+# Copyright (C) 2012-2014 Freescale Semiconductor
 
 require recipes-bsp/firmware-imx/firmware-imx.inc
 
