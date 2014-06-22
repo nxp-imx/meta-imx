@@ -32,6 +32,3 @@ do_deploy () {
     install  arch/arm/boot/uImage ${DEPLOY_DIR_IMAGE}/uImage_mfgtool
     install  arch/arm/boot/zImage ${DEPLOY_DIR_IMAGE}/zImage_mfgtool
 }
-
-
-
