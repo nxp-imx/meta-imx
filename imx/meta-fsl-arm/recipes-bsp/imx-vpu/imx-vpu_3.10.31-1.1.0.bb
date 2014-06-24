@@ -5,10 +5,10 @@ require recipes-bsp/imx-vpu/imx-vpu.inc
 PE = "1"
 
 # FIXME: Drop 'alpha' suffix for GA release
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}-alpha.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}-beta.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}-alpha"
 
-SRC_URI[md5sum] = "2b3bb15876a014c0ed362cb258508ca4"
-SRC_URI[sha256sum] = "b2ec86784a70a1ff7ee8ff6c94f503d06ea83dff8c7942e7e7fe657b1968fe18"
+SRC_URI[md5sum] = "91f95f1e3c9e38a204af26ad25701ee1"
+SRC_URI[sha256sum] = "64c2237d1a423b53871e94a6138c1f8d99e7d3972c2dac28cd67823448bb3697"
 
 COMPATIBLE_MACHINE = "(mx6)"
