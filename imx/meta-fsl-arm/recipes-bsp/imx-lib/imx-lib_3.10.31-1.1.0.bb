@@ -3,7 +3,7 @@
 include recipes-bsp/imx-lib/imx-lib.inc
 
 # FIXME: Drop 'alpha' suffix for GA release
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_beta.tar.gz"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}-beta.tar.gz"
 S="${WORKDIR}/${PN}-${PV}_alpha"
 
 PE = "1"
