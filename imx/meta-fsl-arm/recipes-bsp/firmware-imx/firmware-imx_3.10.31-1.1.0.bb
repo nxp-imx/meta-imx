@@ -6,10 +6,10 @@ PE="1"
 
 SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}-alpha.bin;fsl-eula=true"
 
-S = "${WORKDIR}/firmware-imx-${PV}-alpha"
+S = "${WORKDIR}/firmware-imx-${PV}-beta"
 
-SRC_URI[md5sum] = "44ae0d7eba6aa3cf348a53b8e50565a5"
-SRC_URI[sha256sum] = "e8cfc7f6eb7410c4421e12a64c6ad1ef8396feac90216d0d13f01739d4928438"
+SRC_URI[md5sum] = "52606ff6d40ec713bca96f3d41928ec0"
+SRC_URI[sha256sum] = "4a0a1dcc5a2789826767e5abe65ecc1bd4038721fe6d1eaeaa9c6acb1364c5b8"
 
 do_install() {
 	install -d ${D}/lib/firmware
