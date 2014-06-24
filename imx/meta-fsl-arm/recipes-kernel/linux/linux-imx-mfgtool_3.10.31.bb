@@ -29,6 +29,7 @@ do_configure_prepend() {
 do_deploy () {
     install -d ${DEPLOY_DIR_IMAGE}
 
-    install  arch/arm/boot/uImage ${DEPLOY_DIR_IMAGE}/uImage_mfgtool
+# commnet out uImage
+#   install  arch/arm/boot/uImage ${DEPLOY_DIR_IMAGE}/uImage_mfgtool
     install  arch/arm/boot/zImage ${DEPLOY_DIR_IMAGE}/zImage_mfgtool
 }
