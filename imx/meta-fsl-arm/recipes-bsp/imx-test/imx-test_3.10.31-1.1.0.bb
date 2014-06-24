@@ -3,7 +3,7 @@
 include recipes-bsp/imx-test/imx-test.inc
 
 # FIXME: Drop 'alpha' suffix for GA release
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_alpha.tar.gz"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}_beta.tar.gz"
 S="${WORKDIR}/${PN}-${PV}_alpha"
 
 SRC_URI_append_mx5 = " file://revert_epdc_hdr_change.patch \
@@ -11,8 +11,8 @@ SRC_URI_append_mx5 = " file://revert_epdc_hdr_change.patch \
 SRC_URI_append_mxs = " file://revert_epdc_hdr_change.patch \
                        file://clocks.sh"
 
-SRC_URI[md5sum] = "350a84f8c122ce36e65bfc2a87980097"
-SRC_URI[sha256sum] = "ae4ada5921ed3b6910589ae530a040e14883f1dbb39ce988c94b797f070c8ddf"
+SRC_URI[md5sum] = "9f667053ec10fe857b969c1c948859c0"
+SRC_URI[sha256sum] = "a4b9f318d1411c203466f13eac88720e9ec02fd8e2e648bb3f28f4f12eb92a79"
 
 # Add MX6SX platform option
 PLATFORM_mx6sx = "IMX6S"
