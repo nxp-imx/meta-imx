@@ -10,7 +10,8 @@ PROVIDES += "virtual/libgl virtual/libgles1 virtual/libgles2"
 
 PROVIDES_remove_mx6sl = "virtual/libgal-x11 virtual/wayland-egl virtual/egl virtual/libopenvg virtual/libgl virtual/libgles1 virtual/libgles2"
 
-SRC_URI =+ "file://glesv1_cm.pc \
+SRC_URI =+ "${FSL_MIRROR}/${PN}-3.10.31-1.1.0-beta-hfp.bin;fsl-eula=true \
+           file://glesv1_cm.pc \
            file://glesv1_cm_x11.pc \
            file://glesv2.pc \
            file://glesv2_x11.pc \

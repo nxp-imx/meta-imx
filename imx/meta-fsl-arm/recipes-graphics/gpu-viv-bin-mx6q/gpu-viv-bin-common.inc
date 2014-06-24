@@ -19,8 +19,7 @@ inherit fsl-eula-unpack
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/gpu-viv-bin-mx6q:"
 
-SRC_URI = "${FSL_MIRROR}/${PN}-3.10.31-1.1.0-beta-hfp.bin;fsl-eula=true \
-           file://egl.pc \
+SRC_URI = "file://egl.pc \
            file://egl_x11.pc \
            file://vg.pc \
            file://vg_x11.pc \
@@ -55,6 +54,8 @@ python __anonymous () {
 USE_X11 = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 USE_DFB = "${@base_contains("DISTRO_FEATURES", "directfb", "yes", "no", d)}"
 USE_WL = "${@base_contains("DISTRO_FEATURES", "wayland", "yes", "no", d)}"
+USE_SL = ""
+USE_SL_mx6sl = "yes" 
 
 # Inhibit warnings about files being stripped.
 INHIBIT_PACKAGE_STRIP = "1"
@@ -101,6 +102,17 @@ do_install () {
     cp -a ${S}/usr/lib/*.so* ${D}${libdir}
     cp -axr ${S}/usr/include/* ${D}${includedir}
     cp -axr ${S}/opt ${D}
+
+   if [ "${USE_SL}" = "yes" ]; then
+    
+    cd ${D}${libdir}
+    rm -rf libGL* libCLC.so libOpenCL.so libOpenVG.3d.so libVivanteOpenCL.so
+    cd ${D}${includedir}
+    rm -rf GL* CL 
+    cd ${D}/opt/viv_samples
+    rm -rf vdk tiger es20 cl11
+ 
+    fi
 
     install -d ${D}${libdir}/pkgconfig
 
