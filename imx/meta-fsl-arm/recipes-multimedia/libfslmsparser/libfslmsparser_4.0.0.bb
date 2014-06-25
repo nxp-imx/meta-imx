@@ -30,5 +30,5 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 FILES_${PN} += "${libdir}/imx-mm/*/*${SOLIBS}"
 FILES_${PN}-dev += " ${libdir}/imx-mm/*/*${SOLIBSDEV}"
 
-COMPATIBLE_MACHINE = "(mx28|mx5|mx6)"
+COMPATIBLE_MACHINE = "(mxs|mx5|mx6)"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
