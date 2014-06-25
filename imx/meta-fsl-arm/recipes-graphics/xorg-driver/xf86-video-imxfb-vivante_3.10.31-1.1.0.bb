@@ -17,9 +17,9 @@ RDEPENDS_${PN}_remove_mx6sl = "libvivante-dri-mx6"
 LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=95cf961a2ceacdf7cf43caef25766779"
 
 # FIXME: Drop 'alpha' suffix for GA release
-SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}_alpha.tar.gz"
-SRC_URI[md5sum] = "e2a952f99affc77204ddc2c307d668e1"
-SRC_URI[sha256sum] = "bbd4aca864d290fa37f40325b68fc294c168d4d5574e3746671f9234621cff58"
+SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}-beta.tar.gz"
+SRC_URI[md5sum] = "5695e9a3ddc37da0e783862e4108fbae"
+SRC_URI[sha256sum] = "c08def7fb98c11cba08bc21522bfb2785576b77db4b36954b15926401ac31c0e"
 
 EXTRA_OEMAKE += "-C EXA/src -f makefile.linux prefix=${D}/usr \
                  sysroot=${STAGING_DIR_TARGET} \
@@ -31,7 +31,7 @@ CFLAGS += "-I${STAGING_INCDIR}/xorg \
            -I${STAGING_INCDIR}/drm \
            -I../../DRI_1.10.4/src"
 
-S = "${WORKDIR}/xserver-xorg-video-imx-viv-${PV}_alpha/"
+S = "${WORKDIR}/xserver-xorg-video-imx-viv-${PV}-beta/"
 
 # FIXME: The Freescale provided Makefile has hardcodec include paths
 #        and this does not work in case prefix is different than /usr,
