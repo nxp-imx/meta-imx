@@ -4,7 +4,7 @@ require recipes-bsp/firmware-imx/firmware-imx.inc
 
 PE="1"
 
-SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}-alpha.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}-beta.bin;fsl-eula=true"
 
 S = "${WORKDIR}/firmware-imx-${PV}-beta"
 
