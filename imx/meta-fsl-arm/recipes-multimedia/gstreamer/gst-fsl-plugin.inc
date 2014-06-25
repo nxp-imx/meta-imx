@@ -8,9 +8,10 @@ SECTION = "multimedia"
 
 DEPENDS = "libfslcodec libfslparser virtual/kernel"
 DEPENDS_append_mx5 = " imx-lib imx-vpu"
-DEPENDS_append_mx6 = " imx-lib imx-vpu libfslvpuwrap"
-DEPENDS_remove_mx6sl = "imx-vpu libfslvpuwrap"
-DEPENDS_remove_mx6sx = "imx-vpu libfslvpuwrap"
+DEPENDS_append_mx6q = " imx-lib imx-vpu libfslvpuwrap"
+DEPENDS_append_mx6dl = " imx-lib imx-vpu libfslvpuwrap"
+DEPENDS_append_mx6sl = " imx-lib"
+DEPENDS_append_mx6sx = " imx-lib"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
                     file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
