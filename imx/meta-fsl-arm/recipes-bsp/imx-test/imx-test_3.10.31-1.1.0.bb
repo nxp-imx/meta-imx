@@ -2,9 +2,9 @@
 
 include recipes-bsp/imx-test/imx-test.inc
 
-# FIXME: Drop 'alpha' suffix for GA release
+# FIXME: Drop 'beta' suffix for GA release
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}-beta.tar.gz"
-S="${WORKDIR}/${PN}-${PV}_alpha"
+S="${WORKDIR}/${PN}-${PV}-beta"
 
 SRC_URI_append_mx5 = " file://revert_epdc_hdr_change.patch \
                        file://clocks.sh"
