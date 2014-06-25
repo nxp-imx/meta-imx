@@ -39,5 +39,5 @@ FILES_${PN}-dev += "${libdir}/pkgconfig/*.pc ${includedir}/imx-mm/* \
 # Add examples to -testapps PACKAGE
 FILES_${PN}-testapps += "${datadir}/imx-mm/*"
 
-COMPATIBLE_MACHINE = "(mx28|mx5|mx6)"
+COMPATIBLE_MACHINE = "(mxs|mx5|mx6)"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
