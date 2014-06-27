@@ -35,14 +35,12 @@ PACKAGES =+ "${PN}-libmfwsconf ${PN}-libgplaycore ${PN}-libgstfsl \
 
 # FIXME: Add all features
 # feature from excluded mm packages
-PACKAGECONFIG[ac3] += "--enable-ac3dec,--disable-ac3dec,,libfslac3codec"
-
+PACKAGECONFIG[ac3] += "--enable-ac3dec,--disable-ac3dec,libfslac3codec,libfslac3codec"
 # feature from special mm packages
-PACKAGECONFIG[aacp] += "--enable-aacpdec,--disable-aacpdec,,libfslaacpcodec"
-
+PACKAGECONFIG[aacp] += "--enable-aacpdec,--disable-aacpdec,libfslaacpcodec,libfslaacpcodec"
 MSDEPENDS = "libfslmsparser libfslmscodec"
-PACKAGECONFIG[wma10dec] += "--enable-wma10dec,--disable-wma10dec,,${MSDEPENDS}"
-PACKAGECONFIG[wma8enc] += "--enable-wma8enc,--disable-wma8enc,${MSDEPENDS},${MSDEPENDS}"
+PACKAGECONFIG[wma10dec] +="--enable-wma10dec,--disable-wma10dec,${MSDEPENDS},${MSDEPENDS}"
+PACKAGECONFIG[wma8enc] +="--enable-wma8enc,--disable-wma8enc,${MSDEPENDS},${MSDEPENDS}"
 
 # Add codec list that the beep plugin run-time depended
 BEEP_RDEPENDS = "libfslcodec-aac libfslcodec-mp3 libfslcodec-oggvorbis"
