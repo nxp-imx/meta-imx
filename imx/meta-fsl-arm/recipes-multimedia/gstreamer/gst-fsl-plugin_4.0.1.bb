@@ -13,8 +13,8 @@ SRC_URI[sha256sum] = "ea487852cf3e2f01445afbcf487295600d4fe1de70a547df26a0cf2076
 
 DEPENDS_append = " gstreamer gst-plugins-base"
 
-PACKAGECONFIG[wmv9mpdec] += "--enable-wmv9mpdec,--disable-wmv9mpdec,,${MSDEPENDS}"
-PACKAGECONFIG[wmv78dec] += "--enable-wmv78dec,--disable-wmv78dec,,${MSDEPENDS}"
+PACKAGECONFIG[wmv9mpdec] +="--enable-wmv9mpdec,--disable-wmv9mpdec,${MSDEPENDS},${MSDEPENDS}"
+PACKAGECONFIG[wmv78dec] +="--enable-wmv78dec,--disable-wmv78dec,${MSDEPENDS},${MSDEPENDS}"
 
 FILES_${PN} = "${libdir}/gstreamer-0.10/*.so ${datadir}"
 FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
