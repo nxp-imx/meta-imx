@@ -9,6 +9,10 @@ for buffers. For now, we require it to be able to grow to at least
 32 buffers, which I think is a fair amount of buffers for decoders.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=726299
+
+Upstream Status:  Pending
+
+Signed-off-by: Nicolas Dufresne <nicolas.dufresne@collabora.com>
 ---
  ext/libav/gstavviddec.c |   22 +++++++++++++++++++++-
  1 file changed, 21 insertions(+), 1 deletion(-)
