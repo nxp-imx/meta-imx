@@ -3,6 +3,8 @@ From: zhouming <b42586@freescale.com>
 Date: Wed, 14 May 2014 10:16:20 +0800
 Subject: [PATCH] ENGR00312515: get caps from src pad when query caps
 
+Upstream Status: Pending
+
 Signed-off-by: zhouming <b42586@freescale.com>
 ---
  gst-libs/gst/tag/gsttagdemux.c |   13 +++++++++++++
