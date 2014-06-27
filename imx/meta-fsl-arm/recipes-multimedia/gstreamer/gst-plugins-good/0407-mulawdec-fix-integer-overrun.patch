@@ -6,6 +6,10 @@ Subject: [PATCH 407/440] mulawdec: fix integer overrun
 There might be more than 65535 samples in a chunk of data.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=687469
+
+Upstream Status:  Pending
+
+Signed-off-by: Roland Krikava <rkrikava@gmail.com>
 ---
  gst/law/mulaw-conversion.c |    6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
