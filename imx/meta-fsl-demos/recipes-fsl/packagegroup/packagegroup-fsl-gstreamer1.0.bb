@@ -6,7 +6,9 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-GST_EXTRA = "gstreamer1.0-plugins-bad-rawparse"
+GST_EXTRA = ""
+GST_EXTRA = "${@base_contains('DISTRO_FEATURES', 'x11', \
+   'gstreamer1.0-plugins-bad-rawparse', '', d)}"
 
 GST_INSTALL = ""
 GST_INSTALL_append_mx6q = " ${GST_EXTRA}"
