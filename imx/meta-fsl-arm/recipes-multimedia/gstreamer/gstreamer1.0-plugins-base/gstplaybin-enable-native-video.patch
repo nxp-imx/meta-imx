@@ -1,3 +1,17 @@
+From 9cfb86cd100904f0ef2626f348695bd2d3416c6a Mon Sep 17 00:00:00 2001
+From: Jian Li <jian.li@freescale.com>
+Date: Mon, 23 Jun 2014 14:14:07 +0800
+Subject: [PATCH] gstplaybin enable native video
+
+- use native video patch in playbin for i.MX SoCs
+
+Upstream Status: N/A
+
+Signed-off-by: Jian Li <jian.li@freescale.com>
+---
+ gst/playback/gstplaybin2.c |    3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
 diff --git a/gst/playback/gstplaybin2.c b/gst/playback/gstplaybin2.c
 index fc02ca3..c342438 100644
 --- a/gst/playback/gstplaybin2.c
@@ -12,3 +26,6 @@ index fc02ca3..c342438 100644
  #define DEFAULT_N_VIDEO           0
  #define DEFAULT_CURRENT_VIDEO     -1
  #define DEFAULT_N_AUDIO           0
+-- 
+1.7.9.5
+
