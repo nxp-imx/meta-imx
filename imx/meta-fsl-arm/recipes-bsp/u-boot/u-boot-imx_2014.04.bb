@@ -1,6 +1,6 @@
 # Copyright (C) 2013, 2014 Freescale Semiconductor
 
-DESCRIPTION = "bootloader for imx platforms"
+DESCRIPTION = "Bootloader for i.MX platforms"
 require recipes-bsp/u-boot/u-boot.inc
 
 PROVIDES += "u-boot"
@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 
 SRCBRANCH = "imx_v2014.04_3.10.31_1.1.0_beta"
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/uboot-imx.git;protocol=git;branch=${SRCBRANCH}"
-SRCREV = "${AUTOREV}"
+SRCREV = "115ec908f5f4425aabcd26071212fa48073890c3"
 
 S = "${WORKDIR}/git"
 
