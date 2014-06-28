@@ -1,4 +1,6 @@
 # Copyright (C) 2014 O.S. Systems Software LTDA.
+# Copyright (C) 2014 Freescale Semiconductor
+
 SUMMARY = "Produces a Manufacturing Tool compatible Linux Kernel"
 DESCRIPTION = "Linux Kernel provided and supported by Freescale that produces a \
 Manufacturing Tool compatible Linux Kernel to be used in updater environment"
@@ -10,7 +12,7 @@ require recipes-kernel/linux/linux-mfgtool.inc
 DEPENDS += "lzop-native bc-native"
 
 SRCBRANCH = "imx_3.10.31_1.1.0_beta"
-SRCREV = "${AUTOREV}"
+SRCREV = "c66de709c8fc46d0d1e946c361cf4c25cda0c295"
 LOCALVERSION = "-1.1.0_beta"
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=${SRCBRANCH}"
 
@@ -28,8 +30,5 @@ do_configure_prepend() {
 
 do_deploy () {
     install -d ${DEPLOY_DIR_IMAGE}
-
-# commnet out uImage
-#   install  arch/arm/boot/uImage ${DEPLOY_DIR_IMAGE}/uImage_mfgtool
     install  arch/arm/boot/zImage ${DEPLOY_DIR_IMAGE}/zImage_mfgtool
 }

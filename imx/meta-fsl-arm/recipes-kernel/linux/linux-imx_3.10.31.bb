@@ -11,7 +11,7 @@ require recipes-kernel/linux/linux-dtb.inc
 DEPENDS += "lzop-native bc-native"
 
 SRCBRANCH = "imx_3.10.31_1.1.0_beta"
-SRCREV = "${AUTOREV}"
+SRCREV = "c66de709c8fc46d0d1e946c361cf4c25cda0c295"
 LOCALVERSION = "-1.1.0_beta"
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=${SRCBRANCH}"
 
@@ -35,9 +35,8 @@ do_configure_prepend() {
        fsl_defconfig='imx_v7_defconfig'
    fi
 
-
-    cp ${S}/arch/arm/configs/${fsl_defconfig} ${S}/.config
-    cp ${S}/arch/arm/configs/${fsl_defconfig} ${S}/../defconfig
+   cp ${S}/arch/arm/configs/${fsl_defconfig} ${S}/.config
+   cp ${S}/arch/arm/configs/${fsl_defconfig} ${S}/../defconfig
 }
 
 # copy zImage to deploy directory
@@ -59,7 +58,6 @@ do_deploy_append () {
     fi
 
 # comment out uImage
-#    install  arch/arm/boot/uImage ${DEPLOY_DIR_IMAGE}/uImage_$fsl_defconfig
     install  arch/arm/boot/zImage ${DEPLOY_DIR_IMAGE}/zImage_$fsl_defconfig
 }
 
