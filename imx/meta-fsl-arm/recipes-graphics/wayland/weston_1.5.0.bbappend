@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
 SRC_URI += "file://0001-Add-Vivante-EGL-support.patch \
             file://0002-Add-Vivante-GAL2D-support.patch \
