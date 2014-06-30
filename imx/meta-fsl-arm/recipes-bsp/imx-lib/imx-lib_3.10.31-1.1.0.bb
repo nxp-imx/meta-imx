@@ -3,15 +3,14 @@
 include recipes-bsp/imx-lib/imx-lib.inc
 
 # FIXME: Drop 'beta' suffix for GA release
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}-beta.tar.gz \
-          file://linux-lib-Disable-rng-and-sahara-for-imx-6-solox.patch"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}-beta.tar.gz"
 
 S="${WORKDIR}/${PN}-${PV}-beta"
 
 PE = "1"
 
-SRC_URI[md5sum] = "82d3cd1a6104a0793f7eb4bf53dafead"
-SRC_URI[sha256sum] = "4a24d8e09db6154b5813bb7907842c11a8d71e422d9af87c32eab0d32fe12bc0"
+SRC_URI[md5sum] = "c17e70d0568d4d6185408907b8e558c3"
+SRC_URI[sha256sum] = "7a465fd93d63f8241d4866ae2393f31c5758820a8bf19a742017c74e0991452a"
 
 PLATFORM_mx6sl = "IMX6S"
 PLATFORM_mx6sx = "IMX6S"
