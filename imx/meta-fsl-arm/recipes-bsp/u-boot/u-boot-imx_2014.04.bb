@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 
 SRCBRANCH = "imx_v2014.04_3.10.31_1.1.0_beta"
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/uboot-imx.git;protocol=git;branch=${SRCBRANCH}"
-SRCREV = "2556b15145f8026856ec3c78dd140bdcdfc3017b"
+SRCREV = "db5a2a8658a2bf9f8aff74b41b2b5d98cf6d226f"
 
 S = "${WORKDIR}/git"
 
