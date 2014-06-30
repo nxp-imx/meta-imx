@@ -6,6 +6,9 @@ Subject: [PATCH 2/3] ENGR00314805-2 Add Vivante GAL2D support
 Add Vivante GAL2D compositor support.
 
 [DATE]05-22-2014
+
+Upstream Status: N/A
+
 Signed-off-by Yong Gan <B45748@freescale.com>
 ---
  Makefile.am            |   13 +

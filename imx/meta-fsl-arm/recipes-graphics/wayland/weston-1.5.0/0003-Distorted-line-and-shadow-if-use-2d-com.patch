@@ -6,6 +6,8 @@ Subject: [PATCH 3/3] ENGR00319247 : Distorted line and shadow if use 2d
 
 Fixed blending for shadown and maintained separate surface for damage composite.
 
+Upstream Status: N/A
+
 Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@freescale.com>
 ---
  src/compositor-fbdev.c |   8 ++--
