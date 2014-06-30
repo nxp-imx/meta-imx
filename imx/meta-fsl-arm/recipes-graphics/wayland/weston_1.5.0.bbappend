@@ -8,6 +8,8 @@ SRC_URI += "file://0001-Add-Vivante-EGL-support.patch \
 
 PACKAGECONFIG_mx6 = "fbdev egl cairo-glesv2"
 
+PACKAGECONFIG_remove_mx6sl = "egl cairo-glesv2"
+
 EXTRA_OECONF_append_mx6 = " \
     --disable-libunwind \
     --disable-xwayland-test \
@@ -23,6 +25,10 @@ EXTRA_OEMAKE_append_mx6 = " \
     EGL_TESTS_CFLAGS="-DLINUX -DEGL_API_FB -DEGL_API_WL" \
     CLIENT_CFLAGS="-I ${STAGING_INCDIR}/cairo -I ${STAGING_INCDIR}/pixman-1 -DLINUX -DEGL_API_FB -DEGL_API_WL" \
 "
+EXTRA_OEMAKE_append_mx6sl = " \
+    COMPOSITOR_LIBS="-lGAL -lwayland-server -lxkbcommon -lpixman-1" \
+    FB_COMPOSITOR_LIBS="-lwayland-server -lxkbcommon" \
+    "
 
 do_install_append () {
     install -d ${D}${sysconfdir}/profile.d/
