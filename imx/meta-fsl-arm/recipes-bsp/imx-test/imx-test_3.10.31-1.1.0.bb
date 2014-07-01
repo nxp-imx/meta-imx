@@ -2,6 +2,8 @@
 
 include recipes-bsp/imx-test/imx-test.inc
 
+DEPENDS_mx6sx = "virtual/kernel imx-lib"
+
 # FIXME: Drop 'beta' suffix for GA release
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}-beta.tar.gz"
 S="${WORKDIR}/${PN}-${PV}-beta"
