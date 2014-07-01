@@ -8,7 +8,7 @@ PE = "1"
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}-beta.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}-beta"
 
-SRC_URI[md5sum] = "7014ee1a40844abff98c8e91331aaa4a"
-SRC_URI[sha256sum] = "3fcdda0d3675ad3b7ace3ce3945f5dd4fa77ded85435d90b164114d6b34db524"
+SRC_URI[md5sum] = "ab76e7395b6a178a8538a6d5beb87656"
+SRC_URI[sha256sum] = "22d0542bd4d7beb88084575c834bf9045c8e2acc43acdd2ec4e0e5534b4b9c5e"
 
 COMPATIBLE_MACHINE = "(mx6)"
