@@ -106,7 +106,8 @@ do_install () {
    if [ "${USE_SL}" = "yes" ]; then
     
     cd ${D}${libdir}
-    rm -rf libGL* libCLC.so libOpenCL.so libOpenVG.3d.so libVivanteOpenCL.so
+    rm -rf libGL* libCLC.so libOpenCL.so libOpenVG.3d.so libVivanteOpenCL.so libOpenVG.so
+    mv libOpenVG.2d.so libOpenVG.so
     cd ${D}${includedir}
     rm -rf GL* CL 
     cd ${D}/opt/viv_samples
