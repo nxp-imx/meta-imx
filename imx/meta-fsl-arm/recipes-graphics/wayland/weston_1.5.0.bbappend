@@ -4,6 +4,7 @@ SRC_URI += "file://0001-Add-Vivante-EGL-support.patch \
             file://0002-Add-Vivante-GAL2D-support.patch \
             file://0003-Distorted-line-and-shadow-if-use-2d-com.patch \
             file://0004-Desktop-shell-Don-t-assume-there-is-a-pointer.patch \
+            file://0005-Enable-GAL2D-compositor-in-SoloLite.patch \
             file://weston.sh"
 
 PACKAGECONFIG_mx6 = "fbdev egl cairo-glesv2"
