@@ -7,8 +7,8 @@ S="${WORKDIR}/${PN}-${PV}-beta"
 
 LIC_FILES_CHKSUM = "file://usr/include/g2d.h;endline=7;md5=53b61e015f8e1c386057c5ba8b081d53"
 
-SRC_URI[md5sum] = "e8c13e0cb37a252d73c3a73d04429729"
-SRC_URI[sha256sum] = "4993e92a568bf59fb907a5b056535208af1accc96aec18b045c7ec4fb7bb7afa"
+SRC_URI[md5sum] = "ac3f2741381fdab14b51f9cdcf004420"
+SRC_URI[sha256sum] = "54aeafd64396616382278717a771c0b9537909d584c100ea27f87939487388c0"
 
 FILES_${PN} += "  ${bindir}/gmem_info "
 FILES_libg2d =  "${libdir}/libg2d-viv${SOLIBS} ${libdir}/libg2d${SOLIBS}"
