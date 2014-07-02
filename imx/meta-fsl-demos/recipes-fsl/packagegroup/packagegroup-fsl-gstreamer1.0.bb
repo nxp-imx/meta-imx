@@ -16,8 +16,8 @@ GST_INSTALL_append_mx6sx = " ${GST_EXTRA}"
 RDEPENDS_${PN} += " \
     gstreamer1.0-plugins-good-meta \
     gstreamer1.0-plugins-base-meta \
-    gst1.0-fsl-plugin \
-    gst1.0-fsl-plugin-gplay \
+    ${MACHINE_GSTREAMER_1_0_PLUGIN} \
+    ${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "gst1.0-fsl-plugin", "gst1.0-fsl-plugin-gplay", "", d)} \
     ${GST_INSTALL} \
 "
 
