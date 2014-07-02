@@ -7,7 +7,7 @@ SRC_URI =+ "${FSL_MIRROR}/gpu-viv-bin-mx6q-3.10.31-1.1.0-beta-hfp.bin;fsl-eula=t
 
 S="${WORKDIR}/gpu-viv-bin-mx6q-3.10.31-1.1.0-beta-hfp"
 
-SRC_URI[md5sum] = "7f8d8acc23301552c1ad45dba76bdf0e"
-SRC_URI[sha256sum] = "aeca4a1ef0afe321bad6ac6b71c1e60c689976c7ef3beb3ba33d489e94cc498b"
+SRC_URI[md5sum] = "cc9afbaff410bdfd1709c8e81ae7607e"
+SRC_URI[sha256sum] = "1d8c88afc506653356527ab2bb939acba0cee4bb5c903f86df371ce4e80596ff"
 
 PACKAGE_FP_TYPE = "hardfp"
