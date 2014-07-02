@@ -6,15 +6,13 @@ HOMEPAGE = "http://quitcoding.com/?page=work#cinex"
 LICENSE = "CC-BY-3.0"
 LIC_FILES_CHKSUM = "file://README;beginline=44;endline=55;md5=3a9db934c393a0cf198cbe7e73ebec86"
 
-SRC_URI = "http://quitcoding.com/download/Qt5_NMap_CarouselDemo_1.0.tgz"
+DEPENDS = "qtdeclarative qtgraphicaleffects"
 
+SRC_URI = "http://quitcoding.com/download/Qt5_NMap_CarouselDemo_1.0.tgz"
 SRC_URI[md5sum] = "c1b4568cdbb6b3af4ca10c5a90aa8128"
 SRC_URI[sha256sum] = "445da212074a10a432f4508d125814212bbe7a967bfa47b015b92dfac6bfd65f"
 
 S = "${WORKDIR}/Qt5_NMap_CarouselDemo_1.0"
-
-DEPENDS = "qtdeclarative qtgraphicaleffects"
-RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
 
 require recipes-qt/qt5/qt5.inc
 
@@ -27,3 +25,5 @@ do_install() {
 
 FILES_${PN}-dbg += "${datadir}/${P}/.debug"
 FILES_${PN} += "${datadir}"
+
+RDEPENDS_${PN} = "qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
