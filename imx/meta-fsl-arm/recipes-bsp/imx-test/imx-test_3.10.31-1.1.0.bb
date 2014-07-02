@@ -13,8 +13,8 @@ SRC_URI_append_mx5 = " file://revert_epdc_hdr_change.patch \
 SRC_URI_append_mxs = " file://revert_epdc_hdr_change.patch \
                        file://clocks.sh"
 
-SRC_URI[md5sum] = "aebfd0454f352d72ed8f922621c10ec0"
-SRC_URI[sha256sum] = "ad1f7b9a53f6abcfa1369ed58e1fbce95631501db6999b3856d7eba3023f1ef4"
+SRC_URI[md5sum] = "f64f9239d3a89ea6563f234224fb8b95"
+SRC_URI[sha256sum] = "7ca50feac75d8df42e814f8364cc81ce9630137ce241e04c11f5a18270799bf4"
 
 # Add MX6SX platform option
 PLATFORM_mx6sl = "IMX6SL"
