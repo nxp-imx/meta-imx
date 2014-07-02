@@ -2,8 +2,10 @@ SUMMARY = "Freescale GPU SDK Samples"
 DESCRIPTION = "Set of sample applications for Freescale GPU"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=44e96dac83a60d6c21a6055f7b31cf0c"
-DEPENDS = "virtual/libgles1 virtual/libgles2 ${WL_DEPENDS}"
+DEPENDS = "virtual/libgles1 virtual/libgles2 virtual/libopenvg ${WL_DEPENDS}"
 WL_DEPENDS = "${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
+
+DEPENDS_remove_mx6sl= "virtual/libgles1 virtual/libgles2"
 
 inherit fsl-eula-unpack
 
@@ -13,12 +15,14 @@ RREPLACES_${PN} = "vivante-gpu-sdk"
 RCONFLICTS_${PN} = "vivante-gpu-sdk"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "61cdbdc080855a619a1f1cccd00c058e"
-SRC_URI[sha256sum] = "a9529c103618c1e62dfc52cda14611c015bff739c6c6733c1c5854635da5c448"
+
+SRC_URI[md5sum] = "9e9bd05dd12c709d8d91ea7ac2445e86"
+SRC_URI[sha256sum] = "12c78f8c666fdfb1745af9cc22416f03ef670b6ee3db079f6e90e1a3e5ddf0ea"
 
 S = "${WORKDIR}/${PN}-${PV}"
 
-SUPPORTED_APIS = "GLES1.1 GLES2.0 ${@base_contains('DISTRO_FEATURES', 'directfb', '', 'OpenVG', d)}"
+SUPPORTED_APIS = "GLES1.1 GLES2.0 OpenVG"
+SUPPORTED_APIS_remove_mx6sl = "GLES1.1 GLES2.0"
 MAKEFILE_NO_X11 = "${@base_contains('DISTRO_FEATURES', 'wayland', 'Makefile.wl', \
                                      base_contains('DISTRO_FEATURES', 'directfb', 'Makefile.Dfb', 'Makefile.fbdev', d), d)}"
 MAKEFILE = "${@base_contains('DISTRO_FEATURES', 'x11', 'Makefile.x11', '${MAKEFILE_NO_X11}', d)}"
@@ -44,5 +48,3 @@ do_install () {
 
 FILES_${PN} += "/opt/${PN}"
 FILES_${PN}-dbg += "/opt/${PN}/*/.debug"
-
-COMPATIBLE_MACHINE = "(mx6sx|mx6q|mx6dl)"
