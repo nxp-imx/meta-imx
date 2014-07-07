@@ -1,0 +1,28 @@
+From 67a7b4adb7af0f8581037befb6bb0d0816286731 Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <b02247@freescale.com>
+Date: Mon, 7 Jul 2014 10:52:16 +0800
+Subject: [PATCH] pcm: rate: fix that hw_ptr will exceed the boundary
+
+Complement the hw_ptr in the boundary.
+
+Upstream Status: Pending
+
+Signed-off-by: Shengjiu Wang <b02247@freescale.com>
+---
+ src/pcm/pcm_rate.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/pcm/pcm_rate.c b/src/pcm/pcm_rate.c
+index 7f667d4..2563d82 100644
+--- a/src/pcm/pcm_rate.c
++++ b/src/pcm/pcm_rate.c
+@@ -574,6 +574,8 @@ static inline void snd_pcm_rate_sync_hwptr(snd_pcm_t *pcm)
+ 	rate->hw_ptr =
+ 		(slave_hw_ptr / rate->gen.slave->period_size) * pcm->period_size +
+ 		rate->ops.input_frames(rate->obj, slave_hw_ptr % rate->gen.slave->period_size);
++
++	rate->hw_ptr %= pcm->boundary;
+ }
+ 
+ static int snd_pcm_rate_hwsync(snd_pcm_t *pcm)
+-- 
