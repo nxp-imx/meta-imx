@@ -14,8 +14,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "a2c4fabfc79736902e592460a54ea265"
-SRC_URI[sha256sum] = "93d168bfa5c60be52f8e5e5de5d7bea999861860dd7d9cfe8bb61acc24045dd2"
+SRC_URI[md5sum] = "70cc7feb118c6c0181adaa937c9ec170"
+SRC_URI[sha256sum] = "8d9d00fb0fdc067d88d28d76d5b993767069420643b024178db86360e80b7cde"
 
 # Choose between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
