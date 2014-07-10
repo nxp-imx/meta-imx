@@ -1,0 +1,28 @@
+From 57e3751f070a87cf7383d1bf686398ffe2f5b5df Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <b02247@freescale.com>
+Date: Thu, 10 Jul 2014 17:30:28 +0800
+Subject: [PATCH] pcm_local.h: include <time.h> to enable CLOCK_MONOTONIC
+
+CLOCK_MONITONIC is defined in <bits/time.h>, add <time.h> before
+<sys/time.h>
+
+Upstream Status: Pending
+
+Signed-off-by: Shengjiu Wang <b02247@freescale.com>
+---
+ src/pcm/pcm_local.h |    1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/pcm/pcm_local.h b/src/pcm/pcm_local.h
+index 8a6c743..934bbd7 100644
+--- a/src/pcm/pcm_local.h
++++ b/src/pcm/pcm_local.h
+@@ -24,6 +24,7 @@
+ #include <stdlib.h>
+ #include <limits.h>
+ #include <sys/uio.h>
++#include <time.h>
+ #include <sys/time.h>
+ 
+ #define _snd_mask sndrv_mask
+-- 
