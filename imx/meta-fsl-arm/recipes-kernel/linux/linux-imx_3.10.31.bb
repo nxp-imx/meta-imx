@@ -11,7 +11,7 @@ require recipes-kernel/linux/linux-dtb.inc
 DEPENDS += "lzop-native bc-native"
 
 SRCBRANCH = "imx_3.10.31_1.1.0_beta"
-SRCREV = "bc123587aab31201fee090653b9e30237f62a86f"
+SRCREV = "21d742a1d602b703a935f40f0811dd8b0820c31d"
 LOCALVERSION = "-1.1.0_beta"
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=${SRCBRANCH}"
 
