@@ -5,7 +5,9 @@ Subject: [PATCH] baseparse: Fix 'self-comparison always evaluates to true'
 
 This was really a bug.
 
-Upstream Status:  Pending
+Commit is ed7f4802222234eef192aa3f74bc92268f338f97 in 0.10 branch
+
+Upstream Status:  Backported
 
 Signed-off-by: Sebastian Droege <sebastian.droege@collabora.co.uk>
 ---
