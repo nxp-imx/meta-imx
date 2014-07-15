@@ -10,7 +10,9 @@ for buffers. For now, we require it to be able to grow to at least
 
 https://bugzilla.gnome.org/show_bug.cgi?id=726299
 
-Upstream Status:  Pending
+Commit 2a337d926cc30cd7eaae13a4b46eea68ba89e368 in master branch
+
+Upstream Status:  Backported
 
 Signed-off-by: Nicolas Dufresne <nicolas.dufresne@collabora.com>
 ---

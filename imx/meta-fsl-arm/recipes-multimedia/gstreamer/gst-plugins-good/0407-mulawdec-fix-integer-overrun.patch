@@ -7,7 +7,9 @@ There might be more than 65535 samples in a chunk of data.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=687469
 
-Upstream Status:  Pending
+Commit - 3be45f70220310ec1c60d819f90b5f2ae03b5d83 in 0.10 branch
+
+Upstream Status:  Backported
 
 Signed-off-by: Roland Krikava <rkrikava@gmail.com>
 ---
