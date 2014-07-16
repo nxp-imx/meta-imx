@@ -3,6 +3,8 @@ From: zhouming <b42586@freescale.com>
 Date: Wed, 14 May 2014 10:16:20 +0800
 Subject: [PATCH] ENGR00312515: get caps from src pad when query caps
 
+https://bugzilla.gnome.org/show_bug.cgi?id=728312
+
 Upstream Status: Pending
 
 Signed-off-by: zhouming <b42586@freescale.com>
