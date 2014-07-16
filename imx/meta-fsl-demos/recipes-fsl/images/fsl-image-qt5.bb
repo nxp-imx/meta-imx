@@ -29,8 +29,7 @@ QT5_IMAGE_INSTALL_mx6 = " \
     "
 QT5_IMAGE_INSTALL_mx6sl = "${@base_contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'packagegroup-qt5-core \
-     qtbase-examples \
-     ${WLD_IMAGE_INSTALL}', d)}"
+     qtbase-examples', d)}"
 
 IMAGE_INSTALL += " \
 ${QT5_IMAGE_INSTALL} \
