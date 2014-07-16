@@ -12,4 +12,4 @@ SRC_URI[sha256sum] = "7fb965e903d0cec0f9a6236ef01da91a326b2cbff455cd42dcfe272e30
 
 FILES_${PN} += "  ${bindir}/gmem_info "
 FILES_libg2d =  "${libdir}/libg2d-viv${SOLIBS} ${libdir}/libg2d${SOLIBS}"
-"
+
