@@ -1,14 +1,12 @@
-# Copyright (C) 2014 Freescale Semiconductor
+# Copyright (C) 2012-2014 Freescale Semiconductor
 # Copyright (C) 2012-2014 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "GPU driver and apps for full GPU"
+DESCRIPTION = "GPU metadata for chips with full GPU support"
 
 require gpu-viv-bin-common.inc
 
 PROVIDES += "virtual/libgl virtual/libgles1 virtual/libgles2"
-
-PROVIDES_remove_mx6sl = "virtual/libgal-x11 virtual/wayland-egl virtual/egl virtual/libopenvg virtual/libgl virtual/libgles1 virtual/libgles2"
 
 SRC_URI =+ "${FSL_MIRROR}/${PN}-3.10.31-1.1.0-beta-hfp.bin;fsl-eula=true \
            file://glesv1_cm.pc \
@@ -34,26 +32,25 @@ do_install_append () {
 
         install -m 0644 ${WORKDIR}/glesv1_cm_x11.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
         install -m 0644 ${WORKDIR}/glesv2_x11.pc ${D}${libdir}/pkgconfig/glesv2.pc
-        
+
      elif [ "${USE_WL}" = "yes" ]; then
         backend=wl
 
         install -m 0644 ${WORKDIR}/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
         install -m 0644 ${WORKDIR}/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
-     
+
        else
-        
+
         install -m 0644 ${WORKDIR}/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
         install -m 0644 ${WORKDIR}/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
 
-       if [ "${USE_DFB}" = "yes" ]; then
+        if [ "${USE_DFB}" = "yes" ]; then
             backend=dfb
         else
             # Regular framebuffer
             backend=fb
         fi
-        
-     fi
+    fi
 
     # Install Vendor ICDs for OpenCL's installable client driver loader (ICDs Loader)
     install -d ${D}${sysconfdir}/OpenCL/vendors/
@@ -64,7 +61,7 @@ do_install_append () {
     mv ${D}${libdir}/libGL.so.1.2 ${D}${libdir}/libGL.so.1.2.0
     ln -sf libGL.so.1.2.0 ${D}${libdir}/libGL.so.1.2
     ln -sf libGL.so.1.2.0 ${D}${libdir}/libGL.so
-    
+
   # update libglesv2 as backend dependent
     rm -rf ${D}${libdir}/libGLESv2*
     cp -a ${S}/usr/lib/libGLESv2-${backend}.so ${D}${libdir}/libGLESv2.so.2.0.0
@@ -109,4 +106,4 @@ RDEPENDS_libopencl-mx6 = "libclc-mx6"
 
 FILES_libvivante-dri-mx6 = "${libdir}/dri/vivante_dri.so"
 
-COMPATIBLE_MACHINE = "(mx6)"
+COMPATIBLE_MACHINE = "(mx6q|mx6dl|mx6sx)"
