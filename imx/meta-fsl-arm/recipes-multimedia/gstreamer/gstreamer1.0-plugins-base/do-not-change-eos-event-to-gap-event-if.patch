@@ -4,6 +4,8 @@ Date: Thu, 8 May 2014 12:01:17 +0800
 Subject: [PATCH] ENGR00312034: do not change eos event to gap event if no
  data has passed to streamsynchronizer.
 
+https://bugzilla.gnome.org/show_bug.cgi?id=727074
+
 Upstream Status: Pending
 
 Signed-off-by: zhouming <b42586@freescale.com>

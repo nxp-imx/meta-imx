@@ -3,6 +3,8 @@ From: zhouming <zmafox@gmail.com>
 Date: Wed, 7 May 2014 18:26:38 +0800
 Subject: [PATCH] pass rate of input segment to output segment.
 
+https://bugzilla.gnome.org/show_bug.cgi?id=729701
+
 Commit - 2793f808ee7fbebc7de2c7b733c6e94dac6a099f  in master branch
 
 Upstream Status: Backported
