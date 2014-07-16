@@ -1,8 +1,8 @@
-# Copyright (C) 2014 Freescale Semiconductor
+# Copyright (C) 2012-2014 Freescale Semiconductor
 # Copyright (C) 2012-2014 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "Common file for partial and full GPU"
+DESCRIPTION = "Common meta data for all i.MX GPUs"
 SECTION = "libs"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://usr/include/gc_vdk.h;endline=11;md5=c4713c78d7f52bf2f92688a6f8f0cc93"
@@ -55,7 +55,7 @@ USE_X11 = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 USE_DFB = "${@base_contains("DISTRO_FEATURES", "directfb", "yes", "no", d)}"
 USE_WL = "${@base_contains("DISTRO_FEATURES", "wayland", "yes", "no", d)}"
 USE_SL = ""
-USE_SL_mx6sl = "yes" 
+USE_SL_mx6sl = "yes"
 
 # Inhibit warnings about files being stripped.
 INHIBIT_PACKAGE_STRIP = "1"
@@ -103,16 +103,14 @@ do_install () {
     cp -axr ${S}/usr/include/* ${D}${includedir}
     cp -axr ${S}/opt ${D}
 
-   if [ "${USE_SL}" = "yes" ]; then
-    
-    cd ${D}${libdir}
-    rm -rf libGL* libCLC.so libOpenCL.so libOpenVG.3d.so libVivanteOpenCL.so libOpenVG.so
-    mv libOpenVG.2d.so libOpenVG.so
-    cd ${D}${includedir}
-    rm -rf GL* CL 
-    cd ${D}/opt/viv_samples
-    rm -rf vdk tiger es20 cl11
- 
+    if [ "${USE_SL}" = "yes" ]; then
+        cd ${D}${libdir}
+        rm -rf libGL* libCLC.so libOpenCL.so libOpenVG.3d.so libVivanteOpenCL.so libOpenVG.so
+        mv libOpenVG.2d.so libOpenVG.so
+        cd ${D}${includedir}
+        rm -rf GL* CL
+        cd ${D}/opt/viv_samples
+        rm -rf vdk tiger es20 cl11
     fi
 
     install -d ${D}${libdir}/pkgconfig
