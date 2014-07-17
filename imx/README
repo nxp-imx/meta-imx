@@ -36,7 +36,7 @@ This BSP is a Freescale release providing support for the following processors
     imx6dlsabreauto - sd, eim-nor, spi-nor, nand
     imx6solosabresd - sd
     imx6solosabreauto - sd, eim-nor, spi-nor, nand
-    imx6slevk - sd, spinor
+    imx6slevk - sd, spi-nor
     imx6sx17x17arm2 - sd, qspi2, spi-nor, nand, eim-nor
     imx6sx19x19ddr3arm2 - sd, qspi2, eim-nor
     imx6sx19x19lpddr2arm2 - sd, qspi2
