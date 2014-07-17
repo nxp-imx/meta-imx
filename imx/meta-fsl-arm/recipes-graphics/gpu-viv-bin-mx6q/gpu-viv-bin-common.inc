@@ -106,7 +106,7 @@ do_install () {
     if [ "${USE_SL}" = "yes" ]; then
         cd ${D}${libdir}
         rm -rf libGL* libCLC.so libOpenCL.so libOpenVG.3d.so libVivanteOpenCL.so libOpenVG.so
-        mv libOpenVG.2d.so libOpenVG.so
+        ln -sf libOpenVG.2d.so ${D}${libdir}/libOpenVG.so
         cd ${D}${includedir}
         rm -rf GL* CL
         cd ${D}/opt/viv_samples
@@ -186,6 +186,7 @@ FILES_libgal-mx6 = "${libdir}/libGAL${SOLIBS}"
 FILES_libgal-mx6-dev = "${libdir}/libGAL${SOLIBSDEV}"
 FILES_libgal-mx6-dbg = "${libdir}/.debug/libGAL${SOLIBS}"
 
+INSANE_SKIP_libopenvg-mx6 += "dev-so"
 FILES_libopenvg-mx6 = "${libdir}/libOpenVG*${SOLIBS}"
 FILES_libopenvg-mx6-dev = "${includedir}/VG ${libdir}/libOpenVG*${SOLIBSDEV} ${libdir}/pkgconfig/vg.pc"
 FILES_libopenvg-mx6-dbg = "${libdir}/.debug/libOpenVG*${SOLIBS}"
