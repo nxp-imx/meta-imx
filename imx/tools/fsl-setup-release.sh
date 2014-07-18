@@ -94,11 +94,16 @@ if [ -z "$BUILD_DIR" ]; then
     BUILD_DIR='build'
 fi
 
+if [ -z "$MACHINE" ]; then
+    echo setting to default machine
+    MACHINE='imx6qsabresd'
+fi
+
 # New machine definitions may need to be added to the expected location
 cp sources/meta-fsl-bsp-release/imx/meta-fsl-arm/conf/machine/* sources/meta-fsl-arm/conf/machine
 
 # Set up the basic yocto environment
-source $PROGNAME $BUILD_DIR
+MACHINE=$MACHINE source $PROGNAME $BUILD_DIR
 
 # Point to the current directory since the last command changed the directory to $BUILD_DIR
 BUILD_DIR=.
