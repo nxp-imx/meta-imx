@@ -5,7 +5,9 @@ Subject: [PATCH] pcm: rate: fix that hw_ptr will exceed the boundary
 
 Complement the hw_ptr in the boundary.
 
-Upstream Status: Pending
+Commit is 035f196bcdc1e9903ed52ad1859dc23d3aa74e72 in master branch
+
+Upstream Status: Backported
 
 Signed-off-by: Shengjiu Wang <b02247@freescale.com>
 ---
