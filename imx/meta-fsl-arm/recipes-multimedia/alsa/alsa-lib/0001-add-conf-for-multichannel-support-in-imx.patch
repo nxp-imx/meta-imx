@@ -3,6 +3,8 @@ From: Shengjiu Wang <b02247@freescale.com>
 Date: Thu, 5 Jun 2014 17:37:47 +0800
 Subject: [PATCH] add conf for multichannel support in imx
 
+Upstream Status: N/A
+
 Signed-off-by: Shengjiu Wang <b02247@freescale.com>
 ---
  src/conf/cards/CS42888.conf  | 94 ++++++++++++++++++++++++++++++++++++++++++++
