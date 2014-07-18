@@ -35,6 +35,9 @@ config file.
 
 Another change is remain the volume same as the asound.state.
 
+Upstream Status: N/A
+  - It is i.Mx specific 
+
 Signed-off-by: Shengjiu Wang <b02247@freescale.com>
 ---
  .../alsa/mixer/paths/analog-output-headphones.conf |    8 ++++----
