@@ -110,7 +110,7 @@ do_install () {
         cd ${D}${includedir}
         rm -rf GL* CL
         cd ${D}/opt/viv_samples
-        rm -rf vdk tiger es20 cl11
+        rm -rf vdk es20 cl11
     fi
 
     install -d ${D}${libdir}/pkgconfig
