@@ -21,8 +21,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-3.10.31-1.1.0-beta-sfp.bin;fsl-eula=true \
 
 S="${WORKDIR}/${PN}-3.10.31-1.1.0-beta-sfp"
 
-SRC_URI[md5sum] = "f973de08122616aea4583199d865332d"
-SRC_URI[sha256sum] = "8e24f7e2a16660b5a7934340b7ea8ce811d5d3d398fe362c1021a8625f23d4ac"
+SRC_URI[md5sum] = "f66a40fb49a75ad45c75984f7f2d3acf"
+SRC_URI[sha256sum] = "d46a114234fa0a3fea8e866cc54dd1cbd329fd45bd2ea43c9629cafd5877c36b"
 
 # FIXME skip the QA error for viv-samples
 INSANE_SKIP_${PN} += "rpaths"
