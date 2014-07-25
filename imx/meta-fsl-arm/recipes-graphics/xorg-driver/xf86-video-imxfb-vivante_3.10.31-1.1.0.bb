@@ -10,10 +10,6 @@ inherit autotools-brokensep
 
 DEPENDS += "virtual/xserver virtual/libx11 virtual/libgal-x11 gpu-viv-bin-mx6q pixman"
 
-DEPENDS_remove_mx6sl = "gpu-viv-bin-mx6q"
-DEPENDS_append_mx6sl = " gpu-viv-bin-mx6sl"
-RDEPENDS_${PN}_remove_mx6sl = "libvivante-dri-mx6"
-
 LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=95cf961a2ceacdf7cf43caef25766779"
 
 # FIXME: Drop 'alpha' suffix for GA release
