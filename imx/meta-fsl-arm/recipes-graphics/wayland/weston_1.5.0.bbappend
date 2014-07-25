@@ -8,9 +8,10 @@ SRC_URI += "file://0001-Add-Vivante-EGL-support.patch \
             file://0006-Change-GAL2D-compositor-to-be-default-i.patch \
             file://weston.sh"
 
-PACKAGECONFIG_mx6 = "fbdev egl cairo-glesv2"
-
-PACKAGECONFIG_remove_mx6sl = "egl cairo-glesv2"
+PACKAGECONFIG_mx6 = "fbdev"
+PACKAGECONFIG_append_mx6q = "egl cairo-glesv2"
+PACKAGECONFIG_append_mx6dl = "egl cairo-glesv2"
+PACKAGECONFIG_append_mx6sx = "egl cairo-glesv2"
 
 EXTRA_OECONF_append_mx6 = " \
     --disable-libunwind \
