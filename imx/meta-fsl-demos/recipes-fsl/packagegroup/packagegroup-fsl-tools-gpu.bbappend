@@ -7,15 +7,9 @@ X11_TOOLS_INSTALL = ""
 X11_TOOLS_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
    'xserver-xorg-extension-viv-hdmi', '', d)}"
 
-SOC_TOOLS_GPU_mx6sl = " \
-    gpu-viv-bin-mx6sl \
-    gpu-viv-g2d \
-    fsl-gpu-sdk \
-    "
 RDEPENDS_${PN} += " \
     ${DFB_TOOLS_INSTALL} \
     ${X11_TOOLS_INSTALL} \
 "
-
 SOC_TOOLS_GPU_mx6 += " fsl-gpu-sdk"
 
