@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
-SRC_URI += "file://0001-Add-Vivante-EGL-support.patch \
+SRC_URI_append_mx6 += "file://0001-Add-Vivante-EGL-support.patch \
             file://0002-Add-Vivante-GAL2D-support.patch \
             file://0003-Distorted-line-and-shadow-if-use-2d-com.patch \
             file://0004-Desktop-shell-Don-t-assume-there-is-a-pointer.patch \
@@ -33,11 +33,11 @@ EXTRA_OEMAKE_append_mx6sl = " \
     FB_COMPOSITOR_LIBS="-lwayland-server -lxkbcommon" \
     "
 
-do_install_append () {
+do_install_append_mx6 () {
     install -d ${D}${sysconfdir}/profile.d/
     install -m 0755 ${WORKDIR}/weston.sh ${D}${sysconfdir}/profile.d/
 }
 
-FILES_${PN} += "${sysconfdir}/profile.d/weston.sh"
+FILES_${PN}_mx6 += "${sysconfdir}/profile.d/weston.sh"
 
 PACKAGE_ARCH_mx6 = "${MACHINE_ARCH}"
