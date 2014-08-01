@@ -24,9 +24,9 @@ SRC_URI[sha256sum] = "12c78f8c666fdfb1745af9cc22416f03ef670b6ee3db079f6e90e1a3e5
 S = "${WORKDIR}/${PN}-${PV}"
 
 SUPPORTED_APIS = "OpenVG "
-SUPPORTED_APIS_append_mx6q = "GLES1.1 GLES2.0"
-SUPPORTED_APIS_append_mx6dl = "GLES1.1 GLES2.0"
-SUPPORTED_APIS_append_mx6sx = "GLES1.1 GLES2.0"
+SUPPORTED_APIS_append_mx6q = " GLES1.1 GLES2.0"
+SUPPORTED_APIS_append_mx6dl = " GLES1.1 GLES2.0"
+SUPPORTED_APIS_append_mx6sx = " GLES1.1 GLES2.0"
 
 MAKEFILE_NO_X11 = "${@base_contains('DISTRO_FEATURES', 'wayland', 'Makefile.wl', \
                                      base_contains('DISTRO_FEATURES', 'directfb', 'Makefile.Dfb', 'Makefile.fbdev', d), d)}"
