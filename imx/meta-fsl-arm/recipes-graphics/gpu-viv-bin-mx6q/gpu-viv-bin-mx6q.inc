@@ -91,7 +91,7 @@ python __anonymous() {
 
     for p in (("libegl", "libegl1"), ("libgl", "libgl1"),
               ("libgles1", "libglesv1-cm1"), ("libgles2", "libglesv2-2"),
-              ("libgles3",)):
+              ("libgles3",), ("libopenvg",)):
         fullp = p[0] + "-mx6"
         pkgs = " ".join(p)
         d.setVar("DEBIAN_NOAUTONAME_" + fullp, "1")
