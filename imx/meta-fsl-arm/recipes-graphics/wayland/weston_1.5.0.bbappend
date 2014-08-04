@@ -27,8 +27,8 @@ EXTRA_OEMAKE_append_mx6 = " \
     CLIENT_CFLAGS="-I ${STAGING_INCDIR}/cairo -I ${STAGING_INCDIR}/pixman-1 -DLINUX -DEGL_API_FB -DEGL_API_WL" \
 "
 EXTRA_OEMAKE_append_mx6sl = " \
-    COMPOSITOR_LIBS="-lGAL -lwayland-server -lxkbcommon -lpixman-1" \
-    FB_COMPOSITOR_LIBS="-lwayland-server -lxkbcommon" \
+    COMPOSITOR_LIBS="-lEGL -lGAL -lwayland-server -lxkbcommon -lpixman-1" \
+    FB_COMPOSITOR_LIBS="-lEGL -lwayland-server -lxkbcommon" \
     "
 EXTRA_OEMAKE_append_mx6q = " \
     COMPOSITOR_LIBS="-lGLESv2 -lEGL -lGAL -lwayland-server -lxkbcommon -lpixman-1" \
