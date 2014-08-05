@@ -8,8 +8,8 @@ S = "${WORKDIR}/gst1.0-fsl-plugins-${PV}"
 
 EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 
-SRC_URI[md5sum] = "19834b71ee2f0f12886464f60085bae2"
-SRC_URI[sha256sum] = "345c5585b64b78685efdfe68cfeea945679a562968ea9b0ba86472fa196edbcd"
+SRC_URI[md5sum] = "38d20aa22910a841593318aa638fb702"
+SRC_URI[sha256sum] = "972babc09f53fb0139a350c5b4267101793fcb96d289c4ae402d6a6ddddbe085"
 
 DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base gpu-viv-g2d"
 
