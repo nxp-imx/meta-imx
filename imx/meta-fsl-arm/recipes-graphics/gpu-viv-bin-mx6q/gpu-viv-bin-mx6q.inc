@@ -20,8 +20,7 @@ PE = "1"
 
 inherit fsl-eula-unpack
 
-# FIXME: Drop 'beta' suffix for GA release
-SRC_URI = "${FSL_MIRROR}/${PN}-3.10.31-1.1.0-beta-hfp.bin;fsl-eula=true \
+SRC_URI = "${FSL_MIRROR}/${PN}-3.10.31-1.1.0-hfp.bin;fsl-eula=true \
            file://egl.pc \
            file://egl_x11.pc \
            file://glesv1_cm.pc \
