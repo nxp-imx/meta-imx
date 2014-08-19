@@ -114,9 +114,9 @@ do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
 
-    cp -a ${S}/usr/lib/*.so* ${D}${libdir}
-    cp -axr ${S}/usr/include/* ${D}${includedir}
-    cp -axr ${S}/opt ${D}
+    cp -P ${S}/usr/lib/*.so* ${D}${libdir}
+    cp -r ${S}/usr/include/* ${D}${includedir}
+    cp -r ${S}/opt ${D}
 
     install -d ${D}${libdir}/pkgconfig
 
@@ -175,6 +175,7 @@ do_install () {
     # and avoid rework in other packages, when possible
     mv ${D}${libdir}/libGL.so.1.2 ${D}${libdir}/libGL.so.1.2.0
     ln -sf libGL.so.1.2.0 ${D}${libdir}/libGL.so.1.2
+    ln -sf libGL.so.1.2.0 ${D}${libdir}/libGL.so.1
     ln -sf libGL.so.1.2.0 ${D}${libdir}/libGL.so
     mv ${D}${libdir}/libEGL-${backend}.so ${D}${libdir}/libEGL.so.1.0
     ln -sf libEGL.so.1.0 ${D}${libdir}/libEGL.so.1
@@ -184,9 +185,15 @@ do_install () {
 
     # update libglesv2 as backend dependent
     rm -rf ${D}${libdir}/libGLESv2*
-    cp -a ${S}/usr/lib/libGLESv2-${backend}.so ${D}${libdir}/libGLESv2.so.2.0.0
+    cp ${S}/usr/lib/libGLESv2-${backend}.so ${D}${libdir}/libGLESv2.so.2.0.0
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so.2
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
+
+ # skip packaging wayland libraries if no support is requested
+ if [ "${USE_WL}" = "no" ]; then
+  rm ${D}${libdir}/libgc_wayland_protocol.*
+  rm ${D}${libdir}/libwayland-viv.*
+  fi
 
     for backend in wl x11 fb dfb dri; do
         find ${D}${libdir} -name "*-$backend.so" -exec rm '{}' ';'
@@ -277,6 +284,7 @@ FILES_libvivante-mx6-dev = "${libdir}/libVIVANTE${SOLIBSDEV}"
 FILES_libvivante-mx6-dbg = "${libdir}/.debug/libVIVANTE${SOLIBS}"
 
 FILES_libvivante-dri-mx6 = "${libdir}/dri/vivante_dri.so"
+RDEPENDS_libvivante-dri-mx6 = "libdrm"
 
 FILES_libvivante-dfb-mx6 = "${libdir}/directfb-1.7-1/gfxdrivers/libdirectfb_gal.so"
 
