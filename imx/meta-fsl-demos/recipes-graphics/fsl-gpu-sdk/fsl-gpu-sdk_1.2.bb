@@ -2,12 +2,13 @@ SUMMARY = "Freescale GPU SDK Samples"
 DESCRIPTION = "Set of sample applications for Freescale GPU"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=44e96dac83a60d6c21a6055f7b31cf0c"
-DEPENDS = "virtual/libopenvg ${WL_DEPENDS}"
+DEPENDS = "virtual/libopenvg ${WL_DEPENDS} ${DFB_DEPENDS} "
 DEPENDS_append_mx6q = " virtual/libgles1 virtual/libgles2 "
 DEPENDS_append_mx6dl = " virtual/libgles1 virtual/libgles2 "
 DEPENDS_append_mx6sx = " virtual/libgles1 virtual/libgles2 "
 
 WL_DEPENDS = "${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
+DFB_DEPENDS =  "${@base_contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}"
 
 inherit fsl-eula-unpack
 
