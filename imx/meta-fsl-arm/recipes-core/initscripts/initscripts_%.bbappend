@@ -1,5 +1,5 @@
 # Append to remove /proc/cpu/aligntment from alignmnet script
-FILESEXTRAPATHS_prepend := "${THISDIR}/arm"
+FILESEXTRAPATHS_prepend := "${THISDIR}/arm:"
 
 SRC_URI += "file://alignment.sh"
 
