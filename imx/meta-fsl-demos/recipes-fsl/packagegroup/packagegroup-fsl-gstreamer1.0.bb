@@ -4,6 +4,8 @@
 DESCRIPTION = "Freescale package group - gstreamer"
 LICENSE = "MIT"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit packagegroup
 
 GST_EXTRA = "gstreamer1.0-plugins-bad-rawparse"
@@ -20,5 +22,3 @@ RDEPENDS_${PN} += " \
     ${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "gst1.0-fsl-plugin", "gst1.0-fsl-plugin-gplay", "", d)} \
     ${GST_INSTALL} \
 "
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
