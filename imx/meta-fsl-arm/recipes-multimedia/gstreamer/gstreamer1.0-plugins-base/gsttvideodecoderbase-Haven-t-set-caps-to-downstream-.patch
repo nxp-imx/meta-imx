@@ -1,0 +1,50 @@
+From 66905c3a3d47a8fa5fbafa78fae81b3e5b37b331 Mon Sep 17 00:00:00 2001
+From: Song Bing <b06498@freescale.com>
+Date: Tue, 26 Aug 2014 10:37:27 +0800
+Subject: [PATCH][gsttvideodecoderbase] Haven't set caps to downstream when
+ select another video track.
+
+Video decoder base should set caps even if caps is same with previews as
+video sink should know the new caps and prepare new buffer pool when
+select another video track.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=735423
+
+Upstream Status: Pending
+
+Signed-off-by: Song Bing <b06498@freescale.com>
+---
+ gst-libs/gst/video/gstvideodecoder.c |   10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
+
+diff --git a/gst-libs/gst/video/gstvideodecoder.c b/gst-libs/gst/video/gstvideodecoder.c
+index dd8abe3..6cfba58 100644
+--- a/gst-libs/gst/video/gstvideodecoder.c
++++ b/gst-libs/gst/video/gstvideodecoder.c
+@@ -3085,7 +3085,6 @@ gst_video_decoder_negotiate_default (GstVideoDecoder * decoder)
+   GstAllocationParams params;
+   gboolean ret = TRUE;
+   GstVideoCodecFrame *frame;
+-  GstCaps *prevcaps;
+ 
+   g_return_val_if_fail (state, FALSE);
+   g_return_val_if_fail (GST_VIDEO_INFO_WIDTH (&state->info) != 0, FALSE);
+@@ -3129,14 +3128,7 @@ gst_video_decoder_negotiate_default (GstVideoDecoder * decoder)
+     }
+   }
+ 
+-  prevcaps = gst_pad_get_current_caps (decoder->srcpad);
+-  if (!prevcaps || !gst_caps_is_equal (prevcaps, state->caps))
+-    ret = gst_pad_set_caps (decoder->srcpad, state->caps);
+-  else
+-    ret = TRUE;
+-  if (prevcaps)
+-    gst_caps_unref (prevcaps);
+-
++  ret = gst_pad_set_caps (decoder->srcpad, state->caps);
+   if (!ret)
+     goto done;
+   decoder->priv->output_state_changed = FALSE;
+-- 
+1.7.9.5
+
