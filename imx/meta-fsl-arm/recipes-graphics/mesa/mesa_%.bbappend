@@ -1,1 +1,3 @@
-PACKAGECONFIG[x11] = "--enable-glx,--disable-glx,${X11_DEPS}"
+PROVIDES_remove_mx6sx = "virtual/libgl"
+
+EXTRA_OECONF_mx6 := "${@'${EXTRA_OECONF}'.replace('--enable-glx-tls','--enable-glx')}"
