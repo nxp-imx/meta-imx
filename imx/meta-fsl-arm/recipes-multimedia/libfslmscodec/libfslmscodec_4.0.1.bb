@@ -30,12 +30,18 @@ do_install_append() {
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 PACKAGES += "${PN}-testapps"
 
-python populate_packages_prepend() {
+
+python __set_insane_skip() {
+    # Ensure we have PACKAGES expanded
+    bb.build.exec_func("read_subpackage_metadata", d)
+
     # FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
     # the source we cannot fix it. Disable the insane check for now.
     for p in d.getVar('PACKAGES', True).split():
         d.setVar("INSANE_SKIP_%s" % p, "ldflags textrel libdir")
 }
+
+do_package_qa[prefuncs] += "__set_insane_skip"
 
 FILES_${PN} += "${libdir}/imx-mm/audio-codec/wrap/*${SOLIBS} \
 "
