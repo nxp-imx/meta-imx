@@ -22,6 +22,7 @@ RDEPENDS_${PN} += " \
     cpufrequtils \
     nano \
     ntpdate \
+    minicom \
 "
 
 SOC_TOOLS_TESTAPPS = ""
