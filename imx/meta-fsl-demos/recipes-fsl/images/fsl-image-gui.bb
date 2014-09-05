@@ -47,14 +47,13 @@ X11_IMAGE_INSTALL_append_mx6sl = " libopenvg-mx6"
 
 # Add in Graphics
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
-   'packagegroup-fsl-gstreamer \
-    packagegroup-core-x11-sato-games \
+   'packagegroup-core-x11-sato-games \
     xorg-minimal-fonts \
     liberation-fonts', '', d)}"
 
 # set mm image install specific to SOC
-MM_IMAGE_INSTALL = ""
-MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-gstreamer1.0"
+MM_IMAGE_INSTALL = "packagegroup-fsl-gstreamer"
+MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-gstreamer packagegroup-fsl-gstreamer1.0"
 
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
