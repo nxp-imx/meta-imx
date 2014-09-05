@@ -23,6 +23,7 @@ RDEPENDS_${PN} += " \
     nano \
     ntpdate \
     minicom \
+    coreutils \
 "
 
 SOC_TOOLS_TESTAPPS = ""
