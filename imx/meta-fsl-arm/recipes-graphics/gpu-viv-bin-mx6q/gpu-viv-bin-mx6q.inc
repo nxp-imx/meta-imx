@@ -215,7 +215,7 @@ do_install () {
                ${D}/opt/viv_samples/vdk \
                ${D}/opt/viv_samples/es20 ${D}/opt/viv_samples/cl11
 
-        ln -sf ${D}${libdir}/libOpenVG.2d.so ${D}${libdir}/libOpenVG.so
+        ln -sf libOpenVG.2d.so ${D}${libdir}/libOpenVG.so
     fi
 
     find ${D}${libdir} -type f -exec chmod 644 {} \;
