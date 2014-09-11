@@ -2,17 +2,15 @@
 
 SUMMARY = "Tool to trace gpu memory info"
 
-#require recipes-graphics/gpu-viv-g2d/gpu-viv-g2d.inc
-LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://usr/include/g2d.h;endline=7;md5=53b61e015f8e1c386057c5ba8b081d53"
-
-inherit fsl-eula-unpack
+require recipes-graphics/gpu-viv-g2d/gpu-viv-g2d.inc
 
 SRC_URI = "${FSL_MIRROR}/gpu-viv-g2d-${PV}.bin;fsl-eula=true"
 S="${WORKDIR}/gpu-viv-g2d-${PV}"
 
-SRC_URI[md5sum] = "5bf36981a865f8aaa9de90bc3db6645a"
-SRC_URI[sha256sum] = "cd545032d191ebd2d7df5589911d49886406eddf4409130e4175f62b798a2433"
+LIC_FILES_CHKSUM = "file://usr/include/g2d.h;endline=7;md5=53b61e015f8e1c386057c5ba8b081d53"
+
+SRC_URI[md5sum] = "4f5e7537955ce62aa54bac037dcc1569"
+SRC_URI[sha256sum] = "cbb1f03312d5eabcdba97db5e94bdc5cfb06220ff206f00179a9aebf622aceac"
 
 do_install () {
     install -d ${D}${bindir}
@@ -21,6 +19,3 @@ do_install () {
 }
 
 FILES_${PN} += "  ${bindir}/gmem_info "
-
-PACKAGE_ARCH = "${MACHINE_SOCARCH}"
-COMPATIBLE_MACHINE = "(mx6)"
