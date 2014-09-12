@@ -24,7 +24,6 @@ RDEPENDS_${PN} += " \
     ntpdate \
     minicom \
     coreutils \
-    gmem-info \
 "
 
 SOC_TOOLS_TESTAPPS = ""
