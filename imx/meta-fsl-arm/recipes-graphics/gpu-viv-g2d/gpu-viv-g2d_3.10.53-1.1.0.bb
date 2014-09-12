@@ -7,7 +7,7 @@ S="${WORKDIR}/${PN}-${PV}"
 
 LIC_FILES_CHKSUM = "file://usr/include/g2d.h;endline=7;md5=53b61e015f8e1c386057c5ba8b081d53"
 
-SRC_URI[md5sum] = "4f5e7537955ce62aa54bac037dcc1569"
-SRC_URI[sha256sum] = "cbb1f03312d5eabcdba97db5e94bdc5cfb06220ff206f00179a9aebf622aceac"
+SRC_URI[md5sum] = "f727c43f1a7a7aba6572a55aa8afecb1"
+SRC_URI[sha256sum] = "73aee62f49bfd284bb4fddb5143a7af24221229c2a175e74f2e8ea7babd74c3a"
 
 FILES_libg2d =  "${libdir}/libg2d-viv${SOLIBS} ${libdir}/libg2d${SOLIBS}"

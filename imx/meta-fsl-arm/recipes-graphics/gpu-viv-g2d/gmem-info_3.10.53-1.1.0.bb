@@ -14,8 +14,8 @@ DEPENDS += "gpu-viv-bin-mx6q"
 SRC_URI = "${FSL_MIRROR}/gpu-viv-g2d-${PV}.bin;fsl-eula=true"
 S="${WORKDIR}/gpu-viv-g2d-${PV}"
 
-SRC_URI[md5sum] = "4f5e7537955ce62aa54bac037dcc1569"
-SRC_URI[sha256sum] = "cbb1f03312d5eabcdba97db5e94bdc5cfb06220ff206f00179a9aebf622aceac"
+SRC_URI[md5sum] = "f727c43f1a7a7aba6572a55aa8afecb1"
+SRC_URI[sha256sum] = "73aee62f49bfd284bb4fddb5143a7af24221229c2a175e74f2e8ea7babd74c3a"
 
 do_install () {
     install -d ${D}${bindir}
