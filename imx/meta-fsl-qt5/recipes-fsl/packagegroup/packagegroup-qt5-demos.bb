@@ -16,7 +16,6 @@ RDEPENDS_${PN} += " \
     qtsmarthome \
     qt5ledscreen \
     quitbattery \
-    qt5everywheredemo \ 
     qt5nmapcarousedemo \
     qt5nmapper \
     cinematicexperience \
