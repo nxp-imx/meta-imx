@@ -28,7 +28,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 # Backend-specific packages
 # Direct FB packages
 DFB_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'directfb', \
-    'packagegroup-core-full-cmdline packagegroup-core-directfb libvivante-dfb-mx6', '', d)}"
+    'packagegroup-core-full-cmdline packagegroup-core-directfb libvivante-dfb-mx6 rpm', '', d)}"
 
 # Wayland packages
 WAYLAND_IMAGE_INSTALL = ""
