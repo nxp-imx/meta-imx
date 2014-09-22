@@ -5,7 +5,7 @@ require gpu-viv-bin-mx6q.inc
 
 S="${WORKDIR}/${PN}-3.10.53-1.1.0-hfp"
 
-SRC_URI[md5sum] = "b601e7d9d1ab54412bfbc90f435d6f5b"
-SRC_URI[sha256sum] = "cb756d349f0e7e4c3d42fa5d0cb30762c191cb24a40d0228caea3e9b1ad334c4"
+SRC_URI[md5sum] = "fcb889e8ad8a72df45db44ada936ba81"
+SRC_URI[sha256sum] = "a737339f3473fd974a78d6eef18cff02822d77d36f120f1c5125978c1c439d8a"
 
 PACKAGE_FP_TYPE = "hardfp"
