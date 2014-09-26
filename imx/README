@@ -127,10 +127,9 @@ These codecs have contractual restrictions that require separate distribution.
 The Manufacturing Tool - MFGTool
 --------------------------------
 In this release MFGTool uses the community setup.  
-To build MFGTool, build the following components:
+To build MFGTool, build the following:
 
-   bitbake linux-imx-mfgtool
-   bitbake u-boot-imx-mfgtool
+   bitbake fsl-image-mfgtool-initramfs
 
 End User License Agreement
 --------------------------
