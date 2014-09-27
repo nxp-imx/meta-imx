@@ -9,8 +9,8 @@ S="${WORKDIR}/${PN}-${PV}"
 
 PE = "1"
 
-SRC_URI[md5sum] = "0485e457eafe5a10274d171b3af79e2f"
-SRC_URI[sha256sum] = "011eb34c6fd1b1ea9894bbe07a539c1aeee1500bc8fdd29d8ce1dc1d02f79e24"
+SRC_URI[md5sum] = "d5074d3f40f33e678503015141b4ac09"
+SRC_URI[sha256sum] = "898ea4c204b920098ef08be17bff31a0ebc48333630d1150ecbb2e35f94db7ed"
 
 PLATFORM_mx6sl = "IMX6S"
 PLATFORM_mx6sx = "IMX6S"
