@@ -8,8 +8,8 @@ EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 SRC_URI = "${FSL_MIRROR}/gst-fsl-plugins-${PV}.tar.gz"
 S = "${WORKDIR}/gst-fsl-plugins-${PV}"
 
-SRC_URI[md5sum] = "6db4bec9c1cd75758c3c529896307810"
-SRC_URI[sha256sum] = "629bbb904879571c058647acfa07ac7a11ea32350be14f4cb2b72dbac80ae42c"
+SRC_URI[md5sum] = "2770724e98a85208be44cb43c7e58a6d"
+SRC_URI[sha256sum] = "3c6c41a9f7fffd406e6b42d0e57658762d7cc0a7f1abd300a053705709804c4c"
 
 DEPENDS_append = " gstreamer gst-plugins-base"
 
