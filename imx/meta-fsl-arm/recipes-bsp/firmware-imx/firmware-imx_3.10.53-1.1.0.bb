@@ -8,8 +8,8 @@ SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true"
 
 S = "${WORKDIR}/firmware-imx-${PV}"
 
-SRC_URI[md5sum] = "4e102affc4273f424da4cec9f46adae8"
-SRC_URI[sha256sum] = "8fcfc713321c4ffaafee248feb392b7bc9b913b7abee5020fceaca1d1a49ac99"
+SRC_URI[md5sum] = "0ac17aabd4849a68b96fd23d92eac566"
+SRC_URI[sha256sum] = "c83a368432d8725d16679c08726b293d09ff6c4a12a0ead44a2ee46c70cd542a"
 
 do_install() {
 	install -d ${D}/lib/firmware
