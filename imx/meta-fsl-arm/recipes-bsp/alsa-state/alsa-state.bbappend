@@ -4,12 +4,11 @@
 # Append path for freescale layer to include alsa-state asound.conf
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append_mx6 = " file://asound.conf.3.10.17 \
+SRC_URI_append_mx6 = " \
 	file://asound.state.3.10.17 \
 "
 
 do_install_append_mx6() {
-    install -m 0644 ${WORKDIR}/asound.conf.3.10.17 ${D}${sysconfdir}/asound.conf
     install -m 0644 ${WORKDIR}/asound.state.3.10.17 ${D}${localstatedir}/lib/alsa/asound.state
 }
 
