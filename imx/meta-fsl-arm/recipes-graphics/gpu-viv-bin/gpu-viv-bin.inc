@@ -11,7 +11,7 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'virtual/libx11 libxdamag
                              base_contains('DISTRO_FEATURES', 'wayland', 'wayland', \
                                            '', d), d)}"
 
-PROVIDES += "virtual/wayland-egl virtual/libgal-x11 virtual/egl virtual/libopenvg"
+PROVIDES += "virtual/wayland-egl virtual/libgal-x11 virtual/egl virtual/libopenvg virtual/libg2d"
 PROVIDES_append_mx6q  = " virtual/libgl virtual/libgles1 virtual/libgles2"
 PROVIDES_append_mx6dl  = " virtual/libgl virtual/libgles1 virtual/libgles2"
 PROVIDES_append_mx6sx  = " virtual/libgl virtual/libgles1 virtual/libgles2"
@@ -51,6 +51,9 @@ PACKAGES =+ "libclc-mx6 libclc-mx6-dev libclc-mx6-dbg \
 	libwayland-viv-mx6 libwayland-viv-mx6-dev libwayland-viv-mx6-dbg \
 	libgc-wayland-protocol-mx6 libgc-wayland-protocol-mx6-dev libgc-wayland-protocol-mx6-dbg \
 	libwayland-egl-mx6-dev \
+        gpu-viv-g2d-mx6 gpu-viv-g2d-mx6-dev gpu-viv-g2d-mx6-dbg \
+	gpu-viv-tools-mx6 gpu-viv-tools-mx6-dbg\
+	gpu-viv-demos-mx6 gpu-viv-demos-mx6-dbg \
 "
 
 # Skip package if it does not match the machine float-point type in use
@@ -113,10 +116,12 @@ IS_MX6SL_mx6sl = "1"
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
+    install -d ${D}${bindir}
 
     cp -P ${S}/usr/lib/*.so* ${D}${libdir}
     cp -r ${S}/usr/include/* ${D}${includedir}
     cp -r ${S}/opt ${D}
+    cp -axr ${S}/usr/bin/* ${D}${bindir}
 
     install -d ${D}${libdir}/pkgconfig
 
@@ -222,9 +227,8 @@ do_install () {
     find ${D}${includedir} -type f -exec chmod 644 {} \;
 }
 
-FILES_${PN} += "/opt"
 FILES_${PN}-dev = "${includedir}"
-FILES_${PN}-dbg = "${libdir}/.debug /opt/viv_samples/*/*/.debug"
+FILES_${PN}-dbg = "${libdir}/.debug"
 INSANE_SKIP_${PN} += "rpaths"
 
 FILES_libclc-mx6 = "${libdir}/libCLC${SOLIBS}"
@@ -301,5 +305,17 @@ FILES_libgc-wayland-protocol-mx6-dbg = "${libdir}/libgc_wayland_protocol${SOLIBS
 FILES_libwayland-egl-mx6-dev = "${libdir}/pkgconfig/wayland-egl.pc"
 
 FILES_libvivante-dfb-mx6 += "${sysconfdir}/directfbrc"
+
+INSANE_SKIP_gpu-viv-g2d-mx6 += "dev-so"
+FILES_gpu-viv-g2d-mx6 = "${libdir}/libg2d* "
+FILES_gpu-viv-g2d-mx6-dev = "${includedir}/g2d.h"
+FILES_gpu-viv-g2d-mx6-dbg = "${libdir}/.debug/libg2d${SOLIBS}"
+
+FILES_gpu-viv-tools-mx6 = "${bindir}/gmem_info"
+FILES_gpu-viv-tools-mx6-dbg = "${bindir}/gmem_info"
+
+FILES_gpu-viv-demos-mx6 = "/opt"
+FILES_gpu-viv-demos-mx6-dbg = "/opt/viv_samples/*/*/.debug"
+INSANE_SKIP_gpu-viv-demos-mx6 += "rpaths"
 
 COMPATIBLE_MACHINE = "(mx6)"

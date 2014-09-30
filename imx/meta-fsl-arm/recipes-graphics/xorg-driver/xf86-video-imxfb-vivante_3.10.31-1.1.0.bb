@@ -8,7 +8,7 @@ PE = "3"
 
 inherit autotools-brokensep
 
-DEPENDS += "virtual/xserver virtual/libx11 virtual/libgal-x11 gpu-viv-bin-mx6q pixman"
+DEPENDS += "virtual/xserver virtual/libx11 virtual/libgal-x11 gpu-viv-bin pixman"
 
 LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=95cf961a2ceacdf7cf43caef25766779"
 
