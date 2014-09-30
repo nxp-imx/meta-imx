@@ -11,7 +11,7 @@ EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 SRC_URI[md5sum] = "38d20aa22910a841593318aa638fb702"
 SRC_URI[sha256sum] = "972babc09f53fb0139a350c5b4267101793fcb96d289c4ae402d6a6ddddbe085"
 
-DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base gpu-viv-g2d"
+DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base gpu-viv-bin"
 
 FILES_${PN} = "${libdir}/gstreamer-1.0/*.so ${datadir}"
 FILES_${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"
