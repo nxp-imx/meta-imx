@@ -13,3 +13,11 @@ RDEPENDS_${PN} += " \
 "
 SOC_TOOLS_GPU_mx6 += " fsl-gpu-sdk"
 
+SOC_TOOLS_GPU_remove_mx6 = " \
+    gpu-viv-bin-mx6q \
+    gpu-viv-g2d \
+"
+SOC_TOOLS_GPU_append_mx6 = " \
+    gpu-viv-bin \
+    gpu-viv-g2d-mx6 \
+"
