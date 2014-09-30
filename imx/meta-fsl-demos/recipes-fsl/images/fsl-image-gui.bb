@@ -64,6 +64,7 @@ IMAGE_INSTALL += " \
     ${MM_IMAGE_INSTALL} \
     packagegroup-fsl-tools-gpu \
     packagegroup-fsl-tools-gpu-external \
+    packagegroup-fsl-demos-gpu \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
     "
