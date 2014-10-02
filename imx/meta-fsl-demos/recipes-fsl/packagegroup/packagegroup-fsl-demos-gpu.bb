@@ -11,7 +11,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = " \
+RDEPENDS_${PN}_mx6 = " \
     gpu-viv-tools-mx6 \
     gpu-viv-demos-mx6 \
 "
