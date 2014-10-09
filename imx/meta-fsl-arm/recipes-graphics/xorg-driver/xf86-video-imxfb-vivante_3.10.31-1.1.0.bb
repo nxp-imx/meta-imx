@@ -14,8 +14,8 @@ LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=95cf96
 
 # FIXME: Drop 'alpha' suffix for GA release
 SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}-beta.tar.gz"
-SRC_URI[md5sum] = "5695e9a3ddc37da0e783862e4108fbae"
-SRC_URI[sha256sum] = "c08def7fb98c11cba08bc21522bfb2785576b77db4b36954b15926401ac31c0e"
+SRC_URI[md5sum] = "5dc9bc45a4e88f9c94c5dfa83ffa993c"
+SRC_URI[sha256sum] = "e369bf1dd0401fff4fcc7202c2879d7fff9468f3ee34ba2ef3f159d710f76557"
 
 EXTRA_OEMAKE += "-C EXA/src -f makefile.linux prefix=${D}/usr \
                  sysroot=${STAGING_DIR_TARGET} \
