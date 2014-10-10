@@ -1,2 +1,2 @@
 DDPDEPENDS = "libfslddpcodec"
-PACKAGECONFIG[ddp] = "--enable-ddpdec,--disable-ddpdec,,${DDPDEPENDS}"
+PACKAGECONFIG[ddp] = ",,${DDPDEPENDS},${DDPDEPENDS}"
