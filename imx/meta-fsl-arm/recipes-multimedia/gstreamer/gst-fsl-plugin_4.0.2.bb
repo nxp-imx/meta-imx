@@ -13,6 +13,14 @@ SRC_URI[sha256sum] = "3c6c41a9f7fffd406e6b42d0e57658762d7cc0a7f1abd300a053705709
 
 DEPENDS_append = " gstreamer gst-plugins-base"
 
+# FIXME: Add all features
+# feature from excluded mm packages
+PACKAGECONFIG[ac3] += "--enable-ac3dec,--disable-ac3dec,libfslac3codec,libfslac3codec"
+# feature from special mm packages
+PACKAGECONFIG[aacp] += "--enable-aacpdec,--disable-aacpdec,libfslaacpcodec,libfslaacpcodec"
+MSDEPENDS = "libfslmsparser libfslmscodec"
+PACKAGECONFIG[wma10dec] +="--enable-wma10dec,--disable-wma10dec,${MSDEPENDS},${MSDEPENDS}"
+PACKAGECONFIG[wma8enc] +="--enable-wma8enc,--disable-wma8enc,${MSDEPENDS},${MSDEPENDS}"
 PACKAGECONFIG[wmv9mpdec] +="--enable-wmv9mpdec,--disable-wmv9mpdec,${MSDEPENDS},${MSDEPENDS}"
 PACKAGECONFIG[wmv78dec] +="--enable-wmv78dec,--disable-wmv78dec,${MSDEPENDS},${MSDEPENDS}"
 
