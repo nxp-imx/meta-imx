@@ -11,7 +11,19 @@ EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 SRC_URI[md5sum] = "5ea09ead59df2f2230074f1173f41729"
 SRC_URI[sha256sum] = "02acd2608c98d464e41b1f6eba482c5c33437624c78140d26cc0e3213dc71304"
 
-DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base gpu-viv-bin"
+DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base"
+
+PACKAGECONFIG ?= "overlaysink"
+# FIXME: Add all features
+# feature from excluded mm packages
+PACKAGECONFIG[ac3] += ",,libfslac3codec,libfslac3codec"
+# feature from special mm packages
+PACKAGECONFIG[aacp] += ",,libfslaacpcodec,libfslaacpcodec"
+MSDEPENDS = "libfslmsparser libfslmscodec"
+PACKAGECONFIG[wma10dec] += ",,${MSDEPENDS},${MSDEPENDS}"
+PACKAGECONFIG[wma8enc] += "--enable-wma8enc,--disable-wma8enc,${MSDEPENDS},${MSDEPENDS}"
+OVDEPENDS = "virtual/libg2d"
+PACKAGECONFIG[overlaysink] += "--enable-overlaysink,--disable-overlaysink, ${OVDEPENDS}"
 
 FILES_${PN} = "${libdir}/gstreamer-1.0/*.so ${datadir}"
 FILES_${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"
