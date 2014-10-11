@@ -2,13 +2,16 @@ commit f9536544f5ad182b4f78d0143d1daa45dd64e624
 Author: Song Bing <b06498@freescale.com>
 Date:   Thu Oct 9 17:37:43 2014 +0800
 
-    [gststreamsynchronizer] send EOS event insterd of GAP event as GAP
-    event has issue when A/V have different duration.
+[gststreamsynchronizer] send EOS event insterd of GAP event as GAP
+event has issue when A/V have different duration.
     
-    send EOS event insterd of GAP event as GAP
-    event has issue when A/V have different duration.
+send EOS event insterd of GAP event as GAP event has issue when A/V have different duration.
     
-    Signed-off-by: Song Bing <b06498@freescale.com>
+https://bugzilla.gnome.org/show_bug.cgi?id=736655
+
+Upstream Status: Inappropriate [platform specific]
+
+Signed-off-by: Song Bing <b06498@freescale.com>
 
 diff --git a/gst/playback/gststreamsynchronizer.c b/gst/playback/gststreamsynchronizer.c
 index 3e17c55..ff42d72 100644
