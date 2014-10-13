@@ -1,7 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
 SRC_URI_append_mx6 = " file://0001-Add-Vivante-EGL-and-GAL2D-compositor-support.patch \
-				       file://0002-disable_libinput_backend.patch \
 				       file://weston.sh "
 
 PACKAGECONFIG_mx6 = "fbdev"
