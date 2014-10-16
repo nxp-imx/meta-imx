@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "30b555771e7cb921ccb9430c4a86940aa3938d05506e81d2417c03e304
 
 inherit autotools pkgconfig
 
-DEPENDS = "libevdev"
+DEPENDS = "libevdev mtdev"
 
 FILES_${PN} += "/opt/${PN}"
 FILES_${PN}-dbg += "/opt/${PN}/*/.debug"
