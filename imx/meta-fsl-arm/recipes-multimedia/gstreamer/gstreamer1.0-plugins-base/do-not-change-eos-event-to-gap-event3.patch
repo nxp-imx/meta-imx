@@ -3,7 +3,7 @@ Author: Song Bing <b06498@freescale.com>
 Date:   Thu Oct 23 13:35:13 2014 +0800
 
 [streamsynchronizer] One stream can finish playback.
-
+  
 As changed GAP event EOS event, so EOS will send more times, which will
 cause send function return error.
 Streamsynchronizer will don’t send second track EOS event if send the
