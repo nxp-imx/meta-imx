@@ -20,21 +20,8 @@ PE = "1"
 
 inherit fsl-eula-unpack
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
-           file://egl.pc \
-           file://egl_x11.pc \
-           file://glesv1_cm.pc \
-           file://glesv1_cm_x11.pc \
-           file://glesv2.pc \
-           file://glesv2_x11.pc \
-           file://vg.pc \
-           file://vg_x11.pc \
-           file://gc_wayland_protocol.pc \
-           file://wayland-egl.pc \
-           file://wayland-viv.pc \
-           file://directfbrc \
-           file://Vivante.icd \
-          "
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+
 PACKAGES =+ "libclc-mx6 libclc-mx6-dev libclc-mx6-dbg \
 	libgl-mx6 libgl-mx6-dev libgl-mx6-dbg \
 	libgles-mx6 libgles-mx6-dev libgles-mx6-dbg \
@@ -131,37 +118,37 @@ do_install () {
 
         backend=x11
 
-        install -m 0644 ${WORKDIR}/egl_x11.pc ${D}${libdir}/pkgconfig/egl.pc
-        install -m 0644 ${WORKDIR}/glesv1_cm_x11.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
-        install -m 0644 ${WORKDIR}/glesv2_x11.pc ${D}${libdir}/pkgconfig/glesv2.pc
-        install -m 0644 ${WORKDIR}/vg_x11.pc ${D}${libdir}/pkgconfig/vg.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/egl_x11.pc ${D}${libdir}/pkgconfig/egl.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/glesv1_cm_x11.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/glesv2_x11.pc ${D}${libdir}/pkgconfig/glesv2.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/vg_x11.pc ${D}${libdir}/pkgconfig/vg.pc
         mv ${D}${libdir}/libGAL_egl.dri.so ${D}${libdir}/libGAL_egl.so
         #FIXME: WL & X11 is not currently functional
         #if [ "${USE_WL}" = "yes" ]; then
-        #    install -m 0644 ${WORKDIR}/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
-        #    install -m 0644 ${WORKDIR}/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
-        #    install -m 0644 ${WORKDIR}/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
+        #    install -m 0644 ${S}/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
+        #    install -m 0644 ${S}/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
+        #    install -m 0644 ${S}/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
         #fi
     elif [ "${USE_WL}" = "yes" ]; then
         backend=wl
 
-        install -m 0644 ${WORKDIR}/egl.pc ${D}${libdir}/pkgconfig/egl.pc
-        install -m 0644 ${WORKDIR}/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
-        install -m 0644 ${WORKDIR}/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
-        install -m 0644 ${WORKDIR}/vg.pc ${D}${libdir}/pkgconfig/vg.pc
-        install -m 0644 ${WORKDIR}/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
-        install -m 0644 ${WORKDIR}/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
-        install -m 0644 ${WORKDIR}/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/egl.pc ${D}${libdir}/pkgconfig/egl.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/vg.pc ${D}${libdir}/pkgconfig/vg.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
         mv ${D}${libdir}/libGAL_egl.${backend}.so ${D}${libdir}/libGAL_egl.so
     else
-        install -m 0644 ${WORKDIR}/egl.pc ${D}${libdir}/pkgconfig/egl.pc
-        install -m 0644 ${WORKDIR}/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
-        install -m 0644 ${WORKDIR}/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
-        install -m 0644 ${WORKDIR}/vg.pc ${D}${libdir}/pkgconfig/vg.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/egl.pc ${D}${libdir}/pkgconfig/egl.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
+        install -m 0644 ${S}/usr/lib/pkgconfig/vg.pc ${D}${libdir}/pkgconfig/vg.pc
 
         if [ "${USE_DFB}" = "yes" ]; then
             install -d ${D}/${sysconfdir}
-            install -m 644 ${WORKDIR}/directfbrc ${D}/${sysconfdir}/directfbrc
+            install -m 644 ${S}/etc/directfbrc ${D}/${sysconfdir}/directfbrc
 
             cp -r ${S}/usr/lib/directfb-* ${D}${libdir}
             backend=dfb
@@ -174,7 +161,7 @@ do_install () {
 
     # Install Vendor ICDs for OpenCL's installable client driver loader (ICDs Loader)
     install -d ${D}${sysconfdir}/OpenCL/vendors/
-    install -m 0644 ${WORKDIR}/Vivante.icd ${D}${sysconfdir}/OpenCL/vendors/Vivante.icd
+    install -m 0644 ${S}/etc/Vivante.icd ${D}${sysconfdir}/OpenCL/vendors/Vivante.icd
 
     # We'll only have one backend here so we rename it to generic name
     # and avoid rework in other packages, when possible
