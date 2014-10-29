@@ -3,10 +3,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 SRC_URI_append_mx6 = " file://0001-Add-Vivante-EGL-and-GAL2D-compositor-support.patch \
 				       file://weston.sh "
 
-PACKAGECONFIG_mx6 = "fbdev"
-PACKAGECONFIG_append_mx6q = " egl cairo-glesv2"
-PACKAGECONFIG_append_mx6dl = " egl cairo-glesv2"
-PACKAGECONFIG_append_mx6sx = " egl cairo-glesv2"
+PACKAGECONFIG_append_mx6q = " cairo-glesv2"
+PACKAGECONFIG_append_mx6dl = " cairo-glesv2"
+PACKAGECONFIG_append_mx6sx = " cairo-glesv2"
+PACKAGECONFIG_remove_mx6sl = "egl"
 
 EXTRA_OECONF_append_mx6 = " \
     --disable-libunwind \
