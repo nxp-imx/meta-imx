@@ -67,7 +67,6 @@ IMAGE_INSTALL += " \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
     "
-IMAGE_INSTALL_remove_mx6sl = "${@base_contains('DISTRO_FEATURES', 'wayland', 'chromium', '', d)}"
 export IMAGE_BASENAME = "fsl-image-gui"
 
 
