@@ -1,0 +1,21 @@
+diff -Naur glmark2-2014.03_org/src/mesh.cpp glmark2-2014.03/src/mesh.cpp
+--- glmark2-2014.03_org/src/mesh.cpp	2014-11-05 10:35:19.728769894 -0600
++++ glmark2-2014.03/src/mesh.cpp	2014-11-05 10:36:12.000000000 -0600
+@@ -569,7 +569,7 @@
+ void
+ Mesh::render_vbo()
+ {
+-    for (size_t i = 0; i < vertex_format_.size(); i++) {
++    for (size_t i = 0; i < attrib_locations_.size(); i++) {
+         if (attrib_locations_[i] < 0)
+             continue;
+         glEnableVertexAttribArray(attrib_locations_[i]);
+@@ -581,7 +581,7 @@
+ 
+     glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
+ 
+-    for (size_t i = 0; i < vertex_format_.size(); i++) {
++    for (size_t i = 0; i < attrib_locations_.size(); i++) {
+         if (attrib_locations_[i] < 0)
+             continue;
+         glDisableVertexAttribArray(attrib_locations_[i]);
