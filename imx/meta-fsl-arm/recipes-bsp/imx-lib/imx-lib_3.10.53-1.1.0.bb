@@ -2,11 +2,6 @@
 
 include recipes-bsp/imx-lib/imx-lib.inc
 
-# FIXME: Drop 'beta' suffix for GA release
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
-
-S="${WORKDIR}/${PN}-${PV}"
-
 PE = "1"
 
 SRC_URI[md5sum] = "c103f0e1afefbd2ec6e6cde82cb437e7"
