@@ -19,32 +19,28 @@ RCONFLICTS_${PN} = "vivante-gpu-sdk"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "c74bba9bfcaf6cb2448c42bb4f597181"
-SRC_URI[sha256sum] = "8bee7fedc91e054713742d949d749195b6e0cfa3479c1b0168e588a4104d47a9"
+SRC_URI[md5sum] = "a7602a6e843fb571f213756223a201cf"
+SRC_URI[sha256sum] = "9622e778f20883cec423425c217a8b99eff8151961a10c154f1ff0833e8ac44a"
 
 S = "${WORKDIR}/${PN}-${PV}"
 
 BACKEND = "${@base_contains('DISTRO_FEATURES', 'x11', 'X11', \
                     base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
-                           base_contains('DISTRO_FEATURES', 'directfb', 'DirectFB', 'FB', d), d), d)}"
+                           base_contains('DISTRO_FEATURES', 'fb', 'FB', 'DirectFB', d), d), d)}"
 do_compile () {
      export FSL_GRAPHICS_SDK=${S}
-     export FSL_PLATFORM_NAME=Yocto
      export ROOTFS=${STAGING_DIR_HOST}
     ./build.sh -f GNUmakefile_Yocto EGLBackend=${BACKEND}
 }
 
 do_install () {
    export FSL_GRAPHICS_SDK=${S}
-   export FSL_PLATFORM_NAME=Yocto
    install -d "${D}/opt/${PN}"
   ./build.sh -f  GNUmakefile_Yocto EGLBackend=${BACKEND} install 
-   cp -r bin/* "${D}/opt/${PN}"
-   rm -rf ${D}/opt/${PN}/GLES2/S05_PrecompiledShader
-   rm -rf ${D}/opt/${PN}/GLES3/S05_PrecompiledShader
+   cp -r bin/* "${D}/opt/${PN}"      
 }
 
 FILES_${PN} += "/opt/${PN}"
 FILES_${PN}-dev = "/usr"
-FILES_${PN}-dbg = "/opt/${PN}/*/*/.debug"
+FILES_${PN}-dbg = "/opt/${PN}/*/.debug"
 INSANE_SKIP_${PN} += "rpaths"
