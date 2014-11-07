@@ -29,12 +29,14 @@ BACKEND = "${@base_contains('DISTRO_FEATURES', 'x11', 'X11', \
                            base_contains('DISTRO_FEATURES', 'fb', 'FB', 'DirectFB', d), d), d)}"
 do_compile () {
      export FSL_GRAPHICS_SDK=${S}
+     export FSL_PLATFORM_NAME=Yocto
      export ROOTFS=${STAGING_DIR_HOST}
     ./build.sh -f GNUmakefile_Yocto EGLBackend=${BACKEND}
 }
 
 do_install () {
    export FSL_GRAPHICS_SDK=${S}
+   export FSL_PLATFORM_NAME=Yocto
    install -d "${D}/opt/${PN}"
   ./build.sh -f  GNUmakefile_Yocto EGLBackend=${BACKEND} install 
    cp -r bin/* "${D}/opt/${PN}"      
