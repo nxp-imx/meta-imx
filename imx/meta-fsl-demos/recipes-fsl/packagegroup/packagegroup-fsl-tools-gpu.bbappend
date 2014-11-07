@@ -5,14 +5,14 @@ DFB_TOOLS_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'directfb', \
 
 X11_TOOLS_INSTALL = ""
 X11_TOOLS_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
-   'xserver-xorg-extension-viv-hdmi fsl-gpu-sdk', '', d)}"
+   'xserver-xorg-extension-viv-hdmi', '', d)}"
 
 RDEPENDS_${PN} += " \
     ${DFB_TOOLS_INSTALL} \
     ${X11_TOOLS_INSTALL} \
 "
 
-#SOC_TOOLS_GPU_mx6 += " fsl-gpu-sdk"
+SOC_TOOLS_GPU_mx6 += " fsl-gpu-sdk"
 
 SOC_TOOLS_GPU_remove_mx6 = " \
     gpu-viv-bin-mx6q \
