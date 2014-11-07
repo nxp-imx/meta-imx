@@ -51,4 +51,3 @@ FILES_${PN}-dev += "${libdir}/imx-mm/audio-codec/wrap/*${SOLIBSDEV} \
 FILES_${PN}-testapps += "${datadir}/imx-mm/*"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6)"
-PACKAGE_ARCH = "${MACHINE_ARCH}"
