@@ -41,4 +41,3 @@ FILES_${PN}-dbg += "${libdir}/imx-mm/audio-codec/.debug  ${libdir}/imx-mm/audio-
 FILES_${PN}-testapps += "${datadir}/imx-mm/*"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6)"
-PACKAGE_ARCH = "${MACHINE_ARCH}"

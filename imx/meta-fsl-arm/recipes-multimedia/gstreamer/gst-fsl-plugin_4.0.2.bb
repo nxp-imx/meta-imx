@@ -32,4 +32,5 @@ FILES_${PN}-gplay = "${bindir}/gplay"
 FILES_${PN}-libgplaycore = "${libdir}/libgplaycore${SOLIBS}"
 FILES_${PN}-libgstfsl = "${libdir}/libgstfsl-0.10${SOLIBS}"
 
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx28|mx5|mx6)"
