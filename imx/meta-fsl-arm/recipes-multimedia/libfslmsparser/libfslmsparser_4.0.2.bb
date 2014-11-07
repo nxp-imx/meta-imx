@@ -31,4 +31,3 @@ FILES_${PN} += "${libdir}/imx-mm/*/*${SOLIBS}"
 FILES_${PN}-dev += " ${libdir}/imx-mm/*/*${SOLIBSDEV}"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6)"
-PACKAGE_ARCH = "${MACHINE_ARCH}"

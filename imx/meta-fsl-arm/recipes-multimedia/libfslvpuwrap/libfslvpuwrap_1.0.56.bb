@@ -20,5 +20,5 @@ do_install_append() {
     rm -r ${D}${datadir}/imx-mm
 }
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx6q|mx6dl)"
