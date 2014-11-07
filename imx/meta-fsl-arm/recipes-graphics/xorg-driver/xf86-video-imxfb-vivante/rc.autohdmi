@@ -1,22 +1,18 @@
 #! /bin/sh
 ### BEGIN INIT INFO
-# Provides:          rc.hdmi
+# Provides:          rc.autohdmi
 # Required-Start:    $all
 # Required-Stop:
 # Default-Start:     2 3 4 5
 # Default-Stop:
-# Short-Description: Run /etc/rc.hdmi if it exist
 ### END INIT INFO
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 
 do_start() {
-	if [ -x /etc/rc.hdmi ]; then
-		echo -n "Running local boot scripts (/etc/rc.hdmi)"
-		/etc/rc.hdmi
-		[ $? = 0 ] && echo "." || echo "error"
-		return $ES
-	fi
+	export DISPLAY=:0
+	autohdmi &
+	exit 0
 }
 
 case "$1" in
