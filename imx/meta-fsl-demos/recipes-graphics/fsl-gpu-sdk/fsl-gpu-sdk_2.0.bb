@@ -26,7 +26,7 @@ S = "${WORKDIR}/${PN}-${PV}"
 
 BACKEND = "${@base_contains('DISTRO_FEATURES', 'x11', 'X11', \
                     base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
-                           base_contains('DISTRO_FEATURES', 'fb', 'FB', 'DirectFB', d), d), d)}"
+                           base_contains('DISTRO_FEATURES', 'directfb', 'DirectFB', 'FB', d), d), d)}"
 do_compile () {
      export FSL_GRAPHICS_SDK=${S}
      export FSL_PLATFORM_NAME=Yocto
