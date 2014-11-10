@@ -13,16 +13,16 @@ DEPENDS += "qtmultimedia gstreamer1.0"
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://qtimxplayer.desktop \
 "
-SRC_URI[md5sum] = "d61abdd5b32047bff822a76db980538c"
-SRC_URI[sha256sum] = "70abb0926a8a23f55021ad95b37ea539a6d165b06933bb56e941d6eb8d47ee1e"
+SRC_URI[md5sum] = "a0cbbb105b87f4e23d3bd961c0647b7a"
+SRC_URI[sha256sum] = "34829a791dd947c271562b29d3b8e7232cd7cf0bc0b3c2908178fc3dbed61cea"
 
 do_install () {
     install -d ${D}${datadir}/applications
     install -m 0644 ${WORKDIR}/qtimxplayer.desktop ${D}${datadir}/applications
     install -d ${D}${datadir}/qt5
-    cp -r ${S}/examples ${D}${datadir}/qt5
+    cp -r ${S}/usr/share/qt5/examples ${D}${datadir}/qt5
     install -d ${D}${datadir}/pixmaps
-    cp -r ${S}/pixmaps/* ${D}${datadir}/pixmaps
+    cp -r ${S}/usr/share/pixmaps/* ${D}${datadir}/pixmaps
 }
 
 FILES_${PN} = " \
