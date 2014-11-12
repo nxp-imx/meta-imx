@@ -1,0 +1,30 @@
+diff --git a/src/client_common.c b/src/client_common.c
+index 2b62024..30724c1 100644
+--- a/src/client_common.c
++++ b/src/client_common.c
+@@ -779,10 +779,24 @@ client_get_button_list_item_from_event(Client *c, XButtonEvent *e)
+ {
+   struct list_item *l = c->buttons;
+   MBClientButton   *b = NULL;
+-
++  int dx, dy;
+   while (l != NULL)
+     {
+       b = (MBClientButton *)l->data;
++	  if (e->subwindow == 0)
++	  {
++		dx = (e->x - b->x - b->w/2) > 0 ? \
++			 (e->x - b->x - b->w/2) : \
++			 (b->x + b->w/2 - e->x);
++
++		dy = (e->y - b->y - b->h/2) > 0 ? \
++			 (e->y - b->y - b->h/2) : \
++			 (b->y + b->h/2 - e->y);
++
++		if (dx <= b->w/2 && dy <= b->h/2)
++		  return l;
++	  }
++
+       if (b->win == e->subwindow)
+ 	{
+ 	  return l;
