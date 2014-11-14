@@ -13,8 +13,8 @@ DEPENDS += "qtmultimedia gstreamer1.0 gstreamer1.0-plugins-base"
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://qtimxplayer.desktop \
 "
-SRC_URI[md5sum] = "a0cbbb105b87f4e23d3bd961c0647b7a"
-SRC_URI[sha256sum] = "34829a791dd947c271562b29d3b8e7232cd7cf0bc0b3c2908178fc3dbed61cea"
+SRC_URI[md5sum] = "d54c21792f0b87150bee27a9f512580f"
+SRC_URI[sha256sum] = "d40fca1949c6c4d2fac10855af60c97d203e06f92f394ebf8eba2954ff3bc1ad"
 
 do_install () {
     install -d ${D}${datadir}/applications
