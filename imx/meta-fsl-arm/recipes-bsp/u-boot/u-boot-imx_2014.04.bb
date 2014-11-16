@@ -2,7 +2,6 @@
 
 DESCRIPTION = "Bootloader for i.MX platforms"
 require recipes-bsp/u-boot/u-boot.inc
-require conf/internal-git.inc
 
 PROVIDES += "u-boot"
 
