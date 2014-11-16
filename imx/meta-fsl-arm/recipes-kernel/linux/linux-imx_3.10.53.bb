@@ -7,7 +7,6 @@ i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU 
 
 require recipes-kernel/linux/linux-imx.inc
 require recipes-kernel/linux/linux-dtb.inc
-require conf/internal-git.inc
 
 DEPENDS += "lzop-native bc-native"
 
