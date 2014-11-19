@@ -23,8 +23,7 @@ PROGNAME="setup-environment"
 exit_message ()
 {
    echo "To return to this build environment later please run:"
-   echo "    source setup-environment <build_dir>" 
-
+   echo "    source setup-environment <build_dir>"
 }
 
 usage()
@@ -103,7 +102,7 @@ fi
 cp sources/meta-fsl-bsp-release/imx/meta-fsl-arm/conf/machine/* sources/meta-fsl-arm/conf/machine
 
 # Set up the basic yocto environment
-MACHINE=$MACHINE source $PROGNAME $BUILD_DIR
+MACHINE=$MACHINE . ./$PROGNAME $BUILD_DIR
 
 # Point to the current directory since the last command changed the directory to $BUILD_DIR
 BUILD_DIR=.
