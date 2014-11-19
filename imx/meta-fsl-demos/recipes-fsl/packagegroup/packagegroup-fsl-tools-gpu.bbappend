@@ -19,7 +19,7 @@ SOC_TOOLS_GPU_remove_mx6 = " \
     gpu-viv-g2d \
 "
 SOC_TOOLS_GPU_append_mx6 = " \
-    gpu-viv-bin \
+    imx-gpu-viv \
     gpu-viv-g2d-mx6 \
 "
 SOC_TOOLS_GPU_remove_mx6sl = "fsl-gpu-sdk"

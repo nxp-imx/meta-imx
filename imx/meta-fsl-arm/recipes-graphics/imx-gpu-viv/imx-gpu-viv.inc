@@ -5,7 +5,7 @@
 DESCRIPTION = "GPU driver and apps for imx6"
 SECTION = "libs"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://usr/include/gc_vdk.h;endline=11;md5=c4713c78d7f52bf2f92688a6f8f0cc93"
+LIC_FILES_CHKSUM = "file://gpu-core/usr/include/gc_vdk.h;endline=11;md5=c4713c78d7f52bf2f92688a6f8f0cc93"
 
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'virtual/libx11 libxdamage libxext libxfixes mesa', \
                              base_contains('DISTRO_FEATURES', 'wayland', 'wayland', \
@@ -105,52 +105,54 @@ do_install () {
     install -d ${D}${includedir}
     install -d ${D}${bindir}
 
-    cp -P ${S}/usr/lib/*.so* ${D}${libdir}
-    cp -r ${S}/usr/include/* ${D}${includedir}
-    cp -r ${S}/opt ${D}
-    cp -axr ${S}/usr/bin/* ${D}${bindir}
+    cp -P ${S}/gpu-core/usr/lib/*.so* ${D}${libdir}
+    cp -P ${S}/g2d/usr/lib/*.so* ${D}${libdir}
+    cp -r ${S}/gpu-core/usr/include/* ${D}${includedir}
+    cp -r ${S}/g2d/usr/include/* ${D}${includedir}
+    cp -r ${S}/gpu-demos/opt ${D}
+    cp -axr ${S}/gpu-tools/gmem-info/usr/bin/* ${D}${bindir}
 
     install -d ${D}${libdir}/pkgconfig
 
     # The preference order, based in DISTRO_FEATURES, is x11, wayland, directfb and fb
     if [ "${USE_X11}" = "yes" ]; then
-        cp -r ${S}/usr/lib/dri ${D}${libdir}
+        cp -r ${S}/gpu-core/usr/lib/dri ${D}${libdir}
 
         backend=x11
 
-        install -m 0644 ${S}/usr/lib/pkgconfig/egl_x11.pc ${D}${libdir}/pkgconfig/egl.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/glesv1_cm_x11.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/glesv2_x11.pc ${D}${libdir}/pkgconfig/glesv2.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/vg_x11.pc ${D}${libdir}/pkgconfig/vg.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_x11.pc ${D}${libdir}/pkgconfig/egl.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv1_cm_x11.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv2_x11.pc ${D}${libdir}/pkgconfig/glesv2.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/vg_x11.pc ${D}${libdir}/pkgconfig/vg.pc
         mv ${D}${libdir}/libGAL_egl.dri.so ${D}${libdir}/libGAL_egl.so
         #FIXME: WL & X11 is not currently functional
         #if [ "${USE_WL}" = "yes" ]; then
-        #    install -m 0644 ${S}/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
-        #    install -m 0644 ${S}/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
-        #    install -m 0644 ${S}/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
+        #    install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
+        #    install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
+        #    install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
         #fi
     elif [ "${USE_WL}" = "yes" ]; then
         backend=wl
 
-        install -m 0644 ${S}/usr/lib/pkgconfig/egl.pc ${D}${libdir}/pkgconfig/egl.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/vg.pc ${D}${libdir}/pkgconfig/vg.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl.pc ${D}${libdir}/pkgconfig/egl.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/vg.pc ${D}${libdir}/pkgconfig/vg.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
         mv ${D}${libdir}/libGAL_egl.${backend}.so ${D}${libdir}/libGAL_egl.so
     else
-        install -m 0644 ${S}/usr/lib/pkgconfig/egl.pc ${D}${libdir}/pkgconfig/egl.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
-        install -m 0644 ${S}/usr/lib/pkgconfig/vg.pc ${D}${libdir}/pkgconfig/vg.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl.pc ${D}${libdir}/pkgconfig/egl.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/vg.pc ${D}${libdir}/pkgconfig/vg.pc
 
         if [ "${USE_DFB}" = "yes" ]; then
             install -d ${D}/${sysconfdir}
-            install -m 644 ${S}/etc/directfbrc ${D}/${sysconfdir}/directfbrc
+            install -m 644 ${S}/gpu-core/etc/directfbrc ${D}/${sysconfdir}/directfbrc
 
-            cp -r ${S}/usr/lib/directfb-* ${D}${libdir}
+            cp -r ${S}/gpu-core/usr/lib/directfb-* ${D}${libdir}
             backend=dfb
         else
             # Regular framebuffer
@@ -161,7 +163,7 @@ do_install () {
 
     # Install Vendor ICDs for OpenCL's installable client driver loader (ICDs Loader)
     install -d ${D}${sysconfdir}/OpenCL/vendors/
-    install -m 0644 ${S}/etc/Vivante.icd ${D}${sysconfdir}/OpenCL/vendors/Vivante.icd
+    install -m 0644 ${S}/gpu-core/etc/Vivante.icd ${D}${sysconfdir}/OpenCL/vendors/Vivante.icd
 
     # We'll only have one backend here so we rename it to generic name
     # and avoid rework in other packages, when possible
@@ -177,7 +179,7 @@ do_install () {
 
     # update libglesv2 as backend dependent
     rm -rf ${D}${libdir}/libGLESv2*
-    cp ${S}/usr/lib/libGLESv2-${backend}.so ${D}${libdir}/libGLESv2.so.2.0.0
+    cp ${S}/gpu-core/usr/lib/libGLESv2-${backend}.so ${D}${libdir}/libGLESv2.so.2.0.0
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so.2
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 
