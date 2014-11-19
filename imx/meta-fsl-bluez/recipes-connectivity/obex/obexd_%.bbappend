@@ -1,2 +1,3 @@
 
-DEPENDS = "glib-2.0 dbus virtual/bluez libical"
+# obexd was integrated into bluez5
+RCONFLICTS_${PN} = "bluez5"
