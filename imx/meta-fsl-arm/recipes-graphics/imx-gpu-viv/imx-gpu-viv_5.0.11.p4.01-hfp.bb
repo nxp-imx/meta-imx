@@ -1,11 +1,11 @@
 # Copyright (C) 2013, 2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require gpu-viv-bin.inc
+require imx-gpu-viv.inc
 
 S="${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "62d3aae651ef8b77a6e159b9eb778ab1"
-SRC_URI[sha256sum] = "cd79a498311a8571dd5f37e5d6fb4aa56e7c5a8b520c25d8e27c60d51126fc77"
+SRC_URI[md5sum] = "ffd577c4223e2de4e8fa343ef08df9e7"
+SRC_URI[sha256sum] = "033a4f8662e1ecf96070bad8ab20b29e7ccd7b7013fd4078d61bf4064371f876"
 
 PACKAGE_FP_TYPE = "hardfp"
