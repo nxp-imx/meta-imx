@@ -1,0 +1,2 @@
+
+PACKAGECONFIG[bluetooth] = ",,virtual/bluez"
