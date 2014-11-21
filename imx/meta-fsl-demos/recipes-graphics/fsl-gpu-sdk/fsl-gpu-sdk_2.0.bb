@@ -19,8 +19,8 @@ RCONFLICTS_${PN} = "vivante-gpu-sdk"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "3245a1855b916a72e58021be7d1da070"
-SRC_URI[sha256sum] = "0e46d0f62961b9ef8f197faa8f260fce60a0ef1abfc120b4e45f43bb3c3aeb24"
+SRC_URI[md5sum] = "c74bba9bfcaf6cb2448c42bb4f597181"
+SRC_URI[sha256sum] = "8bee7fedc91e054713742d949d749195b6e0cfa3479c1b0168e588a4104d47a9"
 
 S = "${WORKDIR}/${PN}-${PV}"
 
@@ -44,5 +44,5 @@ do_install () {
 
 FILES_${PN} += "/opt/${PN}"
 FILES_${PN}-dev = "/usr"
-FILES_${PN}-dbg = "/opt/${PN}/*/.debug"
+FILES_${PN}-dbg = "/opt/${PN}/*/*/.debug"
 INSANE_SKIP_${PN} += "rpaths"
