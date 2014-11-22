@@ -12,9 +12,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 APITRACE_INSTALL = ""
-APITRACE_INSTALL_append_mx6q = " imx-apitrace"
-APITRACE_INSTALL_append_mx6dl = " imx-apitrace"
-APITRACE_INSTALL_append_mx6sx = " imx-apitrace"
+APITRACE_X11_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', 'imx-apitrace', '', d)}"
+APITRACE_INSTALL_append_mx6q = " ${APITRACE_X11_INSTALL}"
+APITRACE_INSTALL_append_mx6dl = " ${APITRACE_X11_INSTALL}"
+APITRACE_INSTALL_append_mx6sx = " ${APITRACE_X11_INSTALL}"
 
 RDEPENDS_${PN}_mx6 = " \
     gpu-viv-tools-mx6 \
