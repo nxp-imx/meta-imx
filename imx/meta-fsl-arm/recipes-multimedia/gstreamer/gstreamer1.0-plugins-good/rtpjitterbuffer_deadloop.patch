@@ -1,43 +1,28 @@
-commit 61a950728ad2b63740492871ab52c607a271b3d2
-Author: Song Bing <b06498@freescale.com>
-Date:   Thu Nov 6 14:59:26 2014 +0800
+commit 6c584bc8337da0a19287d51eaf05c608711b9ef5
+Author: Mark Nauwelaerts <mnauw@users.sourceforge.net>
+Date:   Sun May 4 13:37:46 2014 +0200
 
-[rtpjitterbuffer] dead loop when schedule one dead line timer.
-
-Rtpjitterbuffer has issue when schedule one dead line timer. It will
-record sequence number, but source pad active will start send buffer in
-source pad. Which will cause can’t find the recorded sequence number
-packet and will cause deadloop in rtpjitterbuffer.
+    rtpjitterbuffer: avoid stall by corrupted seqnum accounting
 
 https://bugzilla.gnome.org/show_bug.cgi?id=739709
 
-Upstream Status: Pending
+Upstream Status: Backport
 
 Signed-off-by: Song Bing <b06498@freescale.com>
 
 diff --git a/gst/rtpmanager/gstrtpjitterbuffer.c b/gst/rtpmanager/gstrtpjitterbuffer.c
-index 2529f2b..4192219 100644
+index 1459e91..62d7228 100644
 --- a/gst/rtpmanager/gstrtpjitterbuffer.c
 +++ b/gst/rtpmanager/gstrtpjitterbuffer.c
-@@ -943,7 +943,10 @@ gst_rtp_jitter_buffer_set_active (GstRtpJitterBuffer * jbuf, gboolean active,
-     GST_DEBUG_OBJECT (jbuf, "out offset %" GST_TIME_FORMAT,
-         GST_TIME_ARGS (priv->out_offset));
-     priv->active = active;
--    JBUF_SIGNAL_EVENT (priv);
-+    /* don't start send out buffer when timer need wait */
-+    if (!priv->timers->len) {
-+      JBUF_SIGNAL_EVENT (priv);
-+    }
-   }
-   if (!active) {
-     rtp_jitter_buffer_set_buffering (priv->jbuf, TRUE);
-@@ -2104,7 +2107,8 @@ gst_rtp_jitter_buffer_chain (GstPad * pad, GstObject * parent,
-     do_handle_sync (jitterbuffer);
-
-   /* signal addition of new buffer when the _loop is waiting. */
--  if (priv->active)
-+  /* don't start send out buffer when timer need wait */
-+  if (priv->active && priv->waiting_timer && !priv->timers->len)
-     JBUF_SIGNAL_EVENT (priv);
-
-   /* let's unschedule and unblock any waiting buffers. We only want to do this
+@@ -2826,7 +2826,10 @@ do_deadline_timeout (GstRtpJitterBuffer * jitterbuffer, TimerData * timer,
+ 
+   GST_INFO_OBJECT (jitterbuffer, "got deadline timeout");
+ 
+-  priv->next_seqnum = timer->seqnum;
++  /* timer seqnum might have been obsoleted by caps seqnum-base,
++   * only mess with current ongoing seqnum if still unknown */
++  if (priv->next_seqnum == -1)
++    priv->next_seqnum = timer->seqnum;
+   remove_timer (jitterbuffer, timer);
+   JBUF_SIGNAL_EVENT (priv);
+ 
