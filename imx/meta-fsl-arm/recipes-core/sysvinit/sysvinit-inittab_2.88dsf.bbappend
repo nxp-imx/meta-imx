@@ -5,8 +5,6 @@ RDEPENDS_${PN} += " bash "
 
 SRC_URI_append_mx6 = " file://rc_mxc.S file://rc_gpu.S"
 
-USE_X11 = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
-
 # overirde do_install
 do_install_mx6() {
     install -d ${D}${sysconfdir}
@@ -48,14 +46,9 @@ EOF
         echo "" >> ${D}${sysconfdir}/inittab
     fi
 
-    # Add rc_gpu.s for non-X11 backend
-    if [ "${USE_X11}" = "no" ]; then
-	echo "gpu::sysinit:/etc/init.d/rc_gpu.S"
-        echo "gpu::sysinit:/etc/init.d/rc_gpu.S" >> ${D}${sysconfdir}/inittab
-	install -m 0755 ${WORKDIR}/rc_gpu.S ${D}${sysconfdir}/init.d
-    else
-	echo "X11 -- no gpu::sysinit:/etc/init.d/rc_gpu.S"
-    fi
+    # Install rc_gpu.S to /etc/init.d
+    echo "gpu::sysinit:/etc/init.d/rc_gpu.S" >> ${D}${sysconfdir}/inittab
+    install -m 0755 ${WORKDIR}/rc_gpu.S ${D}${sysconfdir}/init.d
 
 }
 
