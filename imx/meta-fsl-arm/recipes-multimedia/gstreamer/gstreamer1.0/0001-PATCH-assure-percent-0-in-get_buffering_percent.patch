@@ -1,0 +1,33 @@
+From 8571693a0d2cef53862b0807e928e8d7d5633873 Mon Sep 17 00:00:00 2001
+From: Mingke Wang <mingke.wang@freescale.com>
+Date: Tue, 25 Nov 2014 15:09:16 +0800
+Subject: [PATCH] [PATCH] assure percent >= 0 in get_buffering_percent
+
+check percent to make sure it is valid otherwise invalid percent
+may cause a NULL buffering message, then cause a segmentation fault
+
+https://bugzilla.gnome.org/show_bug.cgi?id=740672
+
+Upstream Status: Pending
+
+Signed-off-by: Mingke Wang <mingke.wang@freescale.com>
+
+diff --git a/plugins/elements/gstqueue2.c b/plugins/elements/gstqueue2.c
+old mode 100644
+new mode 100755
+index f675a45..2b89f8d
+--- a/plugins/elements/gstqueue2.c
++++ b/plugins/elements/gstqueue2.c
+@@ -826,6 +826,9 @@ get_buffering_percent (GstQueue2 * queue, gboolean * is_buffering,
+   if (perc > 100)
+     perc = 100;
+ 
++  if (perc < 0)
++    perc = 0;
++  
+   if (percent)
+     *percent = perc;
+ 
+-- 
+1.7.9.5
+
