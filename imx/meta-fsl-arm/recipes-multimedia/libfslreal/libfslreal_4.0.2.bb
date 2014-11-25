@@ -6,7 +6,7 @@ LICENSE = "Proprietary"
 LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://EULA.txt;md5=93b784b1c11b3fffb1638498a8dde3f6"
 
-DEPENDS = "libfslcodec"
+#DEPENDS = "libfslcodec"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
