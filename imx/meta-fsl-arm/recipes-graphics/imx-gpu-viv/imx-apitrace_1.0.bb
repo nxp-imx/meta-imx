@@ -24,4 +24,5 @@ do_install () {
 FILES_${PN} = "${bindir} ${libdir}"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
 
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx6)"
