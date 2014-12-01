@@ -39,7 +39,9 @@ do_install () {
    export FSL_PLATFORM_NAME=Yocto
    install -d "${D}/opt/${PN}"
   ./build.sh -f  GNUmakefile_Yocto EGLBackend=${BACKEND} install 
-   cp -r bin/* "${D}/opt/${PN}"      
+   cp -r bin/* "${D}/opt/${PN}"
+   rm -rf ${D}/opt/${PN}/GLES2/S05_PrecompiledShader
+   rm -rf ${D}/opt/${PN}/GLES3/S05_PrecompiledShader
 }
 
 FILES_${PN} += "/opt/${PN}"
