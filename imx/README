@@ -1,4 +1,4 @@
-Freescale's 3.10.31-1.1.0 Beta Yocto Project BSP
+Freescale's 3.10.53-1.1.0 Yocto Project BSP
 ================================================
 
 This BSP is a Freescale release providing support for the following processors
@@ -153,3 +153,11 @@ LICENSE_FLAGS_WHITELIST="commercial"
 QTWebkit
 --------
 To start go to /usr/share/qt5/examples/webkitwidgets/browser and run browser
+
+Qt
+--
+Note that Qt has both a commercial and open source license options.  Make the decision about which license
+to use before starting work on custom Qt applications.  Once custom Qt applications are started with an open source
+Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
+the differences between each license.   Default builds use an open source Qt license.
+
