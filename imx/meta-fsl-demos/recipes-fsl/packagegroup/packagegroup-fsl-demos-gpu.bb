@@ -18,7 +18,7 @@ APITRACE_INSTALL_append_mx6dl = " ${APITRACE_X11_INSTALL}"
 APITRACE_INSTALL_append_mx6sx = " ${APITRACE_X11_INSTALL}"
 
 RDEPENDS_${PN}_mx6 = " \
-    gpu-viv-tools-mx6 \
-    gpu-viv-demos-mx6 \
+    imx-gpu-viv-tools-mx6 \
+    imx-gpu-viv-demos-mx6 \
     ${APITRACE_INSTALL} \
 "
