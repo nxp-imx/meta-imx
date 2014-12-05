@@ -38,9 +38,9 @@ PACKAGES =+ "libclc-mx6 libclc-mx6-dev libclc-mx6-dbg \
 	libwayland-viv-mx6 libwayland-viv-mx6-dev libwayland-viv-mx6-dbg \
 	libgc-wayland-protocol-mx6 libgc-wayland-protocol-mx6-dev libgc-wayland-protocol-mx6-dbg \
 	libwayland-egl-mx6-dev \
-        gpu-viv-g2d-mx6 gpu-viv-g2d-mx6-dev gpu-viv-g2d-mx6-dbg \
-	gpu-viv-tools-mx6 gpu-viv-tools-mx6-dbg\
-	gpu-viv-demos-mx6 gpu-viv-demos-mx6-dbg \
+        imx-gpu-viv-g2d-mx6 imx-gpu-viv-g2d-mx6-dev imx-gpu-viv-g2d-mx6-dbg \
+	imx-gpu-viv-tools-mx6 imx-gpu-viv-tools-mx6-dbg\
+	imx-gpu-viv-demos-mx6 imx-gpu-viv-demos-mx6-dbg \
 "
 
 # Skip package if it does not match the machine float-point type in use
@@ -295,16 +295,16 @@ FILES_libwayland-egl-mx6-dev = "${libdir}/pkgconfig/wayland-egl.pc"
 
 FILES_libvivante-dfb-mx6 += "${sysconfdir}/directfbrc"
 
-INSANE_SKIP_gpu-viv-g2d-mx6 += "dev-so"
-FILES_gpu-viv-g2d-mx6 = "${libdir}/libg2d* "
-FILES_gpu-viv-g2d-mx6-dev = "${includedir}/g2d.h"
-FILES_gpu-viv-g2d-mx6-dbg = "${libdir}/.debug/libg2d${SOLIBS}"
+INSANE_SKIP_imx-gpu-viv-g2d-mx6 += "dev-so"
+FILES_imx-gpu-viv-g2d-mx6 = "${libdir}/libg2d* "
+FILES_imx-gpu-viv-g2d-mx6-dev = "${includedir}/g2d.h"
+FILES_imx-gpu-viv-g2d-mx6-dbg = "${libdir}/.debug/libg2d${SOLIBS}"
 
-FILES_gpu-viv-tools-mx6 = "${bindir}/gmem_info"
-FILES_gpu-viv-tools-mx6-dbg = "${bindir}/gmem_info"
+FILES_imx-gpu-viv-tools-mx6 = "${bindir}/gmem_info"
+FILES_imx-gpu-viv-tools-mx6-dbg = "${bindir}/gmem_info"
 
-FILES_gpu-viv-demos-mx6 = "/opt"
-FILES_gpu-viv-demos-mx6-dbg = "/opt/viv_samples/*/*/.debug"
-INSANE_SKIP_gpu-viv-demos-mx6 += "rpaths"
+FILES_imx-gpu-viv-demos-mx6 = "/opt"
+FILES_imx-gpu-viv-demos-mx6-dbg = "/opt/viv_samples/*/*/.debug"
+INSANE_SKIP_imx-gpu-viv-demos-mx6 += "rpaths"
 
 COMPATIBLE_MACHINE = "(mx6)"
