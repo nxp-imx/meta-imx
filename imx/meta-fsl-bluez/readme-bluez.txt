@@ -89,47 +89,14 @@ Bluez5 instructions
 	<bluetooth> connect <mac address>
 	<bluetooth> quit
 
-6) Copy a file from board to bluetooth device using the obex transfer.
+6) Copy a file from board to bluetooth device using the obex transfer
 
-	Note: both obexd and obexctl need to be run from a terminal on the board
-			instead of from a remote login.
-			
 	a) Start obex daemon
 	$ /usr/lib/bluez5/bluetooth/obexd
 
-	b) On a smart phone, install an obex app such as Bluetooth File Transfer.
-	
-	c) Start obexctl. Type help to show commands. 
+	b) Start the obex control interface
 	$ obexctl
-	
-	d) Start app on phone and use the connect function to connect board.
-		After connection is established, obexctl should have some messages 
-		showing up saying a new session has been established. The MAC address 
-		of the phone should	be displayed in bracket as the command prompt.
-		
-	e) Send a file to phone from obexctl
-	[<mac addr>]# send <file>
-	
-	f) Once it's done, close the session
-	[<mac addr]# disconnect
-	[<mac addr>]# quit
-
-    
-To setup blueZ5 and A2DP sink on SabreSD
-----------------------------------------
-
-- For details, please reference https://community.freescale.com/docs/DOC-103385
-
-- Note: 
-    1) For systems that can automatically detect the alsa cards and starts 
-        pulseaudio daemon, all steps related to the 'pulse' user and starting 
-        pulseaudio can be skipped. 
-    2) To check if the system detected alsa card or not, run the following command
-    $ ps aux | grep pulse
-    
-        if the output includes a process like '/usr/bin/pulseaudio --start',
-        the daemon has started.
-    3) After starting bluetoothd, make sure the bluetooth interface is up
-        before running bluetoothctl.
-        
-    
+	<obex> connect <mac address>
+	<obex> send file
+	<obex> disconnect <mac address>
+	<obex> quit
