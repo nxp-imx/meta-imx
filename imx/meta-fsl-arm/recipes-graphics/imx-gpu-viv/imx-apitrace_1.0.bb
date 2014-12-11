@@ -7,11 +7,11 @@ DEPENDS = "imx-gpu-viv"
 
 inherit fsl-eula-unpack
 
-SRC_URI = "${FSL_MIRROR}/imx-gpu-viv-5.0.11.p4.1-hfp.bin;fsl-eula=true"
-SRC_URI[md5sum] = "80d60c6da13cc685cf16ac463a5bbf87"
-SRC_URI[sha256sum] = "7c7005c3eb6b9887a1760c5549c35ecdf2b804f8805ff93291c44a4034c60fbe"
+SRC_URI = "${FSL_MIRROR}/imx-gpu-viv-5.0.11.p4.2-hfp.bin;fsl-eula=true"
+SRC_URI[md5sum] = "ce3e874a777f369f86fde3e4dd0e4d0c"
+SRC_URI[sha256sum] = "5bffeb89ced387393593586920a2dfe8f8d1243cad0123814c43e4d4c5480353"
 
-S = "${WORKDIR}/imx-gpu-viv-5.0.11.p4.1-hfp/apitrace"
+S = "${WORKDIR}/imx-gpu-viv-5.0.11.p4.2-hfp/apitrace"
 
 do_install () {
     install -d ${D}${libdir}
