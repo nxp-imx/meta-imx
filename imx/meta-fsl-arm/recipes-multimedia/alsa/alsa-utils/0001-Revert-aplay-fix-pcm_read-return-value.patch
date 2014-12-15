@@ -12,6 +12,12 @@ change. Note that '-d' processing was broken in some cases.
 
 Note: The reverted commit allows that the return value might be
 greater than requested (see the first condition in read routines).
+
+Commit 8f361d83cfcb39887f5fc591633e68d9448e3425 in master branch
+
+Upstream Status: Backported
+
+Signed-off-by: Jaroslav Kysela <perex@perex.cz>
 ---
  aplay/aplay.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
