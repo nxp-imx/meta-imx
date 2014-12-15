@@ -1,0 +1,48 @@
+commit eeb902c797bdc3d8bfcca2d012086e63b004d181
+Author: Song Bing <b06498@freescale.com>
+Date:   Fri Dec 12 13:39:38 2014 +0800
+
+videopool: should reset buffer size to buffer pool as video alignment
+will change buffer size
+
+Buffer pool add size check when release buffer to buffer pool. Will
+release the buffer if check fail.
+Video buffer size will change if video has padding, the video buffer
+size will re-calculate in video buffer pool.
+Reset size value in video buffer pool to fix the issue.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=741420
+
+Upstream Status: Pending
+
+Signed-off-by: Song Bing <b06498@freescale.com>
+
+diff --git a/gst-libs/gst/video/gstvideopool.c b/gst-libs/gst/video/gstvideopool.c
+index 4475f45..546a465 100644
+--- a/gst-libs/gst/video/gstvideopool.c
++++ b/gst-libs/gst/video/gstvideopool.c
+@@ -122,11 +122,13 @@ video_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config)
+   GstVideoBufferPoolPrivate *priv = vpool->priv;
+   GstVideoInfo info;
+   GstCaps *caps;
++  guint size, min_buffers, max_buffers;
+   gint width, height;
+   GstAllocator *allocator;
+   GstAllocationParams params;
+
+-  if (!gst_buffer_pool_config_get_params (config, &caps, NULL, NULL, NULL))
++  if (!gst_buffer_pool_config_get_params (config, &caps, &size, &min_buffers,
++          &max_buffers))
+     goto wrong_config;
+
+   if (caps == NULL)
+@@ -170,6 +172,9 @@ video_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config)
+   }
+   priv->info = info;
+
++  gst_buffer_pool_config_set_params (config, caps, info.size, min_buffers,
++      max_buffers);
++
+   return GST_BUFFER_POOL_CLASS (parent_class)->set_config (pool, config);
+
+   /* ERRORS */
