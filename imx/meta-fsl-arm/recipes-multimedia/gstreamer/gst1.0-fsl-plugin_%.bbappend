@@ -1,2 +1,0 @@
-DDPDEPENDS = "libfslddpcodec"
-PACKAGECONFIG[ddp] = ",,${DDPDEPENDS},${DDPDEPENDS}"
