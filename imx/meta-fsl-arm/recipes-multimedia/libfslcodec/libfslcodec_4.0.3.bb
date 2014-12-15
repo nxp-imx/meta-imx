@@ -10,8 +10,8 @@ EXTRA_OECONF += "${VPU_SUPPORT}"
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "a89ffc781292c56d4664f1ec67331243"
-SRC_URI[sha256sum] = "d5baa92fefe68f7456380172fefc14ec9e4c155e1d2f6672c23bc5e06841bd1a"
+SRC_URI[md5sum] = "4ecd728e406f00acb5044389adbfd43b"
+SRC_URI[sha256sum] = "8a01fede0cadb5757c3e00fb18475d81468db3d1e623a354fcea80b71c31ece3"
 
 # FIXME: The wrap and lib names does not match
 FILES_${PN}-nb += "${libdir}/imx-mm/audio-codec/wrap/lib_nbamrd_wrap_arm*_elinux.so.*"
