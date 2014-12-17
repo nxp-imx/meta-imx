@@ -1,24 +1,21 @@
-commit eeb902c797bdc3d8bfcca2d012086e63b004d181
+commit 8baf1ec50076bd4ea13477875069eb48d7f2a337
 Author: Song Bing <b06498@freescale.com>
-Date:   Fri Dec 12 13:39:38 2014 +0800
+Date:   Tue Dec 16 12:10:53 2014 +0100
 
-videopool: should reset buffer size to buffer pool as video alignment
-will change buffer size
+videopool: update buffer size after video alignment
 
-Buffer pool add size check when release buffer to buffer pool. Will
-release the buffer if check fail.
-Video buffer size will change if video has padding, the video buffer
-size will re-calculate in video buffer pool.
-Reset size value in video buffer pool to fix the issue.
+Update the new buffer size after alignment in the pool configuration
+before calling the parent set_config. This ensures that the parent knows
+about the buffer size that we will allocate and makes the size check
+work in the release_buffer method.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=741420
 
-Upstream Status: Pending
+Upstream Status: Backport
 
 Signed-off-by: Song Bing <b06498@freescale.com>
-
 diff --git a/gst-libs/gst/video/gstvideopool.c b/gst-libs/gst/video/gstvideopool.c
-index 4475f45..546a465 100644
+index f1e7c00..abc6ba5 100644
 --- a/gst-libs/gst/video/gstvideopool.c
 +++ b/gst-libs/gst/video/gstvideopool.c
 @@ -122,11 +122,13 @@ video_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config)
@@ -39,6 +36,59 @@ index 4475f45..546a465 100644
 @@ -170,6 +172,9 @@ video_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config)
    }
    priv->info = info;
+
++  gst_buffer_pool_config_set_params (config, caps, info.size, min_buffers,
++      max_buffers);
++
+   return GST_BUFFER_POOL_CLASS (parent_class)->set_config (pool, config);
+
+   /* ERRORS */
+diff --git a/sys/ximage/ximagepool.c b/sys/ximage/ximagepool.c
+index 9d4ac2fcf..3582f11 100644
+--- a/sys/ximage/ximagepool.c
++++ b/sys/ximage/ximagepool.c
+@@ -542,8 +542,10 @@ ximage_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config)
+   GstXImageBufferPool *xpool = GST_XIMAGE_BUFFER_POOL_CAST (pool);
+   GstVideoInfo info;
+   GstCaps *caps;
++  guint size, min_buffers, max_buffers;
+
+-  if (!gst_buffer_pool_config_get_params (config, &caps, NULL, NULL, NULL))
++  if (!gst_buffer_pool_config_get_params (config, &caps, &size, &min_buffers,
++          &max_buffers))
+     goto wrong_config;
+
+   if (caps == NULL)
+@@ -596,6 +598,9 @@ ximage_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config)
+
+   xpool->info = info;
+
++  gst_buffer_pool_config_set_params (config, caps, info.size, min_buffers,
++      max_buffers);
++
+   return GST_BUFFER_POOL_CLASS (parent_class)->set_config (pool, config);
+
+   /* ERRORS */
+diff --git a/sys/xvimage/xvimagepool.c b/sys/xvimage/xvimagepool.c
+index 77fc272..614f197 100644
+--- a/sys/xvimage/xvimagepool.c
++++ b/sys/xvimage/xvimagepool.c
+@@ -60,9 +60,11 @@ xvimage_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config)
+   GstXvImageBufferPool *xvpool = GST_XVIMAGE_BUFFER_POOL_CAST (pool);
+   GstVideoInfo info;
+   GstCaps *caps;
++  guint size, min_buffers, max_buffers;
+   GstXvContext *context;
+
+-  if (!gst_buffer_pool_config_get_params (config, &caps, NULL, NULL, NULL))
++  if (!gst_buffer_pool_config_get_params (config, &caps, &size, &min_buffers,
++          &max_buffers))
+     goto wrong_config;
+
+   if (caps == NULL)
+@@ -124,6 +126,9 @@ xvimage_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config)
+   xvpool->crop.w = xvpool->info.width;
+   xvpool->crop.h = xvpool->info.height;
 
 +  gst_buffer_pool_config_set_params (config, caps, info.size, min_buffers,
 +      max_buffers);
