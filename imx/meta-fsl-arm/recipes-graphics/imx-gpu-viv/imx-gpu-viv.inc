@@ -45,6 +45,10 @@ PACKAGES =+ "libclc-mx6 libclc-mx6-dev libclc-mx6-dbg \
 
 # Skip package if it does not match the machine float-point type in use
 python __anonymous () {
+
+        if d.getVar('USE_GPU_VIV_MODULE', True) == '1':
+           d.appendVar('RDEPENDS_imx-gpu-viv', ' imx-gpu-viv-kernel ')
+
         is_machine_hardfp = base_contains("TUNE_FEATURES", "callconvention-hard", True, False, d)
         is_package_hardfp = d.getVar("PACKAGE_FP_TYPE", True) == "hardfp"
 
