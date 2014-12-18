@@ -1,5 +1,5 @@
 
-RRECOMMENDS_${PN}_mx6 = "\
+RRECOMMENDS_${PN} = "\
     ${MACHINE_EXTRA_RRECOMMENDS} \
     ${@base_contains("MACHINE_FEATURES", "usbhost", "usbutils", "", d)} \
     ${@base_contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
