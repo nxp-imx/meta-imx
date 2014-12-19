@@ -13,7 +13,7 @@ DEPENDS += "lzop-native bc-native"
 
 SRCBRANCH = "imx_3.10.53_1.1.0_ga"
 LOCALVERSION = "-1.1.0_ga"
-SRCREV = "968ac9e9562b36eb94c3a6103dc6c970dde73244"
+SRCREV = "e1959911edda217d547b2cd06bc6dcd198de36e8"
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=${SRCBRANCH}"
 
 DEFAULT_PREFERENCE = "1"
