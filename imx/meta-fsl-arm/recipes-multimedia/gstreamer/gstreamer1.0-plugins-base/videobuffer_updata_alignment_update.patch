@@ -10,7 +10,7 @@ Which will cause user get wrong video alignment.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=741501
 
-Upstream Status: Pending
+Upstream Status: Backport
 
 Signed-off-by: Song Bing <b06498@freescale.com>
 diff --git a/gst-libs/gst/video/gstvideopool.c b/gst-libs/gst/video/gstvideopool.c
