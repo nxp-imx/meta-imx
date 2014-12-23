@@ -4,7 +4,7 @@ require recipes-bsp/imx-vpu/imx-vpu.inc
 
 PE = "1"
 
-SRC_URI[md5sum] = "38df41fd7aec8978009f5fa0c040e73f"
-SRC_URI[sha256sum] = "e1f1a9b74fb30f7ef26d6081ba3694757dd2fcb7b94836ea04e08e853b9d2104"
+SRC_URI[md5sum] = "3dc36b427fc2b91af05504f39f8f964f"
+SRC_URI[sha256sum] = "e4e983f465c2ed296908dfe2bfcff2890c8f05b38f6ae98e7a7879b23a2b1a4e"
 
 COMPATIBLE_MACHINE = "(mx6)"
