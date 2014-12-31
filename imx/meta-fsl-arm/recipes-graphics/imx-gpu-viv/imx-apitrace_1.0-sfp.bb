@@ -8,8 +8,8 @@ DEPENDS = "imx-gpu-viv"
 inherit fsl-eula-unpack
 
 SRC_URI = "${FSL_MIRROR}/imx-gpu-viv-5.0.11.p4.1-sfp.bin;fsl-eula=true"
-SRC_URI[md5sum] = "2d8859599895c4e6a27c5a7215cc055d"
-SRC_URI[sha256sum] = "db89885463733bffae4625a0dd4173d9530eb9b11eda8be3ee09dc7e9c4e23ba"
+SRC_URI[md5sum] = "386b66e25abfb962f8eaf54fa85e7c18"
+SRC_URI[sha256sum] = "08349e3e6f23287f03e3a896c16938acc9cff44a1f6d624b23f7d348e09ab1ac"
 
 S = "${WORKDIR}/imx-gpu-viv-5.0.11.p4.1-sfp/apitrace"
 
