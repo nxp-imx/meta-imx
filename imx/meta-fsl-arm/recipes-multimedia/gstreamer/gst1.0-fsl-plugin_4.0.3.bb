@@ -1,4 +1,4 @@
-# Copyright (C) 2014,2015 Freescale Semiconductor
+# Copyright (C) 2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require gst-fsl-plugin.inc
@@ -8,14 +8,12 @@ S = "${WORKDIR}/gst1.0-fsl-plugins-${PV}"
 
 EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 
-SRC_URI[md5sum] = "b5c1072536479c174bda1349ade5d10c"
-SRC_URI[sha256sum] = "9d5c051cbde023014e67fde07bc314b6b9a5e7030e24eb0d8afdf33e7e458125"
+SRC_URI[md5sum] = "974908c4b916ca3a12be6d591f666913"
+SRC_URI[sha256sum] = "43c3b040cf93d751f65c0bd78418f8c7cd23fc8be2340b3f9fc679894622eca5"
 
 DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base"
 
-PACKAGECONFIG ?= ""
-PACKAGECONFIG_mx6 = "overlaysink"
-
+PACKAGECONFIG ?= "overlaysink"
 # FIXME: Add all features
 # feature from excluded mm packages
 PACKAGECONFIG[ac3] += ",,libfslac3codec,libfslac3codec"
