@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=iMX Player
+Exec=/usr/share/qt5/examples/multimedia/imxplayer/imxplayer
+Icon=imxplayer
+Terminal=false
+Type=Application
+X-MB-SingleInstance=true
+Comment=i.MX Player
+StartupNotify=false
