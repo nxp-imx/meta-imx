@@ -4,8 +4,8 @@ require recipes-bsp/firmware-imx/firmware-imx.inc
 
 PE="1"
 
-SRC_URI[md5sum] = "b15ce0e8d2acb4ad694d7c0b835678ef"
-SRC_URI[sha256sum] = "32391ce725657a74d69c448556c62afc3d3dafed55aa1a20de257a07171cb151"
+SRC_URI[md5sum] = "65dda3b8366060729e635d4a1f3024d6"
+SRC_URI[sha256sum] = "f2be795785f6c7cd751fd2aadf6d8c18c28b40f315b5e321d8957da237905842"
 
 do_install() {
 	install -d ${D}/lib/firmware
