@@ -1,7 +1,9 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
 SRC_URI_append_mx6 = " file://0001-Add-Vivante-EGL-and-GAL2D-compositor-support.patch \
-				       file://weston.sh "
+                       file://0002-Fix-for-wrong-FPS-throttling-when-multib.patch \
+                       file://0003-Performance-Optimisation-for-single-buff.patch \
+                       file://weston.sh "
 
 PACKAGECONFIG_append_mx6q = " cairo-glesv2"
 PACKAGECONFIG_append_mx6dl = " cairo-glesv2"
