@@ -89,14 +89,27 @@ Bluez5 instructions
 	<bluetooth> connect <mac address>
 	<bluetooth> quit
 
-6) Copy a file from board to bluetooth device using the obex transfer
+6) Copy a file from board to bluetooth device using the obex transfer.
 
+	Note: both obexd and obexctl need to be run from a terminal on the board
+			instead of from a remote login.
+			
 	a) Start obex daemon
 	$ /usr/lib/bluez5/bluetooth/obexd
 
-	b) Start the obex control interface
+	b) On a smart phone, install an obex app such as Bluetooth File Transfer.
+	
+	c) Start obexctl. Type help to show commands. 
 	$ obexctl
-	<obex> connect <mac address>
-	<obex> send file
-	<obex> disconnect <mac address>
-	<obex> quit
+	
+	d) Start app on phone and use the connect function to connect board.
+		After connection is established, obexctl should have some messages 
+		showing up saying a new session has been established. The MAC address 
+		of the phone should	be displayed in bracket as the command prompt.
+		
+	e) Send a file to phone from obexctl
+	[<mac addr>]# send <file>
+	
+	f) Once it's done, close the session
+	[<mac addr]# disconnect
+	[<mac addr>]# quit
