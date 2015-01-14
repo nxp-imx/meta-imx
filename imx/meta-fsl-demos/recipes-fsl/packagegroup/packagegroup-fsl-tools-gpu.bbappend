@@ -19,7 +19,11 @@ SOC_TOOLS_GPU_remove_mx6 = " \
     gpu-viv-g2d \
 "
 SOC_TOOLS_GPU_append_mx6 = " \
-    imx-gpu-viv \
-    imx-gpu-viv-g2d-mx6 \
+    imx-gpu-viv-g2d \
+    imx-gpu-viv-tools \
+    ${@base_contains('DISTRO_FEATURES', 'x11', 'imx-gpu-viv-tools-apitrace', '', d)} \
 "
-SOC_TOOLS_GPU_remove_mx6sl = "fsl-gpu-sdk"
+SOC_TOOLS_GPU_remove_mx6sl = " \
+    fsl-gpu-sdk \
+    imx-gpu-viv-tools-apitrace \
+"

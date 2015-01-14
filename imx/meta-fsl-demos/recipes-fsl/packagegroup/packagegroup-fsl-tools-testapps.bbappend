@@ -24,6 +24,7 @@ RDEPENDS_${PN} += " \
     ntpdate \
     minicom \
     coreutils \
+    imx-gpu-viv-demos \
 "
 
 SOC_TOOLS_TESTAPPS = ""
