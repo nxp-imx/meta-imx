@@ -309,7 +309,7 @@ FILES_libvivante-dfb-mx6 = "${libdir}/directfb-*/gfxdrivers/libdirectfb_gal.so"
 
 INSANE_SKIP_libwayland-viv-mx6 += "dev-so"
 FILES_libwayland-viv-mx6 =  "${libdir}/libwayland-viv${REALSOLIBS}  ${libdir}/libwayland-viv${SOLIBS}"
-FILES_libwayland-viv-mx6-dev = "${libdir})/libwayland-viv${SOLIBSDEV} ${libdir}/pkgconfig/wayland-viv.pc"
+FILES_libwayland-viv-mx6-dev = "${includedir}/wayland-viv ${libdir})/libwayland-viv${SOLIBSDEV} ${libdir}/pkgconfig/wayland-viv.pc"
 FILES_libwayland-viv-mx6-dbg = "${libdir}/.debug/libwayland-viv${SOLIBS}"
 
 INSANE_SKIP_libgc-wayland-protocol-mx6 += "dev-so"
