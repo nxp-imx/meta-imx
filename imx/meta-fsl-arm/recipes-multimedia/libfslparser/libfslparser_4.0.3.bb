@@ -6,7 +6,7 @@ require recipes-multimedia/libfslparser/libfslparser.inc
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "3b77fb127117fa7d4d86dfe132204925"
-SRC_URI[sha256sum] = "536e2eca92b8a9736d87e8a125757b686057746f6758538716ecad8a2f69622b"
+SRC_URI[md5sum] = "8ab3e9fd968114b1db8ad77b2f3d250d"
+SRC_URI[sha256sum] = "fba81e02141fac8f52bdeb085c81cc0fcdf6a508957ac3d9d999f67ea638100c"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6)"
