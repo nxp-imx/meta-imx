@@ -28,6 +28,7 @@ PACKAGES =+ "libclc-mx6 libclc-mx6-dev libclc-mx6-dbg \
 	libgl-mx6 libgl-mx6-dev libgl-mx6-dbg \
 	libgles-mx6 libgles-mx6-dev libgles-mx6-dbg \
 	libgles2-mx6 libgles2-mx6-dev libgles2-mx6-dbg \
+	libgles3-mx6-dev \
 	libglslc-mx6 libglslc-mx6-dev libglslc-mx6-dbg \
 	libopencl-mx6 libopencl-mx6-dev libopencl-mx6-dbg \
 	libopenvg-mx6 libopenvg-mx6-dev libopenvg-mx6-dbg \
@@ -238,10 +239,6 @@ do_install () {
     find ${D}${includedir} -type f -exec chmod 644 {} \;
 }
 
-FILES_${PN}-dev = "${includedir}"
-FILES_${PN}-dbg = "${libdir}/.debug"
-INSANE_SKIP_${PN} += "rpaths"
-
 FILES_libclc-mx6 = "${libdir}/libCLC${SOLIBS}"
 FILES_libclc-mx6-dev = "${includedir}/CL ${libdir}/libCLC${SOLIBSDEV}"
 FILES_libclc-mx6-dbg = "${libdir}/.debug/libCLC${SOLIBS}"
@@ -278,6 +275,8 @@ FILES_libgles2-mx6-dev = "${includedir}/GLES2 ${libdir}/libGLESv2${SOLIBSDEV} ${
 FILES_libgles2-mx6-dbg = "${libdir}/.debug/libGLESv2${SOLIBS}"
 RDEPENDS_libgles2-mx6 = "libglslc-mx6"
 
+FILES_libgles3-mx6-dev = "${includedir}/GLES3"
+
 FILES_libglslc-mx6 = "${libdir}/libGLSLC${SOLIBS}"
 FILES_libglslc-mx6-dev = "${includedir}/CL ${libdir}/libGLSLC${SOLIBSDEV}"
 FILES_libglslc-mx6-dbg = "${libdir}/.debug/libGLSLC${SOLIBS}"
@@ -295,7 +294,7 @@ FILES_libopenvg-mx6-dev = "${includedir}/VG ${libdir}/libOpenVG*${SOLIBSDEV} ${l
 FILES_libopenvg-mx6-dbg = "${libdir}/.debug/libOpenVG*${SOLIBS}"
 
 FILES_libvdk-mx6 = "${libdir}/libVDK${SOLIBS}"
-FILES_libvdk-mx6-dev = "${includedir}/*vdk.h ${libdir}/libVDK${SOLIBSDEV}"
+FILES_libvdk-mx6-dev = "${includedir}/*vdk*.h ${libdir}/libVDK${SOLIBSDEV}"
 FILES_libvdk-mx6-dbg = "${libdir}/.debug/libVDK${SOLIBS}"
 
 FILES_libvivante-mx6 = "${libdir}/libVIVANTE${SOLIBS}"
