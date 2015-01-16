@@ -1,1 +1,1 @@
-SRC_URI = "git://code.qt.io/qt/qt3d.git;protocol=http;branch=dev"
+QT_MODULE_BRANCH = "dev"
