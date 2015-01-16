@@ -1,9 +1,9 @@
-# Copyright (C) 2014-2015 Freescale Semiconductor
+# Copyright (C) 2014 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Freescale QT Multimedia applications"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=acdb807ac7275fe32f9f64992e111241"
+LIC_FILES_CHKSUM = "file://EULA;md5=b063366b066c9f10037c59756a9ced54"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
@@ -13,8 +13,8 @@ DEPENDS += "qtmultimedia gstreamer1.0 gstreamer1.0-plugins-base"
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://qtimxplayer.desktop \
 "
-SRC_URI[md5sum] = "a703e0b1390455c2f60804a5786a4f1f"
-SRC_URI[sha256sum] = "127f54bbea16998aefea28079116628bd72e1eb79cdb42d80e10efd1a897db51"
+SRC_URI[md5sum] = "918f5511da7dbbd45057f65932b2d73d"
+SRC_URI[sha256sum] = "210f087e48fb47c0fc229dcc01442b3fcd6ea8d0b992b2380554d78f783ab3da"
 
 do_install () {
     install -d ${D}${datadir}/applications
