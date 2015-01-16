@@ -12,8 +12,8 @@ require recipes-kernel/linux/linux-mfgtool.inc
 DEPENDS += "lzop-native bc-native"
 
 SRCBRANCH = "imx_3.14.y"
-SRCREV = "${AUTOREV}"
 LOCALVERSION = "-1.0.0_ga"
+SRCREV = "4e299e6943cc9701c70b77d33bb02c747af52204"
 SRC_URI = "git://${FSL_ARM_GIT_SERVER}/linux-2.6-imx.git;protocol=git;branch=${SRCBRANCH}"
 
 DEFAULT_PREFERENCE = "1"
