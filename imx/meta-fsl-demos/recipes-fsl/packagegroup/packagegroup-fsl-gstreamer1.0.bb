@@ -8,12 +8,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-GST_EXTRA = "gstreamer1.0-plugins-bad-rawparse"
+GST_EXTRA = "gstreamer1.0-plugins-bad-rawparse gstreamer1.0-plugins-bad-jpegformat"
 GST_EXTRA += "${@base_contains('DISTRO_FEATURES', 'x11', 'libgstgl-1.0-0 gstreamer1.0-plugins-bad-opengl', '', d)}"
 
 GST_INSTALL = ""
-GST_INSTALL_append_mx6q = " ${GST_EXTRA}"
-GST_INSTALL_append_mx6dl = " ${GST_EXTRA}"
+GST_INSTALL_append_mx6q = " ${GST_EXTRA} ${@base_contains('DISTRO_FEATURES', 'x11', 'gstreamer1.0-plugins-bad-camerabin2', '', d)}"
+GST_INSTALL_append_mx6dl = " ${GST_EXTRA} ${@base_contains('DISTRO_FEATURES', 'x11', 'gstreamer1.0-plugins-bad-camerabin2', '', d)}"
 GST_INSTALL_append_mx6sx = " ${GST_EXTRA}"
 
 RDEPENDS_${PN} += " \
