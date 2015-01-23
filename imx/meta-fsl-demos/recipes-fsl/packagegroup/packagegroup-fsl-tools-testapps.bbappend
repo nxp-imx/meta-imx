@@ -24,7 +24,6 @@ RDEPENDS_${PN} += " \
     ntpdate \
     minicom \
     coreutils \
-    imx-gpu-viv-demos \
 "
 
 SOC_TOOLS_TESTAPPS = ""
@@ -33,6 +32,7 @@ SOC_TOOLS_TESTAPPS_mx6 += " \
     vlan \
     cryptodev-module \
     cryptodev-tests \
+    imx-gpu-viv-demos \
     ${PN}-fslcodec-testapps \
 "
 
