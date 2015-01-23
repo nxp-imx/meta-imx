@@ -78,9 +78,9 @@ FILES_${PN} = "${libdir}/*/*/*/vivante_drv${SOLIBS}"
 FILES_${PN}-dev = "${includedir} /usr/src"
 FILES_${PN}-dbg = "${libdir}/*/*/*/.debug"
 
-FILES_xserver-xorg-extension-viv-hdmi = " ${libdir}/libfsl_x11_ext${SOLIBS} ${exec_prefix}/bin/autohdmi ${sysconfdir}/init.d ${sysconfdir}/rc.autohdmi"
+FILES_xserver-xorg-extension-viv-hdmi = " ${libdir}/libfsl_x11_ext${SOLIBS} ${exec_prefix}/bin/autohdmi ${sysconfdir}/init.d/rc.autohdmi"
 FILES_xserver-xorg-extension-viv-hdmi-dev = " ${libdir}/libfsl_x11_ext${SOLIBSDEV}"
-FILES_xserver-xorg-extension-viv-hdmi-dbg = " ${libdir}/.debug/libfsl_x11_ext${SOLIBS} ${exec_prefix}/bin/.debug/autohdmi ${sysconfdir}/init.d"
+FILES_xserver-xorg-extension-viv-hdmi-dbg = " ${libdir}/.debug/libfsl_x11_ext${SOLIBS} ${exec_prefix}/bin/.debug/autohdmi"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx6)"
