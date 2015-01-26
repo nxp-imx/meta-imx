@@ -1,12 +1,12 @@
-# Copyright (C) 2013, 2014 Freescale Semiconductor
+# Copyright (C) 2013-2015 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require imx-gpu-viv.inc
 
 S="${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "024ea7bf6dc07ef33cdffce2256dc53d"
-SRC_URI[sha256sum] = "fca37864cb53a4bf7fc00ab7210cc772ebb04170900903a8dd12497be8ca5e2e"
+SRC_URI[md5sum] = "7c21a9ee10b716fb663c349b99b80ede"
+SRC_URI[sha256sum] = "db0aa3765790b3b132c52f7c562d97f1cd19191d348b001b007cb2eee71e85d0"
 
 # FIXME skip the QA error for viv-samples
 INSANE_SKIP_${PN} += "rpaths"
