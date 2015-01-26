@@ -13,7 +13,9 @@ SRC_URI[sha256sum] = "01bd080faa07d51d1af097ca5b6d46094b01310d7c9fbb065a6d4536a4
 
 DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base"
 
-PACKAGECONFIG ?= "overlaysink"
+PACKAGECONFIG ?= ""
+PACKAGECONFIG_mx6 = "overlaysink"
+
 # FIXME: Add all features
 # feature from excluded mm packages
 PACKAGECONFIG[ac3] += ",,libfslac3codec,libfslac3codec"
