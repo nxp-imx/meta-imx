@@ -1,0 +1,22 @@
+diff --git a/Qt5_NMapper_1.0/content/Switch.qml b/Qt5NMapper/content/Switch.qml
+index 08a2cba..a8b8b26 100644
+--- a/Qt5_NMapper_1.0/content/Switch.qml
++++ b/Qt5NMapper/content/Switch.qml
+@@ -5,7 +5,7 @@ Item {
+ 
+     property alias text: textItem.text
+     property bool checked: false
+-    property string onText: "On"
++    property string onTextString: "On"
+     property string offText: "Off"
+ 
+     QtObject {
+@@ -76,7 +76,7 @@ Item {
+             color: "#000000"
+             font.pixelSize: 18
+             font.bold: true
+-            text: onText
++            text: onTextString
+         }
+         Text {
+             anchors.verticalCenter: parent.verticalCenter
