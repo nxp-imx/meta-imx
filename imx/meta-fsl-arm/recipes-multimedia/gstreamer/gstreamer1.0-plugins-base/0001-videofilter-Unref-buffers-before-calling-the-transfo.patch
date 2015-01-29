@@ -1,0 +1,54 @@
+From f711288c7c86c33aed18f52ed6d7787d19b7741d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Sebastian=20Dr=C3=B6ge?= <sebastian@centricular.com>
+Date: Fri, 12 Sep 2014 14:27:44 +0300
+Subject: [PATCH 1/3] videofilter: Unref buffers before calling the
+ transform_frame functions
+
+GstVideoFrame has another reference, so the buffer looks unwriteable,
+meaning that we can't attach any metas or anything to it
+
+Upstream Status: Accepted
+https://bugzilla.gnome.org/show_bug.cgi?id=736118
+---
+ gst-libs/gst/video/gstvideofilter.c |   16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/gst-libs/gst/video/gstvideofilter.c b/gst-libs/gst/video/gstvideofilter.c
+index a47a113..e1fa2c1 100644
+--- a/gst-libs/gst/video/gstvideofilter.c
++++ b/gst-libs/gst/video/gstvideofilter.c
+@@ -267,7 +267,16 @@ gst_video_filter_transform (GstBaseTransform * trans, GstBuffer * inbuf,
+             GST_MAP_WRITE))
+       goto invalid_buffer;
+ 
++    /* GstVideoFrame has another reference, so the buffer looks unwriteable,
++     * meaning that we can't attach any metas or anything to it. Other
++     * map() functions like gst_buffer_map() don't get another reference
++     * of the buffer and expect the buffer reference to be kept until
++     * the buffer is unmapped again. */
++    gst_buffer_unref (inbuf);
++    gst_buffer_unref (outbuf);
+     res = fclass->transform_frame (filter, &in_frame, &out_frame);
++    gst_buffer_ref (inbuf);
++    gst_buffer_ref (outbuf);
+ 
+     gst_video_frame_unmap (&out_frame);
+     gst_video_frame_unmap (&in_frame);
+@@ -316,7 +325,14 @@ gst_video_filter_transform_ip (GstBaseTransform * trans, GstBuffer * buf)
+     if (!gst_video_frame_map (&frame, &filter->in_info, buf, flags))
+       goto invalid_buffer;
+ 
++    /* GstVideoFrame has another reference, so the buffer looks unwriteable,
++     * meaning that we can't attach any metas or anything to it. Other
++     * map() functions like gst_buffer_map() don't get another reference
++     * of the buffer and expect the buffer reference to be kept until
++     * the buffer is unmapped again. */
++    gst_buffer_unref (buf);
+     res = fclass->transform_frame_ip (filter, &frame);
++    gst_buffer_ref (buf);
+ 
+     gst_video_frame_unmap (&frame);
+   } else {
+-- 
+1.7.9.5
+
