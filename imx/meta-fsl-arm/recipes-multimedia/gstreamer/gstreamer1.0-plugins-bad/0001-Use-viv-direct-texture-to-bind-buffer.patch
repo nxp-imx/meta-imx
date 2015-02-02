@@ -1,4 +1,4 @@
-From cac68de9771199017e42642bc8228e0d0438ef4a Mon Sep 17 00:00:00 2001
+From a29f5a0647cbc7f7adb41f78c365fdc48589125e Mon Sep 17 00:00:00 2001
 From: Jian <Jian.Li@freescale.com>
 Date: Tue, 13 Jan 2015 15:07:22 +0800
 Subject: [PATCH] Use viv direct texture to bind buffer
@@ -10,15 +10,15 @@ Content-Transfer-Encoding: 8bit
   buffer with texture to avoid memory copy from video
   buffer to texture to gain good performance.
 
-  Upstream Status: Inappropriate [i.MX specific]
+Upstream Status: Inappropriate [i.MX specific]
 Signed-off-by: Jian <Jian.Li@freescale.com>
 ---
  gst-libs/gst/gl/Makefile.am             |    4 +-
  gst-libs/gst/gl/gstglfilter.c           |   11 ++-
  gst-libs/gst/gl/gstglupload.c           |   10 ++-
- gst-libs/gst/gl/gstglvivdirecttexture.c |  122 +++++++++++++++++++++++++++++++
+ gst-libs/gst/gl/gstglvivdirecttexture.c |  123 +++++++++++++++++++++++++++++++
  gst-libs/gst/gl/gstglvivdirecttexture.h |   34 +++++++++
- 5 files changed, 177 insertions(+), 4 deletions(-)
+ 5 files changed, 178 insertions(+), 4 deletions(-)
  create mode 100644 gst-libs/gst/gl/gstglvivdirecttexture.c
  create mode 100644 gst-libs/gst/gl/gstglvivdirecttexture.h
 
@@ -110,10 +110,10 @@ index 133fdd5..3caf9c1 100644
    if (!gst_video_frame_map (&upload->priv->frame, &upload->in_info, buffer,
 diff --git a/gst-libs/gst/gl/gstglvivdirecttexture.c b/gst-libs/gst/gl/gstglvivdirecttexture.c
 new file mode 100644
-index 0000000..dd63ebd
+index 0000000..4806335
 --- /dev/null
 +++ b/gst-libs/gst/gl/gstglvivdirecttexture.c
-@@ -0,0 +1,122 @@
+@@ -0,0 +1,123 @@
 +/*
 + * GStreamer
 + * Copyright (c) 2015, Freescale Semiconductor, Inc. 
@@ -186,6 +186,7 @@ index 0000000..dd63ebd
 +  typedef struct {
 +    guint8 *vaddr;
 +    guint8 *paddr;
++    guint8 *caddr;
 +    gsize size;
 +    gpointer *user_data;
 +  } PhyMemBlock;
