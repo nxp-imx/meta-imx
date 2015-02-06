@@ -17,8 +17,8 @@ SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}.tar.gz \
             file://rc.autohdmi \
 "
 
-SRC_URI[md5sum] = "3e2a75360dacbf0db1d6d5417c4d9164"
-SRC_URI[sha256sum] = "29f00e1d16eff6a1c8ef5052ba171116b68e180cf251378fd449a660c220e226"
+SRC_URI[md5sum] = "350c59606afd315a3c905b9e2f647495"
+SRC_URI[sha256sum] = "f7c7c35ac5b64b773b13d9faad2492eaf8e89b569c916fe79c3c1a4fadf061e6"
 
 INITSCRIPT_NAME = "rc.autohdmi"
 INITSCRIPT_PARAMS = "start 99 2 3 4 5 ."
