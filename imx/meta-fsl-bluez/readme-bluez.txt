@@ -113,3 +113,23 @@ Bluez5 instructions
 	f) Once it's done, close the session
 	[<mac addr]# disconnect
 	[<mac addr>]# quit
+
+    
+To setup blueZ5 and A2DP sink on SabreSD
+----------------------------------------
+
+- For details, please reference https://community.freescale.com/docs/DOC-103385
+
+- Note: 
+    1) For systems that can automatically detect the alsa cards and starts 
+        pulseaudio daemon, all steps related to the 'pulse' user and starting 
+        pulseaudio can be skipped. 
+    2) To check if the system detected alsa card or not, run the following command
+    $ ps aux | grep pulse
+    
+        if the output includes a process like '/usr/bin/pulseaudio --start',
+        the daemon has started.
+    3) After starting bluetoothd, make sure the bluetooth interface is up
+        before running bluetoothctl.
+        
+    
