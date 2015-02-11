@@ -1,5 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+SRC_URI_append_mx6 = " file://0001-MGS-515-ccc-Opencv-app-can-t-run-on-imx6sx-with-cam.patch"
+
 EXTRA_OECMAKE += "-DBUILD_TIFF=ON \
                   -DBUILD_opencv_ocl=OFF \
                   -DBUILD_opencv_gpu=OFF \
