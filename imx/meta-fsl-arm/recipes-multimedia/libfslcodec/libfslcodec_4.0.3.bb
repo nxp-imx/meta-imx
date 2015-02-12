@@ -3,7 +3,7 @@
 
 require recipes-multimedia/libfslcodec/libfslcodec.inc
 
-SRC_URI[md5sum] = "8999ede022f4fe9c98a655ff6e63c5bd"
-SRC_URI[sha256sum] = "a6a49fc96c78c257db80681d6ef2510921578c8f5a7d26750d7a0f68fa871f4e"
+SRC_URI[md5sum] = "c984a41fa489ab50535c560b6b216e06"
+SRC_URI[sha256sum] = "a61616ae3b5918125af11374867418adcccdf5a63592a56604f299200bbc44d2"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6)"
