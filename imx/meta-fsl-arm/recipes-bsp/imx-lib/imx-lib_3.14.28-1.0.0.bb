@@ -4,8 +4,8 @@ include recipes-bsp/imx-lib/imx-lib.inc
 
 PE = "1"
 
-SRC_URI[md5sum] = "c510512ebd2bae5a7e57079b9788960e"
-SRC_URI[sha256sum] = "4db2c1f286f2478b8236e62de4df9d2a2c26ff727c752dc4f21e2910f4a5e5d7"
+SRC_URI[md5sum] = "d9b338547f7a8528876fa83d6230bdeb"
+SRC_URI[sha256sum] = "3fb4b4e83de71e4d24c2f2985c92484a2b27fe6c517cb5b265bf7ddc473ba5d3"
 PLATFORM_mx6sl = "IMX6S"
 PLATFORM_mx6sx = "IMX6S"
 
