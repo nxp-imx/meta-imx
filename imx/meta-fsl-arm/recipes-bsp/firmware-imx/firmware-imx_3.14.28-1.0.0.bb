@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=acdb807ac7275fe32f9f64992e111241"
 
 PE="1"
 
-SRC_URI[md5sum] = "eb24f23aafb5a7f4a6a822eb202db33b"
-SRC_URI[sha256sum] = "4f0311553c908a5a1edefe50b7e460d0530e98ffab1e4ab2f69a1cd7ccf662aa"
+SRC_URI[md5sum] = "e0f1dbf106c93c34ba6a2c871e84a408"
+SRC_URI[sha256sum] = "ff1e5852f8382e3e24e4215ce4b9980671fb431f066a02e4bfe57421d2b288dc"
 
 do_install() {
 	install -d ${D}/lib/firmware
