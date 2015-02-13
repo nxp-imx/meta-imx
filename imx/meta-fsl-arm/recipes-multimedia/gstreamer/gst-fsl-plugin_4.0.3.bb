@@ -1,4 +1,4 @@
-# Copyright (C) 2013-14 Freescale Semiconductor
+# Copyright (C) 2013-2015 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require gst-fsl-plugin.inc
