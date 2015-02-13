@@ -4,7 +4,7 @@
 require recipes-multimedia/libfslcodec/libfslcodec.inc
 LIC_FILES_CHKSUM = "file://EULA.txt;md5=acdb807ac7275fe32f9f64992e111241"
 
-SRC_URI[md5sum] = "c984a41fa489ab50535c560b6b216e06"
-SRC_URI[sha256sum] = "a61616ae3b5918125af11374867418adcccdf5a63592a56604f299200bbc44d2"
+SRC_URI[md5sum] = "f752135f14733296b82c14002c68df78"
+SRC_URI[sha256sum] = "dc2f9df1ef9579cc91a43513f67e8e2565598f7692b3de7b1013635d2cbbe91b"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6)"
