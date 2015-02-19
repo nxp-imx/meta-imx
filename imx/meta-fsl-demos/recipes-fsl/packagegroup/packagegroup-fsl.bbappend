@@ -24,15 +24,18 @@ RDEPENDS_${PN}-tools-testapps_mx6 = " \
     ethtool \
     mtd-utils \
     mtd-utils-ubifs \
-    imx-kobs \
     bluez4 \
     obexftp \
     procps \
 "
 
-SOC_TOOLS_TESTAPPS_mx6 += " \
+SOC_TOOLS_TESTAPPS += " \
     iw \
     can-utils \
+"
+
+SOC_TOOLS_TESTAPPS_mx6 += " \
+    imx-kobs \
 "
 
 # only add in cryptodev for non solo-lite mx6 devices
