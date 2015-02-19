@@ -30,3 +30,8 @@ RDEPENDS_${PN}-tools-testapps = " \
     obexftp \
     procps \
 "
+
+SOC_TOOLS_TESTAPPS_mx6 += " \
+    iw \
+    can-utils \
+"
