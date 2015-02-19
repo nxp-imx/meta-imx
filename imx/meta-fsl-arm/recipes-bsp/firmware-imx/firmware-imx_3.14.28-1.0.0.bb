@@ -1,12 +1,11 @@
-# Copyright (C) 2012-2015 Freescale Semiconductor
+# Copyright (C) 2012-2014 Freescale Semiconductor
 
 require recipes-bsp/firmware-imx/firmware-imx.inc
-LIC_FILES_CHKSUM = "file://COPYING;md5=acdb807ac7275fe32f9f64992e111241"
 
 PE="1"
 
-SRC_URI[md5sum] = "6e700f3d3a6482db08d5aabee7751630"
-SRC_URI[sha256sum] = "1f09acd4d605efc78a0672068a658cb16274811d2f444cf3ae7aaa075266746f"
+SRC_URI[md5sum] = "65dda3b8366060729e635d4a1f3024d6"
+SRC_URI[sha256sum] = "f2be795785f6c7cd751fd2aadf6d8c18c28b40f315b5e321d8957da237905842"
 
 do_install() {
 	install -d ${D}/lib/firmware
