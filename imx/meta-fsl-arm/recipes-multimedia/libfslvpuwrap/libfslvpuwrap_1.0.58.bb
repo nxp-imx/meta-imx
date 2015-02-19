@@ -4,7 +4,7 @@ DESCRIPTION = "Freescale Multimedia VPU wrapper"
 DEPENDS = "imx-vpu"
 LICENSE = "Proprietary"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://EULA.txt;md5=acdb807ac7275fe32f9f64992e111241"
+LIC_FILES_CHKSUM = "file://COPYING;md5=acdb807ac7275fe32f9f64992e111241"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
