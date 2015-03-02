@@ -12,14 +12,13 @@ DEPENDS += "virtual/xserver virtual/libx11 virtual/libgal-x11 imx-gpu-viv pixman
 
 LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=95cf961a2ceacdf7cf43caef25766779"
 
-# FIXME: Drop 'alpha' suffix for GA release
 SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}.tar.gz \
-            file://rc.autohdmi \
-"
+            file://rc.autohdmi"
 
 SRC_URI[md5sum] = "1a8846c4595fc41e556b157caf2181fa"
 SRC_URI[sha256sum] = "701c68e3cf1419e5238f1a69390663569ecbce3f1331c86e94834874a7f85530"
 
+INITSCRIPT_PACKAGES = "xserver-xorg-extension-viv-autohdmi"
 INITSCRIPT_NAME = "rc.autohdmi"
 INITSCRIPT_PARAMS = "start 99 2 3 4 5 ."
 
@@ -35,8 +34,7 @@ CFLAGS += "-I${STAGING_INCDIR}/xorg \
 
 S = "${WORKDIR}/xserver-xorg-video-imx-viv-${PV}/"
 
-
-PACKAGES =+ "xserver-xorg-extension-viv-hdmi xserver-xorg-extension-viv-hdmi-dev xserver-xorg-extension-viv-hdmi-dbg"
+PACKAGES =+ "xserver-xorg-extension-viv-autohdmi"
 
 # FIXME: The Freescale provided Makefile has hardcodec include paths
 #        and this does not work in case prefix is different than /usr,
@@ -75,12 +73,10 @@ REALSOLIBS := "${SOLIBS}"
 SOLIBS = "${SOLIBSDEV}"
 
 FILES_${PN} = "${libdir}/*/*/*/vivante_drv${SOLIBS}"
-FILES_${PN}-dev = "${includedir} /usr/src"
-FILES_${PN}-dbg = "${libdir}/*/*/*/.debug"
+FILES_${PN}-dev = "${includedir} /usr/src ${libdir}/libfsl_x11_ext${SOLIBSDEV}"
+FILES_${PN}-dbg = "${libdir}/*/*/*/.debug ${libdir}/.debug/libfsl_x11_ext${SOLIBS} ${exec_prefix}/bin/.debug/autohdmi"
 
-FILES_xserver-xorg-extension-viv-hdmi = " ${libdir}/libfsl_x11_ext${SOLIBS} ${exec_prefix}/bin/autohdmi ${sysconfdir}/init.d/rc.autohdmi"
-FILES_xserver-xorg-extension-viv-hdmi-dev = " ${libdir}/libfsl_x11_ext${SOLIBSDEV}"
-FILES_xserver-xorg-extension-viv-hdmi-dbg = " ${libdir}/.debug/libfsl_x11_ext${SOLIBS} ${exec_prefix}/bin/.debug/autohdmi"
+FILES_xserver-xorg-extension-viv-autohdmi = " ${libdir}/libfsl_x11_ext${SOLIBS} ${exec_prefix}/bin/autohdmi ${sysconfdir}/init.d/rc.autohdmi"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx6)"
