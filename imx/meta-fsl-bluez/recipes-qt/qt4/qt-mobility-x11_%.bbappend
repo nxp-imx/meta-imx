@@ -1,2 +1,0 @@
-
-PACKAGECONFIG[bluetooth] = ",,virtual/bluez"
