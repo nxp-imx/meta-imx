@@ -62,7 +62,8 @@ PACKAGES =+ "${PN}-security-policy \
              ${PN}-module-exa \
              ${PN}-module-xaa \
              ${PN}-module-libxf1bpp \
-             ${PN}-module-libxf4bpp"
+             ${PN}-module-libxf4bpp \
+             ${PN}-module-modesetting "
 
 RRECOMMENDS_${PN} += "${PN}-security-policy xkeyboard-config rgb xserver-xf86-config xkbcomp"
 RDEPENDS_${PN}-xvfb += "xkeyboard-config"
@@ -97,6 +98,7 @@ FILES_${PN}-module-exa = "${libdir}/xorg/modules/libexa.so"
 FILES_${PN}-module-xaa = "${libdir}/xorg/modules/libxaa.so"
 FILES_${PN}-module-libxf1bpp = "${libdir}/xorg/modules/libxf1bpp.so"
 FILES_${PN}-module-libxf4bpp = "${libdir}/xorg/modules/libxf4bpp.so"
+FILES_${PN}-module-modesetting = "${libdir}/xorg/modules/drivers/modesetting_drv.so"
 
 EXTRA_OECONF += "--with-fop=no \
                  --with-pic \
@@ -114,6 +116,7 @@ EXTRA_OECONF += "--with-fop=no \
                  --with-xkb-output=/var/lib/xkb \
                  --with-sha1=libcrypto \
                  ac_cv_file__usr_share_sgml_X11_defs_ent=no \
+                 --disable-systemd-logind \
 "
 
 PACKAGECONFIG ??= "udev ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'dri dri2 glx', '', d)}"

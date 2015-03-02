@@ -1,12 +1,14 @@
-require recipes-graphics/xorg-xserver/xserver-xorg.inc
+require xserver-xorg.inc
+
+LIC_FILES_CHKSUM = "file://COPYING;md5=5df87950af51ac2c5822094553ea1880"
+
 
 # Misc build failure for master HEAD
 SRC_URI += "file://fix_open_max_preprocessor_error.patch \
-            file://xshmfence-option.patch \
            "
 
-SRC_URI[md5sum] = "b1ff364222e921d32de40c4786e8bc47"
-SRC_URI[sha256sum] = "f4677c6ec9fb7b59648321737087aeb9963b60bcea50ee3773fe46be1a37e060"
+SRC_URI[md5sum] = "38ecaefa238b04ec4a38f7128e87e239"
+SRC_URI[sha256sum] = "4e8548bae163129d2fc8f8e1f3b6071fe9d62821e3d5617507ccd2f589526166"
 
 # These extensions are now integrated into the server, so declare the migration
 # path for in-place upgrades.
