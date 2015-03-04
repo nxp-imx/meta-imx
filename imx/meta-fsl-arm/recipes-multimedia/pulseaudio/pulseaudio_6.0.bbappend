@@ -6,8 +6,9 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI_append = " file://daemon.conf \
         file://default.pa \
         file://0001-Fix-pulseaudio-mutex-issue-when-do-pause-in-gstreame.patch \
-        file://0002-Fix-issue-there-is-no-sound-after-plugin-plugout-hea.patch \
 "
+#        file://0002-Fix-issue-there-is-no-sound-after-plugin-plugout-hea.patch
+
 
 do_install_append() {
     install -m 0644 ${WORKDIR}/daemon.conf ${D}${sysconfdir}/pulse/daemon.conf
