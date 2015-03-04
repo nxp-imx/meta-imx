@@ -14,8 +14,7 @@ PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
                            base_contains('DISTRO_FEATURES', 'x11', \
                                     'opengl', '', d), '', d)}"
 
-SRC_URI_append_mx6 = " file://0001-Use-viv-direct-texture-to-bind-buffer.patch \
-                       file://camerabin-examples-memory-leak-in-camerabin-examples-01.patch \
+SRC_URI_append_mx6 = " file://camerabin-examples-memory-leak-in-camerabin-examples-01.patch \
                        file://camerabin-examples-memory-leak-in-camerabin-examples-02.patch \
 "
 
