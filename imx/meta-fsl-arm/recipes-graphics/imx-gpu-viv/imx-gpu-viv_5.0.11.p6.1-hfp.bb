@@ -5,7 +5,7 @@ require imx-gpu-viv.inc
 
 S="${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "57996c100b5fdc5982f73c1ec9a9dee6"
-SRC_URI[sha256sum] = "1432e3fc3d9d80fb48d236ab0bfe8201219fe09bf98728cca32cb65fe7d7d88a"
+SRC_URI[md5sum] = "6aafc01f38f08527f351106f167da658"
+SRC_URI[sha256sum] = "1f213dc56676bd7adb089c4190d9eca2a2884f9a883b9363d0f0c24a74bdac89"
 
 PACKAGE_FP_TYPE = "hardfp"
