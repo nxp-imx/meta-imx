@@ -16,7 +16,7 @@ inherit fsl-eula-unpack autotools pkgconfig
 
 do_install_append() {
     # FIXME: Drop examples for now
-    rm -r ${D}${datadir}/imx-mm
+    rm -r ${D}${datadir}
 }
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
