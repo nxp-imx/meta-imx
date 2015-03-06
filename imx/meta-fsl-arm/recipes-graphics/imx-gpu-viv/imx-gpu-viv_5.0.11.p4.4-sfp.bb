@@ -5,8 +5,8 @@ require imx-gpu-viv.inc
 
 S="${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "ae613dbd572d04165322eee4de1e232c"
-SRC_URI[sha256sum] = "2f0baf8cb6bb1beee2a3fd8d646306c1645f22bcb5073009f749c8e679dea4ce"
+SRC_URI[md5sum] = "00ae643cf61a531f362182978c622c61"
+SRC_URI[sha256sum] = "619e050216aa084edc8f6c317973a91796b9e719a4740ea6edf510b795fa27ba"
 
 # FIXME skip the QA error for viv-samples
 INSANE_SKIP_${PN} += "rpaths"
