@@ -4,12 +4,12 @@ PACKAGES += " \
     ${PN}-fslcodec-testapps \
 "
 
-RDEPENDS_${PN}-fslcodec-testapps_mx6 += " \
+RDEPENDS_${PN}-fslcodec-testapps += " \
     libfslcodec-test-bin \
     libfslcodec-test-source \
 "
 
-ALLOW_EMPTY_${PN}-fslcodec-testapps_mx6 = "1"
+ALLOW_EMPTY_${PN}-fslcodec-testapps = "1"
 
 RDEPENDS_${PN} += " \
     ${SOC_TOOLS_TESTAPPS} \
@@ -32,6 +32,9 @@ SOC_TOOLS_TESTAPPS_mx6 += " \
     vlan \
     cryptodev-module \
     cryptodev-tests \
+    ${PN}-fslcodec-testapps \
+"
+SOC_TOOLS_TESTAPPS_mx7 += " \
     ${PN}-fslcodec-testapps \
 "
 
