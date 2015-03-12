@@ -1,0 +1,1 @@
+PACKAGECONFIG[bluez] = "bluez='true',bluez='false',virtual/bluez"
