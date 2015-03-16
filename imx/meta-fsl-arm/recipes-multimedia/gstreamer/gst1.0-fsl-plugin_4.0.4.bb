@@ -12,6 +12,8 @@ SRC_URI[md5sum] = "93ff1ed372062b76fe7842e9e112152b"
 SRC_URI[sha256sum] = "c5e59f026bc47ede04a4380abd2d3b6d9d4883a67bc4bf27dacd113e651c2e1f"
 
 DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base"
+DEPENDS_append_mx7 = " imx-lib"
+PLATFORM_mx7= "MX6SL"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG_mx6 = "overlaysink"
@@ -36,4 +38,4 @@ FILES_${PN}-libgplaycore = "${libdir}/libgplaycore-1.0${SOLIBS}"
 FILES_${PN}-libgstfsl = "${libdir}/libgstfsl-1.0${SOLIBS}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx6)"
+COMPATIBLE_MACHINE = "(mx6|mx7)"
