@@ -44,6 +44,8 @@ X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'gst-plugins-gl-meta packagegroup-fsl-pulseaudio', '', d)}"
 X11_IMAGE_INSTALL_remove_mx6sl = "gst-plugins-gl-meta"
 X11_IMAGE_INSTALL_append_mx6sl = " libopenvg-mx6"
+X11_IMAGE_INSTALL_mx7 = "${@base_contains('DISTRO_FEATURES', 'x11', \
+    'packagegroup-fsl-pulseaudio', '', d)}"
 
 # Add in Graphics
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
@@ -55,6 +57,7 @@ X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
 # set mm image install specific to SOC
 MM_IMAGE_INSTALL = ""
 MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-gstreamer1.0"
+MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-gstreamer1.0"
 
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
