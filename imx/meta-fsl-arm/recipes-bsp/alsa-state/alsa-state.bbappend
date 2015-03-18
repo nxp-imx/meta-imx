@@ -12,3 +12,5 @@ do_install_append_mx6() {
     install -m 0644 ${WORKDIR}/asound.state.3.10.17 ${D}${localstatedir}/lib/alsa/asound.state
 }
 
+# for i.MX7D
+PACKAGE_ARCH_mx7 = "${MACHINE_ARCH}"
