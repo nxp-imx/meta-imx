@@ -11,11 +11,14 @@ MACHINE_QT5_MULTIMEDIA_PLAYER = ""
 MACHINE_QT5_MULTIMEDIA_PLAYER_mx6q = "${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "gst1.0-fsl-plugin", "fslqtapplications", "", d)}"
 MACHINE_QT5_MULTIMEDIA_PLAYER_mx6dl = "${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "gst1.0-fsl-plugin", "fslqtapplications", "", d)}"
 
+# Take out for now
+#    qtbase-examples
+#    qtdeclarative-examples
+#    qt3d-examples 
+
+
 RDEPENDS_${PN} += " \
-    qtbase-examples \
-    qtdeclarative-examples \
     qt3d \
-    qt3d-examples \
     qt3d-tools \
     qt3d-qmlplugins \
     qtsmarthome \
