@@ -7,12 +7,12 @@ Manufacturing Tool compatible Linux Kernel to be used in updater environment"
 
 require recipes-kernel/linux/linux-imx.inc
 require recipes-kernel/linux/linux-dtb.inc
-require recipes-kernel/linux/linux-mfgtool.inc
+require linux-mfgtool.inc
 
 DEPENDS += "lzop-native bc-native"
 
 SRCBRANCH = "imx_3.14.y"
-LOCALVERSION = "-mfgtool-7D_alpha"
+LOCALVERSION = "-7D_alpha"
 SRCREV = "${AUTOREV}"
 KERNEL_SRC ?= "git://git.freescale.com/imx/linux-2.6-imx.git;protocol=git" 
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
