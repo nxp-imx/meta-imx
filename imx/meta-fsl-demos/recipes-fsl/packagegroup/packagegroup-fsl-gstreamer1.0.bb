@@ -21,5 +21,6 @@ RDEPENDS_${PN} += " \
     gstreamer1.0-plugins-base-meta \
     ${MACHINE_GSTREAMER_1_0_PLUGIN} \
     ${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "gst1.0-fsl-plugin", "gst1.0-fsl-plugin-gplay", "", d)} \
+    ${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "gst1.0-fsl-plugin", "gst1.0-fsl-plugin-grecorder", "", d)} \
     ${GST_INSTALL} \
 "
