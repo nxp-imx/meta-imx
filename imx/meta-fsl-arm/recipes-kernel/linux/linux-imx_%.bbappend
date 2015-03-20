@@ -3,7 +3,7 @@
 
 do_configure_append() {    
     if [ "${USE_GPU_VIV_MODULE}" = "1" ]; then        
-        sed -i s/CONFIG_MXC_GPU_VIV=y/CONFIG_MXC_GPU_VIV=n/g ${S}/.config
-        sed -i s/CONFIG_MXC_GPU_VIV=y/CONFIG_MXC_GPU_VIV=n/g ${S}/../defconfig
+        sed -i s/CONFIG_MXC_GPU_VIV=y/CONFIG_MXC_GPU_VIV=n/g ${B}/.config
+        sed -i s/CONFIG_MXC_GPU_VIV=y/CONFIG_MXC_GPU_VIV=n/g ${B}/../defconfig
     fi
 }
