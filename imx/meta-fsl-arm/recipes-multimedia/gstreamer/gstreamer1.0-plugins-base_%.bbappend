@@ -1,7 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append_mx7 = " file://gstplaybin-enable-native-video.patch"
-
 SRC_URI_append = " file://do-not-change-eos-event-to-gap-event2.patch \
                    file://do-not-change-eos-event-to-gap-event3.patch \
                    file://fix-id3demux-utf16-to-utf8-issue.patch \
@@ -14,7 +12,6 @@ SRC_URI_append = " file://do-not-change-eos-event-to-gap-event2.patch \
                    file://0002-gstplaysink-don-t-set-async-of-custom-text-sink-to-f.patch \
                    file://0003-ssaparse-enhance-SSA-text-lines-parsing.patch \
                    file://0004-subparse-set-need_segment-after-sink-pad-received-GS.patch \
-                   file://gstplaybin-remove-native-video-and-deinterlace-flag.patch \
 "
 
 # Enable pango lib
