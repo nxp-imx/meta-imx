@@ -1,0 +1,155 @@
+From a4df921db4e7a869e0941adcde5fb62f2a0ce51d Mon Sep 17 00:00:00 2001
+From: Jian <Jian.Li@freescale.com>
+Date: Fri, 20 Mar 2015 16:25:33 +0800
+Subject: [PATCH] Support croping and alignment handling
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+  Upstream Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Jian <Jian.Li@freescale.com>
+---
+ ext/gl/gstglimagesink.c                 |   41 ++++++++++++++++++++++++++++++-
+ ext/gl/gstglimagesink.h                 |    3 +++
+ gst-libs/gst/gl/gstglvivdirecttexture.c |   22 +++++++++--------
+ 3 files changed, 55 insertions(+), 11 deletions(-)
+
+diff --git a/ext/gl/gstglimagesink.c b/ext/gl/gstglimagesink.c
+index e79d3b6..669cc87 100644
+--- a/ext/gl/gstglimagesink.c
++++ b/ext/gl/gstglimagesink.c
+@@ -302,6 +302,8 @@ gst_glimage_sink_init (GstGLImageSink * glimage_sink)
+   glimage_sink->pool = NULL;
+   glimage_sink->stored_buffer = NULL;
+   glimage_sink->redisplay_texture = 0;
++  glimage_sink->cropmeta = NULL;
++  glimage_sink->videometa = NULL;
+ 
+   g_mutex_init (&glimage_sink->drawing_lock);
+ }
+@@ -597,6 +599,10 @@ gst_glimage_sink_change_state (GstElement * element, GstStateChange transition)
+         gst_object_unref (glimage_sink->display);
+         glimage_sink->display = NULL;
+       }
++
++      glimage_sink->cropmeta = NULL;
++      glimage_sink->videometa = NULL;
++
+       break;
+     }
+     case GST_STATE_CHANGE_READY_TO_NULL:
+@@ -798,6 +804,10 @@ gst_glimage_sink_show_frame (GstVideoSink * vsink, GstBuffer * buf)
+   if (stored_buffer)
+     gst_buffer_unref (stored_buffer);
+ 
++  glimage_sink->cropmeta = gst_buffer_get_video_crop_meta (buf);
++  if (!glimage_sink->videometa)
++    glimage_sink->videometa = gst_buffer_get_video_meta (buf);
++
+   /* Ask the underlying window to redraw its content */
+   if (!gst_glimage_sink_redisplay (glimage_sink))
+     goto redisplay_failed;
+@@ -1135,7 +1145,7 @@ gst_glimage_sink_on_draw (GstGLImageSink * gl_sink)
+ #endif
+ #if GST_GL_HAVE_GLES2
+     if (USING_GLES2 (gl_sink->context)) {
+-      const GLfloat vVertices[] = { 1.0f, 1.0f, 0.0f,
++      GLfloat vVertices[] = { 1.0f, 1.0f, 0.0f,
+         1.0f, 0.0f,
+         -1.0f, 1.0f, 0.0f,
+         0.0f, 0.0f,
+@@ -1145,6 +1155,35 @@ gst_glimage_sink_on_draw (GstGLImageSink * gl_sink)
+         1.0f, 1.0f
+       };
+ 
++      if (gl_sink->cropmeta) {
++        gint width, height;
++        if (gl_sink->videometa 
++            && (gl_sink->videometa->format == GST_VIDEO_FORMAT_I420 
++                || gl_sink->videometa->format == GST_VIDEO_FORMAT_NV12)) {
++          width = gl_sink->videometa->stride[0];
++          height = gl_sink->videometa->offset[1] / width;
++        }
++        else {
++          width = GST_VIDEO_SINK_WIDTH (gl_sink);
++          height = GST_VIDEO_SINK_HEIGHT (gl_sink);
++        }
++
++        vVertices[8] = (float)(gl_sink->cropmeta->x) / width;
++        vVertices[9] = (float)(gl_sink->cropmeta->y) / height;
++
++        vVertices[3] = (float)(gl_sink->cropmeta->width + gl_sink->cropmeta->x) / width;
++        vVertices[4] = vVertices[9];
++
++        vVertices[13] = vVertices[8];
++        vVertices[14] = (float)(gl_sink->cropmeta->height + gl_sink->cropmeta->y) / height;
++
++        vVertices[18] = vVertices[3];
++        vVertices[19] = vVertices[14];
++
++        //g_print ("vVertices, (%f, %f), (%f, %f), (%f, %f), (%f, %f)\n", vVertices[8], vVertices[9], vVertices[3], vVertices[4],
++        //    vVertices[13], vVertices[14], vVertices[18], vVertices[19]);
++      }
++
+       GLushort indices[] = { 0, 1, 2, 0, 2, 3 };
+ 
+       gl->ClearColor (0.0, 0.0, 0.0, 0.0);
+diff --git a/ext/gl/gstglimagesink.h b/ext/gl/gstglimagesink.h
+index efa557b..a34fa04 100644
+--- a/ext/gl/gstglimagesink.h
++++ b/ext/gl/gstglimagesink.h
+@@ -78,6 +78,9 @@ struct _GstGLImageSink
+     GstBuffer *stored_buffer;
+     GLuint redisplay_texture;
+ 
++    GstVideoCropMeta *cropmeta;
++    GstVideoMeta *videometa;
++
+ #if GST_GL_HAVE_GLES2
+   GstGLShader *redisplay_shader;
+   GLint redisplay_attr_position_loc;
+diff --git a/gst-libs/gst/gl/gstglvivdirecttexture.c b/gst-libs/gst/gl/gstglvivdirecttexture.c
+index 4806335..9131101 100644
+--- a/gst-libs/gst/gl/gstglvivdirecttexture.c
++++ b/gst-libs/gst/gl/gstglvivdirecttexture.c
+@@ -89,8 +89,18 @@ gst_gl_viv_direct_bind_gstbuffer (GstGLContext * context, guint tex_id, GstVideo
+   PhyMemBlock *memblk = &memphy->block;
+ 
+   GstVideoFormat fmt = GST_VIDEO_INFO_FORMAT (info);
+-  guint viv_fmt;
++  gint width, height;
++  GstVideoMeta *vmeta = gst_buffer_get_video_meta (buffer);
++  if (vmeta && (fmt == GST_VIDEO_FORMAT_I420 || fmt == GST_VIDEO_FORMAT_NV12)) {
++    width = vmeta->stride[0];
++    height = vmeta->offset[1] / width;
++  }
++  else {
++    width = GST_VIDEO_INFO_WIDTH (info);
++    height = GST_VIDEO_INFO_HEIGHT (info);
++  }
+ 
++  guint viv_fmt;
+   switch (fmt) {
+     case GST_VIDEO_FORMAT_I420:
+       viv_fmt = GL_VIV_I420;
+@@ -107,15 +117,7 @@ gst_gl_viv_direct_bind_gstbuffer (GstGLContext * context, guint tex_id, GstVideo
+       return FALSE;
+   }
+ 
+-  GstVivDirectTexture viv_tex = {
+-    tex_id, 
+-    GST_VIDEO_INFO_WIDTH (info), 
+-    GST_VIDEO_INFO_HEIGHT (info), 
+-    viv_fmt,  
+-    memblk->vaddr, 
+-    memblk->paddr, 
+-    FALSE};
+-
++  GstVivDirectTexture viv_tex = {tex_id, width, height, viv_fmt, memblk->vaddr, memblk->paddr, FALSE};
+   gst_gl_context_thread_add (context, (GstGLContextThreadFunc) _do_viv_direct_tex_bind_mem, &viv_tex);
+ 
+   return viv_tex.ret;
+-- 
+1.7.9.5
+
