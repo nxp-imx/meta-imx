@@ -13,10 +13,13 @@ PACKAGECONFIG_GL_mx6sx = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gle
 PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
                            base_contains('DISTRO_FEATURES', 'x11', \
                                     'opengl', '', d), '', d)}"
-GST_VER_PATCH = "${@base_conditional('PV', '1.4.5', 'file://1.4.5-Use-viv-direct-texture-to-bind-buffer.patch', '', d)}"
 
-SRC_URI_append_mx6 = " file://camerabin-examples-memory-leak-in-camerabin-examples-01.patch \
-                       file://camerabin-examples-memory-leak-in-camerabin-examples-02.patch \
-                       ${GST_VER_PATCH} \
+SRC_URI_append = " file://camerabin-examples-memory-leak-in-camerabin-examples-01.patch \
+                   file://camerabin-examples-memory-leak-in-camerabin-examples-02.patch \
+"
+
+# i.MX6 patches for GST1.4.5
+SRC_URI_append_mx6 = " file://1.4.5-Use-viv-direct-texture-to-bind-buffer.patch \
+                       file://0001-Support-croping-and-alignment-handling.patch \
 "
 
