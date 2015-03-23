@@ -1,0 +1,33 @@
+From 518cc8a9af3797fbed2916497bb1cf83725265c4 Mon Sep 17 00:00:00 2001
+From: Song Bing <b06498@freescale.com>
+Date: Tue, 3 Mar 2015 10:12:11 +0800
+Subject: [PATCH] dvbsuboverlay: Set query ALLOCATION need_pool to FALSE
+
+Set query ALLOCATION need_pool to FALSE as it only need query if can
+support video overlay composition meta.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=745495
+
+Upstream Status: Accepted 
+
+Signed-off-by: Song Bing <b06498@freescale.com> 
+---
+ gst/dvbsuboverlay/gstdvbsuboverlay.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gst/dvbsuboverlay/gstdvbsuboverlay.c b/gst/dvbsuboverlay/gstdvbsuboverlay.c
+index 3965b65..341b153 100644
+--- a/gst/dvbsuboverlay/gstdvbsuboverlay.c
++++ b/gst/dvbsuboverlay/gstdvbsuboverlay.c
+@@ -720,7 +720,7 @@ gst_dvbsub_overlay_negotiate (GstDVBSubOverlay * overlay, GstCaps * caps)
+     GstQuery *query;
+ 
+     /* find supported meta */
+-    query = gst_query_new_allocation (caps, TRUE);
++    query = gst_query_new_allocation (caps, FALSE);
+ 
+     if (!gst_pad_peer_query (overlay->srcpad, query)) {
+       /* no problem, we use the query defaults */
+-- 
+1.7.9.5
+

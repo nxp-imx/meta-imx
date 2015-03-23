@@ -1,0 +1,42 @@
+From 0d979b3a2a4e2db571545e84aeb854b326fa2234 Mon Sep 17 00:00:00 2001
+From: Song Bing <b06498@freescale.com>
+Date: Tue, 17 Mar 2015 10:21:28 +0800
+Subject: [PATCH] [egl] workaround for eglCreateContext () isn't thread safe
+
+Workaround for eglCreateContext () isn't thread safe
+
+Upstream Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Song Bing b06498@freescale.com
+---
+ gst-libs/gst/gl/egl/gstglcontext_egl.c |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/gst-libs/gst/gl/egl/gstglcontext_egl.c b/gst-libs/gst/gl/egl/gstglcontext_egl.c
+index 4ccec8d..7ba1782 100644
+--- a/gst-libs/gst/gl/egl/gstglcontext_egl.c
++++ b/gst-libs/gst/gl/egl/gstglcontext_egl.c
+@@ -208,6 +208,8 @@ failure:
+   return FALSE;
+ }
+ 
++static GMutex test_mutex;
++
+ static gboolean
+ gst_gl_context_egl_create_context (GstGLContext * context,
+     GstGLAPI gl_api, GstGLContext * other_context, GError ** error)
+@@ -336,9 +338,11 @@ gst_gl_context_egl_create_context (GstGLContext * context,
+   }
+   context_attrib[i++] = EGL_NONE;
+ 
++  g_mutex_lock (&test_mutex);
+   egl->egl_context =
+       eglCreateContext (egl->egl_display, egl->egl_config,
+       (EGLContext) external_gl_context, context_attrib);
++  g_mutex_unlock (&test_mutex);
+ 
+   if (egl->egl_context != EGL_NO_CONTEXT) {
+     GST_INFO ("gl context created: %" G_GUINTPTR_FORMAT,
+-- 
+1.7.9.5
+
