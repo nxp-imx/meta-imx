@@ -1,5 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+
 SRC_URI_append = " file://do-not-change-eos-event-to-gap-event2.patch \
                    file://do-not-change-eos-event-to-gap-event3.patch \
                    file://fix-id3demux-utf16-to-utf8-issue.patch \
@@ -12,8 +13,12 @@ SRC_URI_append = " file://do-not-change-eos-event-to-gap-event2.patch \
                    file://0002-gstplaysink-don-t-set-async-of-custom-text-sink-to-f.patch \
                    file://0003-ssaparse-enhance-SSA-text-lines-parsing.patch \
                    file://0004-subparse-set-need_segment-after-sink-pad-received-GS.patch \
+                   file://gstplaybin-remove-flag-deinterlace.patch \
 "
 
 # Enable pango lib
 PACKAGECONFIG_append = " pango "
 
+PACKAGE_ARCH_mxs = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH_mx5 = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH_mx6 = "${MACHINE_SOCARCH}"
