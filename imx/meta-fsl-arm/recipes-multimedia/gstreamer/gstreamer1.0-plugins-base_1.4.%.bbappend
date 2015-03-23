@@ -14,6 +14,7 @@ SRC_URI_append = " file://do-not-change-eos-event-to-gap-event2.patch \
                    file://0003-ssaparse-enhance-SSA-text-lines-parsing.patch \
                    file://0004-subparse-set-need_segment-after-sink-pad-received-GS.patch \
                    file://gstplaybin-remove-flag-deinterlace.patch \
+                   file://encodebin-Need-more-buffers-in-output-queue-for-bett.patch \
 "
 
 # Enable pango lib
