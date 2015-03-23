@@ -21,7 +21,9 @@ SRC_URI_append = " file://camerabin-examples-memory-leak-in-camerabin-examples-0
 "
 
 # i.MX6 patches for GST1.4.5
-SRC_URI_append_mx6 = " file://1.4.5-Use-viv-direct-texture-to-bind-buffer.patch \
-                       file://0001-Support-croping-and-alignment-handling.patch \
-"
+GPU_PATCHES = " file://1.4.5-Use-viv-direct-texture-to-bind-buffer.patch \
+                file://0001-Support-croping-and-alignment-handling.patch "
 
+SRC_URI_append_mx6q  = "${GPU_PATCHES}"
+SRC_URI_append_mx6dl = "${GPU_PATCHES}"
+SRC_URI_append_mx6sx = "${GPU_PATCHES}"
