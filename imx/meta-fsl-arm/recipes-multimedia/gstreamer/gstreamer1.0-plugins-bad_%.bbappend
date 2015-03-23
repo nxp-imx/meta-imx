@@ -16,6 +16,8 @@ PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
 
 SRC_URI_append = " file://camerabin-examples-memory-leak-in-camerabin-examples-01.patch \
                    file://camerabin-examples-memory-leak-in-camerabin-examples-02.patch \
+                   file://dvbsuboverlay-Set-query-ALLOCATION-need_pool-to-FALSE.patch \
+                   file://egl-workaround-for-eglCreateContext-isn-t-thread-safe.patch \
 "
 
 # i.MX6 patches for GST1.4.5
