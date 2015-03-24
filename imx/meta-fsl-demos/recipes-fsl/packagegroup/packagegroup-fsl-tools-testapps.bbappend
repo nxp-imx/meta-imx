@@ -35,6 +35,10 @@ SOC_TOOLS_TESTAPPS_mx6 += " \
     ${PN}-fslcodec-testapps \
 "
 SOC_TOOLS_TESTAPPS_mx7 += " \
+    imx-kobs \
+    vlan \
+    cryptodev-module \
+    cryptodev-tests \
     ${PN}-fslcodec-testapps \
 "
 
