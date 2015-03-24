@@ -32,7 +32,7 @@ CFLAGS += "-I${STAGING_INCDIR}/xorg \
            -I${STAGING_INCDIR}/drm \
            -I../../DRI_1.10.4/src"
 
-S = "${WORKDIR}/xserver-xorg-video-imx-viv-${PV}/"
+S = "${WORKDIR}/xserver-xorg-video-imx-viv-${@'${PV}'.replace('5.0.11.p6.1', '5.0.11.p6.1-alpha')}/"
 
 PACKAGES =+ "xserver-xorg-extension-viv-autohdmi"
 
