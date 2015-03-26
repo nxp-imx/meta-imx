@@ -30,3 +30,6 @@ GPU_PATCHES = " file://1.4.5-Use-viv-direct-texture-to-bind-buffer.patch \
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
 SRC_URI_append_mx6dl = "${GPU_PATCHES}"
 SRC_URI_append_mx6sx = "${GPU_PATCHES}"
+
+# include fragment shaders
+FILES_${PN}-opengl += "/usr/share/*.fs"
