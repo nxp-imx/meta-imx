@@ -1,4 +1,4 @@
-# Copyright (C) 2013, 2014 Freescale Semiconductor
+# Copyright (C) 2013-2015 Freescale Semiconductor
 
 SUMMARY = "Nand boot write source"
 SECTION = "base"
