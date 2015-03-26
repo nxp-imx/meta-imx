@@ -1,6 +1,6 @@
-# Copyright (C) 2013, 2014 Freescale Semiconductor
+# Copyright (C) 2013-2015 Freescale Semiconductor
 
-DESCRIPTION = "Bootloader for i.MX platforms"
+DESCRIPTION = "U-Boot provided by Freescale with focus on  i.MX reference boards."
 require recipes-bsp/u-boot/u-boot.inc
 
 PROVIDES += "u-boot"
@@ -14,6 +14,10 @@ SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "1d4e7b28b209aa8ff5e633b5987319e7ff576e2e"
 
 S = "${WORKDIR}/git"
+
+inherit fsl-u-boot-localversion
+
+LOCALVERSION ?= "-${SRCBRANCH}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(mx6)"
