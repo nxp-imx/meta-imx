@@ -14,4 +14,4 @@ SRC_URI[sha256sum] = "927cd6792f95ea5e087448818cefe62c37fc5d76eed99b8c67fabee436
 inherit autotools pkgconfig
 
 FILES_${PN} = "${libdir} /usr/src"
-FILES_${PN}-dbg = "${libdir}/.debug"
+FILES_${PN}-dbg = "${libdir}/.debug ${libdir}/*/.debug"
