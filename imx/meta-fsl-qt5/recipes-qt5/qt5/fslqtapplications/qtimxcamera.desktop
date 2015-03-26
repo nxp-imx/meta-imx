@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=iMX Player
+Name=iMX Camera
 Exec=/usr/share/qt5/examples/multimedia/imxcamera/imxcamera
 Icon=imxcamera
 Terminal=false
