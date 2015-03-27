@@ -106,7 +106,7 @@ cp -r sources/meta-fsl-bsp-release/imx/meta-fsl-arm/conf/machine/* sources/meta-
 cp sources/meta-fsl-bsp-release/EULA.txt sources/meta-fsl-arm/EULA
 
 # Set up the basic yocto environment
-MACHINE=$MACHINE . $PROGNAME $BUILD_DIR
+MACHINE=$MACHINE . ./$PROGNAME $BUILD_DIR
 
 # Point to the current directory since the last command changed the directory to $BUILD_DIR
 BUILD_DIR=.
