@@ -86,7 +86,7 @@ Origin:                    Freescale
 
 --------------------------------------------
 
-Package:                   imx-lib-3.10.53-1.1.0.tar.gz
+Package:                   imx-lib-3.14.28-1.0.0.tar.gz
 
 Outgoing License:          LGPLv2.1+
 
