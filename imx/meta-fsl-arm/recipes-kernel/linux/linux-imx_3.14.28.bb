@@ -22,6 +22,12 @@ do_configure_prepend() {
    # copy latest defconfig for imx_v7_defoonfig to use
    cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
    cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
+
+   if [ "${SCMVERSION}" = "y" ]; then
+        # Add GIT revision to the local version
+        head=`git --git-dir=${S}/.git rev-parse --verify --short HEAD 2> /dev/null`
+        printf "%s%s" +g $head > ${S}/.scmversion
+   fi
 }
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
