@@ -9,6 +9,9 @@ SRC_URI_append = " file://daemon.conf \
         file://0002-Revert-launch-Avoid-specifically-starting-PA-and-rel.patch \
 "
 
+SRC_URI_append_mx7 = " file://pulseaudio-remove-the-control-for-speaker-headphone-widge.patch \
+"
+
 do_install_append() {
     install -m 0644 ${WORKDIR}/daemon.conf ${D}${sysconfdir}/pulse/daemon.conf
     install -m 0644 ${WORKDIR}/default.pa ${D}${sysconfdir}/pulse/default.pa
