@@ -11,7 +11,7 @@ SDCARD_GENERATION_COMMAND_mx7 = "generate_imx_sdcard"
 
 SERIAL_CONSOLE = "115200 ttymxc0"
 
-#MACHINE_FIRMWARE_append_mx6 = " linux-firmware-ath6k"
+MACHINE_FIRMWARE_append_mx7 = " linux-firmware-ath6k"
 
 MACHINE_FEATURES += " pci wifi bluetooth"
 
