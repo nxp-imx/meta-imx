@@ -31,8 +31,7 @@ QT5_IMAGE_INSTALL_mx6 = " \
     packagegroup-qt5-webkit \
     "
 QT5_IMAGE_INSTALL_mx6sl = "${@base_contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
-    'packagegroup-qt5-core \
-     qtbase-examples', d)}"
+    'packagegroup-qt5-core', d)}"
 
 IMAGE_INSTALL += " \
 ${QT5_IMAGE_INSTALL} \
