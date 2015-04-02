@@ -15,8 +15,8 @@ LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=95cf96
 SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${@'${PV}'.replace('5.0.11.p6.1', '5.0.11.p6.1-alpha')}.tar.gz \
             file://rc.autohdmi"
 
-SRC_URI[md5sum] = "60ae0e67bd325d0594467dc42df5b1dd"
-SRC_URI[sha256sum] = "0ad7eb18aedfe027a7e59a978346c8ef37876c648905c26bdc5189b3478050de"
+SRC_URI[md5sum] = "99597f4122628f9f806da555430ab766"
+SRC_URI[sha256sum] = "d74bb39176d959bf26b95a22d711243ed5ba4264bf5bc6bb3e29156c36c83ae3"
 
 INITSCRIPT_PACKAGES = "xserver-xorg-extension-viv-autohdmi"
 INITSCRIPT_NAME = "rc.autohdmi"
