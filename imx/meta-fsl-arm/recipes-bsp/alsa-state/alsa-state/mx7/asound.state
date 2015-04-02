@@ -1471,8 +1471,8 @@ state.wm8960audio {
 	control.8 {
 		iface MIXER
 		name 'Playback Volume'
-		value.0 230
-		value.1 230
+		value.0 255
+		value.1 255
 		comment {
 			access 'read write'
 			type INTEGER
@@ -1480,8 +1480,8 @@ state.wm8960audio {
 			range '0 - 255'
 			dbmin -9999999
 			dbmax 50
-			dbvalue.0 -1200
-			dbvalue.1 -1200
+			dbvalue.0 50
+			dbvalue.1 50
 		}
 	}
 	control.9 {
@@ -1514,8 +1514,8 @@ state.wm8960audio {
 	control.11 {
 		iface MIXER
 		name 'Speaker Playback Volume'
-		value.0 120
-		value.1 120
+		value.0 121
+		value.1 121
 		comment {
 			access 'read write'
 			type INTEGER
@@ -1523,8 +1523,8 @@ state.wm8960audio {
 			range '0 - 127'
 			dbmin -9999999
 			dbmax 600
-			dbvalue.0 -100
-			dbvalue.1 -100
+			dbvalue.0 0
+			dbvalue.1 0
 		}
 	}
 	control.12 {
@@ -1777,8 +1777,8 @@ state.wm8960audio {
 	control.34 {
 		iface MIXER
 		name 'ADC PCM Capture Volume'
-		value.0 230
-		value.1 230
+		value.0 195
+		value.1 195
 		comment {
 			access 'read write'
 			type INTEGER
@@ -1786,8 +1786,8 @@ state.wm8960audio {
 			range '0 - 255'
 			dbmin -9700
 			dbmax 3050
-			dbvalue.0 1800
-			dbvalue.1 1800
+			dbvalue.0 50
+			dbvalue.1 50
 		}
 	}
 	control.35 {
@@ -2251,7 +2251,7 @@ state.wm8958audio {
 	control.19 {
 		iface MIXER
 		name 'IN1L Volume'
-		value 30
+		value 11
 		comment {
 			access 'read write'
 			type INTEGER
@@ -2259,7 +2259,7 @@ state.wm8958audio {
 			range '0 - 31'
 			dbmin -1650
 			dbmax 3000
-			dbvalue.0 2850
+			dbvalue.0 0
 		}
 	}
 	control.20 {
@@ -2401,7 +2401,7 @@ state.wm8958audio {
 	control.32 {
 		iface MIXER
 		name 'MIXINL IN1L Volume'
-		value 1
+		value 0
 		comment {
 			access 'read write'
 			type INTEGER
@@ -2409,7 +2409,7 @@ state.wm8958audio {
 			range '0 - 1'
 			dbmin 0
 			dbmax 3000
-			dbvalue.0 3000
+			dbvalue.0 0
 		}
 	}
 	control.33 {
@@ -3157,7 +3157,7 @@ state.wm8958audio {
 	control.88 {
 		iface MIXER
 		name 'AIF1ADCR Source'
-		value Right
+		value Left
 		comment {
 			access 'read write'
 			type ENUMERATED
