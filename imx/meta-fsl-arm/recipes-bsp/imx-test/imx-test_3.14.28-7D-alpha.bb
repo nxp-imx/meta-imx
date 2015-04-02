@@ -5,8 +5,8 @@ include recipes-bsp/imx-test/imx-test.inc
 SRC_URI_append_mx5 = " file://clocks.sh"
 SRC_URI_append_mxs = " file://clocks.sh"
 
-SRC_URI[md5sum] = "5a1655793ed50db0f6d24b7ce2bce583"
-SRC_URI[sha256sum] = "abb2882b5c21a543f98578beaf1ba99ff338ff2b9de1f119e471136170c3f67d"
+SRC_URI[md5sum] = "d6e13bedf858017119a96b665965327e"
+SRC_URI[sha256sum] = "77de7a1c2d3513a865ca72c83c9645a33a43978384212b4420942854dc3c9c03"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6|mx7)"
 
