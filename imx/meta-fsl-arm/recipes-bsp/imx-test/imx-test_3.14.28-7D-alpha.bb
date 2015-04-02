@@ -1,6 +1,7 @@
 # Copyright (C) 2013-2015 Freescale Semiconductor
 
 include recipes-bsp/imx-test/imx-test.inc
+DEPENDS_mx7d = "virtual/kernel imx-lib"
 
 SRC_URI_append_mx5 = " file://clocks.sh"
 SRC_URI_append_mxs = " file://clocks.sh"
