@@ -7,7 +7,7 @@ Manufacturing Tool compatible Linux Kernel to be used in updater environment"
 
 require recipes-kernel/linux/linux-imx.inc
 require recipes-kernel/linux/linux-dtb.inc
-require linux-mfgtool.inc
+require recipes-kernel/linux/linux-mfgtool.inc
 
 DEPENDS += "lzop-native bc-native"
 
