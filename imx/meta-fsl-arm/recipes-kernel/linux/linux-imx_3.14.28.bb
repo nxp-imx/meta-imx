@@ -10,7 +10,7 @@ require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native"
 
-SRCBRANCH = "imx_3.14.y"
+SRCBRANCH = "imx_3.14.28_7d_alpha"
 LOCALVERSION = "-7D_alpha"
 SRCREV = "3cb38096dfa53e0b44e7e27fd7cd9f6098047e64"
 KERNEL_SRC ?= "git://git.freescale.com/imx/linux-2.6-imx.git;protocol=git"
@@ -22,12 +22,6 @@ do_configure_prepend() {
    # copy latest defconfig for imx_v7_defoonfig to use
    cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
    cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
-
-   if [ "${SCMVERSION}" = "y" ]; then
-        # Add GIT revision to the local version
-        head=`git --git-dir=${S}/.git rev-parse --verify --short HEAD 2> /dev/null`
-        printf "%s%s" +g $head > ${S}/.scmversion
-   fi
 }
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
