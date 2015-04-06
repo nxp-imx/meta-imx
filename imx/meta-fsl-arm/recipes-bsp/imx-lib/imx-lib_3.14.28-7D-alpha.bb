@@ -2,6 +2,8 @@
 
 include recipes-bsp/imx-lib/imx-lib.inc
 
+LIC_FILES_CHKSUM = "file://COPYING-LGPL-2.13;md5=fbc093901857fcd118f065f900982c24"
+
 PE = "1"
 
 SRC_URI[md5sum] = "d21e2334fb78dfcfea6c848ba1d30323"
