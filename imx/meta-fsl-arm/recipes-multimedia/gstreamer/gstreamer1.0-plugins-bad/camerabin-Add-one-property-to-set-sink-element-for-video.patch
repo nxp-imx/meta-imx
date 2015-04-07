@@ -1,4 +1,4 @@
-From 9b4b9e8fbdf958b24935dfaf2302096a5272acdd Mon Sep 17 00:00:00 2001
+From 59726a9af8d439f2a4bbe51d0cac909c936d86f3 Mon Sep 17 00:00:00 2001
 From: Song Bing <b06498@freescale.com>
 Date: Fri, 13 Mar 2015 17:31:29 +0800
 Subject: [PATCH] camerabin: Add one property to set sink element for video
@@ -12,12 +12,12 @@ https://bugzilla.gnome.org/show_bug.cgi?id=744508
 Upstream Status: Inappropriate [i.MX specific]
 
 ---
- gst/camerabin2/gstcamerabin2.c |   67 ++++++++++++++++++++++++++++++++++------
+ gst/camerabin2/gstcamerabin2.c |   73 ++++++++++++++++++++++++++++++++++------
  gst/camerabin2/gstcamerabin2.h |    1 +
- 2 files changed, 59 insertions(+), 9 deletions(-)
+ 2 files changed, 63 insertions(+), 11 deletions(-)
 
 diff --git a/gst/camerabin2/gstcamerabin2.c b/gst/camerabin2/gstcamerabin2.c
-index c77585a..c69f35e 100644
+index c77585a..01037ff 100644
 --- a/gst/camerabin2/gstcamerabin2.c
 +++ b/gst/camerabin2/gstcamerabin2.c
 @@ -226,6 +226,7 @@ enum
@@ -77,7 +77,7 @@ index c77585a..c69f35e 100644
    g_object_class_install_property (object_class, PROP_MUTE_AUDIO,
        g_param_spec_boolean ("mute", "Mute",
            "If the audio recording should be muted. Note that this still "
-@@ -1534,12 +1546,29 @@ gst_camera_bin_create_elements (GstCameraBin2 * camera)
+@@ -1534,13 +1546,30 @@ gst_camera_bin_create_elements (GstCameraBin2 * camera)
          g_signal_connect (camera->video_encodebin, "element-added",
          (GCallback) encodebin_element_added, camera);
  
@@ -104,14 +104,27 @@ index c77585a..c69f35e 100644
 +          missing_element_name = "filesink";
 +          goto missing_element;
 +        }
++        g_object_set (camera->videosink, "async", FALSE, NULL);
 +      }
      }
+-    g_object_set (camera->videosink, "async", FALSE, NULL);
 +
 +    g_assert (camera->videosink != NULL);
-     g_object_set (camera->videosink, "async", FALSE, NULL);
  
      /* audio elements */
-@@ -2029,6 +2058,20 @@ gst_camera_bin_set_audio_src (GstCameraBin2 * camera, GstElement * src)
+     if (!camera->audio_volume) {
+@@ -1663,7 +1692,9 @@ gst_camera_bin_create_elements (GstCameraBin2 * camera)
+     gst_element_set_locked_state (camera->videosink, TRUE);
+     gst_element_set_locked_state (camera->imagesink, TRUE);
+ 
+-    g_object_set (camera->videosink, "location", camera->location, NULL);
++    if (!camera->user_video_sink) {
++      g_object_set (camera->videosink, "location", camera->location, NULL);
++    }
+     g_object_set (camera->imagesink, "location", camera->location, NULL);
+   }
+ 
+@@ -2029,6 +2060,20 @@ gst_camera_bin_set_audio_src (GstCameraBin2 * camera, GstElement * src)
  }
  
  static void
@@ -132,7 +145,7 @@ index c77585a..c69f35e 100644
  gst_camera_bin_set_camera_src (GstCameraBin2 * camera, GstElement * src)
  {
    GST_DEBUG_OBJECT (GST_OBJECT (camera),
-@@ -2061,6 +2104,9 @@ gst_camera_bin_set_property (GObject * object, guint prop_id,
+@@ -2061,6 +2106,9 @@ gst_camera_bin_set_property (GObject * object, guint prop_id,
      case PROP_AUDIO_SRC:
        gst_camera_bin_set_audio_src (camera, g_value_get_object (value));
        break;
@@ -142,7 +155,7 @@ index c77585a..c69f35e 100644
      case PROP_MUTE_AUDIO:
        g_object_set (camera->audio_volume, "mute", g_value_get_boolean (value),
            NULL);
-@@ -2244,6 +2290,9 @@ gst_camera_bin_get_property (GObject * object, guint prop_id,
+@@ -2244,6 +2292,9 @@ gst_camera_bin_get_property (GObject * object, guint prop_id,
      case PROP_AUDIO_SRC:
        g_value_set_object (value, camera->user_audio_src);
        break;
