@@ -1,7 +1,7 @@
 # Copyright (C) 2013-2015 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require gst-fsl-plugin.inc
+require recipes-multimedia/gstreamer/gst-fsl-plugin.inc
 
 EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 

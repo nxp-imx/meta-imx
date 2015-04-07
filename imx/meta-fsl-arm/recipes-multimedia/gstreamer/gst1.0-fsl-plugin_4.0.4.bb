@@ -1,7 +1,7 @@
 # Copyright (C) 2014,2015 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require gst-fsl-plugin.inc
+require recipes-multimedia/gstreamer/gst-fsl-plugin.inc
 
 SRC_URI = "${FSL_MIRROR}/gst1.0-fsl-plugins-${PV}.tar.gz"
 S = "${WORKDIR}/gst1.0-fsl-plugins-${PV}"
@@ -13,7 +13,9 @@ SRC_URI[sha256sum] = "665a187974688b814ca450d4bbea424041e3f022a25e7cb0b61e2dbcf4
 
 DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base"
 DEPENDS_append_mx7 = " imx-lib"
-PLATFORM_mx7= "MX6SL"
+RDEPENDS_${PN} += "gstreamer1.0-plugins-good-id3demux"
+
+PLATFORM_mx7= "MX7D"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG_mx6 = "overlaysink"
