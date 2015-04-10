@@ -12,11 +12,11 @@ DEPENDS += "virtual/xserver virtual/libx11 virtual/libgal-x11 imx-gpu-viv pixman
 
 LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=19;md5=95cf961a2ceacdf7cf43caef25766779"
 
-SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${@'${PV}'.replace('5.0.11.p6.1', '5.0.11.p6.1-alpha')}.tar.gz \
+SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${@'${PV}'.replace('5.0.11.p6.2', '5.0.11.p6.2-alpha')}.tar.gz \
             file://rc.autohdmi"
 
-SRC_URI[md5sum] = "ae8e72ca92cfa5bdf620965763de0960"
-SRC_URI[sha256sum] = "31c7f45fd58761b756369081e92fac0e03dc351f4d5b56ffc43c9af7c209fd16"
+SRC_URI[md5sum] = "6ae2e58ca93db1834169d9bcec32eaf3"
+SRC_URI[sha256sum] = "ae5bcfe428c1690f330fc75fbc9596912ccd0edef718821bef7dda662965a651"
 
 INITSCRIPT_PACKAGES = "xserver-xorg-extension-viv-autohdmi"
 INITSCRIPT_NAME = "rc.autohdmi"
@@ -32,7 +32,7 @@ CFLAGS += "-I${STAGING_INCDIR}/xorg \
            -I${STAGING_INCDIR}/drm \
            -I../../DRI_1.10.4/src"
 
-S = "${WORKDIR}/xserver-xorg-video-imx-viv-${@'${PV}'.replace('5.0.11.p6.1', '5.0.11.p6.1-alpha')}/"
+S = "${WORKDIR}/xserver-xorg-video-imx-viv-${@'${PV}'.replace('5.0.11.p6.2', '5.0.11.p6.2-alpha')}/"
 
 PACKAGES =+ "xserver-xorg-extension-viv-autohdmi"
 
