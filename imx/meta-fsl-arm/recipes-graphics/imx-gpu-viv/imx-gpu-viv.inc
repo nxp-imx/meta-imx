@@ -20,9 +20,9 @@ PE = "1"
 
 inherit fsl-eula-unpack
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${@'${PV}'.replace('5.0.11.p6.1', '5.0.11.p6.1-alpha')}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${PN}-${@'${PV}'.replace('5.0.11.p6.2', '5.0.11.p6.2-alpha')}.bin;fsl-eula=true"
 
-S="${WORKDIR}/${PN}-${@'${PV}'.replace('5.0.11.p6.1', '5.0.11.p6.1-alpha')}"
+S="${WORKDIR}/${PN}-${@'${PV}'.replace('5.0.11.p6.2', '5.0.11.p6.2-alpha')}"
 
 PACKAGES =+ "libclc-mx6 libclc-mx6-dev libclc-mx6-dbg \
 	libgl-mx6 libgl-mx6-dev libgl-mx6-dbg \
