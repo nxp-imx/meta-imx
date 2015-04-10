@@ -1,13 +1,13 @@
 SUMMARY = "Qt5 everywhere demo"
 DESCRIPTION = "Quick tour of Qt 5.0, primarily focusing on its graphical capabilities."
-HOMEPAGE = "https://qt.gitorious.org/qt-labs"
+HOMEPAGE = "https://code.qt.io/qt-labs"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://main.cpp;md5=b09598d736187eeb9738630f8ec7b663"
 
 DEPENDS = "qtdeclarative qtgraphicaleffects"
 
 SRCREV = "6fb348b4e49b0213bf8df09328768b6fdfeda97d"
-SRC_URI = "git://gitorious.org/qt-labs/qt5-everywhere-demo.git"
+SRC_URI = "git://code.qt.io/qt-labs/qt5-everywhere-demo.git;protocol=https"
 
 S = "${WORKDIR}/git/QtDemo"
 
