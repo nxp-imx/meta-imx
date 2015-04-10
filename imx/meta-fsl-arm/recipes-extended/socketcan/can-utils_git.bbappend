@@ -1,1 +1,1 @@
-SRC_URI = "git://git.gitorious.org/linux-can/can-utils.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/linux-can/can-utils.git;protocol=http;branch=master"
