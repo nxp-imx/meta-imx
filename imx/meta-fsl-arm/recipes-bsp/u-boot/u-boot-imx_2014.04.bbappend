@@ -1,6 +1,6 @@
-SRCBRANCH = "imx_v2014.04_3.14.28_7d_alpha"
+SRCBRANCH = "imx_v2014.04"
 UBOOT_SRC ?= "git://git.freescale.com/imx/uboot-imx.git;protocol=git"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "714e56947f1df05f93bafda03ce916c6bd0c49bf"
+SRCREV = "ed53487d36a886fb4557088804a4b5232b168889"
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
