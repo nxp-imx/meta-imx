@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Freescale Semiconductor
+# Copyright (C) 2014-2015 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Freescale's package group used to add bluez5 tools."
@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 inherit packagegroup
 
-RDEPENDS_${PN}_mx6 = " \
+BLUEZ5_INSTALL = " \
      bluez5-noinst-tools \
      bluez5-obex \
      bluez5-testtools  \
@@ -21,3 +21,6 @@ RDEPENDS_${PN}_mx6 = " \
      pulseaudio-module-switch-on-connect \
      pulseaudio-module-loopback \
 "
+
+RDEPENDS_${PN}_mx6 = "${BLUEZ5_INSTALL}"
+RDEPENDS_${PN}_mx7 = "${BLUEZ5_INSTALL}"
