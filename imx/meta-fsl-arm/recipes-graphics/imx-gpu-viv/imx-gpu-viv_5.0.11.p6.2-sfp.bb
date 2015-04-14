@@ -1,7 +1,7 @@
 # Copyright (C) 2013-2015 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require imx-gpu-viv.inc
+require recipes-graphics/imx-gpu-viv/imx-gpu-viv.inc
 
 S="${WORKDIR}/${PN}-${@'${PV}'.replace('5.0.11.p6.2', '5.0.11.p6.2-alpha')}"
 
