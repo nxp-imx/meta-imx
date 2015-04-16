@@ -1,15 +1,16 @@
-Freescale's 3.14.28-7D_alpha Yocto Project BSP
+Freescale's 3.14.28-6QP_beta Yocto Project BSP
 ================================================
 
 This BSP is a Freescale release providing support for the following processors
 
-Ths release is a standalone release that is only tested on i.MX 7D
+Ths release is a standalone release that is only tested on i.MX 6QP SABRE AUTO
 
-   * Freescale i.MX7D SABRE SD (imx7dsabresd)
+   * Freescale i.MX6QP SABRE AUTO (imx6qpsabreauto)
 
 The following boards were not tested in this release but this release contains updates
 that might affect these boards.
 
+   * Freescale i.MX7D SABRE SD (imx7dsabresd)
    * Freescale i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
    * Freescale i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
    * Freescale i.MX 6Quad SABRE Smart Device (imx6qsabresd)
@@ -28,6 +29,7 @@ that might affect these boards.
     Each machine files lists the associated device trees for that machine.
 
  * i.MX U-Boot configurations for each machine
+    imx6qpsabreauto - sd, eim-nor, nand, spi-nor, sata
     imx7dsabresd - sd, qspi1, nand
     imx6sxsabresd - sd, qspi2, m4fastup, emmc
     imx6sxsabreauto - sd, qspi1, nand
