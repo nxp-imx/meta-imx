@@ -16,7 +16,7 @@ RDEPENDS_packagegroup-base += "\
 "
 
 RDEPENDS_packagegroup-base-bluetooth = "\
-    ${VIRTUAL-RUNTIME_virtual/bluez} \
+    ${BLUEZ} \
     ${@bb.utils.contains('COMBINED_FEATURES', "set(['alsa'])", 'libasound-module-bluez', '',d)} \
    "
 
