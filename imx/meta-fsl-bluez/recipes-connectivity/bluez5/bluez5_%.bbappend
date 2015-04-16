@@ -1,2 +1,0 @@
-
-PROVIDES += " virtual/bluez"
