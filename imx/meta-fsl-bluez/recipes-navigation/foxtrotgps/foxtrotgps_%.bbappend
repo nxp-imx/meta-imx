@@ -1,1 +1,0 @@
-DEPENDS = "curl gtk+ libglade sqlite3 libexif gpsd virtual/bluez intltool-native"
