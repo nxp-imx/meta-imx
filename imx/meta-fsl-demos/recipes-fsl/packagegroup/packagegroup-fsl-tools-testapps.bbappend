@@ -13,6 +13,7 @@ ALLOW_EMPTY_${PN}-fslcodec-testapps = "1"
 
 RDEPENDS_${PN} += " \
     ${SOC_TOOLS_TESTAPPS} \
+    obexftp \
     procps \
     ptpd \
     linuxptp \
@@ -40,3 +41,4 @@ SOC_TOOLS_TESTAPPS_mx7 += " \
     cryptodev-tests \
     ${PN}-fslcodec-testapps \
 "
+
