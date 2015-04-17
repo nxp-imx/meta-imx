@@ -24,4 +24,4 @@ do_configure_prepend() {
    cp ${S}/arch/arm/configs/imx_v7_defconfig ${S}/../defconfig
 }
 
-COMPATIBLE_MACHINE = "(mx6)"
+COMPATIBLE_MACHINE = "(mx6|mx7)"
