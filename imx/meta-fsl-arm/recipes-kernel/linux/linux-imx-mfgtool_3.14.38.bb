@@ -20,8 +20,8 @@ SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 DEFAULT_PREFERENCE = "1"
 
 do_configure_prepend() {
-    cp ${S}/arch/arm/configs/imx_v7_mfg_defconfig ${S}/.config
-    cp ${S}/arch/arm/configs/imx_v7_mfg_defconfig ${S}/../defconfig
+    cp ${S}/arch/arm/configs/imx_v7_mfg_defconfig ${B}/.config
+    cp ${S}/arch/arm/configs/imx_v7_mfg_defconfig ${B}/../defconfig
 }
 
 # copy zImage to deploy directory

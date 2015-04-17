@@ -20,8 +20,8 @@ DEFAULT_PREFERENCE = "1"
 
 do_configure_prepend() {
    # copy latest defconfig for imx_v7_defoonfig to use
-   cp ${S}/arch/arm/configs/imx_v7_defconfig ${S}/.config
-   cp ${S}/arch/arm/configs/imx_v7_defconfig ${S}/../defconfig
+   cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
+   cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
 }
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
