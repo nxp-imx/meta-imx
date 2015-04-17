@@ -2,7 +2,6 @@
 # Copyright (C) 2012-2014 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require recipes-graphics/xorg-driver/xorg-driver-video.inc
 require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
 
 SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${@'${PV}'.replace('5.0.11.p6.2', '5.0.11.p6.2-alpha')}.tar.gz \
