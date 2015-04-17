@@ -59,20 +59,12 @@ MM_IMAGE_INSTALL = ""
 MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-gstreamer1.0"
 MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-gstreamer1.0"
 
-# set mm image install specific to SOC
-BLUEZ_IMAGE_INSTALL = ""
-BLUEZ_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'bluez5', \
-    'packagegroup-fsl-bluez5-tools', 'obexftp', d)}"
-BLUEZ_IMAGE_INSTALL_mx7 = "${@base_contains('DISTRO_FEATURES', 'bluez5', \
-    'packagegroup-fsl-bluez5-tools', 'obexftp', d)}"
-
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
     ${X11_IMAGE_INSTALL_GRAPHICS} \
     ${DFB_IMAGE_INSTALL} \
     ${WAYLAND_IMAGE_INSTALL} \
     ${MM_IMAGE_INSTALL} \
-    ${BLUEZ_IMAGE_INSTALL} \
     packagegroup-fsl-tools-gpu \
     packagegroup-fsl-tools-gpu-external \
     packagegroup-fsl-tools-testapps \
