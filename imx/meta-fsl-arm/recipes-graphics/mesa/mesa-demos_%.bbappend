@@ -11,4 +11,5 @@ PACKAGECONFIG_remove = "${REMOVE_GLU}"
 
 PACKAGECONFIG[vg] = "--enable-vg,--disable-vg,virtual/libopenvg"
 
-PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland vg', '', d)}"
+PACKAGECONFIG_append = "${@base_contains('DISTRO_FEATURES', 'x11', '', \
+                base_contains('DISTRO_FEATURES', 'wayland', 'wayland vg', '', d), d)}"
