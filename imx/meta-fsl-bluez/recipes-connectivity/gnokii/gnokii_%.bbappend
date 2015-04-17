@@ -1,0 +1,1 @@
+PACKAGECONFIG[bluez] = "--enable-bluetooth,--disable-bluetooth,virtual/bluez"
