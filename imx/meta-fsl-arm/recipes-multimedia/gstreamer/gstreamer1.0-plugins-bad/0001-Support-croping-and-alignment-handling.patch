@@ -1,4 +1,4 @@
-From dca4c28e6cd1c52b5fef2cc3904175a2b14530ad Mon Sep 17 00:00:00 2001
+From e5b2bade360bcf12ac389463019162a6ce64d9ef Mon Sep 17 00:00:00 2001
 From: Jian <Jian.Li@freescale.com>
 Date: Thu, 26 Mar 2015 14:22:07 +0800
 Subject: [PATCH] Support croping and alignment handling
@@ -10,13 +10,13 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Jian <Jian.Li@freescale.com>
 ---
- ext/gl/gstglimagesink.c                 |   58 ++++++++++++++++++++++++++++++-
+ ext/gl/gstglimagesink.c                 |   57 ++++++++++++++++++++++++++++++-
  ext/gl/gstglimagesink.h                 |    3 ++
  gst-libs/gst/gl/gstglvivdirecttexture.c |   22 ++++++------
- 3 files changed, 72 insertions(+), 11 deletions(-)
+ 3 files changed, 71 insertions(+), 11 deletions(-)
 
 diff --git a/ext/gl/gstglimagesink.c b/ext/gl/gstglimagesink.c
-index cd3a9ff..dd6acc4 100644
+index cd3a9ff..1d60e1d 100644
 --- a/ext/gl/gstglimagesink.c
 +++ b/ext/gl/gstglimagesink.c
 @@ -302,6 +302,8 @@ gst_glimage_sink_init (GstGLImageSink * glimage_sink)
@@ -39,18 +39,17 @@ index cd3a9ff..dd6acc4 100644
        break;
      }
      case GST_STATE_CHANGE_READY_TO_NULL:
-@@ -804,6 +810,10 @@ gst_glimage_sink_show_frame (GstVideoSink * vsink, GstBuffer * buf)
+@@ -804,6 +810,9 @@ gst_glimage_sink_show_frame (GstVideoSink * vsink, GstBuffer * buf)
    if (stored_buffer)
      gst_buffer_unref (stored_buffer);
  
 +  glimage_sink->cropmeta = gst_buffer_get_video_crop_meta (buf);
-+  if (!glimage_sink->videometa)
-+    glimage_sink->videometa = gst_buffer_get_video_meta (buf);
++  glimage_sink->videometa = gst_buffer_get_video_meta (buf);
 +
    /* Ask the underlying window to redraw its content */
    if (!gst_glimage_sink_redisplay (glimage_sink))
      goto redisplay_failed;
-@@ -1155,7 +1165,7 @@ gst_glimage_sink_on_draw (GstGLImageSink * gl_sink)
+@@ -1155,7 +1164,7 @@ gst_glimage_sink_on_draw (GstGLImageSink * gl_sink)
  #endif
  #if GST_GL_HAVE_GLES2
      if (USING_GLES2 (gl_sink->context)) {
@@ -59,7 +58,7 @@ index cd3a9ff..dd6acc4 100644
          1.0f, 0.0f,
          -1.0f, 1.0f, 0.0f,
          0.0f, 0.0f,
-@@ -1165,6 +1175,52 @@ gst_glimage_sink_on_draw (GstGLImageSink * gl_sink)
+@@ -1165,6 +1174,52 @@ gst_glimage_sink_on_draw (GstGLImageSink * gl_sink)
          1.0f, 1.0f
        };
  
