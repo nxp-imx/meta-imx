@@ -12,3 +12,5 @@ SRC_URI[md5sum] = "4c8bb33467a7bcb593d52eda20539691"
 SRC_URI[sha256sum] = "3642d553b19b7333b19a49c3fd08d4bf38f7ee9837b42fdaff4b14165553266f"
 
 inherit  autotools pkgconfig
+
+COMPATIBLE_MACHINE = "(mxs|mx6|mx7)"
