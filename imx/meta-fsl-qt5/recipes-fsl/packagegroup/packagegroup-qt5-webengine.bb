@@ -8,7 +8,4 @@ inherit packagegroup
 
 RDEPENDS_${PN} += " \
     qtwebengine \
-    qtwebengine-qmlplugins \
-    qtquickcontrols-qmlplugins \
-    qtwebengine-examples \
 "
