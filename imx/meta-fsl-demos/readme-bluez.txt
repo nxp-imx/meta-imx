@@ -1,13 +1,7 @@
 This readme documents how to interface to the blueooth device on both bluez4 and bluez5.
 
 Bluez4 is the default for 3.10.53-1.1.0_GA release.
-
-Bluez5 can be configured by adding the following lines to the local.conf.  Do a clean build.
-
-PREFERRED_PROVIDER_virtual/bluez_mx6 = "bluez5"
-VIRTUAL-RUNTIME_virtual/bluez_mx6 = "bluez5"
-PREFERRED_PROVIDER_bluez-hcidump_mx6 = "bluez5"
-IMAGE_INSTALL_append = " packagegroup-fsl-bluez5-tools"
+Bluez5 is the default for 3.14.38 release.
 
 Bluez4 and bluez5 have different tool sets which will be described next.
 

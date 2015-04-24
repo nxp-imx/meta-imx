@@ -1,6 +1,6 @@
 # Ugly patch as Poky's fido branch does not include the patch for utils.py
 
-RDEPENDS_packagegroup-base += "\
+IMX_BASE_DEPENDS = "\
     ${@bb.utils.contains('COMBINED_FEATURES', "set(['alsa'])", 'packagegroup-base-alsa', '',d)} \
     ${@bb.utils.contains('COMBINED_FEATURES', "set(['ext2'])", 'packagegroup-base-ext2', '',d)} \
     ${@bb.utils.contains('COMBINED_FEATURES', "set(['vfat'])", 'packagegroup-base-vfat', '',d)} \
@@ -15,8 +15,14 @@ RDEPENDS_packagegroup-base += "\
     ${@bb.utils.contains('COMBINED_FEATURES', "set(['nfc'])", 'packagegroup-base-nfc', '',d)} \
 "
 
+IMX_DEPENDS = ""
+IMX_DEPENDS_mx6 = "${IMX_BASE_DEPENDS}"
+IMX_DEPENDS_mx7 = "${IMX_BASE_DEPENDS}"
+
+RDEPENDS_packagegroup-base += "${IMX_DEPENDS}"
+
 RDEPENDS_packagegroup-base-bluetooth = "\
-    ${VIRTUAL-RUNTIME_virtual/bluez} \
+    ${BLUEZ} \
     ${@bb.utils.contains('COMBINED_FEATURES', "set(['alsa'])", 'libasound-module-bluez', '',d)} \
    "
 

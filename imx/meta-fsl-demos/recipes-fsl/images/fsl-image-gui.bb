@@ -65,6 +65,7 @@ IMAGE_INSTALL += " \
     ${DFB_IMAGE_INSTALL} \
     ${WAYLAND_IMAGE_INSTALL} \
     ${MM_IMAGE_INSTALL} \
+    packagegroup-fsl-bluez-tools \
     packagegroup-fsl-tools-gpu \
     packagegroup-fsl-tools-gpu-external \
     packagegroup-fsl-tools-testapps \

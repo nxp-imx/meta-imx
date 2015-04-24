@@ -150,7 +150,6 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-filesystems \"" >
 
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-qt5 \"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-qt5 \"" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-fsl-bluez \"" >> $BUILD_DIR/conf/bblayers.conf
 
 echo >> $BUILD_DIR/conf/local.conf
 
@@ -159,6 +158,10 @@ if [ "$BACKEND" = "fb" ] || [ "$BACKEND" = "wayland" ] || [ "$BACKEND" = "dfb" ]
     if [ !  -z "$DIST_FEATURES_add" ] ; then
         echo "DISTRO_FEATURES_append = \"$DIST_FEATURES_add\"" >> $BUILD_DIR/conf/local.conf
     fi
+
+    echo "# Comment out the 2 lines below to use bluez4." >> $BUILD_DIR/conf/local.conf
+    echo "DISTRO_FEATURES_append_mx6 = \" bluez5\"" >> $BUILD_DIR/conf/local.conf
+    echo "DISTRO_FEATURES_append_mx7 = \" bluez5\"" >> $BUILD_DIR/conf/local.conf
     echo >> $BUILD_DIR/conf/local.conf
 fi
 
