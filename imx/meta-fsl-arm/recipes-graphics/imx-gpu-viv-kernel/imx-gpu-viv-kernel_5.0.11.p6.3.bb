@@ -2,7 +2,7 @@
 
 require imx-gpu-viv-kernel.inc
           
-SRC_URI[md5sum] = "dce0dc1b7a90e2e1a8b93daa94ad97b8"
-SRC_URI[sha256sum] = "5e3eed4b73adf74110c6141fb5091675875f4bf883b712347038c51c8b0f6027"
+SRC_URI[md5sum] = "827e97616c1e554aca4ac272421e45af"
+SRC_URI[sha256sum] = "ba41232f38e2d2163981636913fe397722f69243daf50ef80105b856beb6e393"
 
 S="${WORKDIR}/${PN}-${@'${PV}'.replace('5.0.11.p6.3', '5.0.11.p6.3-beta')}"
