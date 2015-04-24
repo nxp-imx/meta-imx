@@ -1,4 +1,4 @@
-SRCBRANCH = "imx_v2014.04"
+SRCBRANCH = "imx_v2014.04_3.14.38_6qp_beta"
 UBOOT_SRC ?= "git://git.freescale.com/imx/uboot-imx.git;protocol=git"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "02e7090604e55d9690532294b02b499609d46e63"
