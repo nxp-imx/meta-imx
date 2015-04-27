@@ -27,6 +27,7 @@ GPU_PATCHES = " file://1.4.5-Use-viv-direct-texture-to-bind-buffer.patch \
                 file://0001-Support-croping-and-alignment-handling.patch \
                 file://Fix-warnnig-log-in-glfilter.patch \
                 file://Adding-some-fragment-shaders-for-glshader-plugin.patch \
+                file://Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"

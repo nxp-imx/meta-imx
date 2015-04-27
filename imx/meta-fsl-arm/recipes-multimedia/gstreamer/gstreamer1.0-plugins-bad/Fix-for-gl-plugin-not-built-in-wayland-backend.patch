@@ -1,0 +1,31 @@
+From 7cf34dcec06acaf3278ef48feafe68b5cb3c7789 Mon Sep 17 00:00:00 2001
+From: Jian <Jian.Li@freescale.com>
+Date: Fri, 24 Apr 2015 17:12:02 +0800
+Subject: [PATCH] Fix for gl plugin not built in wayland backend
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Jian <Jian.Li@freescale.com>
+---
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index cd55e22..099d0eb 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -745,7 +745,7 @@ case $host in
+     LIBS=$old_LIBS
+     CFLAGS=$old_CFLAGS
+ 
+-    PKG_CHECK_MODULES(WAYLAND_EGL, wayland-client >= 1.0 wayland-cursor >= 1.0 wayland-egl >= 9.0, HAVE_WAYLAND_EGL=yes, HAVE_WAYLAND_EGL=no)
++    PKG_CHECK_MODULES(WAYLAND_EGL, wayland-client >= 1.0 wayland-cursor >= 1.0 wayland-egl >= 1.0, HAVE_WAYLAND_EGL=yes, HAVE_WAYLAND_EGL=no)
+   ;;
+ esac
+ 
+-- 
+1.7.9.5
+
