@@ -1,0 +1,57 @@
+From 6bdbf69076950eb3024b1b271f3ff205df3937e4 Mon Sep 17 00:00:00 2001
+From: Jian <Jian.Li@freescale.com>
+Date: Mon, 27 Apr 2015 17:43:16 +0800
+Subject: [PATCH 3/3] [gl wayland] Make it always fullscreen (1024x768)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+gl wayland backend has problem for window resolution,
+currently make if always 1024x768.
+
+Upstream Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Jian <Jian.Li@freescale.com>
+---
+ gst-libs/gst/gl/wayland/gstglwindow_wayland_egl.c |   12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/gst-libs/gst/gl/wayland/gstglwindow_wayland_egl.c b/gst-libs/gst/gl/wayland/gstglwindow_wayland_egl.c
+index d5853b0..5d9b457 100644
+--- a/gst-libs/gst/gl/wayland/gstglwindow_wayland_egl.c
++++ b/gst-libs/gst/gl/wayland/gstglwindow_wayland_egl.c
+@@ -195,9 +195,9 @@ create_surface (GstGLWindowWaylandEGL * window_egl)
+       &shell_surface_listener, window_egl);
+ 
+   if (window_egl->window.window_width <= 0)
+-    window_egl->window.window_width = 320;
++    window_egl->window.window_width = 1024;
+   if (window_egl->window.window_height <= 0)
+-    window_egl->window.window_height = 240;
++    window_egl->window.window_height = 768;
+ 
+   window_egl->window.native =
+       wl_egl_window_create (window_egl->window.surface,
+@@ -483,11 +483,19 @@ draw_cb (gpointer data)
+   GstGLContext *context = gst_gl_window_get_context (window);
+   GstGLContextClass *context_class = GST_GL_CONTEXT_GET_CLASS (context);
+ 
++#if 0
+   if (window_egl->window.window_width != draw_data->width
+       || window_egl->window.window_height != draw_data->height) {
+     GST_DEBUG ("dimensions don't match, attempting resize");
+     window_resize (window_egl, draw_data->width, draw_data->height);
+   }
++#endif
++
++  // Fix to fullscreen here
++  if (!window_egl->window.fullscreen) {
++    window_resize (window_egl, window_egl->window.window_width, window_egl->window.window_height);
++    window_egl->window.fullscreen = 1;
++  }
+ 
+   if (window->draw)
+     window->draw (window->draw_data);
+-- 
+1.7.9.5
+

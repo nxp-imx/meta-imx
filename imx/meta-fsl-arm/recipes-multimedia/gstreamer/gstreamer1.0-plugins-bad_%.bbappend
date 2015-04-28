@@ -28,6 +28,9 @@ GPU_PATCHES = " file://1.4.5-Use-viv-direct-texture-to-bind-buffer.patch \
                 file://Fix-warnnig-log-in-glfilter.patch \
                 file://Adding-some-fragment-shaders-for-glshader-plugin.patch \
                 file://Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
+                file://0003-glimagesink-Add-fps-print-in-glimagesink.patch \
+                file://0004-gl-fb-Support-fb-backend-for-gl-plugins.patch \
+                file://0005-gl-wayland-Make-it-always-fullscreen-1024x768.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
