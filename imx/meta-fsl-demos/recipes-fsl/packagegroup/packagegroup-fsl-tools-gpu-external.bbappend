@@ -15,3 +15,4 @@ RDEPENDS_${PN} += " \
     ${X11_TOOLS_INSTALL} \
     ${WAYLAND_TOOLS_INSTALL} \
 "
+RDEPENDS_${PN}_remove = "opencv-samples"
