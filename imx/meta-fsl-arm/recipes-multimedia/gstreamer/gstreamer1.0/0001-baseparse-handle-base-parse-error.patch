@@ -1,0 +1,37 @@
+From 430bbeee450e3fd4fc4d0ccb627de7d3f05a9736 Mon Sep 17 00:00:00 2001
+From: Lyon Wang <lyon.wang@freescale.com>
+Date: Thu, 23 Apr 2015 14:11:11 +0800
+Subject: [PATCH] [baseparse] handle base parse error
+
+There is no need to send GST_ELEMENT_ERROR
+becuase ohter tracks may still good to play.
+no need to end the element, just print error message is enough
+
+Bugzilla https://bugzilla.gnome.org/show_bug.cgi?id=741542
+Upstream Status: submitted
+
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
+---
+ libs/gst/base/gstbaseparse.c |    6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/libs/gst/base/gstbaseparse.c b/libs/gst/base/gstbaseparse.c
+index 57e78bb..31bf0c0 100644
+--- a/libs/gst/base/gstbaseparse.c
++++ b/libs/gst/base/gstbaseparse.c
+@@ -1151,8 +1151,10 @@ gst_base_parse_sink_event_default (GstBaseParse * parse, GstEvent * event)
+ 
+       /* If we STILL have zero frames processed, fire an error */
+       if (parse->priv->framecount == 0) {
+-        GST_ELEMENT_ERROR (parse, STREAM, WRONG_TYPE,
+-            ("No valid frames found before end of stream"), (NULL));
++      /*  GST_ELEMENT_ERROR (parse, STREAM, WRONG_TYPE,
++            ("No valid frames found before end of stream"), (NULL));*/
++        GST_ERROR_OBJECT(parse, "No valid frames decoded before end of stream");
++
+       }
+       /* newsegment and other serialized events before eos */
+       gst_base_parse_push_pending_events (parse);
+-- 
+1.7.9.5
+
