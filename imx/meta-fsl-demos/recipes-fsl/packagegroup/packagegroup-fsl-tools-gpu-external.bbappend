@@ -11,8 +11,11 @@ X11_TOOLS_INSTALL_append_mx6sl = " ${X11_TOOLS_GTK}"
 # wayland packages
 WAYLAND_TOOLS_INSTALL = "${@base_contains('DISTRO_FEATURES', 'wayland', 'glmark2', '', d)}"
 
-RDEPENDS_${PN} += " \
+RDEPENDS_${PN} = " \
+    ${@base_contains("DISTRO_FEATURES", "x11", "${SOC_GPU_TOOLS_X11}", \
+        base_contains("DISTRO_FEATURES", "wayland", "${SOC_GPU_TOOLS_WAYLAND}", \
+            base_contains("DISTRO_FEATURES", "directfb", "${SOC_GPU_TOOLS_DIRECTFB}", \
+                 "${SOC_GPU_TOOLS_FB}", d), d), d)} \
     ${X11_TOOLS_INSTALL} \
     ${WAYLAND_TOOLS_INSTALL} \
 "
-RDEPENDS_${PN}_remove = "opencv-samples"
