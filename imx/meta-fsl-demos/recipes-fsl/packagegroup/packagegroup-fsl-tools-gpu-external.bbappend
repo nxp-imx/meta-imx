@@ -9,7 +9,11 @@ X11_TOOLS_INSTALL_append_mx6sx = " ${X11_TOOLS_GTK} ${X11_TOOLS_GLCOMP}"
 X11_TOOLS_INSTALL_append_mx6sl = " ${X11_TOOLS_GTK}"
 
 # wayland packages
-WAYLAND_TOOLS_INSTALL = "${@base_contains('DISTRO_FEATURES', 'wayland', 'glmark2', '', d)}"
+
+WAYLAND_TOOLS_INSTALL =  ""
+WAYLAND_TOOLS_INSTALL_append_mx6q = "${@base_contains('DISTRO_FEATURES', 'wayland', ' glmark2', '', d)}"
+WAYLAND_TOOLS_INSTALL_append_mx6dl = "${@base_contains('DISTRO_FEATURES', 'wayland', ' glmark2', '', d)}"
+WAYLAND_TOOLS_INSTALL_append_mx6sx = "${@base_contains('DISTRO_FEATURES', 'wayland', ' glmark2', '', d)}"
 
 RDEPENDS_${PN} = " \
     ${@base_contains("DISTRO_FEATURES", "x11", "${SOC_GPU_TOOLS_X11}", \
