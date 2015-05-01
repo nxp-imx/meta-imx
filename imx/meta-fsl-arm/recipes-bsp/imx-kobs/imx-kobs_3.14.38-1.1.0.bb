@@ -5,11 +5,11 @@ SECTION = "base"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
-SRC_URI = "${FSL_MIRROR}/${PN}-3.14.28-6QP-beta.tar.gz"
-S = "${WORKDIR}/${PN}-3.14.28-6QP-beta"
+SRC_URI = "${FSL_MIRROR}/${PN}-3.14.38-6QP-beta.tar.gz"
+S = "${WORKDIR}/${PN}-3.14.38-6QP-beta"
 
-SRC_URI[md5sum] = "4c8bb33467a7bcb593d52eda20539691"
-SRC_URI[sha256sum] = "3642d553b19b7333b19a49c3fd08d4bf38f7ee9837b42fdaff4b14165553266f"
+SRC_URI[md5sum] = "a2cdd22b6fc3a2cadc63cb24030b387a"
+SRC_URI[sha256sum] = "9f31a0cef7de90897c2a8cfec1c0462cb9ec6ecff9c0e06692b9f55d628f7a5f"
 
 inherit  autotools pkgconfig
 
