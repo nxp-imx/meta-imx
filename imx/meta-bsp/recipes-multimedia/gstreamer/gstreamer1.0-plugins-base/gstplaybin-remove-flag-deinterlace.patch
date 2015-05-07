@@ -5,7 +5,7 @@ Subject: [PATCH] gstplaybin remove default deinterlace flag
 
 - remove default deinterlace flag in playbin for i.MX SoCs
 
-Upstream-Status: Inappropriate [platform specific]
+Upstream Status: Inappropriate [platform specific]
 
 Signed-off-by: Jian Li <jian.li@freescale.com>
 ---

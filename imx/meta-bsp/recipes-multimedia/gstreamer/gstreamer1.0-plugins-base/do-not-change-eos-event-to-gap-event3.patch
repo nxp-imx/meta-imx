@@ -9,8 +9,9 @@ cause send function return error.
 Streamsynchronizer will don’t send second track EOS event if send the
 first track EOS return fail. Fixed by ignore the return error.
 
+https://bugzilla.gnome.org/show_bug.cgi?id=736655
 
-Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=736655]
+Upstream Status: Inappropriate [platform specific]
 
 Signed-off-by: Song Bing b06498@freescale.com
 

@@ -9,7 +9,7 @@ all sticky events from the (now discarded) frames. Let's change the order.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=746865
 
-Upstream-Status: Accepted 
+Upstream Status: Accepted 
 
 ---
  gst-libs/gst/video/gstvideoencoder.c |    8 ++++----

@@ -1,8 +1,5 @@
 # Add needed Freescale packages and definitions
 
-SOC_TOOLS_TEST_mx6ul = "imx-test"
-SOC_TOOLS_TEST_mx7 = "imx-test"
-
 PACKAGES += " \
     ${PN}-fslcodec-testapps \
 "
@@ -27,8 +24,6 @@ RDEPENDS_${PN} += " \
     minicom \
     coreutils \
 "
-
-RDEPENDS_${PN}_remove_mx6ul = "clutter-1.0-examples"
 
 SOC_TOOLS_TESTAPPS = ""
 SOC_TOOLS_TESTAPPS_mx6 += " \

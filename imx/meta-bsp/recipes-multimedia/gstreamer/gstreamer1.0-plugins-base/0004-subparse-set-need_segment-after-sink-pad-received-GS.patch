@@ -10,7 +10,7 @@ if set need_segment flag in src pad event handler, the segment
 event will be pushed earlier, result in the subtitle text will
 be send out to down stream from the beginning.
 
-Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=747498]
+Upstream Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Mingke Wang <mingke.wang@freescale.com>
 

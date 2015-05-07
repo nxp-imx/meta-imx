@@ -11,10 +11,10 @@ require recipes-kernel/linux/linux-mfgtool.inc
 
 DEPENDS += "lzop-native bc-native"
 
-SRCBRANCH = "imx_3.14.38_6ul_ga"
-LOCALVERSION = "-6UL_ga"
-SRCREV = "e4944a51c4bb950a8f13e421eefc000a87350e23"
-KERNEL_SRC ?= "git://sw-stash.freescale.net/scm/imx/linux-2.6-imx.git;protocol=http"
+SRCBRANCH = "imx_3.14.38_6qp_beta"
+LOCALVERSION = "-6QP_beta"
+SRCREV = "6b72f678d1fda6aecd32cf8e623cd09014592d2f"
+KERNEL_SRC ?= "git://git.freescale.com/imx/linux-2.6-imx.git;protocol=git" 
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
 DEFAULT_PREFERENCE = "1"

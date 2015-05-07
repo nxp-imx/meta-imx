@@ -11,7 +11,9 @@ tracks playing.
 The patch comments the GST_ELEMENT_ERROR() and just add GST_ERROR_OBJECT()
 information instead.
 
-Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=741542]
+https://bugzilla.gnome.org/show_bug.cgi?id=741542
+
+Upstream Status: Pending
 
 Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---

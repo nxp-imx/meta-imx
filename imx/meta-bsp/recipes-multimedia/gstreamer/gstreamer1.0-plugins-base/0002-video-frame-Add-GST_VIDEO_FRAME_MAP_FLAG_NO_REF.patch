@@ -7,7 +7,7 @@ This makes sure that the buffer is not reffed another time when
 storing it in the GstVideoFrame, keeping it writable if it was
 writable.
 
-Upstream-Status: Backport [1.5.1]
+Upstream Status: Accepted
 https://bugzilla.gnome.org/show_bug.cgi?id=736118
 ---
  gst-libs/gst/video/video-frame.c |    9 ++++++++-

@@ -7,7 +7,7 @@ Subject: [PATCH 2/4] gstplaysink: don't set async of custom text-sink to
 set async to false lead to A/V sync problem when seeking.
 the preroll need use GAP event instead of set async to false.
 
-Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=747499]
+Upstream Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Mingke Wang <mingke.wang@freescale.com>
 

@@ -7,7 +7,9 @@ event has issue when A/V have different duration.
     
 send EOS event insterd of GAP event as GAP event has issue when A/V have different duration.
     
-Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=736655]
+https://bugzilla.gnome.org/show_bug.cgi?id=736655
+
+Upstream Status: Inappropriate [platform specific]
 
 Signed-off-by: Song Bing <b06498@freescale.com>
 
