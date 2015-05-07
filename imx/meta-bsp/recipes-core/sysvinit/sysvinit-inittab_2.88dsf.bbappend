@@ -3,19 +3,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 RDEPENDS_${PN} += " bash "
 
-SYSVINIT-GPU = " file://rc_mxc.S file://rc_gpu.S"
+SRC_URI_append_mx6 = " file://rc_mxc.S file://rc_gpu.S"
 
-SRC_URI_append_mx6q  = " ${SYSVINIT-GPU}"
-SRC_URI_append_mx6dl = " ${SYSVINIT-GPU}"
-SRC_URI_append_mx6sx = " ${SYSVINIT-GPU}"
-SRC_URI_append_mx6sl = " ${SYSVINIT-GPU}"
-
-IS_MX6UL = "0"
-IS_MX6UL_mx6ul = "1"
-
-do_install_append_mx6() {
-
- if [ "${IS_MX6UL}" = "0" ]; then
+# overirde do_install
+do_install_mx6() {
     install -d ${D}${sysconfdir}
 
     # Install rc_mxc.S to /etc/init.d
@@ -58,13 +49,11 @@ EOF
     # Install rc_gpu.S to /etc/init.d
     echo "gpu::sysinit:/etc/init.d/rc_gpu.S" >> ${D}${sysconfdir}/inittab
     install -m 0755 ${WORKDIR}/rc_gpu.S ${D}${sysconfdir}/init.d
-fi
 
 }
 
-FILES_${PN}_append_mx6q = " ${sysconfdir}/init.d/rc_mxc.S ${sysconfdir}/init.d/rc_gpu.S"
-FILES_${PN}_append_mx6dl = " ${sysconfdir}/init.d/rc_mxc.S ${sysconfdir}/init.d/rc_gpu.S"
-FILES_${PN}_append_mx6sx = " ${sysconfdir}/init.d/rc_mxc.S ${sysconfdir}/init.d/rc_gpu.S"
-FILES_${PN}_append_mx6sl = " ${sysconfdir}/init.d/rc_mxc.S ${sysconfdir}/init.d/rc_gpu.S"
+FILES_${PN}_append_mx6 = " ${sysconfdir}/init.d/rc_mxc.S ${sysconfdir}/init.d/rc_gpu.S"
 
 PACKAGE_ARCH_mx6 = "${MACHINE_ARCH}"
+
+

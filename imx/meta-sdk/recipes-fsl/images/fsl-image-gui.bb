@@ -27,10 +27,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 # Backend-specific packages
 # Direct FB packages
-DFB_IMAGE_INSTALL = ""
-DFB_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'directfb', \
+DFB_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'directfb', \
     'packagegroup-core-full-cmdline packagegroup-core-directfb libvivante-dfb-mx6', '', d)}"
-DFB_IMAGE_INSTALL_remove_mx6ul = "libvivante-dfb-mx6"
 
 # Wayland packages
 WAYLAND_IMAGE_INSTALL = ""
@@ -45,8 +43,6 @@ X11_IMAGE_INSTALL = ""
 X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'gst-plugins-gl-meta packagegroup-fsl-pulseaudio', '', d)}"
 X11_IMAGE_INSTALL_remove_mx6sl = "gst-plugins-gl-meta"
-X11_IMAGE_INSTALL_remove_mx6qp = "gst-plugins-gl-meta"
-X11_IMAGE_INSTALL_remove_mx6ul = "gst-plugins-gl-meta"
 X11_IMAGE_INSTALL_append_mx6sl = " libopenvg-mx6"
 X11_IMAGE_INSTALL_mx7 = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'packagegroup-fsl-pulseaudio', '', d)}"
@@ -58,13 +54,10 @@ X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
     xorg-minimal-fonts \
     liberation-fonts', '', d)}"
 
-X11_IMAGE_INSTALL_GRAPHICS_remove_mx6qp = "packagegroup-fsl-gstreamer"
-X11_IMAGE_INSTALL_GRAPHICS_remove_mx6ul = "packagegroup-fsl-gstreamer"
-X11_IMAGE_INSTALL_GRAPHICS_remove_mx7d = "packagegroup-fsl-gstreamer"
 # set mm image install specific to SOC
 MM_IMAGE_INSTALL = ""
-MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
-MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
+MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-gstreamer1.0"
+MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-gstreamer1.0"
 
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
