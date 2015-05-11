@@ -8,10 +8,10 @@ PROVIDES += "u-boot"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCBRANCH = "imx_v2015.04_3.14.38_6ul7d_beta"
+SRCBRANCH = "imx_v2015.04"
 UBOOT_SRC ?= "git://git.freescale.com/imx/uboot-imx.git;protocol=git"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "b026e66a5bb6c2b6fda9e353dfe9061306c69da4"
+SRCREV = "63bf57cd2c05017c977b1c2caa913042f356b994"
 
 S = "${WORKDIR}/git"
 
