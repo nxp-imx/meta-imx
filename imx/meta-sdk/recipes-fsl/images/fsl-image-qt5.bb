@@ -13,6 +13,8 @@ X11_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', \
 WLD_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', '', \
                 base_contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d), d)}"
 
+OPENCV_INSTALL = "opencv opencv-dev opencv-apps opencv-samples"
+
 QT5_IMAGE_INSTALL = ""
 QT5_IMAGE_INSTALL_common = " \
     packagegroup-qt5-core \
