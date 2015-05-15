@@ -14,14 +14,12 @@ PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
                            base_contains('DISTRO_FEATURES', 'x11', \
                                     'opengl', '', d), '', d)}"
 
-PACKAGECONFIG_append_mx6q = "${@base_contains('DISTRO_FEATURES', 'directfb', ' ', \
-                ' opencv ', d)}"
-PACKAGECONFIG_append_mx6qp = "${@base_contains('DISTRO_FEATURES', 'directfb', ' ', \
-                ' opencv ', d)}"
+PACKAGECONFIG_append = " opencv "
 
-
-#i.MX specific
-SRC_URI_append = " file://egl-workaround-for-eglCreateContext-isn-t-thread-safe.patch \
+SRC_URI_append = " file://camerabin-examples-memory-leak-in-camerabin-examples-01.patch \
+                   file://camerabin-examples-memory-leak-in-camerabin-examples-02.patch \
+                   file://dvbsuboverlay-Set-query-ALLOCATION-need_pool-to-FALSE.patch \
+                   file://egl-workaround-for-eglCreateContext-isn-t-thread-safe.patch \
                    file://camerabin-Add-one-property-to-set-sink-element-for-video.patch \
                    file://0002-mpegtsmux-Need-get-pid-when-create-streams.patch \
                    file://0006-h263parse_fix_CPFMT_parsing.patch \
