@@ -3,7 +3,7 @@
 
 DESCRIPTION = "Freescale QT Multimedia applications"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=01ba08a2b77c3a0a9d0ab5d4d83fed64"
+LIC_FILES_CHKSUM = "file://COPYING;md5=acdb807ac7275fe32f9f64992e111241"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
@@ -14,8 +14,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://qtimxplayer.desktop \
            file://qtimxcamera.desktop \
 "
-SRC_URI[md5sum] = "a4b70177255c63f610a0ce87b04ddcaf"
-SRC_URI[sha256sum] = "8843cdf8c0507946579e3eed35552e57fc75354c5efedaba0390b107fe5c3ee1"
+SRC_URI[md5sum] = "d57ee2d85ff53d46da9ad4e18c1e1893"
+SRC_URI[sha256sum] = "ec4efb60a96a6c3d57cb4c45c3683ef3d44c5a2bb3c62526dbf150392a1bd089"
 
 do_install () {
     install -d ${D}${datadir}/applications

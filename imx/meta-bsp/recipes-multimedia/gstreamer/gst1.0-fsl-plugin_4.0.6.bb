@@ -8,21 +8,17 @@ S = "${WORKDIR}/gst1.0-fsl-plugins-${PV}"
 
 EXTRA_OECONF += " CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 
-SRC_URI[md5sum] = "098dfa5e2c0cc7314f526d4aacc4613d"
-SRC_URI[sha256sum] = "cb5e066546221120ef06bab6ec3052459d92b997190077dc50545e49d5e3b151"
+SRC_URI[md5sum] = "af0166b0dd39d92e72ef90da5e7595f5"
+SRC_URI[sha256sum] = "b245368c3fe7bd51bf6fe975ae9234dc1db9da6ba9b63308b8c417d55d987a14"
 
 DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base"
-DEPENDS_append_mx6ul = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 RDEPENDS_${PN} += "gstreamer1.0-plugins-good-id3demux"
 
-PLATFORM_mx6qp= "MX6QP"
-PLATFORM_mx6ul= "MX6UL"
 PLATFORM_mx7= "MX7D"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG_mx6 = "overlaysink"
-PACKAGECONFIG_mx6ul = ""
 
 # FIXME: Add all features
 # feature from excluded mm packages
