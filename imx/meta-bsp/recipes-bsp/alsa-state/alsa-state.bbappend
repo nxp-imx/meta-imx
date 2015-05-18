@@ -5,11 +5,11 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append_mx6 = " \
-	file://asound.state.3.10.17 \
+	file://asound.state.wm89586062 \
 "
 
 do_install_append_mx6() {
-    install -m 0644 ${WORKDIR}/asound.state.3.10.17 ${D}${localstatedir}/lib/alsa/asound.state
+    install -m 0644 ${WORKDIR}/asound.state.wm89586062 ${D}${localstatedir}/lib/alsa/asound.state
 }
 
 # for i.MX7D
