@@ -56,4 +56,4 @@ FILES_${PN}_append_mx6 = " ${sysconfdir}/init.d/rc_mxc.S ${sysconfdir}/init.d/rc
 
 PACKAGE_ARCH_mx6 = "${MACHINE_ARCH}"
 
-
+COMPATIBLE_MACHINE = "(mx6q:mx6dl:mx6sx:mx6sl)"
