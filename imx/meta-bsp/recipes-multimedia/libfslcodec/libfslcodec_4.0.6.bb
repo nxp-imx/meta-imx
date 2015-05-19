@@ -4,7 +4,7 @@
 require recipes-multimedia/libfslcodec/libfslcodec.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=acdb807ac7275fe32f9f64992e111241"
 
-SRC_URI[md5sum] = "ce74c62cae1c36fc9e4a20a272340c7c"
-SRC_URI[sha256sum] = "0970b549c7ac767db234e72b5bc9223cb44a205c23f24379eab782073b3685fe"
+SRC_URI[md5sum] = "99b123e2fae4ae2ecc31e621ce4114a2"
+SRC_URI[sha256sum] = "e0db75642bd48013a336594654b9a71b8e85c25742c05573f5f315bc25e8b45c"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6|mx7)"
