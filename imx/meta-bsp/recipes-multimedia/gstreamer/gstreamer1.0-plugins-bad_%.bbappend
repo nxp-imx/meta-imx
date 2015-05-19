@@ -14,7 +14,8 @@ PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
                            base_contains('DISTRO_FEATURES', 'x11', \
                                     'opengl', '', d), '', d)}"
 
-PACKAGECONFIG_append = " opencv "
+PACKAGECONFIG_append = "${@base_contains('DISTRO_FEATURES', 'directfb', ' ', \
+                ' opencv ', d)}"
 
 SRC_URI_append = " file://camerabin-examples-memory-leak-in-camerabin-examples-01.patch \
                    file://camerabin-examples-memory-leak-in-camerabin-examples-02.patch \
