@@ -19,6 +19,7 @@ PLATFORM_mx7= "MX7D"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG_mx6 = "overlaysink"
+PACKAGECONFIG_mx6ul = ""
 
 # FIXME: Add all features
 # feature from excluded mm packages
