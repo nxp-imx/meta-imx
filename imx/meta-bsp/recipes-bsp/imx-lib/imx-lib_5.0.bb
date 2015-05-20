@@ -14,3 +14,4 @@ SRC_URI[sha256sum] = "0215acc97ca7e1c8dbdc2f1f9c7e85dae0725fdac56b79e8ec1c37e47a
 COMPATIBLE_MACHINE = "(mx6|mx7)"
 
 PLATFORM_mx7   = "IMX7"
+PLATFORM_mx6ul   = "IMX7"
