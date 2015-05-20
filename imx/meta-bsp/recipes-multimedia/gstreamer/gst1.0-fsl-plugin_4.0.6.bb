@@ -12,9 +12,11 @@ SRC_URI[md5sum] = "03b2b54e9344a7e1fbfcf4c8b693487c"
 SRC_URI[sha256sum] = "912843d04850bcf081723e12eb2a2627f78e68f6ae3674fb06ea2ea664063a5f"
 
 DEPENDS_append = " gstreamer1.0 gstreamer1.0-plugins-base"
+DEPENDS_append_mx6ul = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 RDEPENDS_${PN} += "gstreamer1.0-plugins-good-id3demux"
 
+PLATFORM_mx6ul= "MX6UL"
 PLATFORM_mx7= "MX7D"
 
 PACKAGECONFIG ?= ""
