@@ -1,0 +1,66 @@
+From b74f9d15cad37abddd9050a14fb12c1dac0a43eb Mon Sep 17 00:00:00 2001
+From: Jian <Jian.Li@freescale.com>
+Date: Thu, 21 May 2015 12:55:15 +0800
+Subject: [PATCH] MMFMWK-6582 [glfilter] Fix video is tearing after enable
+ graphic effect
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Need to finish current gl draw before send the buffer
+to downstream elements
+
+Upstream Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Jian <Jian.Li@freescale.com>
+---
+ gst-libs/gst/gl/gstglfilter.c |    7 +++++++
+ gst-libs/gst/gl/gstglfilter.h |    2 ++
+ 2 files changed, 9 insertions(+)
+
+diff --git a/gst-libs/gst/gl/gstglfilter.c b/gst-libs/gst/gl/gstglfilter.c
+index d038dcc..feff9de 100644
+--- a/gst-libs/gst/gl/gstglfilter.c
++++ b/gst-libs/gst/gl/gstglfilter.c
+@@ -300,6 +300,8 @@ gst_gl_filter_reset (GstGLFilter * filter)
+   if (filter->context)
+     gst_object_unref (filter->context);
+   filter->context = NULL;
++
++  filter->sync_draw = FALSE;
+ }
+ 
+ static gboolean
+@@ -1197,6 +1199,7 @@ gst_gl_filter_filter_texture (GstGLFilter * filter, GstBuffer * inbuf,
+     GST_DEBUG ("Physical continious buffer, attempting viv direct texture binding");
+     gst_gl_viv_direct_bind_gstbuffer (filter->context, filter->out_tex_id, &filter->out_info, outbuf);
+     to_download = FALSE;
++    filter->sync_draw = TRUE;
+     out_tex = filter->out_tex_id;
+   }
+   else {
+@@ -1434,4 +1437,8 @@ gst_gl_filter_draw_texture (GstGLFilter * filter, GLuint texture,
+     gl->DisableVertexAttribArray (filter->draw_attr_texture_loc);
+   }
+ #endif
++
++  if (filter->sync_draw) {
++    gl->Finish ();
++  }
+ }
+diff --git a/gst-libs/gst/gl/gstglfilter.h b/gst-libs/gst/gl/gstglfilter.h
+index c786493..1543d61 100644
+--- a/gst-libs/gst/gl/gstglfilter.h
++++ b/gst-libs/gst/gl/gstglfilter.h
+@@ -90,6 +90,8 @@ struct _GstGLFilter
+   GLint draw_attr_position_loc;
+   GLint draw_attr_texture_loc;
+ #endif
++
++  gboolean          sync_draw;
+ };
+ 
+ /**
+-- 
+1.7.9.5
+
