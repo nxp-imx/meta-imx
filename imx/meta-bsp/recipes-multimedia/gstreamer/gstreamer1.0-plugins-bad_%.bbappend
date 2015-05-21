@@ -38,6 +38,7 @@ GPU_PATCHES = " file://1.4.5-Use-viv-direct-texture-to-bind-buffer.patch \
                 file://0003-glimagesink-Add-fps-print-in-glimagesink.patch \
                 file://0004-gl-fb-Support-fb-backend-for-gl-plugins.patch \
                 file://0005-gl-wayland-Make-it-always-fullscreen-1024x768.patch \
+                file://0007-glfilter-Fix-video-is-tearing-after-enab.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
