@@ -1,6 +1,7 @@
 # Add needed Freescale packages and definitions
 
 SOC_TOOLS_TEST_mx6ul = "imx-test"
+SOC_TOOLS_TEST_mx7 = "imx-test"
 
 PACKAGES += " \
     ${PN}-fslcodec-testapps \
