@@ -16,6 +16,7 @@ DEPENDS_append_mx6ul = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 RDEPENDS_${PN} += "gstreamer1.0-plugins-good-id3demux"
 
+PLATFORM_mx6qp= "MX6QP"
 PLATFORM_mx6ul= "MX6UL"
 PLATFORM_mx7= "MX7D"
 
