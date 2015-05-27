@@ -26,6 +26,8 @@ SRC_URI_append = " file://camerabin-examples-memory-leak-in-camerabin-examples-0
                    file://camerabin-Add-one-property-to-set-sink-element-for-video.patch \
                    file://0002-mpegtsmux-Need-get-pid-when-create-streams.patch \
                    file://0006-h263parse_fix_CPFMT_parsing.patch \
+                   file://0009-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
+                   file://0010-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
 "
 
 
