@@ -2,7 +2,7 @@
 
 require recipes-bsp/firmware-imx/firmware-imx.inc
 
-SRC_URI[md5sum] = "fef51366ba1535184d12b79b209df1c2"
-SRC_URI[sha256sum] = "48e63bdacb6e3e72fc040433988bae0b0422a7ab802c1267b991916b3276105d"
+SRC_URI[md5sum] = "929273d66b12af2990ef90b16c67519f"
+SRC_URI[sha256sum] = "886981673f17b65ebedc498eb5afa64717f4e6725e43eb3ddc67f56ada69b159"
 
 COMPATIBLE_MACHINE = "(mx5|mx6)"
