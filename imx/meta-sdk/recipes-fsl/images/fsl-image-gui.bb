@@ -63,8 +63,8 @@ X11_IMAGE_INSTALL_GRAPHICS_remove_mx6ul = "packagegroup-fsl-gstreamer"
 X11_IMAGE_INSTALL_GRAPHICS_remove_mx7d = "packagegroup-fsl-gstreamer"
 # set mm image install specific to SOC
 MM_IMAGE_INSTALL = ""
-MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-gstreamer1.0"
-MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-gstreamer1.0"
+MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
+MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
 
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
