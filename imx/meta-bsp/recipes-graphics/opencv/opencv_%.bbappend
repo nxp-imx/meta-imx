@@ -1,7 +1,3 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-
-SRC_URI_append_mx6 = " file://0001-MGS-515-ccc-Opencv-app-can-t-run-on-imx6sx-with-cam.patch"
-
 # Remove libav as it has LICENSE_FLAG commmerical
 PACKAGECONFIG_remove = "libav"
 
