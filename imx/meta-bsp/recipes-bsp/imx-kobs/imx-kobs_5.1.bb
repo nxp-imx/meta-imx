@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "305ea23e36d26c98b664f11f40eebe5a"
-SRC_URI[sha256sum] = "b2220e798432e9165f7158c302ae462e0b905d4ac930a040ca95995b37a3be35"
+SRC_URI[md5sum] = "98ba99dd3619fa90ae5c572b5d07ee2f"
+SRC_URI[sha256sum] = "0f08c47f0ca48e8d97501cd671d84607318172bba6aed6f516b9daa413b04ca6"
 
 inherit  autotools pkgconfig
 
