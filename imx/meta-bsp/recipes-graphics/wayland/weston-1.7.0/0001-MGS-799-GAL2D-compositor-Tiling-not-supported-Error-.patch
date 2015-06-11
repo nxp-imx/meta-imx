@@ -1,0 +1,30 @@
+From 48bbc6a6495d1636823feb3c2ce5e22ca88ee4c0 Mon Sep 17 00:00:00 2001
+From: Prabhu <prabhu.sundararaj@freescale.com>
+Date: Wed, 10 Jun 2015 22:27:22 -0500
+Subject: [PATCH] MGS-799 : GAL2D compositor "Tiling not supported Error in
+ function repaint_region"
+
+Removed un-necessary error condition and prints.
+
+Date: June 10, 2015
+Signed-off-by: Prabhu <prabhu.sundararaj@freescale.com>
+---
+ src/gal2d-renderer.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/gal2d-renderer.c b/src/gal2d-renderer.c
+index 4a1da29..e911d56 100644
+--- a/src/gal2d-renderer.c
++++ b/src/gal2d-renderer.c
+@@ -709,7 +709,7 @@ repaint_region(struct weston_view *ev, struct weston_output *output, struct gal2
+ 	else
+ 	{
+         gcoSURF_GetTiling(srcSurface, &tiling);
+-        if (gcoHAL_IsFeatureAvailable(gr->gcoHal, gcvFEATURE_2D_TILING) != gcvTRUE)
++        if (gcoHAL_IsFeatureAvailable(gr->gcoHal, gcvFEATURE_2D_TILING) != gcvTRUE && (tiling > gcvLINEAR))
+         {
+             weston_log("Tiling not supported \n");
+             status = gcvSTATUS_NOT_SUPPORTED;
+-- 
+2.3.6
+
