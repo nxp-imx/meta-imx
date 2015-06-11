@@ -34,6 +34,7 @@ SRC_URI_append += " file://camerabin-examples-memory-leak-in-camerabin-examples-
                     file://0006-h263parse_fix_CPFMT_parsing.patch \
                     file://0009-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
                     file://0010-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
+                    file://0012-glfilter-Lost-frame-rate-info-when-fixate-caps.patch \
 "
 
 # i.MX6 patches for GST1.4.5
