@@ -8,8 +8,8 @@ PE = "1"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "1d555e91bdf31239fd0805844babde00"
-SRC_URI[sha256sum] = "4189a506cda7527bee28d5445cda64c956f37b133c17a3679802c81b3b4c32bf"
+SRC_URI[md5sum] = "d38daf723e270387ba41041f7b588ac4"
+SRC_URI[sha256sum] = "0215acc97ca7e1c8dbdc2f1f9c7e85dae0725fdac56b79e8ec1c37e47a6d38a5"
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
 
