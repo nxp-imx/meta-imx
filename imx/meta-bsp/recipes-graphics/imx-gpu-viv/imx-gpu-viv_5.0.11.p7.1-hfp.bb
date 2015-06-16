@@ -3,9 +3,9 @@
 
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv.inc
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${@'${PV}'.replace('5.0.11.p6.3', '5.0.11.p6.3-beta')}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-S="${WORKDIR}/${PN}-${@'${PV}'.replace('5.0.11.p6.3', '5.0.11.p6.3-beta')}"
+S="${WORKDIR}/${PN}-${PV}"
 
 SRC_URI[md5sum] = "2702903f5ab3f92b7d83db70493f9987"
 SRC_URI[sha256sum] = "89a9eb6fd67079710889da0ebeace877ee0ed9927aef3fe6f129fd2b50d2e53a"
