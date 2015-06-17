@@ -1,7 +1,7 @@
 # Copyright (C) 2013-2015 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require recipes-graphics/imx-gpu-viv/imx-gpu-viv.inc
+require imx-gpu-viv.inc
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
