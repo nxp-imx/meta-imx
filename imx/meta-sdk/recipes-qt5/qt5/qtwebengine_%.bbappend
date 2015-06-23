@@ -1,3 +1,5 @@
+FILESEXTRAPATHS_prepend_mx6 := "${THISDIR}/${PN}:"
+
 SRC_URI = " \
     git://gitorious.org/qt/qtwebengine-chromium.git;name=chromium;branch=${QT_MODULE_BRANCH_CHROMIUM};protocol=https;destsuffix=git/src/3rdparty \
     file://0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch \
