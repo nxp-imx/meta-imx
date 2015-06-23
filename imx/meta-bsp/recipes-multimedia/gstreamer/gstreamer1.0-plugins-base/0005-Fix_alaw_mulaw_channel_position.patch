@@ -1,0 +1,40 @@
+commit 829b7298e9d783d612032273775c7048bf83fec6
+Author: Lyon Wang <lyon.wang@freescale.com>
+Date:   Thu Jun 18 17:38:09 2015 +0800
+
+    audioringbuffer: Fix alaw/mulaw channel positions
+    
+    For alaw/mulaw we should also try to initialize the channel positions in the
+    ringbuffer's audio info. This allow pulsesink to directly use the channel
+    positions instead of using the default zero-initialized ones, which doesn't
+    work well.
+    
+Bugzilla URL:    https://bugzilla.gnome.org/show_bug.cgi?id=751144
+Upstream Status: Accepted and target milestone 1.5.2
+
+diff --git a/gst-libs/gst/audio/gstaudioringbuffer.c b/gst-libs/gst/audio/gstaudioringbuffer.c
+index d6f65f3..246c6f6 100644
+--- a/gst-libs/gst/audio/gstaudioringbuffer.c
++++ b/gst-libs/gst/audio/gstaudioringbuffer.c
+@@ -218,6 +218,10 @@ gst_audio_ring_buffer_parse_caps (GstAudioRingBufferSpec * spec, GstCaps * caps)
+             gst_structure_get_int (structure, "channels", &info.channels)))
+       goto parse_error;
+ 
++    if (!(gst_audio_channel_positions_from_mask (info.channels, 0,
++                info.position)))
++      goto parse_error;
++
+     spec->type = GST_AUDIO_RING_BUFFER_FORMAT_TYPE_A_LAW;
+     info.bpf = info.channels;
+   } else if (g_str_equal (mimetype, "audio/x-mulaw")) {
+@@ -226,6 +230,10 @@ gst_audio_ring_buffer_parse_caps (GstAudioRingBufferSpec * spec, GstCaps * caps)
+             gst_structure_get_int (structure, "channels", &info.channels)))
+       goto parse_error;
+ 
++    if (!(gst_audio_channel_positions_from_mask (info.channels, 0,
++                info.position)))
++      goto parse_error;
++
+     spec->type = GST_AUDIO_RING_BUFFER_FORMAT_TYPE_MU_LAW;
+     info.bpf = info.channels;
+   } else if (g_str_equal (mimetype, "audio/x-iec958")) {
