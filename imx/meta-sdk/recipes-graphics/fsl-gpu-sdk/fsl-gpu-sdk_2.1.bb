@@ -22,9 +22,9 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "d23f46de671d31ecfc254d4951f7ca08"
 SRC_URI[sha256sum] = "caa87b529ed612dbcf5f1c93183b25793a3aef1589a7ccebb92aa7e4d917d351"
 
-BACKEND = "${@base_contains('DISTRO_FEATURES', 'x11', 'X11', \
-                    base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
-                           base_contains('DISTRO_FEATURES', 'directfb', 'DirectFB', 'FB', d), d), d)}"
+BACKEND = "${@base_contains('DISTRO_FEATURES', 'x11', \
+                    base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', 'X11', d), \
+                           base_contains('DISTRO_FEATURES', 'directfb', 'DirectFB', 'FB', d), d)}"
 do_compile () {
     export FSL_GRAPHICS_SDK=${S}
     export FSL_PLATFORM_NAME=Yocto

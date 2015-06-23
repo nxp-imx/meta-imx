@@ -9,7 +9,8 @@ SRC_URI = "http://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
            file://weston.png \
            file://weston.desktop \
            file://disable-wayland-scanner-pkg-check.patch \
-           file://make-lcms-configurable.patch"
+           file://make-lcms-configurable.patch \
+           ${@base_contains('DISTRO_FEATURES', 'x11','file://xwayland.patch', '', d)}"
 SRC_URI[md5sum] = "1fde8a44f48cd177438522850d6ba4be"
 SRC_URI[sha256sum] = "1c4511945f3f476c24af712e82a7b500ae91a99cbc0fe2e381da1449125166cd"
 
@@ -19,7 +20,7 @@ DEPENDS = "libxkbcommon gdk-pixbuf pixman cairo glib-2.0 jpeg"
 DEPENDS += "wayland virtual/egl pango libinput"
 
 EXTRA_OECONF = "--enable-setuid-install \
-                --disable-xwayland \
+                ${@base_contains('DISTRO_FEATURES', 'x11','--enable-xwayland', '--disable-xwayland', d)} \
                 --enable-simple-clients \
                 --enable-clients \
                 --enable-demo-clients-install \
@@ -68,12 +69,15 @@ do_install_append() {
 
 		install -d ${D}${datadir}/icons/hicolor/48x48/apps
 		install ${WORKDIR}/weston.png ${D}${datadir}/icons/hicolor/48x48/apps
+
+               install -d ${D}/${sysconfdir}
+               install ${WORKDIR}/build/weston.ini ${D}/${sysconfdir}
         fi
 }
 
 PACKAGES += "${PN}-examples"
 
-FILES_${PN} = "${bindir}/weston ${bindir}/weston-terminal ${bindir}/weston-info ${bindir}/weston-launch ${bindir}/wcap-decode ${libexecdir} ${datadir}"
+FILES_${PN} = "${bindir}/weston ${bindir}/weston-terminal ${bindir}/weston-info ${bindir}/weston-launch ${bindir}/wcap-decode ${libexecdir} ${datadir} ${sysconfdir}/weston.ini"
 FILES_${PN}-examples = "${bindir}/*"
 
 RDEPENDS_${PN} += "xkeyboard-config"

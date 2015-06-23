@@ -1,0 +1,12 @@
+Index: git/qtwayland.pro
+===================================================================
+--- git.orig/qtwayland.pro	2014-09-18 12:01:23.883582734 +0300
++++ git/qtwayland.pro	2014-09-18 12:05:49.743574961 +0300
+@@ -7,7 +7,6 @@
+ qtCompileTest(egl)
+ qtCompileTest(brcm_egl)
+ qtCompileTest(glx)
+-qtCompileTest(xcomposite)
+ qtCompileTest(drm_egl_server)
+ 
+ load(qt_parts)
