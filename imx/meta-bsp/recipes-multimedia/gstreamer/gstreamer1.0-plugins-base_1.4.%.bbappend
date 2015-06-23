@@ -16,6 +16,7 @@ SRC_URI_append = " file://do-not-change-eos-event-to-gap-event2.patch \
                    file://gstplaybin-remove-flag-deinterlace.patch \
                    file://encodebin-Need-more-buffers-in-output-queue-for-bett.patch \
                    file://videoencoder-Keep-sticky-events-around-when-doing-a-soft-.patch \
+                   file://0005-Fix_alaw_mulaw_channel_position.patch \
 "
 
 # Enable pango lib
