@@ -10,8 +10,8 @@ CONFLICT_DISTRO_FEATURES = "directfb"
 X11_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'libxkbcommon', '', d)}"
 
-WLD_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', '', \
-                base_contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d), d)}"
+WLD_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'wayland', \
+                base_contains('DISTRO_FEATURES', 'x11', 'qtwayland qtwayland-plugins', ' qtwayland qtwayland-plugins ', d), '', d)}"
 
 QT5_IMAGE_INSTALL = ""
 QT5_IMAGE_INSTALL_common = " \
@@ -24,6 +24,7 @@ QT5_IMAGE_INSTALL_common = " \
     "
 QT5_IMAGE_INSTALL_mx6 = " \
     ${QT5_IMAGE_INSTALL_common} \
+    packagegroup-qt5-webengine \
     "
 QT5_IMAGE_INSTALL_mx6sl = "${@base_contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'packagegroup-qt5-core', d)}"
