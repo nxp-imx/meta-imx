@@ -119,25 +119,7 @@ do_install () {
     install -d ${D}${libdir}/pkgconfig
 
     # The preference order, based in DISTRO_FEATURES, is x11, wayland, directfb and fb
-    if [ "${USE_X11}" = "yes" ]; then
-        cp -r ${S}/gpu-core/usr/lib/dri ${D}${libdir}
-        cp -axr ${S}/apitrace/x11/usr/lib/* ${D}${libdir}
-        cp -axr ${S}/apitrace/x11/usr/bin/* ${D}${bindir}
-
-        backend=x11
-
-        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_x11.pc ${D}${libdir}/pkgconfig/egl.pc
-        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv1_cm_x11.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
-        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv2_x11.pc ${D}${libdir}/pkgconfig/glesv2.pc
-        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/vg_x11.pc ${D}${libdir}/pkgconfig/vg.pc
-
-        #FIXME: WL & X11 is not currently functional
-        #if [ "${USE_WL}" = "yes" ]; then
-        #    install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
-        #    install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
-        #    install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
-        #fi
-    elif [ "${USE_WL}" = "yes" ]; then
+    if [ "${USE_WL}" = "yes" ]; then
         cp -axr ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
         cp -axr ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
 
@@ -150,7 +132,29 @@ do_install () {
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
+        mv ${D}${libdir}/libGAL_egl.${backend}.so ${D}${libdir}/libGAL_egl.so
 
+
+       if [ "${USE_X11}" = "yes" ]; then
+
+        cp -r ${S}/gpu-core/usr/lib/dri ${D}${libdir}
+
+       fi
+
+    elif [ "${USE_X11}" = "yes" ]; then
+
+        cp -r ${S}/gpu-core/usr/lib/dri ${D}${libdir}
+        cp -axr ${S}/apitrace/x11/usr/lib/* ${D}${libdir}
+        cp -axr ${S}/apitrace/x11/usr/bin/* ${D}${bindir}
+
+
+        backend=x11
+
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_x11.pc ${D}${libdir}/pkgconfig/egl.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv1_cm_x11.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv2_x11.pc ${D}${libdir}/pkgconfig/glesv2.pc
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/vg_x11.pc ${D}${libdir}/pkgconfig/vg.pc
+        mv ${D}${libdir}/libGAL_egl.dri.so ${D}${libdir}/libGAL_egl.so
     else
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
@@ -172,7 +176,7 @@ do_install () {
             cp -axr ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
             backend=fb
         fi
-
+        mv ${D}${libdir}/libGAL_egl.${backend}.so ${D}${libdir}/libGAL_egl.so
     fi
 
     # Install Vendor ICDs for OpenCL's installable client driver loader (ICDs Loader)
