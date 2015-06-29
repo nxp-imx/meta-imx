@@ -5,8 +5,8 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv.inc
 
 S="${WORKDIR}/${PN}-${@'${PV}'.replace('5.0.11.p6.3', '5.0.11.p6.3-beta')}"
 
-SRC_URI[md5sum] = "7fc27627d2989c9117da6f33346276ec"
-SRC_URI[sha256sum] = "27c39cf161d9c73bea137135be4da17d854b84d5985133bdc16575747f881cf4"
+SRC_URI[md5sum] = "b2155c395de054184211fb57ccdb1dfb"
+SRC_URI[sha256sum] = "9dad9944d7d3c4dd8cba52a829625c0546df0b15324e723c61e6f3ae97da9487"
 
 # FIXME skip the QA error for viv-samples
 INSANE_SKIP_${PN} += "rpaths"
