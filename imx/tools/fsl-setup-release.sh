@@ -51,6 +51,7 @@ clean_up()
 
 # get command line options
 OLD_OPTIND=$OPTIND
+unset FSLDISTRO
 
 while getopts "k:r:t:b:e:gh" fsl_setup_flag
 do
@@ -61,7 +62,6 @@ do
         e)
             # Determine what distro needs to be used.
             BACKEND="$OPTARG"
-            unset FSLDISTRO
             if [ "$BACKEND" = "fb" ]; then
                 if [ -z "$DISTRO" ]; then
                     FSLDISTRO='fsl-imx-release-fb'
@@ -189,3 +189,4 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-qt5 \"" >> $BUILD_DIR/conf/bblayers
 
 cd  $BUILD_DIR
 clean_up
+unset FSLDISTRO
