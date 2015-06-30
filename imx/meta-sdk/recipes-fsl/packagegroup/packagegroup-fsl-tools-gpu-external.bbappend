@@ -9,7 +9,7 @@ X11_TOOLS_INSTALL_append_mx6sx = " ${X11_TOOLS_GTK} ${X11_TOOLS_GLCOMP}"
 X11_TOOLS_INSTALL_append_mx6sl = " ${X11_TOOLS_GTK}"
 
 XWAYLAND_glmark2 = "${@base_contains('DISTRO_FEATURES', 'x11', \
-                        base_contains('DISTRO_FEATURES', 'wayland' ' glmark2', '', d), d)}"
+                        base_contains('DISTRO_FEATURES', 'wayland' 'glmark2', '', d), '', d)}"
 
 SOC_GPU_TOOLS_X11_remove_mx6sl = "${XWAYLAND_glmark2}"
 
