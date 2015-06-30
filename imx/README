@@ -5,7 +5,7 @@ This BSP is a Freescale release providing support for the following processors
 
 Ths release is a standalone release that is only tested on i.MX 6QP SABRE AUTO
 
-   * Freescale i.MX6QP SABRE AUTO (imx6qpsabreauto)
+   * Freescale i.MX 6QP SABRE AUTO (imx6qpsabreauto)
 
 The following boards were not tested in this release but this release contains updates
 that might affect these boards.
@@ -18,9 +18,8 @@ that might affect these boards.
    * Freescale i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
    * Freescale i.MX 6DualLite SABRE Auto (imx6dlsabreauto)
    * Freescale i.MX 6SoloLite EVK (imx6slevk)
-   * Freescale i.MXSX 17x17 arm2 (imx6sx17x17arm2)
-   * Freescale i.MXSX 19x19 ddr3 arm2 (imx6sx19x19ddr3arm2)
-   * Freescale i.MXSX 19x19 lpddr arm2 (imx6sx19x19lpddrarm2)
+   * Freescale i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
+   * Freescale i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
    * Freescale i.MX6SOLO SABRE Smart Device (imx6solosabresd )
    * Freescale i.MX6SOLO SABRE Auto (imx6solosabreauto )
    * Freescale i.MX7D SABRE SD (imx7dsabresd)
