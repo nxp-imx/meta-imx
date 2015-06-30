@@ -1,4 +1,4 @@
-Freescale's 3.14.28-6QP_beta Yocto Project BSP
+Freescale's 3.14.38-6QP_beta Yocto Project BSP
 ================================================
 
 This BSP is a Freescale release providing support for the following processors
@@ -47,7 +47,7 @@ Quick Start Guide
 See the Freescale Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX Freescale BSP repo
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.14.28-1.0.0
+$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.14.38-6QP_beta
 
 Download the Yocto Freescale Layers:
 $: repo sync
@@ -62,7 +62,7 @@ Build images
 Each graphical backend X11, Frame buffer, DirectFB and Wayland must be in a separate build 
 directory, so the setup script above must be run for each backend to configure the build 
 correctly.
-In the 3.14.28-1.0.0 release two image recipes are provided that work on almost all backends.
+In this release two image recipes are provided that work on almost all backends.
 
    fsl-image-gui provides a gui image without QT.
    fsl-image-qt5 provides a Qt5 image for X11, FB and Wayland backends.
