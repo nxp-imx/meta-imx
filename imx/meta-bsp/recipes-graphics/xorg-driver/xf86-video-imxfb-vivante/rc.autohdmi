@@ -14,7 +14,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 
 case "$1" in
     start)
-        echo -n "Starting autohdmi: "
+	echo -n "Starting autohdmi: "
 	export DISPLAY=:0
 	autohdmi &
 	echo
