@@ -1,0 +1,351 @@
+From b3a9be129e25b9c84b2a056b6c9fad50d6b60c88 Mon Sep 17 00:00:00 2001
+From: Song Bing <b06498@freescale.com>
+Date: Mon, 1 Jun 2015 14:52:45 +0800
+Subject: [PATCH 1/2] opencv: rename gstopencv.c to gstopencv.cpp
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+As Open CV plugin will include many Open CV C++ head files.
+
+Upstream Status: Waiting for review.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=751203
+---
+ ext/opencv/Makefile.am        |    2 +-
+ ext/opencv/gstopencv.c        |  113 -----------------------------------------
+ ext/opencv/gstopencv.cpp      |  113 +++++++++++++++++++++++++++++++++++++++++
+ ext/opencv/gsttemplatematch.c |   14 ++---
+ ext/opencv/gsttemplatematch.h |    2 +-
+ 5 files changed, 122 insertions(+), 122 deletions(-)
+ delete mode 100644 ext/opencv/gstopencv.c
+ create mode 100644 ext/opencv/gstopencv.cpp
+
+diff --git a/ext/opencv/Makefile.am b/ext/opencv/Makefile.am
+index 3ba1c34..3c3418e 100644
+--- a/ext/opencv/Makefile.am
++++ b/ext/opencv/Makefile.am
+@@ -1,7 +1,7 @@
+ plugin_LTLIBRARIES = libgstopencv.la
+ 
+ # sources used to compile this plug-in
+-libgstopencv_la_SOURCES = gstopencv.c \
++libgstopencv_la_SOURCES = gstopencv.cpp \
+ 			gstopencvvideofilter.c \
+ 			gstopencvutils.c \
+ 			gstcvdilate.c \
+diff --git a/ext/opencv/gstopencv.c b/ext/opencv/gstopencv.c
+deleted file mode 100644
+index 3184518..0000000
+--- a/ext/opencv/gstopencv.c
++++ /dev/null
+@@ -1,113 +0,0 @@
+-/* GStreamer
+- * Copyright (C) <2009> Kapil Agrawal <kapil@mediamagictechnologies.com>
+- *
+- * gstopencv.c: plugin registering
+- *
+- * This library is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU Library General Public
+- * License as published by the Free Software Foundation; either
+- * version 2 of the License, or (at your option) any later version.
+- *
+- * This library is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+- * Library General Public License for more details.
+- *
+- * You should have received a copy of the GNU Library General Public
+- * License along with this library; if not, write to the
+- * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+- * Boston, MA 02110-1301, USA.
+- */
+-
+-#ifdef HAVE_CONFIG_H
+-#include "config.h"
+-#endif
+-
+-#include "gstcvdilate.h"
+-#include "gstcvequalizehist.h"
+-#include "gstcverode.h"
+-#include "gstcvlaplace.h"
+-#include "gstcvsmooth.h"
+-#include "gstcvsobel.h"
+-#include "gstedgedetect.h"
+-#include "gstfaceblur.h"
+-#include "gstfacedetect.h"
+-#include "gstmotioncells.h"
+-#include "gstpyramidsegment.h"
+-#include "gsttemplatematch.h"
+-#include "gsttextoverlay.h"
+-#include "gsthanddetect.h"
+-#include "gstskindetect.h"
+-#include "gstretinex.h"
+-#include "gstsegmentation.h"
+-#include "gstgrabcut.h"
+-#include "gstdisparity.h"
+-
+-static gboolean
+-plugin_init (GstPlugin * plugin)
+-{
+-  if (!gst_cv_dilate_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_cv_equalize_hist_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_cv_erode_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_cv_laplace_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_cv_smooth_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_cv_sobel_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_edge_detect_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_face_blur_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_face_detect_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_motion_cells_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_pyramid_segment_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_template_match_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_opencv_text_overlay_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_handdetect_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_skin_detect_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_retinex_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_segmentation_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_grabcut_plugin_init (plugin))
+-    return FALSE;
+-
+-  if (!gst_disparity_plugin_init (plugin))
+-    return FALSE;
+-
+-  return TRUE;
+-}
+-
+-GST_PLUGIN_DEFINE (GST_VERSION_MAJOR,
+-    GST_VERSION_MINOR,
+-    opencv,
+-    "GStreamer OpenCV Plugins",
+-    plugin_init, VERSION, "LGPL", GST_PACKAGE_NAME, GST_PACKAGE_ORIGIN)
+diff --git a/ext/opencv/gstopencv.cpp b/ext/opencv/gstopencv.cpp
+new file mode 100644
+index 0000000..3184518
+--- /dev/null
++++ b/ext/opencv/gstopencv.cpp
+@@ -0,0 +1,113 @@
++/* GStreamer
++ * Copyright (C) <2009> Kapil Agrawal <kapil@mediamagictechnologies.com>
++ *
++ * gstopencv.c: plugin registering
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
++#include "gstcvdilate.h"
++#include "gstcvequalizehist.h"
++#include "gstcverode.h"
++#include "gstcvlaplace.h"
++#include "gstcvsmooth.h"
++#include "gstcvsobel.h"
++#include "gstedgedetect.h"
++#include "gstfaceblur.h"
++#include "gstfacedetect.h"
++#include "gstmotioncells.h"
++#include "gstpyramidsegment.h"
++#include "gsttemplatematch.h"
++#include "gsttextoverlay.h"
++#include "gsthanddetect.h"
++#include "gstskindetect.h"
++#include "gstretinex.h"
++#include "gstsegmentation.h"
++#include "gstgrabcut.h"
++#include "gstdisparity.h"
++
++static gboolean
++plugin_init (GstPlugin * plugin)
++{
++  if (!gst_cv_dilate_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_cv_equalize_hist_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_cv_erode_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_cv_laplace_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_cv_smooth_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_cv_sobel_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_edge_detect_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_face_blur_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_face_detect_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_motion_cells_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_pyramid_segment_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_template_match_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_opencv_text_overlay_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_handdetect_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_skin_detect_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_retinex_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_segmentation_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_grabcut_plugin_init (plugin))
++    return FALSE;
++
++  if (!gst_disparity_plugin_init (plugin))
++    return FALSE;
++
++  return TRUE;
++}
++
++GST_PLUGIN_DEFINE (GST_VERSION_MAJOR,
++    GST_VERSION_MINOR,
++    opencv,
++    "GStreamer OpenCV Plugins",
++    plugin_init, VERSION, "LGPL", GST_PACKAGE_NAME, GST_PACKAGE_ORIGIN)
+diff --git a/ext/opencv/gsttemplatematch.c b/ext/opencv/gsttemplatematch.c
+index 507b218..12c92cd 100644
+--- a/ext/opencv/gsttemplatematch.c
++++ b/ext/opencv/gsttemplatematch.c
+@@ -176,7 +176,7 @@ gst_template_match_init (GstTemplateMatch * filter)
+ 
+   gst_element_add_pad (GST_ELEMENT (filter), filter->sinkpad);
+   gst_element_add_pad (GST_ELEMENT (filter), filter->srcpad);
+-  filter->template = NULL;
++  filter->templatename = NULL;
+   filter->display = TRUE;
+   filter->cvTemplateImage = NULL;
+   filter->cvDistImage = NULL;
+@@ -215,7 +215,7 @@ gst_template_match_set_property (GObject * object, guint prop_id,
+       }
+       break;
+     case PROP_TEMPLATE:
+-      filter->template = (char *) g_value_get_string (value);
++      filter->templatename = (char *) g_value_get_string (value);
+       gst_template_match_load_template (filter);
+       break;
+     case PROP_DISPLAY:
+@@ -238,7 +238,7 @@ gst_template_match_get_property (GObject * object, guint prop_id,
+       g_value_set_int (value, filter->method);
+       break;
+     case PROP_TEMPLATE:
+-      g_value_set_string (value, filter->template);
++      g_value_set_string (value, filter->templatename);
+       break;
+     case PROP_DISPLAY:
+       g_value_set_boolean (value, filter->display);
+@@ -321,7 +321,7 @@ gst_template_match_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
+ 
+   /* FIXME Why template == NULL returns OK?
+    * shouldn't it be a passthrough instead? */
+-  if ((!filter) || (!buf) || filter->template == NULL) {
++  if ((!filter) || (!buf) || filter->templatename == NULL) {
+     return GST_FLOW_OK;
+   }
+   GST_LOG_OBJECT (filter, "Buffer size %u", (guint) gst_buffer_get_size (buf));
+@@ -410,17 +410,17 @@ gst_template_match_match (IplImage * input, IplImage * template,
+ static void
+ gst_template_match_load_template (GstTemplateMatch * filter)
+ {
+-  if (filter->template) {
++  if (filter->templatename) {
+ 
+     if (filter->cvTemplateImage) {
+       cvReleaseImage (&filter->cvTemplateImage);
+     }
+     filter->cvTemplateImage =
+-        cvLoadImage (filter->template, CV_LOAD_IMAGE_COLOR);
++        cvLoadImage (filter->templatename, CV_LOAD_IMAGE_COLOR);
+ 
+     if (!filter->cvTemplateImage) {
+       GST_WARNING ("Couldn't load template image: %s. error: %s",
+-          filter->template, g_strerror (errno));
++          filter->templatename, g_strerror (errno));
+     }
+   }
+ }
+diff --git a/ext/opencv/gsttemplatematch.h b/ext/opencv/gsttemplatematch.h
+index 6b67000..4a716d8 100644
+--- a/ext/opencv/gsttemplatematch.h
++++ b/ext/opencv/gsttemplatematch.h
+@@ -79,7 +79,7 @@ struct _GstTemplateMatch
+   gint method;
+   gboolean display;
+ 
+-  gchar *template;
++  gchar *templatename;
+ 
+   IplImage *cvImage, *cvGray, *cvTemplateImage, *cvDistImage;
+ };
+-- 
+1.7.9.5
+
