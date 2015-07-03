@@ -1,3 +1,10 @@
+matchbox-wm:  Fix to support closing windows in multi-touch panels
+
+In many applications, the close is not recognized because the sub window class is NULL
+This calculates coordinates to track close touch actions in the area to respond.
+
+Upstream Status: Not applicable
+
 diff --git a/src/client_common.c b/src/client_common.c
 index 2b62024..30724c1 100644
 --- a/src/client_common.c
