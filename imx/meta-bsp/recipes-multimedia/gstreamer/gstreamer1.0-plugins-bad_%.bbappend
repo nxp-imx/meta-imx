@@ -36,6 +36,8 @@ SRC_URI_append += " file://camerabin-examples-memory-leak-in-camerabin-examples-
                     file://0009-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
                     file://0010-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
                     file://0012-glfilter-Lost-frame-rate-info-when-fixate-caps.patch \
+                    file://0014-opencv-rename-gstopencv.c-to-gstopencv.cpp.patch \
+                    file://0015-opencv-Add-video-stitching-support.patch \
 "
 
 # i.MX6 patches for GST1.4.5
@@ -49,8 +51,6 @@ GPU_PATCHES = " file://1.4.5-Use-viv-direct-texture-to-bind-buffer.patch \
                 file://0005-gl-wayland-Make-it-always-fullscreen-1024x768.patch \
                 file://0007-glfilter-Fix-video-is-tearing-after-enab.patch \
                 file://0008-gl-Fix-glimagesink-loop-playback-failed-in-wayland.patch \
-                file://0014-opencv-rename-gstopencv.c-to-gstopencv.cpp.patch \
-                file://0015-opencv-Add-video-stitching-support.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
