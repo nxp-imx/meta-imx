@@ -144,7 +144,7 @@ To enable chromium requires the following steps:
 
 In local.conf 
 - Add chromium into your install list:
-CORE_IMAGE_EXTRA_INSTALL += "chromium"
+CORE_IMAGE_EXTRA_INSTALL += "chromium libexif"
 
 - Add commercial into the white list:
 LICENSE_FLAGS_WHITELIST="commercial"
