@@ -1,29 +1,30 @@
-Freescale's 3.14.38-6UL7D_beta Yocto Project BSP
+Freescale's 3.14.38-6QP_gaa Yocto Project BSP
 ================================================
 
 This BSP is a Freescale release providing support for the following processors
 
-Ths release is a standalone release that is only tested on i.MX 6UL EVK and i.MX 7D SABRE SD
+Ths release is a standalone release that is only tested on i.MX 6QuadPlus SABRE Auto
 
-   * Freescale i.MX 6UL EVK (imx6ulevk)
-   * Freescale i.MX 7D SABRE SD (imx7dsabresd)
+   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
 
 The following boards were not tested in this release but this release contains updates
 that might affect these boards.
 
+   * Freescale i.MX 6UltraLite EVK (imx6ulevk)
+   * Freescale i.MX 7Dual SABRE Smart Device (imx7dsabresd)
+   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
+   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
    * Freescale i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
    * Freescale i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
    * Freescale i.MX 6Quad SABRE Smart Device (imx6qsabresd)
    * Freescale i.MX 6Quad SABRE Auto (imx6qsabreauto)
-   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
-   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
    * Freescale i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
    * Freescale i.MX 6DualLite SABRE Auto (imx6dlsabreauto)
    * Freescale i.MX 6SoloLite EVK (imx6slevk)
    * Freescale i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
    * Freescale i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
-   * Freescale i.MX6SOLO SABRE Smart Device (imx6solosabresd )
-   * Freescale i.MX6SOLO SABRE Auto (imx6solosabreauto )
+   * Freescale i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
+   * Freescale i.MX 6SOLO SABRE Auto (imx6solosabreauto )
 
  * i.MX Device Tree configurations for each machine
     Each machine files lists the associated device trees for that machine.
