@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5df87950af51ac2c5822094553ea1880"
 SRC_URI += "file://fix_open_max_preprocessor_error.patch \
            "
 
-SRC_URI[md5sum] = "38ecaefa238b04ec4a38f7128e87e239"
-SRC_URI[sha256sum] = "4e8548bae163129d2fc8f8e1f3b6071fe9d62821e3d5617507ccd2f589526166"
+SRC_URI[md5sum] = "397e405566651150490ff493e463f1ad"
+SRC_URI[sha256sum] = "f61120612728f2c5034671d0ca3e2273438c60aba93b3dda4a8aa40e6a257993"
 
 # These extensions are now integrated into the server, so declare the migration
 # path for in-place upgrades.
