@@ -1,8 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
-SRC_URI_append_mx6 = " file://0001-MGS-549-Integrate-gal2d-renderer-to-weston.patch \
-                       file://0001-MGS-720-Add-support-for-tiling-format-in-weston.patch \
-                       file://0001-MGS-799-GAL2D-compositor-Tiling-not-supported-Error-.patch \
+SRC_URI_append_mx6 = " file://0001-MGS-840-Add-i.MX6-support-for-weston.patch \
                        file://weston.sh "
 
 PACKAGECONFIG_append_mx6q = " cairo-glesv2"

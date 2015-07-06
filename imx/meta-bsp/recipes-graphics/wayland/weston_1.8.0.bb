@@ -3,16 +3,15 @@ DESCRIPTION = "Weston is the reference implementation of a Wayland compositor"
 HOMEPAGE = "http://wayland.freedesktop.org"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=275efac2559a224527bd4fd593d38466 \
-                    file://src/compositor.c;endline=23;md5=c8d8ba7a8075699516544389a3cad682"
+                    file://src/compositor.c;endline=23;md5=a9793f1edc8d1a4c344ca8ae252352fb"
 
 SRC_URI = "http://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
            file://weston.png \
            file://weston.desktop \
-           file://disable-wayland-scanner-pkg-check.patch \
            file://make-lcms-configurable.patch \
            ${@base_contains('DISTRO_FEATURES', 'x11','file://xwayland.patch', '', d)}"
-SRC_URI[md5sum] = "1fde8a44f48cd177438522850d6ba4be"
-SRC_URI[sha256sum] = "1c4511945f3f476c24af712e82a7b500ae91a99cbc0fe2e381da1449125166cd"
+SRC_URI[md5sum] = "24cb8a7ed0535b4fc3642643988dab36"
+SRC_URI[sha256sum] = "8963e69f328e815cec42c58046c4af721476c7541bb7d9edc71740fada5ad312"
 
 inherit autotools pkgconfig useradd
 

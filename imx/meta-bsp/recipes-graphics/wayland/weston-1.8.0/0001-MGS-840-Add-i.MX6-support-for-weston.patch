@@ -1,24 +1,29 @@
-From ae7c891dce5156f61e5e726e66430db923ef3dd7 Mon Sep 17 00:00:00 2001
-From: Yong Gan <b45748@freescale.com>
-Date: Wed, 27 Aug 2014 18:24:27 +0800
-Subject: [PATCH 1/2] Add Vivante EGL and GAL2D compositor support.
+From 0da66b0b96a7059392f0b62d3a13fcedf1023ba8 Mon Sep 17 00:00:00 2001
+From: Prabhu <prabhu.sundararaj@freescale.com>
+Date: Wed, 24 Jun 2015 17:29:03 -0500
+Subject: [PATCH] MGS-840 Add i.MX6 support for weston
 
-[DATE]08-27-2014
-Signed-off-by Yong Gan <B45748@freescale.com>
+Add fbdev backend support for Vivante FBdev EGL
+
+Date: June 24, 2015
+Signed-off-by: Prabhu <prabhu.sundararaj@freescale.com>
 ---
  Makefile.am            |   13 +
- src/compositor-fbdev.c |  139 +++++-
- src/gal2d-renderer.c   | 1231 ++++++++++++++++++++++++++++++++++++++++++++++++
+ src/compositor-fbdev.c |  139 ++++-
+ src/gal2d-renderer.c   | 1337 ++++++++++++++++++++++++++++++++++++++++++++++++
  src/gal2d-renderer.h   |   47 ++
- 4 files changed, 1414 insertions(+), 16 deletions(-)
+ 4 files changed, 1519 insertions(+), 17 deletions(-)
+ mode change 100644 => 100755 Makefile.am
  create mode 100644 src/gal2d-renderer.c
  create mode 100644 src/gal2d-renderer.h
 
 diff --git a/Makefile.am b/Makefile.am
-index b2d6893..bf8fe33 100644
+old mode 100644
+new mode 100755
+index 5819b19..e7e2d49
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -167,6 +167,19 @@ gl_renderer_la_SOURCES =			\
+@@ -207,6 +207,19 @@ gl_renderer_la_SOURCES =			\
  	src/vertex-clipping.h
  endif
  
@@ -39,18 +44,18 @@ index b2d6893..bf8fe33 100644
  module_LTLIBRARIES += x11-backend.la
  x11_backend_la_LDFLAGS = -module -avoid-version
 diff --git a/src/compositor-fbdev.c b/src/compositor-fbdev.c
-index e703e0e..3ae580b 100644
+index 3f3394f..9d18c45 100644
 --- a/src/compositor-fbdev.c
 +++ b/src/compositor-fbdev.c
-@@ -44,6 +44,7 @@
- #include "pixman-renderer.h"
- #include "udev-input.h"
+@@ -45,6 +45,7 @@
+ #include "libinput-seat.h"
  #include "gl-renderer.h"
+ #include "presentation_timing-server-protocol.h"
 +#include "gal2d-renderer.h"
  
  struct fbdev_compositor {
  	struct weston_compositor base;
-@@ -52,7 +53,9 @@ struct fbdev_compositor {
+@@ -53,7 +54,9 @@ struct fbdev_compositor {
  	struct udev *udev;
  	struct udev_input input;
  	int use_pixman;
@@ -60,7 +65,7 @@ index e703e0e..3ae580b 100644
  };
  
  struct fbdev_screeninfo {
-@@ -87,15 +90,20 @@ struct fbdev_output {
+@@ -88,15 +91,20 @@ struct fbdev_output {
  	pixman_image_t *shadow_surface;
  	void *shadow_buf;
  	uint8_t depth;
@@ -81,7 +86,7 @@ index e703e0e..3ae580b 100644
  
  static const char default_seat[] = "seat0";
  
-@@ -491,6 +499,10 @@ fbdev_frame_buffer_destroy(struct fbdev_output *output)
+@@ -471,6 +479,10 @@ fbdev_frame_buffer_destroy(struct fbdev_output *output)
  		           strerror(errno));
  
  	output->fb = NULL;
@@ -92,7 +97,7 @@ index e703e0e..3ae580b 100644
  }
  
  static void fbdev_output_destroy(struct weston_output *base);
-@@ -498,7 +510,7 @@ static void fbdev_output_disable(struct weston_output *base);
+@@ -478,7 +490,7 @@ static void fbdev_output_disable(struct weston_output *base);
  
  static int
  fbdev_output_create(struct fbdev_compositor *compositor,
@@ -100,27 +105,26 @@ index e703e0e..3ae580b 100644
 +                   int x, int y, const char *device)
  {
  	struct fbdev_output *output;
- 	pixman_transform_t transform;
-@@ -508,7 +520,8 @@ fbdev_output_create(struct fbdev_compositor *compositor,
- 	unsigned int bytes_per_pixel;
- 	struct wl_event_loop *loop;
+ 	struct weston_config_section *section;
+@@ -489,7 +501,7 @@ fbdev_output_create(struct fbdev_compositor *compositor,
+ 	uint32_t config_transform;
+ 	char *s;
  
 -	weston_log("Creating fbdev output.\n");
-+
 +	weston_log("Creating fbdev output. %s x=%d y=%d\n", device, x, y);
  
- 	output = calloc(1, sizeof *output);
- 	if (!output)
-@@ -555,7 +568,7 @@ fbdev_output_create(struct fbdev_compositor *compositor,
- 	output->base.model = output->fb_info.id;
+ 	output = zalloc(sizeof *output);
+ 	if (output == NULL)
+@@ -542,7 +554,7 @@ fbdev_output_create(struct fbdev_compositor *compositor,
+ 	free(s);
  
  	weston_output_init(&output->base, &compositor->base,
 -	                   0, 0, output->fb_info.width_mm,
 +	                   x, y, output->fb_info.width_mm,
  	                   output->fb_info.height_mm,
- 	                   WL_OUTPUT_TRANSFORM_NORMAL,
+ 	                   config_transform,
  			   1);
-@@ -625,12 +638,43 @@ fbdev_output_create(struct fbdev_compositor *compositor,
+@@ -565,12 +577,43 @@ fbdev_output_create(struct fbdev_compositor *compositor,
  	if (compositor->use_pixman) {
  		if (pixman_renderer_output_create(&output->base) < 0)
  			goto out_shadow_surface;
@@ -159,16 +163,16 @@ index e703e0e..3ae580b 100644
 +			return 0;
 +		}
  		if (gl_renderer->output_create(&output->base,
--					       (EGLNativeWindowType)NULL,
+-					       (EGLNativeWindowType)NULL, NULL,
 -					       gl_renderer->opaque_attribs,
--					       NULL) < 0) {
-+						(NativeWindowType)output->window,
+-					       NULL, 0) < 0) {
++						(NativeWindowType)output->window, NULL,
 +						gl_renderer->opaque_attribs,
-+						NULL) < 0) {
++						NULL, 0) < 0) {
  			weston_log("gl_renderer_output_create failed.\n");
  			goto out_shadow_surface;
  		}
-@@ -689,7 +733,11 @@ fbdev_output_destroy(struct weston_output *base)
+@@ -629,7 +672,11 @@ fbdev_output_destroy(struct weston_output *base)
  			free(output->shadow_buf);
  			output->shadow_buf = NULL;
  		}
@@ -181,7 +185,7 @@ index e703e0e..3ae580b 100644
  		gl_renderer->output_destroy(base);
  	}
  
-@@ -752,7 +800,7 @@ fbdev_output_reenable(struct fbdev_compositor *compositor,
+@@ -692,7 +739,7 @@ fbdev_output_reenable(struct fbdev_compositor *compositor,
  		 * are re-initialised. */
  		device = output->device;
  		fbdev_output_destroy(base);
@@ -190,7 +194,7 @@ index e703e0e..3ae580b 100644
  
  		return 0;
  	}
-@@ -905,7 +953,10 @@ fbdev_compositor_create(struct wl_display *display, int *argc, char *argv[],
+@@ -850,7 +897,10 @@ fbdev_compositor_create(struct wl_display *display, int *argc, char *argv[],
  	compositor->base.restore = fbdev_restore;
  
  	compositor->prev_state = WESTON_COMPOSITOR_ACTIVE;
@@ -202,7 +206,7 @@ index e703e0e..3ae580b 100644
  
  	for (key = KEY_F1; key < KEY_F9; key++)
  		weston_compositor_add_key_binding(&compositor->base, key,
-@@ -915,7 +966,50 @@ fbdev_compositor_create(struct wl_display *display, int *argc, char *argv[],
+@@ -860,7 +910,50 @@ fbdev_compositor_create(struct wl_display *display, int *argc, char *argv[],
  	if (compositor->use_pixman) {
  		if (pixman_renderer_init(&compositor->base) < 0)
  			goto out_launcher;
@@ -254,20 +258,21 @@ index e703e0e..3ae580b 100644
  		gl_renderer = weston_load_module("gl-renderer.so",
  						 "gl_renderer_interface");
  		if (!gl_renderer) {
-@@ -923,16 +1017,22 @@ fbdev_compositor_create(struct wl_display *display, int *argc, char *argv[],
+@@ -868,17 +961,22 @@ fbdev_compositor_create(struct wl_display *display, int *argc, char *argv[],
  			goto out_launcher;
  		}
  
--		if (gl_renderer->create(&compositor->base, EGL_DEFAULT_DISPLAY,
+-		if (gl_renderer->create(&compositor->base, NO_EGL_PLATFORM,
+-					EGL_DEFAULT_DISPLAY,
 +		compositor->display = fbGetDisplay(compositor->base.wl_display);
 +		if (compositor->display == NULL) {
 +			weston_log("fbGetDisplay failed.\n");
 +			goto out_launcher;
 +		}
 +
-+		if (gl_renderer->create(&compositor->base, compositor->display,
++		if (gl_renderer->create(&compositor->base, NO_EGL_PLATFORM, compositor->display,
  					gl_renderer->opaque_attribs,
- 					NULL) < 0) {
+ 					NULL, 0) < 0) {
  			weston_log("gl_renderer_create failed.\n");
  			goto out_launcher;
  		}
@@ -281,7 +286,7 @@ index e703e0e..3ae580b 100644
  
  	udev_input_init(&compositor->input, &compositor->base, compositor->udev, seat_id);
  
-@@ -965,13 +1065,20 @@ backend_init(struct wl_display *display, int *argc, char *argv[],
+@@ -911,13 +1009,20 @@ backend_init(struct wl_display *display, int *argc, char *argv[],
  	struct fbdev_parameters param = {
  		.tty = 0, /* default to current tty */
  		.device = "/dev/fb0", /* default frame buffer */
@@ -305,12 +310,12 @@ index e703e0e..3ae580b 100644
  	parse_options(fbdev_options, ARRAY_LENGTH(fbdev_options), argc, argv);
 diff --git a/src/gal2d-renderer.c b/src/gal2d-renderer.c
 new file mode 100644
-index 0000000..5142f72
+index 0000000..7ebbf98
 --- /dev/null
 +++ b/src/gal2d-renderer.c
-@@ -0,0 +1,1231 @@
+@@ -0,0 +1,1337 @@
 +/*
-+ * Copyright (c) 2014 Freescale Semiconductor, Inc.
++ * Copyright (c) 2015 Freescale Semiconductor, Inc.
 + * Copyright © 2012 Intel Corporation
 + *
 + * Permission to use, copy, modify, distribute, and sell this software and
@@ -339,6 +344,8 @@ index 0000000..5142f72
 +#include <ctype.h>
 +#include <float.h>
 +#include <assert.h>
++#include <pthread.h>
++
 +#include "compositor.h"
 +#include "gal2d-renderer.h"
 +#include "vertex-clipping.h"
@@ -347,7 +354,6 @@ index 0000000..5142f72
 +#include "HAL/gc_hal_eglplatform.h"
 +
 +#define galONERROR(x)  if(status < 0) printf("Error in function %s\n", __func__);
-+
 +
 +struct gal2d_output_state {
 +	
@@ -359,7 +365,15 @@ index 0000000..5142f72
 +	int activebuffer;
 +	gcoSURF offscreenSurface;
 +	gceSURF_FORMAT format;
-+	gcoSURF tempSurf;
++    pthread_mutex_t workerMutex;
++    pthread_t workerId;
++    gctUINT32 exitWorker;
++    gctSIGNAL signal;
++    gctSIGNAL busySignal;
++    gcsHAL_INTERFACE iface;
++    int directBlit;
++    gctINT width;
++    gctINT height;
 +};
 +
 +struct gal2d_surface_state {
@@ -646,22 +660,24 @@ index 0000000..5142f72
 +	gctUINT width = 0;
 +	gctUINT height = 0;
 +	gctINT stride = 0;
-+	gctUINT32 physical;
++	gctUINT32 physical[3];
 +	gctPOINTER va =0;
++    gceSURF_FORMAT format;
 +
 +	if(!surface)
 +		goto OnError;
 +    
 +
 +	gcmONERROR(gcoSURF_GetAlignedSize(surface, &width, &height, &stride));
-+    
-+	gcmONERROR(gcoSURF_Lock(surface, &physical, (gctPOINTER *)&va));
-+
-+	gcmONERROR(gco2D_SetTargetEx(gr->gcoEngine2d, physical, stride,
-+									gcvSURF_0_DEGREE, width, height));
-+                                   
++    gcmONERROR(gcoSURF_GetFormat(surface, gcvNULL, &format));
++	gcmONERROR(gcoSURF_Lock(surface, &physical[0], (gctPOINTER *)&va));    
++    gco2D_SetGenericTarget(gr->gcoEngine2d, 
++                        &physical[0], 1, 
++                        &stride, 1, 
++                        gcvLINEAR, format,
++                        gcvSURF_0_DEGREE, width, height);
++	
 +	gcmONERROR(gcoSURF_Unlock(surface, (gctPOINTER *)&va));
-+    
 +OnError:
 +    galONERROR(status);
 +	return status;
@@ -684,8 +700,7 @@ index 0000000..5142f72
 +	gcmONERROR(gco2D_SetSource(gr->gcoEngine2d, &dstRect));
 +	gcmONERROR(gco2D_SetClipping(gr->gcoEngine2d, &dstRect));
 +	gcmONERROR(gco2D_Clear(gr->gcoEngine2d, 1, &dstRect, 0xff0000ff, 0xCC, 0xCC, go->format));
-+
-+	gcmONERROR(gcoHAL_Commit(gr->gcoHal, gcvFALSE));
++    gcmONERROR(gcoHAL_Commit(gr->gcoHal, gcvTRUE));
 +
 +OnError:
 +	galONERROR(status);
@@ -776,7 +791,6 @@ index 0000000..5142f72
 +static void
 +gal2d_flip_surface(struct weston_output *output)
 +{
-+	struct gal2d_renderer *gr = get_renderer(output->compositor);
 +	struct gal2d_output_state *go = get_output_state(output);
 +
 +	if(go->nNumBuffers > 1)
@@ -784,75 +798,149 @@ index 0000000..5142f72
 +		gctUINT Offset;
 +		gctINT X;
 +		gctINT Y;
-+		gcmVERIFY_OK(gcoHAL_Commit(gr->gcoHal, gcvTRUE));
 +
 +		gcmVERIFY_OK(gcoOS_GetDisplayBackbuffer(go->display, gcvNULL,
 +									gcvNULL, gcvNULL, &Offset, &X, &Y));
 +
 +		gcmVERIFY_OK(gcoOS_SetDisplayVirtual(go->display, gcvNULL,
 +									Offset, X, Y));
-+
-+		go->activebuffer = (go->activebuffer+1) % go->nNumBuffers;
 +	}
++}
++
++static void *gal2d_output_worker(void *arg)
++{
++    struct weston_output *output = (struct weston_output *)arg;
++    struct gal2d_output_state *go = get_output_state(output);
++
++    while(1)
++    {
++        if(gcoOS_WaitSignal(gcvNULL, go->signal, gcvINFINITE) == gcvSTATUS_OK )
++        {
++            gal2d_flip_surface(output);
++            gcoOS_Signal(gcvNULL,go->busySignal, gcvTRUE);
++        }
++        pthread_mutex_lock(&go->workerMutex);
++        if(go->exitWorker == 1)
++        {
++            pthread_mutex_unlock(&go->workerMutex);
++            break;
++        }
++        pthread_mutex_unlock(&go->workerMutex);
++    }
++    return 0;
 +}
 +
 +static int
 +update_surface(struct weston_output *output)
 +{
 +    struct gal2d_renderer *gr = get_renderer(output->compositor);
-+	struct gal2d_output_state *go = get_output_state(output);
++    struct gal2d_output_state *go = get_output_state(output);
 +    gceSTATUS status = gcvSTATUS_OK;
 +
-+    if(go->offscreenSurface && go->nNumBuffers == 1)
-+	{
-+		make_current(gr, go->renderSurf[go->activebuffer]);
++    if(go->nNumBuffers == 1)
++    {
++        if(!go->directBlit && go->offscreenSurface)
++        {
++            make_current(gr, go->renderSurf[go->activebuffer]);
 +
-+		gctUINT srcWidth = 0;
-+		gctUINT srcHeight = 0;
-+		gctINT srcStride = 0;
-+		gceSURF_FORMAT srcFormat;;
-+		gcsRECT dstRect = {0};
-+		gcoSURF srcSurface = go->offscreenSurface;
-+		gctUINT32 physical;
-+		gctPOINTER va =0;
++            gctUINT srcWidth = 0;
++            gctUINT srcHeight = 0;
++            gceSURF_FORMAT srcFormat;;
++            gcsRECT dstRect = {0};
++            gcoSURF srcSurface = go->offscreenSurface;
++            gctUINT32 srcPhyAddr[3];
++            gctUINT32 srcStride[3];
 +
-+		gcmONERROR(gcoSURF_GetAlignedSize(srcSurface, &srcWidth, &srcHeight, &srcStride));
-+		gcmONERROR(gcoSURF_GetFormat(srcSurface, gcvNULL, &srcFormat));
-+		gcmONERROR(gcoSURF_Lock(srcSurface, &physical, (gctPOINTER *)&va));
-+		gcmONERROR(gco2D_SetColorSource(gr->gcoEngine2d, physical, srcStride, srcFormat,
-+							gcvFALSE, srcWidth, gcvFALSE, gcvSURF_OPAQUE, 0));
++            gctPOINTER va =0;
 +
-+		dstRect.left 	= 0;
-+		dstRect.top		= 0;
-+		dstRect.right 	= srcWidth;
-+		dstRect.bottom 	= srcHeight;
++            gcmONERROR(gcoSURF_GetAlignedSize(srcSurface, &srcWidth, &srcHeight, (gctINT *)&srcStride[0]));
++            gcmONERROR(gcoSURF_GetFormat(srcSurface, gcvNULL, &srcFormat));
 +
-+		gcmONERROR(gco2D_SetSource(gr->gcoEngine2d, &dstRect));
-+		gcmONERROR(gco2D_SetClipping(gr->gcoEngine2d, &dstRect));
-+		gcmONERROR(gco2D_Blit(gr->gcoEngine2d, 1, &dstRect, 0xCC, 0xCC, go->format));
-+		gcmONERROR(gcoSURF_Unlock(srcSurface, (gctPOINTER *)&va));
++            gcmONERROR(gcoSURF_Lock(srcSurface, srcPhyAddr, (gctPOINTER *)&va));
++            gcmONERROR(gco2D_SetCurrentSourceIndex(gr->gcoEngine2d, 0U));
++
++            gco2D_SetGenericSource(gr->gcoEngine2d, srcPhyAddr, 1,
++				        srcStride, 1,
++				        gcvLINEAR, srcFormat, gcvSURF_0_DEGREE,
++				        srcWidth, srcHeight);
++
++            dstRect.left 	= 0;
++            dstRect.top		= 0;
++            dstRect.right 	= srcWidth;
++            dstRect.bottom 	= srcHeight;
++
++            gcmONERROR(gco2D_SetSource(gr->gcoEngine2d, &dstRect));
++            gcmONERROR(gco2D_SetClipping(gr->gcoEngine2d, &dstRect));
++            gcmONERROR(gco2D_Blit(gr->gcoEngine2d, 1, &dstRect, 0xCC, 0xCC, go->format));
++            gcmONERROR(gcoSURF_Unlock(srcSurface, (gctPOINTER *)&va));
++        }
 +		gcmONERROR(gcoHAL_Commit(gr->gcoHal, gcvFALSE));
 +	}
-+
-+    gal2d_flip_surface(output);
-+    
++    else if(go->nNumBuffers > 1)
++    {
++        gcoHAL_ScheduleEvent(gr->gcoHal, &go->iface);
++        gcmVERIFY_OK(gcoHAL_Commit(gr->gcoHal, gcvFALSE));
++    }
 +OnError:
-+	galONERROR(status);
-+	return status;
++    galONERROR(status);
++    return status;
 + }
++
++static int
++is_view_visible(struct weston_view *view)
++{
++	/* Return false, if surface is guaranteed to be totally obscured. */
++	int ret;
++	pixman_region32_t unocc;
++
++	pixman_region32_init(&unocc);
++	pixman_region32_subtract(&unocc, &view->transform.boundingbox,
++				 &view->clip);
++	ret = pixman_region32_not_empty(&unocc);
++	pixman_region32_fini(&unocc);
++
++	return ret;
++}
 + 
 +static int
 +use_output(struct weston_output *output)
 +{
++    struct weston_compositor *compositor = output->compositor;
++	struct weston_view *view;
 +    struct gal2d_output_state *go = get_output_state(output);	
 +	struct gal2d_renderer *gr = get_renderer(output->compositor);    
 +    gceSTATUS status = gcvSTATUS_OK;
 +
 +    gcoSURF surface;
-+	surface = go->nNumBuffers > 1 ?
-+						go->renderSurf[go->activebuffer] :
-+						go->offscreenSurface;  /*go->renderSurf[0];*/
-+    make_current(gr, surface); 
++    int visibleViews=0;
++    int fullscreenViews=0;
++ 
++    surface = go->renderSurf[go->activebuffer];
++    if(go->nNumBuffers == 1)
++    {
++        wl_list_for_each_reverse(view, &compositor->view_list, link)
++            if (view->plane == &compositor->primary_plane && is_view_visible(view))
++            {
++                visibleViews++;
++                if(view->surface->width == go->width && view->surface->height == go->height)
++                {
++                    pixman_box32_t *bb_rects;
++                    int nbb=0;
++                    bb_rects = pixman_region32_rectangles(&view->transform.boundingbox, &nbb);
++                    if(nbb == 1)
++                        if(bb_rects[0].x1 == 0 && bb_rects[0].y1 ==0)
++                            fullscreenViews++;
++                }
++            }
++
++        go->directBlit = ((visibleViews == 1) || (fullscreenViews > 1));
++
++        if(!go->directBlit)
++        {
++             surface = go->offscreenSurface;
++        }
++    }
++    make_current(gr, surface);
 +    return status;
 +}
 +
@@ -898,6 +986,7 @@ index 0000000..5142f72
 +	gcoSURF dstsurface;
 +	int geoWidth = ev->surface->width;
 +	int geoheight = ev->surface->height;
++    gceTILING tiling;
 +
 +	bb_rects = pixman_region32_rectangles(&ev->transform.boundingbox, &nbb);
 +
@@ -935,9 +1024,20 @@ index 0000000..5142f72
 +	}
 +	else
 +	{
-+		gcmVERIFY_OK(gco2D_SetColorSourceEx(gr->gcoEngine2d, srcPhyAddr[0], srcStride[0], srcFormat,
-+						gcvFALSE, srcWidth, srcHeight, gcvFALSE, gcvSURF_OPAQUE, 0));
-+		gcmVERIFY_OK(gco2D_SetSource(gr->gcoEngine2d, &srcRect));
++        gcoSURF_GetTiling(srcSurface, &tiling);
++        if (gcoHAL_IsFeatureAvailable(gr->gcoHal, gcvFEATURE_2D_TILING) != gcvTRUE && (tiling > gcvLINEAR))
++        {
++            weston_log("Tiling not supported \n");
++            status = gcvSTATUS_NOT_SUPPORTED;
++            gcmONERROR(status);
++        }
++        gco2D_SetGenericSource(gr->gcoEngine2d, srcPhyAddr, 1,
++				        srcStride, 1,
++				        tiling, srcFormat, gcvSURF_0_DEGREE,
++				        srcWidth, srcHeight);
++         /* Setup mirror. */
++        gcmONERROR(gco2D_SetBitBlitMirror(gr->gcoEngine2d, gcvFALSE, gcvFALSE));
++        gcmONERROR(gco2D_SetROP(gr->gcoEngine2d, 0xCC, 0xCC));
 +	}
 +
 +	for (i = 0; i < nrects; i++)
@@ -1057,6 +1157,7 @@ index 0000000..5142f72
 +							0xCC, 0xCC, go->format));
 +				}
 +			}
++
 +			if(status < 0)
 +			{
 +				printf("cr l=%d r=%d t=%d b=%d w=%d h=%d\n",
@@ -1069,12 +1170,6 @@ index 0000000..5142f72
 +
 +				goto OnError;
 +			}
-+		}
-+		status = (gcoHAL_Commit(gr->gcoHal, gcvFALSE));
-+		if(status < 0)
-+		{
-+			printf("Error in gcoHAL_Commit %s\n", __func__);
-+			goto OnError;
 +		}
 +	}
 +
@@ -1096,7 +1191,7 @@ index 0000000..5142f72
 +
 +    pixman_region32_init(&repaint);
 +	pixman_region32_intersect(&repaint,
-+				  &ev->transform.masked_boundingbox, damage);
++				  &ev->transform.boundingbox, damage);
 +	pixman_region32_subtract(&repaint, &repaint, &ev->clip);
 +
 +	if (!pixman_region32_not_empty(&repaint))
@@ -1111,14 +1206,13 @@ index 0000000..5142f72
 +	pixman_region32_subtract(&surface_blend, &surface_blend, &ev->surface->opaque);
 +
 +    struct gal2d_renderer *gr = get_renderer(ec);
-+    
-+	if (pixman_region32_not_empty(&ev->surface->opaque)) {
++    gco2D_SetCurrentSourceIndex(gr->gcoEngine2d, 0U);
 +
++	if (pixman_region32_not_empty(&ev->surface->opaque)) {
 +		repaint_region(ev, output, go, &repaint, &ev->surface->opaque);
 +	}
 +
 +	if (pixman_region32_not_empty(&surface_blend)) {
-+    
 +        gco2D_EnableAlphaBlend(gr->gcoEngine2d,
 +            ev->alpha * 0xFF, ev->alpha * 0xFF,
 +            gcvSURF_PIXEL_ALPHA_STRAIGHT, gcvSURF_PIXEL_ALPHA_STRAIGHT,
@@ -1142,6 +1236,14 @@ index 0000000..5142f72
 +{
 +	struct weston_compositor *compositor = output->compositor;
 +	struct weston_view *view;
++	struct gal2d_output_state *go = get_output_state(output);
++
++    if(go->nNumBuffers > 1)
++    {
++        /*500ms is more than enough to process a frame */
++        gcoOS_WaitSignal(gcvNULL, go->busySignal, 500);
++    }
++    go->activebuffer = (go->activebuffer+1) % go->nNumBuffers;
 +
 +	wl_list_for_each_reverse(view, &compositor->view_list, link)
 +		if (view->plane == &compositor->primary_plane)
@@ -1180,37 +1282,17 @@ index 0000000..5142f72
 +gal2d_renderer_attach_egl(struct weston_surface *es, struct weston_buffer *buffer)
 +{
 +    gcsWL_VIV_BUFFER *vivBuffer = wl_resource_get_user_data(buffer->resource);
-+    gctUINT width = 0;
-+    gctUINT height = 0;
-+    gctINT stride = 0;
-+    gceSURF_FORMAT format;
 +    gcoSURF srcSurf = vivBuffer->surface;
-+    gctUINT32 physical;
-+    gctPOINTER va =0;
 +    gceSTATUS status = gcvSTATUS_OK;
 +    struct gal2d_surface_state *gs = get_surface_state(es);
-+        
-+    if(gs->gco_Surface == gcvNULL)
++
++    if(gs->gco_Surface != gcvNULL)
 +    {
-+        /** Construct a wrapper. */
-+        gcmONERROR(gcoSURF_ConstructWrapper(gcvNULL, &gs->gco_Surface));
++        gcmONERROR(gcoSURF_Destroy(gs->gco_Surface));
 +    }
 +
-+    gcmONERROR(gcoSURF_GetAlignedSize(srcSurf, &width, &height, &stride));
-+    gcmONERROR(gcoSURF_GetFormat(srcSurf, gcvNULL, &format));
-+    gcmONERROR(gcoSURF_Lock(srcSurf, &physical, (gctPOINTER *)&va));  
-+
-+    /* Set the buffer. */
-+    gcmONERROR(gcoSURF_SetBuffer(gs->gco_Surface,
-+                               gcvSURF_BITMAP_NO_VIDMEM,
-+                               format,
-+                               stride,
-+                               (gctPOINTER) va,
-+                               (gctUINT32) physical));
-+
-+    /* Set the window. */
-+    gcmONERROR(gcoSURF_SetWindow(gs->gco_Surface, 0, 0, width, height));
-+    
++    gs->gco_Surface = srcSurf;
++    gcoSURF_ReferenceSurface(srcSurf);
 +    buffer->width = vivBuffer->width;
 +    buffer->height = vivBuffer->height;
 +    
@@ -1340,8 +1422,8 @@ index 0000000..5142f72
 +    struct gal2d_surface_state *gs;
 +    struct gal2d_renderer *gr = get_renderer(surface->compositor);
 +    
-+	gs = calloc(1, sizeof *gs);
-+	if (!gs)
++	gs = zalloc(sizeof *gs);
++	if (gs == NULL)
 +		return -1;
 +
 +	/* A buffer is never attached to solid color surfaces, yet
@@ -1401,12 +1483,19 @@ index 0000000..5142f72
 +		if(go->offscreenSurface)
 +			gcmVERIFY_OK(gcoSURF_Destroy(go->offscreenSurface));
 +	}
++    else
++    {
++        gcoOS_Signal(gcvNULL,go->signal, gcvTRUE);
++        pthread_mutex_lock(&go->workerMutex);
++        go->exitWorker = 1;
++        pthread_mutex_unlock(&go->workerMutex);
++        pthread_join(go->workerId, NULL);
++    }
 +
 +	for(i=0; i < go->nNumBuffers; i++)
 +	{
 +		gcmVERIFY_OK(gcoSURF_Destroy(go->renderSurf[i]));
 +	}
-+
 +	free(go->renderSurf);
 +	go->renderSurf = gcvNULL;
 +
@@ -1464,14 +1553,14 @@ index 0000000..5142f72
 +
 + {
 +    struct gal2d_renderer *gr = get_renderer(output->compositor);
-+	struct gal2d_output_state *go = calloc(1, sizeof *go);
++	struct gal2d_output_state *go;
 +    halDISPLAY_INFO info;
 +    gctUINT32 backOffset = 0;
-+    gctINT width, height;
 +    gceSTATUS status = gcvSTATUS_OK;
 +	gctUINT32 i;
 +
-+    if (!go)
++    go = zalloc(sizeof *go);
++    if (go == NULL)
 +		return -1;
 +
 +    output->renderer_state = go;
@@ -1492,10 +1581,29 @@ index 0000000..5142f72
 +	go->activebuffer = 0;
 +
 +	go->renderSurf = malloc(sizeof(gcoSURF) * go->nNumBuffers);
-+	gcoOS_GetDisplayVirtual(go->display, &width, &height);
++	gcoOS_GetDisplayVirtual(go->display, &go->width, &go->height);
++    gcoOS_SetSwapInterval(go->display, 1);
++ 
++    /*Needed only for multi Buffer  */
++    if(go->nNumBuffers > 1)
++    {
++        gcmVERIFY_OK(gcoOS_CreateSignal(gcvNULL, gcvFALSE,
++                &go->signal));
++        gcmVERIFY_OK(gcoOS_CreateSignal(gcvNULL, gcvFALSE,
++                &go->busySignal));
++
++        go->iface.command            = gcvHAL_SIGNAL;
++        go->iface.u.Signal.signal    = gcmPTR_TO_UINT64(go->signal);
++        go->iface.u.Signal.auxSignal = 0;
++        go->iface.u.Signal.process = gcmPTR_TO_UINT64(gcoOS_GetCurrentProcessID());
++        go->iface.u.Signal.fromWhere = gcvKERNEL_PIXEL;
++
++        go->exitWorker = 0;
++        pthread_create(&go->workerId, NULL, gal2d_output_worker, output);
++        pthread_mutex_init(&go->workerMutex, gcvNULL);
++    }
 +	for(i=0; i < go->nNumBuffers; i++)
 +	{
-+		
 +        gcmONERROR(gcoSURF_Construct(gr->gcoHal, info.width, info.height, 1, 
 +            gcvSURF_BITMAP, go->format, gcvPOOL_USER, &go->renderSurf[i]));
 +        
@@ -1524,8 +1632,11 @@ index 0000000..5142f72
 +							  &go->offscreenSurface));
 +		make_current(gr, go->offscreenSurface);
 +		gal2d_clear(output);
-+		gal2d_flip_surface(output);
 +	}
++    else
++    {
++        gcoOS_Signal(gcvNULL,go->busySignal, gcvTRUE);
++    }
 +
 +	for (i = 0; i < 2; i++)
 +		pixman_region32_init(&go->buffer_damage[i]);
@@ -1542,12 +1653,12 @@ index 0000000..5142f72
 +};
 diff --git a/src/gal2d-renderer.h b/src/gal2d-renderer.h
 new file mode 100644
-index 0000000..1322a7d
+index 0000000..fefcfd1
 --- /dev/null
 +++ b/src/gal2d-renderer.h
 @@ -0,0 +1,47 @@
 +/*
-+ * Copyright (c) 2014 Freescale Semiconductor, Inc.
++ * Copyright (c) 2015 Freescale Semiconductor, Inc.
 + * Copyright © 2013 Vasily Khoruzhick <anarsoul@gmail.com>
 + *
 + * Permission to use, copy, modify, distribute, and sell this software and
@@ -1594,5 +1705,5 @@ index 0000000..1322a7d
 +
 +#endif
 -- 
-1.7.9.5
+2.3.6
 
