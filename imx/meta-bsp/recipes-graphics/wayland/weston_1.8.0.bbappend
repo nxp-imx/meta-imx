@@ -1,10 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
-SRC_URI_append_mx6   = " file://weston.sh "
-SRC_URI_append_mx6q  = " file://0001-MGS-840-Add-i.MX6-support-for-weston.patch"
-SRC_URI_append_mx6dl = " file://0001-MGS-840-Add-i.MX6-support-for-weston.patch"
-SRC_URI_append_mx6sx = " file://0001-MGS-840-Add-i.MX6-support-for-weston.patch"
-SRC_URI_append_mx6sl = " file://0001-MGS-840-Add-i.MX6-support-for-weston.patch"
+SRC_URI_append_mx6 = " file://0001-MGS-840-Add-i.MX6-support-for-weston.patch \
+                       file://weston.sh "
 
 PACKAGECONFIG_append_mx6q = " cairo-glesv2"
 PACKAGECONFIG_append_mx6dl = " cairo-glesv2"
