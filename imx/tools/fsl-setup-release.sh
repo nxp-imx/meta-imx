@@ -23,7 +23,8 @@ PROGNAME="setup-environment"
 exit_message ()
 {
    echo "To return to this build environment later please run:"
-   echo "    source setup-environment <build_dir>"
+   echo "    source setup-environment <build_dir>" 
+
 }
 
 usage()
