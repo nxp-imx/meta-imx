@@ -38,6 +38,7 @@ SRC_URI_append += " file://camerabin-examples-memory-leak-in-camerabin-examples-
                     file://0012-glfilter-Lost-frame-rate-info-when-fixate-caps.patch \
                     file://0014-opencv-rename-gstopencv.c-to-gstopencv.cpp.patch \
                     file://0015-opencv-Add-video-stitching-support.patch \
+                    file://0016-PATCH-gstaggregator-memory-leak-increasing-a-lot-aft.patch \
 "
 
 # i.MX6 patches for GST1.4.5
