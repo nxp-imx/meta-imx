@@ -27,14 +27,19 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 # Backend-specific packages
 # Direct FB packages
-DFB_IMAGE_INSTALL = ""
-DFB_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'directfb', \
-    'packagegroup-core-full-cmdline packagegroup-core-directfb libvivante-dfb-mx6', '', d)}"
-DFB_IMAGE_INSTALL_remove_mx6ul = "libvivante-dfb-mx6"
+DFB_INSTALL = "${@base_contains('DISTRO_FEATURES', 'directfb', \
+    'packagegroup-core-full-cmdline packagegroup-core-directfb', '', d)}"
+DFB_INSTALL_VIV = "${@base_contains('DISTRO_FEATURES', 'directfb', \
+    'libvivante-dfb-mx6', '', d)}"
+
+DFB_IMAGE_INSTALL       = "${DFB_INSTALL}"
+DFB_IMAGE_INSTALL_mx6q  = "${DFB_INSTALL} ${DFB_INSTALL_VIV}"
+DFB_IMAGE_INSTALL_mx6dl = "${DFB_INSTALL} ${DFB_INSTALL_VIV}"
+DFB_IMAGE_INSTALL_mx6sx = "${DFB_INSTALL} ${DFB_INSTALL_VIV}"
+DFB_IMAGE_INSTALL_mx6sl = "${DFB_INSTALL} ${DFB_INSTALL_VIV}"
 
 # Wayland packages
 WAYLAND_IMAGE_INSTALL = ""
-
 WAYLAND_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'wayland', \
                                       base_contains('DISTRO_FEATURES', 'x11',' \
                                           xterm weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', 'weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', d), '',d)}"
