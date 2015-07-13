@@ -11,6 +11,7 @@ PACKAGES += "${PN}-epdc"
 
 do_install_append() {
     # Create symbol link for epdc firmware
+    rm -rf ${D}${base_libdir}/firmware/imx/epdc_ED060XH2C1.fw
     ln -sf epdc_ED060XH2C1.fw.nonrestricted ${D}${base_libdir}/firmware/imx/epdc_ED060XH2C1.fw
 }
 
