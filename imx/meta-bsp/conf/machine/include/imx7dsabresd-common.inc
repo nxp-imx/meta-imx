@@ -15,4 +15,4 @@ MACHINE_FIRMWARE_append_mx7 = " linux-firmware-ath6k firmware-imx-epdc"
 
 MACHINE_FEATURES += " pci wifi bluetooth"
 
-MACHINE_SOCARCH_SUFFIX_mx7 = "-mx7d"
+MACHINE_SOCARCH_SUFFIX_mx7 = "-mx7"
