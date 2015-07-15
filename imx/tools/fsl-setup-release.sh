@@ -91,9 +91,9 @@ do
 
             elif [ "$BACKEND" = "x11" ]; then
                 if [ -z "$DISTRO" ]; then
-                    FSLDISTRO='fsl-imx-release'
+                    FSLDISTRO='fsl-imx-release-x11'
                     echo -e  "\n Using X11 backend with poky DIST_FEATURES"
-                elif [ ! "$DISTRO" = "fsl-imx-release" ]; then
+                elif [ ! "$DISTRO" = "fsl-imx-release-x11" ]; then
                     echo -e "\n DISTRO specified conflicts with -e. Please use just one or the other."
                     fsl_setup_error='true'
                 fi
@@ -113,7 +113,7 @@ done
 
 if [ -z "$DISTRO" ]; then
     if [ -z "$FSLDISTRO" ]; then
-        FSLDISTRO='fsl-imx-release'
+        FSLDISTRO='fsl-imx-release-x11'
     fi
 else
     FSLDISTRO="$DISTRO"

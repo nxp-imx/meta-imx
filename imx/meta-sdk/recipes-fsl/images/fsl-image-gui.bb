@@ -71,6 +71,16 @@ MM_IMAGE_INSTALL = ""
 MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
 MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
 
+XWAYLAND = "${@base_contains('DISTRO_FEATURES', 'wayland', \
+             base_contains('DISTRO_FEATURES', 'x11', \
+               'xf86-video-fbdev xf86-video-imxfb-vivante', '', d), '',d)}"
+XWAYLAND_EVDEV = "${@base_contains('DISTRO_FEATURES', 'wayland', \
+             base_contains('DISTRO_FEATURES', 'x11', \
+                'xf86-input-evdev', '', d), '',d)}"
+
+XSERVER_DRIVER_remove_mx6 = "${XWAYLAND}"
+XSERVER_remove = "${XWAYLAND_EVDEV}"
+
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
     ${X11_IMAGE_INSTALL_GRAPHICS} \
