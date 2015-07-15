@@ -1,6 +1,9 @@
 require conf/distro/poky.conf
 
-DISTRO = "fsl-imx-release"
+# This is the default distro configuration.
+
+# Add the ability to specify _imx machines (temporarily here)
+MACHINEOVERRIDES =. "imx:"
 
 # Comment out the 2 lines below to use bluez4.
 DISTRO_FEATURES_append_mx6 = " bluez5"
@@ -100,11 +103,9 @@ MACHINE_GSTREAMER_PLUGIN_mx6ul = ""
 MACHINE_GSTREAMER_PLUGIN_mx6qp = ""
 MACHINE_GSTREAMER_PLUGIN_mx7 = ""
 
-# Firmware: Additional firmware-imx of official BSP
-MACHINE_FIRMWARE_append_mx6dl = " firmware-imx-epdc"
-MACHINE_FIRMWARE_append_mx6sl = " firmware-imx-epdc"
-
 DEFAULTTUNE_mx6 ?= "cortexa9hf-neon"
+DEFAULTTUNE_mx6ul ?= "cortexa7hf-neon"
+DEFAULTTUNE_mx7 ?= "cortexa7hf-neon"
 
 SANITY_TESTED_DISTROS += " \
     Ubuntu-12.04 \n \
