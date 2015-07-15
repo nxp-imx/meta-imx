@@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "9ce3d2b4de66841b248025baee08c1b18d2c5fcb7612e39a58b0fc7991
 
 python __anonymous () {
 	if d.getVar('USE_GPU_VIV_MODULE', True) == '1':
-           d.appendVar('RDEPENDS_imx-gpu-viv', ' imx-gpu-viv-kernel ')
+           d.appendVar('RDEPENDS_imx-gpu-viv', ' kernel-module-imx-gpu-viv ')
 }
 
 PACKAGE_FP_TYPE = "hardfp"
