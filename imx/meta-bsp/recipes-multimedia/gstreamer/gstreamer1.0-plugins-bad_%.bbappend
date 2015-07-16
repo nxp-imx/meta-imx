@@ -64,3 +64,6 @@ SRC_URI_append_mx6sx = "${GPU_PATCHES}"
 
 # include fragment shaders
 FILES_${PN}-opengl += "/usr/share/*.fs"
+
+PACKAGE_ARCH_mx6 = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH_mx7 = "${MACHINE_SOCARCH}"
