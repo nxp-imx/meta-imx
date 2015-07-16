@@ -22,7 +22,7 @@ PACKAGECONFIG_append_mx6qp = "${@base_contains('DISTRO_FEATURES', 'directfb', ' 
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
-PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland"
+PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland"
 
 #i.MX specific
 SRC_URI_append = " file://egl-workaround-for-eglCreateContext-isn-t-thread-safe.patch \
