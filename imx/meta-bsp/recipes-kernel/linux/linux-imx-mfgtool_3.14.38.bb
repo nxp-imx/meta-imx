@@ -11,7 +11,7 @@ require recipes-kernel/linux/linux-mfgtool.inc
 
 DEPENDS += "lzop-native bc-native"
 
-SRCBRANCH = "imx_3.14.y"
+SRCBRANCH = "imx_3.14.38_6qp_ga"
 LOCALVERSION = "-6QP_ga"
 SRCREV = "15cbb089473a6273fce846417e8275e94769e683"
 KERNEL_SRC ?= "git://sw-stash.freescale.net/scm/imx/linux-2.6-imx.git;protocol=http"
