@@ -11,8 +11,8 @@ SRC_URI = "http://sourceforge.net/projects/openil/files/DevIL/1.7.8/DevIL-${PV}.
 		   file://il_manip_c.patch \
 		   file://il_manip_h.patch \
 		   file://M4Patch.patch "
-SRC_URI[md5sum] = "312853ef9c85ad7b2100f9cd068b2a5b"
-SRC_URI[sha256sum] = "4368d83b3016b5eafe8984f0d7f86ccee76b8993cf900d3a8cbd4901b52f64eb"
+SRC_URI[md5sum] = "0103b909e19ca9c6497a7ae696c16480"
+SRC_URI[sha256sum] = "818a4b8bbcb50878a8b1b9f71b4274d242ab46bf860c74676e98dec1d0248821"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 S = "${WORKDIR}/devil-${PV}"
