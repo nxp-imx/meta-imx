@@ -90,7 +90,7 @@ PREFERRED_VERSION_libfslvpuwrap = "1.0.58"
 PREFERRED_VERSION_gst1.0-fsl-plugin = "4.0.7"
 PREFERRED_VERSION_fsl-alsa-plugins = "1.0.25"
 PREFERRED_VERSION_gst-plugins-gl = "0.10.3"
-PREFERRED_VERSION_fslqtapplications = "1.0.4"
+PREFERRED_VERSION_fslqtapplications = "1.0.5"
 
 MACHINE_GSTREAMER_1_0_PLUGIN_mx6 = "gst1.0-fsl-plugin"
 MACHINE_GSTREAMER_1_0_PLUGIN_mx6q = "gst1.0-fsl-plugin"
