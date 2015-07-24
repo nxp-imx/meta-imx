@@ -141,7 +141,7 @@ cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-fsl-
 # copy new EULA into community so setup uses latest i.MX EULA
 cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-fsl-arm/EULA
 # copy unpack class with md5sum that matches new EULA
-cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.class sources/meta-fsl-arm/classes
+cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-fsl-arm/classes
 
 # Set up the basic yocto environment
 if [ -z "$DISTRO" ]; then
