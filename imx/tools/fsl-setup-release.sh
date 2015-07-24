@@ -139,7 +139,7 @@ fi
 cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-fsl-arm/conf/machine
 
 # copy new EULA into community so setup uses latest i.MX EULA
-cp sources/meta-fsl-bsp-release/EULA.txt sources/meta-fsl-arm/EULA
+cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-fsl-arm/EULA
 
 # Set up the basic yocto environment
 if [ -z "$DISTRO" ]; then
