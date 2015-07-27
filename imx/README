@@ -1,16 +1,15 @@
-Freescale's 3.14.38-6QP_ga Yocto Project BSP
+Freescale's 3.14.38-6UL_ga Yocto Project BSP
 ================================================
 
 This BSP is a Freescale release providing support for the following processors
 
-Ths release is a standalone release that is only tested on i.MX 6QuadPlus SABRE Auto
+Ths release is a standalone release that is only tested on Freescale i.MX 6UltraLite EVK (imx6ulevk)
 
-   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
+   *  Freescale i.MX 6UltraLite EVK (imx6ulevk)
 
 The following boards were not tested in this release but this release contains updates
 that might affect these boards.
 
-   * Freescale i.MX 6UltraLite EVK (imx6ulevk)
    * Freescale i.MX 7Dual SABRE Smart Device (imx7dsabresd)
    * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
    * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
@@ -49,7 +48,7 @@ Quick Start Guide
 See the Freescale Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX Freescale BSP repo
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.14.38-6QP_ga
+$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-3.14.38-6UL_ga
 
 Download the Yocto Freescale Layers:
 $: repo sync
