@@ -21,8 +21,6 @@ MACHINE_QT5_MULTIMEDIA_PLAYER_mx6dl = "${@base_contains("MACHINE_GSTREAMER_1_0_P
 QT5_IMAGE_INSTALL = ""
 QT5_IMAGE_INSTALL_common = " \
     packagegroup-qt5-toolchain-target \
-    qtdeclarative-tools \
-    qt3d-tools \
     packagegroup-qt5-demos \
     ${X11_IMAGE_INSTALL} \
     ${WLD_IMAGE_INSTALL} \
