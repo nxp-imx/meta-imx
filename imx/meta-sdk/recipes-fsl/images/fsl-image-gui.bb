@@ -58,14 +58,10 @@ X11_IMAGE_INSTALL_mx7 = "${@base_contains('DISTRO_FEATURES', 'x11', \
 
 # Add in Graphics
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
-   'packagegroup-fsl-gstreamer \
-    packagegroup-core-x11-sato-games \
+   'packagegroup-core-x11-sato-games \
     xorg-minimal-fonts \
     liberation-fonts', '', d)}"
 
-X11_IMAGE_INSTALL_GRAPHICS_remove_mx6qp = "packagegroup-fsl-gstreamer"
-X11_IMAGE_INSTALL_GRAPHICS_remove_mx6ul = "packagegroup-fsl-gstreamer"
-X11_IMAGE_INSTALL_GRAPHICS_remove_mx7d = "packagegroup-fsl-gstreamer"
 # set mm image install specific to SOC
 MM_IMAGE_INSTALL = ""
 MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
