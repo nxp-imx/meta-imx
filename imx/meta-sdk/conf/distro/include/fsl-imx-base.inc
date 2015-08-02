@@ -46,7 +46,7 @@ PREFERRED_VERSION_kernel-module-imx-gpu-viv = "5.0.11.p7.1"
 PREFERRED_VERSION_fsl-gpu-sdk_mx6 = "2.2"
 
 # Remove the GST patch on the community
-BBMASK .= "|meta-fsl-arm/recipes-multimedia/gstreamer/gstreamer1.0-plugins-base_%.bbappend"
+BBMASK = "meta-fsl-arm/recipes-multimedia/gstreamer/gstreamer1.0-plugins-base_%.bbappend"
 PREFERRED_VERSION_wayland_mx6 = "1.8.1"
 PREFERRED_VERSION_weston_mx6 = "1.8.0"
 PREFERRED_VERSION_wayland-native = "1.8.1"
