@@ -1,0 +1,56 @@
+From a639dc1c5bd4e5ff6f3c98995149f556e8528985 Mon Sep 17 00:00:00 2001
+From: Jian Li <jian.li@freescale.com>
+Date: Tue, 4 Aug 2015 17:11:17 +0800
+Subject: [PATCH] MMFMWK-6778  Support more format in direct viv
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Supports I420, YV12, NV12, NV21, YUY2, UYVY,
+         RGBA, BGRA, RGB16
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Jian Li <jian.li@freescale.com>
+---
+ gst-libs/gst/gl/gstglvivdirecttexture.c |   18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/gst-libs/gst/gl/gstglvivdirecttexture.c b/gst-libs/gst/gl/gstglvivdirecttexture.c
+index 9131101..c19b617 100644
+--- a/gst-libs/gst/gl/gstglvivdirecttexture.c
++++ b/gst-libs/gst/gl/gstglvivdirecttexture.c
+@@ -105,12 +105,30 @@ gst_gl_viv_direct_bind_gstbuffer (GstGLContext * context, guint tex_id, GstVideo
+     case GST_VIDEO_FORMAT_I420:
+       viv_fmt = GL_VIV_I420;
+       break;
++    case GST_VIDEO_FORMAT_YV12:
++      viv_fmt = GL_VIV_YV12;
++      break;
+     case GST_VIDEO_FORMAT_NV12:
+       viv_fmt = GL_VIV_NV12;
+       break;
++    case GST_VIDEO_FORMAT_NV21:
++      viv_fmt = GL_VIV_NV21;
++      break;
++    case GST_VIDEO_FORMAT_YUY2:
++      viv_fmt = GL_VIV_YUY2;
++      break;
++    case GST_VIDEO_FORMAT_UYVY:
++      viv_fmt = GL_VIV_UYVY;
++      break;
+     case GST_VIDEO_FORMAT_RGBA:
+       viv_fmt = GL_RGBA;
+       break;
++    case GST_VIDEO_FORMAT_BGRA:
++      viv_fmt = GL_BGRA_EXT;
++      break;
++    case GST_VIDEO_FORMAT_RGB16:
++      viv_fmt = GL_RGB565_OES;
++      break;
+     default:
+       GST_ERROR ("Not supported format %d for viv direct texture upload.", fmt);
+       viv_fmt = GL_NONE;
+-- 
+1.7.9.5
+
