@@ -6,7 +6,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI_append = " file://daemon.conf \
         file://default.pa \
         file://0001-Fix-pulseaudio-mutex-issue-when-do-pause-in-gstreame.patch \
-        file://0002-Revert-launch-Avoid-specifically-starting-PA-and-rel.patch \
+        file://0001-client-conf-Add-allow-autospawn-for-root.patch \
+        file://0002-pulseaudio-enable-allow-autospawn-for-root-as-defaul.patch \
         file://pulseaudio-remove-the-control-for-speaker-headphone-widge.patch \
 "
 

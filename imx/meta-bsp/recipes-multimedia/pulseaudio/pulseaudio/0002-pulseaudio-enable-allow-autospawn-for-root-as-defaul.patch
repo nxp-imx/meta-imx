@@ -1,0 +1,28 @@
+From 87f1ce6657778f6afe45ade01c751d6ce29f0833 Mon Sep 17 00:00:00 2001
+From: Yuqing Zhu <b54851@freescale.com>
+Date: Fri, 7 Aug 2015 17:17:42 +0800
+Subject: [PATCH] pulseaudio: enable allow-autospawn-for-root as default
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Yuqing Zhu <b54851@freescale.com>
+---
+ src/pulse/client.conf.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/pulse/client.conf.in b/src/pulse/client.conf.in
+index 69830ef..777636e 100644
+--- a/src/pulse/client.conf.in
++++ b/src/pulse/client.conf.in
+@@ -23,7 +23,7 @@
+ ; default-dbus-server =
+ 
+ ; autospawn = yes
+-; allow-autospawn-for-root = no
++ allow-autospawn-for-root = yes 
+ ; daemon-binary = @PA_BINARY@
+ ; extra-arguments = --log-target=syslog
+ 
+-- 
+1.9.1
+
