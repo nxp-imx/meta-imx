@@ -3,8 +3,8 @@
 require recipes-bsp/firmware-imx/firmware-imx.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=01ba08a2b77c3a0a9d0ab5d4d83fed64"
 
-SRC_URI[md5sum] = "470d5b8115cbcd745048d417450ed1b8"
-SRC_URI[sha256sum] = "5a285205a006de4e390e7bcab87190b1b7b7758474930808c843f4062d7f54b3"
+SRC_URI[md5sum] = "e466839e2cfbbcacb974b872c0b063e7"
+SRC_URI[sha256sum] = "8cc2df128c0e2d2f5224d73389fbe6e4d6fa9ede76f8c0a9adaf7ec0986d0f1f"
 
 # Install epdc firmware
 PACKAGES += "${PN}-epdc"
