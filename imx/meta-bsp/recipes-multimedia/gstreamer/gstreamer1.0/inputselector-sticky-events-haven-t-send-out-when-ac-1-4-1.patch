@@ -9,7 +9,7 @@ of inactive pad, send the event after the pad actived.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=740949
 
-Upstream Status: Backport
+Upstream-Status: Backport [1.5.1]
 
 Signed-off-by: Song Bing <b06498@freescale.com>
 ---
