@@ -17,7 +17,7 @@ character format successfully.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=741144
 
-Upstream Status: Pending
+Upstream-Status: Backport [1.5.1]
 
 Signed-off-by: Lyon Wang <b12696@freescale.com>
 
