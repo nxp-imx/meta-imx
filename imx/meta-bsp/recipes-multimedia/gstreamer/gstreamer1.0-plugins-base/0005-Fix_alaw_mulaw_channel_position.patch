@@ -10,7 +10,8 @@ Date:   Thu Jun 18 17:38:09 2015 +0800
     work well.
     
 Bugzilla URL:    https://bugzilla.gnome.org/show_bug.cgi?id=751144
-Upstream Status: Accepted and target milestone 1.5.2
+
+Upstream-Status: Backport [1.5.2]
 
 diff --git a/gst-libs/gst/audio/gstaudioringbuffer.c b/gst-libs/gst/audio/gstaudioringbuffer.c
 index d6f65f3..246c6f6 100644

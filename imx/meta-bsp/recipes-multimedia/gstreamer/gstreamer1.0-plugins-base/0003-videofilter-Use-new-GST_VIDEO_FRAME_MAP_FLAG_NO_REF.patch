@@ -3,7 +3,7 @@ From: =?UTF-8?q?Sebastian=20Dr=C3=B6ge?= <sebastian@centricular.com>
 Date: Fri, 12 Sep 2014 14:41:01 +0300
 Subject: [PATCH 3/3] videofilter: Use new GST_VIDEO_FRAME_MAP_FLAG_NO_REF
 
-Upstream Status: Accepted
+Upstream-Status: Backport [1.5.1]
 https://bugzilla.gnome.org/show_bug.cgi?id=736118
 ---
  gst-libs/gst/video/gstvideofilter.c |   23 ++++-------------------

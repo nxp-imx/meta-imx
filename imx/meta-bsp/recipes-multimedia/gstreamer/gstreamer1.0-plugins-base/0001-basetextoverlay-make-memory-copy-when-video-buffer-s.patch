@@ -15,7 +15,7 @@ Subject: [PATCH 1/4] basetextoverlay: make memory copy when video buffer's
    buffer if the buffer's refcount is 1.
 2.  new feature is no added if caps has no feature during caps negotiation
 
-Upstream Status: Inappropriate [i.MX specific]
+Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=747495]
 
 Signed-off-by: Mingke Wang <mingke.wang@freescale.com>
 

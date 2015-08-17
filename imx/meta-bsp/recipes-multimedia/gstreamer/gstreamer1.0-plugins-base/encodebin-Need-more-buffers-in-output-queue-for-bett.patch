@@ -6,9 +6,7 @@ Subject: [PATCH] encodebin: Need more buffers in output queue for better
 
 Need more buffers in output queue for better performance
 
-https://bugzilla.gnome.org/show_bug.cgi?id=744191
-
-Upstream Status: Inappropriate [i.MX specific]
+Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=744191]
 
 Signed-off-by: Song Bing <b06498@freescale.com>
 ---
