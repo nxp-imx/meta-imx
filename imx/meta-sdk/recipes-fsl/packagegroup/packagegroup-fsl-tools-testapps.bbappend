@@ -28,6 +28,8 @@ RDEPENDS_${PN} += " \
     coreutils \
 "
 
+RDEPENDS_${PN}_remove_mx6ul = "clutter-1.0-examples"
+
 SOC_TOOLS_TESTAPPS = ""
 SOC_TOOLS_TESTAPPS_mx6 += " \
     imx-kobs \
