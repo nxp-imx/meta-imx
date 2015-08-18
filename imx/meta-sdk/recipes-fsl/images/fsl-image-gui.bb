@@ -44,6 +44,7 @@ WAYLAND_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'wayland', \
                                       base_contains('DISTRO_FEATURES', 'x11',' \
                                           xterm weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', 'weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', d), '',d)}"
 WAYLAND_IMAGE_INSTALL_remove_mx6sl = "clutter-1.0-examples"
+WAYLAND_IMAGE_INSTALL_remove_mx6ul = "clutter-1.0-examples"
 
 # X11 packages
 X11_IMAGE_INSTALL = ""
