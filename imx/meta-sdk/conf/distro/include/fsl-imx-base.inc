@@ -40,6 +40,8 @@ PREFERRED_VERSION_xtrans = "1.3.5"
 FP_TAG = "${@base_contains("TUNE_FEATURES", "callconvention-hard", "-hfp", "-sfp", d)}"
 
 PREFERRED_VERSION_imx-gpu-viv = "5.0.11.p7.1${FP_TAG}"
+# to silence warnings
+PREFERRED_VERSION_imx-gpu-viv_mx6ul = ""
 PREFERRED_VERSION_xf86-video-imxfb-vivante = "5.0.11.p7.1"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "5.0.11.p7.1"
 
