@@ -16,8 +16,12 @@ USE_VIV_LIBGL = "yes"
 USE_VIV_LIBGL_mx6sl = "no"
 USE_VIV_LIBGL_mx6ul = "no"
 
-# FIXME: Dirty hack to allow use of Vivante GPU libGL binary
 do_install_append_mx6 () {
+    if ${@bb.utils.contains('PACKAGECONFIG', 'egl', 'true', 'false', d)}; then
+        sed -i -e 's/^#if defined(MESA_EGL_NO_X11_HEADERS)/#if ${@bb.utils.contains('PACKAGECONFIG', 'x11', '0', '1', d)}/' ${D}${includedir}/EGL/eglplatform.h
+        sed -i -e 's/^#ifdef MESA_EGL_NO_X11_HEADERS/#if ${@bb.utils.contains('PACKAGECONFIG', 'x11', '0', '1', d)}/' ${D}${includedir}/EGL/eglplatform.h
+    fi
+# FIXME: Dirty hack to allow use of Vivante GPU libGL binary
     if [ "${USE_VIV_LIBGL}" = "yes" ]; then
         rm -f ${D}${libdir}/libGL.*
         rm -rf ${D}${includedir}/GL/gl.h
