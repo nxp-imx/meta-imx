@@ -13,6 +13,7 @@ SOC_GPU_TOOLS_WAYLAND_mx6sl = " mesa-demos"
 
 # XWayland packages
 
+SOC_GPU_TOOLS_XWAYLAND = ""
 SOC_GPU_TOOLS_XWAYLAND_mx6q = " gtkperf glmark2 mesa-demos"
 SOC_GPU_TOOLS_XWAYLAND_mx6dl = " gtkperf glmark2 mesa-demos"
 SOC_GPU_TOOLS_XWAYLAND_mx6sx = " gtkperf glmark2 mesa-demos"
