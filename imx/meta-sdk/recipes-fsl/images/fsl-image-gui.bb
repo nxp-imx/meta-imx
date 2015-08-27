@@ -60,8 +60,8 @@ X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
 
 # set mm image install specific to SOC
 MM_IMAGE_INSTALL = ""
-MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
-MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
+#MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
+#MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
 
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
