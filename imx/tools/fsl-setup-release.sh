@@ -64,36 +64,36 @@ do
             BACKEND="$OPTARG"
             if [ "$BACKEND" = "fb" ]; then
                 if [ -z "$DISTRO" ]; then
-                    FSLDISTRO='fsl-imx-release-fb'
+                    FSLDISTRO='fsl-imx-fb'
                     echo -e "\n Using FB backend with FB DIST_FEATURES to override poky X11 DIST FEATURES"
-                elif [ ! "$DISTRO" = "fsl-imx-release-fb" ]; then
+                elif [ ! "$DISTRO" = "fsl-imx-fb" ]; then
                     echo -e "\n DISTRO specified conflicts with -e. Please use just one or the other."
                     fsl_setup_error='true'
                 fi
 
             elif [ "$BACKEND" = "dfb" ]; then
                 if [ -z "$DISTRO" ]; then
-                    FSLDISTRO='fsl-imx-release-dfb'
+                    FSLDISTRO='fsl-imx-dfb'
                     echo -e "\n Using DirectFB backend with DirectFB DIST_FEATURES to override poky X11 DIST FEATURES"
-                elif [ ! "$DISTRO" = "fsl-imx-release-dfb" ]; then
+                elif [ ! "$DISTRO" = "fsl-imx-dfb" ]; then
                     echo -e "\n DISTRO specified conflicts with -e. Please use just one or the other."
                     fsl_setup_error='true'
                 fi
 
             elif [ "$BACKEND" = "wayland" ]; then
                 if [ -z "$DISTRO" ]; then
-                    FSLDISTRO='fsl-imx-release-wayland'
+                    FSLDISTRO='fsl-imx-wayland'
                     echo -e "\n Using Wayland backend."
-                elif [ ! "$DISTRO" = "fsl-imx-release-wayland" ]; then
+                elif [ ! "$DISTRO" = "fsl-imx-wayland" ]; then
                     echo -e "\n DISTRO specified conflicts with -e. Please use just one or the other."
                     fsl_setup_error='true'
                 fi
 
             elif [ "$BACKEND" = "x11" ]; then
                 if [ -z "$DISTRO" ]; then
-                    FSLDISTRO='fsl-imx-release-x11'
+                    FSLDISTRO='fsl-imx-x11'
                     echo -e  "\n Using X11 backend with poky DIST_FEATURES"
-                elif [ ! "$DISTRO" = "fsl-imx-release-x11" ]; then
+                elif [ ! "$DISTRO" = "fsl-imx-x11" ]; then
                     echo -e "\n DISTRO specified conflicts with -e. Please use just one or the other."
                     fsl_setup_error='true'
                 fi
@@ -113,7 +113,7 @@ done
 
 if [ -z "$DISTRO" ]; then
     if [ -z "$FSLDISTRO" ]; then
-        FSLDISTRO='fsl-imx-release-x11'
+        FSLDISTRO='fsl-imx-x11'
     fi
 else
     FSLDISTRO="$DISTRO"
