@@ -1,0 +1,13 @@
+Index: weston-1.8.0/src/weston-launch.c
+===================================================================
+--- weston-1.8.0.orig/src/weston-launch.c	2015-08-26 11:20:04.722930777 -0500
++++ weston-1.8.0/src/weston-launch.c	2015-08-26 16:20:11.276927824 -0500
+@@ -700,6 +700,8 @@
+ 		case 'h':
+ 			help("weston-launch");
+ 			exit(EXIT_FAILURE);
++		default:
++			exit(EXIT_FAILURE);
+ 		}
+ 	}
+ 
