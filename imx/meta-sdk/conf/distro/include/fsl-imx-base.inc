@@ -1,4 +1,4 @@
-DISTRO = "fsl-imx-release"
+DISTRO = "fsl-imx"
 DISTRO_NAME = "Freescale i.MX Release Distro"
 DISTRO_VERSION = "1.0+snapshot-${DATE}"
 DISTRO_CODENAME = "master"
