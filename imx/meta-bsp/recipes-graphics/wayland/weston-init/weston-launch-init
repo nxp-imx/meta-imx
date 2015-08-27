@@ -36,7 +36,7 @@ case "$1" in
 	mkdir -p /tmp/.X11-unix
 	export XDG_CONFIG_HOME=/etc
 	rm /var/log/weston.log
-	openvt -v -- weston-launch -- --log=/var/log/weston.log
+	openvt -v -- sh -c "weston-launch > /var/log/weston.log 2>&1"
   ;;
 
   stop)
