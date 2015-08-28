@@ -26,6 +26,7 @@ RDEPENDS_${PN} += " \
     ntpdate \
     minicom \
     coreutils \
+    mmc-utils \
 "
 
 SOC_TOOLS_TESTAPPS = ""
