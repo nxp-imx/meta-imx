@@ -23,8 +23,8 @@ EXTRA_OECONF = "PLATFORM=${PLATFORM} \
                 CPPFLAGS="-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include" \
                 CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 
-SRC_URI[md5sum] = "81e2dbd702ea2cd7904fc54981ea3d19"
-SRC_URI[sha256sum] = "fc287a672e2f040c2697af618b2f6ed319202a6dfbb731cbfb7987b41de2d62b"
+SRC_URI[md5sum] = "05c5782966c83899e7ec7abfd0cb6f91"
+SRC_URI[sha256sum] = "74355a1fa5ae70ba80b0f8a31d16d3ea4f25de71984aa7c4c2d032e6c3fbb7b3"
 
 # Add codec list that the beep plugin run-time depended
 BEEP_RDEPENDS = "libfslcodec-aac libfslcodec-mp3 libfslcodec-oggvorbis"
