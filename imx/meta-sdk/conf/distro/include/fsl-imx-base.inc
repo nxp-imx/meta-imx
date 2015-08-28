@@ -1,115 +1,88 @@
-require conf/distro/poky.conf
+DISTRO = "fsl-imx-release"
+DISTRO_NAME = "Freescale i.MX Release Distro"
+DISTRO_VERSION = "1.0+snapshot-${DATE}"
+DISTRO_CODENAME = "fido"
+SDK_VENDOR = "-imx-sdk"
+SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
 
-# This is the default distro configuration.
+MAINTAINER = "Freescale Semiconductors <lauren.post@freescale.com>"
 
-# Add the ability to specify _imx machines (temporarily here)
-MACHINEOVERRIDES =. "imx:"
+TARGET_VENDOR = "-freescale"
 
+LOCALCONF_VERSION = "1"
+
+IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch"
+IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
+IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
+
+DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 # Comment out the 2 lines below to use bluez4.
 DISTRO_FEATURES_append_mx6 = " bluez5"
 DISTRO_FEATURES_append_mx7 = " bluez5"
 
-# Preferred Providers
-PREFERRED_PROVIDER_u-boot_mx5 = "u-boot-fslc"
-PREFERRED_PROVIDER_u-boot_mx6 = "u-boot-imx"
-PREFERRED_PROVIDER_u-boot_mx7 = "u-boot-imx"
+SDK_NAME = "${DISTRO}-${TCLIBC}-${SDK_ARCH}-${IMAGE_BASENAME}-${TUNE_PKGARCH}"
+SDKPATH = "/opt/${DISTRO}/${SDK_VERSION}"
 
-PREFERRED_PROVIDER_virtual/kernel_mx6 = "linux-imx"
-PREFERRED_PROVIDER_virtual/kernel_mx7 = "linux-imx"
+DISTRO_EXTRA_RDEPENDS += " ${IMX_DEFAULT_EXTRA_RDEPENDS}"
+DISTRO_EXTRA_RRECOMMENDS += " ${IMX_DEFAULT_EXTRA_RRECOMMENDS}"
 
-PREFERRED_PROVIDER_virtual/libgal-x11_mx6 = "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libopenvg_mx6q = "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libopenvg_mx6dl = "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libopenvg_mx6sx = "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libopenvg_mx6sl = "imx-gpu-viv"
+TCLIBCAPPEND = ""
 
-# Preferred Versions
+PREMIRRORS ??= "\
+bzr://.*/.*   http://downloads.yoctoproject.org/mirror/sources/ \n \
+cvs://.*/.*   http://downloads.yoctoproject.org/mirror/sources/ \n \
+git://.*/.*   http://downloads.yoctoproject.org/mirror/sources/ \n \
+gitsm://.*/.* http://downloads.yoctoproject.org/mirror/sources/ \n \
+hg://.*/.*    http://downloads.yoctoproject.org/mirror/sources/ \n \
+osc://.*/.*   http://downloads.yoctoproject.org/mirror/sources/ \n \
+p4://.*/.*    http://downloads.yoctoproject.org/mirror/sources/ \n \
+svn://.*/.*   http://downloads.yoctoproject.org/mirror/sources/ \n"
 
-# set these because of meta-fsl-arm override to new xorg version
-PREFERRED_VERSION_xserver-xorg_mx6q = "2:1.17.2"
-PREFERRED_VERSION_xserver-xorg_mx6dl = "2:1.17.2"
-PREFERRED_VERSION_xserver-xorg_mx6s = "2:1.17.2"
-PREFERRED_VERSION_xserver-xorg_mx6sl = "2:1.17.2"
-PREFERRED_VERSION_xserver-xorg_mx6sx = "2:1.17.2"
-PREFERRED_VERSION_xserver-xorg_mx6ul = "2:1.17.2"
-PREFERRED_VERSION_xserver-xorg_mx7 = "2:1.17.2"
+MIRRORS =+ "\
+ftp://.*/.*      http://downloads.yoctoproject.org/mirror/sources/ \n \
+http://.*/.*     http://downloads.yoctoproject.org/mirror/sources/ \n \
+https://.*/.*    http://downloads.yoctoproject.org/mirror/sources/ \n"
 
-PREFERRED_VERSION_xtrans = "1.3.5"
+# The CONNECTIVITY_CHECK_URI's are used to test whether we can succesfully
+# fetch from the network (and warn you if not). To disable the test set
+# the variable to be empty.
+# Git example url: git://git.yoctoproject.org/yocto-firewall-test;protocol=git;rev=master
 
-# preferred versions of recipes-graphics
-FP_TAG = "${@base_contains("TUNE_FEATURES", "callconvention-hard", "-hfp", "-sfp", d)}"
+CONNECTIVITY_CHECK_URIS ?= " \
+             https://eula-downloads.yoctoproject.org/index.php \
+             http://bugzilla.yoctoproject.org/report.cgi"
 
-PREFERRED_VERSION_imx-gpu-viv = "5.0.11.p7.1${FP_TAG}"
-PREFERRED_VERSION_xf86-video-imxfb-vivante = "5.0.11.p7.1"
-PREFERRED_VERSION_kernel-module-imx-gpu-viv = "5.0.11.p7.1"
+SANITY_TESTED_DISTROS ?= " \
+            poky-1.7 \n \
+            poky-1.8 \n \
+            Ubuntu-12.04 \n \
+            Ubuntu-14.04 \n \
+            Ubuntu-14.10 \n \
+            Ubuntu-15.04 \n \
+            Fedora-21 \n \
+            CentOS-6.* \n \
+            CentOS-7.* \n \
+            Debian-7.* \n \
+            Debian-8.* \n \
+            openSUSE-project-13.2 \n \
+            "
 
-PREFERRED_VERSION_fsl-gpu-sdk_mx6 = "2.2"
+# Default hash policy for distro
+BB_SIGNATURE_HANDLER ?= 'OEBasicHash'
+#
+# OELAYOUT_ABI allows us to notify users when the format of TMPDIR changes in
+# an incompatible way. Such changes should usually be detailed in the commit
+# that breaks the format and have been previously discussed on the mailing list
+# with general agreement from the core team.
+#
+OELAYOUT_ABI = "10"
 
-# Use Wayland new version
-BBMASK = "meta-fsl-arm/recipes-graphics/wayland/weston_%.bbappend"
-BBMASK .= "|meta-fsl-arm/recipes-graphics/mesa/mesa_%.bbappend"
+# add poky sanity bbclass
+INHERIT += "poky-sanity"
 
-# Remove the GST patch on the community
-BBMASK .= "|meta-fsl-arm/recipes-multimedia/gstreamer/gstreamer1.0-plugins-base_%.bbappend"
-PREFERRED_VERSION_wayland_mx6 = "1.8.1"
-PREFERRED_VERSION_weston_mx6 = "1.8.0"
-PREFERRED_VERSION_wayland-native = "1.8.1"
-PREFERRED_VERSION_libinput_mx6 = "0.11.0"
-
-# Preferred versions of recipes-bsp
-PREFERRED_VERSION_imx-vpu_mx5 = "11.09.02"
-PREFERRED_VERSION_imx-vpu_mx6 = "5.4.31"
-PREFERRED_VERSION_imx-lib_mx5 = "11.09.02"
-PREFERRED_VERSION_imx-lib_mx6 = "5.1"
-PREFERRED_VERSION_imx-lib_mx7 = "5.1"
-PREFERRED_VERSION_imx-test = "5.2"
-PREFERRED_VERSION_imx-uuc = "0.5"
-PREFERRED_VERSION_imx-kobs = "5.1"
-PREFERRED_VERSION_firmware-imx = "5.2"
-PREFERRED_VERSION_u-boot-imx_mx6 = "2015.04"
-PREFERRED_VERSION_u-boot-imx_mx7 = "2015.04"
-PREFERRED_VERSION_u-boot-imx-mfgtool_mx6 = "2015.04"
-PREFERRED_VERSION_u-boot-imx-mfgtool_mx7 = "2015.04"
-
-# preferred versions of recipes-kernel
-PREFERRED_VERSION_linux-libc-headers = "3.14"
-PREFERRED_VERSION_linux-imx_mx6 = "3.14.38"
-PREFERRED_VERSION_linux-imx_mx7 = "3.14.38"
-PREFERRED_VERSION_mfgtool-linux-imx_mx6 = "3.14.38"
-PREFERRED_VERSION_mfgtool-linux-imx_mx7 = "3.14.38"
-PREFERRED_VERSION_linux-mfgtool_mx6 = "3.14.38"
-PREFERRED_VERSION_linux-imx-mfg_mx6 = "3.14.38"
-PREFERRED_VERSION_linux-mfgtool_mx7 = "3.14.38"
-PREFERRED_VERSION_linux-imx-mfg_mx7 = "3.14.38"
-
-# preferred versions of recipes-multimedia
-PREFERRED_VERSION_gst-fsl-plugin = "4.0.3"
-PREFERRED_VERSION_libfslcodec = "4.0.8"
-PREFERRED_VERSION_libfslparser = "4.0.8"
-PREFERRED_VERSION_libfslvpuwrap = "1.0.61"
-PREFERRED_VERSION_gst1.0-fsl-plugin = "4.0.8"
-PREFERRED_VERSION_fsl-alsa-plugins = "1.0.25"
-PREFERRED_VERSION_gst-plugins-gl = "0.10.3"
-PREFERRED_VERSION_fslqtapplications = "1.0.6"
-
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6 = "gst1.0-fsl-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6q = "gst1.0-fsl-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6dl = "gst1.0-fsl-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6sl = "gst1.0-fsl-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6sx = "gst1.0-fsl-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx7 = "gst1.0-fsl-plugin"
-
-MACHINE_GSTREAMER_PLUGIN_mx6ul = ""
-MACHINE_GSTREAMER_PLUGIN_mx6qp = ""
-MACHINE_GSTREAMER_PLUGIN_mx7 = ""
-
-DEFAULTTUNE_mx6 ?= "cortexa9hf-neon"
-DEFAULTTUNE_mx6ul ?= "cortexa7hf-neon"
-DEFAULTTUNE_mx7 ?= "cortexa7hf-neon"
-
-SANITY_TESTED_DISTROS += " \
-    Ubuntu-12.04 \n \
-"
-
-# Add the ability to specify _imx machines
-MACHINEOVERRIDES =. "imx:"
+# QA check settings - a little stricter than the OE-Core defaults
+WARN_TO_ERROR_QA = "already-stripped compile-host-path install-host-path \
+                    installed-vs-shipped ldflags pn-overrides rpaths staticdev \
+                    useless-rpaths"
+WARN_QA_remove = "${WARN_TO_ERROR_QA}"
+ERROR_QA_append = " ${WARN_TO_ERROR_QA}"
