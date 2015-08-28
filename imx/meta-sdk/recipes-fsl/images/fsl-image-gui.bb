@@ -51,6 +51,7 @@ X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'packagegroup-fsl-pulseaudio', '', d)}"
 X11_IMAGE_INSTALL_mx7 = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'packagegroup-fsl-pulseaudio', '', d)}"
+X11_IMAGE_INSTALL_append_mx6sl = " libopenvg-mx6"
 
 # Add in Graphics
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
