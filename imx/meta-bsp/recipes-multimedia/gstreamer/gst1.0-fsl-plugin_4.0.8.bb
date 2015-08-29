@@ -40,7 +40,7 @@ EXTRA_OECONF = "PLATFORM=${PLATFORM} \
                 CPPFLAGS="-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include" \
                 CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
 
-PACKAGES =+ "${PN}-gplay ${PN}-libgplaycore ${PN}-libgstfsl ${PN}-grecorder ${PN}-librecorder-engine ${PN}-libplay-engine"
+PACKAGES =+ "${PN}-gplay ${PN}-libgplaycore ${PN}-libgstfsl ${PN}-grecorder ${PN}-librecorder-engine ${PN}-libplayengine"
 
 # Add codec list that the beep plugin run-time depended
 BEEP_RDEPENDS = "libfslcodec-aac libfslcodec-mp3 libfslcodec-oggvorbis"
@@ -73,6 +73,6 @@ FILES_${PN}-libgplaycore = "${libdir}/libgplaycore-1.0${SOLIBS}"
 FILES_${PN}-libgstfsl = "${libdir}/libgstfsl-1.0${SOLIBS}"
 FILES_${PN}-grecorder = "${bindir}/grecorder-1.0"
 FILES_${PN}-librecorder-engine = "${libdir}/librecorder_engine-1.0${SOLIBS}"
-FILES_${PN}-libplay-engine = "${libdir}/libplay_engine-1.0${SOLIBS}"
+FILES_${PN}-libplayengine = "${libdir}/libplayengine-1.0${SOLIBS}"
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
