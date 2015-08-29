@@ -7,13 +7,12 @@ PR = "r0"
 DEPENDS = "libpng jpeg"
 RDEPENDS_${PN} += "libpng "
 
-SRC_URI = "${FSL_MIRROR}/DevIL-${PV}.tar.gz \
+SRC_URI = "http://sourceforge.net/projects/openil/files/DevIL/1.7.8/DevIL-${PV}.zip \
 		   file://il_manip_c.patch \
 		   file://il_manip_h.patch \
 		   file://M4Patch.patch "
-
-SRC_URI[md5sum] = "7918f215524589435e5ec2e8736d5e1d"
-SRC_URI[sha256sum] = "682ffa3fc894686156337b8ce473c954bf3f4fb0f3ecac159c73db632d28a8fd"
+SRC_URI[md5sum] = "312853ef9c85ad7b2100f9cd068b2a5b"
+SRC_URI[sha256sum] = "4368d83b3016b5eafe8984f0d7f86ccee76b8993cf900d3a8cbd4901b52f64eb"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 S = "${WORKDIR}/devil-${PV}"
