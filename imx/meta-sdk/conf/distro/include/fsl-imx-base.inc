@@ -1,8 +1,8 @@
-DISTRO = "fsl-imx-release"
+DISTRO = "fsl-imx"
 DISTRO_NAME = "Freescale i.MX Release Distro"
 DISTRO_VERSION = "1.0+snapshot-${DATE}"
 DISTRO_CODENAME = "fido"
-SDK_VENDOR = "-imx-sdk"
+SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
 
 MAINTAINER = "Freescale Semiconductors <lauren.post@freescale.com>"
