@@ -1,0 +1,18 @@
+#@TYPE: Machine
+#@NAME: Freescale i.MX6UL Evaluation Kit
+#@SOC: i.MX6UL
+#@DESCRIPTION: Machine configuration for Freescale i.MX6UL EVK 9x9
+#@MAINTAINER: Lauren Post <lauren.post@freescale.com>
+
+include conf/machine/include/imx-base.inc
+include conf/machine/include/tune-cortexa7.inc
+include conf/machine/include/imx6ul-common.inc
+
+SOC_FAMILY = "mx6:mx6ul"
+
+KERNEL_DEVICETREE = "imx6ul-9x9-evk.dtb imx6ul-9x9-evk-ldo.dtb"
+
+UBOOT_CONFIG ??= "sd"
+UBOOT_CONFIG[sd] = "mx6ul_9x94_evk_config,sdcard"
+UBOOT_CONFIG[qspi1] = "mx6ul_9x9_evk_qspi1_config"
+UBOOT_CONFIG[mfgtool] = "mx6ul_9x9_evk_config"
