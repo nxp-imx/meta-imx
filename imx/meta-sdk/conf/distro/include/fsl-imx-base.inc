@@ -86,13 +86,3 @@ WARN_TO_ERROR_QA = "already-stripped compile-host-path install-host-path \
                     useless-rpaths"
 WARN_QA_remove = "${WARN_TO_ERROR_QA}"
 ERROR_QA_append = " ${WARN_TO_ERROR_QA}"
-
-# Use Wayland new version
-BBMASK = "meta-fsl-arm/recipes-graphics/wayland/weston_%.bbappend"
-BBMASK .= "|meta-fsl-arm/recipes-graphics/imx-gpu-viv/imx-gpu-viv_5.0.11.p4.5-hfp.bb"
-BBMASK .= "|meta-fsl-arm/recipes-graphics/imx-gpu-viv/imx-gpu-viv_5.0.11.p4.5-sfp.bb"
-BBMASK .= "|meta-fsl-arm/recipes-graphics/packagegroups/packagegroup-core-directfb.bbappend"
-BBMASK .= "|meta-fsl-arm/recipes-graphics/mesa/mesa_%.bbappend"
-
-# Remove the GST patch on the community
-BBMASK .= "|meta-fsl-arm/recipes-multimedia/gstreamer/gstreamer1.0-plugins-base_%.bbappend"
