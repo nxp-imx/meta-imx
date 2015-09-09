@@ -21,7 +21,6 @@ RDEPENDS_${PN}-core = "\
 RDEPENDS_${PN}-extended = " \
     bonnie++ \
     dbench \
-    fio \
     nbench-byte \
     tiobench \
     ${FSL_NEON} \
