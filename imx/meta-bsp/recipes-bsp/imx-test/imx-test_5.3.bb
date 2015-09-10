@@ -12,4 +12,4 @@ SRC_URI[sha256sum] = "7b25c8e94a38d9f45643ee9fa7c75e071747451e7cf24ca71d66d43bdb
 PLATFORM_mx7 = "IMX7D"
 PLATFORM_mx6ul = "IMX6UL"
 
-COMPATIBLE_MACHINE = "(mxs|mx5|mx6|mx7)"
+COMPATIBLE_MACHINE = "(mxs|mx5|mx6|mx7|imx6ul)"

@@ -8,6 +8,10 @@ SRC_URI_append_mx6 = " \
 	file://asound.state.wm89586062 \
 "
 
+SRC_URI_append_mx6ul = " \
+        file://asound.state.wm89586062 \
+"
+
 do_install_append_mx6() {
     install -m 0644 ${WORKDIR}/asound.state.wm89586062 ${D}${localstatedir}/lib/alsa/asound.state
 }
