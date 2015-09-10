@@ -20,4 +20,4 @@ do_install_append() {
 
 FILES_${PN}-epdc += "${base_libdir}/firmware/imx/epdc/*"
 
-COMPATIBLE_MACHINE = "(mx5|mx6|mx7)"
+COMPATIBLE_MACHINE = "(mx5|mx6|mx7|mx6ul)"
