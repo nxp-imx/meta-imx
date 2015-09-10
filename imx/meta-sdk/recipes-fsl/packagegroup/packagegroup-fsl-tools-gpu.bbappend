@@ -9,3 +9,5 @@ XWAYLAND = "${@base_contains('DISTRO_FEATURES', 'wayland', \
                     base_contains('DISTRO_FEATURES', 'x11','xserver-xorg-extension-viv-autohdmi', '', d), '',d)}"
 
 SOC_TOOLS_GPU_remove_mx6 = "${XWAYLAND}"
+
+RDEPENDS_${PN}_remove_mx6 = "fsl-gpu-sdk"
