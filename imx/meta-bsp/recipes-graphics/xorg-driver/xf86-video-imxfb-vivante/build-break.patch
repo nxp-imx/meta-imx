@@ -1,0 +1,14 @@
+diff --git a/EXA/src/vivante_exa/vivante_pixmap.c b/EXA/src/vivante_exa/vivante_pixmap.c
+index 9d5ea31..e0fd9c2 100755
+--- a/EXA/src/vivante_exa/vivante_pixmap.c
++++ b/EXA/src/vivante_exa/vivante_pixmap.c
+@@ -257,7 +257,8 @@ VivModifyPixmapHeader(PixmapPtr pPixmap, int width, int height,
+ 
+ // (PrepareAccess, FinishAccess) can embed:
+ // (PrepareAccess1, PrepareAccess2, ..., FinishAccess2, FinishAccess1)
+-
++gctBOOL VIV2DGPUSurfaceAllocEx(VIVGPUPtr gpuctx, gctUINT alignedWidth, gctUINT alignedHeight,
++    gctUINT bytesPerPixel, GenericSurfacePtr * surface, enum PixmapCachePolicy cachePolicy);
+ /**
+  * PrepareAccess() is called before CPU access to an offscreen pixmap.
+  *
