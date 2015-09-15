@@ -9,7 +9,7 @@ SRC_URI_append_mx6 = " \
 "
 
 SRC_URI_append_mx6ul = " \
-        file://asound.state.wm89586062 \
+        file://asound.state \
 "
 
 do_install_append_mx6() {
