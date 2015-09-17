@@ -136,12 +136,25 @@ if [ -z "$MACHINE" ]; then
 fi
 
 # New machine definitions may need to be added to the expected location
-cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-fsl-arm/conf/machine
+if [ -d ./sources/meta-freescale ]; then
+   cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-freescale/conf/machine
+else
+   cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-fsl-arm/conf/machine
+fi
 
 # copy new EULA into community so setup uses latest i.MX EULA
-cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-fsl-arm/EULA
+if [ -d ./sources/meta-freescale ]; then
+   cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-freescale/EULA
+else
+   cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-fsl-arm/EULA
+fi
+
 # copy unpack class with md5sum that matches new EULA
-cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-fsl-arm/classes
+if [ -d ./sources/meta-freescale ]; then
+   cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-freescale/classes
+else
+   cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-fsl-arm/classes
+fi
 
 # Set up the basic yocto environment
 if [ -z "$DISTRO" ]; then
@@ -188,6 +201,15 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-ruby \"" >> $BUIL
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-filesystems \"" >> $BUILD_DIR/conf/bblayers.conf
 
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-qt5 \"" >> $BUILD_DIR/conf/bblayers.conf
+
+echo BSPDIR=$BSPDIR
+echo BUILD_DIR=$BUILD_DIR
+if [ -d ../sources/meta-freescale ]; then
+    echo meta-freescale directory found
+    # Change settings according to environment
+    sed -e "s,meta-fsl-arm\s,meta-freescale ,g" \
+        -i conf/bblayers.conf
+fi
 
 cd  $BUILD_DIR
 clean_up
