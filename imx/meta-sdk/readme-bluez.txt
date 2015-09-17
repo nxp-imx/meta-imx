@@ -1,7 +1,7 @@
 This readme documents how to interface to the blueooth device on both bluez4 and bluez5.
 
 Bluez4 is the default for 3.10.53-1.1.0_GA release.
-Bluez5 is the default for 3.14.38 release.
+Bluez5 is the default for 3.14 releases.
 
 Bluez4 and bluez5 have different tool sets which will be described next.
 
