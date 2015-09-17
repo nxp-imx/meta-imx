@@ -34,4 +34,4 @@ do_deploy () {
     install  arch/arm/boot/zImage ${DEPLOY_DIR_IMAGE}/zImage_mfgtool
 }
 
-COMPATIBLE_MACHINE = "(mx6|mx7)"
+COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
