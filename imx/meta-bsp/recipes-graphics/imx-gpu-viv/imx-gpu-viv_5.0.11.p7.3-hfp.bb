@@ -7,8 +7,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 S="${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "c7952f0960a3543f17fc6390614c76ef"
-SRC_URI[sha256sum] = "0a023411098181623fac50a1872be8ac27b852850f33ce33b5ac7362a171ff32"
+SRC_URI[md5sum] = "b0d7bc118c13f19ce364e4dbc1557910"
+SRC_URI[sha256sum] = "0d3f9406f7c75da472fad5678e65d1d273f4cfba4650035df170d1086e554ec7"
 
 python __anonymous () {
 	if d.getVar('USE_GPU_VIV_MODULE', True) == '1':
