@@ -57,6 +57,7 @@ GPU_PATCHES = " file://1.4.5-Use-viv-direct-texture-to-bind-buffer.patch \
                 file://0007-glfilter-Fix-video-is-tearing-after-enab.patch \
                 file://0008-gl-Fix-glimagesink-loop-playback-failed-in-wayland.patch \
                 file://0017-MMFMWK-6778-Support-more-format-in-direct-viv.patch \
+                file://0018-Add-one-deinterlacing-fragment-shader-file.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
