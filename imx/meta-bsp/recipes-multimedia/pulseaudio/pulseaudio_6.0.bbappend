@@ -3,15 +3,15 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append = " file://daemon.conf \
-        file://default.pa \
-        file://0001-Fix-pulseaudio-mutex-issue-when-do-pause-in-gstreame.patch \
-        file://0002-pulseaudio-enable-allow-autospawn-for-root-as-defaul.patch \
-        file://pulseaudio-remove-the-control-for-speaker-headphone-widge.patch \
+IMX_PATCHES = " file://0001-Fix-pulseaudio-mutex-issue-when-do-pause-in-gstreame.patch \
+                file://0002-pulseaudio-enable-allow-autospawn-for-root-as-defaul.patch \
+                file://pulseaudio-remove-the-control-for-speaker-headphone-widge.patch \
 "
 
-do_install_append() {
-    install -m 0644 ${WORKDIR}/daemon.conf ${D}${sysconfdir}/pulse/daemon.conf
-    install -m 0644 ${WORKDIR}/default.pa ${D}${sysconfdir}/pulse/default.pa
+SRC_URI_append_mx6 = "${IMX_PATCHES}"
+SRC_URI_append_mx6ul = "${IMX_PATCHES}"
+SRC_URI_append_mx7 = "${IMX_PATCHES}"
 
-}
+PACKAGE_ARCH_mx6 = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH_mx6ul = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH_mx7 = "${MACHINE_SOCARCH}"
