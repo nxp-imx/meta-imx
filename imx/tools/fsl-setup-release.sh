@@ -209,6 +209,10 @@ if [ -d ../sources/meta-freescale ]; then
     # Change settings according to environment
     sed -e "s,meta-fsl-arm\s,meta-freescale ,g" \
         -i conf/bblayers.conf
+    sed -e "s,LAYERDEPENDS\s,#LAYERDEPENDS,g" \
+        -i ../sources/meta-fsl-arm-extra/conf/layer.conf
+    sed -e "s,..BSPDIR./sources/meta-fsl-arm-extra\s, ,g" \
+        -i conf/bblayers.conf
 fi
 
 cd  $BUILD_DIR
