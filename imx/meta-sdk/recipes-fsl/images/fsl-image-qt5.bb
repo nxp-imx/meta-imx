@@ -33,8 +33,6 @@ QT5_IMAGE_INSTALL_mx6 = " \
 QT5_IMAGE_INSTALL_mx6sl = "${@base_contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-fonts qtbase-plugins', d)}"
 
-QT5_IMAGE_INSTALL_imxallref_remove = " packagegroup-qt5-webengine"
-
 IMAGE_INSTALL += " \
 ${QT5_IMAGE_INSTALL} \
 "
