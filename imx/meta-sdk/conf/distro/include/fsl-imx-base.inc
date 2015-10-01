@@ -15,6 +15,9 @@ IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 
+BBMASK = "meta-fsl-arm/recipes-bsp/u-boot/u-boot-imx_2015.04.bb"
+BBMASK .= "|meta-fsl-arm/recipes-bsp/u-boot/u-boot-imx-mfgtool_2015.04.bb"
+
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 # Comment out the 2 lines below to use bluez4.
 DISTRO_FEATURES_append_mx6 = " bluez5"
