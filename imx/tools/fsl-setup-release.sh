@@ -209,6 +209,15 @@ if [ -d ../sources/meta-freescale ]; then
     # Change settings according to environment
     sed -e "s,meta-fsl-arm\s,meta-freescale ,g" -i conf/bblayers.conf
     sed -e "s,\$.BSPDIR./sources/meta-fsl-arm-extra\s,,g" -i conf/bblayers.conf
+
+    # temporary
+    echo -e "PREFERRED_VERSION_gstreamer1.0              ?= \"1.4.%\"" >> conf/local.conf
+    echo -e "PREFERRED_VERSION_gstreamer1.0-plugins-bad  ?= \"1.4.%\"" >> conf/local.conf
+    echo -e "PREFERRED_VERSION_gstreamer1.0-plugins-base ?= \"1.4.%\"" >> conf/local.conf
+    echo -e "PREFERRED_VERSION_gstreamer1.0-plugins-good ?= \"1.4.%\"" >> conf/local.conf
+    echo -e "PREFERRED_VERSION_gstreamer1.0-plugins-ugly ?= \"1.4.%\"" >> conf/local.conf
+    echo -e "PREFERRED_VERSION_gstreamer1.0-libav        ?= \"1.4.%\"" >> conf/local.conf
+    echo -e "PREFERRED_VERSION_gstreamer1.0-omx          ?= \"1.2.%\"" >> conf/local.conf
 fi
 
 cd  $BUILD_DIR
