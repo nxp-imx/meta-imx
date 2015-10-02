@@ -207,8 +207,8 @@ echo BUILD_DIR=$BUILD_DIR
 if [ -d ../sources/meta-freescale ]; then
     echo meta-freescale directory found
     # Change settings according to environment
-    sed -e "s,meta-fsl-arm\s,meta-freescale ,g" \
-        -i conf/bblayers.conf
+    sed -e "s,meta-fsl-arm\s,meta-freescale ,g" -i conf/bblayers.conf
+    sed -e "s,\$.BSPDIR./sources/meta-fsl-arm-extra\s,,g" -i conf/bblayers.conf
 fi
 
 cd  $BUILD_DIR
