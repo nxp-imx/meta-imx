@@ -28,7 +28,6 @@ PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayla
 SRC_URI_append = " file://egl-workaround-for-eglCreateContext-isn-t-thread-safe.patch \
                    file://camerabin-Add-one-property-to-set-sink-element-for-video.patch \
                    file://0011-videoparse-modifiy-the-videoparse-rank.patch \
-                   file://0013-PATCH-install-gstaggregator-and-gstvideoaggregator-h.patch \
 "
 
 #common
