@@ -11,5 +11,5 @@ RDEPENDS_${PN}_remove_mx6 = "qtquick1-dev \
 
 RDEPENDS_${PN}_append = " \
     qtdeclarative-tools \
-    qt3d-tools \
+    qtmultimedia-examples \
 "
