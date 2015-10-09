@@ -1,7 +1,7 @@
 DESCRIPTION = "Freescale Image to validate i.MX machines. \
-               This image contains everything used to test i.MX machines \
-               including GUI, demos and lots of applications. This creates a \
-               very large image, not suitable for production."
+    This image contains everything used to test i.MX machines including GUI, \
+    demos and lots of applications. This creates a very large image, not \
+    suitable for production."
 LICENSE = "MIT"
 
 inherit core-image
@@ -20,8 +20,6 @@ IMAGE_FEATURES += " \
         'x11-base x11-sato', '', d)} \
     "
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
 CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-core-full-cmdline \
     packagegroup-fsl-tools-bluetooth \
@@ -37,5 +35,3 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', \
         'weston-init', '', d)} \
     "
-
-export IMAGE_BASENAME = "fsl-image-validation-imx"

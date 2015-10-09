@@ -10,7 +10,9 @@ inherit packagegroup
 
 PACKAGES = "${PN}"
 
-PULSEAUDIO_X11_INSTALL = "${@base_contains('DISTRO_FEATURES','x11', \
+ALLOW_EMPTY_${PN} = "1"
+
+PULSEAUDIO_X11_INSTALL = "${@bb.utils.contains('DISTRO_FEATURES','x11', \
     'pulseaudio-module-x11-xsmp \
      pulseaudio-module-x11-publish \
      pulseaudio-module-x11-cork-request \
@@ -18,7 +20,7 @@ PULSEAUDIO_X11_INSTALL = "${@base_contains('DISTRO_FEATURES','x11', \
      consolekit', \
     '', d)}"
 
-PULSEAUDIO_INSTALL = "${@base_contains('DISTRO_FEATURES', 'pulseaudio',  \
+PULSEAUDIO_INSTALL = "${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio',  \
     'pulseaudio-server \
      pulseaudio-module-cli \
      pulseaudio-misc \
@@ -26,7 +28,7 @@ PULSEAUDIO_INSTALL = "${@base_contains('DISTRO_FEATURES', 'pulseaudio',  \
      ${PULSEAUDIO_X11_INSTALL}', \
     '', d)}"
 
-ALSA_INSTALL = "${@base_contains('DISTRO_FEATURES', 'alsa',  \
+ALSA_INSTALL = "${@bb.utils.contains('DISTRO_FEATURES', 'alsa',  \
     'alsa-utils \
      alsa-tools', \
     '', d)}"

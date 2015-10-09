@@ -31,10 +31,10 @@ BLUEZ5_INSTALL = " \
      bluez5-obex \
      bluez5-testtools  \
      libasound-module-bluez \
-     ${@base_contains('DISTRO_FEATURES', 'pulseaudio', '${PULSEAUDIO_INSTALL}', '', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', '${PULSEAUDIO_INSTALL}', '', d)} \
 "
 
 # Install either bluez4 or bluez5 if they are in distro.  
 # Otherwise install nothing.
-RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'bluez5', '${BLUEZ5_INSTALL}', \
-    base_contains('DISTRO_FEATURES', 'bluez4', '${BLUEZ4_INSTALL}', '', d), d)}"
+RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', '${BLUEZ5_INSTALL}', \
+     bb.utils.contains('DISTRO_FEATURES', 'bluez4', '${BLUEZ4_INSTALL}', '', d), d)}"
