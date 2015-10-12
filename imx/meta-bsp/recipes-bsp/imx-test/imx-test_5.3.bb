@@ -6,8 +6,8 @@ DEPENDS_mx7d = "virtual/kernel imx-lib"
 SRC_URI_append_mx5 = " file://clocks.sh"
 SRC_URI_append_mxs = " file://clocks.sh"
 
-SRC_URI[md5sum] = "fb1cc2c1118885cbab3e431955f750d9"
-SRC_URI[sha256sum] = "ed4d8de7a6b5fb676c0d94eef2b0140149c69ccbb95fe924405c47894469c926"
+SRC_URI[md5sum] = "905ac3909e55f0fa66e5f1d4c8ba1faf"
+SRC_URI[sha256sum] = "a029363ee4feaa8810ce4de429b343e663f2d4fc1024d75a4be12af25d741235"
 
 PLATFORM_mx7 = "IMX7D"
 PLATFORM_mx6ul = "IMX6UL"
