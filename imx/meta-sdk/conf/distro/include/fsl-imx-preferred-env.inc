@@ -20,3 +20,12 @@ MACHINE_GSTREAMER_1_0_PLUGIN_mx7 = "gst1.0-fsl-plugin"
 DEFAULTTUNE_mx6   = "cortexa9hf-neon"
 DEFAULTTUNE_mx6ul = "cortexa7hf-neon"
 DEFAULTTUNE_mx7   = "cortexa7hf-neon"
+
+# Use new Wayland version
+PREFERRED_VERSION_wayland_mx6 = "1.9.0"
+PREFERRED_VERSION_weston_mx6 = "1.9.0"
+PREFERRED_VERSION_wayland_mx6ul = "1.9.0"
+PREFERRED_VERSION_weston_mx6ul = "1.9.0"
+PREFERRED_VERSION_wayland_mx7 = "1.9.0"
+PREFERRED_VERSION_weston_mx7 = "1.9.0"
+PREFERRED_VERSION_wayland-native = "1.9.0"

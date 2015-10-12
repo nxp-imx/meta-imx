@@ -1,0 +1,10 @@
+diff -Naur weston-1.7.0_org/weston.ini.in weston-1.7.0/weston.ini.in
+--- weston-1.7.0_org/weston.ini.in	2015-05-19 13:33:27.851065074 -0500
++++ weston-1.7.0/weston.ini.in	2015-05-19 13:34:26.046008969 -0500
+@@ -1,5 +1,5 @@
+ [core]
+-#modules=xwayland.so,cms-colord.so
++modules=xwayland.so
+ #shell=desktop-shell.so
+ #gbm-format=xrgb2101010
+ 
