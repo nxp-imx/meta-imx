@@ -25,18 +25,9 @@ EXTRA_IMAGE_FEATURES += " \
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-# Backend-specific packages
-# Direct FB packages
-DFB_INSTALL = "${@base_contains('DISTRO_FEATURES', 'directfb', \
-    'packagegroup-core-full-cmdline packagegroup-core-directfb', '', d)}"
-DFB_INSTALL_VIV = "${@base_contains('DISTRO_FEATURES', 'directfb', \
-    'libvivante-dfb-mx6', '', d)}"
+CONFLICT_DISTRO_FEATURES = "directfb"
 
-DFB_IMAGE_INSTALL       = "${DFB_INSTALL}"
-DFB_IMAGE_INSTALL_mx6q  = "${DFB_INSTALL} ${DFB_INSTALL_VIV}"
-DFB_IMAGE_INSTALL_mx6dl = "${DFB_INSTALL} ${DFB_INSTALL_VIV}"
-DFB_IMAGE_INSTALL_mx6sx = "${DFB_INSTALL} ${DFB_INSTALL_VIV}"
-DFB_IMAGE_INSTALL_mx6sl = "${DFB_INSTALL} ${DFB_INSTALL_VIV}"
+# Backend-specific packages
 
 # Wayland packages
 WAYLAND_IMAGE_INSTALL = ""
@@ -67,7 +58,6 @@ MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegro
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \
     ${X11_IMAGE_INSTALL_GRAPHICS} \
-    ${DFB_IMAGE_INSTALL} \
     ${WAYLAND_IMAGE_INSTALL} \
     ${MM_IMAGE_INSTALL} \
     packagegroup-fsl-tools-bluetooth \

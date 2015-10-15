@@ -2,14 +2,13 @@ SUMMARY = "Freescale GPU SDK Samples"
 DESCRIPTION = "Set of sample applications for Freescale GPU"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=01ba08a2b77c3a0a9d0ab5d4d83fed64"
-DEPENDS = "${X11_DEPENDS} ${WL_DEPENDS} ${DFB_DEPENDS} devil gstreamer1.0 gstreamer1.0-plugins-base"
+DEPENDS = "${X11_DEPENDS} ${WL_DEPENDS} devil gstreamer1.0 gstreamer1.0-plugins-base"
 DEPENDS_append_mx6q = " virtual/libgles2"
 DEPENDS_append_mx6dl = " virtual/libgles2"
 DEPENDS_append_mx6sx = " virtual/libgles2"
 
 X11_DEPENDS = "${@base_contains('DISTRO_FEATURES', 'x11', 'xrandr', '', d)}"
 WL_DEPENDS = "${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
-DFB_DEPENDS =  "${@base_contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}"
 
 inherit fsl-eula-unpack
 
@@ -25,8 +24,7 @@ SRC_URI[sha256sum] = "7ac9637d67762472936b634c719d8c5af0168843f2f8306543fadf8a78
 
 BACKEND = "${@base_contains('DISTRO_FEATURES', 'x11', \
                     base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', 'X11', d), \
-                        base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
-                           base_contains('DISTRO_FEATURES', 'directfb', 'DirectFB', 'FB', d), d),d)}"
+                        base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', 'FB', d) ,d)}"
 
 do_compile () {
     export FSL_GRAPHICS_SDK=${S}

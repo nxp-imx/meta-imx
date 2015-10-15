@@ -36,7 +36,6 @@ PACKAGES =+ "libclc-mx6 libclc-mx6-dev libclc-mx6-dbg \
 	libgal-mx6 libgal-mx6-dev libgal-mx6-dbg \
 	libvivante-mx6 libvivante-mx6-dev libvivante-mx6-dbg \
 	libvivante-dri-mx6 \
-	libvivante-dfb-mx6 \
 	libvsc-mx6 \
 	libwayland-viv-mx6 libwayland-viv-mx6-dev libwayland-viv-mx6-dbg \
 	libgc-wayland-protocol-mx6 libgc-wayland-protocol-mx6-dev libgc-wayland-protocol-mx6-dbg \
@@ -60,7 +59,6 @@ python __anonymous () {
 }
 
 USE_X11 = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
-USE_DFB = "${@base_contains("DISTRO_FEATURES", "directfb", "yes", "no", d)}"
 USE_WL = "${@base_contains("DISTRO_FEATURES", "wayland", "yes", "no", d)}"
 
 # Inhibit warnings about files being stripped.
@@ -118,7 +116,7 @@ do_install () {
 
     install -d ${D}${libdir}/pkgconfig
 
-    # The preference order, based in DISTRO_FEATURES, is x11, wayland, directfb and fb
+    # The preference order, based in DISTRO_FEATURES, is x11, wayland and fb
     if [ "${USE_WL}" = "yes" ]; then
         cp -axr ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
         cp -axr ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
@@ -158,22 +156,12 @@ do_install () {
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/vg.pc ${D}${libdir}/pkgconfig/vg.pc
 
-        if [ "${USE_DFB}" = "yes" ]; then
-            install -d ${D}/${sysconfdir}
-            install -m 644 ${S}/gpu-core/etc/directfbrc ${D}/${sysconfdir}/directfbrc
-            install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_directfb.pc ${D}${libdir}/pkgconfig/egl.pc
-
-            cp -r ${S}/gpu-core/usr/lib/directfb-* ${D}${libdir}
-            cp -axr ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
-            cp -axr ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
-            backend=dfb
-        else
-            # Regular framebuffer
-            install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_linuxfb.pc ${D}${libdir}/pkgconfig/egl.pc
-            cp -axr ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
-            cp -axr ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
-            backend=fb
-        fi
+        # Regular framebuffer
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_linuxfb.pc ${D}${libdir}/pkgconfig/egl.pc
+        cp -axr ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
+        cp -axr ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
+        
+        backend=fb
 
     fi
 
@@ -205,7 +193,7 @@ do_install () {
         rm ${D}${libdir}/libwayland-viv.*
     fi
 
-    for backend in wl x11 fb dfb dri; do
+    for backend in wl x11 fb dri; do
         find ${D}${libdir} -name "*-$backend.so" -exec rm '{}' ';'
         find ${D}${libdir} -name "*.$backend.so" -exec rm '{}' ';'
     done
@@ -303,8 +291,6 @@ FILES_libvivante-mx6-dbg = "${libdir}/.debug/libVIVANTE${SOLIBS}"
 FILES_libvivante-dri-mx6 = "${libdir}/dri/vivante_dri.so"
 RDEPENDS_libvivante-dri-mx6 = "libdrm"
 
-FILES_libvivante-dfb-mx6 = "${libdir}/directfb-*/gfxdrivers/libdirectfb_gal.so"
-
 INSANE_SKIP_libwayland-viv-mx6 += "dev-so"
 FILES_libwayland-viv-mx6 =  "${libdir}/libwayland-viv${REALSOLIBS}  ${libdir}/libwayland-viv${SOLIBS}"
 FILES_libwayland-viv-mx6-dev = "${includedir}/wayland-viv ${libdir})/libwayland-viv${SOLIBSDEV} ${libdir}/pkgconfig/wayland-viv.pc"
@@ -316,8 +302,6 @@ FILES_libgc-wayland-protocol-mx6-dev = "${libdir}/libgc_wayland_protocol${SOLIBS
 FILES_libgc-wayland-protocol-mx6-dbg = "${libdir}/libgc_wayland_protocol${SOLIBS}"
 
 FILES_libwayland-egl-mx6-dev = "${libdir}/pkgconfig/wayland-egl.pc"
-
-FILES_libvivante-dfb-mx6 += "${sysconfdir}/directfbrc"
 
 INSANE_SKIP_imx-gpu-viv-g2d += "dev-so"
 FILES_imx-gpu-viv-g2d = "${libdir}/libg2d* "

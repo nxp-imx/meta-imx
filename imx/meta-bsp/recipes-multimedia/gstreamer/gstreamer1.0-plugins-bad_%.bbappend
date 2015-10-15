@@ -1,8 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 GST_CFLAGS_EXTRA = "${@base_contains('DISTRO_FEATURES', 'x11', '', \
-                       base_contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', \
-					   base_contains('DISTRO_FEATURES', 'directfb', '-DEGL_API_DFB -I${STAGING_INCDIR}/directfb', '-DEGL_API_FB', d),d),d)}"
+                       base_contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', '-DEGL_API_FB', d),d)}"
 CFLAGS_append_mx6q = " ${GST_CFLAGS_EXTRA}"
 CFLAGS_append_mx6dl = " ${GST_CFLAGS_EXTRA}"
 CFLAGS_append_mx6sx = " ${GST_CFLAGS_EXTRA}"
@@ -14,11 +13,8 @@ PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
                            base_contains('DISTRO_FEATURES', 'x11', \
                                     'opengl', '', d), '', d)}"
 
-PACKAGECONFIG_append_mx6q = "${@base_contains('DISTRO_FEATURES', 'directfb', ' ', \
-                ' opencv ', d)}"
-PACKAGECONFIG_append_mx6qp = "${@base_contains('DISTRO_FEATURES', 'directfb', ' ', \
-                ' opencv ', d)}"
-
+PACKAGECONFIG_append_mx6q = " opencv"
+PACKAGECONFIG_append_mx6qp = " opencv"
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
