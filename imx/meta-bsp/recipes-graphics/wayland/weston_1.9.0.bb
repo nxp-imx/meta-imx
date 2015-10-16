@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d79ee9e66bb0f95d3386a7acae780b70 \
 SRC_URI = "http://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
            file://weston.png \
            file://weston.desktop \
-           file://make-lcms-configurable.patch \
-           ${@base_contains('DISTRO_FEATURES', 'x11','file://xwayland.patch', '', d)}"
+           file://make-lcms-configurable.patch"
+
 SRC_URI[md5sum] = "66bbba12f546570b4d97f676bc79a28e"
 SRC_URI[sha256sum] = "9c1b03f3184fa0b0dfdf67e215048085156e1a2ca344af6613fed36794ac48cf"
 
@@ -69,8 +69,9 @@ do_install_append() {
 		install -d ${D}${datadir}/icons/hicolor/48x48/apps
 		install ${WORKDIR}/weston.png ${D}${datadir}/icons/hicolor/48x48/apps
 
-               install -d ${D}/${sysconfdir}
-               install ${WORKDIR}/build/weston.ini ${D}/${sysconfdir}
+                install -d ${D}/${sysconfdir}
+                install ${WORKDIR}/build/weston.ini ${D}/${sysconfdir}
+                sed -i 's/#modules=xwayland.so,cms-colord.so/modules=xwayland.so/' ${D}${sysconfdir}/weston.ini
         fi
 }
 
