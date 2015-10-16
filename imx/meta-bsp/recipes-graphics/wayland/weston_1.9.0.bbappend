@@ -15,6 +15,7 @@ EXTRA_OECONF_append_mx6 = " \
     --disable-libunwind \
     --disable-xwayland-test \
     WESTON_NATIVE_BACKEND=fbdev-backend.so \
+    ${@base_contains('DISTRO_FEATURES', 'x11','--enable-xwayland', '--disable-xwayland', d)} \
 "
 
 EXTRA_OEMAKE_append_mx6 = " \
@@ -44,8 +45,15 @@ EXTRA_OEMAKE_append_mx6sx = " \
 do_install_append_mx6 () {
     install -d ${D}${sysconfdir}/profile.d/
     install -m 0755 ${WORKDIR}/weston.sh ${D}${sysconfdir}/profile.d/
+
+    if [ "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}" = "x11" ]; then
+        install -d ${D}/${sysconfdir}
+        install ${WORKDIR}/build/weston.ini ${D}/${sysconfdir}
+        sed -i 's/#modules=xwayland.so,cms-colord.so/modules=xwayland.so/' ${D}${sysconfdir}/weston.ini
+    fi
+
 }
 
-FILES_${PN}_append_mx6 = " ${sysconfdir}/profile.d/weston.sh"
+FILES_${PN}_append_mx6 = " ${sysconfdir}/profile.d/weston.sh ${sysconfdir}/weston.ini"
 
 PACKAGE_ARCH_mx6 = "${MACHINE_ARCH}"
