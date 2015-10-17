@@ -10,9 +10,8 @@ CONFLICT_DISTRO_FEATURES = "directfb"
 X11_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'libxkbcommon', '', d)}"
 
-WLD_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', \
-                base_contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d) \
-                  base_contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins','', d), d)}"
+WLD_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'wayland', \
+                base_contains('DISTRO_FEATURES', 'x11', 'qtwayland qtwayland-plugins', ' qtwayland qtwayland-plugins ', d), '', d)}"
 
 # Install Freescale QT demo applications
 MACHINE_QT5_MULTIMEDIA_PLAYER = ""
