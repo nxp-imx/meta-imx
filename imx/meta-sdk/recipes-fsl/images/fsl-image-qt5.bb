@@ -11,7 +11,7 @@ X11_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'libxkbcommon', '', d)}"
 
 WLD_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', \
-                base_contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d), \
+                base_contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d) \
                   base_contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins','', d), d)}"
 
 # Install Freescale QT demo applications
