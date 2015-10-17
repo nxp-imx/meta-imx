@@ -36,6 +36,17 @@ DEFAULTTUNE_mx6   = "cortexa9hf-neon"
 DEFAULTTUNE_mx6ul = "cortexa7hf-neon"
 DEFAULTTUNE_mx7   = "cortexa7hf-neon"
 
+# preferred versions of recipes-kernel
+PREFERRED_VERSION_linux-libc-headers = "3.14"
+PREFERRED_VERSION_linux-imx_mx6 = "3.14.52"
+PREFERRED_VERSION_linux-imx_mx7 = "3.14.52"
+PREFERRED_VERSION_mfgtool-linux-imx_mx6 = "3.14.52"
+PREFERRED_VERSION_mfgtool-linux-imx_mx7 = "3.14.52"
+PREFERRED_VERSION_linux-mfgtool_mx6 = "3.14.52"
+PREFERRED_VERSION_linux-imx-mfg_mx6 = "3.14.52"
+PREFERRED_VERSION_linux-mfgtool_mx7 = "3.14.52"
+PREFERRED_VERSION_linux-imx-mfg_mx7 = "3.14.52"
+
 # fido settings - not needed in master
 # set these because of meta-fsl-arm override to new xorg version
 PREFERRED_VERSION_xserver-xorg_mx6q = "2:1.17.2"
