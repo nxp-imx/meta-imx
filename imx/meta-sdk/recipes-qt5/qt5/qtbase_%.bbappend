@@ -50,3 +50,5 @@ EOF
 }
 
 PACKAGECONFIG_append_mx6 = " accessibility examples"
+PACKAGECONFIG_append_mx6ul = " examples"
+PACKAGECONFIG_append_mx7 = " examples"
