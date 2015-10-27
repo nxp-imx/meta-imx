@@ -218,8 +218,6 @@ if [ -d ../sources/meta-freescale ]; then
     echo -e "PREFERRED_VERSION_gstreamer1.0-plugins-ugly ?= \"1.4.%\"" >> conf/local.conf
     echo -e "PREFERRED_VERSION_gstreamer1.0-libav        ?= \"1.4.%\"" >> conf/local.conf
     echo -e "PREFERRED_VERSION_gstreamer1.0-omx          ?= \"1.2.%\"" >> conf/local.conf
-else
-    sed -e "s,\$.BSPDIR./sources/meta-fsl-arm-extra\s,,g" -i conf/bblayers.conf
 fi
 
 cd  $BUILD_DIR
