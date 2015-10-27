@@ -90,3 +90,7 @@ WARN_TO_ERROR_QA = "already-stripped compile-host-path install-host-path \
                     useless-rpaths"
 WARN_QA_remove = "${WARN_TO_ERROR_QA}"
 ERROR_QA_append = " ${WARN_TO_ERROR_QA}"
+
+# Chromium and qtwebengine both require GCC 4.9.3 to build
+GCCVERSION = "4.9%"
+
