@@ -4,6 +4,7 @@ SRC_URI_append_mx6 = " \
     file://weston.sh \
     file://weston-launch-silently-ignores-invalid-options.patch \
     file://0001-MGS-1111-Add-GPU-VIV-suport-for-wayland-and-weston-1.patch \
+    file://0002-MGS-1192-xwld-g2d-compositor-dose-not-work.patch \
 "
 
 PACKAGECONFIG_append_mx6q = " cairo-glesv2"
