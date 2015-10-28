@@ -16,6 +16,6 @@ PACKAGECONFIG_remove_mx6sl = "${REMOVE_GLU}"
 
 PACKAGECONFIG[vg] = "--enable-vg,--disable-vg,virtual/libopenvg"
 
-PACKAGECONFIG_append = "${@base_contains('DISTRO_FEATURES', 'x11', \
+PACKAGECONFIG_append_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
                             base_contains('DISTRO_FEATURES', 'wayland',' wayland vg', '', d), \
                                base_contains('DISTRO_FEATURES', 'wayland',' wayland vg', '', d), d)}"
