@@ -1,7 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://glmark2.patch"
-
+SRC_URI += "file://glmark2.patch \
+            file://0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch"
 DEPENDS_remove = "virtual/libx11"
 
 REQUIRED_DISTRO_FEATURES_remove = "x11"
