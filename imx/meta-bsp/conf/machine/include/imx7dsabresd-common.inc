@@ -22,3 +22,7 @@ PREFERRED_PROVIDER_virtual/libgles1_mx7 = "mesa"
 PREFERRED_PROVIDER_virtual/libgles2_mx7 = "mesa"
 PREFERRED_PROVIDER_virtual/libgl_mx7 = "mesa"
 PREFERRED_PROVIDER_virtual/libg2d_mx7 = ""
+
+# Extra audio support
+# FIXME: Add support for imx7
+MACHINE_EXTRA_RRECOMMENDS_append_mx7 = " ${@base_contains('DISTRO_FEATURES', 'alsa', 'fsl-alsa-plugins', '', d)}"
