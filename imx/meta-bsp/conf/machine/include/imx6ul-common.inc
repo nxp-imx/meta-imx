@@ -1,3 +1,7 @@
+# Common definitions to all i.MX6UL boards
+
+SOC_FAMILY = "mx6ul"
+
 DEFAULTTUNE_mx6ul ?= "cortexa7hf-neon"
 
 SERIAL_CONSOLE = "115200 ttymxc0"
