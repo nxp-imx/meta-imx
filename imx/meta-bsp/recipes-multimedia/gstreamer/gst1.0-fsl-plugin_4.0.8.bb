@@ -38,7 +38,8 @@ PLATFORM_mx7= "MX7D"
 # Todo add a mechanism to map possible build targets
 EXTRA_OECONF = "PLATFORM=${PLATFORM} \
                 CPPFLAGS="-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include" \
-                CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR}"
+                CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR} \
+                ${@base_contains('DISTRO_FEATURES', 'wayland', base_contains('DISTRO_FEATURES', 'x11', '--disable-x11', '', d), '', d)}"
 
 PACKAGES =+ "${PN}-gplay ${PN}-libgplaycore ${PN}-libgstfsl ${PN}-grecorder ${PN}-librecorder-engine ${PN}-libplayengine"
 
@@ -47,10 +48,8 @@ BEEP_RDEPENDS = "libfslcodec-aac libfslcodec-mp3 libfslcodec-oggvorbis"
 RDEPENDS_${PN} += "libfslparser ${BEEP_RDEPENDS} gstreamer1.0-plugins-good-id3demux "
 
 PACKAGECONFIG ?= ""
-PACKAGECONFIG_mx6q = "overlaysink"
-PACKAGECONFIG_mx6dl = "overlaysink"
-PACKAGECONFIG_mx6sx = "overlaysink"
-PACKAGECONFIG_mx6sl = "overlaysink"
+PACKAGECONFIG_mx6 = "overlaysink"
+
 
 # FIXME: Add all features
 # feature from excluded mm packages
