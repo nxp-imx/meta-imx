@@ -10,4 +10,3 @@ XWAYLAND = "${@base_contains('DISTRO_FEATURES', 'wayland', \
 
 SOC_TOOLS_GPU_remove_mx6 = "${XWAYLAND}"
 
-RDEPENDS_${PN}_remove_mx6 = "fsl-gpu-sdk"
