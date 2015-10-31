@@ -29,3 +29,6 @@ PREFERRED_VERSION_weston_mx6ul = "1.9.0"
 PREFERRED_VERSION_wayland_mx7 = "1.9.0"
 PREFERRED_VERSION_weston_mx7 = "1.9.0"
 PREFERRED_VERSION_wayland-native = "1.9.0"
+
+# Enable the kenrel loadable module as default
+USE_GPU_VIV_MODULE = "1"
