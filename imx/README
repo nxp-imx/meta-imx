@@ -3,13 +3,11 @@ Freescale's 3.14.52-1.1.0_ga Yocto Project BSP
 
 This BSP is a Freescale release providing support for the following processors
 
-Ths release is a standalone release that is only tested on i.MX 6QuadPlus SABRE Auto
-
-   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
-
 The following boards were not tested in this release but this release contains updates
 that might affect these boards.
 
+   * Freescale i.MX 6QuadPlus SABRE Device (imx6qpsabresd)
+   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
    * Freescale i.MX 6UltraLite EVK (imx6ulevk)
    * Freescale i.MX 7Dual SABRE Smart Device (imx7dsabresd)
    * Freescale i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
@@ -28,18 +26,19 @@ that might affect these boards.
     Each machine files lists the associated device trees for that machine.
 
  * i.MX U-Boot configurations for each machine
+    imx6qpsabresd - sd, sata
     imx6qpsabreauto - sd, eim-nor, nand, spi-nor, sata
-    imx7dsabresd - sd, qspi1, nand
+    imx7dsabresd - sd, qspi1, nand, epdc
     imx6ulevk - sd, qspi1
     imx6sxsabresd - sd, qspi2, m4fastup, emmc
     imx6sxsabreauto - sd, qspi1, nand
     imx6qsabresd - sd, sata
     imx6qsabreauto - sd, eim-nor, spi-nor, nand, sata
-    imx6dlsabresd - sd
+    imx6dlsabresd - sd, epdc
     imx6dlsabreauto - sd, eim-nor, spi-nor, nand
     imx6solosabresd - sd
     imx6solosabreauto - sd, eim-nor, spi-nor, nand
-    imx6slevk - sd, spi-nor
+    imx6slevk - sd, spi-nor, epdc
 
 
 Quick Start Guide
@@ -59,19 +58,23 @@ After this your system will be configured to start a Yocto Project build.
 
 Build images
 ---------------------
-Each graphical backend X11, Frame buffer, DirectFB and Wayland must be in a separate build 
+Each graphical backend X11, Frame buffer and Wayland must be in a separate build 
 directory, so the setup script above must be run for each backend to configure the build 
-correctly.
-In this release two image recipes are provided that work on almost all backends.
+correctly. In this release two image recipes are provided that work on almost all backends.
+
+DISTROs are new and the way to configure for any backends.  Use DISTRO= instead of the -e on the setup script.
+The -e parameter gets converted to the appropriate distro configuration.
+
+Note: DirectFB is no longer supported in i.MX graphic bilds.
 
    fsl-image-gui provides a gui image without QT.
-   fsl-image-qt5 provides a Qt5 image for X11, FB and Wayland backends.
+   fsl-image-qt5 provides a Qt5 image
 
 Here are some examples:
 
 Building X11
 ------------
-  MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-x11 -e x11
+  DISTRO=fsl-imx-x11 MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-x11
   bitbake fsl-image-gui
 or
   bitbake fsl-image-qt5
@@ -81,7 +84,7 @@ To run the QT5 examples use the following parameters:
 
 Building Frame Buffer (FB)
 ---------------------------
-  MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-fb -e fb
+  DISTRO=fsl-imx-fb MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-fb
   bitbake fsl-image-gui
 or
   bitbake fsl-image-qt5
@@ -89,16 +92,19 @@ or
 To run the QT5 examples use the following parameters:
 <QT5 Example> -platform eglfs -plugin evdevtouch:/dev/input/event0
 
-Building Direct FB (DFB)
+Building XWayland
 ---------------------------
-  MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-dfb -e dfb
+  DISTRO=fsl-imx-xwayland MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-xwayland
   bitbake fsl-image-gui
+or
+  bitbake fsl-image-qt5
 
-Direct FB does not support QT5 for this release
+To run the QT5 examples use the following parameters:
+<QT5 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
 
 Building Wayland-Weston (wayland)
 ---------------------------
-  MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-wayland -e wayland
+  DISTRO=fsl-imx-wayland MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-wayland
   bitbake fsl-image-gui
 or
   bitbake fsl-image-qt5
@@ -114,6 +120,8 @@ DEFAULTTUNE_mx6 = "cortexa9hf-neon
 
 To build with software floating point, add the following to local.conf
 DEFAULTTUNE_mx6 = "cortexa9-neon"
+
+Note:  This release is the LAST release providing software floating point binaries.
 
 We also provide some binaries with a software floating point version which we use based on FP_TAG in layer.conf.
 This release was only tested for hardware floating point.
@@ -159,3 +167,4 @@ to use before starting work on custom Qt applications.  Once custom Qt applicati
 Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
 the differences between each license.   Default builds use an open source Qt license.
 
+Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
