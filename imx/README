@@ -115,16 +115,13 @@ To run the QT5 examples use the following parameters:
 Hardware Floating Point
 -----------------------
 This release enables hardware floating point by default.  This feature is enabled in both the machine 
-configurations and in the layer.conf. (Some machine files exist in the community meta-fsl-arm without this setting.)
-DEFAULTTUNE_mx6 = "cortexa9hf-neon
+configurations and in the distros. (Some machine files exist in the community meta-fsl-arm without this setting.)
+DEFAULTTUNE_mx6 = "cortexa9hf-neon"
 
-To build with software floating point, add the following to local.conf
-DEFAULTTUNE_mx6 = "cortexa9-neon"
-
-Note:  This release is the LAST release providing software floating point binaries.
-
-We also provide some binaries with a software floating point version which we use based on FP_TAG in layer.conf.
 This release was only tested for hardware floating point.
+
+To build with software floating point, use DISTRO=fsl-imx-sfp-mx6 which sets the DEFAULTTUNE setting to "cortexa9-neon"
+Note:  This release is the LAST release providing software floating point binaries.
 
 Restricted Codecs
 -----------------
