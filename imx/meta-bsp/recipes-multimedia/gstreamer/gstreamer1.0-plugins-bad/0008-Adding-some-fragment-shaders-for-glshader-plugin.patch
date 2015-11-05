@@ -1,20 +1,20 @@
-From 8489b90f5ed6b7f9b98b123b521d41aec00cc8bd Mon Sep 17 00:00:00 2001
+From 3810b9cdcd397b184693903c549dc56ee039be52 Mon Sep 17 00:00:00 2001
 From: Jian <Jian.Li@freescale.com>
 Date: Wed, 25 Mar 2015 13:45:57 +0800
-Subject: [PATCH] Adding some fragment shaders for glshader plugin
+Subject: [PATCH 08/10] Adding some fragment shaders for glshader plugin
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
- Upstream Status: Inappropriate [i.MX specific]
+Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Jian <Jian.Li@freescale.com>
 ---
- ext/gl/Makefile.am               |    3 +++
- ext/gl/shaders/fisheye_shader.fs |   14 ++++++++++++++
- ext/gl/shaders/gray_shader.fs    |   12 ++++++++++++
- ext/gl/shaders/tunnel_shader.fs  |   14 ++++++++++++++
- ext/gl/shaders/twirl_shader.fs   |   21 +++++++++++++++++++++
+ ext/gl/Makefile.am               |  3 +++
+ ext/gl/shaders/fisheye_shader.fs | 14 ++++++++++++++
+ ext/gl/shaders/gray_shader.fs    | 12 ++++++++++++
+ ext/gl/shaders/tunnel_shader.fs  | 14 ++++++++++++++
+ ext/gl/shaders/twirl_shader.fs   | 21 +++++++++++++++++++++
  5 files changed, 64 insertions(+)
  create mode 100755 ext/gl/shaders/fisheye_shader.fs
  create mode 100755 ext/gl/shaders/gray_shader.fs
@@ -22,10 +22,10 @@ Signed-off-by: Jian <Jian.Li@freescale.com>
  create mode 100755 ext/gl/shaders/twirl_shader.fs
 
 diff --git a/ext/gl/Makefile.am b/ext/gl/Makefile.am
-index b1796f6..b8442f8 100644
+index 1a634ef..8aaa900 100644
 --- a/ext/gl/Makefile.am
 +++ b/ext/gl/Makefile.am
-@@ -110,6 +110,9 @@ libgstopengl_la_LIBADD = \
+@@ -146,6 +146,9 @@ libgstopengl_la_LIBADD = \
  	$(LIBM) \
  	$(GRAPHENE_LIBS)
  
@@ -33,7 +33,7 @@ index b1796f6..b8442f8 100644
 +EXTRA_DIST = shaders/gray_shader.fs shaders/fisheye_shader.fs shaders/tunnel_shader.fs shaders/twirl_shader.fs
 +
  libgstopengl_la_LDFLAGS = $(GST_PLUGIN_LDFLAGS)
- libgstopengl_la_LIBTOOLFLAGS = $(GST_PLUGIN_LIBTOOLFLAGS)
+ libgstopengl_la_LIBTOOLFLAGS = $(GST_PLUGIN_LIBTOOLFLAGS) --tag=CC
  
 diff --git a/ext/gl/shaders/fisheye_shader.fs b/ext/gl/shaders/fisheye_shader.fs
 new file mode 100755
@@ -121,5 +121,5 @@ index 0000000..2b9d5fd
 +}
 +
 -- 
-1.7.9.5
+1.9.1
 

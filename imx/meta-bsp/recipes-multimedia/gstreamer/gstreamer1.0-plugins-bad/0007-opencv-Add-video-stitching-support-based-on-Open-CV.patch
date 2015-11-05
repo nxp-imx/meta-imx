@@ -1,35 +1,31 @@
-From aa485cfba8a06f767498bf707175134629fe2377 Mon Sep 17 00:00:00 2001
+From a2a7f25eba91b429a26fd5347007420e258676de Mon Sep 17 00:00:00 2001
 From: Song Bing <b06498@freescale.com>
 Date: Mon, 1 Jun 2015 13:30:11 +0800
-Subject: [PATCH 2/2] opencv: Add video stitching support.
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Subject: [PATCH 07/10] opencv: Add video stitching support based on Open CV
 
-Add video stitching element.
-
-Upstream Status: Waiting for review.
+Add video stitching element based on Open CV.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=751203
+Upstream-Status: Waiting for review
 ---
- docs/plugins/Makefile.am         |    1 +
- ext/opencv/Makefile.am           |   12 +-
- ext/opencv/gstcvstitching.cpp    |  834 ++++++++++++++++++++++++++++++++++++++
- ext/opencv/gstcvstitching.h      |  130 ++++++
- ext/opencv/gstopencv.cpp         |    4 +
- ext/opencv/gstopencvaggregator.c |  708 ++++++++++++++++++++++++++++++++
- ext/opencv/gstopencvaggregator.h |  118 ++++++
- 7 files changed, 1806 insertions(+), 1 deletion(-)
+ docs/plugins/Makefile.am         |   1 +
+ ext/opencv/Makefile.am           |  12 +-
+ ext/opencv/gstcvstitching.cpp    | 834 +++++++++++++++++++++++++++++++++++++++
+ ext/opencv/gstcvstitching.h      | 130 ++++++
+ ext/opencv/gstopencv.cpp         |   4 +
+ ext/opencv/gstopencvaggregator.c | 705 +++++++++++++++++++++++++++++++++
+ ext/opencv/gstopencvaggregator.h | 118 ++++++
+ 7 files changed, 1803 insertions(+), 1 deletion(-)
  create mode 100644 ext/opencv/gstcvstitching.cpp
  create mode 100644 ext/opencv/gstcvstitching.h
  create mode 100644 ext/opencv/gstopencvaggregator.c
  create mode 100644 ext/opencv/gstopencvaggregator.h
 
 diff --git a/docs/plugins/Makefile.am b/docs/plugins/Makefile.am
-index b093bcf..77593ed 100644
+index c431f78..d96ace8 100644
 --- a/docs/plugins/Makefile.am
 +++ b/docs/plugins/Makefile.am
-@@ -98,6 +98,7 @@ EXTRA_HFILES = \
+@@ -97,6 +97,7 @@ EXTRA_HFILES = \
  	$(top_srcdir)/ext/opencv/gstpyramidsegment.h \
  	$(top_srcdir)/ext/opencv/gsttemplatematch.h \
  	$(top_srcdir)/ext/opencv/gsttextoverlay.h \
@@ -38,7 +34,7 @@ index b093bcf..77593ed 100644
  	$(top_srcdir)/ext/rsvg/gstrsvgdec.h \
  	$(top_srcdir)/ext/rsvg/gstrsvgoverlay.h \
 diff --git a/ext/opencv/Makefile.am b/ext/opencv/Makefile.am
-index 3c3418e..38f67fd 100644
+index 72472fb..66c5786 100644
 --- a/ext/opencv/Makefile.am
 +++ b/ext/opencv/Makefile.am
 @@ -24,10 +24,15 @@ libgstopencv_la_SOURCES = gstopencv.cpp \
@@ -1059,7 +1055,7 @@ index 0000000..ec955d0
 +G_END_DECLS
 +#endif /* __GST_CV_STITCHING_H__ */
 diff --git a/ext/opencv/gstopencv.cpp b/ext/opencv/gstopencv.cpp
-index 3184518..f01aa1d 100644
+index 4077ba6..6ae73c4 100644
 --- a/ext/opencv/gstopencv.cpp
 +++ b/ext/opencv/gstopencv.cpp
 @@ -42,6 +42,7 @@
@@ -1082,10 +1078,10 @@ index 3184518..f01aa1d 100644
  
 diff --git a/ext/opencv/gstopencvaggregator.c b/ext/opencv/gstopencvaggregator.c
 new file mode 100644
-index 0000000..3c69edf
+index 0000000..8a813fc
 --- /dev/null
 +++ b/ext/opencv/gstopencvaggregator.c
-@@ -0,0 +1,708 @@
+@@ -0,0 +1,705 @@
 +/*
 + * GStreamer
 + * Copyright (C) 2015 Song Bing <b06498@freescale.com>
@@ -1265,7 +1261,6 @@ index 0000000..3c69edf
 +  agg_class->stop = gst_opencv_aggregator_stop;
 +  agg_class->start = gst_opencv_aggregator_start;
 +
-+  videoaggregator_class->disable_frame_conversion = TRUE;
 +  videoaggregator_class->aggregate_frames =
 +      gst_opencv_aggregator_aggregate_frames;
 +  videoaggregator_class->get_output_buffer =
@@ -1695,11 +1690,9 @@ index 0000000..3c69edf
 +
 +      walk = g_list_next (walk);
 +
-+      GST_WARNING_OBJECT (aggregator, "sink pad caps:  %"
-+          GST_PTR_FORMAT, caps);
++      GST_WARNING_OBJECT (aggregator, "sink pad caps:  %" GST_PTR_FORMAT, caps);
 +      if (!gst_opencv_parse_iplimage_params_from_caps (caps, &in_width,
-+            &in_height, &in_depth, &in_channels,
-+              &in_err)) {
++              &in_height, &in_depth, &in_channels, &in_err)) {
 +        GST_WARNING_OBJECT (aggregator, "Failed to parse input caps: %s",
 +            in_err->message);
 +        g_error_free (in_err);
@@ -1919,5 +1912,5 @@ index 0000000..1fc65a5
 +G_END_DECLS
 +#endif /* __GST_OPENCV_AGGREGATOR_H__ */
 -- 
-1.7.9.5
+1.9.1
 
