@@ -1457,8 +1457,8 @@ state.wm8960audio {
 	control.1 {
 		iface MIXER
 		name 'Capture Volume'
-		value.0 63
-		value.1 63
+		value.0 35
+		value.1 35
 		comment {
 			access 'read write'
 			type INTEGER
@@ -1466,8 +1466,8 @@ state.wm8960audio {
 			range '0 - 63'
 			dbmin -1725
 			dbmax 3000
-			dbvalue.0 3000
-			dbvalue.1 3000
+			dbvalue.0 900
+			dbvalue.1 900
 		}
 	}
 	control.2 {
@@ -1552,29 +1552,29 @@ state.wm8960audio {
 	control.8 {
 		iface MIXER
 		name 'Right Input Boost Mixer RINPUT1 Volume'
-		value 2
+		value 0
 		comment {
 			access 'read write'
 			type INTEGER
 			count 1
-			range '0 - 4'
+			range '0 - 3'
 			dbmin 0
 			dbmax 2900
-			dbvalue.0 2000
+			dbvalue.0 0
 		}
 	}
 	control.9 {
 		iface MIXER
 		name 'Left Input Boost Mixer LINPUT1 Volume'
-		value 2
+		value 0
 		comment {
 			access 'read write'
 			type INTEGER
 			count 1
-			range '0 - 4'
+			range '0 - 3'
 			dbmin 0
 			dbmax 2900
-			dbvalue.0 2000
+			dbvalue.0 0
 		}
 	}
 	control.10 {
@@ -2113,16 +2113,6 @@ state.wm8960audio {
 		value true
 		comment {
 			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.57 {
-		iface CARD
-		name 'Headset Jack'
-		value true
-		comment {
-			access read
 			type BOOLEAN
 			count 1
 		}
