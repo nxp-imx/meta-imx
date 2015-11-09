@@ -1,0 +1,22 @@
+diff -ruN a/DemoApps/GLES2/DirectMultiSamplingVideoYUV/GNUmakefile_Yocto b/DemoApps/GLES2/DirectMultiSamplingVideoYUV/GNUmakefile_Yocto
+--- a/DemoApps/GLES2/DirectMultiSamplingVideoYUV/GNUmakefile_Yocto	2015-10-24 02:49:55.000000000 +0800
++++ b/DemoApps/GLES2/DirectMultiSamplingVideoYUV/GNUmakefile_Yocto	2015-11-09 13:26:27.369099790 +0800
+@@ -31,6 +31,7 @@
+   $(FSL_GRAPHICS_SDK)/DemoFramework/FslGraphicsGLES2/include \
+   $(PKG_CONFIG_SYSROOT_DIR)/usr/include/glib-2.0 \
+   $(PKG_CONFIG_SYSROOT_DIR)/usr/include/gstreamer-1.0 \
++  $(PKG_CONFIG_SYSROOT_DIR)/usr/lib/gstreamer-1.0/include \
+   $(PKG_CONFIG_SYSROOT_DIR)/usr/lib/glib-2.0/include
+
+ CPP_DEFINE_FLAG_NAMES=\
+diff -ruN a/DemoApps/GLES3/DirectMultiSamplingVideoYUV/GNUmakefile_Yocto b/DemoApps/GLES3/DirectMultiSamplingVideoYUV/GNUmakefile_Yocto
+--- a/DemoApps/GLES3/DirectMultiSamplingVideoYUV/GNUmakefile_Yocto	2015-10-24 02:49:55.000000000 +0800
++++ b/DemoApps/GLES3/DirectMultiSamplingVideoYUV/GNUmakefile_Yocto	2015-11-09 13:26:27.393099789 +0800
+@@ -31,6 +31,7 @@
+   $(FSL_GRAPHICS_SDK)/DemoFramework/FslGraphicsGLES3/include \
+   $(PKG_CONFIG_SYSROOT_DIR)/usr/include/glib-2.0 \
+   $(PKG_CONFIG_SYSROOT_DIR)/usr/include/gstreamer-1.0 \
++  $(PKG_CONFIG_SYSROOT_DIR)/usr/lib/gstreamer-1.0/include \
+   $(PKG_CONFIG_SYSROOT_DIR)/usr/lib/glib-2.0/include
+
+ CPP_DEFINE_FLAG_NAMES=\
