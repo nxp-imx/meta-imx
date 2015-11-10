@@ -1,0 +1,34 @@
+From 90254a34f57278930bbcb3bd80cfef607157b03f Mon Sep 17 00:00:00 2001
+From: Lyon Wang <lyon.wang@freescale.com>
+Date: Wed, 4 Nov 2015 18:16:52 +0800
+Subject: [PATCH] [baseparse] unset FLAG_DISCONT when push to adapter
+
+Since DISCONT flag will be handled by priv->discont flag.
+There is no need to copy DISCONT flag to adapter.
+Otherwise, the DISCONT flag will alwasys been set on each frame,
+for the first chain in buffer.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=757575
+
+Upstream-Status: Pending
+
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
+---
+ libs/gst/base/gstbaseparse.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/libs/gst/base/gstbaseparse.c b/libs/gst/base/gstbaseparse.c
+index 51d159d..184fafe 100644
+--- a/libs/gst/base/gstbaseparse.c
++++ b/libs/gst/base/gstbaseparse.c
+@@ -3026,6 +3026,7 @@ gst_base_parse_chain (GstPad * pad, GstObject * parent, GstBuffer * buffer)
+         parse->priv->discont = TRUE;
+       }
+     }
++    GST_BUFFER_FLAG_UNSET(buffer, GST_BUFFER_FLAG_DISCONT);
+     gst_adapter_push (parse->priv->adapter, buffer);
+   }
+ 
+-- 
+1.9.1
+
