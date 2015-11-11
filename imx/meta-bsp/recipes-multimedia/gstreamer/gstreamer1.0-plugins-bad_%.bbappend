@@ -1,6 +1,8 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-DEPENDS += "gst1.0-fsl-plugin gtk+3"
+DEPENDS_X11 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk+3', '', d)}"
+
+DEPENDS += "gst1.0-fsl-plugin ${DEPENDS_X11}"
 
 GST_CFLAGS_EXTRA = "${@base_contains('DISTRO_FEATURES', 'x11', '', \
                        base_contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', '-DEGL_API_FB', d),d)}"
