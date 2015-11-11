@@ -1,5 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+DEPENDS += "gst1.0-fsl-plugin gtk+3"
+
 GST_CFLAGS_EXTRA = "${@base_contains('DISTRO_FEATURES', 'x11', '', \
                        base_contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', '-DEGL_API_FB', d),d)}"
 CFLAGS_append_mx6q = " ${GST_CFLAGS_EXTRA}"
@@ -34,9 +36,11 @@ SRC_URI_append += " file://0002-mpegtsmux-Need-get-pid-when-create-streams.patch
                     file://0007-opencv-Add-video-stitching-support-based-on-Open-CV.patch \    
 "
 
-# i.MX6 patches for GST1.4.5
+# i.MX6 patches for GST1.6
 GPU_PATCHES = " file://0008-Adding-some-fragment-shaders-for-glshader-plugin.patch \
                 file://0010-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
+                file://0011-glplugin-Add-directviv-to-glimagesink-to-improve-playback-performance.patch \
+                file://0012-glplugin-Accelerate-gldownload-with-directviv-API.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
