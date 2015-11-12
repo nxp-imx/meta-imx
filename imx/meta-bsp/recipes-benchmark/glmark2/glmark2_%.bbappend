@@ -6,9 +6,7 @@ DEPENDS_remove = "virtual/libx11"
 
 REQUIRED_DISTRO_FEATURES_remove = "x11"
 
-REMOVE_GL = "${@base_contains('DISTRO_FEATURES', 'x11', \
-                   base_contains('DISTRO_FEATURES', 'wayland', 'gl', '', d), \
-                       base_contains('DISTRO_FEATURES', 'wayland', 'gl', '', d), d)}"
+REMOVE_GL = "${@base_contains('DISTRO_FEATURES', 'wayland', 'gl', '', d)}"
 
 PACKAGECONFIG_remove_mx6 = "${REMOVE_GL}"
 
