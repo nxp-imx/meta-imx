@@ -51,15 +51,11 @@ fsl_vivante_kernel_driver_handler[eventmask] = "bb.event.RecipePreFinalise"
 
 do_configure_prepend () {
     if [ "${MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT}" = "1" ]; then
-        fsl_viv_handler_defconfig="${WORKDIR}/defconfig"
-        if [ -e ${B}/.config ]; then
-            fsl_viv_handler_defconfig="${B}/.config"
-        fi
-        sed -i "/CONFIG_MXC_GPU_VIV[ =]/d" $fsl_viv_handler_defconfig
         if [ "${MACHINE_USES_VIVANTE_KERNEL_DRIVER_MODULE}" = "1" ]; then
-            echo "# CONFIG_MXC_GPU_VIV is not set" >> $fsl_viv_handler_defconfig
+            new_config="# CONFIG_MXC_GPU_VIV is not set"
         else
-            echo "CONFIG_MXC_GPU_VIV=y" >> $fsl_viv_handler_defconfig
+            new_config="CONFIG_MXC_GPU_VIV=y"
         fi
+        sed -i "s/.*CONFIG_MXC_GPU_VIV.*/$new_config/g" ${WORKDIR}/defconfig
     fi
 }
