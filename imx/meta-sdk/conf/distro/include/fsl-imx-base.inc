@@ -86,3 +86,12 @@ WARN_TO_ERROR_QA = "already-stripped compile-host-path install-host-path \
                     useless-rpaths"
 WARN_QA_remove = "${WARN_TO_ERROR_QA}"
 ERROR_QA_append = " ${WARN_TO_ERROR_QA}"
+
+# Determines if the SoC has support for Vivante kernel driver
+SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT      = "0"
+SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6  = "1"
+
+# Handle Vivante kernel driver setting:
+#   0 - machine does not have Vivante GPU driver support
+#   1 - machine has Vivante GPU driver support
+MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT ?= "${SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT}"
