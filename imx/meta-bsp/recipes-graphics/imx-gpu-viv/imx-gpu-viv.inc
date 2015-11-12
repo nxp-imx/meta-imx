@@ -116,7 +116,7 @@ do_install () {
 
     install -d ${D}${libdir}/pkgconfig
 
-    # The preference order, based in DISTRO_FEATURES, is x11, wayland and fb
+    # The preference order, based in DISTRO_FEATURES, is Wayland (with or without X11), X11 and fb
     if [ "${USE_WL}" = "yes" ]; then
         cp -axr ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
         cp -axr ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}

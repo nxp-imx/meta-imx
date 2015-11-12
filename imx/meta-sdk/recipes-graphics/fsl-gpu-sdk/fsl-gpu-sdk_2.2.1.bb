@@ -24,9 +24,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
 SRC_URI[md5sum] = "c4f01354ae90d86773ee7e6c588ea0e4"
 SRC_URI[sha256sum] = "2621d3897f944c97c2332f14b4085d6326a287889119b3f017bc0c79fa8d6da7"
 
-BACKEND = "${@base_contains('DISTRO_FEATURES', 'x11', \
-                    base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', 'X11', d), \
-                        base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', 'FB', d) ,d)}"
+BACKEND = "${@base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
+                base_contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
 
 HAS_VPU = "1"
 HAS_VPU_mx6sx = "0"

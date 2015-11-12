@@ -24,8 +24,9 @@ OPENCV_TOOLS_INSTALL = ""
 OPENCV_TOOLS_INSTALL_append_mx6 = "opencv-apps opencv-samples"
 
 RDEPENDS_${PN} = " \
-     ${@base_contains('DISTRO_FEATURES', 'x11', \
-          base_contains('DISTRO_FEATURES', 'wayland', '${SOC_GPU_TOOLS_XWAYLAND}', '${SOC_GPU_TOOLS_X11}', d), \
-                base_contains('DISTRO_FEATURES', 'wayland', '${SOC_GPU_TOOLS_WAYLAND}','${SOC_GPU_TOOLS_FB}', d) ,d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', '${SOC_GPU_TOOLS_XWAYLAND}', \
+       bb.utils.contains('DISTRO_FEATURES',         'x11', '${SOC_GPU_TOOLS_X11}', \
+       bb.utils.contains('DISTRO_FEATURES',     'wayland', '${SOC_GPU_TOOLS_WAYLAND}', \
+                                                           '${SOC_GPU_TOOLS_FB}', d), d), d)} \
     ${OPENCV_TOOLS_INSTALL} \
 "
