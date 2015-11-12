@@ -8,6 +8,8 @@ i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU 
 require recipes-kernel/linux/linux-imx.inc
 require recipes-kernel/linux/linux-dtb.inc
 
+inherit fsl-vivante-kernel-driver-handler
+
 DEPENDS += "lzop-native bc-native"
 
 SRCBRANCH = "imx_3.14.52_1.1.0_ga"
@@ -22,6 +24,16 @@ do_configure_prepend() {
    # copy latest defconfig for imx_v7_defoonfig to use
    cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
    cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
+
+   if [ "${MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT}" = "1" ]; then
+      if [ "${MACHINE_USES_VIVANTE_KERNEL_DRIVER_MODULE}" = "1" ]; then
+          new_config="# CONFIG_MXC_GPU_VIV is not set"
+      else
+          new_config="CONFIG_MXC_GPU_VIV=y"
+      fi
+      sed -i "s/.*CONFIG_MXC_GPU_VIV.*/$new_config/g" ${WORKDIR}/defconfig
+   fi
+
 }
 
 COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
