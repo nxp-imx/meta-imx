@@ -1,0 +1,155 @@
+From 1a917447c3749f0a6d3ff98b8dcbc7439b48293d Mon Sep 17 00:00:00 2001
+From: Haihua Hu <b55597@freescale.com>
+Date: Fri, 13 Nov 2015 10:51:25 +0800
+Subject: [PATCH] [glplugin] support video crop for glimagesink
+
+1.Add video crop meta copy in glupload
+2.Calculate the new texture coordinate in vertices array and bind to buffer object
+3.Make glimagesink only updating vertices array when video crop meta changed
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Haihua Hu <b55597@freescale.com>
+---
+ ext/gl/gstglimagesink.c       |   53 ++++++++++++++++++++++++++++++++++++++++-
+ ext/gl/gstglimagesink.h       |    3 +++
+ gst-libs/gst/gl/gstglupload.c |   10 ++++++++
+ 3 files changed, 65 insertions(+), 1 deletion(-)
+
+diff --git a/ext/gl/gstglimagesink.c b/ext/gl/gstglimagesink.c
+index 1e5dc05..6fc0f9e 100644
+--- a/ext/gl/gstglimagesink.c
++++ b/ext/gl/gstglimagesink.c
+@@ -585,6 +585,8 @@ gst_glimage_sink_init (GstGLImageSink * glimage_sink)
+   glimage_sink->handle_events = TRUE;
+   glimage_sink->ignore_alpha = TRUE;
+   glimage_sink->overlay_compositor = NULL;
++  glimage_sink->cropmeta = NULL;
++  glimage_sink->prev_cropmeta = NULL;
+ 
+   glimage_sink->mview_output_mode = DEFAULT_MULTIVIEW_MODE;
+   glimage_sink->mview_output_flags = DEFAULT_MULTIVIEW_FLAGS;
+@@ -1039,6 +1041,12 @@ gst_glimage_sink_change_state (GstElement * element, GstStateChange transition)
+         gst_object_unref (glimage_sink->display);
+         glimage_sink->display = NULL;
+       }
++
++      glimage_sink->cropmeta = NULL;
++      if (glimage_sink->prev_cropmeta)
++        g_slice_free(GstVideoCropMeta, glimage_sink->prev_cropmeta);
++      glimage_sink->prev_cropmeta = NULL;
++
+       break;
+     default:
+       break;
+@@ -1452,6 +1460,8 @@ gst_glimage_sink_show_frame (GstVideoSink * vsink, GstBuffer * buf)
+       GST_VIDEO_SINK_WIDTH (glimage_sink),
+       GST_VIDEO_SINK_HEIGHT (glimage_sink));
+ 
++  glimage_sink->cropmeta = gst_buffer_get_video_crop_meta (buf);
++
+   /* Ask the underlying window to redraw its content */
+   if (!gst_glimage_sink_redisplay (glimage_sink))
+     goto redisplay_failed;
+@@ -1638,7 +1648,7 @@ config_failed:
+ }
+ 
+ /* *INDENT-OFF* */
+-static const GLfloat vertices[] = {
++static GLfloat vertices[] = {
+      1.0f,  1.0f, 0.0f, 1.0f, 0.0f,
+     -1.0f,  1.0f, 0.0f, 0.0f, 0.0f,
+     -1.0f, -1.0f, 0.0f, 0.0f, 1.0f,
+@@ -1898,6 +1908,47 @@ gst_glimage_sink_on_draw (GstGLImageSink * gl_sink)
+ 
+     gst_gl_shader_use (gl_sink->redisplay_shader);
+ 
++    if (gl_sink->cropmeta) {
++      gint width = GST_VIDEO_SINK_WIDTH (gl_sink);
++      gint height = GST_VIDEO_SINK_HEIGHT (gl_sink);
++
++      if (!gl_sink->prev_cropmeta){
++        /* Initialize the previous crop meta and set all memroy to zero */
++        gl_sink->prev_cropmeta = (GstVideoCropMeta *) g_slice_new0(GstVideoCropMeta);
++      }
++
++      /* If crop meta not equal to the previous, recalculate the vertices */
++      if (gl_sink->prev_cropmeta->x != gl_sink->cropmeta->x
++        || gl_sink->prev_cropmeta->y != gl_sink->cropmeta->y
++        || gl_sink->prev_cropmeta->width != gl_sink->cropmeta->width
++        || gl_sink->prev_cropmeta->height != gl_sink->cropmeta->height){
++
++        vertices[8] = (float)(gl_sink->cropmeta->x) / width;
++        vertices[9] = (float)(gl_sink->cropmeta->y) / height;
++
++        vertices[3] = (float)(gl_sink->cropmeta->width + gl_sink->cropmeta->x) / width;
++        vertices[4] = vertices[9];
++
++        vertices[13] = vertices[8];
++        vertices[14] = (float)(gl_sink->cropmeta->height + gl_sink->cropmeta->y) / height;
++
++        vertices[18] = vertices[3];
++        vertices[19] = vertices[14];
++
++        gl->BindBuffer (GL_ARRAY_BUFFER, gl_sink->vertex_buffer);
++        gl->BufferData (GL_ARRAY_BUFFER, 4 * 5 * sizeof (GLfloat), vertices,
++            GL_STATIC_DRAW);
++
++        gl->BindBuffer (GL_ARRAY_BUFFER, 0);
++
++        /* Store the previous crop meta */
++        gl_sink->prev_cropmeta->x = gl_sink->cropmeta->x;
++        gl_sink->prev_cropmeta->y = gl_sink->cropmeta->y;
++        gl_sink->prev_cropmeta->width = gl_sink->cropmeta->width;
++        gl_sink->prev_cropmeta->height = gl_sink->cropmeta->height;
++      }
++    }
++
+     if (gl->GenVertexArrays)
+       gl->BindVertexArray (gl_sink->vao);
+     else
+diff --git a/ext/gl/gstglimagesink.h b/ext/gl/gstglimagesink.h
+index f7b3bfb..a26ca4b 100644
+--- a/ext/gl/gstglimagesink.h
++++ b/ext/gl/gstglimagesink.h
+@@ -102,6 +102,9 @@ struct _GstGLImageSink
+     guint window_width;
+     guint window_height;
+ 
++    GstVideoCropMeta *cropmeta;
++    GstVideoCropMeta *prev_cropmeta;
++
+     GstVideoRectangle display_rect;
+ 
+     GstGLShader *redisplay_shader;
+diff --git a/gst-libs/gst/gl/gstglupload.c b/gst-libs/gst/gl/gstglupload.c
+index acaa329..0d36248 100644
+--- a/gst-libs/gst/gl/gstglupload.c
++++ b/gst-libs/gst/gl/gstglupload.c
+@@ -756,6 +756,7 @@ _physical_buffer_upload_perform(gpointer impl, GstBuffer *buffer, GstBuffer **ou
+ {
+   struct PhyBufferUpload *phyBuffer = impl;
+   GstVideoInfo *info;
++  GstVideoCropMeta *incropmeta, *outcropmeta;
+   gint n_mem;
+ 
+   info = &phyBuffer->upload->priv->out_info;
+@@ -774,6 +775,15 @@ _physical_buffer_upload_perform(gpointer impl, GstBuffer *buffer, GstBuffer **ou
+   gst_buffer_add_video_meta_full (*outbuf, 0,
+       GST_VIDEO_INFO_FORMAT (info), GST_VIDEO_INFO_WIDTH (info),
+       GST_VIDEO_INFO_HEIGHT (info), n_mem, info->offset, info->stride);
++  /* add video crop meta to out buffer if need */
++  incropmeta = gst_buffer_get_video_crop_meta(buffer);
++  if(incropmeta){
++    outcropmeta = gst_buffer_add_video_crop_meta(*outbuf);
++    outcropmeta->x = incropmeta->x;
++    outcropmeta->y = incropmeta->y;
++    outcropmeta->width = incropmeta->width;
++    outcropmeta->height = incropmeta->height;
++  }
+ 
+   return GST_GL_UPLOAD_DONE;
+ }
+-- 
+1.7.9.5
+
