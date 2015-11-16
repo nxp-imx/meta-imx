@@ -25,6 +25,9 @@ SRC_URI[sha256sum] = "c9237da59a9bc3b2e42e81ec1dff6974f710c21f9df6c7f22a5b037b56
 BACKEND = "${@base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
                 base_contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
 
+HAS_VPU = "1"
+HAS_VPU_mx6sx = "0"
+
 do_compile () {
     export FSL_GRAPHICS_SDK=${S}
     export FSL_PLATFORM_NAME=Yocto
@@ -38,6 +41,10 @@ do_install () {
     install -d "${D}/opt/${PN}"
     ./build.sh -f  GNUmakefile_Yocto EGLBackend=${BACKEND} install 
     cp -r bin/* "${D}/opt/${PN}"
+    if [ "${HAS_VPU}" = "0" ]; then
+        rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
+        rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
+    fi
     rm -rf ${D}/opt/${PN}/GLES2/S05_PrecompiledShader
     rm -rf ${D}/opt/${PN}/GLES3/S05_PrecompiledShader
 }
