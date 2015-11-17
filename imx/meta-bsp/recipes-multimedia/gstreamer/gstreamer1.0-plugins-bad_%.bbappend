@@ -42,6 +42,9 @@ GPU_PATCHES = " file://0008-Adding-some-fragment-shaders-for-glshader-plugin.pat
                 file://0011-glplugin-Add-directviv-to-glimagesink-to-improve-playback-performance.patch \
                 file://0012-glplugin-Accelerate-gldownload-with-directviv-API.patch \
                 file://0013-glplugin-support-video-crop-for-glimagesink.patch \
+                file://0014-glplugin-Support-fb-backend-for-gl-plugins.patch \
+                file://0015-glplugin-Change-wayland-default-res-to-1024x768.patch \
+                file://0016-Add-one-deinterlacing-fragment-shader-file.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
