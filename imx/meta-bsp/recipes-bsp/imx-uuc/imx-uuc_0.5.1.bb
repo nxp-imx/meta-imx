@@ -7,8 +7,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "fa34c129b9a9287a9e48a8b293bac1a4"
-SRC_URI[sha256sum] = "a8a1bf56fe9fe43558cf9f9dc5cf7b8113946a686f91c496990624658d187621"
+SRC_URI[md5sum] = "2c6c6eecabdaf2fa93b9e55e719a98f5"
+SRC_URI[sha256sum] = "731f3204dcce954287ae738bcfc74fd721f8cf1b2abe159bf2e7906db2c96697"
 
 inherit autotools-brokensep
 
