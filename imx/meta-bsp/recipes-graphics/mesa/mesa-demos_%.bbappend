@@ -1,7 +1,9 @@
 FILESEXTRAPATHS_prepend_mx6 := "${THISDIR}/${PN}:"
 
 SRC_URI_append_mx6 = " file://0001-Additional-eglSwapBuffer-calling-makes-wrong-throttl.patch \
-                     file://0001-Add-OpenVG-demos-to-support-wayland.patch"
+                     file://0002-Add-OpenVG-demos-to-support-wayland.patch \
+                     file://0003-mesa-demos-OpenVG-demos-with-single-frame-need-eglSw.patch \
+                     "
 
 DEPENDS = "mesa"
 
