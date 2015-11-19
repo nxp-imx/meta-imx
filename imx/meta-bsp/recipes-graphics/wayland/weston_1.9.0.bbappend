@@ -6,6 +6,7 @@ SRC_URI_append_mx6 = " \
     file://0002-MGS-1111-Add-GPU-VIV-suport-for-wayland-and-weston-1.patch \
     file://0003-MGS-1192-xwld-g2d-compositor-dose-not-work.patch \
     file://0004-MGS-1235-Fix-setenv-and-clear-environments.patch \
+    file://0005-MGS-1252-Fix-for-Qt5_CinematicExperience-will-meet-s.patch \
 "
 
 PACKAGECONFIG_append_mx6q = " cairo-glesv2"
