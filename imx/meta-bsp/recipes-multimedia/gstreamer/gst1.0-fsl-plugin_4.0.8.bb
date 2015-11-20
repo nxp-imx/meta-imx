@@ -19,8 +19,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
                     file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
 
 SRC_URI = "${FSL_MIRROR}/gst1.0-fsl-plugins-${PV}.tar.gz"
-SRC_URI[md5sum] = "b6f9479f3085abb3cb0c4bf0f167548b"
-SRC_URI[sha256sum] = "bdc332090e10ac42bb8d596d19d4cf2ecd4b404d98aa65664553157b16bd1292"
+SRC_URI[md5sum] = "0669eeea4e37203e2e654a00ded35ba2"
+SRC_URI[sha256sum] = "43c86f88d3c7b1da8d38815eaec297a9b8652e1fb770ff89c26d617f63ea068b"
 
 S = "${WORKDIR}/gst1.0-fsl-plugins-${PV}"
 
