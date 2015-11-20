@@ -21,7 +21,6 @@ BBMASK = "meta-fsl-arm/recipes-bsp/u-boot/u-boot-imx_2015.04.bb"
 BBMASK .= "|meta-fsl-arm/recipes-bsp/u-boot/u-boot-imx-mfgtool_2015.04.bb"
 BBMASK .= "|meta-fsl-arm/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend"
 BBMASK .= "|meta-freescale/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend"
-BBMASK .= "|meta-fsl-arm/classes/fsl-vivante-kernel-driver-handler.bbclass"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 # Comment out the 2 lines below to use bluez4.
