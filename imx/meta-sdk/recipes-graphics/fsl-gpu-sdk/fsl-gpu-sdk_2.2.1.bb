@@ -30,9 +30,6 @@ BACKEND = "${@base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
 HAS_VPU = "1"
 HAS_VPU_mx6sx = "0"
 
-HAS_VPU = "1"
-HAS_VPU_mx6sx = "0"
-
 do_compile () {
     export FSL_GRAPHICS_SDK=${S}
     export FSL_PLATFORM_NAME=Yocto
