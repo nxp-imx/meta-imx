@@ -101,6 +101,7 @@ EXTRA_OECONF += " \
     --disable-opensles \
     --disable-pvr \
     --disable-resindvd \
+    --disable-qt \
     --disable-sdl \
     --disable-sdltest \
     --disable-sndio \
