@@ -1,0 +1,47 @@
+From 5d83c4db60646ce077dfb2460b59c9d30ce06b04 Mon Sep 17 00:00:00 2001
+From: Lyon Wang <lyon.wang@freescale.com>
+Date: Tue, 17 Nov 2015 14:56:47 +0800
+Subject: [PATCH] gstaudiobasesink print warning istead of return ERROR.
+
+For those clips with corrupt audio track,
+there might be no output from audio decoder
+and thus the audio track have no chance to negotiate.
+We can just print error warning instead of return ERROR,
+so that other track can be played normally
+
+https://bugzilla.gnome.org/show_bug.cgi?id=758215
+
+Upstream-Status:  Pending
+
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
+---
+ gst-libs/gst/audio/gstaudiobasesink.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+ mode change 100644 => 100755 gst-libs/gst/audio/gstaudiobasesink.c
+
+diff --git a/gst-libs/gst/audio/gstaudiobasesink.c b/gst-libs/gst/audio/gstaudiobasesink.c
+old mode 100644
+new mode 100755
+index 704801e..a4a716b
+--- a/gst-libs/gst/audio/gstaudiobasesink.c
++++ b/gst-libs/gst/audio/gstaudiobasesink.c
+@@ -1133,10 +1133,15 @@ gst_audio_base_sink_wait_event (GstBaseSink * bsink, GstEvent * event)
+     case GST_EVENT_GAP:
+       /* We must have a negotiated format before starting the ringbuffer */
+       if (G_UNLIKELY (!gst_audio_ring_buffer_is_acquired (sink->ringbuffer))) {
+-        GST_ELEMENT_ERROR (sink, STREAM, FORMAT, (NULL),
++  /*      GST_ELEMENT_ERROR (sink, STREAM, FORMAT, (NULL),
+             ("Sink not negotiated before %s event.",
+                 GST_EVENT_TYPE_NAME (event)));
++
+         return GST_FLOW_ERROR;
++   */
++        /* consider there might be chance that corrupt audio track without output buffer and not negotiated.
++             We'd better not return error and quit play, video track can keep playing.*/
++        GST_ERROR_OBJECT(sink, "Sink not negotiated before %s event.",GST_EVENT_TYPE_NAME (event));
+       }
+ 
+       gst_audio_base_sink_force_start (sink);
+-- 
+1.9.1
+

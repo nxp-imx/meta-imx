@@ -9,6 +9,7 @@ SRC_URI_append = " file://0001-basetextoverlay-make-memory-copy-when-video-buffe
                    file://0006-ENGR00312515-get-caps-from-src-pad-when-query-caps.patch \
                    file://0007-taglist-not-send-to-down-stream-if-all-the-frame-cor.patch \
                    file://0008-handle-audio-video-decoder-error.patch \
+                   file://0009-gstaudiobasesink-print-warning-istead-of-return-ERRO.patch \
 "
 
 # Enable pango lib
