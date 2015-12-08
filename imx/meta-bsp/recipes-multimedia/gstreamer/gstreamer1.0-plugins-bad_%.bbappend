@@ -45,6 +45,11 @@ GPU_PATCHES = " file://0008-Adding-some-fragment-shaders-for-glshader-plugin.pat
                 file://0014-glplugin-Support-fb-backend-for-gl-plugins.patch \
                 file://0015-glplugin-Change-wayland-default-res-to-1024x768.patch \
                 file://0016-Add-one-deinterlacing-fragment-shader-file.patch \
+                file://0017-glplugin-Add-fps-print-in-glimagesink.patch \
+                file://0018-glplugin-glwindow-fix-memory-leak-of-navigation-thre.patch \
+                file://0019-glplugin-gl-wayland-fix-loop-test-hang-in-glimagesin.patch \
+                file://0020-glplugin-Fix-glimagesink-wayland-resize-showed-blurr.patch \
+                file://0021-glplugin-fix-gleffects-fisheye-shader-co.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"

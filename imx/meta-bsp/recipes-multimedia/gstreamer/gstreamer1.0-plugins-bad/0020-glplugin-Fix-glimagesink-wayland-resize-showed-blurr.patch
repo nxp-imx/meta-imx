@@ -1,0 +1,33 @@
+From 04e9016cd1efb14332a630fb79a1912ec2f3f32f Mon Sep 17 00:00:00 2001
+From: Haihua Hu <b55597@freescale.com>
+Date: Tue, 8 Dec 2015 16:06:34 +0800
+Subject: [PATCH 4/5] [glplugin] Fix glimagesink wayland resize showed blurred
+ screen
+
+For imx, wl_egl_window type is not a wl_proxy object. Can not set
+queue to wl_egl_window object.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Haihua Hu <b55597@freescale.com>
+---
+ gst-libs/gst/gl/wayland/gstglwindow_wayland_egl.c |    3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/gst-libs/gst/gl/wayland/gstglwindow_wayland_egl.c b/gst-libs/gst/gl/wayland/gstglwindow_wayland_egl.c
+index 8ec9e7a..dbd3e67 100644
+--- a/gst-libs/gst/gl/wayland/gstglwindow_wayland_egl.c
++++ b/gst-libs/gst/gl/wayland/gstglwindow_wayland_egl.c
+@@ -325,9 +325,6 @@ create_surfaces (GstGLWindowWaylandEGL * window_egl)
+ 
+     window_egl->window.native =
+         wl_egl_window_create (window_egl->window.surface, width, height);
+-    if (window_egl->window.surface_queue)
+-      wl_proxy_set_queue ((struct wl_proxy *) window_egl->window.native,
+-          window_egl->window.surface_queue);
+   }
+ }
+ 
+-- 
+1.7.9.5
+
