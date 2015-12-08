@@ -74,4 +74,4 @@ FILES_${PN}-grecorder = "${bindir}/grecorder-1.0"
 FILES_${PN}-librecorder-engine = "${libdir}/librecorder_engine-1.0${SOLIBS}"
 FILES_${PN}-libplayengine = "${libdir}/libplayengine-1.0${SOLIBS}"
 
-COMPATIBLE_MACHINE = "(mx6|mx7|mx6ul)"
+COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
