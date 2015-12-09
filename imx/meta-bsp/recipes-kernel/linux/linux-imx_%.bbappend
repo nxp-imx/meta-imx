@@ -3,7 +3,7 @@
 
 inherit fsl-vivante-kernel-driver-handler
 
-IMX_UAPI_HEADERS = "mxc_asrc.h mxc_dcic mxcfb.h mxc_mlb.h mxc_sim_interface.h \
+IMX_UAPI_HEADERS = "mxc_asrc.h mxc_dcic.h mxcfb.h mxc_mlb.h mxc_sim_interface.h \
                     mxc_v4l2.h ipu.h videodev2.h pxp_device.h pxp_dma.h"
 do_install_append () {
    # Install i.MX specific uapi headers
