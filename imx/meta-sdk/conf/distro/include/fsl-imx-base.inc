@@ -19,6 +19,7 @@ IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 # Comment out the 2 lines below to use bluez4.
 DISTRO_FEATURES_append_mx6 = " bluez5"
+DISTRO_FEATURES_append_mx6ul = " bluez5"
 DISTRO_FEATURES_append_mx7 = " bluez5"
 
 SDK_NAME = "${DISTRO}-${TCLIBC}-${SDK_ARCH}-${IMAGE_BASENAME}-${TUNE_PKGARCH}"
