@@ -33,7 +33,6 @@ PREFERRED_VERSION_wayland-native = "1.9.0"
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
 
-# Chromium and qtwebengine both require GCC 4.9.3 to build
-GCCVERSION_mx6 = "4.9%"
-GCCVERSION_mx6ul = "4.9%"
-GCCVERSION_mx7 = "4.9%"
+GCCVERSION_mx6 = "5.2%"
+GCCVERSION_mx6ul = "5.2%"
+GCCVERSION_mx7 = "5.2%"
