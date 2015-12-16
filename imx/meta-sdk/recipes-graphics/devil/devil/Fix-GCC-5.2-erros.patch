@@ -1,0 +1,21 @@
+diff -Naur devil-1.7.8_org/include/IL/il.h devil-1.7.8/include/IL/il.h
+--- devil-1.7.8_org/include/IL/il.h	2015-12-16 14:31:33.105076974 -0600
++++ devil-1.7.8/include/IL/il.h	2015-12-16 14:33:47.000000000 -0600
+@@ -63,13 +63,13 @@
+ 	#endif
+ #endif
+ 
+-#ifdef RESTRICT_KEYWORD
+-#define RESTRICT restrict
+-#define CONST_RESTRICT const restrict
++#if defined(RESTRICT_KEYWORD) && !defined(__cplusplus)
++#define RESTRICT __restrict__
++#define CONST_RESTRICT const __restrict__
+ #else
+ #define RESTRICT
+ #define CONST_RESTRICT const
+-#endif
++#endif // RESTRICT keyword and not C++
+ 
+ #include <stdio.h>
+ 

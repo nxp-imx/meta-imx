@@ -8,9 +8,10 @@ DEPENDS = "libpng jpeg"
 RDEPENDS_${PN} += "libpng "
 
 SRC_URI = "http://sourceforge.net/projects/openil/files/DevIL/1.7.8/DevIL-${PV}.zip \
-		   file://il_manip_c.patch \
-		   file://il_manip_h.patch \
-		   file://M4Patch.patch "
+           file://il_manip_c.patch \
+           file://il_manip_h.patch \
+           file://M4Patch.patch \
+           file://Fix-GCC-5.2-erros.patch"
 SRC_URI[md5sum] = "312853ef9c85ad7b2100f9cd068b2a5b"
 SRC_URI[sha256sum] = "4368d83b3016b5eafe8984f0d7f86ccee76b8993cf900d3a8cbd4901b52f64eb"
 
