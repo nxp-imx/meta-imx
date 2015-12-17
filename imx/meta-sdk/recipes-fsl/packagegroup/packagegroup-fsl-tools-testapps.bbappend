@@ -8,8 +8,8 @@ PACKAGES += " \
 "
 
 RDEPENDS_${PN}-fslcodec-testapps += " \
-    libfslcodec-test-bin \
-    libfslcodec-test-source \
+    imx-codec-test-bin \
+    imx-codec-test-source \
 "
 
 ALLOW_EMPTY_${PN}-fslcodec-testapps = "1"

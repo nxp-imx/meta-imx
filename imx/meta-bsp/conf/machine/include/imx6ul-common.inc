@@ -17,7 +17,7 @@ PREFERRED_PROVIDER_virtual/libgles2_mx6ul = "mesa"
 PREFERRED_PROVIDER_virtual/libgl_mx6ul = "mesa"
 PREFERRED_PROVIDER_virtual/libg2d_mx6ul = ""
 
-MACHINE_SOCARCH_FILTER_mx6ul = "libfslcodec libfslparser gst-fsl-plugins"
+MACHINE_SOCARCH_FILTER_mx6ul = "imx-codec imx-parser gst-fsl-plugins"
 
 # Extra audio support
 # FIXME: Add support for imx6ul
