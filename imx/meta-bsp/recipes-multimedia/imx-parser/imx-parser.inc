@@ -1,5 +1,5 @@
 # Copyright (C) 2012-2014 O.S. Systems Software LTDA.
-# Copyright (C) 2012-2013 Freescale Semiconductor
+# Copyright (C) 2012-2015 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "Freescale Multimedia parser libs"
 LICENSE = "Proprietary"

@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2014 Freescale Semiconductor
+# Copyright (C) 2012-2015 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "Freescale Multimedia codec libs"
 LICENSE = "Proprietary"
