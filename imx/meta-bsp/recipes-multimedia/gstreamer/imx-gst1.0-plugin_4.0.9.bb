@@ -6,9 +6,9 @@ DESCRIPTION = "Gstreamer freescale plugins"
 LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
-DEPENDS = "libfslcodec libfslparser virtual/kernel gstreamer1.0 gstreamer1.0-plugins-base"
-DEPENDS_append_mx6q = " imx-lib imx-vpu libfslvpuwrap"
-DEPENDS_append_mx6dl = " imx-lib imx-vpu libfslvpuwrap"
+DEPENDS = "imx-codec imx-parser virtual/kernel gstreamer1.0 gstreamer1.0-plugins-base"
+DEPENDS_append_mx6q = " imx-lib imx-vpu imx-vpuwrap"
+DEPENDS_append_mx6dl = " imx-lib imx-vpu imx-vpuwrap"
 DEPENDS_append_mx6sl = " imx-lib"
 DEPENDS_append_mx6sx = " imx-lib"
 DEPENDS_append_mx6ul = " imx-lib"
@@ -18,11 +18,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
                     file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
                     file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
 
-SRC_URI = "${FSL_MIRROR}/gst1.0-fsl-plugins-${PV}.tar.gz"
+SRC_URI = "${FSL_MIRROR}/imx-gst1.0-plugins-${PV}.tar.gz"
 SRC_URI[md5sum] = "8b79d5a8864da03ae3b8792070e42754"
 SRC_URI[sha256sum] = "603f9ce3dfc1cff81b9ea3ad87128fc9547e92b686e3617a40b0faaefde0a322"
 
-S = "${WORKDIR}/gst1.0-fsl-plugins-${PV}"
+S = "${WORKDIR}/imx-gst1.0-plugins-${PV}"
 
 inherit autotools pkgconfig
 
@@ -44,8 +44,8 @@ EXTRA_OECONF = "PLATFORM=${PLATFORM} \
 PACKAGES =+ "${PN}-gplay ${PN}-libgplaycore ${PN}-libgstfsl ${PN}-grecorder ${PN}-librecorder-engine ${PN}-libplayengine"
 
 # Add codec list that the beep plugin run-time depended
-BEEP_RDEPENDS = "libfslcodec-aac libfslcodec-mp3 libfslcodec-oggvorbis"
-RDEPENDS_${PN} += "libfslparser ${BEEP_RDEPENDS} gstreamer1.0-plugins-good-id3demux "
+BEEP_RDEPENDS = "imx-codec-aac imx-codec-mp3 imx-codec-oggvorbis"
+RDEPENDS_${PN} += "imx-parser ${BEEP_RDEPENDS} gstreamer1.0-plugins-good-id3demux "
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG_mx6 = "overlaysink"
@@ -53,10 +53,10 @@ PACKAGECONFIG_mx6 = "overlaysink"
 
 # FIXME: Add all features
 # feature from excluded mm packages
-PACKAGECONFIG[ac3] += ",,libfslac3codec,libfslac3codec"
+PACKAGECONFIG[ac3] += ",,imx-ac3codec,imx-ac3codec"
 # feature from special mm packages
-PACKAGECONFIG[aacp] += ",,libfslaacpcodec,libfslaacpcodec"
-MSDEPENDS = "libfslmsparser libfslmscodec"
+PACKAGECONFIG[aacp] += ",,imx-aacpcodec,imx-aacpcodec"
+MSDEPENDS = "imx-msparser imx-mscodec"
 PACKAGECONFIG[wma10dec] += ",,${MSDEPENDS},${MSDEPENDS}"
 PACKAGECONFIG[wma8enc] += "--enable-wma8enc,--disable-wma8enc,${MSDEPENDS},${MSDEPENDS}"
 OVDEPENDS = "virtual/libg2d"

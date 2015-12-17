@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3880bb9c943b135a30fad5e8aabd3ee9"
 inherit fsl-eula-unpack autotools pkgconfig
 
 # base on QtMultimedia v5.2.1
-DEPENDS += "qtmultimedia gstreamer1.0 gstreamer1.0-plugins-base gst1.0-fsl-plugin"
+DEPENDS += "qtmultimedia gstreamer1.0 gstreamer1.0-plugins-base imx-gst1.0-plugin"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://qtimxplayer.desktop \
