@@ -4,6 +4,10 @@ SOC_FAMILY = "mx6ul"
 
 DEFAULTTUNE_mx6ul ?= "cortexa7hf-neon"
 
+UBOOT_ENTRYPOINT_mx6ul  = "0x10008000"
+
+SDCARD_GENERATION_COMMAND_mx6ul = "generate_imx_sdcard"
+
 SERIAL_CONSOLE = "115200 ttymxc0"
 
 MACHINE_FEATURES += " pci wifi bluetooth"
