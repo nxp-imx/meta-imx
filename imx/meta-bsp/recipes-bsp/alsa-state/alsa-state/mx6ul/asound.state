@@ -2124,7 +2124,7 @@ state.wm8960audio {
 	control.57 {
 		iface MIXER
 		name 'Left Boost Mixer LINPUT1 Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
