@@ -9,5 +9,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 inherit module
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "b18ffc97b7d6cb83dfb83d8871fb09f7"
-SRC_URI[sha256sum] = "f4b431571b2c9e68abca376562a73b4dee9fa2e1edd79d88cfa98dd981259584"
+SRC_URI[md5sum] = "c6d3f998d5332c3fd2e6241819a77047"
+SRC_URI[sha256sum] = "c7ab7c6ad9c0c2715790da6d55534098dbda6732ee81f321f963bcb25a3e3fe8"
