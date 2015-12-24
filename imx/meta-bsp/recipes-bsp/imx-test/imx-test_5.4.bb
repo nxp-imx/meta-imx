@@ -1,7 +1,10 @@
 # Copyright (C) 2013-2015 Freescale Semiconductor
 
 include recipes-bsp/imx-test/imx-test.inc
-DEPENDS_mx7d = "virtual/kernel imx-lib"
+
+DEPENDS_mx6 += "imx-vpu"
+DEPENDS_mx6ul += "imx-vpu"
+DEPENDS_mx7d = "virtual/kernel imx-lib imx-vpu"
 
 DEPENDS_mx6q += "${@base_contains('DISTRO_FEATURES', 'x11', \
                    ' libx11 libxdamage libxrender libxrandr', '', d)}"
