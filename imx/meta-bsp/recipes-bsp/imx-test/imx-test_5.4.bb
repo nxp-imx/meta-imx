@@ -2,7 +2,8 @@
 
 include recipes-bsp/imx-test/imx-test.inc
 
-DEPENDS_mx6 += "imx-vpu"
+DEPENDS_mx6sl += "imx-vpu"
+DEPENDS_mx6sx += "imx-vpu"
 DEPENDS_mx6ul += "imx-vpu"
 DEPENDS_mx7d = "virtual/kernel imx-lib imx-vpu"
 
