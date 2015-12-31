@@ -6,4 +6,4 @@ require recipes-bsp/u-boot/u-boot-mfgtool.inc
 SRCBRANCH = "imx_v2015.04"
 UBOOT_SRC ?= "git://git.freescale.com/imx/uboot-imx.git;protocol=git"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "d0c650df58b592509685a4bd1575e0bebd81932c"
+SRCREV = "327dad065f6f9a2b29bd646efc7a08a4c01a4ad3"
