@@ -7,5 +7,4 @@ SRC_URI_append_mx6sx = " file://0001-MGS-515-ccc-Opencv-app-can-t-run-on-imx6sx-
 PACKAGECONFIG_remove = "libav"
 
 # Camera cannot work with libv4l
-EXTRA_OECMAKE += "-DWITH_LIBV4L=OFF \
-"
+PACKAGECONFIG_remove = "libv4l"
