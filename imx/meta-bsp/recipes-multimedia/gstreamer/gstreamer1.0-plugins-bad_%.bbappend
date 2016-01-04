@@ -26,6 +26,7 @@ PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayla
 SRC_URI_append = " file://0001-intall-the-header-file-of-gstaggregator-and-gstvideo.patch \
                    file://0005-modifiy-the-videoparse-rank.patch \
                    file://0009-camerabin-Add-one-property-to-set-sink-element-for-v.patch \
+                   file://0022-vidoeparse-Roll-back-h264parse-rank.patch \
 "
 
 #common

@@ -1,0 +1,36 @@
+From 12909bcae0504687ba1bb7c8fc385e858fdd3f30 Mon Sep 17 00:00:00 2001
+From: Lyon Wang <lyon.wang@freescale.com>
+Date: Mon, 4 Jan 2016 14:58:02 +0800
+Subject: [PATCH] [vidoeparse] Roll-back h264parse rank
+
+Roll back the h264parse rank.
+MMFMWK-7012
+For SW video decoder, it only support aligment au,
+But in GST1.6, rtph264depay output aligment nal format video.
+Need link h264parse to convert it to au alginment,
+make the sw decodear work
+
+http://sw-jira.freescale.net/browse/MMFMWK-7012
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
+---
+ gst/videoparsers/plugin.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gst/videoparsers/plugin.c b/gst/videoparsers/plugin.c
+index c070b93..6fb0161 100644
+--- a/gst/videoparsers/plugin.c
++++ b/gst/videoparsers/plugin.c
+@@ -56,7 +56,7 @@ plugin_init (GstPlugin * plugin)
+   ret |= gst_element_register (plugin, "h263parse",
+       GST_RANK_MARGINAL - 1, GST_TYPE_H263_PARSE);
+   ret |= gst_element_register (plugin, "h264parse",
+-      GST_RANK_MARGINAL - 1, GST_TYPE_H264_PARSE);
++      GST_RANK_PRIMARY + 1, GST_TYPE_H264_PARSE);
+   ret |= gst_element_register (plugin, "diracparse",
+       GST_RANK_NONE, GST_TYPE_DIRAC_PARSE);
+   ret |= gst_element_register (plugin, "mpegvideoparse",
+-- 
+1.9.1
+
