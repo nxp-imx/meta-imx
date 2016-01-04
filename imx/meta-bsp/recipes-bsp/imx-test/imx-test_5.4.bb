@@ -23,8 +23,8 @@ DEPENDS_mx7d += "${@base_contains('DISTRO_FEATURES', 'x11', \
 SRC_URI_append_mx5 = " file://clocks.sh"
 SRC_URI_append_mxs = " file://clocks.sh"
 
-SRC_URI[md5sum] = "ca01cda8f7d82b7a967e171d5a36db3b"
-SRC_URI[sha256sum] = "164d5ef7a37a5fb01afc2ad649a56e29cd33d8b1cf9f80ac7c093a2ad5bda643"
+SRC_URI[md5sum] = "7b54001a3fdb7dc753605e791a7eefdf"
+SRC_URI[sha256sum] = "5f5d6b9919b379eaecfc95d8c564ed85ed7a7d7f874c025e9e6cd3044b71eaf7"
 
 PLATFORM_mx7 = "IMX7D"
 PLATFORM_mx6ul = "IMX6UL"
