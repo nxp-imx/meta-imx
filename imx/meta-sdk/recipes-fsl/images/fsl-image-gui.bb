@@ -33,7 +33,7 @@ CONFLICT_DISTRO_FEATURES = "directfb"
 WAYLAND_IMAGE_INSTALL = ""
 WAYLAND_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'wayland', \
                                       base_contains('DISTRO_FEATURES', 'x11',' \
-                                          xterm xserver-xorg-xwayland weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', 'weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', d), '',d)}"
+                                          xterm weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', 'weston weston-init weston-examples gtk+3-demo clutter-1.0-examples', d), '',d)}"
 WAYLAND_IMAGE_INSTALL_remove_mx6sl = "clutter-1.0-examples"
 
 # X11 packages
