@@ -12,6 +12,7 @@ SRC_URI_append = " file://0001-basetextoverlay-make-memory-copy-when-video-buffe
                    file://0009-gstaudiobasesink-print-warning-istead-of-return-ERRO.patch \
                    file://0010-Disable-orc-optimization-for-lib-video-in-plugins-ba.patch \
                    file://0011-convertframe-Support-video-crop-when-convert-frame.patch \
+                   file://0012-MMFMWK-7030-Linux_MX6QP_ARD-IMXCameraApp-When-Enable.patch \
 "
 
 # Enable pango lib
