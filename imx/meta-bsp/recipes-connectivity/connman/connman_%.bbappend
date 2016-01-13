@@ -1,7 +1,6 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-do_install_append() {
-     # This patch will fix to the issue that 2 Ethernet port board failed to mount nfs rootfs
-    if [ -e ${D}${sysconfdir}/init.d/connman ]; then
-        sed -e 's/ifconfig | grep \"^eth\" | sed -e \"s\//dmesg | grep \"device=eth\" | sed -e \"s\/^.*/' -i ${D}${sysconfdir}/init.d/connman
-    fi
-}
+# Using the enhanced verison of connman script.
+#   - Fixes the issue that 2 Ethernet port board failed to mount nfs rootfs
+#   - Support below kernel IP cfg parameters:  ip=:::::eth0:dhcp
+#     (Support static ip address like: ip=10.192.242.179:10.192.242.47:10.192.242.254:255.255.255.0:imx:eth0:off)
