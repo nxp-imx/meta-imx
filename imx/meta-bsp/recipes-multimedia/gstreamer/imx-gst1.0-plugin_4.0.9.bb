@@ -19,8 +19,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
                     file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
 
 SRC_URI = "${FSL_MIRROR}/imx-gst1.0-plugin-${PV}.tar.gz"
-SRC_URI[md5sum] = "0de451a8b1974cdbf3e1c9abe02cfc7d"
-SRC_URI[sha256sum] = "f5128cfb3c33c06c2035f3d442f78bed73e1714be43f890f8bd5239c1f3050d7"
+SRC_URI[md5sum] = "74aa970b81e40c700540008ab42a8e41"
+SRC_URI[sha256sum] = "71069a839936c670eecf5a90433775689bf67b6a24cbe7ed5777e4fdfe6acaa3"
 
 S = "${WORKDIR}/imx-gst1.0-plugin-${PV}"
 
