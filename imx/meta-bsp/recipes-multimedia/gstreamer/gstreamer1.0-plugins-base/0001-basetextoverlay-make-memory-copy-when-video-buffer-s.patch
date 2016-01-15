@@ -46,8 +46,8 @@ index bde4303..3e98aa1
 +  gint idx = 0;
 +  gboolean mem_rdonly = FALSE;
 +  GstMemory *mem;
-+
-+  while (mem = gst_buffer_get_memory(video_frame, idx++)) {
++  guint n = gst_buffer_n_memory(video_frame);
++  while ((idx < n) && (mem = gst_buffer_get_memory(video_frame, idx++))) {
 +    if (GST_MEMORY_IS_READONLY(mem)) {
 +      gst_memory_unref (mem);
 +      mem_rdonly = TRUE;
