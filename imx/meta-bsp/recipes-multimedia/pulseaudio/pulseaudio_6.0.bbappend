@@ -4,13 +4,15 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 IMX_PATCHES = " file://0001-Fix-pulseaudio-mutex-issue-when-do-pause-in-gstreame.patch \
-                file://0002-pulseaudio-enable-allow-autospawn-for-root-as-defaul.patch \
                 file://pulseaudio-remove-the-control-for-speaker-headphone-widge.patch \
 "
 
 SRC_URI_append_mx6 = "${IMX_PATCHES}"
 SRC_URI_append_mx6ul = "${IMX_PATCHES}"
 SRC_URI_append_mx7 = "${IMX_PATCHES}"
+
+# Enable allow-autospawn-for-root as default
+PACKAGECONFIG_append = " autospawn-for-root"
 
 PACKAGE_ARCH_mx6 = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx6ul = "${MACHINE_SOCARCH}"
