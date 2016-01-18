@@ -21,8 +21,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://0001-update-gstreamer1.0-include-directory.patch \
 "
 
-SRC_URI[md5sum] = "92575bc028cea9ac7a3c2a05f7848926"
-SRC_URI[sha256sum] = "c57103cbfaf74abec795130c7ea6ce9801f8cfd5c08832498d0a1ec21f178ebc"
+SRC_URI[md5sum] = "3d92a0aa773ea8110751d4313fceb24a"
+SRC_URI[sha256sum] = "750eccb00dba502e6f047d088e3db3bc8779fc77448389827b8d63ec68294ad0"
 
 BACKEND = "${@base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
                 base_contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
