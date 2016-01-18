@@ -31,6 +31,7 @@ RDEPENDS_${PN} += " \
     minicom \
     coreutils \
     mmc-utils \
+    udev-extraconf \
 "
 
 SOC_TOOLS_TESTAPPS = ""
