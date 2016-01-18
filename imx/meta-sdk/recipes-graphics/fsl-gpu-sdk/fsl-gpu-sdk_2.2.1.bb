@@ -18,7 +18,6 @@ RREPLACES_${PN} = "vivante-gpu-sdk"
 RCONFLICTS_${PN} = "vivante-gpu-sdk"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
-           file://0001-update-gstreamer1.0-include-directory.patch \
 "
 
 SRC_URI[md5sum] = "3d92a0aa773ea8110751d4313fceb24a"
