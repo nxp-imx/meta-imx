@@ -1,0 +1,54 @@
+From 97975e6bb35895a74fa8aba805ce9482ae010654 Mon Sep 17 00:00:00 2001
+From: Lyon Wang <lyon.wang@nxp.com>
+Date: Fri, 15 Jan 2016 17:30:14 +0800
+Subject: [PATCH] [gstbaseparse] Need push adapter remainning data in pass
+ through mode
+
+When switching to pass through mode, there might be remainning
+data in the adpater, and it will be no chance to push to downstream when
+in pass through mode.
+So need check adapter available data and push downstream to avoid missing data
+
+package: gstreamer1.0
+ticket https://bugzilla.gnome.org/show_bug.cgi?id=760513
+Upstream-Status: Pending
+
+Signed-off-by: Lyon Wang <lyon.wang@nxp.com>
+---
+ libs/gst/base/gstbaseparse.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ mode change 100644 => 100755 libs/gst/base/gstbaseparse.c
+
+diff --git a/libs/gst/base/gstbaseparse.c b/libs/gst/base/gstbaseparse.c
+old mode 100644
+new mode 100755
+index 184fafe..e4d12b5
+--- a/libs/gst/base/gstbaseparse.c
++++ b/libs/gst/base/gstbaseparse.c
+@@ -3007,6 +3007,23 @@ gst_base_parse_chain (GstPad * pad, GstObject * parent, GstBuffer * buffer)
+             && parse->priv->passthrough)) {
+       GstBaseParseFrame frame;
+ 
++    av = gst_adapter_available (parse->priv->adapter);
++    if (av) {
++      tmpbuf = gst_adapter_get_buffer (parse->priv->adapter, av);
++
++      if (parse->priv->upstream_format == GST_FORMAT_TIME) {
++        tmpbuf = gst_buffer_make_writable (tmpbuf);
++        GST_BUFFER_PTS (tmpbuf) = parse->priv->next_pts;
++        GST_BUFFER_DTS (tmpbuf) = parse->priv->next_dts;
++        GST_BUFFER_DURATION (tmpbuf) = GST_CLOCK_TIME_NONE;
++      }
++
++      ret = gst_pad_push (parse->srcpad, tmpbuf);
++
++      gst_adapter_clear (parse->priv->adapter);
++
++    }
++
+       gst_base_parse_frame_init (&frame);
+       frame.buffer = gst_buffer_make_writable (buffer);
+       ret = gst_base_parse_push_frame (parse, &frame);
+-- 
+1.9.1
+
