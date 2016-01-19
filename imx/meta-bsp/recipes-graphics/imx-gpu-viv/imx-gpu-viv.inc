@@ -9,7 +9,8 @@ LIC_FILES_CHKSUM = "file://gpu-core/usr/include/gc_vdk.h;beginline=5;endline=11;
 
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'virtual/libx11 libxdamage libxext libxfixes mesa', \
                              base_contains('DISTRO_FEATURES', 'wayland', 'wayland', \
-                                           '', d), d)}"
+                                           '', d), d)} \
+            libpng"
 
 EXTRA_PROVIDES = ""
 EXTRA_PROVIDES_mx6q  = " virtual/libgl virtual/libgles1 virtual/libgles2"
