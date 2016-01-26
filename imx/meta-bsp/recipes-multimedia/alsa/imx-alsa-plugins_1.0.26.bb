@@ -14,8 +14,8 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
 inherit autotools pkgconfig
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "a7b7e581d59d862b4862fcf6d68746a8"
-SRC_URI[sha256sum] = "b80f5bb0b2030822f4baf4147829715add4bce2d46837b8a80223f4ca7ceb41b"
+SRC_URI[md5sum] = "8fe4bcfddeca82dd01a9c4c6ce9471df"
+SRC_URI[sha256sum] = "0a7e8d90fdde2f6780605ecfee674e6e13523915a7bcd64078bc507ac1a8deb8"
 
 
 INCLUDE_DIR = "-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include"
