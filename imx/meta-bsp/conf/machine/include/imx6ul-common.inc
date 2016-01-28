@@ -19,6 +19,3 @@ PREFERRED_PROVIDER_virtual/libg2d_mx6ul = ""
 
 MACHINE_SOCARCH_FILTER_mx6ul = "imx-codec imx-parser gst-fsl-plugins"
 
-# Extra audio support
-# FIXME: Add support for imx6ul
-MACHINE_EXTRA_RRECOMMENDS_append_mx6ul = " ${@base_contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
