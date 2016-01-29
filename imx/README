@@ -118,13 +118,7 @@ This release enables hardware floating point by default.  This feature is enable
 configurations and in the layer.conf. (Some machine files exist in the community meta-fsl-arm without this setting.)
 DEFAULTTUNE_mx6 = "cortexa9hf-neon
 
-To build with software floating point, add the following to local.conf
-DEFAULTTUNE_mx6 = "cortexa9-neon"
-
-Note:  This release is the LAST release providing software floating point binaries.
-
-We also provide some binaries with a software floating point version which we use based on FP_TAG in layer.conf.
-This release was only tested for hardware floating point.
+Software floating point is not supported starting with the 4.1.15_1.0.0_ga release
 
 Restricted Codecs
 -----------------
