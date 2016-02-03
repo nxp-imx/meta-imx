@@ -7,9 +7,9 @@ require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
 SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}.tar.gz \
             file://rc.autohdmi"
 
-LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=26;md5=ecb1a30055169dfee70ba94b6eb1e151"
+LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=26;md5=1fd459c0c72a4d0723eeee2489aa540f"
 
-SRC_URI[md5sum] = "030bf942bf14e2e924a8b7877860dd09"
-SRC_URI[sha256sum] = "2c3cb24434b4f127f34b239d73481986253ddc2a3044e916c84dbcb613c32186"
+SRC_URI[md5sum] = "66c71c4c7afa7c09cc97f291a454e9fa"
+SRC_URI[sha256sum] = "9bc4dec4acd88e9d6c8a9f9b7a7cb24435537bc7cb73728a0286dad569821a1e"
 
 S = "${WORKDIR}/xserver-xorg-video-imx-viv-${PV}/"
