@@ -1888,8 +1888,8 @@ state.wm8960audio {
 	control.36 {
 		iface MIXER
 		name 'ADC PCM Capture Volume'
-		value.0 220
-		value.1 220
+		value.0 195
+		value.1 195
 		comment {
 			access 'read write'
 			type INTEGER
@@ -1897,8 +1897,8 @@ state.wm8960audio {
 			range '0 - 255'
 			dbmin -9999999
 			dbmax 3000
-			dbvalue.0 1250
-			dbvalue.1 1250
+			dbvalue.0 0
+			dbvalue.1 0
 		}
 	}
 	control.37 {
@@ -1960,7 +1960,7 @@ state.wm8960audio {
 	control.41 {
 		iface MIXER
 		name 'ADC Data Output Select'
-		value 'Left Data = Left ADC;  Right Data = Right ADC'
+		value 'Left Data = Left ADC;  Right Data = Left ADC'
 		comment {
 			access 'read write'
 			type ENUMERATED
@@ -2054,7 +2054,7 @@ state.wm8960audio {
 	control.50 {
 		iface MIXER
 		name 'Right Input Mixer Boost Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2074,7 +2074,7 @@ state.wm8960audio {
 	control.52 {
 		iface MIXER
 		name 'Right Boost Mixer RINPUT2 Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2094,7 +2094,7 @@ state.wm8960audio {
 	control.54 {
 		iface MIXER
 		name 'Right Boost Mixer RINPUT1 Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2104,7 +2104,7 @@ state.wm8960audio {
 	control.55 {
 		iface MIXER
 		name 'Left Boost Mixer LINPUT2 Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2114,7 +2114,7 @@ state.wm8960audio {
 	control.56 {
 		iface MIXER
 		name 'Left Boost Mixer LINPUT3 Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
