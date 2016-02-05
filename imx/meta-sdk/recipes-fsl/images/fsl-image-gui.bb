@@ -40,6 +40,8 @@ WAYLAND_IMAGE_INSTALL_remove_mx6sl = "clutter-1.0-examples"
 X11_IMAGE_INSTALL = ""
 X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'packagegroup-fsl-pulseaudio', '', d)}"
+X11_IMAGE_INSTALL_mx6ul = "${@base_contains('DISTRO_FEATURES', 'x11', \
+    'packagegroup-fsl-pulseaudio', '', d)}"
 X11_IMAGE_INSTALL_mx7 = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'packagegroup-fsl-pulseaudio', '', d)}"
 X11_IMAGE_INSTALL_append_mx6sl = " libopenvg-mx6"
