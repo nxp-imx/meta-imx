@@ -1,6 +1,8 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-DEPENDS += "imx-gst1.0-plugin"
+DEPENDS_mx6 += "imx-gst1.0-plugin"
+DEPENDS_mx6ul += "imx-gst1.0-plugin"
+DEPENDS_mx7 += "imx-gst1.0-plugin"
 
 GST_CFLAGS_EXTRA = "${@base_contains('DISTRO_FEATURES', 'x11', '', \
                        base_contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', '-DEGL_API_FB', d),d)}"
@@ -21,21 +23,6 @@ PACKAGECONFIG_append_mx6qp = " opencv"
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
 PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland"
-
-#i.MX specific
-SRC_URI_append = " file://0001-intall-the-header-file-of-gstaggregator-and-gstvideo.patch \
-                   file://0005-modifiy-the-videoparse-rank.patch \
-                   file://0009-camerabin-Add-one-property-to-set-sink-element-for-v.patch \
-                   file://0022-vidoeparse-Roll-back-h264parse-rank.patch \
-"
-
-#common
-SRC_URI_append += " file://0002-mpegtsmux-Need-get-pid-when-create-streams.patch \
-                    file://0003-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
-                    file://0004-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
-                    file://0006-glfilter-Lost-frame-rate-info-when-fixate-caps.patch \
-                    file://0007-opencv-Add-video-stitching-support-based-on-Open-CV.patch \    
-"
 
 # i.MX6 patches for GST1.6
 GPU_PATCHES = " file://0008-Adding-some-fragment-shaders-for-glshader-plugin.patch \
