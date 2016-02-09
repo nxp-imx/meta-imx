@@ -39,7 +39,3 @@ PREFERRED_VERSION_wayland-native = "1.9.0"
 
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
-
-GCCVERSION_mx6 = "5.2%"
-GCCVERSION_mx6ul = "5.2%"
-GCCVERSION_mx7 = "5.2%"
