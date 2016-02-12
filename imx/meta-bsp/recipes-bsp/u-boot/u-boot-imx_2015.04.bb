@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2015 Freescale Semiconductor
+# Copyright (C) 2013-2016 Freescale Semiconductor
 
 DESCRIPTION = "U-Boot provided by Freescale with focus on  i.MX reference boards."
 require recipes-bsp/u-boot/u-boot.inc
