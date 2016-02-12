@@ -20,13 +20,10 @@ DEPENDS_mx6ul += "${@base_contains('DISTRO_FEATURES', 'x11', \
 DEPENDS_mx7d += "${@base_contains('DISTRO_FEATURES', 'x11', \
                    ' libx11 libxdamage libxrender libxrandr', '', d)}"
 
-SRC_URI_append_mx5 = " file://clocks.sh"
-SRC_URI_append_mxs = " file://clocks.sh"
-
 SRC_URI[md5sum] = "a1af4c33a00ccbc19d031fefe83e5d04"
 SRC_URI[sha256sum] = "ef995356cc9931c81c55b2668bb47ffebae84422fd9a12747e6d34b22e8c906f"
 
 PLATFORM_mx7 = "IMX7D"
 PLATFORM_mx6ul = "IMX6UL"
 
-COMPATIBLE_MACHINE = "(mxs|mx5|mx6|mx6ul|mx7)"
+COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
