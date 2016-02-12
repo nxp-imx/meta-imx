@@ -1,7 +1,6 @@
-# Copyright (C) 2013-2015 Freescale Semiconductor
+# Copyright (C) 2013-2016 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-#require recipes-multimedia/libfslcodec/libfslcodec.inc
 require recipes-multimedia/imx-codec/imx-codec.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=3880bb9c943b135a30fad5e8aabd3ee9"
 
