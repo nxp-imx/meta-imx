@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2015 Freescale Semiconductor
+# Copyright (C) 2012-2016 Freescale Semiconductor
 
 require recipes-bsp/firmware-imx/firmware-imx.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=3880bb9c943b135a30fad5e8aabd3ee9"
