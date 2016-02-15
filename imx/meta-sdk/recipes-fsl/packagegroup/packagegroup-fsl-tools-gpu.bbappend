@@ -10,4 +10,6 @@ SOC_TOOLS_GPU_append_mx6 = " ${GPU_PKGS} ${XWAYLAND_PKGS}"
 
 XWAYLAND = "${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'xserver-xorg-extension-viv-autohdmi', '', d)}"
 
-SOC_TOOLS_GPU_remove_mx6 = "${XWAYLAND}"
+SOC_TOOLS_GPU_remove_mx6 = "${XWAYLAND} fsl-gpu-sdk"
+
+SOC_TOOLS_GPU_append_mx6 = " imx-gpu-sdk"
