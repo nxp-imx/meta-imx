@@ -1,0 +1,13 @@
+diff -Naur imx-gpu-sdk-2.2.1_org/build_OpenVG.sh imx-gpu-sdk-2.2.1/build_OpenVG.sh
+--- imx-gpu-sdk-2.2.1_org/build_OpenVG.sh	2016-02-16 15:25:30.000000000 -0600
++++ imx-gpu-sdk-2.2.1/build_OpenVG.sh	2016-02-17 12:58:07.000000000 -0600
+@@ -20,9 +20,6 @@
+ pushd $FSL_GRAPHICS_SDK/DemoFramework/FslGraphicsVG > /dev/null
+ make "$@"
+ popd > /dev/null
+-pushd $FSL_GRAPHICS_SDK/DemoFramework/FslGraphicsGLES2 > /dev/null
+-make "$@"
+-popd > /dev/null
+ pushd $FSL_GRAPHICS_SDK/DemoFramework/FslGraphicsEGL > /dev/null
+ make "$@"
+ popd > /dev/null
