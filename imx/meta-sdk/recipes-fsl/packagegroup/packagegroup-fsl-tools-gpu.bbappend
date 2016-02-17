@@ -12,4 +12,6 @@ XWAYLAND = "${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'xserver-xorg
 
 SOC_TOOLS_GPU_remove_mx6 = "${XWAYLAND} fsl-gpu-sdk"
 
-SOC_TOOLS_GPU_append_mx6 = " imx-gpu-sdk"
+SOC_TOOLS_GPU_append_mx6q = " imx-gpu-sdk"
+SOC_TOOLS_GPU_append_mx6dl = " imx-gpu-sdk"
+SOC_TOOLS_GPU_append_mx6sx = " imx-gpu-sdk"
