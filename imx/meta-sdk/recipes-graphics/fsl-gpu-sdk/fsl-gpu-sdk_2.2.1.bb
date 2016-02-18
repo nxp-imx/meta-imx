@@ -6,6 +6,7 @@ DEPENDS = "${X11_DEPENDS} ${WL_DEPENDS} devil gstreamer1.0 gstreamer1.0-plugins-
 DEPENDS_append_mx6q = " virtual/libgles2"
 DEPENDS_append_mx6dl = " virtual/libgles2"
 DEPENDS_append_mx6sx = " virtual/libgles2"
+DEPENDS_append_mx6sl = " virtual/libopenvg"
 
 X11_DEPENDS = "${@base_contains('DISTRO_FEATURES', 'x11', 'xrandr', '', d)}"
 WL_DEPENDS = "${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
