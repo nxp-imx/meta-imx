@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append_mx6 = " file://weston-launch-init"
+SRC_URI_append = " file://weston-launch-init"
 
 USE_WESTON_LAUNCH = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 
