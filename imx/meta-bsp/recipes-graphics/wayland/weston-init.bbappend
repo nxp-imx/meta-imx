@@ -4,7 +4,7 @@ SRC_URI_append_mx6 = " file://weston-launch-init"
 
 USE_WESTON_LAUNCH = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 
-do_install_append() {	
+do_install_append_mx6() {
 
     if [ "${USE_WESTON_LAUNCH}" = "yes" ]; then  
 	install -d ${D}/${sysconfdir}/init.d      
