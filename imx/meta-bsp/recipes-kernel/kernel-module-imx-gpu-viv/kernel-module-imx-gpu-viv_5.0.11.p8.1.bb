@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Freescale Semiconductor
+# Copyright (C) 2015-2016 Freescale Semiconductor
 
 SUMMARY = "Kernel loadable module for Vivante GPU"
 DESCRIPTION = "Builds the Vivante GPU kernel driver as a loadable kernel module, \
@@ -9,5 +9,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 inherit module
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "c08abefd96339c96438efa06f0e4179a"
-SRC_URI[sha256sum] = "b9ed6c491f684137a092f3af9cc2138b1b12cd111e6321cd288e3e079c5b315e"
+SRC_URI[md5sum] = "06bced55cb13dd8573489e721a6a96fc"
+SRC_URI[sha256sum] = "445e95aa04e253c82ebba195bb1d7ab86c6d6519f23bc2d62c1fe57afdca95b4"
