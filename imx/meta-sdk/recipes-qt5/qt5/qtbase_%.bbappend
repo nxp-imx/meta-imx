@@ -2,7 +2,8 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://Force_egl_visual_ID_33.patch"
+SRC_URI += "file://Force_egl_visual_ID_33.patch \
+            file://eglerror.patch"
 
 HAS_X11 = "${@base_contains('DISTRO_FEATURES', 'x11', 1, 0, d)}"
 
