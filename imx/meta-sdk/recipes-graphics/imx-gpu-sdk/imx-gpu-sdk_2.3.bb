@@ -2,7 +2,7 @@ SUMMARY = "Freescale GPU SDK Samples"
 DESCRIPTION = "Set of sample applications for Freescale GPU"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3880bb9c943b135a30fad5e8aabd3ee9"
-DEPENDS = "${X11_DEPENDS} ${WL_DEPENDS} devil gstreamer1.0 gstreamer1.0-plugins-base"
+DEPENDS = "${X11_DEPENDS} ${WL_DEPENDS} devil assimp gstreamer1.0 gstreamer1.0-plugins-base"
 DEPENDS_append_mx6q = " virtual/libgles2"
 DEPENDS_append_mx6dl = " virtual/libgles2"
 DEPENDS_append_mx6sx = " virtual/libgles2"
@@ -57,6 +57,7 @@ do_install () {
     if [ "${HAS_VPU}" = "0" ]; then
         rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
         rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
+        rm -rf ${D}/opt/${PN}/GLES2/DeBayer
     fi
     rm -rf ${D}/opt/${PN}/GLES2/S05_PrecompiledShader
     rm -rf ${D}/opt/${PN}/GLES3/S05_PrecompiledShader
