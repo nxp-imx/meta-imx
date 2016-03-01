@@ -7,8 +7,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "58f87bcae9124fb83fa4f4af6c2bca13"
-SRC_URI[sha256sum] = "4386f267f23fa0d8140def1bc25e022a5e214ba56fd78e93f3c0c4e4bb9bef5c"
+SRC_URI[md5sum] = "18b30af6c7034826ea5b1aa11b96aa40"
+SRC_URI[sha256sum] = "4fec50a27b5377e0104933e4f2318ad22331d6eebddaed158ac9207f4cb44ed7"
 
 DEPENDS = "virtual/kernel"
 
