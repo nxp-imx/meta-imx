@@ -665,7 +665,7 @@ index 0000000..153ef5a
 +#define __GST_GL_WINDOW_FB_EGL_H__
 +
 +#include <gst/gl/gl.h>
-+#include "EGL/eglvivante.h"
++#include "EGL/eglplatform.h"
 +
 +G_BEGIN_DECLS
 +
