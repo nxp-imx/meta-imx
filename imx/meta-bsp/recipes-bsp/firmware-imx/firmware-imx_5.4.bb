@@ -3,7 +3,7 @@
 require recipes-bsp/firmware-imx/firmware-imx.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=a31dce3023402a821cfcdc1bb8dbdbc0"
 
-SRC_URI[md5sum] = "2bb352c6aa8f64868fc321f1b4e3a32a"
-SRC_URI[sha256sum] = "b54deaca208d8a00e12ecb45075c7a8434d91ea9de7a6a690deb9bc02bd0e7b5"
+SRC_URI[md5sum] = "c6b99d14967142e4d8e702e46b1b7a20"
+SRC_URI[sha256sum] = "077a9288addeafaea97755189ad91172da30259385625b4aefc345e7cfcfd812"
 
 COMPATIBLE_MACHINE = "(mx5|mx6|mx6ul|mx7)"
