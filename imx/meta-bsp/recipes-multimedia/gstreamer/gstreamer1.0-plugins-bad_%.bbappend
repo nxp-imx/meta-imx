@@ -20,6 +20,19 @@ PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
 PACKAGECONFIG_append_mx6q = " opencv"
 PACKAGECONFIG_append_mx6qp = " opencv"
 
+#i.MX specific
+SRC_URI_append = " file://0005-modifiy-the-videoparse-rank.patch \
+                   file://0009-camerabin-Add-one-property-to-set-sink-element-for-v.patch \
+                   file://0022-vidoeparse-Roll-back-h264parse-rank.patch \
+"
+#common
+SRC_URI_append += " file://0002-mpegtsmux-Need-get-pid-when-create-streams.patch \
+                    file://0003-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
+                    file://0004-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
+                    file://0006-glfilter-Lost-frame-rate-info-when-fixate-caps.patch \
+                    file://0007-opencv-Add-video-stitching-support-based-on-Open-CV.patch \
+"
+
 # i.MX6 patches for GST1.6
 GPU_PATCHES = " file://0008-Adding-some-fragment-shaders-for-glshader-plugin.patch \
                 file://0010-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
