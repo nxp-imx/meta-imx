@@ -17,8 +17,8 @@ PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
                            base_contains('DISTRO_FEATURES', 'x11', \
                                     'opengl', '', d), '', d)}"
 
-PACKAGECONFIG_append_mx6q = " opencv"
-PACKAGECONFIG_append_mx6qp = " opencv"
+#PACKAGECONFIG_append_mx6q = " opencv"
+#PACKAGECONFIG_append_mx6qp = " opencv"
 
 #i.MX specific
 SRC_URI_append = " file://0005-modifiy-the-videoparse-rank.patch \
