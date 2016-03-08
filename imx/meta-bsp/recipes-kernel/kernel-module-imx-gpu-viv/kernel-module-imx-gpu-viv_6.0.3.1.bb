@@ -10,8 +10,6 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "e3625f4ddbe388b196e569f5b928dca8"
 SRC_URI[sha256sum] = "10d4936e9ac4c6c9760892933c6e836777d1eb36e83738210143814eccf2f1bb"
 
-DEPENDS = "virtual/kernel"
-
 inherit module
 
 KERNEL_MODULE_AUTOLOAD = "galcore"
