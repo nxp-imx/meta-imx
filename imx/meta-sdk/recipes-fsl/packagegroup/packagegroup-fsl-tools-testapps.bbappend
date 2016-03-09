@@ -32,7 +32,6 @@ RDEPENDS_${PN} += " \
     coreutils \
     mmc-utils \
     udev-extraconf \
-    tk \
 "
 
 SOC_TOOLS_TESTAPPS = ""
