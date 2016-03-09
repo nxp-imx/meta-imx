@@ -51,6 +51,7 @@ GPU_PATCHES = " file://0008-Adding-some-fragment-shaders-for-glshader-plugin.pat
                 file://0019-glplugin-gl-wayland-fix-loop-test-hang-in-glimagesin.patch \
                 file://0020-glplugin-Fix-glimagesink-wayland-resize-showed-blurr.patch \
                 file://0021-glplugin-fix-gleffects-fisheye-shader-co.patch \
+                file://0023-glplugin-glupload-crash-in-glupload-with-a-gst-launc.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
