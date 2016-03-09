@@ -12,4 +12,6 @@ SRC_URI[sha256sum] = "10d4936e9ac4c6c9760892933c6e836777d1eb36e83738210143814ecc
 
 inherit module
 
+DEPENDS = "virtual/kernel"
+
 KERNEL_MODULE_AUTOLOAD = "galcore"
