@@ -32,6 +32,7 @@ RDEPENDS_${PN} += " \
     coreutils \
     mmc-utils \
     udev-extraconf \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
 "
 
 SOC_TOOLS_TESTAPPS = ""
