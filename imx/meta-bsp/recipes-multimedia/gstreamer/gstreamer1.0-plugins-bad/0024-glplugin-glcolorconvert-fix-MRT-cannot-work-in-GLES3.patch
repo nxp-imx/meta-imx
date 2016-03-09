@@ -1,0 +1,226 @@
+From 524dda469b6275cb8f4af2c89ea5ce8158bf88a7 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <b55597@freescale.com>
+Date: Thu, 28 Jan 2016 15:39:14 +0800
+Subject: [PATCH 2/2] [glplugin] glcolorconvert: fix MRT cannot work in
+ GLES3.0
+
+1. Add #ifdefine Marco to avoid redefinition of GL_COLOR_ATTACHMENT(1,2).
+2. Fix copy texture failed by passing internal texture format to glCopyTexImage2D
+3. Add glBlitFramebuffer for textures copy from one FBO to another
+   to get better performance in gles3.0.
+4. Improve texture sampling in YUY2 and UYVY shader.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Haihua Hu <b55597@freescale.com>
+---
+ gst-libs/gst/gl/glprototypes/fbo.h               |    6 +-
+ gst-libs/gst/gl/glprototypes/gstgl_gles2compat.h |    7 ++-
+ gst-libs/gst/gl/gstglcolorconvert.c              |    6 +-
+ gst-libs/gst/gl/gstglmemory.c                    |   65 ++++++++++++++++------
+ 4 files changed, 59 insertions(+), 25 deletions(-)
+
+diff --git a/gst-libs/gst/gl/glprototypes/fbo.h b/gst-libs/gst/gl/glprototypes/fbo.h
+index d142483..7171eff 100644
+--- a/gst-libs/gst/gl/glprototypes/fbo.h
++++ b/gst-libs/gst/gl/glprototypes/fbo.h
+@@ -102,9 +102,9 @@ GST_GL_EXT_FUNCTION (GLboolean, IsFramebuffer,
+ GST_GL_EXT_END ()
+ 
+ GST_GL_EXT_BEGIN (offscreen_blit,
+-                  GST_GL_API_NONE,
+-                  255, 255,
+-                  255, 255, /* not in either GLES */
++                  GST_GL_API_OPENGL3 | GST_GL_API_GLES2,
++                  3, 0,
++                  3, 0,/* enable to avoid using glCopyTexImage2D for texture copying*/
+                   "EXT\0ANGLE\0",
+                   "framebuffer_blit\0")
+ GST_GL_EXT_FUNCTION (void, BlitFramebuffer,
+diff --git a/gst-libs/gst/gl/glprototypes/gstgl_gles2compat.h b/gst-libs/gst/gl/glprototypes/gstgl_gles2compat.h
+index d282990..1980476 100644
+--- a/gst-libs/gst/gl/glprototypes/gstgl_gles2compat.h
++++ b/gst-libs/gst/gl/glprototypes/gstgl_gles2compat.h
+@@ -34,9 +34,10 @@ G_BEGIN_DECLS
+ //END FIXME
+ 
+ /* UNSUPPORTED */
+-
+-#define GL_COLOR_ATTACHMENT1 0
+-#define GL_COLOR_ATTACHMENT2 0
++#ifndef GL_COLOR_ATTACHMENT1
++#define GL_COLOR_ATTACHMENT1 0x8CE1
++#define GL_COLOR_ATTACHMENT2 0x8CE2
++#endif
+ #ifndef GL_TEXTURE_ENV
+ #define GL_TEXTURE_ENV 0
+ #endif
+diff --git a/gst-libs/gst/gl/gstglcolorconvert.c b/gst-libs/gst/gl/gstglcolorconvert.c
+index 8fa52ab..aa198ec 100644
+--- a/gst-libs/gst/gl/gstglcolorconvert.c
++++ b/gst-libs/gst/gl/gstglcolorconvert.c
+@@ -400,7 +400,7 @@ static const gchar frag_RGB_to_YUY2_UYVY[] =
+     "  float inorder = mod (v_texcoord.x * width, 2.0);\n"
+     "  fx = v_texcoord.x;\n"
+     "  dx = 1.0 / width;\n"
+-    "  if (v_texcoord.x >= (1.0 - 0.5 * dx) || (v_texcoord.x > 0.5 * dx && inorder < 1.0)) {\n"
++    "  if (inorder > 1.0) {\n"
+     "    dx = -dx;\n"
+     "  }\n"
+     "  fy = v_texcoord.y;\n"
+@@ -1362,14 +1362,14 @@ _init_convert (GstGLColorConvert * convert)
+ 
+   /* multiple draw targets not supported on GLES2...yet */
+   if (info->out_n_textures > 1 && (!gl->DrawBuffers ||
+-          USING_GLES2 (convert->context))) {
++          !USING_GLES3 (convert->context))) {
+     g_free (info->frag_prog);
+     GST_ERROR ("Conversion requires output to multiple draw buffers");
+     goto incompatible_api;
+   }
+ 
+   /* Requires reading from a RG/LA framebuffer... */
+-  if (USING_GLES2 (convert->context) &&
++  if (!USING_GLES3 (convert->context) &&
+       (GST_VIDEO_INFO_FORMAT (&convert->out_info) == GST_VIDEO_FORMAT_YUY2 ||
+           GST_VIDEO_INFO_FORMAT (&convert->out_info) ==
+           GST_VIDEO_FORMAT_UYVY)) {
+diff --git a/gst-libs/gst/gl/gstglmemory.c b/gst-libs/gst/gl/gstglmemory.c
+index 0a528ec..e106d71 100644
+--- a/gst-libs/gst/gl/gstglmemory.c
++++ b/gst-libs/gst/gl/gstglmemory.c
+@@ -107,6 +107,12 @@ static GstAllocator *_gl_allocator;
+ #ifndef GL_UNPACK_ROW_LENGTH
+ #define GL_UNPACK_ROW_LENGTH 0x0CF2
+ #endif
++#ifndef GL_READ_FRAMEBUFFER
++#define GL_READ_FRAMEBUFFER 0x8CA8
++#endif
++#ifndef GL_DRAW_FRAMEBUFFER
++#define GL_DRAW_FRAMEBUFFER 0x8CA9
++#endif
+ 
+ G_DEFINE_TYPE (GstGLAllocator, gst_gl_allocator,
+     GST_TYPE_GL_BASE_BUFFER_ALLOCATOR);
+@@ -932,11 +938,12 @@ _gl_mem_copy_thread (GstGLContext * context, gpointer data)
+   GstGLMemory *src;
+   guint tex_id;
+   GLuint out_tex_target;
+-  GLuint fboId;
++  GLuint fboId[2] = {0};
+   gsize out_width, out_height, out_stride;
+   GLuint out_gl_format, out_gl_type;
+   GLuint in_gl_format, in_gl_type;
+   gsize in_size, out_size;
++  guint internal_format;
+ 
+   copy_params = (GstGLMemoryCopyParams *) data;
+   src = copy_params->src;
+@@ -951,6 +958,11 @@ _gl_mem_copy_thread (GstGLContext * context, gpointer data)
+   out_gl_type = GL_UNSIGNED_BYTE;
+   if (copy_params->out_format == GST_VIDEO_GL_TEXTURE_TYPE_RGB16)
+     out_gl_type = GL_UNSIGNED_SHORT_5_6_5;
++
++  internal_format =
++      gst_gl_sized_gl_format_from_gl_format_type (context, out_gl_format,
++      out_gl_type);
++
+   in_gl_format = gst_gl_format_from_gl_texture_type (src->tex_type);
+   in_gl_type = GL_UNSIGNED_BYTE;
+   if (src->tex_type == GST_VIDEO_GL_TEXTURE_TYPE_RGB16)
+@@ -975,17 +987,12 @@ _gl_mem_copy_thread (GstGLContext * context, gpointer data)
+   }
+ 
+   if (!tex_id) {
+-    guint internal_format;
+     guint out_gl_type;
+ 
+     out_gl_type = GL_UNSIGNED_BYTE;
+     if (copy_params->out_format == GST_VIDEO_GL_TEXTURE_TYPE_RGB16)
+       out_gl_type = GL_UNSIGNED_SHORT_5_6_5;
+ 
+-    internal_format =
+-        gst_gl_sized_gl_format_from_gl_format_type (context, out_gl_format,
+-        out_gl_type);
+-
+     tex_id =
+         _new_texture (context, out_tex_target, internal_format, out_gl_format,
+         out_gl_type, copy_params->out_width, copy_params->out_height);
+@@ -1000,15 +1007,32 @@ _gl_mem_copy_thread (GstGLContext * context, gpointer data)
+ 
+   /* FIXME: try and avoid creating and destroying fbo's every copy... */
+   /* create a framebuffer object */
+-  gl->GenFramebuffers (1, &fboId);
+-  gl->BindFramebuffer (GL_FRAMEBUFFER, fboId);
++  gl->GenFramebuffers (2, &fboId[0]);
++  if(gl->BlitFramebuffer){
++    gl->BindFramebuffer (GL_READ_FRAMEBUFFER, fboId[0]);
+ 
+-  gl->FramebufferTexture2D (GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+-      src->tex_target, src->tex_id, 0);
++    gl->FramebufferTexture2D (GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
++	src->tex_target, src->tex_id, 0);
++
++    if (!gst_gl_context_check_framebuffer_status (context))
++      goto fbo_error;
++
++    gl->BindFramebuffer (GL_DRAW_FRAMEBUFFER, fboId[1]);
++
++    gl->FramebufferTexture2D (GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
++	src->tex_target, tex_id, 0);
++
++    if (!gst_gl_context_check_framebuffer_status (context))
++      goto fbo_error;
++  }else{
++    gl->BindFramebuffer (GL_FRAMEBUFFER, fboId[0]);
+ 
+-//  if (!gst_gl_context_check_framebuffer_status (src->context))
+-//    goto fbo_error;
++    gl->FramebufferTexture2D (GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
++	src->tex_target, src->tex_id, 0);
+ 
++    if (!gst_gl_context_check_framebuffer_status (context))
++      goto fbo_error;
++  }
+   gl->BindTexture (out_tex_target, tex_id);
+   if (copy_params->respecify) {
+     if (!gl->GenBuffers || !src->mem.id) {
+@@ -1043,14 +1067,23 @@ _gl_mem_copy_thread (GstGLContext * context, gpointer data)
+ 
+     gl->BindBuffer (GL_PIXEL_UNPACK_BUFFER, 0);
+   } else {                      /* different sizes */
+-    gl->CopyTexImage2D (out_tex_target, 0, out_gl_format, 0, 0, out_width,
+-        out_height, 0);
++    if(gl->BlitFramebuffer) { 
++      GST_INFO("Use BlitFramebuffer copy texture %d into %d",src->tex_id, tex_id);
++      gl->ReadBuffer ( GL_COLOR_ATTACHMENT0 );
++      gl->BlitFramebuffer ( 0, 0, out_width, out_height,
++			    0, 0, out_width, out_height,
++			    GL_COLOR_BUFFER_BIT, GL_LINEAR );
++    } else {
++      /* should use internal format*/
++      gl->CopyTexImage2D (out_tex_target, 0, internal_format, 0, 0, out_width,
++	  out_height, 0);
++    }
+   }
+ 
+   gl->BindTexture (out_tex_target, 0);
+   gl->BindFramebuffer (GL_FRAMEBUFFER, 0);
+ 
+-  gl->DeleteFramebuffers (1, &fboId);
++  gl->DeleteFramebuffers (2, &fboId[0]);
+ 
+   copy_params->tex_id = tex_id;
+   copy_params->result = TRUE;
+@@ -1060,7 +1093,7 @@ _gl_mem_copy_thread (GstGLContext * context, gpointer data)
+ /* ERRORS */
+ fbo_error:
+   {
+-    gl->DeleteFramebuffers (1, &fboId);
++    gl->DeleteFramebuffers (2, &fboId[0]);
+ 
+     copy_params->tex_id = 0;
+     copy_params->result = FALSE;
+-- 
+1.7.9.5
+
