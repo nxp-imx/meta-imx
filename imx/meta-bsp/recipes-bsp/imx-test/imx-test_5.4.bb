@@ -20,8 +20,8 @@ DEPENDS_mx6ul += "${@base_contains('DISTRO_FEATURES', 'x11', \
 DEPENDS_mx7d += "${@base_contains('DISTRO_FEATURES', 'x11', \
                    ' libx11 libxdamage libxrender libxrandr', '', d)}"
 
-SRC_URI[md5sum] = "a1af4c33a00ccbc19d031fefe83e5d04"
-SRC_URI[sha256sum] = "ef995356cc9931c81c55b2668bb47ffebae84422fd9a12747e6d34b22e8c906f"
+SRC_URI[md5sum] = "46ddd6d1631cc0f7328383e13632d5bb"
+SRC_URI[sha256sum] = "cae6ec9b4d5cc1c402a7683cc8c2c35cccdd9598283caefcea2804baa47a15b6"
 
 PLATFORM_mx7 = "IMX7D"
 PLATFORM_mx6ul = "IMX6UL"
