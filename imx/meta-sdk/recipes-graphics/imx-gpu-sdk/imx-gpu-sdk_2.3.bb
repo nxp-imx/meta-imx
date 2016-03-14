@@ -56,11 +56,11 @@ do_install () {
     cp -r bin/* "${D}/opt/${PN}"
     if [ "${HAS_VPU}" = "0" ]; then
         rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
-        rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
-        rm -rf ${D}/opt/${PN}/GLES2/DeBayer
+        rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV        
     fi
     rm -rf ${D}/opt/${PN}/GLES2/S05_PrecompiledShader
     rm -rf ${D}/opt/${PN}/GLES3/S05_PrecompiledShader
+    rm -rf ${D}/opt/${PN}/GLES2/DeBayer
 }
 
 FILES_${PN} += "/opt/${PN}"
