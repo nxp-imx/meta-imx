@@ -61,6 +61,8 @@ do_install () {
     rm -rf ${D}/opt/${PN}/GLES2/S05_PrecompiledShader
     rm -rf ${D}/opt/${PN}/GLES3/S05_PrecompiledShader
     rm -rf ${D}/opt/${PN}/GLES2/DeBayer
+    rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
+    rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
 }
 
 FILES_${PN} += "/opt/${PN}"
