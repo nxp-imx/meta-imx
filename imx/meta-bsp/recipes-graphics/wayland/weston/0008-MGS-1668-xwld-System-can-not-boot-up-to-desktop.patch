@@ -1,0 +1,40 @@
+From 1e822d0a4e275c4cc9dfb579a11b19b22adc4e8f Mon Sep 17 00:00:00 2001
+From: "yong.gan" <yong.gan@nxp.com>
+Date: Wed, 9 Mar 2016 10:11:34 +0800
+Subject: [PATCH] MGS-1668: xwld: System can not boot up to desktop
+
+System can not boot up to desktop if press touch panel continuously during booting up.
+The weston view was not initialed completely, so add a protection to the pointer.
+
+Date: MAR 08, 2016
+Signed-off-by: Yong Gan <yong.gan@nxp.com>
+---
+ src/compositor.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/src/compositor.c b/src/compositor.c
+index cbef4dc..b2a098e 100644
+--- a/src/compositor.c
++++ b/src/compositor.c
+@@ -1375,13 +1375,14 @@ weston_view_from_global_fixed(struct weston_view *view,
+ 			      wl_fixed_t *vx, wl_fixed_t *vy)
+ {
+ 	float vxf, vyf;
+-
+-	weston_view_from_global_float(view,
++	if(view != NULL){
++		weston_view_from_global_float(view,
+ 				      wl_fixed_to_double(x),
+ 				      wl_fixed_to_double(y),
+ 				      &vxf, &vyf);
+-	*vx = wl_fixed_from_double(vxf);
+-	*vy = wl_fixed_from_double(vyf);
++		*vx = wl_fixed_from_double(vxf);
++		*vy = wl_fixed_from_double(vyf);
++	}
+ }
+ 
+ WL_EXPORT void
+-- 
+1.9.1
+
