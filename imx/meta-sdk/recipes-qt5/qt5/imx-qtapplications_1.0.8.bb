@@ -14,8 +14,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://qtimxplayer.desktop \
            file://qtimxcamera.desktop \
 "
-SRC_URI[md5sum] = "eb3d81e68eef223cfc31b53a0a542dec"
-SRC_URI[sha256sum] = "19cdd35cade5a701f8f211373c74f5f5662e9d62752246cd781dc6018d4ac072"
+SRC_URI[md5sum] = "256a54f469b12a913486a93700d2b4bc  /home/raa013/yocto/pkg-work2/packages/imx-qtapplications-1.0.8.bin"
+SRC_URI[sha256sum] = "19c2490f35a8c11095b996d5281518923b4ccc6b2408fff926219186020621be  /home/raa013/yocto/pkg-work2/packages/imx-qtapplications-1.0.8.bin"
 
 do_install () {
     install -d ${D}${datadir}/applications
