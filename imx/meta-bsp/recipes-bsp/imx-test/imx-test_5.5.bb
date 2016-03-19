@@ -20,8 +20,8 @@ DEPENDS_mx6ul += "${@base_contains('DISTRO_FEATURES', 'x11', \
 DEPENDS_mx7d += "${@base_contains('DISTRO_FEATURES', 'x11', \
                    ' libx11 libxdamage libxrender libxrandr', '', d)}"
 
-SRC_URI[md5sum] = "46ddd6d1631cc0f7328383e13632d5bb"
-SRC_URI[sha256sum] = "cae6ec9b4d5cc1c402a7683cc8c2c35cccdd9598283caefcea2804baa47a15b6"
+SRC_URI[md5sum] = "36cf9b6ad4669de0e313271937e9c2d9  /home/raa013/yocto/pkg-work2/packages/imx-test-5.5.tar.gz"
+SRC_URI[sha256sum] = "59eb9ed8d1af43353e86233739ca41e357df39ee7a4be19fd2f9b2e32601e065  /home/raa013/yocto/pkg-work2/packages/imx-test-5.5.tar.gz"
 
 PLATFORM_mx7 = "IMX7D"
 PLATFORM_mx6ul = "IMX6UL"
