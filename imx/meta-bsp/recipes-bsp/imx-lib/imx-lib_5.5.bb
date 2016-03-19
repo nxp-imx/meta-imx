@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24
 
 PE = "1"
 
-SRC_URI[md5sum] = "a0da6a01698776f2df05130108c226c9"
-SRC_URI[sha256sum] = "8d12c4a0a44d29569f1ead3a36adc28402b9c4036b53e11dd3ebf2295e3ce1d0"
+SRC_URI[md5sum] = "9a52dfee2a1950ef1d083392c579a0a6  /home/raa013/yocto/pkg-work2/packages/imx-lib-5.5.tar.gz"
+SRC_URI[sha256sum] = "123206a227973f91b6c733e343587e4f47734db4f2b2c4ea9db3800742d2b595  /home/raa013/yocto/pkg-work2/packages/imx-lib-5.5.tar.gz"
 
 COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
 
