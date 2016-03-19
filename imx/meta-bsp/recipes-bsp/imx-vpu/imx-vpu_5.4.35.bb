@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8cf95184c220e247b9917e7244124c5a"
 
 PE = "1"
 
-SRC_URI[md5sum] = "547074f0bb12fbf123f7998f2640c279"
-SRC_URI[sha256sum] = "2e670ef2337a5dbe6c32fa07128ad9aad32afdbf472c23d44133245ec6a66d46"
+SRC_URI[md5sum] = "52c1ee80c11d3179715c932f3f3ae890  /home/raa013/yocto/pkg-work2/packages/imx-vpu-5.4.35.bin"
+SRC_URI[sha256sum] = "e1d6550426dfc59e4fd0352f1d312ea7eff5dcf18974f923ed7a85007cb40e27  /home/raa013/yocto/pkg-work2/packages/imx-vpu-5.4.35.bin"
 
 # imx-vpu can only support imx6q platform, in order to build out the vpu case in unit test,
 # using a workaround to transfer "IMX6Q" on imx6ul & imx7d platform.
