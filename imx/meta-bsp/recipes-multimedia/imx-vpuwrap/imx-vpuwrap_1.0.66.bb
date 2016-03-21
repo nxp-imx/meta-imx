@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8cf95184c220e247b9917e7244124c5a"
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "83a8655a4d415173c4d117becba02953  /home/raa013/yocto/pkg-work2/packages/imx-vpuwrap-1.0.66.bin"
-SRC_URI[sha256sum] = "b128d02014dc1f65b2fe23dce275e10126abb49ff71934fd9fa524bde4ef5b33  /home/raa013/yocto/pkg-work2/packages/imx-vpuwrap-1.0.66.bin"
+SRC_URI[md5sum] = "83a8655a4d415173c4d117becba02953"
+SRC_URI[sha256sum] = "b128d02014dc1f65b2fe23dce275e10126abb49ff71934fd9fa524bde4ef5b33"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
