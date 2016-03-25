@@ -10,7 +10,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 # Choose between Soft Float-Point and Hard Float-Point
-EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
+EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8', \
+                   bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d), d)}"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG_mx6q = "vpu"
@@ -19,8 +20,10 @@ PACKAGECONFIG_mx6dl = "vpu"
 PACKAGECONFIG[vpu] = "--enable-vpu,--disable-vpu,imx-vpu"
 
 do_install_append() {
-	# FIXME: This link points to nowhere
-	rm ${D}${libdir}/imx-mm/audio-codec/lib_src_ppp_arm11_elinux.so
+    # FIXME: This link points to nowhere
+    if [ -e ${D}${libdir}/imx-mm/audio-codec/lib_src_ppp_arm11_elinux.so ]; then
+        rm ${D}${libdir}/imx-mm/audio-codec/lib_src_ppp_arm11_elinux.so
+    fi
 
     # LTIB move the files around or gst-fsl-plugin won't find them
     for p in $(find ${D}${libdir}/imx-mm -mindepth 2 -maxdepth 2 -not -type d); do
