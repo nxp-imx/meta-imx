@@ -4,7 +4,7 @@
 require recipes-multimedia/imx-codec/imx-codec.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=8cf95184c220e247b9917e7244124c5a"
 
-SRC_URI[md5sum] = "d00d025de2e9a2fa7051339da3ca993e"
-SRC_URI[sha256sum] = "7d2c7e55ba198c649b97fac880cc99115fa61e72f1bfc994b968b06879767742"
+SRC_URI[md5sum] = "bd2d88436eba01c56882007173ef43cf"
+SRC_URI[sha256sum] = "fa4a4895efbd1ec16288c99366da74d7eda40dce020d1b2e17d4a9bdf7766afd"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6|mx6ul|mx7)"
