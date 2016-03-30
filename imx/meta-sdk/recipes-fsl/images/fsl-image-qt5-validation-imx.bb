@@ -16,8 +16,8 @@ WLD_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', \
 
 # Install Freescale QT demo applications
 MACHINE_QT5_MULTIMEDIA_PLAYER = ""
-MACHINE_QT5_MULTIMEDIA_PLAYER_mx6q = "${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "gst1.0-fsl-plugin", "fslqtapplications", "", d)}"
-MACHINE_QT5_MULTIMEDIA_PLAYER_mx6dl = "${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "gst1.0-fsl-plugin", "fslqtapplications", "", d)}"
+MACHINE_QT5_MULTIMEDIA_PLAYER_mx6q = "${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "gst1.0-fsl-plugin", "imx-qtapplications", "", d)}"
+MACHINE_QT5_MULTIMEDIA_PLAYER_mx6dl = "${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "gst1.0-fsl-plugin", "imx-qtapplications", "", d)}"
 # Install Freescale QT demo applications for X11 backend only
 MACHINE_QT5_MULTIMEDIA_APPS = "${@base_contains('DISTRO_FEATURES', 'x11', base_contains('DISTRO_FEATURES', 'wayland', \
                                  '', '${MACHINE_QT5_MULTIMEDIA_PLAYER}', d), '', d)}"
@@ -34,6 +34,12 @@ QT5_IMAGE_INSTALL_mx6 = " \
     "
 QT5_IMAGE_INSTALL_mx6sl = "${@base_contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-fonts qtbase-plugins', d)}"
+
+QT5_IMAGE_INSTALL_mx6ul = "${@base_contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
+    'qtbase qtbase-examples qtbase-fonts qtbase-plugins', d)}"
+
+QT5_IMAGE_INSTALL_mx7 = "${@base_contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
+    'qtbase qtbase-examples qtbase-fonts qtbase-plugins', d)}"
 
 QT5_IMAGE_INSTALL_remove = " packagegroup-qt5-webengine"
 
