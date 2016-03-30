@@ -9,7 +9,6 @@ SRC_URI_append = " file://0001-basetextoverlay-make-memory-copy-when-video-buffe
                    file://0008-handle-audio-video-decoder-error.patch \
                    file://0009-gstaudiobasesink-print-warning-istead-of-return-ERRO.patch \
                    file://0010-Disable-orc-optimization-for-lib-video-in-plugins-ba.patch \
-                   file://0012-Linux_MX6QP_ARD-IMXCameraApp-When-Enable.patch \
 "
 
 PACKAGE_ARCH_mxs = "${MACHINE_SOCARCH}"
