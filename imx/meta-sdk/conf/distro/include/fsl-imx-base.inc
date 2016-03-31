@@ -6,7 +6,7 @@ SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
 
-MAINTAINER = "Freescale Semiconductors <lauren.post@freescale.com>"
+MAINTAINER = "Freescale Semiconductors <lauren.post@nxp.com>"
 
 TARGET_VENDOR = "-poky"
 
