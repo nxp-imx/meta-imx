@@ -1,12 +1,12 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "Freescale i.MX Release Distro"
-DISTRO_VERSION = "4.1.15-1.0.0"
+DISTRO_VERSION = "4.1.15-1.1.0"
 DISTRO_CODENAME = "jethro"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
 
-MAINTAINER = "Freescale Semiconductors <lauren.post@freescale.com>"
+MAINTAINER = "Freescale Semiconductors <lauren.post@nxp.com>"
 
 TARGET_VENDOR = "-poky"
 
