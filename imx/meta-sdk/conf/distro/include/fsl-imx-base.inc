@@ -1,6 +1,6 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "Freescale i.MX Release Distro"
-DISTRO_VERSION = "3.14.52-1.1.0"
+DISTRO_VERSION = "3.14.52-1.1.1"
 DISTRO_CODENAME = "fido"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
