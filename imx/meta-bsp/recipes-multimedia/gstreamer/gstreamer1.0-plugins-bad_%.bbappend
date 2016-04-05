@@ -20,6 +20,10 @@ PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
 #PACKAGECONFIG_append_mx6q = " opencv"
 #PACKAGECONFIG_append_mx6qp = " opencv"
 
+#revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
+PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
+PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland"
+
 #i.MX specific
 SRC_URI_append = " file://0005-modifiy-the-videoparse-rank.patch \
                    file://0009-camerabin-Add-one-property-to-set-sink-element-for-v.patch \
