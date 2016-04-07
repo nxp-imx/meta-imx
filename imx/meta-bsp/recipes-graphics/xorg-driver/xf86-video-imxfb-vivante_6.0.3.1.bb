@@ -13,3 +13,9 @@ SRC_URI[md5sum] = "1aa8e734b1fc80af1d13910e9ae1289e"
 SRC_URI[sha256sum] = "c00d1eb8c171aae02385e4d5838182790caea5c8eae164bb0af117ad3ed700f8"
 
 S = "${WORKDIR}/xserver-xorg-video-imx-viv-${PV}/"
+
+RDEPENDS_${PN}_remove = "libvivante-dri-mx6"
+
+RDEPENDS_${PN}_append = " libvivante-dri"
+
+COMPATIBLE_MACHINE = "(mx6|mx8)"
