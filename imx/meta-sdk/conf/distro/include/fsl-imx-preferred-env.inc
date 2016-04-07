@@ -45,3 +45,11 @@ PREFERRED_VERSION_wayland-native = "1.9.0"
 USE_GPU_VIV_MODULE = "1"
 
 PREFERRED_VERSION_linux-libc-headers = "4.1"
+
+#mx8 changes
+MACHINE_SOCARCH_FILTER_append_mx8 = " virtual/libopenvg virtual/libgles1 virtual/libgles2 virtual/egl virtual/mesa virtual/libgl virtual/libg2d"
+PREFERRED_PROVIDER_virtual/egl_mx8 = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libgles1_mx8 = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libgles2_mx8 = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libgl_mx8 = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libg2d_mx8 = "imx-gpu-viv"
