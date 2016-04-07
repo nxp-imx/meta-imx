@@ -69,4 +69,4 @@ FILES_${PN} += "/opt/${PN}"
 FILES_${PN}-dbg += "/opt/${PN}/*/*/.debug /usr/src/debug"
 INSANE_SKIP_${PN} += "already-stripped rpaths"
 
-COMPATIBLE_MACHINE = "(mx6)"
+COMPATIBLE_MACHINE = "(mx6|mx8)"
