@@ -1,0 +1,40 @@
+From 84b46f115efabdf25f5d0627f342d2b3787ea613 Mon Sep 17 00:00:00 2001
+From: Jian <Jian.Li@freescale.com>
+Date: Tue, 3 Feb 2015 17:08:40 +0800
+Subject: [PATCH 2/4] Need to check if pa stream is still valid
+
+Fixed the issue that will report pulse server is dead
+when doing audio track switching.
+Need to check if pa stream is valid as it may be released
+by caps change.
+
+Upstream Status: Submitted
+https://bugzilla.gnome.org/show_bug.cgi?id=743912
+
+Signed-off-by: Jian <Jian.Li@freescale.com>
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
+---
+ ext/pulse/pulsesink.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/ext/pulse/pulsesink.c b/ext/pulse/pulsesink.c
+index f7685f7..4c9ea5a 100644
+--- a/ext/pulse/pulsesink.c
++++ b/ext/pulse/pulsesink.c
+@@ -2029,6 +2029,13 @@ gst_pulsesink_get_time (GstClock * clock, GstAudioBaseSink * sink)
+   }
+ 
+   pa_threaded_mainloop_lock (mainloop);
++
++  /* Need to check if pa stream is valid as it may be released by caps change*/
++  if (!pbuf->stream) {
++    pa_threaded_mainloop_unlock (mainloop);
++    return GST_CLOCK_TIME_NONE;
++  }
++
+   if (gst_pulsering_is_dead (psink, pbuf, TRUE))
+     goto server_dead;
+ 
+-- 
+1.9.1
+
