@@ -1,7 +1,7 @@
-From acb391046061441fc6af73e16bf52e89d9696ecb Mon Sep 17 00:00:00 2001
+From 05bbd82dd527afa44d6b403b02a0dbd198c96859 Mon Sep 17 00:00:00 2001
 From: Jian Li <jian.li@freescale.com>
 Date: Fri, 6 Nov 2015 15:00:19 +0800
-Subject: [PATCH 2/2] MMFMWK-6930 [glplugin] Accelerate gldownload with
+Subject: [PATCH 14/18] MMFMWK-6930 [glplugin] Accelerate gldownload with
  directviv API
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -15,20 +15,21 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Jian Li <jian.li@freescale.com>
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
- ext/gl/gstgldownloadelement.c           |   91 ++++++++++++
- gst-libs/gst/gl/Makefile.am             |    4 +
- gst-libs/gst/gl/gstglbufferpool.c       |   11 ++
- gst-libs/gst/gl/gstglphymemory.c        |  245 +++++++++++++++++++++++++++++++
- gst-libs/gst/gl/gstglphymemory.h        |   44 ++++++
- gst-libs/gst/gl/gstglvivdirecttexture.c |  147 ++++++++++---------
- gst-libs/gst/gl/gstglvivdirecttexture.h |    3 +
- 7 files changed, 475 insertions(+), 70 deletions(-)
+ ext/gl/gstgldownloadelement.c           |  91 ++++++++++++
+ gst-libs/gst/gl/Makefile.am             |   4 +
+ gst-libs/gst/gl/gstglbufferpool.c       |  12 ++
+ gst-libs/gst/gl/gstglphymemory.c        | 254 ++++++++++++++++++++++++++++++++
+ gst-libs/gst/gl/gstglphymemory.h        |  43 ++++++
+ gst-libs/gst/gl/gstglvivdirecttexture.c | 147 +++++++++---------
+ gst-libs/gst/gl/gstglvivdirecttexture.h |   3 +
+ 7 files changed, 484 insertions(+), 70 deletions(-)
  create mode 100644 gst-libs/gst/gl/gstglphymemory.c
  create mode 100644 gst-libs/gst/gl/gstglphymemory.h
 
 diff --git a/ext/gl/gstgldownloadelement.c b/ext/gl/gstgldownloadelement.c
-index 94a6e7a..df51c9e 100644
+index ff931fa..9ea0146 100644
 --- a/ext/gl/gstgldownloadelement.c
 +++ b/ext/gl/gstgldownloadelement.c
 @@ -23,6 +23,7 @@
@@ -81,7 +82,7 @@ index 94a6e7a..df51c9e 100644
  
    *outbuf = inbuf;
  
-@@ -193,3 +212,75 @@ gst_gl_download_element_transform (GstBaseTransform * bt,
+@@ -194,3 +213,75 @@ gst_gl_download_element_transform (GstBaseTransform * bt,
  {
    return GST_FLOW_OK;
  }
@@ -116,7 +117,7 @@ index 94a6e7a..df51c9e 100644
 +  }
 +
 +  if (!allocator)
-+    allocator = gst_allocator_find (GST_GL_MEMORY_ALLOCATOR);
++    allocator = gst_allocator_find (GST_GL_MEMORY_ALLOCATOR_NAME);
 +
 +  if (!allocator) {
 +    GST_ERROR_OBJECT (bt, "Can't obtain physical memory allocator.");
@@ -158,26 +159,26 @@ index 94a6e7a..df51c9e 100644
 +  return TRUE;
 +}
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index 402e37a..6744d6e 100644
+index c396603..5c05230 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
-@@ -31,6 +31,7 @@ libgstgl_@GST_API_VERSION@_la_SOURCES = \
- 	gstglviewconvert.c \
+@@ -34,6 +34,7 @@ libgstgl_@GST_API_VERSION@_la_SOURCES = \
  	gstgloverlaycompositor.c \
+ 	gstglquery.c \
  	gstglvivdirecttexture.c \
 +	gstglphymemory.c \
- 	utils/opengl_versions.h
+ 	gstglcontrolbindingproxy.c
  
  libgstgl_@GST_API_VERSION@includedir = $(includedir)/gstreamer-@GST_API_VERSION@/gst/gl
-@@ -58,6 +59,7 @@ libgstgl_@GST_API_VERSION@include_HEADERS = \
- 	gstgloverlaycompositor.h \
+@@ -68,6 +69,7 @@ libgstgl_@GST_API_VERSION@include_HEADERS = \
  	gstgl_fwd.h \
+ 	gstgl_enums.h \
  	gstglvivdirecttexture.h \
 +	gstglphymemory.h \
  	gl.h
  
- libgstgl_@GST_API_VERSION@_la_LIBADD = \
-@@ -68,6 +70,8 @@ libgstgl_@GST_API_VERSION@_la_LIBADD = \
+ noinst_HEADERS = \
+@@ -84,6 +86,8 @@ libgstgl_@GST_API_VERSION@_la_LIBADD = \
  	$(GST_LIBS) \
  	$(GL_LIBS)
  
@@ -187,7 +188,7 @@ index 402e37a..6744d6e 100644
  SUBDIRS += win32
  libgstgl_@GST_API_VERSION@_la_LIBADD += win32/libgstgl-win32.la
 diff --git a/gst-libs/gst/gl/gstglbufferpool.c b/gst-libs/gst/gl/gstglbufferpool.c
-index 69ac2d8..94a02f8 100644
+index 90536b0..71c726a 100644
 --- a/gst-libs/gst/gl/gstglbufferpool.c
 +++ b/gst-libs/gst/gl/gstglbufferpool.c
 @@ -30,6 +30,8 @@
@@ -199,12 +200,13 @@ index 69ac2d8..94a02f8 100644
  /**
   * SECTION:gstglbufferpool
   * @short_description: buffer pool for #GstGLMemory objects
-@@ -275,6 +277,15 @@ gst_gl_buffer_pool_alloc (GstBufferPool * pool, GstBuffer ** buffer,
+@@ -290,6 +292,16 @@ gst_gl_buffer_pool_alloc (GstBufferPool * pool, GstBuffer ** buffer,
    }
  #endif
  
 +  if ((g_strcmp0 (priv->allocator->mem_type, GST_GL_PHY_MEM_ALLOCATOR) == 0)) {
-+    if (!gst_gl_physical_memory_setup_buffer (glpool->context, &priv->params, info, valign, buf)) {
++    GstAllocator* allocator = (GstAllocator*) gst_phy_mem_allocator_obtain ();
++    if (!gst_gl_physical_memory_setup_buffer (allocator, buf, priv->gl_params)) {
 +      GST_ERROR_OBJECT (pool, "Can't create physcial buffer.");
 +      return GST_FLOW_ERROR;
 +    }
@@ -212,15 +214,15 @@ index 69ac2d8..94a02f8 100644
 +    return GST_FLOW_OK;
 +  }
 +
-   if (!gst_gl_memory_setup_buffer (glpool->context, &priv->params, info,
-           valign, buf))
+   alloc = GST_GL_MEMORY_ALLOCATOR (priv->allocator);
+   if (!gst_gl_memory_setup_buffer (alloc, buf, priv->gl_params))
      goto mem_create_failed;
 diff --git a/gst-libs/gst/gl/gstglphymemory.c b/gst-libs/gst/gl/gstglphymemory.c
 new file mode 100644
-index 0000000..f5cbccf
+index 0000000..52ae41f
 --- /dev/null
 +++ b/gst-libs/gst/gl/gstglphymemory.c
-@@ -0,0 +1,245 @@
+@@ -0,0 +1,254 @@
 +/*
 + * GStreamer
 + * Copyright (c) 2015, Freescale Semiconductor, Inc. 
@@ -365,10 +367,10 @@ index 0000000..f5cbccf
 +gboolean
 +gst_is_gl_physical_memory (GstMemory * mem)
 +{
-+  GstGLMemory *glmem;
++  GstGLBaseMemory *glmem;
 +  g_return_val_if_fail (gst_is_gl_memory (mem), FALSE);
 +
-+  glmem = (GstGLMemory*) mem;
++  glmem = (GstGLBaseMemory*) mem;
 +
 +  if (glmem->user_data
 +      && GST_IS_MINI_OBJECT_TYPE(glmem->user_data, GST_TYPE_MEMORY))
@@ -389,15 +391,17 @@ index 0000000..f5cbccf
 +}
 +
 +gboolean
-+gst_gl_physical_memory_setup_buffer (GstGLContext * ctx, 
-+    GstAllocationParams * params, GstVideoInfo * info, 
-+    GstVideoAlignment * valign, GstBuffer * buffer)
++gst_gl_physical_memory_setup_buffer (GstAllocator * allocator, GstBuffer *buffer, 
++    GstGLVideoAllocationParams * params)
 +{
-+  GstAllocator *allocator;
++  GstGLBaseMemoryAllocator *gl_alloc;
 +  GstMemory *mem = NULL;
 +  PhyMemBlock *memblk = NULL;
 +  GstGLMemory *glmem = NULL;
 +  gsize size;
++
++  GstVideoInfo * info = params->v_info;
++  GstVideoAlignment * valign = params->valign;
 +
 +  GST_DEBUG ("glphymemory setup buffer format %s", gst_video_format_to_string (GST_VIDEO_INFO_FORMAT (info)));
 +  
@@ -406,9 +410,9 @@ index 0000000..f5cbccf
 +    return FALSE;
 +  }
 +
-+  allocator = (GstAllocator*) gst_phy_mem_allocator_obtain ();
++  //allocator = (GstAllocator*) gst_phy_mem_allocator_obtain ();
 +  size = gst_gl_get_plane_data_size (info, valign, 0);
-+  mem = gst_allocator_alloc (allocator, size, params);
++  mem = gst_allocator_alloc (allocator, size, params->parent.alloc_params);
 +  if (!mem) {
 +    GST_DEBUG ("Can't allocate physical memory size %d", size);
 +    return FALSE;
@@ -420,10 +424,17 @@ index 0000000..f5cbccf
 +    return FALSE;
 +  }
 +
-+  glmem = gst_gl_memory_wrapped (ctx, info, 0, valign, memblk->vaddr,
-+      mem, (GDestroyNotify)gst_gl_phy_mem_destroy);
++  gl_alloc =
++      GST_GL_BASE_MEMORY_ALLOCATOR (gst_gl_memory_allocator_get_default
++      (params->parent.context));
++
++  params->plane = 0;
++  params->parent.user_data = mem;
++  params->parent.notify = gst_gl_phy_mem_destroy;
++
++  glmem = (GstGLMemory *)gst_gl_base_memory_alloc (gl_alloc, (GstGLAllocationParams *) params);
 +  if (!glmem) {
-+    GST_ERROR ("Can't get gl memory.");
++    GST_ERROR("Can't get gl memory.");
 +    return FALSE;
 +  }
 +
@@ -433,7 +444,7 @@ index 0000000..f5cbccf
 +      GST_VIDEO_INFO_FORMAT (info), GST_VIDEO_INFO_WIDTH (info),
 +      GST_VIDEO_INFO_HEIGHT (info), 1, info->offset, info->stride);
 +
-+  gst_gl_viv_direct_bind_data(ctx, glmem->tex_id, 
++  gst_gl_viv_direct_bind_data(params->parent.context, glmem->tex_id, 
 +      GST_VIDEO_INFO_FORMAT (info), GST_VIDEO_INFO_WIDTH (info),
 +      GST_VIDEO_INFO_HEIGHT (info), memblk->vaddr, memblk->paddr);
 +
@@ -445,7 +456,7 @@ index 0000000..f5cbccf
 +    GstVideoInfo * info, GstBuffer *glbuf)
 +{
 +  GstBuffer *buf;
-+  GstGLMemory *glmem;
++  GstGLBaseMemory *glmem;
 +
 +  gst_gl_context_thread_add (ctx, (GstGLContextThreadFunc) _finish_texture, NULL);
 +
@@ -468,10 +479,10 @@ index 0000000..f5cbccf
 +
 diff --git a/gst-libs/gst/gl/gstglphymemory.h b/gst-libs/gst/gl/gstglphymemory.h
 new file mode 100644
-index 0000000..bcd0d83
+index 0000000..b1a69e7
 --- /dev/null
 +++ b/gst-libs/gst/gl/gstglphymemory.h
-@@ -0,0 +1,44 @@
+@@ -0,0 +1,43 @@
 +/*
 + * GStreamer
 + * Copyright (c) 2015, Freescale Semiconductor, Inc. 
@@ -509,8 +520,7 @@ index 0000000..bcd0d83
 +GstAllocator *gst_phy_mem_allocator_obtain (void);
 +gboolean gst_is_gl_physical_memory (GstMemory * mem);
 +gboolean gst_is_gl_physical_memory_supported_fmt (GstVideoInfo * info);
-+gboolean gst_gl_physical_memory_setup_buffer (GstGLContext * ctx, GstAllocationParams * params,
-+    GstVideoInfo * info, GstVideoAlignment * valign, GstBuffer * buffer);
++gboolean gst_gl_physical_memory_setup_buffer (GstAllocator * allocator, GstBuffer *buffer, GstGLVideoAllocationParams * params);
 +GstBuffer * gst_gl_phymem_buffer_to_gstbuffer (GstGLContext * ctx, GstVideoInfo * info, GstBuffer *glbuf);
 +
 +G_END_DECLS
@@ -715,5 +725,5 @@ index fa88e1a..9a2d123 100644
  
  G_END_DECLS
 -- 
-1.7.9.5
+1.9.1
 

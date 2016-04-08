@@ -1,24 +1,27 @@
-From c28a677a17eeb96042bc126ec5c73bf8eb291fc9 Mon Sep 17 00:00:00 2001
+From 67d11594e693b60797c2bae1bcfa4e8bafcf4c9a Mon Sep 17 00:00:00 2001
 From: Haihua Hu <b55597@freescale.com>
 Date: Thu, 25 Feb 2016 13:53:20 +0800
-Subject: [PATCH 1/2] [glplugin] glcolorconvert: convert YUV to RGB use
- directviv
+Subject: [PATCH 17/18] glcolorconvert: convert YUV to RGB use directviv
 
-1.Modify glcolorconvert to let src pad use proposed buffer pool
-2.Add a property "disable_passthrough" in glcolorconvert for enable/disable passthrough.
-  When need convert YUV to RGB with directviv, set it to be TRUE.
+Add a property "disable_passthrough" in glcolorconvert for enable/disable passthrough.
+When need convert YUV to RGB with directviv, set it to be TRUE.
 
-Upstream-Status: Inappropriate [i.MX specific]
+Upstream Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <b55597@freescale.com>
+
+Conflicts:
+	gst-libs/gst/gl/gstglcolorconvert.c
+
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
- ext/gl/gstglcolorconvertelement.c   |   83 ++++++++++++++++++++++++++++++++++-
- ext/gl/gstglcolorconvertelement.h   |    1 +
- gst-libs/gst/gl/gstglcolorconvert.c |   23 ++++++----
- 3 files changed, 97 insertions(+), 10 deletions(-)
+ ext/gl/gstglcolorconvertelement.c   | 70 +++++++++++++++++++++++++++++++++++++
+ ext/gl/gstglcolorconvertelement.h   |  1 +
+ gst-libs/gst/gl/gstglcolorconvert.c |  6 +++-
+ 3 files changed, 76 insertions(+), 1 deletion(-)
 
 diff --git a/ext/gl/gstglcolorconvertelement.c b/ext/gl/gstglcolorconvertelement.c
-index e4ff6ca..854edc2 100644
+index bd4fbeb..9108b0a 100644
 --- a/ext/gl/gstglcolorconvertelement.c
 +++ b/ext/gl/gstglcolorconvertelement.c
 @@ -35,6 +35,14 @@ G_DEFINE_TYPE_WITH_CODE (GstGLColorConvertElement, gst_gl_color_convert_element,
@@ -52,7 +55,7 @@ index e4ff6ca..854edc2 100644
  static GstStaticPadTemplate gst_gl_color_convert_element_src_pad_template =
  GST_STATIC_PAD_TEMPLATE ("src",
      GST_PAD_SRC,
-@@ -91,14 +108,18 @@ gst_gl_color_convert_element_class_init (GstGLColorConvertElementClass * klass)
+@@ -89,6 +106,10 @@ gst_gl_color_convert_element_class_init (GstGLColorConvertElementClass * klass)
  {
    GstBaseTransformClass *bt_class = GST_BASE_TRANSFORM_CLASS (klass);
    GstElementClass *element_class = GST_ELEMENT_CLASS (klass);
@@ -63,17 +66,7 @@ index e4ff6ca..854edc2 100644
  
    bt_class->transform_caps = gst_gl_color_convert_element_transform_caps;
    bt_class->set_caps = gst_gl_color_convert_element_set_caps;
-   bt_class->get_unit_size = gst_gl_color_convert_element_get_unit_size;
-   bt_class->filter_meta = gst_gl_color_convert_element_filter_meta;
-   bt_class->decide_allocation = gst_gl_color_convert_element_decide_allocation;
--  bt_class->prepare_output_buffer =
--      gst_gl_color_convert_element_prepare_output_buffer;
-+  //bt_class->prepare_output_buffer =
-+  //    gst_gl_color_convert_element_prepare_output_buffer;
-   bt_class->transform = gst_gl_color_convert_element_transform;
-   bt_class->stop = gst_gl_color_convert_element_stop;
-   bt_class->fixate_caps = gst_gl_color_convert_element_fixate_caps;
-@@ -112,6 +133,13 @@ gst_gl_color_convert_element_class_init (GstGLColorConvertElementClass * klass)
+@@ -110,6 +131,13 @@ gst_gl_color_convert_element_class_init (GstGLColorConvertElementClass * klass)
        gst_static_pad_template_get
        (&gst_gl_color_convert_element_sink_pad_template));
  
@@ -87,7 +80,7 @@ index e4ff6ca..854edc2 100644
    gst_element_class_set_metadata (element_class,
        "OpenGL color converter", "Filter/Converter/Video",
        "Converts between color spaces using OpenGL shaders",
-@@ -123,6 +151,41 @@ gst_gl_color_convert_element_init (GstGLColorConvertElement * convert)
+@@ -121,6 +149,41 @@ gst_gl_color_convert_element_init (GstGLColorConvertElement * convert)
  {
    gst_base_transform_set_prefer_passthrough (GST_BASE_TRANSFORM (convert),
        TRUE);
@@ -129,7 +122,7 @@ index e4ff6ca..854edc2 100644
  }
  
  static gboolean
-@@ -137,6 +200,13 @@ gst_gl_color_convert_element_set_caps (GstBaseTransform * bt,
+@@ -135,6 +198,13 @@ gst_gl_color_convert_element_set_caps (GstBaseTransform * bt,
    if (convert->convert)
      gst_gl_color_convert_set_caps (convert->convert, in_caps, out_caps);
  
@@ -141,22 +134,6 @@ index e4ff6ca..854edc2 100644
 +  }
 +
    return TRUE;
- }
- 
-@@ -233,6 +303,15 @@ static GstFlowReturn
- gst_gl_color_convert_element_transform (GstBaseTransform * bt,
-     GstBuffer * inbuf, GstBuffer * outbuf)
- {
-+  GstGLColorConvertElement *convert = GST_GL_COLOR_CONVERT_ELEMENT (bt);
-+
-+  convert->convert->outbuf = outbuf;
-+  if (!gst_gl_color_convert_perform (convert->convert, inbuf)) {
-+    GST_ELEMENT_ERROR (bt, RESOURCE, NOT_FOUND,
-+        ("%s", "Failed to convert video buffer"), (NULL));
-+    return GST_FLOW_ERROR;
-+  }
-+
-   return GST_FLOW_OK;
  }
  
 diff --git a/ext/gl/gstglcolorconvertelement.h b/ext/gl/gstglcolorconvertelement.h
@@ -172,52 +149,22 @@ index 2a0dd1d..5cdbd3a 100644
  
  struct _GstGLColorConvertElementClass
 diff --git a/gst-libs/gst/gl/gstglcolorconvert.c b/gst-libs/gst/gl/gstglcolorconvert.c
-index 5915a39..8fa52ab 100644
+index eb3b4a8..4ed947e 100644
 --- a/gst-libs/gst/gl/gstglcolorconvert.c
 +++ b/gst-libs/gst/gl/gstglcolorconvert.c
-@@ -681,8 +681,13 @@ _gst_gl_color_convert_set_caps_unlocked (GstGLColorConvert * convert,
+@@ -700,7 +700,11 @@ _gst_gl_color_convert_set_caps_unlocked (GstGLColorConvert * convert,
+   convert->priv->to_texture_target = to_target;
    convert->initted = FALSE;
  
-   /* If input and output are identical, pass through directly */
--  convert->passthrough =
--      _gst_gl_color_convert_can_passthrough (&in_info, &out_info);
-+
+-  convert->passthrough = passthrough;
 +  /* We may disable passthrough via an external property
 +   * By the way, when glconvertelement is in passthrough mode, 
 +   * the plugin will not call gst_gl_color_convert_perform().*/
 +
-+  //convert->passthrough =
-+      //_gst_gl_color_convert_can_passthrough (&in_info, &out_info);
++  //convert->passthrough = passthrough;
  #ifndef GST_DISABLE_GST_DEBUG
    if (G_UNLIKELY (convert->passthrough))
      GST_DEBUG_OBJECT (convert,
-@@ -1712,18 +1717,20 @@ _do_convert (GstGLContext * context, GstGLColorConvert * convert)
-   gint views, v;
-   GstVideoOverlayCompositionMeta *composition_meta;
- 
--  convert->outbuf = NULL;
-+  //convert->outbuf = NULL;
- 
-   if (!_init_convert (convert)) {
-     convert->priv->result = FALSE;
-     return;
-   }
- 
--  convert->outbuf = gst_buffer_new ();
--  if (!gst_gl_memory_setup_buffer (convert->context, NULL, &convert->out_info,
--          NULL, convert->outbuf)) {
--    convert->priv->result = FALSE;
--    return;
-+  if (!convert->outbuf) {
-+    convert->outbuf = gst_buffer_new ();
-+    if (!gst_gl_memory_setup_buffer (convert->context, NULL, &convert->out_info,
-+            NULL, convert->outbuf)) {
-+      convert->priv->result = FALSE;
-+      return;
-+    }
-   }
- 
-   if (GST_VIDEO_INFO_MULTIVIEW_MODE (in_info) ==
 -- 
-1.7.9.5
+1.9.1
 

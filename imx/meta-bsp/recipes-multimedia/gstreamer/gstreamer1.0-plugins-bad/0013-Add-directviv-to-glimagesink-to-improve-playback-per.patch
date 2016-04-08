@@ -1,8 +1,8 @@
-From 587db892fdaac18780c8024e5a976ea182f36ff4 Mon Sep 17 00:00:00 2001
+From 94e6bb069cb5207761f2e4234137f2a748f984db Mon Sep 17 00:00:00 2001
 From: Haihua Hu <b55597@freescale.com>
 Date: Tue, 13 Oct 2015 09:33:54 +0800
-Subject: [PATCH 1/2] [glplugin] Add directviv to glimagesink to improve
- playback performance
+Subject: [PATCH 13/18] Add directviv to glimagesink to improve playback
+ performance
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -16,87 +16,55 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <b55597@freescale.com>
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
- ext/gl/gstglimagesink.c                 |    5 ++
- ext/gl/gstgluploadelement.c             |   14 +++
- gst-libs/gst/gl/Makefile.am             |    2 +
- gst-libs/gst/gl/gstglupload.c           |  118 ++++++++++++++++++++++++-
- gst-libs/gst/gl/gstglvivdirecttexture.c |  143 +++++++++++++++++++++++++++++++
- gst-libs/gst/gl/gstglvivdirecttexture.h |   35 ++++++++
- 6 files changed, 314 insertions(+), 3 deletions(-)
+ ext/gl/gstglimagesink.c                 |   5 ++
+ gst-libs/gst/gl/Makefile.am             |   2 +
+ gst-libs/gst/gl/gstglupload.c           | 141 ++++++++++++++++++++++++++++++-
+ gst-libs/gst/gl/gstglvivdirecttexture.c | 143 ++++++++++++++++++++++++++++++++
+ gst-libs/gst/gl/gstglvivdirecttexture.h |  35 ++++++++
+ 5 files changed, 323 insertions(+), 3 deletions(-)
  create mode 100644 gst-libs/gst/gl/gstglvivdirecttexture.c
  create mode 100644 gst-libs/gst/gl/gstglvivdirecttexture.h
 
 diff --git a/ext/gl/gstglimagesink.c b/ext/gl/gstglimagesink.c
-index f629df7..1e5dc05 100644
+index 3b5e3b5..532ea6a 100644
 --- a/ext/gl/gstglimagesink.c
 +++ b/ext/gl/gstglimagesink.c
-@@ -896,6 +896,11 @@ gst_glimage_sink_query (GstBaseSink * bsink, GstQuery * query)
+@@ -911,6 +911,11 @@ gst_glimage_sink_query (GstBaseSink * bsink, GstQuery * query)
        res = GST_BASE_SINK_CLASS (parent_class)->query (bsink, query);
        break;
      }
 +    case GST_QUERY_ALLOCATION:
 +    {
-+      res = gst_glimage_sink_propose_allocation(bsink, query);
++      gst_glimage_sink_propose_allocation(bsink, query);
 +      break;
 +    }
      default:
        res = GST_BASE_SINK_CLASS (parent_class)->query (bsink, query);
        break;
-diff --git a/ext/gl/gstgluploadelement.c b/ext/gl/gstgluploadelement.c
-index 83ff24c..e74da3a 100644
---- a/ext/gl/gstgluploadelement.c
-+++ b/ext/gl/gstgluploadelement.c
-@@ -208,6 +208,8 @@ gst_gl_upload_element_prepare_output_buffer (GstBaseTransform * bt,
-   GstGLUploadElement *upload = GST_GL_UPLOAD_ELEMENT (bt);
-   GstGLUploadReturn ret;
-   GstBaseTransformClass *bclass;
-+  GstVideoInfo info;
-+  GstCaps *caps;
- 
-   bclass = GST_BASE_TRANSFORM_GET_CLASS (bt);
- 
-@@ -231,6 +233,18 @@ gst_gl_upload_element_prepare_output_buffer (GstBaseTransform * bt,
-     return GST_FLOW_ERROR;
-   }
- 
-+  /* check if the output buffer's meta format equals to the caps format */
-+  GstVideoMeta *vmeta = gst_buffer_get_video_meta(*outbuf);
-+  gst_video_info_from_caps (&info, upload->out_caps);
-+  if(vmeta->format != GST_VIDEO_INFO_FORMAT (&info))
-+  {
-+    caps = gst_caps_copy(upload->out_caps);
-+    gst_caps_set_simple (caps, "format", G_TYPE_STRING, 
-+        gst_video_format_to_string (vmeta->format), NULL);
-+    gst_caps_replace (&upload->out_caps, caps);
-+    gst_base_transform_update_src_caps (upload, caps);
-+  }
-+
-   /* basetransform doesn't unref if they're the same */
-   if (buffer == *outbuf)
-     gst_buffer_unref (*outbuf);
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index 36f3bf7..402e37a 100644
+index 4bd6511..c396603 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
-@@ -30,6 +30,7 @@ libgstgl_@GST_API_VERSION@_la_SOURCES = \
- 	gstglsyncmeta.c \
+@@ -33,6 +33,7 @@ libgstgl_@GST_API_VERSION@_la_SOURCES = \
  	gstglviewconvert.c \
  	gstgloverlaycompositor.c \
+ 	gstglquery.c \
 +	gstglvivdirecttexture.c \
- 	utils/opengl_versions.h
+ 	gstglcontrolbindingproxy.c
  
  libgstgl_@GST_API_VERSION@includedir = $(includedir)/gstreamer-@GST_API_VERSION@/gst/gl
-@@ -56,6 +57,7 @@ libgstgl_@GST_API_VERSION@include_HEADERS = \
- 	gstglviewconvert.h \
- 	gstgloverlaycompositor.h \
+@@ -66,6 +67,7 @@ libgstgl_@GST_API_VERSION@include_HEADERS = \
+ 	gstglcontrolbindingproxy.h \
  	gstgl_fwd.h \
+ 	gstgl_enums.h \
 +	gstglvivdirecttexture.h \
  	gl.h
  
- libgstgl_@GST_API_VERSION@_la_LIBADD = \
+ noinst_HEADERS = \
 diff --git a/gst-libs/gst/gl/gstglupload.c b/gst-libs/gst/gl/gstglupload.c
-index 0addca1..acaa329 100644
+index 32e6150..99cc68a 100644
 --- a/gst-libs/gst/gl/gstglupload.c
 +++ b/gst-libs/gst/gl/gstglupload.c
 @@ -23,6 +23,7 @@
@@ -107,7 +75,7 @@ index 0addca1..acaa329 100644
  
  #include "gl.h"
  #include "gstglupload.h"
-@@ -47,7 +48,7 @@
+@@ -51,7 +52,7 @@
  #define USING_GLES2(context) (gst_gl_context_check_gl_version (context, GST_GL_API_GLES2, 2, 0))
  #define USING_GLES3(context) (gst_gl_context_check_gl_version (context, GST_GL_API_GLES2, 3, 0))
  
@@ -116,13 +84,14 @@ index 0addca1..acaa329 100644
  #define GST_CAT_DEFAULT gst_gl_upload_debug
  
  #define DEBUG_INIT \
-@@ -698,6 +699,114 @@ static const UploadMethod _upload_meta_upload = {
+@@ -1169,6 +1170,140 @@ static const UploadMethod _upload_meta_upload = {
    &_upload_meta_upload_free
  };
  
 +struct PhyBufferUpload
 +{
 +  GstGLUpload *upload;
++  GstGLVideoAllocationParams *params;
 +};
 +
 +static gpointer
@@ -139,16 +108,28 @@ index 0addca1..acaa329 100644
 +_physical_buffer_upload_transform_caps(GstGLContext *context,
 +    GstPadDirection direction, GstCaps *caps)
 +{
++  GstCapsFeatures *passthrough =
++      gst_caps_features_from_string
++      (GST_CAPS_FEATURE_META_GST_VIDEO_OVERLAY_COMPOSITION);
 +  GstCaps *ret;
 +
 +  if (direction == GST_PAD_SINK) {
-+    ret = _set_caps_features (caps, GST_CAPS_FEATURE_MEMORY_GL_MEMORY);
++    GstCaps *tmp;
++
++    ret =
++        _set_caps_features_with_passthrough (caps,
++        GST_CAPS_FEATURE_MEMORY_GL_MEMORY, passthrough);
++
 +    gst_caps_set_simple (ret, "format", G_TYPE_STRING, "RGBA", NULL);
++    tmp = _caps_intersect_texture_target (ret, 1 << GST_GL_TEXTURE_TARGET_2D);
++    gst_caps_unref (ret);
++    ret = tmp;
 +  } else {
 +    ret = gst_caps_from_string (GST_VIDEO_CAPS_MAKE_WITH_FEATURES
 +            (GST_CAPS_FEATURE_MEMORY_SYSTEM_MEMORY,GST_GL_DIRECTVIV_FORMAT));
 +  }
 +
++  gst_caps_features_free (passthrough);
 +  return ret;
 +}
 +
@@ -156,10 +137,19 @@ index 0addca1..acaa329 100644
 +_physical_buffer_upload_accept(gpointer impl, GstBuffer *buffer, 
 +    GstCaps *in_caps, GstCaps *out_caps)
 +{
++  struct PhyBufferUpload *upload = impl;  
 +  GstCapsFeatures *features;
 +
 +  features = gst_caps_get_features (out_caps, 0);
 +  if (!gst_caps_features_contains (features, GST_CAPS_FEATURE_MEMORY_GL_MEMORY))
++    return FALSE;
++  
++  if (upload->params)
++    gst_gl_allocation_params_free ((GstGLAllocationParams *) upload->params);
++  if (!(upload->params =
++          gst_gl_video_allocation_params_new (upload->upload->context, NULL,
++              &upload->upload->priv->in_info, -1, NULL,
++              GST_GL_TEXTURE_TARGET_2D)))
 +    return FALSE;
 +
 +  return gst_is_physical_buffer(buffer);
@@ -176,15 +166,22 @@ index 0addca1..acaa329 100644
 +_physical_buffer_upload_perform(gpointer impl, GstBuffer *buffer, GstBuffer **outbuf)
 +{
 +  struct PhyBufferUpload *phyBuffer = impl;
++  GstGLMemoryAllocator *allocator;
 +  GstVideoInfo *info;
 +  gint n_mem;
 +
 +  info = &phyBuffer->upload->priv->out_info;
 +  n_mem = GST_VIDEO_INFO_N_PLANES (info);
 +  GST_LOG_OBJECT (phyBuffer->upload, "Attempting viv direct upload");
++  
++  allocator =
++      GST_GL_MEMORY_ALLOCATOR (gst_allocator_find
++      (GST_GL_MEMORY_PBO_ALLOCATOR_NAME));
++
++  /* FIXME: buffer pool */
 +  *outbuf = gst_buffer_new ();
-+  gst_gl_memory_setup_buffer (phyBuffer->upload->context,
-+      NULL, info, NULL, *outbuf);
++  gst_gl_memory_setup_buffer (allocator, *outbuf, phyBuffer->params);
++  gst_object_unref (allocator);
 +
 +  GstGLMemory *out_gl_mem =
 +      (GstGLMemory *) gst_buffer_peek_memory (*outbuf, 0);
@@ -200,14 +197,12 @@ index 0addca1..acaa329 100644
 +}
 +
 +static void
-+_physical_buffer_upload_release(gpointer impl, GstBuffer *buffer)
-+{
-+}
-+
-+static void
 +_physical_buffer_upload_free(gpointer impl)
 +{
 +  struct PhyBufferUpload *phyBuffer = impl;
++
++  if (phyBuffer->params)
++    gst_gl_allocation_params_free ((GstGLAllocationParams *) phyBuffer->params);
 +
 +  g_free(phyBuffer);
 +}
@@ -224,34 +219,23 @@ index 0addca1..acaa329 100644
 +  &_physical_buffer_upload_accept,
 +  &_physical_buffer_upload_propose_allocation,
 +  &_physical_buffer_upload_perform,
-+  &_physical_buffer_upload_release,
 +  &_physical_buffer_upload_free
 +};
 +
  struct RawUploadFrame
  {
    gint ref_count;
-@@ -813,6 +922,7 @@ _raw_data_upload_perform (gpointer impl, GstBuffer * buffer,
-   struct RawUpload *raw = impl;
-   int i;
-   GstVideoInfo *in_info = &raw->upload->priv->in_info;
-+
-   guint max_planes = GST_VIDEO_INFO_N_PLANES (in_info);
- 
-   /* Support stereo views for separated multiview mode */
-@@ -870,7 +980,9 @@ static const UploadMethod *upload_methods[] = { &_gl_memory_upload,
- #if GST_GL_HAVE_PLATFORM_EGL
-   &_egl_image_upload,
+@@ -1391,7 +1526,7 @@ static const UploadMethod *upload_methods[] = { &_gl_memory_upload,
+ #if GST_GL_HAVE_DMABUF
+   &_dma_buf_upload,
  #endif
 -  &_upload_meta_upload, &_raw_data_upload
-+  &_upload_meta_upload,
-+  &_physical_buffer_upload,
-+  &_raw_data_upload
++  &_upload_meta_upload, &_physical_buffer_upload, &_raw_data_upload
  };
  
  static GMutex upload_global_lock;
-@@ -998,7 +1110,7 @@ gst_gl_upload_transform_caps (GstGLContext * context, GstPadDirection direction,
- 
+@@ -1514,7 +1649,7 @@ gst_gl_upload_transform_caps (GstGLContext * context, GstPadDirection direction,
+   }
  
    if (filter) {
 -    result = gst_caps_intersect_full (filter, tmp, GST_CAPS_INTERSECT_FIRST);
@@ -450,5 +434,5 @@ index 0000000..fa88e1a
 +
 +#endif /* __GST_GL_VIVDIRECT_H__ */
 -- 
-1.7.9.5
+1.9.1
 

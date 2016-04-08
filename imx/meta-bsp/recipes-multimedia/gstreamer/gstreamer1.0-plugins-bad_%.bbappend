@@ -25,34 +25,30 @@ PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-
 PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland"
 
 #i.MX specific
-SRC_URI_append = " file://0005-modifiy-the-videoparse-rank.patch \
-                   file://0009-camerabin-Add-one-property-to-set-sink-element-for-v.patch \
-                   file://0022-vidoeparse-Roll-back-h264parse-rank.patch \
+SRC_URI_append = " file://0004-modifiy-the-videoparse-rank.patch \
+                   file://0007-camerabin-Add-one-property-to-set-sink-element-for-v.patch \
 "
 #common
-SRC_URI_append += " file://0002-mpegtsmux-Need-get-pid-when-create-streams.patch \
-                    file://0003-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
-                    file://0004-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
-                    file://0006-glfilter-Lost-frame-rate-info-when-fixate-caps.patch \
-                    file://0007-opencv-Add-video-stitching-support-based-on-Open-CV.patch \
+SRC_URI_append += " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch \
+                    file://0002-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
+                    file://0003-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
+                    file://0005-glfilter-Lost-frame-rate-info-when-fixate-caps.patch \
+                    file://0006-opencv-Add-video-stitching-support-based-on-Open-CV.patch \
+                    file://0001-gstreamer-gl.pc.in-don-t-append-GL_CFLAGS-to-CFLAGS.patch \
 "
 
 # i.MX6 patches for GST1.6
-GPU_PATCHES = " file://0008-Adding-some-fragment-shaders-for-glshader-plugin.patch \
-                file://0010-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
-                file://0011-glplugin-Add-directviv-to-glimagesink-to-improve-playback-performance.patch \
-                file://0012-glplugin-Accelerate-gldownload-with-directviv-API.patch \
-                file://0013-glplugin-support-video-crop-for-glimagesink.patch \
-                file://0014-glplugin-Support-fb-backend-for-gl-plugins.patch \
-                file://0015-glplugin-Change-wayland-default-res-to-1024x768.patch \
-                file://0016-Add-one-deinterlacing-fragment-shader-file.patch \
-                file://0017-glplugin-Add-fps-print-in-glimagesink.patch \
-                file://0019-glplugin-gl-wayland-fix-loop-test-hang-in-glimagesin.patch \
-                file://0020-glplugin-Fix-glimagesink-wayland-resize-showed-blurr.patch \
-                file://0021-glplugin-fix-gleffects-fisheye-shader-co.patch \
-                file://0023-glplugin-glcolorconvert-convert-YUV-to-RGB-use-direc.patch \
-                file://0024-glplugin-glcolorconvert-fix-MRT-cannot-work-in-GLES3.patch \
-                file://0025-glplugin-glupload-crash-in-glupload-with-a-gst-launc.patch \
+GPU_PATCHES = " file://0008-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
+                file://0009-glplugin-Support-fb-backend-for-gl-plugins.patch \
+                file://0010-glplugin-Change-wayland-default-res-to-1024x768.patch \
+                file://0011-glplugin-gl-wayland-fix-loop-test-hang-in-glimagesin.patch \
+                file://0012-glplugin-Fix-glimagesink-wayland-resize-showed-blurr.patch \
+                file://0013-Add-directviv-to-glimagesink-to-improve-playback-per.patch \
+                file://0014-MMFMWK-6930-glplugin-Accelerate-gldownload-with-dire.patch \
+                file://0015-support-video-crop-for-glimagesink.patch \
+                file://0016-Add-fps-print-in-glimagesink.patch \
+                file://0017-glcolorconvert-convert-YUV-to-RGB-use-directviv.patch \
+                file://0018-glwindow-work-around-for-no-frame-when-imxplayer-use.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"

@@ -1,28 +1,32 @@
-From a2a7f25eba91b429a26fd5347007420e258676de Mon Sep 17 00:00:00 2001
+From 4c9fe61f694ea651dabc89f7699ede580dc3df14 Mon Sep 17 00:00:00 2001
 From: Song Bing <b06498@freescale.com>
 Date: Mon, 1 Jun 2015 13:30:11 +0800
-Subject: [PATCH 07/10] opencv: Add video stitching support based on Open CV
+Subject: [PATCH 06/18] opencv: Add video stitching support based on Open CV
 
 Add video stitching element based on Open CV.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=751203
-Upstream-Status: Waiting for review
+
+Conflicts:
+	ext/opencv/Makefile.am
+
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
  docs/plugins/Makefile.am         |   1 +
- ext/opencv/Makefile.am           |  12 +-
+ ext/opencv/Makefile.am           |  14 +-
  ext/opencv/gstcvstitching.cpp    | 834 +++++++++++++++++++++++++++++++++++++++
  ext/opencv/gstcvstitching.h      | 130 ++++++
  ext/opencv/gstopencv.cpp         |   4 +
  ext/opencv/gstopencvaggregator.c | 705 +++++++++++++++++++++++++++++++++
  ext/opencv/gstopencvaggregator.h | 118 ++++++
- 7 files changed, 1803 insertions(+), 1 deletion(-)
+ 7 files changed, 1804 insertions(+), 2 deletions(-)
  create mode 100644 ext/opencv/gstcvstitching.cpp
  create mode 100644 ext/opencv/gstcvstitching.h
  create mode 100644 ext/opencv/gstopencvaggregator.c
  create mode 100644 ext/opencv/gstopencvaggregator.h
 
 diff --git a/docs/plugins/Makefile.am b/docs/plugins/Makefile.am
-index c431f78..d96ace8 100644
+index 7607b55..95f2661 100644
 --- a/docs/plugins/Makefile.am
 +++ b/docs/plugins/Makefile.am
 @@ -97,6 +97,7 @@ EXTRA_HFILES = \
@@ -34,10 +38,10 @@ index c431f78..d96ace8 100644
  	$(top_srcdir)/ext/rsvg/gstrsvgdec.h \
  	$(top_srcdir)/ext/rsvg/gstrsvgoverlay.h \
 diff --git a/ext/opencv/Makefile.am b/ext/opencv/Makefile.am
-index 72472fb..66c5786 100644
+index 0eee38c..8cea91f 100644
 --- a/ext/opencv/Makefile.am
 +++ b/ext/opencv/Makefile.am
-@@ -24,10 +24,15 @@ libgstopencv_la_SOURCES = gstopencv.cpp \
+@@ -24,11 +24,15 @@ libgstopencv_la_SOURCES = gstopencv.cpp \
  			gstsegmentation.cpp \
  			gstgrabcut.cpp \
  			gstdisparity.cpp \
@@ -46,21 +50,22 @@ index 72472fb..66c5786 100644
  			motioncells_wrapper.cpp \
  			MotionCells.cpp
  
--libgstopencv_la_CXXFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) $(GST_CXXFLAGS) $(OPENCV_CFLAGS)
-+libgstopencv_la_CXXFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) \
-+	$(GST_CXXFLAGS) $(OPENCV_CFLAGS) \
+-libgstopencv_la_CXXFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) $(GST_CXXFLAGS) $(OPENCV_CFLAGS) \
+-	-DGST_HAAR_CASCADES_DIR=\"$(pkgdatadir)/@GST_API_VERSION@/opencv_haarcascades\"
++libgstopencv_la_CXXFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS)	$(GST_CXXFLAGS) $(OPENCV_CFLAGS) \
++	-DGST_HAAR_CASCADES_DIR=\"$(pkgdatadir)/@GST_API_VERSION@/opencv_haarcascades\" \
 +	-I$(top_srcdir)/gst-libs \
 +	-I$(top_builddir)/gst-libs
  
  # flags used to compile this facedetect
  # add other _CFLAGS and _LIBS as needed
-@@ -36,11 +41,14 @@ libgstopencv_la_CXXFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) $(GST_C
+@@ -37,10 +41,14 @@ libgstopencv_la_CXXFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) $(GST_C
  # OpenCV's define isn't good enough to avoid 'unused' gcc warnings (at v2.1.0)
  libgstopencv_la_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) \
  	$(GST_CFLAGS) $(OPENCV_CFLAGS) \
 +	-I$(top_srcdir)/gst-libs \
 +	-I$(top_builddir)/gst-libs \
- 	-DGST_HAAR_CASCADES_DIR=\"$(pkgdatadir)/@GST_API_VERSION@/opencv_haarcascades\" \
++	-DGST_HAAR_CASCADES_DIR=\"$(pkgdatadir)/@GST_API_VERSION@/opencv_haarcascades\" \
  	-DCV_INLINE="static inline" \
  	-DCV_NO_BACKWARD_COMPATIBILITY
  

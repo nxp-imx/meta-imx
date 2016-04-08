@@ -1,7 +1,7 @@
-From d5425e319532304efd627b29df99050f01258b7f Mon Sep 17 00:00:00 2001
+From 940b92046efe19f174efe83e63b0f47f3b842154 Mon Sep 17 00:00:00 2001
 From: Song Bing <b06498@freescale.com>
 Date: Fri, 13 Mar 2015 17:31:29 +0800
-Subject: [PATCH 09/10] camerabin: Add one property to set sink element for
+Subject: [PATCH 07/18] camerabin: Add one property to set sink element for
  video recording pipeline
 
 Add one property to set sink element for video recording. Default is
@@ -9,14 +9,16 @@ filesink.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=744508
 
-Upstream-Status: Inappropriate [i.MX specific]
+Upstream Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
  gst/camerabin2/gstcamerabin2.c | 73 +++++++++++++++++++++++++++++++++++-------
  gst/camerabin2/gstcamerabin2.h |  1 +
  2 files changed, 63 insertions(+), 11 deletions(-)
 
 diff --git a/gst/camerabin2/gstcamerabin2.c b/gst/camerabin2/gstcamerabin2.c
-index 7458675..b667fbc 100644
+index d0876d5..31c1e7f 100644
 --- a/gst/camerabin2/gstcamerabin2.c
 +++ b/gst/camerabin2/gstcamerabin2.c
 @@ -220,6 +220,7 @@ enum
