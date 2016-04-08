@@ -1,0 +1,34 @@
+From f64d32b781b5ce30ebd847d52f3aca7a1f280566 Mon Sep 17 00:00:00 2001
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+Date: Sat, 6 Apr 2013 23:52:11 +0200
+Subject: [PATCH 2/4] Fix crash with gst-inspect Chris Lord
+ <chris@openedhand.com>
+
+Upstream-Status: Pending
+
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+
+Conflicts:
+	tools/gst-inspect.c
+
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
+---
+ tools/gst-inspect.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/gst-inspect.c b/tools/gst-inspect.c
+index 845f52e..7c99e64 100644
+--- a/tools/gst-inspect.c
++++ b/tools/gst-inspect.c
+@@ -1511,7 +1511,7 @@ main (int argc, char *argv[])
+   g_option_context_add_main_entries (ctx, options, GETTEXT_PACKAGE);
+   g_option_context_add_group (ctx, gst_init_get_option_group ());
+   if (!g_option_context_parse (ctx, &argc, &argv, &err)) {
+-    g_printerr ("Error initializing: %s\n", err->message);
++    g_printerr ("Error initializing: %s\n", err ? err->message : "(null)");
+     g_clear_error (&err);
+     g_option_context_free (ctx);
+     return -1;
+-- 
+1.9.1
+

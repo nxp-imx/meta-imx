@@ -1,12 +1,13 @@
-From 774244aba887b2f609678733054854a7259d3218 Mon Sep 17 00:00:00 2001
+From 19f71fe56e9f5a8ad07a9adc41a5c37fbe03f801 Mon Sep 17 00:00:00 2001
 From: Lyon Wang <lyon.wang@freescale.com>
 Date: Wed, 14 Oct 2015 14:15:11 +0800
-Subject: [PATCH 1/2] handle base parse error
+Subject: [PATCH 1/4] handle base parse error
 
 There is no need to send GST_ELEMENT_ERROR
 becuase ohter tracks may still good to play.
 no need to end the element, just print error message is enough
 
+Bugzilla https://bugzilla.gnome.org/show_bug.cgi?id=741542
 Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=741542]
 
 Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
@@ -15,10 +16,10 @@ Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/libs/gst/base/gstbaseparse.c b/libs/gst/base/gstbaseparse.c
-index 80334fb..51d159d 100644
+index 2defab9..14223a5 100644
 --- a/libs/gst/base/gstbaseparse.c
 +++ b/libs/gst/base/gstbaseparse.c
-@@ -1275,8 +1275,9 @@ gst_base_parse_sink_event_default (GstBaseParse * parse, GstEvent * event)
+@@ -1356,8 +1356,9 @@ gst_base_parse_sink_event_default (GstBaseParse * parse, GstEvent * event)
        /* If we STILL have zero frames processed, fire an error */
        if (parse->priv->framecount == 0 && !parse->priv->saw_gaps &&
            !parse->priv->first_buffer) {
