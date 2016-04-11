@@ -5,4 +5,6 @@ matchbox-base = "${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', ' \
 matchbox-apps = "${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'matchbox-terminal', '', d)}"
 
 RDEPENDS_${PN}-base_remove = "${matchbox-base}"
-RDEPENDS_${PN}-apps_remove = "${matchbox-apps}"
+RDEPENDS_${PN}-apps_remove = "${matchbox-apps} \
+                              gst-player-bin \
+"
