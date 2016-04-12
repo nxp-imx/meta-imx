@@ -9,8 +9,8 @@ SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}.tar.gz \
 
 LIC_FILES_CHKSUM = "file://EXA/src/vivante_fbdev/vivante.h;endline=26;md5=1fd459c0c72a4d0723eeee2489aa540f"
 
-SRC_URI[md5sum] = "1aa8e734b1fc80af1d13910e9ae1289e"
-SRC_URI[sha256sum] = "c00d1eb8c171aae02385e4d5838182790caea5c8eae164bb0af117ad3ed700f8"
+SRC_URI[md5sum] = "5989563508c80859d3d2badb3588f086"
+SRC_URI[sha256sum] = "d4b009d2d523b3516a4536a9c25e86c98c167fb271bd718414e327a12aab550d"
 
 S = "${WORKDIR}/xserver-xorg-video-imx-viv-${PV}/"
 
