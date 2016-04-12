@@ -11,8 +11,8 @@ M4_SOC_mx7 = "imx7d-sabresd"
 SRC_URI = "${FSL_MIRROR}/${M4_SOC}-m4-freertos-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${M4_SOC}-m4-freertos-${PV}"
 
-SRC_URI[md5sum] = "c2bf0e4ed90192734d04bca0fa9a8405"
-SRC_URI[sha256sum] = "c01c6d9aff5623fec43a4bd2dc44b6d5b0568edbf2d683cccd780520aec69ff4"
+SRC_URI[md5sum] = "b05b780ff3916f4953ab58ac95233c38"
+SRC_URI[sha256sum] = "cc00d3b936d49b2794a2a99e10129437e70caba3fd26b8379b8c50dd22f73254"
 
 do_deploy () {
    # Install the demo binaries
