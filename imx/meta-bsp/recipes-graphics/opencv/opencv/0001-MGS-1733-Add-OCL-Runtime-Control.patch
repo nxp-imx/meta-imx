@@ -1,0 +1,46 @@
+From 07e0e710cd956dd6f904d810d8c4ab8ff784ce1f Mon Sep 17 00:00:00 2001
+From: Shawn Xiao <b49994@freescale.com>
+Date: Mon, 11 Apr 2016 15:47:23 +0800
+Subject: [PATCH] MGS-1733 Add OCL Runtime Control
+
+Export an environment varaible "CV_OCL_ENABLED" to make the OCL runtime
+control. By default the varaible is not set, so the OCL accelerator
+should not be used in OpenCV. Set it to 1, will enable the OCL
+accelerator.
+
+Date April 11, 2016
+
+Signed-off-by: Shawn Xiao <b49994@freescale.com>
+---
+ modules/core/src/ocl.cpp | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/modules/core/src/ocl.cpp b/modules/core/src/ocl.cpp
+index 5d68a36..4d2aaf5 100644
+--- a/modules/core/src/ocl.cpp
++++ b/modules/core/src/ocl.cpp
+@@ -1457,6 +1457,21 @@ bool haveOpenCL()
+ #ifdef HAVE_OPENCL
+     static bool g_isOpenCLInitialized = false;
+     static bool g_isOpenCLAvailable = false;
++    char *p = NULL;
++
++    p = getenv("CV_OCL_ENABLED");
++    if(p == NULL)
++    {
++        return false;
++    }
++    else
++    {
++    	int value = atoi(p);
++    	if(value != 1)
++	{
++    	    return false;
++	}
++    }
+ 
+     if (!g_isOpenCLInitialized)
+     {
+-- 
+1.9.1
+
