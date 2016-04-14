@@ -3,3 +3,5 @@ RDEPENDS_${PN}-base += " \
     ${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-gst1.0-plugin-gplay", "", d)} \
     ${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-gst1.0-plugin-grecorder", "", d)} \
 "
+
+RDEPENDS_${PN} += " gstreamer1.0-rtsp-server"
