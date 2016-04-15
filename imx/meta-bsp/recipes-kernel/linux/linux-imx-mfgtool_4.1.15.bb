@@ -9,6 +9,7 @@ require linux-imx_${PV}.bb
 require recipes-kernel/linux/linux-mfgtool.inc
 
 KERNEL_IMAGE_BASE_NAME[vardepsexclude] = "DATETIME"
+MODULE_IMAGE_BASE_NAME[vardepsexclude] = "DATETIME"
 
 do_configure_prepend() {
     cp ${S}/arch/arm/configs/imx_v7_mfg_defconfig ${B}/.config
