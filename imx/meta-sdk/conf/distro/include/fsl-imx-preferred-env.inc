@@ -19,6 +19,7 @@ MACHINE_GSTREAMER_1_0_PLUGIN_mx6dl = "imx-gst1.0-plugin"
 MACHINE_GSTREAMER_1_0_PLUGIN_mx6sl = "imx-gst1.0-plugin"
 MACHINE_GSTREAMER_1_0_PLUGIN_mx6sx = "imx-gst1.0-plugin"
 MACHINE_GSTREAMER_1_0_PLUGIN_mx7 = "imx-gst1.0-plugin"
+MACHINE_GSTREAMER_1_0_PLUGIN_mx8 = "imx-gst1.0-plugin"
 
 # Extra audio support
 # FIXME: Add support for ALL SoC families
