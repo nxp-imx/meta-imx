@@ -5,6 +5,9 @@ SRC_URI_append_mx6 = " \
     file://0001-weston-launch-silently-ignores-invalid-options.patch \
     file://0003-MGS-1192-xwld-g2d-compositor-dose-not-work.patch \
     file://0008-MGS-1668-xwld-System-can-not-boot-up-to-desktop.patch \
+    file://0009-MGS-1284-xwld-Re-implement-weston-2d-renderer-with-p.patch \
+    file://0010-MGS-1284-1-xwld-Re-implement-weston-2d-renderer-with.patch \
+    file://0011-MGS-1724-xwld-G2D-compositor-build-failed-in-slevk-b.patch \
 "
 SRC_URI_remove_mx6 = " \
     file://0001-MGS-840-Add-i.MX6-support-for-weston.patch \
