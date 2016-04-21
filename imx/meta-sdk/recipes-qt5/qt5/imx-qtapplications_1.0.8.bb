@@ -1,9 +1,9 @@
-# Copyright (C) 2014-2015 Freescale Semiconductor
+# Copyright (C) 2014-2016 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Freescale QT Multimedia applications"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=8cf95184c220e247b9917e7244124c5a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=102094e9e695888c6a9f9fda9004165d"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
