@@ -18,7 +18,7 @@ SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
 DEFAULT_PREFERENCE = "1"
 
-addtask copy_defconfig after do_unpack before do_configure
+addtask copy_defconfig after do_patch before do_configure
 do_copy_defconfig () {
     # copy latest imx_v7_defconfig to use
     cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
