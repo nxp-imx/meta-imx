@@ -1,5 +1,9 @@
-Freescale's 3.14.52-1.1.1_patch Yocto Project BSP
+Freescale's 3.14.52-1.1.1 Yocto Project BSP
 =================================================
+
+Note 3.14.52-1.1.1 is a patch update primarily for graphics update to p8.4
+
+To build the oriignal 3.14.52-1.1.0 GA checkout tag imx_3.14.52_1.1.0_ga in meta-fsl-bsp-release.
 
 This BSP is a Freescale release providing support for the following processors
 
