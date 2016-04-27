@@ -1,9 +1,3 @@
-
-SOC_GPU_TOOLS_X11_append_mx6q  = " gtkperf glcompbench"
-SOC_GPU_TOOLS_X11_append_mx6dl = " gtkperf glcompbench"
-SOC_GPU_TOOLS_X11_append_mx6sx = " gtkperf glcompbench"
-SOC_GPU_TOOLS_X11_append_mx6sl = " gtkperf"
-
 # Wayland packages
 
 SOC_GPU_TOOLS_WAYLAND_mx6q = " glmark2 mesa-demos weston-examples"
