@@ -9,9 +9,6 @@ SRC_URI_append_mx6 = " \
     file://0010-MGS-1284-1-xwld-Re-implement-weston-2d-renderer-with.patch \
     file://0011-MGS-1724-xwld-G2D-compositor-build-failed-in-slevk-b.patch \
 "
-SRC_URI_remove_mx6 = " \
-    file://0001-MGS-840-Add-i.MX6-support-for-weston.patch \
-"
 PACKAGECONFIG_append_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11',' xwayland', '', d)}"
 
 do_install_append_mx6 () {
