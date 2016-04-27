@@ -1,6 +1,12 @@
-FILESEXTRAPATHS_prepend_mx6 := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append_mx6 = " file://0001-mesa-demos-OpenVG-demos-with-single-frame-need-eglSw.patch"
+
+SRC_URI_append_mx8 = " file://Replace-glWindowPos2iARB-calls-with-glWindowPos2i.patch \
+                    file://fix-clear-build-break.patch \
+                    file://Additional-eglSwapBuffer-calling-makes-wrong-throttl.patch \
+                    file://Add-OpenVG-demos-to-support-wayland.patch \
+                    file://0001-mesa-demos-OpenVG-demos-with-single-frame-need-eglSw.patch"
 
 DEPENDS = "mesa"
 
@@ -9,5 +15,7 @@ PACKAGECONFIG_remove_mx6q = "${REMOVE_GLU}"
 PACKAGECONFIG_remove_mx6dl = "${REMOVE_GLU}"
 PACKAGECONFIG_remove_mx6sx = "${REMOVE_GLU}"
 PACKAGECONFIG_remove_mx6sl = "${REMOVE_GLU}"
+PACKAGECONFIG_remove_mx8 = "${REMOVE_GLU}"
 
 PACKAGECONFIG_append_mx6 = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland vg', '', d)}"
+PACKAGECONFIG_append_mx8 = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland vg', '', d)}"
