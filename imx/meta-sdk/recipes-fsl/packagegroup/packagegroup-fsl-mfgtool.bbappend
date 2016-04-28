@@ -1,4 +1,4 @@
-# Add extra tools
+# Add extra tools needed for Android mfgtools
 
 RDEPENDS_${PN}-base += " \
     simg2img \
