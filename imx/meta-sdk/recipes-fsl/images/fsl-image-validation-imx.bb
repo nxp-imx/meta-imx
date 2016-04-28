@@ -28,7 +28,7 @@ IMAGE_FEATURES += " \
 
 CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-core-full-cmdline \
-    packagegroup-fsl-tools-bluetooth \
+    packagegroup-tools-bluetooth \
     packagegroup-fsl-tools-audio \
     packagegroup-fsl-tools-gpu \
     packagegroup-fsl-tools-gpu-external \
