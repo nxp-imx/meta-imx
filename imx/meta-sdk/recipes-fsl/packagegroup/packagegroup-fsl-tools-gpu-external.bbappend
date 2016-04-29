@@ -14,9 +14,10 @@ SOC_GPU_TOOLS_XWAYLAND_mx6sx = " gtkperf glmark2 mesa-demos weston-examples xter
 SOC_GPU_TOOLS_XWAYLAND_mx6sl = " gtkperf mesa-demos weston-examples xterm"
 
 # OpenCV test apps
-# Comment out due to blacklist conflict with ffmpeg3
+# Comment out opencv-samplpes due to blacklist conflict with ffmpeg3
 OPENCV_TOOLS_INSTALL = ""
 #OPENCV_TOOLS_INSTALL_append_mx6 = "opencv-apps opencv-samples"
+OPENCV_TOOLS_INSTALL_append_mx6 = "opencv-apps"
 
 RDEPENDS_${PN} = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', '${SOC_GPU_TOOLS_XWAYLAND}', \

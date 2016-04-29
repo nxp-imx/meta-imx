@@ -23,7 +23,7 @@ BBMASK .= "|meta-fsl-arm/recipes-kernel/linux/linux-imx_4.1.15.bb"
 BBMASK .= "|meta-fsl-arm/recipes-kernel/linux/linux-imx-mfgtool_4.1.15.bb"
 BBMASK .= "|meta-freescale/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend"
 BBMASK .= "|meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv_2.4.bbappend"
-BBMASK .= "|meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv_3.0.bbappend"
+BBMASK .= "|meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv_3.1.bbappend"
 BBMASK .= "|meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
