@@ -1,0 +1,48 @@
+From 17b1abd8491d87fab389654f313b72bded24afc2 Mon Sep 17 00:00:00 2001
+From: Song Bing <bing.song@nxp.com>
+Date: Tue, 26 Apr 2016 16:49:33 +0800
+Subject: [PATCH] ximageutil: shouldn't implement transform if don't support
+ it.
+
+shouldn't implement transform if don't support it. Or
+gst_buffer_copy_into() will print ERROR log.
+
+Upstream-Status: Backport [1.9.1]
+
+https://bugzilla.gnome.org/show_bug.cgi?id=765583
+---
+ sys/ximage/ximageutil.c |   11 +----------
+ 1 file changed, 1 insertion(+), 10 deletions(-)
+
+diff --git a/sys/ximage/ximageutil.c b/sys/ximage/ximageutil.c
+index ac2fd49..add0422 100644
+--- a/sys/ximage/ximageutil.c
++++ b/sys/ximage/ximageutil.c
+@@ -36,15 +36,6 @@ gst_meta_ximage_api_get_type (void)
+   return type;
+ }
+ 
+-static gboolean
+-gst_meta_ximage_transform (GstBuffer * dest, GstMeta * meta,
+-    GstBuffer * buffer, GQuark type, gpointer data)
+-{
+-  /* ximage metadata can't be transformed or copied */
+-
+-  return FALSE;
+-}
+-
+ const GstMetaInfo *
+ gst_meta_ximage_get_info (void)
+ {
+@@ -54,7 +45,7 @@ gst_meta_ximage_get_info (void)
+     const GstMetaInfo *meta =
+         gst_meta_register (gst_meta_ximage_api_get_type (), "GstMetaXImageSrc",
+         sizeof (GstMetaXImage), (GstMetaInitFunction) NULL,
+-        (GstMetaFreeFunction) NULL, gst_meta_ximage_transform);
++        (GstMetaFreeFunction) NULL, (GstMetaTransformFunction) NULL);
+     g_once_init_leave (&meta_ximage_info, meta);
+   }
+   return meta_ximage_info;
+-- 
+1.7.9.5
+
