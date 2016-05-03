@@ -49,7 +49,6 @@ GPU_PATCHES = " file://0008-Fix-for-gl-plugin-not-built-in-wayland-backend.patch
                 file://0016-Add-fps-print-in-glimagesink.patch \
                 file://0017-glcolorconvert-convert-YUV-to-RGB-use-directviv.patch \
                 file://0018-glwindow-work-around-for-no-frame-when-imxplayer-use.patch \
-                file://0019-glplugin-glimagesink-need-to-clean-window_id-when-st.patch \
                 file://0020-glplugin-glcolorconvert-fix-MRT-cannot-work-in-GLES3.patch \
                 file://0021-glplugin-enable-gldeinterlace-on-OpenGL-ES.patch \
                 file://0022-glcolorconvert-implement-multiple-render-targets-for.patch \
