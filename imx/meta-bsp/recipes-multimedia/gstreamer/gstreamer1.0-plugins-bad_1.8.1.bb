@@ -29,7 +29,7 @@ SRC_URI = " \
 
 SRC_URI_remove = "file://0001-PATCH-install-gstaggregator-and-gstvideoaggregator-h.patch "
 
-SRC_URI[md5sum] = "1c2d797bb96a81e9ef570c7a0a37203e"
-SRC_URI[sha256sum] = "116376dd1085082422e0b21b0ecd3d1cb345c469c58e32463167d4675f4ca90e"
+SRC_URI[md5sum] = "e508da2a8a5c3d12264fe3415be2f451"
+SRC_URI[sha256sum] = "0bbd58f363734fc0c4a620b2d6fb01d427fdafdbda7b90b4e15d03b751ca40f5"
 
 S = "${WORKDIR}/gst-plugins-bad-${PV}"
