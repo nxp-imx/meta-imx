@@ -53,7 +53,9 @@ GPU_PATCHES = " file://0008-Fix-for-gl-plugin-not-built-in-wayland-backend.patch
                 file://0020-glplugin-glcolorconvert-fix-MRT-cannot-work-in-GLES3.patch \
                 file://0021-glplugin-enable-gldeinterlace-on-OpenGL-ES.patch \
                 file://0022-glcolorconvert-implement-multiple-render-targets-for.patch \
-                file://0023-MMFMWK-7135-glplugin-glcolorconvert-fix-fragment-sha.patch \
+                file://0023-glcolorconvert-don-t-use-the-predefined-variable-nam.patch \
+                file://0024-glshader-add-glBindFragDataLocation.patch \
+                file://0025-glcolorconvert-GLES3-deprecates-texture2D-and-it-doe.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
