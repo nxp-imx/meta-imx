@@ -9,7 +9,7 @@ SRC_URI = " \
 "
 
 
-SRC_URI[md5sum] = "6846d7289ec323c38c49b818171e955a"
-SRC_URI[sha256sum] = "947a314a212b5d94985d89b43440dbe66b696e12bbdf9a2f78967b98d74abedc"
+SRC_URI[md5sum] = "711ada79b63e47ac96adb4e5444dc908"
+SRC_URI[sha256sum] = "5a3722fb9302dd977c17ced4240293dc777cb716dc98c8cca63d75c27e5e3107"
 
 S = "${WORKDIR}/gstreamer-${PV}"
