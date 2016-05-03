@@ -1,47 +1,6 @@
-This readme documents how to interface to the blueooth device on both bluez4 and bluez5.
+This readme documents how to interface to the blueooth device on bluez5.
 
-Bluez4 is the default for 3.10.53-1.1.0_GA release.
 Bluez5 is the default for 3.14 releases.
-
-Bluez4 and bluez5 have different tool sets which will be described next.
-
-Bluez4 instructions
--------------------
-1) Attach the bluetooth device. Note that ttymxc2 might need to be changed to ttymxc0 for sabresd boards.
-
-	$ hciattach -n -s 921600 /dev/ttymxc2 bcsp 921600 flow & 
-
-2) Start the bluetooth daemon.
-	$ bluetoothd &
-
-3) Show the information on the bluetooth device.
-	$ hciconifg -a
-
-4) Scan the Bluetooth devices. Copy the MAC address of the target bluetooth device.
-	$ hcitool scan
-
-5) List the services the bluetooth device supports.
-
-	$ sdptool browse <mac address>
-
-6) Send the file to the bluetooth device.
-
-	$ obexftp -b <mac address> -B 10 -p <file>
-
-7) Receive the file from the bluetooth device.
-
-	$ sdptool add --chanell=10 OPUSH
-
-Show the transfer server.
-	$ hciconifg -a
-
-Start the server for receiving.
-
-	$ obexftpd -b -c . &
-
-	Send a file from the bluetooth device to the board.
-
-
 
 Bluez5 instructions
 -------------------
