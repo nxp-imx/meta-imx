@@ -17,8 +17,8 @@ PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
                            base_contains('DISTRO_FEATURES', 'x11', \
                                     'opengl', '', d), '', d)}"
 
-#PACKAGECONFIG_append_mx6q = " opencv"
-#PACKAGECONFIG_append_mx6qp = " opencv"
+PACKAGECONFIG_append_mx6q = " opencv"
+PACKAGECONFIG_append_mx6qp = " opencv"
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
