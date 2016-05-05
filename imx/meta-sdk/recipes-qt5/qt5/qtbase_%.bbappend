@@ -5,7 +5,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://Force_egl_visual_ID_33.patch \
             file://eglerror.patch"
 
-HAS_X11 = "${@base_contains('DISTRO_FEATURES', 'x11', 1, 0, d)}"
+HAS_X11 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 1, 0, d)}"
 
 IS_MX6SL = "0"
 IS_MX6SL_mx6sl = "1"
@@ -13,16 +13,16 @@ IS_MX6SL_mx6sl = "1"
 PACKAGECONFIG_GL_mx6q = "gles2"
 PACKAGECONFIG_GL_mx6dl = "gles2"
 PACKAGECONFIG_GL_mx6sx = "gles2"
-PACKAGECONFIG_GL_mx6sl = "${@base_contains('DISTRO_FEATURES', 'x11', ' gl', '', d)}"
+PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' gl', '', d)}"
 PACKAGECONFIG_GL_mx6ul = "gles2"
 PACKAGECONFIG_GL_mx7 = "gles2"
-QT_CONFIG_FLAGS_append_mx6q = "${@base_contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
-QT_CONFIG_FLAGS_append_mx6dl = "${@base_contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
-QT_CONFIG_FLAGS_append_mx6sx = "${@base_contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
-QT_CONFIG_FLAGS_append_mx6sl = "${@base_contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', \
+QT_CONFIG_FLAGS_append_mx6q = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
+QT_CONFIG_FLAGS_append_mx6dl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
+QT_CONFIG_FLAGS_append_mx6sx = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
+QT_CONFIG_FLAGS_append_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', \
                                                  ' -no-opengl -linuxfb -no-eglfs', d)}"
-QT_CONFIG_FLAGS_append_mx6ul = "${@base_contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
-QT_CONFIG_FLAGS_append_mx7 = "${@base_contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
+QT_CONFIG_FLAGS_append_mx6ul = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
+QT_CONFIG_FLAGS_append_mx7 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 
 do_configure_prepend() {
     # adapt qmake.conf to our needs

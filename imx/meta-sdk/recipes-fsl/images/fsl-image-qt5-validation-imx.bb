@@ -7,19 +7,19 @@ inherit distro_features_check
 
 CONFLICT_DISTRO_FEATURES = "directfb"
 
-X11_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', \
+X11_IMAGE_INSTALL = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', \
     'libxkbcommon', '', d)}"
 
-WLD_IMAGE_INSTALL = "${@base_contains('DISTRO_FEATURES', 'x11', \
-                base_contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d), \
-                  base_contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins','', d), d)}"
+WLD_IMAGE_INSTALL = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', \
+                bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d), \
+                bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins','', d), d)}"
 
 # Install Freescale QT demo applications
 MACHINE_QT5_MULTIMEDIA_PLAYER = ""
-MACHINE_QT5_MULTIMEDIA_PLAYER_mx6q = "${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
-MACHINE_QT5_MULTIMEDIA_PLAYER_mx6dl = "${@base_contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
+MACHINE_QT5_MULTIMEDIA_PLAYER_mx6q = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
+MACHINE_QT5_MULTIMEDIA_PLAYER_mx6dl = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
 # Install Freescale QT demo applications for X11 backend only
-MACHINE_QT5_MULTIMEDIA_APPS = "${@base_contains('DISTRO_FEATURES', 'x11', base_contains('DISTRO_FEATURES', 'wayland', \
+MACHINE_QT5_MULTIMEDIA_APPS = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', bb.utils.contains('DISTRO_FEATURES', 'wayland', \
                                  '', '${MACHINE_QT5_MULTIMEDIA_PLAYER}', d), '', d)}"
 QT5_IMAGE_INSTALL = ""
 QT5_IMAGE_INSTALL_common = " \
@@ -32,13 +32,13 @@ QT5_IMAGE_INSTALL_common = " \
 QT5_IMAGE_INSTALL_mx6 = " \
     ${QT5_IMAGE_INSTALL_common} \
     "
-QT5_IMAGE_INSTALL_mx6sl = "${@base_contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
+QT5_IMAGE_INSTALL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-fonts qtbase-plugins', d)}"
 
-QT5_IMAGE_INSTALL_mx6ul = "${@base_contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
+QT5_IMAGE_INSTALL_mx6ul = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-examples qtbase-fonts qtbase-plugins', d)}"
 
-QT5_IMAGE_INSTALL_mx7 = "${@base_contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
+QT5_IMAGE_INSTALL_mx7 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-examples qtbase-fonts qtbase-plugins', d)}"
 
 QT5_IMAGE_INSTALL_remove = " packagegroup-qt5-webengine"

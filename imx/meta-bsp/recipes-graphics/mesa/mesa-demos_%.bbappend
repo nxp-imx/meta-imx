@@ -10,7 +10,7 @@ SRC_URI_append_mx8 = " file://Replace-glWindowPos2iARB-calls-with-glWindowPos2i.
 
 DEPENDS = "mesa"
 
-REMOVE_GLU = "${@base_contains('DISTRO_FEATURES', 'wayland', 'glu x11', '', d)}"
+REMOVE_GLU = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'glu x11', '', d)}"
 PACKAGECONFIG_remove_mx6q = "${REMOVE_GLU}"
 PACKAGECONFIG_remove_mx6dl = "${REMOVE_GLU}"
 PACKAGECONFIG_remove_mx6sx = "${REMOVE_GLU}"

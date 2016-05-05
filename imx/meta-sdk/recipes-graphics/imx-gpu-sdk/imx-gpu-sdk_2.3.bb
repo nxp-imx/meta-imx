@@ -8,8 +8,8 @@ DEPENDS_append_mx6dl = " virtual/libgles2"
 DEPENDS_append_mx6sx = " virtual/libgles2"
 DEPENDS_append_mx6sl = " virtual/libopenvg"
 
-X11_DEPENDS = "${@base_contains('DISTRO_FEATURES', 'x11', 'xrandr', '', d)}"
-WL_DEPENDS = "${@base_contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
+X11_DEPENDS = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xrandr', '', d)}"
+WL_DEPENDS = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
 
 inherit fsl-eula-unpack
 
@@ -23,8 +23,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "d551ab57bd117edc0339566a244427d4"
 SRC_URI[sha256sum] = "0b9565cf7794e0acc896630e290c1bc8b9fe747adc91b78004d99afcf1549a29"
 
-BACKEND = "${@base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
-                base_contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
+BACKEND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
+                bb.utils.contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
 
 HAS_VPU = "1"
 HAS_VPU_mx6sx = "0"

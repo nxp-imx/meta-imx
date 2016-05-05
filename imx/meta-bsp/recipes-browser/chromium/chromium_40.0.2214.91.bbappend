@@ -1,7 +1,7 @@
 # Don't use X if it's running through Wayland
 
-CHROMIUM_ENABLE_WAYLAND = "${@base_contains('DISTRO_FEATURES', 'wayland', '1', \
-                      base_contains('DISTRO_FEATURES', 'x11', '0', \
+CHROMIUM_ENABLE_WAYLAND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '1', \
+                      bb.utils.contains('DISTRO_FEATURES', 'x11', '0', \
                       '0', d),d)}"
 
 # This is the workaround for the segfault when running google-chrome

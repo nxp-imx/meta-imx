@@ -2,7 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append = " file://weston-launch-init"
 
-USE_WESTON_LAUNCH = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
+USE_WESTON_LAUNCH = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 
 do_install_append() {	
 

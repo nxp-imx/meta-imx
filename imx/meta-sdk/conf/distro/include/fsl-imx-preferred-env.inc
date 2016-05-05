@@ -24,9 +24,9 @@ MACHINE_GSTREAMER_1_0_PLUGIN_mx8 = "imx-gst1.0-plugin"
 # Extra audio support
 # FIXME: Add support for ALL SoC families
 MACHINE_EXTRA_RRECOMMENDS_remove_mx6 = " fsl-alsa-plugins"
-MACHINE_EXTRA_RRECOMMENDS_append_mx6 = " ${@base_contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS_append_mx6ul = " ${@base_contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS_append_mx7 = " ${@base_contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append_mx6 = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append_mx6ul = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append_mx7 = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
 
 # Default toolchains used in testing i.MX BSPs
 DEFAULTTUNE_mx6   = "cortexa9hf-neon"
