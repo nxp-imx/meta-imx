@@ -1,6 +1,6 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "Freescale i.MX Release Distro"
-DISTRO_VERSION = "4.1.15-1.1.1"
+DISTRO_VERSION = "4.1.15-1.2.0"
 DISTRO_CODENAME = "jethro"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
