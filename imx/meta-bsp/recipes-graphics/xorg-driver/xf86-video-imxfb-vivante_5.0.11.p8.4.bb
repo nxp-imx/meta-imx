@@ -4,6 +4,8 @@
 
 require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
 
+LIC_FILES_CHKSUM = "file://COPYING-MIT;md5=b5e9d9f5c02ea831ab3ecf802bb7c4f3"
+
 SRC_URI = "${FSL_MIRROR}/xserver-xorg-video-imx-viv-${PV}.tar.gz \
             file://rc.autohdmi"
 
