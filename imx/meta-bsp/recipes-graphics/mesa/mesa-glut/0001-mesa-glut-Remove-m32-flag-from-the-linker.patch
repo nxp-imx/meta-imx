@@ -1,0 +1,40 @@
+From 45f903c35a7bf3eafffd232ee1df1b177ae0168e Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Tue, 10 May 2016 10:48:57 -0500
+Subject: [PATCH] mesa-glut: Remove m32 flag from the linker
+
+Yocto does not recognize m32 flag and it failed to generate
+the library for glut.
+
+Upstream status: pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ bin/mklib | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/bin/mklib b/bin/mklib
+index 2c7ed38..9110727 100755
+--- a/bin/mklib
++++ b/bin/mklib
+@@ -335,7 +335,7 @@ case $ARCH in
+ 	    set ${OBJECTS}
+ 	    ABI32=`file $1 | grep 32-bit`
+ 	    if [ "${ABI32}" -a `uname -m` = "x86_64" ] ; then
+-		OPTS="-m32 ${OPTS}"
++		OPTS="${OPTS}"
+ 	    fi
+ 
+             if [ "${ALTOPTS}" ] ; then
+@@ -392,7 +392,7 @@ case $ARCH in
+ 	    set ${OBJECTS}
+ 	    ABI32=`file $1 | grep 32-bit`
+ 	    if [ "${ABI32}" -a `uname -m` = "x86_64" ] ; then
+-		OPTS="-m32 ${OPTS}"
++		OPTS="${OPTS}"
+ 	    fi
+             if [ "${ALTOPTS}" ] ; then
+                 OPTS=${ALTOPTS}
+-- 
+1.9.1
+
