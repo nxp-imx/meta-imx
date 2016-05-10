@@ -41,6 +41,7 @@ QT5_IMAGE_INSTALL_mx6ul = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_
 QT5_IMAGE_INSTALL_mx7 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-examples qtbase-fonts qtbase-plugins', d)}"
 
+# Add packagegroup-qt5-webengine to QT5_IMAGE_INSTALL_mx6 and comment out the line below to install qtwebengine to the rootfs.
 QT5_IMAGE_INSTALL_remove = " packagegroup-qt5-webengine"
 
 IMAGE_INSTALL += " \
@@ -48,4 +49,3 @@ ${QT5_IMAGE_INSTALL} \
 "
 #export IMAGE_BASENAME = "fsl-image-qt5"
 
-# Add packagegroup-qt5-webengine to QT5_IMAGE_INSTALL_mx6 if qtwebengine needs to installed to rootfs
