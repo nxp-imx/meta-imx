@@ -19,3 +19,7 @@ PACKAGECONFIG_remove_mx8 = "${REMOVE_GLU}"
 
 PACKAGECONFIG_append_mx6 = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland vg', '', d)}"
 PACKAGECONFIG_append_mx8 = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland vg', '', d)}"
+
+PACKAGECONFIG[glut] = "--with-glut=${STAGING_EXECPREFIXDIR},--without-glut,mesa-glut"
+
+PACKAGECONFIG_append_mx6 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'glut', '', d)}"
