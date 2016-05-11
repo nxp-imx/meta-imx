@@ -47,5 +47,3 @@ QT5_IMAGE_INSTALL_remove = " packagegroup-qt5-webengine"
 IMAGE_INSTALL += " \
 ${QT5_IMAGE_INSTALL} \
 "
-#export IMAGE_BASENAME = "fsl-image-qt5"
-
