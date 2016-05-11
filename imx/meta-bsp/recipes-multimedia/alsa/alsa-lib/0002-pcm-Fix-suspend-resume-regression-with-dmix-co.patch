@@ -1,0 +1,43 @@
+From c14b0a08f0bf58e4f62307c68f8ff0137b4dec19 Mon Sep 17 00:00:00 2001
+From: Takashi Iwai <tiwai@suse.de>
+Date: Wed, 11 May 2016 09:06:47 +0200
+Subject: [PATCH] pcm: Fix suspend/resume regression with dmix & co
+
+The recent fix commit [8985742d91db: pcm: dmix: Handle slave PCM xrun
+and unexpected states properly] caused a regression in dmix and other
+plugins regarding suspend/resume.  For example, aplay endlessly prints
+"Suspended. Trying resume. Done." message if suspend and resume are
+performed in the middle of playback.
+
+The reason is that the commit above changed the shadow PCM state
+(dmix->state) to SUSPENDED when the slave PCM is in suspend, while it
+doesn't restore the shadow state upon resume.  Thus it appears as if
+it's always suspended even after the resume is invoked.
+
+The fix is just to add the proper update of the shadow state in
+snd_pcm_direct_resume().
+
+Upstream-Status: Submitted [http://git.alsa-project.org/?p=alsa-lib.git;a=commit;h=c14b0a08f0bf58e4f62307c68f8ff0137b4dec19]
+
+
+Reported-by: Shengjiu Wang <shengjiu.wang@freescale.com>
+Signed-off-by: Takashi Iwai <tiwai@suse.de>
+---
+ src/pcm/pcm_direct.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/pcm/pcm_direct.c b/src/pcm/pcm_direct.c
+index 14de734..e28738b 100644
+--- a/src/pcm/pcm_direct.c
++++ b/src/pcm/pcm_direct.c
+@@ -848,6 +848,7 @@ int snd_pcm_direct_resume(snd_pcm_t *pcm)
+ 		snd_pcm_start(dmix->spcm);
+ 		err = 0;
+ 	}
++	dmix->state = snd_pcm_state(dmix->spcm);
+ 	snd_pcm_direct_semaphore_up(dmix, DIRECT_IPC_SEM_CLIENT);
+ 	return err;
+ }
+-- 
+1.9.1
+
