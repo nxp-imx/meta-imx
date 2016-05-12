@@ -16,6 +16,7 @@ PACKAGECONFIG_GL_mx6sx = "gles2"
 PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' gl', '', d)}"
 PACKAGECONFIG_GL_mx6ul = "gles2"
 PACKAGECONFIG_GL_mx7 = "gles2"
+PACKAGECONFIG_GL_mx8 = "gles2"
 QT_CONFIG_FLAGS_append_mx6q = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_append_mx6dl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_append_mx6sx = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
@@ -23,6 +24,7 @@ QT_CONFIG_FLAGS_append_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '
                                                  ' -no-opengl -linuxfb -no-eglfs', d)}"
 QT_CONFIG_FLAGS_append_mx6ul = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_append_mx7 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
+QT_CONFIG_FLAGS_append_mx8 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 
 do_configure_prepend() {
     # adapt qmake.conf to our needs
