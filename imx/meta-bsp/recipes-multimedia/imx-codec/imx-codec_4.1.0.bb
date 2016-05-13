@@ -1,7 +1,7 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require recipes-multimedia/imx-codec/imx-codec.inc
+require imx-codec.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=102094e9e695888c6a9f9fda9004165d"
 
 SRC_URI[md5sum] = "4bc5d9e8f6936698e600ba1229976308"
