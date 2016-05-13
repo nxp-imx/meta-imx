@@ -121,8 +121,8 @@ do_install () {
 
     # The preference order, based in DISTRO_FEATURES, is Wayland (with or without X11), X11 and fb
     if [ "${USE_WL}" = "yes" ]; then
-        cp -axr ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
-        cp -axr ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
+        cp -r ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
+        cp -r ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
 
         backend=wl
 
@@ -143,8 +143,8 @@ do_install () {
     elif [ "${USE_X11}" = "yes" ]; then
 
         cp -r ${S}/gpu-core/usr/lib/dri ${D}${libdir}
-        cp -axr ${S}/apitrace/x11/usr/lib/* ${D}${libdir}
-        cp -axr ${S}/apitrace/x11/usr/bin/* ${D}${bindir}
+        cp -r ${S}/apitrace/x11/usr/lib/* ${D}${libdir}
+        cp -r ${S}/apitrace/x11/usr/bin/* ${D}${bindir}
 
 
         backend=x11
@@ -161,8 +161,8 @@ do_install () {
 
         # Regular framebuffer
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_linuxfb.pc ${D}${libdir}/pkgconfig/egl.pc
-        cp -axr ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
-        cp -axr ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
+        cp -r ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
+        cp -r ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
         
         backend=fb
 
