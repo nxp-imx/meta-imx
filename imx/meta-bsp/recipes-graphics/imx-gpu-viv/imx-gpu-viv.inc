@@ -114,7 +114,7 @@ do_install () {
     cp -r ${S}/gpu-demos/opt ${D}
 
     if [ "${IS_MX8}" = "0" ]; then
-        cp -axr ${S}/gpu-tools/gmem-info/usr/bin/* ${D}${bindir}
+        cp -r ${S}/gpu-tools/gmem-info/usr/bin/* ${D}${bindir}
     fi
 
     install -d ${D}${libdir}/pkgconfig
