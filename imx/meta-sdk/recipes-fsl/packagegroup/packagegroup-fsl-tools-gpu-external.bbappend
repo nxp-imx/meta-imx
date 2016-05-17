@@ -19,9 +19,6 @@ SOC_GPU_TOOLS_XWAYLAND_mx8 = " gtkperf glmark2 mesa-demos weston-examples xterm"
 
 SOC_GPU_TOOLS_X11_mx8 = " mesa-demos glmark2 eglinfo-x11 gtkperf glcompbench"
 
-# Fb packages
-
-SOC_GPU_TOOLS_FB_mx8 = "eglinfo-fb"
 
 # OpenCV test apps
 # Comment out opencv-samplpes due to blacklist conflict with ffmpeg3
