@@ -1,6 +1,6 @@
 DESCRIPTION = "FreeGLUT is a free-software/open-source alternative to the OpenGL \
                Utility Toolkit (GLUT) library"
-LICENSE = "X-Consortium"
+LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=89c0b58a3e01ce3d8254c9f59e78adfb"
 
 SRC_URI = "https://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
@@ -11,5 +11,7 @@ inherit cmake
 
 # depends on virtual/libx11
 REQUIRED_DISTRO_FEATURES = "x11"
+
+PROVIDES += "mesa-glut"
 
 DEPENDS = "virtual/libx11 libxmu libxi virtual/libgl libglu libxrandr"
