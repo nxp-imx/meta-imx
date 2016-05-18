@@ -25,6 +25,11 @@ BBMASK .= "|meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv_3.1.bb
 BBMASK .= "|meta-openembedded/meta-oe/recipes-support/opencv/opencv_3.1.bb"
 BBMASK .= "|meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend"
 
+# XWayland backport from Yocto 2.2
+BBMASK .= "|meta-fsl-arm/recipes-graphics/wayland/weston_%.bbappend"
+BBMASK .= "|meta-fsl-arm/recipes-graphics/wayland/weston-init.bb"
+BBMASK .= "|meta-fsl-arm/recipes-graphics/images/core-image-weston.bbappend"
+
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 # Comment out the 2 lines below to use bluez4.
 DISTRO_FEATURES_append_mx6 = " bluez5"
