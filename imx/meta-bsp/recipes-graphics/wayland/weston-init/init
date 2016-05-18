@@ -8,6 +8,10 @@
 # Default-Stop:      0 1 6
 ### END INIT INFO
 
+if test -e /etc/default/weston ; then
+        . /etc/default/weston
+fi
+
 killproc() {
         pid=`/bin/pidof $1`
         [ "$pid" != "" ] && kill $pid
@@ -27,16 +31,7 @@ case "$1" in
   start)
         . /etc/profile
 
-        # This is all a nasty hack
-        if test -z "$XDG_RUNTIME_DIR"; then
-                export XDG_RUNTIME_DIR=/run/user/root
-                mkdir --parents $XDG_RUNTIME_DIR
-                chmod 0700 $XDG_RUNTIME_DIR
-        fi
-	mkdir -p /tmp/.X11-unix
-	export XDG_CONFIG_HOME=/etc
-	rm /var/log/weston.log
-	openvt -v -- sh -c "weston-launch > /var/log/weston.log 2>&1"
+        weston-start -s -- $OPTARGS
   ;;
 
   stop)
