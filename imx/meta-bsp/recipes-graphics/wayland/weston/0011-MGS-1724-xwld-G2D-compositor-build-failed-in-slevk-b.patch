@@ -15,11 +15,11 @@ Signed-off-by: Yong Gan <yong.gan@nxp.com>
  src/g2d-renderer.c     |  4 ++--
  2 files changed, 12 insertions(+), 3 deletions(-)
 
-diff --git a/src/compositor-fbdev.c b/src/compositor-fbdev.c
-index 097da10..8a29250 100644
---- a/src/compositor-fbdev.c
-+++ b/src/compositor-fbdev.c
-@@ -61,7 +61,9 @@ struct fbdev_backend {
+Index: weston-1.10.0/src/compositor-fbdev.c
+===================================================================
+--- weston-1.10.0.orig/src/compositor-fbdev.c	2016-05-17 14:17:37.039727929 -0500
++++ weston-1.10.0/src/compositor-fbdev.c	2016-05-17 14:20:36.000000000 -0500
+@@ -61,7 +61,9 @@
  	int use_pixman;
  	int use_g2d;
  	struct wl_listener session_listener;
@@ -29,9 +29,9 @@ index 097da10..8a29250 100644
  };
  
  struct fbdev_screeninfo {
-@@ -96,9 +98,10 @@ struct fbdev_output {
- 	pixman_image_t *shadow_surface;
- 	void *shadow_buf;
+@@ -94,9 +96,10 @@
+ 	/* pixman details. */
+ 	pixman_image_t *hw_surface;
  	uint8_t depth;
 -
 +#ifdef ENABLE_EGL
@@ -41,7 +41,7 @@ index 097da10..8a29250 100644
  };
  
  struct fbdev_parameters {
-@@ -484,10 +487,12 @@ fbdev_frame_buffer_destroy(struct fbdev_output *output)
+@@ -455,10 +458,12 @@
  		           strerror(errno));
  
  	output->fb = NULL;
@@ -54,23 +54,24 @@ index 097da10..8a29250 100644
  }
  
  static void fbdev_output_destroy(struct weston_output *base);
-@@ -592,6 +597,7 @@ fbdev_output_create(struct fbdev_backend *backend,
- 
- 	}
- 	else {
+@@ -542,7 +547,7 @@
+ 			weston_log("g2d_renderer_output_create failed.\n");
+ 			goto out_hw_surface;
+ 		}
+-
 +#ifdef ENABLE_EGL
+ 	} else {
  		setenv("HYBRIS_EGLPLATFORM", "wayland", 1);
  		output->window = fbCreateWindow(backend->display, -1, -1, 0, 0);
- 		if (output->window == NULL) {
-@@ -605,6 +611,7 @@ fbdev_output_create(struct fbdev_backend *backend,
+@@ -557,6 +562,7 @@
  			weston_log("gl_renderer_output_create failed.\n");
- 			goto out_shadow_surface;
+ 			goto out_hw_surface;
  		}
 +#endif
  	}
  
- 
-@@ -938,6 +945,7 @@ fbdev_backend_create(struct weston_compositor *compositor, int *argc, char *argv
+ 	loop = wl_display_get_event_loop(backend->compositor->wl_display);
+@@ -860,6 +866,7 @@
  		}
  	}
  	 else {
@@ -78,7 +79,7 @@ index 097da10..8a29250 100644
  		gl_renderer = weston_load_module("gl-renderer.so",
  						 "gl_renderer_interface");
  		if (!gl_renderer) {
-@@ -957,6 +965,7 @@ fbdev_backend_create(struct weston_compositor *compositor, int *argc, char *argv
+@@ -879,6 +886,7 @@
  			weston_log("gl_renderer_create failed.\n");
  			goto out_launcher;
  		}
@@ -86,11 +87,11 @@ index 097da10..8a29250 100644
  	}
  	if(!backend->use_g2d)
  		if (fbdev_output_create(backend, 0, 0, param->device) < 0)
-diff --git a/src/g2d-renderer.c b/src/g2d-renderer.c
-index 19c93a0..7a37949 100644
---- a/src/g2d-renderer.c
-+++ b/src/g2d-renderer.c
-@@ -756,11 +756,11 @@ g2d_renderer_attach_shm(struct weston_surface *es, struct weston_buffer *buffer,
+Index: weston-1.10.0/src/g2d-renderer.c
+===================================================================
+--- weston-1.10.0.orig/src/g2d-renderer.c	2016-05-17 14:17:37.039727929 -0500
++++ weston-1.10.0/src/g2d-renderer.c	2016-05-17 14:17:37.035727909 -0500
+@@ -756,11 +756,11 @@
  
  	switch (wl_shm_buffer_get_format(shm_buffer)) {
  	case WL_SHM_FORMAT_XRGB8888:
@@ -104,6 +105,3 @@ index 19c93a0..7a37949 100644
  		gs->bpp = 4;
  		break;
  	case WL_SHM_FORMAT_RGB565:
--- 
-1.9.1
-

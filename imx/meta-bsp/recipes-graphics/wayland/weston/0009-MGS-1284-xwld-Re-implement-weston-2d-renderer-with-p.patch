@@ -25,11 +25,11 @@ Signed-off-by: Yong Gan <yong.gan@freescale.com>
  delete mode 100644 src/gal2d-renderer.c
  delete mode 100644 src/gal2d-renderer.h
 
-diff --git a/Makefile.am b/Makefile.am
-index 86d3dfa..f62bfc7 100644
---- a/Makefile.am
-+++ b/Makefile.am
-@@ -214,16 +214,16 @@ gl_renderer_la_SOURCES =			\
+Index: weston-1.10.0/Makefile.am
+===================================================================
+--- weston-1.10.0.orig/Makefile.am	2016-05-17 14:00:01.158492097 -0500
++++ weston-1.10.0/Makefile.am	2016-05-17 14:00:01.146492037 -0500
+@@ -234,16 +234,16 @@
  	src/vertex-clipping.h			\
  	shared/helpers.h
  endif
@@ -54,10 +54,10 @@ index 86d3dfa..f62bfc7 100644
  	src/vertex-clipping.c			\
  	src/vertex-clipping.h
  
-diff --git a/src/compositor-fbdev.c b/src/compositor-fbdev.c
-index c6b8e5a..097da10 100644
---- a/src/compositor-fbdev.c
-+++ b/src/compositor-fbdev.c
+Index: weston-1.10.0/src/compositor-fbdev.c
+===================================================================
+--- weston-1.10.0.orig/src/compositor-fbdev.c	2016-05-17 14:00:01.158492097 -0500
++++ weston-1.10.0/src/compositor-fbdev.c	2016-05-17 14:11:44.000000000 -0500
 @@ -49,7 +49,7 @@
  #include "libinput-seat.h"
  #include "gl-renderer.h"
@@ -67,7 +67,7 @@ index c6b8e5a..097da10 100644
  
  struct fbdev_backend {
  	struct weston_backend base;
-@@ -59,7 +59,7 @@ struct fbdev_backend {
+@@ -59,7 +59,7 @@
  	struct udev *udev;
  	struct udev_input input;
  	int use_pixman;
@@ -76,7 +76,7 @@ index c6b8e5a..097da10 100644
  	struct wl_listener session_listener;
  	NativeDisplayType display;
  };
-@@ -105,11 +105,11 @@ struct fbdev_parameters {
+@@ -103,11 +103,11 @@
  	int tty;
  	char *device;
  	int use_gl;
@@ -90,11 +90,11 @@ index c6b8e5a..097da10 100644
  
  static const char default_seat[] = "seat0";
  
-@@ -583,41 +583,15 @@ fbdev_output_create(struct fbdev_backend *backend,
+@@ -536,36 +536,10 @@
+ 	if (backend->use_pixman) {
  		if (pixman_renderer_output_create(&output->base) < 0)
- 			goto out_shadow_surface;
- 	} 
--    else if(backend->use_gal2d) {
+ 			goto out_hw_surface;
+-	} else if(backend->use_gal2d) {
 -
 -		char* fbenv = getenv("FB_FRAMEBUFFER_0");
 -		setenv("FB_FRAMEBUFFER_0", device, 1);
@@ -124,31 +124,25 @@ index c6b8e5a..097da10 100644
 -					output->display,
 -					(NativeWindowType)output->window) < 0) {
 -			weston_log("gal_renderer_output_create failed.\n");
-+	else if(backend->use_g2d) {
++	} else if(backend->use_g2d) {
 +		if (g2d_renderer->output_create(&output->base,
 +					backend->compositor->wl_display, device) < 0) {
 +			weston_log("g2d_renderer_output_create failed.\n");
- 			goto out_shadow_surface;
+ 			goto out_hw_surface;
  		}
  
- 	}
--    else {
-+	else {
- 		setenv("HYBRIS_EGLPLATFORM", "wayland", 1);
- 		output->window = fbCreateWindow(backend->display, -1, -1, 0, 0);
- 		if (output->window == NULL) {
-@@ -687,8 +661,8 @@ fbdev_output_destroy(struct weston_output *base)
- 			output->shadow_buf = NULL;
- 		}
- 	}
--	else if (backend->use_gal2d) {
+@@ -623,8 +597,8 @@
+ 	if (backend->use_pixman) {
+ 		if (base->renderer_state != NULL)
+ 			pixman_renderer_output_destroy(base);
+-	} else if (backend->use_gal2d) {
 -		gal2d_renderer->output_destroy(base);
-+	else if (backend->use_g2d) {
++	} else if (backend->use_g2d) {
 +		g2d_renderer->output_destroy(base);
- 	}
- 	else {
+ 	} else {
  		gl_renderer->output_destroy(base);
-@@ -909,8 +883,8 @@ fbdev_backend_create(struct weston_compositor *compositor, int *argc, char *argv
+ 	}
+@@ -834,8 +808,8 @@
  	backend->base.restore = fbdev_restore;
  
  	backend->prev_state = WESTON_COMPOSITOR_ACTIVE;
@@ -157,9 +151,9 @@ index c6b8e5a..097da10 100644
 +	backend->use_pixman = !(param->use_gl || param->use_g2d);
 +	backend->use_g2d = param->use_g2d;
  
- 	for (key = KEY_F1; key < KEY_F9; key++)
- 		weston_compositor_add_key_binding(compositor, key,
-@@ -921,21 +895,21 @@ fbdev_backend_create(struct weston_compositor *compositor, int *argc, char *argv
+ 	weston_setup_vt_switch_bindings(compositor);
+ 
+@@ -843,21 +817,21 @@
  		if (pixman_renderer_init(compositor) < 0)
  			goto out_launcher;
  	}
@@ -188,7 +182,7 @@ index c6b8e5a..097da10 100644
  			goto out_launcher;
  		}
  
-@@ -984,7 +958,7 @@ fbdev_backend_create(struct weston_compositor *compositor, int *argc, char *argv
+@@ -906,7 +880,7 @@
  			goto out_launcher;
  		}
  	}
@@ -197,7 +191,7 @@ index c6b8e5a..097da10 100644
  		if (fbdev_output_create(backend, 0, 0, param->device) < 0)
  			goto out_launcher;
  
-@@ -1018,10 +992,10 @@ backend_init(struct weston_compositor *compositor, int *argc, char *argv[],
+@@ -941,10 +915,10 @@
  		.device = "/dev/fb0", /* default frame buffer */
  #ifdef ENABLE_EGL
  		.use_gl = 1,
@@ -210,7 +204,7 @@ index c6b8e5a..097da10 100644
  #endif
  	};
  
-@@ -1029,7 +1003,7 @@ backend_init(struct weston_compositor *compositor, int *argc, char *argv[],
+@@ -952,7 +926,7 @@
  		{ WESTON_OPTION_INTEGER, "tty", 0, &param.tty },
  		{ WESTON_OPTION_STRING, "device", 0, &param.device },
  		{ WESTON_OPTION_INTEGER, "use-gl", 0, &param.use_gl },
@@ -219,11 +213,10 @@ index c6b8e5a..097da10 100644
  	};
  
  	parse_options(fbdev_options, ARRAY_LENGTH(fbdev_options), argc, argv);
-diff --git a/src/g2d-renderer.c b/src/g2d-renderer.c
-new file mode 100644
-index 0000000..756c8f0
---- /dev/null
-+++ b/src/g2d-renderer.c
+Index: weston-1.10.0/src/g2d-renderer.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ weston-1.10.0/src/g2d-renderer.c	2016-05-17 14:00:01.146492037 -0500
 @@ -0,0 +1,1175 @@
 +/*
 + * Copyright (c) 2016 Freescale Semiconductor, Inc.
@@ -1400,11 +1393,10 @@ index 0000000..756c8f0
 +	.output_create = g2d_renderer_output_create,
 +	.output_destroy = g2d_renderer_output_destroy,
 +};
-diff --git a/src/g2d-renderer.h b/src/g2d-renderer.h
-new file mode 100644
-index 0000000..4f019ec
---- /dev/null
-+++ b/src/g2d-renderer.h
+Index: weston-1.10.0/src/g2d-renderer.h
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ weston-1.10.0/src/g2d-renderer.h	2016-05-17 14:00:01.146492037 -0500
 @@ -0,0 +1,48 @@
 +/*
 + * Copyright (c) 2015 Freescale Semiconductor, Inc.
@@ -1454,11 +1446,10 @@ index 0000000..4f019ec
 +};
 +
 +#endif
-diff --git a/src/gal2d-renderer.c b/src/gal2d-renderer.c
-deleted file mode 100644
-index 2ecc8ac..0000000
---- a/src/gal2d-renderer.c
-+++ /dev/null
+Index: weston-1.10.0/src/gal2d-renderer.c
+===================================================================
+--- weston-1.10.0.orig/src/gal2d-renderer.c	2016-05-17 14:00:01.158492097 -0500
++++ /dev/null	1970-01-01 00:00:00.000000000 +0000
 @@ -1,1307 +0,0 @@
 -/*
 - * Copyright (c) 2015 Freescale Semiconductor, Inc.
@@ -2767,11 +2758,10 @@ index 2ecc8ac..0000000
 -	.output_create = gal2d_renderer_output_create,
 -	.output_destroy = gal2d_renderer_output_destroy,
 -};
-diff --git a/src/gal2d-renderer.h b/src/gal2d-renderer.h
-deleted file mode 100644
-index 279358d..0000000
---- a/src/gal2d-renderer.h
-+++ /dev/null
+Index: weston-1.10.0/src/gal2d-renderer.h
+===================================================================
+--- weston-1.10.0.orig/src/gal2d-renderer.h	2016-05-17 14:00:01.158492097 -0500
++++ /dev/null	1970-01-01 00:00:00.000000000 +0000
 @@ -1,50 +0,0 @@
 -/*
 - * Copyright (c) 2015 Freescale Semiconductor, Inc.
@@ -2823,6 +2813,3 @@ index 279358d..0000000
 -};
 -
 -#endif
--- 
-1.9.1
-
