@@ -18,11 +18,18 @@ SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
 DEFAULT_PREFERENCE = "1"
 
+DO_CONFIG_V7_COPY ="no"
+DO_CONFIG_V7_COPY_mx6 = "yes"
+DO_CONFIG_V7_COPY_mx6ul = "yes"
+DO_CONFIG_V7_COPY_mx7 = "yes"
+
 addtask copy_defconfig after do_patch before do_configure
 do_copy_defconfig () {
-    # copy latest imx_v7_defconfig to use
-    cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
-    cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
+    if [ ${DO_CONFIG_V7_COPY} = "yes" ]; then
+        # copy latest imx_v7_defconfig to use for mx6, mx6ul and mx7
+        cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
+        cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
+    fi
 }
 
 COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
