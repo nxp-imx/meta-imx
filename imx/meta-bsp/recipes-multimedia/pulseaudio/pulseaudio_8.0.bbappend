@@ -4,6 +4,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 IMX_PATCHES = " file://0001-Fix-pulseaudio-mutex-issue-when-do-pause-in-gstreame.patch \
+                file://pulseaudio-remove-the-control-for-speaker-headphone-widge.patch \
 "
 
 # Revert poky's patch "pulseaudio: Fix HDMI profile selection"
