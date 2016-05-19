@@ -7,27 +7,21 @@ inherit distro_features_check
 
 CONFLICT_DISTRO_FEATURES = "directfb"
 
-X11_IMAGE_INSTALL = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', \
-    'libxkbcommon', '', d)}"
-
-WLD_IMAGE_INSTALL = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', \
-                bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d), \
-                bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins','', d), d)}"
-
 # Install Freescale QT demo applications
-MACHINE_QT5_MULTIMEDIA_PLAYER = ""
-MACHINE_QT5_MULTIMEDIA_PLAYER_mx6q = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
-MACHINE_QT5_MULTIMEDIA_PLAYER_mx6dl = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
+QT5_IMAGE_INSTALL_APPS = ""
+QT5_IMAGE_INSTALL_APPS_mx6q = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
+QT5_IMAGE_INSTALL_APPS_mx6dl = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
+
 # Install Freescale QT demo applications for X11 backend only
-MACHINE_QT5_MULTIMEDIA_APPS = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', bb.utils.contains('DISTRO_FEATURES', 'wayland', \
-                                 '', '${MACHINE_QT5_MULTIMEDIA_PLAYER}', d), '', d)}"
+MACHINE_QT5_MULTIMEDIA_APPS = ""
 QT5_IMAGE_INSTALL = ""
 QT5_IMAGE_INSTALL_common = " \
     packagegroup-qt5-toolchain-target \
     packagegroup-qt5-demos \
-    ${X11_IMAGE_INSTALL} \
-    ${WLD_IMAGE_INSTALL} \
-    ${MACHINE_QT5_MULTIMEDIA_APPS} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxkbcommon', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', \  
+       bb.utils.contains('DISTRO_FEATURES',     'x11', '${QT5_IMAGE_INSTALL_APPS}', \
+                                                       '', d), d)} \
     "
 QT5_IMAGE_INSTALL_mx6 = " \
     ${QT5_IMAGE_INSTALL_common} \
