@@ -1,19 +1,19 @@
 # Wayland packages
 
-SOC_GPU_TOOLS_WAYLAND_mx6q  = "mesa-demos weston-examples glmark2"
-SOC_GPU_TOOLS_WAYLAND_mx6dl = "mesa-demos weston-examples glmark2"
-SOC_GPU_TOOLS_WAYLAND_mx6sx = "mesa-demos weston-examples glmark2"
-SOC_GPU_TOOLS_WAYLAND_mx6sl = "mesa-demos weston-examples"
-SOC_GPU_TOOLS_WAYLAND_mx8   = "mesa-demos weston-examples glmark2"
+SOC_GPU_TOOLS_WAYLAND_mx6q  = "mesa-demos glmark2"
+SOC_GPU_TOOLS_WAYLAND_mx6dl = "mesa-demos glmark2"
+SOC_GPU_TOOLS_WAYLAND_mx6sx = "mesa-demos glmark2"
+SOC_GPU_TOOLS_WAYLAND_mx6sl = "mesa-demos"
+SOC_GPU_TOOLS_WAYLAND_mx8   = "mesa-demos glmark2"
 
 # XWayland packages
 
 SOC_GPU_TOOLS_XWAYLAND = ""
-SOC_GPU_TOOLS_XWAYLAND_mx6q  = "mesa-demos weston-examples gtkperf glmark2"
-SOC_GPU_TOOLS_XWAYLAND_mx6dl = "mesa-demos weston-examples gtkperf glmark2"
-SOC_GPU_TOOLS_XWAYLAND_mx6sx = "mesa-demos weston-examples gtkperf glmark2"
-SOC_GPU_TOOLS_XWAYLAND_mx6sl = "mesa-demos weston-examples gtkperf"
-SOC_GPU_TOOLS_XWAYLAND_mx8   = "mesa-demos weston-examples gtkperf glmark2"
+SOC_GPU_TOOLS_XWAYLAND_mx6q  = "mesa-demos gtkperf glmark2"
+SOC_GPU_TOOLS_XWAYLAND_mx6dl = "mesa-demos gtkperf glmark2"
+SOC_GPU_TOOLS_XWAYLAND_mx6sx = "mesa-demos gtkperf glmark2"
+SOC_GPU_TOOLS_XWAYLAND_mx6sl = "mesa-demos gtkperf"
+SOC_GPU_TOOLS_XWAYLAND_mx8   = "mesa-demos gtkperf glmark2"
 
 # X11 packages
 
