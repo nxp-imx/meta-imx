@@ -12,6 +12,6 @@ SRC_URI[sha256sum] = "5d8ea94ef921b4bd45ff6aec0eeb20deddc9a4e83068756075f86c85ad
 
 RDEPENDS_${PN}_remove = "libvivante-dri-mx6"
 
-RDEPENDS_${PN}_append = " libvivante-dri"
+RDEPENDS_${PN}_append = " libvivante-dri-imx"
 
 COMPATIBLE_MACHINE = "(mx6|mx8)"
