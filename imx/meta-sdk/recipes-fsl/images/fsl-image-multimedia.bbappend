@@ -3,6 +3,3 @@ IMAGE_FEATURES_remove = "${@base_contains('DISTRO_FEATURES', 'wayland', 'x11-bas
 CORE_IMAGE_EXTRA_INSTALL += "${@base_contains('DISTRO_FEATURES', 'x11 wayland', \
                                               'weston-xwayland weston-init weston-examples \
                                                gtk+3-demo clutter-1.0-examples xterm', '', d)}"
-
-RDEPENDS_${PN}_remove_mx6ul = "clutter-1.0-examples"
-
