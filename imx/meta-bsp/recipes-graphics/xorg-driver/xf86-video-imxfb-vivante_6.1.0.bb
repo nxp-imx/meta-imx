@@ -7,8 +7,8 @@ require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
 SRC_URI += " file://Stop-using-Git-to-write-local-version.patch \
              file://rc.autohdmi"
 
-SRC_URI[md5sum] = "e42694892707a176130cbb513199c92b"
-SRC_URI[sha256sum] = "5d8ea94ef921b4bd45ff6aec0eeb20deddc9a4e83068756075f86c85ade5934c"
+SRC_URI[md5sum] = "562381adae7b733bc8ecc6bf283aad5b"
+SRC_URI[sha256sum] = "1767689687655bc9484109f9c6646029a9e321922ee19d3aae527faf8475c618"
 
 RDEPENDS_${PN}_remove = "libvivante-dri-mx6"
 
