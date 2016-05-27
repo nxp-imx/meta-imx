@@ -1,8 +1,14 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
 # Don't use X if it's running through Wayland
 
 CHROMIUM_ENABLE_WAYLAND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '1', \
                       bb.utils.contains('DISTRO_FEATURES', 'x11', '0', \
                       '0', d),d)}"
+
+SRC_URI_append_mx6sx = "\
+        ${@oe.utils.conditional('CHROMIUM_ENABLE_WAYLAND', '1', ' file://chromium.patch', '', d)} \
+"
 
 # This is the workaround for the segfault when running google-chrome
 
