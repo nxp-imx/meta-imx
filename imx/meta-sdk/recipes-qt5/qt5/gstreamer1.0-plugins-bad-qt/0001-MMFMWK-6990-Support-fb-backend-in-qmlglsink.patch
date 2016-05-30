@@ -1,0 +1,69 @@
+From b2617ad38e9042e421eb641cad88808c8b9d250d Mon Sep 17 00:00:00 2001
+From: Jian Li <jian.li@nxp.com>
+Date: Wed, 20 Apr 2016 15:17:56 +0800
+Subject: [PATCH] [MMFMWK-6990] Support fb backend in qmlglsink
+
+Added fb backend in qmlglsink
+
+Upstream Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Jian Li <jian.li@nxp.com>
+---
+ configure.ac     |    5 +++++
+ ext/qt/qtitem.cc |   17 +++++++++++++++++
+ 2 files changed, 22 insertions(+)
+
+diff --git a/configure.ac b/configure.ac
+index 3bcd038..3e68ed2 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2919,6 +2919,11 @@ AG_GST_CHECK_FEATURE(QT, [Qt elements], qt, [
+             HAVE_QT_WINDOWING="yes"
+           fi
+         fi
++        if test "x$GST_GL_HAVE_WINDOW_FB" = "x1" -a "x$GST_GL_HAVE_PLATFORM_EGL" = "x1"; then
++          QT_CFLAGS="$QT_CFLAGS"
++          QT_LIBS="$QT_LIBS"
++          HAVE_QT_WINDOWING="yes"
++        fi
+         if test "x$HAVE_QT_WINDOWING" = "xno"; then
+           AC_MSG_WARN([Could not find any Qt Windowing integration])
+           HAVE_QT="no"
+diff --git a/ext/qt/qtitem.cc b/ext/qt/qtitem.cc
+index e1f91e7..fb1e6be 100644
+--- a/ext/qt/qtitem.cc
++++ b/ext/qt/qtitem.cc
+@@ -52,6 +52,12 @@
+ #include <gst/gl/coaoa/gstgldisplay_cocoa.h>
+ #endif
+ 
++#if GST_GL_HAVE_WINDOW_FB
++#define LINUX
++#define EGL_API_FB
++#include <gst/gl/fb/gstgldisplay_fb.h>
++#endif
++
+ /**
+  * SECTION:gtkgstglwidget
+  * @short_description: a #GtkGLArea that renders GStreamer video #GstBuffers
+@@ -366,6 +372,17 @@ QtGLVideoItem::onSceneGraphInitialized ()
+           platform, gl_api);
+   }
+ #endif
++#if GST_GL_HAVE_WINDOW_FB
++  if (GST_IS_GL_DISPLAY_FB (this->priv->display)) {
++    platform = GST_GL_PLATFORM_EGL;
++    gl_api = gst_gl_context_get_current_gl_api (platform, NULL, NULL);
++    gl_handle = gst_gl_context_get_current_gl_context (platform);
++    if (gl_handle)
++      this->priv->other_context =
++          gst_gl_context_new_wrapped (this->priv->display, gl_handle,
++          platform, gl_api);
++  }
++#endif
+ 
+   (void) platform;
+   (void) gl_api;
+-- 
+1.7.9.5
+
