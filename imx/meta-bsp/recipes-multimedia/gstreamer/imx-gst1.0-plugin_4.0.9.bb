@@ -22,6 +22,8 @@ SRC_URI = "${FSL_MIRROR}/imx-gst1.0-plugin-${PV}.tar.gz"
 SRC_URI[md5sum] = "56fc7d4fcbad0ba14739b668793fcf2c"
 SRC_URI[sha256sum] = "4ab74e3660a56c5a79c714b820bb1ce8dd1db5d66c92529b5378bb211cf25896"
 
+SRC_URI += " file://0001-MMFMWK-7167-Fix-http-streaming-memory-leakage.patch "
+
 S = "${WORKDIR}/imx-gst1.0-plugin-${PV}"
 
 inherit autotools pkgconfig
