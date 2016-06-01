@@ -25,6 +25,7 @@ QT5_IMAGE_INSTALL_common = " \
     "
 QT5_IMAGE_INSTALL_mx6 = " \
     ${QT5_IMAGE_INSTALL_common} \
+    gstreamer1.0-plugins-bad-qt \
     "
 QT5_IMAGE_INSTALL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-fonts qtbase-plugins', d)}"
