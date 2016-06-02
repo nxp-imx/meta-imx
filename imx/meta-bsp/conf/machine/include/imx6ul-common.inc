@@ -1,7 +1,5 @@
 DEFAULTTUNE_mx6ul ?= "cortexa7hf-neon"
 
-SERIAL_CONSOLE = "115200 ttymxc0"
-
 MACHINE_FEATURES += " pci wifi bluetooth"
 
 MACHINE_FIRMWARE += "linux-firmware-ath6k"

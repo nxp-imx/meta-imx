@@ -9,8 +9,6 @@ UBOOT_ENTRYPOINT_mx7 = "0x80008000"
 
 SDCARD_GENERATION_COMMAND_mx7 = "generate_imx_sdcard"
 
-SERIAL_CONSOLE = "115200 ttymxc0"
-
 MACHINE_FIRMWARE_append_mx7 = " linux-firmware-ath6k firmware-imx-epdc"
 
 MACHINE_FEATURES += " pci wifi bluetooth"
