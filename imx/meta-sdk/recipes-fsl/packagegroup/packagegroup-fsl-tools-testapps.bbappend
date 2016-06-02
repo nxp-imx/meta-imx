@@ -33,6 +33,7 @@ RDEPENDS_${PN} += " \
     mmc-utils \
     udev-extraconf \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-examples', '', d)} \
 "
 
 SOC_TOOLS_TESTAPPS = ""
