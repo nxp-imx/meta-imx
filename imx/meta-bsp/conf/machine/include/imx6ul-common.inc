@@ -1,12 +1,6 @@
 DEFAULTTUNE_mx6ul ?= "cortexa7hf-neon"
 
-MACHINE_FEATURES += " pci wifi bluetooth"
-
 MACHINE_FIRMWARE += "linux-firmware-ath6k"
-
-MACHINE_SOCARCH_SUFFIX_mx6ul = "-mx6ul"
-
-XSERVER_DRIVER_mx6ul = "xf86-video-fbdev"
 
 # mx6 GPU libraries
 PREFERRED_PROVIDER_virtual/egl_mx6ul = "mesa"

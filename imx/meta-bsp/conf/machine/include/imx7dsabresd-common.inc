@@ -5,13 +5,7 @@ require conf/machine/include/tune-cortexa7.inc
 
 DEFAULTTUNE_mx7 ?= "cortexa7hf-neon"
 
-SDCARD_GENERATION_COMMAND_mx7 = "generate_imx_sdcard"
-
-MACHINE_FIRMWARE_append_mx7 = " linux-firmware-ath6k firmware-imx-epdc"
-
-MACHINE_FEATURES += " pci wifi bluetooth"
-
-MACHINE_SOCARCH_SUFFIX_mx7 = "-mx7"
+MACHINE_FIRMWARE_append_mx7 = " linux-firmware-ath6k"
 
 PREFERRED_PROVIDER_virtual/egl_mx7 = "mesa"
 PREFERRED_PROVIDER_virtual/libgles1_mx7 = "mesa"
