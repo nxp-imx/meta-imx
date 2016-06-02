@@ -1,7 +1,5 @@
 DEFAULTTUNE_mx6ul ?= "cortexa7hf-neon"
 
-MACHINE_FIRMWARE += "linux-firmware-ath6k"
-
 # mx6 GPU libraries
 PREFERRED_PROVIDER_virtual/egl_mx6ul = "mesa"
 PREFERRED_PROVIDER_virtual/libgles1_mx6ul = "mesa"

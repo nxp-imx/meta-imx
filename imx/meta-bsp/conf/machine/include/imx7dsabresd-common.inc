@@ -5,8 +5,6 @@ require conf/machine/include/tune-cortexa7.inc
 
 DEFAULTTUNE_mx7 ?= "cortexa7hf-neon"
 
-MACHINE_FIRMWARE_append_mx7 = " linux-firmware-ath6k"
-
 PREFERRED_PROVIDER_virtual/egl_mx7 = "mesa"
 PREFERRED_PROVIDER_virtual/libgles1_mx7 = "mesa"
 PREFERRED_PROVIDER_virtual/libgles2_mx7 = "mesa"
