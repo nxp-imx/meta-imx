@@ -5,8 +5,6 @@ require conf/machine/include/tune-cortexa7.inc
 
 DEFAULTTUNE_mx7 ?= "cortexa7hf-neon"
 
-UBOOT_ENTRYPOINT_mx7 = "0x80008000"
-
 SDCARD_GENERATION_COMMAND_mx7 = "generate_imx_sdcard"
 
 MACHINE_FIRMWARE_append_mx7 = " linux-firmware-ath6k firmware-imx-epdc"
