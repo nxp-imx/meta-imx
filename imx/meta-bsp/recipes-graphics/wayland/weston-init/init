@@ -40,7 +40,6 @@ case "$1" in
         mkdir -p /tmp/.X11-unix
         export XDG_CONFIG_HOME=/etc
         rm /var/log/weston.log
-        unset DISPLAY
 
         weston-start -s -- $OPTARGS
   ;;
