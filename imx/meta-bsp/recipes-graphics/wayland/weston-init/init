@@ -31,6 +31,16 @@ case "$1" in
   start)
         . /etc/profile
 
+        # This is all a nasty hack
+        if test -z "$XDG_RUNTIME_DIR"; then
+                export XDG_RUNTIME_DIR=/run/user/root
+                mkdir --parents $XDG_RUNTIME_DIR
+                chmod 0700 $XDG_RUNTIME_DIR
+        fi
+        mkdir -p /tmp/.X11-unix
+        export XDG_CONFIG_HOME=/etc
+        rm /var/log/weston.log
+
         weston-start -s -- $OPTARGS
   ;;
 

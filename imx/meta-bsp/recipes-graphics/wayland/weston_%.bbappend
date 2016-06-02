@@ -49,5 +49,17 @@ SRC_URI_append_mx6 = " \
     file://0009-MGS-1284-xwld-Re-implement-weston-2d-renderer-with-p.patch \
     file://0010-MGS-1284-1-xwld-Re-implement-weston-2d-renderer-with.patch \
     file://0011-MGS-1724-xwld-G2D-compositor-build-failed-in-slevk-b.patch \
+    file://weston.sh \
 "
+do_install_append_mx6 () {
+    install -d ${D}${sysconfdir}/profile.d/
+    install -m 0755 ${WORKDIR}/weston.sh ${D}${sysconfdir}/profile.d/
 
+    install -d ${D}/${sysconfdir}
+    install ${WORKDIR}/build/weston.ini ${D}/${sysconfdir}
+    sed -i 's/#modules=xwayland.so,cms-colord.so/modules=xwayland.so/' ${D}${sysconfdir}/weston.ini
+}
+
+FILES_${PN}_append_mx6 = " ${sysconfdir}/profile.d/weston.sh \
+                           ${sysconfdir}/weston.ini \
+"
