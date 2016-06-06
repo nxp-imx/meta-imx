@@ -54,3 +54,5 @@ PREFERRED_PROVIDER_virtual/libgles1_mx8 = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx8 = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx8 = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libg2d_mx8 = "imx-gpu-viv"
+
+GCCVERSION = "5.3.0"
