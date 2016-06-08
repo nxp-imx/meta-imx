@@ -1,8 +1,14 @@
 #!/bin/sh
 # Copyright (C) 2016 O.S. Systems Software LTDA.
+# Copyright 2016 Freescale Semiconductor
 
+if [ "$USER" = "" ]; then
+    export USER=`id -un`
+fi
+if [ "$HOME" = "/" ]; then
+    export HOME=/home/$USER
+fi
 . /etc/profile
-export PATH="/sbin:/usr/sbin:/bin:/usr/bin"
 
 usage() {
     cat <<EOF
