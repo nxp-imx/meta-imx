@@ -2,6 +2,7 @@
 #   another file extension for new patch to the append in the meta-fsl-arm
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}/imx:"
 
 IMX_PATCHES = " file://0001-Fix-pulseaudio-mutex-issue-when-do-pause-in-gstreame.patch \
 "
@@ -18,6 +19,14 @@ SRC_URI_append_mx6ul = "${IMX_PATCHES}"
 SRC_URI_append_mx6sll = "${IMX_PATCHES}"
 SRC_URI_append_mx7 = "${IMX_PATCHES}"
 SRC_URI_append_mx8 = "${IMX_PATCHES}"
+
+# Install a i.MX6ULL specific daemon.conf to increase the rlimit-rttime
+SRC_URI_append_mx6ull = " file://daemon.conf_mx6ull"
+do_install_append_mx6ull () {
+    if [ -e "${WORKDIR}/daemon.conf_mx6ull" ]; then
+        install -m 0644 ${WORKDIR}/daemon.conf_mx6ull ${D}${sysconfdir}/pulse/daemon.conf
+    fi
+}
 
 # Enable allow-autospawn-for-root as default
 PACKAGECONFIG_append = " autospawn-for-root"
