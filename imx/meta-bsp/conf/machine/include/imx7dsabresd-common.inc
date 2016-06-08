@@ -11,3 +11,5 @@ PREFERRED_PROVIDER_virtual/libgles2_mx7 = "mesa"
 PREFERRED_PROVIDER_virtual/libgl_mx7 = "mesa"
 PREFERRED_PROVIDER_virtual/libg2d_mx7 = ""
 
+# MESA DRI library
+XSERVER += "mesa-driver-swrast"
