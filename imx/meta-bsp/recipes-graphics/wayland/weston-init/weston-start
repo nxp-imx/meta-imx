@@ -64,4 +64,4 @@ if [ -d "$modules_dir" ]; then
 	done
 fi
 
-exec openvt $openvt_args -- $launcher $weston_args --log=/var/log/weston.log
+exec openvt $openvt_args -- $launcher $weston_args --log=@LOCALSTATEDIR@/log/weston.log
