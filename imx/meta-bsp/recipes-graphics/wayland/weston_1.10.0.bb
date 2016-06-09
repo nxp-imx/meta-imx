@@ -10,7 +10,7 @@ SRC_URI = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
            file://weston.desktop \
            file://make-libwebp-explicitly-configurable.patch \
            file://0001-make-error-portable.patch \
-           file://0001-configure.ac-Use-PKG_CONFIG_SYSROOT_DIR-for-protocol.patch \
+           file://0001-configure.ac-Fix-wayland-protocols-path.patch \
            file://xwayland.weston-start \
            file://make-weston-launch-exit-for-unrecognized-option.patch \
            file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
@@ -28,7 +28,9 @@ DEPENDS += "wayland wayland-protocols libinput virtual/egl pango wayland-native"
 EXTRA_OECONF = "--enable-setuid-install \
                 --disable-rpi-compositor \
                 --disable-rdp-compositor \
+                WAYLAND_PROTOCOLS_SYSROOT_DIR=${STAGING_DIR}/${MACHINE} \
                 "
+EXTRA_OECONF[vardepsexclude] = "MACHINE"
 
 EXTRA_OECONF_append_qemux86 = "\
 		WESTON_NATIVE_BACKEND=fbdev-backend.so \
@@ -109,6 +111,7 @@ RDEPENDS_${PN}-xwayland += "xserver-xorg-xwayland"
 
 RDEPENDS_${PN} += "xkeyboard-config"
 RRECOMMENDS_${PN} = "liberation-fonts"
+RRECOMMENDS_${PN}-dev += "wayland-protocols"
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system weston-launch"
