@@ -8,6 +8,7 @@ fi
 if [ "$HOME" = "/" ]; then
     export HOME=/home/$USER
 fi
+cd
 . /etc/profile
 
 usage() {
