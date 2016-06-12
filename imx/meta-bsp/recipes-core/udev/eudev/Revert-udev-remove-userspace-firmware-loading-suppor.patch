@@ -32,8 +32,8 @@ index 8691891..65028c2 100644
 -        AC_MSG_ERROR([*** gperf not found])
 +AC_ARG_WITH(firmware-path,
 +       AS_HELP_STRING([--with-firmware-path=DIR[[[:DIR[...]]]]],
-+          [Firmware search path (default="")]),
-+       [], [with_firmware_path=""])
++          [Firmware search path (default=ROOTPREFIX/lib/firmware/updates:ROOTPREFIX/lib/firmware)]),
++       [], [with_firmware_path="$rootprefix/lib/firmware/updates:$rootprefix/lib/firmware"])
 +OLD_IFS=$IFS
 +IFS=:
 +for i in $with_firmware_path; do
