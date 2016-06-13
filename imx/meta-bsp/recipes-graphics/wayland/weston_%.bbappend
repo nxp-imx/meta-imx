@@ -40,3 +40,11 @@ EXTRA_OEMAKE_append_mx6sl = " \
 SRC_URI_append_mx6 = " \
     file://0001-Add-Imx-GPU-support-for-weston-1.10.patch \
 "
+
+# YOCIMX-658
+PACKAGECONFIG_remove_mx6ul = "egl"
+EXTRA_OECONF_append_mx6ul = " \
+    --disable-libunwind \
+    --disable-xwayland-test \
+    WESTON_NATIVE_BACKEND=fbdev-backend.so \
+"
