@@ -6,8 +6,8 @@ require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
 
 SRC_URI += "file://rc.autohdmi"
 
-SRC_URI[md5sum] = "562381adae7b733bc8ecc6bf283aad5b"
-SRC_URI[sha256sum] = "1767689687655bc9484109f9c6646029a9e321922ee19d3aae527faf8475c618"
+SRC_URI[md5sum] = "3d8dbb462eb62a3939d929fecbff66d8"
+SRC_URI[sha256sum] = "bdef41f091b3e0b284f06fcba8bdc711eb8b38acc7d3b22ee94658025402efeb"
 
 RDEPENDS_${PN}_remove = "libvivante-dri-mx6"
 
