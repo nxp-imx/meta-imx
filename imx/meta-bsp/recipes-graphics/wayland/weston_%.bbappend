@@ -1,13 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 ## Start XWayland Backport from Yocto 2.2
-SRC_URI_append_mx6 = " \
-    file://0002-MGS-1111-Add-GPU-VIV-suport-for-wayland-and-weston-1.patch \
-    file://0004-MGS-1235-Fix-setenv-and-clear-environments.patch \
-    file://0005-MGS-1252-Fix-for-Qt5_CinematicExperience-will-meet-s.patch \
-    file://0006-MGS-1236-imx6qp-imx6dl-First-frame-distored-when-som.patch \
-    file://0007-MGS-1236-1-imx6qp-imx6dl-First-frame-distored-when-s.patch \
-    "
 PACKAGECONFIG_append_mx6q = " cairo-glesv2"
 PACKAGECONFIG_append_mx6dl = " cairo-glesv2"
 PACKAGECONFIG_append_mx6sx = " cairo-glesv2"
@@ -43,11 +36,7 @@ EXTRA_OEMAKE_append_mx6sl = " \
 "
 ## End XWayland Backport from Yocto 2.2
 
+# Note, this patch requires Vivante driver v6
 SRC_URI_append_mx6 = " \
-    file://0003-MGS-1192-xwld-g2d-compositor-dose-not-work.patch \
-    file://0008-MGS-1668-xwld-System-can-not-boot-up-to-desktop.patch \
-    file://0009-MGS-1284-xwld-Re-implement-weston-2d-renderer-with-p.patch \
-    file://0010-MGS-1284-1-xwld-Re-implement-weston-2d-renderer-with.patch \
-    file://0011-MGS-1724-xwld-G2D-compositor-build-failed-in-slevk-b.patch \
+    file://0001-Add-Imx-GPU-support-for-weston-1.10.patch \
 "
-
