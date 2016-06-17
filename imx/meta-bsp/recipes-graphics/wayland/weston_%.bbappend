@@ -1,15 +1,14 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-# Note, patch 0001 requires Vivante driver v6
 SRC_URI_IMX = " \
-    file://0001-Add-Imx-GPU-support-for-weston-1.10.patch \
+    file://0008-MGS-1668-xwld-System-can-not-boot-up-to-desktop.patch \
+    file://0009-MGS-1284-xwld-Re-implement-weston-2d-renderer-with-p.patch \
+    file://0010-MGS-1284-1-xwld-Re-implement-weston-2d-renderer-with.patch \
+    file://0011-MGS-1724-xwld-G2D-compositor-build-failed-in-slevk-b.patch \
 "
 SRC_URI_append_mx6 = " ${SRC_URI_IMX}"
 SRC_URI_append_mx8 = " ${SRC_URI_IMX}"
 
-PACKAGECONFIG_append_mx6q  = " cairo-glesv2"
-PACKAGECONFIG_append_mx6dl = " cairo-glesv2"
-PACKAGECONFIG_append_mx6sx = " cairo-glesv2"
 PACKAGECONFIG_append_mx8   = " cairo-glesv2"
 
 PACKAGECONFIG_remove_mx6sl = "egl"
@@ -20,7 +19,6 @@ EXTRA_OECONF_IMX = " \
     --disable-xwayland-test \
     WESTON_NATIVE_BACKEND=fbdev-backend.so \
 "
-EXTRA_OECONF_append_mx6   = " ${EXTRA_OECONF_IMX}"
 EXTRA_OECONF_append_mx6ul = " ${EXTRA_OECONF_IMX}"
 EXTRA_OECONF_append_mx8   = " ${EXTRA_OECONF_IMX}"
 
@@ -39,5 +37,4 @@ EXTRA_OEMAKE_IMX_LIBS_mx6sl = " \
     COMPOSITOR_LIBS="-lEGL -lGAL -lwayland-server -lxkbcommon -lpixman-1" \
     FB_COMPOSITOR_LIBS="-lEGL -lwayland-server -lxkbcommon" \
 "
-EXTRA_OEMAKE_append_mx6  = " ${EXTRA_OEMAKE_IMX_CFLAGS} ${EXTRA_OEMAKE_IMX_LIBS}"
 EXTRA_OEMAKE_append_mx8  = " ${EXTRA_OEMAKE_IMX_CFLAGS} ${EXTRA_OEMAKE_IMX_LIBS}"
