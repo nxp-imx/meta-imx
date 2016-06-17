@@ -33,15 +33,6 @@ DEFAULTTUNE_mx6   = "cortexa9hf-neon"
 DEFAULTTUNE_mx6ul = "cortexa7hf-neon"
 DEFAULTTUNE_mx7   = "cortexa7hf-neon"
 
-# Use new Wayland version
-PREFERRED_VERSION_wayland_mx6 = "1.10.0"
-PREFERRED_VERSION_weston_mx6 = "1.10.0"
-PREFERRED_VERSION_wayland_mx6ul = "1.10.0"
-PREFERRED_VERSION_weston_mx6ul = "1.10.0"
-PREFERRED_VERSION_wayland_mx7 = "1.10.0"
-PREFERRED_VERSION_weston_mx7 = "1.10.0"
-PREFERRED_VERSION_wayland-native = "1.10.0"
-
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
 

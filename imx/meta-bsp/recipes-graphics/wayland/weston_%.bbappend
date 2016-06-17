@@ -6,13 +6,35 @@ SRC_URI_IMX = " \
     file://0010-MGS-1284-1-xwld-Re-implement-weston-2d-renderer-with.patch \
     file://0011-MGS-1724-xwld-G2D-compositor-build-failed-in-slevk-b.patch \
 "
-SRC_URI_append_mx6 = " ${SRC_URI_IMX}"
-SRC_URI_append_mx8 = " ${SRC_URI_IMX}"
+SRC_URI_XWAYLAND = " \
+    file://xwayland.weston-start \
+    file://make-weston-launch-exit-for-unrecognized-option.patch \
+    file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
+"
+SRC_URI_append_mx6   = " ${SRC_URI_IMX} ${SRC_URI_XWAYLAND}"
+SRC_URI_append_mx6ul = " ${SRC_URI_XWAYLAND}"
+SRC_URI_append_mx8   = " ${SRC_URI_IMX} ${SRC_URI_XWAYLAND}"
 
 PACKAGECONFIG_append_mx8   = " cairo-glesv2"
 
 PACKAGECONFIG_remove_mx6sl = "egl"
 PACKAGECONFIG_remove_mx6ul = "egl"
+
+PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'xwayland', '', d)}"
+PACKAGE_BEFORE_PN += "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', '${PN}-xwayland', '', d)}"
+FILES_${PN}-xwayland = "${libdir}/${BPN}/xwayland.so"
+RDEPENDS_${PN}-xwayland += "xserver-xorg-xwayland"
+
+PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+PACKAGECONFIG_append = " launch"
+DEPENDS_${PN}-launch_remove = "libpam"
+PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
+
+do_install_append() {
+	if [ "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', 'yes', 'no', d)}" = "yes" ]; then
+		install -Dm 644 ${WORKDIR}/xwayland.weston-start ${D}${datadir}/weston-start/xwayland
+	fi
+}
 
 EXTRA_OECONF_IMX = " \
     --disable-libunwind \
