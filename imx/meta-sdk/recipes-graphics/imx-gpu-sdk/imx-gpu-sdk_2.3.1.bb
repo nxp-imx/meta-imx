@@ -20,8 +20,8 @@ RCONFLICTS_${PN} = "vivante-gpu-sdk"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "bd2910f85028d0c7c6d87b5ea2044016"
-SRC_URI[sha256sum] = "2d98012e6e8da698f3250fdc6221141538dcbf88d7b3782377390bdcbb68beab"
+SRC_URI[md5sum] = "dff09fd53497cbf0383e48e93241e5c3"
+SRC_URI[sha256sum] = "db74024260ec46d7eb869fb785e82623a7d1f9a6d3ebbd5de7e6bdbf55485ec6"
 
 BACKEND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
                 bb.utils.contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
