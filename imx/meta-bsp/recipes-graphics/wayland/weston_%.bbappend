@@ -1,5 +1,13 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+SRC_URI_IMX8 = " \
+    file://0002-MGS-1111-Add-GPU-VIV-suport-for-wayland-and-weston-1.patch \
+    file://0003-MGS-1192-xwld-g2d-compositor-dose-not-work.patch \
+    file://0004-MGS-1235-Fix-setenv-and-clear-environments.patch \
+    file://0005-MGS-1252-Fix-for-Qt5_CinematicExperience-will-meet-s.patch \
+    file://0006-MGS-1236-imx6qp-imx6dl-First-frame-distored-when-som.patch \
+    file://0007-MGS-1236-1-imx6qp-imx6dl-First-frame-distored-when-s.patch \
+    "
 SRC_URI_IMX = " \
     file://0008-MGS-1668-xwld-System-can-not-boot-up-to-desktop.patch \
     file://0009-MGS-1284-xwld-Re-implement-weston-2d-renderer-with-p.patch \
@@ -13,7 +21,7 @@ SRC_URI_XWAYLAND = " \
 "
 SRC_URI_append_mx6   = " ${SRC_URI_IMX} ${SRC_URI_XWAYLAND}"
 SRC_URI_append_mx6ul = " ${SRC_URI_XWAYLAND}"
-SRC_URI_append_mx8   = " ${SRC_URI_IMX} ${SRC_URI_XWAYLAND}"
+SRC_URI_append_mx8   = " ${SRC_URI_IMX8} ${SRC_URI_IMX} ${SRC_URI_XWAYLAND}"
 
 PACKAGECONFIG_append_mx8   = " cairo-glesv2"
 
