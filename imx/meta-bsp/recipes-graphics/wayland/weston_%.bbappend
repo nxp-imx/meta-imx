@@ -21,12 +21,14 @@ SRC_URI_XWAYLAND = " \
 "
 SRC_URI_append_mx6   = " ${SRC_URI_IMX} ${SRC_URI_XWAYLAND}"
 SRC_URI_append_mx6ul = " ${SRC_URI_XWAYLAND}"
+SRC_URI_append_mx7   = " ${SRC_URI_XWAYLAND}"
 SRC_URI_append_mx8   = " ${SRC_URI_IMX8} ${SRC_URI_IMX} ${SRC_URI_XWAYLAND}"
 
 PACKAGECONFIG_append_mx8   = " cairo-glesv2"
 
 PACKAGECONFIG_remove_mx6sl = "egl"
 PACKAGECONFIG_remove_mx6ul = "egl"
+PACKAGECONFIG_remove_mx7   = "egl"
 
 PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'xwayland', '', d)}"
 PACKAGE_BEFORE_PN += "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', '${PN}-xwayland', '', d)}"
@@ -50,6 +52,7 @@ EXTRA_OECONF_IMX = " \
     WESTON_NATIVE_BACKEND=fbdev-backend.so \
 "
 EXTRA_OECONF_append_mx6ul = " ${EXTRA_OECONF_IMX}"
+EXTRA_OECONF_append_mx7   = " ${EXTRA_OECONF_IMX}"
 EXTRA_OECONF_append_mx8   = " ${EXTRA_OECONF_IMX}"
 
 EXTRA_OEMAKE_IMX_CFLAGS = " \
