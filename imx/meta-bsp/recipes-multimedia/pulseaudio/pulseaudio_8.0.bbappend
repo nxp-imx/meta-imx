@@ -19,7 +19,3 @@ SRC_URI_append_mx7 = "${IMX_PATCHES}"
 
 # Enable allow-autospawn-for-root as default
 PACKAGECONFIG_append = " autospawn-for-root"
-
-PACKAGE_ARCH_mx6 = "${MACHINE_SOCARCH}"
-PACKAGE_ARCH_mx6ul = "${MACHINE_SOCARCH}"
-PACKAGE_ARCH_mx7 = "${MACHINE_SOCARCH}"
