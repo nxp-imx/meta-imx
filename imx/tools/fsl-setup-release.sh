@@ -149,13 +149,6 @@ else
    cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-fsl-arm/EULA
 fi
 
-# copy unpack class with md5sum that matches new EULA
-if [ -d ./sources/meta-freescale ]; then
-   cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-freescale/classes
-else
-   cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-fsl-arm/classes
-fi
-
 # Set up the basic yocto environment
 if [ -z "$DISTRO" ]; then
    DISTRO=$FSLDISTRO MACHINE=$MACHINE . ./$PROGNAME $BUILD_DIR
