@@ -14,11 +14,19 @@ DEPENDS_append_mx6sx = " imx-lib"
 DEPENDS_append_mx6ul = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 
+# For backwards compatibility
+RREPLACES_${PN} = "gst1.0-fsl-plugin"
+RPROVIDES_${PN} = "gst1.0-fsl-plugin"
+RCONFLICTS_${PN} = "gst1.0-fsl-plugin"
+
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
                     file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
                     file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
 
-SRC_URI = "${FSL_MIRROR}/imx-gst1.0-plugin-${PV}.tar.gz"
+SRC_URI = " \
+    ${FSL_MIRROR}/imx-gst1.0-plugin-${PV}.tar.gz \
+"
+
 SRC_URI[md5sum] = "0484eec2330a78f260a4678146213557"
 SRC_URI[sha256sum] = "8aa4140f5a841b05fef6cfd0ace0ad5e5d528caec92d4b9e091e0a6f0e6a99bf"
 
@@ -38,7 +46,7 @@ PLATFORM_mx8 = "MX8"
 
 # Todo add a mechanism to map possible build targets
 EXTRA_OECONF = "PLATFORM=${PLATFORM} \
-                CPPFLAGS="-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include" \
+                CPPFLAGS="-I${STAGING_KERNEL_BUILDDIR}/include/generated/uapi -I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include" \
                 CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR} \
                 ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', bb.utils.contains('DISTRO_FEATURES', 'x11', '--disable-x11', '', d), '', d)}"
 
