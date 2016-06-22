@@ -17,7 +17,7 @@ S = "${WORKDIR}/git"
 
 inherit fsl-u-boot-localversion
 
-LOCALVERSION ?= "-${SRCBRANCH}"
+LOCALVERSION ?= "imx_v2015.04_4.1.15_1.2.0_ga"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
