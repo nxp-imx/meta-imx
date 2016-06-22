@@ -14,6 +14,7 @@ SRC_URI_IMX = " \
     file://0010-MGS-1284-1-xwld-Re-implement-weston-2d-renderer-with.patch \
     file://0011-MGS-1724-xwld-G2D-compositor-build-failed-in-slevk-b.patch \
     file://0012-MGS-1783-xwld-Add-clone-mode-support-for-multi-displ.patch \
+    file://0013-MGS-1945-Use-common-API-to-support-G2d-compositor.patch    \
 "
 SRC_URI_XWAYLAND = " \
     file://xwayland.weston-start \
