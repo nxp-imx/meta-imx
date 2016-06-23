@@ -56,6 +56,8 @@ GPU_PATCHES = " file://0008-Fix-for-gl-plugin-not-built-in-wayland-backend.patch
                 file://0024-glshader-add-glBindFragDataLocation.patch \
                 file://0025-glcolorconvert-GLES3-deprecates-texture2D-and-it-doe.patch \
                 file://0026-MMFMWK-7151-glplugin-glimagesink-support-video-rotat.patch \
+                file://0027-glplugin-gleffects-fix-little-rectangel-appears-at-t.patch \
+                file://0028-qtglplugin-qmlgisink-Add-Wayland-support.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
