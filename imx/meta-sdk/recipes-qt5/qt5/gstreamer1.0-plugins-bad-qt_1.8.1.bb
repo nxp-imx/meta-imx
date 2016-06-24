@@ -46,6 +46,7 @@ SRC_URI = " \
 GPU_PATCHES = " file://0001-MMFMWK-6990-Support-fb-backend-in-qmlglsink.patch \
                 file://0008-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
                 file://0009-glplugin-Support-fb-backend-for-gl-plugins.patch \
+                file://0010-qtglplugin-qmlgisink-Add-Wayland-support.patch \
 "
 
 SRC_URI_append_mx6q  = "${GPU_PATCHES}"
