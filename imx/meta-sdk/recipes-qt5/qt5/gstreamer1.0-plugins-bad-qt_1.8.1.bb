@@ -49,9 +49,8 @@ GPU_PATCHES = " file://0001-MMFMWK-6990-Support-fb-backend-in-qmlglsink.patch \
                 file://0010-qtglplugin-qmlgisink-Add-Wayland-support.patch \
 "
 
-SRC_URI_append_mx6q  = "${GPU_PATCHES}"
-SRC_URI_append_mx6dl = "${GPU_PATCHES}"
-SRC_URI_append_mx6sx = "${GPU_PATCHES}"
+SRC_URI_append_mx6 = "${GPU_PATCHES}"
+SRC_URI_remove_mx6sl = "${GPU_PATCHES}"
 
 # remove the duplicate libs except qtsink
 do_install_append() {
