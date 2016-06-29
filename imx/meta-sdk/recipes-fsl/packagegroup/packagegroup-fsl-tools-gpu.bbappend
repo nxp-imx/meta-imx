@@ -13,6 +13,7 @@ SOC_TOOLS_GPU_mx8 = " \
         imx-viv-dpu-g2d-mx8 \
         imx-gpu-viv-tools-apitrace \
         imx-gpu-viv-demos \
+        imx-gpu-sdk \
         "
 
 SOC_TOOLS_GPU_remove_mx8 = "${XWAYLAND}"
