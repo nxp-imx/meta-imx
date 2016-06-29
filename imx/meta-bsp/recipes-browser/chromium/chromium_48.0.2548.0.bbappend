@@ -22,3 +22,15 @@ CHROMIUM_EXTRA_ARGS_append = " \
 # Remove packages as Chromium is changed to statically link against ffmpeg.
 
 PACKAGES_remove = "${PN}-codecs-ffmpeg ${PN}-plugin-pdf"
+
+
+# chromium changes for mx8 (64 bit)
+
+SRC_URI_append_mx8 = " file://fix_64bit_build_breaks.patch"
+
+VPU_PATCHES = "file://${PATCH_BASE_DIR}/common/0002-Add-VPU-video-decode-accelerator-to-Chromium-GPU-.patch"
+CHROMIUM_IMX_VPU_PATCHES_mx8 += "${VPU_PATCHES}"
+
+COMPATIBLE_MACHINE_aarch64 = "(.*)"
+
+COMPATIBLE_MACHINE = "(mx6|mx8)"
