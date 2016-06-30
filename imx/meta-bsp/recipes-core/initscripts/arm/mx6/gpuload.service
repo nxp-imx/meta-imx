@@ -1,0 +1,8 @@
+[Unit]
+Description=Formerly rc_gpu.S
+
+[Service]
+ExecStart=/usr/bin/gpuload
+
+[Install]
+WantedBy=multi-user.target 

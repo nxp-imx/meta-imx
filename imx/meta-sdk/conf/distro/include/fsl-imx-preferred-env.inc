@@ -39,4 +39,11 @@ PREFERRED_PROVIDER_virtual/libgles2_mx8 = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx8 = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libg2d_mx8 = "imx-gpu-viv"
 
+# Use systemd as default init manager - comment out for now
+#VIRTUAL-RUNTIME_init_manager = "systemd"
+#PREFERRED_PROVIDER_udev = "systemd"
+#PREFERRED_PROVIDER_udev-utils = "systemd"
+#DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
+#IMX_DEFAULT_DISTRO_FEATURES += " systemd"
+
 GCCVERSION = "5.3.0"
