@@ -1,0 +1,27 @@
+From 98bfb00d8bee3c8346a24758d197c369c0ff2d1e Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Thu, 30 Jun 2016 16:36:25 -0500
+Subject: [PATCH] Add option to build without xcomposite.
+
+Upstream-Status: Submitted
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ qtwayland.pro | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/qtwayland.pro b/qtwayland.pro
+index b508807..ef06c9b 100644
+--- a/qtwayland.pro
++++ b/qtwayland.pro
+@@ -8,7 +8,7 @@ qtCompileTest(wayland_scanner)
+ qtCompileTest(wayland_egl)
+ qtCompileTest(brcm_egl)
+ qtCompileTest(glx)
+-qtCompileTest(xcomposite)
++!contains(CONFIG, no-xcomposite):qtCompileTest(xcomposite)
+ qtCompileTest(drm_egl_server)
+ qtCompileTest(libhybris_egl_server)
+ 
+-- 
+1.9.1
+
