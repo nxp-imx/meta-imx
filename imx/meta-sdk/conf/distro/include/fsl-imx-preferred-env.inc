@@ -39,6 +39,11 @@ PREFERRED_PROVIDER_virtual/libgles2_mx8 = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx8 = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libg2d_mx8 = "imx-gpu-viv"
 
+# preferred versions of recipes-graphics for mx6
+PREFERRED_VERSION_imx-gpu-viv_mx6 = "5.0.11.p8.4-hfp"
+PREFERRED_VERSION_xf86-video-imxfb-vivante_mx6 = "5.0.11.p8.4"
+PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx6 = "5.0.11.p8.4+fslc"
+
 # Use systemd as default init manager - comment out for now
 #VIRTUAL-RUNTIME_init_manager = "systemd"
 #PREFERRED_PROVIDER_udev = "systemd"
