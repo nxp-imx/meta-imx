@@ -10,4 +10,7 @@ DEPENDS_mx7   += "imx-vpu"
 SRC_URI[md5sum] = "ae762525d9ba2bd7fb3bab20608d632e"
 SRC_URI[sha256sum] = "3769d914286bcbd0ba6bd6b1c49123f76a2eaf9a4d1a18c99c0c9f66bd80bb51"
 
+# fix for build break using pr_info
+SRC_URI_append = "file://0001-mxc_mcc_tty_test-Change-pr_info-to-printf.patch"
+
 COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"

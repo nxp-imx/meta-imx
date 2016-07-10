@@ -1,0 +1,26 @@
+From 86b5d9116d408e7383fd60201be3d9f2d16135a4 Mon Sep 17 00:00:00 2001
+From: Lauren Post <lauren.post@nxp.com>
+Date: Fri, 8 Jul 2016 02:44:11 -0500
+Subject: [PATCH] mxc_mcc_tty_test:  Change pr_info to printf
+
+Signed-off-by: Lauren Post <lauren.post@nxp.com>
+---
+ test/mxc_mcc_tty_test/mxc_mcc_tty_test.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test/mxc_mcc_tty_test/mxc_mcc_tty_test.c b/test/mxc_mcc_tty_test/mxc_mcc_tty_test.c
+index a5c37cd..eb4ff58 100644
+--- a/test/mxc_mcc_tty_test/mxc_mcc_tty_test.c
++++ b/test/mxc_mcc_tty_test/mxc_mcc_tty_test.c
+@@ -108,7 +108,7 @@ void real_op(int fd, char op)
+ 
+ 	/* init buffer */
+ 	if (op == 'W') {
+-		pr_info("Doesn't support write yet, just return here.\n");
++		printf("Doesn't support write yet, just return here.\n");
+ 		return;
+ 	}
+ 
+-- 
+1.9.1
+
