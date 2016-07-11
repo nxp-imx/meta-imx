@@ -45,7 +45,7 @@ else
 	launcher="weston-launch --"
 fi
 
-openvt_args=""
+openvt_args="-s"
 while [ -n "$1" ]; do
 	openvt_args="$openvt_args $1"
 	shift
