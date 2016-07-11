@@ -1,6 +1,6 @@
 EXTRA_PROVIDES_mx8  = " virtual/libgl virtual/libgles1 virtual/libgles2"
 
-PACKAGES =+ "imx-viv-dpu-g2d imx-viv-dpu-g2d-dev"
+PACKAGES =+ "imx-dpu-g2d imx-dpu-g2d-dev"
 
 IS_MX8 = "0"
 IS_MX8_mx8 = "1"
@@ -136,8 +136,8 @@ INSANE_SKIP_imx-gpu-viv-g2d_mx6 += "dev-so"
 FILES_imx-gpu-viv-g2d_mx6 = "${libdir}/libg2d* "
 FILES_imx-gpu-viv-g2d-dev_mx6 = "${includedir}/g2d.h"
 
-INSANE_SKIP_imx-viv-dpu-g2d_mx8 += "dev-so"
-FILES_imx-viv-dpu-g2d_mx8 = "${libdir}/libg2d* "
-FILES_imx-viv-dpu-g2d-dev_mx8 = "${includedir}/g2d.h"
+INSANE_SKIP_imx-dpu-g2d_mx8 += "dev-so"
+FILES_imx-dpu-g2d_mx8 = "${libdir}/libg2d* "
+FILES_imx-dpu-g2d-dev_mx8 = "${includedir}/g2d.h"
 
 # COMPATIBLE_MACHINE = "(mx6q|mx6dl|mx6sx|mx6sl|mx8)"

@@ -10,7 +10,7 @@ SOC_TOOLS_GPU_remove_mx6 = "${XWAYLAND} fsl-gpu-sdk"
 SOC_TOOLS_GPU_append_mx6 = " imx-gpu-sdk"
 
 SOC_TOOLS_GPU_mx8 = " \
-        imx-viv-dpu-g2d-mx8 \
+        imx-dpu-g2d \
         imx-gpu-viv-tools-apitrace \
         imx-gpu-viv-demos \
         imx-gpu-sdk \
