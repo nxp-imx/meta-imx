@@ -2,7 +2,7 @@
 # Copyright (C) 2012-2016 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "GPU driver and apps for imx"
+DESCRIPTION = "GPU driver and apps for imx6"
 SECTION = "libs"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://gpu-core/usr/include/gc_vdk.h;beginline=5;endline=11;md5=12c028cbbbedb4b8770267131500592c"
@@ -25,25 +25,25 @@ inherit fsl-eula-unpack
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-PACKAGES =+ "libclc-imx libclc-imx-dev \
-	libgl-imx libgl-imx-dev \
-	libgles-imx libgles-imx-dev \
-	libgles2-imx libgles2-imx-dev \
-	libgles3-imx-dev \
-	libglslc-imx libglslc-imx-dev \
-	libopencl-imx libopencl-imx-dev \
-	libopenvg-imx libopenvg-imx-dev \
-	libvdk-imx libvdk-imx-dev \
-	libegl-imx libegl-imx-dev \
-	libgal-imx libgal-imx-dev \
-	libvivante-imx libvivante-imx-dev \
-	libvivante-dri-imx \
-	libvsc-imx \
-	libwayland-viv-imx libwayland-viv-imx-dev \
-	libgc-wayland-protocol-imx libgc-wayland-protocol-imx-dev \
-	libwayland-egl-imx-dev \
-	imx-gpu-viv-g2d-mx6 imx-gpu-viv-g2d-mx6-dev \
-	imx-viv-dpu-g2d-mx8 imx-viv-dpu-g2d-mx8-dev \
+PACKAGES =+ "libclc-mx6 libclc-mx6-dev \
+	libgl-mx6 libgl-mx6-dev \
+	libgles-mx6 libgles-mx6-dev \
+	libgles2-mx6 libgles2-mx6-dev \
+	libgles3-mx6-dev \
+	libglslc-mx6 libglslc-mx6-dev \
+	libopencl-mx6 libopencl-mx6-dev \
+	libopenvg-mx6 libopenvg-mx6-dev \
+	libvdk-mx6 libvdk-mx6-dev \
+	libegl-mx6 libegl-mx6-dev \
+	libgal-mx6 libgal-mx6-dev \
+	libvivante-mx6 libvivante-mx6-dev \
+	libvivante-dri-mx6 \
+	libvsc-mx6 \
+	libwayland-viv-mx6 libwayland-viv-mx6-dev \
+	libgc-wayland-protocol-mx6 libgc-wayland-protocol-mx6-dev \
+	libwayland-egl-mx6-dev \
+	imx-gpu-viv-g2d imx-gpu-viv-g2d-dev \
+	imx-viv-dpu-g2d imx-viv-dpu-g2d-dev \
 	imx-gpu-viv-tools \
 	imx-gpu-viv-tools-apitrace \
 	imx-gpu-viv-demos \
@@ -55,8 +55,8 @@ python __anonymous () {
                 raise bb.parse.SkipPackage('The kernel of machine needs to have Vivante kernel driver support for this recipe to be used.')
 }
 
-USE_X11 = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
-USE_WL = "${@bb.utils.contains("DISTRO_FEATURES", "wayland", "yes", "no", d)}"
+HAS_X11 = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
+HAS_WL = "${@bb.utils.contains("DISTRO_FEATURES", "wayland", "yes", "no", d)}"
 
 # Inhibit warnings about files being stripped.
 INHIBIT_PACKAGE_STRIP = "1"
@@ -80,7 +80,7 @@ python __anonymous() {
     for p in (("libegl", "libegl1"), ("libgl", "libgl1"),
               ("libgles1", "libglesv1-cm1"), ("libgles2", "libglesv2-2"),
               ("libgles3",)):
-        fullp = p[0] + "-imx"
+        fullp = p[0] + "-mx6"
         pkgs = " ".join(p)
         d.setVar("DEBIAN_NOAUTONAME_" + fullp, "1")
         d.appendVar("RREPLACES_" + fullp, pkgs)
@@ -120,7 +120,7 @@ do_install () {
     install -d ${D}${libdir}/pkgconfig
 
     # The preference order, based in DISTRO_FEATURES, is Wayland (with or without X11), X11 and fb
-    if [ "${USE_WL}" = "yes" ]; then
+    if [ "${HAS_WL}" = "yes" ]; then
         cp -r ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
         cp -r ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
 
@@ -134,13 +134,13 @@ do_install () {
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
 
-       if [ "${USE_X11}" = "yes" ]; then
+       if [ "${HAS_X11}" = "yes" ]; then
 
         cp -r ${S}/gpu-core/usr/lib/dri ${D}${libdir}
 
        fi
 
-    elif [ "${USE_X11}" = "yes" ]; then
+    elif [ "${HAS_X11}" = "yes" ]; then
 
         cp -r ${S}/gpu-core/usr/lib/dri ${D}${libdir}
         cp -r ${S}/apitrace/x11/usr/lib/* ${D}${libdir}
@@ -191,7 +191,7 @@ do_install () {
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 
     # skip packaging wayland libraries if no support is requested
-    if [ "${USE_WL}" = "no" ]; then
+    if [ "${HAS_WL}" = "no" ]; then
         rm ${D}${libdir}/libgc_wayland_protocol.*
         rm ${D}${libdir}/libwayland-viv.*
     fi
@@ -229,82 +229,82 @@ do_install () {
 
 ALLOW_EMPTY_${PN} = "1"
 
-FILES_libclc-imx = "${libdir}/libCLC${SOLIBS}"
-FILES_libclc-imx-dev = "${includedir}/CL ${libdir}/libCLC${SOLIBSDEV}"
+FILES_libclc-mx6 = "${libdir}/libCLC${SOLIBS}"
+FILES_libclc-mx6-dev = "${includedir}/CL ${libdir}/libCLC${SOLIBSDEV}"
 
 # libEGL.so is used by some demo apps from Freescale
-INSANE_SKIP_libegl-imx += "dev-so"
-FILES_libegl-imx = "${libdir}/libEGL${REALSOLIBS} ${libdir}/libEGL${SOLIBSDEV} "
-FILES_libegl-imx-dev = "${includedir}/EGL ${includedir}/KHR ${libdir}/pkgconfig/egl.pc"
+INSANE_SKIP_libegl-mx6 += "dev-so"
+FILES_libegl-mx6 = "${libdir}/libEGL${REALSOLIBS} ${libdir}/libEGL${SOLIBSDEV} "
+FILES_libegl-mx6-dev = "${includedir}/EGL ${includedir}/KHR ${libdir}/pkgconfig/egl.pc"
 
-FILES_libgal-imx = "${libdir}/libGAL${SOLIBS} ${libdir}/libGAL_egl${SOLIBS}"
-FILES_libgal-imx-dev = "${libdir}/libGAL${SOLIBSDEV} ${includedir}/HAL"
-RDEPENDS_libgal-imx += "kernel-module-imx-gpu-viv"
-INSANE_SKIP_libgal-imx += "build-deps"
+FILES_libgal-mx6 = "${libdir}/libGAL${SOLIBS} ${libdir}/libGAL_egl${SOLIBS}"
+FILES_libgal-mx6-dev = "${libdir}/libGAL${SOLIBSDEV} ${includedir}/HAL"
+RDEPENDS_libgal-mx6 += "kernel-module-imx-gpu-viv"
+INSANE_SKIP_libgal-mx6 += "build-deps"
 
-FILES_libvsc-imx = "${libdir}/libVSC${SOLIBS}"
+FILES_libvsc-mx6 = "${libdir}/libVSC${SOLIBS}"
 
-FILES_libgl-imx = "${libdir}/libGL${REALSOLIBS}"
-FILES_libgl-imx-dev = "${libdir}/libGL${SOLIBSDEV}"
+FILES_libgl-mx6 = "${libdir}/libGL${REALSOLIBS}"
+FILES_libgl-mx6-dev = "${libdir}/libGL${SOLIBSDEV}"
 # Includes GL headers from mesa
-RDEPENDS_libgl-imx-dev += "libgl-mesa-dev"
+RDEPENDS_libgl-mx6-dev += "libgl-mesa-dev"
 
 # libEGL needs to open libGLESv1.so
-INSANE_SKIP_libgles-imx += "dev-so"
-FILES_libgles-imx = "${libdir}/libGLESv1*${REALSOLIBS} ${libdir}/libGLESv1*${SOLIBS} ${libdir}/libGLES_*${REALSOLIBS} ${libdir}/libGLES_*${SOLIBS}"
-FILES_libgles-imx-dev = "${includedir}/GLES ${libdir}/libGLESv1*${SOLIBS} ${libdir}/libGLES_*${SOLIBSDEV} ${libdir}/pkgconfig/glesv1_cm.pc"
+INSANE_SKIP_libgles-mx6 += "dev-so"
+FILES_libgles-mx6 = "${libdir}/libGLESv1*${REALSOLIBS} ${libdir}/libGLESv1*${SOLIBS} ${libdir}/libGLES_*${REALSOLIBS} ${libdir}/libGLES_*${SOLIBS}"
+FILES_libgles-mx6-dev = "${includedir}/GLES ${libdir}/libGLESv1*${SOLIBS} ${libdir}/libGLES_*${SOLIBSDEV} ${libdir}/pkgconfig/glesv1_cm.pc"
 
 # libEGL needs to open libGLESv2.so
-INSANE_SKIP_libgles2-imx += "dev-so"
-FILES_libgles2-imx = "${libdir}/libGLESv2${REALSOLIBS} ${libdir}/libGLESv2${SOLIBS}"
-FILES_libgles2-imx-dev = "${includedir}/GLES2 ${libdir}/libGLESv2${SOLIBSDEV} ${libdir}/pkgconfig/glesv2.pc"
-RDEPENDS_libgles2-imx = "libglslc-imx"
+INSANE_SKIP_libgles2-mx6 += "dev-so"
+FILES_libgles2-mx6 = "${libdir}/libGLESv2${REALSOLIBS} ${libdir}/libGLESv2${SOLIBS}"
+FILES_libgles2-mx6-dev = "${includedir}/GLES2 ${libdir}/libGLESv2${SOLIBSDEV} ${libdir}/pkgconfig/glesv2.pc"
+RDEPENDS_libgles2-mx6 = "libglslc-mx6"
 
-FILES_libgles3-imx-dev = "${includedir}/GLES3"
-# as long as there is no libgles3: ship libgles3-dev along with
-# libgles2-dev - otherwise GLES3 headers have to be added manually
-RDEPENDS_libgles2-imx-dev += "libgles3-imx-dev"
+FILES_libgles3-mx6-dev = "${includedir}/GLES3"
+# as long as there is no libgles3-mx6: ship libgles3-mx6-dev along with
+# libgles2-mx6-dev - otherwise GLES3 headers have to be added manually
+RDEPENDS_libgles2-mx6-dev += "libgles3-mx6-dev"
 
-FILES_libglslc-imx = "${libdir}/libGLSLC${SOLIBS}"
-FILES_libglslc-imx-dev = "${includedir}/CL ${libdir}/libGLSLC${SOLIBSDEV}"
+FILES_libglslc-mx6 = "${libdir}/libGLSLC${SOLIBS}"
+FILES_libglslc-mx6-dev = "${includedir}/CL ${libdir}/libGLSLC${SOLIBSDEV}"
 
-FILES_libopencl-imx = "${libdir}/libOpenCL${SOLIBS} \
+FILES_libopencl-mx6 = "${libdir}/libOpenCL${SOLIBS} \
                        ${libdir}/libVivanteOpenCL${SOLIBS} \
                        ${sysconfdir}/OpenCL/vendors/Vivante.icd"
-FILES_libopencl-imx-dev = "${includedir}/CL ${libdir}/libOpenCL${SOLIBSDEV}"
-RDEPENDS_libopencl-imx= "libclc-imx"
+FILES_libopencl-mx6-dev = "${includedir}/CL ${libdir}/libOpenCL${SOLIBSDEV}"
+RDEPENDS_libopencl-mx6 = "libclc-mx6"
 
-INSANE_SKIP_libopenvg-imx += "dev-so"
-FILES_libopenvg-imx = "${libdir}/libOpenVG*${SOLIBS}"
-FILES_libopenvg-imx-dev = "${includedir}/VG ${libdir}/libOpenVG*${SOLIBSDEV} ${libdir}/pkgconfig/vg.pc"
+INSANE_SKIP_libopenvg-mx6 += "dev-so"
+FILES_libopenvg-mx6 = "${libdir}/libOpenVG*${SOLIBS}"
+FILES_libopenvg-mx6-dev = "${includedir}/VG ${libdir}/libOpenVG*${SOLIBSDEV} ${libdir}/pkgconfig/vg.pc"
 
-FILES_libvdk-imx = "${libdir}/libVDK${SOLIBS}"
-FILES_libvdk-imx-dev = "${includedir}/*vdk*.h ${libdir}/libVDK${SOLIBSDEV}"
+FILES_libvdk-mx6 = "${libdir}/libVDK${SOLIBS}"
+FILES_libvdk-mx6-dev = "${includedir}/*vdk*.h ${libdir}/libVDK${SOLIBSDEV}"
 
-FILES_libvivante-imx = "${libdir}/libVIVANTE${SOLIBS}"
-FILES_libvivante-imx-dev = "${libdir}/libVIVANTE${SOLIBSDEV}"
+FILES_libvivante-mx6 = "${libdir}/libVIVANTE${SOLIBS}"
+FILES_libvivante-mx6-dev = "${libdir}/libVIVANTE${SOLIBSDEV}"
 
-FILES_libvivante-dri-imx = "${libdir}/dri/vivante_dri.so"
-RDEPENDS_libvivante-dri-imx = "libdrm"
+FILES_libvivante-dri-mx6 = "${libdir}/dri/vivante_dri.so"
+RDEPENDS_libvivante-dri-mx6 = "libdrm"
 
-INSANE_SKIP_libwayland-viv-imx += "dev-so"
-FILES_libwayland-viv-imx =  "${libdir}/libwayland-viv${REALSOLIBS}  ${libdir}/libwayland-viv${SOLIBS}"
-FILES_libwayland-viv-imx-dev = "${includedir}/wayland-viv ${libdir})/libwayland-viv${SOLIBSDEV} ${libdir}/pkgconfig/wayland-viv.pc"
-RPROVIDES_libwayland-viv-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xf86-video-imxfb-vivante', '', d)}"
+INSANE_SKIP_libwayland-viv-mx6 += "dev-so"
+FILES_libwayland-viv-mx6 =  "${libdir}/libwayland-viv${REALSOLIBS}  ${libdir}/libwayland-viv${SOLIBS}"
+FILES_libwayland-viv-mx6-dev = "${includedir}/wayland-viv ${libdir})/libwayland-viv${SOLIBSDEV} ${libdir}/pkgconfig/wayland-viv.pc"
+RPROVIDES_libwayland-viv-mx6 += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xf86-video-mx6fb-vivante', '', d)}"
 
-INSANE_SKIP_libgc-wayland-protocol-imx += "dev-so"
-FILES_libgc-wayland-protocol-imx = "${libdir}/libgc_wayland_protocol${REALSOLIBS} ${libdir}/libgc_wayland_protocol${SOLIBS}"
-FILES_libgc-wayland-protocol-imx-dev = "${libdir}/libgc_wayland_protocol${SOLIBSDEV} ${libdir}/pkgconfig/gc_wayland_protocol.pc"
+INSANE_SKIP_libgc-wayland-protocol-mx6 += "dev-so"
+FILES_libgc-wayland-protocol-mx6 = "${libdir}/libgc_wayland_protocol${REALSOLIBS} ${libdir}/libgc_wayland_protocol${SOLIBS}"
+FILES_libgc-wayland-protocol-mx6-dev = "${libdir}/libgc_wayland_protocol${SOLIBSDEV} ${libdir}/pkgconfig/gc_wayland_protocol.pc"
 
-FILES_libwayland-egl-imx-dev = "${libdir}/pkgconfig/wayland-egl.pc"
+FILES_libwayland-egl-mx6-dev = "${libdir}/pkgconfig/wayland-egl.pc"
 
-INSANE_SKIP_imx-gpu-viv-g2d-mx6_mx6 += "dev-so"
-FILES_imx-gpu-viv-g2d-mx6_mx6 = "${libdir}/libg2d* "
-FILES_imx-gpu-viv-g2d-mx6-dev_mx6 = "${includedir}/g2d.h"
+INSANE_SKIP_imx-gpu-viv-g2d_mx6 += "dev-so"
+FILES_imx-gpu-viv-g2d_mx6 = "${libdir}/libg2d* "
+FILES_imx-gpu-viv-g2d-dev_mx6 = "${includedir}/g2d.h"
 
-INSANE_SKIP_imx-viv-dpu-g2d-mx8_mx8 += "dev-so"
-FILES_imx-viv-dpu-g2d-mx8_mx8 = "${libdir}/libg2d* "
-FILES_imx-viv-dpu-g2d-mx8-dev_mx8 = "${includedir}/g2d.h"
+INSANE_SKIP_imx-viv-dpu-g2d_mx8 += "dev-so"
+FILES_imx-viv-dpu-g2d_mx8 = "${libdir}/libg2d* "
+FILES_imx-viv-dpu-g2d-dev_mx8 = "${includedir}/g2d.h"
 
 FILES_imx-gpu-viv-tools = "${bindir}/gmem_info"
 
