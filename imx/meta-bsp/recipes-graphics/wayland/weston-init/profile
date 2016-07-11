@@ -1,6 +1,3 @@
-if test -z "$XDG_CONFIG_HOME"; then
-    export XDG_CONFIG_HOME=$HOME/.config
-fi
 if test -z "$XDG_RUNTIME_DIR"; then
     export XDG_RUNTIME_DIR=/run/user/$USER
     if ! test -d "${XDG_RUNTIME_DIR}"; then
