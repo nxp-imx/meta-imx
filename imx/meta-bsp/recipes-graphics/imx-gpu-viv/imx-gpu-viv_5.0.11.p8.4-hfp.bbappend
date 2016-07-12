@@ -8,10 +8,7 @@ do_install () {
     cp -r ${S}/gpu-core/usr/include/* ${D}${includedir}
     cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
     cp -r ${S}/gpu-demos/opt ${D}
-
-    if [ "${IS_MX8}" = "0" ]; then
-        cp -r ${S}/gpu-tools/gmem-info/usr/bin/* ${D}${bindir}
-    fi
+    cp -r ${S}/gpu-tools/gmem-info/usr/bin/* ${D}${bindir}
 
     install -d ${D}${libdir}/pkgconfig
 
