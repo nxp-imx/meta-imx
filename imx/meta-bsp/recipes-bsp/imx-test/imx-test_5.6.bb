@@ -7,7 +7,7 @@ DEPENDS_mx6sx += "imx-vpu"
 DEPENDS_mx6ul += "imx-vpu"
 DEPENDS_mx7   += "imx-vpu"
 
-SRC_URI[md5sum] = "ae762525d9ba2bd7fb3bab20608d632e"
-SRC_URI[sha256sum] = "3769d914286bcbd0ba6bd6b1c49123f76a2eaf9a4d1a18c99c0c9f66bd80bb51"
+SRC_URI[md5sum] = "985d66af1bbad7ce67135c089c9c0cb6"
+SRC_URI[sha256sum] = "02c2ba5440c95663a0ff4066320efc5473408b7cef66542d08dbfbcac824d364"
 
 COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
