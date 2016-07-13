@@ -43,7 +43,7 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libgc-wayland-protocol-imx libgc-wayland-protocol-imx-dev \
 	libwayland-egl-imx-dev \
 	imx-gpu-viv-g2d imx-gpu-viv-g2d-dev \
-	imx-dpu-g2d imx-dpu-g2d-dev \
+	imx-dpu-g2d-mx8 imx-dpu-g2d-mx8-dev \
 	imx-gpu-viv-tools \
 	imx-gpu-viv-tools-apitrace \
 	imx-gpu-viv-demos \
@@ -302,9 +302,9 @@ INSANE_SKIP_imx-gpu-viv-g2d_mx6 += "dev-so"
 FILES_imx-gpu-viv-g2d_mx6 = "${libdir}/libg2d* "
 FILES_imx-gpu-viv-g2d-dev_mx6 = "${includedir}/g2d.h"
 
-INSANE_SKIP_imx-dpu-g2d_mx8 += "dev-so"
-FILES_imx-dpu-g2d_mx8 = "${libdir}/libg2d* "
-FILES_imx-dpu-g2d-dev_mx8 = "${includedir}/g2d.h"
+INSANE_SKIP_imx-dpu-g2d-mx8_mx8 += "dev-so"
+FILES_imx-dpu-g2d-mx8_mx8 = "${libdir}/libg2d* "
+FILES_imx-dpu-g2d-mx8-dev_mx8 = "${includedir}/g2d.h"
 
 FILES_imx-gpu-viv-tools = "${bindir}/gmem_info"
 
