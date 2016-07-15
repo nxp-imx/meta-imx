@@ -39,6 +39,7 @@ SRC_URI_append += " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch
                     file://0006-opencv-Add-video-stitching-support-based-on-Open-CV.patch \
                     file://0001-gstreamer-gl.pc.in-don-t-append-GL_CFLAGS-to-CFLAGS.patch \
                     file://0028-ion-DMA-Buf-allocator-based-on-ion.patch \
+                    file://0029-EGL_DMA_Buf-Wrong-attribute-list-type-for-EGL-1.5.patch \
 "
 
 # i.MX6 patches for GST1.6
