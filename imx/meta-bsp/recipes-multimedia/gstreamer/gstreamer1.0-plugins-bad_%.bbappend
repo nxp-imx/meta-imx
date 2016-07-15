@@ -9,6 +9,7 @@ GST_CFLAGS_EXTRA = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', \
 CFLAGS_append_mx6q = " ${GST_CFLAGS_EXTRA}"
 CFLAGS_append_mx6dl = " ${GST_CFLAGS_EXTRA}"
 CFLAGS_append_mx6sx = " ${GST_CFLAGS_EXTRA}"
+CFLAGS_append_mx8dv = " ${GST_CFLAGS_EXTRA}"
 
 PACKAGECONFIG_GL_mx6q = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
 PACKAGECONFIG_GL_mx6dl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
@@ -16,9 +17,11 @@ PACKAGECONFIG_GL_mx6sx = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gle
 PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
                            bb.utils.contains('DISTRO_FEATURES', 'x11', \
                                     'opengl', '', d), '', d)}"
+PACKAGECONFIG_GL_mx8dv = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
 
 PACKAGECONFIG_append_mx6q = " opencv"
 PACKAGECONFIG_append_mx6qp = " opencv"
+PACKAGECONFIG_append_mx8dv = " opencv"
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
@@ -68,3 +71,4 @@ FILES_${PN}-opengl += "/usr/share/*.fs"
 PACKAGE_ARCH_mx6 = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx7 = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx6ul = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
