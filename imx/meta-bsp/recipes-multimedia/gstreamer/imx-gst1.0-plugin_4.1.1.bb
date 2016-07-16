@@ -13,7 +13,6 @@ DEPENDS_append_mx6sl = " imx-lib"
 DEPENDS_append_mx6sx = " imx-lib"
 DEPENDS_append_mx6ul = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
-DEPENDS_append_mx8 = " gstreamer1.0-plugins-bad"
 
 # For backwards compatibility
 RREPLACES_${PN} = "gst1.0-fsl-plugin"
@@ -59,7 +58,6 @@ RDEPENDS_${PN} += "imx-parser ${BEEP_RDEPENDS} gstreamer1.0-plugins-good-id3demu
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG_mx6 = "overlaysink"
-PACKAGECONFIG_mx8 = "overlaysink"
 
 
 # FIXME: Add all features
