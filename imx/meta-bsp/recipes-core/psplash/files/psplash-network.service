@@ -1,0 +1,11 @@
+[Unit]
+Description=Update psplash to network 
+After=psplash-basic.service network.target
+Before=psplash-quit.service
+
+[Service]
+TimeoutSec=20
+ExecStart=/usr/bin/psplash-write "PROGRESS 80"
+
+[Install]
+WantedBy=network.target
