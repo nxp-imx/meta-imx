@@ -13,7 +13,7 @@ cd
 
 usage() {
     cat <<EOF
-    $0 <openvt arguments> -- <weston options>
+    $0 [<openvt arguments>] [-- <weston options>]
 EOF
 }
 
@@ -30,11 +30,6 @@ add_openvt_argument() {
 	openvt_args="$openvt_args $1"
 }
 
-if test $# -lt 2; then
-	usage
-	exit 1
-fi
-
 if [ -n "$WAYLAND_DISPLAY" ]; then
 	echo "ERROR: A Wayland compositor is already running, nested Weston instance is not supported yet."
 	exit 1
@@ -47,13 +42,12 @@ fi
 
 openvt_args="-s"
 while [ -n "$1" ]; do
-	openvt_args="$openvt_args $1"
-	shift
-
 	if [ "$1" = "--" ]; then
 		shift
 		break
 	fi
+	openvt_args="$openvt_args $1"
+	shift
 done
 
 weston_args=$*
