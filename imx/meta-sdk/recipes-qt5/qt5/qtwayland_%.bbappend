@@ -1,3 +1,8 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+SRC_URI_append = " \
+    file://0001-Avoid-attaching-NULL-buffer-while-hiding-EGL-windows.patch \
+"
 XKB_DEPENDS_remove = "libxkbcommon xproto"
 DEPENDS_remove = "libxcomposite"
 QT_WAYLAND_CONFIG = ""
