@@ -7,10 +7,15 @@ XKB_DEPENDS_remove = "libxkbcommon xproto"
 DEPENDS_remove = "libxcomposite"
 QT_WAYLAND_CONFIG = ""
 
+#FIXME: xkb should be optional; we add it here to fix the build error without it
+#       (https://bugreports.qt.io/browse/QTBUG-54851)
 PACKAGECONFIG ?= " \
+    compositor-api \
     wayland-egl \
+    xkb \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcompositor xkb glx', '', d)} \
 "
+PACKAGECONFIG[compositor-api] = "CONFIG+=config_wayland_compositor,CONFIG+=done_config_wayland_compositor"
 PACKAGECONFIG[xcompositor] = "CONFIG+=config_xcomposite,CONFIG+=done_config_xcomposite,libxcomposite"
 PACKAGECONFIG[glx] = "CONFIG+=config_glx,CONFIG+=done_config_glx,virtual/mesa"
 PACKAGECONFIG[xkb] = "CONFIG+=config_xkbcommon,CONFIG+=done_config_xkbcommon,libxkbcommon xproto"
