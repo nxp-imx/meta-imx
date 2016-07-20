@@ -107,9 +107,11 @@ do_install () {
     install -d ${D}${bindir}
 
     cp -P ${S}/gpu-core/usr/lib/*.so* ${D}${libdir}
-    cp -P ${S}/g2d/usr/lib/*.so* ${D}${libdir}
+    if [ "${IS_MX8}" = "0" ]; then
+        cp -P ${S}/g2d/usr/lib/*.so* ${D}${libdir}
+        cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
+    fi
     cp -r ${S}/gpu-core/usr/include/* ${D}${includedir}
-    cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
     cp -r ${S}/gpu-demos/opt ${D}
 
     if [ "${IS_MX8}" = "0" ]; then
