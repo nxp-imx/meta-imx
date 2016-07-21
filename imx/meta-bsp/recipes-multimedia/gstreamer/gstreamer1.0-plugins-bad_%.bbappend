@@ -41,6 +41,8 @@ SRC_URI_append += " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch
                     file://0028-ion-DMA-Buf-allocator-based-on-ion.patch \
                     file://0029-EGL_DMA_Buf-Wrong-attribute-list-type-for-EGL-1.5.patch \
 "
+#i.MX specific, but it should be applied after 0028 & 0029 DMA Buffer patch
+SRC_URI_append += " file://0030-MMFMWK-7257-DMA_FD-query-physical-address-from-ION.patch "
 
 # i.MX6/i.MX8 GPU patches
 GPU_PATCHES = " file://0008-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \

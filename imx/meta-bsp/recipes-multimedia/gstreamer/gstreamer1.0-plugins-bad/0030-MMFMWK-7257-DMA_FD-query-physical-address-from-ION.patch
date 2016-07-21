@@ -1,0 +1,126 @@
+From d5586c03d742b92ca9435ef52f1f0e9536429566 Mon Sep 17 00:00:00 2001
+From: Song Bing <bing.song@nxp.com>
+Date: Wed, 6 Jul 2016 13:32:51 +0800
+Subject: [PATCH] MMFMWK-7257 [DMA_FD] query physical address from ION.
+
+As convert DMA FD to physical address still has issue. so work
+around to query physical address from ION. Will revert it after
+convert DMA FD to physical address works.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Song Bing bing.song@nxp.com
+---
+ gst-libs/gst/ion/gstionmemory.c |   48 +++++++++++++++++++++++++++++++++++++++
+ gst-libs/gst/ion/gstionmemory.h |    2 ++
+ 2 files changed, 50 insertions(+)
+
+diff --git a/gst-libs/gst/ion/gstionmemory.c b/gst-libs/gst/ion/gstionmemory.c
+index ea62ac4..dff5534 100755
+--- a/gst-libs/gst/ion/gstionmemory.c
++++ b/gst-libs/gst/ion/gstionmemory.c
+@@ -100,6 +100,35 @@ gst_ion_free(int fd, ion_user_handle_t handle)
+ }
+ 
+ static int 
++gst_ion_custom(int fd, void *arg)
++{
++  int ret;
++  ret = gst_ion_ioctl(fd, ION_IOC_CUSTOM, arg);
++  return ret;
++}
++
++static unsigned long 
++gst_ion_phys(int fd, ion_user_handle_t handle)
++{
++  int ret;
++  struct ion_phys_data data = {
++    .handle = handle,
++    .phys = 0,
++  };
++
++  struct ion_custom_data custom = {
++    .cmd = ION_IOC_PHYS,
++    .arg = &data,
++  };
++
++  ret = gst_ion_custom(fd, &custom);
++  if (ret == 0)
++    return data.phys;
++
++  return 0;
++}
++
++static int 
+ gst_ion_map(int fd, ion_user_handle_t handle, size_t length, int prot,
+     int flags, off_t offset, unsigned char **ptr, int *map_fd)
+ {
+@@ -184,6 +213,7 @@ gst_ion_alloc_alloc (GstAllocator * allocator, gint size,
+   GstIONAllocator *self = GST_ION_ALLOCATOR (allocator);
+   gint dmafd = -1;
+   guint8 *ptr = NULL;
++  guint8 *paddr = NULL;
+   ion_user_handle_t ionHandle;
+   gint ionSize = PAGE_ALIGN (size + params->prefix + params->padding);
+   gint err;
+@@ -197,6 +227,12 @@ gst_ion_alloc_alloc (GstAllocator * allocator, gint size,
+     return NULL;
+   }
+ 
++  paddr = gst_ion_phys(self->fd, ionHandle);
++  if (paddr == NULL) {
++    GST_ERROR ("gst_ion_phys failed.");
++    goto bail;
++  }
++
+   err = gst_ion_map(self->fd, ionHandle, ionSize, PROT_READ | PROT_WRITE,
+       MAP_SHARED, 0, &ptr, &dmafd);
+   if (err) {
+@@ -211,6 +247,7 @@ gst_ion_alloc_alloc (GstAllocator * allocator, gint size,
+                     allocator, 0, size, 0, 0, size);
+ 
+   ion_mem->vaddr = ptr;
++  ion_mem->paddr = paddr;
+   ion_mem->size = ionSize;
+   ion_mem->handle = ionHandle;
+   ion_mem->fd = dmafd;
+@@ -237,6 +274,17 @@ bail:
+   return NULL;
+ }
+ 
++guint8 *
++gst_buffer_query_paddr (GstBuffer *buffer)
++{
++  GstIONMemory *ion_mem = gst_mini_object_get_qdata(GST_MINI_OBJECT(
++        gst_buffer_peek_memory (buffer, 0)), GST_ION_MEMORY_QUARK);
++  if (!ion_mem)
++    return NULL;
++
++  return ion_mem->paddr;
++}
++
+ static void
+ gst_ion_alloc_free (GstAllocator * allocator, GstMemory * memory)
+ {
+diff --git a/gst-libs/gst/ion/gstionmemory.h b/gst-libs/gst/ion/gstionmemory.h
+index b6dca5f..02ff3a8 100755
+--- a/gst-libs/gst/ion/gstionmemory.h
++++ b/gst-libs/gst/ion/gstionmemory.h
+@@ -60,12 +60,14 @@ struct _GstIONMemory {
+ 
+   gint fd;
+   guint8 *vaddr;
++  guint8 *paddr;
+   gsize size;
+   gint handle;
+ };
+ 
+ GType gst_ion_allocator_get_type (void);
+ GstAllocator* gst_ion_allocator_obtain (void);
++guint8 *gst_buffer_query_paddr (GstBuffer *buffer);
+ 
+ G_END_DECLS
+ 
+-- 
+1.7.9.5
+
