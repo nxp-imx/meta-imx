@@ -1,5 +1,5 @@
 
-RDEPENDS_${PN}_remove_mx6 = "qtquick1-dev \
+RDEPENDS_${PN}_remove = "qtquick1-dev \
     qtquick1-mkspecs \
     qtquick1-plugins \
     qtquick1-qmlplugins \
