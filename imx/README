@@ -171,3 +171,11 @@ Qt license the work can not be used with a commercial Qt license.  Work with a l
 the differences between each license.   Default builds use an open source Qt license.
 
 Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
+
+Systemd
+-------
+Systemd support is not enabled as default but it can be enabled by uncommenting out the systemd settings in
+imx/meta-sdk//conf/distro/include/fsl-imx-preferred-env.inc.
+
+Note systemd has not gone through a validation cycle so it is provided with no support.  The release layer
+contains what is needed for systemd to work if enabled.  For this release eudev was the default.
