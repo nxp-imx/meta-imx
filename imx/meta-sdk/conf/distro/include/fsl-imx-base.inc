@@ -12,7 +12,7 @@ TARGET_VENDOR = "-poky"
 
 LOCALCONF_VERSION = "1"
 
-IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch"
+IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch bluez"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 IMAGE_FSTYPES = "tar.bz2 ext4 sdcard"
@@ -25,8 +25,6 @@ BBMASK .= "|meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend"
 BBMASK .= "|meta-fsl-arm/recipes-graphics/images/core-image-weston.bbappend"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
-
-DISTRO_FEATURES_append = " bluez5"
 
 SDK_NAME = "${DISTRO}-${TCLIBC}-${SDK_ARCH}-${IMAGE_BASENAME}-${TUNE_PKGARCH}"
 SDKPATH = "/opt/${DISTRO}/${SDK_VERSION}"
@@ -97,5 +95,3 @@ ERROR_QA_append = " ${WARN_TO_ERROR_QA}"
 
 MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"
 MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx8 = "1"
-
-XSERVER_DRIVER_mx8 = "xf86-video-imxfb-vivante"
