@@ -21,6 +21,11 @@ MACHINE_GSTREAMER_1_0_PLUGIN_mx6sx = "imx-gst1.0-plugin"
 MACHINE_GSTREAMER_1_0_PLUGIN_mx7 = "imx-gst1.0-plugin"
 MACHINE_GSTREAMER_1_0_PLUGIN_mx8 = "imx-gst1.0-plugin"
 
+# Extra audio support
+# Add back some setting for i.MX6ul & i.MX7d which have not been upstreamed
+MACHINE_EXTRA_RRECOMMENDS_append_mx6ul = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append_mx7 = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
+
 # Default toolchains used in testing i.MX BSPs
 DEFAULTTUNE_mx6   = "cortexa9hf-neon"
 DEFAULTTUNE_mx6ul = "cortexa7hf-neon"
