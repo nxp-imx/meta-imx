@@ -6,7 +6,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
 PV = "5.5+git${SRCPV}"
-SRCREV = "${AUTOREV}"
+SRCREV = "a817b20fc14dd1d40857858b1853707ebda6f23e"
 
 SRC_URI = "git://github.com/NXPmicro/imx-kobs.git;protocal=https"
 
