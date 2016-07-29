@@ -1,3 +1,11 @@
+# Copyright (C) 2016 Freescale Semiconductor
+# Released under the MIT license (see COPYING.MIT for the terms)
+
+require recipes-graphics/imx-gpu-viv/imx-gpu-viv.inc
+
+SRC_URI[md5sum] = "7b8aa1f8bb62e9472bd55cd7861bc75b"
+SRC_URI[sha256sum] = "1cd1f6f8fab55b087c32d5a8875883d61dc8232709375bc27fbb0cc06982acc5"
+
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
