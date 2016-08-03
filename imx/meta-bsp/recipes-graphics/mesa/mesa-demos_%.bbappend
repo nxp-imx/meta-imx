@@ -2,6 +2,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append_mx6 = " file://0001-mesa-demos-OpenVG-demos-with-single-frame-need-eglSw.patch"
 
+# For now, the following patch in poky krogoth branch breaks the build.
+# Remove it as a temporal workaround.
+SRC_URI_remove = " file://0011-drop-demos-dependant-on-obsolete-MESA_screen_surface.patch"
+
 DEPENDS = "mesa"
 
 REMOVE_GLU = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'glu x11', '', d)}"
