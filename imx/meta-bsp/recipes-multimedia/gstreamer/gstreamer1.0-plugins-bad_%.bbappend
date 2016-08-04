@@ -69,7 +69,6 @@ GPU_PATCHES_IMX6 = " file://0013-Add-directviv-to-glimagesink-to-improve-playbac
 SRC_URI_append_mx6  = "${GPU_PATCHES} ${GPU_PATCHES_IMX6}"
 SRC_URI_remove_mx6sl = "${GPU_PATCHES} ${GPU_PATCHES_IMX6}"
 SRC_URI_append_mx8  = "${GPU_PATCHES} \
-                       file://0030-MMFMWK-7257-DMA_FD-query-physical-address-from-ION.patch \
 "
 
 # include fragment shaders
