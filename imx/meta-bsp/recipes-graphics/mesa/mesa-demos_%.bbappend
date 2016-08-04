@@ -4,7 +4,9 @@ SRC_URI_append_mx6 = " file://0001-mesa-demos-OpenVG-demos-with-single-frame-nee
 
 # For now, the following patch in poky krogoth branch breaks the build.
 # Remove it as a temporal workaround.
-SRC_URI_remove = " file://0011-drop-demos-dependant-on-obsolete-MESA_screen_surface.patch"
+SRC_URI_remove = " file://0011-drop-demos-dependant-on-obsolete-MESA_screen_surface.patch \
+                   file://Add-OpenVG-demos-to-support-wayland.patch \
+"
 
 DEPENDS = "mesa"
 
