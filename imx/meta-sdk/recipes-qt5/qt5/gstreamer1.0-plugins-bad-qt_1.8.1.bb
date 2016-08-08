@@ -24,19 +24,22 @@ EXTRA_OECONF += "STAGING_DIR=${STAGING_DIR_NATIVE}"
 PACKAGECONFIG_mx6q += "qt5"
 PACKAGECONFIG_mx6dl += "qt5"
 PACKAGECONFIG_mx6sx += "qt5"
+PACKAGECONFIG_mx8 += "qt5"
 
 PACKAGECONFIG_mx6q += " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} "
 PACKAGECONFIG_mx6dl += " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} "
 PACKAGECONFIG_mx6sx += " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} "
+PACKAGECONFIG_mx8 += " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} "
 
 PACKAGECONFIG_mx6q += "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
 PACKAGECONFIG_mx6dl += "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
 PACKAGECONFIG_mx6sx += "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
+PACKAGECONFIG_mx8 += "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
 PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland qtwayland"
-PACKAGECONFIG[qt5] = ",--disable-qt,qtbase qtdeclarative"
+PACKAGECONFIG[qt5] = ",--disable-qt,qtbase qtdeclarative qtx11extras"
 
 SRC_URI = " \
     http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \
@@ -53,6 +56,7 @@ GPU_PATCHES = " file://0001-MMFMWK-6990-Support-fb-backend-in-qmlglsink.patch \
 
 SRC_URI_append_mx6 = "${GPU_PATCHES}"
 SRC_URI_remove_mx6sl = "${GPU_PATCHES}"
+SRC_URI_append_mx8 = "${GPU_PATCHES}"
 
 # remove the duplicate libs except qtsink
 do_install_append() {
@@ -67,4 +71,4 @@ do_install_append() {
 S = "${WORKDIR}/gst-plugins-bad-1.8.1"
 
 # Need qtsink for SoCs that have hardware GPU3D
-COMPATIBLE_MACHINE = "(mx6q|mx6dl|mx6sx)"
+COMPATIBLE_MACHINE = "(mx6sx|mx6dl|mx6q|mx8)"
