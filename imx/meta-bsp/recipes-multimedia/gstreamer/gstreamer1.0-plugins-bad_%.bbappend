@@ -60,6 +60,8 @@ GPU_PATCHES = " file://0008-Fix-for-gl-plugin-not-built-in-wayland-backend.patch
                 file://0025-glcolorconvert-GLES3-deprecates-texture2D-and-it-doe.patch \
                 file://0026-MMFMWK-7151-glplugin-glimagesink-support-video-rotat.patch \
                 file://0027-glplugin-gleffects-fix-little-rectangel-appears-at-t.patch \
+                file://0030-glimagesink-Fix-horizontal-vertical-flip-matrizes.patch \
+                file://0031-glwindow-Fix-glimagesink-cannot-show-frame-when-conn.patch \
 "
 # i.MX6 only GPU patches
 GPU_PATCHES_IMX6 = " file://0013-Add-directviv-to-glimagesink-to-improve-playback-per.patch \
