@@ -57,10 +57,10 @@ SRC_URI_remove_mx6sl = "${GPU_PATCHES}"
 # remove the duplicate libs except qtsink
 do_install_append() {
     rm -rf ${D}/usr
-    if [ -e ${WORKDIR}/build/ext/qt/.libs/libgstqtsink.so ]; then
+    if [ -e ${WORKDIR}/build/ext/qt/.libs/libgstqmlgl.so ]; then
         mkdir -p ${D}${libdir}/gstreamer-1.0/
-        install -m 0755 ${WORKDIR}/build/ext/qt/.libs/libgstqtsink.so ${D}${libdir}/gstreamer-1.0/
-        install -m 0755 ${WORKDIR}/build/ext/qt/.libs/libgstqtsink.lai ${D}${libdir}/gstreamer-1.0/libgstqtsink.la
+        install -m 0755 ${WORKDIR}/build/ext/qt/.libs/libgstqmlgl.so ${D}${libdir}/gstreamer-1.0/
+        install -m 0755 ${WORKDIR}/build/ext/qt/.libs/libgstqmlgl.lai ${D}${libdir}/gstreamer-1.0/libgstqmlgl.la
     fi
 }
 
