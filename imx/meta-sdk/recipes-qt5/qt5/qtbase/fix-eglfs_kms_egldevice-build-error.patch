@@ -1,0 +1,18 @@
+diff --git a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms_egldevice/eglfs_kms_egldevice.pro b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms_egldevice/eglfs_kms_egldevice.pro
+index 1932f86..837171a 100644
+--- a/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms_egldevice/eglfs_kms_egldevice.pro
++++ b/src/plugins/platforms/eglfs/deviceintegration/eglfs_kms_egldevice/eglfs_kms_egldevice.pro
+@@ -16,7 +16,12 @@ HEADERS += $$PWD/qeglfskmsegldeviceintegration.h
+ 
+ OTHER_FILES += $$PWD/eglfs_kms_egldevice.json
+ 
+-LIBS += -ldrm
++CONFIG += link_pkgconfig
++!contains(QT_CONFIG, no-pkg-config) {
++    PKGCONFIG += libdrm
++} else {
++    LIBS += -ldrm
++}
+ 
+ PLUGIN_TYPE = egldeviceintegrations
+ PLUGIN_CLASS_NAME = QEglFSKmsEglDeviceIntegrationPlugin
