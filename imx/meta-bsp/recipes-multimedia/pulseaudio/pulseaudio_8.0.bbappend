@@ -23,4 +23,12 @@ PACKAGECONFIG_append = " autospawn-for-root"
 
 SRC_URI_append_mx8 = " file://daemon.conf file://default.pa"
 
+# Install a new daemon.conf for all platform to increase the rlimit-rttime
+SRC_URI_append = " file://daemon_new.conf"
+do_install_append () {
+    if [ -e "${WORKDIR}/daemon_new.conf" ]; then
+        install -m 0644 ${WORKDIR}/daemon_new.conf ${D}${sysconfdir}/pulse/daemon.conf
+    fi
+}
+
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
