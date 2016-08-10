@@ -21,7 +21,7 @@ QT_CONFIG_FLAGS_append_mx6q = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' 
 QT_CONFIG_FLAGS_append_mx6dl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_append_mx6sx = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_append_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', \
-                                                 ' -no-opengl -linuxfb -no-eglfs', d)}"
+                                                 ' -no-opengl -linuxfb -no-eglfs -no-widgets', d)}"
 QT_CONFIG_FLAGS_append_mx6ul = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_append_mx7 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_append_mx8 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
