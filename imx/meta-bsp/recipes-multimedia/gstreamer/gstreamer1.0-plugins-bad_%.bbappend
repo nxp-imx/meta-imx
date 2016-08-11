@@ -1,8 +1,10 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-DEPENDS_mx6 += "imx-gst1.0-plugin"
-DEPENDS_mx6ul += "imx-gst1.0-plugin"
-DEPENDS_mx7 += "imx-gst1.0-plugin"
+# These two dependency are for the SoC which has G2D
+DEPENDS_mx6q += "imx-gpu-viv"
+DEPENDS_mx6dl += "imx-gpu-viv"
+DEPENDS_mx6sx += "imx-gpu-viv"
+DEPENDS_mx8 += "imx-gpu-viv imx-dpu-g2d-mx8"
 
 GST_CFLAGS_EXTRA = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', \
                        bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', '-DEGL_API_FB', d),d)}"
@@ -27,27 +29,27 @@ PACKAGECONFIG_append_mx8dv = " opencv"
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
 PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland"
 
-#i.MX specific
-SRC_URI_append = " file://0004-modifiy-the-videoparse-rank.patch \
-                   file://0007-camerabin-Add-one-property-to-set-sink-element-for-v.patch \
-"
 #common
-SRC_URI_append += " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch \
-                    file://0002-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
-                    file://0003-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
-                    file://0005-glfilter-Lost-frame-rate-info-when-fixate-caps.patch \
-                    file://0006-opencv-Add-video-stitching-support-based-on-Open-CV.patch \
-                    file://0001-gstreamer-gl.pc.in-don-t-append-GL_CFLAGS-to-CFLAGS.patch \
-                    file://0028-ion-DMA-Buf-allocator-based-on-ion.patch \
-                    file://0029-EGL_DMA_Buf-Wrong-attribute-list-type-for-EGL-1.5.patch \
+SRC_URI_append = " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch \
+                   file://0002-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
+                   file://0003-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
+                   file://0004-modifiy-the-videoparse-rank.patch \
+                   file://0005-glfilter-Lost-frame-rate-info-when-fixate-caps.patch \
+                   file://0006-opencv-Add-video-stitching-support-based-on-Open-CV.patch \
+                   file://0007-camerabin-Add-one-property-to-set-sink-element-for-v.patch \
+                   file://0001-gstreamer-gl.pc.in-don-t-append-GL_CFLAGS-to-CFLAGS.patch \
+                   file://0028-ion-DMA-Buf-allocator-based-on-ion.patch \
+                   file://0029-EGL_DMA_Buf-Wrong-attribute-list-type-for-EGL-1.5.patch \
 "
 
-# i.MX6/i.MX8 GPU patches
+# These GPU_PATCHES are not supported on i.MX6SLEVK/i.MX6UL/i.MX7D
 GPU_PATCHES = " file://0008-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
                 file://0009-glplugin-Support-fb-backend-for-gl-plugins.patch \
                 file://0010-glplugin-Change-wayland-default-res-to-1024x768.patch \
                 file://0011-glplugin-gl-wayland-fix-loop-test-hang-in-glimagesin.patch \
                 file://0012-glplugin-Fix-glimagesink-wayland-resize-showed-blurr.patch \
+                file://0013-Add-directviv-to-glimagesink-to-improve-playback-per.patch \
+                file://0014-MMFMWK-6930-glplugin-Accelerate-gldownload-with-dire.patch \
                 file://0015-support-video-crop-for-glimagesink.patch \
                 file://0016-Add-fps-print-in-glimagesink.patch \
                 file://0017-glcolorconvert-convert-YUV-to-RGB-use-directviv.patch \
@@ -62,16 +64,13 @@ GPU_PATCHES = " file://0008-Fix-for-gl-plugin-not-built-in-wayland-backend.patch
                 file://0027-glplugin-gleffects-fix-little-rectangel-appears-at-t.patch \
                 file://0030-glimagesink-Fix-horizontal-vertical-flip-matrizes.patch \
                 file://0031-glwindow-Fix-glimagesink-cannot-show-frame-when-conn.patch \
-"
-# i.MX6 only GPU patches
-GPU_PATCHES_IMX6 = " file://0013-Add-directviv-to-glimagesink-to-improve-playback-per.patch \
-                     file://0014-MMFMWK-6930-glplugin-Accelerate-gldownload-with-dire.patch \
+                file://0032-Fix-dependence-issue-between-gst-plugin-.patch \
 "
 
-SRC_URI_append_mx6  = "${GPU_PATCHES} ${GPU_PATCHES_IMX6}"
-SRC_URI_remove_mx6sl = "${GPU_PATCHES} ${GPU_PATCHES_IMX6}"
-SRC_URI_append_mx8  = "${GPU_PATCHES} \
-"
+
+SRC_URI_append_mx6  = "${GPU_PATCHES}"
+SRC_URI_remove_mx6sl = "${GPU_PATCHES}"
+SRC_URI_append_mx8  = "${GPU_PATCHES}"
 
 # include fragment shaders
 FILES_${PN}-opengl += "/usr/share/*.fs"
