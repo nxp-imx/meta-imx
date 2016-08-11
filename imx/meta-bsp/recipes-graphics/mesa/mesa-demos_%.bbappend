@@ -20,4 +20,4 @@ PACKAGECONFIG_append_mx6 = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 
 
 PACKAGECONFIG[glut] = "--with-glut=${STAGING_EXECPREFIXDIR},--without-glut,freeglut"
 
-PACKAGECONFIG_append_mx6 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'glut', '', d)}"
+PACKAGECONFIG_append_mx6 = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'glut', '', d)}"
