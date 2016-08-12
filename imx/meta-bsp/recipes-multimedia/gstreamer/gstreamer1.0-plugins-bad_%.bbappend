@@ -40,6 +40,7 @@ SRC_URI_append = " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch 
                    file://0001-gstreamer-gl.pc.in-don-t-append-GL_CFLAGS-to-CFLAGS.patch \
                    file://0028-ion-DMA-Buf-allocator-based-on-ion.patch \
                    file://0029-EGL_DMA_Buf-Wrong-attribute-list-type-for-EGL-1.5.patch \
+                   file://0033-ion_allocator-refine-ion-allocator-code.patch \
 "
 
 # These GPU_PATCHES are not supported on i.MX6SLEVK/i.MX6UL/i.MX7D
