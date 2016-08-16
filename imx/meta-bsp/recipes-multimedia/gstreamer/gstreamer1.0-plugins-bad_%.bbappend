@@ -1,10 +1,10 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 # These two dependency are for the SoC which has G2D
-DEPENDS_mx6q += "imx-gpu-viv"
-DEPENDS_mx6dl += "imx-gpu-viv"
-DEPENDS_mx6sx += "imx-gpu-viv"
-DEPENDS_mx8 += "imx-gpu-viv imx-dpu-g2d-mx8"
+DEPENDS_append_mx6q = " imx-gpu-viv"
+DEPENDS_append_mx6dl = " imx-gpu-viv"
+DEPENDS_append_mx6sx = " imx-gpu-viv"
+DEPENDS_append_mx8 = " imx-gpu-viv imx-dpu-g2d-mx8"
 
 GST_CFLAGS_EXTRA = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', \
                        bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', '-DEGL_API_FB', d),d)}"
