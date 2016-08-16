@@ -4,14 +4,14 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 DEPENDS_append_mx6q = " imx-gpu-viv"
 DEPENDS_append_mx6dl = " imx-gpu-viv"
 DEPENDS_append_mx6sx = " imx-gpu-viv"
-DEPENDS_append_mx8 = " imx-gpu-viv imx-dpu-g2d-mx8"
+DEPENDS_append_mx8 = " imx-gpu-viv imx-dpu-g2d-mx8 virtual/kernel"
 
 GST_CFLAGS_EXTRA = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', \
                        bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', '-DEGL_API_FB', d),d)}"
 CFLAGS_append_mx6q = " ${GST_CFLAGS_EXTRA}"
 CFLAGS_append_mx6dl = " ${GST_CFLAGS_EXTRA}"
 CFLAGS_append_mx6sx = " ${GST_CFLAGS_EXTRA}"
-CFLAGS_append_mx8dv = " ${GST_CFLAGS_EXTRA}"
+CFLAGS_append_mx8 = " ${GST_CFLAGS_EXTRA}"
 
 PACKAGECONFIG_GL_mx6q = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
 PACKAGECONFIG_GL_mx6dl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
@@ -19,11 +19,11 @@ PACKAGECONFIG_GL_mx6sx = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gle
 PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
                            bb.utils.contains('DISTRO_FEATURES', 'x11', \
                                     'opengl', '', d), '', d)}"
-PACKAGECONFIG_GL_mx8dv = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
+PACKAGECONFIG_GL_mx8 = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
 
 PACKAGECONFIG_append_mx6q = " opencv"
 PACKAGECONFIG_append_mx6qp = " opencv"
-PACKAGECONFIG_append_mx8dv = " opencv"
+PACKAGECONFIG_append_mx8 = " opencv"
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
