@@ -4,7 +4,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 DEPENDS_append_mx6q = " imx-gpu-viv"
 DEPENDS_append_mx6dl = " imx-gpu-viv"
 DEPENDS_append_mx6sx = " imx-gpu-viv"
-DEPENDS_append_mx8 = " imx-gpu-viv imx-dpu-g2d-mx8 virtual/kernel"
+DEPENDS_append_mx8 = " imx-gpu-viv virtual/libg2d virtual/kernel"
 
 GST_CFLAGS_EXTRA = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', \
                        bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', '-DEGL_API_FB', d),d)}"
