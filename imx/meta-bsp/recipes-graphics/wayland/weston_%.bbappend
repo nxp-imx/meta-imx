@@ -43,7 +43,7 @@ PACKAGECONFIG_append = " launch"
 DEPENDS_${PN}-launch_remove = "libpam"
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
 
-DEPENDS += "virtual/libg2d"
+DEPENDS_append_mx8 = " virtual/libg2d"
 
 do_install_append() {
 	if [ "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', 'yes', 'no', d)}" = "yes" ]; then
