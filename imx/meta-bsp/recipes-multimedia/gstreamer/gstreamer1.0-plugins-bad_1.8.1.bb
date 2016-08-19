@@ -25,6 +25,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=73a5855a8119deb017f5f13cf327095d \
 
 SRC_URI = " \
     http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \
+    file://configure-allow-to-disable-libssh2.patch \
 "
 
 SRC_URI_remove = "file://0001-PATCH-install-gstaggregator-and-gstvideoaggregator-h.patch "
