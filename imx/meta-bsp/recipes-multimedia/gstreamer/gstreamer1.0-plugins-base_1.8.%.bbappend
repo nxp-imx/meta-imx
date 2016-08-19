@@ -3,6 +3,11 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 # Enable pango lib
 PACKAGECONFIG_append = " pango "
 
+# Remove gio-unix-2.0 as it does not seem to exist anywhere
+PACKAGECONFIG_remove = "gio-unix-2.0"
+# Overwrite the unrecognised option which is set in gstreamer1.0-plugins-base.inc under poky layer
+PACKAGECONFIG[gio-unix-2.0] = ""
+
 SRC_URI_append = " file://0001-basetextoverlay-make-memory-copy-when-video-buffer-s.patch \
                    file://0002-gstplaysink-don-t-set-async-of-custom-text-sink-to-f.patch \
                    file://0003-ssaparse-enhance-SSA-text-lines-parsing.patch \
