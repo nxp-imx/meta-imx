@@ -2,6 +2,8 @@
 
 RDEPENDS_${PN}-base += " \
     simg2img \
+    gptfdisk \
+    hdparm \
 "
 
 RDEPENDS_${PN}-extfs += " \
