@@ -27,6 +27,7 @@ addtask copy_defconfig after do_patch before do_preconfigure #do_configure
 do_copy_defconfig () {
     if [ ${DO_CONFIG_V7_COPY} = "yes" ]; then
         # copy latest imx_v7_defconfig to use for mx6, mx6ul and mx7
+        mkdir -p ${B}
         cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
         cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
     fi
