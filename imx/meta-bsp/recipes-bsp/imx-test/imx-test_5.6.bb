@@ -7,7 +7,11 @@ DEPENDS_mx6sx += "imx-vpu"
 DEPENDS_mx6ul += "imx-vpu"
 DEPENDS_mx7   += "imx-vpu"
 
+PARALLEL_MAKE="-j 1"
+
 SRC_URI[md5sum] = "43cf209ff6a93f33fab763a09720a12e"
 SRC_URI[sha256sum] = "6ad8b30cd77224edbd8d1e2941a8fb1252909a8926c3c2e91c0118438d964da2"
+
+SRC_URI += "file://0001-imx-test-Fix-Makefiles-to-handle-library-dependencie.patch"
 
 COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
