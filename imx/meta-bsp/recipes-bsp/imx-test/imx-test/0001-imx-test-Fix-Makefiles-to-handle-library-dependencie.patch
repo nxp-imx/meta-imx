@@ -1,4 +1,4 @@
-From 30ba28a8f4013d86cb99ed581c150d9cb4d28938 Mon Sep 17 00:00:00 2001
+From 251612f51136568331d3cf3826bf08c3f70d7eee Mon Sep 17 00:00:00 2001
 From: Lauren Post <lauren.post@nxp.com>
 Date: Wed, 24 Aug 2016 14:54:33 -0500
 Subject: [PATCH] imx-test:  Fix Makefiles to handle library dependencies
@@ -12,9 +12,9 @@ Signed-off-by: Lauren Post <lauren.post@nxp.com>
  test/mxc_cec_test/Makefile       | 13 ++++++++++---
  test/mxc_i2c_slave_test/Makefile | 12 ++++++++++--
  test/mxc_mpeg4_enc_test/Makefile | 18 ++++++------------
- test/pxp_lib_test/Makefile       | 20 +++++++++++++-------
+ test/pxp_lib_test/Makefile       | 16 ++++++++++------
  test/pxp_v4l2_test/Makefile      | 19 ++++++++++++++++---
- 5 files changed, 55 insertions(+), 27 deletions(-)
+ 5 files changed, 52 insertions(+), 26 deletions(-)
 
 diff --git a/test/mxc_cec_test/Makefile b/test/mxc_cec_test/Makefile
 index 8327784..9d7ee9e 100755
@@ -105,24 +105,20 @@ index 842ab58..1de4115 100644
  # include the Rules
  #
 diff --git a/test/pxp_lib_test/Makefile b/test/pxp_lib_test/Makefile
-index 76e213a..dd660a9 100644
+index 978bea5..c73e4c2 100644
 --- a/test/pxp_lib_test/Makefile
 +++ b/test/pxp_lib_test/Makefile
-@@ -1,13 +1,19 @@
+@@ -1,12 +1,16 @@
  SRCS = pxp_test.c utils.c
 -CFLAGS += -lpxp -lpthread
  
--OBJS = $(OBJDIR)/pxp_test.out \
--	$(OBJDIR)/autorun-pxp.sh
+-OBJS = $(OBJDIR)/pxp_test.out
 -$(OBJS): $(SRCS)
 -	mkdir -p $(OBJDIR)
 -	$(VERBOSE) $(CC) -g $(INC) $(CFLAGS) $^ $(LIBS) -o $@
 +TARGET = $(OBJDIR)/pxp_test.out
  
 -all: $(OBJS)
-+# comment out for now as there is no autorun-pxp.sh to copy in this directory
-+#	$(OBJDIR)/autorun-pxp.sh
-+
 +all: $(TARGET)
 +
 +OBJ = pxp_test.o utils.o
