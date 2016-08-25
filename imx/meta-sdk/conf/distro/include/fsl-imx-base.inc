@@ -21,6 +21,7 @@ BBMASK = "meta-fsl-arm/recipes-kernel/linux/linux-imx_4.1.15.bb"
 BBMASK .= "|meta-fsl-arm/recipes-kernel/linux/linux-imx-mfgtool_4.1.15.bb"
 BBMASK .= "|meta-freescale/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend"
 BBMASK .= "|meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend"
+BBMASK .= "|meta-fsl-arm/recipes-bsp/firmware-imx"
 
 BBMASK .= "|meta-fsl-arm/recipes-graphics/images/core-image-weston.bbappend"
 
