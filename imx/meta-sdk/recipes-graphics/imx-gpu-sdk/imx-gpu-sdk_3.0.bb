@@ -3,11 +3,11 @@ DESCRIPTION = "Set of sample applications for Freescale GPU"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=102094e9e695888c6a9f9fda9004165d"
 DEPENDS = "${X11_DEPENDS} ${WL_DEPENDS} devil assimp gstreamer1.0 gstreamer1.0-plugins-base"
-DEPENDS_append_mx6q  = " virtual/libgles2"
-DEPENDS_append_mx6dl = " virtual/libgles2"
-DEPENDS_append_mx6sx = " virtual/libgles2"
-DEPENDS_append_mx6sl = " virtual/libopenvg"
-DEPENDS_append_mx8   = " virtual/libg2d"
+DEPENDS_append_mx6q = " virtual/libgles2 virtual/libg2d"
+DEPENDS_append_mx6dl = " virtual/libgles2 virtual/libg2d "
+DEPENDS_append_mx6sx = " virtual/libgles2 virtual/libg2d "
+DEPENDS_append_mx6sl = " virtual/libopenvg virtual/libg2d"
+DEPENDS_append_mx8 = " virtual/libgles2 virtual/libg2d"
 
 X11_DEPENDS = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xrandr', '', d)}"
 WL_DEPENDS = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
@@ -21,8 +21,8 @@ RCONFLICTS_${PN} = "vivante-gpu-sdk"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "e85c94a55e4fadc72042a39fb52d15fe"
-SRC_URI[sha256sum] = "257bbb096b0b640eb30bbe272d718ee4576c051c8dfca157f420dd7b79c149ac"
+SRC_URI[md5sum] = "d408a9ca549bb9fbfef160bcad195cbc"
+SRC_URI[sha256sum] = "ff0d795ef59aa9f3af53a69a3962e9591ee3b9baf6e8c7147f2e4bec460ea728"
 
 BACKEND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
                 bb.utils.contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
@@ -30,40 +30,27 @@ BACKEND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
 HAS_VPU = "1"
 HAS_VPU_mx6sx = "0"
 
-IS_MX6SL = "0"
-IS_MX6SL_mx6sl = "1"
-
 do_compile () {
     export FSL_GRAPHICS_SDK=${S}
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
-    if [ "${IS_MX6SL}" = "0" ]; then
-        ./build.sh -f GNUmakefile_Yocto EGLBackend=${BACKEND}
-    else
-        ./build_OpenVG.sh -f GNUmakefile_Yocto EGLBackend=${BACKEND}  
-    fi      
+    cd ${S}/.Config
+    ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND}
+
 }
 
 do_install () {
     export FSL_GRAPHICS_SDK=${S}
     export FSL_PLATFORM_NAME=Yocto
     install -d "${D}/opt/${PN}"
-    if [ "${IS_MX6SL}" = "0" ]; then
-        ./build.sh -f GNUmakefile_Yocto EGLBackend=${BACKEND} install
-    else
-        ./build_OpenVG.sh -f GNUmakefile_Yocto EGLBackend=${BACKEND} install  
-    fi 
+    cd ${S}/.Config
+    ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} install
+    cp -r ${S}/bin/* ${D}/opt/${PN}
 
-    cp -r bin/* "${D}/opt/${PN}"
     if [ "${HAS_VPU}" = "0" ]; then
         rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
         rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV        
     fi
-    rm -rf ${D}/opt/${PN}/GLES2/S05_PrecompiledShader
-    rm -rf ${D}/opt/${PN}/GLES3/S05_PrecompiledShader
-    rm -rf ${D}/opt/${PN}/GLES2/DeBayer
-    rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
-    rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
 }
 
 FILES_${PN} += "/opt/${PN}"
