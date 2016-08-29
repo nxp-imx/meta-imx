@@ -1,0 +1,128 @@
+From 6c4aae98f7b7d3f83014204ff7a276b01c99e294 Mon Sep 17 00:00:00 2001
+From: DozyC <dozyc@users.noreply.github.com>
+Date: Thu, 19 May 2016 23:20:55 -0700
+Subject: [PATCH] tapi examples - Removing defaults from all command line
+ switches accessed with has()
+
+Upstream-Status: Accepted
+---
+ samples/tapi/bgfg_segm.cpp          | 4 ++--
+ samples/tapi/clahe.cpp              | 2 +-
+ samples/tapi/hog.cpp                | 8 ++++----
+ samples/tapi/pyrlk_optical_flow.cpp | 2 +-
+ samples/tapi/squares.cpp            | 4 ++--
+ samples/tapi/tvl1_optical_flow.cpp  | 4 ++--
+ 6 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/samples/tapi/bgfg_segm.cpp b/samples/tapi/bgfg_segm.cpp
+index 4058771..8b944d1 100644
+--- a/samples/tapi/bgfg_segm.cpp
++++ b/samples/tapi/bgfg_segm.cpp
+@@ -17,10 +17,10 @@ using namespace cv;
+ int main(int argc, const char** argv)
+ {
+     CommandLineParser cmd(argc, argv,
+-        "{ c camera   | false       | use camera }"
++        "{ c camera   |             | use camera }"
+         "{ f file     | ../data/768x576.avi | input video file }"
+         "{ t type     | mog2        | method's type (knn, mog2) }"
+-        "{ h help     | false       | print help message }"
++        "{ h help     |             | print help message }"
+         "{ m cpu_mode | false       | press 'm' to switch OpenCL<->CPU}");
+ 
+     if (cmd.has("help"))
+diff --git a/samples/tapi/clahe.cpp b/samples/tapi/clahe.cpp
+index 905ea1f..1b6c53b 100644
+--- a/samples/tapi/clahe.cpp
++++ b/samples/tapi/clahe.cpp
+@@ -33,7 +33,7 @@ int main(int argc, char** argv)
+         "{ i input    |                    | specify input image }"
+         "{ c camera   |  0                 | specify camera id   }"
+         "{ o output   | clahe_output.jpg   | specify output save path}"
+-        "{ h help     | false              | print help message }";
++        "{ h help     |                    | print help message }";
+ 
+     cv::CommandLineParser cmd(argc, argv, keys);
+     if (cmd.has("help"))
+diff --git a/samples/tapi/hog.cpp b/samples/tapi/hog.cpp
+index 0529f24..db31396 100644
+--- a/samples/tapi/hog.cpp
++++ b/samples/tapi/hog.cpp
+@@ -68,15 +68,15 @@ private:
+ int main(int argc, char** argv)
+ {
+     const char* keys =
+-        "{ h help      | false          | print help message }"
++        "{ h help      |                | print help message }"
+         "{ i input     |                | specify input image}"
+         "{ c camera    | -1             | enable camera capturing }"
+         "{ v video     | ../data/768x576.avi | use video as input }"
+-        "{ g gray      | false          | convert image to gray one or not}"
++        "{ g gray      |                | convert image to gray one or not}"
+         "{ s scale     | 1.0            | resize the image before detect}"
+         "{ o output    |                | specify output path when input is images}";
+     CommandLineParser cmd(argc, argv, keys);
+-    if (cmd.get<bool>("help"))
++    if (cmd.has("help"))
+     {
+         cmd.printMessage();
+         return EXIT_SUCCESS;
+@@ -115,7 +115,7 @@ App::App(CommandLineParser& cmd)
+          << "\t4/r - increase/decrease hit threshold\n"
+          << endl;
+ 
+-    make_gray = cmd.get<bool>("gray");
++    make_gray = cmd.has("gray");
+     resize_scale = cmd.get<double>("s");
+     vdo_source = cmd.get<string>("v");
+     img_source = cmd.get<string>("i");
+diff --git a/samples/tapi/pyrlk_optical_flow.cpp b/samples/tapi/pyrlk_optical_flow.cpp
+index 9cdbd7c..bb426cb 100644
+--- a/samples/tapi/pyrlk_optical_flow.cpp
++++ b/samples/tapi/pyrlk_optical_flow.cpp
+@@ -75,7 +75,7 @@ static void drawArrows(UMat& _frame, const vector<Point2f>& prevPts, const vecto
+ int main(int argc, const char* argv[])
+ {
+     const char* keys =
+-        "{ h help           | false           | print help message }"
++        "{ h help           |                 | print help message }"
+         "{ l left           |                 | specify left image }"
+         "{ r right          |                 | specify right image }"
+         "{ c camera         | 0               | enable camera capturing }"
+diff --git a/samples/tapi/squares.cpp b/samples/tapi/squares.cpp
+index e18e533..7df4a42 100644
+--- a/samples/tapi/squares.cpp
++++ b/samples/tapi/squares.cpp
+@@ -143,8 +143,8 @@ int main(int argc, char** argv)
+     const char* keys =
+         "{ i input    | ../data/pic1.png   | specify input image }"
+         "{ o output   | squares_output.jpg | specify output save path}"
+-        "{ h help     | false              | print help message }"
+-        "{ m cpu_mode | false              | run without OpenCL }";
++        "{ h help     |                    | print help message }"
++        "{ m cpu_mode |                    | run without OpenCL }";
+ 
+     CommandLineParser cmd(argc, argv, keys);
+ 
+diff --git a/samples/tapi/tvl1_optical_flow.cpp b/samples/tapi/tvl1_optical_flow.cpp
+index f7bebac..18c7a7f 100644
+--- a/samples/tapi/tvl1_optical_flow.cpp
++++ b/samples/tapi/tvl1_optical_flow.cpp
+@@ -83,12 +83,12 @@ static void getFlowField(const Mat& u, const Mat& v, Mat& flowField)
+ int main(int argc, const char* argv[])
+ {
+     const char* keys =
+-        "{ h help     | false           | print help message }"
++        "{ h help     |                 | print help message }"
+         "{ l left     |                 | specify left image }"
+         "{ r right    |                 | specify right image }"
+         "{ o output   | tvl1_output.jpg | specify output save path }"
+         "{ c camera   | 0               | enable camera capturing }"
+-        "{ m cpu_mode | false           | run without OpenCL }"
++        "{ m cpu_mode |                 | run without OpenCL }"
+         "{ v video    |                 | use video as input }";
+ 
+     CommandLineParser cmd(argc, argv, keys);
+-- 
+1.9.1
+

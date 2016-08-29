@@ -1,0 +1,38 @@
+From 3db19c046b376aff6274aeeb69ea751d9f7988d4 Mon Sep 17 00:00:00 2001
+From: DozyC <dozyc@users.noreply.github.com>
+Date: Tue, 10 May 2016 17:20:59 -0700
+Subject: [PATCH] Fix command line argument handling, fixes #6525
+
+Upstream-Status: Accepted
+---
+ samples/tapi/hog.cpp | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/samples/tapi/hog.cpp b/samples/tapi/hog.cpp
+index e361c2b..0529f24 100644
+--- a/samples/tapi/hog.cpp
++++ b/samples/tapi/hog.cpp
+@@ -76,10 +76,8 @@ int main(int argc, char** argv)
+         "{ s scale     | 1.0            | resize the image before detect}"
+         "{ o output    |                | specify output path when input is images}";
+     CommandLineParser cmd(argc, argv, keys);
+-    if (cmd.has("help"))
++    if (cmd.get<bool>("help"))
+     {
+-        cout << "Usage : hog [options]" << endl;
+-        cout << "Available options:" << endl;
+         cmd.printMessage();
+         return EXIT_SUCCESS;
+     }
+@@ -117,7 +115,7 @@ App::App(CommandLineParser& cmd)
+          << "\t4/r - increase/decrease hit threshold\n"
+          << endl;
+ 
+-    make_gray = cmd.has("gray");
++    make_gray = cmd.get<bool>("gray");
+     resize_scale = cmd.get<double>("s");
+     vdo_source = cmd.get<string>("v");
+     img_source = cmd.get<string>("i");
+-- 
+1.9.1
+
