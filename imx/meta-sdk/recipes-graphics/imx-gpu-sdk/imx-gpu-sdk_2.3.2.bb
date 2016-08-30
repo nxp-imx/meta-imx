@@ -26,9 +26,6 @@ SRC_URI[sha256sum] = "e9192f91c910f8ca16b9c7b60d1e90630c88e4d903b7228e49236a26c3
 BACKEND = "${@base_contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
                 base_contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
 
-HAS_VPU = "1"
-HAS_VPU_mx6sx = "0"
-
 IS_MX6SL = "0"
 IS_MX6SL_mx6sl = "1"
 
@@ -53,10 +50,7 @@ do_install () {
         ./build_OpenVG.sh -f GNUmakefile_Yocto EGLBackend=${BACKEND} install
     fi
     cp -r bin/* "${D}/opt/${PN}"
-    if [ "${HAS_VPU}" = "0" ]; then
-        rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
-        rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
-    fi
+
     rm -rf ${D}/opt/${PN}/GLES2/S05_PrecompiledShader
     rm -rf ${D}/opt/${PN}/GLES3/S05_PrecompiledShader
     rm -rf ${D}/opt/${PN}/GLES2/DeBayer
