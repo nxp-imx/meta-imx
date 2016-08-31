@@ -1,4 +1,4 @@
-NXP's 4.1.15-3.0.0 Yocto Project BSP
+NXP's 4.1.30-3.0.0 Yocto Project BSP
 ================================================
 
 This BSP is an NXP release providing support for the following processors
@@ -55,10 +55,10 @@ $: repo sync
 
 If errors on repo init, remove the .repo directory and try repo init again.
 
-Note that this downloads the latest release for 4.1.15-2.0.0 plus patches after.
+Note that this downloads the latest release for 4.1.30-3.0.0 plus patches after.
 
 To download only the 4.1.15-2.0.0 release use this for repo init command
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth -m imx-4.1.15-2.0.0.xml
+$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth -m imx-4.1.30-3.0.0.xml
 
 Run i.MX NXP Yocto Project Setup:
 $: MACHINE=< machine name> source fsl-setup-release.sh -b <build directory> -e <backend fb, wayland, x11>
