@@ -2,7 +2,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append_mx6 = " \
     file://0001-mesa-demos-OpenVG-demos-with-single-frame-need-eglSw.patch \
-    file://0012-Fix-gles-configurability.patch \
 "
 
 DEPENDS = "mesa"
