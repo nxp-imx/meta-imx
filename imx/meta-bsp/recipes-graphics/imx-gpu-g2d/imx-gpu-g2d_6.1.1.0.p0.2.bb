@@ -30,4 +30,4 @@ do_install () {
 FILES_${PN} = "${libdir}/libg2d* /opt"
 FILES_${PN}-dev = "${includedir}"
 
-COMPATIBLE_MACHINE = "(mx6)"
+COMPATIBLE_MACHINE = "(mx6|mx7ulp)"
