@@ -1,0 +1,352 @@
+From a1373b9e7e209389a15ee3bcdd0f7851fcdb8123 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Fri, 2 Sep 2016 16:40:02 +0800
+Subject: [PATCH 1/3] [MMFMWK-7266]Add ion memory support for glupload
+
+1. Propose ion dma-fd buffer pool to upstream to avoid memory copy
+2. If upstream don't chose the proposed buffer pool, then create
+   our own and do copy to avoid memory copy from CPU to GPU side
+3. Add buffer alignment
+
+Upstream-Status: Pending
+
+https://bugzilla.gnome.org/show_bug.cgi?id=770585
+
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+---
+ configure.ac                  |  18 +++--
+ gst-libs/gst/Makefile.am      |   3 +-
+ gst-libs/gst/gl/Makefile.am   |  10 +++
+ gst-libs/gst/gl/gstglupload.c | 171 +++++++++++++++++++++++++++++++++++++++++-
+ 4 files changed, 192 insertions(+), 10 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 6c3db50..65a4e24 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -575,6 +575,17 @@ else
+   AG_GST_DISABLE_PLUGIN(dccp)
+ fi
+ 
++dnl check for ion
++translit(dnm, m, l) AM_CONDITIONAL(USE_ION, true)
++AG_GST_CHECK_FEATURE(ION, [ion], ion, [
++  AC_CHECK_HEADER(linux/ion.h, HAVE_ION="yes", HAVE_ION="no")
++])
++
++GST_GL_HAVE_ION=0
++if test "x$HAVE_ION" = "xyes"; then
++  GST_GL_HAVE_ION=1
++fi
++
+ dnl *** opengl ***
+ AC_ARG_ENABLE([opengl],
+      [  --enable-opengl         Enable Desktop OpenGL support @<:@default=auto@:>@],
+@@ -1281,6 +1292,7 @@ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+ 
+ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+ #define GST_GL_HAVE_DMABUF $GST_GL_HAVE_DMABUF
++#define GST_GL_HAVE_ION $GST_GL_HAVE_ION
+ #define GST_GL_HAVE_DIRECTVIV $GST_GL_HAVE_DIRECTVIV
+ #define GST_GL_HAVE_PHYMEM $GST_GL_HAVE_PHYMEM
+ "
+@@ -1998,12 +2010,6 @@ AG_GST_CHECK_FEATURE(TINYALSA, [tinyalsa], tinyalsa, [
+   AC_CHECK_HEADER(tinyalsa/asoundlib.h, HAVE_TINYALSA="yes", HAVE_TINYALSA="no")
+ ])
+ 
+-dnl check for ion
+-translit(dnm, m, l) AM_CONDITIONAL(USE_ION, true)
+-AG_GST_CHECK_FEATURE(ION, [ion], ion, [
+-  AC_CHECK_HEADER(linux/ion.h, HAVE_ION="yes", HAVE_ION="no")
+-])
+-
+ dnl *** ext plug-ins ***
+ dnl keep this list sorted alphabetically !
+ 
+diff --git a/gst-libs/gst/Makefile.am b/gst-libs/gst/Makefile.am
+index eb2031c..9db1405 100644
+--- a/gst-libs/gst/Makefile.am
++++ b/gst-libs/gst/Makefile.am
+@@ -25,10 +25,11 @@ DIST_SUBDIRS = uridownloader adaptivedemux interfaces gl basecamerabinsrc \
+ video, audio: base
+ 
+ adaptivedemux: uridownloader
++gl: ion
+ 
+ INDEPENDENT_SUBDIRS = \
+ 	interfaces basecamerabinsrc codecparsers insertbin uridownloader \
+-	mpegts base player $(ION_DIR) $(GL_DIR) $(WAYLAND_DIR)
++	mpegts base player $(ION_DIR) $(WAYLAND_DIR)
+ 
+ .PHONY: independent-subdirs $(INDEPENDENT_SUBDIRS)
+ 
+diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
+index 70fb6a5..0512f83 100644
+--- a/gst-libs/gst/gl/Makefile.am
++++ b/gst-libs/gst/gl/Makefile.am
+@@ -102,6 +102,11 @@ if HAVE_PHYMEM
+ libgstgl_@GST_API_VERSION@_la_LIBADD += -lg2d
+ endif
+ 
++if USE_ION
++libgstgl_@GST_API_VERSION@_la_LIBADD += \
++	$(top_builddir)/gst-libs/gst/ion/libgstbadion-$(GST_API_VERSION).la
++endif
++
+ if HAVE_WINDOW_WIN32
+ SUBDIRS += win32
+ libgstgl_@GST_API_VERSION@_la_LIBADD += win32/libgstgl-win32.la
+@@ -187,6 +192,10 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@
+ 		-I$(top_builddir)/gst-libs \
+ 		$(GST_PLUGINS_BASE_CFLAGS) \
+ 		$(GL_CFLAGS) \
++		--library-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=libdir gstreamer-@GST_API_VERSION@` \
++		--library-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=libdir gstreamer-base-@GST_API_VERSION@` \
++		--library-path="$(top_builddir)/gst-libs/gst/ion/" \
++		--add-include-path="$(top_builddir)/gst-libs/gst/ion/" \
+ 		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
+ 		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
+ 		--library=libgstgl-@GST_API_VERSION@.la \
+@@ -219,6 +228,7 @@ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 		--includedir=$(builddir) \
+ 		--includedir=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
+ 		--includedir=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
++		--includedir="$(top_builddir)/gst-libs/gst/ion/" \
+ 		$(INTROSPECTION_COMPILER_OPTS) $< -o $(@F)
+ 
+ CLEANFILES = $(BUILT_GIRSOURCES) $(typelibs_DATA)
+diff --git a/gst-libs/gst/gl/gstglupload.c b/gst-libs/gst/gl/gstglupload.c
+index 4ea403d..3b30455 100644
+--- a/gst-libs/gst/gl/gstglupload.c
++++ b/gst-libs/gst/gl/gstglupload.c
+@@ -23,6 +23,7 @@
+ #endif
+ 
+ #include <stdio.h>
++#include <string.h>
+ 
+ #include "gl.h"
+ #include "gstglupload.h"
+@@ -35,6 +36,10 @@
+ #include <gst/allocators/gstdmabuf.h>
+ #endif
+ 
++#if GST_GL_HAVE_ION
++#include <gst/ion/gstionmemory.h>
++#endif
++
+ #if GST_GL_HAVE_DIRECTVIV
+ #include <gst/gl/gstglvivdirecttexture.h>
+ #endif
+@@ -54,6 +59,8 @@
+ #define USING_GLES2(context) (gst_gl_context_check_gl_version (context, GST_GL_API_GLES2, 2, 0))
+ #define USING_GLES3(context) (gst_gl_context_check_gl_version (context, GST_GL_API_GLES2, 3, 0))
+ 
++#define DEFAULT_ALIGN 16
++
+ GST_DEBUG_CATEGORY (gst_gl_upload_debug);
+ #define GST_CAT_DEFAULT gst_gl_upload_debug
+ 
+@@ -661,7 +668,9 @@ struct DmabufUpload
+   GstGLUpload *upload;
+ 
+   GstMemory *eglimage[GST_VIDEO_MAX_PLANES];
++  GstBuffer *inbuf;
+   GstBuffer *outbuf;
++  GstBufferPool *pool;
+   GstGLVideoAllocationParams *params;
+ };
+ 
+@@ -747,6 +756,72 @@ _set_cached_eglimage (GstMemory * mem, GstMemory * eglimage, gint plane)
+ }
+ 
+ static gboolean
++_dma_buf_upload_setup_buffer_pool (GstBufferPool **pool, GstAllocator *allocator,
++    GstCaps *caps, GstVideoInfo *info)
++{
++  GstAllocationParams params;
++  GstStructure *config;
++  gsize size;
++  guint width, height;
++  GstVideoAlignment alignment;
++ 
++  g_return_val_if_fail (caps != NULL && info != NULL, FALSE);
++
++  width = GST_VIDEO_INFO_WIDTH (info);
++  height = GST_VIDEO_INFO_HEIGHT (info);
++
++  gst_allocation_params_init (&params);
++
++  /* if user not provide an allocator, then use default ion allocator*/
++  if (!allocator) {
++#if GST_GL_HAVE_ION
++    allocator = gst_ion_allocator_obtain ();
++#endif
++  }
++
++  if (!allocator) {
++    GST_WARNING ("Cannot get available allocator");
++    return FALSE;
++  }
++  GST_DEBUG ("got allocator(%p).", allocator);
++
++  if (*pool)
++    gst_object_unref(*pool);
++
++  *pool = gst_video_buffer_pool_new ();
++  if (!*pool) {
++    GST_WARNING ("New video buffer pool failed.");
++    return FALSE;
++  }
++  GST_DEBUG ("create buffer pool(%p).", *pool);
++
++  config = gst_buffer_pool_get_config (*pool);
++
++  /* configure alignment for eglimage to import this dma-fd buffer */
++  memset (&alignment, 0, sizeof (GstVideoAlignment));
++  alignment.padding_right = GST_ROUND_UP_N(width, DEFAULT_ALIGN) - width;
++  alignment.padding_bottom = GST_ROUND_UP_N(height, DEFAULT_ALIGN) - height;
++  GST_DEBUG ("align buffer pool, w(%d) h(%d), padding_right (%d), padding_bottom (%d)",
++      width, height, alignment.padding_right, alignment.padding_bottom);
++
++  /* the normal size of a frame */
++  size = info->size;
++  gst_buffer_pool_config_set_params (config, caps, size, 0, 30);
++  gst_buffer_pool_config_add_option (config, GST_BUFFER_POOL_OPTION_VIDEO_META);
++  gst_buffer_pool_config_add_option (config, GST_BUFFER_POOL_OPTION_VIDEO_ALIGNMENT);
++  gst_buffer_pool_config_set_video_alignment (config, &alignment);
++  gst_buffer_pool_config_set_allocator (config, allocator, &params);
++
++  if (!gst_buffer_pool_set_config (*pool, config)) {
++    GST_WARNING ("buffer pool config failed.");
++    gst_object_unref (*pool);
++    return FALSE;
++  }
++
++  return TRUE;
++}
++
++static gboolean
+ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
+     GstCaps * out_caps)
+ {
+@@ -772,8 +847,52 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
+     return FALSE;
+ 
+   /* This will eliminate most non-dmabuf out there */
+-  if (!gst_is_dmabuf_memory (gst_buffer_peek_memory (buffer, 0)))
+-    return FALSE;
++  if (!gst_is_dmabuf_memory (gst_buffer_peek_memory (buffer, 0))) {
++    GstVideoFrame frame1, frame2;
++
++    gst_video_frame_map (&frame1, in_info, buffer, GST_MAP_READ);
++
++    if (!dmabuf->pool) {
++      gboolean ret;
++      GstCaps *new_caps = gst_video_info_to_caps(&frame1.info);
++      gst_video_info_from_caps(in_info, new_caps);
++
++      ret = _dma_buf_upload_setup_buffer_pool (&dmabuf->pool, NULL, new_caps, in_info);
++      if (!ret) {
++        gst_video_frame_unmap (&frame1);
++        gst_caps_unref (new_caps);
++        GST_WARNING_OBJECT (dmabuf->upload, "no available buffer pool");
++        return FALSE;
++      }
++    }
++
++    if (!gst_buffer_pool_is_active (dmabuf->pool)
++        && gst_buffer_pool_set_active (dmabuf->pool, TRUE) != TRUE) {
++      gst_video_frame_unmap (&frame1);
++      GST_WARNING_OBJECT (dmabuf->upload, "buffer pool is not ok");
++      return FALSE;
++    }
++
++    if (dmabuf->inbuf)
++      gst_buffer_unref(dmabuf->inbuf);
++    dmabuf->inbuf = NULL;
++
++    gst_buffer_pool_acquire_buffer (dmabuf->pool, &dmabuf->inbuf, NULL);
++    if (!dmabuf->inbuf) {
++      gst_video_frame_unmap (&frame1);
++      GST_WARNING_OBJECT (dmabuf->upload, "acquire_buffer failed");
++      return FALSE;
++    }
++
++    GST_DEBUG_OBJECT (dmabuf->upload, "copy plane resolution (%d)x(%d)\n", in_info->width, in_info->height);
++    gst_video_frame_map (&frame2, in_info, dmabuf->inbuf, GST_MAP_WRITE);
++    gst_video_frame_copy (&frame2, &frame1);
++    gst_video_frame_unmap (&frame1);
++    gst_video_frame_unmap (&frame2);
++
++    buffer = dmabuf->inbuf;
++    meta = gst_buffer_get_video_meta (buffer);
++  }
+ 
+   /* We cannot have multiple dmabuf per plane */
+   if (n_mem > n_planes)
+@@ -845,7 +964,47 @@ static void
+ _dma_buf_upload_propose_allocation (gpointer impl, GstQuery * decide_query,
+     GstQuery * query)
+ {
+-  /* nothing to do for now. */
++  struct DmabufUpload *upload = impl;
++  GstBufferPool *pool = NULL;
++  GstAllocator *allocator = NULL;
++  GstCaps *caps;
++  GstVideoInfo info;
++
++  gst_query_parse_allocation (query, &caps, NULL);
++
++  if (!gst_video_info_from_caps (&info, caps))
++    goto invalid_caps;
++
++#if GST_GL_HAVE_ION
++  allocator = gst_ion_allocator_obtain ();
++#endif
++  if (!allocator) {
++    GST_WARNING ("New ion allocator failed.");
++    return;
++  }
++  GST_DEBUG ("create ion allocator(%p).", allocator);
++
++  gst_query_add_allocation_param (query, allocator, NULL);
++
++  if (!_dma_buf_upload_setup_buffer_pool (&pool, allocator, caps, &info))
++    goto setup_failed;
++
++  gst_query_set_nth_allocation_pool (query, 0, pool, info.size, 1, 30);
++
++  if (pool)
++    gst_object_unref (pool);
++
++  return;
++invalid_caps:
++  {
++    GST_WARNING_OBJECT (upload->upload, "invalid caps specified");
++    return;
++  }
++setup_failed:
++  {
++    GST_WARNING_OBJECT (upload->upload, "failed to setup buffer pool");
++    return;
++  }
+ }
+ 
+ static void
+@@ -911,6 +1070,12 @@ _dma_buf_upload_free (gpointer impl)
+   if (dmabuf->params)
+     gst_gl_allocation_params_free ((GstGLAllocationParams *) dmabuf->params);
+ 
++  if (dmabuf->inbuf)
++    gst_buffer_unref (dmabuf->inbuf);
++
++  if (dmabuf->pool)
++    gst_object_unref(dmabuf->pool);
++
+   g_free (impl);
+ }
+ 
+-- 
+1.9.1
+

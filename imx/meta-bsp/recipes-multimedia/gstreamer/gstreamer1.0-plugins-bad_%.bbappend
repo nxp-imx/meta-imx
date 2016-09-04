@@ -65,9 +65,11 @@ SRC_URI_append = " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch 
                    file://0033-ion_allocator-refine-ion-allocator-code.patch \
                    file://0034-Fix-build-error-on-non-GPU-soc.patch \
                    file://0035-videocompositor-Remove-output-format-alpha-check.patch \
+                   file://0036-Add-ion-memory-support-for-glupload.patch \
+                   file://0037-Support-one-texture-for-YUV-format-in-dmabuf-upload.patch \
+                   file://0038-Add-ion-dmabuf-support-in-gldownload.patch \
+                   file://0039-Fix-yocto-build-QA-error-in-gst-bad.patch \
 "
-
-
 
 # include fragment shaders
 FILES_${PN}-opengl += "/usr/share/*.fs"
@@ -76,3 +78,8 @@ PACKAGE_ARCH_mx6 = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx7 = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx6ul = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
+
+# Fix libgstbadion-1.0.so.0 which is under built directory cannot be found
+do_compile_prepend () {
+    export GIR_EXTRA_LIBS_PATH="${B}/gst-libs/gst/ion/.libs"
+}
