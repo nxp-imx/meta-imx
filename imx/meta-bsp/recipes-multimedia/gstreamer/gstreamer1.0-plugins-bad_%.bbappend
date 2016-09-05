@@ -68,7 +68,6 @@ SRC_URI_append = " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch 
                    file://0036-Add-ion-memory-support-for-glupload.patch \
                    file://0037-Support-one-texture-for-YUV-format-in-dmabuf-upload.patch \
                    file://0038-Add-ion-dmabuf-support-in-gldownload.patch \
-                   file://0039-Fix-yocto-build-QA-error-in-gst-bad.patch \
 "
 
 # include fragment shaders

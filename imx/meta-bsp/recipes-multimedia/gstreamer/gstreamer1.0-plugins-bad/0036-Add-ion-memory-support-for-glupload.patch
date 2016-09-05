@@ -1,12 +1,14 @@
-From a1373b9e7e209389a15ee3bcdd0f7851fcdb8123 Mon Sep 17 00:00:00 2001
+From 16d6de6bc9fd8ddde45a490174ae41e10b61c2b9 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
-Date: Fri, 2 Sep 2016 16:40:02 +0800
-Subject: [PATCH 1/3] [MMFMWK-7266]Add ion memory support for glupload
+Date: Wed, 17 Aug 2016 12:56:39 +0800
+Subject: [PATCH] Add ion memory support for glupload
 
 1. Propose ion dma-fd buffer pool to upstream to avoid memory copy
 2. If upstream don't chose the proposed buffer pool, then create
    our own and do copy to avoid memory copy from CPU to GPU side
 3. Add buffer alignment
+4. append PKG_CONFIG_SYSROOT_DIR to pkg_config result to Fix yocto
+   build QA issue
 
 Upstream-Status: Pending
 
@@ -16,9 +18,9 @@ Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
  configure.ac                  |  18 +++--
  gst-libs/gst/Makefile.am      |   3 +-
- gst-libs/gst/gl/Makefile.am   |  10 +++
+ gst-libs/gst/gl/Makefile.am   |  14 +++-
  gst-libs/gst/gl/gstglupload.c | 171 +++++++++++++++++++++++++++++++++++++++++-
- 4 files changed, 192 insertions(+), 10 deletions(-)
+ 4 files changed, 194 insertions(+), 12 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
 index 6c3db50..65a4e24 100644
@@ -81,10 +83,10 @@ index eb2031c..9db1405 100644
  .PHONY: independent-subdirs $(INDEPENDENT_SUBDIRS)
  
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index 70fb6a5..0512f83 100644
+index 2a70e58..6d8d1d6 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
-@@ -102,6 +102,11 @@ if HAVE_PHYMEM
+@@ -104,6 +104,11 @@ if HAVE_PHYMEM
  libgstgl_@GST_API_VERSION@_la_LIBADD += -lg2d
  endif
  
@@ -96,18 +98,22 @@ index 70fb6a5..0512f83 100644
  if HAVE_WINDOW_WIN32
  SUBDIRS += win32
  libgstgl_@GST_API_VERSION@_la_LIBADD += win32/libgstgl-win32.la
-@@ -187,6 +192,10 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@
+@@ -189,8 +194,12 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@
  		-I$(top_builddir)/gst-libs \
  		$(GST_PLUGINS_BASE_CFLAGS) \
  		$(GL_CFLAGS) \
-+		--library-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=libdir gstreamer-@GST_API_VERSION@` \
-+		--library-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=libdir gstreamer-base-@GST_API_VERSION@` \
-+		--library-path="$(top_builddir)/gst-libs/gst/ion/" \
+-		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
+-		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
++		--add-include-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
++		--add-include-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
 +		--add-include-path="$(top_builddir)/gst-libs/gst/ion/" \
- 		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
- 		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
++		--library-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=libdir gstreamer-@GST_API_VERSION@` \
++		--library-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=libdir gstreamer-base-@GST_API_VERSION@` \
++		--library-path="$(top_builddir)/gst-libs/gst/ion/" \
  		--library=libgstgl-@GST_API_VERSION@.la \
-@@ -219,6 +228,7 @@ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+ 		--include=Gst-@GST_API_VERSION@ \
+ 		--include=GstBase-@GST_API_VERSION@ \
+@@ -221,6 +230,7 @@ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
  		--includedir=$(builddir) \
  		--includedir=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
  		--includedir=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
@@ -116,7 +122,7 @@ index 70fb6a5..0512f83 100644
  
  CLEANFILES = $(BUILT_GIRSOURCES) $(typelibs_DATA)
 diff --git a/gst-libs/gst/gl/gstglupload.c b/gst-libs/gst/gl/gstglupload.c
-index 4ea403d..3b30455 100644
+index 03b38a9..fbef086 100644
 --- a/gst-libs/gst/gl/gstglupload.c
 +++ b/gst-libs/gst/gl/gstglupload.c
 @@ -23,6 +23,7 @@
@@ -285,7 +291,7 @@ index 4ea403d..3b30455 100644
  
    /* We cannot have multiple dmabuf per plane */
    if (n_mem > n_planes)
-@@ -845,7 +964,47 @@ static void
+@@ -861,7 +980,47 @@ static void
  _dma_buf_upload_propose_allocation (gpointer impl, GstQuery * decide_query,
      GstQuery * query)
  {
@@ -334,7 +340,7 @@ index 4ea403d..3b30455 100644
  }
  
  static void
-@@ -911,6 +1070,12 @@ _dma_buf_upload_free (gpointer impl)
+@@ -927,6 +1086,12 @@ _dma_buf_upload_free (gpointer impl)
    if (dmabuf->params)
      gst_gl_allocation_params_free ((GstGLAllocationParams *) dmabuf->params);
  
