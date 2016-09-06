@@ -53,6 +53,10 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	imx-gpu-viv-tools-apitrace \
 	imx-gpu-viv-demos \
 "
+PACKAGES_append_mx8 = " libvulkan-imx libvulkan-imx-dev \
+                        libopenvx-imx libopenvx-imx-dev \
+"
+
 python __anonymous () {
         has_vivante_kernel_driver_support = (d.getVar('MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT', True) or '0')
         if has_vivante_kernel_driver_support != '1':
@@ -259,6 +263,13 @@ FILES_libvsc-imx = "${libdir}/libVSC${SOLIBS}"
 FILES_libgbm-imx = "${libdir}/libgbm${SOLIBS} ${libdir}/libVIVANTE.gbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
 FILES_libgbm-imx-dev = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
 
+FILES_libvulkan-imx = "${libdir}/libvulkan${SOLIBS} ${libdir}/libvulkan${REALSOLIBS}"
+FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/libvulkan${SOLIBSDEV}"
+INSANE_SKIP_libvulkan-imx += "dev-deps"
+
+FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS}"
+FILES_libopenvx-imx-dev = "${includedir}/VX ${libdir}/libopenVX${SOLIBSDEV}"
+
 FILES_libgl-imx = "${libdir}/libGL${REALSOLIBS}"
 FILES_libgl-imx-dev = "${libdir}/libGL${SOLIBSDEV}"
 # Includes GL headers from mesa
@@ -327,6 +338,6 @@ FILES_imx-gpu-viv-tools-apitrace = " \
 RDEPENDS_imx-gpu-viv-tools-apitrace = "virtual/libg2d"
 
 FILES_imx-gpu-viv-demos = "/opt"
-INSANE_SKIP_imx-gpu-viv-demos += "rpaths"
+INSANE_SKIP_imx-gpu-viv-demos += "rpaths dev-deps"
 
 # COMPATIBLE_MACHINE = "(mx6q|mx6dl|mx6sx|mx6sl|mx8)"
