@@ -8,6 +8,7 @@ DEPENDS_append_mx6dl = " virtual/libgles2 virtual/libg2d "
 DEPENDS_append_mx6sx = " virtual/libgles2 virtual/libg2d "
 DEPENDS_append_mx6sl = " virtual/libopenvg virtual/libg2d"
 DEPENDS_append_mx8 = " virtual/libgles2 virtual/libg2d"
+DEPENDS_append_mx7ulp = " virtual/libgles2 virtual/libg2d"
 
 X11_DEPENDS = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xrandr', '', d)}"
 WL_DEPENDS = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}"
