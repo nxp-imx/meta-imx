@@ -25,6 +25,12 @@ OPENCV_TOOLS_INSTALL = ""
 OPENCV_TOOLS_INSTALL_append_mx6 = "opencv-apps opencv-samples"
 OPENCV_TOOLS_INSTALL_append_mx8 = "opencv-apps opencv-samples"
 
+# Remove mesa-demos for now till the extensions are added by vivante
+
+SOC_GPU_TOOLS_X11_remove = "mesa-demos"
+SOC_GPU_TOOLS_XWAYLAND_remove = "mesa-demos"
+SOC_GPU_TOOLS_WAYLAND_remove = "mesa-demos"
+
 RDEPENDS_${PN} = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', '${SOC_GPU_TOOLS_XWAYLAND}', \
        bb.utils.contains('DISTRO_FEATURES',     'wayland', '${SOC_GPU_TOOLS_WAYLAND}', \
