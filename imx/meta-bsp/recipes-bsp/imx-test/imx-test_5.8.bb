@@ -12,6 +12,5 @@ PARALLEL_MAKE="-j 1"
 SRC_URI[md5sum] = "3b5d581e35a649378402a26974463db6"
 SRC_URI[sha256sum] = "720c55ac43d2608c6a6aec6ff3cc2275ccc38e83dfbff3494d318ab80ee1d08f"
 
-SRC_URI += "file://0001-imx-test-Fix-Makefiles-to-handle-library-dependencie.patch"
 
 COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
