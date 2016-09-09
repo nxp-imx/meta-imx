@@ -1,0 +1,44 @@
+From d026d0bfa37e5f57bccf3b05ad0c3aa523ea534a Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Tue, 6 Sep 2016 13:13:39 +0800
+Subject: [PATCH] [MMFMWK-7342]qmlglsink: check qt_context_ first in
+ GstQSGTexture::bind()
+
+When start qmlglsink app, it will set NULL buffer to GstQSGTexture
+in which case that qt_context_ will be a random value and cause
+gst_gl_context_activate() fail.
+
+Upstream-Status: Accepted[1.9.3]
+
+https://bugzilla.gnome.org/show_bug.cgi?id=770925
+
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+---
+ ext/qt/gstqsgtexture.cc | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/ext/qt/gstqsgtexture.cc b/ext/qt/gstqsgtexture.cc
+index 13208c0..85747f2 100644
+--- a/ext/qt/gstqsgtexture.cc
++++ b/ext/qt/gstqsgtexture.cc
+@@ -45,6 +45,7 @@ GstQSGTexture::GstQSGTexture ()
+ 
+   gst_video_info_init (&this->v_info);
+   this->buffer_ = NULL;
++  this->qt_context_ = NULL;
+   this->sync_buffer_ = gst_buffer_new ();
+ }
+ 
+@@ -87,6 +88,9 @@ GstQSGTexture::bind ()
+   GstMemory *mem;
+   guint tex_id;
+ 
++  if (!this->qt_context_)
++    return;
++
+   gst_gl_context_activate (this->qt_context_, TRUE);
+ 
+   if (!this->buffer_)
+-- 
+1.9.1
+
