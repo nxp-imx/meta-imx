@@ -65,6 +65,7 @@ SRC_URI_append = " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch 
                    file://0033-ion_allocator-refine-ion-allocator-code.patch \
                    file://0034-Fix-build-error-on-non-GPU-soc.patch \
                    file://0035-videocompositor-Remove-output-format-alpha-check.patch \
+                   file://0036-qmlglsink-check-qt_context_-first-in-Gst.patch \
 "
 
 
