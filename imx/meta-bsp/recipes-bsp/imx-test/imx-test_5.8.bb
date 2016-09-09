@@ -9,8 +9,8 @@ DEPENDS_mx7   += "imx-vpu"
 
 PARALLEL_MAKE="-j 1"
 
-SRC_URI[md5sum] = "341d1c7f0e0c2dedbdc09d126a03b7c9"
-SRC_URI[sha256sum] = "6f0a90febb001363878e71a93acc9e5a4d4684b903a70fccef7929f58dc6a219"
+SRC_URI[md5sum] = "3b5d581e35a649378402a26974463db6"
+SRC_URI[sha256sum] = "720c55ac43d2608c6a6aec6ff3cc2275ccc38e83dfbff3494d318ab80ee1d08f"
 
 SRC_URI += "file://0001-imx-test-Fix-Makefiles-to-handle-library-dependencie.patch"
 
