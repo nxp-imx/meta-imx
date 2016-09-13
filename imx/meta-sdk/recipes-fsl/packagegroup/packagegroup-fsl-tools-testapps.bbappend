@@ -66,6 +66,3 @@ SOC_TOOLS_TESTAPPS_mx8 += " \
     ${PN}-fslcodec-testapps \
 "
 
-# Remove mesa-demos from the image till the extensions are added by vivante
-
-X11GLTOOLS_remove = "mesa-demos"
