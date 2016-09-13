@@ -3,8 +3,8 @@
 
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv.inc
 
-SRC_URI[md5sum] = "e9f94b65cc60dbb57f4c3f1fee81910e"
-SRC_URI[sha256sum] = "710a8954340d71a6b92cc2cb2392df6127148122f5a0cbd3ff4fcadcd1c4937a"
+SRC_URI[md5sum] = "8b472c8ccbb24c5b4cb6ef21dd93eff0"
+SRC_URI[sha256sum] = "157d7255067a3ecc6b190acf6833fb5bb378da6cea77a8d40aa3bbb0fd0b3122"
 
 do_install () {
     install -d ${D}${libdir}
