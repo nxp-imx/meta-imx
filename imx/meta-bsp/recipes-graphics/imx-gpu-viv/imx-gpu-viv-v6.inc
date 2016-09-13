@@ -198,10 +198,11 @@ do_install () {
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so.2
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 
-    # update libvulkan so link
-    mv ${D}${libdir}/libvulkan.so ${D}${libdir}/libvulkan.so.1.0.0
-    ln -sf libvulkan.so.1.0.0 ${D}${libdir}/libvulkan.so.1
-    ln -sf libvulkan.so.1.0.0 ${D}${libdir}/libvulkan.so
+    if [ "${IS_MX8}" = "1" ]; then
+        mv ${D}${libdir}/libvulkan.so ${D}${libdir}/libvulkan.so.1.0.0
+        ln -sf libvulkan.so.1.0.0 ${D}${libdir}/libvulkan.so.1
+        ln -sf libvulkan.so.1.0.0 ${D}${libdir}/libvulkan.so
+    fi
 
     # skip packaging wayland libraries if no support is requested
     if [ "${USE_WL}" = "no" ]; then
