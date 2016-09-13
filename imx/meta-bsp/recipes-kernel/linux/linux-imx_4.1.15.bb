@@ -12,7 +12,7 @@ DEPENDS += "lzop-native bc-native"
 
 SRCBRANCH = "imx_4.1.15_2.0.0_ga"
 LOCALVERSION = "-2.0.0"
-SRCREV = "15c88df94f6c70ba77e979db1a7e9a467fbce578"
+SRCREV = "d3aac3f5b0d2e0dd0fa1e8b165d465f4e4b7d979"
 KERNEL_SRC ?= "git://git.freescale.com/imx/linux-imx.git;protocol=git"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
