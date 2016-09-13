@@ -44,6 +44,7 @@ PACKAGECONFIG[qt5] = ",--disable-qt,qtbase qtdeclarative qtx11extras"
 SRC_URI = " \
     http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \
     file://0001-gst-plugins-bad-fix-moc-uic-rcc-incorrect-dir.patch \
+    file://0004-qmlglsink-check-qt_context_-first-in-Gst.patch \
 "
 
 GPU_PATCHES = " file://0001-MMFMWK-6990-Support-fb-backend-in-qmlglsink.patch \
