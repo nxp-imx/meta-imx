@@ -11,6 +11,7 @@ CONFLICT_DISTRO_FEATURES = "directfb"
 QT5_IMAGE_INSTALL_APPS = ""
 QT5_IMAGE_INSTALL_APPS_mx6q = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
 QT5_IMAGE_INSTALL_APPS_mx6dl = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
+QT5_IMAGE_INSTALL_APPS_mx8 = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
 
 # Install Freescale QT demo applications for X11 backend only
 MACHINE_QT5_MULTIMEDIA_APPS = ""
