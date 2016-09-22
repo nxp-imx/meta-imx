@@ -50,7 +50,6 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libgc-wayland-protocol-imx libgc-wayland-protocol-imx-dev \
 	libwayland-egl-imx-dev \
 	imx-gpu-viv-tools \
-	imx-gpu-viv-tools-apitrace \
 	imx-gpu-viv-demos \
 "
 PACKAGES_append_mx8 = " libvulkan-imx libvulkan-imx-dev \
@@ -127,8 +126,6 @@ do_install () {
 
     # The preference order, based in DISTRO_FEATURES, is Wayland (with or without X11), X11 and fb
     if [ "${USE_WL}" = "yes" ]; then
-        cp -r ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
-        cp -r ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
 
         backend=wl
 
@@ -150,9 +147,6 @@ do_install () {
     elif [ "${USE_X11}" = "yes" ]; then
 
         cp -r ${S}/gpu-core/usr/lib/dri ${D}${libdir}
-        cp -r ${S}/apitrace/x11/usr/lib/* ${D}${libdir}
-        cp -r ${S}/apitrace/x11/usr/bin/* ${D}${bindir}
-
 
         backend=x11
 
@@ -168,8 +162,6 @@ do_install () {
 
         # Regular framebuffer
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_linuxfb.pc ${D}${libdir}/pkgconfig/egl.pc
-        cp -r ${S}/apitrace/non-x11/usr/lib/* ${D}${libdir}
-        cp -r ${S}/apitrace/non-x11/usr/bin/* ${D}${bindir}
         
         backend=fb
 
@@ -331,17 +323,6 @@ FILES_libgc-wayland-protocol-imx-dev = "${libdir}/libgc_wayland_protocol${SOLIBS
 FILES_libwayland-egl-imx-dev = "${libdir}/pkgconfig/wayland-egl.pc"
 
 FILES_imx-gpu-viv-tools = "${bindir}/gmem_info"
-
-INSANE_SKIP_imx-gpu-viv-tools-apitrace += "dev-so"
-FILES_imx-gpu-viv-tools-apitrace = " \
-    ${bindir}/apitrace \
-    ${bindir}/eglretrace \
-    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "", \
-       bb.utils.contains("DISTRO_FEATURES",     "x11", "glretrace", \
-                                                       "", d), d)} \
-    ${libdir}/apitrace \
-"
-RDEPENDS_imx-gpu-viv-tools-apitrace = "virtual/libg2d"
 
 FILES_imx-gpu-viv-demos = "/opt"
 INSANE_SKIP_imx-gpu-viv-demos += "rpaths dev-deps"
