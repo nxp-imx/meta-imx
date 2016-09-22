@@ -3,7 +3,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50"
 DEPENDS = "virtual/libg2d"
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
 
 SRC_URI[md5sum] = "577802a497a301c820a3628083075334"
 SRC_URI[sha256sum] = "260988f6d661cab0ea5e6ba875e344a75bcbfa51f332e4f232c6200e67447bab"
