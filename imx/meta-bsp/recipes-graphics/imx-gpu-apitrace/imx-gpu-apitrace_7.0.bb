@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "260988f6d661cab0ea5e6ba875e344a75bcbfa51f332e4f232c6200e67
 inherit cmake lib_package pkgconfig perlnative pythonnative
 
 EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DDISABLE_X11=ON -DCMAKE_SYSROOT=${STAGING_DIR_HOST}', \
-                bb.utils.contains('DISTRO_FEATURES', 'fb', '-DDISABLE_X11=ON -DCMAKE_SYSROOT=${STAGING_DIR_HOST}', '', d), d)}"
+                bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-DDISABLE_X11=ON -DCMAKE_SYSROOT=${STAGING_DIR_HOST}', d), d)}"
 
 FILES_${PN} = "${bindir} ${libdir}"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
