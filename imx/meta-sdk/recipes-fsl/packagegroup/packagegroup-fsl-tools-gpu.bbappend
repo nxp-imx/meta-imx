@@ -1,7 +1,7 @@
-GPU_PKGS = ""
-GPU_PKGS_mx6 = "imx-gpu-apitrace"
 
-SOC_TOOLS_GPU_append_mx6 = " ${GPU_PKGS}"
+SOC_TOOLS_GPU_append_mx6q = " imx-gpu-apitrace"
+SOC_TOOLS_GPU_append_mx6dl = " imx-gpu-apitrace"
+SOC_TOOLS_GPU_append_mx6sx = " imx-gpu-apitrace"
 
 XWAYLAND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xserver-xorg-extension-viv-autohdmi', '', d)}"
 
