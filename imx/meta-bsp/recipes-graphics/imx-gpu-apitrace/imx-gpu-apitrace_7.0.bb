@@ -5,8 +5,8 @@ DEPENDS = "virtual/libg2d"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "d408a9ca549bb9fbfef160bcad195cbc"
-SRC_URI[sha256sum] = "ff0d795ef59aa9f3af53a69a3962e9591ee3b9baf6e8c7147f2e4bec460ea728"
+SRC_URI[md5sum] = "577802a497a301c820a3628083075334"
+SRC_URI[sha256sum] = "260988f6d661cab0ea5e6ba875e344a75bcbfa51f332e4f232c6200e67447bab"
 
 inherit cmake lib_package pkgconfig perlnative pythonnative
 
