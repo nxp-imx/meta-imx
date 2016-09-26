@@ -19,10 +19,9 @@ QT5_IMAGE_INSTALL = ""
 QT5_IMAGE_INSTALL_common = " \
     packagegroup-qt5-toolchain-target \
     packagegroup-qt5-demos \
+    ${QT5_IMAGE_INSTALL_APPS} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxkbcommon', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', \  
-       bb.utils.contains('DISTRO_FEATURES',     'x11', '${QT5_IMAGE_INSTALL_APPS}', \
-                                                       '', d), d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d)}\
     "
 QT5_IMAGE_INSTALL_mx6 = " \
     ${QT5_IMAGE_INSTALL_common} \

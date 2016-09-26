@@ -17,13 +17,22 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
 SRC_URI[md5sum] = "fde6bf920f60c6d8196075372d391dff"
 SRC_URI[sha256sum] = "11a8184f6b03c5bee071240875940d00ec2b45bc859c0a1cf55d930eadad640a"
 
+USE_X11 = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
+
+# for now, imxcamera & imxplayer can only be supported on x11 backend
+# but test_qmlglsrc & test_qmlglsink can be supported on all backends
 do_install () {
-    install -d ${D}${datadir}/applications
-    install -m 0644 ${WORKDIR}/qt*.desktop ${D}${datadir}/applications
-    install -d ${D}${datadir}/qt5
-    cp -r ${S}/usr/share/qt5/examples ${D}${datadir}/qt5
-    install -d ${D}${datadir}/pixmaps
-    cp -r ${S}/usr/share/pixmaps/* ${D}${datadir}/pixmaps
+    if [ "${USE_X11}" = "yes" ]; then
+        install -d ${D}${datadir}/applications
+        install -m 0644 ${WORKDIR}/qt*.desktop ${D}${datadir}/applications
+        install -d ${D}${datadir}/qt5
+        cp -r ${S}/usr/share/qt5/examples ${D}${datadir}/qt5
+        install -d ${D}${datadir}/pixmaps
+        cp -r ${S}/usr/share/pixmaps/* ${D}${datadir}/pixmaps
+    else
+        install -d ${D}${datadir}/qt5/examples/multimedia/
+        cp -r ${S}/usr/share/qt5/examples/multimedia/qmlgltest/ ${D}${datadir}/qt5/examples/multimedia/
+    fi
 }
 
 FILES_${PN} = " \
