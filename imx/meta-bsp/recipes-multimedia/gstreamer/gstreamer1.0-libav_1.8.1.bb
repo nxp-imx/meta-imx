@@ -12,6 +12,7 @@ SRC_URI = " \
     http://gstreamer.freedesktop.org/src/gst-libav/gst-libav-${PV}.tar.xz \
     file://0001-Disable-yasm-for-libav-when-disable-yasm.patch \
     file://workaround-to-build-gst-libav-for-i586-with-gcc.patch \
+    file://0002-av-Cast-AVContext-bit_rate-to-a-guint-before-passing.patch \
 "
 
 SRC_URI[md5sum] = "85f1a047606ca9e08493d7b6b42df462"
