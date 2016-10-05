@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/chromium-52:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}"
 
 # Add changes from meta-fsl-arm
 
