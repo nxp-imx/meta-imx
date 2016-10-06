@@ -40,6 +40,8 @@ PACKAGES_remove = "${PN}-codecs-ffmpeg ${PN}-plugin-pdf"
 
 # chromium changes for mx8 (64 bit)
 
+SRC_URI_append_mx8 = " file://fix_64bit_build_breaks.patch"
+
 CHROMIUM_IMX_VPU_PATCHES_mx8 += "${VPU_PATCHES}"
 
 COMPATIBLE_MACHINE_aarch64 = "(.*)"
