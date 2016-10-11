@@ -1,7 +1,7 @@
-Freescale's 4.1.15-1.1.1 Yocto Project BSP
+Freescale's 4.1.15-1.2.0 Yocto Project BSP
 ================================================
 
-Note 4.1.15-1.1.1 is a patch update to i.MX 6UltraLite.
+Note 4.1.15-1.2.0 is an update to i.MX 7Dual SABRE Device.
 
 To build the oriignal 4.1.15-1.0.0_ga checkout tag imx_4.1.15_1.0.0_ga in meta-fsl-bsp-release.
 

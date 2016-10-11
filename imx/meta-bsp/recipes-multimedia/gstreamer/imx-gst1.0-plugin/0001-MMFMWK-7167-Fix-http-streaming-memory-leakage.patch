@@ -1,0 +1,100 @@
+From e651126d7a8ecf4eec42128f4b6d945497914488 Mon Sep 17 00:00:00 2001
+From: Lyon Wang <lyon.wang@nxp.com>
+Date: Mon, 30 May 2016 10:55:42 +0800
+Subject: [PATCH] [MMFMWK-7167] Fix http streaming memory leakage
+
+- Unref buffer when copy to cache adapter
+- Unref thread for aiur push task when finalize
+- Unref thread when do push seek
+
+Signed-off-by: Lyon Wang <lyon.wang@nxp.com>
+---
+ plugins/aiurdemux/aiurdemux.c       | 15 +++++++++++++--
+ plugins/aiurdemux/aiurdemux.h       |  2 ++
+ plugins/aiurdemux/aiurstreamcache.c |  3 +++
+ 3 files changed, 18 insertions(+), 2 deletions(-)
+
+diff --git a/plugins/aiurdemux/aiurdemux.c b/plugins/aiurdemux/aiurdemux.c
+index 8eb4060..64e13d0 100755
+--- a/plugins/aiurdemux/aiurdemux.c
++++ b/plugins/aiurdemux/aiurdemux.c
+@@ -463,6 +463,7 @@ static void gst_aiurdemux_init (GstAiurDemux * demux)
+   demux->pullbased = FALSE;
+   demux->core_interface = NULL;
+   demux->core_handle = NULL;
++  demux->thread = NULL;
+ 
+   demux->stream_cache = gst_aiur_stream_cache_new (AIUR_STREAM_CACHE_SIZE,
+     AIUR_STREAM_CACHE_SIZE_MAX, demux);
+@@ -943,7 +944,7 @@ static gboolean aiurdemux_sink_activate_push (GstPad * sinkpad, GstObject * pare
+ 
+   if (active) {
+     demux->loop_push = TRUE;
+-    g_thread_new ("aiur_push",(GThreadFunc) aiurdemux_loop_push, (gpointer) demux);
++    demux->thread = g_thread_new ("aiur_push",(GThreadFunc) aiurdemux_loop_push, (gpointer) demux);
+ 
+     return TRUE;
+ 
+@@ -953,6 +954,12 @@ static gboolean aiurdemux_sink_activate_push (GstPad * sinkpad, GstObject * pare
+     /* make sure task is closed */
+     g_mutex_lock (&demux->runmutex);
+     g_mutex_unlock (&demux->runmutex);
++
++    if (demux->thread) {
++      g_thread_unref(demux->thread);
++      demux->thread = NULL;
++    }
++
+     return gst_pad_stop_task (sinkpad);
+   }
+ }
+@@ -3677,6 +3684,10 @@ aiurdemux_do_push_seek (GstAiurDemux * demux, GstPad * pad,
+   /* commit the new segment */
+   memcpy (&demux->segment, &seeksegment, sizeof (GstSegment));
+ 
++  if (demux->thread) {
++    g_thread_unref(demux->thread);
++    demux->thread = NULL;
++  }
+ 
+   demux->loop_push = TRUE;
+   gst_aiur_stream_cache_open (demux->stream_cache);
+@@ -3684,7 +3695,7 @@ aiurdemux_do_push_seek (GstAiurDemux * demux, GstPad * pad,
+     demux->streams[i]->last_ret = GST_FLOW_OK;
+ 
+ 
+-  g_thread_new ("aiur_push",(GThreadFunc) aiurdemux_loop_push, (gpointer) demux);
++  demux->thread = g_thread_new ("aiur_push",(GThreadFunc) aiurdemux_loop_push, (gpointer) demux);
+   g_mutex_unlock (&demux->runmutex);
+ 
+   return ret;
+diff --git a/plugins/aiurdemux/aiurdemux.h b/plugins/aiurdemux/aiurdemux.h
+index b5589ee..ef025af 100755
+--- a/plugins/aiurdemux/aiurdemux.h
++++ b/plugins/aiurdemux/aiurdemux.h
+@@ -329,6 +329,8 @@ struct _GstAiurDemux
+ 
+     AiurDemuxOption option;
+ 
++    GThread *thread;  // for push mode thread
++
+ };
+ 
+ struct _GstAiurDemuxClass
+diff --git a/plugins/aiurdemux/aiurstreamcache.c b/plugins/aiurdemux/aiurstreamcache.c
+index ad01c55..646f7e0 100755
+--- a/plugins/aiurdemux/aiurstreamcache.c
++++ b/plugins/aiurdemux/aiurstreamcache.c
+@@ -246,6 +246,9 @@ gst_aiur_stream_cache_add_buffer (GstAiurStreamCache * cache,
+ 
+       gst_adapter_push (cache->adapter, newBuffer);
+       newBuffer = NULL;
++      if (buffer) {
++        gst_buffer_unref (buffer);
++      }
+     }
+ 
+   }else{
+-- 
+1.9.1
+

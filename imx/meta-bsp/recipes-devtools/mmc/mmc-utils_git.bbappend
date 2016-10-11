@@ -1,5 +1,5 @@
-# Upgrade to support optional cache for eMMC devices
+# Upgrade to add more eMMC configure and status check interface
 
-SRCREV = "d0b46442b50794217e53b2455c1344c548d9d088"
+LIC_FILES_CHKSUM = "file://mmc.c;beginline=1;endline=17;md5=f8b01ca0e7a359872d513a2d0bfd0d28"
 
-
+SRCREV = "bb779acfc385d135b32a6998c1d1fceef0491400"

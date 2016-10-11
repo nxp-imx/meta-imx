@@ -1,6 +1,6 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "Freescale i.MX Release Distro"
-DISTRO_VERSION = "4.1.15-1.1.1"
+DISTRO_VERSION = "4.1.15-1.2.0"
 DISTRO_CODENAME = "jethro"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
@@ -27,6 +27,7 @@ BBMASK .= "|meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend"
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 # Comment out the 2 lines below to use bluez4.
 DISTRO_FEATURES_append_mx6 = " bluez5"
+DISTRO_FEATURES_append_mx6ul = "bluez5"
 DISTRO_FEATURES_append_mx7 = " bluez5"
 
 SDK_NAME = "${DISTRO}-${TCLIBC}-${SDK_ARCH}-${IMAGE_BASENAME}-${TUNE_PKGARCH}"
