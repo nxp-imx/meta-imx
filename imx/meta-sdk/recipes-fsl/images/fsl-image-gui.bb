@@ -40,11 +40,11 @@ WAYLAND_IMAGE_INSTALL_remove_mx6sl = "clutter-1.0-examples"
 X11_IMAGE_INSTALL = ""
 X11_IMAGE_INSTALL_mx6 = "${@base_contains('DISTRO_FEATURES', 'x11', \
     'packagegroup-fsl-pulseaudio', '', d)}"
-X11_IMAGE_INSTALL_append_mx6sl = " libopenvg-mx6"
-X11_IMAGE_INSTALL_mx7 = "${@base_contains('DISTRO_FEATURES', 'x11', \
-    'packagegroup-fsl-pulseaudio mesa-megadriver xserver-xorg-extension-glx', '', d)}"
 X11_IMAGE_INSTALL_mx6ul = "${@base_contains('DISTRO_FEATURES', 'x11', \
-    'packagegroup-fsl-pulseaudio mesa-megadriver xserver-xorg-extension-glx', '', d)}"
+    'packagegroup-fsl-pulseaudio', '', d)}"
+X11_IMAGE_INSTALL_mx7 = "${@base_contains('DISTRO_FEATURES', 'x11', \
+    'packagegroup-fsl-pulseaudio', '', d)}"
+X11_IMAGE_INSTALL_append_mx6sl = " libopenvg-mx6"
 
 # Add in Graphics
 X11_IMAGE_INSTALL_GRAPHICS = "${@base_contains('DISTRO_FEATURES', 'x11', \
@@ -57,7 +57,6 @@ MM_IMAGE_INSTALL = ""
 MM_IMAGE_INSTALL_mx6 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
 MM_IMAGE_INSTALL_mx6ul = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
 MM_IMAGE_INSTALL_mx7 = "packagegroup-fsl-multimedia-gstreamer1.0-core packagegroup-fsl-multimedia-gstreamer1.0-testapps"
-
 
 IMAGE_INSTALL += " \
     ${X11_IMAGE_INSTALL} \

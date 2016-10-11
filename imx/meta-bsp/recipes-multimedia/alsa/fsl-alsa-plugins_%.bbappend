@@ -1,1 +1,0 @@
-COMPATIBLE_MACHINE = "(mx6|mx7|mx6ul)"

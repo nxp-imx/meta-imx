@@ -1,0 +1,454 @@
+From 587db892fdaac18780c8024e5a976ea182f36ff4 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <b55597@freescale.com>
+Date: Tue, 13 Oct 2015 09:33:54 +0800
+Subject: [PATCH 1/2] [glplugin] Add directviv to glimagesink to improve
+ playback performance
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+1.Add a physical buffer uploader in glupload plugin and using viv direct
+  texture to bind physical continious buffer with texture to avoid memory
+  copy from videobuffer to texture to gain good performance.
+2.Reduce glimagesink load latency by override glimagesink ALLOCATION query to
+  avoid memory copy.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Haihua Hu <b55597@freescale.com>
+---
+ ext/gl/gstglimagesink.c                 |    5 ++
+ ext/gl/gstgluploadelement.c             |   14 +++
+ gst-libs/gst/gl/Makefile.am             |    2 +
+ gst-libs/gst/gl/gstglupload.c           |  118 ++++++++++++++++++++++++-
+ gst-libs/gst/gl/gstglvivdirecttexture.c |  143 +++++++++++++++++++++++++++++++
+ gst-libs/gst/gl/gstglvivdirecttexture.h |   35 ++++++++
+ 6 files changed, 314 insertions(+), 3 deletions(-)
+ create mode 100644 gst-libs/gst/gl/gstglvivdirecttexture.c
+ create mode 100644 gst-libs/gst/gl/gstglvivdirecttexture.h
+
+diff --git a/ext/gl/gstglimagesink.c b/ext/gl/gstglimagesink.c
+index f629df7..1e5dc05 100644
+--- a/ext/gl/gstglimagesink.c
++++ b/ext/gl/gstglimagesink.c
+@@ -896,6 +896,11 @@ gst_glimage_sink_query (GstBaseSink * bsink, GstQuery * query)
+       res = GST_BASE_SINK_CLASS (parent_class)->query (bsink, query);
+       break;
+     }
++    case GST_QUERY_ALLOCATION:
++    {
++      res = gst_glimage_sink_propose_allocation(bsink, query);
++      break;
++    }
+     default:
+       res = GST_BASE_SINK_CLASS (parent_class)->query (bsink, query);
+       break;
+diff --git a/ext/gl/gstgluploadelement.c b/ext/gl/gstgluploadelement.c
+index 83ff24c..e74da3a 100644
+--- a/ext/gl/gstgluploadelement.c
++++ b/ext/gl/gstgluploadelement.c
+@@ -208,6 +208,8 @@ gst_gl_upload_element_prepare_output_buffer (GstBaseTransform * bt,
+   GstGLUploadElement *upload = GST_GL_UPLOAD_ELEMENT (bt);
+   GstGLUploadReturn ret;
+   GstBaseTransformClass *bclass;
++  GstVideoInfo info;
++  GstCaps *caps;
+ 
+   bclass = GST_BASE_TRANSFORM_GET_CLASS (bt);
+ 
+@@ -231,6 +233,18 @@ gst_gl_upload_element_prepare_output_buffer (GstBaseTransform * bt,
+     return GST_FLOW_ERROR;
+   }
+ 
++  /* check if the output buffer's meta format equals to the caps format */
++  GstVideoMeta *vmeta = gst_buffer_get_video_meta(*outbuf);
++  gst_video_info_from_caps (&info, upload->out_caps);
++  if(vmeta->format != GST_VIDEO_INFO_FORMAT (&info))
++  {
++    caps = gst_caps_copy(upload->out_caps);
++    gst_caps_set_simple (caps, "format", G_TYPE_STRING, 
++        gst_video_format_to_string (vmeta->format), NULL);
++    gst_caps_replace (&upload->out_caps, caps);
++    gst_base_transform_update_src_caps (upload, caps);
++  }
++
+   /* basetransform doesn't unref if they're the same */
+   if (buffer == *outbuf)
+     gst_buffer_unref (*outbuf);
+diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
+index 36f3bf7..402e37a 100644
+--- a/gst-libs/gst/gl/Makefile.am
++++ b/gst-libs/gst/gl/Makefile.am
+@@ -30,6 +30,7 @@ libgstgl_@GST_API_VERSION@_la_SOURCES = \
+ 	gstglsyncmeta.c \
+ 	gstglviewconvert.c \
+ 	gstgloverlaycompositor.c \
++	gstglvivdirecttexture.c \
+ 	utils/opengl_versions.h
+ 
+ libgstgl_@GST_API_VERSION@includedir = $(includedir)/gstreamer-@GST_API_VERSION@/gst/gl
+@@ -56,6 +57,7 @@ libgstgl_@GST_API_VERSION@include_HEADERS = \
+ 	gstglviewconvert.h \
+ 	gstgloverlaycompositor.h \
+ 	gstgl_fwd.h \
++	gstglvivdirecttexture.h \
+ 	gl.h
+ 
+ libgstgl_@GST_API_VERSION@_la_LIBADD = \
+diff --git a/gst-libs/gst/gl/gstglupload.c b/gst-libs/gst/gl/gstglupload.c
+index 0addca1..acaa329 100644
+--- a/gst-libs/gst/gl/gstglupload.c
++++ b/gst-libs/gst/gl/gstglupload.c
+@@ -23,6 +23,7 @@
+ #endif
+ 
+ #include <stdio.h>
++#include <gst/gl/gstglvivdirecttexture.h>
+ 
+ #include "gl.h"
+ #include "gstglupload.h"
+@@ -47,7 +48,7 @@
+ #define USING_GLES2(context) (gst_gl_context_check_gl_version (context, GST_GL_API_GLES2, 2, 0))
+ #define USING_GLES3(context) (gst_gl_context_check_gl_version (context, GST_GL_API_GLES2, 3, 0))
+ 
+-GST_DEBUG_CATEGORY_STATIC (gst_gl_upload_debug);
++GST_DEBUG_CATEGORY (gst_gl_upload_debug);
+ #define GST_CAT_DEFAULT gst_gl_upload_debug
+ 
+ #define DEBUG_INIT \
+@@ -698,6 +699,114 @@ static const UploadMethod _upload_meta_upload = {
+   &_upload_meta_upload_free
+ };
+ 
++struct PhyBufferUpload
++{
++  GstGLUpload *upload;
++};
++
++static gpointer
++_physical_buffer_upload_new(GstGLUpload *upload)
++{
++  struct PhyBufferUpload *phybuffer = g_new0 (struct PhyBufferUpload, 1);
++
++  phybuffer->upload = upload;
++
++  return phybuffer;
++}
++
++static GstCaps *
++_physical_buffer_upload_transform_caps(GstGLContext *context,
++    GstPadDirection direction, GstCaps *caps)
++{
++  GstCaps *ret;
++
++  if (direction == GST_PAD_SINK) {
++    ret = _set_caps_features (caps, GST_CAPS_FEATURE_MEMORY_GL_MEMORY);
++    gst_caps_set_simple (ret, "format", G_TYPE_STRING, "RGBA", NULL);
++  } else {
++    ret = gst_caps_from_string (GST_VIDEO_CAPS_MAKE_WITH_FEATURES
++            (GST_CAPS_FEATURE_MEMORY_SYSTEM_MEMORY,GST_GL_DIRECTVIV_FORMAT));
++  }
++
++  return ret;
++}
++
++static gboolean
++_physical_buffer_upload_accept(gpointer impl, GstBuffer *buffer, 
++    GstCaps *in_caps, GstCaps *out_caps)
++{
++  GstCapsFeatures *features;
++
++  features = gst_caps_get_features (out_caps, 0);
++  if (!gst_caps_features_contains (features, GST_CAPS_FEATURE_MEMORY_GL_MEMORY))
++    return FALSE;
++
++  return gst_is_physical_buffer(buffer);
++}
++
++static void
++_physical_buffer_upload_propose_allocation(gpointer impl, GstQuery *decide_query,
++    GstQuery *query)
++{
++  gst_query_add_allocation_meta (query, GST_VIDEO_META_API_TYPE, 0);
++}
++
++static GstGLUploadReturn
++_physical_buffer_upload_perform(gpointer impl, GstBuffer *buffer, GstBuffer **outbuf)
++{
++  struct PhyBufferUpload *phyBuffer = impl;
++  GstVideoInfo *info;
++  gint n_mem;
++
++  info = &phyBuffer->upload->priv->out_info;
++  n_mem = GST_VIDEO_INFO_N_PLANES (info);
++  GST_LOG_OBJECT (phyBuffer->upload, "Attempting viv direct upload");
++  *outbuf = gst_buffer_new ();
++  gst_gl_memory_setup_buffer (phyBuffer->upload->context,
++      NULL, info, NULL, *outbuf);
++
++  GstGLMemory *out_gl_mem =
++      (GstGLMemory *) gst_buffer_peek_memory (*outbuf, 0);
++
++  gst_gl_viv_direct_bind_gstbuffer(phyBuffer->upload->context, out_gl_mem->tex_id,
++      &phyBuffer->upload->priv->in_info, buffer);
++
++  gst_buffer_add_video_meta_full (*outbuf, 0,
++      GST_VIDEO_INFO_FORMAT (info), GST_VIDEO_INFO_WIDTH (info),
++      GST_VIDEO_INFO_HEIGHT (info), n_mem, info->offset, info->stride);
++
++  return GST_GL_UPLOAD_DONE;
++}
++
++static void
++_physical_buffer_upload_release(gpointer impl, GstBuffer *buffer)
++{
++}
++
++static void
++_physical_buffer_upload_free(gpointer impl)
++{
++  struct PhyBufferUpload *phyBuffer = impl;
++
++  g_free(phyBuffer);
++}
++
++static GstStaticCaps _physical_buffer_upload_caps =
++GST_STATIC_CAPS (GST_VIDEO_CAPS_MAKE (GST_GL_DIRECTVIV_FORMAT));
++
++static const UploadMethod _physical_buffer_upload = {
++  "Physical buffer",
++  0,
++  &_physical_buffer_upload_caps,
++  &_physical_buffer_upload_new,
++  &_physical_buffer_upload_transform_caps,
++  &_physical_buffer_upload_accept,
++  &_physical_buffer_upload_propose_allocation,
++  &_physical_buffer_upload_perform,
++  &_physical_buffer_upload_release,
++  &_physical_buffer_upload_free
++};
++
+ struct RawUploadFrame
+ {
+   gint ref_count;
+@@ -813,6 +922,7 @@ _raw_data_upload_perform (gpointer impl, GstBuffer * buffer,
+   struct RawUpload *raw = impl;
+   int i;
+   GstVideoInfo *in_info = &raw->upload->priv->in_info;
++
+   guint max_planes = GST_VIDEO_INFO_N_PLANES (in_info);
+ 
+   /* Support stereo views for separated multiview mode */
+@@ -870,7 +980,9 @@ static const UploadMethod *upload_methods[] = { &_gl_memory_upload,
+ #if GST_GL_HAVE_PLATFORM_EGL
+   &_egl_image_upload,
+ #endif
+-  &_upload_meta_upload, &_raw_data_upload
++  &_upload_meta_upload,
++  &_physical_buffer_upload,
++  &_raw_data_upload
+ };
+ 
+ static GMutex upload_global_lock;
+@@ -998,7 +1110,7 @@ gst_gl_upload_transform_caps (GstGLContext * context, GstPadDirection direction,
+ 
+ 
+   if (filter) {
+-    result = gst_caps_intersect_full (filter, tmp, GST_CAPS_INTERSECT_FIRST);
++    result = gst_caps_intersect_full (tmp, filter, GST_CAPS_INTERSECT_FIRST);
+     gst_caps_unref (tmp);
+   } else {
+     result = tmp;
+diff --git a/gst-libs/gst/gl/gstglvivdirecttexture.c b/gst-libs/gst/gl/gstglvivdirecttexture.c
+new file mode 100644
+index 0000000..c19b617
+--- /dev/null
++++ b/gst-libs/gst/gl/gstglvivdirecttexture.c
+@@ -0,0 +1,143 @@
++/*
++ * GStreamer
++ * Copyright (c) 2015, Freescale Semiconductor, Inc. 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
++#include "gl.h"
++
++GST_DEBUG_CATEGORY_EXTERN (gst_gl_upload_debug);
++#define GST_CAT_DEFAULT gst_gl_upload_debug
++
++typedef struct {
++  guint tex_id;
++  guint w;
++  guint h;
++  guint fmt;
++  void *vaddr;
++  guint paddr;
++  gboolean ret;
++} GstVivDirectTexture; 
++
++gboolean
++gst_is_physical_buffer (GstBuffer *buffer)
++{
++
++  GstMemory *mem;
++
++  mem = gst_buffer_peek_memory (buffer, 0);
++  if (!mem->allocator)
++    return FALSE;
++
++  return g_type_check_instance_is_a (mem->allocator, g_type_from_name("GstAllocatorPhyMem"));
++}
++
++static void
++_do_viv_direct_tex_bind_mem (GstGLContext * context, GstVivDirectTexture * viv_tex)
++{
++  GST_DEBUG ("viv direct upload, tex_id %d, fmt: %d, res: (%dx%d)", viv_tex->tex_id, viv_tex->fmt, viv_tex->w, viv_tex->h);
++  GST_DEBUG ("Physical memory buffer, vaddr: %p, paddr: %p", viv_tex->vaddr, viv_tex->paddr);
++
++  glBindTexture (GL_TEXTURE_2D, viv_tex->tex_id);
++  glTexDirectVIVMap (GL_TEXTURE_2D, viv_tex->w, viv_tex->h, viv_tex->fmt, &viv_tex->vaddr, &viv_tex->paddr);
++  glTexDirectInvalidateVIV (GL_TEXTURE_2D);
++  viv_tex->ret = TRUE;
++
++  return;
++}
++
++gboolean
++gst_gl_viv_direct_bind_gstbuffer (GstGLContext * context, guint tex_id, GstVideoInfo * info, GstBuffer * buffer)
++{
++  typedef struct {
++    guint8 *vaddr;
++    guint8 *paddr;
++    guint8 *caddr;
++    gsize size;
++    gpointer *user_data;
++  } PhyMemBlock;
++  //Note: structure PhyMemBlock is copied from gst1.0-fsl-plugin/libs/allocator/gstallocatorphymem.h
++
++  typedef struct {
++    GstMemory mem;
++    guint8 *vaddr;
++    guint8 *paddr;
++    PhyMemBlock block;
++  } GstMemoryPhy;
++  //Note: structure GstMemoryPhy is copied from gst1.0-fsl-plugin/libs/allocator/gstallocatorphymem.c
++
++  GstMemory *mem = gst_buffer_peek_memory (buffer, 0);
++  GstMemoryPhy *memphy = (GstMemoryPhy*) mem;
++  PhyMemBlock *memblk = &memphy->block;
++
++  GstVideoFormat fmt = GST_VIDEO_INFO_FORMAT (info);
++  gint width, height;
++  GstVideoMeta *vmeta = gst_buffer_get_video_meta (buffer);
++  if (vmeta && (fmt == GST_VIDEO_FORMAT_I420 || fmt == GST_VIDEO_FORMAT_NV12)) {
++    width = vmeta->stride[0];
++    height = vmeta->offset[1] / width;
++  }
++  else {
++    width = GST_VIDEO_INFO_WIDTH (info);
++    height = GST_VIDEO_INFO_HEIGHT (info);
++  }
++
++  guint viv_fmt;
++  switch (fmt) {
++    case GST_VIDEO_FORMAT_I420:
++      viv_fmt = GL_VIV_I420;
++      break;
++    case GST_VIDEO_FORMAT_YV12:
++      viv_fmt = GL_VIV_YV12;
++      break;
++    case GST_VIDEO_FORMAT_NV12:
++      viv_fmt = GL_VIV_NV12;
++      break;
++    case GST_VIDEO_FORMAT_NV21:
++      viv_fmt = GL_VIV_NV21;
++      break;
++    case GST_VIDEO_FORMAT_YUY2:
++      viv_fmt = GL_VIV_YUY2;
++      break;
++    case GST_VIDEO_FORMAT_UYVY:
++      viv_fmt = GL_VIV_UYVY;
++      break;
++    case GST_VIDEO_FORMAT_RGBA:
++      viv_fmt = GL_RGBA;
++      break;
++    case GST_VIDEO_FORMAT_BGRA:
++      viv_fmt = GL_BGRA_EXT;
++      break;
++    case GST_VIDEO_FORMAT_RGB16:
++      viv_fmt = GL_RGB565_OES;
++      break;
++    default:
++      GST_ERROR ("Not supported format %d for viv direct texture upload.", fmt);
++      viv_fmt = GL_NONE;
++      return FALSE;
++  }
++
++  GstVivDirectTexture viv_tex = {tex_id, width, height, viv_fmt, memblk->vaddr, memblk->paddr, FALSE};
++  gst_gl_context_thread_add (context, (GstGLContextThreadFunc) _do_viv_direct_tex_bind_mem, &viv_tex);
++
++  return viv_tex.ret;
++}
++
+diff --git a/gst-libs/gst/gl/gstglvivdirecttexture.h b/gst-libs/gst/gl/gstglvivdirecttexture.h
+new file mode 100644
+index 0000000..fa88e1a
+--- /dev/null
++++ b/gst-libs/gst/gl/gstglvivdirecttexture.h
+@@ -0,0 +1,35 @@
++/*
++ * GStreamer
++ * Copyright (c) 2015, Freescale Semiconductor, Inc. 
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++#ifndef __GST_GL_VIVDIRECT_H__
++#define __GST_GL_VIVDIRECT_H__
++
++#include <gst/video/video.h>
++#include <gst/gl/gstgl_fwd.h>
++
++#define GST_GL_DIRECTVIV_FORMAT "{RGBA, I420, YV12, NV12, NV21, YUY2, UYVY, BGRA, RGB16}"
++G_BEGIN_DECLS
++
++gboolean gst_is_physical_buffer (GstBuffer *buffer);
++gboolean gst_gl_viv_direct_bind_gstbuffer (GstGLContext * context, guint tex_id, GstVideoInfo * info, GstBuffer * buffer);
++
++G_END_DECLS
++
++#endif /* __GST_GL_VIVDIRECT_H__ */
+-- 
+1.7.9.5
+

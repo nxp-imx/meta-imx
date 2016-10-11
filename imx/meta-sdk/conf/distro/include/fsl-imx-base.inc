@@ -1,7 +1,7 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "Freescale i.MX Release Distro"
-DISTRO_VERSION = "3.14.52-1.1.1"
-DISTRO_CODENAME = "fido"
+DISTRO_VERSION = "4.1.15-1.0.0"
+DISTRO_CODENAME = "jethro"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
@@ -15,11 +15,18 @@ LOCALCONF_VERSION = "1"
 IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
+IMAGE_FSTYPES = "tar.bz2 ext4 sdcard"
+
+BBMASK = "meta-fsl-arm/recipes-bsp/u-boot/u-boot-imx_2015.04.bb"
+BBMASK .= "|meta-fsl-arm/recipes-bsp/u-boot/u-boot-imx-mfgtool_2015.04.bb"
+BBMASK .= "|meta-fsl-arm/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend"
+BBMASK .= "|meta-freescale/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend"
+BBMASK .= "|meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv_2.4.bbappend"
+BBMASK .= "|meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 # Comment out the 2 lines below to use bluez4.
 DISTRO_FEATURES_append_mx6 = " bluez5"
-DISTRO_FEATURES_append_mx6ul = " bluez5"
 DISTRO_FEATURES_append_mx7 = " bluez5"
 
 SDK_NAME = "${DISTRO}-${TCLIBC}-${SDK_ARCH}-${IMAGE_BASENAME}-${TUNE_PKGARCH}"
@@ -77,7 +84,7 @@ BB_SIGNATURE_HANDLER ?= 'OEBasicHash'
 # that breaks the format and have been previously discussed on the mailing list
 # with general agreement from the core team.
 #
-OELAYOUT_ABI = "10"
+OELAYOUT_ABI = "11"
 
 # add poky sanity bbclass
 INHERIT += "poky-sanity"
@@ -89,11 +96,4 @@ WARN_TO_ERROR_QA = "already-stripped compile-host-path install-host-path \
 WARN_QA_remove = "${WARN_TO_ERROR_QA}"
 ERROR_QA_append = " ${WARN_TO_ERROR_QA}"
 
-# Determines if the SoC has support for Vivante kernel driver
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT      = "0"
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6  = "1"
-
-# Handle Vivante kernel driver setting:
-#   0 - machine does not have Vivante GPU driver support
-#   1 - machine has Vivante GPU driver support
-MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT ?= "${SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT}"
+MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"

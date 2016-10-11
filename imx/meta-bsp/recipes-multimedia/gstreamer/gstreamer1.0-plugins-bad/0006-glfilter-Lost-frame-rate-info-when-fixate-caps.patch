@@ -1,0 +1,52 @@
+From 15fcb87bc9abd69377b38ef0f8b48b84a56909f4 Mon Sep 17 00:00:00 2001
+From: Song Bing <b06498@freescale.com>
+Date: Mon, 8 Jun 2015 17:06:22 +0800
+Subject: [PATCH 06/10] glfilter: Lost frame rate info when fixate caps
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Lost frame rate info when fixate caps. It will cause
+down stream element fail, such avimux.
+
+Upstream-Status: Waiting for review.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=750545
+---
+ gst-libs/gst/gl/gstglfilter.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/gst-libs/gst/gl/gstglfilter.c b/gst-libs/gst/gl/gstglfilter.c
+index 78bcbc9..65eba1e 100644
+--- a/gst-libs/gst/gl/gstglfilter.c
++++ b/gst-libs/gst/gl/gstglfilter.c
+@@ -258,7 +258,8 @@ gst_gl_filter_fixate_caps (GstBaseTransform * bt,
+     GstPadDirection direction, GstCaps * caps, GstCaps * othercaps)
+ {
+   GstStructure *ins, *outs;
+-  const GValue *from_par, *to_par;
++  const GValue *from_par, *to_par, *from_fps;
++  gint framerate_num, framerate_den;
+   GValue fpar = { 0, }, tpar = {
+   0,};
+ 
+@@ -271,6 +272,16 @@ gst_gl_filter_fixate_caps (GstBaseTransform * bt,
+   ins = gst_caps_get_structure (caps, 0);
+   outs = gst_caps_get_structure (othercaps, 0);
+ 
++  /* replace frame rate */
++  from_fps = gst_structure_get_value (ins, "framerate");
++  if (from_fps) {
++      gst_structure_set_value (outs, "framerate", from_fps);
++  } else {
++    if (gst_structure_get_fraction (ins, "framerate", &framerate_num, &framerate_den))
++      gst_structure_set (outs, "framerate", GST_TYPE_FRACTION, framerate_num, framerate_den,
++          NULL);
++  }
++
+   from_par = gst_structure_get_value (ins, "pixel-aspect-ratio");
+   to_par = gst_structure_get_value (outs, "pixel-aspect-ratio");
+ 
+-- 
+1.9.1
+

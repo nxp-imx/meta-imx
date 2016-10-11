@@ -1,1 +1,1 @@
-RDEPENDS_${PN}_remove = "fio" 
+RDEPENDS_${PN}_remove = "tiobench"

@@ -1,0 +1,31 @@
+From b90555d05f7c020d75afb7b99c87358d7c72be1c Mon Sep 17 00:00:00 2001
+From: Haihua Hu <b55597@freescale.com>
+Date: Wed, 9 Mar 2016 10:38:24 +0800
+Subject: [PATCH] [glplugin] glupload: crash in glupload with a gst-launch
+ command
+
+Add protection for pointer "vmeta". It crashed when vmeta is NULL.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Haihua Hu <b55597@freescale.com>
+---
+ ext/gl/gstgluploadelement.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ext/gl/gstgluploadelement.c b/ext/gl/gstgluploadelement.c
+index e74da3a..290b279 100644
+--- a/ext/gl/gstgluploadelement.c
++++ b/ext/gl/gstgluploadelement.c
+@@ -236,7 +236,7 @@ gst_gl_upload_element_prepare_output_buffer (GstBaseTransform * bt,
+   /* check if the output buffer's meta format equals to the caps format */
+   GstVideoMeta *vmeta = gst_buffer_get_video_meta(*outbuf);
+   gst_video_info_from_caps (&info, upload->out_caps);
+-  if(vmeta->format != GST_VIDEO_INFO_FORMAT (&info))
++  if(vmeta && vmeta->format != GST_VIDEO_INFO_FORMAT (&info))
+   {
+     caps = gst_caps_copy(upload->out_caps);
+     gst_caps_set_simple (caps, "format", G_TYPE_STRING, 
+-- 
+1.7.9.5
+

@@ -1,0 +1,89 @@
+From 9ee6ec80b80268932a372522ca192168e7812ccf Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <shengjiu.wang@freescale.com>
+Date: Fri, 12 Jun 2015 16:15:08 +0800
+Subject: [PATCH] PCM: snd_pcm_xxxx_drain() maybe blocked after suspend and
+ resume
+
+After suspend and resume, the alsa driver is stopped. But if alsa-lib run
+into snd_pcm_xxxx_drain(), it need to wait avail >= pcm->stop_threshold,
+otherwise, it will not exit the loop, so finally it is blocked at poll() of
+snd_pcm_wait_nocheck(pcm, -1).
+This patch is to add state check after snd_pcm_wait_nocheck(pcm, -1), if
+the state is SND_PCM_STATE_SUSPENDED, then return error.
+
+Upstream-Status: Backport [1.1.0]
+
+Signed-off-by: Shengjiu Wang <shengjiu.wang@freescale.com>
+Signed-off-by: Takashi Iwai <tiwai@suse.de>
+---
+ src/pcm/pcm_dmix.c   | 14 ++++++++++++++
+ src/pcm/pcm_dshare.c | 14 ++++++++++++++
+ 2 files changed, 28 insertions(+)
+
+diff --git a/src/pcm/pcm_dmix.c b/src/pcm/pcm_dmix.c
+index 4acbaf0..58e4975 100644
+--- a/src/pcm/pcm_dmix.c
++++ b/src/pcm/pcm_dmix.c
+@@ -617,6 +617,13 @@ static int snd_pcm_dmix_drain(snd_pcm_t *pcm)
+ 	snd_pcm_uframes_t stop_threshold;
+ 	int err;
+ 
++	switch (snd_pcm_state(dmix->spcm)) {
++	case SND_PCM_STATE_SUSPENDED:
++		return -ESTRPIPE;
++	default:
++		break;
++	}
++
+ 	if (dmix->state == SND_PCM_STATE_OPEN)
+ 		return -EBADFD;
+ 	if (pcm->mode & SND_PCM_NONBLOCK)
+@@ -649,6 +656,13 @@ static int snd_pcm_dmix_drain(snd_pcm_t *pcm)
+ 			snd_pcm_dmix_sync_area(pcm);
+ 			snd_pcm_wait_nocheck(pcm, -1);
+ 			snd_pcm_direct_clear_timer_queue(dmix); /* force poll to wait */
++
++			switch (snd_pcm_state(dmix->spcm)) {
++			case SND_PCM_STATE_SUSPENDED:
++				return -ESTRPIPE;
++			default:
++				break;
++			}
+ 		}
+ 	} while (dmix->state == SND_PCM_STATE_DRAINING);
+ 	pcm->stop_threshold = stop_threshold;
+diff --git a/src/pcm/pcm_dshare.c b/src/pcm/pcm_dshare.c
+index b51758f..02370dc 100644
+--- a/src/pcm/pcm_dshare.c
++++ b/src/pcm/pcm_dshare.c
+@@ -368,6 +368,13 @@ static int snd_pcm_dshare_drain(snd_pcm_t *pcm)
+ 	snd_pcm_uframes_t stop_threshold;
+ 	int err;
+ 
++	switch (snd_pcm_state(dshare->spcm)) {
++	case SND_PCM_STATE_SUSPENDED:
++		return -ESTRPIPE;
++	default:
++		break;
++	}
++
+ 	if (dshare->state == SND_PCM_STATE_OPEN)
+ 		return -EBADFD;
+ 	if (pcm->mode & SND_PCM_NONBLOCK)
+@@ -400,6 +407,13 @@ static int snd_pcm_dshare_drain(snd_pcm_t *pcm)
+ 			snd_pcm_dshare_sync_area(pcm);
+ 			snd_pcm_wait_nocheck(pcm, -1);
+ 			snd_pcm_direct_clear_timer_queue(dshare); /* force poll to wait */
++
++			switch (snd_pcm_state(dshare->spcm)) {
++			case SND_PCM_STATE_SUSPENDED:
++				return -ESTRPIPE;
++			default:
++				break;
++			}
+ 		}
+ 	} while (dshare->state == SND_PCM_STATE_DRAINING);
+ 	pcm->stop_threshold = stop_threshold;
+-- 
+1.9.1
+

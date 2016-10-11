@@ -1,0 +1,83 @@
+From 8b6786fa049e9a5acfd6e7776fe0790c57c9c569 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <b55597@freescale.com>
+Date: Wed, 18 Nov 2015 15:10:22 +0800
+Subject: [PATCH 1/5] [glplugin] Add fps print in glimagesink
+
+In GST-1.6, Pipeline will set start time to 0 when state
+change form PAUSE to READY, so get start time in state change
+PLAYING_PAUSE.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Haihua Hu <b55597@freescale.com>
+---
+ ext/gl/gstglimagesink.c |   15 +++++++++++++++
+ ext/gl/gstglimagesink.h |    4 ++++
+ 2 files changed, 19 insertions(+)
+
+diff --git a/ext/gl/gstglimagesink.c b/ext/gl/gstglimagesink.c
+index 6fc0f9e..60355ec 100644
+--- a/ext/gl/gstglimagesink.c
++++ b/ext/gl/gstglimagesink.c
+@@ -587,6 +587,8 @@ gst_glimage_sink_init (GstGLImageSink * glimage_sink)
+   glimage_sink->overlay_compositor = NULL;
+   glimage_sink->cropmeta = NULL;
+   glimage_sink->prev_cropmeta = NULL;
++  glimage_sink->frame_showed = 0;
++  glimage_sink->run_time = 0;
+ 
+   glimage_sink->mview_output_mode = DEFAULT_MULTIVIEW_MODE;
+   glimage_sink->mview_output_flags = DEFAULT_MULTIVIEW_FLAGS;
+@@ -964,7 +966,10 @@ gst_glimage_sink_change_state (GstElement * element, GstStateChange transition)
+ 
+   switch (transition) {
+     case GST_STATE_CHANGE_PLAYING_TO_PAUSED:
++    {
++      glimage_sink->run_time = gst_element_get_start_time (GST_ELEMENT (glimage_sink));
+       break;
++    }
+     case GST_STATE_CHANGE_PAUSED_TO_READY:
+     {
+       GstBuffer *buf[2];
+@@ -1047,6 +1052,14 @@ gst_glimage_sink_change_state (GstElement * element, GstStateChange transition)
+         g_slice_free(GstVideoCropMeta, glimage_sink->prev_cropmeta);
+       glimage_sink->prev_cropmeta = NULL;
+ 
++      if (glimage_sink->run_time > 0) {
++        g_print ("Total showed frames (%lld), playing for (%"GST_TIME_FORMAT"), fps (%.3f).\n",
++                glimage_sink->frame_showed, GST_TIME_ARGS (glimage_sink->run_time),
++                (gfloat)GST_SECOND * glimage_sink->frame_showed / glimage_sink->run_time);
++      }
++
++      glimage_sink->frame_showed = 0;
++      glimage_sink->run_time = 0;
+       break;
+     default:
+       break;
+@@ -1474,6 +1487,8 @@ gst_glimage_sink_show_frame (GstVideoSink * vsink, GstBuffer * buf)
+     return GST_FLOW_ERROR;
+   }
+ 
++  glimage_sink->frame_showed++;
++
+   return GST_FLOW_OK;
+ 
+ /* ERRORS */
+diff --git a/ext/gl/gstglimagesink.h b/ext/gl/gstglimagesink.h
+index a26ca4b..fa69999 100644
+--- a/ext/gl/gstglimagesink.h
++++ b/ext/gl/gstglimagesink.h
+@@ -120,6 +120,10 @@ struct _GstGLImageSink
+     GstGLStereoDownmix mview_downmix_mode;
+ 
+     GstGLOverlayCompositor *overlay_compositor;
++
++    /* fps print support */
++    guint64 frame_showed;
++    GstClockTime run_time;
+ };
+ 
+ struct _GstGLImageSinkClass
+-- 
+1.7.9.5
+

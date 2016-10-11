@@ -1,4 +1,4 @@
-LA_OPT_BASE_LICENSE v11 February 2016
+LA_OPT_BASE_LICENSE v12 March 2016
 
 IMPORTANT.  Read the following NXP Semiconductor Software License Agreement
 ("Agreement") completely.    By selecting the "I Accept" button at the end of
@@ -23,7 +23,7 @@ of the terms of this Agreement, do not download or install the Licensed
 Software. If you change your mind later, stop using the Licensed Software and
 delete all copies of the Licensed Software in your possession or control. Any
 copies of the Licensed Software that you have already distributed, where
-permitted, and do not estroy will continue to be governed by this Agreement.
+permitted, and do not destroy will continue to be governed by this Agreement.
 Your prior use will also continue to be governed by this Agreement.
 
 1.       DEFINITIONS
@@ -263,8 +263,8 @@ REVENUES, TO THE FULL EXTENT SUCH MAY BE DISCLAIMED BY LAW.  NXP'S TOTAL
 LIABILITY FOR ALL COSTS, DAMAGES, CLAIMS, OR LOSSES WHATSOEVER ARISING OUT OF
 OR IN CONNECTION WITH THIS AGREEMENT OR PRODUCT(S) SUPPLIED UNDER THIS
 AGREEMENT IS LIMITED TO THE AGGREGATE AMOUNT PAID BY YOU TO NXP IN CONNECTION
-WITH THE
-LICENSED SOFTWARE TO WHICH LOSSES OR DAMAGES ARE CLAIMED.
+WITH THE LICENSED SOFTWARE TO WHICH LOSSES OR DAMAGES ARE CLAIMED.
+
 
 13.               EXPORT COMPLIANCE. Each party shall comply with all
 applicable export and import control laws and regulations including but not
@@ -293,10 +293,10 @@ limitation, statutes or regulations that may relate to pricing, quality,
 origin or content.
 
 14.2.          The Licensed Software has been developed at private expense and
-is a "Commercial Item" as defined in 48 C.F.R. Section 2.101, consisting of
+is a "Commercial Item" as defined in 48 C.F.R. §2.101, consisting of
 "Commercial Computer Software", and/or "Commercial Computer Software
-Documentation," as such terms are used in 48 C.F.R. Section 12.212 (or 48 C.F.R.
-Section 227.7202, as applicable) and may only be licensed to or shared with U.S.
+Documentation," as such terms are used in 48 C.F.R. §12.212 (or 48 C.F.R.
+§227.7202, as applicable) and may only be licensed to or shared with U.S.
 Government end users in object code form as part of, or embedded within,
 Authorized Systems.  Any agreement pursuant to which you share the Licensed
 Software will include a provision that reiterates the limitations of this
@@ -337,7 +337,7 @@ the International Sale of Goods will not apply to this document.
 restrictions contained herein, you must treat the Licensed Software as
 confidential information and you agree to retain the Licensed Software in
 confidence perpetually, with respect to Licensed Software in source code form
-(human readable), or for a period of five (5) years from the date of 
+(human readable), or for a period of five (5) years from the date of
 termination of this Agreement, with respect to all other parts of the Licensed
 Software.  During this period, you may not disclose any part of the Licensed
 Software to anyone other than employees who have a need to know of the Licensed
@@ -387,9 +387,12 @@ disclosed by such examination or audit.
 this Agreement will be made in writing, and will be effective when received
 at the following addresses:
 
-NXP:                   NXP Semiconductor, Inc.
+NXP:                   Freescale Semiconductor, Inc.
+
                                     6501 William Cannon West    OE62
+
                                     Austin, Texas 78735
+
                                     ATTN: Legal Department
                 You:   The address provided at registration will be used.
 
@@ -542,15 +545,15 @@ circumstance, even by a signed written amendment to this Agreement.
 Opus
 
 Use of Opus software must be consistent with the terms of the Opus license
-which can be found at: http://www.opus-codec.org/license/
+which can be found at: {http://www.opus-codec.org/license/}
 
-Real Networks - its GStreamer Optimized Real Format Client Code
-implementation or OpenMax Optimized Real Format Client Code
+Real Networks - its GStreamer Optimized Real Format Client Code implementation
+or OpenMax Optimized Real Format Client Code
 
 Use of the GStreamer Optimized Real Format Client Code, or OpenMax Optimized
-Real Format Client code is restricted to applications in the automotive
-market.  Licensee must be a final manufacturer in good standing with a current
-license with Real Networks for the commercial use and distribution of products
+Real Format Client code is restricted to applications in the automotive market.
+Licensee must be a final manufacturer in good standing with a current license
+with Real Networks for the commercial use and distribution of products
 containing the GStreamer Optimized Real Format Client Code implementation or
 OpenMax Optimized Real Format Client Code
 
@@ -587,3 +590,20 @@ Vivante
 
 Distribution of Vivante software must be a part of, or embedded within,
 Authorized Systems that include a Vivante Graphics Processing Unit.
+
+
+Synopsys/Target Compiler Technologies
+
+
+Your use of the Synopsys/Target Compiler Technologies Licensed Software
+and related documentation is subject to the following:
+
+-             Duration of the license for the Licensed Software is limited to
+12 months, unless otherwise specified in the license file.
+
+-             The Licensed Software is usable by one user at a time on a single
+ designated computer, unless otherwise agreed by Synopsys.
+
+-             Licensed Software and documentation are to be used only on a
+designated computer at the designated physical address provided by you on the
+APEX license form.

@@ -1,0 +1,62 @@
+From 85b1ac94e34fcd3ebf2e4cedb48313c1189dc61d Mon Sep 17 00:00:00 2001
+From: Lyon Wang <lyon.wang@freescale.com>
+Date: Fri, 29 May 2015 09:54:56 +0800
+Subject: [PATCH 05/10] modifiy the videoparse rank
+
+- Modify the videparsers rank down to avoid link them in
+. h263parse rank down to 63
+. h264parse rank down to 63
+. mpegvideoparse rank down to 63
+. mpeg4videpparse rank down to 63
+. pngparse, rank down to 63
+. h265parse rank down to 63
+
+Upstream-Status:  [i.MX specific] internal use only
+
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
+---
+ gst/videoparsers/plugin.c | 21 +++++++++++++++++++--
+ 1 file changed, 19 insertions(+), 2 deletions(-)
+
+diff --git a/gst/videoparsers/plugin.c b/gst/videoparsers/plugin.c
+index 79d1df6..c070b93 100644
+--- a/gst/videoparsers/plugin.c
++++ b/gst/videoparsers/plugin.c
+@@ -35,7 +35,7 @@ static gboolean
+ plugin_init (GstPlugin * plugin)
+ {
+   gboolean ret = FALSE;
+-
++#if 0
+   ret |= gst_element_register (plugin, "h263parse",
+       GST_RANK_PRIMARY + 1, GST_TYPE_H263_PARSE);
+   ret |= gst_element_register (plugin, "h264parse",
+@@ -52,7 +52,24 @@ plugin_init (GstPlugin * plugin)
+       GST_RANK_SECONDARY, GST_TYPE_H265_PARSE);
+   ret |= gst_element_register (plugin, "vc1parse",
+       GST_RANK_NONE, GST_TYPE_VC1_PARSE);
+-
++#else
++  ret |= gst_element_register (plugin, "h263parse",
++      GST_RANK_MARGINAL - 1, GST_TYPE_H263_PARSE);
++  ret |= gst_element_register (plugin, "h264parse",
++      GST_RANK_MARGINAL - 1, GST_TYPE_H264_PARSE);
++  ret |= gst_element_register (plugin, "diracparse",
++      GST_RANK_NONE, GST_TYPE_DIRAC_PARSE);
++  ret |= gst_element_register (plugin, "mpegvideoparse",
++      GST_RANK_MARGINAL - 1, GST_TYPE_MPEGVIDEO_PARSE);
++  ret |= gst_element_register (plugin, "mpeg4videoparse",
++      GST_RANK_MARGINAL -1, GST_TYPE_MPEG4VIDEO_PARSE);
++  ret |= gst_element_register (plugin, "pngparse",
++      GST_RANK_MARGINAL-1, GST_TYPE_PNG_PARSE);
++  ret |= gst_element_register (plugin, "h265parse",
++      GST_RANK_MARGINAL-1, GST_TYPE_H265_PARSE);
++  ret |= gst_element_register (plugin, "vc1parse",
++      GST_RANK_NONE, GST_TYPE_VC1_PARSE);
++#endif
+   return ret;
+ }
+ 
+-- 
+1.9.1
+

@@ -2,7 +2,7 @@
 #
 # FSL Build Enviroment Setup Script
 #
-# Copyright (C) 2011-2013 Freescale Semiconductor
+# Copyright (C) 2011-2015 Freescale Semiconductor
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -189,7 +189,7 @@ fi
 
 
 META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-bsp"
-echo "##Freescale Yocto Release layer" >> $BUILD_DIR/conf/bblayers.conf
+echo "##Freescale Yocto Project Release layer" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-bsp \"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-sdk \"" >> $BUILD_DIR/conf/bblayers.conf
 
@@ -199,20 +199,19 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-networking \"" >>
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-python \"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-ruby \"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-filesystems \"" >> $BUILD_DIR/conf/bblayers.conf
+echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-xfce \"" >> $BUILD_DIR/conf/bblayers.conf
 
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-qt5 \"" >> $BUILD_DIR/conf/bblayers.conf
 
 echo BSPDIR=$BSPDIR
 echo BUILD_DIR=$BUILD_DIR
+
+# Support integrating community meta-freescale instead of meta-fsl-arm
 if [ -d ../sources/meta-freescale ]; then
     echo meta-freescale directory found
     # Change settings according to environment
-    sed -e "s,meta-fsl-arm\s,meta-freescale ,g" \
-        -i conf/bblayers.conf
-    sed -e "s,LAYERDEPENDS\s,#LAYERDEPENDS,g" \
-        -i ../sources/meta-fsl-arm-extra/conf/layer.conf
-    sed -e "s,..BSPDIR./sources/meta-fsl-arm-extra\s, ,g" \
-        -i conf/bblayers.conf
+    sed -e "s,meta-fsl-arm\s,meta-freescale ,g" -i conf/bblayers.conf
+    sed -e "s,\$.BSPDIR./sources/meta-fsl-arm-extra\s,,g" -i conf/bblayers.conf
 fi
 
 cd  $BUILD_DIR

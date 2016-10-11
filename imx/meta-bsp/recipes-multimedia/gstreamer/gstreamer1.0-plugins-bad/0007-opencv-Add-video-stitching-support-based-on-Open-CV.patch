@@ -1,0 +1,1916 @@
+From a2a7f25eba91b429a26fd5347007420e258676de Mon Sep 17 00:00:00 2001
+From: Song Bing <b06498@freescale.com>
+Date: Mon, 1 Jun 2015 13:30:11 +0800
+Subject: [PATCH 07/10] opencv: Add video stitching support based on Open CV
+
+Add video stitching element based on Open CV.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=751203
+Upstream-Status: Waiting for review
+---
+ docs/plugins/Makefile.am         |   1 +
+ ext/opencv/Makefile.am           |  12 +-
+ ext/opencv/gstcvstitching.cpp    | 834 +++++++++++++++++++++++++++++++++++++++
+ ext/opencv/gstcvstitching.h      | 130 ++++++
+ ext/opencv/gstopencv.cpp         |   4 +
+ ext/opencv/gstopencvaggregator.c | 705 +++++++++++++++++++++++++++++++++
+ ext/opencv/gstopencvaggregator.h | 118 ++++++
+ 7 files changed, 1803 insertions(+), 1 deletion(-)
+ create mode 100644 ext/opencv/gstcvstitching.cpp
+ create mode 100644 ext/opencv/gstcvstitching.h
+ create mode 100644 ext/opencv/gstopencvaggregator.c
+ create mode 100644 ext/opencv/gstopencvaggregator.h
+
+diff --git a/docs/plugins/Makefile.am b/docs/plugins/Makefile.am
+index c431f78..d96ace8 100644
+--- a/docs/plugins/Makefile.am
++++ b/docs/plugins/Makefile.am
+@@ -97,6 +97,7 @@ EXTRA_HFILES = \
+ 	$(top_srcdir)/ext/opencv/gstpyramidsegment.h \
+ 	$(top_srcdir)/ext/opencv/gsttemplatematch.h \
+ 	$(top_srcdir)/ext/opencv/gsttextoverlay.h \
++	$(top_srcdir)/ext/opencv/gstcvstitching.h \
+ 	$(top_srcdir)/ext/openni2/gstopenni2src.h \
+ 	$(top_srcdir)/ext/rsvg/gstrsvgdec.h \
+ 	$(top_srcdir)/ext/rsvg/gstrsvgoverlay.h \
+diff --git a/ext/opencv/Makefile.am b/ext/opencv/Makefile.am
+index 72472fb..66c5786 100644
+--- a/ext/opencv/Makefile.am
++++ b/ext/opencv/Makefile.am
+@@ -24,10 +24,15 @@ libgstopencv_la_SOURCES = gstopencv.cpp \
+ 			gstsegmentation.cpp \
+ 			gstgrabcut.cpp \
+ 			gstdisparity.cpp \
++			gstopencvaggregator.c \
++			gstcvstitching.cpp \
+ 			motioncells_wrapper.cpp \
+ 			MotionCells.cpp
+ 
+-libgstopencv_la_CXXFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) $(GST_CXXFLAGS) $(OPENCV_CFLAGS)
++libgstopencv_la_CXXFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) \
++	$(GST_CXXFLAGS) $(OPENCV_CFLAGS) \
++	-I$(top_srcdir)/gst-libs \
++	-I$(top_builddir)/gst-libs
+ 
+ # flags used to compile this facedetect
+ # add other _CFLAGS and _LIBS as needed
+@@ -36,11 +41,14 @@ libgstopencv_la_CXXFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) $(GST_C
+ # OpenCV's define isn't good enough to avoid 'unused' gcc warnings (at v2.1.0)
+ libgstopencv_la_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) \
+ 	$(GST_CFLAGS) $(OPENCV_CFLAGS) \
++	-I$(top_srcdir)/gst-libs \
++	-I$(top_builddir)/gst-libs \
+ 	-DGST_HAAR_CASCADES_DIR=\"$(pkgdatadir)/@GST_API_VERSION@/opencv_haarcascades\" \
+ 	-DCV_INLINE="static inline" \
+ 	-DCV_NO_BACKWARD_COMPATIBILITY
+ 
+ libgstopencv_la_LIBADD = $(GST_LIBS) $(GST_BASE_LIBS) $(OPENCV_LIBS) \
++			$(top_builddir)/gst-libs/gst/video/libgstbadvideo-$(GST_API_VERSION).la \
+ 			$(GSTPB_BASE_LIBS) -lgstvideo-$(GST_API_VERSION)
+ 
+ libgstopencv_la_LDFLAGS = $(GST_PLUGIN_LDFLAGS)
+@@ -67,6 +75,8 @@ noinst_HEADERS = gstopencvvideofilter.h gstopencvutils.h \
+ 		gstsegmentation.h \
+ 		gstgrabcut.h \
+ 		gstdisparity.h \
++		gstopencvaggregator.h \
++		gstcvstitching.h \
+ 		gstmotioncells.h \
+ 		motioncells_wrapper.h \
+ 		MotionCells.h
+diff --git a/ext/opencv/gstcvstitching.cpp b/ext/opencv/gstcvstitching.cpp
+new file mode 100644
+index 0000000..47105f7
+--- /dev/null
++++ b/ext/opencv/gstcvstitching.cpp
+@@ -0,0 +1,834 @@
++/*
++ * GStreamer
++ * Copyright (C) 2015 Song Bing <b06498@freescale.com>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ *
++ * Alternatively, the contents of this file may be used under the
++ * GNU Lesser General Public License Version 2.1 (the "LGPL"), in
++ * which case the following provisions apply instead of the ones
++ * mentioned above:
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++/**
++ * SECTION:element-cvstitching
++ *
++ * video or image stitching.
++ *
++ * video or image stitching.
++ *
++ * <refsect2>
++ * <title>Example launch line</title>
++ * |[
++ * gst-launch-1.0 filesrc  location=IMG_20150529_152901.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152907.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. cvstitching name=stitcher stitcher.src ! videoconvert ! ximagesink sync=false
++ * ]| image stitching.
++ * |[
++ * gst-launch-1.0 filesrc location=IMG_20150529_152901.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152907.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152913.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152918.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152924.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152929.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152933.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152938.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152942.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152947.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. filesrc location=IMG_20150529_152951.jpg ! jpegdec ! videoconvert ! imagefreeze ! stitcher. cvstitching name=stitcher stitcher.src ! videoconvert ! ximagesink sync=false
++ * ]| images stitching.
++ *
++ * </refsect2>
++ */
++
++#ifdef HAVE_CONFIG_H
++#  include <config.h>
++#endif
++
++#include "gstopencvutils.h"
++#include "gstcvstitching.h"
++
++// default settings.
++bool preview = false;
++bool try_gpu = false;
++double work_megapix = 0.6;
++double seam_megapix = 0.1;
++double compose_megapix = -1;
++float conf_thresh = 1.f;
++string ba_refine_mask = "xxxxx";
++bool do_wave_correct = true;
++WaveCorrectKind wave_correct = detail::WAVE_CORRECT_HORIZ;
++int expos_comp_type = ExposureCompensator::GAIN_BLOCKS;
++float match_conf = 0.3f;
++int blend_type = Blender::MULTI_BAND;
++float blend_strength = 5;
++
++#define gst_cv_stitching_parent_class parent_class
++
++#define GST_CAT_DEFAULT gst_cv_stitching_debug
++GST_DEBUG_CATEGORY_STATIC (GST_CAT_DEFAULT);
++
++#define DEFAULT_FEATURE_TYPE 0
++#define DEFAULT_WARP_TYPE 0
++#define DEFAULT_SEAM_FIND 0
++#define DEFAULT_BA_COST_FUNC 0
++enum
++{
++  PROP_0,
++  PROP_FEATURE_TYPE,
++  PROP_WARP_TYPE,
++  PROP_SEAM_FIND_TYPE,
++  PROP_BA_COST_FUNC
++};
++
++static GstStaticPadTemplate sink_factory = GST_STATIC_PAD_TEMPLATE ("sink_%u",
++    GST_PAD_SINK,
++    GST_PAD_REQUEST,
++    GST_STATIC_CAPS (GST_VIDEO_CAPS_MAKE ("RGB"))
++    );
++
++static GstStaticPadTemplate src_factory = GST_STATIC_PAD_TEMPLATE ("src",
++    GST_PAD_SRC,
++    GST_PAD_ALWAYS,
++    GST_STATIC_CAPS (GST_VIDEO_CAPS_MAKE ("RGB"))
++    );
++
++G_DEFINE_TYPE (GstCvStitching, gst_cv_stitching, GST_TYPE_OPENCV_AGGREGATOR);
++
++G_DEFINE_TYPE (GstCvStitchingPad, gst_cv_stitching_pad,
++    GST_TYPE_OPENCV_AGGREGATOR_PAD);
++
++static void gst_cv_stitching_pad_set_property (GObject * object,
++    guint prop_id, const GValue * value, GParamSpec * pspec);
++static void gst_cv_stitching_pad_get_property (GObject * object,
++    guint prop_id, GValue * value, GParamSpec * pspec);
++
++enum
++{
++  PROP_PAD_0,
++};
++
++static void
++gst_cv_stitching_pad_class_init (GstCvStitchingPadClass * klass)
++{
++  GObjectClass *gobject_class = (GObjectClass *) klass;
++
++  gobject_class->set_property = gst_cv_stitching_pad_set_property;
++  gobject_class->get_property = gst_cv_stitching_pad_get_property;
++}
++
++static void
++gst_cv_stitching_pad_init (GstCvStitchingPad * pad)
++{
++}
++
++static void
++gst_cv_stitching_pad_get_property (GObject * object, guint prop_id,
++    GValue * value, GParamSpec * pspec)
++{
++  switch (prop_id) {
++    default:
++      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
++      break;
++  }
++}
++
++static void
++gst_cv_stitching_pad_set_property (GObject * object, guint prop_id,
++    const GValue * value, GParamSpec * pspec)
++{
++  switch (prop_id) {
++    default:
++      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
++      break;
++  }
++}
++
++static void gst_cv_stitching_set_property (GObject * object, guint prop_id,
++    const GValue * value, GParamSpec * pspec);
++static void gst_cv_stitching_get_property (GObject * object, guint prop_id,
++    GValue * value, GParamSpec * pspec);
++static gboolean gst_cv_stitching_start (GstAggregator * agg);
++static gboolean gst_cv_stitching_stop (GstAggregator * agg);
++static gboolean
++gst_cv_stitching_process (GstOpencvAggregator * agg, GPtrArray *imgs,
++        IplImage *outimg);
++
++enum _GstCvStitchingFeatureTypes {
++  GST_CV_STITCHING_FEATURE_TYPES_SURF = 0,
++  GST_CV_STITCHING_FEATURE_TYPES_ORB = 1
++};
++
++#define GST_TYPE_CV_STITCHING_FEATURE_TYPES (cv_stitching_feature_type_get_type ())
++
++static GType
++cv_stitching_feature_type_get_type (void)
++{
++  static GType cv_stitching_feature_type_type = 0;
++  static const GEnumValue cv_stitching_feature_type[] = {
++    {GST_CV_STITCHING_FEATURE_TYPES_SURF, "feature type surf", "surf"},
++    {GST_CV_STITCHING_FEATURE_TYPES_ORB, "feature type surf", "orb"},
++    {0, NULL, NULL},
++  };
++
++  if (!cv_stitching_feature_type_type) {
++    cv_stitching_feature_type_type =
++      g_enum_register_static ("GstCvStitchingFeatureTypes", cv_stitching_feature_type);
++  }
++  return cv_stitching_feature_type_type;
++}
++
++enum _GstCvStitchingWarpTypes {
++  GST_CV_STITCHING_WARP_TYPES_PLANE = 0,
++  GST_CV_STITCHING_WARP_TYPES_CYLINDRICAL = 1,
++  GST_CV_STITCHING_WARP_TYPES_SPHERICAL = 2,
++  GST_CV_STITCHING_WARP_TYPES_FISHEYE = 3,
++  GST_CV_STITCHING_WARP_TYPES_STEREOGRAPHIC = 4,
++  GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEA2B1 = 5,
++  GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEA1_5B1 = 6,
++  GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEPORTRAITA2B1 = 7,
++  GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEPORTRAITA1_5B1 = 8,
++  GST_CV_STITCHING_WARP_TYPES_PANINIA2B1 = 9,
++  GST_CV_STITCHING_WARP_TYPES_PANINIA1_5B1 = 10,
++  GST_CV_STITCHING_WARP_TYPES_PANINIPORTRAITA2B1 = 11,
++  GST_CV_STITCHING_WARP_TYPES_PANINIPORTRAITA1_5B1 = 12,
++  GST_CV_STITCHING_WARP_TYPES_MERCATOR = 13,
++  GST_CV_STITCHING_WARP_TYPES_TRANSVERSEMERCATOR = 14
++};
++
++#define GST_TYPE_CV_STITCHING_WARP_TYPES (cv_stitching_warp_type_get_type ())
++
++static GType
++cv_stitching_warp_type_get_type (void)
++{
++  static GType cv_stitching_warp_type_type = 0;
++  static const GEnumValue cv_stitching_warp_type[] = {
++    {GST_CV_STITCHING_WARP_TYPES_PLANE, "warp type plane", "plane"},
++    {GST_CV_STITCHING_WARP_TYPES_CYLINDRICAL, "warp type cylindrical", "cylindrical"},
++    {GST_CV_STITCHING_WARP_TYPES_SPHERICAL, "warp type spherical", "spherical"},
++    {GST_CV_STITCHING_WARP_TYPES_FISHEYE, "warp type fisheye", "fisheye"},
++    {GST_CV_STITCHING_WARP_TYPES_STEREOGRAPHIC, "warp type stereographic", "stereographic"},
++    {GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEA2B1, "warp type compressedPlaneA2B1", "compressedPlaneA2B1"},
++    {GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEA1_5B1, "warp type compressedPlaneA1.5B1", "compressedPlaneA1.5B1"},
++    {GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEPORTRAITA2B1, "warp type compressedPlanePortraitA2B1", "compressedPlanePortraitA2B1"},
++    {GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEPORTRAITA1_5B1, "warp type compressedPlanePortraitA1.5B1", "compressedPlanePortraitA1.5B1"},
++    {GST_CV_STITCHING_WARP_TYPES_PANINIA2B1, "warp type paniniA2B1", "paniniA2B1"},
++    {GST_CV_STITCHING_WARP_TYPES_PANINIA1_5B1, "warp type paniniA1.5B1", "paniniA1.5B1"},
++    {GST_CV_STITCHING_WARP_TYPES_PANINIPORTRAITA2B1, "warp type paniniPortraitA2B1", "paniniPortraitA2B1"},
++    {GST_CV_STITCHING_WARP_TYPES_PANINIPORTRAITA1_5B1, "warp type paniniPortraitA1.5B1", "paniniPortraitA1.5B1"},
++    {GST_CV_STITCHING_WARP_TYPES_MERCATOR, "warp type mercator", "mercator"},
++    {GST_CV_STITCHING_WARP_TYPES_TRANSVERSEMERCATOR, "warp type transverseMercator", "transverseMercator"},
++    {0, NULL, NULL},
++  };
++
++  if (!cv_stitching_warp_type_type) {
++    cv_stitching_warp_type_type =
++      g_enum_register_static ("GstCvStitchingWarpTypes", cv_stitching_warp_type);
++  }
++  return cv_stitching_warp_type_type;
++}
++
++enum _GstCvStitchingSeamFindTypes {
++  GST_CV_STITCHING_SEAM_FIND_TYPES_NO = 0,
++  GST_CV_STITCHING_SEAM_FIND_TYPES_VORONOI = 1,
++  GST_CV_STITCHING_SEAM_FIND_TYPES_GC_COLOR = 2,
++  GST_CV_STITCHING_SEAM_FIND_TYPES_GC_COLORGRAD = 3,
++  GST_CV_STITCHING_SEAM_FIND_TYPES_DP_COLOR = 4,
++  GST_CV_STITCHING_SEAM_FIND_TYPES_DP_COLORGRAD = 5
++};
++
++#define GST_TYPE_CV_STITCHING_SEAM_FIND_TYPES (cv_stitching_seam_find_type_get_type ())
++
++static GType
++cv_stitching_seam_find_type_get_type (void)
++{
++  static GType cv_stitching_seam_find_type_type = 0;
++  static const GEnumValue cv_stitching_seam_find_type[] = {
++    {GST_CV_STITCHING_SEAM_FIND_TYPES_NO, "seam_find type no", "no"},
++    {GST_CV_STITCHING_SEAM_FIND_TYPES_VORONOI, "seam_find type voronoi", "voronoi"},
++    {GST_CV_STITCHING_SEAM_FIND_TYPES_GC_COLOR, "seam_find type gc_color", "gc_color"},
++    {GST_CV_STITCHING_SEAM_FIND_TYPES_GC_COLORGRAD, "seam_find type gc_colorgrad", "gc_colorgrad"},
++    {GST_CV_STITCHING_SEAM_FIND_TYPES_DP_COLOR, "seam_find type dp_color", "dp_color"},
++    {GST_CV_STITCHING_SEAM_FIND_TYPES_DP_COLORGRAD, "seam_find type dp_colorgrad", "dp_colorgrad"},
++    {0, NULL, NULL},
++  };
++
++  if (!cv_stitching_seam_find_type_type) {
++    cv_stitching_seam_find_type_type =
++      g_enum_register_static ("GstCvStitchingSeamFindTypes", cv_stitching_seam_find_type);
++  }
++  return cv_stitching_seam_find_type_type;
++}
++
++enum _GstCvStitchingBACostFuncs {
++  GST_CV_STITCHING_BA_COST_FUNCS_REPROJ = 0,
++  GST_CV_STITCHING_BA_COST_FUNCS_RAY = 1
++};
++
++#define GST_TYPE_CV_STITCHING_BA_COST_FUNCS (cv_stitching_ba_cost_func_get_type ())
++
++static GType
++cv_stitching_ba_cost_func_get_type (void)
++{
++  static GType cv_stitching_ba_cost_func_type = 0;
++  static const GEnumValue cv_stitching_ba_cost_func[] = {
++    {GST_CV_STITCHING_BA_COST_FUNCS_REPROJ, "ba cost func reproj", "reproj"},
++    {GST_CV_STITCHING_BA_COST_FUNCS_RAY, "ba cost func ray", "ray"},
++    {0, NULL, NULL},
++  };
++
++  if (!cv_stitching_ba_cost_func_type) {
++    cv_stitching_ba_cost_func_type =
++      g_enum_register_static ("GstCvStitchingBACostFuncs", cv_stitching_ba_cost_func);
++  }
++  return cv_stitching_ba_cost_func_type;
++}
++
++static void
++gst_cv_stitching_class_init (GstCvStitchingClass * klass)
++{
++  GObjectClass *gobject_class;
++  GstElementClass *element_class;
++  GstAggregatorClass *agg_class = (GstAggregatorClass *) klass;
++  GstOpencvAggregatorClass *cvagg_class = (GstOpencvAggregatorClass *) klass;
++
++  gobject_class = (GObjectClass *) klass;
++  element_class = GST_ELEMENT_CLASS (klass);
++
++  gobject_class->set_property = gst_cv_stitching_set_property;
++  gobject_class->get_property = gst_cv_stitching_get_property;
++
++  gst_element_class_add_pad_template (element_class,
++      gst_static_pad_template_get (&src_factory));
++  gst_element_class_add_pad_template (element_class,
++      gst_static_pad_template_get (&sink_factory));
++
++  g_object_class_install_property (gobject_class, PROP_FEATURE_TYPE,
++      g_param_spec_enum ("feturetypes", "Featuretypes", "match feature type",
++        GST_TYPE_CV_STITCHING_FEATURE_TYPES, DEFAULT_FEATURE_TYPE,
++        G_PARAM_READWRITE));
++  g_object_class_install_property (gobject_class, PROP_WARP_TYPE,
++      g_param_spec_enum ("warptypes", "Warptypes", "Warp type",
++        GST_TYPE_CV_STITCHING_WARP_TYPES, DEFAULT_WARP_TYPE,
++        G_PARAM_READWRITE));
++  g_object_class_install_property (gobject_class, PROP_SEAM_FIND_TYPE,
++      g_param_spec_enum ("seamfindtypes", "Seamfindtypes", "Seam find type",
++        GST_TYPE_CV_STITCHING_SEAM_FIND_TYPES, DEFAULT_SEAM_FIND,
++        G_PARAM_READWRITE));
++  g_object_class_install_property (gobject_class, PROP_BA_COST_FUNC,
++      g_param_spec_enum ("bacostfuncs", "Bacostfuncs", "Ba cost func",
++        GST_TYPE_CV_STITCHING_BA_COST_FUNCS, DEFAULT_BA_COST_FUNC,
++        G_PARAM_READWRITE));
++
++  gst_element_class_set_metadata (element_class, "OpenCV video_stitcher",
++      "Aggregator/VideoAggregator/CvStitching", "OpenCV video_stitcher",
++      "Song Bing <b06498@freescale.com>");
++
++  agg_class->start = gst_cv_stitching_start;
++  agg_class->stop = gst_cv_stitching_stop;
++
++  cvagg_class->GstOpencvAggregatorProcess = gst_cv_stitching_process;
++
++  agg_class->sinkpads_type = GST_TYPE_CV_STITCHING_PAD;
++}
++
++static void
++gst_cv_stitching_init (GstCvStitching * stitcher)
++{
++  stitcher->features_type = DEFAULT_FEATURE_TYPE;
++  stitcher->warp_type = DEFAULT_WARP_TYPE;
++  stitcher->seam_find_type = DEFAULT_SEAM_FIND;
++  stitcher->ba_cost_func = DEFAULT_BA_COST_FUNC;
++}
++
++static void
++gst_cv_stitching_set_property (GObject * object, guint prop_id,
++    const GValue * value, GParamSpec * pspec)
++{
++  GstCvStitching *stitcher = GST_CV_STITCHING (object);
++
++  switch (prop_id) {
++    case PROP_FEATURE_TYPE:
++      stitcher->features_type = g_value_get_enum (value);
++      break;
++    case PROP_WARP_TYPE:
++      stitcher->warp_type = g_value_get_enum (value);
++      break;
++     case PROP_SEAM_FIND_TYPE:
++      stitcher->seam_find_type = g_value_get_enum (value);
++      break;
++     case PROP_BA_COST_FUNC:
++      stitcher->ba_cost_func = g_value_get_enum (value);
++      break;
++    default:
++      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
++      break;
++  }
++}
++
++static void
++gst_cv_stitching_get_property (GObject * object, guint prop_id,
++    GValue * value, GParamSpec * pspec)
++{
++  GstCvStitching *stitcher = GST_CV_STITCHING (object);
++
++  switch (prop_id) {
++    case PROP_FEATURE_TYPE:
++      g_value_set_enum (value, stitcher->features_type);
++      break;
++    case PROP_WARP_TYPE:
++      g_value_set_enum (value, stitcher->warp_type);
++      break;
++     case PROP_SEAM_FIND_TYPE:
++      g_value_set_enum (value, stitcher->seam_find_type);
++      break;
++     case PROP_BA_COST_FUNC:
++      g_value_set_enum (value, stitcher->ba_cost_func);
++      break;
++    default:
++      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
++      break;
++  }
++}
++
++static gboolean
++gst_cv_stitching_start (GstAggregator * agg)
++{
++  GstCvStitching *stitcher = GST_CV_STITCHING (agg);
++
++  if (!GST_AGGREGATOR_CLASS (parent_class)->start (agg))
++    return FALSE;
++
++  if (stitcher->features_type == GST_CV_STITCHING_FEATURE_TYPES_SURF) {
++      stitcher->finder = new SurfFeaturesFinder();
++  } else if (stitcher->features_type == GST_CV_STITCHING_FEATURE_TYPES_ORB) {
++    stitcher->finder = new OrbFeaturesFinder();
++  } else {
++    GST_ERROR_OBJECT (stitcher, "Unknown 2D features type: %d", stitcher->features_type);
++    return FALSE;
++  }
++
++  if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_PLANE)
++    stitcher->warper_creator = new cv::PlaneWarper();
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_CYLINDRICAL)
++    stitcher->warper_creator = new cv::CylindricalWarper();
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_SPHERICAL)
++    stitcher->warper_creator = new cv::SphericalWarper();
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_FISHEYE)
++    stitcher->warper_creator = new cv::FisheyeWarper();
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_STEREOGRAPHIC)
++    stitcher->warper_creator = new cv::StereographicWarper();
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEA2B1)
++    stitcher->warper_creator = new cv::CompressedRectilinearWarper(2, 1);
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEA1_5B1)
++    stitcher->warper_creator = new cv::CompressedRectilinearWarper(1.5, 1);
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEPORTRAITA2B1)
++    stitcher->warper_creator = new cv::CompressedRectilinearPortraitWarper(2, 1);
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_COMPRESSEDPLANEPORTRAITA1_5B1)
++    stitcher->warper_creator = new cv::CompressedRectilinearPortraitWarper(1.5, 1);
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_PANINIA2B1)
++    stitcher->warper_creator = new cv::PaniniWarper(2, 1);
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_PANINIA1_5B1)
++    stitcher->warper_creator = new cv::PaniniWarper(1.5, 1);
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_PANINIPORTRAITA2B1)
++    stitcher->warper_creator = new cv::PaniniPortraitWarper(2, 1);
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_PANINIPORTRAITA1_5B1)
++    stitcher->warper_creator = new cv::PaniniPortraitWarper(1.5, 1);
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_MERCATOR)
++    stitcher->warper_creator = new cv::MercatorWarper();
++  else if (stitcher->warp_type == GST_CV_STITCHING_WARP_TYPES_TRANSVERSEMERCATOR)
++    stitcher->warper_creator = new cv::TransverseMercatorWarper();
++  if (stitcher->warper_creator.empty()) {
++    GST_ERROR_OBJECT (stitcher, "Can't create the following warper: %d",
++        stitcher->warp_type);
++    return FALSE;
++  }
++
++  if (stitcher->seam_find_type == GST_CV_STITCHING_SEAM_FIND_TYPES_NO)
++    stitcher->seam_finder = new detail::NoSeamFinder();
++  else if (stitcher->seam_find_type == GST_CV_STITCHING_SEAM_FIND_TYPES_VORONOI)
++    stitcher->seam_finder = new detail::VoronoiSeamFinder();
++  else if (stitcher->seam_find_type == GST_CV_STITCHING_SEAM_FIND_TYPES_GC_COLOR) {
++    stitcher->seam_finder = new detail::GraphCutSeamFinder(GraphCutSeamFinderBase::COST_COLOR);
++  } else if (stitcher->seam_find_type == GST_CV_STITCHING_SEAM_FIND_TYPES_GC_COLORGRAD) {
++    stitcher->seam_finder = new detail::GraphCutSeamFinder(GraphCutSeamFinderBase::COST_COLOR_GRAD);
++  } else if (stitcher->seam_find_type == GST_CV_STITCHING_SEAM_FIND_TYPES_DP_COLOR)
++    stitcher->seam_finder = new detail::DpSeamFinder(DpSeamFinder::COLOR);
++  else if (stitcher->seam_find_type == GST_CV_STITCHING_SEAM_FIND_TYPES_DP_COLORGRAD)
++    stitcher->seam_finder = new detail::DpSeamFinder(DpSeamFinder::COLOR_GRAD);
++  if (stitcher->seam_finder.empty()) {
++    GST_ERROR_OBJECT (stitcher, "Can't create the following seam finder: %d",
++        stitcher->seam_find_type);
++    return FALSE;
++  }
++
++  if (stitcher->ba_cost_func == GST_CV_STITCHING_BA_COST_FUNCS_REPROJ)
++    stitcher->adjuster = new detail::BundleAdjusterReproj();
++  else if (stitcher->ba_cost_func == GST_CV_STITCHING_BA_COST_FUNCS_RAY)
++    stitcher->adjuster = new detail::BundleAdjusterRay();
++  else {
++    GST_ERROR_OBJECT (stitcher, "Unknown bundle adjustment cost function: %d",
++        stitcher->ba_cost_func);
++    return FALSE;
++  }
++
++  return TRUE;
++}
++
++static gboolean
++gst_cv_stitching_stop (GstAggregator * agg)
++{
++  GstCvStitching *stitcher = GST_CV_STITCHING (agg);
++
++  stitcher->finder.release();
++  stitcher->warper_creator.release();
++  stitcher->seam_finder.release();
++  stitcher->adjuster.release();
++
++  return GST_AGGREGATOR_CLASS (parent_class)->stop (agg);
++}
++
++static gboolean
++gst_cv_stitching_process (GstOpencvAggregator * agg, GPtrArray *imgs,
++        IplImage *outimg)
++{
++  GstCvStitching *stitcher = GST_CV_STITCHING (agg);
++  int64 app_start_time = getTickCount();
++
++  GST_LOG_OBJECT (stitcher, "video stitching process");
++  int num_images = imgs->len;
++  if (num_images < 2) {
++    GST_ERROR_OBJECT (stitcher, "Need more images");
++    return FALSE;
++  }
++
++  double work_scale = 1, seam_scale = 1, compose_scale = 1;
++  bool is_work_scale_set = false, is_seam_scale_set = false, is_compose_scale_set = false;
++
++  GST_LOG_OBJECT (stitcher, "Finding features...");
++  int64 t = getTickCount();
++
++  Mat full_img, img;
++  vector<ImageFeatures> features(num_images);
++  vector<Mat> images(num_images);
++  vector<Size> full_img_sizes(num_images);
++  double seam_work_aspect = 1;
++
++  for (int i = 0; i < num_images; ++i) {
++    IplImage *cvImage = (IplImage *) g_ptr_array_index (imgs, i);
++    Mat in_mat(cvImage, false);
++
++    full_img = in_mat;
++    full_img_sizes[i] = full_img.size();
++
++    if (full_img.empty()) {
++      GST_ERROR_OBJECT (stitcher, "No input data");
++      return FALSE;
++    }
++    if (work_megapix < 0) {
++      img = full_img;
++      work_scale = 1;
++      is_work_scale_set = true;
++    } else {
++      if (!is_work_scale_set) {
++        work_scale = min(1.0, sqrt(work_megapix * 1e6 / full_img.size().area()));
++        is_work_scale_set = true;
++      }
++      resize(full_img, img, Size(), work_scale, work_scale);
++    }
++    if (!is_seam_scale_set) {
++      seam_scale = min(1.0, sqrt(seam_megapix * 1e6 / full_img.size().area()));
++      seam_work_aspect = seam_scale / work_scale;
++      is_seam_scale_set = true;
++    }
++
++    (*stitcher->finder)(img, features[i]);
++    features[i].img_idx = i;
++    //LOGLN("Features in image #" << i+1 << ": " << features[i].keypoints.size());
++
++    resize(full_img, img, Size(), seam_scale, seam_scale);
++    images[i] = img.clone();
++  }
++
++  stitcher->finder->collectGarbage();
++  full_img.release();
++  img.release();
++
++  GST_LOG_OBJECT (stitcher, "Finding features, time: %f sec",
++      ((getTickCount() - t) / getTickFrequency()));
++
++  GST_LOG_OBJECT (stitcher, "Pairwise matching");
++  t = getTickCount();
++  BestOf2NearestMatcher matcher(try_gpu, match_conf);
++  vector<MatchesInfo> pairwise_matches;
++
++  matcher(features, pairwise_matches);
++  matcher.collectGarbage();
++  GST_LOG_OBJECT (stitcher, "Pairwise matching, time: %f sec",
++      ((getTickCount() - t) / getTickFrequency()));
++
++  // Leave only images we are sure are from the same panorama
++  vector<int> indices = leaveBiggestComponent(features, pairwise_matches, conf_thresh);
++  vector<Mat> img_subset;
++  vector<Size> full_img_sizes_subset;
++  for (size_t i = 0; i < indices.size(); ++i) {
++    img_subset.push_back(images[indices[i]]);
++    full_img_sizes_subset.push_back(full_img_sizes[indices[i]]);
++  }
++
++  images = img_subset;
++  full_img_sizes = full_img_sizes_subset;
++
++  // Check if we still have enough images
++  num_images = static_cast<int>(images.size());
++  if (num_images < 2) {
++    GST_WARNING_OBJECT (stitcher, "Can't find overlap images");
++    return FALSE;
++  }
++  HomographyBasedEstimator estimator;
++  vector<CameraParams> cameras;
++  estimator(features, pairwise_matches, cameras);
++
++  for (size_t i = 0; i < cameras.size(); ++i) {
++    Mat R;
++    cameras[i].R.convertTo(R, CV_32F);
++    cameras[i].R = R;
++    //LOGLN("Initial intrinsics #" << indices[i]+1 << ":\n" << cameras[i].K());
++  }
++
++  stitcher->adjuster->setConfThresh(conf_thresh);
++  Mat_<uchar> refine_mask = Mat::zeros(3, 3, CV_8U);
++  if (ba_refine_mask[0] == 'x') refine_mask(0,0) = 1;
++  if (ba_refine_mask[1] == 'x') refine_mask(0,1) = 1;
++  if (ba_refine_mask[2] == 'x') refine_mask(0,2) = 1;
++  if (ba_refine_mask[3] == 'x') refine_mask(1,1) = 1;
++  if (ba_refine_mask[4] == 'x') refine_mask(1,2) = 1;
++  stitcher->adjuster->setRefinementMask(refine_mask);
++  (*stitcher->adjuster)(features, pairwise_matches, cameras);
++
++  // Find median focal length
++  vector<double> focals;
++  for (size_t i = 0; i < cameras.size(); ++i) {
++    //LOGLN("Camera #" << indices[i]+1 << ":\n" << cameras[i].K());
++    focals.push_back(cameras[i].focal);
++  }
++
++  sort(focals.begin(), focals.end());
++  float warped_image_scale;
++  if (focals.size() % 2 == 1)
++    warped_image_scale = static_cast<float>(focals[focals.size() / 2]);
++  else
++    warped_image_scale = static_cast<float>(focals[focals.size() / 2 - 1]
++        + focals[focals.size() / 2]) * 0.5f;
++
++  if (do_wave_correct) {
++    vector<Mat> rmats;
++    for (size_t i = 0; i < cameras.size(); ++i)
++      rmats.push_back(cameras[i].R);
++    waveCorrect(rmats, wave_correct);
++    for (size_t i = 0; i < cameras.size(); ++i)
++      cameras[i].R = rmats[i];
++  }
++
++  GST_LOG_OBJECT (stitcher, "Warping images (auxiliary)... ");
++  t = getTickCount();
++
++  vector<Point> corners(num_images);
++  vector<Mat> masks_warped(num_images);
++  vector<Mat> images_warped(num_images);
++  vector<Size> sizes(num_images);
++  vector<Mat> masks(num_images);
++
++  // Preapre images masks
++  for (int i = 0; i < num_images; ++i) {
++    masks[i].create(images[i].size(), CV_8U);
++    masks[i].setTo(Scalar::all(255));
++  }
++
++  Ptr<RotationWarper> warper = stitcher->warper_creator->create(
++      static_cast<float>(warped_image_scale * seam_work_aspect));
++
++  for (int i = 0; i < num_images; ++i) {
++    Mat_<float> K;
++    cameras[i].K().convertTo(K, CV_32F);
++    float swa = (float)seam_work_aspect;
++    K(0,0) *= swa; K(0,2) *= swa;
++    K(1,1) *= swa; K(1,2) *= swa;
++
++    corners[i] = warper->warp(images[i], K, cameras[i].R,
++        INTER_LINEAR, BORDER_REFLECT, images_warped[i]);
++    sizes[i] = images_warped[i].size();
++
++    warper->warp(masks[i], K, cameras[i].R, INTER_NEAREST,
++        BORDER_CONSTANT, masks_warped[i]);
++  }
++
++  vector<Mat> images_warped_f(num_images);
++  for (int i = 0; i < num_images; ++i)
++    images_warped[i].convertTo(images_warped_f[i], CV_32F);
++
++  GST_LOG_OBJECT (stitcher, "Warping images, time: %f sec",
++      ((getTickCount() - t) / getTickFrequency()));
++
++  GST_LOG_OBJECT (stitcher, "seam finder...");
++  t = getTickCount();
++
++  Ptr<ExposureCompensator> compensator = ExposureCompensator::createDefault(expos_comp_type);
++  compensator->feed(corners, images_warped, masks_warped);
++
++  stitcher->seam_finder->find(images_warped_f, corners, masks_warped);
++
++  // Release unused memory
++  images.clear();
++  images_warped.clear();
++  images_warped_f.clear();
++  masks.clear();
++  GST_LOG_OBJECT (stitcher, "seam finder, time: %f sec",
++      ((getTickCount() - t) / getTickFrequency()));
++
++  GST_LOG_OBJECT (stitcher, "Compositing...");
++  t = getTickCount();
++
++  Mat img_warped, img_warped_s;
++  Mat dilated_mask, seam_mask, mask, mask_warped;
++  //double compose_seam_aspect = 1;
++  double compose_work_aspect = 1;
++  Ptr<Blender> blender;
++
++  for (int img_idx = 0; img_idx < num_images; ++img_idx) {
++    //LOGLN("Compositing image #" << indices[img_idx]+1);
++    // Read image and resize it if necessary
++    IplImage *cvImage = (IplImage *) g_ptr_array_index (imgs, img_idx);
++    Mat in_mat(cvImage, false);
++
++    full_img = in_mat;
++    if (!is_compose_scale_set) {
++      if (compose_megapix > 0)
++        compose_scale = min(1.0, sqrt(compose_megapix * 1e6 / full_img.size().area()));
++      is_compose_scale_set = true;
++
++      // Compute relative scales
++      //compose_seam_aspect = compose_scale / seam_scale;
++      compose_work_aspect = compose_scale / work_scale;
++
++      // Update warped image scale
++      warped_image_scale *= static_cast<float>(compose_work_aspect);
++      warper = stitcher->warper_creator->create(warped_image_scale);
++
++      // Update corners and sizes
++      for (int i = 0; i < num_images; ++i) {
++        // Update intrinsics
++        cameras[i].focal *= compose_work_aspect;
++        cameras[i].ppx *= compose_work_aspect;
++        cameras[i].ppy *= compose_work_aspect;
++
++        // Update corner and size
++        Size sz = full_img_sizes[i];
++        if (std::abs(compose_scale - 1) > 1e-1) {
++          sz.width = cvRound(full_img_sizes[i].width * compose_scale);
++          sz.height = cvRound(full_img_sizes[i].height * compose_scale);
++        }
++
++        Mat K;
++        cameras[i].K().convertTo(K, CV_32F);
++        Rect roi = warper->warpRoi(sz, K, cameras[i].R);
++        corners[i] = roi.tl();
++        sizes[i] = roi.size();
++      }
++    }
++    if (abs(compose_scale - 1) > 1e-1)
++      resize(full_img, img, Size(), compose_scale, compose_scale);
++    else
++      img = full_img;
++    full_img.release();
++    Size img_size = img.size();
++
++    Mat K;
++    cameras[img_idx].K().convertTo(K, CV_32F);
++
++    // Warp the current image
++    warper->warp(img, K, cameras[img_idx].R, INTER_LINEAR, BORDER_REFLECT, img_warped);
++
++    // Warp the current image mask
++    mask.create(img_size, CV_8U);
++    mask.setTo(Scalar::all(255));
++    warper->warp(mask, K, cameras[img_idx].R, INTER_NEAREST, BORDER_CONSTANT, mask_warped);
++
++    // Compensate exposure
++    compensator->apply(img_idx, corners[img_idx], img_warped, mask_warped);
++
++    img_warped.convertTo(img_warped_s, CV_16S);
++    img_warped.release();
++    img.release();
++    mask.release();
++
++    dilate(masks_warped[img_idx], dilated_mask, Mat());
++    resize(dilated_mask, seam_mask, mask_warped.size());
++    mask_warped = seam_mask & mask_warped;
++
++    if (blender.empty()) {
++      blender = Blender::createDefault(blend_type, try_gpu);
++      Size dst_sz = resultRoi(corners, sizes).size();
++      float blend_width = sqrt(static_cast<float>(dst_sz.area())) * blend_strength / 100.f;
++      if (blend_width < 1.f)
++        blender = Blender::createDefault(Blender::NO, try_gpu);
++      else if (blend_type == Blender::MULTI_BAND) {
++        MultiBandBlender* mb = dynamic_cast<MultiBandBlender*>(static_cast<Blender*>(blender));
++        mb->setNumBands(static_cast<int>(ceil(log(blend_width)/log(2.)) - 1.));
++        //LOGLN("Multi-band blender, number of bands: " << mb->numBands());
++      } else if (blend_type == Blender::FEATHER) {
++        FeatherBlender* fb = dynamic_cast<FeatherBlender*>(static_cast<Blender*>(blender));
++        fb->setSharpness(1.f/blend_width);
++        //LOGLN("Feather blender, sharpness: " << fb->sharpness());
++      }
++      blender->prepare(corners, sizes);
++    }
++
++    // Blend the current image
++    blender->feed(img_warped_s, mask_warped, corners[img_idx]);
++  }
++
++  Mat result, result_mask;
++  blender->blend(result, result_mask);
++
++  GST_LOG_OBJECT (stitcher, "Compositing, time: %f sec", ((getTickCount() - t) / getTickFrequency()));
++
++  Mat m1(outimg->height, outimg->width, CV_8UC3), m2;
++  resize(result, m1, m1.size());
++  m1.convertTo(m2, CV_8UC3);
++  memcpy(outimg->imageData, m2.data, outimg->imageSize);
++
++  GST_LOG_OBJECT (stitcher, "Finished, total time: %f sec", (
++        (getTickCount() - app_start_time) / getTickFrequency()));
++
++  return TRUE;
++}
++
++gboolean
++gst_cv_stitching_plugin_init (GstPlugin * plugin)
++{
++  GST_DEBUG_CATEGORY_INIT (gst_cv_stitching_debug, "cvstitching",
++      0, "Video or image stitching");
++
++  return gst_element_register (plugin, "cvstitching", GST_RANK_NONE,
++      GST_TYPE_CV_STITCHING);
++}
+diff --git a/ext/opencv/gstcvstitching.h b/ext/opencv/gstcvstitching.h
+new file mode 100644
+index 0000000..ec955d0
+--- /dev/null
++++ b/ext/opencv/gstcvstitching.h
+@@ -0,0 +1,130 @@
++/*
++ * GStreamer
++ * Copyright (C) 2015 Song Bing <b06498@freescale.com>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ *
++ * Alternatively, the contents of this file may be used under the
++ * GNU Lesser General Public License Version 2.1 (the "LGPL"), in
++ * which case the following provisions apply instead of the ones
++ * mentioned above:
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++#ifndef __GST_CV_STITCHING_H__
++#define __GST_CV_STITCHING_H__
++
++#include <gst/gst.h>
++#include "opencv2/opencv_modules.hpp"
++#include "opencv2/highgui/highgui.hpp"
++#include "opencv2/stitching/detail/autocalib.hpp"
++#include "opencv2/stitching/detail/blenders.hpp"
++#include "opencv2/stitching/detail/camera.hpp"
++#include "opencv2/stitching/detail/exposure_compensate.hpp"
++#include "opencv2/stitching/detail/matchers.hpp"
++#include "opencv2/stitching/detail/motion_estimators.hpp"
++#include "opencv2/stitching/detail/seam_finders.hpp"
++#include "opencv2/stitching/detail/util.hpp"
++#include "opencv2/stitching/detail/warpers.hpp"
++#include "opencv2/stitching/warpers.hpp"
++#include "gstopencvaggregator.h"
++
++using namespace std;
++using namespace cv;
++using namespace cv::detail;
++
++G_BEGIN_DECLS
++#define GST_TYPE_CV_STITCHING_PAD (gst_cv_stitching_pad_get_type())
++#define GST_CV_STITCHING_PAD(obj) \
++        (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_CV_STITCHING_PAD, GstCvStitchingPad))
++#define GST_CV_STITCHING_PAD_CLASS(klass) \
++        (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_CV_STITCHING_PAD, GstCvStitchingPadClass))
++#define GST_IS_CV_STITCHING_PAD(obj) \
++        (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_CV_STITCHING_PAD))
++#define GST_IS_CV_STITCHING_PAD_CLASS(klass) \
++        (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_CV_STITCHING_PAD))
++
++typedef struct _GstCvStitchingPad GstCvStitchingPad;
++typedef struct _GstCvStitchingPadClass GstCvStitchingPadClass;
++
++struct _GstCvStitchingPad
++{
++  GstOpencvAggregatorPad parent;
++};
++
++struct _GstCvStitchingPadClass
++{
++  GstOpencvAggregatorPadClass parent_class;
++};
++
++GType gst_cv_stitching_pad_get_type (void);
++
++#define GST_TYPE_CV_STITCHING \
++  (gst_cv_stitching_get_type())
++#define GST_CV_STITCHING(obj) \
++  (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_CV_STITCHING,GstCvStitching))
++#define GST_CV_STITCHING_CLASS(klass) \
++  (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_CV_STITCHING,GstCvStitchingClass))
++#define GST_IS_CV_STITCHING(obj) \
++  (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_CV_STITCHING))
++#define GST_IS_CV_STITCHING_CLASS(klass) \
++  (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_CV_STITCHING))
++
++typedef struct _GstCvStitching GstCvStitching;
++typedef struct _GstCvStitchingClass GstCvStitchingClass;
++
++struct _GstCvStitching
++{
++  GstOpencvAggregator parent;
++
++  Ptr<FeaturesFinder> finder;
++  Ptr<WarperCreator> warper_creator;
++  Ptr<SeamFinder> seam_finder;
++  Ptr<detail::BundleAdjusterBase> adjuster;
++  gint features_type;
++  gint warp_type;
++  gint seam_find_type;
++  gint ba_cost_func;
++};
++
++struct _GstCvStitchingClass
++{
++  GstOpencvAggregatorClass parent_class;
++};
++
++GType gst_cv_stitching_get_type (void);
++
++gboolean gst_cv_stitching_plugin_init (GstPlugin * plugin);
++
++G_END_DECLS
++#endif /* __GST_CV_STITCHING_H__ */
+diff --git a/ext/opencv/gstopencv.cpp b/ext/opencv/gstopencv.cpp
+index 4077ba6..6ae73c4 100644
+--- a/ext/opencv/gstopencv.cpp
++++ b/ext/opencv/gstopencv.cpp
+@@ -42,6 +42,7 @@
+ #include "gstsegmentation.h"
+ #include "gstgrabcut.h"
+ #include "gstdisparity.h"
++#include "gstcvstitching.h"
+ 
+ static gboolean
+ plugin_init (GstPlugin * plugin)
+@@ -103,6 +104,9 @@ plugin_init (GstPlugin * plugin)
+   if (!gst_disparity_plugin_init (plugin))
+     return FALSE;
+ 
++  if (!gst_cv_stitching_plugin_init (plugin))
++    return FALSE;
++
+   return TRUE;
+ }
+ 
+diff --git a/ext/opencv/gstopencvaggregator.c b/ext/opencv/gstopencvaggregator.c
+new file mode 100644
+index 0000000..8a813fc
+--- /dev/null
++++ b/ext/opencv/gstopencvaggregator.c
+@@ -0,0 +1,705 @@
++/*
++ * GStreamer
++ * Copyright (C) 2015 Song Bing <b06498@freescale.com>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ *
++ * Alternatively, the contents of this file may be used under the
++ * GNU Lesser General Public License Version 2.1 (the "LGPL"), in
++ * which case the following provisions apply instead of the ones
++ * mentioned above:
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++#ifdef HAVE_CONFIG_H
++#  include <config.h>
++#endif
++
++#include <gst/gst.h>
++#include "gstopencvaggregator.h"
++#include "gstopencvutils.h"
++
++#define gst_opencv_aggregator_parent_class parent_class
++G_DEFINE_ABSTRACT_TYPE (GstOpencvAggregator, gst_opencv_aggregator,
++    GST_TYPE_VIDEO_AGGREGATOR);
++
++G_DEFINE_TYPE (GstOpencvAggregatorPad, gst_opencv_aggregator_pad,
++    GST_TYPE_VIDEO_AGGREGATOR_PAD);
++
++#define GST_CAT_DEFAULT gst_opencv_aggregator_debug
++GST_DEBUG_CATEGORY (gst_opencv_aggregator_debug);
++
++static void gst_opencv_aggregator_pad_get_property (GObject * object,
++    guint prop_id, GValue * value, GParamSpec * pspec);
++static void gst_opencv_aggregator_pad_set_property (GObject * object,
++    guint prop_id, const GValue * value, GParamSpec * pspec);
++
++enum
++{
++  PROP_PAD_0
++};
++
++#define GST_OPENCV_AGGREGATOR_GET_PRIVATE(obj)  \
++    (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GST_TYPE_OPENCV_AGGREGATOR, \
++    GstOpencvAggregatorPrivate))
++
++struct _GstOpencvAggregatorPrivate
++{
++  gboolean set_caps;
++  GstBufferPool *pool;
++  gboolean pool_active;
++  GstAllocator *allocator;
++  GstAllocationParams params;
++  GstQuery *query;
++
++  GPtrArray *imgs;
++  GPtrArray *in_infos;
++  IplImage *out_cvImage;
++};
++
++static void
++gst_opencv_aggregator_pad_class_init (GstOpencvAggregatorPadClass * klass)
++{
++  GObjectClass *gobject_class = (GObjectClass *) klass;
++
++  gobject_class->set_property = gst_opencv_aggregator_pad_set_property;
++  gobject_class->get_property = gst_opencv_aggregator_pad_get_property;
++}
++
++static void
++gst_opencv_aggregator_pad_init (GstOpencvAggregatorPad * aggregatorerpad)
++{
++}
++
++static void
++gst_opencv_aggregator_pad_get_property (GObject * object, guint prop_id,
++    GValue * value, GParamSpec * pspec)
++{
++  switch (prop_id) {
++    default:
++      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
++      break;
++  }
++}
++
++static void
++gst_opencv_aggregator_pad_set_property (GObject * object, guint prop_id,
++    const GValue * value, GParamSpec * pspec)
++{
++  switch (prop_id) {
++    default:
++      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
++      break;
++  }
++}
++
++enum
++{
++  PROP_0
++};
++
++static void gst_opencv_aggregator_set_property (GObject * object, guint prop_id,
++    const GValue * value, GParamSpec * pspec);
++static void gst_opencv_aggregator_get_property (GObject * object, guint prop_id,
++    GValue * value, GParamSpec * pspec);
++static gboolean gst_opencv_aggregator_start (GstAggregator * agg);
++static gboolean gst_opencv_aggregator_stop (GstAggregator * agg);
++static GstFlowReturn
++gst_opencv_aggregator_get_output_buffer (GstVideoAggregator * videoaggregator,
++    GstBuffer ** outbuf);
++static GstFlowReturn
++gst_opencv_aggregator_aggregate_frames (GstVideoAggregator * vagg,
++    GstBuffer * outbuffer);
++static gboolean
++gst_opencv_aggregator_sink_query (GstAggregator * agg, GstAggregatorPad * bpad,
++    GstQuery * query);
++static gboolean
++gst_opencv_aggregator_negotiated_caps (GstVideoAggregator * vagg,
++    GstCaps * caps);
++static gboolean
++gst_opencv_aggregator_decide_allocation_default (GstOpencvAggregator *
++    aggregator, GstQuery * query);
++static gboolean
++gst_opencv_aggregator_propose_allocation_default (GstOpencvAggregator *
++    aggregator, GstQuery * query);
++
++static void
++gst_opencv_aggregator_class_init (GstOpencvAggregatorClass * klass)
++{
++  GObjectClass *gobject_class;
++
++  GstVideoAggregatorClass *videoaggregator_class =
++      (GstVideoAggregatorClass *) klass;
++  GstAggregatorClass *agg_class = (GstAggregatorClass *) klass;
++
++  GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "opencvaggregator", 0,
++      "opencv aggregator");
++
++  gobject_class = (GObjectClass *) klass;
++
++  g_type_class_add_private (klass, sizeof (GstOpencvAggregatorPrivate));
++
++  gobject_class->get_property = gst_opencv_aggregator_get_property;
++  gobject_class->set_property = gst_opencv_aggregator_set_property;
++
++  agg_class->sinkpads_type = GST_TYPE_OPENCV_AGGREGATOR_PAD;
++  agg_class->sink_query = gst_opencv_aggregator_sink_query;
++  agg_class->stop = gst_opencv_aggregator_stop;
++  agg_class->start = gst_opencv_aggregator_start;
++
++  videoaggregator_class->aggregate_frames =
++      gst_opencv_aggregator_aggregate_frames;
++  videoaggregator_class->get_output_buffer =
++      gst_opencv_aggregator_get_output_buffer;
++  videoaggregator_class->negotiated_caps =
++      gst_opencv_aggregator_negotiated_caps;
++
++  klass->decide_allocation = gst_opencv_aggregator_decide_allocation_default;
++  klass->propose_allocation = gst_opencv_aggregator_propose_allocation_default;
++}
++
++static void
++gst_opencv_aggregator_reset (GstOpencvAggregator * aggregator)
++{
++  aggregator->priv->set_caps = FALSE;
++}
++
++static void
++gst_opencv_aggregator_init (GstOpencvAggregator * aggregator)
++{
++  aggregator->priv = GST_OPENCV_AGGREGATOR_GET_PRIVATE (aggregator);
++
++  gst_opencv_aggregator_reset (aggregator);
++}
++
++static void
++gst_opencv_aggregator_get_property (GObject * object,
++    guint prop_id, GValue * value, GParamSpec * pspec)
++{
++  switch (prop_id) {
++    default:
++      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
++      break;
++  }
++}
++
++static void
++gst_opencv_aggregator_set_property (GObject * object,
++    guint prop_id, const GValue * value, GParamSpec * pspec)
++{
++  switch (prop_id) {
++    default:
++      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
++      break;
++  }
++}
++
++static void
++_free_opencv_aggregator_img (IplImage * img)
++{
++  cvReleaseImage (&img);
++}
++
++static void
++_free_opencv_aggregator_in_info (GstMapInfo * info)
++{
++  g_slice_free1 (sizeof (GstMapInfo), info);
++}
++
++static gboolean
++gst_opencv_aggregator_start (GstAggregator * agg)
++{
++  GstOpencvAggregator *aggregator = GST_OPENCV_AGGREGATOR (agg);
++  GstElement *element = GST_ELEMENT (agg);
++
++  if (!GST_AGGREGATOR_CLASS (parent_class)->start (agg))
++    return FALSE;
++
++  GST_OBJECT_LOCK (aggregator);
++  aggregator->priv->imgs = g_ptr_array_new_full (element->numsinkpads,
++      (GDestroyNotify) _free_opencv_aggregator_img);
++  g_ptr_array_set_size (aggregator->priv->imgs, element->numsinkpads);
++
++  aggregator->priv->in_infos = g_ptr_array_new_full (element->numsinkpads,
++      (GDestroyNotify) _free_opencv_aggregator_in_info);
++  g_ptr_array_set_size (aggregator->priv->in_infos, element->numsinkpads);
++  GST_OBJECT_UNLOCK (aggregator);
++
++  return TRUE;
++}
++
++static gboolean
++gst_opencv_aggregator_stop (GstAggregator * agg)
++{
++  GstOpencvAggregator *aggregator = GST_OPENCV_AGGREGATOR (agg);
++
++  GST_OBJECT_LOCK (agg);
++  g_ptr_array_free (aggregator->priv->imgs, TRUE);
++  aggregator->priv->imgs = NULL;
++  g_ptr_array_free (aggregator->priv->in_infos, TRUE);
++  aggregator->priv->in_infos = NULL;
++  GST_OBJECT_UNLOCK (agg);
++
++  if (aggregator->priv->pool) {
++    gst_object_unref (aggregator->priv->pool);
++    aggregator->priv->pool = NULL;
++  }
++
++  if (aggregator->priv->out_cvImage)
++    cvReleaseImage (&aggregator->priv->out_cvImage);
++
++  gst_opencv_aggregator_reset (aggregator);
++
++  return GST_AGGREGATOR_CLASS (parent_class)->stop (agg);
++}
++
++static gboolean
++gst_opencv_aggregator_sink_query (GstAggregator * agg, GstAggregatorPad * bpad,
++    GstQuery * query)
++{
++  gboolean ret = FALSE;
++  GstOpencvAggregator *aggregator = GST_OPENCV_AGGREGATOR (agg);
++  GstOpencvAggregatorClass *klass = GST_OPENCV_AGGREGATOR_GET_CLASS (agg);
++
++  GST_TRACE ("QUERY %" GST_PTR_FORMAT, query);
++
++  switch (GST_QUERY_TYPE (query)) {
++    case GST_QUERY_ALLOCATION:{
++      if (klass->propose_allocation)
++        ret = klass->propose_allocation (aggregator, query);
++      break;
++    }
++    default:
++      ret = GST_AGGREGATOR_CLASS (parent_class)->sink_query (agg, bpad, query);
++      break;
++  }
++
++  return ret;
++}
++
++static gboolean
++gst_opencv_aggregator_decide_allocation_default (GstOpencvAggregator *
++    aggregator, GstQuery * query)
++{
++  GstCaps *outcaps = NULL;
++  GstBufferPool *pool = NULL;
++  guint size, min, max;
++  GstAllocator *allocator = NULL;
++  GstAllocationParams params;
++  GstStructure *config;
++  gboolean update_pool, update_allocator;
++  GstVideoInfo vinfo;
++
++  gst_query_parse_allocation (query, &outcaps, NULL);
++  gst_video_info_init (&vinfo);
++  if (outcaps)
++    gst_video_info_from_caps (&vinfo, outcaps);
++
++  /* we got configuration from our peer or the decide_allocation method,
++   * parse them */
++  if (gst_query_get_n_allocation_params (query) > 0) {
++    /* try the allocator */
++    gst_query_parse_nth_allocation_param (query, 0, &allocator, &params);
++    update_allocator = TRUE;
++  } else {
++    allocator = NULL;
++    gst_allocation_params_init (&params);
++    update_allocator = FALSE;
++  }
++
++  if (gst_query_get_n_allocation_pools (query) > 0) {
++    gst_query_parse_nth_allocation_pool (query, 0, &pool, &size, &min, &max);
++    size = MAX (size, vinfo.size);
++    update_pool = TRUE;
++  } else {
++    pool = NULL;
++    size = vinfo.size;
++    min = max = 0;
++
++    update_pool = FALSE;
++  }
++
++  if (pool == NULL) {
++    /* no pool, we can make our own */
++    GST_DEBUG_OBJECT (aggregator, "no pool, making new pool");
++    pool = gst_video_buffer_pool_new ();
++  }
++
++  /* now configure */
++  config = gst_buffer_pool_get_config (pool);
++  gst_buffer_pool_config_set_params (config, outcaps, size, min, max);
++  gst_buffer_pool_config_set_allocator (config, allocator, &params);
++
++  if (!gst_buffer_pool_set_config (pool, config)) {
++    config = gst_buffer_pool_get_config (pool);
++
++    /* If change are not acceptable, fallback to generic pool */
++    if (!gst_buffer_pool_config_validate_params (config, outcaps, size, min,
++            max)) {
++      GST_DEBUG_OBJECT (aggregator, "unsuported pool, making new pool");
++
++      gst_object_unref (pool);
++      pool = gst_video_buffer_pool_new ();
++      gst_buffer_pool_config_set_params (config, outcaps, size, min, max);
++      gst_buffer_pool_config_set_allocator (config, allocator, &params);
++    }
++
++    if (!gst_buffer_pool_set_config (pool, config))
++      goto config_failed;
++  }
++
++  if (update_allocator)
++    gst_query_set_nth_allocation_param (query, 0, allocator, &params);
++  else
++    gst_query_add_allocation_param (query, allocator, &params);
++  if (allocator)
++    gst_object_unref (allocator);
++
++  if (update_pool)
++    gst_query_set_nth_allocation_pool (query, 0, pool, size, min, max);
++  else
++    gst_query_add_allocation_pool (query, pool, size, min, max);
++
++  if (pool)
++    gst_object_unref (pool);
++
++  return TRUE;
++
++config_failed:
++  if (allocator)
++    gst_object_unref (allocator);
++  if (pool)
++    gst_object_unref (pool);
++  GST_ELEMENT_ERROR (aggregator, RESOURCE, SETTINGS,
++      ("Failed to configure the buffer pool"),
++      ("Configuration is most likely invalid, please report this issue."));
++  return FALSE;
++}
++
++static gboolean
++gst_opencv_aggregator_propose_allocation_default (GstOpencvAggregator *
++    aggregator, GstQuery * query)
++{
++  GstCaps *caps;
++  GstVideoInfo info;
++  GstBufferPool *pool;
++  guint size;
++
++  gst_query_parse_allocation (query, &caps, NULL);
++
++  if (caps == NULL)
++    return FALSE;
++
++  if (!gst_video_info_from_caps (&info, caps))
++    return FALSE;
++
++  size = GST_VIDEO_INFO_SIZE (&info);
++
++  if (gst_query_get_n_allocation_pools (query) == 0) {
++    GstStructure *structure;
++    GstAllocator *allocator = NULL;
++    GstAllocationParams params = { 0, 15, 0, 0 };
++
++    if (gst_query_get_n_allocation_params (query) > 0)
++      gst_query_parse_nth_allocation_param (query, 0, &allocator, &params);
++    else
++      gst_query_add_allocation_param (query, allocator, &params);
++
++    pool = gst_video_buffer_pool_new ();
++
++    structure = gst_buffer_pool_get_config (pool);
++    gst_buffer_pool_config_set_params (structure, caps, size, 0, 0);
++    gst_buffer_pool_config_set_allocator (structure, allocator, &params);
++
++    if (allocator)
++      gst_object_unref (allocator);
++
++    if (!gst_buffer_pool_set_config (pool, structure))
++      goto config_failed;
++
++    gst_query_add_allocation_pool (query, pool, size, 0, 0);
++    gst_object_unref (pool);
++    gst_query_add_allocation_meta (query, GST_VIDEO_META_API_TYPE, NULL);
++  }
++
++  return TRUE;
++
++  /* ERRORS */
++config_failed:
++  {
++    GST_ERROR_OBJECT (aggregator, "failed to set config");
++    gst_object_unref (pool);
++    return FALSE;
++  }
++}
++
++static gboolean
++gst_opencv_aggregator_negotiate_pool (GstOpencvAggregator * aggregator,
++    GstCaps * caps)
++{
++  GstAggregator *agg = GST_AGGREGATOR (aggregator);
++  GstOpencvAggregatorClass *klass;
++  GstQuery *query = NULL;
++  GstBufferPool *pool = NULL;
++  GstAllocator *allocator;
++  GstAllocationParams params;
++  gboolean ret = TRUE;
++
++  klass = GST_OPENCV_AGGREGATOR_GET_CLASS (aggregator);
++
++  query = gst_query_new_allocation (caps, TRUE);
++
++  if (!gst_pad_peer_query (agg->srcpad, query)) {
++    GST_DEBUG_OBJECT (aggregator, "didn't get downstream ALLOCATION hints");
++  }
++
++  g_assert (klass->decide_allocation != NULL);
++  ret = klass->decide_allocation (aggregator, query);
++
++  GST_DEBUG_OBJECT (aggregator, "ALLOCATION (%d) params: %" GST_PTR_FORMAT, ret,
++      query);
++
++  if (!ret)
++    goto no_decide_allocation;
++
++  /* we got configuration from our peer or the decide_allocation method,
++   * parse them */
++  if (gst_query_get_n_allocation_params (query) > 0) {
++    gst_query_parse_nth_allocation_param (query, 0, &allocator, &params);
++  } else {
++    allocator = NULL;
++    gst_allocation_params_init (&params);
++  }
++
++  if (gst_query_get_n_allocation_pools (query) > 0)
++    gst_query_parse_nth_allocation_pool (query, 0, &pool, NULL, NULL, NULL);
++  if (!pool) {
++    if (allocator)
++      gst_object_unref (allocator);
++    ret = FALSE;
++    goto no_decide_allocation;
++  }
++
++  if (aggregator->priv->allocator)
++    gst_object_unref (aggregator->priv->allocator);
++  aggregator->priv->allocator = allocator;
++  aggregator->priv->params = params;
++
++  if (aggregator->priv->pool) {
++    /* do not set the bufferpool to inactive here, it will be done
++     * on its finalize function. As videoaggregator do late renegotiation
++     * it might happen that some element downstream is already using this
++     * same bufferpool and deactivating it will make it fail.
++     * Happens when a downstream element changes from passthrough to
++     * non-passthrough and gets this same bufferpool to use */
++    gst_object_unref (aggregator->priv->pool);
++  }
++  aggregator->priv->pool = pool;
++
++  /* and activate */
++  gst_buffer_pool_set_active (pool, TRUE);
++
++done:
++  if (query)
++    gst_query_unref (query);
++
++  return ret;
++
++  /* Errors */
++no_decide_allocation:
++  {
++    GST_WARNING_OBJECT (aggregator, "Subclass failed to decide allocation");
++    goto done;
++  }
++}
++
++static gboolean
++gst_opencv_aggregator_negotiated_caps (GstVideoAggregator * vagg,
++    GstCaps * caps)
++{
++  GstOpencvAggregator *aggregator = GST_OPENCV_AGGREGATOR (vagg);
++  gint out_width, out_height;
++  gint out_depth, out_channels;
++  GError *out_err = NULL;
++
++  if (!gst_opencv_parse_iplimage_params_from_caps (caps, &out_width,
++          &out_height, &out_depth, &out_channels, &out_err)) {
++    GST_WARNING_OBJECT (aggregator, "Failed to parse output caps: %s",
++        out_err->message);
++    g_error_free (out_err);
++    return FALSE;
++  }
++
++  if (aggregator->priv->out_cvImage)
++    cvReleaseImage (&aggregator->priv->out_cvImage);
++
++  aggregator->priv->out_cvImage =
++      cvCreateImageHeader (cvSize (out_width, out_height), out_depth,
++      out_channels);
++
++  return gst_opencv_aggregator_negotiate_pool (aggregator, caps);
++}
++
++static GstFlowReturn
++gst_opencv_aggregator_get_output_buffer (GstVideoAggregator * videoaggregator,
++    GstBuffer ** outbuf)
++{
++  GstOpencvAggregator *aggregator = GST_OPENCV_AGGREGATOR (videoaggregator);
++
++  return gst_buffer_pool_acquire_buffer (aggregator->priv->pool, outbuf, NULL);
++}
++
++static GstFlowReturn
++gst_opencv_aggregator_aggregate_frames (GstVideoAggregator * vagg,
++    GstBuffer * outbuf)
++{
++  GstOpencvAggregator *aggregator = GST_OPENCV_AGGREGATOR (vagg);
++  GstOpencvAggregatorClass *aggregator_class =
++      GST_OPENCV_AGGREGATOR_GET_CLASS (vagg);
++  GstElement *element = GST_ELEMENT (aggregator);
++  GstMapInfo out_info;
++  guint array_index = 0;
++  gboolean res = FALSE;
++  GList *walk;
++  guint i;
++
++  if (!aggregator->priv->set_caps) {
++    gint in_width, in_height;
++    gint in_depth, in_channels;
++    GError *in_err = NULL;
++
++    GST_OBJECT_LOCK (aggregator);
++    walk = element->sinkpads;
++    while (walk) {
++      GstVideoAggregatorPad *vaggpad = walk->data;
++      GstCaps *caps = gst_video_info_to_caps (&vaggpad->info);
++
++      walk = g_list_next (walk);
++
++      GST_WARNING_OBJECT (aggregator, "sink pad caps:  %" GST_PTR_FORMAT, caps);
++      if (!gst_opencv_parse_iplimage_params_from_caps (caps, &in_width,
++              &in_height, &in_depth, &in_channels, &in_err)) {
++        GST_WARNING_OBJECT (aggregator, "Failed to parse input caps: %s",
++            in_err->message);
++        g_error_free (in_err);
++        gst_caps_unref (caps);
++        return FALSE;
++      }
++      gst_caps_unref (caps);
++
++      aggregator->priv->imgs->pdata[array_index] =
++          cvCreateImageHeader (cvSize (in_width, in_height), in_depth,
++          in_channels);
++      aggregator->priv->in_infos->pdata[array_index] =
++          g_slice_new0 (GstMapInfo);
++      array_index++;
++    }
++    GST_OBJECT_UNLOCK (aggregator);
++    aggregator->priv->set_caps = TRUE;
++  }
++
++  array_index = 0;
++  GST_OBJECT_LOCK (aggregator);
++  walk = GST_ELEMENT (aggregator)->sinkpads;
++  while (walk) {
++    GstVideoAggregatorPad *vaggpad = walk->data;
++    IplImage *cvImage;
++    GstMapInfo *in_info = aggregator->priv->in_infos->pdata[array_index];
++
++    walk = g_list_next (walk);
++
++    if (!gst_buffer_map (vaggpad->buffer, in_info, GST_MAP_READ))
++      goto inbuf_map_failed;
++
++    cvImage = aggregator->priv->imgs->pdata[array_index];
++    cvImage->imageData = (char *) in_info->data;
++    ++array_index;
++  }
++  GST_OBJECT_UNLOCK (aggregator);
++
++  if (!gst_buffer_map (outbuf, &out_info, GST_MAP_WRITE))
++    goto outbuf_map_failed;
++
++  aggregator->priv->out_cvImage->imageData = (char *) out_info.data;
++
++  res =
++      aggregator_class->GstOpencvAggregatorProcess (aggregator,
++      aggregator->priv->imgs, aggregator->priv->out_cvImage);
++
++  GST_OBJECT_LOCK (aggregator);
++  walk = GST_ELEMENT (aggregator)->sinkpads;
++  array_index = 0;
++  while (walk) {
++    GstVideoAggregatorPad *vaggpad = walk->data;
++    GstMapInfo *in_info = aggregator->priv->in_infos->pdata[array_index];
++    walk = g_list_next (walk);
++    gst_buffer_unmap (vaggpad->buffer, in_info);
++    ++array_index;
++  }
++  GST_OBJECT_UNLOCK (aggregator);
++
++  gst_buffer_unmap (outbuf, &out_info);
++
++  return res ? GST_FLOW_OK : GST_FLOW_ERROR;
++
++inbuf_map_failed:
++  GST_ELEMENT_ERROR (aggregator, RESOURCE, READ,
++      ("Failed to map buffer for reading"), (NULL));
++  walk = GST_ELEMENT (aggregator)->sinkpads;
++  for (i = 0; i < array_index; i++) {
++    GstVideoAggregatorPad *vaggpad = walk->data;
++    GstMapInfo *in_info = aggregator->priv->in_infos->pdata[array_index];
++    walk = g_list_next (walk);
++    gst_buffer_unmap (vaggpad->buffer, in_info);
++    ++array_index;
++  }
++  GST_OBJECT_UNLOCK (aggregator);
++  return GST_FLOW_ERROR;
++
++outbuf_map_failed:
++  GST_ELEMENT_ERROR (aggregator, RESOURCE, WRITE,
++      ("Failed to map buffer for writing"), (NULL));
++  GST_OBJECT_LOCK (aggregator);
++  walk = GST_ELEMENT (aggregator)->sinkpads;
++  array_index = 0;
++  while (walk) {
++    GstVideoAggregatorPad *vaggpad = walk->data;
++    GstMapInfo *in_info = aggregator->priv->in_infos->pdata[array_index];
++    walk = g_list_next (walk);
++    gst_buffer_unmap (vaggpad->buffer, in_info);
++    ++array_index;
++  }
++  GST_OBJECT_UNLOCK (aggregator);
++
++  return GST_FLOW_ERROR;
++}
+diff --git a/ext/opencv/gstopencvaggregator.h b/ext/opencv/gstopencvaggregator.h
+new file mode 100644
+index 0000000..1fc65a5
+--- /dev/null
++++ b/ext/opencv/gstopencvaggregator.h
+@@ -0,0 +1,118 @@
++/*
++ * GStreamer
++ * Copyright (C) 2015 Song Bing <b06498@freescale.com>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ *
++ * Alternatively, the contents of this file may be used under the
++ * GNU Lesser General Public License Version 2.1 (the "LGPL"), in
++ * which case the following provisions apply instead of the ones
++ * mentioned above:
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++#ifndef __GST_OPENCV_AGGREGATOR_H__
++#define __GST_OPENCV_AGGREGATOR_H__
++
++#include <gst/gst.h>
++#include <gst/video/gstvideoaggregator.h>
++#include <opencv2/core/core_c.h>
++
++G_BEGIN_DECLS
++#define GST_TYPE_OPENCV_AGGREGATOR_PAD (gst_opencv_aggregator_pad_get_type())
++#define GST_OPENCV_AGGREGATOR_PAD(obj) \
++        (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_OPENCV_AGGREGATOR_PAD, GstOpencvAggregatorPad))
++#define GST_OPENCV_AGGREGATOR_PAD_CLASS(klass) \
++        (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_OPENCV_AGGREGATOR_PAD, GstOpencvAggregatorPadClass))
++#define GST_IS_OPENCV_AGGREGATOR_PAD(obj) \
++        (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_OPENCV_AGGREGATOR_PAD))
++#define GST_IS_OPENCV_AGGREGATOR_PAD_CLASS(klass) \
++        (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_OPENCV_AGGREGATOR_PAD))
++#define GST_OPENCV_AGGREGATOR_PAD_GET_CLASS(obj) \
++        (G_TYPE_INSTANCE_GET_CLASS((obj),GST_TYPE_OPENCV_AGGREGATOR_PAD,GstOpencvAggregatorPadClass))
++typedef struct _GstOpencvAggregatorPad GstOpencvAggregatorPad;
++typedef struct _GstOpencvAggregatorPadClass GstOpencvAggregatorPadClass;
++
++struct _GstOpencvAggregatorPad
++{
++  GstVideoAggregatorPad parent;
++};
++
++struct _GstOpencvAggregatorPadClass
++{
++  GstVideoAggregatorPadClass parent_class;
++};
++
++GType gst_opencv_aggregator_pad_get_type (void);
++
++#define GST_TYPE_OPENCV_AGGREGATOR \
++  (gst_opencv_aggregator_get_type())
++#define GST_OPENCV_AGGREGATOR(obj) \
++  (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_OPENCV_AGGREGATOR,GstOpencvAggregator))
++#define GST_OPENCV_AGGREGATOR_CLASS(klass) \
++  (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_OPENCV_AGGREGATOR,GstOpencvAggregatorClass))
++#define GST_IS_OPENCV_AGGREGATOR(obj) \
++  (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_OPENCV_AGGREGATOR))
++#define GST_IS_OPENCV_AGGREGATOR_CLASS(klass) \
++  (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_OPENCV_AGGREGATOR))
++#define GST_OPENCV_AGGREGATOR_GET_CLASS(obj)  \
++    (G_TYPE_INSTANCE_GET_CLASS((obj),GST_TYPE_OPENCV_AGGREGATOR,GstOpencvAggregatorClass))
++#define GST_OPENCV_AGGREGATOR_CAST(obj) ((GstOpencvAggregator *) (obj))
++
++typedef struct _GstOpencvAggregator GstOpencvAggregator;
++typedef struct _GstOpencvAggregatorClass GstOpencvAggregatorClass;
++typedef struct _GstOpencvAggregatorPrivate GstOpencvAggregatorPrivate;
++
++struct _GstOpencvAggregator
++{
++  GstVideoAggregator parent;
++
++  GstOpencvAggregatorPrivate *priv;
++};
++
++struct _GstOpencvAggregatorClass
++{
++  GstVideoAggregatorClass parent_class;
++
++    gboolean (*GstOpencvAggregatorProcess) (GstOpencvAggregator * aggregrator,
++      GPtrArray * imgs, IplImage * outimg);
++    gboolean (*decide_allocation) (GstOpencvAggregator * aggretator,
++      GstQuery * query);
++    gboolean (*propose_allocation) (GstOpencvAggregator * aggretator,
++      GstQuery * query);
++};
++
++GType gst_opencv_aggregator_get_type (void);
++
++G_END_DECLS
++#endif /* __GST_OPENCV_AGGREGATOR_H__ */
+-- 
+1.9.1
+

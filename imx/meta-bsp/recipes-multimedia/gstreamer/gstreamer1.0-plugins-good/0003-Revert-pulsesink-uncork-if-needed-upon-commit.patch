@@ -1,0 +1,38 @@
+From f49f7dfa8e73ab0fa5868346f2f868c5ab61cb53 Mon Sep 17 00:00:00 2001
+From: Jian Li <jian.li@freescale.com>
+Date: Tue, 19 Jan 2016 16:16:40 +0800
+Subject: [PATCH] Revert "pulsesink: uncork if needed upon commit"
+
+This reverts commit 0dd46accf6d282ff07065852bd91c85c78af3394.
+
+Revert this commit to workaround issue: MMFMWK-7045
+[LMX6UL_EVK]AACLCDec:No audio output if play some clips and
+cpu loading become very high while playing
+
+UpStream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Jian Li <jian.li@freescale.com>
+---
+ ext/pulse/pulsesink.c |    6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/ext/pulse/pulsesink.c b/ext/pulse/pulsesink.c
+index 4c9ea5a..2f3bc60 100644
+--- a/ext/pulse/pulsesink.c
++++ b/ext/pulse/pulsesink.c
+@@ -1516,12 +1516,6 @@ gst_pulseringbuffer_commit (GstAudioRingBuffer * buf, guint64 * sample,
+   if (pbuf->paused)
+     goto was_paused;
+ 
+-  /* ensure running clock for whatever out there */
+-  if (pbuf->corked) {
+-    if (!gst_pulsering_set_corked (pbuf, FALSE, FALSE))
+-      goto uncork_failed;
+-  }
+-
+   /* offset is in bytes */
+   offset = *sample * bpf;
+ 
+-- 
+1.7.9.5
+

@@ -1,0 +1,48 @@
+From f712092e768347b59719f5016714c91d4d82483b Mon Sep 17 00:00:00 2001
+From: Song Bing <b06498@freescale.com>
+Date: Wed, 20 May 2015 15:13:20 +0800
+Subject: [PATCH 03/10] mpeg4videoparse: Need detect picture coding type when
+ drain
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+our use case is demuxer only output key frame when backward playback.
+every frame is DISCONT and KEY frame. mpeg4videoparse will detect coding
+type when detect start code after VOP. our use case will drain after VOP
+and can't detect start code after VOP. Add check coding type code when
+drain.
+
+Upstream-Status: Waiting for review.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=749617
+---
+ gst/videoparsers/gstmpeg4videoparse.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/gst/videoparsers/gstmpeg4videoparse.c b/gst/videoparsers/gstmpeg4videoparse.c
+index 53db2d5..dbbd6d2 100644
+--- a/gst/videoparsers/gstmpeg4videoparse.c
++++ b/gst/videoparsers/gstmpeg4videoparse.c
+@@ -502,6 +502,18 @@ next:
+     case (GST_MPEG4_PARSER_ERROR):
+       /* if draining, take all */
+       if (GST_BASE_PARSE_DRAINING (parse)) {
++        /* need decide intra_frame */
++        if (mp4vparse->vop_offset >= 0) {
++          if (G_LIKELY (size > mp4vparse->vop_offset + 1)) {
++            mp4vparse->intra_frame =
++              ((data[mp4vparse->vop_offset + 1] >> 6 & 0x3) == 0);
++          } else {
++            GST_WARNING_OBJECT (mp4vparse, "no data following VOP startcode");
++            mp4vparse->intra_frame = FALSE;
++          }
++          GST_LOG_OBJECT (mp4vparse, "is intra %d %d",
++              mp4vparse->intra_frame, mp4vparse->vop_offset);
++        }
+         framesize = size;
+         ret = TRUE;
+       } else {
+-- 
+1.9.1
+

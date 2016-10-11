@@ -1,0 +1,59 @@
+From 57f50df6ec692850a3f81a62c0b660509ad3b539 Mon Sep 17 00:00:00 2001
+From: Mingke Wang <mingke.wang@freescale.com>
+Date: Fri, 16 Oct 2015 19:11:49 +0800
+Subject: [PATCH 01/10] intall the header file of gstaggregator and
+ gstvideoaggregator so that we can use them outside of gstreamer-plugins-bad
+ package
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Mingke Wang <mingke.wang@freescale.com>
+---
+ gst-libs/gst/base/Makefile.am  | 7 ++++---
+ gst-libs/gst/video/Makefile.am | 6 +++++-
+ 2 files changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/gst-libs/gst/base/Makefile.am b/gst-libs/gst/base/Makefile.am
+index 0d55368..7268095 100644
+--- a/gst-libs/gst/base/Makefile.am
++++ b/gst-libs/gst/base/Makefile.am
+@@ -6,11 +6,12 @@ libgstbadbase_@GST_API_VERSION@_la_SOURCES = \
+ libgstbadbase_@GST_API_VERSION@_la_CFLAGS = $(GST_CFLAGS) \
+ 	-DGST_USE_UNSTABLE_API
+ 
++libgstbadbase_@GST_API_VERSION@includedir = $(includedir)/gstreamer-@GST_API_VERSION@/gst/base
++libgstbadbase_@GST_API_VERSION@include_HEADERS = \
++        gstaggregator.h
++
+ libgstbadbase_@GST_API_VERSION@_la_LIBADD = $(GST_LIBS)
+ libgstbadbase_@GST_API_VERSION@_la_LDFLAGS = $(GST_LIB_LDFLAGS) $(GST_ALL_LDFLAGS) $(GST_LT_LDFLAGS)
+ 
+-noinst_HEADERS =	\
+-	gstaggregator.h
+-
+ EXTRA_DIST = 
+ 
+diff --git a/gst-libs/gst/video/Makefile.am b/gst-libs/gst/video/Makefile.am
+index 5108281..8cf0731 100644
+--- a/gst-libs/gst/video/Makefile.am
++++ b/gst-libs/gst/video/Makefile.am
+@@ -16,6 +16,11 @@ libgstbadvideo_@GST_API_VERSION@_la_CFLAGS = \
+ 	$(GST_PLUGINS_BASE_CFLAGS) \
+ 	$(GST_BASE_CFLAGS)
+ 
++libgstbadvideo_@GST_API_VERSION@includedir = $(includedir)/gstreamer-@GST_API_VERSION@/gst/video
++libgstbadvideo_@GST_API_VERSION@include_HEADERS = \
++        gstvideoaggregatorpad.h \
++        gstvideoaggregator.h
++
+ libgstbadvideo_@GST_API_VERSION@_la_LIBADD = \
+ 	$(top_builddir)/gst-libs/gst/base/libgstbadbase-$(GST_API_VERSION).la \
+ 	$(GST_PLUGINS_BASE_LIBS) -lgstvideo-$(GST_API_VERSION) \
+@@ -23,4 +28,3 @@ libgstbadvideo_@GST_API_VERSION@_la_LIBADD = \
+ 
+ libgstbadvideo_@GST_API_VERSION@_la_LDFLAGS = $(GST_LIB_LDFLAGS) $(GST_ALL_LDFLAGS) $(GST_LT_LDFLAGS)
+ 
+-noinst_HEADERS = gstvideoaggregatorpad.h gstvideoaggregator.h
+-- 
+1.9.1
+

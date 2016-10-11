@@ -1,0 +1,34 @@
+From 51554875c2ee2714a4f80456f805cc2dfd612f78 Mon Sep 17 00:00:00 2001
+From: Lyon Wang <lyon.wang@freescale.com>
+Date: Thu, 10 Dec 2015 14:32:43 +0800
+Subject: [PATCH] Disable orc optimization for lib video in plugins-base
+
+- the orc optimization for lib video in plugins base may
+cause segmentation fault
+- disalbe orc optimization for lib video and just use the c source
+
+package:  gstreamer1.0-plugins-base
+Community ticket: https://bugzilla.gnome.org/show_bug.cgi?id=759286
+Upstream-Status: pending
+
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
+---
+ gst-libs/gst/video/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gst-libs/gst/video/Makefile.am b/gst-libs/gst/video/Makefile.am
+index 5d31fa1..f91fca6 100644
+--- a/gst-libs/gst/video/Makefile.am
++++ b/gst-libs/gst/video/Makefile.am
+@@ -84,7 +84,7 @@ nodist_libgstvideo_@GST_API_VERSION@include_HEADERS = $(built_headers)
+ noinst_HEADERS = gstvideoutilsprivate.h
+ 
+ libgstvideo_@GST_API_VERSION@_la_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) $(GST_CFLAGS) \
+-					$(ORC_CFLAGS)
++					$(ORC_CFLAGS) -DDISABLE_ORC
+ libgstvideo_@GST_API_VERSION@_la_LIBADD = $(GST_BASE_LIBS) $(GST_LIBS) $(ORC_LIBS) $(LIBM)
+ libgstvideo_@GST_API_VERSION@_la_LDFLAGS = $(GST_LIB_LDFLAGS) $(GST_ALL_LDFLAGS) $(GST_LT_LDFLAGS)
+ 
+-- 
+1.9.1
+

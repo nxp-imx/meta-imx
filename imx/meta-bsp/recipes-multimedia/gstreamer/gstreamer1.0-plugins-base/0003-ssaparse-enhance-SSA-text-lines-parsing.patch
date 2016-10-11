@@ -1,14 +1,18 @@
-From be6163cfa3a255493f9d75bad9541cbfe1723fee Mon Sep 17 00:00:00 2001
+From e4d9470b63b18196dbb81c7ca610f09b55a67b6e Mon Sep 17 00:00:00 2001
 From: Mingke Wang <mingke.wang@freescale.com>
 Date: Thu, 19 Mar 2015 14:17:10 +0800
-Subject: [PATCH 3/4] ssaparse: enhance SSA text lines parsing.
+Subject: [PATCH 3/9] ssaparse: enhance SSA text lines parsing.
 
 some parser will pass in the original ssa text line which starts with "Dialog:"
 and there's are maybe multiple Dialog lines in one input buffer.
 
-Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=747496]
+Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Mingke Wang <mingke.wang@freescale.com>
+---
+ gst/subparse/gstssaparse.c | 150 ++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 134 insertions(+), 16 deletions(-)
+ mode change 100644 => 100755 gst/subparse/gstssaparse.c
 
 diff --git a/gst/subparse/gstssaparse.c b/gst/subparse/gstssaparse.c
 old mode 100644
@@ -221,5 +225,5 @@ index 06ecef9..0ab5dce
    if (ret != GST_FLOW_OK && GST_CLOCK_TIME_IS_VALID (ts)) {
      GstSegment segment;
 -- 
-1.7.9.5
+1.9.1
 

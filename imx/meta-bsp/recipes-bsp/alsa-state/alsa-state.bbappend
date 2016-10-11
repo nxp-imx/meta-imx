@@ -5,16 +5,14 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append_mx6 = " \
-	file://asound.state.wm89586062 \
+	file://asound.state \
+        file://asound.conf \
 "
 
 SRC_URI_append_mx6ul = " \
         file://asound.state \
+        file://asound.conf \
 "
-
-do_install_append_mx6() {
-    install -m 0644 ${WORKDIR}/asound.state.wm89586062 ${D}${localstatedir}/lib/alsa/asound.state
-}
 
 # for i.MX7D
 PACKAGE_ARCH_mx7 = "${MACHINE_ARCH}"

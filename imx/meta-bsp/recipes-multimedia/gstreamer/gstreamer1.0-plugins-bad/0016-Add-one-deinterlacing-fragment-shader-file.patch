@@ -1,0 +1,71 @@
+From c3e8fc06c859e3fcf2cb0b6d1143ad7512d167c5 Mon Sep 17 00:00:00 2001
+From: Jian Li <jian.li@freescale.com>
+Date: Wed, 23 Sep 2015 14:42:45 +0800
+Subject: [PATCH 3/3] Add one deinterlacing fragment shader file
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+  add one shader for deinterlacing with
+  glshader plugin
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Jian Li <jian.li@freescale.com>
+---
+ ext/gl/Makefile.am                     |    4 ++--
+ ext/gl/shaders/deinterlacing_shader.fs |   27 +++++++++++++++++++++++++++
+ 2 files changed, 29 insertions(+), 2 deletions(-)
+ create mode 100755 ext/gl/shaders/deinterlacing_shader.fs
+
+diff --git a/ext/gl/Makefile.am b/ext/gl/Makefile.am
+index 8aaa900..09c975d 100644
+--- a/ext/gl/Makefile.am
++++ b/ext/gl/Makefile.am
+@@ -146,8 +146,8 @@ libgstopengl_la_LIBADD = \
+ 	$(LIBM) \
+ 	$(GRAPHENE_LIBS)
+ 
+-data_DATA = shaders/gray_shader.fs shaders/fisheye_shader.fs shaders/tunnel_shader.fs shaders/twirl_shader.fs
+-EXTRA_DIST = shaders/gray_shader.fs shaders/fisheye_shader.fs shaders/tunnel_shader.fs shaders/twirl_shader.fs
++data_DATA = shaders/gray_shader.fs shaders/fisheye_shader.fs shaders/tunnel_shader.fs shaders/twirl_shader.fs shaders/deinterlacing_shader.fs
++EXTRA_DIST = shaders/gray_shader.fs shaders/fisheye_shader.fs shaders/tunnel_shader.fs shaders/twirl_shader.fs shaders/deinterlacing_shader.fs
+ 
+ libgstopengl_la_LDFLAGS = $(GST_PLUGIN_LDFLAGS)
+ libgstopengl_la_LIBTOOLFLAGS = $(GST_PLUGIN_LIBTOOLFLAGS) --tag=CC
+diff --git a/ext/gl/shaders/deinterlacing_shader.fs b/ext/gl/shaders/deinterlacing_shader.fs
+new file mode 100755
+index 0000000..f999953
+--- /dev/null
++++ b/ext/gl/shaders/deinterlacing_shader.fs
+@@ -0,0 +1,27 @@
++precision mediump float;
++uniform sampler2D tex;
++uniform float width;
++uniform float height;
++varying vec2 v_texcoord;
++void main()
++{
++    vec2 topcoord, botcoord;
++    vec4 cur_color, top_color, bot_color;
++    topcoord.x = v_texcoord.x;
++    botcoord.x = v_texcoord.x;
++    if (v_texcoord.y == 0.0 || v_texcoord.y == 1.0) {
++        topcoord.y = v_texcoord.y ;
++        botcoord.y = v_texcoord.y ;
++    }
++    else {
++        topcoord.y = v_texcoord.y - 1.0/height;
++        botcoord.y = v_texcoord.y + 1.0/height;
++    }
++
++    cur_color = texture2D(tex, v_texcoord);
++    top_color = texture2D(tex, topcoord);
++    bot_color = texture2D(tex, botcoord);
++
++    gl_FragColor = 0.5*cur_color + 0.25*top_color + 0.25*bot_color; 
++}
++
+-- 
+1.7.9.5
+

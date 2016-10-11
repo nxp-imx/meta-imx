@@ -8,14 +8,18 @@ PACKAGES += " \
 "
 
 RDEPENDS_${PN}-fslcodec-testapps += " \
-    libfslcodec-test-bin \
-    libfslcodec-test-source \
+    imx-codec-test-bin \
+    imx-codec-test-source \
 "
 
 ALLOW_EMPTY_${PN}-fslcodec-testapps = "1"
 
+# Install i.MX specific UAPI headers to rootfs
+SOC_UAPI_HEADERS = "${@base_conditional('PREFERRED_PROVIDER_virtual/kernel','linux-imx','linux-imx-soc-headers','',d)}"
+
 RDEPENDS_${PN} += " \
     ${SOC_TOOLS_TESTAPPS} \
+    ${SOC_UAPI_HEADERS} \
     procps \
     ptpd \
     linuxptp \
@@ -27,6 +31,7 @@ RDEPENDS_${PN} += " \
     minicom \
     coreutils \
     mmc-utils \
+    udev-extraconf \
 "
 
 SOC_TOOLS_TESTAPPS = ""

@@ -1,4 +1,5 @@
-# Copyright (C) 2015 Freescale Semiconductor
+# Copyright (C) 2014-2015 Freescale Semiconductor
+# Copyright (C) 2014 O.S. Systems Software LTDA.
 
 SUMMARY = "Universal Adapter source"
 SECTION = "base"

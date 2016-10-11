@@ -9,7 +9,8 @@ LIC_FILES_CHKSUM = "file://gpu-core/usr/include/gc_vdk.h;beginline=5;endline=11;
 
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'virtual/libx11 libxdamage libxext libxfixes mesa', \
                              base_contains('DISTRO_FEATURES', 'wayland', 'wayland', \
-                                           '', d), d)}"
+                                           '', d), d)} \
+            libpng"
 
 EXTRA_PROVIDES = ""
 EXTRA_PROVIDES_mx6q  = " virtual/libgl virtual/libgles1 virtual/libgles2"
@@ -191,16 +192,6 @@ do_install () {
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so.2
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 
-    # FIXME: The libGL.so* libraries depend on the X11 libraries and
-    # libglapi.so from mesa. For non-X11 distros, neither of them are listed
-    # as build dependencies, which can lead to non-deterministic package
-    # dependencies. If the intention is that the GL backend should be usable
-    # without X11, the linking should be fixed. For now just skip
-    # packaging them.
-    if [ "${USE_X11}" = "no" ]; then
-        rm ${D}${libdir}/libGL.*
-    fi
-
     # skip packaging wayland libraries if no support is requested
     if [ "${USE_WL}" = "no" ]; then
         rm ${D}${libdir}/libgc_wayland_protocol.*
@@ -259,7 +250,6 @@ FILES_libvsc-mx6 = "${libdir}/libVSC${SOLIBS}"
 FILES_libgl-mx6 = "${libdir}/libGL${REALSOLIBS}"
 FILES_libgl-mx6-dev = "${libdir}/libGL${SOLIBSDEV}"
 FILES_libgl-mx6-dbg = "${libdir}/.debug/libGL.${SOLIBS}"
-RDEPENDS_libgl-mx6 = "libglapi"
 # Includes GL headers from mesa
 RDEPENDS_libgl-mx6-dev += "libgl-mesa-dev"
 
