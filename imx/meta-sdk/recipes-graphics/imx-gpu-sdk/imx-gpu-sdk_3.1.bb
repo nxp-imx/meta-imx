@@ -50,7 +50,8 @@ do_install () {
 
     if [ "${HAS_VPU}" = "0" ]; then
         rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
-        rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV        
+        rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
+        rm -rf ${D}/opt/${PN}/GLES2/DeBayer
     fi
 }
 
