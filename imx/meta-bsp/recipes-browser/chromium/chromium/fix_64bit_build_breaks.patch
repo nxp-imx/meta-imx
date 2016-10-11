@@ -1,0 +1,24 @@
+diff -Naur chromium-48.0.2548.0_org/content/common/sandbox_linux/bpf_gpu_policy_linux.cc chromium-48.0.2548.0/content/common/sandbox_linux/bpf_gpu_policy_linux.cc
+--- chromium-48.0.2548.0_org/content/common/sandbox_linux/bpf_gpu_policy_linux.cc	2016-06-23 10:01:48.145178537 -0500
++++ chromium-48.0.2548.0/content/common/sandbox_linux/bpf_gpu_policy_linux.cc	2016-06-23 10:22:46.000000000 -0500
+@@ -191,7 +191,7 @@
+ #endif  // !defined(__aarch64__)
+     case __NR_faccessat:
+     case __NR_openat:
+-#if !defined(OS_CHROMEOS)
++#if !defined(OS_CHROMEOS) && !defined(__aarch64__)
+     // The broker process needs to able to unlink the temporary
+     // files that it may create. This is used by DRI3.
+     case __NR_unlink:
+diff -Naur chromium-48.0.2548.0_org/third_party/ffmpeg/ffmpeg.gyp chromium-48.0.2548.0/third_party/ffmpeg/ffmpeg.gyp
+--- chromium-48.0.2548.0_org/third_party/ffmpeg/ffmpeg.gyp	2016-06-23 10:02:15.585314605 -0500
++++ chromium-48.0.2548.0/third_party/ffmpeg/ffmpeg.gyp	2016-06-23 10:28:00.000000000 -0500
+@@ -267,7 +267,7 @@
+                 '-fno-omit-frame-pointer',
+               ],
+             }],  # target_arch == "ia32"
+-            ['target_arch == "arm"', {
++            ['target_arch == "arm" or target_arch =="arm64" ', {
+               # On arm we use gcc to compile the assembly.
+               'sources': [
+                 '<@(asm_sources)',

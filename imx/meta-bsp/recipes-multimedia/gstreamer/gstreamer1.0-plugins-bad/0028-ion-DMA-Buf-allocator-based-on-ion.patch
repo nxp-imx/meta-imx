@@ -1,0 +1,484 @@
+From 8f8a2de1ccbc744c96676ff401fd4159fe230350 Mon Sep 17 00:00:00 2001
+From: Song Bing <bing.song@nxp.com>
+Date: Mon, 20 Jun 2016 10:28:34 +0800
+Subject: [PATCH] ion: DMA Buf allocator based on ion.
+
+DMA Buf allocator based on ion.
+
+Upstream-Status: Pending
+
+https://bugzilla.gnome.org/show_bug.cgi?id=768794
+---
+ configure.ac                    |    7 +
+ gst-libs/gst/Makefile.am        |   10 +-
+ gst-libs/gst/ion/Makefile.am    |   16 +++
+ gst-libs/gst/ion/gstionmemory.c |  297 +++++++++++++++++++++++++++++++++++++++
+ gst-libs/gst/ion/gstionmemory.h |   72 ++++++++++
+ 5 files changed, 399 insertions(+), 3 deletions(-)
+ create mode 100644 gst-libs/gst/ion/Makefile.am
+ create mode 100755 gst-libs/gst/ion/gstionmemory.c
+ create mode 100755 gst-libs/gst/ion/gstionmemory.h
+
+diff --git a/configure.ac b/configure.ac
+index 079b1cb..faeb2a8 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1973,6 +1973,12 @@ AG_GST_CHECK_FEATURE(TINYALSA, [tinyalsa], tinyalsa, [
+   AC_CHECK_HEADER(tinyalsa/asoundlib.h, HAVE_TINYALSA="yes", HAVE_TINYALSA="no")
+ ])
+ 
++dnl check for ion
++translit(dnm, m, l) AM_CONDITIONAL(USE_ION, true)
++AG_GST_CHECK_FEATURE(ION, [ion], ion, [
++  AC_CHECK_HEADER(linux/ion.h, HAVE_ION="yes", HAVE_ION="no")
++])
++
+ dnl *** ext plug-ins ***
+ dnl keep this list sorted alphabetically !
+ 
+@@ -3617,6 +3623,7 @@ gst-libs/gst/uridownloader/Makefile
+ gst-libs/gst/wayland/Makefile
+ gst-libs/gst/base/Makefile
+ gst-libs/gst/player/Makefile
++gst-libs/gst/ion/Makefile
+ gst-libs/gst/video/Makefile
+ gst-libs/gst/audio/Makefile
+ sys/Makefile
+diff --git a/gst-libs/gst/Makefile.am b/gst-libs/gst/Makefile.am
+index 7d0b309..eb2031c 100644
+--- a/gst-libs/gst/Makefile.am
++++ b/gst-libs/gst/Makefile.am
+@@ -10,12 +10,16 @@ if USE_WAYLAND
+ WAYLAND_DIR=wayland
+ endif
+ 
++if USE_ION
++ION_DIR=ion
++endif
++
+ SUBDIRS = uridownloader adaptivedemux interfaces basecamerabinsrc codecparsers \
+-	 insertbin mpegts base video audio player $(GL_DIR) $(WAYLAND_DIR)
++	 insertbin mpegts base video audio player $(ION_DIR) $(GL_DIR) $(WAYLAND_DIR)
+ 
+ noinst_HEADERS = gst-i18n-plugin.h gettext.h glib-compat-private.h
+ DIST_SUBDIRS = uridownloader adaptivedemux interfaces gl basecamerabinsrc \
+-	codecparsers insertbin mpegts wayland base video audio player
++	codecparsers insertbin mpegts wayland base video audio player ion
+ 
+ #dependencies
+ video, audio: base
+@@ -24,7 +28,7 @@ adaptivedemux: uridownloader
+ 
+ INDEPENDENT_SUBDIRS = \
+ 	interfaces basecamerabinsrc codecparsers insertbin uridownloader \
+-	mpegts base player $(GL_DIR) $(WAYLAND_DIR)
++	mpegts base player $(ION_DIR) $(GL_DIR) $(WAYLAND_DIR)
+ 
+ .PHONY: independent-subdirs $(INDEPENDENT_SUBDIRS)
+ 
+diff --git a/gst-libs/gst/ion/Makefile.am b/gst-libs/gst/ion/Makefile.am
+new file mode 100644
+index 0000000..0a9f9f3
+--- /dev/null
++++ b/gst-libs/gst/ion/Makefile.am
+@@ -0,0 +1,16 @@
++lib_LTLIBRARIES = libgstbadion-@GST_API_VERSION@.la
++
++libgstbadion_@GST_API_VERSION@_la_SOURCES = \
++	gstionmemory.c
++
++libgstbadion_@GST_API_VERSION@_la_CFLAGS = $(GST_CFLAGS) \
++	-DGST_USE_UNSTABLE_API
++
++libgstbadion_@GST_API_VERSION@_la_LIBADD = $(GST_LIBS)
++libgstbadion_@GST_API_VERSION@_la_LDFLAGS = $(GST_LIB_LDFLAGS) $(GST_ALL_LDFLAGS) $(GST_LT_LDFLAGS)
++
++libgstion_@GST_API_VERSION@includedir = $(includedir)/gstreamer-@GST_API_VERSION@/gst/ion
++libgstion_@GST_API_VERSION@include_HEADERS = gstionmemory.h
++
++EXTRA_DIST = 
++
+diff --git a/gst-libs/gst/ion/gstionmemory.c b/gst-libs/gst/ion/gstionmemory.c
+new file mode 100755
+index 0000000..ea62ac4
+--- /dev/null
++++ b/gst-libs/gst/ion/gstionmemory.c
+@@ -0,0 +1,297 @@
++/*
++ * Copyright (c) 2016, Freescale Semiconductor, Inc. All rights reserved.
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
++ * Boston, MA 02111-1307, USA.
++ */
++
++#include <errno.h>
++#include <fcntl.h>
++#include <stdio.h>
++#include <string.h>
++#include <sys/ioctl.h>
++#include <sys/mman.h>
++#include <sys/types.h>
++#include <linux/ion.h>
++
++#include <gst/allocators/gstdmabuf.h>
++#include "gstionmemory.h"
++
++GST_DEBUG_CATEGORY_STATIC(ion_allocator_debug);
++#define GST_CAT_DEFAULT ion_allocator_debug
++
++#define gst_ion_allocator_parent_class parent_class
++
++#define PAGE_ALIGN(x) (((x) + 4095) & ~4095)
++
++G_DEFINE_TYPE(GstIONAllocator, gst_ion_allocator, GST_TYPE_ALLOCATOR)
++
++static int 
++gst_ion_open()
++{
++  int fd = open("/dev/ion", O_RDWR);
++  if (fd < 0)
++    GST_ERROR ("open /dev/ion failed!\n");
++  return fd;
++}
++
++static int 
++gst_ion_close(int fd)
++{
++  int ret = close(fd);
++  if (ret < 0)
++    return -errno;
++  return ret;
++}
++
++static int 
++gst_ion_ioctl(int fd, int req, void *arg)
++{
++  int ret = ioctl(fd, req, arg);
++  if (ret < 0) {
++    GST_ERROR ("ioctl %x failed with code %d: %s\n", req,
++        ret, strerror(errno));
++    return -errno;
++  }
++  return ret;
++}
++
++static int 
++gst_ion_alloc(int fd, size_t len, size_t align, unsigned int heap_mask,
++    unsigned int flags, ion_user_handle_t *handle)
++{
++  int ret;
++  struct ion_allocation_data data = {
++    .len = len,
++    .align = align,
++    .heap_id_mask = heap_mask,
++    .flags = flags,
++  };
++
++  if (handle == NULL)
++    return -EINVAL;
++
++  ret = gst_ion_ioctl(fd, ION_IOC_ALLOC, &data);
++  if (ret < 0)
++    return ret;
++  *handle = data.handle;
++  return ret;
++}
++
++static int 
++gst_ion_free(int fd, ion_user_handle_t handle)
++{
++  struct ion_handle_data data = {
++    .handle = handle,
++  };
++  return gst_ion_ioctl(fd, ION_IOC_FREE, &data);
++}
++
++static int 
++gst_ion_map(int fd, ion_user_handle_t handle, size_t length, int prot,
++    int flags, off_t offset, unsigned char **ptr, int *map_fd)
++{
++  int ret;
++  unsigned char *tmp_ptr;
++  struct ion_fd_data data = {
++    .handle = handle,
++  };
++
++  if (map_fd == NULL)
++    return -EINVAL;
++  if (ptr == NULL)
++    return -EINVAL;
++
++  ret = gst_ion_ioctl(fd, ION_IOC_MAP, &data);
++  if (ret < 0)
++    return ret;
++  if (data.fd < 0) {
++    GST_ERROR ("map ioctl returned negative fd\n");
++    return -EINVAL;
++  }
++  tmp_ptr = mmap(NULL, length, prot, flags, data.fd, offset);
++  if (tmp_ptr == MAP_FAILED) {
++    GST_ERROR ("mmap failed: %s\n", strerror(errno));
++    return -errno;
++  }
++  *map_fd = data.fd;
++  *ptr = tmp_ptr;
++  return ret;
++}
++
++static void 
++gst_ion_mem_init(void)
++{
++	GstAllocator *allocator = g_object_new(gst_ion_allocator_get_type(), NULL);
++  GstIONAllocator *self = GST_ION_ALLOCATOR (allocator);
++  gint fd;
++
++  fd = gst_ion_open();
++  if (fd < 0) {
++    GST_ERROR ("Could not open ion driver");
++    g_object_unref (self);
++    return;
++  }
++
++  self->fd = fd;
++  self->dma_allocator = gst_dmabuf_allocator_new();
++
++	gst_allocator_register(GST_TYPE_ION_ALLOCATOR, allocator);
++}
++
++GstAllocator* 
++gst_ion_allocator_obtain(void)
++{
++	static GOnce ion_allocator_once = G_ONCE_INIT;
++	GstAllocator *allocator;
++
++	g_once(&ion_allocator_once, (GThreadFunc)gst_ion_mem_init, NULL);
++
++	allocator = gst_allocator_find(GST_TYPE_ION_ALLOCATOR);
++	if (allocator == NULL)
++		GST_WARNING("No allocator named %s found", GST_TYPE_ION_ALLOCATOR);
++
++	return allocator;
++}
++
++GQuark
++gst_ion_memory_quark (void)
++{
++  static GQuark quark = 0;
++
++  if (quark == 0)
++    quark = g_quark_from_string ("GstIONPrivate");
++
++  return quark;
++}
++
++static GstMemory *
++gst_ion_alloc_alloc (GstAllocator * allocator, gint size,
++    GstAllocationParams * params)
++{
++  GstIONAllocator *self = GST_ION_ALLOCATOR (allocator);
++  gint dmafd = -1;
++  guint8 *ptr = NULL;
++  ion_user_handle_t ionHandle;
++  gint ionSize = PAGE_ALIGN (size + params->prefix + params->padding);
++  gint err;
++
++  if (self->fd < 0)
++    return NULL;
++
++  err = gst_ion_alloc(self->fd, ionSize, 8, 1, 0, &ionHandle);
++  if (err) {
++    GST_ERROR ("gst_ion_alloc failed.");
++    return NULL;
++  }
++
++  err = gst_ion_map(self->fd, ionHandle, ionSize, PROT_READ | PROT_WRITE,
++      MAP_SHARED, 0, &ptr, &dmafd);
++  if (err) {
++    GST_ERROR ("gst_ion_map failed.");
++    goto bail;
++  }
++  GST_DEBUG ("phyalloc ptr:0x%x, ionSize:%d dmafd: %d", (int32_t)ptr,
++      ionSize, dmafd);
++
++  GstIONMemory *ion_mem = g_slice_new0 (GstIONMemory);
++  gst_memory_init (GST_MEMORY_CAST (ion_mem), GST_MEMORY_FLAG_NO_SHARE,
++                    allocator, 0, size, 0, 0, size);
++
++  ion_mem->vaddr = ptr;
++  ion_mem->size = ionSize;
++  ion_mem->handle = ionHandle;
++  ion_mem->fd = dmafd;
++
++  GstMemory * mem =
++    gst_dmabuf_allocator_alloc(self->dma_allocator, dmafd, ionSize);
++
++  gst_mini_object_set_qdata (GST_MINI_OBJECT (mem), GST_ION_MEMORY_QUARK,
++                              ion_mem, gst_memory_unref);
++
++  GST_LOG ("allocated memory %p by allocator %p with qdata %p\n",
++            mem, allocator, ion_mem);
++
++  return mem;
++
++bail:
++  gst_ion_free(self->fd, ionHandle);
++  if (ptr != MAP_FAILED) {
++    munmap(ptr, ionSize);
++  }
++  if (dmafd > 0) {
++    close(dmafd);
++  }
++  return NULL;
++}
++
++static void
++gst_ion_alloc_free (GstAllocator * allocator, GstMemory * memory)
++{
++  GstIONAllocator *self = GST_ION_ALLOCATOR (allocator);
++  GstIONMemory *ion_mem = (GstIONMemory *) memory;
++
++  if (!ion_mem || self->fd < 0)
++    return;
++
++  ion_user_handle_t ionHandle =
++    (ion_user_handle_t)ion_mem->handle;
++  munmap(ion_mem->vaddr, ion_mem->size);
++  close(ion_mem->fd);
++  gst_ion_free(self->fd, ionHandle);
++
++  g_slice_free (GstIONMemory, ion_mem);
++}
++
++static void
++gst_ion_allocator_dispose (GObject * object)
++{
++  GstIONAllocator *self = GST_ION_ALLOCATOR (object);
++
++  if (self->fd > 0) {
++    close(self->fd);
++    self->fd = -1;
++  }
++
++  if (self->dma_allocator)
++    gst_object_unref(self->dma_allocator);
++  self->dma_allocator = NULL;
++
++  G_OBJECT_CLASS (parent_class)->dispose (object);
++}
++
++static void
++gst_ion_allocator_class_init (GstIONAllocatorClass * klass)
++{
++  GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
++  GstAllocatorClass *allocator_class = GST_ALLOCATOR_CLASS (klass);
++
++  allocator_class->alloc = GST_DEBUG_FUNCPTR (gst_ion_alloc_alloc);
++  allocator_class->free = GST_DEBUG_FUNCPTR (gst_ion_alloc_free);
++  gobject_class->dispose = GST_DEBUG_FUNCPTR (gst_ion_allocator_dispose);
++
++  GST_DEBUG_CATEGORY_INIT(ion_allocator_debug, "ionmemory", 0, "DMA FD memory allocator based on ion");
++}
++
++static void
++gst_ion_allocator_init (GstIONAllocator * self)
++{
++  GstAllocator *allocator = GST_ALLOCATOR (self);
++
++  allocator->mem_type = GST_ALLOCATOR_ION;
++  allocator->mem_map = NULL;
++  allocator->mem_unmap = NULL;
++}
++
+diff --git a/gst-libs/gst/ion/gstionmemory.h b/gst-libs/gst/ion/gstionmemory.h
+new file mode 100755
+index 0000000..b6dca5f
+--- /dev/null
++++ b/gst-libs/gst/ion/gstionmemory.h
+@@ -0,0 +1,72 @@
++/*
++ * Copyright (c) 2016, Freescale Semiconductor, Inc. All rights reserved.
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
++ * Boston, MA 02111-1307, USA.
++ */
++
++#ifndef __GST_IONMEMORY_H__
++#define __GST_IONMEMORY_H__
++
++#include <gst/gst.h>
++#include <gst/gstallocator.h>
++
++G_BEGIN_DECLS
++
++typedef struct _GstIONAllocator GstIONAllocator;
++typedef struct _GstIONAllocatorClass GstIONAllocatorClass;
++typedef struct _GstIONMemory GstIONMemory;
++
++#define GST_ALLOCATOR_ION "ionmem"
++
++#define GST_TYPE_ION_ALLOCATOR gst_ion_allocator_get_type ()
++#define GST_IS_ION_ALLOCATOR(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
++    GST_TYPE_ION_ALLOCATOR))
++#define GST_ION_ALLOCATOR(obj) \
++  (G_TYPE_CHECK_INSTANCE_CAST((obj), GST_TYPE_ION_ALLOCATOR, GstIONAllocator))
++#define GST_ION_ALLOCATOR_CLASS(klass) \
++  (G_TYPE_CHECK_CLASS_CAST((klass), GST_TYPE_ION_ALLOCATOR, GstIONAllocatorClass))
++#define GST_ION_ALLOCATOR_CAST(obj) ((GstIONAllocator *)(obj))
++
++#define GST_ION_MEMORY_QUARK gst_ion_memory_quark ()
++
++struct _GstIONAllocator
++{
++  GstAllocator parent;
++
++  gint fd;
++  GstAllocator *dma_allocator;
++};
++
++struct _GstIONAllocatorClass
++{
++  GstAllocatorClass parent;
++};
++
++struct _GstIONMemory {
++  GstMemory mem;
++
++  gint fd;
++  guint8 *vaddr;
++  gsize size;
++  gint handle;
++};
++
++GType gst_ion_allocator_get_type (void);
++GstAllocator* gst_ion_allocator_obtain (void);
++
++G_END_DECLS
++
++#endif /* __GST_IONMEMORY_H__ */
+-- 
+1.7.9.5
+

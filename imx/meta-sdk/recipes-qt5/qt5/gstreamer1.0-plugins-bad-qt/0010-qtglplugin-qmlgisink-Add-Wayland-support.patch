@@ -1,0 +1,105 @@
+From 1629f84d142f5b6d12cb2a5075b5de04c5a5b4a5 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Sun, 12 Jun 2016 15:35:28 +0800
+Subject: [PATCH 2/2] [qtglplugin] qmlgisink: Add Wayland support
+
+Don't use gstgldisplay to get wayland display. Should use QPA on wayland
+to get wayland display for QT. Also propagate GL context creation failure
+upwards. Otherwise an application cannot know if the qmlglsink will be displaying frames
+incorrectly/at all.
+
+Upstream-Status: Backport[1.9.1]
+
+https://bugzilla.gnome.org/show_bug.cgi?id=767553
+
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+---
+ configure.ac       |  3 +++
+ ext/qt/Makefile.am |  1 +
+ ext/qt/qtitem.cc   | 23 +++++++++++++++++++++--
+ 3 files changed, 25 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 3e68ed2..079b1cb 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2864,6 +2864,9 @@ AG_GST_CHECK_FEATURE(QT, [Qt elements], qt, [
+       else
+         HAVE_QT="yes"
+         HAVE_QT_WINDOWING="no"
++        QT_VERSION="`$PKG_CONFIG --modversion Qt5Core`"
++        QPA_INCLUDE_PATH=${STAGING_INCDIR}/../../`$PKG_CONFIG --variable=includedir Qt5Core`/QtGui/${QT_VERSION}/QtGui
++        AC_SUBST(QPA_INCLUDE_PATH)
+         if test "x$GST_GL_HAVE_WINDOW_X11" = "x1" -a "x$GST_GL_HAVE_PLATFORM_GLX" = "x1"; then
+           PKG_CHECK_MODULES(QT_X11, Qt5X11Extras, [
+             AC_DEFINE([HAVE_QT_X11], [], [Define if Qt X11 integration is installed])
+diff --git a/ext/qt/Makefile.am b/ext/qt/Makefile.am
+index 5fdd90a..eab3e97 100644
+--- a/ext/qt/Makefile.am
++++ b/ext/qt/Makefile.am
+@@ -26,6 +26,7 @@ libgstqtsink_la_SOURCES = \
+ libgstqtsink_la_CXXFLAGS = \
+ 	-I$(top_srcdir)/gst-libs \
+ 	-I$(top_builddir)/gst-libs \
++	-I$(QPA_INCLUDE_PATH) \
+ 	$(GST_CXXFLAGS) \
+ 	$(GST_BASE_CFLAGS) \
+ 	$(GST_PLUGINS_BASE_CFLAGS) \
+diff --git a/ext/qt/qtitem.cc b/ext/qt/qtitem.cc
+index fb1e6be..d48e470 100644
+--- a/ext/qt/qtitem.cc
++++ b/ext/qt/qtitem.cc
+@@ -32,6 +32,7 @@
+ #include <QtGui/QGuiApplication>
+ #include <QtQuick/QQuickWindow>
+ #include <QtQuick/QSGSimpleTextureNode>
++#include <qpa/qplatformnativeinterface.h>
+ 
+ #if GST_GL_HAVE_WINDOW_X11 && GST_GL_HAVE_PLATFORM_GLX && defined (HAVE_QT_X11)
+ #include <QX11Info>
+@@ -153,6 +154,18 @@ QtGLVideoItem::QtGLVideoItem()
+     this->priv->display = (GstGLDisplay *)
+         gst_gl_display_x11_new_with_display (QX11Info::display ());
+ #endif
++#if GST_GL_HAVE_WINDOW_WAYLAND && GST_GL_HAVE_PLATFORM_EGL && defined (HAVE_QT_WAYLAND)
++  if (QString::fromUtf8 ("wayland") == app->platformName()
++      || QString::fromUtf8 ("wayland-egl") == app->platformName()){
++    struct wl_display * wayland_display;
++    QPlatformNativeInterface *native =
++        QGuiApplication::platformNativeInterface();
++    wayland_display = (struct wl_display *)
++        native->nativeResourceForWindow("display", NULL);
++    this->priv->display = (GstGLDisplay *)
++        gst_gl_display_wayland_new_with_display (wayland_display);
++  }
++#endif
+ #if GST_GL_HAVE_WINDOW_ANDROID && GST_GL_HAVE_PLATFORM_EGL && defined (HAVE_QT_ANDROID)
+   if (QString::fromUtf8 ("android") == app->platformName())
+     this->priv->display = (GstGLDisplay *) gst_gl_display_egl_new ();
+@@ -416,6 +429,8 @@ QtGLVideoItem::onSceneGraphInvalidated ()
+ gboolean
+ qt_item_init_winsys (QtGLVideoItem * widget)
+ {
++  GError *error = NULL;
++
+   g_return_val_if_fail (widget != NULL, FALSE);
+ 
+   g_mutex_lock (&widget->priv->lock);
+@@ -448,8 +463,12 @@ qt_item_init_winsys (QtGLVideoItem * widget)
+     return FALSE;
+   }
+ 
+-  gst_gl_context_create (widget->priv->context, widget->priv->other_context,
+-      NULL);
++  if (!gst_gl_context_create (widget->priv->context, widget->priv->other_context,
++        &error)) {
++    GST_ERROR ("%s", error->message);
++    g_mutex_unlock (&widget->priv->lock);
++    return FALSE;
++  }
+ 
+   g_mutex_unlock (&widget->priv->lock);
+   return TRUE;
+-- 
+1.9.1
+

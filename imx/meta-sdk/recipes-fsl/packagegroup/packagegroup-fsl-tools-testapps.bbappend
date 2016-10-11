@@ -32,6 +32,8 @@ RDEPENDS_${PN} += " \
     coreutils \
     mmc-utils \
     udev-extraconf \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-examples', '', d)} \
 "
 
 SOC_TOOLS_TESTAPPS = ""
@@ -50,6 +52,13 @@ SOC_TOOLS_TESTAPPS_mx6ul += " \
     ${PN}-fslcodec-testapps \
 "
 SOC_TOOLS_TESTAPPS_mx7 += " \
+    imx-kobs \
+    vlan \
+    cryptodev-module \
+    cryptodev-tests \
+    ${PN}-fslcodec-testapps \
+"
+SOC_TOOLS_TESTAPPS_mx8 += " \
     imx-kobs \
     vlan \
     cryptodev-module \

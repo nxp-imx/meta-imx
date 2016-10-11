@@ -1,0 +1,71 @@
+From 139e50acd70b8ce0e220d7d7433ccfe43a6b1fd8 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Wed, 27 Jul 2016 10:55:01 +0800
+Subject: [PATCH 5/6] glwindow: Fix glimagesink cannot show frame when connect
+ to qmlglsrc
+
+1.When connect to qmlglsrc, x11 event loop will be replace by qt event loop
+  which will cause the window cannot receive event from xserver, such as resize
+2.Also advertise support for the affine transformation meta in the allocation
+  query.
+
+Upstream-Status: Backport [1.9.2]
+
+https://bugzilla.gnome.org/show_bug.cgi?id=768160
+
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+---
+ ext/gl/gstglimagesink.c               |  2 ++
+ gst-libs/gst/gl/x11/gstglwindow_x11.c | 14 +++++++++-----
+ 2 files changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/ext/gl/gstglimagesink.c b/ext/gl/gstglimagesink.c
+index cd3147d..d81fcfb 100644
+--- a/ext/gl/gstglimagesink.c
++++ b/ext/gl/gstglimagesink.c
+@@ -1957,6 +1957,8 @@ gst_glimage_sink_propose_allocation (GstBaseSink * bsink, GstQuery * query)
+ 
+   gst_query_add_allocation_meta (query,
+       GST_VIDEO_OVERLAY_COMPOSITION_META_API_TYPE, allocation_meta);
++  gst_query_add_allocation_meta (query,
++      GST_VIDEO_AFFINE_TRANSFORMATION_META_API_TYPE, 0);
+ 
+   if (allocation_meta)
+     gst_structure_free (allocation_meta);
+diff --git a/gst-libs/gst/gl/x11/gstglwindow_x11.c b/gst-libs/gst/gl/x11/gstglwindow_x11.c
+index 67160f6..bc7b9c0 100644
+--- a/gst-libs/gst/gl/x11/gstglwindow_x11.c
++++ b/gst-libs/gst/gl/x11/gstglwindow_x11.c
+@@ -399,6 +399,7 @@ draw_cb (gpointer data)
+   GstGLWindow *window = GST_GL_WINDOW (window_x11);
+ 
+   if (gst_gl_window_is_running (window)) {
++    guint width, height;
+     XWindowAttributes attr;
+ 
+     XGetWindowAttributes (window_x11->device, window_x11->internal_win_id,
+@@ -422,13 +423,16 @@ draw_cb (gpointer data)
+       }
+     }
+ 
+-    if (window_x11->allow_extra_expose_events) {
+-      if (window->queue_resize) {
+-        guint width, height;
++    gst_gl_window_get_surface_dimensions (window, &width, &height);
++    if (attr.width != width || attr.height != height) {
++      width = attr.width;
++      height = attr.height;
++      gst_gl_window_queue_resize (window);
++    }
+ 
+-        gst_gl_window_get_surface_dimensions (window, &width, &height);
++    if (window_x11->allow_extra_expose_events) {
++      if (window->queue_resize)
+         gst_gl_window_resize (window, width, height);
+-      }
+ 
+       if (window->draw) {
+         GstGLContext *context = gst_gl_window_get_context (window);
+-- 
+1.9.1
+

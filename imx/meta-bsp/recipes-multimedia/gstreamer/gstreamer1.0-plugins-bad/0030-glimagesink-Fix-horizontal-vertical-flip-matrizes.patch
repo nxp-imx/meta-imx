@@ -1,0 +1,44 @@
+From 99937ea5854b6182333b9cf578db726748665ae7 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Mon, 1 Aug 2016 14:12:35 +0800
+Subject: [PATCH 1/6] glimagesink: Fix horizontal/vertical flip matrizes
+
+They were swapped.
+
+Upstream-Status: Backport [1.9.2]
+
+https://bugzilla.gnome.org/show_bug.cgi?id=769371
+
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+---
+ ext/gl/gstglimagesink.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/ext/gl/gstglimagesink.c b/ext/gl/gstglimagesink.c
+index fb60468..cd3147d 100644
+--- a/ext/gl/gstglimagesink.c
++++ b/ext/gl/gstglimagesink.c
+@@ -472,16 +472,16 @@ static const gfloat counterclockwise_matrix[] = {
+ 
+ /* horizontal-flip */
+ static const gfloat horizontal_flip_matrix[] = {
+-  1.0f, 0.0f, 0.0f, 0.0f,
+-  0.0f, -1.0f, 0.0f, 0.0f,
++  -1.0f, 0.0f, 0.0f, 0.0f,
++  0.0f, 1.0f, 0.0f, 0.0f,
+   0.0f, 0.0f, 1.0f, 0.0f,
+   0.0f, 0.0f, 0.0f, 1.0f,
+ };
+ 
+ /* vertical-flip */
+ static const gfloat vertical_flip_matrix[] = {
+-  -1.0f, 0.0f, 0.0f, 0.0f,
+-  0.0f, 1.0f, 0.0f, 0.0f,
++  1.0f, 0.0f, 0.0f, 0.0f,
++  0.0f, -1.0f, 0.0f, 0.0f,
+   0.0f, 0.0f, 1.0f, 0.0f,
+   0.0f, 0.0f, 0.0f, 1.0f,
+ };
+-- 
+1.9.1
+

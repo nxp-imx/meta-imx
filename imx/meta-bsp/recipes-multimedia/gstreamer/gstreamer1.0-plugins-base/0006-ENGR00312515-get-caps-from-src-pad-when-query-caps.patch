@@ -1,13 +1,14 @@
-From e36cb98316dcbed910dd9bbb3885075bbe29b5e6 Mon Sep 17 00:00:00 2001
+From 28c14cdc57c074faef2ab8bcfaa9328b979d8215 Mon Sep 17 00:00:00 2001
 From: zhouming <b42586@freescale.com>
 Date: Wed, 14 May 2014 10:16:20 +0800
-Subject: [PATCH 6/9] ENGR00312515: get caps from src pad when query caps
+Subject: [PATCH 06/12] ENGR00312515: get caps from src pad when query caps
 
 https://bugzilla.gnome.org/show_bug.cgi?id=728312
 
-Upstream-Status: Pending
+Upstream Status: Pending
 
 Signed-off-by: zhouming <b42586@freescale.com>
+Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
  gst-libs/gst/tag/gsttagdemux.c | 13 +++++++++++++
  1 file changed, 13 insertions(+)

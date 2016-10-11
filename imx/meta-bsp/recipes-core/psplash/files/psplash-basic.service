@@ -1,0 +1,11 @@
+[Unit]
+Description=Updates psplash to basic
+After=psplash-start.service basic.target
+Before=psplash-network.service
+
+[Service]
+TimeoutSec=20
+ExecStart=/usr/bin/psplash-write "PROGRESS 40"
+
+[Install]
+WantedBy=basic.target

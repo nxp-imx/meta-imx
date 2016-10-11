@@ -1,16 +1,20 @@
-# Copyright (C) 2012-2015 Freescale Semiconductor
+# Copyright (C) 2012-2016 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "Freescale Multimedia codec libs"
 LICENSE = "Proprietary"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://COPYING;md5=01ba08a2b77c3a0a9d0ab5d4d83fed64"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d4f548f93b5fe0ee2bc86758c344412d"
+
+# Backward compatibility
+PROVIDES += "libfslcodec"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-# Choose between Soft Float-Point and Hard Float-Point
-EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d)}"
+# Choose between 32bit and 64bit binaries
+EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8', \
+                   bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d), d)}"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG_mx6q = "vpu"
@@ -19,8 +23,10 @@ PACKAGECONFIG_mx6dl = "vpu"
 PACKAGECONFIG[vpu] = "--enable-vpu,--disable-vpu,imx-vpu"
 
 do_install_append() {
-	# FIXME: This link points to nowhere
-	rm ${D}${libdir}/imx-mm/audio-codec/lib_src_ppp_arm11_elinux.so
+    # FIXME: This link points to nowhere
+    if [ -e ${D}${libdir}/imx-mm/audio-codec/lib_src_ppp_arm11_elinux.so ]; then
+        rm ${D}${libdir}/imx-mm/audio-codec/lib_src_ppp_arm11_elinux.so
+    fi
 
     # LTIB move the files around or gst-fsl-plugin won't find them
     for p in $(find ${D}${libdir}/imx-mm -mindepth 2 -maxdepth 2 -not -type d); do
@@ -57,6 +63,17 @@ python __split_libfslcodec_plugins() {
                       output_pattern='imx-codec-%s',
                       description='Freescale i.MX Codec (%s)',
                       extra_depends='')
+    pkgs = d.getVar('PACKAGES', True).split()
+    for pkg in pkgs:
+        meta = pkg[10:]
+        if meta != '':
+            d.setVar('RREPLACES_%s' % pkg, ' libfslcodec-%s' % meta)
+            d.setVar('RPROVIDES_%s' % pkg, ' libfslcodec-%s' % meta)
+            d.setVar('RCONFLICTS_%s' % pkg, ' libfslcodec-%s' % meta)
+        else :
+            d.setVar('RREPLACES_%s' % pkg, ' libfslcodec')
+            d.setVar('RPROVIDES_%s' % pkg, ' libfslcodec')
+            d.setVar('RCONFLICTS_%s' % pkg, ' libfslcodec')
 }
 
 python __set_metapkg_rdepends() {

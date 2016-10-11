@@ -1,17 +1,24 @@
-# Copyright (C) 2012-2014 O.S. Systems Software LTDA.
-# Copyright (C) 2012-2015 Freescale Semiconductor
+# Copyright (C) 2012-2014, 2016 O.S. Systems Software LTDA.
+# Copyright (C) 2012-2016 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "Freescale Multimedia parser libs"
 LICENSE = "Proprietary"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://COPYING;md5=01ba08a2b77c3a0a9d0ab5d4d83fed64"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d4f548f93b5fe0ee2bc86758c344412d"
+
+# For backwards compatibility
+PROVIDES += "libfslparser"
+RREPLACES_${PN} = "libfslparser"
+RPROVIDES_${PN} = "libfslparser"
+RCONFLICTS_${PN} = "libfslparser"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-# Choose between Soft Float-Point and Hard Float-Point
-EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '--enable-fsw', d)}"
+# Choose between 32bit and 64bit binaries
+EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8', \
+                  bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '--enable-fsw', d), d)}"
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
@@ -31,3 +38,4 @@ FILES_${PN} += "${libdir}/imx-mm/*/*${SOLIBS} ${libdir}/imx-mm/*/*${SOLIBSDEV}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+INHIBIT_SYSROOT_STRIP = "1"

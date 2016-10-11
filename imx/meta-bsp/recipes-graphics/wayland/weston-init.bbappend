@@ -1,13 +1,15 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append = " file://weston-launch-init"
+SRC_URI_append = " \
+    file://weston-start \
+    file://profile \
+"
 
-USE_WESTON_LAUNCH = "${@base_contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
+do_install_append() {
+	install -Dm0755 ${WORKDIR}/profile ${D}${sysconfdir}/profile.d/weston.sh
 
-do_install_append() {	
-
-    if [ "${USE_WESTON_LAUNCH}" = "yes" ]; then  
-	install -d ${D}/${sysconfdir}/init.d      
-        install -m755 ${WORKDIR}/weston-launch-init ${D}/${sysconfdir}/init.d/weston
-    fi    
+	# Install weston-start script
+	install -Dm755 ${WORKDIR}/weston-start ${D}${bindir}/weston-start
+	sed -i 's,@DATADIR@,${datadir},g' ${D}${bindir}/weston-start
+	sed -i 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${bindir}/weston-start
 }

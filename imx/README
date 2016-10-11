@@ -1,30 +1,27 @@
-Freescale's 4.1.15-1.2.0 Yocto Project BSP
+NXP's 4.1.15-2.0.0 Yocto Project BSP
 ================================================
 
-Note 4.1.15-1.2.0 is an update to i.MX 7Dual SABRE Device.
-
-To build the oriignal 4.1.15-1.0.0_ga checkout tag imx_4.1.15_1.0.0_ga in meta-fsl-bsp-release.
-
-This BSP is a Freescale release providing support for the following processors
+This BSP is an NXP release providing support for the following processors
 
 The following boards were not tested in this release but this release contains updates
 that might affect these boards.
 
-   * Freescale i.MX 6QuadPlus SABRE Device (imx6qpsabresd)
-   * Freescale i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
-   * Freescale i.MX 6UltraLite EVK (imx6ulevk)
-   * Freescale i.MX 7Dual SABRE Smart Device (imx7dsabresd)
-   * Freescale i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
-   * Freescale i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
-   * Freescale i.MX 6Quad SABRE Smart Device (imx6qsabresd)
-   * Freescale i.MX 6Quad SABRE Auto (imx6qsabreauto)
-   * Freescale i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
-   * Freescale i.MX 6DualLite SABRE Auto (imx6dlsabreauto)
-   * Freescale i.MX 6SoloLite EVK (imx6slevk)
-   * Freescale i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
-   * Freescale i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
-   * Freescale i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
-   * Freescale i.MX 6SOLO SABRE Auto (imx6solosabreauto )
+   * NXP i.MX 6QuadPlus SABRE Device (imx6qpsabresd)
+   * NXP i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
+   * NXP i.MX 6UltraLite EVK (imx6ulevk)
+   * NXP i.MX 6ULL EVK (imx6ull14x14evk)
+   * NXP i.MX 7Dual SABRE Smart Device (imx7dsabresd)
+   * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
+   * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
+   * NXP i.MX 6Quad SABRE Smart Device (imx6qsabresd)
+   * NXP i.MX 6Quad SABRE Auto (imx6qsabreauto)
+   * NXP i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
+   * NXP i.MX 6DualLite SABRE Auto (iEmx6dlsabreauto)
+   * NXP i.MX 6SoloLite EVK (imx6slevk)
+   * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
+   * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
+   * NXP i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
+   * NXP i.MX 6SOLO SABRE Auto (imx6solosabreauto )
 
  * i.MX Device Tree configurations for each machine
     Each machine files lists the associated device trees for that machine.
@@ -34,6 +31,7 @@ that might affect these boards.
     imx6qpsabreauto - sd, eim-nor, nand, spi-nor, sata
     imx7dsabresd - sd, qspi1, nand, epdc
     imx6ulevk - sd, qspi1
+    imx6ullevk - sd
     imx6sxsabresd - sd, qspi2, m4fastup, emmc
     imx6sxsabreauto - sd, qspi1, nand
     imx6qsabresd - sd, sata
@@ -49,13 +47,20 @@ Quick Start Guide
 -----------------
 See the Freescale Yocto Project User's Guide for instructions on installing repo.
 
-First install the i.MX Freescale BSP repo
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1.15-1.0.0_ga
+First install the i.MX NXP BSP repo
+$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth
 
-Download the Yocto Freescale Layers:
+Download the Yocto Project NXP Layers:
 $: repo sync
 
-Run i.MX Freescale Yocto Project Setup:
+If errors on repo init, remove the .repo directory and try repo init again.
+
+Note that this downloads the latest release for 4.1.15-2.0.0 plus patches after.
+
+To download only the 4.1.15-2.0.0 release use this for repo init command
+$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth -m imx-4.1.15-2.0.0.xml
+
+Run i.MX NXP Yocto Project Setup:
 $: MACHINE=< machine name> source fsl-setup-release.sh -b <build directory> -e <backend fb, wayland, x11>
 
 After this your system will be configured to start a Yocto Project build.
@@ -137,9 +142,9 @@ To build MFGTool, build the following:
 
 End User License Agreement
 --------------------------
-During the Freescale Yocto Community BSP setup-environment process, the Freescale i.MX End User License Agreement (EULA) 
-is displayed. To continue, users must agree to the conditions of this license. The agreement to the terms allows the 
-Yocto build to untar packages from the Freescale mirror. Please read this license agreement carefully during the 
+During the NXP Yocto Project Community BSP setup-environment process, the NXP i.MX End User License Agreement (EULA)
+is displayed. To continue, users must agree to the conditions of this license. The agreement to the terms allows the
+Yocto build to untar packages from the NXP mirror. Please read this license agreement carefully during the
 setup process because, once accepted, all further work in the Yocto environment is tied to this accepted agreement.
 
 Chromium
@@ -166,3 +171,11 @@ Qt license the work can not be used with a commercial Qt license.  Work with a l
 the differences between each license.   Default builds use an open source Qt license.
 
 Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
+
+Systemd
+-------
+Systemd support is not enabled as default but it can be enabled by uncommenting out the systemd settings in
+imx/meta-sdk//conf/distro/include/fsl-imx-preferred-env.inc.
+
+Note systemd has not gone through a validation cycle so it is provided with no support.  The release layer
+contains what is needed for systemd to work if enabled.  For this release eudev was the default.

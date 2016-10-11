@@ -1,7 +1,7 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "Freescale i.MX Release Distro"
-DISTRO_VERSION = "4.1.15-1.2.0"
-DISTRO_CODENAME = "jethro"
+DISTRO_VERSION = "4.1.15-2.0.0"
+DISTRO_CODENAME = "master"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
@@ -12,23 +12,20 @@ TARGET_VENDOR = "-poky"
 
 LOCALCONF_VERSION = "1"
 
-IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch"
+IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch bluez"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 IMAGE_FSTYPES = "tar.bz2 ext4 sdcard"
 
-BBMASK = "meta-fsl-arm/recipes-bsp/u-boot/u-boot-imx_2015.04.bb"
-BBMASK .= "|meta-fsl-arm/recipes-bsp/u-boot/u-boot-imx-mfgtool_2015.04.bb"
-BBMASK .= "|meta-fsl-arm/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend"
+BBMASK = "meta-fsl-arm/recipes-kernel/linux/linux-imx_4.1.15.bb"
+BBMASK .= "|meta-fsl-arm/recipes-kernel/linux/linux-imx-mfgtool_4.1.15.bb"
 BBMASK .= "|meta-freescale/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend"
-BBMASK .= "|meta-fsl-arm/openembedded-layer/recipes-support/opencv/opencv_2.4.bbappend"
 BBMASK .= "|meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend"
+BBMASK .= "|meta-fsl-arm/recipes-bsp/firmware-imx"
+
+BBMASK .= "|meta-fsl-arm/recipes-graphics/images/core-image-weston.bbappend"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
-# Comment out the 2 lines below to use bluez4.
-DISTRO_FEATURES_append_mx6 = " bluez5"
-DISTRO_FEATURES_append_mx6ul = "bluez5"
-DISTRO_FEATURES_append_mx7 = " bluez5"
 
 SDK_NAME = "${DISTRO}-${TCLIBC}-${SDK_ARCH}-${IMAGE_BASENAME}-${TUNE_PKGARCH}"
 SDKPATH = "/opt/${DISTRO}/${SDK_VERSION}"
@@ -98,3 +95,4 @@ WARN_QA_remove = "${WARN_TO_ERROR_QA}"
 ERROR_QA_append = " ${WARN_TO_ERROR_QA}"
 
 MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"
+MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx8 = "1"

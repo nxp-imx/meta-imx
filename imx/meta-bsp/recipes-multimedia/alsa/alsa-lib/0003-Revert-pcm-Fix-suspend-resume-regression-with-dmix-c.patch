@@ -1,0 +1,44 @@
+From 7f3f3a0e106571de672b3302feacc18621f4b993 Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <shengjiu.wang@freescale.com>
+Date: Wed, 18 May 2016 14:57:44 +0800
+Subject: [PATCH 1/2] Revert "pcm: Fix suspend/resume regression with dmix &
+ co"
+
+This reverts commit c14b0a08f0bf58e4f62307c68f8ff0137b4dec19.
+
+The patch will cause the alsa-lib may stop at
+snd_pcm_write_areas()
+	--->snd_pcm_wait_nocheck()
+with suspend and resume test.
+
+The reason is that: In the beginning of playback and before the
+snd_pcm_dmix_start is called, the system enter suspend. After resuming
+snd_pcm_direct_resume() update the dmix->stte to 3 (RUNNING), because
+dmix->spcm is in RUNNING from snd_pcm_dmix_open(), it is the first
+instance.
+So in snd_pcm_write_areas() the state is RUNNING, then snd_pcm_start()
+will never be called, after a while, alsa-lib will stop at the
+snd_pcm_wait_nocheck() for the kernel won't wake up the timer.
+
+Upstream-Status: Pending
+
+Signed-off-by: Shengjiu Wang <shengjiu.wang@freescale.com>
+---
+ src/pcm/pcm_direct.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/pcm/pcm_direct.c b/src/pcm/pcm_direct.c
+index 5352b4b..fd3877c 100644
+--- a/src/pcm/pcm_direct.c
++++ b/src/pcm/pcm_direct.c
+@@ -842,7 +842,6 @@ int snd_pcm_direct_resume(snd_pcm_t *pcm)
+ 		snd_pcm_start(dmix->spcm);
+ 		err = 0;
+ 	}
+-	dmix->state = snd_pcm_state(dmix->spcm);
+ 	snd_pcm_direct_semaphore_up(dmix, DIRECT_IPC_SEM_CLIENT);
+ 	return err;
+ }
+-- 
+1.9.1
+

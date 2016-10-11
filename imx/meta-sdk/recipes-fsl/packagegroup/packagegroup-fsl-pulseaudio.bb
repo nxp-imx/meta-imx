@@ -9,14 +9,14 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 inherit packagegroup
 
-PULSEAUDIO_EXTRA_INSTALL = "${@base_contains('DISTRO_FEATURES','x11', \
+PULSEAUDIO_EXTRA_INSTALL = "${@bb.utils.contains('DISTRO_FEATURES','x11', \
                             'pulseaudio-module-x11-xsmp \
                              pulseaudio-module-x11-publish \
                              pulseaudio-module-x11-cork-request \
                              pulseaudio-module-x11-bell', \
                             '', d)}"
 
-RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'pulseaudio',  \
+RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio',  \
     ' pulseaudio-server \
     pulseaudio-module-cli \
     pulseaudio-misc \
