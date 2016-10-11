@@ -1,7 +1,8 @@
-Freescale's 4.1.15-1.1.0_patch Yocto Project BSP
+Freescale's 4.1.15-1.1.1 Yocto Project BSP
 ================================================
 
-Note 4.1.15-1.1.0 is a patch update to i.MX 6UltraLite tapeout update.
+Note 4.1.15-1.1.1 is a patch update to i.MX 6UltraLite.
+
 To build the oriignal 4.1.15-1.0.0_ga checkout tag imx_4.1.15_1.0.0_ga in meta-fsl-bsp-release.
 
 This BSP is a Freescale release providing support for the following processors
