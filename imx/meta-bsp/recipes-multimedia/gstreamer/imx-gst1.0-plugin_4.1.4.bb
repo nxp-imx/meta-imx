@@ -12,6 +12,7 @@ DEPENDS_append_mx6dl = " imx-lib imx-vpu imx-vpuwrap"
 DEPENDS_append_mx6sl = " imx-lib"
 DEPENDS_append_mx6sx = " imx-lib"
 DEPENDS_append_mx6ul = " imx-lib"
+DEPENDS_append_mx6sll = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 
 # For backwards compatibility
@@ -41,6 +42,7 @@ PLATFORM_mx6 = "MX6"
 PLATFORM_mx6sl = "MX6SL"
 PLATFORM_mx6sx = "MX6SX"
 PLATFORM_mx6ul = "MX6UL"
+PLATFORM_mx6sll = "MX6SLL"
 PLATFORM_mx7= "MX7D"
 PLATFORM_mx8 = "MX8"
 
@@ -84,4 +86,4 @@ FILES_${PN}-grecorder = "${bindir}/grecorder-1.0"
 FILES_${PN}-librecorder-engine = "${libdir}/librecorder_engine-1.0${SOLIBS}"
 FILES_${PN}-libplayengine = "${libdir}/libplayengine-1.0${SOLIBS}"
 
-COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7|mx8)"
+COMPATIBLE_MACHINE = "(mx6|mx6ul|mx6sll|mx7|mx8)"

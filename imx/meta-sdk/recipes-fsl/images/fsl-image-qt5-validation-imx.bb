@@ -33,6 +33,9 @@ QT5_IMAGE_INSTALL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_
 QT5_IMAGE_INSTALL_mx6ul = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-examples qtbase-fonts qtbase-plugins', d)}"
 
+QT5_IMAGE_INSTALL_mx6sll = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
+    'qtbase qtbase-examples qtbase-fonts qtbase-plugins', d)}"
+
 QT5_IMAGE_INSTALL_mx7 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT5_IMAGE_INSTALL_common}', \
     'qtbase qtbase-examples qtbase-fonts qtbase-plugins', d)}"
 

@@ -1,6 +1,7 @@
 # Add needed Freescale packages and definitions
 
 SOC_TOOLS_TEST_mx6ul = "imx-test"
+SOC_TOOLS_TEST_mx6sll = "imx-test"
 SOC_TOOLS_TEST_mx7 = "imx-test"
 
 PACKAGES += " \
@@ -45,6 +46,13 @@ SOC_TOOLS_TESTAPPS_mx6 += " \
     ${PN}-fslcodec-testapps \
 "
 SOC_TOOLS_TESTAPPS_mx6ul += " \
+    imx-kobs \
+    vlan \
+    cryptodev-module \
+    cryptodev-tests \
+    ${PN}-fslcodec-testapps \
+"
+SOC_TOOLS_TESTAPPS_mx6sll += " \
     imx-kobs \
     vlan \
     cryptodev-module \
