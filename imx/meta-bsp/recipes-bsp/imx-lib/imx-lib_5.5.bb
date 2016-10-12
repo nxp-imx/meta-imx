@@ -9,7 +9,9 @@ PE = "1"
 SRC_URI[md5sum] = "9a52dfee2a1950ef1d083392c579a0a6"
 SRC_URI[sha256sum] = "123206a227973f91b6c733e343587e4f47734db4f2b2c4ea9db3800742d2b595"
 
-COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
+COMPATIBLE_MACHINE = "(mx6|mx6ul|mx6sll|mx7)"
 
 PLATFORM_mx7 = "IMX7"
 PLATFORM_mx6ul = "IMX6UL"
+# add this until imx-lib makefile is changed to exclude 6SLL
+PLATFORM_mx6sll = "IMX6UL"

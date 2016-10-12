@@ -7,6 +7,12 @@ do_install_append_mx6ul () {
     fi
 }
 
+do_install_append_mx6sll () {
+    if [ -e ${D}/${sysconfdir}/matchbox/session ]; then
+        sed -e 's/SHOWCURSOR=\"no\"/SHOWCURSOR=\"yes\"/' -i ${D}/${sysconfdir}/matchbox/session
+    fi
+}
+
 do_install_append_mx7d () {
     if [ -e ${D}/${sysconfdir}/matchbox/session ]; then
         sed -e 's/SHOWCURSOR=\"no\"/SHOWCURSOR=\"yes\"/' -i ${D}/${sysconfdir}/matchbox/session

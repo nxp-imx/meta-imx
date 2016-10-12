@@ -12,5 +12,6 @@ SRC_URI[sha256sum] = "e1d6550426dfc59e4fd0352f1d312ea7eff5dcf18974f923ed7a85007c
 # using a workaround to transfer "IMX6Q" on imx6ul & imx7d platform.
 PLATFORM_mx6ul = "IMX6Q"
 PLATFORM_mx7 = "IMX6Q"
+PLATFORM_mx6sll = "IMX6Q"
 
-COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
+COMPATIBLE_MACHINE = "(mx6|mx6ul|mx6sll|mx7)"

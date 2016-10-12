@@ -15,6 +15,7 @@ SRC_URI_remove = "file://0004-alsa-set-availability-for-some-unavailable-profile
 
 SRC_URI_append_mx6 = "${IMX_PATCHES}"
 SRC_URI_append_mx6ul = "${IMX_PATCHES}"
+SRC_URI_append_mx6sll = "${IMX_PATCHES}"
 SRC_URI_append_mx7 = "${IMX_PATCHES}"
 SRC_URI_append_mx8 = "${IMX_PATCHES}"
 
