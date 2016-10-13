@@ -1,0 +1,76 @@
+From b87cf4e0b004869f8936028dd03472b0c1573c23 Mon Sep 17 00:00:00 2001
+From: Laszlo Agocs <laszlo.agocs@qt.io>
+Date: Tue, 9 Aug 2016 13:33:14 +0200
+Subject: [PATCH] evdevtouch: Avoid crashing on exit
+
+26238aca8c442736f380eb523ef48468f892bdb7 causes double deletion of the
+QTouchDevice in case the post routine already cleaned up the list by the
+time the touch handler gets to do it.
+
+Just check the list of devices to see if the one we hold is still there.
+If not, the pointer is likely to be a dangling one so do nothing.
+
+This will avoid dying with bus error or similar on application exit.
+
+Upstream-Status: Backport [5.6.2]
+
+Task-number: QTBUG-51562
+Change-Id: I50c1edee7405aad308274538219698388c2cc9f9
+Reviewed-by: Shawn Rutledge <shawn.rutledge@qt.io>
+---
+ src/gui/kernel/qwindowsysteminterface.cpp                   | 5 +++++
+ src/gui/kernel/qwindowsysteminterface.h                     | 1 +
+ src/platformsupport/input/evdevtouch/qevdevtouchhandler.cpp | 8 ++++++--
+ 3 files changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/src/gui/kernel/qwindowsysteminterface.cpp b/src/gui/kernel/qwindowsysteminterface.cpp
+index cae9760..f1c4311 100644
+--- a/src/gui/kernel/qwindowsysteminterface.cpp
++++ b/src/gui/kernel/qwindowsysteminterface.cpp
+@@ -442,6 +442,11 @@ void QWindowSystemInterface::unregisterTouchDevice(const QTouchDevice *device)
+     QTouchDevicePrivate::unregisterDevice(device);
+ }
+ 
++bool QWindowSystemInterface::isTouchDeviceRegistered(const QTouchDevice *device)
++{
++    return QTouchDevicePrivate::isRegistered(device);
++}
++
+ void QWindowSystemInterface::handleTouchEvent(QWindow *w, QTouchDevice *device,
+                                               const QList<TouchPoint> &points, Qt::KeyboardModifiers mods)
+ {
+diff --git a/src/gui/kernel/qwindowsysteminterface.h b/src/gui/kernel/qwindowsysteminterface.h
+index 69c850a..b4f6020 100644
+--- a/src/gui/kernel/qwindowsysteminterface.h
++++ b/src/gui/kernel/qwindowsysteminterface.h
+@@ -123,6 +123,7 @@ public:
+ 
+     static void registerTouchDevice(const QTouchDevice *device);
+     static void unregisterTouchDevice(const QTouchDevice *device);
++    static bool isTouchDeviceRegistered(const QTouchDevice *device);
+     static void handleTouchEvent(QWindow *w, QTouchDevice *device,
+                                  const QList<struct TouchPoint> &points, Qt::KeyboardModifiers mods = Qt::NoModifier);
+     static void handleTouchEvent(QWindow *w, ulong timestamp, QTouchDevice *device,
+diff --git a/src/platformsupport/input/evdevtouch/qevdevtouchhandler.cpp b/src/platformsupport/input/evdevtouch/qevdevtouchhandler.cpp
+index 7cb4813..f863629 100644
+--- a/src/platformsupport/input/evdevtouch/qevdevtouchhandler.cpp
++++ b/src/platformsupport/input/evdevtouch/qevdevtouchhandler.cpp
+@@ -393,9 +393,13 @@ void QEvdevTouchScreenHandler::unregisterTouchDevice()
+     if (!m_device)
+         return;
+ 
+-    QWindowSystemInterface::unregisterTouchDevice(m_device);
++    // At app exit the cleanup may have already been done, avoid
++    // double delete by checking the list first.
++    if (QWindowSystemInterface::isTouchDeviceRegistered(m_device)) {
++        QWindowSystemInterface::unregisterTouchDevice(m_device);
++        delete m_device;
++    }
+ 
+-    delete m_device;
+     m_device = Q_NULLPTR;
+ }
+ 
+-- 
+1.9.1
+
