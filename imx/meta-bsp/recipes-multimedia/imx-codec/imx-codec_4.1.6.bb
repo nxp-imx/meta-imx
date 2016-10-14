@@ -3,7 +3,7 @@
 
 require imx-codec.inc
 
-SRC_URI[md5sum] = "46e2004889fcdedbf259613f0046a7a1"
-SRC_URI[sha256sum] = "98fe71cb44f7e858c64c5eda81741ed02f40afaadc3d4ed1e693c7d1e684b81d"
+SRC_URI[md5sum] = "5073ec1846e62ea3c5aaae6ff36fcda7"
+SRC_URI[sha256sum] = "be238a44bce813ccf5617b680c658949e21012c6a7091a104d85e45db1995131"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6|mx6ul|mx6sll|mx7|mx8)"
