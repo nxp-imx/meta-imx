@@ -2,7 +2,7 @@
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require imx-codec.inc
-LIC_FILES_CHKSUM = "file://COPYING;md5=d4f548f93b5fe0ee2bc86758c344412d"
+LIC_FILES_CHKSUM = "file://COPYING;md5=be67a88e9e6c841043b005ad7bcf8309"
 
 SRC_URI[md5sum] = "b6a09e494e9db9c227885d36c10da11d"
 SRC_URI[sha256sum] = "d5ec8db61da9ca6852357566f5068a9c2f5301dc88e8935e08fde430e862d857"
