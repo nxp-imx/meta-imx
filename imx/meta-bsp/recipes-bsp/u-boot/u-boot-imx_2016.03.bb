@@ -13,6 +13,9 @@ UBOOT_SRC ?= "git://git.freescale.com/imx/uboot-imx.git;protocol=git"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "0ec2a019117bb2d59b9672a145b4684313d92782"
 
+SRCBRANCH_mx6sll = "imx_v2016.03"
+SRCREV_mx6sll = "${AUTOREV}"
+
 S = "${WORKDIR}/git"
 
 inherit fsl-u-boot-localversion
