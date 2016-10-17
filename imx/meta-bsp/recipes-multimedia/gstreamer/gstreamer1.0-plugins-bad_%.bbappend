@@ -77,6 +77,7 @@ FILES_${PN}-opengl += "/usr/share/*.fs"
 PACKAGE_ARCH_mx6 = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx7 = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx6ul = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH_mx6sll = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
 
 # Fix libgstbadion-1.0.so.0 which is under built directory cannot be found
