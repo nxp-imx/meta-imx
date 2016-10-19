@@ -31,6 +31,9 @@ BACKEND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
 HAS_VPU = "1"
 HAS_VPU_mx6sx = "0"
 
+IS_MX8 = "0"
+IS_MX8_mx8 = "1"
+
 do_compile () {
     export FSL_GRAPHICS_SDK=${S}
     export FSL_PLATFORM_NAME=Yocto
@@ -48,10 +51,12 @@ do_install () {
     ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} install
     cp -r ${S}/bin/* ${D}/opt/${PN}
 
-    if [ "${HAS_VPU}" = "0" ]; then
-        rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
-        rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
-        rm -rf ${D}/opt/${PN}/GLES2/DeBayer
+    rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
+    rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
+    rm -rf ${D}/opt/${PN}/GLES2/DeBayer
+
+    if [ "${IS_MX8}" = "1" ]; then
+        rm -rf ${D}/opt/${PN}/G2D/EightLayers
     fi
 }
 
