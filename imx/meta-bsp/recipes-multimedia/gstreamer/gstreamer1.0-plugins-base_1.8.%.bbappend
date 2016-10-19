@@ -21,6 +21,12 @@ SRC_URI_append = " file://0001-basetextoverlay-make-memory-copy-when-video-buffe
                    file://0012-Remove-dependence-on-imx-plugin-git.patch \
 "
 
+# The following "IMX_PATCHES" being defined in meta-fsl-arm layer are only applied to mx6 & mx7,
+# Actually, they need to be applied to all SoC.
+# Do the following change temporarily, will do upstream later.
+SRC_URI_append_mx6ul  = "${IMX_PATCHES}"
+SRC_URI_append_mx6sll = "${IMX_PATCHES}"
+
 PACKAGE_ARCH_mxs = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx5 = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx6 = "${MACHINE_SOCARCH}"
