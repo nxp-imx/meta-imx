@@ -39,7 +39,7 @@ do_compile () {
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     cd ${S}/.Config
-    ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND}
+    ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
 
 }
 
