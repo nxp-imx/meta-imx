@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Freescale Semiconductor
+# Copyright (C) 2013-2016 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv.inc

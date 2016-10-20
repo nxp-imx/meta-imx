@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Freescale Semiconductor
+# Copyright (C) 2015-2016 Freescale Semiconductor
 
 SUMMARY = "Kernel loadable module for Vivante GPU"
 DESCRIPTION = "Builds the Vivante GPU kernel driver as a loadable kernel module, \
