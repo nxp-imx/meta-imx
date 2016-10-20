@@ -1,9 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append_mx6 = " \
-    file://0001-mesa-demos-OpenVG-demos-with-single-frame-need-eglSw.patch \
-"
-
 DEPENDS = "mesa"
 
 REMOVE_GLU = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'glu x11', '', d)}"
