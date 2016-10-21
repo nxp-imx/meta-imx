@@ -13,6 +13,9 @@ SRC_URI_remove = "file://0002-alsa-bluetooth-fail-if-user-requested-profile-does
 SRC_URI_remove = "file://0003-card-move-profile-selection-after-pa_card_new.patch "
 SRC_URI_remove = "file://0004-alsa-set-availability-for-some-unavailable-profiles.patch "
 
+# Remove poky morty patch temporarily to fix build break
+SRC_URI_remove = "file://0004-card-remove-pa_card_new_data.active_profile.patch "
+
 SRC_URI_append_mx6 = "${IMX_PATCHES}"
 SRC_URI_append_mx6ul = "${IMX_PATCHES}"
 SRC_URI_append_mx6sll = "${IMX_PATCHES}"
