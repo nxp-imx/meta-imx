@@ -25,6 +25,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "61300da83a4df22b83006dbbac55a57b"
 SRC_URI[sha256sum] = "d665286be72aa7a04365c192e8e6466db73baefaa2699007aeee88947138b5ea"
 
+SRC_URI += "file://Add-missing-cmath-include.patch"
+
 BACKEND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
                 bb.utils.contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
 
