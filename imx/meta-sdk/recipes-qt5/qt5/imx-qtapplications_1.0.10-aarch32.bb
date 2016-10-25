@@ -19,6 +19,11 @@ SRC_URI[sha256sum] = "70ba7a3132fcf5d76a67560314dfc5c47557323739ed4ed41e309601f0
 
 USE_X11 = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 
+do_compile () {
+    echo "empty do-compile"
+    # do nothing for compile to avoid morty error
+}
+
 # for now, imxcamera & imxplayer can only be supported on x11 backend
 # but test_qmlglsrc & test_qmlglsink can be supported on all backends
 do_install () {
