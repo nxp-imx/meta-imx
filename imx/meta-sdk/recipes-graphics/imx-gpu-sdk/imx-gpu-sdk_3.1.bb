@@ -50,7 +50,7 @@ do_install () {
     export FSL_PLATFORM_NAME=Yocto
     install -d "${D}/opt/${PN}"
     cd ${S}/.Config
-    ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} install
+    ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} install ROOTFS=${STAGING_DIR_HOST}
     cp -r ${S}/bin/* ${D}/opt/${PN}
 
     rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
