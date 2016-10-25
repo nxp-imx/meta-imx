@@ -40,8 +40,6 @@ DEFAULTTUNE_mx7   = "cortexa7hf-neon"
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
 
-PREFERRED_VERSION_linux-libc-headers = "4.1"
-
 # preferred versions of recipes-graphics for mx6
 PREFERRED_PROVIDER_virtual/libg2d_mx6 = "imx-gpu-g2d"
 
