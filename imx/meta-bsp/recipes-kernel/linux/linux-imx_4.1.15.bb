@@ -37,4 +37,4 @@ do_copy_defconfig () {
     fi
 }
 
-COMPATIBLE_MACHINE = "(mx6|mx6ul|mx7)"
+COMPATIBLE_MACHINE = "(mx6|mx6ul|mx6sll|mx7)"
