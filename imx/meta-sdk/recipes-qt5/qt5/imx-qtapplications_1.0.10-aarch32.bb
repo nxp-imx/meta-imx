@@ -5,7 +5,7 @@ DESCRIPTION = "Freescale QT Multimedia applications"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=be67a88e9e6c841043b005ad7bcf8309"
 
-inherit fsl-eula-unpack autotools pkgconfig
+inherit fsl-eula-unpack pkgconfig
 
 # base on QtMultimedia v5.2.1
 DEPENDS += "qtmultimedia gstreamer1.0 gstreamer1.0-plugins-base imx-gst1.0-plugin"
