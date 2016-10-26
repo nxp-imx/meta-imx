@@ -19,9 +19,7 @@ SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 DEFAULT_PREFERENCE = "1"
 
 DO_CONFIG_V7_COPY = "no"
-DO_CONFIG_V7_COPY_mx6 = "yes"
-DO_CONFIG_V7_COPY_mx6ul = "yes"
-DO_CONFIG_V7_COPY_mx7 = "yes"
+DO_CONFIG_V7_COPY_imx = "yes"
 
 addtask copy_defconfig after do_patch before do_preconfigure #do_configure
 do_copy_defconfig () {
