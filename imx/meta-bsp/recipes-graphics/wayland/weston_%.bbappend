@@ -2,6 +2,9 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 PACKAGECONFIG_append_mx8   = " cairo-glesv2"
 
+DEPENDS_IMX_TO_APPEND = ""
+DEPENDS_IMX_TO_APPEND_imxgpu3d = "virtual/libg2d"
+DEPENDS_append = " ${DEPENDS_IMX_TO_APPEND}"
 DEPENDS_append_mx8 = " virtual/libg2d"
 
 EXTRA_OECONF_append_mx8   = " ${EXTRA_OECONF_IMX}"
