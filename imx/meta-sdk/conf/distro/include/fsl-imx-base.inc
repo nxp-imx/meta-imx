@@ -21,6 +21,8 @@ BBMASK = "meta-freescale/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%
 BBMASK .= "|meta-fsl-arm/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend"
 BBMASK .= "|meta-fsl-arm/recipes-bsp/firmware-imx"
 BBMASK .= "|meta-fsl-arm/recipes-graphics/images/core-image-weston.bbappend"
+BBMASK .= "|meta-freescale/recipes-bsp/u-boot/u-boot-imx_2016.03.bb"
+BBMASK .= "|meta-freescale/recipes-bsp/u-boot/u-boot-imx-mfgtool_2016.03.bb"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 
