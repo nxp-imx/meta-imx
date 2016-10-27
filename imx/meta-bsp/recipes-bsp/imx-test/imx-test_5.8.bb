@@ -6,7 +6,7 @@ DEPENDS_mx6sl += "imx-vpu"
 DEPENDS_mx6sx += "imx-vpu"
 DEPENDS_mx6ul += "imx-vpu"
 DEPENDS_mx6sll += "imx-vpu"
-DEPENDS_mx7   += "imx-vpu"
+DEPENDS_mx7d   += "imx-vpu"
 
 PARALLEL_MAKE="-j 1"
 
