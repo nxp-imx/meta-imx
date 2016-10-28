@@ -14,7 +14,6 @@ SRC_URI_append = " file://0001-basetextoverlay-make-memory-copy-when-video-buffe
                    file://0009-handle-audio-video-decoder-error.patch \
                    file://0010-gstaudiobasesink-print-warning-istead-of-return-ERRO.patch \
                    file://0011-Disable-orc-optimization-for-lib-video-in-plugins-ba.patch \
-                   file://0012-Remove-dependence-on-imx-plugin-git.patch \
 "
 
 # The following "IMX_PATCHES" being defined in meta-fsl-arm layer are only applied to mx6 & mx7,
