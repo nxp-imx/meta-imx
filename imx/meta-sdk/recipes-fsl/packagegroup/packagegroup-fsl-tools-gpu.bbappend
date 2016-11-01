@@ -8,7 +8,6 @@ XWAYLAND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xserver-xorg-ext
 SOC_TOOLS_GPU_remove_mx6 = "${XWAYLAND} fsl-gpu-sdk"
 
 SOC_TOOLS_GPU_remove_mx6 = "imx-gpu-viv-g2d imx-gpu-viv-tools-apitrace"
-SOC_TOOLS_GPU_append_mx6 = " imx-gpu-sdk imx-gpu-g2d"
 
 SOC_TOOLS_GPU_mx8 = " \
         imx-dpu-g2d-mx8 \
