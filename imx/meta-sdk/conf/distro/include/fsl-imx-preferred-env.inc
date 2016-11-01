@@ -44,10 +44,20 @@ DEFAULTTUNE_mx7ulp = "cortexa7hf-neon"
 USE_GPU_VIV_MODULE = "1"
 
 # preferred versions of recipes-graphics for mx6
-PREFERRED_PROVIDER_virtual/libg2d_imxgpu2d = "imx-gpu-g2d"
-PREFERRED_VERSION_imx-gpu-viv_imxpug2d = "6.2.0.p4-aarch32"
-PREFERRED_VERSION_xf86-video-imxfb-vivante_imxgpu2d = "6.2.0.p4"
-PREFERRED_VERSION_kernel-module-imx-gpu-viv_imxgpu2d = "6.2.0.p4"
+PREFERRED_PROVIDER_virtual/libg2d_mx6 = "imx-gpu-g2d"
+PREFERRED_PROVIDER_virtual/libg2d_mx7ulp = "imx-gpu-g2d"
+PREFERRED_PROVIDER_virtual/libg2d_mx8 = "imx-gpu-g2d"
+PREFERRED_VERSION_imx-gpu-viv_mx6 = "6.2.0.p4-aarch32"
+PREFERRED_VERSION_imx-gpu-viv_mx7upl = "6.2.0.p4-aarch32"
+PREFERRED_VERSION_xf86-video-imxfb-vivante_mx6 = "6.2.0.p4"
+PREFERRED_VERSION_xf86-video-imxfb-vivante_mx7up = "6.2.0.p4"
+PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx6 = "6.2.0.p4"
+PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx7ulp = "6.2.0.p4"
+
+PREFERRED_PROVIDER_virtual/egl_mx7ulp = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libgles1_mx7ulp = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libgles2_mx7ulp = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libgl_mx7ulp = "imx-gpu-viv"
 
 # Use systemd as default init manager - comment out for now
 #VIRTUAL-RUNTIME_init_manager = "systemd"
@@ -56,4 +66,5 @@ PREFERRED_VERSION_kernel-module-imx-gpu-viv_imxgpu2d = "6.2.0.p4"
 #DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
 #IMX_DEFAULT_DISTRO_FEATURES += " systemd"
 
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_imxgpu2d = "1"
+SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"
+SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx7ulp = "1"
