@@ -1,29 +1,16 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-# These two dependency are for the SoC which has G2D
-DEPENDS_append_mx6q = " imx-gpu-viv"
-DEPENDS_append_mx6dl = " imx-gpu-viv"
-DEPENDS_append_mx6sx = " imx-gpu-viv"
-DEPENDS_append_mx8 = " imx-gpu-viv virtual/libg2d virtual/kernel"
+DEPENDS_append_imxgpu2d = " virtual/libg2d"
+DEPENDS_append_mx8 = " virtual/libgles2 virtual/libg2d virtual/kernel"
 
 GST_CFLAGS_EXTRA = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', \
                        bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', '-DEGL_API_FB', d),d)}"
-CFLAGS_append_mx6q = " ${GST_CFLAGS_EXTRA}"
-CFLAGS_append_mx6dl = " ${GST_CFLAGS_EXTRA}"
-CFLAGS_append_mx6sx = " ${GST_CFLAGS_EXTRA}"
 CFLAGS_append_mx8 = " ${GST_CFLAGS_EXTRA}"
-
-PACKAGECONFIG_GL_mx6q = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
-PACKAGECONFIG_GL_mx6dl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
-PACKAGECONFIG_GL_mx6sx = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
-PACKAGECONFIG_GL_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
-                           bb.utils.contains('DISTRO_FEATURES', 'x11', \
-                                    'opengl', '', d), '', d)}"
-PACKAGECONFIG_GL_mx8 = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
 
 PACKAGECONFIG_append_mx6q = " opencv"
 PACKAGECONFIG_append_mx6qp = " opencv"
 PACKAGECONFIG_append_mx8 = " opencv"
+PACKAGECONFIG_remove_mx6sl = " gles2"
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
@@ -67,10 +54,7 @@ SRC_URI_append = " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch 
 # include fragment shaders
 FILES_${PN}-opengl += "/usr/share/*.fs"
 
-PACKAGE_ARCH_mx6 = "${MACHINE_SOCARCH}"
-PACKAGE_ARCH_mx7 = "${MACHINE_SOCARCH}"
-PACKAGE_ARCH_mx6ul = "${MACHINE_SOCARCH}"
-PACKAGE_ARCH_mx6sll = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH_imxpxp = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
 
 # Fix libgstbadion-1.0.so.0 which is under built directory cannot be found
