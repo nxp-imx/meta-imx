@@ -15,39 +15,21 @@ Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
 
 Index: weston-1.9.0/xwayland/selection.c
 ===================================================================
---- weston-1.9.0.orig/xwayland/selection.c	2016-11-01 08:56:20.722760983 -0500
-+++ weston-1.9.0/xwayland/selection.c	2016-11-01 09:20:51.000000000 -0500
-@@ -654,10 +654,12 @@
- 	struct weston_seat *seat = data;
- 	struct weston_wm *wm =
- 		container_of(listener, struct weston_wm, selection_listener);
--	struct weston_data_source *source = seat->selection_data_source;
-+	struct weston_data_source *source = NULL;
- 	const char **p, **end;
- 	int has_text_plain = 0;
- 
-+	if (seat != NULL)
-+		source = seat->selection_data_source;
- 	if (source == NULL) {
- 		if (wm->selection_owner == wm->selection_window)
- 			xcb_set_selection_owner(wm->conn,
-@@ -728,8 +730,10 @@
+--- weston-1.9.0.orig/xwayland/selection.c	2016-11-01 09:27:36.008060020 -0500
++++ weston-1.9.0/xwayland/selection.c	2016-11-01 13:32:31.000000000 -0500
+@@ -728,6 +728,8 @@
  					  wm->atom.clipboard, mask);
  
  	seat = weston_wm_pick_seat(wm);
--	wm->selection_listener.notify = weston_wm_set_selection;
--	wl_signal_add(&seat->selection_signal, &wm->selection_listener);
-+	if (seat != NULL) {
-+		wm->selection_listener.notify = weston_wm_set_selection;
-+		wl_signal_add(&seat->selection_signal, &wm->selection_listener);
-+	}
++	if (seat == NULL)
++		return;
+ 	wm->selection_listener.notify = weston_wm_set_selection;
+ 	wl_signal_add(&seat->selection_signal, &wm->selection_listener);
  
- 	weston_wm_set_selection(&wm->selection_listener, seat);
- }
 Index: weston-1.9.0/xwayland/window-manager.c
 ===================================================================
---- weston-1.9.0.orig/xwayland/window-manager.c	2016-11-01 08:56:20.722760983 -0500
-+++ weston-1.9.0/xwayland/window-manager.c	2016-11-01 08:56:20.718760963 -0500
+--- weston-1.9.0.orig/xwayland/window-manager.c	2016-11-01 09:27:36.008060020 -0500
++++ weston-1.9.0/xwayland/window-manager.c	2016-11-01 09:27:42.936094375 -0500
 @@ -1313,8 +1313,10 @@
  struct weston_seat *
  weston_wm_pick_seat(struct weston_wm *wm)
