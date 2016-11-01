@@ -1,0 +1,63 @@
+From 60f8817f371123b9c36b3ff1120eec1e8f9e3d10 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Mon, 31 Oct 2016 19:21:58 -0500
+Subject: [PATCH weston] xwayland: Fix crash when run with no input device
+
+Starting an xterm with no input device led to a crash
+because weston_wm_pick_seat() was returning garbage and
+weston_wm_selection_init() was trying to use the garbage.
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ xwayland/selection.c      | 10 +++++++---
+ xwayland/window-manager.c |  6 ++++--
+ 2 files changed, 11 insertions(+), 5 deletions(-)
+
+Index: weston-1.9.0/xwayland/selection.c
+===================================================================
+--- weston-1.9.0.orig/xwayland/selection.c	2016-11-01 08:56:20.722760983 -0500
++++ weston-1.9.0/xwayland/selection.c	2016-11-01 09:20:51.000000000 -0500
+@@ -654,10 +654,12 @@
+ 	struct weston_seat *seat = data;
+ 	struct weston_wm *wm =
+ 		container_of(listener, struct weston_wm, selection_listener);
+-	struct weston_data_source *source = seat->selection_data_source;
++	struct weston_data_source *source = NULL;
+ 	const char **p, **end;
+ 	int has_text_plain = 0;
+ 
++	if (seat != NULL)
++		source = seat->selection_data_source;
+ 	if (source == NULL) {
+ 		if (wm->selection_owner == wm->selection_window)
+ 			xcb_set_selection_owner(wm->conn,
+@@ -728,8 +730,10 @@
+ 					  wm->atom.clipboard, mask);
+ 
+ 	seat = weston_wm_pick_seat(wm);
+-	wm->selection_listener.notify = weston_wm_set_selection;
+-	wl_signal_add(&seat->selection_signal, &wm->selection_listener);
++	if (seat != NULL) {
++		wm->selection_listener.notify = weston_wm_set_selection;
++		wl_signal_add(&seat->selection_signal, &wm->selection_listener);
++	}
+ 
+ 	weston_wm_set_selection(&wm->selection_listener, seat);
+ }
+Index: weston-1.9.0/xwayland/window-manager.c
+===================================================================
+--- weston-1.9.0.orig/xwayland/window-manager.c	2016-11-01 08:56:20.722760983 -0500
++++ weston-1.9.0/xwayland/window-manager.c	2016-11-01 08:56:20.718760963 -0500
+@@ -1313,8 +1313,10 @@
+ struct weston_seat *
+ weston_wm_pick_seat(struct weston_wm *wm)
+ {
+-	return container_of(wm->server->compositor->seat_list.next,
+-			    struct weston_seat, link);
++	struct wl_list *seats = wm->server->compositor->seat_list.next;
++	if (wl_list_empty(seats))
++		return NULL;
++	return container_of(seats, struct weston_seat, link);
+ }
+ 
+ static struct weston_seat *

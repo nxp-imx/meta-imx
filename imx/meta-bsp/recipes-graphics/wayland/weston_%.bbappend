@@ -21,6 +21,7 @@ SRC_URI_XWAYLAND = " \
     file://xwayland.weston-start \
     file://make-weston-launch-exit-for-unrecognized-option.patch \
     file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
+    file://0018-xwayland-Fix-crash-when-run-with-no-input-device.patch \
 "
 SRC_URI_append_mx6   = " ${SRC_URI_IMX} ${SRC_URI_XWAYLAND}"
 SRC_URI_append_mx6ul = " ${SRC_URI_XWAYLAND}"
