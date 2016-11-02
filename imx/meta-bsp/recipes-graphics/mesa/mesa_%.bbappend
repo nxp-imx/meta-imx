@@ -1,4 +1,5 @@
 # gbm libraries are now provided by vivante so remove it from mesa
+PROVIDES_remove_mx6sl = "  virtual/egl gbm virtual/libopenvg"
 
 PACKAGECONFIG_remove_mx6 = "gbm"
 PACKAGECONFIG_remove_mx7ulp = "egl gles gbm"
