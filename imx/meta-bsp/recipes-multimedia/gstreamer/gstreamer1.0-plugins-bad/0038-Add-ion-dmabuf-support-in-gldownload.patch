@@ -1,7 +1,7 @@
-From 58973f6c1ac434f62c5664fd88bcd224186cdf87 Mon Sep 17 00:00:00 2001
+From ebc840bd4ac59a180b87754c582df865b43568d9 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
 Date: Wed, 31 Aug 2016 14:26:59 +0800
-Subject: [PATCH 3/3] Add ion dmabuf support in gldownload
+Subject: [PATCH] Add ion dmabuf support in gldownload
 
 Support copy into dma-fb buffer if support the buffer format
 
@@ -10,11 +10,11 @@ Upstream-Status: Inappropriate [i.MX specific]
 Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
  ext/gl/gstgldownloadelement.c    |  36 +++++-
- gst-libs/gst/gl/Makefile.am      |   2 +
+ gst-libs/gst/gl/Makefile.am      |   4 +
  gst-libs/gst/gl/gstgl_fwd.h      |   4 +
  gst-libs/gst/gl/gstglmemorydma.c | 273 +++++++++++++++++++++++++++++++++++++++
  gst-libs/gst/gl/gstglmemorydma.h |  72 +++++++++++
- 5 files changed, 383 insertions(+), 4 deletions(-)
+ 5 files changed, 385 insertions(+), 4 deletions(-)
  create mode 100644 gst-libs/gst/gl/gstglmemorydma.c
  create mode 100644 gst-libs/gst/gl/gstglmemorydma.h
 
@@ -91,25 +91,20 @@ index 5662ea9..d6ccc6e 100644
      GST_DEBUG_OBJECT (bt, "obtain physical memory allocator %p.", allocator);
    }
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index 0512f83..9b05230 100644
+index c5c22c5..9c79e0d 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
-@@ -14,6 +14,7 @@ libgstgl_@GST_API_VERSION@_la_SOURCES = \
- 	gstglbuffer.c \
- 	gstglmemory.c \
- 	gstglmemorypbo.c \
-+	gstglmemorydma.c \
- 	gstglbufferpool.c \
- 	gstglfilter.c \
- 	gstglformat.c \
-@@ -53,6 +54,7 @@ libgstgl_@GST_API_VERSION@include_HEADERS = \
- 	gstglbuffer.h \
- 	gstglmemory.h \
- 	gstglmemorypbo.h \
-+	gstglmemorydma.h \
- 	gstglbufferpool.h \
- 	gstglfilter.h \
- 	gstglformat.h \
+@@ -105,6 +105,10 @@ endif
+ if USE_ION
+ libgstgl_@GST_API_VERSION@_la_LIBADD += \
+ 	$(top_builddir)/gst-libs/gst/ion/libgstbadion-$(GST_API_VERSION).la
++if USE_EGL
++libgstgl_@GST_API_VERSION@_la_SOURCES += gstglmemorydma.c
++libgstgl_@GST_API_VERSION@include_HEADERS += gstglmemorydma.h
++endif
+ endif
+ 
+ if HAVE_WINDOW_WIN32
 diff --git a/gst-libs/gst/gl/gstgl_fwd.h b/gst-libs/gst/gl/gstgl_fwd.h
 index fb64ff6..fc7cf02 100644
 --- a/gst-libs/gst/gl/gstgl_fwd.h
