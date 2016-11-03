@@ -7,8 +7,8 @@ DEPENDS_mx6sx += "imx-vpu"
 DEPENDS_mx6ul += "imx-vpu"
 DEPENDS_mx6sll += "imx-vpu"
 DEPENDS_mx7d  += "imx-vpu"
-DEPENDS_imx7ulp_zebu  = "virtual/kernel imx-lib imx-vpu"
-PLATFORM_imx7ulp_zebu  = "IMX7D"
+DEPENDS_mx7ulp  = "virtual/kernel imx-lib imx-vpu"
+PLATFORM_mx7ulp  = "IMX7D"
 
 PARALLEL_MAKE="-j 1"
 

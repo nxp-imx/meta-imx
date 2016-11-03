@@ -13,10 +13,10 @@ UBOOT_SRC ?= "git://git.freescale.com/imx/uboot-imx.git;protocol=git"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "03f995630f92462081e98412a0fbc86bb5106f10"
 
-SRCBRANCH_imx7ulp_zebu = "imx_v2016.03_imx7ulp"
-UBOOT_SRC_imx7ulp_zebu = "git://sw-stash.freescale.net/scm/imx/uboot-imx-testbuild.git;protocol=http"
-SRC_URI_imx7ulp_zebu = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV_imx7ulp_zebu = "${AUTOREV}"
+SRCBRANCH_mx7ulp = "imx_v2016.03_imx7ulp"
+UBOOT_SRC_mx7ulp = "git://sw-stash.freescale.net/scm/imx/uboot-imx-testbuild.git;protocol=http"
+SRC_URI_mx7ulp = "${UBOOT_SRC};branch=${SRCBRANCH}"
+SRCREV_mx7ulp = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 

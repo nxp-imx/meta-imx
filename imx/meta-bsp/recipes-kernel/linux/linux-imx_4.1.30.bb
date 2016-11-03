@@ -15,10 +15,10 @@ LOCALVERSION = "-3.0.0"
 SRCREV = "4bc68ee04b1b49500dc291dcdb5afc37ba5c12e8"
 KERNEL_SRC ?= "git://git.freescale.com/imx/linux-imx.git;protocol=git"
 
-SRCBRANCH_imx7ulp_zebu = "imx_4.1.y_imx7ulp"
-LOCALVERSION_imx7ulp_zebu = "-mx7ulp"
-SRCREV_imx7ulp_zebu = "ffd160f175e96052550f6f169bf0f67f41b2e9a9"
-KERNEL_SRC_imx7ulp_zebu = "git://sw-stash.freescale.net/scm/imx/linux-2.6-testbuild.git;protocol=http"
+SRCBRANCH_mx7ulp = "imx_4.1.y_imx7ulp"
+LOCALVERSION_mx7ulp = "-mx7ulp"
+SRCREV_mx7ulp = "79eda5844c36a4b7743c621de16d0b3170982747"
+KERNEL_SRC_mx7ulp = "git://sw-stash.freescale.net/scm/imx/linux-2.6-testbuild.git;protocol=http"
 
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
@@ -30,10 +30,10 @@ DO_CONFIG_V7_COPY_mx7 = "yes"
 DO_CONFIG_V7_COPY_nx6sll = "yes"
 DO_CONFIG_V7_COPY_mx6ull = "yes"
 
-DO_CONFIG_V7_COPY_imx7ulp_zebu = "no"
+DO_CONFIG_V7_COPY_mx7ulp = "no"
 
 DO_CONFIG_7ULP_COPY = "no"
-DO_CONFIG_7ULP_COPY_imx7ulp_zebu = "yes"
+DO_CONFIG_7ULP_COPY_mx7ulp = "yes"
 
 addtask copy_defconfig after do_patch before do_preconfigure #do_configure
 do_copy_defconfig () {
