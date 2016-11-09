@@ -51,7 +51,6 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libwayland-egl-imx-dev \
 	imx-gpu-viv-tools \
 	imx-gpu-viv-demos \
-	imx-gpu-viv-demos \
 	libvulkan-imx libvulkan-imx-dev \
 	libopenvx-imx libopenvx-imx-dev \
 "
