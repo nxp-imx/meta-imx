@@ -51,11 +51,10 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libwayland-egl-imx-dev \
 	imx-gpu-viv-tools \
 	imx-gpu-viv-demos \
+	imx-gpu-viv-demos \
+	libvulkan-imx libvulkan-imx-dev \
+	libopenvx-imx libopenvx-imx-dev \
 "
-PACKAGES_append_mx8 = " libvulkan-imx libvulkan-imx-dev \
-                        libopenvx-imx libopenvx-imx-dev \
-"
-
 python __anonymous () {
         has_vivante_kernel_driver_support = (d.getVar('MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT', True) or '0')
         if has_vivante_kernel_driver_support != '1':
@@ -191,9 +190,11 @@ do_install () {
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 
     if [ "${IS_MX8}" = "1" ]; then
-        mv ${D}${libdir}/libvulkan.so ${D}${libdir}/libvulkan.so.1.0.0
-        ln -sf libvulkan.so.1.0.0 ${D}${libdir}/libvulkan.so.1
-        ln -sf libvulkan.so.1.0.0 ${D}${libdir}/libvulkan.so
+
+        mv ${D}${libdir}/libvulkan.so ${D}${libdir}/libvulkan_VSI.so.1.0.0
+        ln -sf libvulkan_VSI.so.1.0.0 ${D}${libdir}/libvulkan_VSI.so.1
+        ln -sf libvulkan_VSI.so.1.0.0 ${D}${libdir}/libvulkan_VSI.so
+        rm -rf ${D}${libdir}/libvulkan.so.1
     fi
 
     # skip packaging wayland libraries if no support is requested
@@ -261,15 +262,15 @@ FILES_libvsc-imx = "${libdir}/libVSC${SOLIBS}"
 FILES_libgbm-imx = "${libdir}/libgbm${SOLIBS} ${libdir}/libVIVANTE.gbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
 FILES_libgbm-imx-dev = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
 
-FILES_libvulkan-imx = "${libdir}/libvulkan${SOLIBS} ${libdir}/libvulkan${REALSOLIBS}"
-FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/libvulkan${SOLIBSDEV}"
+FILES_libvulkan-imx = "${libdir}/libvulkan_VSI${SOLIBS} ${libdir}/libvulkan_VSI${REALSOLIBS}"
+FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/libvulkan_VSI${SOLIBSDEV}"
 INSANE_SKIP_libvulkan-imx += "dev-deps"
 
 FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS}"
 FILES_libopenvx-imx-dev = "${includedir}/VX ${libdir}/libopenVX${SOLIBSDEV}"
 
 FILES_libgl-imx = "${libdir}/libGL${REALSOLIBS}"
-FILES_libgl-imx-dev = "${libdir}/libGL${SOLIBSDEV}"
+FILES_libgl-imx-dev = "${libdir}/libGL${SOLIBSDEV} ${includedir}/GL"
 # Includes GL headers from mesa
 RDEPENDS_libgl-imx-dev += "libgl-mesa-dev"
 
