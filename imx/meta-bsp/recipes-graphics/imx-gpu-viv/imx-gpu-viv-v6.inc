@@ -31,6 +31,7 @@ inherit fsl-eula-unpack
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
+# Note : If you add a package here, to prevent a naming conflict see the python_anonymous() futher below
 PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libgl-imx libgl-imx-dev \
 	libgles-imx libgles-imx-dev \
@@ -84,7 +85,7 @@ python __anonymous() {
 
     for p in (("libegl", "libegl1"), ("libgl", "libgl1"),
               ("libgles1", "libglesv1-cm1"), ("libgles2", "libglesv2-2"),
-              ("libgles3",)):
+              ("libgles3",) , ("libvulkan",)):
         fullp = p[0] + "-imx"
         pkgs = " ".join(p)
         d.setVar("DEBIAN_NOAUTONAME_" + fullp, "1")
