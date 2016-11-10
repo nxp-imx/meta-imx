@@ -111,15 +111,13 @@ IS_MX8_mx8 = "1"
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
+    install -d ${D}${bindir}
 
     cp -P ${S}/gpu-core/usr/lib/*.so* ${D}${libdir}
     cp -r ${S}/gpu-core/usr/include/* ${D}${includedir}
     cp -r ${S}/gpu-demos/opt ${D}
+    cp -r ${S}/gpu-tools/gmem-info/usr/bin/* ${D}${bindir}
 
-    if [ "${IS_MX8}" = "0" ]; then
-        install -d ${D}${bindir}
-        cp -r ${S}/gpu-tools/gmem-info/usr/bin/* ${D}${bindir}
-    fi
 
     install -d ${D}${libdir}/pkgconfig
 
