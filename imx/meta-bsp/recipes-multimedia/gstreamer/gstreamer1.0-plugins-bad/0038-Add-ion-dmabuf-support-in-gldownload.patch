@@ -1,6 +1,6 @@
-From ebc840bd4ac59a180b87754c582df865b43568d9 Mon Sep 17 00:00:00 2001
+From fc9a3ad809957e92dcf2ab3e71bde5794b39d185 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
-Date: Wed, 31 Aug 2016 14:26:59 +0800
+Date: Fri, 11 Nov 2016 14:42:58 +0800
 Subject: [PATCH] Add ion dmabuf support in gldownload
 
 Support copy into dma-fb buffer if support the buffer format
@@ -9,17 +9,17 @@ Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
- ext/gl/gstgldownloadelement.c    |  36 +++++-
+ ext/gl/gstgldownloadelement.c    |  37 +++++-
  gst-libs/gst/gl/Makefile.am      |   4 +
  gst-libs/gst/gl/gstgl_fwd.h      |   4 +
  gst-libs/gst/gl/gstglmemorydma.c | 273 +++++++++++++++++++++++++++++++++++++++
  gst-libs/gst/gl/gstglmemorydma.h |  72 +++++++++++
- 5 files changed, 385 insertions(+), 4 deletions(-)
+ 5 files changed, 385 insertions(+), 5 deletions(-)
  create mode 100644 gst-libs/gst/gl/gstglmemorydma.c
  create mode 100644 gst-libs/gst/gl/gstglmemorydma.h
 
 diff --git a/ext/gl/gstgldownloadelement.c b/ext/gl/gstgldownloadelement.c
-index 5662ea9..d6ccc6e 100644
+index e89c36e..c545f36 100644
 --- a/ext/gl/gstgldownloadelement.c
 +++ b/ext/gl/gstgldownloadelement.c
 @@ -29,6 +29,10 @@
@@ -33,7 +33,7 @@ index 5662ea9..d6ccc6e 100644
  GST_DEBUG_CATEGORY_STATIC (gst_gl_download_element_debug);
  #define GST_CAT_DEFAULT gst_gl_download_element_debug
  
-@@ -173,8 +177,22 @@ gst_gl_download_element_prepare_output_buffer (GstBaseTransform * bt,
+@@ -174,8 +178,22 @@ gst_gl_download_element_prepare_output_buffer (GstBaseTransform * bt,
    gint i, n;
    GstGLMemory *glmem;
  
@@ -57,7 +57,7 @@ index 5662ea9..d6ccc6e 100644
    if (gst_is_gl_physical_memory (glmem)) {
      GstGLContext *context = GST_GL_BASE_FILTER (bt)->context;
      GstVideoInfo info;
-@@ -233,6 +251,7 @@ gst_gl_download_element_propose_allocation (GstBaseTransform * bt,
+@@ -234,6 +252,7 @@ gst_gl_download_element_propose_allocation (GstBaseTransform * bt,
    GstCaps *caps;
    GstStructure *config;
    gsize size;
@@ -65,11 +65,12 @@ index 5662ea9..d6ccc6e 100644
  
    gst_query_parse_allocation (query, &caps, NULL);
    if (!gst_video_info_from_caps (&info, caps)) {
-@@ -240,12 +259,21 @@ gst_gl_download_element_propose_allocation (GstBaseTransform * bt,
+@@ -241,13 +260,21 @@ gst_gl_download_element_propose_allocation (GstBaseTransform * bt,
      return FALSE;
    }
  
--  GST_DEBUG_OBJECT (bt, "video format is %s", gst_video_format_to_string (GST_VIDEO_INFO_FORMAT (&info)));
+-  GST_DEBUG_OBJECT (bt, "video format is %s",
+-      gst_video_format_to_string (GST_VIDEO_INFO_FORMAT (&info)));
 -
    gst_allocation_params_init (&params);
  
@@ -91,10 +92,10 @@ index 5662ea9..d6ccc6e 100644
      GST_DEBUG_OBJECT (bt, "obtain physical memory allocator %p.", allocator);
    }
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index c5c22c5..9c79e0d 100644
+index f321d48..538858a 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
-@@ -105,6 +105,10 @@ endif
+@@ -149,6 +149,10 @@ libgstgl_@GST_API_VERSION@_la_LIBADD += -lgstallocators-$(GST_API_VERSION)
  if USE_ION
  libgstgl_@GST_API_VERSION@_la_LIBADD += \
  	$(top_builddir)/gst-libs/gst/ion/libgstbadion-$(GST_API_VERSION).la
@@ -103,8 +104,8 @@ index c5c22c5..9c79e0d 100644
 +libgstgl_@GST_API_VERSION@include_HEADERS += gstglmemorydma.h
 +endif
  endif
+ endif
  
- if HAVE_WINDOW_WIN32
 diff --git a/gst-libs/gst/gl/gstgl_fwd.h b/gst-libs/gst/gl/gstgl_fwd.h
 index fb64ff6..fc7cf02 100644
 --- a/gst-libs/gst/gl/gstgl_fwd.h

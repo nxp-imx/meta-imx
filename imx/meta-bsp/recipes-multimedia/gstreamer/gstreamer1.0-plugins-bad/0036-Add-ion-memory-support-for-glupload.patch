@@ -1,4 +1,4 @@
-From 16d6de6bc9fd8ddde45a490174ae41e10b61c2b9 Mon Sep 17 00:00:00 2001
+From 8f3f9d086ab30b0aa5eda58273a96340646fb694 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
 Date: Wed, 17 Aug 2016 12:56:39 +0800
 Subject: [PATCH] Add ion memory support for glupload
@@ -18,12 +18,12 @@ Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
  configure.ac                  |  18 +++--
  gst-libs/gst/Makefile.am      |   3 +-
- gst-libs/gst/gl/Makefile.am   |  14 +++-
+ gst-libs/gst/gl/Makefile.am   |  13 +++-
  gst-libs/gst/gl/gstglupload.c | 171 +++++++++++++++++++++++++++++++++++++++++-
- 4 files changed, 194 insertions(+), 12 deletions(-)
+ 4 files changed, 193 insertions(+), 12 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 6c3db50..65a4e24 100644
+index 927e6c7..7d149a8 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -575,6 +575,17 @@ else
@@ -44,7 +44,7 @@ index 6c3db50..65a4e24 100644
  dnl *** opengl ***
  AC_ARG_ENABLE([opengl],
       [  --enable-opengl         Enable Desktop OpenGL support @<:@default=auto@:>@],
-@@ -1281,6 +1292,7 @@ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+@@ -1283,6 +1294,7 @@ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
  
  GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
  #define GST_GL_HAVE_DMABUF $GST_GL_HAVE_DMABUF
@@ -52,7 +52,7 @@ index 6c3db50..65a4e24 100644
  #define GST_GL_HAVE_DIRECTVIV $GST_GL_HAVE_DIRECTVIV
  #define GST_GL_HAVE_PHYMEM $GST_GL_HAVE_PHYMEM
  "
-@@ -1998,12 +2010,6 @@ AG_GST_CHECK_FEATURE(TINYALSA, [tinyalsa], tinyalsa, [
+@@ -2000,12 +2012,6 @@ AG_GST_CHECK_FEATURE(TINYALSA, [tinyalsa], tinyalsa, [
    AC_CHECK_HEADER(tinyalsa/asoundlib.h, HAVE_TINYALSA="yes", HAVE_TINYALSA="no")
  ])
  
@@ -83,22 +83,21 @@ index eb2031c..9db1405 100644
  .PHONY: independent-subdirs $(INDEPENDENT_SUBDIRS)
  
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index 2a70e58..6d8d1d6 100644
+index 70fb6a5..f321d48 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
-@@ -104,6 +104,11 @@ if HAVE_PHYMEM
- libgstgl_@GST_API_VERSION@_la_LIBADD += -lg2d
- endif
- 
+@@ -146,6 +146,10 @@ if USE_EGL
+ SUBDIRS += egl
+ libgstgl_@GST_API_VERSION@_la_LIBADD += egl/libgstgl-egl.la
+ libgstgl_@GST_API_VERSION@_la_LIBADD += -lgstallocators-$(GST_API_VERSION)
 +if USE_ION
 +libgstgl_@GST_API_VERSION@_la_LIBADD += \
 +	$(top_builddir)/gst-libs/gst/ion/libgstbadion-$(GST_API_VERSION).la
 +endif
-+
- if HAVE_WINDOW_WIN32
- SUBDIRS += win32
- libgstgl_@GST_API_VERSION@_la_LIBADD += win32/libgstgl-win32.la
-@@ -189,8 +194,12 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@
+ endif
+ 
+ configexecincludedir = $(libdir)/gstreamer-@GST_API_VERSION@/include/gst/gl
+@@ -187,8 +191,12 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@
  		-I$(top_builddir)/gst-libs \
  		$(GST_PLUGINS_BASE_CFLAGS) \
  		$(GL_CFLAGS) \
@@ -113,7 +112,7 @@ index 2a70e58..6d8d1d6 100644
  		--library=libgstgl-@GST_API_VERSION@.la \
  		--include=Gst-@GST_API_VERSION@ \
  		--include=GstBase-@GST_API_VERSION@ \
-@@ -221,6 +230,7 @@ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
+@@ -219,6 +227,7 @@ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
  		--includedir=$(builddir) \
  		--includedir=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
  		--includedir=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
@@ -122,7 +121,7 @@ index 2a70e58..6d8d1d6 100644
  
  CLEANFILES = $(BUILT_GIRSOURCES) $(typelibs_DATA)
 diff --git a/gst-libs/gst/gl/gstglupload.c b/gst-libs/gst/gl/gstglupload.c
-index 03b38a9..fbef086 100644
+index d17fab3..2c0a2d3 100644
 --- a/gst-libs/gst/gl/gstglupload.c
 +++ b/gst-libs/gst/gl/gstglupload.c
 @@ -23,6 +23,7 @@
@@ -291,7 +290,7 @@ index 03b38a9..fbef086 100644
  
    /* We cannot have multiple dmabuf per plane */
    if (n_mem > n_planes)
-@@ -861,7 +980,47 @@ static void
+@@ -845,7 +964,47 @@ static void
  _dma_buf_upload_propose_allocation (gpointer impl, GstQuery * decide_query,
      GstQuery * query)
  {
@@ -340,7 +339,7 @@ index 03b38a9..fbef086 100644
  }
  
  static void
-@@ -927,6 +1086,12 @@ _dma_buf_upload_free (gpointer impl)
+@@ -911,6 +1070,12 @@ _dma_buf_upload_free (gpointer impl)
    if (dmabuf->params)
      gst_gl_allocation_params_free ((GstGLAllocationParams *) dmabuf->params);
  
