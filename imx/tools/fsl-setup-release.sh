@@ -136,20 +136,11 @@ if [ -z "$MACHINE" ]; then
 fi
 
 # New machine definitions may need to be added to the expected location
-if [ -d ./sources/meta-freescale ]; then
-   cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-freescale/conf/machine
-else
-   cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-fsl-arm/conf/machine
-fi
+cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-freescale/conf/machine
 
 # copy new EULA into community so setup uses latest i.MX EULA
-if [ -d ./sources/meta-freescale ]; then
-   cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-freescale/EULA
-   cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-freescale/classes
-else
-   cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-fsl-arm/EULA
-   cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-fsl-arm/classes
-fi
+cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-freescale/EULA
+cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-freescale/classes
 
 # Set up the basic yocto environment
 if [ -z "$DISTRO" ]; then
