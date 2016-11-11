@@ -142,11 +142,6 @@ else
    cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-fsl-arm/conf/machine
 fi
 
-# New distro definitions may need to be added to the expected location
-if [ -d ./sources/meta-freescale-distro ]; then
-   cp -r sources/meta-fsl-bsp-release/imx/meta-sdk/conf/distro/*.conf sources/meta-freescale-distro/conf/distro
-fi
-
 # copy new EULA into community so setup uses latest i.MX EULA
 if [ -d ./sources/meta-freescale ]; then
    cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-freescale/EULA
