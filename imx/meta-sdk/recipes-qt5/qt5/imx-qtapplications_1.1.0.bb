@@ -14,8 +14,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://qtimxplayer.desktop \
            file://qtimxcamera.desktop \
 "
-SRC_URI[md5sum] = "36643bf5fa8dd67f24406d1060d888ca"
-SRC_URI[sha256sum] = "788991a2eb0adcdd25c7103cd00bf7132020c5321b2d3c0bcfbbff8f33f0f8f1"
+SRC_URI[md5sum] = "5658cf1405bc14a95867a7e461c023b2"
+SRC_URI[sha256sum] = "98443c36adaa714fbc7af80db53dc8990cf2f50e0813dba09849b273e4b3fbb2"
 
 do_install () {
     install -d ${D}${datadir}/applications
