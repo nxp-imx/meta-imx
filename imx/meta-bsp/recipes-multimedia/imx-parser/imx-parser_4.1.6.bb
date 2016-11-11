@@ -3,7 +3,7 @@
 
 include imx-parser.inc
 
-SRC_URI[md5sum] = "30883a3e551b51015f34b44a46cec29a"
-SRC_URI[sha256sum] = "e51f637c0254eacd78cb79874917d8f85c4734009c97752022eb8a5d20aebd47"
+SRC_URI[md5sum] = "8392d566e7a6e7e007a00fb2ac5b98f6"
+SRC_URI[sha256sum] = "34e52b56aeebd675787d79f0c53d10d2466265e9f7a97c8ac172f2320cc4f180"
 
 COMPATIBLE_MACHINE = "(mxs|mx5|mx6|mx6ul|mx6sll|mx7|mx8)"
