@@ -28,7 +28,7 @@ DO_CONFIG_V7_COPY = "no"
 DO_CONFIG_V7_COPY_mx6 = "yes"
 DO_CONFIG_V7_COPY_mx7 = "yes"
 DO_CONFIG_V7_COPY_nx6sll = "yes"
-DO_CONFIG_V7_COPY_mx6ull = "yes"
+DO_CONFIG_V7_COPY_mx6ul = "yes"
 
 DO_CONFIG_V7_COPY_mx7ulp = "no"
 
