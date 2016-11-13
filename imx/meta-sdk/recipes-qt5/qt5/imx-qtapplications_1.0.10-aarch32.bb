@@ -43,6 +43,6 @@ FILES_${PN} = " \
 
 INSANE_SKIP_${PN} += "debug-files"
 
-COMPATIBLE_MACHINE = "(mx6)"
+COMPATIBLE_MACHINE = "(mx6|mx7ulp)"
 
 
