@@ -1,10 +1,5 @@
 # Copyright (C) 2013 Eric Bénard - Eukréa Electromatique
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-
-SRC_URI_append = " file://0001-evdevtouch-Avoid-crashing-on-exit.patch \
-"
-
 HAS_X11 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 1, 0, d)}"
 
 IS_IMX3D = "0"
