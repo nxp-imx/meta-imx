@@ -27,8 +27,7 @@ do_configure_prepend() {
     # adapt qmake.conf to our needs
     sed -i 's!load(qt_config)!!' ${S}/mkspecs/linux-oe-g++/qmake.conf
     if test ${HAS_X11} -eq 0; then
-        if test ${IS_IMX3D} -eq "2d"; then
-    
+        if test ${IS_IMX3D} -eq "3d"; then
             cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
 IMX_CFLAGS             = -DLINUX=1 -DEGL_API_FB=1
 EGLFS_DEVICE_INTEGRATION = eglfs_viv
