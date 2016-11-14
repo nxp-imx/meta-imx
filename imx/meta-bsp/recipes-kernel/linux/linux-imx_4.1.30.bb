@@ -17,7 +17,7 @@ KERNEL_SRC ?= "git://git.freescale.com/imx/linux-imx.git;protocol=git"
 
 SRCBRANCH_mx7ulp = "imx_4.1.y_imx7ulp"
 LOCALVERSION_mx7ulp = "-mx7ulp"
-SRCREV_mx7ulp = "142035c20709420c83cc9d55a58c9490e32c23a2"
+SRCREV_mx7ulp = "65e13473122b2d24f8a862a19c6ed6cbb8980b67"
 KERNEL_SRC_mx7ulp = "git://sw-stash.freescale.net/scm/imx/linux-2.6-testbuild.git;protocol=http"
 
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
