@@ -1,0 +1,212 @@
+From bd570de2532c38fead41eef8e8bc8630671791e0 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Tue, 15 Nov 2016 11:05:00 +0800
+Subject: [PATCH] qmlglsrc: some enhancements for qmlglsrc
+
+1. Need set use-default-fbo to qquickwindow during set
+   property to support change render target on the fly.
+2. Calculate qmlglsrc refresh frame rate in qtglwindow
+
+Upstream-Status: Backport[1.11.1]
+
+https://bugzilla.gnome.org/show_bug.cgi?id=774035
+
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+---
+ ext/qt/gstqtglutility.cc |  4 ++--
+ ext/qt/gstqtsrc.cc       | 17 +++++++----------
+ ext/qt/gstqtsrc.h        |  2 --
+ ext/qt/qtwindow.cc       | 36 +++++++++++++++++++++---------------
+ ext/qt/qtwindow.h        |  1 -
+ 5 files changed, 30 insertions(+), 30 deletions(-)
+
+diff --git a/ext/qt/gstqtglutility.cc b/ext/qt/gstqtglutility.cc
+index 12d2f1d..9c8eab3 100644
+--- a/ext/qt/gstqtglutility.cc
++++ b/ext/qt/gstqtglutility.cc
+@@ -63,14 +63,14 @@ gst_qt_get_gl_display ()
+ 
+   g_assert (app != NULL);
+ 
+-  GST_INFO ("QGuiApplication::instance()->platformName() %s", app->platformName().toUtf8().data());
+-
+   if (g_once_init_enter (&_debug)) {
+     GST_DEBUG_CATEGORY_INIT (GST_CAT_DEFAULT, "qtglutility", 0,
+         "Qt gl utility functions");
+     g_once_init_leave (&_debug, 1);
+   }
+ 
++  GST_INFO ("QGuiApplication::instance()->platformName() %s", app->platformName().toUtf8().data());
++
+ #if GST_GL_HAVE_WINDOW_X11 && defined (HAVE_QT_X11)
+   if (QString::fromUtf8 ("xcb") == app->platformName())
+     display = (GstGLDisplay *)
+diff --git a/ext/qt/gstqtsrc.cc b/ext/qt/gstqtsrc.cc
+index 1137ab6..69915f3 100644
+--- a/ext/qt/gstqtsrc.cc
++++ b/ext/qt/gstqtsrc.cc
+@@ -132,6 +132,7 @@ gst_qt_src_init (GstQtSrc * src)
+   gst_base_src_set_live (GST_BASE_SRC (src), DEFAULT_IS_LIVE);
+   src->default_fbo = FALSE;
+   src->pending_image_orientation = TRUE;
++  src->window = NULL;
+ }
+ 
+ static void
+@@ -145,8 +146,11 @@ gst_qt_src_set_property (GObject * object, guint prop_id,
+       qt_src->qwindow =
+           static_cast < QQuickWindow * >(g_value_get_pointer (value));
+ 
+-      if (qt_src->window)
++      if (qt_src->window) {
+         delete qt_src->window;
++        qt_src->window = NULL;
++      }
++
+       if (qt_src->qwindow)
+         qt_src->window = new QtGLWindow (NULL, qt_src->qwindow);
+ 
+@@ -154,6 +158,8 @@ gst_qt_src_set_property (GObject * object, guint prop_id,
+     }
+     case PROP_DEFAULT_FBO:
+       qt_src->default_fbo = g_value_get_boolean (value);
++      if (qt_src->window)
++        qt_window_use_default_fbo (qt_src->window, qt_src->default_fbo);
+       break;
+     default:
+       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+@@ -508,7 +514,6 @@ gst_qt_src_change_state (GstElement * element, GstStateChange transition)
+   GstQtSrc *qt_src = GST_QT_SRC (element);
+   GstStateChangeReturn ret = GST_STATE_CHANGE_SUCCESS;
+   QGuiApplication *app;
+-  guint64 frames_rendered = 0;
+ 
+   GST_DEBUG ("changing state: %s => %s",
+       gst_element_state_get_name (GST_STATE_TRANSITION_CURRENT (transition)),
+@@ -553,18 +558,10 @@ gst_qt_src_change_state (GstElement * element, GstStateChange transition)
+ 
+   switch (transition) {
+     case GST_STATE_CHANGE_PLAYING_TO_PAUSED:
+-      qt_src->run_time = gst_element_get_start_time (GST_ELEMENT (qt_src));
+       break;
+     case GST_STATE_CHANGE_PAUSED_TO_READY:
+       break;
+     case GST_STATE_CHANGE_READY_TO_NULL:
+-      qt_window_get_total_frames (qt_src->window, &frames_rendered);
+-      if (qt_src->run_time > 0) {
+-        g_print ("qmlglsrc Total refresh frames (%lld), playing for (%"
+-            GST_TIME_FORMAT "), fps (%.3f).\n", frames_rendered,
+-            GST_TIME_ARGS (qt_src->run_time),
+-            (gfloat) GST_SECOND * frames_rendered / qt_src->run_time);
+-      }
+       break;
+     default:
+       break;
+diff --git a/ext/qt/gstqtsrc.h b/ext/qt/gstqtsrc.h
+index 8bbf4e2..d845442 100644
+--- a/ext/qt/gstqtsrc.h
++++ b/ext/qt/gstqtsrc.h
+@@ -62,8 +62,6 @@ struct _GstQtSrc
+   gboolean              default_fbo;
+   gboolean              downstream_supports_affine_meta;
+   gboolean              pending_image_orientation;
+-  /* fps print support */
+-  GstClockTime          run_time;
+ };
+ 
+ /**
+diff --git a/ext/qt/qtwindow.cc b/ext/qt/qtwindow.cc
+index 4e801fe..e94a79e 100644
+--- a/ext/qt/qtwindow.cc
++++ b/ext/qt/qtwindow.cc
+@@ -29,6 +29,7 @@
+ #include "gstqsgtexture.h"
+ #include "gstqtglutility.h"
+ 
++#include <QtCore/QDateTime>
+ #include <QtCore/QRunnable>
+ #include <QtGui/QGuiApplication>
+ #include <QtQuick/QQuickWindow>
+@@ -65,7 +66,9 @@ struct _QtGLWindowPrivate
+   GLuint fbo;
+ 
+   /* frames that qmlview rendered in its gl thread */
+-  guint64 frames_rendered;
++  quint64 frames_rendered;
++  quint64 start;
++  quint64 stop;
+ };
+ 
+ class InitQtGLContext : public QRunnable
+@@ -141,6 +144,12 @@ QtGLWindow::beforeRendering()
+ 
+   g_mutex_lock (&this->priv->lock);
+ 
++  static volatile gsize once = 0;
++  if (g_once_init_enter(&once)) {
++    this->priv->start = QDateTime::currentDateTime().toMSecsSinceEpoch();
++    g_once_init_leave(&once,1);
++  }
++
+   if (!fbo && !this->priv->useDefaultFbo) {
+ 
+     width = source->width();
+@@ -152,6 +161,10 @@ QtGLWindow::beforeRendering()
+           QOpenGLFramebufferObject::NoAttachment, GL_TEXTURE_2D, GL_RGBA));
+ 
+     source->setRenderTarget(fbo.data());
++  } else if (this->priv->useDefaultFbo) {
++    GST_DEBUG ("use default fbo for renderTargetId");
++    fbo.reset(NULL);
++    source->setRenderTarget(NULL);
+   }
+ 
+   g_mutex_unlock (&this->priv->lock);
+@@ -251,9 +264,14 @@ QtGLWindow::aboutToQuit()
+   this->priv->quit = TRUE;
+   g_cond_signal (&this->priv->update_cond);
+ 
+-  g_mutex_unlock (&this->priv->lock);
++  this->priv->stop = QDateTime::currentDateTime().toMSecsSinceEpoch();
++  qint64 duration = this->priv->stop - this->priv->start;
++  float fps = ((float)this->priv->frames_rendered / duration * 1000);
++
++  GST_DEBUG("about to quit, total refresh frames (%lld) in (%0.3f) seconds, fps: %0.3f",
++      this->priv->frames_rendered, (float)duration / 1000, fps);
+ 
+-  GST_DEBUG("about to quit");
++  g_mutex_unlock (&this->priv->lock);
+ }
+ 
+ void
+@@ -405,15 +423,3 @@ qt_window_use_default_fbo (QtGLWindow * qt_window, gboolean useDefaultFbo)
+ 
+   g_mutex_unlock (&qt_window->priv->lock);
+ }
+-
+-void
+-qt_window_get_total_frames (QtGLWindow * qt_window, guint64 *frames)
+-{
+-  g_return_if_fail (qt_window != NULL);
+-
+-  g_mutex_lock (&qt_window->priv->lock);
+-
+-  *frames = qt_window->priv->frames_rendered;
+-
+-  g_mutex_unlock (&qt_window->priv->lock);
+-}
+diff --git a/ext/qt/qtwindow.h b/ext/qt/qtwindow.h
+index 8cb5a2c..697f389 100644
+--- a/ext/qt/qtwindow.h
++++ b/ext/qt/qtwindow.h
+@@ -65,7 +65,6 @@ GstGLContext *  qt_window_get_qt_context (QtGLWindow * qt_window);
+ GstGLDisplay *  qt_window_get_display (QtGLWindow * qt_window);
+ gboolean        qt_window_is_scenegraph_initialized (QtGLWindow * qt_window);
+ void            qt_window_use_default_fbo (QtGLWindow * qt_window, gboolean useDefaultFbo);
+-void            qt_window_get_total_frames (QtGLWindow * qt_window, guint64 *frames);
+ }
+ 
+ #endif /* __QT_WINDOW_H__ */
+-- 
+1.9.1
+
