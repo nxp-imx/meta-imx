@@ -1,7 +1,7 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
 
 require recipes-bsp/imx-vpu/imx-vpu.inc
-LIC_FILES_CHKSUM = "file://COPYING;md5=b07f39bfbc2c512763d717a876d5aae82334dde2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=be67a88e9e6c841043b005ad7bcf8309"
 
 PE = "1"
 
