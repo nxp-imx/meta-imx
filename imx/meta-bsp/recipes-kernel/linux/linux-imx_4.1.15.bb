@@ -16,9 +16,6 @@ SRCREV = "3cdcd76acb72ea3a70747561e6bd873954387436"
 KERNEL_SRC ?= "git://git.freescale.com/imx/linux-imx.git;protocol=git"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
-SRCBRANCH_mx6sll = "imx_4.1.y"
-SRCREV_mx6sll = "${AUTOREV}"
-
 DEFAULT_PREFERENCE = "1"
 
 DO_CONFIG_V7_COPY = "no"
