@@ -68,6 +68,6 @@ PREFERRED_PROVIDER_virtual/libgl_mx7ulp = "imx-gpu-viv"
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx7ulp = "1"
 
-UBOOT_SUFFIX_mx6ul = "bin"
+UBOOT_SUFFIX_mx6ul = "imx"
 SPL_BINARY_mx6ul = ""
 UBOOT_MAKE_TARGET_mx6ul = "u-boot.imx"
