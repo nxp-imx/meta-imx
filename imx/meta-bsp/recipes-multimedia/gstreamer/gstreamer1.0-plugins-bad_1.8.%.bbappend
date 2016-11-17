@@ -16,8 +16,20 @@ PACKAGECONFIG_remove_mx6sl = " gles2"
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
 PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland"
 
+SRC_URI_append_imxpxp = " \
+    file://0001-glplugin-Change-wayland-default-res-to-1024x768.patch \
+    file://0002-Support-fb-backend-for-gl-plugins.patch \
+    file://0003-Add-directviv-to-glimagesink-to-improve-playback-per.patch \
+    file://0004-MMFMWK-6930-glplugin-Accelerate-gldownload-with-dire.patch \
+    file://0005-Fix-dependence-issue-between-gst-plugin-.patch \
+    file://0006-glcolorconvert-convert-YUV-to-RGB-use-directviv.patch \
+    file://0007-glwindow-work-around-for-no-frame-when-imxplayer-use.patch \
+    file://0008-glplugin-glcolorconvert-fix-MRT-cannot-work-in-GLES3.patch \
+    file://0009-MMFMWK-7308-Fix-build-issue-on-non-GPU-soc.patch \
+"
+
 #common
-SRC_URI_append = " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch \
+COMMON_IMX = " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch \
                    file://0002-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
                    file://0003-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
                    file://0004-modifiy-the-videoparse-rank.patch \
@@ -36,9 +48,14 @@ SRC_URI_append = " file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch 
                    file://0031-glwindow-Fix-glimagesink-cannot-show-frame-when-conn.patch \
                    file://0033-ion_allocator-refine-ion-allocator-code.patch \
                    file://0035-videocompositor-Remove-output-format-alpha-check.patch \
+                   file://0036-Add-ion-memory-support-for-glupload.patch \
                    file://0037-Support-one-texture-for-YUV-format-in-dmabuf-upload.patch \
+                   file://0038-Add-ion-dmabuf-support-in-gldownload.patch \
                    file://0039-imx8dv-fix-qmlgltest-can-not-run-on-FB-b.patch \
 "
+
+SRC_URI_append_imxgpu2d = "${COMMON_IMX}"
+SRC_URI_append_imxpxp = "${COMMON_IMX}"
 
 # include fragment shaders
 FILES_${PN}-opengl += "/usr/share/*.fs"
