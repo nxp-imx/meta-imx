@@ -14,12 +14,6 @@ SRCBRANCH = "imx_4.1.y"
 LOCALVERSION = "-3.0.0"
 SRCREV = "33d2ad634dac3f88e92fb9df8c1871129719fd69"
 KERNEL_SRC ?= "git://git.freescale.com/imx/linux-imx.git;protocol=git"
-
-SRCBRANCH_mx7ulp = "imx_4.1.y_imx7ulp"
-LOCALVERSION_mx7ulp = "-mx7ulp"
-SRCREV_mx7ulp = "65e13473122b2d24f8a862a19c6ed6cbb8980b67"
-KERNEL_SRC_mx7ulp = "git://sw-stash.freescale.net/scm/imx/linux-2.6-testbuild.git;protocol=http"
-
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
 DEFAULT_PREFERENCE = "1"
@@ -29,11 +23,7 @@ DO_CONFIG_V7_COPY_mx6 = "yes"
 DO_CONFIG_V7_COPY_mx7 = "yes"
 DO_CONFIG_V7_COPY_nx6sll = "yes"
 DO_CONFIG_V7_COPY_mx6ul = "yes"
-
-DO_CONFIG_V7_COPY_mx7ulp = "no"
-
-DO_CONFIG_7ULP_COPY = "no"
-DO_CONFIG_7ULP_COPY_mx7ulp = "yes"
+DO_CONFIG_V7_COPY_mx7ulp = "yes"
 
 addtask copy_defconfig after do_patch before do_preconfigure #do_configure
 do_copy_defconfig () {
@@ -44,15 +34,6 @@ do_copy_defconfig () {
         cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
         cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
     fi
-
-    if [ ${DO_CONFIG_7ULP_COPY} = "yes" ]; then
-        # temporal work-around for GPU KLM build error
-        echo "CONFIG_MODULES=y" >>  ${S}/arch/arm/configs/mx7ulp_defconfig
-
-        cp ${S}/arch/arm/configs/mx7ulp_defconfig ${B}/.config
-        cp ${S}/arch/arm/configs/mx7ulp_defconfig ${B}/../defconfig
-    fi
-
 }
 
 COMPATIBLE_MACHINE = "(mx6|mx6ul|mx6sll|mx7)"
