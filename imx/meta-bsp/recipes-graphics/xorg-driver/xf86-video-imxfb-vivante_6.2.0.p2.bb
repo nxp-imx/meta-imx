@@ -6,8 +6,8 @@ require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
 
 SRC_URI += "file://rc.autohdmi"
 
-SRC_URI[md5sum] = "a39c1b33438c036467818de4babac880"
-SRC_URI[sha256sum] = "8fbb19f251ca59d4185ed5b748a583819b2bbba837d81e9ca5b032810400a704"
+SRC_URI[md5sum] = "9bfacc658e4a8d26cf9dcf5b6f47917a"
+SRC_URI[sha256sum] = "48fd3d5032706f0b87e9b025ab19144cc4b3e379990406d81e1d69ba79713fb4"
 
 DEPENDS_mx8 = "virtual/libg2d virtual/xserver"
 
