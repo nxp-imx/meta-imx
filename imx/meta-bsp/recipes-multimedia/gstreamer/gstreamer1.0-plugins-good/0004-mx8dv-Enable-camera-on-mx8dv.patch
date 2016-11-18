@@ -1,7 +1,7 @@
-From 1765f757fc795dd61a3688acc66e9bbf4c25bff1 Mon Sep 17 00:00:00 2001
+From ef7c638ae4570aea7c49af98ce8a594c4e4447c9 Mon Sep 17 00:00:00 2001
 From: Song Bing <bing.song@nxp.com>
 Date: Fri, 21 Oct 2016 11:24:05 +0800
-Subject: [PATCH] MMFMWK-7274 [mx8dv] Enable camera on mx8dv
+Subject: [PATCH 4/4] MMFMWK-7274 [mx8dv] Enable camera on mx8dv
 
 Set memory allocate by camera as physical continuoues.
 
