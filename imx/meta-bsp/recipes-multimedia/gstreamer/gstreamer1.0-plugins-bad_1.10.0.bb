@@ -16,6 +16,9 @@ SRC_URI = " \
 "
 
 SRC_URI_remove = " \
+    file://0003-Add-directviv-to-glimagesink-to-improve-playback-per.patch \
+    file://0004-MMFMWK-6930-glplugin-Accelerate-gldownload-with-dire.patch \
+    file://0005-Fix-dependence-issue-between-gst-plugin-.patch \
     file://0008-glplugin-glcolorconvert-fix-MRT-cannot-work-in-GLES3.patch \
     file://0009-MMFMWK-7308-Fix-build-issue-on-non-GPU-soc.patch \
 "
