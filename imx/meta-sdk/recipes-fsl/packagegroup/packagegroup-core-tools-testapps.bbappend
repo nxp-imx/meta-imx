@@ -4,11 +4,8 @@ RDEPENDS_${PN}_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', "gst-pl
                           ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', "gst-player-bin", "", d)} \
 "
 
-# only include piglit for x11 - breaks on frame buffer
-IMX_PIGLIT = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', "piglit", "", d)}"
-
 IMX_CORE_TOOLS = ""
-IMX_CORE_TOOLS_imxgpu2d = " tslib ${IMX_PIGLIT}"
+IMX_CORE_TOOLS_imxgpu2d = " tslib"
 IMX_CORE_TOOLS_imxpxp = " tslib"
 
 RDEPENDS_${PN} += " \
