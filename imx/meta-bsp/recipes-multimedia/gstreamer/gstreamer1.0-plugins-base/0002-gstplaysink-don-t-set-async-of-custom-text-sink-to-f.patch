@@ -1,7 +1,7 @@
-From 29acdf1fe4e7a82cbd534e53a4f4ac9897bf2019 Mon Sep 17 00:00:00 2001
+From 7847d85e7f37a4a40e483f3b3095c7f8a9fdf5ee Mon Sep 17 00:00:00 2001
 From: Mingke Wang <mingke.wang@freescale.com>
 Date: Thu, 19 Mar 2015 14:15:25 +0800
-Subject: [PATCH 02/12] gstplaysink: don't set async of custom text-sink to
+Subject: [PATCH 02/13] gstplaysink: don't set async of custom text-sink to
  false
 
 set async to false lead to A/V sync problem when seeking.
@@ -10,7 +10,6 @@ the preroll need use GAP event instead of set async to false.
 Upstream Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Mingke Wang <mingke.wang@freescale.com>
-Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
  gst/playback/gstplaysink.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
@@ -19,10 +18,10 @@ Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 diff --git a/gst/playback/gstplaysink.c b/gst/playback/gstplaysink.c
 old mode 100644
 new mode 100755
-index c640ba4..70fbdaa
+index eaac018..02d019e
 --- a/gst/playback/gstplaysink.c
 +++ b/gst/playback/gstplaysink.c
-@@ -2433,7 +2433,7 @@ gen_text_chain (GstPlaySink * playsink)
+@@ -2430,7 +2430,7 @@ gen_text_chain (GstPlaySink * playsink)
            G_TYPE_BOOLEAN);
        if (elem) {
          /* make sure the sparse subtitles don't participate in the preroll */

@@ -1,7 +1,7 @@
-From 0f92c49322461ea1674bb455efa65daa11466a0c Mon Sep 17 00:00:00 2001
+From 21197c14982415b596ca7539764d17c9cc08c7b4 Mon Sep 17 00:00:00 2001
 From: Lyon Wang <lyon.wang@freescale.com>
 Date: Tue, 17 Nov 2015 14:56:47 +0800
-Subject: [PATCH 10/12] gstaudiobasesink print warning istead of return ERROR.
+Subject: [PATCH 10/13] gstaudiobasesink print warning istead of return ERROR.
 
 For those clips with corrupt audio track,
 there might be no output from audio decoder

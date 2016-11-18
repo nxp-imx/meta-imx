@@ -1,7 +1,7 @@
-From 483acba0c5e07ffbb806f53dc81469abf559a790 Mon Sep 17 00:00:00 2001
+From b77e49edf4c21c75f61fdc434aef5517a00d3263 Mon Sep 17 00:00:00 2001
 From: Mingke Wang <mingke.wang@freescale.com>
 Date: Fri, 16 Oct 2015 19:31:32 +0800
-Subject: [PATCH 01/12] basetextoverlay: make memory copy when video buffer's
+Subject: [PATCH 01/13] basetextoverlay: make memory copy when video buffer's
  memory is ready only
 
 1. since gst_buffer_make_writable just lookup the refcount to determine if
@@ -15,7 +15,6 @@ Subject: [PATCH 01/12] basetextoverlay: make memory copy when video buffer's
    buffer if the buffer's refcount is 1.
 
 Signed-off-by: Mingke Wang <mingke.wang@freescale.com>
-Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
  ext/pango/gstbasetextoverlay.c | 32 ++++++++++++++++++++++++++++++--
  1 file changed, 30 insertions(+), 2 deletions(-)
@@ -24,10 +23,10 @@ Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 diff --git a/ext/pango/gstbasetextoverlay.c b/ext/pango/gstbasetextoverlay.c
 old mode 100644
 new mode 100755
-index e0bb169..a289b4e
+index d2cdc23..ebeb92b
 --- a/ext/pango/gstbasetextoverlay.c
 +++ b/ext/pango/gstbasetextoverlay.c
-@@ -2212,16 +2212,44 @@ gst_base_text_overlay_push_frame (GstBaseTextOverlay * overlay,
+@@ -2213,16 +2213,44 @@ gst_base_text_overlay_push_frame (GstBaseTextOverlay * overlay,
    if (gst_pad_check_reconfigure (overlay->srcpad))
      gst_base_text_overlay_negotiate (overlay, NULL);
  
