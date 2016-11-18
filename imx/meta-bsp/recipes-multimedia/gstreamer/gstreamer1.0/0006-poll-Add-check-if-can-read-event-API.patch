@@ -1,24 +1,26 @@
-From 39212c51bd2f0f435559cce3472ed77fbc046d7c Mon Sep 17 00:00:00 2001
+From a82b3f0c9d53b73d7dac961990b08b06c6671faa Mon Sep 17 00:00:00 2001
 From: Song Bing <bing.song@nxp.com>
 Date: Thu, 20 Aug 2015 14:57:46 +0800
-Subject: [PATCH] poll: Add check if can read event API
+Subject: [PATCH 6/6] poll: Add check if can read event API
 
 Need check if can read event of buffer for video decoder based on
 V4L2 driver. Add the API for it.
 
-Upstream-Status: Pending [https://bugzilla.gnome.org/show_bug.cgi?id=752962]
+https://bugzilla.gnome.org/show_bug.cgi?id=752962
+
+Upstream-Status: pending
 
 Signed-off-by: Song Bing bing.song@nxp.com
 ---
- gst/gstpoll.c |   52 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- gst/gstpoll.h |    1 +
+ gst/gstpoll.c | 52 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ gst/gstpoll.h |  1 +
  2 files changed, 53 insertions(+)
 
 diff --git a/gst/gstpoll.c b/gst/gstpoll.c
-index 04165a5..773fc33 100644
+index 23bceab..f9f5242 100644
 --- a/gst/gstpoll.c
 +++ b/gst/gstpoll.c
-@@ -1120,6 +1120,58 @@ gst_poll_fd_can_read (const GstPoll * set, GstPollFD * fd)
+@@ -1239,6 +1239,58 @@ gst_poll_fd_can_read (const GstPoll * set, GstPollFD * fd)
    return res;
  }
  
@@ -78,7 +80,7 @@ index 04165a5..773fc33 100644
   * gst_poll_fd_can_write:
   * @set: a file descriptor set.
 diff --git a/gst/gstpoll.h b/gst/gstpoll.h
-index 8bf64fd..3e4196f 100644
+index ef6dcea..0513648 100644
 --- a/gst/gstpoll.h
 +++ b/gst/gstpoll.h
 @@ -79,6 +79,7 @@ void            gst_poll_fd_ignored       (GstPoll *set, GstPollFD *fd);
@@ -90,5 +92,5 @@ index 8bf64fd..3e4196f 100644
  
  gint            gst_poll_wait             (GstPoll *set, GstClockTime timeout);
 -- 
-1.7.9.5
+1.9.1
 
