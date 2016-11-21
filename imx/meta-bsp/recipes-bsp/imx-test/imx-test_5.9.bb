@@ -10,7 +10,7 @@ DEPENDS_mx7   += "imx-vpu"
 
 PARALLEL_MAKE="-j 1"
 
-SRC_URI[md5sum] = "bf55f7c2c9fd6664d640557f7cd107a1"
-SRC_URI[sha256sum] = "d7a503112098befc91c4d256d8683ca11eb4246123f4e57cf2df498791294888"
+SRC_URI[md5sum] = "870849555ec64fd1bdc50fe07c7bd99a"
+SRC_URI[sha256sum] = "8e974a37c7e936bcc6a18b66a671e55f5756fbbd3ba0bf58b2b7756aaa14aa2b"
 
 COMPATIBLE_MACHINE = "(mx6|mx6ul|mx6sll|mx7)"
