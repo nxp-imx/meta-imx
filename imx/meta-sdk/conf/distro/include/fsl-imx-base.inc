@@ -18,6 +18,7 @@ IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 IMAGE_FSTYPES = "tar.bz2 ext4 sdcard"
 
 BBMASK = "meta-freescale/dynamic-layers/qt5-layer/recipes-qt/qt5/qtbase_%.bbappend"
+BBMASK .= "|meta-freescale/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_%.bbappend"
 BBMASK .= "|meta-freescale/recipes-bsp/firmware-imx"
 BBMASK .= "|meta-freescale/recipes-graphics/images/core-image-weston.bbappend"
 BBMASK .= "|meta-freescale/recipes-bsp/u-boot/u-boot-imx_2016.03.bb"
