@@ -1,0 +1,33 @@
+From 9f18ce17f205420fcf18277fd3cbf7bf6b92fddb Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Tue, 15 Nov 2016 18:10:24 +0800
+Subject: [PATCH 24/26] glwindow: use g_thread_unref() to release navigation
+ thread
+
+use g_thread_unref() to release navigation thread to avoid memory leak
+
+Upstream Status: Backport[1.10.1]
+
+https://bugzilla.gnome.org/show_bug.cgi?id=774462
+
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+---
+ gst-libs/gst/gl/gstglwindow.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/gst-libs/gst/gl/gstglwindow.c b/gst-libs/gst/gl/gstglwindow.c
+index 834d927..899675e 100644
+--- a/gst-libs/gst/gl/gstglwindow.c
++++ b/gst-libs/gst/gl/gstglwindow.c
+@@ -351,6 +351,8 @@ gst_gl_window_finalize (GObject * object)
+     /* wait until navigation thread finished */
+     while (window->priv->nav_alive)
+       g_cond_wait (&window->priv->nav_destroy_cond, &window->priv->nav_lock);
++    /* release the resources of navigation thread */
++    g_thread_unref (window->priv->navigation_thread);
+     window->priv->navigation_thread = NULL;
+   }
+   g_mutex_unlock (&window->priv->nav_lock);
+-- 
+1.9.1
+

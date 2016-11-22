@@ -1,7 +1,7 @@
-From 379756bc728b78b37316047db7b8fed817c7556b Mon Sep 17 00:00:00 2001
+From a47d1cf0a545ca2648b79f946bd80a64b5a2bd3a Mon Sep 17 00:00:00 2001
 From: Song Bing <b06498@freescale.com>
 Date: Wed, 22 Apr 2015 18:06:35 +0800
-Subject: [PATCH 01/18] mpegtsmux: Need get pid when create streams.
+Subject: [PATCH 01/26] mpegtsmux: Need get pid when create streams.
 
 when camerabin use mpegtsmux as muxer, start video recording and then
 stop video recording and then start video recording, mpegtsmux get wrong
@@ -10,14 +10,12 @@ pid.
 https://bugzilla.gnome.org/show_bug.cgi?id=748288
 
 UpStream Status: Pending
-
-Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
  gst/mpegtsmux/mpegtsmux.c | 15 +++++++++++++++
  1 file changed, 15 insertions(+)
 
 diff --git a/gst/mpegtsmux/mpegtsmux.c b/gst/mpegtsmux/mpegtsmux.c
-index cd07338..ca717f3 100644
+index 67c2b72..cfd7c2a 100644
 --- a/gst/mpegtsmux/mpegtsmux.c
 +++ b/gst/mpegtsmux/mpegtsmux.c
 @@ -833,6 +833,21 @@ mpegtsmux_create_streams (MpegTsMux * mux)

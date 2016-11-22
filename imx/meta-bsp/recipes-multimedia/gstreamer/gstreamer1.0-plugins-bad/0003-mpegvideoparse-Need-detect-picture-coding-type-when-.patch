@@ -1,7 +1,7 @@
-From f1a54535bf21d534a42a914f88d838cfc53837cb Mon Sep 17 00:00:00 2001
+From 823c4f11c80a8ec0f081c30d729226c724fd4bed Mon Sep 17 00:00:00 2001
 From: Song Bing <b06498@freescale.com>
 Date: Wed, 20 May 2015 15:15:08 +0800
-Subject: [PATCH 03/18] mpegvideoparse: Need detect picture coding type when
+Subject: [PATCH 03/26] mpegvideoparse: Need detect picture coding type when
  drain
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -12,16 +12,15 @@ Need detect picture coding type when drain
 Upstream Status: Waiting for review.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=749617
-Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
  gst/videoparsers/gstmpegvideoparse.c | 16 ++++++++++++++++
  1 file changed, 16 insertions(+)
 
 diff --git a/gst/videoparsers/gstmpegvideoparse.c b/gst/videoparsers/gstmpegvideoparse.c
-index bf71a3e..7ba624e 100644
+index 6896339..769e0fd 100644
 --- a/gst/videoparsers/gstmpegvideoparse.c
 +++ b/gst/videoparsers/gstmpegvideoparse.c
-@@ -717,6 +717,22 @@ need_more:
+@@ -715,6 +715,22 @@ need_more:
    if (GST_BASE_PARSE_DRAINING (parse)) {
      GST_LOG_OBJECT (mpvparse, "draining, accepting all data");
      off = size;

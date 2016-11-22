@@ -1,45 +1,91 @@
-From fc9a3ad809957e92dcf2ab3e71bde5794b39d185 Mon Sep 17 00:00:00 2001
+From bc9ba14000db74dce0c90ab0057793e1f7859243 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
-Date: Fri, 11 Nov 2016 14:42:58 +0800
-Subject: [PATCH] Add ion dmabuf support in gldownload
+Date: Mon, 14 Nov 2016 16:59:23 +0800
+Subject: [PATCH 23/26] Add ion dmabuf support in gldownload
 
 Support copy into dma-fb buffer if support the buffer format
 
-Upstream-Status: Inappropriate [i.MX specific]
+Upstream Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
- ext/gl/gstgldownloadelement.c    |  37 +++++-
- gst-libs/gst/gl/Makefile.am      |   4 +
+ configure.ac                     |   9 ++
+ ext/gl/gstgldownloadelement.c    |  36 +++++-
+ gst-libs/gst/gl/Makefile.am      |   8 ++
  gst-libs/gst/gl/gstgl_fwd.h      |   4 +
- gst-libs/gst/gl/gstglmemorydma.c | 273 +++++++++++++++++++++++++++++++++++++++
- gst-libs/gst/gl/gstglmemorydma.h |  72 +++++++++++
- 5 files changed, 385 insertions(+), 5 deletions(-)
+ gst-libs/gst/gl/gstglmemorydma.c | 258 +++++++++++++++++++++++++++++++++++++++
+ gst-libs/gst/gl/gstglmemorydma.h |  76 ++++++++++++
+ 6 files changed, 387 insertions(+), 4 deletions(-)
  create mode 100644 gst-libs/gst/gl/gstglmemorydma.c
  create mode 100644 gst-libs/gst/gl/gstglmemorydma.h
 
+diff --git a/configure.ac b/configure.ac
+index 7a01dd9..5f4b7c2 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -910,10 +910,16 @@ PKG_CHECK_MODULES(GST_ALLOCATORS, gstreamer-allocators-1.0,
+   HAVE_GST_ALLOCATORS=yes, )
+ 
+ GST_GL_HAVE_DMABUF=0
++USE_IONDMA=no
++GST_GL_HAVE_IONDMA=0
+ if test "x$HAVE_DRM_FOURCC_HEADER" = "xyes" -a \
+         "x$HAVE_GST_ALLOCATORS" = "xyes" -a \
+         "x$HAVE_EGL" = "xyes"; then
+           GST_GL_HAVE_DMABUF=1
++          if test "x$GST_GL_HAVE_ION" = "x1"; then
++            GST_GL_HAVE_IONDMA=1
++            USE_IONDMA=yes
++          fi
+ fi
+ 
+ dnl check if we can include both GL and GLES2 at the same time
+@@ -1336,6 +1342,7 @@ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+ #define GST_GL_HAVE_DMABUF $GST_GL_HAVE_DMABUF
+ #define GST_GL_HAVE_ION $GST_GL_HAVE_ION
++#define GST_GL_HAVE_IONDMA $GST_GL_HAVE_IONDMA
+ #define GST_GL_HAVE_DIRECTVIV $GST_GL_HAVE_DIRECTVIV
+ #define GST_GL_HAVE_PHYMEM $GST_GL_HAVE_PHYMEM
+ "
+@@ -1364,6 +1371,7 @@ if test "x$GL_APIS" = "x" -o "x$GL_PLATFORMS" = "x" -o "x$GL_WINDOWS" = "x"; the
+   USE_EGL_MALI=no
+   USE_EGL_RPI=no
+   USE_EAGL=no
++  USE_IONDMA=no
+ 
+   HAVE_WINDOW_X11=no
+   HAVE_WINDOW_WIN32=no
+@@ -1404,6 +1412,7 @@ AM_CONDITIONAL(USE_COCOA, test "x$USE_COCOA" = "xyes")
+ AM_CONDITIONAL(USE_EGL_MALI, test "x$USE_EGL_MALI" = "xyes")
+ AM_CONDITIONAL(USE_EGL_RPI, test "x$USE_EGL_RPI" = "xyes")
+ AM_CONDITIONAL(USE_EAGL, test "x$USE_EAGL" = "xyes")
++AM_CONDITIONAL(USE_IONDMA, test "x$USE_IONDMA" = "xyes")
+ 
+ AM_CONDITIONAL(HAVE_GST_GL, test "x$USE_OPENGL" = "xyes" -o "x$USE_GLES2" = "xyes")
+ 
 diff --git a/ext/gl/gstgldownloadelement.c b/ext/gl/gstgldownloadelement.c
-index e89c36e..c545f36 100644
+index a5ba6ab..77358ca 100644
 --- a/ext/gl/gstgldownloadelement.c
 +++ b/ext/gl/gstgldownloadelement.c
 @@ -29,6 +29,10 @@
  #include <gst/gl/gstglphymemory.h>
  #endif
  
-+#if GST_GL_HAVE_DMABUF
++#if GST_GL_HAVE_IONDMA
 +#include <gst/gl/gstglmemorydma.h>
 +#endif
 +
  GST_DEBUG_CATEGORY_STATIC (gst_gl_download_element_debug);
  #define GST_CAT_DEFAULT gst_gl_download_element_debug
  
-@@ -174,8 +178,22 @@ gst_gl_download_element_prepare_output_buffer (GstBaseTransform * bt,
+@@ -173,8 +177,22 @@ gst_gl_download_element_prepare_output_buffer (GstBaseTransform * bt,
    gint i, n;
    GstGLMemory *glmem;
  
 -#if GST_GL_HAVE_PHYMEM
    glmem = gst_buffer_peek_memory (inbuf, 0);
-+#if GST_GL_HAVE_DMABUF
++#if GST_GL_HAVE_IONDMA
 +  if (gst_is_gl_memory_dma (glmem)) {
 +    GstGLContext *context = GST_GL_BASE_FILTER (bt)->context;
 +    GstVideoInfo info;
@@ -57,7 +103,7 @@ index e89c36e..c545f36 100644
    if (gst_is_gl_physical_memory (glmem)) {
      GstGLContext *context = GST_GL_BASE_FILTER (bt)->context;
      GstVideoInfo info;
-@@ -234,6 +252,7 @@ gst_gl_download_element_propose_allocation (GstBaseTransform * bt,
+@@ -233,6 +251,7 @@ gst_gl_download_element_propose_allocation (GstBaseTransform * bt,
    GstCaps *caps;
    GstStructure *config;
    gsize size;
@@ -65,12 +111,11 @@ index e89c36e..c545f36 100644
  
    gst_query_parse_allocation (query, &caps, NULL);
    if (!gst_video_info_from_caps (&info, caps)) {
-@@ -241,13 +260,21 @@ gst_gl_download_element_propose_allocation (GstBaseTransform * bt,
+@@ -240,12 +259,21 @@ gst_gl_download_element_propose_allocation (GstBaseTransform * bt,
      return FALSE;
    }
  
--  GST_DEBUG_OBJECT (bt, "video format is %s",
--      gst_video_format_to_string (GST_VIDEO_INFO_FORMAT (&info)));
+-  GST_DEBUG_OBJECT (bt, "video format is %s", gst_video_format_to_string (GST_VIDEO_INFO_FORMAT (&info)));
 -
    gst_allocation_params_init (&params);
  
@@ -78,7 +123,7 @@ index e89c36e..c545f36 100644
 +
 +  GST_DEBUG_OBJECT (bt, "video format is %s", gst_video_format_to_string (fmt));
 +
-+#if GST_GL_HAVE_DMABUF
++#if GST_GL_HAVE_IONDMA
 +  if (fmt == GST_VIDEO_FORMAT_RGBA || fmt == GST_VIDEO_FORMAT_RGB16) {
 +    allocator = gst_gl_memory_dma_allocator_obtain ();
 +    GST_DEBUG_OBJECT (bt, "obtain dma memory allocator %p.", allocator);
@@ -92,41 +137,52 @@ index e89c36e..c545f36 100644
      GST_DEBUG_OBJECT (bt, "obtain physical memory allocator %p.", allocator);
    }
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index f321d48..538858a 100644
+index 604c606..7ab6423 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
-@@ -149,6 +149,10 @@ libgstgl_@GST_API_VERSION@_la_LIBADD += -lgstallocators-$(GST_API_VERSION)
- if USE_ION
- libgstgl_@GST_API_VERSION@_la_LIBADD += \
- 	$(top_builddir)/gst-libs/gst/ion/libgstbadion-$(GST_API_VERSION).la
-+if USE_EGL
-+libgstgl_@GST_API_VERSION@_la_SOURCES += gstglmemorydma.c
-+libgstgl_@GST_API_VERSION@include_HEADERS += gstglmemorydma.h
-+endif
- endif
+@@ -44,6 +44,10 @@ if HAVE_PHYMEM
+ libgstgl_@GST_API_VERSION@_la_SOURCES += gstglphymemory.c
  endif
  
++if USE_IONDMA
++libgstgl_@GST_API_VERSION@_la_SOURCES += gstglmemorydma.c
++endif
++
+ libgstgl_@GST_API_VERSION@includedir = $(includedir)/gstreamer-@GST_API_VERSION@/gst/gl
+ libgstgl_@GST_API_VERSION@include_HEADERS = \
+ 	gstglwindow.h \
+@@ -86,6 +90,10 @@ if HAVE_PHYMEM
+ libgstgl_@GST_API_VERSION@include_HEADERS += gstglphymemory.h
+ endif
+ 
++if USE_IONDMA
++libgstgl_@GST_API_VERSION@include_HEADERS += gstglmemorydma.h
++endif
++
+ noinst_HEADERS = \
+ 	gstglsl_private.h \
+ 	utils/opengl_versions.h \
 diff --git a/gst-libs/gst/gl/gstgl_fwd.h b/gst-libs/gst/gl/gstgl_fwd.h
-index fb64ff6..fc7cf02 100644
+index 465e284..70fc208 100644
 --- a/gst-libs/gst/gl/gstgl_fwd.h
 +++ b/gst-libs/gst/gl/gstgl_fwd.h
-@@ -55,6 +55,10 @@ typedef struct _GstGLMemoryPBO GstGLMemoryPBO;
- typedef struct _GstGLMemoryPBOAllocator GstGLMemoryPBOAllocator;
- typedef struct _GstGLMemoryPBOAllocatorClass GstGLMemoryPBOAllocatorClass;
+@@ -51,6 +51,10 @@ typedef struct _GstGLMemory GstGLMemory;
+ typedef struct _GstGLMemoryAllocator GstGLMemoryAllocator;
+ typedef struct _GstGLMemoryAllocatorClass GstGLMemoryAllocatorClass;
  
 +typedef struct _GstGLMemoryDMA GstGLMemoryDMA;
 +typedef struct _GstGLMemoryDMAAllocator GstGLMemoryDMAAllocator;
 +typedef struct _GstGLMemoryDMAAllocatorClass GstGLMemoryDMAAllocatorClass;
 +
- typedef struct _GstGLSLStage        GstGLSLStage;
- typedef struct _GstGLSLStagePrivate GstGLSLStagePrivate;
- typedef struct _GstGLSLStageClass   GstGLSLStageClass;
+ typedef struct _GstGLMemoryPBO GstGLMemoryPBO;
+ typedef struct _GstGLMemoryPBOAllocator GstGLMemoryPBOAllocator;
+ typedef struct _GstGLMemoryPBOAllocatorClass GstGLMemoryPBOAllocatorClass;
 diff --git a/gst-libs/gst/gl/gstglmemorydma.c b/gst-libs/gst/gl/gstglmemorydma.c
 new file mode 100644
-index 0000000..fa418a1
+index 0000000..0a4cee2
 --- /dev/null
 +++ b/gst-libs/gst/gl/gstglmemorydma.c
-@@ -0,0 +1,273 @@
+@@ -0,0 +1,258 @@
 +/*
 + * GStreamer
 + * Copyright (c) 2016, Freescale Semiconductor, Inc. 
@@ -153,9 +209,6 @@ index 0000000..fa418a1
 +
 +#include <string.h>
 +
-+#include <gst/video/video.h>
-+
-+#include "egl/gsteglimagememory.h"
 +#include <gst/allocators/gstdmabuf.h>
 +#include <gst/gl/gstglmemorydma.h>
 +
@@ -238,7 +291,7 @@ index 0000000..fa418a1
 +  dma_fd = gst_dmabuf_memory_get_fd ((GstMemory*) gl_mem->dma);
 +
 +  gl_mem->eglimage = 
-+    gst_egl_image_memory_from_dmabuf (context, dma_fd, &gl_mem->mem.info, 0,0);
++    gst_egl_image_from_dmabuf (context, dma_fd, &gl_mem->mem.info, 0,0);
 +
 +  if (!gl_mem->eglimage) {
 +    GST_CAT_ERROR (GST_CAT_GL_DMA_MEMORY, "Can't allocate eglimage memory");
@@ -250,23 +303,12 @@ index 0000000..fa418a1
 +  gl->ActiveTexture (GL_TEXTURE0);
 +  gl->BindTexture (GL_TEXTURE_2D, gl_mem->mem.tex_id);
 +  gl->EGLImageTargetTexture2D (GL_TEXTURE_2D,
-+      gst_egl_image_memory_get_image (gl_mem->eglimage));
++      gst_egl_image_get_image (gl_mem->eglimage));
 +
 +  GST_CAT_DEBUG (GST_CAT_GL_DMA_MEMORY, "generated dma buffer %p fd %u texid %u",
 +      gl_mem, dma_fd, gl_mem->mem.tex_id);
 +
 +  return TRUE;
-+}
-+
-+static void
-+_gl_mem_init (GstGLMemoryDMA * mem, GstAllocator * allocator,
-+    GstMemory * parent, GstGLContext * context, GstGLTextureTarget target,
-+    GstAllocationParams * params, GstVideoInfo * info,
-+    guint plane, GstVideoAlignment * valign, gpointer user_data,
-+    GDestroyNotify notify)
-+{
-+  gst_gl_memory_init ((GstGLMemory *) mem, allocator, parent,
-+      context, target, params, info, plane, valign, user_data, notify);
 +}
 +
 +static GstMemory *
@@ -285,7 +327,7 @@ index 0000000..fa418a1
 +  GST_CAT_DEBUG (GST_CAT_GL_DMA_MEMORY, "destroy gl dma buffer %p", gl_mem);
 +
 +  if (gl_mem->eglimage)
-+    gst_memory_unref (GST_MEMORY_CAST (gl_mem->eglimage));
++    gst_egl_image_unref (gl_mem->eglimage);
 +  gl_mem->eglimage = NULL;
 +  if (gl_mem->dma)
 +    gst_memory_unref (GST_MEMORY_CAST (gl_mem->dma));
@@ -322,10 +364,10 @@ index 0000000..fa418a1
 +    return NULL;
 +  }
 +
-+  _gl_mem_init (mem, GST_ALLOCATOR_CAST (allocator), NULL,
-+      params->parent.context, params->target, params->parent.alloc_params,
-+      params->v_info, params->plane, params->valign, params->parent.user_data,
-+      params->parent.notify);
++  gst_gl_memory_init (GST_GL_MEMORY_CAST (mem), GST_ALLOCATOR_CAST (allocator),
++      NULL, params->parent.context, params->target, params->tex_type,
++      params->parent.alloc_params, params->v_info, params->plane,
++      params->valign, params->parent.user_data, params->parent.notify);
 +
 +  return mem;
 +}
@@ -380,7 +422,6 @@ index 0000000..fa418a1
 +{
 +  GstBuffer *buf;
 +  GstGLMemoryDMA *glmem;
-+  GstGLSyncMeta *sync_meta;
 +
 +  gst_gl_context_thread_add (ctx, (GstGLContextThreadFunc) _finish_texture, NULL);
 +
@@ -402,10 +443,10 @@ index 0000000..fa418a1
 +}
 diff --git a/gst-libs/gst/gl/gstglmemorydma.h b/gst-libs/gst/gl/gstglmemorydma.h
 new file mode 100644
-index 0000000..41fb27b
+index 0000000..f63442a
 --- /dev/null
 +++ b/gst-libs/gst/gl/gstglmemorydma.h
-@@ -0,0 +1,72 @@
+@@ -0,0 +1,76 @@
 +/*
 + * GStreamer
 + * Copyright (c) 2016, Freescale Semiconductor, Inc. 
@@ -434,6 +475,10 @@ index 0000000..41fb27b
 +#include <gst/gstmemory.h>
 +#include <gst/video/video.h>
 +
++#include <gst/gl/gl.h>
++#include <gst/gl/egl/gstglcontext_egl.h>
++#include <gst/gl/egl/gsteglimage.h>
++
 +#include <gst/gl/gstglmemory.h>
 +
 +G_BEGIN_DECLS
@@ -453,9 +498,9 @@ index 0000000..41fb27b
 +  GstGLMemory   mem;
 +
 +  /* <private> */
-+  GstAllocationParams *params;
-+  GstMemory     *eglimage;
++  GstEGLImage	*eglimage;
 +  GstMemory     *dma;
++  GstAllocationParams *params;
 +};
 +
 +#define GST_GL_MEMORY_DMA_ALLOCATOR_NAME   "GLMemoryDMA"

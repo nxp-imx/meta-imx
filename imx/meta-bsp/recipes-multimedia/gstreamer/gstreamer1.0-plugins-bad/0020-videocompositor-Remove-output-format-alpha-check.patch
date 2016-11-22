@@ -1,23 +1,23 @@
-From 2e88ae058837e0849808895f6bdbd5d55d0c8b77 Mon Sep 17 00:00:00 2001
+From 0be8ebc81b6e8e65ba425d0ddd535c587996a351 Mon Sep 17 00:00:00 2001
 From: Song Bing <bing.song@nxp.com>
 Date: Tue, 16 Aug 2016 13:11:57 +0800
-Subject: [PATCH] videocompositor: Remove output format alpha check
+Subject: [PATCH 21/26] videocompositor: Remove output format alpha check
 
 Remove output format alpha check, or output without alpha will
 fail if input has alpha.
 
-Upstream-Status: Pending
+Upstream Status: Pending
 
 https://bugzilla.gnome.org/show_bug.cgi?id=769962
 ---
- gst-libs/gst/video/gstvideoaggregator.c |    4 +---
+ gst-libs/gst/video/gstvideoaggregator.c | 4 +---
  1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/gst-libs/gst/video/gstvideoaggregator.c b/gst-libs/gst/video/gstvideoaggregator.c
-index f9232e8..3961ca1 100644
+index cd42d7e..c62f210 100644
 --- a/gst-libs/gst/video/gstvideoaggregator.c
 +++ b/gst-libs/gst/video/gstvideoaggregator.c
-@@ -777,11 +777,9 @@ gst_videoaggregator_update_src_caps (GstVideoAggregator * vagg)
+@@ -780,11 +780,9 @@ gst_video_aggregator_update_src_caps (GstVideoAggregator * vagg)
        g_return_val_if_fail (finfo != NULL, FALSE);
  
        if (at_least_one_alpha && !(finfo->flags & GST_VIDEO_FORMAT_FLAG_ALPHA)) {
@@ -31,5 +31,5 @@ index f9232e8..3961ca1 100644
      }
  
 -- 
-1.7.9.5
+1.9.1
 
