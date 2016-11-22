@@ -18,6 +18,7 @@ that might affect these boards.
    * NXP i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
    * NXP i.MX 6DualLite SABRE Auto (iEmx6dlsabreauto)
    * NXP i.MX 6SoloLite EVK (imx6slevk)
+   * NXP i.MX 6SLL EVK (imx6sllevk)
    * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
    * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
    * NXP i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
@@ -41,6 +42,7 @@ that might affect these boards.
     imx6solosabresd - sd
     imx6solosabreauto - sd, eim-nor, spi-nor, nand
     imx6slevk - sd, spi-nor, epdc
+    imx6sllevk - sd, epdc
 
 
 Quick Start Guide
@@ -55,10 +57,10 @@ $: repo sync
 
 If errors on repo init, remove the .repo directory and try repo init again.
 
-Note that this downloads the latest release for 4.1.15-2.0.0 plus patches after.
+Note that this downloads the latest release for 4.1.15-2.1.0 plus patches after.
 
-To download only the 4.1.15-2.0.0 release use this for repo init command
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth -m imx-4.1.15-2.0.0.xml
+To download only the 4.1.15-2.1.0 release use this for repo init command
+$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth -m imx-4.1.15-2.1.0.xml
 
 Run i.MX NXP Yocto Project Setup:
 $: MACHINE=< machine name> source fsl-setup-release.sh -b <build directory> -e <backend fb, wayland, x11>
