@@ -1,12 +1,11 @@
-From bd14defd07afb47870c06f11fccf145ce0a6cdb5 Mon Sep 17 00:00:00 2001
+From c584d4ed4c32e5243d710e609341d872120efa29 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
-Date: Thu, 4 Aug 2016 11:01:11 +0800
-Subject: [PATCH 3/6] qmlglplugin: Add i.mx specific code
+Date: Mon, 14 Nov 2016 14:34:47 +0800
+Subject: [PATCH 20/26] qmlglplugin: Add i.mx specific code
 
 1.Add FB and X11 support for qml gl plugins
 2.Use Render-to-texture for texture copy since we use direct viv
   for GPU download.
-3.Make fps always print out
 
 Upstream-Status: Inappropriate [i.MX specific]
 
@@ -14,26 +13,25 @@ Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
  configure.ac             |  2 +-
  ext/qt/gstqtglutility.cc | 17 +++++++++++++---
- ext/qt/gstqtsrc.cc       |  2 +-
  ext/qt/qtwindow.cc       | 50 +++++++++++++++++++++++++++++++++++++++++++++++-
  ext/qt/qtwindow.h        |  1 +
- 5 files changed, 66 insertions(+), 6 deletions(-)
+ 4 files changed, 65 insertions(+), 5 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index faeb2a8..d59bd10 100644
+index 7fdc75e..de1c557 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -2873,7 +2873,7 @@ AG_GST_CHECK_FEATURE(QT, [Qt elements], qt, [
-         QT_VERSION="`$PKG_CONFIG --modversion Qt5Core`"
-         QPA_INCLUDE_PATH=${STAGING_INCDIR}/../../`$PKG_CONFIG --variable=includedir Qt5Core`/QtGui/${QT_VERSION}/QtGui
-         AC_SUBST(QPA_INCLUDE_PATH)
+@@ -2977,7 +2977,7 @@ AG_GST_CHECK_FEATURE(QT, [Qt elements], qt, [
+           QT_CFLAGS="$QT_CFLAGS -I$QPA_INCLUDE_PATH"
+           HAVE_QT_QPA_HEADER="yes"
+         ], [AC_MSG_NOTICE([Cannot find QPA])])
 -        if test "x$GST_GL_HAVE_WINDOW_X11" = "x1" -a "x$GST_GL_HAVE_PLATFORM_GLX" = "x1"; then
 +        if test "x$GST_GL_HAVE_WINDOW_X11" = "x1" -a "x$GST_GL_HAVE_PLATFORM_EGL" = "x1"; then
            PKG_CHECK_MODULES(QT_X11, Qt5X11Extras, [
              AC_DEFINE([HAVE_QT_X11], [], [Define if Qt X11 integration is installed])
              QT_CFLAGS="$QT_CFLAGS $QT_X11_CFLAGS"
 diff --git a/ext/qt/gstqtglutility.cc b/ext/qt/gstqtglutility.cc
-index 3753037..12d2f1d 100644
+index 4d6d318..c85465f 100644
 --- a/ext/qt/gstqtglutility.cc
 +++ b/ext/qt/gstqtglutility.cc
 @@ -25,10 +25,10 @@
@@ -62,7 +60,7 @@ index 3753037..12d2f1d 100644
  #define GST_CAT_DEFAULT qt_gl_utils_debug
  GST_DEBUG_CATEGORY_STATIC (GST_CAT_DEFAULT);
  
-@@ -122,7 +128,7 @@ gst_qt_get_gl_wrapcontext (GstGLDisplay * display,
+@@ -121,7 +127,7 @@ gst_qt_get_gl_wrapcontext (GstGLDisplay * display,
  
  #if GST_GL_HAVE_WINDOW_X11 && defined (HAVE_QT_X11)
    if (GST_IS_GL_DISPLAY_X11 (display)) {
@@ -71,7 +69,7 @@ index 3753037..12d2f1d 100644
    }
  #endif
  #if GST_GL_HAVE_WINDOW_WAYLAND && defined (HAVE_QT_WAYLAND)
-@@ -135,6 +141,11 @@ gst_qt_get_gl_wrapcontext (GstGLDisplay * display,
+@@ -134,6 +140,11 @@ gst_qt_get_gl_wrapcontext (GstGLDisplay * display,
      platform = GST_GL_PLATFORM_EGL;
    }
  #endif
@@ -83,24 +81,11 @@ index 3753037..12d2f1d 100644
    if (platform == 0) {
  #if GST_GL_HAVE_WINDOW_COCOA && GST_GL_HAVE_PLATFORM_COCOA && defined (HAVE_QT_MAC)
      platform = GST_GL_PLATFORM_CGL;
-diff --git a/ext/qt/gstqtsrc.cc b/ext/qt/gstqtsrc.cc
-index 68f0735..1137ab6 100644
---- a/ext/qt/gstqtsrc.cc
-+++ b/ext/qt/gstqtsrc.cc
-@@ -560,7 +560,7 @@ gst_qt_src_change_state (GstElement * element, GstStateChange transition)
-     case GST_STATE_CHANGE_READY_TO_NULL:
-       qt_window_get_total_frames (qt_src->window, &frames_rendered);
-       if (qt_src->run_time > 0) {
--        GST_DEBUG ("qmlglsrc Total refresh frames (%ld), playing for (%"
-+        g_print ("qmlglsrc Total refresh frames (%lld), playing for (%"
-             GST_TIME_FORMAT "), fps (%.3f).\n", frames_rendered,
-             GST_TIME_ARGS (qt_src->run_time),
-             (gfloat) GST_SECOND * frames_rendered / qt_src->run_time);
 diff --git a/ext/qt/qtwindow.cc b/ext/qt/qtwindow.cc
-index 4702891..4e801fe 100644
+index c3fd564..3d96751 100644
 --- a/ext/qt/qtwindow.cc
 +++ b/ext/qt/qtwindow.cc
-@@ -61,6 +61,9 @@ struct _QtGLWindowPrivate
+@@ -66,6 +66,9 @@ struct _QtGLWindowPrivate
    GstGLDisplay *display;
    GstGLContext *other_context;
  
@@ -110,16 +95,16 @@ index 4702891..4e801fe 100644
    /* frames that qmlview rendered in its gl thread */
    guint64 frames_rendered;
  };
-@@ -112,6 +115,8 @@ QtGLWindow::QtGLWindow ( QWindow * parent, QQuickWindow *src ) :
-     source->scheduleRenderJob(new InitQtGLContext(this), QQuickWindow::BeforeSynchronizingStage);
+@@ -118,6 +121,8 @@ QtGLWindow::QtGLWindow ( QWindow * parent, QQuickWindow *src ) :
    else
      connect (source, SIGNAL(sceneGraphInitialized()), this, SLOT(onSceneGraphInitialized()), Qt::DirectConnection);
-+ 
-+  connect (source, SIGNAL(sceneGraphInvalidated()), this, SLOT(onSceneGraphInvalidated()), Qt::DirectConnection);
  
++  connect (source, SIGNAL(sceneGraphInvalidated()), this, SLOT(onSceneGraphInvalidated()), Qt::DirectConnection);
++
    GST_DEBUG ("%p init Qt Window", this->priv->display);
  }
-@@ -205,8 +210,23 @@ QtGLWindow::afterRendering()
+ 
+@@ -210,8 +215,23 @@ QtGLWindow::afterRendering()
    GST_DEBUG ("qml render target id %d, render to tex %d %dX%d", 
        this->source->renderTargetId(), dst_tex, width,height);
  
@@ -144,11 +129,10 @@ index 4702891..4e801fe 100644
    
    GST_DEBUG ("rendering finished");
  
-@@ -244,11 +264,39 @@ QtGLWindow::onSceneGraphInitialized()
- 
+@@ -250,10 +270,38 @@ QtGLWindow::onSceneGraphInitialized()
    this->priv->initted = gst_qt_get_gl_wrapcontext (this->priv->display,
        &this->priv->other_context, NULL);
-+ 
+ 
 +  if (this->priv->initted && this->priv->other_context) {
 +    const GstGLFuncs *gl;
 +
@@ -159,7 +143,7 @@ index 4702891..4e801fe 100644
 +
 +    gst_gl_context_activate (this->priv->other_context, FALSE);
 +  }
- 
++
    GST_DEBUG ("%p created wrapped GL context %" GST_PTR_FORMAT, this,
        this->priv->other_context);
  }

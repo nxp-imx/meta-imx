@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=73a5855a8119deb017f5f13cf327095d \
                     file://gst/tta/crc32.h;beginline=12;endline=29;md5=27db269c575d1e5317fffca2d33b3b50 \
                     file://gst/tta/filters.h;beginline=12;endline=29;md5=8a08270656f2f8ad7bb3655b83138e5a"
 
-SRC_URI[md5sum] = "e508da2a8a5c3d12264fe3415be2f451"
-SRC_URI[sha256sum] = "0bbd58f363734fc0c4a620b2d6fb01d427fdafdbda7b90b4e15d03b751ca40f5"
+SRC_URI[md5sum] = "86916b5c8e5923cc070c1548f270e9b9"
+SRC_URI[sha256sum] = "3d5f9d16e1a3ee7c5c024494cc3a3420007bfdce6f94511317ae004972811c4f"
 
 #qt5 configuratin only support "--disable-qt"
 #and in default, it is disabled, need to remove the default setting to enable it.
@@ -29,21 +29,15 @@ PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '',
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
-PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland qtwayland"
+PACKAGECONFIG[wayland] = "--disable-wayland --disable-x11,--disable-wayland,wayland qtwayland"
 PACKAGECONFIG[qt5] = ",--disable-qt,qtbase qtdeclarative qtx11extras"
 
 SRC_URI = " \
     http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \
     file://configure-allow-to-disable-libssh2.patch \
     file://0001-gst-plugins-bad-fix-moc-uic-rcc-incorrect-dir.patch \
-    file://0002-qmlglsink-check-qt_context_-first-in-Gst.patch \
-    file://0003-MMFMWK-6990-Support-fb-backend-in-qmlglsink.patch \
-    file://0004-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
-    file://0005-glplugin-Support-fb-backend-for-gl-plugins.patch \
-    file://0006-qtglplugin-qmlgisink-Add-Wayland-support.patch \
-    file://0007-qt-implement-qmlglsrc-for-qml-view-grab.patch \
-    file://0008-qmlglplugin-Add-i.mx-specific-code.patch \
-    file://0009-qmlglsrc-some-enhancements-for-qmlglsrc.patch \
+    file://0002-qmlglplugin-Add-i.mx-specific-code.patch \
+    file://0003-qmlglsrc-some-enhancements-for-qmlglsrc.patch \
 "
 
 # remove the duplicate libs except qtsink
@@ -56,7 +50,7 @@ do_install_append() {
     fi
 }
 
-S = "${WORKDIR}/gst-plugins-bad-1.8.1"
+S = "${WORKDIR}/gst-plugins-bad-1.10.0"
 
 INSANE_SKIP_gstreamer1.0-plugins-bad-qt-qmlgl += "build-deps"
 
