@@ -188,12 +188,7 @@ do_install () {
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 
     if [ "${IS_MX8}" = "1" ]; then
-        if [ "${USE_WL}" = "yes" ]; then
-            mv ${D}${libdir}/libvulkan-wl.so ${D}${libdir}/libvulkan_VSI.so 
-        elif [ "${USE_X11}" = "yes" ]; then
-        else
-            mv ${D}${libdir}/libvulkan-fb.so ${D}${libdir}/libvulkan_VSI.so
-        fi
+        mv ${D}${libdir}/libvulkan-${backend}.so ${D}${libdir}/libvulkan_VSI.so
     fi
 
     # skip packaging wayland libraries if no support is requested
