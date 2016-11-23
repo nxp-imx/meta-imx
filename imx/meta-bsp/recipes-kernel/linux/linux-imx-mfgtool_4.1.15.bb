@@ -6,7 +6,7 @@ DESCRIPTION = "Linux Kernel provided and supported by Freescale that produces a 
 Manufacturing Tool compatible Linux Kernel to be used in updater environment"
 
 require linux-imx_${PV}.bb
-require recipes-kernel/linux/linux-mfgtool.inc
+require linux-mfgtool.inc
 
 KERNEL_IMAGE_BASE_NAME[vardepsexclude] = "DATETIME"
 MODULE_IMAGE_BASE_NAME[vardepsexclude] = "DATETIME"
