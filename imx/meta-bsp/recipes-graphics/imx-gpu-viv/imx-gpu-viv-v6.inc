@@ -188,11 +188,12 @@ do_install () {
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 
     if [ "${IS_MX8}" = "1" ]; then
-
-        mv ${D}${libdir}/libvulkan.so ${D}${libdir}/libvulkan_VSI.so.1.0.0
-        ln -sf libvulkan_VSI.so.1.0.0 ${D}${libdir}/libvulkan_VSI.so.1
-        ln -sf libvulkan_VSI.so.1.0.0 ${D}${libdir}/libvulkan_VSI.so
-        rm -rf ${D}${libdir}/libvulkan.so.1
+        if [ "${USE_WL}" = "yes" ]; then
+            mv ${D}${libdir}/libvulkan-wl.so ${D}${libdir}/libvulkan_VSI.so 
+        elif [ "${USE_X11}" = "yes" ]; then
+        else
+            mv ${D}${libdir}/libvulkan-fb.so ${D}${libdir}/libvulkan_VSI.so
+        fi
     fi
 
     # skip packaging wayland libraries if no support is requested
@@ -260,7 +261,7 @@ FILES_libvsc-imx = "${libdir}/libVSC${SOLIBS}"
 FILES_libgbm-imx = "${libdir}/libgbm${SOLIBS} ${libdir}/libVIVANTE.gbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
 FILES_libgbm-imx-dev = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
 
-FILES_libvulkan-imx = "${libdir}/libvulkan_VSI${SOLIBS} ${libdir}/libvulkan_VSI${REALSOLIBS}"
+FILES_libvulkan-imx = "${libdir}/libvulkan_VSI${SOLIBS}"
 FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/libvulkan_VSI${SOLIBSDEV}"
 INSANE_SKIP_libvulkan-imx += "dev-deps dev-so"
 
