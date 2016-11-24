@@ -19,9 +19,11 @@ PACKAGECONFIG_remove_mx6sl = " gles2"
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
+PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland"
 
 SRC_URI_append = " \
        file://0001-gstreamer-gl.pc.in-don-t-append-GL_CFLAGS-to-CFLAGS.patch \
+       file://0001-gst-plugins-bad-fix-incorrect-wayland-protocols-dir.patch \
        file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch \
        file://0002-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
        file://0003-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
