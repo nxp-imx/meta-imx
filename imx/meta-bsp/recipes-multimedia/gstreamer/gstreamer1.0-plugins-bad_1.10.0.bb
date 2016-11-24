@@ -18,13 +18,6 @@ SRC_URI = " \
     file://avoid-including-sys-poll.h-directly.patch \
 "
 
-SRC_URI_remove = " \
-    file://0003-Add-directviv-to-glimagesink-to-improve-playback-per.patch \
-    file://0004-MMFMWK-6930-glplugin-Accelerate-gldownload-with-dire.patch \
-    file://0005-Fix-dependence-issue-between-gst-plugin-.patch \
-    file://0008-glplugin-glcolorconvert-fix-MRT-cannot-work-in-GLES3.patch \
-    file://0009-MMFMWK-7308-Fix-build-issue-on-non-GPU-soc.patch \
-"
 
 SRC_URI[md5sum] = "86916b5c8e5923cc070c1548f270e9b9"
 SRC_URI[sha256sum] = "3d5f9d16e1a3ee7c5c024494cc3a3420007bfdce6f94511317ae004972811c4f"
