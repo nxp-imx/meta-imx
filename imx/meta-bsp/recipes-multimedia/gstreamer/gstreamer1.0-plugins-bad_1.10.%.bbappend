@@ -42,7 +42,6 @@ SRC_URI_append = " \
        file://0016-glcolorconvert-convert-YUV-to-RGB-use-directviv.patch \
        file://0017-glwindow-work-around-for-no-frame-when-imxplayer-use.patch \
        file://0018-glcolorconvert-fix-MRT-cannot-work-in-GLES3.0.patch \
-       file://0019-ion-DMA-Buf-allocator-based-on-ion.patch \
        file://0020-videocompositor-Remove-output-format-alpha-check.patch \
        file://0021-Add-ion-memory-support-for-glupload.patch \
        file://0022-Add-ion-dmabuf-support-in-gldownload.patch \

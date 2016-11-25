@@ -1,105 +1,73 @@
-From 22e04041183fc6489c6fd63318bc538e8618e1f0 Mon Sep 17 00:00:00 2001
+From f917a9a95019282b39d65c7cd986a59effa1deed Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
-Date: Mon, 14 Nov 2016 16:42:03 +0800
-Subject: [PATCH 22/26] Add ion memory support for glupload
+Date: Fri, 25 Nov 2016 14:33:42 +0800
+Subject: [PATCH 1/2] Add ion memory support for glupload
 
 1. Support one texture for YUV format in dmabuf uploader
 2. Propose ion dma-fd buffer pool to upstream to avoid memory copy
 3. If upstream don't chose the proposed buffer pool, then create
    our own and do copy to avoid memory copy from CPU to GPU side
-4. Add buffer alignment
-5. append PKG_CONFIG_SYSROOT_DIR to pkg_config result to Fix yocto
-   build QA issue
+4. Add buffer alignmentw
 
 Upstream Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
- configure.ac                      |  19 ++--
- gst-libs/gst/Makefile.am          |   3 +-
- gst-libs/gst/gl/Makefile.am       |  13 ++-
+ configure.ac                      |  14 +++
+ gst-libs/gst/gl/Makefile.am       |   4 +-
  gst-libs/gst/gl/egl/gsteglimage.c | 131 +++++++++++++++++++++++++
  gst-libs/gst/gl/egl/gsteglimage.h |   5 +
- gst-libs/gst/gl/gstglupload.c     | 195 +++++++++++++++++++++++++++++++++++++-
- 6 files changed, 353 insertions(+), 13 deletions(-)
+ gst-libs/gst/gl/gstglupload.c     | 196 +++++++++++++++++++++++++++++++++++++-
+ 5 files changed, 344 insertions(+), 6 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index de1c557..7a01dd9 100644
+index ce1088b..4b53b94 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -592,6 +592,18 @@ else
+@@ -592,6 +592,15 @@ else
    AG_GST_DISABLE_PLUGIN(dccp)
  fi
  
 +dnl check for ion
++old_CFLAGS=$CFLAGS
++CFLAGS="$CFLAGS `$PKG_CONFIG --cflags gstreamer-allocators-1.0`"
 +translit(dnm, m, l) AM_CONDITIONAL(USE_ION, true)
 +AG_GST_CHECK_FEATURE(ION, [ion], ion, [
-+  AC_CHECK_HEADER(linux/ion.h, HAVE_ION="yes", HAVE_ION="no")
++  AC_CHECK_HEADER(gst/allocators/gstionmemory.h, HAVE_ION="yes", HAVE_ION="no")
 +])
-+
-+GST_GL_HAVE_ION=0
-+if test "x$HAVE_ION" = "xyes"; then
-+  GST_GL_HAVE_ION=1
-+fi
-+
++CFLAGS=$old_CFLAGS
 +
  dnl *** opengl ***
  AC_ARG_ENABLE([opengl],
       [  --enable-opengl         Enable Desktop OpenGL support @<:@default=auto@:>@],
-@@ -1323,6 +1335,7 @@ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+@@ -899,10 +908,14 @@ PKG_CHECK_MODULES(GST_ALLOCATORS, gstreamer-allocators-1.0,
+   HAVE_GST_ALLOCATORS=yes, )
+ 
+ GST_GL_HAVE_DMABUF=0
++GST_GL_HAVE_IONDMA=0
+ if test "x$HAVE_DRM_FOURCC_HEADER" = "xyes" -a \
+         "x$HAVE_GST_ALLOCATORS" = "xyes" -a \
+         "x$HAVE_EGL" = "xyes"; then
+           GST_GL_HAVE_DMABUF=1
++  if test "x$HAVE_ION" = "xyes"; then
++    GST_GL_HAVE_IONDMA=1
++  fi
+ fi
+ 
+ dnl check if we can include both GL and GLES2 at the same time
+@@ -1324,6 +1337,7 @@ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
  
  GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
  #define GST_GL_HAVE_DMABUF $GST_GL_HAVE_DMABUF
-+#define GST_GL_HAVE_ION $GST_GL_HAVE_ION
++#define GST_GL_HAVE_IONDMA $GST_GL_HAVE_IONDMA
  #define GST_GL_HAVE_DIRECTVIV $GST_GL_HAVE_DIRECTVIV
  #define GST_GL_HAVE_PHYMEM $GST_GL_HAVE_PHYMEM
  "
-@@ -2058,12 +2071,6 @@ AG_GST_CHECK_FEATURE(TINYALSA, [tinyalsa], tinyalsa, [
-   AC_CHECK_HEADER(tinyalsa/asoundlib.h, HAVE_TINYALSA="yes", HAVE_TINYALSA="no")
- ])
- 
--dnl check for ion
--translit(dnm, m, l) AM_CONDITIONAL(USE_ION, true)
--AG_GST_CHECK_FEATURE(ION, [ion], ion, [
--  AC_CHECK_HEADER(linux/ion.h, HAVE_ION="yes", HAVE_ION="no")
--])
--
- dnl *** ext plug-ins ***
- dnl keep this list sorted alphabetically !
- 
-diff --git a/gst-libs/gst/Makefile.am b/gst-libs/gst/Makefile.am
-index eb2031c..9db1405 100644
---- a/gst-libs/gst/Makefile.am
-+++ b/gst-libs/gst/Makefile.am
-@@ -25,10 +25,11 @@ DIST_SUBDIRS = uridownloader adaptivedemux interfaces gl basecamerabinsrc \
- video, audio: base
- 
- adaptivedemux: uridownloader
-+gl: ion
- 
- INDEPENDENT_SUBDIRS = \
- 	interfaces basecamerabinsrc codecparsers insertbin uridownloader \
--	mpegts base player $(ION_DIR) $(GL_DIR) $(WAYLAND_DIR)
-+	mpegts base player $(ION_DIR) $(WAYLAND_DIR)
- 
- .PHONY: independent-subdirs $(INDEPENDENT_SUBDIRS)
- 
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index abfff15..604c606 100644
+index 0be4fa2..71f94b0 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
-@@ -148,6 +148,10 @@ if USE_EGL
- SUBDIRS += egl
- libgstgl_@GST_API_VERSION@_la_LIBADD += egl/libgstgl-egl.la
- libgstgl_@GST_API_VERSION@_la_LIBADD += -lgstallocators-$(GST_API_VERSION)
-+if USE_ION
-+libgstgl_@GST_API_VERSION@_la_LIBADD += \
-+	$(top_builddir)/gst-libs/gst/ion/libgstbadion-$(GST_API_VERSION).la
-+endif
- endif
- 
- configexecincludedir = $(libdir)/gstreamer-@GST_API_VERSION@/include/gst/gl
-@@ -190,8 +194,12 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@
+@@ -190,8 +190,8 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@
  		-I$(top_builddir)/gst-libs \
  		$(GST_PLUGINS_BASE_CFLAGS) \
  		$(GL_CFLAGS) \
@@ -107,21 +75,9 @@ index abfff15..604c606 100644
 -		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
 +		--add-include-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
 +		--add-include-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
-+		--add-include-path="$(top_builddir)/gst-libs/gst/ion/" \
-+		--library-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=libdir gstreamer-@GST_API_VERSION@` \
-+		--library-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=libdir gstreamer-base-@GST_API_VERSION@` \
-+		--library-path="$(top_builddir)/gst-libs/gst/ion/" \
  		--library=libgstgl-@GST_API_VERSION@.la \
  		--include=Gst-@GST_API_VERSION@ \
  		--include=GstBase-@GST_API_VERSION@ \
-@@ -222,6 +230,7 @@ typelibs_DATA = $(BUILT_GIRSOURCES:.gir=.typelib)
- 		--includedir=$(builddir) \
- 		--includedir=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
- 		--includedir=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
-+		--includedir="$(top_builddir)/gst-libs/gst/ion/" \
- 		$(INTROSPECTION_COMPILER_OPTS) $< -o $(@F)
- 
- CLEANFILES = $(BUILT_GIRSOURCES) $(typelibs_DATA)
 diff --git a/gst-libs/gst/gl/egl/gsteglimage.c b/gst-libs/gst/gl/egl/gsteglimage.c
 index 16441e1..a9ee209 100644
 --- a/gst-libs/gst/gl/egl/gsteglimage.c
@@ -279,7 +235,7 @@ index 2d2e075..c6eaa28 100644
  
  /**
 diff --git a/gst-libs/gst/gl/gstglupload.c b/gst-libs/gst/gl/gstglupload.c
-index 2e52c3e..9e4ef93 100644
+index 2e52c3e..92bbf90 100644
 --- a/gst-libs/gst/gl/gstglupload.c
 +++ b/gst-libs/gst/gl/gstglupload.c
 @@ -23,6 +23,7 @@
@@ -290,17 +246,18 @@ index 2e52c3e..9e4ef93 100644
  
  #include "gl.h"
  #include "gstglupload.h"
-@@ -36,6 +37,9 @@
- 
- #if GST_GL_HAVE_DMABUF
+@@ -38,6 +39,10 @@
  #include <gst/allocators/gstdmabuf.h>
-+#if GST_GL_HAVE_ION
-+#include <gst/ion/gstionmemory.h>
-+#endif
  #endif
  
++#if GST_GL_HAVE_IONDMA
++#include <gst/allocators/gstionmemory.h>
++#endif
++
  /**
-@@ -54,6 +58,8 @@
+  * SECTION:gstglupload
+  * @short_description: an object that uploads to GL textures
+@@ -54,6 +59,8 @@
  #define USING_GLES2(context) (gst_gl_context_check_gl_version (context, GST_GL_API_GLES2, 2, 0))
  #define USING_GLES3(context) (gst_gl_context_check_gl_version (context, GST_GL_API_GLES2, 3, 0))
  
@@ -309,7 +266,7 @@ index 2e52c3e..9e4ef93 100644
  GST_DEBUG_CATEGORY (gst_gl_upload_debug);
  #define GST_CAT_DEFAULT gst_gl_upload_debug
  
-@@ -478,7 +484,9 @@ struct DmabufUpload
+@@ -478,7 +485,9 @@ struct DmabufUpload
    GstGLUpload *upload;
  
    GstEGLImage *eglimage[GST_VIDEO_MAX_PLANES];
@@ -319,7 +276,7 @@ index 2e52c3e..9e4ef93 100644
    GstGLVideoAllocationParams *params;
  };
  
-@@ -509,6 +517,7 @@ _dma_buf_upload_transform_caps (gpointer impl, GstGLContext * context,
+@@ -509,6 +518,7 @@ _dma_buf_upload_transform_caps (gpointer impl, GstGLContext * context,
          _set_caps_features_with_passthrough (caps,
          GST_CAPS_FEATURE_MEMORY_GL_MEMORY, passthrough);
  
@@ -327,7 +284,7 @@ index 2e52c3e..9e4ef93 100644
      tmp = _caps_intersect_texture_target (ret, 1 << GST_GL_TEXTURE_TARGET_2D);
      gst_caps_unref (ret);
      ret = tmp;
-@@ -564,6 +573,72 @@ _set_cached_eglimage (GstMemory * mem, GstEGLImage * eglimage, gint plane)
+@@ -564,6 +574,72 @@ _set_cached_eglimage (GstMemory * mem, GstEGLImage * eglimage, gint plane)
  }
  
  static gboolean
@@ -349,7 +306,7 @@ index 2e52c3e..9e4ef93 100644
 +
 +  /* if user not provide an allocator, then use default ion allocator*/
 +  if (!allocator) {
-+#if GST_GL_HAVE_ION
++#if GST_GL_HAVE_IONDMA
 +    allocator = gst_ion_allocator_obtain ();
 +#endif
 +  }
@@ -400,7 +357,7 @@ index 2e52c3e..9e4ef93 100644
  _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
      GstCaps * out_caps)
  {
-@@ -589,8 +664,52 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
+@@ -589,8 +665,52 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
      return FALSE;
  
    /* This will eliminate most non-dmabuf out there */
@@ -455,7 +412,7 @@ index 2e52c3e..9e4ef93 100644
  
    /* We cannot have multiple dmabuf per plane */
    if (n_mem > n_planes)
-@@ -611,7 +730,7 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
+@@ -611,7 +731,7 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
      gst_gl_allocation_params_free ((GstGLAllocationParams *) dmabuf->params);
    if (!(dmabuf->params =
            gst_gl_video_allocation_params_new_wrapped_gl_handle (dmabuf->
@@ -464,7 +421,7 @@ index 2e52c3e..9e4ef93 100644
                GST_GL_TEXTURE_TARGET_2D, 0, NULL, NULL, NULL)))
      return FALSE;
  
-@@ -637,6 +756,21 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
+@@ -637,6 +757,21 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
        return FALSE;
    }
  
@@ -486,7 +443,7 @@ index 2e52c3e..9e4ef93 100644
    /* Now create an EGLImage for each dmabufs */
    for (i = 0; i < n_planes; i++) {
      /* check if one is cached */
-@@ -654,6 +788,7 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
+@@ -654,6 +789,7 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
  
      _set_cached_eglimage (mems[i], dmabuf->eglimage[i], i);
    }
@@ -494,7 +451,7 @@ index 2e52c3e..9e4ef93 100644
  
    return TRUE;
  }
-@@ -662,7 +797,47 @@ static void
+@@ -662,7 +798,47 @@ static void
  _dma_buf_upload_propose_allocation (gpointer impl, GstQuery * decide_query,
      GstQuery * query)
  {
@@ -510,7 +467,7 @@ index 2e52c3e..9e4ef93 100644
 +  if (!gst_video_info_from_caps (&info, caps))
 +    goto invalid_caps;
 +
-+#if GST_GL_HAVE_ION
++#if GST_GL_HAVE_IONDMA
 +  allocator = gst_ion_allocator_obtain ();
 +#endif
 +  if (!allocator) {
@@ -543,7 +500,7 @@ index 2e52c3e..9e4ef93 100644
  }
  
  static void
-@@ -670,11 +845,17 @@ _dma_buf_upload_perform_gl_thread (GstGLContext * context,
+@@ -670,11 +846,17 @@ _dma_buf_upload_perform_gl_thread (GstGLContext * context,
      struct DmabufUpload *dmabuf)
  {
    GstGLMemoryAllocator *allocator;
@@ -561,7 +518,7 @@ index 2e52c3e..9e4ef93 100644
    /* FIXME: buffer pool */
    dmabuf->outbuf = gst_buffer_new ();
    gst_gl_memory_setup_buffer (allocator, dmabuf->outbuf, dmabuf->params, NULL,
-@@ -709,6 +890,12 @@ _dma_buf_upload_free (gpointer impl)
+@@ -709,6 +891,12 @@ _dma_buf_upload_free (gpointer impl)
    if (dmabuf->params)
      gst_gl_allocation_params_free ((GstGLAllocationParams *) dmabuf->params);
  

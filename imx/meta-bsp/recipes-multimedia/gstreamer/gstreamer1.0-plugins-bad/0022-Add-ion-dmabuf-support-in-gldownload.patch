@@ -1,7 +1,7 @@
-From bc9ba14000db74dce0c90ab0057793e1f7859243 Mon Sep 17 00:00:00 2001
+From 4e95ef9d674e34ba24400da520d8f69a921d6142 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
-Date: Mon, 14 Nov 2016 16:59:23 +0800
-Subject: [PATCH 23/26] Add ion dmabuf support in gldownload
+Date: Fri, 25 Nov 2016 14:48:44 +0800
+Subject: [PATCH 2/2] Add ion dmabuf support in gldownload
 
 Support copy into dma-fb buffer if support the buffer format
 
@@ -9,61 +9,15 @@ Upstream Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
- configure.ac                     |   9 ++
  ext/gl/gstgldownloadelement.c    |  36 +++++-
  gst-libs/gst/gl/Makefile.am      |   8 ++
  gst-libs/gst/gl/gstgl_fwd.h      |   4 +
  gst-libs/gst/gl/gstglmemorydma.c | 258 +++++++++++++++++++++++++++++++++++++++
  gst-libs/gst/gl/gstglmemorydma.h |  76 ++++++++++++
- 6 files changed, 387 insertions(+), 4 deletions(-)
+ 5 files changed, 378 insertions(+), 4 deletions(-)
  create mode 100644 gst-libs/gst/gl/gstglmemorydma.c
  create mode 100644 gst-libs/gst/gl/gstglmemorydma.h
 
-diff --git a/configure.ac b/configure.ac
-index 7a01dd9..5f4b7c2 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -910,10 +910,16 @@ PKG_CHECK_MODULES(GST_ALLOCATORS, gstreamer-allocators-1.0,
-   HAVE_GST_ALLOCATORS=yes, )
- 
- GST_GL_HAVE_DMABUF=0
-+USE_IONDMA=no
-+GST_GL_HAVE_IONDMA=0
- if test "x$HAVE_DRM_FOURCC_HEADER" = "xyes" -a \
-         "x$HAVE_GST_ALLOCATORS" = "xyes" -a \
-         "x$HAVE_EGL" = "xyes"; then
-           GST_GL_HAVE_DMABUF=1
-+          if test "x$GST_GL_HAVE_ION" = "x1"; then
-+            GST_GL_HAVE_IONDMA=1
-+            USE_IONDMA=yes
-+          fi
- fi
- 
- dnl check if we can include both GL and GLES2 at the same time
-@@ -1336,6 +1342,7 @@ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
- GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
- #define GST_GL_HAVE_DMABUF $GST_GL_HAVE_DMABUF
- #define GST_GL_HAVE_ION $GST_GL_HAVE_ION
-+#define GST_GL_HAVE_IONDMA $GST_GL_HAVE_IONDMA
- #define GST_GL_HAVE_DIRECTVIV $GST_GL_HAVE_DIRECTVIV
- #define GST_GL_HAVE_PHYMEM $GST_GL_HAVE_PHYMEM
- "
-@@ -1364,6 +1371,7 @@ if test "x$GL_APIS" = "x" -o "x$GL_PLATFORMS" = "x" -o "x$GL_WINDOWS" = "x"; the
-   USE_EGL_MALI=no
-   USE_EGL_RPI=no
-   USE_EAGL=no
-+  USE_IONDMA=no
- 
-   HAVE_WINDOW_X11=no
-   HAVE_WINDOW_WIN32=no
-@@ -1404,6 +1412,7 @@ AM_CONDITIONAL(USE_COCOA, test "x$USE_COCOA" = "xyes")
- AM_CONDITIONAL(USE_EGL_MALI, test "x$USE_EGL_MALI" = "xyes")
- AM_CONDITIONAL(USE_EGL_RPI, test "x$USE_EGL_RPI" = "xyes")
- AM_CONDITIONAL(USE_EAGL, test "x$USE_EAGL" = "xyes")
-+AM_CONDITIONAL(USE_IONDMA, test "x$USE_IONDMA" = "xyes")
- 
- AM_CONDITIONAL(HAVE_GST_GL, test "x$USE_OPENGL" = "xyes" -o "x$USE_GLES2" = "xyes")
- 
 diff --git a/ext/gl/gstgldownloadelement.c b/ext/gl/gstgldownloadelement.c
 index a5ba6ab..77358ca 100644
 --- a/ext/gl/gstgldownloadelement.c
@@ -137,14 +91,14 @@ index a5ba6ab..77358ca 100644
      GST_DEBUG_OBJECT (bt, "obtain physical memory allocator %p.", allocator);
    }
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index 604c606..7ab6423 100644
+index 71f94b0..c71c3b8 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
 @@ -44,6 +44,10 @@ if HAVE_PHYMEM
  libgstgl_@GST_API_VERSION@_la_SOURCES += gstglphymemory.c
  endif
  
-+if USE_IONDMA
++if USE_ION
 +libgstgl_@GST_API_VERSION@_la_SOURCES += gstglmemorydma.c
 +endif
 +
@@ -155,7 +109,7 @@ index 604c606..7ab6423 100644
  libgstgl_@GST_API_VERSION@include_HEADERS += gstglphymemory.h
  endif
  
-+if USE_IONDMA
++if USE_ION
 +libgstgl_@GST_API_VERSION@include_HEADERS += gstglmemorydma.h
 +endif
 +
@@ -179,7 +133,7 @@ index 465e284..70fc208 100644
  typedef struct _GstGLMemoryPBOAllocatorClass GstGLMemoryPBOAllocatorClass;
 diff --git a/gst-libs/gst/gl/gstglmemorydma.c b/gst-libs/gst/gl/gstglmemorydma.c
 new file mode 100644
-index 0000000..0a4cee2
+index 0000000..3ad9a8a
 --- /dev/null
 +++ b/gst-libs/gst/gl/gstglmemorydma.c
 @@ -0,0 +1,258 @@
@@ -212,8 +166,8 @@ index 0000000..0a4cee2
 +#include <gst/allocators/gstdmabuf.h>
 +#include <gst/gl/gstglmemorydma.h>
 +
-+#if GST_GL_HAVE_ION
-+#include <gst/ion/gstionmemory.h>
++#if GST_GL_HAVE_IONDMA
++#include <gst/allocators/gstionmemory.h>
 +#endif
 +
 +GST_DEBUG_CATEGORY_STATIC (GST_CAT_GL_DMA_MEMORY);
@@ -231,7 +185,7 @@ index 0000000..0a4cee2
 +
 +  GST_DEBUG_CATEGORY_INIT (GST_CAT_GL_DMA_MEMORY, "glmemorydma", 0, "OpenGL dma memory");
 +
-+#if GST_GL_HAVE_ION
++#if GST_GL_HAVE_IONDMA
 +  ion_allocator = gst_ion_allocator_obtain();
 +#endif
 +
