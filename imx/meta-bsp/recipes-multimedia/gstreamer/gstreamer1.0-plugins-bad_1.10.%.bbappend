@@ -1,7 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
-DEPENDS_append_mx8 = " virtual/libgles2 virtual/libg2d virtual/kernel"
+DEPENDS_append_mx8 = " virtual/libgles2 virtual/libg2d"
 
 GST_CFLAGS_EXTRA = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', \
                        bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DEGL_API_FB -DWL_EGL_PLATFORM', '-DEGL_API_FB', d),d)}"
