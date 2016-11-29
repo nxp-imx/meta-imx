@@ -12,6 +12,11 @@ PACKAGECONFIG_remove = "gio-unix-2.0"
 # Overwrite the unrecognised option which is set in gstreamer1.0-plugins-base.inc under poky layer
 PACKAGECONFIG[gio-unix-2.0] = ""
 
+# The following "GST_IMX_PATCHES" being defined in meta-freescale layer is applied to imxpxp & imxvpu,
+# Actually, they need to be applied to all SoC, including mx6sll & mx8.
+SRC_URI_append_mx6sll = "${GST_IMX_PATCHES}"
+SRC_URI_append_mx8 = "${GST_IMX_PATCHES}"
+
 SRC_URI_append = " file://0001-basetextoverlay-make-memory-copy-when-video-buffer-s.patch \
                    file://0002-gstplaysink-don-t-set-async-of-custom-text-sink-to-f.patch \
                    file://0003-taglist-not-send-to-down-stream-if-all-the-frame-cor.patch \
@@ -24,8 +29,4 @@ SRC_URI_append = " file://0001-basetextoverlay-make-memory-copy-when-video-buffe
                    file://0010-ion-DMA-Buf-allocator-based-on-ion.patch \
 "
 
-# The following "GST_IMX_PATCHES" being defined in meta-freescale layer is applied to imxpxp & imxvpu,
-# Actually, they need to be applied to all SoC, including mx6sll & mx8.
-SRC_URI_append_mx6sll = "${GST_IMX_PATCHES}"
-SRC_URI_append_mx8 = "${GST_IMX_PATCHES}"
 
