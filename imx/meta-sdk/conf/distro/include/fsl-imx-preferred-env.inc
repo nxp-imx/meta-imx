@@ -45,7 +45,7 @@ USE_GPU_VIV_MODULE = "1"
 # preferred versions of recipes-graphics for mx6
 PREFERRED_PROVIDER_virtual/libg2d_mx6 = "imx-gpu-g2d"
 PREFERRED_PROVIDER_virtual/libg2d_mx7ulp = "imx-gpu-g2d"
-PREFERRED_PROVIDER_virtual/libg2d_mx8 = "imx-gpu-g2d"
+PREFERRED_PROVIDER_virtual/libg2d_mx8 = "imx-dpu-g2d-mx8"
 PREFERRED_VERSION_imx-gpu-viv_mx6 = "6.2.0.p3-aarch32"
 PREFERRED_VERSION_imx-gpu-viv_mx7ulp = "6.2.0.p3-aarch32"
 PREFERRED_VERSION_xf86-video-imxfb-vivante_mx6 = "6.2.0.p3"
