@@ -31,6 +31,7 @@ MACHINE_EXTRA_RRECOMMENDS_append_imx = " ${@bb.utils.contains('DISTRO_FEATURES',
 #MACHINE_EXTRA_RRECOMMENDS_append_mx6sll = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
 #MACHINE_EXTRA_RRECOMMENDS_append_mx7 = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
 #MACHINE_EXTRA_RRECOMMENDS_append_mx7ulp = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_remove_mx8 = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
 
 # Default toolchains used in testing i.MX BSPs
 DEFAULTTUNE_mx6   = "cortexa9hf-neon"
