@@ -22,6 +22,9 @@ SRC_URI_append_mx8 = "${IMX_PATCHES}"
 # Enable allow-autospawn-for-root as default
 PACKAGECONFIG_append = " autospawn-for-root"
 
+# This default setting should be added on all i.MX SoC,
+# For now, only the setting for mx6/mx6ul/mx7 has been upstreamed
+SRC_URI_append_mx6sll = " file://daemon.conf file://default.pa"
 SRC_URI_append_mx8 = " file://daemon.conf file://default.pa"
 
 # Install a new daemon.conf for all platform to increase the rlimit-rttime
