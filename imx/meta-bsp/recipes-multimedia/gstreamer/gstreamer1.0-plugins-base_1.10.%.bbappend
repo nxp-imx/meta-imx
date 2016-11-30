@@ -27,6 +27,7 @@ SRC_URI_append = " file://0001-basetextoverlay-make-memory-copy-when-video-buffe
                    file://0008-dmabuf-allocator-Add-missing-padding-in-the-class.patch \
                    file://0009-dmabuf-Add-free-function.patch \
                    file://0010-ion-DMA-Buf-allocator-based-on-ion.patch \
+                   file://0011-ion-DMA-Buf-allocator-based-on-ion2.patch \
 "
 
 
