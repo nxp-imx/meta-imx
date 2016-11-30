@@ -35,4 +35,5 @@ do_install_append () {
     fi
 }
 
+PACKAGE_ARCH_mx6sll = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
