@@ -17,9 +17,9 @@ PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' qt5
 # This is needed to run samples that contains images
 do_install_append() {
 
-    install -d ${D}${datadir}/OpenCV/data
-    cp -r ${S}/samples/data/* ${D}${datadir}/OpenCV/data
+    install -d ${D}${datadir}/OpenCV/samples/data
+    cp -r ${S}/samples/data/* ${D}${datadir}/OpenCV/samples/data
 }
 
 PACKAGES_append = " ${PN}-data"
-FILES_${PN}-data = "${datadir}/OpenCV/data/"
+FILES_${PN}-data = "${datadir}/OpenCV/samples/data/"
