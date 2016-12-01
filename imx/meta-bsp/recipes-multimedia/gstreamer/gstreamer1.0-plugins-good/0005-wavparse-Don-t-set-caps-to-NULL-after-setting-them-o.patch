@@ -1,0 +1,30 @@
+From 3c59f796339f67b9cebbb169c4bc25985e856204 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Sebastian=20Dr=C3=B6ge?= <sebastian@centricular.com>
+Date: Thu, 3 Nov 2016 12:34:51 +0200
+Subject: [PATCH] wavparse: Don't set caps to NULL after setting them on the
+ srcpad
+
+We would like to check later on EOS if we found a known stream type or
+not, to possibly post an error message.
+
+Upstream-Status: Backport [1.10.1]
+https://bugzilla.gnome.org/show_bug.cgi?id=773861
+---
+ gst/wavparse/gstwavparse.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/gst/wavparse/gstwavparse.c b/gst/wavparse/gstwavparse.c
+index 49bc03c..9ee11fc 100644
+--- a/gst/wavparse/gstwavparse.c
++++ b/gst/wavparse/gstwavparse.c
+@@ -1914,7 +1914,6 @@ gst_wavparse_add_src_pad (GstWavParse * wav, GstBuffer * buf)
+   }
+ 
+   gst_pad_set_caps (wav->srcpad, wav->caps);
+-  gst_caps_replace (&wav->caps, NULL);
+ 
+   if (wav->start_segment) {
+     GST_DEBUG_OBJECT (wav, "Send start segment event on newpad");
+-- 
+1.9.1
+
