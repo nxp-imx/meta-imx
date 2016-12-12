@@ -15,8 +15,8 @@ PACKAGECONFIG[gio-unix-2.0] = ""
 
 # The following "GST_IMX_PATCHES" being defined in meta-freescale layer is applied to imxpxp & imxvpu,
 # Actually, they need to be applied to all SoC, including mx6sll & mx8.
-SRC_URI_append_mx6sll = "${GST_IMX_PATCHES}"
-SRC_URI_append_mx8 = "${GST_IMX_PATCHES}"
+#SRC_URI_append_mx6sll = "${GST_IMX_PATCHES}"
+#SRC_URI_append_mx8 = "${GST_IMX_PATCHES}"
 
 SRC_URI_append = " file://0001-gstplaybin-remove-default-deinterlace-flag.patch \
                    file://0002-Linux_MX6QP_ARD-IMXCameraApp-When-Enable.patch \
