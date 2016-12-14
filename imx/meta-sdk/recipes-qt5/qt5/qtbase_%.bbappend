@@ -1,10 +1,10 @@
 # Copyright (C) 2013 Eric Bénard - Eukréa Electromatique
 
-HAS_FB = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 0, \
-                       bb.utils.contains('DISTRO_FEATURES', 'wayland', 0, 1, d),d)}"
+HAS_X11 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 1, 0, d)}"
 
 IS_IMX3D = "0"
-IS_IMX3D_imxgpu3d = "1"
+IS_IMX3D_imxgpu2d = "2d"
+IS_IMX3D_imxgpu3d = "3d"
 
 PACKAGECONFIG_GL_imxgpu3d = "gles2"
 PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' gl', '', d)}"
@@ -21,19 +21,23 @@ QT_CONFIG_FLAGS_append = "${QT_CONFIG_FLAGS_APPEND}"
 do_configure_prepend() {
     # adapt qmake.conf to our needs
     sed -i 's!load(qt_config)!!' ${S}/mkspecs/linux-oe-g++/qmake.conf
-
-cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
-IMX_CFLAGS = -DLINUX=1
-EOF
-    if test ${HAS_FB} -eq 1; then
-        if test ${IS_IMX3D} -eq 1; then
-cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
-IMX_CFLAGS += -DEGL_API_FB=1
+    if test ${HAS_X11} -eq 0; then
+        if test ${IS_IMX3D} -eq "3d"; then
+            cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
+IMX_CFLAGS             = -DLINUX=1 -DEGL_API_FB=1
 EGLFS_DEVICE_INTEGRATION = eglfs_viv
 EOF
+        else
+            cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
+IMX_CFLAGS             = -DLINUX=1
+EOF
         fi
+    else
+        cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
+IMX_CFLAGS             = -DLINUX=1
+EOF
     fi
-cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
+    cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
 QMAKE_LIBS_EGL         += -lEGL
 QMAKE_LIBS_OPENGL_ES2  += -lGLESv2 -lEGL
 QMAKE_LIBS_OPENVG      += -lOpenVG -lEGL
