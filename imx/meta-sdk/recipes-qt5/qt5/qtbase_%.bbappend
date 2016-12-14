@@ -6,15 +6,16 @@ HAS_FB = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 0, \
 IS_IMX3D = "0"
 IS_IMX3D_imxgpu3d = "1"
 
-PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' gl', '', d)}"
 PACKAGECONFIG_GL_imxgpu3d = "gles2"
+PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' gl', '', d)}"
 PACKAGECONFIG_GL_imxpxp = "gles2"
 PACKAGECONFIG_GL_mx8 = "gles2"
 QT_CONFIG_FLAGS_APPEND = ""
+QT_CONFIG_FLAGS_APPEND_imxgpu3d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_APPEND_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', \
                                                  ' -no-opengl -linuxfb -no-eglfs', d)}"
 QT_CONFIG_FLAGS_APPEND_imxpxp = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
-QT_CONFIG_FLAGS_APPEND_imxgpu3d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
+QT_CONFIG_FLAGS_APPEND_mx8 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_append = "${QT_CONFIG_FLAGS_APPEND}"
 
 do_configure_prepend() {
