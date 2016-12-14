@@ -2,9 +2,9 @@
 
 HAS_X11 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 1, 0, d)}"
 
-IS_IMX3D = "0"
-IS_IMX3D_imxgpu3d = "3d"
-IS_IMX3D_imxgpu2d = "2d"
+IMXGPU_imxgpu3d = "3d"
+IMXGPU_imxgpu2d = "2d"
+IMXGPU_mx8      = "3d"
 
 PACKAGECONFIG_GL_imxgpu3d = "gles2"
 PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' gl', '', d)}"
@@ -19,10 +19,13 @@ QT_CONFIG_FLAGS_APPEND_mx8 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -
 QT_CONFIG_FLAGS_append = " ${QT_CONFIG_FLAGS_APPEND}"
 
 do_configure_prepend() {
+    if [ "${IMXGPU}" = "" ]; then
+        return
+    fi
     # adapt qmake.conf to our needs
     sed -i 's!load(qt_config)!!' ${S}/mkspecs/linux-oe-g++/qmake.conf
     if test ${HAS_X11} -eq 0; then
-        if [ "${IS_IMX3D}" = "3d" ]; then
+        if [ "${IMXGPU}" = "3d" ]; then
             cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
 IMX_CFLAGS             = -DLINUX=1 -DEGL_API_FB=1
 EGLFS_DEVICE_INTEGRATION = eglfs_viv
