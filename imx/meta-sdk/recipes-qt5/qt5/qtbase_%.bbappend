@@ -3,8 +3,8 @@
 HAS_X11 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 1, 0, d)}"
 
 IS_IMX3D = "0"
-IS_IMX3D_imxgpu2d = "2d"
 IS_IMX3D_imxgpu3d = "3d"
+IS_IMX3D_imxgpu2d = "2d"
 
 PACKAGECONFIG_GL_imxgpu3d = "gles2"
 PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' gl', '', d)}"
