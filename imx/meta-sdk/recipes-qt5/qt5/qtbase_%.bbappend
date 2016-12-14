@@ -25,31 +25,15 @@ do_configure_prepend() {
     fi
     # adapt qmake.conf to our needs
     sed -i 's!load(qt_config)!!' ${S}/mkspecs/linux-oe-g++/qmake.conf
-    if test ${HAS_X11} -eq 0; then
-        if [ "${IMXGPU}" = "3d" ]; then
-    
-            cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
-IMX_CFLAGS             = -DLINUX=1 -DEGL_API_FB=1
-EGLFS_DEVICE_INTEGRATION = eglfs_viv
-EOF
-        else
-            cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
-IMX_CFLAGS             = -DLINUX=1
-EOF
-        fi
-    else
+    if [ ${HAS_X11} -eq 0 ] && [ "${IMXGPU}" = "3d" ]; then
         cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
-IMX_CFLAGS             = -DLINUX=1
+EGLFS_DEVICE_INTEGRATION = eglfs_viv
 EOF
     fi
     cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
 QMAKE_LIBS_EGL         += -lEGL
 QMAKE_LIBS_OPENGL_ES2  += -lGLESv2 -lEGL
 QMAKE_LIBS_OPENVG      += -lOpenVG -lEGL
-QMAKE_CFLAGS_RELEASE   += \$\$IMX_CFLAGS
-QMAKE_CXXFLAGS_RELEASE += \$\$IMX_CFLAGS
-QMAKE_CFLAGS_DEBUG   += \$\$IMX_CFLAGS
-QMAKE_CXXFLAGS_DEBUG += \$\$IMX_CFLAGS
 
 load(qt_config)
 
