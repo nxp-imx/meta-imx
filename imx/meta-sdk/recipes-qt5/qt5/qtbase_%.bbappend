@@ -1,11 +1,20 @@
 # Copyright (C) 2013 Eric Bénard - Eukréa Electromatique
 # Copyright (C) 2016 O.S. Systems Software LTDA.
+# Copyright (C) 2016 Freescale Semiconductor
 
-HAS_X11 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 1, 0, d)}"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-IMXGPU_imxgpu3d = "3d"
-IMXGPU_imxgpu2d = "2d"
-IMXGPU_mx8      = "3d"
+SRC_URI_IMXGPU_COMMON = " \
+    file://0014-Add-IMX-GPU-support.patch \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
+       bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
+                                                       'file://0015-Add-eglfs-to-IMX-GPU.patch', d), d)} \
+"
+SRC_URI_IMXGPU          = ""
+SRC_URI_IMXGPU_imxgpu2d = "${SRC_URI_IMXGPU_COMMON}"
+SRC_URI_IMXGPU_imxgpu3d = "${SRC_URI_IMXGPU_COMMON}"
+SRC_URI_IMXGPU_mx8      = "${SRC_URI_IMXGPU_COMMON}"
+SRC_URI_append = " ${SRC_URI_IMXGPU}"
 
 PACKAGECONFIG_GL_imxpxp   = "gles2"
 PACKAGECONFIG_GL_imxgpu3d = "gles2"
@@ -18,26 +27,5 @@ QT_CONFIG_FLAGS_APPEND_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11'
 QT_CONFIG_FLAGS_APPEND_imxgpu3d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_APPEND_mx8 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -no-eglfs', ' -eglfs', d)}"
 QT_CONFIG_FLAGS_append = " ${QT_CONFIG_FLAGS_APPEND}"
-
-do_configure_prepend() {
-    if [ "${IMXGPU}" = "" ]; then
-        return
-    fi
-    # adapt qmake.conf to our needs
-    sed -i 's!load(qt_config)!!' ${S}/mkspecs/linux-oe-g++/qmake.conf
-    if [ ${HAS_X11} -eq 0 ] && [ "${IMXGPU}" = "3d" ]; then
-        cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
-EGLFS_DEVICE_INTEGRATION = eglfs_viv
-EOF
-    fi
-    cat >> ${S}/mkspecs/linux-oe-g++/qmake.conf <<EOF
-QMAKE_LIBS_EGL         += -lEGL
-QMAKE_LIBS_OPENGL_ES2  += -lGLESv2 -lEGL
-QMAKE_LIBS_OPENVG      += -lOpenVG -lEGL
-
-load(qt_config)
-
-EOF
-}
 
 PACKAGECONFIG_append = " accessibility examples"
