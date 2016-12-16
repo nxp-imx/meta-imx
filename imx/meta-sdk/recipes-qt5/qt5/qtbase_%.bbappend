@@ -4,17 +4,18 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_IMXGPU_COMMON = " \
+SRC_URI_append_mx8 = " \
     file://0014-Add-IMX-GPU-support.patch \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
-       bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
-                                                       'file://0015-Add-eglfs-to-IMX-GPU.patch', d), d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', \
+                                                   'file://0015-Add-eglfs-to-IMX-GPU.patch', d)} \
 "
-SRC_URI_IMXGPU          = ""
-SRC_URI_IMXGPU_mx8      = "${SRC_URI_IMXGPU_COMMON}"
-SRC_URI_IMXGPU_imxgpu2d = "${SRC_URI_IMXGPU_COMMON}"
-SRC_URI_IMXGPU_imxgpu3d = "${SRC_URI_IMXGPU_COMMON}"
-SRC_URI_append = " ${SRC_URI_IMXGPU}"
+SRC_URI_append_imxgpu2d = " \
+    file://0014-Add-IMX-GPU-support.patch \
+"
+SRC_URI_append_imxgpu3d = " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', \
+                                                   'file://0015-Add-eglfs-to-IMX-GPU.patch', d)} \
+"
 
 PACKAGECONFIG_GL_mx8 = "gles2"
 PACKAGECONFIG_GL_imxpxp   = "gles2"
