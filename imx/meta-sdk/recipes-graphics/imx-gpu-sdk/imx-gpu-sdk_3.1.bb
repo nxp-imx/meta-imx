@@ -36,12 +36,20 @@ HAS_VPU_mx6sx = "0"
 IS_MX8 = "0"
 IS_MX8_mx8 = "1"
 
+IS_MX6SL = "0"
+IS_MX6SL_mx6sl = "1"
+
 do_compile () {
     export FSL_GRAPHICS_SDK=${S}
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     cd ${S}/.Config
-    ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
+
+    if [ "${IS_MX6SL}" = "0" ]; then
+        ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
+    else
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
+    fi
 
 }
 
@@ -50,7 +58,13 @@ do_install () {
     export FSL_PLATFORM_NAME=Yocto
     install -d "${D}/opt/${PN}"
     cd ${S}/.Config
-    ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} install ROOTFS=${STAGING_DIR_HOST}
+
+    if [ "${IS_MX6SL}" = "0" ]; then
+        ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} install
+    else
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D] -- -j 2 EGLBackend=${BACKEND} install
+    fi
+
     cp -r ${S}/bin/* ${D}/opt/${PN}
 
     rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
