@@ -28,8 +28,8 @@ SRC_URI = " \
     ${FSL_MIRROR}/imx-gst1.0-plugin-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "ff3c7a4aa83fcb9ba3ca701874286a56"
-SRC_URI[sha256sum] = "54aa99ae837baeff9153e0ba8f7b7d320c8be47d27baf52a183e99037e0832c2"
+SRC_URI[md5sum] = "cd23ebbb46df020ecb81739b0d338b99"
+SRC_URI[sha256sum] = "924cebaf1bfb5dc35dcc5d40bf64ecad4264b9b6b5e42a2886f87ebeba271bcc"
 
 S = "${WORKDIR}/imx-gst1.0-plugin-${PV}"
 
