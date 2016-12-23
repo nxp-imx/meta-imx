@@ -44,6 +44,7 @@ PLATFORM_mx6sx = "MX6SX"
 PLATFORM_mx6ul = "MX6UL"
 PLATFORM_mx6sll = "MX6SLL"
 PLATFORM_mx7= "MX7D"
+PLATFORM_mx7ulp= "MX7ULP"
 PLATFORM_mx8 = "MX8"
 
 # Todo add a mechanism to map possible build targets
@@ -60,6 +61,7 @@ RDEPENDS_${PN} += "imx-parser ${BEEP_RDEPENDS} gstreamer1.0-plugins-good-id3demu
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG_mx6 = "overlaysink"
+PACKAGECONFIG_mx7ulp = "overlaysink"
 PACKAGECONFIG_mx8 = "overlaysink"
 
 
