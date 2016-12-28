@@ -46,6 +46,7 @@ SRC_URI_append = " \
        file://0021-Add-ion-memory-support-for-glupload.patch \
        file://0022-Add-ion-dmabuf-support-in-gldownload.patch \
        file://0023-glwindow-use-g_thread_unref-to-release-navigation-th.patch \
+       file://0024-gl-effects-use-non-PBO-GLMemory-for-internal-texture.patch \
 "
 
 # include fragment shaders
