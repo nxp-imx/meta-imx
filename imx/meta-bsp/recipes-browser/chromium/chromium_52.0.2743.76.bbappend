@@ -39,4 +39,4 @@ SRC_URI_append_mx8 = " file://chromium_aarch64_buildbreak.patch"
 
 COMPATIBLE_MACHINE_aarch64 = "(.*)"
 
-COMPATIBLE_MACHINE = "(mx6|7ulp|mx8)"
+COMPATIBLE_MACHINE = "(mx6|mx7ulp|mx8)"
