@@ -1,0 +1,33 @@
+diff -Naur chromium-52.0.2743.76_org/build/common.gypi chromium-52.0.2743.76/build/common.gypi
+--- chromium-52.0.2743.76_org/build/common.gypi	2016-12-29 13:09:07.148874888 -0600
++++ chromium-52.0.2743.76/build/common.gypi	2016-12-29 13:13:41.000000000 -0600
+@@ -2346,7 +2346,7 @@
+         'arm_thumb%': 0,
+       }],
+       ['arm_version==7', {
+-        'arm_arch%': 'armv7-a',
++        'arm_arch%': 'armv7ve',
+         'arm_tune%': 'generic-armv7-a',
+         'conditions': [
+           ['arm_neon==1', {
+diff -Naur chromium-52.0.2743.76_org/v8/gypfiles/toolchain.gypi chromium-52.0.2743.76/v8/gypfiles/toolchain.gypi
+--- chromium-52.0.2743.76_org/v8/gypfiles/toolchain.gypi	2016-12-29 13:09:05.164865049 -0600
++++ chromium-52.0.2743.76/v8/gypfiles/toolchain.gypi	2016-12-29 13:14:16.000000000 -0600
+@@ -200,7 +200,7 @@
+                 # Host built with an Arm CXX compiler.
+                 'conditions': [
+                   [ 'arm_version==7', {
+-                    'cflags': ['-march=armv7-a',],
++                    'cflags': ['-march=armv7ve',],
+                   }],
+                   [ 'arm_version==7 or arm_version=="default"', {
+                     'conditions': [
+@@ -243,7 +243,7 @@
+                 # Target built with an Arm CXX compiler.
+                 'conditions': [
+                   [ 'arm_version==7', {
+-                    'cflags': ['-march=armv7-a',],
++                    'cflags': ['-march=armv7ve',],
+                   }],
+                   [ 'arm_version==7 or arm_version=="default"', {
+                     'conditions': [

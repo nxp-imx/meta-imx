@@ -29,6 +29,10 @@ CHROMIUM_EXTRA_ARGS_append = " \
 
 PACKAGES_remove = "${PN}-codecs-ffmpeg ${PN}-plugin-pdf"
 
+# chromium changes for mx7ulp
+
+SRC_URI_append_mx7ulp = " file://fix_buildbreak_toolchain_7ulp.patch"
+
 # chromium changes for mx8 (64 bit)
 
 SRC_URI_append_mx8 = " file://chromium_aarch64_buildbreak.patch"
