@@ -36,8 +36,10 @@ SRC_URI = " \
     http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \
     file://configure-allow-to-disable-libssh2.patch \
     file://0001-gst-plugins-bad-fix-moc-uic-rcc-incorrect-dir.patch \
-    file://0002-qmlglplugin-Add-i.mx-specific-code.patch \
-    file://0003-qmlglsrc-some-enhancements-for-qmlglsrc.patch \
+    file://0002-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
+    file://0003-Support-fb-backend-for-gl-plugins.patch \
+    file://0004-qmlglplugin-Add-i.mx-specific-code.patch \
+    file://0005-qmlglsrc-some-enhancements-for-qmlglsrc.patch \
 "
 
 # remove the duplicate libs except qtsink

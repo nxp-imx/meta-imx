@@ -1,7 +1,7 @@
-From c584d4ed4c32e5243d710e609341d872120efa29 Mon Sep 17 00:00:00 2001
+From feaf35085a6828a2db55a36850924b83faa171e0 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
 Date: Mon, 14 Nov 2016 14:34:47 +0800
-Subject: [PATCH 20/26] qmlglplugin: Add i.mx specific code
+Subject: [PATCH] qmlglplugin: Add i.mx specific code
 
 1.Add FB and X11 support for qml gl plugins
 2.Use Render-to-texture for texture copy since we use direct viv
@@ -10,18 +10,28 @@ Subject: [PATCH 20/26] qmlglplugin: Add i.mx specific code
 Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+
+fix build issue
+
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
- configure.ac             |  2 +-
+ configure.ac             |  9 +++++++--
  ext/qt/gstqtglutility.cc | 17 +++++++++++++---
  ext/qt/qtwindow.cc       | 50 +++++++++++++++++++++++++++++++++++++++++++++++-
  ext/qt/qtwindow.h        |  1 +
- 4 files changed, 65 insertions(+), 5 deletions(-)
+ 4 files changed, 71 insertions(+), 6 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 7fdc75e..de1c557 100644
+index 90bf768..1f15625 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -2977,7 +2977,7 @@ AG_GST_CHECK_FEATURE(QT, [Qt elements], qt, [
+@@ -2967,12 +2967,12 @@ AG_GST_CHECK_FEATURE(QT, [Qt elements], qt, [
+         HAVE_QT="yes"
+         HAVE_QT_WINDOWING="no"
+         QT_VERSION="`$PKG_CONFIG --modversion Qt5Core`"
+-        QPA_INCLUDE_PATH=`$PKG_CONFIG --variable=includedir Qt5Core`/QtGui/${QT_VERSION}/QtGui
++        QPA_INCLUDE_PATH=${STAGING_INCDIR}/../../`$PKG_CONFIG --variable=includedir Qt5Core`/QtGui/${QT_VERSION}/QtGui
+         AS_IF([test -f "$QPA_INCLUDE_PATH/qpa/qplatformnativeinterface.h"], [
            QT_CFLAGS="$QT_CFLAGS -I$QPA_INCLUDE_PATH"
            HAVE_QT_QPA_HEADER="yes"
          ], [AC_MSG_NOTICE([Cannot find QPA])])
@@ -30,6 +40,18 @@ index 7fdc75e..de1c557 100644
            PKG_CHECK_MODULES(QT_X11, Qt5X11Extras, [
              AC_DEFINE([HAVE_QT_X11], [], [Define if Qt X11 integration is installed])
              QT_CFLAGS="$QT_CFLAGS $QT_X11_CFLAGS"
+@@ -3032,6 +3032,11 @@ AG_GST_CHECK_FEATURE(QT, [Qt elements], qt, [
+             HAVE_QT_WINDOWING="yes"
+           fi
+         fi
++        if test "x$GST_GL_HAVE_WINDOW_FB" = "x1" -a "x$GST_GL_HAVE_PLATFORM_EGL" = "x1"; then
++          QT_CFLAGS="$QT_CFLAGS"
++          QT_LIBS="$QT_LIBS"
++          HAVE_QT_WINDOWING="yes"
++        fi
+         if test "x$HAVE_QT_WINDOWING" = "xno"; then
+           AC_MSG_WARN([Could not find any Qt Windowing integration])
+           HAVE_QT="no"
 diff --git a/ext/qt/gstqtglutility.cc b/ext/qt/gstqtglutility.cc
 index 4d6d318..c85465f 100644
 --- a/ext/qt/gstqtglutility.cc
