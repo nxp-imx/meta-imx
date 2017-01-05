@@ -5,8 +5,8 @@ DEPENDS = "virtual/libg2d imx-gpu-viv zlib libpng"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "9ea9c16b5aba8e6a60103ee7ed34947d"
-SRC_URI[sha256sum] = "969ff6fb2fa91c929ed7d104136bf64543917b07ff54364ccc2dd7581558accf"
+SRC_URI[md5sum] = "2fcba76cd1ca4955e31db1ef5b101889"
+SRC_URI[sha256sum] = "7cdaacd4e4a0c666a618c2ea96746918ac41948eaf68ccb866264bd12e70bc53"
 
 inherit cmake lib_package pkgconfig perlnative pythonnative
 
