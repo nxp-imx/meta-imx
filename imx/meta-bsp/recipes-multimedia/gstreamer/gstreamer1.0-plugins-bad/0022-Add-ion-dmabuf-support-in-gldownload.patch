@@ -1,11 +1,11 @@
-From 4e95ef9d674e34ba24400da520d8f69a921d6142 Mon Sep 17 00:00:00 2001
+From b9e22f7c4709472b2c1d53ea965b583da2f79a4f Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
 Date: Fri, 25 Nov 2016 14:48:44 +0800
-Subject: [PATCH 2/2] Add ion dmabuf support in gldownload
+Subject: [PATCH 22/24] Add ion dmabuf support in gldownload
 
 Support copy into dma-fb buffer if support the buffer format
 
-Upstream Status: Inappropriate [i.MX specific]
+Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
@@ -91,7 +91,7 @@ index a5ba6ab..77358ca 100644
      GST_DEBUG_OBJECT (bt, "obtain physical memory allocator %p.", allocator);
    }
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index 71f94b0..c71c3b8 100644
+index 9955298..911fd8a 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
 @@ -44,6 +44,10 @@ if HAVE_PHYMEM

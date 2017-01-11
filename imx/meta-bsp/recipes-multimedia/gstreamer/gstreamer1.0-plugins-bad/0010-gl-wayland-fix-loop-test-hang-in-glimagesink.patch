@@ -1,7 +1,7 @@
-From eace1494c6bd1e37dfca3d008b8681bf259851b6 Mon Sep 17 00:00:00 2001
+From 91613520839c92d5f684f04e70266bc71c06ab85 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <b55597@freescale.com>
 Date: Sun, 6 Dec 2015 14:25:44 +0800
-Subject: [PATCH 10/26] gl/wayland: fix loop test hang in glimagesink
+Subject: [PATCH 10/24] gl/wayland: fix loop test hang in glimagesink
 
 Root cause: In glimagesink, gl thread will dispatch event queue and window_show()
 is called from streaming thread. Gl thread will empty event queue and
@@ -11,7 +11,7 @@ becaue the swap_buffer event is queued by streaming thread but it is blocked.
 
 Solution: Use two event queue, One for surface and another for gl thread
 
-Upstream Status: Pending
+Upstream-Status: Pending
 
 bugzilla URL: https://bugzilla.gnome.org/show_bug.cgi?id=758984
 

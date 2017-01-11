@@ -1,7 +1,7 @@
-From c68551fe3fd4f74caa1467048a1707ef5e74a4dc Mon Sep 17 00:00:00 2001
+From bc06c1174f2ca1109c31e00a92d7250d08d401de Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
 Date: Wed, 7 Dec 2016 16:51:27 +0800
-Subject: [PATCH] gl/effects: use non-PBO GLMemory for internal textures
+Subject: [PATCH 24/24] gl/effects: use non-PBO GLMemory for internal textures
 
 middle textures in gleffects do not need to use GstGLMemoryPBO as they
 aren't transfering data to/from the GPU. This will cost too much DMA

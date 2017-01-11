@@ -1,7 +1,7 @@
-From 823c4f11c80a8ec0f081c30d729226c724fd4bed Mon Sep 17 00:00:00 2001
+From 091af579f4bc68a78958e40cbb3207a191f3012a Mon Sep 17 00:00:00 2001
 From: Song Bing <b06498@freescale.com>
 Date: Wed, 20 May 2015 15:15:08 +0800
-Subject: [PATCH 03/26] mpegvideoparse: Need detect picture coding type when
+Subject: [PATCH 03/24] mpegvideoparse: Need detect picture coding type when
  drain
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -9,7 +9,7 @@ Content-Transfer-Encoding: 8bit
 
 Need detect picture coding type when drain
 
-Upstream Status: Waiting for review.
+Upstream-Status: Waiting for review.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=749617
 ---

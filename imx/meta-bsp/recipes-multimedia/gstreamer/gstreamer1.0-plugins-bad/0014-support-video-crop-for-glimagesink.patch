@@ -1,7 +1,7 @@
-From 0ea1a28f11bf419c2d65ec31a7db0fbc724c87f2 Mon Sep 17 00:00:00 2001
+From f127aafb7edbe5056d6524f3922c5526c67f601b Mon Sep 17 00:00:00 2001
 From: Haihua Hu <b55597@freescale.com>
 Date: Fri, 13 Nov 2015 10:51:25 +0800
-Subject: [PATCH 14/26] support video crop for glimagesink
+Subject: [PATCH 14/24] support video crop for glimagesink
 
 1.Add video crop meta copy in glupload
 2.Calculate the new texture coordinate in vertices array and bind to buffer object

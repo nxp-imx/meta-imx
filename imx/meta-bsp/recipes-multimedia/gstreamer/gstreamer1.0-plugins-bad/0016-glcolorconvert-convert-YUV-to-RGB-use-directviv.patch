@@ -1,12 +1,12 @@
-From 64718397e93087ffe37ad3209535ef84e15854aa Mon Sep 17 00:00:00 2001
+From 1e9cb63c034ffdfb4362d1368c914148409f9f21 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <b55597@freescale.com>
 Date: Thu, 25 Feb 2016 13:53:20 +0800
-Subject: [PATCH 16/26] glcolorconvert: convert YUV to RGB use directviv
+Subject: [PATCH 16/24] glcolorconvert: convert YUV to RGB use directviv
 
 Add a property "disable_passthrough" in glcolorconvert for enable/disable passthrough.
 When need convert YUV to RGB with directviv, set it to be TRUE.
 
-Upstream Status: Inappropriate [i.MX specific]
+Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <b55597@freescale.com>
 
@@ -147,10 +147,10 @@ index 2a0dd1d..5cdbd3a 100644
  
  struct _GstGLColorConvertElementClass
 diff --git a/gst-libs/gst/gl/gstglcolorconvert.c b/gst-libs/gst/gl/gstglcolorconvert.c
-index 908a53e..4f072f5 100644
+index 0bf6b46..1d62eaf 100644
 --- a/gst-libs/gst/gl/gstglcolorconvert.c
 +++ b/gst-libs/gst/gl/gstglcolorconvert.c
-@@ -710,7 +710,11 @@ _gst_gl_color_convert_set_caps_unlocked (GstGLColorConvert * convert,
+@@ -717,7 +717,11 @@ _gst_gl_color_convert_set_caps_unlocked (GstGLColorConvert * convert,
    convert->priv->to_texture_target = to_target;
    convert->initted = FALSE;
  

@@ -1,7 +1,7 @@
-From f705c7bbc8274b6824a9063161263cb16af9d15d Mon Sep 17 00:00:00 2001
+From 7fea1c622ed810c9410ce6d5cf0a828c402d3029 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
 Date: Mon, 14 Nov 2016 10:53:27 +0800
-Subject: [PATCH 18/26] glcolorconvert: fix MRT cannot work in GLES3.0
+Subject: [PATCH 18/24] glcolorconvert: fix MRT cannot work in GLES3.0
 
 use glBlitFramebuffer for textures copy if it is available
 
@@ -31,7 +31,7 @@ index d142483..789f289 100644
                    "framebuffer_blit\0")
  GST_GL_EXT_FUNCTION (void, BlitFramebuffer,
 diff --git a/gst-libs/gst/gl/gstglmemory.c b/gst-libs/gst/gl/gstglmemory.c
-index 73c3b59..6f9794f 100644
+index 31e102e..5701c75 100644
 --- a/gst-libs/gst/gl/gstglmemory.c
 +++ b/gst-libs/gst/gl/gstglmemory.c
 @@ -69,6 +69,12 @@ GST_DEBUG_CATEGORY_STATIC (GST_CAT_GL_MEMORY);
@@ -47,7 +47,7 @@ index 73c3b59..6f9794f 100644
  
  G_DEFINE_TYPE (GstGLMemoryAllocator, gst_gl_memory_allocator,
      GST_TYPE_GL_BASE_MEMORY_ALLOCATOR);
-@@ -626,7 +632,7 @@ gst_gl_memory_copy_teximage (GstGLMemory * src, guint tex_id,
+@@ -627,7 +633,7 @@ gst_gl_memory_copy_teximage (GstGLMemory * src, guint tex_id,
    guint out_gl_format, out_tex_target;
    GstMapInfo sinfo;
    guint src_tex_id;
@@ -56,7 +56,7 @@ index 73c3b59..6f9794f 100644
  
    gl = src->mem.context->gl_vtable;
    out_tex_target = gst_gl_texture_target_to_gl (out_target);
-@@ -659,31 +665,63 @@ gst_gl_memory_copy_teximage (GstGLMemory * src, guint tex_id,
+@@ -660,31 +666,63 @@ gst_gl_memory_copy_teximage (GstGLMemory * src, guint tex_id,
  
    /* FIXME: try and avoid creating and destroying fbo's every copy... */
    /* create a framebuffer object */

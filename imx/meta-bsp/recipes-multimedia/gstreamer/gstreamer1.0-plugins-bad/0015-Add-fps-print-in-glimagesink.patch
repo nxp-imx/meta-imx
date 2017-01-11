@@ -1,7 +1,7 @@
-From 8367518d96521c44997d95dfc474b4522d00a101 Mon Sep 17 00:00:00 2001
+From 38b229376853002dc089e0414c6c68f399465f3d Mon Sep 17 00:00:00 2001
 From: Haihua Hu <b55597@freescale.com>
 Date: Wed, 18 Nov 2015 15:10:22 +0800
-Subject: [PATCH 15/26] Add fps print in glimagesink
+Subject: [PATCH 15/24] Add fps print in glimagesink
 
 In GST-1.6, Pipeline will set start time to 0 when state
 change form PAUSE to READY, so get start time in state change

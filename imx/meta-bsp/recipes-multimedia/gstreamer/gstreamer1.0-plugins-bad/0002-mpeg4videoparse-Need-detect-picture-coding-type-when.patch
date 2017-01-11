@@ -1,7 +1,7 @@
-From 521508d4f61d30abea851579ff458c6a022ae74d Mon Sep 17 00:00:00 2001
+From 5bf16425def5d0967adede3070bf42f6868d3f96 Mon Sep 17 00:00:00 2001
 From: Song Bing <b06498@freescale.com>
 Date: Wed, 20 May 2015 15:13:20 +0800
-Subject: [PATCH 02/26] mpeg4videoparse: Need detect picture coding type when
+Subject: [PATCH 02/24] mpeg4videoparse: Need detect picture coding type when
  drain
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -13,7 +13,7 @@ type when detect start code after VOP. our use case will drain after VOP
 and can't detect start code after VOP. Add check coding type code when
 drain.
 
-Upstream Status: Waiting for review.
+Upstream-Status: Waiting for review.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=749617
 ---

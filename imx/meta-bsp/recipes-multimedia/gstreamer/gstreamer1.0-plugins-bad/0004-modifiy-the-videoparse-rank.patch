@@ -1,7 +1,7 @@
-From 95d6499c644e4cc13d5fabdffbd17e63e336dede Mon Sep 17 00:00:00 2001
+From 821754c6c432b0dbc22ee4b0ed4d6844e33e2763 Mon Sep 17 00:00:00 2001
 From: Lyon Wang <lyon.wang@freescale.com>
 Date: Fri, 29 May 2015 09:54:56 +0800
-Subject: [PATCH 04/26] modifiy the videoparse rank
+Subject: [PATCH 04/24] modifiy the videoparse rank
 
 - Modify the videparsers rank down to avoid link them in
 . h263parse rank down to 63
@@ -10,7 +10,7 @@ Subject: [PATCH 04/26] modifiy the videoparse rank
 . pngparse, rank down to 63
 . h265parse rank down to 63
 
-Upstream status:  [i.MX specific] internal use only
+Upstream-Status:  [i.MX specific] internal use only
 
 Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 

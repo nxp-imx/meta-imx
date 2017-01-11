@@ -1,12 +1,12 @@
-From 0be8ebc81b6e8e65ba425d0ddd535c587996a351 Mon Sep 17 00:00:00 2001
+From 013b06571336f730e19f8a09a36888e804c084ab Mon Sep 17 00:00:00 2001
 From: Song Bing <bing.song@nxp.com>
 Date: Tue, 16 Aug 2016 13:11:57 +0800
-Subject: [PATCH 21/26] videocompositor: Remove output format alpha check
+Subject: [PATCH 20/24] videocompositor: Remove output format alpha check
 
 Remove output format alpha check, or output without alpha will
 fail if input has alpha.
 
-Upstream Status: Pending
+Upstream-Status: Pending
 
 https://bugzilla.gnome.org/show_bug.cgi?id=769962
 ---

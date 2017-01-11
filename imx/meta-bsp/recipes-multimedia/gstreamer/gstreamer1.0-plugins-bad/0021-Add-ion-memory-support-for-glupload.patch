@@ -1,7 +1,7 @@
-From f917a9a95019282b39d65c7cd986a59effa1deed Mon Sep 17 00:00:00 2001
+From 70bb137090a7952bc6071780995482803a327c7d Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
 Date: Fri, 25 Nov 2016 14:33:42 +0800
-Subject: [PATCH 1/2] Add ion memory support for glupload
+Subject: [PATCH 21/24] Add ion memory support for glupload
 
 1. Support one texture for YUV format in dmabuf uploader
 2. Propose ion dma-fd buffer pool to upstream to avoid memory copy
@@ -9,19 +9,19 @@ Subject: [PATCH 1/2] Add ion memory support for glupload
    our own and do copy to avoid memory copy from CPU to GPU side
 4. Add buffer alignmentw
 
-Upstream Status: Inappropriate [i.MX specific]
+Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <jared.hu@nxp.com>
 ---
  configure.ac                      |  14 +++
- gst-libs/gst/gl/Makefile.am       |   4 +-
+ gst-libs/gst/gl/Makefile.am       |   6 +-
  gst-libs/gst/gl/egl/gsteglimage.c | 131 +++++++++++++++++++++++++
  gst-libs/gst/gl/egl/gsteglimage.h |   5 +
  gst-libs/gst/gl/gstglupload.c     | 196 +++++++++++++++++++++++++++++++++++++-
- 5 files changed, 344 insertions(+), 6 deletions(-)
+ 5 files changed, 345 insertions(+), 7 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index ce1088b..4b53b94 100644
+index a4cc878..c3603e7 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -592,6 +592,15 @@ else
@@ -64,25 +64,27 @@ index ce1088b..4b53b94 100644
  #define GST_GL_HAVE_PHYMEM $GST_GL_HAVE_PHYMEM
  "
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index 0be4fa2..71f94b0 100644
+index 993ee90..9955298 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
-@@ -190,8 +190,8 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@
+@@ -190,9 +190,9 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@
  		-I$(top_builddir)/gst-libs \
  		$(GST_PLUGINS_BASE_CFLAGS) \
  		$(GL_CFLAGS) \
 -		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
 -		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
+-		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-video-@GST_API_VERSION@` \
 +		--add-include-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-@GST_API_VERSION@` \
 +		--add-include-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-base-@GST_API_VERSION@` \
++		--add-include-path=$(PKG_CONFIG_SYSROOT_DIR)`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-video-@GST_API_VERSION@` \
  		--library=libgstgl-@GST_API_VERSION@.la \
  		--include=Gst-@GST_API_VERSION@ \
  		--include=GstBase-@GST_API_VERSION@ \
 diff --git a/gst-libs/gst/gl/egl/gsteglimage.c b/gst-libs/gst/gl/egl/gsteglimage.c
-index 16441e1..a9ee209 100644
+index 07f246d..4524d43 100644
 --- a/gst-libs/gst/gl/egl/gsteglimage.c
 +++ b/gst-libs/gst/gl/egl/gsteglimage.c
-@@ -319,4 +319,135 @@ gst_egl_image_from_dmabuf (GstGLContext * context,
+@@ -365,4 +365,135 @@ gst_egl_image_from_dmabuf (GstGLContext * context,
        GST_VIDEO_GL_TEXTURE_ORIENTATION_X_NORMAL_Y_NORMAL,
        NULL, (GstEGLImageDestroyNotify) _destroy_egl_image);
  }
@@ -219,10 +221,10 @@ index 16441e1..a9ee209 100644
 +}
  #endif /* GST_GL_HAVE_DMABUF */
 diff --git a/gst-libs/gst/gl/egl/gsteglimage.h b/gst-libs/gst/gl/egl/gsteglimage.h
-index 2d2e075..c6eaa28 100644
+index 7136c0f..834079e 100644
 --- a/gst-libs/gst/gl/egl/gsteglimage.h
 +++ b/gst-libs/gst/gl/egl/gsteglimage.h
-@@ -72,6 +72,11 @@ GstEGLImage *           gst_egl_image_from_dmabuf               (GstGLContext *
+@@ -77,6 +77,11 @@ GstEGLImage *           gst_egl_image_from_dmabuf               (GstGLContext *
                                                                   GstVideoInfo * in_info,
                                                                   gint plane,
                                                                   gsize offset);
@@ -235,7 +237,7 @@ index 2d2e075..c6eaa28 100644
  
  /**
 diff --git a/gst-libs/gst/gl/gstglupload.c b/gst-libs/gst/gl/gstglupload.c
-index 2e52c3e..92bbf90 100644
+index 3df8aa9..f33a696 100644
 --- a/gst-libs/gst/gl/gstglupload.c
 +++ b/gst-libs/gst/gl/gstglupload.c
 @@ -23,6 +23,7 @@

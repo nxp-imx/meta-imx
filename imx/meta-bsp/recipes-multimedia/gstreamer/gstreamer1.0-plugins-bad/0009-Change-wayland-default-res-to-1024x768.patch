@@ -1,7 +1,7 @@
-From 665acd133d8491cf70407d59e033cd48ac989dfa Mon Sep 17 00:00:00 2001
+From a4745fd8b955718527f1c8f00913bb313c41d7aa Mon Sep 17 00:00:00 2001
 From: Jian <Jian.Li@freescale.com>
 Date: Tue, 17 Nov 2015 14:39:07 +0800
-Subject: [PATCH 09/26] Change wayland default res to 1024x768
+Subject: [PATCH 09/24] Change wayland default res to 1024x768
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -9,7 +9,7 @@ Content-Transfer-Encoding: 8bit
 Change wayland backend default window resolution
 from 320x240 to 1024x768
 
-Upstream Status: Inappropriate [i.MX specific]
+Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Jian <Jian.Li@freescale.com>
 ---

@@ -1,7 +1,7 @@
-From d0179e89c294f775a7ebb6ccb0ad539433f3c22e Mon Sep 17 00:00:00 2001
+From 31ee675e0e3f22d4057e8bec38af9f0c5516ef30 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <b55597@freescale.com>
 Date: Mon, 16 Nov 2015 17:41:57 +0800
-Subject: [PATCH 08/26] Support fb backend for gl plugins
+Subject: [PATCH 08/24] Support fb backend for gl plugins
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -9,7 +9,7 @@ Content-Transfer-Encoding: 8bit
 1.Add fb support in glimagesink
 2.override set_render_rectangle() to support resize
 
-Upstream Status: Inappropriate [i.MX specific]
+Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Haihua Hu <b55597@freescale.com>
 
@@ -26,7 +26,7 @@ Conflicts:
  gst-libs/gst/gl/gstgldisplay.c          |  11 ++
  gst-libs/gst/gl/gstgldisplay.h          |   1 +
  gst-libs/gst/gl/gstglwindow.c           |   8 +
- 11 files changed, 580 insertions(+), 1 deletions(-)
+ 10 files changed, 580 insertions(+), 1 deletion(-)
  create mode 100644 gst-libs/gst/gl/fb/Makefile.am
  create mode 100644 gst-libs/gst/gl/fb/gstgldisplay_fb.c
  create mode 100644 gst-libs/gst/gl/fb/gstgldisplay_fb.h
@@ -34,7 +34,7 @@ Conflicts:
  create mode 100644 gst-libs/gst/gl/fb/gstglwindow_fb_egl.h
 
 diff --git a/configure.ac b/configure.ac
-index f135648..991e7d0 100644
+index faceea4..8b536b6 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -700,6 +700,7 @@ HAVE_GL=no
@@ -133,7 +133,7 @@ index f135648..991e7d0 100644
  gst-libs/gst/interfaces/Makefile
  gst-libs/gst/codecparsers/Makefile
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index 5ceb622..01498e0 100644
+index f29cb71..f10dc1f 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
 @@ -119,6 +119,11 @@ SUBDIRS += eagl
@@ -710,7 +710,7 @@ index 0000000..216e421
 +
 +#endif /* __GST_GL_WINDOW_FB_EGL_H__ */
 diff --git a/gst-libs/gst/gl/gstgldisplay.c b/gst-libs/gst/gl/gstgldisplay.c
-index 3ffc906..7b0b5bf 100644
+index c0942a7..0fef869 100644
 --- a/gst-libs/gst/gl/gstgldisplay.c
 +++ b/gst-libs/gst/gl/gstgldisplay.c
 @@ -70,6 +70,9 @@
@@ -751,7 +751,7 @@ index a02e904..2f896bb 100644
    GST_GL_DISPLAY_TYPE_ANY = G_MAXUINT32
  } GstGLDisplayType;
 diff --git a/gst-libs/gst/gl/gstglwindow.c b/gst-libs/gst/gl/gstglwindow.c
-index 0588f1d..834d927 100644
+index 7a275e4..4b2399f 100644
 --- a/gst-libs/gst/gl/gstglwindow.c
 +++ b/gst-libs/gst/gl/gstglwindow.c
 @@ -58,6 +58,9 @@
@@ -764,7 +764,7 @@ index 0588f1d..834d927 100644
  #if GST_GL_HAVE_WINDOW_DISPMANX
  #include "dispmanx/gstglwindow_dispmanx_egl.h"
  #endif
-@@ -308,6 +311,11 @@ gst_gl_window_new (GstGLDisplay * display)
+@@ -285,6 +288,11 @@ gst_gl_window_new (GstGLDisplay * display)
    if (!window && (!user_choice || g_strstr_len (user_choice, 4, "eagl")))
      window = GST_GL_WINDOW (gst_gl_window_eagl_new (display));
  #endif

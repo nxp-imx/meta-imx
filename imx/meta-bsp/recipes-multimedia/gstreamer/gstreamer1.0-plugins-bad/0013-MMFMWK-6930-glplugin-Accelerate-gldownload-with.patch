@@ -1,7 +1,7 @@
-From 771ef0eb163d23d172527e11ce1b587a03cfa745 Mon Sep 17 00:00:00 2001
+From 0855b9d5e0483e8a8600593302729e458fab6493 Mon Sep 17 00:00:00 2001
 From: Haihua Hu <jared.hu@nxp.com>
 Date: Sun, 13 Nov 2016 00:45:29 +0800
-Subject: [PATCH] MMFMWK-6930 [glplugin] Accelerate gldownload with
+Subject: [PATCH 13/24] MMFMWK-6930 [glplugin] Accelerate gldownload with
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -27,7 +27,7 @@ Signed-off-by: Haihua Hu <jared.hu@nxp.com>
  create mode 100644 gst-libs/gst/gl/gstglphymemory.h
 
 diff --git a/configure.ac b/configure.ac
-index 3dc2b75..90bf768 100644
+index 406d1c1..0876a14 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -702,6 +702,7 @@ HAVE_GLES3_H=no
@@ -224,7 +224,7 @@ index 058398b..a5ba6ab 100644
 +  return TRUE;
 +}
 diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index 4fec88a..0be4fa2 100644
+index 4734af3..993ee90 100644
 --- a/gst-libs/gst/gl/Makefile.am
 +++ b/gst-libs/gst/gl/Makefile.am
 @@ -40,6 +40,10 @@ if HAVE_DIRECTVIV
@@ -261,7 +261,7 @@ index 4fec88a..0be4fa2 100644
  SUBDIRS += win32
  libgstgl_@GST_API_VERSION@_la_LIBADD += win32/libgstgl-win32.la
 diff --git a/gst-libs/gst/gl/gstglbufferpool.c b/gst-libs/gst/gl/gstglbufferpool.c
-index 218169a..1ca6d8c 100644
+index 4b3cf28..84f47e9 100644
 --- a/gst-libs/gst/gl/gstglbufferpool.c
 +++ b/gst-libs/gst/gl/gstglbufferpool.c
 @@ -26,6 +26,10 @@
@@ -274,8 +274,8 @@ index 218169a..1ca6d8c 100644
 +
  /**
   * SECTION:gstglbufferpool
-  * @short_description: buffer pool for #GstGLMemory objects
-@@ -261,6 +265,18 @@ gst_gl_buffer_pool_alloc (GstBufferPool * pool, GstBuffer ** buffer,
+  * @short_description: buffer pool for #GstGLBaseMemory objects
+@@ -263,6 +267,18 @@ gst_gl_buffer_pool_alloc (GstBufferPool * pool, GstBuffer ** buffer,
      goto no_buffer;
    }
  
