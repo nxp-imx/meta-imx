@@ -2,7 +2,6 @@ SUMMARY = "Freescale GPU SDK Samples"
 DESCRIPTION = "Set of sample applications for Freescale GPU"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=be67a88e9e6c841043b005ad7bcf8309"
-
 DEPENDS = "${X11_DEPENDS} ${WL_DEPENDS} devil assimp gstreamer1.0 gstreamer1.0-plugins-base"
 
 IMX_DEPENDS_APPEND          = ""
@@ -30,8 +29,8 @@ SRC_URI += "file://Add-missing-cmath-include.patch"
 BACKEND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
                 bb.utils.contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
 
-HAS_VPU = "1"
-HAS_VPU_mx6sx = "0"
+IS_MX6SX = "0"
+IS_MX6SX_mx6sx = "1"
 
 IS_MX8 = "0"
 IS_MX8_mx8 = "1"
@@ -39,16 +38,29 @@ IS_MX8_mx8 = "1"
 IS_MX6SL = "0"
 IS_MX6SL_mx6sl = "1"
 
+IS_MX7ULP = "0"
+IS_MX7ULP_mx7ulp = "1"
+
 do_compile () {
     export FSL_GRAPHICS_SDK=${S}
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     cd ${S}/.Config
 
-    if [ "${IS_MX6SL}" = "0" ]; then
-        ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
-    else
+    if [ "${IS_MX8}" = "1" ]; then
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,OpenGLES2,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.0.1,Vulkan,G2D] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
+
+    elif [ "${IS_MX6SL}" = "1" ]; then
         ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
+
+    elif [ "${IS_MX6SX}" = "1" ]; then
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
+
+    elif [ "${IS_MX7ULP}" = "1" ]; then
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
+
+    else
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2,OpenGLES3] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
     fi
 
 }
@@ -59,10 +71,20 @@ do_install () {
     install -d "${D}/opt/${PN}"
     cd ${S}/.Config
 
-    if [ "${IS_MX6SL}" = "0" ]; then
-        ./FslBuild.py -t sdk -- -j 2 EGLBackend=${BACKEND} install
-    else
+    if [ "${IS_MX8}" = "1" ]; then
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,OpenGLES2,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.0.1,Vulkan,G2D] -- -j 2 EGLBackend=${BACKEND} install
+
+    elif [ "${IS_MX6SL}" = "1" ]; then
         ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D] -- -j 2 EGLBackend=${BACKEND} install
+
+    elif [ "${IS_MX6SX}" = "1" ]; then
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} install
+
+    elif [ "${IS_MX7ULP}" = "1" ]; then
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} install
+
+    else
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2,OpenGLES3] -- -j 2 EGLBackend=${BACKEND} install
     fi
 
     cp -r ${S}/bin/* ${D}/opt/${PN}
