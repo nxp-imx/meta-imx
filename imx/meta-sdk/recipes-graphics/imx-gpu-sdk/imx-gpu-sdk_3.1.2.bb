@@ -21,8 +21,8 @@ RCONFLICTS_${PN} = "vivante-gpu-sdk"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "af473ebe30b9bc68bdd2d67c01210ca9"
-SRC_URI[sha256sum] = "ce49c541e4874cd3406a3ae7141d918e892a6423788d2b46d98e313e5fa793f6"
+SRC_URI[md5sum] = "18773fcd8e468b64043eb8967946bfbd"
+SRC_URI[sha256sum] = "48f0a7ee043e14dcccece665603abb2a7515179f63890dd3410c3041b99dd5e7"
 
 SRC_URI += "file://Add-missing-cmath-include.patch"
 
