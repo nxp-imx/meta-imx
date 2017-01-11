@@ -1,4 +1,5 @@
 # Copyright (C) 2015 Freescale Semiconductor
+# Copyright 2017 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "Set of audio tools for inclusion on images"

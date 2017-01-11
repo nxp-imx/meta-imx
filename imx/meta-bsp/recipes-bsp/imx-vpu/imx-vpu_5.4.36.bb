@@ -1,4 +1,5 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
+# Copyright 2017 NXP
 
 require recipes-bsp/imx-vpu/imx-vpu.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=be67a88e9e6c841043b005ad7bcf8309"

@@ -1,4 +1,5 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
+# Copyright 2017 NXP
 
 require firmware-imx.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=d4f548f93b5fe0ee2bc86758c344412d"

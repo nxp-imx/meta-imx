@@ -1,4 +1,5 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
+# Copyright 2017 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 include imx-parser.inc

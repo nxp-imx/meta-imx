@@ -1,4 +1,5 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
+# Copyright 2017 NXP
 
 include recipes-bsp/imx-test/imx-test.inc
 

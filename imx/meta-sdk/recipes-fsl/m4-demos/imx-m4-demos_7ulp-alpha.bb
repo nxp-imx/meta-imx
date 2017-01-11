@@ -1,4 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
+# Copyright 2017 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "i.MX M4 core Demo images"
