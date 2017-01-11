@@ -16,7 +16,7 @@ SRC_URI = " \
     file://make-gio_unix_2_0-dependency-configurable.patch \
 "
 
-SRC_URI[md5sum] = "2114878715a69fc0ab850c4286eddbc6"
-SRC_URI[sha256sum] = "bfcdef97dfc69a0bbdb4403c47aae4e53def176bf0b781c5d818550536cfe94a"
+SRC_URI[md5sum] = "8efa9e9ad9a841a900359604da82fb8b"
+SRC_URI[sha256sum] = "fbc0d40fcb746d2efe2ea47444674029912f66e6107f232766d33b722b97de20"
 
 S = "${WORKDIR}/gst-plugins-base-${PV}"
