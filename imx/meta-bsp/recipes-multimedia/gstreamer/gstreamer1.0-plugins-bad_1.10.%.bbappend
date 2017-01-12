@@ -16,6 +16,7 @@ PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayla
 
 SRC_URI_append = " \
         file://0001-gstreamer-gl.pc.in-don-t-append-GL_CFLAGS-to-CFLAGS.patch \
+        file://0001-gst-plugins-bad-fix-incorrect-wayland-protocols-dir.patch \
         file://0001-mpegtsmux-Need-get-pid-when-create-streams.patch \
         file://0002-mpeg4videoparse-Need-detect-picture-coding-type-when.patch \
         file://0003-mpegvideoparse-Need-detect-picture-coding-type-when-.patch \
