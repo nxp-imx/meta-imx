@@ -27,6 +27,8 @@ do_install () {
     cp -r ${S}/gpu-demos/opt ${D}
 }
 
+RDEPENDS_${PN} = "libgal-imx"
+
 FILES_${PN} = "${libdir}/libg2d* /opt"
 FILES_${PN}-dev = "${includedir}"
 INSANE_SKIP_${PN} = "ldflags"
