@@ -2,7 +2,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append_imxgpu3d = " \
     file://0016-MGS-2343-ccc-XWLD-T3DStressTest_Wayland-displays-abn.patch \
-    file://0017-MGS-2343-1-ccc-XWLD-T3DStressTest_Wayland-displays-a.patch \
 "
 
 SRC_URI_append_imxgpu2d = " \
