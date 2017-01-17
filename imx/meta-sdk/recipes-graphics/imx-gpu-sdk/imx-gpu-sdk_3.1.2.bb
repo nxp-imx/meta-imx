@@ -28,34 +28,18 @@ SRC_URI[sha256sum] = "2a9f10f129c4c4c38fb06eadb69b354e3aab9a6d4c1bf32f51221996d9
 BACKEND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
                 bb.utils.contains('DISTRO_FEATURES', 'x11', 'X11', 'FB', d), d)}"
 
-IS_MX6SX = "0"
-IS_MX6SX_mx6sx = "1"
-
-IS_MX8 = "0"
-IS_MX8_mx8 = "1"
-
-IS_MX6SL = "0"
-IS_MX6SL_mx6sl = "1"
-
-IS_MX7ULP = "0"
-IS_MX7ULP_mx7ulp = "1"
+BUILD_USE_FEATURES        = "[EGL,OpenVG,G2D,OpenGLES2,OpenGLES3]"
+BUILD_USE_FEATURES_mx6sl  = "[EGL,OpenVG,G2D]"
+BUILD_USE_FEATURES_mx6sx  = "[EGL,OpenVG,G2D,OpenGLES2]"
+BUILD_USE_FEATURES_mx7ulp = "[EGL,OpenVG,G2D,OpenGLES2]"
+BUILD_USE_FEATURES_mx8    = "[EGL,OpenVG,G2D,OpenGLES2,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.0.1,Vulkan]"
 
 do_compile () {
     export FSL_GRAPHICS_SDK=${S}
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     cd ${S}/.Config
-    if [ "${IS_MX8}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,OpenGLES2,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.0.1,Vulkan,G2D] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
-    elif [ "${IS_MX6SL}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
-    elif [ "${IS_MX6SX}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
-    elif [ "${IS_MX7ULP}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
-    else
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2,OpenGLES3] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
-    fi
+    ./FslBuild.py -t sdk -u ${BUILD_USE_FEATURES} -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
 }
 
 do_install () {
