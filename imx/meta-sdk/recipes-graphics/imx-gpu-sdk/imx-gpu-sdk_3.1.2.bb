@@ -45,53 +45,25 @@ do_compile () {
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     cd ${S}/.Config
-
     if [ "${IS_MX8}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,OpenGLES2,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.0.1,Vulkan,G2D] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
-
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,OpenGLES2,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.0.1,Vulkan,G2D] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
     elif [ "${IS_MX6SL}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
-
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
     elif [ "${IS_MX6SX}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
-
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
     elif [ "${IS_MX7ULP}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
-
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
     else
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2,OpenGLES3] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST}
+        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2,OpenGLES3] -- -j 2 EGLBackend=${BACKEND} ROOTFS=${STAGING_DIR_HOST} install
     fi
-
 }
 
 do_install () {
-    export FSL_GRAPHICS_SDK=${S}
-    export FSL_PLATFORM_NAME=Yocto
     install -d "${D}/opt/${PN}"
-    cd ${S}/.Config
-
-    if [ "${IS_MX8}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,OpenGLES2,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.0.1,Vulkan,G2D] -- -j 2 EGLBackend=${BACKEND} install
-
-    elif [ "${IS_MX6SL}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D] -- -j 2 EGLBackend=${BACKEND} install
-
-    elif [ "${IS_MX6SX}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} install
-
-    elif [ "${IS_MX7ULP}" = "1" ]; then
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2] -- -j 2 EGLBackend=${BACKEND} install
-
-    else
-        ./FslBuild.py -t sdk -u [EGL,OpenVG,G2D,OpenGLES2,OpenGLES3] -- -j 2 EGLBackend=${BACKEND} install
-    fi
-
     cp -r ${S}/bin/* ${D}/opt/${PN}
-
     rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
     rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
     rm -rf ${D}/opt/${PN}/GLES2/DeBayer
-
     if [ "${IS_MX8}" = "1" ]; then
         rm -rf ${D}/opt/${PN}/G2D/EightLayers
     fi
