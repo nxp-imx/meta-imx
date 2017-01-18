@@ -39,6 +39,7 @@ SRC_URI = " \
     file://0003-Support-fb-backend-for-gl-plugins.patch \
     file://0004-qmlglplugin-Add-i.mx-specific-code.patch \
     file://0005-qmlglsrc-some-enhancements-for-qmlglsrc.patch \
+    file://0006-Make-qmlglsrc-be-compatible-with-GLES2.0.patch \
 "
 
 # remove the duplicate libs except qtsink
