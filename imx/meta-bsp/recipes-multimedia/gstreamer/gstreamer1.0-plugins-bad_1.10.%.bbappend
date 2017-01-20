@@ -41,6 +41,7 @@ SRC_URI_append = " \
         file://0022-Add-ion-dmabuf-support-in-gldownload.patch \
         file://0023-qmlglsrc-some-enhancements-for-qmlglsrc.patch \
         file://0024-gl-effects-use-non-PBO-GLMemory-for-internal-texture.patch \
+        file://0025-opencv-Add-video-stitching-support-based-on-Open-CV.patch \
 "
 
 # include fragment shaders
