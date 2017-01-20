@@ -42,6 +42,11 @@ SRC_URI_append = " \
         file://0023-qmlglsrc-some-enhancements-for-qmlglsrc.patch \
         file://0024-gl-effects-use-non-PBO-GLMemory-for-internal-texture.patch \
         file://0025-opencv-Add-video-stitching-support-based-on-Open-CV.patch \
+        file://0026-player-Add-configuration-for-enabling-accurate-seeks.patch \
+        file://0027-player-Add-get-track-number-media-info-API.patch \
+        file://0028-Specific-patches-for-gstplayer-API.patch \
+        file://0029-player-Add-overlayvideorenderer-video-sink.patch \
+        file://0030-player-Add-get-video-snapshot-API.patch \
 "
 
 # include fragment shaders
