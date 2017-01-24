@@ -6,15 +6,27 @@ SRC_URI_append = " \
 
 PACKAGECONFIG_remove_imx = "eigen python3"
 
-# Disable qt for opencv for now as non-qt builds installs qt because of the dependency of imx-gpu-sdk
-# and gstreamer on opencv for fb/xwayland backends.
+PACKAGECONFIG[qt5] = " \
+    -DWITH_QT=ON -DWITH_GTK=OFF \
+        -DOE_QMAKE_PATH_EXTERNAL_HOST_BINS=${STAGING_BINDIR_NATIVE}/qt5 \
+        -DCMAKE_PREFIX_PATH=${STAGING_BINDIR_NATIVE}/cmake, \
+    -DWITH_QT=OFF, \
+    qtbase, \
+    \
+"
 
-# inherit cmake_qt5
+QT5_PACKAGECONFIG_APPEND = " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qt5', \
+       bb.utils.contains('DISTRO_FEATURES',     'x11',    '', \
+                                                       'qt5', d), d)}"
+GTK_PACKAGECONFIG_REMOVE = " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
+PACKAGECONFIG_append_mx8dv = " ${QT5_PACKAGECONFIG_APPEND}"
+PACKAGECONFIG_append_mx8qm = " ${QT5_PACKAGECONFIG_APPEND}"
+PACKAGECONFIG_remove_mx8dv = "${GTK_PACKAGECONFIG_REMOVE}"
+PACKAGECONFIG_remove_mx8qm = "${GTK_PACKAGECONFIG_REMOVE}"
 
-# PACKAGECONFIG[qt5] = "-DWITH_QT=ON -DWITH_GTK=OFF,-DWITH_QT=OFF,qtbase,"
 
-# PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' qt5', \
-#                bb.utils.contains('DISTRO_FEATURES', 'x11', '', ' qt5', d), d)}"
 
 # This is needed to run samples that contains images
 do_install_append() {
