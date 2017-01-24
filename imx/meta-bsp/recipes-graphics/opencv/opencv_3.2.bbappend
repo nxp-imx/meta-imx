@@ -6,6 +6,12 @@ SRC_URI_append = " \
 
 PACKAGECONFIG_remove_imx = "eigen python3"
 
+PACKAGECONFIG[openvx] = " \
+    -DWITH_OPENVX=ON -DOPENVX_ROOT=${STAGING_LIBDIR} -DOPENVX_LIB_CANDIDATES='OpenVX;OpenVXU', \
+    -DWITH_OPENVX=OFF, \
+    virtual/libopenvx, \
+    \
+"
 PACKAGECONFIG[qt5] = " \
     -DWITH_QT=ON -DWITH_GTK=OFF \
         -DOE_QMAKE_PATH_EXTERNAL_HOST_BINS=${STAGING_BINDIR_NATIVE}/qt5 \
@@ -21,8 +27,8 @@ QT5_PACKAGECONFIG_APPEND = " \
                                                        'qt5', d), d)}"
 GTK_PACKAGECONFIG_REMOVE = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
-PACKAGECONFIG_append_mx8dv = " opencl ${QT5_PACKAGECONFIG_APPEND}"
-PACKAGECONFIG_append_mx8qm = " opencl ${QT5_PACKAGECONFIG_APPEND}"
+PACKAGECONFIG_append_mx8dv = " opencl openvx ${QT5_PACKAGECONFIG_APPEND}"
+PACKAGECONFIG_append_mx8qm = " opencl openvx ${QT5_PACKAGECONFIG_APPEND}"
 PACKAGECONFIG_remove_mx8dv = "${GTK_PACKAGECONFIG_REMOVE}"
 PACKAGECONFIG_remove_mx8qm = "${GTK_PACKAGECONFIG_REMOVE}"
 
