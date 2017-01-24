@@ -1,3 +1,9 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+SRC_URI_append = " \
+    file://Avoid-segmentation-fault.patch \
+"
+
 PACKAGECONFIG_remove_imx = "eigen"
 
 # Disable qt for opencv for now as non-qt builds installs qt because of the dependency of imx-gpu-sdk

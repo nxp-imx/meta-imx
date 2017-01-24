@@ -1,0 +1,13 @@
+Index: git/modules/core/src/command_line_parser.cpp
+===================================================================
+--- git.orig/modules/core/src/command_line_parser.cpp	2017-01-24 09:21:45.900724275 -0600
++++ git/modules/core/src/command_line_parser.cpp	2017-01-24 10:34:17.000000000 -0600
+@@ -10,7 +10,7 @@
+ static String cat_string(const String& str)
+ {
+     int left = 0, right = (int)str.length();
+-    while( left <= right && str[left] == ' ' )
++    while( left < right && str[left] == ' ' )
+         left++;
+     while( right > left && str[right-1] == ' ' )
+         right--;
