@@ -13,11 +13,11 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11 libxd
             libpng"
 
 EXTRA_PROVIDES = ""
-EXTRA_PROVIDES_mx6q   = "virtual/libgl virtual/libgles1 virtual/libgles2"
+EXTRA_PROVIDES_mx6q   = "virtual/libgl virtual/libgles1 virtual/libgles2 virtual/opencl-icd opencl-headers"
 EXTRA_PROVIDES_mx6dl  = "virtual/libgl virtual/libgles1 virtual/libgles2"
 EXTRA_PROVIDES_mx6sx  = "virtual/libgl virtual/libgles1 virtual/libgles2"
 EXTRA_PROVIDES_mx7ulp = "virtual/libgl virtual/libgles1 virtual/libgles2"
-EXTRA_PROVIDES_mx8    = "virtual/libgl virtual/libgles1 virtual/libgles2"
+EXTRA_PROVIDES_mx8    = "virtual/libgl virtual/libgles1 virtual/libgles2 virtual/opencl-icd opencl-headers virtual/libopenvx"
 PROVIDES += "imx-gpu-viv virtual/wayland-egl virtual/libgal-x11 virtual/egl virtual/libopenvg ${EXTRA_PROVIDES}"
 RPROVIDES_${PN}_mx6q   += "imx-gpu-viv"
 RPROVIDES_${PN}_mx6dl  += "imx-gpu-viv"
