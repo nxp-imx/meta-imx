@@ -21,8 +21,8 @@ QT5_PACKAGECONFIG_APPEND = " \
                                                        'qt5', d), d)}"
 GTK_PACKAGECONFIG_REMOVE = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
-PACKAGECONFIG_append_mx8dv = " ${QT5_PACKAGECONFIG_APPEND}"
-PACKAGECONFIG_append_mx8qm = " ${QT5_PACKAGECONFIG_APPEND}"
+PACKAGECONFIG_append_mx8dv = " opencl ${QT5_PACKAGECONFIG_APPEND}"
+PACKAGECONFIG_append_mx8qm = " opencl ${QT5_PACKAGECONFIG_APPEND}"
 PACKAGECONFIG_remove_mx8dv = "${GTK_PACKAGECONFIG_REMOVE}"
 PACKAGECONFIG_remove_mx8qm = "${GTK_PACKAGECONFIG_REMOVE}"
 
