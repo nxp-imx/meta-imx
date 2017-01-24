@@ -4,6 +4,10 @@ SRC_URI_append = " \
     file://Avoid-segmentation-fault.patch \
 "
 
+SRCREV_opencv_extra = "c41d35c0be5feeb884e7da57c201461cb9877863"
+
+SRC_URI_append = "git://github.com/opencv/opencv_extra.git;destsuffix=opencv_extra;name=opencv_extra"
+
 PACKAGECONFIG_remove_imx = "eigen python3"
 
 PACKAGECONFIG[openvx] = " \
@@ -20,6 +24,10 @@ PACKAGECONFIG[qt5] = " \
     qtbase, \
     \
 "
+PACKAGECONFIG[test] = " \
+    -DBUILD_TESTS=ON -DINSTALL_TESTS=ON -DOPENCV_TEST_DATA_PATH=${S}/../opencv_extra/testdata, \
+    -DBUILD_TESTS=OFF -DINSTALL_TESTS=OFF, \
+"
 
 QT5_PACKAGECONFIG_APPEND = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qt5', \
@@ -27,19 +35,14 @@ QT5_PACKAGECONFIG_APPEND = " \
                                                        'qt5', d), d)}"
 GTK_PACKAGECONFIG_REMOVE = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
-PACKAGECONFIG_append_mx8dv = " opencl openvx ${QT5_PACKAGECONFIG_APPEND}"
-PACKAGECONFIG_append_mx8qm = " opencl openvx ${QT5_PACKAGECONFIG_APPEND}"
+PACKAGECONFIG_append_mx8dv = " opencl openvx ${QT5_PACKAGECONFIG_APPEND} test"
+PACKAGECONFIG_append_mx8qm = " opencl openvx ${QT5_PACKAGECONFIG_APPEND} test"
 PACKAGECONFIG_remove_mx8dv = "${GTK_PACKAGECONFIG_REMOVE}"
 PACKAGECONFIG_remove_mx8qm = "${GTK_PACKAGECONFIG_REMOVE}"
 
-
-
-# This is needed to run samples that contains images
 do_install_append() {
-
-    install -d ${D}${datadir}/OpenCV/samples/data
-    cp -r ${S}/samples/data/* ${D}${datadir}/OpenCV/samples/data
+    if ${@bb.utils.contains("PACKAGECONFIG", "samples", "true", "false", d)}; then
+        install -d ${D}${datadir}/OpenCV/samples/data
+        cp -r ${S}/samples/data/* ${D}${datadir}/OpenCV/samples/data
+    fi
 }
-
-PACKAGES_append = " ${PN}-data"
-FILES_${PN}-data = "${datadir}/OpenCV/samples/data/"
