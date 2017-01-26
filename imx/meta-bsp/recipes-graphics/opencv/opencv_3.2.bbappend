@@ -4,7 +4,7 @@ SRC_URI_append = " \
     file://Avoid-segmentation-fault.patch \
 "
 
-PACKAGECONFIG_remove_imx = "eigen"
+PACKAGECONFIG_remove_imx = "eigen python3"
 
 # Disable qt for opencv for now as non-qt builds installs qt because of the dependency of imx-gpu-sdk
 # and gstreamer on opencv for fb/xwayland backends.
