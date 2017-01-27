@@ -1,7 +1,7 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
 # Copyright 2017 NXP
 
-require firmware-imx.inc
+require recipes-bsp/firmware-imx/firmware-imx.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=d4f548f93b5fe0ee2bc86758c344412d"
 
 SRC_URI[md5sum] = "140d489744e2d3cce3b8fd17731a3cce"
