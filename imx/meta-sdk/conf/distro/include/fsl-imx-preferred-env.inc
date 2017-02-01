@@ -59,12 +59,12 @@ PREFERRED_PROVIDER_virtual/libgles1_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx7ulp = "imx-gpu-viv"
 
-# Use systemd as default init manager - comment out for now
-#VIRTUAL-RUNTIME_init_manager = "systemd"
-#PREFERRED_PROVIDER_udev = "systemd"
-#PREFERRED_PROVIDER_udev-utils = "systemd"
-#DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
-#IMX_DEFAULT_DISTRO_FEATURES += " systemd"
+# Use systemd as default init manager
+VIRTUAL-RUNTIME_init_manager = "systemd"
+PREFERRED_PROVIDER_udev = "systemd"
+PREFERRED_PROVIDER_udev-utils = "systemd"
+DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
+IMX_DEFAULT_DISTRO_FEATURES += " systemd"
 
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx7ulp = "1"
