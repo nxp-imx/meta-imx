@@ -1,6 +1,6 @@
 DISTRO = "fsl-imx"
-DISTRO_NAME = "Freescale i.MX Release Distro"
-DISTRO_VERSION = "4.1.30-3.0.0"
+DISTRO_NAME = "NXP i.MX Release Distro"
+DISTRO_VERSION = "4.1.33-3.0.0"
 DISTRO_CODENAME = "master"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
