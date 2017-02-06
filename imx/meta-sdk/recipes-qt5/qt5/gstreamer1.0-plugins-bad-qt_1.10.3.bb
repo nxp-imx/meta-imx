@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=73a5855a8119deb017f5f13cf327095d \
                     file://gst/tta/crc32.h;beginline=12;endline=29;md5=27db269c575d1e5317fffca2d33b3b50 \
                     file://gst/tta/filters.h;beginline=12;endline=29;md5=8a08270656f2f8ad7bb3655b83138e5a"
 
-SRC_URI[md5sum] = "823f4c33fe27c61332c0122273217988"
-SRC_URI[sha256sum] = "0795ca9303a99cc7e44dda0e6e18524de02b39892e4b68eaba488f7b9db53a3a"
+SRC_URI[md5sum] = "e59798c86a670041de2e61856ea43d2a"
+SRC_URI[sha256sum] = "24099351fb6984c9e7560de06e072ff2e33d0b2db38b8fcc7afefb536e5094e7"
 
 #qt5 configuratin only support "--disable-qt"
 #and in default, it is disabled, need to remove the default setting to enable it.
@@ -52,7 +52,7 @@ do_install_append() {
     fi
 }
 
-S = "${WORKDIR}/gst-plugins-bad-1.10.2"
+S = "${WORKDIR}/gst-plugins-bad-1.10.3"
 
 INSANE_SKIP_gstreamer1.0-plugins-bad-qt-qmlgl += "build-deps"
 
