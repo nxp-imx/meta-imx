@@ -46,6 +46,7 @@ SRC_URI_append = " \
         file://0028-Specific-patches-for-gstplayer-API.patch \
         file://0029-player-Add-overlayvideorenderer-video-sink.patch \
         file://0030-player-Add-get-video-snapshot-API.patch \
+        file://0031-gl-window-attach-the-GMaincontext-in-window-struct-t.patch \
 "
 
 # include fragment shaders
