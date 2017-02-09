@@ -21,7 +21,7 @@ Index: weston-1.11.0/xwayland/selection.c
  					  wm->atom.clipboard, mask);
  
  	seat = weston_wm_pick_seat(wm);
-+	if (seat == NULL)
++	if (seat != NULL)
 +		return;
  	wm->selection_listener.notify = weston_wm_set_selection;
  	wl_signal_add(&seat->selection_signal, &wm->selection_listener);
