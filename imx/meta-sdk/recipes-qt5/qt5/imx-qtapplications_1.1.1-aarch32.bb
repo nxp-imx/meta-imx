@@ -15,8 +15,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
            file://qtimxplayer.desktop \
            file://qtimxcamera.desktop \
 "
-SRC_URI[md5sum] = "ad7f7effd113bd89e4b287477432ef38"
-SRC_URI[sha256sum] = "949fd1ebeeabf9acb0624967e31df596ba8f2e0ce5def83e10155220d66764e5"
+SRC_URI[md5sum] = "9ef6cd6fa96af1119951582e04e693cc"
+SRC_URI[sha256sum] = "45825e6549f336d1a10a30fa968b9e4022433d0693f924d2528a667e8aa96fd5"
 
 USE_X11 = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 
