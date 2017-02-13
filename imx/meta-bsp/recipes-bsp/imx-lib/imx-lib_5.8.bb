@@ -16,3 +16,8 @@ PLATFORM_mx7 = "IMX7"
 PLATFORM_mx6ul = "IMX6UL"
 # add this until imx-lib makefile is changed to exclude 6SLL
 PLATFORM_mx6sll = "IMX6UL"
+
+# Remove pxp library from build 
+do_configure_prepend() {
+    rm -rf ${S}/pxp
+}
