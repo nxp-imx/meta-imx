@@ -13,4 +13,4 @@ SRC_URI[sha256sum] = "581d87a7ab7bca61cbaf89b1eccc403ae28f1bb664b34afe38429034a4
 
 PACKAGE_FP_TYPE = "hardfp"
 
-COMPATIBLE_MACHINE = "(mx6q|mx6dl|mx6sx|mx6sl|mx7ulp)"
+COMPATIBLE_MACHINE = "(mx7ulp)"

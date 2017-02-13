@@ -43,21 +43,24 @@ DEFAULTTUNE_mx7ulp = "cortexa7hf-neon"
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
 
-# preferred versions of recipes-graphics for mx6
-PREFERRED_PROVIDER_virtual/libg2d_mx6 = "imx-gpu-g2d"
-PREFERRED_PROVIDER_virtual/libg2d_mx7ulp = "imx-gpu-g2d"
-PREFERRED_PROVIDER_virtual/libg2d_mx8 = "imx-dpu-g2d-mx8"
-PREFERRED_VERSION_imx-gpu-viv_mx6 = "6.2.1.p0-aarch32"
-PREFERRED_VERSION_imx-gpu-viv_mx7ulp = "6.2.1.p0-aarch32"
-PREFERRED_VERSION_xf86-video-imxfb-vivante_mx6 = "6.2.1.p0"
-PREFERRED_VERSION_xf86-video-imxfb-vivante_mx7up = "6.2.1.p0"
-PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx6 = "6.2.1.p0"
-PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx7ulp = "6.2.1.p0"
-
+# preferred versions of recipes-graphics
+PREFERRED_PROVIDER_virtual/libg2d_imxgpu3d = "imx-gpu-g2d"
 PREFERRED_PROVIDER_virtual/egl_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles1_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx7ulp = "imx-gpu-viv"
+
+IMX_V5_GRAPHICS = "5.0.11.p8.7"
+IMX_V6_GRAPHICS = "6.2.1.p0"
+
+PREFERRED_VERSION_imx-gpu-viv_mx6 = "${IMX_V5_GRAPHICS}-hfp"
+PREFERRED_VERSION_imx-gpu-viv_mx7ulp= "${IMX_V6_GRAPHICS}-aarch32"
+PREFERRED_VERSION_xf86-video-imxfb-vivante_mx6 = "${IMX_V5_GRAPHICS}"
+PREFERRED_VERSION_xf86-video-imxfb-vivante_mx7ulp = "${IMX_V6_GRAPHICS}"
+PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx6 = "${IMX_V5_GRAPHICS}"
+PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx7ulp = "${IMX_V6_GRAPHICS}"
+PREFERRED_VERSION_virtual/libg2d_mx6 = "${IMX_V5_GRAPHICS}"
+PREFERRED_VERSION_virtual/libg2d_mx7ulp = "${IMX_V6_GRAPHICS}"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"
