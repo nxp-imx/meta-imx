@@ -44,7 +44,7 @@ DEFAULTTUNE_mx7ulp = "cortexa7hf-neon"
 USE_GPU_VIV_MODULE = "1"
 
 # preferred versions of recipes-graphics
-PREFERRED_PROVIDER_virtual/libg2d_imxgpu3d = "imx-gpu-g2d"
+PREFERRED_PROVIDER_virtual/libg2d_mx6 = "imx-gpu-g2d"
 PREFERRED_PROVIDER_virtual/egl_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles1_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx7ulp = "imx-gpu-viv"
@@ -60,6 +60,7 @@ PREFERRED_VERSION_xf86-video-imxfb-vivante_mx7ulp = "${IMX_V6_GRAPHICS}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx6 = "${IMX_V5_GRAPHICS}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx7ulp = "${IMX_V6_GRAPHICS}"
 PREFERRED_VERSION_virtual/libg2d_mx6 = "${IMX_V5_GRAPHICS}"
+PREFERRED_VERSION_imx-gpu-g2d_mx6 = "${IMX_V5_GRAPHICS}"
 PREFERRED_VERSION_virtual/libg2d_mx7ulp = "${IMX_V6_GRAPHICS}"
 
 # Use systemd as default init manager

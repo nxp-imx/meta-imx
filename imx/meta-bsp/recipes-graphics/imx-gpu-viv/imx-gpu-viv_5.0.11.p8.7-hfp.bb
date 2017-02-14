@@ -6,7 +6,7 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv.inc
 SRC_URI[md5sum] = "97b1424bc8ea23bf8c35fdbe6f8716ce"
 SRC_URI[sha256sum] = "6792a15b1688e730bc1de956fe6e5daba5a7b0d63a6773973f984e37ac5df399"
 
-PROVIDES_remove = "virtual/libg2d libgal-imx"
+PROVIDES_remove = "virtual/libg2d"
 PACKAGES_remove = "imx-gpu-viv-g2d imx-gpu-viv-g2d-dev"
 
 do_install () {
