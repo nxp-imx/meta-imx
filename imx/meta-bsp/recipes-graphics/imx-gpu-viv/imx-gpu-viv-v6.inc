@@ -236,6 +236,7 @@ INSANE_SKIP_libclc-imx += "dev-deps"
 
 RDEPENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'libgc-wayland-protocol-imx', '', d)}"
 RDEPENDS_${PN}_mx6 += "imx-gpu-g2d"
+RDEPENDS_${PN}_mx7ulp += "imx-gpu-g2d"
 RDEPENDS_${PN}_mx8 += "imx-dpu-g2d-mx8"
 
 FILES_libclc-imx = "${libdir}/libCLC${SOLIBS}"
