@@ -45,6 +45,7 @@ USE_GPU_VIV_MODULE = "1"
 
 # preferred versions of recipes-graphics
 PREFERRED_PROVIDER_virtual/libg2d_mx6 = "imx-gpu-g2d"
+PREFERRED_PROVIDER_virtual/libg2d_mx7ulp = "imx-gpu-g2d"
 PREFERRED_PROVIDER_virtual/egl_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles1_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx7ulp = "imx-gpu-viv"
