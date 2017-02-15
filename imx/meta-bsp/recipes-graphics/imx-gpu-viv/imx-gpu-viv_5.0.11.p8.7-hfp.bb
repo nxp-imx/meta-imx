@@ -97,7 +97,7 @@ do_install () {
     done
 
     # FIXME: MX6SL does not have 3D support; hack it for now
-    if [ "${IS_MX6SL}" = "1" ]; then
+    if [ "${IMXGPU}" = "2d" ]; then
         rm -rf ${D}${libdir}/libCLC* ${D}${includedir}/CL \
                \
                ${D}${libdir}/libGL* ${D}${includedir}/GL* \ 
