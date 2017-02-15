@@ -1,8 +1,8 @@
-PROVIDES_remove_imxgpu2d = "gbm"
-PROVIDES_remove_mx7ulp = "virtual/libgles1 virtual/libgles2 virtual/libopenvg virtual/egl virtual/libgl gbm"
+GBM_REMOVES = "${@bb.utils.contains("DISTRO_FEATURES", "imx_v6_graphics", "gbm", "", d)}"
+GBM_REMOVES_mx7ulp = "gbm"
 
-PACKAGECONFIG_remove_imxgpu2d = "gbm"
-PACKAGECONFIG_remove_mx7ulp = "egl gles gbm"
+PROVIDES_remove_imxgpu2d = "${GBM_REMOVES}"
+PACKAGECONFIG_remove_imxgpu2d = "${GBM_REMOVES}"
 
 USE_V6_GRAPHICS = "${@bb.utils.contains("DISTRO_FEATURES", "imx_v6_graphics", "yes", "no", d)}"
 USE_V6_GRAPHICS_mx7ulp = "yes"
