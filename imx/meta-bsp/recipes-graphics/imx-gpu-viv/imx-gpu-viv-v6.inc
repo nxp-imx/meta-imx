@@ -11,7 +11,6 @@ DEPENDS += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
        bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes mesa', \
                                                        '', d), d)} \
-    libpng \
 "
 
 EXTRA_PROVIDES = ""
