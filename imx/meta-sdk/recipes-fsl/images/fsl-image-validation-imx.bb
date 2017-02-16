@@ -28,6 +28,8 @@ IMAGE_FEATURES += " \
        bb.utils.contains('DISTRO_FEATURES',     'x11', 'x11-base x11-sato', \
                                                        '', d), d)} \
 "
+ERPC_COMPS ?= ""
+ERPC_COMPS_append_mx7ulp = "packagegroup-imx-erpc"
 
 CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-core-full-cmdline \
@@ -41,4 +43,5 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-fsl-gstreamer1.0-full \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-init', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
+    ${ERPC_COMPS} \
 "
