@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=be67a88e9e6c841043b005ad7bcf8309"
 
 inherit deploy fsl-eula-unpack
 
-M4_PKG_NAME = "imx7ulp-m4-demo-alpha"
+M4_PKG_NAME = "imx7ulp-m4-demo-beta"
 SRC_URI = "${FSL_MIRROR}/${M4_PKG_NAME}.bin;fsl-eula=true"
 S = "${WORKDIR}/${M4_PKG_NAME}"
 
