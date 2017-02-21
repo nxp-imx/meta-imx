@@ -53,7 +53,7 @@ PREFERRED_PROVIDER_virtual/libgl_mx7ulp = "imx-gpu-viv"
 
 GRAPHICS_V5        = "5.0.11.p8.7"
 GRAPHICS_V5_SUFFIX = "hfp"
-GRAPHICS_V6        = "6.2.1.p0"
+GRAPHICS_V6        = "6.2.0.p4"
 GRAPHICS_V6_SUFFIX = "aarch32"
 
 GRAPHICS_VERSION               = "${GRAPHICS_V5}"
