@@ -22,4 +22,6 @@ do_install_append () {
     fi
 }
 
+SYSTEMD_SERVICE_${PN} += "connman-env.service"
+
 FILES_${PN} += "${systemd_unitdir}/system/connman-env.service"
