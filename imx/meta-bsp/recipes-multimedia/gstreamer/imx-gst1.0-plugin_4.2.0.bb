@@ -59,10 +59,10 @@ PACKAGES =+ "${PN}-gplay ${PN}-libgplaycore ${PN}-libgstfsl ${PN}-grecorder ${PN
 BEEP_RDEPENDS = "imx-codec-aac imx-codec-mp3 imx-codec-oggvorbis"
 RDEPENDS_${PN} += "imx-parser ${BEEP_RDEPENDS} gstreamer1.0-plugins-good-id3demux "
 
+# overlaysink rely on G2D,
+# cannot be supported on i.MX6SLL & i.MX6UL & i.MX6ULL & i.MX7D
 PACKAGECONFIG ?= ""
-PACKAGECONFIG_mx6 = "overlaysink"
-PACKAGECONFIG_mx7ulp = "overlaysink"
-PACKAGECONFIG_mx8 = "overlaysink"
+PACKAGECONFIG_imxgpu2d = "overlaysink"
 
 
 # FIXME: Add all features
