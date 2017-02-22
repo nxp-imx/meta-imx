@@ -15,4 +15,4 @@ PLATFORM_mx6ul = "IMX6Q"
 PLATFORM_mx7 = "IMX6Q"
 PLATFORM_mx6sll = "IMX6Q"
 
-COMPATIBLE_MACHINE = "(mx6|mx6ul|mx6sll|mx7)"
+COMPATIBLE_MACHINE = "(mx6|mx7)"
