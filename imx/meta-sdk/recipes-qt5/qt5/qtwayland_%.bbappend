@@ -28,7 +28,5 @@ PACKAGECONFIG[libhybris-egl] = "CONFIG+=config_libhybris_egl_server CONFIG+=done
 EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
 
 PACKAGECONFIG_remove_mx6 = "xcompositor"
-PACKAGECONFIG_remove_mx6ul = "xcompositor"
-PACKAGECONFIG_remove_mx6sll = "xcompositor"
 PACKAGECONFIG_remove_mx7 = "xcompositor"
 PACKAGECONFIG_remove_mx8 = "xcompositor"
