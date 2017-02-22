@@ -17,8 +17,6 @@ SRC_URI_remove = "file://0004-alsa-set-availability-for-some-unavailable-profile
 SRC_URI_remove = "file://0004-card-remove-pa_card_new_data.active_profile.patch "
 
 SRC_URI_append_mx6 = "${IMX_PATCHES}"
-SRC_URI_append_mx6ul = "${IMX_PATCHES}"
-SRC_URI_append_mx6sll = "${IMX_PATCHES}"
 SRC_URI_append_mx7 = "${IMX_PATCHES}"
 SRC_URI_append_mx8 = "${IMX_PATCHES}"
 
@@ -26,8 +24,7 @@ SRC_URI_append_mx8 = "${IMX_PATCHES}"
 PACKAGECONFIG_append = " autospawn-for-root"
 
 # This default setting should be added on all i.MX SoC,
-# For now, only the setting for mx6/mx6ul/mx7 has been upstreamed
-SRC_URI_append_mx6sll = " file://daemon.conf file://default.pa"
+# For now, the setting for mx6(including mx6ul & mx6sll)/mx7 has been upstreamed
 SRC_URI_append_mx8 = " file://daemon.conf file://default.pa"
 
 # Install a new daemon.conf for all platform to increase the rlimit-rttime
@@ -38,5 +35,4 @@ do_install_append () {
     fi
 }
 
-PACKAGE_ARCH_mx6sll = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
