@@ -22,8 +22,6 @@ DEFAULT_PREFERENCE = "1"
 DO_CONFIG_V7_COPY = "no"
 DO_CONFIG_V7_COPY_mx6 = "yes"
 DO_CONFIG_V7_COPY_mx7 = "yes"
-DO_CONFIG_V7_COPY_mx6sll = "yes"
-DO_CONFIG_V7_COPY_mx6ul = "yes"
 DO_CONFIG_V7_COPY_mx7ulp = "yes"
 
 addtask copy_defconfig after do_patch before do_preconfigure #do_configure
@@ -37,4 +35,4 @@ do_copy_defconfig () {
     fi
 }
 
-COMPATIBLE_MACHINE = "(mx6|mx6ul|mx6sll|mx7)"
+COMPATIBLE_MACHINE = "(mx6|mx7)"
