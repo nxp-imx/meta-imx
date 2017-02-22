@@ -36,6 +36,12 @@ do_install () {
     fi
 }
 
+# Only install the qml apps for imx7ulp
+do_install_mx7ulp () {
+    install -d ${D}${datadir}/qt5/examples/multimedia/
+    cp -r ${S}/usr/share/qt5/examples/multimedia/qmlgltest/ ${D}${datadir}/qt5/examples/multimedia/
+}
+
 FILES_${PN} = " \
     ${datadir}/qt5/examples/*/* \
     ${datadir}/applications/* \
