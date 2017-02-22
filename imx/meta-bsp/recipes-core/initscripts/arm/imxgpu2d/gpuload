@@ -9,12 +9,11 @@ then
   then
         rm -f $FILEVG
   fi
-  if [ $CPUREV == "i.MX6DL" ] || [ $CPUREV == "i.MX6SX" ]
-  then
-        ln -s $FILEVG3D $FILEVG
-  fi
   if [ $CPUREV == "i.MX6QP" ] || [ $CPUREV == "i.MX6Q" ] || [ $CPUREV == "i.MX6SL" ]
   then
+        # Use GC355 VG
         ln -s $FILEVG355 $FILEVG
+  else
+        ln -s $FILEVG3D $FILEVG
   fi
 fi
