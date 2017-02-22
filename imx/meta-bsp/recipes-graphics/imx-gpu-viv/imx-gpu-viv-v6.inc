@@ -39,7 +39,6 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libvdk-imx libvdk-imx-dev \
 	libegl-imx libegl-imx-dev \
 	libgal-imx libgal-imx-dev \
-	libvivante-imx libvivante-imx-dev \
 	libvivante-dri-imx \
 	libvsc-imx \
 	libgbm-imx libgbm-imx-dev \
@@ -175,7 +174,6 @@ do_install () {
     ln -sf libEGL.so.1.0 ${D}${libdir}/libEGL.so
     mv ${D}${libdir}/libGAL-${backend}.so ${D}${libdir}/libGAL.so
     mv ${D}${libdir}/libVDK-${backend}.so ${D}${libdir}/libVDK.so
-    mv ${D}${libdir}/libVIVANTE-${backend}.so ${D}${libdir}/libVIVANTE.so
 
     # update libglesv2 as backend dependent
     rm -rf ${D}${libdir}/libGLESv2*
@@ -251,7 +249,7 @@ INSANE_SKIP_libgal-imx += "build-deps"
 
 FILES_libvsc-imx = "${libdir}/libVSC${SOLIBS}"
 
-FILES_libgbm-imx = "${libdir}/libgbm${SOLIBS} ${libdir}/libVIVANTE.gbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
+FILES_libgbm-imx = "${libdir}/libgbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
 FILES_libgbm-imx-dev = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
 
 FILES_libvulkan-imx = "${libdir}/libvulkan_VSI${SOLIBS}"
@@ -297,9 +295,6 @@ FILES_libopenvg-imx-dev = "${includedir}/VG ${libdir}/libOpenVG*${SOLIBSDEV} ${l
 
 FILES_libvdk-imx = "${libdir}/libVDK${SOLIBS}"
 FILES_libvdk-imx-dev = "${includedir}/*vdk*.h ${libdir}/libVDK${SOLIBSDEV}"
-
-FILES_libvivante-imx = "${libdir}/libVIVANTE${SOLIBS}"
-FILES_libvivante-imx-dev = "${libdir}/libVIVANTE${SOLIBSDEV}"
 
 FILES_libvivante-dri-imx = "${libdir}/dri/vivante_dri.so"
 RDEPENDS_libvivante-dri-imx = "libdrm"
