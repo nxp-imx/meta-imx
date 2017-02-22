@@ -10,6 +10,3 @@ SRC_URI_append_mx8 = " file://0001-add-conf-for-multichannel-support-in-imx.patc
 
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
 
-SRC_URI_append_mx6sll = " file://0001-add-conf-for-multichannel-support-in-imx.patch"
-
-PACKAGE_ARCH_mx6sll = "${MACHINE_SOCARCH}"
