@@ -19,28 +19,28 @@ SRC_URI[md5sum] = "236206e654b5d6217f35a8274ce152f9"
 SRC_URI[sha256sum] = "f066aa0d6d73732538a31c62d9ec274803cd9643ca99305bfbf93f59c838115a"
 
 USE_X11 = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
+PLATFORM_HAS_VPU = " "
+PLATFORM_HAS_VPU_imxvpu = "yes"
 
-# for now, imxcamera & imxplayer can only be supported on x11 backend
-# but test_qmlglsrc & test_qmlglsink can be supported on all backends
+# imx-qtapplications will be enabled on board with GPU 3D
+# For now, imxcamera & imxplayer can only be supported on x11 backend for SoC with VPU only (including i.MX6Q & i.MX6DL)
+# And test_qmlglsrc & test_qmlglsink can be supported on all backends
 do_install () {
     if [ "${USE_X11}" = "yes" ]; then
-        install -d ${D}${datadir}/applications
-        install -m 0644 ${WORKDIR}/qt*.desktop ${D}${datadir}/applications
-        install -d ${D}${datadir}/qt5
-        cp -r ${S}/usr/share/qt5/examples ${D}${datadir}/qt5
-        install -d ${D}${datadir}/pixmaps
-        cp -r ${S}/usr/share/pixmaps/* ${D}${datadir}/pixmaps
+        if [ "${PLATFORM_HAS_VPU}" = "yes" ]; then
+            install -d ${D}${datadir}/applications
+            install -m 0644 ${WORKDIR}/qt*.desktop ${D}${datadir}/applications
+            install -d ${D}${datadir}/qt5
+            cp -r ${S}/usr/share/qt5/examples ${D}${datadir}/qt5
+            install -d ${D}${datadir}/pixmaps
+            cp -r ${S}/usr/share/pixmaps/* ${D}${datadir}/pixmaps
+        fi
     else
         install -d ${D}${datadir}/qt5/examples/multimedia/
         cp -r ${S}/usr/share/qt5/examples/multimedia/qmlgltest/ ${D}${datadir}/qt5/examples/multimedia/
     fi
 }
 
-# Only install the qml apps for imx7ulp
-do_install_mx7ulp () {
-    install -d ${D}${datadir}/qt5/examples/multimedia/
-    cp -r ${S}/usr/share/qt5/examples/multimedia/qmlgltest/ ${D}${datadir}/qt5/examples/multimedia/
-}
 
 FILES_${PN} = " \
     ${datadir}/qt5/examples/*/* \
