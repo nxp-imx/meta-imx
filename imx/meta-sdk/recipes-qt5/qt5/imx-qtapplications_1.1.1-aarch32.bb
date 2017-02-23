@@ -34,6 +34,9 @@ do_install () {
             cp -r ${S}/usr/share/qt5/examples ${D}${datadir}/qt5
             install -d ${D}${datadir}/pixmaps
             cp -r ${S}/usr/share/pixmaps/* ${D}${datadir}/pixmaps
+        else
+            install -d ${D}${datadir}/qt5/examples/multimedia/
+            cp -r ${S}/usr/share/qt5/examples/multimedia/qmlgltest/ ${D}${datadir}/qt5/examples/multimedia/
         fi
     else
         install -d ${D}${datadir}/qt5/examples/multimedia/
