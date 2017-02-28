@@ -228,8 +228,6 @@ ALLOW_EMPTY_${PN} = "1"
 INSANE_SKIP_imx-gpu-viv-dev += "dev-elf"
 INSANE_SKIP_libclc-imx += "dev-deps"
 
-RDEPENDS_${PN}_imxgpu2d += "virtual/libg2d"
-
 FILES_libclc-imx = "${libdir}/libCLC${SOLIBS}"
 FILES_libclc-imx-dev = "${includedir}/CL ${libdir}/libCLC${SOLIBSDEV}"
 

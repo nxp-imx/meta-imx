@@ -7,7 +7,6 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=88595f92466edd79be7f4f9547ffa0ef"
 
 PROVIDES += "virtual/libg2d"
-RPROVIDES_${PN} += "imx-gpu-g2d virtual/libg2d"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
