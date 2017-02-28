@@ -1,8 +1,8 @@
 [Unit]
 Description=Weston Wayland Compositor (on tty7)
 RequiresMountsFor=/run
-Conflicts=getty at tty7.service plymouth-quit.service
-After=systemd-user-sessions.service getty at tty7.service plymouth-quit-wait.service
+Conflicts=getty@tty7.service plymouth-quit.service
+After=systemd-user-sessions.service getty@tty7.service plymouth-quit-wait.service
 
 [Service]
 User=root
