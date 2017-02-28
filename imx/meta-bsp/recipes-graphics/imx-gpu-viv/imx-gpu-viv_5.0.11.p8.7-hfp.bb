@@ -122,6 +122,4 @@ do_install () {
     chown -R root:root "${D}"
 }
 
-RDEPENDS_${PN} +="virtual/libg2d"
-
 RPROVIDES_libwayland-viv-mx6 += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xf86-video-mx6fb-vivante', '', d)}"
