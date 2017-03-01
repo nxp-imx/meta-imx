@@ -5,7 +5,7 @@ SECTION = "devel"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4cd8c0aedc7a0623476669377d7eeda8"
 
-DEPENDS = "boost"
+DEPENDS = "boost virtual/libgl"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/archive/v${PV}.tar.gz"
 SRC_URI[md5sum] = "fc57b024e80ebb13301bd0983826cad3"
