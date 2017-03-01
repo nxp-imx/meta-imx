@@ -67,11 +67,11 @@ PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${GRAPHICS_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${GRAPHICS_VERSION}"
 
 # Use systemd as default init manager
-#VIRTUAL-RUNTIME_init_manager = "systemd"
-#PREFERRED_PROVIDER_udev = "systemd"
-#PREFERRED_PROVIDER_udev-utils = "systemd"
-#DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
-#IMX_DEFAULT_DISTRO_FEATURES += " systemd"
+VIRTUAL-RUNTIME_init_manager = "systemd"
+PREFERRED_PROVIDER_udev = "systemd"
+PREFERRED_PROVIDER_udev-utils = "systemd"
+DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
+IMX_DEFAULT_DISTRO_FEATURES += " systemd"
 
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx7ulp = "1"
