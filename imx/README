@@ -1,7 +1,8 @@
-NXP's 4.1.33-3.0.0 Yocto Project BSP
+NXP's 4.1.33-7ULP Beta Yocto Project BSP
 ================================================
 
-This BSP is an NXP release providing support for the following processors
+This BSP release is a standalong release for i.MX 7ULP Beta and is
+validated only for i.MX 7ULP
 
 The following boards were not tested in this release but this release contains updates
 that might affect these boards.
@@ -48,17 +49,12 @@ Quick Start Guide
 See the Freescale Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX NXP BSP repo
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth
+$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-morty -m imx-4.1.33_7ulp_beta.xml
 
 Download the Yocto Project NXP Layers:
 $: repo sync
 
 If errors on repo init, remove the .repo directory and try repo init again.
-
-Note that this downloads the latest release for 4.1.33-3.0.0 plus patches after.
-
-To download only the 4.1.15-2.0.0 release use this for repo init command
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth -m imx-4.1.33-3.0.0.xml
 
 Run i.MX NXP Yocto Project Setup:
 $: MACHINE=< machine name> source fsl-setup-release.sh -b <build directory> -e <backend fb, wayland, x11>
