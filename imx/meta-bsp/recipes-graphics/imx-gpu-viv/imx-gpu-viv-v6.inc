@@ -247,6 +247,7 @@ FILES_libvsc-imx = "${libdir}/libVSC${SOLIBS}"
 
 FILES_libgbm-imx = "${libdir}/libgbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
 FILES_libgbm-imx-dev = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
+DEPENDS_libgbm-imx += "libdrm"
 
 FILES_libvulkan-imx = "${libdir}/libvulkan_VSI${SOLIBS}"
 FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/libvulkan_VSI${SOLIBSDEV}"
