@@ -2,16 +2,16 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
 
-PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', \
-                                bb.utils.contains('DISTRO_FEATURES', 'x11', \
-				    'opengl egl', 'egl', d), '', d)}"
-PACKAGECONFIG_GL_imxgpu3d = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2 egl', '', d)}"
+PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'opengl', '', d)}"
+PACKAGECONFIG_GL_imxgpu3d = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '', d)}"
 
 PACKAGECONFIG_append_mx6q = " opencv"
 PACKAGECONFIG_append_mx6qp = " opencv"
 PACKAGECONFIG_append_mx8 = " opencv"
+PACKAGECONFIG_remove_mx6sl = " gles2"
 
-# Disable x11 plugin for wayland build
+#revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
+PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
 PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland"
 
 SRC_URI_append = " \
