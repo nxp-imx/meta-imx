@@ -191,9 +191,9 @@ do_install () {
         rm ${D}${libdir}/libwayland-viv.*
     fi
 
-    for backend in wl x11 fb dri; do
-        find ${D}${libdir} -name "*-$backend.so" -exec rm '{}' ';'
-        find ${D}${libdir} -name "*.$backend.so" -exec rm '{}' ';'
+    for i in wl x11 fb dri; do
+        find ${D}${libdir} -name "*-$i.so" -exec rm '{}' ';'
+        find ${D}${libdir} -name "*.$i.so" -exec rm '{}' ';'
     done
 
     # FIXME: MX6SL does not have 3D support; hack it for now
