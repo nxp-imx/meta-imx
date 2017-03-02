@@ -289,6 +289,7 @@ RDEPENDS_libopencl-imx= "libclc-imx"
 INSANE_SKIP_libopenvg-imx += "dev-so"
 FILES_libopenvg-imx = "${libdir}/libOpenVG*${SOLIBS}"
 FILES_libopenvg-imx-dev = "${includedir}/VG ${libdir}/libOpenVG*${SOLIBSDEV} ${libdir}/pkgconfig/vg.pc"
+RDEPENDS_libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 
 FILES_libvdk-imx = "${libdir}/libVDK${SOLIBS}"
 FILES_libvdk-imx-dev = "${includedir}/*vdk*.h ${libdir}/libVDK${SOLIBSDEV}"

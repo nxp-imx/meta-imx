@@ -123,3 +123,5 @@ do_install () {
 }
 
 RPROVIDES_libwayland-viv-mx6 += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xf86-video-mx6fb-vivante', '', d)}"
+
+RDEPENDS_libopenvg-mx6 += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
