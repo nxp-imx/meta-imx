@@ -79,3 +79,5 @@ SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx7ulp = "1"
 UBOOT_SUFFIX_mx6ul = "imx"
 SPL_BINARY_mx6ul = ""
 UBOOT_MAKE_TARGET_mx6ul = "u-boot.imx"
+
+IMX_DEFAULT_DISTRO_FEATURES_append_mx7ulp = " imx_v6_graphics"
