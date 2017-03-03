@@ -16,7 +16,7 @@ DEPENDS += " \
 # imx-gpu-viv does not provide everything it needs to for virtual/libgl
 # on x11 backend or on Wayland backend with XWayland support.
 # We depend on mesa to fill in what is missing.
-DEPENDS += "bb.utils.contains('DISTRO_FEATURES', 'x11', 'mesa', '', d)}"
+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'mesa', '', d)}"
 
 EXTRA_PROVIDES = ""
 EXTRA_PROVIDES_append_imxgpu3d = " virtual/libgl virtual/libgles1 virtual/libgles2"
