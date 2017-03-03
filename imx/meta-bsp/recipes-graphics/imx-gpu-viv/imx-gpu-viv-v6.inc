@@ -9,9 +9,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=88595f92466edd79be7f4f9547ffa0ef"
 
 DEPENDS += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
-       bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes mesa', \
+       bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes', \
                                                        '', d), d)} \
 "
+
+# imx-gpu-viv does not provide everything it needs to for virtual/libgl
+# on x11 backend or on Wayland backend with XWayland support.
+# We depend on mesa to fill in what is missing.
+DEPENDS += "bb.utils.contains('DISTRO_FEATURES', 'x11', 'mesa', '', d)}"
 
 EXTRA_PROVIDES = ""
 EXTRA_PROVIDES_append_imxgpu3d = " virtual/libgl virtual/libgles1 virtual/libgles2"
