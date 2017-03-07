@@ -20,6 +20,10 @@ EXTRA_OECONF_remove = "--disable-qt"
 # need to passing STAGING_DIR to update the QT PATH
 EXTRA_OECONF += "STAGING_DIR=${STAGING_DIR_NATIVE}"
 
+# Need libdrm_fourcc.h for DMA buf support in opengl plugins
+DEPENDS_append_mx7ulp = " libdrm"
+DEPENDS_append_mx8 = " libdrm"
+
 PACKAGECONFIG += "qt5"
 
 PACKAGECONFIG += " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} "
