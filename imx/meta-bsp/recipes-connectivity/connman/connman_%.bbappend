@@ -22,6 +22,15 @@ do_install_append () {
     fi
 }
 
+pkg_postinst_${PN} () {
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        if [ -n "$D" ]; then
+            OPTS="--root=$D"
+        fi
+        systemctl $OPTS mask connman.service
+    fi
+}
+
 SYSTEMD_SERVICE_${PN} += "connman-env.service"
 
 FILES_${PN} += "${systemd_unitdir}/system/connman-env.service"
