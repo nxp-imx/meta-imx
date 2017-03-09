@@ -24,7 +24,8 @@ EXTRA_PROVIDES_append_mx6q     = " virtual/opencl-icd opencl-headers"
 EXTRA_PROVIDES_append_mx8      = " virtual/opencl-icd opencl-headers virtual/libopenvx"
 PROVIDES += "imx-gpu-viv virtual/wayland-egl virtual/libgal-x11 virtual/egl virtual/libopenvg ${EXTRA_PROVIDES}"
 
-RPROVIDES_${PN}_imxgpu3d += "imx-gpu-viv"
+RPROVIDES_${PN}_append_imxgpu3d = " imx-gpu-viv"
+RPROVIDES_${PN}_append = " imx-gpu-viv-demos"
 
 PE = "1"
 
