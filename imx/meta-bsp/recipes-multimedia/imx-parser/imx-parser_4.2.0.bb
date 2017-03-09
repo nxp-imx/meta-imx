@@ -3,7 +3,7 @@
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 include imx-parser.inc
-LIC_FILES_CHKSUM = "file://COPYING;md5=88595f92466edd79be7f4f9547ffa0ef"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
 
 SRC_URI[md5sum] = "c75653bdba11b1651b4b9e4520cc4d83"
 SRC_URI[sha256sum] = "75f2d933890b7e0307cf32f5bc95ae8aef3b2222b88b6f1f7e99b882c022f6fc"
