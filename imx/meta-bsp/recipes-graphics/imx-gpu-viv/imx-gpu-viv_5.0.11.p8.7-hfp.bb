@@ -6,17 +6,15 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv.inc
 SRC_URI[md5sum] = "6e7d31196a18e31de3f245776d45c51b"
 SRC_URI[sha256sum] = "ed7561d5a9eab4370ce5d3ff81b7e155db42442d52fe431a69c9beebf624e7d8"
 
-PROVIDES_remove = "virtual/libg2d"
-
-PACKAGES_remove = "imx-gpu-viv-g2d imx-gpu-viv-g2d-dev"
-
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
     install -d ${D}${bindir}
 
     cp -P ${S}/gpu-core/usr/lib/*.so* ${D}${libdir}
+    cp  ${S}/g2d/usr/lib/*.so* ${D}${libdir}
     cp -r ${S}/gpu-core/usr/include/* ${D}${includedir}
+    cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
     cp -r ${S}/gpu-demos/opt ${D}
     cp -r ${S}/gpu-tools/gmem-info/usr/bin/* ${D}${bindir}
 
@@ -129,7 +127,5 @@ do_install () {
 
     chown -R root:root "${D}"
 }
-
-RDEPENDS_${PN} +="virtual/libg2d"
 
 RPROVIDES_libwayland-viv-mx6 += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xf86-video-mx6fb-vivante', '', d)}"
