@@ -3,8 +3,8 @@
 
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv.inc
 
-SRC_URI[md5sum] = "97b1424bc8ea23bf8c35fdbe6f8716ce"
-SRC_URI[sha256sum] = "6792a15b1688e730bc1de956fe6e5daba5a7b0d63a6773973f984e37ac5df399"
+SRC_URI[md5sum] = "cfc112a3d777194bad620147d05e3dba"
+SRC_URI[sha256sum] = "680036f095d31475a28e47ede9eb6fc85ea7ed29f26de9c5d1783a7c4061d934"
 
 PROVIDES_remove = "virtual/libg2d"
 PACKAGES_remove = "imx-gpu-viv-g2d imx-gpu-viv-g2d-dev"
