@@ -52,6 +52,7 @@ SRC_URI_append = " \
         file://0033-gstplayer-Add-play-stop-sync-API.patch \
         file://0034-gstplayer-add-get-audio-text-sink-API.patch \
         file://0035-Fix-6slevk-build-break-when-egl-is-disabled.patch \
+        file://0036-gst-player-fix-gst-player-failed-to-load-external-su.patch \
 "
 
 # include fragment shaders
