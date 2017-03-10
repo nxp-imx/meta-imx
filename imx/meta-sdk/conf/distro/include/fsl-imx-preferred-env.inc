@@ -43,9 +43,9 @@ USE_GPU_VIV_MODULE = "1"
 PREFERRED_VERSION_linux-libc-headers = "4.1"
 
 # preferred versions of recipes-graphics for mx6
-PREFERRED_VERSION_imx-gpu-viv_mx6 = "5.0.11.p8.7-hfp"
-PREFERRED_VERSION_xf86-video-imxfb-vivante_mx6 = "5.0.11.p8.7"
-PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx6 = "5.0.11.p8.7"
+PREFERRED_VERSION_imx-gpu-viv_mx6 = "5.0.11.p8.6-hfp"
+PREFERRED_VERSION_xf86-video-imxfb-vivante_mx6 = "5.0.11.p8.6"
+PREFERRED_VERSION_kernel-module-imx-gpu-viv_mx6 = "5.0.11.p8.6"
 
 # Use systemd as default init manager - comment out for now
 #VIRTUAL-RUNTIME_init_manager = "systemd"
