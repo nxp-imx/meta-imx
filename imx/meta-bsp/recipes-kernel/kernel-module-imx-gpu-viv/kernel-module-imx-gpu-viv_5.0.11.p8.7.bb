@@ -10,8 +10,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz \
            file://MakefileModSym.patch \
            file://kbuild.patch"
 
-SRC_URI[md5sum] = "bed46c896e0e5d99b4f330f0d7a02405"
-SRC_URI[sha256sum] = "4b6f08c493bc431edaa588800b0856ef318f13255ffe4954bb42b22996819f60"
+SRC_URI[md5sum] = "5032cbf5d1fe0798691bdada542299e6"
+SRC_URI[sha256sum] = "1bcf47768841bb519ab6f02add1e40ec9969abd488a7b8025cdd4205448b8c17"
 
 inherit module
 
