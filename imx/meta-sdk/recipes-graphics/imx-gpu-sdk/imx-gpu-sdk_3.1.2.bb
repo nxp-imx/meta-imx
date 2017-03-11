@@ -21,8 +21,8 @@ RCONFLICTS_${PN} = "vivante-gpu-sdk"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "40c45361a8ef7aaaaa572c9f1c0af6f0"
-SRC_URI[sha256sum] = "09c18bcbe4b08b58f7c423b7b2181c2e2980bdfda51167ef08974ac554057f23"
+SRC_URI[md5sum] = "148ff67599bee049a5900d9fc6de8144"
+SRC_URI[sha256sum] = "e2413a19718417efb6acd2c685396fc73929486cafc17ab651d06a6f6707fd4f"
 
 
 BACKEND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
