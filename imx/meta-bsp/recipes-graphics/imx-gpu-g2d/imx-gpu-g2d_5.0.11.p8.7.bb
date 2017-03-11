@@ -3,7 +3,7 @@
 
 DESCRIPTION = "GPU G2D library and apps for imx6"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=be67a88e9e6c841043b005ad7bcf8309"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
 
 PROVIDES += "virtual/libg2d"
 RDEPENDS_${PN} = "libgal-mx6"
