@@ -75,7 +75,7 @@ index d0aec41..0568347 100644
 +{
 +  gint wait_cnt = 0;
 +
-+  while (time_out < 0 || wait_cnt < time_out) {
++  while (time_out < 0 || wait_cnt < time_out * 20) {
 +    if (self->app_state == target_state) {
 +      break;
 +    } else if (self->got_error == TRUE) {
@@ -83,10 +83,10 @@ index d0aec41..0568347 100644
 +      return;
 +    } else {
 +      wait_cnt++;
-+      sleep (1);
++      usleep (50000);
 +    }
 +  }
-+  if (time_out > 0 && wait_cnt >= time_out) {
++  if (time_out > 0 && wait_cnt >= time_out * 20) {
 +    emit_error (self, g_error_new (GST_PLAYER_ERROR,
 +            GST_PLAYER_ERROR_FAILED,
 +            "try to play /stop /pause failed, time out"));
