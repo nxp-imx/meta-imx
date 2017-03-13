@@ -29,7 +29,7 @@ EnvironmentFile=-/etc/default/weston
 # Weston does not successfully change VT, nor does systemd place us on
 # the VT it just activated for us. Switch manually:
 ExecStartPre=/usr/bin/chvt 7
-ExecStart=/usr/bin/weston --log=/var/log/weston.log $OPTARGS
+ExecStart=/usr/bin/weston-launch -- --log=/var/log/weston.log $OPTARGS
 
 IgnoreSIGPIPE=no
 
