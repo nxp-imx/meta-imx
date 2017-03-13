@@ -2,6 +2,8 @@ inherit image_types
 
 IMAGE_BOOTLOADER ?= "u-boot"
 
+IMAGE_M4LOADER ?= ""
+
 # Handle u-boot suffixes
 UBOOT_SUFFIX ?= "bin"
 UBOOT_SUFFIX_SDCARD ?= "${UBOOT_SUFFIX}"
@@ -81,7 +83,8 @@ IMAGE_DEPENDS_sdcard = "parted-native:do_populate_sysroot \
                         dosfstools-native:do_populate_sysroot \
                         mtools-native:do_populate_sysroot \
                         virtual/kernel:do_deploy \
-                        ${@d.getVar('IMAGE_BOOTLOADER', True) and d.getVar('IMAGE_BOOTLOADER', True) + ':do_deploy' or ''}"
+                        ${@d.getVar('IMAGE_BOOTLOADER', True) and d.getVar('IMAGE_BOOTLOADER', True) + ':do_deploy' or ''} \
+                        ${@d.getVar('IMAGE_M4LOADER', True) and d.getVar('IMAGE_M4LOADER', True) + ':do_deploy' or ''}"
 
 SDCARD = "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.sdcard"
 
@@ -144,6 +147,18 @@ _generate_boot_image() {
 		mmd -i ${WORKDIR}/boot.img ::/extlinux
 		mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/extlinux.conf ::/extlinux/extlinux.conf
 	fi
+
+        # Copy m4 image
+        if [ -n "${IMAGE_M4}" ]; then
+            for IMAGE_FILE in ${IMAGE_M4}; do
+                if [ -e "${DEPLOY_DIR_IMAGE}/${IMAGE_FILE}" ]; then
+                    mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${IMAGE_FILE} ::/${IMAGE_FILE}
+                else
+                    bbfatal "${IMAGE_FILE}$ does not exist."
+                fi
+            done
+        fi
+
 }
 
 #
