@@ -1,7 +1,7 @@
-From cd3603dc28ae3c56299d4ff6debf1532c85ab26c Mon Sep 17 00:00:00 2001
+From ab6c07b0c3d4038366995eb86bbc6e80cdfa93ba Mon Sep 17 00:00:00 2001
 From: Lyon Wang <lyon.wang@nxp.com>
 Date: Thu, 16 Feb 2017 18:50:28 +0800
-Subject: [PATCH 2/3] gstplayer: Add play/stop sync API
+Subject: [PATCH] gstplayer: Add play/stop sync API
 
 - Add play/stop/pause sync API
       gst_player_play_sync()
@@ -14,12 +14,12 @@ Upstream Status:  [i.MX specific]
 
 Signed-off-by: Lyon Wang <lyon.wang@nxp.com>
 ---
- gst-libs/gst/player/gstplayer.c | 112 +++++++++++++++++++++++++++++++++++++++-
- gst-libs/gst/player/gstplayer.h |   4 ++
- 2 files changed, 115 insertions(+), 1 deletion(-)
+ gstplayer.c | 114 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ gstplayer.h |   4 +++
+ 2 files changed, 117 insertions(+), 1 deletion(-)
 
 diff --git a/gst-libs/gst/player/gstplayer.c b/gst-libs/gst/player/gstplayer.c
-index d0aec41..0568347 100644
+index d0aec41..eb547d8 100644
 --- a/gst-libs/gst/player/gstplayer.c
 +++ b/gst-libs/gst/player/gstplayer.c
 @@ -195,6 +195,10 @@ struct _GstPlayer
@@ -41,16 +41,16 @@ index d0aec41..0568347 100644
  
    GST_TRACE_OBJECT (self, "Initialized");
  }
-@@ -1172,6 +1177,8 @@ error_cb (G_GNUC_UNUSED GstBus * bus, GstMessage * msg, gpointer user_data)
-       full_message);
-   emit_error (self, player_err);
+@@ -1038,6 +1043,8 @@ emit_error (GstPlayer * self, GError * err)
+   GST_ERROR_OBJECT (self, "Error: %s (%s, %d)", err->message,
+       g_quark_to_string (err->domain), err->code);
  
 +  self->got_error = TRUE;
 +
-   g_clear_error (&err);
-   g_free (debug);
-   g_free (name);
-@@ -4589,4 +4596,107 @@ gst_player_get_state (GstPlayer * self)
+   if (g_signal_handler_find (self, G_SIGNAL_MATCH_ID,
+           signals[SIGNAL_ERROR], 0, NULL, NULL, NULL) != 0) {
+     ErrorSignalData *data = g_new (ErrorSignalData, 1);
+@@ -4589,4 +4596,109 @@ gst_player_get_state (GstPlayer * self)
    g_return_val_if_fail (GST_IS_PLAYER (self), GST_PLAYER_STATE_STOPPED);
  
    return self->app_state;
@@ -80,6 +80,8 @@ index d0aec41..0568347 100644
 +      break;
 +    } else if (self->got_error == TRUE) {
 +      self->got_error = FALSE;
++      return;
++    } else if (self->is_eos == TRUE) {
 +      return;
 +    } else {
 +      wait_cnt++;
