@@ -13,8 +13,8 @@ M4_PKG_NAME = "imx7ulp-m4-demo-beta"
 SRC_URI = "${FSL_MIRROR}/${M4_PKG_NAME}.bin;fsl-eula=true"
 S = "${WORKDIR}/${M4_PKG_NAME}"
 
-SRC_URI[md5sum] = "db58c4294dc199a15928439a1f411064"
-SRC_URI[sha256sum] = "96766e1968cd76f1cd968b6703ef55fb03a00599967a13d6914cb85aa8aa273a"
+SRC_URI[md5sum] = "fc51dfc22876efd6b0149d290ed91a55"
+SRC_URI[sha256sum] = "2db49708c5c5d8d721bba940b1e23e3eb6aee0c7e6547d90597c08e737616007"
 
 do_deploy () {
    # Install the demo binaries
