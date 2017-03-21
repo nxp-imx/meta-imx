@@ -1,0 +1,9 @@
+[Unit]
+Description=Target Communication Framework agent
+After=network.target
+
+[Service]
+ExecStart=@SBINDIR@/tcf-agent -L- -l0
+
+[Install]
+WantedBy=multi-user.target
