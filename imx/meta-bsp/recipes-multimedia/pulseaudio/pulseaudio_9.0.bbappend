@@ -29,10 +29,19 @@ SRC_URI_append_mx8 = " file://daemon.conf file://default.pa"
 
 # Install a new daemon.conf for all platform to increase the rlimit-rttime
 SRC_URI_append = " file://daemon_new.conf"
+# Install a mx7ulp specific daemon.conf
+SRC_URI_append_mx7ulp = " file://daemon_new.conf_mx7ulp"
+
+
 do_install_append () {
     if [ -e "${WORKDIR}/daemon_new.conf" ]; then
         install -m 0644 ${WORKDIR}/daemon_new.conf ${D}${sysconfdir}/pulse/daemon.conf
     fi
 }
 
+do_install_append_mx7ulp () {
+    if [ -e "${WORKDIR}/daemon_new.conf_mx7ulp" ]; then
+        install -m 0644 ${WORKDIR}/daemon_new.conf_mx7ulp ${D}${sysconfdir}/pulse/daemon.conf
+    fi
+}
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
