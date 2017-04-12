@@ -1,7 +1,7 @@
 SUMMARY = "i.MX  GPU SDK Samples"
 DESCRIPTION = "Set of sample applications for i.MX GPU"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=be67a88e9e6c841043b005ad7bcf8309"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
 DEPENDS = "${X11_DEPENDS} ${WL_DEPENDS} devil assimp gstreamer1.0 gstreamer1.0-plugins-base"
 DEPENDS_append_mx6q  = " virtual/libgles2"
 DEPENDS_append_mx6dl = " virtual/libgles2"
