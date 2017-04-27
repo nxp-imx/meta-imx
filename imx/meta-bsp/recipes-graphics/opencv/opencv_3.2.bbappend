@@ -29,14 +29,10 @@ PACKAGECONFIG[test] = " \
     -DBUILD_TESTS=OFF -DINSTALL_TESTS=OFF, \
 "
 
-QT5_PACKAGECONFIG_APPEND = " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qt5', \
-       bb.utils.contains('DISTRO_FEATURES',     'x11',    '', \
-                                                       'qt5', d), d)}"
 GTK_PACKAGECONFIG_REMOVE = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
-PACKAGECONFIG_append_mx8dv = " opencl openvx ${QT5_PACKAGECONFIG_APPEND} test"
-PACKAGECONFIG_append_mx8qm = " opencl openvx ${QT5_PACKAGECONFIG_APPEND} test"
+PACKAGECONFIG_append_mx8dv = " opencl openvx test"
+PACKAGECONFIG_append_mx8qm = " opencl openvx test"
 PACKAGECONFIG_remove_mx8dv = "${GTK_PACKAGECONFIG_REMOVE}"
 PACKAGECONFIG_remove_mx8qm = "${GTK_PACKAGECONFIG_REMOVE}"
 
