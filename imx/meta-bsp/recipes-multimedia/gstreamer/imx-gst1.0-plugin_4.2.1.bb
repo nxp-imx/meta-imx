@@ -8,8 +8,8 @@ LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
 DEPENDS = "imx-codec imx-parser virtual/kernel gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
-DEPENDS_append_mx6q = " imx-lib imx-vpu imx-vpuwrap"
-DEPENDS_append_mx6dl = " imx-lib imx-vpu imx-vpuwrap"
+DEPENDS_append_mx6q = " imx-lib virtual/libvpu imx-vpuwrap"
+DEPENDS_append_mx6dl = " imx-lib virtual/libvpu imx-vpuwrap"
 DEPENDS_append_mx6sl = " imx-lib"
 DEPENDS_append_mx6sx = " imx-lib"
 DEPENDS_append_mx6ul = " imx-lib"
@@ -28,8 +28,8 @@ SRC_URI = " \
     ${FSL_MIRROR}/imx-gst1.0-plugin-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "be74fa30e52f68136250e4e35900778d"
-SRC_URI[sha256sum] = "bff14ce5e15201d926efd02f1cd16331dffbf149d8c8d6bce49a6b3e25da6002"
+SRC_URI[md5sum] = "015a33eb25da7e665a28653393ed2a44"
+SRC_URI[sha256sum] = "c4ec0c10df75e87d82e7d704258b9609143c0185afe97d7b904bb8c4a7058fe2"
 
 S = "${WORKDIR}/imx-gst1.0-plugin-${PV}"
 
