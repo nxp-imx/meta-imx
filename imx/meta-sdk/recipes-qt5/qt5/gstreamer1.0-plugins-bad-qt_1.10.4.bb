@@ -1,5 +1,5 @@
 include recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad.inc
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-sdk/recipes-qt5/qt5/${PN}:"
 
 # Add extra patch directory to find needed patch
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=73a5855a8119deb017f5f13cf327095d \
                     file://gst/tta/crc32.h;beginline=12;endline=29;md5=27db269c575d1e5317fffca2d33b3b50 \
                     file://gst/tta/filters.h;beginline=12;endline=29;md5=8a08270656f2f8ad7bb3655b83138e5a"
 
-SRC_URI[md5sum] = "e59798c86a670041de2e61856ea43d2a"
-SRC_URI[sha256sum] = "24099351fb6984c9e7560de06e072ff2e33d0b2db38b8fcc7afefb536e5094e7"
+SRC_URI[md5sum] = "2757103e57a096a1a05b3ab85b8381af"
+SRC_URI[sha256sum] = "23ddae506b3a223b94869a0d3eea3e9a12e847f94d2d0e0b97102ce13ecd6966"
 
 #qt5 configuratin only support "--disable-qt"
 #and in default, it is disabled, need to remove the default setting to enable it.
@@ -56,7 +56,7 @@ do_install_append() {
     fi
 }
 
-S = "${WORKDIR}/gst-plugins-bad-1.10.3"
+S = "${WORKDIR}/gst-plugins-bad-1.10.4"
 
 INSANE_SKIP_gstreamer1.0-plugins-bad-qt-qmlgl += "build-deps"
 
