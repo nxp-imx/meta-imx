@@ -1,11 +1,7 @@
-NXP's 4.1.33-7ULP Beta Yocto Project BSP
+NXP's 4.9.11-1.0.0 Yocto Project BSP
 ================================================
 
-This BSP release is a standalong release for i.MX 7ULP Beta and is
-validated only for i.MX 7ULP
-
-The following boards were not tested in this release but this release contains updates
-that might affect these boards.
+The following boards were tested in this release.
 
    * NXP i.MX 6QuadPlus SABRE Device (imx6qpsabresd)
    * NXP i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
@@ -23,6 +19,7 @@ that might affect these boards.
    * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
    * NXP i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
    * NXP i.MX 6SOLO SABRE Auto (imx6solosabreauto )
+   * NXP i.MX 7ULP EVK (imx7ulpevk) (this is Beta quality)
 
  * i.MX Device Tree configurations for each machine
     Each machine files lists the associated device trees for that machine.
@@ -42,6 +39,8 @@ that might affect these boards.
     imx6solosabresd - sd
     imx6solosabreauto - sd, eim-nor, spi-nor, nand
     imx6slevk - sd, spi-nor, epdc
+    imx6sllevk - sd, epdc
+    imx7ulpevk - sd, emmc
 
 
 Quick Start Guide
