@@ -18,7 +18,7 @@ SRC_URI = " \
 "
 
 
-SRC_URI[md5sum] = "e59798c86a670041de2e61856ea43d2a"
-SRC_URI[sha256sum] = "24099351fb6984c9e7560de06e072ff2e33d0b2db38b8fcc7afefb536e5094e7"
+SRC_URI[md5sum] = "2757103e57a096a1a05b3ab85b8381af"
+SRC_URI[sha256sum] = "23ddae506b3a223b94869a0d3eea3e9a12e847f94d2d0e0b97102ce13ecd6966"
 
 S = "${WORKDIR}/gst-plugins-bad-${PV}"

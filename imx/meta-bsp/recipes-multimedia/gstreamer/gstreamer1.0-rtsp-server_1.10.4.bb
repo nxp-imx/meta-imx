@@ -5,5 +5,5 @@ FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstre
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6762ed442b3822387a51c92d928ead0d"
 
-SRC_URI[md5sum] = "2c6bdf872443a8b5bb567462c267bdb1"
-SRC_URI[sha256sum] = "baf9f7d229711cb3d823a447a930132f809b3321eab3535491bb01c8a21566fe"
+SRC_URI[md5sum] = "ef587fa6393e09bc26f884510596e305"
+SRC_URI[sha256sum] = "2f6e12fd4e3568ee190dc24e57e4c3a878971c3a3fb6904a9674404fac256de6"

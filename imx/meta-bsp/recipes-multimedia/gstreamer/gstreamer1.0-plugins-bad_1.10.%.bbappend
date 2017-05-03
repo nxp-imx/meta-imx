@@ -15,6 +15,8 @@ PACKAGECONFIG_remove_mx6sl = " gles2"
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
 PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland"
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
 SRC_URI_append = " \
         file://0001-gstreamer-gl.pc.in-don-t-append-GL_CFLAGS-to-CFLAGS.patch \
         file://0001-gst-plugins-bad-fix-incorrect-wayland-protocols-dir.patch \
@@ -50,7 +52,6 @@ SRC_URI_append = " \
         file://0031-gl-window-attach-the-GMaincontext-in-window-struct-t.patch \
         file://0032-gstplayer-Add-gst_player_get_state-API.patch \
         file://0033-gstplayer-Add-play-stop-sync-API.patch \
-        file://0034-gstplayer-add-get-audio-text-sink-API.patch \
         file://0035-Fix-6slevk-build-break-when-egl-is-disabled.patch \
         file://0036-gst-player-fix-gst-player-failed-to-load-external-su.patch \
         file://0037-opencv-allow-compilation-against-3.2.0.patch \

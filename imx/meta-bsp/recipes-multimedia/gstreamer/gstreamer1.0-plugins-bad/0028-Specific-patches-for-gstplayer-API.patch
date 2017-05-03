@@ -1,7 +1,7 @@
-From 3d789943c1f0568014ff2399a097b5dfa5d7a92e Mon Sep 17 00:00:00 2001
+From 1f3a60fbfb1876675dd4e5de7e7b210d2b90ba97 Mon Sep 17 00:00:00 2001
 From: Lyon Wang <lyon.wang@nxp.com>
 Date: Fri, 30 Dec 2016 15:53:21 +0800
-Subject: [PATCH 3/5] Specific patches for gstplayer API
+Subject: [PATCH 1/7] Specific patches for gstplayer API
 
 player: Add get_rotate, set_rotate API
 
@@ -13,18 +13,18 @@ player: Add force-aspect-ratio config
 
 player: Add set audio / text sink API
 
-- Add set audio / text sink API
+- Add get/set audio / text sink API
 
 Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Lyon Wang <lyon.wang@nxp.com>
 ---
- gst-libs/gst/player/gstplayer.c | 214 ++++++++++++++++++++++++++++++++++++++++
- gst-libs/gst/player/gstplayer.h |  10 ++
- 2 files changed, 224 insertions(+)
+ gst-libs/gst/player/gstplayer.c | 284 ++++++++++++++++++++++++++++++++++++++++
+ gst-libs/gst/player/gstplayer.h |  12 ++
+ 2 files changed, 296 insertions(+)
 
 diff --git a/gst-libs/gst/player/gstplayer.c b/gst-libs/gst/player/gstplayer.c
-index d9ff524..960e7a2 100644
+index d9ff524..a1810f2 100644
 --- a/gst-libs/gst/player/gstplayer.c
 +++ b/gst-libs/gst/player/gstplayer.c
 @@ -86,6 +86,7 @@ typedef enum
@@ -51,7 +51,7 @@ index d9ff524..960e7a2 100644
        NULL);
    /* *INDENT-ON* */
  
-@@ -4259,3 +4262,214 @@ gst_player_config_get_seek_accurate (const GstStructure * config)
+@@ -4259,3 +4262,284 @@ gst_player_config_get_seek_accurate (const GstStructure * config)
  
    return accurate;
  }
@@ -218,59 +218,129 @@ index d9ff524..960e7a2 100644
 +/**
 + * gst_player_set_audio_sink:
 + * @player: #GstPlayer instance
-+ * @sink_name: the sink name to set
++ * @audio_sink: the custom audio sink to set
 + *
 + * Returns: %TRUE or %FALSE
 + *
 + * Set the customize audio sink
 + */
 +gboolean
-+gst_player_set_audio_sink (GstPlayer * self, const gchar * sink_name)
++gst_player_set_audio_sink (GstPlayer * self,  GstElement * audio_sink)
 +{
-+  GstElement *audio_sink = NULL;
 +  g_return_val_if_fail (GST_IS_PLAYER (self), FALSE);
-+
-+  audio_sink = gst_parse_bin_from_description (sink_name, TRUE, NULL);
-+  if (!audio_sink) {
-+    GST_ERROR_OBJECT (self, "invalid audio sink %s", sink_name);
-+    return FALSE;
-+  }
++  g_return_val_if_fail (audio_sink != NULL, FALSE);
 +
 +  g_object_set (G_OBJECT (self->playbin), "audio-sink", audio_sink, NULL);
-+  GST_DEBUG_OBJECT (self, "set audio sink '%s'", sink_name);
 +  return TRUE;
 +}
 +
 +/**
 + * gst_player_set_text_sink:
 + * @player: #GstPlayer instance
-+ * @sink_name: the sink name to set
++ * @text_sink: the custom text sink  to set
 + *
 + * Returns: %TRUE or %FALSE
 + *
-+ * Set the customize video sink
++ * Set the customize text sink
 + */
 +gboolean
-+gst_player_set_text_sink (GstPlayer * self, const gchar * sink_name)
++gst_player_set_text_sink (GstPlayer * self,  GstElement * text_sink)
 +{
-+  GstElement *text_sink = NULL;
 +  g_return_val_if_fail (GST_IS_PLAYER (self), FALSE);
-+
-+  text_sink = gst_parse_bin_from_description (sink_name, TRUE, NULL);
-+  if (!text_sink) {
-+    GST_ERROR_OBJECT (self, "invalid text sink %s", sink_name);
-+    return FALSE;
-+  }
++  g_return_val_if_fail (text_sink != NULL, FALSE);
 +
 +  g_object_set (G_OBJECT (self->playbin), "text-sink", text_sink, NULL);
-+  GST_DEBUG_OBJECT (self, "set text sink '%s'", sink_name);
 +  return TRUE;
 +}
++
++/**
++ * gst_player_get_audio_sink:
++ * @player: #GstPlayer instance
++ *
++ * Returns: actual audio sink element
++ */
++GstElement *
++gst_player_get_audio_sink (GstPlayer * self)
++{
++  GstElement *sink = NULL;
++  GstElement *actual_sink = NULL;
++  GstIteratorResult rc;
++  GstIterator *it;
++  GValue item = { 0, };
++  g_return_val_if_fail (GST_IS_PLAYER (self), NULL);
++
++  g_object_get (G_OBJECT (self->playbin), "audio-sink", &sink, NULL);
++  if (NULL == sink) {
++    GST_WARNING_OBJECT (self, "No audio-sink found");
++    return NULL;
++  }
++  it = gst_bin_iterate_sinks ((GstBin *) sink);
++  do {
++    rc = gst_iterator_next (it, &item);
++    if (rc == GST_ITERATOR_OK) {
++      break;
++    }
++  } while (rc != GST_ITERATOR_DONE);
++
++  g_object_unref (sink);
++  actual_sink = g_value_get_object (&item);
++  g_value_unset (&item);
++  gst_iterator_free (it);
++
++  if (NULL == actual_sink) {
++    GST_WARNING_OBJECT (self, "No auido-sink found");
++    return NULL;
++  }
++
++  return actual_sink;
++}
++
++/**
++ * gst_player_get_text_sink:
++ * @player: #GstPlayer instance
++ *
++ * Returns: actual text sink element
++ */
++GstElement *
++gst_player_get_text_sink (GstPlayer * self)
++{
++  GstElement *sink = NULL;
++  GstElement *actual_sink = NULL;
++  GstIteratorResult rc;
++  GstIterator *it;
++  GValue item = { 0, };
++  g_return_val_if_fail (GST_IS_PLAYER (self), NULL);
++
++  g_object_get (G_OBJECT (self->playbin), "text-sink", &sink, NULL);
++  if (NULL == sink) {
++    GST_WARNING_OBJECT (self, "No text-sink found");
++    return NULL;
++  }
++  it = gst_bin_iterate_sinks ((GstBin *) sink);
++  do {
++    rc = gst_iterator_next (it, &item);
++    if (rc == GST_ITERATOR_OK) {
++      break;
++    }
++  } while (rc != GST_ITERATOR_DONE);
++
++  g_object_unref (sink);
++  actual_sink = g_value_get_object (&item);
++  g_value_unset (&item);
++  gst_iterator_free (it);
++
++  if (NULL == actual_sink) {
++    GST_WARNING_OBJECT (self, "No text-sink found");
++    return NULL;
++  }
++
++  return actual_sink;
++}
 diff --git a/gst-libs/gst/player/gstplayer.h b/gst-libs/gst/player/gstplayer.h
-index 8426be5..bfc12b2 100644
+index 8426be5..40c0c47 100644
 --- a/gst-libs/gst/player/gstplayer.h
 +++ b/gst-libs/gst/player/gstplayer.h
-@@ -205,6 +205,16 @@ guint          gst_player_config_get_position_update_interval  (const GstStructu
+@@ -205,6 +205,18 @@ guint          gst_player_config_get_position_update_interval  (const GstStructu
  void           gst_player_config_set_seek_accurate (GstPlayer * player, gboolean accurate);
  gboolean       gst_player_config_get_seek_accurate (const GstStructure * config);
  
@@ -281,8 +351,10 @@ index 8426be5..bfc12b2 100644
 +void        gst_player_config_set_force_aspect_ratio (GstPlayer * self, gboolean force_aspect_ratio);
 +gboolean    gst_player_config_get_force_aspect_ratio (const GstStructure * config);
 +
-+gboolean    gst_player_set_audio_sink (GstPlayer * player, const gchar * sink_name);
-+gboolean    gst_player_set_text_sink (GstPlayer * player, const gchar * sink_name);
++gboolean    gst_player_set_audio_sink (GstPlayer * player, GstElement * audio_sink);
++gboolean    gst_player_set_text_sink (GstPlayer * player, GstElement * text_sink);
++GstElement * gst_player_get_audio_sink (GstPlayer * player);
++GstElement * gst_player_get_text_sink (GstPlayer * player);
 +
  G_END_DECLS
  

@@ -1,7 +1,7 @@
-From ab6c07b0c3d4038366995eb86bbc6e80cdfa93ba Mon Sep 17 00:00:00 2001
+From a05aafd8dfc8c127a3b7399907bb915d2dfe683b Mon Sep 17 00:00:00 2001
 From: Lyon Wang <lyon.wang@nxp.com>
 Date: Thu, 16 Feb 2017 18:50:28 +0800
-Subject: [PATCH] gstplayer: Add play/stop sync API
+Subject: [PATCH 1/3] gstplayer: Add play/stop sync API
 
 - Add play/stop/pause sync API
       gst_player_play_sync()
@@ -14,12 +14,12 @@ Upstream Status:  [i.MX specific]
 
 Signed-off-by: Lyon Wang <lyon.wang@nxp.com>
 ---
- gstplayer.c | 114 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
- gstplayer.h |   4 +++
- 2 files changed, 117 insertions(+), 1 deletion(-)
+ gst-libs/gst/player/gstplayer.c | 112 ++++++++++++++++++++++++++++++++++++++++
+ gst-libs/gst/player/gstplayer.h |   4 ++
+ 2 files changed, 116 insertions(+)
 
 diff --git a/gst-libs/gst/player/gstplayer.c b/gst-libs/gst/player/gstplayer.c
-index d0aec41..eb547d8 100644
+index 841027b..02c1741 100644
 --- a/gst-libs/gst/player/gstplayer.c
 +++ b/gst-libs/gst/player/gstplayer.c
 @@ -195,6 +195,10 @@ struct _GstPlayer
@@ -50,13 +50,10 @@ index d0aec41..eb547d8 100644
    if (g_signal_handler_find (self, G_SIGNAL_MATCH_ID,
            signals[SIGNAL_ERROR], 0, NULL, NULL, NULL) != 0) {
      ErrorSignalData *data = g_new (ErrorSignalData, 1);
-@@ -4589,4 +4596,109 @@ gst_player_get_state (GstPlayer * self)
-   g_return_val_if_fail (GST_IS_PLAYER (self), GST_PLAYER_STATE_STOPPED);
+@@ -4660,3 +4667,108 @@ gst_player_get_state (GstPlayer * self)
  
    return self->app_state;
--}
-\ No newline at end of file
-+}
+ }
 +
 +/**
 + * gst_player_wait_state
@@ -163,10 +160,10 @@ index d0aec41..eb547d8 100644
 +  return;
 +}
 diff --git a/gst-libs/gst/player/gstplayer.h b/gst-libs/gst/player/gstplayer.h
-index 3fb323b..abead10 100644
+index 5fac081..12e8219 100644
 --- a/gst-libs/gst/player/gstplayer.h
 +++ b/gst-libs/gst/player/gstplayer.h
-@@ -229,6 +229,10 @@ gboolean    gst_player_set_text_sink (GstPlayer * player, const gchar * sink_nam
+@@ -231,6 +231,10 @@ GstElement * gst_player_get_text_sink (GstPlayer * player);
  
  GstPlayerState  gst_player_get_state (GstPlayer * player);
  

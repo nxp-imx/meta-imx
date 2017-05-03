@@ -33,6 +33,5 @@ SRC_URI_append = " file://0001-gstplaybin-remove-default-deinterlace-flag.patch 
                    file://0013-ion-DMA-Buf-allocator-based-on-ion.patch \
                    file://0014-ion-DMA-Buf-allocator-based-on-ion2.patch \
                    file://0015-streamsynchronizer-every-stream-need-keep-their-own-.patch \
+                   file://0016-subparse-fix-critical-log-print-out-when.patch \
 "
-
-
