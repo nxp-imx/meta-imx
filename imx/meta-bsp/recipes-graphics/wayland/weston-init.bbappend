@@ -1,5 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+REQUIRED_DISTRO_FEATURES_remove_mx6sl = "opengl"
+
 SRC_URI_append = " file://profile"
 SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd wayland x11', 'file://weston.config', '', d)}"
 
