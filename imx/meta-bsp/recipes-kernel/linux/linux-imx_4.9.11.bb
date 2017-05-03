@@ -2,8 +2,8 @@
 # Copyright 2017 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-SUMMARY = "Linux Kernel provided and supported by Freescale"
-DESCRIPTION = "Linux Kernel provided and supported by Freescale with focus on \
+SUMMARY = "Linux Kernel provided and supported by NXP"
+DESCRIPTION = "Linux Kernel provided and supported by NXP with focus on \
 i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU and IPU."
 
 require recipes-kernel/linux/linux-imx.inc
@@ -11,9 +11,9 @@ require recipes-kernel/linux/linux-dtb.inc
 
 DEPENDS += "lzop-native bc-native"
 
-SRCBRANCH = "imx_4.1.33_7ulp_beta"
-LOCALVERSION = "-3.0.0"
-SRCREV = "4f882165cc31672f3c98de74ab02b757cb96ad26"
+SRCBRANCH = "imx_4.9.y"
+LOCALVERSION = "-1.0.0"
+SRCREV = "a87bb06a0bc74cfbd9ccf5d1b407b44f6d5ff6f8"
 KERNEL_SRC ?= "git://git.freescale.com/imx/linux-imx.git;protocol=git"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
@@ -22,9 +22,8 @@ DEFAULT_PREFERENCE = "1"
 DO_CONFIG_V7_COPY = "no"
 DO_CONFIG_V7_COPY_mx6 = "yes"
 DO_CONFIG_V7_COPY_mx7 = "yes"
-DO_CONFIG_V7_COPY_mx7ulp = "yes"
 
-addtask copy_defconfig after do_patch before do_preconfigure #do_configure
+addtask copy_defconfig after do_unpack before do_preconfigure
 do_copy_defconfig () {
     install -d ${B}
     if [ ${DO_CONFIG_V7_COPY} = "yes" ]; then
@@ -36,3 +35,5 @@ do_copy_defconfig () {
 }
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
+EXTRA_OEMAKE_append_mx6 = " ARCH=arm"
+EXTRA_OEMAKE_append_mx7 = " ARCH=arm"

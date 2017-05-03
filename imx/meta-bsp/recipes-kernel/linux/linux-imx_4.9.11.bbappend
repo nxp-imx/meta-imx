@@ -43,8 +43,3 @@ sysroot_stage_all_append () {
 
 PACKAGES += "${PN}-soc-headers"
 FILES_${PN}-soc-headers = "${exec_prefix}/include"
-
-# support for systemd
-do_configure_append () {
-    echo "CONFIG_FHANDLE=y" >>  ${B}/.config
-}
