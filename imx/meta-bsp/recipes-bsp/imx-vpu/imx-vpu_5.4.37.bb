@@ -2,7 +2,7 @@
 # Copyright 2017 NXP
 
 require recipes-bsp/imx-vpu/imx-vpu.inc
-LIC_FILES_CHKSUM = "file://COPYING;md5=be67a88e9e6c841043b005ad7bcf8309"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
 
 PE = "1"
 
