@@ -18,10 +18,8 @@ IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 IMAGE_FSTYPES = "tar.bz2 ext4 sdcard"
 
-BBMASK = "meta-freescale/recipes-bsp/u-boot/u-boot-imx_2016.03.bb"
-BBMASK .= "|meta-freescale/recipes-bsp/u-boot/u-boot-imx-mfgtool_2016.03.bb"
-BBMASK .= "|meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium_52.0.2743.76.bbappend"
-BBMASK .= "|meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bbappend"
+BBMASK += "meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium_52.0.2743.76.bbappend"
+BBMASK += "meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bbappend"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 
