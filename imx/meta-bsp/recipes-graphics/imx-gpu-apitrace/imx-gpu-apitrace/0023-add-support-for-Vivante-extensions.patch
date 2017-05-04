@@ -1,0 +1,444 @@
+From 32fa35eca3f5f1fa9014a3cc2d29cecaa01dbe5d Mon Sep 17 00:00:00 2001
+From: Adrian Negreanu <groleo@gmail.com>
+Date: Thu, 20 Apr 2017 10:15:29 +0300
+Subject: [PATCH 23/31] add support for Vivante extensions
+
+glTexDirectVIVMap
+glTexDirectMapVIV
+glTexDirectTiledMapVIV
+
+Note: this adds a dependency on the G2D libraries.
+---
+ CMakeLists.txt          |  11 ++++
+ cmake/FindVivante.cmake |  29 ++++++++++
+ retrace/CMakeLists.txt  |   5 +-
+ retrace/glretrace.py    | 142 ++++++++++++++++++++++++++++++++++++++++++++++++
+ specs/glapi.py          |   7 +++
+ wrappers/egltrace.py    | 121 ++++++++++++++++++++++++++++++++++++++++-
+ 6 files changed, 313 insertions(+), 2 deletions(-)
+ create mode 100644 cmake/FindVivante.cmake
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ce5fd4c..5efc888 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -44,6 +44,8 @@ option (ENABLE_WAFFLE "Enable WAFFLE support." OFF)
+ 
+ option (ENABLE_FRAME_POINTER "Disable frame pointer omission" ON)
+ 
++option (ENABLE_VIVANTE "Enable Vivante support." OFF)
++
+ # Proprietary Linux games often ship their own libraries (zlib, libstdc++,
+ # etc.) in order to ship a single set of binaries across multiple
+ # distributions.  Given that apitrace wrapper modules will be loaded into those
+@@ -159,6 +161,15 @@ if (ENABLE_EGL AND ENABLE_WAFFLE)
+     find_package (Waffle REQUIRED)
+ endif ()
+ 
++if (ENABLE_VIVANTE)
++    find_package (Vivante)
++    if (Vivante_FOUND)
++        add_definitions (-DHAVE_VIVANTE_G2D)
++    else()
++        message (FATAL_ERROR "Vivante requested but not found.")
++    endif()
++endif ()
++
+ 
+ ##############################################################################
+ # Set global build options
+diff --git a/cmake/FindVivante.cmake b/cmake/FindVivante.cmake
+new file mode 100644
+index 0000000..6ec1352
+--- /dev/null
++++ b/cmake/FindVivante.cmake
+@@ -0,0 +1,29 @@
++# - Vivante headers and libraries
++#set (Vivante_INC_SEARCH_PATH "usr/include")
++find_path (Vivante_G2D_INCLUDE_DIR g2d.h
++	PATHS ${Vivante_INC_SEARCH_PATH}
++	DOC "The directory where gd2.h resides"
++	)
++
++find_library (Vivante_G2D_LIBRARY libg2d.so
++	PATHS ${Vivante_LIB_SEARCH_PATH}
++	DOC "The directory where libg2d resides"
++	)
++find_library (Vivante_VDK_LIBRARY libVDK.so
++	PATHS ${Vivante_LIB_SEARCH_PATH}
++	DOC "The directory where libVDK resides"
++	)
++
++if (Vivante_G2D_INCLUDE_DIR AND Vivante_G2D_LIBRARY AND Vivante_VDK_LIBRARY)
++	set (Vivante_FOUND 1)
++endif ()
++
++mark_as_advanced (
++	Vivante_G2D_INCLUDE_DIR
++	Vivante_G2D_LIBRARY
++	Vivante_VDK_LIBRARY
++)
++
++mark_as_advanced (
++	Vivante_FOUND
++)
+diff --git a/retrace/CMakeLists.txt b/retrace/CMakeLists.txt
+index 9973e2c..fb8e299 100644
+--- a/retrace/CMakeLists.txt
++++ b/retrace/CMakeLists.txt
+@@ -131,6 +131,7 @@ if (WIN32 OR APPLE OR X11_FOUND)
+             # http://stackoverflow.com/questions/2702628/gdb-cannot-find-new-threads-generic-error
+             ${CMAKE_THREAD_LIBS_INIT}
+             ${CMAKE_DL_LIBS}
++            ${Vivante_G2D_LIBRARY}
+         )
+     endif ()
+ 
+@@ -154,6 +155,7 @@ if (ENABLE_EGL AND X11_FOUND AND NOT WIN32 AND NOT APPLE AND NOT ENABLE_WAFFLE)
+         ${X11_X11_LIB}
+         ${CMAKE_THREAD_LIBS_INIT}
+         ${CMAKE_DL_LIBS}
++        ${Vivante_G2D_LIBRARY}
+     )
+     install (TARGETS eglretrace RUNTIME DESTINATION bin) 
+ endif ()
+@@ -173,7 +175,8 @@ if (Vivante_FOUND AND ENABLE_EGL AND NOT X11_FOUND AND NOT WIN32 AND NOT APPLE A
+         glproc_egl
+         ${CMAKE_THREAD_LIBS_INIT}
+         ${CMAKE_DL_LIBS}
+-        VDK
++        ${Vivante_G2D_LIBRARY}
++        ${Vivante_VDK_LIBRARY}
+     )
+ 
+     if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+diff --git a/retrace/glretrace.py b/retrace/glretrace.py
+index db351e8..6b5608b 100644
+--- a/retrace/glretrace.py
++++ b/retrace/glretrace.py
+@@ -174,6 +174,59 @@ class GlRetracer(Retracer):
+ 
+ 
+     def invokeFunction(self, function):
++        if function.name == "glTexDirectVIVMap" or function.name == "glTexDirectMapVIV" or function.name == "glTexDirectTiledMapVIV":
++            print '#if defined(HAVE_VIVANTE_G2D)'
++            print '    GLint tex;'
++            print '    glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex);'
++            print '    int32_t size = 0;'
++            print '    switch(format){'
++            print '    case GL_VIV_YV12:'
++            print '    case GL_VIV_I420:'
++            print '    case GL_VIV_NV12:'
++            print '    case GL_VIV_NV21:'
++            print '        size=width * height * 3 / 2;'
++            print '        break;'
++            print '    case GL_RGBA:'
++            print '    case GL_BGRA_EXT:'
++            print '        size=width * height * 4;'
++            print '        break;'
++            print '    case GL_RGB:'
++            print '        size=width * height *3;'
++            print '        break;'
++            print '    case GL_VIV_YUY2:'
++            print '    case GL_VIV_UYVY:'
++            print '    case GL_RGB565_OES:'
++            print '        size=width * height *2;'
++            print '        break;'
++            print '    default:'
++            print '        break;'
++            print '    }'
++            print '    if(tex != 0)'
++            print '    {'
++            print '        TEXDIRECTVIVDATA &data = _directTextureDataMap[tex];'
++            print '        if(data.privateData == 0) // new entry'
++            print '        {'
++            print '            data.privateData = alloc_dma_buffer(size, &data.logical, &data.physical);'
++            print '            data.index=Logical[0];'
++            print '            data.size=size;'
++            print '            retrace::addRegion(call,data.index,(void*)data.logical,size);'
++            print '        }'
++            print '        else // already have one; check size and index'
++            print '        {'
++            print '            if((size!=data.size)||(Logical[0]!=data.index))'
++            print '            {'
++            print '                retrace::delRegionByPointer((void*)data.logical);'
++            print '                free_dma_buffer(data.privateData);'
++            print '                data.privateData = alloc_dma_buffer(size, &data.logical, &data.physical);'
++            print '                data.index=Logical[0];'
++            print '                data.size=size;'
++            print '                retrace::addRegion(call,data.index,(void*)data.logical,size);'
++            print '            }'
++            print '        }'
++            print '        *Logical = data.logical;'
++            print '        *Physical = data.physical;'
++            print '    }'
++            print '#endif /* HAVE_VIVANTE_G2D */'
+         # Infer the drawable size from GL calls
+         if function.name == "glViewport":
+             print '    glretrace::updateDrawable(x + width, y + height);'
+@@ -356,6 +409,54 @@ class GlRetracer(Retracer):
+             print '        currentContext->insideBeginEnd = true;'
+             print '    }'
+ 
++        if function.name == "glTexDirectVIV":
++            print '#if defined(HAVE_VIVANTE_G2D)'
++            print '    int32_t ysize = 0;'
++            print '    int32_t usize = 0;'
++            print '    int32_t vsize = 0;'
++            print '    switch(format){'
++            print '    case GL_VIV_YV12:'
++            print '    case GL_VIV_I420:'
++            print '        ysize=width * height;'
++            print '        usize=ysize/4;'
++            print '        vsize=usize;'
++            print '        break;'
++            print '    case GL_VIV_NV12:'
++            print '    case GL_VIV_NV21:'
++            print '        ysize=width * height;'
++            print '        usize=ysize/2;'
++            print '        vsize=0;'
++            print '        break;'
++            print '    case GL_RGBA:'
++            print '    case GL_BGRA_EXT:'
++            print '        ysize=width * height *4;'
++            print '        usize=0;'
++            print '        vsize=0;'
++            print '        break;'
++            print '    case GL_RGB:'
++            print '        ysize=width * height *3;'
++            print '        usize=0;'
++            print '        vsize=0;'
++            print '        break;'
++            print '    case GL_VIV_YUY2:'
++            print '    case GL_VIV_UYVY:'
++            print '    case GL_RGB565_OES:'
++            print '        ysize=width * height *2;'
++            print '        usize=0;'
++            print '        vsize=0;'
++            print '        break;'
++            print '    default:'
++            print '        break;'
++            print '    }'
++            print '    const trace::Array * arrayGLvoid = (call.arg(4)).toArray();'
++            print '    if(ysize > 0)'
++            print '        retrace::addRegion(call,(*arrayGLvoid->values[0]).toUInt(),(GLvoid*)pixels[0], ysize);'
++            print '    if(usize > 0)'
++            print '        retrace::addRegion(call,(*arrayGLvoid->values[1]).toUInt(),(GLvoid*)pixels[1], usize);'
++            print '    if(vsize > 0)'
++            print '        retrace::addRegion(call,(*arrayGLvoid->values[2]).toUInt(),(GLvoid*)pixels[2], vsize);'
++            print '#endif /* HAVE_VIVANTE_G2D */'
++
+         print r'    if (currentContext && !currentContext->insideList && !currentContext->insideBeginEnd && retrace::profiling) {'
+         if profileDraw:
+             print r'        glretrace::endProfile(call, true);'
+@@ -545,6 +646,47 @@ _getActiveProgram(void);
+ static void
+ _validateActiveProgram(trace::Call &call);
+ 
++#if defined(HAVE_VIVANTE_G2D)
++
++#define GL_VIV_YV12                        0x8FC0
++#define GL_VIV_NV12                        0x8FC1
++#define GL_VIV_YUY2                        0x8FC2
++#define GL_VIV_UYVY                        0x8FC3
++#define GL_VIV_NV21                        0x8FC4
++#define GL_VIV_I420                        0x8FC5
++
++typedef struct TexDirectVivData
++{
++    GLuint   logical; // used for glTexDirectVIVMap/glTexDirectMapVIV/glTexDirectTiledMapVIV
++    GLuint   physical;
++    GLuint   index;
++    uint32_t size;
++    void *privateData; // used to allocate buffer
++}TEXDIRECTVIVDATA;
++
++static std::map<GLint, TEXDIRECTVIVDATA> _directTextureDataMap;
++
++#include <g2d.h>
++
++static void * alloc_dma_buffer(int size, unsigned int *logical, unsigned int *physical)
++{
++    struct g2d_buf *buf = g2d_alloc(size, 0);
++    if(buf != NULL)
++    {
++        *logical = (unsigned int)buf->buf_vaddr;
++        *physical = (unsigned int)buf->buf_paddr ;
++    }
++    return buf;
++}
++
++static void free_dma_buffer(void *buf)
++{
++    if(buf != NULL)
++        g2d_free((g2d_buf *)buf);
++}
++
++#endif /* HAVE_VIVANTE_G2D */
++
+ '''
+     api = stdapi.API()
+     api.addModule(glapi.glapi)
+diff --git a/specs/glapi.py b/specs/glapi.py
+index d56d7fa..b0c30b3 100644
+--- a/specs/glapi.py
++++ b/specs/glapi.py
+@@ -3588,4 +3588,11 @@ glapi.addFunctions([
+     # GL_WIN_swap_hint
+     GlFunction(Void, "glAddSwapHintRectWIN", [(GLint, "x"), (GLint, "y"), (GLsizei, "width"), (GLsizei, "height")]),
+ 
++    # Vivante extension
++    GlFunction(Void, "glTexDirectVIV", [(GLenum, "target"), (GLsizei, "width"), (GLsizei, "height"), (GLenum, "format"), Out(Array(GLuint, 3), "pixels")]),
++    GlFunction(Void, "glTexDirectVIVMap", [(GLenum, "target"), (GLsizei, "width"), (GLsizei, "height"), (GLenum, "format"),      (Pointer(GLuint), "Logical"), (Pointer(Const(GLuint)), "Physical")]),
++    GlFunction(Void, "glTexDirectMapVIV", [(GLenum, "target"), (GLsizei, "width"), (GLsizei, "height"), (GLenum, "format"),       (Pointer(GLuint), "Logical"), (Pointer(Const(GLuint)), "Physical")]),
++    GlFunction(Void, "glTexDirectTiledMapVIV", [(GLenum, "target"), (GLsizei, "width"), (GLsizei, "height"), (GLenum, "format"), (Pointer(GLuint), "Logical"), (Pointer(Const(GLuint)), "Physical")]),
++    GlFunction(Void, "glTexDirectInvalidateVIV", [(GLenum, "target")]),
++
+ ])
+diff --git a/wrappers/egltrace.py b/wrappers/egltrace.py
+index 6d032eb..683f562 100644
+--- a/wrappers/egltrace.py
++++ b/wrappers/egltrace.py
+@@ -49,11 +49,109 @@ class EglTracer(GlTracer):
+     ]
+ 
+     def traceFunctionImplBody(self, function):
++        if function.name == 'glTexDirectMapVIV':
++            print '    // prevent loop call'
++            print '    glTexDirectVIVMap(target, width, height, format, Logical, Physical);'
++            return
++
++        if function.name == 'glTexDirectInvalidateVIV':
++            print '    // get current texture'
++            print '    GLint tex = 0;'
++            print '    int32_t size = 0;'
++            print '    int32_t ysize = 0;'
++            print '    int32_t usize = 0;'
++            print '    int32_t vsize = 0;'
++            print '    _glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex);'
++            print '    if(tex == 0)'
++            print '    {'
++            print '        return;'
++            print '    }'
++            print '    TEXDIRECTVIVDATA &data = _directTextureDataMap[tex];'
++            print '    switch(data.format){'
++            print '    case GL_VIV_YV12:'
++            print '    case GL_VIV_I420:'
++            print '        ysize=data.width * data.height;'
++            print '        usize=ysize/4;'
++            print '        vsize=usize;'
++            print '        break;'
++            print '    case GL_VIV_NV12:'
++            print '    case GL_VIV_NV21:'
++            print '        ysize=data.width * data.height;'
++            print '        usize=ysize/2;'
++            print '        vsize=0;'
++            print '        break;'
++            print '    case GL_RGBA:'
++            print '    case GL_BGRA_EXT:'
++            print '        ysize=data.width * data.height *4;'
++            print '        usize=0;'
++            print '        vsize=0;'
++            print '        break;'
++            print '    case GL_RGB:'
++            print '        ysize=data.width * data.height *3;'
++            print '        usize=0;'
++            print '        vsize=0;'
++            print '        break;'
++            print '    case GL_VIV_YUY2:'
++            print '    case GL_VIV_UYVY:'
++            print '    case GL_RGB565_OES:'
++            print '        ysize=data.width * data.height *2;'
++            print '        usize=0;'
++            print '        vsize=0;'
++            print '        break;'
++            print '    default:'
++            print '        return;'
++            print '    }'
++            print '    if (NULL==(GLvoid*)data.logical) {'
++            print '        if (ysize > 0) {'
++            self.emit_memcpy('(GLvoid*)data.planes[0]', 'ysize')
++            print '         }'
++            print '        if (usize > 0) {'
++            self.emit_memcpy('(GLvoid*)data.planes[1]', 'usize')
++            print '         }'
++            print '        if (vsize > 0) {'
++            self.emit_memcpy('(GLvoid*)data.planes[2]', 'vsize')
++            print '         }'
++            print '    } else {'
++            print '        size = ysize + usize + vsize;'
++            print '        if (size > 0) {'
++            self.emit_memcpy('(GLvoid*)data.logical', 'size')
++            print '         }'
++            print '    }'
++
+         if function.name == 'eglGetProcAddress':
+             print '    procname = __get_alias_func_name(procname);'
+ 
+         GlTracer.traceFunctionImplBody(self, function)
+ 
++        if function.name == 'glTexDirectVIV':
++            print '    // get current texture'
++            print '    GLint tex = 0;'
++            print '    _glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex);'
++            print '    if(tex != 0)'
++            print '    {'
++            print '        TEXDIRECTVIVDATA &data = _directTextureDataMap[tex];'
++            print '        data.width = width;'
++            print '        data.height = height;'
++            print '        data.format = format;'
++            print '        data.planes[0] = pixels[0];'
++            print '        data.planes[1] = pixels[1];'
++            print '        data.planes[2] = pixels[2];'
++            print '    }'
++
++        if function.name == 'glTexDirectVIVMap' or function.name == 'glTexDirectTiledMapVIV':
++            print '    // get current texture'
++            print '    GLint tex = 0;'
++            print '    _glGetIntegerv(GL_TEXTURE_BINDING_2D, &tex);'
++            print '    if(tex != 0)'
++            print '    {'
++            print '        TEXDIRECTVIVDATA &data = _directTextureDataMap[tex];'
++            print '        data.width = width;'
++            print '        data.height = height;'
++            print '        data.format = format;'
++            print '        data.logical = *Logical; // Logical != NULL'
++            print '        data.physical = *Physical;'
++            print '    }'
++
+         if function.name == 'eglCreateContext':
+             print '    if (_result != EGL_NO_CONTEXT)'
+             print '        gltrace::createContext((uintptr_t)_result);'
+@@ -158,7 +256,28 @@ if __name__ == '__main__':
+     print
+     print '    return origFunName;'
+     print '}'
+-    
++
++    print
++    print 'typedef struct TexDirectVivData'
++    print '{'
++    print '    int width;'
++    print '    int height;'
++    print '    GLenum format;'
++    print '    GLuint planes[3]; // used for glTexDirectVIV'
++    print '    GLuint logical; // used for glTexDirectVIVMap/glTexDirectMapVIV/glTexDirectTiledMapVIV'
++    print '    GLuint physical;'
++    print '}TEXDIRECTVIVDATA;'
++    print
++    print 'static std::map<GLint, TEXDIRECTVIVDATA> _directTextureDataMap;'
++    print
++    print '#define GL_VIV_YV12                        0x8FC0'
++    print '#define GL_VIV_NV12                        0x8FC1'
++    print '#define GL_VIV_YUY2                        0x8FC2'
++    print '#define GL_VIV_UYVY                        0x8FC3'
++    print '#define GL_VIV_NV21                        0x8FC4'
++    print '#define GL_VIV_I420                        0x8FC5'
++    print
++
+     module = Module()
+     module.mergeModule(eglapi)
+     module.mergeModule(glapi)
+-- 
+2.7.4
+

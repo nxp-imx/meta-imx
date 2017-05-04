@@ -1,0 +1,36 @@
+From 1c1f29f549a121ed0a402c95044376457a882a35 Mon Sep 17 00:00:00 2001
+From: Yuchou Gan <yuchou.gan@nxp.com>
+Date: Thu, 19 Jan 2017 11:55:35 +0200
+Subject: [PATCH 15/31] egl: define egl native types for non-x11
+
+---
+ thirdparty/khronos/EGL/eglplatform.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/thirdparty/khronos/EGL/eglplatform.h b/thirdparty/khronos/EGL/eglplatform.h
+index 203f08c..ed189e2 100644
+--- a/thirdparty/khronos/EGL/eglplatform.h
++++ b/thirdparty/khronos/EGL/eglplatform.h
+@@ -111,6 +111,7 @@ typedef void *EGLNativeWindowType;
+ 
+ #elif defined(__unix__)
+ 
++#if defined(HAVE_X11)
+ /* X11 (tentative)  */
+ #include <X11/Xlib.h>
+ #include <X11/Xutil.h>
+@@ -118,6 +119,11 @@ typedef void *EGLNativeWindowType;
+ typedef Display *EGLNativeDisplayType;
+ typedef Pixmap   EGLNativePixmapType;
+ typedef Window   EGLNativeWindowType;
++#else
++typedef void *EGLNativeDisplayType;
++typedef void *EGLNativePixmapType;
++typedef void *EGLNativeWindowType;
++#endif
+ 
+ #else
+ #error "Platform not recognized"
+-- 
+2.7.4
+

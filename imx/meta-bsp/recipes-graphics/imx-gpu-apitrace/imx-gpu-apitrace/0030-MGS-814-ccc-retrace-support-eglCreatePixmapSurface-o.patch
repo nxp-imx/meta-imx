@@ -1,0 +1,98 @@
+From 5645e1fbf239be0a3f5af059057cc8c381acbf0e Mon Sep 17 00:00:00 2001
+From: Yang Dong <b56112@freescale.com>
+Date: Thu, 20 Apr 2017 11:58:48 +0300
+Subject: [PATCH 30/31] MGS-814 [#ccc] retrace: support eglCreatePixmapSurface
+ on NonX backend
+
+Signed-off-by: Yang Dong <b56112@freescale.com>
+---
+ retrace/glretrace.hpp     |  3 +++
+ retrace/glretrace_egl.cpp | 26 +++++++++++++++++++++++++-
+ retrace/glretrace_ws.cpp  |  6 ++++++
+ 3 files changed, 34 insertions(+), 1 deletion(-)
+
+diff --git a/retrace/glretrace.hpp b/retrace/glretrace.hpp
+index 7e26d6d..f75b516 100644
+--- a/retrace/glretrace.hpp
++++ b/retrace/glretrace.hpp
+@@ -96,6 +96,9 @@ glws::Drawable *
+ createDrawable(glprofile::Profile profile);
+ 
+ glws::Drawable *
++createPixmapDrawable(glprofile::Profile profile);
++
++glws::Drawable *
+ createDrawable(void);
+ 
+ glws::Drawable *
+diff --git a/retrace/glretrace_egl.cpp b/retrace/glretrace_egl.cpp
+index c6fabdd..d1e63ed 100644
+--- a/retrace/glretrace_egl.cpp
++++ b/retrace/glretrace_egl.cpp
+@@ -118,6 +118,24 @@ static void createDrawable(unsigned long long orig_config, unsigned long long or
+     drawable_map[orig_surface] = drawable;
+ }
+ 
++static void createPixmapDrawable(unsigned long long orig_config, unsigned long long orig_surface)
++{
++    ProfileMap::iterator it = profile_map.find(orig_config);
++    glprofile::Profile profile;
++
++    // If the requested config is associated with a profile, use that
++    // profile. Otherwise, assume that the last used profile is what
++    // the user wants.
++    if (it != profile_map.end()) {
++        profile = it->second;
++    } else {
++        profile = last_profile;
++    }
++
++    glws::Drawable *drawable = glretrace::createPixmapDrawable(profile);
++    drawable_map[orig_surface] = drawable;
++}
++
+ static void retrace_eglChooseConfig(trace::Call &call) {
+     if (!call.ret->toSInt()) {
+         return;
+@@ -166,6 +184,12 @@ static void retrace_eglCreatePbufferSurface(trace::Call &call) {
+     // TODO: Respect the pbuffer dimensions too
+ }
+ 
++static void retrace_eglCreatePixmapSurface(trace::Call &call) {
++    unsigned long long orig_config = call.arg(1).toUIntPtr();
++    unsigned long long orig_surface = call.ret->toUIntPtr();
++    createPixmapDrawable(orig_config, orig_surface);
++}
++
+ static void retrace_eglDestroySurface(trace::Call &call) {
+     unsigned long long orig_surface = call.arg(1).toUIntPtr();
+ 
+@@ -293,7 +317,7 @@ const retrace::Entry glretrace::egl_callbacks[] = {
+     {"eglGetConfigAttrib", &retrace::ignore},
+     {"eglCreateWindowSurface", &retrace_eglCreateWindowSurface},
+     {"eglCreatePbufferSurface", &retrace_eglCreatePbufferSurface},
+-    //{"eglCreatePixmapSurface", &retrace::ignore},
++    {"eglCreatePixmapSurface", &retrace_eglCreatePixmapSurface},
+     {"eglDestroySurface", &retrace_eglDestroySurface},
+     {"eglQuerySurface", &retrace::ignore},
+     {"eglBindAPI", &retrace_eglBindAPI},
+diff --git a/retrace/glretrace_ws.cpp b/retrace/glretrace_ws.cpp
+index 4d617f7..376b055 100644
+--- a/retrace/glretrace_ws.cpp
++++ b/retrace/glretrace_ws.cpp
+@@ -99,6 +99,12 @@ createDrawable(glprofile::Profile profile) {
+ 
+ 
+ glws::Drawable *
++createPixmapDrawable(glprofile::Profile profile) {
++    return createDrawableHelper(profile, false, true);
++}
++
++
++glws::Drawable *
+ createDrawable(void) {
+     return createDrawable(defaultProfile);
+ }
+-- 
+2.7.4
+

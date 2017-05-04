@@ -1,0 +1,58 @@
+From 6d25ba9cff1736fc69e4b7e0a3b5062545e9c128 Mon Sep 17 00:00:00 2001
+From: Yuchou Gan <yuchou.gan@nxp.com>
+Date: Fri, 3 Jun 2016 17:16:44 +0800
+Subject: [PATCH 27/31] MGS-1859 [#ccc] blank screen when retracing es20 sdk
+ app DirectMultiSamplingVideoYUV_FB
+
+Add GL_ALPHA and GL_LUMINANCE8_ALPHA8_EXT format support for
+
+glTexDirectVIVMap and glTexDirectInvalidateVIV.
+
+Date June 3, 2016
+Signed-off-by: Gan Yuchou <yuchou.gan@nxp.com>
+---
+ retrace/glretrace.py | 4 ++++
+ wrappers/egltrace.py | 6 ++++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/retrace/glretrace.py b/retrace/glretrace.py
+index 870c84a..9618e52 100644
+--- a/retrace/glretrace.py
++++ b/retrace/glretrace.py
+@@ -196,8 +196,12 @@ class GlRetracer(Retracer):
+             print '    case GL_VIV_YUY2:'
+             print '    case GL_VIV_UYVY:'
+             print '    case GL_RGB565_OES:'
++            print '    case GL_LUMINANCE8_ALPHA8_EXT:'
+             print '        size=width * height *2;'
+             print '        break;'
++            print '    case GL_ALPHA:'
++            print '        size=width * height;'
++            print '        break;'
+             print '    default:'
+             print '        break;'
+             print '    }'
+diff --git a/wrappers/egltrace.py b/wrappers/egltrace.py
+index 683f562..572e67c 100644
+--- a/wrappers/egltrace.py
++++ b/wrappers/egltrace.py
+@@ -94,10 +94,16 @@ class EglTracer(GlTracer):
+             print '    case GL_VIV_YUY2:'
+             print '    case GL_VIV_UYVY:'
+             print '    case GL_RGB565_OES:'
++            print '    case GL_LUMINANCE8_ALPHA8_EXT:'
+             print '        ysize=data.width * data.height *2;'
+             print '        usize=0;'
+             print '        vsize=0;'
+             print '        break;'
++            print '    case GL_ALPHA:'
++            print '        ysize=data.width * data.height;'
++            print '        usize=0;'
++            print '        vsize=0;'
++            print '        break;'
+             print '    default:'
+             print '        return;'
+             print '    }'
+-- 
+2.7.4
+
