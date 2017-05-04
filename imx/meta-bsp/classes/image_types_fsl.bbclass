@@ -4,6 +4,8 @@ IMAGE_BOOTLOADER ?= "u-boot"
 
 IMAGE_M4LOADER ?= ""
 
+BOOTLOADER_OFFSET ?= "16"
+
 # Handle u-boot suffixes
 UBOOT_SUFFIX ?= "bin"
 UBOOT_SUFFIX_SDCARD ?= "${UBOOT_SUFFIX}"
@@ -200,7 +202,7 @@ generate_imx_sdcard () {
 		exit 1
 		;;
                 imx-boot)
-                dd if=${DEPLOY_DIR_IMAGE}/imx-boot/imx-boot-${MACHINE}-${UBOOT_CONFIG}.bin of=${SDCARD} conv=notrunc seek=16 bs=1K
+                dd if=${DEPLOY_DIR_IMAGE}/imx-boot/imx-boot-${MACHINE}-${UBOOT_CONFIG}.bin of=${SDCARD} conv=notrunc seek=${BOOTLOADER_OFFSET} bs=1K
                 ;;
                 u-boot)
 		if [ -n "${SPL_BINARY}" ]; then
