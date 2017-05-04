@@ -55,6 +55,8 @@ SRC_URI_append = " \
         file://0035-Fix-6slevk-build-break-when-egl-is-disabled.patch \
         file://0036-gst-player-fix-gst-player-failed-to-load-external-su.patch \
         file://0037-opencv-allow-compilation-against-3.2.0.patch \
+        file://0038-MMFMWK-7554-glupload-fix-memory-leak-when-use-a-GVal.patch \
+        file://0039-glupload-passthrough-composition-caps-features-in-ph.patch \
 "
 
 # include fragment shaders
