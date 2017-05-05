@@ -14,7 +14,10 @@ PLATFORM_mx7ulp  = "IMX7D"
 
 PARALLEL_MAKE="-j 1"
 
-SRC_URI[md5sum] = "83f34c29d6b09c21a78bba3e7f9550f1"
-SRC_URI[sha256sum] = "e0e53c8e988772ced1f9725486b9b09b92fc34052996d964fd927db1ab08d1c5"
+S = "${WORKDIR}/git"
+SRCBRANCH = "imx_4.1.y"
+IMXTEST_SRC ?= "git://git.freescale.com/imx/imx-test.git;protocol=git"
+SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
+SRCREV = "51bf6163155d1ca1b9062f26a8b7fb67bba79018"
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
