@@ -4,7 +4,7 @@
 SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true \
            git://sw-stash.freescale.net/scm/imx/imx-firmware.git;protocol=http;branch=${SRCBRANCH};destsuffix=${S}/git "
 
-SRCREV = "4b3dd61998a533325726c9bc2a53673ce9459123"
+SRCREV = "15b71028ad5ab7038f14014d3010d3d81247ab04"
 
 do_install() {
     install -d ${D}${base_libdir}/firmware/imx
