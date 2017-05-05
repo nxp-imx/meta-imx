@@ -1,14 +1,18 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
-# Copyright 2017 NXP
 # Copyright (C) 2012-2014 O.S. Systems Software LTDA.
+# Copyright 2017 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
 
-SRC_URI[md5sum] = "4fa006a5750e25369e6d9feac82949b4"
-SRC_URI[sha256sum] = "9bc6a55c6a2dff468f6b9a3d173d0fcb4ebd1bddd819d429198e1fccfc120a61"
+SRCBRANCH = "imx_exa_viv6_g2d"
+S = "${WORKDIR}/git/"
+XF86_VIDEO_IMXFB_VIV_SRC ?= "git://git.freescale.com/imx/xf86-imxfb-vivante.git;protocol=git"
+SRC_URI = "${XF86_VIDEO_IMXFB_VIV_SRC};branch=${SRCBRANCH} \
+            file://rc.autohdmi"
+SRCREV = "cbbc8029cf4c4ab69a8061d9382aae6b3c037638"
 
 DEPENDS += "virtual/libg2d"
 
