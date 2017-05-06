@@ -36,6 +36,6 @@ PE = "1"
 SRCBRANCH = "master"
 IMXLIB_SRC ?= "git://git.freescale.com/imx/imx-lib.git;protocol=git"
 SRC_URI = "${IMXLIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "67083e1"
+SRCREV = "67083e1999d5baa90d7141d84bb866ec8a7cfa90"
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
