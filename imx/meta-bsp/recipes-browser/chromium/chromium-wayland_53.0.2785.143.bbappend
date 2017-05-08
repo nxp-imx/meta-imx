@@ -35,10 +35,6 @@ DEPENDS_remove = "${DEPENDS_REMOVE}"
 
 PACKAGES_remove = "${PN}-codecs-ffmpeg ${PN}-plugin-pdf"
 
-# chromium changes for mx7ulp
-
-SRC_URI_append_mx7ulp = " file://add-armv7ve-in-v8-toolchain.patch"
-
 # chromium changes for mx8 (64 bit)
 
 # CHROMIUM_IMX_VPU_PATCHES_mx8 += "${VPU_PATCHES}"
