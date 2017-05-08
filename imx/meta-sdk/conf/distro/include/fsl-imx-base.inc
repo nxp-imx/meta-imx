@@ -95,3 +95,5 @@ MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx8 = "1"
 
 MACHINEOVERRIDES_EXTENDER_mx6sll  = "imxpxp:imxepdc"
 MACHINEOVERRIDES_EXTENDER_mx7ulp  = "imxpxp:imxgpu2d:imxgpu3d"
+
+MACHINE_FIRMWARE_append = " firmware-imx-brcm"
