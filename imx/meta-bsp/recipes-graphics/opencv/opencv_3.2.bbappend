@@ -2,6 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append = " \
     file://Avoid-segmentation-fault.patch \
+    file://Disable_OpenVX.patch \
 "
 
 SRCREV_opencv_extra = "c41d35c0be5feeb884e7da57c201461cb9877863"

@@ -1,0 +1,25 @@
+diff --git a/modules/core/src/ovx.cpp b/modules/core/src/ovx.cpp
+index a53f553..6fb9bce 100644
+--- a/modules/core/src/ovx.cpp
++++ b/modules/core/src/ovx.cpp
+@@ -17,6 +17,12 @@ namespace cv
+ bool haveOpenVX()
+ {
+ #ifdef HAVE_OPENVX
++    char *p;
++    p = getenv("NO_OPENVX");
++    if((p != NULL) && (p[0] == '1'))
++   {
++        return false;
++   }
+     static int g_haveOpenVX = -1;
+     if(g_haveOpenVX < 0)
+     {
+@@ -45,6 +51,7 @@ bool useOpenVX()
+ {
+ #ifdef HAVE_OPENVX
+     CoreTLSData* data = getCoreTlsData().get();
++    if(!haveOpenVX())  return false;
+     if( data->useOpenVX < 0 )
+     {
+         // enabled (if available) by default
