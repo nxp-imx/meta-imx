@@ -14,6 +14,7 @@ SRC_URI = "${XF86_VIDEO_IMXFB_VIV_SRC};branch=${SRCBRANCH}"
 SRCREV = "568869b97b712d276e84c94f2f633f251bbab331"
 
 SRC_URI +="file://rc.autohdmi"
+SRCREV = "568869b97b712d276e84c94f2f633f251bbab331"
 
 DEPENDS += "virtual/libg2d"
 
