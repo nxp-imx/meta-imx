@@ -1,8 +1,9 @@
 # Copyright 2017 NXP
 
 #BRCM firmware v1.141.100.6
+IMX_FIRMWARE_SRC ?= "git://git.freescale.com/imx/imx-firmware.git;protocol=git"
 SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true \
-           git://sw-stash.freescale.net/scm/imx/imx-firmware.git;protocol=http;branch=${SRCBRANCH};destsuffix=${S}/git "
+           ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH};destsuffix=${S}/git "
 
 SRCREV = "15b71028ad5ab7038f14014d3010d3d81247ab04"
 
