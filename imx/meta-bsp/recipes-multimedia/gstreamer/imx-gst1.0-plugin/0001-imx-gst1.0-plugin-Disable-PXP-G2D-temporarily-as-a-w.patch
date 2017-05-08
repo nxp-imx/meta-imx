@@ -1,0 +1,93 @@
+From 44e0029b28a04bee4a4e2fa26c68df70dd1fe7ec Mon Sep 17 00:00:00 2001
+From: Yuqing Zhu <carol.zhu@nxp.com>
+Date: Mon, 8 May 2017 17:12:45 +0800
+Subject: [PATCH] imx-gst1.0-plugin: Disable PXP G2D temporarily as a
+ workaround to skip build break
+
+Signed-off-by: Yuqing Zhu <carol.zhu@nxp.com>
+---
+ configure    | 14 +++++++-------
+ configure.ac | 10 +++++-----
+ 2 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/configure b/configure
+index ec17deb..cafb03a 100755
+--- a/configure
++++ b/configure
+@@ -14411,20 +14411,20 @@ fi
+ 
+ if test "x$PLATFORM" = "xMX6" || test "x$PLATFORM" = "xMX6QP"; then
+ 	 HAVE_DEVICE_IPU=yes
+-	 HAVE_DEVICE_G2D=yes
++	 HAVE_DEVICE_G2D=no
+ fi
+ 
+ if test "x$PLATFORM" = "xMX6SL" || test "x$PLATFORM" = "xMX6SX"; then
+-	 HAVE_DEVICE_G2D=yes
+-	 HAVE_DEVICE_PXP=yes
++	 HAVE_DEVICE_G2D=no
++	 HAVE_DEVICE_PXP=no
+ fi
+ 
+ if test "x$PLATFORM" = "xMX6UL" || test "x$PLATFORM" = "xMX7D" || test "x$PLATFORM" = "xMX6SLL" ; then
+-	 HAVE_DEVICE_PXP=yes
++	 HAVE_DEVICE_PXP=no
+ fi
+ 
+ if test "x$PLATFORM" = "xMX8" || test "x$PLATFORM" = "xMX7ULP"; then
+-	 HAVE_DEVICE_G2D=yes
++	 HAVE_DEVICE_G2D=no
+ fi
+ 
+ 
+@@ -14789,7 +14789,7 @@ if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
+   cat >>confdefs.h <<_ACEOF
+ #define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
+ _ACEOF
+- HAVE_IMX_2DDEVICE_G2D=yes && break
++ HAVE_IMX_2DDEVICE_G2D=no && break
+ else
+   HAVE_IMX_2DDEVICE_G2D=no
+ fi
+@@ -14875,7 +14875,7 @@ if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
+   cat >>confdefs.h <<_ACEOF
+ #define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
+ _ACEOF
+- HAVE_IMX_2DDEVICE_PXP=yes && break
++ HAVE_IMX_2DDEVICE_PXP=no && break
+ else
+   HAVE_IMX_2DDEVICE_PXP=no
+ fi
+diff --git a/configure.ac b/configure.ac
+index b5e9231..79b6173 100755
+--- a/configure.ac
++++ b/configure.ac
+@@ -344,20 +344,20 @@ AM_CONDITIONAL(USE_FB_DISPLAY, test "x$PLATFORM" = "xMX8" || test "x$PLATFORM" =
+ 
+ if test "x$PLATFORM" = "xMX6" || test "x$PLATFORM" = "xMX6QP"; then
+ 	 HAVE_DEVICE_IPU=yes
+-	 HAVE_DEVICE_G2D=yes
++	 HAVE_DEVICE_G2D=no
+ fi
+ 
+ if test "x$PLATFORM" = "xMX6SL" || test "x$PLATFORM" = "xMX6SX"; then
+-	 HAVE_DEVICE_G2D=yes
+-	 HAVE_DEVICE_PXP=yes
++	 HAVE_DEVICE_G2D=no
++	 HAVE_DEVICE_PXP=no
+ fi
+ 
+ if test "x$PLATFORM" = "xMX6UL" || test "x$PLATFORM" = "xMX7D" || test "x$PLATFORM" = "xMX6SLL" ; then
+-	 HAVE_DEVICE_PXP=yes
++	 HAVE_DEVICE_PXP=no
+ fi
+ 
+ if test "x$PLATFORM" = "xMX8" || test "x$PLATFORM" = "xMX7ULP"; then
+-	 HAVE_DEVICE_G2D=yes
++	 HAVE_DEVICE_G2D=no
+ fi
+ 
+ CHECK_DISABLE_FEATURE(mp3enc, [Disable mp3 encoder plugin], [MP3_ENC], [mp3_enc_interface.h], [plugin: imxmp3enc])
+-- 
+1.9.1
+
