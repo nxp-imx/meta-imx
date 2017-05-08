@@ -20,4 +20,7 @@ RDEPENDS_${PN}_remove = "libvivante-dri-mx6"
 
 RDEPENDS_${PN}_append = " libvivante-dri-imx"
 
+# work-around for 6.2.2 build issue
+CFLAGS_append = " -DLINUX"
+
 COMPATIBLE_MACHINE = "(mx6|mx8|mx7ulp)"
