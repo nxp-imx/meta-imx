@@ -11,8 +11,6 @@ SRCBRANCH = "imx_exa_viv6_g2d"
 S = "${WORKDIR}/git/"
 XF86_VIDEO_IMXFB_VIV_SRC ?= "git://git.freescale.com/imx/xf86-imxfb-vivante.git;protocol=git"
 SRC_URI = "${XF86_VIDEO_IMXFB_VIV_SRC};branch=${SRCBRANCH}"
-SRCREV = "568869b97b712d276e84c94f2f633f251bbab331"
-
 SRC_URI +="file://rc.autohdmi"
 SRCREV = "568869b97b712d276e84c94f2f633f251bbab331"
 
@@ -21,8 +19,5 @@ DEPENDS += "virtual/libg2d"
 RDEPENDS_${PN}_remove = "libvivante-dri-mx6"
 
 RDEPENDS_${PN}_append = " libvivante-dri-imx"
-
-# work-around for 6.2.2 build issue
-CFLAGS_append = " -DLINUX"
 
 COMPATIBLE_MACHINE = "(mx6|mx8|mx7ulp)"
