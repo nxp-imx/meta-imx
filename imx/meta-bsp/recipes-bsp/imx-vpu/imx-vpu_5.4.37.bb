@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
 
 PE = "1"
 
-SRC_URI[md5sum] = "46fd44e75134daea800bf324c7920acf"
-SRC_URI[sha256sum] = "a5a9e01e1305528dffaa9240dde3e4513e152b3e6f3761634bf52eeac5696291"
+SRC_URI[md5sum] = "01a73ce199ba20cf005bcf3fbff28a12"
+SRC_URI[sha256sum] = "47f82412278d117bd989efd95718cbd11b9310093bc37506bb01d5b70d4e8c8a"
 
 # imx-vpu can only support imx6q platform, in order to build out the vpu case in unit test,
 # using a workaround to transfer "IMX6Q" on imx6ul & imx7d platform.
