@@ -15,6 +15,11 @@ DEPENDS_append_mx8      = \
         bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
                                                         ' glslang-native vulkan-loader-layers', d), d)}"
 
+SDK_BRANCH ?= "release/4.0.1"
+GPU_SDK_SRC ?= "git://github.com/NXPmicro/gtec-demo-framework.git;protocol=http"
+SRC_URI = "${GPU_SDK_SRC};branch=${SDK_BRANCH}"
+SRCREV = "16840f3d0333a6e0474e5329d4aaaaf71823f2f9"
+
 # For backwards compatibility
 RPROVIDES_${PN} = "fsl-gpu-sdk"
 RREPLACES_${PN} = "fsl-gpu-sdk"
