@@ -49,7 +49,6 @@ SRC_URI_append = " \
         file://0028-Specific-patches-for-gstplayer-API.patch \
         file://0029-player-Add-overlayvideorenderer-video-sink.patch \
         file://0030-player-Add-get-video-snapshot-API.patch \
-        file://0031-gl-window-attach-the-GMaincontext-in-window-struct-t.patch \
         file://0032-gstplayer-Add-gst_player_get_state-API.patch \
         file://0033-gstplayer-Add-play-stop-sync-API.patch \
         file://0035-Fix-6slevk-build-break-when-egl-is-disabled.patch \
