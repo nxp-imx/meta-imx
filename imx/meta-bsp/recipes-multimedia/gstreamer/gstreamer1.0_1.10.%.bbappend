@@ -7,5 +7,6 @@ SRC_URI_append = " file://0001-handle-base-parse-error.patch \
                    file://0004-gstbaseparse-Need-push-adapter-remainning-data-in-pa.patch \
                    file://0005-inputselector-should-proceed-non-active-pad-buffer-e.patch \
                    file://0006-poll-Add-check-if-can-read-event-API.patch \
+                   file://0007-inputselector-Need-flush-when-set-active-pad-and-the.patch \
 "
 
