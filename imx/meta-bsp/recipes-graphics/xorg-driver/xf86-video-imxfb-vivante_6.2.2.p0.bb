@@ -12,7 +12,7 @@ S = "${WORKDIR}/git/"
 XF86_VIDEO_IMXFB_VIV_SRC ?= "git://git.freescale.com/imx/xf86-imxfb-vivante.git;protocol=git"
 SRC_URI = "${XF86_VIDEO_IMXFB_VIV_SRC};branch=${SRCBRANCH}"
 SRC_URI +="file://rc.autohdmi"
-SRCREV = "a508a7864fb149b7db9d77c279f7076f39521248"
+SRCREV = "279a164f2c5f18e732e94919f3b89eb031268718"
 
 DEPENDS += "virtual/libg2d"
 
