@@ -24,14 +24,13 @@ RCONFLICTS_${PN} = "gst1.0-fsl-plugin"
 LIC_FILES_CHKSUM = "file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
                     file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
 
-SRC_URI = " \
-    ${FSL_MIRROR}/imx-gst1.0-plugin-${PV}.tar.gz \
-"
+IMXGST_SRC ?= "git://sw-stash.freescale.net/scm/mmcsh/gst1.0-plugins-fsl.git;protocol=http"
+FSL_MM_GIT_TAGBRANCH ?= "master"
 
-SRC_URI[md5sum] = "81c82b1e47d8aa15634421d96730ddf8"
-SRC_URI[sha256sum] = "6a4b6df547ba5e7b6583c28f151147f15513228bb397cc314dae8fc341c1a72b"
+SRC_URI = "${IMXGST_SRC};branch=${FSL_MM_GIT_TAGBRANCH}"
+SRCREV  = "a6fa1e6e39eb667a7e2b56a3ea3d88ed769aaa28"
 
-S = "${WORKDIR}/imx-gst1.0-plugin-${PV}"
+S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
