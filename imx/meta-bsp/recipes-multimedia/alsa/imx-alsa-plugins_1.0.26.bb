@@ -23,7 +23,7 @@ IMXALSA_SRC ?= "git://sw-stash.freescale.net/scm/mmcsh/fsl-alsa-plugins.git;prot
 FSL_MM_GIT_TAGBRANCH ?= "master"
 
 SRC_URI = "${IMXALSA_SRC};branch=${FSL_MM_GIT_TAGBRANCH}"
-SRCREV  = "9a63071e7734bd164017f3761b8d1944c017611f"
+SRCREV = "9a63071e7734bd164017f3761b8d1944c017611f"
 S = "${WORKDIR}/git"
 
 INCLUDE_DIR = "-I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include"
