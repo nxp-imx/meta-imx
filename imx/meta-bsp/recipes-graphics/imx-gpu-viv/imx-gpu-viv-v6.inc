@@ -208,11 +208,11 @@ do_install () {
                \
                ${D}${libdir}/libGL* ${D}${includedir}/GL* ${D}${libdir}/pkgconfig/gl.pc \ 
                \
-               ${D}${libdir}/libGLES* \
+               ${D}${libdir}/libGLES* ${D}${libdir}/pkgconfig/gles*.pc \
                \
                ${D}${libdir}/libOpenCL* ${D}${includedir}/CL \
                \
-               ${D}${libdir}/libOpenVG.so ${D}${libdir}/libOpenVG.3d.so \
+               ${D}${libdir}/libOpenVG.so ${D}${libdir}/libOpenVG.3d.so ${D}${libdir}/pkgconfig/vg.pc\
                \
                ${D}${libdir}/libVivanteOpenCL.so \
                \
