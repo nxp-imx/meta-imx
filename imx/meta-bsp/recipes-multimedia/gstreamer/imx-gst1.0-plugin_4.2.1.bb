@@ -28,7 +28,7 @@ IMXGST_SRC ?= "git://sw-stash.freescale.net/scm/mmcsh/gst1.0-plugins-fsl.git;pro
 FSL_MM_GIT_TAGBRANCH ?= "master"
 
 SRC_URI = "${IMXGST_SRC};branch=${FSL_MM_GIT_TAGBRANCH}"
-SRCREV = "a6fa1e6e39eb667a7e2b56a3ea3d88ed769aaa28"
+SRCREV = "8cdf6792351977e139e3a88461dcfdae53534744"
 
 S = "${WORKDIR}/git"
 
