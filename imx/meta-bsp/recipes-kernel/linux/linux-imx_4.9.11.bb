@@ -15,7 +15,7 @@ SRCBRANCH = "imx_4.9.y"
 LOCALVERSION = "-1.0.0"
 KERNEL_SRC ?= "git://git.freescale.com/imx/linux-imx.git;protocol=git"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
-SRCREV = "b9cc19e6922ff3b8ff445bcccaec05329968faa1"
+SRCREV = "de6adcebf19e2637126b7d4943e0c67d3d73b119"
 
 DEFAULT_PREFERENCE = "1"
 
