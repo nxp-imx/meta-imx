@@ -19,7 +19,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 inherit autotools pkgconfig
 
-IMXALSA_SRC ?= "git://sw-stash.freescale.net/scm/mmcsh/fsl-alsa-plugins.git;protocol=http"
+IMXALSA_SRC ?= "git://git.freescale.com/imx/fsl-alsa-plugins.git;protocol=git"
 FSL_MM_GIT_TAGBRANCH ?= "MM_04.02.01_1705_L4.9.11_CONSOLIDATED_GA"
 
 SRC_URI = "${IMXALSA_SRC};branch=${FSL_MM_GIT_TAGBRANCH}"

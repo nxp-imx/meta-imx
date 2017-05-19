@@ -24,7 +24,7 @@ RCONFLICTS_${PN} = "gst1.0-fsl-plugin"
 LIC_FILES_CHKSUM = "file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
                     file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
 
-IMXGST_SRC ?= "git://sw-stash.freescale.net/scm/mmcsh/gst1.0-plugins-fsl.git;protocol=http"
+IMXGST_SRC ?= "git://git.freescale.com/imx/gst1.0-plugins-fsl.git;protocol=git"
 FSL_MM_GIT_TAGBRANCH ?= "MM_04.02.01_1705_L4.9.11_CONSOLIDATED_GA"
 
 SRC_URI = "${IMXGST_SRC};branch=${FSL_MM_GIT_TAGBRANCH}"
