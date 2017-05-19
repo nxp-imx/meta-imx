@@ -7,10 +7,15 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-RDEPENDS_${PN} += " \
+RDEPENDS_${PN}_append = " \
     qtbase-examples \
     qtdeclarative-examples \
-    qt3d-examples \
+    quitindicators \
+    qt5-demo-extrafiles \
+"
+
+# Install the following apps on SoC with GPU
+RDEPENDS_${PN}_append_imxgpu2d = " \
     qtsmarthome \
     qt5ledscreen \
     quitbattery \
@@ -18,6 +23,8 @@ RDEPENDS_${PN} += " \
     qt5nmapcarousedemo \
     qt5nmapper \
     cinematicexperience \
-    quitindicators \
-    qt5-demo-extrafiles \
-  "
+"
+
+RDEPENDS_${PN}_append_imxgpu3d = " \
+    qt3d-examples \
+"
