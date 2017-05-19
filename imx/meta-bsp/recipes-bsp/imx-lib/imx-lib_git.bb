@@ -33,7 +33,7 @@ do_install () {
 
 PE = "1"
 
-SRCBRANCH = "master"
+SRCBRANCH = "imx_4.9.11_1.0.0_ga"
 IMXLIB_SRC ?= "git://git.freescale.com/imx/imx-lib.git;protocol=git"
 SRC_URI = "${IMXLIB_SRC};branch=${SRCBRANCH}"
 SRCREV = "67083e1999d5baa90d7141d84bb866ec8a7cfa90"
