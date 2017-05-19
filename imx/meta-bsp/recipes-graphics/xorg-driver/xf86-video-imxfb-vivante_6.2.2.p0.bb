@@ -7,7 +7,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
 
-SRCBRANCH = "imx_exa_viv6_g2d"
+SRCBRANCH = "imx_4.9.11_1.0.0_ga"
 S = "${WORKDIR}/git/"
 XF86_VIDEO_IMXFB_VIV_SRC ?= "git://git.freescale.com/imx/xf86-imxfb-vivante.git;protocol=git"
 SRC_URI = "${XF86_VIDEO_IMXFB_VIV_SRC};branch=${SRCBRANCH}"
