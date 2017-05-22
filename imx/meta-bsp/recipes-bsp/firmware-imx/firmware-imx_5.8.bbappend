@@ -5,7 +5,7 @@ IMX_FIRMWARE_SRC ?= "git://git.freescale.com/imx/imx-firmware.git;protocol=git"
 SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true \
            ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH};destsuffix=${S}/git "
 
-SRCREV = "15b71028ad5ab7038f14014d3010d3d81247ab04"
+SRCREV = "005b11ffc4d874dd339db1975a08e9dfe5d80e3c"
 
 do_install() {
     install -d ${D}${base_libdir}/firmware/imx
