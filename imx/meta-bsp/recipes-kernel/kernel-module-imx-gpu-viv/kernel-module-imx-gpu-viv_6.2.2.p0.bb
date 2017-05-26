@@ -8,8 +8,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "af2c9a8d9c5ded8e595013fbab88687f"
-SRC_URI[sha256sum] = "825aac1ef793baed24ce096528ece9f386ad7d32339914777f27c2bd0bf836a5"
+SRC_URI[md5sum] = "113672ee2bff719a9d54d713e482f197"
+SRC_URI[sha256sum] = "b757302d4ef27272113b9042a87be8781f473809ddd6c84d670963cb80c9c74d"
 
 inherit module
 
