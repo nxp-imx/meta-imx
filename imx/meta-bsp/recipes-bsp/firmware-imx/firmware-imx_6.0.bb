@@ -2,7 +2,7 @@
 # Copyright 2017 NXP
 
 require recipes-bsp/firmware-imx/firmware-imx.inc
-LIC_FILES_CHKSUM = "file://COPYING;md5=d4f548f93b5fe0ee2bc86758c344412d"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
 
 SRC_URI[md5sum] = "35bb49760fb9dba69e681710a424a42b"
 SRC_URI[sha256sum] = "63d8b175bb22dd9e56d546f41c7f06ecd0a12adcc08db19aac7bf3972ac4e7a1"
