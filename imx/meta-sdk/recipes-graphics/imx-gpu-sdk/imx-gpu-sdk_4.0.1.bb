@@ -18,7 +18,7 @@ DEPENDS_append_mx8      = \
 SDK_BRANCH ?= "release/4.0.1"
 GPU_SDK_SRC ?= "git://github.com/NXPmicro/gtec-demo-framework.git;protocol=http"
 SRC_URI = "${GPU_SDK_SRC};branch=${SDK_BRANCH}"
-SRCREV = "2ca4d516fb490c2f57abfd2682e0fb777aca3c41"
+SRCREV = "2caec2342944fbc71db7fcbaef1b54888bb6c733"
 
 # For backwards compatibility
 RPROVIDES_${PN} = "fsl-gpu-sdk"
