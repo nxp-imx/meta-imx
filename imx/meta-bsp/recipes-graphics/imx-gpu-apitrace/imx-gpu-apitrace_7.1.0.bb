@@ -48,6 +48,12 @@ EXTRA_OECMAKE += \
         bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
                                                         '-DDISABLE_X11=ON', d), d)}"
 
+do_install_append() {
+    install -d ${D}/usr/lib/apitrace/wrappers
+    mv ${D}/usr/lib/arm-linux-gnueabi/apitrace/wrappers/egltrace.so ${D}/usr/lib/apitrace/wrappers/egltrace.so
+    rm -rf ${D}/usr/lib/arm-linux-gnueabi
+}
+
 FILES_${PN} = "${bindir} ${libdir}"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
 
