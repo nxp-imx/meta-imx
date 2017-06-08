@@ -41,8 +41,10 @@ S = "${WORKDIR}/git"
 
 inherit cmake lib_package pkgconfig perlnative pythonnative
 
-EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DDISABLE_X11=ON -DCMAKE_SYSROOT=${STAGING_DIR_HOST}', \
-                bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-DDISABLE_X11=ON -DCMAKE_SYSROOT=${STAGING_DIR_HOST}', d), d)}"
+EXTRA_OECMAKE += \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DDISABLE_X11=ON', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
+                                                        '-DDISABLE_X11=ON', d), d)}"
 
 FILES_${PN} = "${bindir} ${libdir}"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
