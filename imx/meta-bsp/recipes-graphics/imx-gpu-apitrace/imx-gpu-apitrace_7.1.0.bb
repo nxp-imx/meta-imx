@@ -41,6 +41,7 @@ S = "${WORKDIR}/git"
 
 inherit cmake lib_package pkgconfig perlnative pythonnative
 
+EXTRA_OECMAKE += "-DENABLE_VIVANTE=ON"
 EXTRA_OECMAKE += \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DDISABLE_X11=ON', \
         bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
