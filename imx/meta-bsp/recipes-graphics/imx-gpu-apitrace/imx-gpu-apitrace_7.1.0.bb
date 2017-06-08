@@ -34,7 +34,7 @@ SRC_URI = "git://github.com/apitrace/apitrace.git;nobranch=1;tag=7.1 \
           file://0029-MGS-815-ccc-avoid-memcpy-in-glTexDirectInvalidateVIV.patch \
           file://0030-MGS-814-ccc-retrace-support-eglCreatePixmapSurface-o.patch \
           file://0031-libbacktrace-define-HAVE_STDINT_H-in-config.h.patch \
-          file://changed-disable-X11-mechanism.patch \
+          file://0032-changed-disable-X11-mechanism.patch \
 "
 
 S = "${WORKDIR}/git"
