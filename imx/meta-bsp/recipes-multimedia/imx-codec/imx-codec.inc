@@ -19,7 +19,7 @@ EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8
 PACKAGECONFIG ?= ""
 PACKAGECONFIG_imxvpu = "vpu"
 
-PACKAGECONFIG[vpu] = "--enable-vpu,--disable-vpu,imx-vpu"
+PACKAGECONFIG[vpu] = "--enable-vpu,--disable-vpu,virtual/libvpu"
 
 do_install_append() {
     # FIXME: This link points to nowhere
