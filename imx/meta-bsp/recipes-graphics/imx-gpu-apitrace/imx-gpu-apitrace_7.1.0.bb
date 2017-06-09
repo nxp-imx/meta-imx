@@ -49,9 +49,11 @@ EXTRA_OECMAKE += \
                                                         '-DDISABLE_X11=ON', d), d)}"
 
 do_install_append() {
-    install -d ${D}/usr/lib/apitrace/wrappers
-    mv ${D}/usr/lib/arm-linux-gnueabi/apitrace/wrappers/egltrace.so ${D}/usr/lib/apitrace/wrappers/egltrace.so
-    rm -rf ${D}/usr/lib/arm-linux-gnueabi
+    if [ -f ${D}/usr/lib/arm-linux-gnueabi/apitrace/wrappers/egltrace.so ]; then
+        install -d ${D}/usr/lib/apitrace/wrappers
+        mv ${D}/usr/lib/arm-linux-gnueabi/apitrace/wrappers/egltrace.so ${D}/usr/lib/apitrace/wrappers/egltrace.so
+        rm -rf ${D}/usr/lib/arm-linux-gnueabi
+    fi
 }
 
 FILES_${PN} = "${bindir} ${libdir}"
