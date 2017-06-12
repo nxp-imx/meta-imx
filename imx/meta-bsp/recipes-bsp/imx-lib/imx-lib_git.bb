@@ -5,7 +5,6 @@ DESCRIPTION = "Platform specific libraries for imx platform"
 LICENSE = "LGPLv2.1"
 SECTION = "multimedia"
 DEPENDS = "virtual/kernel"
-
 S = "${WORKDIR}/git"
 
 LIC_FILES_CHKSUM = "file://${S}/COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
