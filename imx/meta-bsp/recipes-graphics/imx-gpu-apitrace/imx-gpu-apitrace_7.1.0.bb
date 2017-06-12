@@ -49,10 +49,10 @@ EXTRA_OECMAKE += \
                                                         '-DDISABLE_X11=ON', d), d)}"
 
 do_install_append() {
-    if [ -f ${D}/usr/lib/arm-linux-gnueabi/apitrace/wrappers/egltrace.so ]; then
-        install -d ${D}/usr/lib/apitrace/wrappers
-        mv ${D}/usr/lib/arm-linux-gnueabi/apitrace/wrappers/egltrace.so ${D}/usr/lib/apitrace/wrappers/egltrace.so
+    if [ -d ${D}/usr/lib/arm-linux-gnueabi ]; then
+        cp -r ${D}/usr/lib/arm-linux-gnueabi/* ${D}/usr/lib
         rm -rf ${D}/usr/lib/arm-linux-gnueabi
+        bbwarn "Files were installed in the wrong folder and had to be moved to the correct folder. See MGS-2964."
     fi
 }
 
