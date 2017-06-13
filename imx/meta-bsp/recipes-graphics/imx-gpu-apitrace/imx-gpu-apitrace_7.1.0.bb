@@ -36,13 +36,14 @@ SRC_URI = "git://github.com/apitrace/apitrace.git;nobranch=1;tag=7.1 \
           file://0031-libbacktrace-define-HAVE_STDINT_H-in-config.h.patch \
           file://0032-changed-disable-X11-mechanism.patch \
           file://0033-MGS-2963-ccc-Miss-usr-bin-eglretrace-file-in-FB-and-.patch \
+          file://0034-MGS-make-multiarch-optional.patch \
 "
 
 S = "${WORKDIR}/git"
 
 inherit cmake lib_package pkgconfig perlnative pythonnative
 
-EXTRA_OECMAKE += "-DENABLE_VIVANTE=ON"
+EXTRA_OECMAKE += "-DENABLE_VIVANTE=ON -DENABLE_MULTIARCH=OFF"
 EXTRA_OECMAKE += \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DDISABLE_X11=ON', \
         bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
