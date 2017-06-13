@@ -48,14 +48,6 @@ EXTRA_OECMAKE += \
         bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
                                                         '-DDISABLE_X11=ON', d), d)}"
 
-do_install_append() {
-    if [ -d ${D}/usr/lib/arm-linux-gnueabi ]; then
-        cp -r ${D}/usr/lib/arm-linux-gnueabi/* ${D}/usr/lib
-        rm -rf ${D}/usr/lib/arm-linux-gnueabi
-        bbwarn "Files were installed in the wrong folder and had to be moved to the correct folder. See MGS-2964."
-    fi
-}
-
 FILES_${PN} = "${bindir} ${libdir}"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
 
