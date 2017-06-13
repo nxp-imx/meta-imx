@@ -11,11 +11,11 @@ S = "${WORKDIR}"
 RDEPENDS_${PN} = "systemd"
 
 do_install () {
-    install -d ${D}${bindir}
+    install -d ${D}${sysconfdir}
     install -d ${D}${systemd_unitdir}/system/
     install -d ${D}${sysconfdir}/systemd/system/multi-user.target.wants/
 
-    install -m 0755 ${WORKDIR}/gpuconfig ${D}${bindir}
+    install -m 0755 ${WORKDIR}/gpuconfig ${D}${sysconfdir}
     install -m 0644 ${WORKDIR}/gpuconfig.service ${D}${systemd_unitdir}/system
 
     # Enable the gpuconfig.service
@@ -23,7 +23,7 @@ do_install () {
             ${D}${sysconfdir}/systemd/system/multi-user.target.wants/gpuconfig.service
 }
 
-FILES_${PN} = "${systemd_unitdir}/system/*.service ${sysconfdir} ${bindir}"
+FILES_${PN} = "${systemd_unitdir}/system/*.service ${sysconfdir}"
 
 # As this package is tied to systemd, only build it when we're also building systemd.
 python () {
