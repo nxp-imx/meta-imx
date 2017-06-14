@@ -3,7 +3,7 @@
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "A tool to convert Android sparse images to raw images"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://Makefile;md5=54ba9e30fc8d139ebce9ea0f900a229c"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b433a746dd6fe8862028b1d7fc412a4d"
 
 DEPENDS = "zlib"
 
@@ -11,7 +11,7 @@ SIMG2IMG_SRC ?= "git://git.freescale.com/imx/simg2img.git;protocol=git"
 SRC_BRANCH = "master"
 
 SRC_URI = "${SIMG2IMG_SRC};branch=${SRC_BRANCH}"
-SRCREV  = "${AUTOREV}"
+SRCREV = "ae70b83c606f5ac912af28343296d1da4a5ba3ea"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += 'CC="${CC}"'
