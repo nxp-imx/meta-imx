@@ -17,6 +17,9 @@ SRC_URI_append_imxgpu2d = " \
     file://0007-MGS-2787-ccc-Check-if-g2d_format-has-an-alpha-when-d.patch \
     file://0008-MGS-1285-ccc-Refine-g2d-renderer-to-optimize-Weston-.patch \
 "
+SRC_URI_append = " \
+    file://0009-MGS-2921-ccc-Fix-gl-renderer-of-using-create_platfor.patch \
+"
 
 EXTRA_OEMAKE_append_mx6sl = " \
     COMPOSITOR_CFLAGS="-I ${STAGING_INCDIR}/pixman-1 -DLINUX=1 -DEGL_API_FB -DEGL_API_WL" \
