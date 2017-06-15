@@ -8,8 +8,8 @@ SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 S="${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "51b5e8aef4be9d61b2074942c177e87a"
-SRC_URI[sha256sum] = "d2c6755caae41558ee86772093ea74b3bd6cb47f65e70ea8f12923589e614bd2"
+SRC_URI[md5sum] = "155cb87b16fe2ed640ec12292de27063"
+SRC_URI[sha256sum] = "ffd7b62136bb3c4950282920df07e4661704637f2d2f618276c49ad1b7b48d53"
 
 PACKAGE_FP_TYPE = "hardfp"
 
