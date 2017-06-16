@@ -19,6 +19,7 @@ SRC_URI_append_imxgpu2d = " \
 "
 SRC_URI_append = " \
     file://0009-MGS-2921-ccc-Fix-gl-renderer-of-using-create_platfor.patch \
+    file://Make-opengl-optional.patch \
 "
 
 EXTRA_OEMAKE_append_mx6sl = " \
