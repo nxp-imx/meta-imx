@@ -212,7 +212,7 @@ do_install () {
                \
                ${D}${libdir}/libOpenCL* ${D}${includedir}/CL \
                \
-               ${D}${libdir}/libOpenVG.so ${D}${libdir}/libOpenVG.3d.so ${D}${libdir}/pkgconfig/vg.pc\
+               ${D}${libdir}/libOpenVG.3d.so \
                \
                ${D}${libdir}/libVivanteOpenCL.so \
                \
