@@ -4,7 +4,7 @@ IMAGE_BOOTLOADER ?= "u-boot"
 
 IMAGE_M4LOADER ?= ""
 
-BOOTLOADER_OFFSET ?= "16"
+IMX_BOOT_SEEK ?= "16"
 
 # Handle u-boot suffixes
 UBOOT_SUFFIX ?= "bin"
@@ -202,14 +202,19 @@ generate_imx_sdcard () {
 		exit 1
 		;;
                 imx-boot)
-                dd if=${DEPLOY_DIR_IMAGE}/imx-boot-tools/imx-boot-${MACHINE}-${UBOOT_CONFIG}.bin of=${SDCARD} conv=notrunc seek=${BOOTLOADER_OFFSET} bs=1K
+                dd if=${DEPLOY_DIR_IMAGE}/imx-boot-tools/imx-boot-${MACHINE}-${UBOOT_CONFIG}.bin of=${SDCARD} conv=notrunc seek=${IMX_BOOT_SEEK} bs=1K
                 ;;
                 u-boot)
 		if [ -n "${SPL_BINARY}" ]; then
-			dd if=${DEPLOY_DIR_IMAGE}/${SPL_BINARY} of=${SDCARD} conv=notrunc seek=2 bs=512
-			dd if=${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX_SDCARD} of=${SDCARD} conv=notrunc seek=69 bs=1K
+                    if [ -n "${SPL_SEEK}" ]; then
+                        dd if=${DEPLOY_DIR_IMAGE}/${SPL_BINARY} of=${SDCARD} conv=notrunc seek=${SPL_SEEK} bs=1K
+                        dd if=${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX_SDCARD} of=${SDCARD} conv=notrunc seek=${UBOOT_SEEK} bs=1K
+                    else
+                        dd if=${DEPLOY_DIR_IMAGE}/${SPL_BINARY} of=${SDCARD} conv=notrunc seek=2 bs=512
+                        dd if=${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX_SDCARD} of=${SDCARD} conv=notrunc seek=69 bs=1K
+                    fi
 		else
-			dd if=${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX_SDCARD} of=${SDCARD} conv=notrunc seek=2 bs=512
+                    dd if=${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX_SDCARD} of=${SDCARD} conv=notrunc seek=2 bs=512
 		fi
 		;;
 		barebox)
