@@ -11,8 +11,10 @@ SRC_URI += " \
              file://connman-env.service \
 "
 
+HAS_SYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
+
 do_install_append () {
-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+    if ${HAS_SYSTEMD}; then
         install -m 0755 ${WORKDIR}/connmand-env ${D}${sbindir}/
         install -m 0644 ${WORKDIR}/connman-env.service  ${D}/${systemd_unitdir}/system/
         sed -i  -e 's,@SBINDIR@,${sbindir},g' \
@@ -22,8 +24,14 @@ do_install_append () {
     fi
 }
 
+MASK_CONNMAN                 = "false"
+MASK_CONNMAN_imx6dlsabreauto = "true"
+MASK_CONNMAN_imx6sllevk      = "true"
+MASK_CONNMAN_imx7dsabresd    = "true"
+MASK_CONNMAN_imx7ulpevk      = "true"
+
 pkg_postinst_${PN} () {
-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+    if ${HAS_SYSTEMD} && ${MASK_CONNMAN}; then
         if [ -n "$D" ]; then
             OPTS="--root=$D"
         fi
