@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://memtool_profile "
+SRC_URI_append = " file://memtool_profile "
 
 do_install_append() {
     install -d -m 0755 ${D}/home/root/
