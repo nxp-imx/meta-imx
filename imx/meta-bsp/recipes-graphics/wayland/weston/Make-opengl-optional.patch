@@ -1,7 +1,7 @@
 Index: weston-1.11.0/configure.ac
 ===================================================================
---- weston-1.11.0.orig/configure.ac	2017-06-22 10:13:31.555705933 -0500
-+++ weston-1.11.0/configure.ac	2017-06-22 10:29:35.000000000 -0500
+--- weston-1.11.0.orig/configure.ac	2017-06-22 10:37:37.034873678 -0500
++++ weston-1.11.0/configure.ac	2017-06-22 10:37:37.394875463 -0500
 @@ -90,8 +90,16 @@
  AM_CONDITIONAL(ENABLE_EGL, test x$enable_egl = xyes)
  if test x$enable_egl = xyes; then
@@ -61,8 +61,8 @@ Index: weston-1.11.0/configure.ac
  	XWayland			${enable_xwayland}
 Index: weston-1.11.0/Makefile.am
 ===================================================================
---- weston-1.11.0.orig/Makefile.am	2017-06-22 10:13:31.555705933 -0500
-+++ weston-1.11.0/Makefile.am	2017-06-22 10:13:31.555705933 -0500
+--- weston-1.11.0.orig/Makefile.am	2016-05-19 16:36:04.000000000 -0500
++++ weston-1.11.0/Makefile.am	2017-06-22 13:20:19.000000000 -0500
 @@ -231,10 +231,10 @@
  	ivi-shell/ivi-layout-export.h
  endif
@@ -76,7 +76,7 @@ Index: weston-1.11.0/Makefile.am
  gl_renderer_la_CFLAGS =				\
  	$(COMPOSITOR_CFLAGS)			\
  	$(EGL_CFLAGS)				\
-@@ -1270,7 +1270,7 @@
+@@ -1270,11 +1270,11 @@
  roles_weston_CFLAGS = $(AM_CFLAGS) $(TEST_CLIENT_CFLAGS)
  roles_weston_LDADD = libtest-client.la
  
@@ -85,10 +85,15 @@ Index: weston-1.11.0/Makefile.am
  weston_tests += buffer-count.weston
  buffer_count_weston_SOURCES = tests/buffer-count-test.c
  buffer_count_weston_CFLAGS = $(AM_CFLAGS) $(EGL_TESTS_CFLAGS)
+-buffer_count_weston_LDADD = libtest-client.la $(EGL_TESTS_LIBS)
++buffer_count_weston_LDADD = libtest-client.la $(EGL_TESTS_LIBS) $(OPENGL_LIBS)
+ endif
+ 
+ if ENABLE_XWAYLAND_TEST
 Index: weston-1.11.0/src/main.c
 ===================================================================
---- weston-1.11.0.orig/src/main.c	2017-06-22 10:13:31.555705933 -0500
-+++ weston-1.11.0/src/main.c	2017-06-22 10:43:04.000000000 -0500
+--- weston-1.11.0.orig/src/main.c	2017-06-22 10:37:37.122874114 -0500
++++ weston-1.11.0/src/main.c	2017-06-22 10:37:37.394875463 -0500
 @@ -285,7 +285,10 @@
  		"Options for fbdev-backend.so:\n\n"
  		"  --tty=TTY\t\tThe tty to use\n"
