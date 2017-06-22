@@ -1,27 +1,32 @@
 Index: weston-1.11.0/configure.ac
 ===================================================================
---- weston-1.11.0.orig/configure.ac	2017-06-22 10:13:31.555705933 -0500
-+++ weston-1.11.0/configure.ac	2017-06-22 10:29:35.000000000 -0500
-@@ -90,8 +90,16 @@
+--- weston-1.11.0.orig/configure.ac	2017-06-22 06:31:46.157728028 -0500
++++ weston-1.11.0/configure.ac	2017-06-22 06:31:46.741730924 -0500
+@@ -90,12 +90,20 @@
  AM_CONDITIONAL(ENABLE_EGL, test x$enable_egl = xyes)
  if test x$enable_egl = xyes; then
  	AC_DEFINE([ENABLE_EGL], [1], [Build Weston with EGL support])
 -	PKG_CHECK_MODULES(EGL, [egl glesv2])
 -        PKG_CHECK_MODULES([EGL_TESTS], [egl glesv2 wayland-client wayland-egl])
+-	PKG_CHECK_MODULES([GL_RENDERER], [libdrm])
 +	PKG_CHECK_MODULES(EGL, [egl])
 +	PKG_CHECK_MODULES([EGL_TESTS], [egl wayland-client wayland-egl])
-+fi
-+
+ 	COMPOSITOR_MODULES="$COMPOSITOR_MODULES egl"
+ fi
+ 
 +AC_ARG_ENABLE(opengl, [  --disable-opengl],,
-+              enable_opengl=$enable_egl)
++			  enable_opengl=$enable_egl)
 +AM_CONDITIONAL(ENABLE_OPENGL, test x$enable_egl = xyes -a x$enable_opengl = xyes)
 +if test x$enable_egl = xyes -a x$enable_opengl = xyes; then
 +	AC_DEFINE([ENABLE_OPENGL], [1], [Build Weston with OpenGL support])
 +	PKG_CHECK_MODULES(OPENGL, [glesv2])
- 	PKG_CHECK_MODULES([GL_RENDERER], [libdrm])
- fi
- 
-@@ -353,9 +361,9 @@
++	PKG_CHECK_MODULES([GL_RENDERER], [libdrm])
++fi
++
+ AC_ARG_ENABLE(xkbcommon,
+ 	      AS_HELP_STRING([--disable-xkbcommon], [Disable libxkbcommon
+ 			      support: This is only useful in environments
+@@ -354,9 +362,9 @@
  AC_ARG_ENABLE(simple-egl-clients,
                AS_HELP_STRING([--disable-simple-egl-clients],
                               [do not build the simple EGL clients]),,
@@ -34,7 +39,7 @@ Index: weston-1.11.0/configure.ac
    PKG_CHECK_MODULES(SIMPLE_EGL_CLIENT,
                      [egl glesv2 wayland-client wayland-egl wayland-cursor])
  fi
-@@ -432,13 +440,13 @@
+@@ -433,13 +441,13 @@
  AM_CONDITIONAL(HAVE_PANGO, test "x$have_pango" = "xyes")
  
  AM_CONDITIONAL(HAVE_CAIRO_GLESV2,
@@ -51,7 +56,7 @@ Index: weston-1.11.0/configure.ac
  
  AM_CONDITIONAL(ENABLE_DESKTOP_SHELL, true)
  
-@@ -665,6 +673,7 @@
+@@ -666,6 +674,7 @@
  
  	Cairo Renderer			${with_cairo}
  	EGL				${enable_egl}
@@ -61,8 +66,8 @@ Index: weston-1.11.0/configure.ac
  	XWayland			${enable_xwayland}
 Index: weston-1.11.0/Makefile.am
 ===================================================================
---- weston-1.11.0.orig/Makefile.am	2017-06-22 10:13:31.555705933 -0500
-+++ weston-1.11.0/Makefile.am	2017-06-22 10:13:31.555705933 -0500
+--- weston-1.11.0.orig/Makefile.am	2017-06-22 06:31:45.761726064 -0500
++++ weston-1.11.0/Makefile.am	2017-06-22 06:32:51.966054354 -0500
 @@ -231,10 +231,10 @@
  	ivi-shell/ivi-layout-export.h
  endif
@@ -76,7 +81,7 @@ Index: weston-1.11.0/Makefile.am
  gl_renderer_la_CFLAGS =				\
  	$(COMPOSITOR_CFLAGS)			\
  	$(EGL_CFLAGS)				\
-@@ -1270,7 +1270,7 @@
+@@ -1286,7 +1286,7 @@
  roles_weston_CFLAGS = $(AM_CFLAGS) $(TEST_CLIENT_CFLAGS)
  roles_weston_LDADD = libtest-client.la
  
@@ -87,27 +92,37 @@ Index: weston-1.11.0/Makefile.am
  buffer_count_weston_CFLAGS = $(AM_CFLAGS) $(EGL_TESTS_CFLAGS)
 Index: weston-1.11.0/src/main.c
 ===================================================================
---- weston-1.11.0.orig/src/main.c	2017-06-22 10:13:31.555705933 -0500
-+++ weston-1.11.0/src/main.c	2017-06-22 10:43:04.000000000 -0500
-@@ -285,7 +285,10 @@
+--- weston-1.11.0.orig/src/main.c	2017-06-22 06:31:46.069727591 -0500
++++ weston-1.11.0/src/main.c	2017-06-22 06:31:46.741730924 -0500
+@@ -285,11 +285,10 @@
  		"Options for fbdev-backend.so:\n\n"
  		"  --tty=TTY\t\tThe tty to use\n"
  		"  --device=DEVICE\tThe framebuffer device to use\n"
--		"  --use-gl\t\tUse the GL renderer\n\n");
+-#if defined(ENABLE_EGL)
 +#if defined(ENABLE_OPENGL)
-+		"  --use-gl\t\tUse the GL renderer\n\n"
-+#endif
-+	);
+ 		"  --use-gl=1\t\tUse the GL renderer (default is 1)\n"
+ 		"  --use-g2d=1\t\tUse the G2D renderer (default is 0)\n"
+ #else
+-		"  --use-gl=1\t\tUse the GL renderer (default is 0)\n"
+ 		"  --use-g2d=1\t\tUse the G2D renderer (default is 1)\n"
  #endif
- 
- #if defined(BUILD_HEADLESS_COMPOSITOR)
-@@ -868,7 +871,9 @@
+ 		"  --clone-mode\t\tClone display to multiple devices\n\n");
+@@ -869,7 +868,7 @@
+ {
+ 	struct weston_fbdev_backend_config config = {
+ 		.base = {0},
+-#ifdef ENABLE_EGL
++#ifdef ENABLE_OPENGL
+ 		.use_gl = 1,
+ 		.use_g2d = 0,
+ #else
+@@ -885,7 +884,9 @@
  	const struct weston_option fbdev_options[] = {
  		{ WESTON_OPTION_INTEGER, "tty", 0, &config.tty },
  		{ WESTON_OPTION_STRING, "device", 0, &config.device },
 +#ifdef ENABLE_OPENGL
- 		{ WESTON_OPTION_BOOLEAN, "use-gl", 0, &config.use_gl },
+ 		{ WESTON_OPTION_INTEGER, "use-gl", 0, &config.use_gl },
 +#endif
+ 		{ WESTON_OPTION_INTEGER, "use-g2d", 0, &config.use_g2d },
+ 		{ WESTON_OPTION_BOOLEAN, "clone-mode", 0, &config.clone_mode },
  	};
- 
- 	parse_options(fbdev_options, ARRAY_LENGTH(fbdev_options), argc, argv);
