@@ -19,7 +19,7 @@ SRCBRANCH = "imx_4.9.11_1.0.0_ga"
 IMXTEST_SRC ?= "git://git.freescale.com/imx/imx-test.git;protocol=git"
 
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
-SRCREV = "a3b586cef2e46cd8710bc54ce249bc4cf0098ac1"
+SRCREV = "1d7f8eaf8c33c6ccd46fb893683adda5ca857793"
 
 S = "${WORKDIR}/git"
 
