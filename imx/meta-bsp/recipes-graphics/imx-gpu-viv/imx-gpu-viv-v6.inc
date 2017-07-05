@@ -12,6 +12,7 @@ DEPENDS += " \
        bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes', \
                                                        '', d), d)} \
 "
+DEPENDS += "libdrm"
 
 # imx-gpu-viv does not provide everything it needs to for virtual/libgl
 # on x11 backend or on Wayland backend with XWayland support.
@@ -253,7 +254,7 @@ FILES_libvsc-imx = "${libdir}/libVSC${SOLIBS}"
 
 FILES_libgbm-imx = "${libdir}/libgbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
 FILES_libgbm-imx-dev = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
-DEPENDS_libgbm-imx += "libdrm"
+RDEPENDS_libgbm-imx += "libdrm"
 
 FILES_libvulkan-imx = "${libdir}/libvulkan_VSI${SOLIBS}"
 FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/libvulkan_VSI${SOLIBSDEV}"
