@@ -37,6 +37,7 @@ SRC_URI = "git://github.com/apitrace/apitrace.git;nobranch=1;tag=7.1 \
           file://0032-changed-disable-X11-mechanism.patch \
           file://0033-MGS-2963-ccc-Miss-usr-bin-eglretrace-file-in-FB-and-.patch \
           file://0034-MGS-make-multiarch-optional.patch \
+          file://0035-dlopen-don-t-override-symbols-in-Vivante-libs.patch \
 "
 
 S = "${WORKDIR}/git"

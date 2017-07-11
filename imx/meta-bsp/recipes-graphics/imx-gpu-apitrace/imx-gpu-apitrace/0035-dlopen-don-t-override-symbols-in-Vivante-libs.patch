@@ -1,0 +1,62 @@
+From 8d5cf4331d0aab57f50703fad357f2af9a2f9f9e Mon Sep 17 00:00:00 2001
+From: Adrian Negreanu <adrian.negreanu@nxp.com>
+Date: Mon, 10 Jul 2017 22:13:44 +0300
+Subject: [PATCH] dlopen: don't override symbols in Vivante libs
+
+Overridding the Vivante libraries like libGAL.so, libVDK.so causes
+apitrace trace --api=egl .. to fail.
+Do not override the symbols from those libraries.
+
+Upstream Status: Inappropriate [i.MX specific]
+---
+ wrappers/egltrace.py | 20 +++++++++++++++++++-
+ 1 file changed, 19 insertions(+), 1 deletion(-)
+
+diff --git a/wrappers/egltrace.py b/wrappers/egltrace.py
+index 7d2d182..f25fb18 100644
+--- a/wrappers/egltrace.py
++++ b/wrappers/egltrace.py
+@@ -153,6 +153,19 @@ void * dlopen(const char *filename, int flag)
+             strcmp(filename, "libGL.so") == 0 ||
+             strcmp(filename, "libGL.so.1") == 0;
+ 
++        void *caller = __builtin_return_address(0);
++        Dl_info info;
++        if (dladdr(caller, &info)) {
++            const char *caller_module = info.dli_fname;
++            os::log("apitrace: dlopen(%s) called from %s\n", filename, caller_module);
++            if ( (strcmp(caller_module, "/usr/lib/libGAL.so") == 0)
++              || (strcmp(caller_module, "/usr/lib/libVDK.so") == 0)
++               )
++            {
++                intercept = false;
++            }
++        }
++
+         if (intercept) {
+             os::log("apitrace: redirecting dlopen(\"%s\", 0x%x)\n", filename, flag);
+ 
+@@ -167,7 +180,11 @@ void * dlopen(const char *filename, int flag)
+         }
+     }
+ 
+-    void *handle = _dlopen(filename, flag);
++    void *handle = _dlopen(filename, RTLD_NOW);
++    if (!handle) {
++        os::log("apitrace: warning: dlopen(%s,%x) failed %s\n", filename, flag, dlerror());
++        return handle;
++    }
+ 
+     if (intercept) {
+         // Get the file path for our shared object, and use it instead
+@@ -188,6 +205,7 @@ void * dlopen(const char *filename, int flag)
+         }
+     }
+ 
++    os::log("apitrace: %p\n", handle);
+     return handle;
+ }
+ 
+-- 
+2.7.4
+
