@@ -9,8 +9,8 @@ require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
 
 SRCBRANCH = "imx_4.9.11_1.0.0_ga"
 S = "${WORKDIR}/git/"
-XF86_VIDEO_IMXFB_VIV_SRC ?= "git://git.freescale.com/imx/xf86-imxfb-vivante.git;protocol=git"
-SRC_URI = "${XF86_VIDEO_IMXFB_VIV_SRC};branch=${SRCBRANCH}"
+XF86_VIDEO_IMX_VIVANTE_SRC ?= "git://git.freescale.com/imx/xf86-video-imx-vivante.git;protocol=git"
+SRC_URI = "${XF86_VIDEO_IMX_VIVANTE_SRC};branch=${SRCBRANCH}"
 SRC_URI +="file://rc.autohdmi"
 SRCREV = "279a164f2c5f18e732e94919f3b89eb031268718"
 
