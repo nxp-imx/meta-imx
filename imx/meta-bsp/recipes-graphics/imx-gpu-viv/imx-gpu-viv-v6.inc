@@ -5,7 +5,7 @@
 DESCRIPTION = "GPU driver and apps for imx"
 SECTION = "libs"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
 
 DEPENDS += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
