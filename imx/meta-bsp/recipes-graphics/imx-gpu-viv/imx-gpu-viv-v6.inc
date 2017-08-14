@@ -243,6 +243,7 @@ INSANE_SKIP_libegl-imx += "dev-so"
 FILES_libegl-imx = "${libdir}/libEGL${REALSOLIBS} ${libdir}/libEGL${SOLIBSDEV} "
 FILES_libegl-imx-dev = "${includedir}/EGL ${includedir}/KHR ${libdir}/pkgconfig/egl.pc"
 RDEPENDS_libegl-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'libgc-wayland-protocol-imx libwayland-viv-imx libgc-wayland-protocol-imx', '', d)}"
+RDEPENDS_libegl-imx-dev += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'libwayland-egl-imx-dev', '', d)}"
 
 FILES_libgal-imx = "${libdir}/libGAL${SOLIBS} ${libdir}/libGAL_egl${SOLIBS}"
 FILES_libgal-imx-dev = "${libdir}/libGAL${SOLIBSDEV} ${includedir}/HAL"
