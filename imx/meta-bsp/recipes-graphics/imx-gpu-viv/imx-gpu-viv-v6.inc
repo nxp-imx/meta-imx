@@ -189,7 +189,12 @@ do_install () {
     ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
 
     if [ "${IS_MX8}" = "1" ]; then
-        mv ${D}${libdir}/libvulkan-${backend}.so ${D}${libdir}/libvulkan_VSI.so
+        # Install the vulkan driver in a sub-folder. When installed in the same
+        # folder as the vulkan loader layer library, an incorrect linkage is
+        # created from libvulkan.so.1 to our library instead of the loader
+        # layer library.
+        install -d ${D}${libdir}/vulkan
+        mv ${D}${libdir}/libvulkan-${backend}.so ${D}${libdir}/vulkan/libvulkan_VSI.so
     fi
 
     # skip packaging wayland libraries if no support is requested
@@ -257,8 +262,8 @@ FILES_libgbm-imx = "${libdir}/libgbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
 FILES_libgbm-imx-dev = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
 RDEPENDS_libgbm-imx += "libdrm"
 
-FILES_libvulkan-imx = "${libdir}/libvulkan_VSI${SOLIBS}"
-FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/libvulkan_VSI${SOLIBSDEV}"
+FILES_libvulkan-imx = "${libdir}/vulkan/libvulkan_VSI${SOLIBS}"
+FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/vulkan/libvulkan_VSI${SOLIBSDEV}"
 INSANE_SKIP_libvulkan-imx += "dev-deps dev-so"
 
 FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS}"
