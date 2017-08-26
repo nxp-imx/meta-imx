@@ -12,6 +12,7 @@ DEPENDS_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
 
 RDEPENDS_${PN}_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
                 bb.utils.contains('DISTRO_FEATURES', 'x11', '', 'libxcb-sync libxcb-present libxcb-dri3', d), d)}"
+RDEPENDS_${PN} += "libvulkan-imx"
 
 REQUIRED_DISTRO_FEATURES_remove = "x11"
 
