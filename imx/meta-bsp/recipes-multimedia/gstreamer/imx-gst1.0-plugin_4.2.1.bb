@@ -24,7 +24,7 @@ IMXGST_SRC ?= "git://git.freescale.com/imx/gst1.0-plugins-fsl.git;protocol=git"
 SRCBRANCH = "MM_04.02.01_1705_L4.9.11_CONSOLIDATED_GA"
 
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH}"
-SRCREV = "8cdf6792351977e139e3a88461dcfdae53534744"
+SRCREV = "ba0dc410c4a64a6882804e65562cbc6ec6356a8f"
 
 S = "${WORKDIR}/git"
 
