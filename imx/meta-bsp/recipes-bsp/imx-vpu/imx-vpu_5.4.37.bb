@@ -15,4 +15,6 @@ PLATFORM_mx6ul = "IMX6Q"
 PLATFORM_mx7 = "IMX6Q"
 PLATFORM_mx6sll = "IMX6Q"
 
-COMPATIBLE_MACHINE = "(mx6|mx7)"
+# Compatible only for i.MX with Chips & Media VPU
+COMPATIBLE_MACHINE = "(^$)"
+COMPATIBLE_MACHINE_imxvpucnm = "${MACHINE}"
