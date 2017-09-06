@@ -1,0 +1,13 @@
+Index: git/test/mxc_cec_test/Makefile
+===================================================================
+--- git.orig/test/mxc_cec_test/Makefile	2017-08-08 14:37:21.349216493 -0500
++++ git/test/mxc_cec_test/Makefile	2017-08-08 14:38:04.581430870 -0500
+@@ -1,7 +1,7 @@
+ ifneq ($(ARCH),arm64)
+ DIR = HDMI
+ BUILD = mxc_cec_test.out
+-LDFLAGS = -lpthread -lcec -lrt -lstdc++
++LDFLAGS = -pthread -lpthread -lcec -lrt -lstdc++
+ COPY = README
+ endif
+ 
