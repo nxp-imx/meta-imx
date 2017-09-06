@@ -11,9 +11,11 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRCBRANCH = "imx_v2017.03_4.9.11_1.0.0_ga"
+SRCBRANCH_mx8 = "imx_v2017.03_4.9.11_imx8_alpha"
 UBOOT_SRC ?= "git://git.freescale.com/imx/uboot-imx.git;protocol=git"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "c250b072a606b6a450dbe6633b9c5371c5e36108"
+SRCREV_mx8 = "f7852257913d8c41f324a945eaec06ab4d194ae8"
 
 S = "${WORKDIR}/git"
 
@@ -22,4 +24,4 @@ inherit fsl-u-boot-localversion
 LOCALVERSION ?= "-${SRCBRANCH}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx6|mx7)"
+COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
