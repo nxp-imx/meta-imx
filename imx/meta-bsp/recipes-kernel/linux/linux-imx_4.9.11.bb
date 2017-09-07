@@ -8,20 +8,16 @@ i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU 
 
 require recipes-kernel/linux/linux-imx.inc
 require recipes-kernel/linux/linux-dtb.inc
+require recipes-kernel/linux/linux-imx_4.9.11.inc
 
 DEPENDS += "lzop-native bc-native"
-
-SRCBRANCH = "imx_4.9.11_1.0.0_ga"
-LOCALVERSION = "-1.0.0"
-KERNEL_SRC ?= "git://git.freescale.com/imx/linux-imx.git;protocol=git"
-SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
-SRCREV = "f2ed3bfca174b3e370fc37cd5f75a67334822093"
 
 DEFAULT_PREFERENCE = "1"
 
 DO_CONFIG_V7_COPY = "no"
 DO_CONFIG_V7_COPY_mx6 = "yes"
 DO_CONFIG_V7_COPY_mx7 = "yes"
+DO_CONFIG_V7_COPY_mx8 = "no"
 
 addtask copy_defconfig after do_unpack before do_preconfigure
 do_copy_defconfig () {
@@ -31,9 +27,15 @@ do_copy_defconfig () {
         mkdir -p ${B}
         cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
         cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
+    else
+        # copy latest defconfig to use for mx8
+        mkdir -p ${B}
+        cp ${S}/arch/arm64/configs/defconfig ${B}/.config
+        cp ${S}/arch/arm64/configs/defconfig ${B}/../defconfig
     fi
 }
 
-COMPATIBLE_MACHINE = "(mx6|mx7)"
+COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
 EXTRA_OEMAKE_append_mx6 = " ARCH=arm"
 EXTRA_OEMAKE_append_mx7 = " ARCH=arm"
+EXTRA_OEMAKE_append_mx8 = " ARCH=arm64"
