@@ -21,10 +21,10 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
                     file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
 
 IMXGST_SRC ?= "git://git.freescale.com/imx/gst1.0-plugins-fsl.git;protocol=git"
-SRCBRANCH = "MM_04.02.01_1705_L4.9.11_CONSOLIDATED_GA"
+SRCBRANCH = "MM_04.03.00_1708_L4.9.11_MX8_ALPHA"
 
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH}"
-SRCREV = "ff75824b4444114de57ed61e885b14e6f003c3ab"
+SRCREV = "66120eebf3b8ed751b90f7aedadd9a240a34e9ba"
 
 S = "${WORKDIR}/git"
 
