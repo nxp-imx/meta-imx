@@ -1,7 +1,7 @@
-From a3166f6b6cd9e5f9779bf2ca8bb83978fc68e5ce Mon Sep 17 00:00:00 2001
+From 7f7398acb5dc5fdc904f6684eab2bb072be25de7 Mon Sep 17 00:00:00 2001
 From: Song Bing <bing.song@nxp.com>
 Date: Wed, 11 May 2016 16:57:23 +0800
-Subject: [PATCH 5/6] inputselector: should proceed non-active pad buffer even
+Subject: [PATCH 5/7] inputselector: should proceed non-active pad buffer even
  if active pad reach eos
 
 non-active pad will be blocked if active pad reach eos in inputselector.
@@ -10,9 +10,8 @@ Inputselector should proceed non-active pad buffer based on clock even
 if active pad reach eos
 Change to sync with clock for better user experience.
 
-https://bugzilla.gnome.org/show_bug.cgi?id=766261
 
-Upstream status: pending
+Upstream-Status: Pending [https://bugzilla.gnome.org/show_bug.cgi?id=766261]
 
 Signed-off-by: Song Bing bing.song@nxp.com
 ---
@@ -20,10 +19,10 @@ Signed-off-by: Song Bing bing.song@nxp.com
  1 file changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/plugins/elements/gstinputselector.c b/plugins/elements/gstinputselector.c
-index 5d1d65e..e4f1348 100644
+index f3f95e6..f6e1993 100644
 --- a/plugins/elements/gstinputselector.c
 +++ b/plugins/elements/gstinputselector.c
-@@ -777,7 +777,7 @@ gst_input_selector_wait_running_time (GstInputSelector * sel,
+@@ -772,7 +772,7 @@ gst_input_selector_wait_running_time (GstInputSelector * sel,
      }
  
      cur_running_time = GST_CLOCK_TIME_NONE;
@@ -32,7 +31,7 @@ index 5d1d65e..e4f1348 100644
        clock = gst_element_get_clock (GST_ELEMENT_CAST (sel));
        if (clock) {
          GstClockTime base_time;
-@@ -828,7 +828,13 @@ gst_input_selector_wait_running_time (GstInputSelector * sel,
+@@ -823,7 +823,13 @@ gst_input_selector_wait_running_time (GstInputSelector * sel,
            "Waiting for active streams to advance. %" GST_TIME_FORMAT " >= %"
            GST_TIME_FORMAT, GST_TIME_ARGS (running_time),
            GST_TIME_ARGS (cur_running_time));

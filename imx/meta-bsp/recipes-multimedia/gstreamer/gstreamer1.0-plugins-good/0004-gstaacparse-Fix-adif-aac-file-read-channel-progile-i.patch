@@ -1,0 +1,267 @@
+From b2c850f295a0fe49310fb60784ac6af4a29bceae Mon Sep 17 00:00:00 2001
+From: Lyon Wang <lyon.wang@nxp.com>
+Date: Fri, 9 Jun 2017 16:53:11 +0800
+Subject: [PATCH] gstaacparse: Fix adif aac file read channel/progile issue
+
+- parser adif program_config_element() to get correct channel
+- Fix aacparse src pad caps wrong profile for ADIF file
+
+Upstream status: submitted.
+Combined 2 bugzilla ticket:
+https://bugzilla.gnome.org/show_bug.cgi?id=783583
+https://bugzilla.gnome.org/show_bug.cgi?id=785476
+
+Signed-off-by: Lyon Wang <lyon.wang@nxp.com>
+---
+ gst/audioparsers/gstaacparse.c | 203 ++++++++++++++++++++++++++++++-----------
+ 1 file changed, 152 insertions(+), 51 deletions(-)
+
+diff --git a/gst/audioparsers/gstaacparse.c b/gst/audioparsers/gstaacparse.c
+index 16d66e2..e2c2bc9 100644
+--- a/gst/audioparsers/gstaacparse.c
++++ b/gst/audioparsers/gstaacparse.c
+@@ -85,6 +85,35 @@ static const gint loas_channels_table[16] = {
+   0, 0, 0, 7, 8, 0, 8, 0
+ };
+ 
++typedef struct
++{
++  guint32 num_ele;
++  guint32 ele_is_cpe[16];
++  guint32 ele_tag[16];
++} GstAacEleList;
++
++typedef struct
++{
++  guint32 present;
++  guint32 ele_tag;
++  guint32 pseudo_enab;
++} GstAacMIXdown;
++
++typedef struct
++{
++  guint32 profile;
++  guint32 sr_idx;
++  GstAacEleList front;
++  GstAacEleList side;
++  GstAacEleList back;
++  GstAacEleList data;
++  GstAacEleList lfe;
++  GstAacEleList coupling;
++  GstAacMIXdown mono_mix;
++  GstAacMIXdown stereo_mix;
++  GstAacMIXdown matrix_mix;
++} GstAacProgConfig;
++
+ static gboolean gst_aac_parse_start (GstBaseParse * parse);
+ static gboolean gst_aac_parse_stop (GstBaseParse * parse);
+ 
+@@ -104,6 +133,9 @@ static gboolean gst_aac_parse_read_audio_specific_config (GstAacParse *
+     aacparse, GstBitReader * br, gint * object_type, gint * sample_rate,
+     gint * channels, gint * frame_samples);
+ 
++static gboolean gst_aac_parse_read_program_config_element (GstAacProgConfig *
++    progConfig, GstBitReader * br);
++
+ 
+ #define gst_aac_parse_parent_class parent_class
+ G_DEFINE_TYPE (GstAacParse, gst_aac_parse, GST_TYPE_BASE_PARSE);
+@@ -844,6 +876,87 @@ gst_aac_parse_parse_adts_header (GstAacParse * aacparse, const guint8 * data,
+     *object = ((data[2] & 0xc0) >> 6) + 1;
+ }
+ 
++static void
++gst_aac_parse_get_ele_list (GstAacEleList * pList, gint32 cpe,
++    GstBitReader * br)
++{
++  guint32 count, num_elem;
++  num_elem = pList->num_ele;
++  for (count = 0; count < num_elem; count++) {
++    if (cpe) {
++      gst_bit_reader_get_bits_uint32 (br, &(pList->ele_is_cpe[count]), 1);
++    } else {
++      pList->ele_is_cpe[count] = 0;
++    }
++    gst_bit_reader_get_bits_uint32 (br, &(pList->ele_tag[count]), 4);
++  }
++}
++
++static gint32
++gst_aac_parse_get_config_channels (GstAacEleList * pList)
++{
++  guint32 count, num_elem, channels = 0;
++  num_elem = pList->num_ele;
++  for (count = 0; count < num_elem; count++) {
++    channels++;
++    if (pList->ele_is_cpe[count] == 1) {
++      /* CPE element channels++ */
++      channels++;
++    }
++  }
++  return channels;
++}
++
++/* Read program config element
++ISO/IEC 14496-3, 4.4.1.1  read program config element */
++static gboolean
++gst_aac_parse_read_program_config_element (GstAacProgConfig *
++    progConfig, GstBitReader * br)
++{
++  guint32 count = 0;
++  guint32 bytes = 0;
++
++  gst_bit_reader_skip (br, 4);  //element_instance_tag
++
++  gst_bit_reader_get_bits_uint32 (br, &progConfig->profile, 2);
++  gst_bit_reader_get_bits_uint32 (br, &progConfig->sr_idx, 4);
++  gst_bit_reader_get_bits_uint32 (br, &(progConfig->front.num_ele), 4);
++  gst_bit_reader_get_bits_uint32 (br, &(progConfig->side.num_ele), 4);
++  gst_bit_reader_get_bits_uint32 (br, &(progConfig->back.num_ele), 4);
++  gst_bit_reader_get_bits_uint32 (br, &(progConfig->lfe.num_ele), 2);
++  gst_bit_reader_get_bits_uint32 (br, &(progConfig->data.num_ele), 3);
++  gst_bit_reader_get_bits_uint32 (br, &(progConfig->coupling.num_ele), 4);
++
++  gst_bit_reader_get_bits_uint32 (br, &(progConfig->mono_mix.present), 1);
++  if (progConfig->mono_mix.present) {
++    gst_bit_reader_get_bits_uint32 (br, &(progConfig->mono_mix.ele_tag), 4);
++  }
++  gst_bit_reader_get_bits_uint32 (br, &(progConfig->stereo_mix.present), 1);
++  if (progConfig->mono_mix.present) {
++    gst_bit_reader_get_bits_uint32 (br, &(progConfig->stereo_mix.ele_tag), 4);
++  }
++  gst_bit_reader_get_bits_uint32 (br, &(progConfig->matrix_mix.present), 1);
++  if (progConfig->mono_mix.present) {
++    gst_bit_reader_get_bits_uint32 (br, &(progConfig->matrix_mix.ele_tag), 2);
++    gst_bit_reader_get_bits_uint32 (br, &(progConfig->matrix_mix.pseudo_enab), 1);
++  }
++
++  gst_aac_parse_get_ele_list (&progConfig->front, 1, br);
++  gst_aac_parse_get_ele_list (&progConfig->side, 1, br);
++  gst_aac_parse_get_ele_list (&progConfig->back, 1, br);
++  gst_aac_parse_get_ele_list (&progConfig->data, 0, br);
++  gst_aac_parse_get_ele_list (&progConfig->lfe, 0, br);
++  gst_aac_parse_get_ele_list (&progConfig->coupling, 1, br);
++
++  gst_bit_reader_skip_to_byte (br);     // byte_alignment
++
++  gst_bit_reader_get_bits_uint32 (br, &bytes, 8);       //comment_field_bytes
++  for (count = 0; count < bytes; count++) {
++    gst_bit_reader_skip (br, 8);        //skip comment data
++  }
++  return TRUE;
++}
++
+ /**
+  * gst_aac_parse_detect_stream:
+  * @aacparse: #GstAacParse.
+@@ -973,68 +1086,56 @@ gst_aac_parse_detect_stream (GstAacParse * aacparse,
+     return FALSE;
+ 
+   if (memcmp (data + i, "ADIF", 4) == 0) {
+-    const guint8 *adif;
+-    int skip_size = 0;
+-    int bitstream_type;
++    GstBitReader br;
++    guint8 u8 = 0;
++    guint8 bitstream_type = 0;
++    guint num_elems = 0;
++    guint bitrate = 0;
++    guint count;
+     int sr_idx;
+     GstCaps *sinkcaps;
+-
++    GstAacProgConfig *progConfig;
+     aacparse->header_type = DSPAAC_HEADER_ADIF;
+     aacparse->mpegversion = 4;
+-
+-    /* Skip the "ADIF" bytes */
+-    adif = data + i + 4;
+-
+-    /* copyright string */
+-    if (adif[0] & 0x80)
+-      skip_size += 9;           /* skip 9 bytes */
+-
+-    bitstream_type = adif[0 + skip_size] & 0x10;
+-    aacparse->bitrate =
+-        ((unsigned int) (adif[0 + skip_size] & 0x0f) << 19) |
+-        ((unsigned int) adif[1 + skip_size] << 11) |
+-        ((unsigned int) adif[2 + skip_size] << 3) |
+-        ((unsigned int) adif[3 + skip_size] & 0xe0);
+-
+-    /* CBR */
++    gst_bit_reader_init (&br, data + i, avail - i);
++    /* skip sync word (adif 4 byte ) */
++    gst_bit_reader_skip (&br, 32);
++    gst_bit_reader_get_bits_uint8 (&br, &u8, 1);
++    if (u8) {
++      gst_bit_reader_skip (&br, 72);    //copyright_id
++    }
++    gst_bit_reader_skip (&br, 2);       // original_copy and home
++    gst_bit_reader_get_bits_uint8 (&br, &bitstream_type, 1);
++    gst_bit_reader_get_bits_uint32 (&br, &bitrate, 23);
++    gst_bit_reader_get_bits_uint32 (&br, &num_elems, 4);
+     if (bitstream_type == 0) {
+-#if 0
+-      /* Buffer fullness parsing. Currently not needed... */
+-      guint num_elems = 0;
+-      guint fullness = 0;
+-
+-      num_elems = (adif[3 + skip_size] & 0x1e);
+-      GST_INFO ("ADIF num_config_elems: %d", num_elems);
+-
+-      fullness = ((unsigned int) (adif[3 + skip_size] & 0x01) << 19) |
+-          ((unsigned int) adif[4 + skip_size] << 11) |
+-          ((unsigned int) adif[5 + skip_size] << 3) |
+-          ((unsigned int) (adif[6 + skip_size] & 0xe0) >> 5);
+-
+-      GST_INFO ("ADIF buffer fullness: %d", fullness);
+-#endif
+-      aacparse->object_type = ((adif[6 + skip_size] & 0x01) << 1) |
+-          ((adif[7 + skip_size] & 0x80) >> 7);
+-      sr_idx = (adif[7 + skip_size] & 0x78) >> 3;
++      gst_bit_reader_skip (&br, 20);    //adif_buffer_fullness
+     }
+-    /* VBR */
+-    else {
+-      aacparse->object_type = (adif[4 + skip_size] & 0x18) >> 3;
+-      sr_idx = ((adif[4 + skip_size] & 0x07) << 1) |
+-          ((adif[5 + skip_size] & 0x80) >> 7);
++
++    progConfig =
++        (GstAacProgConfig *) g_malloc0 ((num_elems+1) * sizeof (GstAacProgConfig));
++    for ( count = 0; count < num_elems + 1; count++) {
++      gst_aac_parse_read_program_config_element (&progConfig[count], &br);
++      aacparse->channels +=
++          gst_aac_parse_get_config_channels (&(progConfig[count].front));
++      aacparse->channels +=
++          gst_aac_parse_get_config_channels (&(progConfig[count].side));
++      aacparse->channels +=
++          gst_aac_parse_get_config_channels (&(progConfig[count].back));
++      aacparse->channels +=
++          gst_aac_parse_get_config_channels (&(progConfig[count].lfe));
++      aacparse->channels +=
++          gst_aac_parse_get_config_channels (&(progConfig[count].coupling));
+     }
+ 
+-    /* FIXME: This gives totally wrong results. Duration calculation cannot
+-       be based on this */
++    aacparse->bitrate = (gint)bitrate;
++    aacparse->object_type = progConfig[0].profile + 1;
++    sr_idx = progConfig[0].sr_idx;
++    g_free(progConfig);
++
+     aacparse->sample_rate =
+         gst_codec_utils_aac_get_sample_rate_from_index (sr_idx);
+ 
+-    /* baseparse is not given any fps,
+-     * so it will give up on timestamps, seeking, etc */
+-
+-    /* FIXME: Can we assume this? */
+-    aacparse->channels = 2;
+-
+     GST_INFO ("ADIF: br=%d, samplerate=%d, objtype=%d",
+         aacparse->bitrate, aacparse->sample_rate, aacparse->object_type);
+ 
+-- 
+1.9.1
+

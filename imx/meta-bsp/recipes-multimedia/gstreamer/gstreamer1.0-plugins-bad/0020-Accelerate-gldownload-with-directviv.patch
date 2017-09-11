@@ -1,0 +1,698 @@
+From 80d15dc6e8484bb65cbcc994ab5cae8f4860094d Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Tue, 16 May 2017 14:20:42 +0800
+Subject: [PATCH] Accelerate gldownload with directviv
+
+1.Propose a physical buffer pool to upstream in gldownload
+2.Bind the physical buffer with texture via dirctviv
+3.In gldownload, wrap the physical buffer to gstbuffer, pass to
+  downstream plugins.
+4.Add some configure check for g2d and phymem
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+---
+ configure.ac                      |  14 ++
+ ext/gl/gstgldownloadelement.c     |  99 +++++++++++
+ gst-libs/gst/gl/Makefile.am       |   6 +
+ gst-libs/gst/gl/gstglbufferpool.c |  21 ++-
+ gst-libs/gst/gl/gstglphymemory.c  | 363 ++++++++++++++++++++++++++++++++++++++
+ gst-libs/gst/gl/gstglphymemory.h  |  44 +++++
+ 6 files changed, 546 insertions(+), 1 deletion(-)
+ create mode 100644 gst-libs/gst/gl/gstglphymemory.c
+ create mode 100644 gst-libs/gst/gl/gstglphymemory.h
+
+diff --git a/configure.ac b/configure.ac
+index 8a05495..d7a2a46 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -871,6 +871,17 @@ if test "x$HAVE_VIV_DIRECTVIV" = "xyes"; then
+           GST_GL_HAVE_VIV_DIRECTVIV=1
+ fi
+ 
++dnl check imx6 g2d support
++HAVE_G2D=no
++AC_CHECK_HEADER(g2d.h, HAVE_G2D=yes, HAVE_G2D=no)
++
++GST_GL_HAVE_PHYMEM=0
++if test "x$HAVE_G2D" = "xyes" -a "x$HAVE_VIV_DIRECTVIV" = "xyes"; then
++  GST_GL_HAVE_PHYMEM=1
++else
++  AC_MSG_WARN([Physical memory do not support])
++fi
++
+ dnl check if we can include both GL and GLES2 at the same time
+ if test "x$HAVE_GL" = "xyes" -a "x$HAVE_GLES2" = "xyes"; then
+   GLES3_H_DEFINE=0
+@@ -1291,6 +1302,7 @@ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+ GL_CONFIG_DEFINES="$GL_CONFIG_DEFINES
+ #define GST_GL_HAVE_DMABUF $GST_GL_HAVE_DMABUF
+ #define GST_GL_HAVE_VIV_DIRECTVIV $GST_GL_HAVE_VIV_DIRECTVIV
++#define GST_GL_HAVE_PHYMEM $GST_GL_HAVE_PHYMEM
+ "
+ 
+ dnl Check for no platforms/window systems
+@@ -1326,6 +1338,7 @@ if test "x$GL_APIS" = "x" -o "x$GL_PLATFORMS" = "x" -o "x$GL_WINDOWS" = "x"; the
+   HAVE_WINDOW_COCOA=no
+   HAVE_WINDOW_EAGL=no
+   HAVE_WINDOW_VIV_FB=no
++  HAVE_G2D=no
+ fi
+ 
+ AC_SUBST(GL_APIS)
+@@ -1345,6 +1358,7 @@ AM_CONDITIONAL(HAVE_WINDOW_WAYLAND, test "x$HAVE_WINDOW_WAYLAND" = "xyes")
+ AM_CONDITIONAL(HAVE_WINDOW_ANDROID, test "x$HAVE_WINDOW_ANDROID" = "xyes")
+ AM_CONDITIONAL(HAVE_WINDOW_EAGL, test "x$HAVE_WINDOW_EAGL" = "xyes")
+ AM_CONDITIONAL(HAVE_WINDOW_VIV_FB, test "x$HAVE_WINDOW_VIV_FB" = "xyes")
++AM_CONDITIONAL(HAVE_GL_PHYMEM, test "x$HAVE_G2D" = "xyes" -a "x$HAVE_VIV_DIRECTVIV" = "xyes")
+ 
+ AM_CONDITIONAL(USE_OPENGL, test "x$USE_OPENGL" = "xyes")
+ AM_CONDITIONAL(USE_GLES2, test "x$USE_GLES2" = "xyes")
+diff --git a/ext/gl/gstgldownloadelement.c b/ext/gl/gstgldownloadelement.c
+index 36821df..03f4479 100644
+--- a/ext/gl/gstgldownloadelement.c
++++ b/ext/gl/gstgldownloadelement.c
+@@ -25,6 +25,10 @@
+ #include <gst/gl/gl.h>
+ #include "gstgldownloadelement.h"
+ 
++#if GST_GL_HAVE_PHYMEM
++#include <gst/gl/gstglphymemory.h>
++#endif
++
+ GST_DEBUG_CATEGORY_STATIC (gst_gl_download_element_debug);
+ #define GST_CAT_DEFAULT gst_gl_download_element_debug
+ 
+@@ -45,6 +49,8 @@ gst_gl_download_element_prepare_output_buffer (GstBaseTransform * bt,
+     GstBuffer * buffer, GstBuffer ** outbuf);
+ static GstFlowReturn gst_gl_download_element_transform (GstBaseTransform * bt,
+     GstBuffer * buffer, GstBuffer * outbuf);
++static gboolean gst_gl_download_element_propose_allocation (GstBaseTransform *
++    bt, GstQuery * decide_query, GstQuery * query);
+ 
+ static GstStaticPadTemplate gst_gl_download_element_src_pad_template =
+     GST_STATIC_PAD_TEMPLATE ("src",
+@@ -70,6 +76,7 @@ gst_gl_download_element_class_init (GstGLDownloadElementClass * klass)
+   bt_class->prepare_output_buffer =
+       gst_gl_download_element_prepare_output_buffer;
+   bt_class->transform = gst_gl_download_element_transform;
++  bt_class->propose_allocation = gst_gl_download_element_propose_allocation;
+ 
+   bt_class->passthrough_on_same_caps = TRUE;
+ 
+@@ -160,9 +167,26 @@ static GstFlowReturn
+ gst_gl_download_element_prepare_output_buffer (GstBaseTransform * bt,
+     GstBuffer * inbuf, GstBuffer ** outbuf)
+ {
++  GstGLDownloadElement *download = GST_GL_DOWNLOAD_ELEMENT (bt);
+   GstCaps *src_caps = gst_pad_get_current_caps (bt->srcpad);
+   GstCapsFeatures *features = NULL;
+   gint i, n;
++  GstGLMemory *glmem;
++
++#if GST_GL_HAVE_PHYMEM
++  glmem = gst_buffer_peek_memory (inbuf, 0);
++  if (gst_is_gl_physical_memory (glmem)) {
++    GstGLContext *context = GST_GL_BASE_FILTER (bt)->context;
++    GstVideoInfo info;
++
++    gst_video_info_from_caps (&info, src_caps);
++    *outbuf = gst_gl_phymem_buffer_to_gstbuffer (context, &info, inbuf);
++
++    GST_DEBUG_OBJECT (download, "gl download with direct viv.");
++
++    return GST_FLOW_OK;
++  }
++#endif /* GST_GL_HAVE_PHYMEM */
+ 
+   *outbuf = inbuf;
+ 
+@@ -194,3 +218,78 @@ gst_gl_download_element_transform (GstBaseTransform * bt,
+ {
+   return GST_FLOW_OK;
+ }
++
++static gboolean
++gst_gl_download_element_propose_allocation (GstBaseTransform * bt,
++    GstQuery * decide_query, GstQuery * query)
++{
++  GstGLContext *context = GST_GL_BASE_FILTER (bt)->context;
++  GstGLDownloadElement *download = GST_GL_DOWNLOAD_ELEMENT (bt);
++  GstAllocationParams params;
++  GstAllocator *allocator = NULL;
++  GstBufferPool *pool = NULL;
++  guint n_pools, i;
++  GstVideoInfo info;
++  GstCaps *caps;
++  GstStructure *config;
++  gsize size;
++
++  gst_query_parse_allocation (query, &caps, NULL);
++  if (!gst_video_info_from_caps (&info, caps)) {
++    GST_WARNING_OBJECT (bt, "invalid caps specified");
++    return FALSE;
++  }
++
++  GST_DEBUG_OBJECT (bt, "video format is %s", gst_video_format_to_string (GST_VIDEO_INFO_FORMAT (&info)));
++
++  gst_allocation_params_init (&params);
++
++#if GST_GL_HAVE_PHYMEM
++  if (gst_is_gl_physical_memory_supported_fmt (&info)) {
++    allocator = gst_phy_mem_allocator_obtain ();
++    GST_DEBUG_OBJECT (bt, "obtain physical memory allocator %p.", allocator);
++  }
++#endif /* GST_GL_HAVE_PHYMEM */
++
++  if (!allocator)
++    allocator = gst_allocator_find (GST_GL_MEMORY_ALLOCATOR_NAME);
++
++  if (!allocator) {
++    GST_ERROR_OBJECT (bt, "Can't obtain gl memory allocator.");
++    return FALSE;
++  }
++
++  gst_query_add_allocation_param (query, allocator, &params);
++  gst_object_unref (allocator);
++
++  n_pools = gst_query_get_n_allocation_pools (query);
++  for (i = 0; i < n_pools; i++) {
++    gst_query_parse_nth_allocation_pool (query, i, &pool, NULL, NULL, NULL);
++    gst_object_unref (pool);
++    pool = NULL;
++  }
++
++  //new buffer pool
++  pool = gst_gl_buffer_pool_new (context);
++  config = gst_buffer_pool_get_config (pool);
++
++  /* the normal size of a frame */
++  size = info.size;
++  gst_buffer_pool_config_set_params (config, caps, size, 0, 0);
++  gst_buffer_pool_config_add_option (config, GST_BUFFER_POOL_OPTION_GL_SYNC_META);
++
++  if (!gst_buffer_pool_set_config (pool, config)) {
++    gst_object_unref (pool);
++    GST_WARNING_OBJECT (bt, "failed setting config");
++    return FALSE;
++  }
++
++  GST_DEBUG_OBJECT (download, "create pool %p", pool);
++
++  //propose 3 buffers for better performance
++  gst_query_add_allocation_pool (query, pool, size, 3, 0);
++
++  gst_object_unref (pool);
++
++  return TRUE;
++}
+diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
+index 2ae4773..e97a386 100644
+--- a/gst-libs/gst/gl/Makefile.am
++++ b/gst-libs/gst/gl/Makefile.am
+@@ -131,6 +131,12 @@ libgstgl_@GST_API_VERSION@_la_LIBADD += egl/libgstgl-egl.la
+ libgstgl_@GST_API_VERSION@_la_LIBADD += -lgstallocators-$(GST_API_VERSION)
+ endif
+ 
++if HAVE_GL_PHYMEM
++libgstgl_@GST_API_VERSION@_la_SOURCES += gstglphymemory.c
++libgstgl_@GST_API_VERSION@include_HEADERS += gstglphymemory.h
++libgstgl_@GST_API_VERSION@_la_LIBADD += -lg2d
++endif
++
+ configexecincludedir = $(libdir)/gstreamer-@GST_API_VERSION@/include/gst/gl
+ nodist_configexecinclude_HEADERS = $(built_sys_header_configure)
+ 
+diff --git a/gst-libs/gst/gl/gstglbufferpool.c b/gst-libs/gst/gl/gstglbufferpool.c
+index e886557..e8bde19 100644
+--- a/gst-libs/gst/gl/gstglbufferpool.c
++++ b/gst-libs/gst/gl/gstglbufferpool.c
+@@ -26,6 +26,10 @@
+ #include "gstglbufferpool.h"
+ #include "gstglutils.h"
+ 
++#if GST_GL_HAVE_PHYMEM
++#include <gst/gl/gstglphymemory.h>
++#endif
++
+ /**
+  * SECTION:gstglbufferpool
+  * @title: GstGlBufferPool
+@@ -117,7 +121,11 @@ gst_gl_buffer_pool_set_config (GstBufferPool * pool, GstStructure * config)
+     gst_object_unref (priv->allocator);
+ 
+   if (allocator) {
+-    if (!GST_IS_GL_MEMORY_ALLOCATOR (allocator)) {
++    if (!GST_IS_GL_MEMORY_ALLOCATOR (allocator) 
++#if GST_GL_HAVE_PHYMEM
++        && (g_strcmp0 (allocator->mem_type, GST_GL_PHY_MEM_ALLOCATOR) != 0)
++#endif
++        ) {
+       gst_object_unref (allocator);
+       goto wrong_allocator;
+     } else {
+@@ -274,10 +282,21 @@ gst_gl_buffer_pool_alloc (GstBufferPool * pool, GstBuffer ** buffer,
+     goto no_buffer;
+   }
+ 
++#if GST_GL_HAVE_PHYMEM
++  if ((g_strcmp0 (priv->allocator->mem_type, GST_GL_PHY_MEM_ALLOCATOR) == 0)) {
++    if (!gst_gl_physical_memory_setup_buffer (priv->allocator, buf, priv->gl_params)) {
++      GST_ERROR_OBJECT (pool, "Can't create physcial buffer.");
++      return GST_FLOW_ERROR;
++    }
++    goto done;
++  }
++#endif
++
+   alloc = GST_GL_MEMORY_ALLOCATOR (priv->allocator);
+   if (!gst_gl_memory_setup_buffer (alloc, buf, priv->gl_params, NULL, NULL, 0))
+     goto mem_create_failed;
+ 
++done:
+   if (priv->add_glsyncmeta)
+     gst_buffer_add_gl_sync_meta (glpool->context, buf);
+ 
+diff --git a/gst-libs/gst/gl/gstglphymemory.c b/gst-libs/gst/gl/gstglphymemory.c
+new file mode 100644
+index 0000000..11e6c8e
+--- /dev/null
++++ b/gst-libs/gst/gl/gstglphymemory.c
+@@ -0,0 +1,363 @@
++/*
++ * GStreamer
++ * Copyright (c) 2015, Freescale Semiconductor, Inc.
++ * Copyright 2017 NXP
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
++#include "gstglphymemory.h"
++#include <g2d.h>
++
++GST_DEBUG_CATEGORY_STATIC (GST_CAT_GL_PHY_MEMORY);
++#define GST_CAT_DEFAULT GST_CAT_GL_PHY_MEMORY
++
++#ifndef GL_BGRA_EXT
++#define GL_BGRA_EXT                                             0x80E1
++#endif
++#ifndef GL_VIV_YV12
++#define GL_VIV_YV12                                             0x8FC0
++#endif
++#ifndef GL_VIV_NV12
++#define GL_VIV_NV12                                             0x8FC1
++#endif
++#ifndef GL_VIV_YUY2
++#define GL_VIV_YUY2                                             0x8FC2
++#endif
++#ifndef GL_VIV_UYVY
++#define GL_VIV_UYVY                                             0x8FC3
++#endif
++#ifndef GL_VIV_NV21
++#define GL_VIV_NV21                                             0x8FC4
++#endif
++#ifndef GL_VIV_I420
++#define GL_VIV_I420                                             0x8FC5
++#endif
++
++typedef void (*TexDirectVIVMap) (GLenum Target, GLsizei Width, GLsizei Height,
++    GLenum Format, GLvoid ** Logical, const GLuint * Physical);
++typedef void (*TexDirectInvalidateVIV) (GLenum Target);
++static TexDirectVIVMap pTexDirectVIVMap = NULL;
++static TexDirectInvalidateVIV pTexDirectInvalidateVIV = NULL;
++
++typedef struct {
++  guint tex_id;
++  guint w;
++  guint h;
++  guint fmt;
++  void *vaddr;
++  guint paddr;
++  gboolean ret;
++}DirectVIVData;
++
++typedef struct _GstPhyMemAllocator GstPhyMemAllocator;
++typedef struct _GstPhyMemAllocatorClass GstPhyMemAllocatorClass;
++
++struct _GstPhyMemAllocator
++{
++  GstAllocatorPhyMem parent;
++};
++
++struct _GstPhyMemAllocatorClass
++{
++  GstAllocatorPhyMemClass parent_class;
++};
++
++GType gst_phy_mem_allocator_get_type (void);
++G_DEFINE_TYPE (GstPhyMemAllocator, gst_phy_mem_allocator, GST_TYPE_ALLOCATOR_PHYMEM);
++
++static int
++alloc_phymem (GstAllocatorPhyMem *allocator, PhyMemBlock *memblk)
++{
++  struct g2d_buf *pbuf = NULL;
++
++  memblk->size = PAGE_ALIGN(memblk->size);
++
++  pbuf = g2d_alloc (memblk->size, 0);
++  if (!pbuf) {
++    GST_ERROR("G2D allocate %u bytes memory failed: %s",
++        memblk->size, strerror(errno));
++    return -1;
++  }
++
++  memblk->vaddr = (guchar*) pbuf->buf_vaddr;
++  memblk->paddr = (guchar*) pbuf->buf_paddr;
++  memblk->user_data = (gpointer) pbuf;
++  GST_DEBUG("G2D allocated memory (%p)", memblk->paddr);
++
++  return 1;
++}
++
++static int
++free_phymem (GstAllocatorPhyMem *allocator, PhyMemBlock *memblk)
++{
++  GST_DEBUG("G2D free memory (%p)", memblk->paddr);
++  gint ret = g2d_free ((struct g2d_buf*)(memblk->user_data));
++  memblk->user_data = NULL;
++  memblk->vaddr = NULL;
++  memblk->paddr = NULL;
++  memblk->size = 0;
++
++  return ret;
++}
++
++static void
++gst_phy_mem_allocator_class_init (GstPhyMemAllocatorClass * klass)
++{
++  GstAllocatorPhyMemClass *phy_allocator_klass = (GstAllocatorPhyMemClass *) klass;
++
++  phy_allocator_klass->alloc_phymem = alloc_phymem;
++  phy_allocator_klass->free_phymem = free_phymem;
++}
++
++static void
++gst_phy_mem_allocator_init (GstPhyMemAllocator * allocator)
++{
++  GstAllocator *alloc = GST_ALLOCATOR_CAST (allocator);
++
++  alloc->mem_type = GST_GL_PHY_MEM_ALLOCATOR;
++}
++
++
++static gpointer
++gst_phy_mem_allocator_init_instance (gpointer data)
++{
++  GstAllocator *allocator =
++      g_object_new (gst_phy_mem_allocator_get_type (), NULL);
++
++  GST_DEBUG_CATEGORY_INIT (GST_CAT_GL_PHY_MEMORY, "glphymemory", 0,
++      "GLPhysical Memory");
++
++  gst_allocator_register (GST_GL_PHY_MEM_ALLOCATOR, gst_object_ref (allocator));
++
++  return allocator;
++}
++
++static void
++_finish_texture (GstGLContext * ctx, gpointer *data)
++{
++  GstGLFuncs *gl = ctx->gl_vtable;
++
++  gl->Finish ();
++}
++
++static void
++_do_viv_direct_tex_bind_mem(GstGLContext * ctx, DirectVIVData *data)
++{
++  GstGLFuncs *gl = ctx->gl_vtable;
++
++  GST_DEBUG ("viv direct bind, tex_id %d, fmt: %d, res: (%dx%d)", data->tex_id, data->fmt, data->w, data->h);
++  GST_DEBUG ("Physical memory buffer, vaddr: %p, paddr: %p", data->vaddr, data->paddr);
++
++  gl->BindTexture (GL_TEXTURE_2D, data->tex_id);
++  pTexDirectVIVMap (GL_TEXTURE_2D, data->w, data->h, data->fmt, &data->vaddr, &data->paddr);
++  pTexDirectInvalidateVIV (GL_TEXTURE_2D);
++  data->ret = TRUE;
++}
++
++static GLenum
++_directviv_video_format_to_gl_format (GstVideoFormat format)
++{
++  switch (format) {
++    case GST_VIDEO_FORMAT_I420:
++      return GL_VIV_I420;
++    case GST_VIDEO_FORMAT_YV12:
++      return GL_VIV_YV12;
++    case GST_VIDEO_FORMAT_NV12:
++      return GL_VIV_NV12;
++    case GST_VIDEO_FORMAT_NV21:
++      return GL_VIV_NV21;
++    case GST_VIDEO_FORMAT_YUY2:
++      return GL_VIV_YUY2;
++    case GST_VIDEO_FORMAT_UYVY:
++      return GL_VIV_UYVY;
++    case GST_VIDEO_FORMAT_RGB16:
++      return GL_RGB565;
++    case GST_VIDEO_FORMAT_RGBA:
++      return GL_RGBA;
++    case GST_VIDEO_FORMAT_BGRA:
++      return GL_BGRA_EXT;
++    case GST_VIDEO_FORMAT_RGBx:
++      return GL_RGBA;
++    case GST_VIDEO_FORMAT_BGRx:
++      return GL_BGRA_EXT;
++    default:
++      return 0;
++  }
++}
++
++static void
++gst_gl_phy_mem_destroy (GstMemory *mem)
++{
++  gst_memory_unref (mem);
++}
++
++
++GstAllocator *
++gst_phy_mem_allocator_obtain (void)
++{
++  static GOnce once = G_ONCE_INIT;
++
++  g_once (&once, gst_phy_mem_allocator_init_instance, NULL);
++
++  g_return_val_if_fail (once.retval != NULL, NULL);
++
++  return (GstAllocator *) (g_object_ref (once.retval));
++}
++
++gboolean
++gst_is_gl_physical_memory (GstMemory * mem)
++{
++  GstGLBaseMemory *glmem;
++  g_return_val_if_fail (gst_is_gl_memory (mem), FALSE);
++
++  glmem = (GstGLBaseMemory*) mem;
++
++  if (glmem->user_data
++      && GST_IS_MINI_OBJECT_TYPE(glmem->user_data, GST_TYPE_MEMORY))
++    return gst_memory_is_type ((GstMemory*)glmem->user_data, GST_GL_PHY_MEM_ALLOCATOR);
++  else
++    return FALSE;
++}
++
++gboolean
++gst_is_gl_physical_memory_supported_fmt (GstVideoInfo * info)
++{
++  if (GST_VIDEO_INFO_IS_RGB(info)
++      && _directviv_video_format_to_gl_format (GST_VIDEO_INFO_FORMAT (info))) {
++    return TRUE;
++  }
++  else
++    return FALSE;
++}
++
++gboolean
++gst_gl_physical_memory_setup_buffer (GstAllocator * allocator, GstBuffer *buffer, 
++    GstGLVideoAllocationParams * params)
++{
++  GstGLBaseMemoryAllocator *gl_alloc;
++  GstMemory *mem = NULL;
++  PhyMemBlock *memblk = NULL;
++  GstGLMemory *glmem = NULL;
++  gsize size;
++
++  GstVideoInfo * info = params->v_info;
++  GstVideoAlignment * valign = params->valign;
++
++  GST_DEBUG ("glphymemory setup buffer format %s", gst_video_format_to_string (GST_VIDEO_INFO_FORMAT (info)));
++  
++  if (!gst_is_gl_physical_memory_supported_fmt (info)) {
++    GST_DEBUG ("Not support format.");
++    return FALSE;
++  }
++
++  if(!pTexDirectVIVMap || !pTexDirectInvalidateVIV) {
++    pTexDirectVIVMap =
++      gst_gl_context_get_proc_address (params->parent.context, "glTexDirectVIVMap");
++    pTexDirectInvalidateVIV =
++      gst_gl_context_get_proc_address (params->parent.context, "glTexDirectInvalidateVIV");
++  }
++
++  if(!pTexDirectVIVMap || !pTexDirectInvalidateVIV) {
++    GST_DEBUG ("Load directviv functions failed.");
++    return FALSE;
++  }
++
++  size = gst_gl_get_plane_data_size (info, valign, 0);
++  mem = gst_allocator_alloc (allocator, size, params->parent.alloc_params);
++  if (!mem) {
++    GST_DEBUG ("Can't allocate physical memory size %d", size);
++    return FALSE;
++  }
++
++  memblk = gst_memory_query_phymem_block (mem);
++  if (!memblk) {
++    GST_ERROR("Can't find physic memory block.");
++    return FALSE;
++  }
++
++  gl_alloc =
++      GST_GL_BASE_MEMORY_ALLOCATOR (gst_gl_memory_allocator_get_default
++      (params->parent.context));
++
++  params->plane = 0;
++  params->parent.user_data = mem;
++  params->parent.notify = gst_gl_phy_mem_destroy;
++  params->tex_format =
++    gst_gl_format_from_video_info(params->parent.context, info, 0);
++
++  glmem = (GstGLMemory *)gst_gl_base_memory_alloc (gl_alloc, (GstGLAllocationParams *) params);
++  gst_object_unref (gl_alloc);
++  if (!glmem) {
++    GST_ERROR("Can't get gl memory.");
++    return FALSE;
++  }
++
++  gst_buffer_append_memory (buffer, (GstMemory *) glmem);
++
++  gst_buffer_add_video_meta_full (buffer, 0,
++      GST_VIDEO_INFO_FORMAT (info), GST_VIDEO_INFO_WIDTH (info),
++      GST_VIDEO_INFO_HEIGHT (info), 1, info->offset, info->stride);
++
++  guint viv_fmt = _directviv_video_format_to_gl_format (GST_VIDEO_INFO_FORMAT (info));
++
++  DirectVIVData directvivdata = 
++  {
++    glmem->tex_id,
++    GST_VIDEO_INFO_WIDTH (info),
++    GST_VIDEO_INFO_HEIGHT (info),
++    viv_fmt,
++    memblk->vaddr,
++    memblk->paddr,
++    FALSE
++  };
++
++  gst_gl_context_thread_add (params->parent.context,
++      _do_viv_direct_tex_bind_mem, &directvivdata);
++
++  return directvivdata.ret;
++}
++
++GstBuffer *
++gst_gl_phymem_buffer_to_gstbuffer (GstGLContext * ctx,
++    GstVideoInfo * info, GstBuffer *glbuf)
++{
++  GstBuffer *buf;
++  GstGLBaseMemory *glmem;
++
++  gst_gl_context_thread_add (ctx, (GstGLContextThreadFunc) _finish_texture, NULL);
++
++  glmem = gst_buffer_peek_memory (glbuf, 0);
++
++  buf = gst_buffer_new ();
++  gst_buffer_append_memory (buf, (GstMemory *) glmem->user_data);
++  gst_memory_ref ((GstMemory *)glmem->user_data);
++
++  gst_buffer_add_video_meta_full (buf, 0,
++      GST_VIDEO_INFO_FORMAT (info), GST_VIDEO_INFO_WIDTH (info),
++      GST_VIDEO_INFO_HEIGHT (info), 1, info->offset, info->stride);
++  GST_BUFFER_FLAGS (buf) = GST_BUFFER_FLAGS (glbuf);
++  GST_BUFFER_PTS (buf) = GST_BUFFER_PTS (glbuf);
++  GST_BUFFER_DTS (buf) = GST_BUFFER_DTS (glbuf);
++  GST_BUFFER_DURATION (buf) = GST_BUFFER_DURATION (glbuf);
++
++  return buf;
++}
++
+diff --git a/gst-libs/gst/gl/gstglphymemory.h b/gst-libs/gst/gl/gstglphymemory.h
+new file mode 100644
+index 0000000..9ebb3ea
+--- /dev/null
++++ b/gst-libs/gst/gl/gstglphymemory.h
+@@ -0,0 +1,44 @@
++/*
++ * GStreamer
++ * Copyright (c) 2015, Freescale Semiconductor, Inc.
++ * Copyright 2017 NXP
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++#ifndef _GST_GL_PHY_MEMORY_H_
++#define _GST_GL_PHY_MEMORY_H_
++
++#include <gst/gst.h>
++#include <gst/gstmemory.h>
++#include <gst/video/video.h>
++#include <gst/allocators/gstallocatorphymem.h>
++
++#include <gst/gl/gl.h>
++
++G_BEGIN_DECLS
++
++#define GST_GL_PHY_MEM_ALLOCATOR "GLPhyMemory"
++
++GstAllocator *gst_phy_mem_allocator_obtain (void);
++gboolean gst_is_gl_physical_memory (GstMemory * mem);
++gboolean gst_is_gl_physical_memory_supported_fmt (GstVideoInfo * info);
++gboolean gst_gl_physical_memory_setup_buffer (GstAllocator * allocator, GstBuffer *buffer, GstGLVideoAllocationParams * params);
++GstBuffer * gst_gl_phymem_buffer_to_gstbuffer (GstGLContext * ctx, GstVideoInfo * info, GstBuffer *glbuf);
++
++G_END_DECLS
++
++#endif /* _GST_GL_PHY_MEMORY_H_ */
+-- 
+1.9.1
+

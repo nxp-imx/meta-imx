@@ -1,0 +1,27 @@
+From 86b607832be048fba0038bc5720e187ccce6a46e Mon Sep 17 00:00:00 2001
+From: Yuqing Zhu <carol.zhu@nxp.com>
+Date: Fri, 26 May 2017 16:49:45 +0800
+Subject: [PATCH] gst-plugins-bad: Correct PKG_COFING directory for
+ WAYLAND_PROTOCOLS
+
+Signed-off-by: Yuqing Zhu <carol.zhu@nxp.com>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index c99a5b8..d1b04b0 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2264,7 +2264,7 @@ AG_GST_CHECK_FEATURE(WAYLAND, [wayland sink], wayland , [
+   PKG_CHECK_MODULES(WAYLAND, wayland-client >= 1.4.0 libdrm >= 2.4.55 wayland-protocols >= 1.4, [
+     if test "x$wayland_scanner" != "x"; then
+       HAVE_WAYLAND="yes"
+-      AC_SUBST(WAYLAND_PROTOCOLS_DATADIR, `$PKG_CONFIG --variable=pkgdatadir wayland-protocols`)
++      AC_SUBST(WAYLAND_PROTOCOLS_DATADIR, $PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=pkgdatadir wayland-protocols`)
+     else
+       AC_MSG_RESULT([wayland-scanner is required to build the wayland plugin])
+       HAVE_WAYLAND="no"
+-- 
+1.9.1
+

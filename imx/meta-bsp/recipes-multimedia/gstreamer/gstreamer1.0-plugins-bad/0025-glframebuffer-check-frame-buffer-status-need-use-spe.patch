@@ -1,0 +1,132 @@
+From bf7eb6a0725daf770dc68503216d7cd8e1e314c4 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Thu, 25 May 2017 10:09:04 +0800
+Subject: [PATCH 25/26] glframebuffer: check frame buffer status need use
+ specific fbo target
+
+Upstream-Status: Pending
+https://bugzilla.gnome.org/show_bug.cgi?id=783065
+---
+ ext/qt/qtwindow.cc                  |  4 ++--
+ gst-libs/gst/gl/gstglcolorconvert.c |  2 +-
+ gst-libs/gst/gl/gstglframebuffer.c  | 10 ++++++++--
+ gst-libs/gst/gl/gstglframebuffer.h  |  3 ++-
+ gst-libs/gst/gl/gstglmemory.c       |  8 ++++----
+ 5 files changed, 17 insertions(+), 10 deletions(-)
+
+diff --git a/ext/qt/qtwindow.cc b/ext/qt/qtwindow.cc
+index 92c5834..6f1df7e 100644
+--- a/ext/qt/qtwindow.cc
++++ b/ext/qt/qtwindow.cc
+@@ -217,7 +217,7 @@ QtGLWindow::afterRendering()
+ 
+   gl->BindFramebuffer (GL_READ_FRAMEBUFFER, this->source->renderTargetId());
+ 
+-  ret = gst_gl_context_check_framebuffer_status (context);
++  ret = gst_gl_context_check_framebuffer_status (context, GL_READ_FRAMEBUFFER);
+   if (!ret) {
+     GST_ERROR ("FBO errors");
+     goto errors;
+@@ -233,7 +233,7 @@ QtGLWindow::afterRendering()
+     gl->FramebufferTexture2D (GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+               GL_TEXTURE_2D, dst_tex, 0);
+ 
+-    ret = gst_gl_context_check_framebuffer_status (context);
++    ret = gst_gl_context_check_framebuffer_status (context, GL_DRAW_FRAMEBUFFER);
+     if (!ret) {
+       GST_ERROR ("FBO errors");
+       goto errors;
+diff --git a/gst-libs/gst/gl/gstglcolorconvert.c b/gst-libs/gst/gl/gstglcolorconvert.c
+index adf5a6e..45d2d32 100644
+--- a/gst-libs/gst/gl/gstglcolorconvert.c
++++ b/gst-libs/gst/gl/gstglcolorconvert.c
+@@ -2516,7 +2516,7 @@ _do_convert_draw (GstGLContext * context, GstGLColorConvert * convert)
+   gl->Viewport (viewport_dim[0], viewport_dim[1], viewport_dim[2],
+       viewport_dim[3]);
+ 
+-  if (!gst_gl_context_check_framebuffer_status (context))
++  if (!gst_gl_context_check_framebuffer_status (context, GL_FRAMEBUFFER))
+     ret = FALSE;
+ 
+   gst_gl_context_clear_framebuffer (context);
+diff --git a/gst-libs/gst/gl/gstglframebuffer.c b/gst-libs/gst/gl/gstglframebuffer.c
+index f628997..7dc9727 100644
+--- a/gst-libs/gst/gl/gstglframebuffer.c
++++ b/gst-libs/gst/gl/gstglframebuffer.c
+@@ -507,11 +507,17 @@ gst_gl_framebuffer_get_effective_dimensions (GstGLFramebuffer * fb,
+  * Since: 1.10
+  */
+ gboolean
+-gst_gl_context_check_framebuffer_status (GstGLContext * context)
++gst_gl_context_check_framebuffer_status (GstGLContext * context, GLenum fbo_target)
+ {
+   g_return_val_if_fail (GST_IS_GL_CONTEXT (context), FALSE);
+ 
+-  switch (context->gl_vtable->CheckFramebufferStatus (GL_FRAMEBUFFER)) {
++  if (fbo_target != GL_FRAMEBUFFER && fbo_target != GL_READ_FRAMEBUFFER
++      && fbo_target != GL_DRAW_FRAMEBUFFER) {
++    GST_ERROR_OBJECT (context, "fbo target is invalid");
++    return FALSE;
++  }
++
++  switch (context->gl_vtable->CheckFramebufferStatus (fbo_target)) {
+     case GL_FRAMEBUFFER_COMPLETE:
+       return TRUE;
+       break;
+diff --git a/gst-libs/gst/gl/gstglframebuffer.h b/gst-libs/gst/gl/gstglframebuffer.h
+index 297a71e..172f999 100644
+--- a/gst-libs/gst/gl/gstglframebuffer.h
++++ b/gst-libs/gst/gl/gstglframebuffer.h
+@@ -103,7 +103,8 @@ void                    gst_gl_framebuffer_get_effective_dimensions (GstGLFrameb
+                                                                      guint * height);
+ 
+ GST_EXPORT
+-gboolean                gst_gl_context_check_framebuffer_status     (GstGLContext * context);
++gboolean                gst_gl_context_check_framebuffer_status     (GstGLContext * context,
++                                                                     GLenum fbo_target);
+ 
+ GST_EXPORT
+ gboolean                gst_gl_framebuffer_draw_to_texture          (GstGLFramebuffer * fb,
+diff --git a/gst-libs/gst/gl/gstglmemory.c b/gst-libs/gst/gl/gstglmemory.c
+index 343a859..0cda68b 100644
+--- a/gst-libs/gst/gl/gstglmemory.c
++++ b/gst-libs/gst/gl/gstglmemory.c
+@@ -373,7 +373,7 @@ gst_gl_memory_read_pixels (GstGLMemory * gl_mem, gpointer read_pointer)
+   gl->FramebufferTexture2D (GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+       gst_gl_texture_target_to_gl (gl_mem->tex_target), gl_mem->tex_id, 0);
+ 
+-  if (!gst_gl_context_check_framebuffer_status (context)) {
++  if (!gst_gl_context_check_framebuffer_status (context, GL_FRAMEBUFFER)) {
+     GST_CAT_WARNING (GST_CAT_GL_MEMORY,
+         "Could not create framebuffer to read pixels for memory %p", gl_mem);
+     gl->DeleteFramebuffers (1, &fbo);
+@@ -682,7 +682,7 @@ gst_gl_memory_copy_teximage (GstGLMemory * src, guint tex_id,
+     gl->FramebufferTexture2D (GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+         gst_gl_texture_target_to_gl (src->tex_target), src_tex_id, 0);
+ 
+-    if (!gst_gl_context_check_framebuffer_status (src->mem.context))
++    if (!gst_gl_context_check_framebuffer_status (src->mem.context, GL_FRAMEBUFFER))
+       goto fbo_error;
+ 
+     gl->BindTexture (out_tex_target, tex_id);
+@@ -711,7 +711,7 @@ gst_gl_memory_copy_teximage (GstGLMemory * src, guint tex_id,
+     gl->FramebufferTexture2D (GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+         gst_gl_texture_target_to_gl (src->tex_target), src_tex_id, 0);
+ 
+-    if (!gst_gl_context_check_framebuffer_status (src->mem.context))
++    if (!gst_gl_context_check_framebuffer_status (src->mem.context, GL_READ_FRAMEBUFFER))
+       goto fbo_error;
+ 
+     gl->BindFramebuffer (GL_DRAW_FRAMEBUFFER, fbo[1]);
+@@ -719,7 +719,7 @@ gst_gl_memory_copy_teximage (GstGLMemory * src, guint tex_id,
+     gl->FramebufferTexture2D (GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+         gst_gl_texture_target_to_gl (src->tex_target), tex_id, 0);
+ 
+-    if (!gst_gl_context_check_framebuffer_status (src->mem.context))
++    if (!gst_gl_context_check_framebuffer_status (src->mem.context, GL_DRAW_FRAMEBUFFER))
+       goto fbo_error;
+ 
+     gl->BindTexture (out_tex_target, tex_id);
+-- 
+1.9.1
+

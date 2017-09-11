@@ -13,10 +13,10 @@ Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
  gst-libs/gst/mpegts/Makefile.am    | 2 +-
  3 files changed, 3 insertions(+), 3 deletions(-)
 
-Index: gst-plugins-bad-1.10.1/gst-libs/gst/gl/Makefile.am
+Index: gst-plugins-bad-1.12.0/gst-libs/gst/gl/Makefile.am
 ===================================================================
---- gst-plugins-bad-1.10.1.orig/gst-libs/gst/gl/Makefile.am
-+++ gst-plugins-bad-1.10.1/gst-libs/gst/gl/Makefile.am
+--- gst-plugins-bad-1.12.0.orig/gst-libs/gst/gl/Makefile.am
++++ gst-plugins-bad-1.12.0/gst-libs/gst/gl/Makefile.am
 @@ -171,7 +171,7 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPEC
  		--include=Gst-@GST_API_VERSION@ \
  		--include=GstBase-@GST_API_VERSION@ \
@@ -26,10 +26,10 @@ Index: gst-plugins-bad-1.10.1/gst-libs/gst/gl/Makefile.am
  		--pkg gstreamer-@GST_API_VERSION@ \
  		--pkg gstreamer-base-@GST_API_VERSION@ \
  		--pkg gstreamer-video-@GST_API_VERSION@ \
-Index: gst-plugins-bad-1.10.1/gst-libs/gst/insertbin/Makefile.am
+Index: gst-plugins-bad-1.12.0/gst-libs/gst/insertbin/Makefile.am
 ===================================================================
---- gst-plugins-bad-1.10.1.orig/gst-libs/gst/insertbin/Makefile.am
-+++ gst-plugins-bad-1.10.1/gst-libs/gst/insertbin/Makefile.am
+--- gst-plugins-bad-1.12.0.orig/gst-libs/gst/insertbin/Makefile.am
++++ gst-plugins-bad-1.12.0/gst-libs/gst/insertbin/Makefile.am
 @@ -45,7 +45,7 @@ GstInsertBin-@GST_API_VERSION@.gir: $(IN
  		--library=libgstinsertbin-@GST_API_VERSION@.la \
  		--include=Gst-@GST_API_VERSION@ \
@@ -39,10 +39,10 @@ Index: gst-plugins-bad-1.10.1/gst-libs/gst/insertbin/Makefile.am
  		--pkg gstreamer-@GST_API_VERSION@ \
  		--pkg gstreamer-base-@GST_API_VERSION@ \
  		--pkg-export gstreamer-insertbin-@GST_API_VERSION@ \
-Index: gst-plugins-bad-1.10.1/gst-libs/gst/mpegts/Makefile.am
+Index: gst-plugins-bad-1.12.0/gst-libs/gst/mpegts/Makefile.am
 ===================================================================
---- gst-plugins-bad-1.10.1.orig/gst-libs/gst/mpegts/Makefile.am
-+++ gst-plugins-bad-1.10.1/gst-libs/gst/mpegts/Makefile.am
+--- gst-plugins-bad-1.12.0.orig/gst-libs/gst/mpegts/Makefile.am
++++ gst-plugins-bad-1.12.0/gst-libs/gst/mpegts/Makefile.am
 @@ -79,7 +79,7 @@ GstMpegts-@GST_API_VERSION@.gir: $(INTRO
  		--add-include-path=`PKG_CONFIG_PATH="$(GST_PKG_CONFIG_PATH)" $(PKG_CONFIG) --variable=girdir gstreamer-video-@GST_API_VERSION@` \
  		--library=libgstmpegts-@GST_API_VERSION@.la \

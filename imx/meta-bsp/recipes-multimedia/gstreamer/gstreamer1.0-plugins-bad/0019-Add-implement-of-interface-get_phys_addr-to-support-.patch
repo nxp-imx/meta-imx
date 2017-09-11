@@ -1,0 +1,48 @@
+From ccbb5a40d9260e63fbf87c737adb05102c82fbb3 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Mon, 22 May 2017 13:38:05 +0800
+Subject: [PATCH 19/26] Add implement of interface "get_phys_addr" to support
+ directviv upload
+
+Upstream-Status: Inappropriate [i.MX specific]
+---
+ gst-libs/gst/allocators/gstallocatorphymem.c | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+
+diff --git a/gst-libs/gst/allocators/gstallocatorphymem.c b/gst-libs/gst/allocators/gstallocatorphymem.c
+index cf5995e..d128b83 100755
+--- a/gst-libs/gst/allocators/gstallocatorphymem.c
++++ b/gst-libs/gst/allocators/gstallocatorphymem.c
+@@ -20,6 +20,7 @@
+ #include <stdio.h>
+ #include <string.h>
+ #include "gstallocatorphymem.h"
++#include "gstphysmemory.h"
+ 
+ typedef struct {
+   GstMemory mem;
+@@ -212,7 +213,20 @@ default_free (GstAllocatorPhyMem *allocator, PhyMemBlock *phy_mem)
+   return -1;
+ }
+ 
+-G_DEFINE_TYPE (GstAllocatorPhyMem, gst_allocator_phymem, GST_TYPE_ALLOCATOR);
++static guintptr
++gst_allocator_phymem_get_phys_addr (GstPhysMemoryAllocator *allocator, GstMemory *mem)
++{
++  return gst_phymem_get_phy (mem);
++}
++
++static void gst_allocator_phymem_iface_init(gpointer g_iface)
++{
++  GstPhysMemoryAllocatorInterface *iface = g_iface;
++  iface->get_phys_addr = gst_allocator_phymem_get_phys_addr;
++}
++
++G_DEFINE_TYPE_WITH_CODE (GstAllocatorPhyMem, gst_allocator_phymem, GST_TYPE_ALLOCATOR,
++    G_IMPLEMENT_INTERFACE(GST_TYPE_PHYS_MEMORY_ALLOCATOR, gst_allocator_phymem_iface_init));
+ 
+ static void
+ gst_allocator_phymem_class_init (GstAllocatorPhyMemClass * klass)
+-- 
+1.9.1
+

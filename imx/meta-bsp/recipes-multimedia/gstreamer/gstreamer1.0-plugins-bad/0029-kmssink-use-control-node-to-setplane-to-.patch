@@ -1,0 +1,108 @@
+From c2dd58fac7dc43280fab80d2234193993076665c Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Tue, 8 Aug 2017 12:55:42 +0800
+Subject: [PATCH 1/3] [MMFMWK-7567] kmssink: use control node to setplane to
+ avoid getting DRM-Master
+
+a workaround on Linux 4.9 for kmssink multi-user
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+---
+ sys/kms/gstkmssink.c | 31 +++++++++++++++++++++++++++++--
+ sys/kms/gstkmssink.h |  1 +
+ 2 files changed, 30 insertions(+), 2 deletions(-)
+
+diff --git a/sys/kms/gstkmssink.c b/sys/kms/gstkmssink.c
+index d19e19e..e91c211 100644
+--- a/sys/kms/gstkmssink.c
++++ b/sys/kms/gstkmssink.c
+@@ -51,6 +51,8 @@
+ #include <drm_fourcc.h>
+ 
+ #include <string.h>
++#include <fcntl.h>
++#include <unistd.h>
+ 
+ #include "gstkmssink.h"
+ #include "gstkmsutils.h"
+@@ -485,6 +487,21 @@ ensure_allowed_caps (GstKMSSink * self, drmModeConnector * conn,
+   return (self->allowed_caps && !gst_caps_is_empty (self->allowed_caps));
+ }
+ 
++static gint
++get_drm_minor_base (gint type)
++{
++  switch (type) {
++    case DRM_NODE_PRIMARY:
++      return 0;
++    case DRM_NODE_CONTROL:
++      return 64;
++    case DRM_NODE_RENDER:
++      return 128;
++    default:
++      return -1;
++  }
++}
++
+ static gboolean
+ gst_kms_sink_start (GstBaseSink * bsink)
+ {
+@@ -496,6 +513,7 @@ gst_kms_sink_start (GstBaseSink * bsink)
+   drmModePlane *plane;
+   gboolean universal_planes;
+   gboolean ret;
++  gint minor;
+ 
+   self = GST_KMS_SINK (bsink);
+   universal_planes = FALSE;
+@@ -510,7 +528,11 @@ gst_kms_sink_start (GstBaseSink * bsink)
+     self->fd = drmOpen (self->devname, NULL);
+   else
+     self->fd = kms_open (&self->devname);
+-  if (self->fd < 0)
++
++  minor = get_drm_minor_base (DRM_NODE_CONTROL);
++  self->ctrl_fd = drmOpenControl(minor);
++
++  if (self->fd < 0 || self->ctrl_fd < 0)
+     goto open_failed;
+ 
+   log_drm_version (self);
+@@ -689,6 +711,11 @@ gst_kms_sink_stop (GstBaseSink * bsink)
+     self->fd = -1;
+   }
+ 
++  if (self->ctrl_fd >= 0) {
++    drmClose (self->ctrl_fd);
++    self->ctrl_fd = -1;
++  }
++
+   return TRUE;
+ }
+ 
+@@ -1278,7 +1305,7 @@ retry_set_plane:
+       "drmModeSetPlane at (%i,%i) %ix%i sourcing at (%i,%i) %ix%i",
+       result.x, result.y, result.w, result.h, src.x, src.y, src.w, src.h);
+ 
+-  ret = drmModeSetPlane (self->fd, self->plane_id, self->crtc_id, fb_id, 0,
++  ret = drmModeSetPlane (self->ctrl_fd, self->plane_id, self->crtc_id, fb_id, 0,
+       result.x, result.y, result.w, result.h,
+       /* source/cropping coordinates are given in Q16 */
+       src.x << 16, src.y << 16, src.w << 16, src.h << 16);
+diff --git a/sys/kms/gstkmssink.h b/sys/kms/gstkmssink.h
+index 214f3ad..f2ab4d4 100644
+--- a/sys/kms/gstkmssink.h
++++ b/sys/kms/gstkmssink.h
+@@ -49,6 +49,7 @@ struct _GstKMSSink {
+ 
+   /*< private >*/
+   gint fd;
++  gint ctrl_fd;
+   gint conn_id;
+   gint crtc_id;
+   gint plane_id;
+-- 
+1.9.1
+

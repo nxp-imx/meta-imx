@@ -1,7 +1,7 @@
-From a5dcc14fd8e0c5613ebef18fc9e7c182fa0709f9 Mon Sep 17 00:00:00 2001
+From 44e9b424ac7d4b7f28688da0c93ee8a4520dae14 Mon Sep 17 00:00:00 2001
 From: Song Bing <bing.song@nxp.com>
 Date: Mon, 24 Oct 2016 11:00:07 -0400
-Subject: [PATCH 3/4] dmabuf: Add free function
+Subject: [PATCH 13/16] dmabuf: Add free function
 
 Add free function to free subclass and fd memory resource.
 
@@ -9,17 +9,17 @@ Upstream-Status: Pending
 
 https://bugzilla.gnome.org/show_bug.cgi?id=768794
 ---
- gst-libs/gst/allocators/gstdmabuf.c   |   13 +++++++++++++
- gst-libs/gst/allocators/gstdmabuf.h   |    3 +++
- gst-libs/gst/allocators/gstfdmemory.c |    6 ++++++
- gst-libs/gst/allocators/gstfdmemory.h |    9 +++++++++
+ gst-libs/gst/allocators/gstdmabuf.c   | 13 +++++++++++++
+ gst-libs/gst/allocators/gstdmabuf.h   |  3 +++
+ gst-libs/gst/allocators/gstfdmemory.c |  6 ++++++
+ gst-libs/gst/allocators/gstfdmemory.h |  9 +++++++++
  4 files changed, 31 insertions(+)
 
 diff --git a/gst-libs/gst/allocators/gstdmabuf.c b/gst-libs/gst/allocators/gstdmabuf.c
-index e4ee14e..ff6b7fb 100644
+index 7d6bcab..3c6820f 100644
 --- a/gst-libs/gst/allocators/gstdmabuf.c
 +++ b/gst-libs/gst/allocators/gstdmabuf.c
-@@ -44,8 +44,21 @@ GST_DEBUG_CATEGORY_STATIC (dmabuf_debug);
+@@ -45,8 +45,21 @@ GST_DEBUG_CATEGORY_STATIC (dmabuf_debug);
  G_DEFINE_TYPE (GstDmaBufAllocator, gst_dmabuf_allocator, GST_TYPE_FD_ALLOCATOR);
  
  static void
@@ -42,10 +42,10 @@ index e4ee14e..ff6b7fb 100644
  
  static void
 diff --git a/gst-libs/gst/allocators/gstdmabuf.h b/gst-libs/gst/allocators/gstdmabuf.h
-index ff5525b..2789222 100644
+index c6301da..166bbfe 100644
 --- a/gst-libs/gst/allocators/gstdmabuf.h
 +++ b/gst-libs/gst/allocators/gstdmabuf.h
-@@ -58,6 +58,9 @@ struct _GstDmaBufAllocatorClass
+@@ -90,6 +90,9 @@ struct _GstDmaBufAllocatorClass
  {
    GstFdAllocatorClass parent_class;
  
@@ -56,10 +56,10 @@ index ff5525b..2789222 100644
    gpointer _gst_reserved[GST_PADDING];
  };
 diff --git a/gst-libs/gst/allocators/gstfdmemory.c b/gst-libs/gst/allocators/gstfdmemory.c
-index 7a7f05b..f51d957 100644
+index ad428a7..6d36c11 100644
 --- a/gst-libs/gst/allocators/gstfdmemory.c
 +++ b/gst-libs/gst/allocators/gstfdmemory.c
-@@ -55,6 +55,12 @@ typedef struct
+@@ -56,6 +56,12 @@ typedef struct
  static void
  gst_fd_mem_free (GstAllocator * allocator, GstMemory * gmem)
  {
@@ -73,10 +73,10 @@ index 7a7f05b..f51d957 100644
    GstFdMemory *mem = (GstFdMemory *) gmem;
  
 diff --git a/gst-libs/gst/allocators/gstfdmemory.h b/gst-libs/gst/allocators/gstfdmemory.h
-index 75efae2..39a5e31 100644
+index 40c90d0..93cb46b 100644
 --- a/gst-libs/gst/allocators/gstfdmemory.h
 +++ b/gst-libs/gst/allocators/gstfdmemory.h
-@@ -66,11 +66,20 @@ typedef enum {
+@@ -69,11 +69,20 @@ typedef enum {
  struct _GstFdAllocator
  {
    GstAllocator parent;
@@ -98,5 +98,5 @@ index 75efae2..39a5e31 100644
  
  GType gst_fd_allocator_get_type (void);
 -- 
-1.7.9.5
+1.9.1
 

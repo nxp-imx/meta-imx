@@ -1,14 +1,13 @@
-From a82b3f0c9d53b73d7dac961990b08b06c6671faa Mon Sep 17 00:00:00 2001
+From 6daed66db8a147783acc117b76afa2e779c8c12c Mon Sep 17 00:00:00 2001
 From: Song Bing <bing.song@nxp.com>
 Date: Thu, 20 Aug 2015 14:57:46 +0800
-Subject: [PATCH 6/6] poll: Add check if can read event API
+Subject: [PATCH 6/7] poll: Add check if can read event API
 
 Need check if can read event of buffer for video decoder based on
 V4L2 driver. Add the API for it.
 
-https://bugzilla.gnome.org/show_bug.cgi?id=752962
 
-Upstream-Status: pending
+Upstream-Status: Pending [https://bugzilla.gnome.org/show_bug.cgi?id=752962]
 
 Signed-off-by: Song Bing bing.song@nxp.com
 ---
@@ -17,10 +16,10 @@ Signed-off-by: Song Bing bing.song@nxp.com
  2 files changed, 53 insertions(+)
 
 diff --git a/gst/gstpoll.c b/gst/gstpoll.c
-index 23bceab..f9f5242 100644
+index fd672ed..084f6f7 100644
 --- a/gst/gstpoll.c
 +++ b/gst/gstpoll.c
-@@ -1239,6 +1239,58 @@ gst_poll_fd_can_read (const GstPoll * set, GstPollFD * fd)
+@@ -1242,6 +1242,58 @@ gst_poll_fd_can_read (const GstPoll * set, GstPollFD * fd)
    return res;
  }
  

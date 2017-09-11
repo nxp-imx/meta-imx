@@ -1,0 +1,35 @@
+From dcaf27575e66a34a60255ddd59ddfc75f1c196c7 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Tue, 5 Sep 2017 12:48:56 +0800
+Subject: [PATCH] [MMFMWK-7700] glimagesink: fix segmentation fault when stop
+ glimagesink wayland
+
+eglTerminate call is integrated into GstGLDisplyEGL, GstGLDisplayWayland
+will hold an instance of GstGLDisplyEGL when egl context call to
+gst_gl_display_egl_from_gl_display. When we unref GstGLDisplayWayland,
+first clean the hold instance GstGLDisplyEGL and then do disconnect
+
+Upstream-Status: Backport [1.13.1]
+https://bugzilla.gnome.org/show_bug.cgi?id=787293
+---
+ gst-libs/gst/gl/wayland/gstgldisplay_wayland.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/gst-libs/gst/gl/wayland/gstgldisplay_wayland.c b/gst-libs/gst/gl/wayland/gstgldisplay_wayland.c
+index e466fb4..c3e902d 100644
+--- a/gst-libs/gst/gl/wayland/gstgldisplay_wayland.c
++++ b/gst-libs/gst/gl/wayland/gstgldisplay_wayland.c
+@@ -91,6 +91,10 @@ gst_gl_display_wayland_finalize (GObject * object)
+ {
+   GstGLDisplayWayland *display_wayland = GST_GL_DISPLAY_WAYLAND (object);
+ 
++  /* Cause eglTerminate() to occur before wl_display_disconnect()
++   * https://bugzilla.gnome.org/show_bug.cgi?id=787293 */
++  g_object_set_data (object, "gst.gl.display.egl", NULL);
++
+   if (!display_wayland->foreign_display && display_wayland->display) {
+     wl_display_flush (display_wayland->display);
+     wl_display_disconnect (display_wayland->display);
+-- 
+1.9.1
+

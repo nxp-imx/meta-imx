@@ -1,0 +1,37 @@
+From 2ad9aa1c62ff7b7772862ace35dd03bfae3f0fce Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Thu, 25 May 2017 11:31:46 +0800
+Subject: [PATCH 16/16] Remove phymem allocator from base to bad
+
+Upstream-Status: Inappropriate [i.MX specific]
+---
+ gst-libs/gst/allocators/Makefile.am | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/gst-libs/gst/allocators/Makefile.am b/gst-libs/gst/allocators/Makefile.am
+index 1955436..1c5680b 100644
+--- a/gst-libs/gst/allocators/Makefile.am
++++ b/gst-libs/gst/allocators/Makefile.am
+@@ -5,8 +5,7 @@ libgstallocators_@GST_API_VERSION@_includedir = $(includedir)/gstreamer-@GST_API
+ libgstallocators_@GST_API_VERSION@_include_HEADERS = \
+ 	allocators.h \
+ 	gstfdmemory.h \
+-	gstdmabuf.h \
+-	gstallocatorphymem.h
++	gstdmabuf.h
+ 
+ if USE_ION
+ libgstallocators_@GST_API_VERSION@_include_HEADERS += \
+@@ -17,8 +16,7 @@ noinst_HEADERS =
+ 
+ libgstallocators_@GST_API_VERSION@_la_SOURCES = \
+ 	gstfdmemory.c \
+-	gstdmabuf.c \
+-	gstallocatorphymem.c
++	gstdmabuf.c
+ 
+ if USE_ION
+ libgstallocators_@GST_API_VERSION@_la_SOURCES += \
+-- 
+1.9.1
+

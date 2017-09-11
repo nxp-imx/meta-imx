@@ -1,0 +1,74 @@
+From b1886be721be792c98f17af31dd8c144754e05be Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Wed, 12 Jul 2017 10:17:18 +0800
+Subject: [PATCH 3/3] [MMFMWK-7567] kmssink: check scaleable when set_caps
+
+when video size is same as display resolution, show frame will not do
+retry because the setplane will never fail. But the scale result is not
+correct. We can do this check by set a fake plane.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+---
+ sys/kms/gstkmssink.c | 38 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+
+diff --git a/sys/kms/gstkmssink.c b/sys/kms/gstkmssink.c
+index 6d9b765..65fdc4f 100644
+--- a/sys/kms/gstkmssink.c
++++ b/sys/kms/gstkmssink.c
+@@ -402,6 +402,42 @@ get_drm_caps (GstKMSSink * self)
+   return TRUE;
+ }
+ 
++static void
++check_scaleable (GstKMSSink * self)
++{
++  gint result;
++  guint32 fb_id;
++  guint32 width, height;
++  GstKMSMemory *kmsmem = NULL;
++
++  if (!self->can_scale)
++    return;
++
++  if (self->conn_id < 0)
++    return;
++
++  kmsmem = (GstKMSMemory *) gst_kms_allocator_bo_alloc (self->allocator, &self->vinfo);
++  if (!kmsmem)
++    return;
++
++  fb_id = kmsmem->fb_id;
++
++  GST_INFO_OBJECT (self, "checking scaleable");
++
++  width = GST_VIDEO_INFO_WIDTH (&self->vinfo);
++  height = GST_VIDEO_INFO_HEIGHT (&self->vinfo);
++
++  result = drmModeSetPlane (self->fd, self->plane_id, self->crtc_id, fb_id, 0,
++      0, 0, width/2, height/2,
++      0, 0, width << 16, height << 16);
++  if (result) {
++    self->can_scale = FALSE;
++    GST_INFO_OBJECT (self, "scale is not support");
++  }
++
++  g_clear_pointer (&kmsmem, gst_memory_unref);
++}
++
+ static gboolean
+ configure_mode_setting (GstKMSSink * self, GstVideoInfo * vinfo)
+ {
+@@ -977,6 +1013,8 @@ gst_kms_sink_set_caps (GstBaseSink * bsink, GstCaps * caps)
+ 
+   self->vinfo = vinfo;
+ 
++  check_scaleable (self);
++
+   GST_OBJECT_LOCK (self);
+   if (self->reconfigure) {
+     self->reconfigure = FALSE;
+-- 
+1.9.1
+

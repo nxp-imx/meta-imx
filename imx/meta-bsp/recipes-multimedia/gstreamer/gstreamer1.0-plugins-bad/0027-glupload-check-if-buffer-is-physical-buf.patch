@@ -1,0 +1,35 @@
+From a0f4d0e327e49e146f39e458ef121c5c108a020b Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Tue, 4 Jul 2017 10:49:29 +0800
+Subject: [PATCH] [MMFMWK-7607]glupload: check if buffer is physical buffer in
+ dmabuf
+
+For imx8 with vpu and ion. Need check if the buffer
+is physical buffer first, otherwise it will do copy from
+physical buffer to dmabuf and cause performance downgrade
+
+Upstream-Status: Inappropriate [i.MX specific]
+---
+ gst-libs/gst/gl/gstglupload.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/gst-libs/gst/gl/gstglupload.c b/gst-libs/gst/gl/gstglupload.c
+index 56009a3..e9a47af 100644
+--- a/gst-libs/gst/gl/gstglupload.c
++++ b/gst-libs/gst/gl/gstglupload.c
+@@ -669,6 +669,12 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
+           "EGL_KHR_image_base"))
+     return FALSE;
+ 
++  /* FIXME: For imx8 with vpu and ion. Need check if the buffer
++   * is physical buffer first, otherwise it will do copy from
++   * physical buffer to dmabuf and cause performance downgrade */
++  if (gst_is_phys_memory(gst_buffer_peek_memory (buffer, 0)))
++    return FALSE;
++
+   /* This will eliminate most non-dmabuf out there */
+   if (!gst_is_dmabuf_memory (gst_buffer_peek_memory (buffer, 0))) {
+     GstVideoFrame frame1, frame2;
+-- 
+1.9.1
+

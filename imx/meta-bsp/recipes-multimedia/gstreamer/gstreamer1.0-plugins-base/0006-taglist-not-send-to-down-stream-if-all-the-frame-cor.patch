@@ -1,12 +1,12 @@
-From f231580eb8a58f97bb26df94cfec720be4e8605b Mon Sep 17 00:00:00 2001
+From 1dfe4f567771217bb33c57e8480b99969f119ded Mon Sep 17 00:00:00 2001
 From: Lyon Wang <lyon.wang@freescale.com>
 Date: Wed, 21 Oct 2015 16:35:43 +0800
-Subject: [PATCH 08/13] taglist not send to down stream if all the frame
+Subject: [PATCH 07/16] taglist not send to down stream if all the frame
  corrupted
 
 https://bugzilla.gnome.org/show_bug.cgi?id=737246
 
-Upstream status: Pending
+Upstream-Status: Pending
 
 Signed-off-by: Jian Li <lj.qfy.sh@gmail.com>
 ---
@@ -15,10 +15,10 @@ Signed-off-by: Jian Li <lj.qfy.sh@gmail.com>
  2 files changed, 17 insertions(+)
 
 diff --git a/gst-libs/gst/audio/gstaudiodecoder.c b/gst-libs/gst/audio/gstaudiodecoder.c
-index e583e2f..4c4a14f 100644
+index 333dbf9..d082380 100644
 --- a/gst-libs/gst/audio/gstaudiodecoder.c
 +++ b/gst-libs/gst/audio/gstaudiodecoder.c
-@@ -2289,6 +2289,15 @@ gst_audio_decoder_sink_eventfunc (GstAudioDecoder * dec, GstEvent * event)
+@@ -2261,6 +2261,15 @@ gst_audio_decoder_sink_eventfunc (GstAudioDecoder * dec, GstEvent * event)
              ("no valid frames found"));
        }
  
@@ -35,10 +35,10 @@ index e583e2f..4c4a14f 100644
         * EOS and nothing could trigger another _finish_frame() call. */
        if (dec->priv->pending_events)
 diff --git a/gst-libs/gst/video/gstvideodecoder.c b/gst-libs/gst/video/gstvideodecoder.c
-index fdbc7d2..b5f54ba 100644
+index b91a32e..1f89e10 100644
 --- a/gst-libs/gst/video/gstvideodecoder.c
 +++ b/gst-libs/gst/video/gstvideodecoder.c
-@@ -1182,6 +1182,14 @@ gst_video_decoder_sink_event_default (GstVideoDecoder * decoder,
+@@ -1165,6 +1165,14 @@ gst_video_decoder_sink_event_default (GstVideoDecoder * decoder,
         * parent class' ::sink_event() until a later time.
         */
        forward_immediate = TRUE;

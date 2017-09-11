@@ -1,0 +1,35 @@
+From cd2d0769aaf242ecb24e18b7acc027bfb846b7c8 Mon Sep 17 00:00:00 2001
+From: Song Bing <bing.song@nxp.com>
+Date: Tue, 16 Aug 2016 13:11:57 +0800
+Subject: [PATCH 13/26] videocompositor: Remove output format alpha check
+
+Remove output format alpha check, or output without alpha will
+fail if input has alpha.
+
+Upstream-Status: Pending
+
+https://bugzilla.gnome.org/show_bug.cgi?id=769962
+---
+ gst-libs/gst/video/gstvideoaggregator.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/gst-libs/gst/video/gstvideoaggregator.c b/gst-libs/gst/video/gstvideoaggregator.c
+index 1616b27..a987c15 100644
+--- a/gst-libs/gst/video/gstvideoaggregator.c
++++ b/gst-libs/gst/video/gstvideoaggregator.c
+@@ -781,11 +781,9 @@ gst_video_aggregator_update_src_caps (GstVideoAggregator * vagg)
+       g_return_val_if_fail (finfo != NULL, FALSE);
+ 
+       if (at_least_one_alpha && !(finfo->flags & GST_VIDEO_FORMAT_FLAG_ALPHA)) {
+-        GST_ELEMENT_ERROR (vagg, CORE, NEGOTIATION,
++        GST_WARNING_OBJECT (vagg,
+             ("At least one of the input pads contains alpha, but configured caps don't support alpha."),
+             ("Either convert your inputs to not contain alpha or add a videoconvert after the aggregator"));
+-        ret = FALSE;
+-        goto done;
+       }
+     }
+ 
+-- 
+1.9.1
+

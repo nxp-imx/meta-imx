@@ -1,7 +1,7 @@
-From 93296a17d6f1af67bcc4c1d8f93fe571c8367953 Mon Sep 17 00:00:00 2001
+From b7f3a53b5d43c40fc1432c12f2ca314c5dbf403b Mon Sep 17 00:00:00 2001
 From: Lyon Wang <lyon.wang@nxp.com>
 Date: Fri, 15 Jan 2016 17:30:14 +0800
-Subject: [PATCH 4/6] [gstbaseparse] Need push adapter remainning data in pass
+Subject: [PATCH 4/7] [gstbaseparse] Need push adapter remainning data in pass
  through mode
 
 When switching to pass through mode, there might be remainning
@@ -10,8 +10,7 @@ in pass through mode.
 So need check adapter available data and push downstream to avoid missing data
 
 package: gstreamer1.0
-ticket https://bugzilla.gnome.org/show_bug.cgi?id=760513
-Upstream-Status: pending
+Upstream-Status: Pending [https://bugzilla.gnome.org/show_bug.cgi?id=760513]
 
 Signed-off-by: Lyon Wang <lyon.wang@nxp.com>
 ---
@@ -22,10 +21,10 @@ Signed-off-by: Lyon Wang <lyon.wang@nxp.com>
 diff --git a/libs/gst/base/gstbaseparse.c b/libs/gst/base/gstbaseparse.c
 old mode 100644
 new mode 100755
-index 2f83707..a7f01ea
+index 3c52887..6d3eacf
 --- a/libs/gst/base/gstbaseparse.c
 +++ b/libs/gst/base/gstbaseparse.c
-@@ -3151,6 +3151,21 @@ gst_base_parse_chain (GstPad * pad, GstObject * parent, GstBuffer * buffer)
+@@ -3138,6 +3138,21 @@ gst_base_parse_chain (GstPad * pad, GstObject * parent, GstBuffer * buffer)
              && parse->priv->passthrough)) {
        GstBaseParseFrame frame;
  

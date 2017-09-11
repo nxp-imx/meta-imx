@@ -1,7 +1,7 @@
-From 1e42de6a2dd2a4a0813d5652a18dc5bf46204fa7 Mon Sep 17 00:00:00 2001
+From 40ef196e9291e71b852b32979daa0256cb805d14 Mon Sep 17 00:00:00 2001
 From: Lyon Wang <lyon.wang@freescale.com>
 Date: Mon, 15 Dec 2014 16:52:07 +0800
-Subject: [PATCH 09/13] handle audio/video decoder error
+Subject: [PATCH 08/16] handle audio/video decoder error
 
 When there is input data and no output data to the end of the stream, it will
 send GST_ELEMENT_ERROR, So the clips playing will quit.
@@ -13,7 +13,7 @@ information instead.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=741542
 
-Upstream Status: Pending
+Upstream-Status: Pending
 
 Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
@@ -26,10 +26,10 @@ Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 diff --git a/gst-libs/gst/audio/gstaudiodecoder.c b/gst-libs/gst/audio/gstaudiodecoder.c
 old mode 100644
 new mode 100755
-index 4c4a14f..21875d6
+index d082380..669b02a
 --- a/gst-libs/gst/audio/gstaudiodecoder.c
 +++ b/gst-libs/gst/audio/gstaudiodecoder.c
-@@ -2284,9 +2284,10 @@ gst_audio_decoder_sink_eventfunc (GstAudioDecoder * dec, GstEvent * event)
+@@ -2256,9 +2256,10 @@ gst_audio_decoder_sink_eventfunc (GstAudioDecoder * dec, GstEvent * event)
        GST_AUDIO_DECODER_STREAM_UNLOCK (dec);
  
        if (dec->priv->ctx.had_input_data && !dec->priv->ctx.had_output_data) {
@@ -45,10 +45,10 @@ index 4c4a14f..21875d6
 diff --git a/gst-libs/gst/video/gstvideodecoder.c b/gst-libs/gst/video/gstvideodecoder.c
 old mode 100644
 new mode 100755
-index b5f54ba..b6d6c12
+index 1f89e10..802d94a
 --- a/gst-libs/gst/video/gstvideodecoder.c
 +++ b/gst-libs/gst/video/gstvideodecoder.c
-@@ -1168,9 +1168,10 @@ gst_video_decoder_sink_event_default (GstVideoDecoder * decoder,
+@@ -1151,9 +1151,10 @@ gst_video_decoder_sink_event_default (GstVideoDecoder * decoder,
  
        /* Error out even if EOS was ok when we had input, but no output */
        if (ret && priv->had_input_data && !priv->had_output_data) {

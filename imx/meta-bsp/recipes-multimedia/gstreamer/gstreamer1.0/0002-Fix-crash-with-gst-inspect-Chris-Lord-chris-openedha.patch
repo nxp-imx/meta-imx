@@ -1,7 +1,7 @@
-From 8fe7ae005511178f0a42bd3918c5ded6d95ccf3b Mon Sep 17 00:00:00 2001
+From 1bd9b30040ad23d86faa577baeb1c6734f39150f Mon Sep 17 00:00:00 2001
 From: Carlos Rafael Giani <dv@pseudoterminal.org>
 Date: Sat, 6 Apr 2013 23:52:11 +0200
-Subject: [PATCH 2/6] Fix crash with gst-inspect Chris Lord
+Subject: [PATCH 2/7] Fix crash with gst-inspect Chris Lord
  <chris@openedhand.com>
 
 Upstream-Status: Pending
@@ -15,10 +15,10 @@ Conflicts:
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/gst-inspect.c b/tools/gst-inspect.c
-index 3a59ef3..6958344 100644
+index e420e4c..95983bc 100644
 --- a/tools/gst-inspect.c
 +++ b/tools/gst-inspect.c
-@@ -1510,7 +1510,7 @@ main (int argc, char *argv[])
+@@ -1548,7 +1548,7 @@ main (int argc, char *argv[])
    g_option_context_add_main_entries (ctx, options, GETTEXT_PACKAGE);
    g_option_context_add_group (ctx, gst_init_get_option_group ());
    if (!g_option_context_parse (ctx, &argc, &argv, &err)) {

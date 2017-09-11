@@ -1,7 +1,7 @@
-From cb0d2616089ab68f1f39edcda9036de549602b71 Mon Sep 17 00:00:00 2001
+From e24ce1960d57724964d901a31e84b8e3f424f81e Mon Sep 17 00:00:00 2001
 From: Song Bing <bing.song@nxp.com>
 Date: Fri, 18 Nov 2016 15:15:56 +0800
-Subject: [PATCH 4/4] ion: DMA Buf allocator based on ion.
+Subject: [PATCH 14/16] ion: DMA Buf allocator based on ion.
 
 DMA Buf allocator based on ion.
 
@@ -9,19 +9,19 @@ Upstream-Status: Pending
 
 https://bugzilla.gnome.org/show_bug.cgi?id=768794
 ---
- configure.ac                           |    6 +
- gst-libs/gst/allocators/Makefile.am    |   10 ++
- gst-libs/gst/allocators/gstionmemory.c |  215 ++++++++++++++++++++++++++++++++
- gst-libs/gst/allocators/gstionmemory.h |   62 +++++++++
+ configure.ac                           |   6 +
+ gst-libs/gst/allocators/Makefile.am    |  10 ++
+ gst-libs/gst/allocators/gstionmemory.c | 215 +++++++++++++++++++++++++++++++++
+ gst-libs/gst/allocators/gstionmemory.h |  62 ++++++++++
  4 files changed, 293 insertions(+)
  create mode 100755 gst-libs/gst/allocators/gstionmemory.c
  create mode 100755 gst-libs/gst/allocators/gstionmemory.h
 
 diff --git a/configure.ac b/configure.ac
-index 892dd80..13217e0 100644
+index bb0cfee..ccb93dc 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -326,6 +326,12 @@ fi
+@@ -353,6 +353,12 @@ fi
  AM_CONDITIONAL(HAVE_QT, test "x$HAVE_QT" = "xyes")
  AM_CONDITIONAL(HAVE_QT_MOC, test "x$HAVE_QT_MOC" != "xno")
  
@@ -35,7 +35,7 @@ index 892dd80..13217e0 100644
  AC_COMPILE_IFELSE(
  [
 diff --git a/gst-libs/gst/allocators/Makefile.am b/gst-libs/gst/allocators/Makefile.am
-index 13ffd9c..fab2616 100644
+index a19c249..1955436 100644
 --- a/gst-libs/gst/allocators/Makefile.am
 +++ b/gst-libs/gst/allocators/Makefile.am
 @@ -8,6 +8,11 @@ libgstallocators_@GST_API_VERSION@_include_HEADERS = \
@@ -352,5 +352,5 @@ index 0000000..a5ca5dd
 +
 +#endif /* __GST_IONMEMORY_H__ */
 -- 
-1.7.9.5
+1.9.1
 
