@@ -15,9 +15,11 @@ DEPENDS_append_mx8      = \
         bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
                                                         ' glslang-native vulkan-loader-layers', d), d)}"
 
-SRC_URI = "git://github.com/NXPmicro/gtec-demo-framework.git;protocol=http"
+GPU_SDK_SRC ?= "git://github.com/NXPmicro/gtec-demo-framework.git;protocol=http"
+SRCBRANCH ?= "release/4.0.2"
+SRC_URI = "${GPU_SDK_SRC};branch=${SRCBRANCH}"
+SRCREV = "a96d3f022fb899cae120a3d1150c18711e4a6c82"
 
-SRCREV = "0b3aa9f4e7c3a43a4a733ce833160761d1b9ee38"
 
 # For backwards compatibility
 RPROVIDES_${PN} = "fsl-gpu-sdk"
@@ -48,13 +50,16 @@ do_compile () {
     FslBuild.py -t sdk -u [${FEATURES}] -v --Variants [WindowSystem=${BACKEND}] -- install -j 2
 }
 
+HAS_DPU_BLIT     = "true"
+HAS_DPU_BLIT_mx8 = "false"
+
 do_install () {
     install -d "${D}/opt/${PN}"
     cp -r ${S}/bin/* ${D}/opt/${PN}
     rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
     rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
     rm -rf ${D}/opt/${PN}/GLES2/DeBayer
-    if [ "${IS_MX8}" = "1" ]; then
+    if ! ${HAS_DPU_BLIT}; then
         rm -rf ${D}/opt/${PN}/G2D/EightLayers
     fi
 }
