@@ -1,0 +1,30 @@
+From 8360595a2c350d985db38e2bc9eff5c80893d660 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Mon, 17 Jul 2017 16:44:23 -0500
+Subject: [PATCH] glamor: Use CFLAGS for EGL and GBM
+
+Glamor uses both EGL and GBM, so use CFLAGS for these.
+
+Upstream-Status: Pending
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ glamor/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/glamor/Makefile.am b/glamor/Makefile.am
+index 8c79994..3f0f592 100644
+--- a/glamor/Makefile.am
++++ b/glamor/Makefile.am
+@@ -2,7 +2,7 @@ noinst_LTLIBRARIES = libglamor.la libglamor_egl_stubs.la
+ 
+ libglamor_la_LIBADD = $(GLAMOR_LIBS)
+ 
+-AM_CFLAGS = $(CWARNFLAGS) $(DIX_CFLAGS) $(GLAMOR_CFLAGS)
++AM_CFLAGS = $(CWARNFLAGS) $(DIX_CFLAGS) $(EGL_CFLAGS) $(GBM_CFLAGS) $(GLAMOR_CFLAGS)
+ 
+ libglamor_la_SOURCES = \
+ 	glamor.c \
+-- 
+1.9.1
+
