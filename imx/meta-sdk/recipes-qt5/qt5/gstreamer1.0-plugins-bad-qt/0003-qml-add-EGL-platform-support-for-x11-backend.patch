@@ -1,0 +1,63 @@
+From 147613f5bf11a220caa819230c447e57f2f4272f Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Wed, 17 May 2017 10:58:05 +0800
+Subject: [PATCH 21/26] qml:add EGL platform support for x11 backend
+
+Add support for EGL platform when x11 is available. This can work
+eg. on imx6 platform.
+
+Upstream-Status: Backport [1.13.1]
+https://bugzilla.gnome.org/show_bug.cgi?id=782718
+---
+ configure.ac             |  2 +-
+ ext/qt/gstqtglutility.cc | 10 +++++++++-
+ 2 files changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index d7a2a46..27f0469 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2939,7 +2939,7 @@ AG_GST_CHECK_FEATURE(QT, [Qt elements], qt, [
+           QT_CFLAGS="$QT_CFLAGS -I$PKG_CONFIG_SYSROOT_DIR/$QPA_INCLUDE_PATH"
+           HAVE_QT_QPA_HEADER="yes"
+         ], [AC_MSG_NOTICE([Cannot find QPA])])
+-        if test "x$GST_GL_HAVE_WINDOW_X11" = "x1" -a "x$GST_GL_HAVE_PLATFORM_GLX" = "x1"; then
++        if test "x$GST_GL_HAVE_WINDOW_X11" = "x1" -a "x$GST_GL_HAVE_PLATFORM_GLX" = "x1" || test "x$GST_GL_HAVE_WINDOW_X11" = "x1" -a "x$GST_GL_HAVE_PLATFORM_EGL" = "x1"; then
+           PKG_CHECK_MODULES(QT_X11, Qt5X11Extras, [
+             AC_DEFINE([HAVE_QT_X11], [], [Define if Qt X11 integration is installed])
+             QT_CFLAGS="$QT_CFLAGS $QT_X11_CFLAGS"
+diff --git a/ext/qt/gstqtglutility.cc b/ext/qt/gstqtglutility.cc
+index 22aae60..0867f35 100644
+--- a/ext/qt/gstqtglutility.cc
++++ b/ext/qt/gstqtglutility.cc
+@@ -25,10 +25,14 @@
+ #include "gstqtglutility.h"
+ #include <QtGui/QGuiApplication>
+ 
+-#if GST_GL_HAVE_WINDOW_X11 && GST_GL_HAVE_PLATFORM_GLX && defined (HAVE_QT_X11)
++#if GST_GL_HAVE_WINDOW_X11 && defined (HAVE_QT_X11)
+ #include <QX11Info>
+ #include <gst/gl/x11/gstgldisplay_x11.h>
++#if GST_GL_HAVE_PLATFORM_GLX
+ #include <gst/gl/x11/gstglcontext_glx.h>
++#elif GST_GL_HAVE_PLATFORM_EGL
++#include <gst/gl/egl/gstglcontext_egl.h>
++#endif
+ #endif
+ 
+ #if GST_GL_HAVE_WINDOW_WAYLAND && GST_GL_HAVE_PLATFORM_EGL && defined (HAVE_QT_WAYLAND)
+@@ -151,7 +155,11 @@ gst_qt_get_gl_wrapcontext (GstGLDisplay * display,
+ 
+ #if GST_GL_HAVE_WINDOW_X11 && defined (HAVE_QT_X11)
+   if (GST_IS_GL_DISPLAY_X11 (display)) {
++#if GST_GL_HAVE_PLATFORM_GLX
+     platform = GST_GL_PLATFORM_GLX;
++#elif GST_GL_HAVE_PLATFORM_EGL
++    platform = GST_GL_PLATFORM_EGL;
++#endif
+   }
+ #endif
+ #if GST_GL_HAVE_WINDOW_WAYLAND && defined (HAVE_QT_WAYLAND)
+-- 
+1.9.1
+

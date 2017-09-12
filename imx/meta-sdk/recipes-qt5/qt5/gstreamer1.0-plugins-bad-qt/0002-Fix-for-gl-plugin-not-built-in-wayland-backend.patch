@@ -1,12 +1,12 @@
-From fbc3d36db2ff1288dc5d08137789d911746bcbc5 Mon Sep 17 00:00:00 2001
+From 3015f801add8e0d004954d5e76ee9d8dcb6b88f6 Mon Sep 17 00:00:00 2001
 From: Jian <Jian.Li@freescale.com>
 Date: Fri, 24 Apr 2015 17:12:02 +0800
-Subject: [PATCH 07/26] Fix for gl plugin not built in wayland backend
+Subject: [PATCH 06/26] Fix for gl plugin not built in wayland backend
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Upstream Status: Inappropriate [i.MX specific]
+Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Jian <Jian.Li@freescale.com>
 
@@ -17,10 +17,10 @@ Conflicts:
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index 676a24a..f135648 100644
+index b0a5b2a..8a05495 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -798,7 +798,7 @@ case $host in
+@@ -776,7 +776,7 @@ case $host in
      LIBS=$old_LIBS
      CFLAGS=$old_CFLAGS
  

@@ -3,22 +3,25 @@ FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-sdk/
 
 # Add extra patch directory to find needed patch
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
+FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-fsl-mpu-internal/meta-next/recipes-qt5/qt5/${PN}:"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=73a5855a8119deb017f5f13cf327095d \
                     file://COPYING.LIB;md5=21682e4e8fea52413fd26c60acb907e5 \
-                    file://gst/tta/crc32.h;beginline=12;endline=29;md5=27db269c575d1e5317fffca2d33b3b50 \
-                    file://gst/tta/filters.h;beginline=12;endline=29;md5=8a08270656f2f8ad7bb3655b83138e5a"
-
-SRC_URI[md5sum] = "2757103e57a096a1a05b3ab85b8381af"
-SRC_URI[sha256sum] = "23ddae506b3a223b94869a0d3eea3e9a12e847f94d2d0e0b97102ce13ecd6966"
+"
+SRC_URI[md5sum] = "5683f0ea91f9e1e0613b0f6f729980a7"
+SRC_URI[sha256sum] = "9c2c7edde4f59d74eb414e0701c55131f562e5c605a3ce9b091754f106c09e37"
 
 #qt5 configuratin only support "--disable-qt"
 #and in default, it is disabled, need to remove the default setting to enable it.
-EXTRA_OECONF_remove = "--disable-qt"
+EXTRA_OECONF_remove = "--disable-qt \
+                       --disable-sdl --disable-nas --disable-libvisual --disable-xvid --disable-mimic \
+                       --disable-pvr --disable-sdltest --disable-wininet --disable-timidity \
+                       --disable-linsys --disable-sndio --disable-apexsink \
+"
 
 # The QT_PATH & QT_HOST_PATH which help to access to moc uic rcc tools are incorrect,
 # need to passing STAGING_DIR to update the QT PATH
-EXTRA_OECONF += "STAGING_DIR=${STAGING_DIR_NATIVE}"
+EXTRA_OECONF += "STAGING_DIR=${STAGING_DIR_NATIVE} --disable-introspection"
 
 # Need libdrm_fourcc.h for DMA buf support in opengl plugins
 DEPENDS_append_mx7ulp = " libdrm"
@@ -38,12 +41,9 @@ PACKAGECONFIG[qt5] = ",--disable-qt,qtbase qtdeclarative qtx11extras"
 SRC_URI = " \
     http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \
     file://configure-allow-to-disable-libssh2.patch \
-    file://0001-gst-plugins-bad-fix-moc-uic-rcc-incorrect-dir.patch \
+    file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
     file://0002-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
-    file://0003-Support-fb-backend-for-gl-plugins.patch \
-    file://0004-qmlglplugin-Add-i.mx-specific-code.patch \
-    file://0005-qmlglsrc-some-enhancements-for-qmlglsrc.patch \
-    file://0006-Make-qmlglsrc-be-compatible-with-GLES2.0.patch \
+    file://0003-qml-add-EGL-platform-support-for-x11-backend.patch \
 "
 
 # remove the duplicate libs except qtsink
@@ -56,7 +56,7 @@ do_install_append() {
     fi
 }
 
-S = "${WORKDIR}/gst-plugins-bad-1.10.4"
+S = "${WORKDIR}/gst-plugins-bad-1.12.2"
 
 INSANE_SKIP_gstreamer1.0-plugins-bad-qt-qmlgl += "build-deps"
 
