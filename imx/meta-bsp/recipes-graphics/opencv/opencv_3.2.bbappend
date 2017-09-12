@@ -33,7 +33,10 @@ PACKAGECONFIG[test] = " \
 GTK_PACKAGECONFIG_REMOVE = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
 PACKAGECONFIG_append_mx8dv = " opencl openvx test"
+PACKAGECONFIG_append_mx8mq = " opencl"
 PACKAGECONFIG_append_mx8qm = " opencl openvx test"
+PACKAGECONFIG_append_mx8qxp = " opencl"
+
 PACKAGECONFIG_remove_mx8dv = "${GTK_PACKAGECONFIG_REMOVE}"
 PACKAGECONFIG_remove_mx8qm = "${GTK_PACKAGECONFIG_REMOVE}"
 
