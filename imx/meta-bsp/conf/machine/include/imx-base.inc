@@ -78,6 +78,7 @@ MACHINE_SOCARCH_SUFFIX_vf60 = "-vf60"
 MACHINE_SOCARCH_SUFFIX_vf50 = "-vf50"
 MACHINE_SOCARCH_SUFFIX_mx6ul  = "-mx6ul"
 MACHINE_SOCARCH_SUFFIX_mx6ull = "-mx6ul"
+MACHINE_SOCARCH_SUFFIX_mx8 = "-mx8"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
 MACHINE_SOCARCH_FILTER_append_imxvpu = " imx-vpu libimxvpuapi imx-codec imx-vpuwrap imx-parser"
@@ -139,6 +140,7 @@ SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6q  = "1"
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6dl = "1"
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6sx = "1"
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6sl = "1"
+SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx8   = "1"
 
 # Handle Vivante kernel driver setting:
 #   0 - machine does not have Vivante GPU driver support
@@ -152,6 +154,7 @@ PREFERRED_PROVIDER_virtual/egl_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx6sl ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/egl_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/egl_mx8 ?= "imx-gpu-viv"
 
 PREFERRED_PROVIDER_virtual/libgles1_mx6q ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles1_mx6dl ?= "imx-gpu-viv"
@@ -159,6 +162,7 @@ PREFERRED_PROVIDER_virtual/libgles1_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles1_mx6sl ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles1_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles1_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/libgles1_mx8 ?= "imx-gpu-viv"
 
 PREFERRED_PROVIDER_virtual/libgles2_mx6q ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx6dl ?= "imx-gpu-viv"
@@ -166,6 +170,7 @@ PREFERRED_PROVIDER_virtual/libgles2_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx6sl ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles2_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles2_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/libgles2_mx8 ?= "imx-gpu-viv"
 
 PREFERRED_PROVIDER_virtual/libgl_mx6q ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx6dl ?= "imx-gpu-viv"
@@ -173,10 +178,12 @@ PREFERRED_PROVIDER_virtual/libgl_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx6sl ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgl_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgl_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/libgl_mx8 ?= "imx-gpu-viv"
 
 PREFERRED_PROVIDER_virtual/libg2d_mx6 ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libg2d_mx6ul = ""
 PREFERRED_PROVIDER_virtual/libg2d_mx6ull = ""
+PREFERRED_PROVIDER_virtual/libg2d_mx8 = "imx-dpu-g2d"
 
 # Handle default kernel
 IMX_DEFAULT_KERNEL = "linux-imx"
