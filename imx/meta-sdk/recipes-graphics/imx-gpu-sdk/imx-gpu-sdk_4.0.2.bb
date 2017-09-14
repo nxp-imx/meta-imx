@@ -50,8 +50,8 @@ do_compile () {
     FslBuild.py -t sdk -u [${FEATURES}] -v --Variants [WindowSystem=${BACKEND}] -- install -j 2
 }
 
-HAS_DPU_BLIT     = "true"
-HAS_DPU_BLIT_mx8 = "false"
+HAS_DPU_BLIT            = "false"
+HAS_DPU_BLIT_imxdpublit = "true"
 
 do_install () {
     install -d "${D}/opt/${PN}"
