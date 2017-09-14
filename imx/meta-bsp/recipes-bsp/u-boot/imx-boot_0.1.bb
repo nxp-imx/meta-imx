@@ -57,7 +57,7 @@ IS_MX8QM_mx8qm = "1"
 # Inter-Task dependeency for do_compile task
 COMPILE_DEP_TASKS ?= ""
 COMPILE_DEP_TASKS_mx8qm = "imx-sc-firmware:do_deploy"
-COMPILE_DEP_TASKS_mx8qm = "imx-m4-demos:do_deploy"
+COMPILE_DEP_TASKS_mx8qm += "imx-m4-demos:do_deploy"
 COMPILE_DEP_TASKS_mx8qxp = "imx-sc-firmware:do_deploy"
 COMPILE_DEP_TASKS_mx8mq = "firmware-imx:do_install"
 
