@@ -60,7 +60,7 @@ MACHINEOVERRIDES_EXTENDER_mx6sl  = "imxfbdev:imxpxp:imxgpu:imxgpu2d:imxdpublit:i
 MACHINEOVERRIDES_EXTENDER_mx6ul  = "imxfbdev:imxpxp"
 MACHINEOVERRIDES_EXTENDER_mx6ull = "imxfbdev:imxpxp:imxepdc"
 MACHINEOVERRIDES_EXTENDER_mx7d   = "imxfbdev:imxpxp:imxepdc"
-MACHINEOVERRIDES_EXTENDER_mx8mq  = "imxfbdev:imxdcss:imxvpu:imxvpuhantro:imxgpu:imxgpu2d:imxgpu3d"
+MACHINEOVERRIDES_EXTENDER_mx8mq  = "imxfbdev:imxdcss:imxvpu:imxvpuhantro:imxgpu:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_mx8qm  = "imxdrm:imxdpu:imxvpuamphion:imxgpu:imxgpu2d:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_mx8qxp = "imxdrm:imxdpu:imxvpuamphion:imxgpu:imxgpu2d:imxgpu3d"
 
