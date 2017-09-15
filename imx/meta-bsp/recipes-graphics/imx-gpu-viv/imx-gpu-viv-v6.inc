@@ -7,11 +7,13 @@ SECTION = "libs"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
 
-DEPENDS += " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
-       bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes', \
-                                                       '', d), d)} \
-"
+DEPENDS += \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes', \
+                                                        '', d), d)}"
+DEPENDS += \
+    "${@bb.utils.contains('DISTRO_FEATURES',     'x11', 'libxcb libxshmfence', \
+                                                        '', d)}"
 DEPENDS += "libdrm"
 
 # imx-gpu-viv does not provide everything it needs to for virtual/libgl
@@ -109,6 +111,13 @@ IS_MX6SL_mx6sl = "1"
 IS_MX8 = "0"
 IS_MX8_mx8 = "1"
 
+PACKAGE_FP_TYPE = "hardfp"
+
+do_install_prepend_imxgpu3d () {
+    install -d ${D}${libdir}/pkgconfig
+    install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gbm.pc ${D}${libdir}/pkgconfig/gbm.pc
+}
+
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
@@ -134,7 +143,6 @@ do_install () {
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
-        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gbm.pc ${D}${libdir}/pkgconfig/gbm.pc
 
        if [ "${USE_X11}" = "yes" ]; then
 
