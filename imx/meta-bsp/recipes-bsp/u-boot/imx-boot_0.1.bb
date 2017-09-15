@@ -69,7 +69,13 @@ do_compile[depends] = "imx-mkimage:do_deploy \
 do_compile () {
     # Combine ATF with u-boot.bin
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME}  ${UBOOT_NAME_ATF}
-    dd if=${DEPLOY_DIR_IMAGE}/${UBOOT_NAME} of=${UBOOT_NAME_ATF}  bs=1K seek=128
+    if [ "${IS_MX8MQ}" != "1" ]; then
+        ${TOOLS_NAME} -commit > head.hash
+        cat ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME} head.hash > u-boot-hash.bin
+        dd if=u-boot-hash.bin of=${UBOOT_NAME_ATF}  bs=1K seek=128
+    else
+        dd if=${DEPLOY_DIR_IMAGE}/${UBOOT_NAME} of=${UBOOT_NAME_ATF}  bs=1K seek=128
+    fi
 
     if [ "${IS_MX8MQ}" = "1" ]; then
         # generate u-boot-spl-ddr.bin
