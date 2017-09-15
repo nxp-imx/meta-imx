@@ -12,7 +12,7 @@ DEPENDS += \
         bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes', \
                                                         '', d), d)}"
 DEPENDS += \
-    "${@bb.utils.contains('DISTRO_FEATURES',     'x11', 'libxcb libxshmfence', \
+    "${@bb.utils.contains('DISTRO_FEATURES',     'x11', 'libxcb libxshmfence libxxf86vm', \
                                                         '', d)}"
 DEPENDS += "libdrm"
 
