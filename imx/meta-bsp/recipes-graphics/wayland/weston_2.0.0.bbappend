@@ -7,7 +7,7 @@ SRC_URI_remove_imxgpu  = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.
 WESTON_SRC ?= "git://git.freescale.com/imx/weston-imx.git;protocol=http"
 SRCBRANCH = "weston-imx-2.0"
 SRC_URI_prepend_imxgpu = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV_imxgpu = "1a2d8db6da022340400eb6aa4485884303cb5e51"
+SRCREV_imxgpu = "33b05a5d5c63b3d0c9bfcae2efb71cbd098bbb2e"
 S_imxgpu = "${WORKDIR}/git"
 
 # Define RECIPE_SYSROOT since it doesn't exist in morty
@@ -20,8 +20,19 @@ EXTRA_OECONF_IMX_FBDEV_imxfbdev = "WESTON_NATIVE_BACKEND=fbdev-backend.so"
 EXTRA_OECONF_append_imxgpu      = " ${EXTRA_OECONF_IMX_FBDEV}"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
-REQUIRED_DISTRO_FEATURES_remove_mx6sl = "opengl"
-EXTRA_OECONF_append_mx6sl = " --disable-opengl"
+IMX_REQUIRED_DISTRO_FEATURES_REMOVE          = ""
+IMX_REQUIRED_DISTRO_FEATURES_REMOVE_imxgpu2d = "opengl"
+IMX_REQUIRED_DISTRO_FEATURES_REMOVE_imxgpu3d = ""
+REQUIRED_DISTRO_FEATURES_remove = "${IMX_REQUIRED_DISTRO_FEATURES_REMOVE}"
+IMX_EXTRA_OECONF_OPENGL          = ""
+IMX_EXTRA_OECONF_OPENGL_imxgpu2d = " --disable-opengl"
+IMX_EXTRA_OECONF_OPENGL_imxgpu3d = ""
+EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_OPENGL}"
+
+# Disable G2D for parts without GPU support for 2D
+IMX_EXTRA_OECONF_G2D          = " --disable-imxg2d"
+IMX_EXTRA_OECONF_G2D_imxgpu2d = ""
+EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_G2D}"
 
 PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
 
