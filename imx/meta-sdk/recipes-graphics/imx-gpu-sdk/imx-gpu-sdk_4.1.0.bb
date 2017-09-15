@@ -16,9 +16,9 @@ DEPENDS_append_mx8      = \
                                                         ' glslang-native vulkan-loader-layers', d), d)}"
 
 GPU_SDK_SRC ?= "git://github.com/NXPmicro/gtec-demo-framework.git;protocol=http"
-SRCBRANCH ?= "release/4.0.2"
-SRC_URI = "${GPU_SDK_SRC};branch=${SRCBRANCH}"
-SRCREV = "a96d3f022fb899cae120a3d1150c18711e4a6c82"
+GPU_SDK_SRC_BRANCH ?= "master"
+SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
+SRCREV = "97b66454d989956ae17cf7a0bc11dea7ec0d5fd1"
 
 
 # For backwards compatibility
@@ -68,4 +68,6 @@ FILES_${PN} += "/opt/${PN}"
 FILES_${PN}-dbg += "/opt/${PN}/*/*/.debug /usr/src/debug"
 INSANE_SKIP_${PN} += "already-stripped rpaths"
 
-COMPATIBLE_MACHINE = "(mx6|mx8|mx7ulp)"
+# Compatible only with i.MX GPU
+COMPATIBLE_MACHINE = "(^$)"
+COMPATIBLE_MACHINE_imxgpu = "${MACHINE}"
