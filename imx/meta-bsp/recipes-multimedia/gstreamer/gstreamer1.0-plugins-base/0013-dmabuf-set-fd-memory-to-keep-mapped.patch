@@ -1,0 +1,30 @@
+From 59a4c4584f732eea055267971013909816287311 Mon Sep 17 00:00:00 2001
+From: Song Bing <bing.song@nxp.com>
+Date: Wed, 13 Sep 2017 13:37:17 -0800
+Subject: [PATCH 4/4] dmabuf: set fd memory to keep mapped
+
+set fd memory to keep mapped.
+
+Upstream-Status: Pending
+
+https://bugzilla.gnome.org/show_bug.cgi?id=768794
+---
+ gst-libs/gst/allocators/gstdmabuf.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gst-libs/gst/allocators/gstdmabuf.c b/gst-libs/gst/allocators/gstdmabuf.c
+index 7d6bcab..89bb447 100644
+--- a/gst-libs/gst/allocators/gstdmabuf.c
++++ b/gst-libs/gst/allocators/gstdmabuf.c
+@@ -95,7 +95,7 @@ gst_dmabuf_allocator_alloc (GstAllocator * allocator, gint fd, gsize size)
+ {
+   g_return_val_if_fail (GST_IS_DMABUF_ALLOCATOR (allocator), NULL);
+ 
+-  return gst_fd_allocator_alloc (allocator, fd, size, GST_FD_MEMORY_FLAG_NONE);
++  return gst_fd_allocator_alloc (allocator, fd, size, GST_FD_MEMORY_FLAG_KEEP_MAPPED);
+ }
+ 
+ /**
+-- 
+2.7.4
+

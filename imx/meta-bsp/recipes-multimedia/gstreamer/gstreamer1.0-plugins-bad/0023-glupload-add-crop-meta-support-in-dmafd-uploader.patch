@@ -1,0 +1,52 @@
+From efa0059db11f091ceeef768a6ed115045399eeac Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Wed, 13 Sep 2017 16:42:21 +0800
+Subject: [PATCH 2/2] glupload: add crop meta support in dmafd uploader
+
+get video crop meta from input buffer and update video info
+
+Upstream-Status: Pending
+https://bugzilla.gnome.org/show_bug.cgi?id=787616
+---
+ gst-libs/gst/gl/gstglupload.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/gst-libs/gst/gl/gstglupload.c b/gst-libs/gst/gl/gstglupload.c
+index 6011695..5c7eca0 100644
+--- a/gst-libs/gst/gl/gstglupload.c
++++ b/gst-libs/gst/gl/gstglupload.c
+@@ -651,6 +651,7 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
+   GstVideoInfo *in_info = &dmabuf->upload->priv->in_info;
+   guint n_planes = GST_VIDEO_INFO_N_PLANES (in_info);
+   GstVideoMeta *meta;
++  GstVideoCropMeta *crop;
+   guint n_mem;
+   guint mems_idx[GST_VIDEO_MAX_PLANES];
+   gsize mems_skip[GST_VIDEO_MAX_PLANES];
+@@ -659,6 +660,7 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
+ 
+   n_mem = gst_buffer_n_memory (buffer);
+   meta = gst_buffer_get_video_meta (buffer);
++  crop = gst_buffer_get_video_crop_meta(buffer);
+ 
+   /* dmabuf upload is only supported with EGL contexts. */
+   if (gst_gl_context_get_gl_platform (dmabuf->upload->context) !=
+@@ -732,6 +734,15 @@ _dma_buf_upload_accept (gpointer impl, GstBuffer * buffer, GstCaps * in_caps,
+     }
+   }
+ 
++  if (crop) {
++    in_info->width = MIN (crop->width, in_info->width);
++    in_info->height = MIN (crop->height, in_info->height);
++
++    GST_DEBUG_OBJECT (dmabuf->upload, "got crop meta (%d)x(%d)",
++        in_info->width, in_info->height);
++    gst_buffer_remove_meta (buffer, (GstMeta *)crop);
++  }
++
+   if (dmabuf->params)
+     gst_gl_allocation_params_free ((GstGLAllocationParams *) dmabuf->params);
+   if (!(dmabuf->params =
+-- 
+1.9.1
+

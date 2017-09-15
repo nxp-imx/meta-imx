@@ -47,15 +47,17 @@ SRC_URI_append = " \
     file://0018-Add-imx-physical-memory-allocator.patch \
     file://0019-Add-implement-of-interface-get_phys_addr-to-support-.patch \
     file://0020-Accelerate-gldownload-with-directviv.patch \
-    file://0022-glupload-add-ion-dmabuf-support-in-glupload.patch \
-    file://0023-Add-ion-dmabuf-support-in-gldownload.patch \
-    file://0025-glframebuffer-check-frame-buffer-status-need-use-spe.patch \
-    file://0027-glupload-check-if-buffer-is-physical-buf.patch \
-    file://0028-qml-add-EGL-platform-support-for-x11-backend.patch \
-    file://0029-kmssink-use-control-node-to-setplane-to-.patch \
-    file://0030-kmssink-support-videooverlay-interface.patch \
-    file://0031-kmssink-check-scaleable-when-set_caps.patch \
-    file://0032-glimagesink-fix-segmentation-fault-when-.patch \
+    file://0021-ionmemory-dmabuf-memory-allocator-based-on-ion-drive.patch \
+    file://0022-ionmemory-support-get-phys-memory.patch \
+    file://0023-glupload-add-crop-meta-support-in-dmafd-uploader.patch \
+    file://0024-glupload-add-ion-dmabuf-support-in-glupload.patch \
+    file://0025-Add-ion-dmabuf-support-in-gldownload.patch \
+    file://0026-glframebuffer-check-frame-buffer-status-need-use-spe.patch \
+    file://0027-qml-add-EGL-platform-support-for-x11-backend.patch \
+    file://0028-kmssink-use-control-node-to-setplane-to-.patch \
+    file://0029-kmssink-support-videooverlay-interface.patch \
+    file://0030-kmssink-check-scaleable-when-set_caps.patch \
+    file://0031-glimagesink-fix-segmentation-fault-when-.patch \
 "
 
 # include fragment shaders

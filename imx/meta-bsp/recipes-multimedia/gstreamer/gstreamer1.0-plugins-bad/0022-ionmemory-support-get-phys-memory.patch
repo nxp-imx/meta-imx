@@ -1,0 +1,94 @@
+From 2f82ec644f10e2aefa9f80ee3909ba06466752e6 Mon Sep 17 00:00:00 2001
+From: Song Bing <bing.song@nxp.com>
+Date: Wed, 13 Sep 2017 13:39:53 +0800
+Subject: [PATCH 3/3] ionmemory: support get phys memory
+
+Upstream Status: Pending
+
+https://bugzilla.gnome.org/show_bug.cgi?id=768794
+---
+ gst-libs/gst/allocators/gstionmemory.c | 54 ++++++++++++++++++++++++++++++++--
+ 1 file changed, 52 insertions(+), 2 deletions(-)
+
+diff --git a/gst-libs/gst/allocators/gstionmemory.c b/gst-libs/gst/allocators/gstionmemory.c
+index bfe13ad..fad53db 100755
+--- a/gst-libs/gst/allocators/gstionmemory.c
++++ b/gst-libs/gst/allocators/gstionmemory.c
+@@ -29,6 +29,7 @@
+ #include <linux/ion.h>
+ 
+ #include <gst/allocators/gstdmabuf.h>
++#include "gstphysmemory.h"
+ #include "gstionmemory.h"
+ 
+ GST_DEBUG_CATEGORY_STATIC (ion_allocator_debug);
+@@ -36,8 +37,6 @@ GST_DEBUG_CATEGORY_STATIC (ion_allocator_debug);
+ 
+ #define gst_ion_allocator_parent_class parent_class
+ 
+-G_DEFINE_TYPE (GstIONAllocator, gst_ion_allocator, GST_TYPE_DMABUF_ALLOCATOR)
+-
+ #define DEFAULT_HEAP_ID  0
+ #define DEFAULT_FLAG     0
+ 
+@@ -49,6 +48,57 @@ enum
+   PROP_LAST
+ };
+ 
++static guintptr
++gst_ion_allocator_get_phys_addr (GstPhysMemoryAllocator *allocator, GstMemory *mem)
++{
++  GstIONAllocator *self = GST_ION_ALLOCATOR (allocator);
++  gint ret, fd;
++
++  if (self->fd < 0 || !mem) {
++    GST_ERROR ("ion get phys param wrong");
++    return 0;
++  }
++
++  if (!gst_is_dmabuf_memory (mem)) {
++    GST_ERROR ("isn't dmabuf memory");
++    return 0;
++  }
++
++  fd = gst_dmabuf_memory_get_fd (mem);
++  if (fd < 0) {
++    GST_ERROR ("dmabuf memory get fd failed");
++    return 0;
++  }
++
++  GST_DEBUG ("ion DMA FD: %d", fd);
++
++  struct ion_phys_dma_data data = {
++    .phys = 0,
++    .size = 0,
++    .dmafd = fd,
++  };
++
++  struct ion_custom_data custom = {
++    .cmd = ION_IOC_PHYS_DMA,
++    .arg = (unsigned long)&data,
++  };
++
++  ret = ioctl(self->fd, ION_IOC_CUSTOM, &custom);
++  if (ret < 0)
++    return 0;
++
++  return data.phys;
++}
++
++static void gst_ion_allocator_iface_init(gpointer g_iface)
++{
++  GstPhysMemoryAllocatorInterface *iface = g_iface;
++  iface->get_phys_addr = gst_ion_allocator_get_phys_addr;
++}
++
++G_DEFINE_TYPE_WITH_CODE (GstIONAllocator, gst_ion_allocator, GST_TYPE_DMABUF_ALLOCATOR,
++    G_IMPLEMENT_INTERFACE(GST_TYPE_PHYS_MEMORY_ALLOCATOR, gst_ion_allocator_iface_init));
++
+ static gint
+ gst_ion_ioctl (gint fd, gint req, void *arg)
+ {
+-- 
+2.7.4
+
