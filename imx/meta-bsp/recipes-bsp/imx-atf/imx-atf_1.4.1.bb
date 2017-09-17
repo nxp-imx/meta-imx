@@ -2,8 +2,8 @@
 
 DESCRIPTION = "i.MX ARM Trusted Firmware"
 SECTION = "BSP"
-LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
+LICENSE = "Proprietary"
+LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
 
 inherit fsl-eula-unpack pkgconfig deploy
 
@@ -23,14 +23,27 @@ SOC_ATF_mx8mq = "imx8mq"
 
 SYSROOT_DIRS += "/boot"
 
+do_compile () {
+    export CROSS_COMPILE="${TARGET_PREFIX}"
+    cd ${S}
+    # Clear LDFLAGS to avoid the option -Wl recognize issue
+    unset LDFLAGS
+
+    echo "-> Build ${SOC_ATF} bl31.bin"
+    oe_runmake clean PLAT=${SOC_ATF}
+    oe_runmake PLAT=${SOC_ATF} bl31
+
+    unset CROSS_COMPILE
+}
+
 do_install () {
     install -d ${D}/boot
-    install -m 0644 ${S}/bl31-${SOC_ATF}.bin ${D}/boot/bl31-${SOC_ATF}.bin
+    install -m 0644 ${S}/build/${SOC_ATF}/release/bl31.bin ${D}/boot/bl31-${SOC_ATF}.bin
 }
 
 do_deploy () {
     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${S}/bl31-${SOC_ATF}.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${SOC_ATF}.bin
+    install -m 0644 ${S}/build/${SOC_ATF}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${SOC_ATF}.bin
 }
 
 addtask deploy before do_install after do_compile
