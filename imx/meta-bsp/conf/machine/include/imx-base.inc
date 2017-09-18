@@ -67,6 +67,9 @@ MACHINEOVERRIDES_EXTENDER_mx8qxp = "imxdrm:imxdpu:imxvpuamphion:imxgpu:imxgpu2d:
 MACHINEOVERRIDES_EXTENDER_mx6sll =. "imxfbdev:"
 MACHINEOVERRIDES_EXTENDER_mx7ulp =. "imxfbdev:imxgpu:"
 
+MACHINE_FEATURES_imxgpu2d += "imxgpu2d"
+MACHINE_FEATURES_imxgpu3d += "imxgpu3d"
+
 # Sub-architecture support
 MACHINE_SOCARCH_SUFFIX ?= ""
 MACHINE_SOCARCH_SUFFIX_mx6q = "-mx6qdl"

@@ -31,8 +31,10 @@ BACKEND = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',     'X11', \
                                                              'FB', d), d)}"
 
-FEATURES_append_imxgpu2d = "EGL,OpenVG,G2D,EarlyAccess"
-FEATURES_append_imxgpu3d = ",OpenGLES2"
+FEATURES = \
+    "${@bb.utils.contains('MACHINE_FEATURES', 'imxgpu2d imxgpu3d', 'EGL,OpenVG,G2D,EarlyAccess,OpenGLES2', \
+        bb.utils.contains('MACHINE_FEATURES',          'imxgpu2d', 'EGL,OpenVG,G2D,EarlyAccess', \
+                                                                   'OpenGLES2', d), d)}"
 FEATURES_append_mx6q     = ",OpenGLES3"
 FEATURES_append_mx6dl    = ",OpenGLES3"
 FEATURES_append_mx8      = ",OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenCV,OpenVX,OpenVX1.0.1"
