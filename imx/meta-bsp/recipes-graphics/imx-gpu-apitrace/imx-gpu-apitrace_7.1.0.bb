@@ -16,9 +16,9 @@ inherit cmake lib_package pkgconfig perlnative pythonnative
 EXTRA_OECMAKE_append_imxgpu2d = " -DENABLE_VIVANTE=ON"
 EXTRA_OECMAKE_append          = " -DENABLE_MULTIARCH=OFF"
 EXTRA_OECMAKE_append          = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '-DDISABLE_X11=ON', \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' -DDISABLE_X11=ON', \
         bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
-                                                        '-DDISABLE_X11=ON', d), d)}"
+                                                        ' -DDISABLE_X11=ON', d), d)}"
 
 FILES_${PN} = "${bindir} ${libdir}"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
