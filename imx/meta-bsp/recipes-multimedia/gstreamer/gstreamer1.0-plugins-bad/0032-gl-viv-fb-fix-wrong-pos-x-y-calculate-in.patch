@@ -1,0 +1,52 @@
+From b2f9859ec9170ed8aba88df4bf29c0b235b6aa07 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Mon, 11 Sep 2017 15:12:53 +0800
+Subject: [PATCH 1/3] [MMFMWK-7707] gl/viv-fb: fix wrong pos (x,y) calculate in
+ queue_resize
+
+queue_resize viewport coordinate calculate is wrong and
+force queue_resize when do _set_render_rectangle in case
+user input pos changed
+
+Upstream-Status: Backport [1.13.1]
+https://bugzilla.gnome.org/show_bug.cgi?id=787394
+---
+ gst-libs/gst/gl/viv-fb/gstglwindow_viv_fb_egl.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/gst-libs/gst/gl/viv-fb/gstglwindow_viv_fb_egl.c b/gst-libs/gst/gl/viv-fb/gstglwindow_viv_fb_egl.c
+index f8fb638..14d9997 100644
+--- a/gst-libs/gst/gl/viv-fb/gstglwindow_viv_fb_egl.c
++++ b/gst-libs/gst/gl/viv-fb/gstglwindow_viv_fb_egl.c
+@@ -174,9 +174,7 @@ draw_cb (gpointer data)
+ 
+     gl->GetIntegerv (GL_VIEWPORT, viewport_dim);
+     viewport_dim[0] += window_egl->render_rectangle.x;
+-    viewport_dim[1] -= window_egl->render_rectangle.y;
+-    viewport_dim[2] -= window_egl->render_rectangle.x;
+-    viewport_dim[3] -= window_egl->render_rectangle.y;
++    viewport_dim[1] += window_egl->render_rectangle.y;
+     gl->Viewport (viewport_dim[0],
+         viewport_dim[1], viewport_dim[2], viewport_dim[3]);
+   }
+@@ -215,13 +213,15 @@ static void
+ _set_render_rectangle (gpointer data)
+ {
+   SetRenderRectangleData *render = data;
++  GstGLWindow *window = GST_GL_WINDOW (render->window_egl);
+ 
+   GST_LOG_OBJECT (render->window_egl, "setting render rectangle %i,%i+%ix%i",
+       render->rect.x, render->rect.y, render->rect.w, render->rect.h);
+ 
+   render->window_egl->render_rectangle = render->rect;
+-  gst_gl_window_resize (GST_GL_WINDOW (render->window_egl), render->rect.w,
+-      render->rect.h);
++  gst_gl_window_resize (window, render->rect.w, render->rect.h);
++
++  window->queue_resize = TRUE;
+ }
+ 
+ static gboolean
+-- 
+1.9.1
+

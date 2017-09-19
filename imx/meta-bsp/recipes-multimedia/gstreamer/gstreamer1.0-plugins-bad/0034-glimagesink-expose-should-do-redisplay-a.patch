@@ -1,0 +1,37 @@
+From 5f355f75a93bce1fc445bd6cce8b6f608c19902c Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Mon, 11 Sep 2017 16:11:19 +0800
+Subject: [PATCH 3/3] [MMFMWK-7707] glimagesink: expose should do redisplay all
+ the time
+
+when using internal window, window resize should work
+when pause state, but expose only do redisplay when
+window_id is valid. So expose should do redisplay all
+the time.
+
+Upstream-Status: Backport [1.13.1]
+https://bugzilla.gnome.org/show_bug.cgi?id=787394
+---
+ ext/gl/gstglimagesink.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/ext/gl/gstglimagesink.c b/ext/gl/gstglimagesink.c
+index e697bd0..b8a9971 100644
+--- a/ext/gl/gstglimagesink.c
++++ b/ext/gl/gstglimagesink.c
+@@ -1814,9 +1814,9 @@ gst_glimage_sink_expose (GstVideoOverlay * overlay)
+   GstGLImageSink *glimage_sink = GST_GLIMAGE_SINK (overlay);
+ 
+   /* redisplay opengl scene */
+-  if (glimage_sink->display && glimage_sink->window_id) {
+-
+-    if (glimage_sink->window_id != glimage_sink->new_window_id) {
++  if (glimage_sink->display) {
++    if (glimage_sink->window_id
++        && glimage_sink->window_id != glimage_sink->new_window_id) {
+       GstGLWindow *window = gst_gl_context_get_window (glimage_sink->context);
+ 
+       glimage_sink->window_id = glimage_sink->new_window_id;
+-- 
+1.9.1
+
