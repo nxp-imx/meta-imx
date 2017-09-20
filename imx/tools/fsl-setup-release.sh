@@ -174,10 +174,12 @@ fi
 
 META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-bsp"
 
-echo "##Freescale Yocto Project Release layer" >> $BUILD_DIR/conf/bblayers.conf
+echo "" >> $BUILD_DIR/conf/bblayers.conf
+echo "# Freescale Yocto Project Release layers" >> $BUILD_DIR/conf/bblayers.conf
 hook_in_layer meta-fsl-bsp-release/imx/meta-bsp
 hook_in_layer meta-fsl-bsp-release/imx/meta-sdk
 
+echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-browser \"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-gnome \"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-networking \"" >> $BUILD_DIR/conf/bblayers.conf
