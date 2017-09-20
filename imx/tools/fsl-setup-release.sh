@@ -18,6 +18,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+. sources/meta-fsl-bsp-release/imx/tools/utils.sh
+
 CWD=`pwd`
 PROGNAME="setup-environment"
 exit_message ()
@@ -138,45 +140,6 @@ fi
 # copy new EULA into community so setup uses latest i.MX EULA
 cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-freescale/EULA
 
-# Delete upstream machine and bbclass files that we have modified
-machine_roots="sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine"
-for machine_root in $machine_roots; do
-   if [ -d $machine_root ]; then
-      machines="$machines $machine_root/*"
-      machine_includes="$machine_includes $machine_root/include/*"
-   fi
-done
-for machine in $machines; do
-   if [ -f $machine ]; then
-      upstream_machine=sources/meta-freescale/conf/machine/`basename $machine`
-      if [ -f $upstream_machine ]; then
-         rm $upstream_machine
-      fi
-   fi
-done
-for machine_include in $machine_includes; do
-   if [ -f $machine_include ]; then
-      upstream_machine_include=sources/meta-freescale/conf/machine/include/`basename $machine_include`
-      if [ -f $upstream_machine_include ]; then
-         rm $upstream_machine_include
-      fi
-   fi
-done
-bbclass_roots="sources/meta-fsl-bsp-release/imx/meta-bsp/classes"
-for bbclass_root in $bbclass_roots; do
-   if [ -d $bbclass_root ]; then
-      bbclasses="$bbclasses $bbclass_root/*"
-   fi
-done
-for bbclass in $bbclasses; do
-   if [ -f $bbclass ]; then
-      upstream_bbclass=sources/meta-freescale/classes/`basename $bbclass`
-      if [ -f $upstream_bbclass ]; then
-         rm $upstream_bbclass
-      fi
-   fi
-done
-
 # Set up the basic yocto environment
 if [ -z "$DISTRO" ]; then
    DISTRO=$FSLDISTRO MACHINE=$MACHINE . ./$PROGNAME $BUILD_DIR
@@ -210,9 +173,10 @@ fi
 
 
 META_FSL_BSP_RELEASE="${CWD}/sources/meta-fsl-bsp-release/imx/meta-bsp"
+
 echo "##Freescale Yocto Project Release layer" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-bsp \"" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \" \${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-sdk \"" >> $BUILD_DIR/conf/bblayers.conf
+hook_in_layer meta-fsl-bsp-release/imx/meta-bsp
+hook_in_layer meta-fsl-bsp-release/imx/meta-sdk
 
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-browser \"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \" \${BSPDIR}/sources/meta-openembedded/meta-gnome \"" >> $BUILD_DIR/conf/bblayers.conf
