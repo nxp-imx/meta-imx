@@ -61,6 +61,8 @@ SRC_URI_append = " \
     file://0032-gl-viv-fb-fix-wrong-pos-x-y-calculate-in.patch \
     file://0033-gl-viv-fb-transform-screen-coordinate-to.patch \
     file://0034-glimagesink-expose-should-do-redisplay-a.patch \
+    file://0035-videoaggregator-passthrough-interlace-mo.patch \
+    file://0036-glvideomixer-need-update-output-geometry.patch \
 "
 
 # include fragment shaders

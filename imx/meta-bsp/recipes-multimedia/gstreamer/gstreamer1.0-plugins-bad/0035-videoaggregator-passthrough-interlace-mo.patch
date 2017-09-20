@@ -1,0 +1,99 @@
+From ed7ce121daa3c5fdfa8d32eeff30c4fb7332017b Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Mon, 18 Sep 2017 15:11:41 +0800
+Subject: [PATCH 1/2] [MMFMWK-7736] videoaggregator: passthrough interlace mode
+ when update src caps
+
+Upstream-Status: Pending
+https://bugzilla.gnome.org/show_bug.cgi?id=787819
+---
+ gst-libs/gst/video/gstvideoaggregator.c | 59 ++++++++++++++++++++++-----------
+ 1 file changed, 39 insertions(+), 20 deletions(-)
+
+diff --git a/gst-libs/gst/video/gstvideoaggregator.c b/gst-libs/gst/video/gstvideoaggregator.c
+index a987c15..246ff8b 100644
+--- a/gst-libs/gst/video/gstvideoaggregator.c
++++ b/gst-libs/gst/video/gstvideoaggregator.c
+@@ -691,6 +691,26 @@ gst_video_aggregator_default_update_caps (GstVideoAggregator * vagg,
+   return ret;
+ }
+ 
++static gboolean
++gst_video_aggregator_get_sinkpads_interlace_mode (GstVideoAggregator * vagg,
++    GstVideoAggregatorPad * skip_pad, GstVideoInterlaceMode * mode)
++{
++  GList *walk;
++
++  for (walk = GST_ELEMENT (vagg)->sinkpads; walk; walk = g_list_next (walk)) {
++    GstVideoAggregatorPad *vaggpad = walk->data;
++
++    if (skip_pad && vaggpad == skip_pad)
++      continue;
++    if (vaggpad->info.finfo
++        && GST_VIDEO_INFO_FORMAT (&vaggpad->info) != GST_VIDEO_FORMAT_UNKNOWN) {
++      *mode = GST_VIDEO_INFO_INTERLACE_MODE (&vaggpad->info);
++      return TRUE;
++    }
++  }
++  return FALSE;
++}
++
+ /* WITH GST_VIDEO_AGGREGATOR_LOCK TAKEN */
+ static gboolean
+ gst_video_aggregator_update_src_caps (GstVideoAggregator * vagg)
+@@ -787,6 +807,25 @@ gst_video_aggregator_update_src_caps (GstVideoAggregator * vagg)
+       }
+     }
+ 
++    /* configure for interlace mode, we can only pass through interlace mode */
++    {
++      GstVideoInterlaceMode interlace_mode = GST_VIDEO_INTERLACE_MODE_PROGRESSIVE;
++      gboolean has_mode = FALSE;
++      GstStructure *s;
++      guint i, n;
++      has_mode =
++          gst_video_aggregator_get_sinkpads_interlace_mode (vagg, NULL,
++          &interlace_mode);
++
++      n = gst_caps_get_size (caps);
++      for (i = 0; i < n; i++) {
++        s = gst_caps_get_structure (caps, i);
++        if (has_mode)
++          gst_structure_set (s, "interlace-mode", G_TYPE_STRING,
++              gst_video_interlace_mode_to_string (interlace_mode), NULL);
++      }
++    }
++
+     gst_video_info_from_caps (&vagg->info, caps);
+ 
+     if (vaggpad_klass->set_info) {
+@@ -820,26 +859,6 @@ done:
+ }
+ 
+ static gboolean
+-gst_video_aggregator_get_sinkpads_interlace_mode (GstVideoAggregator * vagg,
+-    GstVideoAggregatorPad * skip_pad, GstVideoInterlaceMode * mode)
+-{
+-  GList *walk;
+-
+-  for (walk = GST_ELEMENT (vagg)->sinkpads; walk; walk = g_list_next (walk)) {
+-    GstVideoAggregatorPad *vaggpad = walk->data;
+-
+-    if (skip_pad && vaggpad == skip_pad)
+-      continue;
+-    if (vaggpad->info.finfo
+-        && GST_VIDEO_INFO_FORMAT (&vaggpad->info) != GST_VIDEO_FORMAT_UNKNOWN) {
+-      *mode = GST_VIDEO_INFO_INTERLACE_MODE (&vaggpad->info);
+-      return TRUE;
+-    }
+-  }
+-  return FALSE;
+-}
+-
+-static gboolean
+ gst_video_aggregator_pad_sink_setcaps (GstPad * pad, GstObject * parent,
+     GstCaps * caps)
+ {
+-- 
+1.9.1
+

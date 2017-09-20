@@ -1,0 +1,83 @@
+From fb4d28d491a8949cd78329ec30a0bffea6d2bb91 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Mon, 18 Sep 2017 15:42:00 +0800
+Subject: [PATCH 2/2] [MMFMWK-7736] glvideomixer: need update output geometry
+ after src caps reconfigure
+
+Need update output geometry when sink caps changed and use
+gst_structure_set to update caps if structure is fixed
+
+Upstream-Status: Pending
+https://bugzilla.gnome.org/show_bug.cgi?id=787820
+---
+ ext/gl/gstglvideomixer.c | 19 ++++++++++++++-----
+ ext/gl/gstglvideomixer.h |  2 ++
+ 2 files changed, 16 insertions(+), 5 deletions(-)
+
+diff --git a/ext/gl/gstglvideomixer.c b/ext/gl/gstglvideomixer.c
+index 5df126d..d918ac7 100644
+--- a/ext/gl/gstglvideomixer.c
++++ b/ext/gl/gstglvideomixer.c
+@@ -1089,10 +1089,14 @@ _fixate_caps (GstVideoAggregator * vagg, GstCaps * caps)
+   }
+ 
+   s = gst_caps_get_structure (ret, 0);
+-  gst_structure_fixate_field_nearest_int (s, "width", best_width);
+-  gst_structure_fixate_field_nearest_int (s, "height", best_height);
+-  gst_structure_fixate_field_nearest_fraction (s, "framerate", best_fps_n,
+-      best_fps_d);
++  if (!gst_structure_fixate_field_nearest_int (s, "width", best_width))
++    gst_structure_set (s, "width", G_TYPE_INT, best_width, NULL);
++  if (!gst_structure_fixate_field_nearest_int (s, "height", best_height))
++    gst_structure_set (s, "height", G_TYPE_INT, best_height, NULL);
++  if (!gst_structure_fixate_field_nearest_fraction (s, "framerate", best_fps_n,
++          best_fps_d))
++    gst_structure_set (s, "framerate", GST_TYPE_FRACTION, best_fps_n,
++        best_fps_d, NULL);
+   ret = gst_caps_fixate (ret);
+ 
+   return ret;
+@@ -1165,6 +1169,9 @@ gst_gl_video_mixer_init_shader (GstGLMixer * mixer, GstCaps * outcaps)
+   if (video_mixer->shader)
+     gst_object_unref (video_mixer->shader);
+ 
++  /* need reconfigure output geometry */
++  video_mixer->output_geo_changed = TRUE;
++
+   return gst_gl_context_gen_shader (GST_GL_BASE_MIXER (mixer)->context,
+       gst_gl_shader_string_vertex_mat4_vertex_transform,
+       video_mixer_f_src, &video_mixer->shader);
+@@ -1487,7 +1494,8 @@ gst_gl_video_mixer_callback (gpointer stuff)
+ 
+     _init_vbo_indices (video_mixer);
+ 
+-    if (pad->geometry_change || !pad->vertex_buffer) {
++    if (video_mixer->output_geo_changed || pad->geometry_change
++        || !pad->vertex_buffer) {
+       gint pad_width, pad_height;
+       gfloat w, h;
+ 
+@@ -1555,6 +1563,7 @@ gst_gl_video_mixer_callback (gpointer stuff)
+ 
+     walk = g_list_next (walk);
+   }
++  video_mixer->output_geo_changed = FALSE;
+   GST_OBJECT_UNLOCK (video_mixer);
+ 
+   gl->DisableVertexAttribArray (attr_position_loc);
+diff --git a/ext/gl/gstglvideomixer.h b/ext/gl/gstglvideomixer.h
+index f352646..c734efb 100644
+--- a/ext/gl/gstglvideomixer.h
++++ b/ext/gl/gstglvideomixer.h
+@@ -126,6 +126,8 @@ struct _GstGLVideoMixer
+     GLuint vbo_indices;
+     GLuint checker_vbo;
+     GstGLMemory *out_tex;
++
++    gboolean output_geo_changed;
+ };
+ 
+ struct _GstGLVideoMixerClass
+-- 
+1.9.1
+
