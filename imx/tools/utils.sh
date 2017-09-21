@@ -51,9 +51,9 @@ hook_in_layer() {
     layer=$1
     shift
     if [ "$1" = "" ]; then
-        upstream_layers = "meta-freescale"
+        upstream_layers="meta-freescale"
     else
-        upstream_layers = "$@"
+        upstream_layers="$@"
     fi
 
     echo "BBLAYERS += \" \${BSPDIR}/sources/$layer \"" >> conf/bblayers.conf
