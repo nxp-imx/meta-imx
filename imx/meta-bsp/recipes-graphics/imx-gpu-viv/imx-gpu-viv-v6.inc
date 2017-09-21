@@ -113,10 +113,8 @@ IS_MX8_mx8 = "1"
 
 PACKAGE_FP_TYPE = "hardfp"
 
-do_install_prepend_imxgpu3d () {
-    install -d ${D}${libdir}/pkgconfig
-    install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gbm.pc ${D}${libdir}/pkgconfig/gbm.pc
-}
+HAS_GPU3D          = "false"
+HAS_GPU3D_imxgpu3d = "true"
 
 do_install () {
     install -d ${D}${libdir}
@@ -130,6 +128,9 @@ do_install () {
 
 
     install -d ${D}${libdir}/pkgconfig
+    if $HAS_GPU3D; then
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gbm.pc ${D}${libdir}/pkgconfig/gbm.pc
+    fi
 
     # The preference order, based in DISTRO_FEATURES, is Wayland (with or without X11), X11 and fb
     if [ "${USE_WL}" = "yes" ]; then
