@@ -22,14 +22,21 @@ EXTRA_OEMAKE       += "HAS_VPU=${IMX_HAS_VPU}"
 
 PARALLEL_MAKE="-j 1"
 
-SRCBRANCH = "imx_4.9.11_1.0.0_ga"
-SRCBRANCH_mx8 = "imx_4.9.11_imx8_alpha"
+SRCBRANCH = "master"
 IMXTEST_SRC ?= "git://git.freescale.com/imx/imx-test.git;protocol=git"
 
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
-SRCREV = "fb250a795ce0d25c19610e9e19e1cd815fc64cb9"
-SRCREV_mx8 = "1143e88632a1695a2e9dcd9578c5d7bfd1b65e02"
+SRC_URI_append = " file://memtool_profile "
+
+SRCREV = "3a22e1bc41f524258c7ce332de569d4f9523c060"
 
 S = "${WORKDIR}/git"
+
+do_install_append() {
+    install -d -m 0755 ${D}/home/root/
+    install -m 0644 ${WORKDIR}/memtool_profile ${D}/home/root/.profile
+}
+
+FILES_${PN} += " /home/root/.profile "
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
