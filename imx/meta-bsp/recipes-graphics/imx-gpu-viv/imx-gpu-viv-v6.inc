@@ -128,7 +128,7 @@ do_install () {
 
 
     install -d ${D}${libdir}/pkgconfig
-    if $HAS_GPU3D; then
+    if ${HAS_GPU3D}; then
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gbm.pc ${D}${libdir}/pkgconfig/gbm.pc
     fi
 
