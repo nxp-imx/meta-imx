@@ -30,8 +30,17 @@ do_compile () {
     unset LDFLAGS
 
     echo "-> Build ${SOC_ATF} bl31.bin"
+    # Set BUIL_STRING with the revision info
+    BUILD_STRING=""
+    if [ -e ${S}/.revision ]; then
+        cur_rev=`cat ${S}/.revision`
+        echo " Current revision is ${cur_rev} ."
+        BUILD_STRING="BUILD_STRING=${cur_rev}"
+    else
+        echo " No .revision found! "
+    fi
     oe_runmake clean PLAT=${SOC_ATF}
-    oe_runmake PLAT=${SOC_ATF} bl31
+    oe_runmake ${BUILD_STRING} PLAT=${SOC_ATF} bl31
 
     unset CROSS_COMPILE
 }
