@@ -28,7 +28,7 @@ IMXTEST_SRC ?= "git://git.freescale.com/imx/imx-test.git;protocol=git"
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
 SRC_URI_append = " file://memtool_profile "
 
-SRCREV = "3a22e1bc41f524258c7ce332de569d4f9523c060"
+SRCREV = "a027be331c9dd0cc8398a03098e8b0bdca69c50a"
 
 S = "${WORKDIR}/git"
 
