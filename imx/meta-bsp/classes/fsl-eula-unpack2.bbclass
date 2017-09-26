@@ -16,10 +16,18 @@ D_SUBDIR                 = ""
 D_SUBDIR_class-native    = "${STAGING_DIR_NATIVE}"
 D_SUBDIR_class-nativesdk = "/opt/${DISTRO}"
 
+# SCR is the location and name of the Software Content Register file
+# relative to ${D}${D_SUBDIR}.
+SCR = "SCR.txt"
+
 do_install () {
     install -d ${D}${D_SUBDIR}
     cp -r ${S}/* ${D}${D_SUBDIR}
     rm ${D}${D_SUBDIR}/COPYING
+    if [ ! -f ${D}${D_SUBDIR}/${SCR} ]; then
+        bbfatal "Missing Software Content Register \"${D}${D_SUBDIR}/${SCR}\""
+    fi
+    rm ${D}${D_SUBDIR}/${SCR}
 }
 
 FILES_${PN} = "/"
