@@ -1,0 +1,30 @@
+From 0479a8e34369080c9beb5b36cd77d93b83a7b663 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Wed, 27 Sep 2017 12:22:51 +0800
+Subject: [PATCH] [MMFMWK-7741] gleglimage: fix YUY2 import error when upload
+ with dmafd
+
+gstreamer YUY2 fourcc is not match with that one in drm fourcc
+
+Upstream Status:  [i.MX specific]
+Signed-off-by: Haihua Hu <jared.hu@nxp.com>
+---
+ gst-libs/gst/gl/egl/gsteglimage.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/gst-libs/gst/gl/egl/gsteglimage.c b/gst-libs/gst/gl/egl/gsteglimage.c
+index 75ed5cf..f0ab74b 100644
+--- a/gst-libs/gst/gl/egl/gsteglimage.c
++++ b/gst-libs/gst/gl/egl/gsteglimage.c
+@@ -496,6 +496,8 @@ gst_egl_image_from_dmabuf_singleplaner (GstGLContext * context,
+     /* gstreamer fourcc is not compatible with DRM FOURCC*/
+     if(GST_VIDEO_INFO_FORMAT(in_info) == GST_VIDEO_FORMAT_I420)
+       fourcc = DRM_FORMAT_YUV420;
++    if(GST_VIDEO_INFO_FORMAT(in_info) == GST_VIDEO_FORMAT_YUY2)
++      fourcc = DRM_FORMAT_YUYV;
+   }
+ 
+   GST_DEBUG ("fourcc %.4s (%d) n_planes %d (%dx%d)",
+-- 
+1.9.1
+
