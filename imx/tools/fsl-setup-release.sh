@@ -135,21 +135,47 @@ if [ -z "$MACHINE" ]; then
     MACHINE='imx6qsabresd'
 fi
 
-# New machine definitions may need to be added to the expected location
-if [ -d ./sources/meta-freescale ]; then
-   cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-freescale/conf/machine
-else
-   cp -r sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine/* sources/meta-fsl-arm/conf/machine
-fi
-
 # copy new EULA into community so setup uses latest i.MX EULA
-if [ -d ./sources/meta-freescale ]; then
-   cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-freescale/EULA
-   cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-freescale/classes
-else
-   cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-fsl-arm/EULA
-   cp sources/meta-fsl-bsp-release/imx/classes/fsl-eula-unpack.bbclass sources/meta-fsl-arm/classes
-fi
+cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-freescale/EULA
+
+# Delete upstream machine and bbclass files that we have modified
+machine_roots="sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine"
+for machine_root in $machine_roots; do
+   if [ -d $machine_root ]; then
+      machines="$machines $machine_root/*"
+      machine_includes="$machine_includes $machine_root/include/*"
+   fi
+done
+for machine in $machines; do
+   if [ -f $machine ]; then
+      upstream_machine=sources/meta-freescale/conf/machine/`basename $machine`
+      if [ -f $upstream_machine ]; then
+         rm $upstream_machine
+      fi
+   fi
+done
+for machine_include in $machine_includes; do
+   if [ -f $machine_include ]; then
+      upstream_machine_include=sources/meta-freescale/conf/machine/include/`basename $machine_include`
+      if [ -f $upstream_machine_include ]; then
+         rm $upstream_machine_include
+      fi
+   fi
+done
+bbclass_roots="sources/meta-fsl-bsp-release/imx/meta-bsp/classes"
+for bbclass_root in $bbclass_roots; do
+   if [ -d $bbclass_root ]; then
+      bbclasses="$bbclasses $bbclass_root/*"
+   fi
+done
+for bbclass in $bbclasses; do
+   if [ -f $bbclass ]; then
+      upstream_bbclass=sources/meta-freescale/classes/`basename $bbclass`
+      if [ -f $upstream_bbclass ]; then
+         rm $upstream_bbclass
+      fi
+   fi
+done
 
 # Set up the basic yocto environment
 if [ -z "$DISTRO" ]; then

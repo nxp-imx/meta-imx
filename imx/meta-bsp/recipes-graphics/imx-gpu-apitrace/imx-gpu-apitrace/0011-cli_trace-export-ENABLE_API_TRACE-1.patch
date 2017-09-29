@@ -1,0 +1,37 @@
+From 117de34b35888fc4dbacb394216c5127461778df Mon Sep 17 00:00:00 2001
+From: Yuchou Gan <yuchou.gan@nxp.com>
+Date: Thu, 19 Jan 2017 09:52:31 +0200
+Subject: [PATCH 11/31] cli_trace: export ENABLE_API_TRACE=1
+
+No description of what the variable is for.
+---
+ cli/cli_trace.cpp | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/cli/cli_trace.cpp b/cli/cli_trace.cpp
+index adca8af..ea57878 100644
+--- a/cli/cli_trace.cpp
++++ b/cli/cli_trace.cpp
+@@ -251,6 +251,8 @@ traceProgram(trace::API api,
+             os::setEnvironment("TRACE_FILE", output);
+         }
+ 
++        os::setEnvironment("ENABLE_API_TRACE", "1");
++
+         for (char * const * arg = argv; *arg; ++arg) {
+             args.push_back(*arg);
+         }
+@@ -296,7 +298,9 @@ exit:
+     if (output) {
+         os::unsetEnvironment("TRACE_FILE");
+     }
+-    
++
++    os::unsetEnvironment("ENABLE_API_TRACE");
++
+     return status;
+ 
+ }
+-- 
+2.7.4
+

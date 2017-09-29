@@ -1,0 +1,79 @@
+From b0b1ee6963cb87f7465c45fce756baa7e3ff6883 Mon Sep 17 00:00:00 2001
+From: Adrian Negreanu <groleo@gmail.com>
+Date: Wed, 19 Apr 2017 16:28:55 +0300
+Subject: [PATCH 20/31] (egl|glx)trace: add ApiTraceEnabled
+
+This is a dummy API to let the GPU driver know that we are in
+apitrace.
+---
+ wrappers/egltrace.py      | 11 +++++++++++
+ wrappers/egltrace.version |  1 +
+ wrappers/glxtrace.py      | 11 +++++++++++
+ wrappers/glxtrace.version |  1 +
+ 4 files changed, 24 insertions(+)
+
+diff --git a/wrappers/egltrace.py b/wrappers/egltrace.py
+index c7720bb..6d032eb 100644
+--- a/wrappers/egltrace.py
++++ b/wrappers/egltrace.py
+@@ -294,3 +294,14 @@ void APIENTRY glWeightPointerOESBounds(GLint size, GLenum type, GLsizei stride,
+ 
+ 
+ '''
++    print r'''
++/*
++ * This is a dummy API to let the GPU driver know that we are in apitrace
++ */
++extern "C" PUBLIC
++void APIENTRY ApiTraceEnabled(void) {
++    // a dummy function
++    os::log("Dummy API function\n");
++}
++
++'''
+diff --git a/wrappers/egltrace.version b/wrappers/egltrace.version
+index 0e7e62b..4009857 100644
+--- a/wrappers/egltrace.version
++++ b/wrappers/egltrace.version
+@@ -5,6 +5,7 @@
+         egl[A-Z]*;
+         gl[A-Z]*;
+         dlopen;
++        ApiTraceEnabled;
+     local:
+         *;
+ };
+diff --git a/wrappers/glxtrace.py b/wrappers/glxtrace.py
+index e9c43a9..d9ffe56 100644
+--- a/wrappers/glxtrace.py
++++ b/wrappers/glxtrace.py
+@@ -227,3 +227,14 @@ void * dlopen(const char *filename, int flag)
+ 
+ 
+ '''
++    print r'''
++/*
++ * This is a dummy API to let the GPU driver know that we are in apitrace
++ */
++extern "C" PUBLIC
++void APIENTRY ApiTraceEnabled(void) {
++    // a dummy function
++    os::log("Dummy API function\n");
++}
++
++'''
+diff --git a/wrappers/glxtrace.version b/wrappers/glxtrace.version
+index 7d7a162..7402d6f 100644
+--- a/wrappers/glxtrace.version
++++ b/wrappers/glxtrace.version
+@@ -4,6 +4,7 @@
+         _fini;
+         gl[A-Z]*;
+         dlopen;
++        ApiTraceEnabled;
+     local:
+         *;
+ };
+-- 
+2.7.4
+

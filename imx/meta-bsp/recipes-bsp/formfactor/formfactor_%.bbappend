@@ -1,2 +1,2 @@
-# Append path for freescale to include costom matchconfig
+# Append path for i.MX custom matchconfig
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"

@@ -4,3 +4,10 @@ RDEPENDS_${PN}_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', "gst-pl
                           ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', "gst-player-bin", "", d)} \
 "
 
+IMX_CORE_TOOLS = ""
+IMX_CORE_TOOLS_imxgpu2d = " tslib"
+IMX_CORE_TOOLS_imxpxp = " tslib"
+
+RDEPENDS_${PN} += " \
+    ${IMX_CORE_TOOLS} \
+"

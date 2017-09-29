@@ -1,0 +1,283 @@
+From c460694f65760abc04cebb01db77a95da5d06c3e Mon Sep 17 00:00:00 2001
+From: Yang Dong <b56112@freescale.com>
+Date: Thu, 20 Apr 2017 11:24:35 +0300
+Subject: [PATCH 29/31] MGS-815 [#ccc] avoid memcpy in glTexDirectInvalidateVIV
+
+When a trace file is replayed, glTexDirectInvalidateVIV will
+trigger a memcpy to update the texture data.
+
+However, this data update is implemented by hardware in real mode.
+In order to achieve the realtime performance in apitrace,
+discard the memcpy used to update the VIV texture in performance mode.
+
+Signed-off-by: Yang Dong <b56112@freescale.com>
+---
+ common/trace_parser.cpp       |  5 +++++
+ common/trace_parser.hpp       |  2 ++
+ common/trace_writer_local.cpp | 23 +++++++++++++++++++++++
+ common/trace_writer_local.hpp |  2 ++
+ retrace/retrace.hpp           |  4 ++++
+ retrace/retrace_main.cpp      | 15 ++++++++++++++-
+ retrace/retrace_stdc.cpp      | 36 ++++++++++++++++++++++++++++++++++++
+ wrappers/egltrace.py          |  8 ++++----
+ wrappers/trace.py             |  3 +++
+ 9 files changed, 93 insertions(+), 5 deletions(-)
+
+diff --git a/common/trace_parser.cpp b/common/trace_parser.cpp
+index 99fa5e8..bcc7b9f 100644
+--- a/common/trace_parser.cpp
++++ b/common/trace_parser.cpp
+@@ -70,6 +70,7 @@ bool Parser::open(const char *filename) {
+         return false;
+     }
+     api = API_UNKNOWN;
++    skip_spec_call = false;
+ 
+     return true;
+ }
+@@ -442,6 +443,10 @@ void Parser::parse_enter(Mode mode) {
+ 
+     call->no = next_call_no++;
+ 
++    if((skip_spec_call == true)&&(sig->id==4)) {
++        mode = SCAN;
++    }
++
+     if (parse_call_details(call, mode)) {
+         calls.push_back(call);
+     } else {
+diff --git a/common/trace_parser.hpp b/common/trace_parser.hpp
+index b638aa1..1403b28 100644
+--- a/common/trace_parser.hpp
++++ b/common/trace_parser.hpp
+@@ -56,6 +56,8 @@ public:
+     virtual bool open(const char *filename) = 0;
+     virtual void close(void) = 0;
+     virtual unsigned long long getVersion(void) const = 0;
++public:
++    bool skip_spec_call;
+ };
+ 
+ 
+diff --git a/common/trace_writer_local.cpp b/common/trace_writer_local.cpp
+index 17b6328..d792f87 100644
+--- a/common/trace_writer_local.cpp
++++ b/common/trace_writer_local.cpp
+@@ -55,6 +55,9 @@ const FunctionSig free_sig = {2, "free", 1, free_args};
+ static const char *realloc_args[2] = {"ptr", "size"};
+ const FunctionSig realloc_sig = {3, "realloc", 2, realloc_args};
+ 
++static const char *memcpy_opt_args[3] = {"dest", "src", "n"};
++const FunctionSig memcpy_opt_sig = {0xFFFF, "memcpy_opt", 3, memcpy_opt_args};
++
+ 
+ static void exceptionCallback(void)
+ {
+@@ -316,6 +319,26 @@ void fakeMemcpy(const void *ptr, size_t size) {
+     localWriter.endLeave();
+ }
+ 
++void fakeMemcpyOpt(const void *ptr, size_t size) {
++    assert(ptr);
++    if (!size) {
++        return;
++    }
++    unsigned _call = localWriter.beginEnter(&memcpy_opt_sig, true);
++    localWriter.beginArg(0);
++    localWriter.writePointer((uintptr_t)ptr);
++    localWriter.endArg();
++    localWriter.beginArg(1);
++    localWriter.writeBlob(ptr, size);
++    localWriter.endArg();
++    localWriter.beginArg(2);
++    localWriter.writeUInt(size);
++    localWriter.endArg();
++    localWriter.endEnter();
++    localWriter.beginLeave(_call);
++    localWriter.endLeave();
++}
++
+ 
+ } /* namespace trace */
+ 
+diff --git a/common/trace_writer_local.hpp b/common/trace_writer_local.hpp
+index ed27dbb..0dbc96f 100644
+--- a/common/trace_writer_local.hpp
++++ b/common/trace_writer_local.hpp
+@@ -142,5 +142,7 @@ namespace trace {
+ 
+     void fakeMemcpy(const void *ptr, size_t size);
+ 
++    void fakeMemcpyOpt(const void *ptr, size_t size);
++
+ } /* namespace trace */
+ 
+diff --git a/retrace/retrace.hpp b/retrace/retrace.hpp
+index 1c9f0e6..1b1a6e1 100644
+--- a/retrace/retrace.hpp
++++ b/retrace/retrace.hpp
+@@ -134,6 +134,10 @@ extern bool profilingMemoryUsage;
+ extern bool dumpingState;
+ extern bool dumpingSnapshots;
+ 
++/**
++ * Whether to discard the memcpy called by the VIV texture.
++ */
++extern bool performance;
+ 
+ enum Driver {
+     DRIVER_DEFAULT,
+diff --git a/retrace/retrace_main.cpp b/retrace/retrace_main.cpp
+index 72e0183..95ca24c 100644
+--- a/retrace/retrace_main.cpp
++++ b/retrace/retrace_main.cpp
+@@ -35,6 +35,10 @@
+ #include <fcntl.h>
+ #endif
+ 
++#include <sys/types.h>
++#include <sys/stat.h>
++#include <fcntl.h>
++
+ #include "os_binary.hpp"
+ #include "os_crtdbg.hpp"
+ #include "os_time.hpp"
+@@ -98,6 +102,7 @@ bool profilingPixelsDrawn = false;
+ bool profilingMemoryUsage = false;
+ bool useCallNos = true;
+ bool singleThread = false;
++bool performance = false;
+ 
+ unsigned frameNo = 0;
+ unsigned callNo = 0;
+@@ -633,7 +638,9 @@ usage(const char *argv0) {
+         "      --dump-format=FORMAT dump state format (`json` or `ubjson`)\n"
+         "  -w, --wait              waitOnFinish on final frame\n"
+         "      --loop[=N]          loop N times (N<0 continuously) replaying final frame.\n"
+-        "      --singlethread      use a single thread to replay command stream\n";
++        "      --singlethread      use a single thread to replay command stream\n"
++        "      --performance       discard the memcpy in retrace egl VIV extension\n"
++        ;
+ }
+ 
+ enum {
+@@ -657,6 +664,7 @@ enum {
+     SNAPSHOT_STARTFRAME_OPT,
+     SNAPSHOT_STOPFRAME_OPT,
+     REFERENCE_DUMP_OPT,
++    PERFORMANCE_OPT,
+ };
+ 
+ const static char *
+@@ -692,6 +700,7 @@ longOptions[] = {
+     {"snapshot-start", required_argument, 0, SNAPSHOT_STARTFRAME_OPT},
+     {"snapshot-stop", required_argument, 0, SNAPSHOT_STOPFRAME_OPT},
+     {"reference-dump", required_argument, 0, REFERENCE_DUMP_OPT},
++    {"performance", no_argument, 0, PERFORMANCE_OPT},
+     {0, 0, 0, 0}
+ };
+ 
+@@ -928,6 +937,10 @@ int main(int argc, char **argv)
+                 return 1;
+             }
+             break;
++        case PERFORMANCE_OPT:
++            retrace::performance = true;
++            parser->skip_spec_call = true;
++            break;
+         default:
+             std::cerr << "error: unknown option " << opt << "\n";
+             usage(argv[0]);
+diff --git a/retrace/retrace_stdc.cpp b/retrace/retrace_stdc.cpp
+index 2a57ef0..8a862ac 100644
+--- a/retrace/retrace_stdc.cpp
++++ b/retrace/retrace_stdc.cpp
+@@ -82,8 +82,44 @@ static void retrace_memcpy(trace::Call &call) {
+ }
+ 
+ 
++static void retrace_memcpy_opt(trace::Call &call) {
++    if(retrace::performance==true)
++    {
++        return;
++    }
++
++    void * destPtr;
++    size_t destLen;
++    retrace::toRange(call.arg(0), destPtr, destLen);
++
++    void * srcPtr;
++    size_t srcLen;
++    retrace::toRange(call.arg(1), srcPtr, srcLen);
++
++    size_t n = call.arg(2).toUInt();
++
++    if (!destPtr || !srcPtr || !n) {
++        return;
++    }
++
++    if (n > destLen) {
++        retrace::warning(call) << "dest buffer overflow of " << n - destLen << " bytes\n";
++    }
++
++    if (n > srcLen) {
++        retrace::warning(call) << "src buffer overflow of " << n - srcLen << " bytes\n";
++    }
++
++    n = std::min(n, destLen);
++    n = std::min(n, srcLen);
++
++    memcpy(destPtr, srcPtr, n);
++}
++
++
+ const retrace::Entry retrace::stdc_callbacks[] = {
+     {"malloc", &retrace_malloc},
+     {"memcpy", &retrace_memcpy},
++    {"memcpy_opt", &retrace_memcpy_opt},
+     {NULL, NULL}
+ };
+diff --git a/wrappers/egltrace.py b/wrappers/egltrace.py
+index 572e67c..9a292da 100644
+--- a/wrappers/egltrace.py
++++ b/wrappers/egltrace.py
+@@ -109,18 +109,18 @@ class EglTracer(GlTracer):
+             print '    }'
+             print '    if (NULL==(GLvoid*)data.logical) {'
+             print '        if (ysize > 0) {'
+-            self.emit_memcpy('(GLvoid*)data.planes[0]', 'ysize')
++            self.emit_memcpy_opt('(GLvoid*)data.planes[0]', 'ysize')
+             print '         }'
+             print '        if (usize > 0) {'
+-            self.emit_memcpy('(GLvoid*)data.planes[1]', 'usize')
++            self.emit_memcpy_opt('(GLvoid*)data.planes[1]', 'usize')
+             print '         }'
+             print '        if (vsize > 0) {'
+-            self.emit_memcpy('(GLvoid*)data.planes[2]', 'vsize')
++            self.emit_memcpy_opt('(GLvoid*)data.planes[2]', 'vsize')
+             print '         }'
+             print '    } else {'
+             print '        size = ysize + usize + vsize;'
+             print '        if (size > 0) {'
+-            self.emit_memcpy('(GLvoid*)data.logical', 'size')
++            self.emit_memcpy_opt('(GLvoid*)data.logical', 'size')
+             print '         }'
+             print '    }'
+ 
+diff --git a/wrappers/trace.py b/wrappers/trace.py
+index efb2fd5..7d1baa1 100644
+--- a/wrappers/trace.py
++++ b/wrappers/trace.py
+@@ -972,6 +972,9 @@ class Tracer:
+     def emit_memcpy(self, ptr, size):
+         print '    trace::fakeMemcpy(%s, %s);' % (ptr, size)
+     
++    def emit_memcpy_opt(self, ptr, size):
++        print '    trace::fakeMemcpyOpt(%s, %s);' % (ptr, size)
++
+     def fake_call(self, function, args):
+         print '            unsigned _fake_call = trace::localWriter.beginEnter(&_%s_sig, true);' % (function.name,)
+         for arg, instance in zip(function.args, args):
+-- 
+2.7.4
+

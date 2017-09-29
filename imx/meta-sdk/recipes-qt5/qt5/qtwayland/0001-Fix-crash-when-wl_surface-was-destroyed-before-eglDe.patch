@@ -1,0 +1,29 @@
+From eb7bf049b8ee84d906c1dec974c0910f3ce2e757 Mon Sep 17 00:00:00 2001
+From: Yong Gan <yong.gan@nxp.com>
+Date: Fri, 16 Jun 2017 05:32:13 +0800
+Subject: [PATCH] Fix crash when wl_surface was destroyed before
+ eglDestroySurface called
+
+Upstream Status: Inappropriate [i.MX specific]
+
+Signed-off-by Yong Gan <yong.gan@nxp.com>
+---
+ src/client/qwaylandwindow.cpp | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
+index 83e5f7c..12970d7 100644
+--- a/src/client/qwaylandwindow.cpp
++++ b/src/client/qwaylandwindow.cpp
+@@ -334,8 +334,6 @@ void QWaylandWindow::setVisible(bool visible)
+         // case 'this' will be deleted. When that happens, we must abort right away.
+         QPointer<QWaylandWindow> deleteGuard(this);
+         QWindowSystemInterface::flushWindowSystemEvents();
+-        if (!deleteGuard.isNull())
+-            reset();
+     }
+ }
+ 
+-- 
+1.9.1
+

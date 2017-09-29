@@ -1,0 +1,55 @@
+From 71899da21295172c21d0a8422af91063cda4e569 Mon Sep 17 00:00:00 2001
+From: Yuchou Gan <yuchou.gan@nxp.com>
+Date: Tue, 20 Sep 2016 00:39:13 +0800
+Subject: [PATCH 28/31] MGS-2254 [#ccc] add the TOT commit SHA1 inside the
+ binary
+
+Print the Tip Of Tree commit SHA1.
+In this way, we know which commit is in the released apitrace.
+
+Date: Sep 19, 2016
+Signed-off-by: Yuchou Gan <yuchou.gan@nxp.com>
+---
+ cli/CMakeLists.txt | 2 ++
+ cli/cli_main.cpp   | 8 ++++++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/cli/CMakeLists.txt b/cli/CMakeLists.txt
+index 4c13c21..9b621bb 100644
+--- a/cli/CMakeLists.txt
++++ b/cli/CMakeLists.txt
+@@ -3,10 +3,12 @@
+ # TODO: Use the same directory layout, for both build and install directories,
+ # so that binaries can find each other using just relative paths.
+ #
++execute_process(COMMAND git log --pretty=format:"%h" -n 1 OUTPUT_VARIABLE GIT_STRING)
+ add_definitions(
+     -DAPITRACE_PROGRAMS_INSTALL_DIR="${CMAKE_INSTALL_PREFIX}/bin"
+     -DAPITRACE_SCRIPTS_INSTALL_DIR="${CMAKE_INSTALL_PREFIX}/${SCRIPTS_INSTALL_DIR}"
+     -DAPITRACE_WRAPPERS_INSTALL_DIR="${CMAKE_INSTALL_PREFIX}/${WRAPPER_INSTALL_DIR}"
++    -DGIT_STRING="${GIT_STRING}"
+ )
+ if (WIN32)
+     add_definitions (-DAPITRACE_PYTHON_EXECUTABLE="python")
+diff --git a/cli/cli_main.cpp b/cli/cli_main.cpp
+index 2317be2..31e8b85 100644
+--- a/cli/cli_main.cpp
++++ b/cli/cli_main.cpp
+@@ -40,6 +40,14 @@
+ 
+ #define ARRAY_SIZE(arr) (sizeof (arr) / sizeof (arr[0]))
+ 
++#define _TXT2STR(t) #t
++#define TXT2STR(t) _TXT2STR(t)
++const char * VERSION = "\n\0$VERSION$"
++#ifdef GIT_STRING
++                            TXT2STR(GIT_STRING)
++#endif
++                            "$\n";
++
+ static const char *help_synopsis = "Print detailed help for the given command.";
+ 
+ static void list_commands(void);
+-- 
+2.7.4
+

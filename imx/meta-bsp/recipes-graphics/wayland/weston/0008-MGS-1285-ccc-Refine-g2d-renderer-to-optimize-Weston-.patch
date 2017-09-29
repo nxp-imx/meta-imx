@@ -1,0 +1,60 @@
+From 0b09db222156b1f17cdd53d98693d57ba50b6eba Mon Sep 17 00:00:00 2001
+From: Meng Mingming <mingming.meng@nxp.com>
+Date: Fri, 7 Apr 2017 14:22:11 +0800
+Subject: [PATCH 9/9] MGS-1285 [#ccc] Refine g2d-renderer to optimize Weston 2D
+ compositor
+
+Add clipRect when copying to framebuffer.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Date: Apr 13, 2017
+Signed-off-by: Meng Mingming <mingming.meng@nxp.com>
+---
+ src/g2d-renderer.c | 20 +++++++++++++++++---
+ 1 file changed, 17 insertions(+), 3 deletions(-)
+
+diff --git a/src/g2d-renderer.c b/src/g2d-renderer.c
+index 28c1c2d..3a68a76 100644
+--- a/src/g2d-renderer.c
++++ b/src/g2d-renderer.c
+@@ -408,11 +408,26 @@ copy_to_framebuffer(struct weston_output *output)
+ {
+ 	struct g2d_renderer *gr = get_renderer(output->compositor);
+ 	struct g2d_output_state *go = get_output_state(output);
+-	if(!go->directBlit && go->nNumBuffers == 1)
++    g2dRECT clipRect;
++
++    if((!go->directBlit && go->nNumBuffers == 1) || (go->clone_display_num))
++    {
++        clipRect.left   = output->previous_damage.extents.x1;
++        clipRect.top    = output->previous_damage.extents.y1;
++        clipRect.right  = output->previous_damage.extents.x2;
++        clipRect.bottom = output->previous_damage.extents.y2;
++
++        if(clipRect.left >= go->offscreenSurface.base.width)
++        {
++            clipRect.left -= go->offscreenSurface.base.width;
++            clipRect.right -= go->offscreenSurface.base.width;
++        }
++    }
++
++    if(!go->directBlit && go->nNumBuffers == 1)
+ 	{
+ 		g2dRECT srcRect  = {0, 0, go->offscreenSurface.base.width, go->offscreenSurface.base.height};
+ 		g2dRECT dstrect  = srcRect;
+-		g2dRECT clipRect = srcRect;
+ 		g2d_set_clipping(gr->handle, clipRect.left, clipRect.top, clipRect.right, clipRect.bottom);
+ 		g2d_blitSurface(gr->handle, &go->offscreenSurface,
+ 			&go->renderSurf[go->activebuffer], &srcRect, &dstrect);
+@@ -425,7 +440,6 @@ copy_to_framebuffer(struct weston_output *output)
+ 		{
+ 			g2dRECT srcRect  = {0, 0, go->renderSurf[go->activebuffer].base.width, go->renderSurf[go->activebuffer].base.height};
+ 			g2dRECT dstrect  = {0, 0, go->mirrorSurf[i].base.width, go->mirrorSurf[i].base.height};
+-			g2dRECT clipRect = srcRect;
+ 			g2d_set_clipping(gr->handle, clipRect.left, clipRect.top, clipRect.right, clipRect.bottom);
+ 			if(go->directBlit || go->nNumBuffers > 1)
+ 			{
+-- 
+2.9.3
+

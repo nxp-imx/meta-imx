@@ -1,0 +1,72 @@
+From a2ac34d5b0dca60fa98555801f3e021f5f21c464 Mon Sep 17 00:00:00 2001
+From: Yuchou Gan <yuchou.gan@nxp.com>
+Date: Thu, 19 Jan 2017 09:39:20 +0200
+Subject: [PATCH 06/31] add test_android.sh
+
+---
+ test_android.sh | 53 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 53 insertions(+)
+ create mode 100644 test_android.sh
+
+diff --git a/test_android.sh b/test_android.sh
+new file mode 100644
+index 0000000..b6cfb9f
+--- /dev/null
++++ b/test_android.sh
+@@ -0,0 +1,53 @@
++#!/system/bin/sh
++
++INSTALL=/data/apitrace
++TRACEFILE_PATH=/sdcard/
++MAXDURATION="10" # duration for every case. depending on available disk space
++
++EGL11_CASES="angeles test-opengl-tritex test-opengl-textures"
++
++kill_app()
++{
++    APP=$1
++    # Need truncate app name, otherwise pkill will fail on yocto
++    busybox pkill -x "${APP:0:15}"
++}
++
++run_eglcases()
++{
++    for tcase in $1
++    do
++        CURPATH="$(realpath .)"
++        echo "--------------------------------------------------------"
++	echo "Start apitrace"
++        echo "--------------------------------------------------------"
++        # start test
++	apitrace trace -v --output=$TRACEFILE_PATH/$tcase.trace --api=egl $tcase &
++        sleep $MAXDURATION
++        # end test
++	kill_app $tcase
++        cd $CURPATH # go back to original path
++    done
++}
++
++run_cases()
++{
++    export PATH=$PATH:$INSTALL/bin:$INSTALL/test
++
++    echo "Put trace file to $TRACEFILE_PATH"
++
++    mkdir -p $TRACEFILE_PATH
++    rm $TRACEFILE_PATH/*.trace
++
++    run_eglcases "$EGL11_CASES"
++}
++
++date
++
++run_cases
++
++echo "--------------------------------------------------------"
++echo "Test finished"
++date
++echo "--------------------------------------------------------"
++exit 0
+-- 
+2.7.4
+

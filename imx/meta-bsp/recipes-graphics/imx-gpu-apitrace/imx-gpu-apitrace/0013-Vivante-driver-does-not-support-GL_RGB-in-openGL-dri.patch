@@ -1,0 +1,36 @@
+From 58ba383c0f51b02ebcf703c1d8a3e213dc08ae97 Mon Sep 17 00:00:00 2001
+From: Yuchou Gan <yuchou.gan@nxp.com>
+Date: Thu, 19 Jan 2017 11:37:50 +0200
+Subject: [PATCH 13/31] Vivante driver does not support GL_RGB in openGL driver
+
+---
+ retrace/glstate_images.cpp | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/retrace/glstate_images.cpp b/retrace/glstate_images.cpp
+index 44a2633..f0805e2 100644
+--- a/retrace/glstate_images.cpp
++++ b/retrace/glstate_images.cpp
+@@ -1015,6 +1015,10 @@ getDrawBufferImage() {
+     if (context.ES) {
+         format = GL_RGBA;
+     }
++    else {
++        // Vivante driver does not support GL_RGB in openGL driver
++        format = GL_RGBA;
++    }
+ 
+     GLint channels = _gl_format_channels(format);
+     if (channels > 4) {
+@@ -1049,6 +1053,8 @@ getDrawBufferImage() {
+     {
+         // TODO: reset imaging state too
+         PixelPackState pps(context);
++        // FIXME! in case driver does not support full state
++        glGetError();
+         glReadPixels(0, 0, desc.width, desc.height, format, type, image->pixels);
+     }
+ 
+-- 
+2.7.4
+

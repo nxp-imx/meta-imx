@@ -1,20 +1,18 @@
-LA_OPT_BASE_LICENSE v16 September 2016
+LA_OPT_BASE_LICENSE v18 February 2017
 
-IMPORTANT.  Read the following NXP Semiconductors Software License Agreement
-("Agreement") completely.    By selecting the "I Accept" button at the end of
-this page, you indicate that you accept the terms of the Agreement and you
-acknowledge that you have the authority, for yourself or on behalf of your
-company, to bind your company to these terms.  You may then download or install
-the file.
+IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
+completely.    By selecting the "I Accept" button at the end of this page, you
+indicate that you accept the terms of the Agreement and you acknowledge that
+you have the authority, for yourself or on behalf of your company, to bind your
+company to these terms.  You may then download or install the file.
 
-NXP SEMICONDUCTORS SOFTWARE LICENSE AGREEMENT
+NXP SOFTWARE LICENSE AGREEMENT
 
 This is a legal agreement between you, as an authorized representative of your
 employer, or if you have no employer, as an individual (together "you"), and
-Freescale Semiconductor, Inc., a 100% affiliated company of NXP Semiconductors
-N.V. ("NXP").  It concerns your rights to use the software identified in the
-Software Content Register and provided to you in binary or source code form and
-any accompanying written materials (the "Licensed Software"). The Licensed
+NXP B.V. ("NXP").  It concerns your rights to use the software identified in
+the Software Content Register and provided to you in binary or source code form
+and any accompanying written materials (the "Licensed Software"). The Licensed
 Software may include any updates or error corrections or documentation relating
 to the Licensed Software provided to you by NXP under this License. In
 consideration for NXP allowing you to access the Licensed Software, you are
@@ -28,9 +26,19 @@ Your prior use will also continue to be governed by this Agreement.
 
 1.                 DEFINITIONS
 
-1.1.                  "Affiliates" means, any corporation, or entity directly
-or indirectly controlled by, controlling, or under common control with NXP
-Semiconductors N.V.
+1.1.                  For NXP, the term "Affiliate" means (i) any Person
+Controlled by NXP Semiconductors N.V. or (ii) any Person Controlled by any
+transferee of all or substantially all of the assets of NXP Semiconductors
+N.V., where "Controlled" means the direct or indirect beneficial ownership of
+more than fifty percent (50%) of the voting stock, or decision-making authority
+in the event that there is no voting stock, in another entity; provided, any
+such Person described in clause (i) or (ii) shall be deemed to be an
+"Affiliate" only for so long as such Person is Controlled by NXP Semiconductors
+N.V. or such transferee. For the purposes of this definition, "Person" is
+defined to mean "an individual, corporation, partnership, limited liability
+company, association, unincorporated association, trust or other entity or
+organization, including a government or political subdivision or an agency or
+instrumentality thereof."
 
 1.2.                  "Essential Patent" means a patent to the limited extent
 that infringement of such patent cannot be avoided in remaining compliant with
@@ -42,8 +50,7 @@ state of the art generally available at the time of standardization.
 1.3.                  "Intellectual Property Rights" means any and all rights
 under statute, common law or equity in and under copyrights, trade secrets, and
 patents (including utility models), and analogous rights throughout the world,
-including any applications for and the right to apply for, any of the
-foregoing.
+including any applications for and the right to apply for, any of the foregoing.
 
 1.4.                  "Software Content Register" means the documentation
 accompanying the Licensed Software which identifies the contents of the
@@ -82,6 +89,7 @@ only as part of, or embedded within Authorized Systems.
 Authorized System, proprietary NXP information associated with the Licensed
 Software for the purpose of developing, maintaining and supporting Authorized
 Systems with which the Licensed Software is integrated or associated.
+
 2.3.                  For NXP Licensed Software provided to you in source code
 form (human readable), NXP further grants to you a worldwide, personal,
 non-transferable, non-exclusive, non-sublicensable, license, under NXP's
@@ -289,13 +297,12 @@ or content.
 14.2.               The Licensed Software has been developed at private expense
 and is a "Commercial Item" as defined in 48 C.F.R. Section 2.101, consisting of
 "Commercial Computer Software", and/or "Commercial Computer Software
-Documentation," as such terms are used in 48 C.F.R. Section 12.212 (or 48
-C.F.R. Section 227.7202, as applicable) and may only be licensed to or shared
-with U.S. Government end users in object code form as part of, or embedded
-within, Authorized Systems.  Any agreement pursuant to which you share the
-Licensed Software will include a provision that reiterates the limitations of
-this document and requires all sub-agreements to similarly contain such
-limitations.
+Documentation," as such terms are used in 48 C.F.R. Section 12.212 (or 48 C.F.R.
+Section 227.7202, as applicable) and may only be licensed to or shared with U.S.
+Government end users in object code form as part of, or embedded within,
+Authorized Systems.  Any agreement pursuant to which you share the Licensed
+Software will include a provision that reiterates the limitations of this
+document and requires all sub-agreements to similarly contain such limitations.
 
 15.              SAFETY CRITICAL APPLICATIONS
 
@@ -321,12 +328,12 @@ aerospace application or environment, you do so at your own risk.
 in anti-personnel landmines.
 
 16.              CHOICE OF LAW; VENUE.  This Agreement will be governed by,
-construed, and enforced in accordance with the laws of the State of Texas, USA,
-without regard to conflicts of laws principles, will apply to all matters
-relating to this Agreement or the Licensed Software, and you agree that any
-litigation will be subject to the exclusive jurisdiction of the state or
-federal courts Texas, USA.  The United Nations Convention on Contracts for the
-International Sale of Goods will not apply to this document.
+construed, and enforced in accordance with the laws of The Netherlands, without
+regard to conflicts of laws principles, will apply to all matters relating to
+this Agreement or the Licensed Software, and you agree that any litigation will
+be subject to the exclusive jurisdiction of the courts of Amsterdam, The
+Netherlands.  The United Nations Convention on Contracts for the International
+Sale of Goods will not apply to this document.
 
 17.              CONFIDENTIAL INFORMATION.  Subject to the license grants and
 restrictions contained herein, you must treat the Licensed Software as
@@ -383,13 +390,14 @@ disclosed by such examination or audit.
 Agreement will be made in writing, and will be effective when received at the
 following addresses:
 
-NXP:                   Freescale Semiconductor, Inc.
-                            6501 William Cannon West    OE62
-                            Austin, Texas 78735
+NXP:                    NXP B.V.
+                        High Tech Campus 60
+                        5656 AG Eindhoven
+                        The Netherlands
                             ATTN: Legal Department
 
-                You:                      The address provided at registration
-will be used.
+                You:                  The address provided at registration will
+be used.
 
 24.              RELATIONSHIP OF THE PARTIES.     The parties are independent
 contractors.  Nothing in this Agreement will be construed to create any
@@ -400,7 +408,8 @@ authorized to bind the other to any obligations with third parties.
 upon and inure to the benefit of the parties and their permitted successors and
 assigns.  You may not assign this Agreement, or any part of this Agreement,
 without the prior written approval of NXP, which approval will not be
-unreasonably withheld or delayed.
+unreasonably withheld or delayed. NXP may assign this Agreement, or any part of
+this Agreement, in its sole discretion.
 
 
 
@@ -532,7 +541,6 @@ Real Format Client code is restricted to applications in the automotive market.
 Licensee must be a final manufacturer in good standing with a current license
 with Real Networks for the commercial use and distribution of products
 containing the GStreamer Optimized Real Format Client Code implementation or
-
 OpenMax Optimized Real Format Client Code
 
 Real Time Engineers Ltd.
@@ -578,6 +586,10 @@ Corporation Licensed Software on any memory device product.  SanDisk retains
 all rights to any modifications or derivative works to the SanDisk Corporation
 Licensed Software that you may create.
 
+SEGGER Microcontroller
+Your use of SEGGER emWin software is restricted to NXP ARM7, ARM9, Cortex-M0,
+Cortex-M3, and Cortex-M4 based devices only.
+
 Synopsys/Target Compiler Technologies
 Your use of the Synopsys/Target Compiler Technologies Licensed Software and
 related documentation is subject to the following:
@@ -586,7 +598,7 @@ related documentation is subject to the following:
 months, unless otherwise specified in the license file.
 *       The Licensed Software is usable by one user at a time on a single
 designated computer, unless otherwise agreed by Synopsys.
--       Licensed Software and documentation are to be used only on a designated
+*       Licensed Software and documentation are to be used only on a designated
 computer at the designated physical address provided by you on the APEX license
 form.
 *       The Licensed Software is not sub-licensable.

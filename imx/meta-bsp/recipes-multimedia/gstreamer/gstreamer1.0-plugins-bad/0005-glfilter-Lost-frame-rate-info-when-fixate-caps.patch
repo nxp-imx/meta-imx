@@ -1,7 +1,7 @@
-From 4d5eef96a6001af6480d0a228fb4e71e1ff4e3b7 Mon Sep 17 00:00:00 2001
+From 09e1b096aa6bccf2f8a39681ea8cbae1c28dc1d4 Mon Sep 17 00:00:00 2001
 From: Song Bing <b06498@freescale.com>
 Date: Mon, 8 Jun 2015 17:06:22 +0800
-Subject: [PATCH 05/18] glfilter: Lost frame rate info when fixate caps
+Subject: [PATCH 05/24] glfilter: Lost frame rate info when fixate caps
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -9,19 +9,18 @@ Content-Transfer-Encoding: 8bit
 Lost frame rate info when fixate caps. It will cause
 down stream element fail, such avimux.
 
-Upstream Status: Waiting for review.
+Upstream-Status: Waiting for review.
 
 https://bugzilla.gnome.org/show_bug.cgi?id=750545
-Signed-off-by: Lyon Wang <lyon.wang@freescale.com>
 ---
  gst-libs/gst/gl/gstglfilter.c | 13 ++++++++++++-
  1 file changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/gst-libs/gst/gl/gstglfilter.c b/gst-libs/gst/gl/gstglfilter.c
-index d25bb72..6840f4c 100644
+index 5d59791..c471496 100644
 --- a/gst-libs/gst/gl/gstglfilter.c
 +++ b/gst-libs/gst/gl/gstglfilter.c
-@@ -247,7 +247,8 @@ gst_gl_filter_fixate_caps (GstBaseTransform * bt,
+@@ -252,7 +252,8 @@ gst_gl_filter_fixate_caps (GstBaseTransform * bt,
      GstPadDirection direction, GstCaps * caps, GstCaps * othercaps)
  {
    GstStructure *ins, *outs;
@@ -31,7 +30,7 @@ index d25bb72..6840f4c 100644
    GValue fpar = { 0, }, tpar = {
    0,};
  
-@@ -260,6 +261,16 @@ gst_gl_filter_fixate_caps (GstBaseTransform * bt,
+@@ -265,6 +266,16 @@ gst_gl_filter_fixate_caps (GstBaseTransform * bt,
    ins = gst_caps_get_structure (caps, 0);
    outs = gst_caps_get_structure (othercaps, 0);
  

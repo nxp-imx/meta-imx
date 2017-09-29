@@ -1,0 +1,8 @@
+[Unit]
+Description=Configuration for i.MX GPU (Former rc_gpu.S)
+
+[Service]
+ExecStart=/etc/gpuconfig
+
+[Install]
+WantedBy=multi-user.target

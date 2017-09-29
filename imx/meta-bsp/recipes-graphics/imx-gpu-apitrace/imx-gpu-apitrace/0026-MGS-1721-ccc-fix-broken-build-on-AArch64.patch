@@ -1,0 +1,43 @@
+From d210fab9154aa4ba45816e96b8b1fc4caebaeb01 Mon Sep 17 00:00:00 2001
+From: Yuchou Gan <yuchou.gan@nxp.com>
+Date: Fri, 1 Apr 2016 01:59:39 +0800
+Subject: [PATCH 26/31] MGS-1721 [#ccc] fix broken build on AArch64
+
+modify the type of structure TEXDIRECTVIVDATA's member to fit the 32-bit and 64-bit OS
+
+Signed-off-by: Gan Yuchou <yuchou.gan@nxp.com>
+---
+ retrace/glretrace.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/retrace/glretrace.py b/retrace/glretrace.py
+index 6b5608b..870c84a 100644
+--- a/retrace/glretrace.py
++++ b/retrace/glretrace.py
+@@ -657,7 +657,7 @@ _validateActiveProgram(trace::Call &call);
+ 
+ typedef struct TexDirectVivData
+ {
+-    GLuint   logical; // used for glTexDirectVIVMap/glTexDirectMapVIV/glTexDirectTiledMapVIV
++    uintptr_t   logical; // used for glTexDirectVIVMap/glTexDirectMapVIV/glTexDirectTiledMapVIV
+     GLuint   physical;
+     GLuint   index;
+     uint32_t size;
+@@ -668,12 +668,12 @@ static std::map<GLint, TEXDIRECTVIVDATA> _directTextureDataMap;
+ 
+ #include <g2d.h>
+ 
+-static void * alloc_dma_buffer(int size, unsigned int *logical, unsigned int *physical)
++static void * alloc_dma_buffer(int size, uintptr_t *logical, unsigned int *physical)
+ {
+     struct g2d_buf *buf = g2d_alloc(size, 0);
+     if(buf != NULL)
+     {
+-        *logical = (unsigned int)buf->buf_vaddr;
++        *logical = (uintptr_t)buf->buf_vaddr;
+         *physical = (unsigned int)buf->buf_paddr ;
+     }
+     return buf;
+-- 
+2.7.4
+

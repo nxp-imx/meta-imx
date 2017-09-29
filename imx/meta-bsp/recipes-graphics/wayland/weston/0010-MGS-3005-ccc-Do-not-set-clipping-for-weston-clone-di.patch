@@ -1,0 +1,33 @@
+From 2fb41d2fa80abe8c0e66cbfbd63ff8578b928bed Mon Sep 17 00:00:00 2001
+From: Meng Mingming <mingming.meng@nxp.com>
+Date: Wed, 21 Jun 2017 13:44:21 +0800
+Subject: [PATCH 14/14] MGS-3005 [#ccc] Do not set clipping for weston clone
+ display
+
+It's no need to set clipping when copying to the clone display.
+Consider the multi display having different size, it need resize
+in that case.
+
+Upstream Status: Inappropriate [i.MX specific]
+
+Date: Jun 21, 2017
+Signed-off-by: Meng Mingming <mingming.meng@nxp.com>
+---
+ src/g2d-renderer.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/g2d-renderer.c b/src/g2d-renderer.c
+index 3a68a76..38c9772 100644
+--- a/src/g2d-renderer.c
++++ b/src/g2d-renderer.c
+@@ -440,7 +440,6 @@ copy_to_framebuffer(struct weston_output *output)
+ 		{
+ 			g2dRECT srcRect  = {0, 0, go->renderSurf[go->activebuffer].base.width, go->renderSurf[go->activebuffer].base.height};
+ 			g2dRECT dstrect  = {0, 0, go->mirrorSurf[i].base.width, go->mirrorSurf[i].base.height};
+-			g2d_set_clipping(gr->handle, clipRect.left, clipRect.top, clipRect.right, clipRect.bottom);
+ 			if(go->directBlit || go->nNumBuffers > 1)
+ 			{
+ 				g2d_blitSurface(gr->handle, &go->renderSurf[go->activebuffer],
+-- 
+2.9.3
+

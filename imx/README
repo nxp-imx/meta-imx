@@ -1,10 +1,7 @@
-NXP's 4.1.15-2.1.0 Yocto Project BSP
+NXP's 4.9.11-1.0.0 Yocto Project BSP
 ================================================
 
-This BSP is an NXP release providing support for the following processors
-
-The following boards were not tested in this release but this release contains updates
-that might affect these boards.
+The following boards were tested in this release.
 
    * NXP i.MX 6QuadPlus SABRE Device (imx6qpsabresd)
    * NXP i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
@@ -18,11 +15,11 @@ that might affect these boards.
    * NXP i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
    * NXP i.MX 6DualLite SABRE Auto (iEmx6dlsabreauto)
    * NXP i.MX 6SoloLite EVK (imx6slevk)
-   * NXP i.MX 6SLL EVK (imx6sllevk)
    * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
    * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
    * NXP i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
    * NXP i.MX 6SOLO SABRE Auto (imx6solosabreauto )
+   * NXP i.MX 7ULP EVK (imx7ulpevk) (this is Beta quality)
 
  * i.MX Device Tree configurations for each machine
     Each machine files lists the associated device trees for that machine.
@@ -43,6 +40,7 @@ that might affect these boards.
     imx6solosabreauto - sd, eim-nor, spi-nor, nand
     imx6slevk - sd, spi-nor, epdc
     imx6sllevk - sd, epdc
+    imx7ulpevk - sd, emmc
 
 
 Quick Start Guide
@@ -50,17 +48,12 @@ Quick Start Guide
 See the Freescale Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX NXP BSP repo
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth
+$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-morty -m imx-4.1.33_7ulp_beta.xml
 
 Download the Yocto Project NXP Layers:
 $: repo sync
 
 If errors on repo init, remove the .repo directory and try repo init again.
-
-Note that this downloads the latest release for 4.1.15-2.1.0 plus patches after.
-
-To download only the 4.1.15-2.1.0 release use this for repo init command
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth -m imx-4.1.15-2.1.0.xml
 
 Run i.MX NXP Yocto Project Setup:
 $: MACHINE=< machine name> source fsl-setup-release.sh -b <build directory> -e <backend fb, wayland, x11>
@@ -78,17 +71,15 @@ The -e parameter gets converted to the appropriate distro configuration.
 
 Note: DirectFB is no longer supported in i.MX graphic bilds.
 
-   fsl-image-gui provides a gui image without QT.
-   fsl-image-qt5 provides a Qt5 image
+   fsl-image-validation-imx provides a gui image without QT.
+   fsl-image-qt5-validation-imx provides a Qt5 image
 
 Here are some examples:
 
 Building X11
 ------------
   DISTRO=fsl-imx-x11 MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-x11
-  bitbake fsl-image-gui
-or
-  bitbake fsl-image-qt5
+  bitbake <image>
 
 To run the QT5 examples use the following parameters:
 <QT5 example> -platform xcb -plugin evdevtouch:/dev/input/event0
@@ -96,9 +87,7 @@ To run the QT5 examples use the following parameters:
 Building Frame Buffer (FB)
 ---------------------------
   DISTRO=fsl-imx-fb MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-fb
-  bitbake fsl-image-gui
-or
-  bitbake fsl-image-qt5
+  bitbake <image>
 
 To run the QT5 examples use the following parameters:
 <QT5 Example> -platform eglfs -plugin evdevtouch:/dev/input/event0
@@ -106,9 +95,7 @@ To run the QT5 examples use the following parameters:
 Building XWayland
 ---------------------------
   DISTRO=fsl-imx-xwayland MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-xwayland
-  bitbake fsl-image-gui
-or
-  bitbake fsl-image-qt5
+  bitbake <image>
 
 To run the QT5 examples use the following parameters:
 <QT5 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
@@ -116,9 +103,7 @@ To run the QT5 examples use the following parameters:
 Building Wayland-Weston (wayland)
 ---------------------------
   DISTRO=fsl-imx-wayland MACHINE=imx6qsabresd source fsl-setup-release.sh -b build-wayland
-  bitbake fsl-image-gui
-or
-  bitbake fsl-image-qt5
+  bitbake <image>
 
 To run the QT5 examples use the following parameters:
 <QT5 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
@@ -176,8 +161,5 @@ Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 back
 
 Systemd
 -------
-Systemd support is not enabled as default but it can be enabled by uncommenting out the systemd settings in
+Systemd support is enabled as default but it can be disabled by commenting out the systemd settings in
 imx/meta-sdk//conf/distro/include/fsl-imx-preferred-env.inc.
-
-Note systemd has not gone through a validation cycle so it is provided with no support.  The release layer
-contains what is needed for systemd to work if enabled.  For this release eudev was the default.

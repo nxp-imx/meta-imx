@@ -3,7 +3,7 @@
 DESCRIPTION = "Freescale Multimedia codec libs"
 LICENSE = "Proprietary"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://COPYING;md5=be67a88e9e6c841043b005ad7bcf8309"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
 
 # Backward compatibility
 PROVIDES += "libfslcodec"
@@ -17,10 +17,9 @@ EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8
                    bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d), d)}"
 
 PACKAGECONFIG ?= ""
-PACKAGECONFIG_mx6q = "vpu"
-PACKAGECONFIG_mx6dl = "vpu"
+PACKAGECONFIG_imxvpu = "vpu"
 
-PACKAGECONFIG[vpu] = "--enable-vpu,--disable-vpu,imx-vpu"
+PACKAGECONFIG[vpu] = "--enable-vpu,--disable-vpu,virtual/libvpu"
 
 do_install_append() {
     # FIXME: This link points to nowhere

@@ -1,0 +1,30 @@
+From a36e8a1a3eb0fdb1217bc17d8c28d5b528855a87 Mon Sep 17 00:00:00 2001
+From: Yang Dong <b56112@freescale.com>
+Date: Fri, 20 Nov 2015 02:23:50 +0800
+Subject: [PATCH 25/31] MGS-1271 [#ccc] disable X debug function
+
+Accoring to the yocto cmake file, NDEBUG is not defined.
+So disable X debug to make apitrace's replay function work.
+
+Date: Nov 19, 2015
+Signed-off-by: Yang Dong <b56112@freescale.com>
+---
+ retrace/glws_xlib.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/retrace/glws_xlib.cpp b/retrace/glws_xlib.cpp
+index 56bb043..6e13124 100644
+--- a/retrace/glws_xlib.cpp
++++ b/retrace/glws_xlib.cpp
+@@ -111,7 +111,7 @@ void
+ initX(void)
+ {
+ #ifndef NDEBUG
+-    _Xdebug = 1;
++    _Xdebug = 0;
+ #endif
+ 
+     XInitThreads();
+-- 
+2.7.4
+

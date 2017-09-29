@@ -1,4 +1,5 @@
 # Copyright (C) 2014-2015 Freescale Semiconductor
+# Copyright 2017 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "Freescale package group - pulseaudio"

@@ -1,0 +1,101 @@
+From 60ed9aa18ddd36f5e9fa3169245df2091244dcb1 Mon Sep 17 00:00:00 2001
+From: Adrian Negreanu <groleo@gmail.com>
+Date: Wed, 19 Apr 2017 17:52:04 +0300
+Subject: [PATCH 21/31] LocalWriter: make a writer ignorable
+
+---
+ common/trace_writer_local.cpp | 34 ++++++++++++++++++++++++++++++++++
+ common/trace_writer_local.hpp | 25 +++++++++++++++++++++++++
+ 2 files changed, 59 insertions(+)
+
+diff --git a/common/trace_writer_local.cpp b/common/trace_writer_local.cpp
+index 41f39c8..17b6328 100644
+--- a/common/trace_writer_local.cpp
++++ b/common/trace_writer_local.cpp
+@@ -157,6 +157,9 @@ static uintptr_t next_thread_num = 1;
+ static OS_THREAD_SPECIFIC(uintptr_t)
+ thread_num;
+ 
++static OS_THREAD_SPECIFIC(uint32_t)
++ignored_num;
++
+ void LocalWriter::checkProcessId(void) {
+     if (m_file &&
+         os::getCurrentProcessId() != pid) {
+@@ -244,6 +247,37 @@ void LocalWriter::flush(void) {
+ }
+ 
+ 
++bool LocalWriter::isIgnored(void) {
++    mutex.lock();
++    if (0==ignored_num){
++        mutex.unlock();
++        return false;
++    } else {
++        mutex.unlock();
++        return true;
++    }
++}
++
++void LocalWriter::beginIgnore(void) {
++    mutex.lock();
++    ++ignored_num;
++}
++
++void LocalWriter::endIgnore(void) {
++    mutex.unlock();
++}
++
++void LocalWriter::beginTrace(void) {
++    mutex.lock();
++    --ignored_num;
++}
++
++void LocalWriter::endTrace(void) {
++    mutex.unlock();
++}
++
++
++
+ LocalWriter localWriter;
+ 
+ 
+diff --git a/common/trace_writer_local.hpp b/common/trace_writer_local.hpp
+index 5d55bd9..ed27dbb 100644
+--- a/common/trace_writer_local.hpp
++++ b/common/trace_writer_local.hpp
+@@ -108,6 +108,31 @@ namespace trace {
+         void endLeave(void);
+ 
+         void flush(void);
++
++        /**
++         * Check ingore state
++         */
++        bool isIgnored(void);
++
++        /**
++         * It will stop the trace apicall.
++         */
++        void beginIgnore(void);
++
++        /**
++         * It will release mutex.
++         */
++        void endIgnore(void);
++
++        /**
++         * It will resume the trace apicall.
++         */
++        void beginTrace(void);
++
++        /**
++         * It will release mutex.
++         */
++        void endTrace(void);
+     };
+ 
+     /**
+-- 
+2.7.4
+
