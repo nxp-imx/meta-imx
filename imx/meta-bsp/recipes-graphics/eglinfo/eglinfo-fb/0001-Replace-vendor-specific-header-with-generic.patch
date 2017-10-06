@@ -1,8 +1,9 @@
 From fdb3add3dfd53c539c3c79e4fbf9eedb1dc1e440 Mon Sep 17 00:00:00 2001
 From: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
 Date: Fri, 26 Feb 2016 11:29:54 -0600
-Subject: [PATCH] Uuse generic eglplatform.h rather than vendor specifc
- (eglvivante.h) EGL headers.
+Subject: [PATCH] Replace vendor-specific header with generic
+
+Upstream-Status: Pending
 
 ---
  wscript | 2 +-
