@@ -9,7 +9,7 @@ SOC_TOOLS_GPU_XWAYLAND_append_mx8 = " vulkan-loader-layers vulkan-loader-layers-
 
 # OpenCV test apps
 OPENCV_TOOLS_INSTALL = ""
-OPENCV_TOOLS_INSTALL_imxgpu2d = "opencv-apps opencv-samples"
+OPENCV_TOOLS_INSTALL_imxgpu2d = "opencv-samples"
 
 RDEPENDS_${PN} += " \
     ${OPENCV_TOOLS_INSTALL} \
