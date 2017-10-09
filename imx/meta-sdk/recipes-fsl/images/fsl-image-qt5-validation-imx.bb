@@ -18,7 +18,6 @@ QT5_FONTS = "ttf-dejavu-common ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-s
 MACHINE_QT5_MULTIMEDIA_APPS = ""
 QT5_IMAGE_INSTALL = ""
 QT5_IMAGE_INSTALL_common = " \
-    packagegroup-qt5-toolchain-target \
     packagegroup-qt5-demos \
     ${QT5_FONTS} \
     ${QT5_IMAGE_INSTALL_APPS} \
