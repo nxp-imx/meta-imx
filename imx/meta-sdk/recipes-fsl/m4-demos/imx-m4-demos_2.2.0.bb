@@ -22,6 +22,8 @@ SRC_URI[imx8mq.sha256sum] = "bd19040df61df7e9157984c9d005a2fe977bec5b97e9269ad0a
 SRC_URI[imx8qm.md5sum] = "7580970903ffc10d9c4c963e36905529"
 SRC_URI[imx8qm.sha256sum] = "5d127b64d5b75eca623cc47cd3408e2b729359ac093ca7819df9af3759a61516"
 
+SCR = "SCR-imx8mq-m4-demo.txt"
+
 do_deploy () {
    # Install the demo binaries
    install -d ${DEPLOYDIR}
