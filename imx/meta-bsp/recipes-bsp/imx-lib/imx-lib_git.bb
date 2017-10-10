@@ -1,5 +1,6 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
 # Copyright (C) 2012-2016 O.S. Systems Software LTDA.
+# Copyright 2017 NXP
 
 DESCRIPTION = "Platform specific libraries for imx platform"
 LICENSE = "LGPLv2.1"
@@ -8,7 +9,7 @@ DEPENDS = "virtual/kernel"
 
 S = "${WORKDIR}/git"
 
-LIC_FILES_CHKSUM = "file://${S}/COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
+LIC_FILES_CHKSUM = "file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
 
 PLATFORM_mx6q  = "IMX6Q"
 PLATFORM_mx6dl = "IMX6Q"
