@@ -3,13 +3,20 @@
 # Copyright 2017 NXP
 
 DESCRIPTION = "Platform specific libraries for imx platform"
-LICENSE = "LGPLv2.1"
 SECTION = "multimedia"
+LICENSE = "LGPLv2.1"
+LIC_FILES_CHKSUM = "file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
+
 DEPENDS = "virtual/kernel"
 
-S = "${WORKDIR}/git"
+PE = "1"
 
-LIC_FILES_CHKSUM = "file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
+SRCBRANCH = "imx_4.9.11_1.0.0_ga"
+IMXLIB_SRC ?= "git://git.freescale.com/imx/imx-lib.git;protocol=git"
+SRC_URI = "${IMXLIB_SRC};branch=${SRCBRANCH}"
+SRCREV = "f5f14fc24581e5d6e689f42a56b5f2992f978ef4"
+
+S = "${WORKDIR}/git"
 
 PLATFORM_mx6q  = "IMX6Q"
 PLATFORM_mx6dl = "IMX6Q"
@@ -31,12 +38,5 @@ do_compile () {
 do_install () {
     oe_runmake PLATFORM="${PLATFORM}" DEST_DIR="${D}" install
 }
-
-PE = "1"
-
-SRCBRANCH = "imx_4.9.11_1.0.0_ga"
-IMXLIB_SRC ?= "git://git.freescale.com/imx/imx-lib.git;protocol=git"
-SRC_URI = "${IMXLIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "f5f14fc24581e5d6e689f42a56b5f2992f978ef4"
 
 COMPATIBLE_MACHINE = "(mx6|mx7)"
