@@ -32,12 +32,16 @@ PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gl'
 PACKAGECONFIG_GL_imxgpu3d = "gles2"
 PACKAGECONFIG_append = " accessibility examples"
 
-QT_CONFIG_FLAGS_IMX_NOT_X11_imx      = "-eglfs"
-QT_CONFIG_FLAGS_IMX_NOT_X11_imxgpu2d = "-no-opengl -linuxfb -no-eglfs"
-QT_CONFIG_FLAGS_IMX_NOT_X11_imxgpu3d = "-eglfs"
-QT_CONFIG_FLAGS_append_imx = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', \
-    '-no-eglfs', \
-    '${QT_CONFIG_FLAGS_IMX_NOT_X11}', d)}"
+# -eglfs is conditioned on FrameBuffer only
+# -no-opengl -linuxfb are conditioned on GPU2D only
+EGLFS_FLAGS = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '-no-eglfs', \
+        bb.utils.contains('DISTRO_FEATURES', 'wayland', '-no-eglfs', \
+            '-eglfs', d), d)}"
+QT_CONFIG_FLAGS_APPEND_imxpxp = "${EGLFS_FLAGS}"
+QT_CONFIG_FLAGS_APPEND_imxgpu2d = "${EGLFS_FLAGS} -no-opengl -linuxfb"
+QT_CONFIG_FLAGS_APPEND_imxgpu3d = "${EGLFS_FLAGS}"
+QT_CONFIG_FLAGS_append = " ${QT_CONFIG_FLAGS_APPEND}"
 
 do_install_append () {
     install -d ${D}${sysconfdir}/profile.d/
