@@ -13,7 +13,7 @@ SRC_URI_append = \
 "
 
 inherit module
-require recipes-kernel/linux/linux-imx_4.9.11.inc
+require recipes-kernel/linux/linux-imx_4.9.51.inc
 
 EXTRA_OEMAKE += "CONFIG_MXC_GPU_VIV=m"
 
