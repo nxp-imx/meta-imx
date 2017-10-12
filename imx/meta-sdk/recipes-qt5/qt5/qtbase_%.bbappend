@@ -32,15 +32,15 @@ PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gl'
 PACKAGECONFIG_GL_imxgpu3d = "gles2"
 PACKAGECONFIG_append = " accessibility examples"
 
-# -eglfs is conditioned on FrameBuffer only
+# -eglfs is conditioned on GPU3D with FrameBuffer only
 # -no-opengl -linuxfb are conditioned on GPU2D only
-EGLFS_FLAGS = "\
+# Overwrite the original setting which is in meta-freescale layer
+QT_CONFIG_FLAGS_APPEND_imxpxp = "-no-eglfs"
+QT_CONFIG_FLAGS_APPEND_imxgpu2d = "-no-eglfs -no-opengl -linuxfb"
+QT_CONFIG_FLAGS_APPEND_imxgpu3d = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '-no-eglfs', \
         bb.utils.contains('DISTRO_FEATURES', 'wayland', '-no-eglfs', \
             '-eglfs', d), d)}"
-QT_CONFIG_FLAGS_APPEND_imxpxp = "${EGLFS_FLAGS}"
-QT_CONFIG_FLAGS_APPEND_imxgpu2d = "${EGLFS_FLAGS} -no-opengl -linuxfb"
-QT_CONFIG_FLAGS_APPEND_imxgpu3d = "${EGLFS_FLAGS}"
 QT_CONFIG_FLAGS_append = " ${QT_CONFIG_FLAGS_APPEND}"
 
 PACKAGECONFIG_WAYLAND ?= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xkbcommon-evdev', '', d)}"
