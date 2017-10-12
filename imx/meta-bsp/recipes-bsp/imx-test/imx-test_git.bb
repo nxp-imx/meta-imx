@@ -23,7 +23,7 @@ EXTRA_OEMAKE       += "HAS_VPU=${IMX_HAS_VPU}"
 PARALLEL_MAKE="-j 1"
 
 SRCBRANCH = "master"
-IMXTEST_SRC ?= "git://git.freescale.com/imx/imx-test.git;protocol=git"
+IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
 
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
 SRC_URI_append = " file://memtool_profile "
