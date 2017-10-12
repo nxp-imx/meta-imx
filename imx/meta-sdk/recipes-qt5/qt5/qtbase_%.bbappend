@@ -43,6 +43,9 @@ QT_CONFIG_FLAGS_APPEND_imxgpu2d = "${EGLFS_FLAGS} -no-opengl -linuxfb"
 QT_CONFIG_FLAGS_APPEND_imxgpu3d = "${EGLFS_FLAGS}"
 QT_CONFIG_FLAGS_append = " ${QT_CONFIG_FLAGS_APPEND}"
 
+PACKAGECONFIG_WAYLAND ?= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xkbcommon-evdev', '', d)}"
+PACKAGECONFIG += "${PACKAGECONFIG_WAYLAND}"
+
 do_install_append () {
     install -d ${D}${sysconfdir}/profile.d/
     install -m 0755 ${WORKDIR}/qt5-${IMX_BACKEND}.sh ${D}${sysconfdir}/profile.d/qt5.sh
