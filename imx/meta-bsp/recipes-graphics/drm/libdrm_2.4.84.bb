@@ -19,7 +19,9 @@ SRC_URI = "http://dri.freedesktop.org/libdrm/${BP}.tar.bz2 \
 SRC_URI[md5sum] = "5e676f903bdb245878383334dca4cc33"
 SRC_URI[sha256sum] = "ca4d3a4705be2ec289f9df7cfa871f5e02fa43d0f653622c9d9d428959143e78"
 
-inherit autotools pkgconfig manpages
+# IMX: Remove manpages which is added in pyro
+#inherit autotools pkgconfig manpages
+inherit autotools pkgconfig
 
 EXTRA_OECONF += "--disable-cairo-tests \
                  --without-cunit \
@@ -28,7 +30,9 @@ EXTRA_OECONF += "--disable-cairo-tests \
                  --enable-install-test-programs \
                  --disable-valgrind \
                 "
-PACKAGECONFIG[manpages] = "--enable-manpages, --disable-manpages, libxslt-native xmlto-native"
+# IMX: Remove manpages which is added in pyro
+#PACKAGECONFIG[manpages] = "--enable-manpages, --disable-manpages, libxslt-native xmlto-native"
+EXTRA_OECONF += "--disable-manpages"
 
 ALLOW_EMPTY_${PN}-drivers = "1"
 PACKAGES =+ "${PN}-tests ${PN}-drivers ${PN}-radeon ${PN}-nouveau ${PN}-omap \
