@@ -16,8 +16,8 @@ SRC_URI = "http://dri.freedesktop.org/libdrm/${BP}.tar.bz2 \
            file://0001-configure.ac-Allow-explicit-enabling-of-cunit-tests.patch \
           "
 
-SRC_URI[md5sum] = "23800953ed7564988872e1e8c61fde31"
-SRC_URI[sha256sum] = "03a52669da60ead62548a35bc430aafb6c2d8dd21ec9dba3a90f96eff5fe36d6"
+SRC_URI[md5sum] = "5e676f903bdb245878383334dca4cc33"
+SRC_URI[sha256sum] = "ca4d3a4705be2ec289f9df7cfa871f5e02fa43d0f653622c9d9d428959143e78"
 
 inherit autotools pkgconfig manpages
 
