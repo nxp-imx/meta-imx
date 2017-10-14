@@ -3,6 +3,16 @@
 
 include recipes-bsp/imx-test/imx-test.inc
 
+SRCBRANCH = "master"
+IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
+
+SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
+SRC_URI_append = " file://memtool_profile "
+
+SRCREV = "979a3df3f7dd79e378e956ba2a0cfd6ada0fe0a4"
+
+S = "${WORKDIR}/git"
+
 DEPENDS_mx6sl += "virtual/libvpu"
 DEPENDS_mx6sx += "virtual/libvpu"
 DEPENDS_mx6ul += "virtual/libvpu"
@@ -21,16 +31,6 @@ IMX_HAS_VPU_imxvpu  = "true"
 EXTRA_OEMAKE       += "HAS_VPU=${IMX_HAS_VPU}"
 
 PARALLEL_MAKE="-j 1"
-
-SRCBRANCH = "master"
-IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
-
-SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
-SRC_URI_append = " file://memtool_profile "
-
-SRCREV = "979a3df3f7dd79e378e956ba2a0cfd6ada0fe0a4"
-
-S = "${WORKDIR}/git"
 
 do_install_append() {
     install -d -m 0755 ${D}/home/root/
