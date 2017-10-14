@@ -3,6 +3,7 @@
 
 DESCRIPTION = "i.MX U-Boot suppporting i.MX reference boards."
 require recipes-bsp/u-boot/u-boot.inc
+inherit pythonnative
 
 PROVIDES += "u-boot"
 DEPENDS_append = "dtc-native"
