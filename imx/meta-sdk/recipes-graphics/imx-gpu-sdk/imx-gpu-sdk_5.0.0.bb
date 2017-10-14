@@ -18,7 +18,7 @@ DEPENDS_append_mx8      = \
 GPU_SDK_SRC ?= "git://github.com/NXPmicro/gtec-demo-framework.git;protocol=http"
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
-SRCREV = "97b66454d989956ae17cf7a0bc11dea7ec0d5fd1"
+SRCREV = "f01ca340946a1dd0f13853f8a979649720f2d1d4"
 
 
 # For backwards compatibility
@@ -50,7 +50,7 @@ do_compile () {
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     . ./prepare.sh
-    FslBuild.py -t sdk -u [${FEATURES}] -v --Variants [WindowSystem=${BACKEND}] -- install -j 2
+    FslBuild.py -v -t sdk --UseFeatures [${FEATURES}] --Variants [WindowSystem=${BACKEND}] -- install -j 2
 }
 
 HAS_DPU_BLIT            = "false"
