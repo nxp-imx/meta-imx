@@ -2,17 +2,20 @@
 
 DESCRIPTION = "i.MX ARM Trusted Firmware"
 SECTION = "BSP"
-LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
+LICENSE = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
 
 inherit fsl-eula-unpack pkgconfig deploy
 
-SRC_URI = "${MX8_DOWNLOADS}/${PN}-${PV}.bin;fsl-eula=true"
+PV = "1.4.1+git${SRCPV}"
 
-SRC_URI[md5sum] = "ba88a2aa6cf61d4d4108b17f2f1bd531"
-SRC_URI[sha256sum] = "bc0fb6c407c698f292425ba81f8eb31cee6d2c36114fafcd38c5e12edaaf3a5e"
+ATF_SRC ?= "git://sw-stash.freescale.net/scm/imx/arm-trusted-firmware.git;protocol=http"
+ATF_BRANCH = "imx_1.4.y"
 
-S = "${WORKDIR}/${PN}-${PV}"
+SRC_URI = "${ATF_SRC};branch=${ATF_BRANCH}"
+SRCREV = "${AUTOREV}"
+
+S = "${WORKDIR}/git"
 
 BOOT_TOOLS = "imx-boot-tools"
 
