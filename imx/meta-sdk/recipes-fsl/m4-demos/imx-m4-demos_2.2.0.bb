@@ -12,6 +12,7 @@ inherit deploy fsl-eula-unpack2
 SOC ?= "imx8qm"
 SOC_mx8mq= "imx8mq"
 SOC_mx8qm= "imx8qm"
+SOC_mx8qxp= "imx8qx"
 
 IMX_PACKAGE_NAME = "${SOC}-m4-demo-${PV}"
 SRC_URI_NAME = "${SOC}"
@@ -21,6 +22,9 @@ SRC_URI[imx8mq.sha256sum] = "bd19040df61df7e9157984c9d005a2fe977bec5b97e9269ad0a
 
 SRC_URI[imx8qm.md5sum] = "7580970903ffc10d9c4c963e36905529"
 SRC_URI[imx8qm.sha256sum] = "5d127b64d5b75eca623cc47cd3408e2b729359ac093ca7819df9af3759a61516"
+
+SRC_URI[imx8qx.md5sum] = "50017d93c422a5287bcc231c5aa7da7f"
+SRC_URI[imx8qx.sha256sum] = "87baa0b9e2e82046cb00001f0cfd7c781f03eff13fd7778b0d744ec22b54b753"
 
 SCR = "SCR-${SOC}-m4-demo.txt"
 
@@ -34,4 +38,4 @@ do_deploy () {
 addtask deploy before do_build after do_compile
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx8mq|mx8qm)"
+COMPATIBLE_MACHINE = "(mx8mq|mx8qm|mx8qx)"
