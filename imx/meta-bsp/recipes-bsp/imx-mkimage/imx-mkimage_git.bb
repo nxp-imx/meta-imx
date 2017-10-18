@@ -10,7 +10,7 @@ inherit native deploy
 DEPENDS = "zlib-native"
 
 IMX_MKIMAGE_SRC ?= "git://git.freescale.com/imx/imx-mkimage.git;protocol=git"
-SRCBRANCH ?= "imx_4.9.51_imx8_beta1"
+SRCBRANCH ?= "master"
 SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH}"
 SRCREV = "e1b3bc76b30d68864ee3c0465b24fe96375efd6f"
 
