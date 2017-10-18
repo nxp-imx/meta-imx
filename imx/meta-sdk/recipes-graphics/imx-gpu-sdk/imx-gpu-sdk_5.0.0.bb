@@ -31,7 +31,8 @@ BACKEND = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',     'X11', \
                                                              'FB', d), d)}"
 
-FEATURES = \
+FEATURES                 = "--UseFeatures ["
+FEATURES_append          = \
     "${@bb.utils.contains('MACHINE_FEATURES', 'imxgpu2d imxgpu3d', 'EGL,OpenVG,G2D,EarlyAccess,OpenGLES2', \
         bb.utils.contains('MACHINE_FEATURES',          'imxgpu2d', 'EGL,OpenVG,G2D,EarlyAccess', \
                                                                    'OpenGLES2', d), d)}"
@@ -43,6 +44,7 @@ FEATURES_append_mx8      = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland',        '', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',        '', \
                                                         ',Vulkan', d), d)}"
+FEATURES_append          = "]"
 
 S = "${WORKDIR}/git"
 
@@ -50,7 +52,7 @@ do_compile () {
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     . ./prepare.sh
-    FslBuild.py -v -t sdk --UseFeatures [${FEATURES}] --Variants [WindowSystem=${BACKEND}] -- install -j 2
+    FslBuild.py -vvvvv -t sdk ${FEATURES} --Variants [WindowSystem=${BACKEND}] --BuildThreads 2 -- install
 }
 
 HAS_DPU_BLIT            = "false"
