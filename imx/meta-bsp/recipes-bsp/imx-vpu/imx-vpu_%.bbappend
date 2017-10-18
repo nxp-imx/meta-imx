@@ -1,2 +1,2 @@
-PROVIDES = "virtual/libvpu"
-RPROVIDES_${PN} = "virtual/libvpu"
+PROVIDES = "virtual/imxvpu"
+RPROVIDES_${PN} = "virtual/imxvpu"

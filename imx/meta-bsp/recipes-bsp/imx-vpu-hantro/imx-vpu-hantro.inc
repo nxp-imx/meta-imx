@@ -8,8 +8,8 @@ inherit fsl-eula-unpack
 
 PARALLEL_MAKE="-j 1"
 
-PROVIDES = "virtual/libvpu"
-RPROVIDES_${PN} = "virtual/libvpu"
+PROVIDES = "virtual/imxvpu"
+RPROVIDES_${PN} = "virtual/imxvpu"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
