@@ -1,7 +1,7 @@
 # Copyright 2017 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-SRCBRANCH = "imx_4.9.51_imx8_beta1"
+SRCBRANCH = "imx_4.9.y"
 
 LOCALVERSION = "-${SRCBRANCH}"
 
