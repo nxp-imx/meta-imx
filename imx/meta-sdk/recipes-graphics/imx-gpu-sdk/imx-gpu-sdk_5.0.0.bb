@@ -52,7 +52,7 @@ do_compile () {
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     . ./prepare.sh
-    FslBuild.py -vvvvv -t sdk ${FEATURES} --Variants [WindowSystem=${BACKEND}] --BuildThreads 2 -- install
+    FslBuild.py -vvvvv -t sdk ${FEATURES} --Variants [WindowSystem=${BACKEND}] --BuildThreads ${BB_NUMBER_THREADS} -- install
 }
 
 HAS_DPU_BLIT            = "false"
