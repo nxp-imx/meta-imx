@@ -8,8 +8,8 @@ IMX_FIRMWARE_SRC ?= "git://git.freescale.com/proprietary/imx-firmware.git;protoc
 SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true \
            ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH};destsuffix=${S}/git "
 
-SRC_URI[md5sum] = "531b15263809f104c89b43bdfab4802b"
-SRC_URI[sha256sum] = "f5458b28068d7c43e6a2ebe43b48b9b9d742121377fd556c2bbf11426ba356c2"
+SRC_URI[md5sum] = "0902764c6d8512856ba518d7e84ebdcf"
+SRC_URI[sha256sum] = "c03bf99deadc06ce3aadc2a44d87d8387662b8d861ca520041c870a6c1fcd0f4"
 
 #BRCM firmware git
 SRCREV = "8ce9046f5058fdd2c5271f86ccfc61bc5a248ae3"
@@ -82,3 +82,14 @@ do_install_append_mx8 () {
     cp -rfv firmware/hdmi/cadence/hdmi_imx8m.bin ${STAGING_DIR}/boot
 }
 
+IS_8MQ = "0"
+IS_8MQ_mx8mq = "1"
+inherit deploy
+addtask deploy before do_build after do_install
+do_deploy () {
+    #
+    if [ "${IS_8MQ}" = "1" ]; then
+    install -m 0644 ${S}/firmware/ddr/synopsys/lpddr4_pmu_train_*.bin ${DEPLOYDIR}
+    install -m 0644 ${S}/firmware/hdmi/cadence/hdmi_imx8m.bin ${DEPLOYDIR}
+    fi
+}
