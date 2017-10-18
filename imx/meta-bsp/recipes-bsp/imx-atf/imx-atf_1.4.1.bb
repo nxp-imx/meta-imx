@@ -13,7 +13,7 @@ ATF_SRC ?= "git://sw-stash.freescale.net/scm/imx/arm-trusted-firmware.git;protoc
 ATF_BRANCH = "imx_1.4.y"
 
 SRC_URI = "${ATF_SRC};branch=${ATF_BRANCH}"
-SRCREV = "d1db55a79421719376fc769d9184b0fa67622415"
+SRCREV = "6c7326624779972436506db78469d29e10881f10"
 
 S = "${WORKDIR}/git"
 
