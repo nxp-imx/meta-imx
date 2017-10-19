@@ -95,6 +95,8 @@ MACHINE_SOCARCH_FILTER_append_imxgpu = " \
     virtual/egl \
     virtual/mesa \
     virtual/libg2d \
+    virtual/wayland-egl \
+    virtual/libgal-x11 \
     cairo \
     pango \
 "
@@ -102,6 +104,15 @@ MACHINE_SOCARCH_FILTER_append_imxgpu3d = " \
     virtual/libgl \
     virtual/libgles1 \
     virtual/libgles2 \
+"
+MACHINE_SOCARCH_FILTER_append_mx6q = " \
+    virtual/opencl-icd \
+    opencl-headers \
+"
+MACHINE_SOCARCH_FILTER_append_mx8 = " \
+    virtual/opencl-icd \
+    opencl-headers \
+    virtual/libopenvx \
 "
 MACHINE_SOCARCH_FILTER_append_imxpxp = " \
     imx-codec \
