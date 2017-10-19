@@ -84,19 +84,19 @@ MACHINE_SOCARCH_SUFFIX_mx8qxp = "-mx8qxp"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
 MACHINE_SOCARCH_FILTER_append_imxvpu = " \
-    imx-vpu \
-    libimxvpuapi \
     imx-codec \
-    imx-vpuwrap \
     imx-parser \
+    imx-vpu \
+    imx-vpuwrap \
+    libimxvpuapi \
 "
 MACHINE_SOCARCH_FILTER_append_imxgpu = " \
-    virtual/libopenvg \
     virtual/egl \
     virtual/mesa \
     virtual/libg2d \
-    virtual/wayland-egl \
     virtual/libgal-x11 \
+    virtual/libopenvg \
+    virtual/wayland-egl \
     cairo \
     pango \
 "
@@ -110,9 +110,9 @@ MACHINE_SOCARCH_FILTER_append_mx6q = " \
     opencl-headers \
 "
 MACHINE_SOCARCH_FILTER_append_mx8 = " \
+    virtual/libopenvx \
     virtual/opencl-icd \
     opencl-headers \
-    virtual/libopenvx \
 "
 MACHINE_SOCARCH_FILTER_append_imxpxp = " \
     imx-codec \

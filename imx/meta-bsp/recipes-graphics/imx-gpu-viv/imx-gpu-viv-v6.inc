@@ -32,16 +32,16 @@ EXTRA_PROVIDES_append_mx6q = " \
     opencl-headers \
 "
 EXTRA_PROVIDES_append_mx8 = " \
+    virtual/libopenvx \
     virtual/opencl-icd \
     opencl-headers \
-    virtual/libopenvx \
 "
 PROVIDES += " \
     imx-gpu-viv \
-    virtual/wayland-egl \
-    virtual/libgal-x11 \
     virtual/egl \
+    virtual/libgal-x11 \
     virtual/libopenvg \
+    virtual/wayland-egl \
     ${EXTRA_PROVIDES} \
 "
 
