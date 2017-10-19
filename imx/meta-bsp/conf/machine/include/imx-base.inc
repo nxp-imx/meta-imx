@@ -83,9 +83,28 @@ MACHINE_SOCARCH_SUFFIX_mx8qm  = "-mx8qm"
 MACHINE_SOCARCH_SUFFIX_mx8qxp = "-mx8qxp"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
-MACHINE_SOCARCH_FILTER_append_imxvpu = " imx-vpu libimxvpuapi imx-codec imx-vpuwrap imx-parser"
-MACHINE_SOCARCH_FILTER_append_imxgpu2d = " virtual/libopenvg virtual/libgles1 virtual/libgles2 virtual/egl virtual/mesa virtual/libgl virtual/libg2d cairo pango"
-MACHINE_SOCARCH_FILTER_append_imxpxp = " imx-codec imx-parser"
+MACHINE_SOCARCH_FILTER_append_imxvpu = " \
+    imx-vpu \
+    libimxvpuapi \
+    imx-codec \
+    imx-vpuwrap \
+    imx-parser \
+"
+MACHINE_SOCARCH_FILTER_append_imxgpu2d = " \
+    virtual/libopenvg \
+    virtual/libgles1 \
+    virtual/libgles2 \
+    virtual/egl \
+    virtual/mesa \
+    virtual/libgl \
+    virtual/libg2d \
+    cairo \
+    pango \
+"
+MACHINE_SOCARCH_FILTER_append_imxpxp = " \
+    imx-codec \
+    imx-parser \
+"
 
 INHERIT += "fsl-dynamic-packagearch"
 
