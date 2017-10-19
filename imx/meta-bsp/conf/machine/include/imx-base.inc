@@ -90,16 +90,18 @@ MACHINE_SOCARCH_FILTER_append_imxvpu = " \
     imx-vpuwrap \
     imx-parser \
 "
-MACHINE_SOCARCH_FILTER_append_imxgpu2d = " \
+MACHINE_SOCARCH_FILTER_append_imxgpu = " \
     virtual/libopenvg \
-    virtual/libgles1 \
-    virtual/libgles2 \
     virtual/egl \
     virtual/mesa \
-    virtual/libgl \
     virtual/libg2d \
     cairo \
     pango \
+"
+MACHINE_SOCARCH_FILTER_append_imxgpu3d = " \
+    virtual/libgl \
+    virtual/libgles1 \
+    virtual/libgles2 \
 "
 MACHINE_SOCARCH_FILTER_append_imxpxp = " \
     imx-codec \
