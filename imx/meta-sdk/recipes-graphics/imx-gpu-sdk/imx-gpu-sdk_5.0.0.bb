@@ -31,14 +31,14 @@ BACKEND = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',     'X11', \
                                                              'FB', d), d)}"
 
-FEATURES                 = "EGL,EarlyAccess,OpenVG"
-FEATURES_append_imxgpu2d = ",G2D"
-FEATURES_append_imxgpu3d = ",OpenGLES2"
-FEATURES_append_mx6q     = ",OpenGLES3"
-FEATURES_append_mx6dl    = ",OpenGLES3"
-FEATURES_append_mx8      = ",OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenCV"
-FEATURES_append_openvx   = ",OpenVX,OpenVX1.0.1"
-FEATURES_append_mx8      = \
+FEATURES                  = "EGL,EarlyAccess,OpenVG"
+FEATURES_append_imxgpu2d  = ",G2D"
+FEATURES_append_imxgpu3d  = ",OpenGLES2"
+FEATURES_append_mx6q      = ",OpenGLES3"
+FEATURES_append_mx6dl     = ",OpenGLES3"
+FEATURES_append_mx8       = ",OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenCV"
+FEATURES_append_imxopenvx = ",OpenVX,OpenVX1.0.1"
+FEATURES_append_mx8       = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland',        '', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',        '', \
                                                         ',Vulkan', d), d)}"
