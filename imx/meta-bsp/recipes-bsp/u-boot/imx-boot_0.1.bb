@@ -31,6 +31,7 @@ DCD_NAME_mx8qxp = "imx8qx_dcd.cfg.tmp"
 
 UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 UBOOT_NAME_ATF = "u-boot-atf-${MACHINE}.bin-${UBOOT_CONFIG}"
+UBOOT_NAME_ITB = "u-boot.itb"
 BOOT_CONFIG_MACHINE = "${BOOT_NAME}-${MACHINE}-${UBOOT_CONFIG}.bin"
 BOOT_CONFIG_MACHINE_NODCD = "${BOOT_CONFIG_MACHINE}-no_dcd"
 BOOT_CONFIG_MACHINE_NOHDMI = "${BOOT_CONFIG_MACHINE}-no_hdmi"
@@ -85,20 +86,31 @@ do_compile () {
                    u-boot-spl-ddr-${MACHINE}.bin-${UBOOT_CONFIG}
         rm -f lpddr4_pmu_train_fw.bin lpddr4_pmu_train_imem_pad.bin
 
+        # generate u-boot.its
+        cp  ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/fsl-imx8mq-evk.dtb .
+        cp  ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ./bl31.bin
+        cp  ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin    .
+        ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mkimage_fit_atf.sh fsl-imx8mq-evk.dtb > u-boot.its
+        ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mkimage_uboot -E -f u-boot.its ${UBOOT_NAME_ITB}
+
         # mkimage_imx8 for i.MX8MQ
         # flash_spl_uboot.bin
         #./mkimage_imx8 -loader u-boot-spl-ddr.bin 0x7E1000 -second_loader u-boot-atf.bin 0x40001000 0x60000 -out $(OUTIMG)
+        #./mkimage_imx8 -fit -loader u-boot-spl-ddr.bin 0x7E1000 -second_loader u-boot.itb 0x40001000 0x60000 -out $(OUTIMG)
         ${TOOLS_NAME} \
+                 -fit \
                  -loader u-boot-spl-ddr-${MACHINE}.bin-${UBOOT_CONFIG} 0x7E1000 \
-                 -second_loader ${UBOOT_NAME_ATF} 0x40001000 0x60000 \
+                 -second_loader ${UBOOT_NAME_ITB} 0x40001000 0x60000 \
                  -out ${BOOT_CONFIG_MACHINE_NOHDMI}
 
         # flash_hdmi_spl_uboot.bin
         # ./mkimage_imx8 -hdmi hdmi_imx8m.bin -loader u-boot-spl-ddr.bin 0x7E1000 -second_loader u-boot-atf.bin 0x40001000 0x60000 -out $(OUTIMG)
+        # ./mkimage_imx8 -fit -hdmi hdmi_imx8m.bin -loader u-boot-spl-ddr.bin 0x7E1000 -second_loader u-boot.itb 0x40001000 0x60000 -out $(OUTIMG)
         ${TOOLS_NAME} \
+                 -fit \
                  -hdmi ${STAGING_DIR}/boot/hdmi_imx8m.bin \
                  -loader u-boot-spl-ddr-${MACHINE}.bin-${UBOOT_CONFIG} 0x7E1000 \
-                 -second_loader ${UBOOT_NAME_ATF} 0x40001000 0x60000 \
+                 -second_loader ${UBOOT_NAME_ITB} 0x40001000 0x60000 \
                  -out ${BOOT_CONFIG_MACHINE}
 
     elif [ "${IS_MX8QM}" = "1" ]; then
