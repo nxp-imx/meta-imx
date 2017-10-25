@@ -24,6 +24,14 @@ SRC_URI = "http://w1.fi/releases/wpa_supplicant-${PV}.tar.gz  \
            file://wpa_supplicant.conf \
            file://wpa_supplicant.conf-sane \
            file://99_wpa_supplicant \
+           file://rebased-v2.6-0001-hostapd-Avoid-key-reinstallation-in-FT-handshake.patch \
+           file://rebased-v2.6-0002-Prevent-reinstallation-of-an-already-in-use-group-ke.patch \
+           file://rebased-v2.6-0003-Extend-protection-of-GTK-IGTK-reinstallation-of-WNM-.patch \
+           file://rebased-v2.6-0004-Prevent-installation-of-an-all-zero-TK.patch \
+           file://rebased-v2.6-0005-Fix-PTK-rekeying-to-generate-a-new-ANonce.patch \
+           file://rebased-v2.6-0006-TDLS-Reject-TPK-TK-reconfiguration.patch \
+           file://rebased-v2.6-0007-WNM-Ignore-WNM-Sleep-Mode-Response-without-pending-r.patch \
+           file://rebased-v2.6-0008-FT-Do-not-allow-multiple-Reassociation-Response-fram.patch \
           "
 SRC_URI[md5sum] = "091569eb4440b7d7f2b4276dbfc03c3c"
 SRC_URI[sha256sum] = "b4936d34c4e6cdd44954beba74296d964bc2c9668ecaa5255e499636fe2b1450"
