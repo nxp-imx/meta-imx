@@ -80,11 +80,16 @@ do_compile () {
     if [ "${IS_MX8MQ}" = "1" ]; then
         # generate u-boot-spl-ddr.bin
         objcopy -I binary -O binary --pad-to 0x8000 --gap-fill=0x0 \
-                   ${STAGING_DIR}/boot/lpddr4_pmu_train_imem.bin lpddr4_pmu_train_imem_pad.bin
-        cat lpddr4_pmu_train_imem_pad.bin ${STAGING_DIR}/boot/lpddr4_pmu_train_dmem.bin > lpddr4_pmu_train_fw.bin
-        cat ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} lpddr4_pmu_train_fw.bin > \
+                   ${STAGING_DIR}/boot/lpddr4_pmu_train_1d_imem.bin lpddr4_pmu_train_1d_imem_pad.bin
+        objcopy -I binary -O binary --pad-to 0x4000 --gap-fill=0x0 \
+                   ${STAGING_DIR}/boot/lpddr4_pmu_train_1d_dmem.bin lpddr4_pmu_train_1d_dmem_pad.bin
+        objcopy -I binary -O binary --pad-to 0x8000 --gap-fill=0x0 \
+                   ${STAGING_DIR}/boot/lpddr4_pmu_train_2d_imem.bin lpddr4_pmu_train_2d_imem_pad.bin
+        cat lpddr4_pmu_train_1d_imem_pad.bin lpddr4_pmu_train_1d_dmem_pad.bin > lpddr4_pmu_train_1d_fw.bin
+        cat lpddr4_pmu_train_2d_imem_pad.bin  ${STAGING_DIR}/boot/lpddr4_pmu_train_2d_dmem.bin > lpddr4_pmu_train_2d_fw.bin
+        cat ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} lpddr4_pmu_train_1d_fw.bin lpddr4_pmu_train_2d_fw.bin > \
                    u-boot-spl-ddr-${MACHINE}.bin-${UBOOT_CONFIG}
-        rm -f lpddr4_pmu_train_fw.bin lpddr4_pmu_train_imem_pad.bin
+        rm -f lpddr4_pmu_train_*fw.bin lpddr4_pmu_train_*_pad.bin
 
         # generate u-boot.its
         cp  ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/fsl-imx8mq-evk.dtb .
