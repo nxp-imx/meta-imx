@@ -8,4 +8,5 @@ PACKAGECONFIG_append_imxdrm = \
 SRC_URI_append_imxdrm = " \
     file://0001-NativeStateDRM-add-imx-drm-driver-support.patch \
     file://0002-GLStateEGL-Use-eglGetPlatformDisplayEXT-when-possibl.patch \
+    file://0003-drm-Initialize-the-page-flip-handler-to-0.patch \
 "
