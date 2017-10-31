@@ -14,13 +14,7 @@ SRC_URI[sha256sum] = "6e7216560d8af1380d412e853c6c050fff4eeb493d7b1bdb25d3312817
 #BRCM firmware git
 SRCREV = "8ce9046f5058fdd2c5271f86ccfc61bc5a248ae3"
 
-do_install() {
-    install -d ${D}${base_libdir}/firmware/imx
-    install -d ${D}${base_libdir}/firmware/bcm
-    install -d ${D}${sysconfdir}/firmware
-
-    cp -rfv firmware/* ${D}${base_libdir}/firmware/
-
+do_install_append() {
     # No need to do install for ddr & hdmi binaries
     if [ -d ${D}${base_libdir}/firmware/ddr ]; then
         rm -rf ${D}${base_libdir}/firmware/ddr
@@ -34,26 +28,6 @@ do_install() {
         rm -rf ${D}${base_libdir}/firmware/hifi4
     fi
 
-    #1BW_BCM43340
-    install -d ${D}${base_libdir}/firmware/bcm/1BW_BCM43340
-    cp -rfv git/brcm/1BW_BCM43340/*.bin ${D}${base_libdir}/firmware/bcm/1BW_BCM43340
-    cp -rfv git/brcm/1BW_BCM43340/*.hcd ${D}${sysconfdir}/firmware/
-
-    #1DX_BCM4343W
-    install -d ${D}${base_libdir}/firmware/bcm/1DX_BCM4343W
-    cp -rfv git/brcm/1DX_BCM4343W/*.bin ${D}${base_libdir}/firmware/bcm/1DX_BCM4343W
-    cp -rfv git/brcm/1DX_BCM4343W/*.hcd ${D}${sysconfdir}/firmware/
-
-    #SN8000_BCM43362
-    install -d ${D}${base_libdir}/firmware/bcm/SN8000_BCM43362
-    cp -rfv git/brcm/SN8000_BCM43362/*.bin ${D}${base_libdir}/firmware/bcm/SN8000_BCM43362
-    cp -rfv git/brcm/1DX_BCM4343W/*.hcd ${D}${sysconfdir}/firmware/
-
-    #ZP_BCM4339
-    install -d ${D}${base_libdir}/firmware/bcm/ZP_BCM4339
-    cp -rfv git/brcm/ZP_BCM4339/*.bin ${D}${base_libdir}/firmware/bcm/ZP_BCM4339
-    cp -rfv git/brcm/ZP_BCM4339/*.hcd ${D}${sysconfdir}/firmware/
-
     #1FD_BCM89359
     install -d ${D}${base_libdir}/firmware/bcm/1FD_BCM89359
     cp -rfv git/brcm/1FD_BCM89359/*.bin ${D}${base_libdir}/firmware/bcm/1FD_BCM89359
@@ -62,15 +36,6 @@ do_install() {
     #1CX_BCM4356
     install -d ${D}${base_libdir}/firmware/bcm/1CX_BCM4356
     cp -rfv git/brcm/1CX_BCM4356/fw_bcmdhd.bin ${D}${base_libdir}/firmware/bcm/1CX_BCM4356
-
-    mv ${D}${base_libdir}/firmware/epdc/ ${D}${base_libdir}/firmware/imx/epdc/
-    mv ${D}${base_libdir}/firmware/imx/epdc/epdc_ED060XH2C1.fw.nonrestricted ${D}${base_libdir}/firmware/imx/epdc/epdc_ED060XH2C1.fw
-
-    find ${D}${base_libdir}/firmware -type f -exec chmod 644 '{}' ';'
-    find ${D}${base_libdir}/firmware -type f -exec chown root:root '{}' ';'
-
-    # Remove files not going to be installed
-    find ${D}${base_libdir}/firmware/ -name '*.mk' -exec rm '{}' ';'
 }
 
 do_install_append_mx8 () {
