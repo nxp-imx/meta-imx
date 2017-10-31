@@ -119,11 +119,14 @@ do_compile () {
                  -out ${BOOT_CONFIG_MACHINE}
 
     elif [ "${IS_MX8QM}" = "1" ]; then
+        cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_0_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin m40_tcm.bin
+        cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_1_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin m41_tcm.bin
+
         # mkimage for i.MX8QM
         ${TOOLS_NAME} -soc ${SOC_TARGET} \
                  ${MX8_BOOT_OPTIONS} \
                  -c -scfw ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_MACHINE_NAME} \
-                 -m4 ${DEPLOY_DIR_IMAGE}/imx8qm_m4_0_TCM_hello_world.bin 0 0x34fe0000 -m4 ${DEPLOY_DIR_IMAGE}/imx8qm_m4_1_TCM_hello_world.bin 1 0x38fe0000 \
+                 -m4 m40_tcm.bin 0 0x34fe0000 -m4 m41_tcm.bin 1 0x38fe0000 \
                  -c -ap ${UBOOT_NAME_ATF} ${MX8_BOOT_CORE} 0x80000000 \
                  -out ${BOOT_CONFIG_MACHINE_NODCD}
 
@@ -131,7 +134,7 @@ do_compile () {
                  ${MX8_BOOT_OPTIONS} \
                  -c -dcd  ${DEPLOY_DIR_IMAGE}/${DCD_NAME} \
                  -scfw ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_MACHINE_NAME} \
-                 -m4 ${DEPLOY_DIR_IMAGE}/imx8qm_m4_0_TCM_hello_world.bin 0 0x34fe0000 -m4 ${DEPLOY_DIR_IMAGE}/imx8qm_m4_1_TCM_hello_world.bin 1 0x38fe0000 \
+                 -m4 m40_tcm.bin 0 0x34fe0000 -m4 m41_tcm.bin 1 0x38fe0000 \
                  -c -ap ${UBOOT_NAME_ATF} ${MX8_BOOT_CORE} 0x80000000 \
                  -out ${BOOT_CONFIG_MACHINE}
 
