@@ -1,46 +1,19 @@
-NXP's 4.9.11-1.0.0 Yocto Project BSP
+NXP's 4.9.51_8qm_beta1_8qxp_alpha Yocto Project BSP
 ================================================
 
 The following boards were tested in this release.
 
-   * NXP i.MX 6QuadPlus SABRE Device (imx6qpsabresd)
-   * NXP i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
-   * NXP i.MX 6UltraLite EVK (imx6ulevk)
-   * NXP i.MX 6ULL EVK (imx6ull14x14evk)
-   * NXP i.MX 7Dual SABRE Smart Device (imx7dsabresd)
-   * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
-   * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
-   * NXP i.MX 6Quad SABRE Smart Device (imx6qsabresd)
-   * NXP i.MX 6Quad SABRE Auto (imx6qsabreauto)
-   * NXP i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
-   * NXP i.MX 6DualLite SABRE Auto (iEmx6dlsabreauto)
-   * NXP i.MX 6SoloLite EVK (imx6slevk)
-   * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
-   * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
-   * NXP i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
-   * NXP i.MX 6SOLO SABRE Auto (imx6solosabreauto )
-   * NXP i.MX 7ULP EVK (imx7ulpevk) (this is Beta quality)
+   * NXP i.MX 8QuadMax LPDDR4 ARM2 (imx8qmlpddr4arm2)
+   * NXP i.MX 8QuadXPlus LPDDR4 ARM2 (imx8qxplpddr4arm2)
+   * NXP i.MX 8QuadXPlus MEK (imx8qxpmek)
+
 
  * i.MX Device Tree configurations for each machine
     Each machine files lists the associated device trees for that machine.
 
  * i.MX U-Boot configurations for each machine
-    imx6qpsabresd - sd, sata
-    imx6qpsabreauto - sd, eim-nor, nand, spi-nor, sata
-    imx7dsabresd - sd, qspi1, nand, epdc
-    imx6ulevk - sd, qspi1
-    imx6ullevk - sd
-    imx6sxsabresd - sd, qspi2, m4fastup, emmc
-    imx6sxsabreauto - sd, qspi1, nand
-    imx6qsabresd - sd, sata
-    imx6qsabreauto - sd, eim-nor, spi-nor, nand, sata
-    imx6dlsabresd - sd, epdc
-    imx6dlsabreauto - sd, eim-nor, spi-nor, nand
-    imx6solosabresd - sd
-    imx6solosabreauto - sd, eim-nor, spi-nor, nand
-    imx6slevk - sd, spi-nor, epdc
-    imx6sllevk - sd, epdc
-    imx7ulpevk - sd, emmc
+    imx8qm - sd, fspi
+    imx8qxp - sd, fspi
 
 
 Quick Start Guide
@@ -48,7 +21,7 @@ Quick Start Guide
 See the Freescale Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX NXP BSP repo
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-morty -m imx-4.1.33_7ulp_beta.xml
+$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-morty -m imx-4.9.51-mx8_beta1.xml
 
 Download the Yocto Project NXP Layers:
 $: repo sync
@@ -75,6 +48,7 @@ Note: DirectFB is no longer supported in i.MX graphic bilds.
    fsl-image-qt5-validation-imx provides a Qt5 image
 
 Here are some examples:
+(The example uses the imx6qsabresd MACHINE but substitute this with whatever you are using)
 
 Building X11
 ------------
