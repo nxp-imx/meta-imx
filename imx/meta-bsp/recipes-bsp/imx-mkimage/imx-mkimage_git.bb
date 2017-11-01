@@ -6,13 +6,10 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 SECTION = "BSP"
 
+require imx-mkimage_git.inc
+
 inherit native deploy
 DEPENDS = "zlib-native"
-
-IMX_MKIMAGE_SRC ?= "git://git.freescale.com/imx/imx-mkimage.git;protocol=git"
-SRCBRANCH ?= "master"
-SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH}"
-SRCREV = "05d3d4a7d74054887ec5d5aeb7d17a3b14870238"
 
 S = "${WORKDIR}/git"
 
