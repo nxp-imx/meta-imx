@@ -39,8 +39,6 @@ do_install () {
 do_deploy () {
     install -m 0644 ${S}/iMX8QM/imx8qm_dcd.cfg.tmp ${DEPLOYDIR}
     install -m 0644 ${S}/iMX8QX/imx8qx_dcd.cfg.tmp ${DEPLOYDIR}
-    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0777 ${S}/iMX8M/mkimage_fit_atf.sh  ${DEPLOYDIR}/${BOOT_TOOLS}
 }
 
 addtask deploy before do_build after do_install
