@@ -1,0 +1,220 @@
+From 4686bd7318121930acdda7b1d31602da63e36176 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Wed, 1 Nov 2017 14:22:59 +0800
+Subject: [PATCH 1/2] add HDR10 metadata type
+
+Upstream-Status: Inappropriate [i.MX specific]
+---
+ gst-libs/gst/video/Makefile.am         |   2 +
+ gst-libs/gst/video/gstvideohdr10meta.c | 104 +++++++++++++++++++++++++++++++++
+ gst-libs/gst/video/gstvideohdr10meta.h |  67 +++++++++++++++++++++
+ 3 files changed, 173 insertions(+)
+ create mode 100644 gst-libs/gst/video/gstvideohdr10meta.c
+ create mode 100644 gst-libs/gst/video/gstvideohdr10meta.h
+
+diff --git a/gst-libs/gst/video/Makefile.am b/gst-libs/gst/video/Makefile.am
+index a197a2f..eae73bf 100644
+--- a/gst-libs/gst/video/Makefile.am
++++ b/gst-libs/gst/video/Makefile.am
+@@ -36,6 +36,7 @@ libgstvideo_@GST_API_VERSION@_la_SOURCES = \
+ 	gstvideofilter.c 	\
+ 	convertframe.c   	\
+ 	gstvideoaffinetransformationmeta.c \
++	gstvideohdr10meta.c 	\
+ 	gstvideometa.c   	\
+ 	gstvideopool.c		\
+ 	videodirection.c	\
+@@ -73,6 +74,7 @@ libgstvideo_@GST_API_VERSION@include_HEADERS = \
+ 	gstvideofilter.h	\
+ 	gstvideometa.h		\
+ 	gstvideoaffinetransformationmeta.h \
++	gstvideohdr10meta.h	\
+ 	gstvideopool.h		\
+ 	videodirection.h 	\
+ 	videoorientation.h 	\
+diff --git a/gst-libs/gst/video/gstvideohdr10meta.c b/gst-libs/gst/video/gstvideohdr10meta.c
+new file mode 100644
+index 0000000..5b07ec3
+--- /dev/null
++++ b/gst-libs/gst/video/gstvideohdr10meta.c
+@@ -0,0 +1,104 @@
++/* GStreamer
++ * Copyright 2017 NXP
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++
++#include "gstvideohdr10meta.h"
++
++#include <string.h>
++
++GType
++gst_video_hdr10_meta_api_get_type (void)
++{
++  static volatile GType type = 0;
++  static const gchar *tags[] =
++      { GST_META_TAG_VIDEO_STR, GST_META_TAG_VIDEO_ORIENTATION_STR,
++    GST_META_TAG_VIDEO_ORIENTATION_STR, NULL
++  };
++
++  if (g_once_init_enter (&type)) {
++    GType _type =
++        gst_meta_api_type_register ("GstVideoHdr10MetaAPI", tags);
++    g_once_init_leave (&type, _type);
++  }
++  return type;
++}
++
++static gboolean
++gst_video_hdr10_meta_transform (GstBuffer * dest,
++    GstMeta * meta, GstBuffer * buffer, GQuark type, gpointer data)
++{
++  GstVideoHdr10Meta *dmeta, *smeta;
++
++  smeta = (GstVideoHdr10Meta *) meta;
++
++  if (GST_META_TRANSFORM_IS_COPY (type)) {
++    dmeta =
++        (GstVideoHdr10Meta *) gst_buffer_add_meta (dest,
++        GST_VIDEO_HDR10_META_INFO, NULL);
++
++    if (!dmeta)
++      return FALSE;
++
++    memcpy (&dmeta->hdr10meta, &smeta->hdr10meta, sizeof (GstHdr10Meta));
++
++  }
++  return TRUE;
++}
++
++static gboolean
++gst_video_hdr10_meta_init (GstMeta * meta, gpointer params,
++    GstBuffer * buffer)
++{
++  return TRUE;
++}
++
++const GstMetaInfo *
++gst_video_hdr10_meta_get_info (void)
++{
++  static const GstMetaInfo *info = NULL;
++
++  if (g_once_init_enter ((GstMetaInfo **) & info)) {
++    const GstMetaInfo *meta =
++        gst_meta_register (GST_VIDEO_HDR10_META_API_TYPE,
++        "GstVideoHdr10Meta",
++        sizeof (GstVideoHdr10Meta),
++        gst_video_hdr10_meta_init,
++        NULL,
++        gst_video_hdr10_meta_transform);
++    g_once_init_leave ((GstMetaInfo **) & info, (GstMetaInfo *) meta);
++  }
++  return info;
++}
++
++GstVideoHdr10Meta *
++gst_buffer_add_video_hdr10_meta (GstBuffer * buffer)
++{
++  GstVideoHdr10Meta *meta;
++
++  g_return_val_if_fail (buffer != NULL, NULL);
++
++  meta =
++      (GstVideoHdr10Meta *) gst_buffer_add_meta (buffer,
++      GST_VIDEO_HDR10_META_INFO, NULL);
++
++  if (!meta)
++    return NULL;
++
++  return meta;
++}
+diff --git a/gst-libs/gst/video/gstvideohdr10meta.h b/gst-libs/gst/video/gstvideohdr10meta.h
+new file mode 100644
+index 0000000..e47635a
+--- /dev/null
++++ b/gst-libs/gst/video/gstvideohdr10meta.h
+@@ -0,0 +1,67 @@
++/* GStreamer
++ * Copyright 2017 NXP
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, write to the
++ * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
++ * Boston, MA 02110-1301, USA.
++ */
++
++#ifndef __GST_VIDEO_HDR10_META_H__
++#define __GST_VIDEO_HDR10_META_H__
++
++#include <gst/gst.h>
++#include <gst/video/video.h>
++
++G_BEGIN_DECLS
++
++#define GST_VIDEO_HDR10_META_API_TYPE (gst_video_hdr10_meta_api_get_type())
++#define GST_VIDEO_HDR10_META_INFO  (gst_video_hdr10_meta_get_info())
++
++typedef struct _GstHdr10Meta GstHdr10Meta;
++typedef struct _GstVideoHdr10Meta GstVideoHdr10Meta;
++
++struct _GstHdr10Meta
++{
++  guint redPrimary[2];
++  guint greenPrimary[2];
++  guint bluePrimary[2];
++  guint whitePoint[2];
++  guint maxMasteringLuminance;
++  guint minMasteringLuminance;
++  guint maxContentLightLevel;
++  guint maxFrameAverageLightLevel;
++  guint colourPrimaries;
++  guint transferCharacteristics;
++  guint matrixCoeffs;
++  guint chromaSampleLocTypeTopField;
++  guint chromaSampleLocTypeBottomField;
++};
++
++struct _GstVideoHdr10Meta
++{
++  GstMeta meta;
++
++  GstHdr10Meta hdr10meta;
++};
++
++GType gst_video_hdr10_meta_api_get_type          (void);
++const GstMetaInfo *gst_video_hdr10_meta_get_info (void);
++
++#define gst_buffer_get_video_hdr10_meta(b) \
++    ((GstVideoHdr10Meta *)gst_buffer_get_meta((b),GST_VIDEO_HDR10_META_API_TYPE))
++GstVideoHdr10Meta *gst_buffer_add_video_hdr10_meta (GstBuffer * buffer);
++
++G_END_DECLS
++
++#endif /* __GST_VIDEO_HDR10_META_H__ */
+-- 
+1.9.1
+

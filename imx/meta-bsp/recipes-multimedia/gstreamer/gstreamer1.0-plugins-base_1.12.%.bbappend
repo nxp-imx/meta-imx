@@ -27,4 +27,6 @@ SRC_URI_append = " file://0001-basetextoverlay-make-memory-copy-when-video-buffe
                    file://0011-Disable-orc-optimization-for-lib-video-in-plugins-ba.patch \
                    file://0012-Remove-phymem-allocator-from-base-to-bad.patch \
                    file://0013-dmabuf-set-fd-memory-to-keep-mapped.patch \
+                   file://0014-add-HDR10-metadata-type.patch \
+                   file://0015-Add-10bit-packed-NV12-format.patch \
 "

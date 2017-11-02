@@ -1,0 +1,78 @@
+From 60374f466afeb2d7b2748376877ce790fc341cc0 Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Thu, 2 Nov 2017 10:43:49 +0800
+Subject: [PATCH 2/2] Add 10bit packed NV12 format
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+---
+ gst-libs/gst/video/video-format.c | 3 +++
+ gst-libs/gst/video/video-format.h | 4 +++-
+ gst-libs/gst/video/video-info.c   | 8 ++++++++
+ 3 files changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/gst-libs/gst/video/video-format.c b/gst-libs/gst/video/video-format.c
+index 58176df..5944466 100644
+--- a/gst-libs/gst/video/video-format.c
++++ b/gst-libs/gst/video/video-format.c
+@@ -4825,6 +4825,9 @@ static const VideoFormat formats[] = {
+       PSTR244, PLANE011, OFFS001, SUB420, PACK_P010_10BE),
+   MAKE_YUV_LE_FORMAT (P010_10LE, "raw video", 0x00000000, DPTH10_10_10_HI,
+       PSTR244, PLANE011, OFFS001, SUB420, PACK_P010_10LE),
++  /* FIXME: support mscale hdr10 video format */
++  MAKE_YUV_LE_FORMAT (NV12_10LE, "raw video", 0x00000000, DPTH10_10_10,
++      PSTR244, PLANE011, OFFS001, SUB420, PACK_P010_10LE),
+   MAKE_YUV_FORMAT (IYU2, "raw video", GST_MAKE_FOURCC ('I', 'Y', 'U', '2'),
+       DPTH888, PSTR333, PLANE0, OFFS102, SUB444, PACK_IYU2),
+   MAKE_YUV_FORMAT (VYUY, "raw video", GST_MAKE_FOURCC ('V', 'Y', 'U', 'Y'),
+diff --git a/gst-libs/gst/video/video-format.h b/gst-libs/gst/video/video-format.h
+index 5b651bc..da4270e 100644
+--- a/gst-libs/gst/video/video-format.h
++++ b/gst-libs/gst/video/video-format.h
+@@ -97,6 +97,7 @@ G_BEGIN_DECLS
+  * @GST_VIDEO_FORMAT_NV61: planar 4:2:2 YUV with interleaved VU plane (Since: 1.6)
+  * @GST_VIDEO_FORMAT_P010_10BE: planar 4:2:0 YUV with interleaved UV plane, 10 bits per channel (Since: 1.10)
+  * @GST_VIDEO_FORMAT_P010_10LE: planar 4:2:0 YUV with interleaved UV plane, 10 bits per channel (Since: 1.10)
++ * @GST_VIDEO_FORMAT_NV12_10LE: planar 4:2:0 YUV with interleaved UV plane, 10 bits per channel (for mscale vpu)
+  * @GST_VIDEO_FORMAT_GBRA: planar 4:4:4:4 ARGB, 8 bits per channel (Since: 1.12)
+  * @GST_VIDEO_FORMAT_GBRA_10BE: planar 4:4:4:4 ARGB, 10 bits per channel (Since: 1.12)
+  * @GST_VIDEO_FORMAT_GBRA_10LE: planar 4:4:4:4 ARGB, 10 bits per channel (Since: 1.12)
+@@ -177,6 +178,7 @@ typedef enum {
+   GST_VIDEO_FORMAT_NV61,
+   GST_VIDEO_FORMAT_P010_10BE,
+   GST_VIDEO_FORMAT_P010_10LE,
++  GST_VIDEO_FORMAT_NV12_10LE,
+   GST_VIDEO_FORMAT_IYU2,
+   GST_VIDEO_FORMAT_VYUY,
+   GST_VIDEO_FORMAT_GBRA,
+@@ -531,7 +533,7 @@ gconstpointer  gst_video_format_get_palette          (GstVideoFormat format, gsi
+   "AYUV64, r210, I420_10BE, I420_10LE, I422_10BE, I422_10LE, Y444_10BE, " \
+   "Y444_10LE, GBR, GBR_10BE, GBR_10LE, NV16, NV24, NV12_64Z32, A420_10BE, " \
+   "A420_10LE, A422_10BE, A422_10LE, A444_10BE, A444_10LE, NV61, P010_10BE, " \
+-  "P010_10LE, IYU2, VYUY, GBRA, GBRA_10BE, GBRA_10LE, GBR_12BE, GBR_12LE, " \
++  "P010_10LE, NV12_10LE, IYU2, VYUY, GBRA, GBRA_10BE, GBRA_10LE, GBR_12BE, GBR_12LE, " \
+   "GBRA_12BE, GBRA_12LE, I420_12BE, I420_12LE, I422_12BE, I422_12LE, " \
+   "Y444_12BE, Y444_12LE }"
+ 
+diff --git a/gst-libs/gst/video/video-info.c b/gst-libs/gst/video/video-info.c
+index 7685b0e..b244cfb 100644
+--- a/gst-libs/gst/video/video-info.c
++++ b/gst-libs/gst/video/video-info.c
+@@ -1006,6 +1006,14 @@ fill_planes (GstVideoInfo * info)
+       cr_h = GST_ROUND_UP_2 (height) / 2;
+       info->size = info->offset[1] + info->stride[0] * cr_h;
+       break;
++    case GST_VIDEO_FORMAT_NV12_10LE:
++      info->stride[0] = GST_ROUND_UP_16 (width * 5 / 4);
++      info->stride[1] = info->stride[0];
++      info->offset[0] = 0;
++      info->offset[1] = info->stride[0] * GST_ROUND_UP_16 (height);
++      cr_h = GST_ROUND_UP_16 (height) / 2;
++      info->size = info->offset[1] + info->stride[0] * cr_h;
++      break;
+ 
+     case GST_VIDEO_FORMAT_ENCODED:
+       break;
+-- 
+1.9.1
+
