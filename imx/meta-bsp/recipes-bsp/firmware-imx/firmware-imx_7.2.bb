@@ -38,15 +38,6 @@ do_install_append() {
     cp -rfv git/brcm/1CX_BCM4356/fw_bcmdhd.bin ${D}${base_libdir}/firmware/bcm/1CX_BCM4356
 }
 
-do_install_append_mx8 () {
-    #ddr/synopsys
-    install -d ${STAGING_DIR}/boot
-    cp -rfv firmware/ddr/synopsys/lpddr4_pmu_train_*.bin ${STAGING_DIR}/boot
-
-    #hdmi/cadence
-    cp -rfv firmware/hdmi/cadence/hdmi_imx8m.bin ${STAGING_DIR}/boot
-}
-
 IS_8MQ = "0"
 IS_8MQ_mx8mq = "1"
 inherit deploy
@@ -54,7 +45,10 @@ addtask deploy before do_build after do_install
 do_deploy () {
     #
     if [ "${IS_8MQ}" = "1" ]; then
-    install -m 0644 ${S}/firmware/ddr/synopsys/lpddr4_pmu_train_*.bin ${DEPLOYDIR}
-    install -m 0644 ${S}/firmware/hdmi/cadence/hdmi_imx8m.bin ${DEPLOYDIR}
+        # Deploy ddr/synopsys
+        install -m 0644 ${S}/firmware/ddr/synopsys/lpddr4_pmu_train_*.bin ${DEPLOYDIR}
+
+        # Deploy hdmi/cadence
+        install -m 0644 ${S}/firmware/hdmi/cadence/hdmi_imx8m.bin ${DEPLOYDIR}
     fi
 }

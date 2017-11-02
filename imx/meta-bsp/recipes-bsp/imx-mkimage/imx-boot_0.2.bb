@@ -48,7 +48,7 @@ IMXBOOT_TARGETS_mx8mq ?= "flash_spl_uboot flash_hdmi_spl_uboot"
 COMPILE_DEP_TASKS ?= ""
 COMPILE_DEP_TASKS_mx8qm = "imx-sc-firmware:do_deploy imx-m4-demos:do_deploy"
 COMPILE_DEP_TASKS_mx8qxp = "imx-sc-firmware:do_deploy imx-m4-demos:do_deploy"
-COMPILE_DEP_TASKS_mx8mq = "firmware-imx:do_install"
+COMPILE_DEP_TASKS_mx8mq = "firmware-imx:do_deploy"
 
 do_compile[depends] = " \
                        imx-atf:do_deploy \
@@ -60,8 +60,8 @@ S = "${WORKDIR}/git"
 do_compile () {
     if [ "${SOC_TARGET}" = "iMX8M" ]; then
         echo 8MQ boot binary build
-        cp ${STAGING_DIR}/boot/lpddr4_pmu_train_*.bin            ${S}/${SOC_TARGET}/
-        cp ${STAGING_DIR}/boot/hdmi_imx8m.bin                    ${S}/${SOC_TARGET}/
+        cp ${DEPLOY_DIR_IMAGE}/lpddr4_pmu_train_*.bin            ${S}/${SOC_TARGET}/
+        cp ${DEPLOY_DIR_IMAGE}/hdmi_imx8m.bin                    ${S}/${SOC_TARGET}/
         cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${S}/${SOC_TARGET}/u-boot-spl.bin
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/fsl-imx8mq-evk.dtb  ${S}/${SOC_TARGET}/
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin    ${S}/${SOC_TARGET}/
@@ -106,7 +106,7 @@ do_install () {
     done
 }
 
-DEPLOYDIR_IMXBOOT = "${BOOT_TOOLS}/${SOC_TARGET}"
+DEPLOYDIR_IMXBOOT = "${BOOT_TOOLS}"
 do_deploy () {
     install -d ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
@@ -114,8 +114,8 @@ do_deploy () {
     install -m 0644 ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
     if [ "${SOC_TARGET}" = "iMX8M" ]; then
         install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-        install -m 0644 ${STAGING_DIR}/boot/lpddr4_pmu_train_*.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-        install -m 0644 ${STAGING_DIR}/boot/hdmi*.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/lpddr4_pmu_train_*.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/hdmi*.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
         install -m 0755 ${S}/${SOC_TARGET}/${TOOLS_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
     else
