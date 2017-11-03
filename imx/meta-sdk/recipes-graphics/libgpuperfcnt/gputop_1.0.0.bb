@@ -25,7 +25,7 @@ do_install_append() {
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 PACKAGES = "${PN}"
 FILES_${PN} += "${mandir}/*"
-INSANE_SKIP_${PN} += "installed-vs-shipped dev-so rpaths"
+INSANE_SKIP_${PN} += "installed-vs-shipped dev-so rpaths dev-deps"
 
 # Compatible only with i.MX with GPU
 COMPATIBLE_MACHINE        = "(^$)"
