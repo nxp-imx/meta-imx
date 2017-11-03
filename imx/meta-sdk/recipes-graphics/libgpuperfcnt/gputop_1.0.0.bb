@@ -7,7 +7,7 @@ DEPENDS = "libgpuperfcnt"
 GPUTOP_SRC ?= "git://git.freescale.com/imx/gputop.git;protocol=git"
 SRCBRANCH = "release"
 SRC_URI = "${GPUTOP_SRC};branch=${SRCBRANCH} "
-SRCREV = "b8a6fba7a2d076cae14f635b31ddd1a5d9500813"
+SRCREV = "b8a6fba7a2d076cae14f635b31ddd1a5d9500813" 
 
 S = "${WORKDIR}/git"
 
