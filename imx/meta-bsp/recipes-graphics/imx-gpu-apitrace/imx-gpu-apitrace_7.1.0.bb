@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50"
 DEPENDS = "imx-gpu-viv zlib libpng procps"
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
 
-APITRACE_SRC ?= "git://git.freescale.com/imx/apitrace-imx.git;protocol=git"
-SRCBRANCH = "imx_4.9.11_imx8_alpha"
+APITRACE_SRC ?= "git://source.codeaurora.org/external/imx/apitrace-imx.git;protocol=https"
+SRCBRANCH = "imx_4.9.51_imx8_beta1"
 SRC_URI_imxgpu = "${APITRACE_SRC};branch=${SRCBRANCH} "
 SRCREV_imxgpu = "759c5b7a004d1807e15a7f587023dc2e459b3509"
 
