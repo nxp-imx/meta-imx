@@ -29,7 +29,7 @@ RDEPENDS_${PN} = "imx-gpu-viv"
 do_install_append () {
     # replace .so with symlink
     rm ${D}${libdir}/libgpuperfcnt.so
-    ln -s libgpuperfcnt.so.0 ${D}${libdir}/libgpuperfcnt.so
+    ln -s libgpuperfcnt.so.1.0.0 ${D}${libdir}/libgpuperfcnt.so
 }
 
 # Compatible only with i.MX with GPU
