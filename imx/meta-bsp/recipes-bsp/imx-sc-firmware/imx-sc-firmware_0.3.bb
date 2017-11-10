@@ -10,8 +10,8 @@ inherit fsl-eula-unpack pkgconfig deploy
 
 SRC_URI = "${MX8_DOWNLOADS}/${PN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "59528f0b2d881357f9305e8bbd834681"
-SRC_URI[sha256sum] = "69b0fa91cf534c7f9aa0007dc2999ede33a3ff3033b410dd38f33e3c7ce3ebc0"
+SRC_URI[md5sum] = "f386ed71b03c7b47984daa50429b538f"
+SRC_URI[sha256sum] = "722ebf745e1814658680a52d257b7985c21b9d8c06ec9d12bd003acba3c3a3d6"
 
 S = "${WORKDIR}/${PN}-${PV}"
 
