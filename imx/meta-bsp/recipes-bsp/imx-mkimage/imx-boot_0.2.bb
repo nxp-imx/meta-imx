@@ -115,7 +115,7 @@ do_deploy () {
     if [ "${SOC_TARGET}" = "iMX8M" ]; then
         install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         install -m 0644 ${DEPLOY_DIR_IMAGE}/lpddr4_pmu_train_*.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/hdmi*.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/signed_hdmi*.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
         install -m 0755 ${S}/${SOC_TARGET}/${TOOLS_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
     else
