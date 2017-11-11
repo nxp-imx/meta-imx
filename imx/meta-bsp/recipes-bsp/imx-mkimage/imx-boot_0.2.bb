@@ -61,7 +61,7 @@ do_compile () {
     if [ "${SOC_TARGET}" = "iMX8M" ]; then
         echo 8MQ boot binary build
         cp ${DEPLOY_DIR_IMAGE}/lpddr4_pmu_train_*.bin            ${S}/${SOC_TARGET}/
-        cp ${DEPLOY_DIR_IMAGE}/hdmi_imx8m.bin                    ${S}/${SOC_TARGET}/
+        cp ${DEPLOY_DIR_IMAGE}/signed_hdmi_imx8m.bin             ${S}/${SOC_TARGET}/
         cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${S}/${SOC_TARGET}/u-boot-spl.bin
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/fsl-imx8mq-evk.dtb  ${S}/${SOC_TARGET}/
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin    ${S}/${SOC_TARGET}/
