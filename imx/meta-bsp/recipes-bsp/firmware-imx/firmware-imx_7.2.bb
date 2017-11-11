@@ -49,6 +49,6 @@ do_deploy () {
         install -m 0644 ${S}/firmware/ddr/synopsys/lpddr4_pmu_train_*.bin ${DEPLOYDIR}
 
         # Deploy hdmi/cadence
-        install -m 0644 ${S}/firmware/hdmi/cadence/hdmi_imx8m.bin ${DEPLOYDIR}
+        install -m 0644 ${S}/firmware/hdmi/cadence/signed_hdmi_imx8m.bin ${DEPLOYDIR}
     fi
 }
