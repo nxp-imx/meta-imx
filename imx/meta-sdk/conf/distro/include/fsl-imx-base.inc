@@ -16,7 +16,7 @@ LOCALCONF_VERSION = "1"
 IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch bluez"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
-IMAGE_FSTYPES += "tar.bz2 ext4"
+IMAGE_FSTYPES = "tar.bz2 ext4 sdcard.bz2"
 
 BBMASK += "meta-freescale/recipes-graphics/wayland/weston_%.bbappend"
 BBMASK += "meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium_52.0.2743.76.bbappend"
