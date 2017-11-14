@@ -1,7 +1,17 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-
-SRC_URI_append = " file://0001-Need-to-check-if-pa-stream-is-still-valid.patch \
-                   file://0002-Fix-aacpase-error-tolerance-issue.patch \
-                   file://0003-MMFMWK-7274-mx8dv-Enable-camera-on-mx8dv.patch \
-                   file://0004-gstaacparse-Fix-adif-aac-file-read-channel-progile-i.patch \
+# Use i.MX fork of GST for customizations
+SRC_URI_remove_imx = " \
+    http://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz \
+    file://0001-gstrtpmp4gpay-set-dafault-value-for-MPEG4-without-co.patch \
 "
+
+GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
+SRCBRANCH = "imx-1.12.x"
+
+SRC_URI_append_imx = " \
+    ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
+"
+SRCREV_imx = "${AUTOREV}"
+
+EXTRA_AUTORECONF = ""
+
+S_imx = "${WORKDIR}/git"

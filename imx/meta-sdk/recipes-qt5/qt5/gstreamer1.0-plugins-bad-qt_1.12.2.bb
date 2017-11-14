@@ -38,13 +38,20 @@ PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-
 PACKAGECONFIG[wayland] = "--disable-wayland --disable-x11,--disable-wayland,wayland qtwayland"
 PACKAGECONFIG[qt5] = ",--disable-qt,qtbase qtdeclarative qtx11extras"
 
+# Use i.MX fork of GST for customizations
+GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
+SRCBRANCH = "imx-1.12.x"
+
 SRC_URI = " \
-    http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \
+    ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
     file://configure-allow-to-disable-libssh2.patch \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
-    file://0002-Fix-for-gl-plugin-not-built-in-wayland-backend.patch \
-    file://0003-qml-add-EGL-platform-support-for-x11-backend.patch \
 "
+SRCREV = "${AUTOREV}"
+
+# This remove "--exclude=autopoint" option from autoreconf argument to avoid
+# configure.ac:30: error: required file './ABOUT-NLS' not found
+EXTRA_AUTORECONF = ""
 
 # remove the duplicate libs except qtsink
 do_install_append() {
@@ -56,7 +63,7 @@ do_install_append() {
     fi
 }
 
-S = "${WORKDIR}/gst-plugins-bad-1.12.2"
+S = "${WORKDIR}/git"
 
 INSANE_SKIP_gstreamer1.0-plugins-bad-qt-qmlgl += "build-deps"
 
