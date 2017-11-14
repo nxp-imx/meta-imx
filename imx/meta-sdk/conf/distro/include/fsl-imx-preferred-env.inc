@@ -53,12 +53,9 @@ PREFERRED_PROVIDER_virtual/libgles1_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx7ulp = "imx-gpu-viv"
 
-GRAPHICS_V6        ?= "6.2.4.p0"
-GRAPHICS_V6_SUFFIX = "aarch32"
-GRAPHICS_V6_SUFFIX_mx8 = "aarch64"
-
-GRAPHICS_VERSION               = "${GRAPHICS_V6}"
-GRAPHICS_VERSION_SUFFIX        = "${GRAPHICS_V6_SUFFIX}"
+GRAPHICS_VERSION            ?= "6.2.4.p0.1"
+GRAPHICS_VERSION_SUFFIX      = "aarch32"
+GRAPHICS_VERSION_SUFFIX_mx8  = "aarch64"
 
 PREFERRED_VERSION_imx-gpu-viv               = "${GRAPHICS_VERSION}-${GRAPHICS_VERSION_SUFFIX}"
 PREFERRED_VERSION_xf86-video-imxfb-vivante  = "${GRAPHICS_VERSION}"
