@@ -13,4 +13,8 @@ SRC_URI[sha256sum] = "d385c3f90876241343f09e45f4e5033a6a05861b971c63d1f6d512371f
 
 inherit cmake
 
+do_configure_prepend() {
+    sed -i 's,ASSIMP_LIB_INSTALL_DIR "lib",ASSIMP_LIB_INSTALL_DIR "${baselib}",' ${S}/CMakeLists.txt
+}
+
 FILES_${PN}-dev += "${libdir}/cmake"
