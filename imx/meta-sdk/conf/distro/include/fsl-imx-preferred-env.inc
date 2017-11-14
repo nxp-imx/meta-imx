@@ -58,7 +58,7 @@ GRAPHICS_VERSION_SUFFIX      = "aarch32"
 GRAPHICS_VERSION_SUFFIX_mx8  = "aarch64"
 
 PREFERRED_VERSION_imx-gpu-viv               = "${GRAPHICS_VERSION}-${GRAPHICS_VERSION_SUFFIX}"
-PREFERRED_VERSION_xf86-video-imxfb-vivante  = "${GRAPHICS_VERSION}"
+PREFERRED_VERSION_xf86-video-imx-vivante    = "${GRAPHICS_VERSION}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${GRAPHICS_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${GRAPHICS_VERSION}"
 
