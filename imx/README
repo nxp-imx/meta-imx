@@ -82,6 +82,21 @@ Building Wayland-Weston (wayland)
 To run the QT5 examples use the following parameters:
 <QT5 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
 
+Building with Multilib support
+---------------------------
+Yocto is able to build libraries for different target optimizations, combing those in one system image,
+allowing the user to run both 32-bit and 64-bit applications.
+Here is an example to add multilib support (lib32).
+
+In local.conf
+- Define multilib targets
+require conf/multilib.conf
+MULTILIBS = "multilib:lib32"
+DEFAULTTUNE_virtclass-multilib-lib32 = "armv7athf-neon"
+
+- 32-bit libraries to be added into the image
+IMAGE_INSTALL_append = "lib32-glibc lib32-libgcc lib32-libstdc++"
+
 Hardware Floating Point
 -----------------------
 This release enables hardware floating point by default.  This feature is enabled in both the machine 
