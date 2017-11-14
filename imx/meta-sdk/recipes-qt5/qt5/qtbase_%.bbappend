@@ -47,6 +47,9 @@ PACKAGECONFIG_WAYLAND ?= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xk
 PACKAGECONFIG += "${PACKAGECONFIG_WAYLAND}"
 
 do_install_append () {
+    if ls ${D}${libdir}/pkgconfig/Qt5*.pc >/dev/null 2>&1; then
+        sed -i 's,-L${STAGING_DIR_HOST}/usr/lib,,' ${D}${libdir}/pkgconfig/Qt5*.pc
+    fi
     install -d ${D}${sysconfdir}/profile.d/
     install -m 0755 ${WORKDIR}/qt5-${IMX_BACKEND}.sh ${D}${sysconfdir}/profile.d/qt5.sh
 }

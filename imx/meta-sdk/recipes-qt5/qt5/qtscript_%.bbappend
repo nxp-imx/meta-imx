@@ -4,6 +4,3 @@ if ls ${D}${libdir}/pkgconfig/Qt5*.pc >/dev/null 2>&1; then
 fi
 }
 
-COMPATIBLE_MACHINE_aarch64 = "(.*)"
-
-
