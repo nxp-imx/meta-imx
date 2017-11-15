@@ -7,6 +7,6 @@ GST1.0-LIBAV_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-libav.git;pr
 SRCBRANCH = "imx-1.12.x"
 
 SRC_URI_append_imx = " ${GST1.0-LIBAV_SRC};branch=${SRCBRANCH} "
-SRCREV_imx = "${AUTOREV}"
+SRCREV_imx = "7aa0c9e37183ec67e41e7780dbf223b381cc2788"
 
 S_imx = "${WORKDIR}/git"
