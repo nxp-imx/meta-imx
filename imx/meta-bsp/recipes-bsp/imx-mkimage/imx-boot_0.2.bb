@@ -41,7 +41,9 @@ SOC_TARGET_mx8qm  = "iMX8QM"
 SOC_TARGET_mx8qxp = "iMX8QX"
 SOC_TARGET_mx8mq  = "iMX8M"
 
-IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', 'flash flash_dcd flash_multi_cores', d)}"
+IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', \
+                       bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
+                                                                 'flash flash_dcd flash_multi_cores', d), d)}"
 IMXBOOT_TARGETS_mx8mq ?= "flash_spl_uboot flash_hdmi_spl_uboot"
 
 # Inter-Task dependeency for do_compile task
