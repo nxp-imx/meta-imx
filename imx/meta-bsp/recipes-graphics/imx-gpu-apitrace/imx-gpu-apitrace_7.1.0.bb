@@ -7,7 +7,7 @@ DEPENDS_append_imxgpu2d = " virtual/libg2d"
 APITRACE_SRC ?= "git://source.codeaurora.org/external/imx/apitrace-imx.git;protocol=https"
 SRCBRANCH = "imx_4.9.51_imx8_beta1"
 SRC_URI_imxgpu = "${APITRACE_SRC};branch=${SRCBRANCH} "
-SRCREV_imxgpu = "759c5b7a004d1807e15a7f587023dc2e459b3509"
+SRCREV_imxgpu = "9281b2c2f2766caf3529df347289128470318537"
 
 S = "${WORKDIR}/git"
 
