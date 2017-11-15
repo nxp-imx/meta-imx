@@ -23,7 +23,7 @@ SRCBRANCH = "imx-1.12.x"
 SRC_URI_append_imx = " \
     ${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
 "
-SRCREV_imx = "${AUTOREV}"
+SRCREV_imx = "aedf923e6e8acace13cd8f71efa651b8ca343f01"
 
 EXTRA_AUTORECONF = ""
 
