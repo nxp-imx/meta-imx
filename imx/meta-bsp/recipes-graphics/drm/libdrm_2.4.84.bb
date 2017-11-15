@@ -16,8 +16,8 @@ SRC_URI = "http://dri.freedesktop.org/libdrm/${BP}.tar.bz2 \
            file://0001-configure.ac-Allow-explicit-enabling-of-cunit-tests.patch \
           "
 
-SRC_URI[md5sum] = "5e676f903bdb245878383334dca4cc33"
-SRC_URI[sha256sum] = "ca4d3a4705be2ec289f9df7cfa871f5e02fa43d0f653622c9d9d428959143e78"
+SRC_URI[md5sum] = "35b9544bc2ad864acd1abaa1a2b99092"
+SRC_URI[sha256sum] = "7ae9c24d91139ac9a2cdee06fe46dbe1c401a1eda1c0bd2a6d1ecf72f479e0aa"
 
 # IMX: Remove manpages which is added in pyro
 #inherit autotools pkgconfig manpages
