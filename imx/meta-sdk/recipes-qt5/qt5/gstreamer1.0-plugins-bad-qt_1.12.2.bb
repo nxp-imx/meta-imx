@@ -47,7 +47,7 @@ SRC_URI = " \
     file://configure-allow-to-disable-libssh2.patch \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
 "
-SRCREV = "${AUTOREV}"
+SRCREV = "40a0d2688ae41a14d388ab3a83499972a8d92dc8"
 
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
