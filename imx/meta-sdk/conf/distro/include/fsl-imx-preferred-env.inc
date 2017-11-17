@@ -44,7 +44,6 @@ DEFAULTTUNE_mx7ulp = "cortexa7hf-neon"
 
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
-
 # preferred versions of recipes-graphics
 PREFERRED_PROVIDER_virtual/libg2d_mx6 = "imx-gpu-g2d"
 PREFERRED_PROVIDER_virtual/libg2d_mx7ulp = "imx-gpu-g2d"
@@ -76,3 +75,11 @@ UBOOT_SUFFIX_mx6ul = "imx"
 SPL_BINARY_mx6ul = ""
 UBOOT_MAKE_TARGET_mx6ul = "u-boot.imx"
 
+PREFERRED_PROVIDER_virtual/imxvpu_mx6q = "imx-vpu"
+PREFERRED_PROVIDER_virtual/imxvpu_mx6d = "imx-vpu"
+PREFERRED_PROVIDER_virtual/imxvpu_mx8mq = "imx-vpu-hantro"
+PREFERRED_PROVIDER_virtual/imxvpu_mx7  = ""
+PREFERRED_PROVIDER_virtual/imxvpu_mx6sl = ""
+PREFERRED_PROVIDER_virtual/imxvpu_mx6sx = ""
+PREFERRED_PROVIDER_virtual/imxvpu_mx6ul = ""
+PREFERRED_PROVIDER_virtual/imxvpu_mx6sll = ""
