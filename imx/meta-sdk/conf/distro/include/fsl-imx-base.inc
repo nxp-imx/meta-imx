@@ -88,6 +88,3 @@ WARN_TO_ERROR_QA = "already-stripped compile-host-path install-host-path \
                     useless-rpaths"
 WARN_QA_remove = "${WARN_TO_ERROR_QA}"
 ERROR_QA_append = " ${WARN_TO_ERROR_QA}"
-
-MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"
-MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx8 = "1"
