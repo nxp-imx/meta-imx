@@ -13,7 +13,7 @@ ATF_SRC ?= "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https"
 ATF_BRANCH = "imx_1.4.y"
 
 SRC_URI = "${ATF_SRC};branch=${ATF_BRANCH}"
-SRCREV = "93dd1cc9633d6731a4f3bdfddf2da8db2585bc28"
+SRCREV = "dc624d9bca563a1295d3c888dcee31ead889d3d2"
 
 S = "${WORKDIR}/git"
 
