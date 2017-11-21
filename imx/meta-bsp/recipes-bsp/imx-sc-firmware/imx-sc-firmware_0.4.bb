@@ -8,7 +8,7 @@ SECTION = "BSP"
 
 inherit fsl-eula-unpack pkgconfig deploy
 
-SRC_URI = "${MX8_DOWNLOADS}/${PN}-${PV}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 SRC_URI[md5sum] = "ddf3fb163e48d1e9034cf2730b4698df"
 SRC_URI[sha256sum] = "8af0b019a9a239e9300c23aff7cb2d4dd83c850eced40efbac704cb10d53cd6e"

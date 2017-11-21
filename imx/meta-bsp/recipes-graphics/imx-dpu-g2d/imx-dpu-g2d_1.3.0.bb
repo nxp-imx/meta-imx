@@ -10,7 +10,7 @@ RDEPENDS_${PN} = "libgal-imx"
 
 PROVIDES += "virtual/libg2d"
 
-SRC_URI = "${MX8_DOWNLOADS}/${PN}-${PV}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 S="${WORKDIR}/${PN}-${PV}"
 
