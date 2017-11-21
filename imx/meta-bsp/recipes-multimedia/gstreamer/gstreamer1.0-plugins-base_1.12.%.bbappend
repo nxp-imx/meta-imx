@@ -3,9 +3,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 PACKAGECONFIG_append = " pango "
 
 # ion allocator will be enabled only when detecting the ion.h exists, which is built out from kernel.
-# For now, ion allocatior is supported on mx7ulp & mx8
-DEPENDS_append_mx7ulp = " virtual/kernel"
-DEPENDS_append_mx8 = " virtual/kernel"
+# Now, ion allocator can be supported on all i.MX platform
+DEPENDS_append = " virtual/kernel"
 
 # Remove gio-unix-2.0 as it does not seem to exist anywhere
 PACKAGECONFIG_remove = "gio-unix-2.0"
