@@ -1,8 +1,9 @@
-NXP's 4.9.51_8qm_beta1_8qxp_alpha Yocto Project BSP
-================================================
+i.MX Linux Yocto Project BSP 4.9.51_8mq_beta Release
+=====================================================
 
 The following boards were tested in this release.
 
+   * NXP i.MX 8M EVK (imx8mqevk)
    * NXP i.MX 8QuadMax LPDDR4 ARM2 (imx8qmlpddr4arm2)
    * NXP i.MX 8QuadXPlus LPDDR4 ARM2 (imx8qxplpddr4arm2)
    * NXP i.MX 8QuadXPlus MEK (imx8qxpmek)
@@ -12,23 +13,24 @@ The following boards were tested in this release.
     Each machine files lists the associated device trees for that machine.
 
  * i.MX U-Boot configurations for each machine
+    imx8mq - sd
     imx8qm - sd, fspi
     imx8qxp - sd, fspi
 
 
 Quick Start Guide
 -----------------
-See the Freescale Yocto Project User's Guide for instructions on installing repo.
+See the i.MX Yocto Project User's Guide for instructions on installing repo.
 
-First install the i.MX NXP BSP repo
-$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-morty -m imx-4.9.51-mx8_beta1.xml
+First install the i.MX Linux BSP repo
+$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-morty -m imx-4.9.51-8mq_beta.xml
 
-Download the Yocto Project NXP Layers:
+Download the Yocto Project Layers:
 $: repo sync
 
 If errors on repo init, remove the .repo directory and try repo init again.
 
-Run i.MX NXP Yocto Project Setup:
+Run i.MX Linux Yocto Project Setup:
 $: MACHINE=< machine name> source fsl-setup-release.sh -b <build directory> -e <backend fb, wayland, x11>
 
 After this your system will be configured to start a Yocto Project build.
