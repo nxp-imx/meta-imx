@@ -3,7 +3,7 @@ i.MX Linux Yocto Project BSP 4.9.51_8mq_beta Release
 
 The following boards were tested in this release.
 
-   * NXP i.MX 8M EVK (imx8mqevk)
+   * NXP i.MX 8MQuad EVK (imx8mqevk)
    * NXP i.MX 8QuadMax LPDDR4 ARM2 (imx8qmlpddr4arm2)
    * NXP i.MX 8QuadXPlus LPDDR4 ARM2 (imx8qxplpddr4arm2)
    * NXP i.MX 8QuadXPlus MEK (imx8qxpmek)
@@ -132,7 +132,11 @@ To enable chromium requires the following steps:
 
 In local.conf 
 - Add chromium into your install list:
-CORE_IMAGE_EXTRA_INSTALL += "chromium libexif"
+If building X11/FB backend, add a line followed:
+   CORE_IMAGE_EXTRA_INSTALL += "chromium libexif"
+
+If building XWayland/Wayland backend, add a line followed:
+   CORE_IMAGE_EXTRA_INSTALL += "chromium-wayland libexif"
 
 - Add commercial into the white list:
 LICENSE_FLAGS_WHITELIST="commercial"
