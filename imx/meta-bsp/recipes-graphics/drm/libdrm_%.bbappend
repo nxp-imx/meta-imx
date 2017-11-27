@@ -5,7 +5,7 @@ IMX_LIBDRM_BRANCH = "libdrm-imx-2.4.84"
 SRC_URI_remove_imxgpu  = "http://dri.freedesktop.org/libdrm/${BP}.tar.bz2"
 SRC_URI_remove_mx8     = "file://drm-update-arm.patch"
 SRC_URI_prepend_imxgpu = "${IMX_LIBDRM_SRC};branch=${IMX_LIBDRM_BRANCH} "
-SRCREV_imxgpu = "5ea2086676129226753e186ad2521ff360444416"
+SRCREV_imxgpu = "bc8476570137577e0c4457707a1115a4cfa6cf86"
 
 SRC_URI_append = " file://0001-libdrm-amphion-Add-Amphion-VPU-tiled-format.patch"
 
