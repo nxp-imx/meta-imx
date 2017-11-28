@@ -15,7 +15,7 @@ RDEPENDS_${PN}_append = " \
 "
 
 # Install the following apps on SoC with GPU
-RDEPENDS_${PN}_append_imxgpu2d = " \
+RDEPENDS_${PN}_append_imxgpu = " \
     qtsmarthome \
     qt5ledscreen \
     quitbattery \
