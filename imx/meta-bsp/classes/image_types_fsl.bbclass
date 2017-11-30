@@ -156,7 +156,7 @@ _generate_boot_image() {
                 if [ -e "${DEPLOY_DIR_IMAGE}/${IMAGE_FILE}" ]; then
                     mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${IMAGE_FILE} ::/${IMAGE_FILE}
                 else
-                    bbfatal "${IMAGE_FILE}$ does not exist."
+                    bbfatal "${IMAGE_FILE} does not exist."
                 fi
             done
         fi
