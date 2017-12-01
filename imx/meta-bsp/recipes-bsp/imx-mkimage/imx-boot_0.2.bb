@@ -52,7 +52,7 @@ COMPILE_DEP_TASKS_mx8qm = "imx-sc-firmware:do_deploy imx-m4-demos:do_deploy"
 COMPILE_DEP_TASKS_mx8qxp = "imx-sc-firmware:do_deploy imx-m4-demos:do_deploy"
 COMPILE_DEP_TASKS_mx8mq = "firmware-imx:do_deploy"
 
-do_compile[depends] = " \
+do_compile[depends] += " \
                        imx-atf:do_deploy \
                        virtual/bootloader:do_deploy \
                        ${COMPILE_DEP_TASKS}"
