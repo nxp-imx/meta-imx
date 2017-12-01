@@ -13,15 +13,15 @@ BOOT_TOOLS = "imx-boot-tools"
 BOOT_NAME = "imx-boot"
 PROVIDES = "${BOOT_NAME}"
 
-DEPENDS += "imx-sc-firmware u-boot imx-atf"
-DEPENDS_remove_mx8mq = "imx-sc-firmware"
-DEPENDS_append_mx8mq = " firmware-imx"
+IMX_FIRMWARE       = "imx-sc-firmware"
+IMX_FIRMWARE_mx8mq = "firmware-imx"
+DEPENDS += "${IMX_FIRMWARE} u-boot imx-atf"
 
 # Inter-Task dependeency for do_compile task
 COMPILE_DEP_TASKS ?= ""
-COMPILE_DEP_TASKS_mx8qm = "imx-sc-firmware:do_deploy imx-m4-demos:do_deploy"
-COMPILE_DEP_TASKS_mx8qxp = "imx-sc-firmware:do_deploy imx-m4-demos:do_deploy"
-COMPILE_DEP_TASKS_mx8mq = "firmware-imx:do_deploy"
+COMPILE_DEP_TASKS_mx8qm = "${IMX_FIRMWARE}:do_deploy imx-m4-demos:do_deploy"
+COMPILE_DEP_TASKS_mx8qxp = "${IMX_FIRMWARE}:do_deploy imx-m4-demos:do_deploy"
+COMPILE_DEP_TASKS_mx8mq = "${IMX_FIRMWARE}:do_deploy"
 
 do_compile[depends] += " \
     imx-atf:do_deploy \
