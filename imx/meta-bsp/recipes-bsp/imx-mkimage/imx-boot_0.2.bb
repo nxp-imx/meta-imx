@@ -16,7 +16,6 @@ PROVIDES = "${BOOT_NAME}"
 DEPENDS += "imx-sc-firmware u-boot imx-atf"
 DEPENDS_remove_mx8mq = "imx-sc-firmware"
 DEPENDS_append_mx8mq = " firmware-imx"
-DEPENDS_append_mx8qm = " imx-m4-demos"
 
 SC_MACHINE_NAME ?= "mx8qm-scfw-tcm.bin"
 SC_MACHINE_NAME_mx8qm = "mx8qm-scfw-tcm.bin"
