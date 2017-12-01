@@ -15,19 +15,26 @@ PROVIDES = "${BOOT_NAME}"
 
 IMX_FIRMWARE       = "imx-sc-firmware"
 IMX_FIRMWARE_mx8mq = "firmware-imx"
-DEPENDS += "${IMX_FIRMWARE} u-boot imx-atf"
-
-# Inter-Task dependeency for do_compile task
-COMPILE_DEP_TASKS ?= ""
-COMPILE_DEP_TASKS_mx8qm = "${IMX_FIRMWARE}:do_deploy imx-m4-demos:do_deploy"
-COMPILE_DEP_TASKS_mx8qxp = "${IMX_FIRMWARE}:do_deploy imx-m4-demos:do_deploy"
-COMPILE_DEP_TASKS_mx8mq = "${IMX_FIRMWARE}:do_deploy"
-
-do_compile[depends] += " \
-    imx-atf:do_deploy \
-    virtual/bootloader:do_deploy \
-    ${COMPILE_DEP_TASKS} \
+DEPENDS += " \
+    u-boot \
+    ${IMX_FIRMWARE} \
+    imx-atf \
 "
+
+# This package aggregates output deployed by other packages,
+# so set the appropriate dependencies
+do_compile[depends] += " \
+    virtual/bootloader:do_deploy \
+    ${IMX_FIRMWARE}:do_deploy \
+    imx-atf:do_deploy \
+"
+
+# For i.MX 8, this package aggregates the imx-m4-demos
+# output. Note that this aggregation replaces the aggregation
+# that would otherwise be done in the image build as controlled
+# by IMAGE_M4LOADER and IMAGE_M4 in image_types_fsl.bbclass
+do_compile[depends]_append_mx8qm  = " imx-m4-demos:do_deploy"
+do_compile[depends]_append_mx8qxp = " imx-m4-demos:do_deploy"
 
 SC_MACHINE_NAME ?= "mx8qm-scfw-tcm.bin"
 SC_MACHINE_NAME_mx8qm = "mx8qm-scfw-tcm.bin"
