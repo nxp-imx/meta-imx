@@ -17,6 +17,18 @@ DEPENDS += "imx-sc-firmware u-boot imx-atf"
 DEPENDS_remove_mx8mq = "imx-sc-firmware"
 DEPENDS_append_mx8mq = " firmware-imx"
 
+# Inter-Task dependeency for do_compile task
+COMPILE_DEP_TASKS ?= ""
+COMPILE_DEP_TASKS_mx8qm = "imx-sc-firmware:do_deploy imx-m4-demos:do_deploy"
+COMPILE_DEP_TASKS_mx8qxp = "imx-sc-firmware:do_deploy imx-m4-demos:do_deploy"
+COMPILE_DEP_TASKS_mx8mq = "firmware-imx:do_deploy"
+
+do_compile[depends] += " \
+    imx-atf:do_deploy \
+    virtual/bootloader:do_deploy \
+    ${COMPILE_DEP_TASKS} \
+"
+
 SC_MACHINE_NAME ?= "mx8qm-scfw-tcm.bin"
 SC_MACHINE_NAME_mx8qm = "mx8qm-scfw-tcm.bin"
 SC_MACHINE_NAME_mx8qxp = "mx8qx-scfw-tcm.bin"
@@ -44,17 +56,6 @@ IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi'
                        bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
                                                                  'flash flash_dcd flash_multi_cores', d), d)}"
 IMXBOOT_TARGETS_mx8mq ?= "flash_spl_uboot flash_hdmi_spl_uboot"
-
-# Inter-Task dependeency for do_compile task
-COMPILE_DEP_TASKS ?= ""
-COMPILE_DEP_TASKS_mx8qm = "imx-sc-firmware:do_deploy imx-m4-demos:do_deploy"
-COMPILE_DEP_TASKS_mx8qxp = "imx-sc-firmware:do_deploy imx-m4-demos:do_deploy"
-COMPILE_DEP_TASKS_mx8mq = "firmware-imx:do_deploy"
-
-do_compile[depends] += " \
-                       imx-atf:do_deploy \
-                       virtual/bootloader:do_deploy \
-                       ${COMPILE_DEP_TASKS}"
 
 S = "${WORKDIR}/git"
 
