@@ -21,20 +21,22 @@ DEPENDS += " \
     imx-atf \
 "
 
+# For i.MX 8, this package aggregates the imx-m4-demos
+# output. Note that this aggregation replaces the aggregation
+# that would otherwise be done in the image build as controlled
+# by IMAGE_M4LOADER and IMAGE_M4 in image_types_fsl.bbclass
+IMX_M4_DEMOS        = ""
+IMX_M4_DEMOS_mx8qm  = "imx-m4-demos:do_deploy"
+IMX_M4_DEMOS_mx8qxp = "imx-m4-demos:do_deploy"
+
 # This package aggregates output deployed by other packages,
 # so set the appropriate dependencies
 do_compile[depends] += " \
     virtual/bootloader:do_deploy \
     ${IMX_FIRMWARE}:do_deploy \
     imx-atf:do_deploy \
+    ${IMX_M4_DEMOS} \
 "
-
-# For i.MX 8, this package aggregates the imx-m4-demos
-# output. Note that this aggregation replaces the aggregation
-# that would otherwise be done in the image build as controlled
-# by IMAGE_M4LOADER and IMAGE_M4 in image_types_fsl.bbclass
-do_compile[depends]_append_mx8qm  = " imx-m4-demos:do_deploy"
-do_compile[depends]_append_mx8qxp = " imx-m4-demos:do_deploy"
 
 SC_MACHINE_NAME ?= "mx8qm-scfw-tcm.bin"
 SC_MACHINE_NAME_mx8qm = "mx8qm-scfw-tcm.bin"
