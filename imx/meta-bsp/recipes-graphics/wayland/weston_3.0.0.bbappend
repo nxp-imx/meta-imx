@@ -5,9 +5,9 @@ DEPENDS_append_imxgpu2d = " virtual/libg2d"
 # Use i.MX fork of weston for customizations.
 SRC_URI_remove_imxgpu  = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
-SRCBRANCH = "weston-imx-2.0"
+SRCBRANCH = "weston-imx-3.0"
 SRC_URI_prepend_imxgpu = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV_imxgpu = "5757c73cf27763102d076856090df4bd15ee24b2"
+SRCREV_imxgpu = "693f6dfadee41fdc829fb527e0b4020249aab883"
 S_imxgpu = "${WORKDIR}/git"
 
 # Define RECIPE_SYSROOT since it doesn't exist in morty
