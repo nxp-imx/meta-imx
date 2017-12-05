@@ -12,4 +12,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "eb639021905a32cf3013ca5bac1b694d"
 SRC_URI[sha256sum] = "1cc3942bbf3ea87da3e35437d4e014e991b103db22a6174f62a98c89c3f5f466"
 
+# Remove unrecognised options: --disable-mad
+EXTRA_OECONF_remove = " --disable-mad"
+
 S = "${WORKDIR}/gst-plugins-ugly-${PV}"
