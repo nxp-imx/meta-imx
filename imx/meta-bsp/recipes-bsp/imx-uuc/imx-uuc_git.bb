@@ -13,7 +13,7 @@ PR = "r1"
 PV = "0.5.1+git${SRCPV}"
 
 SRC_URI = "git://github.com/NXPmicro/imx-uuc.git;protocol=https"
-SRCREV = "1de598e7b36d95596435902106c9a746697b9afc"
+SRCREV = "e2349be2ce985eef3ba433c8eaf1671012dfa54d"
 
 S = "${WORKDIR}/git"
 
