@@ -37,7 +37,7 @@ FEATURES_append_imxgpu3d  = ",OpenGLES2"
 FEATURES_append_mx6q      = ",OpenGLES3"
 FEATURES_append_mx6dl     = ",OpenGLES3"
 FEATURES_append_mx8       = ",OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenCV"
-FEATURES_append_imxopenvx = ",OpenVX,OpenVX1.0.1"
+FEATURES_append_imxopenvx = ",OpenVX,OpenVX1.1"
 FEATURES_append_mx8       = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland',        '', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',        '', \
