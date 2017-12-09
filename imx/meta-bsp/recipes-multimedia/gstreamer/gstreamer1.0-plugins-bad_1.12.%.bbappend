@@ -36,7 +36,7 @@ SRC_URI_append_imx = " \
     file://0001-gstreamer-gl.pc.in-Don-t-append-GL_CFLAGS-to-CFLAGS.patch \
 "
 
-SRCREV_imx = "03eb5a97865a89fb508b37baae54bcc4a36b1a7a"
+SRCREV_imx = "095050152eac21e93dc9e42d809b46db501cb671"
 
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
