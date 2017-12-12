@@ -26,8 +26,6 @@ UBOOT_ENTRYPOINT_mx6ull  = "0x10008000"
 UBOOT_ENTRYPOINT_mx7 = "0x80008000"
 UBOOT_ENTRYPOINT_vf = "0x80008000"
 
-IMAGE_ROOTFS_ALIGNMENT_mx8 = "8192"
-
 PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
 XSERVER_DRIVER            = "xf86-video-fbdev"
 XSERVER_DRIVER_imxgpu2d   = "xf86-video-imx-vivante"

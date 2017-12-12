@@ -78,8 +78,10 @@ BOOT_SPACE ?= "8192"
 # Barebox environment size [in KiB]
 BAREBOX_ENV_SPACE ?= "512"
 
-# Set alignment to 4MB [in KiB]
-IMAGE_ROOTFS_ALIGNMENT ?= "4096"
+# Set alignment in KiB
+IMAGE_ROOTFS_ALIGNMENT_mx6 ?= "4096"
+IMAGE_ROOTFS_ALIGNMENT_mx7 ?= "4096"
+IMAGE_ROOTFS_ALIGNMENT_mx8 ?= "8192"
 
 IMAGE_DEPENDS_sdcard = "parted-native:do_populate_sysroot \
                         dosfstools-native:do_populate_sysroot \
