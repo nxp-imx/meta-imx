@@ -13,8 +13,8 @@ SRC_URI = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
            file://xwayland.weston-start \
            file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
 "
-SRC_URI[md5sum] = "15f38945942bf2a91fe2687145fb4c7d"
-SRC_URI[sha256sum] = "b4e446ac27f118196f1609dab89bb3cb3e81652d981414ad860e733b355365d8"
+SRC_URI[md5sum] = "9c42a4c51a1b9f35d040fa9d45ada36d"
+SRC_URI[sha256sum] = "cde1d55e8dd70c3cbb3d1ec72f60e60000041579caa1d6a262bd9c35e93723a5"
 
 inherit autotools pkgconfig useradd distro_features_check
 # depends on virtual/egl
