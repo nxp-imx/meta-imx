@@ -8,10 +8,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d79ee9e66bb0f95d3386a7acae780b70 \
 SRC_URI = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
            file://weston.png \
            file://weston.desktop \
-           file://0001-configure.ac-Fix-wayland-protocols-path-3.0.patch \
+           file://0001-configure.ac-Fix-wayland-protocols-path.patch \
            file://0001-make-error-portable.patch \
            file://xwayland.weston-start \
            file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
+	   file://weston-gl-renderer-Set-pitch-correctly-for-subsampled-textures.patch \
+	   file://fix-missing-header.patch \
 "
 SRC_URI[md5sum] = "9c42a4c51a1b9f35d040fa9d45ada36d"
 SRC_URI[sha256sum] = "cde1d55e8dd70c3cbb3d1ec72f60e60000041579caa1d6a262bd9c35e93723a5"
