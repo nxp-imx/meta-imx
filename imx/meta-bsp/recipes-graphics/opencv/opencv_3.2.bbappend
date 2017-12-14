@@ -46,3 +46,5 @@ do_install_append() {
         cp -r ${S}/samples/data/* ${D}${datadir}/OpenCV/samples/data
     fi
 }
+
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
