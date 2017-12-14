@@ -22,6 +22,9 @@ SRC_URI[imx8mq.sha256sum] = "fd441e75395b0c6f90626c883ee8a93406b14e7d55adc792511
 SRC_URI[imx8qm.md5sum] = "694f9590283a57b6e50016db068d0315"
 SRC_URI[imx8qm.sha256sum] = "00e853af98184948af75061079a22144264b971045a72195ca2631957f0b4a33"
 
+SRC_URI[imx8qx.md5sum] = "b18198150c3aa5b1e01aba2047166728"
+SRC_URI[imx8qx.sha256sum] = "3b3887694b7cfe02d2918b0780f941da3d5c0e867725927b8c8f19fbff106bc9"
+
 SCR = "SCR-${SOC}-m4-demo.txt"
 
 do_deploy () {
@@ -34,4 +37,4 @@ do_deploy () {
 addtask deploy before do_build after do_compile
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx8mq|mx8qm)"
+COMPATIBLE_MACHINE = "(mx8mq|mx8qm|mx8qxp)"
