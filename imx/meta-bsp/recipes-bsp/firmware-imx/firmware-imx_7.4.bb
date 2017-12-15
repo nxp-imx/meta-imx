@@ -38,17 +38,22 @@ do_install_append() {
     cp -rfv git/brcm/1CX_BCM4356/fw_bcmdhd.bin ${D}${base_libdir}/firmware/bcm/1CX_BCM4356
 }
 
-IS_8MQ = "0"
-IS_8MQ_mx8mq = "1"
+IS_MX8 = "0"
+IS_MX8_mx8mq = "8mq"
+IS_MX8_mx8qm = "8qm"
 inherit deploy
 addtask deploy before do_build after do_install
 do_deploy () {
-    #
-    if [ "${IS_8MQ}" = "1" ]; then
+    # Deploy i.MX8 related firmware files
+    if [ "${IS_MX8}" = "8mq" ]; then
         # Deploy ddr/synopsys
         install -m 0644 ${S}/firmware/ddr/synopsys/lpddr4_pmu_train_*.bin ${DEPLOYDIR}
 
         # Deploy hdmi/cadence
         install -m 0644 ${S}/firmware/hdmi/cadence/signed_hdmi_imx8m.bin ${DEPLOYDIR}
+    elif [ "${IS_MX8}" = "8qm" ]; then
+        # Deploy hdmi/cadence
+        install -m 0644 ${S}/firmware/hdmi/cadence/hdmitx.bin ${DEPLOYDIR}
+        install -m 0644 ${S}/firmware/hdmi/cadence/dpfw.bin ${DEPLOYDIR}
     fi
 }
