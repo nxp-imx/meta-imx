@@ -7,7 +7,7 @@ SRC_URI_remove_imxgpu  = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-3.0"
 SRC_URI_prepend_imxgpu = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV_imxgpu = "57b0acbd370ca50b5cf2d87ce747d60947a43618"
+SRCREV_imxgpu = "883a90bbef43d749296ab6a75f0ebbcf8223f2e5"
 S_imxgpu = "${WORKDIR}/git"
 
 # Define RECIPE_SYSROOT since it doesn't exist in morty
