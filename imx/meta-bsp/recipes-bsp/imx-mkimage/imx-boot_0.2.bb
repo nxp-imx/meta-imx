@@ -38,9 +38,7 @@ do_compile[depends] += " \
     ${IMX_M4_DEMOS} \
 "
 
-SC_MACHINE_NAME ?= "mx8qm-scfw-tcm.bin"
-SC_MACHINE_NAME_mx8qm = "mx8qm-scfw-tcm.bin"
-SC_MACHINE_NAME_mx8qxp = "mx8qx-scfw-tcm.bin"
+SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
 ATF_MACHINE_NAME ?= "bl31-imx8qm.bin"
 ATF_MACHINE_NAME_mx8qm = "bl31-imx8qm.bin"
@@ -83,7 +81,7 @@ do_compile () {
 
     elif [ "${SOC_TARGET}" = "iMX8QM" ]; then
         echo 8QM boot binary build
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_MACHINE_NAME}  ${S}/${SOC_TARGET}/scfw_tcm.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${S}/${SOC_TARGET}/scfw_tcm.bin
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_TARGET}/bl31.bin
         cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_TARGET}/u-boot.bin
 
@@ -93,7 +91,7 @@ do_compile () {
     else
         echo 8QX boot binary build
         cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_hello_world.bin     ${S}/${SOC_TARGET}/m40_tcm.bin
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_MACHINE_NAME}  ${S}/${SOC_TARGET}/scfw_tcm.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${S}/${SOC_TARGET}/scfw_tcm.bin
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_TARGET}/bl31.bin
         cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_TARGET}/u-boot.bin
     fi
