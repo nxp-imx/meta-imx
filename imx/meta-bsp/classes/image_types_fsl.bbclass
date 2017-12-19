@@ -3,6 +3,10 @@ inherit image_types
 IMAGE_BOOTLOADER ?= "u-boot"
 
 IMAGE_M4LOADER ?= ""
+IMAGE_M4 ?= ""
+IMAGE_BOOTFIRMWARE ?= ""
+
+IMAGE_BOOTFILES += "${IMAGE_M4}"
 
 IMX_BOOT_SEEK ?= "33"
 
@@ -88,6 +92,7 @@ IMAGE_DEPENDS_sdcard = "parted-native:do_populate_sysroot \
                         mtools-native:do_populate_sysroot \
                         virtual/kernel:do_deploy \
                         ${@d.getVar('IMAGE_BOOTLOADER', True) and d.getVar('IMAGE_BOOTLOADER', True) + ':do_deploy' or ''} \
+                        ${@d.getVar('IMAGE_BOOTFIRMWARE', True) and d.getVar('IMAGE_BOOTFIRMWARE', True) + ':do_deploy' or ''} \
                         ${@d.getVar('IMAGE_M4LOADER', True) and d.getVar('IMAGE_M4LOADER', True) + ':do_deploy' or ''}"
 
 SDCARD = "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.sdcard"
@@ -152,9 +157,9 @@ _generate_boot_image() {
 		mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/extlinux.conf ::/extlinux/extlinux.conf
 	fi
 
-        # Copy m4 image
-        if [ -n "${IMAGE_M4}" ]; then
-            for IMAGE_FILE in ${IMAGE_M4}; do
+        # Copy additional files to boot partition: such as m4 images and firmwares
+        if [ -n "${IMAGE_BOOTFILES}" ]; then
+            for IMAGE_FILE in ${IMAGE_BOOTFILES}; do
                 if [ -e "${DEPLOY_DIR_IMAGE}/${IMAGE_FILE}" ]; then
                     mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${IMAGE_FILE} ::/${IMAGE_FILE}
                 else
