@@ -15,7 +15,7 @@
 # archive. The variable is built from a combination of the package name ${PN},
 # the version ${IMX_PACKAGE_VERSION} and the target or native architecture,
 # ${TARGET_ARCH} or ${BUILD_ARCH}.
-IMX_PACKAGE_NAME                 = "${PN}-${IMX_PACKAGE_VERSION}-${TARGET_ARCH}"
+IMX_PACKAGE_NAME                 = "${BPN}-${IMX_PACKAGE_VERSION}-${TARGET_ARCH}"
 IMX_PACKAGE_NAME_class-native    = "${PN}-${IMX_PACKAGE_VERSION}-${BUILD_ARCH}"
 IMX_PACKAGE_NAME_class-nativesdk = "${PN}-${IMX_PACKAGE_VERSION}-${BUILD_ARCH}"
 
