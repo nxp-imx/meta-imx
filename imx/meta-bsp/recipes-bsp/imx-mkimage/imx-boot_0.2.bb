@@ -63,7 +63,7 @@ IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi'
                        bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
                                                                  'flash flash_dcd flash_multi_cores', d), d)}"
 IMXBOOT_TARGETS_mx8mq ?= "flash_spl_uboot flash_hdmi_spl_uboot"
-IMXBOOT_TARGETS_imx8qxplpddr3arm2 ?= "flash_ddr3_dcd"
+IMXBOOT_TARGETS_imx8qxpddr3arm2 ?= "flash_ddr3_dcd"
 
 S = "${WORKDIR}/git"
 
