@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "imx_v2017.03"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "2f1eed596782be19eb2c14e708e6db8596876346"
+SRCREV = "8c81dfb83f59ceb358f91564b9d48052d3df97cb"
 
 S = "${WORKDIR}/git"
 
