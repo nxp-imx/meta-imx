@@ -4,3 +4,6 @@
 
 require u-boot-imx_${PV}.bb
 require recipes-bsp/u-boot/u-boot-mfgtool.inc
+
+SPL_IMAGE = "${SPL_BINARYNAME}-${MACHINE}-mfgtool-${PV}-${PR}"
+SPL_SYMLINK = "${SPL_BINARYNAME}-mfgtool-${MACHINE}"
