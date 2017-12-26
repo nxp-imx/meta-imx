@@ -53,7 +53,7 @@ do_deploy () {
         install -m 0644 ${S}/firmware/hdmi/cadence/signed_hdmi_imx8m.bin ${DEPLOYDIR}
     elif [ "${IS_MX8}" = "8qm" ]; then
         # Deploy hdmi/cadence
-        install -m 0644 ${S}/firmware/hdmi/cadence/hdmitx.bin ${DEPLOYDIR}
+        install -m 0644 ${S}/firmware/hdmi/cadence/hdmitxfw.bin ${DEPLOYDIR}
         install -m 0644 ${S}/firmware/hdmi/cadence/dpfw.bin ${DEPLOYDIR}
     fi
 }
