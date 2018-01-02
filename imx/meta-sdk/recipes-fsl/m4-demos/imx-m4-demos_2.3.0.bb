@@ -19,8 +19,8 @@ SRC_URI_NAME = "${SOC}"
 SRC_URI[imx8mq.md5sum] = "c2aeda4ca7cc7d1c2916be7dd42b946f"
 SRC_URI[imx8mq.sha256sum] = "fd441e75395b0c6f90626c883ee8a93406b14e7d55adc7925116254394bb7ad8"
 
-SRC_URI[imx8qm.md5sum] = "7523f9dd234b5a6c2f939d2be7072111"
-SRC_URI[imx8qm.sha256sum] = "9998d05cf65aa4891b1db55272a1c63ab0f156146cb0e04852b53431e4fa0bd6"
+SRC_URI[imx8qm.md5sum] = "e6ee6daca287d4128a1b60352b7fac95"
+SRC_URI[imx8qm.sha256sum] = "1b4e7bc3a54a94327c12bdb376ff8e915ddcf7e33c7bfd3082836e1969801f45"
 
 SRC_URI[imx8qx.md5sum] = "b18198150c3aa5b1e01aba2047166728"
 SRC_URI[imx8qx.sha256sum] = "3b3887694b7cfe02d2918b0780f941da3d5c0e867725927b8c8f19fbff106bc9"
