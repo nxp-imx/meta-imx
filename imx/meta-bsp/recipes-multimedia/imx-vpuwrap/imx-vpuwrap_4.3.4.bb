@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${PN}-${PV}"
 
-SRC_URI[md5sum] = "813199d669341710d299023fface7759"
-SRC_URI[sha256sum] = "f3bc81a91805d0d7e93acd5e5d5e6250ec3f4f457188a20ee791688822453a8c"
+SRC_URI[md5sum] = "1a17458e605d33e67fa420efbb82b73a"
+SRC_URI[sha256sum] = "6c1cdd41244c8845ee32d9cae2c37d1336557b2dee52a5c6436f78b22c254aa1"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
