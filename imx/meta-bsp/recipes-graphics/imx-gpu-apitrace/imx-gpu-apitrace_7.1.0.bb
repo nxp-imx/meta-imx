@@ -18,9 +18,17 @@ PACKAGECONFIG_append = \
         bb.utils.contains('DISTRO_FEATURES',     'x11', ' x11', \
                                                         '', d), d)}"
 PACKAGECONFIG_append_imxgpu2d = " vivante"
+# For 8M, which has 3D but no 2D, eglretrace is not available
+# on Wayland except through X11 and waffle.
+PACKAGECONFIG_IMXGPU3D = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', ' waffle x11 x11-egl', '', d)}"
+PACKAGECONFIG_IMXGPU3D_imxgpu2d = ""
+PACKAGECONFIG_append_imxgpu3d = "${PACKAGECONFIG_IMXGPU3D}"
 
 PACKAGECONFIG[multiarch] = "-DENABLE_MULTIARCH=ON,-DENABLE_MULTIARCH=OFF"
+PACKAGECONFIG[waffle] = "-DENABLE_WAFFLE=ON,-DENABLE_WAFFLE=OFF,waffle"
 PACKAGECONFIG[x11] = "-DDISABLE_X11=OFF,-DDISABLE_X11=ON"
+PACKAGECONFIG[x11-egl] = "-Dwaffle_has_x11_egl=ON,-Dwaffle_has_x11_egl=OFF"
 PACKAGECONFIG[vivante] = "-DENABLE_VIVANTE=ON,-DENABLE_VIVANTE=OFF,virtual/libg2d"
 
 FILES_${PN} = "${bindir} ${libdir}"
