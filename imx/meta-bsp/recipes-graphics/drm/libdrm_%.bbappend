@@ -5,7 +5,7 @@ IMX_LIBDRM_BRANCH = "libdrm-imx-2.4.84"
 SRC_URI_remove_imxgpu  = "http://dri.freedesktop.org/libdrm/${BP}.tar.bz2"
 SRC_URI_remove_mx8     = "file://drm-update-arm.patch"
 SRC_URI_prepend_imxgpu = "${IMX_LIBDRM_SRC};branch=${IMX_LIBDRM_BRANCH} "
-SRCREV_imxgpu = "bc8476570137577e0c4457707a1115a4cfa6cf86"
+SRCREV_imxgpu = "504e10f82f837e3f9894759a9b1a7470aa8a55a4"
 
 S_imxgpu = "${WORKDIR}/git"
 
