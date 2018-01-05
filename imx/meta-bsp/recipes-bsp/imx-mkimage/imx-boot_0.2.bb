@@ -62,18 +62,20 @@ SOC_TARGET_mx8mq  = "iMX8M"
 IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', \
                        bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
                                                                  'flash flash_dcd flash_multi_cores', d), d)}"
-IMXBOOT_TARGETS_mx8mq ?= "flash_spl_uboot flash_hdmi_spl_uboot"
-IMXBOOT_TARGETS_imx8qxpddr3arm2 ?= "flash_ddr3_dcd"
+IMXBOOT_TARGETS_imx8qxpddr3arm2 = "flash_ddr3_dcd"
 
 S = "${WORKDIR}/git"
 
 do_compile () {
     if [ "${SOC_TARGET}" = "iMX8M" ]; then
         echo 8MQ boot binary build
-        cp ${DEPLOY_DIR_IMAGE}/lpddr4_pmu_train_*.bin            ${S}/${SOC_TARGET}/
+        for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
+            echo "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${S}/${SOC_TARGET} "
+            cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${S}/${SOC_TARGET}/
+        done
         cp ${DEPLOY_DIR_IMAGE}/signed_hdmi_imx8m.bin             ${S}/${SOC_TARGET}/
         cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${S}/${SOC_TARGET}/u-boot-spl.bin
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/fsl-imx8mq-evk.dtb  ${S}/${SOC_TARGET}/
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${UBOOT_DTB_NAME}   ${S}/${SOC_TARGET}/
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin    ${S}/${SOC_TARGET}/
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mkimage_uboot       ${S}/${SOC_TARGET}/
 
