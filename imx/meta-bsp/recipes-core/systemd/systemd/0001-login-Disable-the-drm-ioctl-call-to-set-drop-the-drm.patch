@@ -1,0 +1,57 @@
+From 84dca4ef4eac01b59f880e097fd621f53f145acd Mon Sep 17 00:00:00 2001
+From: Yong Gan <yong.gan@nxp.com>
+Date: Fri, 29 Dec 2017 10:26:42 +0800
+Subject: [PATCH] login: Disable the drm ioctl call to set/drop the drm master
+
+Weston got DRM permission failure with DRM operations during suspend and resume.
+It conflict with the atomic modesetting patches for the weston 3.0.
+
+The atomic modesetting patch split repaint into two stages, as implied by the grouped-repaint
+interface: drm_output_repaint generates the repaint state only, and drm_repaint_flush
+applies it. the new asynchronous rendering mode conflict with the systemd login.
+
+This is a workaround patch, we will remove it after the conflict was fixed in the weston code.
+
+Git for weston with atomic modesetting:
+https://gitlab.collabora.com/daniels/weston/tree/wip/2017-12/atomic-v14
+
+Signed-off-by: Yong Gan <yong.gan@nxp.com>
+---
+ src/login/logind-session-device.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/login/logind-session-device.c b/src/login/logind-session-device.c
+index 4055a23..3c0d2a2 100644
+--- a/src/login/logind-session-device.c
++++ b/src/login/logind-session-device.c
+@@ -120,11 +120,11 @@ static int sd_drmsetmaster(int fd) {
+         int r;
+ 
+         assert(fd >= 0);
+-
++/*
+         r = ioctl(fd, DRM_IOCTL_SET_MASTER, 0);
+         if (r < 0)
+                 return -errno;
+-
++*/
+         return 0;
+ }
+ 
+@@ -132,11 +132,11 @@ static int sd_drmdropmaster(int fd) {
+         int r;
+ 
+         assert(fd >= 0);
+-
++/*
+         r = ioctl(fd, DRM_IOCTL_DROP_MASTER, 0);
+         if (r < 0)
+                 return -errno;
+-
++*/
+         return 0;
+ }
+ 
+-- 
+1.9.1
+
