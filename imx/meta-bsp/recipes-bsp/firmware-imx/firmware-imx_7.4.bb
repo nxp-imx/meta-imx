@@ -47,7 +47,9 @@ do_deploy () {
     # Deploy i.MX8 related firmware files
     if [ "${IS_MX8}" = "8mq" ]; then
         # Deploy ddr/synopsys
-        install -m 0644 ${S}/firmware/ddr/synopsys/*ddr*.bin ${DEPLOYDIR}
+        for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
+            install -m 0644 ${S}/firmware/ddr/synopsys/${ddr_firmware} ${DEPLOYDIR}
+        done
 
         # Deploy hdmi/cadence
         install -m 0644 ${S}/firmware/hdmi/cadence/signed_hdmi_imx8m.bin ${DEPLOYDIR}
