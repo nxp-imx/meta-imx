@@ -41,6 +41,7 @@ DEFAULTTUNE_mx6ul = "cortexa7hf-neon"
 DEFAULTTUNE_mx6sll = "cortexa9hf-neon"
 DEFAULTTUNE_mx7d   = "cortexa7hf-neon"
 DEFAULTTUNE_mx7ulp = "cortexa7hf-neon"
+DEFAULTTUNE_mx8 = "aarch64"
 
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"

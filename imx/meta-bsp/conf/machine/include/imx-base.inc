@@ -49,6 +49,7 @@ DEFAULTTUNE_mx6 ?= "cortexa9thf-neon"
 DEFAULTTUNE_mx6ul ?= "cortexa7thf-neon"
 DEFAULTTUNE_mx6ull ?= "cortexa7thf-neon"
 DEFAULTTUNE_mx7 ?= "cortexa7thf-neon"
+DEFAULTTUNE_mx8 ?= "aarch64"
 DEFAULTTUNE_vf ?= "cortexa5thf-neon"
 
 INHERIT += "machine-overrides-extender"
@@ -223,6 +224,7 @@ IMX_DEFAULT_KERNEL_mx6 = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL_mx7 = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL_mx6ul = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL_mx6ull = "linux-fslc-imx"
+IMX_DEFAULT_KERNEL_mx8 = "linux-imx"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 
@@ -236,6 +238,7 @@ SERIAL_CONSOLE = "115200 ttymxc0"
 SERIAL_CONSOLE_mxs = "115200 ttyAMA0"
 
 KERNEL_IMAGETYPE = "zImage"
+KERNEL_IMAGETYPE_mx8 = "Image"
 
 MACHINE_FEATURES = "usbgadget usbhost vfat alsa touchscreen"
 MACHINE_FEATURES_append_mx8 = " xen"
