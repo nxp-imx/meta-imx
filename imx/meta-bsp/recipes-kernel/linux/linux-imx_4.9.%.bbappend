@@ -1,5 +1,5 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
-# Copyright 2017 NXP
+# Copyright 2017-2018 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
@@ -9,7 +9,9 @@ SRC_URI_append = " file://Install-dma-buf-h.patch"
 inherit fsl-vivante-kernel-driver-handler
 
 IMX_UAPI_HEADERS = "mxc_asrc.h mxc_dcic.h mxcfb.h mxc_mlb.h mxc_sim_interface.h \
-                    mxc_v4l2.h ipu.h videodev2.h pxp_device.h pxp_dma.h isl29023.h"
+                    mxc_v4l2.h ipu.h videodev2.h pxp_device.h pxp_dma.h isl29023.h \
+                    imx_drm.h \
+"
 IMX_UAPI_HEADERS += "dma-buf.h"
 
 MORE_UAPI_HEADERS = "ion.h"
@@ -17,11 +19,14 @@ MORE_UAPI_HEADERS = "ion.h"
 do_install_append () {
    # Install i.MX specific uapi headers
    oe_runmake headers_install INSTALL_HDR_PATH=${B}${exec_prefix}
-   install -d ${D}${exec_prefix}/include/linux
    for UAPI_HDR in ${IMX_UAPI_HEADERS}; do
-       find ${B}${exec_prefix}/include -name ${UAPI_HDR} -exec cp {} ${D}${exec_prefix}/include/linux \;
-       ls ${D}${exec_prefix}/include/linux
-       echo "copy ${UAPI_HDR} done"
+       found_result=`find ${B}${exec_prefix}/include -name ${UAPI_HDR} -printf '%P '`
+       for hdr_file in $found_result ; do
+           folder_name=`echo ${hdr_file%/*} `
+           install -d ${D}${exec_prefix}/include/$folder_name
+           cp ${B}${exec_prefix}/include/$hdr_file ${D}${exec_prefix}/include/$folder_name
+           echo "copy ${UAPI_HDR} to $hdr_file"
+       done
    done
 }
 
