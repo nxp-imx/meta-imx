@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
 SRC_URI = " \
     http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${PV}.tar.xz \
     file://make-gio_unix_2_0-dependency-configurable.patch \
+    file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
 "
 
 SRC_URI[md5sum] = "77f5379c4ca677616b415e3b3ff95578"
