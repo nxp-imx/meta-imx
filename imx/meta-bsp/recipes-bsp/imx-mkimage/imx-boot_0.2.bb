@@ -1,4 +1,4 @@
-# Copyright 2017 NXP
+# Copyright 2017-2018 NXP
 
 DESCRIPTION = "Generate Boot Loader for i.MX8 device"
 LICENSE = "GPLv2"
@@ -61,7 +61,7 @@ SOC_TARGET_mx8mq  = "iMX8M"
 
 IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', \
                        bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
-                                                                 'flash flash_dcd flash_multi_cores', d), d)}"
+                                                                 'flash_multi_cores flash flash_dcd', d), d)}"
 IMXBOOT_TARGETS_imx8qxpddr3arm2 = "flash_ddr3_dcd"
 
 S = "${WORKDIR}/git"
@@ -145,10 +145,15 @@ do_deploy () {
 
     # copy the generated boot image to deploy path
     for target in ${IMXBOOT_TARGETS}; do
+        # Use first "target" as IMAGE_IMXBOOT_TARGET
+        if [ "$IMAGE_IMXBOOT_TARGET" = "" ]; then
+            IMAGE_IMXBOOT_TARGET="$target"
+            echo "Set boot target as $IMAGE_IMXBOOT_TARGET"
+        fi
         install -m 0644 ${S}/${BOOT_CONFIG_MACHINE}-${target} ${DEPLOYDIR}
     done
     cd ${DEPLOYDIR}
-    ln -sf ${BOOT_CONFIG_MACHINE}-${target} ${BOOT_CONFIG_MACHINE}
+    ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${BOOT_CONFIG_MACHINE}
     cd -
 }
 
