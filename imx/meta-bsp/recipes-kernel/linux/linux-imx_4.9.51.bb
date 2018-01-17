@@ -7,8 +7,8 @@ DESCRIPTION = "Linux Kernel provided and supported by NXP with focus on \
 i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU and IPU."
 
 require recipes-kernel/linux/linux-imx.inc
+require recipes-kernel/linux/linux-imx-src.inc
 require recipes-kernel/linux/linux-dtb.inc
-require recipes-kernel/linux/linux-imx_${PV}.inc
 
 DEPENDS += "lzop-native bc-native"
 
