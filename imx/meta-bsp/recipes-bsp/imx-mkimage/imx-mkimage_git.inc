@@ -3,4 +3,4 @@
 IMX_MKIMAGE_SRC ?= "git://source.codeaurora.org/external/imx/imx-mkimage.git;protocol=https"
 SRCBRANCH ?= "master"
 SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH}"
-SRCREV = "f95f055031c92adc797b53e05c26b1283a738505"
+SRCREV = "d4e440b2d15269594be5f45ce04a725c0646ac66"
