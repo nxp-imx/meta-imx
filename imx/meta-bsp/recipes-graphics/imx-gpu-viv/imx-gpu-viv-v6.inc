@@ -41,6 +41,8 @@ PROVIDES += " \
     virtual/egl \
     virtual/libgal-x11 \
     virtual/libopenvg \
+    virtual/opencl-headers \
+    virtual/opencl-icd \
     virtual/wayland-egl \
     ${EXTRA_PROVIDES} \
 "
