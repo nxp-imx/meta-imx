@@ -20,7 +20,7 @@ SOC_TOOLS_GPU_FB_imxgpu3d              = "eglinfo-fb"
 SOC_TOOLS_GPU_FB_append_mx8            = " glmark2 ${VULKAN_TOOLS}"
 
 SOC_TOOLS_GPU_WAYLAND                  = ""
-SOC_TOOLS_GPU_WAYLAND_imxgpu3d         = "glmark2"
+SOC_TOOLS_GPU_WAYLAND_imxgpu3d         = "glmark2 kmscube"
 
 SOC_TOOLS_GPU_XWAYLAND                 = "mesa-demos gtkperf"
 SOC_TOOLS_GPU_XWAYLAND_append_imxgpu3d = " glmark2"
