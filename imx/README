@@ -127,19 +127,17 @@ setup process because, once accepted, all further work in the Yocto environment 
 
 Chromium
 ---------
-The Chromium browser requires additional layers added in the fsl-release-setup.sh script.   
-To enable chromium requires the following steps:
+Add Chromium to your Wayland or X11-based image by adding the following lines to local.conf:
 
-In local.conf 
-- Add chromium into your install list:
-If building X11/FB backend, add a line followed:
-   CORE_IMAGE_EXTRA_INSTALL += "chromium libexif"
-
-If building XWayland/Wayland backend, add a line followed:
-   CORE_IMAGE_EXTRA_INSTALL += "chromium-wayland libexif"
-
-- Add commercial into the white list:
-LICENSE_FLAGS_WHITELIST="commercial"
+# Add Chromium
+IMAGE_INSTALL_append = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' chromium-wayland libexif', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', ' chromium libexif', \
+                                                        '', d), d)}"
+LICENSE_FLAGS_WHITELIST = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'commercial', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', 'commercial', \
+                                                        '', d), d)}"
 
 QTWebkit
 --------
