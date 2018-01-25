@@ -1,0 +1,4 @@
+#!/bin/sh
+cd test
+OPENSSL_ENGINES=../engines BLDTOP=.. SRCTOP=.. perl run_tests.pl
+cd ..
