@@ -1,5 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
-# Copyright 2017 NXP
+# Copyright 2017-2018 NXP
 
 DESCRIPTION = "i.MX System Controller Firmware"
 LICENSE = "MIT"
@@ -10,8 +10,8 @@ inherit fsl-eula-unpack pkgconfig deploy
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "c62b9ca939d23b1dd94f9b039bb7123c"
-SRC_URI[sha256sum] = "d7be0073edb4decd04f58169e99e6501be9117fc959672d236f995217794cae2"
+SRC_URI[md5sum] = "17e0789338a377b4fc1b7e4c1cbe8d91"
+SRC_URI[sha256sum] = "58fbbb65b8f73228ecae7f4bd85e6607deee959892a386cada7336d582ba5c32"
 
 S = "${WORKDIR}/${PN}-${PV}"
 
