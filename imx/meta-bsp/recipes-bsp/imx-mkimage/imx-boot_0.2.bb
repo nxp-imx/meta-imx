@@ -9,6 +9,9 @@ require imx-mkimage_git.inc
 
 inherit deploy
 
+# Add CFLAGS with native INCDIR & LIBDIR for imx-mkimage build
+CFLAGS = "-O2 -Wall -std=c99 -static -I ${STAGING_INCDIR_NATIVE} -L ${STAGING_LIBDIR_NATIVE}"
+
 BOOT_TOOLS = "imx-boot-tools"
 BOOT_NAME = "imx-boot"
 PROVIDES = "${BOOT_NAME}"

@@ -9,7 +9,6 @@ SECTION = "BSP"
 require imx-mkimage_git.inc
 
 inherit native deploy
-DEPENDS = "zlib-native"
 
 S = "${WORKDIR}/git"
 
