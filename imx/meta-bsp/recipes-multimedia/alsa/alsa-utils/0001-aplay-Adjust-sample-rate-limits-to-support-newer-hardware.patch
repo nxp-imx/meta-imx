@@ -1,0 +1,38 @@
+From d0802f32cafa8ba8ff4d48e3eb1f690b7adb0d3d Mon Sep 17 00:00:00 2001
+From: Jussi Laako <jussi@sonarnerd.net>
+Date: Thu, 7 Dec 2017 13:57:14 +0200
+Subject: [PATCH] aplay: Adjust sample rate limits to support newer hardware
+
+There are number of devices that support up to 384 kHz sampling rate and
+some devices up to 768 kHz sampling rate. This patch increases sanity
+check limit to 768k in order to support testing of such hardware.
+
+Upstream-Status: Backport [1.1.16]
+http://git.alsa-project.org/?p=alsa-utils.git;a=commit;h=d0802f32cafa8ba8ff4d48e3eb1f690b7adb0d3d
+
+Signed-off-by: Jussi Laako <jussi@sonarnerd.net>
+Signed-off-by: Takashi Iwai <tiwai@suse.de>
+---
+ aplay/aplay.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/aplay/aplay.c b/aplay/aplay.c
+index dbae17c..6b740c2 100644
+--- a/aplay/aplay.c
++++ b/aplay/aplay.c
+@@ -635,10 +635,10 @@ int main(int argc, char *argv[])
+ 				error(_("invalid rate argument '%s'"), optarg);
+ 				return 1;
+ 			}
+-			if (tmp < 300)
++			if (tmp < 1000)
+ 				tmp *= 1000;
+ 			rhwparams.rate = tmp;
+-			if (tmp < 2000 || tmp > 192000) {
++			if (tmp < 2000 || tmp > 768000) {
+ 				error(_("bad speed value %i"), tmp);
+ 				return 1;
+ 			}
+-- 
+1.7.11.7
+
