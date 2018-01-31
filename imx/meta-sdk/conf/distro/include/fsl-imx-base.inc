@@ -1,6 +1,6 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.9.51-mx8-beta"
+DISTRO_VERSION = "4.9.51-mx8-ga"
 
 DISTRO_CODENAME = "morty"
 SDK_VENDOR = "-pokysdk"
