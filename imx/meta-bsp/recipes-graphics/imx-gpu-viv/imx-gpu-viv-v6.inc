@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
 
 DEPENDS += \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', 'wayland virtual/libx11 libxdamage libxext libxfixes', \
                                                         '', d), d)}"
 DEPENDS += \
     "${@bb.utils.contains('DISTRO_FEATURES',     'x11', 'libxcb libxshmfence libxxf86vm', \
