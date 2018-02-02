@@ -7,7 +7,5 @@ IMX_PATCH_append = " file://0002-pcm-Fix-suspend-resume-regression-with-dmix-co.
 
 SRC_URI_append_mx8 = "${IMX_PATCH}"
 
-SRC_URI_remove_mx8 = " file://0004-pcm-Don-t-store-the-state-for-SND_PCM_STATE_SUSPENDE.patch"
-
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
 
