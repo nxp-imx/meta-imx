@@ -4,6 +4,3 @@ IMX_PATCH_append = " file://0002-pcm-Fix-suspend-resume-regression-with-dmix-co.
                      file://0003-Revert-pcm-Fix-suspend-resume-regression-with-dmix-c.patch \
                      file://0005-add-ak4458-conf-for-multichannel-support.patch \
 "
-
-SRC_URI_remove_mx8 = " file://0004-pcm-Don-t-store-the-state-for-SND_PCM_STATE_SUSPENDE.patch"
-
