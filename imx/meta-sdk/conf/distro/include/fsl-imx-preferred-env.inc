@@ -57,8 +57,6 @@ PREFERRED_VERSION_imx-gpu-viv               = "${GRAPHICS_VERSION}-${GRAPHICS_VE
 PREFERRED_VERSION_xf86-video-imx-vivante    = "${GRAPHICS_VERSION}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${GRAPHICS_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${GRAPHICS_VERSION}"
-PREFERRED_VERSION_openssl                   = "1.0.2m"
-PREFERRED_VERSION_openssl-native            = "1.0.2m"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"
