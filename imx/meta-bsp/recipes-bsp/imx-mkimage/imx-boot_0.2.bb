@@ -24,7 +24,7 @@ DEPENDS += " \
     imx-atf \
 "
 # Fix dtc: command not found for i.MX8MScale
-DEPENDS_mx8mq += " dtc-native"
+DEPENDS_append_mx8mq = " dtc-native"
 
 # For i.MX 8, this package aggregates the imx-m4-demos
 # output. Note that this aggregation replaces the aggregation
