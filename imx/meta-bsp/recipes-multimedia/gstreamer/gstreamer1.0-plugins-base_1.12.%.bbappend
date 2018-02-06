@@ -14,6 +14,9 @@ PACKAGECONFIG[gio-unix-2.0] = ""
 # Use i.MX fork of GST for customizations
 SRC_URI_remove_imx = " \
     http://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${PV}.tar.xz \
+    file://0003-ssaparse-enhance-SSA-text-lines-parsing.patch \
+    file://0004-subparse-set-need_segment-after-sink-pad-received-GS.patch \
+    file://get-caps-from-src-pad-when-query-caps.patch \
 "
 
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
