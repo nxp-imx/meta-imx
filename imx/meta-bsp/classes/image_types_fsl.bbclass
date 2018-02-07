@@ -19,6 +19,9 @@ UBOOT_SUFFIX_SDCARD ?= "${UBOOT_SUFFIX}"
 #
 MXSBOOT_NAND_ARGS ?= ""
 
+# Include required software for optee
+IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'packagegroup-fsl-optee', '', d)} "
+
 # IMX Bootlets Linux bootstream
 do_image_linux.sb[depends] = "elftosb-native:do_populate_sysroot \
                               imx-bootlets:do_deploy \
@@ -168,6 +171,14 @@ _generate_boot_image() {
                 fi
             done
         fi
+
+    # add tee to boot image
+    if ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true', 'false', d)}; then
+        for UTEE_FILE_PATH in `find ${DEPLOY_DIR_IMAGE} -maxdepth 1 -type f -name 'uTee-*' -print -quit`; do
+            UTEE_FILE=`basename ${UTEE_FILE_PATH}`
+            mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${UTEE_FILE} ::/${UTEE_FILE}
+        done
+    fi
 
 }
 

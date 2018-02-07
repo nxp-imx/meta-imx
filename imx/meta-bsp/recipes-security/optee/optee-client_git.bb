@@ -1,0 +1,48 @@
+# Copyright (C) 2017 NXP
+
+SUMMARY = "OPTEE Client libs"
+HOMEPAGE = "http://www.optee.org/"
+LICENSE = "BSD"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=69663ab153298557a59c67a60a743e5b"
+
+inherit pythonnative systemd
+
+SRC_URI = "git://bitbucket.sw.nxp.com/scm/imx/imx-optee-client.git;branch=imx_2.5.y;protocol=http"
+SRCREV = "${AUTOREV}"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+SRC_URI_append = " file://tee-supplicant.service"
+
+S = "${WORKDIR}/git"
+SYSTEMD_SERVICE_${PN} = "tee-supplicant.service"
+
+do_compile () {
+    if [ ${DEFAULTTUNE} = "aarch64" ]; then
+        oe_runmake -C ${S} ARCH=arm64
+    else
+        oe_runmake -C ${S} ARCH=arm
+    fi
+}
+
+do_install () {
+	oe_runmake install
+
+	install -D -p -m0644 ${S}/out/export/lib/libteec.so.1.0 ${D}${libdir}/libteec.so.1.0
+	ln -sf libteec.so.1.0 ${D}${libdir}/libteec.so
+	ln -sf libteec.so.1.0 ${D}${libdir}/libteec.so.1
+
+	install -D -p -m0755 ${S}/out/export/bin/tee-supplicant ${D}${bindir}/tee-supplicant
+
+	cp -a ${S}/out/export/include ${D}/usr/
+
+	sed -i -e s:/etc:${sysconfdir}:g -e s:/usr/bin:${bindir}:g ${WORKDIR}/tee-supplicant.service
+	install -D -p -m0644 ${WORKDIR}/tee-supplicant.service ${D}${systemd_system_unitdir}/tee-supplicant.service
+}
+
+PACKAGES += "tee-supplicant"
+FILES_${PN} += "${libdir}/* ${includedir}/*"
+FILES_tee-supplicant += "${bindir}/tee-supplicant"
+
+INSANE_SKIP_${PN} = "ldflags dev-elf"
+INSANE_SKIP_${PN}-dev = "ldflags dev-elf"
+INSANE_SKIP_tee-supplicant = "ldflags"
