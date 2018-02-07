@@ -7,7 +7,8 @@ LICENSE = "Proprietary"
 SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
+    file://Fix-malone-interface-build-error.patch"
 S = "${WORKDIR}/${PN}-${PV}"
 
 SRC_URI[md5sum] = "9509d0474b34323f4eab7c2d5b784252"
