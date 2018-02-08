@@ -34,6 +34,9 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/memtool_profile ${D}/home/root/.profile
 }
 
+# Avoid race condition between tasks. This should be upstreamed to meta-freescale.
+addtask make_scripts after do_configure before do_compile
+
 FILES_${PN} += " /home/root/.profile "
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
