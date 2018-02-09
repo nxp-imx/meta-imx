@@ -38,18 +38,4 @@ EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_G2D}"
 
 PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
 
-do_install_append() {
-    # Weston doesn't need the .la files to load modules, so wipe them
-    rm -f ${D}/${libdir}/libweston-4/*.la
-}
-
-PACKAGES_remove = "libweston-3"
-PACKAGES_append = " libweston-4"
-
-FILES_libweston-4 = "${libdir}/lib*${SOLIBS} ${libdir}/libweston-4/*.so"
-SUMMARY_libweston-4 = "Helper library for implementing 'wayland window managers'."
-
-FILES_${PN}-xwayland_remove = "${libdir}/libweston-3/xwayland.so"
-FILES_${PN}-xwayland_append = " ${libdir}/libweston-4/xwayland.so"
-
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
