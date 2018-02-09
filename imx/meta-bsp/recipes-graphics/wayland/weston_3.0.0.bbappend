@@ -5,10 +5,11 @@ DEPENDS_append_imxgpu2d = " virtual/libg2d"
 # Use i.MX fork of weston for customizations.
 SRC_URI_remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 SRC_URI_remove = "file://weston-gl-renderer-Set-pitch-correctly-for-subsampled-textures.patch"
+SRC_URI_remove = "file://fix-missing-header.patch"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-3.0"
 SRC_URI_prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV = "c91bb94e27a2f61bc6d397ecd5e71327f0ceed48"
+SRCREV = "ef52229f6d6722279ea9a0d938d5360a525dd513" 
 S = "${WORKDIR}/git"
 
 # Define RECIPE_SYSROOT since it doesn't exist in morty
@@ -36,5 +37,19 @@ IMX_EXTRA_OECONF_G2D_imxgpu2d = ""
 EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_G2D}"
 
 PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
+
+do_install_append() {
+    # Weston doesn't need the .la files to load modules, so wipe them
+    rm -f ${D}/${libdir}/libweston-4/*.la
+}
+
+PACKAGES_remove = "libweston-3"
+PACKAGES_append = " libweston-4"
+
+FILES_libweston-4 = "${libdir}/lib*${SOLIBS} ${libdir}/libweston-4/*.so"
+SUMMARY_libweston-4 = "Helper library for implementing 'wayland window managers'."
+
+FILES_${PN}-xwayland_remove = "${libdir}/libweston-3/xwayland.so"
+FILES_${PN}-xwayland_append = " ${libdir}/libweston-4/xwayland.so"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"

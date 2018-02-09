@@ -19,11 +19,11 @@ Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
  libweston/weston-launch.c | 20 ++++++++++++++++++++
  2 files changed, 27 insertions(+), 2 deletions(-)
 
-diff --git a/configure.ac b/configure.ac
-index 46cb2c7..bb45f46 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -435,13 +435,17 @@ AC_ARG_ENABLE(resize-optimization,
+Index: git/configure.ac
+===================================================================
+--- git.orig/configure.ac	2018-02-08 14:04:40.807286171 -0600
++++ git/configure.ac	2018-02-08 14:04:40.807286171 -0600
+@@ -472,13 +472,17 @@
  AS_IF([test "x$enable_resize_optimization" = "xyes"],
        [AC_DEFINE([USE_RESIZE_POOL], [1], [Use resize memory pool as a performance optimization])])
  
@@ -43,7 +43,7 @@ index 46cb2c7..bb45f46 100644
  fi
  
  AM_CONDITIONAL(HAVE_PANGO, test "x$have_pango" = "xyes")
-@@ -701,6 +705,7 @@ AC_MSG_RESULT([
+@@ -744,6 +748,7 @@
  	Enable developer documentation	${enable_devdocs}
  
  	weston-launch utility		${enable_weston_launch}
@@ -51,10 +51,10 @@ index 46cb2c7..bb45f46 100644
  	systemd-login support		${have_systemd_login}
  	systemd notify support		${enable_systemd_notify}
  
-diff --git a/libweston/weston-launch.c b/libweston/weston-launch.c
-index 0491896..07e7469 100644
---- a/libweston/weston-launch.c
-+++ b/libweston/weston-launch.c
+Index: git/libweston/weston-launch.c
+===================================================================
+--- git.orig/libweston/weston-launch.c	2018-02-08 14:04:40.807286171 -0600
++++ git/libweston/weston-launch.c	2018-02-08 14:08:10.000000000 -0600
 @@ -51,7 +51,9 @@
  
  #include <pwd.h>
@@ -65,7 +65,7 @@ index 0491896..07e7469 100644
  
  #ifdef HAVE_SYSTEMD_LOGIN
  #include <systemd/sd-login.h>
-@@ -93,8 +95,10 @@ drmSetMaster(int drm_fd)
+@@ -101,8 +103,10 @@
  #endif
  
  struct weston_launch {
@@ -76,7 +76,7 @@ index 0491896..07e7469 100644
  	int tty;
  	int ttynr;
  	int sock[2];
-@@ -181,6 +185,7 @@ weston_launch_allowed(struct weston_launch *wl)
+@@ -189,6 +193,7 @@
  	return false;
  }
  
@@ -84,7 +84,7 @@ index 0491896..07e7469 100644
  static int
  pam_conversation_fn(int msg_count,
  		    const struct pam_message **messages,
-@@ -221,6 +226,7 @@ setup_pam(struct weston_launch *wl)
+@@ -229,6 +234,7 @@
  
  	return 0;
  }
@@ -92,7 +92,7 @@ index 0491896..07e7469 100644
  
  static int
  setup_launcher_socket(struct weston_launch *wl)
-@@ -414,6 +420,7 @@ quit(struct weston_launch *wl, int status)
+@@ -422,6 +428,7 @@
  	close(wl->signalfd);
  	close(wl->sock[0]);
  
@@ -100,7 +100,7 @@ index 0491896..07e7469 100644
  	if (wl->new_user) {
  		err = pam_close_session(wl->ph, 0);
  		if (err)
-@@ -421,6 +428,7 @@ quit(struct weston_launch *wl, int status)
+@@ -429,6 +436,7 @@
  				err, pam_strerror(wl->ph, err));
  		pam_end(wl->ph, err);
  	}
@@ -108,7 +108,7 @@ index 0491896..07e7469 100644
  
  	if (ioctl(wl->tty, KDSKBMUTE, 0) &&
  	    ioctl(wl->tty, KDSKBMODE, wl->kb_mode))
-@@ -600,6 +608,7 @@ setup_session(struct weston_launch *wl, char **child_argv)
+@@ -608,6 +616,7 @@
  	setenv("HOME", wl->pw->pw_dir, 1);
  	setenv("SHELL", wl->pw->pw_shell, 1);
  
@@ -116,7 +116,7 @@ index 0491896..07e7469 100644
  	env = pam_getenvlist(wl->ph);
  	if (env) {
  		for (i = 0; env[i]; ++i) {
-@@ -608,6 +617,7 @@ setup_session(struct weston_launch *wl, char **child_argv)
+@@ -616,6 +625,7 @@
  		}
  		free(env);
  	}
@@ -124,17 +124,18 @@ index 0491896..07e7469 100644
  
  	/*
  	 * We open a new session, so it makes sense
-@@ -675,7 +685,9 @@ static void
+@@ -683,8 +693,10 @@
  help(const char *name)
  {
  	fprintf(stderr, "Usage: %s [args...] [-- [weston args..]]\n", name);
 +#ifdef HAVE_PAM
- 	fprintf(stderr, "  -u, --user      Start session as specified username\n");
+ 	fprintf(stderr, "  -u, --user      Start session as specified username,\n"
+ 			"                  e.g. -u joe, requires root.\n");
 +#endif
- 	fprintf(stderr, "  -t, --tty       Start session on alternative tty\n");
+ 	fprintf(stderr, "  -t, --tty       Start session on alternative tty,\n"
+ 			"                  e.g. -t /dev/tty4, requires -u option.\n");
  	fprintf(stderr, "  -v, --verbose   Be verbose\n");
- 	fprintf(stderr, "  -h, --help      Display this help message\n");
-@@ -688,7 +700,9 @@ main(int argc, char *argv[])
+@@ -698,7 +710,9 @@
  	int i, c;
  	char *tty = NULL;
  	struct option opts[] = {
@@ -144,8 +145,8 @@ index 0491896..07e7469 100644
  		{ "tty",     required_argument, NULL, 't' },
  		{ "verbose", no_argument,       NULL, 'v' },
  		{ "help",    no_argument,       NULL, 'h' },
-@@ -700,9 +714,13 @@ main(int argc, char *argv[])
- 	while ((c = getopt_long(argc, argv, "u:t::vh", opts, &i)) != -1) {
+@@ -710,9 +724,13 @@
+ 	while ((c = getopt_long(argc, argv, "u:t:vh", opts, &i)) != -1) {
  		switch (c) {
  		case 'u':
 +#ifdef HAVE_PAM
@@ -158,7 +159,7 @@ index 0491896..07e7469 100644
  			break;
  		case 't':
  			tty = optarg;
-@@ -740,8 +758,10 @@ main(int argc, char *argv[])
+@@ -753,8 +771,10 @@
  	if (setup_tty(&wl, tty) < 0)
  		exit(EXIT_FAILURE);
  
@@ -169,6 +170,3 @@ index 0491896..07e7469 100644
  
  	if (setup_launcher_socket(&wl) < 0)
  		exit(EXIT_FAILURE);
--- 
-2.1.4
-
