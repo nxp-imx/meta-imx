@@ -10,7 +10,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-VULKAN_TOOLS = "vulkan-loader-layers vulkan-loader-layers-dev"
+VULKAN_TOOLS = "vulkan vulkan-demos vkmark"
 
 SOC_TOOLS_GPU_X11                      = "mesa-demos gtkperf"
 SOC_TOOLS_GPU_X11_append_imxgpu3d      = " glmark2 eglinfo-x11 glcompbench"
