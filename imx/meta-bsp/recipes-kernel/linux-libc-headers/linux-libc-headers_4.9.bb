@@ -7,3 +7,5 @@ SRC_URI_append_libc-musl = "\
     file://0002-libc-compat.h-prevent-redefinition-of-struct-ethhdr.patch \
     file://0003-remove-inclusion-of-sysinfo.h-in-kernel.h.patch \
    "
+
+SRC_URI_append = " file://Install-dma-buf-h.patch"

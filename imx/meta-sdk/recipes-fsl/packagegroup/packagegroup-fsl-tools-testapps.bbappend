@@ -11,10 +11,6 @@ RDEPENDS_${PN}-fslcodec-testapps += " \
 
 ALLOW_EMPTY_${PN}-fslcodec-testapps = "1"
 
-# Install i.MX specific UAPI headers to rootfs
-SOC_UAPI_HEADERS = ""
-SOC_UAPI_HEADERS_imx = "${@base_conditional('PREFERRED_PROVIDER_virtual/kernel','linux-imx','linux-imx-soc-headers','',d)}"
-
 SOC_TOOLS_IMX_TESTAPPS = " \
     imx-kobs \
     vlan \
@@ -34,7 +30,6 @@ SOC_TOOLS_TEST_imxgpu  = "imx-test imx-gpu-viv-demos"
 
 RDEPENDS_${PN} += " \
     ${SOC_TOOLS_TESTAPPS} \
-    ${SOC_UAPI_HEADERS} \
     procps \
     ptpd \
     linuxptp \
