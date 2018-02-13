@@ -32,8 +32,6 @@ SRCBRANCH = "imx-1.12.x"
 
 SRC_URI_append_imx = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
-    file://0001-gst-plugins-bad-Correct-PKG_COFING-directory-for-WAY.patch \
-    file://0001-gstreamer-gl.pc.in-Don-t-append-GL_CFLAGS-to-CFLAGS.patch \
 "
 
 SRCREV_imx = "f9b27b75046245690cc21b017a43ebbd09b309a9"

@@ -36,7 +36,11 @@ PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '',
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
 PACKAGECONFIG[wayland] = "--disable-wayland --disable-x11,--disable-wayland,wayland qtwayland"
-PACKAGECONFIG[qt5] = ",--disable-qt,qtbase qtdeclarative qtx11extras"
+PACKAGECONFIG[qt5] = '--enable-qt \
+                      --with-moc="${STAGING_DIR_NATIVE}/usr/bin/qt5/moc" \
+                      --with-uic="${STAGING_DIR_NATIVE}/usr/bin/qt5/uic" \
+                      --with-rcc="${STAGING_DIR_NATIVE}/usr/bin/qt5/rcc" \
+                     ,--disable-qt,qtbase qtdeclarative qtbase-native'
 
 # Use i.MX fork of GST for customizations
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"

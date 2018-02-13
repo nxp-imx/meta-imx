@@ -6,7 +6,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 #     (Support static ip address like: ip=10.192.242.179:10.192.242.47:10.192.242.254:255.255.255.0:imx:eth0:off)
 
 SRC_URI += " \
-             file://replace-hardcode-and-add-EnvironmentFile-and-Wants.patch \
              file://connmand-env \
              file://connman-env.service \
 "

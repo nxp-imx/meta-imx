@@ -12,9 +12,6 @@ IMX_BACKEND = \
 
 SRC_URI_append = " \
     file://qt5-${IMX_BACKEND}.sh \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', \
-        'file://0001-xcb-Ignore-XI2-LMB-mouse-events-from-touch-screens.patch', \
-        '', d)} \
 "
 SRC_URI_append_imxgpu = " \
     file://0014-Add-IMX-GPU-support.patch \

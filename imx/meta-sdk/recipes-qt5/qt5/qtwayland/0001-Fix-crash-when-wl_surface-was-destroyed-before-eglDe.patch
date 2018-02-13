@@ -1,29 +1,31 @@
-From eb7bf049b8ee84d906c1dec974c0910f3ce2e757 Mon Sep 17 00:00:00 2001
-From: Yong Gan <yong.gan@nxp.com>
-Date: Fri, 16 Jun 2017 05:32:13 +0800
-Subject: [PATCH] Fix crash when wl_surface was destroyed before
- eglDestroySurface called
+From f407bd40a35153f88b3492814b805e0773e53881 Mon Sep 17 00:00:00 2001
+From: Alexandru Palalau <ioan-alexandru.palalau@nxp.com>
+Date: Mon, 15 Jan 2018 15:18:41 +0200
+Subject: [PATCH] =?UTF-8?q?Fix=20crash=20when=20wl=5Fsurface=20was=20destr?=
+ =?UTF-8?q?oyed=20before=20eglDestroySurface=20called.=20Upstream=C2=A0Sta?=
+ =?UTF-8?q?tus:=C2=A0Inappropriate=C2=A0[i.MX=C2=A0specific]?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Upstream Status: Inappropriate [i.MX specific]
-
-Signed-off-by Yong Gan <yong.gan@nxp.com>
+Signed-off-by: Alexandru Palalau <ioan-alexandru.palalau@nxp.com>
 ---
  src/client/qwaylandwindow.cpp | 2 --
  1 file changed, 2 deletions(-)
 
 diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
-index 83e5f7c..12970d7 100644
+index 6d7c088..94c89a3 100644
 --- a/src/client/qwaylandwindow.cpp
 +++ b/src/client/qwaylandwindow.cpp
-@@ -334,8 +334,6 @@ void QWaylandWindow::setVisible(bool visible)
-         // case 'this' will be deleted. When that happens, we must abort right away.
-         QPointer<QWaylandWindow> deleteGuard(this);
+@@ -385,8 +385,6 @@ void QWaylandWindow::setVisible(bool visible)
          QWindowSystemInterface::flushWindowSystemEvents();
+         if (!deleteGuard.isNull() && window()->type() == Qt::Popup)
+             closePopups(this);
 -        if (!deleteGuard.isNull())
 -            reset();
      }
  }
  
 -- 
-1.9.1
+2.7.4
 
