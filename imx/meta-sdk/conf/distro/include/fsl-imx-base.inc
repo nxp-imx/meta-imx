@@ -13,7 +13,9 @@ TARGET_VENDOR = "-poky"
 
 LOCALCONF_VERSION = "1"
 
-IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch bluez vulkan"
+IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch bluez"
+# Enable vulkan distro feature only for mx8
+IMX_DEFAULT_DISTRO_FEATURES_append_mx8 = " vulkan"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 IMAGE_FSTYPES = "tar.bz2 ext4 sdcard.bz2"

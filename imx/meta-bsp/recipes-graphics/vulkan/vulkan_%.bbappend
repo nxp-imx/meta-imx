@@ -18,3 +18,5 @@ do_install_append () {
 # Use some vulkan headers from imx-gpu-viv
     rm -rf ${D}${includedir}/vulkan/vk_*
 }
+
+COMPATIBLE_MACHINE = "(mx8)"
