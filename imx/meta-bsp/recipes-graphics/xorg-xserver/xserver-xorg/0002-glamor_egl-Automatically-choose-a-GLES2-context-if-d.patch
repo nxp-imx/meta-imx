@@ -1,10 +1,10 @@
-From c652f62d89605fc613b757e65aa160aa1802f050 Mon Sep 17 00:00:00 2001
+From 1c99ec67c526b21f6cde697c8efece82a7884a15 Mon Sep 17 00:00:00 2001
 From: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
 Date: Tue, 18 Jul 2017 09:49:06 -0500
 Subject: [PATCH] glamor_egl: Automatically choose a GLES2 context if desktop
  GL fails.
 
-Backport to 1.18.4 from xserver 1.19.x
+Backport from xserver 1.19.x for Pyro
 
 GLES2 support has been requested multiple times, and we've had this
 code laying around trying to implement it.  The GLES2 implementation
@@ -17,14 +17,14 @@ Reviewed-by: Adam Jackson <ajax@redhat.com>
 Signed-off-by: Eric Anholt <eric@anholt.net>
 Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
 ---
- glamor/glamor_egl.c | 156 ++++++++++++++++++++++++++++------------------------
- 1 file changed, 83 insertions(+), 73 deletions(-)
+ glamor/glamor_egl.c | 143 ++++++++++++++++++++++++++--------------------------
+ 1 file changed, 71 insertions(+), 72 deletions(-)
 
 diff --git a/glamor/glamor_egl.c b/glamor/glamor_egl.c
-index 5aacbed..9aa4fc9 100644
+index 4bde637..d6fd9c5 100644
 --- a/glamor/glamor_egl.c
 +++ b/glamor/glamor_egl.c
-@@ -75,7 +75,7 @@ struct glamor_egl_screen_private {
+@@ -73,7 +73,7 @@ struct glamor_egl_screen_private {
  #endif
      int has_gem;
      int gl_context_depth;
@@ -32,8 +32,8 @@ index 5aacbed..9aa4fc9 100644
 +
  
      CloseScreenProcPtr saved_close_screen;
-     xf86FreeScreenProc *saved_free_screen;
-@@ -350,7 +350,7 @@ glamor_egl_create_textured_pixmap_from_gbm_bo(PixmapPtr pixmap, void *bo)
+     DestroyPixmapProcPtr saved_destroy_pixmap;
+@@ -307,7 +307,7 @@ glamor_egl_create_textured_pixmap_from_gbm_bo(PixmapPtr pixmap,
      glamor_make_current(glamor_priv);
  
      image = eglCreateImageKHR(glamor_egl->display,
@@ -42,18 +42,15 @@ index 5aacbed..9aa4fc9 100644
                                EGL_NATIVE_PIXMAP_KHR, bo, NULL);
      if (image == EGL_NO_IMAGE_KHR) {
          glamor_set_pixmap_type(pixmap, GLAMOR_DRM_ONLY);
-@@ -507,8 +507,8 @@ glamor_egl_dri3_fd_name_from_tex(ScreenPtr screen,
+@@ -447,6 +447,7 @@ glamor_egl_dri3_fd_name_from_tex(ScreenPtr screen,
              glamor_get_name_from_bo(glamor_egl->fd, bo, &fd);
      }
      else {
--        if (glamor_get_fd_from_bo(glamor_egl->fd, bo, &fd)) {
--        }
 +        /*fixed from Xserver 1.19.x*/
-+        fd = gbm_bo_get_fd(bo);
+         fd = gbm_bo_get_fd(bo);
      }
      *stride = pixmap->devKind;
-     *size = pixmap->devKind * gbm_bo_get_height(bo);
-@@ -538,9 +538,6 @@ glamor_back_pixmap_from_fd(PixmapPtr pixmap,
+@@ -477,9 +478,6 @@ glamor_back_pixmap_from_fd(PixmapPtr pixmap,
  
      glamor_egl = glamor_egl_get_screen_private(scrn);
  
@@ -63,7 +60,7 @@ index 5aacbed..9aa4fc9 100644
      if (bpp != 32 || !(depth == 24 || depth == 32) || width == 0 || height == 0)
          return FALSE;
  
-@@ -724,7 +721,7 @@ glamor_egl_screen_init(ScreenPtr screen, struct glamor_context *glamor_ctx)
+@@ -669,7 +667,7 @@ glamor_egl_screen_init(ScreenPtr screen, struct glamor_context *glamor_ctx)
      glamor_ctx->make_current = glamor_egl_make_current;
  
  #ifdef DRI3
@@ -72,7 +69,7 @@ index 5aacbed..9aa4fc9 100644
      	glamor_screen_private *glamor_priv = glamor_get_screen_private(screen);
          /* Tell the core that we have the interfaces for import/export
           * of pixmaps.
-@@ -783,25 +780,8 @@ Bool
+@@ -733,25 +731,8 @@ Bool
  glamor_egl_init(ScrnInfoPtr scrn, int fd)
  {
      struct glamor_egl_screen_private *glamor_egl;
@@ -98,7 +95,7 @@ index 5aacbed..9aa4fc9 100644
      glamor_egl = calloc(sizeof(*glamor_egl), 1);
      if (glamor_egl == NULL)
          return FALSE;
-@@ -810,35 +790,27 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
+@@ -760,41 +741,26 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
  
      scrn->privates[xf86GlamorEGLPrivateIndex].ptr = glamor_egl;
      glamor_egl->fd = fd;
@@ -109,23 +106,23 @@ index 5aacbed..9aa4fc9 100644
          ErrorF("couldn't get display device\n");
          goto error;
      }
--    glamor_egl->display = eglGetDisplay(glamor_egl->gbm);
+ 
+-    glamor_egl->display = glamor_egl_get_display(EGL_PLATFORM_GBM_MESA,
+-                                                 glamor_egl->gbm);
++    glamor_egl->display = eglGetPlatformDisplayEXT(EGL_PLATFORM_GBM_KHR, glamor_egl->gbm, NULL);
+     if (!glamor_egl->display) {
+         xf86DrvMsg(scrn->scrnIndex, X_ERROR, "eglGetDisplay() failed\n");
+         goto error;
+     }
 -#else
 -    glamor_egl->display = eglGetDisplay((EGLNativeDisplayType) (intptr_t) fd);
 -#endif
-+    
-+    glamor_egl->display = eglGetPlatformDisplayEXT(EGL_PLATFORM_GBM_KHR, glamor_egl->gbm, NULL);
-+	if (!glamor_egl->display) {
-+        xf86DrvMsg(scrn->scrnIndex, X_ERROR, "eglGetDisplay() failed\n");
-+        goto error;
-+    }
  
 -    glamor_egl->has_gem = glamor_egl_check_has_gem(fd);
++    if (!eglInitialize(glamor_egl->display, NULL, NULL)) {
  
 -    if (!eglInitialize
 -        (glamor_egl->display, &glamor_egl->major, &glamor_egl->minor)) {
-+    if (!eglInitialize(glamor_egl->display, NULL, NULL)) {
-+
          xf86DrvMsg(scrn->scrnIndex, X_ERROR, "eglInitialize() failed\n");
          glamor_egl->display = EGL_NO_DISPLAY;
          goto error;
@@ -143,7 +140,7 @@ index 5aacbed..9aa4fc9 100644
  #define GLAMOR_CHECK_EGL_EXTENSION(EXT)  \
  	if (!epoxy_has_egl_extension(glamor_egl->display, "EGL_" #EXT)) {  \
  		ErrorF("EGL_" #EXT " required.\n");  \
-@@ -852,30 +824,66 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
+@@ -808,30 +774,66 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
  		goto error;  \
  	}
  
@@ -229,21 +226,16 @@ index 5aacbed..9aa4fc9 100644
      }
  
      if (!eglMakeCurrent(glamor_egl->display,
-@@ -884,21 +892,23 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
-                    "Failed to make EGL context current\n");
-         goto error;
-     }
+@@ -845,21 +847,18 @@ glamor_egl_init(ScrnInfoPtr scrn, int fd)
+      * (in case of multiple GPUs using glamor)
+      */
+     lastGLContext = NULL;
 -#ifdef GLAMOR_HAS_GBM
 -    if (epoxy_has_egl_extension(glamor_egl->display,
 -                                "EGL_KHR_gl_texture_2D_image") &&
 -        epoxy_has_gl_extension("GL_OES_EGL_image"))
 -        glamor_egl->dri3_capable = TRUE;
 -#endif
-+    /*
-+     * Force the next glamor_make_current call to set the right context
-+     * (in case of multiple GPUs using glamor)
-+     */
-+    lastGLContext = NULL;
 +
 +    if (!epoxy_has_gl_extension("GL_OES_EGL_image")) {
 +        xf86DrvMsg(scrn->scrnIndex, X_ERROR,
