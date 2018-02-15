@@ -9,3 +9,7 @@ SRC_URI_append_libc-musl = "\
    "
 
 SRC_URI_append = " file://Install-dma-buf-h.patch"
+
+do_install_append() {
+    install -m 0644 ${B}/drivers/staging/android/uapi/ion.h ${D}${exec_prefix}/include/linux
+}
