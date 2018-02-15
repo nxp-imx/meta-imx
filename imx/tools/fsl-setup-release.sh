@@ -115,7 +115,7 @@ done
 
 if [ -z "$DISTRO" ]; then
     if [ -z "$FSLDISTRO" ]; then
-        FSLDISTRO='fsl-imx-x11'
+        FSLDISTRO='fsl-imx-xwayland'
     fi
 else
     FSLDISTRO="$DISTRO"
