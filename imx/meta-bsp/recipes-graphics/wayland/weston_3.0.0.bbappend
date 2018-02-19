@@ -36,6 +36,9 @@ IMX_EXTRA_OECONF_G2D          = " --disable-imxg2d"
 IMX_EXTRA_OECONF_G2D_imxgpu2d = ""
 EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_G2D}"
 
+# drm is not supported on mx6
+PACKAGECONFIG_remove_mx6 = "kms"
+
 PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
