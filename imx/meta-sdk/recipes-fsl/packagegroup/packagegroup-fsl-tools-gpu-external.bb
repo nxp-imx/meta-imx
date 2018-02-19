@@ -13,7 +13,7 @@ inherit packagegroup
 VULKAN_TOOLS = "vulkan vulkan-demos vkmark"
 
 SOC_TOOLS_GPU_X11                      = "mesa-demos gtkperf"
-SOC_TOOLS_GPU_X11_append_imxgpu3d      = " glmark2 eglinfo-x11 glcompbench"
+SOC_TOOLS_GPU_X11_append_imxgpu3d      = " glmark2 eglinfo-x11"
 
 SOC_TOOLS_GPU_FB                       = ""
 SOC_TOOLS_GPU_FB_imxgpu3d              = "eglinfo-fb"
