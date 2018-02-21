@@ -1,9 +1,8 @@
-# As i.MX8MQ has no imxgpu2d hw, need remove mesa features to avoid multple provider issue
-PROVIDES_remove_imxgpu3d = "virtual/libgles1 virtual/libgles2 virtual/libopenvg virtual/egl virtual/libgl gbm"
-PROVIDES_remove_imxgpu2d = "gbm"
+PROVIDES_remove_imxgpu   = "virtual/egl"
+PROVIDES_remove_imxgpu3d = "virtual/libgl virtual/libgles1 virtual/libgles2"
 
-PACKAGECONFIG_remove_imxgpu3d = "egl gles gbm"
-PACKAGECONFIG_remove_imxgpu2d = "gbm"
+PACKAGECONFIG_remove_imxgpu   = "egl gbm"
+PACKAGECONFIG_remove_imxgpu3d = "gles"
 
 BACKEND = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
