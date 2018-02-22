@@ -96,16 +96,15 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 REALSOLIBS := "${SOLIBS}"
 SOLIBS = "${SOLIBSDEV}"
 
-# For the packages that make up the OpenGL interfaces, inject variables so that
-# they don't get Debian-renamed (which would remove the -imx suffix).
-#
-# FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
-# the source we cannot fix it. Disable the insane check for now.
 python __anonymous() {
+    # FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
+    # the source we cannot fix it. Disable the insane check for now.
     packages = d.getVar('PACKAGES', True).split()
     for p in packages:
         d.appendVar("INSANE_SKIP_%s" % p, " ldflags")
 
+    # For the packages that make up the OpenGL interfaces, inject variables so that
+    # they don't get Debian-renamed (which would remove the -imx suffix).
     for p in (("libegl", "libegl1"), ("libgl", "libgl1"),
               ("libgles1", "libglesv1-cm1"), ("libgles2", "libglesv2-2"),
               ("libgles3",) , ("libvulkan",)):
