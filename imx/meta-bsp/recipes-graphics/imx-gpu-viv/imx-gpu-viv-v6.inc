@@ -8,13 +8,13 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
 
 DEPENDS += \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland libdrm', \
         bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes', \
                                                         '', d), d)}"
 DEPENDS += \
     "${@bb.utils.contains('DISTRO_FEATURES',     'x11', 'libxcb libxshmfence libxxf86vm', \
                                                         '', d)}"
-DEPENDS += "libdrm wayland"
+DEPENDS_append_imxdrm = " wayland libdrm"
 
 # imx-gpu-viv does not provide everything it needs to for virtual/libgl
 # on x11 backend or on Wayland backend with XWayland support.
