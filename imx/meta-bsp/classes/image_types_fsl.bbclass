@@ -91,7 +91,7 @@ do_image_sdcard[depends] = "parted-native:do_populate_sysroot \
                             dosfstools-native:do_populate_sysroot \
                             mtools-native:do_populate_sysroot \
                             virtual/kernel:do_deploy \
-                            ${@d.getVar('IMAGE_BOOTLOADER', True) and d.getVar('IMAGE_BOOTLOADER', True) + ':do_deploy' or ''} \
+                            ${IMAGE_BOOTLOADER}:do_deploy \
                             ${IMAGE_BOOTFILES_DEPENDS} \
                            "
 
