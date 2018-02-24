@@ -2,8 +2,6 @@ inherit image_types
 
 IMAGE_BOOTLOADER ?= "u-boot"
 
-IMAGE_BOOTFIRMWARE ?= ""
-
 IMAGE_BOOTFILES ?= ""
 IMAGE_BOOTFILES_DEPENDS ?= ""
 
@@ -94,7 +92,6 @@ do_image_sdcard[depends] = "parted-native:do_populate_sysroot \
                             mtools-native:do_populate_sysroot \
                             virtual/kernel:do_deploy \
                             ${@d.getVar('IMAGE_BOOTLOADER', True) and d.getVar('IMAGE_BOOTLOADER', True) + ':do_deploy' or ''} \
-                            ${@d.getVar('IMAGE_BOOTFIRMWARE', True) and d.getVar('IMAGE_BOOTFIRMWARE', True) + ':do_deploy' or ''} \
                             ${IMAGE_BOOTFILES_DEPENDS} \
                            "
 
