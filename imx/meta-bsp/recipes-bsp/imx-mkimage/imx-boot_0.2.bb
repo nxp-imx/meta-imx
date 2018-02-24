@@ -23,13 +23,12 @@ DEPENDS += " \
     ${IMX_FIRMWARE} \
     imx-atf \
 "
-# Fix dtc: command not found for i.MX8MScale
 DEPENDS_append_mx8mq = " dtc-native"
 
 # For i.MX 8, this package aggregates the imx-m4-demos
 # output. Note that this aggregation replaces the aggregation
 # that would otherwise be done in the image build as controlled
-# by IMAGE_M4LOADER and IMAGE_M4 in image_types_fsl.bbclass
+# by IMAGE_BOOTFILES_DEPENDS and IMAGE_BOOTFILES in image_types_fsl.bbclass
 IMX_M4_DEMOS        = ""
 IMX_M4_DEMOS_mx8qm  = "imx-m4-demos:do_deploy"
 IMX_M4_DEMOS_mx8qxp = "imx-m4-demos:do_deploy"

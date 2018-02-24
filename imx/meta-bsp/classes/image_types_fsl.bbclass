@@ -2,11 +2,9 @@ inherit image_types
 
 IMAGE_BOOTLOADER ?= "u-boot"
 
-IMAGE_M4LOADER ?= ""
-IMAGE_M4 ?= ""
 IMAGE_BOOTFIRMWARE ?= ""
 
-IMAGE_BOOTFILES += "${IMAGE_M4}"
+IMAGE_BOOTFILES ?= ""
 IMAGE_BOOTFILES_DEPENDS ?= ""
 
 IMX_BOOT_SEEK ?= "33"
@@ -97,7 +95,6 @@ do_image_sdcard[depends] = "parted-native:do_populate_sysroot \
                             virtual/kernel:do_deploy \
                             ${@d.getVar('IMAGE_BOOTLOADER', True) and d.getVar('IMAGE_BOOTLOADER', True) + ':do_deploy' or ''} \
                             ${@d.getVar('IMAGE_BOOTFIRMWARE', True) and d.getVar('IMAGE_BOOTFIRMWARE', True) + ':do_deploy' or ''} \
-                            ${@d.getVar('IMAGE_M4LOADER', True) and d.getVar('IMAGE_M4LOADER', True) + ':do_deploy' or ''} \
                             ${IMAGE_BOOTFILES_DEPENDS} \
                            "
 
