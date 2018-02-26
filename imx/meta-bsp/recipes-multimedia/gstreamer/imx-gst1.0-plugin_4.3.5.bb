@@ -10,7 +10,7 @@ SECTION = "multimedia"
 DEPENDS = "imx-codec imx-parser virtual/kernel gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
 DEPENDS_append_mx6 = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
-DEPENDS_append_imxvpu = " imx-vpuwrap"
+DEPENDS_append_imxvpu = " imx-vpuwrap libdrm"
 
 # For backwards compatibility
 RREPLACES_${PN} = "gst1.0-fsl-plugin"
