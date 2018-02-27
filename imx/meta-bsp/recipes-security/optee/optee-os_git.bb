@@ -21,7 +21,11 @@ python () {
 	machine = d.getVar("MACHINE", True)
 
 	import re
-	if re.match('imx',machine):
+	if re.match('imx6qpdlsolox',machine):
+		subplatform = 'mx6qsabresd'
+	elif re.match('imx6ul7d',machine):
+		subplatform = 'mx6ulevk'
+	elif re.match('imx',machine):
 		subplatform = machine[1:]
 	else:
         	bb.fatal("optee-os doesn't recognize this MACHINE")
