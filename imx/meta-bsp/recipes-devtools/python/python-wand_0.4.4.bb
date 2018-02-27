@@ -1,5 +1,5 @@
 DESCRIPTION = "Magic wand library"
-HOMEPAGE = "http://docs.wand-py.org/en/0.4.3/"
+HOMEPAGE = "http://docs.wand-py.org/en/0.4.4/"
 SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=170eafd687d4a2b950819cd5e067e6d5"
