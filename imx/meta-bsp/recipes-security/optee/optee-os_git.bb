@@ -1,4 +1,4 @@
-# Copyright (C) 2017 NXP
+# Copyright (C) 2017-2018 NXP
 
 SUMMARY = "OPTEE OS"
 DESCRIPTION = "OPTEE OS"
@@ -8,7 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=69663ab153298557a59c67a60a743e5b"
 
 inherit deploy pythonnative autotools
 DEPENDS = "python-pycrypto-native python-wand-native"
-SRC_URI = "git://bitbucket.sw.nxp.com/scm/imx/imx-optee-os.git;branch=imx_2.5.y;protocol=http"
+
+SRCBRANCH = "imx_2.5.y"
+OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
+SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"

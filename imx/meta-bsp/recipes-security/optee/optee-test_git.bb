@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 inherit pythonnative
 DEPENDS = "optee-os optee-client python-pycrypto-native"
 
-SRC_URI = "git://bitbucket.sw.nxp.com/scm/imx/imx-optee-test.git;branch=imx_2.5.y;protocol=http"
+SRCBRANCH = "imx_2.5.y"
+OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
+SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
@@ -24,7 +26,7 @@ do_compile () {
     fi
     export OPTEE_CLIENT_EXPORT=${STAGING_DIR_HOST}/usr
     export CROSS_COMPILE_HOST=${HOST_PREFIX}
-    export CROSS_COMPILE_TA=${HOST_PREFIX} 
+    export CROSS_COMPILE_TA=${HOST_PREFIX}
     export CROSS_COMPILE=${HOST_PREFIX}
 
     oe_runmake V=1
