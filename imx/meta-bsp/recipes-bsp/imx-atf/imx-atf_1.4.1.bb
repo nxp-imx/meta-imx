@@ -27,7 +27,7 @@ SOC_ATF_mx8mq = "imx8mq"
 SYSROOT_DIRS += "/boot"
 
 # Only i.MX8M supports OP-TEE addition.
-EXTRA_OEMAKE_append_mx8mq = "  ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'SPD=opteed', '', d)}"
+EXTRA_OEMAKE_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'SPD=opteed', '', d)}"
 
 do_compile () {
     export CROSS_COMPILE="${TARGET_PREFIX}"
