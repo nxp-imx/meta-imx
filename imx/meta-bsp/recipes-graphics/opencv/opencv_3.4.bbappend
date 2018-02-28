@@ -1,10 +1,13 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+SRC_URI += "git://github.com/opencv/opencv_extra.git;destsuffix=opencv_extra;name=opencv_extra"
 SRCREV_opencv_extra = "c41d35c0be5feeb884e7da57c201461cb9877863"
 
-SRC_URI_append = "git://github.com/opencv/opencv_extra.git;destsuffix=opencv_extra;name=opencv_extra"
-
-PACKAGECONFIG_remove_imx = "eigen python3"
+PACKAGECONFIG_remove_imx   = "eigen python3"
+PACKAGECONFIG_remove_mx8   = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
+PACKAGECONFIG_append_mx8   = " opencl"
+PACKAGECONFIG_append_mx8dv = " openvx"
+PACKAGECONFIG_append_mx8qm = " openvx"
 
 PACKAGECONFIG[openvx] = " \
     -DWITH_OPENVX=ON -DOPENVX_ROOT=${STAGING_LIBDIR} -DOPENVX_LIB_CANDIDATES='OpenVX;OpenVXU', \
@@ -24,10 +27,6 @@ PACKAGECONFIG[test] = " \
     -DBUILD_TESTS=ON -DINSTALL_TESTS=ON -DOPENCV_TEST_DATA_PATH=${S}/../opencv_extra/testdata, \
     -DBUILD_TESTS=OFF -DINSTALL_TESTS=OFF, \
 "
-
-PACKAGECONFIG_append_mx8 = " opencl openvx test"
-PACKAGECONFIG_remove_mx8 = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
 
 do_install_append() {
     if ${@bb.utils.contains("PACKAGECONFIG", "samples", "true", "false", d)}; then
