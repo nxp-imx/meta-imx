@@ -1,5 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
-# Copyright 2017 NXP
+# Copyright 2017-2018 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "GPU G2D library and apps for imx8"
@@ -16,8 +16,8 @@ S="${WORKDIR}/${PN}-${PV}"
 
 inherit fsl-eula-unpack
 
-SRC_URI[md5sum] = "4e3b4f4a7752b5baa2326328c5082027"
-SRC_URI[sha256sum] = "3bfc856dd8347f7c423257d69062606171c2ca14d17efe32acae1fa54f907a39"
+SRC_URI[md5sum] = "416c701c0f793ec6cabdc90104fcc5cb"
+SRC_URI[sha256sum] = "3d545fe328e012fd2a772d89f88c5243315abd00c2a04d44574fd57a50b75b65"
 
 do_install () {
 
