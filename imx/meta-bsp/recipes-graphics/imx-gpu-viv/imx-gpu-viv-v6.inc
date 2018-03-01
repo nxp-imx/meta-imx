@@ -38,8 +38,8 @@ EXTRA_PROVIDES_append_mx8 = " \
 "
 PROVIDES += " \
     imx-gpu-viv \
+    libgal-imx \
     virtual/egl \
-    virtual/libgal-x11 \
     virtual/libopenvg \
     virtual/opencl-headers \
     virtual/opencl-icd \
