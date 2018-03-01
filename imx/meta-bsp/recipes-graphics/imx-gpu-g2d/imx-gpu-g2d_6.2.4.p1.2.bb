@@ -6,6 +6,7 @@ DESCRIPTION = "GPU G2D library and apps for imx6"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
 
+DEPENDS += "libgal-imx"
 PROVIDES += "virtual/libg2d"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
