@@ -95,7 +95,7 @@ MACHINE_SOCARCH_FILTER_append_imxgpu = " \
     virtual/egl \
     virtual/mesa \
     virtual/libg2d \
-    virtual/libgal-x11 \
+    libgal-imx \
     virtual/libopenvg \
     virtual/wayland-egl \
     cairo \
