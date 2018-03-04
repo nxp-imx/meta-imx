@@ -1,5 +1,5 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
-# Copyright NXP
+# Copyright 2017-2018 NXP
 
 SUMMARY = "Nand boot write source"
 SECTION = "base"
