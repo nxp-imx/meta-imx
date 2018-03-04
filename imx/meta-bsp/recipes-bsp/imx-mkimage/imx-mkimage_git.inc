@@ -1,4 +1,4 @@
-# Copyright 2017 NXP
+# Copyright 2017-2018 NXP
 
 IMX_MKIMAGE_SRC ?= "git://source.codeaurora.org/external/imx/imx-mkimage.git;protocol=https"
 SRCBRANCH ?= "master"

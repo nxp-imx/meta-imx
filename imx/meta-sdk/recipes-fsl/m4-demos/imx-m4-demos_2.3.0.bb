@@ -1,4 +1,4 @@
-# Copyright 2017 NXP
+# Copyright 2017-2018 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "i.MX M4 core Demo images"

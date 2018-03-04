@@ -1,6 +1,6 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
 # Copyright (C) 2012-2014 O.S. Systems Software LTDA.
-# Copyright 2017 NXP
+# Copyright 2017-2018 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
