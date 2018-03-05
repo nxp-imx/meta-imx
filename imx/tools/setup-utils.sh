@@ -1,4 +1,22 @@
 #!/bin/sh
+#
+# FSL Build Environment Setup Utility Functions
+#
+# Copyright 2017 NXP
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 file_override() {
     source_path=$1
@@ -35,11 +53,13 @@ bbclass_overrides() {
 
 # hook_in_layer LAYER-NAME [UPSTREAM-LAYER-NAME]...
 #
-# Adds the specified layer to bblayers.conf. Also takes care of
-# any machine and/or bbclass files in the layer that are overriding
-# files in an upstream layer. If no upstream layer is specified,
-# meta-freescale is used. The function is expected to be called
-# from the build folder.
+# Adds the specified layer to bblayers.conf and facilitates
+# the replacement of upstream machine and/or bbclass files by
+# removing upstream files with the same name.
+#
+# If no upstream layer is specified, meta-freescale is used.
+#
+# The function is expected to be called from the build folder.
 #
 # The specified layer is defined as the path from the sources folder
 # to the layer folder.

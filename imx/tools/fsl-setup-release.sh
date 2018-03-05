@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# FSL Build Enviroment Setup Script
+# FSL Build Environment Setup Script
 #
 # Copyright (C) 2011-2015 Freescale Semiconductor
 #
