@@ -69,7 +69,6 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libgal-imx libgal-imx-dev \
 	libvivante-dri-imx \
 	libvsc-imx \
-	libgbm-imx libgbm-imx-dev \
 	libwayland-viv-imx libwayland-viv-imx-dev \
 	libgc-wayland-protocol-imx libgc-wayland-protocol-imx-dev \
 	libwayland-egl-imx-dev \
@@ -78,6 +77,7 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libvulkan-imx libvulkan-imx-dev \
 	libopenvx-imx libopenvx-imx-dev \
 "
+PACKAGES_append_mx8 = " libgbm-imx libgbm-imx-dev"
 python __anonymous () {
         has_vivante_kernel_driver_support = (d.getVar('MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT', True) or '0')
         if has_vivante_kernel_driver_support != '1':
@@ -132,8 +132,8 @@ IS_MX8_mx8 = "1"
 
 PACKAGE_FP_TYPE = "hardfp"
 
-HAS_GPU3D          = "false"
-HAS_GPU3D_imxgpu3d = "true"
+HAS_GBM     = "false"
+HAS_GBM_mx8 = "true"
 
 do_install () {
     install -d ${D}${libdir}
@@ -149,7 +149,7 @@ do_install () {
     rm -rf ${D}${includedir}/vulkan/vulkan.h
 
     install -d ${D}${libdir}/pkgconfig
-    if ${HAS_GPU3D}; then
+    if ${HAS_GBM}; then
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gbm.pc ${D}${libdir}/pkgconfig/gbm.pc
     fi
 
@@ -288,9 +288,9 @@ INSANE_SKIP_libgal-imx += "build-deps"
 
 FILES_libvsc-imx = "${libdir}/libVSC${SOLIBS}"
 
-FILES_libgbm-imx = "${libdir}/libgbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
-FILES_libgbm-imx-dev = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
-RDEPENDS_libgbm-imx += "libdrm"
+FILES_libgbm-imx_mx8           = "${libdir}/libgbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
+FILES_libgbm-imx-dev_mx8       = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
+RDEPENDS_libgbm-imx_append_mx8 = " libdrm"
 
 FILES_libvulkan-imx = "${libdir}/vulkan/libvulkan_VSI${SOLIBS}"
 FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/vulkan/libvulkan_VSI${SOLIBSDEV}"
