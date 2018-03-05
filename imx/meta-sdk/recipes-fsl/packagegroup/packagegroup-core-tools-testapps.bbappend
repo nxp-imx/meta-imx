@@ -3,8 +3,6 @@
 RDEPENDS_${PN}_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', "gst-player-bin", "", d)} \
                           ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', "gst-player-bin", "", d)} \
 "
-# Remove piglit for i.MX8
-X11GLTOOLS_remove_mx8 = " piglit"
 
 IMX_CORE_TOOLS = ""
 IMX_CORE_TOOLS_imxgpu2d = " tslib"
