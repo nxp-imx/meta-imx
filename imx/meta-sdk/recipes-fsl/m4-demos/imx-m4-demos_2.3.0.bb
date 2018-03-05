@@ -33,12 +33,10 @@ SCR = "SCR-${SOC}-m4-demo.txt"
 
 do_deploy () {
    # Install the demo binaries
-   install -d ${DEPLOYDIR}
-   cp ${S}/*.bin ${DEPLOYDIR}/
-   ls ${DEPLOYDIR}/
+   cp ${D}/* ${DEPLOYDIR}/
 }
 
-addtask deploy before do_build after do_compile
+addtask deploy before do_build after do_install
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(mx7ulp|mx8mq|mx8qm|mx8qxp)"
