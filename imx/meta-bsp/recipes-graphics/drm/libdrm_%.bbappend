@@ -5,7 +5,7 @@ IMX_LIBDRM_BRANCH = "libdrm-imx-2.4.84"
 SRC_URI_remove     = "http://dri.freedesktop.org/libdrm/${BP}.tar.bz2"
 SRC_URI_remove_mx8 = "file://drm-update-arm.patch"
 SRC_URI_prepend    = "${IMX_LIBDRM_SRC};branch=${IMX_LIBDRM_BRANCH} "
-SRCREV = "5efa5632e53d984505a65e339b93680be6596c7a"
+SRCREV = "8c8c46d41839035de605291bc1c26902011a74ac"
 
 S = "${WORKDIR}/git"
 
