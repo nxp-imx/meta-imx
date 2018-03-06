@@ -56,7 +56,7 @@ inherit fsl-eula-unpack
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 # Note : If you add a package here, to prevent a naming conflict see the python_anonymous() futher below
-PACKAGES =+ "libclc-imx libclc-imx-dev \
+PACKAGES_1 = "libclc-imx libclc-imx-dev \
 	libgl-imx libgl-imx-dev \
 	libgles-imx libgles-imx-dev \
 	libgles2-imx libgles2-imx-dev \
@@ -69,7 +69,10 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libgal-imx libgal-imx-dev \
 	libvivante-dri-imx \
 	libvsc-imx \
-	libwayland-viv-imx libwayland-viv-imx-dev \
+"
+PACKAGES_2     = ""
+PACKAGES_2_mx8 = "libgbm-imx libgbm-imx-dev"
+PACKAGES_3 = "libwayland-viv-imx libwayland-viv-imx-dev \
 	libgc-wayland-protocol-imx libgc-wayland-protocol-imx-dev \
 	libwayland-egl-imx-dev \
 	imx-gpu-viv-tools \
@@ -77,7 +80,7 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libvulkan-imx libvulkan-imx-dev \
 	libopenvx-imx libopenvx-imx-dev \
 "
-PACKAGES_append_mx8 = " libgbm-imx libgbm-imx-dev"
+PACKAGES =+ "${PACKAGES_1} ${PACKAGES_2} ${PACKAGES_3}"
 python __anonymous () {
         has_vivante_kernel_driver_support = (d.getVar('MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT', True) or '0')
         if has_vivante_kernel_driver_support != '1':
