@@ -18,8 +18,8 @@ do_compile_append () {
 }
 
 do_install_append() {
-    install -d ${D}/${mandir}
-    install -m 0444 ${S}/man/* ${D}/${mandir}
+	install -d ${D}/${mandir}
+	install -m 0444 ${S}/man/* ${D}/${mandir}
 }
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
