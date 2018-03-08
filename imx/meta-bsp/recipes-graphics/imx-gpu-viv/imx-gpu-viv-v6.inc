@@ -346,8 +346,9 @@ FILES_libopenvg-imx = "${libdir}/libOpenVG*${SOLIBS}"
 FILES_libopenvg-imx-dev = "${includedir}/VG ${libdir}/libOpenVG*${SOLIBSDEV} ${libdir}/pkgconfig/vg.pc"
 RDEPENDS_libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 
-FILES_libvdk-imx = "${libdir}/libVDK${SOLIBS}"
+FILES_libvdk-imx = "${libdir}/libVDK*${SOLIBS}"
 FILES_libvdk-imx-dev = "${includedir}/*vdk*.h ${libdir}/libVDK${SOLIBSDEV}"
+INSANE_SKIP_libvdk-imx += "dev-so"
 
 FILES_libvivante-dri-imx = "${libdir}/dri/vivante_dri.so"
 RDEPENDS_libvivante-dri-imx = "libdrm"
