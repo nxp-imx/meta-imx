@@ -22,6 +22,7 @@ DEPENDS += " \
     u-boot \
     ${IMX_FIRMWARE} \
     imx-atf \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'optee-os', '', d)} \
 "
 DEPENDS_append_mx8mq = " dtc-native"
 
@@ -40,6 +41,7 @@ do_compile[depends] += " \
     ${IMX_FIRMWARE}:do_deploy \
     imx-atf:do_deploy \
     ${IMX_M4_DEMOS} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
 "
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
@@ -62,6 +64,9 @@ SOC_TARGET ?= "iMX8QM"
 SOC_TARGET_mx8qm  = "iMX8QM"
 SOC_TARGET_mx8qxp = "iMX8QX"
 SOC_TARGET_mx8mq  = "iMX8M"
+
+DEPLOY_OPTEE = "false"
+DEPLOY_OPTEE_mx8mq = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true', 'false', d)}"
 
 IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', \
                        bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
@@ -103,6 +108,11 @@ do_compile () {
         cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_TARGET}/u-boot.bin
     fi
 
+    # Copy TEE binary to SoC target folder to mkimage
+    if ${DEPLOY_OPTEE}; then
+        cp ${DEPLOY_DIR_IMAGE}/tee.bin             ${S}/${SOC_TARGET}/
+    fi
+
     # mkimage for i.MX8
     for target in ${IMXBOOT_TARGETS}; do
         echo "building ${SOC_TARGET} - ${target}"
@@ -142,6 +152,11 @@ do_deploy () {
         install -m 0644 ${S}/${SOC_TARGET}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
         install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
+    fi
+
+    # copy tee.bin to deploy path
+    if "${DEPLOY_OPTEE}"; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/tee.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
     fi
 
     # copy makefile (soc.mak) for reference
