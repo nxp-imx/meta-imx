@@ -1,7 +1,11 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+# Specify the opencv_extra source. The version should match the overall opencv version.
+# Recording the opencv_extra version here allows us to raise a fatal error if the
+# package version is updated but this section is not.
 SRC_URI += "git://github.com/opencv/opencv_extra.git;destsuffix=opencv_extra;name=opencv_extra"
 SRCREV_opencv_extra = "c41d35c0be5feeb884e7da57c201461cb9877863"
+OPENCV_EXTRA_VERSION = "3.2"
 
 PACKAGECONFIG_remove_imx   = "eigen python3"
 PACKAGECONFIG_remove_mx8   = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
@@ -27,6 +31,14 @@ PACKAGECONFIG[test] = " \
     -DBUILD_TESTS=ON -DINSTALL_TESTS=ON -DOPENCV_TEST_DATA_PATH=${S}/../opencv_extra/testdata, \
     -DBUILD_TESTS=OFF -DINSTALL_TESTS=OFF, \
 "
+
+do_check_opencv_extra_version() {
+    OPENCV_VERSION=`echo ${PV} |  cut -d '+' -f 1`
+    if [ "${OPENCV_EXTRA_VERSION}" != "${OPENCV_VERSION}" ]; then
+        bbfatal "The opencv_extra version ${OPENCV_EXTRA_VERSION} does not match the recipe version ${OPENCV_VERSION}."
+    fi
+}
+addtask check_opencv_extra_version before do_fetch
 
 do_install_append() {
     if ${@bb.utils.contains("PACKAGECONFIG", "samples", "true", "false", d)}; then
