@@ -213,7 +213,16 @@ do_install () {
     ln -sf libEGL.so.1.0 ${D}${libdir}/libEGL.so.1
     ln -sf libEGL.so.1.0 ${D}${libdir}/libEGL.so
     mv ${D}${libdir}/libGAL-${backend}.so ${D}${libdir}/libGAL.so
-    mv ${D}${libdir}/libVDK-${backend}.so ${D}${libdir}/libVDK.so
+    if [ "${USE_WL}" = "yes" ]; then
+        # Special case for libVDK on Wayland backend, deliver fb library as well.
+        # Need to rename the libraries to avoid the code below that will remove
+        # *-fb.so and *-wl.so
+        mv ${D}${libdir}/libVDK-fb.so ${D}${libdir}/libVDK-framebuffer.so
+        mv ${D}${libdir}/libVDK-wl.so ${D}${libdir}/libVDK-wayland.so
+        ln -sf libVDK-wayland.so ${D}${libdir}/libVDK.so
+    else
+        mv ${D}${libdir}/libVDK-${backend}.so ${D}${libdir}/libVDK.so
+    fi
 
     # update libglesv2 as backend dependent
     rm -rf ${D}${libdir}/libGLESv2*
