@@ -9,7 +9,7 @@ OPENCV_EXTRA_VERSION = "3.4"
 
 PACKAGECONFIG_remove_imx   = "eigen python3"
 PACKAGECONFIG_remove_mx8   = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
-PACKAGECONFIG_append_mx8   = " opencl"
+PACKAGECONFIG_append_mx8   = " opencl dnn"
 PACKAGECONFIG_append_mx8dv = " openvx"
 PACKAGECONFIG_append_mx8qm = " openvx"
 
@@ -46,9 +46,7 @@ do_install_append() {
         cp -r ${S}/samples/data/* ${D}${datadir}/OpenCV/samples/data
 
         install -d ${D}${datadir}/OpenCV/samples/bin/
-        if [ "${MACHINE}" = "imx8qmlpddr4arm2" -o "${MACHINE}" = "imx8qmmek" ]; then
-            cp -f bin/example_openvx* ${D}${datadir}/OpenCV/samples/bin/
-        fi
+        cp -f bin/example_* ${D}${datadir}/OpenCV/samples/bin/
     fi
 }
 
