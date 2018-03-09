@@ -748,6 +748,7 @@ FILES_${PN}-xencommons += "\
     ${systemd_unitdir}/system/xen-init-dom0.service \
     ${systemd_unitdir}/system/xenstored.service \
     ${systemd_unitdir}/system/var-lib-xenstored.mount \
+    ${systemd_unitdir}/system/xendriverdomain.service \
     "
 
 FILES_${PN}-xend += " \
