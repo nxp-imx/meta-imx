@@ -48,8 +48,6 @@ do_install_append() {
         install -d ${D}${datadir}/OpenCV/samples/bin/
         if [ "${MACHINE}" = "imx8qmlpddr4arm2" -o "${MACHINE}" = "imx8qmmek" ]; then
             cp -f bin/example_openvx* ${D}${datadir}/OpenCV/samples/bin/
-        elif [ "${MACHINE}" = "imx8mqevk" -o "${MACHINE}" = "imx8qxpmek" -o "${MACHINE}" = "imx8qxplpddr4arm2" ]; then
-            cp -f bin/opencv_perf_* ${D}${datadir}/OpenCV/samples/bin/
         fi
     fi
 }
