@@ -26,7 +26,6 @@ PACKAGECONFIG[hvm] = "--with-system-seabios="/usr/share/firmware/bios.bin",--dis
 
 DEPENDS = " \
     bison-native \
-    dev86-native \
     flex-native \
     file-native \
     gettext-native \
