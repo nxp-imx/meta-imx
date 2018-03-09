@@ -994,21 +994,21 @@ do_deploy() {
     install -d ${DEPLOYDIR}
 
     if [ -f ${D}/boot/xen ]; then
-        install -m 0644 ${D}/boot/xen ${DEPLOYDIR}/xen-${MACHINE}
+        install -m 0644 ${D}/boot/xen ${DEPLOYDIR}
     fi
 
     if [ -f ${D}/boot/xen.gz ]; then
-        install -m 0644 ${D}/boot/xen.gz ${DEPLOYDIR}/xen-${MACHINE}.gz
+        install -m 0644 ${D}/boot/xen.gz ${DEPLOYDIR}
     fi
 
     if [ -f ${D}/usr/lib64/efi/xen.efi ]; then
-        install -m 0644 ${D}/usr/lib64/efi/xen.efi ${DEPLOYDIR}/xen-${MACHINE}.efi
+        install -m 0644 ${D}/usr/lib64/efi/xen.efi ${DEPLOYDIR}
     fi
 
     # Install the flask policy in the deploy directory if it exists
     if [ -f ${D}/boot/${FLASK_POLICY_FILE} ]; then
         install -m 0644 ${D}/boot/${FLASK_POLICY_FILE} ${DEPLOYDIR}
-        ln -sf ${FLASK_POLICY_FILE} ${DEPLOYDIR}/xenpolicy-${MACHINE}
+        ln -sf ${FLASK_POLICY_FILE} ${DEPLOYDIR}/xenpolicy
     fi
 }
 
