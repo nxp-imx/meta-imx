@@ -11,7 +11,7 @@ WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=
 #SRCBRANCH = "weston-imx-3.0"
 SRCBRANCH = "bugfix/MGS-3593-weston-3.0-is-broken-for-sololite"
 SRC_URI_prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV = "6526535bb5026a8908b0564ea0b5c0aeb5edb5cb"
+SRCREV = "90899d38c1c376c50e0a4a789e76ab12c781ae71"
 S = "${WORKDIR}/git"
 
 # Define RECIPE_SYSROOT since it doesn't exist in morty
