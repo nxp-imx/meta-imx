@@ -27,6 +27,10 @@ do_install_append() {
     if [ -d ${D}${base_libdir}/firmware/hifi4 ]; then
         rm -rf ${D}${base_libdir}/firmware/hifi4
     fi
+    # Don't install seco related binary
+    if [ -d ${D}${base_libdir}/firmware/seco ]; then
+        rm -rf ${D}${base_libdir}/firmware/seco
+    fi
 
     #1FD_BCM89359
     install -d ${D}${base_libdir}/firmware/bcm/1FD_BCM89359
@@ -41,6 +45,7 @@ do_install_append() {
 IS_MX8 = "0"
 IS_MX8_mx8mq = "8mq"
 IS_MX8_mx8qm = "8qm"
+IS_MX8_mx8qxp = "8qx"
 inherit deploy
 addtask deploy before do_build after do_install
 do_deploy () {
@@ -57,5 +62,8 @@ do_deploy () {
         # Deploy hdmi/cadence
         install -m 0644 ${S}/firmware/hdmi/cadence/hdmitxfw.bin ${DEPLOYDIR}
         install -m 0644 ${S}/firmware/hdmi/cadence/dpfw.bin ${DEPLOYDIR}
+    elif [ "${IS_MX8}" = "8qx" ]; then
+        # Deploy seco
+        install -m 0644 ${S}/firmware/seco/ahab-container.img ${DEPLOYDIR}
     fi
 }
