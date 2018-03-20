@@ -71,6 +71,9 @@ DEPLOY_OPTEE_mx8mq = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true',
 IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', \
                        bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
                                                                  'flash_multi_cores flash flash_dcd', d), d)}"
+IMXBOOT_TARGETS_mx8qxp = "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', \
+                       bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
+                                                                 'flash_b0 flash_b0_all flash_multi_cores flash flash_dcd', d), d)}"
 IMXBOOT_TARGETS_imx8qxpddr3arm2 = "flash_ddr3_dcd"
 
 S = "${WORKDIR}/git"
@@ -103,6 +106,8 @@ do_compile () {
     else
         echo 8QX boot binary build
         cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin ${S}/${SOC_TARGET}/m40_tcm.bin
+        cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin ${S}/${SOC_TARGET}/CM4.bin
+        cp ${DEPLOY_DIR_IMAGE}/ahab-container.img ${S}/${SOC_TARGET}/
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${S}/${SOC_TARGET}/scfw_tcm.bin
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_TARGET}/bl31.bin
         cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_TARGET}/u-boot.bin
@@ -148,8 +153,15 @@ do_deploy () {
         install -m 0755 ${S}/${SOC_TARGET}/${TOOLS_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
         install -m 0755 ${S}/${SOC_TARGET}/mkimage_fit_atf.sh ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+    elif [ "${SOC_TARGET}" = "iMX8QM" ]; then
+        install -m 0644 ${S}/${SOC_TARGET}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+
+        install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
     else
         install -m 0644 ${S}/${SOC_TARGET}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${S}/${SOC_TARGET}/ahab-container.img ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${S}/${SOC_TARGET}/m40_tcm.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${S}/${SOC_TARGET}/CM4.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
         install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
     fi
