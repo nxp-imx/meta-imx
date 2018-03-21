@@ -19,6 +19,9 @@ MXSBOOT_NAND_ARGS ?= ""
 # Include required software for optee
 IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'packagegroup-fsl-optee', '', d)} "
 
+# Include userspace xen tools
+IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'imx-xen-base imx-xen-hypervisor', '', d)} "
+
 # IMX Bootlets Linux bootstream
 do_image_linux.sb[depends] = "elftosb-native:do_populate_sysroot \
                               imx-bootlets:do_deploy \
