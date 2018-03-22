@@ -18,6 +18,7 @@ PROVIDES = "${BOOT_NAME}"
 
 IMX_FIRMWARE       = "imx-sc-firmware"
 IMX_FIRMWARE_mx8mq = "firmware-imx"
+IMX_FIRMWARE_mx8qxp = "firmware-imx imx-sc-firmware"
 DEPENDS += " \
     u-boot \
     ${IMX_FIRMWARE} \
@@ -38,7 +39,7 @@ IMX_M4_DEMOS_mx8qxp = "imx-m4-demos:do_deploy"
 # so set the appropriate dependencies
 do_compile[depends] += " \
     virtual/bootloader:do_deploy \
-    ${IMX_FIRMWARE}:do_deploy \
+    ${@' '.join('%s:do_deploy' % r for r in '${IMX_FIRMWARE}'.split() )} \
     imx-atf:do_deploy \
     ${IMX_M4_DEMOS} \
     ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
