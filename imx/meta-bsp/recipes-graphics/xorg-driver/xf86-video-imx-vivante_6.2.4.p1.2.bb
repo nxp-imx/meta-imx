@@ -9,7 +9,7 @@ SRCBRANCH = "imx_exa_viv6_g2d"
 XF86_VIDEO_IMX_VIVANTE_SRC ?= "git://source.codeaurora.org/external/imx/xf86-video-imx-vivante.git;protocol=https"
 SRC_URI  = "${XF86_VIDEO_IMX_VIVANTE_SRC};branch=${SRCBRANCH}"
 SRC_URI += "file://rc.autohdmi"
-SRCREV = "a30f60f7ffc908499f258886c35d7ffe41ba771e"
+SRCREV = "946e8603ed9a52f36d305405dbb2ab8ff90943d0"
 
 S = "${WORKDIR}/git/"
 
