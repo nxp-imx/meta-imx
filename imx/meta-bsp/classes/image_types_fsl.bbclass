@@ -5,6 +5,11 @@ IMAGE_BOOTLOADER ?= "u-boot"
 IMAGE_BOOTFILES ?= ""
 IMAGE_BOOTFILES_DEPENDS ?= ""
 
+IMAGE_BOOTFILES += \
+    "${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'xen', '', d)}"
+IMAGE_BOOTFILES_DEPENDS += \
+    "${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'imx-xen:do_deploy', '', d)}"
+
 IMX_BOOT_SEEK ?= "33"
 
 # Handle u-boot suffixes
