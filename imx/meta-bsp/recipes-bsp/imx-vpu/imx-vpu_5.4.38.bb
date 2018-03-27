@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bd2df2910a2234bf6f419b7d2f531a3"
 
 PE = "1"
 
-SRC_URI[md5sum] = "0b8e45decce2933f648c0faeb7278a0e"
-SRC_URI[sha256sum] = "5c757e7c1b0e9144ae6c8bbdbdc07dcbda65ff9e0b8f9ea628e11d63a1b2eaf4"
+SRC_URI[md5sum] = "4c33584308033c2660fdfd0463abd6c2"
+SRC_URI[sha256sum] = "458a0ad2560e8db86012a9b347e3c937a4ccbc7541343a4a3e9b820c7ae7a2cc"
 
 # Compatible only for i.MX with Chips&Media VPU
 COMPATIBLE_MACHINE = "(^$)"
