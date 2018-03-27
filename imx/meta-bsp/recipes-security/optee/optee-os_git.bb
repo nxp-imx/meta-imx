@@ -25,6 +25,8 @@ python () {
 		subplatform = 'mx6qsabresd'
 	elif re.match('imx6ul7d',machine):
 		subplatform = 'mx6ulevk'
+	elif re.match('imx6ull14x14evk',machine):
+		subplatform = 'mx6ullevk'
 	elif re.match('imx',machine):
 		subplatform = machine[1:]
 	else:
