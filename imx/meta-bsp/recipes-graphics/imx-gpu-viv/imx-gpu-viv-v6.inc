@@ -138,6 +138,12 @@ PACKAGE_FP_TYPE = "hardfp"
 HAS_GBM     = "false"
 HAS_GBM_mx8 = "true"
 
+# GLES 3.1 is supported for all i.MX 8
+# GLES 3.2 is supported for i.MX 8QM only
+GLES3_HEADER_REMOVALS = "gl31.h gl32.h"
+GLES3_HEADER_REMOVALS_remove_mx8   = "gl31.h"
+GLES3_HEADER_REMOVALS_remove_mx8qm = "gl32.h"
+
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
@@ -238,6 +244,9 @@ do_install () {
         install -d ${D}${libdir}/vulkan
         mv ${D}${libdir}/libvulkan-${backend}.so ${D}${libdir}/vulkan/libvulkan_VSI.so
     fi
+    for header in ${GLES3_HEADER_REMOVALS}; do
+        rm -f ${D}${includedir}/GLES3/${header}
+    done
 
     # skip packaging wayland libraries if no support is requested
     if [ "${USE_WL}" = "no" ]; then
