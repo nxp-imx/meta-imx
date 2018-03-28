@@ -5,7 +5,7 @@ include recipes-bsp/imx-test/imx-test.inc
 
 PV = "7.0+${SRCPV}"
 
-SRCBRANCH = "master"
+SRCBRANCH = "imx_4.9.88_2.0.0_ga"
 IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
 SRC_URI_append = " file://memtool_profile "
