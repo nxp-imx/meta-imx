@@ -44,7 +44,7 @@ PACKAGECONFIG[qt5] = '--enable-qt \
 
 # Use i.MX fork of GST for customizations
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
-SRCBRANCH = "imx-1.12.x"
+SRCBRANCH = "MM_04.03.05_1804_L4.9.88_MX7ULP_GA"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \

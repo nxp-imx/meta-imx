@@ -20,7 +20,7 @@ SRC_URI_remove_imx = " \
 "
 
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
-SRCBRANCH = "imx-1.12.x"
+SRCBRANCH = "MM_04.03.05_1804_L4.9.88_MX7ULP_GA"
 
 SRC_URI_append_imx = " \
     ${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
