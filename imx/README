@@ -156,7 +156,7 @@ Qt
 Note that Qt has both a commercial and open source license options.  Make the decision about which license
 to use before starting work on custom Qt applications.  Once custom Qt applications are started with an open source
 Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
-the differences between each license.   Default builds use an open source Qt license.
+the differences between each license.
 
 Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
 
