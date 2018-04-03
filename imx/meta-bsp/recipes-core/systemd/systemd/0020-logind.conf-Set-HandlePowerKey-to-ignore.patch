@@ -1,0 +1,30 @@
+From ef9f6626d08d6d19767d20845c8d6f374f05465d Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Tue, 3 Apr 2018 14:07:32 -0500
+Subject: [PATCH] logind.conf: Set HandlePowerKey to ignore
+
+For i.MX, we don't want systemd to handle the power key.
+
+Upstream-Status: Inappropriate [i.MX-specific]
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ src/login/logind.conf.in | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/login/logind.conf.in b/src/login/logind.conf.in
+index 6f720b7..043191f 100644
+--- a/src/login/logind.conf.in
++++ b/src/login/logind.conf.in
+@@ -19,6 +19,8 @@
+ #KillExcludeUsers=root
+ #InhibitDelayMaxSec=5
+ #HandlePowerKey=poweroff
++# i.MX-specific
++HandlePowerKey=ignore
+ #HandleSuspendKey=suspend
+ #HandleHibernateKey=hibernate
+ #HandleLidSwitch=suspend
+-- 
+2.7.4
+
