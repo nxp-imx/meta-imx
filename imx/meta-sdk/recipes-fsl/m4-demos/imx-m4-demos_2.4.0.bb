@@ -4,7 +4,7 @@
 SUMMARY = "i.MX M4 core Demo images"
 SECTION = "app"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=08fd295cce89b0a9c74b9b83ed74f671"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6bd2df2910a2234bf6f419b7d2f531a3"
 
 inherit deploy fsl-eula-unpack2
 
