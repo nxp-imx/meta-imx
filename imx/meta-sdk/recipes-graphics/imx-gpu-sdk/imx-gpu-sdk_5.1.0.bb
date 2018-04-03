@@ -48,8 +48,6 @@ EXTENSIONS_mx8mq = "OpenGLES3.1:EXT_geometry_shader,OpenGLES3.1:EXT_tessellation
 
 S = "${WORKDIR}/git"
 
-inherit python3native
-
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
