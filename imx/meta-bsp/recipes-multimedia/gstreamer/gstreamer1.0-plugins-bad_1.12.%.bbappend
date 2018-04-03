@@ -8,7 +8,7 @@ PACKAGECONFIG_GL_imxgpu3d = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', '
 
 PACKAGECONFIG_append_mx6q = " opencv"
 PACKAGECONFIG_append_mx6qp = " opencv"
-PACKAGECONFIG_append_mx8 = " opencv"
+PACKAGECONFIG_append_mx8 = " opencv kms"
 PACKAGECONFIG_remove_mx6sl = " gles2"
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
