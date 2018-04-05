@@ -22,6 +22,11 @@ EXTRA_OECONF_remove = " --disable-sdl --disable-nas --disable-libvisual --disabl
                         --disable-pvr --disable-sdltest --disable-wininet --disable-timidity \
                         --disable-linsys --disable-sndio --disable-apexsink \
 "
+
+SRC_URI_remove = "file://0001-Prepend-PKG_CONFIG_SYSROOT_DIR-to-pkg-config-output.patch"
+
+EXTRA_OECONF_remove = "WAYLAND_PROTOCOLS_SYSROOT_DIR=${RECIPE_SYSROOT}"
+
 # Use i.MX fork of GST for customizations
 SRC_URI_remove_imx = " \
     http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \

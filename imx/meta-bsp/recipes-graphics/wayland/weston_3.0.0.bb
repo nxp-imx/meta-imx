@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d79ee9e66bb0f95d3386a7acae780b70 \
 SRC_URI = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
            file://weston.png \
            file://weston.desktop \
-           file://0001-configure.ac-Fix-wayland-protocols-path.patch \
            file://0001-make-error-portable.patch \
            file://xwayland.weston-start \
            file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
@@ -27,7 +26,6 @@ DEPENDS += "wayland wayland-protocols libinput virtual/egl pango wayland-native"
 
 EXTRA_OECONF = "--enable-setuid-install \
                 --disable-rdp-compositor \
-                WAYLAND_PROTOCOLS_SYSROOT_DIR=${RECIPE_SYSROOT} \
                 "
 EXTRA_OECONF_append_qemux86 = "\
 		WESTON_NATIVE_BACKEND=fbdev-backend.so \
