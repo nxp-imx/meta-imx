@@ -11,14 +11,14 @@ DEPENDS_append = \
 DEPENDS_append_imxgpu2d = " virtual/libg2d virtual/libopenvg"
 DEPENDS_append_imxgpu3d = " virtual/libgles2"
 DEPENDS_append_mx8      = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11', '', \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' vulkan', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11',        '', \
                                                         ' vulkan', d), d)}"
 
 GPU_SDK_SRC ?= "git://github.com/codeauroraforum/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
-SRCREV = "313c65b6eea220ec20db19a0b341468d0ee5cc4e"
+SRCREV = "32ecfc5c06881541ffa1821387f2965c48718687"
 
 
 # For backwards compatibility
@@ -39,12 +39,12 @@ FEATURES_append_mx6dl     = ",OpenGLES3"
 FEATURES_append_mx8       = ",OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenCV"
 FEATURES_append_imxopenvx = ",OpenVX,OpenVX1.1"
 FEATURES_append_mx8       = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland',        '', \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ',Vulkan', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',        '', \
                                                         ',Vulkan', d), d)}"
 
 EXTENSIONS       = ""
-EXTENSIONS_mx8mq = "OpenGLES3.1:EXT_geometry_shader,OpenGLES3.1:EXT_tessellation_shader"
+EXTENSIONS_mx8mq = "OpenGLES3.1:GL_EXT_geometry_shader,OpenGLES3.1:GL_EXT_tessellation_shader"
 
 S = "${WORKDIR}/git"
 
