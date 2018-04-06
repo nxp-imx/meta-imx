@@ -11,9 +11,9 @@ DEPENDS_append = \
 DEPENDS_append_imxgpu2d = " virtual/libg2d virtual/libopenvg"
 DEPENDS_append_imxgpu3d = " virtual/libgles2"
 DEPENDS_append_mx8      = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland',        '', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11',        '', \
-                                                        ' vulkan', d), d)}"
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' vulkan glslang', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11',                '', \
+                                                        ' vulkan glslang', d), d)}"
 
 GPU_SDK_SRC ?= "git://github.com/codeauroraforum/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
@@ -39,7 +39,7 @@ FEATURES_append_mx6dl     = ",OpenGLES3"
 FEATURES_append_mx8       = ",OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenCV"
 FEATURES_append_imxopenvx = ",OpenVX,OpenVX1.1"
 FEATURES_append_mx8       = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland',        '', \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ',Vulkan', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',        '', \
                                                         ',Vulkan', d), d)}"
 
