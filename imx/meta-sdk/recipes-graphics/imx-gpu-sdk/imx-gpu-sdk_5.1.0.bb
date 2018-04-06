@@ -11,9 +11,9 @@ DEPENDS_append = \
 DEPENDS_append_imxgpu2d = " virtual/libg2d virtual/libopenvg"
 DEPENDS_append_imxgpu3d = " virtual/libgles2"
 DEPENDS_append_mx8      = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' vulkan glslang', \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' vulkan glslang-native', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',                '', \
-                                                        ' vulkan glslang', d), d)}"
+                                                        ' vulkan glslang-native', d), d)}"
 
 GPU_SDK_SRC ?= "git://github.com/codeauroraforum/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
