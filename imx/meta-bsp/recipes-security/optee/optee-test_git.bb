@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 inherit pythonnative
 DEPENDS = "optee-os optee-client python-pycrypto-native"
 
-SRCBRANCH = "imx_3.0.y"
+SRCBRANCH = "imx_4.9.88_2.0.0_ga"
 OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
 SRCREV = "b7b6c4d4af9607a3987988ae62b0957e659a32ef"
@@ -38,7 +38,7 @@ do_install () {
 
     install -d ${D}/lib/optee_armtz
     find ${S}/out/ta -name '*.ta' | while read name; do
-    	install -m 444 $name ${D}/lib/optee_armtz/
+    install -m 444 $name ${D}/lib/optee_armtz/
     done
 
 }
