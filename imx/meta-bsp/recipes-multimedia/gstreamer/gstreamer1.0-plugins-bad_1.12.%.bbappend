@@ -13,7 +13,7 @@ PACKAGECONFIG_remove_mx6sl = " gles2"
 
 #revert poky fido commit:cdc2c8aeaa96b07dfc431a4cf0bf51ef7f8802a3: move EGL to Wayland
 PACKAGECONFIG[gles2]   = "--enable-gles2 --enable-egl,--disable-gles2 --disable-egl,virtual/libgles2 virtual/egl"
-PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland"
+PACKAGECONFIG[wayland] = "--enable-wayland --disable-x11,--disable-wayland,wayland-native wayland wayland-protocols libdrm"
 
 # Disable introspection to fix [GstGL-1.0.gir] Error 
 EXTRA_OECONF_append = " --disable-introspection"
