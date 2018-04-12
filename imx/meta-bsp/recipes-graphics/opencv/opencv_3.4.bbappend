@@ -9,7 +9,7 @@ OPENCV_EXTRA_VERSION = "3.4"
 
 PACKAGECONFIG_remove_imx   = "eigen"
 PACKAGECONFIG_remove_mx8   = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
-PACKAGECONFIG_append_mx8   = " opencl dnn"
+PACKAGECONFIG_append_mx8   = " opencl dnn text"
 PACKAGECONFIG_append_mx8dv = " openvx"
 PACKAGECONFIG_append_mx8qm = " openvx"
 
