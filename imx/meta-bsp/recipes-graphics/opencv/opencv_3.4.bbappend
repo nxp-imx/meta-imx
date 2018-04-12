@@ -7,7 +7,7 @@ SRC_URI += "git://github.com/opencv/opencv_extra.git;destsuffix=opencv_extra;nam
 SRCREV_opencv_extra = "ccc82f931442d187dec1bf4bb70533486f49ed00"
 OPENCV_EXTRA_VERSION = "3.4"
 
-PACKAGECONFIG_remove_imx   = "eigen python3"
+PACKAGECONFIG_remove_imx   = "eigen"
 PACKAGECONFIG_remove_mx8   = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
 PACKAGECONFIG_append_mx8   = " opencl dnn"
 PACKAGECONFIG_append_mx8dv = " openvx"
@@ -39,6 +39,16 @@ do_check_opencv_extra_version() {
     fi
 }
 addtask check_opencv_extra_version before do_fetch
+
+do_compile_prepend() {
+    # A build break occurs if dnn and python3 are configured. Work around
+    # the problem by building opencv_dnn first. See
+    # https://github.com/opencv/opencv/issues/10474.
+    if ${@bb.utils.contains("PACKAGECONFIG", "dnn python3", "true", "false", d)}; then
+        bbnote VERBOSE=1 cmake --build '${B}' --target opencv_dnn -- ${PARALLEL_MAKE}
+        VERBOSE=1 cmake --build '${B}' --target opencv_dnn -- ${PARALLEL_MAKE}
+    fi
+}
 
 do_install_append() {
     if ${@bb.utils.contains("PACKAGECONFIG", "samples", "true", "false", d)}; then
