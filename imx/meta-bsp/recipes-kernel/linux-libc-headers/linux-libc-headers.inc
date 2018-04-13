@@ -2,7 +2,7 @@ SUMMARY = "Sanitized set of kernel headers for the C library's use"
 SECTION = "devel"
 
 require recipes-kernel/linux/linux-imx-src.inc
-SRCREV = "73dcc67ffc4ba9c50013f150f649991d8cfe2cdd"
+SRCREV = "1ae552181bb125760f99a360fcdf202e720f8ecd"
 
 #########################################################################
 ####                        PLEASE READ 
