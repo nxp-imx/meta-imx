@@ -1,6 +1,6 @@
 SUMMARY = "Python version of the NXP eRPC infrastructure"
 DESCRIPTION = "eRPC (Embedded RPC) is an open source Remote Procedure Call (RPC) system for multichip embedded systems and heterogeneous multicore SoCs"
-LICENSE = "Proprietary"
+LICENSE = "BSD-3"
 AUTHOR = "Jun Zhu <junzhu@nxp.com>"
 
 RDEPENDS_${PN} = "python-pyserial python-enum34 python-argparse python-importlib python-threading python-shell"
