@@ -10,8 +10,8 @@ inherit fsl-eula-unpack allarch
 
 SRC_URI = " ${INTERNAL_MIRROR}/firmware-qca-1.0.bin;fsl-eula=true; \
 "
-SRC_URI[md5sum] = "396b1c5d74e0cee3c6c56cfd430db87f"
-SRC_URI[sha256sum] = "e5cee0bd23f941680f1d995fdca86e842243d0b2f79087b257db1fc42617ae70"
+SRC_URI[md5sum] = "be4f9ca9059a1546af70db3fd6d990c7"
+SRC_URI[sha256sum] = "5dfe3ea15aaf8bfc8a20dfccae72317b6c2162c82e12e8e0780996b468e8fee1"
 
 do_install () {
     # Install firmware.conf for QCA modules
