@@ -1,52 +1,50 @@
-LA_OPT_BASE_LICENSE v21 March 2018
+LA_OPT_BASE_LICENSE v22 April 2018
 
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
-completely.    By selecting the "I Accept" button at the end of this page,
-you indicate that you accept the terms of the Agreement and you acknowledge
-that you have the authority, for yourself or on behalf of your company, to bind
-your company to these terms.  You may then download or install the file.
+completely.    By selecting the "I Accept" button at the end of this page, you
+indicate that you accept the terms of the Agreement and you acknowledge that
+you have the authority, for yourself or on behalf of your company, to bind your
+company to these terms.  You may then download or install the file.
 
 NXP SOFTWARE LICENSE AGREEMENT
 
 This is a legal agreement between you, as an authorized representative of your
-employer, or if you have no employer, as an individual (together "you"),
-and NXP B.V. ("NXP").  It concerns your rights to use the software
-identified in the Software Content Register and provided to you in binary or
-source code form and any accompanying written materials (the "Licensed
-Software"). The Licensed Software may include any updates or error
-corrections or documentation relating to the Licensed Software provided to you
-by NXP under this License. In consideration for NXP allowing you to access the
-Licensed Software, you are agreeing to be bound by the terms of this Agreement.
-If you do not agree to all of the terms of this Agreement, do not download or
-install the Licensed Software. If you change your mind later, stop using the
-Licensed Software and delete all copies of the Licensed Software in your
-possession or control. Any copies of the Licensed Software that you have
-already distributed, where permitted, and do not destroy will continue to be
-governed by this Agreement. Your prior use will also continue to be governed by
-this Agreement.
+employer, or if you have no employer, as an individual (together "you"), and
+NXP B.V. ("NXP").  It concerns your rights to use the software identified in
+the Software Content Register and provided to you in binary or source code form
+and any accompanying written materials (the "Licensed Software"). The Licensed
+Software may include any updates or error corrections or documentation relating
+to the Licensed Software provided to you by NXP under this License. In
+consideration for NXP allowing you to access the Licensed Software, you are
+agreeing to be bound by the terms of this Agreement. If you do not agree to all
+of the terms of this Agreement, do not download or install the Licensed
+Software. If you change your mind later, stop using the Licensed Software and
+delete all copies of the Licensed Software in your possession or control. Any
+copies of the Licensed Software that you have already distributed, where
+permitted, and do not destroy will continue to be governed by this Agreement.
+Your prior use will also continue to be governed by this Agreement.
 
 1.              DEFINITIONS
 
 1.1. For NXP, the term "Affiliate" means (i) any Person Controlled by NXP
 Semiconductors N.V. or (ii) any Person Controlled by any transferee of all or
-substantially all of the assets of NXP Semiconductors N.V., where
-"Controlled" means the direct or indirect beneficial ownership of more than
-fifty percent (50%) of the voting stock, or decision-making authority in the
-event that there is no voting stock, in another entity; provided, any such
-Person described in clause (i) or (ii) shall be deemed to be an "Affiliate"
-only for so long as such Person is Controlled by NXP Semiconductors N.V. or
-such transferee. For the purposes of this definition, "Person" is defined
-to mean "an individual, corporation, partnership, limited liability company,
-association, unincorporated association, trust or other entity or organization,
-including a government or political subdivision or an agency or instrumentality
-thereof."
+substantially all of the assets of NXP Semiconductors N.V., where "Controlled"
+means the direct or indirect beneficial ownership of more than fifty percent
+(50%) of the voting stock, or decision-making authority in the event that there
+is no voting stock, in another entity; provided, any such Person described in
+clause (i) or (ii) shall be deemed to be an "Affiliate" only for so long as
+such Person is Controlled by NXP Semiconductors N.V. or such transferee. For
+the purposes of this definition, "Person" is defined to mean "an individual,
+corporation, partnership, limited liability company, association,
+unincorporated association, trust or other entity or organization, including a
+government or political subdivision or an agency or instrumentality thereof."
 
-1.2. "Essential Patent" means a patent to the limited extent that
-infringement of such patent cannot be avoided in remaining compliant with the
-technology standards implicated by the usage of any of the Licensed Software,
-including optional implementation of the standards, on technical but not
-commercial grounds, taking into account normal technical practice and the state
-of the art generally available at the time of standardization.
+1.2. "Essential Patent" means a patent to the limited extent that infringement
+of such patent cannot be avoided in remaining compliant with the technology
+standards implicated by the usage of any of the Licensed Software, including
+optional implementation of the standards, on technical but not commercial
+grounds, taking into account normal technical practice and the state of the art
+generally available at the time of standardization.
 
 1.3. "Intellectual Property Rights" means any and all rights under statute,
 common law or equity in and under copyrights, trade secrets, and patents
@@ -71,11 +69,11 @@ any, that is subject to the different terms in Appendix A.
 
 2.2. Exclusively in connection with your development and distribution of
 product containing a programmable processing unit (e.g. a microprocessor,
-microcontroller, sensor or digital signal processor) ("NXP Product")
-supplied directly or indirectly from NXP ("Authorized System"), and
-exclusively for use with or integrated within an NXP Product, NXP grants you a
-world-wide, personal, non-transferable, non-exclusive, non-sublicensable,
-license, under NXP's Intellectual Property Rights:
+microcontroller, sensor or digital signal processor) ("NXP Product") supplied
+directly or indirectly from NXP ("Authorized System"), and exclusively for use
+with or integrated within an NXP Product, NXP grants you a world-wide,
+personal, non-transferable, non-exclusive, non-sublicensable, license, under
+NXP's Intellectual Property Rights:
 
 (a)   to use and reproduce the Licensed Software only as part of, or integrated
 within, Authorized Systems and not on a standalone basis;
@@ -83,8 +81,8 @@ within, Authorized Systems and not on a standalone basis;
 market and sell the Licensed Software in object code (machine readable) only as
 part of, or embedded within, Authorized Systems in object code form and not on
 a standalone basis.  Notwithstanding the foregoing, those files marked as .h
-files ("Header files") may be distributed in source or object code form,
-but only as part of, or embedded within Authorized Systems.
+files ("Header files") may be distributed in source or object code form, but
+only as part of, or embedded within Authorized Systems.
 (c)    to copy, use and distribute as needed, solely in connection with an
 Authorized System, proprietary NXP information associated with the Licensed
 Software for the purpose of developing, maintaining and supporting Authorized
@@ -100,10 +98,9 @@ integrated within, Authorized Systems and not on a standalone basis;
 (b)   to use, demonstrate, copy, distribute, market and sell the derivative
 works of the Licensed Software in object code (machine readable) only as part
 of, or integrated within, Authorized Systems and not on a standalone basis.
-Notwithstanding the foregoing, those files marked as .h files ("Header
-files") may be distributed in source or object code form, but only as part
-of, or embedded within Authorized Systems.
-
+Notwithstanding the foregoing, those files marked as .h files ("Header files")
+may be distributed in source or object code form, but only as part of, or
+embedded within Authorized Systems.
 2.4. You may use subcontractors on your premises to exercise your rights under
 Section 2.2 and 2.3 so long as you have an agreement in place with the
 subcontractor containing confidentiality restrictions no less stringent than
@@ -133,9 +130,10 @@ to the extent applicable law specifically prohibits such restriction.
 3.4. You must reproduce any and all of NXP's (or its third party licensor's)
 copyright notices and other proprietary legends on copies of Licensed Software.
 
+
 3.5. If you distribute the Licensed Software to the United States Government,
-then the Licensed Software is "restricted computer software" and is subject
-to FAR 52.227-19 (c)(1) and (c)(2).
+then the Licensed Software is "restricted computer software" and is subject to
+FAR 52.227-19 (c)(1) and (c)(2).
 
 3.6. You grant to NXP a non-exclusive, non-transferable, irrevocable,
 perpetual, worldwide, royalty-free, sub-licensable license under your
@@ -181,7 +179,6 @@ authorship and all rights of approval, restriction, or limitation on use or
 subsequent modification.  Notwithstanding the foregoing, you will have the
 license rights granted in Section 2 hereto to any such modifications made by
 you or your licensees.
-
 6.              PATENT COVENANT NOT TO SUE. As partial, material consideration
 for the rights granted to you under this Agreement, you covenant not to sue or
 otherwise assert your patents against NXP, a NXP Affiliate or subsidiary, or a
@@ -219,13 +216,13 @@ will expire, except that any licenses extended to end-users pursuant to
 Sections 2.2(b), 2.2(c), and 2.3(b), which have been granted prior to such
 termination will survive.
 
-8.5. After termination of this Agreement by either party and upon NXP's
-written request, you will, at your discretion, return to the NXP any
-confidential information including all copies thereof or furnish to NXP at the
-address below, a statement certifying, with respect to the Licensed Software
-delivered hereunder that the original and all copies, except for archival
-copies to be used solely for dispute resolution purposes, in whole or in part,
-in any form, of the Licensed Software have been destroyed.
+8.5. After termination of this Agreement by either party and upon NXP's written
+request, you will, at your discretion, return to the NXP any confidential
+information including all copies thereof or furnish to NXP at the address
+below, a statement certifying, with respect to the Licensed Software delivered
+hereunder that the original and all copies, except for archival copies to be
+used solely for dispute resolution purposes, in whole or in part, in any form,
+of the Licensed Software have been destroyed.
 
 8.6. Notwithstanding the termination of this Agreement for any reason, the
 terms of Sections 1, 3, 5 through 25 will survive.
@@ -240,17 +237,17 @@ to you.
 
 10.           NO WARRANTY.  To the maximum extent permitted by law, NXP
 expressly disclaims any warranty for the Licensed Software.  The Licensed
-Software is provided "AS IS", without warranty of any kind, either express
-or implied, including without limitation the implied warranties of
+Software is provided "AS IS", without warranty of any kind, either express or
+implied, including without limitation the implied warranties of
 merchantability, fitness for a particular purpose, or non-infringement.  You
 assume the entire risk arising out of the use or performance of the licensed
 software, or any systems you design using the licensed software (if any).
 
 11.           INDEMNITY. You agree to fully defend and indemnify NXP from all
 claims, liabilities, and costs (including reasonable attorney's fees) related
-to (1) your use (including your contractors or distributee's use, if
-permitted) of the Licensed Software or (2) your violation of the terms and
-conditions of this Agreement.
+to (1) your use (including your contractors or distributee's use, if permitted)
+of the Licensed Software or (2) your violation of the terms and conditions of
+this Agreement.
 
 12.           LIMITATION OF LIABILITY.  EXCLUDING LIABILITY FOR A BREACH OF
 SECTION 2 (LICENSE GRANTS), SECTION 3 (LICENSE LIMITATIONS AND RESTRICTIONS),
@@ -291,11 +288,11 @@ limitation, statutes or regulations that may relate to pricing, quality, origin
 or content.
 
 14.2.                The Licensed Software has been developed at private
-expense and is a "Commercial Item" as defined in 48 C.F.R. §2.101,
-consisting of "Commercial Computer Software", and/or "Commercial Computer
-Software Documentation," as such terms are used in 48 C.F.R. §12.212 (or 48
-C.F.R. §227.7202, as applicable) and may only be licensed to or shared with
-U.S. Government end users in object code form as part of, or embedded within,
+expense and is a "Commercial Item" as defined in 48 C.F.R. §2.101, consisting
+of "Commercial Computer Software", and/or "Commercial Computer Software
+Documentation," as such terms are used in 48 C.F.R. §12.212 (or 48 C.F.R.
+§227.7202, as applicable) and may only be licensed to or shared with U.S.
+Government end users in object code form as part of, or embedded within,
 Authorized Systems.  Any agreement pursuant to which you share the Licensed
 Software will include a provision that reiterates the limitations of this
 document and requires all sub-agreements to similarly contain such limitations.
@@ -456,9 +453,9 @@ distributions must be similarly limited. Further rights must be obtained from
 Dolby Laboratories.
 
 CSR
-Use of Cambridge Silicon Radio, Inc. ("CSR") software is limited to
-evaluation and demonstration only.  Permitted distributions must be similarly
-limited.  Further rights must be obtained directly from CSR.
+Use of Cambridge Silicon Radio, Inc. ("CSR") software is limited to evaluation
+and demonstration only.  Permitted distributions must be similarly limited.
+Further rights must be obtained directly from CSR.
 
 NXP Wireless Charging Library
 License to the Software is limited to use in inductive coupling or wireless
@@ -496,7 +493,6 @@ paying a licensing fee.
 Microsoft
 If the Licensed Software includes software owned by Microsoft
 Corporation ("Microsoft"), it is subject to the terms of your license with
-
 Microsoft (the "Microsoft Underlying Licensed Software") and as such, NXP
 grants no license to you, beyond evaluation and demonstration in connection
 with NXP processors, in the Microsoft Underlying Licensed Software.  You must
@@ -537,6 +533,12 @@ Opus
 Use of Opus software must be consistent with the terms of the Opus license
 which can be found at: http://www.opus-codec.org/license/
 
+Qualcomm Atheros, Inc.
+Notwithstanding anything in this Agreement, Qualcomm Atheros, Inc. Wi-Fi
+software must be used strictly in accordance with the Qualcomm Atheros, Inc.
+Technology License Agreement that accompanies such software.  Any other use is
+expressly prohibited.
+
 Real Networks - its
 GStreamer Optimized Real Format Client Code implementation
 or OpenMax Optimized Real Format Client Code
@@ -545,7 +547,6 @@ Real Format Client code is restricted to applications in the automotive market.
  Licensee must be a final manufacturer in good standing with a current license
 with Real Networks for the commercial use and distribution of products
 containing the GStreamer Optimized Real Format Client Code implementation or
-
 OpenMax Optimized Real Format Client Code
 
 Real Time Engineers Ltd.
@@ -579,9 +580,9 @@ Agreement.  Any such use rights must be obtained directly from RivieraWaves.
 
 SanDisk Corporation
 If the Licensed Software includes software developed by SanDisk Corporation
-("SanDisk"), you must separately obtain the rights to reproduce and
-distribute this software in source code form from SanDisk.  Please follow these
-easy steps to obtain the license and software:
+("SanDisk"), you must separately obtain the rights to reproduce and distribute
+this software in source code form from SanDisk.  Please follow these easy steps
+to obtain the license and software:
 
 1.     Contact your local SanDisk sales representative to obtain the SanDisk
 License Agreement.
