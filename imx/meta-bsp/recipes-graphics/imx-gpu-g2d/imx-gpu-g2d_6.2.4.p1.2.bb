@@ -2,7 +2,7 @@
 # Copyright 2017-2018 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "GPU G2D library and apps for imx6"
+DESCRIPTION = "GPU G2D library and apps for imx6 and imx7ulp"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=75abe2fa1d16ca79f87cde926f05f72d"
 
