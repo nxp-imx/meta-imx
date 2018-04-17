@@ -137,24 +137,6 @@ if [ -z "$MACHINE" ]; then
     MACHINE='imx6qsabresd'
 fi
 
-case $MACHINE in
-imx8*)
-    case $DISTRO in
-    *wayland)
-        : ok
-        ;;
-    *)
-        echo -e "\n ERROR - Only Wayland distros are supported for i.MX 8 or i.MX 8M"
-        echo -e "\n"
-        return 1
-        ;;
-    esac
-    ;;
-*)
-    : ok
-    ;;
-esac
-
 # copy new EULA into community so setup uses latest i.MX EULA
 cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-freescale/EULA
 

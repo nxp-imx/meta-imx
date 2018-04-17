@@ -51,9 +51,7 @@ RPROVIDES_${PN}_imxgpu3d += "imx-gpu-viv"
 
 PE = "1"
 
-inherit fsl-eula-unpack distro_features_check
-
-REQUIRED_DISTRO_FEATURES_mx8 = "wayland"
+inherit fsl-eula-unpack
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
