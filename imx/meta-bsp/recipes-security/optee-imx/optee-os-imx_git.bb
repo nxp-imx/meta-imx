@@ -30,7 +30,7 @@ python () {
 	elif re.match('imx',machine):
 		subplatform = machine[1:]
 	else:
-        	bb.fatal("optee-os doesn't recognize this MACHINE")
+        	bb.fatal("optee-os-imx doesn't recognize this MACHINE")
 	d.setVar("OPTEE_PLATFORM", subplatform)
 }
 

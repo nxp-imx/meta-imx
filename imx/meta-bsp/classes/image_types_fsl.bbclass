@@ -22,7 +22,7 @@ UBOOT_SUFFIX_SDCARD ?= "${UBOOT_SUFFIX}"
 MXSBOOT_NAND_ARGS ?= ""
 
 # Include required software for optee
-IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'packagegroup-fsl-optee', '', d)} "
+IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'packagegroup-fsl-optee-imx', '', d)} "
 
 # Include userspace xen tools
 IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'imx-xen-base imx-xen-hypervisor', '', d)} "
