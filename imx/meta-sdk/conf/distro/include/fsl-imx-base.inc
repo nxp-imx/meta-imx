@@ -7,7 +7,7 @@ SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
 
-MAINTAINER = "Freescale Semiconductors <lauren.post@nxp.com>"
+MAINTAINER = "NXP <lauren.post@nxp.com>"
 
 TARGET_VENDOR = "-poky"
 
@@ -63,6 +63,7 @@ SANITY_TESTED_DISTROS ?= " \
             Ubuntu-14.04 \n \
             Ubuntu-14.10 \n \
             Ubuntu-15.04 \n \
+            Ubuntu-16.04 \n \
             Fedora-21 \n \
             CentOS-6.* \n \
             CentOS-7.* \n \
