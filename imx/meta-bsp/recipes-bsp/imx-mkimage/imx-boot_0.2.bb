@@ -23,7 +23,7 @@ DEPENDS += " \
     u-boot \
     ${IMX_FIRMWARE} \
     imx-atf \
-    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'optee-os', '', d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'optee-os-imx', '', d)} \
 "
 DEPENDS_append_mx8mq = " dtc-native"
 
@@ -42,7 +42,7 @@ do_compile[depends] += " \
     ${@' '.join('%s:do_deploy' % r for r in '${IMX_FIRMWARE}'.split() )} \
     imx-atf:do_deploy \
     ${IMX_M4_DEMOS} \
-    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'optee-os-imx:do_deploy', '', d)} \
 "
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
