@@ -4,12 +4,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 # Recording the opencv_extra version here allows us to raise a fatal error if the
 # package version is updated but this section is not.
 SRC_URI += "git://github.com/opencv/opencv_extra.git;destsuffix=opencv_extra;name=opencv_extra"
-SRCREV_opencv_extra = "c533012eb214ec3db851586f74f9dc43ea20c065"
-OPENCV_EXTRA_VERSION = "3.4.1"
-
-SRC_URI_remove = "file://javagen.patch"
-SRC_URI += "file://fix_openvx_samples.patch"
-SRC_URI += "file://fix_python_bindings.patch"
+SRCREV_opencv_extra = "ccc82f931442d187dec1bf4bb70533486f49ed00"
+OPENCV_EXTRA_VERSION = "3.4"
 
 PACKAGECONFIG_remove_imx   = "eigen"
 PACKAGECONFIG_remove_mx8   = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"

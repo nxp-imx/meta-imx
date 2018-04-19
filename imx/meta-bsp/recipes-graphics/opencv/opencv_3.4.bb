@@ -3,15 +3,15 @@ HOMEPAGE = "http://opencv.org/"
 SECTION = "libs"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=62d89c5dcb0583609ea919c56be0ee76"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=2b2f8752cc5edf504d283107d033f544"
 
 ARM_INSTRUCTION_SET_armv4 = "arm"
 ARM_INSTRUCTION_SET_armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "6ffc48769ac60d53c4bd1913eac15117c9b1c9f7"
-SRCREV_contrib = "ced5aa760688dd2ec867ebf7bd4f0c2341d2fde5"
+SRCREV_opencv = "6d4f66472e14b29b8e1623859cfebfdc67f677c3"
+SRCREV_contrib = "81ca8dab8697ae6acc5d8bc45f03b6b10f4d7d24"
 SRCREV_ipp = "a62e20676a60ee0ad6581e217fe7e4bada3b95db"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
@@ -52,7 +52,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://javagen.patch \
 "
 
-PV = "3.4.1+git${SRCPV}"
+PV = "3.4+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -73,8 +73,6 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
-    ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
-    ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
 "
 EXTRA_OECMAKE_append_x86 = " -DX86=ON"
 
@@ -189,6 +187,6 @@ do_install_append() {
 
     if ${@bb.utils.contains("PACKAGECONFIG", "samples", "true", "false", d)}; then
         install -d ${D}${datadir}/OpenCV/samples/bin/
-        cp -f bin/example_* ${D}${datadir}/OpenCV/samples/bin/
+        cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/samples/bin/
     fi
 }
