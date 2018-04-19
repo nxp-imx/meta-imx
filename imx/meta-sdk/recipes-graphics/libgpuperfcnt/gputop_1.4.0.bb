@@ -1,8 +1,8 @@
 # Copyright (C) 2017-2018 NXP
 
 DESCRIPTION = "Sample program to monitor i.MX GPU performance data"
-LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/Proprietary;md5=0557f9d92cf58f2ccdd50f62f8ac0b28"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bcacc6777a7173f8b95b5d1e0ac341ae"
 
 DEPENDS = "libgpuperfcnt"
 
