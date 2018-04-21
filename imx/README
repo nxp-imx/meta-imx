@@ -3,11 +3,27 @@ i.MX Linux Yocto Project BSP 4.9.51_8mq_ga Release
 
 The following boards were tested in this release.
 
+   * NXP i.MX 6QuadPlus SABRE Device (imx6qpsabresd)
+   * NXP i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
+   * NXP i.MX 6UltraLite EVK (imx6ulevk)
+   * NXP i.MX 6ULL EVK (imx6ull14x14evk)
+   * NXP i.MX 7Dual SABRE Smart Device (imx7dsabresd)
+   * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
+   * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
+   * NXP i.MX 6Quad SABRE Smart Device (imx6qsabresd)
+   * NXP i.MX 6Quad SABRE Auto (imx6qsabreauto)
+   * NXP i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
+   * NXP i.MX 6DualLite SABRE Auto (iEmx6dlsabreauto)
+   * NXP i.MX 6SoloLite EVK (imx6slevk)
+   * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
+   * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
+   * NXP i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
+   * NXP i.MX 6SOLO SABRE Auto (imx6solosabreauto )
+   * NXP i.MX 7ULP EVK (imx7ulpevk)
    * NXP i.MX 8MQuad EVK (imx8mqevk)
    * NXP i.MX 8QuadMax LPDDR4 ARM2 (imx8qmlpddr4arm2)
    * NXP i.MX 8QuadXPlus LPDDR4 ARM2 (imx8qxplpddr4arm2)
    * NXP i.MX 8QuadXPlus MEK (imx8qxpmek)
-
 
  * i.MX Device Tree configurations for each machine
     Each machine files lists the associated device trees for that machine.
@@ -23,7 +39,7 @@ Quick Start Guide
 See the i.MX Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX Linux BSP repo
-$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-morty -m imx-4.9.51-8mq_ga.xml
+$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-rocko -m imx-4.9.88-2.1.0_beta.xml
 
 Download the Yocto Project Layers:
 $: repo sync
@@ -31,15 +47,11 @@ $: repo sync
 If errors on repo init, remove the .repo directory and try repo init again.
 
 Run i.MX Linux Yocto Project Setup:
-$: [MACHINE=<machine>] [DISTRO=fsl-imx-<backend>] source ./fsl-setup-release.sh -b bld-<backend>
+$: [MACHINE=<machine>] [DISTRO=fsl-imx-<backend>] source ./fsl-setup-release.sh -b <build folder>
 
 where
  <machine> defaults to imx6qsabresd
- <backend> Graphics backend type
-            x11         X11 (this is the default if DISTRO is unspecified)
-            wayland     Wayland
-            xwayland    Wayland with XWayland support
-            fb          Framebuffer
+ <build folder> specifies the build folder name 
 
 After this your system will be configured to start a Yocto Project build.
 
@@ -52,7 +64,10 @@ correctly. In this release two image recipes are provided that work on almost al
 DISTROs are new and the way to configure for any backends.  Use DISTRO= instead of the -e on the setup script.
 The -e parameter gets converted to the appropriate distro configuration.
 
-Note: DirectFB is no longer supported in i.MX graphic bilds.
+Note: 
+DirectFB is no longer supported in i.MX graphic builds.
+The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7.  i.MX 8 should use xwayland only.
+XWayland is the default distro for all i.MX families.
 
    fsl-image-validation-imx provides a gui image without QT.
    fsl-image-qt5-validation-imx provides a Qt5 image
@@ -94,7 +109,7 @@ To run the QT5 examples use the following parameters:
 
 Building with Multilib support
 ---------------------------
-Yocto is able to build libraries for different target optimizations, combing those in one system image,
+Yocto Project is able to build libraries for different target optimizations, combing those in one system image,
 allowing the user to run both 32-bit and 64-bit applications.
 Here is an example to add multilib support (lib32).
 
