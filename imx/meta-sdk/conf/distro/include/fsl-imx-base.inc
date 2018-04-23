@@ -57,19 +57,22 @@ https://.*/.*    http://downloads.yoctoproject.org/mirror/sources/ \n"
 CONNECTIVITY_CHECK_URIS ?= "https://www.example.com/"
 
 SANITY_TESTED_DISTROS ?= " \
-            poky-1.7 \n \
-            poky-1.8 \n \
-            Ubuntu-12.04 \n \
-            Ubuntu-14.04 \n \
-            Ubuntu-14.10 \n \
-            Ubuntu-15.04 \n \
-            Ubuntu-16.04 \n \
-            Fedora-21 \n \
-            CentOS-6.* \n \
-            CentOS-7.* \n \
-            Debian-7.* \n \
-            Debian-8.* \n \
-            openSUSE-project-13.2 \n \
+            poky-2.2 \n \
+            poky-2.3 \n \
+            poky-2.4 \n \
+            ubuntu-12.04 \n \
+            ubuntu-15.04 \n \
+            ubuntu-16.04 \n \
+            ubuntu-16.10 \n \
+            ubuntu-17.04 \n \
+            fedora-24 \n \
+            fedora-25 \n \
+            fedora-26 \n \
+            centos-7 \n \
+            debian-8 \n \
+            debian-9 \n \
+            opensuse-42.1 \n \
+            opensuse-42.2 \n \
             "
 
 # Default hash policy for distro
