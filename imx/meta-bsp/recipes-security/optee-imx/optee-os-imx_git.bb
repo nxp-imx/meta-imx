@@ -12,7 +12,7 @@ DEPENDS = "python-pycrypto-native u-boot-mkimage-native"
 SRCBRANCH = "imx_3.0.y"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
-SRCREV = "5b29889537ef8c6d912d1fdb33fe308a295b2b60"
+SRCREV = "76acc7662a8ca8778ec835f97b89b8102044f892"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build.${OPTEE_PLATFORM}"
@@ -30,7 +30,7 @@ python () {
 	elif re.match('imx',machine):
 		subplatform = machine[1:]
 	else:
-        	bb.fatal("optee-os-imx doesn't recognize this MACHINE")
+                bb.fatal("optee-os-imx doesn't recognize this MACHINE")
 	d.setVar("OPTEE_PLATFORM", subplatform)
 }
 
