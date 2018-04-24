@@ -244,6 +244,7 @@ KERNEL_IMAGETYPE_mx8 = "Image"
 MACHINE_FEATURES = "usbgadget usbhost vfat alsa touchscreen"
 
 MACHINE_FEATURES_append_mx8qm = " xen"
+MACHINE_FEATURES_append_mx8qxp = " xen"
 
 # Add the ability to specify _imx machines
 MACHINEOVERRIDES =. "imx:"
