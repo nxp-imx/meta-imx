@@ -10,7 +10,7 @@ GST1.0_SRC ?= "gitsm://source.codeaurora.org/external/imx/gstreamer.git;protocol
 SRCBRANCH = "imx-1.14.x"
 
 SRC_URI = " ${GST1.0_SRC};branch=${SRCBRANCH}"
-SRCREV = "91d29ccc969ea1304a6d0ce0aac785f3c492b102"
+SRCREV = "f4e127a5e9a1eb977e023532d6636d939c8ccbc8"
 
 EXTRA_AUTORECONF = ""
 
