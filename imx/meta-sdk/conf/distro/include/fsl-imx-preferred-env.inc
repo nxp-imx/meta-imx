@@ -60,6 +60,11 @@ PREFERRED_VERSION_imx-gpu-g2d               = "${GRAPHICS_VERSION}"
 PREFERRED_VERSION_openssl                   = "1.0.2m"
 PREFERRED_VERSION_openssl-native            = "1.0.2m"
 
+PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.14.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.14.0.imx"
+PREFERRED_VERSION_gstreamer1.0              = "1.14.0.imx"
+
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"
 PREFERRED_PROVIDER_udev = "systemd"
