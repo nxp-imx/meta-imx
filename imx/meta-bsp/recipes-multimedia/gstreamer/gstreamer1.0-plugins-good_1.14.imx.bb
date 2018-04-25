@@ -14,6 +14,8 @@ SRC_URI = " \
 "
 SRCREV = "3fc5ff18ae40c6571b119263fe9fe8c84bc48b9f"
 
+DEPENDS_append = " libdrm"
+
 EXTRA_AUTORECONF = ""
 
 # Fix: unrecognised options: --disable-sunaudio [unknown-configure-option]
