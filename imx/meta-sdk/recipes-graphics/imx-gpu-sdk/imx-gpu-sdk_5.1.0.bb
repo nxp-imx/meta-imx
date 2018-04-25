@@ -43,8 +43,8 @@ FEATURES_append_mx8       = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',        '', \
                                                         ',Vulkan', d), d)}"
 
-EXTENSIONS       = ""
-EXTENSIONS_mx8mq = "OpenGLES3.1:GL_EXT_geometry_shader,OpenGLES3.1:GL_EXT_tessellation_shader"
+EXTENSIONS       = "*"
+EXTENSIONS_mx8mq = "OpenGLES3:GL_EXT_color_buffer_float"
 
 S = "${WORKDIR}/git"
 
