@@ -13,7 +13,7 @@ PR = "r1"
 PV = "0.5.1+git${SRCPV}"
 
 SRC_URI = "git://github.com/codeauroraforum/imx-uuc.git;protocol=https"
-SRCREV = "e2349be2ce985eef3ba433c8eaf1671012dfa54d"
+SRCREV = "323efa5e4c799c40503ac92a8104c33b090e6731"
 
 S = "${WORKDIR}/git"
 
