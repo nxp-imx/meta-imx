@@ -10,7 +10,7 @@ SRC_URI += "file://0001-weston.ini-Use-a-simpler-default-file-YOCIMX-2296.patch"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-3.0"
 SRC_URI_prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV = "2b6e812fc0c67d16d43b924cce989029ed7fa6f8"
+SRCREV = "1c5783b13c7de3dab56aae116f1f6150ffa10ffc"
 S = "${WORKDIR}/git"
 
 # Define RECIPE_SYSROOT since it doesn't exist in morty
