@@ -24,7 +24,7 @@ IMXGST_SRC ?= "git://source.codeaurora.org/external/imx/imx-gst1.0-plugin.git;pr
 SRCBRANCH = "master"
 
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH}"
-SRCREV = "d135dc3ccaf5e55628dac0ad9c2c63f6fc27e6d4"
+SRCREV = "46727bd114d604de99579cc4e814900f31aa228b"
 
 S = "${WORKDIR}/git"
 
