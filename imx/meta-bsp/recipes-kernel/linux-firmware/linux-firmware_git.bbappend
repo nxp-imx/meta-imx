@@ -15,7 +15,6 @@ do_install_append () {
     cp ${WORKDIR}/firmware.conf ${D}${sysconfdir}/bluetooth
 
     # Use Murata's QCA calibration files
-    install -m 0644 ${S}/murata/1CQ/nvm_tlv_3.2.bin ${D}${nonarch_base_libdir}/firmware/nvm_tlv_3.2.bin
     install -m 0644 ${S}/murata/1CQ/board.bin ${D}${nonarch_base_libdir}/firmware/ath10k/QCA6174/hw3.0/
 }
 

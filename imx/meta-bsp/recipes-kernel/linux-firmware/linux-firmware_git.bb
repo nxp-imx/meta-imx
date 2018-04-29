@@ -223,9 +223,6 @@ do_install() {
         # Copy the iwlwifi ucode
         cp ${WORKDIR}/iwlwifi-8000C-19.ucode ${D}${nonarch_base_libdir}/firmware/
 
-        # Copy QCA BT FIRMWARE
-        ln -sf qca/nvm_00130302.bin ${D}${nonarch_base_libdir}/firmware/nvm_tlv_3.2.bin
-        ln -sf qca/rampatch_00130302.bin ${D}${nonarch_base_libdir}/firmware/rampatch_tlv_3.2.tlv
 }
 
 
@@ -314,8 +311,6 @@ FILES_${PN}-ath10k = " \
 
 FILES_${PN}-qca = " \
   ${nonarch_base_libdir}/firmware/qca \
-  ${nonarch_base_libdir}/firmware/nvm_tlv_3.2.bin \
-  ${nonarch_base_libdir}/firmware/rampatch_tlv_3.2.tlv \
 "
 
 RDEPENDS_${PN}-ar3k += "${PN}-ar3k-license"
