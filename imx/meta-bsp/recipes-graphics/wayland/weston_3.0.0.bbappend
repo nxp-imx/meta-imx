@@ -9,7 +9,7 @@ SRC_URI_remove = "file://fix-missing-header.patch"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-3.0"
 SRC_URI_prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV = "2b6e812fc0c67d16d43b924cce989029ed7fa6f8"
+SRCREV = "5b77bec4e4a1bd6bd0e205cd4bc9864616bcc494"
 S = "${WORKDIR}/git"
 
 # Define RECIPE_SYSROOT since it doesn't exist in morty
