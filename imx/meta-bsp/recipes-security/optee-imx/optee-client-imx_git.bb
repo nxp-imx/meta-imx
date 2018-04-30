@@ -48,3 +48,5 @@ FILES_tee-supplicant += "${bindir}/tee-supplicant"
 INSANE_SKIP_${PN} = "ldflags dev-elf"
 INSANE_SKIP_${PN}-dev = "ldflags dev-elf"
 INSANE_SKIP_tee-supplicant = "ldflags"
+
+COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"

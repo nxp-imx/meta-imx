@@ -38,9 +38,11 @@ do_install () {
 
     install -d ${D}/lib/optee_armtz
     find ${S}/out/ta -name '*.ta' | while read name; do
-    	install -m 444 $name ${D}/lib/optee_armtz/
+    install -m 444 $name ${D}/lib/optee_armtz/
     done
 
 }
 
 FILES_${PN} = "/usr/bin/ /lib*/optee_armtz/"
+
+COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
