@@ -8,7 +8,7 @@ HOMEPAGE = "https://www.khronos.org/registry/spir-v"
 inherit cmake python3native
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=ce523927d7bcd789d6c3af579d03ad73"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 S = "${WORKDIR}/git"
 SPIRV_HEADERS_LOCATION = "${S}/external/spirv-headers"
