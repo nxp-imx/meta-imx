@@ -17,7 +17,8 @@ HEADERS_VERSION = "1.1"
 SRCREV_spirv-tools = "2c0ce872103d676bf8de5dc87a03ad2c32e215a2"
 SRCREV_spirv-headers = "3a4dbdde9a9b2cf23736694ba70262dce27fbeaa"
 SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools;protocol=http;name=spirv-tools \
-           git://github.com/KhronosGroup/SPIRV-Headers;name=spirv-headers;destsuffix=${SPIRV_HEADERS_LOCATION}"
+           git://github.com/KhronosGroup/SPIRV-Headers;name=spirv-headers;destsuffix=${SPIRV_HEADERS_LOCATION} \
+           file://0002-spirv-lesspipe.sh-allow-using-generic-shells.patch"
 
 do_install_append() {
     if test -d ${SPIRV_HEADERS_LOCATION}/include/spirv/${HEADERS_VERSION}; then
@@ -25,3 +26,7 @@ do_install_append() {
         install -m 0644 ${SPIRV_HEADERS_LOCATION}/include/spirv/${HEADERS_VERSION}/* ${D}/${includedir}/SPIRV
     fi
 }
+
+FILES_SOLIBSDEV = ""
+FILES_${PN} += "${libdir}/libSPIRV*"
+INSANE_SKIP_${PN} = "dev-so"

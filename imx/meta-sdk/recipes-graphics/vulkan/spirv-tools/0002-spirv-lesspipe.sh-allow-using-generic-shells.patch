@@ -12,16 +12,13 @@ Signed-off-by: Awais Belal <awais_belal@mentor.com>
  tools/lesspipe/spirv-lesspipe.sh | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/lesspipe/spirv-lesspipe.sh b/tools/lesspipe/spirv-lesspipe.sh
-index 05831d1..4e98fee 100644
---- a/tools/lesspipe/spirv-lesspipe.sh
-+++ b/tools/lesspipe/spirv-lesspipe.sh
+Index: git/tools/lesspipe/spirv-lesspipe.sh
+===================================================================
+--- git.orig/tools/lesspipe/spirv-lesspipe.sh	2018-05-01 13:37:34.294579393 -0500
++++ git/tools/lesspipe/spirv-lesspipe.sh	2018-05-01 13:38:35.000000000 -0500
 @@ -1,4 +1,4 @@
 -#!/bin/bash
 +#!/bin/sh
- 
  # Copyright (c) 2016 The Khronos Group Inc.
- #
--- 
-1.9.1
-
+ 
+ # Licensed under the Apache License, Version 2.0 (the "License");
