@@ -14,8 +14,8 @@ SRC_URI = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
 	   file://weston-gl-renderer-Set-pitch-correctly-for-subsampled-textures.patch \
 	   file://fix-missing-header.patch \
 "
-SRC_URI[md5sum] = "9c42a4c51a1b9f35d040fa9d45ada36d"
-SRC_URI[sha256sum] = "cde1d55e8dd70c3cbb3d1ec72f60e60000041579caa1d6a262bd9c35e93723a5"
+SRC_URI[md5sum] = "33709aa4d5916f89643fca0fc0064b39"
+SRC_URI[sha256sum] = "a0fc0ae7ef83dfbed12abfe9b8096a24a7dd00705e86fa0db1e619ded18b4b58"
 
 inherit autotools pkgconfig useradd distro_features_check
 # depends on virtual/egl
@@ -100,12 +100,12 @@ PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', '${PN}-xwayland',
 
 FILES_${PN} = "${bindir}/weston ${bindir}/weston-terminal ${bindir}/weston-info ${bindir}/weston-launch ${bindir}/wcap-decode ${libexecdir} ${libdir}/${BPN}/*.so ${datadir}"
 
-FILES_libweston-3 = "${libdir}/lib*${SOLIBS} ${libdir}/libweston-3/*.so"
+FILES_libweston-3 = "${libdir}/lib*${SOLIBS} ${libdir}/libweston-4/*.so"
 SUMMARY_libweston-3 = "Helper library for implementing 'wayland window managers'."
 
 FILES_${PN}-examples = "${bindir}/*"
 
-FILES_${PN}-xwayland = "${libdir}/libweston-3/xwayland.so"
+FILES_${PN}-xwayland = "${libdir}/libweston-4/xwayland.so"
 RDEPENDS_${PN}-xwayland += "xserver-xorg-xwayland"
 
 RDEPENDS_${PN} += "xkeyboard-config"

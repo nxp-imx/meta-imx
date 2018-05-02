@@ -6,10 +6,11 @@ DEPENDS_append_imxgpu2d = " virtual/libg2d"
 SRC_URI_remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 SRC_URI_remove = "file://weston-gl-renderer-Set-pitch-correctly-for-subsampled-textures.patch"
 SRC_URI_remove = "file://fix-missing-header.patch"
+SRC_URI += "file://0001-weston.ini.in-Modify-paths-to-point-to-right-directo.patch"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
-SRCBRANCH = "weston-imx-3.0"
+SRCBRANCH = "weston-imx-4.0"
 SRC_URI_prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV = "5b77bec4e4a1bd6bd0e205cd4bc9864616bcc494"
+SRCREV = "f980ed16294ee6fa8f11e0804ee34acb690d775c"
 S = "${WORKDIR}/git"
 
 # Define RECIPE_SYSROOT since it doesn't exist in morty
