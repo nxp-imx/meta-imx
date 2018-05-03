@@ -91,3 +91,5 @@ FILES_${PN}-dev = "/usr/include/optee"
 INSANE_SKIP_${PN}-dev = "staticdev"
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
