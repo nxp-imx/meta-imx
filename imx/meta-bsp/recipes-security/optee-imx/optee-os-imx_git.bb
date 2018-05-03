@@ -15,24 +15,13 @@ SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
 SRCREV = "1fc8c8532af7333c48b78ad908e3822fac89af7c"
 
 S = "${WORKDIR}/git"
-B = "${WORKDIR}/build.${OPTEE_PLATFORM}"
+B = "${WORKDIR}/build.${PLATFORM_FLAVOR}"
 
-python () {
-	machine = d.getVar("MACHINE", True)
-
-	import re
-	if re.match('imx6qpdlsolox',machine):
-		subplatform = 'mx6qsabresd'
-	elif re.match('imx6ul7d',machine):
-		subplatform = 'mx6ulevk'
-	elif re.match('imx6ull14x14evk',machine):
-		subplatform = 'mx6ullevk'
-	elif re.match('imx',machine):
-		subplatform = machine[1:]
-	else:
-                bb.fatal("optee-os-imx doesn't recognize this MACHINE")
-	d.setVar("OPTEE_PLATFORM", subplatform)
-}
+# The platform flavor corresponds to the Yocto machine without the leading 'i'.
+PLATFORM_FLAVOR                 = "${@d.getVar('MACHINE')[1:]}"
+PLATFORM_FLAVOR_imx6qpdlsolox   = "mx6qsabresd"
+PLATFORM_FLAVOR_imx6ul7d        = "mx6ulevk"
+PLATFORM_FLAVOR_imx6ull14x14evk = "mx6ullevk"
 
 OPTEE_ARCH ?= "arm32"
 OPTEE_ARCH_armv7a = "arm32"
@@ -43,7 +32,7 @@ OPTEE_ARCH_aarch64 = "arm64"
 # For 64bits, CROSS_COMPILE64 must be set
 # When defining CROSS_COMPILE and CROSS_COMPILE64, we assure that
 # any 32 or 64 bits builds will pass
-EXTRA_OEMAKE = "PLATFORM=imx PLATFORM_FLAVOR=${OPTEE_PLATFORM} \
+EXTRA_OEMAKE = "PLATFORM=imx PLATFORM_FLAVOR=${PLATFORM_FLAVOR} \
                 CROSS_COMPILE=${HOST_PREFIX} \
                 CROSS_COMPILE64=${HOST_PREFIX} \
                 NOWERROR=1 \
@@ -60,14 +49,14 @@ do_compile () {
 
 do_deploy () {
    install -d ${DEPLOYDIR}
-   ${TARGET_PREFIX}objcopy -O binary ${B}/core/tee.elf ${DEPLOYDIR}/tee.${OPTEE_PLATFORM}.bin
+   ${TARGET_PREFIX}objcopy -O binary ${B}/core/tee.elf ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin
 
    IMX_LOAD_ADDR=`cat ${B}/core/tee-init_load_addr.txt` && \
    uboot-mkimage -A arm -O linux -C none -a ${IMX_LOAD_ADDR} -e ${IMX_LOAD_ADDR} \
-    -d ${DEPLOYDIR}/tee.${OPTEE_PLATFORM}.bin ${DEPLOYDIR}/uTee-${OPTEE_BIN_EXT}
+    -d ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin ${DEPLOYDIR}/uTee-${OPTEE_BIN_EXT}
 
     cd ${DEPLOYDIR}
-    ln -sf tee.${OPTEE_PLATFORM}.bin tee.bin
+    ln -sf tee.${PLATFORM_FLAVOR}.bin tee.bin
     cd -
 }
 
