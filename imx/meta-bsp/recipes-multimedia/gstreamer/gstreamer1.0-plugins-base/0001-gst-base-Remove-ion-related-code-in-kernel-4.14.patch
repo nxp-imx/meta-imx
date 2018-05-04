@@ -1,0 +1,70 @@
+From 7082f1e2921148ccab776bcf8af46b536329cf8f Mon Sep 17 00:00:00 2001
+From: "i.MX Yocto Project Build" <lauren.post@nxp.com>
+Date: Fri, 4 May 2018 04:24:42 -0500
+Subject: [PATCH] Remove ion related code in kernel 4.14
+
+- Remove ion related code in kernel 4.14
+as ion is not ready yet
+
+Signed-off-by: Lyon Wang <lyon.wang@nxp.com>
+---
+ gst-libs/gst/allocators/gstionmemory.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/gst-libs/gst/allocators/gstionmemory.c b/gst-libs/gst/allocators/gstionmemory.c
+index fad53db..55c73f8 100644
+--- a/gst-libs/gst/allocators/gstionmemory.c
++++ b/gst-libs/gst/allocators/gstionmemory.c
+@@ -27,6 +27,8 @@
+ #include <sys/mman.h>
+ #include <sys/types.h>
+ #include <linux/ion.h>
++#include <linux/version.h>
++
+ 
+ #include <gst/allocators/gstdmabuf.h>
+ #include "gstphysmemory.h"
+@@ -72,12 +74,12 @@ gst_ion_allocator_get_phys_addr (GstPhysMemoryAllocator *allocator, GstMemory *m
+ 
+   GST_DEBUG ("ion DMA FD: %d", fd);
+ 
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 1, 4)
+   struct ion_phys_dma_data data = {
+     .phys = 0,
+     .size = 0,
+     .dmafd = fd,
+   };
+-
+   struct ion_custom_data custom = {
+     .cmd = ION_IOC_PHYS_DMA,
+     .arg = (unsigned long)&data,
+@@ -88,6 +90,9 @@ gst_ion_allocator_get_phys_addr (GstPhysMemoryAllocator *allocator, GstMemory *m
+     return 0;
+ 
+   return data.phys;
++#else
++  return 0;
++#endif
+ }
+ 
+ static void gst_ion_allocator_iface_init(gpointer g_iface)
+@@ -149,6 +154,7 @@ gst_ion_alloc_alloc (GstAllocator * allocator, gsize size,
+     GstAllocationParams * params)
+ {
+   GstIONAllocator *self = GST_ION_ALLOCATOR (allocator);
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 1, 4) 
+   struct ion_allocation_data allocation_data = { 0 };
+   struct ion_fd_data fd_data = { 0 };
+   struct ion_handle_data handle_data = { 0 };
+@@ -199,6 +205,8 @@ bail:
+   handle_data.handle = ion_handle;
+   gst_ion_ioctl (self->fd, ION_IOC_FREE, &handle_data);
+ 
++#endif
++
+   return NULL;
+ }
+ 
+-- 
+2.7.4
+
