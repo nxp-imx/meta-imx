@@ -7,8 +7,6 @@ DESCRIPTION = "Gstreamer freescale plugins"
 LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-
 DEPENDS = "imx-codec imx-parser virtual/kernel gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
 DEPENDS_append_mx6 = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
@@ -25,9 +23,7 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
 IMXGST_SRC ?= "git://source.codeaurora.org/external/imx/imx-gst1.0-plugin.git;protocol=https"
 SRCBRANCH = "master"
 
-SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
-           file://0001-Remove-ion-related-code-in-kernel-4.14.patch \
-"
+SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH}"
 SRCREV = "3683c9e5901df253b3525d9d60a4c8ea41f517bf"
 
 S = "${WORKDIR}/git"

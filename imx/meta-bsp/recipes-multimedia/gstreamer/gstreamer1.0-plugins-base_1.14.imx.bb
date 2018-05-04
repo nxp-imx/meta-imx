@@ -29,7 +29,6 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
     file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
     file://make-gio_unix_2_0-dependency-configurable.patch \
-    file://0001-gst-base-Remove-ion-related-code-in-kernel-4.14.patch \
 "
 SRCREV = "47d90a947f9e9753e3a8ce62f2254723049a2418"
 
