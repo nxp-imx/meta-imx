@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=69663ab153298557a59c67a60a743e5b"
 inherit deploy pythonnative autotools
 DEPENDS = "python-pycrypto-native u-boot-mkimage-native"
 
-SRCBRANCH = "imx_4.9.88_im8qxp_beta2"
+SRCBRANCH = "imx_3.0.y"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
-SRCREV = "1fc8c8532af7333c48b78ad908e3822fac89af7c" 
+SRCREV = "1fc8c8532af7333c48b78ad908e3822fac89af7c"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build.${PLATFORM_FLAVOR}"
