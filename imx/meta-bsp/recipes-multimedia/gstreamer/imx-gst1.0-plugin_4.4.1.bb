@@ -28,7 +28,7 @@ SRCBRANCH = "master"
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
            file://0001-Remove-ion-related-code-in-kernel-4.14.patch \
 "
-SRCREV = "4ee18ae98b5ace825d32375ffe504045075f7655"
+SRCREV = "3683c9e5901df253b3525d9d60a4c8ea41f517bf"
 
 S = "${WORKDIR}/git"
 
