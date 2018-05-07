@@ -14,6 +14,9 @@ PACKAGECONFIG_append_mx6q = " opencv"
 PACKAGECONFIG_append_mx6qp = " opencv"
 PACKAGECONFIG_append_mx8 = " opencv kms"
 
+#Remove unrecognised configure option for 1.14
+PACKAGECONFIG_remove = " gles2"
+
 PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland-native wayland wayland-protocols libdrm"
 
 # Disable introspection to fix [GstGL-1.0.gir] Error
@@ -23,7 +26,7 @@ EXTRA_OECONF_remove = " --disable-sdl --disable-nas --disable-libvisual --disabl
                         --disable-pvr --disable-sdltest --disable-wininet --disable-timidity \
                         --disable-linsys --disable-sndio --disable-apexsink \
                         --disable-libssh2 --disable-qt --disable-schro --disable-cocoa --disable-gtk3 \
-                        --enable-egl --disable-opengl --enable-gles2 \
+                        --enable-egl --disable-opengl --disable-gles2 \
 "
 
 SRC_URI_remove = "file://0001-Prepend-PKG_CONFIG_SYSROOT_DIR-to-pkg-config-output.patch"
