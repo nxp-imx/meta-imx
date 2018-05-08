@@ -12,7 +12,7 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
 "
-SRCREV = "10e1786736c759864984fc29d66cce022afef321"
+SRCREV = "7d23f43349748904e5248a0682cc8627c8af7534"
 
 # gstgldisplay_viv_fb.h from gst-base is needed by qmlgl plugin
 DEPENDS_append = " gstreamer1.0-plugins-base"
