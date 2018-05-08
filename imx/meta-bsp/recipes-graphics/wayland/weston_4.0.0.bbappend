@@ -10,7 +10,7 @@ SRC_URI += "file://0001-weston.ini.in-Modify-paths-to-point-to-right-directo.pat
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-4.0"
 SRC_URI_prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV = "f980ed16294ee6fa8f11e0804ee34acb690d775c" 
+SRCREV = "1226c0d6e2fc893fed6f62bf936ff132987858ca"
 S = "${WORKDIR}/git"
 
 # Define RECIPE_SYSROOT since it doesn't exist in morty
