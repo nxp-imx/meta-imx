@@ -7,10 +7,10 @@ DESCRIPTION = "Gstreamer freescale plugins"
 LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
-DEPENDS = "imx-codec imx-parser virtual/kernel gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
+DEPENDS = "imx-codec imx-parser virtual/kernel gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad libdrm"
 DEPENDS_append_mx6 = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
-DEPENDS_append_imxvpu = " imx-vpuwrap libdrm"
+DEPENDS_append_imxvpu = " imx-vpuwrap"
 
 # For backwards compatibility
 RREPLACES_${PN} = "gst1.0-fsl-plugin"
