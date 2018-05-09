@@ -1,7 +1,10 @@
 require recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad.inc
 
+# Re-use patch files from 1.12.2 recipe
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad:"
+# The following PATH has highest priority
+# Implement patch overwrite, using the updated patch under this PATH, instead of the 1.12.2 ones
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=73a5855a8119deb017f5f13cf327095d \
