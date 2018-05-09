@@ -40,3 +40,5 @@ addtask make_scripts after do_configure before do_compile
 FILES_${PN} += " /home/root/.profile "
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
+
+EXTRA_OEMAKE += "SDKTARGETSYSROOT=${STAGING_DIR_HOST}"
