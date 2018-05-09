@@ -9,10 +9,13 @@ SRCBRANCH = "imx-1.14.x"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
+    file://0001-v4l2videodec-Fix-drm_fourcc.h-build-break.patch \
 "
 SRCREV = "7d23f43349748904e5248a0682cc8627c8af7534"
 
-DEPENDS_append = " libdrm"
+DEPENDS += "virtual/kernel"
+# Make sure kernel sources are available
+do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 EXTRA_AUTORECONF = ""
 

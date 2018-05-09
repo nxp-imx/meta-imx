@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=73a5855a8119deb017f5f13cf327095d \
                     file://COPYING.LIB;md5=21682e4e8fea52413fd26c60acb907e5 "
 
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
-DEPENDS_append_mx8 = " libdrm"
+DEPENDS += "virtual/kernel"
 
 PACKAGECONFIG_append_mx6q = " opencv"
 PACKAGECONFIG_append_mx6qp = " opencv"
@@ -20,7 +20,7 @@ PACKAGECONFIG_append_mx8 = " opencv kms"
 #Remove unrecognised configure option for 1.14
 PACKAGECONFIG_remove = " gles2"
 
-PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland-native wayland wayland-protocols libdrm"
+PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland-native wayland wayland-protocols"
 
 # Disable introspection to fix [GstGL-1.0.gir] Error
 EXTRA_OECONF_append = " --disable-introspection"
@@ -48,6 +48,9 @@ SRCREV = "797029384ed24bce7da1b63dfea53b4d2357efb1"
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
 EXTRA_AUTORECONF = ""
+
+# Make sure kernel sources are available
+do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 PACKAGE_ARCH_imxpxp = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
