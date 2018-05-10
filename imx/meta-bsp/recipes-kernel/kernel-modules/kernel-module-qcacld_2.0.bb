@@ -7,6 +7,7 @@ inherit module
 SRC_URI = "git://source.codeaurora.org/quic/la/platform/vendor/qcom-opensource/wlan/qcacld-2.0;protocol=https;branch=caf-wlan/CNSS.LEH_TF.2.3.3; \
            file://0001-Kbuild-Eliminate-errors-caused-by-GCC-6.x-warning.patch \
            file://0002-Kbuild-disable-debug-configs-in-default.patch \
+           file://0003-dbglog_host-add-timeout-for-dbglog_block-fwlog-read.patch \
 "
 
 SRCREV = "${AUTOREV}"
