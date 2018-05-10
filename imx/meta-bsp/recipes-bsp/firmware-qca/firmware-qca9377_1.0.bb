@@ -4,7 +4,6 @@ SUMMARY = "Qualcomm Wi-Fi and Bluetooth firmware"
 DESCRIPTION = "Qualcomm Wi-Fi and Bluetooth firmware for modules such as QCA9377-3"
 SECTION = "base"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=75abe2fa1d16ca79f87cde926f05f72d"
 
 require firmware-qca.inc
 

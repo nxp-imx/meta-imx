@@ -1,16 +1,17 @@
 # Copyright 2018 NXP
 
 SUMMARY = "Qualcomm Wi-Fi and Bluetooth firmware"
-DESCRIPTION = "Qualcomm Wi-Fi and Bluetooth firmware for modules QCA9377-3, QCA6174A"
 SECTION = "base"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=75abe2fa1d16ca79f87cde926f05f72d"
+LIC_FILES_CHKSUM = "file://COPYING;md5=75abe2fa1d16ca79f87cde926f05f72d \
+                    file://QUALCOMM_ATHEROS_LICENSE_AGREEMENT.pdf;md5=e629669cf17f6a2a6872e067582986e3 \
+"
 
 inherit fsl-eula-unpack allarch
 
 SRC_URI = " ${FSL_MIRROR}/firmware-qca-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "f79734ff3831328e1e6f7bfb61188cbf"
-SRC_URI[sha256sum] = "8e9440f9ceca7226c2736aafd4646ea11dbdef85dcd79947cf0635f4adc363c1"
+SRC_URI[md5sum] = "8abcef21c4e4b96380465f4c305765e7"
+SRC_URI[sha256sum] = "6ea14bd9e7665c9030c1c8a25dafb2290ab0f1372a5ead4fd74f268d6f8f9f69"
 
 S = "${WORKDIR}/firmware-qca-${PV}"
