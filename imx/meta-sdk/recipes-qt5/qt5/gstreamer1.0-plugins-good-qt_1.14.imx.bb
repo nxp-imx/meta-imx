@@ -14,9 +14,11 @@ SRC_URI = " \
 "
 SRCREV = "7d23f43349748904e5248a0682cc8627c8af7534"
 
-DEPENDS += "gstreamer1.0-plugins-base virtual/kernel"
-# Make sure kernel sources are available
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
+# gstgldisplay_viv_fb.h from gst-base is needed by qmlgl plugin
+DEPENDS_append = " gstreamer1.0-plugins-base"
+# Need libdrm_fourcc.h for DMA buf support in opengl plugins
+DEPENDS_append_mx7ulp = " libdrm"
+DEPENDS_append_mx8 = " libdrm"
 
 # Qt5 configuratin only support "--disable-qt"
 # And in default, it is disabled, need to remove the default setting to enable it.
