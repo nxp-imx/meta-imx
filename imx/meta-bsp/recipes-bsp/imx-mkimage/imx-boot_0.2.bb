@@ -79,10 +79,10 @@ IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi'
                                                                  'flash_multi_cores flash flash_dcd', d), d)}"
 IMXBOOT_TARGETS_mx8qxp = "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', \
                        bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
-                                                                 'flash_b0_all flash_b0', d), d)}"
-IMXBOOT_TARGETS_mx8qxpa0 = "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', \
-                       bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
-                                                                 'flash_multi_cores flash flash_dcd', d), d)}"
+                                                                 'flash_all flash', d), d)}"
+IMXBOOT_TARGETS_mx8qxpa0 = "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi_a0', \
+                       bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand_a0', \
+                                                                 'flash_multi_cores_a0 flash_a0 flash_dcd_a0', d), d)}"
 IMXBOOT_TARGETS_imx8qxpddr3arm2 = "flash_ddr3_dcd"
 
 S = "${WORKDIR}/git"
