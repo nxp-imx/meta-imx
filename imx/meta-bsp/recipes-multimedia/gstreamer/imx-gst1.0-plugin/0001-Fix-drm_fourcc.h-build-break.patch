@@ -1,0 +1,75 @@
+From 44bc2dc4502a9626d329ff2089e132ebe3ebd8fe Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Fri, 11 May 2018 09:46:15 -0500
+Subject: [PATCH] Fix drm_fourcc.h build break
+
+Use the userspace API so the user is not forced to use the libdrm
+package on platforms where DRM is not supported.
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ plugins/compositor/gstimxcompositor.c     | 3 ++-
+ plugins/videoconvert/gstimxvideoconvert.c | 3 ++-
+ plugins/vpu/gstvpudec.c                   | 3 ++-
+ plugins/vpu/gstvpudecobject.c             | 3 ++-
+ 4 files changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/plugins/compositor/gstimxcompositor.c b/plugins/compositor/gstimxcompositor.c
+index e714f2a..a35a14f 100755
+--- a/plugins/compositor/gstimxcompositor.c
++++ b/plugins/compositor/gstimxcompositor.c
+@@ -121,7 +121,8 @@
+ 
+ #include <gst/allocators/gstdmabuf.h>
+ #include <gst/allocators/gstdmabufmeta.h>
+-#include <libdrm/drm_fourcc.h>
++#include <stdint.h>
++#include <drm/drm_fourcc.h>
+ #include <gst/allocators/gstallocatorphymem.h>
+ #include <gst/allocators/gstphymemmeta.h>
+ #ifdef USE_ION
+diff --git a/plugins/videoconvert/gstimxvideoconvert.c b/plugins/videoconvert/gstimxvideoconvert.c
+index c883cb3..d3de18a 100755
+--- a/plugins/videoconvert/gstimxvideoconvert.c
++++ b/plugins/videoconvert/gstimxvideoconvert.c
+@@ -25,7 +25,8 @@
+ #include <gst/video/video.h>
+ #include <gst/allocators/gstdmabuf.h>
+ #include <gst/allocators/gstdmabufmeta.h>
+-#include <libdrm/drm_fourcc.h>
++#include <stdint.h>
++#include <drm/drm_fourcc.h>
+ #include <gst/allocators/gstallocatorphymem.h>
+ #ifdef USE_ION
+ #include <gst/allocators/gstionmemory.h>
+diff --git a/plugins/vpu/gstvpudec.c b/plugins/vpu/gstvpudec.c
+index c78d0c2..afaf028 100755
+--- a/plugins/vpu/gstvpudec.c
++++ b/plugins/vpu/gstvpudec.c
+@@ -44,7 +44,8 @@
+ #ifdef USE_ION
+ #include <gst/allocators/gstionmemory.h>
+ #endif
+-#include <libdrm/drm_fourcc.h>
++#include <stdint.h>
++#include <drm/drm_fourcc.h>
+ #include "gstimxcommon.h"
+ #include "gstvpuallocator.h"
+ #include "gstvpudec.h"
+diff --git a/plugins/vpu/gstvpudecobject.c b/plugins/vpu/gstvpudecobject.c
+index 1484e9d..ff99dcb 100755
+--- a/plugins/vpu/gstvpudecobject.c
++++ b/plugins/vpu/gstvpudecobject.c
+@@ -19,7 +19,8 @@
+  */
+ 
+ #include <string.h>
+-#include <libdrm/drm_fourcc.h>
++#include <stdint.h>
++#include <drm/drm_fourcc.h>
+ #include <gst/video/gstvideometa.h>
+ #include <gst/video/gstvideohdr10meta.h>
+ #include "gstimxcommon.h"
+-- 
+2.7.4
+

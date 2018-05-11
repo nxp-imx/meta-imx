@@ -1,0 +1,29 @@
+From 6ff3d8e5afa438c1672ab728e4f11d85348087eb Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Wed, 9 May 2018 08:40:10 -0500
+Subject: [PATCH] v4l2videodec: Fix drm_fourcc.h build break
+
+Upstream-Status: Inappropriate [i.MX-specific]
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ sys/v4l2/gstv4l2videodec.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/sys/v4l2/gstv4l2videodec.c b/sys/v4l2/gstv4l2videodec.c
+index 9b97871..b5670ab 100644
+--- a/sys/v4l2/gstv4l2videodec.c
++++ b/sys/v4l2/gstv4l2videodec.c
+@@ -28,7 +28,8 @@
+ #include <errno.h>
+ #include <unistd.h>
+ #include <string.h>
+-#include <libdrm/drm_fourcc.h>
++#include <stdint.h>
++#include <drm/drm_fourcc.h>
+ #include <gst/allocators/gstdmabufmeta.h>
+ 
+ #include "gstv4l2object.h"
+-- 
+2.7.4
+

@@ -7,7 +7,7 @@ DESCRIPTION = "Gstreamer freescale plugins"
 LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
-DEPENDS = "imx-codec imx-parser virtual/kernel gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad libdrm"
+DEPENDS = "imx-codec imx-parser virtual/kernel gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
 DEPENDS_append_mx6 = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 DEPENDS_append_imxvpu = " imx-vpuwrap"
@@ -23,7 +23,8 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
 IMXGST_SRC ?= "git://source.codeaurora.org/external/imx/imx-gst1.0-plugin.git;protocol=https"
 SRCBRANCH = "master"
 
-SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
+           file://0001-Fix-drm_fourcc.h-build-break.patch"
 SRCREV = "97b3396c6adbdb42a10f95b70e49479f1c7271c7"
 
 S = "${WORKDIR}/git"
