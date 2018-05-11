@@ -43,14 +43,14 @@ do_install_append() {
 }
 
 IS_MX8 = "0"
-IS_MX8_mx8mq = "8mq"
+IS_MX8_mx8m = "8m"
 IS_MX8_mx8qm = "8qm"
 IS_MX8_mx8qxp = "8qx"
 inherit deploy
 addtask deploy before do_build after do_install
 do_deploy () {
     # Deploy i.MX8 related firmware files
-    if [ "${IS_MX8}" = "8mq" ]; then
+    if [ "${IS_MX8}" = "8m" ]; then
         # Deploy ddr/synopsys
         for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
             install -m 0644 ${S}/firmware/ddr/synopsys/${ddr_firmware} ${DEPLOYDIR}
