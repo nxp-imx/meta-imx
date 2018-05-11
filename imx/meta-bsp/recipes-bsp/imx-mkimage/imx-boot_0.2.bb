@@ -17,7 +17,7 @@ BOOT_NAME = "imx-boot"
 PROVIDES = "${BOOT_NAME}"
 
 IMX_FIRMWARE       = "imx-sc-firmware"
-IMX_FIRMWARE_mx8mq = "firmware-imx"
+IMX_FIRMWARE_mx8m = "firmware-imx"
 IMX_FIRMWARE_mx8qxp = "firmware-imx imx-sc-firmware"
 DEPENDS += " \
     u-boot \
@@ -25,7 +25,7 @@ DEPENDS += " \
     imx-atf \
     ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'optee-os-imx', '', d)} \
 "
-DEPENDS_append_mx8mq = " dtc-native"
+DEPENDS_append_mx8m = " dtc-native"
 
 # For i.MX 8, this package aggregates the imx-m4-demos
 # output. Note that this aggregation replaces the aggregation
@@ -51,6 +51,7 @@ ATF_MACHINE_NAME ?= "bl31-imx8qm.bin"
 ATF_MACHINE_NAME_mx8qm = "bl31-imx8qm.bin"
 ATF_MACHINE_NAME_mx8qxp = "bl31-imx8qxp.bin"
 ATF_MACHINE_NAME_mx8mq = "bl31-imx8mq.bin"
+ATF_MACHINE_NAME_mx8mq = "bl31-imx8mm.bin"
 
 DCD_NAME ?= "imx8qm_dcd.cfg.tmp"
 DCD_NAME_mx8qm = "imx8qm_dcd.cfg.tmp"
@@ -65,6 +66,10 @@ SOC_TARGET ?= "iMX8QM"
 SOC_TARGET_mx8qm  = "iMX8QM"
 SOC_TARGET_mx8qxp = "iMX8QX"
 SOC_TARGET_mx8mq  = "iMX8M"
+SOC_TARGET_mx8mm  = "iMX8MM"
+
+SOC_DIR ?= "${SOC_TARGET}"
+SOC_DIR_mx8m = "iMX8M"
 
 DEPLOY_OPTEE = "false"
 DEPLOY_OPTEE_mx8mq = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true', 'false', d)}"
@@ -83,51 +88,52 @@ IMXBOOT_TARGETS_imx8qxpddr3arm2 = "flash_ddr3_dcd"
 S = "${WORKDIR}/git"
 
 do_compile () {
-    if [ "${SOC_TARGET}" = "iMX8M" ]; then
-        echo 8MQ boot binary build
+    if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" ]; then
+        echo 8MQ/8MM boot binary build
+        SOC_DIR="iMX8M"
         for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
-            echo "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${S}/${SOC_TARGET} "
-            cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${S}/${SOC_TARGET}/
+            echo "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${S}/${SOC_DIR} "
+            cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${S}/${SOC_DIR}/
         done
-        cp ${DEPLOY_DIR_IMAGE}/signed_hdmi_imx8m.bin             ${S}/${SOC_TARGET}/
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${S}/${SOC_TARGET}/u-boot-spl.bin
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${UBOOT_DTB_NAME}   ${S}/${SOC_TARGET}/
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin    ${S}/${SOC_TARGET}/
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mkimage_uboot       ${S}/${SOC_TARGET}/
+        cp ${DEPLOY_DIR_IMAGE}/signed_hdmi_imx8m.bin             ${S}/${SOC_DIR}/
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${S}/${SOC_DIR}/u-boot-spl.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${UBOOT_DTB_NAME}   ${S}/${SOC_DIR}/
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin    ${S}/${SOC_DIR}/
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mkimage_uboot       ${S}/${SOC_DIR}/
 
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_TARGET}/bl31.bin
-        cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_TARGET}/u-boot.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_DIR}/bl31.bin
+        cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_DIR}/u-boot.bin
 
     elif [ "${SOC_TARGET}" = "iMX8QM" ]; then
         echo 8QM boot binary build
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${S}/${SOC_TARGET}/scfw_tcm.bin
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_TARGET}/bl31.bin
-        cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_TARGET}/u-boot.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${S}/${SOC_DIR}/scfw_tcm.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_DIR}/bl31.bin
+        cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_DIR}/u-boot.bin
 
-        cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_0_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin ${S}/${SOC_TARGET}/m40_tcm.bin
-        cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_1_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin ${S}/${SOC_TARGET}/m41_tcm.bin
+        cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_0_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin ${S}/${SOC_DIR}/m40_tcm.bin
+        cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_1_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin ${S}/${SOC_DIR}/m41_tcm.bin
 
     else
         echo 8QX boot binary build
-        cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin ${S}/${SOC_TARGET}/m40_tcm.bin
-        cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin ${S}/${SOC_TARGET}/CM4.bin
-        cp ${DEPLOY_DIR_IMAGE}/ahab-container.img ${S}/${SOC_TARGET}/
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${S}/${SOC_TARGET}/scfw_tcm.bin
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_TARGET}/bl31.bin
-        cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_TARGET}/u-boot.bin
+        cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin ${S}/${SOC_DIR}/m40_tcm.bin
+        cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin ${S}/${SOC_DIR}/CM4.bin
+        cp ${DEPLOY_DIR_IMAGE}/ahab-container.img ${S}/${SOC_DIR}/
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${S}/${SOC_DIR}/scfw_tcm.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_DIR}/bl31.bin
+        cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_DIR}/u-boot.bin
     fi
 
     # Copy TEE binary to SoC target folder to mkimage
     if ${DEPLOY_OPTEE}; then
-        cp ${DEPLOY_DIR_IMAGE}/tee.bin             ${S}/${SOC_TARGET}/
+        cp ${DEPLOY_DIR_IMAGE}/tee.bin             ${S}/${SOC_DIR}/
     fi
 
     # mkimage for i.MX8
     for target in ${IMXBOOT_TARGETS}; do
         echo "building ${SOC_TARGET} - ${target}"
         make SOC=${SOC_TARGET} ${target}
-        if [ -e "${S}/${SOC_TARGET}/flash.bin" ]; then
-            cp ${S}/${SOC_TARGET}/flash.bin ${S}/${BOOT_CONFIG_MACHINE}-${target}
+        if [ -e "${S}/${SOC_DIR}/flash.bin" ]; then
+            cp ${S}/${SOC_DIR}/flash.bin ${S}/${BOOT_CONFIG_MACHINE}-${target}
         fi
     done
 }
@@ -147,27 +153,28 @@ do_deploy () {
 
     # copy the tool mkimage to deploy path and sc fw, dcd and uboot
     install -m 0644 ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-    if [ "${SOC_TARGET}" = "iMX8M" ]; then
+    if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" ]; then
+        SOC_DIR="iMX8M"
         install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
             install -m 0644 ${DEPLOY_DIR_IMAGE}/${ddr_firmware} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         done
         install -m 0644 ${DEPLOY_DIR_IMAGE}/signed_hdmi*.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
-        install -m 0755 ${S}/${SOC_TARGET}/${TOOLS_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0755 ${S}/${SOC_DIR}/${TOOLS_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
-        install -m 0755 ${S}/${SOC_TARGET}/mkimage_fit_atf.sh ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0755 ${S}/${SOC_DIR}/mkimage_fit_atf.sh ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
     elif [ "${SOC_TARGET}" = "iMX8QM" ]; then
-        install -m 0644 ${S}/${SOC_TARGET}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${S}/${SOC_DIR}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
         install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
     else
         if [ "${MACHINE}" = "imx8qxpa0mek" ]; then
-            install -m 0644 ${S}/${SOC_TARGET}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+            install -m 0644 ${S}/${SOC_DIR}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         fi
-        install -m 0644 ${S}/${SOC_TARGET}/ahab-container.img ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-        install -m 0644 ${S}/${SOC_TARGET}/m40_tcm.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-        install -m 0644 ${S}/${SOC_TARGET}/CM4.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${S}/${SOC_DIR}/ahab-container.img ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${S}/${SOC_DIR}/m40_tcm.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${S}/${SOC_DIR}/CM4.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
         install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
     fi
@@ -178,7 +185,7 @@ do_deploy () {
     fi
 
     # copy makefile (soc.mak) for reference
-    install -m 0644 ${S}/${SOC_TARGET}/soc.mak     ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+    install -m 0644 ${S}/${SOC_DIR}/soc.mak     ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
     # copy the generated boot image to deploy path
     for target in ${IMXBOOT_TARGETS}; do
@@ -198,5 +205,5 @@ addtask deploy before do_build after do_compile
 
 FILES_${PN} = "/boot"
 
-COMPATIBLE_MACHINE = "(mx8qm|mx8qxp|mx8mq)"
+COMPATIBLE_MACHINE = "(mx8qm|mx8qxp|mx8m)"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
