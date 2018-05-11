@@ -1,5 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-SRC_URI_append = " file://0001-Fix-crash-when-wl_surface-was-destroyed-before-eglDe.patch"
+SRC_URI_append = " file://0001-Fix-crash-when-wl_surface-was-destroyed-before-eglDe.patch \
+                   file://0001-tst_client.cpp-Fix-no-opengl-build.patch \
+"
 
 PACKAGECONFIG_remove_mx6 = "xcomposite-egl xcomposite-glx"
 PACKAGECONFIG_remove_mx6sl = "wayland-egl"
