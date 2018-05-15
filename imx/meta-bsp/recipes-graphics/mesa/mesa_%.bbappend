@@ -20,5 +20,6 @@ do_install_append_imxgpu () {
     rm -f ${D}${includedir}/KHR
     if [ "${BACKEND}" = "wayland" ]; then
         rm -f ${D}${libdir}/pkgconfig/wayland-egl.pc
+        rm -f ${D}${libdir}/libwayland-egl*
     fi
 }
