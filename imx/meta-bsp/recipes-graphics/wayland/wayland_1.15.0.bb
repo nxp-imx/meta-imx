@@ -36,7 +36,7 @@ sysroot_stage_all_append_class-target () {
 	cp ${STAGING_DATADIR_NATIVE}/aclocal/wayland-scanner.m4 ${SYSROOT_DESTDIR}/${datadir}/aclocal/
 }
 
-FILES_${PN} = "${libdir}/*${SOLIBS}"
-FILES_${PN}-dev += "${bindir} ${datadir}/wayland"
+FILES_${PN}_class-target = "${libdir}/*${SOLIBS}"
+FILES_${PN}-dev_append_class-target = " ${bindir} ${datadir}/wayland"
 
 BBCLASSEXTEND = "native nativesdk"
