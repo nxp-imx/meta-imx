@@ -61,6 +61,7 @@ do_deploy () {
     elif [ "${IS_MX8}" = "8qm" ]; then
         # Deploy hdmi/cadence
         install -m 0644 ${S}/firmware/hdmi/cadence/hdmitxfw.bin ${DEPLOYDIR}
+        install -m 0644 ${S}/firmware/hdmi/cadence/hdmirxfw.bin ${DEPLOYDIR}
         install -m 0644 ${S}/firmware/hdmi/cadence/dpfw.bin ${DEPLOYDIR}
     elif [ "${IS_MX8}" = "8qx" ]; then
         # Deploy seco
