@@ -140,7 +140,7 @@ MACHINE_FIRMWARE_append_mx6sl = " firmware-imx-epdc"
 MACHINE_FIRMWARE_append_mx6ull = " firmware-imx-epdc"
 MACHINE_FIRMWARE_append_mx53 = " firmware-imx-vpu-imx53 firmware-imx-sdma-imx53"
 MACHINE_FIRMWARE_append_mx51 = " firmware-imx-vpu-imx51 firmware-imx-sdma-imx51"
-MACHINE_FIRMWARE_append_mx8  = " linux-firmware-ath10k linux-firmware-qca"
+MACHINE_FIRMWARE_append_mx8  = " linux-firmware-ath10k"
 MACHINE_FIRMWARE_append_mx8qxp  = " firmware-imx-vpu-imx8qxp"
 
 # FIXME: Needs addition of firmware-imx of official BSPs
@@ -148,6 +148,10 @@ MACHINE_FIRMWARE_append_mx8qxp  = " firmware-imx-vpu-imx8qxp"
 #MACHINE_FIRMWARE_append_mx25 = " firmware-imx-sdma-imx25"
 
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
+
+# Extra QCA Wi-Fi & BTE driver and firmware
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'firmware-qca6174 kernel-module-qcacld-lea', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'firmware-qca9377 kernel-module-qcacld-lea', '', d)}"
 
 # Extra audio support
 # FIXME: Add support for ALL SoC families
