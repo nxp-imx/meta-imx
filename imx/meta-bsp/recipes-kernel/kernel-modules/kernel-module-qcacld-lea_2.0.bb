@@ -16,6 +16,8 @@ SRC_URI = "git://source.codeaurora.org/external/wlan/qcacld-2.0;protocol=https;b
            file://0009-CORE-add-timeout-when-BMI-request-response-transacti.patch \
            file://0010-CORE-HIF-PCIe-only-support-one-instance.patch \
            file://0011-CORE-BMI-RF-align-the-utf-firmware-bin-name.patch \
+           file://0012-CORE-revert-two-patches-to-support-QCA-SMP.patch \
+           file://0013-CORE-services-os-fix-issue-to-avoid-spin_lock_bh-in-.patch \
 "
 
 # verison v4.5.23.1
