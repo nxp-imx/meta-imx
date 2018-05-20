@@ -3,8 +3,8 @@
 
 include recipes-bsp/imx-test/imx-test.inc
 
-DEPENDS_append        = " alsa-lib libdrm"
-DEPENDS_append_mx8    = " virtual/kernel"
+DEPENDS_remove        = " virtual/kernel"
+DEPENDS_append        = " alsa-lib libdrm linux-imx-headers"
 DEPENDS_append_imxvpu = " virtual/imxvpu"
 
 PV = "7.0+${SRCPV}"
@@ -25,6 +25,16 @@ IMX_HAS_VPU_imxvpu  = "true"
 EXTRA_OEMAKE       += "HAS_VPU=${IMX_HAS_VPU}"
 
 PARALLEL_MAKE="-j 1"
+
+do_compile() {
+    CFLAGS="${TOOLCHAIN_OPTIONS}"
+    oe_runmake V=1 VERBOSE='' \
+               CROSS_COMPILE=${TARGET_PREFIX} \
+               CC="${CC} -I${STAGING_EXECPREFIXDIR}/imx/include -L${STAGING_LIBDIR} ${LDFLAGS}" \
+               LINUXPATH=${STAGING_KERNEL_DIR} \
+               KBUILD_OUTPUT=${STAGING_KERNEL_BUILDDIR} \
+               PLATFORM=${PLATFORM}
+}
 
 do_install_append() {
     install -d -m 0755 ${D}/home/root/
