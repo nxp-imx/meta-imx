@@ -3,6 +3,10 @@
 
 include recipes-bsp/imx-test/imx-test.inc
 
+DEPENDS_append        = " alsa-lib libdrm"
+DEPENDS_append_mx8    = " virtual/kernel"
+DEPENDS_append_imxvpu = " virtual/imxvpu"
+
 PV = "7.0+${SRCPV}"
 
 SRCBRANCH = "master"
@@ -14,13 +18,6 @@ SRCREV = "ed8dc2260ee093301599c984021a8501f0c0d6b9"
 
 S = "${WORKDIR}/git"
 
-DEPENDS_append        = " alsa-lib libdrm"
-DEPENDS_append_mx7ulp = " virtual/kernel imx-lib"
-DEPENDS_append_mx8    = " virtual/kernel"
-DEPENDS_append_imxvpu = " virtual/imxvpu"
-
-PLATFORM_mx6sll = "IMX6SL"
-PLATFORM_mx7ulp  = "IMX7D"
 PLATFORM_mx8 = "IMX8"
 
 IMX_HAS_VPU         = "false"
