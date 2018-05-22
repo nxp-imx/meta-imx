@@ -1,11 +1,13 @@
 # Copyright 2018 NXP
 
+require firmware-qca.inc
+
 SUMMARY = "Qualcomm Wi-Fi and Bluetooth firmware"
 DESCRIPTION = "Qualcomm Wi-Fi and Bluetooth firmware for modules such as QCA9377-3"
 SECTION = "base"
 LICENSE = "Proprietary"
 
-require firmware-qca.inc
+inherit allarch
 
 do_install () {
     # Install firmware.conf for QCA modules
