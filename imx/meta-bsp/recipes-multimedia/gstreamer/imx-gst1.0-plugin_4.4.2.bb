@@ -7,7 +7,7 @@ DESCRIPTION = "Gstreamer freescale plugins"
 LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
-DEPENDS = "imx-codec imx-parser virtual/kernel gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
+DEPENDS = "imx-codec imx-parser libdrm gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
 DEPENDS_append_mx6 = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 DEPENDS_append_imxvpu = " imx-vpuwrap"
@@ -26,16 +26,12 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
 IMXGST_SRC ?= "git://source.codeaurora.org/external/imx/imx-gst1.0-plugin.git;protocol=https"
 SRCBRANCH = "master"
 
-SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
-           file://0001-Fix-drm_fourcc.h-build-break.patch"
+SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH}"
 SRCREV = "15290663140d70f09f254a22346a2421a788b597"
 
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
-
-# Make sure kernel sources are available
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 PLATFORM_mx6 = "MX6"
 PLATFORM_mx6sl = "MX6SL"
