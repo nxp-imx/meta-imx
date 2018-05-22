@@ -10,8 +10,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 LIC_FILES_CHKSUM = "file://COPYING;md5=73a5855a8119deb017f5f13cf327095d \
                     file://COPYING.LIB;md5=21682e4e8fea52413fd26c60acb907e5 "
 
+DEPENDS += "libdrm"
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
-DEPENDS += "virtual/kernel"
 
 PACKAGECONFIG_append_mx6q = " opencv"
 PACKAGECONFIG_append_mx6qp = " opencv"
@@ -48,9 +48,6 @@ SRCREV = "c2df045769d2fd26b9304cf51e9517b633ebceb5"
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
 EXTRA_AUTORECONF = ""
-
-# Make sure kernel sources are available
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 PACKAGE_ARCH_imxpxp = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
