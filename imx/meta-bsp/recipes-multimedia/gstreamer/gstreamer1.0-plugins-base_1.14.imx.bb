@@ -11,12 +11,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
                     file://COPYING.LIB;md5=6762ed442b3822387a51c92d928ead0d \
                     file://common/coverage/coverage-report.pl;beginline=2;endline=17;md5=a4e1830fce078028c8f0974161272607"
 
+# Require ion.h from kernel userspace headers
+DEPENDS += "linux-imx-headers"
+
 # Enable pango lib
 PACKAGECONFIG_append = " pango "
-
-# ion allocator will be enabled only when detecting the ion.h exists, which is built out from kernel.
-# Now, ion allocator can be supported on all i.MX platform
-DEPENDS_append = " virtual/kernel"
 
 # Remove gio-unix-2.0 as it does not seem to exist anywhere
 PACKAGECONFIG_remove = "gio-unix-2.0"
@@ -37,6 +36,8 @@ SRC_URI = " \
 SRCREV = "c859c59b8990434b88cda4474c17af5cfe8c364e"
 
 EXTRA_AUTORECONF = ""
+
+EXTRA_OECONF = "CPPFLAGS="-I${STAGING_EXECPREFIXDIR}/imx/include""
 
 FILES_${PN} += "/usr/lib/gstreamer-1.0/include"
 
