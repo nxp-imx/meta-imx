@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://CORE/HDD/src/wlan_hdd_main.c;beginline=1;endline=20;m
 
 inherit module
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/kernel-module-qcacld-lea:"
+
 SRC_URI = "git://source.codeaurora.org/external/wlan/qcacld-2.0;protocol=https;branch=CNSS.LEA.NRT_2.0; \
            file://0001-CORE-QCA9377-CLD-LEA-2.0-porting-to-support-Android-.patch \
            file://0002-Kbuild-Eliminate-errors-by-tool-chain-and-disable-de.patch \
@@ -33,4 +35,3 @@ QCA9377_OEMAKE = "CONFIG_CLD_HL_SDIO_CORE=y CONFIG_PER_VDEV_TX_DESC_POOL=1 SAP_A
 
 EXTRA_OEMAKE += "CONFIG_CFG80211_INTERNAL_REGDB=y CONFIG_PMF_SUPPORT=y CONFIG_LINUX_QCMBR=y"
 EXTRA_OEMAKE += "TARGET_BUILD_VARIANT=user CONFIG_NON_QC_PLATFORM=y"
-EXTRA_OEMAKE += "${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', '${QCA6174_OEMAKE}', '${QCA9377_OEMAKE}', d)}"

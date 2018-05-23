@@ -151,8 +151,8 @@ MACHINE_FIRMWARE_append_mx8qxp  = " firmware-imx-vpu-imx8qxp"
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 
 # Extra QCA Wi-Fi & BTE driver and firmware
-MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'firmware-qca6174 kernel-module-qcacld-lea', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'firmware-qca9377 kernel-module-qcacld-lea', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'firmware-qca6174 kernel-module-qca6174', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'firmware-qca9377 kernel-module-qca9377', '', d)}"
 
 # Extra audio support
 # FIXME: Add support for ALL SoC families
