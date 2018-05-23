@@ -20,8 +20,8 @@ SRC_URI_NAME = "${SOC}"
 SRC_URI[imx7ulp.md5sum] = "cf2c88b91b4f87781365d8b0921d1cf3"
 SRC_URI[imx7ulp.sha256sum] = "f4852a8da27bec0853ef499614d9337d586749805bc2c3d58500a7016ae52bdb"
 
-SRC_URI[imx8qm.md5sum] = "b75dda504083ac1ee05423974c22bbce"
-SRC_URI[imx8qm.sha256sum] = "fdc486af0a02e3093559b31cb9c982f05c209bfc03da0910062091c406bfb496"
+SRC_URI[imx8qm.md5sum] = "d86ff64abd4ba877a236b2b18d8f6aec"
+SRC_URI[imx8qm.sha256sum] = "1f39c086c0526ceebebb078009dc22d060e5c24c714823ef06f42792ce4fb425"
 
 SCR = "SCR-${SOC}-m4-demo.txt"
 
