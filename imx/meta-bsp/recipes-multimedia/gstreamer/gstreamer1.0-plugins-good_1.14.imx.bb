@@ -11,7 +11,7 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-v4l2videodec-Fix-drm_fourcc.h-build-break.patch \
 "
-SRCREV = "a85cca272b76ead8f124456e161f7fc010553f4c"
+SRCREV = "ef31f7b4113708da1c3f2c83257c642657f9097e"
 
 DEPENDS += "virtual/kernel"
 # Make sure kernel sources are available
