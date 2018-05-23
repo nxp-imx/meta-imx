@@ -20,6 +20,7 @@ SRC_URI = "git://source.codeaurora.org/external/wlan/qcacld-2.0;protocol=https;b
            file://0011-CORE-BMI-RF-align-the-utf-firmware-bin-name.patch \
            file://0012-CORE-revert-two-patches-to-support-QCA-SMP.patch \
            file://0013-CORE-services-os-fix-issue-to-avoid-spin_lock_bh-in-.patch \
+           file://0014-CLD-CORE-add-CONFIG_HDD_WLAN_WAIT_TIME-support-for-u.patch \
 "
 
 # verison v4.5.23.1
@@ -35,3 +36,4 @@ QCA9377_OEMAKE = "CONFIG_CLD_HL_SDIO_CORE=y CONFIG_PER_VDEV_TX_DESC_POOL=1 SAP_A
 
 EXTRA_OEMAKE += "CONFIG_CFG80211_INTERNAL_REGDB=y CONFIG_PMF_SUPPORT=y CONFIG_LINUX_QCMBR=y"
 EXTRA_OEMAKE += "TARGET_BUILD_VARIANT=user CONFIG_NON_QC_PLATFORM=y"
+EXTRA_OEMAKE += "CONFIG_HDD_WLAN_WAIT_TIME=10000"
