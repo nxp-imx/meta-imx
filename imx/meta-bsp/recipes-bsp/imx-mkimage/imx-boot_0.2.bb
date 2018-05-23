@@ -71,8 +71,7 @@ SOC_TARGET_mx8mm  = "iMX8MM"
 SOC_DIR ?= "${SOC_TARGET}"
 SOC_DIR_mx8m = "iMX8M"
 
-DEPLOY_OPTEE = "false"
-DEPLOY_OPTEE_mx8mq = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true', 'false', d)}"
+DEPLOY_OPTEE = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true', 'false', d)}"
 
 IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', \
                        bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
