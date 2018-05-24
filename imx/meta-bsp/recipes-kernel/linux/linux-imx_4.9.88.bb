@@ -11,6 +11,8 @@ require recipes-kernel/linux/linux-imx-src.inc
 
 DEPENDS += "lzop-native bc-native"
 
+SRC_URI += "file://0001-ion-Add-userspace-header-ion.h-to-Linux-userspace.patch"
+
 DEFAULT_PREFERENCE = "1"
 
 DO_CONFIG_V7_COPY = "no"
