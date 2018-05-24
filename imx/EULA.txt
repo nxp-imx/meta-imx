@@ -1,4 +1,6 @@
-LA_OPT_BASE_LICENSE v22 April 2018
+LA_OPT_BASE_LICENSE v24 May 2018
+
+
 
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely.    By selecting the "I Accept" button at the end of this page, you
@@ -6,7 +8,11 @@ indicate that you accept the terms of the Agreement and you acknowledge that
 you have the authority, for yourself or on behalf of your company, to bind your
 company to these terms.  You may then download or install the file.
 
+
+
 NXP SOFTWARE LICENSE AGREEMENT
+
+
 
 This is a legal agreement between you, as an authorized representative of your
 employer, or if you have no employer, as an individual (together "you"), and
@@ -77,16 +83,20 @@ NXP's Intellectual Property Rights:
 
 (a)   to use and reproduce the Licensed Software only as part of, or integrated
 within, Authorized Systems and not on a standalone basis;
+
 (b)   to directly or indirectly manufacture, demonstrate, copy, distribute,
 market and sell the Licensed Software in object code (machine readable) only as
 part of, or embedded within, Authorized Systems in object code form and not on
 a standalone basis.  Notwithstanding the foregoing, those files marked as .h
 files ("Header files") may be distributed in source or object code form, but
 only as part of, or embedded within Authorized Systems.
+
 (c)    to copy, use and distribute as needed, solely in connection with an
 Authorized System, proprietary NXP information associated with the Licensed
 Software for the purpose of developing, maintaining and supporting Authorized
 Systems with which the Licensed Software is integrated or associated.
+
+
 
 2.3. For Licensed Software provided to you in source code form (human
 readable), exclusively for use with or integrated within an NXP Product, NXP
@@ -95,12 +105,14 @@ non-sublicensable, license, under NXP's Intellectual Property Rights:
 
 (a)   to prepare derivative works of the Licensed Software, only as part of, or
 integrated within, Authorized Systems and not on a standalone basis;
+
 (b)   to use, demonstrate, copy, distribute, market and sell the derivative
 works of the Licensed Software in object code (machine readable) only as part
 of, or integrated within, Authorized Systems and not on a standalone basis.
 Notwithstanding the foregoing, those files marked as .h files ("Header files")
 may be distributed in source or object code form, but only as part of, or
 embedded within Authorized Systems.
+
 2.4. You may use subcontractors on your premises to exercise your rights under
 Section 2.2 and 2.3 so long as you have an agreement in place with the
 subcontractor containing confidentiality restrictions no less stringent than
@@ -108,6 +120,7 @@ those contained in this Agreement.  You will remain liable for your
 subcontractors' adherence to the terms of this Agreement and for any and all
 acts and omissions of such subcontractors with respect to this Agreement and
 the Licensed Software.
+
 3.              LICENSE LIMITATIONS AND RESTRICTIONS.
 
 3.1. The licenses granted above in Section 2.3 only extend to NXP intellectual
@@ -156,7 +169,7 @@ improvements thereof.  NXP retains the right to use such results and related
 information in any manner it deems appropriate.
 
 4.              OPEN SOURCE.         Open source software included in the
-Licensed Software is not licensed under the terms of this Agreement, but is
+Licensed Software is not licensed under the terms of this Agreement but is
 instead licensed under the terms of the applicable open source license(s), such
 as the BSD License, Apache License or the GNU Lesser General Public License.
 Your use of the open source software is subject to the terms of each applicable
@@ -179,6 +192,7 @@ authorship and all rights of approval, restriction, or limitation on use or
 subsequent modification.  Notwithstanding the foregoing, you will have the
 license rights granted in Section 2 hereto to any such modifications made by
 you or your licensees.
+
 6.              PATENT COVENANT NOT TO SUE. As partial, material consideration
 for the rights granted to you under this Agreement, you covenant not to sue or
 otherwise assert your patents against NXP, a NXP Affiliate or subsidiary, or a
@@ -211,6 +225,7 @@ insolvent, or file a petition for bankruptcy or insolvency, make an assignment
 for the benefit of its creditors; enter proceedings for winding up or
 dissolution ;are dissolved; or are nationalized or become subject to the
 expropriation of all or substantially all of its business or assets.
+
 8.4. Upon termination of this Agreement, all licenses granted under Section 2
 will expire, except that any licenses extended to end-users pursuant to
 Sections 2.2(b), 2.2(c), and 2.3(b), which have been granted prior to such
@@ -234,6 +249,7 @@ Licensed Software. NXP has no obligation to respond to such a problem report or
 suggestion. NXP may make changes to the Licensed Software at any time, without
 any obligation to notify or provide updated versions of the Licensed Software
 to you.
+
 
 10.           NO WARRANTY.  To the maximum extent permitted by law, NXP
 expressly disclaims any warranty for the Licensed Software.  The Licensed
@@ -261,6 +277,7 @@ COSTS, DAMAGES, CLAIMS, OR LOSSES WHATSOEVER ARISING OUT OF OR IN CONNECTION
 WITH THIS AGREEMENT OR PRODUCT(S) SUPPLIED UNDER THIS AGREEMENT IS LIMITED TO
 THE AGGREGATE AMOUNT PAID BY YOU TO NXP IN CONNECTION WITH THE LICENSED
 SOFTWARE TO WHICH LOSSES OR DAMAGES ARE CLAIMED.
+
 
 13.           EXPORT COMPLIANCE. Each party shall comply with all applicable
 export and import control laws and regulations including but not limited to the
@@ -385,10 +402,16 @@ Agreement will be made in writing, and will be effective when received at the
 following addresses:
 
 NXP:                    NXP B.V.
+
                         High Tech Campus 60
+
                         5656 AG Eindhoven
+
                         The Netherlands
+
                             ATTN: Legal Department
+
+
 
                 You:                  The address provided at registration will
 be used.
@@ -408,6 +431,7 @@ this Agreement, in its sole discretion.
 
 
 
+
 APPENDIX A
 
 Other License Grants and Restrictions:
@@ -420,7 +444,13 @@ following Third Party Software or specific components of the NXP Proprietary
 Software, the following terms apply to the extent they deviate from the terms
 in the Agreement:
 
+
+
 Third Party Software Use Restrictions
+
+Amphion Semiconductor Ltd.
+Distribution of Amphion software must be a part of, or embedded within,
+Authorized Systems that include an Amphion Video Decoder.
 
 Atheros
 Use of Atheros software is limited to evaluation and demonstration only.
@@ -437,9 +467,14 @@ that incorporate a compatible integrated circuit device manufactured or sold by
 Broadcom.
 
 Cadence Design Systems
-The license granted herein to the Cadence Design Systems HiFi aacPlus Audio
-Decoder software does not include a license to the AAC family of technologies
-which you or your customer may need to obtain.
+Use of Cadence audio codec software is limited to evaluation and demonstration
+only of one copy embedded in a single NXP Product. Further rights must be
+obtained from Cadence. The license granted herein to the Cadence Design Systems
+HiFi aacPlus Audio Decoder software does not include a license to the AAC
+family of technologies which you or your customer may need to obtain.
+Configuration tool outputs may only be distributed by licensees of the relevant
+Cadence SDK and distribution is limited to distribution of one copy embedded in
+a single NXP Product.
 
 Cirque Corporation
 Use of Cirque Corporation technology is limited to evaluation, demonstration,
@@ -539,8 +574,7 @@ software must be used strictly in accordance with the Qualcomm Atheros, Inc.
 Technology License Agreement that accompanies such software.  Any other use is
 expressly prohibited.
 
-Real Networks - its
-GStreamer Optimized Real Format Client Code implementation
+Real Networks - its GStreamer Optimized Real Format Client Code implementation
 or OpenMax Optimized Real Format Client Code
 Use of the GStreamer Optimized Real Format Client Code, or OpenMax Optimized
 Real Format Client code is restricted to applications in the automotive market.
@@ -586,7 +620,6 @@ to obtain the license and software:
 
 1.     Contact your local SanDisk sales representative to obtain the SanDisk
 License Agreement.
-
 2.     Sign the license agreement.  Fax the signed agreement to SanDisk USA
 marketing department at 408-542-0403.  The license will be valid when fully
 executed by SanDisk.
@@ -614,6 +647,7 @@ designated computer, unless otherwise agreed by Synopsys.
 computer at the designated physical address provided by you on the APEX license
 form.
 *       The Licensed Software is not sub-licensable.
+
 
 Texas Instruments
 Your use of Texas Instruments Inc. WiLink8 Licensed Software is restricted to
