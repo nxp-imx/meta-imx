@@ -3,7 +3,11 @@
 DESCRIPTION = "i.MX HANTRO VPU library"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://vpu/EULA.txt;md5=b063366b066c9f10037c59756a9ced54"
+
+# Require ion.h from kernel userspace headers
 DEPENDS = "virtual/kernel"
+do_configure[depends] += "virtual/kernel:do_shared_workdir"
+
 inherit fsl-eula-unpack
 
 PARALLEL_MAKE="-j 1"
@@ -14,7 +18,6 @@ RPROVIDES_${PN} = "virtual/imxvpu"
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 do_compile () {
-
     oe_runmake CROSS_COMPILE="${HOST_PREFIX}" LINUX_KERNEL_ROOT="${STAGING_KERNEL_DIR}" SDKTARGETSYSROOT="${STAGING_DIR_TARGET}" all
 }
 
