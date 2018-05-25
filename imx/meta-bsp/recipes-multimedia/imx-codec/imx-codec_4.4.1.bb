@@ -8,7 +8,7 @@ PACKAGECONFIG_remove_imxvpuamphion = "vpu"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=75abe2fa1d16ca79f87cde926f05f72d"
 
-SRC_URI[md5sum] = "b1e0576e479a0015b0e4c79025de8adb"
-SRC_URI[sha256sum] = "a92a1504350f0114270e7e85dcab3b6eb8cd625fe8e4c033867e23079156a429"
+SRC_URI[md5sum] = "d276ce3a17fd83f25e2f774a1b49beac"
+SRC_URI[sha256sum] = "bc327f5405bf3bf2220e92b3fc2950730bf17d2dabffa61a8e7386d277700176"
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
