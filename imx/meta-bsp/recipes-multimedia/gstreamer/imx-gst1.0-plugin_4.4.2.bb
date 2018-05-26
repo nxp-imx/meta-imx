@@ -12,6 +12,9 @@ DEPENDS_append_mx6 = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 DEPENDS_append_imxvpu = " imx-vpuwrap"
 
+# Require videodev2.h and ion.h from kernel userspace headers
+DEPENDS += "linux-imx-headers"
+
 # For backwards compatibility
 RREPLACES_${PN} = "gst1.0-fsl-plugin"
 RPROVIDES_${PN} = "gst1.0-fsl-plugin"
@@ -45,7 +48,7 @@ PLATFORM_mx8 = "MX8"
 
 # Todo add a mechanism to map possible build targets
 EXTRA_OECONF = "PLATFORM=${PLATFORM} \
-                CPPFLAGS="-I${STAGING_KERNEL_BUILDDIR}/include/generated/uapi -I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include" \
+                CPPFLAGS="-I${STAGING_EXECPREFIXDIR}/imx/include" \
                 CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR} \
                 ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', bb.utils.contains('DISTRO_FEATURES', 'x11', '--disable-x11', '', d), '', d)}"
 
