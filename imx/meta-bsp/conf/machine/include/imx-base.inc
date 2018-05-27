@@ -76,6 +76,7 @@ MACHINE_SOCARCH_SUFFIX_mx6dl = "-mx6qdl"
 MACHINE_SOCARCH_SUFFIX_mx6sx = "-mx6sx"
 MACHINE_SOCARCH_SUFFIX_mx6sl = "-mx6sl"
 MACHINE_SOCARCH_SUFFIX_mx7d = "-mx7d"
+MACHINE_SOCARCH_SUFFIX_mx7ulp = "-mx7ulp"
 MACHINE_SOCARCH_SUFFIX_vf60 = "-vf60"
 MACHINE_SOCARCH_SUFFIX_vf50 = "-vf50"
 MACHINE_SOCARCH_SUFFIX_mx6ul  = "-mx6ul"
@@ -102,6 +103,7 @@ MACHINE_SOCARCH_FILTER_append_imxgpu = " \
     cairo \
     pango \
 "
+
 MACHINE_SOCARCH_FILTER_append_imxgpu3d = " \
     virtual/libgl \
     virtual/libgles1 \
@@ -234,6 +236,7 @@ IMX_DEFAULT_KERNEL_mx7 = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL_mx6ul = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL_mx6ull = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL_mx8 = "linux-imx"
+IMX_DEFAULT_KERNEL_mx7ulp = "linux-imx"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 
