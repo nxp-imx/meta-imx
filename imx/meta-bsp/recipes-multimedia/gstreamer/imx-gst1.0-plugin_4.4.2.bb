@@ -25,7 +25,7 @@ SRCBRANCH = "master"
 
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
            file://0001-Fix-drm_fourcc.h-build-break.patch"
-SRCREV = "e70d7e8c020bce9d66a40fd974580ac13cd30674"
+SRCREV = "15290663140d70f09f254a22346a2421a788b597"
 
 S = "${WORKDIR}/git"
 
