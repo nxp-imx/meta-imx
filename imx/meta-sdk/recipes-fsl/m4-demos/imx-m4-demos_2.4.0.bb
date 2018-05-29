@@ -5,11 +5,13 @@ SUMMARY = "i.MX M4 core Demo images"
 SECTION = "app"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=75abe2fa1d16ca79f87cde926f05f72d"
+LIC_FILES_CHKSUM_mx8mm = "file://COPYING;md5=ab61cab9599935bfe9f700405ef00f28"
 
 inherit deploy fsl-eula-unpack2
 
 SOC ?= "imx8qm"
 SOC_mx7ulp= "imx7ulp"
+SOC_mx8mm= "imx8mm"
 SOC_mx8mq= "imx8mq"
 SOC_mx8qm= "imx8qm"
 SOC_mx8qxp= "imx8qx"
@@ -19,6 +21,9 @@ SRC_URI_NAME = "${SOC}"
 
 SRC_URI[imx7ulp.md5sum] = "cf2c88b91b4f87781365d8b0921d1cf3"
 SRC_URI[imx7ulp.sha256sum] = "f4852a8da27bec0853ef499614d9337d586749805bc2c3d58500a7016ae52bdb"
+
+SRC_URI[imx8mm.md5sum] = "0789c1b8645fd7c67336f1aec84fe95b"
+SRC_URI[imx8mm.sha256sum] = "87a359332d1611cc448447f3222d7a0705efd4617caae266452537393b0d0c10"
 
 SRC_URI[imx8qm.md5sum] = "39eb5e7482c681bfc6a25579b0203e3a"
 SRC_URI[imx8qm.sha256sum] = "cf240c15c4671fbc637aa1f7f1ad8702cceac91c60d119db926b785d622fa3cc"
@@ -33,4 +38,4 @@ do_deploy () {
 addtask deploy before do_build after do_install
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx7ulp|mx8qm)"
+COMPATIBLE_MACHINE = "(mx7ulp|mx8mm|mx8qm)"
