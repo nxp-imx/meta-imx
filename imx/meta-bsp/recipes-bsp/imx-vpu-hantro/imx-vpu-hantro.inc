@@ -5,7 +5,7 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://vpu/EULA.txt;md5=b063366b066c9f10037c59756a9ced54"
 
 # Require ion.h from kernel userspace headers
-DEPENDS = "linux-imx-headers"
+DEPENDS = "virtual/kernel"
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 inherit fsl-eula-unpack
