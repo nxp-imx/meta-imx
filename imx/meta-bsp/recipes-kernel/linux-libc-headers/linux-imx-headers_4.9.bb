@@ -10,7 +10,7 @@ SRC_URI_append_libc-musl = "\
     file://0001-libc-compat.h-musl-_does_-define-IFF_LOWER_UP-DORMAN.patch \
    "
 SRC_URI_append = " file://Install-dma-buf-h.patch"
-SRCREV = "90e531112936c7878f4ed09fc3eeef12dd8c1140" 
+SRCREV = "2e8555d6b44442c2125df62264e3e107c35e995c"
 
 # i.MX: Install to /usr/imx instead of /usr
 exec_prefix = "/usr/imx"
