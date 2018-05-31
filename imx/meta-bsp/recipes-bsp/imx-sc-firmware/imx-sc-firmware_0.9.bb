@@ -10,8 +10,8 @@ inherit fsl-eula-unpack pkgconfig deploy
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "07fac8a538f54a1f61a83af2bfd1e68c"
-SRC_URI[sha256sum] = "1ea38f2c8af04fb857b3ae9c9a6682f4228f9dfd9ac8bb2321b1c4aede2f9a1b"
+SRC_URI[md5sum] = "3aaa157964cce4785583b929c290c550"
+SRC_URI[sha256sum] = "71d6d9bbb65ea808a548131e90c8771624410d3ab6c27a3608d7d59603e5bd70"
 
 S = "${WORKDIR}/${PN}-${PV}"
 
