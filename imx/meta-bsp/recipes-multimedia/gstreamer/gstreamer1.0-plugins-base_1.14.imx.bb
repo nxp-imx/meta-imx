@@ -22,8 +22,7 @@ PACKAGECONFIG_remove = "gio-unix-2.0"
 # Overwrite the unrecognised option which is set in gstreamer1.0-plugins-base.inc under poky layer
 PACKAGECONFIG[gio-unix-2.0] = ""
 
-# Disable introspection to fix [GstGL-1.0.gir] Error
-EXTRA_OECONF_append = " --disable-introspection --disable-opengl --enable-wayland"
+EXTRA_OECONF_append = " --disable-opengl --enable-wayland"
 
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "imx-1.14.x"
@@ -38,6 +37,8 @@ SRCREV = "c859c59b8990434b88cda4474c17af5cfe8c364e"
 EXTRA_AUTORECONF = ""
 
 EXTRA_OECONF = "CPPFLAGS="-I${STAGING_EXECPREFIXDIR}/imx/include""
+
+EXTRA_OEMAKE += "GIR_EXTRA_LIBS_PATH=${GIR_EXTRA_LIBS_PATH}:${B}/gst-libs/gst/allocators/.libs"
 
 FILES_${PN} += "/usr/lib/gstreamer-1.0/include"
 
