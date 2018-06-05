@@ -48,8 +48,10 @@ do_install_append() {
         WESTON_INI_SRC=${B}/weston.ini
     fi
     WESTON_INI_DEST_DIR=${D}${sysconfdir}/xdg/weston
-    install -d ${WESTON_INI_DEST_DIR}
-    install -m 0644 ${WESTON_INI_SRC} ${WESTON_INI_DEST_DIR}
+    if [ -z "${@bb.utils.filter('BBFILE_COLLECTIONS', 'aglprofilegraphical', d)}" ]; then
+        install -d ${WESTON_INI_DEST_DIR}
+        install -m 0644 ${WESTON_INI_SRC} ${WESTON_INI_DEST_DIR}
+    fi
 }
 
 FILES_${PN} += "${sysconfdir}/xdg/weston"
