@@ -8,7 +8,7 @@ SRC_URI += "file://0001-weston.ini.in-Modify-paths-to-point-to-right-directo.pat
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-4.0"
 SRC_URI_prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV = "e346c51c97a6445183862b4c3b97b350fa7eb289"
+SRCREV = "b41f1a0c40a89865657ae969cd2c5042d9858753"
 S = "${WORKDIR}/git"
 
 # Use FBDEV for parts that support it
