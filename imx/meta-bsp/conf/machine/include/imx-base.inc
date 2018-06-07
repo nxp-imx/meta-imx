@@ -102,6 +102,7 @@ MACHINE_SOCARCH_FILTER_append_imxgpu = " \
     libgal-imx \
     virtual/libopenvg \
     cairo \
+    opencv \
     pango \
 "
 
