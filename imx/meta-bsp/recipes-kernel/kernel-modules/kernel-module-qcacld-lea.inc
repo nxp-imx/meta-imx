@@ -22,6 +22,7 @@ SRC_URI = "git://source.codeaurora.org/external/wlan/qcacld-2.0;protocol=https;b
            file://0013-CORE-services-os-fix-issue-to-avoid-spin_lock_bh-in-.patch \
            file://0014-CLD-CORE-add-CONFIG_HDD_WLAN_WAIT_TIME-support-for-u.patch \
            file://0015-CORE-HIF-enable-pcie-MSI-feature.patch \
+           file://0016-MLK-18490-CORE-HDD-add-ssid-len-check.patch \
 "
 
 # verison v4.5.23.1
