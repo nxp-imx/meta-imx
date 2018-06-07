@@ -66,5 +66,3 @@ do_install_append() {
 
 RDEPENDS_opencv-apps += \
     "${@bb.utils.contains('PACKAGECONFIG', 'test', 'bash', '', d)}"
-
-PACKAGE_ARCH = "${MACHINE_SOCARCH}"
