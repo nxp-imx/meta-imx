@@ -1,6 +1,6 @@
 require imx-gpu-g2d.inc
 
-SRC_URI[md5sum] = "a7cd1fbda686533cba81906f4be5a24e"
-SRC_URI[sha256sum] = "9ab65e348efea6e9d425979c4d725796d5dced09d1ede0321de9a0f3de375177"
+SRC_URI[md5sum] = "c7f205c52a316fa3232ccd5645572b80"
+SRC_URI[sha256sum] = "ec1878dc53c405560532890392df162e03674ea1f6e599d2504071c50c895c6c"
 
 COMPATIBLE_MACHINE = "(mx6q|mx6dl|mx6sx|mx6sl|mx7ulp)"
