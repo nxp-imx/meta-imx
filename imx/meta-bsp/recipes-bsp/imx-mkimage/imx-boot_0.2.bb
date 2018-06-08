@@ -52,6 +52,7 @@ ATF_MACHINE_NAME_mx8qm = "bl31-imx8qm.bin"
 ATF_MACHINE_NAME_mx8qxp = "bl31-imx8qxp.bin"
 ATF_MACHINE_NAME_mx8mq = "bl31-imx8mq.bin"
 ATF_MACHINE_NAME_mx8mm = "bl31-imx8mm.bin"
+ATF_MACHINE_NAME_append = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', '-optee', '', d)}"
 
 DCD_NAME ?= "imx8qm_dcd.cfg.tmp"
 DCD_NAME_mx8qm = "imx8qm_dcd.cfg.tmp"
