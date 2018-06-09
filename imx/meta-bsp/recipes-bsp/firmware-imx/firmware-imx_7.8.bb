@@ -8,8 +8,8 @@ IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
 SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true \
            ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH};destsuffix=${S}/git "
 
-SRC_URI[md5sum] = "25b2b6cfd890e959cc5554ed5f9e9bd1"
-SRC_URI[sha256sum] = "60ffa93f7632ba2a0b020a8678fbe0916c58dbc56d7b0edcd16b0c9ddd050a81"
+SRC_URI[md5sum] = "a6e69023698d4bd1ba79b619baea49b4"
+SRC_URI[sha256sum] = "12e7222678a56a439fee22cfafc334392c2d6f4fd837a863303bdfde279c4212"
 
 #BRCM firmware git
 SRCREV = "8ce9046f5058fdd2c5271f86ccfc61bc5a248ae3"
