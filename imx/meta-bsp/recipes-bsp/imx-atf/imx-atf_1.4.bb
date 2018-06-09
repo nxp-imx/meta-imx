@@ -27,10 +27,7 @@ SOC_ATF_mx8mm = "imx8mm"
 
 SYSROOT_DIRS += "/boot"
 
-EXTRA_OEMAKE_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'SPD=opteed', '', d)}"
-
-ATF_MACHINE_NAME = "bl31-${SOC_ATF}.bin"
-ATF_MACHINE_NAME_append = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', '-optee', '', d)}"
+BUILD_OPTEE = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true', 'false', d)}"
 
 do_compile () {
     export CROSS_COMPILE="${TARGET_PREFIX}"
@@ -51,17 +48,30 @@ do_compile () {
     oe_runmake clean PLAT=${SOC_ATF}
     oe_runmake ${BUILD_STRING} PLAT=${SOC_ATF} bl31
 
+    # Build opteee version
+    if [ "${BUILD_OPTEE}" = "true" ]; then
+        oe_runmake clean PLAT=${SOC_ATF} BUILD_BASE=build-optee
+        oe_runmake ${BUILD_STRING} PLAT=${SOC_ATF} BUILD_BASE=build-optee SPD=opteed bl31
+    fi
     unset CROSS_COMPILE
 }
 
 do_install () {
     install -d ${D}/boot
     install -m 0644 ${S}/build/${SOC_ATF}/release/bl31.bin ${D}/boot/bl31-${SOC_ATF}.bin
+    # Install opteee version
+    if [ "${BUILD_OPTEE}" = "true" ]; then
+        install -m 0644 ${S}/build-optee/${SOC_ATF}/release/bl31.bin ${D}/boot/bl31-${SOC_ATF}.bin-optee
+    fi
 }
 
 do_deploy () {
     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${S}/build/${SOC_ATF}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/${ATF_MACHINE_NAME}
+    install -m 0644 ${S}/build/${SOC_ATF}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${SOC_ATF}.bin
+    # Deploy opteee version
+    if [ "${BUILD_OPTEE}" = "true" ]; then
+        install -m 0644 ${S}/build-optee/${SOC_ATF}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${SOC_ATF}.bin-optee
+    fi
 }
 
 addtask deploy before do_install after do_compile
