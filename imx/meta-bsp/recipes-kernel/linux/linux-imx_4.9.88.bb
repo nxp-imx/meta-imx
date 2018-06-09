@@ -2,16 +2,20 @@
 # Copyright 2017-2018 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
+require recipes-kernel/linux/linux-imx.inc
+
 SUMMARY = "Linux Kernel provided and supported by NXP"
 DESCRIPTION = "Linux Kernel provided and supported by NXP with focus on \
 i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU and IPU."
 
-require recipes-kernel/linux/linux-imx.inc
-require recipes-kernel/linux/linux-imx-src.inc
-
 DEPENDS += "lzop-native bc-native"
 
+SRCBRANCH = "imx_4.9.y"
+LOCALVERSION = "-${SRCBRANCH}"
+KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
+SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 SRC_URI += "file://0001-ion-Add-userspace-header-ion.h-to-Linux-userspace.patch"
+SRCREV = "e38e289e2dada1a55bfabdcb2315aa764bf40400"
 
 DEFAULT_PREFERENCE = "1"
 
