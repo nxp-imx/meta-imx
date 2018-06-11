@@ -15,7 +15,7 @@ LOCALVERSION = "-${SRCBRANCH}"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 SRC_URI += "file://0001-ion-Add-userspace-header-ion.h-to-Linux-userspace.patch"
-SRCREV = "e38e289e2dada1a55bfabdcb2315aa764bf40400"
+SRCREV = "f2dd417bfb1c75ffad2355230e96259718cc90fa"
 
 DEFAULT_PREFERENCE = "1"
 
