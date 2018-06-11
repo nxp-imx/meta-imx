@@ -1,15 +1,15 @@
 require linux-libc-headers.inc
-require recipes-kernel/linux/linux-imx-src.inc
+require recipes-kernel/linux/linux-imx-src-${PV}.inc
 
 SUMMARY = "Installs i.MX-specific kernel headers to /usr/imx"
 
+SRC_URI += "file://Install-dma-buf-h.patch"
 SRC_URI_append_libc-musl = "\
     file://0001-libc-compat.h-fix-some-issues-arising-from-in6.h.patch \
     file://0002-libc-compat.h-prevent-redefinition-of-struct-ethhdr.patch \
     file://0003-remove-inclusion-of-sysinfo.h-in-kernel.h.patch \
     file://0001-libc-compat.h-musl-_does_-define-IFF_LOWER_UP-DORMAN.patch \
    "
-SRC_URI_append = " file://Install-dma-buf-h.patch"
 SRCREV = "85c6f5dc1e51a57d207d15068fd2aca5af056e83"
 
 # i.MX: Install to /usr/imx instead of /usr
