@@ -10,7 +10,6 @@ SRC_URI_append_libc-musl = "\
     file://0003-remove-inclusion-of-sysinfo.h-in-kernel.h.patch \
     file://0001-libc-compat.h-musl-_does_-define-IFF_LOWER_UP-DORMAN.patch \
    "
-SRCREV = "85c6f5dc1e51a57d207d15068fd2aca5af056e83"
 
 # i.MX: Install to /usr/imx instead of /usr
 exec_prefix = "/usr/imx"
