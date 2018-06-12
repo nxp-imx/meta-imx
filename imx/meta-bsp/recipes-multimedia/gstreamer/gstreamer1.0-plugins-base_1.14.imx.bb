@@ -40,7 +40,7 @@ EXTRA_OECONF = "CPPFLAGS="-I${STAGING_EXECPREFIXDIR}/imx/include""
 
 EXTRA_OEMAKE += "GIR_EXTRA_LIBS_PATH=${GIR_EXTRA_LIBS_PATH}:${B}/gst-libs/gst/allocators/.libs"
 
-FILES_${PN} += "/usr/lib/gstreamer-1.0/include"
+FILES_${PN} += "${libdir}/gstreamer-1.0/include"
 
 PV = "1.14.0.imx"
 
