@@ -2,9 +2,15 @@ inherit image_types
 
 IMAGE_BOOTLOADER ?= "u-boot"
 
-IMAGE_M4LOADER ?= ""
+IMAGE_BOOTFILES ?= ""
+IMAGE_BOOTFILES_DEPENDS ?= ""
 
-IMX_BOOT_SEEK ?= "16"
+IMAGE_BOOTFILES += \
+    "${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'xen', '', d)}"
+IMAGE_BOOTFILES_DEPENDS += \
+    "${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'imx-xen:do_deploy', '', d)}"
+
+IMX_BOOT_SEEK ?= "33"
 
 # Handle u-boot suffixes
 UBOOT_SUFFIX ?= "bin"
@@ -15,10 +21,16 @@ UBOOT_SUFFIX_SDCARD ?= "${UBOOT_SUFFIX}"
 #
 MXSBOOT_NAND_ARGS ?= ""
 
+# Include required software for optee
+IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'packagegroup-fsl-optee-imx', '', d)} "
+
+# Include userspace xen tools
+IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'imx-xen-base imx-xen-hypervisor', '', d)} "
+
 # IMX Bootlets Linux bootstream
-IMAGE_DEPENDS_linux.sb = "elftosb-native:do_populate_sysroot \
-                          imx-bootlets:do_deploy \
-                          virtual/kernel:do_deploy"
+do_image_linux.sb[depends] = "elftosb-native:do_populate_sysroot \
+                              imx-bootlets:do_deploy \
+                              virtual/kernel:do_deploy"
 IMAGE_LINK_NAME_linux.sb = ""
 IMAGE_CMD_linux.sb () {
 	kernel_bin="`readlink ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin`"
@@ -43,10 +55,10 @@ IMAGE_CMD_linux.sb () {
 }
 
 # IMX Bootlets barebox bootstream
-IMAGE_DEPENDS_barebox.mxsboot-sdcard = "elftosb-native:do_populate_sysroot \
-                                        u-boot-mxsboot-native:do_populate_sysroot \
-                                        imx-bootlets:do_deploy \
-                                        barebox:do_deploy"
+do_image_barebox-mxsboot-sdcard[depends] = "elftosb-native:do_populate_sysroot \
+                                            u-boot-mxsboot-native:do_populate_sysroot \
+                                            imx-bootlets:do_deploy \
+                                            barebox:do_deploy"
 IMAGE_CMD_barebox.mxsboot-sdcard () {
 	barebox_bd_file=imx-bootlets-barebox_ivt.bd-${MACHINE}
 
@@ -58,13 +70,13 @@ IMAGE_CMD_barebox.mxsboot-sdcard () {
 
 # U-Boot mxsboot generation to SD-Card
 UBOOT_SUFFIX_SDCARD_mxs ?= "mxsboot-sdcard"
-IMAGE_DEPENDS_uboot.mxsboot-sdcard = "u-boot-mxsboot-native:do_populate_sysroot \
-                                      u-boot:do_deploy"
+do_image_uboot-mxsboot-sdcard[depends] = "u-boot-mxsboot-native:do_populate_sysroot \
+                                          u-boot:do_deploy"
 IMAGE_CMD_uboot.mxsboot-sdcard = "mxsboot sd ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX} \
                                              ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.uboot.mxsboot-sdcard"
 
-IMAGE_DEPENDS_uboot.mxsboot-nand = "u-boot-mxsboot-native:do_populate_sysroot \
-                                      u-boot:do_deploy"
+do_image_uboot-mxsboot-nand[depends] = "u-boot-mxsboot-native:do_populate_sysroot \
+                                        u-boot:do_deploy"
 IMAGE_CMD_uboot.mxsboot-nand = "mxsboot ${MXSBOOT_NAND_ARGS} nand \
                                              ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.${UBOOT_SUFFIX} \
                                              ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.uboot.mxsboot-nand"
@@ -78,15 +90,18 @@ BOOT_SPACE ?= "8192"
 # Barebox environment size [in KiB]
 BAREBOX_ENV_SPACE ?= "512"
 
-# Set alignment to 4MB [in KiB]
-IMAGE_ROOTFS_ALIGNMENT = "4096"
+# Set alignment in KiB
+IMAGE_ROOTFS_ALIGNMENT_mx6 ?= "4096"
+IMAGE_ROOTFS_ALIGNMENT_mx7 ?= "4096"
+IMAGE_ROOTFS_ALIGNMENT_mx8 ?= "8192"
 
-IMAGE_DEPENDS_sdcard = "parted-native:do_populate_sysroot \
-                        dosfstools-native:do_populate_sysroot \
-                        mtools-native:do_populate_sysroot \
-                        virtual/kernel:do_deploy \
-                        ${@d.getVar('IMAGE_BOOTLOADER', True) and d.getVar('IMAGE_BOOTLOADER', True) + ':do_deploy' or ''} \
-                        ${@d.getVar('IMAGE_M4LOADER', True) and d.getVar('IMAGE_M4LOADER', True) + ':do_deploy' or ''}"
+do_image_sdcard[depends] = "parted-native:do_populate_sysroot \
+                            dosfstools-native:do_populate_sysroot \
+                            mtools-native:do_populate_sysroot \
+                            virtual/kernel:do_deploy \
+                            ${IMAGE_BOOTLOADER}:do_deploy \
+                            ${IMAGE_BOOTFILES_DEPENDS} \
+                           "
 
 SDCARD = "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.sdcard"
 
@@ -95,6 +110,7 @@ SDCARD_GENERATION_COMMAND_mx25 = "generate_imx_sdcard"
 SDCARD_GENERATION_COMMAND_mx5 = "generate_imx_sdcard"
 SDCARD_GENERATION_COMMAND_mx6 = "generate_imx_sdcard"
 SDCARD_GENERATION_COMMAND_mx7 = "generate_imx_sdcard"
+SDCARD_GENERATION_COMMAND_mx8 = "generate_imx_sdcard"
 SDCARD_GENERATION_COMMAND_vf = "generate_imx_sdcard"
 
 
@@ -150,16 +166,24 @@ _generate_boot_image() {
 		mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/extlinux.conf ::/extlinux/extlinux.conf
 	fi
 
-        # Copy m4 image
-        if [ -n "${IMAGE_M4}" ]; then
-            for IMAGE_FILE in ${IMAGE_M4}; do
+        # Copy additional files to boot partition: such as m4 images and firmwares
+        if [ -n "${IMAGE_BOOTFILES}" ]; then
+            for IMAGE_FILE in ${IMAGE_BOOTFILES}; do
                 if [ -e "${DEPLOY_DIR_IMAGE}/${IMAGE_FILE}" ]; then
                     mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${IMAGE_FILE} ::/${IMAGE_FILE}
                 else
-                    bbfatal "${IMAGE_FILE}$ does not exist."
+                    bbfatal "${IMAGE_FILE} does not exist."
                 fi
             done
         fi
+
+    # add tee to boot image
+    if ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true', 'false', d)}; then
+        for UTEE_FILE_PATH in `find ${DEPLOY_DIR_IMAGE} -maxdepth 1 -type f -name 'uTee-*' -print -quit`; do
+            UTEE_FILE=`basename ${UTEE_FILE_PATH}`
+            mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${UTEE_FILE} ::/${UTEE_FILE}
+        done
+    fi
 
 }
 
@@ -202,7 +226,7 @@ generate_imx_sdcard () {
 		exit 1
 		;;
                 imx-boot)
-                dd if=${DEPLOY_DIR_IMAGE}/imx-boot-tools/imx-boot-${MACHINE}-${UBOOT_CONFIG}.bin of=${SDCARD} conv=notrunc seek=${IMX_BOOT_SEEK} bs=1K
+                dd if=${DEPLOY_DIR_IMAGE}/imx-boot-${MACHINE}-${UBOOT_CONFIG}.bin of=${SDCARD} conv=notrunc seek=${IMX_BOOT_SEEK} bs=1K
                 ;;
                 u-boot)
 		if [ -n "${SPL_BINARY}" ]; then

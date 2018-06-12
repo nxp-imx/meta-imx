@@ -1,5 +1,5 @@
 # Copyright (C) 2014 Freescale Semiconductor
-# Copyright 2017 NXP
+# Copyright 2017-2018 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Package group for Qt5 demos"
@@ -15,7 +15,7 @@ RDEPENDS_${PN}_append = " \
 "
 
 # Install the following apps on SoC with GPU
-RDEPENDS_${PN}_append_imxgpu2d = " \
+RDEPENDS_${PN}_append_imxgpu = " \
     qtsmarthome \
     qt5ledscreen \
     quitbattery \

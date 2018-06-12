@@ -1,0 +1,35 @@
+From 5877685b10560c40f1c4af375e30adf2a631fefc Mon Sep 17 00:00:00 2001
+From: Fugang Duan <fugang.duan@nxp.com>
+Date: Tue, 29 Aug 2017 14:54:44 +0800
+Subject: [PATCH 3/5] hciattach: instead of strlcpy with strncpy to avoid rome
+ build error
+
+Instead of strlcpy with strncpy to avoid rome build error.
+
+igned-off-by: Fugang Duan <fugang.duan@nxp.com>
+---
+ tools/hciattach_rome.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tools/hciattach_rome.c b/tools/hciattach_rome.c
+index 242a49f..c3e9fde 100644
+--- a/tools/hciattach_rome.c
++++ b/tools/hciattach_rome.c
+@@ -893,12 +893,12 @@ int get_value_from_config(char *file_path,char *param)
+         return ret;
+     }
+ 
+-    while (getline(&line, &bytes_read, pfile) > 0 ) {
++    while (getline(&line, (size_t *)&bytes_read, pfile) > 0 ) {
+         if (line[0] != '#'  && line[0] != '\n') {
+             pch = memchr(line, '=', strlen(line));
+             if (pch != NULL) {
+                 position = pch - line;
+-                strlcpy(param_str, line, sizeof(param_str));
++                strncpy(param_str, line, sizeof(param_str));
+                 if (position >= sizeof(param_str))
+                     position = sizeof(param_str) - 1;
+                 if (strncmp(param_str, param, position) == 0) {
+-- 
+1.9.1
+

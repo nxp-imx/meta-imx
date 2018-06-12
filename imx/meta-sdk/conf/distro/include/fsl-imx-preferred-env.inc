@@ -27,13 +27,8 @@ MACHINE_GSTREAMER_1_0_PLUGIN_mx7ulp = "imx-gst1.0-plugin"
 MACHINE_GSTREAMER_1_0_PLUGIN_mx8 = "imx-gst1.0-plugin"
 
 # Extra audio support
-# Add back some setting for i.MX6ul & i.MX7d which have not been upstreamed
+# Add support for ALL i.MX6/7/8 SoC families
 MACHINE_EXTRA_RRECOMMENDS_append_imx = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
-#MACHINE_EXTRA_RRECOMMENDS_append_mx6ul = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
-#MACHINE_EXTRA_RRECOMMENDS_append_mx6sll = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
-#MACHINE_EXTRA_RRECOMMENDS_append_mx7 = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
-#MACHINE_EXTRA_RRECOMMENDS_append_mx7ulp = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS_remove_mx8 = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
 
 # Default toolchains used in testing i.MX BSPs
 DEFAULTTUNE_mx6   = "cortexa9hf-neon"
@@ -41,6 +36,7 @@ DEFAULTTUNE_mx6ul = "cortexa7hf-neon"
 DEFAULTTUNE_mx6sll = "cortexa9hf-neon"
 DEFAULTTUNE_mx7d   = "cortexa7hf-neon"
 DEFAULTTUNE_mx7ulp = "cortexa7hf-neon"
+DEFAULTTUNE_mx8 = "aarch64"
 
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
@@ -53,16 +49,16 @@ PREFERRED_PROVIDER_virtual/libgles1_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx7ulp = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx7ulp = "imx-gpu-viv"
 
-GRAPHICS_V6        ?= "6.2.2.p0"
-GRAPHICS_V6_SUFFIX = "aarch32"
-
-GRAPHICS_VERSION               = "${GRAPHICS_V6}"
-GRAPHICS_VERSION_SUFFIX        = "${GRAPHICS_V6_SUFFIX}"
+GRAPHICS_VERSION            ?= "6.2.4.p1.2"
+GRAPHICS_VERSION_SUFFIX      = "aarch32"
+GRAPHICS_VERSION_SUFFIX_mx8  = "aarch64"
 
 PREFERRED_VERSION_imx-gpu-viv               = "${GRAPHICS_VERSION}-${GRAPHICS_VERSION_SUFFIX}"
-PREFERRED_VERSION_xf86-video-imxfb-vivante  = "${GRAPHICS_VERSION}"
+PREFERRED_VERSION_xf86-video-imx-vivante    = "${GRAPHICS_VERSION}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${GRAPHICS_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${GRAPHICS_VERSION}"
+PREFERRED_VERSION_openssl                   = "1.0.2m"
+PREFERRED_VERSION_openssl-native            = "1.0.2m"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"

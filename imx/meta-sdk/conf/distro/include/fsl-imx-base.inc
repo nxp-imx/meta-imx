@@ -1,23 +1,26 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.9.11-1.0.0"
+DISTRO_VERSION = "4.9.88-2.0.0"
 
-DISTRO_CODENAME = "morty"
+DISTRO_CODENAME = "rocko"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
 
-MAINTAINER = "Freescale Semiconductors <lauren.post@nxp.com>"
+MAINTAINER = "NXP <lauren.post@nxp.com>"
 
 TARGET_VENDOR = "-poky"
 
 LOCALCONF_VERSION = "1"
 
 IMX_DEFAULT_DISTRO_FEATURES = "largefile opengl ptest multiarch bluez"
+# Enable vulkan distro feature only for mx8
+IMX_DEFAULT_DISTRO_FEATURES_append_mx8 = " vulkan"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
-IMAGE_FSTYPES = "tar.bz2 ext4 sdcard"
+IMAGE_FSTYPES = "tar.bz2 ext4 sdcard.bz2"
 
+BBMASK += "meta-freescale/recipes-graphics/wayland/weston_%.bbappend"
 BBMASK += "meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium_52.0.2743.76.bbappend"
 BBMASK += "meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bbappend"
 
@@ -54,18 +57,22 @@ https://.*/.*    http://downloads.yoctoproject.org/mirror/sources/ \n"
 CONNECTIVITY_CHECK_URIS ?= "https://www.example.com/"
 
 SANITY_TESTED_DISTROS ?= " \
-            poky-1.7 \n \
-            poky-1.8 \n \
-            Ubuntu-12.04 \n \
-            Ubuntu-14.04 \n \
-            Ubuntu-14.10 \n \
-            Ubuntu-15.04 \n \
-            Fedora-21 \n \
-            CentOS-6.* \n \
-            CentOS-7.* \n \
-            Debian-7.* \n \
-            Debian-8.* \n \
-            openSUSE-project-13.2 \n \
+            poky-2.2 \n \
+            poky-2.3 \n \
+            poky-2.4 \n \
+            ubuntu-12.04 \n \
+            ubuntu-15.04 \n \
+            ubuntu-16.04 \n \
+            ubuntu-16.10 \n \
+            ubuntu-17.04 \n \
+            fedora-24 \n \
+            fedora-25 \n \
+            fedora-26 \n \
+            centos-7 \n \
+            debian-8 \n \
+            debian-9 \n \
+            opensuse-42.1 \n \
+            opensuse-42.2 \n \
             "
 
 # Default hash policy for distro
@@ -87,11 +94,3 @@ WARN_TO_ERROR_QA = "already-stripped compile-host-path install-host-path \
                     useless-rpaths"
 WARN_QA_remove = "${WARN_TO_ERROR_QA}"
 ERROR_QA_append = " ${WARN_TO_ERROR_QA}"
-
-MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"
-MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx8 = "1"
-
-MACHINEOVERRIDES_EXTENDER_mx6sll  = "imxpxp:imxepdc"
-MACHINEOVERRIDES_EXTENDER_mx7ulp  = "imxpxp:imxgpu2d:imxgpu3d"
-
-MACHINE_FIRMWARE_append = " firmware-imx-brcm"

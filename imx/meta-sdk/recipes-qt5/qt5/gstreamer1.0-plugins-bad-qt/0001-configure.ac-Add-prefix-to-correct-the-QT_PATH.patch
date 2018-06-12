@@ -1,0 +1,28 @@
+From 66389744b6f521880679433fd3ea6ed072eef9a3 Mon Sep 17 00:00:00 2001
+From: Yuqing Zhu <carol.zhu@nxp.com>
+Date: Wed, 26 Jul 2017 11:29:41 +0800
+Subject: [PATCH] configure.ac: Add prefix to correct the QT_PATH
+
+Signed-off-by: Yuqing Zhu <carol.zhu@nxp.com>
+---
+ configure.ac | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index fa26262..b35a828 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2919,8 +2919,8 @@ dnl *** Qt ***
+ translit(dnm, m, l) AM_CONDITIONAL(USE_QT, true)
+ AG_GST_CHECK_FEATURE(QT, [Qt elements], qt, [
+   PKG_CHECK_MODULES(QT, Qt5Core Qt5Gui Qt5Qml Qt5Quick >= 5.4.0, [
+-      QT_PATH=`$PKG_CONFIG --variable=exec_prefix Qt5Core`
+-      QT_HOST_PATH=`$PKG_CONFIG --variable=host_bins Qt5Core`
++      QT_PATH=$STAGING_DIR`$PKG_CONFIG --variable=exec_prefix Qt5Core`
++      QT_HOST_PATH=$STAGING_DIR`$PKG_CONFIG --variable=host_bins Qt5Core`
+       AC_ARG_WITH([moc],
+            AS_HELP_STRING([--with-moc], [Set location of qt moc tool]),
+            [MOC=$withval])
+-- 
+1.9.1
+

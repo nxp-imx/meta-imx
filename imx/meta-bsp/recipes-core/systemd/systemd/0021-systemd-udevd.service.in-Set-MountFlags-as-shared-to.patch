@@ -1,0 +1,38 @@
+From 63a29080c6a2f6e235d19e2ed303e52706c2c74e Mon Sep 17 00:00:00 2001
+From: Jun Zhu <junzhu@nxp.com>
+Date: Thu, 26 Apr 2018 15:43:45 +0800
+Subject: [PATCH] systemd-udevd.service.in: Set MountFlags as shared to fix the
+ automount problem
+
+Use "shared" mode to ensure that mounts and unmounts
+ are propagated from systemd's namespace to the service's namespace.
+
+It will fix the automount problem from v234
+
+The original commit to set the mode to "slave" is
+the commit c2c13f2df42e0691aecabe3979ea81cd7faa35c7
+"unit: turn off mount propagation for udevd"
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Jun Zhu <junzhu@nxp.com>
+---
+ units/systemd-udevd.service.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/units/systemd-udevd.service.in b/units/systemd-udevd.service.in
+index fc037b5..f65b77c 100644
+--- a/units/systemd-udevd.service.in
++++ b/units/systemd-udevd.service.in
+@@ -24,7 +24,7 @@ ExecStart=@rootlibexecdir@/systemd-udevd
+ KillMode=mixed
+ WatchdogSec=3min
+ TasksMax=infinity
+-MountFlags=slave
++MountFlags=shared
+ MemoryDenyWriteExecute=yes
+ RestrictRealtime=yes
+ RestrictAddressFamilies=AF_UNIX AF_NETLINK AF_INET AF_INET6
+-- 
+2.7.4
+

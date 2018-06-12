@@ -1,0 +1,335 @@
+From 82348c8235b9935d0d3b0715908ec66db0ef7a75 Mon Sep 17 00:00:00 2001
+From: "aifeng.wang" <aifeng.wang@murata.com>
+Date: Tue, 5 Sep 2017 17:22:48 +0800
+Subject: [PATCH 5/5] bluetooth: Add support for multi baud rate
+
+Currently BT operates only at 3M baud rate. Provide option
+to configure the pre-defined baud rate values as supported by the
+target platform.
+(based on CAF commit:f7a564dd593b1ba29a3395e1078ac180e4a02ed3)
+---
+ tools/hciattach.c      |  58 +++++++++++++++++++++++++-
+ tools/hciattach.h      |   2 +-
+ tools/hciattach_rome.c | 109 ++++++++++++++++++++++++++++++++++++++++++-------
+ tools/hciattach_rome.h |  23 +++++++++++
+ 4 files changed, 176 insertions(+), 16 deletions(-)
+
+diff --git a/tools/hciattach.c b/tools/hciattach.c
+old mode 100644
+new mode 100755
+index d03ed46..d64601e
+--- a/tools/hciattach.c
++++ b/tools/hciattach.c
+@@ -88,6 +88,62 @@ static void sig_alarm(int sig)
+ 	exit(1);
+ }
+ 
++int uart_speed(int s)
++{
++	switch (s) {
++	case 9600:
++		return B9600;
++	case 19200:
++		return B19200;
++	case 38400:
++		return B38400;
++	case 57600:
++		return B57600;
++	case 115200:
++		return B115200;
++	case 230400:
++		return B230400;
++	case 460800:
++		return B460800;
++	case 500000:
++		return B500000;
++	case 576000:
++		return B576000;
++	case 921600:
++		return B921600;
++	case 1000000:
++		return B1000000;
++	case 1152000:
++		return B1152000;
++	case 1500000:
++		return B1500000;
++	case 2000000:
++		return B2000000;
++#ifdef B2500000
++	case 2500000:
++		return B2500000;
++#endif
++#ifdef B3000000
++	case 3000000:
++		return B3000000;
++#endif
++#ifdef B3500000
++	case 3500000:
++		return B3500000;
++#endif
++#ifdef B3710000
++	case 3710000
++		return B3710000;
++#endif
++#ifdef B4000000
++	case 4000000:
++		return B4000000;
++#endif
++	default:
++		return B57600;
++	}
++}
++
+ int set_speed(int fd, struct termios *ti, int speed)
+ {
+ 	if (cfsetospeed(ti, tty_get_speed(speed)) < 0)
+@@ -268,7 +324,7 @@ static int ath3k_pm(int fd, struct uart_t *u, struct termios *ti)
+ static int qca(int fd, struct uart_t *u, struct termios *ti)
+ {
+         fprintf(stderr,"qca\n");
+-        return qca_soc_init(fd, u->bdaddr);
++        return qca_soc_init(fd, u->speed, u->bdaddr);
+ }
+ 
+ static int qualcomm(int fd, struct uart_t *u, struct termios *ti)
+diff --git a/tools/hciattach.h b/tools/hciattach.h
+old mode 100644
+new mode 100755
+index 59efa31..626e2a0
+--- a/tools/hciattach.h
++++ b/tools/hciattach.h
+@@ -66,7 +66,7 @@ int bgb2xx_init(int dd, bdaddr_t *bdaddr);
+ int ath3k_init(int fd, int speed, int init_speed, char *bdaddr,
+ 						struct termios *ti);
+ int ath3k_post(int fd, int pm);
+-int qca_soc_init(int fd, char *bdaddr);
++int qca_soc_init(int fd, int speed, char *bdaddr);
+ int qualcomm_init(int fd, int speed, struct termios *ti, const char *bdaddr);
+ int intel_init(int fd, int init_speed, int *speed, struct termios *ti);
+ int bcm43xx_init(int fd, int def_speed, int speed, struct termios *ti,
+diff --git a/tools/hciattach_rome.c b/tools/hciattach_rome.c
+old mode 100644
+new mode 100755
+index 188bcc1..fc843f6
+--- a/tools/hciattach_rome.c
++++ b/tools/hciattach_rome.c
+@@ -1574,7 +1574,7 @@ static void flow_control(int fd, int opt)
+ }
+ 
+ 
+-int rome_set_baudrate_req(int fd)
++int rome_set_baudrate_req(int fd, int local_baud_rate, int controller_baud_rate)
+ {
+    int size, err = 0;
+     unsigned char cmd[HCI_MAX_CMD_SIZE];
+@@ -1588,7 +1588,7 @@ int rome_set_baudrate_req(int fd)
+     cmd[0]  = HCI_COMMAND_PKT;
+     cmd_hdr->opcode = cmd_opcode_pack(HCI_VENDOR_CMD_OGF, EDL_SET_BAUDRATE_CMD_OCF);
+     cmd_hdr->plen     = VSC_SET_BAUDRATE_REQ_LEN;
+-    cmd[4]  = BAUDRATE_3000000;
++    cmd[4]  = controller_baud_rate;
+ 
+     /* Total length of the packet to be sent to the Controller */
+     size = (HCI_CMD_IND + HCI_COMMAND_HDR_SIZE + VSC_SET_BAUDRATE_REQ_LEN);
+@@ -1604,7 +1604,7 @@ int rome_set_baudrate_req(int fd)
+         goto error;
+     }
+     /* Change Local UART baudrate to high speed UART */
+-    userial_vendor_set_baud(USERIAL_BAUD_3M);
++    userial_vendor_set_baud(local_baud_rate);
+ 
+     /* Flow on after changing local uart baudrate */
+     flow_control(fd, MSM_ENABLE_FLOW_CTRL);
+@@ -1630,7 +1630,7 @@ error:
+ }
+ 
+ 
+-int rome_hci_reset_req(int fd)
++int rome_hci_reset_req(int fd, char baud)
+ {
+     int size, err = 0;
+     unsigned char cmd[HCI_MAX_CMD_SIZE];
+@@ -1662,7 +1662,7 @@ int rome_hci_reset_req(int fd)
+     }
+ 
+     /* Change Local UART baudrate to high speed UART */
+-     userial_vendor_set_baud(USERIAL_BAUD_3M);
++     userial_vendor_set_baud(baud);
+ 
+     /* Flow on after changing local uart baudrate */
+     flow_control(fd, MSM_ENABLE_FLOW_CTRL);
+@@ -1728,10 +1728,69 @@ int read_bd_address(unsigned char *bdaddr)
+   return 0;
+ }
+ 
+-int qca_soc_init(int fd, char *bdaddr)
++int isSpeedValid(int speed, int *local_baud_rate, int *controller_baud_rate)
++{
++    switch(speed) {
++    case 9600:
++        *local_baud_rate = USERIAL_BAUD_9600;
++        *controller_baud_rate = BAUDRATE_9600;
++        break;
++    case 19200:
++        *local_baud_rate = USERIAL_BAUD_19200;
++        *controller_baud_rate = BAUDRATE_19200;
++        break;
++    case 57600:
++        *local_baud_rate = USERIAL_BAUD_57600;
++        *controller_baud_rate = BAUDRATE_57600;
++        break;
++    case 115200:
++        *local_baud_rate = USERIAL_BAUD_115200;
++        *controller_baud_rate = BAUDRATE_115200;
++        break;
++    case 230400:
++        *local_baud_rate = USERIAL_BAUD_230400;
++        *controller_baud_rate = BAUDRATE_230400;
++        break;
++    case 460800:
++        *local_baud_rate = USERIAL_BAUD_460800;
++        *controller_baud_rate = BAUDRATE_460800;
++        break;
++    case 921600:
++        *local_baud_rate = USERIAL_BAUD_921600;
++        *controller_baud_rate = BAUDRATE_921600;
++        break;
++    case 1000000:
++        *local_baud_rate = USERIAL_BAUD_1M;
++        *controller_baud_rate = BAUDRATE_1000000;
++        break;
++    case 2000000:
++        *local_baud_rate = USERIAL_BAUD_2M;
++        *controller_baud_rate = BAUDRATE_2000000;
++        break;
++    case 3000000:
++        *local_baud_rate = USERIAL_BAUD_3M;
++        *controller_baud_rate = BAUDRATE_3000000;
++        break;
++    case 4000000:
++        *local_baud_rate = USERIAL_BAUD_4M;
++        *controller_baud_rate = BAUDRATE_4000000;
++        break;
++    case 300:
++    case 600:
++    case 1200:
++    case 2400:
++    default:
++        fprintf(stderr, "Invalid baud rate passed!\n");
++        *local_baud_rate = *controller_baud_rate = -1;
++        break;
++    }
++    return -1;
++}
++
++int qca_soc_init(int fd, int speed, char *bdaddr)
+ {
+     int err = -1;
+-    int size;
++    int size, local_baud_rate = 0, controller_baud_rate = 0;
+ 
+     vnd_userial.fd = fd;
+ 
+@@ -1789,7 +1848,7 @@ int qca_soc_init(int fd, char *bdaddr)
+                 }
+ 
+                 /* Change baud rate 115.2 kbps to 3Mbps*/
+-                err = rome_hci_reset_req(fd);
++                err = rome_hci_reset_req(fd, local_baud_rate);
+                 if ( err <0 ) {
+                     fprintf(stderr, "HCI Reset Failed !!\n");
+                     goto error;
+@@ -1821,17 +1880,30 @@ int qca_soc_init(int fd, char *bdaddr)
+         case TUFELLO_VER_1_0:
+             rampatch_file_path = TF_RAMPATCH_TLV_1_0_0_PATH;
+             nvm_file_path = TF_NVM_TLV_1_0_0_PATH;
++            goto download;
+         case TUFELLO_VER_1_1:
+             rampatch_file_path = TF_RAMPATCH_TLV_1_0_1_PATH;
+             nvm_file_path = TF_NVM_TLV_1_0_1_PATH;
+ 
+ download:
+-            /* Change baud rate 115.2 kbps to 3Mbps*/
+-            err = rome_set_baudrate_req(fd);
+-            if (err < 0) {
+-                fprintf(stderr, "%s: Baud rate change failed!\n", __FUNCTION__);
+-                goto error;
++            /* Check if user requested for 115200 kbps */
++            if (speed == 115200) {
++                local_baud_rate = USERIAL_BAUD_115200;
++                controller_baud_rate = BAUDRATE_115200;
+             }
++            else {
++                /* Change only if baud rate requested is valid or not */
++                isSpeedValid(speed, &local_baud_rate, &controller_baud_rate);
++                if (local_baud_rate < 0 || controller_baud_rate < 0) {
++                    err = -1;
++                    goto error;
++                }
++                err = rome_set_baudrate_req(fd, local_baud_rate, controller_baud_rate);
++                if (err < 0) {
++                    fprintf(stderr, "%s: Baud rate change failed!\n", __FUNCTION__);
++                   goto error;
++                }
++             }
+             fprintf(stderr, "%s: Baud rate changed successfully \n", __FUNCTION__);
+ 
+             /* Donwload TLV files (rampatch, NVM) */
+@@ -1842,8 +1914,17 @@ download:
+             }
+             fprintf(stderr, "%s: Download TLV file successfully \n", __FUNCTION__);
+ 
++            /*
++             * Overriding the baud rate value in NVM file with the user
++             * requested baud rate, since default baud rate in NVM file is 3M.
++             */
++            err = rome_set_baudrate_req(fd, local_baud_rate, controller_baud_rate);
++            if (err < 0) {
++                fprintf(stderr, "%s: Baud rate change failed!\n", __FUNCTION__);
++                goto error;
++            }
+             /* Perform HCI reset here*/
+-            err = rome_hci_reset_req(fd);
++            err = rome_hci_reset_req(fd, local_baud_rate);
+             if ( err <0 ) {
+                 fprintf(stderr, "HCI Reset Failed !!!\n");
+                 goto error;
+diff --git a/tools/hciattach_rome.h b/tools/hciattach_rome.h
+old mode 100644
+new mode 100755
+index 917af55..62f2ac0
+--- a/tools/hciattach_rome.h
++++ b/tools/hciattach_rome.h
+@@ -83,6 +83,29 @@ typedef struct
+ #define USERIAL_BAUD_4M         15
+ #define USERIAL_BAUD_AUTO       16
+ 
++/* Vendor specific baud rate values */
++#define UART_Baud_Rate_Baud_9600        4
++#define UART_Baud_Rate_Baud_19200       3
++#define UART_Baud_Rate_Baud_57600       1
++#define UART_Baud_Rate_Baud_115200      0
++#define UART_Baud_Rate_Baud_230400      5
++#define UART_Baud_Rate_Baud_460800      7
++#define UART_Baud_Rate_Baud_921600      10
++#define UART_Baud_Rate_Baud_1000000     11
++#define UART_Baud_Rate_Baud_2000000     13
++#define UART_Baud_Rate_Baud_3000000     14
++#define UART_Baud_Rate_Baud_4000000     15
++
++#define UART_Baud_Rate_Baud_250000      6
++#define UART_Baud_Rate_Baud_500000      8
++#define UART_Baud_Rate_Baud_720000      9
++#define UART_Baud_Rate_Baud_125000      12
++#define UART_Baud_Rate_Baud_1600000     16
++#define UART_Baud_Rate_Baud_3200000     17
++#define UART_Baud_Rate_Baud_3500000     18
++
++
++
+ #ifndef FALSE
+ #define FALSE  0
+ #endif
+-- 
+1.9.1
+

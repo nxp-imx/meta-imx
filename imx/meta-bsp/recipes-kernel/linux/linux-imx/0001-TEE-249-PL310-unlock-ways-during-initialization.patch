@@ -1,0 +1,27 @@
+From df3179e57030afc88be60ed0c35f07c51948c1a2 Mon Sep 17 00:00:00 2001
+From: Cedric Neveux <cedric.neveux@nxp.com>
+Date: Tue, 14 Nov 2017 16:42:42 +0000
+Subject: [PATCH 2/4] TEE-249 PL310 unlock ways during initialization
+
+Signed-off-by: Cedric Neveux <cedric.neveux@nxp.com>
+---
+ arch/arm/mm/cache-l2x0.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/arch/arm/mm/cache-l2x0.c b/arch/arm/mm/cache-l2x0.c
+index d1870c7..388d550 100644
+--- a/arch/arm/mm/cache-l2x0.c
++++ b/arch/arm/mm/cache-l2x0.c
+@@ -876,6 +876,9 @@ static int __init __l2c_init(const struct l2c_init_data *data,
+ 		l2x0_saved_regs.aux_ctrl = aux;
+ 
+ 		data->enable(l2x0_base, data->num_lock);
++	} else {
++		pr_info("%s cache controller enabled try to unlock\n", data->type);
++		data->unlock(l2x0_base, data->num_lock);
+ 	}
+ 
+ 	outer_cache = fns;
+-- 
+2.7.4
+

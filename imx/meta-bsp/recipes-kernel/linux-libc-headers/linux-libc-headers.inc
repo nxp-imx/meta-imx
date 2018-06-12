@@ -1,6 +1,8 @@
 SUMMARY = "Sanitized set of kernel headers for the C library's use"
 SECTION = "devel"
-LICENSE = "GPLv2"
+
+require recipes-kernel/linux/linux-imx-src.inc
+SRCREV = "7ad1d6c8bd0471c2264ee63b6955ca670e8428b5"
 
 #########################################################################
 ####                        PLEASE READ 
@@ -30,8 +32,6 @@ LICENSE = "GPLv2"
 #
 # -- RP
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-
 python __anonymous () {
     major = d.getVar("PV",True).split('.')[0]
     if major == "3":
@@ -45,10 +45,6 @@ python __anonymous () {
 inherit kernel-arch
 
 KORG_ARCHIVE_COMPRESSION ?= "xz"
-
-SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v${HEADER_FETCH_VER}/linux-${PV}.tar.${KORG_ARCHIVE_COMPRESSION}"
-
-S = "${WORKDIR}/linux-${PV}"
 
 EXTRA_OEMAKE = " HOSTCC="${BUILD_CC}" HOSTCPP="${BUILD_CPP}""
 

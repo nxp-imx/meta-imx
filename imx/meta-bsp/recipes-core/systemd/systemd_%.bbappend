@@ -1,6 +1,5 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
-SRC_URI_append += "file://Fix-for-hostnamed-not-starting.patch \
-                   file://Machine-system-ctl-always-pass-changes-and-n_changes.patch\
-                   file://0001-systemctl-avoid-spurious-warning-about-missing-reboo.patch"
-
+SRC_URI += "file://0020-logind.conf-Set-HandlePowerKey-to-ignore.patch \
+            file://0021-systemd-udevd.service.in-Set-MountFlags-as-shared-to.patch \
+"

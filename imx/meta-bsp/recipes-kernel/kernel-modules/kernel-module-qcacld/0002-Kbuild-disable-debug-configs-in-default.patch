@@ -1,0 +1,36 @@
+From 226853f2b44278d6ff30538bbc2d8798d3224cbe Mon Sep 17 00:00:00 2001
+From: Fugang Duan <fugang.duan@nxp.com>
+Date: Thu, 8 Mar 2018 18:05:18 +0800
+Subject: [PATCH 2/2] Kbuild: disable debug configs in default
+
+Disable debug configs in default.
+
+Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
+---
+ Kbuild | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Kbuild b/Kbuild
+index cb8dba8..f38d6a9 100644
+--- a/Kbuild
++++ b/Kbuild
+@@ -182,13 +182,13 @@ endif
+ # Feature flags which are not (currently) configurable via Kconfig
+ 
+ #Whether to build debug version
+-BUILD_DEBUG_VERSION := 1
++#BUILD_DEBUG_VERSION := 1
+ 
+ #Enable this flag to build driver in diag version
+-BUILD_DIAG_VERSION := 1
++#BUILD_DIAG_VERSION := 1
+ 
+ #Do we panic on bug?  default is to warn
+-PANIC_ON_BUG := 1
++#PANIC_ON_BUG := 1
+ 
+ #Re-enable wifi on WDI timeout
+ RE_ENABLE_WIFI_ON_WDI_TIMEOUT := 0
+-- 
+1.9.1
+

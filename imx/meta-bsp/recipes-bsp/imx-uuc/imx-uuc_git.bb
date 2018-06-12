@@ -1,5 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
-# Copyright 2017 NXP
+# Copyright 2017-2018 NXP
 
 SUMMARY = "A Daemon wait for NXP mfgtools host's command"
 SECTION = "base"
@@ -12,8 +12,8 @@ inherit autotools-brokensep
 PR = "r1"
 PV = "0.5.1+git${SRCPV}"
 
-SRC_URI = "git://github.com/NXPmicro/imx-uuc.git;protocol=https"
-SRCREV = "1de598e7b36d95596435902106c9a746697b9afc"
+SRC_URI = "git://github.com/codeauroraforum/imx-uuc.git;protocol=https"
+SRCREV = "323efa5e4c799c40503ac92a8104c33b090e6731"
 
 S = "${WORKDIR}/git"
 

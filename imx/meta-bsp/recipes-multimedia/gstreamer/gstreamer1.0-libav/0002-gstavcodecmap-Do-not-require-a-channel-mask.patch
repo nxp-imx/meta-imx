@@ -1,0 +1,46 @@
+From 1553cc0f1843213801767dedb973e30db2d23855 Mon Sep 17 00:00:00 2001
+From: Mathieu Duponchelle <mathieu.duponchelle@opencreed.com>
+Date: Thu, 17 Aug 2017 14:28:22 +0200
+Subject: [PATCH] gstavcodecmap: Do not require a channel-mask
+
+.. for mono or stereo input.
+
+Upstream-Status: Backport [1.13.1]
+
+https://bugzilla.gnome.org/show_bug.cgi?id=786401
+---
+ ext/libav/gstavcodecmap.c | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
+
+diff --git a/ext/libav/gstavcodecmap.c b/ext/libav/gstavcodecmap.c
+index 35a2ca0..7033f54 100644
+--- a/ext/libav/gstavcodecmap.c
++++ b/ext/libav/gstavcodecmap.c
+@@ -651,12 +651,19 @@ gst_ff_aud_caps_new (AVCodecContext * context, AVCodec * codec,
+ 
+           if (gst_audio_channel_positions_to_mask (pos, nbits_set, FALSE,
+                   &mask)) {
+-            GstCaps *tmp =
+-                gst_caps_new_simple (mimetype, "channel-mask", GST_TYPE_BITMASK,
+-                mask,
+-                "channels", G_TYPE_INT, nbits_set, NULL);
++            GstStructure *s =
++                gst_structure_new (mimetype, "channels", G_TYPE_INT, nbits_set,
++                NULL);
++
++            /* No need to require a channel mask for mono or stereo */
++            if (!(nbits_set == 1 && pos[0] == GST_AUDIO_CHANNEL_POSITION_MONO)
++                && !(nbits_set == 2
++                    && pos[0] == GST_AUDIO_CHANNEL_POSITION_FRONT_LEFT
++                    && pos[1] == GST_AUDIO_CHANNEL_POSITION_FRONT_RIGHT))
++              gst_structure_set (s, "channel-mask", GST_TYPE_BITMASK, mask,
++                  NULL);
+ 
+-            gst_caps_append (caps, tmp);
++            gst_caps_append_structure (caps, s);
+           }
+         }
+         layouts++;
+-- 
+1.9.1
+

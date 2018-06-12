@@ -1,0 +1,66 @@
+From 93dfa6aff194904dc4a798eb2d1f150fb543c512 Mon Sep 17 00:00:00 2001
+From: Fugang Duan <fugang.duan@nxp.com>
+Date: Mon, 2 Apr 2018 14:51:05 +0800
+Subject: [PATCH 1/2] Kbuild: Eliminate errors by tool chain and disable debug
+ configs
+
+- Eliminate errors caused by GCC 6.x warning.
+- Disable debug configs in default.
+
+Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
+---
+ Kbuild | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/Kbuild b/Kbuild
+index 69b228d..b823dc7 100644
+--- a/Kbuild
++++ b/Kbuild
+@@ -188,13 +188,13 @@ endif
+ # Feature flags which are not (currently) configurable via Kconfig
+ 
+ #Whether to build debug version
+-BUILD_DEBUG_VERSION := 1
++#BUILD_DEBUG_VERSION := 1
+ 
+ #Enable this flag to build driver in diag version
+-BUILD_DIAG_VERSION := 1
++#BUILD_DIAG_VERSION := 1
+ 
+ #Do we panic on bug?  default is to warn
+-PANIC_ON_BUG := 1
++#PANIC_ON_BUG := 1
+ 
+ #Re-enable wifi on WDI timeout
+ RE_ENABLE_WIFI_ON_WDI_TIMEOUT := 0
+@@ -1010,7 +1010,6 @@ CDEFINES :=	-DANI_LITTLE_BYTE_ENDIAN \
+ 		-DWLAN_PERF \
+ 		-DPTT_SOCK_SVC_ENABLE \
+ 		-Wall\
+-		-Werror\
+ 		-D__linux__ \
+ 		-DHAL_SELF_STA_PER_BSS=1 \
+ 		-DWLAN_FEATURE_VOWIFI_11R \
+@@ -1050,7 +1049,9 @@ CDEFINES :=	-DANI_LITTLE_BYTE_ENDIAN \
+ 		-DFEATURE_WLAN_CH144 \
+ 		-DHTC_CRP_DEBUG \
+ 		-DWLAN_VOWIFI_DEBUG \
+-		-DATH_SUPPORT_DFS
++		-DATH_SUPPORT_DFS \
++		-Wno-misleading-indentation
++#-Werror is omitted
+ 
+ ifeq ($(CONFIG_WLAN_POWER_DEBUGFS), y)
+ CDEFINES += -DWLAN_POWER_DEBUGFS
+@@ -1145,7 +1146,7 @@ CDEFINES += -DMDNS_OFFLOAD
+ endif
+ 
+ ifeq (y,$(findstring y,$(CONFIG_ARCH_MSM) $(CONFIG_ARCH_QCOM)))
+-CDEFINES += -DMSM_PLATFORM
++#CDEFINES += -DMSM_PLATFORM
+ ifeq ($(CONFIG_CNSS), y)
+ ifeq ($(CONFIG_HIF_PCI), 1)
+ CDEFINES += -DFEATURE_BUS_BANDWIDTH
+-- 
+1.9.1
+

@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b433a746dd6fe8862028b1d7fc412a4d"
 
 DEPENDS = "zlib"
 
-SIMG2IMG_SRC ?= "git://git.freescale.com/imx/simg2img.git;protocol=git"
+SIMG2IMG_SRC ?= "git://source.codeaurora.org/external/imx/simg2img.git;protocol=https"
 SRC_BRANCH = "master"
 
 SRC_URI = "${SIMG2IMG_SRC};branch=${SRC_BRANCH}"

@@ -1,5 +1,5 @@
-NXP's 4.9.11-1.0.0 Yocto Project BSP
-================================================
+i.MX Linux Yocto Project BSP 4.9.88-2.0.0_ga Release
+=====================================================
 
 The following boards were tested in this release.
 
@@ -19,7 +19,12 @@ The following boards were tested in this release.
    * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
    * NXP i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
    * NXP i.MX 6SOLO SABRE Auto (imx6solosabreauto )
-   * NXP i.MX 7ULP EVK (imx7ulpevk) (this is Beta quality)
+   * NXP i.MX 7ULP EVK (imx7ulpevk)
+   * NXP i.MX 8MQuad EVK (imx8mqevk)
+
+Note the following i.MX 8 boards are not supported in this release.
+   * NXP i.MX 8QuadMax MEK (imx8qmmek)
+   * NXP i.MX 8QuadXPllus (imx8qxpmek)
 
  * i.MX Device Tree configurations for each machine
     Each machine files lists the associated device trees for that machine.
@@ -41,22 +46,27 @@ The following boards were tested in this release.
     imx6slevk - sd, spi-nor, epdc
     imx6sllevk - sd, epdc
     imx7ulpevk - sd, emmc
+    imx8mqevk - sd
 
 
 Quick Start Guide
 -----------------
-See the Freescale Yocto Project User's Guide for instructions on installing repo.
+See the i.MX Yocto Project User's Guide for instructions on installing repo.
 
-First install the i.MX NXP BSP repo
-$: repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-morty -m imx-4.1.33_7ulp_beta.xml
+First install the i.MX Linux BSP repo
+$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-rocko -m imx-4.9.88-2.0.0_ga.xml
 
-Download the Yocto Project NXP Layers:
+Download the Yocto Project Layers:
 $: repo sync
 
 If errors on repo init, remove the .repo directory and try repo init again.
 
-Run i.MX NXP Yocto Project Setup:
-$: MACHINE=< machine name> source fsl-setup-release.sh -b <build directory> -e <backend fb, wayland, x11>
+Run i.MX Linux Yocto Project Setup:
+$: [MACHINE=<machine>] [DISTRO=fsl-imx-<backend>] source ./fsl-setup-release.sh -b <build folder>
+
+where
+ <machine> defaults to imx6qsabresd
+ <build folder> specifies the build folder name 
 
 After this your system will be configured to start a Yocto Project build.
 
@@ -69,12 +79,16 @@ correctly. In this release two image recipes are provided that work on almost al
 DISTROs are new and the way to configure for any backends.  Use DISTRO= instead of the -e on the setup script.
 The -e parameter gets converted to the appropriate distro configuration.
 
-Note: DirectFB is no longer supported in i.MX graphic bilds.
+Note: 
+DirectFB is no longer supported in i.MX graphic builds.
+The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7.  i.MX 8 should use xwayland only.
+XWayland is the default distro for all i.MX families.
 
    fsl-image-validation-imx provides a gui image without QT.
    fsl-image-qt5-validation-imx provides a Qt5 image
 
 Here are some examples:
+(The example uses the imx6qsabresd MACHINE but substitute this with whatever you are using)
 
 Building X11
 ------------
@@ -108,6 +122,52 @@ Building Wayland-Weston (wayland)
 To run the QT5 examples use the following parameters:
 <QT5 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
 
+Building with Multilib support
+---------------------------
+Yocto Project is able to build libraries for different target optimizations, combing those in one system image,
+allowing the user to run both 32-bit and 64-bit applications.
+Here is an example to add multilib support (lib32).
+
+In local.conf
+- Define multilib targets
+require conf/multilib.conf
+MULTILIBS = "multilib:lib32"
+DEFAULTTUNE_virtclass-multilib-lib32 = "armv7athf-neon"
+
+- 32-bit libraries to be added into the image
+IMAGE_INSTALL_append = "lib32-glibc lib32-libgcc lib32-libstdc++"
+
+Enable/disable OPTEE
+---------------------------
+Optee feature is not enabled by default in the build. If you want to enable optee at build time, you need to add
+DISTRO_FEATURES_append = " optee" to local.conf file
+
+### To ENABLE optee, assuimg the machine supports it.
+echo "DISTRO_FEATURES_append = \" optee\"" >> conf/local.conf
+
+This updates the uboot config file, add the specific .dts files, and integrates the optee packages in rootfs.
+If you want to switch back to a non-optee configuration, you can just flash a uboot without optee enabled.
+
+Building u-boot for imx6 and imx7 legacy boards with optee disabled:
+
+cd <build folder>
+echo "UBOOT_CONFIG = \"sd-optee\"" >> conf/local.conf
+MACHINE=<MACHINE> bitbake u-boot-imx -c deploy -f
+cp tmp/deploy/images/<MACHINE>/u-boot-<MACHINE>.imx <folder where you keep the uboots>/u-boot-<MACHINE>'_'sd-optee.imx
+
+Flashing boot for imx6 and imx7 legacy boards:
+
+dd if=u-boot-<MACHINE>_sd-optee.imx of=<SDCARD> conv=notrunc seek=2 bs=512
+
+Building boot image for imx8 with optee disabled:
+
+To disable optee from the boot image you should remove tee.bin from eFIT image
+Please refer to README and <mkimage_fit_atf.sh> files from imx-boot for more information
+
+Flashing boot for imx8:
+
+dd if=imx-boot-<MACHINE>-sd.bin of=<SDCARD> conv=notrunc seek=33 bs=1K
+
 Hardware Floating Point
 -----------------------
 This release enables hardware floating point by default.  This feature is enabled in both the machine 
@@ -136,15 +196,17 @@ setup process because, once accepted, all further work in the Yocto environment 
 
 Chromium
 ---------
-The Chromium browser requires additional layers added in the fsl-release-setup.sh script.   
-To enable chromium requires the following steps:
+Add Chromium to your Wayland or X11-based image by adding the following lines to local.conf:
 
-In local.conf 
-- Add chromium into your install list:
-CORE_IMAGE_EXTRA_INSTALL += "chromium libexif"
-
-- Add commercial into the white list:
-LICENSE_FLAGS_WHITELIST="commercial"
+# Add Chromium
+IMAGE_INSTALL_append = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' chromium-ozone-wayland libexif', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', ' chromium-x11 libexif', \
+                                                        '', d), d)}"
+LICENSE_FLAGS_WHITELIST = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'commercial', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', 'commercial', \
+                                                        '', d), d)}"
 
 QTWebkit
 --------
@@ -155,7 +217,7 @@ Qt
 Note that Qt has both a commercial and open source license options.  Make the decision about which license
 to use before starting work on custom Qt applications.  Once custom Qt applications are started with an open source
 Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
-the differences between each license.   Default builds use an open source Qt license.
+the differences between each license.
 
 Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
 
