@@ -23,6 +23,7 @@ SRC_URI = "git://source.codeaurora.org/external/wlan/qcacld-2.0;protocol=https;b
            file://0014-CLD-CORE-add-CONFIG_HDD_WLAN_WAIT_TIME-support-for-u.patch \
            file://0015-CORE-HIF-enable-pcie-MSI-feature.patch \
            file://0016-MLK-18490-CORE-HDD-add-ssid-len-check.patch \
+           file://0017-MLK-18491-qcacld-2.0-avoid-overflow-of-bounce-buffer.patch \
 "
 
 # verison v4.5.23.1
