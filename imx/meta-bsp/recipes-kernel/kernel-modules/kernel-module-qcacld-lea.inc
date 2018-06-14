@@ -24,6 +24,7 @@ SRC_URI = "git://source.codeaurora.org/external/wlan/qcacld-2.0;protocol=https;b
            file://0015-CORE-HIF-enable-pcie-MSI-feature.patch \
            file://0016-MLK-18490-CORE-HDD-add-ssid-len-check.patch \
            file://0017-MLK-18491-qcacld-2.0-avoid-overflow-of-bounce-buffer.patch \
+           file://0018-MLK-18491-02-qcacld-2.0-fix-the-overflow-of-bounce-b.patch \
 "
 
 # verison v4.5.23.1
