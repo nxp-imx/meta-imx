@@ -11,7 +11,7 @@ SRC_URI_prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 SRCREV = "7c3e9f147c847db503c9a0fe0cc36f5353569ba7"
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF_append_imxfbdev = "WESTON_NATIVE_BACKEND=fbdev-backend.so"
+EXTRA_OECONF_append_imxfbdev = " WESTON_NATIVE_BACKEND=fbdev-backend.so"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
 IMX_REQUIRED_DISTRO_FEATURES_REMOVE          = ""
