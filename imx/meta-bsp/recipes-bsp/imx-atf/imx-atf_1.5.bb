@@ -5,15 +5,15 @@ SECTION = "BSP"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
 
-inherit pkgconfig deploy
+inherit fsl-eula-unpack pkgconfig deploy
 
-PV = "1.4+git${SRCPV}"
+PV = "1.5+git${SRCPV}"
 
 ATF_SRC ?= "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https"
-SRCBRANCH = "imx_1.4.y"
+SRCBRANCH = "imx_1.5.y"
 
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH}"
-SRCREV = "625d9ed11ccc136759da6500761b8e230aacaa06"
+SRCREV = "8592b0e37db6fe21d0fc5baa74614c78098f6d59"
 
 S = "${WORKDIR}/git"
 
