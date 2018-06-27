@@ -1,15 +1,15 @@
-SUMMARY_append_imxgpu = " (with i.MX support)"
+SUMMARY_append = " (with i.MX support)"
 
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
 
 # Use i.MX fork of weston for customizations.
-SRC_URI_remove_imxgpu = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
-SRC_URI_imxgpu += "file://0001-weston.ini.in-Modify-paths-to-point-to-right-directo.patch"
+SRC_URI_remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
+SRC_URI += "file://0001-weston.ini.in-Modify-paths-to-point-to-right-directo.patch"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-4.0"
-SRC_URI_prepend_imxgpu = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV_imxgpu = "7c3e9f147c847db503c9a0fe0cc36f5353569ba7"
-S_imxgpu = "${WORKDIR}/git"
+SRC_URI_prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
+SRCREV = "7c3e9f147c847db503c9a0fe0cc36f5353569ba7"
+S = "${WORKDIR}/git"
 
 EXTRA_OECONF_append_imxfbdev = " WESTON_NATIVE_BACKEND=fbdev-backend.so"
 
@@ -34,7 +34,7 @@ PACKAGECONFIG_remove_mx7 = "kms"
 
 PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
 
-do_install_append_imxgpu() {
+do_install_append() {
     if [ "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
         WESTON_INI_SRC=${B}/ivi-shell/weston.ini
     else
