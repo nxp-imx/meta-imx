@@ -142,8 +142,8 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS_append = " \
 # Firmware
 MACHINE_FIRMWARE ?= ""
 MACHINE_FIRMWARE_append = " firmware-imx-brcm"
-MACHINE_FIRMWARE_append_mx6 = " firmware-imx-sdma"
-MACHINE_FIRMWARE_append_mx7 = " firmware-imx-epdc firmware-imx-sdma"
+MACHINE_FIRMWARE_append_mx6 = " firmware-imx-sdma linux-firmware-bcm4339"
+MACHINE_FIRMWARE_append_mx7 = " firmware-imx-epdc firmware-imx-sdma linux-firmware-bcm4339"
 MACHINE_FIRMWARE_append_mx6q = " firmware-imx-vpu-imx6q"
 MACHINE_FIRMWARE_append_mx6dl = " firmware-imx-vpu-imx6d firmware-imx-epdc"
 MACHINE_FIRMWARE_append_mx6sl = " firmware-imx-epdc"
