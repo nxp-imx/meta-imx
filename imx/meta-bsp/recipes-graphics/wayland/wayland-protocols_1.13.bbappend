@@ -1,5 +1,5 @@
 WAYLAND_PROTOCOLS_SRC ?= "git://source.codeaurora.org/external/imx/wayland-protocols-imx.git;protocol=https"
 SRCBRANCH = "master"
 SRC_URI = "${WAYLAND_PROTOCOLS_SRC};branch=${SRCBRANCH} "
-SRCREV = "3ab537dc323e6a45bf9b6931117ce68ae9143c7b"
+SRCREV = "dacfb5e2d82eaf5fdc53fff5650b1bd061a7e95d"
 S = "${WORKDIR}/git"
