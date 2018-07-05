@@ -1,6 +1,6 @@
 # Copyright 2018 NXP
 
-require firmware-qca.inc
+require firmware-qca-${PV}.inc
 
 SUMMARY = "Qualcomm Wi-Fi and Bluetooth tools"
 DESCRIPTION = "Qualcomm Wi-Fi and Bluetooth tools for modules such as QCA6174A and QCA9377"
