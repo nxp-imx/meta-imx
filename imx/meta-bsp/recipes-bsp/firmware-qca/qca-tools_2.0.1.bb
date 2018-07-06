@@ -16,7 +16,6 @@ do_install () {
     install -d ${D}${sbindir}/fcc_tools
 
     cp -r ${S}/fcc_tools/${FCC_TOOLS_FOLDER} ${D}${sbindir}/fcc_tools
-    chmod 644 ${D}${sbindir}/fcc_tools/*
 }
 
 FILES_${PN} = " \
