@@ -1,7 +1,5 @@
 SUMMARY_append = " (with i.MX support)"
 
-DEPENDS_append_imxgpu2d = " virtual/libg2d"
-
 # Use i.MX fork of weston for customizations.
 SRC_URI_remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 SRC_URI += "file://0001-weston.ini.in-Modify-paths-to-point-to-right-directo.patch"
@@ -26,16 +24,14 @@ IMX_EXTRA_OECONF_OPENGL_imxgpu2d = " --disable-opengl"
 IMX_EXTRA_OECONF_OPENGL_imxgpu3d = ""
 EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_OPENGL}"
 
-# Disable G2D for parts without GPU support for 2D
-IMX_EXTRA_OECONF_G2D          = " --disable-imxg2d"
-IMX_EXTRA_OECONF_G2D_imxgpu2d = ""
-EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_G2D}"
-
 # drm is not supported on mx6/mx7
 PACKAGECONFIG_remove_mx6 = "kms"
 PACKAGECONFIG_remove_mx7 = "kms"
 
+PACKAGECONFIG_append_imxgpu2d = " imxg2d"
 PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
+
+PACKAGECONFIG[imxg2d] = "--enable-imxg2d,--disable-imxg2d,virtual/libg2d"
 
 do_install_append() {
     if [ "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
