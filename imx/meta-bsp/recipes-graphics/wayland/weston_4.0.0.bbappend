@@ -30,9 +30,11 @@ EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_OPENGL}"
 PACKAGECONFIG_remove_mx6 = "kms"
 PACKAGECONFIG_remove_mx7 = "kms"
 
+PACKAGECONFIG_append_imxgpu   = " imxgpu"
 PACKAGECONFIG_append_imxgpu2d = " imxg2d"
 PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
 
+PACKAGECONFIG[imxgpu] = "--enable-imxgpu,--disable-imxgpu"
 PACKAGECONFIG[imxg2d] = "--enable-imxg2d,--disable-imxg2d,virtual/libg2d"
 
 do_install_append() {
