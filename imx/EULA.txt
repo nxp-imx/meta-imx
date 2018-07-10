@@ -1,4 +1,4 @@
-LA_OPT_BASE_LICENSE v24 May 2018
+LA_OPT_BASE_LICENSE v26 June 2018
 
 
 
@@ -261,9 +261,9 @@ software, or any systems you design using the licensed software (if any).
 
 11.           INDEMNITY. You agree to fully defend and indemnify NXP from all
 claims, liabilities, and costs (including reasonable attorney's fees) related
-to (1) your use (including your contractors or distributee's use, if permitted)
-of the Licensed Software or (2) your violation of the terms and conditions of
-this Agreement.
+to (1) your use (including your contractor's or distributee's use, if
+permitted) of the Licensed Software or (2) your violation of the terms and
+conditions of this Agreement.
 
 12.           LIMITATION OF LIABILITY.  EXCLUDING LIABILITY FOR A BREACH OF
 SECTION 2 (LICENSE GRANTS), SECTION 3 (LICENSE LIMITATIONS AND RESTRICTIONS),
@@ -492,9 +492,10 @@ Use of Cambridge Silicon Radio, Inc. ("CSR") software is limited to evaluation
 and demonstration only.  Permitted distributions must be similarly limited.
 Further rights must be obtained directly from CSR.
 
-NXP Wireless Charging Library
-License to the Software is limited to use in inductive coupling or wireless
-charging applications
+Future Technology Devices International Ltd.
+Future Technology Devices International software must be used consistent with
+the terms found here:
+http://www.ftdichip.com/Drivers/FTDriverLicenceTerms.htm
 
 Global Locate (Broadcom Corporation)
 Use of Global Locate, Inc. software is limited to evaluation and demonstration
@@ -514,6 +515,11 @@ with NXP's Rayleigh products or your Authorized System.
 
 The confidentiality restrictions shall continue in force without limit in time
 notwithstanding the termination or expiration of this Agreement.
+
+LineStream Technologies
+LineStream Technologies software must be used consistent with the terms found
+here:
+http://www.linestream.com/eula
 
 Micrium
 uC/OS-II and uC/OS-III is provided in source form for FREE short-term
@@ -540,6 +546,7 @@ assistance, please contact NXP.  Microsoft Corporation is a third party
 beneficiary to this Agreement with the right to enforce the terms of this
 Agreement.  TO THE MAXIMUM EXTENT PERMITTED BY LAW, MICROSOFT AND ITS
 AFFILIATES DISCLAIM ANY WARRANTIES FOR THE
+
 MICROSOFT UNDERLYING LICENSED SOFTWARE.  TO THE MAXIMUM
 EXTENT PERMITTED BY LAW, NEITHER MICROSOFT NOR ITS AFFILIATES
 WILL BE LIABLE, WHETHER IN CONTRACT, TORT, OR OTHERWISE, FOR ANY
@@ -564,9 +571,29 @@ MQX RTOS Code
 MQX RTOS source code may not be re-distributed by any NXP Licensee under any
 circumstance, even by a signed written amendment to this Agreement.
 
+NXP Wireless Charging Library
+License to the Software is limited to use in inductive coupling or wireless
+charging applications
+
 Opus
 Use of Opus software must be consistent with the terms of the Opus license
 which can be found at: http://www.opus-codec.org/license/
+
+Oracle JRE (Java)
+The Oracle JRE must be used consistent with terms found here:
+http://java.com/license
+
+P&E Micro
+P&E Software must be used consistent with the terms found here:
+http://www.pemicro.com/licenses/gdbserver/license_gdb.pdf
+
+Pro Design Electronic
+Licensee may not modify, create derivative works based on, or copy the Pro
+Design software, documentation, hardware execution key or the accompanying
+materials.  Licensee shall not use Pro Design's or any of its licensors names,
+logos or trademarks to market the Authorized System.  Only NXP customers and
+distributors are permitted to further redistribute the Pro Design software and
+only as part of an Authorized System which contains the Pro Design software.
 
 Qualcomm Atheros, Inc.
 Notwithstanding anything in this Agreement, Qualcomm Atheros, Inc. Wi-Fi
@@ -631,14 +658,18 @@ Corporation Licensed Software on any memory device product.  SanDisk retains
 all rights to any modifications or derivative works to the SanDisk Corporation
 Licensed Software that you may create.
 
-SEGGER Microcontroller
+SEGGER Microcontroller - emWin Software
 Your use of SEGGER emWin software is restricted to NXP ARM7, ARM9, Cortex-M0,
 Cortex-M3, and Cortex-M4 based devices only.
 
+SEGGER Microcontroller - J-Link/J-Trace Software
+Segger software must be used consistent with the terms found here:
+http://www.segger.com/jlink-software.html
+
 Synopsys/Target Compiler Technologies
+
 Your use of the Synopsys/Target Compiler Technologies Licensed Software and
 related documentation is subject to the following:
-
 *       Duration of the license for the Licensed Software is limited to 12
 months, unless otherwise specified in the license file.
 *       The Licensed Software is usable by one user at a time on a single
