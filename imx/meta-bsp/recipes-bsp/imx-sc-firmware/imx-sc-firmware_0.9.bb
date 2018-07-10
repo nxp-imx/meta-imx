@@ -3,7 +3,7 @@
 
 DESCRIPTION = "i.MX System Controller Firmware"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=ab61cab9599935bfe9f700405ef00f28"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5ab1a30d0cd181e3408077727ea5a2db"
 SECTION = "BSP"
 
 inherit fsl-eula-unpack pkgconfig deploy

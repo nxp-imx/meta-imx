@@ -1,7 +1,7 @@
 # Copyright 2017-2018 NXP
 
 require recipes-bsp/firmware-imx/firmware-imx.inc
-LIC_FILES_CHKSUM = "file://COPYING;md5=ab61cab9599935bfe9f700405ef00f28"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5ab1a30d0cd181e3408077727ea5a2db"
 
 #BRCM firmware v1.141.100.6
 IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
