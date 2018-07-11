@@ -7,6 +7,6 @@ SRCBRANCH = "imx_4.9.y"
 LOCALVERSION = "-${SRCBRANCH}"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
-SRCREV = "7e7ddffbeac9fbd9732a04fb75c3c1eee3f9bcbb"
+SRCREV = "88214f571e7e3a793d40b20fb96af856a5a800a9"
 
 S = "${WORKDIR}/git"
