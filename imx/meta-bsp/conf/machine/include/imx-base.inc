@@ -188,13 +188,14 @@ MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT        = "0"
 MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_imxgpu = "1"
 
 
-# mx6 GPU libraries
+# GPU libraries
 PREFERRED_PROVIDER_virtual/egl_mx6q ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx6dl ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx6sl ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/egl_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/egl_mx7ulp ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx8 ?= "imx-gpu-viv"
 
 PREFERRED_PROVIDER_virtual/libgles1_mx6q ?= "imx-gpu-viv"
@@ -203,6 +204,7 @@ PREFERRED_PROVIDER_virtual/libgles1_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles1_mx6sl ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles1_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles1_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/libgles1_mx7ulp ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles1_mx8 ?= "imx-gpu-viv"
 
 PREFERRED_PROVIDER_virtual/libgles2_mx6q ?= "imx-gpu-viv"
@@ -211,6 +213,7 @@ PREFERRED_PROVIDER_virtual/libgles2_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx6sl ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles2_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles2_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/libgles2_mx7ulp ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx8 ?= "imx-gpu-viv"
 
 PREFERRED_PROVIDER_virtual/libgl_mx6q ?= "imx-gpu-viv"
@@ -219,15 +222,11 @@ PREFERRED_PROVIDER_virtual/libgl_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx6sl ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgl_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgl_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/libgl_mx7ulp ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx8 ?= "imx-gpu-viv"
 
-PREFERRED_PROVIDER_virtual/libg2d_mx6 ?= "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libg2d_mx6ul = ""
-PREFERRED_PROVIDER_virtual/libg2d_mx6ull = ""
-PREFERRED_PROVIDER_virtual/libg2d_mx8qm ?= "imx-dpu-g2d"
-PREFERRED_PROVIDER_virtual/libg2d_mx8qxp ?= "imx-dpu-g2d"
-PREFERRED_PROVIDER_virtual/libg2d_mx8mq ?= "imx-dpu-g2d"
-PREFERRED_PROVIDER_virtual/libg2d_mx8mm ?= "imx-gpu-g2d"
+PREFERRED_PROVIDER_virtual/libg2d        ?= "imx-gpu-g2d"
+PREFERRED_PROVIDER_virtual/libg2d_imxdpu ?= "imx-dpu-g2d"
 
 # Handle default kernel
 IMX_DEFAULT_KERNEL = "linux-imx"
