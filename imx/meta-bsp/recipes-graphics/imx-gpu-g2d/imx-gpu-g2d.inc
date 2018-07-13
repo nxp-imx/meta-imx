@@ -2,7 +2,7 @@
 # Copyright 2017-2018 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "GPU G2D library and apps for imx6, imx7ulp and imx8mm"
+DESCRIPTION = "GPU G2D library and apps for i.MX with 2D GPU and no DPU"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5ab1a30d0cd181e3408077727ea5a2db"
 
@@ -30,3 +30,9 @@ RDEPENDS_${PN} = "libgal-imx"
 FILES_${PN} = "${libdir}/libg2d* /opt"
 FILES_${PN}-dev = "${includedir}"
 INSANE_SKIP_${PN} = "ldflags"
+
+# Compatible with i.MX with 2D GPU but no DPU
+COMPATIBLE_MACHINE_2D          = "(^$)"
+COMPATIBLE_MACHINE_2D_imxgpu2d = "${MACHINE}"
+COMPATIBLE_MACHINE             = "${COMPATIBLE_MACHINE_2D}"
+COMPATIBLE_MACHINE_imxdpu      = "(^$)"
