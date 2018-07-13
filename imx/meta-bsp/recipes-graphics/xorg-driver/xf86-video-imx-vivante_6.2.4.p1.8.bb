@@ -23,7 +23,6 @@ EXTRA_OEMAKE_remove = "prefix=${D}/usr"
 EXTRA_OEMAKE += "prefix=${exec_prefix}"
 
 RDEPENDS_${PN}_remove = "libvivante-dri-mx6"
-RDEPENDS_${PN}_remove_mx8mq = "xserver-xorg-extension-glx"
 RDEPENDS_${PN}_append = " libvivante-dri-imx"
 
-COMPATIBLE_MACHINE = "(mx6|mx8|mx7ulp)"
+COMPATIBLE_MACHINE = "(mx6|mx7ulp)"
