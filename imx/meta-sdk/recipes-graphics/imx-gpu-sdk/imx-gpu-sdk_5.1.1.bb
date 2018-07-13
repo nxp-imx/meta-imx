@@ -55,8 +55,8 @@ do_compile () {
     FslBuild.py -vvvvv -t sdk --UseFeatures [${FEATURES}] --UseExtensions [${EXTENSIONS}] --Variants [WindowSystem=${BACKEND}] --BuildThreads ${BB_NUMBER_THREADS} -- install
 }
 
-HAS_DPU_BLIT            = "false"
-HAS_DPU_BLIT_imxdpublit = "true"
+HAS_DPU        = "false"
+HAS_DPU_imxdpu = "true"
 
 do_install () {
     install -d "${D}/opt/${PN}"
@@ -64,7 +64,7 @@ do_install () {
     rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
     rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
     rm -rf ${D}/opt/${PN}/GLES2/DeBayer
-    if ! ${HAS_DPU_BLIT}; then
+    if ${HAS_DPU}; then
         rm -rf ${D}/opt/${PN}/G2D/EightLayers
     fi
 }
