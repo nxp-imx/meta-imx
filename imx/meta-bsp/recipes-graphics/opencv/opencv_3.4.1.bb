@@ -48,6 +48,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://fixpkgconfig.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
     file://tinydnn.patch;patchdir=../contrib/ \
+    file://0003-To-fix-errors-as-following.patch \
     file://0001-Dont-use-isystem.patch \
     file://javagen.patch \
 "
