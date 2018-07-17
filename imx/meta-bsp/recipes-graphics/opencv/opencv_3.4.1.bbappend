@@ -44,16 +44,6 @@ do_check_opencv_extra_version() {
 }
 addtask check_opencv_extra_version before do_fetch
 
-do_compile_prepend() {
-    # A build break occurs if dnn and python3 are configured. Work around
-    # the problem by building opencv_dnn first. See
-    # https://github.com/opencv/opencv/issues/10474.
-    if ${@bb.utils.contains("PACKAGECONFIG", "dnn python3", "true", "false", d)}; then
-        bbnote VERBOSE=1 cmake --build '${B}' --target opencv_dnn -- ${PARALLEL_MAKE}
-        VERBOSE=1 cmake --build '${B}' --target opencv_dnn -- ${PARALLEL_MAKE}
-    fi
-}
-
 do_install_append() {
     if ${@bb.utils.contains("PACKAGECONFIG", "samples", "true", "false", d)}; then
         install -d ${D}${datadir}/OpenCV/samples/data
