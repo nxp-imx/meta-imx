@@ -1,6 +1,6 @@
 # Copyright 2018 NXP
 
-require firmware-qca-${PV}.inc
+require firmware-qca_${PV}.inc
 
 SUMMARY = "Qualcomm Wi-Fi and Bluetooth firmware"
 DESCRIPTION = "Qualcomm Wi-Fi and Bluetooth firmware for modules such as QCA9377-3"
