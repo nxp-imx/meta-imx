@@ -1,9 +1,20 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
-# Copyright (C) 2012-2014 O.S. Systems Software LTDA.
+# Copyright (C) 2012-2018 O.S. Systems Software LTDA.
 # Copyright 2017-2018 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require recipes-graphics/xorg-driver/xf86-video-imxfb-vivante.inc
+require recipes-graphics/xorg-driver/xorg-driver-video.inc
+
+PE = "3"
+
+inherit autotools-brokensep update-rc.d pkgconfig
+
+DEPENDS += "virtual/xserver virtual/libx11 libgal-imx imx-gpu-viv virtual/libg2d pixman"
+
+# Patch for MX8 DRM_VIV
+RDEPENDS_${PN}_append_mx8 = " kernel-module-vivante"
+
+LIC_FILES_CHKSUM = "file://COPYING-MIT;md5=b5e9d9f5c02ea831ab3ecf802bb7c4f3"
 
 SRCBRANCH = "imx_exa_viv6_g2d"
 XF86_VIDEO_IMX_VIVANTE_SRC ?= "git://source.codeaurora.org/external/imx/xf86-video-imx-vivante.git;protocol=https"
@@ -13,16 +24,45 @@ SRCREV = "946e8603ed9a52f36d305405dbb2ab8ff90943d0"
 
 S = "${WORKDIR}/git/"
 
-DEPENDS += "virtual/libg2d pixman"
+INITSCRIPT_PACKAGES = "xserver-xorg-extension-viv-autohdmi"
+INITSCRIPT_NAME = "rc.autohdmi"
+INITSCRIPT_PARAMS = "start 99 2 3 4 5 ."
 
-EXTRA_OEMAKE += "SDKTARGETSYSROOT=${STAGING_DIR_HOST}"
+EXTRA_OEMAKE += "prefix=${exec_prefix} \
+                 sysroot=${STAGING_DIR_TARGET} \
+                 SDKTARGETSYSROOT=${STAGING_DIR_HOST} \
+                 BUSID_HAS_NUMBER=1 \
+                 BUILD_IN_YOCTO=1 \
+                 XSERVER_GREATER_THAN_13=1"
 
-TARGET_CC_ARCH += "${LDFLAGS}"
+PACKAGES =+ "xserver-xorg-extension-viv-autohdmi"
 
-EXTRA_OEMAKE_remove = "prefix=${D}/usr"
-EXTRA_OEMAKE += "prefix=${exec_prefix}"
+do_install_append () {
+    install -d ${D}${includedir}
+    cp -axr ${S}/EXA/src/vivante_gal/vivante_priv.h ${D}${includedir}
+    cp -axr ${S}/EXA/src/vivante_gal/vivante_gal.h ${D}${includedir}
 
-RDEPENDS_${PN}_remove = "libvivante-dri-mx6"
-RDEPENDS_${PN}_append = " libvivante-dri-imx"
+    install -d ${D}/${sysconfdir}/init.d
+    install -m 755 ${WORKDIR}/rc.autohdmi ${D}/${sysconfdir}/init.d/rc.autohdmi
 
+    find ${D}${includedir} -type f -exec chmod 660 {} \;
+}
+
+RDEPENDS_${PN} += "libvivante-dri-imx \
+                   xserver-xorg-module-exa \
+                   mesa-driver-swrast \
+                   xserver-xorg-extension-dri \
+                   xserver-xorg-extension-dri2 \
+                   xserver-xorg-extension-glx"
+
+REALSOLIBS := "${SOLIBS}"
+SOLIBS = "${SOLIBSDEV}"
+
+FILES_${PN} = "${libdir}/*/*/*/vivante_drv${SOLIBS}"
+FILES_${PN}-dev = "${includedir} /usr/src ${libdir}/libfsl_x11_ext${SOLIBSDEV}"
+FILES_${PN}-dbg = "${libdir}/*/*/*/.debug ${libdir}/.debug/libfsl_x11_ext${SOLIBS} ${exec_prefix}/bin/.debug/autohdmi"
+
+FILES_xserver-xorg-extension-viv-autohdmi = " ${libdir}/libfsl_x11_ext${SOLIBS} ${exec_prefix}/bin/autohdmi ${sysconfdir}/init.d/rc.autohdmi"
+
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx6|mx7ulp)"
