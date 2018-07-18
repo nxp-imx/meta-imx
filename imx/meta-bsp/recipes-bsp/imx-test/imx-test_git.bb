@@ -8,7 +8,9 @@ SECTION = "base"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-DEPENDS  = "imx-lib alsa-lib libdrm linux-imx-headers"
+DEPENDS  = "alsa-lib libdrm linux-imx-headers"
+DEPENDS_append_mx6 = " imx-lib"
+DEPENDS_append_mx7 = " imx-lib"
 DEPENDS_append_imxvpu = " virtual/imxvpu"
 
 PE = "1"
