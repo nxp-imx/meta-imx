@@ -1,12 +1,17 @@
+# Copyright (C) 2012-2016 O.S. Systems Software LTDA.
 # Copyright (C) 2013-2016 Freescale Semiconductor
 # Copyright 2017-2018 NXP
 
-include recipes-bsp/imx-test/imx-test.inc
+SUMMARY = "Test programs for IMX BSP"
+DESCRIPTION = "Unit tests for the IMX BSP"
+SECTION = "base"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-DEPENDS_remove        = " virtual/kernel"
-DEPENDS_append        = " alsa-lib libdrm linux-imx-headers"
+DEPENDS  = "imx-lib alsa-lib libdrm linux-imx-headers"
 DEPENDS_append_imxvpu = " virtual/imxvpu"
 
+PE = "1"
 PV = "7.0+${SRCPV}"
 
 SRCBRANCH = "master"
@@ -18,13 +23,35 @@ SRCREV = "c5e65f91dd987f1a99b7e9f990e95c2679e59ca1"
 
 S = "${WORKDIR}/git"
 
+inherit module-base
+
+INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+
+PLATFORM_mx6q  = "IMX6Q"
+PLATFORM_mx6dl = "IMX6Q"
+PLATFORM_mx6sl = "IMX6SL"
+PLATFORM_mx6sll = "IMX6SL"
+PLATFORM_mx6sx = "IMX6SX"
+PLATFORM_mx6ul = "IMX6UL"
+PLATFORM_mx7d  = "IMX7D"
+PLATFORM_mx7ulp  = "IMX7D"
 PLATFORM_mx8 = "IMX8"
 
-IMX_HAS_VPU         = "false"
-IMX_HAS_VPU_imxvpu  = "true"
-EXTRA_OEMAKE       += "HAS_VPU=${IMX_HAS_VPU}"
-
 PARALLEL_MAKE="-j 1"
+EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
+
+PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+PACKAGECONFIG_append_imxvpu = " vpu"
+
+PACKAGECONFIG[x11] = ",,libx11 libxdamage libxrender libxrandr"
+PACKAGECONFIG[vpu] = "HAS_VPU=true,HAS_VPU=false,virtual/imxvpu"
+
+# Required so the fixdep binary is generated
+addtask make_scripts after do_patch before do_compile
+do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
+do_make_scripts[deptask] = "do_populate_sysroot"
+do_make_scripts[depends] += "virtual/kernel:do_install"
 
 do_compile() {
     CFLAGS="${TOOLCHAIN_OPTIONS}"
@@ -36,7 +63,15 @@ do_compile() {
                PLATFORM=${PLATFORM}
 }
 
-do_install_append() {
+do_install() {
+    oe_runmake DESTDIR=${D}/unit_tests \
+               PLATFORM=${PLATFORM} \
+               install
+
+    if [ -e ${WORKDIR}/clocks.sh ]; then
+        install -m 755 ${WORKDIR}/clocks.sh ${D}/unit_tests/clocks.sh
+    fi
+
     install -d -m 0755 ${D}/home/root/
     install -m 0644 ${WORKDIR}/memtool_profile ${D}/home/root/.profile
 }
@@ -44,7 +79,10 @@ do_install_append() {
 # Avoid race condition between tasks. This should be upstreamed to meta-freescale.
 addtask make_scripts after do_configure before do_compile
 
-FILES_${PN} += " /home/root/.profile "
+FILES_${PN} += "/unit_tests /home/root/.profile "
+RDEPENDS_${PN} = "bash"
+
+FILES_${PN}-dbg += "/unit_tests/.debug"
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
 
