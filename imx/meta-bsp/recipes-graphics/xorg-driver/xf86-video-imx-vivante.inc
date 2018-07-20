@@ -33,6 +33,7 @@ EXTRA_OEMAKE += "prefix=${exec_prefix} \
                  BUSID_HAS_NUMBER=1 \
                  BUILD_IN_YOCTO=1 \
                  XSERVER_GREATER_THAN_13=1"
+TARGET_CC_ARCH += "${LDFLAGS}"
 
 PACKAGES =+ "xserver-xorg-extension-viv-autohdmi"
 
