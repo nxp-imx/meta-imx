@@ -115,9 +115,12 @@ do_deploy () {
         install -m 0644 ${S}/firmware/hdmi/cadence/hdmitxfw.bin ${DEPLOYDIR}
         install -m 0644 ${S}/firmware/hdmi/cadence/hdmirxfw.bin ${DEPLOYDIR}
         install -m 0644 ${S}/firmware/hdmi/cadence/dpfw.bin ${DEPLOYDIR}
+        # Deploy seco
+        install -m 0644 ${S}/firmware/seco/mx8qm-ahab-container.img ${DEPLOYDIR}
+
     elif [ "${IS_MX8}" = "8qx" ]; then
         # Deploy seco
-        install -m 0644 ${S}/firmware/seco/ahab-container.img ${DEPLOYDIR}
+        install -m 0644 ${S}/firmware/seco/mx8qx-ahab-container.img ${DEPLOYDIR}
     fi
 }
 
