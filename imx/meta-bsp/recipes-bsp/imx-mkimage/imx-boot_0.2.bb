@@ -16,9 +16,8 @@ BOOT_TOOLS = "imx-boot-tools"
 BOOT_NAME = "imx-boot"
 PROVIDES = "${BOOT_NAME}"
 
-IMX_FIRMWARE       = "imx-sc-firmware"
+IMX_FIRMWARE = "firmware-imx imx-sc-firmware"
 IMX_FIRMWARE_mx8m = "firmware-imx"
-IMX_FIRMWARE_mx8qxp = "firmware-imx imx-sc-firmware"
 DEPENDS += " \
     u-boot \
     ${IMX_FIRMWARE} \
