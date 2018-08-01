@@ -11,7 +11,7 @@ SRC_URI_append_mx8mq = " file://0001-weston.ini-using-argb8888-as-gbm-default-on
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-4.0"
 SRC_URI_prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
-SRCREV = "1cc4f0ff5d3feb6f325d103bebd6a528d44f9017"
+SRCREV = "b61428379c1b7114e2e8cf3f7e39927cc04ead5f"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF_append_imxfbdev = " WESTON_NATIVE_BACKEND=fbdev-backend.so"
