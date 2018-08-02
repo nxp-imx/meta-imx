@@ -13,8 +13,8 @@ DEPENDS += "qtmultimedia gstreamer1.0 gstreamer1.0-plugins-base imx-gst1.0-plugi
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
 "
-SRC_URI[md5sum] = "a4df8c4b998d9de7fde469d20d3cd8b1"
-SRC_URI[sha256sum] = "8f64a8d232dc1e3f03873b6702c281750bae9d720e89e414c0104f0ded3d2f84"
+SRC_URI[md5sum] = "017b9495681c2ade9aed2cd5b193e76d"
+SRC_URI[sha256sum] = "c197f134db3f8f3e5ef7a0153a15a8baba998eb7d03ba13beef7a4189eb46070"
 
 do_install () {
     install -d ${D}${datadir}/qt5/examples/multimedia/
