@@ -7,12 +7,12 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 
 inherit pythonnative
-DEPENDS = "optee-os-imx optee-client-imx python-pycrypto-native"
+DEPENDS = "optee-os-imx optee-client-imx python-pycrypto-native openssl"
 
-SRCBRANCH = "imx_3.0.y"
+SRCBRANCH = "imx_3.2.y"
 OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
-SRCREV = "b7b6c4d4af9607a3987988ae62b0957e659a32ef"
+SRCREV = "302cec4bb41f911dd2f671386fa541753e5268a8"
 
 S = "${WORKDIR}/git"
 
@@ -28,7 +28,7 @@ do_compile () {
     export CROSS_COMPILE_HOST=${HOST_PREFIX}
     export CROSS_COMPILE_TA=${HOST_PREFIX}
     export CROSS_COMPILE=${HOST_PREFIX}
-
+    export OPTEE_OPENSSL_EXPORT=${STAGING_INCDIR}/openssl
     oe_runmake V=1
 }
 
