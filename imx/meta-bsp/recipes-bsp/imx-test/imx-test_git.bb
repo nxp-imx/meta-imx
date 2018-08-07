@@ -49,12 +49,6 @@ PACKAGECONFIG_append_imxvpu = " vpu"
 PACKAGECONFIG[x11] = ",,libx11 libxdamage libxrender libxrandr"
 PACKAGECONFIG[vpu] = "HAS_VPU=true,HAS_VPU=false,virtual/imxvpu"
 
-# Required so the fixdep binary is generated
-addtask make_scripts after do_patch before do_compile
-do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
-do_make_scripts[deptask] = "do_populate_sysroot"
-do_make_scripts[depends] += "virtual/kernel:do_install"
-
 do_compile() {
     CFLAGS="${TOOLCHAIN_OPTIONS}"
     oe_runmake V=1 VERBOSE='' \
@@ -77,9 +71,6 @@ do_install() {
     install -d -m 0755 ${D}/home/root/
     install -m 0644 ${WORKDIR}/memtool_profile ${D}/home/root/.profile
 }
-
-# Avoid race condition between tasks. This should be upstreamed to meta-freescale.
-addtask make_scripts after do_configure before do_compile
 
 FILES_${PN} += "/unit_tests /home/root/.profile "
 RDEPENDS_${PN} = "bash"
