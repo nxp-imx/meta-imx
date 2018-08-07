@@ -2,7 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
 SRC_URI += " \
     file://icd_VSI.json \
-    file://0001-CMakeLists.txt-Modify-the-library-path-to-point-to-u.patch \
+    file://0001-CMakeLists.txt-Modify-the-library-path-to-point-to.patch \
 "
 # choose wayland
 PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '' ,d)}"
