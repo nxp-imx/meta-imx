@@ -41,6 +41,7 @@ PROVIDES += " \
     libgal-imx \
     virtual/egl \
     virtual/libopenvg \
+    virtual/libgbm \
     virtual/opencl-headers \
     virtual/opencl-icd \
     ${EXTRA_PROVIDES} \
