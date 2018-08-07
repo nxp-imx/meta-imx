@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 inherit pythonnative
 DEPENDS = "optee-os-imx optee-client-imx python-pycrypto-native"
 
-SRCBRANCH = "imx_4.9.88_2.0.0_ga"
+SRCBRANCH = "imx_3.0.y"
 OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
 SRCREV = "b7b6c4d4af9607a3987988ae62b0957e659a32ef"
@@ -44,3 +44,5 @@ do_install () {
 }
 
 FILES_${PN} = "/usr/bin/ /lib*/optee_armtz/"
+
+COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"

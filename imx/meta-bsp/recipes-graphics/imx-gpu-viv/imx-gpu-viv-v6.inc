@@ -5,7 +5,7 @@
 DESCRIPTION = "GPU driver and apps for imx"
 SECTION = "libs"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=75abe2fa1d16ca79f87cde926f05f72d"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5ab1a30d0cd181e3408077727ea5a2db"
 
 DEPENDS += \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
@@ -43,7 +43,6 @@ PROVIDES += " \
     virtual/libopenvg \
     virtual/opencl-headers \
     virtual/opencl-icd \
-    virtual/wayland-egl \
     ${EXTRA_PROVIDES} \
 "
 
@@ -51,7 +50,9 @@ RPROVIDES_${PN}_imxgpu3d += "imx-gpu-viv"
 
 PE = "1"
 
-inherit fsl-eula-unpack
+inherit fsl-eula-unpack distro_features_check
+
+REQUIRED_DISTRO_FEATURES_mx8 = "wayland"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
@@ -74,7 +75,6 @@ PACKAGES_2     = ""
 PACKAGES_2_mx8 = "libgbm-imx libgbm-imx-dev"
 PACKAGES_3 = "libwayland-viv-imx libwayland-viv-imx-dev \
 	libgc-wayland-protocol-imx libgc-wayland-protocol-imx-dev \
-	libwayland-egl-imx-dev \
 	imx-gpu-viv-tools \
 	imx-gpu-viv-demos \
 	libvulkan-imx libvulkan-imx-dev \
@@ -172,7 +172,6 @@ do_install () {
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/vg.pc ${D}${libdir}/pkgconfig/vg.pc
         #install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
-        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-egl.pc ${D}${libdir}/pkgconfig/wayland-egl.pc
         #install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
 
        if [ "${USE_X11}" = "yes" ]; then
@@ -200,7 +199,7 @@ do_install () {
 
         # Regular framebuffer
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_linuxfb.pc ${D}${libdir}/pkgconfig/egl.pc
-        
+
         backend=fb
 
     fi
@@ -263,7 +262,7 @@ do_install () {
     if [ "${IS_MX6SL}" = "1" ]; then
         rm -rf ${D}${libdir}/libCLC* ${D}${includedir}/CL \
                \
-               ${D}${libdir}/libGL* ${D}${includedir}/GL* ${D}${libdir}/pkgconfig/gl.pc \ 
+               ${D}${libdir}/libGL* ${D}${includedir}/GL* ${D}${libdir}/pkgconfig/gl.pc \
                \
                ${D}${libdir}/libGLES* ${D}${libdir}/pkgconfig/gles*.pc \
                \
@@ -299,7 +298,6 @@ INSANE_SKIP_libegl-imx += "dev-so"
 FILES_libegl-imx = "${libdir}/libEGL${REALSOLIBS} ${libdir}/libEGL${SOLIBSDEV} "
 FILES_libegl-imx-dev = "${includedir}/EGL ${includedir}/KHR ${libdir}/pkgconfig/egl.pc"
 #RDEPENDS_libegl-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'libgc-wayland-protocol-imx libwayland-viv-imx libgc-wayland-protocol-imx', '', d)}"
-RDEPENDS_libegl-imx-dev += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'libwayland-egl-imx-dev', '', d)}"
 
 FILES_libgal-imx = "${libdir}/libGAL${SOLIBS} ${libdir}/libGAL_egl${SOLIBS}"
 FILES_libgal-imx-dev = "${libdir}/libGAL${SOLIBSDEV} ${includedir}/HAL"
@@ -370,8 +368,6 @@ RPROVIDES_libwayland-viv-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'waylan
 INSANE_SKIP_libgc-wayland-protocol-imx += "dev-so"
 FILES_libgc-wayland-protocol-imx = "${libdir}/libgc_wayland_protocol${REALSOLIBS} ${libdir}/libgc_wayland_protocol${SOLIBS}"
 FILES_libgc-wayland-protocol-imx-dev = "${libdir}/libgc_wayland_protocol${SOLIBSDEV} ${libdir}/pkgconfig/gc_wayland_protocol.pc"
-
-FILES_libwayland-egl-imx-dev = "${libdir}/pkgconfig/wayland-egl.pc"
 
 FILES_imx-gpu-viv-tools = "${bindir}/gmem_info"
 

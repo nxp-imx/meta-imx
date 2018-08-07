@@ -30,6 +30,7 @@ SOC_TOOLS_TEST_imxgpu  = "imx-test imx-gpu-viv-demos"
 
 RDEPENDS_${PN} += " \
     ${SOC_TOOLS_TESTAPPS} \
+    python-pip \
     procps \
     ptpd \
     linuxptp \

@@ -10,7 +10,7 @@ SRC_URI += " \
 inherit systemd
 
 SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)}"
-SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'psplash-start.service psplash-basic.service psplash-network.service psplash-quit.service', '', d)}"
+SYSTEMD_SERVICE_${PN}_append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' psplash-start.service psplash-basic.service psplash-network.service psplash-quit.service', '', d)}"
 
 do_install_append () {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then

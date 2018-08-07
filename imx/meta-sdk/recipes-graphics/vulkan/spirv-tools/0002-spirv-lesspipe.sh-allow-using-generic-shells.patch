@@ -1,0 +1,24 @@
+From 93a770330aa21c91a9b7fce798b73d31cad8f16a Mon Sep 17 00:00:00 2001
+From: Awais Belal <awais_belal@mentor.com>
+Date: Tue, 25 Oct 2016 16:12:08 +0500
+Subject: [PATCH] spirv-lesspipe.sh: allow using generic shells
+
+The script is harmless for any type of shell and
+shouldn't be tied with bash to allow catering
+more possibilities.
+
+Signed-off-by: Awais Belal <awais_belal@mentor.com>
+---
+ tools/lesspipe/spirv-lesspipe.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Index: git/tools/lesspipe/spirv-lesspipe.sh
+===================================================================
+--- git.orig/tools/lesspipe/spirv-lesspipe.sh	2018-05-01 13:37:34.294579393 -0500
++++ git/tools/lesspipe/spirv-lesspipe.sh	2018-05-01 13:38:35.000000000 -0500
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/bin/sh
+ # Copyright (c) 2016 The Khronos Group Inc.
+ 
+ # Licensed under the Apache License, Version 2.0 (the "License");

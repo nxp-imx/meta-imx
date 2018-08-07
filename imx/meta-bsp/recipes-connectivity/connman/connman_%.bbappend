@@ -8,6 +8,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI += " \
              file://connmand-env \
              file://connman-env.service \
+             file://replace-hardcode-and-add-EnvironmentFile-and-Wants.patch \
 "
 
 HAS_SYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"

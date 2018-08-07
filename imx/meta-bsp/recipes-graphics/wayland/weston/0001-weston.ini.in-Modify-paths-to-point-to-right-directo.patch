@@ -1,0 +1,155 @@
+From b9c05520c4ff688c6488d8ca1e1defc592449d49 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Wed, 2 May 2018 11:51:45 -0500
+Subject: [PATCH] weston.ini.in: Modify paths to point to right directories
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ Makefile.am             |  2 ++
+ ivi-shell/weston.ini.in | 56 ++++++++++++++++++++++++-------------------------
+ 2 files changed, 30 insertions(+), 28 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 870e347..427cb5b 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -27,6 +27,7 @@ ivi-shell/weston.ini : $(srcdir)/ivi-shell/weston.ini.in
+ 		-e 's|@abs_top_builddir[@]|$(abs_top_builddir)|g' \
+ 		-e 's|@abs_top_srcdir[@]|$(abs_top_srcdir)|g' \
+ 		-e 's|@libexecdir[@]|$(libexecdir)|g' \
++		-e 's|@datadir[@]|$(datadir)|g' \
+ 		-e 's|@plugin_prefix[@]||g' \
+ 		$< > $@
+ 
+@@ -43,6 +44,7 @@ AM_CPPFLAGS = 					\
+ 	-I$(top_builddir)/protocol		\
+ 	-DLIBWESTON_MODULEDIR='"$(libweston_moduledir)"' \
+ 	-DLIBEXECDIR='"$(libexecdir)"'		\
++	-DDATADIR='"$(datadir)"'		\
+ 	-DBINDIR='"$(bindir)"'
+ 
+ CLEANFILES = weston.ini				\
+diff --git a/ivi-shell/weston.ini.in b/ivi-shell/weston.ini.in
+index 3f11e1c..d0efd03 100644
+--- a/ivi-shell/weston.ini.in
++++ b/ivi-shell/weston.ini.in
+@@ -3,7 +3,7 @@ shell=@plugin_prefix@ivi-shell.so
+ modules=@plugin_prefix@hmi-controller.so
+ 
+ [ivi-shell]
+-ivi-shell-user-interface=@abs_top_builddir@/weston-ivi-shell-user-interface
++ivi-shell-user-interface=@libexecdir@/weston-ivi-shell-user-interface
+ 
+ #developermode=true
+ 
+@@ -19,20 +19,20 @@ application-layer-id=4000
+ 
+ transition-duration=300
+ 
+-background-image=@abs_top_srcdir@/data/background.png
++background-image=@datadir@/weston/background.png
+ background-id=1001
+-panel-image=@abs_top_srcdir@/data/panel.png
++panel-image=@datadir@/weston/panel.png
+ panel-id=1002
+ surface-id-offset=10
+-tiling-image=@abs_top_srcdir@/data/tiling.png
++tiling-image=@datadir@/weston/tiling.png
+ tiling-id=1003
+-sidebyside-image=@abs_top_srcdir@/data/sidebyside.png
++sidebyside-image=@datadir@/weston/sidebyside.png
+ sidebyside-id=1004
+-fullscreen-image=@abs_top_srcdir@/data/fullscreen.png
++fullscreen-image=@datadir@/weston/fullscreen.png
+ fullscreen-id=1005
+-random-image=@abs_top_srcdir@/data/random.png
++random-image=@datadir@/weston/random.png
+ random-id=1006
+-home-image=@abs_top_srcdir@/data/home.png
++home-image=@datadir@/weston/home.png
+ home-id=1007
+ workspace-background-color=0x99000000
+ workspace-background-id=2001
+@@ -43,59 +43,59 @@ path=@libexecdir@/weston-keyboard
+ [ivi-launcher]
+ workspace-id=0
+ icon-id=4001
+-icon=@abs_top_srcdir@/data/icon_ivi_flower.png
+-path=@abs_top_builddir@/weston-flower
++icon=@datadir@/weston/icon_ivi_flower.png
++path=@bindir@/weston-flower
+ 
+ [ivi-launcher]
+ workspace-id=0
+ icon-id=4002
+-icon=@abs_top_srcdir@/data/icon_ivi_clickdot.png
+-path=@abs_top_builddir@/weston-clickdot
++icon=@datadir@/weston/icon_ivi_clickdot.png
++path=@bindir@/weston-clickdot
+ 
+ [ivi-launcher]
+ workspace-id=1
+ icon-id=4003
+-icon=@abs_top_srcdir@/data/icon_ivi_simple-egl.png
+-path=@abs_top_builddir@/weston-simple-egl
++icon=@datadir@/weston/icon_ivi_simple-egl.png
++path=@bindir@/weston-simple-egl
+ 
+ [ivi-launcher]
+ workspace-id=1
+ icon-id=4004
+-icon=@abs_top_srcdir@/data/icon_ivi_simple-shm.png
+-path=@abs_top_builddir@/weston-simple-shm
++icon=@datadir@/weston/icon_ivi_simple-shm.png
++path=@bindir@/weston-simple-shm
+ 
+ [ivi-launcher]
+ workspace-id=2
+ icon-id=4005
+-icon=@abs_top_srcdir@/data/icon_ivi_smoke.png
+-path=@abs_top_builddir@/weston-smoke
++icon=@datadir@/weston/icon_ivi_smoke.png
++path=@bindir@/weston-smoke
+ 
+ [ivi-launcher]
+ workspace-id=3
+ icon-id=4006
+-icon=@abs_top_srcdir@/data/icon_ivi_flower.png
+-path=@abs_top_builddir@/weston-flower
++icon=@datadir@/weston/icon_ivi_flower.png
++path=@bindir@/weston-flower
+ 
+ [ivi-launcher]
+ workspace-id=3
+ icon-id=4007
+-icon=@abs_top_srcdir@/data/icon_ivi_clickdot.png
+-path=@abs_top_builddir@/weston-clickdot
++icon=@datadir@/weston/icon_ivi_clickdot.png
++path=@bindir@/weston-clickdot
+ 
+ [ivi-launcher]
+ workspace-id=3
+ icon-id=4008
+-icon=@abs_top_srcdir@/data/icon_ivi_simple-egl.png
+-path=@abs_top_builddir@/weston-simple-egl
++icon=@datadir@/weston/icon_ivi_simple-egl.png
++path=@bindir@/weston-simple-egl
+ 
+ [ivi-launcher]
+ workspace-id=3
+ icon-id=4009
+-icon=@abs_top_srcdir@/data/icon_ivi_simple-shm.png
+-path=@abs_top_builddir@/weston-simple-shm
++icon=@datadir@/weston/icon_ivi_simple-shm.png
++path=@bindir@/weston-simple-shm
+ 
+ [ivi-launcher]
+ workspace-id=3
+ icon-id=4010
+-icon=@abs_top_srcdir@/data/icon_ivi_smoke.png
+-path=@abs_top_builddir@/weston-smoke
++icon=@datadir@/weston/icon_ivi_smoke.png
++path=@bindir@/weston-smoke
+-- 
+1.9.1
+

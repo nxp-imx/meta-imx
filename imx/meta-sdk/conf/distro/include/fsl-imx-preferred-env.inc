@@ -41,24 +41,21 @@ DEFAULTTUNE_mx8 = "aarch64"
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
 
-# preferred versions of recipes-graphics
-PREFERRED_PROVIDER_virtual/libg2d_mx6 = "imx-gpu-g2d"
-PREFERRED_PROVIDER_virtual/libg2d_mx7ulp = "imx-gpu-g2d"
-PREFERRED_PROVIDER_virtual/egl_mx7ulp = "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libgles1_mx7ulp = "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libgles2_mx7ulp = "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libgl_mx7ulp = "imx-gpu-viv"
+IMX_GPU_VERSION            ?= "6.2.4.p1.8"
+IMX_GPU_VERSION_SUFFIX      = "aarch32"
+IMX_GPU_VERSION_SUFFIX_mx8  = "aarch64"
 
-GRAPHICS_VERSION            ?= "6.2.4.p1.2"
-GRAPHICS_VERSION_SUFFIX      = "aarch32"
-GRAPHICS_VERSION_SUFFIX_mx8  = "aarch64"
-
-PREFERRED_VERSION_imx-gpu-viv               = "${GRAPHICS_VERSION}-${GRAPHICS_VERSION_SUFFIX}"
-PREFERRED_VERSION_xf86-video-imx-vivante    = "${GRAPHICS_VERSION}"
-PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${GRAPHICS_VERSION}"
-PREFERRED_VERSION_imx-gpu-g2d               = "${GRAPHICS_VERSION}"
+PREFERRED_VERSION_imx-gpu-viv               = "${IMX_GPU_VERSION}-${IMX_GPU_VERSION_SUFFIX}"
+PREFERRED_VERSION_xf86-video-imx-vivante    = "${IMX_GPU_VERSION}"
+PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${IMX_GPU_VERSION}"
+PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}-${IMX_GPU_VERSION_SUFFIX}"
 PREFERRED_VERSION_openssl                   = "1.0.2m"
 PREFERRED_VERSION_openssl-native            = "1.0.2m"
+
+PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.14.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.14.0.imx"
+PREFERRED_VERSION_gstreamer1.0              = "1.14.0.imx"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"
