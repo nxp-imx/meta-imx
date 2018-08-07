@@ -3,7 +3,7 @@ DESCRIPTION = "eRPC (Embedded RPC) is an open source Remote Procedure Call (RPC)
 LICENSE = "BSD-3"
 AUTHOR = "Jun Zhu <junzhu@nxp.com>"
 
-RDEPENDS_${PN} = "python-pyserial python-enum34 python-argparse python-importlib python-threading python-shell"
+RDEPENDS_${PN} = "python-pyserial python-enum34 python-argparse python-threading python-shell"
 
 LIC_FILES_CHKSUM = "file://readme.md;md5=d3d754f8e1f07a15e65da588118bf793"
 
