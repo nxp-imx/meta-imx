@@ -41,7 +41,7 @@ DEFAULTTUNE_mx8 = "aarch64"
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
 
-IMX_GPU_VERSION            ?= "6.2.4.p1.8"
+IMX_GPU_VERSION            ?= "6.2.4.p2.1"
 IMX_GPU_VERSION_SUFFIX      = "aarch32"
 IMX_GPU_VERSION_SUFFIX_mx8  = "aarch64"
 
