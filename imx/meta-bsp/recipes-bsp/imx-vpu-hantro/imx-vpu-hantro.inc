@@ -4,9 +4,8 @@ DESCRIPTION = "i.MX HANTRO VPU library"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://vpu/EULA.txt;md5=b063366b066c9f10037c59756a9ced54"
 
-# Require ion.h from kernel userspace headers
-DEPENDS = "virtual/kernel"
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
+# Require ion.h from linux-imx-headers, under usr/imx/include
+DEPENDS = " linux-imx-headers"
 
 inherit fsl-eula-unpack
 
