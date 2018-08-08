@@ -66,6 +66,11 @@ do_install() {
     install -d ${D}${base_libdir}/firmware/bcm/1CX_BCM4356
     cp -rfv git/brcm/1CX_BCM4356/fw_bcmdhd.bin ${D}${base_libdir}/firmware/bcm/1CX_BCM4356
 
+    # Install SDMA Firmware: sdma-imx6q.bin & sdma-imx7d.bin into lib/firmware/imx/sdma
+    install -d ${D}${base_libdir}/firmware/imx/sdma
+    mv ${D}${base_libdir}/firmware/sdma/sdma-imx6q.bin ${D}${base_libdir}/firmware/imx/sdma
+    mv ${D}${base_libdir}/firmware/sdma/sdma-imx7d.bin ${D}${base_libdir}/firmware/imx/sdma
+
     # No need to do install for ddr & hdmi binaries
     if [ -d ${D}${base_libdir}/firmware/ddr ]; then
         rm -rf ${D}${base_libdir}/firmware/ddr
@@ -143,8 +148,9 @@ ALLOW_EMPTY_${PN} = "1"
 
 PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-*"
 
-PACKAGES =+ "${PN}-epdc ${PN}-brcm ${PN}-scfw"
+PACKAGES =+ "${PN}-epdc ${PN}-brcm ${PN}-scfw ${PN}-sdma"
 
 FILES_${PN}-epdc = "${base_libdir}/firmware/imx/epdc/"
 FILES_${PN}-brcm = "${base_libdir}/firmware/bcm/*/*.bin ${base_libdir}/firmware/bcm/*/*.cal ${sysconfdir}/firmware/"
 FILES_${PN}-scfw = "${base_libdir}/firmware/scfw/"
+FILES_${PN}-sdma = " ${base_libdir}/firmware/imx/sdma"
