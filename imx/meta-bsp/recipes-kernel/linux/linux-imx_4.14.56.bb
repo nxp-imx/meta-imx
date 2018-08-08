@@ -11,8 +11,6 @@ i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU 
 
 DEPENDS += "lzop-native bc-native"
 
-SRC_URI += "file://0001-ion-Add-userspace-header-ion.h-to-Linux-userspace.patch"
-
 DEFAULT_PREFERENCE = "1"
 
 DO_CONFIG_V7_COPY = "no"
@@ -40,3 +38,7 @@ COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
 EXTRA_OEMAKE_append_mx6 = " ARCH=arm"
 EXTRA_OEMAKE_append_mx7 = " ARCH=arm"
 EXTRA_OEMAKE_append_mx8 = " ARCH=arm64"
+
+#KERNEL_DEVICETREE_remove = "freescale/fsl-imx8mm-evk.dtb freescale/fsl-imx8mm-evk-ak4497.dtb "
+#KERNEL_DEVICETREE_remove = "freescale/fsl-imx8mm-evk-m4.dtb freescale/fsl-imx8mm-evk-ak5558.dtb "
+#KERNEL_DEVICETREE_remove = "freescale/fsl-imx8mm-evk-audio-tdm.dtb "
