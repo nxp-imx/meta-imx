@@ -1,7 +1,7 @@
-From 7984a38559bf13bfc3aeff868faf3aacea4df20b Mon Sep 17 00:00:00 2001
+From 8b130e7d3d5c466d7907f010d04c1dd46190aa6f Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Mon, 14 May 2018 14:19:46 +0800
-Subject: [PATCH 01/11] CORE: QCA9377 CLD LEA 2.0 porting to support Android O
+Subject: [PATCH 01/23] CORE: QCA9377 CLD LEA 2.0 porting to support Android O
 
 QCA9377 CLD LEA 2.0 porting to support Android O.
 

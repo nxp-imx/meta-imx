@@ -1,7 +1,7 @@
-From 5294a5788854d05ebea6e4f0d103d42fac220f00 Mon Sep 17 00:00:00 2001
+From 1fb1f1638534e6ffc3c5388e07e3e2243acdc5b1 Mon Sep 17 00:00:00 2001
 From: Hangtian Zhu <hangtian@qti.qualcomm.com>
 Date: Thu, 7 Jun 2018 13:12:43 +0800
-Subject: [PATCH] MLK-18490 CORE: HDD: add ssid len check
+Subject: [PATCH 20/23] MLK-18490 CORE: HDD: add ssid len check
 
 Add ssid len check to avoid the race between iface up and down.
 
@@ -21,10 +21,10 @@ Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
  1 file changed, 14 insertions(+), 11 deletions(-)
 
 diff --git a/CORE/HDD/src/wlan_hdd_assoc.c b/CORE/HDD/src/wlan_hdd_assoc.c
-index 889ea95..9818d79 100644
+index 43f53f3..dda8a94 100644
 --- a/CORE/HDD/src/wlan_hdd_assoc.c
 +++ b/CORE/HDD/src/wlan_hdd_assoc.c
-@@ -2309,6 +2309,7 @@ static eHalStatus hdd_AssociationCompletionHandler( hdd_adapter_t *pAdapter, tCs
+@@ -2314,6 +2314,7 @@ static eHalStatus hdd_AssociationCompletionHandler( hdd_adapter_t *pAdapter, tCs
      hdd_ap_ctx_t *hdd_ap_ctx;
      uint8_t default_sap_channel = 6;
      tSirResultCodes timeout_reason = 0;
@@ -32,7 +32,7 @@ index 889ea95..9818d79 100644
  #ifdef WLAN_FEATURE_ROAM_OFFLOAD
      if (pRoamInfo && pRoamInfo->roamSynchInProgress) {
         /* change logging before release */
-@@ -2604,12 +2605,13 @@ static eHalStatus hdd_AssociationCompletionHandler( hdd_adapter_t *pAdapter, tCs
+@@ -2613,12 +2614,13 @@ static eHalStatus hdd_AssociationCompletionHandler( hdd_adapter_t *pAdapter, tCs
                      hddLog(LOG1, "%s ft_carrier_on is %d, sending connect "
                                   "indication", __FUNCTION__, ft_carrier_on);
  
@@ -52,7 +52,7 @@ index 889ea95..9818d79 100644
                  }
              }
              else
-@@ -2640,11 +2642,12 @@ static eHalStatus hdd_AssociationCompletionHandler( hdd_adapter_t *pAdapter, tCs
+@@ -2649,11 +2651,12 @@ static eHalStatus hdd_AssociationCompletionHandler( hdd_adapter_t *pAdapter, tCs
                                 roamResult, roamStatus);
  
                          /* inform connect result to nl80211 */

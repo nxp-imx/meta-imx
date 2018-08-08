@@ -1,7 +1,7 @@
-From 8b67d5d294896db83badb8d860051a2ab69e6a3d Mon Sep 17 00:00:00 2001
+From 33c62eb5125a9511c7edabf1001776c5ada06a14 Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Mon, 14 May 2018 20:09:13 +0800
-Subject: [PATCH 06/11] Kbuild: disable QCA_CONFIG_SMP
+Subject: [PATCH 06/23] Kbuild: disable QCA_CONFIG_SMP
 
 Disable QCA_CONFIG_SMP config for CLD driver since it still
 have bug that cause kernel dump.

@@ -6,6 +6,7 @@ inherit module
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/kernel-module-qcacld-lea:"
 
+# The following patchset are for kernel v4.14 only
 SRC_URI = "git://source.codeaurora.org/external/wlan/qcacld-2.0;protocol=https;branch=CNSS.LEA.NRT_2.0; \
            file://0001-CORE-QCA9377-CLD-LEA-2.0-porting-to-support-Android-.patch \
            file://0002-Kbuild-Eliminate-errors-by-tool-chain-and-disable-de.patch \
@@ -21,10 +22,13 @@ SRC_URI = "git://source.codeaurora.org/external/wlan/qcacld-2.0;protocol=https;b
            file://0012-CORE-revert-two-patches-to-support-QCA-SMP.patch \
            file://0013-CORE-services-os-fix-issue-to-avoid-spin_lock_bh-in-.patch \
            file://0014-CLD-CORE-add-CONFIG_HDD_WLAN_WAIT_TIME-support-for-u.patch \
-           file://0015-CORE-HIF-enable-pcie-MSI-feature.patch \
-           file://0016-MLK-18490-CORE-HDD-add-ssid-len-check.patch \
-           file://0017-MLK-18491-qcacld-2.0-avoid-overflow-of-bounce-buffer.patch \
-           file://0018-MLK-18491-02-qcacld-2.0-fix-the-overflow-of-bounce-b.patch \
+           file://0015-CORE-upgrade-CLD-LEA2.0-to-support-kernel-v4.14.patch \
+           file://0016-CORE-wlan_hdd_cfg80211-disable-scheduled-scan-if-no-.patch \
+           file://0017-CORE-HIF-enable-pcie-MSI-feature.patch \
+           file://0018-MLK-18490-CORE-HDD-add-ssid-len-check.patch \
+           file://0019-MLK-18491-qcacld-2.0-avoid-overflow-of-bounce-buffer.patch \
+           file://0020-MLK-18491-02-qcacld-2.0-fix-the-overflow-of-bounce-b.patch \
+           file://0021-CORE-LEA2.0-fix-the-initialization-from-incompatible.patch \
 "
 
 # verison v4.5.23.1

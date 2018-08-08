@@ -1,7 +1,7 @@
-From b0944b8c45efecf75b9d1be3182bd41cba0a1859 Mon Sep 17 00:00:00 2001
+From e9a87243b49f57f89782fdac3bf5e4aa6aaee045 Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Mon, 14 May 2018 15:36:44 +0800
-Subject: [PATCH 05/11] CORE: cannot call spin_lock_bh in irq context
+Subject: [PATCH 05/23] CORE: cannot call spin_lock_bh in irq context
 
 Cannot call spin_lock_bh in irq context.
 Remove the dump message when send wmi command during target is suspended.

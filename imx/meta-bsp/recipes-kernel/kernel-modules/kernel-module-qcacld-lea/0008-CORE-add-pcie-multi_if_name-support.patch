@@ -1,7 +1,7 @@
-From 72964bb8777fd806e23849a44a07c11af55fdf92 Mon Sep 17 00:00:00 2001
+From b0b079aa0ed75989070e779d1f7e6e165baf76e6 Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Fri, 4 May 2018 15:31:21 +0800
-Subject: [PATCH 08/11] CORE: add pcie multi_if_name support
+Subject: [PATCH 08/23] CORE: add pcie multi_if_name support
 
 Add pcie multi_if_name support.
 

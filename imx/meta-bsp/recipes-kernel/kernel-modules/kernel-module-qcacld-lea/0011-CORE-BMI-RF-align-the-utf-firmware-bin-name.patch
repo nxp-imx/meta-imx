@@ -1,7 +1,7 @@
-From bcddb095fb2ac2a4584705178d78c08d2d5ad583 Mon Sep 17 00:00:00 2001
+From d541dad8e63aa83f32a542af205f8ea4ad97a76d Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Tue, 15 May 2018 14:03:02 +0800
-Subject: [PATCH 11/11] CORE: BMI: RF: align the utf firmware bin name
+Subject: [PATCH 11/23] CORE: BMI: RF: align the utf firmware bin name
 
 Align the utf firmware bin with release's name.
 

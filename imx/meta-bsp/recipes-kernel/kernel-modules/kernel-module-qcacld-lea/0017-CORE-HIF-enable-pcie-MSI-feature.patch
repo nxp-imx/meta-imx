@@ -1,7 +1,7 @@
-From 1c3170fe6acfd3ab411199bcf2235964a9036c2c Mon Sep 17 00:00:00 2001
+From 756185d51b6f9f34ae1a6d1f015bcff46cf153b4 Mon Sep 17 00:00:00 2001
 From: Hangtian Zhu <hangtian@qti.qualcomm.com>
 Date: Tue, 29 May 2018 18:09:49 +0800
-Subject: [PATCH] CORE: HIF: enable pcie MSI feature
+Subject: [PATCH 19/23] CORE: HIF: enable pcie MSI feature
 
 Add PCIe MSI interrupt support.
 Currently, it only support 1 MSI interrupt.
@@ -28,7 +28,7 @@ index f5ba19b..95db903 100644
  
  /*
 diff --git a/CORE/SERVICES/HIF/PCIe/if_pci.c b/CORE/SERVICES/HIF/PCIe/if_pci.c
-index 374a9b0..840724d 100644
+index 8008fac..1a8a826 100644
 --- a/CORE/SERVICES/HIF/PCIe/if_pci.c
 +++ b/CORE/SERVICES/HIF/PCIe/if_pci.c
 @@ -81,7 +81,7 @@

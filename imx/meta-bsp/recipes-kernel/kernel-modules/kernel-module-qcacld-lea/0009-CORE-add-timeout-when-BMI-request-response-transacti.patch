@@ -1,7 +1,7 @@
-From a2314b0afa1687cd043183ab3794e27336ad47b3 Mon Sep 17 00:00:00 2001
+From 12fb3360d6258a7082ce674bf00b8ec9a5035172 Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Tue, 15 May 2018 10:45:21 +0800
-Subject: [PATCH 09/11] CORE: add timeout when BMI request/response transaction
+Subject: [PATCH 09/23] CORE: add timeout when BMI request/response transaction
  are not completed
 
 Add timeout when BMI request/response transaction are not completed.

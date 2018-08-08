@@ -1,7 +1,7 @@
-From 48b35557f766f360d65b1c693c472997847c4738 Mon Sep 17 00:00:00 2001
+From 6a8f8f55efb923e3940d635aa40b87a4cca687cc Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Wed, 9 May 2018 16:08:57 +0800
-Subject: [PATCH 03/11] dbglog_host: add timeout for dbglog_block fwlog read
+Subject: [PATCH 03/23] dbglog_host: add timeout for dbglog_block fwlog read
 
 Add timeout for dbglog_block fwlog read operation.
 

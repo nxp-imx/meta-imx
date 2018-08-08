@@ -1,7 +1,7 @@
-From 1f285b2023fa97a140bf65e81a5778c96320a275 Mon Sep 17 00:00:00 2001
+From 11fe78c4ed5e71069557d0d22fae36c5abd68b04 Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Mon, 14 May 2018 14:42:37 +0800
-Subject: [PATCH 04/11] CORE: remove the debug message in default
+Subject: [PATCH 04/23] CORE: remove the debug message in default
 
 Remove the debug message in default.
 

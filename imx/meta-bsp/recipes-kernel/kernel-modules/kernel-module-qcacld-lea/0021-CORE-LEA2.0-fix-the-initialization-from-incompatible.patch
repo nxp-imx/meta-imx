@@ -1,0 +1,147 @@
+From e025db31376453e8ca053a27d38830cb62a95161 Mon Sep 17 00:00:00 2001
+From: Andy Duan <fugang.duan@nxp.com>
+Date: Thu, 21 Jun 2018 18:46:58 +0800
+Subject: [PATCH 23/23] CORE: LEA2.0: fix the initialization from incompatible
+ pointer type
+
+Fix the initialization from incompatible pointer type to support
+kernel v4.14.
+
+Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
+---
+ CORE/HDD/inc/wlan_hdd_p2p.h      |  8 +++++++-
+ CORE/HDD/src/wlan_hdd_cfg80211.c | 30 ++++++++++++++++++++++++++++++
+ CORE/HDD/src/wlan_hdd_p2p.c      | 27 ++++++++++++++++++++++++++-
+ 3 files changed, 63 insertions(+), 2 deletions(-)
+
+diff --git a/CORE/HDD/inc/wlan_hdd_p2p.h b/CORE/HDD/inc/wlan_hdd_p2p.h
+index 5523687..06fd2f4 100644
+--- a/CORE/HDD/inc/wlan_hdd_p2p.h
++++ b/CORE/HDD/inc/wlan_hdd_p2p.h
+@@ -172,7 +172,13 @@ int wlan_hdd_mgmt_tx( struct wiphy *wiphy, struct net_device *dev,
+ #endif
+ 
+ 
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 1, 0))
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
++struct wireless_dev *wlan_hdd_add_virtual_intf(struct wiphy *wiphy,
++                                               const char *name,
++                                               unsigned char name_assign_type,
++                                               enum nl80211_iftype type,
++                                               struct vif_params *params);
++#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 1, 0))
+ struct wireless_dev *wlan_hdd_add_virtual_intf(struct wiphy *wiphy,
+                                                const char *name,
+                                                unsigned char name_assign_type,
+diff --git a/CORE/HDD/src/wlan_hdd_cfg80211.c b/CORE/HDD/src/wlan_hdd_cfg80211.c
+index 18b6aa5..bce5a5f 100644
+--- a/CORE/HDD/src/wlan_hdd_cfg80211.c
++++ b/CORE/HDD/src/wlan_hdd_cfg80211.c
+@@ -19258,6 +19258,21 @@ done:
+  * FUNCTION: wlan_hdd_cfg80211_change_iface
+  * wrapper function to protect the actual implementation from SSR.
+  */
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
++static int wlan_hdd_cfg80211_change_iface(struct wiphy *wiphy,
++                                          struct net_device *ndev,
++                                          enum nl80211_iftype type,
++                                          struct vif_params *params)
++{
++    int ret;
++
++    vos_ssr_protect(__func__);
++    ret = __wlan_hdd_cfg80211_change_iface(wiphy, ndev, type, &params->flags, params);
++    vos_ssr_unprotect(__func__);
++
++    return ret;
++}
++#else
+ static int wlan_hdd_cfg80211_change_iface(struct wiphy *wiphy,
+                                           struct net_device *ndev,
+                                           enum nl80211_iftype type,
+@@ -19272,6 +19287,7 @@ static int wlan_hdd_cfg80211_change_iface(struct wiphy *wiphy,
+ 
+     return ret;
+ }
++#endif
+ 
+ #ifdef FEATURE_WLAN_TDLS
+ static int wlan_hdd_tdls_add_station(struct wiphy *wiphy,
+@@ -27890,8 +27906,13 @@ static int wlan_hdd_cfg80211_sched_scan_start(struct wiphy *wiphy,
+  * FUNCTION: __wlan_hdd_cfg80211_sched_scan_stop
+  * Function to disable PNO
+  */
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
++static int __wlan_hdd_cfg80211_sched_scan_stop(struct wiphy *wiphy,
++          struct net_device *dev, u64 reqid)
++#else
+ static int __wlan_hdd_cfg80211_sched_scan_stop(struct wiphy *wiphy,
+           struct net_device *dev)
++#endif
+ {
+     eHalStatus status = eHAL_STATUS_FAILURE;
+     hdd_adapter_t *pAdapter = WLAN_HDD_GET_PRIV_PTR(dev);
+@@ -27987,13 +28008,22 @@ static int __wlan_hdd_cfg80211_sched_scan_stop(struct wiphy *wiphy,
+  * FUNCTION: wlan_hdd_cfg80211_sched_scan_stop
+  * NL interface to disable PNO
+  */
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
++static int wlan_hdd_cfg80211_sched_scan_stop(struct wiphy *wiphy,
++          struct net_device *dev, u64 reqid)
++#else
+ static int wlan_hdd_cfg80211_sched_scan_stop(struct wiphy *wiphy,
+           struct net_device *dev)
++#endif
+ {
+     int ret;
+ 
+     vos_ssr_protect(__func__);
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
++    ret = __wlan_hdd_cfg80211_sched_scan_stop(wiphy, dev, reqid);
++#else
+     ret = __wlan_hdd_cfg80211_sched_scan_stop(wiphy, dev);
++#endif
+     vos_ssr_unprotect(__func__);
+ 
+     return ret;
+diff --git a/CORE/HDD/src/wlan_hdd_p2p.c b/CORE/HDD/src/wlan_hdd_p2p.c
+index 5cfad0d..3db596c 100644
+--- a/CORE/HDD/src/wlan_hdd_p2p.c
++++ b/CORE/HDD/src/wlan_hdd_p2p.c
+@@ -2992,7 +2992,32 @@ struct wireless_dev* __wlan_hdd_add_virtual_intf(
+ #endif
+ }
+ 
+-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 1, 0))
++#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
++/**
++ * wlan_hdd_add_virtual_intf() - Add virtual interface wrapper
++ * @wiphy: wiphy pointer
++ * @name: User-visible name of the interface
++ * @name_assign_type: the name of assign type of the netdev
++ * @nl80211_iftype: (virtual) interface types
++ * @vif_params: virtual interface parameters (not used)
++ *
++ * Return: the pointer of wireless dev, otherwise NULL.
++ */
++struct wireless_dev *wlan_hdd_add_virtual_intf(struct wiphy *wiphy,
++                                               const char *name,
++                                               unsigned char name_assign_type,
++                                               enum nl80211_iftype type,
++                                               struct vif_params *params)
++{
++    struct wireless_dev *wdev;
++
++    vos_ssr_protect(__func__);
++    wdev = __wlan_hdd_add_virtual_intf(wiphy, name, name_assign_type,
++                                       type, &params->flags, params);
++    vos_ssr_unprotect(__func__);
++    return wdev;
++}
++#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 1, 0))
+ /**
+  * wlan_hdd_add_virtual_intf() - Add virtual interface wrapper
+  * @wiphy: wiphy pointer
+-- 
+1.9.1
+

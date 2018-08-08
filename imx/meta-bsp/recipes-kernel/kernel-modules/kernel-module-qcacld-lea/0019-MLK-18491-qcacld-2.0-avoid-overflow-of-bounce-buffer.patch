@@ -1,7 +1,7 @@
-From a41baa51cbc517243d55ff24ec7aedc625ab376c Mon Sep 17 00:00:00 2001
+From 73f932bd4176956f93e75e1c837051816f5b5740 Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Fri, 8 Jun 2018 13:12:20 +0800
-Subject: [PATCH] MLK-18491 qcacld-2.0: avoid overflow of bounce buffer
+Subject: [PATCH 21/23] MLK-18491 qcacld-2.0: avoid overflow of bounce buffer
 
 Disable pEndpoint->TxCreditFlowEnabled to avoid overflow of bounce buffer.
 

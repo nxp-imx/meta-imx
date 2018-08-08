@@ -1,7 +1,7 @@
-From 990dd836c6dffa810611e2b1e42582b79088e345 Mon Sep 17 00:00:00 2001
+From f60afb78bcc6b9b752153cba3ac7494a2f4194ab Mon Sep 17 00:00:00 2001
 From: Fugang Duan <fugang.duan@nxp.com>
 Date: Mon, 2 Apr 2018 14:51:05 +0800
-Subject: [PATCH 02/11] Kbuild: Eliminate errors by tool chain and disable
+Subject: [PATCH 02/23] Kbuild: Eliminate errors by tool chain and disable
  debug configs
 
 - Eliminate errors caused by GCC 6.x warning.

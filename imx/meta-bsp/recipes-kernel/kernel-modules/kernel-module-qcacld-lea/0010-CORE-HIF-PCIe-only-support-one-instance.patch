@@ -1,7 +1,7 @@
-From 5c01620b0b3a3d7d6a95b4d00d75d44bd8e78b0c Mon Sep 17 00:00:00 2001
+From 6d4cda569ac61b52249ddc5566aa705fff3cf6c8 Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Tue, 15 May 2018 10:55:42 +0800
-Subject: [PATCH 10/11] CORE: HIF: PCIe: only support one instance
+Subject: [PATCH 10/23] CORE: HIF: PCIe: only support one instance
 
 The CLD driver only support one instance, add code check it.
 

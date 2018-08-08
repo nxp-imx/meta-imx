@@ -1,7 +1,8 @@
-From 67edc9c191c31fc3dc911c6c8b81d584524d91e6 Mon Sep 17 00:00:00 2001
+From f3c6bfdcc78674831ac40f3fde8feaf930f11f19 Mon Sep 17 00:00:00 2001
 From: Andy Duan <fugang.duan@nxp.com>
 Date: Tue, 22 May 2018 16:13:54 +0800
-Subject: [PATCH] CLD: CORE: add CONFIG_HDD_WLAN_WAIT_TIME support for user
+Subject: [PATCH 14/23] CLD: CORE: add CONFIG_HDD_WLAN_WAIT_TIME support for
+ user
 
 User can point the CONFIG_HDD_WLAN_WAIT_TIME for driver firmware loading
 timeout.
