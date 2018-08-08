@@ -3,4 +3,4 @@ SRC_URI_remove = "git://anongit.freedesktop.org/mesa/kmscube;branch=master;proto
 KMSCUBE_SRC ?= "git://source.codeaurora.org/external/imx/kmscube-imx.git;protocol=https"
 SRCBRANCH = "imx-kmscube"
 SRC_URI_prepend = "${KMSCUBE_SRC};branch=${SRCBRANCH} "
-SRCREV = "4a5c98b6ab1cf49f499d56d91270de21f3febe69" 
+SRCREV = "ee1ab26e0d689c92e6e20491e04eb0f096b11728"
