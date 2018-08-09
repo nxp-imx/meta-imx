@@ -31,17 +31,19 @@ BACKEND = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',     'X11', \
                                                              'FB', d), d)}"
 
+FEATURES_MX8   = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.1"
+FEATURES_MX8M  = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2"
+FEATURES_MX8MM = ",OpenCV"
+FEATURES_MX8X  = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2"
 FEATURES                  = "EGL,EarlyAccess,OpenVG"
 FEATURES_append_imxgpu2d  = ",G2D"
 FEATURES_append_imxgpu3d  = ",OpenGLES2"
 FEATURES_append_mx6q      = ",OpenGLES3"
 FEATURES_append_mx6dl     = ",OpenGLES3"
-FEATURES_append_mx8       = ",OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenCV"
-FEATURES_append_imxopenvx = ",OpenVX,OpenVX1.1"
-FEATURES_append_mx8       = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ',Vulkan', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11',        '', \
-                                                        ',Vulkan', d), d)}"
+FEATURES_append_mx8qm     = "${FEATURES_MX8}"
+FEATURES_append_mx8mq     = "${FEATURES_MX8M}"
+FEATURES_append_mx8mm     = "${FEATURES_MX8MM}"
+FEATURES_append_mx8qxp    = "${FEATURES_MX8X}"
 
 EXTENSIONS       = "*"
 EXTENSIONS_mx8mq = "OpenGLES3:GL_EXT_color_buffer_float"
