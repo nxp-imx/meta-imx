@@ -13,7 +13,7 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
 "
-SRCREV = "1bc984f52d6b0b6d11d6fc3bf21f615dabd6cc15"
+SRCREV = "670eb6eff7de71803b67018f68d6cc5864acd3a3"
 
 DEPENDS += "gstreamer1.0-plugins-base virtual/kernel"
 # Make sure kernel sources are available
