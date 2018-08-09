@@ -1,0 +1,41 @@
+From 39847456fd69ede802d88af5106f608d49038ab1 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Thu, 9 Aug 2018 19:01:45 +0000
+Subject: [PATCH] hardwareintegration: Do not include shm-emulation-server
+
+shm-emulation-server is failing on sololite because of its dependency on
+opengl
+
+qtwayland/5.10.1+gitAUTOINC+db36bc0d9c-r0/git/src/hardwareintegration/client/shm-emulation-server/shmserverbufferintegration.cpp:81:10:
+ error: 'QOpenGLContext' has not been declared
+      if (!QOpenGLContext::currentContext())
+           ^~~~~~~~~~~~~~
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ src/plugins/hardwareintegration/client/client.pro         | 2 +-
+ src/plugins/hardwareintegration/compositor/compositor.pro | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/plugins/hardwareintegration/client/client.pro b/src/plugins/hardwareintegration/client/client.pro
+index f1c71f0..5bf9e12 100644
+--- a/src/plugins/hardwareintegration/client/client.pro
++++ b/src/plugins/hardwareintegration/client/client.pro
+@@ -15,4 +15,4 @@ qtConfig(libhybris-egl-server): \
+     SUBDIRS += libhybris-egl-server
+ 
+ ### TODO: make shm-emulation configurable
+-SUBDIRS += shm-emulation-server
++# SUBDIRS += shm-emulation-server
+diff --git a/src/plugins/hardwareintegration/compositor/compositor.pro b/src/plugins/hardwareintegration/compositor/compositor.pro
+index 0b2a429..f50561a 100644
+--- a/src/plugins/hardwareintegration/compositor/compositor.pro
++++ b/src/plugins/hardwareintegration/compositor/compositor.pro
+@@ -15,4 +15,4 @@ qtConfig(libhybris-egl-server): \
+     SUBDIRS += libhybris-egl-server
+ 
+ ### TODO: make shm-emulation configurable
+-SUBDIRS += shm-emulation-server
++# SUBDIRS += shm-emulation-server
+-- 
+1.9.1
+
