@@ -57,18 +57,21 @@ do_compile () {
     FslBuild.py -vvvvv -t sdk --UseFeatures [${FEATURES}] --UseExtensions [${EXTENSIONS}] --Variants [WindowSystem=${BACKEND}] --BuildThreads ${BB_NUMBER_THREADS} -- install
 }
 
-HAS_DPU        = "false"
-HAS_DPU_imxdpu = "true"
+REMOVALS = " \
+    GLES2/DeBayer \
+    GLES2/DirectMultiSamplingVideoYUV \
+    GLES3/DirectMultiSamplingVideoYUV \
+"
+REMOVALS_append_imxdpu = " \
+    G2D/EightLayers \
+"
 
 do_install () {
     install -d "${D}/opt/${PN}"
     cp -r ${S}/bin/* ${D}/opt/${PN}
-    rm -rf ${D}/opt/${PN}/GLES2/DirectMultiSamplingVideoYUV
-    rm -rf ${D}/opt/${PN}/GLES3/DirectMultiSamplingVideoYUV
-    rm -rf ${D}/opt/${PN}/GLES2/DeBayer
-    if ${HAS_DPU}; then
-        rm -rf ${D}/opt/${PN}/G2D/EightLayers
-    fi
+    cd ${D}/opt/${PN}
+    rm -rf ${REMOVALS}
+    cd -
 }
 
 FILES_${PN} += "/opt/${PN}"
