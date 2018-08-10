@@ -1,8 +1,8 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.9-rocko"
+DISTRO_VERSION = "4.14-sumo"
 
-DISTRO_CODENAME = "rocko"
+DISTRO_CODENAME = "sumo"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
