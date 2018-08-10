@@ -65,6 +65,16 @@ REMOVALS = " \
 REMOVALS_append_imxdpu = " \
     G2D/EightLayers \
 "
+REMOVALS_append_mx6q = " \
+    GLES3/HDR02_FBBasicToneMapping \
+    GLES3/HDR03_SkyboxTonemapping \
+    GLES3/HDR04_HDRFramebuffer \
+"
+REMOVALS_append_mx6dl = " \
+    GLES3/HDR02_FBBasicToneMapping \
+    GLES3/HDR03_SkyboxTonemapping \
+    GLES3/HDR04_HDRFramebuffer \
+"
 
 do_install () {
     install -d "${D}/opt/${PN}"
