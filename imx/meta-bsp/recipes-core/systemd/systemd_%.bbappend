@@ -4,6 +4,10 @@ SRC_URI += "file://0020-logind.conf-Set-HandlePowerKey-to-ignore.patch \
             file://0021-systemd-udevd.service.in-Set-MountFlags-as-shared-to.patch \
 "
 
+#FIX-it: Workaround as missing ending slash in FIRMWARE_PATH [YOCIMX-2831]
+EXTRA_OEMESON_remove = "-Dfirmware-path=${nonarch_base_libdir}/firmware "
+EXTRA_OEMESON   += "-Dfirmware-path=${nonarch_base_libdir}/firmware/ "
+
 do_install_append () {
     # Disable the assignment of the fixed network interface name
     install -d ${D}${sysconfdir}/systemd/network
