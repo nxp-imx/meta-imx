@@ -167,6 +167,8 @@ do_deploy () {
     elif [ "${SOC_TARGET}" = "iMX8QM" ]; then
         install -m 0644 ${S}/${SOC_DIR}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         install -m 0644 ${S}/${SOC_DIR}/mx8qm-ahab-container.img ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${S}/${SOC_DIR}/m40_tcm.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${S}/${SOC_DIR}/m41_tcm.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
         install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
     else
