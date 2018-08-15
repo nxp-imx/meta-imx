@@ -3,8 +3,8 @@
 require imx-vpu-hantro.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=5ab1a30d0cd181e3408077727ea5a2db"
 
-SRC_URI[md5sum] = "24cf5345dfbb8e24815f82b259cf8f6f"
-SRC_URI[sha256sum] = "7848997626ccdf8554b8fef26ffbe4aa5e52fbe6b90c09fd110e5846842a4f02"
+SRC_URI[md5sum] = "226aaa8b85567364d4a8c0f968af6115"
+SRC_URI[sha256sum] = "a3e94094e38ada6e59fb6490f487e38fe40e8bd43d0619f12e00e8d8e63603ce"
 
 # Compatible only for i.MX with Hantro VPU
 COMPATIBLE_MACHINE = "(^$)"
