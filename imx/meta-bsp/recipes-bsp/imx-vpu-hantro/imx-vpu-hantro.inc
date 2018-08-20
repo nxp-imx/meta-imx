@@ -14,7 +14,10 @@ PARALLEL_MAKE="-j 1"
 PROVIDES = "virtual/imxvpu"
 RPROVIDES_${PN} = "virtual/imxvpu"
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+SRC_URI = " \
+    ${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
+    file://0001-Use-ion.h-from-standard-location-MXVPSDK-143.patch \
+"
 
 PLATFORM_mx8mm = "IMX8MM"
 PLATFORM_mx8mq = "IMX8MQ"

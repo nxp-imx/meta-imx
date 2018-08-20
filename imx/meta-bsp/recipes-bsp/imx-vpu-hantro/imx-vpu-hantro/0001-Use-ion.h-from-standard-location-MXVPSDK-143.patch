@@ -1,0 +1,57 @@
+From 40bdb82f13f53250b4972bb3e00ec24bd00abb7a Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Mon, 13 Aug 2018 09:27:15 -0500
+Subject: [PATCH 1/2] Use ion.h from standard location [MXVPSDK-143]
+
+Use ion.h from its standard location instead of relying on a
+manual copy of ion.h to /usr/include/linux.
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ Makefile_G1G2                                             | 2 ++
+ decoder_sw/software/linux/dwl/dwl_linux.c                 | 2 +-
+ h1_encoder/software/linux_reference/ewl/ewl_x280_common.c | 2 +-
+ 3 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile_G1G2 b/Makefile_G1G2
+index caab40f..8979fe5 100755
+--- a/Makefile_G1G2
++++ b/Makefile_G1G2
+@@ -12,6 +12,8 @@ INCLUDE_HEADERS = -I./decoder_sw -I$(SOURCE_ROOT)/source/inc -I$(SOURCE_ROOT)/so
+ INCLUDE_HEADERS += -I$(SOURCE_ROOT)/linux/memalloc
+ #INCLUDE_HEADERS += -I$(SOURCE_ROOT)/linux/ldriver
+ INCLUDE_HEADERS += -I$(LINUX_KERNEL_ROOT)/include/uapi -I$(LINUX_KERNEL_ROOT)/include
++# ION header location
++INCLUDE_HEADERS += -I$(LINUX_KERNEL_ROOT)/drivers/staging/android/uapi
+ 
+ CFLAGS += -DDEC_MODULE_PATH=\"/dev/mxc_hantro\" -DUSE_FAKE_RFC_TABLE -DFIFO_DATATYPE=void* -DNDEBUG -DDOWN_SCALER \
+            -DUSE_EXTERNAL_BUFFER -DUSE_FAST_EC -DUSE_VP9_EC -DGET_FREE_BUFFER_NON_BLOCK \
+diff --git a/decoder_sw/software/linux/dwl/dwl_linux.c b/decoder_sw/software/linux/dwl/dwl_linux.c
+index 0899596..f2e1229 100755
+--- a/decoder_sw/software/linux/dwl/dwl_linux.c
++++ b/decoder_sw/software/linux/dwl/dwl_linux.c
+@@ -41,7 +41,7 @@
+ #include "dwl.h"
+ #include <linux/hantrodec.h>
+ #ifdef USE_ION
+-#include <linux/ion.h>
++#include <ion.h>
+ #include <linux/dma-buf.h>
+ #include <linux/version.h>
+ #ifdef ANDROID
+diff --git a/h1_encoder/software/linux_reference/ewl/ewl_x280_common.c b/h1_encoder/software/linux_reference/ewl/ewl_x280_common.c
+index 620c978..82b4836 100755
+--- a/h1_encoder/software/linux_reference/ewl/ewl_x280_common.c
++++ b/h1_encoder/software/linux_reference/ewl/ewl_x280_common.c
+@@ -49,7 +49,7 @@
+ 
+ #include "linux/hx280enc.h"
+ #ifdef USE_ION
+-#include <linux/ion.h>
++#include <ion.h>
+ #include <linux/dma-buf.h>
+ #include <linux/version.h>
+ #ifdef ANDROID
+-- 
+2.7.4
+
