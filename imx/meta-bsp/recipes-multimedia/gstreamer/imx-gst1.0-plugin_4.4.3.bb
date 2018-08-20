@@ -7,13 +7,11 @@ DESCRIPTION = "Gstreamer freescale plugins"
 LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
-DEPENDS = "imx-codec imx-parser libdrm gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
+DEPENDS = "imx-codec imx-parser virtual/kernel libdrm gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
+do_configure[depends] += "virtual/kernel:do_shared_workdir"
 DEPENDS_append_mx6 = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 DEPENDS_append_imxvpu = " imx-vpuwrap"
-
-# Require videodev2.h and ion.h from kernel userspace headers
-DEPENDS += "linux-imx-headers"
 
 # For backwards compatibility
 RREPLACES_${PN} = "gst1.0-fsl-plugin"
