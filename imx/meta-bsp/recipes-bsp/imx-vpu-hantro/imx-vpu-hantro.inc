@@ -17,6 +17,7 @@ RPROVIDES_${PN} = "virtual/imxvpu"
 SRC_URI = " \
     ${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
     file://0001-Use-ion.h-from-standard-location-MXVPSDK-143.patch \
+    file://0002-Fix-build-break-for-ion-on-4.14-kernel-MXVPSDK-144.patch \
 "
 
 PLATFORM_mx8mm = "IMX8MM"
