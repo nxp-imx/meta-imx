@@ -1,4 +1,4 @@
-From 40bdb82f13f53250b4972bb3e00ec24bd00abb7a Mon Sep 17 00:00:00 2001
+From 01cfa8d699da7744ea6eed0230b7490627af3d94 Mon Sep 17 00:00:00 2001
 From: Tom Hochstein <tom.hochstein@nxp.com>
 Date: Mon, 13 Aug 2018 09:27:15 -0500
 Subject: [PATCH 1/2] Use ion.h from standard location [MXVPSDK-143]
@@ -8,16 +8,24 @@ manual copy of ion.h to /usr/include/linux.
 
 Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
 ---
- Makefile_G1G2                                             | 2 ++
+ Makefile_G1G2                                             | 5 +++--
+ Makefile_H1                                               | 3 ++-
  decoder_sw/software/linux/dwl/dwl_linux.c                 | 2 +-
  h1_encoder/software/linux_reference/ewl/ewl_x280_common.c | 2 +-
- 3 files changed, 4 insertions(+), 2 deletions(-)
+ 4 files changed, 7 insertions(+), 5 deletions(-)
 
 diff --git a/Makefile_G1G2 b/Makefile_G1G2
-index caab40f..8979fe5 100755
+index caab40f..00b092b 100755
 --- a/Makefile_G1G2
 +++ b/Makefile_G1G2
-@@ -12,6 +12,8 @@ INCLUDE_HEADERS = -I./decoder_sw -I$(SOURCE_ROOT)/source/inc -I$(SOURCE_ROOT)/so
+@@ -6,12 +6,13 @@ SOURCE_ROOT = decoder_sw/software
+ OMX_ROOT = openmax_il
+ 
+ INCLUDE_HEADERS = -I./decoder_sw -I$(SOURCE_ROOT)/source/inc -I$(SOURCE_ROOT)/source/hevc \
+-           -I$(SOURCE_ROOT)/source/config -I$(SOURCE_ROOT)/source/dwl -I$(SOURCE_ROOT)/source/common -I$(SOURCE_ROOT)/source/vp9 \
+-           -I$(SDKTARGETSYSROOT)/usr/imx/include
++           -I$(SOURCE_ROOT)/source/config -I$(SOURCE_ROOT)/source/dwl -I$(SOURCE_ROOT)/source/common -I$(SOURCE_ROOT)/source/vp9
+ 
  INCLUDE_HEADERS += -I$(SOURCE_ROOT)/linux/memalloc
  #INCLUDE_HEADERS += -I$(SOURCE_ROOT)/linux/ldriver
  INCLUDE_HEADERS += -I$(LINUX_KERNEL_ROOT)/include/uapi -I$(LINUX_KERNEL_ROOT)/include
@@ -26,6 +34,20 @@ index caab40f..8979fe5 100755
  
  CFLAGS += -DDEC_MODULE_PATH=\"/dev/mxc_hantro\" -DUSE_FAKE_RFC_TABLE -DFIFO_DATATYPE=void* -DNDEBUG -DDOWN_SCALER \
             -DUSE_EXTERNAL_BUFFER -DUSE_FAST_EC -DUSE_VP9_EC -DGET_FREE_BUFFER_NON_BLOCK \
+diff --git a/Makefile_H1 b/Makefile_H1
+index 9ca1aa9..93fd295 100755
+--- a/Makefile_H1
++++ b/Makefile_H1
+@@ -18,7 +18,8 @@ ENV += -DMEMALLOC_MODULE_PATH=\\\"/dev/ion\\\"
+ ENV += -DEWL_NO_HW_TIMEOUT
+ ENV += -DUSE_ION
+ ENV += -I$(LINUX_KERNEL_ROOT)/include/uapi -I$(LINUX_KERNEL_ROOT)/include
+-ENV += -I$(SDKTARGETSYSROOT)/usr/imx/include
++# ION header location
++ENV += -I$(LINUX_KERNEL_ROOT)/drivers/staging/android/uapi
+ 
+ LIBENCNAME = libcodec_enc
+ LIBSENC = -L./ -lhantro_h1 -lpthread
 diff --git a/decoder_sw/software/linux/dwl/dwl_linux.c b/decoder_sw/software/linux/dwl/dwl_linux.c
 index 0899596..f2e1229 100755
 --- a/decoder_sw/software/linux/dwl/dwl_linux.c
