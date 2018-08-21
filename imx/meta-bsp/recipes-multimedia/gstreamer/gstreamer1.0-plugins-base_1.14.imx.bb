@@ -36,8 +36,6 @@ SRCREV = "908251c01c24272997192beed79869ed818503cf"
 
 EXTRA_AUTORECONF = ""
 
-EXTRA_OECONF = "CPPFLAGS="-I${STAGING_EXECPREFIXDIR}/imx/include""
-
 EXTRA_OEMAKE += "GIR_EXTRA_LIBS_PATH=${GIR_EXTRA_LIBS_PATH}:${B}/gst-libs/gst/allocators/.libs"
 
 FILES_${PN} += "${libdir}/gstreamer-1.0/include"
