@@ -32,7 +32,7 @@ SRC_URI = " \
     file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
     file://make-gio_unix_2_0-dependency-configurable.patch \
 "
-SRCREV = "46ee5269c511339396e3c20d8c71875ff7b8cda9"
+SRCREV = "908251c01c24272997192beed79869ed818503cf"
 
 EXTRA_AUTORECONF = ""
 
