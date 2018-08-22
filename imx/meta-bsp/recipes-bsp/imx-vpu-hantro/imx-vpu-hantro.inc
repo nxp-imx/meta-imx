@@ -1,4 +1,4 @@
-# Copyright 2017 NXP
+# Copyright 2017-2018 NXP
 
 DESCRIPTION = "i.MX HANTRO VPU library"
 LICENSE = "Proprietary"
@@ -14,11 +14,7 @@ PARALLEL_MAKE="-j 1"
 PROVIDES = "virtual/imxvpu"
 RPROVIDES_${PN} = "virtual/imxvpu"
 
-SRC_URI = " \
-    ${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
-    file://0001-Use-ion.h-from-standard-location-MXVPSDK-143.patch \
-    file://0002-Fix-build-break-for-ion-on-4.14-kernel-MXVPSDK-144.patch \
-"
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 PLATFORM_mx8mm = "IMX8MM"
 PLATFORM_mx8mq = "IMX8MQ"
