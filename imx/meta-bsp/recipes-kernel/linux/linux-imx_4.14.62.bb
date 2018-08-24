@@ -11,6 +11,8 @@ i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU 
 
 DEPENDS += "lzop-native bc-native"
 
+SRC_URI += "file://0001-uapi-Add-ion.h-to-userspace.patch"
+
 DEFAULT_PREFERENCE = "1"
 
 DO_CONFIG_V7_COPY = "no"
