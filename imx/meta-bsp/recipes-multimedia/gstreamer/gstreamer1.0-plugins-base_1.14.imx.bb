@@ -31,14 +31,10 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
     file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
     file://make-gio_unix_2_0-dependency-configurable.patch \
-    file://0001-gstreamer1.0-plugins-base-Update-ion.h-check-locatio.patch \
 "
 SRCREV = "e924794deaab8738f68e2eb96056032e2ae72e91"
 
 EXTRA_AUTORECONF = ""
-
-# Use ion.h from standard location
-EXTRA_OECONF = "CPPFLAGS="-I${STAGING_KERNEL_DIR}/drivers/staging/android/uapi""
 
 EXTRA_OEMAKE += "GIR_EXTRA_LIBS_PATH=${GIR_EXTRA_LIBS_PATH}:${B}/gst-libs/gst/allocators/.libs"
 
