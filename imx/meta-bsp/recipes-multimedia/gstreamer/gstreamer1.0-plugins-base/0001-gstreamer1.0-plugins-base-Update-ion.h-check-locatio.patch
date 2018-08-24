@@ -1,0 +1,26 @@
+From d363ea9349ca8dcd7443e0b24cbbba6501a1b272 Mon Sep 17 00:00:00 2001
+From: Yuqing Zhu <carol.zhu@nxp.com>
+Date: Fri, 24 Aug 2018 02:57:13 -0500
+Subject: [PATCH] gstreamer1.0-plugins-base: Update ion.h check location
+
+Signed-off-by: Yuqing Zhu <carol.zhu@nxp.com>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 51272df..4bea0dd 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -678,7 +678,7 @@ AG_GST_CHECK_FEATURE(CDPARANOIA, [CDParanoia], cdparanoia, [
+ dnl check for ion
+ translit(dnm, m, l) AM_CONDITIONAL(USE_ION, true)
+ AG_GST_CHECK_FEATURE(ION, [ion], ion, [
+-  AC_CHECK_HEADER(linux/ion.h, HAVE_ION="yes", HAVE_ION="no")
++  AC_CHECK_HEADER(ion.h, HAVE_ION="yes", HAVE_ION="no")
+ ])
+ 
+ dnl FIXME : add second check somehow if that is necessary
+-- 
+2.7.4
+
