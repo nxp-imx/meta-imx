@@ -31,6 +31,7 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
     file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
     file://make-gio_unix_2_0-dependency-configurable.patch \
+    file://0001-YOCIMX-2861-Fix-build-break-for-ion-on-4.14-kernel.patch \
 "
 SRCREV = "e924794deaab8738f68e2eb96056032e2ae72e91"
 
