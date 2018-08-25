@@ -36,6 +36,14 @@ SRCREV = "e924794deaab8738f68e2eb96056032e2ae72e91"
 
 EXTRA_AUTORECONF = ""
 
+# Find ion.h in kernel
+EXTRA_OECONF = " \
+    CPPFLAGS=" \
+        -I${STAGING_KERNEL_DIR}/include/uapi \
+        -I${STAGING_KERNEL_DIR}/include \
+    " \
+"
+
 EXTRA_OEMAKE += "GIR_EXTRA_LIBS_PATH=${GIR_EXTRA_LIBS_PATH}:${B}/gst-libs/gst/allocators/.libs"
 
 FILES_${PN} += "${libdir}/gstreamer-1.0/include"
