@@ -3,9 +3,9 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 # Specify the opencv_extra source. The version should match the overall opencv version.
 # Recording the opencv_extra version here allows us to raise a fatal error if the
 # package version is updated but this section is not.
-SRC_URI += "git://github.com/opencv/opencv_extra.git;branch=3.4;destsuffix=opencv_extra;name=opencv_extra"
-SRCREV_opencv_extra = "cc18e9a17c5afe034341c8c70a5aaa9ac86e5601"
-OPENCV_EXTRA_VERSION = "3.4.2"
+SRC_URI += "git://github.com/opencv/opencv_extra.git;destsuffix=opencv_extra;name=opencv_extra"
+SRCREV_opencv_extra = "c533012eb214ec3db851586f74f9dc43ea20c065"
+OPENCV_EXTRA_VERSION = "3.4.1"
 
 SRC_URI_remove = "file://javagen.patch"
 SRC_URI += "file://fix_openvx_samples.patch"

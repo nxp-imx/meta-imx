@@ -23,7 +23,7 @@ Index: git/modules/ts/include/opencv2/ts.hpp
 ===================================================================
 --- git.orig/modules/ts/include/opencv2/ts.hpp
 +++ git/modules/ts/include/opencv2/ts.hpp
-@@ -611,7 +611,7 @@ protected:
+@@ -601,7 +601,7 @@ protected:
      }
  };
  
@@ -32,7 +32,7 @@ Index: git/modules/ts/include/opencv2/ts.hpp
  
  struct DefaultRngAuto
  {
-@@ -667,14 +667,14 @@ std::string findDataFile(const std::stri
+@@ -657,14 +657,14 @@ std::string findDataFile(const std::stri
  
  #ifdef HAVE_OPENCL
  namespace ocl {
@@ -66,17 +66,15 @@ Index: git/modules/ts/include/opencv2/ts/ts_ext.hpp
 ===================================================================
 --- git.orig/modules/ts/include/opencv2/ts/ts_ext.hpp
 +++ git/modules/ts/include/opencv2/ts/ts_ext.hpp
-@@ -9,10 +9,10 @@
+@@ -9,9 +9,9 @@
  #define OPENCV_TS_EXT_HPP
  
  namespace cvtest {
 -void checkIppStatus();
 -extern bool skipUnstableTests;
--extern bool runBigDataTests;
 -extern int testThreads;
 +CV_EXPORTS void checkIppStatus();
 +CV_EXPORTS extern bool skipUnstableTests;
-+CV_EXPORTS extern bool runBigDataTests;
 +CV_EXPORTS extern int testThreads;
  }
  

@@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "9e1b1e5389237c2b9f6c7b9d7715d9836c0a5de1"
-SRCREV_contrib = "d4e02869454998c9af5af1a5c3392cdc0c31dd22"
+SRCREV_opencv = "6ffc48769ac60d53c4bd1913eac15117c9b1c9f7"
+SRCREV_contrib = "ced5aa760688dd2ec867ebf7bd4f0c2341d2fde5"
 SRCREV_ipp = "a62e20676a60ee0ad6581e217fe7e4bada3b95db"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
@@ -38,8 +38,8 @@ IPP_FILENAME = "${@ipp_filename(d)}"
 IPP_MD5 = "${@ipp_md5sum(d)}"
 
 SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
-SRC_URI = "git://github.com/opencv/opencv.git;branch=3.4;name=opencv \
-    git://github.com/opencv/opencv_contrib.git;branch=3.4;destsuffix=contrib;name=contrib \
+SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+    git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
     git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20170418;destsuffix=ipp;name=ipp \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
@@ -47,12 +47,13 @@ SRC_URI = "git://github.com/opencv/opencv.git;branch=3.4;name=opencv \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
     file://fixpkgconfig.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
+    file://tinydnn.patch;patchdir=../contrib/ \
     file://0003-To-fix-errors-as-following.patch \
     file://0001-Dont-use-isystem.patch \
     file://javagen.patch \
 "
 
-PV = "3.4.2+git${SRCPV}"
+PV = "3.4.1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
