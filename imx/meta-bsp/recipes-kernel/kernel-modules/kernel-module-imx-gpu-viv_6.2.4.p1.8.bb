@@ -1,7 +1,7 @@
 # Copyright (C) 2015-2016 Freescale Semiconductor
 # Copyright 2017-2018 NXP
 
-require recipes-kernel/linux/linux-imx-src-4.9.88.inc
+require recipes-kernel/linux/linux-imx-src-4.9.123.inc
 
 SUMMARY = "Kernel loadable module for Vivante GPU"
 DESCRIPTION = "Builds the Vivante GPU kernel driver as a loadable kernel module, \

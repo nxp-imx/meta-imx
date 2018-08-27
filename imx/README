@@ -1,4 +1,4 @@
-i.MX Linux Yocto Project BSP 4.9.88-2.3.0_8mm_beta Release
+i.MX Linux Yocto Project BSP 4.9.123-2.3.0_8mm_ga Release
 =====================================================
 
 The following boards were tested in this release.
@@ -41,7 +41,7 @@ Quick Start Guide
 See the i.MX Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX Linux BSP repo
-$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-rocko -m imx-4.9.88-2.3.0_8mm_beta.xml
+$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-rocko -m imx-4.9.123-2.3.0_8mm_ga.xml
 
 Download the Yocto Project Layers:
 $: repo sync
