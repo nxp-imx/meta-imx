@@ -50,6 +50,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;branch=3.4;name=opencv \
     file://0003-To-fix-errors-as-following.patch \
     file://0001-Dont-use-isystem.patch \
     file://javagen.patch \
+    file://0001-dnn-allow-to-use-external-protobuf.patch \
 "
 
 PV = "3.4.2+git${SRCPV}"
