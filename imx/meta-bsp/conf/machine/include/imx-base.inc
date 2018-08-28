@@ -147,6 +147,7 @@ MACHINE_FIRMWARE_append_mx6ull = " firmware-imx-epdc"
 MACHINE_FIRMWARE_append_mx53 = " firmware-imx-vpu-imx53 firmware-imx-sdma-imx53"
 MACHINE_FIRMWARE_append_mx51 = " firmware-imx-vpu-imx51 firmware-imx-sdma-imx51"
 MACHINE_FIRMWARE_append_mx8  = " linux-firmware-ath10k firmware-imx-sdma"
+MACHINE_FIRMWARE_append_mx8qm  = " firmware-imx-vpu-imx8"
 MACHINE_FIRMWARE_append_mx8qxp  = " firmware-imx-vpu-imx8"
 
 # FIXME: Needs addition of firmware-imx of official BSPs
