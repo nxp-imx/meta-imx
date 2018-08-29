@@ -41,6 +41,7 @@ SRCBRANCH = "imx-1.14.x"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
+    file://0001-opencv-Fix-build-for-opencv-3.4.2.patch \
 "
 
 SRCREV = "a8a6b3965561a83653de37dae5c7b00bd03f6e5b"
