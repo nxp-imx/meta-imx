@@ -12,7 +12,7 @@ inherit autotools-brokensep
 PR = "r1"
 PV = "0.5.1+git${SRCPV}"
 
-SRC_URI = "git://github.com/codeauroraforum/imx-uuc.git;protocol=https"
+SRC_URI = "git://github.com/nxpmicro/imx-uuc.git;protocol=https"
 SRCREV = "e05cc551fb40efc05cea3c3baf25b480519ec4cd"
 
 S = "${WORKDIR}/git"
