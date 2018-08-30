@@ -1,4 +1,4 @@
-SUMMARY = "Jailhouse"
+SUMMARY = "Jailhouse, i.MX fork"
 HOMEPAGE = "https://github.com/siemens/jailhouse"
 SECTION = "jailhouse"
 LICENSE = "GPL-2.0 & BSD-2-Clause"
