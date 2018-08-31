@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
                  file://include/arch/x86/asm/jailhouse_hypercall.h;beginline=9;endline=36;md5=2825581c1666c44a17955dc574cfbfb3 \
                  file://driver/jailhouse.h;beginline=9;endline=36;md5=2825581c1666c44a17955dc574cfbfb3"
 
-DEPENDS = "virtual/kernel make-native python-mako-native dtc-native python-mako"
+DEPENDS = "virtual/kernel make-native python-mako-native dtc-native python3-mako"
 
 S ="${WORKDIR}/git"
 
@@ -23,6 +23,8 @@ JH_CONFIG ?= "${S}/ci/jailhouse-config-x86.h"
 JH_CONFIG_x86 ?= "${S}/ci/jailhouse-config-x86.h"
 JH_CONFIG_x86-64 ?= "${S}/ci/jailhouse-config-x86.h"
 JH_CONFIG_arm ?= "${S}/ci/jailhouse-config-banana-pi.h"
+JH_CONFIG_imx8mqevk = "${S}/ci/jailhouse-config-imx8mq-evk.h"
+JH_CONFIG_imx8mmevk = "${S}/ci/jailhouse-config-imx8mm-evk.h"
 
 do_configure() {
    if [ -d ${STAGING_DIR_HOST}/${CELLCONF_DIR} ]; 
@@ -42,13 +44,13 @@ TOOLS_SRC_DIR = "${S}/tools"
 TOOLS_OBJ_DIR = "${S}/tools"
 
 do_compile() {
-   oe_runmake V=0 \
-        ARCH=${TARGET_ARCH} CROSS_COMPILE=${TARGET_PREFIX} \
+   oe_runmake V=1 LDFLAGS="" CC="${CC}"\
+        ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} \
         KDIR=${STAGING_KERNEL_BUILDDIR}
 
    cd ${TOOLS_SRC_DIR}
    export JAILHOUSE_VERSION=$(cat ../VERSION)
-   oe_runmake V=0 \
+   oe_runmake V=1 \
    	       CFLAGS="${USER_SPACE_CFLAGS}" \
                src=${TOOLS_SRC_DIR} obj=${TOOLS_OBJ_DIR} \
 	       ${TOOLS_OBJ_DIR}/jailhouse-config-collect ${TOOLS_OBJ_DIR}/jailhouse
@@ -56,7 +58,10 @@ do_compile() {
 
 do_install() {
     oe_runmake \
-	       ARCH=${TARGET_ARCH} \
+	       V=1 \
+	       LDFLAGS="" \
+	       CC="${CC}" \
+	       ARCH=${JH_ARCH} \
 	       CROSS_COMPILE=${TARGET_PREFIX} \
 	       KDIR=${STAGING_KERNEL_BUILDDIR} \
 	       DESTDIR=${D} install
@@ -71,6 +76,7 @@ do_install() {
 PACKAGE_BEFORE_PN = "kernel-module-jailhouse"
 FILES_${PN} = "${base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_DATADIR}"
 
+INSANE_SKIP_${PN} = "ldflags"
 KERNEL_MODULE_AUTOLOAD += "jailhouse"
 
 python __anonymous () {
