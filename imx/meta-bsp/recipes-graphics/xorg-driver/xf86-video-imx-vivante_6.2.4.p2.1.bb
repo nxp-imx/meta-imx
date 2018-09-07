@@ -1,3 +1,3 @@
 require recipes-graphics/xorg-driver/xf86-video-imx-vivante.inc
 
-SRCREV = "8ea614949fdefd4ab655d3944fc32d62cb48c3be" 
+SRCREV = "b765c3ffc0dcc4246afa659aa0d59f78a6736b08"
