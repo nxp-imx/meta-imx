@@ -1,23 +1,37 @@
-SUMMARY = "Weston, a Wayland compositor"
+SUMMARY = "Weston, a Wayland compositor, i.MX fork"
 DESCRIPTION = "Weston is the reference implementation of a Wayland compositor"
 HOMEPAGE = "http://wayland.freedesktop.org"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d79ee9e66bb0f95d3386a7acae780b70 \
-                    file://libweston/compositor.c;endline=26;md5=e342df749174a8ee11065583157c7a38"
+                    file://libweston/compositor.c;endline=26;md5=f47553ae598090444273db00adfb5b66"
 
-SRC_URI = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
+#DEFAULT_PREFERENCE = "-1"
+
+WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
+SRCBRANCH = "weston-imx-5.0"
+SRC_URI = "${WESTON_SRC};branch=${SRCBRANCH} \
            file://weston.png \
            file://weston.desktop \
            file://0001-make-error-portable.patch \
            file://xwayland.weston-start \
            file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
 "
-SRC_URI[md5sum] = "33709aa4d5916f89643fca0fc0064b39"
-SRC_URI[sha256sum] = "a0fc0ae7ef83dfbed12abfe9b8096a24a7dd00705e86fa0db1e619ded18b4b58"
+#SRC_URI += "file://0001-weston.ini.in-Modify-paths-to-point-to-right-directo.patch"
+# Use argb8888 as gbm-format for i.MX8MQ only
+SRC_URI_append_mx8mq = " file://0001-weston.ini-using-argb8888-as-gbm-default-on-mscale-8.patch \
+                         file://0002-weston.ini-configure-desktop-shell-size-in-weston-co.patch \
+"
+
+SRCREV = "${AUTOREV}"
+S = "${WORKDIR}/git"
+
+UPSTREAM_CHECK_URI = "https://wayland.freedesktop.org/releases.html"
 
 inherit autotools pkgconfig useradd distro_features_check
-# depends on virtual/egl
-REQUIRED_DISTRO_FEATURES = "opengl"
+# Disable OpenGL for parts with GPU support for 2D but not 3D
+REQUIRED_DISTRO_FEATURES          = "opengl"
+REQUIRED_DISTRO_FEATURES_imxgpu2d = ""
+REQUIRED_DISTRO_FEATURES_imxgpu3d = "opengl"
 
 DEPENDS = "libxkbcommon gdk-pixbuf pixman cairo glib-2.0 jpeg"
 DEPENDS += "wayland wayland-protocols libinput virtual/egl pango wayland-native"
@@ -33,10 +47,22 @@ EXTRA_OECONF_append_qemux86 = "\
 EXTRA_OECONF_append_qemux86-64 = "\
 		WESTON_NATIVE_BACKEND=fbdev-backend.so \
 		"
+EXTRA_OECONF_append_mx6 = "\
+		WESTON_NATIVE_BACKEND=fbdev-backend.so \
+		"
+EXTRA_OECONF_append_mx7 = "\
+		WESTON_NATIVE_BACKEND=fbdev-backend.so \
+		"
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'kms fbdev wayland egl', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'xwayland', '', d)} \
-                   ${@bb.utils.filter('DISTRO_FEATURES', 'pam systemd x11', d)} \
+                   ${@bb.utils.filter('DISTRO_FEATURES', 'opengl pam systemd x11', d)} \
                    clients launch"
+# drm is not supported on mx6/mx7
+PACKAGECONFIG_remove_mx6 = "kms"
+PACKAGECONFIG_remove_mx7 = "kms"
+PACKAGECONFIG_append_imxgpu   = " imxgpu"
+PACKAGECONFIG_append_imxgpu2d = " imxg2d"
+PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
 #
 # Compositor choices
 #
@@ -72,29 +98,47 @@ PACKAGECONFIG[colord] = "--enable-colord,--disable-colord,colord"
 PACKAGECONFIG[clients] = "--enable-clients --enable-simple-clients --enable-demo-clients-install,--disable-clients --disable-simple-clients"
 # Weston with PAM support
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
+# Weston with i.MX G2D renderer
+PACKAGECONFIG[imxg2d] = "--enable-imxg2d,--disable-imxg2d,virtual/libg2d"
+# Weston with OpenGL support
+PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl"
+# Weston with imxgpu hardware
+PACKAGECONFIG[imxgpu] = "--enable-imxgpu,--disable-imxgpu"
 
 do_install_append() {
-	# Weston doesn't need the .la files to load modules, so wipe them
-	rm -f ${D}/${libdir}/libweston-${WESTON_MAJOR_VERSION}/*.la
+    # Weston doesn't need the .la files to load modules, so wipe them
+    rm -f ${D}/${libdir}/libweston-${WESTON_MAJOR_VERSION}/*.la
 
-	# If X11, ship a desktop file to launch it
-	if [ "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}" ]; then
-		install -d ${D}${datadir}/applications
-		install ${WORKDIR}/weston.desktop ${D}${datadir}/applications
+    # If X11, ship a desktop file to launch it
+    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}" ]; then
+        install -d ${D}${datadir}/applications
+        install ${WORKDIR}/weston.desktop ${D}${datadir}/applications
 
-		install -d ${D}${datadir}/icons/hicolor/48x48/apps
-		install ${WORKDIR}/weston.png ${D}${datadir}/icons/hicolor/48x48/apps
-	fi
+        install -d ${D}${datadir}/icons/hicolor/48x48/apps
+        install ${WORKDIR}/weston.png ${D}${datadir}/icons/hicolor/48x48/apps
+    fi
 
-	if [ "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', 'yes', 'no', d)}" = "yes" ]; then
-		install -Dm 644 ${WORKDIR}/xwayland.weston-start ${D}${datadir}/weston-start/xwayland
-	fi
+    if [ "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', 'yes', 'no', d)}" = "yes" ]; then
+        install -Dm 644 ${WORKDIR}/xwayland.weston-start ${D}${datadir}/weston-start/xwayland
+    fi
+
+    if [ "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
+        WESTON_INI_SRC=${B}/ivi-shell/weston.ini
+    else
+        WESTON_INI_SRC=${B}/weston.ini
+    fi
+    WESTON_INI_DEST_DIR=${D}${sysconfdir}/xdg/weston
+    if [ -z "${@bb.utils.filter('BBFILE_COLLECTIONS', 'aglprofilegraphical', d)}" ]; then
+        install -d ${WESTON_INI_DEST_DIR}
+        install -m 0644 ${WESTON_INI_SRC} ${WESTON_INI_DEST_DIR}
+    fi
 }
 
 PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', '${PN}-xwayland', '', d)} \
              libweston-${WESTON_MAJOR_VERSION} ${PN}-examples"
 
 FILES_${PN} = "${bindir}/weston ${bindir}/weston-terminal ${bindir}/weston-info ${bindir}/weston-launch ${bindir}/wcap-decode ${libexecdir} ${libdir}/${BPN}/*.so ${datadir}"
+FILES_${PN} += "${sysconfdir}/xdg/weston"
 
 FILES_libweston-${WESTON_MAJOR_VERSION} = "${libdir}/lib*${SOLIBS} ${libdir}/libweston-${WESTON_MAJOR_VERSION}/*.so"
 SUMMARY_libweston-${WESTON_MAJOR_VERSION} = "Helper library for implementing 'wayland window managers'."
@@ -110,3 +154,5 @@ RRECOMMENDS_${PN}-dev += "wayland-protocols"
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system weston-launch"
+
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
