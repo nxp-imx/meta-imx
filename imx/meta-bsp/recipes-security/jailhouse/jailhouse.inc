@@ -67,7 +67,7 @@ do_install() {
 	       DESTDIR=${D} install
 
     install -d ${D}${CELL_DIR}
-    install ${B}/configs/*.cell ${D}${CELL_DIR}/
+    install ${B}/configs/${JH_ARCH}/*.cell ${D}${CELL_DIR}/
 
     install -d ${D}${INMATES_DIR}
     install ${B}/inmates/demos/${JH_ARCH}/*.bin ${D}${INMATES_DIR}
