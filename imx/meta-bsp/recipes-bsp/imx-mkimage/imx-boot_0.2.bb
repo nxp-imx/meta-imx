@@ -165,7 +165,7 @@ do_deploy () {
 
         install -m 0755 ${S}/${SOC_DIR}/mkimage_fit_atf.sh ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
     elif [ "${SOC_TARGET}" = "iMX8QM" ]; then
-        if [ "${MACHINE}" = "imx8qmmek" ]; then
+        if [ "${MACHINE}" = "imx8qma0mek" ]; then
             install -m 0644 ${S}/${SOC_DIR}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         fi
         install -m 0644 ${S}/${SOC_DIR}/mx8qm-ahab-container.img ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
