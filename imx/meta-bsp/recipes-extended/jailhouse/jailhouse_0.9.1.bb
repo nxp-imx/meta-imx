@@ -9,5 +9,4 @@ PV = "0.9.1+${SRCPV}"
 
 CELLS = ""
 
-COMPATIBLE_MACHINE = "(imx8mqevk|imx8mmevk)"
-
+COMPATIBLE_MACHINE = "${@bb.utils.contains('MACHINE_FEATURES', 'jailhouse', '${MACHINE}', '(^$)', d)}"

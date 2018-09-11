@@ -27,6 +27,9 @@ IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'pac
 # Include userspace xen tools
 IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'imx-xen-base imx-xen-hypervisor', '', d)} "
 
+# Include jailhouse kernel module and tools
+IMAGE_INSTALL_append = " ${@bb.utils.contains('COMBINED_FEATURES', 'jailhouse', 'jailhouse', '', d)} "
+
 # IMX Bootlets Linux bootstream
 do_image_linux.sb[depends] = "elftosb-native:do_populate_sysroot \
                               imx-bootlets:do_deploy \
