@@ -6,3 +6,5 @@ SRC_URI = "${XEN_SRC};branch=${SRCBRANCH}"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
+
+COMPATIBLE_MACHINE = "${@bb.utils.contains('MACHINE_FEATURES', 'xen', '${MACHINE}', '(^$)', d)}"
