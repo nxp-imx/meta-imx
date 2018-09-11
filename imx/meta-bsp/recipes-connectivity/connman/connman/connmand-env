@@ -41,6 +41,7 @@ if test $nfsroot -eq 1 ; then
             done
         fi
     fi
+    EXTRA_PARAM=${EXTRA_PARAM}" -I usb0 -I usb1"
 fi
 
 #if [ -f @DATADIR@/connman/wired-setup ] ; then
