@@ -1,0 +1,46 @@
+From 27751d89248c8c5eef6d8b56eb8f7d2084145080 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Date: Thu, 5 Apr 2018 03:50:50 +0200
+Subject: [PATCH] tools/misc: fix hypothetical buffer overflow in xen-lowmemd
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+gcc-8 complains:
+
+    xen-lowmemd.c: In function 'handle_low_mem':
+    xen-lowmemd.c:80:55: error: '%s' directive output may be truncated writing up to 511 bytes into a region of size 489 [-Werror=format-truncation=]
+             snprintf(error, BUFSZ,"Failed to write target %s to xenstore", data);
+                                                           ^~               ~~~~
+    xen-lowmemd.c:80:9: note: 'snprintf' output between 36 and 547 bytes into a destination of size 512
+             snprintf(error, BUFSZ,"Failed to write target %s to xenstore", data);
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In practice it wouldn't happen, because 'data' contains string
+representation of 64-bit unsigned number (20 characters at most).
+But place a limit to mute gcc warning.
+
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Acked-by: Wei Liu <wei.liu2@citrix.com>
+Release-Acked-by: Juergen Gross <jgross@suse.com>
+---
+ tools/misc/xen-lowmemd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/misc/xen-lowmemd.c b/tools/misc/xen-lowmemd.c
+index 865a54c..79ad34c 100644
+--- a/tools/misc/xen-lowmemd.c
++++ b/tools/misc/xen-lowmemd.c
+@@ -77,7 +77,7 @@ void handle_low_mem(void)
+     if (!xs_write(xs_handle, XBT_NULL, 
+             "/local/domain/0/memory/target", data, strlen(data)))
+     {
+-        snprintf(error, BUFSZ,"Failed to write target %s to xenstore", data);
++        snprintf(error, BUFSZ,"Failed to write target %.24s to xenstore", data);
+         perror(error);
+     }
+ }
+-- 
+2.7.4
+

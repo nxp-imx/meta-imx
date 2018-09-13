@@ -1,0 +1,47 @@
+From 8717e7417cebeae162fd61ea4cbdcdd422748f08 Mon Sep 17 00:00:00 2001
+From: Juergen Gross <jgross@suse.com>
+Date: Fri, 20 Apr 2018 17:47:55 +0200
+Subject: [PATCH] shim: don't let build modify shim.config
+
+Currently building the shim will modify shim.config in case some config
+option was added or modified in the hypervisor.
+
+Avoid that by copying shim.config to an intermediate file instead.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Wei Liu <wei.liu2@citrix.com>
+---
+ tools/firmware/xen-dir/Makefile | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
+
+diff --git a/tools/firmware/xen-dir/Makefile b/tools/firmware/xen-dir/Makefile
+index a7e69ae..84648c3 100644
+--- a/tools/firmware/xen-dir/Makefile
++++ b/tools/firmware/xen-dir/Makefile
+@@ -41,16 +41,12 @@ linkfarm.stamp: $(DEP_DIRS) $(DEP_FILES) FORCE
+ $(D): linkfarm.stamp
+ 	$(MAKE) -C $(D)/xen distclean
+ 
+-.PHONY: shim-%config
+-shim-%config: $(D) FORCE
+-	$(MAKE) -C $(D)/xen $*config \
+-		XEN_CONFIG_EXPERT=y \
+-		KCONFIG_CONFIG=$(CURDIR)/shim.config
+-
+-xen-shim: $(D) shim-olddefconfig
+-	$(MAKE) -C $(D)/xen build \
+-		XEN_CONFIG_EXPERT=y \
+-		KCONFIG_CONFIG=$(CURDIR)/shim.config
++$(D)/xen/.config: shim.config $(D)
++	cp $< $@
++	$(MAKE) -C $(@D) olddefconfig XEN_CONFIG_EXPERT=y
++
++xen-shim: $(D)/xen/.config
++	$(MAKE) -C $(<D) build XEN_CONFIG_EXPERT=y
+ 	ln -sf $(D)/xen/xen $@
+ 	ln -sf $(D)/xen/xen-syms $@-syms
+ 
+-- 
+2.7.4
+

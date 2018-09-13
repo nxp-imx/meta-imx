@@ -90,6 +90,7 @@ RRECOMMENDS_${PN}-base = " \
     ${PN}-libvhd \
     ${PN}-flask \
     ${PN}-hvmloader \
+    ${PN}-shim \
     ${PN}-xenpaging \
     "
 
@@ -212,6 +213,7 @@ PACKAGES = "\
     ${PN}-scripts-block \
     ${PN}-scripts-common \
     ${PN}-scripts-network \
+    ${PN}-shim \
     ${PN}-staticdev \
     ${PN}-volatiles \
     ${PN}-xcutils \
@@ -635,6 +637,11 @@ FILES_${PN}-scripts-common = " \
     ${sysconfdir}/xen/scripts/xen-script-common.sh \
     "
 
+INSANE_SKIP_${PN}-shim = "arch"
+FILES_${PN}-shim = " \
+    ${libdir}/xen/boot/xen-shim \
+    "
+
 FILES_${PN}-volatiles = "\
     ${sysconfdir}/default/volatiles/99_xen \
     ${sysconfdir}/tmpfiles.d/xen.conf \
@@ -927,10 +934,17 @@ do_compile() {
     # workaround for build bug when CFLAGS is exported
     # https://www.mail-archive.com/xen-devel@lists.xen.org/msg67822.html
     unset CFLAGS
+
+    # Workaround for parallel build bug: build xen first.
+    # https://lists.xenproject.org/archives/html/xen-devel/2018-07/msg02551.html
+    oe_runmake xen
     oe_runmake
 }
 
 do_install() {
+    # CFLAGS is used to set PY_CFLAGS which affects the pygrub install
+    # so also need to unset CFLAGS here:
+    unset CFLAGS
     oe_runmake DESTDIR="${D}" install
 
     # remove installed volatiles

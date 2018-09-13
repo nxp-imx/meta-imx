@@ -1,0 +1,28 @@
+Patch derived from below Xen changeset.
+Signed-off-by: Christopher Clark <christopher.clark6@baesystems.com>
+
+commit 22bf5be3237cb482a2ffd772ffd20ce37285eebf
+Author: Olaf Hering <olaf@aepfle.de>
+Date:   Mon Jun 18 14:55:36 2018 +0200
+
+stubdom/vtpm: fix memcmp in TPM_ChangeAuthAsymFinish
+
+gcc8 spotted this error:
+error: 'memcmp' reading 20 bytes from a region of size 8 [-Werror=stringop-overflow=]
+
+Signed-off-by: Olaf Hering <olaf@aepfle.de>
+Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
+
+diff --git a/tpm/tpm_deprecated.c b/tpm/tpm_deprecated.c
+index c362b56..4c49f54 100644
+--- a/tpm/tpm_deprecated.c
++++ b/tpm/tpm_deprecated.c
+@@ -434,7 +434,7 @@ TPM_RESULT TPM_ChangeAuthAsymFinish(TPM_KEY_HANDLE parentHandle,
+   tpm_hmac_final(&hmac_ctx, b1.digest);
+   /* 6. The TPM SHALL compare b1 with newAuthLink. The TPM SHALL
+         indicate a failure if the values do not match. */
+-  if (memcmp(&b1, &newAuthLink, sizeof(TPM_HMAC))) {
++  if (memcmp(&b1, newAuthLink, sizeof(TPM_HMAC))) {
+     debug("TPM_ChangeAuthAsymFinish(): newAuthLink value does not match.");
+     return TPM_FAIL;
+   }

@@ -1,0 +1,74 @@
+From 938c8f53b1f80175c6f7a1399efdb984abb0cb8b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Date: Thu, 5 Apr 2018 03:50:53 +0200
+Subject: [PATCH] tools/xenpmd: fix possible '\0' truncation
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+gcc-8 complains:
+    xenpmd.c:207:9: error: 'strncpy' specified bound 32 equals destination size [-Werror=stringop-truncation]
+             strncpy(info->oem_info, attrib_value, 32);
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    xenpmd.c:201:9: error: 'strncpy' specified bound 32 equals destination size [-Werror=stringop-truncation]
+             strncpy(info->battery_type, attrib_value, 32);
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    xenpmd.c:195:9: error: 'strncpy' specified bound 32 equals destination size [-Werror=stringop-truncation]
+             strncpy(info->serial_number, attrib_value, 32);
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    xenpmd.c:189:9: error: 'strncpy' specified bound 32 equals destination size [-Werror=stringop-truncation]
+             strncpy(info->model_number, attrib_value, 32);
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Copy 31 chars, then make sure terminating '\0' is present. Those fields
+are passed to strlen and as '%s' for snprintf later.
+
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Acked-by: Wei Liu <wei.liu2@citrix.com>
+Release-Acked-by: Juergen Gross <jgross@suse.com>
+---
+ tools/xenpmd/xenpmd.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/tools/xenpmd/xenpmd.c b/tools/xenpmd/xenpmd.c
+index 689c8fd..56412a9 100644
+--- a/tools/xenpmd/xenpmd.c
++++ b/tools/xenpmd/xenpmd.c
+@@ -186,25 +186,29 @@ void set_attribute_battery_info(char *attrib_name,
+ 
+     if ( strstr(attrib_name, "model number") ) 
+     {
+-        strncpy(info->model_number, attrib_value, 32);
++        strncpy(info->model_number, attrib_value, 31);
++        info->model_number[31] = '\0';
+         return;
+     }
+ 
+     if ( strstr(attrib_name, "serial number") ) 
+     {
+-        strncpy(info->serial_number, attrib_value, 32);
++        strncpy(info->serial_number, attrib_value, 31);
++        info->serial_number[31] = '\0';
+         return;
+     }
+ 
+     if ( strstr(attrib_name, "battery type") ) 
+     {
+-        strncpy(info->battery_type, attrib_value, 32);
++        strncpy(info->battery_type, attrib_value, 31);
++        info->battery_type[31] = '\0';
+         return;
+     }
+ 
+     if ( strstr(attrib_name, "OEM info") ) 
+     {
+-        strncpy(info->oem_info, attrib_value, 32);
++        strncpy(info->oem_info, attrib_value, 31);
++        info->oem_info[31] = '\0';
+         return;
+     }
+ 
+-- 
+2.7.4
+
