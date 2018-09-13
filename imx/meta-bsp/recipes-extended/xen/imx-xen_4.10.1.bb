@@ -19,3 +19,5 @@ SRC_URI = " \
 SRCREV = "9240b9351175900ceb732718cd58bcc89329cd60"
 
 S = "${WORKDIR}/git"
+
+COMPATIBLE_MACHINE = "${@bb.utils.contains('MACHINE_FEATURES', 'xen', '${MACHINE}', '(^$)', d)}"
