@@ -16,6 +16,6 @@ SRC_URI = " \
     file://shim-don-t-let-build-modify-shim.config.patch \
     "
 
-SRCREV = "${AUTOREV}"
+SRCREV = "9240b9351175900ceb732718cd58bcc89329cd60"
 
 S = "${WORKDIR}/git"
