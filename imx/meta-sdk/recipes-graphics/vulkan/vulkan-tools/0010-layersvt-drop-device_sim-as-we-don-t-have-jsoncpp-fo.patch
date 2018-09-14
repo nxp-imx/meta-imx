@@ -1,0 +1,41 @@
+From 6d89b0953f8ffe2b81ecdf2e512afe59a86ab609 Mon Sep 17 00:00:00 2001
+From: Awais Belal <awais_belal@mentor.com>
+Date: Wed, 6 Dec 2017 19:17:58 +0500
+Subject: [PATCH] layersvt: drop device_sim as we don't have jsoncpp for now
+
+Signed-off-by: Awais Belal <awais_belal@mentor.com>
+---
+ layersvt/CMakeLists.txt | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/layersvt/CMakeLists.txt b/layersvt/CMakeLists.txt
+index 437057e8d..8ac4d4d13 100644
+--- a/layersvt/CMakeLists.txt
++++ b/layersvt/CMakeLists.txt
+@@ -45,7 +45,6 @@ set(LAYER_JSON_FILES
+     VkLayer_api_dump
+     VkLayer_monitor
+     VkLayer_screenshot
+-    VkLayer_device_simulation
+     )
+ 
+ set(VK_LAYER_RPATH /usr/lib/x86_64-linux-gnu/vulkan/layer:/usr/lib/i386-linux-gnu/vulkan/layer)
+@@ -131,7 +130,6 @@ include_directories(
+     ${CMAKE_CURRENT_BINARY_DIR}
+     ${CMAKE_BINARY_DIR}
+     ${PROJECT_SOURCE_DIR}/../glslang/SPIRV
+-    ${JSONCPP_INCLUDE_DIR}
+     ${X11_XLIB_INCLUDE_DIR}
+ )
+ 
+@@ -176,7 +174,6 @@ add_dependencies(VkLayer_utilsvt generate_helper_files)
+ # VulkanTools layers
+ add_vk_layer(monitor monitor.cpp ../layers/vk_layer_table.cpp)
+ add_vk_layer(screenshot screenshot.cpp screenshot_parsing.h screenshot_parsing.cpp ../layers/vk_layer_table.cpp)
+-add_vk_layer(device_simulation device_simulation.cpp ../layers/vk_layer_table.cpp ${JSONCPP_SOURCE_DIR}/jsoncpp.cpp)
+ # generated
+ add_vk_layer(api_dump api_dump.cpp ../layers/vk_layer_table.cpp)
+ 
+-- 
+2.11.1
+

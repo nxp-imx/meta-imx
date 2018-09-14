@@ -1,0 +1,108 @@
+From 00241b5774d0b730958b03c588e4ff56ba38774f Mon Sep 17 00:00:00 2001
+From: Awais Belal <awais_belal@mentor.com>
+Date: Thu, 7 Dec 2017 16:54:56 +0500
+Subject: [PATCH] CMakeLists: add include path so Xlib.h is found as needed
+
+All the targets including vk_platform.h or directly including
+X11/Xlib.h require to know the directory for the installed
+header. Add the directory to these so the requirements are
+filled in properly.
+
+Signed-off-by: Awais Belal <awais_belal@mentor.com>
+---
+ CMakeLists.txt                        | 1 +
+ layers/CMakeLists.txt                 | 1 +
+ layersvt/CMakeLists.txt               | 1 +
+ vktrace/vktrace_common/CMakeLists.txt | 1 +
+ vktrace/vktrace_layer/CMakeLists.txt  | 1 +
+ vktrace/vktrace_replay/CMakeLists.txt | 1 +
+ vktrace/vktrace_trace/CMakeLists.txt  | 1 +
+ 7 files changed, 7 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1b3e8770a..ddb8aac18 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -42,6 +42,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+ 
+     if (BUILD_WSI_XLIB_SUPPORT)
+         find_package(X11 REQUIRED)
++        find_path(X11_XLIB_INCLUDE_DIR X11/Xlib.h DOC "Path to X11/Xlib.h")
+     endif()
+ 
+     if (BUILD_WSI_WAYLAND_SUPPORT)
+diff --git a/layers/CMakeLists.txt b/layers/CMakeLists.txt
+index 9567d7146..998482052 100644
+--- a/layers/CMakeLists.txt
++++ b/layers/CMakeLists.txt
+@@ -142,6 +142,7 @@ include_directories(
+     ${CMAKE_CURRENT_BINARY_DIR}
+     ${CMAKE_PROJECT_BINARY_DIR}
+     ${CMAKE_BINARY_DIR}
++    ${X11_XLIB_INCLUDE_DIR}
+ )
+ 
+ if (WIN32)
+diff --git a/layersvt/CMakeLists.txt b/layersvt/CMakeLists.txt
+index 3c6055050..437057e8d 100644
+--- a/layersvt/CMakeLists.txt
++++ b/layersvt/CMakeLists.txt
+@@ -132,6 +132,7 @@ include_directories(
+     ${CMAKE_BINARY_DIR}
+     ${PROJECT_SOURCE_DIR}/../glslang/SPIRV
+     ${JSONCPP_INCLUDE_DIR}
++    ${X11_XLIB_INCLUDE_DIR}
+ )
+ 
+ if (WIN32)
+diff --git a/vktrace/vktrace_common/CMakeLists.txt b/vktrace/vktrace_common/CMakeLists.txt
+index b7d6e33eb..c223912a9 100644
+--- a/vktrace/vktrace_common/CMakeLists.txt
++++ b/vktrace/vktrace_common/CMakeLists.txt
+@@ -7,6 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/../)
+ include_directories(
+     ${SRC_DIR}/vktrace_common
+     ${SRC_DIR}/thirdparty
++    ${X11_XLIB_INCLUDE_DIR}
+ )
+ 
+ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+diff --git a/vktrace/vktrace_layer/CMakeLists.txt b/vktrace/vktrace_layer/CMakeLists.txt
+index 4a25eec87..182a406b7 100644
+--- a/vktrace/vktrace_layer/CMakeLists.txt
++++ b/vktrace/vktrace_layer/CMakeLists.txt
+@@ -75,6 +75,7 @@ include_directories(
+     ${VKTRACE_VULKAN_INCLUDE_DIR}
+     ${CMAKE_BINARY_DIR}
+     ${GENERATED_FILES_DIR}
++    ${X11_XLIB_INCLUDE_DIR}
+ )
+ 
+ # copy/link layer json file into build/layersvt directory
+diff --git a/vktrace/vktrace_replay/CMakeLists.txt b/vktrace/vktrace_replay/CMakeLists.txt
+index 946d49691..adbf10844 100644
+--- a/vktrace/vktrace_replay/CMakeLists.txt
++++ b/vktrace/vktrace_replay/CMakeLists.txt
+@@ -69,6 +69,7 @@ include_directories(
+     ${GENERATED_FILES_DIR}
+     ${VKTRACE_VULKAN_INCLUDE_DIR}
+     ${CMAKE_BINARY_DIR}
++    ${X11_XLIB_INCLUDE_DIR}
+ )
+ 
+ 
+diff --git a/vktrace/vktrace_trace/CMakeLists.txt b/vktrace/vktrace_trace/CMakeLists.txt
+index 5bffb4d9f..d2707ecd4 100644
+--- a/vktrace/vktrace_trace/CMakeLists.txt
++++ b/vktrace/vktrace_trace/CMakeLists.txt
+@@ -23,6 +23,7 @@ include_directories(
+     ${VULKAN_TOOLS_SOURCE_DIR}/layersvt
+     ${CMAKE_BINARY_DIR}
+     ${GENERATED_FILES_DIR}
++    ${X11_XLIB_INCLUDE_DIR}
+ )
+ 
+ if (NOT WIN32)
+-- 
+2.11.1
+

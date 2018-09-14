@@ -10,7 +10,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-VULKAN_TOOLS = "vulkan vulkan-demos vkmark"
+VULKAN_TOOLS = "vulkan vulkan-demos vkmark vulkan-tools vulkan-tools-layer-libs"
 
 # Common tools independent of the graphics backend
 SOC_TOOLS_GPU                          = "opencv-samples"
