@@ -7,8 +7,7 @@ DESCRIPTION = "Gstreamer freescale plugins"
 LICENSE = "GPLv2 & LGPLv2 & LGPLv2.1"
 SECTION = "multimedia"
 
-DEPENDS = "imx-codec imx-parser virtual/kernel libdrm gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
+DEPENDS = "imx-codec imx-parser libdrm gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
 DEPENDS_append_mx6 = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 DEPENDS_append_imxvpu = " imx-vpuwrap"
@@ -29,7 +28,7 @@ SRCREV = "2287ca3f27ae3969fbfbdd64f58ab0ae9a08b6c7"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig use-imx-headers
 
 PLATFORM_mx6 = "MX6"
 PLATFORM_mx6sl = "MX6SL"
@@ -42,7 +41,7 @@ PLATFORM_mx8 = "MX8"
 
 # Todo add a mechanism to map possible build targets
 EXTRA_OECONF = "PLATFORM=${PLATFORM} \
-                CPPFLAGS="-I${STAGING_KERNEL_BUILDDIR}/include/generated/uapi -I${STAGING_KERNEL_DIR}/include/uapi -I${STAGING_KERNEL_DIR}/include" \
+                CPPFLAGS="-I${STAGING_INCDIR_IMX}" \
                 CROSS_ROOT=${PKG_CONFIG_SYSROOT_DIR} \
                 ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', bb.utils.contains('DISTRO_FEATURES', 'x11', '--disable-x11', '', d), '', d)}"
 

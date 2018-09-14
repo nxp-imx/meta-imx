@@ -11,10 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
                     file://COPYING.LIB;md5=6762ed442b3822387a51c92d928ead0d \
                     file://common/coverage/coverage-report.pl;beginline=2;endline=17;md5=a4e1830fce078028c8f0974161272607"
 
-DEPENDS += "virtual/kernel"
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
-
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 # Enable pango lib
 PACKAGECONFIG_append = " pango "
@@ -36,15 +33,11 @@ SRC_URI = " \
 "
 SRCREV = "318a9477159d6b162e480faf29f56153b27fb6a7"
 
+inherit use-imx-headers
+
 EXTRA_AUTORECONF = ""
 
-# Find ion.h in kernel
-EXTRA_OECONF = " \
-    CPPFLAGS=" \
-        -I${STAGING_KERNEL_DIR}/include/uapi \
-        -I${STAGING_KERNEL_DIR}/include \
-    " \
-"
+EXTRA_OECONF = "CPPFLAGS="-I${STAGING_INCDIR_IMX}""
 
 EXTRA_OEMAKE += "GIR_EXTRA_LIBS_PATH=${GIR_EXTRA_LIBS_PATH}:${B}/gst-libs/gst/allocators/.libs"
 
