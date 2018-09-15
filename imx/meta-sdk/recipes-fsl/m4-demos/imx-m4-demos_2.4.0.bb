@@ -35,4 +35,4 @@ do_deploy () {
 addtask deploy before do_build after do_install
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx7ulp|mx8qm)"
+COMPATIBLE_MACHINE = "(mx7ulp)"
