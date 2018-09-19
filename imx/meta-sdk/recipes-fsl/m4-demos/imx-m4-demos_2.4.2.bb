@@ -18,8 +18,8 @@ SOC_mx8qxp= "imx8qx"
 IMX_PACKAGE_NAME = "${SOC}-m4-demo-${PV}"
 SRC_URI_NAME = "${SOC}"
 
-SRC_URI[imx8mm.md5sum] = "2334b4d5a30482845e8cff757fff5f84"
-SRC_URI[imx8mm.sha256sum] = "7c89f58742b8577601b382271d0b2b1f31f3eee9723abf64aac1fd55ae0baefe"
+SRC_URI[imx8mm.md5sum] = "576aace71cf194169d36ca658d63317e"
+SRC_URI[imx8mm.sha256sum] = "29844ff7771c74ea36950f5a2d561336f0d7aad5178add1a76643806fd78c63e"
 
 SCR = "SCR-${SOC}-m4-demo.txt"
 
