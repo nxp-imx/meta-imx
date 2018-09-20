@@ -38,6 +38,7 @@ DEPENDS += "wayland wayland-protocols libinput virtual/egl pango wayland-native"
 
 WESTON_MAJOR_VERSION = "${@'.'.join(d.getVar('PV').split('.')[0:1])}"
 
+
 EXTRA_OECONF = "--enable-setuid-install \
                 --disable-rdp-compositor \
                 "
@@ -53,6 +54,12 @@ EXTRA_OECONF_append_mx6 = "\
 EXTRA_OECONF_append_mx7 = "\
 		WESTON_NATIVE_BACKEND=fbdev-backend.so \
 		"
+
+IMX_EXTRA_OECONF_OPENGL          = ""
+IMX_EXTRA_OECONF_OPENGL_imxgpu2d = " --disable-opengl"
+IMX_EXTRA_OECONF_OPENGL_imxgpu3d = ""
+EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_OPENGL}"
+
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'kms fbdev wayland egl', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'xwayland', '', d)} \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl pam systemd x11', d)} \
