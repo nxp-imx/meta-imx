@@ -15,7 +15,9 @@ SRC_URI = " \
 "
 SRCREV = "1f424f28fcc23c4348ba11ef0f23ecf876a23db5"
 
-DEPENDS += "gstreamer1.0-plugins-base virtual/kernel"
+DEPENDS += "gstreamer1.0-plugins-base virtual/kernel \
+            ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)} \
+"
 # Make sure kernel sources are available
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
