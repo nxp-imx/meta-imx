@@ -1,6 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
 # Copyright 2017-2018 NXP
-
 SUMMARY = "A Daemon wait for NXP mfgtools host's command"
 SECTION = "base"
 DEPENDS = "virtual/kernel dosfstools-native"
