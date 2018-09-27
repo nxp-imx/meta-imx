@@ -23,6 +23,9 @@ do_install_append () {
     fi
 }
 
+# Use the latest version of sdma firmware in firmware-imx
+PACKAGES_remove = "${PN}-imx-sdma-license ${PN}-imx-sdma-imx6q ${PN}-imx-sdma-imx7d"
+
 FILES_${PN}-qca += " \
   ${sysconfdir}/bluetooth/firmware.conf \
 "
