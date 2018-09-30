@@ -15,6 +15,7 @@ SRC_URI = "${WESTON_SRC};branch=${SRCBRANCH} \
            file://0001-make-error-portable.patch \
            file://xwayland.weston-start \
            file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
+           file://0003-weston-touch-calibrator-Advertise-the-touchscreen-ca.patch \
 "
 #SRC_URI += "file://0001-weston.ini.in-Modify-paths-to-point-to-right-directo.patch"
 # Use argb8888 as gbm-format for i.MX8MQ only
