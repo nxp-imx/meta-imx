@@ -130,7 +130,7 @@ do_install_append() {
         install -Dm 644 ${WORKDIR}/xwayland.weston-start ${D}${datadir}/weston-start/xwayland
     fi
 
-    if [ "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
+    if [ -z "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
         WESTON_INI_SRC=${B}/ivi-shell/weston.ini
     else
         WESTON_INI_SRC=${B}/weston.ini
