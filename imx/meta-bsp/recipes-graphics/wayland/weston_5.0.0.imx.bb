@@ -17,7 +17,6 @@ SRC_URI = "${WESTON_SRC};branch=${SRCBRANCH} \
            file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
            file://0003-weston-touch-calibrator-Advertise-the-touchscreen-ca.patch \
 "
-#SRC_URI += "file://0001-weston.ini.in-Modify-paths-to-point-to-right-directo.patch"
 # Use argb8888 as gbm-format for i.MX8MQ only
 SRC_URI_append_mx8mq = " file://0001-weston.ini-using-argb8888-as-gbm-default-on-mscale-8.patch \
                          file://0002-weston.ini-configure-desktop-shell-size-in-weston-co.patch \
@@ -130,7 +129,7 @@ do_install_append() {
         install -Dm 644 ${WORKDIR}/xwayland.weston-start ${D}${datadir}/weston-start/xwayland
     fi
 
-    if [ "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
+    if [ -z "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
         WESTON_INI_SRC=${B}/ivi-shell/weston.ini
     else
         WESTON_INI_SRC=${B}/weston.ini
