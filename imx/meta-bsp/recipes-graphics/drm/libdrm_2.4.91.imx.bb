@@ -61,3 +61,5 @@ RRECOMMENDS_${PN}-drivers_append_imxgpu = " ${PN}-vivante"
 FILES_${PN}-vivante = "${libdir}/libdrm_vivante.so.*"
 
 S = "${WORKDIR}/git"
+
+PACKAGE_ARCH_imxgpu2d = "${MACHINE_SOCARCH}"
