@@ -24,6 +24,7 @@ BBMASK += "meta-freescale/recipes-graphics/wayland/weston_%.bbappend"
 BBMASK += "meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium_52.0.2743.76.bbappend"
 BBMASK += "meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bbappend"
 BBMASK += "meta-freescale/recipes-graphics/wayland/wayland_1.15.%.bbappend"
+BBMASK += "meta-freescale/recipes-graphics/drm/libdrm_%.bbappend"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 
