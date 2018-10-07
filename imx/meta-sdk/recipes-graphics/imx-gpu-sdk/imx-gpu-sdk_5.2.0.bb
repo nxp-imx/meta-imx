@@ -18,7 +18,7 @@ DEPENDS_append_mx8      = \
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
-SRCREV = "c04432efde98d011ec1536faf19786f69e408598"
+SRCREV = "c42a1c815ff77d45eca07a3541864226108232ca"
 
 
 # For backwards compatibility
