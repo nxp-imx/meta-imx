@@ -51,12 +51,14 @@ do_compile () {
 
 
 do_deploy () {
-   install -d ${DEPLOYDIR}
-   ${TARGET_PREFIX}objcopy -O binary ${B}/core/tee.elf ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin
+    install -d ${DEPLOYDIR}
+    ${TARGET_PREFIX}objcopy -O binary ${B}/core/tee.elf ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin
 
-   IMX_LOAD_ADDR=`cat ${B}/core/tee-init_load_addr.txt` && \
-   uboot-mkimage -A arm -O linux -C none -a ${IMX_LOAD_ADDR} -e ${IMX_LOAD_ADDR} \
-    -d ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin ${DEPLOYDIR}/uTee-${OPTEE_BIN_EXT}
+    if [ "${OPTEE_ARCH}" != "arm64" ]; then
+        IMX_LOAD_ADDR=`cat ${B}/core/tee-init_load_addr.txt` && \
+        uboot-mkimage -A arm -O linux -C none -a ${IMX_LOAD_ADDR} -e ${IMX_LOAD_ADDR} \
+            -d ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin ${DEPLOYDIR}/uTee-${OPTEE_BIN_EXT}
+    fi
 
     cd ${DEPLOYDIR}
     ln -sf tee.${PLATFORM_FLAVOR}.bin tee.bin
