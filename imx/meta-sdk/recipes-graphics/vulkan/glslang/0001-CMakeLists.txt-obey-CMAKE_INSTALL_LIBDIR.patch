@@ -1,0 +1,82 @@
+From 372422ed8ce32e1085cd524156c687df65095237 Mon Sep 17 00:00:00 2001
+From: Awais Belal <awais_belal@mentor.com>
+Date: Tue, 25 Oct 2016 14:44:20 +0500
+Subject: [PATCH] CMakeLists.txt: obey CMAKE_INSTALL_LIBDIR
+
+Not using the exact path that is set through cmake
+will end up in a mixed configuration setup where
+files are installed on hard-coded locations.
+
+Signed-off-by: Awais Belal <awais_belal@mentor.com>
+---
+ OGLCompilersDLL/CMakeLists.txt             | 2 +-
+ SPIRV/CMakeLists.txt                       | 2 +-
+ glslang/CMakeLists.txt                     | 2 +-
+ glslang/OSDependent/Unix/CMakeLists.txt    | 2 +-
+ glslang/OSDependent/Windows/CMakeLists.txt | 2 +-
+ hlsl/CMakeLists.txt                        | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/OGLCompilersDLL/CMakeLists.txt b/OGLCompilersDLL/CMakeLists.txt
+index 4954db9..6b518d9 100644
+--- a/OGLCompilersDLL/CMakeLists.txt
++++ b/OGLCompilersDLL/CMakeLists.txt
+@@ -8,4 +8,4 @@ if(WIN32)
+ endif(WIN32)
+ 
+ install(TARGETS OGLCompiler 
+-        ARCHIVE DESTINATION lib)
++        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+diff --git a/SPIRV/CMakeLists.txt b/SPIRV/CMakeLists.txt
+index 48a6c46..c657d56 100755
+--- a/SPIRV/CMakeLists.txt
++++ b/SPIRV/CMakeLists.txt
+@@ -41,4 +41,4 @@ if(WIN32)
+ endif(WIN32)
+ 
+ install(TARGETS SPIRV SPVRemapper
+-        ARCHIVE DESTINATION lib)
++        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+diff --git a/glslang/CMakeLists.txt b/glslang/CMakeLists.txt
+index ff91135..efb7f15 100644
+--- a/glslang/CMakeLists.txt
++++ b/glslang/CMakeLists.txt
+@@ -89,4 +89,4 @@ if(WIN32)
+ endif(WIN32)
+ 
+ install(TARGETS glslang 
+-        ARCHIVE DESTINATION lib)
++        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+diff --git a/glslang/OSDependent/Unix/CMakeLists.txt b/glslang/OSDependent/Unix/CMakeLists.txt
+index 174cc91..d98057b 100644
+--- a/glslang/OSDependent/Unix/CMakeLists.txt
++++ b/glslang/OSDependent/Unix/CMakeLists.txt
+@@ -2,4 +2,4 @@ add_library(OSDependent STATIC ossource.cpp ../osinclude.h)
+ set_property(TARGET OSDependent PROPERTY FOLDER glslang)
+ 
+ install(TARGETS OSDependent 
+-        ARCHIVE DESTINATION lib)
++        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+diff --git a/glslang/OSDependent/Windows/CMakeLists.txt b/glslang/OSDependent/Windows/CMakeLists.txt
+index 399760c..744bcbb 100644
+--- a/glslang/OSDependent/Windows/CMakeLists.txt
++++ b/glslang/OSDependent/Windows/CMakeLists.txt
+@@ -14,4 +14,4 @@ if(WIN32)
+ endif(WIN32)
+ 
+ install(TARGETS OSDependent 
+-        ARCHIVE DESTINATION lib)
++        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+diff --git a/hlsl/CMakeLists.txt b/hlsl/CMakeLists.txt
+index c7537e2..5111661 100755
+--- a/hlsl/CMakeLists.txt
++++ b/hlsl/CMakeLists.txt
+@@ -23,4 +23,4 @@ if(WIN32)
+ endif(WIN32)
+ 
+ install(TARGETS HLSL
+-        ARCHIVE DESTINATION lib)
++        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+-- 
+1.9.1
+

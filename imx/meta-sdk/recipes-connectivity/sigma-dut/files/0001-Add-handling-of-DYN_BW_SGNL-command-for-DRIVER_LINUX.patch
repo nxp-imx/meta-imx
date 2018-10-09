@@ -1,0 +1,27 @@
+From 033a5104728b1a0baa52d5f8b107bfbc6e790ebd Mon Sep 17 00:00:00 2001
+From: Nirav Shah <nnshah@codeaurora.org>
+Date: Thu, 9 Nov 2017 16:42:30 +0530
+Subject: [PATCH] Add handling of DYN_BW_SGNL command for DRIVER_LINUX_WCN
+
+When DYN_BW_SGNL command is issued, the corresponding iwpriv command
+needs to be invoked by sigma_dut. This fix adds the handing DYN_BW_SGNL
+command for DRIVER_LINUX_WCN for STA mode.
+---
+ sta.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/sta.c b/sta.c
+index dfa7280..083c1aa 100644
+--- a/sta.c
++++ b/sta.c
+@@ -3954,6 +3954,7 @@ static int cmd_sta_set_wireless_common(const char *intf, struct sigma_dut *dut,
+ 	if (val) {
+ 		switch (get_driver_type()) {
+ 		case DRIVER_WCN:
++		case DRIVER_LINUX_WCN:
+ 			if (strcasecmp(val, "enable") == 0) {
+ 				snprintf(buf, sizeof(buf),
+ 					 "iwpriv %s cwmenable 1", intf);
+-- 
+1.9.1
+

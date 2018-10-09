@@ -1,0 +1,30 @@
+From 7b79281810012925da71cf2250fdde048131ca8d Mon Sep 17 00:00:00 2001
+From: Nirav Shah <nnshah@codeaurora.org>
+Date: Tue, 17 Oct 2017 10:49:11 +0530
+Subject: [PATCH] Add handling of DYN_BW_SGNL command for AP mode
+
+When DYN_BW_SGNL command is issued, the corresponding iwpriv command
+needs to be invoked by sigma_dut. This fix adds the handing DYN_BW_SGNL
+command for DRIVER_WCN and DRIVER_LINUX_WCN for AP mode.
+---
+ ap.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/ap.c b/ap.c
+index d0f42de..98159c3 100644
+--- a/ap.c
++++ b/ap.c
+@@ -717,6 +717,10 @@ static int cmd_ap_set_wireless(struct sigma_dut *dut, struct sigma_conn *conn,
+ 				return 0;
+ 			}
+ 			break;
++		case DRIVER_WCN:
++		case DRIVER_LINUX_WCN:
++			ath_config_dyn_bw_sig(dut, ifname, val);
++			break;
+ 		default:
+ 			sigma_dut_print(dut, DUT_MSG_ERROR,
+ 					"Unsupported DYN_BW_SGL with the current driver");
+-- 
+1.9.1
+

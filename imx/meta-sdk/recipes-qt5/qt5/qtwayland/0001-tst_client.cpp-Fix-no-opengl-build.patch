@@ -1,0 +1,63 @@
+From 9e2f959060d8767f8710e113621c0004f21ace93 Mon Sep 17 00:00:00 2001
+From: Yuqing Zhu <carol.zhu@nxp.com>
+Date: Fri, 11 May 2018 13:51:55 +0800
+Subject: [PATCH] tst_client.cpp: Fix no-opengl build error
+
+The error is introduced by bf09c7a1493c01a65ee0f110b37a04e653edc08e
+
+Upstream-Status: Pending
+
+Signed-off-by: Yuqing Zhu <carol.zhu@nxp.com>
+---
+ tests/auto/client/client/tst_client.cpp | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/tests/auto/client/client/tst_client.cpp b/tests/auto/client/client/tst_client.cpp
+index 2124205..d63030d 100644
+--- a/tests/auto/client/client/tst_client.cpp
++++ b/tests/auto/client/client/tst_client.cpp
+@@ -114,6 +114,7 @@ public:
+     QPoint mousePressPos;
+ };
+ 
++#ifndef QT_NO_OPENGL
+ class TestGlWindow : public QOpenGLWindow
+ {
+     Q_OBJECT
+@@ -132,6 +133,7 @@ void TestGlWindow::paintGL()
+ {
+     glClear(GL_COLOR_BUFFER_BIT);
+ }
++#endif // QT_NO_OPENGL
+ 
+ class tst_WaylandClient : public QObject
+ {
+@@ -170,7 +172,9 @@ private slots:
+     void dontCrashOnMultipleCommits();
+     void hiddenTransientParent();
+     void hiddenPopupParent();
++#ifndef  QT_NO_OPENGL
+     void glWindow();
++#endif // QT_NO_OPENGL
+ 
+ private:
+     MockCompositor *compositor;
+@@ -433,6 +437,7 @@ void tst_WaylandClient::hiddenPopupParent()
+     QTRY_VERIFY(compositor->surface());
+ }
+ 
++#ifndef  QT_NO_OPENGL
+ void tst_WaylandClient::glWindow()
+ {
+     QSKIP("Skipping GL tests, as not supported by all CI systems: See https://bugreports.qt.io/browse/QTBUG-65802");
+@@ -447,6 +452,7 @@ void tst_WaylandClient::glWindow()
+     testWindow->setVisible(false);
+     QTRY_VERIFY(!compositor->surface());
+ }
++#endif // QT_NO_OPENGL
+ 
+ int main(int argc, char **argv)
+ {
+-- 
+1.9.1
+

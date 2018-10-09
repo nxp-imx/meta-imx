@@ -51,14 +51,4 @@ do_install_append () {
     install -m 0755 ${WORKDIR}/qt5-${IMX_BACKEND}.sh ${D}${sysconfdir}/profile.d/qt5.sh
 }
 
-QT_CONFIG_FLAGS_APPEND = ""
-QT_CONFIG_FLAGS_APPEND_imxpxp = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '-no-eglfs', \
-                       bb.utils.contains('DISTRO_FEATURES', 'wayland', '-no-eglfs', '-eglfs', d), d)}"
-QT_CONFIG_FLAGS_APPEND_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '-no-eglfs', '-no-opengl -linuxfb -no-eglfs', d)}"
-QT_CONFIG_FLAGS_APPEND_imxgpu3d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '-no-eglfs', \
-                       bb.utils.contains('DISTRO_FEATURES', 'wayland', '-no-eglfs', '-eglfs', d), d)}"
-
-PACKAGECONFIG_WAYLAND ?= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xkbcommon-evdev', '', d)}"
-PACKAGECONFIG += "${PACKAGECONFIG_WAYLAND}"
-
 FILES_${PN} += "${sysconfdir}/profile.d/qt5.sh"

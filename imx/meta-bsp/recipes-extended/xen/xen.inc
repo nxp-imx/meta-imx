@@ -399,8 +399,7 @@ FILES_${PN}-hypervisor = "\
 FILES_${PN}-init-xenstore-dom = "${libdir}/xen/bin/init-xenstore-domain"
 
 FILES_${PN}-efi = "\
-    ${exec_prefix}/lib64 \
-    ${exec_prefix}/lib64/xen* \
+    ${exec_prefix}/lib64/efi \
     "
 
 FILES_${PN}-base = "\

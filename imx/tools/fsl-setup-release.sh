@@ -63,10 +63,22 @@ do
            ;;
         h) fsl_setup_help='true';
            ;;
-        ?) fsl_setup_error='true';
+        \?) fsl_setup_error='true';
            ;;
     esac
 done
+shift $((OPTIND-1))
+if [ $# -ne 0 ]; then
+    fsl_setup_error=true
+    echo -e "Invalid command line ending: '$@'"
+fi
+OPTIND=$OLD_OPTIND
+if test $fsl_setup_help; then
+    usage && clean_up && return 1
+elif test $fsl_setup_error; then
+    clean_up && return 1
+fi
+
 
 if [ -z "$DISTRO" ]; then
     if [ -z "$FSLDISTRO" ]; then
@@ -74,13 +86,6 @@ if [ -z "$DISTRO" ]; then
     fi
 else
     FSLDISTRO="$DISTRO"
-fi
-
-OPTIND=$OLD_OPTIND
-
-# check the "-h" and other not supported options
-if test $fsl_setup_error || test $fsl_setup_help; then
-    usage && clean_up && return 1
 fi
 
 if [ -z "$BUILD_DIR" ]; then
@@ -91,6 +96,24 @@ if [ -z "$MACHINE" ]; then
     echo setting to default machine
     MACHINE='imx6qpsabresd'
 fi
+
+case $MACHINE in
+imx8*)
+    case $DISTRO in
+    *wayland)
+        : ok
+        ;;
+    *)
+        echo -e "\n ERROR - Only Wayland distros are supported for i.MX 8 or i.MX 8M"
+        echo -e "\n"
+        return 1
+        ;;
+    esac
+    ;;
+*)
+    : ok
+    ;;
+esac
 
 # copy new EULA into community so setup uses latest i.MX EULA
 cp sources/meta-fsl-bsp-release/imx/EULA.txt sources/meta-freescale/EULA

@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
 PV = "5.5+git${SRCPV}"
 
-SRC_URI = "git://github.com/codeauroraforum/imx-kobs.git;protocol=https"
+SRC_URI = "git://github.com/nxpmicro/imx-kobs.git;protocol=https"
 
 SRCREV = "a0e9adce2fb7fcd57e794d7f9a5deba0f94f521b"
 

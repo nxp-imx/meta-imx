@@ -1,4 +1,4 @@
-i.MX Linux Yocto Project BSP 4.9.88-2.0.0_ga Release
+i.MX Linux Yocto Project BSP 4.9.123-2.3.0_8mm_ga Release
 =====================================================
 
 The following boards were tested in this release.
@@ -20,33 +20,20 @@ The following boards were tested in this release.
    * NXP i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
    * NXP i.MX 6SOLO SABRE Auto (imx6solosabreauto )
    * NXP i.MX 7ULP EVK (imx7ulpevk)
+   * NXP i.MX 8MMini EVK (imx8mmevk)
    * NXP i.MX 8MQuad EVK (imx8mqevk)
-
-Note the following i.MX 8 boards are not supported in this release.
-   * NXP i.MX 8QuadMax MEK (imx8qmmek)
-   * NXP i.MX 8QuadXPllus (imx8qxpmek)
+   * NXP i.MX 8QuadMax LPDDR4 ARM2 (imx8qmlpddr4arm2)
+   * NXP i.MX 8QuadXPlus LPDDR4 ARM2 (imx8qxplpddr4arm2)
+   * NXP i.MX 8QuadXPlus MEK (imx8qxpmek)
 
  * i.MX Device Tree configurations for each machine
     Each machine files lists the associated device trees for that machine.
 
  * i.MX U-Boot configurations for each machine
-    imx6qpsabresd - sd, sata
-    imx6qpsabreauto - sd, eim-nor, nand, spi-nor, sata
-    imx7dsabresd - sd, qspi1, nand, epdc
-    imx6ulevk - sd, qspi1
-    imx6ullevk - sd
-    imx6sxsabresd - sd, qspi2, m4fastup, emmc
-    imx6sxsabreauto - sd, qspi1, nand
-    imx6qsabresd - sd, sata
-    imx6qsabreauto - sd, eim-nor, spi-nor, nand, sata
-    imx6dlsabresd - sd, epdc
-    imx6dlsabreauto - sd, eim-nor, spi-nor, nand
-    imx6solosabresd - sd
-    imx6solosabreauto - sd, eim-nor, spi-nor, nand
-    imx6slevk - sd, spi-nor, epdc
-    imx6sllevk - sd, epdc
-    imx7ulpevk - sd, emmc
-    imx8mqevk - sd
+    imx8mm - sd, fspi
+    imx8mq - sd
+    imx8qm - sd, fspi
+    imx8qxp - sd, fspi
 
 
 Quick Start Guide
@@ -54,7 +41,7 @@ Quick Start Guide
 See the i.MX Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX Linux BSP repo
-$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-rocko -m imx-4.9.88-2.0.0_ga.xml
+$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-rocko -m imx-4.9.123-2.3.0-8mm_ga.xml
 
 Download the Yocto Project Layers:
 $: repo sync
@@ -136,37 +123,6 @@ DEFAULTTUNE_virtclass-multilib-lib32 = "armv7athf-neon"
 
 - 32-bit libraries to be added into the image
 IMAGE_INSTALL_append = "lib32-glibc lib32-libgcc lib32-libstdc++"
-
-Enable/disable OPTEE
----------------------------
-Optee feature is not enabled by default in the build. If you want to enable optee at build time, you need to add
-DISTRO_FEATURES_append = " optee" to local.conf file
-
-### To ENABLE optee, assuimg the machine supports it.
-echo "DISTRO_FEATURES_append = \" optee\"" >> conf/local.conf
-
-This updates the uboot config file, add the specific .dts files, and integrates the optee packages in rootfs.
-If you want to switch back to a non-optee configuration, you can just flash a uboot without optee enabled.
-
-Building u-boot for imx6 and imx7 legacy boards with optee disabled:
-
-cd <build folder>
-echo "UBOOT_CONFIG = \"sd-optee\"" >> conf/local.conf
-MACHINE=<MACHINE> bitbake u-boot-imx -c deploy -f
-cp tmp/deploy/images/<MACHINE>/u-boot-<MACHINE>.imx <folder where you keep the uboots>/u-boot-<MACHINE>'_'sd-optee.imx
-
-Flashing boot for imx6 and imx7 legacy boards:
-
-dd if=u-boot-<MACHINE>_sd-optee.imx of=<SDCARD> conv=notrunc seek=2 bs=512
-
-Building boot image for imx8 with optee disabled:
-
-To disable optee from the boot image you should remove tee.bin from eFIT image
-Please refer to README and <mkimage_fit_atf.sh> files from imx-boot for more information
-
-Flashing boot for imx8:
-
-dd if=imx-boot-<MACHINE>-sd.bin of=<SDCARD> conv=notrunc seek=33 bs=1K
 
 Hardware Floating Point
 -----------------------

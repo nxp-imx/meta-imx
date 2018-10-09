@@ -12,6 +12,7 @@ S = "${WORKDIR}/git"
 
 SRCREV = "${AUTOREV}"
 SRC_URI = "git://github.com/vkmark/vkmark;protocol=https"
+SRC_URI += "file://0001-scenes-Use-depth-format-supported-by-i.MX.patch"
 
 VKMARK_INSTALL_DIR = "${WORKDIR}/vm-install"
 

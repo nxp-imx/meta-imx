@@ -54,16 +54,17 @@ DEFAULTTUNE_vf ?= "cortexa5thf-neon"
 
 INHERIT += "machine-overrides-extender"
 
-MACHINEOVERRIDES_EXTENDER_mx6q   = "imxfbdev:imxipu:imxvpu:imxvpucnm:imxgpu:imxgpu2d:imxdpublit:imxgpu3d"
-MACHINEOVERRIDES_EXTENDER_mx6dl  = "imxfbdev:imxipu:imxpxp:imxvpu:imxvpucnm:imxgpu:imxgpu2d:imxdpublit:imxgpu3d:imxepdc"
-MACHINEOVERRIDES_EXTENDER_mx6sx  = "imxfbdev:imxpxp:imxgpu:imxgpu2d:imxdpublit:imxgpu3d"
-MACHINEOVERRIDES_EXTENDER_mx6sl  = "imxfbdev:imxpxp:imxgpu:imxgpu2d:imxdpublit:imxepdc"
+MACHINEOVERRIDES_EXTENDER_mx6q   = "imxfbdev:imxipu:imxvpu:imxvpucnm:imxgpu:imxgpu2d:imxgpu3d"
+MACHINEOVERRIDES_EXTENDER_mx6dl  = "imxfbdev:imxipu:imxpxp:imxvpu:imxvpucnm:imxgpu:imxgpu2d:imxgpu3d:imxepdc"
+MACHINEOVERRIDES_EXTENDER_mx6sx  = "imxfbdev:imxpxp:imxgpu:imxgpu2d:imxgpu3d"
+MACHINEOVERRIDES_EXTENDER_mx6sl  = "imxfbdev:imxpxp:imxgpu:imxgpu2d:imxepdc"
 MACHINEOVERRIDES_EXTENDER_mx6sll = "imxfbdev:imxpxp:imxepdc"
 MACHINEOVERRIDES_EXTENDER_mx6ul  = "imxfbdev:imxpxp"
 MACHINEOVERRIDES_EXTENDER_mx6ull = "imxfbdev:imxpxp:imxepdc"
 MACHINEOVERRIDES_EXTENDER_mx7d   = "imxfbdev:imxpxp:imxepdc"
-MACHINEOVERRIDES_EXTENDER_mx7ulp = "imxfbdev:imxpxp:imxgpu:imxgpu2d:imxdpublit:imxgpu3d"
+MACHINEOVERRIDES_EXTENDER_mx7ulp = "imxfbdev:imxpxp:imxgpu:imxgpu2d:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_mx8mq  = "imxdrm:imxdcss:imxvpu:imxvpuhantro:imxgpu:imxgpu3d"
+MACHINEOVERRIDES_EXTENDER_mx8mm  = "imxdrm:imxvpu:imxvpuhantro:imxgpu:imxgpu2d:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_mx8qm  = "imxdrm:imxdpu:imxgpu:imxgpu2d:imxgpu3d:imxopenvx"
 MACHINEOVERRIDES_EXTENDER_mx8qxp = "imxdrm:imxdpu:imxgpu:imxgpu2d:imxgpu3d"
 
@@ -74,14 +75,17 @@ MACHINE_SOCARCH_SUFFIX_mx6q = "-mx6qdl"
 MACHINE_SOCARCH_SUFFIX_mx6dl = "-mx6qdl"
 MACHINE_SOCARCH_SUFFIX_mx6sx = "-mx6sx"
 MACHINE_SOCARCH_SUFFIX_mx6sl = "-mx6sl"
+MACHINE_SOCARCH_SUFFIX_mx6sll = "-mx6sll"
 MACHINE_SOCARCH_SUFFIX_mx7d = "-mx7d"
+MACHINE_SOCARCH_SUFFIX_mx7ulp = "-mx7ulp"
 MACHINE_SOCARCH_SUFFIX_vf60 = "-vf60"
 MACHINE_SOCARCH_SUFFIX_vf50 = "-vf50"
 MACHINE_SOCARCH_SUFFIX_mx6ul  = "-mx6ul"
 MACHINE_SOCARCH_SUFFIX_mx6ull = "-mx6ul"
-MACHINE_SOCARCH_SUFFIX_mx8mq  = "-mx8mq"
-MACHINE_SOCARCH_SUFFIX_mx8qm  = "-mx8qm"
-MACHINE_SOCARCH_SUFFIX_mx8qxp = "-mx8qxp"
+MACHINE_SOCARCH_SUFFIX_mx8mm  = "-mx8mm"
+MACHINE_SOCARCH_SUFFIX_mx8mq  = "-mx8m"
+MACHINE_SOCARCH_SUFFIX_mx8qm  = "-mx8"
+MACHINE_SOCARCH_SUFFIX_mx8qxp = "-mx8"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
 MACHINE_SOCARCH_FILTER_append_imxvpu = " \
@@ -97,10 +101,11 @@ MACHINE_SOCARCH_FILTER_append_imxgpu = " \
     virtual/libg2d \
     libgal-imx \
     virtual/libopenvg \
-    virtual/wayland-egl \
     cairo \
+    opencv \
     pango \
 "
+
 MACHINE_SOCARCH_FILTER_append_imxgpu3d = " \
     virtual/libgl \
     virtual/libgles1 \
@@ -140,13 +145,18 @@ MACHINE_FIRMWARE_append_mx6sl = " firmware-imx-epdc"
 MACHINE_FIRMWARE_append_mx6ull = " firmware-imx-epdc"
 MACHINE_FIRMWARE_append_mx53 = " firmware-imx-vpu-imx53 firmware-imx-sdma-imx53"
 MACHINE_FIRMWARE_append_mx51 = " firmware-imx-vpu-imx51 firmware-imx-sdma-imx51"
-MACHINE_FIRMWARE_append_mx8  = " linux-firmware-ath10k "
+MACHINE_FIRMWARE_append_mx8  = " linux-firmware-ath10k"
+MACHINE_FIRMWARE_append_mx8qxp  = " firmware-imx-vpu-imx8qxp"
 
 # FIXME: Needs addition of firmware-imx of official BSPs
 #MACHINE_FIRMWARE_append_mx27 = " firmware-imx-vpu-imx27"
 #MACHINE_FIRMWARE_append_mx25 = " firmware-imx-sdma-imx25"
 
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
+
+# Extra QCA Wi-Fi & BTE driver and firmware
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'firmware-qca6174 kernel-module-qca6174 qca-tools', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'firmware-qca9377 kernel-module-qca9377 qca-tools', '', d)}"
 
 # Extra audio support
 # FIXME: Add support for ALL SoC families
@@ -178,13 +188,14 @@ MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT        = "0"
 MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_imxgpu = "1"
 
 
-# mx6 GPU libraries
+# GPU libraries
 PREFERRED_PROVIDER_virtual/egl_mx6q ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx6dl ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx6sl ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/egl_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/egl_mx7ulp ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/egl_mx8 ?= "imx-gpu-viv"
 
 PREFERRED_PROVIDER_virtual/libgles1_mx6q ?= "imx-gpu-viv"
@@ -193,6 +204,7 @@ PREFERRED_PROVIDER_virtual/libgles1_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles1_mx6sl ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles1_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles1_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/libgles1_mx7ulp ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles1_mx8 ?= "imx-gpu-viv"
 
 PREFERRED_PROVIDER_virtual/libgles2_mx6q ?= "imx-gpu-viv"
@@ -201,6 +213,7 @@ PREFERRED_PROVIDER_virtual/libgles2_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx6sl ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles2_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles2_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/libgles2_mx7ulp ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles2_mx8 ?= "imx-gpu-viv"
 
 PREFERRED_PROVIDER_virtual/libgl_mx6q ?= "imx-gpu-viv"
@@ -209,12 +222,11 @@ PREFERRED_PROVIDER_virtual/libgl_mx6sx ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx6sl ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgl_mx6ul ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgl_mx6ull ?= "mesa"
+PREFERRED_PROVIDER_virtual/libgl_mx7ulp ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgl_mx8 ?= "imx-gpu-viv"
 
-PREFERRED_PROVIDER_virtual/libg2d_mx6 ?= "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/libg2d_mx6ul = ""
-PREFERRED_PROVIDER_virtual/libg2d_mx6ull = ""
-PREFERRED_PROVIDER_virtual/libg2d_mx8 = "imx-dpu-g2d"
+PREFERRED_PROVIDER_virtual/libg2d        ?= "imx-gpu-g2d"
+PREFERRED_PROVIDER_virtual/libg2d_imxdpu ?= "imx-dpu-g2d"
 
 # Handle default kernel
 IMX_DEFAULT_KERNEL = "linux-imx"
@@ -225,6 +237,8 @@ IMX_DEFAULT_KERNEL_mx7 = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL_mx6ul = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL_mx6ull = "linux-fslc-imx"
 IMX_DEFAULT_KERNEL_mx8 = "linux-imx"
+IMX_DEFAULT_KERNEL_mx7ulp = "linux-imx"
+IMX_DEFAULT_KERNEL_mx6sll = "linux-imx"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 
@@ -243,6 +257,7 @@ KERNEL_IMAGETYPE_mx8 = "Image"
 MACHINE_FEATURES = "usbgadget usbhost vfat alsa touchscreen"
 
 MACHINE_FEATURES_append_mx8qm = " xen"
+MACHINE_FEATURES_append_mx8qxp = " xen"
 
 # Add the ability to specify _imx machines
 MACHINEOVERRIDES =. "imx:"

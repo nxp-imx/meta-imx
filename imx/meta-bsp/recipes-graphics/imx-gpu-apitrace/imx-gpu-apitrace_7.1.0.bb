@@ -6,7 +6,7 @@ DEPENDS = "imx-gpu-viv zlib libpng procps"
 APITRACE_SRC ?= "git://source.codeaurora.org/external/imx/apitrace-imx.git;protocol=https"
 SRCBRANCH = "imx_7.1"
 SRC_URI = "${APITRACE_SRC};branch=${SRCBRANCH}"
-SRCREV = "9281b2c2f2766caf3529df347289128470318537"
+SRCREV = "438c29f7b43c8dd82275f2bac00075f77b9e9699"
 
 S = "${WORKDIR}/git"
 
@@ -27,7 +27,7 @@ PACKAGECONFIG_append_imxgpu3d = "${PACKAGECONFIG_IMXGPU3D}"
 
 PACKAGECONFIG[multiarch] = "-DENABLE_MULTIARCH=ON,-DENABLE_MULTIARCH=OFF"
 PACKAGECONFIG[waffle] = "-DENABLE_WAFFLE=ON,-DENABLE_WAFFLE=OFF,waffle"
-PACKAGECONFIG[x11] = "-DDISABLE_X11=OFF,-DDISABLE_X11=ON"
+PACKAGECONFIG[x11] = "-DENABLE_X11=ON,-DENABLE_X11=OFF"
 PACKAGECONFIG[x11-egl] = "-Dwaffle_has_x11_egl=ON,-Dwaffle_has_x11_egl=OFF"
 PACKAGECONFIG[vivante] = "-DENABLE_VIVANTE=ON,-DENABLE_VIVANTE=OFF,virtual/libg2d"
 

@@ -9,30 +9,19 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=69663ab153298557a59c67a60a743e5b"
 inherit deploy pythonnative autotools
 DEPENDS = "python-pycrypto-native u-boot-mkimage-native"
 
-SRCBRANCH = "imx_4.9.88_2.0.0_ga"
+SRCBRANCH = "imx_4.9.123_imx8mm_ga"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
-SRCREV = "17fec4d15572a06f354b00bf7ec9be08123ba3db"
+SRCREV = "abcc7c2135986a6d7d377f2f53c967cda0281351" 
 
 S = "${WORKDIR}/git"
-B = "${WORKDIR}/build.${OPTEE_PLATFORM}"
+B = "${WORKDIR}/build.${PLATFORM_FLAVOR}"
 
-python () {
-	machine = d.getVar("MACHINE", True)
-
-	import re
-	if re.match('imx6qpdlsolox',machine):
-		subplatform = 'mx6qsabresd'
-	elif re.match('imx6ul7d',machine):
-		subplatform = 'mx6ulevk'
-	elif re.match('imx6ull',machine):
-		subplatform = 'mx6ullevk'
-	elif re.match('imx',machine):
-		subplatform = machine[1:]
-	else:
-        	bb.fatal("optee-os-imx doesn't recognize this MACHINE")
-	d.setVar("OPTEE_PLATFORM", subplatform)
-}
+# The platform flavor corresponds to the Yocto machine without the leading 'i'.
+PLATFORM_FLAVOR                 = "${@d.getVar('MACHINE')[1:]}"
+PLATFORM_FLAVOR_imx6qpdlsolox   = "mx6qsabresd"
+PLATFORM_FLAVOR_imx6ul7d        = "mx6ulevk"
+PLATFORM_FLAVOR_imx6ull14x14evk = "mx6ullevk"
 
 OPTEE_ARCH ?= "arm32"
 OPTEE_ARCH_armv7a = "arm32"
@@ -43,7 +32,7 @@ OPTEE_ARCH_aarch64 = "arm64"
 # For 64bits, CROSS_COMPILE64 must be set
 # When defining CROSS_COMPILE and CROSS_COMPILE64, we assure that
 # any 32 or 64 bits builds will pass
-EXTRA_OEMAKE = "PLATFORM=imx PLATFORM_FLAVOR=${OPTEE_PLATFORM} \
+EXTRA_OEMAKE = "PLATFORM=imx PLATFORM_FLAVOR=${PLATFORM_FLAVOR} \
                 CROSS_COMPILE=${HOST_PREFIX} \
                 CROSS_COMPILE64=${HOST_PREFIX} \
                 NOWERROR=1 \
@@ -60,14 +49,14 @@ do_compile () {
 
 do_deploy () {
    install -d ${DEPLOYDIR}
-   ${TARGET_PREFIX}objcopy -O binary ${B}/core/tee.elf ${DEPLOYDIR}/tee.${OPTEE_PLATFORM}.bin
+   ${TARGET_PREFIX}objcopy -O binary ${B}/core/tee.elf ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin
 
    IMX_LOAD_ADDR=`cat ${B}/core/tee-init_load_addr.txt` && \
    uboot-mkimage -A arm -O linux -C none -a ${IMX_LOAD_ADDR} -e ${IMX_LOAD_ADDR} \
-    -d ${DEPLOYDIR}/tee.${OPTEE_PLATFORM}.bin ${DEPLOYDIR}/uTee-${OPTEE_BIN_EXT}
+    -d ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin ${DEPLOYDIR}/uTee-${OPTEE_BIN_EXT}
 
     cd ${DEPLOYDIR}
-    ln -sf tee.${OPTEE_PLATFORM}.bin tee.bin
+    ln -sf tee.${PLATFORM_FLAVOR}.bin tee.bin
     cd -
 }
 
@@ -90,4 +79,6 @@ FILES_${PN} = "/lib/firmware/"
 FILES_${PN}-dev = "/usr/include/optee"
 INSANE_SKIP_${PN}-dev = "staticdev"
 
-COMPATIBLE_MACHINE = "(mx6|mx7|mx8m)"
+COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
