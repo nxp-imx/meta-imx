@@ -1,4 +1,4 @@
-i.MX Linux Yocto Project BSP 4.9.51_8mq_ga Release
+i.MX Linux Yocto Project BSP 4.14.62_1.0.0_ga Release
 =====================================================
 
 The following boards were tested in this release.
@@ -7,6 +7,7 @@ The following boards were tested in this release.
    * NXP i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
    * NXP i.MX 6UltraLite EVK (imx6ulevk)
    * NXP i.MX 6ULL EVK (imx6ull14x14evk)
+   * NXP i.MX 6ULZ EVK (imx6ull14x14evk)
    * NXP i.MX 7Dual SABRE Smart Device (imx7dsabresd)
    * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
    * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
@@ -24,15 +25,6 @@ The following boards were tested in this release.
    * NXP i.MX 8QuadMax LPDDR4 ARM2 (imx8qmlpddr4arm2)
    * NXP i.MX 8QuadXPlus LPDDR4 ARM2 (imx8qxplpddr4arm2)
    * NXP i.MX 8QuadXPlus MEK (imx8qxpmek)
-
- * i.MX Device Tree configurations for each machine
-    Each machine files lists the associated device trees for that machine.
-
- * i.MX U-Boot configurations for each machine
-    imx8mq - sd
-    imx8qm - sd, fspi
-    imx8qxp - sd, fspi
-
 
 Quick Start Guide
 -----------------
@@ -164,6 +156,9 @@ LICENSE_FLAGS_WHITELIST = \
 
 QTWebkit
 --------
+Qtwebkit is not build by default so add this to local.conf or image recipe.
+ IMAGE_INSTALL_append = "packagegroup-qt5-webengine"
+
 To start go to /usr/share/qt5/examples/webkitwidgets/browser and run browser
 
 Qt
