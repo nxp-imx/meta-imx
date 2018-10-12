@@ -10,6 +10,9 @@ OPENCV_EXTRA_VERSION = "3.4.2"
 SRC_URI_remove = "file://javagen.patch"
 SRC_URI += "file://fix_openvx_samples.patch"
 SRC_URI += "file://fix_python_bindings.patch"
+SRC_URI += "file://0001-photo-avoid-resizing-a-const-Mat-in-decolor.patch \
+            file://0002-photo-Decolor-corrections.patch \
+"
 
 PACKAGECONFIG_remove_imx   = "eigen"
 PACKAGECONFIG_remove_mx8   = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
