@@ -17,8 +17,8 @@ SRC_URI[aarch64-fb.sha256sum] = "70f148f6b32bfd2032b58b2346efd10dea7df06e4e59c1b
 SRC_URI[aarch64-wayland.md5sum] = "ce9bced38d727f746874419882dcf7fe"
 SRC_URI[aarch64-wayland.sha256sum] = "bf9cbc124fcb63599070a93834a51f798ff609b1d693038850ba0b142b8308cf"
 
-SRC_URI[aarch64-x11.md5sum] = "a4dae1d0c012f499a2b66b9ccb972329"
-SRC_URI[aarch64-x11.sha256sum] = "0013cf7312d72b68221a447852c23e56685a5c3ba28906176c41edeb1247711f"
+SRC_URI[aarch64-x11.md5sum] = "23057f7807545102fc94f085115a1b5f"
+SRC_URI[aarch64-x11.sha256sum] = "90298f80ffd3f17cacd50f6bdd641293e1dad6176fbbb5b276ee181674558fed"
 
 inherit fsl-eula-unpack2 fsl-eula-graphics
 
