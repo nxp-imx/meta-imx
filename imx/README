@@ -114,6 +114,20 @@ DEFAULTTUNE_virtclass-multilib-lib32 = "armv7athf-neon"
 - 32-bit libraries to be added into the image
 IMAGE_INSTALL_append = "lib32-glibc lib32-libgcc lib32-libstdc++"
 
+Building XEN
+------------
+XEN is supported on IMX8QM/QXP. To enable xen build add the following line to local.conf:
+
+  DISTRO_FEATURES_append = " xen"
+
+Key tech implemented:
+- GPU partition, 2 GPUs assigned to different OSes
+- DPU partition, 2 DPUs assigned to different OSes
+- USDHC passthrough
+- USB passthrough
+- LPUART passthrough
+- Software partition based on SCU firmware to restrict resource access from different OSes.
+
 Hardware Floating Point
 -----------------------
 This release enables hardware floating point by default.  This feature is enabled in both the machine 
