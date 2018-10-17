@@ -44,7 +44,7 @@ SRC_URI = " \
     file://0001-opencv-Fix-build-for-opencv-3.4.2.patch \
 "
 
-SRCREV = "3d668189253b5132a00ce4da6cdf6285890fee14"
+SRCREV = "133babe14f837985eae9348248e69daa5efb2747"
 
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
