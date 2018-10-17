@@ -142,8 +142,8 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS_append = " \
 # Firmware
 MACHINE_FIRMWARE ?= ""
 MACHINE_FIRMWARE_append = " firmware-imx-brcm"
-MACHINE_FIRMWARE_append_mx6 = " firmware-imx-sdma linux-firmware-bcm4339"
-MACHINE_FIRMWARE_append_mx7 = " firmware-imx-epdc firmware-imx-sdma linux-firmware-bcm4339"
+MACHINE_FIRMWARE_append_mx6 = " firmware-imx-sdma"
+MACHINE_FIRMWARE_append_mx7 = " firmware-imx-epdc firmware-imx-sdma"
 MACHINE_FIRMWARE_append_mx6q = " firmware-imx-vpu-imx6q"
 MACHINE_FIRMWARE_append_mx6dl = " firmware-imx-vpu-imx6d firmware-imx-epdc"
 MACHINE_FIRMWARE_append_mx6sl = " firmware-imx-epdc"
@@ -154,6 +154,8 @@ MACHINE_FIRMWARE_append_mx51 = " firmware-imx-vpu-imx51 firmware-imx-sdma-imx51"
 MACHINE_FIRMWARE_append_mx8  = " linux-firmware-ath10k firmware-imx-sdma"
 MACHINE_FIRMWARE_append_mx8qm  = " firmware-imx-vpu-imx8"
 MACHINE_FIRMWARE_append_mx8qxp  = " firmware-imx-vpu-imx8"
+# Extra Cypress Wi-Fi and BTW firmware (Murata)
+MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 'linux-firmware-bcm4339', '', d)}"
 
 # FIXME: Needs addition of firmware-imx of official BSPs
 #MACHINE_FIRMWARE_append_mx27 = " firmware-imx-vpu-imx27"
@@ -164,6 +166,9 @@ MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 # Extra QCA Wi-Fi & BTE driver and firmware
 MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'firmware-qca6174 kernel-module-qca6174 qca-tools', '', d)}"
 MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'firmware-qca9377 kernel-module-qca9377 qca-tools', '', d)}"
+
+# Extra Cypress Wi-Fi tools (Murata)
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 'cyw-fmac-utils', '', d)}"
 
 # Extra audio support
 # FIXME: Add support for ALL SoC families
