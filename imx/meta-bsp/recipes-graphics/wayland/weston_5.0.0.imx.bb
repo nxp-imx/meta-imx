@@ -22,7 +22,7 @@ SRC_URI_append_mx8mq = " file://0001-weston.ini-using-argb8888-as-gbm-default-on
                          file://0002-weston.ini-configure-desktop-shell-size-in-weston-co.patch \
 "
 
-SRCREV = "de814e1aa4899375b67140b5e5ae714c67bb27a0"
+SRCREV = "6ed61e30a8afdb31b0f375c2042baa2c2de7e085"
 S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_URI = "https://wayland.freedesktop.org/releases.html"
