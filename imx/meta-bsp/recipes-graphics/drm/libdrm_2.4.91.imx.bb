@@ -17,7 +17,7 @@ SRC_URI = "${IMX_LIBDRM_SRC};branch=${IMX_LIBDRM_BRANCH} \
            file://fix_O_CLOEXEC_undeclared.patch \
            file://0001-configure.ac-Allow-explicit-enabling-of-cunit-tests.patch \
           "
-SRCREV = "e8e9cf8a66be11508c39f1cc31b8a5e7eb758875" 
+SRCREV = "e1658ff7d750c2705419b441912a3ea8269ebd39"
 
 DEFAULT_PREFERENCE = "-1"
 
