@@ -1,0 +1,87 @@
+# Automatically set PACKAGE_ARCH for MACHINE_SOCARCH
+#
+# This allow to easy reuse of binary packages among similar SoCs. The
+# usual use for this is to share SoC specific packages among different
+# boards.
+#
+# MACHINE_SOCARCH_FILTER list all packages associated with
+# MACHINE_SOCARCH and, when match, will set PACKAGE_ARCH as MACHINE_SOCARCH
+#
+# MACHINE_ARCH_FILTER list all packages associated with
+# MACHINE_ARCH and, when match, will set PACKAGE_ARCH as MACHINE_ARCH
+#
+# MACHINE_GPUARCH_FILTER list all packages associated with
+# MACHINE_GPUARCH and, when match, will set PACKAGE_ARCH as MACHINE_GPUARCH
+#
+# For example, in meta-fsl-arm, this is used to share GPU packages for
+# i.MX53 boards (as all them share the AMD GPU) and i.MX6 based boards
+# (as all them share Vivante GPU).
+#
+# To use the class, specify, for example:
+#
+# MACHINE_SOCARCH_SUFFIX_soc = "-soc"
+#
+# and the need filters, as:
+#
+# MACHINE_ARCH_FILTER = "virtual/kernel"
+# MACHINE_SOCARCH_FILTER_soc = "imx-codec ...imx-vpu"
+# MACHINE_GPUARCH_FILTER = "virtual/libgl ...virtual/libgles1"
+#
+# Copyright 2013-2016 (C) O.S. Systems Software LTDA.
+
+python __anonymous () {
+    machine_arch_filter = set((d.getVar("MACHINE_ARCH_FILTER", True) or "").split())
+    machine_socarch_filter = set((d.getVar("MACHINE_SOCARCH_FILTER", True) or "").split())
+    machine_gpuarch_filter = set((d.getVar("MACHINE_GPUARCH_FILTER", True) or "").split())
+
+    if machine_socarch_filter or machine_arch_filter or machine_gpuarch_filter:
+        provides = set((d.getVar("PROVIDES", True) or "").split())
+        depends = set((d.getVar("DEPENDS", True) or "").split())
+        PN = d.getVar("PN", True)
+
+        package_arch = None
+        if list(machine_arch_filter & (provides | depends)):
+            package_arch = d.getVar("MACHINE_ARCH", True)
+        elif list(machine_socarch_filter & (provides | depends)):
+            package_arch = d.getVar("MACHINE_SOCARCH", True)
+            if not package_arch:
+                raise bb.parse.SkipPackage("You must set MACHINE_SOCARCH as MACHINE_SOCARCH_FILTER is set for this SoC.")
+
+            machine_socarch_suffix = d.getVar("MACHINE_SOCARCH_SUFFIX", True)
+            if not machine_socarch_suffix:
+                raise bb.parse.SkipPackage("You must set MACHINE_SOCARCH_SUFFIX as MACHINE_SOCARCH_FILTER is set for this SoC.")
+        elif list(machine_gpuarch_filter & (provides | depends)):
+            package_arch = d.getVar("MACHINE_GPUARCH", True)
+            if not package_arch:
+                raise bb.parse.SkipPackage("You must set MACHINE_GPUARCH as MACHINE_GPUARCH_FILTER is set.")
+
+            machine_gpuarch_suffix = d.getVar("MACHINE_GPUARCH_SUFFIX", True)
+            if not machine_gpuarch_suffix:
+                raise bb.parse.SkipPackage("You must set MACHINE_GPUARCH_SUFFIX as MACHINE_GPUARCH_FILTER is set.")
+
+        if package_arch:
+            bb.debug(1, "Use '%s' as package architecture for '%s'" % (package_arch, PN))
+            d.setVar("PACKAGE_ARCH", package_arch)
+
+    cur_package_archs = (d.getVar("PACKAGE_ARCHS", True) or "").split()
+    machine_socarch = (d.getVar("MACHINE_SOCARCH", True) or "")
+    machine_gpuarch = (d.getVar("MACHINE_GPUARCH", True) or "")
+    if not machine_socarch in cur_package_archs:
+        d.appendVar("PACKAGE_EXTRA_ARCHS", " %s" % machine_socarch)
+    if not machine_gpuarch in cur_package_archs:
+        d.appendVar("PACKAGE_EXTRA_ARCHS", " %s" % machine_gpuarch)
+
+    if d.getVar("TUNE_ARCH", True) == "arm":
+        # For ARM we have two possible machine_socarch values, one for the arm and one for the thumb instruction set
+        # add the other value to extra archs also, so that a image recipe searches both for packages.
+        if  d.getVar("ARM_INSTRUCTION_SET", True) == "thumb":
+            d.appendVar("PACKAGE_EXTRA_ARCHS", " %s" % d.getVar("ARM_EXTRA_SOCARCH", True))
+        else:
+            d.appendVar("PACKAGE_EXTRA_ARCHS", " %s" % d.getVar("THUMB_EXTRA_SOCARCH", True))
+}
+
+MACHINE_SOCARCH = "${TUNE_PKGARCH}${MACHINE_SOCARCH_SUFFIX}"
+MACHINE_GPUARCH = "${TUNE_PKGARCH}${MACHINE_GPUARCH_SUFFIX}"
+
+ARM_EXTRA_SOCARCH = "${ARMPKGARCH}${ARMPKGSFX_DSP}${ARMPKGSFX_EABI}${ARMPKGSFX_ENDIAN}${ARMPKGSFX_FPU}${MACHINE_SOCARCH_SUFFIX}"
+THUMB_EXTRA_SOCARCH = "${ARMPKGARCH}${ARM_THUMB_SUFFIX}${ARMPKGSFX_DSP}${ARMPKGSFX_EABI}${ARMPKGSFX_ENDIAN}${ARMPKGSFX_FPU}${MACHINE_SOCARCH_SUFFIX}"

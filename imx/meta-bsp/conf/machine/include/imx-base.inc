@@ -71,6 +71,8 @@ MACHINEOVERRIDES_EXTENDER_mx8mm  = "imxdrm:imxvpu:imxvpuhantro:imxgpu:imxgpu2d:i
 MACHINEOVERRIDES_EXTENDER_mx8qm  = "imxdrm:imxdpu:imxgpu:imxgpu2d:imxgpu3d:imxopenvx"
 MACHINEOVERRIDES_EXTENDER_mx8qxp = "imxdrm:imxdpu:imxgpu:imxgpu2d:imxgpu3d"
 
+MACHINE_GPUARCH_SUFFIX = "-imxgpu"
+MACHINE_GPUARCH_SUFFIX_mx6sl = "-imxgpu2d"
 
 # Sub-architecture support
 MACHINE_SOCARCH_SUFFIX ?= ""
@@ -99,36 +101,23 @@ MACHINE_SOCARCH_FILTER_append_imxvpu = " \
     imx-vpuwrap \
     libimxvpuapi \
 "
-MACHINE_SOCARCH_FILTER_append_imxgpu = " \
-    virtual/egl \
-    virtual/mesa \
-    virtual/libg2d \
-    libgal-imx \
-    virtual/libopenvg \
-    cairo \
-    opencv \
-    pango \
-"
-
-MACHINE_SOCARCH_FILTER_append_imxgpu3d = " \
-    virtual/libgl \
-    virtual/libgles1 \
-    virtual/libgles2 \
-"
-MACHINE_SOCARCH_FILTER_append_mx6q = " \
-    virtual/opencl-icd \
-    opencl-headers \
-"
-MACHINE_SOCARCH_FILTER_append_mx8 = " \
-    virtual/libopenvx \
-    virtual/opencl-icd \
-    opencl-headers \
-"
 MACHINE_SOCARCH_FILTER_append_imxpxp = " \
     imx-codec \
     imx-parser \
 "
-
+MACHINE_GPUARCH_FILTER = " \
+    libgal-imx \
+    opencl-headers \
+    virtual/egl \
+    virtual/mesa \
+    virtual/libg2d \
+    virtual/libopenvg \
+    virtual/libgl \
+    virtual/libgles1 \
+    virtual/libgles2 \
+    virtual/opencl-icd \
+    virtual/libopenvx \
+"
 INHERIT += "fsl-dynamic-packagearch"
 
 SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS_append = " \
