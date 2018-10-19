@@ -1,6 +1,6 @@
 require imx-gpu-viv-v6.inc
 
-SRC_URI[md5sum] = "8db72c2d1f2b8b8e9e396ce8c8d6abd1"
-SRC_URI[sha256sum] = "07c0bd4467a7cf90b18ab9e357c43bede88aad0272510953b2e5fe4971c6dec9"
+SRC_URI[md5sum] = "3a2eaebe9679423684bd8d704eb7ab05"
+SRC_URI[sha256sum] = "a090269eac89486504c7395d1b92f9cb37f9bcd34dee5d2d70682b784cb86677"
 
 COMPATIBLE_MACHINE = "(mx8)"
