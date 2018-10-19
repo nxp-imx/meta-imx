@@ -24,8 +24,6 @@ do_install_append_imxgpu2d () {
     install -m 0644 ${WORKDIR}/qtledbillboard.desktop ${D}/${datadir}/applications
     install -m 0644 ${WORKDIR}/qtledcombo.png ${D}/${datadir}/pixmaps
     install -m 0644 ${WORKDIR}/qtledcombo.desktop ${D}/${datadir}/applications
-    install -m 0644 ${WORKDIR}/qtsmarthome.png ${D}/${datadir}/pixmaps
-    install -m 0644 ${WORKDIR}/qtsmarthome.desktop ${D}/${datadir}/applications
     install -m 0644 ${WORKDIR}/quitbattery.png ${D}/${datadir}/pixmaps
     install -m 0644 ${WORKDIR}/quitbattery.desktop ${D}/${datadir}/applications
     install -m 0644 ${WORKDIR}/quitindicators.png ${D}/${datadir}/pixmaps
