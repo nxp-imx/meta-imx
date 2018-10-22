@@ -33,6 +33,7 @@ EXTRA_PROVIDES_append_mx6q = " \
 "
 EXTRA_PROVIDES_append_mx8 = " \
     virtual/libopenvx \
+    virtual/libgbm \
     virtual/opencl-icd \
     opencl-headers \
 "
@@ -41,7 +42,6 @@ PROVIDES += " \
     libgal-imx \
     virtual/egl \
     virtual/libopenvg \
-    virtual/libgbm \
     virtual/opencl-headers \
     virtual/opencl-icd \
     ${EXTRA_PROVIDES} \
