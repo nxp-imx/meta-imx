@@ -22,9 +22,6 @@ SRC_URI_NAME = "${SOC}"
 SRC_URI[imx7ulp.md5sum] = "cf2c88b91b4f87781365d8b0921d1cf3"
 SRC_URI[imx7ulp.sha256sum] = "f4852a8da27bec0853ef499614d9337d586749805bc2c3d58500a7016ae52bdb"
 
-SRC_URI[imx8qm.md5sum] = "39eb5e7482c681bfc6a25579b0203e3a"
-SRC_URI[imx8qm.sha256sum] = "cf240c15c4671fbc637aa1f7f1ad8702cceac91c60d119db926b785d622fa3cc"
-
 SCR = "SCR-${SOC}-m4-demo.txt"
 
 do_deploy () {
