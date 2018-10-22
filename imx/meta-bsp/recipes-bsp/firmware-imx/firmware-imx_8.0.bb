@@ -79,10 +79,6 @@ do_install() {
         rm -rf ${D}${base_libdir}/firmware/hdmi
     fi
 
-    # Don't install hifi4 related binary
-    if [ -d ${D}${base_libdir}/firmware/hifi4 ]; then
-        rm -rf ${D}${base_libdir}/firmware/hifi4
-    fi
     # Don't install seco related binary
     if [ -d ${D}${base_libdir}/firmware/seco ]; then
         rm -rf ${D}${base_libdir}/firmware/seco
