@@ -12,18 +12,15 @@ Signed-off-by: Haihua Hu <jared.hu@nxp.com>
  weston.ini.in | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/weston.ini.in b/weston.ini.in
-index 2d492ab..ae54b79 100644
---- a/weston.ini.in
-+++ b/weston.ini.in
-@@ -1,6 +1,7 @@
- [core]
+Index: git/weston.ini.in
+===================================================================
+--- git.orig/weston.ini.in
++++ git/weston.ini.in
+@@ -2,6 +2,7 @@
  # i.MX: Disable idle timeout
  idle-time=0
+ #use-g2d=1
 +gbm-format=argb8888
  
  [libinput]
  touchscreen_calibrator=true
--- 
-2.7.4
-
