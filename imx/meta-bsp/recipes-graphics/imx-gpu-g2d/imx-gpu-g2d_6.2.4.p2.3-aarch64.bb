@@ -1,4 +1,4 @@
 require imx-gpu-g2d.inc
 
-SRC_URI[md5sum] = "e106266c373595ca5cba7ba508fcf43f"
-SRC_URI[sha256sum] = "122943f519e9b263d0a09983ce6605eded828190b67a6cae0eb04bb85ff64e4e"
+SRC_URI[md5sum] = "ef9587970a7281d08873f353cbb1297c"
+SRC_URI[sha256sum] = "b6a25cba6691d48baee27a59c0ac48a949cd9a11719a0378bc8d5e0e12094056"
