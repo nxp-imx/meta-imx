@@ -1,0 +1,32 @@
+From 901cdebb9c1bbe286fbcd85d67c219b821384d30 Mon Sep 17 00:00:00 2001
+From: Marius Vlad <marius-cristian.vlad@nxp.com>
+Date: Thu, 25 Oct 2018 12:39:55 +0300
+Subject: [PATCH] YOCIMX-3012: Use 1080p for 8mm and 8mscale
+
+Forcing the mode to 1080p will start weston on other sinks with a larger
+resolution, otherwise modesetting will fail, resulting in a blank
+screen. This should only apply to 8mm and 8mscale.
+
+Signed-off-by: Marius Vlad <marius-cristian.vlad@nxp.com>
+
+---
+ weston.ini.in | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/weston.ini.in b/weston.ini.in
+index 7e9f62d..b0daf92 100644
+--- a/weston.ini.in
++++ b/weston.ini.in
+@@ -7,9 +7,9 @@ gbm-format=argb8888
+ [libinput]
+ touchscreen_calibrator=true
+ 
+-#[output]
+-#name=HDMI-A-1
+-#mode=1920x1080@60
++[output]
++name=HDMI-A-1
++mode=1920x1080@60
+ #transform=90
+ 
+ [shell]
