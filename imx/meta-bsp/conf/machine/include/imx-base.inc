@@ -86,6 +86,8 @@ MACHINE_SOCARCH_SUFFIX_vf50 = "-vf50"
 MACHINE_SOCARCH_SUFFIX_mx6ul  = "-mx6ul"
 MACHINE_SOCARCH_SUFFIX_mx6ull = "-mx6ul"
 MACHINE_SOCARCH_SUFFIX_mx6ulz = "-mx6ul"
+
+MACHINE_MX8ARCH_SUFFIX_mx8    = "-mx8all"
 MACHINE_SOCARCH_SUFFIX_mx8mm  = "-mx8mm"
 MACHINE_SOCARCH_SUFFIX_mx8mq  = "-mx8m"
 MACHINE_SOCARCH_SUFFIX_mx8qm  = "-mx8"
@@ -109,7 +111,6 @@ MACHINE_SOCARCH_FILTER_append_imxgpu = " \
     opencv \
     pango \
 "
-
 MACHINE_SOCARCH_FILTER_append_imxgpu3d = " \
     virtual/libgl \
     virtual/libgles1 \
@@ -119,14 +120,34 @@ MACHINE_SOCARCH_FILTER_append_mx6q = " \
     virtual/opencl-icd \
     opencl-headers \
 "
+MACHINE_SOCARCH_FILTER_append_imxpxp = " \
+    imx-codec \
+    imx-parser \
+"
 MACHINE_SOCARCH_FILTER_append_mx8 = " \
     virtual/libopenvx \
     virtual/opencl-icd \
     opencl-headers \
 "
-MACHINE_SOCARCH_FILTER_append_imxpxp = " \
-    imx-codec \
-    imx-parser \
+MACHINE_SOCARCH_FILTER_remove_mx8 = " \
+    libgal-imx \
+    virtual/egl \
+    virtual/libgl \
+    virtual/libgles1 \
+    virtual/libgles2 \
+    virtual/libopenvg \
+    cairo \
+    pango \
+"
+MACHINE_MX8ARCH_FILTER_append_mx8 = " \
+    libgal-imx \
+    virtual/egl \
+    virtual/libgl \
+    virtual/libgles1 \
+    virtual/libgles2 \
+    virtual/libopenvg \
+    cairo \
+    pango \
 "
 
 INHERIT += "fsl-dynamic-packagearch"
