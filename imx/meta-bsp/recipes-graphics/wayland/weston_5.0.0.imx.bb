@@ -26,7 +26,7 @@ SRC_URI_append_mx8mq = " file://0001-weston.ini-using-argb8888-as-gbm-default-on
 # Force the mode to 1080p for only i.MX8MQ and i.MX8MM
 SRC_URI_append_mx8mm = " file://0001-YOCIMX-3012-Use-1080p-for-8mm-and-8mscale.patch \
 "
-SRCREV = "1ee5c6cfef767b04b4fb915fa3920820ba6cd1b7"
+SRCREV = "aa502f16b2a27accf22efb49cff5a2a5e028e14b"
 S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_URI = "https://wayland.freedesktop.org/releases.html"
