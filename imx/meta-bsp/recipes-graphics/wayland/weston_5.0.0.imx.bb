@@ -21,9 +21,6 @@ SRC_URI = "${WESTON_SRC};branch=${SRCBRANCH} \
 SRC_URI_append_mx8mq = " file://0001-weston.ini-using-argb8888-as-gbm-default-on-mscale-8.patch \
                          file://0002-weston.ini-configure-desktop-shell-size-in-weston-co.patch \
 "
-# Force the mode to 1080p for only i.MX8MM
-SRC_URI_append_mx8mm = " file://0001-YOCIMX-3012-Use-1080p-for-8mm-and-8mscale.patch \
-"
 SRCREV = "aa502f16b2a27accf22efb49cff5a2a5e028e14b"
 S = "${WORKDIR}/git"
 
