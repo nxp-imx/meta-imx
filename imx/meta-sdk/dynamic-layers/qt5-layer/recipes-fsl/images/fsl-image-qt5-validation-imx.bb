@@ -3,7 +3,7 @@ LICENSE = "MIT"
 
 require recipes-fsl/images/fsl-image-validation-imx.bb
 
-inherit distro_features_check populate_sdk_qt5
+inherit distro_features_check ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'populate_sdk_qt5', '', d)}
 
 CONFLICT_DISTRO_FEATURES = "directfb"
 
