@@ -10,12 +10,16 @@ inherit deploy fsl-eula-unpack2
 
 SOC ?= "imx8qm"
 SOC_mx7ulp= "imx7ulp"
+SOC_mx8mm= "imx8mm"
 SOC_mx8mq= "imx8mq"
 SOC_mx8qm= "imx8qm"
 SOC_mx8qxp= "imx8qx"
 
 IMX_PACKAGE_NAME = "${SOC}-m4-demo-${PV}"
 SRC_URI_NAME = "${SOC}"
+
+SRC_URI[imx8mm.md5sum] = "55ccd2b430530f27faa99a66d8bbce49"
+SRC_URI[imx8mm.sha256sum] = "56f4c15efc488c30b58acb1f20338e1fe95b69fe25e3d58e02cde14f70dc170d"
 
 SRC_URI[imx8qm.md5sum] = "1fc9bba172d09ec1e5dbce5d05883266"
 SRC_URI[imx8qm.sha256sum] = "8403ce645d92b5703879a09d5584ce196339255685f54e94d981540f866cd8f4"
