@@ -18,6 +18,9 @@ SOC_mx8qxp= "imx8qx"
 IMX_PACKAGE_NAME = "${SOC}-m4-demo-${PV}"
 SRC_URI_NAME = "${SOC}"
 
+SRC_URI[imx7ulp.md5sum] = "cf2c88b91b4f87781365d8b0921d1cf3"
+SRC_URI[imx7ulp.sha256sum] = "f4852a8da27bec0853ef499614d9337d586749805bc2c3d58500a7016ae52bdb"
+
 SRC_URI[imx8mm.md5sum] = "739653d98bc39b799bff961f63411a89"
 SRC_URI[imx8mm.sha256sum] = "ec7ca52a78a78498f9f76be414d2d484fe27d06f96bf7cfbd8228cee232659f2"
 
