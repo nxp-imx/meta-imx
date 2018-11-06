@@ -10,11 +10,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-VULKAN_TOOLS = "vulkan vulkan-demos vkmark vulkan-tools vulkan-tools-layer-libs"
+VULKAN_TOOLS       = ""
+VULKAN_TOOLS_mx8   = "vulkan vulkan-demos vkmark vulkan-tools vulkan-tools-layer-libs"
+VULKAN_TOOLS_mx8mm = ""
 
 # Common tools independent of the graphics backend
-SOC_TOOLS_GPU                          = "opencv-samples"
-SOC_TOOLS_GPU_append_mx8               = " ${VULKAN_TOOLS}"
+SOC_TOOLS_GPU                          = "opencv-samples ${VULKAN_TOOLS}"
 SOC_TOOLS_GPU_append_imxdrm            = " kmscube"
 
 # Tools for wayland and x11
