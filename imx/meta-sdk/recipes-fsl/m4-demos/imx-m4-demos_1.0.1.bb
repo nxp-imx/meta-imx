@@ -23,6 +23,6 @@ do_deploy () {
 
 addtask deploy before do_build after do_compile
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx7)"
 
