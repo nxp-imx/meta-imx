@@ -35,5 +35,3 @@ do_install() {
 }
 
 FILES_${PN} += "${bindir} ${datadir}"
-
-COMPATIBLE_MACHINE = "(mx8)"

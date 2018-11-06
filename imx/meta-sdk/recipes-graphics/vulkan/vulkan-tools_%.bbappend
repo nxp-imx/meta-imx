@@ -25,4 +25,3 @@ EXTRA_OECMAKE_append = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' -DBUILD_WSI_WAYLAND_SUPPORT=1 -DBUILD_WSI_XCB_SUPPORT=0 -DBUILD_WSI_XLIB_SUPPORT=0', \
         bb.utils.contains('DISTRO_FEATURES',     'x11', ' -DBUILD_WSI_WAYLAND_SUPPORT=0', \
                                                         '', d), d)}"
-COMPATIBLE_MACHINE = "(mx8)"
