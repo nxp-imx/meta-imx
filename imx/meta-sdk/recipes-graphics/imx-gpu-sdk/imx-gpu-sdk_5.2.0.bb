@@ -10,13 +10,13 @@ DEPENDS_append = \
                                                                 '', d), d)}"
 DEPENDS_append_imxgpu2d = " virtual/libg2d virtual/libopenvg"
 DEPENDS_append_imxgpu3d = " virtual/libgles2"
-DEPENDS_append_mx8      = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' vulkan glslang-native', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11',                '', \
-                                                        ' vulkan glslang-native', d), d)}"
-
-#Remove vulkan as it's incompatible for i.MX 8M Mini
-DEPENDS_remove_mx8mm = " vulkan"
+DEPENDS_VULKAN       = ""
+DEPENDS_VULKAN_mx8   = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'vulkan glslang-native', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11',                      '', \
+                                                        'vulkan glslang-native', d), d)}"
+DEPENDS_VULKAN_mx8mm = ""
+DEPENDS_append       = " ${DEPENDS_VULKAN}"
 
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
