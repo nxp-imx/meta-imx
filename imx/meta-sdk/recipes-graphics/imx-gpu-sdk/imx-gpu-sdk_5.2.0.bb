@@ -23,11 +23,7 @@ GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
 SRCREV = "0447f708533bb2b1f2cfd9f06cb2570d5141915c"
 
-
-# For backwards compatibility
-RPROVIDES_${PN} = "fsl-gpu-sdk"
-RREPLACES_${PN} = "fsl-gpu-sdk"
-RCONFLICTS_${PN} = "fsl-gpu-sdk"
+S = "${WORKDIR}/git"
 
 BACKEND = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
@@ -50,8 +46,6 @@ FEATURES_append_mx8qxp    = "${FEATURES_MX8X}"
 
 EXTENSIONS       = "*"
 EXTENSIONS_mx8mq = "OpenGLES3:GL_EXT_color_buffer_float"
-
-S = "${WORKDIR}/git"
 
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
@@ -90,6 +84,11 @@ do_install () {
 FILES_${PN} += "/opt/${PN}"
 FILES_${PN}-dbg += "/opt/${PN}/*/*/.debug /usr/src/debug"
 INSANE_SKIP_${PN} += "already-stripped rpaths"
+
+# For backwards compatibility
+RPROVIDES_${PN} = "fsl-gpu-sdk"
+RREPLACES_${PN} = "fsl-gpu-sdk"
+RCONFLICTS_${PN} = "fsl-gpu-sdk"
 
 # Compatible only with i.MX GPU
 COMPATIBLE_MACHINE = "(^$)"
