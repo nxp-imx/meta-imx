@@ -15,6 +15,9 @@ DEPENDS_append_mx8      = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',                '', \
                                                         ' vulkan glslang-native', d), d)}"
 
+#Remove vulkan as it's incompatible for i.MX 8M Mini
+DEPENDS_remove_mx8mm = " vulkan"
+
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
