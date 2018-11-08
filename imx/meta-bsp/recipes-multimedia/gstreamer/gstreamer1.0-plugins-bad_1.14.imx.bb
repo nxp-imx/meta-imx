@@ -20,6 +20,9 @@ PACKAGECONFIG_append_mx8 = " opencv kms"
 #Remove unrecognised configure option for 1.14
 PACKAGECONFIG_remove = " gles2"
 
+#Remove vulkan as it's incompatible for i.MX 8M Mini
+PACKAGECONFIG_remove_mx8mm = " vulkan"
+
 PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland-native wayland wayland-protocols"
 
 # Disable introspection to fix [GstGL-1.0.gir] Error
