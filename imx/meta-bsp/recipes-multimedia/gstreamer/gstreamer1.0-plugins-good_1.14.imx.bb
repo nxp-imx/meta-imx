@@ -13,7 +13,7 @@ SRCBRANCH = "imx-1.14.x"
 SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "849110f36b9cdaeac34d5fa033b8ab943744eacf"
+SRCREV = "cec0ef39784a3acfd2b442d107f054c6ab10181e"
 
 EXTRA_AUTORECONF = ""
 
