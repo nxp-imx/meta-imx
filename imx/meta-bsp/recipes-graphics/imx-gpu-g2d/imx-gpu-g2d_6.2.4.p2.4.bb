@@ -10,9 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5ab1a30d0cd181e3408077727ea5a2db"
 DEPENDS += "libgal-imx"
 PROVIDES += "virtual/libg2d"
 
-# FIXME: arm packages are mis-labeled with aarch32 suffix
-FSLBIN_NAME     = "${PN}-${PV}-${TARGET_ARCH}"
-FSLBIN_NAME_arm = "${PN}-${PV}-aarch32"
+FSLBIN_NAME = "${PN}-${PV}-${TARGET_ARCH}"
 
 SRC_URI = "${FSL_MIRROR}/${FSLBIN_NAME}.bin;name=${TARGET_ARCH};fsl-eula=true"
 SRC_URI[aarch64.md5sum] = "c10e4cebe93ba5682e633f5a5a8bcf26"
