@@ -3,7 +3,7 @@ DESCRIPTION = "Set of sample applications for i.MX GPU"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://License.md;md5=9d58a2573275ce8c35d79576835dbeb8"
 
-DEPENDS = "assimp devil gstreamer1.0 gstreamer1.0-plugins-base tclap zlib"
+DEPENDS = "assimp devil gstreamer1.0 gstreamer1.0-plugins-base tclap zlib gtest rapidjson"
 DEPENDS_append = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',  ' xrandr', \
@@ -12,11 +12,25 @@ DEPENDS_append_imxgpu2d = " virtual/libg2d virtual/libopenvg"
 DEPENDS_append_imxgpu3d = " virtual/libgles2"
 DEPENDS_VULKAN       = ""
 DEPENDS_VULKAN_mx8   = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'vulkan glslang-native', \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'vulkan rapidvulkan glslang-native', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',                      '', \
-                                                        'vulkan glslang-native', d), d)}"
+                                                        'vulkan rapidvulkan glslang-native', d), d)}"
 DEPENDS_VULKAN_mx8mm = ""
 DEPENDS_append       = " ${DEPENDS_VULKAN}"
+
+DEPENDS_OPENCL       = ""
+DEPENDS_OPENCL_mx8   = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'rapidopencl', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11',                      '', \
+                                                        'rapidopencl', d), d)}"
+DEPENDS_OPENCL_mx8mm = ""
+DEPENDS_append       = " ${DEPENDS_OPENCL}"
+
+DEPENDS_OPENVX   = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'rapidopenvx', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11',                      '', \
+                                                        'rapidopenvx', d), d)}"
+DEPENDS_append_mx8qm       = " ${DEPENDS_OPENVX}"
 
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
@@ -47,7 +61,7 @@ FEATURES_append_mx8qxp    = "${FEATURES_MX8X}"
 EXTENSIONS       = "*"
 EXTENSIONS_mx8mq = "OpenGLES3:GL_EXT_color_buffer_float"
 
-RECIPES = "*,-Recipe.tclap_1_2_2,-Recipe.zlib_1_2_11"
+RECIPES = "*,-Recipe.tclap_1_2_2,-Recipe.zlib_1_2_11,-Recipe.googletest_1_8_1,-Recipe.RapidJSON_1_1_0,-Recipe.RapidOpenCL_1_1_0_1,-Recipe.RapidOpenVX_1_1_0,Recipe.RapidVulkan_1_0_68_0a"
 
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
