@@ -6,14 +6,10 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6dfb32a488e5fd6bae52fbf6c7ebb086"
 SECTION = "BSP"
 
-inherit fsl-eula-unpack pkgconfig deploy
-
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+inherit fsl-eula2-unpack2 pkgconfig deploy
 
 SRC_URI[md5sum] = "2e1ef6e1e5841214ec20a98e7ef5b412"
 SRC_URI[sha256sum] = "3abcbe43fc71873e2ffed3d4ef46b1440fa82b4fdbaeb3ac67dfbc4b7858249e"
-
-S = "${WORKDIR}/${PN}-${PV}"
 
 BOARD_TYPE ?= "mek"
 SC_FIRMWARE_NAME ?= "mx8qm-mek-scfw-tcm.bin"
