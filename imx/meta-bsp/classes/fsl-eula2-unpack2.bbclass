@@ -2,11 +2,11 @@
 # EULA-licensed archives downloaded by HTTP and b) handling the EULA
 # acceptance.
 
-inherit fsl-eula-unpack fsl-eula
+inherit fsl-eula-unpack fsl-eula2
 
 IMX_PACKAGE_VERSION = "${PV}"
 
-SRC_URI = "${FSL_MIRROR}${IMX_PACKAGE_NAME}.bin;name=${SRC_URI_NAME};fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}${IMX_PACKAGE_NAME}.bin;fsl-eula=true"
 
 S = "${WORKDIR}/${IMX_PACKAGE_NAME}"
 
