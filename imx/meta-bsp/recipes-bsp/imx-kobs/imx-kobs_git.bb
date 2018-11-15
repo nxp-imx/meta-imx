@@ -10,7 +10,7 @@ PV = "5.5+git${SRCPV}"
 
 SRC_URI = "git://github.com/nxpmicro/imx-kobs.git;protocol=https"
 
-SRCREV = "d085ba9dfaaeba580e2490156e019784f9cabe4e"
+SRCREV = "8e9964405a1c9eb9765b9475524c942722ea8d64"
 
 S = "${WORKDIR}/git"
 
