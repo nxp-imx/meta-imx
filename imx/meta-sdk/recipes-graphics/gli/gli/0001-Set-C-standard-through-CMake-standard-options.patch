@@ -1,0 +1,21 @@
+From a2d4a3a912a001bc5483e0d8fd178af422814394 Mon Sep 17 00:00:00 2001
+From: Ian Hattendorf <ian@ianhattendorf.com>
+Date: Mon, 19 Mar 2018 13:57:10 -0700
+Subject: [PATCH 1/7] Set C++ standard through CMake standard options
+
+---
+ CMakeLists.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Index: git/CMakeLists.txt
+===================================================================
+--- git.orig/CMakeLists.txt
++++ git/CMakeLists.txt
+@@ -24,7 +24,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "
+ endif()
+ 
+ if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang") OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") OR (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel") AND UNIX))
+-	set(CMAKE_CXX_FLAGS "-std=c++0x")
+ 	add_definitions(-Wall)
+ endif()
+ 
