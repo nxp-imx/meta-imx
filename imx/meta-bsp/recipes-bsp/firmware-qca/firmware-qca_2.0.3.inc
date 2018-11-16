@@ -11,7 +11,7 @@ inherit fsl-eula-unpack
 
 SRC_URI = " ${FSL_MIRROR}/firmware-qca-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "f35fe7b4818eb4df0ff4acc53cdd1b8c"
-SRC_URI[sha256sum] = "2ad400cf74cbfabd84a873edab9ab21b8ddbc21038daa67afcb8f39fcf612c4a"
+SRC_URI[md5sum] = "c42561b8eb83d0b9e974bcb92173fd51"
+SRC_URI[sha256sum] = "1d84beb3441d511ba03ca31e041dc8fd14bd4d09866bf588b30170187a3f2cfc"
 
 S = "${WORKDIR}/firmware-qca-${PV}"
