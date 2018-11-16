@@ -1,0 +1,73 @@
+From ec9256bb704e94f41407fc8ace6a580491430196 Mon Sep 17 00:00:00 2001
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Thu, 15 Dec 2016 04:35:41 -0800
+Subject: [PATCH] Add pkg-config support
+
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+Signed-off-by: Rodrigo Caimi <caimi@datacom.ind.br>
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ googlemock/CMakeLists.txt | 9 +++++++--
+ googlemock/gmock.pc.in    | 9 +++++++++
+ googletest/CMakeLists.txt | 9 +++++++--
+ googletest/gtest.pc.in    | 9 +++++++++
+ 4 files changed, 32 insertions(+), 4 deletions(-)
+ create mode 100644 googlemock/gmock.pc.in
+ create mode 100644 googletest/gtest.pc.in
+
+Index: git/googlemock/CMakeLists.txt
+===================================================================
+--- git.orig/googlemock/CMakeLists.txt
++++ git/googlemock/CMakeLists.txt
+@@ -23,6 +23,9 @@ if (COMMAND pre_project_set_up_hermetic_
+   pre_project_set_up_hermetic_build()
+ endif()
+ 
++# pkg-config support
++configure_file("gmock.pc.in" "gmock.pc" @ONLY)
++
+ ########################################################################
+ #
+ # Project-wide settings
+Index: git/googlemock/gmock.pc.in
+===================================================================
+--- /dev/null
++++ git/googlemock/gmock.pc.in
+@@ -0,0 +1,9 @@
++Name: libgmock
++Version: 1.8.0
++Description: Google's framework for writing C++ tests on a variety of platforms
++
++prefix=@CMAKE_INSTALL_PREFIX@
++includedir=@CMAKE_INSTALL_INCLUDEDIR@
++libdir=@CMAKE_INSTALL_LIBDIR@
++Cflags:-I${includedir}/gmock
++Libs: -L${libdir} -lgmock -lgmock_main
+Index: git/googletest/CMakeLists.txt
+===================================================================
+--- git.orig/googletest/CMakeLists.txt
++++ git/googletest/CMakeLists.txt
+@@ -30,6 +30,9 @@ if (COMMAND pre_project_set_up_hermetic_
+   pre_project_set_up_hermetic_build()
+ endif()
+ 
++# pkg-config support
++configure_file("gtest.pc.in" "gtest.pc" @ONLY)
++
+ ########################################################################
+ #
+ # Project-wide settings
+Index: git/googletest/gtest.pc.in
+===================================================================
+--- /dev/null
++++ git/googletest/gtest.pc.in
+@@ -0,0 +1,9 @@
++Name: libgtest
++Version: 1.8.0
++Description: Google's framework for writing C++ tests on a variety of platforms
++
++prefix=@CMAKE_INSTALL_PREFIX@
++includedir=@CMAKE_INSTALL_INCLUDEDIR@
++libdir=@CMAKE_INSTALL_LIBDIR@
++Cflags:-I${includedir}/gtest
++Libs: -L${libdir} -lgtest -lgtest_main
