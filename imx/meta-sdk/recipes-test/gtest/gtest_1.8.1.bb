@@ -11,7 +11,6 @@ S = "${WORKDIR}/git"
 SRCREV = "2fe3bd994b3189899d93f1d5a881e725e046fdc2"
 SRC_URI = "\
     git://github.com/google/googletest.git;protocol=https; \
-    file://Add-pkg-config-support.patch \
 "
 
 inherit cmake
