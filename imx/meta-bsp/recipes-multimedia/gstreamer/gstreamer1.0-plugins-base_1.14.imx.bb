@@ -12,6 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c54ce9345727175ff66d17b67ff51f58 \
                     file://common/coverage/coverage-report.pl;beginline=2;endline=17;md5=a4e1830fce078028c8f0974161272607"
 
 DEPENDS += "virtual/kernel"
+DEPENDS_append_imxgpu2d = " virtual/libg2d"
+
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 # Enable pango lib
