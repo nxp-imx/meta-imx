@@ -9,7 +9,7 @@ SRC_URI = " \
     file://tools-xentop-vwprintw.patch \
     "
 
-SRCREV = "d41da8e9f39020a68a5590c8b71bc8f187031750"
+SRCREV = "4f236fa62b101296d88d878c65ccd35154f7a79b"
 
 S = "${WORKDIR}/git"
 
