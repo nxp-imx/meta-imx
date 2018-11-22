@@ -77,7 +77,6 @@ PACKAGE_BEFORE_PN = "kernel-module-jailhouse"
 FILES_${PN} = "${base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_DATADIR}"
 
 INSANE_SKIP_${PN} = "ldflags"
-KERNEL_MODULE_AUTOLOAD += "jailhouse"
 
 python __anonymous () {
     # Setup DEPENDS and RDEPENDS to included cells"
