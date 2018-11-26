@@ -3,8 +3,8 @@ DESCRIPTION = "Set of sample applications for i.MX GPU"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://License.md;md5=9d58a2573275ce8c35d79576835dbeb8"
 
-DEPENDS = "assimp devil gstreamer1.0 gstreamer1.0-plugins-base gli glm \
-           gtest rapidjson tclap zlib"
+DEPENDS = "assimp devil fmt gstreamer1.0 gstreamer1.0-plugins-base gli \
+           glm gtest rapidjson tclap zlib"
 DEPENDS_append = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',  ' xrandr', \
@@ -57,6 +57,7 @@ EXTENSIONS_mx8mq = "OpenGLES3:GL_EXT_color_buffer_float"
 
 RECIPES          = "*"
 RECIPES_append   = ",-Recipe.DevIL_1_8_0"
+RECIPES_append   = ",-Recipe.fmt_4_0_0"
 RECIPES_append   = ",-Recipe.googletest_1_8_1"
 RECIPES_append   = ",-Recipe.gli_0_8_2_0"
 RECIPES_append   = ",-Recipe.glm_0_9_8_5"
