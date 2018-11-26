@@ -56,7 +56,7 @@ EXTENSIONS       = "*"
 EXTENSIONS_mx8mq = "OpenGLES3:GL_EXT_color_buffer_float"
 
 RECIPES          = "*"
-RECIPES_append   = ",-Recipe.tclap_1_2_2"
+RECIPES_append   = ",-Recipe.DevIL_1_8_0"
 RECIPES_append   = ",-Recipe.googletest_1_8_1"
 RECIPES_append   = ",-Recipe.gli_0_8_2_0"
 RECIPES_append   = ",-Recipe.glm_0_9_8_5"
@@ -64,6 +64,7 @@ RECIPES_append   = ",-Recipe.RapidJSON_1_1_0"
 RECIPES_append   = ",-Recipe.RapidOpenCL_1_1_0_1"
 RECIPES_append   = ",-Recipe.RapidOpenVX_1_1_0"
 RECIPES_append   = ",-Recipe.RapidVulkan_1_0_68_0a"
+RECIPES_append   = ",-Recipe.tclap_1_2_2"
 RECIPES_append   = ",-Recipe.zlib_1_2_11"
 
 do_compile () {
