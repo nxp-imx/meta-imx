@@ -1,6 +1,6 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.14-sumo"
+DISTRO_VERSION = "4.14.78-1.0.0"
 
 DISTRO_CODENAME = "sumo"
 SDK_VENDOR = "-pokysdk"
