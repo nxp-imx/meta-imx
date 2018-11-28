@@ -4,7 +4,7 @@
 SUMMARY = "i.MX M4 core Demo images"
 SECTION = "app"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=5ab1a30d0cd181e3408077727ea5a2db"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6dfb32a488e5fd6bae52fbf6c7ebb086"
 
 inherit deploy fsl-eula-unpack2
 
@@ -23,12 +23,6 @@ SRC_URI[imx7ulp.sha256sum] = "1f6f11aea132487ef731ba188c917ec71e69d030bbd4e81b6c
 
 SRC_URI[imx8mm.md5sum] = "d89683a22be9023356c9e273a35057c5"
 SRC_URI[imx8mm.sha256sum] = "228bb155f9a113f13949c07576c613ccacd6d99b236ce152ef9dfdbb3de003b6"
-
-SRC_URI[imx8qm.md5sum] = "1fc9bba172d09ec1e5dbce5d05883266"
-SRC_URI[imx8qm.sha256sum] = "8403ce645d92b5703879a09d5584ce196339255685f54e94d981540f866cd8f4"
-
-SRC_URI[imx8qx.md5sum] = "466d7b3b6213c756a3b5ebfef1a8c320"
-SRC_URI[imx8qx.sha256sum] = "4e83d60e27cd8ad67d4174ad3082a5f4a06b7df93571cfd2274615cbdf66eb6c"
 
 SCR = "SCR-${SOC}-m4-demo.txt"
 
