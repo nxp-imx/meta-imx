@@ -15,7 +15,7 @@ RCONFLICTS_${PN} = "fsl-alsa-plugins"
 
 LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig use-imx-headers
 
 IMXALSA_SRC ?= "git://source.codeaurora.org/external/imx/imx-alsa-plugins.git;protocol=https"
 NXP_REPO_MIRROR ?= "nxp/"
