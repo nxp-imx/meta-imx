@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://License.md;md5=9d58a2573275ce8c35d79576835dbeb8"
 
 DEPENDS = "assimp devil fmt gstreamer1.0 gstreamer1.0-plugins-base gli \
-           glm gtest half rapidjson tclap zlib"
+           glm gtest half rapidjson stb tclap zlib"
 DEPENDS_append = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',  ' xrandr', \
@@ -66,6 +66,7 @@ RECIPES_append   = ",-Recipe.RapidJSON_1_1_0"
 RECIPES_append   = ",-Recipe.RapidOpenCL_1_1_0_1"
 RECIPES_append   = ",-Recipe.RapidOpenVX_1_1_0"
 RECIPES_append   = ",-Recipe.RapidVulkan_1_0_68_0a"
+RECIPES_append   = ",-Recipe.stb_2_19_0_0"
 RECIPES_append   = ",-Recipe.tclap_1_2_2"
 RECIPES_append   = ",-Recipe.zlib_1_2_11"
 
