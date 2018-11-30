@@ -9,8 +9,10 @@ SRC_URI = " \
     file://tools-xentop-vwprintw.patch \
     "
 
-SRCREV = "633581fd3fe94ca2f003679fcd24b3b9b35f9ebf"
+SRCREV = "a55884ea96df772e8b5071837d73a6d198325a0d"
 
 S = "${WORKDIR}/git"
+
+FILES_${PN}-scripts-common += " ${sysconfdir}/xen/*.cfg"
 
 COMPATIBLE_MACHINE = "${@bb.utils.contains('MACHINE_FEATURES', 'xen', '${MACHINE}', '(^$)', d)}"
