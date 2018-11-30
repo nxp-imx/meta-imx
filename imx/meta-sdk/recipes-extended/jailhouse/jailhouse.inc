@@ -44,7 +44,8 @@ TOOLS_SRC_DIR = "${S}/tools"
 TOOLS_OBJ_DIR = "${S}/tools"
 
 do_compile() {
-   oe_runmake V=1 LDFLAGS="" CC="${CC}"\
+   unset LDFLAGS
+   oe_runmake V=1 CC="${CC}"\
         ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} \
         KDIR=${STAGING_KERNEL_BUILDDIR}
 
