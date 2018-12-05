@@ -10,13 +10,13 @@ HOMEPAGE = "https://www.khronos.org/opengles/sdk/tools/Reference-Compiler"
 inherit cmake
 
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://glslang/Include/Types.h;beginline=1;endline=36;md5=6639a5f9543e833d71e2f4e4ff52f34b"
+LIC_FILES_CHKSUM = "file://glslang/Include/Types.h;beginline=1;endline=36;md5=26473d85c7f85d955e24663f67a53818"
 
 S = "${WORKDIR}/git"
 
-SRCREV = "81cd764b5ffc475bc73f1fb35f75fd1171bb2343"
+SRCREV = "1bc601c674aecc2fee0dee8ff7a118db76b4c439"
 SRC_URI = "git://github.com/KhronosGroup/glslang \
-           file://0001-CMakeLists.txt-obey-CMAKE_INSTALL_LIBDIR.patch"
+"
 
 FILES_${PN} += "${libdir}/*"
 
@@ -29,6 +29,10 @@ do_install_append() {
     cp -f ${S}/SPIRV/Logger.h ${D}${includedir}/SPIRV
     cp -f ${S}/SPIRV/SPVRemapper.h ${D}${includedir}/SPIRV
     cp -f ${S}/SPIRV/spvIR.h ${D}${includedir}/SPIRV
+
+    # Remove redundant headers from spirv-headers
+    rm -rf ${D}${includedir}/SPIRV/GLSL.std.450.h
+    rm -rf ${D}${includedir}/SPIRV/spirv.hpp
 
     install -d ${D}${includedir}/glslang/Include
     cp -f ${S}/glslang/Include/*.h ${D}${includedir}/glslang/Include
