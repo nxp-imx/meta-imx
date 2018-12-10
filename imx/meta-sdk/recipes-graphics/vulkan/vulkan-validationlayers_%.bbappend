@@ -7,8 +7,7 @@ SRC_URI += " \
 # choose wayland
 PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '' ,d)}"
 
-DEPENDS_append = " virtual/egl glslang spirv-tools"
-RDEPENDS_${PN} += "libvulkan-imx"
+DEPENDS += " virtual/egl glslang spirv-tools"
 
 EXTRA_OECMAKE_remove = "-DBUILD_LAYERS=OFF"
 # Enable validation layers
@@ -24,6 +23,10 @@ do_install_append () {
 
 FILES_SOLIBSDEV = ""
 FILES_${PN} += "${libdir}/libVkLayer_*.so"
+
+# The package libvulkan-imx is required to configure the imx-gpu-viv vulkan drivers for the validation layers
+RDEPENDS_${PN} += "libvulkan-imx"
+
 INSANE_SKIP_${PN} = "dev-so"
 
 COMPATIBLE_MACHINE = "(mx8)"
