@@ -1,7 +1,7 @@
-diff --git a/cmake/OpenCVGenPkgconfig.cmake b/cmake/OpenCVGenPkgconfig.cmake
-index 425c0fa..9123dc6 100644
---- a/cmake/OpenCVGenPkgconfig.cmake
-+++ b/cmake/OpenCVGenPkgconfig.cmake
+Index: git/cmake/OpenCVGenPkgconfig.cmake
+===================================================================
+--- git.orig/cmake/OpenCVGenPkgconfig.cmake
++++ git/cmake/OpenCVGenPkgconfig.cmake
 @@ -31,7 +31,7 @@ macro(fix_prefix lst isown)
        get_filename_component(libdir "${item}" PATH)
        get_filename_component(_libname "${item}" NAME)
@@ -11,10 +11,11 @@ index 425c0fa..9123dc6 100644
      else()
        list(APPEND _lst "-l${item}")
      endif()
-@@ -125,10 +125,14 @@ ocv_list_unique(_3rdparty)
+@@ -124,11 +124,14 @@ ocv_list_unique(_extra)
+ ocv_list_unique(_3rdparty)
  
  set(OPENCV_PC_LIBS
-   "-L\${exec_prefix}/${OPENCV_LIB_INSTALL_PATH}"
+-  "-L\${exec_prefix}/${OPENCV_LIB_INSTALL_PATH}"
 +  "-L\${exec_prefix}/${OPENCV_3P_LIB_INSTALL_PATH}"
    "${_modules}"
  )
