@@ -47,6 +47,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;branch=3.4;name=opencv \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
     file://fixpkgconfig.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
+    file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
     file://0003-To-fix-errors-as-following.patch \
     file://0001-Dont-use-isystem.patch \
     file://javagen.patch \
@@ -74,6 +75,8 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
+    ${@oe.utils.conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
+    ${@oe.utils.conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
 "
 EXTRA_OECMAKE_append_x86 = " -DX86=ON"
 
