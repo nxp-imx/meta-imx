@@ -3,17 +3,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 # Specify the opencv_extra source. The version should match the overall opencv version.
 # Recording the opencv_extra version here allows us to raise a fatal error if the
 # package version is updated but this section is not.
-SRC_URI += "git://github.com/opencv/opencv_extra.git;branch=3.4;destsuffix=opencv_extra;name=opencv_extra"
-SRCREV_opencv_extra = "cc18e9a17c5afe034341c8c70a5aaa9ac86e5601"
-OPENCV_EXTRA_VERSION = "3.4.2"
+SRC_URI += "git://github.com/opencv/opencv_extra.git;destsuffix=opencv_extra;name=opencv_extra"
+SRCREV_opencv_extra = "0622e61e7e646c7dd4e29841fd4264a464232661"
+OPENCV_EXTRA_VERSION = "3.4.3"
 
-SRC_URI_remove = "file://javagen.patch"
 SRC_URI_remove = "file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch"
 SRC_URI += "file://fix_openvx_samples.patch"
-SRC_URI += "file://fix_python_bindings.patch"
-SRC_URI += "file://0001-photo-avoid-resizing-a-const-Mat-in-decolor.patch \
-            file://0002-photo-Decolor-corrections.patch \
-"
 
 PACKAGECONFIG_remove_imx   = "eigen"
 PACKAGECONFIG_remove_mx8   = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gtk', '', d)}"
