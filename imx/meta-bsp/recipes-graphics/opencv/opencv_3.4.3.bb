@@ -10,9 +10,9 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "9e1b1e5389237c2b9f6c7b9d7715d9836c0a5de1"
-SRCREV_contrib = "d4e02869454998c9af5af1a5c3392cdc0c31dd22"
-SRCREV_ipp = "a62e20676a60ee0ad6581e217fe7e4bada3b95db"
+SRCREV_opencv = "b38c50b3d0c31e82294315ec44b54b7ef559ef12"
+SRCREV_contrib = "1f6d6f06266e1ef336437ae5404bee1c65d42cda"
+SRCREV_ipp = "bdb7bb85f34a8cb0d35e40a81f58da431aa1557a"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
@@ -22,39 +22,39 @@ def ipp_filename(d):
     import re
     arch = d.getVar('TARGET_ARCH', True)
     if re.match("i.86$", arch):
-        return "ippicv_2017u2_lnx_ia32_20170418.tgz"
+        return "ippicv_2017u3_lnx_ia32_general_20180518.tgz"
     else:
-        return "ippicv_2017u2_lnx_intel64_20170418.tgz"
+        return "ippicv_2017u3_lnx_intel64_general_20180518.tgz"
 
 def ipp_md5sum(d):
     import re
     arch = d.getVar('TARGET_ARCH', True)
     if re.match("i.86$", arch):
-        return "f2cece00d802d4dea86df52ed095257e"
+        return "ea72de74dae3c604eb6348395366e78e"
     else:
-        return "808b791a6eac9ed78d32a7666804320e"
+        return "b7cc351267db2d34b9efa1cd22ff0572"
 
 IPP_FILENAME = "${@ipp_filename(d)}"
 IPP_MD5 = "${@ipp_md5sum(d)}"
 
 SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
-SRC_URI = "git://github.com/opencv/opencv.git;branch=3.4;name=opencv \
-    git://github.com/opencv/opencv_contrib.git;branch=3.4;destsuffix=contrib;name=contrib \
-    git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20170418;destsuffix=ipp;name=ipp \
+SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+    git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
+    git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20180518;destsuffix=ipp;name=ipp \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
     https://github.com/tiny-dnn/tiny-dnn/archive/v1.0.0a3.tar.gz;destsuffix=git/3rdparty/tinydnn/tiny-dnn-1.0.0a3;name=tinydnn;unpack=false \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
-    file://fixpkgconfig.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
+    file://0001-Add-missing-multi-line-separator.patch;patchdir=../contrib/ \
     file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
     file://0003-To-fix-errors-as-following.patch \
+    file://fixpkgconfig.patch \
+    file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
     file://0001-Dont-use-isystem.patch \
-    file://javagen.patch \
-    file://0001-dnn-allow-to-use-external-protobuf.patch \
+    file://0001-Check-for-clang-before-using-isystem.patch \
 "
-
-PV = "3.4.2+git${SRCPV}"
+PV = "3.4.3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -69,6 +69,7 @@ addtask unpack_extra after do_unpack before do_patch
 
 EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
     -DWITH_1394=OFF \
+    -DENABLE_PRECOMPILED_HEADERS=OFF \
     -DCMAKE_SKIP_RPATH=ON \
     -DOPENCV_ICV_HASH=${IPP_MD5} \
     -DIPPROOT=${WORKDIR}/ippicv_lnx \
@@ -187,10 +188,5 @@ do_install_append() {
     if [ "$libdir" != "/usr/lib" -a -d ${D}/usr/lib ]; then
         mv ${D}/usr/lib/* ${D}/${libdir}/
         rm -rf ${D}/usr/lib
-    fi
-
-    if ${@bb.utils.contains("PACKAGECONFIG", "samples", "true", "false", d)}; then
-        install -d ${D}${datadir}/OpenCV/samples/bin/
-        cp -f bin/example_* ${D}${datadir}/OpenCV/samples/bin/
     fi
 }
