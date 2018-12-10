@@ -14,8 +14,8 @@ S = "${WORKDIR}/git"
 SPIRV_HEADERS_LOCATION = "${S}/external/spirv-headers"
 HEADERS_VERSION = "unified1"
 
-SRCREV_spirv-tools = "68d1dc66d2efdef9a8b11780cead84cdfa7fd684"
-SRCREV_spirv-headers = "17da9f8231f78cf519b4958c2229463a63ead9e2"
+SRCREV_spirv-tools = "9d699f6d4038f432c55310d5d0b4a6d507c1b686"
+SRCREV_spirv-headers = "${AUTOREV}"
 SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools;protocol=http;name=spirv-tools \
            git://github.com/KhronosGroup/SPIRV-Headers;name=spirv-headers;destsuffix=${SPIRV_HEADERS_LOCATION} \
            file://0002-spirv-lesspipe.sh-allow-using-generic-shells.patch"
