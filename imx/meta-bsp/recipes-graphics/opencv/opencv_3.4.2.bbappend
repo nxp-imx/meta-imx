@@ -8,6 +8,7 @@ SRCREV_opencv_extra = "cc18e9a17c5afe034341c8c70a5aaa9ac86e5601"
 OPENCV_EXTRA_VERSION = "3.4.2"
 
 SRC_URI_remove = "file://javagen.patch"
+SRC_URI_remove = "file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch"
 SRC_URI += "file://fix_openvx_samples.patch"
 SRC_URI += "file://fix_python_bindings.patch"
 SRC_URI += "file://0001-photo-avoid-resizing-a-const-Mat-in-decolor.patch \
@@ -46,6 +47,10 @@ do_check_opencv_extra_version() {
     fi
 }
 addtask check_opencv_extra_version before do_fetch
+
+EXTRA_OECMAKE_remove = \
+    "${@oe.utils.conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
+     ${@oe.utils.conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)}"
 
 do_install_append() {
     if ${@bb.utils.contains("PACKAGECONFIG", "samples", "true", "false", d)}; then
