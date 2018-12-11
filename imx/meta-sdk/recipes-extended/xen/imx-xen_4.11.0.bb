@@ -16,3 +16,9 @@ S = "${WORKDIR}/git"
 FILES_${PN}-scripts-common += " ${sysconfdir}/xen/*.cfg"
 
 COMPATIBLE_MACHINE = "${@bb.utils.contains('MACHINE_FEATURES', 'xen', '${MACHINE}', '(^$)', d)}"
+
+# provides for qemu build and runtime
+PROVIDES = "xen"
+RPROVIDES_${PN}-libxenstore += "xen-libxenstore"
+RPROVIDES_${PN}-libxenctrl += "xen-libxenctrl"
+RPROVIDES_${PN}-libxenguest += "xen-libxenguest"
