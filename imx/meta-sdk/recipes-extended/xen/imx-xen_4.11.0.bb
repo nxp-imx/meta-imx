@@ -13,6 +13,6 @@ SRCREV = "641f78ed299ce68c93e01fb3c9b08449e77e6afe"
 
 S = "${WORKDIR}/git"
 
-FILES_${PN}_append = " ${sysconfdir}/xen"
+FILES_${PN}-scripts-common += " ${sysconfdir}/xen/*.cfg"
 
 COMPATIBLE_MACHINE = "${@bb.utils.contains('MACHINE_FEATURES', 'xen', '${MACHINE}', '(^$)', d)}"
