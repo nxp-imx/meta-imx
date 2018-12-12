@@ -21,7 +21,7 @@ IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=h
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
 SRC_URI_append = " file://memtool_profile "
 
-SRCREV = "2d3880523adec3dad1f8775febfa338dea4cfd26"
+SRCREV = "e3141f1c1fd89a30c7978a169f1c7bff2ed386d5"
 
 S = "${WORKDIR}/git"
 
