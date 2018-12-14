@@ -2,23 +2,23 @@ DESCRIPTION = "A library to retrieve i.MX GPU performance data"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6dfb32a488e5fd6bae52fbf6c7ebb086"
 
-SRC_URI[arm-fb.md5sum] = "c2647e062d093d6d0b03a4ff21dfd576"
-SRC_URI[arm-fb.sha256sum] = "f4b251ea048f14764659980cf2922f7a952a9e256f515db82b027a5654323a02"
+SRC_URI[arm-fb.md5sum] = "6cf3eb2b058d4a77bf30d993e2021ad1"
+SRC_URI[arm-fb.sha256sum] = "d87f73e6eba5eb48570fa4a103bdb3eb3022485d366f3866084e03d771f677f0"
 
-SRC_URI[arm-wayland.md5sum] = "e2dc4ce44f3d5ea4f48d2541b57e0569"
-SRC_URI[arm-wayland.sha256sum] = "8623b3714c30efd82dd3198cd4cd779ae3e6c9e6ec2b5c0fabe976f0755a2210"
+SRC_URI[arm-wayland.md5sum] = "40f542cb4e8dcac0ff0cc3e73cbd344e"
+SRC_URI[arm-wayland.sha256sum] = "e1d9f01df09512ba7edf2b075d6f3314ed614a06b28c21903f712c1ef85444ea"
 
-SRC_URI[arm-x11.md5sum] = "2d39e8f8f1961bd6461f4009881bfaeb"
-SRC_URI[arm-x11.sha256sum] = "3bb181c3d1f7a1787e1ce5a95a148183174598bcfeeb58ba68feef38bc4e93ec"
+SRC_URI[arm-x11.md5sum] = "1d7998c442ea9f4261a6394bca6fa832"
+SRC_URI[arm-x11.sha256sum] = "843ebd4ab2dc5a818f0d4ed06eec3e8f8546e2dc3d7bc3107f7d49d93499c2a1"
 
-SRC_URI[aarch64-fb.md5sum] = "2be91ed27d193159422eaba3cfc57564"
-SRC_URI[aarch64-fb.sha256sum] = "ceac9a663dbc5b8801681611cba7e575a434cd9f7c704e0f54c78a1f82b366c0"
+SRC_URI[aarch64-fb.md5sum] = "76e23a8b684ad32451755e076002be08"
+SRC_URI[aarch64-fb.sha256sum] = "cb0cd4ad86f8b110af0b92085f5c38b32bf7e819e33a2a69b21db7a9a8aea33f"
 
-SRC_URI[aarch64-wayland.md5sum] = "ade203957583a5eadaa599986e2e885f"
-SRC_URI[aarch64-wayland.sha256sum] = "521217e3e9f8fa2d424ef2102d1c4ab83fad9c725e08ee2bd2d5501d96eda056"
+SRC_URI[aarch64-wayland.md5sum] = "2dd069a27a6252e8797214a5691d77ee"
+SRC_URI[aarch64-wayland.sha256sum] = "3b1dd82d664e9592365127f4f8e30f46cab4bcaf5348dc66e23ec8551306b338"
 
-SRC_URI[aarch64-x11.md5sum] = "045993da38f5d34184b0cb58684bfeff"
-SRC_URI[aarch64-x11.sha256sum] = "752e0536effbbb5bfd3c1bb6ef58d30145b588601e491610e580bf38f6f51e9c"
+SRC_URI[aarch64-x11.md5sum] = "7cfd5c3f1f066c6b2801cc8fdb0ce364"
+SRC_URI[aarch64-x11.sha256sum] = "875ff565045bd40fb0220be5e5f3e9544b17cffca468c68c7d099eaa9be9d1f8"
 
 inherit fsl-eula-unpack2 fsl-eula-graphics
 
