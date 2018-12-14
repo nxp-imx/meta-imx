@@ -15,6 +15,7 @@ SRCREV_contrib = "25221244732dcf44c1450d0f93edc2529a61c0e1"
 SRCREV_ipp = "32e315a5b106a7b89dbed51c28f8120a48b368b4"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+SRCREV_extra = "d29d003e00dacf4ed686577c3f2c0aa048d5a80a"
 SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
 SRC_URI[tinydnn.sha256sum] = "e2c61ce8c5debaa644121179e9dbdcf83f497f39de853f8dd5175846505aa18b"
 
@@ -37,12 +38,13 @@ def ipp_md5sum(d):
 IPP_FILENAME = "${@ipp_filename(d)}"
 IPP_MD5 = "${@ipp_md5sum(d)}"
 
-SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
+SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_extra"
 SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
     git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20180723;destsuffix=ipp;name=ipp \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
+    git://github.com/opencv/opencv_extra.git;destsuffix=extra;name=extra \
     https://github.com/tiny-dnn/tiny-dnn/archive/v1.0.0a3.tar.gz;destsuffix=git/3rdparty/tinydnn/tiny-dnn-1.0.0a3;name=tinydnn;unpack=false \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
@@ -50,6 +52,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://fixpkgconfig.patch \
     file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
     file://0001-Dont-use-isystem.patch \
+    file://fix_openvx_samples.patch \
 "
 PV = "4.0.1+git${SRCPV}"
 
@@ -73,14 +76,23 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
-    ${@oe.utils.conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
-    ${@oe.utils.conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
 "
 EXTRA_OECMAKE_append_x86 = " -DX86=ON"
 
-PACKAGECONFIG ??= "python3 eigen jpeg png tiff v4l libv4l gstreamer samples tbb gphoto2 \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
+PACKAGECONFIG_GTK ?= " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)} \
+"
+PACKAGECONFIG_GTK_mx8 ?= " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11',    '', \
+       bb.utils.contains('DISTRO_FEATURES',         'x11', 'gtk', \
+                                                              '', d), d)} \
+"
+PACKAGECONFIG ??= "python3 jpeg png tiff v4l libv4l gstreamer samples tbb gphoto2 \
+    ${PACKAGECONFIG_GTK} \
     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
+PACKAGECONFIG_append_mx8   = " opencl dnn text"
+PACKAGECONFIG_append_mx8dv = " openvx"
+PACKAGECONFIG_append_mx8qm = " openvx"
 
 PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
 PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
@@ -96,12 +108,15 @@ PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
 PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
 PACKAGECONFIG[libv4l] = "-DWITH_LIBV4L=ON,-DWITH_LIBV4L=OFF,v4l-utils,"
 PACKAGECONFIG[opencl] = "-DWITH_OPENCL=ON,-DWITH_OPENCL=OFF,opencl-headers virtual/opencl-icd,"
+PACKAGECONFIG[openvx] = "-DWITH_OPENVX=ON -DOPENVX_ROOT=${STAGING_LIBDIR} -DOPENVX_LIB_CANDIDATES='OpenVX;OpenVXU',-DWITH_OPENVX=OFF,virtual/libopenvx,"
 PACKAGECONFIG[oracle-java] = "-DJAVA_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${ORACLE_JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native oracle-jse-jdk oracle-jse-jdk-native,"
 PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
 PACKAGECONFIG[python2] = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include,,python-numpy,"
 PACKAGECONFIG[python3] = "-DPYTHON3_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include,,python3-numpy,"
+PACKAGECONFIG[qt5] = "-DWITH_QT=ON -DWITH_GTK=OFF -DOE_QMAKE_PATH_EXTERNAL_HOST_BINS=${STAGING_BINDIR_NATIVE}/qt5 -DCMAKE_PREFIX_PATH=${STAGING_BINDIR_NATIVE}/cmake,-DWITH_QT=OFF,qtbase qtbase-native,"
 PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
 PACKAGECONFIG[tbb] = "-DWITH_TBB=ON,-DWITH_TBB=OFF,tbb,"
+PACKAGECONFIG[test] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON -DOPENCV_TEST_DATA_PATH=${S}/../extra/testdata, -DBUILD_TESTS=OFF -DINSTALL_TESTS=OFF,"
 PACKAGECONFIG[text] = "-DBUILD_opencv_text=ON,-DBUILD_opencv_text=OFF,tesseract,"
 PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
 PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
@@ -183,4 +198,14 @@ do_install_append() {
         mv ${D}/usr/lib/* ${D}/${libdir}/
         rm -rf ${D}/usr/lib
     fi
+
+    if ${@bb.utils.contains("PACKAGECONFIG", "samples", "true", "false", d)}; then
+        install -d ${D}${datadir}/OpenCV/samples/data
+        cp -r ${S}/samples/data/* ${D}${datadir}/OpenCV/samples/data
+
+        install -d ${D}${datadir}/OpenCV/samples/bin/
+        cp -f bin/example_* ${D}${datadir}/OpenCV/samples/bin/
+    fi
 }
+
+RDEPENDS_opencv-apps += "${@bb.utils.contains('PACKAGECONFIG', 'test', 'bash', '', d)}"
