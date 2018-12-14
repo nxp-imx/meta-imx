@@ -21,8 +21,8 @@ do_install () {
 
 
 FILES_${PN} = " \
-                ${sysconfdir}/bluetooth/firmware.conf \
-                ${base_libdir}/firmware/qca \
-                ${base_libdir}/firmware/qca9377 \
-                ${base_libdir}/firmware/wlan \
+    ${sysconfdir}/bluetooth/firmware.conf \
+    ${base_libdir}/firmware/qca \
+    ${base_libdir}/firmware/qca9377 \
+    ${base_libdir}/firmware/wlan \
 "
