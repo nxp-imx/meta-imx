@@ -10,9 +10,9 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "b38c50b3d0c31e82294315ec44b54b7ef559ef12"
-SRCREV_contrib = "1f6d6f06266e1ef336437ae5404bee1c65d42cda"
-SRCREV_ipp = "bdb7bb85f34a8cb0d35e40a81f58da431aa1557a"
+SRCREV_opencv = "1dee705074bb68fde68058a92b59235ffb34660c"
+SRCREV_contrib = "25221244732dcf44c1450d0f93edc2529a61c0e1"
+SRCREV_ipp = "32e315a5b106a7b89dbed51c28f8120a48b368b4"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
@@ -22,9 +22,9 @@ def ipp_filename(d):
     import re
     arch = d.getVar('TARGET_ARCH', True)
     if re.match("i.86$", arch):
-        return "ippicv_2017u3_lnx_ia32_general_20180518.tgz"
+        return "ippicv_2019_lnx_ia32_general_20180723.tgz"
     else:
-        return "ippicv_2017u3_lnx_intel64_general_20180518.tgz"
+        return "ippicv_2019_lnx_intel64_general_20180723.tgz"
 
 def ipp_md5sum(d):
     import re
@@ -40,21 +40,18 @@ IPP_MD5 = "${@ipp_md5sum(d)}"
 SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
 SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
-    git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20180518;destsuffix=ipp;name=ipp \
+    git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20180723;destsuffix=ipp;name=ipp \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
     https://github.com/tiny-dnn/tiny-dnn/archive/v1.0.0a3.tar.gz;destsuffix=git/3rdparty/tinydnn/tiny-dnn-1.0.0a3;name=tinydnn;unpack=false \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
-    file://0001-Add-missing-multi-line-separator.patch;patchdir=../contrib/ \
-    file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
     file://0003-To-fix-errors-as-following.patch \
     file://fixpkgconfig.patch \
     file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
     file://0001-Dont-use-isystem.patch \
-    file://0001-Check-for-clang-before-using-isystem.patch \
 "
-PV = "3.4.3+git${SRCPV}"
+PV = "4.0.1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
@@ -159,13 +156,13 @@ python populate_packages_prepend () {
 
 PACKAGES_DYNAMIC += "^libopencv-.*"
 
-FILES_${PN} = ""
-FILES_${PN}-dbg += "${datadir}/OpenCV/java/.debug/* ${datadir}/OpenCV/samples/bin/.debug/*"
-FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig ${datadir}/OpenCV/*.cmake"
+FILES_${PN} = "${datadir}/licenses"
+FILES_${PN}-dbg += "${datadir}/OpenCV/java/.debug/* ${datadir}/OpenCV/samples/bin/.debug/* ${datadir}/opencv4/valgrind*.supp"
+FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig ${datadir}/OpenCV/*.cmake ${libdir}/cmake"
 FILES_${PN}-staticdev += "${datadir}/OpenCV/3rdparty/lib/*.a"
 FILES_${PN}-apps = "${bindir}/* ${datadir}/OpenCV"
 FILES_${PN}-java = "${datadir}/OpenCV/java"
-FILES_${PN}-samples = "${datadir}/OpenCV/samples/"
+FILES_${PN}-samples = "${datadir}/OpenCV/samples ${datadir}/opencv4/samples ${datadir}/opencv4/*cascades ${datadir}/opencv4/testdata/"
 
 INSANE_SKIP_${PN}-java = "libdir"
 INSANE_SKIP_${PN}-dbg = "libdir"
@@ -181,9 +178,6 @@ FILES_python3-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
 RDEPENDS_python3-opencv = "python3-core python3-numpy"
 
 do_install_append() {
-    cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
-    sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
-
     # Move Python files into correct library folder (for multilib build)
     if [ "$libdir" != "/usr/lib" -a -d ${D}/usr/lib ]; then
         mv ${D}/usr/lib/* ${D}/${libdir}/
