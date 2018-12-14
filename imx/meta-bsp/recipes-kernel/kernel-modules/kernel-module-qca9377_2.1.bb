@@ -4,3 +4,4 @@ SUMMARY = "Qualcomm WiFi driver for QCA module 9377"
 
 EXTRA_OEMAKE += "${QCA9377_OEMAKE}"
 
+RDEPENDS_${PN} += "firmware-qca9377"
