@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "a6387c3012d5331798ffca2acdd8297f417101e4"
+SRCREV_opencv = "cb98964bbf53d83d1a801f8db36d095394d2b935"
 SRCREV_contrib = "6ef1983f0876fdf65083666d8e73abfecaf9d4f4"
 SRCREV_ipp = "bdb7bb85f34a8cb0d35e40a81f58da431aa1557a"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
@@ -39,7 +39,9 @@ IPP_FILENAME = "${@ipp_filename(d)}"
 IPP_MD5 = "${@ipp_md5sum(d)}"
 
 SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_extra"
-SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+OPENCV_SRC ?= "git://source.codeaurora.org/external/imx/opencv-imx.git;protocol=https"
+SRCBRANCH = "4.0.0-rc_imx"
+SRC_URI = "${OPENCV_SRC};branch=${SRCBRANCH};name=opencv \
     git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
     git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20180518;destsuffix=ipp;name=ipp \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
@@ -49,10 +51,8 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
     file://0003-To-fix-errors-as-following.patch \
-    file://fixpkgconfig.patch \
     file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
     file://0001-Dont-use-isystem.patch \
-    file://fix_openvx_samples.patch \
 "
 PV = "4.0.0+git${SRCPV}"
 
