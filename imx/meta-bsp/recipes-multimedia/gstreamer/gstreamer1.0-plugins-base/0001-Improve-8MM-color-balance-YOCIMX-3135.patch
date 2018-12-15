@@ -1,0 +1,158 @@
+From 6cf985c5063ce965fb9742df5ab72ae521c5dd66 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Sat, 15 Dec 2018 11:45:32 -0600
+Subject: [PATCH] Improve 8MM color balance [YOCIMX-3135]
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ ext/gl/gstglcolorbalance.c | 107 ++++++++++++++++++++++-----------------------
+ 1 file changed, 52 insertions(+), 55 deletions(-)
+
+diff --git a/ext/gl/gstglcolorbalance.c b/ext/gl/gstglcolorbalance.c
+index 8163046..ca02c88 100644
+--- a/ext/gl/gstglcolorbalance.c
++++ b/ext/gl/gstglcolorbalance.c
+@@ -44,6 +44,9 @@
+ #include <gst/video/colorbalance.h>
+ 
+ #include "gstglcolorbalance.h"
++#include <math.h>
++
++#define PI 3.14159265
+ 
+ GST_DEBUG_CATEGORY_STATIC (glcolorbalance_debug);
+ #define GST_CAT_DEFAULT glcolorbalance_debug
+@@ -59,60 +62,21 @@ static const gchar *color_balance_frag =
+   "#ifdef GL_ES\n"
+   "precision mediump float;\n"
+   "#endif\n"
+-  "uniform float brightness;\n"
+-  "uniform float contrast;\n"
+-  "uniform float saturation;\n"
+-  "uniform float hue;\n"
++  "uniform float hue_sin;\n"
++  "uniform float hue_cos;\n"
+   "varying vec2 v_texcoord;\n"
+   "uniform sampler2D tex;\n"
+-  "#define from_yuv_bt601_offset vec3(-0.0625, -0.5, -0.5)\n"
+-  "#define from_yuv_bt601_rcoeff vec3(1.164, 0.000, 1.596)\n"
+-  "#define from_yuv_bt601_gcoeff vec3(1.164,-0.391,-0.813)\n"
+-  "#define from_yuv_bt601_bcoeff vec3(1.164, 2.018, 0.000)\n"
+-  "#define from_rgb_bt601_offset vec3(0.0625, 0.5, 0.5)\n"
+-  "#define from_rgb_bt601_ycoeff vec3(0.256816, 0.504154, 0.0979137)\n"
+-  "#define from_rgb_bt601_ucoeff vec3(-0.148246, -0.29102, 0.439266)\n"
+-  "#define from_rgb_bt601_vcoeff vec3(0.439271, -0.367833, -0.071438)\n"
+-  "#define PI 3.14159265\n"
+   "\n"
+-  "vec3 yuv_to_rgb (vec3 val) {\n"
+-  "  vec3 rgb;\n"
+-  "  val += from_yuv_bt601_offset;\n"
+-  "  rgb.r = dot(val, from_yuv_bt601_rcoeff);\n"
+-  "  rgb.g = dot(val, from_yuv_bt601_gcoeff);\n"
+-  "  rgb.b = dot(val, from_yuv_bt601_bcoeff);\n"
+-  "  return rgb;\n"
+-  "}\n"
+-  "vec3 rgb_to_yuv (vec3 val) {\n"
+-  "  vec3 yuv;\n"
+-  "  yuv.r = dot(val.rgb, from_rgb_bt601_ycoeff);\n"
+-  "  yuv.g = dot(val.rgb, from_rgb_bt601_ucoeff);\n"
+-  "  yuv.b = dot(val.rgb, from_rgb_bt601_vcoeff);\n"
+-  "  yuv += from_rgb_bt601_offset;\n"
+-  "  return yuv;\n"
+-  "}\n"
+-  /* 224 = 256 - (256 - 240) - 16*/
+-  "float luma_to_narrow (float luma) {\n"
+-  "  return (luma + 16.0 / 256.0) * 219.0 / 256.0;"
+-  "}\n"
+-  "float luma_to_full (float luma) {\n"
+-  "  return (luma * 256.0 / 219.0) - 16.0 / 256.0;"
+-  "}\n"
++  " uniform  vec4 rXform;"
++  " uniform  vec4 gXform;\n"
++  " uniform  vec4 bXform;\n"
+   "void main () {\n"
+-  "  vec3 yuv;\n"
+-  /* operations translated from videobalanceand tested with glvideomixer
+-   * with one pad's paremeters blend-equation-rgb={subtract,reverse-subtract},
+-   * blend-function-src-rgb=src-color and blend-function-dst-rgb=dst-color */
+-  "  float hue_cos = cos (PI * hue);\n"
+-  "  float hue_sin = sin (PI * hue);\n"
+   "  vec4 rgba = texture2D (tex, v_texcoord);\n"
+-  "  yuv = rgb_to_yuv (rgba.rgb);\n"
+-  "  yuv.x = clamp (luma_to_narrow (luma_to_full(yuv.x) * contrast) + brightness, 0.0, 1.0);\n"
+-  "  vec2 uv = yuv.yz;\n"
+-  "  yuv.y = clamp (0.5 + (((uv.x - 0.5) * hue_cos + (uv.y - 0.5) * hue_sin) * saturation), 0.0, 1.0);\n"
+-  "  yuv.z = clamp (0.5 + (((0.5 - uv.x) * hue_sin + (uv.y - 0.5) * hue_cos) * saturation), 0.0, 1.0);\n"
+-  "  rgba.rgb = yuv_to_rgb (yuv);\n"
+-  "  gl_FragColor = rgba;\n"
++  "  gl_FragColor.a = rgba.a; \n" 
++  "  rgba.a = 1.0; \n"
++  "  gl_FragColor.r = clamp ( dot(rgba, rXform), 0.0, 1.0);\n"
++  "  gl_FragColor.g = clamp ( dot(rgba, gXform), 0.0, 1.0);\n"
++  "  gl_FragColor.b = clamp ( dot(rgba, bXform), 0.0, 1.0); \n"
+   "}\n";
+ /* *INDENT-ON* */
+ 
+@@ -239,18 +203,51 @@ gst_gl_color_balance_filter_texture (GstGLFilter * filter, GstGLMemory * in_tex,
+     GstGLMemory * out_tex)
+ {
+   GstGLColorBalance *balance = GST_GL_COLOR_BALANCE (filter);
++  gfloat hue_sin;
++  gfloat hue_cos;
++  gfloat nXform[4]; 
++  //gfloat contrast, saturation;
++  // balance->contrast =balance->contrast *128.0 ;
++  // balance->saturation =balance->saturation*128.0 ;
++  // balance->hue = (balance->hue)*128.0;
++  // balance->brightness = (balance->brightness)*128.0;
++  //gfloat comp;
+ 
+   if (!balance->shader)
+     _create_shader (balance);
+ 
+   gst_gl_shader_use (balance->shader);
+   GST_OBJECT_LOCK (balance);
+-  gst_gl_shader_set_uniform_1f (balance->shader, "brightness",
+-      balance->brightness);
+-  gst_gl_shader_set_uniform_1f (balance->shader, "contrast", balance->contrast);
+-  gst_gl_shader_set_uniform_1f (balance->shader, "saturation",
+-      balance->saturation);
+-  gst_gl_shader_set_uniform_1f (balance->shader, "hue", balance->hue);
++  hue_sin = sin(PI*balance->hue)*balance->saturation;
++  hue_cos= cos(PI*balance->hue)*balance->saturation;
++  gst_gl_shader_set_uniform_1f(balance->shader,  "hue_sin", hue_sin);
++  gst_gl_shader_set_uniform_1f(balance->shader,  "hue_cos", hue_cos);
++  nXform[0] = 0.700989*hue_cos + 0.236571*hue_sin+ 0.299011*balance->contrast;
++  nXform[1] = -0.586988*hue_cos + .46441*hue_sin + 0.586988*balance->contrast;
++  nXform[2] =  -0.114 * hue_cos - .701*hue_sin + .114*balance->contrast;
++  nXform[3]= -0.0105174 + 1.1643*balance->brightness + 0.0105174*balance->contrast;
++  gst_gl_shader_set_uniform_4fv (balance->shader, "rXform", 1, nXform);
++
++  nXform[0] = -0.299011*hue_cos - 0.292584*hue_sin + 0.299011*balance->contrast;
++  nXform[1] = 0.413012*hue_cos - .0924795*hue_sin + 0.586988*balance->contrast;
++  nXform[2] =  -0.114 * hue_cos + .385064*hue_sin + .114*balance->contrast;
++  nXform[3]= -0.0105174 + 1.1643*balance->brightness + 0.0105174*balance->contrast;
++  gst_gl_shader_set_uniform_4fv (balance->shader, "gXform", 1, nXform);
++
++  nXform[0] = -0.299011*hue_cos + 0.886009*hue_sin + 0.299011*balance->contrast;
++  nXform[1] = -0.586988*hue_cos - .741918*hue_sin + 0.586988*balance->contrast;
++  nXform[2] = 0.886 * hue_cos - .144091*hue_sin + .114*balance->contrast;
++  nXform[3]= -0.0105174 + 1.1643*balance->brightness + 0.0105174*balance->contrast;
++  gst_gl_shader_set_uniform_4fv (balance->shader, "bXform", 1, nXform);
++
++//  gst_gl_shader_set_uniform_1f (balance->shader, "contrast", balance->contrast);
++ // gst_gl_shader_set_uniform_1f (balance->shader, "saturation",
++  //    balance->saturation);
++ // comp =  0.0534668 + balance->brightness;
++ // gst_gl_shader_set_uniform_1f (balance->shader, " contrast_brightness_comp", comp);
++//  hue[0] = sin(PI*balance->hue);
++ // hue[1] = cos(PI*balance->hue);
++//  gst_gl_shader_set_uniform_2fv(balance->shader,  "hue_sin_cos", 1, hue);
+   GST_OBJECT_UNLOCK (balance);
+ 
+   gst_gl_filter_render_to_target_with_shader (filter, in_tex, out_tex,
+-- 
+2.7.4
+
