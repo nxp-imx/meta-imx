@@ -2,16 +2,19 @@
 # Copyright 2017-2018 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require recipes-kernel/linux/linux-imx.inc
-require recipes-kernel/linux/linux-imx-src-${PV}.inc
-
 SUMMARY = "Linux Kernel provided and supported by NXP"
 DESCRIPTION = "Linux Kernel provided and supported by NXP with focus on \
 i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU and IPU."
 
+require recipes-kernel/linux/linux-imx.inc
+
 DEPENDS += "lzop-native bc-native"
 
-SRC_URI += "file://0001-uapi-Add-ion.h-to-userspace.patch"
+SRCBRANCH = "imx_4.14.y"
+LOCALVERSION = "-${SRCBRANCH}"
+KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
+SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
+SRCREV = "3bff01d2bb67c2a82c8e6f4a768f56d78370e70f"
 
 DEFAULT_PREFERENCE = "1"
 
@@ -37,10 +40,3 @@ do_copy_defconfig () {
 }
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
-EXTRA_OEMAKE_append_mx6 = " ARCH=arm"
-EXTRA_OEMAKE_append_mx7 = " ARCH=arm"
-EXTRA_OEMAKE_append_mx8 = " ARCH=arm64"
-
-#KERNEL_DEVICETREE_remove = "freescale/fsl-imx8mm-evk.dtb freescale/fsl-imx8mm-evk-ak4497.dtb "
-#KERNEL_DEVICETREE_remove = "freescale/fsl-imx8mm-evk-m4.dtb freescale/fsl-imx8mm-evk-ak5558.dtb "
-#KERNEL_DEVICETREE_remove = "freescale/fsl-imx8mm-evk-audio-tdm.dtb "
