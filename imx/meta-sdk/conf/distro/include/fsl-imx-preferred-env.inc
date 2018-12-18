@@ -40,6 +40,9 @@ PREFERRED_VERSION_xf86-video-imx-vivante    = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}"
 
+# Set the preffered provider for opencl-headers
+PREFERRED_PROVIDER_opencl-headers_imx = "imx-gpu-viv"
+
 PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.14.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.14.imx"
