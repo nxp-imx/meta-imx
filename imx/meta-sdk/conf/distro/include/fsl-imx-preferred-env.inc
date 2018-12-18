@@ -14,17 +14,7 @@ PREFERRED_PROVIDER_virtual/kernel_imx = "linux-imx"
 #PREFERRED_PROVIDER_virtual/kernel_mx7ulp = "linux-imx"
 #PREFERRED_PROVIDER_virtual/kernel_imx7ulp_zebu = "linux-imx"
 
-PREFERRED_VERSION_linux-libc-headers_imx = "4.9"
-
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6ul = "imx-gst1.0-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6sll = "imx-gst1.0-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6q = "imx-gst1.0-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6dl = "imx-gst1.0-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6sl = "imx-gst1.0-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx6sx = "imx-gst1.0-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx7d = "imx-gst1.0-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx7ulp = "imx-gst1.0-plugin"
-MACHINE_GSTREAMER_1_0_PLUGIN_mx8 = "imx-gst1.0-plugin"
+PREFERRED_VERSION_linux-libc-headers_imx = "4.14"
 
 # Extra audio support
 # Add support for ALL i.MX6/7/8 SoC families
@@ -41,7 +31,7 @@ DEFAULTTUNE_mx8 = "aarch64"
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
 
-IMX_GPU_VERSION            ?= "6.2.4.p1.8"
+IMX_GPU_VERSION            ?= "6.2.4.p2.3"
 IMX_GPU_VERSION_SUFFIX      = "aarch32"
 IMX_GPU_VERSION_SUFFIX_mx8  = "aarch64"
 
@@ -49,8 +39,6 @@ PREFERRED_VERSION_imx-gpu-viv               = "${IMX_GPU_VERSION}-${IMX_GPU_VERS
 PREFERRED_VERSION_xf86-video-imx-vivante    = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}-${IMX_GPU_VERSION_SUFFIX}"
-PREFERRED_VERSION_openssl                   = "1.0.2m"
-PREFERRED_VERSION_openssl-native            = "1.0.2m"
 
 PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.0.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.14.0.imx"

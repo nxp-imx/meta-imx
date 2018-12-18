@@ -12,6 +12,7 @@ ALSA_INSTALL = " \
     alsa-utils \
     alsa-tools \
 "
+ALSA_INSTALL_append_mx8 = " tinycompress"
 
 PULSEAUDIO_INSTALL = " \
     pulseaudio-server \

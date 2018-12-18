@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=69663ab153298557a59c67a60a743e5b"
 inherit deploy pythonnative autotools
 DEPENDS = "python-pycrypto-native u-boot-mkimage-native"
 
-SRCBRANCH = "imx_4.9.123_imx8mm_ga"
+SRCBRANCH = "imx_4.14.78_1.0.0_ga"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
-SRCREV = "abcc7c2135986a6d7d377f2f53c967cda0281351" 
+SRCREV = "6a52487eb0ff664e4ebbd48497f0d3322844d51d"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build.${PLATFORM_FLAVOR}"
@@ -22,6 +22,9 @@ PLATFORM_FLAVOR                 = "${@d.getVar('MACHINE')[1:]}"
 PLATFORM_FLAVOR_imx6qpdlsolox   = "mx6qsabresd"
 PLATFORM_FLAVOR_imx6ul7d        = "mx6ulevk"
 PLATFORM_FLAVOR_imx6ull14x14evk = "mx6ullevk"
+PLATFORM_FLAVOR_imx6ull9x9evk   = "mx6ullevk"
+PLATFORM_FLAVOR_imx6ulz14x14evk = "mx6ullevk"
+PLATFORM_FLAVOR_mx8mm   = "mx8mmevk"
 
 OPTEE_ARCH ?= "arm32"
 OPTEE_ARCH_armv7a = "arm32"
@@ -48,12 +51,14 @@ do_compile () {
 
 
 do_deploy () {
-   install -d ${DEPLOYDIR}
-   ${TARGET_PREFIX}objcopy -O binary ${B}/core/tee.elf ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin
+    install -d ${DEPLOYDIR}
+    ${TARGET_PREFIX}objcopy -O binary ${B}/core/tee.elf ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin
 
-   IMX_LOAD_ADDR=`cat ${B}/core/tee-init_load_addr.txt` && \
-   uboot-mkimage -A arm -O linux -C none -a ${IMX_LOAD_ADDR} -e ${IMX_LOAD_ADDR} \
-    -d ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin ${DEPLOYDIR}/uTee-${OPTEE_BIN_EXT}
+    if [ "${OPTEE_ARCH}" != "arm64" ]; then
+        IMX_LOAD_ADDR=`cat ${B}/core/tee-init_load_addr.txt` && \
+        uboot-mkimage -A arm -O linux -C none -a ${IMX_LOAD_ADDR} -e ${IMX_LOAD_ADDR} \
+            -d ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin ${DEPLOYDIR}/uTee-${OPTEE_BIN_EXT}
+    fi
 
     cd ${DEPLOYDIR}
     ln -sf tee.${PLATFORM_FLAVOR}.bin tee.bin

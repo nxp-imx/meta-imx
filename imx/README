@@ -1,4 +1,4 @@
-i.MX Linux Yocto Project BSP 4.9.123-2.3.0_8mm_ga Release
+i.MX Linux Yocto Project BSP 4.14.78_1.0.0 Release
 =====================================================
 
 The following boards were tested in this release.
@@ -7,6 +7,7 @@ The following boards were tested in this release.
    * NXP i.MX 6QuadPlus SABRE Auto (imx6qpsabreauto)
    * NXP i.MX 6UltraLite EVK (imx6ulevk)
    * NXP i.MX 6ULL EVK (imx6ull14x14evk)
+   * NXP i.MX 6ULZ EVK (imx6ulz14x14evk)
    * NXP i.MX 7Dual SABRE Smart Device (imx7dsabresd)
    * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
    * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
@@ -20,28 +21,17 @@ The following boards were tested in this release.
    * NXP i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
    * NXP i.MX 6SOLO SABRE Auto (imx6solosabreauto )
    * NXP i.MX 7ULP EVK (imx7ulpevk)
-   * NXP i.MX 8MMini EVK (imx8mmevk)
    * NXP i.MX 8MQuad EVK (imx8mqevk)
    * NXP i.MX 8QuadMax LPDDR4 ARM2 (imx8qmlpddr4arm2)
    * NXP i.MX 8QuadXPlus LPDDR4 ARM2 (imx8qxplpddr4arm2)
    * NXP i.MX 8QuadXPlus MEK (imx8qxpmek)
-
- * i.MX Device Tree configurations for each machine
-    Each machine files lists the associated device trees for that machine.
-
- * i.MX U-Boot configurations for each machine
-    imx8mm - sd, fspi
-    imx8mq - sd
-    imx8qm - sd, fspi
-    imx8qxp - sd, fspi
-
 
 Quick Start Guide
 -----------------
 See the i.MX Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX Linux BSP repo
-$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-rocko -m imx-4.9.123-2.3.0-8mm_ga.xml
+$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-sumo -m imx-4.14.62-1.0.0_ga.xml
 
 Download the Yocto Project Layers:
 $: repo sync
@@ -124,6 +114,20 @@ DEFAULTTUNE_virtclass-multilib-lib32 = "armv7athf-neon"
 - 32-bit libraries to be added into the image
 IMAGE_INSTALL_append = "lib32-glibc lib32-libgcc lib32-libstdc++"
 
+Building XEN
+------------
+XEN is supported on IMX8QM/QXP. To enable xen build add the following line to local.conf:
+
+  DISTRO_FEATURES_append = " xen"
+
+Key tech implemented:
+- GPU partition, 2 GPUs assigned to different OSes
+- DPU partition, 2 DPUs assigned to different OSes
+- USDHC passthrough
+- USB passthrough
+- LPUART passthrough
+- Software partition based on SCU firmware to restrict resource access from different OSes.
+
 Hardware Floating Point
 -----------------------
 This release enables hardware floating point by default.  This feature is enabled in both the machine 
@@ -156,16 +160,16 @@ Add Chromium to your Wayland or X11-based image by adding the following lines to
 
 # Add Chromium
 IMAGE_INSTALL_append = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' chromium-ozone-wayland libexif', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11', ' chromium-x11 libexif', \
-                                                        '', d), d)}"
-LICENSE_FLAGS_WHITELIST = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'commercial', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11', 'commercial', \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' chromium-ozone-wayland', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', ' chromium-x11', \
                                                         '', d), d)}"
 
-QTWebkit
+QTWebEngine
 --------
+Qtwebengine is not built by default so add this to local.conf or image recipe.   It is only supported
+for X11 backends for i.MX 6 with GPU and i.MX 7ULP and not on i.MX 8 SoC.
+ IMAGE_INSTALL_append = "packagegroup-qt5-webengine"
+
 To start go to /usr/share/qt5/examples/webkitwidgets/browser and run browser
 
 Qt

@@ -1,0 +1,22 @@
+From bd9d14bbb7cc121d97d7f9e3b49509d8491a9aaa Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Tue, 2 May 2017 22:17:34 -0500
+
+---
+ mkspecs/linux-oe-g++/qmake.conf | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/mkspecs/linux-oe-g++/qmake.conf b/mkspecs/linux-oe-g++/qmake.conf
+index 30d31ed..7a93f2b 100644
+--- a/mkspecs/linux-oe-g++/qmake.conf
++++ b/mkspecs/linux-oe-g++/qmake.conf
+@@ -38,5 +38,9 @@ isEmpty(QMAKE_QT_CONFIG):QMAKE_QT_CONFIG = $$(OE_QMAKE_QT_CONFIG)
+ 
+ include(../oe-device-extra.pri)
+ 
++QMAKE_LIBS_EGL        += -lEGL
++QMAKE_LIBS_OPENGL_ES2 += -lEGL -lGLESv2
++QMAKE_LIBS_OPENVG     += -lEGL -lOpenVG
++
+ load(device_config)
+ load(qt_config)

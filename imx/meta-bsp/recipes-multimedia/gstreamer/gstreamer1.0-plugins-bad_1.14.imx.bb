@@ -20,6 +20,9 @@ PACKAGECONFIG_append_mx8 = " opencv kms"
 #Remove unrecognised configure option for 1.14
 PACKAGECONFIG_remove = " gles2"
 
+#Remove vulkan as it's incompatible for i.MX 8M Mini
+PACKAGECONFIG_remove_mx8mm = " vulkan"
+
 PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland-native wayland wayland-protocols"
 
 # Disable introspection to fix [GstGL-1.0.gir] Error
@@ -37,13 +40,14 @@ SRC_URI_remove = "file://0001-Prepend-PKG_CONFIG_SYSROOT_DIR-to-pkg-config-outpu
 EXTRA_OECONF_remove = "WAYLAND_PROTOCOLS_SYSROOT_DIR=${RECIPE_SYSROOT}"
 
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
-SRCBRANCH = "MM_04.04.02_1808_L4.9.123_MX8MM_GA"
+SRCBRANCH = "MM_04.04.04_1811_L4.14.78_GA"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
+    file://0001-opencv-Fix-build-for-opencv-3.4.2.patch \
 "
 
-SRCREV = "03e6ef6a371a0578a9629abde8e9c83e66f34b11"
+SRCREV = "7e8a87fcbf5bd44b6982f6d15f2d28aa5f49a6be" 
 
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found

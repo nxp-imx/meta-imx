@@ -1,0 +1,57 @@
+Upstream-status: Submitted [https://crrev.com/c/1226882]
+
+- Waiting approval.
+
+Signed-off-by: Maksim Sisov <msisov@igalia.com>
+---
+From eb77f0787800986c5ce3583aec032e6f84c3bc4b Mon Sep 17 00:00:00 2001
+From: Maksim Sisov <msisov@igalia.com>
+Date: Mon, 17 Sep 2018 09:49:08 +0300
+Subject: [PATCH] [ozone/wayland] Don't build gbm_wrappers without gbm used.
+
+The Ozone/Wayland platform has a use_wayland_gbm gn arg, which is
+used to compile chromium without wayland + gbm support. It's used
+by systems, which don't ship gbm.
+
+But there is a problem with the common/linux, which includes everything
+include gbm related sources, which cannot be compiled when there is
+no gbm available.
+
+Thus, to fix the problem, exclude gbm_* sources for the ozone/wayland
+backend, when the use_wayland_gbm is set to false.
+
+Bug: 578890
+Change-Id: I1190022c5964ba8ecdd9c7a5eb53da581b39d50c
+---
+ ui/ozone/common/linux/BUILD.gn | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/ui/ozone/common/linux/BUILD.gn b/ui/ozone/common/linux/BUILD.gn
+index 0d62943e901a..6cfa1259122b 100644
+--- a/ui/ozone/common/linux/BUILD.gn
++++ b/ui/ozone/common/linux/BUILD.gn
+@@ -4,6 +4,7 @@
+ 
+ import("//build/config/ui.gni")
+ import("//ui/ozone/ozone.gni")
++import("//ui/ozone/platform/wayland/wayland.gni")
+ 
+ assert(ozone_platform_gbm || ozone_platform_wayland)
+ 
+@@ -25,4 +26,13 @@ source_set("linux") {
+     "//ui/gfx/geometry:geometry",
+     "//ui/ozone:ozone_base",
+   ]
++
++  if (ozone_platform_wayland && !use_wayland_gbm) {
++    sources -= [
++      "gbm_buffer.h",
++      "gbm_device.h",
++      "gbm_wrapper.cc",
++    ]
++    deps -= [ "//third_party/minigbm" ]
++  }
+ }
+-- 
+2.11.0
+

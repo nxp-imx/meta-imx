@@ -1,0 +1,22 @@
+From dd5b2075480bcb6787f7342f341559ca13fdfbef Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Fri, 24 Aug 2018 17:40:29 -0500
+Subject: [PATCH] uapi: Add ion.h to userspace
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ include/uapi/linux/ion.h | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 120000 include/uapi/linux/ion.h
+
+diff --git a/include/uapi/linux/ion.h b/include/uapi/linux/ion.h
+new file mode 120000
+index 0000000..17e8dbb
+--- /dev/null
++++ b/include/uapi/linux/ion.h
+@@ -0,0 +1 @@
++../../../drivers/staging/android/uapi/ion.h
+\ No newline at end of file
+-- 
+2.7.4
+

@@ -1,8 +1,8 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.9-rocko"
+DISTRO_VERSION = "4.14-sumo"
 
-DISTRO_CODENAME = "rocko"
+DISTRO_CODENAME = "sumo"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
@@ -20,9 +20,8 @@ IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 IMAGE_FSTYPES = "tar.bz2 ext4 sdcard.bz2"
 
-BBMASK += "meta-freescale/recipes-graphics/wayland/weston_%.bbappend"
-BBMASK += "meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium_52.0.2743.76.bbappend"
-BBMASK += "meta-freescale/dynamic-layers/browser-layer/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bbappend"
+BBMASK += "meta-freescale/recipes-graphics/wayland/wayland_1.15.%.bbappend"
+BBMASK += "meta-freescale/recipes-graphics/drm/libdrm_%.bbappend"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 

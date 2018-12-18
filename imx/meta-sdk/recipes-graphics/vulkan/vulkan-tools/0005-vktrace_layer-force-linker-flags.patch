@@ -1,0 +1,30 @@
+From 6c57b7d8ed80f0f443d5cde6cc5294b8e05ccd3e Mon Sep 17 00:00:00 2001
+From: Awais Belal <awais_belal@mentor.com>
+Date: Thu, 1 Jun 2017 12:58:31 +0500
+Subject: [PATCH 5/5] vktrace_layer: force linker flags
+
+This is OE specific in the sense that we use
+CMAKE_CXX_LINK_FLAGS and CMAKE_C_LINK_FLAGS
+separately whereas the build mechanism of
+Vulkan Tools expects otherwise.
+
+Signed-off-by: Awais Belal <awais_belal@mentor.com>
+---
+ vktrace/vktrace_layer/CMakeLists.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/vktrace/vktrace_layer/CMakeLists.txt b/vktrace/vktrace_layer/CMakeLists.txt
+index 4c586bf2d..bbc55cd6e 100644
+--- a/vktrace/vktrace_layer/CMakeLists.txt
++++ b/vktrace/vktrace_layer/CMakeLists.txt
+@@ -110,6 +110,7 @@ add_dependencies(${PROJECT_NAME} generate_helper_files)
+ # Set Compiler Flags, Libraries
+ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
++    set (CMAKE_SHARED_LINKER_FLAGS "${CMAKE_CXX_LINK_FLAGS}")
+     set(OS_TRACER_LIBS
+         -shared
+         -ldl
+-- 
+2.11.1
+

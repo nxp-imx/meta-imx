@@ -1,22 +1,29 @@
-replace hardcode, and add EnvironmentFile and Wants
+From 7f3abc1a4a6de7b721fe85193a2a54c41dc96c2a Mon Sep 17 00:00:00 2001
+From: Roy Li <rongqing.li@windriver.com>
+Date: Fri, 18 May 2018 17:39:46 +0800
+Subject: [PATCH] replace hardcode, and add EnvironmentFile and Wants
 
 Upstream-Status: Inappropriate [distribution]
 
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 Signed-off-by: Jun Zhu <junzhu@nxp.com>
 
-Index: connman-1.34/src/connman.service.in
-===================================================================
---- connman-1.34.orig/src/connman.service.in
-+++ connman-1.34/src/connman.service.in
-@@ -5,13 +5,15 @@ Conflicts=shutdown.target
+---
+ src/connman.service.in | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/connman.service.in b/src/connman.service.in
+index dab48bc..b5a3df5 100644
+--- a/src/connman.service.in
++++ b/src/connman.service.in
+@@ -5,14 +5,16 @@ Conflicts=shutdown.target
  RequiresMountsFor=@localstatedir@/lib/connman
  After=dbus.service network-pre.target systemd-sysusers.service
  Before=network.target multi-user.target shutdown.target
 -Wants=network.target
 +Wants=network.target connman-env.service
  Conflicts=systemd-resolved.service
-
+ 
  [Service]
  Type=dbus
  BusName=net.connman
@@ -26,5 +33,5 @@ Index: connman-1.34/src/connman.service.in
 +ExecStartPre=-@LIBDIR@/connman/wired-setup
 +ExecStart=@sbindir@/connmand -n $CONNMAND_OPTS
  StandardOutput=null
- CapabilityBoundingSet=CAP_KILL CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW CAP_SYS_TIME CAP_SYS_MODULE
+ CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW CAP_SYS_TIME CAP_SYS_MODULE
  ProtectHome=true
