@@ -12,7 +12,7 @@ DEPENDS = "optee-os-imx optee-client-imx python-pycrypto-native openssl"
 SRCBRANCH = "imx_3.2.y"
 OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
-SRCREV = "eb7f698da9a7fa1587f96aa92ad8668abb0f0f48"
+SRCREV = "7ba0bfb5b86a4e00ac2d94523a96682938f1d63b"
 
 S = "${WORKDIR}/git"
 
