@@ -13,7 +13,8 @@ SRC_URI = "${OPTEE_CLIENT_SRC};branch=${SRCBRANCH}"
 SRCREV = "d06647d201520ac57f1331e97db6138d63bc2666" 
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-SRC_URI_append = " file://tee-supplicant.service"
+SRC_URI_append = " file://0001-libteec-Fix-GCC-8-format-truncation-error.patch \
+                   file://tee-supplicant.service"
 
 S = "${WORKDIR}/git"
 SYSTEMD_SERVICE_${PN} = "tee-supplicant.service"
