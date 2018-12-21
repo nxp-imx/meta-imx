@@ -4,7 +4,7 @@ SRCBRANCH = "imx_v0.9.1_y"
 IMX_JAILHOUSE_SRC ?= "git://source.codeaurora.org/external/imx/imx-jailhouse.git;protocol=ssh"
 
 SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH}"
-SRCREV = "c7666e366931ea9adceba97c77d6432a735a59f9"
+SRCREV = "13ad7b234d722353763e5cec4b2bbe3863d64290"
 
 CELLS = ""
 
