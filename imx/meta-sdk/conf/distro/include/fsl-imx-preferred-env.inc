@@ -40,10 +40,10 @@ PREFERRED_VERSION_xf86-video-imx-vivante    = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}"
 
-PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.14.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.14.imx"
-PREFERRED_VERSION_gstreamer1.0              = "1.14.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.14.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.14.0.imx"
+PREFERRED_VERSION_gstreamer1.0              = "1.14.0.imx"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"
