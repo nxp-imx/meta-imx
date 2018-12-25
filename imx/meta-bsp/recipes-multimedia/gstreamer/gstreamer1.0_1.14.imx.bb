@@ -20,7 +20,7 @@ DEPENDS += " elfutils"
 # Unrecognised options, need to remove them
 EXTRA_OECONF_remove = " --disable-docbook --disable-trace"
 
-PV = "1.14.0.imx"
+PV = "1.14.4.imx"
 
 S = "${WORKDIR}/git"
 

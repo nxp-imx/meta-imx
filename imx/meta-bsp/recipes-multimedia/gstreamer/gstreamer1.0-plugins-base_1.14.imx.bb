@@ -34,7 +34,7 @@ SRC_URI = " \
 SRC_URI_append_mx8mm = " \
     file://0001-Improve-8MM-color-balance-YOCIMX-3135.patch \
 "
-SRCREV = "318a9477159d6b162e480faf29f56153b27fb6a7"
+SRCREV = "c26e14b5ddd12f880a84d1a77ec53dbcab9e159f"
 
 inherit use-imx-headers
 
@@ -46,7 +46,7 @@ EXTRA_OEMAKE += "GIR_EXTRA_LIBS_PATH=${GIR_EXTRA_LIBS_PATH}:${B}/gst-libs/gst/al
 
 FILES_${PN} += "${libdir}/gstreamer-1.0/include"
 
-PV = "1.14.0.imx"
+PV = "1.14.4.imx"
 
 S = "${WORKDIR}/git"
 

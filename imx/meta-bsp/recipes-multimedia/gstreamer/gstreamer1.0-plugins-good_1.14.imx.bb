@@ -13,14 +13,14 @@ SRCBRANCH = "imx-1.14.x"
 SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "cec0ef39784a3acfd2b442d107f054c6ab10181e"
+SRCREV = "35615dcb9dbe20bd7fe1d6e23e64a50d1db15c7c"
 
 EXTRA_AUTORECONF = ""
 
 # Fix: unrecognised options: --disable-sunaudio [unknown-configure-option]
 EXTRA_OECONF_remove = " --disable-sunaudio"
 
-PV = "1.14.0.imx"
+PV = "1.14.4.imx"
 
 S = "${WORKDIR}/git"
 

@@ -44,10 +44,9 @@ SRCBRANCH = "imx-1.14.x"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
-    file://0001-opencv-Fix-build-for-opencv-3.4.2.patch \
 "
 
-SRCREV = "7e8a87fcbf5bd44b6982f6d15f2d28aa5f49a6be"
+SRCREV = "51dd145b6ab2625a3650e096341b764294d9aaf3"
 
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
@@ -61,7 +60,7 @@ do_compile_prepend () {
     export GIR_EXTRA_LIBS_PATH="${B}/gst-libs/gst/ion/.libs"
 }
 
-PV = "1.14.0.imx"
+PV = "1.14.4.imx"
 
 S = "${WORKDIR}/git"
 
