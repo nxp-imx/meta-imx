@@ -31,9 +31,6 @@ SRC_URI = " \
     file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
     file://make-gio_unix_2_0-dependency-configurable.patch \
 "
-SRC_URI_append_mx8mm = " \
-    file://0001-Improve-8MM-color-balance-YOCIMX-3135.patch \
-"
 SRCREV = "c26e14b5ddd12f880a84d1a77ec53dbcab9e159f" 
 
 inherit use-imx-headers
