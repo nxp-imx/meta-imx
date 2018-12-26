@@ -13,7 +13,7 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
 "
-SRCREV = "35615dcb9dbe20bd7fe1d6e23e64a50d1db15c7c"
+SRCREV = "b23dc445d03e4d0b5e07faf60a36306cf6a12341"
 
 DEPENDS += "gstreamer1.0-plugins-base virtual/kernel \
             ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)} \
