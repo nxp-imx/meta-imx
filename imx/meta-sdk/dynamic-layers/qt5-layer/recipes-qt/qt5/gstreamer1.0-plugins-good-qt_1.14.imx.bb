@@ -7,6 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
                     file://common/coverage/coverage-report.pl;beginline=2;endline=17;md5=a4e1830fce078028c8f0974161272607 \
                     file://gst/replaygain/rganalysis.c;beginline=1;endline=23;md5=b60ebefd5b2f5a8e0cab6bfee391a5fe"
 
+DEPENDS += "gstreamer1.0-plugins-base virtual/kernel libcap zlib bzip2 \
+            ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)} \
+"
+inherit gettext
+
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "imx-1.14.x"
 
@@ -14,18 +19,27 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
 "
-SRCREV = "cec0ef39784a3acfd2b442d107f054c6ab10181e"
+SRCREV = "b23dc445d03e4d0b5e07faf60a36306cf6a12341"
 
-DEPENDS += "gstreamer1.0-plugins-base virtual/kernel libcap zlib bzip2 \
-            ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)} \
-"
-inherit gettext
+PV = "1.14.4.imx"
+
+S = "${WORKDIR}/git"
+
+# Make sure kernel sources are available
+do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 PACKAGECONFIG ??= " \
     ${GSTREAMER_ORC} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio x11', d)} \
     cairo flac gdk-pixbuf gudev jpeg libpng soup speex taglib v4l2 \
 "
+
+PACKAGECONFIG += "qt5"
+PACKAGECONFIG[qt5] = '--enable-qt \
+                      --with-moc="${STAGING_DIR_NATIVE}/usr/bin/moc" \
+                      --with-uic="${STAGING_DIR_NATIVE}/usr/bin/uic" \
+                      --with-rcc="${STAGING_DIR_NATIVE}/usr/bin/rcc" \
+                     ,--disable-qt,qtbase qtdeclarative qtbase-native qtx11extras'
 
 X11DEPENDS = "virtual/libx11 libsm libxrender libxfixes libxdamage"
 
@@ -63,9 +77,6 @@ EXTRA_OECONF += " \
     --disable-sunaudio \
     --disable-waveform \
 "
-# Make sure kernel sources are available
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
-
 # Qt5 configuratin only support "--disable-qt"
 # And in default, it is disabled, need to remove the default setting to enable it.
 # Fix: unrecognised options: --disable-sunaudio [unknown-configure-option]
@@ -80,14 +91,6 @@ EXTRA_OECONF_remove = "--disable-qt \
 # need to passing STAGING_DIR to update the QT PATH
 EXTRA_OECONF += "STAGING_DIR=${STAGING_DIR_NATIVE} --disable-introspection"
 
-PACKAGECONFIG += "qt5"
-
-PACKAGECONFIG[qt5] = '--enable-qt \
-                      --with-moc="${STAGING_DIR_NATIVE}/usr/bin/qt5/moc" \
-                      --with-uic="${STAGING_DIR_NATIVE}/usr/bin/qt5/uic" \
-                      --with-rcc="${STAGING_DIR_NATIVE}/usr/bin/qt5/rcc" \
-                     ,--disable-qt,qtbase qtdeclarative qtbase-native qtx11extras'
-
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
 EXTRA_AUTORECONF = ""
@@ -101,10 +104,6 @@ do_install_append() {
         install -m 0755 ${WORKDIR}/build/ext/qt/.libs/libgstqmlgl.lai ${D}${libdir}/gstreamer-1.0/libgstqmlgl.la
     fi
 }
-
-PV = "1.14.0.imx"
-
-S = "${WORKDIR}/git"
 
 FILES_${PN}-equalizer += "${datadir}/gstreamer-1.0/presets/*.prs"
 
