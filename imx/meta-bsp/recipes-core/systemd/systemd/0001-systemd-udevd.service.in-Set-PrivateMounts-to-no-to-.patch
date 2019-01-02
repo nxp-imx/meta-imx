@@ -1,0 +1,45 @@
+From e1e86ce259da74edbfbb99c79d0bbb8465381bcc Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Mon, 17 Dec 2018 10:02:19 -0600
+Subject: [PATCH] systemd-udevd.service.in: Set PrivateMounts to no to fix
+ automount problem in systemd 239 version.
+
+In systemd 239 version, A new unit file setting PrivateMounts= has been added.
+It's a boolean option. If enabled the unit's processes are invoked in their own file
+system namespace.
+
+Set PrivateMounts=no to ensure that mounts and unmounts are propagated from systemd's
+namespace to the service's namespace from systemd 239.
+
+Also, SystemCallFilter=@system-service @module @raw-io is added in systemd 239. The simplest
+way to regain the previous behaviour is to remove it entirely.
+
+https://unix.stackexchange.com/questions/464959/udev-rule-to-automount-media-devices-stopped-working-after-systemd-was-updated-t
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ units/systemd-udevd.service.in | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/units/systemd-udevd.service.in b/units/systemd-udevd.service.in
+index 6a3814e..291df05 100644
+--- a/units/systemd-udevd.service.in
++++ b/units/systemd-udevd.service.in
+@@ -25,11 +25,10 @@ ExecStart=@rootlibexecdir@/systemd-udevd
+ KillMode=mixed
+ WatchdogSec=3min
+ TasksMax=infinity
+-PrivateMounts=yes
++PrivateMounts=no
+ MemoryDenyWriteExecute=yes
+ RestrictRealtime=yes
+ RestrictAddressFamilies=AF_UNIX AF_NETLINK AF_INET AF_INET6
+-SystemCallFilter=@system-service @module @raw-io
+ SystemCallErrorNumber=EPERM
+ SystemCallArchitectures=native
+ LockPersonality=yes
+-- 
+2.7.4
+
