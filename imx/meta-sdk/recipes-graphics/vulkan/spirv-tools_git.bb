@@ -18,7 +18,8 @@ SRCREV_spirv-tools = "9d699f6d4038f432c55310d5d0b4a6d507c1b686"
 SRCREV_spirv-headers = "${AUTOREV}"
 SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools;protocol=http;name=spirv-tools \
            git://github.com/KhronosGroup/SPIRV-Headers;name=spirv-headers;destsuffix=${SPIRV_HEADERS_LOCATION} \
-           file://0002-spirv-lesspipe.sh-allow-using-generic-shells.patch"
+           file://0002-spirv-lesspipe.sh-allow-using-generic-shells.patch \
+           file://0001-Avoid-GCC8-warning-in-text_handler.cpp.-2197.patch"
 
 do_install_append() {
     if test -d ${SPIRV_HEADERS_LOCATION}/include/spirv/${HEADERS_VERSION}; then

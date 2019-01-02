@@ -1,0 +1,36 @@
+From c512c6864080ff617afb422a3d04dd902809a6cf Mon Sep 17 00:00:00 2001
+From: Steven Perron <stevenperron@google.com>
+Date: Thu, 13 Dec 2018 15:03:28 -0500
+Subject: [PATCH] Avoid GCC8 warning in text_handler.cpp. (#2197)
+
+In the function `AssemblyContext::binaryEncodeString`, we want to copy
+a nul terminated string to an instruction.  When coping the string, we
+did not copy the nul at the end of the source.  It was added by setting
+the entire last word to 0, which is mandated by the spir-v spec.  This
+is not a bug, but it does trigger a warning in GCC8 when doing a release
+build.
+
+To avoid the warning, we will copy the nul character at the end of the
+string too.
+
+Fixes #1541.
+---
+ source/text_handler.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/source/text_handler.cpp b/source/text_handler.cpp
+index 5f6e8c4..c31f34a 100644
+--- a/source/text_handler.cpp
++++ b/source/text_handler.cpp
+@@ -313,7 +313,7 @@ spv_result_t AssemblyContext::binaryEncodeString(const char* value,
+   pInst->words.back() = 0;
+ 
+   char* dest = (char*)&pInst->words[oldWordCount];
+-  strncpy(dest, value, length);
++  strncpy(dest, value, length + 1);
+ 
+   return SPV_SUCCESS;
+ }
+-- 
+2.7.4
+
