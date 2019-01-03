@@ -7,6 +7,7 @@ XEN_SRC ?= "git://source.codeaurora.org/external/imx/imx-xen.git;protocol=https"
 SRC_URI = " \
     ${XEN_SRC};branch=${SRCBRANCH} \
     file://tools-xentop-vwprintw.patch \
+    file://xen-4.11-arm-acpi-fix-string-lengths.patch \
     "
 
 SRCREV = "f79d61f7120a5ae6180e7ec7f263e6f80cb0e826"
