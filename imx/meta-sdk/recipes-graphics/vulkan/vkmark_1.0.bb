@@ -16,7 +16,7 @@ SRC_URI += "file://0001-scenes-Use-depth-format-supported-by-i.MX.patch"
 
 VKMARK_INSTALL_DIR = "${WORKDIR}/vm-install"
 
-DEPENDS = " vulkan-headers imx-gpu-viv assimp glm ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
+DEPENDS = " vulkan-headers vulkan-loader imx-gpu-viv assimp glm ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
                 bb.utils.contains('DISTRO_FEATURES', 'x11', ' libxcb','libdrm libgbm', d), d)}"
 do_compile() {
 
