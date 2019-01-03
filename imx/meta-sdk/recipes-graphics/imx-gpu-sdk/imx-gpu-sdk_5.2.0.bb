@@ -13,7 +13,7 @@ DEPENDS_append_imxgpu2d = " virtual/libg2d virtual/libopenvg"
 DEPENDS_append_imxgpu3d = " virtual/libgles2"
 
 DEPENDS_VULKAN       = ""
-DEPENDS_VULKAN_mx8   = "vulkan-headers rapidvulkan glslang-native"
+DEPENDS_VULKAN_mx8   = "glslang-native rapidvulkan vulkan-headers vulkan-loader"
 DEPENDS_VULKAN_mx8mm = ""
 DEPENDS_append       = " ${DEPENDS_VULKAN}"
 
