@@ -22,6 +22,7 @@ IMAGE_FSTYPES = "tar.bz2 ext4 sdcard.bz2"
 
 BBMASK += "meta-freescale/recipes-graphics/wayland/wayland_1.15.%.bbappend"
 BBMASK += "meta-freescale/recipes-graphics/drm/libdrm_%.bbappend"
+BBMASK += "poky/meta/recipes-graphics/vulkan/vulkan_1.1.73.0.bb"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 
