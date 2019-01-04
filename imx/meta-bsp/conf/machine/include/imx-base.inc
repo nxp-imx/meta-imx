@@ -94,7 +94,6 @@ MACHINE_SOCARCH_SUFFIX_mx8qxp = "-mx8"
 MACHINE_ARCH_FILTER = "virtual/kernel"
 MACHINE_SOCARCH_FILTER_append_imxvpu = " \
     imx-codec \
-    imx-parser \
     imx-vpu \
     imx-vpuwrap \
     libimxvpuapi \
@@ -126,7 +125,6 @@ MACHINE_SOCARCH_FILTER_append_mx8 = " \
 "
 MACHINE_SOCARCH_FILTER_append_imxpxp = " \
     imx-codec \
-    imx-parser \
 "
 
 INHERIT += "fsl-dynamic-packagearch"
