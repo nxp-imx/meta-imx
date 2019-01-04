@@ -12,7 +12,7 @@ DEPENDS = "optee-os-imx optee-client-imx python-pycrypto-native openssl"
 SRCBRANCH = "imx_3.2.y"
 OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
-SRCREV = "628be690befa2a5b71d75f0b8608b14648922b1a"
+SRCREV = "908ae1e1401a027b668308722b6472e23119f8b9"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI_append = " file://0001-Fix-GCC-8-build-failure.patch"
