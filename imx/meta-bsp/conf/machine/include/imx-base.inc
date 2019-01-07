@@ -162,8 +162,8 @@ MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 
 # Extra QCA Wi-Fi & BTE driver and firmware
-MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'kernel-module-qca6174', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'kernel-module-qca9377', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'kernel-module-qca6174 firmware-qca6174 qca-tools', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'kernel-module-qca9377 firmware-qca9377 qca-tools', '', d)}"
 
 # Extra Cypress Wi-Fi tools (Murata)
 MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 'cyw-fmac-utils', '', d)}"
