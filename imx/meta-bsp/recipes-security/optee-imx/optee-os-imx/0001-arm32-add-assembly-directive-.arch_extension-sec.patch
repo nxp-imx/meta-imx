@@ -1,0 +1,67 @@
+From 7c17664003d857ef160568c195a7e5b7994feaf7 Mon Sep 17 00:00:00 2001
+From: Jerome Forissier <jerome.forissier@linaro.org>
+Date: Fri, 3 Aug 2018 15:53:40 +0200
+Subject: [PATCH] arm32: add assembly directive: .arch_extension sec
+
+When compiling with -mcpu=cortex-a9, GCC 8.1 fails on the smc instruction:
+
+ $ make -s PLATFORM=stm CROSS_COMPILE32=<GCC8.1 path>/arm-linux-gnueabihf-
+ core/arch/arm/kernel/thread_a32.S: Assembler messages:
+ core/arch/arm/kernel/thread_a32.S:44: Error: selected processor does not support `smc #0' in ARM mode
+ [snip]
+ mk/compile.mk:146: recipe for target 'out/arm-plat-stm/core/arch/arm/kernel/thread_a32.o' failed
+ make: *** [out/arm-plat-stm/core/arch/arm/kernel/thread_a32.o] Error 1
+
+Use the '.arch_extension sec' directive to allow the assembler to emit
+the instruction.
+
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Volodymyr Babchuk <vlad.babchuk@gmail.com>
+---
+ core/arch/arm/kernel/generic_entry_a32.S | 2 ++
+ core/arch/arm/kernel/thread_a32.S        | 2 ++
+ core/arch/arm/plat-ti/a9_plat_init.S     | 2 ++
+ 3 files changed, 6 insertions(+)
+
+diff --git a/core/arch/arm/kernel/generic_entry_a32.S b/core/arch/arm/kernel/generic_entry_a32.S
+index 70ef100..7581352 100644
+--- a/core/arch/arm/kernel/generic_entry_a32.S
++++ b/core/arch/arm/kernel/generic_entry_a32.S
+@@ -15,6 +15,8 @@
+ #include <sm/teesmc_opteed.h>
+ #include <sm/teesmc_opteed_macros.h>
+ 
++.arch_extension sec
++
+ .section .data
+ .balign 4
+ 
+diff --git a/core/arch/arm/kernel/thread_a32.S b/core/arch/arm/kernel/thread_a32.S
+index 1b75f43..1918f04 100644
+--- a/core/arch/arm/kernel/thread_a32.S
++++ b/core/arch/arm/kernel/thread_a32.S
+@@ -19,6 +19,8 @@
+ 
+ #include "thread_private.h"
+ 
++	.arch_extension sec
++
+ 	.macro cmp_spsr_user_mode reg:req
+ 		/*
+ 		 * We're only testing the lower 4 bits as bit 5 (0x10)
+diff --git a/core/arch/arm/plat-ti/a9_plat_init.S b/core/arch/arm/plat-ti/a9_plat_init.S
+index 103d868..24174ef 100644
+--- a/core/arch/arm/plat-ti/a9_plat_init.S
++++ b/core/arch/arm/plat-ti/a9_plat_init.S
+@@ -40,6 +40,8 @@
+ #include <sm/teesmc_opteed.h>
+ #include <sm/teesmc_opteed_macros.h>
+ 
++.arch_extension sec
++
+ .section .text
+ .balign 4
+ .code 32
+-- 
+2.7.4
+
