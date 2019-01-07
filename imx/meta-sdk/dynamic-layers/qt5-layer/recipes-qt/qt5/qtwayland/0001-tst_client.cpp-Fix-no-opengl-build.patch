@@ -12,11 +12,11 @@ Signed-off-by: Yuqing Zhu <carol.zhu@nxp.com>
  tests/auto/client/client/tst_client.cpp | 6 ++++++
  1 file changed, 6 insertions(+)
 
-Index: git/tests/auto/client/client/tst_client.cpp
-===================================================================
---- git.orig/tests/auto/client/client/tst_client.cpp
-+++ git/tests/auto/client/client/tst_client.cpp
-@@ -107,6 +107,7 @@ public:
+diff --git a/tests/auto/client/client/tst_client.cpp b/tests/auto/client/client/tst_client.cpp
+index 2124205..d63030d 100644
+--- a/tests/auto/client/client/tst_client.cpp
++++ b/tests/auto/client/client/tst_client.cpp
+@@ -114,6 +114,7 @@ public:
      QPoint mousePressPos;
  };
  
@@ -24,25 +24,25 @@ Index: git/tests/auto/client/client/tst_client.cpp
  class TestGlWindow : public QOpenGLWindow
  {
      Q_OBJECT
-@@ -136,6 +137,7 @@ void TestGlWindow::paintGL()
+@@ -132,6 +133,7 @@ void TestGlWindow::paintGL()
+ {
      glClear(GL_COLOR_BUFFER_BIT);
-     ++paintGLCalled;
  }
 +#endif // QT_NO_OPENGL
  
  class tst_WaylandClient : public QObject
  {
-@@ -180,7 +182,9 @@ private slots:
+@@ -170,7 +172,9 @@ private slots:
      void dontCrashOnMultipleCommits();
      void hiddenTransientParent();
      void hiddenPopupParent();
 +#ifndef  QT_NO_OPENGL
      void glWindow();
 +#endif // QT_NO_OPENGL
-     void longWindowTitle();
  
  private:
-@@ -558,6 +562,7 @@ void tst_WaylandClient::hiddenPopupParen
+     MockCompositor *compositor;
+@@ -433,6 +437,7 @@ void tst_WaylandClient::hiddenPopupParent()
      QTRY_VERIFY(compositor->surface());
  }
  
@@ -50,11 +50,14 @@ Index: git/tests/auto/client/client/tst_client.cpp
  void tst_WaylandClient::glWindow()
  {
      QSKIP("Skipping GL tests, as not supported by all CI systems: See https://bugreports.qt.io/browse/QTBUG-65802");
-@@ -583,6 +588,7 @@ void tst_WaylandClient::glWindow()
+@@ -447,6 +452,7 @@ void tst_WaylandClient::glWindow()
      testWindow->setVisible(false);
      QTRY_VERIFY(!compositor->surface());
  }
-++#endif // QT_NO_OPENGL
++#endif // QT_NO_OPENGL
  
- void tst_WaylandClient::longWindowTitle()
+ int main(int argc, char **argv)
  {
+-- 
+1.9.1
+
