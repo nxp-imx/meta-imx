@@ -1,8 +1,8 @@
-Index: contrib/modules/xfeatures2d/CMakeLists.txt
-===================================================================
---- contrib.orig/modules/xfeatures2d/CMakeLists.txt
-+++ contrib/modules/xfeatures2d/CMakeLists.txt
-@@ -5,11 +5,11 @@ ocv_define_module(xfeatures2d opencv_cor
+diff --git a/modules/xfeatures2d/CMakeLists.txt b/modules/xfeatures2d/CMakeLists.txt
+index e1755595..c7009c47 100644
+--- a/modules/xfeatures2d/CMakeLists.txt
++++ b/modules/xfeatures2d/CMakeLists.txt
+@@ -5,10 +5,10 @@ ocv_define_module(xfeatures2d opencv_core opencv_imgproc opencv_features2d openc
  include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/download_vgg.cmake)
  include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/download_boostdesc.cmake)
  set(DOWNLOAD_DIR "${OpenCV_BINARY_DIR}/downloads/xfeatures2d")
@@ -18,4 +18,3 @@ Index: contrib/modules/xfeatures2d/CMakeLists.txt
 +#endif()
  
  ocv_module_include_directories("${DOWNLOAD_DIR}")
- 
