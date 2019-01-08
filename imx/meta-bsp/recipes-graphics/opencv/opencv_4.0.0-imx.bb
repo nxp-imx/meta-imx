@@ -92,7 +92,7 @@ PACKAGECONFIG ??= "python3 jpeg png tiff v4l libv4l gstreamer samples tbb gphoto
     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
 PACKAGECONFIG_append_mx8   = " opencl dnn text"
 PACKAGECONFIG_append_mx8dv = " openvx"
-PACKAGECONFIG_append_mx8qm = " openvx"
+#PACKAGECONFIG_append_mx8qm = " openvx"
 
 PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
 PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
