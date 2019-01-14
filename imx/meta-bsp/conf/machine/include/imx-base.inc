@@ -154,6 +154,10 @@ MACHINE_FIRMWARE_append_mx8qm  = " firmware-imx-vpu-imx8"
 MACHINE_FIRMWARE_append_mx8qxp  = " firmware-imx-vpu-imx8"
 # Extra Cypress Wi-Fi and BTW firmware (Murata)
 MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 'linux-firmware-bcm4339', '', d)}"
+MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43430', 'linux-firmware-bcm43430', '', d)}"
+MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43455', 'linux-firmware-bcm43455', '', d)}"
+MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4356', 'linux-firmware-bcm4356-pcie', '', d)}"
+MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4359', 'linux-firmware-bcm4359-pcie', '', d)}"
 
 # FIXME: Needs addition of firmware-imx of official BSPs
 #MACHINE_FIRMWARE_append_mx27 = " firmware-imx-vpu-imx27"
