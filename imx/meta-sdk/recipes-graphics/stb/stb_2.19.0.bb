@@ -17,3 +17,5 @@ do_install () {
     cp -r ${S}/stb_image_resize.h ${D}${includedir}
     cp -r ${S}/stb_image_write.h ${D}${includedir}
 }
+
+ALLOW_EMPTY_${PN} = "1"
