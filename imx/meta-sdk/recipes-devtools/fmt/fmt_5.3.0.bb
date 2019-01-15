@@ -11,10 +11,12 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=c2e38bc8629eac247a73b65c1548b2f0"
 SRC_URI = " \
     git://github.com/fmtlib/fmt;protocol=https \
 "
-SRCREV = "398343897f98b88ade80bbebdcbe82a36c65a980"
+SRCREV = "9e554999ce02cf86fcdfe74fe740c4fe3f5a56d5"
 S = "${WORKDIR}/git"
 
 inherit cmake
 
 FILES_${PN}-dev += "${libdir}/cmake"
-RDEPENDS_${PN}-dev = ""
+RDEPENDS_${PN}-dev += "${PN}-staticdev"
+
+ALLOW_EMPTY_${PN} = "1"
