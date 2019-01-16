@@ -23,7 +23,7 @@ SRC_URI = " \
     file://ensure-valid-sentinel-for-gst_structure_get.patch \
     file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
 "
-SRCREV = "b23dc445d03e4d0b5e07faf60a36306cf6a12341"
+SRCREV = "a31aabb7581d3f491cd31889d44479bb0f34990b"
 
 PV = "1.14.4.imx"
 
