@@ -30,7 +30,7 @@ SRC_URI = " ${GST1.0_SRC};branch=${SRCBRANCH} \
             file://add-a-target-to-compile-tests.patch \
             file://run-ptest \
 "
-SRCREV = "d42548da09724ad8cc1aa4f1944607920be2f4c0"
+SRCREV = "d42548da09724ad8cc1aa4f1944607920be2f4c0" 
 
 PV = "1.14.4.imx"
 
