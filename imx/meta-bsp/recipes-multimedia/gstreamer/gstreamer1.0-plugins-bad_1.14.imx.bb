@@ -24,6 +24,7 @@ PACKAGECONFIG_remove = " gles2"
 PACKAGECONFIG_remove_mx8mm = " vulkan"
 
 PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland-native wayland wayland-protocols"
+PACKAGECONFIG[vulkan]  = "--enable-vulkan,--disable-vulkan,vulkan-headers"
 
 # Disable introspection to fix [GstGL-1.0.gir] Error
 EXTRA_OECONF_append = " --disable-introspection"
