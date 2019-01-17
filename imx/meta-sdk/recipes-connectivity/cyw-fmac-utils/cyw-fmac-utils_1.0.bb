@@ -6,11 +6,11 @@ SECTION = "base"
 
 DEPENDS = "libnl"
 
-SRC_URI = "git://github.com/murata-wireless/cyw-fmac-utils-imx32;protocol=git;branch=battra;"
-SRCREV = "060688dfe76df98751207c8146268ce7fd80b6ab"
+SRC_URI = "git://github.com/murata-wireless/cyw-fmac-utils-imx32;protocol=git;branch=manda;"
+SRCREV = "b1cbd9170dd96ac73102aeee5d73b11575e1028a"
 
-SRC_URI_mx8 = "git://github.com/murata-wireless/cyw-fmac-utils-imx64;protocol=git;branch=battra;"
-SRCREV_mx8 = "70dc6eed906fe812a0258f151d1dea338bc63fa7"
+SRC_URI_mx8 = "git://github.com/murata-wireless/cyw-fmac-utils-imx64;protocol=git;branch=manda;"
+SRCREV_mx8 = "6848dc6c805a29ff2a297d99557b8c875342cd57"
 
 S = "${WORKDIR}/git"
 
