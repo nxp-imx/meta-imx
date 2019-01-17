@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "a52ad8bd7efd79bf9c57d334c69af39f5b82b808"
+SRCREV_opencv = "737f8fad1318607bf78eff76e3e4364db11663e0"
 SRCREV_contrib = "25221244732dcf44c1450d0f93edc2529a61c0e1"
 SRCREV_ipp = "32e315a5b106a7b89dbed51c28f8120a48b368b4"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
@@ -92,7 +92,7 @@ PACKAGECONFIG ??= "python3 jpeg png tiff v4l libv4l gstreamer samples tbb gphoto
     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
 PACKAGECONFIG_append_mx8   = " opencl dnn text"
 PACKAGECONFIG_append_mx8dv = " openvx"
-#PACKAGECONFIG_append_mx8qm = " openvx"
+PACKAGECONFIG_append_mx8qm = " openvx"
 
 PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
 PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
