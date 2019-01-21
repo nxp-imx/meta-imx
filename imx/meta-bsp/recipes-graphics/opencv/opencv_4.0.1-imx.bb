@@ -193,6 +193,9 @@ FILES_python3-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
 RDEPENDS_python3-opencv = "python3-core python3-numpy"
 
 do_install_append() {
+    # Fix OpenCV 2 compatibility, broken by OpenCV 4
+    ln -sf opencv4/opencv2 ${D}${includedir}/opencv2
+
     # Move Python files into correct library folder (for multilib build)
     if [ "$libdir" != "/usr/lib" -a -d ${D}/usr/lib ]; then
         mv ${D}/usr/lib/* ${D}/${libdir}/
