@@ -31,14 +31,12 @@ S = "${WORKDIR}/git"
 do_compile_prepend() {
     sed -i 's/arm-linux-gnueabihf-/${TOOLCHAIN_SYS}-/' SConstruct
     sed -i 's/aarch64-linux-gnu-/${TOOLCHAIN_SYS}-/' SConstruct
-    sed -i "s#env.Append(LINKFLAGS = \['-fopenmp'\])#env.Append(LINKFLAGS = \['-fopenmp','--sysroot=${STAGING_DIR_TARGET}'\])#" SConstruct
-    unset CC CXX
 }
 
 inherit scons
 
-EXTRA_OESCONS = "arch=armv7a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept ${TOOLCHAIN_OPTIONS}" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0 set_soname=1"
-EXTRA_OESCONS_aarch64 = "arch=arm64-v8a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept ${TOOLCHAIN_OPTIONS}" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0 set_soname=1"
+EXTRA_OESCONS = "arch=armv7a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0 set_soname=1"
+EXTRA_OESCONS_aarch64 = "arch=arm64-v8a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0 set_soname=1"
 
 LIBS += "-larmpl_lp64_mp"
 
