@@ -29,8 +29,8 @@ SRCREV = "52ba29e936b8e711e8acdfe819e36f884d4f3fe1"
 S = "${WORKDIR}/git"
 
 do_compile_prepend() {
-    sed -i 's/arm-linux-gnueabihf-/${TOOLCHAIN_SYS}-/' SConstruct
-    sed -i 's/aarch64-linux-gnu-/${TOOLCHAIN_SYS}-/' SConstruct
+    sed -i 's/arm-linux-gnueabihf-/${TARGET_PREFIX}/' SConstruct
+    sed -i 's/aarch64-linux-gnu-/${TARGET_PREFIX}/' SConstruct
 }
 
 inherit scons
