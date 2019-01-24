@@ -40,6 +40,8 @@ EXTRA_OESCONS_aarch64 = "arch=arm64-v8a extra_cxx_flags="-fPIC -Wno-unused-but-s
 
 LIBS += "-larmpl_lp64_mp"
 
+TARGET_CC_ARCH += "${LDFLAGS}"
+
 do_install() {
     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
 
@@ -60,10 +62,3 @@ do_install() {
     cp $CP_ARGS ${S}/include ${D}${datadir}/${BPN}/.
     cp $CP_ARGS ${S}/support ${D}${datadir}/${BPN}/.
 }
-
-INSANE_SKIP_${PN} = "ldflags"
-INSANE_SKIP_${PN}-dev = "dev-elf ldflags"
-
-FILES_${PN}-source = "${datadir}/${BPN}"
-INSANE_SKIP_${PN}-source = "ldflags libdir staticdev"
-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
