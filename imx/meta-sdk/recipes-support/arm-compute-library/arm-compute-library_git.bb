@@ -56,9 +56,13 @@ do_install() {
     find ${S}/build/examples/ -maxdepth 1 -type f -executable -exec cp $CP_ARGS {} ${D}${bindir} \;
     cp $CP_ARGS ${S}/build/tests/arm_compute_benchmark ${D}${bindir}
 
-    # Install built source package as expected by ARMNN
-    install -d ${D}${datadir}/${BPN}
-    cp $CP_ARGS ${S}/arm_compute ${D}${datadir}/${BPN}/.
-    cp $CP_ARGS ${S}/include ${D}${datadir}/${BPN}/.
-    cp $CP_ARGS ${S}/support ${D}${datadir}/${BPN}/.
+    # Install headers
+    install -d ${D}${includedir}/${BPN}
+    cp $CP_ARGS ${S}/arm_compute ${D}${includedir}/${BPN}/.
+    cp $CP_ARGS ${S}/include ${D}${includedir}/${BPN}/.
+    cp $CP_ARGS ${S}/support ${D}${includedir}/${BPN}/.
 }
+
+PACKAGES =+ "${PN}-examples"
+
+FILES_${PN}-examples = "${bindir}/*"
