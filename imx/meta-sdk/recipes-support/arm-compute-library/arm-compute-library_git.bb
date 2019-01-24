@@ -35,8 +35,14 @@ do_compile_prepend() {
 
 inherit scons
 
-EXTRA_OESCONS = "arch=armv7a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0 set_soname=1"
-EXTRA_OESCONS_aarch64 = "arch=arm64-v8a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 opencl=0 set_soname=1"
+PACKAGECONFIG_OPENCL = ""
+
+PACKAGECONFIG ??= "${PACKAGECONFIG_OPENCL}"
+
+PACKAGECONFIG[opencl] = "opencl=1,opencl=0,,"
+
+EXTRA_OESCONS = "arch=armv7a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 set_soname=1 ${PACKAGECONFIG_CONFARGS}"
+EXTRA_OESCONS_aarch64 = "arch=arm64-v8a extra_cxx_flags="-fPIC -Wno-unused-but-set-variable -Wno-ignored-qualifiers -Wno-noexcept" benchmark_tests=1 validation_tests=0 neon=1 openmp=1 set_soname=1 ${PACKAGECONFIG_CONFARGS}"
 
 LIBS += "-larmpl_lp64_mp"
 
