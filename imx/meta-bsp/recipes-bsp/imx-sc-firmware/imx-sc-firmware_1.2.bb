@@ -3,13 +3,13 @@
 
 DESCRIPTION = "i.MX System Controller Firmware"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6dfb32a488e5fd6bae52fbf6c7ebb086"
+LIC_FILES_CHKSUM = "file://COPYING;md5=80c0478f4339af024519b3723023fe28"
 SECTION = "BSP"
 
 inherit fsl-eula2-unpack2 pkgconfig deploy
 
-SRC_URI[md5sum] = "cb1a129765714120a96d71029d7edd09"
-SRC_URI[sha256sum] = "a3b9f4daa4d3345f56079004e2dde796a54ce2da30519e22164a5bc82fa757e0"
+SRC_URI[md5sum] = "45a898343a20c9448edbc13217a78ee7"
+SRC_URI[sha256sum] = "9ac5281619b719abb80a2cbc411234b5ca4e2e610337d80e962ac37243efe935"
 
 BOARD_TYPE ?= "mek"
 SC_FIRMWARE_NAME ?= "mx8qm-mek-scfw-tcm.bin"
