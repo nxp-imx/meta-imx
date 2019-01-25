@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v3 November 2018
+LA_OPT_NXP_Software_License v5 January 2019
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
 downloading, installing, or using the Licensed Software, you indicate that you
@@ -125,7 +125,7 @@ licensor's) copyright notices and other proprietary legends on copies of
 Licensed Software.
 3.5.         If you distribute the Licensed Software to the United States
 Government, then the Licensed Software is "restricted computer software" and is
-subject to FAR 52.227-19 (c)(1) and (c)(2).
+subject to FAR 52.227-19.
 3.6.         You grant to NXP a non-exclusive, non-transferable, irrevocable,
 perpetual, worldwide, royalty-free, sub-licensable license under your
 Intellectual Property Rights to use without restriction and for any purpose any
@@ -343,7 +343,7 @@ its sole discretion.
 
 
 
-
+ 
 APPENDIX A
 Other License Grants and Restrictions:
 
@@ -552,3 +552,4 @@ device manufactured by TI.
 
 Vivante: Distribution of Vivante software must be a part of, or embedded
 within, Authorized Systems that include a Vivante Graphics Processing Unit.
+
