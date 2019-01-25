@@ -31,8 +31,6 @@ do_configure() {
    then
       cp "${STAGING_DIR_HOST}/${CELLCONF_DIR}/"*.c ${S}/configs/
    fi
-
-   cp -av ${JH_CONFIG} ${S}/include/jailhouse/config.h
 }
 
 USER_SPACE_CFLAGS = '${CFLAGS} -DLIBEXECDIR=\\\"${libexecdir}\\\" \
