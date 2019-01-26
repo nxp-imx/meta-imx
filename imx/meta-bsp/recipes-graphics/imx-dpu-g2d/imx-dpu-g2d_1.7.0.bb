@@ -4,7 +4,7 @@
 
 DESCRIPTION = "GPU G2D library and apps for i.MX with 2D GPU and DPU"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6dfb32a488e5fd6bae52fbf6c7ebb086"
+LIC_FILES_CHKSUM = "file://COPYING;md5=80c0478f4339af024519b3723023fe28"
 
 RDEPENDS_${PN} = "libgal-imx libdrm"
 
@@ -16,8 +16,8 @@ S="${WORKDIR}/${PN}-${PV}"
 
 inherit fsl-eula-unpack
 
-SRC_URI[md5sum] = "4711b25c2a1dc4be257a54ff43893799"
-SRC_URI[sha256sum] = "7c3f652179533aa88d9e9b2a1a3f0ca92e87ee4ed81e630d0f003b8fd116c6df"
+SRC_URI[md5sum] = "5732da74a0f729662331f86fad62b81d"
+SRC_URI[sha256sum] = "f6fb97104b8a5734258648c52924bc9c70867f886a6c7a1c848291d96e05b93c"
 
 do_install () {
 
