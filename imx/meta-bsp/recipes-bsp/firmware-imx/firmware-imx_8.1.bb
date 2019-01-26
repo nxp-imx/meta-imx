@@ -6,7 +6,7 @@ SUMMARY = "Freescale IMX firmware"
 DESCRIPTION = "Freescale IMX firmware such as for the VPU"
 SECTION = "base"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6dfb32a488e5fd6bae52fbf6c7ebb086"
+LIC_FILES_CHKSUM = "file://COPYING;md5=80c0478f4339af024519b3723023fe28"
 
 PE = "1"
 
@@ -17,8 +17,8 @@ IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
 SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true \
            ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH};destsuffix=${S}/git "
 
-SRC_URI[md5sum] = "dc474be6e4c5e477549b640f3a55e594"
-SRC_URI[sha256sum] = "45a67af505baabad310ed74b1d569f496b975fc5aae1613e9fc91a265a0f9f27"
+SRC_URI[md5sum] = "e9658473df4a472cfb8285841410b1c5"
+SRC_URI[sha256sum] = "012ee53d40fee302d84e8eded247fa72fdd03c34b33ca782772f7e4e0fc6ea50"
 
 #BRCM firmware git
 SRCREV = "8ce9046f5058fdd2c5271f86ccfc61bc5a248ae3"
