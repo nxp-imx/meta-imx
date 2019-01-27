@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=762a7ba8d2ddc3b38d88742fbaf0b62d"
 
 COMPATIBLE_MACHINE = "armv7a|aarch64"
 
+PROVIDES += "${PN}-examples"
+
 PV = "18.11+git${SRCPV}"
 
 ARM_COMPUTELIBRARY_SRC ?= "git://source.codeaurora.org/external/imx/arm-computelibrary-imx.git;protocol=https"
