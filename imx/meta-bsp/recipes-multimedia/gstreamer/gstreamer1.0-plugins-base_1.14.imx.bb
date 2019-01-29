@@ -30,7 +30,7 @@ SRC_URI = " \
     file://0003-riff-add-missing-include-directories-when-calling-in.patch \
     file://0004-rtsp-drop-incorrect-reference-to-gstreamer-sdp-in-Ma.patch \
 "
-SRCREV = "c26e14b5ddd12f880a84d1a77ec53dbcab9e159f" 
+SRCREV = "be30b3d6635bf7e97edb551e15e1c97ee3d6ab74"
 
 PV = "1.14.4.imx"
 
