@@ -28,7 +28,7 @@ SRC_URI = " \
     file://0001-Makefile.am-don-t-hardcode-libtool-name-when-running.patch \
 "
 
-SRCREV = "51dd145b6ab2625a3650e096341b764294d9aaf3" 
+SRCREV = "d059ec8d3781a3a431325c65852676926f5adb2b"
 
 PV = "1.14.4.imx"
 
