@@ -15,7 +15,7 @@ VULKAN_TOOLS_mx8   = "vulkan-loader vulkan-validationlayers vulkan-headers vulka
 VULKAN_TOOLS_mx8mm = ""
 
 # Common tools independent of the graphics backend
-SOC_TOOLS_GPU                          = "opencv-samples ${VULKAN_TOOLS}"
+SOC_TOOLS_GPU                          = "${VULKAN_TOOLS}"
 SOC_TOOLS_GPU_append_armv7a            = " arm-compute-library"
 SOC_TOOLS_GPU_append_aarch64           = " arm-compute-library"
 SOC_TOOLS_GPU_append_imxdrm            = " kmscube"
