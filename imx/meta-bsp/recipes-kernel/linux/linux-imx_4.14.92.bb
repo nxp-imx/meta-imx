@@ -7,14 +7,9 @@ DESCRIPTION = "Linux Kernel provided and supported by NXP with focus on \
 i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU and IPU."
 
 require recipes-kernel/linux/linux-imx.inc
+require linux-imx-src-${PV}.inc
 
 DEPENDS += "lzop-native bc-native"
-
-SRCBRANCH = "imx_4.14.y"
-LOCALVERSION = "-${SRCBRANCH}"
-KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
-SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
-SRCREV = "377d09b8543a4e93af8cfc3df457439e17f34438"
 
 DEFAULT_PREFERENCE = "1"
 
