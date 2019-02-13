@@ -1,11 +1,10 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
 SRC_URI += "file://0020-logind.conf-Set-HandlePowerKey-to-ignore.patch \
+            file://0001-Revert-udev-remove-userspace-firmware-loading-suppor.patch \
+            file://0007-Revert-rules-remove-firmware-loading-rules.patch \
             file://0001-systemd-udevd.service.in-Set-PrivateMounts-to-no-to-.patch \
 "
-
-#FIX-it: Workaround as missing ending slash in FIRMWARE_PATH [YOCIMX-2831]
-EXTRA_OEMESON_remove = "-Dfirmware-path=${nonarch_base_libdir}/firmware "
 EXTRA_OEMESON   += "-Dfirmware-path=${nonarch_base_libdir}/firmware/ "
 
 do_install_append () {
