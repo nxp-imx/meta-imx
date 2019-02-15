@@ -12,7 +12,7 @@ DEPENDS = "python-pycrypto-native u-boot-mkimage-native"
 SRCBRANCH = "imx_3.2.y"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
-SRCREV = "1d8a4467ee5320a96f1be9a4e3aeb7f3915f947c"
+SRCREV = "03601d5082264d642bbf9f8c5a2d8f374f7eeed3"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI_append = " file://0001-arm32-add-assembly-directive-.arch_extension-sec.patch"
