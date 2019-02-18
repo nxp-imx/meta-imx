@@ -1,6 +1,6 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
 # Copyright (C) 2018 O.S. Systems Software LTDA.
-# Copyright 2017-2018 NXP
+# Copyright 2017-2019 NXP
 
 SUMMARY = "Freescale IMX firmware"
 DESCRIPTION = "Freescale IMX firmware such as for the VPU"
@@ -10,61 +10,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=80c0478f4339af024519b3723023fe28"
 
 PE = "1"
 
-SRCBRANCH ?= "master"
-
-#BRCM firmware v1.141.100.6
-IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
-SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true \
-           ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH};destsuffix=${S}/git "
+SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true "
 
 SRC_URI[md5sum] = "9a0ce23ea44b6f28ad4b9b54546ba412"
 SRC_URI[sha256sum] = "e602d3add57608b5644e4c15c69e5ba42f5169a6dc635833df63038a2bcf198c"
-
-#BRCM firmware git
-SRCREV = "8ce9046f5058fdd2c5271f86ccfc61bc5a248ae3"
 
 inherit fsl-eula-unpack allarch
 
 do_install() {
 
     install -d ${D}${base_libdir}/firmware/imx
-    install -d ${D}${base_libdir}/firmware/bcm
-    install -d ${D}${sysconfdir}/firmware
 
     cp -rfv firmware/* ${D}${base_libdir}/firmware/
-
-    #1BW_BCM43340
-    install -d ${D}${base_libdir}/firmware/bcm/1BW_BCM43340
-    cp -rfv git/brcm/1BW_BCM43340/*.bin ${D}${base_libdir}/firmware/bcm/1BW_BCM43340
-    cp -rfv git/brcm/1BW_BCM43340/*.cal ${D}${base_libdir}/firmware/bcm/1BW_BCM43340
-    cp -rfv git/brcm/1BW_BCM43340/*.hcd ${D}${sysconfdir}/firmware/
-
-    #1DX_BCM4343W
-    install -d ${D}${base_libdir}/firmware/bcm/1DX_BCM4343W
-    cp -rfv git/brcm/1DX_BCM4343W/*.bin ${D}${base_libdir}/firmware/bcm/1DX_BCM4343W
-    cp -rfv git/brcm/1DX_BCM4343W/*.cal ${D}${base_libdir}/firmware/bcm/1DX_BCM4343W
-    cp -rfv git/brcm/1DX_BCM4343W/*.hcd ${D}${sysconfdir}/firmware/
-
-    #SN8000_BCM43362
-    install -d ${D}${base_libdir}/firmware/bcm/SN8000_BCM43362
-    cp -rfv git/brcm/SN8000_BCM43362/*.bin ${D}${base_libdir}/firmware/bcm/SN8000_BCM43362
-    cp -rfv git/brcm/SN8000_BCM43362/*.cal ${D}${base_libdir}/firmware/bcm/SN8000_BCM43362
-    cp -rfv git/brcm/1DX_BCM4343W/*.hcd ${D}${sysconfdir}/firmware/
-
-    #ZP_BCM4339
-    install -d ${D}${base_libdir}/firmware/bcm/ZP_BCM4339
-    cp -rfv git/brcm/ZP_BCM4339/*.bin ${D}${base_libdir}/firmware/bcm/ZP_BCM4339
-    cp -rfv git/brcm/ZP_BCM4339/*.cal ${D}${base_libdir}/firmware/bcm/ZP_BCM4339
-    cp -rfv git/brcm/ZP_BCM4339/*.hcd ${D}${sysconfdir}/firmware/
-
-    #1FD_BCM89359
-    install -d ${D}${base_libdir}/firmware/bcm/1FD_BCM89359
-    cp -rfv git/brcm/1FD_BCM89359/*.bin ${D}${base_libdir}/firmware/bcm/1FD_BCM89359
-    cp -rfv git/brcm/1FD_BCM89359/*.hcd ${D}${sysconfdir}/firmware/
-
-    #1CX_BCM4356
-    install -d ${D}${base_libdir}/firmware/bcm/1CX_BCM4356
-    cp -rfv git/brcm/1CX_BCM4356/fw_bcmdhd.bin ${D}${base_libdir}/firmware/bcm/1CX_BCM4356
 
     # Install SDMA Firmware: sdma-imx6q.bin & sdma-imx7d.bin into lib/firmware/imx/sdma
     install -d ${D}${base_libdir}/firmware/imx/sdma
@@ -144,9 +101,8 @@ ALLOW_EMPTY_${PN} = "1"
 
 PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-*"
 
-PACKAGES =+ "${PN}-epdc ${PN}-brcm ${PN}-scfw ${PN}-sdma"
+PACKAGES =+ "${PN}-epdc ${PN}-scfw ${PN}-sdma"
 
 FILES_${PN}-epdc = "${base_libdir}/firmware/imx/epdc/"
-FILES_${PN}-brcm = "${base_libdir}/firmware/bcm/*/*.bin ${base_libdir}/firmware/bcm/*/*.cal ${sysconfdir}/firmware/"
 FILES_${PN}-scfw = "${base_libdir}/firmware/scfw/"
 FILES_${PN}-sdma = " ${base_libdir}/firmware/imx/sdma"
