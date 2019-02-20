@@ -112,7 +112,7 @@ do_compile () {
     else
         echo 8QX boot binary build
         cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_srtm_demo.bin ${S}/${SOC_DIR}/m40_tcm.bin
-        cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_srtm_demo.bin ${S}/${SOC_DIR}/CM4.bin
+        cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_srtm_demo.bin ${S}/${SOC_DIR}/m4_image.bin
         cp ${DEPLOY_DIR_IMAGE}/mx8qx-ahab-container.img ${S}/${SOC_DIR}/
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${S}/${SOC_DIR}/scfw_tcm.bin
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_DIR}/bl31.bin
@@ -181,7 +181,7 @@ do_deploy () {
         fi
         install -m 0644 ${S}/${SOC_DIR}/mx8qx-ahab-container.img ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         install -m 0644 ${S}/${SOC_DIR}/m40_tcm.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-        install -m 0644 ${S}/${SOC_DIR}/CM4.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
+        install -m 0644 ${S}/${SOC_DIR}/m4_image.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
         install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
         if ${DEPLOY_OPTEE}; then
