@@ -21,7 +21,7 @@ SOC_TOOLS_GPU_append_aarch64           = " arm-compute-library"
 SOC_TOOLS_GPU_append_imxdrm            = " kmscube"
 
 # Tools for wayland and x11
-SOC_TOOLS_GPU_XWAYLAND                 = "mesa-demos gtkperf"
+SOC_TOOLS_GPU_XWAYLAND                 = "mesa-demos gtkperf renderdoc"
 SOC_TOOLS_GPU_XWAYLAND_append_imxgpu3d = " glmark2"
 
 # Tools for wayland and !x11
@@ -29,7 +29,7 @@ SOC_TOOLS_GPU_WAYLAND                  = ""
 SOC_TOOLS_GPU_WAYLAND_imxgpu3d         = "glmark2"
 
 # Tools for !wayland and x11
-SOC_TOOLS_GPU_X11                      = "mesa-demos gtkperf"
+SOC_TOOLS_GPU_X11                      = "mesa-demos gtkperf renderdoc"
 SOC_TOOLS_GPU_X11_append_imxgpu3d      = " glmark2 eglinfo-x11"
 
 # Tools for !wayland and !x11
