@@ -11,11 +11,11 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
 SRCREV_opencv = "737f8fad1318607bf78eff76e3e4364db11663e0"
-SRCREV_contrib = "25221244732dcf44c1450d0f93edc2529a61c0e1"
+SRCREV_contrib = "fdd897b5c6fe33533ffddf70644b3305aea8f603"
 SRCREV_ipp = "32e315a5b106a7b89dbed51c28f8120a48b368b4"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
-SRCREV_extra = "d29d003e00dacf4ed686577c3f2c0aa048d5a80a"
+SRCREV_extra = "1bd90e0bfaadd4a83579ce5e8d6a2eb5b7df412f"
 SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
 SRC_URI[tinydnn.sha256sum] = "e2c61ce8c5debaa644121179e9dbdcf83f497f39de853f8dd5175846505aa18b"
 
@@ -40,13 +40,15 @@ IPP_MD5 = "${@ipp_md5sum(d)}"
 
 SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_extra"
 OPENCV_SRC ?= "git://source.codeaurora.org/external/imx/opencv-imx.git;protocol=https"
+OPENCV_CONTRIB_SRC ?= "git://source.codeaurora.org/external/imx/opencv-contrib-imx.git;protocol=https"
+OPENCV_EXTRA_SRC ?= "git://source.codeaurora.org/external/imx/opencv-extra-imx.git;protocol=https"
 SRCBRANCH = "4.0.1_imx"
 SRC_URI = "${OPENCV_SRC};branch=${SRCBRANCH};name=opencv \
-    git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
+    ${OPENCV_CONTRIB_SRC};branch=${SRCBRANCH};destsuffix=contrib;name=contrib \
     git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20180723;destsuffix=ipp;name=ipp \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
-    git://github.com/opencv/opencv_extra.git;destsuffix=extra;name=extra \
+    ${OPENCV_EXTRA_SRC};branch=${SRCBRANCH};destsuffix=extra;name=extra \
     https://github.com/tiny-dnn/tiny-dnn/archive/v1.0.0a3.tar.gz;destsuffix=git/3rdparty/tinydnn/tiny-dnn-1.0.0a3;name=tinydnn;unpack=false \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
