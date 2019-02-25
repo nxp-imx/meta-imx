@@ -10,7 +10,7 @@ SRC_URI = " \
     file://xen-4.11-arm-acpi-fix-string-lengths.patch \
     "
 
-SRCREV = "9ea5b6d1bda24fa4fd7f6d64b579126af1499c40"
+SRCREV = "7bb71ce745b66fcf55ff6ca008fab19f1c71577b"
 
 S = "${WORKDIR}/git"
 
