@@ -1,0 +1,37 @@
+From c29a30d916a64945ee89c5feec4a29915e31e77a Mon Sep 17 00:00:00 2001
+From: Chung-Hsien Hsu <stanley.hsu@cypress.com>
+Date: Thu, 24 May 2018 16:29:01 +0800
+Subject: [PATCH 23/24] driver_nl80211: Fix 802.1X auth failure when offloading
+ 4-way handshake
+
+If a driver advertises 4-way handshake offload support for 802.1X, it
+may reject the NL80211_CMD_CONNECT when NL80211_ATTR_WANT_1X_4WAY_HS
+attribute flag is not present. This patch includes the attribute flag
+in NL80211_CMD_CONNECT for the offload.
+
+Upstream-Status: Pending
+
+Signed-off-by: Chung-Hsien Hsu <stanley.hsu@cypress.com>
+---
+ src/drivers/driver_nl80211.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/drivers/driver_nl80211.c b/src/drivers/driver_nl80211.c
+index 124e0d7..ac42c89 100644
+--- a/src/drivers/driver_nl80211.c
++++ b/src/drivers/driver_nl80211.c
+@@ -5000,6 +5000,11 @@ static int nl80211_connect_common(struct wpa_driver_nl80211_data *drv,
+ 			return -1;
+ 	}
+ 
++	if ((drv->capa.flags & WPA_DRIVER_FLAGS_4WAY_HANDSHAKE) &&
++	    wpa_key_mgmt_wpa_ieee8021x(params->key_mgmt_suite) &&
++	    nla_put_flag(msg, NL80211_ATTR_WANT_1X_4WAY_HS))
++		return -1;
++
+ 	if (nla_put_flag(msg, NL80211_ATTR_CONTROL_PORT))
+ 		return -1;
+ 
+-- 
+1.9.1
+
