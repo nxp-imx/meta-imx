@@ -181,9 +181,6 @@ do_deploy () {
             install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         fi
     else
-        if [ "${MACHINE}" = "imx8qxpa0mek" ]; then
-            install -m 0644 ${S}/${SOC_DIR}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-        fi
         install -m 0644 ${S}/${SOC_DIR}/mx8qx-ahab-container.img ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         install -m 0644 ${S}/${SOC_DIR}/m40_tcm.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         install -m 0644 ${S}/${SOC_DIR}/m4_image.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
