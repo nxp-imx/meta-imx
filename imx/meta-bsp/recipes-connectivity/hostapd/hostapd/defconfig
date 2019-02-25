@@ -28,9 +28,9 @@ CONFIG_LIBNL32=y
 # driver_nl80211.c requires a rather new libnl (version 1.1) which may not be
 # shipped with your distribution yet. If that is the case, you need to build
 # newer libnl version and point the hostapd build to use it.
-#LIBNL=/usr/src/libnl
-#CFLAGS += -I$(LIBNL)/include
-#LIBS += -L$(LIBNL)/lib
+
+CFLAGS += -I/{rootfs_dir}/usr/include/libnl3
+LIBS += -L/{rootfs_dir}/usr/lib
 
 # Driver interface for FreeBSD net80211 layer (e.g., Atheros driver)
 #CONFIG_DRIVER_BSD=y
@@ -110,7 +110,7 @@ CONFIG_EAP_TTLS=y
 # Wi-Fi Protected Setup (WPS)
 CONFIG_WPS=y
 # Enable UPnP support for external WPS Registrars
-#CONFIG_WPS_UPNP=y
+CONFIG_WPS_UPNP=y
 
 # EAP-IKEv2
 #CONFIG_EAP_IKEV2=y
@@ -138,6 +138,9 @@ CONFIG_DRIVER_RADIUS_ACL=y
 
 # IEEE 802.11n (High Throughput) support
 CONFIG_IEEE80211N=y
+
+# IEEE 802.11ac (Very High Throughput) support
+CONFIG_IEEE80211AC=y
 
 # Remove debugging code that is printing out debug messages to stdout.
 # This can be used to reduce the size of the hostapd considerably if debugging
