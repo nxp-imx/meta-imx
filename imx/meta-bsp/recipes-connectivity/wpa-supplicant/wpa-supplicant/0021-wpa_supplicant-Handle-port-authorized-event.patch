@@ -1,0 +1,66 @@
+From 2dc14b8b072d9eccc4f48789e758de17f2bc7eeb Mon Sep 17 00:00:00 2001
+From: Avraham Stern <avraham.stern@intel.com>
+Date: Tue, 30 Jan 2018 15:37:28 +0800
+Subject: [PATCH 21/24] wpa_supplicant: Handle port authorized event
+
+When the driver indicates that the connection is authorized
+(i.e. the 4 way handshake was completed by the driver), cancel
+the EAP authentication timeout and set the EAP state machine to
+success state.
+
+Upstream-Status: Backport [https://w1.fi/cgit/hostap/commit/?id=b8e88d357a28997167cebbe65621e8e77e6f9a34]
+
+Signed-off-by: Avraham Stern <avraham.stern@intel.com>
+---
+ wpa_supplicant/events.c | 21 ++++++++++++++++-----
+ 1 file changed, 16 insertions(+), 5 deletions(-)
+
+diff --git a/wpa_supplicant/events.c b/wpa_supplicant/events.c
+index abe3b47..995fb9d 100644
+--- a/wpa_supplicant/events.c
++++ b/wpa_supplicant/events.c
+@@ -3404,18 +3404,26 @@ static void wpa_supplicant_notify_avoid_freq(struct wpa_supplicant *wpa_s,
+ }
+ 
+ 
+-static void wpa_supplicant_event_assoc_auth(struct wpa_supplicant *wpa_s,
+-					    union wpa_event_data *data)
++static void wpa_supplicant_event_port_authorized(struct wpa_supplicant *wpa_s)
+ {
+-	wpa_dbg(wpa_s, MSG_DEBUG,
+-		"Connection authorized by device, previous state %d",
+-		wpa_s->wpa_state);
+ 	if (wpa_s->wpa_state == WPA_ASSOCIATED) {
+ 		wpa_supplicant_cancel_auth_timeout(wpa_s);
+ 		wpa_supplicant_set_state(wpa_s, WPA_COMPLETED);
+ 		eapol_sm_notify_portValid(wpa_s->eapol, TRUE);
+ 		eapol_sm_notify_eap_success(wpa_s->eapol, TRUE);
+ 	}
++}
++
++
++static void wpa_supplicant_event_assoc_auth(struct wpa_supplicant *wpa_s,
++					    union wpa_event_data *data)
++{
++	wpa_dbg(wpa_s, MSG_DEBUG,
++		"Connection authorized by device, previous state %d",
++		wpa_s->wpa_state);
++
++	wpa_supplicant_event_port_authorized(wpa_s);
++
+ 	wpa_sm_set_rx_replay_ctr(wpa_s->wpa, data->assoc_info.key_replay_ctr);
+ 	wpa_sm_set_ptk_kck_kek(wpa_s->wpa, data->assoc_info.ptk_kck,
+ 			       data->assoc_info.ptk_kck_len,
+@@ -4144,6 +4152,9 @@ void wpa_supplicant_event(void *ctx, enum wpa_event_type event,
+ 			data->p2p_lo_stop.reason_code);
+ #endif /* CONFIG_P2P */
+ 		break;
++	case EVENT_PORT_AUTHORIZED:
++		wpa_supplicant_event_port_authorized(wpa_s);
++		break;
+ 	default:
+ 		wpa_msg(wpa_s, MSG_INFO, "Unknown event %d", event);
+ 		break;
+-- 
+1.9.1
+

@@ -1,0 +1,56 @@
+From ab04647d8705c0c6f1041b575a6c807668d744cb Mon Sep 17 00:00:00 2001
+From: Avraham Stern <avraham.stern@intel.com>
+Date: Tue, 30 Jan 2018 15:27:54 +0800
+Subject: [PATCH 19/24] driver: Add port authorized event
+
+Add an event that indicates that the 4 way handshake was completed by
+the driver.
+
+This event is useful for networks that require 802.1X authentication.
+The driver can use this event that a new connection is already
+authorized (e.g. when the driver used PMKSA caching) and 802.1X
+authentication is not required.
+
+Upstream-Status: Backport [https://w1.fi/cgit/hostap/commit/?id=0a20bd7d91525b431fff7013974850537f2d8f12]
+
+Signed-off-by: Avraham Stern <avraham.stern@intel.com>
+---
+ src/drivers/driver.h        | 9 +++++++++
+ src/drivers/driver_common.c | 1 +
+ 2 files changed, 10 insertions(+)
+
+diff --git a/src/drivers/driver.h b/src/drivers/driver.h
+index a449cc9..b22fe6d 100644
+--- a/src/drivers/driver.h
++++ b/src/drivers/driver.h
+@@ -4112,6 +4112,15 @@ enum wpa_event_type {
+ 	 * EVENT_P2P_LO_STOP - Notify that P2P listen offload is stopped
+ 	 */
+ 	EVENT_P2P_LO_STOP,
++
++	/**
++	 * EVENT_PORT_AUTHORIZED - Notification that a connection is authorized
++	 *
++	 * This event should be indicated when the driver completes the 4 Way
++	 * handshake. This event should be preceded by an EVENT_ASSOC that
++	 * indicates the completion of 802.11 association.
++	 */
++	EVENT_PORT_AUTHORIZED,
+ };
+ 
+ 
+diff --git a/src/drivers/driver_common.c b/src/drivers/driver_common.c
+index c7107ba..fc644b9 100644
+--- a/src/drivers/driver_common.c
++++ b/src/drivers/driver_common.c
+@@ -81,6 +81,7 @@ const char * event_to_string(enum wpa_event_type event)
+ 	E2S(ACS_CHANNEL_SELECTED);
+ 	E2S(DFS_CAC_STARTED);
+ 	E2S(P2P_LO_STOP);
++	E2S(PORT_AUTHORIZED);
+ 	}
+ 
+ 	return "UNKNOWN";
+-- 
+1.9.1
+
