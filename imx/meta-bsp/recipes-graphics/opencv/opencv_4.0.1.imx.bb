@@ -56,7 +56,7 @@ SRC_URI = "${OPENCV_SRC};branch=${SRCBRANCH};name=opencv \
     file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
     file://0001-Dont-use-isystem.patch \
 "
-PV = "4.0.1+git${SRCPV}"
+PV = "4.0.1.imx+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
