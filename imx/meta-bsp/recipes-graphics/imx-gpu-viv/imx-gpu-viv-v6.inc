@@ -1,18 +1,21 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
-# Copyright (C) 2012-2016 O.S. Systems Software LTDA.
+# Copyright (C) 2012-2018 O.S. Systems Software LTDA.
+# Copyright 2017-2019 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "GPU driver and apps for imx"
+DESCRIPTION = "GPU driver and apps for i.MX"
 SECTION = "libs"
 LICENSE = "Proprietary"
 
-DEPENDS += \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes', \
-                                                        '', d), d)}"
-DEPENDS += \
-    "${@bb.utils.contains('DISTRO_FEATURES',     'x11', 'libxcb libxshmfence libxxf86vm', \
-                                                        '', d)}"
+DEPENDS += " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
+       bb.utils.contains('DISTRO_FEATURES',     'x11', 'virtual/libx11 libxdamage libxext libxfixes', \
+                                                       '', d), d)} \
+"
+DEPENDS += " \
+    ${@bb.utils.contains('DISTRO_FEATURES',     'x11', 'libxcb libxshmfence libxxf86vm', \
+                                                       '', d)} \
+"
 DEPENDS_append_imxdrm = " libdrm wayland"
 
 # imx-gpu-viv does not provide everything it needs to for virtual/libgl
@@ -26,19 +29,16 @@ EXTRA_PROVIDES_append_imxgpu3d = " \
     virtual/libgles1 \
     virtual/libgles2 \
 "
-EXTRA_PROVIDES_append_mx6q = " \
-    virtual/opencl-icd \
-    opencl-headers \
-"
 EXTRA_PROVIDES_append_mx8 = " \
-    virtual/libopenvx \
     virtual/libgbm \
-    virtual/opencl-icd \
-    opencl-headers \
+"
+EXTRA_PROVIDES_append_mx8qm = " \
+    virtual/libopenvx \
 "
 PROVIDES += " \
     imx-gpu-viv \
     libgal-imx \
+    opencl-headers \
     virtual/egl \
     virtual/libopenvg \
     virtual/opencl-headers \
@@ -57,7 +57,9 @@ REQUIRED_DISTRO_FEATURES_mx8 = "wayland"
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
 
 # Note : If you add a package here, to prevent a naming conflict see the python_anonymous() futher below
-PACKAGES_1 = "libclc-imx libclc-imx-dev \
+IMX_PACKAGES_GBM     = ""
+IMX_PACKAGES_GBM_mx8 = "libgbm-imx libgbm-imx-dev"
+PACKAGES =+ "libclc-imx libclc-imx-dev \
 	libgl-imx libgl-imx-dev \
 	libgles-imx libgles-imx-dev \
 	libgles2-imx libgles2-imx-dev \
@@ -70,17 +72,14 @@ PACKAGES_1 = "libclc-imx libclc-imx-dev \
 	libgal-imx libgal-imx-dev \
 	libvivante-dri-imx \
 	libvsc-imx \
-"
-PACKAGES_2     = ""
-PACKAGES_2_mx8 = "libgbm-imx libgbm-imx-dev"
-PACKAGES_3 = "libwayland-viv-imx libwayland-viv-imx-dev \
+	${IMX_PACKAGES_GBM} \
+	libwayland-viv-imx libwayland-viv-imx-dev \
 	libgc-wayland-protocol-imx libgc-wayland-protocol-imx-dev \
 	imx-gpu-viv-tools \
 	imx-gpu-viv-demos \
 	libvulkan-imx libvulkan-imx-dev \
 	libopenvx-imx libopenvx-imx-dev \
 "
-PACKAGES =+ "${PACKAGES_1} ${PACKAGES_2} ${PACKAGES_3}"
 python __anonymous () {
         has_vivante_kernel_driver_support = (d.getVar('MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT', True) or '0')
         if has_vivante_kernel_driver_support != '1':
@@ -138,11 +137,12 @@ PACKAGE_FP_TYPE = "hardfp"
 HAS_GBM     = "false"
 HAS_GBM_mx8 = "true"
 
-# GLES 3.1 is supported for all i.MX 8
-# GLES 3.2 is supported for i.MX 8QM only
-GLES3_HEADER_REMOVALS = "gl31.h gl32.h"
-GLES3_HEADER_REMOVALS_remove_mx8   = "gl31.h"
-GLES3_HEADER_REMOVALS_remove_mx8qm = "gl32.h"
+# 8 Family supports GLES 3.2
+# 8M and 8X support GLES 3.1
+GLES3_HEADER_REMOVALS        = "gl31.h gl32.h"
+GLES3_HEADER_REMOVALS_mx8mq  = "gl32.h"
+GLES3_HEADER_REMOVALS_mx8qxp = "gl32.h"
+GLES3_HEADER_REMOVALS_mx8qm  = ""
 
 do_install () {
     install -d ${D}${libdir}
@@ -154,8 +154,8 @@ do_install () {
     cp -r ${S}/gpu-demos/opt ${D}
     cp -r ${S}/gpu-tools/gmem-info/usr/bin/* ${D}${bindir}
 
-    # Use vulkan headers from vulkan recipe
-    rm -rf ${D}${includedir}/vulkan
+    # Use vulkan header from vulkan recipe to support vkmark
+    rm -rf ${D}${includedir}/vulkan/
 
     install -d ${D}${libdir}/pkgconfig
     if ${HAS_GBM}; then
@@ -171,8 +171,6 @@ do_install () {
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv2.pc ${D}${libdir}/pkgconfig/glesv2.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/vg.pc ${D}${libdir}/pkgconfig/vg.pc
-        #install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gc_wayland_protocol.pc ${D}${libdir}/pkgconfig/gc_wayland_protocol.pc
-        #install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/wayland-viv.pc ${D}${libdir}/pkgconfig/wayland-viv.pc
 
        if [ "${USE_X11}" = "yes" ]; then
 
@@ -297,7 +295,6 @@ FILES_libclc-imx-dev = "${includedir}/CL ${libdir}/libCLC${SOLIBSDEV}"
 INSANE_SKIP_libegl-imx += "dev-so"
 FILES_libegl-imx = "${libdir}/libEGL${REALSOLIBS} ${libdir}/libEGL${SOLIBSDEV} "
 FILES_libegl-imx-dev = "${includedir}/EGL ${includedir}/KHR ${libdir}/pkgconfig/egl.pc"
-#RDEPENDS_libegl-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'libgc-wayland-protocol-imx libwayland-viv-imx libgc-wayland-protocol-imx', '', d)}"
 
 FILES_libgal-imx = "${libdir}/libGAL${SOLIBS} ${libdir}/libGAL_egl${SOLIBS}"
 FILES_libgal-imx-dev = "${libdir}/libGAL${SOLIBSDEV} ${includedir}/HAL"
@@ -320,8 +317,6 @@ FILES_libopenvx-imx-dev = "${includedir}/VX ${libdir}/libopenVX${SOLIBSDEV}"
 
 FILES_libgl-imx = "${libdir}/libGL${REALSOLIBS}"
 FILES_libgl-imx-dev = "${libdir}/libGL${SOLIBSDEV} ${includedir}/GL"
-# Includes GL headers from mesa
-RDEPENDS_libgl-imx-dev += "libgl-mesa-dev"
 
 # libEGL needs to open libGLESv1.so
 INSANE_SKIP_libgles-imx += "dev-so"
