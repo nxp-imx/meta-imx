@@ -248,6 +248,11 @@ PREFERRED_PROVIDER_virtual/libgl_mx8 ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libg2d        ?= "imx-gpu-g2d"
 PREFERRED_PROVIDER_virtual/libg2d_imxdpu ?= "imx-dpu-g2d"
 
+# Use i.MX libdrm Version
+PREFERRED_VERSION_libdrm_mx6 ?= "2.4.91.imx"
+PREFERRED_VERSION_libdrm_mx7 ?= "2.4.91.imx"
+PREFERRED_VERSION_libdrm_mx8 ?= "2.4.91.imx"
+
 # Handle default kernel
 IMX_DEFAULT_KERNEL = "linux-imx"
 IMX_DEFAULT_KERNEL_mxs = "linux-fslc"
