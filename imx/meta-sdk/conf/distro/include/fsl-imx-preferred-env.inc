@@ -39,7 +39,6 @@ PREFERRED_VERSION_imx-gpu-viv               = "${IMX_GPU_VERSION}-${IMX_GPU_VERS
 PREFERRED_VERSION_xf86-video-imx-vivante    = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}"
-PREFERRED_VERSION_libdrm                    = "2.4.91.imx"
 
 # Set the preffered provider for opencl-headers
 PREFERRED_PROVIDER_opencl-headers_imx = "imx-gpu-viv"
