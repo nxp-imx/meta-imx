@@ -18,5 +18,6 @@ SRC_URI_remove = "file://0001-opencv-fix-build-for-opencv-3-4-2.patch"
 #Remove vulkan as it's incompatible for i.MX 8M Mini
 PACKAGECONFIG_remove_mx8mm = " vulkan"
 
+PACKAGECONFIG[vulkan]          = "--enable-vulkan,--disable-vulkan,vulkan-headers"
 PACKAGECONFIG[lcms2]           = "--enable-lcms2,--disable-lcms2,lcms"
 PACKAGECONFIG[openmpt]         = "--enable-openmpt,--disable-openmpt,libopenmpt"
