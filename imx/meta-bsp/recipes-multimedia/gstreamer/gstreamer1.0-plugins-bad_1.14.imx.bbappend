@@ -1,6 +1,6 @@
 
 SRCBRANCH = "imx-1.14.x"
-SRCREV = "d059ec8d3781a3a431325c65852676926f5adb2b"
+SRCREV = "d059ec8d3781a3a431325c65852676926f5adb2b" 
 PV = "1.14.4.imx"
 
 DEPENDS += "libdrm "
