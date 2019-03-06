@@ -14,7 +14,7 @@ IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
 SRC_URI += " \
            ${IMX_FIRMWARE_SRC};branch=master;destsuffix=imx-firmware;name=imx-firmware \
 "
-SRCREV_imx-firmware = "c9f90affe8f72d23b394a5552fc480efb8cba19f"
+SRCREV_imx-firmware = "6a99c832e2222eff652d58f95faf2ea1aed54ce0"
 
 SRCREV_FORMAT = "default_murata-qca+imx-firmware"
 
