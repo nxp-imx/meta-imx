@@ -53,6 +53,8 @@ FEATURES_append_mx8mm     = "${FEATURES_MX8MM}"
 FEATURES_append_mx8qxp    = "${FEATURES_MX8X}"
 
 EXTENSIONS       = "*"
+EXTENSIONS_mx6q  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
+EXTENSIONS_mx6dl = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 EXTENSIONS_mx8mq = "OpenGLES3:GL_EXT_color_buffer_float"
 
 do_compile () {
