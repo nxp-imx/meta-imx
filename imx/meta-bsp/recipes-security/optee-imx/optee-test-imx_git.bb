@@ -14,6 +14,9 @@ OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;p
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
 SRCREV = "f9395a26acfcda30447d31ef49c6044902e1dea8"
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+SRC_URI_append = " file://0001-Fix-GCC-8-build-failure.patch"
+
 S = "${WORKDIR}/git"
 
 do_compile () {

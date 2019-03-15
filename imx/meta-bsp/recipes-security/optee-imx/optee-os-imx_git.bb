@@ -14,6 +14,9 @@ OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;proto
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
 SRCREV = "4cbdb242cecc13bbea60bc081159398648068742"
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+SRC_URI_append = " file://0001-arm32-add-assembly-directive-.arch_extension-sec.patch"
+
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build.${PLATFORM_FLAVOR}"
 
