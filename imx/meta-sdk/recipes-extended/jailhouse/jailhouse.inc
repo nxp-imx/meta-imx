@@ -84,6 +84,9 @@ do_install() {
     install ${B}/tools/jailhouse-config-create ${D}${JH_DATADIR}/tools
     install ${B}/tools/jailhouse-gcov-extract ${D}${JH_DATADIR}/tools
     install ${B}/tools/jailhouse-hardware-check ${D}${JH_DATADIR}/tools
+
+    install -d ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
+    install -m 0644 ${B}/build${base_libdir}/pyjailhouse/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
 }
 
 PACKAGE_BEFORE_PN = "kernel-module-jailhouse"
