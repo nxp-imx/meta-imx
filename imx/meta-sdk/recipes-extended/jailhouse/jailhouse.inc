@@ -77,13 +77,14 @@ do_install() {
     install -d ${D}${INMATES_DIR}
     install ${B}/inmates/demos/${JH_ARCH}/*.bin ${D}${INMATES_DIR}
 
-    install -d ${D}${JH_DATADIR}/tools
+    install -d ${D}${JH_DATADIR}/tools/arm64
     install ${B}/tools/jailhouse-cell-linux ${D}${JH_DATADIR}/tools
     install ${B}/tools/jailhouse-cell-stats ${D}${JH_DATADIR}/tools
     install ${B}/tools/jailhouse-config-collect ${D}${JH_DATADIR}/tools
     install ${B}/tools/jailhouse-config-create ${D}${JH_DATADIR}/tools
     install ${B}/tools/jailhouse-gcov-extract ${D}${JH_DATADIR}/tools
     install ${B}/tools/jailhouse-hardware-check ${D}${JH_DATADIR}/tools
+    install ${B}/inmates/tools/${JH_ARCH}/linux-loader.bin ${D}${JH_DATADIR}/tools/arm64
 
     install -d ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
     install -m 0644 ${B}/build${base_libdir}/pyjailhouse/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
