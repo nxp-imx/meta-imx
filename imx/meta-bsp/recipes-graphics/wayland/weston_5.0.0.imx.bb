@@ -128,13 +128,13 @@ do_install_append() {
         install -Dm 644 ${WORKDIR}/xwayland.weston-start ${D}${datadir}/weston-start/xwayland
     fi
 
-    if [ "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
-        WESTON_INI_SRC=${B}/ivi-shell/weston.ini
-    else
-        WESTON_INI_SRC=${B}/weston.ini
-    fi
-    WESTON_INI_DEST_DIR=${D}${sysconfdir}/xdg/weston
     if [ -z "${@bb.utils.filter('BBFILE_COLLECTIONS', 'aglprofilegraphical', d)}" ]; then
+        if [ "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
+            WESTON_INI_SRC=${B}/ivi-shell/weston.ini
+        else
+            WESTON_INI_SRC=${B}/weston.ini
+        fi
+        WESTON_INI_DEST_DIR=${D}${sysconfdir}/xdg/weston
         install -d ${WESTON_INI_DEST_DIR}
         install -m 0644 ${WESTON_INI_SRC} ${WESTON_INI_DEST_DIR}
     fi
