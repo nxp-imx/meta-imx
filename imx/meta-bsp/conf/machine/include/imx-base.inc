@@ -168,10 +168,6 @@ MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'kernel-module-qca6174 firmware-qca6174 qca-tools', '', d)}"
 MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'kernel-module-qca9377 firmware-qca9377 qca-tools', '', d)}"
 
-# Extra Cypress Wi-Fi tools (Murata)
-MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains_any('MACHINE_FEATURES', [ 'bcm4339', 'bcm43430', 'bcm43455', 'bcm4356', 'bcm4359' ], \
-                                        'cyw-fmac-utils', '', d)}"
-
 # Extra audio support
 # FIXME: Add support for ALL SoC families
 MACHINE_EXTRA_RRECOMMENDS_append_mx6dl = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
