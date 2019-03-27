@@ -17,10 +17,6 @@ SRC_URI = "${WESTON_SRC};branch=${SRCBRANCH} \
            file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
            file://0003-weston-touch-calibrator-Advertise-the-touchscreen-ca.patch \
 "
-# Use argb8888 as gbm-format for i.MX8MQ only
-SRC_URI_append_mx8mq = " file://0001-weston.ini-using-argb8888-as-gbm-default-on-mscale-8.patch \
-                         file://0002-weston.ini-configure-desktop-shell-size-in-weston-co.patch \
-"
 SRCREV = "cd7e1c6d39056d6203ceae7e4d30274742bf35df"
 S = "${WORKDIR}/git"
 
@@ -111,6 +107,16 @@ PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl"
 # Weston with imxgpu hardware
 PACKAGECONFIG[imxgpu] = "--enable-imxgpu,--disable-imxgpu"
 
+SOCNAME       = "none"
+SOCNAME_mx8mq = "8mq"
+
+uncomment() {
+    if ! (grep "^#$1" $2); then
+        bbfatal "Commented setting '#$1' not found in file $PWD/$2"
+    fi
+    sed -i -e 's,^#'"$1"','"$1"',g' $2
+}
+
 do_install_append() {
     # Weston doesn't need the .la files to load modules, so wipe them
     rm -f ${D}/${libdir}/libweston-${WESTON_MAJOR_VERSION}/*.la
@@ -137,6 +143,15 @@ do_install_append() {
         WESTON_INI_DEST_DIR=${D}${sysconfdir}/xdg/weston
         install -d ${WESTON_INI_DEST_DIR}
         install -m 0644 ${WESTON_INI_SRC} ${WESTON_INI_DEST_DIR}
+        cd ${WESTON_INI_DEST_DIR}
+        case ${SOCNAME} in
+        8mq)
+            uncomment "gbm-format=argb8888" weston.ini
+            uncomment "\\[shell\\]"         weston.ini
+            uncomment "size=1920x1080"      weston.ini
+            ;;
+        esac
+        cd -
     fi
 }
 
