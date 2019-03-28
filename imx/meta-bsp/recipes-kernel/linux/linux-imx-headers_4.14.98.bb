@@ -34,6 +34,9 @@ IMX_UAPI_HEADERS = " \
     pxp_dma.h \
     videodev2.h \
 "
+IMX_UAPI_DRM_HEADERS = " \
+    imx_drm.h \
+"
 
 do_install() {
     # We install all headers inside of B so we can copy only the
@@ -48,6 +51,10 @@ do_install() {
     for h in ${IMX_UAPI_HEADERS}; do
         install -D -m 0644 ${B}${includedir}/linux/$h \
 	                   ${D}${includedir}/imx/linux/$h
+    done
+    for h in ${IMX_UAPI_DRM_HEADERS}; do
+        install -D -m 0644 ${B}${includedir}/drm/$h \
+	                   ${D}${includedir}/imx/drm/$h
     done
 }
 
