@@ -9,7 +9,7 @@ DEPENDS = "libgpuperfcnt"
 GPUTOP_SRC ?= "git://source.codeaurora.org/external/imx/imx-gputop.git;protocol=https"
 SRCBRANCH = "release"
 SRC_URI = "${GPUTOP_SRC};branch=${SRCBRANCH} "
-SRCREV = "5035d8aeca4f467f8e01226d899383b05344e0e6" 
+SRCREV = "a7c8de1b0c6b6791be2239de7825b14f0d31157e"
 
 S = "${WORKDIR}/git"
 
