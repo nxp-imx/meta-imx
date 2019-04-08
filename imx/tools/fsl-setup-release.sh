@@ -168,10 +168,10 @@ echo "BBLAYERS += \" \${BSPDIR}/sources/meta-qt5 \"" >> $BUILD_DIR/conf/bblayers
 
 if [ -d ../sources/meta-ivi ]; then
     echo -e "\n## Genivi layers" >> $BUILD_DIR/conf/bblayers.conf
+    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-gplv2 \"" >> $BUILD_DIR/conf/bblayers.conf
     echo "BBLAYERS += \" \${BSPDIR}/sources/meta-ivi/meta-ivi \"" >> $BUILD_DIR/conf/bblayers.conf
     echo "BBLAYERS += \" \${BSPDIR}/sources/meta-ivi/meta-ivi-bsp \"" >> $BUILD_DIR/conf/bblayers.conf
     echo "BBLAYERS += \" \${BSPDIR}/sources/meta-ivi/meta-ivi-test \"" >> $BUILD_DIR/conf/bblayers.conf
-    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-gplv2 \"" >> $BUILD_DIR/conf/bblayers.conf
 fi
 
 echo BSPDIR=$BSPDIR
