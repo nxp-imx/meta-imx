@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c7b12b6702da38ca028ace54aae3d484 \
 WAYLAND_PROTOCOLS_SRC ?= "git://source.codeaurora.org/external/imx/wayland-protocols-imx.git;protocol=https"
 SRCBRANCH = "wayland-protocols-imx-1.17"
 SRC_URI = "${WAYLAND_PROTOCOLS_SRC};branch=${SRCBRANCH} "
-SRCREV = "50ea8fbdd1b768ccaa33dfee43b0f12245ef09b8" 
+SRCREV = "50ea8fbdd1b768ccaa33dfee43b0f12245ef09b8"
 S = "${WORKDIR}/git"
 
 inherit allarch autotools pkgconfig
