@@ -1,4 +1,4 @@
-From d5fb8567868866665502106def90017243a968a8 Mon Sep 17 00:00:00 2001
+From 121c95d2800d3b2ad95fc1da016744c79fe93cea Mon Sep 17 00:00:00 2001
 From: Tom Hochstein <tom.hochstein@nxp.com>
 Date: Wed, 22 Feb 2017 15:53:30 +0200
 Subject: [PATCH] weston-launch: Provide a default version that doesn't require
@@ -21,10 +21,10 @@ Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
  2 files changed, 27 insertions(+), 2 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 8f6b80d..603fcb3 100644
+index 757b125..367a643 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -494,13 +494,17 @@ AC_ARG_ENABLE(resize-optimization,
+@@ -537,13 +537,17 @@ AC_ARG_ENABLE(resize-optimization,
  AS_IF([test "x$enable_resize_optimization" = "xyes"],
        [AC_DEFINE([USE_RESIZE_POOL], [1], [Use resize memory pool as a performance optimization])])
  
@@ -44,7 +44,7 @@ index 8f6b80d..603fcb3 100644
  fi
  
  AM_CONDITIONAL(HAVE_PANGO, test "x$have_pango" = "xyes")
-@@ -748,6 +752,7 @@ AC_MSG_RESULT([
+@@ -792,6 +796,7 @@ AC_MSG_RESULT([
  	Enable developer documentation	${enable_devdocs}
  
  	weston-launch utility		${enable_weston_launch}
@@ -53,10 +53,10 @@ index 8f6b80d..603fcb3 100644
  	systemd notify support		${enable_systemd_notify}
  
 diff --git a/libweston/weston-launch.c b/libweston/weston-launch.c
-index 9064439..c6abe92 100644
+index bf73e0d..0d5c6b3 100644
 --- a/libweston/weston-launch.c
 +++ b/libweston/weston-launch.c
-@@ -51,7 +51,9 @@
+@@ -52,7 +52,9 @@
  
  #include <pwd.h>
  #include <grp.h>
