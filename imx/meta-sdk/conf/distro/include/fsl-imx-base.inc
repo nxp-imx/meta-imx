@@ -13,7 +13,7 @@ TARGET_VENDOR = "-poky"
 
 LOCALCONF_VERSION = "1"
 
-IMX_DEFAULT_DISTRO_FEATURES = "opengl ptest multiarch bluez"
+IMX_DEFAULT_DISTRO_FEATURES = "opengl ptest multiarch"
 # Enable vulkan distro feature only for mx8
 IMX_DEFAULT_DISTRO_FEATURES_append_mx8 = " vulkan"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
