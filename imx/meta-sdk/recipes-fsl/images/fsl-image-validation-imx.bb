@@ -31,6 +31,9 @@ IMAGE_FEATURES += " \
 ERPC_COMPS ?= ""
 ERPC_COMPS_append_mx7ulp = "packagegroup-imx-erpc"
 
+ML_PKGS ?= ""
+ML_PKGS_append_mx8 = "packagegroup-imx-ml"
+
 CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-core-full-cmdline \
     packagegroup-tools-bluetooth \
@@ -44,4 +47,5 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-init', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
     ${ERPC_COMPS} \
+    ${ML_PKGS} \
 "
