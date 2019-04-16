@@ -14,7 +14,7 @@ PREFERRED_PROVIDER_virtual/kernel_imx = "linux-imx"
 #PREFERRED_PROVIDER_virtual/kernel_mx7ulp = "linux-imx"
 #PREFERRED_PROVIDER_virtual/kernel_imx7ulp_zebu = "linux-imx"
 
-PREFERRED_VERSION_linux-libc-headers_imx ?= "4.14"
+PREFERRED_VERSION_linux-libc-headers_imx ?= "4.19"
 
 # Extra audio support
 # Add support for ALL i.MX6/7/8 SoC families
