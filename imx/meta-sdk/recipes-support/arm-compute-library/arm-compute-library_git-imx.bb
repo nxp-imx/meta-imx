@@ -12,7 +12,7 @@ PV = "18.11+git${SRCPV}"
 ARM_COMPUTELIBRARY_SRC ?= "git://source.codeaurora.org/external/imx/arm-computelibrary-imx.git;protocol=https"
 SRCBRANCH = "imx_18.11"
 SRC_URI = "${ARM_COMPUTELIBRARY_SRC};branch=${SRCBRANCH}"
-SRCREV = "64441b79b83e0790008486779054e9da891537f3"
+SRCREV = "64441b79b83e0790008486779054e9da891537f3" 
 
 S = "${WORKDIR}/git"
 
