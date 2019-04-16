@@ -1,6 +1,6 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.14-thud"
+DISTRO_VERSION = "4.19-thud"
 
 DISTRO_CODENAME = "thud"
 SDK_VENDOR = "-pokysdk"

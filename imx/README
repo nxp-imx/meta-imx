@@ -1,4 +1,4 @@
-i.MX Linux Yocto Project BSP 4.14.92_1.1.0 Release
+i.MX Linux Yocto Project BSP 4.19.30_1.0.0 Release
 =====================================================
 
 The following boards were tested in this release.
@@ -31,7 +31,7 @@ Quick Start Guide
 See the i.MX Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX Linux BSP repo
-$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-sumo -m imx-4.14.62-1.0.0_ga.xml
+$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-thud -m imx-4.19.30-1.0.0_ga.xml
 
 Download the Yocto Project Layers:
 $: repo sync
