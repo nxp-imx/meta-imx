@@ -34,8 +34,8 @@ IMX_UAPI_HEADERS = " \
     pxp_dma.h \
     videodev2.h \
 "
+# FIXME: Restore imx_drm.h when supported
 IMX_UAPI_DRM_HEADERS = " \
-    imx_drm.h \
 "
 
 do_install() {
