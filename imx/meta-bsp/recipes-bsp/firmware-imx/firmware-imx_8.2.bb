@@ -6,7 +6,7 @@ SUMMARY = "Freescale IMX firmware"
 DESCRIPTION = "Freescale IMX firmware such as for the VPU"
 SECTION = "base"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=80c0478f4339af024519b3723023fe28"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fb0303e4ee8b0e71c094171e2272bd44"
 
 PE = "1"
 
