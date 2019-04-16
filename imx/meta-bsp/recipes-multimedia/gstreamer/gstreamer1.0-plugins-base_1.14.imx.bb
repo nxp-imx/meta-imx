@@ -31,7 +31,7 @@ SRC_URI = " \
     file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
     file://make-gio_unix_2_0-dependency-configurable.patch \
 "
-SRCREV = "f62f8ab685e549eefaecdb1e700239a5a408fcad" 
+SRCREV = "7ecc37ef09fff5de77e417a44debecd28218fbe1"
 
 inherit use-imx-headers
 
