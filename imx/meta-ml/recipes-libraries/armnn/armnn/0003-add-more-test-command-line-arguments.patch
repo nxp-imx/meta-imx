@@ -1,0 +1,75 @@
+From ba19ce3c785fb92077f6309db1125f1ef32cb08a Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Wed, 21 Nov 2018 15:14:24 -0500
+Subject: [PATCH] add more test command line arguments
+
+Upstream-Status: Inappropriate [TI only test code]
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ tests/InferenceTest.inl | 50 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
+
+diff --git a/tests/InferenceTest.inl b/tests/InferenceTest.inl
+index 16df7ba..5808edb 100644
+--- a/tests/InferenceTest.inl
++++ b/tests/InferenceTest.inl
+@@ -299,6 +299,56 @@ int ClassifierInferenceTestMain(int argc,
+     BOOST_ASSERT(inputBindingName);
+     BOOST_ASSERT(outputBindingName);
+ 
++    int count;
++    const char *p_input;
++    char inmodelname[500];
++    char outtensorname[500];
++
++    /* parse command line */
++    for (count = 1; count < argc; count++)
++    {
++        if (*(argv[count]) == '+')
++        {
++            p_input = argv[count] + 1;
++            switch (*(p_input))
++            {
++                case 'i':
++                case 'I':
++                    strcpy(inmodelname, p_input + 2);
++                    modelFilename = &inmodelname[0];
++                    std::cout << "Input model = " << modelFilename << std::endl;
++                    break;
++                case 'o':
++                case 'O':
++                    strcpy(outtensorname, p_input + 2);
++                    outputBindingName = &outtensorname[0];
++                    std::cout << "out tensor name = " << outputBindingName << std::endl;
++                    break;
++                default:
++                    break;
++            }
++        }
++        else if (*(argv[count]) == '-')
++        {
++            p_input = argv[count] + 1;
++            switch (*(p_input))
++            {
++                case '-':
++                    p_input = argv[count] + 2;
++                case 'h':
++                case 'H':
++                    std::cout <<"\nAdditional Options: " << std::endl;
++                    std::cout <<"  +i                                    Set user specified inference model name." << std::endl;
++                    std::cout <<"                                        If not set, default name is used." << std::endl;
++                    std::cout <<"  +o                                    Set user specified output tensor name." << std::endl;
++                    std::cout <<"                                        If not set, default name is used.\n" << std::endl;
++                    break;
++                default:
++                    break;
++            }
++        }
++    }
++
+     return InferenceTestMain(argc, argv, defaultTestCaseIds,
+         [=]
+         ()
+-- 
+1.9.1
+

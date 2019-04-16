@@ -1,0 +1,60 @@
+From 3691057b51010c1bd979998c460ad7b43f97496f Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Fri, 10 Aug 2018 11:02:14 -0400
+Subject: [PATCH] stdlib issue work around
+
+Upstream-Status: Pending
+Need to invesitate whether this is appropriate, or if cmake should be
+fixed. This is currently an open issue on the cmake project [1].
+
+[1] https://gitlab.kitware.com/cmake/cmake/issues/16291
+
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ cmake/GlobalConfig.cmake | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ mode change 100644 => 100755 cmake/GlobalConfig.cmake
+
+diff --git a/cmake/GlobalConfig.cmake b/cmake/GlobalConfig.cmake
+old mode 100644
+new mode 100755
+index 2dbeada..2b88c16
+--- a/cmake/GlobalConfig.cmake
++++ b/cmake/GlobalConfig.cmake
+@@ -47,6 +47,34 @@ elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /MP")
+     add_definitions(-DNOMINMAX=1 -DNO_STRICT=1)
+ endif()
++
++# Ensure that the default include system directories are added to the list of CMake implicit includes.
++# This workarounds an issue that happens when using GCC 6 and using system includes (-isystem).
++# For more details check: https://bugs.webkit.org/show_bug.cgi?id=161697
++macro(DETERMINE_GCC_SYSTEM_INCLUDE_DIRS _lang _compiler _flags _result)
++    file(WRITE "${CMAKE_BINARY_DIR}/CMakeFiles/dummy" "\n")
++    separate_arguments(_buildFlags UNIX_COMMAND "${_flags}")
++    execute_process(COMMAND ${_compiler} ${_buildFlags} -v -E -x ${_lang} -dD dummy
++                    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/CMakeFiles OUTPUT_QUIET
++                    ERROR_VARIABLE _gccOutput)
++    file(REMOVE "${CMAKE_BINARY_DIR}/CMakeFiles/dummy")
++    if ("${_gccOutput}" MATCHES "> search starts here[^\n]+\n *(.+) *\n *End of (search) list")
++        set(${_result} ${CMAKE_MATCH_1})
++        string(REPLACE "\n" " " ${_result} "${${_result}}")
++        separate_arguments(${_result})
++    endif ()
++endmacro()
++
++if (CMAKE_COMPILER_IS_GNUCC)
++   DETERMINE_GCC_SYSTEM_INCLUDE_DIRS("c" "${CMAKE_C_COMPILER}" "${CMAKE_C_FLAGS}" SYSTEM_INCLUDE_DIRS)
++   set(CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES ${CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES} ${SYSTEM_INCLUDE_DIRS})
++endif ()
++
++if (CMAKE_COMPILER_IS_GNUCXX)
++   DETERMINE_GCC_SYSTEM_INCLUDE_DIRS("c++" "${CMAKE_CXX_COMPILER}" "${CMAKE_CXX_FLAGS}" SYSTEM_INCLUDE_DIRS)
++   set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES} ${SYSTEM_INCLUDE_DIRS})
++endif ()
++
+ if("${CMAKE_SYSTEM_NAME}" STREQUAL Android)
+     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -llog")
+     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -llog")
+--
+1.9.1

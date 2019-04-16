@@ -1,0 +1,34 @@
+From 0e77de68df6116e1ec31484e6935b23a23934a56 Mon Sep 17 00:00:00 2001
+From: Daiane Angolini <daiane.angolini@nxp.com>
+Date: Fri, 12 Apr 2019 16:38:03 -0300
+Subject: [PATCH] Fixes strncpy error under GCC 8.2.1
+
+As suggested here:
+https://lists.linaro.org/pipermail/armnn-dev/2019-January/000003.html
+
+Upstream-Status: inappropriate
+
+Signed-off-by: Daiane Angolini <daiane.angolini@nxp.com>
+---
+ src/armnn/LayerSupport.cpp | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/src/armnn/LayerSupport.cpp b/src/armnn/LayerSupport.cpp
+index 12b3c40..722d6db 100644
+--- a/src/armnn/LayerSupport.cpp
++++ b/src/armnn/LayerSupport.cpp
+@@ -24,8 +24,9 @@ void CopyErrorMessage(char* truncatedString, const char* fullString, size_t maxL
+ {
+     if(truncatedString != nullptr)
+     {
+-        size_t copyLength = std::min(maxLength, strlen(fullString));
+-        std::strncpy(truncatedString, fullString, copyLength);
++        size_t copyLength = std::min(maxLength-1, strlen(fullString));
++        std::memcpy(truncatedString, fullString, copyLength);
++
+         // Ensure null-terminated string.
+         truncatedString[copyLength] = '\0';
+     }
+-- 
+2.17.1
+
