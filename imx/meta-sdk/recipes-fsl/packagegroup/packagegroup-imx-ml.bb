@@ -12,5 +12,3 @@ RDEPENDS_${PN} = " \
     armnn \
     tensorflow-lite \
 "
-
-RDEPENDS_${PN} += "armnn tensorflow-lite"
