@@ -10,7 +10,6 @@ PV = "19.02"
 PV_MAJOR = "${@d.getVar('PV',d,1).split('.')[0]}"
 
 BRANCH = "master"
-#SRCREV = "dbfb8549d4aa80115a7049b3e94788fb7a474d9b"
 SRCREV = "0324f48e64edb99a5c8d819394545d97e0c2ae97"
 SRCREV_tidl-api = "7e9a3942ec38efd64d45e34c10cba2f2938f5618"
 

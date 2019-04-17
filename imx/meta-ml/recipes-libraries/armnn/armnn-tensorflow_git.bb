@@ -6,12 +6,9 @@ SRC_URI = " \
     git://github.com/tensorflow/tensorflow.git;name=tensorflow;branch=r2.0 \
     git://github.com/ARM-software/armnn.git;name=armnn;subdir=${WORKDIR}/armnn;destsuffix=armnn \
 "
-
 PV = "2.0.0"
 
-#SRCREV_tensorflow = "c19e29306ce1777456b2dbb3a14f511edf7883a8"
 SRCREV_tensorflow = "2ae06ca49145bfee2e5e98c64ae5cbe064a58a33"
-#SRCREV_armnn = "c577f2c6a3b4ddb6ba87a882723c53a248afbeba"
 SRCREV_armnn = "0324f48e64edb99a5c8d819394545d97e0c2ae97"
 SRCREV_FORMAT = "tensorflow"
 
