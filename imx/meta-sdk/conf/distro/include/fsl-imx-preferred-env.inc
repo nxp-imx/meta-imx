@@ -14,11 +14,6 @@ PREFERRED_PROVIDER_virtual/kernel_imx = "linux-imx"
 #PREFERRED_PROVIDER_virtual/kernel_mx7ulp = "linux-imx"
 #PREFERRED_PROVIDER_virtual/kernel_imx7ulp_zebu = "linux-imx"
 
-# Use latest i.MX libdrm Version
-PREFERRED_VERSION_libdrm_mx6 = "2.4.97.imx"
-PREFERRED_VERSION_libdrm_mx7 = "2.4.97.imx"
-PREFERRED_VERSION_libdrm_mx8 = "2.4.97.imx"
-
 PREFERRED_VERSION_linux-libc-headers_imx ?= "4.19"
 
 # Extra audio support
