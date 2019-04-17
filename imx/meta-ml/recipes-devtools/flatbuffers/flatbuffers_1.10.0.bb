@@ -3,7 +3,6 @@ HOMEPAGE = "https://github.com/google/flatbuffers"
 SECTION = "console/tools"
 LICENSE = "Apache-2.0"
 
-#PACKAGE_BEFORE_PN = "${BPN}-native"
 DEPENDS += " ${BPN}-native"
 
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a873c5645c184d51e0f9b34e1d7cf559"
@@ -32,5 +31,3 @@ do_install_append() {
 }
 
 FILES_${PN} += "${libdir}"
-
-#BBCLASSEXTEND = "native nativesdk"
