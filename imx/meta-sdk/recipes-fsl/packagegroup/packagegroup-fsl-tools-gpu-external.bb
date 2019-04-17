@@ -16,8 +16,6 @@ VULKAN_TOOLS_mx8mm = ""
 
 # Common tools independent of the graphics backend
 SOC_TOOLS_GPU                          = "${VULKAN_TOOLS}"
-SOC_TOOLS_GPU_append_armv7a            = " arm-compute-library"
-SOC_TOOLS_GPU_append_aarch64           = " arm-compute-library"
 SOC_TOOLS_GPU_append_imxdrm            = " kmscube"
 
 # Tools for wayland and x11
