@@ -1,4 +1,4 @@
-i.MX Linux Yocto Project BSP 4.14.92_1.1.0 Release
+i.MX Linux Yocto Project BSP 4.14.98_2.0.0 Release
 =====================================================
 
 The following boards were tested in this release.
@@ -14,7 +14,7 @@ The following boards were tested in this release.
    * NXP i.MX 6Quad SABRE Smart Device (imx6qsabresd)
    * NXP i.MX 6Quad SABRE Auto (imx6qsabreauto)
    * NXP i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
-   * NXP i.MX 6DualLite SABRE Auto (iEmx6dlsabreauto)
+   * NXP i.MX 6DualLite SABRE Auto (imx6dlsabreauto)
    * NXP i.MX 6SoloLite EVK (imx6slevk)
    * NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
    * NXP i.MX 6SoloX SABRE Auto (imx6sxsabreauto)
@@ -22,7 +22,9 @@ The following boards were tested in this release.
    * NXP i.MX 6SOLO SABRE Auto (imx6solosabreauto )
    * NXP i.MX 7ULP EVK (imx7ulpevk)
    * NXP i.MX 8MQuad EVK (imx8mqevk)
+   * NXP i.MX 8MMini EVK (imx8mmevk)
    * NXP i.MX 8QuadMax LPDDR4 ARM2 (imx8qmlpddr4arm2)
+   * NXP i.MX 8QuadMax MEK (imx8qmmek)
    * NXP i.MX 8QuadXPlus LPDDR4 ARM2 (imx8qxplpddr4arm2)
    * NXP i.MX 8QuadXPlus MEK (imx8qxpmek)
 
@@ -31,7 +33,7 @@ Quick Start Guide
 See the i.MX Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX Linux BSP repo
-$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-sumo -m imx-4.14.62-1.0.0_ga.xml
+$: repo init -u git://source.codeaurora.org/external/imx/imx-manifest.git -b imx-linux-sumo -m imx-4.14.98-2.0.0_ga.xml
 
 Download the Yocto Project Layers:
 $: repo sync
@@ -176,7 +178,7 @@ Qt
 --
 Note that Qt has both a commercial and open source license options.  Make the decision about which license
 to use before starting work on custom Qt applications.  Once custom Qt applications are started with an open source
-Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
+Qt license the work cannot be used with a commercial Qt license.  Work with a legal representative to understand
 the differences between each license.
 
 Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
