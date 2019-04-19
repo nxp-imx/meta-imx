@@ -17,7 +17,7 @@ LOCALVERSION = "-${SRCBRANCH}"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 SRC_URI += "file://0001-mtd.h-Fix-build-break-bring-4.14-version-for-4.19-te.patch"
-SRCREV = "dc2f8894e4c1b25581a1857c840e735ff884da79"
+SRCREV = "526042ffcf252b2296a0f617cddba9aef24fdf1e"
 
 S = "${WORKDIR}/git"
 
