@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6dfb32a488e5fd6bae52fbf6c7ebb086 \
                     file://QUALCOMM_ATHEROS_LICENSE_AGREEMENT.pdf;md5=e629669cf17f6a2a6872e067582986e3 \
 "
 
-SRC_URI[md5sum] = "29e949d1037a464dcb7e71b45a97280e"
-SRC_URI[sha256sum] = "d61220c97aa1e5a875234a95934957b02274cb87c2be74e119e4f093907cf68f"
+SRC_URI[md5sum] = "02f7ef1037ac7c4459a4f3efc4a80cc5"
+SRC_URI[sha256sum] = "cbf8271c588b359d72f785b60bd9e3412989bb125b6e3c4eaf46967ef934a26d"
 
 inherit fsl-eula2-unpack2
 
