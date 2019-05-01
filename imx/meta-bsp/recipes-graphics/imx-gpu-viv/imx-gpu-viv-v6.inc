@@ -29,11 +29,13 @@ EXTRA_PROVIDES_append_imxgpu3d = " \
     virtual/libgles1 \
     virtual/libgles2 \
 "
+IMX_PROVIDES_OPENVX = ""
+IMX_PROVIDES_OPENVX_mx8 = "virtual/libopenvx"
+IMX_PROVIDES_OPENVX_mx8mm = ""
+
 EXTRA_PROVIDES_append_mx8 = " \
     virtual/libgbm \
-"
-EXTRA_PROVIDES_append_mx8qm = " \
-    virtual/libopenvx \
+    ${IMX_PROVIDES_OPENVX} \
 "
 PROVIDES += " \
     imx-gpu-viv \
@@ -312,7 +314,8 @@ FILES_libvulkan-imx = "${libdir}/vulkan/libvulkan_VSI${SOLIBS} ${libdir}/libSPIR
 FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/vulkan/libvulkan_VSI${SOLIBSDEV}"
 INSANE_SKIP_libvulkan-imx += "dev-deps dev-so"
 
-FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS}"
+FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS} \
+                       ${libdir}/libOvx12VXCBinary-evis${SOLIBS} ${libdir}/libOvx12VXCBinary-lite${SOLIBS}"
 FILES_libopenvx-imx-dev = "${includedir}/VX ${libdir}/libopenVX${SOLIBSDEV}"
 
 FILES_libgl-imx = "${libdir}/libGL${REALSOLIBS}"
