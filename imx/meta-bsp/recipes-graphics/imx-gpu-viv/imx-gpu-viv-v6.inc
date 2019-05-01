@@ -81,6 +81,7 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	imx-gpu-viv-demos \
 	libvulkan-imx libvulkan-imx-dev \
 	libopenvx-imx libopenvx-imx-dev \
+        libnn-imx \
 "
 python __anonymous () {
         has_vivante_kernel_driver_support = (d.getVar('MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT', True) or '0')
@@ -317,6 +318,8 @@ INSANE_SKIP_libvulkan-imx += "dev-deps dev-so"
 FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS} \
                        ${libdir}/libOvx12VXCBinary-evis${SOLIBS} ${libdir}/libOvx12VXCBinary-lite${SOLIBS}"
 FILES_libopenvx-imx-dev = "${includedir}/VX ${libdir}/libopenVX${SOLIBSDEV}"
+
+FILES_libnn-imx = "${libdir}/libNNGPUBinary-*${SOLIBS} ${libdir}/libNNVXCBinary-*${SOLIBS} ${libdir}/libneuralnetworks${SOLIBS}"
 
 FILES_libgl-imx = "${libdir}/libGL${REALSOLIBS}"
 FILES_libgl-imx-dev = "${libdir}/libGL${SOLIBSDEV} ${includedir}/GL"
