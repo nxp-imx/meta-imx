@@ -23,19 +23,18 @@ DEPENDS_append_imxdrm = " libdrm wayland"
 # We depend on mesa to fill in what is missing.
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'mesa', '', d)}"
 
-EXTRA_PROVIDES = ""
+IMX_PROVIDES_OPENVX = ""
+IMX_PROVIDES_OPENVX_mx8 = "virtual/libopenvx"
+IMX_PROVIDES_OPENVX_mx8mm = ""
+
+EXTRA_PROVIDES = "${IMX_PROVIDES_OPENVX}"
 EXTRA_PROVIDES_append_imxgpu3d = " \
     virtual/libgl \
     virtual/libgles1 \
     virtual/libgles2 \
 "
-IMX_PROVIDES_OPENVX = ""
-IMX_PROVIDES_OPENVX_mx8 = "virtual/libopenvx"
-IMX_PROVIDES_OPENVX_mx8mm = ""
-
 EXTRA_PROVIDES_append_mx8 = " \
     virtual/libgbm \
-    ${IMX_PROVIDES_OPENVX} \
 "
 PROVIDES += " \
     imx-gpu-viv \
@@ -81,7 +80,7 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	imx-gpu-viv-demos \
 	libvulkan-imx libvulkan-imx-dev \
 	libopenvx-imx libopenvx-imx-dev \
-        libnn-imx \
+	libnn-imx \
 "
 python __anonymous () {
         has_vivante_kernel_driver_support = (d.getVar('MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT', True) or '0')
@@ -315,11 +314,10 @@ FILES_libvulkan-imx = "${libdir}/vulkan/libvulkan_VSI${SOLIBS} ${libdir}/libSPIR
 FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/vulkan/libvulkan_VSI${SOLIBSDEV}"
 INSANE_SKIP_libvulkan-imx += "dev-deps dev-so"
 
-FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS} \
-                       ${libdir}/libOvx12VXCBinary-evis${SOLIBS} ${libdir}/libOvx12VXCBinary-lite${SOLIBS}"
-FILES_libopenvx-imx-dev = "${includedir}/VX ${libdir}/libopenVX${SOLIBSDEV}"
+FILES_libopenvx-imx = "${libdir}/libOpenVX*${SOLIBS} ${libdir}/libOvx*${SOLIBS}"
+FILES_libopenvx-imx-dev = "${includedir}/VX"
 
-FILES_libnn-imx = "${libdir}/libNNGPUBinary-*${SOLIBS} ${libdir}/libNNVXCBinary-*${SOLIBS} ${libdir}/libneuralnetworks${SOLIBS}"
+FILES_libnn-imx = "${libdir}/libNN*${SOLIBS} ${libdir}/libneuralnetworks${SOLIBS}"
 
 FILES_libgl-imx = "${libdir}/libGL${REALSOLIBS}"
 FILES_libgl-imx-dev = "${libdir}/libGL${SOLIBSDEV} ${includedir}/GL"
