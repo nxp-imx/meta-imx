@@ -10,7 +10,7 @@ inherit meson
 
 S = "${WORKDIR}/git"
 
-SRCREV = "${AUTOREV}"
+SRCREV = "1ebd49364f03372a710f010c01dedd0d79456413"
 SRC_URI = "git://github.com/vkmark/vkmark;protocol=https"
 SRC_URI += "file://0001-scenes-Use-depth-format-supported-by-i.MX.patch"
 
