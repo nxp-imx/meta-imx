@@ -16,6 +16,9 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[benchmark] = "benchmark_tests=1,benchmark_tests=0"
 PACKAGECONFIG[validation] = "validation_tests=1,validation_tests=0"
 PACKAGECONFIG[opencl] = "opencl=1,opencl=0,opencl-headers virtual/opencl-icd"
+PACKAGECONFIG[gles] = "gles_compute=1,gles_compute=0"
+PACKAGECONFIG[embed] = "embed_kernels=1,embed_kernels=0"
+PACKAGECONFIG[neon] = "neon=1,neon=0"
 
 # Specify any options you want to pass to scons using EXTRA_OESCONS:
 EXTRA_OESCONS = "${PARALLEL_MAKE} extra_cxx_flags='-fPIC' build=native ${PACKAGECONFIG_CONFARGS}"
