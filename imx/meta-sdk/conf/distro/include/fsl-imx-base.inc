@@ -55,25 +55,6 @@ https://.*/.*    http://downloads.yoctoproject.org/mirror/sources/ \n"
 
 CONNECTIVITY_CHECK_URIS ?= "https://www.example.com/"
 
-SANITY_TESTED_DISTROS ?= " \
-            poky-2.2 \n \
-            poky-2.3 \n \
-            poky-2.4 \n \
-            ubuntu-12.04 \n \
-            ubuntu-15.04 \n \
-            ubuntu-16.04 \n \
-            ubuntu-16.10 \n \
-            ubuntu-17.04 \n \
-            fedora-24 \n \
-            fedora-25 \n \
-            fedora-26 \n \
-            centos-7 \n \
-            debian-8 \n \
-            debian-9 \n \
-            opensuse-42.1 \n \
-            opensuse-42.2 \n \
-            "
-
 # Default hash policy for distro
 BB_SIGNATURE_HANDLER ?= 'OEBasicHash'
 #
