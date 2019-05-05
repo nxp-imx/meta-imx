@@ -18,6 +18,11 @@ FILES_${PN} = " /unit_tests \
                  ${datadir}/imx-mm/audio-codec/asrc \
 "
 
+do_install_append() {
+    chmod a+x ${D}/unit_tests/DSPC_ASRC/asrc-test
+}
+
+INSANE_SKIP_${PN} = "file-rdeps"
 INSANE_SKIP_${PN}-dev = "dev-elf"
 
 COMPATIBLE_MACHINE = "(mx8)"
