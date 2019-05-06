@@ -306,7 +306,7 @@ INSANE_SKIP_libgal-imx += "build-deps"
 
 FILES_libvsc-imx = "${libdir}/libVSC${SOLIBS}"
 
-FILES_libgbm-imx_mx8           = "${libdir}/libgbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
+FILES_libgbm-imx_mx8           = "${libdir}/libgbm${SOLIBS} ${libdir}/libgbm_viv${SOLIBS}"
 FILES_libgbm-imx-dev_mx8       = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
 RDEPENDS_libgbm-imx_append_mx8 = " libdrm"
 
