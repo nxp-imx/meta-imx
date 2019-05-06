@@ -4,26 +4,20 @@ LICENSE = "Proprietary"
 SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb0303e4ee8b0e71c094171e2272bd44"
 
+SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+
+SRC_URI[md5sum] = "e76940c531d986e0e998b2988e2cf65c"
+SRC_URI[sha256sum] = "ecf494792801ac330a15a845364bce5f50c1825a550deab14007c2a131ddea98"
+
 inherit fsl-eula-unpack autotools pkgconfig
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
-S = "${WORKDIR}/${PN}-${PV}"
+EXTRA_OECONF = "--enable-armv8 --libdir=${libdir} --bindir=/unit_tests"
 
-EXTRA_OECONF = "--enable-armv8 --libdir=/usr/lib --bindir=/unit_tests"
-
-SRC_URI[md5sum] = "f9983bcc03ff5ca9de2f2fc3ac149031"
-SRC_URI[sha256sum] = "e6a13dd33fd3278391b2a2b73224b1413c661c1cf033a61d3d0002e5de1ee906"
-
-FILES_${PN} = " /unit_tests \
-                 ${datadir}/imx-mm/audio-codec/asrc \
+FILES_${PN} += " /unit_tests \
+                 ${libdir} \
+                 ${datadir}/imx-mm \
 "
 
-do_install_append() {
-    chmod a+x ${D}/unit_tests/DSPC_ASRC/asrc-test
-}
-
-INSANE_SKIP_${PN} = "file-rdeps"
-INSANE_SKIP_${PN}-dev = "dev-elf"
+INSANE_SKIP_${PN} = "already-stripped"
 
 COMPATIBLE_MACHINE = "(mx8)"
-
