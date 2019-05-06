@@ -52,11 +52,20 @@ https://.*/.*    http://downloads.yoctoproject.org/mirror/sources/ \n"
 # fetch from the network (and warn you if not). To disable the test set
 # the variable to be empty.
 # Git example url: git://git.yoctoproject.org/yocto-firewall-test;protocol=git;rev=master
-
 CONNECTIVITY_CHECK_URIS ?= "https://www.example.com/"
 
-# Default hash policy for distro
-BB_SIGNATURE_HANDLER ?= 'OEBasicHash'
+SANITY_TESTED_DISTROS ?= " \
+            poky-2.5 \n \
+            poky-2.6 \n \
+            ubuntu-16.04 \n \
+            ubuntu-18.04 \n \
+            fedora-28 \n \
+            centos-7 \n \
+            debian-8 \n \
+            debian-9 \n \
+            opensuse-42.3 \n \
+            "
+
 #
 # OELAYOUT_ABI allows us to notify users when the format of TMPDIR changes in
 # an incompatible way. Such changes should usually be detailed in the commit
