@@ -1,0 +1,41 @@
+Index: chromium-73.0.3683.103/ui/ozone/platform/wayland/BUILD.gn
+===================================================================
+--- chromium-73.0.3683.103.orig/ui/ozone/platform/wayland/BUILD.gn
++++ chromium-73.0.3683.103/ui/ozone/platform/wayland/BUILD.gn
+@@ -154,7 +154,9 @@ source_set("wayland") {
+ source_set("wayland_unittests") {
+   testonly = true
+ 
+-  assert(use_wayland_gbm)
++  if (use_wayland_gbm) {
++    assert(use_wayland_gbm)
++  }
+ 
+   sources = [
+     "gpu/wayland_surface_factory_unittest.cc",
+@@ -186,18 +188,20 @@ source_set("wayland_unittests") {
+     "//ui/events/ozone:events_ozone_layout",
+     "//ui/ozone:platform",
+     "//ui/ozone:test_support",
+-    "//ui/ozone/common/linux:gbm",
+   ]
++  if (use_wayland_gbm) {
++    deps += [ "//ui/ozone/common/linux:gbm" ]
++  }
+ 
+   import("//ui/base/ui_features.gni")
+   if (use_xkbcommon) {
+     deps += [ "//ui/events/keycodes:xkb" ]
+   }
+ 
+-  defines = [
+-    "WL_HIDE_DEPRECATED",
+-    "WAYLAND_GBM",
+-  ]
++  defines = [ "WL_HIDE_DEPRECATED" ]
++  if (use_wayland_gbm) {
++    defines += [ "WAYLAND_GBM" ]
++  }
+ }
+ 
+ fuzzer_test("wayland_buffer_fuzzer") {
