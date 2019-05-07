@@ -12,7 +12,10 @@
 # By default this script does nothing.
 
 # Set THP as madvise mode
-echo madvise >/sys/kernel/mm/transparent_hugepage/enabled
+if [ -e /sys/kernel/mm/transparent_hugepage/enabled ]
+then
+    echo madvise >/sys/kernel/mm/transparent_hugepage/enabled
+fi
 
 # Set min_free_kbyte to avoid kernel dump from eth for 4K video playback use case
 CPUREV=$(cat /sys/devices/soc0/soc_id)
