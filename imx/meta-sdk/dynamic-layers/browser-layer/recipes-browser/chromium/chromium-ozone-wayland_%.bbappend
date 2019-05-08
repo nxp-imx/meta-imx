@@ -12,7 +12,7 @@ SRC_URI_append_mx8 = " file://0001-ozone-wayland-Add-const-keyword-to-getters.pa
                        file://0008-Separate-swap-buffer-and-presentation-callbacks.patch \
                        file://0009-Ease-the-buffer-swap-and-maintenance.patch \
                        file://0010-ozone-wayland-Don-t-wait-for-frame-callback-after-su.patch \
-                       file://0011-ozone-wayland-Fix-presentation-feedback-flags.patch \"
+                       file://0011-ozone-wayland-Fix-presentation-feedback-flags.patch"
 
 REQUIRED_DISTRO_FEATURES = "wayland"
 
