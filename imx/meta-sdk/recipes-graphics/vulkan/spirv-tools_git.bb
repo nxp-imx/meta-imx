@@ -10,22 +10,17 @@ S = "${WORKDIR}/git"
 DEST_DIR = "${S}/external" 
 SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;name=spirv-tools \
 	file://0001-tools-lesspipe-Allow-generic-shell.patch \
+	file://0001-Avoid-GCC8-warning-in-text_handler.cpp.-2197.patch \
 	git://github.com/KhronosGroup/SPIRV-Headers.git;name=spirv-headers;destsuffix=${DEST_DIR}/spirv-headers \
-	git://github.com/google/effcee.git;name=effcee;destsuffix=${DEST_DIR}/effcee \
-	git://github.com/google/re2.git;name=re2;destsuffix=${DEST_DIR}/re2 \
-	git://github.com/google/googletest.git;name=googletest;destsuffix=${DEST_DIR}/googletest \
 "
-SRCREV_spirv-tools = "167f1270a9ee641b17c016a545741e4aadfabe86"
-SRCREV_spirv-headers = "4618b86e9e4b027a22040732dfee35e399cd2c47"
-SRCREV_effcee = "8f0a61dc95e0df18c18e0ac56d83b3fa9d2fe90b"
-SRCREV_re2 = "2cf86e5ab6dcfe045a1f510c2b9a8b012a4158cd"
-SRCREV_googletest = "150613166524c474a8a97df4c01d46b72050c495"
+SRCREV_spirv-tools = "9d699f6d4038f432c55310d5d0b4a6d507c1b686"
+SRCREV_spirv-headers = "2434b89345a50c018c84f42a310b0fad4f3fd94f"
 
 inherit cmake python3native
 
 do_install_append() {
 	install -d ${D}/${includedir}/spirv
-	install -m 0644 ${DEST_DIR}/spirv-headers/include/spirv/1.2/* ${D}/${includedir}/spirv	
+	install -m 0644 ${DEST_DIR}/spirv-headers/include/spirv/unified1/* ${D}/${includedir}/spirv
 }
 
 FILES_SOLIBSDEV = ""
