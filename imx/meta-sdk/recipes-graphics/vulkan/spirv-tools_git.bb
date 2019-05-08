@@ -1,33 +1,32 @@
-SUMMARY = "SPIR-V Tools"
-DESCRIPTION = "SPIR-V is a binary intermediate language for representing \
-               graphical-shader stages and compute kernels for multiple \
-               Khronos APIs, such as OpenCL, OpenGL, and Vulkan."
+SUMMARY  = "The SPIR-V Tools project provides an API and commands for \
+processing SPIR-V modules"
+DESCRIPTION = "The project includes an assembler, binary module parser, \
+disassembler, validator, and optimizer for SPIR-V."
+LICENSE  = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SECTION = "graphics"
-HOMEPAGE = "https://www.khronos.org/registry/spir-v"
+
+S = "${WORKDIR}/git"
+DEST_DIR = "${S}/external" 
+SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;name=spirv-tools \
+	file://0001-tools-lesspipe-Allow-generic-shell.patch \
+	git://github.com/KhronosGroup/SPIRV-Headers.git;name=spirv-headers;destsuffix=${DEST_DIR}/spirv-headers \
+	git://github.com/google/effcee.git;name=effcee;destsuffix=${DEST_DIR}/effcee \
+	git://github.com/google/re2.git;name=re2;destsuffix=${DEST_DIR}/re2 \
+	git://github.com/google/googletest.git;name=googletest;destsuffix=${DEST_DIR}/googletest \
+"
+SRCREV_spirv-tools = "167f1270a9ee641b17c016a545741e4aadfabe86"
+SRCREV_spirv-headers = "4618b86e9e4b027a22040732dfee35e399cd2c47"
+SRCREV_effcee = "8f0a61dc95e0df18c18e0ac56d83b3fa9d2fe90b"
+SRCREV_re2 = "2cf86e5ab6dcfe045a1f510c2b9a8b012a4158cd"
+SRCREV_googletest = "150613166524c474a8a97df4c01d46b72050c495"
 
 inherit cmake python3native
 
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-
-S = "${WORKDIR}/git"
-SPIRV_HEADERS_LOCATION = "${S}/external/spirv-headers"
-HEADERS_VERSION = "unified1"
-
-SRCREV_spirv-tools = "9d699f6d4038f432c55310d5d0b4a6d507c1b686"
-SRCREV_spirv-headers = "2434b89345a50c018c84f42a310b0fad4f3fd94f"
-SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools;protocol=http;name=spirv-tools \
-           git://github.com/KhronosGroup/SPIRV-Headers;name=spirv-headers;destsuffix=${SPIRV_HEADERS_LOCATION} \
-           file://0002-spirv-lesspipe.sh-allow-using-generic-shells.patch \
-           file://0001-Avoid-GCC8-warning-in-text_handler.cpp.-2197.patch"
-
 do_install_append() {
-    if test -d ${SPIRV_HEADERS_LOCATION}/include/spirv/${HEADERS_VERSION}; then
-        install -d ${D}/${includedir}/SPIRV
-        install -m 0644 ${SPIRV_HEADERS_LOCATION}/include/spirv/${HEADERS_VERSION}/* ${D}/${includedir}/SPIRV
-    fi
+	install -d ${D}/${includedir}/spirv
+	install -m 0644 ${DEST_DIR}/spirv-headers/include/spirv/1.2/* ${D}/${includedir}/spirv	
 }
 
 FILES_SOLIBSDEV = ""
-FILES_${PN} += "${libdir}/libSPIRV*"
-INSANE_SKIP_${PN} = "dev-so"
+FILES_${PN} += "${libdir}/*.so"
