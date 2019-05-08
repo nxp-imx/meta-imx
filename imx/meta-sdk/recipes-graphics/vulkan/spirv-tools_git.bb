@@ -19,8 +19,8 @@ SRCREV_spirv-headers = "a5d33a253b47e183e54dcb9cf0e8ee729e88f6db"
 inherit cmake python3native
 
 do_install_append() {
-	install -d ${D}/${includedir}/spirv
-	install -m 0644 ${DEST_DIR}/spirv-headers/include/spirv/unified1/* ${D}/${includedir}/spirv
+	install -d ${D}/${includedir}/SPIRV
+	install -m 0644 ${DEST_DIR}/spirv-headers/include/spirv/unified1/* ${D}/${includedir}/SPIRV
 }
 
 FILES_SOLIBSDEV = ""
