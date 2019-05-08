@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;name=spirv-tools \
 	git://github.com/KhronosGroup/SPIRV-Headers.git;name=spirv-headers;destsuffix=${DEST_DIR}/spirv-headers \
 "
 SRCREV_spirv-tools = "9d699f6d4038f432c55310d5d0b4a6d507c1b686"
-SRCREV_spirv-headers = "2434b89345a50c018c84f42a310b0fad4f3fd94f"
+SRCREV_spirv-headers = "a5d33a253b47e183e54dcb9cf0e8ee729e88f6db"
 
 inherit cmake python3native
 
