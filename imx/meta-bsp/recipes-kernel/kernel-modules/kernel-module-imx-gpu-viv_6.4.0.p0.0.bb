@@ -14,7 +14,7 @@ SRC_URI = " \
     ${KERNEL_SRC};branch=${SRCBRANCH};subpath=drivers/mxc/gpu-viv;destsuffix=git/src \
     file://Add-makefile.patch \
 "
-SRCREV = "86c2535f6b255afb667b656f12829de3489d29e7"
+SRCREV = "15b59ce5968ae4dc80afd845e5732a080fb28dc4"
 
 S = "${WORKDIR}/git"
 
