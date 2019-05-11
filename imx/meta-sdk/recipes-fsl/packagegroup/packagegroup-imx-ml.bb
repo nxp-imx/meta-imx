@@ -8,7 +8,13 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 
 inherit packagegroup
 
-RDEPENDS_${PN} = " \
+ML_PKGS = " \
     armnn \
     tensorflow-lite \
+"
+ML_PKGS_append_mx8qm = " \
+    tensorflow \
+"
+RDEPENDS_${PN} = " \
+    ${ML_PKGS} \
 "
