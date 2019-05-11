@@ -10,6 +10,5 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     armnn \
-    tensorflow \
     tensorflow-lite \
 "
