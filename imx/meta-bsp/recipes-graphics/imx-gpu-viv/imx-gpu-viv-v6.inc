@@ -1,4 +1,4 @@
-include recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
+require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 EXTRA_PROVIDES_remove = "virtual/libopenvx"
 PROVIDES_OPENVX       = ""
