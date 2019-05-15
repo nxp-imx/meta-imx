@@ -14,6 +14,7 @@ UBOOT_MAKE_TARGET_mxs ?= "u-boot.sb"
 
 UBOOT_SUFFIX ?= "imx"
 UBOOT_SUFFIX_mxs ?= "sb"
+UBOOT_SUFFIX_mx8 ?= "bin"
 
 UBOOT_ENTRYPOINT_mxs = "0x40008000"
 UBOOT_ENTRYPOINT_mx51  = "0x90008000"
