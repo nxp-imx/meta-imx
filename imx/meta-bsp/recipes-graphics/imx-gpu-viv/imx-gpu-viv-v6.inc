@@ -16,6 +16,7 @@ FILES_libvulkan-imx = "${libdir}/vulkan/libvulkan_VSI${SOLIBS} ${libdir}/libSPIR
 
 FILES_libopenvx-imx = "${libdir}/libOpenVX*${SOLIBS} ${libdir}/libOvx*${SOLIBS}"
 FILES_libopenvx-imx-dev = "${includedir}/VX"
+RDEPENDS_libopenvx-imx = "libnn-imx"
 
 FILES_libnn-imx = "${libdir}/libNN*${SOLIBS} ${libdir}/libneuralnetworks${SOLIBS}"
 
