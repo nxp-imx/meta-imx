@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b98f636daed34d12d11e25f3185c0204"
 
 SRC_URI = "git://github.com/Unarmed1000/RapidVulkan;protocol=https \
 "
-SRCREV = "4d1280027d2c5a5b2d01886504a9ab6f5aac928a"
+SRCREV = "4f4ad122c33db16d98f6c0e521a53b61f1ff6777"
 
 S = "${WORKDIR}/git"
 
