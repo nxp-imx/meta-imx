@@ -18,4 +18,4 @@ GN_ARGS += ' \
 GN_ARGS_append_mx6 = " use_system_minigbm=false use_wayland_gbm=false"
 GN_ARGS_append_mx7 = " use_system_minigbm=false use_wayland_gbm=false"
 
-CHROMIUM_EXTRA_ARGS_append = "--disable-features=VizDisplayCompositor --in-process-gpu"
+CHROMIUM_EXTRA_ARGS_append = " --disable-features=VizDisplayCompositor --in-process-gpu"
