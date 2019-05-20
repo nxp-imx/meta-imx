@@ -67,6 +67,7 @@ SOC_TARGET_mx8qm  = "iMX8QM"
 SOC_TARGET_mx8qxp = "iMX8QX"
 SOC_TARGET_mx8mq  = "iMX8M"
 SOC_TARGET_mx8mm  = "iMX8MM"
+SOC_TARGET_mx8mn  = "iMX8MN"
 
 SOC_DIR ?= "${SOC_TARGET}"
 SOC_DIR_mx8m = "iMX8M"
@@ -80,7 +81,7 @@ IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi'
 S = "${WORKDIR}/git"
 
 do_compile () {
-    if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" ]; then
+    if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" -o "${SOC_TARGET}" = "iMX8MN" ]; then
         echo 8MQ/8MM boot binary build
         SOC_DIR="iMX8M"
         for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
@@ -155,7 +156,7 @@ do_deploy () {
 
     # copy the tool mkimage to deploy path and sc fw, dcd and uboot
     install -m 0644 ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-    if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" ]; then
+    if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" -o "${SOC_TARGET}" = "iMX8MN" ]; then
         SOC_DIR="iMX8M"
         install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         for ddr_firmware in ${DDR_FIRMWARE_NAME}; do

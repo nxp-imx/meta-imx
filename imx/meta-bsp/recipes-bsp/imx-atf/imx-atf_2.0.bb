@@ -24,6 +24,7 @@ SOC_ATF_mx8qm = "imx8qm"
 SOC_ATF_mx8qxp = "imx8qx"
 SOC_ATF_mx8mq = "imx8mq"
 SOC_ATF_mx8mm = "imx8mm"
+SOC_ATF_mx8mn = "imx8mn"
 
 SYSROOT_DIRS += "/boot"
 
