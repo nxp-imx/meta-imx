@@ -87,9 +87,11 @@ compile_mx8m() {
     done
     cp ${DEPLOY_DIR_IMAGE}/signed_dp_imx8m.bin               ${BOOT_STAGING}
     cp ${DEPLOY_DIR_IMAGE}/signed_hdmi_imx8m.bin             ${BOOT_STAGING}
-    cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${BOOT_STAGING}/u-boot-spl.bin
+    cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${BOOT_STAGING}/u-boot-spl.bin
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${UBOOT_DTB_NAME}   ${BOOT_STAGING}
-    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${UBOOT_CONFIG}    ${BOOT_STAGING}/u-boot-nodtb.bin
+    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${BOOT_STAGING}/u-boot-nodtb.bin
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mkimage_uboot       ${BOOT_STAGING}
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
     cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${BOOT_STAGING}/u-boot.bin
@@ -100,31 +102,37 @@ compile_mx8() {
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
     cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${BOOT_STAGING}/u-boot.bin
     if ${DEPLOY_OPTEE}; then
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${BOOT_STAGING}/u-boot-spl.bin
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${BOOT_STAGING}/u-boot-spl.bin
     fi
-    cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_0_TCM_rpmsg_lite_pingpong_rtos_linux_remote_m40.bin ${BOOT_STAGING}/m40_tcm.bin
-    cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_1_TCM_rpmsg_lite_pingpong_rtos_linux_remote_m41.bin ${BOOT_STAGING}/m41_tcm.bin
-    cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_0_TCM_rpmsg_lite_pingpong_rtos_linux_remote_m40.bin ${BOOT_STAGING}/m4_image.bin
-    cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_1_TCM_rpmsg_lite_pingpong_rtos_linux_remote_m41.bin ${BOOT_STAGING}/m4_1_image.bin
+    cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_0_TCM_rpmsg_lite_pingpong_rtos_linux_remote_m40.bin \
+                                                             ${BOOT_STAGING}/m40_tcm.bin
+    cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_1_TCM_rpmsg_lite_pingpong_rtos_linux_remote_m41.bin \
+                                                             ${BOOT_STAGING}/m41_tcm.bin
+    cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_0_TCM_rpmsg_lite_pingpong_rtos_linux_remote_m40.bin \
+                                                             ${BOOT_STAGING}/m4_image.bin
+    cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_1_TCM_rpmsg_lite_pingpong_rtos_linux_remote_m41.bin \
+                                                             ${BOOT_STAGING}/m4_1_image.bin
     cp ${DEPLOY_DIR_IMAGE}/mx8qm-ahab-container.img ${BOOT_STAGING}
 }
 compile_mx8x() {
     bbnote 8QX boot binary build
-    cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_srtm_demo.bin ${BOOT_STAGING}/m40_tcm.bin
-    cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_srtm_demo.bin ${BOOT_STAGING}/m4_image.bin
-    cp ${DEPLOY_DIR_IMAGE}/mx8qx-ahab-container.img ${BOOT_STAGING}
+    cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_srtm_demo.bin       ${BOOT_STAGING}/m40_tcm.bin
+    cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_srtm_demo.bin       ${BOOT_STAGING}/m4_image.bin
+    cp ${DEPLOY_DIR_IMAGE}/mx8qx-ahab-container.img          ${BOOT_STAGING}
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${BOOT_STAGING}/scfw_tcm.bin
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
     cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${BOOT_STAGING}/u-boot.bin
     if ${DEPLOY_OPTEE}; then
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${BOOT_STAGING}/u-boot-spl.bin
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${BOOT_STAGING}/u-boot-spl.bin
     fi
 }
 do_compile() {
     compile_${SOC_FAMILY}
     # Copy TEE binary to SoC target folder to mkimage
     if ${DEPLOY_OPTEE}; then
-        cp ${DEPLOY_DIR_IMAGE}/tee.bin             ${BOOT_STAGING}
+        cp ${DEPLOY_DIR_IMAGE}/tee.bin                       ${BOOT_STAGING}
     fi
     # mkimage for i.MX8
     for target in ${IMXBOOT_TARGETS}; do
@@ -145,7 +153,8 @@ do_install () {
 
 deploy_mx8m() {
     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${BOOT_TOOLS}
+    install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         install -m 0644 ${DEPLOY_DIR_IMAGE}/${ddr_firmware}  ${DEPLOYDIR}/${BOOT_TOOLS}
     done
@@ -163,7 +172,8 @@ deploy_mx8() {
     install -m 0644 ${BOOT_STAGING}/m4_1_image.bin           ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
     if ${DEPLOY_OPTEE}; then
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
     fi
 }
 deploy_mx8x() {
@@ -173,7 +183,8 @@ deploy_mx8x() {
     install -m 0644 ${BOOT_STAGING}/m4_image.bin             ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
     if ${DEPLOY_OPTEE}; then
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
     fi
 }
 do_deploy() {
