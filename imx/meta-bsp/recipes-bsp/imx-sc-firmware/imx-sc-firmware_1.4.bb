@@ -8,8 +8,8 @@ SECTION = "BSP"
 
 inherit fsl-eula2-unpack2 pkgconfig deploy
 
-SRC_URI[md5sum] = "33e4db133fc206f55f3aece7d9366b55"
-SRC_URI[sha256sum] = "c37ef062ac60ac110b4ccb9b4fddcbe5e2a6d68d30f7520e916c48bc92d9108e"
+SRC_URI[md5sum] = "684c67e5f8d2fb66a57fc31b65ba86ab"
+SRC_URI[sha256sum] = "733551937aed2ccf65ef307c5a904068f6eb28db5145e4d48e224252345b6dcc"
 
 BOARD_TYPE ?= "mek"
 SC_FIRMWARE_NAME ?= "mx8qm-mek-scfw-tcm.bin"
