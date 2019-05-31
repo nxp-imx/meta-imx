@@ -4,7 +4,7 @@ FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-multimedia/
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRCBRANCH = "imx-1.14.x"
-SRCREV = "91a10a9d20385b3959557ddae2b30441206fb07f"
+SRCREV = "5e8cc757e4fec72ee007ac12fab2d1333fce1dc9"
 
 PV = "1.14.4.imx"
 
