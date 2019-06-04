@@ -13,7 +13,7 @@ DEPENDS += "gstreamer1.0-plugins-base virtual/kernel libcap zlib bzip2 \
 inherit gettext
 
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
-SRCBRANCH = "imx-1.14.x"
+SRCBRANCH = "MM_04.04.06_1906_L4.19.35"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
