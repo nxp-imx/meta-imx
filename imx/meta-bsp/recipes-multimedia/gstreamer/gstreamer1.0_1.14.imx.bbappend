@@ -2,7 +2,7 @@ inherit ptest
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
 
-SRCBRANCH = "imx-1.14.x"
+SRCBRANCH = "MM_04.04.06_1906_L4.19.35"
 SRC_URI_append = " \
     file://add-a-target-to-compile-tests.patch \
     file://run-ptest \

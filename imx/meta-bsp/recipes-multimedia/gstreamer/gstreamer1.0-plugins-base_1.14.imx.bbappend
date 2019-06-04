@@ -3,7 +3,7 @@ DEPENDS_append_imxgpu2d = " virtual/libg2d"
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-multimedia/gstreamer/${PN}-1.14.imx:"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRCBRANCH = "imx-1.14.x"
+SRCBRANCH = "MM_04.04.06_1906_L4.19.35"
 SRCREV = "5e8cc757e4fec72ee007ac12fab2d1333fce1dc9"
 
 PV = "1.14.4.imx"
