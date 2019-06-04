@@ -3,6 +3,6 @@
 IMX_MKIMAGE_SRC ?= "git://source.codeaurora.org/external/imx/imx-mkimage.git;protocol=https"
 SRCBRANCH = "master"
 SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH}"
-SRCREV = "2a3ec5e2c4f7aae5409d172de12e228687520701"
+SRCREV = "6c9e69e63bfba38c744909cf1bf487992a38aef1"
 
 DEPENDS = "zlib-native openssl-native"
