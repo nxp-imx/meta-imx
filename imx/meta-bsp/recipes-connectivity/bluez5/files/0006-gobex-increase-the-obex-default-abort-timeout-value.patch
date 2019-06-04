@@ -6,6 +6,7 @@ Subject: [PATCH] gobex: increase the obex default/abort timeout value.
 Increase the obex default/abort timeout due to avoid
 response timeout for some phone obex opp test.
 
+Upstream-Status: Pending
 Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
 ---
  gobex/gobex.c | 4 ++--
