@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://CORE/HDD/src/wlan_hdd_main.c;beginline=1;endline=20;m
 QCACLD_SRC ?= "git://source.codeaurora.org/external/imx/qcacld-2.0-imx.git;protocol=https"
 
 SRC_URI = "${QCACLD_SRC};branch=IMX_CNSS.LEA.NRT_3.0"
-SRCREV = "193cae37830f02b90e09a68a963a5f87139e317b"
+SRCREV = "2f4ae376ce3db65c3270a4bf7e804f3e86052c8c"
 
 S = "${WORKDIR}/git"
 
