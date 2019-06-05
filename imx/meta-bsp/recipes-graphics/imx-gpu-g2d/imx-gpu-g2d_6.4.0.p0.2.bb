@@ -1,6 +1,6 @@
 require recipes-graphics/imx-gpu-g2d/imx-gpu-g2d_6.2.4.p1.8.bb
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=fb0303e4ee8b0e71c094171e2272bd44" 
+LIC_FILES_CHKSUM = "file://COPYING;md5=fb0303e4ee8b0e71c094171e2272bd44"
 
 FSLBIN_NAME_arm = "${PN}-${PV}-${TARGET_ARCH}"
 
