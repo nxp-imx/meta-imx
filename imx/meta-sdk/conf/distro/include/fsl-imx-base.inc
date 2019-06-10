@@ -1,8 +1,8 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.19-thud"
+DISTRO_VERSION = "4.19-warrior"
 
-DISTRO_CODENAME = "thud"
+DISTRO_CODENAME = "warrior"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
