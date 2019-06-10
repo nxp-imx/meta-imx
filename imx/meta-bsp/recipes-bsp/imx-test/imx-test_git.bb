@@ -8,8 +8,7 @@ SECTION = "base"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-DEPENDS  = "virtual/kernel alsa-lib libdrm"
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
+DEPENDS  = "alsa-lib libdrm"
 DEPENDS_append_mx6 = " imx-lib"
 DEPENDS_append_mx7 = " imx-lib"
 DEPENDS_append_imxvpu = " virtual/imxvpu"
@@ -17,16 +16,16 @@ DEPENDS_append_imxvpu = " virtual/imxvpu"
 PE = "1"
 PV = "7.0+${SRCPV}"
 
-SRCBRANCH = "imx_4.14.78_1.0.0_ga"
+SRCBRANCH = "imx_4.14.98_2.0.0_ga"
 IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
 SRC_URI_append = " file://memtool_profile "
 
-SRCREV = "04ec1d80407c8980a9099dc78e1f142a5fcf750f"
+SRCREV = "d32727a9d7ef2543729c149a713db24b8f5c2aa8"
 
 S = "${WORKDIR}/git"
 
-inherit module-base
+inherit module-base use-imx-headers
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
@@ -52,19 +51,13 @@ PACKAGECONFIG[vpu] = "HAS_VPU=true,HAS_VPU=false,virtual/imxvpu"
 
 do_compile() {
     CFLAGS="${TOOLCHAIN_OPTIONS}"
-    INC=" \
-        -I${STAGING_INCDIR} \
-        -I${S}/include \
-        -I${STAGING_KERNEL_BUILDDIR}/include/uapi \
-        -I${STAGING_KERNEL_BUILDDIR}/include \
-        -I${STAGING_KERNEL_DIR}/include/uapi \
-        -I${STAGING_KERNEL_DIR}/include \
-        -I${STAGING_KERNEL_DIR}/arch/arm/include \
-        -I${STAGING_KERNEL_DIR}/drivers/mxc/security/rng/include \
-        -I${STAGING_KERNEL_DIR}/drivers/mxc/security/sahara2/include"
     oe_runmake V=1 VERBOSE='' \
                CROSS_COMPILE=${TARGET_PREFIX} \
-               CC="${CC} ${INC} -L${STAGING_LIBDIR} ${LDFLAGS}" \
+               CC="${CC} ${LDFLAGS} \
+                    -I${S}/include \
+                    -I${STAGING_INCDIR} \
+                    -I${STAGING_INCDIR_IMX} \
+                    -L${STAGING_LIBDIR}" \
                LINUXPATH=${STAGING_KERNEL_DIR} \
                KBUILD_OUTPUT=${STAGING_KERNEL_BUILDDIR} \
                PLATFORM=${PLATFORM}

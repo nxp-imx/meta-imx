@@ -1,0 +1,37 @@
+From e2e72f8baaa7ee90f489e866befb6f4ce91ba533 Mon Sep 17 00:00:00 2001
+From: "i.MX Yocto Project Build" <lauren.post@nxp.com>
+Date: Mon, 14 Jan 2019 01:59:42 -0600
+Subject: [PATCH] imx-gst1.0-plugin: Update KERNEL_VERSION check
+
+It should be against v4.14 instead of v4.14.34
+
+Signed-off-by: i.MX Yocto Project Build <lauren.post@nxp.com>
+---
+ libs/gstimxcommon.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/libs/gstimxcommon.c b/libs/gstimxcommon.c
+index eb808b9..49eb3e2 100644
+--- a/libs/gstimxcommon.c
++++ b/libs/gstimxcommon.c
+@@ -38,7 +38,7 @@ unsigned long phy_addr_from_fd(int dmafd)
+   if (dmafd < 0)
+     return NULL;
+   
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 14, 34)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 14, 0)
+   fd = open(dev_ion, O_RDWR);
+   if(fd < 0) {
+     return NULL;
+@@ -83,7 +83,7 @@ unsigned long phy_addr_from_vaddr(void *vaddr, int size)
+   if (!vaddr)
+     return NULL;
+   
+-#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 14, 34)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 14, 0)
+   fd = open(dev_ion, O_RDWR);
+   if(fd < 0) {
+     return NULL;
+-- 
+2.7.4
+

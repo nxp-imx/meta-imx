@@ -1,0 +1,39 @@
+From 67b64408741c5956a5e7bd587985f83d78ddeaa2 Mon Sep 17 00:00:00 2001
+From: Eliad Peller <eliad@wizery.com>
+Date: Tue, 30 Jan 2018 15:16:22 +0800
+Subject: [PATCH 17/24] driver_nl80211: check 4-way handshake offload support
+
+Set the WPA_DRIVER_FLAGS_4WAY_HANDSHAKE flag if the
+driver indicates both 4-way handshake PSK and 1X support.
+Currently wpa_supplicant doesn't distinguish between 4-way
+handshake for 1x and PSK, but nl80211 API has different
+capabilities for each one.
+
+Upstream-Status: Backport [https://w1.fi/cgit/hostap/commit/?id=0ff08f96367eaedd7f0554c62d59b4a713a584b2]
+
+Signed-off-by: Eliad Peller <eliadx.peller@intel.com>
+Signed-off-by: Andrei Otcheretianski <andrei.otcheretianski@intel.com>
+---
+ src/drivers/driver_nl80211_capa.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/drivers/driver_nl80211_capa.c b/src/drivers/driver_nl80211_capa.c
+index 6adc3f6..3844739 100644
+--- a/src/drivers/driver_nl80211_capa.c
++++ b/src/drivers/driver_nl80211_capa.c
+@@ -362,6 +362,12 @@ static void wiphy_info_ext_feature_flags(struct wiphy_info_data *info,
+ 
+ 	if (ext_feature_isset(ext_features, len, NL80211_EXT_FEATURE_RRM))
+ 		capa->rrm_flags |= WPA_DRIVER_FLAGS_SUPPORT_RRM;
++
++	if (ext_feature_isset(ext_features, len,
++			      NL80211_EXT_FEATURE_4WAY_HANDSHAKE_STA_PSK) &&
++	    ext_feature_isset(ext_features, len,
++			      NL80211_EXT_FEATURE_4WAY_HANDSHAKE_STA_1X))
++		capa->flags |= WPA_DRIVER_FLAGS_4WAY_HANDSHAKE;
+ }
+ 
+ 
+-- 
+1.9.1
+

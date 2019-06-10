@@ -1,0 +1,38 @@
+From 4f7fd011b47cb65c58b0a1ffaa3830f0b63b5b1d Mon Sep 17 00:00:00 2001
+From: Ella <ella.feng@nxp.com>
+Date: Thu, 7 Mar 2019 17:18:26 +0800
+Subject: [PATCH] STDIO-844 No need to change the App's apiVersion to ICD
+ version
+
+There is no need to do so, otherwise we won't catch the App's error and
+Vulkan CTS will fail to reject the invalid api version.
+
+Date: 7th Mar, 2019
+Signed-off-by: Ella Feng <ella.feng@nxp.com>
+---
+ loader/loader.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/loader/loader.c b/loader/loader.c
+index 281851584..f2033b6ad 100644
+--- a/loader/loader.c
++++ b/loader/loader.c
+@@ -5741,6 +5741,7 @@ VKAPI_ATTR VkResult VKAPI_CALL terminator_CreateInstance(const VkInstanceCreateI
+         }
+ 
+         // Create an instance, substituting the version to 1.0 if necessary
++#if 0
+         VkApplicationInfo icd_app_info;
+         uint32_t icd_version_nopatch = VK_MAKE_VERSION(VK_VERSION_MAJOR(icd_version), VK_VERSION_MINOR(icd_version), 0);
+         uint32_t requested_version = pCreateInfo == NULL || pCreateInfo->pApplicationInfo == NULL ? VK_API_VERSION_1_0 : pCreateInfo->pApplicationInfo->apiVersion;
+@@ -5753,6 +5754,7 @@ VKAPI_ATTR VkResult VKAPI_CALL terminator_CreateInstance(const VkInstanceCreateI
+             icd_app_info.apiVersion = icd_version;
+             icd_create_info.pApplicationInfo = &icd_app_info;
+         }
++#endif
+         icd_result = ptr_instance->icd_tramp_list.scanned_list[i].CreateInstance(&icd_create_info, pAllocator, &(icd_term->instance));
+         if (VK_ERROR_OUT_OF_HOST_MEMORY == icd_result) {
+             // If out of memory, bail immediately.
+-- 
+2.21.0
+

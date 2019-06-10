@@ -23,7 +23,7 @@ Index: git/modules/ts/include/opencv2/ts.hpp
 ===================================================================
 --- git.orig/modules/ts/include/opencv2/ts.hpp
 +++ git/modules/ts/include/opencv2/ts.hpp
-@@ -611,7 +611,7 @@ protected:
+@@ -608,7 +608,7 @@ protected:
      }
  };
  
@@ -32,16 +32,8 @@ Index: git/modules/ts/include/opencv2/ts.hpp
  
  struct DefaultRngAuto
  {
-@@ -667,14 +667,14 @@ std::string findDataFile(const std::stri
- 
- #ifdef HAVE_OPENCL
- namespace ocl {
--void dumpOpenCLDevice();
-+CV_EXPORTS void dumpOpenCLDevice();
- }
- #define TEST_DUMP_OCL_INFO cvtest::ocl::dumpOpenCLDevice();
- #else
- #define TEST_DUMP_OCL_INFO
+@@ -671,7 +671,7 @@ private:
+ #endif
  #endif
  
 -void parseCustomOptions(int argc, char **argv);
@@ -66,18 +58,12 @@ Index: git/modules/ts/include/opencv2/ts/ts_ext.hpp
 ===================================================================
 --- git.orig/modules/ts/include/opencv2/ts/ts_ext.hpp
 +++ git/modules/ts/include/opencv2/ts/ts_ext.hpp
-@@ -9,10 +9,10 @@
+@@ -9,7 +9,7 @@
  #define OPENCV_TS_EXT_HPP
  
  namespace cvtest {
 -void checkIppStatus();
--extern bool skipUnstableTests;
--extern bool runBigDataTests;
--extern int testThreads;
 +CV_EXPORTS void checkIppStatus();
-+CV_EXPORTS extern bool skipUnstableTests;
-+CV_EXPORTS extern bool runBigDataTests;
-+CV_EXPORTS extern int testThreads;
- }
- 
- // check for required "opencv_test" namespace
+ extern bool skipUnstableTests;
+ extern bool runBigDataTests;
+ extern int testThreads;

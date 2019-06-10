@@ -1,7 +1,7 @@
-From a049bb15839557594713cb32e7d6bfe0e2127392 Mon Sep 17 00:00:00 2001
+From 80c48db2d2d1d355e204c454027a8983d1b52a62 Mon Sep 17 00:00:00 2001
 From: Yuqing Zhu <carol.zhu@nxp.com>
-Date: Fri, 20 Apr 2018 22:46:46 +0800
-Subject: [PATCH] Makefile.am: don't hardcode libtool name when running
+Date: Tue, 25 Dec 2018 13:56:12 +0800
+Subject: [PATCH] [PATCH] Makefile.am: don't hardcode libtool name when running
  introspection tools
 
 Do patch refine basing on commit: f1d9652351e7754c63003104eceb526af424c7e0
@@ -13,7 +13,6 @@ Signed-off-by: Yuqing Zhu <carol.zhu@nxp.com>
  gst-libs/gst/allocators/Makefile.am | 2 +-
  gst-libs/gst/app/Makefile.am        | 2 +-
  gst-libs/gst/audio/Makefile.am      | 2 +-
- gst-libs/gst/gl/Makefile.am         | 2 +-
  gst-libs/gst/pbutils/Makefile.am    | 2 +-
  gst-libs/gst/riff/Makefile.am       | 2 +-
  gst-libs/gst/rtp/Makefile.am        | 2 +-
@@ -21,10 +20,10 @@ Signed-off-by: Yuqing Zhu <carol.zhu@nxp.com>
  gst-libs/gst/sdp/Makefile.am        | 2 +-
  gst-libs/gst/tag/Makefile.am        | 2 +-
  gst-libs/gst/video/Makefile.am      | 2 +-
- 11 files changed, 11 insertions(+), 11 deletions(-)
+ 10 files changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/gst-libs/gst/allocators/Makefile.am b/gst-libs/gst/allocators/Makefile.am
-index 0edc0ae..d0d425d 100644
+index fa11983..caccbb1 100644
 --- a/gst-libs/gst/allocators/Makefile.am
 +++ b/gst-libs/gst/allocators/Makefile.am
 @@ -58,7 +58,7 @@ GstAllocators-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstallocators-@
@@ -62,19 +61,6 @@ index 2922245..7fb65f2 100644
  		--pkg gstreamer-@GST_API_VERSION@ \
  		--pkg gstreamer-base-@GST_API_VERSION@ \
  		--pkg-export gstreamer-audio-@GST_API_VERSION@ \
-diff --git a/gst-libs/gst/gl/Makefile.am b/gst-libs/gst/gl/Makefile.am
-index b04187f..576bf1c 100644
---- a/gst-libs/gst/gl/Makefile.am
-+++ b/gst-libs/gst/gl/Makefile.am
-@@ -205,7 +205,7 @@ GstGL-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstgl-@GST_API_VERSION@
- 		--include=Gst-@GST_API_VERSION@ \
- 		--include=GstBase-@GST_API_VERSION@ \
- 		--include=GstVideo-@GST_API_VERSION@ \
--		--libtool="$(top_builddir)/libtool" \
-+		--libtool="$(LIBTOOL)" \
- 		--pkg gstreamer-@GST_API_VERSION@ \
- 		--pkg gstreamer-base-@GST_API_VERSION@ \
- 		--pkg gstreamer-video-@GST_API_VERSION@ \
 diff --git a/gst-libs/gst/pbutils/Makefile.am b/gst-libs/gst/pbutils/Makefile.am
 index ae51993..35a6e44 100644
 --- a/gst-libs/gst/pbutils/Makefile.am
@@ -154,7 +140,7 @@ index 0247c33..c86515b 100644
  		--pkg gstreamer-base-@GST_API_VERSION@ \
  		--pkg-export gstreamer-tag-@GST_API_VERSION@ \
 diff --git a/gst-libs/gst/video/Makefile.am b/gst-libs/gst/video/Makefile.am
-index 1b74f37..0f7c07e 100644
+index 72f23cd..b65a6c5 100644
 --- a/gst-libs/gst/video/Makefile.am
 +++ b/gst-libs/gst/video/Makefile.am
 @@ -126,7 +126,7 @@ GstVideo-@GST_API_VERSION@.gir: $(INTROSPECTION_SCANNER) libgstvideo-@GST_API_VE
@@ -167,5 +153,5 @@ index 1b74f37..0f7c07e 100644
  		--pkg gstreamer-base-@GST_API_VERSION@ \
  		--pkg-export gstreamer-video-@GST_API_VERSION@ \
 -- 
-2.7.4
+1.9.1
 

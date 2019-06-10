@@ -24,6 +24,7 @@ PACKAGECONFIG_remove = " gles2"
 PACKAGECONFIG_remove_mx8mm = " vulkan"
 
 PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland-native wayland wayland-protocols"
+PACKAGECONFIG[vulkan]  = "--enable-vulkan,--disable-vulkan,vulkan-headers"
 
 # Disable introspection to fix [GstGL-1.0.gir] Error
 EXTRA_OECONF_append = " --disable-introspection"
@@ -40,14 +41,13 @@ SRC_URI_remove = "file://0001-Prepend-PKG_CONFIG_SYSROOT_DIR-to-pkg-config-outpu
 EXTRA_OECONF_remove = "WAYLAND_PROTOCOLS_SYSROOT_DIR=${RECIPE_SYSROOT}"
 
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
-SRCBRANCH = "MM_04.04.04_1811_L4.14.78_GA"
+SRCBRANCH = "MM_04.04.05_1902_L4.14.98_GA"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
-    file://0001-opencv-Fix-build-for-opencv-3.4.2.patch \
 "
 
-SRCREV = "7e8a87fcbf5bd44b6982f6d15f2d28aa5f49a6be" 
+SRCREV = "0191521ba226904e4b2f84c38e5f6ae75169a18a"
 
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
@@ -61,7 +61,7 @@ do_compile_prepend () {
     export GIR_EXTRA_LIBS_PATH="${B}/gst-libs/gst/ion/.libs"
 }
 
-PV = "1.14.0.imx"
+PV = "1.14.4.imx"
 
 S = "${WORKDIR}/git"
 

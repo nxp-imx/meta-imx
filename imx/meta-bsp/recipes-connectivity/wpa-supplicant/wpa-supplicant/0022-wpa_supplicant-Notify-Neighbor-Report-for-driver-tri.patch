@@ -1,0 +1,145 @@
+From 222c4a3e5dc5f75684ab526c8a99a11273c83853 Mon Sep 17 00:00:00 2001
+From: Chung-Hsien Hsu <stanley.hsu@cypress.com>
+Date: Thu, 17 May 2018 09:43:53 +0800
+Subject: [PATCH 22/24] wpa_supplicant: Notify Neighbor Report for
+ driver-triggered request
+
+Sending a Neighbor Report request can be triggered by either supplicant
+or device driver. This patch adds the notification of incoming Neighbor
+Report response for driver-triggered request.
+
+Upstream-Status: Pending
+
+Signed-off-by: Chung-Hsien Hsu <stanley.hsu@cypress.com>
+---
+ wpa_supplicant/wpa_supplicant.c | 99 ++++++++++++++++++++++++++++++++++-------
+ 1 file changed, 83 insertions(+), 16 deletions(-)
+
+diff --git a/wpa_supplicant/wpa_supplicant.c b/wpa_supplicant/wpa_supplicant.c
+index 7361ee9..81a52ea 100644
+--- a/wpa_supplicant/wpa_supplicant.c
++++ b/wpa_supplicant/wpa_supplicant.c
+@@ -6287,6 +6287,71 @@ void wpas_rrm_reset(struct wpa_supplicant *wpa_s)
+ 	wpa_s->rrm.next_neighbor_rep_token = 1;
+ }
+ 
++/*
++ * wpas_rrm_notify_neighbor_rep - Notify received neighbor report
++ * @wpa_s: Pointer to wpa_supplicant
++ * @neighbor_rep: Pointer to neighbor report elements
++ */
++void wpas_rrm_notify_neighbor_rep(struct wpa_supplicant *wpa_s,
++				  struct wpabuf *neighbor_rep)
++{
++	size_t len;
++	const u8 *data;
++
++	/*
++	 * Neighbor Report element (IEEE Std 802.11-2016: 9.4.2.37)
++	 * Element ID[1]
++	 * Length[1]
++	 * BSSID[6]
++	 * BSSID Information[4]
++	 * Operating Class[1]
++	 * Channel Number[1]
++	 * PHY Type[1]
++	 * Optional Subelements[variable]
++	 */
++#define NR_IE_MIN_LEN (ETH_ALEN + 4 + 1 + 1 + 1)
++
++	if (wpabuf_len(neighbor_rep) == 0) {
++		wpa_msg(wpa_s, MSG_INFO, RRM_EVENT_NEIGHBOR_REP_RXED
++			"No neighbors of the associated AP");
++		goto out;
++	}
++
++	data = wpabuf_head_u8(neighbor_rep);
++	len = wpabuf_len(neighbor_rep);
++
++	while (len >= 2 + NR_IE_MIN_LEN) {
++		const u8 *nr;
++		u8 nr_len = data[1];
++		const u8 *pos = data, *end;
++
++		if ((pos[0] != WLAN_EID_NEIGHBOR_REPORT) ||
++		    (nr_len < NR_IE_MIN_LEN) ||
++		    (2U + nr_len > len)) {
++			wpa_printf(MSG_DEBUG,
++				   "RRM: Invalid Neighbor Report element: "
++				   "id=%u len=%zu nr_len=%u",
++				   data[0], len, nr_len);
++			goto out;
++		}
++
++		pos += 2;
++		end = pos + nr_len;
++		nr = pos;
++
++		wpa_msg(wpa_s, MSG_INFO, RRM_EVENT_NEIGHBOR_REP_RXED
++			"bssid=" MACSTR
++			" info=0x%x op_class=%u chan=%u phy_type=%u",
++			MAC2STR(nr), WPA_GET_LE32(nr + ETH_ALEN),
++			nr[ETH_ALEN + 4], nr[ETH_ALEN + 5], nr[ETH_ALEN + 6]);
++
++		data = end;
++		len -= 2 + nr_len;
++	}
++
++out:
++	wpabuf_free(neighbor_rep);
++}
+ 
+ /*
+  * wpas_rrm_process_neighbor_rep - Handle incoming neighbor report
+@@ -6303,19 +6368,17 @@ void wpas_rrm_process_neighbor_rep(struct wpa_supplicant *wpa_s,
+ 	if (report_len < 1)
+ 		return;
+ 
+-	if (report[0] != wpa_s->rrm.next_neighbor_rep_token - 1) {
+-		wpa_printf(MSG_DEBUG,
+-			   "RRM: Discarding neighbor report with token %d (expected %d)",
+-			   report[0], wpa_s->rrm.next_neighbor_rep_token - 1);
+-		return;
+-	}
+-
+-	eloop_cancel_timeout(wpas_rrm_neighbor_rep_timeout_handler, &wpa_s->rrm,
+-			     NULL);
++	if (wpa_s->rrm.notify_neighbor_rep) {
++		if (report[0] != wpa_s->rrm.next_neighbor_rep_token - 1) {
++			wpa_printf(MSG_DEBUG,
++				   "RRM: Discarding neighbor report with token "
++				   "%d (expected %d)", report[0],
++				   wpa_s->rrm.next_neighbor_rep_token - 1);
++			return;
++		}
+ 
+-	if (!wpa_s->rrm.notify_neighbor_rep) {
+-		wpa_printf(MSG_ERROR, "RRM: Unexpected neighbor report");
+-		return;
++		eloop_cancel_timeout(wpas_rrm_neighbor_rep_timeout_handler,
++				     &wpa_s->rrm, NULL);
+ 	}
+ 
+ 	/* skipping the first byte, which is only an id (dialog token) */
+@@ -6325,10 +6388,14 @@ void wpas_rrm_process_neighbor_rep(struct wpa_supplicant *wpa_s,
+ 	wpabuf_put_data(neighbor_rep, report + 1, report_len - 1);
+ 	wpa_printf(MSG_DEBUG, "RRM: Notifying neighbor report (token = %d)",
+ 		   report[0]);
+-	wpa_s->rrm.notify_neighbor_rep(wpa_s->rrm.neighbor_rep_cb_ctx,
+-				       neighbor_rep);
+-	wpa_s->rrm.notify_neighbor_rep = NULL;
+-	wpa_s->rrm.neighbor_rep_cb_ctx = NULL;
++
++	if (wpa_s->rrm.notify_neighbor_rep) {
++		wpa_s->rrm.notify_neighbor_rep(wpa_s->rrm.neighbor_rep_cb_ctx,
++					       neighbor_rep);
++		wpa_s->rrm.notify_neighbor_rep = NULL;
++		wpa_s->rrm.neighbor_rep_cb_ctx = NULL;
++	} else
++		wpas_rrm_notify_neighbor_rep(wpa_s, neighbor_rep);
+ }
+ 
+ 
+-- 
+1.9.1
+

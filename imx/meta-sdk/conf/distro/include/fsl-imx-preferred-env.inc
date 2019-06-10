@@ -14,7 +14,7 @@ PREFERRED_PROVIDER_virtual/kernel_imx = "linux-imx"
 #PREFERRED_PROVIDER_virtual/kernel_mx7ulp = "linux-imx"
 #PREFERRED_PROVIDER_virtual/kernel_imx7ulp_zebu = "linux-imx"
 
-PREFERRED_VERSION_linux-libc-headers_imx = "4.14"
+PREFERRED_VERSION_linux-libc-headers_imx ?= "4.14"
 
 # Extra audio support
 # Add support for ALL i.MX6/7/8 SoC families
@@ -31,19 +31,19 @@ DEFAULTTUNE_mx8 = "aarch64"
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
 
-IMX_GPU_VERSION            ?= "6.2.4.p2.3"
+IMX_GPU_VERSION            ?= "6.2.4.p4.0"
 IMX_GPU_VERSION_SUFFIX      = "aarch32"
 IMX_GPU_VERSION_SUFFIX_mx8  = "aarch64"
 
 PREFERRED_VERSION_imx-gpu-viv               = "${IMX_GPU_VERSION}-${IMX_GPU_VERSION_SUFFIX}"
 PREFERRED_VERSION_xf86-video-imx-vivante    = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${IMX_GPU_VERSION}"
-PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}-${IMX_GPU_VERSION_SUFFIX}"
+PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}"
 
-PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.14.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.14.0.imx"
-PREFERRED_VERSION_gstreamer1.0              = "1.14.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.4.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.14.4.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.14.4.imx"
+PREFERRED_VERSION_gstreamer1.0              = "1.14.4.imx"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"

@@ -1,0 +1,33 @@
+From 2305ff6aad80061864bf78be132508fdb1253746 Mon Sep 17 00:00:00 2001
+From: Andy Duan <fugang.duan@nxp.com>
+Date: Mon, 19 Nov 2018 16:43:57 +0800
+Subject: [PATCH 24/24] Enable p2p for hostap.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
+Signed-off-by: Alexandra Safta <alexandra-ioana.safta@nxp.com>
+---
+ src/ap/Makefile             |  2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+Index: hostapd-2.6/src/ap/Makefile
+===================================================================
+--- hostapd-2.6.orig/src/ap/Makefile
++++ hostapd-2.6/src/ap/Makefile
+@@ -33,6 +33,7 @@ LIB_OBJS= \
+ 	drv_callbacks.o \
+ 	eap_user_db.o \
+ 	gas_serv.o \
++	p2p_hostapd.o \
+ 	hostapd.o \
+ 	hs20.o \
+ 	hw_features.o \
+@@ -44,7 +45,6 @@ LIB_OBJS= \
+ 	ieee802_11_vht.o \
+ 	ieee802_1x.o \
+ 	ndisc_snoop.o \
+-	p2p_hostapd.o \
+ 	peerkey_auth.o \
+ 	pmksa_cache_auth.o \
+ 	preauth_auth.o \

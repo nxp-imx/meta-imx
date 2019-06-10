@@ -12,10 +12,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 S = "${WORKDIR}/git"
 SPIRV_HEADERS_LOCATION = "${S}/external/spirv-headers"
-HEADERS_VERSION = "1.1"
+HEADERS_VERSION = "unified1"
 
-SRCREV_spirv-tools = "2c0ce872103d676bf8de5dc87a03ad2c32e215a2"
-SRCREV_spirv-headers = "3a4dbdde9a9b2cf23736694ba70262dce27fbeaa"
+SRCREV_spirv-tools = "9d699f6d4038f432c55310d5d0b4a6d507c1b686"
+SRCREV_spirv-headers = "2434b89345a50c018c84f42a310b0fad4f3fd94f"
 SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools;protocol=http;name=spirv-tools \
            git://github.com/KhronosGroup/SPIRV-Headers;name=spirv-headers;destsuffix=${SPIRV_HEADERS_LOCATION} \
            file://0002-spirv-lesspipe.sh-allow-using-generic-shells.patch"

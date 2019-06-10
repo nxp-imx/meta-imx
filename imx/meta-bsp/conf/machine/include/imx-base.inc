@@ -94,7 +94,6 @@ MACHINE_SOCARCH_SUFFIX_mx8qxp = "-mx8"
 MACHINE_ARCH_FILTER = "virtual/kernel"
 MACHINE_SOCARCH_FILTER_append_imxvpu = " \
     imx-codec \
-    imx-parser \
     imx-vpu \
     imx-vpuwrap \
     libimxvpuapi \
@@ -126,7 +125,6 @@ MACHINE_SOCARCH_FILTER_append_mx8 = " \
 "
 MACHINE_SOCARCH_FILTER_append_imxpxp = " \
     imx-codec \
-    imx-parser \
 "
 
 INHERIT += "fsl-dynamic-packagearch"
@@ -141,7 +139,6 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS_append = " \
 
 # Firmware
 MACHINE_FIRMWARE ?= ""
-MACHINE_FIRMWARE_append = " firmware-imx-brcm"
 MACHINE_FIRMWARE_append_mx6 = " firmware-imx-sdma"
 MACHINE_FIRMWARE_append_mx7 = " firmware-imx-epdc firmware-imx-sdma"
 MACHINE_FIRMWARE_append_mx6q = " firmware-imx-vpu-imx6q"
@@ -156,6 +153,10 @@ MACHINE_FIRMWARE_append_mx8qm  = " firmware-imx-vpu-imx8"
 MACHINE_FIRMWARE_append_mx8qxp  = " firmware-imx-vpu-imx8"
 # Extra Cypress Wi-Fi and BTW firmware (Murata)
 MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 'linux-firmware-bcm4339', '', d)}"
+MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43430', 'linux-firmware-bcm43430', '', d)}"
+MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm43455', 'linux-firmware-bcm43455', '', d)}"
+MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4356', 'linux-firmware-bcm4356-pcie', '', d)}"
+MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4359', 'linux-firmware-bcm4359-pcie', '', d)}"
 
 # FIXME: Needs addition of firmware-imx of official BSPs
 #MACHINE_FIRMWARE_append_mx27 = " firmware-imx-vpu-imx27"
@@ -164,11 +165,8 @@ MACHINE_FIRMWARE_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 
 MACHINE_EXTRA_RRECOMMENDS += "${MACHINE_FIRMWARE}"
 
 # Extra QCA Wi-Fi & BTE driver and firmware
-MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'firmware-qca6174 kernel-module-qca6174 qca-tools', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'firmware-qca9377 kernel-module-qca9377 qca-tools', '', d)}"
-
-# Extra Cypress Wi-Fi tools (Murata)
-MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4339', 'cyw-fmac-utils', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'kernel-module-qca6174 firmware-qca6174 qca-tools', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS_append = " ${@bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'kernel-module-qca9377 firmware-qca9377 qca-tools', '', d)}"
 
 # Extra audio support
 # FIXME: Add support for ALL SoC families
@@ -267,7 +265,7 @@ SOC_DEFAULT_IMAGE_FSTYPES_mxs = "uboot-mxsboot-sdcard sdcard.gz"
 SDCARD_ROOTFS ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.ext4"
 IMAGE_FSTYPES ?= "${SOC_DEFAULT_IMAGE_FSTYPES}"
 
-SERIAL_CONSOLE = "115200 ttymxc0"
+SERIAL_CONSOLES = "115200;ttymxc0"
 SERIAL_CONSOLE_mxs = "115200 ttyAMA0"
 
 KERNEL_IMAGETYPE = "zImage"

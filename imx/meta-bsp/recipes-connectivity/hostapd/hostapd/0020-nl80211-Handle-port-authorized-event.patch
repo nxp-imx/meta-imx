@@ -1,0 +1,58 @@
+From ff2d8cae3cc7261db82ad1ac6603cf366523a006 Mon Sep 17 00:00:00 2001
+From: Avraham Stern <avraham.stern@intel.com>
+Date: Tue, 30 Jan 2018 15:32:21 +0800
+Subject: [PATCH 20/24] nl80211: Handle port authorized event
+
+Indicate that the connection is authorized when receiving a port
+authorized event from the driver.
+
+Upstream-Status: Backport [https://w1.fi/cgit/hostap/commit/?id=a8c45d47d3a424b454bb5dd012f73ae3ba8f3c32]
+
+Signed-off-by: Avraham Stern <avraham.stern@intel.com>
+---
+ src/drivers/driver_nl80211_event.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/src/drivers/driver_nl80211_event.c b/src/drivers/driver_nl80211_event.c
+index 762e3ac..3247a5c 100644
+--- a/src/drivers/driver_nl80211_event.c
++++ b/src/drivers/driver_nl80211_event.c
+@@ -2055,6 +2055,25 @@ static void nl80211_reg_change_event(struct wpa_driver_nl80211_data *drv,
+ }
+ 
+ 
++static void nl80211_port_authorized(struct wpa_driver_nl80211_data *drv,
++				    struct nlattr **tb)
++{
++	if (!tb[NL80211_ATTR_MAC]) {
++		wpa_printf(MSG_DEBUG,
++			   "nl80211: Ignore port authorized event without BSSID");
++		return;
++	}
++
++	if (os_memcmp(nla_data(tb[NL80211_ATTR_MAC]), drv->bssid, ETH_ALEN)) {
++		wpa_printf(MSG_DEBUG,
++			   "nl80211: Ignore port authorized event not for the currently connected BSSID");
++		return;
++	}
++
++	wpa_supplicant_event(drv->ctx, EVENT_PORT_AUTHORIZED, NULL);
++}
++
++
+ static void do_process_drv_event(struct i802_bss *bss, int cmd,
+ 				 struct nlattr **tb)
+ {
+@@ -2245,6 +2264,9 @@ static void do_process_drv_event(struct i802_bss *bss, int cmd,
+ 	case NL80211_CMD_NEW_PEER_CANDIDATE:
+ 		nl80211_new_peer_candidate(drv, tb);
+ 		break;
++	case NL80211_CMD_PORT_AUTHORIZED:
++		nl80211_port_authorized(drv, tb);
++		break;
+ 	default:
+ 		wpa_dbg(drv->ctx, MSG_DEBUG, "nl80211: Ignored unknown event "
+ 			"(cmd=%d)", cmd);
+-- 
+1.9.1
+

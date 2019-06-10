@@ -1,0 +1,33 @@
+From a2d4a3a912a001bc5483e0d8fd178af422814394 Mon Sep 17 00:00:00 2001
+From: Ian Hattendorf <ian@ianhattendorf.com>
+Date: Mon, 19 Mar 2018 13:57:10 -0700
+Subject: [PATCH] Set C++ standard through CMake standard options
+
+Upstream-Status: Backport [https://github.com/g-truc/gli/commit/a2d4a3a912a001bc5483e0d8fd178af422814394]
+
+---
+ CMakeLists.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Index: git/CMakeLists.txt
+===================================================================
+--- git.orig/CMakeLists.txt
++++ git/CMakeLists.txt
+@@ -6,6 +6,9 @@ endif()
+ 
+ project(gli)
+ set(GLI_VERSION "0.8.1")
++set(CMAKE_CXX_STANDARD 11)
++set(CMAKE_CXX_STANDARD_REQUIRED ON)
++set(CMAKE_CXX_EXTENSIONS OFF)
+ 
+ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+ 
+@@ -24,7 +27,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "
+ endif()
+ 
+ if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang") OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") OR (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel") AND UNIX))
+-	set(CMAKE_CXX_FLAGS "-std=c++0x")
+ 	add_definitions(-Wall)
+ endif()
+ 

@@ -1,6 +1,6 @@
 SUMMARY = "tinycompress library for compress audio offload in alsa"
 DESCRIPTION = "A library to handle compressed formats like MP3 etc"
-LICENSE = "BSD-3-clause"
+LICENSE = "BSD-3-Clause"
 
 inherit autotools pkgconfig
 LIC_FILES_CHKSUM = "file://COPYING;md5=cf9105c1a2d4405cbe04bbe3367373a0"
