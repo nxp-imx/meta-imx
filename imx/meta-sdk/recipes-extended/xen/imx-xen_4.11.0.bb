@@ -1,15 +1,16 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 require xen.inc
 
-SRCBRANCH = "imx_4.14.98_2.0.0_ga"
+SRCBRANCH = "imx_4.11.y"
 XEN_SRC ?= "git://source.codeaurora.org/external/imx/imx-xen.git;protocol=https"
 
 SRC_URI = " \
     ${XEN_SRC};branch=${SRCBRANCH} \
     file://tools-xentop-vwprintw.patch \
+    file://xen-4.11-arm-acpi-fix-string-lengths.patch \
     "
 
-SRCREV = "2eb833630e2ee7b4cee4319a35b1ebcedbe36d02"
+SRCREV = "21fbfb1954896a19e6ce2c5b2bf14916c3c79962"
 
 S = "${WORKDIR}/git"
 

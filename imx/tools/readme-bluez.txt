@@ -1,4 +1,4 @@
-This readme documents how to interface to the blueooth device on bluez5.
+This readme documents how to interface to the bluetooth device on bluez5.
 
 Bluez5 is the default for 3.14 releases.
 

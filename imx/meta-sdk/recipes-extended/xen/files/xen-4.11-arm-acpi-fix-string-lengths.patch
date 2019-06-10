@@ -1,0 +1,101 @@
+From 5e1a00969afe98a713bf14d1ba1902403b60e287 Mon Sep 17 00:00:00 2001
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Date: Thu, 16 Aug 2018 13:04:52 -0700
+Subject: [PATCH v2] libxl/arm: Fix build on arm64 + acpi w/ gcc 8.2
+To: xen-devel@lists.xenproject.org
+Cc: wei.liu2@citrix.com,
+    ian.jackson@eu.citrix.com,
+    julien.grall@arm.com,
+    sstabellini@kernel.org
+
+[modified for Xen 4.11 to add required: #include <xen-tools/libs.h>]
+
+Add zero-padding to #defined ACPI table strings that are copied.
+Provides sufficient characters to satisfy the length required to
+fully populate the destination and prevent array-bounds warnings.
+Add BUILD_BUG_ON sizeof checks for compile-time length checking.
+
+Signed-off-by: Christopher Clark <christopher.clark6@baesystems.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Wei Liu <wei.liu2@citrix.com>
+---
+v2: add BUILD_BUG_ON length checks, requested by Wei.
+
+v1: Please add this patch to the backport list for the next minor
+    4.11 release.
+
+Prior to this: gcc 8.2 objects to memcpy past bounds:
+
+| libxl_arm_acpi.c: In function 'make_acpi_header':
+| libxl_arm_acpi.c:208:5: error: 'memcpy' forming offset [5, 6] is out
+of the bounds [0, 4] [-Werror=array-bounds]
+|      memcpy(h->oem_id, ACPI_OEM_ID, sizeof(h->oem_id));
+|      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| libxl_arm_acpi.c:209:5: error: 'memcpy' forming offset [5, 8] is out
+of the bounds [0, 4] [-Werror=array-bounds]
+|      memcpy(h->oem_table_id, ACPI_OEM_TABLE_ID,
+sizeof(h->oem_table_id));
+|
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| libxl_arm_acpi.c:211:5: error: 'memcpy' forming offset 4 is out of the
+bounds [0, 3] [-Werror=array-bounds]
+|      memcpy(h->asl_compiler_id, ACPI_ASL_COMPILER_ID,
+|      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|             sizeof(h->asl_compiler_id));
+|             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| In function 'make_acpi_rsdp.isra.4',
+|     inlined from 'libxl__prepare_acpi' at libxl_arm_acpi.c:389:5:
+| libxl_arm_acpi.c:193:5: error: 'memcpy' forming offset [5, 6] is out
+of the bounds [0, 4] [-Werror=array-bounds]
+|      memcpy(rsdp->oem_id, ACPI_OEM_ID, sizeof(rsdp->oem_id));
+|      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ tools/libxl/libxl_arm_acpi.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/tools/libxl/libxl_arm_acpi.c b/tools/libxl/libxl_arm_acpi.c
+index 636f724..8924396 100644
+--- a/tools/libxl/libxl_arm_acpi.c
++++ b/tools/libxl/libxl_arm_acpi.c
+@@ -29,6 +29,7 @@ typedef int64_t s64;
+ 
+ #include <acpi/acconfig.h>
+ #include <acpi/actbl.h>
++#include <xen-tools/libs.h>
+ 
+ #ifndef BITS_PER_LONG
+ #ifdef _LP64
+@@ -48,9 +49,9 @@ extern const unsigned char dsdt_anycpu_arm[];
+ _hidden
+ extern const int dsdt_anycpu_arm_len;
+ 
+-#define ACPI_OEM_ID "Xen"
+-#define ACPI_OEM_TABLE_ID "ARM"
+-#define ACPI_ASL_COMPILER_ID "XL"
++#define ACPI_OEM_ID "Xen\0\0"
++#define ACPI_OEM_TABLE_ID "ARM\0\0\0\0"
++#define ACPI_ASL_COMPILER_ID "XL\0"
+ 
+ enum {
+     RSDP,
+@@ -190,6 +191,7 @@ static void make_acpi_rsdp(libxl__gc *gc, struct xc_dom_image *dom,
+     struct acpi_table_rsdp *rsdp = (void *)dom->acpi_modules[0].data + offset;
+ 
+     memcpy(rsdp->signature, "RSD PTR ", sizeof(rsdp->signature));
++    BUILD_BUG_ON(sizeof(ACPI_OEM_ID) != sizeof(rsdp->oem_id));
+     memcpy(rsdp->oem_id, ACPI_OEM_ID, sizeof(rsdp->oem_id));
+     rsdp->length = acpitables[RSDP].size;
+     rsdp->revision = 0x02;
+@@ -205,9 +207,12 @@ static void make_acpi_header(struct acpi_table_header *h, const char *sig,
+     memcpy(h->signature, sig, 4);
+     h->length = len;
+     h->revision = rev;
++    BUILD_BUG_ON(sizeof(ACPI_OEM_ID) != sizeof(h->oem_id));
+     memcpy(h->oem_id, ACPI_OEM_ID, sizeof(h->oem_id));
++    BUILD_BUG_ON(sizeof(ACPI_OEM_TABLE_ID) != sizeof(h->oem_table_id));
+     memcpy(h->oem_table_id, ACPI_OEM_TABLE_ID, sizeof(h->oem_table_id));
+     h->oem_revision = 0;
++    BUILD_BUG_ON(sizeof(ACPI_ASL_COMPILER_ID) != sizeof(h->asl_compiler_id));
+     memcpy(h->asl_compiler_id, ACPI_ASL_COMPILER_ID,
+            sizeof(h->asl_compiler_id));
+     h->asl_compiler_revision = 0;

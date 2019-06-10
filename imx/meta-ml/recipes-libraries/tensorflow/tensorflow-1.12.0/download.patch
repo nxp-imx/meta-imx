@@ -1,0 +1,39 @@
+diff --git a/tensorflow/contrib/makefile/download_dependencies.sh b/tensorflow/contrib/makefile/download_dependencies.sh
+index dc9b17a..ecf4fde 100755
+--- a/tensorflow/contrib/makefile/download_dependencies.sh
++++ b/tensorflow/contrib/makefile/download_dependencies.sh
+@@ -66,21 +66,24 @@ download_and_extract() {
+   echo "downloading ${url}" >&2
+   mkdir -p "${dir}"
+   if [[ "${url}" == *gz ]]; then
+-    curl -Ls "${url}" | tar -C "${dir}" --strip-components=1 -xz
++    wget -qO- "${url}" | tar xz --strip-components=1 -C "${dir}"
+   elif [[ "${url}" == *zip ]]; then
+     tempdir=$(mktemp -d)
+     tempdir2=$(mktemp -d)
+-    if [[ "$OSTYPE" == "darwin"* ]]; then
+-      # macOS (AKA darwin) doesn't have wget.
+-      (cd "${tempdir}"; curl --remote-name --silent --location "${url}")
++
++    wget ${url} -O ${tempdir}/zipped.zip
++    unzip ${tempdir}/zipped.zip -d ${tempdir2}
++
++    # If the zip file contains nested directories, extract the files from the
++    # inner directory.
++    if ls ${tempdir2}/*/* 1> /dev/null 2>&1; then
++      # unzip has no strip components, so unzip to a temp dir, and move the
++      # files we want from the tempdir to destination.
++      cp -R ${tempdir2}/*/* ${dir}/
+     else
+-      wget -P "${tempdir}" "${url}"
++      cp -R ${tempdir2}/* ${dir}/
+     fi
+-    unzip "${tempdir}"/* -d "${tempdir2}"
+-    # unzip has no strip components, so unzip to a temp dir, and move the files
+-    # we want from the tempdir to destination.
+-    cp -R "${tempdir2}"/*/* "${dir}"/
+-    rm -rf "${tempdir2}" "${tempdir}"
++    rm -rf ${tempdir2} ${tempdir}
+   fi
+ 
+   # Delete any potential BUILD files, which would interfere with Bazel builds.

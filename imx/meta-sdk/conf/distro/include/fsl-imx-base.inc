@@ -1,8 +1,8 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.14-sumo"
+DISTRO_VERSION = "4.19-thud"
 
-DISTRO_CODENAME = "sumo"
+DISTRO_CODENAME = "thud"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
@@ -13,16 +13,14 @@ TARGET_VENDOR = "-poky"
 
 LOCALCONF_VERSION = "1"
 
-IMX_DEFAULT_DISTRO_FEATURES = "opengl ptest multiarch bluez"
+IMX_DEFAULT_DISTRO_FEATURES = "opengl ptest multiarch"
 # Enable vulkan distro feature only for mx8
 IMX_DEFAULT_DISTRO_FEATURES_append_mx8 = " vulkan"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 IMAGE_FSTYPES = "tar.bz2 ext4 sdcard.bz2"
 
-BBMASK += "meta-freescale/recipes-graphics/wayland/wayland_1.15.%.bbappend"
-BBMASK += "meta-freescale/recipes-graphics/drm/libdrm_%.bbappend"
-BBMASK += "poky/meta/recipes-graphics/vulkan/vulkan_1.0.65.2.bb"
+BBMASK += "poky/meta/recipes-graphics/vulkan/vulkan_1.1.73.0.bb"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"
 
@@ -53,30 +51,20 @@ https://.*/.*    http://downloads.yoctoproject.org/mirror/sources/ \n"
 # fetch from the network (and warn you if not). To disable the test set
 # the variable to be empty.
 # Git example url: git://git.yoctoproject.org/yocto-firewall-test;protocol=git;rev=master
-
 CONNECTIVITY_CHECK_URIS ?= "https://www.example.com/"
 
 SANITY_TESTED_DISTROS ?= " \
-            poky-2.2 \n \
-            poky-2.3 \n \
-            poky-2.4 \n \
-            ubuntu-12.04 \n \
-            ubuntu-15.04 \n \
+            poky-2.5 \n \
+            poky-2.6 \n \
             ubuntu-16.04 \n \
-            ubuntu-16.10 \n \
-            ubuntu-17.04 \n \
-            fedora-24 \n \
-            fedora-25 \n \
-            fedora-26 \n \
+            ubuntu-18.04 \n \
+            fedora-28 \n \
             centos-7 \n \
             debian-8 \n \
             debian-9 \n \
-            opensuse-42.1 \n \
-            opensuse-42.2 \n \
+            opensuse-42.3 \n \
             "
 
-# Default hash policy for distro
-BB_SIGNATURE_HANDLER ?= 'OEBasicHash'
 #
 # OELAYOUT_ABI allows us to notify users when the format of TMPDIR changes in
 # an incompatible way. Such changes should usually be detailed in the commit

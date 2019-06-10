@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=69663ab153298557a59c67a60a743e5b"
 inherit deploy pythonnative autotools
 DEPENDS = "python-pycrypto-native u-boot-mkimage-native"
 
-SRCBRANCH = "imx_4.14.98_2.0.0_ga"
+SRCBRANCH = "imx_3.2.y"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
-SRCREV = "7edb46e0fe60261d06bb2390b716201d6772e16f"
+SRCREV = "172eba0e411ada8e8ca5913ae73f57c728d3678d"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build.${PLATFORM_FLAVOR}"
@@ -25,7 +25,6 @@ PLATFORM_FLAVOR_imx6ull14x14evk = "mx6ullevk"
 PLATFORM_FLAVOR_imx6ull9x9evk   = "mx6ullevk"
 PLATFORM_FLAVOR_imx6ulz14x14evk = "mx6ullevk"
 PLATFORM_FLAVOR_mx8mm   = "mx8mmevk"
-PLATFORM_FLAVOR_imx8qmqxp   = "mx8qmmek"
 
 OPTEE_ARCH ?= "arm32"
 OPTEE_ARCH_armv7a = "arm32"

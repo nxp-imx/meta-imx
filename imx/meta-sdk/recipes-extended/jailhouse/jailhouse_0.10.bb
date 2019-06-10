@@ -1,10 +1,10 @@
 require jailhouse.inc
 
-SRCBRANCH = "imx_4.14.98_2.0.0_ga"
+SRCBRANCH = "imx_v0.10_y"
 IMX_JAILHOUSE_SRC ?= "git://source.codeaurora.org/external/imx/imx-jailhouse.git;protocol=ssh"
 
 SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH}"
-SRCREV = "221702975da376b138bb14444961c28ec220d639"
+SRCREV = "94afe485b8740b6d075e4639b5959e60fa9451d5"
 
 CELLS = ""
 

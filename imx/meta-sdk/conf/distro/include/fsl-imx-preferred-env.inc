@@ -14,7 +14,7 @@ PREFERRED_PROVIDER_virtual/kernel_imx = "linux-imx"
 #PREFERRED_PROVIDER_virtual/kernel_mx7ulp = "linux-imx"
 #PREFERRED_PROVIDER_virtual/kernel_imx7ulp_zebu = "linux-imx"
 
-PREFERRED_VERSION_linux-libc-headers_imx ?= "4.14"
+PREFERRED_VERSION_linux-libc-headers_imx ?= "4.19"
 
 # Extra audio support
 # Add support for ALL i.MX6/7/8 SoC families
@@ -31,14 +31,16 @@ DEFAULTTUNE_mx8 = "aarch64"
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
 
-IMX_GPU_VERSION            ?= "6.2.4.p4.0"
+IMX_GPU_VERSION            ?= "6.4.0.p0.2"
 IMX_GPU_VERSION_SUFFIX      = "aarch32"
 IMX_GPU_VERSION_SUFFIX_mx8  = "aarch64"
 
 PREFERRED_VERSION_imx-gpu-viv               = "${IMX_GPU_VERSION}-${IMX_GPU_VERSION_SUFFIX}"
-PREFERRED_VERSION_xf86-video-imx-vivante    = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}"
+
+# Set the preffered provider for opencl-headers
+PREFERRED_PROVIDER_opencl-headers_imx = "imx-gpu-viv"
 
 PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.4.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.14.4.imx"
@@ -54,8 +56,3 @@ IMX_DEFAULT_DISTRO_FEATURES += " systemd"
 
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"
 SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx7ulp = "1"
-
-UBOOT_SUFFIX_mx6ul = "imx"
-SPL_BINARY_mx6ul = ""
-UBOOT_MAKE_TARGET_mx6ul = "u-boot.imx"
-

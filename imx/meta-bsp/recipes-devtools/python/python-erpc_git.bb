@@ -16,6 +16,8 @@ PV = "1.7+git${SRCPV}"
 
 inherit setuptools
 
+do_configure[noexec] = "1"
+
 do_compile_prepend () {
     export IS_YOCTO="1"
 }

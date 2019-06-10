@@ -17,7 +17,7 @@ Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/plugins/hardwareintegration/client/client.pro b/src/plugins/hardwareintegration/client/client.pro
-index f1c71f0..5bf9e12 100644
+index f1c71f0..b90610d 100644
 --- a/src/plugins/hardwareintegration/client/client.pro
 +++ b/src/plugins/hardwareintegration/client/client.pro
 @@ -15,4 +15,4 @@ qtConfig(libhybris-egl-server): \
@@ -25,17 +25,19 @@ index f1c71f0..5bf9e12 100644
  
  ### TODO: make shm-emulation configurable
 -SUBDIRS += shm-emulation-server
-+# SUBDIRS += shm-emulation-server
++#SUBDIRS += shm-emulation-server
 diff --git a/src/plugins/hardwareintegration/compositor/compositor.pro b/src/plugins/hardwareintegration/compositor/compositor.pro
-index 0b2a429..f50561a 100644
+index 22301d0..45b7e0e 100644
 --- a/src/plugins/hardwareintegration/compositor/compositor.pro
 +++ b/src/plugins/hardwareintegration/compositor/compositor.pro
-@@ -15,4 +15,4 @@ qtConfig(libhybris-egl-server): \
+@@ -15,6 +15,6 @@ qtConfig(libhybris-egl-server): \
      SUBDIRS += libhybris-egl-server
  
  ### TODO: make shm-emulation configurable
 -SUBDIRS += shm-emulation-server
-+# SUBDIRS += shm-emulation-server
++#SUBDIRS += shm-emulation-server
+ 
+ SUBDIRS += hardwarelayer
 -- 
 1.9.1
 

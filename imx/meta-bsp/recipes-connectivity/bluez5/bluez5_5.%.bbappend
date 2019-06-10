@@ -11,4 +11,5 @@ SRC_URI += " \
             file://0003-hciattach-instead-of-strlcpy-with-strncpy-to-avoid-r.patch \
             file://0004-Add-support-for-Tufello-1.1-SOC.patch \
             file://0005-bluetooth-Add-support-for-multi-baud-rate.patch \
+            file://0006-gobex-increase-the-obex-default-abort-timeout-value.patch \
 "
