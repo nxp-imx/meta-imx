@@ -158,11 +158,17 @@ Chromium
 ---------
 Add Chromium to your Wayland or X11-based image by adding the following lines to local.conf:
 
-# Add Chromium
 IMAGE_INSTALL_append = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' chromium-ozone-wayland', \
         bb.utils.contains('DISTRO_FEATURES',     'x11', ' chromium-x11', \
                                                         '', d), d)}"
+
+Build server host requirements for chromium 74 version:
+
+- Host gcc version should be gcc 7. Ubuntu 18.04 has a default gcc 7 version.
+- Increase ulimit (number of open file descriptors) to 4098
+
+Chromium will have compilation errors, if any of the above host requirements are not met.
 
 QTWebEngine
 --------
