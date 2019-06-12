@@ -1,5 +1,5 @@
 # Base this test image on the IVI image
-require recipes-yocto-ivi/images/pulsar-image.bb
+require recipes-yocto-ivi/images/meta-ivi-image.bb
 
 IMAGE_INSTALL_append += " openssl-ptest \
 			  libusb1-test \
