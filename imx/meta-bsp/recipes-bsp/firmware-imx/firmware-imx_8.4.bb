@@ -32,6 +32,7 @@ do_install() {
     mv ${D}${base_libdir}/firmware/sdma/sdma-imx6q.bin ${D}${base_libdir}/firmware/imx/sdma
     mv ${D}${base_libdir}/firmware/sdma/sdma-imx7d.bin ${D}${base_libdir}/firmware/imx/sdma
 
+    install -d ${D}${base_libdir}/firmware/imx/easrc
     mv ${D}${base_libdir}/firmware/easrc/easrc-imx8mn.bin ${D}${base_libdir}/firmware/imx/easrc
 
     mv ${D}${base_libdir}/firmware/epdc/ ${D}${base_libdir}/firmware/imx/epdc/
