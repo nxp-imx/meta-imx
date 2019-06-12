@@ -32,6 +32,8 @@ do_install() {
     mv ${D}${base_libdir}/firmware/sdma/sdma-imx6q.bin ${D}${base_libdir}/firmware/imx/sdma
     mv ${D}${base_libdir}/firmware/sdma/sdma-imx7d.bin ${D}${base_libdir}/firmware/imx/sdma
 
+    mv ${D}${base_libdir}/firmware/easrc/easrc-imx8mn.bin ${D}${base_libdir}/firmware/imx/easrc
+
     mv ${D}${base_libdir}/firmware/epdc/ ${D}${base_libdir}/firmware/imx/epdc/
     mv ${D}${base_libdir}/firmware/imx/epdc/epdc_ED060XH2C1.fw.nonrestricted ${D}${base_libdir}/firmware/imx/epdc/epdc_ED060XH2C1.fw
 
@@ -67,5 +69,6 @@ PACKAGES =+ "${PN}-epdc ${PN}-scfw ${PN}-sdma"
 FILES_${PN}-epdc = "${base_libdir}/firmware/imx/epdc/"
 FILES_${PN}-scfw = "${base_libdir}/firmware/scfw/"
 FILES_${PN}-sdma = " ${base_libdir}/firmware/imx/sdma"
+FILES_${PN}-easrc = " ${base_libdir}/firmware/imx/easrc"
 
 COMPATIBLE_MACHINE = "(imx)"
