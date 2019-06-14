@@ -13,15 +13,15 @@ DEPENDS += "gstreamer1.0-plugins-base virtual/kernel libcap zlib bzip2 \
 inherit gettext
 
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
-SRCBRANCH = "imx-1.14.x"
+SRCBRANCH = "imx-1.16.x"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
 "
-SRCREV = "36d46a8a9a7dcf173f9a0a0145b6cfa44f879670"
+SRCREV = "ca35087ae58913a9c548ce20f7ccfe41001810e7"
 
-PV = "1.14.4.imx"
+PV = "1.16.0.imx"
 
 S = "${WORKDIR}/git"
 
