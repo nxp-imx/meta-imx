@@ -91,4 +91,4 @@ INSANE_SKIP_${PN} += " \
 	already-stripped \
 	staticdev \
 "
-COMPATIBLE_MACHINE = "(imx8qm)"
+COMPATIBLE_MACHINE = "(mx8)"
