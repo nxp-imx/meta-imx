@@ -23,7 +23,7 @@ addtask deploy after do_install
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=fb0303e4ee8b0e71c094171e2272bd44"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fb0303e4ee8b0e71c094171e2272bd44" 
 
 SRC_URI[imx8mn.md5sum] = "ff931a53dd288631a3fdf049b2ecf4ff"
 SRC_URI[imx8mn.sha256sum] = "09be72857685611c227c81a7a09e2d14f37b5efe7b7af8af629fe98ee0cec2c5"
