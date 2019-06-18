@@ -8,6 +8,3 @@ SRC_URI = " \
     file://rc.autohdmi \
 "
 SRCREV = "c828e8a7c38743e960967e7bb78c134cec31c102"
-
-# Patch for MX8 DRM_VIV
-RDEPENDS_${PN}_append_mx8 = " kernel-module-vivante"
