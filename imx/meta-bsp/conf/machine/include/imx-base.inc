@@ -244,7 +244,7 @@ SERIAL_CONSOLES = "115200;ttymxc0"
 SERIAL_CONSOLE_mxs = "115200 ttyAMA0"
 
 KERNEL_IMAGETYPE = "zImage"
-KERNEL_IMAGETYPE_mx8 = "Image"
+KERNEL_IMAGETYPE_aarch64 = "Image"
 
 MACHINE_FEATURES = "usbgadget usbhost vfat alsa touchscreen"
 
