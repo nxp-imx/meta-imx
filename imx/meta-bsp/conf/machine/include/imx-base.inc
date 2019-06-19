@@ -234,7 +234,7 @@ IMX_DEFAULT_KERNEL_mx6sll = "linux-imx"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 
-SOC_DEFAULT_IMAGE_FSTYPES = "sdcard.gz"
+SOC_DEFAULT_IMAGE_FSTYPES = "sdcard.bz2 tar.bz2"
 SOC_DEFAULT_IMAGE_FSTYPES_mxs = "uboot-mxsboot-sdcard sdcard.gz"
 
 SDCARD_ROOTFS ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.ext4"
