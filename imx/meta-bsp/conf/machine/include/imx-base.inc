@@ -3,12 +3,15 @@
 include conf/machine/include/fsl-default-settings.inc
 include conf/machine/include/fsl-default-versions.inc
 
+require conf/machine/include/utilities.inc
+
 # Set specific make target and binary suffix
 PREFERRED_PROVIDER_u-boot ??= "u-boot-fslc"
 PREFERRED_PROVIDER_virtual/bootloader ??= "u-boot-fslc"
 
 PREFERRED_PROVIDER_u-boot-mxsboot-native ??= "u-boot-fslc-mxsboot-native"
 
+UBOOT_BINARY ?= "u-boot.imx"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
 UBOOT_MAKE_TARGET_mxs ?= "u-boot.sb"
 
@@ -246,11 +249,37 @@ IMX_DEFAULT_KERNEL_mx6sll = "linux-imx"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 
-SOC_DEFAULT_IMAGE_FSTYPES = "sdcard.bz2 tar.bz2"
-SOC_DEFAULT_IMAGE_FSTYPES_mxs = "uboot-mxsboot-sdcard sdcard.gz"
+SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.bz2 tar.bz2"
+SOC_DEFAULT_IMAGE_FSTYPES_mxs = "uboot-mxsboot-sdcard wic.gz"
+
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 SDCARD_ROOTFS ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.ext4"
 IMAGE_FSTYPES ?= "${SOC_DEFAULT_IMAGE_FSTYPES}"
+
+IMAGE_BOOT_FILES ?= " \
+    ${KERNEL_IMAGETYPE} \
+    ${@make_dtb_boot_files(d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'xen', '', d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'tee.bin', '', d)} \
+"
+
+### wic default support
+WKS_FILE_DEPENDS_MX8     = ""
+WKS_FILE_DEPENDS_MX8_mx8 = "imx-boot"
+WKS_FILE_DEPENDS ?= " \
+    virtual/bootloader \
+    e2fsprogs-native \
+    bmap-tools-native \
+    ${WKS_FILE_DEPENDS_MX8} \
+"
+
+SOC_DEFAULT_WKS_FILE ?= "imx-uboot-bootpart.wks.in"
+SOC_DEFAULT_WKS_FILE_mx8 ?= "imx-imx-boot-bootpart.wks.in"
+SOC_DEFAULT_WKS_FILE_mxs ?= "imx-uboot-mxs-bootpart.wks.in"
+
+WKS_FILE ?= "${SOC_DEFAULT_WKS_FILE}"
 
 SERIAL_CONSOLES = "115200;ttymxc0"
 SERIAL_CONSOLE_mxs = "115200 ttyAMA0"
