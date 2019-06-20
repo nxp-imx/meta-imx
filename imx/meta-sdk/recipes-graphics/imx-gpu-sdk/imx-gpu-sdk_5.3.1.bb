@@ -44,6 +44,7 @@ FEATURES_append_imxgpu2d  = ",G2D"
 FEATURES_append_imxgpu3d  = ",OpenGLES2"
 FEATURES_append           = "${FEATURES_SOC}"
 
+FEATURES_SOC       = ""
 FEATURES_SOC_mx6q  = ",OpenGLES3"
 FEATURES_SOC_mx6dl = ",OpenGLES3"
 FEATURES_SOC_mx8   = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.1"
