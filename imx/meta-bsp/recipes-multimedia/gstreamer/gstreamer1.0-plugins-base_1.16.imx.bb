@@ -72,8 +72,7 @@ PACKAGECONFIG[zlib]         = "--enable-zlib,--disable-zlib,zlib"
 # Disable introspection to fix [GstGL-1.0.gir] Error
 EXTRA_OECONF += " \
     --enable-zlib \
-    CPPFLAGS="-I${STAGING_INCDIR_IMX} \
-              -I${WORKDIR}/build/gst-libs/gst/gl/wayland/" \
+    CPPFLAGS="-I${STAGING_INCDIR_IMX}" \
     --disable-introspection \
     --disable-opengl \
     --enable-wayland \
