@@ -184,6 +184,18 @@ MACHINE_EXTRA_RRECOMMENDS_append_mx7d = " ${@bb.utils.contains('DISTRO_FEATURES'
 # Extra udev rules
 MACHINE_EXTRA_RRECOMMENDS += "udev-rules-imx"
 
+# Extra optee support
+MACHINE_EXTRA_RRECOMMENDS += \
+    "${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'packagegroup-fsl-optee-imx', '', d)} "
+
+# Extra xen support
+MACHINE_EXTRA_RRECOMMENDS += \
+    "${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'imx-xen-base imx-xen-hypervisor', '', d)}"
+
+# Extra jailhouse support
+MACHINE_EXTRA_RRECOMMENDS += \
+    "${@bb.utils.contains('COMBINED_FEATURES', 'jailhouse', 'jailhouse', '', d)}"
+
 # GStreamer 1.0 plugins
 MACHINE_GSTREAMER_1_0_PLUGIN_mx6q = "imx-gst1.0-plugin"
 MACHINE_GSTREAMER_1_0_PLUGIN_mx6dl = "imx-gst1.0-plugin"
