@@ -18,7 +18,6 @@ IMX_DEFAULT_DISTRO_FEATURES = "opengl ptest multiarch"
 IMX_DEFAULT_DISTRO_FEATURES_append_mx8 = " vulkan"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
-IMAGE_FSTYPES = "tar.bz2 ext4 sdcard.bz2"
 
 BBMASK += "poky/meta/recipes-graphics/vulkan/vulkan_1.1.73.0.bb"
 
