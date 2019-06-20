@@ -15,7 +15,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "imx-1.16.x"
-SRCREV = "f4c13526a278343e6fdf19e7ba3cdd026590ffb0"
+SRCREV = "48bde732b00fb42df636ebbaf3b06e5e7971c206"
 SRC_URI = " \
     ${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
     file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
