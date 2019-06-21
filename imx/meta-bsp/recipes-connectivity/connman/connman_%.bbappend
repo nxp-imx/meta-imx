@@ -10,7 +10,6 @@ SRC_URI += " \
              file://connman-env.service \
              file://replace-hardcode-and-add-EnvironmentFile-and-Wants.patch \
 "
-SRC_URI_remove = "file://0001-connman.service-stop-systemd-resolved-when-we-use-co.patch"
 
 HAS_SYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
 
