@@ -1,0 +1,9 @@
+# Copyright 2017-2018 NXP
+
+require imx-vpu-hantro.inc
+LIC_FILES_CHKSUM = "file://COPYING;md5=80c0478f4339af024519b3723023fe28" 
+
+SRC_URI[md5sum] = "51b811f9523d03ca87f611ba86594311"
+SRC_URI[sha256sum] = "cec620241d303852ddad8601f2025a68abbc1ec26d605103c7e4173749b59e3f"
+
+COMPATIBLE_MACHINE = "imxvpuhantro"
