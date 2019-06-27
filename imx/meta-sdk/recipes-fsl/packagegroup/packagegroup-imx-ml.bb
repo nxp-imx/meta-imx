@@ -10,8 +10,6 @@ inherit packagegroup
 ML_PKGS = " \
     armnn \
     tensorflow-lite \
-"
-ML_PKGS_append_mx8qm = " \
     tensorflow \
 "
 RDEPENDS_${PN} = " \
