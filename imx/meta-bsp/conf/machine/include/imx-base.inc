@@ -12,6 +12,7 @@ PREFERRED_PROVIDER_virtual/bootloader ??= "u-boot-fslc"
 PREFERRED_PROVIDER_u-boot-mxsboot-native ??= "u-boot-fslc-mxsboot-native"
 
 UBOOT_BINARY ?= "u-boot.imx"
+UBOOT_BINARY_mx8 ?= "u-boot.bin"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
 UBOOT_MAKE_TARGET_mxs ?= "u-boot.sb"
 
