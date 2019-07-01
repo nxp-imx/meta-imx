@@ -1,15 +1,15 @@
 SUMMARY = "The ARM Computer Vision and Machine Learning library"
 DESCRIPTION = "The ARM Computer Vision and Machine Learning library is a set of functions optimised for both ARM CPUs and GPUs."
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=762a7ba8d2ddc3b38d88742fbaf0b62d \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8948bc85114b3b716576ef8d732f034f \
                     file://include/half/LICENSE.txt;md5=fe7e5a4795c76b317919afd2d3da5983"
 
-PV = "19.02+git${SRCPV}"
+PV = "19.05+git${SRCPV}"
 
 ARM_COMPUTELIBRARY_SRC ?= "git://source.codeaurora.org/external/imx/arm-computelibrary-imx.git;protocol=https"
-SRCBRANCH = "imx_19.02"
+SRCBRANCH = "imx_19.05"
 SRC_URI = "${ARM_COMPUTELIBRARY_SRC};branch=${SRCBRANCH}"
-SRCREV = "4fba92d5ae4545161c7cfa57616574e9de4be12b" 
+SRCREV = "0b83ee4d656f2b883ea941bc351880caaf30ff68"
 
 S = "${WORKDIR}/git"
 
@@ -76,7 +76,6 @@ FILES_${PN}-source = "${datadir}/${BPN}"
 # usage of rsync is causing host-user-contaminated error
 INSANE_SKIP_${PN} += "ldflags  libdir staticdev host-user-contaminated"
 INSANE_SKIP_${PN}-source += "ldflags  libdir staticdev host-user-contaminated"
-
 
 # We support i.MX8 only (for now)
 COMPATIBLE_MACHINE = "(mx8)"
