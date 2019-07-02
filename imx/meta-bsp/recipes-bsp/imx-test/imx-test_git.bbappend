@@ -18,9 +18,8 @@ do_compile() {
                     -I${STAGING_INCDIR_IMX} \
                     -I${STAGING_INCDIR} \
                     -L${STAGING_LIBDIR}" \
+               SDKTARGETSYSROOT=${STAGING_DIR_HOST} \
                LINUXPATH=${STAGING_KERNEL_DIR} \
                KBUILD_OUTPUT=${STAGING_KERNEL_BUILDDIR} \
                PLATFORM=${PLATFORM}
 }
-
-EXTRA_OEMAKE += "SDKTARGETSYSROOT=${STAGING_DIR_HOST}"
