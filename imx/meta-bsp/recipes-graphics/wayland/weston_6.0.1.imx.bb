@@ -16,7 +16,7 @@ SRC_URI = "${WESTON_SRC};branch=${SRCBRANCH} \
            file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
            file://0003-weston-touch-calibrator-Advertise-the-touchscreen-ca.patch \
 "
-SRCREV = "81b1181180f451558ee4dee843e6fd1f705334cf"
+SRCREV = "213765aae006b06a9bb8257c830efa2ebb24f7ec"
 S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_URI = "https://wayland.freedesktop.org/releases.html"
