@@ -12,7 +12,7 @@ DEPENDS = "python-pycrypto-native u-boot-mkimage-native"
 SRCBRANCH = "imx_3.2.y"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
-SRCREV = "04e1dd72f67b0d1c5e28455ad40da114094fa98b"
+SRCREV = "c01222dca694e22d703a5725f6394ee279c5ba2b"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build.${PLATFORM_FLAVOR}"
