@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d79ee9e66bb0f95d3386a7acae780b70 \
 #DEFAULT_PREFERENCE = "-1"
 
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
-SRCBRANCH = "weston-imx-6.0"
+SRCBRANCH = "weston-imx-6.0.1"
 SRC_URI = "${WESTON_SRC};branch=${SRCBRANCH} \
            file://weston.png \
            file://weston.desktop \
