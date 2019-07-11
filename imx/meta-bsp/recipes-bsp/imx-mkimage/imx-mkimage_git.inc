@@ -5,7 +5,7 @@ DEPENDS = "zlib-native openssl-native"
 SRCBRANCH = "master"
 IMX_MKIMAGE_SRC ?= "git://source.codeaurora.org/external/imx/imx-mkimage.git;protocol=https"
 SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH}"
-SRCREV = "3b09a38b56897436380e8e8253512067d6335f5f"
+SRCREV = "74788d16976d043ee011b35c3bc1b8e7bdca8ad7"
 S = "${WORKDIR}/git"
 
 BOOT_TOOLS = "imx-boot-tools"
