@@ -109,7 +109,6 @@ PACKAGECONFIG[imxgpu] = "--enable-imxgpu,--disable-imxgpu"
 
 SOCNAME       = "none"
 SOCNAME_mx8mq = "8mq"
-SOCNAME_mx8mm = "8mm"
 
 uncomment() {
     if ! (grep "^#$1" $2); then
@@ -150,9 +149,6 @@ do_install_append() {
             uncomment "gbm-format=argb8888" weston.ini
             uncomment "\\[shell\\]"         weston.ini
             uncomment "size=1920x1080"      weston.ini
-            ;;
-        8mm)
-            uncomment "use-g2d=1"           weston.ini
             ;;
         esac
         cd -
