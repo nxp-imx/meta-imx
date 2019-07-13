@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "f77b08525ce698b46d60ed728c419fcefb71db342311cfa4c073cc6395
 
 do_install_append() {
     if [ "${USE_WL}" = "yes" -o "${USE_X11}" = "yes" ]; then
-        mv ${D}${libdir}/libGL-${backend}.so ${D}${libdir}/libGL.so.1.2.0
+        cp ${S}/gpu-core/usr/lib/libGL-${backend}.so ${D}${libdir}/libGL.so.1.2.0
     fi
 }
 
