@@ -2,6 +2,9 @@ require imx-gpu-viv-v6.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=72c0f70181bb6e83eee6aab8de12a9f3"
 
+# FIXME: Remove this patch when upstream handles backend-specific libGL
+SRC_URI += "file://Add-dummy-libgl.patch"
+
 SRC_URI[md5sum] = "8dc194a5a42c2dbc62b9471dc44479c1"
 SRC_URI[sha256sum] = "068448365e2f7e98b2c5bfa0f3d4c2698ee36b4c0df296c94e126a15bb6d5a32"
 

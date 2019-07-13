@@ -1,0 +1,6 @@
+Index: imx-gpu-viv-6.4.0.p0.2-aarch32/gpu-core/usr/lib/libGL.so.1.2
+===================================================================
+--- /dev/null
++++ imx-gpu-viv-6.4.0.p0.2-aarch32/gpu-core/usr/lib/libGL.so.1.2
+@@ -0,0 +1 @@
++dummy
