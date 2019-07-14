@@ -10,7 +10,8 @@ SRC_URI[sha256sum] = "2a730963698d1aaa1bb55d7cfa836b7164510f3387026e6907b2d069f8
 
 do_install_append() {
     if [ "${USE_WL}" = "yes" -o "${USE_X11}" = "yes" ]; then
-        cp ${S}/gpu-core/usr/lib/libGL-${backend}.so ${D}${libdir}/libGL.so.1.2.0
+        # FIXME: Use Wayland library on Wayland when build problem is fixed
+        cp ${S}/gpu-core/usr/lib/libGL-x11.so ${D}${libdir}/libGL.so.1.2.0
     fi
 }
 
