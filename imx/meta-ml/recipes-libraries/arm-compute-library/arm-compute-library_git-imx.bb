@@ -16,7 +16,12 @@ S = "${WORKDIR}/git"
 
 inherit scons
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG_OPENCL       = ""
+PACKAGECONFIG_OPENCL_mx8   = "opencl"
+PACKAGECONFIG_OPENCL_mx8mm = ""
+
+PACKAGECONFIG ??= "${PACKAGECONFIG_OPENCL}"
+
 PACKAGECONFIG[benchmark] = "benchmark_tests=1,benchmark_tests=0"
 PACKAGECONFIG[validation] = "validation_tests=1,validation_tests=0"
 PACKAGECONFIG[opencl] = "opencl=1,opencl=0,opencl-headers virtual/opencl-icd"
