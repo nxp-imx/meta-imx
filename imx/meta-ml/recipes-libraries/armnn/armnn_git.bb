@@ -90,3 +90,6 @@ LIBS += "-larmpl_lp64_mp"
 FILES_${PN} += "${TESTVECS_INSTALL_DIR}"
 FILES_${PN}-dev += "{libdir}/cmake/*"
 INSANE_SKIP_${PN}-dev = "dev-elf"
+
+# We support i.MX8 only (for now)
+COMPATIBLE_MACHINE = "(mx8)"
