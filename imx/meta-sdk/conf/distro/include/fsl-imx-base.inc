@@ -16,6 +16,8 @@ LOCALCONF_VERSION = "1"
 IMX_DEFAULT_DISTRO_FEATURES = "opengl ptest multiarch"
 # Enable vulkan distro feature only for mx8
 IMX_DEFAULT_DISTRO_FEATURES_append_mx8 = " vulkan"
+# Enable jailhouse distro feature only for mx8m
+IMX_DEFAULT_DISTRO_FEATURES_append_mx8m = " jailhouse"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 
