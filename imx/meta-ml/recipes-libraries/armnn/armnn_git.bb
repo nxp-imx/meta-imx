@@ -47,7 +47,11 @@ DEPENDS = " \
 
 RDEPENDS_${PN} = " arm-compute-library protobuf boost "
 
-PACKAGECONFIG ??= "neon caffe tensorflow tensorflow_lite onnx unit_tests"
+PACKAGECONFIG_OPENCL       = ""
+PACKAGECONFIG_OPENCL_mx8   = "opencl"
+PACKAGECONFIG_OPENCL_mx8mm = ""
+
+PACKAGECONFIG ??= "neon caffe tensorflow tensorflow_lite onnx unit_tests ${PACKAGECONFIG_OPENCL}"
 
 PACKAGECONFIG[caffe] = "-DBUILD_CAFFE_PARSER=1 -DCAFFE_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-caffe,-DBUILD_CAFFE_PARSER=0,armnn-caffe"
 PACKAGECONFIG[examples] = "-DBUILD_ARMNN_EXAMPLES=1,-DBUILD_ARMNN_EXAMPLES=0, opencv"
@@ -58,7 +62,7 @@ PACKAGECONFIG[tensorflow] = "-DBUILD_TF_PARSER=1 -DTF_GENERATED_SOURCES=${STAGIN
 PACKAGECONFIG[tensorflow_lite] = "-DTF_LITE_GENERATED_PATH=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow-lite -DBUILD_TF_LITE_PARSER=1 ,-DBUILD_TF_LITE_PARSER=0, flatbuffers armnn-tensorflow"
 PACKAGECONFIG[unit_tests] = "-DBUILD_UNIT_TESTS=1,-DBUILD_UNIT_TESTS=0"
 
-EXTRA_OECMAKE=" \
+EXTRA_OECMAKE += " \
     -DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF \
     -DARMCOMPUTE_ROOT=${STAGING_DIR_HOST}${datadir}/arm-compute-library \
     -DBUILD_TESTS=1 -DPROFILING=1 \
