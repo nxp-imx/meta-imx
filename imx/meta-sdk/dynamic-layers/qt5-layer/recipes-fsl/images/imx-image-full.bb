@@ -2,7 +2,7 @@
 # Copyright 2017-2019 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require recipes-fsl/images/imx-image-mm.bb
+require recipes-fsl/images/imx-image-multimedia.bb
 
 inherit distro_features_check ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'populate_sdk_qt5', '', d)}
 
