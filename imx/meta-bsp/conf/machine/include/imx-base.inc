@@ -248,10 +248,12 @@ WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 IMAGE_FSTYPES ?= "${SOC_DEFAULT_IMAGE_FSTYPES}"
 
+IMAGE_BOOT_FILES_OPTEE     = "tee.bin uTee-${OPTEE_BIN_EXT}"
+IMAGE_BOOT_FILES_OPTEE_mx8 = "tee.bin"
 IMAGE_BOOT_FILES ?= " \
     ${KERNEL_IMAGETYPE} \
     ${@make_dtb_boot_files(d)} \
-    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'tee.bin', '', d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', '${IMAGE_BOOT_FILES_OPTEE}', '', d)} \
     ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'xen', '', d)} \
 "
 
