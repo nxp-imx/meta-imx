@@ -11,8 +11,8 @@ SRC_URI[arm-wayland.sha256sum] = "5a1fe0e67883ad52b872f3b43303ddcf670b03291ccb62
 SRC_URI[arm-x11.md5sum] = "e04324ebbf5b355b6f16dff16abe8d6d"
 SRC_URI[arm-x11.sha256sum] = "ba49b1a638897b613c2285d64d2c78a09764a6e94a0450ff85c7fe5e5422e791"
 
-SRC_URI[aarch64-fb.md5sum] = "f37a2c81d16d49691fe53e1d8866b9f1"
-SRC_URI[aarch64-fb.sha256sum] = "726cca2af52ee0872e1ea6918e719255a92367a01b5a50ea66085806d5020b78"
+SRC_URI[aarch64-fb.md5sum] = "0da96c972b0626a6dad860e4ddd187ba"
+SRC_URI[aarch64-fb.sha256sum] = "a2e1d2e76f32a4240c99bbdc666f35e0769a3a4925c531b1f3514bbb4fd7ef0d"
 
 SRC_URI[aarch64-wayland.md5sum] = "0a098face3eb7238ac54da07261fa04d"
 SRC_URI[aarch64-wayland.sha256sum] = "2d89615e20bc1cc2e4cddecc1cadfe6c6bbb46d4e46e6bc5353722272b0ba39b"
