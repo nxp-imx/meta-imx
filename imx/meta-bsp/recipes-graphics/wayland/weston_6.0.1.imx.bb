@@ -16,6 +16,9 @@ SRC_URI = "${WESTON_SRC};branch=${SRCBRANCH} \
            file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
            file://0003-weston-touch-calibrator-Advertise-the-touchscreen-ca.patch \
 "
+SRC_URI_append_mx6sl = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'systemd wayland x11', ' file://weston.config', '', d)}"
+
 SRCREV = "213765aae006b06a9bb8257c830efa2ebb24f7ec"
 S = "${WORKDIR}/git"
 
@@ -160,6 +163,10 @@ do_install_append() {
             uncomment "xwayland=true"       weston.ini
         fi
         cd -
+    fi
+
+    if [ -f ${WORKDIR}/weston.config ]; then
+        install -Dm0755 ${WORKDIR}/weston.config ${D}${sysconfdir}/default/weston
     fi
 }
 
