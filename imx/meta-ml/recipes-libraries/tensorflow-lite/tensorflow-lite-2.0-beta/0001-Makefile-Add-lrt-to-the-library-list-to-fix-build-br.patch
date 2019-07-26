@@ -1,0 +1,32 @@
+From 7bb0681a139e3a0a3093842babce6de85ad6663f Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Fri, 26 Jul 2019 16:47:51 +0000
+Subject: [PATCH] Makefile: Add -lrt to the library list to fix build break
+
+This fixes the following build break :
+
+| /usr/src/debug/tensorflow-lite/2.0-r0/git/tensorflow/lite/nnapi/nnapi_implementation.cc:81: undefined reference to `shm_open'
+| collect2: error: ld returned 1 exit status
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ tensorflow/lite/tools/make/Makefile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/tensorflow/lite/tools/make/Makefile b/tensorflow/lite/tools/make/Makefile
+index 0e407bb..0fa7df7 100644
+--- a/tensorflow/lite/tools/make/Makefile
++++ b/tensorflow/lite/tools/make/Makefile
+@@ -50,7 +50,8 @@ LIBS := \
+ -lstdc++ \
+ -lpthread \
+ -lm \
+--lz
++-lz \
++-lrt
+ 
+ # There are no rules for compiling objects for the host system (since we don't
+ # generate things like the protobuf compiler that require that), so all of
+-- 
+2.7.4
+
