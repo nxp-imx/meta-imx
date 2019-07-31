@@ -48,6 +48,10 @@ do_install(){
 	do
 		install -m 0555 $example ${D}${bindir}/${PN}-${PV}/examples
 	done
+
+        #install label_image data
+	cp ${S}/tensorflow/lite/examples/label_image/testdata/grace_hopper.bmp ${D}${bindir}/${PN}-${PV}/examples
+	cp ${S}/tensorflow/lite/java/ovic/src/testdata/labels.txt ${D}${bindir}/${PN}-${PV}/examples
 }
 
 RDEPENDS_${PN} += "flatbuffers libnn-imx"

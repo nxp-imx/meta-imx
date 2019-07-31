@@ -1,0 +1,95 @@
+From 552fe9f5c5b89a6e73bdf054518d94af93df0620 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Wed, 31 Jul 2019 14:44:16 -0500
+Subject: [PATCH] Makefile: Add label_image example
+
+This patch is rebased based on 1.12 version patch
+
+https://source.codeaurora.org/external/imx/meta-imx-machinelearning/commit/recipes-libraries/tensorflow-lite?h=sumo&id=9f2ff28958e0991c120632d478f92aa606a63682
+
+Upstream-Status: pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ tensorflow/lite/tools/make/Makefile | 23 +++++++++++++++++++++--
+ 1 file changed, 21 insertions(+), 2 deletions(-)
+
+diff --git a/tensorflow/lite/tools/make/Makefile b/tensorflow/lite/tools/make/Makefile
+index 0e407bb..9829aa1 100644
+--- a/tensorflow/lite/tools/make/Makefile
++++ b/tensorflow/lite/tools/make/Makefile
+@@ -81,6 +81,11 @@ BENCHMARK_BINARY_NAME := benchmark_model
+ MINIMAL_SRCS := \
+ tensorflow/lite/examples/minimal/minimal.cc
+ 
++# TensorFlow C++ and Python Image Recognition Demo
++LABELIMAGE_SRCS := \
++tensorflow/lite/examples/label_image/label_image.cc \
++tensorflow/lite/examples/label_image/bitmap_helpers.cc
++
+ # What sources we want to compile, must be kept in sync with the main Bazel
+ # build files.
+ 
+@@ -136,7 +141,8 @@ $(wildcard tensorflow/lite/*/*/*test.cc) \
+ $(wildcard tensorflow/lite/*/*/*/*test.cc) \
+ $(wildcard tensorflow/lite/kernels/*test_main.cc) \
+ $(wildcard tensorflow/lite/kernels/*test_util.cc) \
+-$(MINIMAL_SRCS)
++$(MINIMAL_SRCS) \
++$(LABELIMAGE_SRCS)
+ 
+ BUILD_WITH_MMAP=true
+ ifeq ($(BUILD_TYPE),micro)
+@@ -211,6 +217,7 @@ ALL_SRCS := \
+ 	$(PROFILER_SUMMARIZER_SRCS) \
+ 	$(TF_LITE_CC_SRCS) \
+ 	$(BENCHMARK_SRCS) \
++	$(LABELIMAGE_SRCS) \
+   $(CMD_LINE_TOOLS_SRCS)
+ 
+ # Where compiled objects are stored.
+@@ -223,6 +230,7 @@ LIB_PATH := $(LIBDIR)$(LIB_NAME)
+ BENCHMARK_LIB := $(LIBDIR)$(BENCHMARK_LIB_NAME)
+ BENCHMARK_BINARY := $(BINDIR)$(BENCHMARK_BINARY_NAME)
+ MINIMAL_BINARY := $(BINDIR)minimal
++LABELIMAGE_BINARY := $(BINDIR)label_image
+ 
+ CXX := $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}g++
+ CC := $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}gcc
+@@ -231,6 +239,9 @@ AR := $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}ar
+ MINIMAL_OBJS := $(addprefix $(OBJDIR), \
+ $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(MINIMAL_SRCS))))
+ 
++LABELIMAGE_OBJS := $(addprefix $(OBJDIR), \
++$(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(LABELIMAGE_SRCS))))
++
+ LIB_OBJS := $(addprefix $(OBJDIR), \
+ $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(TF_LITE_CC_SRCS))))
+ 
+@@ -247,7 +258,7 @@ $(OBJDIR)%.o: %.c
+ 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+ 
+ # The target that's compiled if there's no command-line arguments.
+-all: $(LIB_PATH)  $(MINIMAL_BINARY) $(BENCHMARK_BINARY)
++all: $(LIB_PATH)  $(MINIMAL_BINARY) $(BENCHMARK_BINARY) $(LABELIMAGE_BINARY)
+ 
+ # The target that's compiled for micro-controllers
+ micro: $(LIB_PATH)
+@@ -271,6 +282,14 @@ $(MINIMAL_BINARY): $(MINIMAL_OBJS) $(LIB_PATH)
+ 
+ minimal: $(MINIMAL_BINARY)
+ 
++$(LABELIMAGE_BINARY): $(LABELIMAGE_OBJS) $(LIB_PATH)
++	@mkdir -p $(dir $@)
++	$(CXX) $(CXXFLAGS) $(INCLUDES) \
++	-o $(LABELIMAGE_BINARY) $(LABELIMAGE_OBJS) \
++	$(LIBFLAGS) $(LIB_PATH) $(LDFLAGS) $(LIBS)
++
++labelimage: $(LABELIMAGE_BINARY)
++
+ $(BENCHMARK_LIB) : $(LIB_PATH) $(BENCHMARK_OBJS)
+ 	@mkdir -p $(dir $@)
+ 	$(AR) $(ARFLAGS) $(BENCHMARK_LIB) $(LIB_OBJS) $(BENCHMARK_OBJS)
+-- 
+2.7.4
+
