@@ -14,7 +14,7 @@ ATF_SRC ?= "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https"
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH} \
            file://0001-Allow-BUILD_STRING-to-be-set-in-.revision-file.patch \
 "
-SRCREV = "c24502fde3364cc88d1736f64d2f9fb664cb992f"
+SRCREV = "efdb3062d2855651e5bfa3999ea9151fd2afc376"
 
 PLATFORM_mx8qxp  = "imx8qx"
 PLATFORM_mx8mn  = "imx8mn"
