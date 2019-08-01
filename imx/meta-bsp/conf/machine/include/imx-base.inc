@@ -5,6 +5,8 @@ include conf/machine/include/fsl-default-versions.inc
 
 require conf/machine/include/utilities.inc
 
+IMAGE_CLASSES += "image_types_create_sdcard_symlink"
+
 # Set specific make target and binary suffix
 PREFERRED_PROVIDER_u-boot ??= "u-boot-fslc"
 PREFERRED_PROVIDER_virtual/bootloader ??= "u-boot-fslc"
