@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=72c0f70181bb6e83eee6aab8de12a9f3"
 # FIXME: Remove this patch when upstream handles backend-specific libGL
 SRC_URI += "file://Add-dummy-libgl.patch"
 
-SRC_URI[md5sum] = "71fa64094243d647ac72ae2de225a07b"
-SRC_URI[sha256sum] = "2363c77b305d472af4ca19eafa97b5cd20cbebf8ee65a545195d56ee62a1a916"
+SRC_URI[md5sum] = "6150027acfc9799acbed23bdb8377ace"
+SRC_URI[sha256sum] = "b34021a3a3364d8b2fb820394dc27ceedea5f88dda3f2314785d389e6c5216fe"
 
 do_install_append() {
     if [ "${IS_MX6SL}" != "1" ]; then
