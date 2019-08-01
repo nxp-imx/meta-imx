@@ -10,9 +10,16 @@ PACKAGES =+ "libnn-imx"
 
 GLES3_HEADER_REMOVALS_mx8qxp_remove = "gl32.h"
 
+do_install_append () {
+
+    if [ "${IS_MX8}" = "1" ]; then
+        mv ${D}${libdir}/vulkan/libvulkan_VSI.so ${D}${libdir}/vulkan/libvulkan.so
+    fi
+}
+
 FILES_libgbm-imx_mx8 = "${libdir}/libgbm*${SOLIBS}"
 
-FILES_libvulkan-imx = "${libdir}/vulkan/libvulkan_VSI${SOLIBS} ${libdir}/libSPIRV_viv${SOLIBS}"
+FILES_libvulkan-imx = "${libdir}/vulkan/libvulkan${SOLIBS} ${libdir}/libSPIRV_viv${SOLIBS}"
 
 FILES_libopenvx-imx = "${libdir}/libOpenVX*${SOLIBS} ${libdir}/libOvx*${SOLIBS} ${libdir}/libovx*${SOLIBS}"
 FILES_libopenvx-imx-dev = "${includedir}/VX"

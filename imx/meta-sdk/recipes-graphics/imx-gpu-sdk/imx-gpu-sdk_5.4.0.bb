@@ -95,7 +95,7 @@ FILES_${PN}-dbg += "/opt/${PN}/*/*/.debug /usr/src/debug"
 INSANE_SKIP_${PN} += "already-stripped rpaths"
 
 RDEPENDS_VULKAN       = ""
-RDEPENDS_VULKAN_mx8   = "vulkan-validationlayers vulkan-loader"
+RDEPENDS_VULKAN_mx8   = "vulkan-loader"
 RDEPENDS_VULKAN_mx8mm = ""
 RDEPENDS_${PN} += "${RDEPENDS_VULKAN}"
 
