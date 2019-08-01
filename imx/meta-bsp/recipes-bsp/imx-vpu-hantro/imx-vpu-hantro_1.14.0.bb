@@ -3,7 +3,7 @@
 require imx-vpu-hantro.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=72c0f70181bb6e83eee6aab8de12a9f3"
 
-SRC_URI[md5sum] = "6f0623f369bb71c8c8c649be5fbfcfc4"
-SRC_URI[sha256sum] = "4360a9f6b16a63b686082b17be48c7a04121a0a4f94ee8dc12e63d5f566f5ede"
+SRC_URI[md5sum] = "7cf4845b08915046961323e3b908831c"
+SRC_URI[sha256sum] = "2cac5bf06fb6250e9a4ee0cc88f855cb08cf0d353f1f709eac1102b2728e181d"
 
 COMPATIBLE_MACHINE = "imxvpuhantro"
