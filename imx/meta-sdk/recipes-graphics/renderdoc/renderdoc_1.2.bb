@@ -1,4 +1,4 @@
-# Copyright (C) 2019 NXP 
+# Copyright 2019 NXP 
 # Released under the MIT license 
 
 DESCRIPTION = "RenderDoc is a free MIT licensed stand-alone graphics debugger that \
