@@ -8,6 +8,7 @@ TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.
 SRCBRANCH = "r2.0"
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH} \
            file://download.patch \
+           file://0001-Makefile-Add-label_image-example.patch \
            file://0001-Fix-depthwise-flax-vector.patch \
            file://0001-Fix-aarch64-build.patch \
            file://0001-workspace.bzl-Fix-Eigen-download-issue.patch \
