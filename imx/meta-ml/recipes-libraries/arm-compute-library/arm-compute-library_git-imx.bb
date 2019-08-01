@@ -17,7 +17,7 @@ S = "${WORKDIR}/git"
 inherit scons
 
 PACKAGECONFIG_OPENCL       = ""
-PACKAGECONFIG_OPENCL_mx8   = "opencl"
+PACKAGECONFIG_OPENCL_mx8   = "opencl embed"
 PACKAGECONFIG_OPENCL_mx8mm = ""
 
 PACKAGECONFIG ??= "${PACKAGECONFIG_OPENCL}"
