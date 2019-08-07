@@ -19,7 +19,7 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
 "
-SRCREV = "dbafe0e54637774f3fd8c44d86dd1e3e9990b4e8"
+SRCREV = "1ed3781fbfb350faf104429ae103849e6cf98ac3"
 
 PV = "1.16.0.imx"
 
