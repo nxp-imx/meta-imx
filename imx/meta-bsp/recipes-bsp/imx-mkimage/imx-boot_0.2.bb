@@ -1,4 +1,4 @@
-# Copyright 2017-2018 NXP
+# Copyright 2017-2019 NXP
 
 require imx-mkimage_git.inc
 
@@ -28,7 +28,12 @@ CFLAGS = "-O2 -Wall -std=c99 -I ${STAGING_INCDIR_NATIVE} -L ${STAGING_LIBDIR_NAT
 
 IMX_M4_DEMOS        = ""
 IMX_M4_DEMOS_mx8qm  = "imx-m4-demos:do_deploy"
-IMX_M4_DEMOS_mx8qxp = "imx-m4-demos:do_deploy"
+IMX_M4_DEMOS_mx8x   = "imx-m4-demos:do_deploy"
+
+M4_DEFAULT_IMAGE ?= "m4_image.bin"
+M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_srtm_demo.bin"
+M4_DEFAULT_IMAGE_mx8dxl-phantom = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
+
 
 # This package aggregates output deployed by other packages,
 # so set the appropriate dependencies
@@ -44,7 +49,7 @@ SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
 ATF_MACHINE_NAME ?= "bl31-imx8qm.bin"
 ATF_MACHINE_NAME_mx8qm = "bl31-imx8qm.bin"
-ATF_MACHINE_NAME_mx8qxp = "bl31-imx8qx.bin"
+ATF_MACHINE_NAME_mx8x  = "bl31-imx8qx.bin"
 ATF_MACHINE_NAME_mx8mq = "bl31-imx8mq.bin"
 ATF_MACHINE_NAME_mx8mm = "bl31-imx8mm.bin"
 ATF_MACHINE_NAME_mx8mn = "bl31-imx8mn.bin"
@@ -57,7 +62,7 @@ TOOLS_NAME ?= "mkimage_imx8"
 
 SOC_TARGET       ?= "INVALID"
 SOC_TARGET_mx8qm  = "iMX8QM"
-SOC_TARGET_mx8qxp = "iMX8QX"
+SOC_TARGET_mx8x   = "iMX8QX"
 SOC_TARGET_mx8mq  = "iMX8M"
 SOC_TARGET_mx8mm  = "iMX8MM"
 SOC_TARGET_mx8mn  = "iMX8MN"
@@ -116,8 +121,8 @@ compile_mx8() {
 }
 compile_mx8x() {
     bbnote 8QX boot binary build
-    cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_srtm_demo.bin       ${BOOT_STAGING}/m40_tcm.bin
-    cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_srtm_demo.bin       ${BOOT_STAGING}/m4_image.bin
+    cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}               ${BOOT_STAGING}/m40_tcm.bin
+    cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}               ${BOOT_STAGING}/m4_image.bin
     cp ${DEPLOY_DIR_IMAGE}/mx8qx-ahab-container.img          ${BOOT_STAGING}
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${BOOT_STAGING}/scfw_tcm.bin
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
