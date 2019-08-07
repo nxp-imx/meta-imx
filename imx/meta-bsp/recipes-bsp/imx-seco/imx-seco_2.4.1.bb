@@ -19,7 +19,7 @@ do_install[noexec] = "1"
 
 SECO_FIRMWARE_NAME ?= "mx8qm-ahab-container.img"
 SECO_FIRMWARE_NAME_mx8qm  = "mx8qm-ahab-container.img"
-SECO_FIRMWARE_NAME_mx8qxp = "mx8qx-ahab-container.img"
+SECO_FIRMWARE_NAME_mx8x   = "mx8qx-ahab-container.img"
 
 addtask deploy after do_install
 do_deploy () {
@@ -28,4 +28,4 @@ do_deploy () {
 }
 
 
-COMPATIBLE_MACHINE = "(mx8qxp)"
+COMPATIBLE_MACHINE = "(mx8x)"
