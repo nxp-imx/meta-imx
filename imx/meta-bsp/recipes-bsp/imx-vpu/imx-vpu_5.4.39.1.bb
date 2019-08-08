@@ -4,7 +4,7 @@
 
 DESCRIPTION = "Freescale VPU library"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=72c0f70181bb6e83eee6aab8de12a9f3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=72c0f70181bb6e83eee6aab8de12a9f3" 
 
 PROVIDES = "virtual/imxvpu"
 RPROVIDES_${PN} = "virtual/imxvpu"
