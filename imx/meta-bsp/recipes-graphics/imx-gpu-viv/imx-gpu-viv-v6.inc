@@ -11,7 +11,8 @@ PACKAGES =+ "libnn-imx"
 GLES3_HEADER_REMOVALS_mx8qxp_remove = "gl32.h"
 
 do_install_append () {
-    if [ -e ${D}${libdir}/vulkan/libvulkan_VSI.so ]; then
+
+    if [ "${IS_MX8}" = "1" ]; then
         mv ${D}${libdir}/vulkan/libvulkan_VSI.so ${D}${libdir}/vulkan/libvulkan.so
     fi
 }
