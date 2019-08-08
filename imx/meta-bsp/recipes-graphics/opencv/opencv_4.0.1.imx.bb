@@ -97,6 +97,7 @@ PACKAGECONFIG_append_mx8   = " dnn text"
 
 PACKAGECONFIG_OPENCL       = ""
 PACKAGECONFIG_OPENCL_mx8   = "opencl"
+PACKAGECONFIG_OPENCL_mx8dxl-phantom   = ""
 PACKAGECONFIG_OPENCL_mx8mm = ""
 PACKAGECONFIG_append       = " ${PACKAGECONFIG_OPENCL}"
 
