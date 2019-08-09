@@ -17,6 +17,7 @@ SRC_URI = "${ATF_SRC};branch=${SRCBRANCH} \
 SRCREV = "4dd8919a805336c6df8a791f238e8da1830dfe7b"
 
 PLATFORM_mx8x   = "imx8qx"
+PLATFORM_mx8qxp = "imx8qx"
 PLATFORM_mx8mn  = "imx8mn"
 
 BUILD_OPTEE = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true', 'false', d)}"
