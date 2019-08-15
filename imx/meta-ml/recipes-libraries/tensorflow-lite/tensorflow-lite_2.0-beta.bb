@@ -5,16 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=98c6df387846c9077433242544c8f127"
 DEPENDS = "zlib unzip-native"
 
 TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
-SRCBRANCH = "r2.0"
+SRCBRANCH = "imx-v2.0.0-beta1"
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH} \
-           file://download.patch \
-           file://0001-Makefile-Add-label_image-example.patch \
-           file://0001-Fix-depthwise-flax-vector.patch \
-           file://0001-Fix-aarch64-build.patch \
-           file://0001-workspace.bzl-Fix-Eigen-download-issue.patch \
-           file://0001-Makefile-Add-lrt-to-the-library-list-to-fix-build-br.patch"
-
-SRCREV = "8e423e3d56390671f0d954c90f4fd163ab02a9c1" 
+"
+SRCREV = "899edf736feefa051daea68f52866facbe3ee944"
 
 S = "${WORKDIR}/git"
 
