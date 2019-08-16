@@ -1,14 +1,15 @@
 DESCRIPTION = "TensorFlow Lite C++ Library"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=98c6df387846c9077433242544c8f127"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=01e86893010a1b87e69a213faa753ebd"
 
 DEPENDS = "zlib unzip-native"
 
 TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
-SRCBRANCH = "imx-v2.0.0-beta1"
+SRCBRANCH = "imx-v1.13.2"
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH} \
+           file://download.patch \
 "
-SRCREV = "899edf736feefa051daea68f52866facbe3ee944"
+SRCREV = "cde4007c04b09625022c0e8e3fe09bc27b4454d3" 
 
 S = "${WORKDIR}/git"
 
