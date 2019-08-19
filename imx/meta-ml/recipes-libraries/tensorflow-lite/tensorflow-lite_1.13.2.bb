@@ -9,7 +9,7 @@ SRCBRANCH = "imx-v1.13.2"
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH} \
            file://download.patch \
 "
-SRCREV = "cde4007c04b09625022c0e8e3fe09bc27b4454d3" 
+SRCREV = "2b304c96b3e560cfb10c4301e8dc0ad5bc07ddc0"
 
 S = "${WORKDIR}/git"
 
