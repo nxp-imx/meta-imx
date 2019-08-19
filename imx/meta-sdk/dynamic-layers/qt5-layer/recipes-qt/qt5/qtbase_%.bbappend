@@ -29,6 +29,10 @@ PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gl'
 PACKAGECONFIG_GL_imxgpu3d = "gles2"
 PACKAGECONFIG_append = " accessibility examples"
 
+PACKAGECONFIG_MX8_GPU     = ""
+PACKAGECONFIG_MX8_GPU_mx8 = " gbm kms"
+PACKAGECONFIG_append_imxgpu = " ${PACKAGECONFIG_MX8_GPU}"
+
 # -eglfs is conditioned on GPU3D with FrameBuffer only
 # -no-opengl -linuxfb are conditioned on GPU2D only
 # Overwrite the original setting which is in meta-freescale layer
@@ -39,6 +43,10 @@ QT_CONFIG_FLAGS_APPEND_imxgpu3d = "\
         bb.utils.contains('DISTRO_FEATURES', 'wayland', '-no-eglfs', \
             '-eglfs', d), d)}"
 QT_CONFIG_FLAGS_append = " ${QT_CONFIG_FLAGS_APPEND}"
+
+QT_CONFIG_FLAGS_MX8_GPU     = ""
+QT_CONFIG_FLAGS_MX8_GPU_mx8 = "-eglfs -kms"
+QT_CONFIG_FLAGS_append_imxgpu = " ${QT_CONFIG_FLAGS_MX8_GPU}"
 
 PACKAGECONFIG_WAYLAND ?= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xkbcommon-evdev', '', d)}"
 PACKAGECONFIG += "${PACKAGECONFIG_WAYLAND}"
