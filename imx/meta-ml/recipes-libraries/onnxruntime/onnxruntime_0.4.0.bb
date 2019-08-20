@@ -12,7 +12,7 @@ SRCREV_onnxruntime = "bf859a9a5489a5f0c954ad7da724f3514983d0e3"
 SRC_URI = "\
     ${GIT_onnxruntime} \
     file://Fix_Eigen_Build_Break.patch \
-    file://openmp_fix.patch \
+    file://0001-Undefine-MLAS-THREADPOOL-when-using-OPENMP.patch \
 "
 SRCREV_FORMAT = "onnxruntime"
 
