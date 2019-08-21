@@ -5,4 +5,4 @@ FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-graphics/dr
 LIC_FILES_CHKSUM = "file://xf86drm.c;beginline=9;endline=32;md5=c8a3b961af7667c530816761e949dc71"
 IMX_LIBDRM_BRANCH = "libdrm-imx-2.4.97"
 SRC_URI_remove = "file://installtests.patch"
-SRCREV = "ddf3d10f55581964b507fdb9fe0988cd200d1c23"
+SRCREV = "42074ece90872544644ceeaf38c1dd051baa8cdf"
