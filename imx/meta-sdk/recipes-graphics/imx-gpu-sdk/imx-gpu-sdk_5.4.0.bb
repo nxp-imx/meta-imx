@@ -30,7 +30,7 @@ DEPENDS_append       = " ${DEPENDS_OPENVX}"
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
-SRCREV = "b0d0b95a3989b1f08a0cb7265adb6882a265fed7"
+SRCREV = "d01000875fc89abf7fa8c0dc89fda3039a1e1efa"
 
 S = "${WORKDIR}/git"
 
