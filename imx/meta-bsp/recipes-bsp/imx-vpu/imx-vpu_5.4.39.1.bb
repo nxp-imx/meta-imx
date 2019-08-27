@@ -12,8 +12,8 @@ RPROVIDES_${PN} = "virtual/imxvpu"
 PE = "1"
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "a4216deccd170e98f2def33430142bcb"
-SRC_URI[sha256sum] = "4e059481b31cee8a3219c1dc29655f9987f065598e8f1f750a9a7aee10166c1b"
+SRC_URI[md5sum] = "4176275442e0799e5b6dedb50bbaa915"
+SRC_URI[sha256sum] = "528e2ffc7d3783a0192e645353424025cc211d379d521c4c384051138dcbffe3"
 
 inherit fsl-eula-unpack use-imx-headers
 
