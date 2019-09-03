@@ -8,6 +8,7 @@ inherit core-image
 IMAGE_FEATURES += " \
     debug-tweaks \
     tools-profile \
+    package-management \
     splash \
     nfs-server \
     tools-debug \
