@@ -3,7 +3,7 @@
 
 DESCRIPTION = "This is the basic core image with minimal tests"
 
-inherit core-image 
+inherit core-image
 
 IMAGE_FEATURES += " \
     debug-tweaks \
