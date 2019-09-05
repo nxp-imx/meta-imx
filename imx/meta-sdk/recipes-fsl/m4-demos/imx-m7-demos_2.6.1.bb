@@ -25,7 +25,7 @@ PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=72c0f70181bb6e83eee6aab8de12a9f3"
 
-SRC_URI[imx8mn.md5sum] = "6c6323616171e404b18d53c7ee264bde"
-SRC_URI[imx8mn.sha256sum] = "ccc88e0c1982c459d9b3ea54de90aa8c63649e2fb149e83577cd4950f34ce22e"
+SRC_URI[imx8mn.md5sum] = "3592bae33ee32a652885fc71525d5b9a"
+SRC_URI[imx8mn.sha256sum] = "b28737558fdf39ebf9c371c9d31b21cc3c659707f8f6dea83e82caeffec36ecf"
 
 COMPATIBLE_MACHINE = "(mx8mn)"
