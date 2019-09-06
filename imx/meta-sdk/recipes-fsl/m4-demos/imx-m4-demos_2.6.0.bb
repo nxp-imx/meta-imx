@@ -4,7 +4,8 @@
 require imx-m4-demos-2.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6c12031a11b81db21cdfe0be88cac4b3"
-LIC_FILES_CHKSUM_mx7ulp = "file://COPYING;md5=fb0303e4ee8b0e71c094171e2272bd44"
+
+IMX_PACKAGE_NAME_mx7ulp = "${SOC}-m4-demo-${PV}-rfp"
 
 SRC_URI[imx7ulp.md5sum] = "ce0a9cdb8b27a1cc17392aa57602959f"
 SRC_URI[imx7ulp.sha256sum] = "b4667d68f564586e0d1153245739cb06c16b809fb8921ee61ea6d8a4dc486771"
