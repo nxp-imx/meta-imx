@@ -3,7 +3,7 @@
 
 require imx-m4-demos-2.inc
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=72c0f70181bb6e83eee6aab8de12a9f3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6c12031a11b81db21cdfe0be88cac4b3"
 LIC_FILES_CHKSUM_mx7ulp = "file://COPYING;md5=fb0303e4ee8b0e71c094171e2272bd44"
 
 SRC_URI[imx7ulp.md5sum] = "ce0a9cdb8b27a1cc17392aa57602959f"
