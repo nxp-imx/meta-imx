@@ -16,10 +16,8 @@ SRC_URI_append = ";name=${SOC}"
 SCR = "SCR-${SOC}-m7-demo.txt"
 
 do_deploy () {
-    cp ${D}/* ${DEPLOYDIR}/
-    for i in hello_world rpmsg_lite_pingpong_rtos_linux_remote rpmsg_lite_str_echo_rtos sai_low_power_audio; do
-        ln -s imx8mn_m7_TC_$i.bin ${DEPLOYDIR}/imx8mn_m7_TCM_$i.bin
-    done
+   # Install the demo binaries
+   cp ${D}/* ${DEPLOYDIR}/
 }
 addtask deploy after do_install
 
