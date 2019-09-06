@@ -14,7 +14,7 @@ FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstre
 
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
 SRCBRANCH = "imx-1.16.x"
-SRCREV = "f734ed3a2cad36c5076322f8481a0b85e0cef210"
+SRCREV = "eba3db4034fc17b712808d5e90ed5ff22ef490ca"
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
     file://configure-allow-to-disable-libssh2.patch \
