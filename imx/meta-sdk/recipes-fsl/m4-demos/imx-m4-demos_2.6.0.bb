@@ -4,7 +4,6 @@
 require imx-m4-demos-2.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6c12031a11b81db21cdfe0be88cac4b3"
-LIC_FILES_CHKSUM_mx8dxl-phantom = "file://COPYING;md5=72c0f70181bb6e83eee6aab8de12a9f3"
 
 IMX_PACKAGE_NAME_mx7ulp = "${SOC}-m4-demo-${PV}-rfp"
 
