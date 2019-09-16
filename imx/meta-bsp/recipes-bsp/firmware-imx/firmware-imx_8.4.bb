@@ -12,8 +12,8 @@ PE = "1"
 
 SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true "
 
-SRC_URI[md5sum] = "37b2a565df49b239e87825fa2612d1c6"
-SRC_URI[sha256sum] = "886cc1aab45164681962bce654541d809536045fdbf3f177ae2dc7b2b20ba44b"
+SRC_URI[md5sum] = "d2d02f96dad4fb8350696eaa979d50e1"
+SRC_URI[sha256sum] = "0bd050d5fceb7829201d33b19948b5717db106e3b676a777488c24130eba54b9"
 
 inherit fsl-eula-unpack allarch
 
