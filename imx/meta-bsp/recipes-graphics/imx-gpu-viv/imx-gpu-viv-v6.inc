@@ -143,6 +143,7 @@ HAS_GBM_mx8 = "true"
 GLES3_HEADER_REMOVALS = "gl31.h gl32.h"
 GLES3_HEADER_REMOVALS_remove_mx8   = "gl31.h"
 GLES3_HEADER_REMOVALS_remove_mx8qm = "gl32.h"
+GLES3_HEADER_REMOVALS_mx8qxp = ""
 
 do_install () {
     install -d ${D}${libdir}

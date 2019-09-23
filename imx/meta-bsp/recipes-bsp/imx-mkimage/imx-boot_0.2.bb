@@ -16,7 +16,7 @@ BOOT_TOOLS = "imx-boot-tools"
 BOOT_NAME = "imx-boot"
 PROVIDES = "${BOOT_NAME}"
 
-IMX_FIRMWARE = "firmware-imx imx-sc-firmware"
+IMX_FIRMWARE = "firmware-imx imx-sc-firmware imx-seco"
 IMX_FIRMWARE_mx8m = "firmware-imx"
 DEPENDS += " \
     u-boot \
@@ -51,6 +51,7 @@ ATF_MACHINE_NAME_mx8qm = "bl31-imx8qm.bin"
 ATF_MACHINE_NAME_mx8qxp = "bl31-imx8qx.bin"
 ATF_MACHINE_NAME_mx8mq = "bl31-imx8mq.bin"
 ATF_MACHINE_NAME_mx8mm = "bl31-imx8mm.bin"
+ATF_MACHINE_NAME_mx8mn = "bl31-imx8mn.bin"
 ATF_MACHINE_NAME_append = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', '-optee', '', d)}"
 
 DCD_NAME ?= "imx8qm_dcd.cfg.tmp"
@@ -67,6 +68,7 @@ SOC_TARGET_mx8qm  = "iMX8QM"
 SOC_TARGET_mx8qxp = "iMX8QX"
 SOC_TARGET_mx8mq  = "iMX8M"
 SOC_TARGET_mx8mm  = "iMX8MM"
+SOC_TARGET_mx8mn  = "iMX8MN"
 
 SOC_DIR ?= "${SOC_TARGET}"
 SOC_DIR_mx8m = "iMX8M"
@@ -80,7 +82,7 @@ IMXBOOT_TARGETS ?= "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi'
 S = "${WORKDIR}/git"
 
 do_compile () {
-    if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" ]; then
+    if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" -o "${SOC_TARGET}" = "iMX8MN" ]; then
         echo 8MQ/8MM boot binary build
         SOC_DIR="iMX8M"
         for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
@@ -155,7 +157,7 @@ do_deploy () {
 
     # copy the tool mkimage to deploy path and sc fw, dcd and uboot
     install -m 0644 ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-    if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" ]; then
+    if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" -o "${SOC_TARGET}" = "iMX8MN" ]; then
         SOC_DIR="iMX8M"
         install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
@@ -167,9 +169,6 @@ do_deploy () {
 
         install -m 0755 ${S}/${SOC_DIR}/mkimage_fit_atf.sh ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
     elif [ "${SOC_TARGET}" = "iMX8QM" ]; then
-        if [ "${MACHINE}" = "imx8qma0mek" ]; then
-            install -m 0644 ${S}/${SOC_DIR}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-        fi
         install -m 0644 ${S}/${SOC_DIR}/mx8qm-ahab-container.img ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         install -m 0644 ${S}/${SOC_DIR}/m40_tcm.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         install -m 0644 ${S}/${SOC_DIR}/m41_tcm.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}

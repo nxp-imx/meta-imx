@@ -16,12 +16,12 @@ DEPENDS_append_imxvpu = " virtual/imxvpu"
 PE = "1"
 PV = "7.0+${SRCPV}"
 
-SRCBRANCH = "imx_4.14.98_2.0.0_ga"
+SRCBRANCH = "imx_4.14.98_2.2.0"
 IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
 SRC_URI_append = " file://memtool_profile "
 
-SRCREV = "d32727a9d7ef2543729c149a713db24b8f5c2aa8"
+SRCREV = "fb55212d11ba9fff9dbb9f1f72b24be57f8bb65d"
 
 S = "${WORKDIR}/git"
 

@@ -41,13 +41,13 @@ SRC_URI_remove = "file://0001-Prepend-PKG_CONFIG_SYSROOT_DIR-to-pkg-config-outpu
 EXTRA_OECONF_remove = "WAYLAND_PROTOCOLS_SYSROOT_DIR=${RECIPE_SYSROOT}"
 
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
-SRCBRANCH = "MM_04.04.05_1902_L4.14.98_GA"
+SRCBRANCH = "MM_04.05.00_1908_L4.14.98"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
 "
 
-SRCREV = "0191521ba226904e4b2f84c38e5f6ae75169a18a"
+SRCREV = "9fc1ada651093b37675d30a2794044d06bcacdc8" 
 
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found

@@ -29,7 +29,7 @@ DEPENDS_append       = " ${DEPENDS_OPENVX}"
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
-SRCREV = "184bb5e4068e754ba8fa9658214567c32bac1f8d"
+SRCREV = "5f508da40457bf46bc976b785fc9cdb84deec352"
 
 S = "${WORKDIR}/git"
 
@@ -38,24 +38,24 @@ BACKEND = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',     'X11', \
                                                              'FB', d), d)}"
 
-FEATURES_MX8   = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.1"
-FEATURES_MX8M  = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2"
-FEATURES_MX8MM = ",OpenCV"
-FEATURES_MX8X  = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2"
 FEATURES                  = "EGL,EarlyAccess,OpenVG"
 FEATURES_append_imxgpu2d  = ",G2D"
 FEATURES_append_imxgpu3d  = ",OpenGLES2"
-FEATURES_append_mx6q      = ",OpenGLES3"
-FEATURES_append_mx6dl     = ",OpenGLES3"
-FEATURES_append_mx8qm     = "${FEATURES_MX8}"
-FEATURES_append_mx8mq     = "${FEATURES_MX8M}"
-FEATURES_append_mx8mm     = "${FEATURES_MX8MM}"
-FEATURES_append_mx8qxp    = "${FEATURES_MX8X}"
+FEATURES_append           = "${FEATURES_SOC}"
+
+FEATURES_SOC       = ""
+FEATURES_SOC_mx6q  = ",OpenGLES3"
+FEATURES_SOC_mx6dl = ",OpenGLES3"
+FEATURES_SOC_mx8   = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.1"
+FEATURES_SOC_mx8m  = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2"
+FEATURES_SOC_mx8mm = ",OpenCV"
+FEATURES_SOC_mx8x  = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2"
 
 EXTENSIONS       = "*"
 EXTENSIONS_mx6q  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 EXTENSIONS_mx6dl = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
-EXTENSIONS_mx8mq = "OpenGLES3:GL_EXT_color_buffer_float"
+EXTENSIONS_mx8m  = "OpenGLES3:GL_EXT_color_buffer_float"
+EXTENSIONS_mx8mm = "*"
 
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto

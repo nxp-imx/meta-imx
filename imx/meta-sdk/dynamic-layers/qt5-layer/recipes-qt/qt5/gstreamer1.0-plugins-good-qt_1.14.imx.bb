@@ -7,13 +7,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
                     file://gst/replaygain/rganalysis.c;beginline=1;endline=23;md5=b60ebefd5b2f5a8e0cab6bfee391a5fe"
 
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
-SRCBRANCH = "MM_04.04.05_1902_L4.14.98_GA"
+SRCBRANCH = "MM_04.05.00_1908_L4.14.98"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
 "
-SRCREV = "a31aabb7581d3f491cd31889d44479bb0f34990b"
+SRCREV = "6aa0b5632a610ea09278624826fb312db9f7b1b9"
 
 DEPENDS += "gstreamer1.0-plugins-base virtual/kernel \
             ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)} \

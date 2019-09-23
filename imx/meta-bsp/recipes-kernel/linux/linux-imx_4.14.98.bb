@@ -18,7 +18,7 @@ DO_CONFIG_V7_COPY_mx6 = "yes"
 DO_CONFIG_V7_COPY_mx7 = "yes"
 DO_CONFIG_V7_COPY_mx8 = "no"
 
-addtask copy_defconfig after do_unpack before do_preconfigure
+addtask copy_defconfig after do_patch before do_preconfigure
 do_copy_defconfig () {
     install -d ${B}
     if [ ${DO_CONFIG_V7_COPY} = "yes" ]; then

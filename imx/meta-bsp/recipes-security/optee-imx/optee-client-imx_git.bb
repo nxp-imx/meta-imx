@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=69663ab153298557a59c67a60a743e5b"
 
 inherit pythonnative systemd
 
-SRCBRANCH = "imx_4.14.98_2.0.0_ga"
+SRCBRANCH = "imx_4.14.98_2.2.0"
 OPTEE_CLIENT_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-client.git;protocol=https"
 SRC_URI = "${OPTEE_CLIENT_SRC};branch=${SRCBRANCH}"
-SRCREV = "d06647d201520ac57f1331e97db6138d63bc2666" 
+SRCREV = "71a9bef78fff2d5d4db8a2307d3b91e2aa671dc9" 
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI_append = " file://tee-supplicant.service"

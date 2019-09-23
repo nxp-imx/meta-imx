@@ -1,0 +1,32 @@
+From dee096d75e12554ac24171a8af5cb5da06bd29b8 Mon Sep 17 00:00:00 2001
+From: Fugang Duan <fugang.duan@nxp.com>
+Date: Wed, 29 May 2019 15:33:43 +0800
+Subject: [PATCH] gobex: increase the obex default/abort timeout value.
+
+Increase the obex default/abort timeout due to avoid
+response timeout for some phone obex opp test.
+
+Upstream-Status: Pending
+Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
+---
+ gobex/gobex.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/gobex/gobex.c b/gobex/gobex.c
+index 0e5817e..d568b05 100644
+--- a/gobex/gobex.c
++++ b/gobex/gobex.c
+@@ -35,8 +35,8 @@
+ #define G_OBEX_MINIMUM_MTU	255
+ #define G_OBEX_MAXIMUM_MTU	65535
+ 
+-#define G_OBEX_DEFAULT_TIMEOUT	10
+-#define G_OBEX_ABORT_TIMEOUT	5
++#define G_OBEX_DEFAULT_TIMEOUT	80
++#define G_OBEX_ABORT_TIMEOUT	40
+ 
+ #define G_OBEX_OP_NONE		0xff
+ 
+-- 
+2.7.4
+
