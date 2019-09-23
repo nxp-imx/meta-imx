@@ -201,9 +201,3 @@ Systemd
 -------
 Systemd support is enabled as default but it can be disabled by commenting out the systemd settings in
 imx/meta-sdk//conf/distro/include/fsl-imx-preferred-env.inc.
-
-Opencv
---------
-Opencv can be installed to the rootfs by adding the following lines to local.conf:
-
-IMAGE_INSTALL_append = " opencv"

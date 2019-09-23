@@ -2,12 +2,12 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
 # Copyright 2017-2018 NXP
 
-SRCBRANCH = "imx_4.19.35_1.1.0"
+SRCBRANCH = "master"
 IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
 SRC_URI_append = " file://memtool_profile "
 
-SRCREV = "e5a1705544b3c5f96e180a77e8092c964277380a" 
+SRCREV = "23a3a9a14d516fa5b232a2b6596f558e1ce98901"
 
 do_compile() {
     CFLAGS="${TOOLCHAIN_OPTIONS}"

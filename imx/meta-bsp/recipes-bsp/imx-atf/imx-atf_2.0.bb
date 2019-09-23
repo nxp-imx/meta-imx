@@ -9,12 +9,12 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;m
 # So we don't have to do this:
 PV = "2.0+git${SRCPV}"
 
-SRCBRANCH = "imx_4.19.35_1.1.0"
+SRCBRANCH = "imx_2.0.y"
 ATF_SRC ?= "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https"
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH} \
            file://0001-Allow-BUILD_STRING-to-be-set-in-.revision-file.patch \
 "
-SRCREV = "80896297951c87d8a80ab9364afa53c6606539e4"
+SRCREV = "8dd337278d87e15c6a87bc2db8201f5435a6f8be"
 
 PLATFORM_mx8x   = "imx8qx"
 # Override PLATFORM_mx8qxp from the included recipe

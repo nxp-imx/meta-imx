@@ -12,35 +12,25 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 DEPENDS += "lzop-native bc-native"
 
-SRCBRANCH = "imx_4.19.35_1.0.0"
-LOCALVERSION = "-${SRCBRANCH}"
+SRCBRANCH = "imx_4.19.y"
+LOCALVERSION = "-1.1.0"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
-SRCREV = "e4452f4458e4272345aa773e726107cb74ef2974"
+SRCREV = "81757a1880e62c09b0ff1f0b931666723afc17dd"
 
 S = "${WORKDIR}/git"
 
 DEFAULT_PREFERENCE = "1"
 
-DO_CONFIG_V7_COPY = "no"
-DO_CONFIG_V7_COPY_mx6 = "yes"
-DO_CONFIG_V7_COPY_mx7 = "yes"
-DO_CONFIG_V7_COPY_mx8 = "no"
+DEFCONFIG     = "defconfig"
+DEFCONFIG_mx6 = "imx_v7_defconfig"
+DEFCONFIG_mx7 = "imx_v7_defconfig"
 
-addtask copy_defconfig after do_patch before do_preconfigure
-do_copy_defconfig () {
+do_preconfigure_prepend() {
+    # meta-freescale/classes/fsl-kernel-localversion.bbclass requires
+    # defconfig in ${WORKDIR}
     install -d ${B}
-    if [ ${DO_CONFIG_V7_COPY} = "yes" ]; then
-        # copy latest imx_v7_defconfig to use for mx6, mx6ul and mx7
-        mkdir -p ${B}
-        cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
-        cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
-    else
-        # copy latest defconfig to use for mx8
-        mkdir -p ${B}
-        cp ${S}/arch/arm64/configs/defconfig ${B}/.config
-        cp ${S}/arch/arm64/configs/defconfig ${B}/../defconfig
-    fi
+    cp ${S}/arch/${ARCH}/configs/${DEFCONFIG} ${WORKDIR}/defconfig
 }
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
