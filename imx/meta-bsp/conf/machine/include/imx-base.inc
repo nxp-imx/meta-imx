@@ -3,12 +3,18 @@
 include conf/machine/include/fsl-default-settings.inc
 include conf/machine/include/fsl-default-versions.inc
 
+require conf/machine/include/utilities.inc
+
+IMAGE_CLASSES += "image_types_create_sdcard_symlink"
+
 # Set specific make target and binary suffix
 PREFERRED_PROVIDER_u-boot ??= "u-boot-fslc"
 PREFERRED_PROVIDER_virtual/bootloader ??= "u-boot-fslc"
 
 PREFERRED_PROVIDER_u-boot-mxsboot-native ??= "u-boot-fslc-mxsboot-native"
 
+UBOOT_BINARY ?= "u-boot.imx"
+UBOOT_BINARY_mx8 ?= "u-boot.bin"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
 UBOOT_MAKE_TARGET_mxs ?= "u-boot.sb"
 
@@ -217,11 +223,6 @@ PREFERRED_PROVIDER_virtual/libgles2_imxgpu3d ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libg2d            ?= "imx-gpu-g2d"
 PREFERRED_PROVIDER_virtual/libg2d_imxdpu     ?= "imx-dpu-g2d"
 
-# Use i.MX libdrm Version
-PREFERRED_VERSION_libdrm_mx6 ?= "2.4.97.imx"
-PREFERRED_VERSION_libdrm_mx7 ?= "2.4.97.imx"
-PREFERRED_VERSION_libdrm_mx8 ?= "2.4.97.imx"
-
 # Handle default kernel
 IMX_DEFAULT_KERNEL = "linux-imx"
 IMX_DEFAULT_KERNEL_mxs = "linux-fslc"
@@ -237,17 +238,50 @@ IMX_DEFAULT_KERNEL_mx6sll = "linux-imx"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "${IMX_DEFAULT_KERNEL}"
 
-SOC_DEFAULT_IMAGE_FSTYPES = "sdcard.gz"
-SOC_DEFAULT_IMAGE_FSTYPES_mxs = "uboot-mxsboot-sdcard sdcard.gz"
+SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.bz2 tar.bz2"
+SOC_DEFAULT_IMAGE_FSTYPES_mxs = "uboot-mxsboot-sdcard wic.gz"
 
-SDCARD_ROOTFS ?= "${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.ext4"
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
 IMAGE_FSTYPES ?= "${SOC_DEFAULT_IMAGE_FSTYPES}"
+
+IMAGE_BOOT_FILES_OPTEE     = "tee.bin uTee-${OPTEE_BIN_EXT}"
+IMAGE_BOOT_FILES_OPTEE_mx8 = "tee.bin"
+IMAGE_BOOT_FILES ?= " \
+    ${KERNEL_IMAGETYPE} \
+    ${@make_dtb_boot_files(d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', '${IMAGE_BOOT_FILES_OPTEE}', '', d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'xen', '', d)} \
+"
+
+IMAGE_INSTALL_append = " \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'jailhouse', 'jailhouse', '', d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'packagegroup-fsl-optee-imx', '', d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'imx-xen-base imx-xen-hypervisor', '', d)} \
+"
+
+### wic default support
+WKS_FILE_DEPENDS_MX8     = ""
+WKS_FILE_DEPENDS_MX8_mx8 = "imx-boot"
+WKS_FILE_DEPENDS ?= " \
+    virtual/bootloader \
+    e2fsprogs-native \
+    bmap-tools-native \
+    ${WKS_FILE_DEPENDS_MX8} \
+"
+
+SOC_DEFAULT_WKS_FILE ?= "imx-uboot-bootpart.wks.in"
+SOC_DEFAULT_WKS_FILE_mx8 ?= "imx-imx-boot-bootpart2.wks.in"
+SOC_DEFAULT_WKS_FILE_mxs ?= "imx-uboot-mxs-bootpart.wks.in"
+
+WKS_FILE ?= "${SOC_DEFAULT_WKS_FILE}"
 
 SERIAL_CONSOLES = "115200;ttymxc0"
 SERIAL_CONSOLE_mxs = "115200 ttyAMA0"
 
 KERNEL_IMAGETYPE = "zImage"
-KERNEL_IMAGETYPE_mx8 = "Image"
+KERNEL_IMAGETYPE_aarch64 = "Image"
 
 MACHINE_FEATURES = "usbgadget usbhost vfat alsa touchscreen"
 

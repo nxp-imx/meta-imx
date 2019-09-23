@@ -17,7 +17,7 @@ inherit cmake
 
 TARGET_CFLAGS += "-Dpng_set_gray_1_2_4_to_8=png_set_expand_gray_1_2_4_to_8"
 
-FILES_${PN} = "${libdir}"
-FILES_${PN}-dev = "${includedir}/IL"
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

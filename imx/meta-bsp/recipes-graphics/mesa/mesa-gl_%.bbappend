@@ -1,1 +1,1 @@
-COMPATIBLE_MACHINE_mx8  = "(-)"
+COMPATIBLE_MACHINE_imxgpu  = "(-)"

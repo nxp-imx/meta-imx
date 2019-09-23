@@ -1,4 +1,4 @@
-From 7af7580b32dbd3d5a78c467861d5d57efdaec61f Mon Sep 17 00:00:00 2001
+From 7f3abc1a4a6de7b721fe85193a2a54c41dc96c2a Mon Sep 17 00:00:00 2001
 From: Roy Li <rongqing.li@windriver.com>
 Date: Fri, 18 May 2018 17:39:46 +0800
 Subject: [PATCH] replace hardcode, and add EnvironmentFile and Wants
@@ -13,15 +13,16 @@ Signed-off-by: Jun Zhu <junzhu@nxp.com>
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/src/connman.service.in b/src/connman.service.in
-index 9f5c10f..cf2be52 100644
+index dab48bc..b5a3df5 100644
 --- a/src/connman.service.in
 +++ b/src/connman.service.in
-@@ -5,13 +5,15 @@ Conflicts=shutdown.target
+@@ -5,14 +5,16 @@ Conflicts=shutdown.target
  RequiresMountsFor=@localstatedir@/lib/connman
  After=dbus.service network-pre.target systemd-sysusers.service
  Before=network.target multi-user.target shutdown.target
 -Wants=network.target
 +Wants=network.target connman-env.service
+ Conflicts=systemd-resolved.service
  
  [Service]
  Type=dbus

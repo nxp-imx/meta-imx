@@ -1,82 +1,37 @@
-# Copyright 2017-2018 NXP
+FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-bsp/${BPN}/${BPN}:"
 
-DESCRIPTION = "i.MX ARM Trusted Firmware"
-SECTION = "BSP"
-LICENSE = "BSD-3-Clause"
+require recipes-bsp/imx-atf/imx-atf_1.5.0.bb
+
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
 
-inherit pkgconfig deploy
-
+# Upstream this:
+#PV .= "+git${SRCPV}"
+# So we don't have to do this:
 PV = "2.0+git${SRCPV}"
 
+SRCBRANCH = "imx_4.19.35_1.1.0"
 ATF_SRC ?= "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https"
-SRCBRANCH = "imx_4.19.35_1.0.0"
+SRC_URI = "${ATF_SRC};branch=${SRCBRANCH} \
+           file://0001-Allow-BUILD_STRING-to-be-set-in-.revision-file.patch \
+"
+SRCREV = "80896297951c87d8a80ab9364afa53c6606539e4"
 
-SRC_URI = "${ATF_SRC};branch=${SRCBRANCH}"
-SRCREV = "f92d379ebc12955e1c4e225c2768b36706bc42c4"
-
-S = "${WORKDIR}/git"
-
-BOOT_TOOLS = "imx-boot-tools"
-
-SOC_ATF ?= "imx8qm"
-SOC_ATF_mx8qm = "imx8qm"
-SOC_ATF_mx8qxp = "imx8qx"
-SOC_ATF_mx8mq = "imx8mq"
-SOC_ATF_mx8mm = "imx8mm"
-
-SYSROOT_DIRS += "/boot"
+PLATFORM_mx8x   = "imx8qx"
+# Override PLATFORM_mx8qxp from the included recipe
+PLATFORM_mx8qxp = "imx8qx"
+PLATFORM_mx8mn  = "imx8mn"
 
 BUILD_OPTEE = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true', 'false', d)}"
 
-do_compile () {
-    export CROSS_COMPILE="${TARGET_PREFIX}"
-    cd ${S}
-    # Clear LDFLAGS to avoid the option -Wl recognize issue
-    unset LDFLAGS
-
-    echo "-> Build ${SOC_ATF} bl31.bin"
-    # Set BUIL_STRING with the revision info
-    BUILD_STRING=""
-    if [ -e ${S}/.revision ]; then
-        cur_rev=`cat ${S}/.revision`
-        echo " Current revision is ${cur_rev} ."
-        BUILD_STRING="BUILD_STRING=${cur_rev}"
-    else
-        echo " No .revision found! "
-    fi
-    oe_runmake clean PLAT=${SOC_ATF}
-    oe_runmake ${BUILD_STRING} PLAT=${SOC_ATF} bl31
-
-    # Build opteee version
+do_compile_append() {
     if [ "${BUILD_OPTEE}" = "true" ]; then
-        oe_runmake clean PLAT=${SOC_ATF} BUILD_BASE=build-optee
-        oe_runmake ${BUILD_STRING} PLAT=${SOC_ATF} BUILD_BASE=build-optee SPD=opteed bl31
-    fi
-    unset CROSS_COMPILE
-}
-
-do_install () {
-    install -d ${D}/boot
-    install -m 0644 ${S}/build/${SOC_ATF}/release/bl31.bin ${D}/boot/bl31-${SOC_ATF}.bin
-    # Install opteee version
-    if [ "${BUILD_OPTEE}" = "true" ]; then
-        install -m 0644 ${S}/build-optee/${SOC_ATF}/release/bl31.bin ${D}/boot/bl31-${SOC_ATF}.bin-optee
+        oe_runmake clean BUILD_BASE=build-optee
+        oe_runmake BUILD_BASE=build-optee SPD=opteed bl31
     fi
 }
 
-do_deploy () {
-    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${S}/build/${SOC_ATF}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${SOC_ATF}.bin
-    # Deploy opteee version
+do_deploy_append () {
     if [ "${BUILD_OPTEE}" = "true" ]; then
-        install -m 0644 ${S}/build-optee/${SOC_ATF}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${SOC_ATF}.bin-optee
+        install -m 0644 ${S}/build-optee/${PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${PLATFORM}.bin-optee
     fi
 }
-
-addtask deploy before do_install after do_compile
-
-FILES_${PN} = "/boot"
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx8)"

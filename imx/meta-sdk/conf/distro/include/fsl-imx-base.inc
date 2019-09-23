@@ -1,8 +1,8 @@
 DISTRO = "fsl-imx"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.19-thud"
+DISTRO_VERSION = "4.19-warrior"
 
-DISTRO_CODENAME = "thud"
+DISTRO_CODENAME = "warrior"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 #SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
@@ -16,11 +16,11 @@ LOCALCONF_VERSION = "1"
 IMX_DEFAULT_DISTRO_FEATURES = "opengl ptest multiarch"
 # Enable vulkan distro feature only for mx8
 IMX_DEFAULT_DISTRO_FEATURES_append_mx8 = " vulkan"
+# Enable jailhouse distro feature only for mx8m
+IMX_DEFAULT_DISTRO_FEATURES_append_mx8m = " jailhouse"
 IMX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 IMX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
-IMAGE_FSTYPES = "tar.bz2 ext4 sdcard.bz2"
 
-BBMASK += "meta-freescale/recipes-graphics/wayland/wayland_1.15.%.bbappend"
 BBMASK += "poky/meta/recipes-graphics/vulkan/vulkan_1.1.73.0.bb"
 
 DISTRO_FEATURES ?= "${DISTRO_FEATURES_DEFAULT} ${DISTRO_FEATURES_LIBC} ${IMX_DEFAULT_DISTRO_FEATURES}"

@@ -1,0 +1,19 @@
+diff --git a/tensorflow/lite/tools/make/download_dependencies.sh b/tensorflow/lite/tools/make/download_dependencies.sh
+index 3570f9a..cbe1296 100755
+--- a/tensorflow/lite/tools/make/download_dependencies.sh
++++ b/tensorflow/lite/tools/make/download_dependencies.sh
+@@ -61,12 +61,12 @@ download_and_extract() {
+   echo "downloading ${url}" >&2
+   mkdir -p "${dir}"
+   if [[ "${url}" == *gz ]]; then
+-    curl -Ls "${url}" | tar -C "${dir}" --strip-components=1 -xz
++    wget -qO- "${url}" | tar xz --strip-components=1 -C "${dir}"
+   elif [[ "${url}" == *zip ]]; then
+     tempdir=$(mktemp -d)
+     tempdir2=$(mktemp -d)
+ 
+-    curl -L ${url} > ${tempdir}/zipped.zip
++    wget ${url} -O ${tempdir}/zipped.zip
+     unzip ${tempdir}/zipped.zip -d ${tempdir2}
+ 
+     # If the zip file contains nested directories, extract the files from the

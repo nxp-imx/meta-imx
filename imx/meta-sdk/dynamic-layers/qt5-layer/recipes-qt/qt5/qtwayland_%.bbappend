@@ -1,6 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-SRC_URI_append = " file://0001-Fix-crash-when-wl_surface-was-destroyed-before-eglDe.patch \
-                   file://0001-tst_client.cpp-Fix-no-opengl-build.patch \
+SRC_URI_append = " file://0001-tst_client.cpp-Fix-no-opengl-build.patch \
 "
 SRC_URI_append_mx6sl = " file://0001-hardwareintegration-Do-not-include-shm-emulation-ser.patch \
 "

@@ -1,0 +1,30 @@
+From 101d2965e43395e08e731dd3393fbfba67ef468e Mon Sep 17 00:00:00 2001
+From: Mike Caraman <mike.caraman@nxp.com>
+Date: Tue, 20 Aug 2019 17:20:01 +0300
+Subject: [PATCH] Undefine MLAS THREADPOOL when using OPENMP
+
+The new MLAS THREADPOOL capability added after v0.3.0 broke OPENMP support.
+Fix the issue by defining the concealed MLAS_NO_ONNXRUNTIME_THREADPOOL when using OPENMP.
+---
+ onnxruntime/core/mlas/lib/mlasi.h | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/onnxruntime/core/mlas/lib/mlasi.h b/onnxruntime/core/mlas/lib/mlasi.h
+index 084a27b..86488c9 100644
+--- a/onnxruntime/core/mlas/lib/mlasi.h
++++ b/onnxruntime/core/mlas/lib/mlasi.h
+@@ -75,6 +75,11 @@ Abstract:
+ //
+ // Select the threading model.
+ //
++#ifdef _OPENMP
++#define MLAS_NO_ONNXRUNTIME_THREADPOOL
++#endif
++#include <stdio.h>
++
+ 
+ #if !defined(MLAS_NO_ONNXRUNTIME_THREADPOOL)
+ #include "core/platform/threadpool.h"
+-- 
+2.7.4
+

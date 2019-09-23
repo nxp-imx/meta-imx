@@ -13,6 +13,7 @@ SOC_mx8mm   = "imx8mm"
 SOC_mx8mq   = "imx8mq"
 SOC_mx8qm   = "imx8qm"
 SOC_mx8qxp  = "imx8qx"
+SOC_mx8dxl-phantom  = "imx8dxl-phantom"
 
 IMX_PACKAGE_NAME = "${SOC}-m4-demo-${PV}"
 SRC_URI_append = ";name=${SOC}"
@@ -22,6 +23,7 @@ SCR = "SCR-${SOC}-m4-demo.txt"
 do_deploy () {
    # Install the demo binaries
    cp ${D}/* ${DEPLOYDIR}/
+   chmod 0644 ${DEPLOYDIR}/*
 }
 addtask deploy after do_install
 

@@ -187,6 +187,16 @@ the differences between each license.
 
 Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
 
+Qt with kms
+--
+Some customers wants to use QT without wayland/weston and the alternative for that is to use through kms plugin.
+This configuration is supported only on mx8 machines.
+By default, wayland plugin is enabled.We can switch to kms plugin by following these steps.
+- killall weston
+- export QT_QPA_EGLFS_ALWAYS_SET_MODE=1
+- Run any qt application using -platform eglfs
+  Example: ./Qt5_CinematicExperience -platform eglfs
+
 Systemd
 -------
 Systemd support is enabled as default but it can be disabled by commenting out the systemd settings in

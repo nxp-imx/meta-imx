@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2018 NXP
+# Copyright 2017-2018 NXP
 
 SUMMARY = "OPTEE test"
 HOMEPAGE = "http://www.optee.org/"
@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 inherit pythonnative
 DEPENDS = "optee-os-imx optee-client-imx python-pycrypto-native openssl"
 
-SRCBRANCH = "imx_4.19.35_1.0.0"
+SRCBRANCH = "imx_4.19.35_1.1.0"
 OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
-SRCREV = "b7114b828b82f2c0eec124ed424eff1230cc5319"
+SRCREV = "b7114b828b82f2c0eec124ed424eff1230cc5319" 
 
 S = "${WORKDIR}/git"
 

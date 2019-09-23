@@ -6,11 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074 \
                     file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
 PR = "r1"
-PV = "19.02"
+PV = "19.05"
 PV_MAJOR = "${@d.getVar('PV',d,1).split('.')[0]}"
 
-BRANCH = "master"
-SRCREV = "0324f48e64edb99a5c8d819394545d97e0c2ae97"
+BRANCH = "branches/armnn_19_05"
+BRANCH_tidl-api = "master"
+SRCREV = "a723ec5d2ac35948efb5dfd0c121a1a89cb977b7"
 SRCREV_tidl-api = "7e9a3942ec38efd64d45e34c10cba2f2938f5618"
 
 SRCREV_FORMAT = "armnn"
@@ -31,7 +32,7 @@ SRC_URI = " \
     file://0008-generate-versioned-library-tflite.patch \
     file://Fixes-strncpy-error-under-GCC-8.2.1.patch \
     http://download.tensorflow.org/models/mobilenet_v1_2018_02_22/mobilenet_v1_1.0_224.tgz;name=mobilenet;subdir=${WORKDIR}/tfmodel;destsuffix=tfmodel \
-    git://git.ti.com/tidl/tidl-api.git;name=tidl-api;branch=${BRANCH};subdir=${WORKDIR}/tidl-api;destsuffix=tidl-api \
+    git://git.ti.com/tidl/tidl-api.git;name=tidl-api;branch=${BRANCH_tidl-api};subdir=${WORKDIR}/tidl-api;destsuffix=tidl-api \
 "
 
 SRC_URI[mobilenet.md5sum] = "d5f69cef81ad8afb335d9727a17c462a"
@@ -46,7 +47,11 @@ DEPENDS = " \
 
 RDEPENDS_${PN} = " arm-compute-library protobuf boost "
 
-PACKAGECONFIG ??= "neon caffe tensorflow tensorflow_lite onnx unit_tests"
+PACKAGECONFIG_OPENCL       = ""
+PACKAGECONFIG_OPENCL_mx8   = "opencl"
+PACKAGECONFIG_OPENCL_mx8mm = ""
+
+PACKAGECONFIG ??= "neon caffe tensorflow tensorflow_lite onnx unit_tests ${PACKAGECONFIG_OPENCL}"
 
 PACKAGECONFIG[caffe] = "-DBUILD_CAFFE_PARSER=1 -DCAFFE_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-caffe,-DBUILD_CAFFE_PARSER=0,armnn-caffe"
 PACKAGECONFIG[examples] = "-DBUILD_ARMNN_EXAMPLES=1,-DBUILD_ARMNN_EXAMPLES=0, opencv"
@@ -57,7 +62,7 @@ PACKAGECONFIG[tensorflow] = "-DBUILD_TF_PARSER=1 -DTF_GENERATED_SOURCES=${STAGIN
 PACKAGECONFIG[tensorflow_lite] = "-DTF_LITE_GENERATED_PATH=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow-lite -DBUILD_TF_LITE_PARSER=1 ,-DBUILD_TF_LITE_PARSER=0, flatbuffers armnn-tensorflow"
 PACKAGECONFIG[unit_tests] = "-DBUILD_UNIT_TESTS=1,-DBUILD_UNIT_TESTS=0"
 
-EXTRA_OECMAKE=" \
+EXTRA_OECMAKE += " \
     -DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF \
     -DARMCOMPUTE_ROOT=${STAGING_DIR_HOST}${datadir}/arm-compute-library \
     -DBUILD_TESTS=1 -DPROFILING=1 \
@@ -89,3 +94,6 @@ LIBS += "-larmpl_lp64_mp"
 FILES_${PN} += "${TESTVECS_INSTALL_DIR}"
 FILES_${PN}-dev += "{libdir}/cmake/*"
 INSANE_SKIP_${PN}-dev = "dev-elf"
+
+# We support i.MX8 only (for now)
+COMPATIBLE_MACHINE = "(mx8)"

@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "c3d56b9aea993de1ff3fec28627372f2e24d7eda"
+SRCREV_opencv = "4a5a7cdfaf6aca590aafa1acab91b307b915c88d"
 SRCREV_contrib = "25221244732dcf44c1450d0f93edc2529a61c0e1"
 SRCREV_ipp = "32e315a5b106a7b89dbed51c28f8120a48b368b4"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
@@ -54,7 +54,7 @@ SRC_URI = "${OPENCV_SRC};branch=${SRCBRANCH};name=opencv \
     file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
     file://0001-Dont-use-isystem.patch \
 "
-PV = "4.0.1.imx+git${SRCPV}"
+PV = "4.0.1.imx"
 
 S = "${WORKDIR}/git"
 
@@ -97,6 +97,7 @@ PACKAGECONFIG_append_mx8   = " dnn text"
 
 PACKAGECONFIG_OPENCL       = ""
 PACKAGECONFIG_OPENCL_mx8   = "opencl"
+PACKAGECONFIG_OPENCL_mx8dxl-phantom   = ""
 PACKAGECONFIG_OPENCL_mx8mm = ""
 PACKAGECONFIG_append       = " ${PACKAGECONFIG_OPENCL}"
 

@@ -31,7 +31,7 @@ DEFAULTTUNE_mx8 = "aarch64"
 # Enable the kenrel loadable module as default
 USE_GPU_VIV_MODULE = "1"
 
-IMX_GPU_VERSION            ?= "6.4.0.p0.0"
+IMX_GPU_VERSION            ?= "6.4.0.p0.2"
 IMX_GPU_VERSION_SUFFIX      = "aarch32"
 IMX_GPU_VERSION_SUFFIX_mx8  = "aarch64"
 
@@ -42,10 +42,10 @@ PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}"
 # Set the preffered provider for opencl-headers
 PREFERRED_PROVIDER_opencl-headers_imx = "imx-gpu-viv"
 
-PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.14.4.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.14.4.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.14.4.imx"
-PREFERRED_VERSION_gstreamer1.0              = "1.14.4.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.16.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.16.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.16.0.imx"
+PREFERRED_VERSION_gstreamer1.0              = "1.16.0.imx"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"

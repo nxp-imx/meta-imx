@@ -6,8 +6,6 @@ IMX_REQUIRED_DISTRO_FEATURES_REMOVE_imxgpu2d = "opengl"
 IMX_REQUIRED_DISTRO_FEATURES_REMOVE_imxgpu3d = ""
 REQUIRED_DISTRO_FEATURES_remove = "${IMX_REQUIRED_DISTRO_FEATURES_REMOVE}"
 
-SRC_URI_append_mx6sl = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd wayland x11', 'file://weston.config', '', d)}"
-
 HAS_SYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
 
 do_install_append() {
@@ -17,9 +15,6 @@ do_install_append() {
             -e 's,/etc,${sysconfdir},g' \
             -e 's,/var,${localstatedir},g' \
             ${D}${systemd_system_unitdir}/weston.service
-    fi
-    if [ -f ${WORKDIR}/weston.config ]; then
-        install -Dm0755 ${WORKDIR}/weston.config ${D}${sysconfdir}/default/weston
     fi
 }
 
