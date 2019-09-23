@@ -1,0 +1,68 @@
+diff --git a/tensorflow/contrib/makefile/Makefile b/tensorflow/contrib/makefile/Makefile
+old mode 100644
+new mode 100755
+index 36125c1..7383059
+--- a/tensorflow/contrib/makefile/Makefile
++++ b/tensorflow/contrib/makefile/Makefile
+@@ -79,7 +79,7 @@ HOST_LDOPTS :=
+ ifeq ($(HAS_GEN_HOST_PROTOC),true)
+ 	HOST_LDOPTS += -L$(MAKEFILE_DIR)/gen/protobuf-host/lib
+ endif
+-HOST_LDOPTS += -L/usr/local/lib
++# HOST_LDOPTS += -L/usr/local/lib
+ 
+ HOST_INCLUDES := \
+ -I. \
+@@ -97,7 +97,7 @@ ifeq ($(HAS_GEN_HOST_PROTOC),true)
+ endif
+ # This is at the end so any globally-installed frameworks like protobuf don't
+ # override local versions in the source tree.
+-HOST_INCLUDES += -I/usr/local/include
++# HOST_INCLUDES += -I/usr/local/include
+ 
+ HOST_LIBS := \
+ $(HOST_NSYNC_LIB) \
+@@ -181,13 +181,12 @@ $(shell mkdir -p $(DEPDIR) >/dev/null)
+ CXX := $(CC_PREFIX) gcc
+ OPTFLAGS := -O2
+ 
+-ifneq ($(TARGET),ANDROID)
+-  OPTFLAGS += -march=native
+-endif
++# ifneq ($(TARGET),ANDROID)
++#   OPTFLAGS += -march=native
++# endif
+ 
+ CXXFLAGS := --std=c++11 -DIS_SLIM_BUILD -fno-exceptions -DNDEBUG $(OPTFLAGS)
+-LDFLAGS := \
+--L/usr/local/lib
++# LDFLAGS := -L/usr/local/lib
+ DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
+ 
+ INCLUDES := \
+@@ -206,7 +205,7 @@ ifeq ($(HAS_GEN_HOST_PROTOC),true)
+ endif
+ # This is at the end so any globally-installed frameworks like protobuf don't
+ # override local versions in the source tree.
+-INCLUDES += -I/usr/local/include
++# INCLUDES += -I/usr/local/include
+ 
+ LIBS := \
+ $(TARGET_NSYNC_LIB) \
+@@ -245,7 +244,7 @@ ifeq ($(HAS_GEN_HOST_PROTOC),true)
+ endif
+ 	CXXFLAGS += -fPIC
+ 	LIBFLAGS += -Wl,--allow-multiple-definition -Wl,--whole-archive
+-	LDFLAGS := -Wl,--no-whole-archive
++	LDFLAGS += -Wl,--no-whole-archive
+ endif
+ # If we're on Linux, also link in the dl library.
+ ifeq ($(TARGET),LINUX)
+@@ -755,6 +754,7 @@ tensorflow/core/util/version_info.cc: .phony_version_info
+ $(LIB_PATH): $(LIB_OBJS)
+ 	@mkdir -p $(dir $@)
+ 	$(AR) $(ARFLAGS) $(LIB_PATH) $(LIB_OBJS)
++	$(STRIP) -S $@
+ 
+ $(BENCHMARK_NAME): $(BENCHMARK_OBJS) $(LIB_PATH) $(CUDA_LIB_DEPS)
+ 	@mkdir -p $(dir $@)

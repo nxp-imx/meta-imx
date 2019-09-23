@@ -1,8 +1,8 @@
 # Copyright 2017-2018 NXP
 
 IMX_MKIMAGE_SRC ?= "git://source.codeaurora.org/external/imx/imx-mkimage.git;protocol=https"
-SRCBRANCH = "imx_4.14.98_2.2.0"
+SRCBRANCH = "imx_4.19.35_1.0.0"
 SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH}"
-SRCREV = "c00cd78d2e80178171d2d7f8d0d1ce6e2ea41ac5" 
+SRCREV = "2a3ec5e2c4f7aae5409d172de12e228687520701"
 
 DEPENDS = "zlib-native openssl-native"

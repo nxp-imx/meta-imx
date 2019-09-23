@@ -11,8 +11,20 @@
 #
 # By default this script does nothing.
 
+# Set THP as madvise mode
+if [ -e /sys/kernel/mm/transparent_hugepage/enabled ]
+then
+    echo madvise >/sys/kernel/mm/transparent_hugepage/enabled
+fi
 
-echo 30000 >  /proc/sys/vm/min_free_kbytes
+# Set min_free_kbyte to avoid kernel dump from eth for 4K video playback use case
+CPUREV=$(cat /sys/devices/soc0/soc_id)
+if [ $CPUREV == "i.MX8QM" ] || [ $CPUREV == "i.MX8QXP" ] || [ $CPUREV == "i.MX8MQ" ]
+then
+    echo 80000 >  /proc/sys/vm/min_free_kbytes
+else
+    echo 30000 >  /proc/sys/vm/min_free_kbytes
+fi
 
 exit 0
 

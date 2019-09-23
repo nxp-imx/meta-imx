@@ -5,15 +5,15 @@ SECTION = "BSP"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
 
-inherit fsl-eula-unpack pkgconfig deploy
+inherit pkgconfig deploy
 
 PV = "2.0+git${SRCPV}"
 
 ATF_SRC ?= "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https"
-SRCBRANCH = "imx_4.14.98_2.2.0"
+SRCBRANCH = "imx_4.19.35_1.0.0"
 
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH}"
-SRCREV = "1355c5d12d75c9c7bdd08826796096bab519b3d5"
+SRCREV = "f92d379ebc12955e1c4e225c2768b36706bc42c4"
 
 S = "${WORKDIR}/git"
 
@@ -24,7 +24,6 @@ SOC_ATF_mx8qm = "imx8qm"
 SOC_ATF_mx8qxp = "imx8qx"
 SOC_ATF_mx8mq = "imx8mq"
 SOC_ATF_mx8mm = "imx8mm"
-SOC_ATF_mx8mn = "imx8mn"
 
 SYSROOT_DIRS += "/boot"
 

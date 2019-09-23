@@ -1,0 +1,31 @@
+From 38e8e4bc03a4c1ee801f6af50be94ccd971bf3eb Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Tue, 27 Nov 2018 18:15:49 -0500
+Subject: [PATCH] enable use of arm compute shared library
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ cmake/GlobalConfig.cmake | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/cmake/GlobalConfig.cmake b/cmake/GlobalConfig.cmake
+index 491d87a..4cf40a2 100644
+--- a/cmake/GlobalConfig.cmake
++++ b/cmake/GlobalConfig.cmake
+@@ -285,6 +285,11 @@ if(ARMCOMPUTENEON OR ARMCOMPUTECL)
+         find_library(ARMCOMPUTE_CORE_LIBRARY_DEBUG NAMES arm_compute_core-static)
+         find_library(ARMCOMPUTE_CORE_LIBRARY_RELEASE NAMES arm_compute_core-static)
+ 
++        find_library(ARMCOMPUTE_LIBRARY_DEBUG NAMES arm_compute)
++        find_library(ARMCOMPUTE_LIBRARY_RELEASE NAMES arm_compute)
++        find_library(ARMCOMPUTE_CORE_LIBRARY_DEBUG NAMES arm_compute_core)
++        find_library(ARMCOMPUTE_CORE_LIBRARY_RELEASE NAMES arm_compute_core)
++
+         set(ARMCOMPUTE_LIBRARIES
+             debug ${ARMCOMPUTE_LIBRARY_DEBUG} ${ARMCOMPUTE_CORE_LIBRARY_DEBUG}
+             optimized ${ARMCOMPUTE_LIBRARY_RELEASE} ${ARMCOMPUTE_CORE_LIBRARY_RELEASE} )
+-- 
+1.9.1
+

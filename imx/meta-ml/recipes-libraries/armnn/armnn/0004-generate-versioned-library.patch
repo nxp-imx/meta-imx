@@ -1,0 +1,53 @@
+From 548f8e308b15e396241149e1c89ce7ffecf6242c Mon Sep 17 00:00:00 2001
+From: Qin Su <qsu@ti.com>
+Date: Tue, 27 Nov 2018 18:08:06 -0500
+Subject: [PATCH] generate versioned library
+
+Upstream-Status: Inappropriate [TI only test code]
+
+Signed-off-by: Qin Su <qsu@ti.com>
+---
+ CMakeLists.txt | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c06a869..cc11476 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -84,7 +84,7 @@ if(BUILD_CAFFE_PARSER)
+ 
+     target_link_libraries(armnnCaffeParser armnn)
+     target_link_libraries(armnnCaffeParser ${PROTOBUF_LIBRARIES})
+-
++    set_target_properties( armnnCaffeParser PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+ endif()
+ 
+ if(BUILD_ONNX_PARSER)
+@@ -108,6 +108,7 @@ if(BUILD_ONNX_PARSER)
+ 
+     # Protobuf
+     target_link_libraries(armnnOnnxParser ${PROTOBUF_LIBRARIES})
++    set_target_properties( armnnOnnxParser PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+ endif()
+ 
+ if(BUILD_TF_PARSER)
+@@ -131,6 +132,7 @@ if(BUILD_TF_PARSER)
+ 
+     # Protobuf (use the specific version tensorflow wants)
+     target_link_libraries(armnnTfParser ${PROTOBUF_LIBRARIES})
++    set_target_properties( armnnTfParser PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+ endif()
+ 
+ if(BUILD_ARMNN_QUANTIZER)
+@@ -406,6 +408,8 @@ if(PROFILING_BACKEND_STREAMLINE)
+     target_link_libraries(armnn pthread)
+ endif()
+ 
++set_target_properties( armnn PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
++
+ if(BUILD_UNIT_TESTS)
+     set(unittest_sources)
+     list(APPEND unittest_sources
+-- 
+1.9.1
+

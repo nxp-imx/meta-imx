@@ -1,0 +1,85 @@
+diff --git a/tensorflow/contrib/lite/tools/make/Makefile b/tensorflow/contrib/lite/tools/make/Makefile
+old mode 100644
+new mode 100755
+index 16012a3..17f1046
+--- a/tensorflow/contrib/lite/tools/make/Makefile
++++ b/tensorflow/contrib/lite/tools/make/Makefile
+@@ -24,6 +24,12 @@ HOST_ARCH := $(shell if [[ $(shell uname -m) =~ i[345678]86 ]]; then echo x86_32
+ TARGET := $(HOST_OS)
+ TARGET_ARCH := $(HOST_ARCH)
+ 
++# Where compiled objects are stored.
++GENDIR := $(MAKEFILE_DIR)/gen/
++OBJDIR := $(GENDIR)obj/
++BINDIR := $(GENDIR)bin/
++LIBDIR := $(GENDIR)lib/
++
+ INCLUDES := \
+ -I. \
+ -I$(MAKEFILE_DIR)/../../../../../ \
+@@ -38,7 +44,7 @@ INCLUDES := \
+ -I$(OBJDIR)
+ # This is at the end so any globally-installed frameworks like protobuf don't
+ # override local versions in the source tree.
+-INCLUDES += -I/usr/local/include
++# INCLUDES += -I/usr/local/include
+ 
+ # These are the default libraries needed, but they can be added to or
+ # overridden by the platform-specific settings in target makefiles.
+@@ -46,17 +52,17 @@ LIBS := \
+ -lstdc++ \
+ -lpthread \
+ -lm \
+--lz
++-lz \
++-ldl
+ 
+ # There are no rules for compiling objects for the host system (since we don't
+ # generate things like the protobuf compiler that require that), so all of
+ # these settings are for the target compiler.
+-CXXFLAGS := -O3 -DNDEBUG
++CXXFLAGS += --std=c++11 -O3 -DNDEBUG
+ CCFLAGS := ${CXXFLAGS}
+-CXXFLAGS += --std=c++11
+-CFLAGS :=
+-LDOPTS := -L/usr/local/lib
+-ARFLAGS := -r
++CFLAGS ?= -O3 -DNDEBUG
++LDOPTS ?= -L/usr/local/lib
++ARFLAGS ?= -r
+ TARGET_TOOLCHAIN_PREFIX :=
+ CC_PREFIX :=
+ 
+@@ -131,7 +137,7 @@ BENCHMARK_SRCS := $(filter-out \
+ # CXXFLAGS or LIBS to work for a specific targetted architecture. All logic
+ # based on platforms or architectures should happen within these files, to
+ # keep this main makefile focused on the sources and dependencies.
+-include $(wildcard $(MAKEFILE_DIR)/targets/*_makefile.inc)
++# include $(wildcard $(MAKEFILE_DIR)/targets/*_makefile.inc)
+ 
+ ALL_SRCS := \
+ 	$(MINIMAL_SRCS) \
+@@ -140,20 +146,14 @@ ALL_SRCS := \
+ 	$(TF_LITE_CC_SRCS) \
+ 	$(BENCHMARK_SRCS)
+ 
+-# Where compiled objects are stored.
+-GENDIR := $(MAKEFILE_DIR)/gen/$(TARGET)_$(TARGET_ARCH)/
+-OBJDIR := $(GENDIR)obj/
+-BINDIR := $(GENDIR)bin/
+-LIBDIR := $(GENDIR)lib/
+-
+ LIB_PATH := $(LIBDIR)$(LIB_NAME)
+ BENCHMARK_LIB := $(LIBDIR)$(BENCHMARK_LIB_NAME)
+ BENCHMARK_BINARY := $(BINDIR)$(BENCHMARK_BINARY_NAME)
+ MINIMAL_BINARY := $(BINDIR)minimal
+ 
+-CXX := $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}g++
+-CC := $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}gcc
+-AR := $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}ar
++CXX ?= $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}g++
++CC ?= $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}gcc
++AR ?= $(CC_PREFIX)${TARGET_TOOLCHAIN_PREFIX}ar
+ 
+ MINIMAL_OBJS := $(addprefix $(OBJDIR), \
+ $(patsubst %.cc,%.o,$(patsubst %.c,%.o,$(MINIMAL_SRCS))))
