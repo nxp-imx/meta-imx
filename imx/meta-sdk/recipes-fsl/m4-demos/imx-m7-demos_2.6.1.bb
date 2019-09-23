@@ -18,6 +18,8 @@ SCR = "SCR-${SOC}-m7-demo.txt"
 do_deploy () {
    # Install the demo binaries
    cp ${D}/* ${DEPLOYDIR}/
+   #Set 0644 permission for Demo binaries
+   chmod 0644 ${DEPLOYDIR}/*
 }
 addtask deploy after do_install
 
