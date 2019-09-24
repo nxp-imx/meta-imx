@@ -26,7 +26,7 @@ SRC_URI = " \
 
 S = "${WORKDIR}/git"
 
-inherit gettext bluetooth
+inherit gettext
 
 DEFAULT_PREFERENCE = "-1"
 
@@ -58,7 +58,7 @@ PACKAGECONFIG_remove_mx8mm = " vulkan"
 # not add GL dependencies here, since these are taken care of in -base.
 
 PACKAGECONFIG[assrender]       = "--enable-assrender,--disable-assrender,libass"
-PACKAGECONFIG[bluez]           = "--enable-bluez,--disable-bluez,${BLUEZ}"
+PACKAGECONFIG[bluez]           = "--enable-bluez,--disable-bluez,bluez5"
 PACKAGECONFIG[bz2]             = "--enable-bz2,--disable-bz2,bzip2"
 PACKAGECONFIG[curl]            = "--enable-curl,--disable-curl,curl"
 PACKAGECONFIG[dash]            = "--enable-dash,--disable-dash,libxml2"
