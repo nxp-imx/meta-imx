@@ -5,9 +5,9 @@ HOMEPAGE = "https://www.khronos.org/vulkan/"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
-SRC_URI = "git://github.com/KhronosGroup/Vulkan-Headers.git;branch=sdk-1.1.92 \
+SRC_URI = "git://github.com/KhronosGroup/Vulkan-Headers.git;branch=sdk-1.1.121 \
            "
-SRCREV = "114c3546e195819bd53a34b39f5194b2989a5b12"
+SRCREV = "5671d014bc1792a116d374792f8a6cfba2e6f512"
 UPSTREAM_CHECK_GITTAGREGEX = "sdk-(?P<pver>\d+(\.\d+)+)"
 
 S = "${WORKDIR}/git"
