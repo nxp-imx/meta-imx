@@ -9,12 +9,10 @@ SECTION = "graphics"
 S = "${WORKDIR}/git"
 DEST_DIR = "${S}/external" 
 SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;name=spirv-tools \
-	file://0001-tools-lesspipe-Allow-generic-shell.patch \
-	file://0001-Avoid-GCC8-warning-in-text_handler.cpp.-2197.patch \
-	git://github.com/KhronosGroup/SPIRV-Headers.git;name=spirv-headers;destsuffix=${DEST_DIR}/spirv-headers \
+           git://github.com/KhronosGroup/SPIRV-Headers.git;name=spirv-headers;destsuffix=${DEST_DIR}/spirv-headers \
 "
-SRCREV_spirv-tools = "9d699f6d4038f432c55310d5d0b4a6d507c1b686"
-SRCREV_spirv-headers = "a5d33a253b47e183e54dcb9cf0e8ee729e88f6db"
+SRCREV_spirv-tools = "9b3cc3e05337358d0bd9fec1b7a51e3cbf55312b"
+SRCREV_spirv-headers = "38cafab379e5d16137cb97a485b9385191039b92"
 
 inherit cmake python3native
 
