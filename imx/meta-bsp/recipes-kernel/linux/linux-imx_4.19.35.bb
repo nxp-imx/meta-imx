@@ -15,7 +15,9 @@ DEPENDS += "lzop-native bc-native"
 SRCBRANCH = "imx_4.19.y"
 LOCALVERSION = "-1.1.0"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
-SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH} \
+           file://0001-compiler-attributes-add-support-for-copy-gcc-9.patch \
+           file://0002-include-linux-module.h-copy-init-exit-attrs-to-.patch"
 SRCREV = "81757a1880e62c09b0ff1f0b931666723afc17dd"
 
 S = "${WORKDIR}/git"
