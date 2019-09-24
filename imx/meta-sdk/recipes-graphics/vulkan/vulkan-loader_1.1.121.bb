@@ -8,11 +8,11 @@ BUGTRACKER = "https://github.com/KhronosGroup/Vulkan-Loader"
 SECTION = "libs"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57\
-                    file://loader/loader.c;endline=25;md5=151b392f46568aaedb4ad22b246237ec"
-SRC_URI = "git://github.com/KhronosGroup/Vulkan-Loader.git;branch=sdk-1.1.92 \
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7dbefed23242760aa3475ee42801c5ac\
+                    file://loader/loader.c;endline=25;md5=c8504be00044f3e1e66eee32d3bd6548"
+SRC_URI = "git://github.com/KhronosGroup/Vulkan-Loader.git;branch=sdk-1.1.121 \
            "
-SRCREV = "4cd7e44fc1ca6c4d8361720b43a3588ddf9fc4b6"
+SRCREV = "a34eada3197b96e46bea3ad4b83bfa4b4396e2ea"
 UPSTREAM_CHECK_GITTAGREGEX = "sdk-(?P<pver>\d+(\.\d+)+)"
 
 S = "${WORKDIR}/git"
