@@ -1,4 +1,4 @@
-require recipes-graphics/imx-gpu-g2d/imx-gpu-g2d_6.2.4.p1.8.bb
+require recipes-graphics/imx-gpu-g2d/imx-gpu-g2d_6.2.4.p4.0.bb
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6c12031a11b81db21cdfe0be88cac4b3" 
 
