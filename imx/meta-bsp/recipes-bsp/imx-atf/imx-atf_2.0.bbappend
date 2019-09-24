@@ -1,14 +1,3 @@
-FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-bsp/${BPN}/${BPN}:"
-
-require recipes-bsp/imx-atf/imx-atf_1.5.0.bb
-
-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
-
-# Upstream this:
-#PV .= "+git${SRCPV}"
-# So we don't have to do this:
-PV = "2.0+git${SRCPV}"
-
 SRCBRANCH = "imx_2.0.y"
 ATF_SRC ?= "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https"
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH} \
