@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 S = "${WORKDIR}/git"
 
-SRCREV = "9bbdd552f0fd62741aa1f1e02ab3eafc45cf3c1e"
+SRCREV = "ea8f6f0a3cdfc79bddf3566bf3f4b8350436695b"
 SRC_URI = "git://github.com/KhronosGroup/Vulkan-Tools.git;branch=sdk-${PV} \
 "
 # must choose x11 or wayland or both
