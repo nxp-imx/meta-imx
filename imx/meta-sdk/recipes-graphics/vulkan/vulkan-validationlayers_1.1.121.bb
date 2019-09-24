@@ -7,10 +7,10 @@ BUGTRACKER = "https://github.com/KhronosGroup/Vulkan-ValidationLayers"
 SECTION = "libs"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7dbefed23242760aa3475ee42801c5ac"
 SRC_URI = "git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;nobranch=1 \
            "
-SRCREV = "6e6da6ccab8931f7c30815966ef839b1155e5bec"
+SRCREV = "88fcbab512e449203649d984317ff7b9a9f80b9d"
 UPSTREAM_CHECK_GITTAGREGEX = "sdk-(?P<pver>\d+(\.\d+)+)"
 
 S = "${WORKDIR}/git"

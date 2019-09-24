@@ -2,6 +2,6 @@
     "file_format_version": "1.0.0",
     "ICD": {
         "library_path": "/usr/lib/vulkan/libvulkan_VSI.so",
-        "api_version": "1.0.30"
+        "api_version": "1.1.82"
     }
 }
