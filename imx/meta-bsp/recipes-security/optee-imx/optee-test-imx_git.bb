@@ -11,7 +11,8 @@ DEPENDS = "optee-os-imx optee-client-imx python-pycrypto-native openssl"
 
 SRCBRANCH = "imx_3.2.y"
 OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
-SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH} \
+           file://0001-fix-build-failure-with-GCC-9.patch"
 SRCREV = "b7114b828b82f2c0eec124ed424eff1230cc5319"
 
 S = "${WORKDIR}/git"
