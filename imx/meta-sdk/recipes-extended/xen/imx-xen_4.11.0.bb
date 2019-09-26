@@ -8,6 +8,7 @@ SRC_URI = " \
     ${XEN_SRC};branch=${SRCBRANCH} \
     file://tools-xentop-vwprintw.patch \
     file://xen-4.11-arm-acpi-fix-string-lengths.patch \
+    file://0001-trace-fix-build-with-gcc9.patch \
     "
 
 SRCREV = "6d37080ffc7b6b3224e0e5722009e13e305dd891"
