@@ -28,11 +28,10 @@ SOC_TOOLS_GPU_WAYLAND_imxgpu3d         = "glmark2"
 
 # Tools for !wayland and x11
 SOC_TOOLS_GPU_X11                      = "mesa-demos gtkperf renderdoc"
-SOC_TOOLS_GPU_X11_append_imxgpu3d      = " glmark2 eglinfo-x11"
+SOC_TOOLS_GPU_X11_append_imxgpu3d      = " glmark2"
 
 # Tools for !wayland and !x11
 SOC_TOOLS_GPU_FB                       = ""
-SOC_TOOLS_GPU_FB_imxgpu3d              = "eglinfo-fb"
 SOC_TOOLS_GPU_FB_append_mx8            = " glmark2"
 
 RDEPENDS_${PN}_append_imxgpu = " \
