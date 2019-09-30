@@ -18,8 +18,8 @@ SRC_URI = "https://github.com/GENIVI/dlt-daemon/archive/v${PV}.tar.gz \
     file://0002-Don-t-execute-processes-as-a-specific-user.patch \
     file://0004-Modify-systemd-config-directory.patch \
 "
-SRC_URI[md5sum] = "6f2f6d3386991ed5d5e5078647c62ce5"
-SRC_URI[sha256sum] = "07f7a65d3d248e8f5eed820cae0e2ec81318417a81540647346f81cfe024ee65"
+SRC_URI[md5sum] = "691c10b56857183d9a88023e18964211"
+SRC_URI[sha256sum] = "6bd2bd4e9157e459a4ac7429f9e19cdefd5705fd1358fcf33423b6b4b8b54ac5"
 
 S = "${WORKDIR}/${PN}-${PV}"
 
