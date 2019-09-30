@@ -16,5 +16,3 @@ ML_PKGS = " \
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
 "
-# arm-compute-library failed to build with gcc 9 and armnn depends on it so remove it temporarily
-RDEPENDS_${PN}_remove = "armnn"
