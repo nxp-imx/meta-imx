@@ -112,7 +112,7 @@ MULTILIBS = "multilib:lib32"
 DEFAULTTUNE_virtclass-multilib-lib32 = "armv7athf-neon"
 
 - 32-bit libraries to be added into the image
-IMAGE_INSTALL_append = "lib32-glibc lib32-libgcc lib32-libstdc++"
+IMAGE_INSTALL_append = " lib32-glibc lib32-libgcc lib32-libstdc++"
 
 Building XEN
 ------------
@@ -174,7 +174,7 @@ QTWebEngine
 --------
 Qtwebengine is not built by default so add this to local.conf or image recipe.   It is only supported
 for X11 backends for i.MX 6 with GPU and i.MX 7ULP and not on i.MX 8 SoC.
- IMAGE_INSTALL_append = "packagegroup-qt5-webengine"
+ IMAGE_INSTALL_append = " packagegroup-qt5-webengine"
 
 To start go to /usr/share/qt5/examples/webkitwidgets/browser and run browser
 
