@@ -1,35 +1,7 @@
-# Use i.MX Kernel, U-Boot and Gstreamer 1.0 providers
 PREFERRED_PROVIDER_virtual/bootloader_imx = "u-boot-imx"
-#PREFERRED_PROVIDER_virtual/bootloader_mx6 = "u-boot-imx"
-#PREFERRED_PROVIDER_virtual/bootloader_mx6ul = "u-boot-imx"
-#PREFERRED_PROVIDER_virtual/bootloader_mx6sll = "u-boot-imx"
-#PREFERRED_PROVIDER_virtual/bootloader_mx7d = "u-boot-imx"
-#PREFERRED_PROVIDER_virtual/bootloader_mx7ulp = "u-boot-imx"
-
 PREFERRED_PROVIDER_virtual/kernel_imx = "linux-imx"
-#PREFERRED_PROVIDER_virtual/kernel_mx6 = "linux-imx"
-#PREFERRED_PROVIDER_virtual/kernel_mx6ul = "linux-imx"
-#PREFERRED_PROVIDER_virtual/kernel_mx6sll = "linux-imx"
-#PREFERRED_PROVIDER_virtual/kernel_mx7d = "linux-imx"
-#PREFERRED_PROVIDER_virtual/kernel_mx7ulp = "linux-imx"
-#PREFERRED_PROVIDER_virtual/kernel_imx7ulp_zebu = "linux-imx"
 
 PREFERRED_VERSION_linux-libc-headers_imx ?= "4.19"
-
-# Extra audio support
-# Add support for ALL i.MX6/7/8 SoC families
-MACHINE_EXTRA_RRECOMMENDS_append_imx = " ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'imx-alsa-plugins', '', d)}"
-
-# Default toolchains used in testing i.MX BSPs
-DEFAULTTUNE_mx6   = "cortexa9hf-neon"
-DEFAULTTUNE_mx6ul = "cortexa7hf-neon"
-DEFAULTTUNE_mx6sll = "cortexa9hf-neon"
-DEFAULTTUNE_mx7d   = "cortexa7hf-neon"
-DEFAULTTUNE_mx7ulp = "cortexa7hf-neon"
-DEFAULTTUNE_mx8 = "aarch64"
-
-# Enable the kenrel loadable module as default
-USE_GPU_VIV_MODULE = "1"
 
 IMX_GPU_VERSION            ?= "6.4.1.p0.0"
 IMX_GPU_VERSION_SUFFIX      = "aarch32"
@@ -55,6 +27,3 @@ PREFERRED_PROVIDER_udev = "systemd"
 PREFERRED_PROVIDER_udev-utils = "systemd"
 DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
 IMX_DEFAULT_DISTRO_FEATURES += " systemd"
-
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx6 = "1"
-SOC_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_mx7ulp = "1"
