@@ -16,7 +16,6 @@ SRCBRANCH = "imx_4.19.y"
 LOCALVERSION = "-1.2.0"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH} \
-           file://0001-compiler-attributes-add-support-for-copy-gcc-9.patch \
            file://0002-include-linux-module.h-copy-init-exit-attrs-to-.patch"
 SRCREV = "eb740465b5b5c7c96508016349ce699a9b99bf49"
 
