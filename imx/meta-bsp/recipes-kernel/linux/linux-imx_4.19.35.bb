@@ -18,7 +18,7 @@ KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=h
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH} \
            file://0001-compiler-attributes-add-support-for-copy-gcc-9.patch \
            file://0002-include-linux-module.h-copy-init-exit-attrs-to-.patch"
-SRCREV = "13234ea070f3b0048c98b59200bb3ed85659d013"
+SRCREV = "eb740465b5b5c7c96508016349ce699a9b99bf49"
 
 S = "${WORKDIR}/git"
 
