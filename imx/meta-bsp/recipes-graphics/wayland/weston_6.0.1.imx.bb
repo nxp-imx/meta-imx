@@ -61,7 +61,7 @@ IMX_EXTRA_OECONF_OPENGL_imxgpu2d = " --disable-opengl"
 IMX_EXTRA_OECONF_OPENGL_imxgpu3d = ""
 EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_OPENGL}"
 
-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'kms fbdev wayland egl', '', d)} \
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'kms fbdev egl', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'xwayland', '', d)} \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl pam systemd x11', d)} \
                    clients launch"
