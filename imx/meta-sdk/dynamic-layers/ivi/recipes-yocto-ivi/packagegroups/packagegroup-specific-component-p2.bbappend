@@ -1,1 +1,1 @@
-RDEPENDS_${PN}_remove = "vsomeip"
+RDEPENDS_${PN}_remove = "common-api-c++-someip vsomeip"
