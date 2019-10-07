@@ -35,7 +35,7 @@ SYSTEMD_SERVICE_${PN}-systemd = " \
     dlt-receive.service"
 SYSTEMD_AUTO_ENABLE_${PN}-systemd = "disable"
 
-EXTRA_OECMAKE = "-DWITH_SYSTEMD=ON"
+EXTRA_OECMAKE = "-DWITH_SYSTEMD=ON -DWITH_DLT_SYSTEM=ON -DWITH_DLT_ADAPTOR=ON"
 
 FILES_${PN}-doc += "${datadir}/dlt-filetransfer"
 
