@@ -23,23 +23,22 @@ Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
  units/systemd-udevd.service.in | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/units/systemd-udevd.service.in b/units/systemd-udevd.service.in
-index 6a3814e..291df05 100644
---- a/units/systemd-udevd.service.in
-+++ b/units/systemd-udevd.service.in
-@@ -25,11 +25,10 @@ ExecStart=@rootlibexecdir@/systemd-udevd
+Index: git/units/systemd-udevd.service.in
+===================================================================
+--- git.orig/units/systemd-udevd.service.in
++++ git/units/systemd-udevd.service.in
+@@ -26,13 +26,12 @@ ExecStart=@rootlibexecdir@/systemd-udevd
  KillMode=mixed
  WatchdogSec=3min
  TasksMax=infinity
 -PrivateMounts=yes
 +PrivateMounts=no
+ ProtectHostname=yes
  MemoryDenyWriteExecute=yes
- RestrictRealtime=yes
  RestrictAddressFamilies=AF_UNIX AF_NETLINK AF_INET AF_INET6
+ RestrictRealtime=yes
+ RestrictSUIDSGID=yes
 -SystemCallFilter=@system-service @module @raw-io
  SystemCallErrorNumber=EPERM
  SystemCallArchitectures=native
  LockPersonality=yes
--- 
-2.7.4
-
