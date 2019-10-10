@@ -16,7 +16,7 @@ FILES_libopenvx-imx = "${libdir}/libOpenVX*${SOLIBS} ${libdir}/libOvx*${SOLIBS} 
 FILES_libopenvx-imx-dev = "${includedir}/VX"
 RDEPENDS_libopenvx-imx = "libnn-imx"
 
-FILES_libnn-imx = "${libdir}/libNN*${SOLIBS} ${libdir}/libneuralnetworks${SOLIBS}"
+FILES_libnn-imx = "${libdir}/libNN*${SOLIBS} ${libdir}/libnn*${SOLIBS} ${libdir}/libneuralnetworks${SOLIBS}"
 
 RDEPENDS_libgal-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'valgrind', '', d)}"
 
