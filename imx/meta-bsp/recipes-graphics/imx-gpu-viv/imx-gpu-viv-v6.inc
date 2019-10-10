@@ -9,7 +9,6 @@ PROVIDES += "${PROVIDES_OPENVX}"
 PACKAGES =+ "libnn-imx"
 
 GLES3_HEADER_REMOVALS_mx8mn = "gl32.h"
-GLES3_HEADER_REMOVALS_mx8qxp_remove = "gl32.h"
 
 FILES_libgbm-imx_mx8 = "${libdir}/libgbm*${SOLIBS}"
 
