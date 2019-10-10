@@ -18,4 +18,6 @@ RDEPENDS_libopenvx-imx = "libnn-imx"
 
 FILES_libnn-imx = "${libdir}/libNN*${SOLIBS} ${libdir}/libneuralnetworks${SOLIBS}"
 
+RDEPENDS_libgal-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'valgrind', '', d)}"
+
 RDEPENDS_libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
