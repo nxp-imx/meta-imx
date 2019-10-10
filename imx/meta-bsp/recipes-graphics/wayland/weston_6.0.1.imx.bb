@@ -19,7 +19,7 @@ SRC_URI = "${WESTON_SRC};branch=${SRCBRANCH} \
 SRC_URI_append_mx6sl = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'systemd wayland x11', ' file://weston.config', '', d)}"
 
-SRCREV = "4add9ab7218b8a23619d3a81872d129d01e06954"
+SRCREV = "b6e4a3dac05cd4ae877bd1bf883e6650f118faa1"
 S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_URI = "https://wayland.freedesktop.org/releases.html"
