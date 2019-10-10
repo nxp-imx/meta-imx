@@ -19,9 +19,4 @@ RDEPENDS_libopenvx-imx = "libnn-imx"
 
 FILES_libnn-imx = "${libdir}/libNN*${SOLIBS} ${libdir}/libneuralnetworks${SOLIBS}"
 
-FILES_libopencl-imx = "${libdir}/libOpenCL${SOLIBS} \
-                       ${libdir}/libVivanteOpenCL${SOLIBS} \
-                       ${libdir}/libLLVM_viv${SOLIBS} \
-                       ${sysconfdir}/OpenCL/vendors/Vivante.icd"
-
 RDEPENDS_libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
