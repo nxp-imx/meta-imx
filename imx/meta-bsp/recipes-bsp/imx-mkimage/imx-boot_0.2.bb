@@ -89,6 +89,9 @@ SOC_FAMILY_mx8  = "mx8"
 SOC_FAMILY_mx8m = "mx8m"
 SOC_FAMILY_mx8x = "mx8x"
 
+REV_OPTION ?= ""
+REV_OPTION_imx8qxpC0mek = "REV=C0"
+
 compile_mx8m() {
     bbnote 8MQ/8MM boot binary build
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
@@ -145,8 +148,8 @@ do_compile() {
     fi
     # mkimage for i.MX8
     for target in ${IMXBOOT_TARGETS}; do
-        bbnote "building ${SOC_TARGET} - ${target}"
-        make SOC=${SOC_TARGET} ${target}
+        bbnote "building ${SOC_TARGET} - ${REV_OPTION} ${target}"
+        make SOC=${SOC_TARGET} ${REV_OPTION} ${target}
         if [ -e "${BOOT_STAGING}/flash.bin" ]; then
             cp ${BOOT_STAGING}/flash.bin ${S}/${BOOT_CONFIG_MACHINE}-${target}
         fi
