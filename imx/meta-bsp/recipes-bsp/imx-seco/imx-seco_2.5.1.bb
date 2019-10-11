@@ -21,6 +21,7 @@ SECO_FIRMWARE_NAME ?= "mx8qmb0-ahab-container.img"
 SECO_FIRMWARE_NAME_mx8qm  = "mx8qmb0-ahab-container.img"
 SECO_FIRMWARE_NAME_mx8qxp = "mx8qxb0-ahab-container.img"
 SECO_FIRMWARE_NAME_imx8qxpC0mek = "mx8qxc0-ahab-container.img"
+SECO_FIRMWARE_NAME_mx8dxl-phantom = "mx8qxb0-ahab-container.img"
 
 addtask deploy after do_install
 do_deploy () {
