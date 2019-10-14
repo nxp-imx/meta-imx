@@ -1,0 +1,28 @@
+From 564b2e082ac3a001ee31a8e569bb740d07a1ca95 Mon Sep 17 00:00:00 2001
+From: Robin Gong <yibin.gong@nxp.com>
+Date: Mon, 3 Jun 2019 23:00:22 +0800
+Subject: [PATCH 1/2] Revert "firmware_loader: Enable FW_LOADER_USER_HELPER"
+
+This reverts commit 95e2acb8f7c73fa52937a4e474b87a477ce15bfe.
+---
+ drivers/base/firmware_loader/Kconfig | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/drivers/base/firmware_loader/Kconfig b/drivers/base/firmware_loader/Kconfig
+index ea5394f3..eb15d97 100644
+--- a/drivers/base/firmware_loader/Kconfig
++++ b/drivers/base/firmware_loader/Kconfig
+@@ -137,9 +137,7 @@ config FW_LOADER_USER_HELPER
+ 
+ config FW_LOADER_USER_HELPER_FALLBACK
+ 	bool "Force the firmware sysfs fallback mechanism when possible"
+-	depends on FW_LOADER
+-	default y
+-	select FW_LOADER_USER_HELPER
++	depends on FW_LOADER_USER_HELPER
+ 	help
+ 	  Enabling this option forces a sysfs userspace fallback mechanism
+ 	  to be used for all firmware requests which explicitly do not disable a
+-- 
+2.7.4
+
