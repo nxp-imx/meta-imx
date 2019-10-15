@@ -11,7 +11,7 @@ RPROVIDES_${PN} = "virtual/imxvpu"
 
 PE = "1"
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "9f6136a1300d322078daaa9676054deb"
 SRC_URI[sha256sum] = "b7bb67b00daf436fd91a2760c2db375a962e2c919045ce8bf81bd54b95d999c5"
 

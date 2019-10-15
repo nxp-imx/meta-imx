@@ -14,7 +14,7 @@ RCONFLICTS_${PN} = "libfslparser"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
 # Choose between 32bit and 64bit binaries
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8', \

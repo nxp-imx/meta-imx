@@ -11,8 +11,7 @@ PARALLEL_MAKE="-j 1"
 PROVIDES = "virtual/imxvpu"
 RPROVIDES_${PN} = "virtual/imxvpu"
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true \
-"
+SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
 PLATFORM_mx8mm = "IMX8MM"
 PLATFORM_mx8mq = "IMX8MQ"

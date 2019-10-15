@@ -7,8 +7,7 @@ LICENSE = "Proprietary"
 SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6c12031a11b81db21cdfe0be88cac4b3" 
 
-SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true"
-S = "${WORKDIR}/${PN}-${PV}"
+SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
 SRC_URI[md5sum] = "ee69d711fbe4e50efed0fd610764b16a"
 SRC_URI[sha256sum] = "0c8c1b07017422ba2f5642c69dcc89731fae04f210a6403cf9cbeabc9aac8260"

@@ -6,8 +6,7 @@ type conversions and common mathematical functions."
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe7e5a4795c76b317919afd2d3da5983"
 
-SRC_URI = "https://sourceforge.net/projects/half/files/half/${PV}/${PN}-${PV}.zip \
-"
+SRC_URI = "https://sourceforge.net/projects/half/files/half/${PV}/${BP}.zip"
 SRC_URI[md5sum] = "86d023c0729abf3465bcd55665a39013"
 SRC_URI[sha256sum] = "cdd70d3bf3fe091b688e7ab3f48471c881a197d2c186c95cca8bf156961fb41c"
 
