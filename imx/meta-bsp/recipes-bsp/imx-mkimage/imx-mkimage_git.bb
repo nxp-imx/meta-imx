@@ -14,6 +14,7 @@ CFLAGS = "-O2 -Wall -std=c99 -I ${STAGING_INCDIR} -L ${STAGING_LIBDIR}"
 
 REV_CHIP ?= "B0"
 REV_CHIP_imx8qxpc0mek = "C0"
+REV_CHIP_imx8qxpc0lpddr4arm2 = "C0"
 
 do_compile () {
     cd ${S}

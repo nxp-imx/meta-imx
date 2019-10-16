@@ -60,6 +60,7 @@ SECO_FIRMWARE_mx8qm  = "mx8qmb0-ahab-container.img"
 SECO_FIRMWARE_mx8qxp = "mx8qxb0-ahab-container.img"
 SECO_FIRMWARE_imx8qxpc0mek  = "mx8qxc0-ahab-container.img"
 SECO_FIRMWARE_mx8dxl-phantom = "mx8qxb0-ahab-container.img"
+SECO_FIRMWARE_imx8qxpc0lpddr4arm2  = "mx8qxc0-ahab-container.img"
 
 UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 BOOT_CONFIG_MACHINE = "${BOOT_NAME}-${MACHINE}-${UBOOT_CONFIG}.bin"
@@ -91,6 +92,7 @@ SOC_FAMILY_mx8x = "mx8x"
 
 REV_OPTION ?= ""
 REV_OPTION_imx8qxpc0mek = "REV=C0"
+REV_OPTION_imx8qxpc0lpddr4arm2 = "REV=C0"
 
 compile_mx8m() {
     bbnote 8MQ/8MM boot binary build
