@@ -19,7 +19,7 @@ SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH} \
            file://0001-Revert-firmware_loader-Enable-FW_LOADER_USER_HELPER.patch \
            file://0002-dmaengine-imx-sdma-enable-CONFIG_FW_LOADER_USER_HELP.patch \
            "
-SRCREV = "775033eb3dcba27a2b7093caccbc81c1df55ba46"
+SRCREV = "a6c7f8b0c57790bdb06aa5140df1551c5f67d9d9"
 
 S = "${WORKDIR}/git"
 
