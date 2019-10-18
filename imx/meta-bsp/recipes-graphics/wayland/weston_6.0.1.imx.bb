@@ -31,6 +31,9 @@ inherit autotools pkgconfig useradd distro_features_check
 REQUIRED_DISTRO_FEATURES          = "opengl"
 REQUIRED_DISTRO_FEATURES_imxgpu2d = ""
 REQUIRED_DISTRO_FEATURES_imxgpu3d = "opengl"
+PACKAGECONFIG_OPENGL              = "opengl"
+PACKAGECONFIG_OPENGL_imxgpu2d     = ""
+PACKAGECONFIG_OPENGL_imxgpu3d     = "opengl"
 
 DEPENDS = "libxkbcommon gdk-pixbuf pixman cairo glib-2.0 jpeg"
 DEPENDS += "wayland wayland-protocols libinput virtual/egl pango wayland-native"
@@ -50,15 +53,9 @@ EXTRA_OECONF_append_qemux86-64 = " \
 EXTRA_OECONF_append_imxfbdev = " \
 		WESTON_NATIVE_BACKEND=fbdev-backend.so \
 		"
-
-IMX_EXTRA_OECONF_OPENGL          = ""
-IMX_EXTRA_OECONF_OPENGL_imxgpu2d = " --disable-opengl"
-IMX_EXTRA_OECONF_OPENGL_imxgpu3d = ""
-EXTRA_OECONF_append = "${IMX_EXTRA_OECONF_OPENGL}"
-
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'kms fbdev egl', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'xwayland', '', d)} \
-                   ${@bb.utils.filter('DISTRO_FEATURES', 'opengl pam systemd x11', d)} \
+                   ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL} pam systemd x11', d)} \
                    clients launch"
 PACKAGECONFIG_remove_imxfbdev = "kms"
 PACKAGECONFIG_append_imxgpu   = " imxgpu"
