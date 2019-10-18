@@ -20,11 +20,13 @@ SRC_URI_append_mx6sl = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'systemd wayland x11', ' file://weston.config', '', d)}"
 
 SRCREV = "ab864976ed5c4ebc0349ce0c0e84c47913636aa7"
+
 S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_URI = "https://wayland.freedesktop.org/releases.html"
 
 inherit autotools pkgconfig useradd distro_features_check
+
 # Disable OpenGL for parts with GPU support for 2D but not 3D
 REQUIRED_DISTRO_FEATURES          = "opengl"
 REQUIRED_DISTRO_FEATURES_imxgpu2d = ""
@@ -35,18 +37,17 @@ DEPENDS += "wayland wayland-protocols libinput virtual/egl pango wayland-native"
 
 WESTON_MAJOR_VERSION = "${@'.'.join(d.getVar('PV').split('.')[0:1])}"
 
-
 EXTRA_OECONF = "--enable-setuid-install \
                 --disable-rdp-compositor \
 		--enable-autotools \
                 "
-EXTRA_OECONF_append_qemux86 = "\
+EXTRA_OECONF_append_qemux86 = " \
 		WESTON_NATIVE_BACKEND=fbdev-backend.so \
 		"
-EXTRA_OECONF_append_qemux86-64 = "\
+EXTRA_OECONF_append_qemux86-64 = " \
 		WESTON_NATIVE_BACKEND=fbdev-backend.so \
 		"
-EXTRA_OECONF_append_imxfbdev = "\
+EXTRA_OECONF_append_imxfbdev = " \
 		WESTON_NATIVE_BACKEND=fbdev-backend.so \
 		"
 
@@ -59,7 +60,6 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'kms fbdev
                    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'xwayland', '', d)} \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl pam systemd x11', d)} \
                    clients launch"
-# drm is not supported on mx6/mx7
 PACKAGECONFIG_remove_imxfbdev = "kms"
 PACKAGECONFIG_append_imxgpu   = " imxgpu"
 PACKAGECONFIG_append_imxgpu2d = " imxg2d"
@@ -99,12 +99,12 @@ PACKAGECONFIG[colord] = "--enable-colord,--disable-colord,colord"
 PACKAGECONFIG[clients] = "--enable-clients --enable-simple-clients --enable-demo-clients-install,--disable-clients --disable-simple-clients"
 # Weston with PAM support
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
+# Weston with i.MX GPU support
+PACKAGECONFIG[imxgpu] = "--enable-imxgpu,--disable-imxgpu"
 # Weston with i.MX G2D renderer
 PACKAGECONFIG[imxg2d] = "--enable-imxg2d,--disable-imxg2d,virtual/libg2d"
 # Weston with OpenGL support
 PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl"
-# Weston with imxgpu hardware
-PACKAGECONFIG[imxgpu] = "--enable-imxgpu,--disable-imxgpu"
 
 SOCNAME        = "none"
 SOCNAME_mx7ulp = "7ulp"
@@ -169,8 +169,7 @@ do_install_append() {
 PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', '${PN}-xwayland', '', d)} \
              libweston-${WESTON_MAJOR_VERSION} ${PN}-examples"
 
-FILES_${PN} = "${bindir}/weston ${bindir}/weston-terminal ${bindir}/weston-info ${bindir}/weston-launch ${bindir}/wcap-decode ${libexecdir} ${libdir}/${BPN}/*.so ${datadir}"
-FILES_${PN} += "${sysconfdir}/xdg/weston"
+FILES_${PN} = "${bindir}/weston ${bindir}/weston-terminal ${bindir}/weston-info ${bindir}/weston-launch ${bindir}/wcap-decode ${libexecdir} ${libdir}/${BPN}/*.so ${datadir} ${sysconfdir}/xdg/weston"
 
 FILES_libweston-${WESTON_MAJOR_VERSION} = "${libdir}/lib*${SOLIBS} ${libdir}/libweston-${WESTON_MAJOR_VERSION}/*.so"
 SUMMARY_libweston-${WESTON_MAJOR_VERSION} = "Helper library for implementing 'wayland window managers'."
@@ -188,3 +187,4 @@ USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system weston-launch"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+COMPATIBLE_MACHINE = "(imxfbdev|imxgpu)"
