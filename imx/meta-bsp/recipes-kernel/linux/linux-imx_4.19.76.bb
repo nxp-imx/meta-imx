@@ -16,8 +16,6 @@ SRCBRANCH = "imx_4.19.y"
 LOCALVERSION = "-1.2.0"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH} \
-           file://0001-Revert-firmware_loader-Enable-FW_LOADER_USER_HELPER.patch \
-           file://0002-dmaengine-imx-sdma-enable-CONFIG_FW_LOADER_USER_HELP.patch \
            "
 SRCREV = "a6c7f8b0c57790bdb06aa5140df1551c5f67d9d9"
 
