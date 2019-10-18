@@ -11,7 +11,7 @@ SRCREV = "179b913aee4e7d047c041940b426570f288de235"
 
 S = "${WORKDIR}/git"
 
-inherit cmake lib_package pkgconfig perlnative pythonnative
+inherit cmake pkgconfig perlnative pythonnative
 
 PACKAGECONFIG ??= "egl waffle"
 PACKAGECONFIG_append = \
@@ -27,8 +27,12 @@ PACKAGECONFIG[waffle] = "-DENABLE_WAFFLE=ON,-DENABLE_WAFFLE=OFF,waffle"
 PACKAGECONFIG[x11] = "-DENABLE_X11=ON,-DENABLE_X11=OFF"
 PACKAGECONFIG[vivante] = "-DENABLE_VIVANTE=ON,-DENABLE_VIVANTE=OFF,virtual/libg2d"
 
-FILES_${PN} = "${bindir} ${libdir}"
-FILES_${PN}-dbg += "${libdir}/*/*/.debug"
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
+FILES_${PN} += " \
+    ${libdir}/apitrace/scripts/* \
+    ${libdir}/apitrace/wrappers/* \
+"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(imxgpu)"
