@@ -18,13 +18,15 @@ PACKAGECONFIG_OPENGL_imxgpu3d     = "opengl"
 
 EXTRA_OEMESON += "-Dsimple-dmabuf-drm=auto"
 
-PACKAGECONFIG_remove = "wayland"
+PACKAGECONFIG_remove = "wayland x11"
 PACKAGECONFIG_append = " ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)}"
 PACKAGECONFIG_remove_imxfbdev = "kms"
 PACKAGECONFIG_append_imxgpu   = " imxgpu"
 PACKAGECONFIG_append_imxgpu2d = " g2d"
 PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
 
+# Weston with Xwayland support (requires X11 and Wayland)
+PACKAGECONFIG[xwayland] = "-Dxwayland=true,-Dxwayland=false,libxcursor"
 # Weston with cairo glesv2 support
 PACKAGECONFIG[cairo-glesv2] = "-Dcairo-glesv2=true,-Dcairo=image"
 # Weston with i.MX GPU support
