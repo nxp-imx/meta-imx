@@ -48,9 +48,6 @@ QT_CONFIG_FLAGS_MX8_GPU     = ""
 QT_CONFIG_FLAGS_MX8_GPU_mx8 = "-eglfs -kms"
 QT_CONFIG_FLAGS_append_imxgpu = " ${QT_CONFIG_FLAGS_MX8_GPU}"
 
-PACKAGECONFIG_WAYLAND ?= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'xkbcommon-evdev', '', d)}"
-PACKAGECONFIG += "${PACKAGECONFIG_WAYLAND}"
-
 do_install_append () {
     if ls ${D}${libdir}/pkgconfig/Qt5*.pc >/dev/null 2>&1; then
         sed -i 's,-L${STAGING_DIR_HOST}/usr/lib,,' ${D}${libdir}/pkgconfig/Qt5*.pc
