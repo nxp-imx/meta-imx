@@ -89,7 +89,7 @@ EXTRA_OECONF_remove = "--disable-qt \
 
 # The QT_PATH & QT_HOST_PATH which help to access to moc uic rcc tools are incorrect,
 # need to passing STAGING_DIR to update the QT PATH
-EXTRA_OECONF += "STAGING_DIR=${STAGING_DIR_NATIVE} --disable-introspection"
+EXTRA_OECONF += "STAGING_DIR=${STAGING_DIR_NATIVE}"
 
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
