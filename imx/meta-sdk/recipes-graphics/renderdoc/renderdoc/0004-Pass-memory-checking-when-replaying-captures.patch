@@ -1,0 +1,62 @@
+From b2274117b241639b0b872f46950a2b31d497409e Mon Sep 17 00:00:00 2001
+From: Andrei Catalin Ilie <and96x@gmail.com>
+Date: Wed, 25 Sep 2019 13:28:09 +0300
+Subject: [PATCH 4/5] Pass memory checking when replaying captures
+
+Due to the fact that iMX8 target fails buffer size checking when loading the
+buffers from the capture file, the replay feauture is not working.
+This commit adds a round up for the allocation size to allow creation of
+the buffers, by creating a dummy buffer which has the initial allocation size.
+If this buffer pass the checkings, then the allocation size is correctly set,
+else it will become equal to the demanded size. At the end, the dummy buffer
+is freed.
+---
+ .../driver/vulkan/wrappers/vk_resource_funcs.cpp   | 32 ++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+
+diff --git a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
+index 4c03f57..f7e1b78 100644
+--- a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
++++ b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
+@@ -266,6 +266,38 @@ bool WrappedVulkan::Serialise_vkAllocateMemory(SerialiserType &ser, VkDevice dev
+     // appropriate index on replay
+     AllocateInfo.memoryTypeIndex = m_PhysicalDeviceData.memIdxMap[AllocateInfo.memoryTypeIndex];
+ 
++    // do a last check to completely make sure we meet memory requirements for size
++    {
++      VkBufferCreateInfo bufInfo = {
++          VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
++          NULL,
++          0,
++          AllocateInfo.allocationSize,
++          VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT,
++      };
++
++      // since this is very short lived, it's not wrapped
++      VkBuffer buf = VK_NULL_HANDLE;
++
++      VkResult vkr = ObjDisp(device)->CreateBuffer(Unwrap(device), &bufInfo, NULL, &buf);
++      RDCASSERTEQUAL(vkr, VK_SUCCESS);
++
++      if(vkr == VK_SUCCESS && buf != VK_NULL_HANDLE)
++      {
++        VkMemoryRequirements mrq = {0};
++        ObjDisp(device)->GetBufferMemoryRequirements(Unwrap(device), buf, &mrq);
++
++        RDCASSERTMSG("memory requirements less than desired size", mrq.size >= bufInfo.size, mrq.size,
++                     bufInfo.size);
++
++        // round up allocation size to allow creation of buffers
++        if(mrq.size >= bufInfo.size)
++          AllocateInfo.allocationSize = mrq.size;
++      }
++
++      ObjDisp(device)->DestroyBuffer(Unwrap(device), buf, NULL);
++    }
++
+     VkMemoryAllocateInfo patched = AllocateInfo;
+ 
+     byte *tempMem = GetTempMemory(GetNextPatchSize(patched.pNext));
+-- 
+2.7.4
+
