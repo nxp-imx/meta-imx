@@ -6,7 +6,7 @@ PROVIDES_OPENVX_mx8   = "virtual/libopenvx"
 PROVIDES_OPENVX_mx8mm = ""
 PROVIDES += "${PROVIDES_OPENVX}"
 
-PACKAGES =+ "libnn-imx"
+PACKAGES =+ "libnn-imx libnn-imx-dev"
 
 GLES3_HEADER_REMOVALS_mx8mn = "gl32.h"
 
@@ -17,7 +17,7 @@ FILES_libopenvx-imx-dev = "${includedir}/VX ${includedir}/OVXLIB"
 RDEPENDS_libopenvx-imx = "libnn-imx"
 
 FILES_libnn-imx = "${libdir}/libNN*${SOLIBS} ${libdir}/libnn*${SOLIBS} ${libdir}/libneuralnetworks${SOLIBS}"
-FILES_libnn-imx-dev = "${includedir}/NNRT"
+FILES_libnn-imx-dev = "${includedir}/nnrt"
 
 RDEPENDS_libgal-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'valgrind', '', d)}"
 
