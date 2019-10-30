@@ -46,13 +46,7 @@ EXTRA_OECONF_append_qemux86 = "\
 EXTRA_OECONF_append_qemux86-64 = "\
 		WESTON_NATIVE_BACKEND=fbdev-backend.so \
 		"
-EXTRA_OECONF_append_mx6 = "\
-		WESTON_NATIVE_BACKEND=fbdev-backend.so \
-		"
-EXTRA_OECONF_append_mx7 = "\
-		WESTON_NATIVE_BACKEND=fbdev-backend.so \
-		"
-EXTRA_OECONF_append_mx8dxl-phantom = "\
+EXTRA_OECONF_append_imxfbdev = "\
 		WESTON_NATIVE_BACKEND=fbdev-backend.so \
 		"
 
