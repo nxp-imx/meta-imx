@@ -100,7 +100,7 @@ MACHINE_SOCARCH_SUFFIX_mx8mn  = "-mx8mn"
 MACHINE_SOCARCH_SUFFIX_mx8mq  = "-mx8m"
 MACHINE_SOCARCH_SUFFIX_mx8qm  = "-mx8"
 MACHINE_SOCARCH_SUFFIX_mx8qxp = "-mx8"
-MACHINE_SOCARCH_SUFFIX_mx8dxl = "-mx8-lite"
+MACHINE_SOCARCH_SUFFIX_mx8dxl = "-mx8l"
 
 MACHINE_ARCH_FILTER = "virtual/kernel"
 MACHINE_SOCARCH_FILTER_append_imxvpu = " \
