@@ -8,7 +8,7 @@ CONFLICT_DISTRO_FEATURES = "directfb"
 
 ML_PKGS ?= ""
 ML_PKGS_mx8 = "packagegroup-imx-ml"
-ML_PKGS_mx8dxl-phantom = ""
+ML_PKGS_mx8dxl = ""
 
 OPENCV_PKGS ?= ""
 OPENCV_PKGS_append_imxgpu = " \
