@@ -1,0 +1,90 @@
+From c1a56f520369afd993612f7ad6dd1d02c2c95a02 Mon Sep 17 00:00:00 2001
+From: Alexandru Palalau <ioan-alexandru.palalau@nxp.com>
+Date: Tue, 5 Nov 2019 15:01:34 +0200
+Subject: [PATCH] Copyrights: Update copyrights.
+
+Signed-off-by: Alexandru Palalau <ioan-alexandru.palalau@nxp.com>
+---
+ renderdoc/api/replay/renderdoc_replay.h                | 1 +
+ renderdoc/driver/vulkan/vk_core.cpp                    | 1 +
+ renderdoc/driver/vulkan/vk_linux.cpp                   | 1 +
+ renderdoc/driver/vulkan/vk_replay.h                    | 1 +
+ renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp | 1 +
+ renderdoccmd/renderdoccmd_linux.cpp                    | 1 +
+ 6 files changed, 6 insertions(+)
+
+diff --git a/renderdoc/api/replay/renderdoc_replay.h b/renderdoc/api/replay/renderdoc_replay.h
+index 8b02e30..af6ae4f 100644
+--- a/renderdoc/api/replay/renderdoc_replay.h
++++ b/renderdoc/api/replay/renderdoc_replay.h
+@@ -3,6 +3,7 @@
+  *
+  * Copyright (c) 2015-2019 Baldur Karlsson
+  * Copyright (c) 2014 Crytek
++ * Copyright (c) 2019 NXP
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  * of this software and associated documentation files (the "Software"), to deal
+diff --git a/renderdoc/driver/vulkan/vk_core.cpp b/renderdoc/driver/vulkan/vk_core.cpp
+index 5db15c3..d1e2114 100644
+--- a/renderdoc/driver/vulkan/vk_core.cpp
++++ b/renderdoc/driver/vulkan/vk_core.cpp
+@@ -2,6 +2,7 @@
+  * The MIT License (MIT)
+  *
+  * Copyright (c) 2015-2019 Baldur Karlsson
++ * Copyright (c) 2019 NXP
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  * of this software and associated documentation files (the "Software"), to deal
+diff --git a/renderdoc/driver/vulkan/vk_linux.cpp b/renderdoc/driver/vulkan/vk_linux.cpp
+index c4491ef..cd97a6b 100644
+--- a/renderdoc/driver/vulkan/vk_linux.cpp
++++ b/renderdoc/driver/vulkan/vk_linux.cpp
+@@ -2,6 +2,7 @@
+  * The MIT License (MIT)
+  *
+  * Copyright (c) 2016-2019 Baldur Karlsson
++ * Copyright (c) 2019 NXP
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  * of this software and associated documentation files (the "Software"), to deal
+diff --git a/renderdoc/driver/vulkan/vk_replay.h b/renderdoc/driver/vulkan/vk_replay.h
+index 801ccf5..2835fc5 100644
+--- a/renderdoc/driver/vulkan/vk_replay.h
++++ b/renderdoc/driver/vulkan/vk_replay.h
+@@ -2,6 +2,7 @@
+  * The MIT License (MIT)
+  *
+  * Copyright (c) 2015-2019 Baldur Karlsson
++ * Copyright (c) 2019 NXP
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  * of this software and associated documentation files (the "Software"), to deal
+diff --git a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
+index f7e1b78..0ced8ac 100644
+--- a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
++++ b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
+@@ -2,6 +2,7 @@
+  * The MIT License (MIT)
+  *
+  * Copyright (c) 2015-2019 Baldur Karlsson
++ * Copyright (c) 2019 NXP
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  * of this software and associated documentation files (the "Software"), to deal
+diff --git a/renderdoccmd/renderdoccmd_linux.cpp b/renderdoccmd/renderdoccmd_linux.cpp
+index 8b092c4..0bd3a46 100644
+--- a/renderdoccmd/renderdoccmd_linux.cpp
++++ b/renderdoccmd/renderdoccmd_linux.cpp
+@@ -3,6 +3,7 @@
+  *
+  * Copyright (c) 2015-2019 Baldur Karlsson
+  * Copyright (c) 2014 Crytek
++ * Copyright (c) 2019 NXP
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining a copy
+  * of this software and associated documentation files (the "Software"), to deal
+-- 
+2.7.4
+
