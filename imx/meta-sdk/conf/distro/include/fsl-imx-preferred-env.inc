@@ -20,6 +20,7 @@ PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.16.0.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.16.0.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.16.0.imx"
 PREFERRED_VERSION_gstreamer1.0              = "1.16.0.imx"
+PREFERRED_VERSION_gstreamer1.0-libav        = "1.16.0"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"
