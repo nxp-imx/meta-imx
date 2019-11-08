@@ -1,13 +1,15 @@
 require recipes-support/opencv/opencv_4.1.0.bb
 
-SRCREV_opencv = "c5bf3ec2e791e0817ab1d5880e78711b6fe08206"
-SRCREV_contrib = "83e98d2424bbe3854d4686dc6c9cf9a15812e8d7"
-SRCREV_extra = "cff02b5f48d3431daa04397321c46e0bbb1bde53"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=62d89c5dcb0583609ea919c56be0ee76"
+
+SRCREV_opencv = "edaf3d17f6975f7eddbe44e7f80d05c639fb5bb7"
+SRCREV_contrib = "25221244732dcf44c1450d0f93edc2529a61c0e1"
+SRCREV_extra = "d29d003e00dacf4ed686577c3f2c0aa048d5a80a"
 SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
 SRC_URI[tinydnn.sha256sum] = "e2c61ce8c5debaa644121179e9dbdcf83f497f39de853f8dd5175846505aa18b"
 SRCREV_FORMAT_append = "_extra"
 OPENCV_SRC ?= "git://source.codeaurora.org/external/imx/opencv-imx.git;protocol=https"
-SRCBRANCH = "4.1.2_imx"
+SRCBRANCH = "4.0.1_imx"
 SRC_URI_remove = "git://github.com/opencv/opencv.git;name=opencv \
            file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
            "
@@ -17,7 +19,7 @@ SRC_URI_append = " \
            https://github.com/tiny-dnn/tiny-dnn/archive/v1.0.0a3.tar.gz;destsuffix=git/3rdparty/tinydnn/tiny-dnn-1.0.0a3;name=tinydnn;unpack=false \
            file://uselocalxfeatures.patch;patchdir=../contrib/ \
            "
-PV = "4.1.2.imx"
+PV = "4.0.1.imx"
 
 do_unpack_extra_append() {
     mkdir -p ${S}/3rdparty/tinydnn/
