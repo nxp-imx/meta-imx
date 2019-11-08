@@ -17,21 +17,21 @@ SRCREV = "b7114b828b82f2c0eec124ed424eff1230cc5319"
 
 S = "${WORKDIR}/git"
 
-do_compile () {
-    if [ ${DEFAULTTUNE} = "aarch64" ];then
-        export TA_DEV_KIT_DIR=${STAGING_INCDIR}/optee/export-user_ta_arm64/
-        export ARCH=arm64
-    else
-        export TA_DEV_KIT_DIR=${STAGING_INCDIR}/optee/export-user_ta_arm32/
-        export ARCH=arm
-    fi
-    export OPTEE_CLIENT_EXPORT=${STAGING_DIR_HOST}/usr
-    export CROSS_COMPILE_HOST=${HOST_PREFIX}
-    export CROSS_COMPILE_TA=${HOST_PREFIX}
-    export CROSS_COMPILE=${HOST_PREFIX}
-    export OPTEE_OPENSSL_EXPORT=${STAGING_INCDIR}/
-    oe_runmake V=1
-}
+TA_DEV_KIT_DIR_aarch64 = "${STAGING_INCDIR}/optee/export-user_ta_arm64/"
+OPTEE_ARCH_aarch64 = "arm64"
+TA_DEV_KIT_DIR_arm = "${STAGING_INCDIR}/optee/export-user_ta_arm32/"
+OPTEE_ARCH_arm = "arm"
+
+EXTRA_OEMAKE = " \
+    TA_DEV_KIT_DIR=${TA_DEV_KIT_DIR} \
+    ARCH=${OPTEE_ARCH} \
+    OPTEE_CLIENT_EXPORT=${STAGING_DIR_HOST}/usr \
+    CROSS_COMPILE_HOST=${HOST_PREFIX} \
+    CROSS_COMPILE_TA=${HOST_PREFIX} \
+    CROSS_COMPILE=${HOST_PREFIX} \
+    OPTEE_OPENSSL_EXPORT=${STAGING_INCDIR}/ \
+    V=1 \
+"
 
 do_install () {
     install -d ${D}/usr/bin
