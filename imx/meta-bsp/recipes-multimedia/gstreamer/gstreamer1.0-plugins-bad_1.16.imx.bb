@@ -36,4 +36,9 @@ PACKAGECONFIG_append_mx8 = " opencv kms"
 #Remove vulkan as it's incompatible for i.MX 8M Mini
 PACKAGECONFIG_remove_mx8mm = " vulkan"
 
+# Disable introspection to fix [GstPlayer-1.0.gir] Error
+EXTRA_OECONF += " \
+    --disable-introspection \
+"
+
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
