@@ -6,12 +6,32 @@ DESCRIPTION = "Freescale i.MX firmware such as for the VPU"
 
 require firmware-imx-${PV}.inc
 
+SRC_URI_append = " \
+    file://sdma \
+    file://epdc \
+    file://sdma-firmware.service \
+    file://epdc-firmware.service \
+"
+
 PE = "1"
 
-inherit allarch
+inherit allarch systemd
+
+SYSTEMD_PACKAGES = "${PN}-sdma ${PN}-epdc"
+SYSTEMD_SERVICE_${PN}-sdma = "sdma-firmware.service"
+SYSTEMD_SERVICE_${PN}-epdc = "epdc-firmware.service"
 
 do_install() {
     install -d ${D}${base_libdir}/firmware/imx
+
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}${sysconfdir}
+        install -d ${D}${systemd_system_unitdir}
+        install -m 0755 ${WORKDIR}/sdma ${D}${sysconfdir}
+        install -m 0755 ${WORKDIR}/epdc ${D}${sysconfdir}
+        install -m 0644 ${WORKDIR}/sdma-firmware.service ${D}${systemd_system_unitdir}
+        install -m 0644 ${WORKDIR}/epdc-firmware.service ${D}${systemd_system_unitdir}
+    fi
 
     cd firmware
     for d in *; do
@@ -67,8 +87,11 @@ PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-*"
 
 PACKAGES =+ "${PN}-epdc ${PN}-scfw ${PN}-sdma"
 
-FILES_${PN}-epdc = "${base_libdir}/firmware/imx/epdc/"
+RDEPENDS_${PN}-epdc = "bash"
+RDEPENDS_${PN}-sdma = "bash"
+
+FILES_${PN}-epdc = "${base_libdir}/firmware/imx/epdc/ ${sysconfdir}/epdc ${systemd_system_unitdir}/epdc-firmware.service"
 FILES_${PN}-scfw = "${base_libdir}/firmware/scfw/"
-FILES_${PN}-sdma = " ${base_libdir}/firmware/imx/sdma"
+FILES_${PN}-sdma = " ${base_libdir}/firmware/imx/sdma ${sysconfdir}/sdma ${systemd_system_unitdir}/sdma-firmware.service"
 
 COMPATIBLE_MACHINE = "(imx)"
