@@ -27,3 +27,5 @@ do_install () {
 FILES_${PN} += "/unit_tests"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+COMPATIBLE_MACHINE = "(mx8mq|mx8mm)"
