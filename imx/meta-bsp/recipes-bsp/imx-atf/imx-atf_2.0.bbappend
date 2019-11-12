@@ -10,7 +10,7 @@ PLATFORM_mx8x   = "imx8qx"
 PLATFORM_mx8qxp = "imx8qx"
 PLATFORM_mx8mn  = "imx8mn"
 
-BUILD_OPTEE = "${@bb.utils.contains('COMBINED_FEATURES', 'optee', 'true', 'false', d)}"
+BUILD_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
 do_compile_append() {
     if [ "${BUILD_OPTEE}" = "true" ]; then
