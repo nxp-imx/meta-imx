@@ -1,3 +1,5 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
 do_install_append() {
     rm ${D}${sysconfdir}/xdg/weston/weston.ini
 }
