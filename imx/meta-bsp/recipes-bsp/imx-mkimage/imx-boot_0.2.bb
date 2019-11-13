@@ -15,7 +15,7 @@ DEPENDS += " \
     firmware-imx \
     ${IMX_EXTRA_FIRMWARE} \
     imx-atf \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os-imx', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os', '', d)} \
 "
 DEPENDS_append_mx8m = " u-boot-mkimage-native dtc-native"
 BOOT_NAME = "imx-boot"
@@ -42,7 +42,7 @@ do_compile[depends] += " \
     ${@' '.join('%s:do_deploy' % r for r in '${IMX_EXTRA_FIRMWARE}'.split() )} \
     imx-atf:do_deploy \
     ${IMX_M4_DEMOS} \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os-imx:do_deploy', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
 "
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
