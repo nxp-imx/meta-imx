@@ -20,6 +20,8 @@ SRC_URI = " \
 
 S = "${WORKDIR}/git"
 
+inherit gettext gobject-introspection use-imx-headers
+
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
 
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
@@ -29,6 +31,8 @@ EXTRA_AUTORECONF = ""
 # Disable introspection to fix [GstPlayer-1.0.gir] Error
 EXTRA_OECONF += " \
     --disable-introspection \
+    CPPFLAGS="-I${STAGING_INCDIR_IMX}" \
+    --disable-opengl \
 "
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
