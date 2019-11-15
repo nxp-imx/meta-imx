@@ -17,6 +17,7 @@ SRC_URI = " \
 
 S = "${WORKDIR}/git"
 
+DEPENDS_append = " libdrm"
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
 EXTRA_AUTORECONF = ""
