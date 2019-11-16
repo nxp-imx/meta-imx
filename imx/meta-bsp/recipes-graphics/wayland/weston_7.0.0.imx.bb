@@ -61,7 +61,7 @@ do_install_append() {
         fi
         WESTON_INI_DEST_DIR=${D}${sysconfdir}/xdg/weston
         install -d ${WESTON_INI_DEST_DIR}
-        install -m 0644 ${WESTON_INI_SRC} ${WESTON_INI_DEST_DIR}
+        install -m 0644 ${WESTON_INI_SRC} ${WESTON_INI_DEST_DIR}/weston.ini
         cd ${WESTON_INI_DEST_DIR}
         case ${SOCNAME} in
         8mq)
