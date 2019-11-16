@@ -1,0 +1,30 @@
+From 67984eeb7de1841db1beb7262c6453067d65c75b Mon Sep 17 00:00:00 2001
+From: "i.MX Yocto Project Build" <imx.build@nxp.com>
+Date: Sat, 16 Nov 2019 12:26:10 -0600
+Subject: [PATCH] ivi-input-controller: Update header path for weston 7.0
+
+https://gitlab.freedesktop.org/wayland/weston/commit/27b377f51f3ee96a81936032bf803a49638c3691
+
+Upstream-Status: Pending
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ .../ivi-input-controller/src/ivi-input-controller.c             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c b/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c
+index a0bfc48..257a1dc 100644
+--- a/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c
++++ b/ivi-input-modules/ivi-input-controller/src/ivi-input-controller.c
+@@ -31,7 +31,7 @@
+ #include <fcntl.h>
+ #include <unistd.h>
+ 
+-#include "plugin-registry.h"
++#include <libweston/plugin-registry.h>
+ #include "ilm_types.h"
+ 
+ #include "ivi-input-server-protocol.h"
+-- 
+2.17.1
+
