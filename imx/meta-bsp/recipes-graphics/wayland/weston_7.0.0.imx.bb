@@ -55,7 +55,7 @@ uncomment() {
 do_install_append() {
     if [ -z "${@bb.utils.filter('BBFILE_COLLECTIONS', 'aglprofilegraphical', d)}" ]; then
         if [ "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
-            WESTON_INI_SRC=${B}/ivi-shell/weston.ini
+            WESTON_INI_SRC=${B}/ivi-shell/weston-ivi-test.ini
         else
             WESTON_INI_SRC=${B}/compositor/weston.ini
         fi
