@@ -1,9 +1,9 @@
-SRCBRANCH = "imx_2.0.y"
+SRCBRANCH = "imx_4.19.35_1.1.0"
 ATF_SRC ?= "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https"
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH} \
            file://0001-Allow-BUILD_STRING-to-be-set-in-.revision-file.patch \
 "
-SRCREV = "eb8221204334cece24c6976b1db42544cf3c42a5"
+SRCREV = "70fa7bcc1a2035ab8402550911b3ae29eff55371"
 
 PLATFORM_mx8x   = "imx8qx"
 # Override PLATFORM_mx8qxp from the included recipe
