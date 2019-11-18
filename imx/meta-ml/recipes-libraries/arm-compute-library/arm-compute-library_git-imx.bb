@@ -4,13 +4,13 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8948bc85114b3b716576ef8d732f034f \
                     file://include/half/LICENSE.txt;md5=fe7e5a4795c76b317919afd2d3da5983"
 
-PV = "19.05+git${SRCPV}"
+PV = "19.08+git${SRCPV}"
 
 ARM_COMPUTELIBRARY_SRC ?= "git://source.codeaurora.org/external/imx/arm-computelibrary-imx.git;protocol=https"
-SRCBRANCH = "imx_19.05"
+SRCBRANCH = "imx_19.08"
 
 SRC_URI = "${ARM_COMPUTELIBRARY_SRC};branch=${SRCBRANCH}"
-SRCREV = "0e12bb79c5adefe4e719ee757a74936b53e6c11d"
+SRCREV = "16ed8b15fa8d9a1e598c80874da423ab23a7ae1d"
 
 S = "${WORKDIR}/git"
 
