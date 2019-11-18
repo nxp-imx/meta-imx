@@ -1,5 +1,7 @@
 require recipes-support/opencv/opencv_4.1.0.bb
 
+FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-openembedded/meta-oe/recipes-support/opencv/opencv:"
+
 SRCREV_opencv = "c5bf3ec2e791e0817ab1d5880e78711b6fe08206"
 SRCREV_contrib = "83e98d2424bbe3854d4686dc6c9cf9a15812e8d7"
 SRCREV_extra = "cff02b5f48d3431daa04397321c46e0bbb1bde53"
