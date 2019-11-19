@@ -6,6 +6,8 @@ require u-boot-common.inc
 require u-boot.inc
 inherit pythonnative
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+
 PROVIDES += "u-boot"
 DEPENDS_append = " dtc-native"
 
@@ -14,7 +16,9 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 
 UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "imx_v2019.04"
-SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH} \
+           file://0001-imx8-imx8m-Remove-fsl-prefix-from-kernel-DTB-for-4.19.35_1.1.0.patch \
+"
 SRCREV = "f3d76cc05129655b07fef1f3efceb322aaeb84f2"
 
 S = "${WORKDIR}/git"
