@@ -172,11 +172,13 @@ Chromium will have compilation errors, if any of the above host requirements are
 
 QTWebEngine
 --------
-Qtwebengine is not built by default so add this to local.conf or image recipe.   It is only supported
-for X11 backends for i.MX 6 with GPU and i.MX 7ULP and not on i.MX 8 SoC.
- IMAGE_INSTALL_append = " packagegroup-qt5-webengine"
+Qtwebengine is not built by default so add this to local.conf or image recipe. It is supported only on the machines
+that has GPU.
+ IMAGE_INSTALL_append = "packagegroup-qt5-webengine"
 
-To start go to /usr/share/qt5/examples/webkitwidgets/browser and run browser
+There are many browsers available using QtWebEngine and can be found here:
+/usr/share/examples/webengine
+/usr/share/examples/webenginewidgets
 
 Qt
 --
