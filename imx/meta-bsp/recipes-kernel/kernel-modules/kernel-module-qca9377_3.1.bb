@@ -1,4 +1,4 @@
-require kernel-module-qcacld-lea.inc
+require kernel-module-qcacld_${PV}.inc
 
 SUMMARY = "Qualcomm WiFi driver for QCA module 9377"
 
