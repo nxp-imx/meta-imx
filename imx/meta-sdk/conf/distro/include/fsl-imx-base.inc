@@ -1,11 +1,10 @@
-DISTRO = "fsl-imx"
+DISTRO = "imx-nxp"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.19-zeus"
+DISTRO_VERSION = "5.4-zeus"
 
 DISTRO_CODENAME = "zeus"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
-#SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
 
 MAINTAINER = "NXP <lauren.post@nxp.com>"
 
@@ -13,7 +12,7 @@ TARGET_VENDOR = "-poky"
 
 LOCALCONF_VERSION = "1"
 
-IMX_DEFAULT_DISTRO_FEATURES = "opengl ptest multiarch"
+IMX_DEFAULT_DISTRO_FEATURES = "opengl ptest multiarch linux-factory"
 # Enable vulkan distro feature only for mx8
 IMX_DEFAULT_DISTRO_FEATURES_append_mx8 = " vulkan"
 # Enable jailhouse distro feature only for mx8m
