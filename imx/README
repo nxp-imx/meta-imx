@@ -61,8 +61,8 @@ DirectFB is no longer supported in i.MX graphic builds.
 The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7.  i.MX 8 should use xwayland only.
 XWayland is the default distro for all i.MX families.
 
-   fsl-image-validation-imx provides a gui image without QT.
-   fsl-image-qt5-validation-imx provides a Qt5 image
+   imx-image-multimedia: This image contains all the packages except QT5/OpenCV/Machine Learning packages.
+   imx-image-full: This is the big image which includes imx-image-multimedia + OpenCV + QT5 + Machine Learning packages.
 
 Here are some examples:
 (The example uses the imx6qsabresd MACHINE but substitute this with whatever you are using)
