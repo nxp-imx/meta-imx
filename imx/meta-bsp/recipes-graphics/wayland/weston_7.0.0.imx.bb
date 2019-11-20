@@ -38,47 +38,5 @@ PACKAGECONFIG[g2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d"
 # Weston with OpenGL support
 PACKAGECONFIG[opengl] = "-Dopengl=true,-Dopengl=false"
 
-SOCNAME        = "none"
-SOCNAME_mx7ulp = "7ulp"
-SOCNAME_mx8mq  = "8mq"
-SOCNAME_mx8mm  = "8mm"
-
-uncomment() {
-    if ! (grep "^#$1" $2); then
-        bbfatal "Commented setting '#$1' not found in file $PWD/$2"
-    fi
-    sed -i -e 's,^#'"$1"','"$1"',g' $2
-}
-
-do_install_append() {
-    if [ -z "${@bb.utils.filter('BBFILE_COLLECTIONS', 'aglprofilegraphical', d)}" ]; then
-        if [ "${@bb.utils.filter('BBFILE_COLLECTIONS', 'ivi', d)}" ]; then
-            WESTON_INI_SRC=${B}/ivi-shell/weston-ivi-test.ini
-        else
-            WESTON_INI_SRC=${B}/compositor/weston.ini
-        fi
-        WESTON_INI_DEST_DIR=${D}${sysconfdir}/xdg/weston
-        install -d ${WESTON_INI_DEST_DIR}
-        install -m 0644 ${WESTON_INI_SRC} ${WESTON_INI_DEST_DIR}/weston.ini
-        cd ${WESTON_INI_DEST_DIR}
-        case ${SOCNAME} in
-        8mq)
-            uncomment "gbm-format=argb8888" weston.ini
-            uncomment "\\[shell\\]"         weston.ini
-            uncomment "size=1920x1080"      weston.ini
-            ;;
-        7ulp|8mm)
-            uncomment "use-g2d=1"           weston.ini
-            ;;
-        esac
-        if "${@bb.utils.contains('PACKAGECONFIG', 'xwayland', 'true', 'false', d)}"; then
-            uncomment "xwayland=true"       weston.ini
-        fi
-        cd -
-    fi
-}
-
-FILES_${PN} += "${sysconfdir}/xdg/weston"
-
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(imxfbdev|imxgpu)"
