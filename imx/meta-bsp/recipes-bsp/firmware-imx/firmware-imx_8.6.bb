@@ -9,17 +9,20 @@ require firmware-imx-${PV}.inc
 SRC_URI_append = " \
     file://sdma \
     file://epdc \
+    file://regulatory \
     file://sdma-firmware.service \
     file://epdc-firmware.service \
+    file://regulatory-firmware.service \
 "
 
 PE = "1"
 
 inherit allarch systemd
 
-SYSTEMD_PACKAGES = "${PN}-sdma ${PN}-epdc"
+SYSTEMD_PACKAGES = "${PN}-sdma ${PN}-epdc ${PN}-regulatory"
 SYSTEMD_SERVICE_${PN}-sdma = "sdma-firmware.service"
 SYSTEMD_SERVICE_${PN}-epdc = "epdc-firmware.service"
+SYSTEMD_SERVICE_${PN}-regulatory = "regulatory-firmware.service"
 
 do_install() {
     install -d ${D}${base_libdir}/firmware/imx
@@ -29,8 +32,10 @@ do_install() {
         install -d ${D}${systemd_system_unitdir}
         install -m 0755 ${WORKDIR}/sdma ${D}${sysconfdir}
         install -m 0755 ${WORKDIR}/epdc ${D}${sysconfdir}
+        install -m 0755 ${WORKDIR}/regulatory ${D}${sysconfdir}
         install -m 0644 ${WORKDIR}/sdma-firmware.service ${D}${systemd_system_unitdir}
         install -m 0644 ${WORKDIR}/epdc-firmware.service ${D}${systemd_system_unitdir}
+        install -m 0644 ${WORKDIR}/regulatory-firmware.service ${D}${systemd_system_unitdir}
     fi
 
     cd firmware
@@ -85,13 +90,15 @@ ALLOW_EMPTY_${PN} = "1"
 
 PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-*"
 
-PACKAGES =+ "${PN}-epdc ${PN}-scfw ${PN}-sdma"
+PACKAGES =+ "${PN}-epdc ${PN}-scfw ${PN}-sdma ${PN}-regulatory"
 
 RDEPENDS_${PN}-epdc = "bash"
 RDEPENDS_${PN}-sdma = "bash"
+RDEPENDS_${PN}-regulatory = "bash"
 
 FILES_${PN}-epdc = "${base_libdir}/firmware/imx/epdc/ ${sysconfdir}/epdc ${systemd_system_unitdir}/epdc-firmware.service"
 FILES_${PN}-scfw = "${base_libdir}/firmware/scfw/"
-FILES_${PN}-sdma = " ${base_libdir}/firmware/imx/sdma ${sysconfdir}/sdma ${systemd_system_unitdir}/sdma-firmware.service"
+FILES_${PN}-sdma = "${base_libdir}/firmware/imx/sdma ${sysconfdir}/sdma ${systemd_system_unitdir}/sdma-firmware.service"
+FILES_${PN}-regulatory = "${sysconfdir}/regulatory ${systemd_system_unitdir}/regulatory-firmware.service"
 
 COMPATIBLE_MACHINE = "(imx)"

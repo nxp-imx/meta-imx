@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# firmware loader script
+
+MX8MM_REGULATORY="/sys/bus/platform/devices/regulatory.0/firmware/regulatory.db"
+
+if [ 0 -lt $(ls $MX8MM_REGULATORY 2>/dev/null | wc -w) ]; then
+cd ${MX8MM_REGULATORY}
+echo 1 > loading
+cat /lib/firmware/regulatory.db > data
+echo 0 > loading
+fi
