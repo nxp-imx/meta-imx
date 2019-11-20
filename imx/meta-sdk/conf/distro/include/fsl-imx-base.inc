@@ -1,11 +1,10 @@
-DISTRO = "fsl-imx"
+DISTRO = "imx-nxp"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "4.19-zeus"
+DISTRO_VERSION = "5.4-zeus"
 
 DISTRO_CODENAME = "zeus"
 SDK_VENDOR = "-pokysdk"
 SDK_VERSION := "${DISTRO_VERSION}"
-#SDK_VERSION := "${@'${DISTRO_VERSION}'.replace('snapshot-${DATE}','snapshot')}"
 
 MAINTAINER = "NXP <lauren.post@nxp.com>"
 
