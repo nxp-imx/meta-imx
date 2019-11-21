@@ -21,6 +21,8 @@ FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VE
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
 
+SRCREV = "${AUTOREV}"
+
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 DEFAULT_PREFERENCE = "1"
