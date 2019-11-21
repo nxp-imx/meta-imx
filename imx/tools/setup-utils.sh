@@ -65,7 +65,7 @@ bbclass_overrides() {
 # to the layer folder.
 #
 # Example:
-#   hook_in_layer meta-fsl-bsp-release/imx/meta-bsp
+#   hook_in_layer meta-imx/imx/meta-bsp
 hook_in_layer() {
 
     layer=$1
