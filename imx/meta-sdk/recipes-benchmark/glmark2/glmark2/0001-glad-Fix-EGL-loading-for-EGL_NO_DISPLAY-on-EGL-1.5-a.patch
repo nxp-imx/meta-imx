@@ -1,0 +1,35 @@
+From c493f8c0364d4881bae7d5e773d9b8ba41828633 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Fri, 22 Nov 2019 12:41:06 -0600
+Subject: [PATCH] glad: Fix EGL loading for EGL_NO_DISPLAY on EGL 1.5 and above
+
+EGL loading was failing for a display of EGL_NO_DISPLAY.
+Allow loading EGL 1.5 and above since eglQueryString supports
+EGL_NO_DISPLAY in this case.
+
+Upstream-Status: Pending
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ src/glad/src/egl.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/glad/src/egl.c b/src/glad/src/egl.c
+index 4e65e41..a016bed 100644
+--- a/src/glad/src/egl.c
++++ b/src/glad/src/egl.c
+@@ -202,9 +202,11 @@ static int glad_egl_find_core_egl(EGLDisplay display) {
+         display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+     }
+ #endif
++#ifndef EGL_VERSION_1_5
+     if (display == EGL_NO_DISPLAY) {
+         return 0;
+     }
++#endif
+ 
+     version = eglQueryString(display, EGL_VERSION);
+     (void) eglGetError();
+-- 
+2.17.1
+
