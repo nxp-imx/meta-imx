@@ -18,4 +18,4 @@ RDEPENDS_${PN} = " \
     ${ML_PKGS} \
 "
 # Remove onnxruntime temporarily until the gcc 9 errors are fixed.
-RDEPENDS_${PN}_remove = "onnxruntime armnn"
+RDEPENDS_${PN}_remove = "onnxruntime"
