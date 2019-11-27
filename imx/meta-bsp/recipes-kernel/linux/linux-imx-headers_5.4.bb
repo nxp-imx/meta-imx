@@ -13,7 +13,7 @@ KERNEL_BRANCH ?= "next"
 LOCALVERSION = "-5.4-zeus-${KERNEL_BRANCH}"
 KERNEL_SRC = "git://bitbucket.sw.nxp.com/lfac/linux-nxp.git;protocol=ssh"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
-SRCREV = "${AUTOREV}"
+SRCREV = "780817a99f510ae963256e97b20ffa80761a4f19"
 
 S = "${WORKDIR}/git"
 
