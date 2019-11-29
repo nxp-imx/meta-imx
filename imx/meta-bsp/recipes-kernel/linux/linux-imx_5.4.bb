@@ -12,16 +12,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 DEPENDS += "lzop-native bc-native"
 
-KERNEL_BRANCH ?= "next"
-LOCALVERSION = "-5.4-zeus-${KERNEL_BRANCH}"
-KERNEL_SRC = "git://bitbucket.sw.nxp.com/lfac/linux-nxp.git;protocol=ssh"
+KERNEL_BRANCH ?= "lf-5.4.y"
+LOCALVERSION = "-lts-${KERNEL_BRANCH}"
+KERNEL_SRC = "git://bitbucket.sw.nxp.com/lfac/linux-lts-nxp.git;protocol=ssh"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
+
+SRCREV = "${AUTOREV}"
 
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
-
-SRCREV = "${AUTOREV}"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 

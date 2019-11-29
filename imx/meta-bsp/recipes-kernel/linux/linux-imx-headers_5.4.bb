@@ -9,9 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 #SRC_URI = "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 #SRCREV = "66620c3d281c5a5b27cbb7a51276d2f94f619f1c"
-KERNEL_BRANCH ?= "next"
-LOCALVERSION = "-5.4-zeus-${KERNEL_BRANCH}"
-KERNEL_SRC = "git://bitbucket.sw.nxp.com/lfac/linux-nxp.git;protocol=ssh"
+KERNEL_BRANCH ?= "lf-5.4.y"
+LOCALVERSION = "-lts-${KERNEL_BRANCH}"
+KERNEL_SRC = "git://bitbucket.sw.nxp.com/lfac/linux-lts-nxp.git;protocol=ssh"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
 SRCREV = "${AUTOREV}"
 
