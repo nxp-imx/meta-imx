@@ -38,13 +38,13 @@ do_copy_defconfig () {
     if [ ${DO_CONFIG_V7_COPY} = "yes" ]; then
         # copy latest imx_v7_defconfig to use for mx6, mx6ul and mx7
         mkdir -p ${B}
-        cp ${S}/arch/arm/configs/imx_v6_v7_defconfig ${B}/.config
-        cp ${S}/arch/arm/configs/imx_v6_v7_defconfig ${B}/../defconfig
+        cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
+        cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
     else
-        # copy latest defconfig to use for mx8
+        # copy latest imx_v8_defconfig to use for mx8
         mkdir -p ${B}
-        cp ${S}/arch/arm64/configs/defconfig ${B}/.config
-        cp ${S}/arch/arm64/configs/defconfig ${B}/../defconfig
+        cp ${S}/arch/arm64/configs/imx_v8_defconfig ${B}/.config
+        cp ${S}/arch/arm64/configs/imx_v8_defconfig ${B}/../defconfig
     fi
 }
 
