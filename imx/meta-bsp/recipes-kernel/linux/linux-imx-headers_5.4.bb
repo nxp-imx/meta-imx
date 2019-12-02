@@ -13,7 +13,7 @@ KERNEL_BRANCH ?= "lf-5.4.y"
 LOCALVERSION = "-lts-${KERNEL_BRANCH}"
 KERNEL_SRC = "git://bitbucket.sw.nxp.com/lfac/linux-lts-nxp.git;protocol=ssh"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
-SRCREV = "8a1238b3d8ae6724bf45c7054bbceed2d95cba9a"
+SRCREV = "a3e8e990c6e6daf8a57c820d62eb532ba066a928"
 
 S = "${WORKDIR}/git"
 
