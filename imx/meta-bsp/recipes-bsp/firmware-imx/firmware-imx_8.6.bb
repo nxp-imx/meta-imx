@@ -41,9 +41,6 @@ do_install() {
     cd firmware
     for d in *; do
         case $d in
-        easrc)
-            # excluding as only applies Nano SoC
-            ;;
         ddr|hdmi|seco)
             # These folders are for i.MX 8 and are included in the boot image via imx-boot
             bbnote Excluding folder $d
@@ -62,6 +59,8 @@ do_install() {
 
     mv ${D}${base_libdir}/firmware/epdc/ ${D}${base_libdir}/firmware/imx/epdc/
     mv ${D}${base_libdir}/firmware/imx/epdc/epdc_ED060XH2C1.fw.nonrestricted ${D}${base_libdir}/firmware/imx/epdc/epdc_ED060XH2C1.fw
+
+    mv ${D}${base_libdir}/firmware/easrc/ ${D}${base_libdir}/firmware/imx/easrc/
 
     find ${D}${base_libdir}/firmware -type f -exec chmod 644 '{}' ';'
     find ${D}${base_libdir}/firmware -type f -exec chown root:root '{}' ';'
@@ -90,7 +89,7 @@ ALLOW_EMPTY_${PN} = "1"
 
 PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-*"
 
-PACKAGES =+ "${PN}-epdc ${PN}-scfw ${PN}-sdma ${PN}-regulatory"
+PACKAGES =+ "${PN}-epdc ${PN}-scfw ${PN}-sdma ${PN}-easrc ${PN}-regulatory"
 
 RDEPENDS_${PN}-epdc = "bash"
 RDEPENDS_${PN}-sdma = "bash"
@@ -99,6 +98,7 @@ RDEPENDS_${PN}-regulatory = "bash"
 FILES_${PN}-epdc = "${base_libdir}/firmware/imx/epdc/ ${sysconfdir}/epdc ${systemd_system_unitdir}/epdc-firmware.service"
 FILES_${PN}-scfw = "${base_libdir}/firmware/scfw/"
 FILES_${PN}-sdma = "${base_libdir}/firmware/imx/sdma ${sysconfdir}/sdma ${systemd_system_unitdir}/sdma-firmware.service"
+FILES_${PN}-easrc = "${base_libdir}/firmware/imx/easrc/"
 FILES_${PN}-regulatory = "${sysconfdir}/regulatory ${systemd_system_unitdir}/regulatory-firmware.service"
 
 COMPATIBLE_MACHINE = "(imx)"
