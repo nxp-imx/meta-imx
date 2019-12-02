@@ -26,20 +26,8 @@ do_unpack_extra_append() {
     tar xzf ${WORKDIR}/v1.0.0a3.tar.gz -C ${S}/3rdparty/tinydnn/
 }
 
-PACKAGECONFIG_GTK ?= " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)} \
-"
-PACKAGECONFIG_GTK_mx8 ?= " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11',    '', \
-       bb.utils.contains('DISTRO_FEATURES',         'x11', 'gtk', \
-                                                              '', d), d)} \
-"
-PACKAGECONFIG = "python3 jpeg png tiff v4l libv4l gstreamer samples tbb gphoto2 \
-    ${PACKAGECONFIG_GTK} \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
-
-PACKAGECONFIG_append_mx8   = " dnn text"
-
+PACKAGECONFIG_remove        = "eigen"
+PACKAGECONFIG_append_mx8    = " dnn text"
 PACKAGECONFIG_OPENCL        = ""
 PACKAGECONFIG_OPENCL_mx8    = "opencl"
 PACKAGECONFIG_OPENCL_mx8dxl = ""
@@ -47,7 +35,7 @@ PACKAGECONFIG_OPENCL_mx8mm  = ""
 PACKAGECONFIG_append        = " ${PACKAGECONFIG_OPENCL}"
 
 PACKAGECONFIG[openvx] = "-DWITH_OPENVX=ON -DOPENVX_ROOT=${STAGING_LIBDIR} -DOPENVX_LIB_CANDIDATES='OpenVX;OpenVXU',-DWITH_OPENVX=OFF,virtual/libopenvx,"
-PACKAGECONFIG[qt5] = "-DWITH_QT=ON -DWITH_GTK=OFF -DOE_QMAKE_PATH_EXTERNAL_HOST_BINS=${STAGING_BINDIR_NATIVE} -DCMAKE_PREFIX_PATH=${STAGING_BINDIR_NATIVE}/cmake,-DWITH_QT=OFF,qtbase qtbase-native,"
+PACKAGECONFIG[qt5] = "-DWITH_QT=ON -DOE_QMAKE_PATH_EXTERNAL_HOST_BINS=${STAGING_BINDIR_NATIVE} -DCMAKE_PREFIX_PATH=${STAGING_BINDIR_NATIVE}/cmake,-DWITH_QT=OFF,qtbase qtbase-native,"
 PACKAGECONFIG[test] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON -DOPENCV_TEST_DATA_PATH=${S}/../extra/testdata, -DBUILD_TESTS=OFF -DINSTALL_TESTS=OFF,"
 
 FILES_${PN}-samples += "${datadir}/OpenCV/samples"
