@@ -1,8 +1,8 @@
 # Copyright (C) 2012-2016 O.S. Systems Software LTDA.
 # Copyright (C) 2013-2016 Freescale Semiconductor
-# Copyright 2017-2018 NXP
+# Copyright 2017-2019 NXP
 
-SRCBRANCH = "master"
+SRCBRANCH = "lf-5.4.y"
 IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
 SRC_URI_append = " file://memtool_profile "
