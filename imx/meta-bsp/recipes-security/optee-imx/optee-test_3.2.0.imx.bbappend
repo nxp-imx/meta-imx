@@ -1,4 +1,4 @@
-SRCBRANCH = "imx_3.2.y"
+SRCBRANCH = "lf-5.4.y"
 SRCREV = "b7114b828b82f2c0eec124ed424eff1230cc5319" 
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
