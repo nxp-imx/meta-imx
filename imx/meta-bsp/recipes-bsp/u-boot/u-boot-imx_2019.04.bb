@@ -15,7 +15,7 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
-SRCBRANCH = "imx_v2019.04_4.19.35_1.1.0"
+SRCBRANCH = "lf-5.4.y_v2019.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH} \
            file://0001-imx8-imx8m-Remove-fsl-prefix-from-kernel-DTB-for-4.19.35_1.1.0.patch \
 "
