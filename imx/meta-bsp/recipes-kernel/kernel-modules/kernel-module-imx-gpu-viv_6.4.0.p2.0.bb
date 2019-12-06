@@ -6,4 +6,4 @@ SRCBRANCH = "lf-5.4.y"
 LOCALVERSION = "-lts-${KERNEL_BRANCH}"
 KERNEL_SRC = "git://bitbucket.sw.nxp.com/lfac/linux-lts-nxp.git;protocol=ssh"
 
-SRCREV = "5de3dcaf9ce61510e17dc5f9297b33a8508e65f7"
+SRCREV = "cfebc19b7f06cb3fa4f6704c9e50414e1eb2d660"
