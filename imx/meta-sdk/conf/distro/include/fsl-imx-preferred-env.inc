@@ -1,7 +1,7 @@
 PREFERRED_PROVIDER_virtual/bootloader_imx = "u-boot-imx"
 PREFERRED_PROVIDER_virtual/kernel_imx = "linux-imx"
 
-PREFERRED_VERSION_linux-libc-headers_imx ?= "4.19"
+PREFERRED_VERSION_linux-libc-headers_imx ?= "5.4"
 
 IMX_GPU_VERSION            ?= "6.4.0.p2.0"
 IMX_GPU_VERSION_SUFFIX      = "aarch32"
