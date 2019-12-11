@@ -14,7 +14,7 @@ DEPENDS += "lzop-native bc-native"
 
 KERNEL_BRANCH ?= "lf-5.4.y"
 LOCALVERSION = "-lts-${KERNEL_BRANCH}"
-KERNEL_SRC = "git://bitbucket.sw.nxp.com/lfac/linux-lts-nxp.git;protocol=ssh"
+KERNEL_SRC ?= "git://bitbucket.sw.nxp.com/lfac/linux-lts-nxp.git;protocol=ssh"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
 
 SRCREV = "0e05c736c00578e967d9c399b36eb4767fecee23"
@@ -32,24 +32,26 @@ DO_CONFIG_V7_COPY_mx6 = "yes"
 DO_CONFIG_V7_COPY_mx7 = "yes"
 DO_CONFIG_V7_COPY_mx8 = "no"
 
+IMX_KERNEL_CONFIG_AARCH32 ?= "imx_v7_defconfig"
+IMX_KERNEL_CONFIG_AARCH64 ?= "imx_v8_defconfig"
+
 addtask copy_defconfig after do_unpack before do_preconfigure
 do_copy_defconfig () {
     install -d ${B}
     if [ ${DO_CONFIG_V7_COPY} = "yes" ]; then
-        # copy latest imx_v7_defconfig to use for mx6, mx6ul and mx7
+        # copy latest IMX_KERNEL_CONFIG_AARCH32 to use for mx6, mx6ul and mx7
         mkdir -p ${B}
-        cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
-        cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
+        cp ${S}/arch/arm/configs/${IMX_KERNEL_CONFIG_AARCH32} ${B}/.config
+        cp ${S}/arch/arm/configs/${IMX_KERNEL_CONFIG_AARCH32} ${B}/../defconfig
     else
-        # copy latest imx_v8_defconfig to use for mx8
+        # copy latest IMX_KERNEL_CONFIG_AARCH64 to use for mx8
         mkdir -p ${B}
-        cp ${S}/arch/arm64/configs/imx_v8_defconfig ${B}/.config
-        cp ${S}/arch/arm64/configs/imx_v8_defconfig ${B}/../defconfig
+        cp ${S}/arch/arm64/configs/${IMX_KERNEL_CONFIG_AARCH64} ${B}/.config
+        cp ${S}/arch/arm64/configs/${IMX_KERNEL_CONFIG_AARCH64} ${B}/../defconfig
     fi
 }
 
 DELTA_KERNEL_DEFCONFIG ?= ""
-#DELTA_KERNEL_DEFCONFIG_prepend_mx8 = "sdk_imx.config "
 
 do_merge_delta_config[dirs] = "${B}"
 do_merge_delta_config() {
