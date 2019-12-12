@@ -1,4 +1,4 @@
-git statDESCRIPTION = "cross-platform, high performance scoring engine for ML models"
+DESCRIPTION = "cross-platform, high performance scoring engine for ML models"
 SECTION = "devel"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=980784f0a7f667becbed133924b263bf"
