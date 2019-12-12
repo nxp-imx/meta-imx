@@ -1,27 +1,22 @@
-DESCRIPTION = "cross-platform, high performance scoring engine for ML models"
+git statDESCRIPTION = "cross-platform, high performance scoring engine for ML models"
 SECTION = "devel"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=980784f0a7f667becbed133924b263bf"
 
 DEPENDS = "libpng zlib ${BPN}-native"
 
-GIT_onnxruntime = "gitsm://github.com/Microsoft/onnxruntime.git;branch=rel-0.4.0;name=onnxruntime"
-
-SRCREV_onnxruntime = "bf859a9a5489a5f0c954ad7da724f3514983d0e3"
+ONNXRUNTIME_SRC ?= "git://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
+SRCBRANCH = "master"
+SRCREV = "2ddd64c357771120bd6717032d4d01839ca9b9ee"
 
 SRC_URI = "\
-    ${GIT_onnxruntime} \
+    ${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
     file://Fix_Eigen_Build_Break.patch \
     file://0001-Undefine-MLAS-THREADPOOL-when-using-OPENMP.patch \
 "
-SRCREV_FORMAT = "onnxruntime"
-
 S = "${WORKDIR}/git"
 
 inherit cmake python3native
-
-OECMAKE_SOURCEPATH = "${S}/cmake"
-OECMAKE_GENERATOR = "Unix Makefiles"
 
 # Notes:
 # Protobuff/Protoc: 
@@ -38,7 +33,6 @@ EXTRA_OECMAKE += "\
 -DCMAKE_NO_SYSTEM_FROM_IMPORTED=True \
 -Donnxruntime_RUN_ONNX_TESTS=OFF \
 -Donnxruntime_GENERATE_TEST_REPORTS=ON \
--Donnxruntime_DEV_MODE=ON \
 -Donnxruntime_USE_CUDA=OFF \
 -Donnxruntime_CUDNN_HOME= \
 -Donnxruntime_USE_JEMALLOC=OFF \
