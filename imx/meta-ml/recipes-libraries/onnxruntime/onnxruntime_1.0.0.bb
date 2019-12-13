@@ -18,6 +18,9 @@ S = "${WORKDIR}/git"
 
 inherit cmake python3native
 
+OECMAKE_SOURCEPATH = "${S}/cmake"
+OECMAKE_GENERATOR = "Unix Makefiles"
+
 # Notes:
 # Protobuff/Protoc: 
 #   - protobuf is essetially built twice for native and target system
