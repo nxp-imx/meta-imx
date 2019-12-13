@@ -11,7 +11,7 @@ SRC_URI = " \
     file://0001-trace-fix-build-with-gcc9.patch \
     "
 
-SRCREV = "67e6fa617f8ed89e9cce80fd70d3660445ccdc32"
+SRCREV = "025c05dc49cdc927654052438c90b205826fffcb"
 
 S = "${WORKDIR}/git"
 
