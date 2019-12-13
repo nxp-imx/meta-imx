@@ -13,7 +13,9 @@ S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig perlnative pythonnative
 
-PACKAGECONFIG ??= "egl waffle"
+PACKAGECONFIG     ??= "egl waffle"
+PACKAGECONFIG_mx6 ??= "egl"
+PACKAGECONFIG_mx7 ??= "egl"
 PACKAGECONFIG_append = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
         bb.utils.contains('DISTRO_FEATURES',     'x11', ' x11', \
