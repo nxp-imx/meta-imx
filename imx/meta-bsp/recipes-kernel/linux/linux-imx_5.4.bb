@@ -56,6 +56,7 @@ DELTA_KERNEL_DEFCONFIG ?= ""
 do_merge_delta_config[dirs] = "${B}"
 do_merge_delta_config[depends] += " \
     flex-native:do_populate_sysroot \
+    bison-native:do_populate_sysroot \
 "
 do_merge_delta_config() {
     for deltacfg in ${DELTA_KERNEL_DEFCONFIG}; do
