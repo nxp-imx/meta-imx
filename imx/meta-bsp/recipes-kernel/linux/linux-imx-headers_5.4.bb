@@ -7,13 +7,13 @@ New headers are installed in ${includedir}/imx."
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
-#SRC_URI = "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
-#SRCREV = "66620c3d281c5a5b27cbb7a51276d2f94f619f1c"
-KERNEL_BRANCH ?= "lf-5.4.y"
-LOCALVERSION = "-lts-${KERNEL_BRANCH}"
-KERNEL_SRC = "git://bitbucket.sw.nxp.com/lfac/linux-lts-nxp.git;protocol=ssh"
+KERNEL_BRANCH ?= "imx_5.4.y"
+LOCALVERSION = "1.1.0"
+KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
-SRCREV = "${AUTOREV}"
+
+SRCREV = "dea2fede7e024ee7029b13e8d82a00ec1442777"
+
 
 S = "${WORKDIR}/git"
 
