@@ -12,12 +12,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 DEPENDS += "lzop-native bc-native"
 
-KERNEL_BRANCH ?= "lf-5.4.y"
-LOCALVERSION = "-lts-${KERNEL_BRANCH}"
-KERNEL_SRC = "git://bitbucket.sw.nxp.com/lfac/linux-lts-nxp.git;protocol=ssh"
+KERNEL_BRANCH ?= "imx_5.4.y"
+LOCALVERSION = "1.1.0"
+KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
 
-SRCREV = "c85bf6f6903ad154848fee495b3b34c3cde86f6c"
+SRCREV = "dea2fede7e024ee7029b13e8d82a00ec1442777"
 
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
