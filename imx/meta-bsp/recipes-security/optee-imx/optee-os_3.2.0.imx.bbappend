@@ -1,5 +1,5 @@
 SRCBRANCH = "imx_3.2.y"
-SRCREV = "cccdd12e203addbe976dfc722d76cf5da265707f"
+SRCREV = "92db0edff937f2732ce4308241a2ecd1649095b6"
 
 PLATFORM_FLAVOR_mx8mm = "mx8mmevk"
 PLATFORM_FLAVOR_mx8mn = "mx8mnevk"
