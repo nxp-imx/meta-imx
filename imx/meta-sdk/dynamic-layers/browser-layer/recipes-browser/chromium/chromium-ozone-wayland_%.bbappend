@@ -1,7 +1,9 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append = " file://0001-ozone-wayland-Don-t-build-gbm_wrappers-without-gbm-u.patch \
-                   file://Fix-build-breaks-on-non-gbm-machines.patch"
+                   file://Fix-build-breaks-on-non-gbm-machines.patch \
+                   file://0002-chromium-fix-build-after-y2038-changes-in-glibc.patch \
+"
 
 REQUIRED_DISTRO_FEATURES = "wayland"
 
