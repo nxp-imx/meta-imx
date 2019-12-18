@@ -12,6 +12,7 @@ IMX_EXTRA_FIRMWARE_mx8m = "firmware-imx-8m"
 IMX_EXTRA_FIRMWARE_mx8x = "imx-sc-firmware imx-seco"
 DEPENDS += " \
     u-boot \
+    firmware-imx \
     ${IMX_EXTRA_FIRMWARE} \
     imx-atf \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os', '', d)} \
