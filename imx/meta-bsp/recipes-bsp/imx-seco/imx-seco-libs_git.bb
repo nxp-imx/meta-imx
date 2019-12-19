@@ -9,9 +9,9 @@ LIC_FILES_CHKSUM = "file://LA_OPT_NXP_Software_License.htm;md5=6a8fcab25f3d3f5c2
 DEPENDS = "zlib"
 
 SRCBRANCH = "master"
-SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco_libs.git;protocol=https"
+SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
 SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "e1373466ac70b0ad77edbb65db8177718d28f19b"
+SRCREV = "1afb4e66ba26cc723bd5bf96eb2e79a6c81daa70"
 
 S = "${WORKDIR}/git"
 
