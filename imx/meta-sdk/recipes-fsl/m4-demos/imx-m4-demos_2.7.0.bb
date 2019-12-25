@@ -5,7 +5,7 @@ require imx-m4-demos-2.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6c12031a11b81db21cdfe0be88cac4b3"
 
-SRC_URI[imx8qx.md5sum] = "9f16b13285ff47c8d2a6195bcbf7d7ba"
-SRC_URI[imx8qx.sha256sum] = "1a7aac9816ff6f22b718dec5a7b14ce8a0ea59c50fdd74bcf08ea59742ec89c2"
+SRC_URI[imx8qx.md5sum] = "659c0ccf3a215fae7345d30e85774143"
+SRC_URI[imx8qx.sha256sum] = "74e97eea086b3cabe6d4430570e46586625fba822af97c0c2b5d025e69b3b3cb"
 
 COMPATIBLE_MACHINE = "(mx8qxp)"
