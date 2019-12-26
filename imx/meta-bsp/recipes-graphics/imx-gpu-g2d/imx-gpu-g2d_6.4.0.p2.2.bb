@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fd4b227530cd88a82af6a5982cfb724d"
 
 FSLBIN_NAME_arm = "${PN}-${PV}-${TARGET_ARCH}"
 
-SRC_URI[aarch64.md5sum] = "551460b7b8aea6ecba49db942f903e2e"
-SRC_URI[aarch64.sha256sum] = "77a4ade399489a51e7bc641a4da4e3168a4c3a0aa1266bab4bad1f6ff68a1f96"
+SRC_URI[aarch64.md5sum] = "1c396e0eca9ecf11aeb0100c5e35d7c5"
+SRC_URI[aarch64.sha256sum] = "4a2674db2dc02579ae2aa98230b2012f30f69f023c5af421d9f7c4bf596ec265"
 SRC_URI[arm.md5sum] = "4ec38f6a3d0dd7ea94b915a234817dc8"
 SRC_URI[arm.sha256sum] = "923ab760ef0d2bcfea2f04628b3da44596825fb706d1a3aa2767c1c86d419aa4"
