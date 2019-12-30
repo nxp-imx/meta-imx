@@ -7,7 +7,7 @@ QCACLD_SRC ?= "git://source.codeaurora.org/external/imx/qcacld-2.0-imx.git;proto
 
 #Kernel 5.4
 SRC_URI = "${QCACLD_SRC};branch=IMX_CNSS.LEA.NRT_3.0_KRL5.4"
-SRCREV = "355b2b422591611eeed7080a0737c4cd70320068"
+SRCREV = "7dc91e5977f31d60741c55682564788c0f930163"
 
 S = "${WORKDIR}/git"
 
