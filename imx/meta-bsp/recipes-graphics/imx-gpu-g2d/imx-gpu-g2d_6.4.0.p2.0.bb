@@ -6,5 +6,5 @@ FSLBIN_NAME_arm = "${PN}-${PV}-${TARGET_ARCH}"
 
 SRC_URI[aarch64.md5sum] = "9b8b16e18ae3f5f84c293c6b1a4c43b3"
 SRC_URI[aarch64.sha256sum] = "da0a003a2e0cd1dcc923fd4a10150fa7d080eb52697262c10afadcc2dc46d17a"
-SRC_URI[arm.md5sum] = "99c0a8da44f37a4cd008e49617a3f662"
-SRC_URI[arm.sha256sum] = "f2f6ce1a5198e7780cdc769b17580cc476fce8c61638bd2f1e0ba68aed6b0cec"
+SRC_URI[arm.md5sum] = "e471881ab927eef15ba59c0920844c70"
+SRC_URI[arm.sha256sum] = "03d6b18bc15bb2fbaf4c41d0c096b626fd1f057ccfcb5abd1d156e17c065f08f"
