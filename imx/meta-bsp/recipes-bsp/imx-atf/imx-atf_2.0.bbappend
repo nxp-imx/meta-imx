@@ -9,6 +9,7 @@ PLATFORM_mx8x   = "imx8qx"
 # Override PLATFORM_mx8qxp from the included recipe
 PLATFORM_mx8qxp = "imx8qx"
 PLATFORM_mx8mn  = "imx8mn"
+PLATFORM_mx8mp  = "imx8mp"
 
 BUILD_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
