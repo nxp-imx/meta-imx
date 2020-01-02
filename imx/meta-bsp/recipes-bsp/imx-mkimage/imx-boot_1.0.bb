@@ -52,6 +52,7 @@ ATF_MACHINE_NAME_mx8x  = "bl31-imx8qx.bin"
 ATF_MACHINE_NAME_mx8mq = "bl31-imx8mq.bin"
 ATF_MACHINE_NAME_mx8mm = "bl31-imx8mm.bin"
 ATF_MACHINE_NAME_mx8mn = "bl31-imx8mn.bin"
+ATF_MACHINE_NAME_mx8mp = "bl31-imx8mp.bin"
 ATF_MACHINE_NAME_append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
 SECO_FIRMWARE ?= ""
@@ -72,6 +73,7 @@ SOC_TARGET_mx8x   = "iMX8QX"
 SOC_TARGET_mx8mq  = "iMX8M"
 SOC_TARGET_mx8mm  = "iMX8MM"
 SOC_TARGET_mx8mn  = "iMX8MN"
+SOC_TARGET_mx8mp  = "iMX8MP"
 
 DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
@@ -83,6 +85,7 @@ IMXBOOT_TARGETS ?= \
 BOOT_STAGING       = "${S}/${SOC_TARGET}"
 BOOT_STAGING_mx8mm = "${S}/iMX8M"
 BOOT_STAGING_mx8mn = "${S}/iMX8M"
+BOOT_STAGING_mx8mp = "${S}/iMX8M"
 
 SOC_FAMILY      = "INVALID"
 SOC_FAMILY_mx8  = "mx8"
