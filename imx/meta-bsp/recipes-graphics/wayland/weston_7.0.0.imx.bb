@@ -4,7 +4,7 @@ SRC_URI_remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRC_URI_prepend = "${WESTON_SRC};branch=weston-imx-7.0 "
 SRC_URI += "file://0003-weston-touch-calibrator-Advertise-the-touchscreen-ca.patch"
-SRCREV = "0b9523c3eb66fde6ce5ed4ece9bcd979b7be6803"
+SRCREV = "e4a4ad22d6381b8616e968dbbe77c18e40689312"
 S = "${WORKDIR}/git"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
