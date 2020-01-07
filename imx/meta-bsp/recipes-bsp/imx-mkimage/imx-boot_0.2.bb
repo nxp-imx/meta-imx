@@ -81,8 +81,7 @@ IMXBOOT_TARGETS ?= \
                                                   'flash_multi_cores flash_dcd', d), d)}"
 
 BOOT_STAGING       = "${S}/${SOC_TARGET}"
-BOOT_STAGING_mx8mm = "${S}/iMX8M"
-BOOT_STAGING_mx8mn = "${S}/iMX8M"
+BOOT_STAGING_mx8m  = "${S}/iMX8M"
 
 SOC_FAMILY      = "INVALID"
 SOC_FAMILY_mx8  = "mx8"
