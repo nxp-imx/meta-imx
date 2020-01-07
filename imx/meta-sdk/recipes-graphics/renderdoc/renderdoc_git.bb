@@ -25,7 +25,6 @@ SRC_URI = "git://github.com/baldurk/renderdoc.git;branch=v1.x \
            file://0003-Continue-running-when-EnumerateDeviceExtensionProper.patch \
            file://0004-Pass-memory-checking-when-replaying-captures.patch \
            file://0005-Add-build-script-for-i.MX8-target.patch \
-           file://0006-Copyrights-Update-copyrights.patch \
 "
 
 SRC_URI[md5sum] = "4b99f9ea6e3f57c0bb6b5a34aa60b03b"
