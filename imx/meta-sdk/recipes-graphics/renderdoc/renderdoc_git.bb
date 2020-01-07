@@ -16,17 +16,21 @@ SRC_URI = " \
 "
 SRCREV  = "bdb818d42bc99ab4b273e6741bb8dedc29cc0477"
 S = "${WORKDIR}/git"
-PV= "1.2"
+PV= "1.4+git${SRCPV}"
 
 inherit autotools pkgconfig cmake python3native
 
 REQUIRED_DISTRO_FEATURES = "mesa-dev mesa-demo"
 DEPENDS += "libx11 libxcb xcb-util-keysyms  mesa"
 
-EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=Release -DENABLE_EGL=ON \
+EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=Release \
                   -DENABLE_PYRENDERDOC=OFF \
                   -DENABLE_QRENDERDOC=OFF -DENABLE_XLIB=OFF \
-                  -DENABLE_XCB=OFF -DENABLE_GL=OFF "
+                  -DENABLE_XCB=OFF -DENABLE_GL=OFF \
+                  -DENABLE_RENDERDOCCMD=ON -DENABLE_GLES=OFF \
+                  -DENABLE_VULKAN=ON -DENABLE_WAYLAND=ON \
+                  -DUSE_INTERCEPTOR_LIB=OFF"
+
 OECMAKE_TARGET_COMPILE="renderdoccmd"
 
 FILES_${PN}-dev = "${data_dir}/usr/lib/librenderdoc.so"
@@ -35,5 +39,3 @@ FILES_${PN} += "${libdir}/* ${includedir}"
 do_compile_prepend () {
     sed -i 's/c++ /g++ /g' ${B}/build.ninja
 }
-
-
