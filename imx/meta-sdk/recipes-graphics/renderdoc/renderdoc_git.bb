@@ -8,13 +8,15 @@ Linux, Android, or Nintendo Switch"
 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9753b1b4fba3261c27d1ce5c1acef667"
-
-RENDERDOC_SRC ?= "git://source.codeaurora.org/external/imx/renderdoc-imx.git;protocol=https"
-SRCBRANCH = "v1.x-release"
-SRC_URI = " \
-    ${RENDERDOC_SRC};branch=${SRCBRANCH} \
+SRC_URI = "git://github.com/baldurk/renderdoc.git;branch=v1.x \
+           file://0001-Add-basic-support-for-Wayland-replay-on-renderdoccmd.patch \
+           file://0002-Add-window-functionalities-for-Wayland-replay-suppor.patch \
+           file://0003-Continue-running-when-EnumerateDeviceExtensionProper.patch \
+           file://0004-Pass-memory-checking-when-replaying-captures.patch \
+           file://0005-Add-build-script-for-i.MX8-target.patch \
+           file://0006-Copyrights-Update-copyrights.patch \
 "
-SRCREV  = "bdb818d42bc99ab4b273e6741bb8dedc29cc0477"
+SRCREV  = "76622f65aa88b7b9015a3b1d28f4a3027f4cd491"
 S = "${WORKDIR}/git"
 PV= "1.4+git${SRCPV}"
 
@@ -29,7 +31,8 @@ EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=Release \
                   -DENABLE_XCB=OFF -DENABLE_GL=OFF \
                   -DENABLE_RENDERDOCCMD=ON -DENABLE_GLES=OFF \
                   -DENABLE_VULKAN=ON -DENABLE_WAYLAND=ON \
-                  -DUSE_INTERCEPTOR_LIB=OFF"
+                  -DUSE_INTERCEPTOR_LIB=OFF \
+"
 
 OECMAKE_TARGET_COMPILE="renderdoccmd"
 
