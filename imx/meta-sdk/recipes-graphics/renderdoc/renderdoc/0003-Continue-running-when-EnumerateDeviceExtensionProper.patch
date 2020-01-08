@@ -1,0 +1,34 @@
+From b0ec08e6579932e44fcda5ca538e3b0c46302662 Mon Sep 17 00:00:00 2001
+From: Andrei Catalin Ilie <and96x@gmail.com>
+Date: Tue, 24 Sep 2019 15:35:27 +0300
+Subject: [PATCH 3/5] Continue running when EnumerateDeviceExtensionProperties
+ call result is VK_INCOMPLETE
+
+When getting device extension properities from the driver, the function
+EnumerateDeviceExtensionProperties() will be called 2 times. In the first call,
+the function will return the number of extensions available, N, whereas in the
+second, it will get the extension names.
+Due to the fact that the last extension name given from the driver is a NULL
+string, the second call will return N - 1 extensions, resulting in
+VK_INCOMPLETE.
+This commit fixes the capture support on Vulkan for iMX8 targets.
+---
+ renderdoc/driver/vulkan/vk_core.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/renderdoc/driver/vulkan/vk_core.cpp b/renderdoc/driver/vulkan/vk_core.cpp
+index d232f3e..5db15c3 100644
+--- a/renderdoc/driver/vulkan/vk_core.cpp
++++ b/renderdoc/driver/vulkan/vk_core.cpp
+@@ -1171,7 +1171,7 @@ VkResult WrappedVulkan::FilterDeviceExtensionProperties(VkPhysicalDevice physDev
+   vkr = ObjDisp(physDev)->EnumerateDeviceExtensionProperties(Unwrap(physDev), pLayerName, &numExts,
+                                                              &exts[0]);
+ 
+-  if(vkr != VK_SUCCESS)
++  if(vkr != VK_SUCCESS && vkr != VK_INCOMPLETE)
+     return vkr;
+ 
+   // filter the list of extensions to only the ones we support.
+-- 
+2.7.4
+
