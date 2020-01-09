@@ -8,8 +8,8 @@ SRC_URI[arm-fb.sha256sum] = "908611dc693f5c6482e2d1e62508fda18f99e03867d29f10bc2
 SRC_URI[arm-wayland.md5sum] = "4c864c39d47d46dfbd028f91a6c9bbd4"
 SRC_URI[arm-wayland.sha256sum] = "73e6780294d1bd750b2062e13a814ec207ac16e8ae96f61de9a0fb27c354f516"
 
-SRC_URI[arm-x11.md5sum] = "eaab2c7988fb7c2fed8e6a7fab4943af"
-SRC_URI[arm-x11.sha256sum] = "0146482ba91a4e72f13fa10d7cec22dca92ef55d61f0ba09f2fedcfa6e7b319d"
+SRC_URI[arm-x11.md5sum] = "90dc2582dc8796f7a7aff630ffbe63f2"
+SRC_URI[arm-x11.sha256sum] = "c14ce200a1c6cf39da7d56ba6c25f706920d136a5fd7dc394d87eadb6f99197e"
 
 SRC_URI[aarch64-fb.md5sum] = "1bc3e825218614c4fd7bee0cf1059034"
 SRC_URI[aarch64-fb.sha256sum] = "f2c7985dc09744cfdab152d53cc500e74b5e6f2f9764dbcf9795def1aec1dcf1"
