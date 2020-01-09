@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fd4b227530cd88a82af6a5982cfb724d"
 SRC_URI[arm-fb.md5sum] = "b64900b6c65a1c978452221948b62d95"
 SRC_URI[arm-fb.sha256sum] = "02e9775c27f4f21a8940823dde3ded26acf5fcddcbc0b6ea901763bb5829b92f"
 
-SRC_URI[arm-wayland.md5sum] = "4c864c39d47d46dfbd028f91a6c9bbd4"
-SRC_URI[arm-wayland.sha256sum] = "73e6780294d1bd750b2062e13a814ec207ac16e8ae96f61de9a0fb27c354f516"
+SRC_URI[arm-wayland.md5sum] = "89db4cdad223b90001ed5f5431649a13"
+SRC_URI[arm-wayland.sha256sum] = "beec3fc5b1139bcb7d8dee7658e4d839ab65fb18c8a6a136873a54eba7446792"
 
 SRC_URI[arm-x11.md5sum] = "90dc2582dc8796f7a7aff630ffbe63f2"
 SRC_URI[arm-x11.sha256sum] = "c14ce200a1c6cf39da7d56ba6c25f706920d136a5fd7dc394d87eadb6f99197e"
