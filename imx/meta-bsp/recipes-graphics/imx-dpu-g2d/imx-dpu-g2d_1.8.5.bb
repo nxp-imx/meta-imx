@@ -2,5 +2,5 @@ require recipes-graphics/imx-dpu-g2d/imx-dpu-g2d_1.7.0.bb
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=fd4b227530cd88a82af6a5982cfb724d"
 
-SRC_URI[md5sum] = "6fd41a6a6c7e416f2af4a398aa20d0ab"
-SRC_URI[sha256sum] = "8e2c8b20e013bc56cea758b3a11563b35cd3191720e760bbfebd491802d1ceae"
+SRC_URI[md5sum] = "eb8c4eb234bec8d21b5b8f0ec004c346"
+SRC_URI[sha256sum] = "ab6e5a78096ebed9353f3ba2f65eb4be9887e202cef7dbbdc172e3e654b295a7"
