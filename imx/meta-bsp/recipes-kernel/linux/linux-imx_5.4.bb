@@ -17,7 +17,7 @@ LOCALVERSION = "-lts-${KERNEL_BRANCH}"
 KERNEL_SRC ?= "git://bitbucket.sw.nxp.com/lfac/linux-lts-nxp.git;protocol=ssh"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
 
-SRCREV = "2be5e9c740060b58e962db4c9c20161b0c656ea9"
+SRCREV = "3a91da4214ff3030553a5358c571f901c72ca08e"
 
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
