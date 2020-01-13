@@ -3,9 +3,9 @@ HOMEPAGE = "http://xen.org"
 LICENSE = "GPLv2"
 SECTION = "console/tools"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=bbb4b1bdc2c3b6743da3c39d03249095"
+LIC_FILES_CHKSUM = "file://COPYING;md5=4295d895d4b5ce9d070263d52f030e49"
 
-COMPATIBLE_HOST = '(x86_64.*).*-linux|aarch64.*-linux'
+COMPATIBLE_HOST = '(x86_64.*).*-linux|aarch64.*-linux|arm-.*-linux-gnueabi'
 
 inherit autotools-brokensep setuptools update-rc.d systemd deploy
 
@@ -25,11 +25,12 @@ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd,"
 PACKAGECONFIG[hvm] = "--with-system-seabios="/usr/share/firmware/bios.bin",--disable-seabios,seabios ipxe vgabios,"
 
 DEPENDS = " \
+    ${@bb.utils.contains('XEN_TARGET_ARCH', 'x86_64', 'dev86-native', '', d)} \
     bison-native \
     flex-native \
     file-native \
     gettext-native \
-    iasl-native \
+    acpica-native \
     ncurses-native \
     util-linux-native \
     xz-native \
@@ -284,111 +285,138 @@ FILES_${PN}-staticdev += "\
 FILES_${PN}-libblktapctl = "${libdir}/libblktapctl.so.*"
 FILES_${PN}-libblktapctl-dev = " \
     ${libdir}/libblktapctl.so \
+    ${libdir}/pkgconfig/xenblktapctl.pc \
     ${datadir}/pkgconfig/xenblktapctl.pc \
     "
 
 FILES_${PN}-libxencall = "${libdir}/libxencall.so.*"
 FILES_${PN}-libxencall-dev = " \
     ${libdir}/libxencall.so \
+    ${libdir}/pkgconfig/xencall.pc \
     ${datadir}/pkgconfig/xencall.pc \
     "
 
 FILES_${PN}-libxenctrl = "${libdir}/libxenctrl.so.*"
 FILES_${PN}-libxenctrl-dev = " \
     ${libdir}/libxenctrl.so \
+    ${libdir}/pkgconfig/xencontrol.pc \
     ${datadir}/pkgconfig/xencontrol.pc \
     "
 
 FILES_${PN}-libxendevicemodel = "${libdir}/libxendevicemodel.so.*"
 FILES_${PN}-libxendevicemodel-dev = " \
     ${libdir}/libxendevicemodel.so \
+    ${libdir}/pkgconfig/xendevicemodel.pc \
     ${datadir}/pkgconfig/xendevicemodel.pc \
     "
 
 FILES_${PN}-libxenevtchn = "${libdir}/libxenevtchn.so.*"
 FILES_${PN}-libxenevtchn-dev = " \
     ${libdir}/libxenevtchn.so \
+    ${libdir}/pkgconfig/xenevtchn.pc \
     ${datadir}/pkgconfig/xenevtchn.pc \
     "
 
 FILES_${PN}-libxenforeignmemory = "${libdir}/libxenforeignmemory.so.*"
 FILES_${PN}-libxenforeignmemory-dev = " \
     ${libdir}/libxenforeignmemory.so \
+    ${libdir}/pkgconfig/xenforeignmemory.pc \
     ${datadir}/pkgconfig/xenforeignmemory.pc \
     "
 
 FILES_${PN}-libxengnttab = "${libdir}/libxengnttab.so.*"
 FILES_${PN}-libxengnttab-dev = " \
     ${libdir}/libxengnttab.so \
+    ${libdir}/pkgconfig/xengnttab.pc \
     ${datadir}/pkgconfig/xengnttab.pc \
     "
 
 FILES_${PN}-libxenguest = "${libdir}/libxenguest.so.*"
 FILES_${PN}-libxenguest-dev = " \
     ${libdir}/libxenguest.so \
+    ${libdir}/pkgconfig/xenguest.pc \
     ${datadir}/pkgconfig/xenguest.pc \
     "
 
 FILES_${PN}-libxenlight = "${libdir}/libxenlight.so.*"
 FILES_${PN}-libxenlight-dev = " \
     ${libdir}/libxenlight.so \
+    ${libdir}/pkgconfig/xenlight.pc \
     ${datadir}/pkgconfig/xenlight.pc \
     "
 
 FILES_${PN}-libxenstat = "${libdir}/libxenstat.so.*"
 FILES_${PN}-libxenstat-dev = " \
     ${libdir}/libxenstat.so \
+    ${libdir}/pkgconfig/xenstat.pc \
     ${datadir}/pkgconfig/xenstat.pc \
     "
 
 FILES_${PN}-libxenstore = "${libdir}/libxenstore.so.*"
 FILES_${PN}-libxenstore-dev = " \
     ${libdir}/libxenstore.so \
+    ${libdir}/pkgconfig/xenstore.pc \
     ${datadir}/pkgconfig/xenstore.pc \
     "
 
 FILES_${PN}-libxentoolcore = "${libdir}/libxentoolcore.so.*"
 FILES_${PN}-libxentoolcore-dev = " \
     ${libdir}/libxentoolcore.so \
+    ${libdir}/pkgconfig/xentoolcore.pc \
     ${datadir}/pkgconfig/xentoolcore.pc \
     "
 
 FILES_${PN}-libxentoollog = "${libdir}/libxentoollog.so.*"
 FILES_${PN}-libxentoollog-dev = " \
     ${libdir}/libxentoollog.so \
+    ${libdir}/pkgconfig/xentoollog.pc \
     ${datadir}/pkgconfig/xentoollog.pc \
     "
 
 FILES_${PN}-libxenvchan = "${libdir}/libxenvchan.so.*"
 FILES_${PN}-libxenvchan-dev = " \
     ${libdir}/libxenvchan.so \
+    ${libdir}/pkgconfig/xenvchan.pc \
     ${datadir}/pkgconfig/xenvchan.pc \
     "
 
 FILES_${PN}-libxlutil = "${libdir}/libxlutil.so.*"
 FILES_${PN}-libxlutil-dev = " \
     ${libdir}/libxlutil.so \
+    ${libdir}/pkgconfig/xlutil.pc \
     ${datadir}/pkgconfig/xlutil.pc \
     "
 FILES_${PN}-libvhd = "${libdir}/libvhd.so.*"
 FILES_${PN}-libvhd-dev = " \
     ${libdir}/libvhd.so \
+    ${libdir}/pkgconfig/vhd.pc \
     ${datadir}/pkgconfig/vhd.pc \
     "
 
 FILES_${PN}-libblktap = "${libdir}/libblktap.so.*"
 FILES_${PN}-libblktap-dev = " \
     ${libdir}/libblktap.so \
+    ${libdir}/pkgconfig/blktap.pc \
     ${datadir}/pkgconfig/blktap.pc \
     "
 
-FILES_${PN}-libfsimage = "${libdir}/libfsimage.so.*"
+FILES_${PN}-libfsimage = " \
+    ${libdir}/libfsimage.so.* \
+    ${libdir}/libxenfsimage.so.* \
+    "
 FILES_${PN}-libfsimage-dev = " \
     ${libdir}/libfsimage.so \
+    ${libdir}/libxenfsimage.so \
+    ${libdir}/pkgconfig/fsimage.pc \
     ${datadir}/pkgconfig/fsimage.pc \
+    ${libdir}/pkgconfig/xenfsimage.pc \
+    ${datadir}/pkgconfig/xenfsimage.pc \
     "
 
-FILES_${PN}-fsimage = "${libdir}/fs/*/*fsimage.so"
+FILES_${PN}-fsimage = " \
+    ${libdir}/fs/*/*fsimage.so \
+    ${libdir}/xenfsimage/*/fsimage.so \
+    "
 
 FILES_${PN}-hypervisor = "\
     /boot/xen-* \
@@ -401,7 +429,7 @@ FILES_${PN}-hypervisor = "\
 FILES_${PN}-init-xenstore-dom = "${libdir}/xen/bin/init-xenstore-domain"
 
 FILES_${PN}-efi = "\
-    ${exec_prefix}/lib64/efi \
+    ${exec_prefix}/lib64/efi/xen* \
     "
 
 FILES_${PN}-base = "\
@@ -438,6 +466,7 @@ FILES_${PN}-cpuid = "\
 
 FILES_${PN}-devd = "\
     ${sysconfdir}/init.d/xendriverdomain \
+    ${systemd_unitdir}/system/xendriverdomain.service \
     "
 
 FILES_${PN}-flask = "\
@@ -464,6 +493,7 @@ FILES_${PN}-hvmloader = "\
 
 FILES_${PN}-kdd = "\
     ${sbindir}/kdd \
+    ${sbindir}/xen-kdd \
     "
 
 FILES_${PN}-livepatch += " \
@@ -475,6 +505,7 @@ FILES_${PN}-misc = "\
     ${bindir}/xencov_split \
     ${bindir}/xen-detect \
     ${libdir}/xen/bin/xenpvnetboot \
+    ${libdir}/xen/bin/depriv-fd-checker \
     ${sbindir}/gtracestat \
     ${sbindir}/gtraceview \
     ${sbindir}/xen-bugtool \
@@ -735,6 +766,7 @@ FILES_${PN}-xenmon = "\
     ${sbindir}/xenbaked \
     ${sbindir}/xentrace_setmask \
     ${sbindir}/xenmon.py \
+    ${sbindir}/xenmon \
     "
 
 FILES_${PN}-xm = "\
@@ -754,7 +786,6 @@ FILES_${PN}-xencommons += "\
     ${systemd_unitdir}/system/xen-init-dom0.service \
     ${systemd_unitdir}/system/xenstored.service \
     ${systemd_unitdir}/system/var-lib-xenstored.mount \
-    ${systemd_unitdir}/system/xendriverdomain.service \
     "
 
 FILES_${PN}-xend += " \
@@ -784,7 +815,8 @@ INITSCRIPT_NAME_${PN}-devd = "xendriverdomain"
 INITSCRIPT_PARAMS_${PN}-devd = "defaults 82"
 
 # systemd packages
-SYSTEMD_PACKAGES = "${PN}-xen-watchdog ${PN}-xencommons ${PN}-xendomains"
+SYSTEMD_PACKAGES = "${PN}-xen-watchdog ${PN}-xencommons ${PN}-xendomains ${PN}-devd"
+SYSTEMD_SERVICE_${PN}-devd = "xendriverdomain.service"
 SYSTEMD_SERVICE_${PN}-xen-watchdog = "xen-watchdog.service"
 SYSTEMD_SERVICE_${PN}-xencommons = " \
     proc-xen.mount \
@@ -822,6 +854,8 @@ export XEN_OS = "Linux"
 # this is used for the header (#!${bindir}/python) of the install python scripts
 export PYTHONPATH="${bindir}/python"
 export ac_cv_path_PYTHONPATH="${bindir}/python"
+export DISTUTILS_BUILD_ARGS
+export DISTUTILS_INSTALL_ARGS
 
 # xen and seabios require HOSTCC and HOSTCXX set to cross-compile
 export HOSTCC="${BUILD_CC}"
@@ -837,10 +871,17 @@ export LDFLAGS=""
 # conflicts with -mno-sse so instead we strip -mfpmath=sse instead of
 # patching the build to be ok with this
 TUNE_CCARGS := "${@oe.utils.str_filter_out('-mfpmath=sse', '${TUNE_CCARGS}', d)}"
+TUNE_CCARGS := "${@oe.utils.str_filter_out('-msse4.2', '${TUNE_CCARGS}', d)}"
+
+# Supply the full set of compiler flags via the tool variables
+# Yocto supplys _FORTIFY_SOURCE via CC/CPP/CXX but optimization -O via C*FLAGS
+CC_append = " ${CFLAGS}"
+CPP_append = " ${CPPFLAGS}"
+CXX_append = " ${CXXFLAGS}"
 
 EXTRA_OECONF += " \
-    --exec-prefix=/usr \
-    --prefix=/usr \
+    --exec-prefix=${prefix} \
+    --prefix=${prefix} \
     --host=${HOST_SYS} \
     --with-systemd=${systemd_unitdir}/system \
     --with-systemd-modules-load=${systemd_unitdir}/modules-load.d \
@@ -866,6 +907,24 @@ EXTRA_OEMAKE += "ETHERBOOT_ROMS=${STAGING_DIR_HOST}/usr/share/firmware/rtl8139.r
 EXTRA_OEMAKE += "WGET=/bin/false"
 EXTRA_OEMAKE += "GIT=/bin/false"
 
+# Improve build reproducibility: provide values for build variables.
+def get_build_time_vars(d):
+    source_date_epoch = d.getVar('SOURCE_DATE_EPOCH')
+    if source_date_epoch is not None:
+        import datetime
+        utc_datetime = datetime.datetime.utcfromtimestamp(float(source_date_epoch))
+        return " XEN_BUILD_DATE=" + utc_datetime.strftime("%Y-%m-%d") + \
+               " XEN_BUILD_TIME=" + utc_datetime.strftime("%H:%M:%S")
+    return ""
+EXTRA_OEMAKE += "${@['', 'XEN_WHOAMI=${PF} XEN_DOMAIN=${DISTRO} XEN_BUILD_HOST=${PN}-buildhost'] \
+                    [d.getVar('BUILD_REPRODUCIBLE_BINARIES') == '1']}${@get_build_time_vars(d)}"
+
+# Improve build reproducibility: compiler flags to remove filesystem differences.
+# Suppress __FILE__ via an alternative builtin.
+CC += "${@['', '-gno-record-gcc-switches -Wno-builtin-macro-redefined -D__FILE__=__VERSION__ ' + \
+               '-fdebug-prefix-map=${WORKDIR}=${PN}'] \
+          [d.getVar('BUILD_REPRODUCIBLE_BINARIES') == '1']}"
+
 # check for XSM in package config to allow XSM_ENABLE to be set
 python () {
     pkgconfig = d.getVar('PACKAGECONFIG')
@@ -885,6 +944,20 @@ do_post_patch() {
 
     # libsystemd-daemon -> libsystemd for newer systemd versions
     sed -i 's#libsystemd-daemon#libsystemd#' ${S}/tools/configure
+
+    # Improve build reproducibility: disable insertion of the build timestamp
+    # into the x86 EFI hypervisor binary.
+    # binutils should allow a user-supplied timestamp or use SOURCE_DATE_EPOCH
+    # for PE but currently does not.
+    if [ "${BUILD_REPRODUCIBLE_BINARIES}" = "1" ] ; then
+        sed '/^EFI_LDFLAGS = /{a EFI_LDFLAGS += --no-insert-timestamp
+}' -i "${S}/xen/arch/x86/Makefile"
+    fi
+}
+
+do_post_patch_append_arm()  {
+    # The hypervisor binary must not be built with the hard floating point ABI.
+    echo "CC := \$(filter-out ${TUNE_CCARGS},\$(CC))" >> ${B}/xen/arch/arm/Rules.mk
 }
 
 addtask post_patch after do_patch before do_configure
@@ -948,17 +1021,18 @@ do_install() {
     oe_runmake DESTDIR="${D}" install
 
     # remove installed volatiles
-    rm -rf ${D}${localstatedir}/run \
+    rm -rf ${D}${base_prefix}/run \
+        ${D}${localstatedir}/run \
         ${D}${localstatedir}/lock \
         ${D}${localstatedir}/log \
         ${D}${localstatedir}/volatile \
         ${D}${localstatedir}/lib/xen
 
     VOLATILE_DIRS=" \
-        ${localstatedir}/run/xenstored \
-        ${localstatedir}/run/xend \
-        ${localstatedir}/run/xend/boot \
-        ${localstatedir}/run/xen \
+        ${base_prefix}/run/xenstored \
+        ${base_prefix}/run/xend \
+        ${base_prefix}/run/xend/boot \
+        ${base_prefix}/run/xen \
         ${localstatedir}/log/xen \
         ${localstatedir}/lock/xen \
         ${localstatedir}/lock/subsys \
