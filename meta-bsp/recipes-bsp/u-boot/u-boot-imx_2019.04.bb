@@ -19,7 +19,7 @@ SRCBRANCH = "imx_v2019.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH} \
            file://0001-imx8-imx8m-Remove-fsl-prefix-from-kernel-DTB-for-4.19.35_1.1.0.patch \
 "
-SRCREV = "d966293a2e566a0116b0660c9c6c416951d35c83"
+SRCREV = "1639e165e1122cb92b73a0f737d4f549be6b8949"
 
 S = "${WORKDIR}/git"
 
