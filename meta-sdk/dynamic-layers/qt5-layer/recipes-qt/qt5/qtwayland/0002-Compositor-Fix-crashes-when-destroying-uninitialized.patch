@@ -1,0 +1,51 @@
+From 3d10b7b2de61dbfb64a29f9190962f316f7012f1 Mon Sep 17 00:00:00 2001
+From: Johan Klokkhammer Helsing <johan.helsing@qt.io>
+Date: Mon, 21 Oct 2019 13:13:00 +0200
+Subject: [PATCH] Compositor: Fix crashes when destroying uninitialized
+ surfaces
+
+This happened when running qmlplugindump for QtWayland.
+
+[ChangeLog][Compositor] Fixed a crash when destroying WaylandSurfaces and
+WlShellSurfaces which had not yet been initialized.
+
+Upstream-Status: Backport from dev branch/v5.14.0
+
+Change-Id: Ia35cc1ccddc6146453d4dbba0ffd41a012a526e3
+Reviewed-by: Paul Olav Tvete <paul.tvete@qt.io>
+---
+ src/compositor/compositor_api/qwaylandsurface.cpp | 3 ++-
+ src/compositor/extensions/qwaylandwlshell.cpp     | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/compositor/compositor_api/qwaylandsurface.cpp b/src/compositor/compositor_api/qwaylandsurface.cpp
+index a82c93f7..8c866351 100644
+--- a/src/compositor/compositor_api/qwaylandsurface.cpp
++++ b/src/compositor/compositor_api/qwaylandsurface.cpp
+@@ -391,7 +391,8 @@ QWaylandSurface::QWaylandSurface(QWaylandSurfacePrivate &dptr)
+ QWaylandSurface::~QWaylandSurface()
+ {
+     Q_D(QWaylandSurface);
+-    QWaylandCompositorPrivate::get(d->compositor)->unregisterSurface(this);
++    if (d->compositor)
++        QWaylandCompositorPrivate::get(d->compositor)->unregisterSurface(this);
+     d->notifyViewsAboutDestruction();
+ }
+ 
+diff --git a/src/compositor/extensions/qwaylandwlshell.cpp b/src/compositor/extensions/qwaylandwlshell.cpp
+index 66aeb64b..92423488 100644
+--- a/src/compositor/extensions/qwaylandwlshell.cpp
++++ b/src/compositor/extensions/qwaylandwlshell.cpp
+@@ -466,7 +466,8 @@ QWaylandWlShellSurface::QWaylandWlShellSurface(QWaylandWlShell *shell, QWaylandS
+ QWaylandWlShellSurface::~QWaylandWlShellSurface()
+ {
+     Q_D(QWaylandWlShellSurface);
+-    QWaylandWlShellPrivate::get(d->m_shell)->unregisterShellSurface(this);
++    if (d->m_shell)
++        QWaylandWlShellPrivate::get(d->m_shell)->unregisterShellSurface(this);
+ }
+ 
+ /*!
+-- 
+2.17.1
+

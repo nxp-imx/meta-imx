@@ -1,0 +1,31 @@
+From 90b79bfb3bed86bc560725774a7c7e48375e3389 Mon Sep 17 00:00:00 2001
+From: Johan Klokkhammer Helsing <johan.helsing@qt.io>
+Date: Mon, 21 Oct 2019 13:14:58 +0200
+Subject: [PATCH] Compositor: Fix access to member of null reference
+
+This could happen if there were no seats.
+
+Upstream-Status: Backport from dev branch/v5.14.0
+
+Change-Id: I4c88a5768289e2ac8a736efaa14e37d499de01c9
+Reviewed-by: Paul Olav Tvete <paul.tvete@qt.io>
+---
+ src/imports/compositor/WaylandCursorItem.qml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/imports/compositor/WaylandCursorItem.qml b/src/imports/compositor/WaylandCursorItem.qml
+index 1fa09967..e50c82d5 100644
+--- a/src/imports/compositor/WaylandCursorItem.qml
++++ b/src/imports/compositor/WaylandCursorItem.qml
+@@ -73,7 +73,7 @@ WaylandQuickItem {
+         x: cursorItem.hotspotX + offset.x
+         y: cursorItem.hotspotY + offset.y
+         z: -1
+-        surface: cursorItem.seat.drag.icon
++        surface: cursorItem.seat ? cursorItem.seat.drag.icon : null
+ 
+         Connections {
+             target: dragIcon.surface
+-- 
+2.17.1
+
