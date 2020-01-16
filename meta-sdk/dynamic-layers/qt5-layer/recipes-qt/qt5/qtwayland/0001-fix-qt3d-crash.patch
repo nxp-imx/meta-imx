@@ -1,0 +1,124 @@
+diff --git a/src/client/qwaylanddisplay.cpp b/src/client/qwaylanddisplay.cpp
+index 78524f6..8a08a9a 100644
+--- a/src/client/qwaylanddisplay.cpp
++++ b/src/client/qwaylanddisplay.cpp
+@@ -109,6 +109,10 @@ struct ::wl_region *QWaylandDisplay::createRegion(const QRegion &qregion)
+         return nullptr;
+     }
+ 
++    // Make sure we don't pass NULL surfaces to libwayland (crashes)
++     Q_ASSERT(parent->object());
++     Q_ASSERT(window->object());
++
+     return mSubCompositor->get_subsurface(window->object(), parent->object());
+ }
+ 
+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
+index ae26ba0..1e310db 100644
+--- a/src/client/qwaylandwindow.cpp
++++ b/src/client/qwaylandwindow.cpp
+@@ -124,10 +124,16 @@ void QWaylandWindow::initWindow()
+     if (shouldCreateSubSurface()) {
+         Q_ASSERT(!mSubSurfaceWindow);
+ 
+-        QWaylandWindow *p = static_cast<QWaylandWindow *>(QPlatformWindow::parent());
++       /* QWaylandWindow *p = static_cast<QWaylandWindow *>(QPlatformWindow::parent());
+         if (::wl_subsurface *ss = mDisplay->createSubSurface(this, p)) {
+-            mSubSurfaceWindow = new QWaylandSubSurface(this, p, ss);
++            mSubSurfaceWindow = new QWaylandSubSurface(this, p, ss); */
++           auto *parent = static_cast<QWaylandWindow *>(QPlatformWindow::parent());
++            if (parent->object()) {
++                   if (::wl_subsurface *subsurface = mDisplay->createSubSurface(this, parent))
++                       mSubSurfaceWindow = new QWaylandSubSurface(this, parent, subsurface);
++
+         }
++
+     } else if (shouldCreateShellSurface()) {
+         Q_ASSERT(!mShellSurface);
+         Q_ASSERT(mDisplay->shellIntegration());
+@@ -415,8 +421,8 @@ void QWaylandWindow::setVisible(bool visible)
+         // QWaylandShmBackingStore::beginPaint().
+     } else {
+         sendExposeEvent(QRect());
+-        if (window()->type() == Qt::Popup)
+-            closePopups(this);
++        /*if (window()->type() == Qt::Popup)*/
++         closePopups(this);
+         reset();
+     }
+ }
+diff --git a/src/compositor/compositor_api/qwaylandcompositor.cpp b/src/compositor/compositor_api/qwaylandcompositor.cpp
+index 530cf8e..eea2e6f 100644
+--- a/src/compositor/compositor_api/qwaylandcompositor.cpp
++++ b/src/compositor/compositor_api/qwaylandcompositor.cpp
+@@ -246,9 +246,12 @@ void QWaylandCompositorPrivate::init()
+ 
+ QWaylandCompositorPrivate::~QWaylandCompositorPrivate()
+ {
+-    qDeleteAll(clients);
++       // Take copies, since the lists will get modified as elements are deleted
++    const auto clientsToDelete = clients;
++    qDeleteAll(clientsToDelete);
+ 
+-    qDeleteAll(outputs);
++    const auto outputsToDelete = outputs;
++    qDeleteAll(outputsToDelete);
+ 
+ #if QT_CONFIG(wayland_datadevice)
+     delete data_device_manager;
+diff --git a/src/compositor/compositor_api/qwaylandsurface.cpp b/src/compositor/compositor_api/qwaylandsurface.cpp
+index a82c93f..7116907 100644
+--- a/src/compositor/compositor_api/qwaylandsurface.cpp
++++ b/src/compositor/compositor_api/qwaylandsurface.cpp
+@@ -391,7 +391,10 @@ QWaylandSurface::QWaylandSurface(QWaylandSurfacePrivate &dptr)
+ QWaylandSurface::~QWaylandSurface()
+ {
+     Q_D(QWaylandSurface);
+-    QWaylandCompositorPrivate::get(d->compositor)->unregisterSurface(this);
++    /*QWaylandCompositorPrivate::get(d->compositor)->unregisterSurface(this);*/
++    if (d->compositor)
++        QWaylandCompositorPrivate::get(d->compositor)->unregisterSurface(this);
++
+     d->notifyViewsAboutDestruction();
+ }
+ 
+diff --git a/src/compositor/extensions/qwaylandwlshell.cpp b/src/compositor/extensions/qwaylandwlshell.cpp
+index 66aeb64..f634bf4 100644
+--- a/src/compositor/extensions/qwaylandwlshell.cpp
++++ b/src/compositor/extensions/qwaylandwlshell.cpp
+@@ -466,7 +466,8 @@ QWaylandWlShellSurface::QWaylandWlShellSurface(QWaylandWlShell *shell, QWaylandS
+ QWaylandWlShellSurface::~QWaylandWlShellSurface()
+ {
+     Q_D(QWaylandWlShellSurface);
+-    QWaylandWlShellPrivate::get(d->m_shell)->unregisterShellSurface(this);
++    if (d->m_shell)
++       QWaylandWlShellPrivate::get(d->m_shell)->unregisterShellSurface(this);
+ }
+ 
+ /*!
+diff --git a/src/hardwareintegration/client/wayland-egl/qwaylandglcontext.cpp b/src/hardwareintegration/client/wayland-egl/qwaylandglcontext.cpp
+index bc1f74a..da14749 100644
+--- a/src/hardwareintegration/client/wayland-egl/qwaylandglcontext.cpp
++++ b/src/hardwareintegration/client/wayland-egl/qwaylandglcontext.cpp
+@@ -312,7 +312,7 @@ QWaylandGLContext::QWaylandGLContext(EGLDisplay eglDisplay, QWaylandDisplay *dis
+ 
+     // Create an EGL context for the decorations blitter. By using a dedicated context we don't need to make sure to not
+     // change the context state and we also use OpenGL ES 2 API independently to what the app is using to draw.
+-    QVector<EGLint> eglDecorationsContextAttrs = { EGL_CONTEXT_CLIENT_VERSION, 1, EGL_NONE };
++    QVector<EGLint> eglDecorationsContextAttrs = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
+     m_decorationsContext = eglCreateContext(m_eglDisplay, m_config, m_context, eglDecorationsContextAttrs.constData());
+     if (m_decorationsContext == EGL_NO_CONTEXT)
+         qWarning("QWaylandGLContext: Failed to create the decorations EGLContext. Decorations will not be drawn.");
+diff --git a/src/imports/compositor/WaylandCursorItem.qml b/src/imports/compositor/WaylandCursorItem.qml
+index 1fa0996..e50c82d 100644
+--- a/src/imports/compositor/WaylandCursorItem.qml
++++ b/src/imports/compositor/WaylandCursorItem.qml
+@@ -73,7 +73,7 @@ WaylandQuickItem {
+         x: cursorItem.hotspotX + offset.x
+         y: cursorItem.hotspotY + offset.y
+         z: -1
+-        surface: cursorItem.seat.drag.icon
++        surface: cursorItem.seat ? cursorItem.seat.drag.icon : null
+ 
+         Connections {
+             target: dragIcon.surface
