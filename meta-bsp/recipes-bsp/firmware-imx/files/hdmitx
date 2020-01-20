@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# firmware loader script
+
+MX8_HDMI="/sys/devices/platform/*/*/firmware/hdmitxfw.bin"
+
+if [ 0 -lt $(ls $MX8_HDMI 2>/dev/null | wc -w) ]; then
+cd ${MX8_HDMI}
+echo 1 > loading
+cat /lib/firmware/imx/hdmi/hdmitxfw.bin > data
+echo 0 > loading
+fi
