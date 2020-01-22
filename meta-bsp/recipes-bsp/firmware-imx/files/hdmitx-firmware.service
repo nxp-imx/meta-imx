@@ -1,8 +1,0 @@
-[Unit]
-Description=User Space HDMI TX Firmware Loading
-
-[Service]
-ExecStart=/etc/hdmitx
-
-[Install]
-WantedBy=multi-user.target
