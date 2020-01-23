@@ -13,6 +13,7 @@ SRCREV = "b127b4b3ad0198637c754aca772d005c4657fdde"
 
 PLATFORM_FLAVOR_mx8mn	= "mx8mnevk"
 PLATFORM_FLAVOR_mx8qxp	= "mx8qxpmek"
+PLATFORM_FLAVOR_mx8mp   = "mx8mqevk"
 
 OPTEE_CORE_LOG_LEVEL ?= "1"
 OPTEE_TA_LOG_LEVEL ?= "0"
