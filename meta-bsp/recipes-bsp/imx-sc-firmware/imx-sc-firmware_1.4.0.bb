@@ -16,7 +16,7 @@ SC_FIRMWARE_NAME ?= "mx8qm-mek-scfw-tcm.bin"
 SC_FIRMWARE_NAME_mx8qm = "mx8qm-${BOARD_TYPE}-scfw-tcm.bin"
 SC_FIRMWARE_NAME_mx8qxp = "mx8qx-${BOARD_TYPE}-scfw-tcm.bin"
 SC_FIRMWARE_NAME_mx8dxl-phantom = "mx8dxl-phantom-${BOARD_TYPE}-scfw-tcm.bin"
-SC_FIRMWARE_NAME_imx8dxlmek = "mx8dxl-${BOARD_TYPE}-scfw-tcm.bin"
+SC_FIRMWARE_NAME_imx8dxlmek = "mx8dxl-evk-scfw-tcm.bin"
 SC_FIRMWARE_NAME_mx8dx = "mx8dx-${BOARD_TYPE}-scfw-tcm.bin"
 
 symlink_name = "scfw_tcm.bin"
