@@ -26,3 +26,8 @@ PREFERRED_PROVIDER_udev = "systemd"
 PREFERRED_PROVIDER_udev-utils = "systemd"
 DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
 IMX_DEFAULT_DISTRO_FEATURES += " systemd"
+
+PREFERRED_VERSION_optee-client = "3.2.0.imx"
+PREFERRED_VERSION_optee-os = "3.2.0.imx"
+PREFERRED_VERSION_optee-test = "3.2.0.imx"
+
