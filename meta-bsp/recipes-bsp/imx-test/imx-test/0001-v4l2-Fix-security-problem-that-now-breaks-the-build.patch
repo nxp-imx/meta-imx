@@ -1,0 +1,39 @@
+From 81b6009acd22c1e115e3aeb58b2d0d2b2e30d5e2 Mon Sep 17 00:00:00 2001
+From: "i.MX Yocto Project Build" <imx.build@nxp.com>
+Date: Mon, 27 Jan 2020 14:17:40 -0600
+Subject: [PATCH] v4l2: Fix security problem that now breaks the build
+
+| In function 'open',
+|     inlined from 'open_save_file' at mxc_v4l2_test/mx8_v4l2_cap_drm.c:569:9,
+|     inlined from 'media_device_open' at mxc_v4l2_test/mx8_v4l2_cap_drm.c:679:9,
+|     inlined from 'main' at mxc_v4l2_test/mx8_v4l2_cap_drm.c:1764:8:
+| /home/bamboo/build/core-zeus/fsl-imx-internal-wayland/mx6/temp_build_dir/build_fsl-imx-internal-wayland/tmp/work/cortexa9t2hf-neon-mx6sll-poky-linux-gnueabi/imx-test/1_7.0+AUTOINC+3c482bf09b-r0/recipe-sysroot/usr/include/bits/fcntl2.h:50:4: error: call to '__open_missing_mode' declared with attribute error: open with O_CREAT or O_TMPFILE in second argument needs 3 arguments
+|    50 |    __open_missing_mode ();
+|       |    ^~~~~~~~~~~~~~~~~~~~~~
+
+Upstream-Status: Pending
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ test/mxc_v4l2_test/mx8_v4l2_cap_drm.c | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/test/mxc_v4l2_test/mx8_v4l2_cap_drm.c b/test/mxc_v4l2_test/mx8_v4l2_cap_drm.c
+index 6e69eaa..2d8985b 100644
+--- a/test/mxc_v4l2_test/mx8_v4l2_cap_drm.c
++++ b/test/mxc_v4l2_test/mx8_v4l2_cap_drm.c
+@@ -563,11 +563,7 @@ static int open_save_file(struct video_channel *video_ch)
+ 
+ 	for (i = 0; i < NUM_SENSORS; i++) {
+ 		if ((g_cam >> i) & 0x01) {
+-#ifdef BUILD_FOR_ANDROID
+ 			fd = open(video_ch[i].save_file_name, O_RDWR | O_CREAT, 0660);
+-#else
+-			fd = open(video_ch[i].save_file_name, O_RDWR | O_CREAT);
+-#endif
+ 			if (fd < 0) {
+ 				 v4l2_err("Channel[%d] unable to create recording file\n", i);
+ 				 while (i)
+-- 
+2.17.1
+

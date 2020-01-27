@@ -2,10 +2,16 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
 # Copyright 2017-2018 NXP
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+
 SRCBRANCH = "master"
 IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
-SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
-SRC_URI_append = " file://memtool_profile "
+SRC_URI = " \
+    ${IMXTEST_SRC};branch=${SRCBRANCH} \
+    file://0001-pxp-test-Fix-format-security-error.patch \
+    file://0001-v4l2-Fix-security-problem-that-now-breaks-the-build.patch \
+    file://memtool_profile \
+"
 
 SRCREV = "3c482bf09b0851b13df5d17cedfc33f6285c2efe"
 
