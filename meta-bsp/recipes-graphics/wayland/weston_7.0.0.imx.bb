@@ -20,7 +20,7 @@ PACKAGECONFIG_append = " ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_
 PACKAGECONFIG_remove_imxfbdev = "kms"
 PACKAGECONFIG_append_imxgpu   = " imxgpu"
 PACKAGECONFIG_append_imxgpu2d = " g2d"
-PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
+#PACKAGECONFIG_append_imxgpu3d = " cairo-glesv2"
 
 # Weston with Xwayland support (requires X11 and Wayland)
 PACKAGECONFIG[xwayland] = "-Dxwayland=true,-Dxwayland=false,libxcursor"
@@ -29,7 +29,7 @@ SIMPLE_CLIENTS = "all"
 SIMPLE_CLIENTS_imxfbdev = "damage,im,egl,shm,touch,dmabuf-v4l"
 PACKAGECONFIG[clients] = "-Dsimple-clients=${SIMPLE_CLIENTS} -Ddemo-clients=true,-Dsimple-clients= -Ddemo-clients=false"
 # Weston with cairo glesv2 support
-PACKAGECONFIG[cairo-glesv2] = "-Dcairo-glesv2=true,-Dcairo=image"
+#PACKAGECONFIG[cairo-glesv2] = "-Dcairo-glesv2=true,-Dcairo=image"
 # Weston with i.MX GPU support
 PACKAGECONFIG[imxgpu] = "-Dimxgpu=true,-Dimxgpu=false"
 # Weston with i.MX G2D renderer
