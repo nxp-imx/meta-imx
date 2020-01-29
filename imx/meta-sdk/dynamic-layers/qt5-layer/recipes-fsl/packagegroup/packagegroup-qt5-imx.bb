@@ -4,7 +4,7 @@
 DESCRIPTION = "Package group for i.MX Qt5"
 LICENSE = "MIT"
 
-inherit packagegroup distro_features_check ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'populate_sdk_qt5', '', d)}
+inherit packagegroup distro_features_check
 
 # Install Freescale QT demo applications
 QT5_IMAGE_INSTALL_APPS = ""
