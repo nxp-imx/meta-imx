@@ -13,8 +13,6 @@ SOC_mx8mm   = "imx8mm"
 SOC_mx8mq   = "imx8mq"
 SOC_mx8qm   = "imx8qm"
 SOC_mx8qxp  = "imx8qx"
-SOC_mx8dxlphantom  = "imx8dxl-phantom"
-#Use 8dxl phantom m4 for 8dxl for now.
 SOC_mx8dxl  = "imx8dxl-phantom"
 
 IMX_PACKAGE_NAME = "${SOC}-m4-demo-${PV}"
