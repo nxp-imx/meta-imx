@@ -31,7 +31,7 @@ IMX_M4_DEMOS_mx8x   = "imx-m4-demos:do_deploy"
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
 M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_srtm_demo.bin"
-M4_DEFAULT_IMAGE_mx8dxl-phantom = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
+M4_DEFAULT_IMAGE_mx8phantomdxl = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
 M4_DEFAULT_IMAGE_mx8dxl = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
 
 # This package aggregates output deployed by other packages,
@@ -53,7 +53,7 @@ ATF_MACHINE_NAME_mx8mq = "bl31-imx8mq.bin"
 ATF_MACHINE_NAME_mx8mm = "bl31-imx8mm.bin"
 ATF_MACHINE_NAME_mx8mn = "bl31-imx8mn.bin"
 ATF_MACHINE_NAME_mx8mp = "bl31-imx8mp.bin"
-ATF_MACHINE_NAME_mx8dxl-phantom = "bl31-imx8qx.bin"
+ATF_MACHINE_NAME_mx8phantomdxl = "bl31-imx8qx.bin"
 ATF_MACHINE_NAME_mx8dxl = "bl31-imx8dxl.bin"
 ATF_MACHINE_NAME_append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
@@ -61,7 +61,7 @@ SECO_FIRMWARE ?= ""
 SECO_FIRMWARE_mx8qm          = "mx8qmb0-ahab-container.img"
 SECO_FIRMWARE_mx8qxp         = "mx8qxb0-ahab-container.img"
 SECO_FIRMWARE_mx8qxpc0       = "mx8qxc0-ahab-container.img"
-SECO_FIRMWARE_mx8dxl-phantom = "mx8qxb0-ahab-container.img"
+SECO_FIRMWARE_mx8phantomdxl  = "mx8qxb0-ahab-container.img"
 SECO_FIRMWARE_mx8dxl         = "mx8dxla0-ahab-container.img"
 
 UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
@@ -77,7 +77,7 @@ SOC_TARGET_mx8mm  = "iMX8MM"
 SOC_TARGET_mx8mn  = "iMX8MN"
 SOC_TARGET_mx8mp  = "iMX8MP"
 SOC_TARGET_mx8dxl = "iMX8DXL"
-SOC_TARGET_mx8dxl-phantom = "iMX8QX"
+SOC_TARGET_mx8phantomdxl = "iMX8PhantomDXL"
 
 DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
