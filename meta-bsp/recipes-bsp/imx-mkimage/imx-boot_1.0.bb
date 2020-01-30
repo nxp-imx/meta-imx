@@ -78,7 +78,7 @@ SOC_TARGET_mx8mm  = "iMX8MM"
 SOC_TARGET_mx8mn  = "iMX8MN"
 SOC_TARGET_mx8mp  = "iMX8MP"
 SOC_TARGET_mx8dxl = "iMX8DXL"
-SOC_TARGET_mx8phantomdxl = "iMX8PhantomDXL"
+SOC_TARGET_mx8phantomdxl = "iMX8QX"
 
 DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
