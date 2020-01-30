@@ -21,4 +21,5 @@ do_install () {
 	oe_runmake DESTDIR=${D} install
 }
 
-COMPATIBLE_MACHINE = "(mx8qm|mx8qxp)"
+COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE_mx8m = "(^$)"
