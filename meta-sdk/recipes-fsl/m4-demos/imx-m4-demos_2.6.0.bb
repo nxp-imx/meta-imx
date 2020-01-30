@@ -14,4 +14,4 @@ SRC_URI[imx7ulp.sha256sum] = "f17d55bcc8fd7f9939ad03222500ec92aebd8305d38ead7330
 SRC_URI[imx8dxl-phantom.md5sum] = "2a01f41053bfd8b62d971eeec79dabc0"
 SRC_URI[imx8dxl-phantom.sha256sum] = "613bd1176d29d44af96d99ab0ad85fc8f9cabd8fb56738159b5dbe2d50d31720"
 
-COMPATIBLE_MACHINE = "(mx7ulp|mx8phantomdxl)"
+COMPATIBLE_MACHINE = "(mx7ulp|mx8phantomdxl|mx8dxl)"

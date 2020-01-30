@@ -1,4 +1,4 @@
-# Copyright 2017-2018 NXP
+# Copyright 2017-2019 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "i.MX M4 core Demo images"
@@ -14,6 +14,7 @@ SOC_mx8mq   = "imx8mq"
 SOC_mx8qm   = "imx8qm"
 SOC_mx8qxp  = "imx8qx"
 SOC_mx8dxl  = "imx8dxl-phantom"
+SOC_mx8phantomdxl = "imx8dxl-phantom"
 
 IMX_PACKAGE_NAME = "${SOC}-m4-demo-${PV}"
 SRC_URI_append = ";name=${SOC}"
