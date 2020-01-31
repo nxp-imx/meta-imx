@@ -1,6 +1,7 @@
 # Copyright 2017-2019 NXP
 
 require imx-mkimage_git.inc
+require recipes-bsp/imx-seco/imx-seco.inc
 
 DESCRIPTION = "Generate Boot Loader for i.MX 8 device"
 LICENSE = "GPLv2"
@@ -57,13 +58,6 @@ ATF_MACHINE_NAME_mx8mp = "bl31-imx8mp.bin"
 ATF_MACHINE_NAME_mx8phantomdxl = "bl31-imx8qx.bin"
 ATF_MACHINE_NAME_mx8dxl = "bl31-imx8dxl.bin"
 ATF_MACHINE_NAME_append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
-
-SECO_FIRMWARE ?= ""
-SECO_FIRMWARE_mx8qm          = "mx8qmb0-ahab-container.img"
-SECO_FIRMWARE_mx8qxp         = "mx8qxb0-ahab-container.img"
-SECO_FIRMWARE_mx8qxpc0       = "mx8qxc0-ahab-container.img"
-SECO_FIRMWARE_mx8phantomdxl  = "mx8qxb0-ahab-container.img"
-SECO_FIRMWARE_mx8dxl         = "mx8dxla0-ahab-container.img"
 
 UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 BOOT_CONFIG_MACHINE = "${BOOT_NAME}-${MACHINE}-${UBOOT_CONFIG}.bin"
@@ -132,13 +126,13 @@ compile_mx8() {
                                                              ${BOOT_STAGING}/m4_image.bin
     cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_1_TCM_power_mode_switch_m41.bin \
                                                              ${BOOT_STAGING}/m4_1_image.bin
-    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE} ${BOOT_STAGING}
+    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
 }
 
 compile_mx8x() {
     bbnote 8QX boot binary build
     cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}               ${BOOT_STAGING}/m4_image.bin
-    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE}                  ${BOOT_STAGING}
+    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${BOOT_STAGING}/scfw_tcm.bin
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
     cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${BOOT_STAGING}/u-boot.bin
@@ -185,7 +179,7 @@ deploy_mx8m() {
 }
 deploy_mx8() {
     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE}         ${DEPLOYDIR}/${BOOT_TOOLS}
+    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0644 ${BOOT_STAGING}/m4_image.bin             ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0644 ${BOOT_STAGING}/m4_1_image.bin           ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
@@ -196,7 +190,7 @@ deploy_mx8() {
 }
 deploy_mx8x() {
     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE}         ${DEPLOYDIR}/${BOOT_TOOLS}
+    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0644 ${BOOT_STAGING}/m4_image.bin             ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
     if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
