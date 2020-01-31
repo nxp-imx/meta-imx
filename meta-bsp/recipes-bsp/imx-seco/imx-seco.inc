@@ -1,0 +1,6 @@
+SECO_FIRMWARE_NAME              ?= "UNSUPPORTED"
+SECO_FIRMWARE_NAME_mx8qm         = "mx8qmb0-ahab-container.img"
+SECO_FIRMWARE_NAME_mx8qxp        = "mx8qxb0-ahab-container.img"
+SECO_FIRMWARE_NAME_mx8qxpc0      = "mx8qxc0-ahab-container.img"
+SECO_FIRMWARE_NAME_mx8phantomdxl = "mx8qxb0-ahab-container.img"
+SECO_FIRMWARE_NAME_mx8dxl        = "mx8dxla0-ahab-container.img"

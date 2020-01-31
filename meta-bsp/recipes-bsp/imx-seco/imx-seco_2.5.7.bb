@@ -6,6 +6,7 @@ SECTION = "base"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fd4b227530cd88a82af6a5982cfb724d"
 
+require imx-seco.inc
 inherit fsl-eula-unpack deploy
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
@@ -16,13 +17,6 @@ SRC_URI[sha256sum] = "b9e97fd84914d30fe59fa499e821c11912acfa8e0a3e27db63f4a36888
 do_compile[noexec] = "1"
 
 do_install[noexec] = "1"
-
-SECO_FIRMWARE_NAME ?= "mx8qmb0-ahab-container.img"
-SECO_FIRMWARE_NAME_mx8qm  = "mx8qmb0-ahab-container.img"
-SECO_FIRMWARE_NAME_mx8qxp = "mx8qxb0-ahab-container.img"
-SECO_FIRMWARE_NAME_mx8qxpc0 = "mx8qxc0-ahab-container.img"
-SECO_FIRMWARE_NAME_mx8phantomdxl = "mx8qxb0-ahab-container.img"
-SECO_FIRMWARE_NAME_mx8dxl = "mx8dxla0-ahab-container.img"
 
 addtask deploy after do_install
 do_deploy () {
