@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50"
 DEPENDS = "imx-gpu-viv zlib libpng procps"
 
 APITRACE_SRC ?= "git://source.codeaurora.org/external/imx/apitrace-imx.git;protocol=https"
-SRCBRANCH = "imx_8.0"
+SRCBRANCH = "imx_9.0"
 SRC_URI = "${APITRACE_SRC};branch=${SRCBRANCH}"
 SRCREV = "179b913aee4e7d047c041940b426570f288de235" 
 
 S = "${WORKDIR}/git"
 
-inherit cmake pkgconfig perlnative pythonnative
+inherit cmake pkgconfig perlnative python3native
 
 PACKAGECONFIG     ??= "egl waffle"
 PACKAGECONFIG_mx6 ??= "egl"
