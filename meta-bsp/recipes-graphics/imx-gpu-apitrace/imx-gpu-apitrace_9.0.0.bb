@@ -7,7 +7,7 @@ DEPENDS = "imx-gpu-viv zlib libpng procps"
 APITRACE_SRC ?= "git://source.codeaurora.org/external/imx/apitrace-imx.git;protocol=https"
 SRCBRANCH = "imx_9.0"
 SRC_URI = "${APITRACE_SRC};branch=${SRCBRANCH}"
-SRCREV = "179b913aee4e7d047c041940b426570f288de235" 
+SRCREV = "8636fa989d8e914a7986916b058878761a981a6f"
 
 S = "${WORKDIR}/git"
 
