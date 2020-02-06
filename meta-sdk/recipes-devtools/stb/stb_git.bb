@@ -1,23 +1,17 @@
 SUMMARY = "single-file public domain (or MIT licensed) libraries for C/C++"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://README.md;md5=42144ce827adcfa5170032f0ea03c227"
+LIC_FILES_CHKSUM = "file://stb.h;beginline=14418;endline=14433;md5=b10975d4c8155af1811ab611586f01d2"
 
-PV = "2.31"
+PV = "0.0+git${SRCPV}"
 
-BRANCH = "master"
-SRCREV = "e6afb9cbae4064da8c3e69af3ff5c4629579c1d2"
-
-SRC_URI = "git://github.com/nothings/stb.git;branch=${BRANCH}"
+SRCREV = "f67165c2bb2af3060ecae7d20d6f731173485ad0"
+SRC_URI = "git://github.com/nothings/stb.git"
 
 S = "${WORKDIR}/git"
 
 do_install() {
     install -d ${D}${includedir}
-    for hdr in ${S}/*.h
-    do
+    for hdr in ${S}/*.h; do
         install -m 0644 $hdr ${D}${includedir}
     done
 }
-
-PACKAGES = "${PN}"
-FILES_${PN} += "${includedir}"
