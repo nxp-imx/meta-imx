@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://License.md;md5=9d58a2573275ce8c35d79576835dbeb8"
 
 DEPENDS = "assimp devil fmt gstreamer1.0 gstreamer1.0-plugins-base gli \
-           glm gtest half rapidjson stb tclap zlib"
+           glm gtest half rapidjson stb zlib"
 DEPENDS_append = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',  ' xrandr', \
