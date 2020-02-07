@@ -3,7 +3,7 @@ DESCRIPTION = "Set of sample applications for i.MX GPU"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://License.md;md5=9d58a2573275ce8c35d79576835dbeb8"
 
-DEPENDS = "assimp devil fmt gstreamer1.0 gstreamer1.0-plugins-base gli \
+DEPENDS = "assimp cmake-native devil fmt gstreamer1.0 gstreamer1.0-plugins-base gli \
            glm gtest half rapidjson stb zlib"
 DEPENDS_append = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland', \
@@ -30,7 +30,7 @@ DEPENDS_append       = " ${DEPENDS_OPENVX}"
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
-SRCREV = "5f508da40457bf46bc976b785fc9cdb84deec352" 
+SRCREV = "13716a650c86330d4dc8bc36c0612e65c6aeb8c8"
 
 S = "${WORKDIR}/git"
 
@@ -60,7 +60,7 @@ do_compile () {
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     . ./prepare.sh
-    FslBuild.py -vvvvv -t sdk --UseFeatures [${FEATURES}] --UseExtensions [${EXTENSIONS}] --Variants [WindowSystem=${BACKEND}] --BuildThreads ${BB_NUMBER_THREADS} -- install
+    FslBuild.py -vvvvv -t sdk --UseFeatures [${FEATURES}] --UseExtensions [${EXTENSIONS}] --Variants [WindowSystem=${BACKEND}] --BuildThreads ${BB_NUMBER_THREADS} -c install --CMakeInstallPrefix ${S}/bin
 }
 
 REMOVALS = " \
