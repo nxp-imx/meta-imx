@@ -3,29 +3,39 @@ DESCRIPTION = "Set of sample applications for i.MX GPU"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://License.md;md5=9d58a2573275ce8c35d79576835dbeb8"
 
-DEPENDS = "assimp cmake-native devil fmt gstreamer1.0 gstreamer1.0-plugins-base gli \
-           glm gtest half rapidjson stb zlib"
-DEPENDS_append = \
+DEPENDS_BACKEND = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',  ' xrandr', \
                                                                 '', d), d)}"
+DEPENDS_MX8       = ""
+DEPENDS_MX8_mx8   = " \
+    glslang-native \
+    rapidopencl \
+    rapidopenvx \
+    rapidvulkan \
+    vulkan-headers \
+    vulkan-loader \
+"
+DEPENDS_MX8_mx8mm = ""
+DEPENDS = " \
+    assimp \
+    cmake-native \
+    devil \
+    fmt \
+    gli \
+    glm \
+    gstreamer1.0 \
+    gstreamer1.0-plugins-base \
+    gtest \
+    half \
+    rapidjson \
+    stb \
+    zlib \
+    ${DEPENDS_BACKEND} \
+    ${DEPENDS_MX8} \
+"
 DEPENDS_append_imxgpu2d = " virtual/libg2d virtual/libopenvg"
 DEPENDS_append_imxgpu3d = " virtual/libgles2"
-
-DEPENDS_VULKAN       = ""
-DEPENDS_VULKAN_mx8   = "glslang-native rapidvulkan vulkan-headers vulkan-loader"
-DEPENDS_VULKAN_mx8mm = ""
-DEPENDS_append       = " ${DEPENDS_VULKAN}"
-
-DEPENDS_OPENCL       = ""
-DEPENDS_OPENCL_mx8   = "rapidopencl"
-DEPENDS_OPENCL_mx8mm = ""
-DEPENDS_append       = " ${DEPENDS_OPENCL}"
-
-DEPENDS_OPENVX       = ""
-DEPENDS_OPENVX_mx8   = "rapidopenvx"
-DEPENDS_OPENVX_mx8mm = ""
-DEPENDS_append       = " ${DEPENDS_OPENVX}"
 
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
@@ -85,9 +95,9 @@ REMOVALS_append_mx6dl = " \
 do_install () {
     install -d "${D}/opt/${PN}"
     cp -r ${S}/bin/* ${D}/opt/${PN}
-    cd ${D}/opt/${PN}
-    rm -rf ${REMOVALS}
-    cd -
+    for removal in ${REMOVALS}; do
+        rm -rf ${D}/opt/${PN}/$removal
+    done
 }
 
 FILES_${PN} += "/opt/${PN}"
@@ -104,6 +114,4 @@ RPROVIDES_${PN} = "fsl-gpu-sdk"
 RREPLACES_${PN} = "fsl-gpu-sdk"
 RCONFLICTS_${PN} = "fsl-gpu-sdk"
 
-# Compatible only with i.MX GPU
-COMPATIBLE_MACHINE = "(^$)"
-COMPATIBLE_MACHINE_imxgpu = "${MACHINE}"
+COMPATIBLE_MACHINE = "(imxgpu)"
