@@ -1,4 +1,4 @@
-# Copyright 2017-2019 NXP
+# Copyright 2017-2020 NXP
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
@@ -16,7 +16,14 @@ SRC_URI += " \
 "
 SRCREV_imx-firmware = "f6d0859f9435796f03ae93b70b5f92f4406bc56d"
 
-SRCREV_FORMAT = "default_murata-qca+imx-firmware"
+# Firmware for Marvell Wi-Fi Modules
+MRVL_FIRMWARE_SRC ?= "git://github.com/NXP/mwifiex-firmware.git;protocol=https"
+SRC_URI += " \
+           ${MRVL_FIRMWARE_SRC};branch=master;destsuffix=mwifiex-firmware;name=mwifiex-firmware \
+"
+SRCREV_mwifiex-firmware = "c934f561042d0b3f93a540bf44cb72f826417d32"
+
+SRCREV_FORMAT = "default_murata-qca_imx-firmware_mwifiex-firmware"
 
 do_install_append () {
     # Install firmware.conf for QCA modules
@@ -60,6 +67,15 @@ do_install_append () {
     install -m 0644 ${WORKDIR}/imx-firmware/cyw-wifi-bt/1FD_CYW4359/brcmfmac4359-pcie.clm_blob ${D}${nonarch_base_libdir}/firmware/brcm
     install -m 0644 ${WORKDIR}/imx-firmware/cyw-wifi-bt/1FD_CYW4359/brcmfmac4359-pcie.txt ${D}${nonarch_base_libdir}/firmware/brcm
     install -m 0644 ${WORKDIR}/imx-firmware/cyw-wifi-bt/1FD_CYW4359/BCM4349B1_002.002.014.0077.0083.hcd ${D}${sysconfdir}/firmware
+
+    # Install Marvell PCIE8997 firmware
+    install -m 0644 ${WORKDIR}/mwifiex-firmware/mrvl/FwImage_8997/pcie8997_wlan_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
+    install -m 0644 ${WORKDIR}/mwifiex-firmware/mrvl/FwImage_8997/pcieuart8997_combo_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
+    install -m 0644 ${WORKDIR}/mwifiex-firmware/mrvl/FwImage_8997/helper_uart_3000000.bin ${D}${nonarch_base_libdir}/firmware/mrvl
+    install -m 0644 ${WORKDIR}/mwifiex-firmware/mrvl/FwImage_8997/uart8997_bt_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
+    install -d ${D}${datadir}/mrvl_wireless/bin_pcie8997
+    install -m 0644 ${WORKDIR}/mwifiex-firmware/mrvl/FwImage_8997/fw_loader_arm64 ${D}${datadir}/mrvl_wireless/bin_pcie8997
+
 }
 
 # Use the latest version of sdma firmware in firmware-imx
@@ -101,4 +117,10 @@ FILES_${PN}-bcm4359-pcie = " \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4359-pcie.clm_blob \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4359-pcie.txt \
        ${sysconfdir}/firmware/BCM4349B1_002.002.014.0077.0083.hcd \
+"
+
+FILES_${PN}-pcie8997 += " \
+       ${nonarch_base_libdir}/firmware/mrvl/helper_uart_3000000.bin \
+       ${nonarch_base_libdir}/firmware/mrvl/uart8997_bt_v4.bin \
+       ${datadir}/mrvl_wireless/bin_pcie8997/fw_loader_arm64 \
 "
