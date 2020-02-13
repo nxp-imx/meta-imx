@@ -7,11 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074 \
 
 PR = "r1"
 PV = "19.08"
-PV_MAJOR = "${@d.getVar('PV',d,1).split('.')[0]}"
 
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
 SRCBRANCH = "branches/armnn_19_08"
-SRCREV = "fd069479e05cd2616a2eacba1c13f99da59bb9a8"
+SRCREV = "985e414c581005b3b80276b26bb021d8f7175aa2"
 
 SRCREV_FORMAT = "armnn"
 
@@ -58,7 +57,7 @@ EXTRA_OECMAKE += " \
     -DARMCOMPUTE_ROOT=${STAGING_DIR_HOST}${datadir}/arm-compute-library \
     -DBUILD_TESTS=1 \
     -DTHIRD_PARTY_INCLUDE_DIRS=${STAGING_DIR_HOST}${includedir} \
-    -DGENERIC_LIB_VERSION=${PV} -DGENERIC_LIB_SOVERSION=${PV_MAJOR} \
+    -DGENERIC_LIB_VERSION=${PV} \
     -DARMCOMPUTE_INCLUDE=${STAGING_DIR_HOST}${datadir}/arm-compute-library \
     -DHALF_INCLUDE=${STAGING_DIR_HOST}${datadir}/arm-compute-library/include \
 "
