@@ -17,7 +17,7 @@ inherit python3native
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_$PN} += " armnn protobuf"
+RDEPENDS_${PN} += "armnn protobuf"
 
 do_install(){
 	# Install wheel file
@@ -28,5 +28,3 @@ do_install(){
 }
 
 FILES_${PN} += "${libdir}/python*"
-
-INSANE_SKIP_${PN} += "file-rdeps"
