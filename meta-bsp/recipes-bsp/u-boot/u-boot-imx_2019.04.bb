@@ -18,7 +18,7 @@ UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=ht
 SRCBRANCH = "imx_v2019.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "5124413c52f38d4eaa34b70e150b203b017b12f6"
+SRCREV = "7a8ec829d4410c51550ad7a589645595042ba541"
 
 S = "${WORKDIR}/git"
 
