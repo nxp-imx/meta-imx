@@ -13,7 +13,7 @@ SRC_URI = " \
     file://memtool_profile \
 "
 
-SRCREV = "9500ce3325929be8a2bdc2347a12a0466d814d08"
+SRCREV = "27122ccb593d0645cafeabb9c1db6b5280e289c3"
 
 do_compile() {
     CFLAGS="${TOOLCHAIN_OPTIONS}"
