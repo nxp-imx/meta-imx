@@ -1,0 +1,44 @@
+From 820fa01b5d3df979fb6e9c31708ec8ba2f8e7d84 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Sat, 15 Feb 2020 14:54:23 -0600
+Subject: [PATCH] download_dependencies.sh: filter out mirror when downloading
+ Eigen
+
+https://github.com/tensorflow/tensorflow/commit/05514a000a017dbe7db7643d084b16def9719c99
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ tensorflow/lite/tools/make/download_dependencies.sh | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/tensorflow/lite/tools/make/download_dependencies.sh b/tensorflow/lite/tools/make/download_dependencies.sh
+index fa3d5d3d3b..e7dc1bcb84 100755
+--- a/tensorflow/lite/tools/make/download_dependencies.sh
++++ b/tensorflow/lite/tools/make/download_dependencies.sh
+@@ -29,7 +29,7 @@ if [ ! -f $BZL_FILE_PATH ]; then
+   exit 1;
+ fi
+ 
+-EIGEN_URL="$(grep -o 'http.*bitbucket.org/eigen/eigen/get/.*tar\.gz' "${BZL_FILE_PATH}" | grep -v mirror.bazel | head -n1)"
++EIGEN_URL="$(grep -o 'http.*bitbucket.org/eigen/eigen/get/.*tar\.gz' "${BZL_FILE_PATH}" | grep -v mirror.tensorflow | head -n1)"
+ GEMMLOWP_URL="$(grep -o 'https://mirror.bazel.build/github.com/google/gemmlowp/.*zip' "${BZL_FILE_PATH}" | head -n1)"
+ GOOGLETEST_URL="https://github.com/google/googletest/archive/release-1.8.0.tar.gz"
+ ABSL_URL="$(grep -o 'https://github.com/abseil/abseil-cpp/.*tar.gz' "${BZL_FILE_PATH}" | head -n1)"
+@@ -61,12 +61,12 @@ download_and_extract() {
+   echo "downloading ${url}" >&2
+   mkdir -p "${dir}"
+   if [[ "${url}" == *gz ]]; then
+-    curl -Ls "${url}" | tar -C "${dir}" --strip-components=1 -xz
++    wget -qO- "${url}" | tar xz --strip-components=1 -C "${dir}"
+   elif [[ "${url}" == *zip ]]; then
+     tempdir=$(mktemp -d)
+     tempdir2=$(mktemp -d)
+ 
+-    curl -L ${url} > ${tempdir}/zipped.zip
++    wget ${url} -O ${tempdir}/zipped.zip
+     unzip ${tempdir}/zipped.zip -d ${tempdir2}
+ 
+     # If the zip file contains nested directories, extract the files from the
+-- 
+2.25.0
+
