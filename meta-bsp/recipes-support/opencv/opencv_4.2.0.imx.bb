@@ -22,6 +22,7 @@ SRC_URI += " \
     git://github.com/opencv/opencv_extra.git;destsuffix=extra;name=extra \
     https://github.com/tiny-dnn/tiny-dnn/archive/v1.0.0a3.tar.gz;destsuffix=git/3rdparty/tinydnn/tiny-dnn-1.0.0a3;name=tinydnn;unpack=false \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
+    file://OpenCV_DNN_examples.patch \
 "
 PV = "4.2.0.imx"
 
