@@ -49,7 +49,7 @@ PACKAGECONFIG[opencl] = "-DARMCOMPUTECL=1,-DARMCOMPUTECL=0,opencl-headers"
 PACKAGECONFIG[tensorflow] = "-DBUILD_TF_PARSER=1 -DTF_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow,-DBUILD_TF_PARSER=0, armnn-tensorflow "
 PACKAGECONFIG[tensorflow_lite] = "-DTF_LITE_GENERATED_PATH=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow-lite -DBUILD_TF_LITE_PARSER=1 ,-DBUILD_TF_LITE_PARSER=0, flatbuffers armnn-tensorflow"
 PACKAGECONFIG[unit_tests] = "-DBUILD_UNIT_TESTS=1,-DBUILD_UNIT_TESTS=0"
-PACKAGECONFIG[vsi_npu] = "-DVSI_NPU=1,-DVSI_NPU=0,imx-gpu-viv"
+PACKAGECONFIG[vsi_npu] = "-DVSI_NPU=1,-DVSI_NPU=0,nn-imx"
 PACKAGECONFIG[vsi_tests] = "-DBUILD_VSI_TESTS=1,-DBUILD_VSI_TESTS=0"
 
 EXTRA_OECMAKE += " \
