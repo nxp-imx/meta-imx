@@ -8,12 +8,13 @@ LICENSE = "Proprietary"
 SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fd4b227530cd88a82af6a5982cfb724d"
 
-SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
+IMX_VPUWRAP_SRC ?= "git://github.com/NXP/vpu_wrapper.git;protocol=https"
+SRCBRANCH = "master"
+SRC_URI = "${IMX_VPUWRAP_SRC};branch=${SRCBRANCH}"
+SRCREV  = "96e189fc34e0a6898205cf80a413bf79eca0630d"
+S = "${WORKDIR}/git"
 
-SRC_URI[md5sum] = "d07ce166e743f4d8f88ae3a96c031ae1"
-SRC_URI[sha256sum] = "72adfd353f118f2dd28848fda1b8429c72f0de42ab4782298b9b266b20402d09"
-
-inherit fsl-eula-unpack autotools pkgconfig
+inherit autotools pkgconfig
 
 do_install_append() {
     # FIXME: Drop examples for now
