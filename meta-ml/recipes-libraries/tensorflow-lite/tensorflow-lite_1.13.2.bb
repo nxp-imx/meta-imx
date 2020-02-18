@@ -50,7 +50,7 @@ do_install(){
 	cp ${S}/tensorflow/lite/java/ovic/src/testdata/labels.txt ${D}${bindir}/${PN}-${PV}/examples
 }
 
-RDEPENDS_${PN} += "flatbuffers libnn-imx"
+RDEPENDS_${PN} += "flatbuffers libnn-imx nn-imx"
 
 # TensorFlow and TensorFlow Lite both exports few files, suppres the error
 # SSTATE_DUPWHITELIST = "${D}${includedir}"
