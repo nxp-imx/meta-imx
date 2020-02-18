@@ -1,5 +1,5 @@
 SRCBRANCH = "lf-5.4.y"
-SRCREV = "cccdd12e203addbe976dfc722d76cf5da265707f"
+SRCREV = "6d99b525af752ecdaabdca6098b2564b2665f2b2"
 
 PLATFORM_FLAVOR_imx6ulz14x14evk = "mx6ulzevk"
 PLATFORM_FLAVOR_mx8mm = "mx8mmevk"
