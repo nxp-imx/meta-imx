@@ -1,0 +1,174 @@
+From 6c5971dd466d37759efd99838ee41cfbb3dd2a73 Mon Sep 17 00:00:00 2001
+From: Ludek Slosarcik <ludek.slosarcik@nxp.com>
+Date: Thu, 13 Feb 2020 16:43:30 +0100
+Subject: [PATCH] tf-lite interpreter wrapper
+
+Signed-off-by: Ludek Slosarcik <ludek.slosarcik@nxp.com>
+Signed-off-by: Zongchun Yu <zongchun.yu@nxp.com>
+---
+ .../lite/examples/python/label_image.py       | 20 +++++++---
+ tensorflow/lite/python/interpreter.py         | 39 ++++++++++++-------
+ .../interpreter_wrapper.cc                    |  2 +
+ .../tools/pip_package/build_pip_package.sh    |  8 ++--
+ 4 files changed, 47 insertions(+), 22 deletions(-)
+
+diff --git a/tensorflow/lite/examples/python/label_image.py b/tensorflow/lite/examples/python/label_image.py
+index 0bc15d36a8..7c59ec250f 100644
+--- a/tensorflow/lite/examples/python/label_image.py
++++ b/tensorflow/lite/examples/python/label_image.py
+@@ -20,10 +20,11 @@ from __future__ import print_function
+ 
+ import argparse
+ import numpy as np
++from datetime import datetime
+ 
+ from PIL import Image
+ 
+-from tensorflow.lite.python import interpreter as interpreter_wrapper
++import tflite_runtime.lite.interpreter as tflite
+ 
+ def load_labels(filename):
+   my_labels = []
+@@ -36,19 +37,19 @@ if __name__ == "__main__":
+   floating_model = False
+ 
+   parser = argparse.ArgumentParser()
+-  parser.add_argument("-i", "--image", default="/tmp/grace_hopper.bmp", \
++  parser.add_argument("-i", "--image", default="grace_hopper.bmp", \
+     help="image to be classified")
+   parser.add_argument("-m", "--model_file", \
+-    default="/tmp/mobilenet_v1_1.0_224_quant.tflite", \
++    default="mobilenet_v1_1.0_224_quant.tflite", \
+     help=".tflite model to be executed")
+-  parser.add_argument("-l", "--label_file", default="/tmp/labels.txt", \
++  parser.add_argument("-l", "--label_file", default="labels.txt", \
+     help="name of file containing labels")
+   parser.add_argument("--input_mean", default=127.5, help="input_mean")
+   parser.add_argument("--input_std", default=127.5, \
+     help="input standard deviation")
+   args = parser.parse_args()
+ 
+-  interpreter = interpreter_wrapper.Interpreter(model_path=args.model_file)
++  interpreter = tflite.Interpreter(model_path=args.model_file)
+   interpreter.allocate_tensors()
+ 
+   input_details = interpreter.get_input_details()
+@@ -72,7 +73,16 @@ if __name__ == "__main__":
+ 
+   interpreter.set_tensor(input_details[0]['index'], input_data)
+ 
++  # ignore the 1st invoke
++  startTime = datetime.now()
++  interpreter.invoke()           
++  delta = datetime.now() - startTime
++  print("\n    First time:",'%.1f' % (delta.total_seconds()*1000),"ms\n")
++
++  startTime = datetime.now()
+   interpreter.invoke()
++  delta = datetime.now() - startTime
++  print("\n    Average time:",'%.1f' % (delta.total_seconds()*1000),"ms\n")
+ 
+   output_data = interpreter.get_tensor(output_details[0]['index'])
+   results = np.squeeze(output_data)
+diff --git a/tensorflow/lite/python/interpreter.py b/tensorflow/lite/python/interpreter.py
+index a6183d13b5..43e9e9e141 100644
+--- a/tensorflow/lite/python/interpreter.py
++++ b/tensorflow/lite/python/interpreter.py
+@@ -19,20 +19,31 @@ from __future__ import print_function
+ 
+ import sys
+ import numpy as np
+-from tensorflow.python.util.lazy_loader import LazyLoader
+-from tensorflow.python.util.tf_export import tf_export as _tf_export
+-
+-# Lazy load since some of the performance benchmark skylark rules
+-# break dependencies. Must use double quotes to match code internal rewrite
+-# rule.
+-# pylint: disable=g-inconsistent-quotes
+-_interpreter_wrapper = LazyLoader(
+-    "_interpreter_wrapper", globals(),
+-    "tensorflow.lite.python.interpreter_wrapper."
+-    "tensorflow_wrap_interpreter_wrapper")
+-# pylint: enable=g-inconsistent-quotes
+-
+-del LazyLoader
++# pylint: disable=g-import-not-at-top
++try:
++  from tensorflow.python.util.lazy_loader import LazyLoader
++  from tensorflow.python.util.tf_export import tf_export as _tf_export
++
++  # Lazy load since some of the performance benchmark skylark rules
++  # break dependencies. Must use double quotes to match code internal rewrite
++  # rule.
++  # pylint: disable=g-inconsistent-quotes
++  _interpreter_wrapper = LazyLoader(
++      "_interpreter_wrapper", globals(),
++      "tensorflow.lite.python.interpreter_wrapper."
++      "tensorflow_wrap_interpreter_wrapper")
++  # pylint: enable=g-inconsistent-quotes
++
++  del LazyLoader
++except ImportError:
++  # When full Tensorflow Python PIP is not available do not use lazy load
++  # and instead of the tflite_runtime path.
++  from tflite_runtime.lite.python import interpreter_wrapper as _interpreter_wrapper
++
++  def tf_export_dummy(*x, **kwargs):
++    del x, kwargs
++    return lambda x: x
++  _tf_export = tf_export_dummy
+ 
+ 
+ @_tf_export('lite.Interpreter')
+diff --git a/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc b/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc
+index d14af439ec..fb6bf34339 100644
+--- a/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc
++++ b/tensorflow/lite/python/interpreter_wrapper/interpreter_wrapper.cc
+@@ -111,6 +111,8 @@ std::unique_ptr<tflite::Interpreter> CreateInterpreter(
+   if (tflite::InterpreterBuilder(*model, resolver)(&interpreter) != kTfLiteOk) {
+     return nullptr;
+   }
++  printf("------ Used NNAPI ------\n");
++  interpreter->UseNNAPI(true);
+   return interpreter;
+ }
+ 
+diff --git a/tensorflow/lite/tools/pip_package/build_pip_package.sh b/tensorflow/lite/tools/pip_package/build_pip_package.sh
+index 2887ce8471..fc83342e38 100644
+--- a/tensorflow/lite/tools/pip_package/build_pip_package.sh
++++ b/tensorflow/lite/tools/pip_package/build_pip_package.sh
+@@ -16,6 +16,8 @@
+ 
+ set -e
+ 
++TARGET_PLATFORM=$1
++
+ # Find where this script lives and then the Tensorflow root.
+ MY_DIRECTORY=`dirname $0`
+ export TENSORFLOW_SRC_ROOT=`realpath $MY_DIRECTORY/../../../..`
+@@ -24,7 +26,7 @@ export TENSORFLOW_VERSION=`grep "_VERSION = " $TENSORFLOW_SRC_ROOT/tensorflow/to
+ 
+ 
+ # Build a pip build tree.
+-BUILD_ROOT=/tmp/tflite_pip
++BUILD_ROOT=$PIP_BUILD_ROOT/tflite_pip
+ rm -rf $BUILD_ROOT
+ mkdir -p $BUILD_ROOT/tflite_runtime/lite
+ mkdir -p $BUILD_ROOT/tflite_runtime/lite/python
+@@ -35,7 +37,7 @@ import tflite_runtime.lite.interpreter
+ EOF
+ 
+ cat > $BUILD_ROOT/tflite_runtime/lite/__init__.py <<EOF;
+-from interpreter import Interpreter as Interpreter
++from .interpreter import Interpreter as Interpreter
+ EOF
+ 
+ cat > $BUILD_ROOT/tflite_runtime/lite/python/__init__.py <<EOF;
+@@ -51,4 +53,4 @@ cp $TFLITE_ROOT/tools/pip_package/MANIFEST.in $BUILD_ROOT
+ 
+ # Build the Pip
+ cd $BUILD_ROOT
+-python setup.py bdist_wheel
++$PYTHON setup.py bdist_wheel -p $TARGET_PLATFORM
+-- 
+2.17.1
