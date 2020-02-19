@@ -6,7 +6,7 @@ PROVIDES_OPENVX_mx8   = "virtual/libopenvx"
 PROVIDES_OPENVX_mx8mm = ""
 PROVIDES += "${PROVIDES_OPENVX}"
 
-do_install_append () {
+do_install_append_mx8 () {
     rm ${D}${libdir}/libneuralnetworks.so
     rm ${D}${libdir}/libnnrt.so
     rm ${D}${libdir}/libovxlib.so
