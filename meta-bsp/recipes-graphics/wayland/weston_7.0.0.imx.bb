@@ -2,7 +2,7 @@ require recipes-graphics/wayland/weston_7.0.0.bb
 
 SRC_URI_remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
-SRC_URI_prepend = "${WESTON_SRC};branch=weston-imx-8.0 "
+SRC_URI_prepend = "${WESTON_SRC};branch=weston-imx-7.0 "
 SRCREV = "38c99e9c21af6645d21095b22149e3300da58879" 
 S = "${WORKDIR}/git"
 
@@ -12,6 +12,8 @@ REQUIRED_DISTRO_FEATURES_imxgpu3d = "opengl"
 PACKAGECONFIG_OPENGL              = "opengl"
 PACKAGECONFIG_OPENGL_imxgpu2d     = ""
 PACKAGECONFIG_OPENGL_imxgpu3d     = "opengl"
+
+EXTRA_OEMESON += "-Dsimple-dmabuf-drm=auto"
 
 PACKAGECONFIG_remove = "wayland x11"
 PACKAGECONFIG_append = " ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)}"
@@ -34,9 +36,6 @@ PACKAGECONFIG[imxgpu] = "-Dimxgpu=true,-Dimxgpu=false"
 PACKAGECONFIG[g2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d"
 # Weston with OpenGL support
 PACKAGECONFIG[opengl] = "-Dopengl=true,-Dopengl=false"
-
-FILES_${PN} += "${libdir}/${BPN}/lib*${SOLIBS}"
-FILES_${PN}-dbg += "${libdir}/${BPN}/libexec_weston${SOLIBSDEV}"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(imxfbdev|imxgpu)"
