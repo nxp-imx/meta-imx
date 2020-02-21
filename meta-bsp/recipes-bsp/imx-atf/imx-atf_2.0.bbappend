@@ -12,6 +12,7 @@ PLATFORM_mx8mn  = "imx8mn"
 PLATFORM_mx8mp  = "imx8mp"
 PLATFORM_imx8dxlevk = "imx8dxl"
 PLATFORM_mx8dxlevk-phantom = "imx8qx"
+PLATFORM_mx8dx = "imx8dx"
 
 BUILD_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 

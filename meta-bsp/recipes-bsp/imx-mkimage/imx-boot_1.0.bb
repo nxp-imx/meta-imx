@@ -35,6 +35,7 @@ M4_DEFAULT_IMAGE ?= "m4_image.bin"
 M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_srtm_demo.bin"
 M4_DEFAULT_IMAGE_mx8phantomdxl = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
 M4_DEFAULT_IMAGE_mx8dxl = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
+M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_srtm_demo.bin"
 
 # This package aggregates output deployed by other packages,
 # so set the appropriate dependencies
@@ -57,6 +58,7 @@ ATF_MACHINE_NAME_mx8mn = "bl31-imx8mn.bin"
 ATF_MACHINE_NAME_mx8mp = "bl31-imx8mp.bin"
 ATF_MACHINE_NAME_mx8phantomdxl = "bl31-imx8qx.bin"
 ATF_MACHINE_NAME_mx8dxl = "bl31-imx8dxl.bin"
+ATF_MACHINE_NAME_mx8dx = "bl31-imx8dx.bin"
 ATF_MACHINE_NAME_append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
 UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
@@ -73,6 +75,7 @@ SOC_TARGET_mx8mn  = "iMX8MN"
 SOC_TARGET_mx8mp  = "iMX8MP"
 SOC_TARGET_mx8dxl = "iMX8DXL"
 SOC_TARGET_mx8phantomdxl = "iMX8QX"
+SOC_TARGET_mx8dx  = "iMX8DX"
 
 DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
@@ -83,6 +86,7 @@ IMXBOOT_TARGETS ?= \
 
 BOOT_STAGING       = "${S}/${SOC_TARGET}"
 BOOT_STAGING_mx8m  = "${S}/iMX8M"
+BOOT_STAGING_mx8dx = "${S}/iMX8QX"
 
 SOC_FAMILY      = "INVALID"
 SOC_FAMILY_mx8  = "mx8"
