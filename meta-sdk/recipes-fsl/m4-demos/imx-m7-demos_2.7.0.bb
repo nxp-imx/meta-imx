@@ -31,7 +31,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fd4b227530cd88a82af6a5982cfb724d"
 SRC_URI[imx8mn.md5sum] = "4dd5b924a6486efba82474da9e0dbe1d"
 SRC_URI[imx8mn.sha256sum] = "9785721f2863ad6fa14cfcb63a813789bbcd206ff2f38c27e35235c9ae154e9f"
 
-SRC_URI[imx8mp.md5sum] = "4dd5b924a6486efba82474da9e0dbe1d"
-SRC_URI[imx8mp.sha256sum] = "9785721f2863ad6fa14cfcb63a813789bbcd206ff2f38c27e35235c9ae154e9f"
+SRC_URI[imx8mp.md5sum] = "106361256fa92a894147e8050054b2fc"
+SRC_URI[imx8mp.sha256sum] = "789c5c402d6d564df4ff8f01e3d7ce1bc091c45567b3832ab91d14fae98b2a3e"
 
 COMPATIBLE_MACHINE = "(mx8mn|mx8mp)"
