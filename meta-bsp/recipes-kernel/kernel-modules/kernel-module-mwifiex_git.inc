@@ -13,3 +13,5 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "virtual/kernel"
 do_configure[depends] += "make-mod-scripts:do_compile"
+
+RRECOMMENDS_${PN} = "wireless-tools"
