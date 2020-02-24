@@ -9,7 +9,6 @@ IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=h
 SRC_URI = " \
     ${IMXTEST_SRC};branch=${SRCBRANCH} \
     file://0001-pxp-test-Fix-format-security-error.patch \
-    file://0001-v4l2-Fix-security-problem-that-now-breaks-the-build.patch \
     file://memtool_profile \
 "
 
