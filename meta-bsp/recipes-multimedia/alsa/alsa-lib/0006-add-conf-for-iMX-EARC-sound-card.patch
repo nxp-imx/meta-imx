@@ -1,0 +1,111 @@
+From aaf9bdf0593be1cb8532d8a5dcafc2eca27046b3 Mon Sep 17 00:00:00 2001
+From: Viorel Suman <viorel.suman@nxp.com>
+Date: Sat, 22 Feb 2020 10:11:59 +0200
+Subject: [PATCH] add conf for iMX EARC sound card
+Content-Type: text/plain; charset="iso-8859-1"
+
+Upstream Status: Pending
+
+Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
+---
+ src/conf/cards/IMX-EARC.conf | 60 ++++++++++++++++++++++++++++++++++++++++++++
+ src/conf/cards/Makefile.am   |  3 ++-
+ src/conf/cards/aliases.conf  |  1 +
+ 3 files changed, 63 insertions(+), 1 deletion(-)
+ create mode 100644 src/conf/cards/IMX-EARC.conf
+
+diff --git a/src/conf/cards/IMX-EARC.conf b/src/conf/cards/IMX-EARC.conf
+new file mode 100644
+index 0000000..24f7668
+--- /dev/null
++++ b/src/conf/cards/IMX-EARC.conf
+@@ -0,0 +1,60 @@
++#
++# Configuration for the IMX-EARC sound card using software IEC958
++# subframe conversion
++#
++
++# default with dmix & dsnoop
++IMX-EARC.pcm.default {
++	@args [ CARD ]
++	@args.CARD {
++		type string
++	}
++	type asym
++	playback.pcm {
++		type plug
++		slave.pcm {
++			@func concat
++			strings [ "dmix:" $CARD ",FORMAT=S32_LE" ]
++		}
++	}
++	capture.pcm {
++		type plug
++		slave.pcm {
++			@func concat
++			strings [ "dsnoop:" $CARD ",FORMAT=S32_LE" ]
++		}
++	}
++}
++
++<confdir:pcm/iec958.conf>
++
++IMX-EARC.pcm.iec958.0 {
++	@args [ CARD AES0 AES1 AES2 AES3 ]
++	@args.CARD {
++		type string
++	}
++	@args.AES0 {
++		type integer
++	}
++	@args.AES1 {
++		type integer
++	}
++	@args.AES2 {
++		type integer
++	}
++	@args.AES3 {
++		type integer
++	}
++	type iec958
++	slave {
++		format IEC958_SUBFRAME_LE
++		pcm {
++			type plug
++			slave.pcm {
++				type hw
++				card $CARD
++			}
++		}
++	}
++	status [ $AES0 $AES1 $AES2 $AES3 ]
++}
+diff --git a/src/conf/cards/Makefile.am b/src/conf/cards/Makefile.am
+index 34fa5a3..07ccd8d 100644
+--- a/src/conf/cards/Makefile.am
++++ b/src/conf/cards/Makefile.am
+@@ -61,7 +61,8 @@ cfg_files = aliases.conf \
+ 	VXPocket440.conf \
+ 	CS42888.conf \
+ 	IMX-HDMI.conf \
+-	AK4458.conf
++	AK4458.conf \
++	IMX-EARC.conf
+ 
+ if BUILD_ALISP
+ cfg_files += aliases.alisp
+diff --git a/src/conf/cards/aliases.conf b/src/conf/cards/aliases.conf
+index 5d92ac7..b231e36 100644
+--- a/src/conf/cards/aliases.conf
++++ b/src/conf/cards/aliases.conf
+@@ -60,6 +60,7 @@ VC4-HDMI cards.vc4-hdmi
+ cs42888-audio cards.CS42888
+ imx-hdmi-soc cards.IMX-HDMI
+ ak4458-audio cards.AK4458
++imx-audio-earc cards.IMX-EARC
+ 
+ <confdir:pcm/default.conf>
+ <confdir:pcm/dmix.conf>
+-- 
+2.7.4
+
