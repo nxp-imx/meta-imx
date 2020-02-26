@@ -1,4 +1,4 @@
-SRCBRANCH = "imx_2.0.y"
+SRCBRANCH = "imx_5.4.3_2.0.0"
 ATF_SRC ?= "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https"
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH} \
            file://0001-Allow-BUILD_STRING-to-be-set-in-.revision-file.patch \
