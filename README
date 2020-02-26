@@ -1,4 +1,4 @@
-i.MX Linux Yocto Project BSP 5.4.3_1.1.0 Release
+i.MX Linux Yocto Project BSP 5.4.3_2.0.0 Release
 =====================================================
 
 Note this is release is not a production release.
@@ -8,8 +8,12 @@ The following boards were tested in this release.
 
    * NXP i.MX 8MQuad EVK (imx8mqevk)
    * NXP i.MX 8MMini EVK (imx8mmevk)
+   * NXP i.MX 8MNano EVK (imx8mnevk)
+   * NXP i.MX 8MPlus EVK (imx8mpevk)
    * NXP i.MX 8QuadMax MEK (imx8qmmek)
    * NXP i.MX 8QuadXPlus MEK (imx8qxpmek)
+   * NXP i.MX 8DualX MEK (imx8dxmek)
+   * NXP i.MX 8DXL EVK (imdx8dxlevk)
    * NXP i.MX 7ULP EVK (imx7ulpevk)
    * NXP i.MX 7Dual SABRE Smart Device (imx7dsabresd)
    * NXP i.MX 6QuadPlus SABRE Device (imx6qpsabresd)
