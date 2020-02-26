@@ -69,6 +69,8 @@ do_install() {
 
     mv ${D}${base_libdir}/firmware/xcvr/ ${D}${base_libdir}/firmware/imx/xcvr/
 
+    mv ${D}${base_libdir}/firmware/xuvi/ ${D}${base_libdir}/firmware/imx/xuvi/
+
     # Install HDMI Firmware: hdmitxfw.bin, hdmirxfw.bin & dpfw.bin into lib/firmware/imx/hdmi
     install -d ${D}${base_libdir}/firmware/imx/hdmi
     mv ${D}${base_libdir}/firmware/hdmi/cadence/hdmitxfw.bin ${D}${base_libdir}/firmware/imx/hdmi
@@ -103,7 +105,7 @@ ALLOW_EMPTY_${PN} = "1"
 
 PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-*"
 
-PACKAGES =+ "${PN}-epdc ${PN}-scfw ${PN}-sdma ${PN}-easrc ${PN}-regulatory ${PN}-hdmi ${PN}-xcvr"
+PACKAGES =+ "${PN}-epdc ${PN}-scfw ${PN}-sdma ${PN}-easrc ${PN}-regulatory ${PN}-hdmi ${PN}-xcvr ${PN}-xuvi"
 
 RDEPENDS_${PN}-epdc = "bash"
 RDEPENDS_${PN}-sdma = "bash"
@@ -117,6 +119,6 @@ FILES_${PN}-easrc = "${base_libdir}/firmware/imx/easrc/"
 FILES_${PN}-regulatory = "${sysconfdir}/regulatory ${systemd_system_unitdir}/regulatory-firmware.service"
 FILES_${PN}-hdmi = "${base_libdir}/firmware/imx/hdmi/ ${sysconfdir}/hdmi ${systemd_system_unitdir}/hdmi-firmware.service"
 FILES_${PN}-xcvr = "${base_libdir}/firmware/imx/xcvr/"
-
+FILES_${PN}-xuvi = "${base_libdir}/firmware/imx/xuvi/"
 
 COMPATIBLE_MACHINE = "(imx)"
