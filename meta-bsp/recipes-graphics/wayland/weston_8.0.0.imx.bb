@@ -3,7 +3,7 @@ require recipes-graphics/wayland/weston_7.0.0.bb
 SRC_URI_remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRC_URI_prepend = "${WESTON_SRC};branch=weston-imx-8.0 "
-SRCREV = "491c9b1038c8a99c015554875909a4033d95d4c7"
+SRCREV = "7f144f8195b81bc2aa907e8fa04cd9bacf79259f"
 S = "${WORKDIR}/git"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
