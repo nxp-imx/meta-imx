@@ -33,7 +33,7 @@ DEPENDS = " \
     arm-compute-library \
 "
 
-RDEPENDS_${PN} = " arm-compute-library protobuf boost "
+RDEPENDS_${PN} = " arm-compute-library protobuf boost nn-imx"
 
 PACKAGECONFIG_OPENCL       = ""
 PACKAGECONFIG_OPENCL_mx8   = "opencl"
