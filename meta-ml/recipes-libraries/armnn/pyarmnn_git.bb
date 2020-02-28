@@ -8,7 +8,7 @@ PV = "19.08"
 
 PYARMNN_SRC ?= "git://github.com/nxpmicro/pyarmnn-release.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "f25fe31527db043acebb611f617b925d2c7253a6"
+SRCREV = "9cb28c0451db9aa1acae1df5be286bbed089782a"
 
 SRC_URI = " \
     ${PYARMNN_SRC};branch=${SRCBRANCH} \
@@ -20,6 +20,13 @@ S = "${WORKDIR}/git"
 RDEPENDS_${PN} += "armnn protobuf"
 
 do_install(){
+	# Install examples
+	install -d ${D}${bindir}/${PN}-${PV}/examples
+	for example in ${S}/examples/*
+	do
+	    install -m 0555 $example ${D}${bindir}/${PN}-${PV}/examples
+	done
+
 	# Install wheel file
 	install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
 	${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
