@@ -17,7 +17,7 @@ LOCALVERSION = "-2.0.0"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
 
-SRCREV = "987140ce7820df1010341c651713f96cac720160"
+SRCREV = "da7dda72441d10c4c84e3568998f595b74e2efdc"
 
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
