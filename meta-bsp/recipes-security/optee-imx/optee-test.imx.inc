@@ -7,7 +7,7 @@ DEPENDS_remove = "python-pycrypto-native"
 DEPENDS_append = " python3-pycrypto-native"
 
 SRC_URI_remove = "file://0001-regression-4011-correct-potential-overflow.patch \
-           	file://0001-xtest-prevent-unexpected-build-warning-with-strncpy.patch \
+                  file://0001-xtest-prevent-unexpected-build-warning-with-strncpy.patch \
 		"
 B = "${WORKDIR}/build"
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2019 NXP
+# Copyright (C) 2019-2020 NXP
 require optee-client.imx.inc
 
 SRCBRANCH = "imx_3.7.y"
