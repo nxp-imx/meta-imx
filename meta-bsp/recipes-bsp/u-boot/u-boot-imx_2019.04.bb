@@ -24,7 +24,7 @@ S = "${WORKDIR}/git"
 
 inherit fsl-u-boot-localversion
 
-LOCALVERSION ?= "-5.4.3-2.1.0"
+LOCALVERSION ?= "-5.4.24-2.1.0"
 
 BOOT_TOOLS = "imx-boot-tools"
 
