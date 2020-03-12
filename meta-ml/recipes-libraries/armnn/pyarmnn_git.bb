@@ -17,7 +17,7 @@ inherit python3native
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} += "armnn protobuf"
+RDEPENDS_${PN} += "armnn protobuf python3-pillow python3-pip python3-requests python3-numpy"
 
 do_install(){
 	# Install examples
