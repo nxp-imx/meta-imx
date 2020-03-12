@@ -8,11 +8,19 @@ inherit python3native
 DEPENDS_remove = "python-pycrypto-native"
 DEPENDS_append = " python3-pycrypto-native python3-pyelftools-native"
 
-PLATFORM_FLAVOR_mx8mn	= "mx8mnevk"
-PLATFORM_FLAVOR_mx8qxp	= "mx8qxpmek"
-PLATFORM_FLAVOR_mx8mp   = "mx8mpevk"
-PLATFORM_FLAVOR_mx8dx   = "mx8dxmek"
-PLATFORM_FLAVOR_mx8dxl  = "mx8dxlevk"
+# The recipe uses Machine overrides variable 
+# to select the suitable OP-TEE Platform Flavor.
+# The reason is that from an OP-TEE point of view there
+# are no differences between for example a imx8mnddr4evk
+# and a imx8mnevk MACHINE. In this example, the PLATFORM_FLAVOR 
+# defined is imx8mnevk, the other MACHINE derivatives 
+# are just using the original one.
+PLATFORM_FLAVOR_mx8mn		= "mx8mnevk"
+PLATFORM_FLAVOR_mx8qxp		= "mx8qxpmek"
+PLATFORM_FLAVOR_mx8mp   	= "mx8mpevk"
+PLATFORM_FLAVOR_mx8dx   	= "mx8dxmek"
+PLATFORM_FLAVOR_mx8dxl  	= "mx8dxlevk"
+PLATFORM_FLAVOR_mx8phantomdxl 	= "mx8qxpmek"
 
 OPTEE_CORE_LOG_LEVEL ?= "1"
 OPTEE_TA_LOG_LEVEL ?= "0"
