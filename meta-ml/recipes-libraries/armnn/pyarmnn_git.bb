@@ -21,10 +21,10 @@ RDEPENDS_${PN} += "armnn protobuf"
 
 do_install(){
 	# Install examples
-	install -d ${D}${bindir}/${PN}-${PV}/examples
+	install -d ${D}${bindir}/armnn-${PV}/examples
 	for example in ${S}/examples/*
 	do
-	    install -m 0555 $example ${D}${bindir}/${PN}-${PV}/examples
+	    install -m 0555 $example ${D}${bindir}/armnn-${PV}/examples
 	done
 
 	# Install wheel file
