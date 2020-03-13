@@ -10,20 +10,14 @@ SRC_URI += " \
 SRCREV_murata-qca = "a0026b646ce6adfb72f135ffa8a310f3614b2272"
 
 # Firmware for Murata CYW4339/CYW43430/CYW43455/CYW4356/CYW4359 Module
+# Firmware for Marvell Wi-Fi Modules
 IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
 SRC_URI += " \
            ${IMX_FIRMWARE_SRC};branch=master;destsuffix=imx-firmware;name=imx-firmware \
 "
-SRCREV_imx-firmware = "f6d0859f9435796f03ae93b70b5f92f4406bc56d"
+SRCREV_imx-firmware = "4054827650f833f646899e99af78bbdfb89b9579"
 
-# Firmware for Marvell Wi-Fi Modules
-MRVL_FIRMWARE_SRC ?= "git://github.com/NXP/mwifiex-firmware.git;protocol=https"
-SRC_URI += " \
-           ${MRVL_FIRMWARE_SRC};branch=master;destsuffix=mwifiex-firmware;name=mwifiex-firmware \
-"
-SRCREV_mwifiex-firmware = "c934f561042d0b3f93a540bf44cb72f826417d32"
-
-SRCREV_FORMAT = "default_murata-qca_imx-firmware_mwifiex-firmware"
+SRCREV_FORMAT = "default_murata-qca_imx-firmware"
 
 do_install_append () {
     # Install firmware.conf for QCA modules
@@ -69,12 +63,12 @@ do_install_append () {
     install -m 0644 ${WORKDIR}/imx-firmware/cyw-wifi-bt/1FD_CYW4359/BCM4349B1_002.002.014.0077.0083.hcd ${D}${sysconfdir}/firmware
 
     # Install Marvell PCIE8997 firmware
-    install -m 0644 ${WORKDIR}/mwifiex-firmware/mrvl/FwImage_8997/pcie8997_wlan_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
-    install -m 0644 ${WORKDIR}/mwifiex-firmware/mrvl/FwImage_8997/pcieuart8997_combo_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
-    install -m 0644 ${WORKDIR}/mwifiex-firmware/mrvl/FwImage_8997/helper_uart_3000000.bin ${D}${nonarch_base_libdir}/firmware/mrvl
-    install -m 0644 ${WORKDIR}/mwifiex-firmware/mrvl/FwImage_8997/uart8997_bt_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/pcie8997_wlan_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/pcieuart8997_combo_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/helper_uart_3000000.bin ${D}${nonarch_base_libdir}/firmware/mrvl
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/uart8997_bt_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
     install -d ${D}${datadir}/mrvl_wireless/bin_pcie8997
-    install -m 0644 ${WORKDIR}/mwifiex-firmware/mrvl/FwImage_8997/fw_loader_arm64 ${D}${datadir}/mrvl_wireless/bin_pcie8997
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/fw_loader_arm64 ${D}${datadir}/mrvl_wireless/bin_pcie8997
 
 }
 
