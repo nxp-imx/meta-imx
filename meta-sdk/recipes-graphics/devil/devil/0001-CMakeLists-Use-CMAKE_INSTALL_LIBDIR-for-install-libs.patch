@@ -1,0 +1,81 @@
+From ced941e130d7a953f1cc275077288b7119df3067 Mon Sep 17 00:00:00 2001
+From: Cristinel Panfir <cristinel.panfir@nxp.com>
+Date: Fri, 13 Mar 2020 10:22:36 +0000
+Subject: [PATCH] CMakeLists: Use CMAKE_INSTALL_LIBDIR for install libs/pc
+
+Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
+---
+ src-IL/CMakeLists.txt   | 6 +++---
+ src-ILU/CMakeLists.txt  | 6 +++---
+ src-ILUT/CMakeLists.txt | 6 +++---
+ 3 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/src-IL/CMakeLists.txt b/src-IL/CMakeLists.txt
+index 02e4f03..8aec4ce 100644
+--- a/src-IL/CMakeLists.txt
++++ b/src-IL/CMakeLists.txt
+@@ -248,14 +248,14 @@ configure_file( pkgconfig/IL.pc.cmake.in
+ 
+ # Installation
+ install (TARGETS IL
+-    ARCHIVE DESTINATION lib
+-    LIBRARY DESTINATION lib
++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+     RUNTIME DESTINATION bin
+ )
+ install (FILES ../include/IL/il.h DESTINATION include/IL)
+ 
+ install(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/IL.pc
+-	DESTINATION lib/pkgconfig
++	DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+ )
+ 
+diff --git a/src-ILU/CMakeLists.txt b/src-ILU/CMakeLists.txt
+index 17a3afe..c76331b 100644
+--- a/src-ILU/CMakeLists.txt
++++ b/src-ILU/CMakeLists.txt
+@@ -74,14 +74,14 @@ endif(UNICODE)
+ 
+ # Installation
+ install (TARGETS ILU
+-    ARCHIVE DESTINATION lib
+-    LIBRARY DESTINATION lib
++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+     RUNTIME DESTINATION bin
+ )
+ install (FILES ../include/IL/ilu.h DESTINATION include/IL)
+ 
+ install(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/ILU.pc
+-	DESTINATION lib/pkgconfig
++	DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+ )
+ 
+diff --git a/src-ILUT/CMakeLists.txt b/src-ILUT/CMakeLists.txt
+index 21470cb..8ae7e77 100644
+--- a/src-ILUT/CMakeLists.txt
++++ b/src-ILUT/CMakeLists.txt
+@@ -72,14 +72,14 @@ endif(UNICODE)
+ 
+ # Installation
+ install (TARGETS ILUT
+-    ARCHIVE DESTINATION lib
+-    LIBRARY DESTINATION lib
++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+     RUNTIME DESTINATION bin
+ )
+ install (FILES ../include/IL/ilut.h DESTINATION include/IL)
+ 
+ install(FILES
+     ${CMAKE_CURRENT_BINARY_DIR}/ILUT.pc
+-	DESTINATION lib/pkgconfig
++	DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+ )
+ 
+-- 
+2.7.4
+
