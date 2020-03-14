@@ -87,7 +87,7 @@ do_install() {
     install ${B}/inmates/tools/${JH_ARCH}/linux-loader.bin ${D}${INMATES_DIR}/tools/${JH_ARCH}
 
     install -d ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
-    install -m 0644 ${B}/build${base_libdir}/pyjailhouse/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
+    install -m 0644 ${B}/build/lib/pyjailhouse/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
 }
 
 PACKAGE_BEFORE_PN = "kernel-module-jailhouse"
