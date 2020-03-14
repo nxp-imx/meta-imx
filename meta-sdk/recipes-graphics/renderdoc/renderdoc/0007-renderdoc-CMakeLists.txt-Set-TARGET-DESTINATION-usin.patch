@@ -1,0 +1,27 @@
+From bd3b72b3ecf23545ea8c799033cd642a07cefa3b Mon Sep 17 00:00:00 2001
+From: Cristinel Panfir <cristinel.panfir@nxp.com>
+Date: Fri, 13 Mar 2020 22:22:17 +0200
+Subject: [PATCH] renderdoc/CMakeLists.txt: Set TARGET DESTINATION using
+ CMAKE_INSTALL_LIBDIR
+
+Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
+---
+ renderdoc/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/renderdoc/CMakeLists.txt b/renderdoc/CMakeLists.txt
+index 8e150e1..ae5ae6a 100644
+--- a/renderdoc/CMakeLists.txt
++++ b/renderdoc/CMakeLists.txt
+@@ -551,7 +551,7 @@ if(ANDROID)
+     endif()
+ endif()
+ 
+-install (TARGETS renderdoc DESTINATION lib${LIB_SUFFIX}/${LIB_SUBFOLDER})
++install (TARGETS renderdoc DESTINATION ${CMAKE_INSTALL_LIBDIR}/${LIB_SUBFOLDER})
+ 
+ # Copy in application API header to include
+ install (FILES api/app/renderdoc_app.h DESTINATION include RENAME renderdoc.h)
+-- 
+2.7.4
+
