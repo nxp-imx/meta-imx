@@ -2,4 +2,4 @@
 require optee-os.imx.inc
 
 SRCBRANCH = "imx_3.7.y"
-SRCREV = "25fee73c10f0cf077b6707256ccc1950c1120472"
+SRCREV = "b32a9b6b9fa474359464ca70e62b796a45e16e36"
