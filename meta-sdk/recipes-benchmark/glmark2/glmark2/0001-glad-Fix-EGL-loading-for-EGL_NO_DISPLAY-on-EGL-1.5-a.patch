@@ -7,7 +7,7 @@ EGL loading was failing for a display of EGL_NO_DISPLAY.
 Allow loading EGL 1.5 and above since eglQueryString supports
 EGL_NO_DISPLAY in this case.
 
-Upstream-Status: Pending
+Upstream-Status: Accepted [https://github.com/Dav1dde/glad/commit/434695fa99db397a8edc4617207c7983684cd93e]
 
 Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
 ---
