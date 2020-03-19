@@ -27,7 +27,7 @@ SOC_TOOLS_TESTAPPS_imx = "${SOC_TOOLS_IMX_TESTAPPS}"
 SOC_TOOLS_TEST = ""
 SOC_TOOLS_TEST_imx = "imx-test"
 SOC_TOOLS_TEST_imxgpu  = "imx-test imx-gpu-viv-demos"
-SOC_TOOLS_TEST_append_mx8qm = " imx-seco-libs"
+SOC_TOOLS_TEST_append_mx8qm = " imx-seco-libs dvbapp-tests"
 SOC_TOOLS_TEST_append_mx8x = " imx-seco-libs"
 
 RDEPENDS_${PN} += " \

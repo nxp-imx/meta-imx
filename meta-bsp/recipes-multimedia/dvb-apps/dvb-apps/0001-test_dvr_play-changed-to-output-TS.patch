@@ -1,0 +1,63 @@
+From 2249bbad054e5e3360430cb444fa6bdfa46ca28c Mon Sep 17 00:00:00 2001
+From: Bing Song <bing.song@nxp.com>
+Date: Wed, 18 Mar 2020 21:32:18 +0800
+Subject: [PATCH] test_dvr_play: changed to output TS.
+
+Changed to output TS and remove print log.
+
+Upstream Status: i.MX Specific
+
+Signed-off-by: Bing Song <bing.song@nxp.com>
+---
+ test/test_dvr_play.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/test/test_dvr_play.c b/test/test_dvr_play.c
+index 7ab665f..0150ab0 100644
+--- a/test/test_dvr_play.c
++++ b/test/test_dvr_play.c
+@@ -47,18 +47,18 @@ void play_file_dvr(int filefd, int dvrfd)
+ 
+ 	while ((count = read(filefd, buf, BUFSIZE)) > 0) {
+ 		total += count;
+-		fprintf(stderr, "read  %d (%d total)\n", count, total);
++		//fprintf(stderr, "read  %d (%d total)\n", count, total);
+ 		written = 0;
+ 		while (written < count) {
+ 			bytes = write(dvrfd, buf + written, count - written);
+-			fprintf(stderr, "write %d\n", bytes);
++			//fprintf(stderr, "write %d\n", bytes);
+ 			if (bytes < 0) {
+ 				perror("write dvr");
+ 				return;
+ 			}
+ 			else if (bytes == 0) {
+ 				fprintf(stderr, "write dvr: 0 bytes !");
+-				return;
++				//return;
+ 			}
+ 			written += bytes;
+ 		}
+@@ -78,7 +78,7 @@ void set_pid(int fd, int pid, int type)
+ 
+ 	pesFilterParams.pid = pid;
+ 	pesFilterParams.input = DMX_IN_DVR;
+-	pesFilterParams.output = DMX_OUT_DECODER;
++	pesFilterParams.output = DMX_OUT_TS_TAP;//DMX_OUT_DECODER;
+ 	pesFilterParams.pes_type = type;
+ 	pesFilterParams.flags = DMX_IMMEDIATE_START;
+ 	if (ioctl(fd, DMX_SET_PES_FILTER, &pesFilterParams) < 0)
+@@ -130,8 +130,8 @@ int main(int argc, char **argv)
+ 	/* playback timing is controlled via A/V PTS, so we cannot start
+ 	 * writing to the DVR device before the PIDs are set...
+ 	 */
+-	set_pid(afd, apid, DMX_PES_AUDIO);
+-	set_pid(vfd, vpid, DMX_PES_VIDEO);
++	//set_pid(afd, apid, DMX_PES_AUDIO);
++	//set_pid(vfd, vpid, DMX_PES_VIDEO);
+ 
+ 	play_file_dvr(filefd, dvrfd);
+ 
+-- 
+2.7.4
+
