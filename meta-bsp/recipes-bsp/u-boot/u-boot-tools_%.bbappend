@@ -24,7 +24,6 @@ export DEFAULT_BUILD_LDFLAGS = "-L${STAGING_LIBDIR_NATIVE} \
 
 EXTRA_OEMAKE_class-native = 'CC="${BUILD_CC} ${BUILD_CFLAGS} ${DEFAULT_BUILD_LDFLAGS}" HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${DEFAULT_BUILD_LDFLAGS}" STRIP=true V=1'
 
-SSTATEPOSTUNPACKFUNCS_remove_class-native = "uninative_changeinterp"
 
 do_compile() {
 	oe_runmake sandbox_defconfig
