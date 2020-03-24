@@ -1,4 +1,4 @@
-# Copyright 2017-2019 NXP
+# Copyright 2017-2020 NXP
 
 require imx-vpu-hantro.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9"
