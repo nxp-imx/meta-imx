@@ -21,6 +21,11 @@ EXTRA_OEMAKE = "'TARGET_ARCH=${TARGET_ARCH}' 'CXX=${CXX}' 'CC=${CC}' 'AR=${AR}'"
 
 do_configure() {
 
+    export HTTP_PROXY=${http_proxy}
+    export HTTPS_PROXY=${https_proxy}
+    export http_proxy=${http_proxy}
+    export https_proxy=${https_proxy}
+
     ${S}/tensorflow/lite/tools/make/download_dependencies.sh
 
     # Create Makefile in repo root so we can use do_compile command 'as-is'
