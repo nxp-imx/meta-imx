@@ -6,18 +6,29 @@ require recipes-fsl/images/imx-image-multimedia.bb
 
 CONFLICT_DISTRO_FEATURES = "directfb"
 
-ML_PKGS ?= ""
-ML_PKGS_mx8 = "packagegroup-imx-ml"
-ML_PKGS_mx8dxl = ""
-ML_PKGS_mx8phantomdxl = ""
+# Add machine learning for certain SoCs
+ML_PKGS                   ?= ""
+ML_STATICDEV              ?= ""
+ML_PKGS_mx8                = "packagegroup-imx-ml"
+ML_STATICDEV_mx8           = "tensorflow-lite-staticdev"
+ML_PKGS_mx8dxl             = ""
+ML_STATICDEV_mx8dxl        = ""
+ML_PKGS_mx8phantomdxl      = ""
+ML_STATICDEV_mx8phantomdxl = ""
 
-OPENCV_PKGS ?= ""
-OPENCV_PKGS_append_imxgpu = " \
+# Add opencv for i.MX GPU
+OPENCV_PKGS       ?= ""
+OPENCV_PKGS_imxgpu = " \
     opencv-apps \
     opencv-samples \
     python3-opencv \
 "
+
 IMAGE_INSTALL += " \
     ${OPENCV_PKGS} \
     ${ML_PKGS} \
+"
+
+TOOLCHAIN_TARGET_TASK += " \
+    ${ML_STATICDEV} \
 "
