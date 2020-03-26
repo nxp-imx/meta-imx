@@ -10,21 +10,6 @@ SED_CONFIG_DISABLE_remove_arm = "CONFIG_EFI_LOADER"
 SED_CONFIG_DISABLE_remove_armeb = "CONFIG_EFI_LOADER"
 SED_CONFIG_DISABLE_remove_aarch64 = "CONFIG_EFI_LOADER"
 
-# Reset BUILT_LDFLGGS to build u-boot-tools-native
-# to remove dynamic-linker setting as uninative feature enabled.
-# So this native tools uboot-mkimage can be copied out for standalone use.
-export DEFAULT_BUILD_LDFLAGS = "-L${STAGING_LIBDIR_NATIVE} \
-                        -L${STAGING_BASE_LIBDIR_NATIVE} \
-                        -Wl,--enable-new-dtags \
-                        -Wl,-rpath-link,${STAGING_LIBDIR_NATIVE} \
-                        -Wl,-rpath-link,${STAGING_BASE_LIBDIR_NATIVE} \
-                        -Wl,-rpath,${STAGING_LIBDIR_NATIVE} \
-                        -Wl,-rpath,${STAGING_BASE_LIBDIR_NATIVE} \
-                        -Wl,-O1"
-
-EXTRA_OEMAKE_class-native = 'CC="${BUILD_CC} ${BUILD_CFLAGS} ${DEFAULT_BUILD_LDFLAGS}" HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${DEFAULT_BUILD_LDFLAGS}" STRIP=true V=1'
-
-
 do_compile() {
 	oe_runmake sandbox_defconfig
 	for config in ${SED_CONFIG_DISABLE}; do
