@@ -56,6 +56,10 @@ do_install() {
         $(find . -name "*.h*") \
         ${D}${includedir}/tensorflow/lite
 
+    # install version.h from core
+    install -d ${D}${includedir}/tensorflow/core/public
+    cp ${S}/tensorflow/core/public/version.h ${D}${includedir}/tensorflow/core/public
+
     # install examples
     install -d ${D}${bindir}/${PN}-${PV}/examples
     for example in ${S}/tensorflow/lite/tools/make/gen/linux_${TARGET_ARCH}/bin/*
