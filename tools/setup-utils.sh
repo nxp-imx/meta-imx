@@ -24,6 +24,12 @@ file_override() {
     if [ -f $source_path ]; then
         override_path=$override_root/`basename $source_path`
         if [ -f $override_path ]; then
+            echo "\
+
+WARNING: The file '$PWD/$source_path' is replacing the upstream file '$PWD/$override_path'. \
+Overrides by file replacement are error-prone and discouraged. Please find an \
+alternative override mechanism that uses meta-data only.
+"
             rm $override_path
         fi
     fi
@@ -56,6 +62,11 @@ bbclass_overrides() {
 # Adds the specified layer to bblayers.conf and facilitates
 # the replacement of upstream machine and/or bbclass files by
 # removing upstream files with the same name.
+#
+# WARNING: Overrides by file replacement are error-prone and
+# discouraged, and each such override will be marked with a
+# warning message. Please find an alternative override using
+# meta-data only.
 #
 # If no upstream layer is specified, meta-freescale is used.
 #
