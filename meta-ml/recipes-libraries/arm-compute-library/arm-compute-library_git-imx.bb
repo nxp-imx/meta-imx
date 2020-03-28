@@ -10,6 +10,7 @@ ARM_COMPUTELIBRARY_SRC ?= "git://source.codeaurora.org/external/imx/arm-computel
 SRCBRANCH = "imx_19.08"
 
 SRC_URI = "${ARM_COMPUTELIBRARY_SRC};branch=${SRCBRANCH}"
+
 SRCREV = "16ed8b15fa8d9a1e598c80874da423ab23a7ae1d"
 
 S = "${WORKDIR}/git"
