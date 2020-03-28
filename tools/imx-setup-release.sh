@@ -115,6 +115,9 @@ imx8*)
     ;;
 esac
 
+# copy new EULA into community so setup uses latest i.MX EULA
+cp sources/meta-imx/EULA.txt sources/meta-freescale/EULA
+
 # Set up the basic yocto environment
 if [ -z "$DISTRO" ]; then
    DISTRO=$FSLDISTRO MACHINE=$MACHINE . ./$PROGNAME $BUILD_DIR
