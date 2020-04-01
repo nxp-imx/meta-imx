@@ -4,6 +4,8 @@
 
 require recipes-fsl/images/imx-image-multimedia.bb
 
+inherit populate_sdk_qt5
+
 CONFLICT_DISTRO_FEATURES = "directfb"
 
 # Add machine learning for certain SoCs
@@ -27,6 +29,7 @@ OPENCV_PKGS_imxgpu = " \
 IMAGE_INSTALL += " \
     ${OPENCV_PKGS} \
     ${ML_PKGS} \
+    packagegroup-qt5-imx \
 "
 
 TOOLCHAIN_TARGET_TASK += " \
