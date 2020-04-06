@@ -8,7 +8,11 @@ DEPENDS_append = " python3-pycrypto-native"
 
 SRC_URI_remove = "file://0001-regression-4011-correct-potential-overflow.patch \
                   file://0001-xtest-prevent-unexpected-build-warning-with-strncpy.patch \
-		"
+                  file://0003-sock_server-fix-compilation-against-musl-sys-errno.h.patch \
+                  file://0004-build-ignore-declaration-after-statement-warnings.patch \
+                  file://0005-benchmark_1000-fix-compilation-against-musl-uint.patch \
+                  file://0006-regression_8100-use-null-terminated-strings-with-fil.patch \
+                 "
 B = "${WORKDIR}/build"
 
 TA_DEV_KIT_DIR_aarch64 = "${STAGING_INCDIR}/optee/export-user_ta_arm64/"
