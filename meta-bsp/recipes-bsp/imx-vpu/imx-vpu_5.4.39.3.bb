@@ -1,6 +1,6 @@
 # Copyright (C) 2013-2018 O.S. Systems Software LTDA.
 # Copyright (C) 2013-2016 Freescale Semiconductor
-# Copyright 2017-2018 NXP
+# Copyright 2017-2020 NXP
 
 DESCRIPTION = "Freescale VPU library"
 LICENSE = "Proprietary"
