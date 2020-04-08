@@ -1,1 +1,0 @@
-../../../../poky/meta/recipes-multimedia/gstreamer/gstreamer1.0-plugins.inc

@@ -1,1 +1,0 @@
-../../../../poky/meta/recipes-multimedia/gstreamer/gst-plugins-package.inc
