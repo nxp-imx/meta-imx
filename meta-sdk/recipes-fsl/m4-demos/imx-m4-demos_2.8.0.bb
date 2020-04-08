@@ -1,7 +1,7 @@
 # Copyright 2017-2020 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require imx-m4-demos-2.inc
+require imx-m4-demos-2.8.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9"
 
