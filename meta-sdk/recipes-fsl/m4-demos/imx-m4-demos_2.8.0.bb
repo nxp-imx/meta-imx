@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9"
 SRC_URI[imx7ulp.md5sum] = "eee37bc12642decd41b416fd80972c7c"
 SRC_URI[imx7ulp.sha256sum] = "b6781c2d498ee579adbbd4ca2194e03c6842ff94a53c160644ec44dff8326983"
 
-SRC_URI[imx8mm.md5sum] = "295b6d9d98302d9e2e646a5a98ad1dc6"
-SRC_URI[imx8mm.sha256sum] = "b8323be7e6a7104b141adb116e6e6aa05a92833eb9bea5c205363e76b3000214"
+SRC_URI[imx8mm.md5sum] = "c0c585202032ff5938d4ff8b59bc6339"
+SRC_URI[imx8mm.sha256sum] = "3f4955c030b8a2ca85ef4a175a00555c0c206f9ec9f1ebe38f2d6d78c1bd040e"
 
 SRC_URI[imx8mq.md5sum] = "d0672cc2fcea19110ce706f5fbe88b77"
 SRC_URI[imx8mq.sha256sum] = "bba43b587f0f4fbc3e29d0fd83faeac0310d27760fd0800f542d081bb9e9295e"
