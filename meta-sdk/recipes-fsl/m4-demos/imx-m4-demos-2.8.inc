@@ -27,9 +27,12 @@ do_install () {
     install -m 0644 ${S}/*.elf ${D}${base_libdir}/firmware
 }
 
+DEPLOY_FILE_EXT       ?= "bin"
+DEPLOY_FILE_EXT_mx7ulp = "img"
+
 do_deploy () {
    # Install the demo binaries
-   install -m 0644 ${S}/*.bin ${DEPLOYDIR}/
+   install -m 0644 ${S}/*.${DEPLOY_FILE_EXT} ${DEPLOYDIR}/
 }
 
 addtask deploy after do_install
