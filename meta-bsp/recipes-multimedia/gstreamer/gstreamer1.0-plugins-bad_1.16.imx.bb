@@ -1,9 +1,9 @@
-require recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_1.16.0.bb
+require recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_1.16.1.bb
 
 DEPENDS += "jpeg libdrm"
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
 
-PV = "1.16.0.imx"
+PV = "1.16.1.imx"
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/${PN}:"
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"

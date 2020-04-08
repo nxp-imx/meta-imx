@@ -1,4 +1,4 @@
-require recipes-multimedia/gstreamer/gstreamer1.0-plugins-good_1.16.0.bb
+require recipes-multimedia/gstreamer/gstreamer1.0-plugins-good_1.16.1.bb
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-imx/meta-sdk/dynamic-layers/qt5-layer/recipes-qt/qt5/${PN}:"
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
@@ -14,9 +14,9 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
 "
-SRCREV = "3bcc85705695ee629ac3fb687411bb196d231918"
+SRCREV = "ea3d6b8026de661e5b6cc4aacb2a0444628ba64d"
 
-PV = "1.16.0.imx"
+PV = "1.16.1.imx"
 
 S = "${WORKDIR}/git"
 

@@ -1,18 +1,17 @@
-require recipes-multimedia/gstreamer/gstreamer1.0-plugins-good_1.16.0.bb
+require recipes-multimedia/gstreamer/gstreamer1.0-plugins-good_1.16.1.bb
 
-PV = "1.16.0.imx"
+PV = "1.16.1.imx"
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/${PN}:"
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
 
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "imx-1.16.x"
-SRCREV = "3bcc85705695ee629ac3fb687411bb196d231918"
+SRCREV = "ea3d6b8026de661e5b6cc4aacb2a0444628ba64d"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
-    file://headerfix.patch \
 "
 
 S = "${WORKDIR}/git"
