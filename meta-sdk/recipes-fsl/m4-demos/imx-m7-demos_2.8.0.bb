@@ -1,30 +1,7 @@
 # Copyright 2019-2020 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-SUMMARY = "i.MX M7 core Demo images"
-SECTION = "app"
-LICENSE = "Proprietary"
-
-inherit deploy fsl-eula2-unpack2
-
-SOC        ?= "INVALID"
-SOC_mx8mn   = "imx8mn"
-SOC_mx8mp   = "imx8mp"
-
-IMX_PACKAGE_NAME = "${SOC}-m7-demo-${PV}"
-SRC_URI_append = ";name=${SOC}"
-
-SCR = "SCR-${SOC}-m7-demo.txt"
-
-do_deploy () {
-   # Install the demo binaries
-   cp ${D}/* ${DEPLOYDIR}/
-   #Set 0644 permission for Demo binaries
-   chmod 0644 ${DEPLOYDIR}/*
-}
-addtask deploy after do_install
-
-PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+require imx-mcore-demos-2.8.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9" 
 
