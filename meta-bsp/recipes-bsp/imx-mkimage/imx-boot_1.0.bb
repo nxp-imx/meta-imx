@@ -34,7 +34,7 @@ IMX_M4_DEMOS_mx8dxl = "imx-m4-demos:do_deploy"
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
 M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_srtm_demo.bin"
 M4_DEFAULT_IMAGE_mx8phantomdxl = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
-M4_DEFAULT_IMAGE_mx8dxl = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
+M4_DEFAULT_IMAGE_mx8dxl = "imx8dxl_m4_TCM_rpmsg_lite_str_echo_rtos.bin"
 M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_srtm_demo.bin"
 
 # This package aggregates output deployed by other packages,
