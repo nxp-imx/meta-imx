@@ -9,13 +9,13 @@ inherit deploy fsl-eula2-unpack2
 
 SOC        ?= "INVALID"
 SOC_mx7ulp  = "imx7ulp"
+SOC_mx8dxl  = "imx8dxl"
 SOC_mx8mm   = "imx8mm"
 SOC_mx8mn   = "imx8mn"
 SOC_mx8mp   = "imx8mp"
 SOC_mx8mq   = "imx8mq"
 SOC_mx8qm   = "imx8qm"
 SOC_mx8qxp  = "imx8qx"
-SOC_mx8dxl  = "imx8dxl-phantom"
 SOC_mx8phantomdxl = "imx8dxl-phantom"
 
 MCORE_TYPE  ?= "m4"
