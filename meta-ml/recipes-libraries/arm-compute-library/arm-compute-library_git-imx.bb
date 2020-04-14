@@ -1,7 +1,7 @@
 SUMMARY = "The ARM Computer Vision and Machine Learning library"
 DESCRIPTION = "The ARM Computer Vision and Machine Learning library is a set of functions optimised for both ARM CPUs and GPUs."
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=8948bc85114b3b716576ef8d732f034f \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=2c2e6902c16b52c68b379cecc3fafad7 \
                     file://include/half/LICENSE.txt;md5=fe7e5a4795c76b317919afd2d3da5983"
 
 PV = "19.08+git${SRCPV}"
@@ -11,7 +11,7 @@ SRCBRANCH = "imx_19.08"
 
 SRC_URI = "${ARM_COMPUTELIBRARY_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "16ed8b15fa8d9a1e598c80874da423ab23a7ae1d"
+SRCREV = "887dbf9865041b423cf63ab253173ae21f3bd603"
 
 S = "${WORKDIR}/git"
 
