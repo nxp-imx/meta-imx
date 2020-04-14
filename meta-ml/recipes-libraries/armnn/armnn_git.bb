@@ -10,7 +10,7 @@ PV = "19.08"
 
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
 SRCBRANCH = "branches/armnn_19_08"
-SRCREV = "985e414c581005b3b80276b26bb021d8f7175aa2"
+SRCREV = "eb7a6c94f6376d3c128dacf317bba2fe298286c2"
 
 SRCREV_FORMAT = "armnn"
 
