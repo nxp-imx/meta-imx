@@ -18,9 +18,14 @@ IMAGE_FEATURES += " \
 SDKIMAGE_FEATURES_append = " \
     staticdev-pkgs \
 "
+CLINFO ?= ""
+CLINFO_imxgpu = "clinfo"
+CLINFO_mx8mm = ""
+
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' weston weston-examples weston-init','', d)} \
     imx-test \
     packagegroup-imx-core-tools \
+    ${CLINFO} \
 "
 export IMAGE_BASENAME = "imx-image-core"
