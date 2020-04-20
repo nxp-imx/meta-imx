@@ -4,7 +4,7 @@ SUMMARY = "NXP i.MX SECO firmware"
 DESCRIPTION = "NXP IMX SECO firmware"
 SECTION = "base"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9" 
+LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9"
 
 require imx-seco.inc
 inherit fsl-eula-unpack deploy
