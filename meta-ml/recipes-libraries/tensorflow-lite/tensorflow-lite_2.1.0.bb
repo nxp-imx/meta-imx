@@ -85,8 +85,15 @@ do_install() {
         ${WORKDIR}/tflite_pip/dist/tflite_runtime-*.whl
 }
 
-RDEPENDS_${PN} += "flatbuffers libnn-imx nn-imx python3 python3-numpy"
-
+RDEPENDS_MX8       = ""
+RDEPENDS_MX8_mx8   = "libnn nn-imx"
+RDEPENDS_MX8_mx8mm = ""
+RDEPENDS_${PN}   = " \
+    flatbuffers \
+    python3 \
+    python3-numpy \
+    ${RDEPENDS_MX8} \
+"
 # TensorFlow and TensorFlow Lite both exports few files, suppres the error
 # SSTATE_DUPWHITELIST = "${D}${includedir}"
 SSTATE_DUPWHITELIST = "/"
