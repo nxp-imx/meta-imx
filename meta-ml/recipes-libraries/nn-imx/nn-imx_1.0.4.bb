@@ -32,3 +32,6 @@ do_install () {
 
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
+
+COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE_mx8mm = "(^$)"
