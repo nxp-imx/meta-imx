@@ -15,7 +15,7 @@ IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
 SRC_URI += " \
            ${IMX_FIRMWARE_SRC};branch=master;destsuffix=imx-firmware;name=imx-firmware \
 "
-SRCREV_imx-firmware = "4054827650f833f646899e99af78bbdfb89b9579"
+SRCREV_imx-firmware = "8a185c8007cffd2f4e74bd6df89c6e3eeab02d66"
 
 SRCREV_FORMAT = "default_murata-qca_imx-firmware"
 
@@ -70,11 +70,15 @@ do_install_append () {
     install -d ${D}${datadir}/mrvl_wireless/bin_pcie8997
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/fw_loader_arm64 ${D}${datadir}/mrvl_wireless/bin_pcie8997
 
+    # Install Marvell 8987 firmware
+    install -d ${D}${nonarch_base_libdir}/firmware/nxp
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8987/sdiouart8987_combo_v0.bin ${D}${nonarch_base_libdir}/firmware/nxp
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8987/wifi_mod_para_sd8987.conf ${D}${nonarch_base_libdir}/firmware/nxp
 }
 
 # Use the latest version of sdma firmware in firmware-imx
 PACKAGES_remove = "${PN}-imx-sdma-license ${PN}-imx-sdma-imx6q ${PN}-imx-sdma-imx7d"
-PACKAGES =+ " ${PN}-bcm4359-pcie"
+PACKAGES =+ " ${PN}-bcm4359-pcie ${PN}-nxp8987"
 
 FILES_${PN}-qca += " \
   ${sysconfdir}/bluetooth/firmware.conf \
@@ -117,4 +121,10 @@ FILES_${PN}-pcie8997 += " \
        ${nonarch_base_libdir}/firmware/mrvl/helper_uart_3000000.bin \
        ${nonarch_base_libdir}/firmware/mrvl/uart8997_bt_v4.bin \
        ${datadir}/mrvl_wireless/bin_pcie8997/fw_loader_arm64 \
+"
+
+
+FILES_${PN}-nxp8987 = " \
+       ${nonarch_base_libdir}/firmware/nxp/sdiouart8987_combo_v0.bin \
+       ${nonarch_base_libdir}/firmware/nxp/wifi_mod_para_sd8987.conf \
 "
