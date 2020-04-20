@@ -10,7 +10,7 @@ PV = "19.08"
 
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
 SRCBRANCH = "branches/armnn_19_08"
-SRCREV = "eb7a6c94f6376d3c128dacf317bba2fe298286c2"
+SRCREV = "5ae8257f9a9a0a0369a9d5ce469daeaac21aa661"
 
 SRCREV_FORMAT = "armnn"
 
@@ -32,14 +32,20 @@ DEPENDS = " \
     stb \
     arm-compute-library \
 "
+RDEPENDS_MX8       = ""
+RDEPENDS_MX8_mx8   = "nn-imx"
+RDEPENDS_MX8_mx8mm = ""
+RDEPENDS_${PN}   = " \
+    arm-compute-library \
+    protobuf \
+    boost \
+    ${RDEPENDS_MX8} \
+"
+PACKAGECONFIG_VSI_NPU       = ""
+PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
+PACKAGECONFIG_VSI_NPU_mx8mm = ""
 
-RDEPENDS_${PN} = " arm-compute-library protobuf boost nn-imx"
-
-PACKAGECONFIG_OPENCL       = ""
-PACKAGECONFIG_OPENCL_mx8   = "opencl"
-PACKAGECONFIG_OPENCL_mx8mm = ""
-
-PACKAGECONFIG ??= "neon caffe tensorflow tensorflow_lite onnx unit_tests vsi_npu"
+PACKAGECONFIG ??= "neon caffe tensorflow tensorflow_lite onnx unit_tests ${PACKAGECONFIG_VSI_NPU}"
 
 PACKAGECONFIG[caffe] = "-DBUILD_CAFFE_PARSER=1 -DCAFFE_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-caffe,-DBUILD_CAFFE_PARSER=0,armnn-caffe"
 PACKAGECONFIG[examples] = "-DBUILD_ARMNN_EXAMPLES=1,-DBUILD_ARMNN_EXAMPLES=0, opencv"
