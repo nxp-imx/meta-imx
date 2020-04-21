@@ -9,8 +9,8 @@ SECTION = "kernel"
 LICENSE = "CLOSED"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "d883dd53031126a2138e6d368650d3ba"
-SRC_URI[sha256sum] = "aae06c00b9a36ab5cc5eb26693409602d8d9d479df3c215d941a037d0474ea94"
+SRC_URI[md5sum] = "f07dd4e9fd15829d8652272bc25b1dd9"
+SRC_URI[sha256sum] = "e981cb6f5993da180c50aee77769e86ba381d28779e27556ab0e4fcbc46c0f5f"
 
 inherit allarch
 
