@@ -1,10 +1,6 @@
 require recipes-kernel/kernel-modules/kernel-module-mwifiex_git.inc
 
-SUMMARY = "NXP WiFi SDK"
-
-EXTRA_OEMAKE += " \
-    KERNELDIR=${STAGING_KERNEL_BUILDDIR} \
-"
+SUMMARY = "NXP Wi-Fi SDK"
 
 do_compile () {
     # Change build folder to SDK folder

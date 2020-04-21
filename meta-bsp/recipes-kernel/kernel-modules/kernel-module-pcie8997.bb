@@ -1,6 +1,9 @@
 require kernel-module-mwifiex_git.inc
 
-SUMMARY = "Marvell WiFi driver for PCIE module 8997"
+SUMMARY = "NXP Wi-Fi driver for PCIE module 88w8997"
+
+DEPENDS = "virtual/kernel"
+do_configure[depends] += "make-mod-scripts:do_compile"
 
 EXTRA_OEMAKE += " \
     KERNELDIR=${STAGING_KERNEL_BUILDDIR} \
