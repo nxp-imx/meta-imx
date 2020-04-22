@@ -1,5 +1,5 @@
-PACKAGECONFIG_imxgpu_remove_mx6 = "gbm"
-PACKAGECONFIG_imxgpu_remove_mx7 = "gbm"
+PACKAGECONFIG_imxgpu_remove_mx6 = "gbm x11-egl"
+PACKAGECONFIG_imxgpu_remove_mx7 = "gbm x11-egl"
 
 # Append EGL_CFLAGS to CFLAGS
 CFLAGS_append_imxgpu = " \
