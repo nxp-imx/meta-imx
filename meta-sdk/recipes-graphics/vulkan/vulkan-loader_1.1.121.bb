@@ -30,3 +30,9 @@ PACKAGECONFIG[x11] = "-DBUILD_WSI_XLIB_SUPPORT=ON -DBUILD_WSI_XCB_SUPPORT=ON -DD
 PACKAGECONFIG[wayland] = "-DBUILD_WSI_WAYLAND_SUPPORT=ON, -DBUILD_WSI_WAYLAND_SUPPORT=OFF, wayland"
 
 UPSTREAM_CHECK_GITTAGREGEX = "sdk-(?P<pver>\d+(\.\d+)+)"
+
+# libvulkan.so is loaded dynamically, so put it in the main package
+# instead of -dev
+FILES_SOLIBSDEV = ""
+FILES_${PN} += "${libdir}/lib*${SOLIBSDEV}"
+INSANE_SKIP_${PN} += "dev-so"
