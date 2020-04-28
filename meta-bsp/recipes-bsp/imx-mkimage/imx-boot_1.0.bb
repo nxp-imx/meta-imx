@@ -1,4 +1,4 @@
-# Copyright 2017-2019 NXP
+# Copyright 2017-2020 NXP
 
 require imx-mkimage_git.inc
 require recipes-bsp/imx-seco/imx-seco.inc
@@ -32,10 +32,10 @@ IMX_M4_DEMOS_mx8x   = "imx-m4-demos:do_deploy"
 IMX_M4_DEMOS_mx8dxl = "imx-m4-demos:do_deploy"
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
-M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_srtm_demo.bin"
+M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE_mx8phantomdxl = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
 M4_DEFAULT_IMAGE_mx8dxl = "imx8dxl_m4_TCM_rpmsg_lite_str_echo_rtos.bin"
-M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_srtm_demo.bin"
+M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_power_mode_switch.bin"
 
 # This package aggregates output deployed by other packages,
 # so set the appropriate dependencies
