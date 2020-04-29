@@ -14,8 +14,9 @@ SRC_URI[sha256sum] = "1e902aa4f4c2c61f3fd960a26fa3f6a331683e7d01b0f70c189fa73d6a
 inherit allarch
 
 do_install() {
-	install -d ${D}${nonarch_base_libdir}/firmware/imx/
-	cp -r * ${D}${nonarch_base_libdir}/firmware/imx/
+    # Install sof and sof-tplg folder
+    install -d ${D}${nonarch_base_libdir}/firmware/imx/
+    cp -r sof* ${D}${nonarch_base_libdir}/firmware/imx/
 }
 
 FILES_${PN} = "${nonarch_base_libdir}/firmware/imx"
