@@ -11,4 +11,7 @@ RDEPENDS_${PN}_remove = "qtquick1-dev \
 
 RDEPENDS_${PN}_append = " \
     qtdeclarative-tools \
+    qtquick3d \
+    qtquick3d-dev \
+    qtquick3d-examples \
 "
