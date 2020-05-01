@@ -26,7 +26,7 @@ SRCBRANCH = "master"
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
            file://0001-imx-gst1.0-plugin-Update-KERNEL_VERSION-check.patch \
 "
-SRCREV = "69e14b2a584b9d7d7b5f61c6410a8f737aeb5355"
+SRCREV = "69ad384f462e1a331b9a8f04a7d9ca023af10ea2"
 
 S = "${WORKDIR}/git"
 
