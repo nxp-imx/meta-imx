@@ -15,7 +15,13 @@ do_install_append() {
     rm ${D}${libdir}/libvulkan_VSI.so
     # Copy backend-specific library and rename it for use by vulkan-loader
     # library of the same name
-    mv ${D}${libdir}/libvulkan-${backend}.so.1.1.3 ${D}${libdir}/libvulkan_VSI.so.1.1.3
+    for i in fb wl x11; do
+        if [ "$i" = "${backend}" ]; then
+            mv ${D}${libdir}/libvulkan-${backend}.so.1.1.3 ${D}${libdir}/libvulkan_VSI.so.1.1.3
+        else
+            rm ${D}${libdir}/libvulkan-${i}.so.1.1.3
+        fi
+    done
     patchelf --set-soname libvulkan_VSI.so.1 ${D}${libdir}/libvulkan_VSI.so.1.1.3
     rm ${D}${libdir}/libvulkan.so.1 ${D}${libdir}/libvulkan.so
     ln -s libvulkan_VSI.so.1.1.3 ${D}${libdir}/libvulkan_VSI.so.1
