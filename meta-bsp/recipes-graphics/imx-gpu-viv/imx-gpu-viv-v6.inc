@@ -13,14 +13,11 @@ GLES3_HEADER_REMOVALS_mx8mp  = "gl32.h"
 
 FILES_libgbm-imx_mx8 = "${libdir}/libgbm*${SOLIBS}"
 
-FILES_libvulkan-imx_remove = "${libdir}/libvulkan_VSI${SOLIBS}"
 FILES_libvulkan-imx_append = " ${libdir}/libvulkan_VSI${REALSOLIBS}"
 
-FILES_libopenvx-imx_remove = "${libdir}/libOpenVX${SOLIBS}"
 FILES_libopenvx-imx_append = " ${libdir}/libOpenVX${REALSOLIBS}"
 RDEPENDS_libopenvx-imx = "libnn-imx"
 
-FILES_libopencl-imx_remove = "${libdir}/libOpenCL${SOLIBS}"
 FILES_libopencl-imx_append = " ${libdir}/libOpenCL${REALSOLIBS}"
 
 FILES_libnn-imx = "${libdir}/libNN*${SOLIBS}"
