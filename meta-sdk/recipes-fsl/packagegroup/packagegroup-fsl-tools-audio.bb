@@ -30,8 +30,12 @@ PULSEAUDIO_INSTALL = " \
 ASRC_INSTALL ?= ""
 ASRC_INSTALL_mx8 = "imx-dspc-asrc"
 
+PDM_INSTALL ?= ""
+PDM_INSTALL_mx8 = "imx-sw-pdm"
+
 RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "alsa",  "${ALSA_INSTALL}", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio",  "${PULSEAUDIO_INSTALL}", "", d)} \
     ${ASRC_INSTALL} \
+    ${PDM_INSTALL} \
 "
