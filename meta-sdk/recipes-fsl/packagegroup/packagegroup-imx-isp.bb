@@ -11,7 +11,7 @@ ISP_PKGS = " \
     isp-imx \
     basler-camera \
     basler-camera-dev \
-    kernal-module-isp-vvcam \
+    kernel-module-isp-vvcam \
 "
 RDEPENDS_${PN} = " \
     ${ISP_PKGS} \
