@@ -13,9 +13,13 @@ QT5_IMAGE_INSTALL_APPS_imxgpu3d = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_P
 # Install fonts
 QT5_FONTS = "ttf-dejavu-common ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-serif "
 
+# Install qtquick3d
+QT5_QTQUICK3D = "qtquick3d qtquick3d-dev qtquick3d-examples"
+
 QT5_IMAGE_INSTALL = ""
 QT5_IMAGE_INSTALL_common = " \
     packagegroup-qt5-demos \
+    ${QT5_QTQUICK3D} \
     ${QT5_FONTS} \
     ${QT5_IMAGE_INSTALL_APPS} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxkbcommon', '', d)} \
