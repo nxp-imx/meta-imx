@@ -2,8 +2,8 @@ require imx-gpu-viv-v6.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9"
 
-SRC_URI[md5sum] = "8305da75fef258fd53125875e108a456"
-SRC_URI[sha256sum] = "ee4c75cb70fbc498e30aef83755580d7a2d151cdf50e24eec9f495ae944f70f5"
+SRC_URI[md5sum] = "00631954a3bce08bdaf480ffeba7ce92"
+SRC_URI[sha256sum] = "4c88162e5dcc0edb6e58f4d56de9ee06ada96fc7318b10de305e12b9e2254d17"
 
 do_install_append() {
     if [ "${USE_WL}" = "yes" -o "${USE_X11}" = "yes" ]; then
