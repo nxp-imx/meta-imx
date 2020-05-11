@@ -1,6 +1,6 @@
 require imx-gpu-viv-v6.inc
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9"
+LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9" 
 
 SRC_URI[md5sum] = "cea1dd52b440bf96c592b6b9a621069b"
 SRC_URI[sha256sum] = "68d13d2a9f176435729431679e34094aeb3c9193d2f8cd1e9b96f2922d4e320e"
