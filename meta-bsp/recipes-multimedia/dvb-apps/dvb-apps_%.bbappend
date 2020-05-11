@@ -9,10 +9,11 @@ do_compile () {
     # Build test to generate test_dvr_play
     cd ${S}
     oe_runmake -C lib
+    oe_runmake -C util
     oe_runmake -C test
 }
 
-do_install() {
+do_install_append() {
     install -d ${D}${bindir}
     if [ -e ${S}/test/test_dvr_play ]; then
         cp ${S}/test/test_dvr_play ${D}${bindir}
