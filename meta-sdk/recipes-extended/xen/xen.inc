@@ -1065,6 +1065,9 @@ do_install() {
         sed -i 's#ExecStart=.*qemu-system-i386\(.*\)$#ExecStart=/usr/bin/qemu-system-i386\1#' \
             ${D}${systemd_unitdir}/system/xen-qemu-dom0-disk-backend.service
     fi
+
+    # install domu-imx8*.cfg
+    install ${S}/tools/examples/domu-imx8qm-mek.cfg ${D}${sysconfdir}/xen/
 }
 
 pkg_postinst_${PN}-volatiles() {
