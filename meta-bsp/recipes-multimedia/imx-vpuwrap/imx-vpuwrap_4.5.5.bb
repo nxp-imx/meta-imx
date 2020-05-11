@@ -9,7 +9,7 @@ SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9"
 
 IMX_VPUWRAP_SRC ?= "git://github.com/NXP/vpu_wrapper.git;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "MM_04.05.05_2005_L5.4.24"
 SRC_URI = "${IMX_VPUWRAP_SRC};branch=${SRCBRANCH}"
 SRCREV = "b683295f409490ec481e4ef4ff16bc37d657002e"
 S = "${WORKDIR}/git"
