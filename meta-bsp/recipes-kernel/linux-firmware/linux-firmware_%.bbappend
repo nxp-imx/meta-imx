@@ -4,7 +4,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 # Firmware for Murata QCA Modules
 SRC_URI += " \
-            file://firmware.conf \
             git://github.com/murata-wireless/qca-linux-calibration.git;protocol=https;name=murata-qca;destsuffix=murata-qca \
 "
 SRCREV_murata-qca = "a0026b646ce6adfb72f135ffa8a310f3614b2272"
@@ -20,10 +19,6 @@ SRCREV_imx-firmware = "8a185c8007cffd2f4e74bd6df89c6e3eeab02d66"
 SRCREV_FORMAT = "default_murata-qca_imx-firmware"
 
 do_install_append () {
-    # Install firmware.conf for QCA modules
-    install -d ${D}${sysconfdir}/bluetooth
-    cp ${WORKDIR}/firmware.conf ${D}${sysconfdir}/bluetooth
-
     # Use Murata's QCA calibration files
     install -m 0644 ${WORKDIR}/murata-qca/1CQ/board.bin ${D}${nonarch_base_libdir}/firmware/ath10k/QCA6174/hw3.0/
 
@@ -79,10 +74,6 @@ do_install_append () {
 # Use the latest version of sdma firmware in firmware-imx
 PACKAGES_remove = "${PN}-imx-sdma-license ${PN}-imx-sdma-imx6q ${PN}-imx-sdma-imx7d"
 PACKAGES =+ " ${PN}-bcm4359-pcie ${PN}-nxp8987"
-
-FILES_${PN}-qca += " \
-  ${sysconfdir}/bluetooth/firmware.conf \
-"
 
 FILES_${PN}-bcm4339 += " \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4339-sdio.txt \
