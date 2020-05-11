@@ -19,3 +19,5 @@ PROVIDES = "xen"
 RPROVIDES_${PN}-libxenstore += "xen-libxenstore"
 RPROVIDES_${PN}-libxenctrl += "xen-libxenctrl"
 RPROVIDES_${PN}-libxenguest += "xen-libxenguest"
+
+COMPATIBLE_MACHINE = "(mx8qm)"
