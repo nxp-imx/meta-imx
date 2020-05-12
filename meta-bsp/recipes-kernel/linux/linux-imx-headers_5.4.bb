@@ -1,4 +1,4 @@
-# Copyright 2017-2018 NXP
+# Copyright 2017-2020 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "Installs i.MX-specific kernel headers"
