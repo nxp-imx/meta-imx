@@ -1,4 +1,4 @@
-require recipes-kernel/kernel-modules/kernel-module-mwifiex_git.inc
+require mwifiex_git.inc
 
 SUMMARY = "NXP Wi-Fi SDK"
 
