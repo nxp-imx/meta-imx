@@ -31,7 +31,7 @@ ASRC_INSTALL ?= ""
 ASRC_INSTALL_mx8 = "imx-dspc-asrc"
 
 PDM_INSTALL ?= ""
-PDM_INSTALL_mx8 = "imx-sw-pdm"
+PDM_INSTALL_mx8m = "imx-sw-pdm"
 
 RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "alsa",  "${ALSA_INSTALL}", "", d)} \
