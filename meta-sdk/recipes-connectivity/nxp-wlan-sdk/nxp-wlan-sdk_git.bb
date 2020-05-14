@@ -1,4 +1,4 @@
-require mwifiex_git.inc
+require nxp-wlan-sdk_git.inc
 
 SUMMARY = "NXP Wi-Fi SDK"
 
