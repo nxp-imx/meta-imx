@@ -11,8 +11,8 @@ inherit fsl-eula-unpack deploy
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "05430db082975a04588a02bdaad81fda"
-SRC_URI[sha256sum] = "003422eb773c49a14d6fef4bca1c37ee37062aada62dac11d194cade4cfb62e9"
+SRC_URI[md5sum] = "22a47e14e3f2e713b4b1b2b7ff768b11"
+SRC_URI[sha256sum] = "52ba07633e0f8707d8c26724b5cd03ef96444c8de1e0e134acac50acacf3e7dd"
 
 do_compile[noexec] = "1"
 
