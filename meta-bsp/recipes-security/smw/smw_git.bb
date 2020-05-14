@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982"
 
 DEPENDS = "imx-seco-libs"
 
-SRCBRANCH = "master"
+SRCBRANCH = "imx_5.4.24_2.1.0"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "82dabf3494accf7593015d93806ebf4e9e3e195e"
+SRCREV = "114a5215ca35ce4d13fa471a27401432a6a15d6e"
 
 S = "${WORKDIR}/git"
 
