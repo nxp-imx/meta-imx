@@ -1,4 +1,4 @@
-require kernel-module-mwifiex_git.inc
+require recipes-connectivity/nxp-wlan-sdk/nxp-wlan-sdk_git.inc
 
 SUMMARY = "NXP Wi-Fi driver for PCIE module 88w8997"
 
