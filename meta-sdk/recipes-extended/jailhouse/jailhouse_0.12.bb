@@ -6,7 +6,7 @@ IMX_JAILHOUSE_SRC ?= "git://source.codeaurora.org/external/imx/imx-jailhouse.git
 SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH} \
            file://0001-scripts-include.mk-multilib-Fix-hardcoded-lib-in-fir.patch"
 
-SRCREV = "a88654bdfeb13ed6ce74800360d8616b42269221"
+SRCREV = "90e8fc8ffb06fc6f60badb0c9e916a1ee5e3a1fc"
 
 CELLS = ""
 
