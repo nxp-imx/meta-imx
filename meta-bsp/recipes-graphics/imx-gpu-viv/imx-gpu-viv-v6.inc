@@ -16,7 +16,7 @@ FILES_libgbm-imx_mx8 = "${libdir}/libgbm*${SOLIBS}"
 FILES_libvulkan-imx_append = " ${libdir}/libvulkan_VSI${REALSOLIBS}"
 INSANE_SKIP_libvulkan-imx += "dev-so"
 
-FILES_libopenvx-imx_append = " ${libdir}/libOpenVX${REALSOLIBS}"
+FILES_libopenvx-imx_append = " ${libdir}/libOpenVX${REALSOLIBS} ${libdir}/libOvx*${SOLIBS}"
 RDEPENDS_libopenvx-imx = "libnn-imx"
 INSANE_SKIP_libopenvx-imx += "dev-so"
 
