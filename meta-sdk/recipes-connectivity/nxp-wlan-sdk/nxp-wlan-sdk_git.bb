@@ -6,9 +6,6 @@ do_compile () {
     # Change build folder to SDK folder
     cd ${S}/mxm_wifiex/wlan_src
 
-    export ARCH=arm64
-    export CROSS_COMPILE=aarch64-poky-linux-
-
     oe_runmake build
 }
 
