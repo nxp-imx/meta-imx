@@ -107,7 +107,7 @@ INSANE_SKIP_${PN} += "already-stripped rpaths"
 RDEPENDS_VULKAN       = ""
 RDEPENDS_VULKAN_mx8   = "vulkan-validationlayers vulkan-loader"
 RDEPENDS_VULKAN_mx8mm = ""
-RDEPENDS_${PN} += "${RDEPENDS_VULKAN}"
+RDEPENDS_${PN} += "${RDEPENDS_VULKAN} googletest"
 
 # For backwards compatibility
 RPROVIDES_${PN} = "fsl-gpu-sdk"
