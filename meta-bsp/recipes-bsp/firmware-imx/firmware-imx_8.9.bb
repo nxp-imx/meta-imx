@@ -15,7 +15,7 @@ SRC_URI_append = " \
 
 PE = "1"
 
-inherit allarch systemd
+inherit allarch
 
 do_install() {
     install -d ${D}${base_libdir}/firmware/imx
