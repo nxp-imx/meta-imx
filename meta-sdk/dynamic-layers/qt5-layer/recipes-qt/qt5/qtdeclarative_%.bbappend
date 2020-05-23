@@ -1,5 +1,4 @@
-# Enable examples
-PACKAGECONFIG_append = " examples"
+PACKAGECONFIG_append_class-target = " examples"
 
 PARALLEL_MAKEINST = ""
 PARALLEL_MAKE_task-install = "${PARALLEL_MAKEINST}"
