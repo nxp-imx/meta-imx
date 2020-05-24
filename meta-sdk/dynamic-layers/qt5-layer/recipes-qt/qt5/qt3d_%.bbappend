@@ -1,5 +1,4 @@
-# Enable examples
-PACKAGECONFIG_append = " examples"
+PACKAGECONFIG_append_class-target = " examples"
 
 do_install_append() {
 if ls ${D}${libdir}/pkgconfig/Qt5*.pc >/dev/null 2>&1; then
