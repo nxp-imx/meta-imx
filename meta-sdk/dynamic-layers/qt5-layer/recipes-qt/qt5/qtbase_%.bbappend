@@ -17,40 +17,24 @@ SRC_URI_append_imxgpu = " \
     file://0014-Add-IMX-GPU-support.patch \
     file://0001-egl.prf-Fix-build-error-when-egl-headers-need-platfo.patch \
 "
-SRC_URI_append_imxgpu3d = " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', \
-        '', \
-        'file://0015-Add-eglfs-to-IMX-GPU.patch \
-         file://0016-Configure-eglfs-with-egl-pkg-config.patch', d)} \
-"
 
-PACKAGECONFIG_GL_imxpxp   = "gles2"
-PACKAGECONFIG_GL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gl', '', d)}"
-PACKAGECONFIG_GL_imxgpu3d = "gles2"
-PACKAGECONFIG_append = " accessibility examples"
+PACKAGECONFIG += "examples"
 
-PACKAGECONFIG_MX8_GPU     = ""
-PACKAGECONFIG_MX8_GPU_mx8 = " gbm kms"
-PACKAGECONFIG_append_imxgpu = " ${PACKAGECONFIG_MX8_GPU}"
+PACKAGECONFIG_GL_IMX_GPU      = ""
+PACKAGECONFIG_GL_IMX_GPU_mx8  = "gbm kms"
+PACKAGECONFIG_GL_imxgpu2d += "${PACKAGECONFIG_GL_IMX_GPU}"
+PACKAGECONFIG_GL_imxgpu3d += "${PACKAGECONFIG_GL_IMX_GPU}"
 
-# -eglfs is conditioned on GPU3D with FrameBuffer only
-# -no-opengl -linuxfb are conditioned on GPU2D only
-# Overwrite the original setting which is in meta-freescale layer
-QT_CONFIG_FLAGS_APPEND_imxpxp = "-no-eglfs"
-QT_CONFIG_FLAGS_APPEND_imxgpu2d = "-no-eglfs -no-opengl -linuxfb"
-QT_CONFIG_FLAGS_APPEND_imxgpu3d = "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '-no-eglfs', \
-        bb.utils.contains('DISTRO_FEATURES', 'wayland', '-no-eglfs', \
-            '-eglfs', d), d)}"
-QT_CONFIG_FLAGS_append = " ${QT_CONFIG_FLAGS_APPEND}"
+PACKAGECONFIG_PLATFORM_IMX_GPU     = ""
+PACKAGECONFIG_PLATFORM_IMX_GPU_mx8 = "eglfs"
+PACKAGECONFIG_PLATFORM_imxgpu2d += "${PACKAGECONFIG_PLATFORM_IMX_GPU}"
+PACKAGECONFIG_PLATFORM_imxgpu3d += "${PACKAGECONFIG_PLATFORM_IMX_GPU}"
 
-QT_CONFIG_FLAGS_MX8_GPU     = ""
-QT_CONFIG_FLAGS_MX8_GPU_mx8 = "-eglfs -kms"
-QT_CONFIG_FLAGS_append_imxgpu = " ${QT_CONFIG_FLAGS_MX8_GPU}"
-
-PACKAGECONFIG_MX8_mx8       = "vulkan"
-PACKAGECONFIG_MX8_mx8mm     = ""
-PACKAGECONFIG_append_imxgpu = " ${PACKAGECONFIG_MX8}"
+PACKAGECONFIG_VULKAN_IMX_GPU       = ""
+PACKAGECONFIG_VULKAN_IMX_GPU_mx8   = "vulkan"
+PACKAGECONFIG_VULKAN_IMX_GPU_mx8mm = ""
+PACKAGECONFIG_VULKAN_imxgpu = "${PACKAGECONFIG_VULKAN_IMX_GPU}"
+PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'vulkan', '${PACKAGECONFIG_VULKAN}', '', d)}"
 
 PACKAGECONFIG[vulkan] = "-vulkan,-no-vulkan,vulkan-headers"
 
