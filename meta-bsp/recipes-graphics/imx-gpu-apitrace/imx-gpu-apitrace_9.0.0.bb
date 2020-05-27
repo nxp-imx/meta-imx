@@ -13,12 +13,22 @@ S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig perlnative python3native
 
-PACKAGECONFIG     ??= "egl waffle"
-PACKAGECONFIG_append = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11', ' x11', \
-                                                        '', d), d)}"
-PACKAGECONFIG_append_imxgpu2d = " vivante"
+PACKAGECONFIG_BACKEND_mx6 = " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'waffle', \
+       bb.utils.contains('DISTRO_FEATURES',     'x11',    'x11', \
+                                                             '', d), d)} \
+"
+PACKAGECONFIG_BACKEND_mx7 = "${PACKAGECONFIG_BACKEND_mx6}"
+PACKAGECONFIG_BACKEND_mx8 = "waffle"
+
+PACKAGECONFIG_GPU2D          = ""
+PACKAGECONFIG_GPU2D_imxgpu2d = "vivante"
+
+PACKAGECONFIG = " \
+    egl \
+    ${PACKAGECONFIG_BACKEND} \
+    ${PACKAGECONFIG_GPU2D} \
+"
 
 PACKAGECONFIG[egl] = "-DENABLE_EGL=ON,-DENABLE_EGL=OFF,virtual/egl"
 PACKAGECONFIG[gui] = "-DENABLE_GUI=ON,-DENABLE_GUI=OFF"
