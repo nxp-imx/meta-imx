@@ -4,7 +4,7 @@ SUMMARY = "NXP i.MX SECO library"
 DESCRIPTION = "NXP IMX SECO library"
 SECTION = "base"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://LA_OPT_NXP_Software_License.htm;md5=6a8fcab25f3d3f5c2898456114b91f44"
+LIC_FILES_CHKSUM = "file://EULA.txt;md5=228c72f2a91452b8a03c4cab30f30ef9"
 
 DEPENDS = "zlib"
 
