@@ -14,6 +14,10 @@ SRC_URI = " \
 
 SRCREV = "e4abb926bdfcb139f4c98a1dc79cb9d57481a085" 
 
+PACKAGECONFIG_append_mx8 = " swpdm"
+
+PACKAGECONFIG[swpdm] = "HAS_IMX_SW_PDM=true,HAS_IMX_SW_PDM=false,imx-sw-pdm"
+
 do_compile() {
     CFLAGS="${TOOLCHAIN_OPTIONS}"
     oe_runmake V=1 VERBOSE='' \
