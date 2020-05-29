@@ -13,10 +13,12 @@ IMX_BACKEND = \
 SRC_URI_append = " \
     file://qt5-${IMX_BACKEND}.sh \
 "
-SRC_URI_append_imxgpu = " \
+SRC_URI_3D_ONLY = " \
     file://0014-Add-IMX-GPU-support.patch \
     file://0001-egl.prf-Fix-build-error-when-egl-headers-need-platfo.patch \
 "
+SRC_URI_3D_ONLY_imxgpu2d = ""
+SRC_URI_append_imxgpu3d = " ${SRC_URI_3D_ONLY}"
 
 PACKAGECONFIG += "examples"
 
