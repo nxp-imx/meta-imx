@@ -11,7 +11,7 @@ DEPENDS = "imx-seco-libs"
 SRCBRANCH = "imx_5.4.24_2.1.0"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "114a5215ca35ce4d13fa471a27401432a6a15d6e"
+SRCREV = "2377f162cbb4c6e4099c88ac18b6d68e9873e9a2"
 
 S = "${WORKDIR}/git"
 
