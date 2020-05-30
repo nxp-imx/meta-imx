@@ -14,7 +14,7 @@ SRC_URI = " \
 
 SRCREV = "c856132f0fe812224eafea49b4cd0b05350742ad"
 
-PACKAGECONFIG_append_mx8 = " swpdm"
+PACKAGECONFIG_append_mx8m = " swpdm"
 
 PACKAGECONFIG[swpdm] = "HAS_IMX_SW_PDM=true,HAS_IMX_SW_PDM=false,imx-sw-pdm"
 
