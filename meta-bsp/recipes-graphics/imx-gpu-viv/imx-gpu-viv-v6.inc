@@ -18,6 +18,8 @@ FILES_libvulkan-imx_append = " ${libdir}/libvulkan_VSI${REALSOLIBS}"
 
 FILES_libopenvx-imx_remove = "${libdir}/libOpenVX${SOLIBS}"
 FILES_libopenvx-imx_append = " ${libdir}/libOpenVX${REALSOLIBS} ${libdir}/libOvx*${SOLIBS}"
+FILES_libopenvx-imx-dev_remove = "${libdir}/libopenVX${SOLIBSDEV}"
+FILES_libopenvx-imx-dev_append = " ${libdir}/libOpenVX${SOLIBSDEV}"
 RDEPENDS_libopenvx-imx = "libnn-imx"
 INSANE_SKIP_libopenvx-imx += "dev-so"
 
