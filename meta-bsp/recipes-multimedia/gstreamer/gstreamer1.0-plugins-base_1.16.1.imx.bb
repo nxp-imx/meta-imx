@@ -1,7 +1,5 @@
 require recipes-multimedia/gstreamer/gstreamer1.0-plugins-base_1.16.1.bb
 
-PV = "1.16.1.imx"
-
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/${PN}:"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"

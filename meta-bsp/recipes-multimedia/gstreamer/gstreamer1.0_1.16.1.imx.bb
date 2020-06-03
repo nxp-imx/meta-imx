@@ -1,7 +1,5 @@
 require recipes-multimedia/gstreamer/gstreamer1.0_1.16.1.bb
 
-PV = "1.16.1.imx"
-
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
 
 # Use i.MX fork of GST for customizations

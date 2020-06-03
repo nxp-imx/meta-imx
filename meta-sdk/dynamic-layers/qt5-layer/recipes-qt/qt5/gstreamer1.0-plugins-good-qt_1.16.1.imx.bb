@@ -16,8 +16,6 @@ SRC_URI = " \
 "
 SRCREV = "767f154d275f8489cc4713445c53594d72a355ba"
 
-PV = "1.16.1.imx"
-
 S = "${WORKDIR}/git"
 
 # Make sure kernel sources are available
