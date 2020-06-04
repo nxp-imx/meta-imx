@@ -31,3 +31,15 @@ FILES_libnn-imx = "${libdir}/libNN*${SOLIBS}"
 RDEPENDS_libgal-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'valgrind', '', d)}"
 
 RDEPENDS_libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
+
+python __anonymous() {
+    # Undo libvulkan variable processing done upstream
+    d.setVar("DEBIAN_NOAUTONAME_libvulkan-imx", "0")
+    d.setVar("RREPLACES_libvulkan-imx", "")
+    d.setVar("RPROVIDES_libvulkan-imx", "")
+    d.setVar("RCONFLICTS_libvulkan-imx", "")
+    d.setVar("DEBIAN_NOAUTONAME_libvulkan-imx-dev", "0")
+    d.setVar("RREPLACES_libvulkan-imx-dev", "")
+    d.setVar("RPROVIDES_libvulkan-imx-dev", "")
+    d.setVar("RCONFLICTS_libvulkan-imx-dev", "")
+}
