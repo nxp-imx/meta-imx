@@ -1,0 +1,31 @@
+From d6ad53c37ecab06fbe9c999d6f4aed063552a386 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Thu, 4 Jun 2020 15:15:15 +0000
+Subject: [PATCH] ui_features.gni: Do not enable use_xkbcommon for non
+ x11/wayland backend [YOCIMX-4648]
+
+xkbcommon is set as default in chromium
+https://chromium.googlesource.com/chromium/src.git/+/63d3d7eb06c3518c3be4d97797819d445c8060e4
+Disable it for framebuffer as xkcommon is not supported. It is supported only on x11 and wayland.
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ chromium/ui/base/ui_features.gni | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/chromium/ui/base/ui_features.gni b/chromium/ui/base/ui_features.gni
+index ba269ee36c0..8fc462f3c18 100644
+--- a/chromium/ui/base/ui_features.gni
++++ b/chromium/ui/base/ui_features.gni
+@@ -6,7 +6,7 @@ import("//build/config/ui.gni")
+ 
+ declare_args() {
+   # Optional system library.
+-  use_xkbcommon = use_ozone && is_linux && !is_chromecast
++  use_xkbcommon = use_x11 && use_ozone && is_linux && !is_chromecast
+ 
+   # Whether the platform provides a native accessibility toolkit.
+   has_native_accessibility = use_atk || is_win || is_mac
+-- 
+2.25.0
+
