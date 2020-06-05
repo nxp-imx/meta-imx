@@ -11,22 +11,22 @@ RDEPENDS_${PN}-fslcodec-testapps += " \
 
 ALLOW_EMPTY_${PN}-fslcodec-testapps = "1"
 
-SOC_TOOLS_IMX_TESTAPPS = " \
+# Update SOC_TOOLS_TEST defined in meta-freescale-distro
+SOC_TOOLS_TEST        = ""
+SOC_TOOLS_TEST_imx    = " \
     cryptodev-module \
     cryptodev-tests \
     imx-kobs \
+    imx-test \
     vlan \
     ${PN}-fslcodec-testapps \
 "
+SOC_TOOLS_TEST_imxpxp   = "${SOC_TOOLS_TEST_imx}"
+SOC_TOOLS_TEST_imxgpu2d = "${SOC_TOOLS_TEST_imx}"
 
-SOC_TOOLS_TESTAPPS = ""
-SOC_TOOLS_TESTAPPS_imx = "${SOC_TOOLS_IMX_TESTAPPS}"
-
-SOC_TOOLS_TEST        = ""
-SOC_TOOLS_TEST_imx    = "imx-test"
-SOC_TOOLS_TEST_imxgpu = "imx-test imx-gpu-viv-demos"
-SOC_TOOLS_TEST_append_mx8qm = " imx-seco-libs dvbapp-tests"
-SOC_TOOLS_TEST_append_mx8x  = " imx-seco-libs"
+SOC_TOOLS_TEST_append_imxgpu = " imx-gpu-viv-demos"
+SOC_TOOLS_TEST_append_mx8qm  = " imx-seco-libs dvbapp-tests"
+SOC_TOOLS_TEST_append_mx8x   = " imx-seco-libs"
 
 RDEPENDS_${PN} += " \
     can-utils \
@@ -44,7 +44,6 @@ RDEPENDS_${PN} += " \
     ptpd \
     python-pip \
     udev-extraconf \
-    ${SOC_TOOLS_TESTAPPS} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-examples', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wifi', 'hostapd sigma-dut', '', d)} \
