@@ -1,15 +1,15 @@
 SUMMARY = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=a9ac7eab1246f4785ebb6e1dd18d5ffc"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9c57cfb31165de565a47b65b896391c2"
 
 DEPENDS = "python3 python3-pip-native python3-wheel-native"
 RDEPENDS_${PN} += "python3-core python3-numpy python3-future"
 
 PV = "1.5.0"
 
-PYTORCH_SRC ?= "git://bitbucket.sw.nxp.com/eiqcloud/pytorch-release.git;protocol=ssh"
+PYTORCH_SRC ?= "git://github.com/nxpmicro/pytorch-release.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "be32d33c94af19229c2536a12154c6d40e1d7229"
+SRCREV = "7cf59f868dee8b6d7404a5e06fe07b6c48322c46"
 
 SRC_URI = " \
     ${PYTORCH_SRC};branch=${SRCBRANCH} \
