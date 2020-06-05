@@ -40,6 +40,7 @@ RDEPENDS_${PN} += " \
     nano \
     ntpdate \
     openssl-bin \
+    pciutils \
     procps \
     ptpd \
     python-pip \
