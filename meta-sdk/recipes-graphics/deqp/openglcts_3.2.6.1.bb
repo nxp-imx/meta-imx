@@ -43,7 +43,20 @@ do_install() {
     done
     for src in gl_cts gles2 gles3 gles31; do
         install -d $dest_dir/$src
+        # Install data sub-folder
         cp -R --no-dereference --preserve=mode,links -v $src_dir/$src/data $dest_dir/$src
+        # Install shaders sub-folder
+        case $src in
+        gles2|gles3|gles31)
+            cp -R --no-dereference --preserve=mode,links -v $src_dir/$src/shaders $dest_dir/$src
+            ;;
+        esac
+        # Install graphicsfuzz sub-folder
+        case $src in
+        gles3)
+            cp -R --no-dereference --preserve=mode,links -v $src_dir/$src/graphicsfuzz $dest_dir/$src
+            ;;
+        esac
     done
 }
 
