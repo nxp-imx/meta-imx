@@ -95,6 +95,7 @@ SOC_FAMILY_mx8x = "mx8x"
 
 REV_OPTION ?= ""
 REV_OPTION_mx8qxpc0 = "REV=C0"
+REV_OPTION_mx8phantomdxl = "REV=C0"
 
 compile_mx8m() {
     bbnote 8MQ/8MM boot binary build
