@@ -6,9 +6,7 @@ SRC_URI[md5sum] = "28d0a1ef842cc641d3bbcfc4db8e5aa7"
 SRC_URI[sha256sum] = "3087b6162d13653c9ee46cb82ae0e6c63042f45de8f38c11b13b1529a1dc4d2e"
 
 do_install_append() {
-    if [ "${USE_WL}" = "yes" -o "${USE_X11}" = "yes" ]; then
-        cp ${S}/gpu-core/usr/lib/libGL-${backend}.so ${D}${libdir}/libGL.so.1.2.0
-    fi
+    cp ${S}/gpu-core/usr/lib/libGL-${backend}.so ${D}${libdir}/libGL.so.1.2.0
 
     # Remove the work done by the upstream install for libvulkan so
     # we can install the newly versioned library files
