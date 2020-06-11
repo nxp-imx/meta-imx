@@ -6,6 +6,7 @@ SRC_URI[md5sum] = "e58c570a674b77faeba2091d4bdbd7d0"
 SRC_URI[sha256sum] = "c37c59d2cd308f58dc9dcd3d0d4691e4d4e7f75d665fa78ba79b825351365268"
 
 do_install_append() {
+    rm ${D}${libdir}/libGL.so.1.2.0
     cp ${S}/gpu-core/usr/lib/libGL-${backend}.so ${D}${libdir}/libGL.so.1.2.0
 
     # Remove the work done by the upstream install for libvulkan so
