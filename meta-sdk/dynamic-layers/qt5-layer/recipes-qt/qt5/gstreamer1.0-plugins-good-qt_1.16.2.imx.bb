@@ -1,4 +1,4 @@
-require recipes-multimedia/gstreamer/gstreamer1.0-plugins-good_1.16.1.bb
+require recipes-multimedia/gstreamer/gstreamer1.0-plugins-good_1.16.2.bb
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-imx/meta-sdk/dynamic-layers/qt5-layer/recipes-qt/qt5/${PN}:"
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"

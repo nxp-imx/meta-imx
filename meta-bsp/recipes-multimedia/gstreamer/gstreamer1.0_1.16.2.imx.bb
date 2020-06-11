@@ -1,4 +1,4 @@
-require recipes-multimedia/gstreamer/gstreamer1.0_1.16.1.bb
+require recipes-multimedia/gstreamer/gstreamer1.0_1.16.2.bb
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
 

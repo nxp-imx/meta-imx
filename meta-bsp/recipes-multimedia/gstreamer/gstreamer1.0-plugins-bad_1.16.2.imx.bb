@@ -1,4 +1,4 @@
-require recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_1.16.1.bb
+require recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_1.16.2.bb
 
 DEPENDS += "jpeg libdrm"
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
