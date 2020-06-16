@@ -29,6 +29,8 @@ FILES_libnn-imx = "${libdir}/libNN*${SOLIBS}"
 
 RDEPENDS_libgal-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'valgrind', '', d)}"
 
+INSANE_SKIP_libgl-imx += "file-rdeps"
+
 RDEPENDS_libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 
 python __anonymous() {
