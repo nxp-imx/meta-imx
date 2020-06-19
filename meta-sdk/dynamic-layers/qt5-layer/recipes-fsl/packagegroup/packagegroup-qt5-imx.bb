@@ -19,6 +19,7 @@ QT5_QTQUICK3D = "qtquick3d qtquick3d-dev qtquick3d-examples"
 QT5_IMAGE_INSTALL = ""
 QT5_IMAGE_INSTALL_common = " \
     packagegroup-qt5-demos \
+    nxp-demo-experience \
     ${QT5_QTQUICK3D} \
     ${QT5_FONTS} \
     ${QT5_IMAGE_INSTALL_APPS} \
