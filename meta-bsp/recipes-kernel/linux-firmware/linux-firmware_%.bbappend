@@ -11,8 +11,9 @@ SRCREV_murata-qca = "a0026b646ce6adfb72f135ffa8a310f3614b2272"
 # Firmware for Murata CYW4339/CYW43430/CYW43455/CYW4356/CYW4359 Module
 # Firmware for Marvell Wi-Fi Modules
 IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
+SRCBRANCH = "master"
 SRC_URI += " \
-           ${IMX_FIRMWARE_SRC};branch=master;destsuffix=imx-firmware;name=imx-firmware \
+           ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH};destsuffix=imx-firmware;name=imx-firmware \
 "
 
 SRCREV_imx-firmware = "685ace656284167376241c804827f046b984ce25"
