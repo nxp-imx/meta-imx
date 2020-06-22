@@ -1,0 +1,93 @@
+From 7f69b097a05a3eeb85bbff66717491bd81b3aa61 Mon Sep 17 00:00:00 2001
+From: Maksim Sisov <msisov@igalia.com>
+Date: Thu, 5 Mar 2020 08:26:38 +0000
+Subject: [PATCH] ozone/wayland: Allow to run ozone/wayland without wl_seat.
+
+This change removes hard requirement on a wl_seat and allows
+to run Ozone/Wayland without that. This is required by 1)
+tests that will be run with headless weston 2) systems that
+run without any perihperial peripheral devices.
+
+TBR=spang@chromium.org
+
+Bug: 1029241
+Change-Id: I9970052b3d6d593591eb93738d0b83218abd1353
+Reviewed-on: https://chromium-review.googlesource.com/c/chromium/src/+/2088852
+Reviewed-by: Maksim Sisov <msisov@igalia.com>
+Commit-Queue: Maksim Sisov <msisov@igalia.com>
+Cr-Commit-Position: refs/heads/master@{#747153}
+---
+ .../wayland/host/wayland_connection.cc        | 27 +++++++++++--------
+ .../platform/wayland/host/wayland_window.cc   |  6 ++++-
+ 2 files changed, 21 insertions(+), 12 deletions(-)
+
+diff --git a/ui/ozone/platform/wayland/host/wayland_connection.cc b/ui/ozone/platform/wayland/host/wayland_connection.cc
+index f48eafb1a1a2..21590d85a262 100644
+--- a/ui/ozone/platform/wayland/host/wayland_connection.cc
++++ b/ui/ozone/platform/wayland/host/wayland_connection.cc
+@@ -83,15 +83,16 @@ bool WaylandConnection::Initialize() {
+     LOG(ERROR) << "No wl_shm object";
+     return false;
+   }
+-  if (!seat_) {
+-    LOG(ERROR) << "No wl_seat object";
+-    return false;
+-  }
+   if (!shell_v6_ && !shell_) {
+     LOG(ERROR) << "No Wayland shell found";
+     return false;
+   }
+ 
++  // When we are running tests with weston in headless mode, the seat is not
++  // announced.
++  if (!seat_)
++    LOG(WARNING) << "No wl_seat object. The functionality may suffer.";
++
+   return true;
+ }
+ 
+@@ -122,13 +123,17 @@ void WaylandConnection::MaybePrepareReadQueue() {
+ }
+ 
+ void WaylandConnection::ScheduleFlush() {
+-  if (scheduled_flush_)
+-    return;
+-  DCHECK(base::MessageLoopCurrentForUI::IsSet());
+-  base::ThreadTaskRunnerHandle::Get()->PostTask(
+-      FROM_HERE,
+-      base::BindOnce(&WaylandConnection::Flush, base::Unretained(this)));
+-  scheduled_flush_ = true;
++  // When we are in tests, the message loop is set later when the
++  // initialization of the OzonePlatform complete. Thus, just
++  // flush directly. This doesn't happen in normal run.
++  if (!base::MessageLoopCurrentForUI::IsSet()) {
++    Flush();
++  } else if (!scheduled_flush_) {
++    base::ThreadTaskRunnerHandle::Get()->PostTask(
++        FROM_HERE,
++        base::BindOnce(&WaylandConnection::Flush, base::Unretained(this)));
++    scheduled_flush_ = true;
++  }
+ }
+ 
+ void WaylandConnection::SetCursorBitmap(const std::vector<SkBitmap>& bitmaps,
+diff --git a/ui/ozone/platform/wayland/host/wayland_window.cc b/ui/ozone/platform/wayland/host/wayland_window.cc
+index c752ad3c0048..cfb9644b1f5e 100644
+--- a/ui/ozone/platform/wayland/host/wayland_window.cc
++++ b/ui/ozone/platform/wayland/host/wayland_window.cc
+@@ -47,7 +47,11 @@ WaylandWindow* WaylandWindow::FromSurface(wl_surface* surface) {
+ void WaylandWindow::UpdateBufferScale(bool update_bounds) {
+   DCHECK(connection_->wayland_output_manager());
+   const auto* screen = connection_->wayland_output_manager()->wayland_screen();
+-  DCHECK(screen);
++
++  // The client might not create screen at all.
++  if (!screen)
++    return;
++
+   const auto widget = GetWidget();
+ 
+   int32_t new_scale = 0;
+-- 
+2.25.0
+
