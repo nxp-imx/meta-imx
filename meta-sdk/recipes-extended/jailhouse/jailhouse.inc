@@ -13,13 +13,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
                  file://driver/jailhouse.h;beginline=9;endline=36;md5=2825581c1666c44a17955dc574cfbfb3"
 
 DEPENDS = "virtual/kernel make-native \
-        python-mako-native python3-mako \
+        python3-mako-native python3-mako \
         dtc-native "
 
-S ="${WORKDIR}/git"
+S = "${WORKDIR}/git"
 
 require jailhouse-defs.inc
-inherit module pythonnative bash-completion setuptools
+inherit module python3native bash-completion setuptools3
 
 JH_CONFIG ?= "${S}/ci/jailhouse-config-x86.h"
 JH_CONFIG_x86 ?= "${S}/ci/jailhouse-config-x86.h"
@@ -49,8 +49,6 @@ do_compile() {
         ARCH=${JH_ARCH} CROSS_COMPILE=${TARGET_PREFIX} \
         KDIR=${STAGING_KERNEL_BUILDDIR}
 
-   distutils_do_compile
-
    cd ${TOOLS_SRC_DIR}
    export JAILHOUSE_VERSION=$(cat ../VERSION)
    oe_runmake V=1 \
@@ -61,6 +59,7 @@ do_compile() {
 
 do_install() {
     oe_runmake \
+               PYTHON=python3 \
 	       V=1 \
 	       LDFLAGS="" \
 	       CC="${CC}" \
@@ -68,8 +67,6 @@ do_install() {
 	       CROSS_COMPILE=${TARGET_PREFIX} \
 	       KDIR=${STAGING_KERNEL_BUILDDIR} \
 	       DESTDIR=${D} install
-
-    distutils_do_compile
 
     install -d ${D}${CELL_DIR}
     install ${B}/configs/${JH_ARCH}/*.cell ${D}${CELL_DIR}/
@@ -85,13 +82,25 @@ do_install() {
     install ${B}/tools/jailhouse-gcov-extract ${D}${JH_DATADIR}/tools
     install ${B}/tools/jailhouse-hardware-check ${D}${JH_DATADIR}/tools
     install ${B}/inmates/tools/${JH_ARCH}/linux-loader.bin ${D}${INMATES_DIR}/tools/${JH_ARCH}
-
-    install -d ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
-    install -m 0644 ${B}/build/lib/pyjailhouse/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
 }
 
-PACKAGE_BEFORE_PN = "kernel-module-jailhouse"
+PACKAGE_BEFORE_PN = "kernel-module-jailhouse pyjailhouse"
+
 FILES_${PN} += "${base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_DATADIR}"
+FILES_pyjailhouse = "${PYTHON_SITEPACKAGES_DIR}"
+
+RDEPENDS_${PN} += " \
+    python3-curses \
+    python3-datetime \
+    python3-mmap \
+"
+
+RDEPENDS_pyjailhouse = " \
+    python3-core \
+    python3-ctypes \
+    python3-fcntl \
+    python3-shell \
+"
 
 INSANE_SKIP_${PN} = "ldflags"
 
