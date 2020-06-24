@@ -1,5 +1,5 @@
 SUMMARY = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
-LICENSE = "MIT"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9c57cfb31165de565a47b65b896391c2"
 
 DEPENDS = "python3 python3-pip-native python3-wheel-native"
