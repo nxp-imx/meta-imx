@@ -21,7 +21,7 @@ RDEPENDS_${PN}_append_imxgpu = " \
     qt5everywheredemo \ 
     qt5nmapcarousedemo \
     qt5nmapper \
-    cinematicexperience \
+    cinematicexperience-rhi \
 "
 
 RDEPENDS_${PN}_append_imxgpu3d = " \
