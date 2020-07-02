@@ -1,0 +1,31 @@
+From 994e880baf7108d493d0e5ccc746992193cad317 Mon Sep 17 00:00:00 2001
+From: Prabhu Sundararaj <prabhu.sundarara@nxp.com>
+Date: Tue, 30 Jun 2020 02:24:59 +0000
+Subject: [PATCH] Use GLES Config when the opengl context fails
+
+Signed-off-by: Prabhu Sundararaj <prabhu.sundarara@nxp.com>
+---
+ hw/xwayland/xwayland-glamor-gbm.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/hw/xwayland/xwayland-glamor-gbm.c b/hw/xwayland/xwayland-glamor-gbm.c
+index e274fcd..954abed 100644
+--- a/hw/xwayland/xwayland-glamor-gbm.c
++++ b/hw/xwayland/xwayland-glamor-gbm.c
+@@ -952,8 +952,12 @@ xwl_glamor_gbm_init_egl(struct xwl_screen *xwl_screen)
+     xwl_screen->egl_context = eglCreateContext(
+         xwl_screen->egl_display, NULL, EGL_NO_CONTEXT, config_attribs_core);
+     if (xwl_screen->egl_context == EGL_NO_CONTEXT) {
++        static const EGLint config_attribs[] = {
++            EGL_CONTEXT_CLIENT_VERSION, 2,
++            EGL_NONE
++        };
+         xwl_screen->egl_context = eglCreateContext(
+-            xwl_screen->egl_display, NULL, EGL_NO_CONTEXT, NULL);
++            xwl_screen->egl_display, NULL, EGL_NO_CONTEXT, config_attribs);
+     }
+ 
+     if (xwl_screen->egl_context == EGL_NO_CONTEXT) {
+-- 
+2.17.1
+
