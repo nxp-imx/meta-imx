@@ -32,3 +32,5 @@ fakeroot python do_image_create_sdcard_symlink () {
 }
 
 addtask do_image_create_sdcard_symlink after do_image_wic before do_image_complete
+
+do_image_create_sdcard_symlink[depends] += "virtual/fakeroot-native:do_populate_sysroot"
