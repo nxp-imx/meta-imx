@@ -1,0 +1,41 @@
+From 7e02ad9c8526411e6513a8229678560bd9b276ed Mon Sep 17 00:00:00 2001
+From: "i.MX Yocto Project Build" <imx.build@nxp.com>
+Date: Sat, 4 Jul 2020 19:42:46 -0500
+Subject: [PATCH] audiomanager: Workaround to pass the configure error
+
+Error:
+fatal: ambiguous argument 'HEAD...7.8': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+-- Build Version homebrew-/home/bamboo/build/zeus-5.4-lf/fsl-imx-internal-wayland/temp_build_dir/build_fsl-imx-internal-wayland/tmp/work/aarch64-poky-linux/audiomanager/7.6-r0/git
+CMake Error at CMakeLists.txt:25 (project):
+  VERSION
+  "homebrew-/home/bamboo/build/zeus-5.4-lf/fsl-imx-internal-wayland/temp_build_dir/build_fsl-imx-internal-wayland/tmp/work/aarch64-poky-linux/audiomanager/7.6-r0/git"
+  format invalid.
+-- Configuring incomplete, errors occurred!
+
+The tags's naming rule has been changed in source tree,
+so REGEX MATCH method needs to changed,
+or invalid tag would be used.
+
+Signed-off-by: i.MX Yocto Project Build <imx.build@nxp.com>
+---
+ cmake/MacroVersionFromGit.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/MacroVersionFromGit.cmake b/cmake/MacroVersionFromGit.cmake
+index 94931c6..4da0314 100644
+--- a/cmake/MacroVersionFromGit.cmake
++++ b/cmake/MacroVersionFromGit.cmake
+@@ -10,7 +10,7 @@ IF (TAG_LIST AND NOT VERSION)
+     set (VERSION_LIST)
+ 
+     foreach (element ${TAG_LIST})
+-        STRING (REGEX MATCH "^[0-9]+\\.." SINGLE_VERSION ${element})
++        STRING (REGEX MATCH "^[0-9]+\\..*" SINGLE_VERSION ${element})
+         LIST (APPEND VERSION_LIST ${SINGLE_VERSION})
+     endforeach (element)
+ 
+-- 
+2.17.1
+
