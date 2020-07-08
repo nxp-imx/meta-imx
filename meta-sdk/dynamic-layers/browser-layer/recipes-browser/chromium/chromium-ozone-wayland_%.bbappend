@@ -1,9 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append = " file://0001-ozone-wayland-Don-t-build-gbm_wrappers-without-gbm-u.patch \
+SRC_URI_append = " file://0002-chromium-fix-build-after-y2038-changes-in-glibc.patch \
                    file://Fix-build-breaks-on-non-gbm-machines.patch \
-                   file://0002-chromium-fix-build-after-y2038-changes-in-glibc.patch \
-                   file://0001-ozone-wayland-Allow-to-run-ozone-wayland-without-wl_.patch \
 "
 
 REQUIRED_DISTRO_FEATURES = "wayland"
@@ -13,6 +11,7 @@ DEPENDS += "\
         virtual/egl \
         wayland \
         wayland-native \
+        at-spi2-atk \
 "
 GN_ARGS += ' \
         system_wayland_scanner_path="${STAGING_BINDIR_NATIVE}/wayland-scanner" \

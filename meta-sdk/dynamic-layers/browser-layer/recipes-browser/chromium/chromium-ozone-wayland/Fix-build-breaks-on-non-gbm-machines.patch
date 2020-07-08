@@ -1,8 +1,6 @@
-Index: chromium-80.0.3987.132/ui/ozone/platform/wayland/BUILD.gn
-===================================================================
---- chromium-80.0.3987.132.orig/ui/ozone/platform/wayland/BUILD.gn
-+++ chromium-80.0.3987.132/ui/ozone/platform/wayland/BUILD.gn
-@@ -260,7 +260,9 @@ source_set("test_support") {
+--- chromium-83.0.4103.116_org/ui/ozone/platform/wayland/BUILD.gn	2020-07-08 11:43:27.859818276 -0500
++++ chromium-83.0.4103.116/ui/ozone/platform/wayland/BUILD.gn	2020-07-08 11:58:25.000000000 -0500
+@@ -287,7 +287,9 @@
  source_set("wayland_unittests") {
    testonly = true
  
@@ -13,27 +11,28 @@ Index: chromium-80.0.3987.132/ui/ozone/platform/wayland/BUILD.gn
  
    sources = [
      "gpu/wayland_surface_factory_unittest.cc",
-@@ -295,9 +297,12 @@ source_set("wayland_unittests") {
+@@ -320,12 +322,14 @@
+     "//ui/base/ime/linux",
+     "//ui/events/ozone/layout",
+     "//ui/gfx/linux:drm",
+-    "//ui/gfx/linux:gbm",
+     "//ui/gfx/linux:test_support",
      "//ui/ozone:platform",
      "//ui/ozone:test_support",
-     "//ui/ozone/common/linux:drm",
--    "//ui/ozone/common/linux:gbm",
      "//ui/platform_window/platform_window_handler",
    ]
-+
 +    if (use_wayland_gbm) {
-+     deps += [ "//ui/ozone/common/linux:gbm" ]
++     deps += [ "//ui/gfx/linux:gbm" ]
 +   }
  
    import("//ui/base/ui_features.gni")
    if (use_xkbcommon) {
-@@ -306,8 +311,11 @@ source_set("wayland_unittests") {
+@@ -334,8 +338,10 @@
  
    defines = [
      "WL_HIDE_DEPRECATED",
 -    "WAYLAND_GBM",
    ]
-+
 +  if (use_wayland_gbm) {
 +    defines += [ "WAYLAND_GBM" ]
 +  }
