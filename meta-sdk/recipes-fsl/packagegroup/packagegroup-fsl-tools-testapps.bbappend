@@ -52,4 +52,6 @@ RDEPENDS_${PN} += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'qca6174', 'qca-tools', \
        bb.utils.contains('MACHINE_FEATURES', 'qca9377', 'qca-tools', \
                                                                  '', d), d)} \
+    screen \
+    tmux \
 "
