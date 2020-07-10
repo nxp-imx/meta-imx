@@ -11,7 +11,7 @@ DEPENDS = "zlib"
 SRCBRANCH = "master"
 SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
 SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "15228dd1970ba054a4bb39ec7e055eb707947c54"
+SRCREV = "2e59847a07881a28845e39aa9d362fb1c32b6a51"
 
 S = "${WORKDIR}/git"
 
