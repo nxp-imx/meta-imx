@@ -20,6 +20,8 @@ SRC_URI = " \
 
 S = "${WORKDIR}/git"
 
+PACKAGECONFIG[tinycompress] = "--enable-tinycompress,--disable-tinycompress,tinycompress"
+
 # This remove "--exclude=autopoint" option from autoreconf argument to avoid
 # configure.ac:30: error: required file './ABOUT-NLS' not found
 EXTRA_AUTORECONF = ""
@@ -29,7 +31,7 @@ PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
 
 PACKAGECONFIG_append_mx6q = " opencv"
 PACKAGECONFIG_append_mx6qp = " opencv"
-PACKAGECONFIG_append_mx8 = " opencv kms"
+PACKAGECONFIG_append_mx8 = " opencv kms tinycompress"
 
 #Remove vulkan as it's incompatible for i.MX 8M Mini
 PACKAGECONFIG_remove_mx8mm = " vulkan"
