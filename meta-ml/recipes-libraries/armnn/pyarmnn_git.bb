@@ -4,12 +4,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b94dcac13999be0b219832a72afef36"
 
 DEPENDS = "python3 python3-pip-native python3-wheel-native"
 
-PV = "19.08"
+PV = "19.08.01"
 
 PYARMNN_SRC ?= "git://github.com/nxpmicro/pyarmnn-release.git;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "imx_19.08"
 
-SRCREV = "80824ef6170ca59ebb9835f392a03804f33a5543"
+SRCREV = "020433aae162d041264d7a2fb2ee3a6d02204f8e"
 
 SRC_URI = " \
     ${PYARMNN_SRC};branch=${SRCBRANCH} \
@@ -21,6 +21,12 @@ S = "${WORKDIR}/git"
 RDEPENDS_${PN} += "armnn protobuf python3-pillow python3-pip python3-requests python3-numpy"
 
 do_install(){
+	# Install examples
+	install -d ${D}${bindir}/armnn-${PV}/examples
+	for example in ${S}/python/pyarmnn/examples/*
+	do
+	    install -m 0555 $example ${D}${bindir}/armnn-${PV}/examples
+	done
 
 	# Install wheel file
 	install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
