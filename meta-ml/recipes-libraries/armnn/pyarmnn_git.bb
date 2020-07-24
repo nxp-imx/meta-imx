@@ -26,7 +26,7 @@ do_install(){
 	install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
 	${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
 	    -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
-	    ${S}/whl/pyarmnn-*.whl
+	    ${S}/whl/pyarmnn-19.8.1*.whl
 }
 
 FILES_${PN} += "${libdir}/python*"
