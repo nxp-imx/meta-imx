@@ -21,12 +21,6 @@ S = "${WORKDIR}/git"
 RDEPENDS_${PN} += "armnn protobuf python3-pillow python3-pip python3-requests python3-numpy"
 
 do_install(){
-	# Install examples
-	install -d ${D}${bindir}/armnn-${PV}/examples
-	for example in ${S}/examples/*
-	do
-	    install -m 0555 $example ${D}${bindir}/armnn-${PV}/examples
-	done
 
 	# Install wheel file
 	install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
