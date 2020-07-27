@@ -10,7 +10,9 @@ DEPENDS = "zlib"
 
 SRCBRANCH = "master"
 SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
-SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
+        file://0001-Makefile-Fix-LIBDIR-for-multilib.patch \
+"
 SRCREV = "2e59847a07881a28845e39aa9d362fb1c32b6a51"
 
 S = "${WORKDIR}/git"
