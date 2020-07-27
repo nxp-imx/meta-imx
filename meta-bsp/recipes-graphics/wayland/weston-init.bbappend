@@ -10,6 +10,11 @@ INI_UNCOMMENT_ASSIGNMENTS_append_mx8mp = " \
     use-g2d=1 \
 "
 
+# Fix upstream error, 8M Nano does not have 2D acceleration
+INI_UNCOMMENT_ASSIGNMENTS_remove_mx8mn = " \
+    use-g2d=1 \
+"
+
 do_install_append() {
     install -Dm0755 ${WORKDIR}/profile ${D}${sysconfdir}/profile.d/weston.sh
 }
