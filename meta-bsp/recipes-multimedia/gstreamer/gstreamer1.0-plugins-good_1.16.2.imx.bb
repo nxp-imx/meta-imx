@@ -5,7 +5,7 @@ FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstre
 
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "imx-1.16.x"
-SRCREV = "8bce5bcb203d5e2813ded1bde5fb8470edd97230" 
+SRCREV = "a1ba15d53aab342dd921261148562f47eeed7d98"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
