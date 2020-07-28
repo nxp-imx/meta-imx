@@ -3,7 +3,8 @@ require renderdoc-1.7.inc
 SRC_URI += " \
     file://0003-Continue-running-when-EnumerateDeviceExtensionProper.patch \
     file://0004-Pass-memory-checking-when-replaying-captures.patch \
-    file://0005-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
+    file://0005-Use-specific-integer-format-to-generate-a-dummy-mult.patch \
+    file://0006-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
 "
 
 DEPENDS_remove = "virtual/libgl"

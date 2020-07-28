@@ -1,0 +1,55 @@
+From d189ead4c48441affe557bb7d208f2f2685a1994 Mon Sep 17 00:00:00 2001
+From: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
+Date: Wed, 15 Jul 2020 14:41:16 +0300
+Subject: [PATCH 1/2] Use specific integer format to generate a dummy
+ multisample image when replaying on Vulkan
+
+While replaying, (quote) "renderdoc need a dummy UINT texture
+to fill the binding when we don't have a stencil aspect to copy.
+Unfortunately there's no single guaranteed UINT format that can
+be sampled as MSAA, so we try a few since hopefully we'll find
+one that will work.".
+The formats given in the code are VK_FORMAT_R8G8B8A8_UINT,
+VK_FORMAT_R8_UINT, VK_FORMAT_S8_UINT, VK_FORMAT_D32_SFLOAT_S8_UINT,
+VK_FORMAT_D24_UNORM_S8_UINT, VK_FORMAT_D16_UNORM_S8_UINT.
+The GPU on the board does not support MSAA for any of those formats,
+so a compatible format needs to be added - VK_FORMAT_B8G8R8A8_UNORM.
+
+Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
+---
+ renderdoc/driver/vulkan/vk_debug.cpp   | 3 ++-
+ renderdoc/driver/vulkan/vk_resources.h | 4 ++++
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/renderdoc/driver/vulkan/vk_debug.cpp b/renderdoc/driver/vulkan/vk_debug.cpp
+index 885e6c1a8..98dc454b9 100644
+--- a/renderdoc/driver/vulkan/vk_debug.cpp
++++ b/renderdoc/driver/vulkan/vk_debug.cpp
+@@ -466,7 +466,8 @@ VulkanDebugManager::VulkanDebugManager(WrappedVulkan *driver)
+   // few since hopefully we'll find one that will work.
+   VkFormat attemptFormats[] = {VK_FORMAT_R8G8B8A8_UINT,     VK_FORMAT_R8_UINT,
+                                VK_FORMAT_S8_UINT,           VK_FORMAT_D32_SFLOAT_S8_UINT,
+-                               VK_FORMAT_D24_UNORM_S8_UINT, VK_FORMAT_D16_UNORM_S8_UINT};
++                               VK_FORMAT_D24_UNORM_S8_UINT, VK_FORMAT_D16_UNORM_S8_UINT,
++				VK_FORMAT_B8G8R8A8_UNORM};
+ 
+   for(VkFormat f : attemptFormats)
+   {
+diff --git a/renderdoc/driver/vulkan/vk_resources.h b/renderdoc/driver/vulkan/vk_resources.h
+index bc3680583..3a837f4e7 100644
+--- a/renderdoc/driver/vulkan/vk_resources.h
++++ b/renderdoc/driver/vulkan/vk_resources.h
+@@ -1257,6 +1257,10 @@ struct ImageSubresourceRange
+     {
+       aspectMask = info.Aspects();
+     }
++    else if (info.Aspects() == VK_IMAGE_ASPECT_DEPTH_BIT)
++    {
++      aspectMask = info.Aspects();
++    }
+     else if(aspectMask & ~info.Aspects())
+     {
+       if(aspectMask != VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM)
+-- 
+2.17.1
+
