@@ -10,9 +10,10 @@ DEPENDS_remove = "virtual/libgl"
 
 REQUIRED_DISTRO_FEATURES_remove = "opengl"
 
+xEXTRA_OECMAKE_remove = " \
+    -DCMAKE_BUILD_TYPE=Release \
+"
 EXTRA_OECMAKE += " \
-    -DENABLE_XLIB=OFF \
-    -DENABLE_XCB=OFF \
     -DENABLE_GL=OFF \
     -DENABLE_GLES=OFF \
     -DENABLE_VULKAN=ON \
