@@ -11,7 +11,7 @@ DEPENDS_remove = "virtual/libgl"
 
 REQUIRED_DISTRO_FEATURES_remove = "opengl"
 
-xEXTRA_OECMAKE_remove = " \
+EXTRA_OECMAKE_remove = " \
     -DCMAKE_BUILD_TYPE=Release \
 "
 EXTRA_OECMAKE += " \
@@ -22,8 +22,6 @@ EXTRA_OECMAKE += " \
 "
 
 do_compile_prepend () {
-    sed -i 's/c++ /g++ /g' ${B}/build.ninja
-
     if [ "${base_libdir}" != "lib" ]; then
         export LIB_SUFFIX="64"
     fi
