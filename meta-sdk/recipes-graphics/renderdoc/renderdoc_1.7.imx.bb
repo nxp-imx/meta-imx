@@ -1,0 +1,28 @@
+require renderdoc-1.7.inc
+
+SRC_URI += " \
+    file://0003-Continue-running-when-EnumerateDeviceExtensionProper.patch \
+    file://0004-Pass-memory-checking-when-replaying-captures.patch \
+    file://0005-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
+"
+
+DEPENDS_remove = "virtual/libgl"
+
+REQUIRED_DISTRO_FEATURES_remove = "opengl"
+
+EXTRA_OECMAKE += " \
+    -DENABLE_XLIB=OFF \
+    -DENABLE_XCB=OFF \
+    -DENABLE_GL=OFF \
+    -DENABLE_GLES=OFF \
+    -DENABLE_VULKAN=ON \
+    -DENABLE_WAYLAND=ON \
+"
+
+do_compile_prepend () {
+    sed -i 's/c++ /g++ /g' ${B}/build.ninja
+
+    if [ "${base_libdir}" != "lib" ]; then
+        export LIB_SUFFIX="64"
+    fi
+}

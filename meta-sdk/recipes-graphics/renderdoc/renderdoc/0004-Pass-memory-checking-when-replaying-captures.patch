@@ -1,7 +1,7 @@
-From b2274117b241639b0b872f46950a2b31d497409e Mon Sep 17 00:00:00 2001
-From: Andrei Catalin Ilie <and96x@gmail.com>
-Date: Wed, 25 Sep 2019 13:28:09 +0300
-Subject: [PATCH 4/5] Pass memory checking when replaying captures
+From 6a1ae8b14df7e10fd0c6cf115307435c8d89e675 Mon Sep 17 00:00:00 2001
+From: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
+Date: Wed, 15 Jul 2020 14:25:14 +0300
+Subject: [PATCH 2/4] Pass memory checking when replaying captures
 
 Due to the fact that iMX8 target fails buffer size checking when loading the
 buffers from the capture file, the replay feauture is not working.
@@ -10,17 +10,19 @@ the buffers, by creating a dummy buffer which has the initial allocation size.
 If this buffer pass the checkings, then the allocation size is correctly set,
 else it will become equal to the demanded size. At the end, the dummy buffer
 is freed.
+
+Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
 ---
- .../driver/vulkan/wrappers/vk_resource_funcs.cpp   | 32 ++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ .../vulkan/wrappers/vk_resource_funcs.cpp     | 33 +++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
 diff --git a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
-index 4c03f57..f7e1b78 100644
+index d443ca4f3..8fc865908 100644
 --- a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
 +++ b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
-@@ -266,6 +266,38 @@ bool WrappedVulkan::Serialise_vkAllocateMemory(SerialiserType &ser, VkDevice dev
-     // appropriate index on replay
-     AllocateInfo.memoryTypeIndex = m_PhysicalDeviceData.memIdxMap[AllocateInfo.memoryTypeIndex];
+@@ -263,6 +263,39 @@ bool WrappedVulkan::Serialise_vkAllocateMemory(SerialiserType &ser, VkDevice dev
+   {
+     VkDeviceMemory mem = VK_NULL_HANDLE;
  
 +    // do a last check to completely make sure we meet memory requirements for size
 +    {
@@ -54,9 +56,10 @@ index 4c03f57..f7e1b78 100644
 +      ObjDisp(device)->DestroyBuffer(Unwrap(device), buf, NULL);
 +    }
 +
++
      VkMemoryAllocateInfo patched = AllocateInfo;
  
      byte *tempMem = GetTempMemory(GetNextPatchSize(patched.pNext));
 -- 
-2.7.4
+2.17.1
 
