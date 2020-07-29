@@ -11,6 +11,8 @@ If this buffer pass the checkings, then the allocation size is correctly set,
 else it will become equal to the demanded size. At the end, the dummy buffer
 is freed.
 
+Upstream-Status: Inappropriate [i.MX specific]
+
 Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
 ---
  .../vulkan/wrappers/vk_resource_funcs.cpp     | 33 +++++++++++++++++++

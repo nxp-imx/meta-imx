@@ -13,6 +13,8 @@ string, the second call will return N - 1 extensions, resulting in
 VK_INCOMPLETE.
 This commit fixes the capture support on Vulkan for iMX8 targets.
 
+Upstream-Status: Inappropriate [i.MX specific]
+
 Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
 ---
  renderdoc/driver/vulkan/vk_core.cpp | 2 +-
