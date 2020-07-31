@@ -6,16 +6,25 @@ SECTION = "base"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982"
 
-DEPENDS = "imx-seco-libs"
+DEPENDS = "imx-seco-libs optee-os optee-client"
 
 SRCBRANCH = "master"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "0c701588357b0d9b411d39b1042c1213c0da07df"
+SRCREV = "e8ea968445c8553a5020153eb4e05a195ecf62c3"
 
 S = "${WORKDIR}/git"
 
 inherit cmake
 
+OPTEE_OS_TA_EXPORT_DIR_aarch64 = "${STAGING_INCDIR}/optee/export-user_ta_arm64"
+OPTEE_OS_TA_EXPORT_DIR_arm = "${STAGING_INCDIR}/optee/export-user_ta_arm32"
+
+EXTRA_OECMAKE = " \
+    -DOPTEE_OS_TA_EXPORT_DIR=${OPTEE_OS_TA_EXPORT_DIR} \
+    -DOPTEE_CLIENT_EXPORT_DIR=${STAGING_DIR_HOST} \
+"
+
 COMPATIBLE_MACHINE = "(mx8)"
 COMPATIBLE_MACHINE_mx8m = "(^$)"
+FILES_${PN} += "${base_libdir}/optee_armtz/*"
