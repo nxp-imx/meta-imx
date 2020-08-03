@@ -7,16 +7,16 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-#RDEPENDS_${PN} += " \
-#    qtwebengine \
-#    qtwebengine-qmlplugins \
-#    qtquickcontrols-qmlplugins \
-#    qtwebengine-examples \
-#"
-#RDEPENDS_${PN}_remove_mx8 = " \
-#    qtwebengine \
-#    qtwebengine-qmlplugins \
-#    qtquickcontrols-qmlplugins \
-#    qtwebengine-examples \
-#"
+RDEPENDS_${PN} += " \
+    qtwebengine \
+    qtwebengine-qmlplugins \
+    qtquickcontrols-qmlplugins \
+    qtwebengine-examples \
+"
+RDEPENDS_${PN}_remove_mx8 = " \
+    qtwebengine \
+    qtwebengine-qmlplugins \
+    qtquickcontrols-qmlplugins \
+    qtwebengine-examples \
+"
 
