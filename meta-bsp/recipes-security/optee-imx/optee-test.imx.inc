@@ -30,6 +30,9 @@ EXTRA_OEMAKE = " \
     OPTEE_OPENSSL_EXPORT=${STAGING_INCDIR}/ \
     -C ${S} O=${B} \
 "
+do_compile_prepend () {
+    export CXXFLAGS="${CXXFLAGS} --sysroot=${STAGING_DIR_HOST}"
+}
 
 do_install () {
     install -d ${D}/usr/bin
