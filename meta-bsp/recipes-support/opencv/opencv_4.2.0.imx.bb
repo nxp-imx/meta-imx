@@ -49,7 +49,9 @@ do_install_append() {
     cp -r ${S}/samples/data/* ${D}${datadir}/OpenCV/samples/data
     install -d ${D}${datadir}/OpenCV/samples/bin/
     cp -f bin/example_* ${D}${datadir}/OpenCV/samples/bin/
-    cp -r share/opencv4/testdata/cv/face/* ${D}${datadir}/opencv4/testdata/cv/face/
+    if ${@bb.utils.contains('PACKAGECONFIG', 'test', 'true', 'false', d)}; then
+        cp -r share/opencv4/testdata/cv/face/* ${D}${datadir}/opencv4/testdata/cv/face/
+    fi
 }
 
 FILES_${PN}-samples += "${datadir}/OpenCV/samples"
