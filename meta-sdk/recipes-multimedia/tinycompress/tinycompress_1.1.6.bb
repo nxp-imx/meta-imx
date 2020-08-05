@@ -9,7 +9,8 @@ DEPENDS_append = " alsa-lib"
 
 SRC_URI = "git://git.alsa-project.org/tinycompress.git;protocol=git;branch=master \
            file://0001-tinycompress-Add-id3-decoding.patch \
-           file://0001-cplay-Support-wave-file.patch \
+           file://0002-cplay-Support-wave-file.patch \
+           file://0003-cplay-Add-pause-feature.patch \
 "
 SRCREV = "995f2ed91045dad8c20485ab1a64727d22cd92e5"
 
