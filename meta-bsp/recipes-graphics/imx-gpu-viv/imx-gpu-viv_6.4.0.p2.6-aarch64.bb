@@ -2,8 +2,8 @@ require imx-gpu-viv-v6.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=1b4db4b25c3a1e422c0c0ed64feb65d2"
 
-SRC_URI[md5sum] = "69158254b093f72b681d324480b2debf"
-SRC_URI[sha256sum] = "fe650d74b79c01c3b2595f68340e093f8a5cc00d8b7bd8bbe22c7f07ffcbb244"
+SRC_URI[md5sum] = "cfc1adf89fe04a541eabb6802a0c9f51"
+SRC_URI[sha256sum] = "7ce9756144a85135b79330a10fc17805a709a8e0d0c2439a0e879d5a4fbff669"
 
 do_install_append() {
     rm ${D}${libdir}/libGL.so.1.2.0
