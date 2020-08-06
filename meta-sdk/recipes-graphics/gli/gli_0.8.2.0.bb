@@ -18,7 +18,7 @@ S = "${WORKDIR}/git"
 
 inherit cmake
 
-FILES_${PN}-dev += "${libdir}/cmake"
-RDEPENDS_${PN}-dev = ""
+# This is a header-only library, so the main package will be empty.
+ALLOW_EMPTY_${PN} = "1"
 
 BBCLASSEXTEND = "native"
