@@ -121,10 +121,6 @@ RDEPENDS_EMPTY_MAIN_PACKAGE_append_mx8 = " \
     rapidopenvx \
     rapidvulkan \
 "
-RDEPENDS_EMPTY_MAIN_PACKAGE_append_mx8mm = " \
-    rapidopencl \
-    rapidopenvx \
-"
 RDEPENDS_VULKAN       = ""
 RDEPENDS_VULKAN_mx8   = "vulkan-validationlayers vulkan-loader"
 RDEPENDS_VULKAN_mx8mm = ""
