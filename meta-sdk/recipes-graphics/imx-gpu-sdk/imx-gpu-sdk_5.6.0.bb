@@ -50,16 +50,16 @@ BACKEND = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',     'X11', \
                                                              'FB', d), d)}"
 
-FEATURES                  = "EGL,EarlyAccess,OpenVG"
+FEATURES                  = "EarlyAccess,EGL,OpenVG"
 FEATURES_append_imxgpu2d  = ",G2D"
 FEATURES_append_imxgpu3d  = ",OpenGLES2"
 FEATURES_append           = "${FEATURES_SOC}"
 
-FEATURES_SOC       = ""
-FEATURES_SOC_mx6q  = ",OpenGLES3"
-FEATURES_SOC_mx6dl = ",OpenGLES3"
-FEATURES_SOC_mx8   = ",OpenCV,Vulkan,OpenGLES3,OpenGLES3.1,OpenCL,OpenCL1.1,OpenCL1.2,OpenVX,OpenVX1.1"
-FEATURES_SOC_mx8mm = ",OpenCV"
+FEATURES_SOC              = ""
+FEATURES_SOC_mx6q         = ",OpenGLES3"
+FEATURES_SOC_mx6dl        = ",OpenGLES3"
+FEATURES_SOC_mx8          = ",OpenCV,Vulkan,OpenGLES3.2,OpenCL1.2,OpenVX1.1"
+FEATURES_SOC_mx8mm        = ",OpenCV"
 
 EXTENSIONS       = "*"
 EXTENSIONS_mx6q  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
