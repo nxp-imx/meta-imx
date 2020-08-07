@@ -107,6 +107,8 @@ INSANE_SKIP_${PN} += "already-stripped rpaths"
 
 # Unfortunately recipes with an empty main package, like header-only libraries,
 # are not included in the SDK. Use RDEPENDS as a workaround.
+# NOTE: rapidvulkan also has an empty main package, but it is added through
+# RDEPENDS_VULKAN since we need to exclude it from 8M Mini.
 RDEPENDS_EMPTY_MAIN_PACKAGE = " \
     fmt \
     gli \
@@ -119,10 +121,9 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
 RDEPENDS_EMPTY_MAIN_PACKAGE_append_mx8 = " \
     rapidopencl \
     rapidopenvx \
-    rapidvulkan \
 "
 RDEPENDS_VULKAN       = ""
-RDEPENDS_VULKAN_mx8   = "vulkan-validationlayers vulkan-loader"
+RDEPENDS_VULKAN_mx8   = "vulkan-validationlayers vulkan-loader rapidvulkan"
 RDEPENDS_VULKAN_mx8mm = ""
 
 RDEPENDS_${PN} += " \
