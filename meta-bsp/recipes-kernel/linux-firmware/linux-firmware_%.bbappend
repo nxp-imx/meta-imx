@@ -107,7 +107,7 @@ FILES_${PN}-bcm4359-pcie = " \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4359-pcie.bin \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4359-pcie.clm_blob \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4359-pcie.txt \
-       ${sysconfdir}/firmware/BCM4349B1_002.002.014.0077.0083.hcd \
+       ${sysconfdir}/firmware/BCM4349B1_*.hcd \
 "
 
 FILES_${PN}-pcie8997 += " \
