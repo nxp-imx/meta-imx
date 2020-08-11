@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a873c5645c184d51e0f9b34e1d7cf559"
 
-SRCREV = "c0698cc33f1e534bb59c455909b88cc2726089af"
+SRCREV = "9e7e8cbe9f675123dd41b7c62868acad39188cae"
 
 SRC_URI = "git://github.com/google/flatbuffers.git"
 
