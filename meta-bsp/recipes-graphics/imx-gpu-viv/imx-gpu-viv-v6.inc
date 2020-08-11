@@ -20,7 +20,7 @@ FILES_libopenvx-imx_append = " ${libdir}/libOpenVX${REALSOLIBS} ${libdir}/libOvx
 FILES_libopenvx-imx-dev_remove = "${libdir}/libopenVX${SOLIBSDEV}"
 FILES_libopenvx-imx-dev_append = " ${libdir}/libOpenVX${SOLIBSDEV}"
 RDEPENDS_libopenvx-imx = "libnn-imx"
-INSANE_SKIP_libopenvx-imx += "dev-so"
+INSANE_SKIP_libopenvx-imx += "dev-so dev-deps"
 
 FILES_libopencl-imx_append = " ${libdir}/libOpenCL${REALSOLIBS}"
 INSANE_SKIP_libopencl-imx += "dev-so"
