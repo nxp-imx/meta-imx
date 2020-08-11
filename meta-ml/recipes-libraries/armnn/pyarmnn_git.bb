@@ -4,12 +4,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b94dcac13999be0b219832a72afef36"
 
 DEPENDS = "python3 python3-pip-native python3-wheel-native"
 
-PV = "19.08.01"
+PV = "20.02"
 
 PYARMNN_SRC ?= "git://github.com/nxpmicro/pyarmnn-release.git;protocol=https"
-SRCBRANCH = "imx_19.08"
+SRCBRANCH = "imx_20.02"
 
-SRCREV = "020433aae162d041264d7a2fb2ee3a6d02204f8e" 
+SRCREV = "c9240635659610a64782b5f44a21da489270ac48"
 
 SRC_URI = " \
     ${PYARMNN_SRC};branch=${SRCBRANCH} \
@@ -32,7 +32,7 @@ do_install(){
 	install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
 	${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
 	    -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
-	    ${S}/whl/pyarmnn-19.8.1*.whl
+	    ${S}/whl/pyarmnn-20.2.0-cp37-cp37m-linux_aarch64.whl
 }
 
 FILES_${PN} += "${libdir}/python*"
