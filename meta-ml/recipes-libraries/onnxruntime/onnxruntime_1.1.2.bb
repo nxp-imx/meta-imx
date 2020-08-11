@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=980784f0a7f667becbed133924b263bf"
 DEPENDS = "libpng zlib ${BPN}-native"
 
 ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH = "1.1.2_arm_improvements"
+SRCBRANCH = "1.1.2_vsi_npu_alpha+arm"
 
-SRCREV = "33d0b675e46d2a774b0e3d6e83d09e280d229396"
+SRCREV = "8c2cc385c755ac978cd3a83a5c9ec79c64ec3958"
 
 SRC_URI = "\
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
@@ -35,8 +35,11 @@ EXTRA_OECMAKE += "\
 -DONNX_CUSTOM_PROTOC_EXECUTABLE=${STAGING_BINDIR_NATIVE}/${PN}-native/protoc \
 -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 "
+PACKAGECONFIG_VSI_NPU       = ""
+PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
+PACKAGECONFIG_VSI_NPU_mx8mm = ""
 
-PACKAGECONFIG ?= "openmp test reports sharedlib armnn-relu eigenblas armnn acl acl-1908"
+PACKAGECONFIG ?= "openmp test reports sharedlib armnn-relu eigenblas armnn acl acl-2002 ${PACKAGECONFIG_VSI_NPU}"
 
 PACKAGECONFIG[nsync] = "-Donnxruntime_USE_NSYNC=ON, -Donnxruntime_USE_NSYNC=OFF"
 PACKAGECONFIG[prebuilt] = "-Donnxruntime_USE_PREBUILT_PB=ON, -Donnxruntime_USE_PREBUILT_PB=OFF"
@@ -85,5 +88,7 @@ PACKAGECONFIG[java] = "-Donnxruntime_BUILD_JAVA=ON, -Donnxruntime_BUILD_JAVA=OFF
 PACKAGECONFIG[armnn] = "-Donnxruntime_USE_ARMNN=ON, -Donnxruntime_USE_ARMNN=ON, armnn"
 PACKAGECONFIG[acl] = "-Donnxruntime_USE_ACL=ON, -Donnxruntime_USE_ACL=ON, arm-compute-library"
 PACKAGECONFIG[acl-1908] = "-Donnxruntime_USE_ACL_1908=ON, -Donnxruntime_USE_ACL_1908=OFF, arm-compute-library"
+PACKAGECONFIG[acl-2002] = "-Donnxruntime_USE_ACL_2002=ON, -Donnxruntime_USE_ACL_2002=OFF, arm-compute-library"
+PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -DVSI_NPU_INCLUDE_DIR=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
 
 RDEPENDS_${PN} = "arm-compute-library"
