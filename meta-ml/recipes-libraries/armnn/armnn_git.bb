@@ -5,12 +5,12 @@ LICENSE = "MIT & Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074 \
                     file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-PR = "r1"
-PV = "19.08"
+#PR = "r1"
+PV = "20.02"
 
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
-SRCBRANCH = "branches/armnn_19_08"
-SRCREV = "5bce8fc89ecb74c34e776d8e87c89ad4e121bc71" 
+SRCBRANCH = "branches/armnn_20_02"
+SRCREV = "d26eb0185a369efa1fece3e7b85182b06a97b922"
 
 SRCREV_FORMAT = "armnn"
 
@@ -27,10 +27,10 @@ SRC_URI[mobilenet.md5sum] = "d5f69cef81ad8afb335d9727a17c462a"
 SRC_URI[mobilenet.sha256sum] = "1ccb74dbd9c5f7aea879120614e91617db9534bdfaa53dfea54b7c14162e126b"
 
 DEPENDS = " \
+    arm-compute-library \
     boost \
     protobuf \
     stb \
-    arm-compute-library \
 "
 RDEPENDS_MX8       = ""
 RDEPENDS_MX8_mx8   = "nn-imx"
@@ -45,27 +45,21 @@ PACKAGECONFIG_VSI_NPU       = ""
 PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
 
-PACKAGECONFIG ??= "neon caffe tensorflow tensorflow_lite onnx unit_tests ${PACKAGECONFIG_VSI_NPU}"
+PACKAGECONFIG ??= "neon ref caffe tensorflow tensorflow_lite onnx tests ${PACKAGECONFIG_VSI_NPU}"
 
 PACKAGECONFIG[caffe] = "-DBUILD_CAFFE_PARSER=1 -DCAFFE_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-caffe,-DBUILD_CAFFE_PARSER=0,armnn-caffe"
-PACKAGECONFIG[examples] = "-DBUILD_ARMNN_EXAMPLES=1,-DBUILD_ARMNN_EXAMPLES=0, opencv"
 PACKAGECONFIG[neon] = "-DARMCOMPUTENEON=1,-DARMCOMPUTENEON=0 "
 PACKAGECONFIG[onnx] = "-DBUILD_ONNX_PARSER=1 -DONNX_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-onnx ,-DBUILD_ONNX_PARSER=0,armnn-onnx"
 PACKAGECONFIG[opencl] = "-DARMCOMPUTECL=1,-DARMCOMPUTECL=0,opencl-headers"
 PACKAGECONFIG[tensorflow] = "-DBUILD_TF_PARSER=1 -DTF_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow,-DBUILD_TF_PARSER=0, armnn-tensorflow "
-PACKAGECONFIG[tensorflow_lite] = "-DTF_LITE_GENERATED_PATH=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow-lite -DBUILD_TF_LITE_PARSER=1 ,-DBUILD_TF_LITE_PARSER=0, flatbuffers armnn-tensorflow"
+PACKAGECONFIG[tensorflow_lite] = "-DTF_LITE_SCHEMA_INCLUDE_PATH=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow-lite -DTF_LITE_GENERATED_PATH=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow-lite -DBUILD_TF_LITE_PARSER=1 ,-DBUILD_TF_LITE_PARSER=0, flatbuffers armnn-tensorflow"
 PACKAGECONFIG[unit_tests] = "-DBUILD_UNIT_TESTS=1,-DBUILD_UNIT_TESTS=0"
+PACKAGECONFIG[tests] = "-DBUILD_TESTS=1,-DBUILD_TESTS=0"
+PACKAGECONFIG[ref] = "-DARMNNREF=1,-DARMNNREF=0"
 PACKAGECONFIG[vsi_npu] = "-DVSI_NPU=1,-DVSI_NPU=0,nn-imx"
-PACKAGECONFIG[vsi_tests] = "-DBUILD_VSI_TESTS=1,-DBUILD_VSI_TESTS=0"
 
 EXTRA_OECMAKE += " \
-    -DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF \
-    -DARMCOMPUTE_ROOT=${STAGING_DIR_HOST}${datadir}/arm-compute-library \
-    -DBUILD_TESTS=1 \
-    -DTHIRD_PARTY_INCLUDE_DIRS=${STAGING_DIR_HOST}${includedir} \
-    -DGENERIC_LIB_VERSION=${PV} \
-    -DARMCOMPUTE_INCLUDE=${STAGING_DIR_HOST}${datadir}/arm-compute-library \
-    -DHALF_INCLUDE=${STAGING_DIR_HOST}${datadir}/arm-compute-library/include \
+    -DSHARED_BOOST=1 \
 "
 
 TESTVECS_INSTALL_DIR = "${datadir}/arm/armnn"
@@ -74,7 +68,6 @@ do_install_append() {
     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
     install -d ${D}${bindir}
     find ${WORKDIR}/build/tests -maxdepth 1 -type f -executable -exec cp $CP_ARGS {} ${D}${bindir} \;
-    cp $CP_ARGS ${WORKDIR}/build/UnitTests  ${D}${bindir}
     install -d ${D}${TESTVECS_INSTALL_DIR}/models
     cp ${WORKDIR}/tfmodel/mobilenet_v1_1.0_224_frozen.pb  ${D}${TESTVECS_INSTALL_DIR}/models
     cp ${WORKDIR}/git/tests/TfMobileNet-Armnn/labels.txt  ${D}${TESTVECS_INSTALL_DIR}/models
