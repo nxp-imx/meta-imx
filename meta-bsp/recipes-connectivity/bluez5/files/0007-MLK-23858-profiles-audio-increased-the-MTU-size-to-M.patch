@@ -1,0 +1,106 @@
+From a6eb5e0b205533420b6453da47d46dc791d5c3cd Mon Sep 17 00:00:00 2001
+From: Fugang Duan <fugang.duan@nxp.com>
+Date: Mon, 10 Aug 2020 17:36:19 +0800
+Subject: [PATCH] MLK-23858 profiles: audio: increased the MTU size to MAX MTU
+
+bluez default MTU is 672, it was sending a max of 5 SBC packets.
+This further caused fragmentation of packets and data was being
+sent in 2DH5 packets, thereby reducing bandwidth usage. To overcome
+the issue, by increasing the MTU size to MAX-MTU for AVDTP connection
+which will help to set 3-DH5 packet type during A2DP streaming.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
+
+diff --git a/profiles/audio/a2dp.c b/profiles/audio/a2dp.c
+index fc98bb264..b0b81e91f 100644
+--- a/profiles/audio/a2dp.c
++++ b/profiles/audio/a2dp.c
+@@ -1601,6 +1601,8 @@ drop:
+ static bool a2dp_server_listen(struct a2dp_server *server)
+ {
+ 	GError *err = NULL;
++	int option_imtu = 1021;
++	int option_omtu = 1021;
+ 
+ 	if (server->io)
+ 		return true;
+@@ -1610,6 +1612,8 @@ static bool a2dp_server_listen(struct a2dp_server *server)
+ 				btd_adapter_get_address(server->adapter),
+ 				BT_IO_OPT_PSM, AVDTP_PSM,
+ 				BT_IO_OPT_SEC_LEVEL, BT_IO_SEC_MEDIUM,
++				BT_IO_OPT_OMTU, option_omtu,
++				BT_IO_OPT_IMTU, option_imtu,
+ 				BT_IO_OPT_MASTER, true,
+ 				BT_IO_OPT_INVALID);
+ 	if (server->io)
+diff --git a/profiles/audio/avctp.h b/profiles/audio/avctp.h
+index 68a273561..b48e64a67 100644
+--- a/profiles/audio/avctp.h
++++ b/profiles/audio/avctp.h
+@@ -25,7 +25,7 @@
+ #define AVCTP_CONTROL_PSM		23
+ #define AVCTP_BROWSING_PSM		27
+ 
+-#define AVC_MTU 512
++#define AVC_MTU 1024
+ #define AVC_HEADER_LENGTH 3
+ 
+ /* ctype entries */
+diff --git a/profiles/audio/avdtp.c b/profiles/audio/avdtp.c
+index 2cb3c8a00..764a3bf5f 100644
+--- a/profiles/audio/avdtp.c
++++ b/profiles/audio/avdtp.c
+@@ -2274,6 +2274,9 @@ static void avdtp_connect_cb(GIOChannel *chan, GError *err, gpointer user_data)
+ 	struct avdtp *session = user_data;
+ 	char address[18];
+ 	int err_no = EIO;
++	GError *err1 = NULL;
++	GError *err2 = NULL;
++	int mtu = 1021;
+ 
+ 	if (err) {
+ 		err_no = err->code;
+@@ -2284,6 +2287,20 @@ static void avdtp_connect_cb(GIOChannel *chan, GError *err, gpointer user_data)
+ 	if (!session->io)
+ 		session->io = g_io_channel_ref(chan);
+ 
++	bt_io_set(chan, &err1, BT_IO_OPT_OMTU, mtu, BT_IO_OPT_INVALID);
++        if (err1 != NULL) {
++                error("OMTU! setting failed: %s", err1->message);
++                g_error_free(err1);
++        } else
++                DBG("OMTU set to 2046");
++
++	bt_io_set(chan, &err2, BT_IO_OPT_IMTU, mtu, BT_IO_OPT_INVALID);
++        if (err2 != NULL) {
++                error("Setting IMTU! failed: %s", err2->message);
++                g_error_free(err2);
++        } else
++                DBG("IMTU set to 2046");
++
+ 	bt_io_get(chan, &err,
+ 			BT_IO_OPT_OMTU, &session->omtu,
+ 			BT_IO_OPT_IMTU, &session->imtu,
+@@ -2387,6 +2404,8 @@ static GIOChannel *l2cap_connect(struct avdtp *session)
+ 	GError *err = NULL;
+ 	GIOChannel *io;
+ 	const bdaddr_t *src;
++	int option_imtu = 1021;
++	int option_omtu = 1021;
+ 
+ 	src = btd_adapter_get_address(device_get_adapter(session->device));
+ 
+@@ -2397,6 +2416,8 @@ static GIOChannel *l2cap_connect(struct avdtp *session)
+ 				device_get_address(session->device),
+ 				BT_IO_OPT_PSM, AVDTP_PSM,
+ 				BT_IO_OPT_SEC_LEVEL, BT_IO_SEC_MEDIUM,
++				BT_IO_OPT_OMTU, option_omtu,
++				BT_IO_OPT_IMTU, option_imtu,
+ 				BT_IO_OPT_INVALID);
+ 	if (!io) {
+ 		error("%s", err->message);
+-- 
+2.17.1
+
