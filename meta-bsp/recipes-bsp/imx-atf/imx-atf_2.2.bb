@@ -20,7 +20,7 @@ inherit deploy
 BOOT_TOOLS = "imx-boot-tools"
 
 PLATFORM        ?= "INVALID"
-PLATFORM_imx8dxlevk = "imx8dxl"
+PLATFORM_mx8dxl = "imx8dxl"
 PLATFORM_mx8dx  = "imx8dx"
 PLATFORM_mx8dxlevk-phantom = "imx8qx"
 PLATFORM_mx8mm  = "imx8mm"
