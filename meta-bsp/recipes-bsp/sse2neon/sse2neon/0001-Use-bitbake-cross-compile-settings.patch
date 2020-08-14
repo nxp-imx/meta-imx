@@ -1,0 +1,26 @@
+From 5b12e281e41239a0cfcd2f4d036d3ff0502e97c2 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Thu, 13 Aug 2020 13:26:16 -0500
+Subject: [PATCH] Use bitbake cross-compile settings
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 222f352..df912de 100644
+--- a/Makefile
++++ b/Makefile
+@@ -34,7 +34,7 @@ else
+     $(error Unsupported architecture)
+ endif
+ 
+-CXXFLAGS += -Wall -Wcast-qual -I. $(ARCH_CFLAGS) -std=gnu++14
++CXXFLAGS += -Wall -Wcast-qual -I.
+ LDFLAGS	+= -lm
+ OBJS = \
+     tests/binding.o \
+-- 
+2.17.1
+
