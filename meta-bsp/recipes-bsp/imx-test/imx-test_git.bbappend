@@ -12,7 +12,7 @@ SRC_URI = " \
     file://memtool_profile \
 "
 
-SRCREV = "73701107ab4a0188bab9b5f3bdf2da6adc5fea77"
+SRCREV = "be9fee73fc88387e87ab82230f55b8b671802a2a"
 
 PACKAGECONFIG_append_mx8m = " swpdm"
 
