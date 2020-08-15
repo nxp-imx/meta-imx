@@ -12,9 +12,9 @@ do_install_append() {
     fi
     # Install the newly versioned EGL library files
     rm ${D}${libdir}/libEGL.so.1.0
-    cp ${S}/gpu-core/usr/lib/libEGL-${backend}.so ${D}${libdir}/libEGL.so.1.5.0
-    ln -sf libEGL.so.1.5.0 ${D}${libdir}/libEGL.so.1
-    ln -sf libEGL.so.1.5.0 ${D}${libdir}/libEGL.so
+    cp ${S}/gpu-core/usr/lib/libEGL-${backend}.so ${D}${libdir}/libEGL.so.1.5
+    ln -sf libEGL.so.1.5 ${D}${libdir}/libEGL.so.1
+    ln -sf libEGL.so.1.5 ${D}${libdir}/libEGL.so
 }
 
 COMPATIBLE_MACHINE = "(mx6q|mx6dl|mx6sx|mx6sl|mx7ulp)"
