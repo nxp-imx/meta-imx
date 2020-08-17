@@ -172,7 +172,7 @@ do_install () {
     # The preference order, based in DISTRO_FEATURES, is Wayland (with or without X11), X11 and fb
     if [ "${USE_WL}" = "yes" ]; then
 
-        backend=wl
+        backend=wayland
 
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_wayland.pc ${D}${libdir}/pkgconfig/egl.pc
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glesv1_cm.pc ${D}${libdir}/pkgconfig/glesv1_cm.pc
@@ -213,38 +213,19 @@ do_install () {
     install -d ${D}${sysconfdir}/OpenCL/vendors/
     install -m 0644 ${S}/gpu-core/etc/Vivante.icd ${D}${sysconfdir}/OpenCL/vendors/Vivante.icd
 
-    # We'll only have one backend here so we rename it to generic name
-    # and avoid rework in other packages, when possible
-    mv ${D}${libdir}/libGL.so.1.2 ${D}${libdir}/libGL.so.1.2.0
-    ln -sf libGL.so.1.2.0 ${D}${libdir}/libGL.so.1.2
-    ln -sf libGL.so.1.2.0 ${D}${libdir}/libGL.so.1
-    ln -sf libGL.so.1.2.0 ${D}${libdir}/libGL.so
-    mv ${D}${libdir}/libEGL-${backend}.so ${D}${libdir}/libEGL.so.1.0
-    ln -sf libEGL.so.1.0 ${D}${libdir}/libEGL.so.1
-    ln -sf libEGL.so.1.0 ${D}${libdir}/libEGL.so
-    mv ${D}${libdir}/libGAL-${backend}.so ${D}${libdir}/libGAL.so
+    # Handle backend specific drivers
+    cp -r ${S}/gpu-core/usr/lib/${backend}/* ${D}${libdir}
     if [ "${USE_WL}" = "yes" ]; then
         # Special case for libVDK on Wayland backend, deliver fb library as well.
-        # Need to rename the libraries to avoid the code below that will remove
-        # *-fb.so and *-wl.so
-        mv ${D}${libdir}/libVDK-fb.so ${D}${libdir}/libVDK-framebuffer.so
-        mv ${D}${libdir}/libVDK-wl.so ${D}${libdir}/libVDK-wayland.so
-        ln -sf libVDK-wayland.so ${D}${libdir}/libVDK.so
-    else
-        mv ${D}${libdir}/libVDK-${backend}.so ${D}${libdir}/libVDK.so
+        cp ${S}/gpu-core/usr/lib/fb/libVDK.so.1.2.0 ${D}${libdir}/libVDK-fb.so.1.2.0
     fi
-
-    # update libglesv2 as backend dependent
-    rm -rf ${D}${libdir}/libGLESv2*
-    cp ${S}/gpu-core/usr/lib/libGLESv2-${backend}.so ${D}${libdir}/libGLESv2.so.2.0.0
-    ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so.2
-    ln -sf libGLESv2.so.2.0.0 ${D}${libdir}/libGLESv2.so
-
     if [ "${IS_MX8}" = "1" ]; then
-        # Change libvulkon.so driver soname, so that it does not clash with the
-        # vulkan-loader libvulkan.so
-        patchelf --set-soname libvulkan_VSI.so.1 ${D}${libdir}/libvulkan-${backend}.so
-        mv ${D}${libdir}/libvulkan-${backend}.so ${D}${libdir}/libvulkan_VSI.so
+        # Rename our libvulkan.so so it doesn't clash with vulkan-loader libvulkan.so
+        mv ${D}${libdir}/libvulkan.so.1.1.6 ${D}${libdir}/libvulkan_VSI.so.1.1.6
+        patchelf --set-soname libvulkan_VSI.so.1 ${D}${libdir}/libvulkan_VSI.so.1.1.6
+        ln -sf libvulkan_VSI.so.1.1.6 ${D}${libdir}/libvulkan_VSI.so.1
+        ln -sf libvulkan_VSI.so.1.1.6 ${D}${libdir}/libvulkan_VSI.so
+        rm ${D}${libdir}/libvulkan.so*
     fi
     for header in ${GLES3_HEADER_REMOVALS}; do
         rm -f ${D}${includedir}/GLES3/${header}
@@ -255,11 +236,6 @@ do_install () {
         find ${D}${libdir} -name "libgc_wayland_protocol.*" -exec rm '{}' ';'
         find ${D}${libdir} -name "libwayland-viv.*" -exec rm '{}' ';'
     fi
-
-    for i in wl x11 fb dri; do
-        find ${D}${libdir} -name "*-$i.so" -exec rm '{}' ';'
-        find ${D}${libdir} -name "*.$i.so" -exec rm '{}' ';'
-    done
 
     # FIXME: MX6SL does not have 3D support; hack it for now
     if [ "${IS_MX6SL}" = "1" ]; then
@@ -354,16 +330,16 @@ FILES_libopencl-imx = "${libdir}/libOpenCL${SOLIBS} \
                        ${sysconfdir}/OpenCL/vendors/Vivante.icd"
 FILES_libopencl-imx-dev = "${includedir}/CL ${libdir}/libOpenCL${SOLIBSDEV} ${libdir}/libOpenCL${REALSOLIBS}"
 RDEPENDS_libopencl-imx= "libclc-imx"
-INSANE_SKIP_libopencl-imx += "dev-so"
+INSANE_SKIP_libopencl-imx += "dev-so dev-deps"
 
 FILES_libnn-imx = "${libdir}/libNN*${SOLIBS}"
 
 INSANE_SKIP_libopenvg-imx += "dev-so"
-FILES_libopenvg-imx = "${libdir}/libOpenVG*${SOLIBS}"
+FILES_libopenvg-imx = "${libdir}/libOpenVG*${REALSOLIBS}"
 FILES_libopenvg-imx-dev = "${includedir}/VG ${libdir}/libOpenVG*${SOLIBSDEV} ${libdir}/pkgconfig/vg.pc"
 RDEPENDS_libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 
-FILES_libvdk-imx = "${libdir}/libVDK*${SOLIBS}"
+FILES_libvdk-imx = "${libdir}/libVDK*${REALSOLIBS}"
 FILES_libvdk-imx-dev = "${includedir}/*vdk*.h ${libdir}/libVDK${SOLIBSDEV}"
 INSANE_SKIP_libvdk-imx += "dev-so"
 
