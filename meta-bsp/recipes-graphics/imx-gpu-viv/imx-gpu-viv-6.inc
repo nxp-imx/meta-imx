@@ -37,6 +37,9 @@ EXTRA_PROVIDES_append_mx8 = " \
 EXTRA_PROVIDES_append_mx8qm = " \
     virtual/libopenvx \
 "
+PROVIDES_OPENVX       = ""
+PROVIDES_OPENVX_mx8   = "virtual/libopenvx"
+PROVIDES_OPENVX_mx8mm = ""
 PROVIDES += " \
     imx-gpu-viv \
     libgal-imx \
@@ -46,6 +49,7 @@ PROVIDES += " \
     virtual/opencl-headers \
     virtual/opencl-icd \
     ${EXTRA_PROVIDES} \
+    ${PROVIDES_OPENVX} \
 "
 
 RPROVIDES_${PN}_imxgpu3d += "imx-gpu-viv"
@@ -81,6 +85,7 @@ PACKAGES =+ "libclc-imx libclc-imx-dev \
 	imx-gpu-viv-demos \
 	libvulkan-imx libvulkan-imx-dev \
 	libopenvx-imx libopenvx-imx-dev \
+    libnn-imx \
 "
 python __anonymous () {
         has_vivante_kernel_driver_support = (d.getVar('MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT') or '0')
@@ -111,7 +116,7 @@ python __anonymous() {
     # they don't get Debian-renamed (which would remove the -imx suffix).
     for p in (("libegl", "libegl1"), ("libgl", "libgl1"),
               ("libgles1", "libglesv1-cm1"), ("libgles2", "libglesv2-2"),
-              ("libgles3",) , ("libvulkan",), ("libgbm",)):
+              ("libgles3",), ("libgbm",)):
         fullp = p[0] + "-imx"
         pkgs = "".join(' %s' % i for i in p)
         d.setVar("DEBIAN_NOAUTONAME_" + fullp, "1")
@@ -141,6 +146,8 @@ HAS_GBM_mx8 = "true"
 
 GLES3_HEADER_REMOVALS        = "gl31.h gl32.h"
 GLES3_HEADER_REMOVALS_mx8mq  = "gl32.h"
+GLES3_HEADER_REMOVALS_mx8mn  = "gl32.h"
+GLES3_HEADER_REMOVALS_mx8mp  = "gl32.h"
 GLES3_HEADER_REMOVALS_mx8qxp = ""
 GLES3_HEADER_REMOVALS_mx8qm  = ""
 
@@ -297,23 +304,28 @@ FILES_libegl-imx-dev = "${includedir}/EGL ${includedir}/KHR ${libdir}/pkgconfig/
 FILES_libgal-imx = "${libdir}/libGAL${SOLIBS} ${libdir}/libGAL_egl${SOLIBS}"
 FILES_libgal-imx-dev = "${libdir}/libGAL${SOLIBSDEV} ${includedir}/HAL"
 RDEPENDS_libgal-imx += "kernel-module-imx-gpu-viv"
+RDEPENDS_libgal-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'valgrind', '', d)}"
 RPROVIDES_libgal-imx += "libgal-imx"
 INSANE_SKIP_libgal-imx += "build-deps"
 
 FILES_libvsc-imx = "${libdir}/libVSC${SOLIBS}"
 
-FILES_libgbm-imx_mx8           = "${libdir}/libgbm${SOLIBS} ${libdir}/gbm_viv${SOLIBS}"
+FILES_libgbm-imx_mx8           = "${libdir}/libgbm*${SOLIBS}"
 FILES_libgbm-imx-dev_mx8       = "${libdir}/pkgconfig/gbm.pc ${includedir}/gbm.h ${libdir}/libgbm${SOLIBSDEV}"
 RDEPENDS_libgbm-imx_append_mx8 = " libdrm"
 
-FILES_libvulkan-imx = "${libdir}/libvulkan_VSI${SOLIBS} ${libdir}/libSPIRV_viv${SOLIBS}"
+FILES_libvulkan-imx = "${libdir}/libvulkan_VSI${SOLIBS} ${libdir}/libvulkan_VSI${REALSOLIBS} ${libdir}/libSPIRV_viv${SOLIBS}"
 FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/libvulkan_VSI${SOLIBSDEV}"
+INSANE_SKIP_libvulkan-imx += "dev-so"
 
-FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS}"
-FILES_libopenvx-imx-dev = "${includedir}/VX ${libdir}/libopenVX${SOLIBSDEV}"
+FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVX${REALSOLIBS} ${libdir}/libOvx*${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS}"
+FILES_libopenvx-imx-dev = "${includedir}/VX ${libdir}/libOpenVX${SOLIBSDEV}"
+RDEPENDS_libopenvx-imx = "libnn-imx"
+INSANE_SKIP_libopenvx-imx += "dev-so dev-deps"
 
 FILES_libgl-imx = "${libdir}/libGL${REALSOLIBS}"
 FILES_libgl-imx-dev = "${libdir}/libGL${SOLIBSDEV} ${includedir}/GL"
+INSANE_SKIP_libgl-imx += "file-rdeps"
 
 # libEGL needs to open libGLESv1.so
 INSANE_SKIP_libgles1-imx += "dev-so"
@@ -340,12 +352,16 @@ FILES_libopencl-imx = "${libdir}/libOpenCL${SOLIBS} \
                        ${libdir}/libVivanteOpenCL${SOLIBS} \
                        ${libdir}/libLLVM_viv${SOLIBS} \
                        ${sysconfdir}/OpenCL/vendors/Vivante.icd"
-FILES_libopencl-imx-dev = "${includedir}/CL ${libdir}/libOpenCL${SOLIBSDEV}"
+FILES_libopencl-imx-dev = "${includedir}/CL ${libdir}/libOpenCL${SOLIBSDEV} ${libdir}/libOpenCL${REALSOLIBS}"
 RDEPENDS_libopencl-imx= "libclc-imx"
+INSANE_SKIP_libopencl-imx += "dev-so"
+
+FILES_libnn-imx = "${libdir}/libNN*${SOLIBS}"
 
 INSANE_SKIP_libopenvg-imx += "dev-so"
 FILES_libopenvg-imx = "${libdir}/libOpenVG*${SOLIBS}"
 FILES_libopenvg-imx-dev = "${includedir}/VG ${libdir}/libOpenVG*${SOLIBSDEV} ${libdir}/pkgconfig/vg.pc"
+RDEPENDS_libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 
 FILES_libvdk-imx = "${libdir}/libVDK*${SOLIBS}"
 FILES_libvdk-imx-dev = "${includedir}/*vdk*.h ${libdir}/libVDK${SOLIBSDEV}"
