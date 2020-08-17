@@ -325,10 +325,11 @@ FILES_libglslc-imx = "${libdir}/libGLSLC${SOLIBS}"
 FILES_libglslc-imx-dev = "${includedir}/CL ${libdir}/libGLSLC${SOLIBSDEV}"
 
 FILES_libopencl-imx = "${libdir}/libOpenCL${SOLIBS} \
+                       ${libdir}/libOpenCL${REALSOLIBS} \
                        ${libdir}/libVivanteOpenCL${SOLIBS} \
                        ${libdir}/libLLVM_viv${SOLIBS} \
                        ${sysconfdir}/OpenCL/vendors/Vivante.icd"
-FILES_libopencl-imx-dev = "${includedir}/CL ${libdir}/libOpenCL${SOLIBSDEV} ${libdir}/libOpenCL${REALSOLIBS}"
+FILES_libopencl-imx-dev = "${includedir}/CL ${libdir}/libOpenCL${SOLIBSDEV}"
 RDEPENDS_libopencl-imx= "libclc-imx"
 INSANE_SKIP_libopencl-imx += "dev-so dev-deps"
 
