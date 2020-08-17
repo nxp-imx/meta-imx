@@ -2,14 +2,14 @@
 
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=228c72f2a91452b8a03c4cab30f30ef9"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1b4db4b25c3a1e422c0c0ed64feb65d2"
 
 inherit fsl-eula-unpack
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "50442838d0ff01d4753a0aff244341a3"
-SRC_URI[sha256sum] = "7186d7424ec427ac483a07503ae4ca9ef4c09c1afb5fc536ff529a5f83f68802"
+SRC_URI[md5sum] = "d2744751db27b00385410b63a44d6a29"
+SRC_URI[sha256sum] = "587a6d8760069fb1311a6f99e0aa7678f4a42e30a0ea4d5a4768d9bb1290f63d"
 
 do_install() {
     install -d ${D}/${libdir}
@@ -22,7 +22,10 @@ do_install() {
 
 RDEPENDS_${PN} = "libdrm libpython2"
 
-FILES_${PN} = "${libdir} /opt"
+PACKAGES = "${PN} ${PN}-dev ${PN}-dbg"
 
-INSANE_SKIP_${PN} += "rpaths dev-deps"
+FILES_${PN} = "${libdir} /opt"
+FILES_${PN}-dbg += "${libdir}/.debug"
+
+INSANE_SKIP_${PN} += "rpaths dev-deps dev-so"
 INSANE_SKIP_${PN}-dev += "rpaths dev-elf"
