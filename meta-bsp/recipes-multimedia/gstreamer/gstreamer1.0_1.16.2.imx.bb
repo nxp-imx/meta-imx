@@ -5,7 +5,7 @@ FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstre
 # Use i.MX fork of GST for customizations
 GST1.0_SRC ?= "gitsm://source.codeaurora.org/external/imx/gstreamer.git;protocol=https"
 SRCBRANCH = "MM_04.05.06_2008_L5.4.47"
-SRCREV = "8514bc61ccab208a65e387eab9347276a8e770e7" 
+SRCREV = "8514bc61ccab208a65e387eab9347276a8e770e7"
 SRC_URI = " \
     ${GST1.0_SRC};branch=${SRCBRANCH} \
     file://0001-introspection.m4-prefix-pkgconfig-paths-with-PKG_CON.patch \
