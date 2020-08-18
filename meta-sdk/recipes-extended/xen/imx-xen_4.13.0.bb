@@ -1,7 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 require xen.inc
 
-SRCBRANCH = "imx_4.13.y"
+SRCBRANCH = "imx_5.4.47_2.2.0"
 XEN_SRC ?= "git://source.codeaurora.org/external/imx/imx-xen.git;protocol=https"
 
 SRC_URI = " \
