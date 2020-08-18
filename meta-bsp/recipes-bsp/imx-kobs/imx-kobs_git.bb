@@ -1,5 +1,5 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
-# Copyright 2017-2019 NXP
+# Copyright 2017-2020 NXP
 
 SUMMARY = "Nand boot write source"
 SECTION = "base"
@@ -10,7 +10,7 @@ PV = "5.5+git${SRCPV}"
 
 SRC_URI = "git://github.com/nxpmicro/imx-kobs.git;protocol=https"
 
-SRCREV = "c50b0a001d506a8c39c206b26ec24e71fcf2afb6"
+SRCREV = "cee66d0e956a64d03cc866fa8819da5b798c7f1b"
 
 S = "${WORKDIR}/git"
 
