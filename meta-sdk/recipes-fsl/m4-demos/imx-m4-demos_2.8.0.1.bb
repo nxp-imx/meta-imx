@@ -11,8 +11,8 @@ SRC_URI[imx7ulp.sha256sum] = "a8fbe1180b3d20e933a410cd76e60baac7a9f54e8b2bae8b6b
 SRC_URI[imx8mm.md5sum] = "0a132f5bc45958eb722c669f4766d079"
 SRC_URI[imx8mm.sha256sum] = "500a7d775b5d2af3c3f54f425f0cb3d05dcbf255e7dd7bb38c981ce9010ebec1"
 
-SRC_URI[imx8mq.md5sum] = "baa0a667b19e17a7e55466b92873ad26"
-SRC_URI[imx8mq.sha256sum] = "ac88568f63a794530339775a6e49e7928d3d09bcf4ba5edacea1841989e674b0"
+SRC_URI[imx8mq.md5sum] = "bc5df9ad5986fd5fee745a80feb72bb1"
+SRC_URI[imx8mq.sha256sum] = "7ed6f251d08e4c6c2fcfe8aef89dc98f3b8cb6e11007c9f3d8073c502e85c054"
 
 SRC_URI[imx8qm.md5sum] = "4d969a6bec76b3f58ca563545135e0a5"
 SRC_URI[imx8qm.sha256sum] = "d06a636b84cd559483091cbdb07b5ce9e15a534bca31d4cb756b33b696c2160b"
