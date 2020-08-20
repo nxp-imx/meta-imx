@@ -7,7 +7,7 @@ DEPENDS = "python3 python3-pip-native python3-wheel-native"
 PV = "20.02"
 
 PYARMNN_SRC ?= "git://github.com/nxpmicro/pyarmnn-release.git;protocol=https"
-SRCBRANCH = "imx_20.02"
+SRCBRANCH = "imx_5.4.47_2.2.0"
 
 SRCREV = "7e31a6f729f7f4a3663f545884e451c143d3f194"
 
