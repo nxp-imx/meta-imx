@@ -9,7 +9,7 @@ PV = "20.02"
 PYARMNN_SRC ?= "git://github.com/nxpmicro/pyarmnn-release.git;protocol=https"
 SRCBRANCH = "imx_20.02"
 
-SRCREV = "64ad4047061281eda09125b7aea92a8ca2f16ae7"
+SRCREV = "7e31a6f729f7f4a3663f545884e451c143d3f194"
 
 SRC_URI = " \
     ${PYARMNN_SRC};branch=${SRCBRANCH} \
