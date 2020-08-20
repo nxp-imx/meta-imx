@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v13 June 2020
+LA_OPT_NXP_Software_License v15 August 2020
 
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
@@ -72,13 +72,13 @@ and to which different license terms may apply.
 
 2.       LICENSE GRANT.
 
-2.1.         If you are not expressly granted the production use license in
+2.1.         If you are not expressly granted the distribution license in
 Section 2.3 in the Software Content Register, then you are only granted the
 rights in Section 2.2 and not in 2.3.  If you are expressly granted the
-production use license in Section 2.3 in the Software Content Register, then
-you are granted the rights in both Section 2.2 and 2.3.
+distribution license in Section 2.3 in the Software Content Register, then you
+are granted the rights in both Section 2.2 and 2.3.
 
-2.2.      Internal Use License.  Subject to the terms and conditions of this
+2.2.      Standard License.  Subject to the terms and conditions of this
 Agreement, NXP grants you a worldwide, personal, non-transferable,
 non-exclusive, non-sublicensable license, solely for the development of an
 Authorized System:
@@ -92,11 +92,11 @@ readable), to prepare Derivative Works of the Licensed Software.
 You may not distribute or sublicense the Licensed Software to others under the
 license granted in this Section 2.2.
 
-2.3.        Production Use License.  If expressly authorized in the Software
-Content Register, subject to the terms and conditions of this Agreement, NXP
-grants you a worldwide, personal, non-transferable, non-exclusive,
-non-sublicensable license solely in connection with your manufacturing and
-distribution of an Authorized System:
+2.3.        Additional Distribution License.  If expressly authorized in the
+Software Content Register, subject to the terms and conditions of this
+Agreement, NXP grants you a worldwide, personal, non-transferable,
+non-exclusive, non-sublicensable license solely in connection with your
+manufacturing and distribution of an Authorized System:
 
 (a)            to manufacture (or have manufactured), distribute, and market
 the Licensed Software (and its Derivative Works prepared under the license in
@@ -168,11 +168,11 @@ combined and/or distributed with the software be (i) disclosed or distributed
 in source code form; (ii) licensed for the purpose of making Derivative Works;
 or (iii) redistributable at no charge.
 
-3.8.         You may not publish or distribute information, results or data
-associated with the use of the Licensed Software to anyone other than NXP;
-however, you must advise NXP of any results obtained including any problems or
-suggested improvements thereof.  NXP retains the right to use such results and
-related information in any manner it deems appropriate
+3.8.         You may not publish or distribute reports associated with the use
+of the Licensed Software to anyone other than NXP.  You may advise NXP of any
+results obtained from your use of the Licensed Software, including any problems
+or suggested improvements thereof, and NXP retains the right to use such
+results and related information in any manner it deems appropriate.
 
 4.       OPEN SOURCE.         Open source software included in the Licensed
 Software is not licensed under the terms of this Agreement but is instead
