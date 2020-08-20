@@ -17,7 +17,4 @@ SRC_URI[imx8mq.sha256sum] = "7ed6f251d08e4c6c2fcfe8aef89dc98f3b8cb6e11007c9f3d80
 SRC_URI[imx8qm.md5sum] = "7bfcad2c582c528aaeb0226598754ab3"
 SRC_URI[imx8qm.sha256sum] = "c669de065923753c818f6b3bad0687d1f49eb94ababd076096556815c030a7f3"
 
-SRC_URI[imx8qx.md5sum] = "501dc76bb0a889d4d3aec8ab428eda89"
-SRC_URI[imx8qx.sha256sum] = "3521608924aad04f5fd06444e385b3e8c2e2a63344c7a0956f7d53314c56f187"
-
-COMPATIBLE_MACHINE = "(mx7ulp|mx8mm|mx8mq|mx8qm|mx8qxp)"
+COMPATIBLE_MACHINE = "(mx7ulp|mx8mm|mx8mq|mx8qm)"
