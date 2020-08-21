@@ -6,7 +6,7 @@ SECTION = "base"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982"
 
-DEPENDS = "imx-seco-libs optee-os optee-client"
+DEPENDS = "imx-seco-libs optee-os optee-client python3-pycryptodomex-native"
 
 SRCBRANCH = "master"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
@@ -15,7 +15,7 @@ SRCREV = "e8ea968445c8553a5020153eb4e05a195ecf62c3"
 
 S = "${WORKDIR}/git"
 
-inherit cmake
+inherit cmake python3native
 
 OPTEE_OS_TA_EXPORT_DIR_aarch64 = "${STAGING_INCDIR}/optee/export-user_ta_arm64"
 OPTEE_OS_TA_EXPORT_DIR_arm = "${STAGING_INCDIR}/optee/export-user_ta_arm32"
