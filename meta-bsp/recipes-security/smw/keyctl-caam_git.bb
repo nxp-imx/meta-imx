@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982"
 SRCBRANCH = "master"
 KEYCTL_CAAM_SRC ?= "git://source.codeaurora.org/external/imx/keyctl_caam.git;protocol=https"
 SRC_URI = "${KEYCTL_CAAM_SRC};branch=${SRCBRANCH}"
-SRCREV = "c2e8f41f1b1dd807e11e02790592d428be9ea6b2"
+SRCREV = "be3326eacd11500c54a3c69bf0b7652a46267ea0"
 
 S = "${WORKDIR}/git"
 
