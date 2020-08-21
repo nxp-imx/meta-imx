@@ -2,7 +2,6 @@
 
 DESCRIPTION = "i.MX HANTRO VPU library"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://vpu/EULA.txt;md5=b063366b066c9f10037c59756a9ced54"
 
 inherit fsl-eula-unpack use-imx-headers
 
