@@ -1,8 +1,8 @@
 #!/bin/sh
 CPUREV=$(cat /sys/devices/soc0/soc_id)
 FILEVG=/usr/lib/libOpenVG.so
-FILEVG3D=/usr/lib/libOpenVG.3d.so
-FILEVG355=/usr/lib/libOpenVG.2d.so
+FILEVG3D=/usr/lib/libOpenVG.3d.so.1.1.0
+FILEVG355=/usr/lib/libOpenVG.2d.so.1.1.0
 if  [ -e $FILEVG3D ] && [ -e $FILEVG355 ]
 then
   if [ -e  $FILEVG ]
