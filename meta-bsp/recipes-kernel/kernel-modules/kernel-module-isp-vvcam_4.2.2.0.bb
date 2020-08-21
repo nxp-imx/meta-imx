@@ -10,7 +10,7 @@ SRC_URI = " \
     ${ISP_KERNEL_SRC};branch=${SRCBRANCH} \
 "
 
-SRCREV = "65f52b42ad1b2752d703f73711ed0696685d3a24"
+SRCREV = "b0003957cf7d4af6bc4097414a5a7fbe617f97fe"
 
 S = "${WORKDIR}/git/vvcam/v4l2"
 
