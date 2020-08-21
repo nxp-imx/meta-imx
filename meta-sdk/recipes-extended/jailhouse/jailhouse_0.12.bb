@@ -8,7 +8,7 @@ SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH} \
            file://0002-tools-scripts-update-shebang-to-python3.patch \
 "
 
-SRCREV = "b3ce9bbb2154a90f8f2b1a2838d3017fec5cc385" 
+SRCREV = "8bbe203ee7c1fc16198ce1bf964e54c90606c3c2"
 
 CELLS = ""
 
