@@ -8,8 +8,8 @@ inherit fsl-eula-unpack systemd
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "3b1c130595e8b1fc469401f97af3756d"
-SRC_URI[sha256sum] = "05e9222cb3755df7bca744abc53196d11fdcd9c9e97a277301723aff270b9988"
+SRC_URI[md5sum] = "127a9ddc8a15622537fa6434f5e8e91a"
+SRC_URI[sha256sum] = "647e6f1fedf5dfc5b5709eac8fcb660de489b7faa5b7808b73826296e3189cdd"
 
 SYSTEMD_SERVICE_${PN} = "imx8-isp.service"
 
