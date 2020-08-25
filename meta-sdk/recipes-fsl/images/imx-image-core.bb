@@ -26,6 +26,7 @@ IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' weston weston-examples weston-init','', d)} \
     imx-test \
     packagegroup-imx-core-tools \
+    packagegroup-imx-security \
     ${CLINFO} \
 "
 export IMAGE_BASENAME = "imx-image-core"
