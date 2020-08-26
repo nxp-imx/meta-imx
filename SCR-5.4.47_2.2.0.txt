@@ -45,8 +45,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    ARM Trusted Firmware
 Release Location:            https://source.codeaurora.org/external/imx/imx-atf -b rel_imx_5.4.47_2.2.0
-Origin:                      NXP (proprietary)
-                             arm-trusted-firmware v1.4 - ARM Limited (BSD-3-clause) - http://github.com/ARM-software/arm-trusted-firmware/
+Origin:                      NXP (BSD-3-clause)
+                             arm-trusted-firmware - ARM Limited (BSD-3-clause) - http://github.com/ARM-software/arm-trusted-firmware/
 
 --------------------------------------------
 
@@ -69,25 +69,27 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    BSP firmware - DDR EPDC HDMI SDMA VPU
 Release Location:            Mirror
-Origin:                    NXP (proprietary)
+Origin:                      NXP (proprietary)
 
-                         In addition, these components contain code from the companies listed below.
-                           DDR:   origin: Synopsys (proprietary)
-                           EASRC: origin: NXP (proprietary)
-                           EPDC:  origin: E Ink Corporation (proprietary)
-                           HDMI:  origin: Cadence Design Systems, Inc. (proprietary)
-                           SDMA:  origin: NXP (proprietary)
-                           VPU:   vpu_fw_imx27_TO1.bin
-                                  vpu_fw_imx27_TO2.bin
-                                  vpu_fw_imx51.bin
-                                  vpu_fw_imx53.bin
-                                  vpu_fw_imx6d.bin
-                                  vpu_fw_imx6q.bin
-                               origin: Chips & Media, Inc.  (proprietary)
+                           In addition, these components contain code from the companies listed below.
+                             DDR:   origin: Synopsys (proprietary)
+                             EASRC: origin: NXP (proprietary)
+                             EPDC:  origin: E Ink Corporation (proprietary)
+                             HDMI:  origin: Cadence Design Systems, Inc. (proprietary)
+                             SDMA:  origin: NXP (proprietary)
+                             XCVR:  origin: NXP (proprietary)
+                             XUVI:  origin: NXP (proprietary)
+                             VPU:   vpu_fw_imx27_TO1.bin
+                                    vpu_fw_imx27_TO2.bin
+                                    vpu_fw_imx51.bin
+                                    vpu_fw_imx53.bin
+                                    vpu_fw_imx6d.bin
+                                    vpu_fw_imx6q.bin
+                                 origin: Chips & Media, Inc.  (proprietary)
 
-                                  vpu_fw_imx8_dec.bin
-                                  vpu_fw_imx8_enc.bin
-                               origin: Amphion Semiconductor Ltd  (proprietary)
+                                    vpu_fw_imx8_dec.bin
+                                    vpu_fw_imx8_enc.bin
+                                 origin: Amphion Semiconductor Ltd  (proprietary)
 
 --------------------------------------------
 
@@ -214,8 +216,9 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    BSP firmware - Broadcom Bluetooh and WIFI
 Release Location:            https://github.com/NXP/imx-firmware -b master
-Origin:                      Broadcom Corporation (proprietary)
-                             Cypress Semiconductor Corporation (proprietary)
+Origin:                      brcm: Broadcom Corporation (proprietary)
+                             cyw-wifi-bt: Cypress Semiconductor Corporation (proprietary)
+                             nxp: NXP (proprietary)
 
 --------------------------------------------
 
@@ -226,6 +229,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP Wi-Fi linux SDK
 Release Location:            https://source.codeaurora.org/external/imx/mwifiex -b rel_imx_5.4.47_2.2.0
+Origin:                      NXP (GPL-2.0)
+
 --------------------------------------------
 
 Package:                     imx-seco-3.7.0.bin
@@ -246,6 +251,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    BSP source - SECO
 Release Location:            https://github.com/NXP/imx-seco-libs.git -b rel_imx_5.4.47_2.2.0
+Origin:                      NXP (proprietary)
+
 --------------------------------------------
 
 Package:                     sof-imx-1.5.0-3
@@ -255,6 +262,13 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Sound Open Firmware
 Release Location:            Mirror
+Origin:                      NXP (BSD-3-clause)
+                             Intel Corporation (BSD-3-clause)
+                             Cadence Design Systems, Inc. (MIT)
+                             Ulf Magnusson (ISC) 
+                             FreeBSD (BSD-2-clause)
+                             source code in: https://github.com/thesofproject/sof
+
 --------------------------------------------
 
 Package:                     simg2img.git
@@ -362,6 +376,8 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Machine Learning Security
 Release Location:            Mirror
+Origin:                      NXP (NXP Proprietary)
+
 --------------------------------------------
 
 Package:                     imx-smw.git
@@ -371,6 +387,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP i.MX Security Middleware Library
 Release Location:            https://source.codeaurora.org/external/imx/imx-smw -b rel_imx_5.4.47_2.2.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 Graphics Packages
 --------------------------------------------
@@ -382,24 +400,31 @@ Package Category:            Graphics
 Type of Content:             ISP Kernel Module source
 Description and comments:    Kernel Loadable Module for ISP
 Release Location:            https://source.codeaurora.org/external/imx/isp-vvcam -b rel_imx_5.4.47_2.2.0
+Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
+
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.0.bin
+Package:                     isp-imx-4.2.2.1.bin
 Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
 Description and comments:    i.MX software ISP
 Release Location:            Mirror
+Origin:                      VeriSilicon Holdings Co., Ltd. (proprietary)
+
 --------------------------------------------
 
-Package:                     basler-camera-1.0.3.bin
+Package:                     basler-camera-1.0.4.bin
 Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    Basler camera binary drivers
 Release Location:            Mirror
+Origin:                      Basler AG (proprietary)
+                             VeriSilicon Holdings Co., Ltd. (proprietary)
+
 --------------------------------------------
 
 Package:                     apitrace-imx.git
@@ -656,6 +681,14 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    i.MX Neural Networks Accelerator Plugin
 Release Location:            https://source.codeaurora.org/external/imx/nn-imx -b rel_imx_5.4.47_2.2.0
+Origin:                      NXP (MIT)
+                             Vivante Corporation (MIT)
+                             Boost Software (Boost) - https://www.boost.org/
+                             Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
+                             OpenCV (BSD-3-clause) - https://github.com/opencv/opencv/
+                             JSON-CPP (public domain) - https://github.com/open-source-parsers/jsoncpp/
+                             libjpeg (IJG) - http://www.ijg.org/
+
 --------------------------------------------
 
 Package:                     opencv-imx.git
@@ -797,6 +830,8 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    NXP PDM to PCM Software Decimation SIMD Library
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+
 --------------------------------------------
 
 Package:                     imx-vpuwrap.git
@@ -844,6 +879,10 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    VPU vc8000e encoder library
 Release Location:            Mirror
+Origin:                      VeriSilicon Inc. (proprietary)
+                             Alliance for Open Media (BSD-2-clause, AFOM Patent License) - http://www.aomedia.org/
+                             The WebM project by Google Inc. (BSD-3-clause) https://bugs.chromium.org/p/webm/issues/list
+
 --------------------------------------------
 
 Package:                     imx-qtapplications-1.2.2-aarch32.bin
@@ -903,6 +942,10 @@ Package Category:            M4_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M4 core
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
+                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
+
 --------------------------------------------
 
 Package:                     imx8mm-m4-demo-2.8.0.1.bin
@@ -966,6 +1009,10 @@ Package Category:            M7_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
+                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
+
 --------------------------------------------
 
 Package:                     imx8mp-m7-demo-2.8.1.bin
@@ -975,6 +1022,11 @@ Package Category:            M7_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             ARM LIMITED (BSD-3-Clause)
+                             Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
+                             Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
+
 --------------------------------------------
 MachineLearning Packages
 --------------------------------------------
@@ -986,6 +1038,9 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ARM Neural Network SDK
 Release Location:            https://source.codeaurora.org/external/imx/armnn-imx -b rel_imx_5.4.47_2.2.0
+Origin:                      NXP (MIT)
+                             armnn (MIT) - https://github.com/ARM-software/armnn
+
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
@@ -995,6 +1050,11 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Onnxruntime cross-platform scoring engine
 Release Location:            https://source.codeaurora.org/external/imx/onnxruntime-imx -b rel_imx_5.4.47_2.2.0
+Origin:                      NXP (MIT)
+                             Microsoft/onnxruntime (MIT) - https://github.com/Microsoft/onnxruntime
+                             Google's Protocol Buffer (BSD-3-clause) - https://tracker.debian.org/pkg/protobuf
+                             gRPC (Apache-2.0) - https://github.com/grpc/grpc
+
 --------------------------------------------
 
 Package:                     pyarmnn-release.git
@@ -1004,6 +1064,8 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Python wrapper for armnn
 Release Location:            https://github.com/NXPmicro/pyarmnn-release -b rel_imx_5.4.47_2.2.0
+Origin:                      NXP (MIT)
+
 --------------------------------------------
 
 Package:                     pytorch-release.git
@@ -1061,6 +1123,7 @@ Origin:                      NXP (BSD-3-clause)
                              libusb (LGPL-2.1) [libusb-1.0.dll] [dynamic link] - https://github.com/libusb/libusb
                              bzip2 (BSD-4-clause) - https://github.com/enthought/bzip2-1.0.6/tree/288acf97a15d558f96c24c89f578b724d6e06b0c
                              Android Open Source Project (Apache-2.0) [sparse_format.h] - https://developer.android.com/
+
 --------------------------------------------
 PATCHES IN META_FSL_BSP_RELEASE
 --------------------------------------------
