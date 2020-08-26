@@ -8,6 +8,7 @@ SRC_URI += " \
 "
 
 DEPENDS_remove = "virtual/libgl"
+DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 
 REQUIRED_DISTRO_FEATURES_remove = "opengl"
 
