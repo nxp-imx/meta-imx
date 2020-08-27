@@ -12,10 +12,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 DEPENDS += "lzop-native bc-native"
 
-KERNEL_BRANCH ?= "imx_5.4.47_2.2.0"
+SRCBRANCH = "imx_5.4.47_2.2.0"
 LOCALVERSION = "-2.2.0"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
-SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
+SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
 SRCREV = "70f83dcfafaa9b36b1351a65e5cc18f23a06942d"
 

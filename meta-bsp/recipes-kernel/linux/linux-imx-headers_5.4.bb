@@ -7,10 +7,10 @@ New headers are installed in ${includedir}/imx."
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
-KERNEL_BRANCH ?= "imx_5.4.47_2.2.0"
+SRCBRANCH = "imx_5.4.47_2.2.0"
 LOCALVERSION = "-2.2.0"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
-SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
+SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
 SRCREV = "dea2fede7e024ee7029b13e8d82a00ec14427777"
 
