@@ -20,7 +20,7 @@ do_install() {
     cp -r ${S}/usr/include/* ${D}/${includedir}
 }
 
-RDEPENDS_${PN} = "libdrm libpython2"
+RDEPENDS_${PN} = "libdrm libpython2 bash"
 
 PACKAGES = "${PN} ${PN}-dev ${PN}-dbg"
 
