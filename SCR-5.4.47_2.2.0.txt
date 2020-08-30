@@ -404,7 +404,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.1.bin
+Package:                     isp-imx-4.2.2.2.1.bin
 Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -415,7 +415,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (proprietary)
 
 --------------------------------------------
 
-Package:                     basler-camera-1.0.4.bin
+Package:                     basler-camera-4.2.2.2.1.bin
 Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
