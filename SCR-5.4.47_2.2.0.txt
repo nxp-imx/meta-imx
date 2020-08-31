@@ -390,6 +390,15 @@ Release Location:            https://source.codeaurora.org/external/imx/imx-smw 
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
+
+Package:                     keyctl-caam.git
+Outgoing License:            BSD-3-Clause 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    NXP i.MX keyctl tool to manage CAAM Keys
+Release Location:            https://source.codeaurora.org/external/imx/key_caam -b rel_imx_5.4.47_2.2.0
+--------------------------------------------
 Graphics Packages
 --------------------------------------------
 
