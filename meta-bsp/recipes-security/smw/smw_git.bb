@@ -11,7 +11,7 @@ DEPENDS = "imx-seco-libs optee-os optee-client python3-pycryptodomex-native"
 SRCBRANCH = "imx_5.4.47_2.2.0"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "856a1d4721164e190dc4e415c096ca731bd8c19c"
+SRCREV = "bc123ef0843b96a10a43ef0b8ae6dbb302850890"
 
 S = "${WORKDIR}/git"
 
