@@ -6,8 +6,8 @@ DEPENDS = "zlib unzip-native swig-native python3 python3-numpy-native python3-pi
 
 TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
 SRCBRANCH = "imx-v2.2.0"
-SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH}"
 
+SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH}"
 SRCREV = "cbf56345f9e3cafc48ef7f5f9977174a6c417fa5"
 
 SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz;name=model-mobv1"
