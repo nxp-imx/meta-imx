@@ -30,6 +30,7 @@ IMAGE_INSTALL += " \
     ${OPENCV_PKGS} \
     ${ML_PKGS} \
     packagegroup-qt5-imx \
+    tzdata \
 "
 
 TOOLCHAIN_TARGET_TASK += " \
