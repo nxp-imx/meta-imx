@@ -20,23 +20,9 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install () {
     install -d ${D}${libdir}
-    install -d ${D}/${includedir}/OVXLIB
-    install -d ${D}/${includedir}/nnrt
-
-    install -m 0755 ${S}/*.so* ${D}${libdir}
-
-    ln -sf libneuralnetworks.so.1.1.8 ${D}${libdir}/libneuralnetworks.so
-    ln -sf libneuralnetworks.so.1.1.8 ${D}${libdir}/libneuralnetworks.so.1
-    ln -sf libneuralnetworks.so.1.1.8 ${D}${libdir}/libneuralnetworks.so.1.1
-
-    ln -sf libnnrt.so.1.1.8 ${D}${libdir}/libnnrt.so
-    ln -sf libnnrt.so.1.1.8 ${D}${libdir}/libnnrt.so.1
-    ln -sf libnnrt.so.1.1.8 ${D}${libdir}/libnnrt.so.1.1
-
-    ln -sf libovxlib.so.1.1.0 ${D}${libdir}/libovxlib.so
-    ln -sf libovxlib.so.1.1.0 ${D}${libdir}/libovxlib.so.1
-    ln -sf libovxlib.so.1.1.0 ${D}${libdir}/libovxlib.so.1.1
-
+    install -d ${D}${includedir}/OVXLIB
+    install -d ${D}${includedir}/nnrt
+    cp -d ${S}/*.so* ${D}${libdir}
     cp -r ${S}/include/OVXLIB/* ${D}/${includedir}/OVXLIB
     cp -r ${S}/include/nnrt/* ${D}/${includedir}/nnrt
 }
