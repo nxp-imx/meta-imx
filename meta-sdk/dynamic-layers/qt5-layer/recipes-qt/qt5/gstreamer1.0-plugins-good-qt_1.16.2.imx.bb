@@ -14,7 +14,7 @@ SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
     file://0001-configure.ac-Add-prefix-to-correct-the-QT_PATH.patch \
 "
-SRCREV = "a1ba15d53aab342dd921261148562f47eeed7d98"
+SRCREV = "3299cee5389a52207368f26edfe31ae89728a81d"
 
 S = "${WORKDIR}/git"
 
