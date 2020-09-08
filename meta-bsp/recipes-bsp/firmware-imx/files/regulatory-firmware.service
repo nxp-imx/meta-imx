@@ -1,0 +1,8 @@
+[Unit]
+Description=User Space Regulatory Firmware Loading
+
+[Service]
+ExecStart=/etc/regulatory
+
+[Install]
+WantedBy=multi-user.target

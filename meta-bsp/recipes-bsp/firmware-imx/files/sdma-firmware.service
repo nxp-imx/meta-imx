@@ -1,0 +1,8 @@
+[Unit]
+Description=User Space SDMA Firmware Loading
+
+[Service]
+ExecStart=/etc/sdma
+
+[Install]
+WantedBy=multi-user.target
