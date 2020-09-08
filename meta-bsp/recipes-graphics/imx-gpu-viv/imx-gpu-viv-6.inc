@@ -145,9 +145,8 @@ HAS_GBM     = "false"
 HAS_GBM_mx8 = "true"
 
 GLES3_HEADER_REMOVALS        = "gl31.h gl32.h"
-GLES3_HEADER_REMOVALS_mx8mq  = "gl32.h"
-GLES3_HEADER_REMOVALS_mx8mn  = "gl32.h"
-GLES3_HEADER_REMOVALS_mx8mp  = "gl32.h"
+GLES3_HEADER_REMOVALS_mx8m   = "gl32.h"
+GLES3_HEADER_REMOVALS_mx8mm  = "gl31.h gl32.h"
 GLES3_HEADER_REMOVALS_mx8qxp = ""
 GLES3_HEADER_REMOVALS_mx8qm  = ""
 
