@@ -2,8 +2,8 @@ DESCRIPTION = "A library to retrieve i.MX GPU performance data"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=983e4c77621568488dd902b27e0c2143" 
 
-SRC_URI[arm-fb.md5sum] = "4d0c4dc21257f3522dc6f70979e921e5"
-SRC_URI[arm-fb.sha256sum] = "f5d955316e7c9dfd70c9356a91d0c757cf0c42e9e39a045bd7d7f750564245d7"
+SRC_URI[arm-fb.md5sum] = "71e4b06168bdcf9b70fab3efafd570ef"
+SRC_URI[arm-fb.sha256sum] = "d6526056545b36a7645b9e199357480891df749ed191a1211953bf45dac42406"
 
 SRC_URI[arm-wayland.md5sum] = "6c2a9b5c887360c418e37bfeddf50a81"
 SRC_URI[arm-wayland.sha256sum] = "d90fd26470f6d3f0f76e2f53f079dddc78244ef2803101a94bf722b79144957b"
