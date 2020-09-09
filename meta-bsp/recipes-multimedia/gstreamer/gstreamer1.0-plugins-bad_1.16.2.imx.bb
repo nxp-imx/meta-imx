@@ -29,9 +29,7 @@ EXTRA_AUTORECONF = ""
 PACKAGE_ARCH_imxpxp = "${MACHINE_SOCARCH}"
 PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
 
-PACKAGECONFIG_append_mx6q = " opencv"
-PACKAGECONFIG_append_mx6qp = " opencv"
-PACKAGECONFIG_append_mx8 = " opencv kms tinycompress"
+PACKAGECONFIG_append_mx8 = " kms tinycompress"
 
 #Remove vulkan as it's incompatible for i.MX 8M Mini
 PACKAGECONFIG_remove_mx8mm = " vulkan"
