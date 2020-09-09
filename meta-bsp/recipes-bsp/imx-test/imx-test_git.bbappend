@@ -8,7 +8,6 @@ SRCBRANCH = "master"
 IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
 SRC_URI = " \
     ${IMXTEST_SRC};branch=${SRCBRANCH} \
-    file://0001-pxp-test-Fix-format-security-error.patch \
     file://memtool_profile \
 "
 
