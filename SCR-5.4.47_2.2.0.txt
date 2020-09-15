@@ -832,7 +832,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-sw-pdm-1.0.0.bin
+Package:                     imx-sw-pdm-1.0.1.bin
 Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Multimedia
