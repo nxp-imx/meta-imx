@@ -1,4 +1,4 @@
-require recipes-graphics/drm/libdrm_2.4.91.imx.bb
+require recipes-graphics/drm/libdrm_2.4.99.imx.bb
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-graphics/drm/${BPN}:"
 
