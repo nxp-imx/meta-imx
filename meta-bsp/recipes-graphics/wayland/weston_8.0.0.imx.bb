@@ -1,6 +1,9 @@
-require recipes-graphics/wayland/weston_7.0.0.bb
+require recipes-graphics/wayland/weston_9.0.0.bb
 
-SRC_URI_remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
+FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-graphics/wayland/${PN}:"
+
+SRC_URI_remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
+                  file://0001-tests-include-fcntl.h-for-open-O_RDWR-O_CLOEXEC-and-.patch"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRC_URI_prepend = "${WESTON_SRC};branch=weston-imx-8.0 "
 SRCREV = "f13d40a3a0504a00baf2f28abe83b65dab8b2e10"
