@@ -12,8 +12,6 @@ REQUIRED_DISTRO_FEATURES_remove = "opengl"
 PACKAGECONFIG ?= " \
     egl \
     ${@bb.utils.filter('DISTRO_FEATURES', 'vulkan wayland', d)} \
-    xcb \
-    xlib \
 "
 
 PACKAGECONFIG[egl]     = "-DENABLE_EGL=ON,-DENABLE_EGL=OFF"
