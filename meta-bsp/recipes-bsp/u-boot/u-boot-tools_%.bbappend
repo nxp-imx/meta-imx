@@ -11,11 +11,11 @@ SED_CONFIG_DISABLE_remove_armeb = "CONFIG_EFI_LOADER"
 SED_CONFIG_DISABLE_remove_aarch64 = "CONFIG_EFI_LOADER"
 
 do_compile() {
-	oe_runmake sandbox_defconfig
+	oe_runmake -C ${S} sandbox_defconfig O=${B}
 	for config in ${SED_CONFIG_DISABLE}; do
 		sed -i -e "s/$config=.*/# $config is not set/" .config
 	done
-	oe_runmake cross_tools NO_SDL=1
+	oe_runmake -C ${S} cross_tools NO_SDL=1 O=${B}
 }
 
 # Have to overwrite do_install() as uboot-fit_check_sign and fit_check_sign
