@@ -19,6 +19,8 @@ SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
 SRCREV = "2fc96382f6dbd624e4597cffd284b0f9beffc646"
 
+LINUX_VERSION = "5.4.47"
+
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
@@ -32,6 +34,11 @@ DO_CONFIG_V7_COPY_mx6 = "yes"
 DO_CONFIG_V7_COPY_mx7 = "yes"
 DO_CONFIG_V7_COPY_mx8 = "no"
 
+KBUILD_DEFCONFIG ?= ""
+KBUILD_DEFCONFIG_mx6= "imx_v7_defconfig"
+KBUILD_DEFCONFIG_mx7= "imx_v7_defconfig"
+KBUILD_DEFCONFIG_mx8= "imx_v8_defconfig"
+
 addtask copy_defconfig after do_patch before do_preconfigure
 
 do_copy_defconfig () {
@@ -40,12 +47,10 @@ do_copy_defconfig () {
         # copy latest imx_v7_defconfig to use for mx6, mx6ul and mx7
         mkdir -p ${B}
         cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/.config
-        cp ${S}/arch/arm/configs/imx_v7_defconfig ${B}/../defconfig
     else
         # copy latest imx_v8_defconfig to use for mx8
         mkdir -p ${B}
         cp ${S}/arch/arm64/configs/imx_v8_defconfig ${B}/.config
-        cp ${S}/arch/arm64/configs/imx_v8_defconfig ${B}/../defconfig
     fi
 }
 
