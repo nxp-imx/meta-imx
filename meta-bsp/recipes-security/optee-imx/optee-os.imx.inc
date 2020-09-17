@@ -4,6 +4,9 @@ require recipes-security/optee-imx/optee-os_3.2.0.imx.bb
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c1f21c4f72f372ef38a5a4aee55ec173"
 
+SRC_URI_remove = "file://0001-scripts-update-scripts-to-use-python3.patch \
+                  file://0001-optee-os-fix-gcc10-compilation-issue-and-missing-cc-.patch"
+
 inherit python3native
 DEPENDS_remove = "python-pycrypto-native"
 DEPENDS_append = " python3-pycrypto-native python3-pyelftools-native"

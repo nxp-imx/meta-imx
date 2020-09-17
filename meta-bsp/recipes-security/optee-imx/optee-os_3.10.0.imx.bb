@@ -1,6 +1,8 @@
 # Copyright (C) 2020 NXP
 require optee-os.imx.inc
 
+FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-security/optee-imx/${PN}:"
+
 DEPENDS_append = " python3-pycryptodomex-native"
 
 SRCBRANCH = "imx_3.10.y"

@@ -2,7 +2,10 @@
 
 require recipes-security/optee-imx/optee-client_3.2.0.imx.bb
 
-SRC_URI_remove = "file://0001-libteec-refactor-_dprintf.patch"
+FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-security/optee-imx/optee-client:"
+
+SRC_URI_remove = "file://0001-libteec-refactor-_dprintf.patch \
+                  file://0001-flags-do-not-override-CFLAGS-from-host.patch"
 
 B = "${WORKDIR}/build"
 
