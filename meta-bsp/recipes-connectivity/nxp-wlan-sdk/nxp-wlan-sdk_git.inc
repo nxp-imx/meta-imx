@@ -7,7 +7,7 @@ MRVL_SRC ?= "git://source.codeaurora.org/external/imx/mwifiex.git;protocol=https
 # Kernel 5.4
 SRCBRANCH = "master"
 SRC_URI = "${MRVL_SRC};branch=${SRCBRANCH}"
-SRCREV = "f18705756b7000d16646fbf0bde46e91dfa70d87"
+SRCREV = "e26a6cc8bb9eafb0677523a5a1cb3fdacfda3f51"
 
 S = "${WORKDIR}/git"
 
