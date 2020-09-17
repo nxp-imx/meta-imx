@@ -1,10 +1,9 @@
-require recipes-multimedia/gstreamer/gstreamer1.0-plugins-bad_1.16.2.bb
+require gstreamer1.0-plugins-bad_1.16.2.bb
 
 DEPENDS += "jpeg libdrm"
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
 
-FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/${PN}:"
-FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
 SRCBRANCH = "imx-1.16.x"
