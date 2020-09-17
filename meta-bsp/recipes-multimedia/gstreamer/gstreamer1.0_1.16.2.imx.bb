@@ -14,6 +14,7 @@ SRC_URI = " \
     file://0001-gst-gstpluginloader.c-when-env-var-is-set-do-not-fal.patch \
     file://add-a-target-to-compile-tests.patch \
     file://run-ptest \
+    file://0001-gst-glib-gen.mak-Adapt-to-backwards-incompatible-cha.patch;patchdir=common \
 "
 
 S = "${WORKDIR}/git"
