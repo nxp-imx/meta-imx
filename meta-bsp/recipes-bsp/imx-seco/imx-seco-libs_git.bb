@@ -21,6 +21,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install () {
 	oe_runmake DESTDIR=${D} install
+	chown -R root:root "${D}"
 }
 
 COMPATIBLE_MACHINE = "(mx8)"
