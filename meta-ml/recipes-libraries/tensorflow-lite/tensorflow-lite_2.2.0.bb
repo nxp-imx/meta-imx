@@ -9,7 +9,7 @@ SRCBRANCH = "imx_5.4.47_2.2.0"
 
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "7b59b726d021290878c6a8251609b6183e78e95f"
+SRCREV = "8828092b9dfef251b4bea82a771570b4975c2d6e"
 
 SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz;name=model-mobv1"
 SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
