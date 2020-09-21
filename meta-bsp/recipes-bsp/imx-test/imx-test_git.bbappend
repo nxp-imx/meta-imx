@@ -31,3 +31,5 @@ do_compile() {
                KBUILD_OUTPUT=${STAGING_KERNEL_BUILDDIR} \
                PLATFORM=${PLATFORM}
 }
+
+COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
