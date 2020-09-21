@@ -15,7 +15,16 @@ DEPENDS += "lzop-native bc-native"
 SRCBRANCH = "imx_5.4.y"
 LOCALVERSION = "-2.2.0"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
-SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH} \
+           file://0001-perf-env-Do-not-return-pointers-to-local-variables.patch \
+           file://0002-perf-tests-bp_account-Make-global-variable-static.patch \
+           file://0003-perf-bench-Share-some-global-variables-to-fix-build-.patch \
+           file://0004-perf-cs-etm-Move-definition-of-traceid_list-global-v.patch \
+           file://0005-libtraceevent-Fix-build-with-binutils-2.35.patch \
+           file://0006-tools-lib-traceevent-Fix-memory-leak-in-process_dyna.patch \
+           file://0007-perf-trace-Fix-the-selection-for-architectures-to-ge.patch \
+           file://0008-perf-beauty-Allow-the-CC-used-in-the-arch-errno-name.patch \
+"
 
 SRCREV = "2fc96382f6dbd624e4597cffd284b0f9beffc646"
 

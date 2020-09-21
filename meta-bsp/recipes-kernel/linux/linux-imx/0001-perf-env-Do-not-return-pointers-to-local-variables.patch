@@ -1,0 +1,52 @@
+From 6760c11b6c1a321234a43533a0cfc1d75a6cc53e Mon Sep 17 00:00:00 2001
+From: Arnaldo Carvalho de Melo <acme@redhat.com>
+Date: Mon, 2 Mar 2020 11:23:03 -0300
+Subject: [PATCH 1/8] perf env: Do not return pointers to local variables
+
+commit ebcb9464a2ae3a547e97de476575c82ece0e93e2 upstream.
+
+It is possible to return a pointer to a local variable when looking up
+the architecture name for the running system and no normalization is
+done on that value, i.e. we may end up returning the uts.machine local
+variable.
+
+While this doesn't happen on most arches, as normalization takes place,
+lets fix this by making that a static variable and optimize it a bit by
+not always running uname(), only the first time.
+
+Noticed in fedora rawhide running with:
+
+  [perfbuilder@a5ff49d6e6e4 ~]$ gcc --version
+  gcc (GCC) 10.0.1 20200216 (Red Hat 10.0.1-0.8)
+
+Reported-by: Jiri Olsa <jolsa@kernel.org>
+Cc: Adrian Hunter <adrian.hunter@intel.com>
+Cc: Namhyung Kim <namhyung@kernel.org>
+Signed-off-by: Arnaldo Carvalho de Melo <acme@redhat.com>
+Cc: Ben Hutchings <ben@decadent.org.uk>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ tools/perf/util/env.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tools/perf/util/env.c b/tools/perf/util/env.c
+index 3baca06..018ecf7 100644
+--- a/tools/perf/util/env.c
++++ b/tools/perf/util/env.c
+@@ -326,11 +326,11 @@ static const char *normalize_arch(char *arch)
+ 
+ const char *perf_env__arch(struct perf_env *env)
+ {
+-	struct utsname uts;
+ 	char *arch_name;
+ 
+ 	if (!env || !env->arch) { /* Assume local operation */
+-		if (uname(&uts) < 0)
++		static struct utsname uts = { .machine[0] = '\0', };
++		if (uts.machine[0] == '\0' && uname(&uts) < 0)
+ 			return NULL;
+ 		arch_name = uts.machine;
+ 	} else
+-- 
+2.7.4
+

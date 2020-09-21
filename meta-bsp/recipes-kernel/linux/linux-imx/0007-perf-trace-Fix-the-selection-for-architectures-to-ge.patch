@@ -1,0 +1,55 @@
+From f537820501f3e778d216d10cddf5456cc3f060a5 Mon Sep 17 00:00:00 2001
+From: Ian Rogers <irogers@google.com>
+Date: Thu, 5 Mar 2020 23:11:10 -0800
+Subject: [PATCH 7/8] perf trace: Fix the selection for architectures to
+ generate the errno name tables
+
+Make the architecture test directory agree with the code comment.
+
+Committer notes:
+
+This was split from a larger patch.
+
+The code was assuming the developer always worked from tools/perf/, so make sure we
+do the test -d having $toolsdir/perf/arch/$arch, to match the intent expressed in the comment,
+just above that loop.
+
+Signed-off-by: Ian Rogers <irogers@google.com>
+Cc: Adrian Hunter <adrian.hunter@intel.com>
+Cc: Alexander Shishkin <alexander.shishkin@linux.intel.com>
+Cc: Alexios Zavras <alexios.zavras@intel.com>
+Cc: Andi Kleen <ak@linux.intel.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Igor Lubashev <ilubashe@akamai.com>
+Cc: Jiri Olsa <jolsa@redhat.com>
+Cc: Kan Liang <kan.liang@linux.intel.com>
+Cc: Mark Rutland <mark.rutland@arm.com>
+Cc: Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc: Namhyung Kim <namhyung@kernel.org>
+Cc: Nick Desaulniers <ndesaulniers@google.com>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Stephane Eranian <eranian@google.com>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Wei Li <liwei391@huawei.com>
+Link: http://lore.kernel.org/lkml/20200306071110.130202-4-irogers@google.com
+Signed-off-by: Arnaldo Carvalho de Melo <acme@redhat.com>
+---
+ tools/perf/trace/beauty/arch_errno_names.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/perf/trace/beauty/arch_errno_names.sh b/tools/perf/trace/beauty/arch_errno_names.sh
+index 22c9fc90..f8c44a8 100755
+--- a/tools/perf/trace/beauty/arch_errno_names.sh
++++ b/tools/perf/trace/beauty/arch_errno_names.sh
+@@ -91,7 +91,7 @@ EoHEADER
+ # in tools/perf/arch
+ archlist=""
+ for arch in $(find $toolsdir/arch -maxdepth 1 -mindepth 1 -type d -printf "%f\n" | grep -v x86 | sort); do
+-	test -d arch/$arch && archlist="$archlist $arch"
++	test -d $toolsdir/perf/arch/$arch && archlist="$archlist $arch"
+ done
+ 
+ for arch in x86 $archlist generic; do
+-- 
+2.7.4
+
