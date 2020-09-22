@@ -31,5 +31,3 @@ do_compile() {
                KBUILD_OUTPUT=${STAGING_KERNEL_BUILDDIR} \
                PLATFORM=${PLATFORM}
 }
-
-COMPATIBLE_HOST = '(aarch64|arm).*'
