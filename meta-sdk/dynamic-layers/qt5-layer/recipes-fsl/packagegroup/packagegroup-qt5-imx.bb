@@ -4,7 +4,7 @@
 DESCRIPTION = "Package group for i.MX Qt5"
 LICENSE = "MIT"
 
-inherit packagegroup distro_features_check
+inherit packagegroup features_check
 
 # Install Freescale QT demo applications
 QT5_IMAGE_INSTALL_APPS = ""

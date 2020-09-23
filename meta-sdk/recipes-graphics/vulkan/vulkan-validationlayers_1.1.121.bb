@@ -17,7 +17,7 @@ S = "${WORKDIR}/git"
 
 REQUIRED_DISTRO_FEATURES = "vulkan"
 
-inherit cmake python3native lib_package distro_features_check
+inherit cmake python3native lib_package features_check
 ANY_OF_DISTRO_FEATURES = "x11 wayland"
 
 DEPENDS = "vulkan-headers vulkan-loader"
