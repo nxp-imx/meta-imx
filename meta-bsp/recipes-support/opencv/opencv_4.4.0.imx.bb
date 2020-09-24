@@ -1,12 +1,12 @@
-require recipes-support/opencv/opencv_4.1.0.bb
+require opencv_4.4.0.bb
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-openembedded/meta-oe/recipes-support/opencv/opencv:"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=014935351b2df6f3094bf25de8d50ed8"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=19598330421859a6dd353a4318091ac7"
 
-SRCREV_opencv = "7187501b6bc89e111f4dd5694b58151ca98b7d9a"
-SRCREV_contrib = "65abc7090dedc84bbedec4dfd143f0340e52114f"
-SRCREV_extra = "322b475403899abc2411c4fbf68318afa77d3191"
+SRCREV_opencv = "f331cb18afa10595e4c3c72ecc9e1e86daa216aa"
+SRCREV_contrib = "5fae4082cc493efa5cb7a7486f9e009618a5198b"
+SRCREV_extra = "65796edadce27ed013e3deeedb3c081ff527e4ec"
 SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
 SRC_URI[tinydnn.sha256sum] = "e2c61ce8c5debaa644121179e9dbdcf83f497f39de853f8dd5175846505aa18b"
 SRCREV_FORMAT_append = "_extra"
@@ -16,7 +16,7 @@ SRC_URI_remove = " \
     file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
 "
 OPENCV_SRC ?= "git://source.codeaurora.org/external/imx/opencv-imx.git;protocol=https"
-SRCBRANCH = "4.2.0_imx"
+SRCBRANCH = "4.4.0_imx"
 SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH};name=opencv"
 SRC_URI += " \
     git://github.com/opencv/opencv_extra.git;destsuffix=extra;name=extra \
@@ -24,7 +24,7 @@ SRC_URI += " \
     file://OpenCV_DNN_examples.patch \
     file://0001-Add-smaller-version-of-download_models.py.patch;patchdir=../extra \
 "
-PV = "4.2.0.imx"
+PV = "4.4.0.imx"
 
 PACKAGECONFIG_remove        = "eigen"
 PACKAGECONFIG_append_mx8    = " dnn text"
