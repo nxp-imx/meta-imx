@@ -14,11 +14,11 @@ Upstream-Status: Pending
  samples/dnn/text_detection.cpp      |  5 +++--
  5 files changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/samples/cpp/logistic_regression.cpp b/samples/cpp/logistic_regression.cpp
-index 365b32e523..5dca6b3835 100644
---- a/samples/cpp/logistic_regression.cpp
-+++ b/samples/cpp/logistic_regression.cpp
-@@ -83,7 +83,7 @@ static float calculateAccuracyPercent(const Mat &original, const Mat &predicted)
+Index: git/samples/cpp/logistic_regression.cpp
+===================================================================
+--- git.orig/samples/cpp/logistic_regression.cpp
++++ git/samples/cpp/logistic_regression.cpp
+@@ -83,7 +83,7 @@ static float calculateAccuracyPercent(co
  
  int main()
  {
@@ -27,10 +27,10 @@ index 365b32e523..5dca6b3835 100644
      cout << "**********************************************************************" << endl;
      cout << filename
           << " contains digits 0 and 1 of 20 samples each, collected on an Android device" << endl;
-diff --git a/samples/dnn/classification.cpp b/samples/dnn/classification.cpp
-index 0ae9e6ed94..0a290a8f33 100644
---- a/samples/dnn/classification.cpp
-+++ b/samples/dnn/classification.cpp
+Index: git/samples/dnn/classification.cpp
+===================================================================
+--- git.orig/samples/dnn/classification.cpp
++++ git/samples/dnn/classification.cpp
 @@ -11,6 +11,7 @@ std::string keys =
      "{ help  h     | | Print help message. }"
      "{ @alias      | | An alias name of model to extract preprocessing parameters from models.yml file. }"
@@ -64,11 +64,11 @@ index 0ae9e6ed94..0a290a8f33 100644
  
          imshow(kWinName, frame);
      }
-diff --git a/samples/dnn/object_detection.cpp b/samples/dnn/object_detection.cpp
-index 83ed10db5d..6fa8e08ad8 100644
---- a/samples/dnn/object_detection.cpp
-+++ b/samples/dnn/object_detection.cpp
-@@ -250,13 +250,13 @@ int main(int argc, char** argv)
+Index: git/samples/dnn/object_detection.cpp
+===================================================================
+--- git.orig/samples/dnn/object_detection.cpp
++++ git/samples/dnn/object_detection.cpp
+@@ -251,13 +251,13 @@ int main(int argc, char** argv)
          if (predictionsQueue.counter > 1)
          {
              std::string label = format("Camera: %.2f FPS", framesQueue.getFPS());
@@ -85,7 +85,7 @@ index 83ed10db5d..6fa8e08ad8 100644
          }
          imshow(kWinName, frame);
      }
-@@ -292,7 +292,7 @@ int main(int argc, char** argv)
+@@ -293,7 +293,7 @@ int main(int argc, char** argv)
          double freq = getTickFrequency() / 1000;
          double t = net.getPerfProfile(layersTimes) / freq;
          std::string label = format("Inference time: %.2f ms", t);
@@ -94,7 +94,7 @@ index 83ed10db5d..6fa8e08ad8 100644
  
          imshow(kWinName, frame);
      }
-@@ -424,7 +424,7 @@ void drawPred(int classId, float conf, int left, int top, int right, int bottom,
+@@ -462,7 +462,7 @@ void drawPred(int classId, float conf, i
      top = max(top, labelSize.height);
      rectangle(frame, Point(left, top - labelSize.height),
                Point(left + labelSize.width, top + baseLine), Scalar::all(255), FILLED);
@@ -103,10 +103,10 @@ index 83ed10db5d..6fa8e08ad8 100644
  }
  
  void callback(int pos, void*)
-diff --git a/samples/dnn/segmentation.cpp b/samples/dnn/segmentation.cpp
-index d9fbad8974..2e0c6908d5 100644
---- a/samples/dnn/segmentation.cpp
-+++ b/samples/dnn/segmentation.cpp
+Index: git/samples/dnn/segmentation.cpp
+===================================================================
+--- git.orig/samples/dnn/segmentation.cpp
++++ git/samples/dnn/segmentation.cpp
 @@ -157,7 +157,7 @@ int main(int argc, char** argv)
          double freq = getTickFrequency() / 1000;
          double t = net.getPerfProfile(layersTimes) / freq;
@@ -116,36 +116,33 @@ index d9fbad8974..2e0c6908d5 100644
  
          imshow(kWinName, frame);
          if (!classes.empty())
-diff --git a/samples/dnn/text_detection.cpp b/samples/dnn/text_detection.cpp
-index e7b0f237d3..00cd22e144 100644
---- a/samples/dnn/text_detection.cpp
-+++ b/samples/dnn/text_detection.cpp
-@@ -8,6 +8,7 @@ using namespace cv::dnn;
+Index: git/samples/dnn/text_detection.cpp
+===================================================================
+--- git.orig/samples/dnn/text_detection.cpp
++++ git/samples/dnn/text_detection.cpp
+@@ -25,6 +25,7 @@ using namespace cv::dnn;
  const char* keys =
      "{ help  h     | | Print help message. }"
      "{ input i     | | Path to input image or video file. Skip this argument to capture frames from a camera.}"
 +    "{ device      |  0 | camera device number. }"
-     "{ model m     | | Path to a binary .pb file contains trained network.}"
+     "{ model m     | | Path to a binary .pb file contains trained detector network.}"
+     "{ ocr         | | Path to a binary .pb or .onnx file contains trained recognition network.}"
      "{ width       | 320 | Preprocess input image by resizing to a specific width. It should be multiple by 32. }"
-     "{ height      | 320 | Preprocess input image by resizing to a specific height. It should be multiple by 32. }"
-@@ -51,7 +52,7 @@ int main(int argc, char** argv)
-     if (parser.has("input"))
-         cap.open(parser.get<String>("input"));
-     else
--        cap.open(0);
-+        cap.open(parser.get<int>("device"));
+@@ -75,7 +76,7 @@ int main(int argc, char** argv)
+ 
+     // Open a video file or an image file or a camera stream.
+     VideoCapture cap;
+-    bool openSuccess = parser.has("input") ? cap.open(parser.get<String>("input")) : cap.open(0);
++    bool openSuccess = parser.has("input") ? cap.open(parser.get<String>("input")) : cap.open(parser.get<int>("device"));
+     CV_Assert(openSuccess);
  
      static const std::string kWinName = "EAST: An Efficient and Accurate Scene Text Detector";
-     namedWindow(kWinName, WINDOW_NORMAL);
-@@ -109,7 +110,7 @@ int main(int argc, char** argv)
-         double freq = getTickFrequency() / 1000;
-         double t = net.getPerfProfile(layersTimes) / freq;
-         std::string label = format("Inference time: %.2f ms", t);
+@@ -156,7 +157,7 @@ int main(int argc, char** argv)
+ 
+         // Put efficiency information.
+         std::string label = format("Inference time: %.2f ms", tickMeter.getTimeMilli());
 -        putText(frame, label, Point(0, 15), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
 +        putText(frame, label, Point(0, 20), FONT_HERSHEY_SIMPLEX, 0.8, Scalar(0, 0, 255), 2, 8, false);
  
          imshow(kWinName, frame);
-     }
--- 
-2.17.1
-
+ 
