@@ -3,5 +3,5 @@
 require imx-vpu-hantro.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=983e4c77621568488dd902b27e0c2143"
 
-SRC_URI[md5sum] = "4e2c069632a8884c6009e80adfab9674"
-SRC_URI[sha256sum] = "2fd4af65b8b68f76297574df68919a033cbd4e3116d2d468ba3025a7f382d0d2"
+SRC_URI[md5sum] = "71c3166e0832feb337025df3bc6b19ad"
+SRC_URI[sha256sum] = "5ee4ed52a036d7e0643b4248b2cc214a5ead40c5dc5d2be1c8babf6e96226a41"
