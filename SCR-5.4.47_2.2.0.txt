@@ -369,8 +369,8 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     ml-security-1.0.2.bin
-Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Production Use - Section 2.3 applies 
+Package:                     ml-security-1.0.3.bin
+Outgoing License:            LA_OPT_NXP_Software_License v15 August 2020 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
