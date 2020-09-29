@@ -1,6 +1,6 @@
 # Copyright (C) 2019-2020 NXP
 
-require recipes-security/optee-imx/optee-test_3.2.0.imx.bb
+require recipes-security/optee-imx/optee-test_3.7.0.imx.bb
 
 inherit python3native
 DEPENDS_remove = "python-pycrypto-native"

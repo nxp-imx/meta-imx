@@ -5,6 +5,9 @@ FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-security/op
 
 DEPENDS_append = " python3-pycryptodomex-native"
 
+OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
+SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
+
 SRCBRANCH = "imx_3.10.y"
 SRCREV = "e2e1adfa0a8401d575641caa0692f07997e7eca8"
 

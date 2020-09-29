@@ -3,6 +3,9 @@ require optee-test.imx.inc
 
 DEPENDS_append = " python3-pycryptodomex-native"
 
+OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
+SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
+
 SRCBRANCH = "imx_3.10.y"
 SRCREV = "30efcbeaf8864d0f2a5c4be593a5411001fab31b"
 

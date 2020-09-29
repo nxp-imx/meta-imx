@@ -1,6 +1,6 @@
 # Copyright (C) 2019-2020 NXP
 
-require recipes-security/optee-imx/optee-client_3.2.0.imx.bb
+require recipes-security/optee-imx/optee-client_3.7.0.imx.bb
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-security/optee-imx/optee-client:"
 

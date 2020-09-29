@@ -1,6 +1,6 @@
 # Copyright (C) 2019-2020 NXP
 
-require recipes-security/optee-imx/optee-os_3.2.0.imx.bb
+require recipes-security/optee-imx/optee-os_3.7.0.imx.bb
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c1f21c4f72f372ef38a5a4aee55ec173"
 
