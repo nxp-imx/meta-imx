@@ -9,7 +9,6 @@ inherit packagegroup
 
 ML_PKGS = " \
     ml-security \
-    pytorch \
     torchvision \
 "
 RDEPENDS_${PN} = " \
