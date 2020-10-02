@@ -1,7 +1,7 @@
-require recipes-multimedia/gstreamer/gstreamer1.0-plugins-good_1.16.2.bb
+require ${BSPDIR}/sources/meta-imx/meta-bsp/recipes-multimedia/gstreamer/gstreamer1.0-plugins-good_1.16.2.bb
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-imx/meta-sdk/dynamic-layers/qt5-layer/recipes-qt/qt5/${PN}:"
-FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
+FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-imx/meta-bsp/recipes-multimedia/gstreamer/files:"
 
 DEPENDS += "gstreamer1.0-plugins-base virtual/kernel libcap zlib bzip2 \
             ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)} \
