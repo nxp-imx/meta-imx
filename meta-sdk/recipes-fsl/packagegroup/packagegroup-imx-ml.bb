@@ -9,7 +9,6 @@ inherit packagegroup
 
 ML_PKGS = " \
     ml-security \
-    torchvision \
 "
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
