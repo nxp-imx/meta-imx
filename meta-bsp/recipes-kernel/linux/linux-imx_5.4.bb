@@ -26,7 +26,7 @@ SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH} \
            file://0008-perf-beauty-Allow-the-CC-used-in-the-arch-errno-name.patch \
 "
 
-SRCREV = "2cc8fc5c0de670bc26c2dd5ea4442336e29d517d"
+SRCREV = "024566cea6e02c6172485300db84a029d0a4699c"
 
 LINUX_VERSION = "5.4.47"
 
