@@ -4,7 +4,7 @@ require optee-os.imx.inc
 DEPENDS_append = " python3-pycryptodomex-native"
 
 SRCBRANCH = "imx_3.10.y"
-SRCREV = "e2e1adfa0a8401d575641caa0692f07997e7eca8"
+SRCREV = "f46d17ca5743fd3541ae50e732b2b59b334fa7ba"
 
 # tee-init_load_addr.txt has been remove in lates optee-os version.
 # to keep backward compatibility with existing optee-os recipe.
