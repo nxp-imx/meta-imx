@@ -3,6 +3,8 @@ PACKAGECONFIG_remove_mx8dxl = "osmesa"
 DRIDRIVERS_remove_mx8dxl = "swrast"
 PACKAGECONFIG_remove_mx8phantomdxl = "osmesa"
 DRIDRIVERS_remove_mx8phantomdxl = "swrast"
+PACKAGECONFIG_remove_mx8mnlite = "osmesa"
+DRIDRIVERS_remove_mx8mnlite = "swrast"
 
 do_install_append_imxgpu3d () {
     rm -f ${D}${includedir}/GL/glcorearb.h
