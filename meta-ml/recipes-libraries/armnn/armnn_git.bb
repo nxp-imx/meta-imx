@@ -9,8 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074 \
 PV = "20.02"
 
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
-SRCBRANCH = "branches/armnn_20_02"
-SRCREV = "0e2650f7c2b395d73b68a3bb20908090b11b6940"
+#SRCBRANCH = "branches/armnn_20_02"
+SRCBRANCH = "bugfix/YOCIMX-4965-gcc10"
+SRCREV = "732d70eaec81b3da4cdcfc6a2880370de68248b0"
 
 SRCREV_FORMAT = "armnn"
 
