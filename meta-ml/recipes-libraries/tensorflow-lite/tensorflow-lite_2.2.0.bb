@@ -89,6 +89,7 @@ do_install() {
 RDEPENDS_MX8       = ""
 RDEPENDS_MX8_mx8   = "libnn-imx nn-imx"
 RDEPENDS_MX8_mx8mm = ""
+RDEPENDS_MX8_mx8mnlite = ""
 RDEPENDS_${PN}   = " \
     flatbuffers \
     python3 \
