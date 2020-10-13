@@ -34,6 +34,7 @@ DEPENDS = " \
 RDEPENDS_MX8       = ""
 RDEPENDS_MX8_mx8   = "nn-imx"
 RDEPENDS_MX8_mx8mm = ""
+RDEPENDS_MX8_mx8mnlite = ""
 RDEPENDS_${PN}   = " \
     arm-compute-library \
     protobuf \
@@ -43,6 +44,7 @@ RDEPENDS_${PN}   = " \
 PACKAGECONFIG_VSI_NPU       = ""
 PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
+PACKAGECONFIG_VSI_NPU_mx8mnlite = ""
 
 PACKAGECONFIG ??= "neon ref caffe tensorflow tensorflow_lite onnx tests ${PACKAGECONFIG_VSI_NPU}"
 
