@@ -7,7 +7,7 @@ OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;p
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
 
 SRCBRANCH = "imx_3.10.y"
-SRCREV = "67862c80754e72b9be3330e958363014f4c031d1"
+SRCREV = "be4c2a706efef1ed8d495b0533b39c38ae1b1290"
 
 do_compile_prepend () {
 	export CFLAGS="${CFLAGS} --sysroot=${STAGING_DIR_HOST}"
