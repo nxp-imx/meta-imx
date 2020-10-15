@@ -1,0 +1,66 @@
+From d79dcc2002008c58683de82f06c168d6eea57991 Mon Sep 17 00:00:00 2001
+From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+Date: Fri, 19 Oct 2018 11:01:37 +0200
+Subject: [PATCH] python,pygrub: pass DISTUTILS env vars as setup.py args
+
+Allow to respect the target install dir (PYTHON_SITEPACKAGES_DIR)
+as well as other parameters set by the OpenEmbedded build system.
+This is especially useful when the target libdir is not the default one
+(/usr/lib), but for example /usr/lib64.
+
+Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+
+Forward-ported to Xen 4.12.0
+Signed-off-by: Christopher Clark <christopher.clark6@baesystems.com>
+
+Modified to support pygrub installation with python 3
+Signed-off-by: Christopher Clark <christopher.clark6@baesystems.com>
+
+Forward-ported to Xen 4.14.0
+Signed-off-by: Christopher Clark <christopher.clark6@baesystems.com>
+diff --git a/tools/pygrub/Makefile b/tools/pygrub/Makefile
+index 3063c49..513314b 100644
+--- a/tools/pygrub/Makefile
++++ b/tools/pygrub/Makefile
+@@ -10,14 +10,17 @@ INSTALL_LOG = build/installed_files.txt
+ all: build
+ .PHONY: build
+ build:
+-	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) setup.py build
++	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) setup.py build $(DISTUTILS_BUILD_ARGS)
+ 
+ .PHONY: install
+ install: all
+ 	$(INSTALL_DIR) $(DESTDIR)/$(bindir)
+ 	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) \
+ 		setup.py install --record $(INSTALL_LOG) $(PYTHON_PREFIX_ARG) \
+-		 --root="$(DESTDIR)" --install-scripts=$(LIBEXEC_BIN) --force
++		 --root="$(DESTDIR)" --install-scripts=$(LIBEXEC_BIN) --force \
++		 $(DISTUTILS_INSTALL_ARGS)
++	rm -f $(DESTDIR)/$(LIBEXEC_BIN)/pygrub
++	$(INSTALL_PYTHON_PROG) src/pygrub $(DESTDIR)/$(LIBEXEC_BIN)/pygrub
+ 	set -e; if [ $(bindir) != $(LIBEXEC_BIN) -a \
+ 	             "`readlink -f $(DESTDIR)/$(bindir)`" != \
+ 	             "`readlink -f $(LIBEXEC_BIN)`" ]; then \
+diff --git a/tools/python/Makefile b/tools/python/Makefile
+index 541858e..4d4a344 100644
+--- a/tools/python/Makefile
++++ b/tools/python/Makefile
+@@ -10,7 +10,7 @@ INSTALL_LOG = build/installed_files.txt
+ 
+ .PHONY: build
+ build:
+-	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" $(PYTHON) setup.py build
++	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" $(PYTHON) setup.py build $(DISTUTILS_BUILD_ARGS)
+ 
+ .PHONY: install
+ install:
+@@ -18,7 +18,7 @@ install:
+ 
+ 	CC="$(CC)" CFLAGS="$(PY_CFLAGS)" LDFLAGS="$(PY_LDFLAGS)" $(PYTHON) \
+ 		setup.py install --record $(INSTALL_LOG) $(PYTHON_PREFIX_ARG) \
+-		--root="$(DESTDIR)" --force
++		--root="$(DESTDIR)" --force $(DISTUTILS_INSTALL_ARGS)
+ 
+ 	$(INSTALL_PYTHON_PROG) scripts/convert-legacy-stream $(DESTDIR)$(LIBEXEC_BIN)
+ 	$(INSTALL_PYTHON_PROG) scripts/verify-stream-v2 $(DESTDIR)$(LIBEXEC_BIN)

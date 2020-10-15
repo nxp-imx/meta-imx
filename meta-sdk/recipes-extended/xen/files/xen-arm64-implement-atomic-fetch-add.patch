@@ -1,0 +1,50 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Date: Fri, 26 June 2020 16:34:00 -0800
+Subject: [PATCH] xen: implement atomic op to fix arm64 compilation
+
+Xen's ARM implementation of arch_fetch_and_add since f9cc3cd9
+uses a builtin, despite the build being performed with -fno-builtin.
+With gcc 10.1.0, this now breaks prelinking spinlock.c, so
+implement the one atomic operation that is required with logic
+derived from Linux's atomic_ll_sc.h: ATOMIC_FETCH_OP and comparison with
+the binary produced with and without the patch with gcc 9.2.0.
+
+Signed-off-by: Christopher Clark <christopher.w.clark@gmail.com>
+diff --git a/xen/include/asm-arm/system.h b/xen/include/asm-arm/system.h
+index e5d062667d..c46dd3ac71 100644
+--- a/xen/include/asm-arm/system.h
++++ b/xen/include/asm-arm/system.h
+@@ -55,7 +55,32 @@ static inline int local_abort_is_enabled(void)
+     return !(flags & PSR_ABT_MASK);
+ }
+ 
++#ifdef CONFIG_ARM_64
++
++/* see atomic_ll_sc.h:  ATOMIC_FETCH_OP(name, mb, acq, rel, cl, op, asm_op, constraint) */
++static inline int arch_fetch_and_add(unsigned int *ptr, unsigned long i)
++{
++    int register lptr asm("x0");
++    int register result asm("w1");
++    int register newval asm("w2");
++    int register status asm("w3");
++
++    asm volatile(
++    "   mov       %[lptr], %[ptr]\n"
++    "1: ldxr      %w[result], [%[lptr]]\n"
++    "   add       %w[newval], %w[result], %w[i]\n"
++    "   stlxr     %w[status], %w[newval], [%[lptr]]\n"
++    "   cbnz      %w[status], 1b\n"
++    "   dmb       ish\n"
++    : [result] "=&r" (result), [lptr] "=&r" (lptr), [newval] "=&r" (newval), [status] "=&r" (status), [i] "+r" (i), "+Q" (*ptr)
++    : [ptr] "r" (ptr), "r" (i)
++    : "memory");
++
++    return result;
++}
++#else
+ #define arch_fetch_and_add(x, v) __sync_fetch_and_add(x, v)
++#endif
+ 
+ extern struct vcpu *__context_switch(struct vcpu *prev, struct vcpu *next);
+ 
