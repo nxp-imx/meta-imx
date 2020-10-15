@@ -12,6 +12,8 @@ ML_PKGS = " \
     pyarmnn \
     tensorflow-lite \
     ml-security \
+    pytorch \
+    torchvision \
 "
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
