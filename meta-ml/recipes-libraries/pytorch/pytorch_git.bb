@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9c57cfb31165de565a47b65b896391c2"
 DEPENDS = "python3 python3-pip-native python3-wheel-native"
 RDEPENDS_${PN} += "python3-core python3-numpy python3-future"
 
-PV = "1.5.0"
+PV = "1.6.0"
 
 PYTORCH_SRC ?= "git://github.com/nxpmicro/pytorch-release.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "1a82add08882185ad3f2fb45b9433da827ac8f15"
+SRCREV = "ee5609353c96acaccb1f335078ec9aa1101e8451"
 
 SRC_URI = " \
     ${PYTORCH_SRC};branch=${SRCBRANCH} \
@@ -28,7 +28,7 @@ do_install(){
 
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
-        ${S}/whl/torch-*.whl
+        ${S}/whl/torch-*-cp38*.whl
 
     for app in `ls ${D}${PYTHON_SITEPACKAGES_DIR}/bin/*`; do
         sed -i 's,^#!.*,#!/usr/bin/python3,g' $app
