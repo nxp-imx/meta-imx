@@ -38,7 +38,7 @@ PACKAGECONFIG ??= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'directfb ', d)} \
 	${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gl', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl wayland', 'gl', '', d)} \
     bz2 closedcaption curl dash dtls hls rsvg sbc smoothstreaming sndfile \
     ttml uvch264 webp \
 "
