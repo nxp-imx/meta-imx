@@ -32,7 +32,7 @@ do_install(){
 	install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
 	${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
 	    -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
-	    ${S}/whl/pyarmnn-20.2.0-cp37-cp37m-linux_aarch64.whl
+	    ${S}/whl/pyarmnn-20.2.0-cp38-cp38-linux_aarch64.whl
 }
 
 FILES_${PN} += "${libdir}/python*"
