@@ -8,7 +8,7 @@ FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-multimedia/
 
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "imx-1.18.x" 
-SRCREV = "34358bde93c956007faa9a048f5a6dd5d65cb88f"
+SRCREV = "405787d67273952e3d38e18368d9a74bf543a166"
 SRC_URI = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
            file://0005-viv-fb-Make-sure-config.h-is-included.patch \
            file://0009-glimagesink-Downrank-to-marginal.patch \
