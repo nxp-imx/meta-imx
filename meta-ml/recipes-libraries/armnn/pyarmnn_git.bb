@@ -36,4 +36,3 @@ do_install(){
 }
 
 FILES_${PN} += "${libdir}/python*"
-INSANE_SKIP_${PN} = "file-rdeps"
