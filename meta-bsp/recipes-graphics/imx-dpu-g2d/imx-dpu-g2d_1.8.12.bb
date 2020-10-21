@@ -2,7 +2,7 @@ require recipes-graphics/imx-dpu-g2d/imx-dpu-g2d_1.8.7.bb
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=983e4c77621568488dd902b27e0c2143"
 
-SRC_URI[md5sum] = "f0db029e78143ea5b5e60674a36262fd"
-SRC_URI[sha256sum] = "d7bd81c057e750ed05797988f5dec7394f4414b84c9fa2eff0b0ddf481a8024f"
+SRC_URI[md5sum] = "39e767a810c02d505f82c6c8d15b0305"
+SRC_URI[sha256sum] = "b605b8184824bac15047dc9317a53da98d2bf0004eb737bfdb198940b6d89f67"
 
 RDEPENDS_${PN} += "libopencl-imx"
