@@ -11,3 +11,4 @@ IMX_CORE_TOOLS_imxpxp = " tslib"
 RDEPENDS_${PN} += " \
     ${IMX_CORE_TOOLS} \
 "
+SOC_TOOLS_IMX_TESTAPPS_remove = " cryptodev-module cryptodev-tests"
