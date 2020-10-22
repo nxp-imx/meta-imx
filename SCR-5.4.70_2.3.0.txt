@@ -1,7 +1,7 @@
 NXP Software Content Register
 
 Release - Linux 5.4.70_2.3.0
- September 2020
+ December 2020
 
 Yocto Project recipe manifest:
 repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-zeus -m imx_5.4.70_2.3.0.xml
