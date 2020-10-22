@@ -35,7 +35,6 @@ RDEPENDS_${PN} += " \
     e2fsprogs-resize2fs \
     iw \
     linuxptp \
-    kernel-pcitest \
     minicom \
     mmc-utils \
     nano \

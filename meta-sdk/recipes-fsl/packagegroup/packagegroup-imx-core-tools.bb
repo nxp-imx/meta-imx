@@ -1,4 +1,4 @@
-# Copyright 2018-2020 NXP
+# Copyright 2018-2019 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Packagegroup to provide necessary tools for basic core image"
@@ -15,7 +15,6 @@ RDEPENDS_${PN} = " \
     fbset \
     i2c-tools \
     iproute2 \
-    kernel-pcitest \
     memtester \
     python-subprocess \
     python-datetime \
