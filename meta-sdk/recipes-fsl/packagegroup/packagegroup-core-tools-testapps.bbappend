@@ -2,7 +2,6 @@
 # need to remove the old one
 RDEPENDS_${PN}_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', "gst-player-bin", "", d)} \
                           ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', "gst-player-bin", "", d)} \
-                          ltp \
 "
 
 IMX_CORE_TOOLS = ""
