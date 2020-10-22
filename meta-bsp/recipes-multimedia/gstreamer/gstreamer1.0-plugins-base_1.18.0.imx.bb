@@ -27,7 +27,7 @@ PACKAGES_DYNAMIC =+ "^libgst.*"
 
 # opengl packageconfig factored out to make it easy for distros
 # and BSP layers to choose OpenGL APIs/platforms/window systems
-PACKAGECONFIG_GL ?= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2 egl', '', d)}"
+PACKAGECONFIG_GL ?= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2 egl viv-fb', '', d)}"
 
 PACKAGECONFIG ??= " \
     ${GSTREAMER_ORC} \
@@ -39,7 +39,7 @@ PACKAGECONFIG ??= " \
 
 OPENGL_APIS = 'opengl gles2'
 OPENGL_PLATFORMS = 'egl'
-OPENGL_WINSYS = 'x11 wayland gbm'
+OPENGL_WINSYS = 'x11 wayland gbm viv-fb'
 
 X11DEPENDS = "virtual/libx11 libsm libxrender libxv"
 X11ENABLEOPTS = "-Dx11=enabled -Dxvideo=enabled -Dxshm=enabled"
@@ -64,6 +64,7 @@ PACKAGECONFIG[gles2]        = ",,virtual/libgles2"
 
 # OpenGL platform packageconfigs
 PACKAGECONFIG[egl]          = ",,virtual/egl"
+PACKAGECONFIG[viv-fb]          = ",,virtual/egl virtual/libgles2"
 
 # OpenGL window systems (except for X11)
 PACKAGECONFIG[gbm]          = ",,virtual/libgbm libgudev libdrm"
