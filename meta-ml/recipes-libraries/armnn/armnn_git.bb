@@ -10,7 +10,6 @@ PV = "20.02"
 
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
 SRCBRANCH = "bugfix/YOCIMX-4965-gcc10"
-SRCBRANCH = "bugfix/YOCIMX-4965-gcc10"
 SRCREV = "732d70eaec81b3da4cdcfc6a2880370de68248b0" 
 
 SRCREV_FORMAT = "armnn"
