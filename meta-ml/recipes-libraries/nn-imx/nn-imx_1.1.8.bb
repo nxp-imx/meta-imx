@@ -11,7 +11,7 @@ SRCREV = "814ce810044a48e971aa796d5c4338b0d8225968"
 
 SRC_URI = "${NN-IMX_SRC};branch=${SRCBRANCH}"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += "SDKTARGETSYSROOT=${STAGING_DIR_HOST} \
                  AQROOT=`pwd` \
