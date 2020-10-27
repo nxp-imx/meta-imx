@@ -43,7 +43,7 @@ KBUILD_DEFCONFIG_mx7= "imx_v6_v7_defconfig"
 KBUILD_DEFCONFIG_mx8= "defconfig"
 
 
-addtask copy_defconfig after do_unpack before do_preconfigure
+addtask copy_defconfig after do_patch do_symlink_kernsrc before do_preconfigure
 do_copy_defconfig () {
     install -d ${B}
     if [ ${DO_CONFIG_V7_COPY} = "yes" ]; then
