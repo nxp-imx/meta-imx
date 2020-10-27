@@ -21,6 +21,9 @@ SRCREV = "547c7f50e3fc1d51bae9493e815e9d3c50c00b9a"
 
 LINUX_VERSION = "5.10"
 
+# Add a workaround for race condition
+PARALLEL_MAKE = ""
+
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
