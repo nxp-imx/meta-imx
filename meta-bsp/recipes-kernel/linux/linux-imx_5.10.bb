@@ -76,6 +76,7 @@ do_merge_delta_config() {
             ${S}/scripts/kconfig/merge_config.sh -m .config ${deltacfg}
         fi
     done
+    cp .config ${WORKDIR}/defconfig
 }
 addtask merge_delta_config before do_preconfigure after do_copy_defconfig
 
