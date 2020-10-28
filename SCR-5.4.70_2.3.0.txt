@@ -1086,15 +1086,6 @@ Description and comments:    Tensors and Dynamic neural networks in Python with 
 Release Location:            https://github.com/NXPmicro/pytorch-release -b rel_imx_5.4.70_2.3.0
 --------------------------------------------
 
-Package:                     torchvision.git
-Outgoing License:            BSD-3-Clause 
-License File:                LICENSE
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    The torchvision package consists of popular datasets model architectures and common image transformations for computer vision
-Release Location:            https://github.com/NXPmicro/pytorch-release -b rel_imx_5.4.70_2.3.0
---------------------------------------------
-
 Package:                     tensorflow-imx.git
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
