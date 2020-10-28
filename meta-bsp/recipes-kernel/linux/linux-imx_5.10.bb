@@ -38,8 +38,8 @@ DO_CONFIG_V7_COPY_mx7 = "yes"
 DO_CONFIG_V7_COPY_mx8 = "no"
 
 # Add setting for LF Mainline build
-IMX_KERNEL_CONFIG_AARCH32 = "imx_v6_v7_defconfig"
-IMX_KERNEL_CONFIG_AARCH64 = "defconfig"
+IMX_KERNEL_CONFIG_AARCH32 = "imx_v7_defconfig"
+IMX_KERNEL_CONFIG_AARCH64 = "imx_v8_defconfig"
 KBUILD_DEFCONFIG ?= ""
 KBUILD_DEFCONFIG_mx6= "${IMX_KERNEL_CONFIG_AARCH32}"
 KBUILD_DEFCONFIG_mx7= "${IMX_KERNEL_CONFIG_AARCH32}"
@@ -61,7 +61,7 @@ do_copy_defconfig () {
 }
 
 DELTA_KERNEL_DEFCONFIG ?= ""
-DELTA_KERNEL_DEFCONFIG_mx8 = "imx.config"
+#DELTA_KERNEL_DEFCONFIG_mx8 = "imx.config"
 
 do_merge_delta_config[dirs] = "${B}"
 do_merge_delta_config[depends] += " \
