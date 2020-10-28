@@ -33,8 +33,7 @@ ERPC_COMPS ?= ""
 ERPC_COMPS_append_mx7ulp = "packagegroup-imx-erpc"
 
 ISP_PKGS = ""
-# kernel-module-isp-vvcam got build break, it's not supported yet in k5.10
-#ISP_PKGS_mx8mp = "packagegroup-imx-isp"
+ISP_PKGS_mx8mp = "packagegroup-imx-isp"
 
 CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-core-full-cmdline \
