@@ -1,10 +1,11 @@
-require renderdoc-1.7.inc
+require renderdoc-1.10.inc
 
 SRC_URI += " \
-    file://0003-Continue-running-when-EnumerateDeviceExtensionProper.patch \
-    file://0004-Pass-memory-checking-when-replaying-captures.patch \
-    file://0005-Use-specific-integer-format-to-generate-a-dummy-mult.patch \
-    file://0006-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
+    file://0001-Continue-running-when-EnumerateDeviceExtensionProper.patch \
+    file://0002-Pass-memory-checking-when-replaying-captures.patch \
+    file://0003-Use-specific-integer-format-to-generate-a-dummy-mult.patch \
+    file://0004-Support-ARM-compilation.patch \
+    file://0005-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
 "
 
 REQUIRED_DISTRO_FEATURES_remove = "opengl"
