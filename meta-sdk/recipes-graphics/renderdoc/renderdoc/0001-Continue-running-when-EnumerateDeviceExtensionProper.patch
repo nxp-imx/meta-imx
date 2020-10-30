@@ -21,7 +21,7 @@ Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/renderdoc/driver/vulkan/vk_core.cpp b/renderdoc/driver/vulkan/vk_core.cpp
-index 46d992e7e..446ad36cb 100644
+index 46d992e..446ad36 100644
 --- a/renderdoc/driver/vulkan/vk_core.cpp
 +++ b/renderdoc/driver/vulkan/vk_core.cpp
 @@ -1305,7 +1305,7 @@ VkResult WrappedVulkan::FilterDeviceExtensionProperties(VkPhysicalDevice physDev
@@ -34,5 +34,5 @@ index 46d992e7e..446ad36cb 100644
  
    // filter the list of extensions to only the ones we support.
 -- 
-2.17.1
+2.7.4
 
