@@ -1,7 +1,7 @@
 From d189ead4c48441affe557bb7d208f2f2685a1994 Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
 Date: Wed, 15 Jul 2020 14:41:16 +0300
-Subject: [PATCH 1/2] Use specific integer format to generate a dummy
+Subject: [PATCH 3/4] Use specific integer format to generate a dummy
  multisample image when replaying on Vulkan
 
 While replaying, (quote) "renderdoc need a dummy UINT texture
@@ -24,7 +24,7 @@ Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
  2 files changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/renderdoc/driver/vulkan/vk_debug.cpp b/renderdoc/driver/vulkan/vk_debug.cpp
-index 885e6c1a8..98dc454b9 100644
+index 885e6c1..98dc454 100644
 --- a/renderdoc/driver/vulkan/vk_debug.cpp
 +++ b/renderdoc/driver/vulkan/vk_debug.cpp
 @@ -466,7 +466,8 @@ VulkanDebugManager::VulkanDebugManager(WrappedVulkan *driver)
@@ -38,7 +38,7 @@ index 885e6c1a8..98dc454b9 100644
    for(VkFormat f : attemptFormats)
    {
 diff --git a/renderdoc/driver/vulkan/vk_resources.h b/renderdoc/driver/vulkan/vk_resources.h
-index bc3680583..3a837f4e7 100644
+index bc36805..3a837f4 100644
 --- a/renderdoc/driver/vulkan/vk_resources.h
 +++ b/renderdoc/driver/vulkan/vk_resources.h
 @@ -1257,6 +1257,10 @@ struct ImageSubresourceRange
@@ -53,5 +53,5 @@ index bc3680583..3a837f4e7 100644
      {
        if(aspectMask != VK_IMAGE_ASPECT_FLAG_BITS_MAX_ENUM)
 -- 
-2.17.1
+2.7.4
 
