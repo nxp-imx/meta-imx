@@ -31,6 +31,10 @@ PLATFORM_mx8mq  = "imx8mq"
 PLATFORM_mx8qm  = "imx8qm"
 PLATFORM_mx8x   = "imx8qx"
 
+# Clear LDFLAGS to avoid the option -Wl recognize issue
+# Clear CFLAGS to avoid coherent_arm out of OCRAM size limitation (64KB) - i.MX 8MQ only
+CLEAR_FLAGS ?= "LDFLAGS"
+CLEAR_FLAGS_mx8mq = "LDFLAGS CFLAGS"
 
 EXTRA_OEMAKE += " \
     CROSS_COMPILE="${TARGET_PREFIX}" \
@@ -40,8 +44,8 @@ EXTRA_OEMAKE += " \
 BUILD_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
 do_compile() {
-    # Clear LDFLAGS to avoid the option -Wl recognize issue
-    unset LDFLAGS
+    unset ${CLEAR_FLAGS}
+
     oe_runmake bl31
     if ${BUILD_OPTEE}; then
        oe_runmake clean BUILD_BASE=build-optee
