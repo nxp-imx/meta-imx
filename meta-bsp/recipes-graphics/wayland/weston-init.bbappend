@@ -3,6 +3,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://profile"
 
 INI_UNCOMMENT_ASSIGNMENTS_append_mx8mq = " \
+    drm-device=card0 \
     repaint-window=16 \
 "
 INI_UNCOMMENT_ASSIGNMENTS_append_mx8qm = " \
