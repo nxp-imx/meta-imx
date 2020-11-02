@@ -15,11 +15,11 @@ Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
 ---
- .../driver/vulkan/wrappers/vk_resource_funcs.cpp   | 33 ++++++++++++++++++++++
+ .../vulkan/wrappers/vk_resource_funcs.cpp     | 33 +++++++++++++++++++
  1 file changed, 33 insertions(+)
 
 diff --git a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
-index d443ca4..8fc8659 100644
+index d443ca4f3..8fc865908 100644
 --- a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
 +++ b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
 @@ -263,6 +263,39 @@ bool WrappedVulkan::Serialise_vkAllocateMemory(SerialiserType &ser, VkDevice dev
@@ -63,5 +63,5 @@ index d443ca4..8fc8659 100644
  
      byte *tempMem = GetTempMemory(GetNextPatchSize(patched.pNext));
 -- 
-2.7.4
+2.17.1
 
