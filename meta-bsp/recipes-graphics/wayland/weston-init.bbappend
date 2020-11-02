@@ -2,6 +2,13 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://profile"
 
+INI_UNCOMMENT_ASSIGNMENTS_append_mx8mq = " \
+    repaint-window=16 \
+"
+INI_UNCOMMENT_ASSIGNMENTS_append_mx8qm = " \
+    repaint-window=16 \
+"
+
 do_install_append() {
     install -Dm0755 ${WORKDIR}/profile ${D}${sysconfdir}/profile.d/weston.sh
 
