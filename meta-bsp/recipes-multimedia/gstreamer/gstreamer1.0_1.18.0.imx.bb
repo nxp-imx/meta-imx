@@ -24,7 +24,7 @@ SRC_URI = " \
     file://0001-gst-gstpluginloader.c-when-env-var-is-set-do-not-fal.patch \
     file://0003-meson-Add-valgrind-feature.patch \
 "
-SRCREV = "9844fd44074258dece92f007cfb2b51c3aebb3bb" 
+SRCREV = "2f20fd10eaf8629b3e8c134424c38412c4d3bd86"
 
 S = "${WORKDIR}/git"
 
