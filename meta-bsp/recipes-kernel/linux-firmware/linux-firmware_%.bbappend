@@ -59,18 +59,20 @@ do_install_append () {
     install -m 0644 ${WORKDIR}/imx-firmware/cyw-wifi-bt/1FD_CYW4359/brcmfmac4359-pcie.txt ${D}${nonarch_base_libdir}/firmware/brcm
     install -m 0644 ${WORKDIR}/imx-firmware/cyw-wifi-bt/1FD_CYW4359/BCM4349B1_*.hcd ${D}${sysconfdir}/firmware
 
-    # Install Marvell PCIE8997 firmware
-    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/pcie8997_wlan_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
-    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/pcieuart8997_combo_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
-    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/helper_uart_3000000.bin ${D}${nonarch_base_libdir}/firmware/mrvl
-    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/uart8997_bt_v4.bin ${D}${nonarch_base_libdir}/firmware/mrvl
-    install -d ${D}${datadir}/mrvl_wireless/bin_pcie8997
-    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/fw_loader_arm64 ${D}${datadir}/mrvl_wireless/bin_pcie8997
-
-    # Install Marvell 8987 firmware
+    # Install NXP Connectivity
     install -d ${D}${nonarch_base_libdir}/firmware/nxp
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/wifi_mod_para.conf    ${D}${nonarch_base_libdir}/firmware/nxp
+
+    # Install NXP Connectivity PCIE8997 firmware
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/pcieuart8997_combo_v4.bin ${D}${nonarch_base_libdir}/firmware/nxp
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/ed_mac_ctrl_V3_8997.conf  ${D}${nonarch_base_libdir}/firmware/nxp
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/txpwrlimit_cfg_8997.conf  ${D}${nonarch_base_libdir}/firmware/nxp
+
+    # Install NXp Connectivity 8987 firmware
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8987/ed_mac_ctrl_V3_8987.conf  ${D}${nonarch_base_libdir}/firmware/nxp
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8987/sdiouart8987_combo_v0.bin ${D}${nonarch_base_libdir}/firmware/nxp
-    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8987/wifi_mod_para_sd8987.conf ${D}${nonarch_base_libdir}/firmware/nxp
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8987/txpwrlimit_cfg_8987.conf  ${D}${nonarch_base_libdir}/firmware/nxp
+
 }
 
 # Use the latest version of sdma firmware in firmware-imx
