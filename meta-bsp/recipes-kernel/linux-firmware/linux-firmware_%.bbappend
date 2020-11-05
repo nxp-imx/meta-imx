@@ -68,7 +68,7 @@ do_install_append () {
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/ed_mac_ctrl_V3_8997.conf  ${D}${nonarch_base_libdir}/firmware/nxp
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8997/txpwrlimit_cfg_8997.conf  ${D}${nonarch_base_libdir}/firmware/nxp
 
-    # Install NXp Connectivity 8987 firmware
+    # Install NXP Connectivity 8987 firmware
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8987/ed_mac_ctrl_V3_8987.conf  ${D}${nonarch_base_libdir}/firmware/nxp
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8987/sdiouart8987_combo_v0.bin ${D}${nonarch_base_libdir}/firmware/nxp
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_8987/txpwrlimit_cfg_8987.conf  ${D}${nonarch_base_libdir}/firmware/nxp
@@ -77,7 +77,7 @@ do_install_append () {
 
 # Use the latest version of sdma firmware in firmware-imx
 PACKAGES_remove = "${PN}-imx-sdma-license ${PN}-imx-sdma-imx6q ${PN}-imx-sdma-imx7d"
-PACKAGES =+ " ${PN}-bcm4359-pcie ${PN}-nxp8987"
+PACKAGES =+ " ${PN}-bcm4359-pcie ${PN}-nxp89xx"
 
 FILES_${PN}-bcm4339 += " \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4339-sdio.txt \
@@ -119,7 +119,6 @@ FILES_${PN}-pcie8997 += " \
 "
 
 
-FILES_${PN}-nxp8987 = " \
-       ${nonarch_base_libdir}/firmware/nxp/sdiouart8987_combo_v0.bin \
-       ${nonarch_base_libdir}/firmware/nxp/wifi_mod_para_sd8987.conf \
+FILES_${PN}-nxp89xx = " \
+       ${nonarch_base_libdir}/firmware/nxp/* \
 "
