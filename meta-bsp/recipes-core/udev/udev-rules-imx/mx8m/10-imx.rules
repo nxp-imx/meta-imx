@@ -25,5 +25,5 @@ KERNEL=="galcore",  MODE="0660", GROUP="video"
 # Load hdmi/sdma/regulatory/epdc firmware
 SUBSYSTEM=="platform" DRIVER=="cdns-mhdp-imx", ACTION=="add", RUN+="/etc/hdmi"
 SUBSYSTEM=="platform" KERNEL=="regulatory.0", ACTION=="add", RUN+="/etc/regulatory"
-SUBSYSTEM=="platform" KERNEL=="302b0000.dma-controller", ACTION=="add", RUN+="/etc/sdma"
+SUBSYSTEM=="platform" KERNEL=="30bd0000.dma-controller", ACTION=="add", RUN+="/etc/sdma"
 SUBSYSTEM=="platform" KERNEL=="*.epdc", ACTION=="add", RUN+="/etc/epdc"
