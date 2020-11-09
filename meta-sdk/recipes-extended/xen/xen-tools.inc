@@ -827,7 +827,7 @@ do_deploy() {
     # Install the flask policy in the deploy directory if it exists
     if [ -f ${D}/boot/${FLASK_POLICY_FILE} ]; then
         install -m 0644 ${D}/boot/${FLASK_POLICY_FILE} ${DEPLOYDIR}
-        ln -sf ${FLASK_POLICY_FILE} ${DEPLOYDIR}/xenpolicy-${MACHINE}
+        ln -sf ${FLASK_POLICY_FILE} ${DEPLOYDIR}/xenpolicy
     fi
 }
 # Scheduling the do_deploy task:

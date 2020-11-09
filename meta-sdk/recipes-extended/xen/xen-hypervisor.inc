@@ -60,15 +60,15 @@ do_deploy() {
     install -d ${DEPLOYDIR}
 
     if [ -f ${B}/xen/xen ]; then
-        install -m 0644 ${B}/xen/xen ${DEPLOYDIR}/xen-${MACHINE}
+        install -m 0644 ${B}/xen/xen ${DEPLOYDIR}/xen
     fi
 
     if [ -f ${B}/xen/xen.gz ]; then
-        install -m 0644 ${B}/xen/xen.gz ${DEPLOYDIR}/xen-${MACHINE}.gz
+        install -m 0644 ${B}/xen/xen.gz ${DEPLOYDIR}/xen.gz
     fi
 
     if [ -f ${B}/xen/xen.efi ]; then
-        install -m 0644 ${B}/xen/xen.efi ${DEPLOYDIR}/xen-${MACHINE}.efi
+        install -m 0644 ${B}/xen/xen.efi ${DEPLOYDIR}/xen.efi
     fi
 }
 # Scheduling the do_deploy task:
