@@ -75,7 +75,7 @@ EXTRA_OEMESON += " \
     ${@get_opengl_cmdline_list('gl_api', d.getVar('OPENGL_APIS'), d)} \
     ${@get_opengl_cmdline_list('gl_platform', d.getVar('OPENGL_PLATFORMS'), d)} \
     ${@get_opengl_cmdline_list('gl_winsys', d.getVar('OPENGL_WINSYS'), d)} \
-    -Dc_args="-I${STAGING_INCDIR_IMX}" \
+    -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \
 "
 
 #GTKDOC_MESON_OPTION = "gtk_doc"

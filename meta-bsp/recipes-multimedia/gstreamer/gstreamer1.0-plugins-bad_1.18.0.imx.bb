@@ -150,7 +150,7 @@ EXTRA_OEMESON += " \
 	-Dintrospection="disabled" \
     -Ddtls="disabled" \
     -Dvulkan=disabled \
-    -Dc_args="-I${STAGING_INCDIR_IMX}" \
+    -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \
 "
 
 export OPENCV_PREFIX = "${STAGING_DIR_TARGET}${prefix}"

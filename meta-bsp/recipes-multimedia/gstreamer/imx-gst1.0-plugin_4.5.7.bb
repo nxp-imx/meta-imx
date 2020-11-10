@@ -43,7 +43,7 @@ PLATFORM_mx8 = "MX8"
 
 # Todo add a mechanism to map possible build targets
 EXTRA_OEMESON = "-Dplatform=${PLATFORM} \
-                 -Dc_args="-I${STAGING_INCDIR_IMX}" \
+                 -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \
 "
 
 PACKAGES =+ "${PN}-gplay ${PN}-libgplaycore ${PN}-libgstfsl ${PN}-grecorder ${PN}-librecorder-engine ${PN}-libplayengine"
