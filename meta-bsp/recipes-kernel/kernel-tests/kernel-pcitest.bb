@@ -5,6 +5,8 @@ SUMMARY = "Kernel PCI test for Linux"
 DESCRIPTION = "Kernel PCI test for Linux"
 LICENSE = "GPLv2"
 
+DEPENDS = "make-mod-scripts"
+
 inherit linux-kernel-base kernel-arch
 inherit kernelsrc
 
@@ -20,7 +22,6 @@ KERNEL_PCITEST_SRC ?= "Makefile \
              tools/pci \
              tools/scripts \
 "
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
 do_configure[prefuncs] += "copy_pci_source_from_kernel"
 python copy_pci_source_from_kernel() {
