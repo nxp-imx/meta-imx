@@ -8,7 +8,7 @@ TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.
 SRCBRANCH = "imx-v2.3.1"
 
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH}"
-SRCREV = "fef554aaad143facacd7a7707b88e58f7b8b9481"
+SRCREV = "dc3c013dc51933f55c54e306c22f11732e353c5e"
 
 SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz;name=model-mobv1"
 SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
