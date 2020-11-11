@@ -80,5 +80,7 @@ do_merge_delta_config() {
 }
 addtask merge_delta_config before do_preconfigure after do_copy_defconfig
 
+do_compile_kernelmodules[depends] += "make-mod-scripts:do_configure"
+
 KERNEL_VERSION_SANITY_SKIP="1"
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
