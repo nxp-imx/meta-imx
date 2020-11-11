@@ -1,1 +1,3 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
 PACKAGE_ARCH_imx = "${TUNE_PKGARCH}"
