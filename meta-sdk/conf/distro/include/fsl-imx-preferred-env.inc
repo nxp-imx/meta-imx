@@ -11,7 +11,6 @@ PREFERRED_VERSION_imx-gpu-viv               = "${IMX_GPU_VERSION}-${IMX_GPU_VERS
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}"
 
-# Set the preffered provider for opencl-headers
 PREFERRED_PROVIDER_opencl-headers_imx = "imx-gpu-viv"
 
 PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.16.2.imx"
@@ -19,6 +18,10 @@ PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.16.2.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-good = "1.16.2.imx"
 PREFERRED_VERSION_gstreamer1.0              = "1.16.2.imx"
 PREFERRED_VERSION_gstreamer1.0-libav        = "1.16.2"
+
+PREFERRED_VERSION_opengl-es-cts     = "3.2.6.1"
+PREFERRED_VERSION_opengl-es-cts_mx6 = "3.2.4.0"
+PREFERRED_VERSION_opengl-es-cts_mx7 = "3.2.4.0"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"
