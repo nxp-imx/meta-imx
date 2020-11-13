@@ -16,5 +16,6 @@ RDEPENDS_${PN} = " \
     keyctl-caam \
     keyutils \
     lvm2 \
+    ${SMW} \
     util-linux \
 "
