@@ -10,7 +10,7 @@ inherit kernelsrc
 
 S = "${WORKDIR}/${BP}"
 
-KERNEL_PCITEST_SRC ?= "Makefile \
+KERNEL_PCITEST_SRC ?= " \
              include \
              tools/arch \
              tools/build \
