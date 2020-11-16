@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074 \
                     file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
 #PR = "r1"
-PV = "20.02"
+PV = "20.08"
 
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
-SRCBRANCH = "bugfix/YOCIMX-4965-gcc10"
-SRCREV = "732d70eaec81b3da4cdcfc6a2880370de68248b0" 
+SRCBRANCH = "branches/armnn_20_08"
+SRCREV = "7c1bb17157fc3259c66e6272029c3b168ab30700"
 
 SRCREV_FORMAT = "armnn"
 
