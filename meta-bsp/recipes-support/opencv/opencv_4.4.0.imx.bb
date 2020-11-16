@@ -1,7 +1,5 @@
 require recipes-support/opencv/opencv_4.4.0.bb
 
-FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-openembedded/meta-oe/recipes-support/opencv/opencv:"
-
 LIC_FILES_CHKSUM = "file://LICENSE;md5=19598330421859a6dd353a4318091ac7"
 
 SRCREV_opencv = "f331cb18afa10595e4c3c72ecc9e1e86daa216aa" 
