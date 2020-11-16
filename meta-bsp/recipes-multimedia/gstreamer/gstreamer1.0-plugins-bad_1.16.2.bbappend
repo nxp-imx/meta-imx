@@ -5,7 +5,7 @@ DEPENDS_append_imxgpu2d = " virtual/libg2d"
 
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
 SRCBRANCH = "MM_04.05.07_2011_L5.4.70"
-SRCREV = "9aaee39ed9f0170ff5cea436e993d4e591f720e3" 
+SRCREV = "9aaee39ed9f0170ff5cea436e993d4e591f720e3"
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
     file://configure-allow-to-disable-libssh2.patch \
