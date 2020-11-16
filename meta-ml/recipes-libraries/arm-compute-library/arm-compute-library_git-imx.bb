@@ -1,17 +1,17 @@
 SUMMARY = "The ARM Computer Vision and Machine Learning library"
 DESCRIPTION = "The ARM Computer Vision and Machine Learning library is a set of functions optimised for both ARM CPUs and GPUs."
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=2c2e6902c16b52c68b379cecc3fafad7 \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a700d9de43fc22e998001a63c3feb1d2 \
                     file://include/half/LICENSE.txt;md5=fe7e5a4795c76b317919afd2d3da5983"
 
-PV = "20.02+git${SRCPV}"
+PV = "20.08+git${SRCPV}"
 
 ARM_COMPUTELIBRARY_SRC ?= "git://source.codeaurora.org/external/imx/arm-computelibrary-imx.git;protocol=https"
-SRCBRANCH = "imx_20.02"
+SRCBRANCH = "imx_20.08"
 
 SRC_URI = "${ARM_COMPUTELIBRARY_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "3961def57889dc8c29883fe206820b51c7a3169c"
+SRCREV = "204ed53864f029587bb4750637b2be7027bb37b0"
 
 RDEPENDS_${PN} = "bash"
 
@@ -34,7 +34,7 @@ PACKAGECONFIG[embed] = "embed_kernels=1,embed_kernels=0"
 PACKAGECONFIG[neon] = "neon=1,neon=0"
 
 # Specify any options you want to pass to scons using EXTRA_OESCONS:
-EXTRA_OESCONS = "${PARALLEL_MAKE} Werror=0 build=cross_compile os=linux examples=1 ${PACKAGECONFIG_CONFARGS}"
+EXTRA_OESCONS = "${PARALLEL_MAKE} build=cross_compile os=linux toolchain_prefix=' ' extra_cxx_flags='-fPIC' examples=1 ${PACKAGECONFIG_CONFARGS}"
 EXTRA_OESCONS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', 'arch=arm64-v8a neon=1', '', d)}"
 
 do_install() {
