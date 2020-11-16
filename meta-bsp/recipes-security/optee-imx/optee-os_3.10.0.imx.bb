@@ -1,8 +1,6 @@
 # Copyright (C) 2020 NXP
 require optee-os.imx.inc
 
-FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-freescale/recipes-security/optee-imx/${PN}:"
-
 DEPENDS_append = " python3-pycryptodomex-native"
 
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
