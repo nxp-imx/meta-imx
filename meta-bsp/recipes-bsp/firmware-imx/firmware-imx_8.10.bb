@@ -42,9 +42,9 @@ do_install() {
     cd -
 
     # Install SDMA Firmware: sdma-imx6q.bin & sdma-imx7d.bin into lib/firmware/imx/sdma
-    install -d ${D}${base_libdir}/firmware/imx/sdma
-    mv ${D}${base_libdir}/firmware/sdma/sdma-imx6q.bin ${D}${base_libdir}/firmware/imx/sdma
-    mv ${D}${base_libdir}/firmware/sdma/sdma-imx7d.bin ${D}${base_libdir}/firmware/imx/sdma
+    install -d ${D}${nonarch_base_libdir}/firmware/imx/sdma
+    mv ${D}${base_libdir}/firmware/sdma/sdma-imx6q.bin ${D}${nonarch_base_libdir}/firmware/imx/sdma
+    mv ${D}${base_libdir}/firmware/sdma/sdma-imx7d.bin ${D}${nonarch_base_libdir}/firmware/imx/sdma
 
     mv ${D}${base_libdir}/firmware/epdc/ ${D}${base_libdir}/firmware/imx/epdc/
     mv ${D}${base_libdir}/firmware/imx/epdc/epdc_ED060XH2C1.fw.nonrestricted ${D}${base_libdir}/firmware/imx/epdc/epdc_ED060XH2C1.fw
@@ -92,7 +92,7 @@ PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-*"
 PACKAGES =+ "${PN}-epdc ${PN}-sdma ${PN}-easrc ${PN}-regulatory ${PN}-hdmi ${PN}-xcvr ${PN}-xuvi"
 
 FILES_${PN}-epdc = "${base_libdir}/firmware/imx/epdc/ ${sysconfdir}/epdc"
-FILES_${PN}-sdma = "${base_libdir}/firmware/imx/sdma ${sysconfdir}/sdma"
+FILES_${PN}-sdma = "${nonarch_base_libdir}/firmware/imx/sdma ${sysconfdir}/sdma"
 FILES_${PN}-easrc = "${base_libdir}/firmware/imx/easrc/"
 FILES_${PN}-regulatory = "${sysconfdir}/regulatory"
 FILES_${PN}-hdmi = "${base_libdir}/firmware/imx/hdmi/ ${sysconfdir}/hdmi"
