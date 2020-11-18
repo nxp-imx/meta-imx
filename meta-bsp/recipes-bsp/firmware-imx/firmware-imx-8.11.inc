@@ -9,8 +9,8 @@ SRC_URI = " \
     ${FSL_MIRROR}/firmware-imx-${PV}.bin;fsl-eula=true \
 "
 
-SRC_URI[md5sum] = "3f8c4661ca0f64ca30fd239f66b6a471"
-SRC_URI[sha256sum] = "2b70f169d4065b2a7ac7a676afe24636128bd2dacc9f5230346758c3b146b2be"
+SRC_URI[md5sum] = "126fc0bc8d6fb4b4a1d02c09ebac264a"
+SRC_URI[sha256sum] = "9b58f7dde2301ed0f4ea46c8eabbbc602b3c5abd1ba6398cd07415644acf359d"
 
 S = "${WORKDIR}/firmware-imx-${PV}"
 
