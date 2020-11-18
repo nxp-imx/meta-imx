@@ -34,9 +34,6 @@ EXTRA_PROVIDES_append_imxgpu3d = " \
 EXTRA_PROVIDES_append_mx8 = " \
     virtual/libgbm \
 "
-EXTRA_PROVIDES_append_mx8qm = " \
-    virtual/libopenvx \
-"
 PROVIDES_OPENVX       = ""
 PROVIDES_OPENVX_mx8   = "virtual/libopenvx"
 PROVIDES_OPENVX_mx8mm = ""
