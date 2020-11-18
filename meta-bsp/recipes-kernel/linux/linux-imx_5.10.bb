@@ -80,5 +80,11 @@ do_merge_delta_config() {
 }
 addtask merge_delta_config before do_preconfigure after do_copy_defconfig
 
+do_compile_kernelmodules_append() {
+    if (grep -q -i -e '^CONFIG_MODULES=y$' ${B}/.config); then
+        [ -e ${B}/scripts/module.lds ] && install -Dm 0644 ${B}/scripts/module.lds ${STAGING_KERNEL_BUILDDIR}/scripts/module.lds
+    fi
+}
+
 KERNEL_VERSION_SANITY_SKIP="1"
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
