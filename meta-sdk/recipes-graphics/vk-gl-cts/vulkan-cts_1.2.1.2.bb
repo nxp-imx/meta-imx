@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 DEPENDS = "libpng vulkan-headers vulkan-loader zlib"
 
-VKGLCTS_SRC ?= "git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https"
+VKGLCTS_SRC ?= "git://source.codeaurora.org/external/imx/vk-gl-cts-imx.git;protocol=https"
 SRCBRANCH = "imx-${BP}"
 SRC_URI = " \
     ${VKGLCTS_SRC};name=vk-gl-cts;branch=${SRCBRANCH} \
