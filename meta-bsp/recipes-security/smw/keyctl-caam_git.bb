@@ -10,7 +10,7 @@ SRCBRANCH = "master"
 KEYCTL_CAAM_SRC ?= "git://source.codeaurora.org/external/imx/keyctl_caam.git;protocol=https"
 SRC_URI = "${KEYCTL_CAAM_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "be3326eacd11500c54a3c69bf0b7652a46267ea0"
+SRCREV = "6b80882e3d5bc986a1f2f9512845170658ba9ea2"
 
 S = "${WORKDIR}/git"
 
