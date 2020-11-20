@@ -233,6 +233,40 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
+Package:                     isp-vvcam.git
+Outgoing License:            GPL-2.0 
+License File:                vvcam/LICENSE
+Package Category:            BSP
+Type of Content:             ISP Kernel Module source
+Description and comments:    Kernel Loadable Module for ISP
+Release Location:            https://source.codeaurora.org/external/imx/isp-vvcam -b rel_imx_5.4.70_2.3.0
+Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
+
+--------------------------------------------
+
+Package:                     isp-imx-4.2.2.5.1.bin
+Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             binary and source
+Description and comments:    i.MX software ISP
+Release Location:            Mirror
+Origin:                      VeriSilicon Holdings Co., Ltd. (proprietary)
+
+--------------------------------------------
+
+Package:                     basler-camera-4.2.2.5.1.bin
+Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             binary
+Description and comments:    Basler camera binary drivers
+Release Location:            Mirror
+Origin:                      Basler AG (proprietary)
+                             VeriSilicon Holdings Co., Ltd. (proprietary)
+
+--------------------------------------------
+
 Package:                     imx-seco-3.7.2.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
@@ -402,40 +436,6 @@ Release Location:            https://source.codeaurora.org/external/imx/key_caam
 Graphics Packages
 --------------------------------------------
 
-Package:                     isp-vvcam.git
-Outgoing License:            GPL-2.0 
-License File:                vvcam/LICENSE
-Package Category:            Graphics
-Type of Content:             ISP Kernel Module source
-Description and comments:    Kernel Loadable Module for ISP
-Release Location:            https://source.codeaurora.org/external/imx/isp-vvcam -b rel_imx_5.4.70_2.3.0
-Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
-
---------------------------------------------
-
-Package:                     isp-imx-4.2.2.5.1.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary and source
-Description and comments:    i.MX software ISP
-Release Location:            Mirror
-Origin:                      VeriSilicon Holdings Co., Ltd. (proprietary)
-
---------------------------------------------
-
-Package:                     basler-camera-4.2.2.5.1.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Basler camera binary drivers
-Release Location:            Mirror
-Origin:                      Basler AG (proprietary)
-                             VeriSilicon Holdings Co., Ltd. (proprietary)
-
---------------------------------------------
-
 Package:                     apitrace-imx.git
 Outgoing License:            MIT 
 License File:                LICENSE
@@ -508,7 +508,7 @@ License File:                License.md
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics sample applications
-Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 5.6.1
+Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 5.6.2
 Origin:                      NXP (BSD-3-clause)
                          Demo Framework
                              The Android Open Source Project (Apache-2.0) - https://source.android.com/
