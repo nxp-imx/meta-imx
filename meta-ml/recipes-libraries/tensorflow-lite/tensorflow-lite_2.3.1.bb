@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=64a34301f8e355f57ec992c2af3e5157"
 DEPENDS = "zlib unzip-native python3 python3-numpy-native python3-pip-native python3-wheel-native python3-pybind11-native"
 
 TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
-SRCBRANCH = "imx-v2.3.1"
+SRCBRANCH = "imx_5.4.70_2.3.0"
 
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH}"
 SRCREV = "c6abc15ab3a1e72ef60fa05ec0c1d1b06c043198"
