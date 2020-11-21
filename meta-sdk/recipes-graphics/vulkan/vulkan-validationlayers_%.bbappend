@@ -24,9 +24,6 @@ do_install_append () {
 FILES_SOLIBSDEV = ""
 FILES_${PN} += "${libdir}/libVkLayer_*.so"
 
-# The package libvulkan-imx is required to configure the imx-gpu-viv vulkan drivers for the validation layers
-RDEPENDS_${PN} += "libvulkan-imx"
-
 INSANE_SKIP_${PN} = "dev-so"
 
 COMPATIBLE_MACHINE = "(mx8)"
