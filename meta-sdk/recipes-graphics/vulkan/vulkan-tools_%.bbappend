@@ -4,7 +4,5 @@ PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '
 
 EXTRA_OECMAKE = "-DBUILD_CUBE=OFF"
 
-RDEPENDS_${PN} += "libvulkan-imx"
-
 COMPATIBLE_MACHINE = "(mx8)"
 COMPATIBLE_MACHINE_mx8mm = "(^$)"
