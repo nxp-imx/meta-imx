@@ -13,7 +13,7 @@ VKGLCTS_SRC ?= "git://source.codeaurora.org/external/imx/vk-gl-cts-imx.git;proto
 SRC_URI = "${VKGLCTS_SRC};name=vk-gl-cts;branch=imx-${BP}"
 S = "${WORKDIR}/git"
 
-inherit pkgconfig cmake distro_features_check
+inherit pkgconfig cmake features_check
 
 ANY_OF_DISTRO_FEATURES = "x11 wayland"
 
