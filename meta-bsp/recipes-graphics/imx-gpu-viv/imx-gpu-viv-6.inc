@@ -263,10 +263,6 @@ do_install () {
 
 ALLOW_EMPTY_${PN} = "1"
 
-# FIXME: Remove the following lines after adding libopenvx package
-INSANE_SKIP_imx-gpu-viv-dev += "dev-elf"
-INSANE_SKIP_libclc-imx += "dev-deps"
-
 FILES_libclc-imx = "${libdir}/libCLC${SOLIBS} ${includedir}/CL/cl_viv_vx_ext.h"
 FILES_libclc-imx-dev = "${includedir}/CL ${libdir}/libCLC${SOLIBSDEV}"
 
@@ -293,7 +289,7 @@ FILES_libvulkan-imx = "${libdir}/libvulkan_VSI${SOLIBS} ${libdir}/libvulkan_VSI$
 FILES_libvulkan-imx-dev = "${includedir}/vulkan ${libdir}/libvulkan_VSI${SOLIBSDEV}"
 INSANE_SKIP_libvulkan-imx += "dev-so"
 
-FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVX${REALSOLIBS} ${libdir}/libOvx*${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS}"
+FILES_libopenvx-imx = "${libdir}/libOpenVX${SOLIBS} ${libdir}/libOpenVX${REALSOLIBS} ${libdir}/libOvx*${SOLIBS} ${libdir}/libOpenVXC${SOLIBS} ${libdir}/libOpenVXU${SOLIBS} ${libdir}/libArchModelSw${SOLIBS}"
 FILES_libopenvx-imx-dev = "${includedir}/VX ${libdir}/libOpenVX${SOLIBSDEV}"
 RDEPENDS_libopenvx-imx = "libnn-imx"
 INSANE_SKIP_libopenvx-imx += "dev-so dev-deps"
