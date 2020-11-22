@@ -4,7 +4,7 @@ SRC_URI_remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
                   file://0001-tests-include-fcntl.h-for-open-O_RDWR-O_CLOEXEC-and-.patch"
 WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
 SRC_URI_prepend = "${WESTON_SRC};branch=weston-imx-9.0 "
-SRCREV = "18391b68d37a8ced956889e5ba99a69a38d7255a"
+SRCREV = "a1823f20a1d6e24d2f56e98c5576eda34a94f567"
 S = "${WORKDIR}/git"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
