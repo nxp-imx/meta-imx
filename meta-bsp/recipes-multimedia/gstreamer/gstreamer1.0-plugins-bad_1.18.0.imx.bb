@@ -19,7 +19,7 @@ SRC_URI = " \
     file://fix-maybe-uninitialized-warnings-when-compiling-with-Os.patch \
     file://avoid-including-sys-poll.h-directly.patch \
 "
-SRCREV = "87ddcde581d85eb2b06c643341e53a8577348ff9"
+SRCREV = "b79d8ff46575ac8b881e4e5268f16f92c9c649c7"
 
 S = "${WORKDIR}/git"
 
