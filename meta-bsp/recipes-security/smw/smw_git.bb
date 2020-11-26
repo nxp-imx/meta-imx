@@ -12,7 +12,7 @@ RDEPENDS_${PN} += "cmake"
 SRCBRANCH = "imx_5.4.70_2.3.0"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "8a06ef9ebb051589aea334bdcaab0b1b201b8b6d" 
+SRCREV = "244b68bea0a2b980da1421dbe5c752842b83b284"
 
 S = "${WORKDIR}/git"
 
