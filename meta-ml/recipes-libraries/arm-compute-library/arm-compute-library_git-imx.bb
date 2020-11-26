@@ -34,7 +34,7 @@ PACKAGECONFIG[embed] = "embed_kernels=1,embed_kernels=0"
 PACKAGECONFIG[neon] = "neon=1,neon=0"
 
 # Specify any options you want to pass to scons using EXTRA_OESCONS:
-EXTRA_OESCONS = "${PARALLEL_MAKE} Werror=0 build=cross_compile os=linux examples=1 ${PACKAGECONFIG_CONFARGS}"
+EXTRA_OESCONS = "${PARALLEL_MAKE} Werror=0 build=cross_compile os=linux examples=1 toolchain_prefix=' ' extra_cxx_flags='-fPIC' ${PACKAGECONFIG_CONFARGS}"
 EXTRA_OESCONS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', 'arch=arm64-v8a neon=1', '', d)}"
 
 do_install() {
