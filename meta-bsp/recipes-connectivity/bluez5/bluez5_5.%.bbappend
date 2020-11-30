@@ -12,5 +12,4 @@ SRC_URI += " \
             file://0004-Add-support-for-Tufello-1.1-SOC.patch \
             file://0005-bluetooth-Add-support-for-multi-baud-rate.patch \
             file://0006-gobex-increase-the-obex-default-abort-timeout-value.patch \
-            file://0007-MLK-23858-profiles-audio-increased-the-MTU-size-to-M.patch \
 "
