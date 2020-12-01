@@ -10,7 +10,7 @@ ISP_KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/isp-vvcam.git;protoc
 SRC_URI = " \
     ${ISP_KERNEL_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "062f77fca1efa0a65498379253eb8f46cac0a5b1"
+SRCREV = "9824e601d336bcef2dc6284ff3605e0b1d32d63d"
 
 S = "${WORKDIR}/git/vvcam/v4l2"
 
