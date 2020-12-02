@@ -6,7 +6,7 @@ SECTION = "base"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982"
 
-DEPENDS = "imx-seco-libs optee-os optee-client python3-pycryptodomex-native"
+DEPENDS = "imx-seco-libs json-c optee-os optee-client python3-pycryptodomex-native"
 
 SRCBRANCH = "master"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
@@ -34,11 +34,7 @@ FILES_${PN} += "${base_libdir}/optee_armtz/*"
 
 FILES_${PN}-tests = "${bindir}/* ${datadir}/${BPN}/tests/*"
 
-RDEPENDS_${PN}-tests += " \
-    json-c \
-    bash \
-    cmake \
-"
+RDEPENDS_${PN}-tests += "bash cmake"
 
 COMPATIBLE_MACHINE = "(mx8)"
 COMPATIBLE_MACHINE_mx8m = "(^$)"
