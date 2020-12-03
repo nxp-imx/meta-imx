@@ -11,7 +11,6 @@ SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "67e3a3f6271bf5f5fd1de1ba26778158"
 SRC_URI[sha256sum] = "2022ec572287db2e78a531f96c9f555469a6f813213fb5f725bc6ad61b82ae83"
 
-
 do_install() {
     dest_dir=${D}/opt/imx8-isp/bin
     install -d ${D}/${libdir}
