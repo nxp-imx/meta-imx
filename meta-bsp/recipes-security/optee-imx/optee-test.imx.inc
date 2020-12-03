@@ -1,18 +1,23 @@
-# Copyright (C) 2019-2020 NXP
+# Copyright (C) 2017-2020 NXP
 
-require recipes-security/optee-imx/optee-test_3.2.0.imx.bb
+SUMMARY = "OPTEE test"
+HOMEPAGE = "http://www.optee.org/"
+
+LICENSE = "BSD"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 
 inherit python3native
-DEPENDS_remove = "python-pycrypto-native"
-DEPENDS_append = " python3-pycrypto-native"
 
-SRC_URI_remove = "file://0001-regression-4011-correct-potential-overflow.patch \
-                  file://0001-xtest-prevent-unexpected-build-warning-with-strncpy.patch \
-                  file://0003-sock_server-fix-compilation-against-musl-sys-errno.h.patch \
-                  file://0004-build-ignore-declaration-after-statement-warnings.patch \
-                  file://0005-benchmark_1000-fix-compilation-against-musl-uint.patch \
-                  file://0006-regression_8100-use-null-terminated-strings-with-fil.patch \
-                 "
+DEPENDS = "optee-os optee-client python3-pycrypto-native openssl"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
+
+SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH} \
+"
+
+S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
 TA_DEV_KIT_DIR_aarch64 = "${STAGING_INCDIR}/optee/export-user_ta_arm64/"
@@ -30,8 +35,23 @@ EXTRA_OEMAKE = " \
     OPTEE_OPENSSL_EXPORT=${STAGING_INCDIR}/ \
     -C ${S} O=${B} \
 "
-do_compile_prepend () {
+
+do_compile () {
     export CXXFLAGS="${CXXFLAGS} --sysroot=${STAGING_DIR_HOST}"
+
+    if [ ${DEFAULTTUNE} = "aarch64" ];then
+        export TA_DEV_KIT_DIR=${STAGING_INCDIR}/optee/export-user_ta_arm64/
+        export ARCH=arm64
+    else
+        export TA_DEV_KIT_DIR=${STAGING_INCDIR}/optee/export-user_ta_arm32/
+        export ARCH=arm
+    fi
+    export OPTEE_CLIENT_EXPORT=${STAGING_DIR_HOST}/usr
+    export CROSS_COMPILE_HOST=${HOST_PREFIX}
+    export CROSS_COMPILE_TA=${HOST_PREFIX}
+    export CROSS_COMPILE=${HOST_PREFIX}
+    export OPTEE_OPENSSL_EXPORT=${STAGING_INCDIR}/
+    oe_runmake V=1
 }
 
 do_install () {
@@ -43,3 +63,7 @@ do_install () {
     install -m 444 $name ${D}/lib/optee_armtz/
     done
 }
+
+FILES_${PN} = "/usr/bin/ /lib*/optee_armtz/"
+
+COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
