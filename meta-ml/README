@@ -1,0 +1,24 @@
+i.MX Linux Yocto BSP layer for NXP's i.MX Distribution images
+=====================================================
+
+This layer provides support for building Machine learning and AI
+applications and related software.
+
+This layer depends on:
+
+URI: git://git.openembedded.org/meta-openembedded
+branch: zeus
+revision: Reference to the release manifest file (.xml) in the imx-manifest.git
+
+URI: git://git.yoctoproject.org/meta-freescale
+branch: zeus
+revision: Reference to the release manifest file (.xml) in the imx-manifest.git
+
+URI: git://git.yoctoproject.org/meta-freescale-distro
+branch: zeus
+revision: Reference to the release manifest file (.xml) in the imx-manifest.git
+
+URI: git://source.codeaurora.org/external/imx/meta-imx
+subdirectory: meta-bsp
+branch: the same branch as this layer
+revision: the same revision as this layer
