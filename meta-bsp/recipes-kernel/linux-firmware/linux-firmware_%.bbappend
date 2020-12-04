@@ -16,7 +16,7 @@ SRC_URI += " \
            ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH};destsuffix=imx-firmware;name=imx-firmware \
 "
 
-SRCREV_imx-firmware = "e85dc6f187b9c47e4105c7c1b9469ee94f1e9728"
+SRCREV_imx-firmware = "2fae6509c354bed98302bb199e440899309519e9"
 
 SRCREV_FORMAT = "default_murata-qca_imx-firmware"
 
