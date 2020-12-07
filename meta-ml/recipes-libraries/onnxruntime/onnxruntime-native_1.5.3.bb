@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 DEPENDS = "libpng zlib"
 
 # For ONNX Runtime v0.3.0 we need only 'protoc' to be compiled for native system
-GIT_protobuf = "git://github.com/google/protobuf.git;branch=3.6.x;name=protobuf"
-SRCREV_protobuf = "48cb18e5c419ddd23d9badcfe4e9df7bde1979b2"
+GIT_protobuf = "git://github.com/google/protobuf.git;branch=3.11.x;name=protobuf"
+SRCREV_protobuf = "df2bce345d4bc8cdc3eba2a866e11e79e1fff4df"
 
 SRC_URI = "\
     ${GIT_protobuf} \

@@ -6,14 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=980784f0a7f667becbed133924b263bf"
 DEPENDS = "libpng zlib ${BPN}-native"
 
 ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH = "1.1.2_vsi_npu_alpha+arm"
+SRCBRANCH = "1.5.3"
 
-SRCREV = "93396203b45bdea4987e81a30b5d8d89ebd7fba6" 
+SRCREV = "efd3a582128a4fdad39d56d2a9b1340f63401c11"
 
 SRC_URI = "\
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
-    file://Fix_Eigen_Build_Break.patch \
-    file://0001-Undefine-MLAS-THREADPOOL-when-using-OPENMP.patch \
 "
 S = "${WORKDIR}/git"
 
@@ -40,7 +38,7 @@ PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
 PACKAGECONFIG_VSI_NPU_mx8mnlite = ""
 
-PACKAGECONFIG ?= "openmp test reports sharedlib armnn-relu eigenblas acl acl-2008 ${PACKAGECONFIG_VSI_NPU}"
+PACKAGECONFIG ?= "openmp test reports sharedlib armnn-relu armnn eigenblas acl acl-2008 ${PACKAGECONFIG_VSI_NPU}"
 
 PACKAGECONFIG[nsync] = "-Donnxruntime_USE_NSYNC=ON, -Donnxruntime_USE_NSYNC=OFF"
 PACKAGECONFIG[prebuilt] = "-Donnxruntime_USE_PREBUILT_PB=ON, -Donnxruntime_USE_PREBUILT_PB=OFF"
