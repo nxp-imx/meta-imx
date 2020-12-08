@@ -106,13 +106,6 @@ FILES_${PN}-bcm4359-pcie = " \
        ${sysconfdir}/firmware/BCM4349B1_*.hcd \
 "
 
-FILES_${PN}-pcie8997 += " \
-       ${nonarch_base_libdir}/firmware/mrvl/helper_uart_3000000.bin \
-       ${nonarch_base_libdir}/firmware/mrvl/uart8997_bt_v4.bin \
-       ${datadir}/mrvl_wireless/bin_pcie8997/fw_loader_arm64 \
-"
-
-
 FILES_${PN}-nxp89xx = " \
        ${nonarch_base_libdir}/firmware/nxp/* \
 "
