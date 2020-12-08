@@ -2,20 +2,14 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-# Firmware for Murata QCA Modules
-SRC_URI += " \
-            git://github.com/murata-wireless/qca-linux-calibration.git;protocol=https;name=murata-qca;destsuffix=murata-qca \
-"
-SRCREV_murata-qca = "a0026b646ce6adfb72f135ffa8a310f3614b2272"
-
-# Firmware for Murata CYW4339/CYW43430/CYW43455/CYW4356/CYW4359 Module
-# Firmware for Marvell Wi-Fi Modules
 IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
 SRCBRANCH = "master"
 SRC_URI += " \
-           ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH};destsuffix=imx-firmware;name=imx-firmware \
+    git://github.com/murata-wireless/qca-linux-calibration.git;protocol=https;name=murata-qca;destsuffix=murata-qca \
+    ${IMX_FIRMWARE_SRC};branch=${SRCBRANCH};destsuffix=imx-firmware;name=imx-firmware \
 "
 
+SRCREV_murata-qca = "a0026b646ce6adfb72f135ffa8a310f3614b2272"
 SRCREV_imx-firmware = "2fae6509c354bed98302bb199e440899309519e9"
 
 SRCREV_FORMAT = "default_murata-qca_imx-firmware"
