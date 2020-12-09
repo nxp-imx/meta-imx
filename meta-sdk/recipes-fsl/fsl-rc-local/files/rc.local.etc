@@ -26,5 +26,8 @@ else
     echo 30000 >  /proc/sys/vm/min_free_kbytes
 fi
 
+# set printk to 7 to dump kernel message to console
+echo 7 > /proc/sys/kernel/printk
+
 exit 0
 
