@@ -10,6 +10,8 @@ SRC_URI_remove = " \
 OPTEE_CORE_LOG_LEVEL ?= "1"
 OPTEE_TA_LOG_LEVEL ?= "0"
 
+PLATFORM_FLAVOR_mx8mnlite       = "mx8mnevk"
+
 EXTRA_OEMAKE_remove = "NOWERROR=1 \
                       "
 
