@@ -8,8 +8,6 @@ GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugi
 SRCBRANCH = "imx-1.18.x" 
 SRCREV = "e95a6e703928d038bdd1653b54d9526f5dc6a500"
 SRC_URI = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
-           file://0005-viv-fb-Make-sure-config.h-is-included.patch \
-           file://0009-glimagesink-Downrank-to-marginal.patch \
            "
 
 S = "${WORKDIR}/git"

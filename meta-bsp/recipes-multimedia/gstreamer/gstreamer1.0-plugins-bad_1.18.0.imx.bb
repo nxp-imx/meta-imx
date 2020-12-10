@@ -15,9 +15,6 @@ SRCBRANCH = "imx-1.18.x"
 
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
-    file://opencv-resolve-missing-opencv-data-dir-in-yocto-buil.patch \
-    file://fix-maybe-uninitialized-warnings-when-compiling-with-Os.patch \
-    file://avoid-including-sys-poll.h-directly.patch \
 "
 SRCREV = "b79d8ff46575ac8b881e4e5268f16f92c9c649c7"
 

@@ -24,7 +24,6 @@ IMXGST_SRC ?= "git://source.codeaurora.org/external/imx/imx-gst1.0-plugin.git;pr
 SRCBRANCH = "master"
 
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
-           file://0001-imx-gst1.0-plugin-Update-KERNEL_VERSION-check.patch \
 "
 SRCREV = "250e02464c82dcf92124a92d71cc9d591fcefdcc"
 
