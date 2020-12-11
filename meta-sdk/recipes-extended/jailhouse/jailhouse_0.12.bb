@@ -17,8 +17,7 @@ SRCBRANCH = "imx_v0.12_y"
 IMX_JAILHOUSE_SRC ?= "git://source.codeaurora.org/external/imx/imx-jailhouse.git;protocol=ssh"
 
 SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH} \
-           file://0001-scripts-include.mk-multilib-Fix-hardcoded-lib-in-fir.patch \
-           file://0002-tools-scripts-update-shebang-to-python3.patch \
+           file://0001-tools-scripts-update-shebang-to-python3.patch \
 "
 
 SRCREV = "8914b4f315a855d310f02c5c40fe409c232c0b65"
@@ -106,7 +105,7 @@ do_install() {
 
 PACKAGE_BEFORE_PN = "kernel-module-jailhouse pyjailhouse"
 
-FILES_${PN} += "${base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_DATADIR}"
+FILES_${PN} += "${nonarch_base_libdir}/firmware ${libexecdir} ${sbindir} ${JH_DATADIR}"
 FILES_pyjailhouse = "{PYTHON_SITEPACKAGES_DIR}/pyjailhouse"
 
 RDEPENDS_${PN} += " \
