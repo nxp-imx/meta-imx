@@ -38,7 +38,7 @@ PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
 PACKAGECONFIG_VSI_NPU_mx8mnlite = ""
 
-PACKAGECONFIG ?= "openmp test reports sharedlib armnn-relu armnn eigenblas acl acl-2008 ${PACKAGECONFIG_VSI_NPU}"
+PACKAGECONFIG ?= "openmp test reports sharedlib armnn eigenblas acl acl-2008 ${PACKAGECONFIG_VSI_NPU}"
 
 PACKAGECONFIG[nsync] = "-Donnxruntime_USE_NSYNC=ON, -Donnxruntime_USE_NSYNC=OFF"
 PACKAGECONFIG[prebuilt] = "-Donnxruntime_USE_PREBUILT_PB=ON, -Donnxruntime_USE_PREBUILT_PB=OFF"
@@ -58,7 +58,7 @@ PACKAGECONFIG[openvino] = "-Donnxruntime_USE_OPENVINO=ON, -Donnxruntime_USE_OPEN
 PACKAGECONFIG[interop] = "-Donnxruntime_ENABLE_LANGUAGE_INTEROP_OPS=ON, -Donnxruntime_ENABLE_LANGUAGE_INTEROP_OPS=OFF"
 PACKAGECONFIG[dml] = "-Donnxruntime_USE_DML=ON, -Donnxruntime_USE_DML=OFF"
 PACKAGECONFIG[telemetry] = "-Donnxruntime_USE_TELEMETRY=ON, -Donnxruntime_USE_TELEMETRY=OFF"
-PACKAGECONFIG[armnn-relu] = "-Donnxruntime_ARMNN_RELU_USECPU=ON, -Donnxruntime_ARMNN_RELU_USECPU=OFF"
+PACKAGECONFIG[armnn-relu] = "-Donnxruntime_ARMNN_RELU_USE_CPU=ON, -Donnxruntime_ARMNN_RELU_USE_CPU=OFF"
 PACKAGECONFIG[opschema] = "-Donnxruntime_PYBIND_EXPORT_OPSCHEMA=ON, -Donnxruntime_PYBIND_EXPORT_OPSCHEMA=OFF"
 PACKAGECONFIG[nnapi] = "-Donnxruntime_USE_NNAPI=ON, -Donnxruntime_USE_NNAPI=OFF"
 PACKAGECONFIG[tvm] = "-Donnxruntime_USE_TVM=ON, -Donnxruntime_USE_TVM=OFF"
