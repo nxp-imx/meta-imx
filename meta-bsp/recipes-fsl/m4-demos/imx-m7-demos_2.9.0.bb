@@ -11,4 +11,4 @@ SRC_URI[imx8mp.sha256sum] = "343ecc380ab549d7d345947d360ef949f90f929e93e4bf504bd
 SRC_URI[imx8mnddr3l.md5sum] = "08f25c70319dee9c328fd6158b8403db"
 SRC_URI[imx8mnddr3l.sha256sum] = "b299c886df49da3bc6da99c40bc66b058051661cea49dbe6e176a1743f9223c4"
 
-COMPATIBLE_MACHINE = "(mx8mp)"
+COMPATIBLE_MACHINE = "(mx8mp|mx8mnlite)"
