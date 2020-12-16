@@ -15,7 +15,8 @@ RDEPENDS_${PN} = " \
     fbset \
     i2c-tools \
     iproute2 \
-    kernel-pcitest \
+    kernel-tools-pci \
+    kernel-tools-spi \
     memtester \
     python-subprocess \
     python-datetime \
