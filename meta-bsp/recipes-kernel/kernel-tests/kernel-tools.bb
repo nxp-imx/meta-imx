@@ -54,21 +54,17 @@ do_compile() {
     unset CFLAGS
     oe_runmake -C tools/pci
     oe_runmake -C tools/spi
-    oe_runmake -C tools/virtio  virtio-ivshmem-console virtio-ivshmem-block
 }
 
 do_install() {
     unset CFLAGS
     oe_runmake -C tools/pci install
     oe_runmake -C tools/spi install
-    install ${S}/tools/virtio/virtio-ivshmem-console  ${D}${bindir}/
-    install ${S}/tools/virtio/virtio-ivshmem-block    ${D}${bindir}/
 }
 
-PACKAGES =+ "${PN}-pci ${PN}-spi ${PN}-virtio"
+PACKAGES =+ "${PN}-pci ${PN}-spi "
 
 FILES_${PN}-pci = "${bindir}/pci*"
 FILES_${PN}-spi = "${bindir}/spi*"
-FILES_${PN}-virtio = "${bindir}/virtio*"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
