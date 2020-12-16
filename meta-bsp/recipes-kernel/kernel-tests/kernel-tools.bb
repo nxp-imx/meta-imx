@@ -1,8 +1,8 @@
 # Copyright 2020 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-SUMMARY = "Kernel PCI test for Linux"
-DESCRIPTION = "Kernel PCI test for Linux"
+SUMMARY = "Kernel tools for Linux"
+DESCRIPTION = "Kernel tools for Linux"
 LICENSE = "GPLv2"
 
 inherit linux-kernel-base kernel-arch
@@ -18,6 +18,8 @@ KERNEL_PCITEST_SRC ?= " \
              tools/lib \
              tools/Makefile \
              tools/pci \
+             tools/spi \
+             tools/virtio \
              tools/scripts \
 "
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
@@ -51,13 +53,22 @@ EXTRA_OEMAKE = '\
 do_compile() {
     unset CFLAGS
     oe_runmake -C tools/pci
+    oe_runmake -C tools/spi
+    oe_runmake -C tools/virtio  virtio-ivshmem-console virtio-ivshmem-block
 }
 
 do_install() {
     unset CFLAGS
     oe_runmake -C tools/pci install
+    oe_runmake -C tools/spi install
+    install ${S}/tools/virtio/virtio-ivshmem-console  ${D}${bindir}/
+    install ${S}/tools/virtio/virtio-ivshmem-block    ${D}${bindir}/
 }
 
-FILES_${PN} += "${bindir}"
+PACKAGES =+ "${PN}-pci ${PN}-spi ${PN}-virtio"
+
+FILES_${PN}-pci = "${bindir}/pci*"
+FILES_${PN}-spi = "${bindir}/spi*"
+FILES_${PN}-virtio = "${bindir}/virtio*"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
