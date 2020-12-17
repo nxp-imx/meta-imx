@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a700d9de43fc22e998001a63c3feb1d2 \
                     file://include/half/LICENSE.txt;md5=fe7e5a4795c76b317919afd2d3da5983"
 
-PV = "20.08+git${SRCPV}"
+PV = "20.08"
 
 ARM_COMPUTELIBRARY_SRC ?= "git://source.codeaurora.org/external/imx/arm-computelibrary-imx.git;protocol=https"
 SRCBRANCH = "imx_20.08"
@@ -19,67 +19,82 @@ S = "${WORKDIR}/git"
 
 inherit scons
 
-PACKAGECONFIG_OPENCL       = ""
-PACKAGECONFIG_OPENCL_mx8   = "opencl embed"
-PACKAGECONFIG_OPENCL_mx8mm = ""
-PACKAGECONFIG_OPENCL_mx8mnlite = ""
+PACKAGECONFIG ?= "tests cppthreads examples"
 
-PACKAGECONFIG ??= "${PACKAGECONFIG_OPENCL}"
-
-PACKAGECONFIG[benchmark] = "benchmark_tests=1,benchmark_tests=0"
-PACKAGECONFIG[validation] = "validation_tests=1,validation_tests=0"
+PACKAGECONFIG[Werror] = "Werror=1,Werror=0"
+PACKAGECONFIG[tests] = "benchmark_tests=1 validation_tests=1,benchmark_tests=0 validation_tests=0"
 PACKAGECONFIG[opencl] = "opencl=1,opencl=0,opencl-headers virtual/opencl-icd"
 PACKAGECONFIG[gles] = "gles_compute=1,gles_compute=0"
 PACKAGECONFIG[embed] = "embed_kernels=1,embed_kernels=0"
-PACKAGECONFIG[neon] = "neon=1,neon=0"
+PACKAGECONFIG[debug] = "debug=1,debug=0"
+PACKAGECONFIG[cppthreads] = "cppthreads=1,cppthreads=0"
+PACKAGECONFIG[examples] = "examples=1,examples=0"
 
 # Specify any options you want to pass to scons using EXTRA_OESCONS:
-EXTRA_OESCONS = "${PARALLEL_MAKE} build=cross_compile os=linux toolchain_prefix=' ' extra_cxx_flags='-fPIC' examples=1 ${PACKAGECONFIG_CONFARGS}"
+EXTRA_OESCONS = "${PARALLEL_MAKE} build=cross_compile os=linux toolchain_prefix=' ' extra_cxx_flags='-fPIC' ${PACKAGECONFIG_CONFARGS}"
 EXTRA_OESCONS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', 'arch=arm64-v8a neon=1', '', d)}"
 
 do_install() {
 	CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
 	install -d ${D}${includedir}
-	
-	# using cp instead of install - just temporary thing
-	cp $CP_ARGS arm_compute ${D}${includedir}
-	cp $CP_ARGS support ${D}${includedir}
-	cp $CP_ARGS include/half ${D}${includedir}
+	cp $CP_ARGS ${S}/arm_compute ${D}${includedir}
 
+	# install libraries
 	install -d ${D}${libdir}
-	install -m 0755 build/libarm_compute*.so ${D}${libdir}
-	install -m 0755 build/libarm_compute*.a ${D}${libdir}
+	install -m 0755 ${S}/build/libarm_compute*.so ${D}${libdir}
+	install -m 0755 ${S}/build/libarm_compute*.a ${D}${libdir}
 
-	install -d ${D}${bindir}
-	install -d ${D}${bindir}/examples
-	for item in build/examples/*; do
-        echo "checking item: $item"
-        if [ ${item} != "build/examples/gemm_tuner" ]; then
-            [ -x ${item} ] && install -m 0555 ${item} ${D}${bindir}/examples
-        else
-            [ -x ${item} ] && install -d ${D}${bindir}/examples/gemm_tuner
-            for gt_item in build/examples/gemm_tuner/*; do
-                [ -x ${gt_item} ] && install -m 0555 ${gt_item} ${D}${bindir}/examples/gemm_tuner
+	# install examples
+	if ${@bb.utils.contains('PACKAGECONFIG', 'examples', 'true', 'false', d)}; then
+        install -d ${D}${bindir}/${PN}-${PV}/examples
+        for example in ${S}/build/examples/*; do
+            if [ -d "$example" ]; then
+                continue
+            fi
+            case "$example" in
+                (*.o|*.a) continue;;
+            esac
+            install -m 0555 $example ${D}${bindir}/${PN}-${PV}/examples
+        done
+        if [ -d "${S}/build/examples/gemm_tuner" ]; then
+            install -d ${D}${bindir}/${PN}-${PV}/examples/gemm_tuner
+            for example in ${S}/build/examples/gemm_tuner/*; do
+                if [ -d "$example" ]; then
+                    continue
+                fi
+                case "$example" in
+                    (*.o|*.a) continue;;
+                esac
+                install -m 0555 $example ${D}${bindir}/${PN}-${PV}/examples/gemm_tuner
             done
         fi
-	done
-
-	if ${@bb.utils.contains("PACKAGECONFIG", "benchmark", "true", "false", d)}; then
-		install -m 0555 build/tests/arm_compute_benchmark ${D}${bindir}
 	fi
 
-	if ${@bb.utils.contains("PACKAGECONFIG", "validation", "true", "false", d)}; then
-		install -m 0555 build/tests/arm_compute_validation ${D}${bindir}
-		install -m 0755 build/tests/libarm_compute_validation_framework.a ${D}${libdir}
-	fi
-
-	#prepare exports for ARM NN
-	install -d ${D}${datadir}/${BPN}
-	#documentation folder is causing issues during write_rpm phase
-	#cp $CP_ARGS ${S}/. ${D}${datadir}/${BPN}
-	rm -rf ${S}/.git
-	rm -rf ${S}/documentation
-	cp -r ${S}/* ${D}${datadir}/${BPN}
+    # install tests
+    if ${@bb.utils.contains('PACKAGECONFIG', 'tests', 'true', 'false', d)}; then
+        install -d ${D}${bindir}/${PN}-${PV}/tests
+        for test in ${S}/build/tests/*; do
+            if [ -d "$test" ]; then
+                continue
+            fi
+            case "$test" in
+                (*.o|*.a) continue;;
+            esac
+            install -m 0555 $test ${D}${bindir}/${PN}-${PV}/tests
+        done
+        if [ -d "${S}/build/examples/gemm_tuner" ]; then
+            install -d ${D}${bindir}/${PN}-${PV}/tests/gemm_tuner
+            for test in ${S}/build/tests/gemm_tuner/*; do
+                if [ -d "$test" ]; then
+                    continue
+                fi
+                case "$test" in
+                    (*.o|*.a) continue;;
+                esac
+                install -m 0555 $test ${D}${bindir}/${PN}-${PV}/tests/gemm_tuner
+            done
+        fi
+    fi
 }
 
 SOLIBS = ".so"
@@ -87,15 +102,10 @@ FILES_SOLIBSDEV = ""
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-PACKAGES = "${PN} ${PN}-source"
-
-FILES_${PN} += "${includedir}/* ${libdir}/*"
-FILES_${PN}-source = "${datadir}/${BPN}"
-
 # Suppress the QA error
 # usage of rsync is causing host-user-contaminated error
-INSANE_SKIP_${PN} += "ldflags  libdir staticdev host-user-contaminated"
-INSANE_SKIP_${PN}-source += "ldflags  libdir staticdev host-user-contaminated"
+INSANE_SKIP_${PN} += "ldflags libdir staticdev host-user-contaminated"
+INSANE_SKIP_${PN}-dev += "ldflags libdir staticdev host-user-contaminated"
 
 # We support i.MX8 only (for now)
 COMPATIBLE_MACHINE = "(mx8)"
