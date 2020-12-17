@@ -62,6 +62,8 @@ do_install() {
     oe_runmake -C tools/spi install
 }
 
+ALLOW_EMPTY_${PN} = "1"
+
 PACKAGES =+ "${PN}-pci ${PN}-spi "
 
 FILES_${PN}-pci = "${bindir}/pci*"
