@@ -6,7 +6,7 @@ DEPENDS_append = " python3-pycryptodomex-native"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
 
-SRCBRANCH = "imx_3.10.y"
+SRCBRANCH = "lf_3.10.y"
 SRCREV = "1bc9842984a4bf0aae5de6c1f1fe1c23cdd4f73f"
 
 # tee-init_load_addr.txt has been remove in lates optee-os version.
