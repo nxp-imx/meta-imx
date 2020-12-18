@@ -39,6 +39,7 @@ do_install() {
 	install -d ${D}${includedir}
 	cp $CP_ARGS ${S}/arm_compute ${D}${includedir}
 	cp $CP_ARGS support ${D}${includedir}
+	cp $CP_ARGS include/half ${D}${includedir}
 
 	# install libraries
 	install -d ${D}${libdir}
