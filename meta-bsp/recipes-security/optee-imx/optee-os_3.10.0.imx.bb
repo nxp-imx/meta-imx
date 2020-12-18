@@ -7,7 +7,7 @@ OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;proto
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
 
 SRCBRANCH = "lf_3.10.y"
-SRCREV = "1bc9842984a4bf0aae5de6c1f1fe1c23cdd4f73f"
+SRCREV = "87b3b15498f07a9e4d3da3977722a506d1fa9509"
 
 # tee-init_load_addr.txt has been remove in lates optee-os version.
 # to keep backward compatibility with existing optee-os recipe.
