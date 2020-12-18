@@ -30,6 +30,7 @@ DEPENDS = " \
     boost \
     protobuf \
     stb \
+    half \
 "
 RDEPENDS_MX8       = ""
 RDEPENDS_MX8_mx8   = "nn-imx"
@@ -61,6 +62,7 @@ PACKAGECONFIG[vsi_npu] = "-DVSI_NPU=1,-DVSI_NPU=0,nn-imx"
 
 EXTRA_OECMAKE += " \
     -DSHARED_BOOST=1 \
+    -DHALF_INCLUDE=${STAGING_DIR_HOST} \
 "
 
 TESTVECS_INSTALL_DIR = "${datadir}/arm/armnn"
