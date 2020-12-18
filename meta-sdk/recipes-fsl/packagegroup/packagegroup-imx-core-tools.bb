@@ -7,6 +7,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
+KERNEL_TEST_TOOLS      = "kernel-tools-pci kernel-tools-spi"
+KERNEL_TEST_TOOLS_mx8m = "kernel-tools-pci kernel-tools-spi kernel-tools-virtio"
+
+
 RDEPENDS_${PN} = " \
     dosfstools \
     evtest \
@@ -15,8 +19,7 @@ RDEPENDS_${PN} = " \
     fbset \
     i2c-tools \
     iproute2 \
-    kernel-tools-pci \
-    kernel-tools-spi \
+    ${KERNEL_TEST_TOOLS} \
     memtester \
     python-subprocess \
     python-datetime \

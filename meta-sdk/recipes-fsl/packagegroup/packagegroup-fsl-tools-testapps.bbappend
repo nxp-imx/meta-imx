@@ -27,6 +27,7 @@ SOC_TOOLS_TEST_imxgpu2d = "${SOC_TOOLS_TEST_imx}"
 SOC_TOOLS_TEST_append_imxgpu = " imx-gpu-viv-demos"
 SOC_TOOLS_TEST_append_mx8qm  = " imx-seco-libs dvbapp-tests"
 SOC_TOOLS_TEST_append_mx8x   = " imx-seco-libs"
+SOC_TOOLS_TEST_append_mx8m   = " kernel-tools-virtio"
 
 RDEPENDS_${PN} += " \
     can-utils \
