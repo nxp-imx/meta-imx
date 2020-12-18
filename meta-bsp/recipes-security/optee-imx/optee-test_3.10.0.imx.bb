@@ -6,7 +6,7 @@ DEPENDS_append = " python3-pycryptodomex-native"
 OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
 
-SRCBRANCH = "imx_3.10.y"
+SRCBRANCH = "lf_3.10.y"
 SRCREV = "0c998f42a3fb87b9f2929955cf4b0116cc515091"
 
 do_compile_prepend () {
