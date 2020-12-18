@@ -82,7 +82,7 @@ do_install() {
             esac
             install -m 0555 $test ${D}${bindir}/${PN}-${PV}/tests
         done
-        if [ -d "${S}/build/examples/gemm_tuner" ]; then
+        if [ -d "${S}/build/tests/gemm_tuner" ]; then
             install -d ${D}${bindir}/${PN}-${PV}/tests/gemm_tuner
             for test in ${S}/build/tests/gemm_tuner/*; do
                 if [ -d "$test" ]; then
