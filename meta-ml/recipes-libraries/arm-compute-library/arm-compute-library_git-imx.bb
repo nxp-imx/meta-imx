@@ -19,7 +19,7 @@ S = "${WORKDIR}/git"
 
 inherit scons
 
-PACKAGECONFIG ?= "tests cppthreads examples"
+PACKAGECONFIG ?= "cppthreads examples"
 
 PACKAGECONFIG[Werror] = "Werror=1,Werror=0"
 PACKAGECONFIG[tests] = "benchmark_tests=1 validation_tests=1,benchmark_tests=0 validation_tests=0"
