@@ -49,24 +49,35 @@ EXTRA_OEMAKE = '\
     LD="${LD}" \
     DESTDIR="${D}" \
 '
+DO_BUILD_VIRTIO = "no"
+DO_BUILD_VIRTIO_mx8m = "yes"
 
 do_compile() {
     unset CFLAGS
     oe_runmake -C tools/pci
     oe_runmake -C tools/spi
+    if [ ${DO_BUILD_VIRTIO} = "yes" ]; then
+        oe_runmake -C tools/virtio  virtio-ivshmem-console virtio-ivshmem-block
+    fi
 }
 
 do_install() {
     unset CFLAGS
     oe_runmake -C tools/pci install
     oe_runmake -C tools/spi install
+    if [ ${DO_BUILD_VIRTIO} = "yes" ]; then
+        install ${S}/tools/virtio/virtio-ivshmem-console  ${D}${bindir}/
+        install ${S}/tools/virtio/virtio-ivshmem-block    ${D}${bindir}/
+    fi
 }
 
 ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY_${PN}-virtio = "1"
 
-PACKAGES =+ "${PN}-pci ${PN}-spi "
+PACKAGES =+ "${PN}-pci ${PN}-spi ${PN}-virtio"
 
 FILES_${PN}-pci = "${bindir}/pci*"
 FILES_${PN}-spi = "${bindir}/spi*"
+FILES_${PN}-virtio = "${bindir}/virtio-ivshmem-*"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
