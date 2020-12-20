@@ -9,8 +9,8 @@ inherit fsl-eula-unpack cmake systemd
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "36333c9049e20859068a359115666914"
-SRC_URI[sha256sum] = "9ecff131fd93b350bc89ef37da2b2a0c7764ba04941dc0d1d35c69cf32d2514c"
+SRC_URI[md5sum] = "73946d7c09759b2f994ef7d0350a3933"
+SRC_URI[sha256sum] = "559c378c5f9bbde6449c48c78d4772882add6318e789551be2fb6a388ed6188d"
 
 S = "${WORKDIR}/${PN}-${PV}/appshell"
 
