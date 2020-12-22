@@ -77,7 +77,7 @@ index 5d92ac7..c195848 100644
 --- a/src/conf/cards/aliases.conf
 +++ b/src/conf/cards/aliases.conf
 @@ -60,6 +60,7 @@ VC4-HDMI cards.vc4-hdmi
- cs42888-audio cards.CS42888
+ imx-cs42888 cards.CS42888
  imx-hdmi-soc cards.IMX-HDMI
  ak4458-audio cards.AK4458
 +imx-audio-xcvr cards.IMX-XCVR
