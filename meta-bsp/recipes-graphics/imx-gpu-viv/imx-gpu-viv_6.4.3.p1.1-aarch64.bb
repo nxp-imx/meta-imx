@@ -2,7 +2,7 @@ require imx-gpu-viv-6.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=cf3f9b8d09bc3926b1004ea71f7a248a" 
 
-SRC_URI[md5sum] = "73cc4bd464221406b13dc24282c6f9fb"
-SRC_URI[sha256sum] = "8a2bcce3f5a91844ca743954450059e6619830d318aef7f7612fd3def4343a32"
+SRC_URI[md5sum] = "a8fcad43ce8c87921a292c1bcdf55d1b"
+SRC_URI[sha256sum] = "f545eff05b67126979ebb09f1953c4cc0a36862cf177c18ff84cc12627607fd9"
 
 COMPATIBLE_MACHINE = "(mx8)"
