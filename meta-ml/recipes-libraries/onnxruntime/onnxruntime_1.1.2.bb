@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=980784f0a7f667becbed133924b263bf"
 DEPENDS = "libpng zlib ${BPN}-native"
 
 ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH = "1.1.2_vsi_npu_alpha+arm"
+SRCBRANCH = "imx_5.4.70_2.3.0"
 
 SRCREV = "d97de1d8c8d062e8cfb17fe60aafcff1f8482dd9"
 
