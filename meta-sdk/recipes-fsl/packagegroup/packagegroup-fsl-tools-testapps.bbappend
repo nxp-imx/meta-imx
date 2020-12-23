@@ -37,7 +37,7 @@ RDEPENDS_${PN} += " \
     iw \
     linuxptp \
     kernel-tools-pci \
-    kernel-tools-spi \
+    spidev-test \
     minicom \
     mmc-utils \
     nano \

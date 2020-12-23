@@ -1,8 +1,8 @@
 # Copyright 2020 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-SUMMARY = "Kernel tools for Linux"
-DESCRIPTION = "Kernel tools for Linux"
+SUMMARY = "Kernel test tools for Linux"
+DESCRIPTION = "Kernel test tools for Linux"
 LICENSE = "GPLv2"
 
 inherit linux-kernel-base kernel-arch
@@ -18,7 +18,6 @@ KERNEL_PCITEST_SRC ?= " \
              tools/lib \
              tools/Makefile \
              tools/pci \
-             tools/spi \
              tools/virtio \
              tools/scripts \
 "
@@ -54,17 +53,15 @@ DO_BUILD_VIRTIO_mx8m = "yes"
 
 do_compile() {
     unset CFLAGS
-    oe_runmake -C tools/pci
-    oe_runmake -C tools/spi
+    oe_runmake -C ${S}/tools/pci
     if [ ${DO_BUILD_VIRTIO} = "yes" ]; then
-        oe_runmake -C tools/virtio  virtio-ivshmem-console virtio-ivshmem-block
+        oe_runmake -C ${S}/tools/virtio  virtio-ivshmem-console virtio-ivshmem-block
     fi
 }
 
 do_install() {
     unset CFLAGS
-    oe_runmake -C tools/pci install
-    oe_runmake -C tools/spi install
+    oe_runmake -C ${S}/tools/pci install
     if [ ${DO_BUILD_VIRTIO} = "yes" ]; then
         install ${S}/tools/virtio/virtio-ivshmem-console  ${D}${bindir}/
         install ${S}/tools/virtio/virtio-ivshmem-block    ${D}${bindir}/
@@ -74,10 +71,9 @@ do_install() {
 ALLOW_EMPTY_${PN} = "1"
 ALLOW_EMPTY_${PN}-virtio = "1"
 
-PACKAGES =+ "${PN}-pci ${PN}-spi ${PN}-virtio"
+PACKAGES =+ "${PN}-pci ${PN}-virtio"
 
 FILES_${PN}-pci = "${bindir}/pci*"
-FILES_${PN}-spi = "${bindir}/spi*"
 FILES_${PN}-virtio = "${bindir}/virtio-ivshmem-*"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
