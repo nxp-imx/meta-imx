@@ -17,7 +17,9 @@ EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8
                    bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d), d)}"
 
 PACKAGECONFIG ?= ""
-PACKAGECONFIG_imxvpu = "vpu"
+# Enable vpu PACKAGECONFIG for aarch32 vpu platforms only
+PACKAGECONFIG_mx6q = "vpu"
+PACKAGECONFIG_mx6dl = "vpu"
 
 PACKAGECONFIG[vpu] = "--enable-vpu,--disable-vpu,virtual/imxvpu"
 
@@ -111,3 +113,6 @@ FILES_${PN}-oggvorbis += "${libdir}/imx-mm/audio-codec/wrap/lib_vorbisd_wrap_arm
 FILES_${PN}-nb += "${libdir}/imx-mm/audio-codec/wrap/lib_nbamrd_wrap_arm*_elinux.so.*"
 FILES_${PN}-wb += "${libdir}/imx-mm/audio-codec/wrap/lib_wbamrd_wrap_arm*_elinux.so.*"
 FILES_lib-src-ppp-arm11-elinux1 += "${libdir}/lib_src_ppp_arm11_elinux.so.1"
+
+PACKAGE_ARCH_mx6q = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH_mx6dl = "${MACHINE_SOCARCH}"
