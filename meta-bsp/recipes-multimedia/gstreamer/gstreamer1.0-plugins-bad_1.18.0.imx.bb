@@ -16,7 +16,7 @@ SRCBRANCH = "MM_04.06.00_2012_L5.10.y"
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "acb4d7b7d2eed7e74b4f8c238d388f6461869d0f"
+SRCREV = "822581cd76a9f5c9f8aebc3d08dd7c6d0ef3fadf"
 
 S = "${WORKDIR}/git"
 
