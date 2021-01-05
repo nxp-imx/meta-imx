@@ -8,8 +8,8 @@ SECTION = "BSP"
 
 inherit fsl-eula2-unpack2 pkgconfig deploy
 
-SRC_URI[md5sum] = "6c689b63ffdfde1b6cca65f00b8535c0"
-SRC_URI[sha256sum] = "4e4c4ac92d6e402daec6f41fca375f21adcdd655905d3754bc3fbcba0027bf06"
+SRC_URI[md5sum] = "e64f1c9fecb1e838865ca3829fa1d87e"
+SRC_URI[sha256sum] = "c242ff58c7b5446a99431e7d49b3043dcee07d8146c0b253acc305f043f726c2"
 
 BOARD_TYPE ?= "mek"
 SC_FIRMWARE_NAME ?= "INVALID"
