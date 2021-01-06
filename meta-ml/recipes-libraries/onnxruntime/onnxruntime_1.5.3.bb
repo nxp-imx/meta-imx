@@ -8,7 +8,7 @@ DEPENDS = "libpng zlib ${BPN}-native"
 ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH = "1.5.3"
 
-SRCREV = "5162a54801bf222a880a790196053ca23a150781"
+SRCREV = "d30d22dd4238a15986a8eeb472aecc834d7a2595"
 
 SRC_URI = "\
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
@@ -90,4 +90,4 @@ PACKAGECONFIG[acl] = "-Donnxruntime_USE_ACL=ON, -Donnxruntime_USE_ACL=OFF, arm-c
 PACKAGECONFIG[acl-1908] = "-Donnxruntime_USE_ACL_1908=ON, -Donnxruntime_USE_ACL_1908=OFF, arm-compute-library"
 PACKAGECONFIG[acl-2002] = "-Donnxruntime_USE_ACL_2002=ON, -Donnxruntime_USE_ACL_2002=OFF, arm-compute-library"
 PACKAGECONFIG[acl-2008] = "-Donnxruntime_USE_ACL_2008=ON, -Donnxruntime_USE_ACL_2008=OFF, arm-compute-library"
-PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -DVSI_NPU_INCLUDE_DIR=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
+PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -Donnxruntime_OVXLIB_INCLUDE=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
