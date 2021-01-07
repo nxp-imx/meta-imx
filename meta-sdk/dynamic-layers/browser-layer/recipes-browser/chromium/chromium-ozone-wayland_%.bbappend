@@ -23,3 +23,7 @@ GN_ARGS_append_mx7 = " use_system_minigbm=false use_wayland_gbm=false"
 GN_ARGS_append_mx8 = " use_system_minigbm=false use_wayland_gbm=false"
 
 CHROMIUM_EXTRA_ARGS_append = " --disable-features=VizDisplayCompositor --in-process-gpu"
+
+# Clang does not yet support big.LITTLE performance tunes, so use the LITTLE for tunes
+TUNE_CCARGS_remove = "-mcpu=cortex-a72.cortex-a53"
+TUNE_CCARGS_append_mx8 = " -mcpu=cortex-a53"
