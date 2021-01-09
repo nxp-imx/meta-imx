@@ -2,6 +2,8 @@ require nxp-wlan-sdk_git.inc
 
 SUMMARY = "NXP Wi-Fi SDK"
 
+TARGET_CC_ARCH += "${LDFLAGS}"
+
 do_compile () {
     # Change build folder to SDK folder
     cd ${S}/mxm_wifiex/wlan_src/mapp/mlanutl
@@ -20,7 +22,5 @@ do_install () {
 
 
 FILES_${PN} = "${datadir}/nxp_wireless"
-
-INSANE_SKIP_${PN} = "ldflags"
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
