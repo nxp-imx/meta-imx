@@ -10,4 +10,6 @@ SRCREV = "070397228c46e0a6afce4f627b032d3818cc1356"
 
 S = "${WORKDIR}/git/mxm_wifiex/wlan_src"
 
+EXTRA_OEMAKE = "KERNELDIR=${STAGING_KERNEL_BUILDDIR}"
+
 RRECOMMENDS_${PN} = "wireless-tools"
