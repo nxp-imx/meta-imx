@@ -1,7 +1,9 @@
-From bc6f1ad3a2b18bd074bd8f96c9b9824e6091e9ac Mon Sep 17 00:00:00 2001
+From 5783c1530776245569e939364838efd87cdd6f33 Mon Sep 17 00:00:00 2001
 From: Jerome Evillard <jerome.evillard@nxp.com>
-Date: Tue, 3 Nov 2020 11:00:58 +0100
-Subject: [PATCH] Support ARM compilation
+Date: Mon, 7 Dec 2020 11:18:23 +0100
+Subject: [PATCH 4/6] Support ARM compilation
+
+Upstream-Status: Inappropriate [i.MX specific]
 
 ---
  renderdoc/CMakeLists.txt                   | 7 ++++++-

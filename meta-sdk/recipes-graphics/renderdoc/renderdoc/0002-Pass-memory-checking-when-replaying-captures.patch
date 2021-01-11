@@ -1,7 +1,7 @@
-From 6a1ae8b14df7e10fd0c6cf115307435c8d89e675 Mon Sep 17 00:00:00 2001
+From 446f1378170c8be4257598db67d5e2fdb6c14cda Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
 Date: Wed, 15 Jul 2020 14:25:14 +0300
-Subject: [PATCH 2/4] Pass memory checking when replaying captures
+Subject: [PATCH 2/6] Pass memory checking when replaying captures
 
 Due to the fact that iMX8 target fails buffer size checking when loading the
 buffers from the capture file, the replay feauture is not working.
@@ -19,10 +19,10 @@ Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
  1 file changed, 33 insertions(+)
 
 diff --git a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
-index d443ca4..8fc8659 100644
+index 2a1e043..1e61d13 100644
 --- a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
 +++ b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
-@@ -263,6 +263,39 @@ bool WrappedVulkan::Serialise_vkAllocateMemory(SerialiserType &ser, VkDevice dev
+@@ -283,6 +283,39 @@ bool WrappedVulkan::Serialise_vkAllocateMemory(SerialiserType &ser, VkDevice dev
    {
      VkDeviceMemory mem = VK_NULL_HANDLE;
  

@@ -5,7 +5,9 @@ SRC_URI += " \
     file://0002-Pass-memory-checking-when-replaying-captures.patch \
     file://0003-Use-specific-integer-format-to-generate-a-dummy-mult.patch \
     file://0004-Support-ARM-compilation.patch \
-    file://0005-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
+    file://0005-Add-basic-support-for-Wayland-replay-on-renderdoccmd.patch \
+    file://0006-Add-window-functionalities-for-Wayland-replay-suppor.patch \
+    file://0001-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
 "
 
 REQUIRED_DISTRO_FEATURES_remove = "opengl"
