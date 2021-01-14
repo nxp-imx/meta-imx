@@ -1,0 +1,45 @@
+From e730c1358deaa4db8f8dc9148432aaae02fdf2b3 Mon Sep 17 00:00:00 2001
+From: Pavel Macenauer <pavel.macenauer@nxp.com>
+Date: Sat, 9 Jan 2021 19:48:27 +0100
+Subject: [PATCH] AIR-3570 Removed version check and explicit lib search due to
+ cross-compile
+
+Signed-off-by: Pavel Macenauer <pavel.macenauer@nxp.com>
+---
+ python/pyarmnn/setup.py | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+
+diff --git a/python/pyarmnn/setup.py b/python/pyarmnn/setup.py
+index 42e03a89f..826883038 100755
+--- a/python/pyarmnn/setup.py
++++ b/python/pyarmnn/setup.py
+@@ -61,10 +61,11 @@ class ArmnnVersionCheckerExtBuilder(build_ext):
+             self.failed_ext.append(ext)
+             logger.warning('Failed to build extension %s. \n %s', ext.name, str(err))
+ 
+-        if ext.name == 'pyarmnn._generated._pyarmnn_version':
+-            sys.path.append(os.path.abspath(os.path.join(self.build_lib, str(Path(ext._file_name).parent))))
+-            from _pyarmnn_version import GetVersion
+-            check_armnn_version(GetVersion(), __arm_ml_version__)
++        # Removed due to cross-compile on Yocto
++        # if ext.name == 'pyarmnn._generated._pyarmnn_version':
++        #     sys.path.append(os.path.abspath(os.path.join(self.build_lib, str(Path(ext._file_name).parent))))
++        #     from _pyarmnn_version import GetVersion
++        #     check_armnn_version(GetVersion(), __arm_ml_version__)
+ 
+     def copy_extensions_to_source(self):
+ 
+@@ -155,7 +156,9 @@ class LazyArmnnFinderExtension(Extension):
+         self._include_dirs = None
+         self._library_dirs = None
+         self._runtime_library_dirs = None
+-        self._armnn_libs = armnn_libs
++        # Set to empty list due to Yocto copying libs in a sysroot /usr/lib
++        self._armnn_libs = list()
++        # self._armnn_libs = armnn_libs
+         # self.__swig_opts = None
+         super().__init__(name, sources, include_dirs, define_macros, undef_macros, library_dirs, libraries,
+                          runtime_library_dirs, extra_objects, extra_compile_args, extra_link_args, export_symbols,
+-- 
+2.29.1.windows.1
+

@@ -16,11 +16,14 @@ SRCREV_FORMAT = "armnn"
 
 S = "${WORKDIR}/git"
 
+inherit python3native
 inherit cmake
 
 SRC_URI = " \
     ${ARMNN_SRC};branch=${SRCBRANCH} \
     http://download.tensorflow.org/models/mobilenet_v1_2018_02_22/mobilenet_v1_1.0_224.tgz;name=mobilenet;subdir=${WORKDIR}/tfmodel;destsuffix=tfmodel \
+    file://0001-AIR-3570_remove-gcc-search.patch \
+    file://0002-AIR-3570_remove-version-check-and-explicit-lib-search.patch \
 "
 
 SRC_URI[mobilenet.md5sum] = "d5f69cef81ad8afb335d9727a17c462a"
@@ -31,6 +34,10 @@ DEPENDS = " \
     protobuf \
     stb \
     half \
+    armnn-swig-native \
+    python3-pip-native \
+    python3-wheel-native \
+    python3-setuptools-native \
 "
 RDEPENDS_MX8       = ""
 RDEPENDS_MX8_mx8   = "nn-imx"
@@ -49,12 +56,12 @@ PACKAGECONFIG_VSI_NPU_mx8mnlite = ""
 
 PACKAGECONFIG ??= "neon ref caffe tensorflow tensorflow_lite onnx tests ${PACKAGECONFIG_VSI_NPU}"
 
-PACKAGECONFIG[caffe] = "-DBUILD_CAFFE_PARSER=1 -DCAFFE_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-caffe,-DBUILD_CAFFE_PARSER=0,armnn-caffe"
+PACKAGECONFIG[caffe] = "-DBUILD_CAFFE_PARSER=1 -DCAFFE_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-caffe,-DBUILD_CAFFE_PARSER=0,armnn-caffe"
 PACKAGECONFIG[neon] = "-DARMCOMPUTENEON=1 -DARMCOMPUTE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libarm_compute.so -DARMCOMPUTE_CORE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libarm_compute_core.so,-DARMCOMPUTENEON=0,arm-compute-library"
-PACKAGECONFIG[onnx] = "-DBUILD_ONNX_PARSER=1 -DONNX_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-onnx ,-DBUILD_ONNX_PARSER=0,armnn-onnx"
+PACKAGECONFIG[onnx] = "-DBUILD_ONNX_PARSER=1 -DONNX_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-onnx ,-DBUILD_ONNX_PARSER=0,armnn-onnx"
 PACKAGECONFIG[opencl] = "-DARMCOMPUTECL=1,-DARMCOMPUTECL=0,opencl-headers"
-PACKAGECONFIG[tensorflow] = "-DBUILD_TF_PARSER=1 -DTF_GENERATED_SOURCES=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow,-DBUILD_TF_PARSER=0, armnn-tensorflow "
-PACKAGECONFIG[tensorflow_lite] = "-DTF_LITE_SCHEMA_INCLUDE_PATH=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow-lite -DTF_LITE_GENERATED_PATH=${STAGING_DIR_HOST}${datadir}/armnn-tensorflow-lite -DBUILD_TF_LITE_PARSER=1 ,-DBUILD_TF_LITE_PARSER=0, flatbuffers armnn-tensorflow"
+PACKAGECONFIG[tensorflow] = "-DBUILD_TF_PARSER=1 -DTF_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-tensorflow,-DBUILD_TF_PARSER=0, armnn-tensorflow "
+PACKAGECONFIG[tensorflow_lite] = "-DTF_LITE_SCHEMA_INCLUDE_PATH=${STAGING_DATADIR}/armnn-tensorflow-lite -DTF_LITE_GENERATED_PATH=${STAGING_DATADIR}/armnn-tensorflow-lite -DBUILD_TF_LITE_PARSER=1 ,-DBUILD_TF_LITE_PARSER=0, flatbuffers armnn-tensorflow"
 PACKAGECONFIG[unit_tests] = "-DBUILD_UNIT_TESTS=1,-DBUILD_UNIT_TESTS=0"
 PACKAGECONFIG[tests] = "-DBUILD_TESTS=1,-DBUILD_TESTS=0"
 PACKAGECONFIG[ref] = "-DARMNNREF=1,-DARMNNREF=0"
@@ -67,7 +74,31 @@ EXTRA_OECMAKE += " \
 
 TESTVECS_INSTALL_DIR = "${datadir}/arm/armnn"
 
+do_compile_append() {
+    cp -Rf ${WORKDIR}/build/libarmnnTfParser* ${STAGING_LIBDIR}
+    cp -Rf ${WORKDIR}/build/libarmnnTfLiteParser* ${STAGING_LIBDIR}
+    cp -Rf ${WORKDIR}/build/libarmnnOnnxParser* ${STAGING_LIBDIR}
+    cp -Rf ${WORKDIR}/build/libarmnnCaffeParser* ${STAGING_LIBDIR}
+    cp -R ${WORKDIR}/build/libarmnn.so* ${STAGING_LIBDIR}
+
+    export PYTHONPATH="${STAGING_LIBDIR_NATIVE}/${PYTHON_DIR}/site-packages"
+    export SWIG_EXECUTABLE=${STAGING_BINDIR_NATIVE}/swig
+    export ARMNN_INCLUDE=${S}/include
+    export ARMNN_LIB=${WORKDIR}/build
+    
+    cd ${S}/python/pyarmnn
+    ${PYTHON} setup.py clean --all
+    ${PYTHON} swig_generate.py -v
+    ${PYTHON} setup.py build_ext --inplace    
+    ${PYTHON} setup.py bdist_wheel
+}
+
 do_install_append() {
+    install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
+    ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
+        -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
+        ${S}/python/pyarmnn/dist/pyarmnn-*.whl
+
     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
     install -d ${D}${bindir}
     find ${WORKDIR}/build/tests -maxdepth 1 -type f -executable -exec cp $CP_ARGS {} ${D}${bindir} \;
@@ -81,6 +112,7 @@ CXXFLAGS += "-fopenmp"
 LIBS += "-larmpl_lp64_mp"
 
 FILES_${PN} += "${TESTVECS_INSTALL_DIR}"
+FILES_${PN} += "${libdir}/python*"
 FILES_${PN}-dev += "{libdir}/cmake/*"
 INSANE_SKIP_${PN} = "dev-deps"
 INSANE_SKIP_${PN}-dev = "dev-elf"

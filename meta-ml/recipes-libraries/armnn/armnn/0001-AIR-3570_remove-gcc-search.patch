@@ -1,0 +1,60 @@
+From 95bc086f89f65afe92714780cfba82d1dd59a910 Mon Sep 17 00:00:00 2001
+From: Pavel Macenauer <pavel.macenauer@nxp.com>
+Date: Thu, 7 Jan 2021 17:20:41 +0100
+Subject: [PATCH] AIR-3570 Removed buggy gcc search
+
+Signed-off-by: Pavel Macenauer <pavel.macenauer@nxp.com>
+---
+ python/pyarmnn/setup.py | 29 ++---------------------------
+ 1 file changed, 2 insertions(+), 27 deletions(-)
+
+diff --git a/python/pyarmnn/setup.py b/python/pyarmnn/setup.py
+index ac6ee24b5..42e03a89f 100755
+--- a/python/pyarmnn/setup.py
++++ b/python/pyarmnn/setup.py
+@@ -73,24 +73,7 @@ class ArmnnVersionCheckerExtBuilder(build_ext):
+         super().copy_extensions_to_source()
+ 
+ 
+-def linux_gcc_name():
+-    """Returns the name of the `gcc` compiler. Might happen that we are cross-compiling and the
+-    compiler has a longer name.
+-    
+-    Args:
+-        None
+-
+-    Returns:
+-        str: Name of the `gcc` compiler or None
+-    """
+-    cc_env = os.getenv('CC')
+-    if cc_env is not None:
+-        if subprocess.Popen([cc_env, "--version"], stdout=subprocess.DEVNULL):
+-            return cc_env
+-    return "gcc" if subprocess.Popen(["gcc", "--version"], stdout=subprocess.DEVNULL) else None
+-
+-
+-def linux_gcc_lib_search(gcc_compiler_name: str = linux_gcc_name()):
++def linux_gcc_lib_search():
+     """Calls the `gcc` to get linker default system paths.
+     
+     Args:
+@@ -102,15 +85,7 @@ def linux_gcc_lib_search(gcc_compiler_name: str = linux_gcc_name()):
+     Raises:
+         RuntimeError: If unable to find GCC.
+     """
+-    if gcc_compiler_name is None:
+-        raise RuntimeError("Unable to find gcc compiler")
+-    cmd1 = subprocess.Popen([gcc_compiler_name, "--print-search-dirs"], stdout=subprocess.PIPE)
+-    cmd2 = subprocess.Popen(["grep", "libraries"], stdin=cmd1.stdout,
+-                         stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+-    cmd1.stdout.close()
+-    out, _ = cmd2.communicate()
+-    out = out.decode("utf-8").split('=')
+-    return tuple(out[1].split(':')) if len(out) > 0 else None
++    return None
+ 
+ 
+ def find_includes(armnn_include_env: str = INCLUDE_ENV_NAME):
+-- 
+2.29.1.windows.1
+
