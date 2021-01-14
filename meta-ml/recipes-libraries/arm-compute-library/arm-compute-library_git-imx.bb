@@ -29,6 +29,8 @@ PACKAGECONFIG[examples] = "examples=1,examples=0"
 EXTRA_OESCONS = "${PARALLEL_MAKE} build=cross_compile os=linux toolchain_prefix=' ' extra_cxx_flags='-fPIC' ${PACKAGECONFIG_CONFARGS}"
 EXTRA_OESCONS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', 'arch=arm64-v8a neon=1', '', d)}"
 
+TARGET_CC_ARCH += "${LDFLAGS}"
+
 do_install() {
 	CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
 	install -d ${D}${includedir}
@@ -97,11 +99,6 @@ do_install() {
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
-
-# Suppress the QA error
-# usage of rsync is causing host-user-contaminated error
-INSANE_SKIP_${PN} += "ldflags libdir staticdev host-user-contaminated"
-INSANE_SKIP_${PN}-dev += "ldflags libdir staticdev host-user-contaminated"
 
 RDEPENDS_${PN} = "bash"
 
