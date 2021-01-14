@@ -1,0 +1,94 @@
+From 42debd7e749768a7ee76a1a3e3cb4be1a72b089f Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <shengjiu.wang@nxp.com>
+Date: Tue, 12 Jan 2021 14:28:24 +0800
+Subject: [PATCH] Revert "bluetooth: Fix crash when disabling Bluetooth
+ adapter"
+
+This reverts commit f89d64b98e12bb71b6aa94fcef31eafc060f9759.
+When make the bluetooth HFP call, will meet pulseaudio been auto killed issue
+this is caused by this patch, revert this patch will fix the pulseaudio been
+auto killed issue.
+
+---
+ src/modules/bluetooth/backend-ofono.c | 18 ------------------
+ src/modules/bluetooth/bluez5-util.c   |  2 --
+ src/modules/bluetooth/bluez5-util.h   |  1 -
+ 3 files changed, 21 deletions(-)
+
+diff --git a/src/modules/bluetooth/backend-ofono.c b/src/modules/bluetooth/backend-ofono.c
+index 0e5bbe8b7da4..1f0efe923d23 100644
+--- a/src/modules/bluetooth/backend-ofono.c
++++ b/src/modules/bluetooth/backend-ofono.c
+@@ -70,7 +70,6 @@ struct hf_audio_card {
+     int (*acquire)(struct hf_audio_card *card);
+ 
+     pa_bluetooth_transport *transport;
+-    pa_hook_slot *device_unlink_slot;
+ };
+ 
+ struct pa_bluetooth_backend {
+@@ -182,17 +181,6 @@ static int card_acquire(struct hf_audio_card *card) {
+     return -1;
+ }
+ 
+-static void hf_audio_agent_card_removed(pa_bluetooth_backend *backend, const char *path);
+-
+-static pa_hook_result_t device_unlink_cb(pa_bluetooth_discovery *y, const pa_bluetooth_device *d, struct hf_audio_card *card) {
+-    pa_assert(d);
+-    pa_assert(card);
+-
+-    hf_audio_agent_card_removed(card->backend, card->path);
+-
+-    return PA_HOOK_OK;
+-}
+-
+ static struct hf_audio_card *hf_audio_card_new(pa_bluetooth_backend *backend, const char *path) {
+     struct hf_audio_card *card = pa_xnew0(struct hf_audio_card, 1);
+ 
+@@ -201,18 +189,12 @@ static struct hf_audio_card *hf_audio_card_new(pa_bluetooth_backend *backend, co
+     card->fd = -1;
+     card->acquire = card_acquire;
+ 
+-    card->device_unlink_slot = pa_hook_connect(pa_bluetooth_discovery_hook(backend->discovery, PA_BLUETOOTH_HOOK_DEVICE_UNLINK),
+-                                               PA_HOOK_NORMAL, (pa_hook_cb_t) device_unlink_cb, card);
+-
+     return card;
+ }
+ 
+ static void hf_audio_card_free(struct hf_audio_card *card) {
+     pa_assert(card);
+ 
+-    if (card->device_unlink_slot)
+-        pa_hook_slot_free(card->device_unlink_slot);
+-
+     if (card->transport)
+         pa_bluetooth_transport_free(card->transport);
+ 
+diff --git a/src/modules/bluetooth/bluez5-util.c b/src/modules/bluetooth/bluez5-util.c
+index a21896ede5f7..4439710d0e7f 100644
+--- a/src/modules/bluetooth/bluez5-util.c
++++ b/src/modules/bluetooth/bluez5-util.c
+@@ -562,8 +562,6 @@ static void device_free(pa_bluetooth_device *d) {
+ 
+     device_stop_waiting_for_profiles(d);
+ 
+-    pa_hook_fire(&d->discovery->hooks[PA_BLUETOOTH_HOOK_DEVICE_UNLINK], d);
+-
+     for (i = 0; i < PA_BLUETOOTH_PROFILE_COUNT; i++) {
+         pa_bluetooth_transport *t;
+ 
+diff --git a/src/modules/bluetooth/bluez5-util.h b/src/modules/bluetooth/bluez5-util.h
+index ff172e0258eb..82739bffd0d8 100644
+--- a/src/modules/bluetooth/bluez5-util.h
++++ b/src/modules/bluetooth/bluez5-util.h
+@@ -47,7 +47,6 @@ typedef struct pa_bluetooth_backend pa_bluetooth_backend;
+ 
+ typedef enum pa_bluetooth_hook {
+     PA_BLUETOOTH_HOOK_DEVICE_CONNECTION_CHANGED,          /* Call data: pa_bluetooth_device */
+-    PA_BLUETOOTH_HOOK_DEVICE_UNLINK,                      /* Call data: pa_bluetooth_device */
+     PA_BLUETOOTH_HOOK_TRANSPORT_STATE_CHANGED,            /* Call data: pa_bluetooth_transport */
+     PA_BLUETOOTH_HOOK_TRANSPORT_MICROPHONE_GAIN_CHANGED,  /* Call data: pa_bluetooth_transport */
+     PA_BLUETOOTH_HOOK_TRANSPORT_SPEAKER_GAIN_CHANGED,     /* Call data: pa_bluetooth_transport */
+-- 
+2.27.0
+
