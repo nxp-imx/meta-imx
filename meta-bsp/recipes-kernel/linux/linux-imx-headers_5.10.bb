@@ -1,4 +1,4 @@
-# Copyright 2017-2020 NXP
+# Copyright 2017-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "Installs i.MX-specific kernel headers"
@@ -25,6 +25,7 @@ IMX_UAPI_HEADERS = " \
     ion.h \
     ipu.h \
     isl29023.h \
+    imx_vpu.h \
     mxc_asrc.h \
     mxc_dcic.h \
     mxc_mlb.h \
