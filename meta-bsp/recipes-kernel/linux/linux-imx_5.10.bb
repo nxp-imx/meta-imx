@@ -17,7 +17,7 @@ LOCALVERSION = "-lts-${SRCBRANCH}"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "9ba9a8adf240dc3063fb5b651fba5dcebdff9941"
+SRCREV = "4d01a23bf1d0cf07879b00c8e198093223b643ea"
 
 LINUX_VERSION = "5.10.4"
 
