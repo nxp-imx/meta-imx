@@ -9,7 +9,6 @@ inherit packagegroup
 
 ML_PKGS = " \
     armnn \
-    pyarmnn \
     tensorflow-lite \
     onnxruntime \
     ml-security \
