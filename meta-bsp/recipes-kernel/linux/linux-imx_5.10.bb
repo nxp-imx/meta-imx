@@ -43,7 +43,10 @@ KBUILD_DEFCONFIG_mx7= "${IMX_KERNEL_CONFIG_AARCH32}"
 KBUILD_DEFCONFIG_mx8= "${IMX_KERNEL_CONFIG_AARCH64}"
 
 
-addtask copy_defconfig after do_patch do_symlink_kernsrc do_kernel_configme before do_preconfigure
+# Use a verbatim copy of the defconfig from the linux-imx repo.
+# IMPORTANT: This task effectively disables kernel config fragments
+# since the config fragments applied in do_kernel_configme are replaced.
+addtask copy_defconfig after do_kernel_configme before do_preconfigure
 do_copy_defconfig () {
     install -d ${B}
     if [ ${DO_CONFIG_V7_COPY} = "yes" ]; then
