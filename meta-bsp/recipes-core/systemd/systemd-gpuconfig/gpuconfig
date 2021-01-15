@@ -11,7 +11,7 @@ then
   then
         rm -f $FILEVG
   fi
-  f [ -e  $FILEVGLIB ]
+  if [ -e  $FILEVGLIB ]
   then
         rm -f $FILEVGLIB
   fi
