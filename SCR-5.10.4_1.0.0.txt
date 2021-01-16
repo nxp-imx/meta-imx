@@ -1075,17 +1075,6 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     pyarmnn-release.git
-Outgoing License:            MIT 
-License File:                LICENSE
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    Python wrapper for armnn
-Release Location:            https://github.com/NXPmicro/pyarmnn-release -b rel_imx_5.10.4_1.0.0
-Origin:                      NXP (MIT)
-
---------------------------------------------
-
 Package:                     pytorch-release.git
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
