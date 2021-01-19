@@ -1,0 +1,28 @@
+From ab5723ba036c0e6610ab4d776418d30864d775d8 Mon Sep 17 00:00:00 2001
+From: Fausto Chiatante <fausto.chiatante@nxp.com>
+Date: Thu, 2 Jul 2020 17:46:26 +0200
+Subject: [PATCH] add v2x_test to the installed binaries
+
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index b16cebf..66ab647 100644
+--- a/Makefile
++++ b/Makefile
+@@ -60,9 +60,9 @@ hsm_doc: include/hsm/hsm_api.h
+ 	cp doc/latex/refman.pdf doc/hsm_api_document.pdf
+ 	rm -rf doc/latex/
+ 
+-install: hsm_test she_test she_lib.a seco_nvm_manager.a hsm_lib.a
++install: hsm_test she_test v2x_test she_lib.a seco_nvm_manager.a hsm_lib.a
+ 	mkdir -p $(DESTDIR)$(BINDIR) $(DESTDIR)$(LIBDIR) $(DESTDIR)$(INCLUDEDIR)
+ 	cp -a seco_nvm_manager.a hsm_lib.a she_lib.a $(DESTDIR)$(LIBDIR)
+-	cp hsm_test she_test $(DESTDIR)$(BINDIR)
++	cp hsm_test she_test v2x_test $(DESTDIR)$(BINDIR)
+ 	cp -a include/* $(DESTDIR)$(INCLUDEDIR)
+ 
+-- 
+2.17.1
+

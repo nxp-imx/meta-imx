@@ -1,0 +1,101 @@
+From 648c4cfb5e6ad08709cd5ad4329d04240383adaf Mon Sep 17 00:00:00 2001
+From: Michael Whitfield <michael.whitfield@nxp.com>
+Date: Fri, 13 Mar 2020 11:40:37 +0000
+Subject: [PATCH] Add example use of V2x_LOG_EVENT in seco_mu.c
+
+---
+ drivers/firmware/imx/seco_mu.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/drivers/firmware/imx/seco_mu.c b/drivers/firmware/imx/seco_mu.c
+index 3163216..b2f504c 100644
+--- a/drivers/firmware/imx/seco_mu.c
++++ b/drivers/firmware/imx/seco_mu.c
+@@ -68,6 +68,9 @@
+ #include <linux/firmware/imx/seco_mu_ioctl.h>
+ #include <linux/mailbox_client.h>
+ 
++#define CREATE_TRACE_POINTS
++#include <trace/events/v2x.h>
++
+ #define MAX_RECV_SIZE 31
+ #define MAX_RECV_SIZE_BYTES (MAX_RECV_SIZE * sizeof(u32))
+ #define MAX_MESSAGE_SIZE 31
+@@ -356,6 +359,8 @@ static ssize_t seco_mu_fops_write(struct file *fp, const char __user *buf,
+ 	u32 nb_words = 0, header;
+ 	int err;
+ 
++	V2X_LOG_EVENT("Entry");
++
+ 	devctx_dbg(dev_ctx, "write from buf (%p)%ld, ppos=%lld\n", buf, size,
+ 		   ((ppos) ? *ppos : 0));
+ 
+@@ -443,6 +448,9 @@ static ssize_t seco_mu_fops_write(struct file *fp, const char __user *buf,
+ 
+ exit:
+ 	up(&dev_ctx->fops_lock);
++
++	V2X_LOG_EVENT("Exit");
++
+ 	return err;
+ }
+ 
+@@ -459,6 +467,8 @@ static ssize_t seco_mu_fops_read(struct file *fp, char __user *buf,
+ 	struct seco_out_buffer_desc *b_desc;
+ 	int err;
+ 
++	V2X_LOG_EVENT("Entry");
++
+ 	devctx_dbg(dev_ctx, "read to buf %p(%ld), ppos=%lld\n", buf, size,
+ 		   ((ppos) ? *ppos : 0));
+ 
+@@ -534,6 +544,9 @@ static ssize_t seco_mu_fops_read(struct file *fp, char __user *buf,
+ 
+ exit:
+ 	up(&dev_ctx->fops_lock);
++
++	V2X_LOG_EVENT("Exit");
++
+ 	return err;
+ }
+ 
+@@ -805,6 +818,8 @@ static long seco_mu_ioctl(struct file *fp, unsigned int cmd, unsigned long arg)
+ 	struct seco_mu_priv *mu_priv = dev_ctx->mu_priv;
+ 	int err = -EINVAL;
+ 
++	V2X_LOG_EVENT("Entry");
++
+ 	/* Prevent race during change of device context */
+ 	if (down_interruptible(&dev_ctx->fops_lock))
+ 		return -EBUSY;
+@@ -835,6 +850,9 @@ static long seco_mu_ioctl(struct file *fp, unsigned int cmd, unsigned long arg)
+ 	}
+ 
+ 	up(&dev_ctx->fops_lock);
++
++	V2X_LOG_EVENT("Exit");
++
+ 	return (long)err;
+ }
+ 
+@@ -1001,6 +1019,8 @@ static int seco_mu_probe(struct platform_device *pdev)
+ 	int ret;
+ 	int i;
+ 
++	V2X_LOG_EVENT("Entry");
++
+ 	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
+ 	if (!priv) {
+ 		ret = -ENOMEM;
+@@ -1122,6 +1142,8 @@ static int seco_mu_probe(struct platform_device *pdev)
+ 	}
+ 
+ exit:
++	V2X_LOG_EVENT("Exit");
++
+ 	return ret;
+ }
+ 
+-- 
+2.7.4
+

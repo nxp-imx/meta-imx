@@ -1,0 +1,12 @@
+
+[Unit]
+Description=Seco blob process
+After=system-user-sessions.service
+After=rc-local.service
+
+[Service]
+User=root
+ExecStart=/usr/bin/seco_nvm_daemon
+
+[Install]
+WantedBy=basic.target
