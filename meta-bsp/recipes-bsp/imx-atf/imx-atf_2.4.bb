@@ -20,16 +20,16 @@ inherit deploy
 BOOT_TOOLS = "imx-boot-tools"
 
 PLATFORM        ?= "INVALID"
-PLATFORM_mx8dxl = "imx8dxl"
-PLATFORM_mx8dx  = "imx8dx"
-PLATFORM_mx8dxlevk-phantom = "imx8qx"
-PLATFORM_mx8mm  = "imx8mm"
-PLATFORM_mx8mn  = "imx8mn"
+PLATFORM_mx8qm   = "imx8qm"
+PLATFORM_mx8x    = "imx8qx"
+PLATFORM_mx8mq   = "imx8mq"
+PLATFORM_mx8mm   = "imx8mm"
+PLATFORM_mx8mn   = "imx8mn"
 PLATFORM_mx8mnlite  = "imx8mn"
-PLATFORM_mx8mp  = "imx8mp"
-PLATFORM_mx8mq  = "imx8mq"
-PLATFORM_mx8qm  = "imx8qm"
-PLATFORM_mx8x   = "imx8qx"
+PLATFORM_mx8mp   = "imx8mp"
+PLATFORM_mx8dx   = "imx8dx"
+PLATFORM_mx8dxl  = "imx8dxl"
+PLATFORM_mx8dxlevk-phantom = "imx8qx"
 
 # Clear LDFLAGS to avoid the option -Wl recognize issue
 # Clear CFLAGS to avoid coherent_arm out of OCRAM size limitation (64KB) - i.MX 8MQ only
