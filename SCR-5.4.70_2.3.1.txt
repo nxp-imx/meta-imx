@@ -4,7 +4,7 @@ Release - Linux 5.4.70_2.3.1
  January 2021
 
 Yocto Project recipe manifest:
-repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-zeus -m imx_5.4.70_2.3.0.xml
+repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-zeus -m imx_5.4.70_2.3.1.xml
 
 Release tag: rel_imx_5.4.70_2.3.0
 
