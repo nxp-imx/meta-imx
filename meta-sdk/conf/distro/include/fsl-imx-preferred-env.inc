@@ -11,7 +11,8 @@ PREFERRED_VERSION_imx-gpu-viv               = "${IMX_GPU_VERSION}-${IMX_GPU_VERS
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}"
 
-PREFERRED_PROVIDER_opencl-headers_imx = "imx-gpu-viv"
+PREFERRED_PROVIDER_opencl-headers_imxgpu = "imx-gpu-viv"
+PREFERRED_PROVIDER_opencl-icd-loader_imxgpu = "imx-gpu-viv"
 
 PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.18.0.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.18.0.imx"
