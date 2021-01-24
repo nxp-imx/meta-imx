@@ -8,7 +8,7 @@ SRC_URI = " \
     ${XEN_SRC};branch=${SRCBRANCH} \
     "
 
-SRCREV = "f538d6cef34515fedb923a10774766f15487d2ab" 
+SRCREV = "fa0dbecee1b4a2d7eb6e28c8bd05a6ad5594c175"
 
 S = "${WORKDIR}/git"
 
