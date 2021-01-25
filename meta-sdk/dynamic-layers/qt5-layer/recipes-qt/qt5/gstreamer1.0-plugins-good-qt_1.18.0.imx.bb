@@ -6,7 +6,7 @@ SRCBRANCH = "master"
 SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "67da20d13550aa257efcf3aaa2a3f0a7e50880ba"
+SRCREV = "6ef694ce7b40dda9f2163ed5e1b1de7378505ad0"
 
 DEFAULT_PREFERENCE = "-1"
 
