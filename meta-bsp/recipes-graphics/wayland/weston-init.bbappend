@@ -9,9 +9,6 @@ SRC_URI += "file://profile"
 INI_UNCOMMENT_ASSIGNMENTS_append_mx8mp = " \
     use-g2d=1 \
 "
-INI_UNCOMMENT_ASSIGNMENTS_append_mx8mq = " \
-    drm-device=card0 \
-"
 INI_UNCOMMENT_ASSIGNMENTS_append_mx8 = " \
     repaint-window=16 \
 "
