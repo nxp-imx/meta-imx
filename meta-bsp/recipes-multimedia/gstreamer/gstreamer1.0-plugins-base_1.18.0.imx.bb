@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6762ed442b3822387a51c92d928ead0d \
 
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "c0198efbc99f38f5b7620dba6915fd666fd53bea"
+SRCREV = "f21623c1f60949ed6a77e2c2c3857be942cd2db5"
 SRC_URI = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} \
            "
 
