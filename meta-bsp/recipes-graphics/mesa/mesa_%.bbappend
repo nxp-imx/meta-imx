@@ -1,11 +1,11 @@
-# Undo customization in meta-freescale that doesn't apply to 8DXL
-PACKAGECONFIG_remove_mx8dxl = "osmesa"
-DRIDRIVERS_remove_mx8dxl = "swrast"
-PACKAGECONFIG_remove_mx8phantomdxl = "osmesa"
-DRIDRIVERS_remove_mx8phantomdxl = "swrast"
-PACKAGECONFIG_remove_mx8mnlite = "osmesa"
-DRIDRIVERS_remove_mx8mnlite = "swrast"
+# Fix meta-freescale for i.MX 8, allowing the switch from gallium to OSMesa
+# for DRM only
+PACKAGECONFIG_REMOVE        = "osmesa"
+PACKAGECONFIG_REMOVE_imxdrm = ""
+PACKAGECONFIG_APPEND        = " gallium"
+PACKAGECONFIG_APPEND_imxdrm = ""
+PACKAGECONFIG_remove = "${PACKAGECONFIG_REMOVE}"
+PACKAGECONFIG_append = "${PACKAGECONFIG_APPEND}"
 
-do_install_append_imxgpu3d () {
-    rm -f ${D}${includedir}/GL/glcorearb.h
-}
+# Fix meta-freescale, don't use swrast at all
+DRIDRIVERS_remove = "swrast"
