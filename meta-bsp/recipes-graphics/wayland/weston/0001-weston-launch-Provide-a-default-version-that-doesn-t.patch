@@ -26,7 +26,7 @@ Index: git/libweston/meson.build
 ===================================================================
 --- git.orig/libweston/meson.build
 +++ git/libweston/meson.build
-@@ -224,16 +224,24 @@ dep_vertex_clipping = declare_dependency
+@@ -226,16 +226,24 @@ dep_vertex_clipping = declare_dependency
  )
  
  if get_option('weston-launch')
@@ -96,7 +96,7 @@ Index: git/libweston/weston-launch.c
  
  static int
  setup_launcher_socket(struct weston_launch *wl)
-@@ -431,6 +437,7 @@ quit(struct weston_launch *wl, int statu
+@@ -466,6 +472,7 @@ quit(struct weston_launch *wl, int statu
  	close(wl->signalfd);
  	close(wl->sock[0]);
  
@@ -104,15 +104,15 @@ Index: git/libweston/weston-launch.c
  	if (wl->new_user) {
  		err = pam_close_session(wl->ph, 0);
  		if (err)
-@@ -438,6 +445,7 @@ quit(struct weston_launch *wl, int statu
+@@ -473,6 +480,7 @@ quit(struct weston_launch *wl, int statu
  				err, pam_strerror(wl->ph, err));
  		pam_end(wl->ph, err);
  	}
 +#endif
  
- 	if (ioctl(wl->tty, KDSKBMUTE, 0) &&
- 	    ioctl(wl->tty, KDSKBMODE, wl->kb_mode))
-@@ -666,6 +674,7 @@ setup_session(struct weston_launch *wl,
+ 	/*
+ 	 * Get a fresh handle to the tty as the previous one is in
+@@ -710,6 +718,7 @@ setup_session(struct weston_launch *wl,
  	setenv("HOME", wl->pw->pw_dir, 1);
  	setenv("SHELL", wl->pw->pw_shell, 1);
  
@@ -120,7 +120,7 @@ Index: git/libweston/weston-launch.c
  	env = pam_getenvlist(wl->ph);
  	if (env) {
  		for (i = 0; env[i]; ++i) {
-@@ -674,6 +683,7 @@ setup_session(struct weston_launch *wl,
+@@ -718,6 +727,7 @@ setup_session(struct weston_launch *wl,
  		}
  		free(env);
  	}
@@ -128,7 +128,7 @@ Index: git/libweston/weston-launch.c
  
  	/*
  	 * We open a new session, so it makes sense
-@@ -745,8 +755,10 @@ static void
+@@ -789,8 +799,10 @@ static void
  help(const char *name)
  {
  	fprintf(stderr, "Usage: %s [args...] [-- [weston args..]]\n", name);
@@ -139,7 +139,7 @@ Index: git/libweston/weston-launch.c
  	fprintf(stderr, "  -t, --tty       Start session on alternative tty,\n"
  			"                  e.g. -t /dev/tty4, requires -u option.\n");
  	fprintf(stderr, "  -v, --verbose   Be verbose\n");
-@@ -760,7 +772,9 @@ main(int argc, char *argv[])
+@@ -804,7 +816,9 @@ main(int argc, char *argv[])
  	int i, c;
  	char *tty = NULL;
  	struct option opts[] = {
@@ -149,7 +149,7 @@ Index: git/libweston/weston-launch.c
  		{ "tty",     required_argument, NULL, 't' },
  		{ "verbose", no_argument,       NULL, 'v' },
  		{ "help",    no_argument,       NULL, 'h' },
-@@ -772,11 +786,16 @@ main(int argc, char *argv[])
+@@ -816,11 +830,16 @@ main(int argc, char *argv[])
  	while ((c = getopt_long(argc, argv, "u:t:vh", opts, &i)) != -1) {
  		switch (c) {
  		case 'u':
@@ -166,7 +166,7 @@ Index: git/libweston/weston-launch.c
  			break;
  		case 't':
  			tty = optarg;
-@@ -828,8 +847,10 @@ main(int argc, char *argv[])
+@@ -872,8 +891,10 @@ main(int argc, char *argv[])
  	if (setup_tty(&wl, tty) < 0)
  		exit(EXIT_FAILURE);
  
