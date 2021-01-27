@@ -1,7 +1,5 @@
-# Add extra tools needed for Android mfgtools
-
 RDEPENDS_${PN}-base += " \
-    simg2img \
+    android-tools \
     gptfdisk \
     hdparm \
     iproute2 \
