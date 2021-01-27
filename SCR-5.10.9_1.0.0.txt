@@ -448,7 +448,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.3.p1.1-aarch32.bin
+Package:                     imx-gpu-viv-6.4.3.p1.2-aarch32.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -466,7 +466,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.3.p1.1-aarch64.bin
+Package:                     imx-gpu-viv-6.4.3.p1.2-aarch64.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -595,7 +595,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.3.p1.1-arm.bin
+Package:                     imx-gpu-g2d-6.4.3.p1.2-arm.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -606,7 +606,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.3.p1.1-aarch64.bin
+Package:                     imx-gpu-g2d-6.4.3.p1.2-aarch64.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -617,7 +617,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-aarch64-fb.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-aarch64-fb.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -628,7 +628,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-aarch64-wayland.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-aarch64-wayland.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -639,7 +639,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-aarch64-x11.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-aarch64-x11.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -650,7 +650,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-arm-fb.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-arm-fb.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -661,7 +661,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-arm-wayland.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-arm-wayland.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -672,7 +672,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-arm-x11.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-arm-x11.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -1107,7 +1107,7 @@ Origin:                      NXP (Apache-2.0)
 Tools Packages
 --------------------------------------------
 
-Package:                     VeriSiliconTool-6.4.3.p1.1.tgz
+Package:                     VeriSiliconTool-6.4.3.p1.2.tgz
 Outgoing License:            VeriSilicon License 
 License File:                
 Package Category:            Tools
