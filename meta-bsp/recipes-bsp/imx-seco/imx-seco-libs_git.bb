@@ -13,7 +13,7 @@ SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
 SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
         file://0001-Makefile-Fix-LIBDIR-for-multilib.patch \
 "
-SRCREV = "7069412e4ee1a7f3664456d050fd3d7cf722851e"
+SRCREV = "a51e6ada16eaaa86473ff3081ed5a5f8df5aea6f"
 
 S = "${WORKDIR}/git"
 
