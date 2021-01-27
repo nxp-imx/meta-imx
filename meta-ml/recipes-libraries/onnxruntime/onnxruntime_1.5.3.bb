@@ -6,14 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=980784f0a7f667becbed133924b263bf"
 DEPENDS = "libpng zlib ${BPN}-native"
 
 ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH = "imx_5.4.70_2.3.0"
+SRCBRANCH = "1.5.3"
 
-SRCREV = "d97de1d8c8d062e8cfb17fe60aafcff1f8482dd9"
+SRCREV = "3afbb55ec4d90232bac3ccf5921fc79467c0b142"
 
 SRC_URI = "\
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
-    file://Fix_Eigen_Build_Break.patch \
-    file://0001-Undefine-MLAS-THREADPOOL-when-using-OPENMP.patch \
 "
 S = "${WORKDIR}/git"
 
@@ -40,7 +38,7 @@ PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
 PACKAGECONFIG_VSI_NPU_mx8mnlite = ""
 
-PACKAGECONFIG ?= "openmp test reports sharedlib armnn-relu eigenblas armnn acl acl-2002 ${PACKAGECONFIG_VSI_NPU}"
+PACKAGECONFIG ?= "openmp test reports sharedlib armnn eigenblas acl acl-2008 ${PACKAGECONFIG_VSI_NPU}"
 
 PACKAGECONFIG[nsync] = "-Donnxruntime_USE_NSYNC=ON, -Donnxruntime_USE_NSYNC=OFF"
 PACKAGECONFIG[prebuilt] = "-Donnxruntime_USE_PREBUILT_PB=ON, -Donnxruntime_USE_PREBUILT_PB=OFF"
@@ -60,7 +58,8 @@ PACKAGECONFIG[openvino] = "-Donnxruntime_USE_OPENVINO=ON, -Donnxruntime_USE_OPEN
 PACKAGECONFIG[interop] = "-Donnxruntime_ENABLE_LANGUAGE_INTEROP_OPS=ON, -Donnxruntime_ENABLE_LANGUAGE_INTEROP_OPS=OFF"
 PACKAGECONFIG[dml] = "-Donnxruntime_USE_DML=ON, -Donnxruntime_USE_DML=OFF"
 PACKAGECONFIG[telemetry] = "-Donnxruntime_USE_TELEMETRY=ON, -Donnxruntime_USE_TELEMETRY=OFF"
-PACKAGECONFIG[armnn-relu] = "-Donnxruntime_ARMNN_RELU_USECPU=ON, -Donnxruntime_ARMNN_RELU_USECPU=OFF"
+PACKAGECONFIG[armnn-relu] = "-Donnxruntime_ARMNN_RELU_USE_CPU=ON, -Donnxruntime_ARMNN_RELU_USE_CPU=OFF"
+PACKAGECONFIG[armnn-bn] = "-Donnxruntime_ARMNN_BN_USE_CPU=ON, -Donnxruntime_ARMNN_BN_USE_CPU=OFF"
 PACKAGECONFIG[opschema] = "-Donnxruntime_PYBIND_EXPORT_OPSCHEMA=ON, -Donnxruntime_PYBIND_EXPORT_OPSCHEMA=OFF"
 PACKAGECONFIG[nnapi] = "-Donnxruntime_USE_NNAPI=ON, -Donnxruntime_USE_NNAPI=OFF"
 PACKAGECONFIG[tvm] = "-Donnxruntime_USE_TVM=ON, -Donnxruntime_USE_TVM=OFF"
@@ -90,4 +89,5 @@ PACKAGECONFIG[armnn] = "-Donnxruntime_USE_ARMNN=ON, -Donnxruntime_USE_ARMNN=OFF,
 PACKAGECONFIG[acl] = "-Donnxruntime_USE_ACL=ON, -Donnxruntime_USE_ACL=OFF, arm-compute-library, arm-compute-library"
 PACKAGECONFIG[acl-1908] = "-Donnxruntime_USE_ACL_1908=ON, -Donnxruntime_USE_ACL_1908=OFF, arm-compute-library"
 PACKAGECONFIG[acl-2002] = "-Donnxruntime_USE_ACL_2002=ON, -Donnxruntime_USE_ACL_2002=OFF, arm-compute-library"
-PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -DVSI_NPU_INCLUDE_DIR=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
+PACKAGECONFIG[acl-2008] = "-Donnxruntime_USE_ACL_2008=ON, -Donnxruntime_USE_ACL_2008=OFF, arm-compute-library"
+PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -Donnxruntime_OVXLIB_INCLUDE=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
