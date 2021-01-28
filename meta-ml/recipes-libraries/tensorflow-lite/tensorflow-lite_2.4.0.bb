@@ -14,24 +14,21 @@ SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobile
 SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
 SRC_URI[model-mobv1.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226dfe4cdcef3012555f691744166"
 
-inherit python3native
+inherit python3native cmake
 
 S = "${WORKDIR}/git"
 
-EXTRA_OEMAKE = "'TARGET_ARCH=${TARGET_ARCH}' 'CXX=${CXX}' 'CC=${CC}' 'AR=${AR}'"
+EXTRA_OECMAKE = "-DTFLITE_ENABLE_XNNPACK=on -DTFLITE_ENABLE_RUY=on -DTFLITE_ENABLE_NNAPI=on  ${S}/tensorflow/lite/"
 
-do_configure() {
-
+do_configure_prepend(){
     export HTTP_PROXY=${http_proxy}
     export HTTPS_PROXY=${https_proxy}
     export http_proxy=${http_proxy}
     export https_proxy=${https_proxy}
 
-    ${S}/tensorflow/lite/tools/make/download_dependencies.sh
-
-    # Create Makefile in repo root so we can use do_compile command 'as-is'
-    echo "include tensorflow/lite/tools/make/Makefile" > Makefile
+   ${S}/tensorflow/lite/tools/make/download_dependencies.sh
 }
+
 
 do_compile_append () {
     # build pip package
@@ -45,7 +42,7 @@ do_compile_append () {
 do_install() {
     # install libraries
     install -d ${D}${libdir}
-    for lib in ${S}/tensorflow/lite/tools/make/gen/linux_${TARGET_ARCH}/lib/*
+    for lib in ${B}/*.a
     do
         install -m 0555 $lib ${D}${libdir}
     done
@@ -63,10 +60,8 @@ do_install() {
 
     # install examples
     install -d ${D}${bindir}/${PN}-${PV}/examples
-    for example in ${S}/tensorflow/lite/tools/make/gen/linux_${TARGET_ARCH}/bin/*
-    do
-        install -m 0555 $example ${D}${bindir}/${PN}-${PV}/examples
-    done
+    install -m 0555 ${B}/label_image ${D}${bindir}/${PN}-${PV}/examples
+    install -m 0555 ${B}/benchmark_model ${D}${bindir}/${PN}-${PV}/examples
 
     # install label_image data
     cp ${S}/tensorflow/lite/examples/label_image/testdata/grace_hopper.bmp ${D}${bindir}/${PN}-${PV}/examples
