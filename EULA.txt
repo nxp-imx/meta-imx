@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v17 October 2020
+LA_OPT_NXP_Software_License v18 January 2021
 
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
@@ -488,8 +488,8 @@ demonstration only. Permitted distributions must be similarly limited. Further
 rights must be obtained directly from Crank Software Inc.
 
 Cypress Semiconductor Corporation: WWD RTOS source code may only be used in
-accordance with the Cypress IOT Community License Agreement located at
-https://community.cypress.com/terms-and-conditions!input.jspa?displayOnly=true.
+accordance with the Cypress IOT Community License Agreement obtained directly
+from Cypress Semiconductor Corporation.
 
 Embedded Systems Academy GmbH (EmSA):  Any use of Micro CANopen Plus is subject
 to the acceptance of the license conditions described in the LICENSE.INFO file
