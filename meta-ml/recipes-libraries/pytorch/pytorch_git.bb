@@ -8,7 +8,7 @@ RDEPENDS_${PN} += "python3-core python3-numpy python3-future python3-typing-exte
 PV = "1.7.1"
 
 PYTORCH_SRC ?= "git://github.com/nxpmicro/pytorch-release.git;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "lf-5.10.y_1.0.0"
 SRCREV = "326671b63bb8ebf8fddef690fff0980fddfe77e9" 
 
 SRC_URI = " \
