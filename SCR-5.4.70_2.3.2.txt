@@ -448,7 +448,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.3.p1.0-aarch32.bin
+Package:                     imx-gpu-viv-6.4.3.p1.4-aarch32.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -466,7 +466,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.3.p1.0-aarch64.bin
+Package:                     imx-gpu-viv-6.4.3.p1.4-aarch64.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -538,7 +538,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-1.8.12.bin
+Package:                     imx-dpu-g2d-1.8.14.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -595,7 +595,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.3.p1.0-arm.bin
+Package:                     imx-gpu-g2d-6.4.3.p1.4-arm.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -606,7 +606,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.3.p1.0-aarch64.bin
+Package:                     imx-gpu-g2d-6.4.3.p1.4-aarch64.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -617,7 +617,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.0-aarch64-fb.bin
+Package:                     libgpuperfcnt-6.4.3.p1.4-aarch64-fb.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -628,7 +628,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.0-aarch64-wayland.bin
+Package:                     libgpuperfcnt-6.4.3.p1.4-aarch64-wayland.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -639,7 +639,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.0-aarch64-x11.bin
+Package:                     libgpuperfcnt-6.4.3.p1.4-aarch64-x11.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -650,7 +650,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.0-arm-fb.bin
+Package:                     libgpuperfcnt-6.4.3.p1.4-arm-fb.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -661,7 +661,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.0-arm-wayland.bin
+Package:                     libgpuperfcnt-6.4.3.p1.4-arm-wayland.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -672,7 +672,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.0-arm-x11.bin
+Package:                     libgpuperfcnt-6.4.3.p1.4-arm-x11.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -1063,17 +1063,6 @@ Origin:                      NXP (MIT)
                              Microsoft/onnxruntime (MIT) - https://github.com/Microsoft/onnxruntime
                              Google's Protocol Buffer (BSD-3-clause) - https://tracker.debian.org/pkg/protobuf
                              gRPC (Apache-2.0) - https://github.com/grpc/grpc
-
---------------------------------------------
-
-Package:                     pyarmnn-release.git
-Outgoing License:            MIT 
-License File:                LICENSE
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    Python wrapper for armnn
-Release Location:            https://github.com/NXPmicro/pyarmnn-release -b rel_imx_5.4.70_2.3.2
-Origin:                      NXP (MIT)
 
 --------------------------------------------
 
