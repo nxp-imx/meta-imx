@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "0b9e3dfe2574119266cc3c01861b36c170078eecf703f4bbb7b152c74a
 
 S = "${WORKDIR}/${PN}-${PV}/appshell"
 
-DEPENDS = "python libdrm"
+DEPENDS = "python libdrm virtual/libg2d linux-imx-headers"
 
 OECMAKE_GENERATOR = "Unix Makefiles"
 
