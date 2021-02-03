@@ -6,21 +6,15 @@ DESCRIPTION = "Glslang is the official reference compiler front end \
                either from a command line or programmatically."
 SECTION = "graphics"
 HOMEPAGE = "https://www.khronos.org/opengles/sdk/tools/Reference-Compiler"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=918e668376010a04448a312fb37ae69b"
 
-inherit cmake
-
-LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://glslang/Include/Types.h;beginline=1;endline=36;md5=26473d85c7f85d955e24663f67a53818"
+SRC_URI = "git://github.com/KhronosGroup/glslang"
+SRCREV = "b5f003d7a3ece37db45578a8a3140b370036fc64"
 
 S = "${WORKDIR}/git"
 
-SRCREV = "1bc601c674aecc2fee0dee8ff7a118db76b4c439"
-SRC_URI = "git://github.com/KhronosGroup/glslang \
-"
-
-FILES_${PN} += "${libdir}/*"
-
-BBCLASSEXTEND = "native nativesdk"
+inherit cmake
 
 do_install_append() {
     # Some of the vulkan samples/test require these headers
@@ -32,6 +26,7 @@ do_install_append() {
 
     # Remove redundant headers from spirv-headers
     rm -rf ${D}${includedir}/SPIRV/GLSL.std.450.h
+    rm -rf ${D}${includedir}/SPIRV/NonSemanticDebugPrintf.h
     rm -rf ${D}${includedir}/SPIRV/spirv.hpp
 
     install -d ${D}${includedir}/glslang/Include
@@ -41,3 +36,5 @@ do_install_append() {
     install -d ${D}${includedir}/glslang/MachineIndependent
     cp -f ${S}/glslang/MachineIndependent/Versions.h ${D}${includedir}/glslang/MachineIndependent
 }
+
+BBCLASSEXTEND = "native nativesdk"
