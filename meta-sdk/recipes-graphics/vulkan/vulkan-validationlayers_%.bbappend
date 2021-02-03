@@ -25,6 +25,3 @@ FILES_SOLIBSDEV = ""
 FILES_${PN} += "${libdir}/libVkLayer_*.so"
 
 INSANE_SKIP_${PN} = "dev-so"
-
-COMPATIBLE_MACHINE = "(mx8)"
-COMPATIBLE_MACHINE_mx8mm = "(^$)"
