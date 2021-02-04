@@ -1,11 +1,20 @@
-# Fix meta-freescale for i.MX 8, allowing the switch from gallium to OSMesa
-# for DRM only
-PACKAGECONFIG_REMOVE        = "osmesa"
-PACKAGECONFIG_REMOVE_imxdrm = ""
-PACKAGECONFIG_APPEND        = " gallium"
-PACKAGECONFIG_APPEND_imxdrm = ""
-PACKAGECONFIG_remove = "${PACKAGECONFIG_REMOVE}"
-PACKAGECONFIG_append = "${PACKAGECONFIG_APPEND}"
-
-# Fix meta-freescale, don't use swrast at all
-DRIDRIVERS_remove = "swrast"
+# For NXP BSP, choose between gallium and osmesa, and between enabling
+# dri and swrast or not. dri and gallium are default.
+#
+# For parts with no GPU, use gallium, dri, and swrast
+PACKAGECONFIG_REMOVE_NXPBSP               = ""
+PACKAGECONFIG_APPEND_NXPBSP               = ""
+DRIDRIVERS_NXPBSP                         = "swrast"
+#
+# For parts with GPU but no DRM, use gallium
+PACKAGECONFIG_REMOVE_NXPBSP_imxgpu        = "dri"
+DRIDRIVERS_NXPBSP_imxgpu                  = ""
+#
+# For parts with GPU and DRM, use osmesa, dri, and swrast
+PACKAGECONFIG_REMOVE_NXPBSP_imxgpu_imxdrm = "gallium"
+PACKAGECONFIG_APPEND_NXPBSP_imxgpu_imxdrm = "osmesa"
+DRIDRIVERS_NXPBSP_imxgpu_imxdrm           = "swrast"
+#
+PACKAGECONFIG_remove_use-nxp-bsp = "${PACKAGECONFIG_REMOVE_NXPBSP}"
+PACKAGECONFIG_append_use-nxp-bsp = " ${PACKAGECONFIG_APPEND_NXPBSP}"
+DRIDRIVERS_use-nxp-bsp           = "${DRIDRIVERS_NXPBSP}"
