@@ -9,7 +9,7 @@ DEPENDS = "imx-seco-libs lttng-ust"
 SRCBRANCH = "version_0.4"
 V2XSEHSM_SRC ?= "git://source.codeaurora.org/external/imx/v2xsehsm.git;protocol=ssh"
 SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH}"
-SRCREV = "776767465745d44771c0a998abd778bf304ab162"
+SRCREV = "49bfeb78e58870add970297707b5baf5da128370"
 
 S = "${WORKDIR}/git"
 
