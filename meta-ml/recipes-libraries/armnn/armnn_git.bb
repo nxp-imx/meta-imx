@@ -68,7 +68,8 @@ EXTRA_OECMAKE += " \
     -DHALF_INCLUDE=${STAGING_DIR_HOST} \
 "
 
-TESTVECS_INSTALL_DIR = "${datadir}/arm/armnn"
+ARMNN_INSTALL_DIR = "${bindir}/${P}"
+PYARMNN_INSTALL_DIR = "${ARMNN_INSTALL_DIR}/pyarmnn"
 
 do_compile_append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'pyarmnn', 'true', 'false', d)}; then
@@ -79,7 +80,7 @@ do_compile_append() {
         cp -Rf ${WORKDIR}/build/libarmnnTfLiteParser.so* ${STAGING_LIBDIR}
         cp -Rf ${WORKDIR}/build/libarmnnOnnxParser.so* ${STAGING_LIBDIR}
         cp -Rf ${WORKDIR}/build/libarmnnCaffeParser.so* ${STAGING_LIBDIR}
-        cp -R ${WORKDIR}/build/libarmnn.so* ${STAGING_LIBDIR}
+        cp -Rf ${WORKDIR}/build/libarmnn.so* ${STAGING_LIBDIR}
 
         export SWIG_EXECUTABLE=${STAGING_BINDIR_NATIVE}/swig
         export ARMNN_INCLUDE=${S}/include
@@ -89,38 +90,57 @@ do_compile_append() {
         ${PYTHON} setup.py clean --all
         ${PYTHON} swig_generate.py -v
         ${PYTHON} setup.py build_ext --inplace
+        # Need to create 2 wheels one being installed by the native env and the second to copy to the aarch64 image
+        # for users. Sadly contents are the same, but user cannot install the native wheel on target.
         ${PYTHON} setup.py bdist_wheel
+        ${PYTHON} setup.py bdist_wheel --plat-name linux_aarch64
     fi
 }
 
 do_install_append() {
+    # test applications (examples)
+    if ${@bb.utils.contains('PACKAGECONFIG', 'tests', 'true', 'false', d)}; then
+        install -d ${D}${ARMNN_INSTALL_DIR}
+        CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"        
+        find ${WORKDIR}/build/tests -maxdepth 1 -type f -executable -exec cp $CP_ARGS {} ${D}${ARMNN_INSTALL_DIR} \;
+        chrpath -d ${D}${ARMNN_INSTALL_DIR}/*
+    fi
+
     if ${@bb.utils.contains('PACKAGECONFIG', 'pyarmnn', 'true', 'false', d)}; then
+        # install native python wheel
         export PIP_DISABLE_PIP_VERSION_CHECK=1
         export PIP_NO_CACHE_DIR=1
         install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
         ${STAGING_BINDIR_NATIVE}/pip3 install -v \
             -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-deps \
-            ${S}/python/pyarmnn/dist/pyarmnn-*.whl
+            ${S}/python/pyarmnn/dist/pyarmnn-*_x86_64.whl
         find ${D}/${PYTHON_SITEPACKAGES_DIR} -type d -name "__pycache__" -exec rm -Rf {} +
-    fi
 
-    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
-    install -d ${D}${bindir}
-    find ${WORKDIR}/build/tests -maxdepth 1 -type f -executable -exec cp $CP_ARGS {} ${D}${bindir} \;
-    install -d ${D}${TESTVECS_INSTALL_DIR}/models
-    cp ${WORKDIR}/tfmodel/mobilenet_v1_1.0_224_frozen.pb  ${D}${TESTVECS_INSTALL_DIR}/models
-    cp ${WORKDIR}/git/tests/TfMobileNet-Armnn/labels.txt  ${D}${TESTVECS_INSTALL_DIR}/models
-    chrpath -d ${D}${bindir}/*
+        # copy aarch64 python wheel for use in virtual environments
+        install -d ${D}${PYARMNN_INSTALL_DIR}
+        install -m 0555 ${S}/python/pyarmnn/dist/pyarmnn-*_aarch64.whl ${D}${PYARMNN_INSTALL_DIR}
+        
+        # pyarmnn examples for eiq
+        cp -R ${S}/python/pyarmnn/examples ${D}${PYARMNN_INSTALL_DIR}
+        
+        # pyarmnn unit tests
+        cp -R ${S}/python/pyarmnn/test ${D}${PYARMNN_INSTALL_DIR}
+        rm -f ${D}${PYARMNN_INSTALL_DIR}/test/test_setup.py # not supposed to be run on target
+        cp -R ${S}/python/pyarmnn/scripts ${D}${PYARMNN_INSTALL_DIR}
+        install -m 0555 ${S}/python/pyarmnn/conftest.py ${D}${PYARMNN_INSTALL_DIR}
+    fi
 }
 
 CXXFLAGS += "-fopenmp"
 LIBS += "-larmpl_lp64_mp"
 
-FILES_${PN} += "${TESTVECS_INSTALL_DIR}"
+PACKAGE_BEFORE_PN = "${PN}-tests"
+
 FILES_${PN} += "${libdir}/python*"
-FILES_${PN}-dev += "{libdir}/cmake/*"
-INSANE_SKIP_${PN} = "dev-deps"
-INSANE_SKIP_${PN}-dev = "dev-elf"
+FILES_${PN} += "${PYARMNN_INSTALL_DIR}/examples"
+
+FILES_${PN}-tests = "${PYARMNN_INSTALL_DIR}/test ${PYARMNN_INSTALL_DIR}/scripts"
+FILES_${PN}-tests += "${PYARMNN_INSTALL_DIR}/conftest.py"
 
 # We support i.MX8 only (for now)
 COMPATIBLE_MACHINE = "(mx8)"
