@@ -38,7 +38,7 @@ do_compile_append () {
     export PYTHONPATH="${STAGING_LIBDIR_NATIVE}/${PYTHON_DIR}/site-packages"
     export PIP_BUILD_ROOT="${WORKDIR}"
     export TENSORFLOW_TARGET="${TARGET_ARCH}"
-    chmod +x ${S}/tensorflow/lite/tools/pip_package/build_pip_package.sh
+    export LDSHARED="${CXX} -shared "
     ${S}/tensorflow/lite/tools/pip_package/build_pip_package.sh
 }
 
