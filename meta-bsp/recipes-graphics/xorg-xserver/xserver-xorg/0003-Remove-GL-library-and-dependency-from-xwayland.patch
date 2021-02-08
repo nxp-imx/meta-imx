@@ -1,0 +1,34 @@
+From ea8e2682298e0190668bbd21dbebee624eb4e2a3 Mon Sep 17 00:00:00 2001
+From: Xianzhong <xianzhong.li@nxp.com>
+Date: Tue, 26 Jan 2021 16:44:11 +0800
+Subject: [PATCH] Remove GL library and dependency from xwayland
+
+Signed-off-by: Xianzhong <xianzhong.li@nxp.com>
+---
+ hw/xwayland/Makefile.am | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/hw/xwayland/Makefile.am b/hw/xwayland/Makefile.am
+index bc1cb85..1fada31 100644
+--- a/hw/xwayland/Makefile.am
++++ b/hw/xwayland/Makefile.am
+@@ -24,7 +24,6 @@ Xwayland_SOURCES =				\
+ Xwayland_LDADD =				\
+ 	$(glamor_lib)				\
+ 	$(XWAYLAND_LIBS)			\
+-	$(top_builddir)/glx/libglxvnd.la	\
+ 	$(XWAYLAND_SYS_LIBS)			\
+ 	$(top_builddir)/Xext/libXvidmode.la	\
+ 	$(XSERVER_SYS_LIBS)
+@@ -55,7 +54,7 @@ Xwayland_built_sources += $(glamor_built_sources)
+ 
+ glamor_lib = $(top_builddir)/glamor/libglamor.la
+ 
+-Xwayland_LDADD += $(GLAMOR_LIBS) $(GBM_LIBS) -lEGL -lGL
++Xwayland_LDADD += $(GLAMOR_LIBS) $(GBM_LIBS) -lEGL
+ Xwayland_DEPENDENCIES = $(glamor_lib) $(XWAYLAND_LIBS)
+ endif
+ 
+-- 
+2.17.1
+
