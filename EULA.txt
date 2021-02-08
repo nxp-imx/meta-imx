@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v18 January 2021
+LA_OPT_NXP_Software_License v19 February 2021
 
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
@@ -443,6 +443,20 @@ Schedule, if applicable), located at
 https://developer.amazon.com/support/legal/pml.  All Amazon software is hereby
 designated "Amazon confidential".  Amazon is a third-party beneficiary to this
 Agreement with respect to the Amazon software.
+
+Amazon Web Services, Inc.: AWS is an intended third-party beneficiary to this
+Agreement with respect to the Greengrass software. If you have an account with
+AWS that is not in good standing, you may not download, install, use or
+distribute the Greengrass software. You will comply with all instructions and
+requirements in any integration documents, guidelines, or other documentation
+AWS provides. The license to the Greengrass software will immediately terminate
+without notice if you (a) fail to comply with this Agreement or any other
+agreement with AWS, (b) fail to make timely payment for any AWS service, (c)
+fail to implement AWS updates, or (d) bring any action for intellectual
+property infringement against AWS or any AWS customer utilizing AWS services.
+Any dispute or claim relating to your use of the Greengrass software will be
+resolved by binding arbitration, rather than in court, except that you may
+assert claims in small claims court if your claims qualify.
 
 Amphion Semiconductor Ltd.: Distribution of Amphion software must be a part of,
 or embedded within, Authorized Systems that include an Amphion Video Decoder.
