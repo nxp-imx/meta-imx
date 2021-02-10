@@ -4,8 +4,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=91d560803ea3d191c457b12834553991"
 
 SRC_URI = "git://github.com/BVLC/caffe.git;branch=${BRANCH}"
 
-PV = "1.0"
-
 BRANCH = "master"
 SRCREV = "99bd99795dcdf0b1d3086a8d67ab1782a8a08383"
 
