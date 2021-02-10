@@ -59,6 +59,9 @@ EXTRA_OECMAKE += " \
     -DHALF_INCLUDE=${STAGING_DIR_HOST} \
 "
 
+ARMNN_INSTALL_DIR = "${bindir}/${P}"
+PYARMNN_INSTALL_DIR = "${ARMNN_INSTALL_DIR}/pyarmnn"
+
 do_compile_append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'pyarmnn', 'true', 'false', d)}; then
         # copy required to link against pyarmnn wrappers
@@ -83,6 +86,13 @@ do_compile_append() {
 }
 
 do_install_append() {
+    if ${@bb.utils.contains('PACKAGECONFIG', 'tests', 'true', 'false', d)}; then
+        install -d ${D}${ARMNN_INSTALL_DIR}
+        CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"        
+        find ${WORKDIR}/build/tests -maxdepth 1 -type f -executable -exec cp $CP_ARGS {} ${D}${ARMNN_INSTALL_DIR} \;
+        chrpath -d ${D}${ARMNN_INSTALL_DIR}/*
+    fi
+
     if ${@bb.utils.contains('PACKAGECONFIG', 'pyarmnn', 'true', 'false', d)}; then
         export PIP_DISABLE_PIP_VERSION_CHECK=1
         export PIP_NO_CACHE_DIR=1
@@ -91,20 +101,17 @@ do_install_append() {
             -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-deps \
             ${S}/python/pyarmnn/dist/pyarmnn-*.whl
         find ${D}/${PYTHON_SITEPACKAGES_DIR} -type d -name "__pycache__" -exec rm -Rf {} +
-    fi
 
-    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
-    install -d ${D}${bindir}
-    find ${WORKDIR}/build/tests -maxdepth 1 -type f -executable -exec cp $CP_ARGS {} ${D}${bindir} \;
-    chrpath -d ${D}${bindir}/*
+        # pyarmnn examples for eiq
+        cp -R ${S}/python/pyarmnn/examples ${D}${PYARMNN_INSTALL_DIR}
+    fi
 }
 
 CXXFLAGS += "-fopenmp"
 LIBS += "-larmpl_lp64_mp"
 
 FILES_${PN} += "${libdir}/python*"
-INSANE_SKIP_${PN} = "dev-deps"
-INSANE_SKIP_${PN}-dev = "dev-elf"
+FILES_${PN} += "${PYARMNN_INSTALL_DIR}/examples*"
 
 # We support i.MX8 only (for now)
 COMPATIBLE_MACHINE = "(mx8)"
