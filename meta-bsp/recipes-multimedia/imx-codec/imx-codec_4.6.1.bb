@@ -4,7 +4,7 @@
 
 require imx-codec.inc
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=231e11849a4331fcbb19d7f4aab4a659"
+LIC_FILES_CHKSUM = "file://COPYING;md5=a632fefd1c359980434f9389833cab3a"
 
 SRC_URI[md5sum] = "3ccb243366d322cd122571b79dffbc17"
 SRC_URI[sha256sum] = "dcae6e24a4916dc50c8c61776943c65b4ec851f218ea89192686eb8161cf0e30"
