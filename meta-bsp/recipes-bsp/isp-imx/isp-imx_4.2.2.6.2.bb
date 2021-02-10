@@ -2,20 +2,18 @@
 
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/${PN}-${PV}/COPYING;md5=a632fefd1c359980434f9389833cab3a"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/${BP}/COPYING;md5=a632fefd1c359980434f9389833cab3a"
+DEPENDS = "python libdrm virtual/libg2d linux-imx-headers"
 
-
-inherit fsl-eula-unpack cmake systemd
-
-SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
-
+SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "f638556b9e318bb14509e35a51c62e5b"
 SRC_URI[sha256sum] = "37232a53045f90bda2edbbfbd923e42546d32dc9be9520ae1cf01be2f18031ff"
 
-S = "${WORKDIR}/${PN}-${PV}/appshell"
+S = "${WORKDIR}/${BP}/appshell"
 
-DEPENDS = "python libdrm virtual/libg2d linux-imx-headers"
+inherit fsl-eula-unpack cmake systemd
 
+# Use make instead of ninja
 OECMAKE_GENERATOR = "Unix Makefiles"
 
 SYSTEMD_SERVICE_${PN} = "imx8-isp.service"
@@ -50,23 +48,21 @@ do_install() {
     cp -r ${WORKDIR}/build/generated/release/bin/*2775* ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/bin/isp_media_server ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/bin/vvext ${D}/opt/imx8-isp/bin
-    cp -r ${WORKDIR}/${PN}-${PV}/mediacontrol/case/ ${D}/opt/imx8-isp/bin
+    cp -r ${WORKDIR}/${BP}/mediacontrol/case/ ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/lib/*.so* ${D}/${libdir}
     cp -r ${WORKDIR}/build/generated/release/include/* ${D}/${includedir}
 
-    cp ${WORKDIR}/${PN}-${PV}/imx/run.sh ${D}/opt/imx8-isp/bin
-    cp ${WORKDIR}/${PN}-${PV}/imx/start_isp.sh ${D}/opt/imx8-isp/bin
+    cp ${WORKDIR}/${BP}/imx/run.sh ${D}/opt/imx8-isp/bin
+    cp ${WORKDIR}/${BP}/imx/start_isp.sh ${D}/opt/imx8-isp/bin
 
     chmod +x ${D}/opt/imx8-isp/bin/run.sh
     chmod +x ${D}/opt/imx8-isp/bin/start_isp.sh
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
       install -d ${D}${systemd_system_unitdir}
-      install -m 0644 ${WORKDIR}/${PN}-${PV}/imx/imx8-isp.service ${D}${systemd_system_unitdir}
+      install -m 0644 ${WORKDIR}/${BP}/imx/imx8-isp.service ${D}${systemd_system_unitdir}
     fi
 }
-
-RDEPENDS_${PN} = "libdrm libpython2 bash"
 
 PACKAGES = "${PN} ${PN}-dev ${PN}-dbg"
 
@@ -75,3 +71,5 @@ FILES_${PN}-dbg += "${libdir}/.debug"
 
 INSANE_SKIP_${PN} += "rpaths dev-deps dev-so"
 INSANE_SKIP_${PN}-dev += "rpaths dev-elf"
+
+RDEPENDS_${PN} = "libdrm libpython2 bash"
