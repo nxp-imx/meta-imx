@@ -2,16 +2,17 @@
 
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/${BP}/COPYING;md5=a632fefd1c359980434f9389833cab3a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=a632fefd1c359980434f9389833cab3a"
 DEPENDS = "python libdrm virtual/libg2d linux-imx-headers"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "f638556b9e318bb14509e35a51c62e5b"
 SRC_URI[sha256sum] = "37232a53045f90bda2edbbfbd923e42546d32dc9be9520ae1cf01be2f18031ff"
 
-S = "${WORKDIR}/${BP}/appshell"
-
 inherit fsl-eula-unpack cmake systemd
+
+# Build the sub-folder appshell
+OECMAKE_SOURCEPATH = "${S}/appshell"
 
 # Use make instead of ninja
 OECMAKE_GENERATOR = "Unix Makefiles"
