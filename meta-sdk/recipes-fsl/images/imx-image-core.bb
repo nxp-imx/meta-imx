@@ -25,6 +25,7 @@ CLINFO_mx8mm = ""
 
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' weston weston-examples weston-init','', d)} \
+    imx-uuc \
     imx-test \
     packagegroup-imx-core-tools \
     packagegroup-imx-security \
