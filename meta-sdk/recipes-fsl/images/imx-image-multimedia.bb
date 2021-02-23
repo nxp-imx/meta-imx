@@ -37,6 +37,7 @@ ISP_PKGS = ""
 ISP_PKGS_mx8mp = "packagegroup-imx-isp"
 
 CORE_IMAGE_EXTRA_INSTALL += " \
+    imx-uuc \
     packagegroup-core-full-cmdline \
     packagegroup-tools-bluetooth \
     packagegroup-fsl-tools-audio \
