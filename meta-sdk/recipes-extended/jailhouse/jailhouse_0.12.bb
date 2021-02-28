@@ -20,7 +20,7 @@ SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH} \
            file://0001-tools-scripts-update-shebang-to-python3.patch \
 "
 
-SRCREV = "de56d74e97b7e589b74a8503f0b91a53521457f5"
+SRCREV = "6a4d89fc27b33bc1d2657ffa7fd7380f061b21a4"
 
 DEPENDS = " \
     make-native \
