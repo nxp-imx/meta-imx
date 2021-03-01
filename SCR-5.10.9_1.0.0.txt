@@ -398,6 +398,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP i.MX keyctl tool to manage CAAM Keys
 Release Location:            https://source.codeaurora.org/external/imx/key_caam -b rel_imx_5.10.9_1.0.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 Graphics Packages
 --------------------------------------------
@@ -448,7 +450,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.3.p1.1-aarch32.bin
+Package:                     imx-gpu-viv-6.4.3.p1.2-aarch32.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -466,7 +468,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.3.p1.1-aarch64.bin
+Package:                     imx-gpu-viv-6.4.3.p1.2-aarch64.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -595,7 +597,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.3.p1.1-arm.bin
+Package:                     imx-gpu-g2d-6.4.3.p1.2-arm.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -606,7 +608,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.3.p1.1-aarch64.bin
+Package:                     imx-gpu-g2d-6.4.3.p1.2-aarch64.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -617,7 +619,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-aarch64-fb.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-aarch64-fb.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -628,7 +630,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-aarch64-wayland.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-aarch64-wayland.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -639,7 +641,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-aarch64-x11.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-aarch64-x11.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -650,7 +652,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-arm-fb.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-arm-fb.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -661,7 +663,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-arm-wayland.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-arm-wayland.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -672,7 +674,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p1.1-arm-x11.bin
+Package:                     libgpuperfcnt-6.4.3.p1.2-arm-x11.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2019 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -1082,6 +1084,9 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensors and Dynamic neural networks in Python with strong GPU acceleration
 Release Location:            https://github.com/NXPmicro/pytorch-release -b rel_imx_5.10.9_1.0.0
+Origin:                      NXP (BSD-3-Clause)
+                             pytorch (BSD-3-clause) - https://github.com/pytorch/pytorch
+
 --------------------------------------------
 
 Package:                     torchvision.git
@@ -1091,6 +1096,9 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    The torchvision package consists of popular datasets model architectures and common image transformations for computer vision
 Release Location:            https://github.com/NXPmicro/pytorch-release -b rel_imx_5.10.9_1.0.0
+Origin:                      NXP (BSD-3-Clause)
+                             pytorch (BSD-3-clause) - https://github.com/pytorch/pytorch
+
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
@@ -1107,7 +1115,7 @@ Origin:                      NXP (Apache-2.0)
 Tools Packages
 --------------------------------------------
 
-Package:                     VeriSiliconTool-6.4.3.p1.1.tgz
+Package:                     VeriSiliconTool-6.4.3.p1.2.tgz
 Outgoing License:            VeriSilicon License 
 License File:                
 Package Category:            Tools
