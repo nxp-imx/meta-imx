@@ -14,7 +14,7 @@ SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
     file://0001-Makefile-Fix-LIBDIR-for-multilib.patch \
     file://0002-Makefile-Fix-install-to-clear-host-user-contaminated.patch \
 "
-SRCREV = "79e5fb5d096c61b1c3163c9fa8e42719509d95a0"
+SRCREV = "b730ba5975644094f224faee20942f63d0d24ccd"
 
 S = "${WORKDIR}/git"
 
