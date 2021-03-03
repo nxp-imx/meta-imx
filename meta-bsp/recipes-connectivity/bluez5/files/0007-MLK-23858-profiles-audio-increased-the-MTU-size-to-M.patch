@@ -13,11 +13,11 @@ Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
 
-diff --git a/profiles/audio/a2dp.c b/profiles/audio/a2dp.c
-index 2feea66c0..f862562ea 100644
---- a/profiles/audio/a2dp.c
-+++ b/profiles/audio/a2dp.c
-@@ -2333,6 +2333,8 @@ static bool a2dp_server_listen(struct a2dp_server *server)
+Index: bluez-5.56/profiles/audio/a2dp.c
+===================================================================
+--- bluez-5.56.orig/profiles/audio/a2dp.c
++++ bluez-5.56/profiles/audio/a2dp.c
+@@ -2367,6 +2367,8 @@ static bool a2dp_server_listen(struct a2
  {
  	GError *err = NULL;
  	BtIOMode mode;
@@ -26,7 +26,7 @@ index 2feea66c0..f862562ea 100644
  
  	if (server->io)
  		return true;
-@@ -2348,6 +2350,8 @@ static bool a2dp_server_listen(struct a2dp_server *server)
+@@ -2379,6 +2381,8 @@ static bool a2dp_server_listen(struct a2
  				BT_IO_OPT_PSM, AVDTP_PSM,
  				BT_IO_OPT_MODE, mode,
  				BT_IO_OPT_SEC_LEVEL, BT_IO_SEC_MEDIUM,
@@ -35,11 +35,11 @@ index 2feea66c0..f862562ea 100644
  				BT_IO_OPT_MASTER, true,
  				BT_IO_OPT_INVALID);
  	if (server->io)
-diff --git a/profiles/audio/avctp.h b/profiles/audio/avctp.h
-index 95d95bbbe..47107d3b3 100644
---- a/profiles/audio/avctp.h
-+++ b/profiles/audio/avctp.h
-@@ -25,7 +25,7 @@
+Index: bluez-5.56/profiles/audio/avctp.h
+===================================================================
+--- bluez-5.56.orig/profiles/audio/avctp.h
++++ bluez-5.56/profiles/audio/avctp.h
+@@ -12,7 +12,7 @@
  #define AVCTP_CONTROL_PSM		23
  #define AVCTP_BROWSING_PSM		27
  
@@ -48,11 +48,11 @@ index 95d95bbbe..47107d3b3 100644
  #define AVC_HEADER_LENGTH 3
  
  /* ctype entries */
-diff --git a/profiles/audio/avdtp.c b/profiles/audio/avdtp.c
-index 782268c08..220aae570 100644
---- a/profiles/audio/avdtp.c
-+++ b/profiles/audio/avdtp.c
-@@ -2290,6 +2290,9 @@ static void avdtp_connect_cb(GIOChannel *chan, GError *err, gpointer user_data)
+Index: bluez-5.56/profiles/audio/avdtp.c
+===================================================================
+--- bluez-5.56.orig/profiles/audio/avdtp.c
++++ bluez-5.56/profiles/audio/avdtp.c
+@@ -2341,6 +2341,9 @@ static void avdtp_connect_cb(GIOChannel
  	struct avdtp *session = user_data;
  	char address[18];
  	int err_no = EIO;
@@ -62,10 +62,11 @@ index 782268c08..220aae570 100644
  
  	if (err) {
  		err_no = err->code;
-@@ -2300,6 +2303,20 @@ static void avdtp_connect_cb(GIOChannel *chan, GError *err, gpointer user_data)
+@@ -2350,6 +2353,20 @@ static void avdtp_connect_cb(GIOChannel
+ 
  	if (!session->io)
  		session->io = g_io_channel_ref(chan);
- 
++	
 +	bt_io_set(chan, &err1, BT_IO_OPT_OMTU, mtu, BT_IO_OPT_INVALID);
 +		if (err1 != NULL) {
 +			error("OMTU! setting failed: %s", err1->message);
@@ -79,20 +80,19 @@ index 782268c08..220aae570 100644
 +			g_error_free(err2);
 +        } else
 +			DBG("IMTU set to 2046");
-+
+ 
  	/* Check if kernel supports reading packet types */
  	bt_io_get(chan, NULL, BT_IO_OPT_PHY, &session->phy, BT_IO_OPT_INVALID);
- 
-@@ -2414,6 +2431,8 @@ static GIOChannel *l2cap_connect(struct avdtp *session)
+@@ -2455,6 +2472,8 @@ static GIOChannel *l2cap_connect(struct
+ 	GError *err = NULL;
  	GIOChannel *io;
  	const bdaddr_t *src;
- 	BtIOMode mode;
 +	int option_imtu = 1021;
 +	int option_omtu = 1021;
- 
  	src = btd_adapter_get_address(device_get_adapter(session->device));
  
-@@ -2431,8 +2450,8 @@ static GIOChannel *l2cap_connect(struct avdtp *session)
+ 	if (session->phy)
+@@ -2466,8 +2485,8 @@ static GIOChannel *l2cap_connect(struct
  					BT_IO_OPT_PSM, AVDTP_PSM,
  					BT_IO_OPT_MODE, mode,
  					BT_IO_OPT_SEC_LEVEL, BT_IO_SEC_MEDIUM,
@@ -103,7 +103,7 @@ index 782268c08..220aae570 100644
  					BT_IO_OPT_INVALID);
  	else
  		io = bt_io_connect(avdtp_connect_cb, session,
-@@ -2443,6 +2462,8 @@ static GIOChannel *l2cap_connect(struct avdtp *session)
+@@ -2478,6 +2497,8 @@ static GIOChannel *l2cap_connect(struct
  					BT_IO_OPT_PSM, AVDTP_PSM,
  					BT_IO_OPT_MODE, mode,
  					BT_IO_OPT_SEC_LEVEL, BT_IO_SEC_MEDIUM,
@@ -112,6 +112,3 @@ index 782268c08..220aae570 100644
  					BT_IO_OPT_INVALID);
  	if (!io) {
  		error("%s", err->message);
--- 
-2.17.1
-
