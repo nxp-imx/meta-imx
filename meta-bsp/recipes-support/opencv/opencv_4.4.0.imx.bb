@@ -2,7 +2,7 @@ require opencv_4.4.0.bb
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=19598330421859a6dd353a4318091ac7"
 
-SRCREV_opencv = "e39e6eded2d365a5dc370e1a72717e132166cf07"
+SRCREV_opencv = "310e6486b75b01256afcdc679a34557345905c16"
 SRCREV_contrib = "5fae4082cc493efa5cb7a7486f9e009618a5198b"
 SRCREV_extra = "65796edadce27ed013e3deeedb3c081ff527e4ec"
 SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
