@@ -73,5 +73,5 @@ PACKAGES = "${PN} ${PN}-dev ${PN}-dbg"
 FILES_${PN} = "${libdir} /opt ${systemd_system_unitdir}/imx8-isp.service"
 FILES_${PN}-dbg += "${libdir}/.debug"
 
-INSANE_SKIP_${PN} += "rpaths dev-deps dev-so"
+INSANE_SKIP_${PN} += "rpaths dev-deps dev-so already-stripped"
 INSANE_SKIP_${PN}-dev += "rpaths dev-elf"
