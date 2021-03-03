@@ -1,4 +1,4 @@
-# Copyright 2020 NXP
+# Copyright 2020-2021 NXP
 
 DESCRIPTION = "Basler camera binary drivers"
 LICENSE = "Proprietary"
