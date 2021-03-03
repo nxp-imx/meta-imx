@@ -2,7 +2,7 @@
 
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/${PN}-${PV}/COPYING;md5=cf3f9b8d09bc3926b1004ea71f7a248a"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/${PN}-${PV}/COPYING;md5=a632fefd1c359980434f9389833cab3a"
 
 
 inherit fsl-eula-unpack cmake systemd
