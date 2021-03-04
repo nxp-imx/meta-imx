@@ -1,5 +1,5 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
-# Copyright 2017-2020 NXP
+# Copyright 2017-2021 NXP
 
 DESCRIPTION = "i.MX U-Boot suppporting i.MX reference boards."
 require u-boot-common.inc
@@ -24,7 +24,7 @@ S = "${WORKDIR}/git"
 
 inherit fsl-u-boot-localversion
 
-LOCALVERSION ?= "-5.4.70-2.3.0"
+LOCALVERSION ?= "-5.4.70-2.3.2"
 
 BOOT_TOOLS = "imx-boot-tools"
 
