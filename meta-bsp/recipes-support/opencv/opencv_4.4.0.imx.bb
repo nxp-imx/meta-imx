@@ -1,4 +1,4 @@
-require recipes-support/opencv/opencv_4.5.0.bb
+require recipes-support/opencv/opencv_4.5.1.bb
 
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-openembedded/meta-oe/recipes-support/${PN}/${PN}:"
 
