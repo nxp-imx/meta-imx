@@ -7,7 +7,7 @@ SRCBRANCH = "imx-1.18.x"
 SRC_URI = " \
     ${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "f882dfaeed213e83bda3f80d9229eb578f3fc136"
+SRCREV = "c56bc1b30337cdacd39659dcd2facb63b46b3662"
 
 DEFAULT_PREFERENCE = "-1"
 
