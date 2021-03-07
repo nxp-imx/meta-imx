@@ -1,13 +1,12 @@
-From 65d835c9cc13fab77bc195efafc6b8a5706b8e0b Mon Sep 17 00:00:00 2001
+From 8728678c401ea0fcd030ef9e188aff4a3aaa9e0f Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <and96x@gmail.com>
 Date: Wed, 25 Sep 2019 16:05:17 +0300
-Subject: [PATCH 5/6] Add basic support for Wayland replay on renderdoccmd
+Subject: [PATCH 4/6] Add basic support for Wayland replay on renderdoccmd
 
 This feauture does not support window decorations.
 The Vulkan extension for Wayland will get hardcoded output window dimensions.
 
 Upstream-Status: Inappropriate [i.MX specific]
-
 ---
  renderdoc/driver/vulkan/vk_linux.cpp |   5 +-
  renderdoccmd/CMakeLists.txt          |   4 +
@@ -15,7 +14,7 @@ Upstream-Status: Inappropriate [i.MX specific]
  3 files changed, 254 insertions(+), 6 deletions(-)
 
 diff --git a/renderdoc/driver/vulkan/vk_linux.cpp b/renderdoc/driver/vulkan/vk_linux.cpp
-index 5414569..d0179dd 100644
+index 103ef82..35d52fe 100644
 --- a/renderdoc/driver/vulkan/vk_linux.cpp
 +++ b/renderdoc/driver/vulkan/vk_linux.cpp
 @@ -306,9 +306,8 @@ void VulkanReplay::GetOutputWindowDimensions(uint64_t id, int32_t &w, int32_t &h
@@ -31,7 +30,7 @@ index 5414569..d0179dd 100644
      return;
    }
 diff --git a/renderdoccmd/CMakeLists.txt b/renderdoccmd/CMakeLists.txt
-index 23d71f3..dda38e3 100644
+index da7563e..7736f41 100644
 --- a/renderdoccmd/CMakeLists.txt
 +++ b/renderdoccmd/CMakeLists.txt
 @@ -38,6 +38,10 @@ elseif(UNIX)
@@ -46,7 +45,7 @@ index 23d71f3..dda38e3 100644
      # any shared libraries.
      set(LINKER_FLAGS "-Wl,--no-as-needed")
 diff --git a/renderdoccmd/renderdoccmd_linux.cpp b/renderdoccmd/renderdoccmd_linux.cpp
-index eb98226..a64e2da 100644
+index 45607ec..09d257f 100644
 --- a/renderdoccmd/renderdoccmd_linux.cpp
 +++ b/renderdoccmd/renderdoccmd_linux.cpp
 @@ -38,17 +38,194 @@

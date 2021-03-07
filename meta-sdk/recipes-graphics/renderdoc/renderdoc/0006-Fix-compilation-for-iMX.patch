@@ -1,0 +1,41 @@
+From 5ea08a8683cdb53066290af0bc914ac110a57fc7 Mon Sep 17 00:00:00 2001
+From: Jerome Evillard <jerome.evillard@nxp.com>
+Date: Thu, 3 Dec 2020 19:03:02 +0100
+Subject: [PATCH 6/6] Fix compilation for iMX
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+---
+ renderdoc/api/replay/rdcstr.h              | 1 +
+ renderdoc/driver/vulkan/vk_shaderdebug.cpp | 3 ++-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/renderdoc/api/replay/rdcstr.h b/renderdoc/api/replay/rdcstr.h
+index 54362e9..624e178 100644
+--- a/renderdoc/api/replay/rdcstr.h
++++ b/renderdoc/api/replay/rdcstr.h
+@@ -1034,6 +1034,7 @@ public:
+   rdcinflexiblestr(const rdcliteral &lit)
+   {
+     pointer = (intptr_t)lit.c_str();
++    is_literal = 0;
+     is_literal |= 0x1;
+   }
+   rdcinflexiblestr &operator=(const rdcliteral &in)
+diff --git a/renderdoc/driver/vulkan/vk_shaderdebug.cpp b/renderdoc/driver/vulkan/vk_shaderdebug.cpp
+index 20e94dc..3afc3d7 100644
+--- a/renderdoc/driver/vulkan/vk_shaderdebug.cpp
++++ b/renderdoc/driver/vulkan/vk_shaderdebug.cpp
+@@ -4298,7 +4298,8 @@ ShaderDebugTrace *VulkanReplay::DebugPixel(uint32_t eventId, uint32_t x, uint32_
+   // buffer, we'd still want to spec-constant the address when possible so we're always going to
+   // have some varying value.
+   VkPipeline inputsPipe;
+-  vkr = m_pDriver->vkCreateGraphicsPipelines(dev, NULL, 1, &graphicsInfo, NULL, &inputsPipe);
++  vkr =
++      m_pDriver->vkCreateGraphicsPipelines(dev, VK_NULL_HANDLE, 1, &graphicsInfo, NULL, &inputsPipe);
+   RDCASSERTEQUAL(vkr, VK_SUCCESS);
+ 
+   // make copy of state to draw from
+-- 
+2.7.4
+

@@ -11,11 +11,11 @@ Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
  renderdoc/CMakeLists.txt | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/renderdoc/CMakeLists.txt b/renderdoc/CMakeLists.txt
-index 8e150e1..ae5ae6a 100644
---- a/renderdoc/CMakeLists.txt
-+++ b/renderdoc/CMakeLists.txt
-@@ -551,7 +551,7 @@ if(ANDROID)
+Index: git/renderdoc/CMakeLists.txt
+===================================================================
+--- git.orig/renderdoc/CMakeLists.txt
++++ git/renderdoc/CMakeLists.txt
+@@ -591,7 +591,7 @@ if(ANDROID)
      endif()
  endif()
  
@@ -23,7 +23,4 @@ index 8e150e1..ae5ae6a 100644
 +install (TARGETS renderdoc DESTINATION ${CMAKE_INSTALL_LIBDIR}/${LIB_SUBFOLDER})
  
  # Copy in application API header to include
- install (FILES api/app/renderdoc_app.h DESTINATION include RENAME renderdoc.h)
--- 
-2.7.4
-
+ install (FILES api/app/renderdoc_app.h DESTINATION include RENAME renderdoc_app.h)

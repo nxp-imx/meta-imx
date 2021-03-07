@@ -1,7 +1,7 @@
-From 715557d48f4cbcc849c02f270bcd21efb8b77ca8 Mon Sep 17 00:00:00 2001
+From d5632cf40aca8bf5b55e7c58fd27b28ea701854e Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <and96x@gmail.com>
 Date: Thu, 26 Sep 2019 13:13:48 +0300
-Subject: [PATCH 6/6] Add window functionalities for Wayland replay support
+Subject: [PATCH 5/6] Add window functionalities for Wayland replay support
 
 The following features have been added:
 
@@ -15,7 +15,6 @@ window resize feauture and set a desktop shell for the surface has been
 done yet.
 
 Upstream-Status: Inappropriate [i.MX specific]
-
 ---
  renderdoc/api/replay/control_types.h    |   2 +
  renderdoc/api/replay/renderdoc_replay.h |   5 +-
@@ -26,10 +25,10 @@ Upstream-Status: Inappropriate [i.MX specific]
  6 files changed, 220 insertions(+), 21 deletions(-)
 
 diff --git a/renderdoc/api/replay/control_types.h b/renderdoc/api/replay/control_types.h
-index 88e3890..8247ff7 100644
+index 8338c7e..ed99642 100644
 --- a/renderdoc/api/replay/control_types.h
 +++ b/renderdoc/api/replay/control_types.h
-@@ -850,6 +850,8 @@ struct WindowingData
+@@ -903,6 +903,8 @@ struct WindowingData
      {
        wl_display *display;
        wl_surface *window;
@@ -39,10 +38,10 @@ index 88e3890..8247ff7 100644
  
      struct
 diff --git a/renderdoc/api/replay/renderdoc_replay.h b/renderdoc/api/replay/renderdoc_replay.h
-index 43b3fe0..c5b6ebc 100644
+index 43bb9f8..347cb70 100644
 --- a/renderdoc/api/replay/renderdoc_replay.h
 +++ b/renderdoc/api/replay/renderdoc_replay.h
-@@ -143,13 +143,16 @@ DOCUMENT(R"(Create a :class:`WindowingData` for an Wayland ``wl_surface`` handle
+@@ -145,13 +145,16 @@ DOCUMENT(R"(Create a :class:`WindowingData` for an Wayland ``wl_surface`` handle
  :return: A :class:`WindowingData` corresponding to the given window.
  :rtype: WindowingData
  )");
@@ -61,7 +60,7 @@ index 43b3fe0..c5b6ebc 100644
    return ret;
  }
 diff --git a/renderdoc/driver/vulkan/vk_linux.cpp b/renderdoc/driver/vulkan/vk_linux.cpp
-index d0179dd..adb3aaa 100644
+index 35d52fe..7815b54 100644
 --- a/renderdoc/driver/vulkan/vk_linux.cpp
 +++ b/renderdoc/driver/vulkan/vk_linux.cpp
 @@ -194,6 +194,8 @@ void VulkanReplay::OutputWindow::SetWindowHandle(WindowingData window)
@@ -85,7 +84,7 @@ index d0179dd..adb3aaa 100644
      return;
    }
 diff --git a/renderdoc/driver/vulkan/vk_replay.h b/renderdoc/driver/vulkan/vk_replay.h
-index 60b0df7..9b6aa4b 100644
+index 148b0d9..058f03a 100644
 --- a/renderdoc/driver/vulkan/vk_replay.h
 +++ b/renderdoc/driver/vulkan/vk_replay.h
 @@ -87,6 +87,8 @@
@@ -98,7 +97,7 @@ index 60b0df7..9b6aa4b 100644
  
  #else
 diff --git a/renderdoccmd/CMakeLists.txt b/renderdoccmd/CMakeLists.txt
-index dda38e3..d3691b1 100644
+index 7736f41..e422702 100644
 --- a/renderdoccmd/CMakeLists.txt
 +++ b/renderdoccmd/CMakeLists.txt
 @@ -40,6 +40,7 @@ elseif(UNIX)
@@ -110,7 +109,7 @@ index dda38e3..d3691b1 100644
  
      # Make sure that for the target executable we don't throw away
 diff --git a/renderdoccmd/renderdoccmd_linux.cpp b/renderdoccmd/renderdoccmd_linux.cpp
-index a64e2da..89d10bc 100644
+index 09d257f..0c80458 100644
 --- a/renderdoccmd/renderdoccmd_linux.cpp
 +++ b/renderdoccmd/renderdoccmd_linux.cpp
 @@ -40,9 +40,11 @@
