@@ -8,8 +8,8 @@ inherit fsl-eula-unpack
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "dc0cccbe80d8cd10d105bec006133f44"
-SRC_URI[sha256sum] = "8a33e7dd7222d54eaf6bb5dd3648fc4675bcecf7ae6646f02697fd628a4148ea"
+SRC_URI[md5sum] = "a35a08bbb23c07d96a0fcac155c7f511"
+SRC_URI[sha256sum] = "dfab0c16804749f4205410f70a651d4d22d6caa000af1de8fba95e8f014c3c86"
 
 DEPENDS += "imx-vpu-hantro"
 DEPENDS_append_mx8mp = " imx-vpu-hantro-vc"
