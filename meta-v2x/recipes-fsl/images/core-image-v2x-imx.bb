@@ -8,15 +8,7 @@ IMAGE_FEATURES += 	" ssh-server-openssh \
 			  debug-tweaks \
 			"
 
-IMAGE_INSTALL_append =	"  imx-seco-libs \
-			   ecdsa-lib-imx \
-			   v2xsehsm \
-			   vtest \
-			   util-linux-fdisk \
-			   util-linux-rtcwake \
-			   e2fsprogs-resize2fs \
-			   lttng-tools \
-			"
+IMAGE_INSTALL_append =	" packagegroup-imx-v2x"
 
 # Add 128 MB in root file system
 IMAGE_ROOTFS_EXTRA_SPACE = "131072"

@@ -17,13 +17,15 @@ S = "${WORKDIR}/git"
 
 inherit systemd cmake
 
+PACKAGECONFIG ?= ""
+PACKAGECONFIG[lttng] = "-DLTTNG_LIB=${STAGING_DIR_TARGET}${libdir}/liblttng-ust.so,,lttng-ust"
+
 SYSTEMD_SERVICE_${PN} = "seco_nvm_daemon.service"
 
 EXTRA_OECMAKE += " \
     -DSECO_LIBS_DIR=${STAGING_DIR_TARGET}${libdir} \
     -DZLIB_DIR=${STAGING_DIR_TARGET}${libdir} \
     -DECC_SRC=${STAGING_DIR_TARGET}${libdir} \
-    -DLTTNG_LIB=${STAGING_DIR_TARGET}${libdir}/liblttng-ust.so \
 "
 
 do_install_append() {

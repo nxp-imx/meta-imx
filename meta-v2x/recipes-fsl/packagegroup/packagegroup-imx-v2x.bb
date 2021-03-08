@@ -17,7 +17,6 @@ RDEPENDS_${PN} = " \
     util-linux-fdisk \
     util-linux-rtcwake \
     e2fsprogs-resize2fs \
-    lttng-tools \
 "
 
 COMPATIBLE_MACHINE = "(mx8dxl)"
