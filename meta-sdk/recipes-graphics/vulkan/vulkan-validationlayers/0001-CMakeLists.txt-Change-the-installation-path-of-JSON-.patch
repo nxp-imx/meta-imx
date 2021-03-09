@@ -12,11 +12,11 @@ Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
  layers/CMakeLists.txt | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/layers/CMakeLists.txt b/layers/CMakeLists.txt
-index 5541816..579c8b8 100644
---- a/layers/CMakeLists.txt
-+++ b/layers/CMakeLists.txt
-@@ -98,7 +98,7 @@ if(BUILD_LAYERS)
+Index: git/layers/CMakeLists.txt
+===================================================================
+--- git.orig/layers/CMakeLists.txt
++++ git/layers/CMakeLists.txt
+@@ -93,7 +93,7 @@ if(BUILD_LAYERS)
      elseif(UNIX) # UNIX includes APPLE
          foreach(TARGET_NAME ${TARGET_NAMES})
              install(FILES ${CMAKE_CURRENT_BINARY_DIR}/staging-json/${TARGET_NAME}.json
@@ -25,8 +25,8 @@ index 5541816..579c8b8 100644
          endforeach()
      endif()
  endif()
-@@ -256,7 +256,7 @@ if(BUILD_LAYERS)
-                 -DVK_VERSION=1.1.${vk_header_version})
+@@ -270,7 +270,7 @@ if(BUILD_LAYERS)
+                 -DVK_VERSION=1.2.${vk_header_version})
              # If this json file is not a metalayer, get the needed properties from that target
              if(TARGET ${TARGET_NAME})
 -                set(INSTALL_DEFINES ${INSTALL_DEFINES} -DRELATIVE_LAYER_BINARY="$<TARGET_FILE_NAME:${TARGET_NAME}>")
@@ -34,6 +34,3 @@ index 5541816..579c8b8 100644
              endif()
              add_custom_target(${TARGET_NAME}-staging-json ALL
                                COMMAND ${CMAKE_COMMAND} ${INSTALL_DEFINES} -P "${CMAKE_CURRENT_BINARY_DIR}/generator.cmake")
--- 
-2.7.4
-
