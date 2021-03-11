@@ -51,7 +51,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     imx-sc-firmware-1.7.1.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -244,8 +244,8 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.10.0.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Package:                     isp-imx-4.2.2.11.0.bin
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary and source
@@ -255,8 +255,8 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (proprietary)
 
 --------------------------------------------
 
-Package:                     basler-camera-4.2.2.9.0.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Package:                     basler-camera-4.2.2.10.0.bin
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -1113,6 +1113,15 @@ Origin:                      NXP (BSD-3-clause)
                              bzip2 (BSD-4-clause) - https://github.com/enthought/bzip2-1.0.6/tree/288acf97a15d558f96c24c89f578b724d6e06b0c
                              Android Open Source Project (Apache-2.0) [sparse_format.h] - https://developer.android.com/
 
+--------------------------------------------
+
+Package:                     bcu.git
+Outgoing License:            BSD 3-Clause 
+License File:                LICENSE
+Package Category:            Tools
+Type of Content:             source
+Description and comments:    NXP I.MX Chip image deploy tools. Use bcu.
+Release Location:            https://github.com/NXPmicro/bcu -b master
 --------------------------------------------
 PATCHES IN META_FSL_BSP_RELEASE
 --------------------------------------------
