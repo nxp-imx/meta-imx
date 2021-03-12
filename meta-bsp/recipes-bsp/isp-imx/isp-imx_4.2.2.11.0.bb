@@ -49,7 +49,7 @@ do_install() {
     cp -r ${WORKDIR}/build/generated/release/bin/*2775* ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/bin/isp_media_server ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/bin/vvext ${D}/opt/imx8-isp/bin
-    cp -r ${WORKDIR}/${PN}-${PV}/mediacontrol/case/ ${D}/opt/imx8-isp/bin
+    cp -r ${WORKDIR}/${PN}-${PV}/dewarp/dewarp_config/ ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/lib/*.so* ${D}/${libdir}
     cp -r ${WORKDIR}/build/generated/release/include/* ${D}/${includedir}
 
