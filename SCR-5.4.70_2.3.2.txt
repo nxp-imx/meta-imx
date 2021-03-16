@@ -50,7 +50,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     imx-sc-firmware-1.7.1.bin
+Package:                     imx-sc-firmware-1.7.2.bin
 Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
