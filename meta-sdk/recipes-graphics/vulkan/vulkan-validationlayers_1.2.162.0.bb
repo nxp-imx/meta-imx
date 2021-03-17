@@ -8,9 +8,9 @@ SECTION = "libs"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7dbefed23242760aa3475ee42801c5ac"
-SRC_URI = "git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;branch=sdk-1.2.135"
+SRC_URI = "git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;branch=sdk-1.2.162"
 
-SRCREV = "72347cb6e962c8c7a3e8d964649d8ff22ff53f0c"
+SRCREV = "17d8e593663e69e19ddf04aa3ddd4387e995e74f"
 
 S = "${WORKDIR}/git"
 
@@ -19,10 +19,13 @@ REQUIRED_DISTRO_FEATURES = "vulkan"
 inherit cmake features_check
 ANY_OF_DISTRO_FEATURES = "x11 wayland"
 
-DEPENDS = "vulkan-headers glslang spirv-tools"
+DEPENDS = "vulkan-headers glslang spirv-tools spirv-headers"
 
 EXTRA_OECMAKE = " \
     -DGLSLANG_INSTALL_DIR=${STAGING_DIR_HOST}/usr \
+    -DSPIRV_HEADERS_INSTALL_DIR=${STAGING_DIR_HOST}/usr \
+    -DSPIRV_TOOLS_LIB=${STAGING_DIR_HOST}/usr \
+    -DSPIRV_TOOLS_OPT_LIB=${STAGING_DIR_HOST}/usr \
 "
 
 # must choose x11 or wayland or both
