@@ -46,7 +46,6 @@ RDEPENDS_${PN} += " \
     pciutils \
     procps \
     ptpd \
-    python-pip \
     python3-pip \
     udev-extraconf \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
