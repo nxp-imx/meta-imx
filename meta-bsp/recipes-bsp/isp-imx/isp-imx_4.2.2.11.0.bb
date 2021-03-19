@@ -4,7 +4,7 @@ DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/${PN}-${PV}/COPYING;md5=a632fefd1c359980434f9389833cab3a"
 
-inherit fsl-eula-unpack cmake systemd
+inherit fsl-eula-unpack cmake systemd use-imx-headers
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "2bf3a2327d79807778c1212a138bd2052b5ceb9270c744f3aeac071fd4
 
 S = "${WORKDIR}/${PN}-${PV}/appshell"
 
-DEPENDS = "python libdrm"
+DEPENDS = "python libdrm virtual/libg2d"
 
 OECMAKE_GENERATOR = "Unix Makefiles"
 
@@ -33,6 +33,7 @@ EXTRA_OECMAKE += " \
     -DENABLE_IRQ=1 \
     -DPARTITION_BUILD=0 \
     -D3A_SRC_BUILD=0 \
+    -DIMX_G2D=ON \
     -Wno-dev \
 "
 
