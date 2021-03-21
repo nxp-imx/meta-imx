@@ -1,4 +1,4 @@
-# Copyright 2020 NXP
+# Copyright 2020-2021 NXP
 
 DESCRIPTION = "Kernel loadable module for ISP"
 LICENSE = "GPLv2"
