@@ -8,8 +8,8 @@ inherit fsl-eula-unpack cmake systemd use-imx-headers
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "d0a53d5f7ed9a75c320dfd5f882cb623"
-SRC_URI[sha256sum] = "1785aa6c35d4addc43595b8eacd8483fd6674ac5715a2a03487b273734fd51f7"
+SRC_URI[md5sum] = "98fcb6082b090c0287da1ed7ce9ce92b"
+SRC_URI[sha256sum] = "cda8225cbfcdfbebbad1c6148bd16252f36f1d96cd4b61ddf3b0b0c52fa73594"
 
 S = "${WORKDIR}/${PN}-${PV}/appshell"
 
