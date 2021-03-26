@@ -9,4 +9,4 @@ SRC_URI_append_imxgpu = " \
 "
 
 PACKAGECONFIG_append_mx8 = " glamor"
-PACKAGECONFIG_remove_mx8 = "dri dri2 glx"
+PACKAGECONFIG_remove_imxdrm = "dri dri2 glx"
