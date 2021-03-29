@@ -6,7 +6,7 @@ Please see the release notes for the quality statement for each baord.
 
 The following boards were tested in this release.
 
-   * NXP i.MX 8MQuad EVK (imx8mqevk)
+   * NXP i.MX 8MQuad EVK (imx8mq-evk)
    * NXP i.MX 8MMini EVK (imx8mmevk)
    * NXP i.MX 8MNano EVK (imx8mnevk)
    * NXP i.MX 8MPlus EVK (imx8mpevk)
