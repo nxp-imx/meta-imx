@@ -24,15 +24,16 @@ EXTRA_OECMAKE = " \
     -DSECO_ROOT=${STAGING_INCDIR} \
     -DTA_DEV_KIT_ROOT=${OPTEE_OS_TA_EXPORT_DIR} \
     -DTEEC_ROOT=${STAGING_DIR_HOST} \
-    -DBUILD_TEST=ON \
     -DJSONC_ROOT="${COMPONENTS_DIR}/${TARGET_ARCH}/json-c/usr" \
 "
+OECMAKE_TARGET_COMPILE += "build_tests"
+OECMAKE_TARGET_INSTALL += "install_tests"
 
 PACKAGES =+ "${PN}-tests"
 
 FILES_${PN} += "${base_libdir}/optee_armtz/*"
 
-FILES_${PN}-tests = "${bindir}/* ${datadir}/${BPN}/tests/*"
+FILES_${PN}-tests = "${bindir}/* ${datadir}/${BPN}/*"
 
 RDEPENDS_${PN}-tests += "bash cmake"
 
