@@ -16,7 +16,7 @@ SRCBRANCH = "imx-1.18.x"
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "8b8ad4c5244ec316d694eaf3bb4fbf03098fb571"
+SRCREV = "227af57d23cb6b3564fc94446ab2c9fe8c8cff22"
 
 S = "${WORKDIR}/git"
 
