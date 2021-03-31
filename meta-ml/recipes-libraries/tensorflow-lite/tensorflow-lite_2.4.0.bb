@@ -20,6 +20,8 @@ S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = "-DTFLITE_ENABLE_XNNPACK=on -DTFLITE_ENABLE_RUY=on -DTFLITE_ENABLE_NNAPI=on  ${S}/tensorflow/lite/"
 
+CXXFLAGS += "-fPIC"
+
 do_configure_prepend(){
     export HTTP_PROXY=${http_proxy}
     export HTTPS_PROXY=${https_proxy}
