@@ -1,0 +1,60 @@
+From 6d590a9b7717d6a22ae9dff41d4c52fe042c053c Mon Sep 17 00:00:00 2001
+From: Michael Whitfield <michael.whitfield@nxp.com>
+Date: Fri, 28 Feb 2020 10:35:45 +0100
+Subject: [PATCH] Add definition of v2x_kernel_event and V2x_LOG_EVENT for
+ kernel tracing
+
+---
+ include/trace/events/v2x.h | 43 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+ create mode 100644 include/trace/events/v2x.h
+
+diff --git a/include/trace/events/v2x.h b/include/trace/events/v2x.h
+new file mode 100644
+index 000000000000..d3e0af9f445e
+--- /dev/null
++++ b/include/trace/events/v2x.h
+@@ -0,0 +1,43 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#undef TRACE_SYSTEM
++#define TRACE_SYSTEM v2x
++
++#if !defined(_TRACE_V2X_H) || defined(TRACE_HEADER_MULTI_READ)
++#define _TRACE_V2X_H
++
++#include <linux/tracepoint.h>
++
++#define MAX_V2X_FUNC_NAME_SIZE	32
++#define MAX_V2X_LOG_MSG_SIZE	32
++
++#define V2X_LOG_EVENT(logmessage) \
++		trace_v2x_kernel_event(__FUNCTION__, __LINE__, logmessage)
++
++
++TRACE_EVENT(v2x_kernel_event,
++
++	TP_PROTO(char *funcname, int linenum, char *message),
++
++	TP_ARGS(funcname, linenum, message),
++
++	TP_STRUCT__entry(
++		__array(char, funcname, MAX_V2X_FUNC_NAME_SIZE)
++		__array(char, message, MAX_V2X_LOG_MSG_SIZE)
++		__field(int, linenum)
++	),
++
++	TP_fast_assign(
++		memcpy(__entry->funcname, funcname, MAX_V2X_FUNC_NAME_SIZE - 1);
++		__entry->funcname[MAX_V2X_FUNC_NAME_SIZE - 1] = 0;
++		memcpy(__entry->message, message, MAX_V2X_LOG_MSG_SIZE - 1);
++		__entry->message[MAX_V2X_LOG_MSG_SIZE - 1] = 0;
++		__entry->linenum = linenum;
++	),
++
++	TP_printk("%s:%d %s", __entry->funcname, __entry->linenum, __entry->message)
++);
++
++#endif /* _TRACE_V2X_H */
++
++/* This part must be outside protection */
++#include <trace/define_trace.h>

@@ -1,0 +1,28 @@
+From f115412e4236f82cb2336cae2be1c620fcb3afd4 Mon Sep 17 00:00:00 2001
+From: Michael Whitfield <michael.whitfield@nxp.com>
+Date: Wed, 26 Feb 2020 17:08:32 +0100
+Subject: [PATCH] Add FTRACE support
+
+---
+ arch/arm64/configs/imx_v8_defconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/configs/imx_v8_defconfig b/arch/arm64/configs/imx_v8_defconfig
+index 03e994fba91b..7519630dd47e 100644
+--- a/arch/arm64/configs/imx_v8_defconfig
++++ b/arch/arm64/configs/imx_v8_defconfig
+@@ -810,12 +810,12 @@ CONFIG_INDIRECT_PIO=y
+ CONFIG_CMA_SIZE_MBYTES=320
+ CONFIG_PRINTK_TIME=y
+ CONFIG_DEBUG_INFO=y
+-CONFIG_DEBUG_FS=y
+ CONFIG_MAGIC_SYSRQ=y
+ CONFIG_DEBUG_KERNEL=y
+ # CONFIG_SCHED_DEBUG is not set
+ # CONFIG_DEBUG_PREEMPT is not set
+-# CONFIG_FTRACE is not set
++CONFIG_FUNCTION_TRACER=y
++CONFIG_FTRACE_SYSCALLS=y
+ CONFIG_MEMTEST=y
+ CONFIG_CORESIGHT=y
+ CONFIG_CORESIGHT_LINK_AND_SINK_TMC=y
