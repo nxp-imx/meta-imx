@@ -12,6 +12,7 @@ SRCBRANCH = "master"
 SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
 SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
         file://0001-Makefile-Fix-LIBDIR-for-multilib.patch \
+        file://0002-Makefile-Fix-install-to-clear-host-user-contaminated.patch \
 "
 SRCREV = "8f88b3b2e63a14b6e3729d16cdf254946104a399"
 
