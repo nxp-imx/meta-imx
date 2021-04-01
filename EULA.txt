@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v19 February 2021
+LA_OPT_NXP_Software_License v22 April 2021
 
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
@@ -95,6 +95,14 @@ in combination with a NXP Product.
 
 You may not distribute or sublicense the Licensed Software to others under the
 license granted in this Section 2.2.
+
+You may demonstrate the Licensed Software to your direct costumers as part of
+an Authorized System so long as such demonstration is directly controlled by
+you and without prior approval by NXP; however, to all other third parties only
+if NXP has provided its advance, written approval (e.g. email approval) of your
+demonstrating the Licensed Software to specified third parties or at specified
+event(s).  You may not leave the Licensed Software with a direct customer or
+any other third party at any time.
 
 2.3.        Additional Distribution License.  If expressly authorized in the
 Software Content Register, subject to the terms and conditions of this
@@ -397,13 +405,14 @@ examination or audit.
 Agreement will be made in writing, and will be effective when received at the
 following addresses:
 
-          NXP:      NXP B.V.
-                    High Tech Campus 60
-                    5656 AG Eindhoven
-                    The Netherlands
-                    ATTN: Legal Department
+          NXP:          NXP B.V.
+                        High Tech Campus 60
+                        5656 AG Eindhoven
+                        The Netherlands
 
-          You:      The address provided at registration will be used.
+                        ATTN: Legal Department
+
+          You:          The address provided at registration will be used.
 
 23.        RELATIONSHIP OF THE PARTIES.     The parties are independent
 contractors. Nothing in this Agreement will be construed to create any
@@ -441,8 +450,10 @@ Amazon: Use of the Amazon software constitutes your acceptance of the terms of
 the Amazon Program Materials License Agreement (including the AVS Component
 Schedule, if applicable), located at
 https://developer.amazon.com/support/legal/pml.  All Amazon software is hereby
-designated "Amazon confidential".  Amazon is a third-party beneficiary to this
-Agreement with respect to the Amazon software.
+designated "Amazon confidential".  With the exception of the binary library of
+the Amazon Wake Word Engine for “Alexa”, all Amazon software is also hereby
+designated as “Restricted Program Materials”. Amazon is a third-party
+beneficiary to this Agreement with respect to the Amazon software.
 
 Amazon Web Services, Inc.: AWS is an intended third-party beneficiary to this
 Agreement with respect to the Greengrass software. If you have an account with
@@ -470,6 +481,15 @@ be obtained directly from Atheros.
 
 ATI (AMD): Distribution of ATI software must be a part of, or embedded within,
 Authorized Systems that include a ATI graphics processor core.
+
+Au-Zone Technologies: eIQ Portal, Model Tool, DeepViewRT and ModelRunner are
+distributed by NXP under license from Au-Zone Technologies.  Your use of the
+Licensed Software, examples and related documentation is subject to the
+following:
+(1)          Use of Software is limited to Authorized System only
+(2)          In no event may Licensee Sublicense OR distribute the Software
+(3)          AU-ZONE TECHNOLOGIES SHALL NOT BE LIABLE FOR USE OF LICENSED
+SOFTWARE IN CRITICAL APPLICATIONS BY LICENSEE
 
 Broadcom Corporation: Your use of Broadcom Corporation software is restricted
 to Authorized Systems that incorporate a compatible integrated circuit device
