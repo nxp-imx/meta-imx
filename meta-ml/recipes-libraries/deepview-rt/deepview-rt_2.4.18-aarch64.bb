@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a632fefd1c359980434f9389833cab3a"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "1462e6d79c9c6dc80c2018ce77e30649"
-SRC_URI[sha256sum] = "6065720bbbc83e1f5a5cb739905ade5d8fac6708f6f6f0cb2ede985f68f704da"
+SRC_URI[md5sum] = "2bcb15d55f53ab6acae5e416f64e8a27"
+SRC_URI[sha256sum] = "b8b93dad86afca8c6fee34b8bad25c0f393bdbed4e4ea3d8d2cfc3e12040ac0c"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
