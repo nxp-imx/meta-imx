@@ -14,6 +14,7 @@ ML_PKGS = " \
     ml-security \
     pytorch \
     torchvision \
+    deepview-rt-examples \
 "
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
