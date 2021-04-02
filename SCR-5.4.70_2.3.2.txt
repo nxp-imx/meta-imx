@@ -51,7 +51,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     imx-sc-firmware-1.7.2.bin
-Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -63,7 +63,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     firmware-imx-8.10.1.bin
-Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -268,7 +268,7 @@ Origin:                      Basler AG (proprietary)
 --------------------------------------------
 
 Package:                     imx-seco-3.7.7.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -279,7 +279,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     imx-seco-libs.git
-Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
@@ -403,6 +403,24 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
+Package:                     deepview-rt-2.4.18.bin
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - No distribution license granted - Section 2.2 applies 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             binary
+Description and comments:    Machine Learning Au-Zone DeepViewRT and ModelRunner for i.MX8 Application Processors
+Release Location:            Mirror
+--------------------------------------------
+
+Package:                     deepview-rt-examples-2.4.18.bin
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - No distribution license granted - Section 2.2 applies 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             binary
+Description and comments:    Machine Learning Au-Zone DeepViewRT example code
+Release Location:            Mirror
+--------------------------------------------
+
 Package:                     ml-security-1.0.3.bin
 Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
@@ -449,7 +467,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gpu-viv-6.4.3.p1.4-aarch32.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -467,7 +485,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     imx-gpu-viv-6.4.3.p1.4-aarch64.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -596,7 +614,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gpu-g2d-6.4.3.p1.4-arm.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -607,7 +625,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     imx-gpu-g2d-6.4.3.p1.4-aarch64.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -618,7 +636,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p1.4-aarch64-fb.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -629,7 +647,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p1.4-aarch64-wayland.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -640,7 +658,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p1.4-aarch64-x11.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -651,7 +669,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p1.4-arm-fb.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -662,7 +680,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p1.4-arm-wayland.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -673,7 +691,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p1.4-arm-x11.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
