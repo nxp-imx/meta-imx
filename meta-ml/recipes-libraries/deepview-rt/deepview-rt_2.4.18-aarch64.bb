@@ -5,18 +5,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3c3fe2b904fd694f28d2f646ee16dddb"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "2bcb15d55f53ab6acae5e416f64e8a27"
-SRC_URI[sha256sum] = "b8b93dad86afca8c6fee34b8bad25c0f393bdbed4e4ea3d8d2cfc3e12040ac0c"
+SRC_URI[md5sum] = "7f403cd8c0fe821aebd1be7e36edae38"
+SRC_URI[sha256sum] = "7b7aec9cae427301c61861a27465ec80dfb3a34f1aedc56c921b5e6dbaeee73d"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
 inherit fsl-eula-unpack python3native
 
 DEPENDS = "python3 python3-pip-native opencv"
-RDEPENDS_MX8_mx8   = "nn-imx"
-RDEPENDS_MX8_mx8mm = ""
-RDEPENDS_${PN} += "armnn ${RDEPENDS_MX8} python3-numpy python3-pathlib2 python3-cffi python3-pycparser"
-RDEPENDS_${PN}-dev += "armnn ${RDEPENDS_MX8} onnxruntime"
+RDEPENDS_${PN} += "armnn nn-imx python3-numpy python3-pathlib2 python3-cffi python3-pycparser"
+RDEPENDS_${PN}-dev += "armnn nn-imx onnxruntime"
 
 do_install () {
     install -d ${D}${bindir}
@@ -39,13 +37,16 @@ do_install () {
 FILES_${PN} += " \
     ${libdir}/* \
 "
+FILES_SOLIBSDEV = ""
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 
-INSANE_SKIP_${PN} += "dev-deps ldflags"
+INSANE_SKIP_${PN} += "dev-so dev-deps ldflags"
 
 BBCLASSEXTEND = "nativesdk"
 
 COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE_mx8mm = "(^$)"
+COMPATIBLE_MACHINE_mx8mnlite = "(^$)"
