@@ -16,7 +16,8 @@ ML_PKGS = " \
     torchvision \
     deepview-rt \
 "
-
+ML_PKGS_remove_mx8mm = "deepview-rt"
+ML_PKGS_remove_mx8mnlite = "deepview-rt"
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
 "
