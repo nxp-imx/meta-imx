@@ -13,7 +13,7 @@ ML_PKGS = " \
     ml-security \
     pytorch \
     torchvision \
-    deepview-rt-examples \
+    deepview-rt \
 "
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
