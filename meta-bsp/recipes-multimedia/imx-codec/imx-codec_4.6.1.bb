@@ -6,7 +6,7 @@ require imx-codec.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=a632fefd1c359980434f9389833cab3a"
 
-SRC_URI[md5sum] = "3ccb243366d322cd122571b79dffbc17"
-SRC_URI[sha256sum] = "dcae6e24a4916dc50c8c61776943c65b4ec851f218ea89192686eb8161cf0e30"
+SRC_URI[md5sum] = "4886be243a592f8e9d037bda8af481f0"
+SRC_URI[sha256sum] = "7bee89f4410722e76202e5113389bc06f113e49f6eb797aefc2eae2d0c866ccc"
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
