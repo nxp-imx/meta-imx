@@ -4,7 +4,6 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3c3fe2b904fd694f28d2f646ee16dddb"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
-
 SRC_URI[md5sum] = "7f403cd8c0fe821aebd1be7e36edae38"
 SRC_URI[sha256sum] = "7b7aec9cae427301c61861a27465ec80dfb3a34f1aedc56c921b5e6dbaeee73d"
 
