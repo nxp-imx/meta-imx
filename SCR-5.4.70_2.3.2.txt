@@ -245,7 +245,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 --------------------------------------------
 
 Package:                     isp-imx-4.2.2.11.0.bin
-Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary and source
@@ -256,7 +256,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (proprietary)
 --------------------------------------------
 
 Package:                     basler-camera-4.2.2.11.0.bin
-Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -458,7 +458,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gpu-viv-6.4.3.p1.4-aarch32.bin
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -476,7 +476,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     imx-gpu-viv-6.4.3.p1.4-aarch64.bin
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -548,7 +548,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     imx-dpu-g2d-1.8.14.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -605,7 +605,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gpu-g2d-6.4.3.p1.4-arm.bin
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -616,7 +616,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     imx-gpu-g2d-6.4.3.p1.4-aarch64.bin
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
