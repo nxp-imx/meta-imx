@@ -1,4 +1,4 @@
-# Copyright 2019-2020 NXP
+# Copyright 2019-2021 NXP
 
 DESCRIPTION = "Hardening Library for Machine Learning Security"
 SECTION = "security"
