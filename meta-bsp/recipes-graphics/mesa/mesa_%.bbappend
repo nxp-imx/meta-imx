@@ -1,2 +1,3 @@
-PACKAGECONFIG_APPEND_NXPBSP_remove_imxgpu_imxdrm = "osmesa"
-DRIDRIVERS_NXPBSP_remove_imxgpu_imxdrm           = "swrast"
+PACKAGECONFIG_REMOVE_NXPBSP_imxgpu_imxdrm = "dri"
+PACKAGECONFIG_APPEND_NXPBSP_imxgpu_imxdrm = ""
+DRIDRIVERS_NXPBSP_imxgpu_imxdrm           = ""
