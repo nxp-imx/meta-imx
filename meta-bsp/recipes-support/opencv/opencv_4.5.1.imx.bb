@@ -4,7 +4,7 @@ FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-openembedded/meta-oe/recipes-
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV_opencv = "c21c6cb666578ba5a231017734927ec915fbbfc9"
+SRCREV_opencv = "c21c6cb666578ba5a231017734927ec915fbbfc9" 
 SRCREV_contrib = "b91a781cbc1285d441aa682926d93d8c23678b0b"
 SRCREV_extra = "65796edadce27ed013e3deeedb3c081ff527e4ec"
 SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
