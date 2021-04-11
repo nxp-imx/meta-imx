@@ -1,7 +1,5 @@
 require recipes-support/opencv/opencv_4.5.1.bb
 
-FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/meta-openembedded/meta-oe/recipes-support/${PN}/${PN}:"
-
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRCREV_opencv = "c21c6cb666578ba5a231017734927ec915fbbfc9" 
@@ -13,7 +11,6 @@ SRCREV_FORMAT_append = "_extra"
 
 SRC_URI_remove = " \
     git://github.com/opencv/opencv.git;name=opencv \
-    file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
 "
 OPENCV_SRC ?= "git://source.codeaurora.org/external/imx/opencv-imx.git;protocol=https"
 SRCBRANCH = "4.5.1_imx"
