@@ -1,8 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI_append = " file://0002-chromium-fix-build-after-y2038-changes-in-glibc.patch \
-                   file://Fix-build-breaks-on-non-gbm-machines.patch \
-                   file://Remove-use-of-register-r7.patch \
 "
 
 REQUIRED_DISTRO_FEATURES = "wayland"
