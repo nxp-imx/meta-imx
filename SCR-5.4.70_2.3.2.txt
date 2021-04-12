@@ -279,7 +279,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     imx-seco-libs.git
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
@@ -441,6 +441,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP i.MX keyctl tool to manage CAAM Keys
 Release Location:            https://source.codeaurora.org/external/imx/key_caam -b rel_imx_5.4.70_2.3.2
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 Graphics Packages
 --------------------------------------------
@@ -548,7 +550,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     imx-dpu-g2d-1.8.14.bin
-Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v19 Febreuary 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -853,7 +855,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     imx-vpuwrap.git
-Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
@@ -1082,6 +1084,9 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensors and Dynamic neural networks in Python with strong GPU acceleration
 Release Location:            https://github.com/NXPmicro/pytorch-release -b rel_imx_5.4.70_2.3.2
+Origin:                      NXP (BSD-3-Clause)
+                             pytorch (BSD-3-clause) - https://github.com/pytorch/pytorch
+
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
@@ -1131,206 +1136,6 @@ Package Category:            Tools
 Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use bcu.
 Release Location:            https://github.com/NXPmicro/bcu -b master
---------------------------------------------
-PATCHES IN META_FSL_BSP_RELEASE
---------------------------------------------
-
-Patches for:               systemd
-Source Location:           https://github.com/systemd/systemd-bootchart.git
-Patch Location:            meta-bsp/recipes-core/systemd/systemd
-Outgoing License:          GPL-2.0
-License File:              LICENSE.GPL2
-Package Category:          BSP
-Description and comments:  System and Service Manager
-Origin of patches:         NXP (GPL-2.0)
-
---------------------------------------------
-
-Patches for:               bluez5
-Source Location:           http://www.kernel.org/pub/linux/bluetooth/bluez-5.48.tar.xz
-Patch Location:            meta-bsp/recipes-connectivity/bluez5
-Outgoing License:          GPL-2.0+
-License File:              COPYING
-Package Category:          Connectivity
-Description and comments:  Bluetooth protocol stack for Linux
-Origin of patches:         NXP (GPL-2.0+)
-
---------------------------------------------
-
-Patches for:               connman
-Source Location:           https://git.kernel.org/pub/scm/network/connman/connman.git/
-Patch Location:            meta-bsp/recipes-connectivity/connman/connman
-Outgoing License:          GPL-2.0
-License File:              COPYING
-Package Category:          Connectivity
-Description and comments:  Connection Manager
-Origin of patches:         NXP (GPL-2.0)
-                           WindRiver (GPL-2.0) - https://www.windriver.com/
-
---------------------------------------------
-
-Patches for:               gstreamer1.0-libav
-Source Location:           http://gstreamer.freedesktop.org/src/gst-libav
-Patch Location:            meta-bsp/recipes-multimedia/gstreamer/
-Outgoing License:          LGPL-2.0
-License File:              COPYING
-Package Category:          Multimedia
-Description and comments:  A plugin with a set of elements using the Libav library codecs
-Origin of patches:         Mathieu Duponchelle (LGPL-2.0)
-
---------------------------------------------
-
-Patches for:               alsa-libs
-Source Location:           ftp://ftp.alsa-project.org/pub/libs
-Patch Location:            meta-bsp/recipes-multimedia/alsa
-Outgoing License:          LGPL-2.0
-License File:              COPYING
-Package Category:          Multimedia
-Description and comments:  User space library to simplify application programming and provide higher level functionality
-Origin of patches:         NXP (LGPL-2.0)
-
---------------------------------------------
-
-Patches for:               alsa-utils
-Source Location:           ftp://ftp.alsa-project.org/pub/utils
-Patch Location:            meta-bsp/recipes-multimedia/alsa
-Outgoing License:          GPL-2.0
-License File:              COPYING
-Package Category:          Multimedia
-Description and comments:  Utilities to control sound cards
-Origin of patches:         alsa-utils contributors (GPL-2.0)
-
---------------------------------------------
-
-Patches for:               pulseaudio
-Source Location:           http://freedesktop.org/software/pulseaudio/releases/
-Patch Location:            meta-bsp/recipes-multimedia/pulaeaudio/pulaeaudio
-Outgoing License:          LGPL-2.1
-License File:              LICENSE
-Package Category:          Multimedia
-Description and comments:  Sound server
-Origin of patches:         NXP (LGPL-2.1)
-
---------------------------------------------
-
-Patches for:               opencv
-Source Location:           http://github.com/opencv/opencv.git
-Patch Location:            meta-bsp/recipes-graphics/opencv/opencv
-Outgoing License:          BSD-3-Clause
-License File:              LICENSE
-Package Category:          Graphics
-Description and comments:  The Open Computer Vision Library
-Origin of patches:         NXP (BSD-3-Clause)
-
---------------------------------------------
-
-Patches for:               mesa-demos
-Source Location:           https://mesa.freedesktop.org/archive/demos/
-Patch Location:            meta-bsp/recipes-graphics/mesa/mesa-demos
-Outgoing License:          MIT
-License File:              
-Package Category:          Graphics
-Description and comments:  3-D Graphics
-Origin of patches:         NXP (MIT)
-                           Otavio Salvador (MIT)
-
---------------------------------------------
-
-Patches for:               xserver-xorg
-Source Location:           https://www.x.org/releases/individual/xserver/
-Patch Location:            meta-bsp/recipes-graphics/xorg-xserver/xserver-xorg
-Outgoing License:          MIT.X
-License File:              COPYING
-Package Category:          Linux
-Description and comments:  X11
-Origin of patches:         NXP (MIT.X)
-
---------------------------------------------
-
-Patches for:               glslang
-Source Location:           https://www.khronos.org/opengles/sdk/tools/Reference-Compiler
-Patch Location:            meta-sdk/recipes-graphics/vulkan/glslang
-Outgoing License:          BSD-3-Clause
-License File:              LICENSE
-Package Category:          Graphics
-Description and comments:  Official reference compiler front end for the OpenGL ES and OpenGL shading languages.
-Origin of patches:         NXP (BSD-3-Clause)
-
---------------------------------------------
-
-Patches for:               matchbox-wm 1.2.1
-Source Location:           git://git.yoctoproject.org/matchbox-window-manager
-Patch Location:            meta-bsp/recipes-graphics/matchbox-wm/matchbox-wm
-Outgoing License:          GPL-2.0
-License File:              COPYING
-Package Category:          Graphics
-Description and comments:  Window manager
-Origin of patches:         NXP (GPL-2.0)
-
---------------------------------------------
-
-Patches for:               vulkan
-Source Location:           git://github.com/vulkan
-Patch Location:            meta-sdk/recipes-graphics/vulkan/
-Outgoing License:          MIT
-License File:              LICENSE.md
-Package Category:          Graphics
-Description and comments:  cross-platform 3D graphics and compute AP
-Origin of patches:         NXP (MIT)
-
---------------------------------------------
-
-Patches for:               vulkan/vulkan-tools
-Source Location:           git://github.com/KhronosGroup/SPIRV-Tools
-Patch Location:            meta-sdk/recipes-graphics/vulkan/
-Outgoing License:          Apache-2.0
-License File:              LICENSE.txt
-Package Category:          Graphics
-Description and comments:  provides an API and commands for processing SPIR-V modules.
-Origin of patches:         NXP (Apache-2.0)
-
---------------------------------------------
-
-Patches for:               vulkan/vkmark
-Source Location:           git://github.com/vkmark/vkmark
-Patch Location:            meta-sdk/recipes-graphics/vulkan/
-Outgoing License:          LGPL-2.1
-License File:              COPYING-LGPL2.1
-Package Category:          Graphics
-Description and comments:  vkmark is an extensible Vulkan benchmarking suite with targeted, configurable scenes.
-Origin of patches:         NXP (LGPL-2.1)
-
---------------------------------------------
-
-Patches for:               qtbase
-Source Location:           https://github.com/qt/qtbase
-Patch Location:            recipes-qt5/qt5/qtbase
-Outgoing License:          LGPL-3.0+Qt Exception 1.1
-License File:              LGPL_EXCEPTION.txt
-Package Category:          Qt
-Description and comments:  Qt Base
-Origin of patches:         NXP (LGPL-2.1+Qt Exception 1.1)
-
---------------------------------------------
-
-Patches for:               qtwayland
-Source Location:           https://github.com/qt/qtwayland
-Patch Location:            meta-sdk/recipes-qt5/qt5/qtwayland
-Outgoing License:          LGPL-3.0+Qt Exception 1.1
-License File:              LGPL_EXCEPTION.txt
-Package Category:          Qt
-Description and comments:  A toolbox for making Qt based Wayland compositors.
-Origin of patches:         NXP (LGPL-2.1+Qt Exception 1.1)
-
---------------------------------------------
-
-Patches for:               gstreamer1.0-plugins-good-qt
-Source Location:           https://github.com/qt/gstreamer1.0-plugins-good-qt
-Patch Location:            meta-sdk/recipes-qt5/qt5/gstreamer1.0-plugins-good-qt
-Outgoing License:          LGPL-3.0+Qt Exception 1.1
-License File:              LGPL_EXCEPTION.txt
-Package Category:          Qt
-Description and comments:  
-Origin of patches:         NXP (LGPL-2.1+Qt Exception 1.1)
+Origin:                      AuZone (Proprietary)
 
 --------------------------------------------
