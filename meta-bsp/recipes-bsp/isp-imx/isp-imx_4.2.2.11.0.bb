@@ -8,8 +8,8 @@ inherit fsl-eula-unpack cmake systemd use-imx-headers
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "95abeac4c7178bd48c017326e00f7bf6"
-SRC_URI[sha256sum] = "cdbe69c40e0737321e8e3e418488331ee5780ba2c0eff83661f7fb6cb0b062b6"
+SRC_URI[md5sum] = "75f79ba556c47172b9a0cbc3a877e604"
+SRC_URI[sha256sum] = "28e2ee909f29a256c4eac87ef8336932d90a88a2a183389ac0868212954af42c"
 
 DEPENDS = "python libdrm virtual/libg2d"
 
