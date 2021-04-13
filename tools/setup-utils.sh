@@ -87,7 +87,7 @@ hook_in_layer() {
         upstream_layers="$@"
     fi
 
-    echo "BBLAYERS += \" \${BSPDIR}/sources/$layer \"" >> conf/bblayers.conf
+    echo "BBLAYERS += \"\${BSPDIR}/sources/$layer\"" >> conf/bblayers.conf
     for upstream_layer in $upstream_layers; do
         machine_overrides $layer $upstream_layer
         bbclass_overrides $layer $upstream_layer
