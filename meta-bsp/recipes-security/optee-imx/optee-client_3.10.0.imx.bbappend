@@ -1,4 +1,4 @@
-SRCBRANCH = "master"
+SRCBRANCH = "lf_3.10.y"
 OPTEE_CLIENT_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-client.git;protocol=https"
 SRC_URI = " \
     ${OPTEE_CLIENT_SRC};branch=${SRCBRANCH} \
