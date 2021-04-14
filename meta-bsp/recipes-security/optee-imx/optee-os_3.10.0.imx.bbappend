@@ -1,4 +1,4 @@
-SRCBRANCH = "master"
+SRCBRANCH = "lf_3.10.y"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
 SRCREV = "409c619b3e989ae8b24eca782cad1090aa1ca0de"
