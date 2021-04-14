@@ -4,7 +4,7 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
-SRCBRANCH = "lf-5.10.y_1.0.0"
+SRCBRANCH = "master"
 IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
 SRC_URI = " \
     ${IMXTEST_SRC};branch=${SRCBRANCH} \
