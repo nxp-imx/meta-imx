@@ -15,6 +15,7 @@ IMAGE_FEATURES += " \
     tools-debug \
     ssh-server-dropbear \
     hwcodecs \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston','', d)} \
 "
 SDKIMAGE_FEATURES_append = " \
     staticdev-pkgs \
@@ -24,7 +25,7 @@ CLINFO_imxgpu = "clinfo"
 CLINFO_mx8mm = ""
 
 IMAGE_INSTALL += " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' weston weston-examples weston-init','', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
     imx-test \
     packagegroup-imx-core-tools \
     packagegroup-imx-security \
