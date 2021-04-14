@@ -2,7 +2,7 @@ DESCRIPTION = "TensorFlow Lite C++ Library"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=64a34301f8e355f57ec992c2af3e5157"
 
-DEPENDS = "zlib unzip-native python3 python3-numpy-native python3-pip-native python3-wheel-native python3-pybind11-native"
+DEPENDS = "zlib unzip-native python3 python3-numpy-native python3-pip-native python3-wheel-native python3-pybind11-native tensorflow-protobuf jpeg"
 
 TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
 SRCBRANCH = "imx-v2.4.1"
@@ -18,7 +18,7 @@ inherit python3native cmake
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECMAKE = "-DTFLITE_ENABLE_XNNPACK=on -DTFLITE_ENABLE_RUY=on -DTFLITE_ENABLE_NNAPI=on  ${S}/tensorflow/lite/"
+EXTRA_OECMAKE = "-DTFLITE_ENABLE_XNNPACK=on -DTFLITE_ENABLE_RUY=on -DTFLITE_ENABLE_NNAPI=on -DTFLITE_BUILD_EVALTOOLS=on  ${S}/tensorflow/lite/"
 
 CXXFLAGS += "-fPIC"
 
@@ -64,6 +64,9 @@ do_install() {
     install -d ${D}${bindir}/${PN}-${PV}/examples
     install -m 0555 ${B}/label_image ${D}${bindir}/${PN}-${PV}/examples
     install -m 0555 ${B}/benchmark_model ${D}${bindir}/${PN}-${PV}/examples
+    install -m 0555 ${B}/coco_object_detection_run_eval ${D}${bindir}/${PN}-${PV}/examples
+    install -m 0555 ${B}/imagenet_image_classification_run_eval ${D}${bindir}/${PN}-${PV}/examples
+    install -m 0555 ${B}/inference_diff_run_eval ${D}${bindir}/${PN}-${PV}/examples
 
     # install label_image data
     cp ${S}/tensorflow/lite/examples/label_image/testdata/grace_hopper.bmp ${D}${bindir}/${PN}-${PV}/examples
