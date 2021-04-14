@@ -4,4 +4,4 @@ SRC_URI = " \
     ${OPTEE_CLIENT_SRC};branch=${SRCBRANCH} \
     file://tee-supplicant.service \
 "
-SRCREV = "2a77cf88d956c34cb4a1c191bea6113e327f5fe0"
+SRCREV = "2c812c5b4f81a97687fb42196c1225545cbeb7e8"
