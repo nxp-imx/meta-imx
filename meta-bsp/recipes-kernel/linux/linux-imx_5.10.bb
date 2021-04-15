@@ -19,7 +19,7 @@ SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
 SRCREV = "470aa06b50046ebc1f22a0565bc823bffba07b04"
 
-LINUX_VERSION = "5.10.27"
+LINUX_VERSION = "5.10.29"
 
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
