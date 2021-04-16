@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a700d9de43fc22e998001a63c3feb1d2 \
                     file://include/half/LICENSE.txt;md5=fe7e5a4795c76b317919afd2d3da5983"
 
 PV = "20.08.imx+git${SRCPV}"
-SRCBRANCH = "imx_20.08"
+SRCBRANCH = "imx_5.4.70_2.3.2"
 ARM_COMPUTELIBRARY_SRC ?= "git://source.codeaurora.org/external/imx/arm-computelibrary-imx.git;protocol=https"
 SRC_URI = "${ARM_COMPUTELIBRARY_SRC};branch=${SRCBRANCH}"
 SRCREV = "203f466760aa584913ff11d744078f817d9efee5" 
