@@ -369,15 +369,6 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     deepview-rt-2.4.18-aarch64.bin
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - No distribution license granted - Section 2.2 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    Machine Learning Au-Zone DeepViewRT and ModelRunner for i.MX8 Application Processors
-Release Location:            Mirror
---------------------------------------------
-
 Package:                     ml-security-1.0.4.bin
 Outgoing License:            LA_OPT_NXP_Software_License v15 August 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
@@ -1130,6 +1121,15 @@ Release Location:            https://source.codeaurora.org/external/imx/tensorfl
 Origin:                      NXP (Apache-2.0)
                              TensorFlow (Apache-2.0) - https://github.com/tensorflow/tensorflow/
 
+--------------------------------------------
+
+Package:                     deepview-rt-2.4.18-aarch64.bin
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - No distribution license granted - Section 2.2 applies 
+License File:                COPYING
+Package Category:            MachineLearning
+Type of Content:             binary
+Description and comments:    Machine Learning Au-Zone DeepViewRT and ModelRunner for i.MX8 Application Processors
+Release Location:            Mirror
 --------------------------------------------
 Tools Packages
 --------------------------------------------
