@@ -14,8 +14,4 @@ do_install_append() {
 
     # Add weston.log back, used by NXP for testing
     update_file "ExecStart=/usr/bin/weston " "ExecStart=/usr/bin/weston --log=\$\{XDG_RUNTIME_DIR\}/weston.log " ${D}${systemd_system_unitdir}/weston.service
-
-    # FIXME: weston should be run as weston, not as root
-    update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
-    update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
 }
