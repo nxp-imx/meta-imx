@@ -1,0 +1,34 @@
+From eeea1c8c352e54908f464e8dfd7a06b0f7ce0e6e Mon Sep 17 00:00:00 2001
+From: Jaroslav Kysela <perex@perex.cz>
+Date: Sun, 3 Jan 2021 16:16:10 +0100
+Subject: [PATCH 2/2] pcm: plugin status - revert the recent changes
+
+It's no reason to sync the avail/delay fields using the mirrored
+buffer pointers. The slave information must be valid.
+
+The original report probably tries to fix something for
+the specific plugin. Revert all changes.
+
+Fixes: afe6ff3b33e ("pcm: plugin status - fix the return value (regression)")
+Fixes: 4f90392f07e ("pcm: fix the snd_pcm_plugin_status() avail and delay fields")
+Signed-off-by: Jaroslav Kysela <perex@perex.cz>
+---
+ src/pcm/pcm_plugin.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/src/pcm/pcm_plugin.c b/src/pcm/pcm_plugin.c
+index 76a524fa801d..ea60eb98986e 100644
+--- a/src/pcm/pcm_plugin.c
++++ b/src/pcm/pcm_plugin.c
+@@ -551,8 +551,6 @@ static int snd_pcm_plugin_status(snd_pcm_t *pcm, snd_pcm_status_t * status)
+ 		return err;
+ 	status->appl_ptr = *pcm->appl.ptr;
+ 	status->hw_ptr = *pcm->hw.ptr;
+-	status->avail = snd_pcm_mmap_avail(pcm);
+-	status->delay = snd_pcm_mmap_delay(pcm);
+ 	return 0;
+ }
+ 
+-- 
+2.27.0
+

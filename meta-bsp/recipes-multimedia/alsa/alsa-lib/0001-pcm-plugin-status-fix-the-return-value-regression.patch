@@ -1,0 +1,46 @@
+From 67be50a9d95c8659d4821d0cd8c228e4f57b2c32 Mon Sep 17 00:00:00 2001
+From: Jaroslav Kysela <perex@perex.cz>
+Date: Wed, 30 Dec 2020 09:31:10 +0100
+Subject: [PATCH 1/2] pcm: plugin status - fix the return value (regression)
+
+The snd_pcm_plugin_avail_update() error code in snd_pcm_plugin_status()
+should not be reported to the caller. The state errors can be determined
+using the state member in the status structure.
+
+Fixes: 4f90392f07e ("pcm: fix the snd_pcm_plugin_status() avail and delay fields")
+BugLink: https://github.com/alsa-project/alsa-lib/issues/107
+Signed-off-by: Jaroslav Kysela <perex@perex.cz>
+---
+ src/pcm/pcm_plugin.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/src/pcm/pcm_plugin.c b/src/pcm/pcm_plugin.c
+index 5739cfc2eb07..76a524fa801d 100644
+--- a/src/pcm/pcm_plugin.c
++++ b/src/pcm/pcm_plugin.c
+@@ -541,19 +541,17 @@ static snd_pcm_sframes_t snd_pcm_plugin_avail_update(snd_pcm_t *pcm)
+ static int snd_pcm_plugin_status(snd_pcm_t *pcm, snd_pcm_status_t * status)
+ {
+ 	snd_pcm_plugin_t *plugin = pcm->private_data;
+-	snd_pcm_sframes_t err, avail;
++	snd_pcm_sframes_t err;
+ 
+ 	/* sync with the latest hw and appl ptrs */
+-	avail = snd_pcm_plugin_avail_update(pcm);
+-	if (avail < 0)
+-		return avail;
++	snd_pcm_plugin_avail_update(pcm);
+ 
+ 	err = snd_pcm_status(plugin->gen.slave, status);
+ 	if (err < 0)
+ 		return err;
+ 	status->appl_ptr = *pcm->appl.ptr;
+ 	status->hw_ptr = *pcm->hw.ptr;
+-	status->avail = avail;
++	status->avail = snd_pcm_mmap_avail(pcm);
+ 	status->delay = snd_pcm_mmap_delay(pcm);
+ 	return 0;
+ }
+-- 
+2.27.0
+
