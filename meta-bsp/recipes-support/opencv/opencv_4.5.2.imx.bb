@@ -13,6 +13,7 @@ SRCREV_FORMAT_append = "_extra"
 
 SRC_URI_remove = " \
     git://github.com/opencv/opencv.git;name=opencv \
+    file://download.patch \
 "
 OPENCV_SRC ?= "git://source.codeaurora.org/external/imx/opencv-imx.git;protocol=https"
 SRCBRANCH = "4.5.2_imx"
