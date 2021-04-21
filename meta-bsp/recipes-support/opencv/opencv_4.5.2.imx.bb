@@ -21,7 +21,6 @@ SRC_URI += " \
     file://OpenCV_DNN_examples.patch \
     file://0001-Add-smaller-version-of-download_models.py.patch;patchdir=../extra \
 "
-PV = "4.5.2.imx"
 
 PACKAGECONFIG_remove        = "eigen"
 PACKAGECONFIG_append_mx8    = " dnn text"
