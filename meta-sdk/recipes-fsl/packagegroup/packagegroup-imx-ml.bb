@@ -17,10 +17,6 @@ ML_PKGS = " \
 "
 ML_PKGS_remove_mx8mm = "deepview-rt"
 ML_PKGS_remove_mx8mnlite = "deepview-rt"
-
-ML_PKGS_append_mx8mm = "eiq-apps"
-ML_PKGS_append_mx8mp = "eiq-apps"
-
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
 "
