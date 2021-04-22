@@ -2,7 +2,7 @@ require recipes-support/opencv/opencv_4.5.2.bb
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV_opencv = "5423d53ae0d116ee5bbe52f8b5503f0cd8586998" 
+SRCREV_opencv = "5423d53ae0d116ee5bbe52f8b5503f0cd8586998"
 SRCREV_contrib = "f5d7f6712d4ff229ba4f45cf79dfd11c557d56fd"
 SRCREV_extra = "855c4528402e563283f86f28c6393f57eb5dcf62"
 SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
