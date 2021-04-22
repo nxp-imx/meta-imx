@@ -35,7 +35,7 @@ do_compile_imx8qm-cockpit () {
            bbnote ${BOOT_STAGING}/flash.bin does not exist
         fi
     else
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mx8qm-mek_cockpit-nospl-scfw-tcm.bin  ${BOOT_STAGING}/scfw_tcm_nospl.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mx8qm-mek_cockpit-nospl-scfw-tcm.bin  ${BOOT_STAGING}/scfw_tcm.bin
 
         make SOC=iMX8QM flash_cockpit
         if [ -e "${BOOT_STAGING}/flash.bin" ]; then
