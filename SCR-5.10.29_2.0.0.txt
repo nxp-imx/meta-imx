@@ -62,8 +62,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.11.bin
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Additional distribution license granted - Section 2.3 applies 
+Package:                     firmware-imx-8.12.bin
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
