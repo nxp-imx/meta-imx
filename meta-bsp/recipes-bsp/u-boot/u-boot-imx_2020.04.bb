@@ -18,13 +18,13 @@ UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=ht
 SRCBRANCH = "imx_v2020.04_5.4.70_2.3.0"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "185bdaaaf5644319284566e5c340927d28954a1a"
+SRCREV = "44f5949dd94317c918c23854413ac30b7feceaf0"
 
 S = "${WORKDIR}/git"
 
 inherit fsl-u-boot-localversion
 
-LOCALVERSION ?= "-5.4.70-2.3.2"
+LOCALVERSION ?= "-5.4.70-2.3.3"
 
 BOOT_TOOLS = "imx-boot-tools"
 
