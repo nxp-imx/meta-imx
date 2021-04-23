@@ -1,4 +1,4 @@
-# Copyright 2017 NXP
+# Copyright 2017, 2019 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "i.MX package group - embedded RPC"

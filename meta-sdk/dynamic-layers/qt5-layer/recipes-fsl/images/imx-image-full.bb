@@ -1,5 +1,5 @@
 # Copyright (C) 2015 Freescale Semiconductor
-# Copyright 2017-2019 NXP
+# Copyright 2017-2020 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require recipes-fsl/images/imx-image-multimedia.bb

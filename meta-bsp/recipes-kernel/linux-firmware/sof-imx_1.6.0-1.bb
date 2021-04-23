@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Mihai Lindner <mihai.lindner@nxp.com>
+# Copyright (C) 2020-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Sound Open Firmware"

@@ -1,5 +1,6 @@
 # Copyright (C) 2014, 2016 Freescale Semiconductor
 # Copyright (C) 2015, 2016 O.S. Systems Software LTDA.
+# Copyright 2019-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "Package group used by FSL Community to provide graphic packages used \
 to test the several hardware accelerated graphics APIs including packages not \

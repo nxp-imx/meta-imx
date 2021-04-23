@@ -1,6 +1,6 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
 # Copyright (C) 2012-2018 O.S. Systems Software LTDA.
-# Copyright 2017-2019 NXP
+# Copyright 2017-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "GPU driver and apps for i.MX"

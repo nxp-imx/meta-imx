@@ -1,4 +1,4 @@
-# Copyright 2019-20 NXP
+# Copyright 2019-21 NXP
 
 SUMMARY = "NXP i.MX SECO library"
 DESCRIPTION = "NXP IMX SECO library"

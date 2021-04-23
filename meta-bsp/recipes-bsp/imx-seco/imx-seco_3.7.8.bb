@@ -1,4 +1,4 @@
-# Copyright 2019-2020 NXP
+# Copyright 2019-2021 NXP
 
 SUMMARY = "NXP i.MX SECO firmware"
 DESCRIPTION = "NXP IMX SECO firmware"

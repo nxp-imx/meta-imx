@@ -1,4 +1,4 @@
-# Copyright 2018-2020 NXP
+# Copyright 2018-2021 NXP
 SUMMARY = "Freescale i.MX firmware for 8 family"
 DESCRIPTION = "Freescale i.MX firmware for 8 family"
 

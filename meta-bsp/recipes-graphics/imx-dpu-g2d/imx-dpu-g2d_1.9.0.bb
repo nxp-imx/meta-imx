@@ -1,5 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
-# Copyright 2017-2019 NXP
+# Copyright 2017-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "GPU G2D library and apps for i.MX with 2D GPU and DPU"

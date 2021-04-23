@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2020 NXP
+# Copyright (C) 2017-2021 NXP
 
 DESCRIPTION = "i.MX ARM Trusted Firmware"
 SECTION = "BSP"

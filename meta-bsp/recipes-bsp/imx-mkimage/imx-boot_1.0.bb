@@ -1,4 +1,4 @@
-# Copyright 2017-2020 NXP
+# Copyright 2017-2021 NXP
 
 require imx-mkimage_git.inc
 require recipes-bsp/imx-seco/imx-seco.inc

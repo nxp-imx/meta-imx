@@ -1,5 +1,5 @@
 # Copyright (C) 2015 Freescale Semiconductor
-# Copyright 2017-2019 NXP
+# Copyright 2017-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "NXP Image to validate i.MX machines. \

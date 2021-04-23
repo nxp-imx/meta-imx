@@ -1,4 +1,4 @@
-# Copyright 2018-2019 NXP
+# Copyright 2018-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "This is the basic core image with minimal tests"

@@ -1,4 +1,4 @@
-# Copyright 2020 NXP
+# Copyright 2020-2021 NXP
 
 DESCRIPTION = "This is the basic core image for V2X with internal HSM"
 

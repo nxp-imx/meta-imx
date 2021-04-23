@@ -1,6 +1,6 @@
 # Copyright (C) 2012-2016 O.S. Systems Software LTDA.
 # Copyright (C) 2013-2016 Freescale Semiconductor
-# Copyright 2017-2018 NXP
+# Copyright 2017-2021 NXP
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 

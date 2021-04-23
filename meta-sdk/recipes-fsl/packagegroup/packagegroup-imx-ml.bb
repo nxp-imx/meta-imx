@@ -1,4 +1,4 @@
-# Copyright 2019 NXP
+# Copyright 2019-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Add packages for AI/ML build"

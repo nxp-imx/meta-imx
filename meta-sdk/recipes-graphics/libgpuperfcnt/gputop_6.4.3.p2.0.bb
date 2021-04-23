@@ -1,4 +1,4 @@
-# Copyright 2017-2018 NXP
+# Copyright 2017-2021 NXP
 
 DESCRIPTION = "Sample program to monitor i.MX GPU performance data"
 LICENSE = "MIT"

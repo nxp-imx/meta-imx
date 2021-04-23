@@ -1,4 +1,4 @@
-# Copyright 2019 NXP
+# Copyright 2019-20 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Package group for i.MX Qt5"

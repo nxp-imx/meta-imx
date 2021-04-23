@@ -1,4 +1,4 @@
-# Copyright (C) 2021 NXP
+# Copyright (C) 2019-20221 NXP
 
 DESCRIPTION = "ECDSA Verification Engine using HSM"
 SUMMARY = "ECDSA Verification Engine using HSM"
