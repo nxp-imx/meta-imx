@@ -1,3 +1,4 @@
+# Copyright 2021 NXP
 DESCRIPTION = "Parts of ONNX Runtime that needs to be compiled for native system"
 SECTION = "devel"
 LICENSE = "BSD-3-Clause"

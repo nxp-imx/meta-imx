@@ -1,3 +1,4 @@
+# Copyright 2020-2021
 DESCRIPTION = "cross-platform, high performance scoring engine for ML models"
 SECTION = "devel"
 LICENSE = "MIT"

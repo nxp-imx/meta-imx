@@ -1,3 +1,4 @@
+# Copyright 2020-2021 NXP
 SUMMARY = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9c57cfb31165de565a47b65b896391c2"

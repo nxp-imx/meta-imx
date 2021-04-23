@@ -1,3 +1,4 @@
+# Copyright 2019-2021
 SUMMARY = "The ARM Computer Vision and Machine Learning library"
 DESCRIPTION = "The ARM Computer Vision and Machine Learning library is a set of functions optimised for both ARM CPUs and GPUs."
 LICENSE = "MIT"

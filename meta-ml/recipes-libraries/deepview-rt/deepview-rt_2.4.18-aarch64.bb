@@ -1,3 +1,4 @@
+# Copyright 2021 NXP
 DESCRIPTION = "This package includes the updated and experimental ModelRunner for TensorFlow Lite and ARM NN. Also in this repository is a pre-release of DeepViewRT with support for the OpenVX backend."
 
 LICENSE = "Proprietary"

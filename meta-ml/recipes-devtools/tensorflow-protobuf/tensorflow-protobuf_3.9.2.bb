@@ -1,3 +1,4 @@
+# Copyright 2021 NXP
 SUMMARY = "Protocol Buffers - structured data serialisation mechanism"
 DESCRIPTION = "Protocol Buffers are a way of encoding structured data in an \
 efficient yet extensible format. Google uses Protocol Buffers for almost \

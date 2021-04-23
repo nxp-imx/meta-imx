@@ -1,3 +1,4 @@
+# Copyright 2020-2021 NXP
 SUMMARY = "The torchvision package consists of popular datasets, model architectures, and common image transformations for computer vision."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9c57cfb31165de565a47b65b896391c2"

@@ -1,3 +1,4 @@
+# Copyright 2020-2021 NXP
 DESCRIPTION = "i.MX Neural Networks Accelerator Plugin"
 LICENSE = "MIT"
 

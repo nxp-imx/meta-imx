@@ -1,3 +1,4 @@
+# Copyright 2020 NXP
 SUMMARY = "Memory Efficient Serialization Library"
 HOMEPAGE = "https://github.com/google/flatbuffers"
 SECTION = "console/tools"

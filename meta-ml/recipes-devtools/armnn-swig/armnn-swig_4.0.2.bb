@@ -1,3 +1,4 @@
+# Copyright 2021 NXP
 require ${BPN}.inc
 
 SRC_URI += "file://0001-configure-use-pkg-config-for-pcre-detection.patch \
