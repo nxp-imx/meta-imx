@@ -44,7 +44,7 @@ KBUILD_DEFCONFIG_mx8= "${IMX_KERNEL_CONFIG_AARCH64}"
 # Use a verbatim copy of the defconfig from the linux-imx repo.
 # IMPORTANT: This task effectively disables kernel config fragments
 # since the config fragments applied in do_kernel_configme are replaced.
-addtask copy_defconfig after do_kernel_configme before do_preconfigure
+addtask copy_defconfig after do_kernel_configme before do_kernel_localversion
 do_copy_defconfig () {
     install -d ${B}
     if [ ${DO_CONFIG_V7_COPY} = "yes" ]; then
@@ -79,7 +79,7 @@ do_merge_delta_config() {
     done
     cp .config ${WORKDIR}/defconfig
 }
-addtask merge_delta_config before do_preconfigure after do_copy_defconfig
+addtask merge_delta_config before do_kernel_localversion after do_copy_defconfig
 
 KERNEL_VERSION_SANITY_SKIP="1"
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
