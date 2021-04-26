@@ -16,7 +16,8 @@ SRC_URI[sha256sum] = "1b5e03994662e03a5ea4083d490021aeac030e8befc349c3f49beeff5b
 
 do_compile[noexec] = "1"
 
-do_install[noexec] = "1"
+do_install() {
+}
 
 addtask deploy after do_install
 do_deploy () {
