@@ -1,0 +1,65 @@
+From 5160934fe0eeb1d1fbcac4ba60bc2d2dba869f2e Mon Sep 17 00:00:00 2001
+From: Cristinel Panfir <cristinel.panfir@nxp.com>
+Date: Mon, 26 Apr 2021 09:50:05 +0300
+Subject: [PATCH] CMakeLists.txt [core, pkcs11]: Use CMAKE_INSTALL_LIBDIR to
+ set and install libraries
+
+Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
+---
+ core/CMakeLists.txt                | 2 +-
+ core/subsystems/tee/CMakeLists.txt | 2 +-
+ pkcs11/CMakeLists.txt              | 2 +-
+ pkcs11/tests/CMakeLists.txt        | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/core/CMakeLists.txt b/core/CMakeLists.txt
+index 0dc9cab..d434b52 100644
+--- a/core/CMakeLists.txt
++++ b/core/CMakeLists.txt
+@@ -119,6 +119,6 @@ target_include_directories(${PROJECT_NAME}
+ 
+ target_link_libraries(${PROJECT_NAME} ${EXT_LIBS})
+ 
+-install(TARGETS ${PROJECT_NAME} DESTINATION lib)
++install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+ install(FILES ${CMAKE_SOURCE_DIR}/osal/${OS}/config/default_config.txt
+         DESTINATION share/smw)
+diff --git a/core/subsystems/tee/CMakeLists.txt b/core/subsystems/tee/CMakeLists.txt
+index d809549..6116d95 100644
+--- a/core/subsystems/tee/CMakeLists.txt
++++ b/core/subsystems/tee/CMakeLists.txt
+@@ -66,4 +66,4 @@ ExternalProject_Add(smw_tee_ta
+ 	TMP_DIR ${CMAKE_BINARY_DIR}/ta
+ 	BUILD_COMMAND ${TA_CMD})
+ 
+-install(FILES ${TA_BUILD_DIR}/${TA_FILE} DESTINATION ${DESTDIR}/lib/optee_armtz)
++install(FILES ${TA_BUILD_DIR}/${TA_FILE} DESTINATION ${DESTDIR}/${CMAKE_INSTALL_LIBDIR}/optee_armtz)
+diff --git a/pkcs11/CMakeLists.txt b/pkcs11/CMakeLists.txt
+index ff87769..4cc5dfa 100644
+--- a/pkcs11/CMakeLists.txt
++++ b/pkcs11/CMakeLists.txt
+@@ -47,7 +47,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
+ 
+ string(APPEND CMAKE_SHARED_LINKER_FLAGS " -Wl,--no-undefined")
+ 
+-install(TARGETS ${PROJECT_NAME} DESTINATION lib OPTIONAL)
++install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR} OPTIONAL)
+ 
+ set(SMW_PKCS11_LIB "lib${PROJECT_NAME}.so.${PROJECT_VERSION_MAJOR}")
+ add_subdirectory(tests)
+diff --git a/pkcs11/tests/CMakeLists.txt b/pkcs11/tests/CMakeLists.txt
+index dd3a145..340528c 100644
+--- a/pkcs11/tests/CMakeLists.txt
++++ b/pkcs11/tests/CMakeLists.txt
+@@ -11,7 +11,7 @@ target_sources(${PROJECT_NAME} PRIVATE  ${pkcs11_test})
+ 
+ target_include_directories(${PROJECT_NAME} PRIVATE include)
+ 
+-set(LIBRARY_PATH ${CMAKE_INSTALL_PREFIX}/lib)
++set(LIBRARY_PATH ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
+ 
+ if(NOT DEFAULT_PKCS11_LIB)
+   set(DEFAULT_PKCS11_LIB ${LIBRARY_PATH}/${SMW_PKCS11_LIB})
+-- 
+2.25.1
+
