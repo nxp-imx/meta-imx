@@ -64,7 +64,6 @@ do_deploy_imx8qm-cockpit() {
     if "${DEPLOY_OPTEE}"; then
         install -m 0644 ${DEPLOY_DIR_IMAGE}/tee.bin          ${DEPLOYDIR}/${BOOT_TOOLS}
         install -m 0644 ${BOOT_STAGING}/u-boot-spl.bin       ${DEPLOYDIR}/${BOOT_TOOLS}
-        install -m 0644 ${BOOT_STAGING}/u-boot-spl-a53.bin   ${DEPLOYDIR}/${BOOT_TOOLS}
         install -m 0644 ${BOOT_STAGING}/u-boot-spl-a72.bin   ${DEPLOYDIR}/${BOOT_TOOLS}
         install -m 0644 ${BOOT_STAGING}/imx-boot-imx8qmmek-sd.bin-flash_cockpit_spl ${DEPLOYDIR}
         cd ${DEPLOYDIR}
@@ -72,7 +71,6 @@ do_deploy_imx8qm-cockpit() {
         cd -
     else
         install -m 0644 ${BOOT_STAGING}/u-boot.bin           ${DEPLOYDIR}/${BOOT_TOOLS}
-        install -m 0644 ${BOOT_STAGING}/u-boot-a53.bin       ${DEPLOYDIR}/${BOOT_TOOLS}
         install -m 0644 ${BOOT_STAGING}/u-boot-a72.bin       ${DEPLOYDIR}/${BOOT_TOOLS}
         install -m 0644 ${BOOT_STAGING}/imx-boot-imx8qmmek-sd.bin-flash_cockpit ${DEPLOYDIR}
         cd ${DEPLOYDIR}
