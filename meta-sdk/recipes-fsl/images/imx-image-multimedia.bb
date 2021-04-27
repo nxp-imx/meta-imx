@@ -36,6 +36,11 @@ ERPC_COMPS_append_mx7ulp = "packagegroup-imx-erpc"
 ISP_PKGS = ""
 ISP_PKGS_mx8mp = "packagegroup-imx-isp"
 
+HANTRO_PKGS = ""
+HANTRO_PKGS_mx8mm = "imx-vpu-hantro-daemon"
+HANTRO_PKGS_mx8mp = "imx-vpu-hantro-daemon"
+HANTRO_PKGS_mx8mq = "imx-vpu-hantro-daemon"
+
 CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-core-full-cmdline \
     packagegroup-tools-bluetooth \
@@ -49,4 +54,5 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-fsl-gstreamer1.0-full \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
     ${ISP_PKGS} \
+    ${HANTRO_PKGS} \
 "
