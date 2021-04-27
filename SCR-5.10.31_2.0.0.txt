@@ -538,7 +538,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-1.9.0.bin
+Package:                     imx-dpu-g2d-1.9.2.bin
 Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -943,8 +943,8 @@ Origin:                      NXP (GPL-2.0)
 M4 Processor Packages
 --------------------------------------------
 
-Package:                     imx7ulp-m4-demo-2.8.0.1.bin
-Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Additional distribution license granted - Section 2.3 applies 
+Package:                     imx7ulp-m4-demo-2.9.0.bin
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -969,8 +969,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx8mm-m4-demo-2.8.0.1.bin
-Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Production Use - Section 2.3 applies 
+Package:                     imx8mm-m4-demo-2.9.1.bin
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -982,8 +982,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx8mq-m4-demo-2.8.0.1.bin
-Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Production Use - Section 2.3 applies 
+Package:                     imx8mq-m4-demo-2.9.0.bin
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -995,8 +995,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx8qm-m4-demo-2.8.0.1.bin
-Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Production Use - Section 2.3 applies 
+Package:                     imx8qm-m4-demo-2.9.0.bin
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1008,8 +1008,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx8qx-m4-demo-2.8.0.1.bin
-Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Production Use - Section 2.3 applies 
+Package:                     imx8qx-m4-demo-2.9.0.bin
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1023,8 +1023,8 @@ Origin:                      NXP (proprietary)
 M7 Processor Packages
 --------------------------------------------
 
-Package:                     imx8mn-m7-demo-2.8.0.1.bin
-Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Production Use - Section 2.3 applies 
+Package:                     imx8mn-m7-demo-2.9.0.bin
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
