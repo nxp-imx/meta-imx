@@ -9,7 +9,7 @@ do_compile_imx8qm-cockpit () {
 
     cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME} ${BOOT_STAGING}
 
-    cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE_COCKPIT}.bin        ${BOOT_STAGING}/u-boot.bin
+    cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE_COCKPIT}.bin-a53    ${BOOT_STAGING}/u-boot.bin
     cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE_COCKPIT}.bin-a72    ${BOOT_STAGING}/u-boot-a72.bin
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-a53   ${BOOT_STAGING}/bl31.bin
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-a72   ${BOOT_STAGING}/bl31-a72.bin
@@ -23,7 +23,7 @@ do_compile_imx8qm-cockpit () {
         cp ${DEPLOY_DIR_IMAGE}/tee-a53.bin            ${BOOT_STAGING}/tee.bin
         cp ${DEPLOY_DIR_IMAGE}/tee-a72.bin            ${BOOT_STAGING}
 
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE_COCKPIT}       ${BOOT_STAGING}/u-boot-spl.bin
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE_COCKPIT}-a53   ${BOOT_STAGING}/u-boot-spl.bin
         cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE_COCKPIT}-a72   ${BOOT_STAGING}/u-boot-spl-a72.bin
 
         make SOC=iMX8QM flash_cockpit_spl
