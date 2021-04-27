@@ -23,10 +23,15 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig 
 
-EXTRA_OECONF += "--with-protoc=echo"
+EXTRA_OECONF += "--with-protoc=echo --includedir=${includedir}/tensorflow-protobuf "
+
+do_install_append() {
+    # Remove the symlinks for the shared libraries to avoid conflict with other protobuf versions
+    rm ${D}${libdir}/*.so
+    rm -r ${D}${libdir}/pkgconfig
+}
 
 PACKAGE_BEFORE_PN = "${PN}-compiler ${PN}-lite"
-
 FILES_${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
 FILES_${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
 
@@ -41,3 +46,5 @@ LDFLAGS_append_arm = " -latomic"
 LDFLAGS_append_mips = " -latomic"
 LDFLAGS_append_powerpc = " -latomic"
 LDFLAGS_append_mipsel = " -latomic"
+
+INSANE_SKIP_${PN} = "dev-so"
