@@ -1,4 +1,7 @@
 
+SRC_URI_imx8qm-cockpit = "${ATF_SRC};branch=imx_v2.4"
+SRCREV_imx8qm-cockpit = "ea633e229404b5813b0bddfa52959a2dba24d34a"
+
 do_compile_imx8qm-cockpit () {
     unset ${CLEAR_FLAGS}
     oe_runmake clean bl31 BUILD_BASE=a53
