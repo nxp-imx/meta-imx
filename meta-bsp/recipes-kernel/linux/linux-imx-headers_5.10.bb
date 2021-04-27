@@ -12,7 +12,7 @@ LOCALVERSION = "-lts-5.10.y"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "b1124dd67416ddbd060e20040bb2e1b42d46d55f"
+SRCREV = "f0cd88429c08a754dc235ca87b9ab5fb19f00dce"
 
 S = "${WORKDIR}/git"
 
