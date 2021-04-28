@@ -34,7 +34,7 @@ PACKAGECONFIG_append        = " ${PACKAGECONFIG_OPENCL}"
 
 PACKAGECONFIG[openvx] = "-DWITH_OPENVX=ON -DOPENVX_ROOT=${STAGING_LIBDIR} -DOPENVX_LIB_CANDIDATES='OpenVX;OpenVXU',-DWITH_OPENVX=OFF,virtual/libopenvx,"
 PACKAGECONFIG[qt5] = "-DWITH_QT=ON -DOE_QMAKE_PATH_EXTERNAL_HOST_BINS=${STAGING_BINDIR_NATIVE} -DCMAKE_PREFIX_PATH=${STAGING_BINDIR_NATIVE}/cmake,-DWITH_QT=OFF,qtbase qtbase-native,"
-PACKAGECONFIG[test] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON -DOPENCV_TEST_DATA_PATH=${S}/../extra/testdata, -DBUILD_TESTS=OFF -DINSTALL_TESTS=OFF,"
+PACKAGECONFIG[tests-imx] = "-DINSTALL_TESTS=ON -DOPENCV_TEST_DATA_PATH=${S}/../extra/testdata, -DINSTALL_TESTS=OFF,"
 
 do_unpack_extra_append() {
     mkdir -p ${S}/3rdparty/tinydnn/
@@ -47,7 +47,7 @@ do_install_append() {
     cp -r ${S}/samples/data/* ${D}${datadir}/OpenCV/samples/data
     install -d ${D}${datadir}/OpenCV/samples/bin/
     cp -f bin/example_* ${D}${datadir}/OpenCV/samples/bin/
-    if ${@bb.utils.contains('PACKAGECONFIG', 'test', 'true', 'false', d)}; then
+    if ${@bb.utils.contains('PACKAGECONFIG', 'tests-imx', 'true', 'false', d)}; then
         cp -r share/opencv4/testdata/cv/face/* ${D}${datadir}/opencv4/testdata/cv/face/
     fi
 }
