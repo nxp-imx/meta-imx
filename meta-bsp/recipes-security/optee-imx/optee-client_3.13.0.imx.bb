@@ -11,7 +11,7 @@ SRC_URI = " \
     ${OPTEE_CLIENT_SRC};branch=${SRCBRANCH} \
     file://tee-supplicant.service \
 "
-SRCREV = "2c812c5b4f81a97687fb42196c1225545cbeb7e8"
+SRCREV = "2c812c5b4f81a97687fb42196c1225545cbeb7e8" 
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
