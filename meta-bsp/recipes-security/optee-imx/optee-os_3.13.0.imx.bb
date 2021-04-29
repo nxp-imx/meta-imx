@@ -75,16 +75,16 @@ do_install () {
     install -m 644 ${B}/core/*.bin ${D}${nonarch_base_libdir}/firmware/
 
     # Install the TA devkit
-    install -d ${D}/usr/include/optee/export-user_ta_${OPTEE_ARCH}/
+    install -d ${D}${includedir}/optee/export-user_ta_${OPTEE_ARCH}/
 
     for f in ${B}/export-ta_${OPTEE_ARCH}/*; do
-        cp -aR $f ${D}/usr/include/optee/export-user_ta_${OPTEE_ARCH}/
+        cp -aR $f ${D}${includedir}/optee/export-user_ta_${OPTEE_ARCH}/
     done
 
     # Install embedded TAs
-    install -d ${D}/lib/optee_armtz
+    install -d ${D}${base_libdir}/optee_armtz
     find ${B}/ta -name '*.ta' | while read name; do
-        install -m 444 $name ${D}/lib/optee_armtz/
+        install -m 444 $name ${D}${base_libdir}/optee_armtz/
     done
 }
 
