@@ -1,4 +1,4 @@
-# Copyright 2017-2020 NXP
+# Copyright 2017-2021 NXP
  
 DEPENDS = "zlib-native openssl-native"
 
