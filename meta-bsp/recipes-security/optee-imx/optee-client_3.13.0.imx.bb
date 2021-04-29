@@ -41,7 +41,7 @@ do_install () {
 
 	install -D -p -m0755 ${B}/export/usr/sbin/tee-supplicant ${D}${bindir}/tee-supplicant
 
-	cp -a ${B}/export/usr/include ${D}/usr/
+	cp -a ${B}/export/usr/include ${D}${includedir}
 
 	sed -i -e s:/etc:${sysconfdir}:g -e s:/usr/bin:${bindir}:g ${WORKDIR}/tee-supplicant.service
 	install -D -p -m0644 ${WORKDIR}/tee-supplicant.service ${D}${systemd_system_unitdir}/tee-supplicant.service
