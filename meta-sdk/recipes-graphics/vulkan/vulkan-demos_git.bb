@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/SaschaWillems/Vulkan.git \
            file://0001-Don-t-build-demos-with-questionably-licensed-data.patch \
            "
 UPSTREAM_CHECK_COMMITS = "1"
-SRCREV = "4818f85916bf88c1ca8c2ed1a46e0e758651489e"
+SRCREV = "a2a604be473c829763854ffb34f7978bc0358afb"
 UPSTREAM_CHECK_GITTAGREGEX = "These are not the releases you're looking for"
 S = "${WORKDIR}/git"
 
@@ -24,12 +24,6 @@ inherit cmake features_check
 DEPENDS = "vulkan-loader assimp wayland-protocols wayland-native"
 
 do_install_append () {
-    # Remove assets that have uncertain licenses
-    rm ${D}${datadir}/vulkan-demos/models/armor/* \
-       ${D}${datadir}/vulkan-demos/models/sibenik/* \
-       ${D}${datadir}/vulkan-demos/models/vulkanscene* \
-       ${D}${datadir}/vulkan-demos/models/plants.dae \
-       ${D}${datadir}/vulkan-demos/textures/texturearray_plants*
 
     mv ${D}${bindir}/screenshot ${D}${bindir}/vulkan-screenshot
 }

@@ -37,31 +37,31 @@ Signed-off-by: Maxin B. John <maxin.john@intel.com>
  examples/CMakeLists.txt | 14 --------------
  1 file changed, 14 deletions(-)
 
-diff --git a/examples/CMakeLists.txt b/examples/CMakeLists.txt
-index a53c834..71a12e7 100644
---- a/examples/CMakeLists.txt
-+++ b/examples/CMakeLists.txt
-@@ -55,9 +55,6 @@ set(EXAMPLES
+Index: git/examples/CMakeLists.txt
+===================================================================
+--- git.orig/examples/CMakeLists.txt
++++ git/examples/CMakeLists.txt
+@@ -72,9 +72,6 @@ set(EXAMPLES
  	conditionalrender
  	conservativeraster
  	debugmarker
 -	deferred
 -	deferredmultisampling
 -	deferredshadows
+ 	descriptorindexing
  	descriptorsets
  	displacement
- 	distancefieldfonts
-@@ -65,9 +62,6 @@ set(EXAMPLES
- 	gears
- 	geometryshader
- 	gltfscene
+@@ -85,9 +82,6 @@ set(EXAMPLES
+ 	gltfloading
+ 	gltfscenerendering
+ 	gltfskinning
 -	hdr
 -	imgui
 -	indirectdraw
  	inlineuniformblocks
  	inputattachments
  	instancing
-@@ -83,23 +77,16 @@ set(EXAMPLES
+@@ -101,8 +95,6 @@ set(EXAMPLES
  	parallaxmapping
  	particlefire
  	pbrbasic
@@ -70,29 +70,24 @@ index a53c834..71a12e7 100644
  	pipelines
  	pipelinestatistics
  	pushconstants
- 	pushdescriptors
- 	radialblur
+@@ -115,12 +107,8 @@ set(EXAMPLES
+ 	raytracingshadows	
  	renderheadless
--	scenerendering
  	screenshot
 -	shadowmapping
 -	shadowmappingomni
 -	shadowmappingcascade
- 	skeletalanimation
  	specializationconstants
  	sphericalenvmapping
 -	ssao
  	stencilbuffer
  	subpasses
  	terraintessellation
-@@ -113,7 +100,6 @@ set(EXAMPLES
- 	texturesparseresidency
+@@ -136,7 +124,6 @@ set(EXAMPLES
  	triangle
+ 	variablerateshading
  	viewportarray
 -	vulkanscene
  )
  
  buildExamples()
--- 
-2.17.1
-
