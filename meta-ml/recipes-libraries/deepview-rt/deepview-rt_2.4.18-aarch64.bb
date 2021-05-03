@@ -13,8 +13,7 @@ S = "${WORKDIR}/${BPN}-${PV}"
 inherit fsl-eula-unpack python3native
 
 DEPENDS = "python3 python3-pip-native opencv"
-RDEPENDS_${PN} += "armnn nn-imx python3-numpy python3-pathlib2 python3-cffi python3-pycparser"
-RDEPENDS_${PN}-dev += "armnn nn-imx onnxruntime"
+RDEPENDS_${PN} += "armnn nn-imx onnxruntime python3-numpy python3-pathlib2 python3-cffi python3-pycparser"
 
 do_install () {
     install -d ${D}${bindir}
