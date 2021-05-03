@@ -10,8 +10,9 @@ DEPENDS = "vulkan-loader assimp glm"
 SRC_URI = " \
     git://github.com/vkmark/vkmark;protocol=https \
     file://0001-scenes-Use-depth-format-supported-by-i.MX.patch \
+    file://0001-src-meson.build-Prepend-sysroot-for-the-includedir.patch \
 "
-SRCREV = "fb591d072a841b7ffdd7ef90b0cc5ce6030455ed"
+SRCREV = "53abc4f660191051fba91ea30de084f412e7c68e"
 S = "${WORKDIR}/git"
 
 inherit meson
