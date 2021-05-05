@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ededf2503f5d147ae718276dfd28801f"
 
 DEPENDS = "imx-gpu-viv"
 
-TIM-VX_SRC ?= "git://source.codeaurora.org/external/imx/tim-vx-imx.git;protocol=https"
+TIM_VX_SRC ?= "git://source.codeaurora.org/external/imx/tim-vx-imx.git;protocol=https"
 SRCBRANCH = "imx_v1.1.y"
 SRCREV = "8c502e4c80bef455890c3c33e568f11ff75601a6"
-SRC_URI = "${TIM-VX_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${TIM_VX_SRC};branch=${SRCBRANCH}"
 S = "${WORKDIR}/git"
 
 inherit cmake
