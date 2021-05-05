@@ -1,15 +1,15 @@
-# Copyright 2021 NXP
+# Copyright 2020-2021 NXP
 SUMMARY = "Tensorflow protobuf files - used in ARMNN for Tensorflow network models"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=64a34301f8e355f57ec992c2af3e5157"
 
 SRC_URI = " \
-    git://github.com/tensorflow/tensorflow.git;branch=r1.15;name=tensorflow \
-    git://github.com/ARM-software/armnn.git;branch=branches/armnn_20_02;name=armnn;subdir=${WORKDIR}/armnn;destsuffix=armnn \
+    git://github.com/tensorflow/tensorflow.git;branch=r2.3;name=tensorflow \
+    git://github.com/ARM-software/armnn.git;branch=branches/armnn_21_02;name=armnn;subdir=${WORKDIR}/armnn;destsuffix=armnn \
 "
 
-SRCREV_tensorflow = "590d6eef7e91a6a7392c8ffffb7b58f2e0c8bc6b"
-SRCREV_armnn = "8c3259fa007d43fcc5ea56fe6928526dbe79f3c0"
+SRCREV_tensorflow = "fcc4b966f1265f466e82617020af93670141b009"
+SRCREV_armnn = "bc9b09801fcb9489c3742cf4691c39c050cbfbc4"
 SRCREV_FORMAT = "tensorflow"
 
 DEPENDS = " \

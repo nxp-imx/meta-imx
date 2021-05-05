@@ -1,12 +1,13 @@
+# Copyright 2020-2021 NXP
 SUMMARY = "ARM Neural Network SDK"
-DESCRIPTION = "Linux software and tools to enable machine learning (Caffe/Tensorflow) workloads on power-efficient devices"
+DESCRIPTION = "Linux software and tools to enable machine learning workloads on power-efficient devices"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074"
 
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
-SRCBRANCH = "branches/armnn_20_08"
+SRCBRANCH = "branches/armnn_21_02"
 
-SRCREV = "c9e6465461e869a00478b57ea5c2780c04a9c321"
+SRCREV = "9a2101c98602d5bb2a58ca2f26d98efb366b9450"
 
 SRCREV_FORMAT = "armnn"
 
@@ -17,7 +18,6 @@ inherit cmake
 
 SRC_URI = " \
     ${ARMNN_SRC};branch=${SRCBRANCH} \
-    file://0001-AIR-3570_pyarmnn-yocto-cross-compile.patch \
 "
 
 DEPENDS = " \
