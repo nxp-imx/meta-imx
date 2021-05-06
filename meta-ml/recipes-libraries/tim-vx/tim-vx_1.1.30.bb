@@ -17,4 +17,9 @@ inherit cmake
 
 EXTRA_OECMAKE = "-DCONFIG=YOCTO -DTIMVX_REPLACE_COMPILER_FLAGS=off"
 
+FILES_${PN} += " ${libdir}/*"
+FILES_SOLIBSDEV = ""
+
+INSANE_SKIP_${PN} += "dev-so"
+
 COMPATIBLE_MACHINE = "(mx8)"
