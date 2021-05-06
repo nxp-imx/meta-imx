@@ -3,6 +3,9 @@ NXP Software Content Register
 Release - Linux 5.10.31_2.0.0
  June 2021
 
+Outgoing License: LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies
+License File:     COPYING
+
 Yocto Project recipe manifest:
 repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-hardknott -m imx_5.10.31_2.0.0.xml
 
@@ -255,7 +258,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     sof-imx-1.6.0-1
+Package:                     sof-imx-1.8.0-1
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
