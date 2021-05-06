@@ -1,5 +1,5 @@
 # Copyright 2020-2021 NXP
-SUMMARY = "ONNX protobuf files - used in ARMNN for Caffe network models"
+SUMMARY = "ONNX protobuf files - used in Arm NN for ONNX parser"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=efff5c5110f124a1e2163814067b16e7"
 

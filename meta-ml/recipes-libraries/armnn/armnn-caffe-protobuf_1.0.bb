@@ -1,5 +1,5 @@
 # Copyright 2020-2021 NXP
-SUMMARY = "Caffe protobuf files - used in ARMNN for Caffe network models"
+SUMMARY = "Caffe protobuf files - used in Arm NN for Caffe parser"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=91d560803ea3d191c457b12834553991"
 

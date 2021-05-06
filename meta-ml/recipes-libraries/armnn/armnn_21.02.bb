@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074"
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
 SRCBRANCH = "branches/armnn_21_02"
 
-SRCREV = "f1f67cfa901acb0b83efa4db64cb506eb717a900"
+SRCREV = "f1f67cfa901acb0b83efa4db64cb506eb717a900" 
 
 SRCREV_FORMAT = "armnn"
 
@@ -41,20 +41,20 @@ PACKAGECONFIG_VSI_NPU_mx8   = "vsi-npu"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
 PACKAGECONFIG_VSI_NPU_mx8mnlite = ""
 
-PACKAGECONFIG ??= "neon ref caffe tensorflow tensorflow-lite onnx tests pyarmnn ${PACKAGECONFIG_VSI_NPU}"
+PACKAGECONFIG ??= "neon ref caffe tensorflow tensorflow-lite onnx tests pyarmnn delegate ${PACKAGECONFIG_VSI_NPU}"
 
-PACKAGECONFIG[caffe] = "-DBUILD_CAFFE_PARSER=1 -DCAFFE_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-caffe,-DBUILD_CAFFE_PARSER=0,armnn-caffe"
+PACKAGECONFIG[caffe] = "-DBUILD_CAFFE_PARSER=1 -DCAFFE_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-caffe-protobuf,-DBUILD_CAFFE_PARSER=0,armnn-caffe-protobuf"
 PACKAGECONFIG[neon] = "-DARMCOMPUTENEON=1 -DARMCOMPUTE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libarm_compute.so -DARMCOMPUTE_CORE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libarm_compute_core.so,-DARMCOMPUTENEON=0,arm-compute-library"
-PACKAGECONFIG[onnx] = "-DBUILD_ONNX_PARSER=1 -DONNX_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-onnx ,-DBUILD_ONNX_PARSER=0,armnn-onnx"
+PACKAGECONFIG[onnx] = "-DBUILD_ONNX_PARSER=1 -DONNX_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-onnx-protobuf ,-DBUILD_ONNX_PARSER=0,armnn-onnx-protobuf"
 PACKAGECONFIG[opencl] = "-DARMCOMPUTECL=1,-DARMCOMPUTECL=0,opencl-headers"
-PACKAGECONFIG[tensorflow] = "-DBUILD_TF_PARSER=1 -DTF_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-tensorflow,-DBUILD_TF_PARSER=0, armnn-tensorflow "
-PACKAGECONFIG[tensorflow-lite] = "-DTF_LITE_SCHEMA_INCLUDE_PATH=${STAGING_DATADIR}/armnn-tensorflow-lite -DTF_LITE_GENERATED_PATH=${STAGING_DATADIR}/armnn-tensorflow-lite -DBUILD_TF_LITE_PARSER=1 ,-DBUILD_TF_LITE_PARSER=0, flatbuffers armnn-tensorflow"
+PACKAGECONFIG[tensorflow] = "-DBUILD_TF_PARSER=1 -DTF_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-tensorflow-protobuf,-DBUILD_TF_PARSER=0, armnn-tensorflow-protobuf"
+PACKAGECONFIG[tensorflow-lite] = "-DTF_LITE_SCHEMA_INCLUDE_PATH=${STAGING_DATADIR}/armnn-tensorflow-protobuf-lite -DTF_LITE_GENERATED_PATH=${STAGING_DATADIR}/armnn-tensorflow-protobuf-lite -DBUILD_TF_LITE_PARSER=1 ,-DBUILD_TF_LITE_PARSER=0, flatbuffers armnn-tensorflow-protobuf"
 PACKAGECONFIG[unit-tests] = "-DBUILD_UNIT_TESTS=1,-DBUILD_UNIT_TESTS=0"
 PACKAGECONFIG[tests] = "-DBUILD_TESTS=1,-DBUILD_TESTS=0"
 PACKAGECONFIG[ref] = "-DARMNNREF=1,-DARMNNREF=0"
 PACKAGECONFIG[vsi-npu] = "-DVSI_NPU=1,-DVSI_NPU=0,nn-imx"
 PACKAGECONFIG[pyarmnn] = ",,armnn-swig-native python3-native python3-pip-native python3-wheel-native python3-setuptools-native"
-
+PACKAGECONFIG[delegate] = "-DBUILD_ARMNN_TFLITE_DELEGATE=1 -DARMNN_SOURCE_DIR=${WORKDIR}/git -DTFLITE_INCLUDE_DIR=${STAGING_DATADIR}/armnn-tensorflow-lite -DTFLITE_LIB_DIR=${STAGING_DATADIR}/armnn-tensorflow-lite -DFLATBUFFERS_ROOT=${STAGING_DIR_HOST}/${prefix},-DBUILD_ARMNN_TFLITE_DELEGATE=0,flatbuffers armnn-tensorflow-protobuf armnn-tensorflow-lite"
 EXTRA_OECMAKE += " \
     -DSHARED_BOOST=1 \
     -DHALF_INCLUDE=${STAGING_DIR_HOST} \
@@ -113,6 +113,7 @@ LIBS += "-larmpl_lp64_mp"
 
 FILES_${PN} += "${libdir}/python*"
 FILES_${PN} += "${PYARMNN_INSTALL_DIR}/examples*"
+FILES_${PN}-dev += "${libdir}/ArmnnDelegateTargets-release.cmake ${libdir}/ArmnnDelegateConfig.cmake ${libdir}/ArmnnDelegateTargets.cmake"
 
 # We support i.MX8 only (for now)
 COMPATIBLE_MACHINE = "(mx8)"
