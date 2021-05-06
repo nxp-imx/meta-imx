@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982"
 DEPENDS = "json-c optee-os optee-client python3-pycryptodomex-native"
 DEPENDS_append_mx8qxp = " imx-seco-libs"
 
-SRCBRANCH = "master"
+SRCBRANCH = "lf-5.10.y_2.0.0"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH} \
     file://0001-CMakeLists.txt-core-pkcs11-Use-CMAKE_INSTALL_LIBDIR-.patch"
-SRCREV = "28d766c4adc1f9bb44d60270a2430feddb1bad8a"
+SRCREV = "704e10fc41d6441702e86cbe8f2cffd87572e28b"
 
 S = "${WORKDIR}/git"
 
