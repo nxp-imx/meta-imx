@@ -9,7 +9,7 @@ RDEPENDS_${PN} += "pytorch python3-numpy python3-future python3-pillow libjpeg-t
 PV = "0.8.2"
 
 PYTORCH_SRC ?= "git://github.com/nxpmicro/pytorch-release.git;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "lf-5.10.y_2.0.0"
 SRCREV = "db6e58f9b12c90ae1c8bd6221eb3a93f05eaab94"
 
 SRC_URI = " \
