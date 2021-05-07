@@ -1,4 +1,4 @@
-# Copyright (C) 2019-20221 NXP
+# Copyright (C) 2019-2021 NXP
 
 DESCRIPTION = "ECDSA Verification Engine using HSM"
 SUMMARY = "ECDSA Verification Engine using HSM"
@@ -9,8 +9,8 @@ DEPENDS = "imx-seco-libs"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "3d149bbd95d3164c4d39c31b67dde1d8"
-SRC_URI[sha256sum] = "b595bb4b79eeacafb49c8810ceb8b13324067f56be7ef318b6a5f07969e9cb98"
+SRC_URI[md5sum] = "908a74418ad55f60990f7457f863cee3"
+SRC_URI[sha256sum] = "6ebab9b20a797dbcaa1d0057d14a736d5a3b0512f4d1a1c752e55165d76fc9b2"
 
 inherit fsl-eula-unpack
 
