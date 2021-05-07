@@ -7,7 +7,7 @@ DEPENDS = "google-coral-posenet gstreamer1.0-plugins-base opencv"
 RDEPENDS_${PN} += "google-coral-posenet"
 
 EIQ_APPS_SRC ?= "git://source.codeaurora.org/external/imx/eiq-apps-imx.git;protocol=https"
-SRCBRANCH = "lf-5.10.y_1.0.0"
+SRCBRANCH = "lf-5.10.y_2.0.0"
 
 SRC_URI = "${EIQ_APPS_SRC};branch=${SRCBRANCH}"
 SRCREV = "82de0a15cee2dc12ddfdd4d3fe7ba1994af5f5db"
