@@ -9,8 +9,8 @@ DEPENDS = "imx-seco-libs"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "2d0309d2dd3dc20cde5583353f733d3a"
-SRC_URI[sha256sum] = "ccee988c338b8654c02da0de8742ffdfc4d4f9610a7ba7cde880ecd9d4c8f950"
+SRC_URI[md5sum] = "3d149bbd95d3164c4d39c31b67dde1d8"
+SRC_URI[sha256sum] = "b595bb4b79eeacafb49c8810ceb8b13324067f56be7ef318b6a5f07969e9cb98"
 
 inherit fsl-eula-unpack
 
