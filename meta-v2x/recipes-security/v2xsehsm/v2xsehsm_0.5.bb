@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://BSD-3-Clause.txt;md5=664939843ae3416d811479b21978e8b4
 
 DEPENDS = "imx-seco-libs"
 
-SRCBRANCH = "v2x-dev"
+SRCBRANCH = "lf-5.10.y_2.0.0"
 V2XSEHSM_SRC ?= "git://source.codeaurora.org/external/imx/v2xsehsm.git;protocol=ssh"
 SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH}"
 SRCREV = "1dd537fa5339d49de69945f701af7553cd77e7b7"
