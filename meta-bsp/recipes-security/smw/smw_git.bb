@@ -1,4 +1,4 @@
-# Copyright 2020-21 NXP
+# Copyright 2020-21 NXP 
 
 SUMMARY = "NXP i.MX Security Middleware Library"
 DESCRIPTION = "NXP i.MX Security Middleware Library"
