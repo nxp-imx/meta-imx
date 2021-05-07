@@ -35,6 +35,7 @@ IMX_UAPI_HEADERS = " \
     pxp_device.h \
     pxp_dma.h \
     videodev2.h \
+    llc.h \
 "
 
 do_install() {
