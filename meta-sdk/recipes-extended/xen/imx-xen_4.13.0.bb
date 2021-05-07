@@ -12,7 +12,7 @@ SRC_URI = " \
     file://xen-arm64-implement-atomic-fetch-add.patch \                         
     "
 
-SRCREV = "f538d6cef34515fedb923a10774766f15487d2ab" 
+SRCREV = "f538d6cef34515fedb923a10774766f15487d2ab"
 
 S = "${WORKDIR}/git"
 
