@@ -14,6 +14,7 @@ ML_PKGS = " \
     ml-security \
     pytorch \
     torchvision \
+    tvm \
     deepview-rt \
 "
 ML_PKGS_remove_mx8mm = "deepview-rt"
