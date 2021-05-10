@@ -1,4 +1,5 @@
 # Copyright 2021 NXP
+
 DESCRIPTION = "Google Coral Edge TPU Posenet Library"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=55899200c3031a66eb11a57a52f7a75e"
