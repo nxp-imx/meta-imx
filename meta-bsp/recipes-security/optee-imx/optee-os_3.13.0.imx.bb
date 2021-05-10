@@ -32,7 +32,7 @@ PLATFORM_FLAVOR_mx8qm             = "mx8qmmek"
 PLATFORM_FLAVOR_mx8qxp            = "mx8qxpmek"
 PLATFORM_FLAVOR_mx8dx             = "mx8dxmek"
 PLATFORM_FLAVOR_mx8dxl            = "mx8dxlevk"
-PLATFORM_FLAVOR_mx8mnlite         = "mx8mnevk"
+PLATFORM_FLAVOR_mx8mnul           = "mx8mnevk"
 
 
 OPTEE_ARCH ?= "arm32"

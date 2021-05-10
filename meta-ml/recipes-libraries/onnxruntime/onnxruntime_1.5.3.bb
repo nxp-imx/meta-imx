@@ -37,7 +37,7 @@ EXTRA_OECMAKE += "\
 PACKAGECONFIG_VSI_NPU       = ""
 PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
-PACKAGECONFIG_VSI_NPU_mx8mnlite = ""
+PACKAGECONFIG_VSI_NPU_mx8mnul = ""
 
 PACKAGECONFIG ?= "openmp test reports sharedlib armnn eigenblas acl acl-2102 ${PACKAGECONFIG_VSI_NPU}"
 
