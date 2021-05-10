@@ -1105,6 +1105,33 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
+Package:                     coral-posenet-imx.git
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    Google Coral Edge TPU Posenet Library
+Release Location:            https://source.codeaurora.org/external/imx/coral-posenet-imx -b rel_imx_5.10.35_2.0.0
+--------------------------------------------
+
+Package:                     eiq-apps-imx
+Outgoing License:            LGPL-2.1 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    Gstreamer Neural Network inference Demo
+Release Location:            https://source.codeaurora.org/external/imx/eiq-apps-imx -b rel_imx_5.10.35_2.0.0
+--------------------------------------------
+
+Package:                     eiq-tvm-imx.git
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    Open Deep Learning Compiler Stack
+Release Location:            https://source.codeaurora.org/external/imx/eiq-tvm-imx -b rel_imx_5.10.35_2.0.0
+--------------------------------------------
+
 Package:                     onnxruntime-imx.git
 Outgoing License:            MIT 
 License File:                LICENSE
@@ -1153,6 +1180,15 @@ Release Location:            https://source.codeaurora.org/external/imx/tensorfl
 Origin:                      NXP (Apache-2.0)
                              TensorFlow (Apache-2.0) - https://github.com/tensorflow/tensorflow/
 
+--------------------------------------------
+
+Package:                     tim-vx-imx.git
+Outgoing License:            MIT 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    Tensor Interface Module for OpenVX
+Release Location:            https://source.codeaurora.org/external/imx/tim-vx-imx -b rel_imx_5.10.35_2.0.0
 --------------------------------------------
 
 Package:                     deepview-rt-2.4.18-aarch64.bin
