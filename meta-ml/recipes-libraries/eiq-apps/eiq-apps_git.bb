@@ -1,5 +1,5 @@
 # Copyright 2021 NXP
-DESCRIPTION = "GStreamer Neural Network Inference demo"
+DESCRIPTION = "GStreamer Neural Network Inference Demo"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
