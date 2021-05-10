@@ -11,6 +11,7 @@ TIM_VX_SRC ?= "git://source.codeaurora.org/external/imx/tim-vx-imx.git;protocol=
 SRCBRANCH = "lf-5.10.y_2.0.0"
 SRCREV = "8c502e4c80bef455890c3c33e568f11ff75601a6"
 SRC_URI = "${TIM_VX_SRC};branch=${SRCBRANCH}"
+
 S = "${WORKDIR}/git"
 
 inherit cmake
