@@ -17,8 +17,10 @@ ML_PKGS = " \
     tvm \
     deepview-rt \
 "
-ML_PKGS_remove_mx8mm = "deepview-rt"
-ML_PKGS_remove_mx8mnlite = "deepview-rt"
+
+ML_PKGS_append_mx8 = " \
+    deepview-rt-examples \
+"
 
 ML_PKGS_append_mx8mm = "eiq-apps"
 ML_PKGS_append_mx8mp = "eiq-apps"
