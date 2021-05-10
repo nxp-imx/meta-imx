@@ -40,8 +40,12 @@ DEPENDS_append_imxgpu3d = " virtual/libgles2"
 
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
-SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
-SRCREV = "7ea472feb6dffc96104ca3e2eab637af62095a3b"
+SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH} \
+    file://0001-RenderToTexture-Fix-incorrect-G2D-dependency.patch \
+"
+
+SRCREV = "9dd46a4bb942fe1bd81a0186571dcccb2bd0284f"
+
 S = "${WORKDIR}/git"
 
 BACKEND = \
