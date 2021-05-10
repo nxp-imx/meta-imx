@@ -3,4 +3,4 @@ OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;proto
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
 SRCREV = "58e81912d5ea0a3a95b57e671bb4535132596389"
 
-PLATFORM_FLAVOR_mx8mnlite = "mx8mnevk"
+PLATFORM_FLAVOR_mx8mnul = "mx8mnevk"

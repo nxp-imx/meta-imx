@@ -17,8 +17,8 @@ ML_PKGS_mx8dxl             = ""
 ML_STATICDEV_mx8dxl        = ""
 ML_PKGS_mx8phantomdxl      = ""
 ML_STATICDEV_mx8phantomdxl = ""
-ML_PKGS_mx8mnlite          = ""
-ML_STATICDEV_mx8mnlite     = ""
+ML_PKGS_mx8mnul            = ""
+ML_STATICDEV_mx8mnul       = ""
 
 # Add opencv for i.MX GPU
 OPENCV_PKGS       ?= ""
