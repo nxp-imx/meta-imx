@@ -33,9 +33,6 @@ IMAGE_FEATURES += " \
 ERPC_COMPS ?= ""
 ERPC_COMPS_append_mx7ulp = "packagegroup-imx-erpc"
 
-ISP_PKGS = ""
-ISP_PKGS_mx8mp = "packagegroup-imx-isp"
-
 HANTRO_PKGS = ""
 HANTRO_PKGS_mx8mm = "imx-vpu-hantro-daemon"
 HANTRO_PKGS_mx8mp = "imx-vpu-hantro-daemon"
@@ -49,10 +46,10 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-fsl-tools-gpu-external \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
+    packagegroup-imx-isp \
     packagegroup-imx-security \
     packagegroup-fsl-gstreamer1.0 \
     packagegroup-fsl-gstreamer1.0-full \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
-    ${ISP_PKGS} \
     ${HANTRO_PKGS} \
 "
