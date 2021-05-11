@@ -11,4 +11,3 @@ SRC_URI_append_imxgpu = " \
     file://0008-glamor-Introduce-a-central-place-for-our-pixmap-form.patch \
 "
 
-IMX_OPENGL_PKGCONFIGS_REMOVE_imxgpu_mx8 = ""
