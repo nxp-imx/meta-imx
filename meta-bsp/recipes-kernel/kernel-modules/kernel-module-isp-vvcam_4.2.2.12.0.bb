@@ -15,3 +15,5 @@ SRCREV = "4cba67adb552d0c22b6e7a8f39c5b2ed7fcd8322"
 S = "${WORKDIR}/git/vvcam/v4l2"
 
 inherit module
+
+COMPATIBLE_MACHINE = "(mx8mp)"
