@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://BSD-3-Clause.txt;md5=664939843ae3416d811479b21978e8b4
 
 DEPENDS = "ecdsa-lib-imx v2xsehsm openssl"
 
-SRCBRANCH = "lf-5.10.y_2.0.0"
+SRCBRANCH = "version_0.5"
 VTEST_SRC ?= "git://source.codeaurora.org/external/imx/vtest.git;protocol=ssh"
 SRC_URI = "${VTEST_SRC};branch=${SRCBRANCH} \
     file://seco_nvm_daemon.service \
 "
-SRCREV = "440bf101c161e07771db220716f44d4321ebb917"
+SRCREV = "3216645058c39004f084ab238683aaf9eab5b7b5"
 
 S = "${WORKDIR}/git"
 
