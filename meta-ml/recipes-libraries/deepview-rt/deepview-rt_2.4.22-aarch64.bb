@@ -46,4 +46,3 @@ INSANE_SKIP_${PN} += "dev-so dev-deps ldflags"
 
 COMPATIBLE_MACHINE = "(mx8)"
 BBCLASSEXTEND = "nativesdk"
-
