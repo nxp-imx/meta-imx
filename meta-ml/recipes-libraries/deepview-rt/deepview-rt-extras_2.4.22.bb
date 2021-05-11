@@ -13,7 +13,7 @@ S = "${WORKDIR}/${BPN}-${PV}"
 inherit fsl-eula-unpack cmake
 
 DEPENDS = "deepview-rt"
-RDEPENDS_${PN} += "deepview-rt nn-imx"
+RDEPENDS_${PN} += "deepview-rt"
 
 OECMAKE_GENERATOR = "Unix Makefiles"
 
