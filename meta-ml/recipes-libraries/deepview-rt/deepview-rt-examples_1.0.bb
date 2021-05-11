@@ -26,6 +26,7 @@ do_install () {
     chown -R root:root "${D}"
 }
 
-COMPATIBLE_MACHINE = "(mx8)"
 INSANE_SKIP_${PN} += "rpaths dev-deps ldflags"
 CLEANBROKEN = "1"
+
+COMPATIBLE_MACHINE = "(mx8)"
