@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v22 April 2021
+LA_OPT_NXP_Software_License v23 May 2021
 
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
@@ -475,6 +475,9 @@ or embedded within, Authorized Systems that include an Amphion Video Decoder.
 Aquantia Corp.: You may use Aquantia's API binaries solely to flash the API
 software to an NXP Product which mates with an Aquantia device.
 
+Argus Cyber Security: The Argus software may only be used in object code and
+only for evaluation and demonstration purposes.
+
 Atheros: Use of Atheros software is limited to evaluation and demonstration
 only.  Permitted distributions must be similarly limited. Further rights must
 be obtained directly from Atheros.
@@ -486,8 +489,11 @@ Au-Zone Technologies: eIQ Portal, Model Tool, DeepViewRT and ModelRunner are
 distributed by NXP under license from Au-Zone Technologies.  Your use of the
 Licensed Software, examples and related documentation is subject to the
 following:
+
 (1)          Use of Software is limited to Authorized System only
+
 (2)          In no event may Licensee Sublicense OR distribute the Software
+
 (3)          AU-ZONE TECHNOLOGIES SHALL NOT BE LIABLE FOR USE OF LICENSED
 SOFTWARE IN CRITICAL APPLICATIONS BY LICENSEE
 
