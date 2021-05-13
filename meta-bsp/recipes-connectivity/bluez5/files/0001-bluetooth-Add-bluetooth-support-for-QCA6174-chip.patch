@@ -1,7 +1,7 @@
-From d509b84f237c11874087d7ea527e5ba2f460ed2c Mon Sep 17 00:00:00 2001
+From 2fcf2d7492cd24089e884a0daebb0750217bc2f4 Mon Sep 17 00:00:00 2001
 From: Fugang Duan <fugang.duan@nxp.com>
 Date: Tue, 29 Aug 2017 10:12:57 +0800
-Subject: [PATCH 1/5] bluetooth : Add bluetooth support for QCA6174 chip.
+Subject: [PATCH] bluetooth : Add bluetooth support for QCA6174 chip.
 
 Register the QCA6174 initialization routine with hciattach for
 downloading firmware patches to the bluetooth controller.
@@ -18,19 +18,22 @@ cherry-pick and merged from:
 Change-Id: I87f2927d7096904071a02d73d3afef0dc34db414
 Signed-off-by: Rupesh Tatiya <rtatiya@codeaurora.org>
 Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
+
 ---
  Makefile.tools         |    3 +-
  tools/hciattach.c      |   26 +-
  tools/hciattach.h      |    2 +
- tools/hciattach_rome.c | 1864 ++++++++++++++++++++++++++++++++++++++++++++++++
- tools/hciattach_rome.h |  371 ++++++++++
+ tools/hciattach_rome.c | 1864 ++++++++++++++++++++++++++++++++++++++++
+ tools/hciattach_rome.h |  371 ++++++++
  5 files changed, 2264 insertions(+), 2 deletions(-)
+ create mode 100644 tools/hciattach_rome.c
+ create mode 100644 tools/hciattach_rome.h
 
 diff --git a/Makefile.tools b/Makefile.tools
-index 0fd6dec..f1a1def 100644
+index d5fdf2d..baafecf 100644
 --- a/Makefile.tools
 +++ b/Makefile.tools
-@@ -283,7 +283,8 @@ tools_hciattach_SOURCES = tools/hciattach.c tools/hciattach.h \
+@@ -350,7 +350,8 @@ tools_hciattach_SOURCES = tools/hciattach.c tools/hciattach.h \
  						tools/hciattach_ath3k.c \
  						tools/hciattach_qualcomm.c \
  						tools/hciattach_intel.c \
@@ -39,12 +42,12 @@ index 0fd6dec..f1a1def 100644
 +						tools/hciattach_rome.c tools/hciattach_rome.h
  tools_hciattach_LDADD = lib/libbluetooth-internal.la
  
- tools_hciconfig_SOURCES = tools/hciconfig.c tools/csr.h tools/csr.c
+ tools_hciconfig_SOURCES = tools/hciconfig.c
 diff --git a/tools/hciattach.c b/tools/hciattach.c
-index fad176c..200f734 100644
+index 276a4e5..7977a80 100644
 --- a/tools/hciattach.c
 +++ b/tools/hciattach.c
-@@ -69,6 +69,8 @@ struct uart_t {
+@@ -57,6 +57,8 @@ struct uart_t {
  #define ENABLE_PM	1
  #define DISABLE_PM	0
  
@@ -53,7 +56,7 @@ index fad176c..200f734 100644
  static volatile sig_atomic_t __io_canceled = 0;
  
  static void sig_hup(int sig)
-@@ -263,6 +265,12 @@ static int ath3k_pm(int fd, struct uart_t *u, struct termios *ti)
+@@ -251,6 +253,12 @@ static int ath3k_pm(int fd, struct uart_t *u, struct termios *ti)
  	return ath3k_post(fd, u->pm);
  }
  
@@ -66,7 +69,7 @@ index fad176c..200f734 100644
  static int qualcomm(int fd, struct uart_t *u, struct termios *ti)
  {
  	return qualcomm_init(fd, u->speed, ti, u->bdaddr);
-@@ -1093,6 +1101,11 @@ struct uart_t uart[] = {
+@@ -1081,6 +1089,11 @@ struct uart_t uart[] = {
  	{ "ath3k",    0x0000, 0x0000, HCI_UART_ATH3K, 115200, 115200,
  			FLOW_CTL, DISABLE_PM, NULL, ath3k_ps, ath3k_pm  },
  
@@ -78,7 +81,7 @@ index fad176c..200f734 100644
  	/* QUALCOMM BTS */
  	{ "qualcomm",   0x0000, 0x0000, HCI_UART_H4,   115200, 115200,
  			FLOW_CTL, DISABLE_PM, NULL, qualcomm, NULL },
-@@ -1195,6 +1208,8 @@ static int init_uart(char *dev, struct uart_t *u, int send_break, int raw)
+@@ -1183,6 +1196,8 @@ static int init_uart(char *dev, struct uart_t *u, int send_break, int raw)
  		goto fail;
  	}
  
@@ -87,7 +90,7 @@ index fad176c..200f734 100644
  	/* Set TTY to N_HCI line discipline */
  	i = N_HCI;
  	if (ioctl(fd, TIOCSETD, &i) < 0) {
-@@ -1211,6 +1226,7 @@ static int init_uart(char *dev, struct uart_t *u, int send_break, int raw)
+@@ -1199,6 +1214,7 @@ static int init_uart(char *dev, struct uart_t *u, int send_break, int raw)
  		perror("Can't set device");
  		goto fail;
  	}
@@ -95,7 +98,7 @@ index fad176c..200f734 100644
  
  	if (u->post && u->post(fd, u, &ti) < 0)
  		goto fail;
-@@ -1249,7 +1265,7 @@ int main(int argc, char *argv[])
+@@ -1237,7 +1253,7 @@ int main(int argc, char *argv[])
  	printpid = 0;
  	raw = 0;
  
@@ -104,7 +107,7 @@ index fad176c..200f734 100644
  		switch(opt) {
  		case 'b':
  			send_break = 1;
-@@ -1282,6 +1298,11 @@ int main(int argc, char *argv[])
+@@ -1270,6 +1286,11 @@ int main(int argc, char *argv[])
  			raw = 1;
  			break;
  
@@ -116,7 +119,7 @@ index fad176c..200f734 100644
  		default:
  			usage();
  			exit(1);
-@@ -1426,12 +1447,15 @@ int main(int argc, char *argv[])
+@@ -1414,12 +1435,15 @@ int main(int argc, char *argv[])
  			break;
  	}
  
@@ -133,10 +136,10 @@ index fad176c..200f734 100644
  	return 0;
  }
 diff --git a/tools/hciattach.h b/tools/hciattach.h
-index 249aab4..59efa31 100644
+index 26c0d54..ce808ad 100644
 --- a/tools/hciattach.h
 +++ b/tools/hciattach.h
-@@ -45,6 +45,7 @@
+@@ -32,6 +32,7 @@
  #define HCI_UART_AG6XX	9
  #define HCI_UART_NOKIA	10
  #define HCI_UART_MRVL	11
@@ -144,7 +147,7 @@ index 249aab4..59efa31 100644
  
  #define HCI_UART_RAW_DEVICE	0
  #define HCI_UART_RESET_ON_INIT	1
-@@ -65,6 +66,7 @@ int bgb2xx_init(int dd, bdaddr_t *bdaddr);
+@@ -52,6 +53,7 @@ int bgb2xx_init(int dd, bdaddr_t *bdaddr);
  int ath3k_init(int fd, int speed, int init_speed, char *bdaddr,
  						struct termios *ti);
  int ath3k_post(int fd, int pm);
@@ -2399,6 +2402,3 @@ index 0000000..9770d0b
 +#endif
 +
 +#endif /* HW_ROME_H */
--- 
-1.9.1
-
