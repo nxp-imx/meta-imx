@@ -10,6 +10,7 @@ SRCBRANCH = "lf-5.10.y_2.0.0"
 VTEST_SRC ?= "git://source.codeaurora.org/external/imx/vtest.git;protocol=ssh"
 SRC_URI = "${VTEST_SRC};branch=${SRCBRANCH} \
     file://seco_nvm_daemon.service \
+    file://0001-Ignore-v2xsehsmConfig.cmake.patch \
 "
 SRCREV = "3216645058c39004f084ab238683aaf9eab5b7b5"
 
