@@ -8,7 +8,8 @@ DEPENDS = "imx-seco-libs"
 
 SRCBRANCH = "lf-5.10.y_2.0.0"
 V2XSEHSM_SRC ?= "git://source.codeaurora.org/external/imx/v2xsehsm.git;protocol=ssh"
-SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH} \
+    file://0001-Install-header-to-standard-location.patch"
 SRCREV = "1c4ea5d5aebaf6b5e1b77f655c03899b4e9661c2"
 
 S = "${WORKDIR}/git"
