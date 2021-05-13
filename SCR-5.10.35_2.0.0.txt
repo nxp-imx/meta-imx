@@ -236,7 +236,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-seco-3.7.8.bin
+Package:                     imx-seco-3.8.1.bin
 Outgoing License:            LA_OPT_NXP_Software_License v15 August 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
