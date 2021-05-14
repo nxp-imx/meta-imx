@@ -28,6 +28,8 @@ PREFERRED_VERSION_gstreamer1.0-plugins-good-qt_mx8 = "1.18.0.imx"
 PREFERRED_VERSION_gstreamer1.0_mx8              = "1.18.0.imx"
 PREFERRED_VERSION_gstreamer1.0-libav_mx8        = "1.18.0"
 
+PREFERRED_VERSION_imx-gst1.0-plugin     = "4.6.2"
+
 PREFERRED_VERSION_opengl-es-cts     = "3.2.6.1"
 PREFERRED_VERSION_opengl-es-cts_mx6 = "3.2.4.0"
 PREFERRED_VERSION_opengl-es-cts_mx7 = "3.2.4.0"
