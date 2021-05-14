@@ -21,7 +21,7 @@ S = "${WORKDIR}/git"
 
 # Set the CMAKE_SYSROOT, as it is not set in CMAKE_TOOLCHAIN_FILE
 EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR=}"
-EXTRA_OECMAKE += "-DTFLITE_ENABLE_XNNPACK=on -DTFLITE_ENABLE_RUY=on -DTFLITE_ENABLE_NNAPI=on -DTFLITE_ENABLE_VX=on -DTFLITE_BUILD_EVALTOOLS=on  ${S}/tensorflow/lite/"
+EXTRA_OECMAKE += "-DTFLITE_ENABLE_XNNPACK=on -DTFLITE_ENABLE_RUY=on -DTFLITE_ENABLE_NNAPI=on -DTFLITE_ENABLE_VX=on -DTFLITE_BUILD_EVALTOOLS=on -DTFLITE_BUILD_SHARED_LIB=on  ${S}/tensorflow/lite/"
 
 CXXFLAGS += "-fPIC"
 
@@ -47,9 +47,9 @@ do_compile_append () {
 do_install() {
     # install libraries
     install -d ${D}${libdir}
-    for lib in ${B}/*.a
+    for lib in ${B}/*.so*
     do
-        install -m 0555 $lib ${D}${libdir}
+        cp --no-preserve=ownership -d $lib ${D}${libdir}
     done
 
     # install header files
