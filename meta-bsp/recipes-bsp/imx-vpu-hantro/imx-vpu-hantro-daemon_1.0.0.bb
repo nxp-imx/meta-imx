@@ -1,7 +1,7 @@
 # Copyright 2021 NXP
 DESCRIPTION = "i.MX HANTRO V4L2 Daemon"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=3c3fe2b904fd694f28d2f646ee16dddb"
+LIC_FILES_CHKSUM = "file://COPYING;md5=85d06b38f17b935ca11784d67075b846"
 
 inherit fsl-eula-unpack
 
