@@ -3,7 +3,7 @@ NXP Software Content Register
 Release - Linux 5.10.35_2.0.0
  June 2021
 
-Outgoing License: LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies
+Outgoing License: LA_OPT_NXP_Software_License v23 May 2021 - Additional distribution license granted - Section 2.3 applies
 License File:     COPYING
 
 Yocto Project recipe manifest:
