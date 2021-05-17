@@ -13,6 +13,7 @@ SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
 SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
         file://0001-Makefile-Fix-LIBDIR-for-multilib.patch \
         file://0002-Makefile-Fix-install-to-clear-host-user-contaminated.patch \
+        file://0001-add-v2x_test-to-the-installed-binaries.patch \
 "
 SRCREV = "9da5d5ac52ce1eac1020165bb9207b506eaaa6c9"
 

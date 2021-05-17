@@ -38,6 +38,9 @@ HANTRO_PKGS_mx8mm = "imx-vpu-hantro-daemon"
 HANTRO_PKGS_mx8mp = "imx-vpu-hantro-daemon"
 HANTRO_PKGS_mx8mq = "imx-vpu-hantro-daemon"
 
+V2X_PKGS = ""
+V2X_PKGS_mx8dxl = "packagegroup-imx-v2x"
+
 CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-core-full-cmdline \
     packagegroup-tools-bluetooth \
@@ -52,4 +55,5 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-fsl-gstreamer1.0-full \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
     ${HANTRO_PKGS} \
+    ${V2X_PKGS} \
 "
