@@ -12,7 +12,7 @@ SRCBRANCH = "lf-5.10.y_2.0.0"
 SRC_URI = "${GOOGLE_CORAL_POSENET_SRC};branch=${SRCBRANCH} \
            git://github.com/google-coral/project-posenet.git;protocol=https;name=project-posenet;subpath=models;destsuffix=git/edgetpu/models \
 "
-SRCREV = "16a0b7e1085bde5971420ba332805e3d53553013"
+SRCREV = "7b913cfa32e48eaaa23c4f996d4bb3d11db6b1b4"
 SRCREV_project-posenet = "58a611ed1135852b8e97a7626777a7304e8ecc21"
 
 SRC_URI += "https://dl.google.com/coral/canned_models/all_models.tar.gz;name=canned-models;subdir=canned-models"
@@ -23,13 +23,17 @@ inherit autotools
 
 S = "${WORKDIR}/git/edgetpu"
 
+INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_SYSROOT_STRIP = "1"
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+
 do_install() {
     install -d ${D}${libdir}
     install -d ${D}${includedir}/posenet
     install -d ${D}${datadir}/gstnninferencedemo/google-coral/examples-camera
     install -d ${D}${datadir}/gstnninferencedemo/google-coral/project-posenet
 
-    install -m 0555 ${B}/.libs/libgooglecoraledgetpuposenet.a ${D}${libdir}
+    cp -d ${B}/.libs/libgooglecoraledgetpuposenet.so* ${D}${libdir}
     install -m 0644 ${S}/src/cpp/posenet/*.h ${D}${includedir}/posenet
     install -m 0644 ${WORKDIR}/canned-models/coco_labels.txt ${D}${datadir}/gstnninferencedemo/google-coral/examples-camera
     install -m 0644 ${WORKDIR}/canned-models/mobilenet_ssd_v2_coco_quant_postprocess.tflite ${D}${datadir}/gstnninferencedemo/google-coral/examples-camera
@@ -37,3 +41,4 @@ do_install() {
 }
 
 FILES_${PN} += "${datadir}/gstnninferencedemo/*"
+FILES_${PN} += "${libdir}"
