@@ -1254,7 +1254,7 @@ Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use bcu.
 Release Location:            https://github.com/NXPmicro/bcu -b master
 --------------------------------------------
-PATCHES IN META_FSL_BSP_RELEASE
+PATCHES IN META_IMX
 --------------------------------------------
 
 Patches for:               systemd
