@@ -28,6 +28,7 @@ do_install () {
     cp -r ${S}/include/nnrt/* ${D}/${includedir}/nnrt
 }
 
-COMPATIBLE_MACHINE = "(mx8)"
-COMPATIBLE_MACHINE_mx8mm = "(^$)"
-COMPATIBLE_MACHINE_mx8mnul = "(^$)"
+# Works for i.MX 8 with GPU except for 8M Mini
+COMPATIBLE_MACHINE        = "(^$)"
+COMPATIBLE_MACHINE_imxgpu = "(mx8)"
+COMPATIBLE_MACHINE_mx8mm  = "(^$)"
