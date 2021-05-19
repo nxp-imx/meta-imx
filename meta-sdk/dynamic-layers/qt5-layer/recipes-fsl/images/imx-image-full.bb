@@ -10,15 +10,10 @@ CONFLICT_DISTRO_FEATURES = "directfb"
 
 # Add machine learning for certain SoCs
 ML_PKGS                   ?= ""
-ML_STATICDEV              ?= ""
 ML_PKGS_mx8                = "packagegroup-imx-ml"
-ML_STATICDEV_mx8           = ""
 ML_PKGS_mx8dxl             = ""
-ML_STATICDEV_mx8dxl        = ""
 ML_PKGS_mx8phantomdxl      = ""
-ML_STATICDEV_mx8phantomdxl = ""
 ML_PKGS_mx8mnul            = ""
-ML_STATICDEV_mx8mnul       = ""
 
 # Add opencv for i.MX GPU
 OPENCV_PKGS       ?= ""
@@ -33,8 +28,4 @@ IMAGE_INSTALL += " \
     ${ML_PKGS} \
     packagegroup-qt5-imx \
     tzdata \
-"
-
-TOOLCHAIN_TARGET_TASK += " \
-    ${ML_STATICDEV} \
 "
