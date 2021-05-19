@@ -8,13 +8,6 @@ inherit populate_sdk_qt5
 
 CONFLICT_DISTRO_FEATURES = "directfb"
 
-# Add machine learning for certain SoCs
-ML_PKGS                   ?= ""
-ML_PKGS_mx8                = "packagegroup-imx-ml"
-ML_PKGS_mx8dxl             = ""
-ML_PKGS_mx8phantomdxl      = ""
-ML_PKGS_mx8mnul            = ""
-
 # Add opencv for i.MX GPU
 OPENCV_PKGS       ?= ""
 OPENCV_PKGS_imxgpu = " \
@@ -24,8 +17,8 @@ OPENCV_PKGS_imxgpu = " \
 "
 
 IMAGE_INSTALL += " \
-    ${OPENCV_PKGS} \
-    ${ML_PKGS} \
+    packagegroup-imx-ml \
     packagegroup-qt5-imx \
     tzdata \
+    ${OPENCV_PKGS} \
 "
