@@ -1,0 +1,36 @@
+From 01cc6cdf6ceb6a8b20dab4338adb771373cdbbfe Mon Sep 17 00:00:00 2001
+From: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
+Date: Tue, 11 May 2021 17:31:25 -0500
+Subject: [PATCH 3/3] wayland support for Hello triangle sample
+
+Signed-off-by: Hugo Osornio <hugo.osornio@nxp.com>
+Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
+---
+ samples/api/hello_triangle/hello_triangle.cpp | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/samples/api/hello_triangle/hello_triangle.cpp b/samples/api/hello_triangle/hello_triangle.cpp
+index 3f2b8e7..b62ef82 100644
+--- a/samples/api/hello_triangle/hello_triangle.cpp
++++ b/samples/api/hello_triangle/hello_triangle.cpp
+@@ -187,6 +187,8 @@ void HelloTriangle::init_instance(Context &                        context,
+ 	active_instance_extensions.push_back(VK_MVK_MACOS_SURFACE_EXTENSION_NAME);
+ #elif defined(VK_USE_PLATFORM_XCB_KHR)
+ 	active_instance_extensions.push_back(VK_KHR_XCB_SURFACE_EXTENSION_NAME);
++#elif defined(VK_USE_PLATFORM_WAYLAND_KHR)
++    active_instance_extensions.push_back(VK_KHR_WAYLAND_SURFACE_EXTENSION_NAME);
+ #elif defined(VK_USE_PLATFORM_DISPLAY_KHR)
+ 	active_instance_extensions.push_back(VK_KHR_DISPLAY_EXTENSION_NAME);
+ #else
+@@ -466,7 +468,7 @@ void HelloTriangle::init_swapchain(Context &context)
+ 		}
+ 	}
+ 
+-	VkExtent2D swapchain_size = surface_properties.currentExtent;
++	VkExtent2D swapchain_size{800,800};
+ 
+ 	// FIFO must be supported by all implementations.
+ 	VkPresentModeKHR swapchain_present_mode = VK_PRESENT_MODE_FIFO_KHR;
+-- 
+2.25.1
+

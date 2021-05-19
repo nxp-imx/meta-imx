@@ -1,0 +1,25 @@
+From 01e6667afa4b11e541f78d74076a780d046f5fa7 Mon Sep 17 00:00:00 2001
+From: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
+Date: Wed, 12 May 2021 16:44:32 -0500
+Subject: [PATCH 4/4] glfw : define GLFW_INCLUDE_NONE to avoid using default GL
+
+Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
+---
+ framework/platform/glfw_window.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/framework/platform/glfw_window.cpp b/framework/platform/glfw_window.cpp
+index 0f2de95..91e9228 100644
+--- a/framework/platform/glfw_window.cpp
++++ b/framework/platform/glfw_window.cpp
+@@ -22,6 +22,7 @@
+ #include "common/error.h"
+ 
+ VKBP_DISABLE_WARNINGS()
++#define GLFW_INCLUDE_NONE
+ #include <GLFW/glfw3.h>
+ #include <GLFW/glfw3native.h>
+ #include <spdlog/sinks/stdout_color_sinks.h>
+-- 
+2.25.1
+

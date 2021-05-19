@@ -1,0 +1,66 @@
+From 49198f6ccb388e511e40c963744033b9732b4de8 Mon Sep 17 00:00:00 2001
+From: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
+Date: Tue, 11 May 2021 17:29:48 -0500
+Subject: [PATCH 2/3] Wayland support : Use local context window size.
+
+The default extent will use 0xFFFFFFFF for W and H.
+
+Signed-off-by: Hugo Osornio <hugo.osornio@nxp.com>
+Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
+---
+ framework/core/swapchain.cpp          | 4 +++-
+ framework/rendering/render_target.cpp | 9 +++++----
+ 2 files changed, 8 insertions(+), 5 deletions(-)
+
+diff --git a/framework/core/swapchain.cpp b/framework/core/swapchain.cpp
+index 3821889..bed25a5 100644
+--- a/framework/core/swapchain.cpp
++++ b/framework/core/swapchain.cpp
+@@ -356,7 +356,9 @@ Swapchain::Swapchain(Swapchain &                           old_swapchain,
+ 
+ 	// Chose best properties based on surface capabilities
+ 	properties.image_count    = choose_image_count(image_count, surface_capabilities.minImageCount, surface_capabilities.maxImageCount);
+-	properties.extent         = choose_extent(extent, surface_capabilities.minImageExtent, surface_capabilities.maxImageExtent, surface_capabilities.currentExtent);
++	VkExtent2D localExtent{800,800};
++	LOGI("Using local Extent");
++	properties.extent         = localExtent;//choose_extent(extent, surface_capabilities.minImageExtent, surface_capabilities.maxImageExtent, surface_capabilities.currentExtent);
+ 	properties.array_layers   = choose_image_array_layers(1U, surface_capabilities.maxImageArrayLayers);
+ 	properties.surface_format = choose_surface_format(properties.surface_format, surface_formats, surface_format_priority_list);
+ 	VkFormatProperties format_properties;
+diff --git a/framework/rendering/render_target.cpp b/framework/rendering/render_target.cpp
+index f9940b2..068cafa 100644
+--- a/framework/rendering/render_target.cpp
++++ b/framework/rendering/render_target.cpp
+@@ -40,8 +40,9 @@ Attachment::Attachment(VkFormat format, VkSampleCountFlagBits samples, VkImageUs
+ }
+ const RenderTarget::CreateFunc RenderTarget::DEFAULT_CREATE_FUNC = [](core::Image &&swapchain_image) -> std::unique_ptr<RenderTarget> {
+ 	VkFormat depth_format = get_suitable_depth_format(swapchain_image.get_device().get_gpu().get_handle());
+-
+-	core::Image depth_image{swapchain_image.get_device(), swapchain_image.get_extent(),
++        VkExtent3D localExtent{800,800,1}; // = swapchain_image.get_extent();
++	LOGI("About to create Depth Image {}, {}, {}", localExtent.width, localExtent.height, localExtent.depth);
++	core::Image depth_image{swapchain_image.get_device(), /*swapchain_image.get_extent()*/ localExtent,
+ 	                        depth_format,
+ 	                        VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT,
+ 	                        VMA_MEMORY_USAGE_GPU_ONLY};
+@@ -70,7 +71,7 @@ vkb::RenderTarget::RenderTarget(std::vector<core::Image> &&images) :
+ 	// Allow only one extent size for a render target
+ 	if (unique_extent.size() != 1)
+ 	{
+-		throw VulkanException{VK_ERROR_INITIALIZATION_FAILED, "Extent size is not unique"};
++		//throw VulkanException{VK_ERROR_INITIALIZATION_FAILED, "Extent size is not unique"};
+ 	}
+ 
+ 	extent = *unique_extent.begin();
+@@ -109,7 +110,7 @@ vkb::RenderTarget::RenderTarget(std::vector<core::ImageView> &&image_views) :
+ 	std::transform(views.begin(), views.end(), std::inserter(unique_extent, unique_extent.end()), get_view_extent);
+ 	if (unique_extent.size() != 1)
+ 	{
+-		throw VulkanException{VK_ERROR_INITIALIZATION_FAILED, "Extent size is not unique"};
++		//throw VulkanException{VK_ERROR_INITIALIZATION_FAILED, "Extent size is not unique"};
+ 	}
+ 	extent = *unique_extent.begin();
+ 
+-- 
+2.25.1
+
