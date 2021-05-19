@@ -1,15 +1,12 @@
 # Copyright 2021 NXP
 DESCRIPTION = "i.MX HANTRO V4L2 Daemon"
-LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=85d06b38f17b935ca11784d67075b846"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cd8bc2a79509c22fc9c1782a151210b1"
 
-inherit fsl-eula-unpack
+SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.tar.gz"
 
-
-SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
-
-SRC_URI[md5sum] = "60bb53e3fcead4fa8fa0120e89425b43"
-SRC_URI[sha256sum] = "a1a3c14646f37364618a048afcdd373a93fe4e7b8aa31a9554e9f8f2252b4a76"
+SRC_URI[md5sum] = "cafa266a13893e3c4fe44d8e119cacb2"
+SRC_URI[sha256sum] = "341bc30a4c00f5cf6e1b9f3146230d9f7552a422df35f5b7a2cf6ee7883ba985"
 
 DEPENDS += "imx-vpu-hantro"
 DEPENDS_append_mx8mp = " imx-vpu-hantro-vc"
@@ -37,4 +34,3 @@ INSANE_SKIP_${PN} = "ldflags"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx8mq|mx8mm|mx8mp)"
-
