@@ -913,7 +913,7 @@ Origin:                      VeriSilicon Inc. (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.0.0.bin
+Package:                     imx-vpu-hantro-daemon-1.0.0
 Outgoing License:            MIT License 
 License File:                COPYING
 Package Category:            Multimedia
