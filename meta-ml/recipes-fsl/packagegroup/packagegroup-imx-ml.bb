@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 inherit packagegroup
 
-ML_PKGS = " \
+ML_PKGS            = ""
+ML_PKGS_imxgpu_mx8 = " \
     armnn \
     tensorflow-lite \
     onnxruntime \
@@ -15,16 +16,14 @@ ML_PKGS = " \
     pytorch \
     torchvision \
     tvm \
-    deepview-rt \
-"
-
-ML_PKGS_append_mx8 = " \
     deepview-rt-examples \
 "
 
-ML_PKGS_append_mx8mm = "eiq-apps"
-ML_PKGS_append_mx8mp = "eiq-apps"
+ML_EIQ_PKGS       = ""
+ML_EIQ_PKGS_mx8mm = "eiq-apps"
+ML_EIQ_PKGS_mx8mp = "eiq-apps"
 
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
+    ${ML_EIQ_PKGS} \
 "
