@@ -913,8 +913,8 @@ Origin:                      VeriSilicon Inc. (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.0.0.bin
-Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
+Package:                     imx-vpu-hantro-daemon-1.0.0
+Outgoing License:            MIT License 
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1254,7 +1254,7 @@ Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use bcu.
 Release Location:            https://github.com/NXPmicro/bcu -b master
 --------------------------------------------
-PATCHES IN META_FSL_BSP_RELEASE
+PATCHES IN META_IMX
 --------------------------------------------
 
 Patches for:               systemd
