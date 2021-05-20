@@ -4,7 +4,7 @@ DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=85d06b38f17b935ca11784d67075b846"
 
-DEPENDS = "python libdrm virtual/libg2d"
+DEPENDS = "python3 libdrm virtual/libg2d"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "217b77a29240c5ab51ece4231636fb08"
@@ -79,6 +79,6 @@ FILES_${PN}-dev += " \
 
 INSANE_SKIP_${PN} = "rpaths"
 
-RDEPENDS_${PN} = "libdrm libpython2 bash"
+RDEPENDS_${PN} = "libdrm libpython3 bash"
 
 COMPATIBLE_MACHINE = "(mx8mp)"
