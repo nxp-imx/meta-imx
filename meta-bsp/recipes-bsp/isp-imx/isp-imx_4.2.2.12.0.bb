@@ -79,6 +79,6 @@ FILES_${PN}-dev += " \
 
 INSANE_SKIP_${PN} = "rpaths"
 
-RDEPENDS_${PN} = "libdrm libpython3"
+RDEPENDS_${PN} = "libdrm libpython3 bash"
 
 COMPATIBLE_MACHINE = "(mx8mp)"
