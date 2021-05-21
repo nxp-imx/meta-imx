@@ -14,7 +14,6 @@ SOC_mx8mq   = "imx8mq"
 SOC_mx8qm   = "imx8qm"
 SOC_mx8qxp  = "imx8qx"
 SOC_mx8dxl  = "imx8dxl-phantom"
-SOC_mx8phantomdxl = "imx8dxl-phantom"
 
 IMX_PACKAGE_NAME = "${SOC}-m4-demo-${PV}"
 SRC_URI_append = ";name=${SOC}"

@@ -17,7 +17,6 @@ SOC_mx8mp   = "imx8mp"
 SOC_mx8mq   = "imx8mq"
 SOC_mx8qm   = "imx8qm"
 SOC_mx8qxp  = "imx8qx"
-SOC_mx8phantomdxl = "imx8dxl-phantom"
 
 MCORE_TYPE  ?= "m4"
 MCORE_TYPE_mx8mn  = "m7"

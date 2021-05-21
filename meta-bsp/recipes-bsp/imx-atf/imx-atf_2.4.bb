@@ -29,7 +29,6 @@ PLATFORM_mx8mnul = "imx8mn"
 PLATFORM_mx8mp   = "imx8mp"
 PLATFORM_mx8dx   = "imx8dx"
 PLATFORM_mx8dxl  = "imx8dxl"
-PLATFORM_mx8dxlevk-phantom = "imx8qx"
 
 # Clear LDFLAGS to avoid the option -Wl recognize issue
 # Clear CFLAGS to avoid coherent_arm out of OCRAM size limitation (64KB) - i.MX 8MQ only

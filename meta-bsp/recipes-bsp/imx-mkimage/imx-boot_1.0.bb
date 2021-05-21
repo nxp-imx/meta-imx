@@ -33,7 +33,6 @@ IMX_M4_DEMOS_mx8dxl = "imx-m4-demos:do_deploy"
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
 M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_power_mode_switch.bin"
-M4_DEFAULT_IMAGE_mx8phantomdxl = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
 M4_DEFAULT_IMAGE_mx8dxl = "imx8dxl_m4_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_power_mode_switch.bin"
 
@@ -57,7 +56,6 @@ ATF_MACHINE_NAME_mx8mm = "bl31-imx8mm.bin"
 ATF_MACHINE_NAME_mx8mn = "bl31-imx8mn.bin"
 ATF_MACHINE_NAME_mx8mnul = "bl31-imx8mn.bin"
 ATF_MACHINE_NAME_mx8mp = "bl31-imx8mp.bin"
-ATF_MACHINE_NAME_mx8phantomdxl = "bl31-imx8qx.bin"
 ATF_MACHINE_NAME_mx8dxl = "bl31-imx8dxl.bin"
 ATF_MACHINE_NAME_mx8dx = "bl31-imx8dx.bin"
 ATF_MACHINE_NAME_append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
@@ -76,7 +74,6 @@ SOC_TARGET_mx8mn  = "iMX8MN"
 SOC_TARGET_mx8mnul  = "iMX8MN"
 SOC_TARGET_mx8mp  = "iMX8MP"
 SOC_TARGET_mx8dxl = "iMX8DXL"
-SOC_TARGET_mx8phantomdxl = "iMX8QX"
 SOC_TARGET_mx8dx  = "iMX8DX"
 
 DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
@@ -99,7 +96,6 @@ REV_OPTION ?= ""
 REV_OPTION_mx8qxp = \
     "${@bb.utils.contains('MACHINE_FEATURES', 'soc-revb0', '', \
                                                            'REV=C0', d)}"
-REV_OPTION_mx8phantomdxl = "REV=C0"
 
 compile_mx8m() {
     bbnote 8MQ/8MM boot binary build
