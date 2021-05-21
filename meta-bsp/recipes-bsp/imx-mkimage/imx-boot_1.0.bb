@@ -48,16 +48,7 @@ do_compile[depends] += " \
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
-ATF_MACHINE_NAME ?= "bl31-imx8qm.bin"
-ATF_MACHINE_NAME_mx8qm = "bl31-imx8qm.bin"
-ATF_MACHINE_NAME_mx8x  = "bl31-imx8qx.bin"
-ATF_MACHINE_NAME_mx8mq = "bl31-imx8mq.bin"
-ATF_MACHINE_NAME_mx8mm = "bl31-imx8mm.bin"
-ATF_MACHINE_NAME_mx8mn = "bl31-imx8mn.bin"
-ATF_MACHINE_NAME_mx8mnul = "bl31-imx8mn.bin"
-ATF_MACHINE_NAME_mx8mp = "bl31-imx8mp.bin"
-ATF_MACHINE_NAME_mx8dxl = "bl31-imx8dxl.bin"
-ATF_MACHINE_NAME_mx8dx = "bl31-imx8dx.bin"
+ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
 ATF_MACHINE_NAME_append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
 UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
@@ -65,16 +56,7 @@ BOOT_CONFIG_MACHINE = "${BOOT_NAME}-${MACHINE}-${UBOOT_CONFIG}.bin"
 
 TOOLS_NAME ?= "mkimage_imx8"
 
-SOC_TARGET       ?= "INVALID"
-SOC_TARGET_mx8qm  = "iMX8QM"
-SOC_TARGET_mx8x   = "iMX8QX"
-SOC_TARGET_mx8mq  = "iMX8M"
-SOC_TARGET_mx8mm  = "iMX8MM"
-SOC_TARGET_mx8mn  = "iMX8MN"
-SOC_TARGET_mx8mnul  = "iMX8MN"
-SOC_TARGET_mx8mp  = "iMX8MP"
-SOC_TARGET_mx8dxl = "iMX8DXL"
-SOC_TARGET_mx8dx  = "iMX8DX"
+IMX_BOOT_SOC_TARGET       ?= "INVALID"
 
 DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
@@ -83,7 +65,7 @@ IMXBOOT_TARGETS ?= \
         bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
                                                   'flash_multi_cores flash_dcd', d), d)}"
 
-BOOT_STAGING       = "${S}/${SOC_TARGET}"
+BOOT_STAGING       = "${S}/${IMX_BOOT_SOC_TARGET}"
 BOOT_STAGING_mx8m  = "${S}/iMX8M"
 BOOT_STAGING_mx8dx = "${S}/iMX8QX"
 
@@ -156,11 +138,11 @@ do_compile() {
     for target in ${IMXBOOT_TARGETS}; do
         if [ "$target" = "flash_linux_m4_no_v2x" ]; then
            # Special target build for i.MX 8DXL with V2X off
-           bbnote "building ${SOC_TARGET} - ${REV_OPTION} V2X=NO ${target}"
-           make SOC=${SOC_TARGET} ${REV_OPTION} V2X=NO  flash_linux_m4
+           bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} V2X=NO ${target}"
+           make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} V2X=NO flash_linux_m4
         else
-           bbnote "building ${SOC_TARGET} - ${REV_OPTION} ${target}"
-           make SOC=${SOC_TARGET} ${REV_OPTION} ${target}
+           bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${target}"
+           make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} ${target}
         fi
         if [ -e "${BOOT_STAGING}/flash.bin" ]; then
             cp ${BOOT_STAGING}/flash.bin ${S}/${BOOT_CONFIG_MACHINE}-${target}
