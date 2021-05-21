@@ -1,9 +1,8 @@
 # Copyright 2017-2021 NXP
 
-IMX_M4_DEMOS        = ""
-IMX_M4_DEMOS_mx8qm  = "imx-m4-demos:do_deploy"
-IMX_M4_DEMOS_mx8x   = "imx-m4-demos:do_deploy"
-IMX_M4_DEMOS_mx8dxl = "imx-m4-demos:do_deploy"
+IMX_M4_DEMOS      = ""
+IMX_M4_DEMOS_mx8  = "imx-m4-demos:do_deploy"
+IMX_M4_DEMOS_mx8m = ""
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
 M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_power_mode_switch.bin"
