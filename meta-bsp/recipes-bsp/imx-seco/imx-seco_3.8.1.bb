@@ -6,8 +6,7 @@ SECTION = "base"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3c3fe2b904fd694f28d2f646ee16dddb"
 
-require imx-seco.inc
-inherit fsl-eula-unpack deploy
+inherit fsl-eula-unpack use-imx-security-controller-firmware deploy
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 

@@ -1,12 +1,13 @@
 # Copyright 2017-2021 NXP
 
 require imx-mkimage_git.inc
-require recipes-bsp/imx-seco/imx-seco.inc
 
 DESCRIPTION = "Generate Boot Loader for i.MX 8 device"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 SECTION = "BSP"
+
+inherit use-imx-security-controller-firmware
 
 IMX_EXTRA_FIRMWARE      = "firmware-imx-8 imx-sc-firmware imx-seco"
 IMX_EXTRA_FIRMWARE_mx8m = "firmware-imx-8m"
