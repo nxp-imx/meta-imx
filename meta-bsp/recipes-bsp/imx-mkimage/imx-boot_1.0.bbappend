@@ -1,5 +1,7 @@
 # Copyright 2017-2021 NXP
 
+require imx-mkimage_git.inc
+
 IMX_M4_DEMOS      = ""
 IMX_M4_DEMOS_mx8  = "imx-m4-demos:do_deploy"
 IMX_M4_DEMOS_mx8m = ""
