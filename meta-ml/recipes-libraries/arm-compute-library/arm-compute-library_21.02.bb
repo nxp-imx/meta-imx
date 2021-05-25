@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9598101cf48c5f479cfda9f3fc6fc566 \
 SRCBRANCH = "imx_21.02"
 ARM_COMPUTELIBRARY_SRC ?= "git://source.codeaurora.org/external/imx/arm-computelibrary-imx.git;protocol=https"
 SRC_URI = "${ARM_COMPUTELIBRARY_SRC};branch=${SRCBRANCH}"
-SRCREV = "1aaee77a3011528b1da4c03d1ad7a636089da73d" 
+SRCREV = "34e527e5a7d3df85560ec89f68b61207b8a030df"
 
 S = "${WORKDIR}/git"
 
