@@ -117,3 +117,6 @@ FILES_${PN}-dev += "${libdir}/ArmnnDelegateTargets-release.cmake ${libdir}/Armnn
 
 # We support i.MX8 only (for now)
 COMPATIBLE_MACHINE = "(mx8)"
+
+# Ccache sometimes causes unexpected build break
+CCACHE_DISABLE = '1'
