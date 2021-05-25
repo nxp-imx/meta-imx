@@ -10,6 +10,7 @@ IMX_GPU_VERSION_SUFFIX_mx8  = "aarch64"
 PREFERRED_VERSION_imx-gpu-viv               = "${IMX_GPU_VERSION}-${IMX_GPU_VERSION_SUFFIX}"
 PREFERRED_VERSION_kernel-module-imx-gpu-viv = "${IMX_GPU_VERSION}"
 PREFERRED_VERSION_imx-gpu-g2d               = "${IMX_GPU_VERSION}"
+PREFERRED_VERSION_libgpuperfcnt             = "${IMX_GPU_VERSION}"
 
 PREFERRED_PROVIDER_opencl-headers_imxgpu = "imx-gpu-viv"
 PREFERRED_PROVIDER_opencl-icd-loader_imxgpu = "imx-gpu-viv"
