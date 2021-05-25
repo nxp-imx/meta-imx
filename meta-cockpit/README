@@ -1,0 +1,13 @@
+To add the Digital Cockpit to the Linux Yocto Project build, follow the commands below
+
+- Setup the machine
+
+$ MACHINE=imx8qmmek-cockpit-mek DISTRO=fsl-imx-xwayland .  ./imx-setup-release.sh -b build-cockpit
+
+- Hook in the meta-cockpit layer
+$ hook_in_layer meta-imx/meta-cockpit
+
+When using the new machine configuration imx8qmmek-cockpit-mek this will automation include the chnages for the
+kernel, arm trusted firmware, imx-boot, system controller firmware and optee into any image that is built.
+
+For more details on integration follow the i.MX Digital Cockpit User's Guide as a reference.
