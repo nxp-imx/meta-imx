@@ -7,6 +7,7 @@ DEPENDS = "python3 python3-pip-native python3-wheel-native"
 RDEPENDS_${PN} += "pytorch python3-numpy python3-future python3-pillow libjpeg-turbo"
 
 PV = "0.8.2"
+PYV = "cp39"
 
 PYTORCH_SRC ?= "git://github.com/nxpmicro/pytorch-release.git;protocol=https"
 SRCBRANCH = "lf-5.10.y_2.0.0"
@@ -24,7 +25,7 @@ do_install(){
 
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
-        ${S}/whl/torchvision-${PV}-cp38*.whl
+        ${S}/whl/torchvision-${PV}-${PYV}*.whl
     rm -fr ${D}${PYTHON_SITEPACKAGES_DIR}/bin
 }
 
