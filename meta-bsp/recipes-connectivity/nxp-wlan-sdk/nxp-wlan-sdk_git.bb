@@ -11,11 +11,11 @@ do_compile () {
 }
 
 do_install () {
-   install -d ${D}${datadir}/nxp_wireless
-   cp -rf mapp/mlanutl/mlanutl ${D}${datadir}/nxp_wireless
-   cp -rf script/load ${D}${datadir}/nxp_wireless
-   cp -rf script/unload ${D}${datadir}/nxp_wireless
-   cp -rf README_MLAN ${D}${datadir}/nxp_wireless
+    install -d ${D}${datadir}/nxp_wireless
+    install -m 0755 mapp/mlanutl/mlanutl ${D}${datadir}/nxp_wireless
+    install -m 0755 script/load ${D}${datadir}/nxp_wireless
+    install -m 0755 script/unload ${D}${datadir}/nxp_wireless
+    install -m 0644 README_MLAN ${D}${datadir}/nxp_wireless
 }
 
 FILES_${PN} = "${datadir}/nxp_wireless"
