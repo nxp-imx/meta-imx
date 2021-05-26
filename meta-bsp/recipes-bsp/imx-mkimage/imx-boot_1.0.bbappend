@@ -11,6 +11,15 @@ M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE_mx8dxl = "imx8dxl_m4_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_power_mode_switch.bin"
 
+# Setting for i.MX 8ULP
+IMX_M4_DEMOS_mx8ulp = ""
+ATF_MACHINE_NAME_mx8ulp = "bl31-imx8ulp.bin"
+IMX_EXTRA_FIRMWARE_mx8ulp = ""
+SECO_FIRMWARE_NAME_mx8ulp = "mx8ulpa0-ahab-container.img"
+SOC_TARGET_mx8ulp = "iMX8ULP"
+SOC_FAMILY_mx8ulp = "mx8ulp"
+
+
 do_compile[depends] += "${IMX_M4_DEMOS}"
 
 do_compile_prepend() {
