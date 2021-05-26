@@ -2,9 +2,9 @@ require nxp-wlan-sdk_git.inc
 
 SUMMARY = "NXP Wi-Fi SDK"
 
-TARGET_CC_ARCH += "${LDFLAGS}"
+inherit module-base
 
-EXTRA_OEMAKE += "CROSS_COMPILE=${HOST_PREFIX}"
+TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_compile () {
     oe_runmake build
@@ -17,7 +17,6 @@ do_install () {
    cp -rf script/unload ${D}${datadir}/nxp_wireless
    cp -rf README_MLAN ${D}${datadir}/nxp_wireless
 }
-
 
 FILES_${PN} = "${datadir}/nxp_wireless"
 
