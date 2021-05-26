@@ -4,10 +4,10 @@ SUMMARY = "NXP Wi-Fi SDK"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
+EXTRA_OEMAKE += "CROSS_COMPILE=${HOST_PREFIX}"
+
 do_compile () {
-    # Build mlanutl folder
-    cd mapp/mlanutl
-    oe_runmake
+    oe_runmake build
 }
 
 do_install () {
