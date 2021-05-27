@@ -413,7 +413,7 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Machine Learning Au-Zone DeepViewRT and ModelRunner for i.MX8 Application Processors
 Release Location:            Mirror
-Origin:                      Au-Zone Technologies (proprietary)
+Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
