@@ -13,6 +13,7 @@ M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_power_mode_switch.bin"
 
 # Setting for i.MX 8ULP
 IMX_M4_DEMOS_mx8ulp = ""
+M4_DEFAULT_IMAGE_mx8ulp = "m33_image.bin"
 ATF_MACHINE_NAME_mx8ulp = "bl31-imx8ulp.bin"
 IMX_EXTRA_FIRMWARE_mx8ulp = ""
 SECO_FIRMWARE_NAME_mx8ulp = "mx8ulpa0-ahab-container.img"
@@ -33,7 +34,24 @@ do_compile_prepend() {
     mx8x)
         cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_image.bin
         ;;
+    mx8ulp)
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${M4_DEFAULT_IMAGE}       ${BOOT_STAGING}/m33_image.bin
+        ;;
     esac
+}
+
+compile_mx8ulp() {
+    bbnote 8ULP boot binary build
+    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
+    cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${BOOT_STAGING}/u-boot.bin
+    if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${BOOT_STAGING}/u-boot-spl.bin
+    fi
+
+    # Copy SECO F/W and upower.bin
+    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SECO_FIRMWARE_NAME}  ${BOOT_STAGING}/
+    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/upower.bin          ${BOOT_STAGING}/upower.bin
 }
 
 do_deploy_append() {
@@ -46,4 +64,14 @@ do_deploy_append() {
         install -m 0644 ${BOOT_STAGING}/m4_image.bin         ${DEPLOYDIR}/${BOOT_TOOLS}
         ;;
     esac
+}
+
+deploy_mx8ulp() {
+    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
+#    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
+    install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
+    if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
+    fi
 }
