@@ -7,6 +7,7 @@ DEPENDS = "python3 python3-pip-native python3-wheel-native"
 RDEPENDS_${PN} += "python3-core python3-numpy python3-future python3-typing-extensions"
 
 PV = "1.7.1"
+PYV = "cp39"
 
 PYTORCH_SRC ?= "git://github.com/nxpmicro/pytorch-release.git;protocol=https"
 SRCBRANCH = "master"
@@ -29,7 +30,7 @@ do_install(){
 
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
-        ${S}/whl/torch-${PV}-cp38*.whl
+        ${S}/whl/torch-${PV}-${PYV}*.whl
 
     for app in `ls ${D}${PYTHON_SITEPACKAGES_DIR}/bin/*`; do
         sed -i 's,^#!.*,#!/usr/bin/python3,g' $app
