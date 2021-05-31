@@ -1,0 +1,40 @@
+From 1b4e317083dd1ab43be997690ddabfcb43eebfbd Mon Sep 17 00:00:00 2001
+From: Marc Kleine-Budde <mkl@pengutronix.de>
+Date: Fri, 28 May 2021 11:47:20 +0200
+Subject: [PATCH] candump: fix epoll_wait() returning -1, errno == -EINTR
+
+-EINTR is not an error, just restart the syscall.
+
+Fixes: 639498bc801a ("candump: use epoll_wait() instead of select()")
+Link: https://github.com/linux-can/can-utils/issues/296
+
+Upstream-Status: Backport [https://github.com/linux-can/can-utils/commit/1b4e317083dd1ab43be997690ddabfcb43eebfbd]
+
+Reported-by: Joakim Zhang <qiangqing.zhang@nxp.com>
+Signed-off-by: Marc Kleine-Budde <mkl@pengutronix.de>
+---
+ candump.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/candump.c b/candump.c
+index 27f5d69..4bf860a 100644
+--- a/candump.c
++++ b/candump.c
+@@ -690,10 +690,10 @@ int main(int argc, char **argv)
+ 	msg.msg_control = &ctrlmsg;
+ 
+ 	while (running) {
+-
+-		if ((num_events = epoll_wait(fd_epoll, events_pending, currmax, timeout_ms)) <= 0) {
+-			//perror("epoll_wait");
+-			running = 0;
++		num_events = epoll_wait(fd_epoll, events_pending, currmax, timeout_ms);
++		if (num_events == -1) {
++			if (errno != EINTR)
++				running = 0;
+ 			continue;
+ 		}
+ 
+-- 
+2.17.1
+
