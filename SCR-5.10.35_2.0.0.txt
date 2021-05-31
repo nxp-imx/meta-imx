@@ -975,7 +975,7 @@ Origin:                      NXP (GPL-2.0)
 M4 Processor Packages
 --------------------------------------------
 
-Package:                     imx7ulp-m4-demo-2.9.0.bin
+Package:                     imx7ulp-m4-demo-2.8.0.1.bin
 Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
