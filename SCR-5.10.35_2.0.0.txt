@@ -212,19 +212,6 @@ Origin:                      Qualcomm Atheros, Inc. (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-firmware.git
-Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Additional distribution license granted - Section 2.3 applies 
-License File:                nxp/EULA.txt
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    BSP firmware - Broadcom Bluetooh and WIFI
-Release Location:            https://github.com/NXP/imx-firmware -b master
-Origin:                      brcm: Broadcom Corporation (proprietary)
-                             cyw-wifi-bt: Cypress Semiconductor Corporation (proprietary)
-                             nxp: NXP (proprietary)
-
---------------------------------------------
-
 Package:                     mwifiex.git
 Outgoing License:            GPL-2.0 
 License File:                mwifiex*/gpl-2.0.txt
