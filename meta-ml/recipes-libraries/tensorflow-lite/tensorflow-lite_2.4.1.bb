@@ -3,7 +3,11 @@ DESCRIPTION = "TensorFlow Lite C++ Library"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=64a34301f8e355f57ec992c2af3e5157"
 
-DEPENDS = "zlib unzip-native python3 python3-numpy-native python3-pip-native python3-wheel-native python3-pybind11-native tensorflow-protobuf jpeg tim-vx"
+DEPENDS_MX8_mx8 =     "tim-vx"
+DEPENDS_MX8_mx8mm =   ""
+DEPENDS_MX8_mx8mnul = ""
+DEPENDS =              "zlib unzip-native python3 python3-numpy-native python3-pip-native python3-wheel-native python3-pybind11-native tensorflow-protobuf jpeg ${DEPENDS_MX8}"
+
 
 TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
 SRCBRANCH = "imx-v2.4.1"
@@ -20,8 +24,11 @@ inherit python3native cmake
 S = "${WORKDIR}/git"
 
 # Set the CMAKE_SYSROOT, as it is not set in CMAKE_TOOLCHAIN_FILE
+EXTRA_OECMAKE_MX8_mx8 =       " -DTFLITE_ENABLE_VX=on  -DTIM_VX_INSTALL=${STAGING_DIR_HOST}/usr "
+EXTRA_OECMAKE_MX8_mx8mm =     ""
+EXTRA_OECMAKE_MX8_mx8mnul =   ""
 EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR=}"
-EXTRA_OECMAKE += "-DTFLITE_ENABLE_XNNPACK=on -DTFLITE_ENABLE_RUY=on -DTFLITE_ENABLE_NNAPI=on -DTFLITE_ENABLE_VX=on -DTFLITE_BUILD_EVALTOOLS=on -DTFLITE_BUILD_SHARED_LIB=on  ${S}/tensorflow/lite/"
+EXTRA_OECMAKE += "-DTFLITE_ENABLE_XNNPACK=on -DTFLITE_ENABLE_RUY=on -DTFLITE_ENABLE_NNAPI=on ${EXTRA_OECMAKE_MX8} -DTFLITE_BUILD_EVALTOOLS=on -DTFLITE_BUILD_SHARED_LIB=on  ${S}/tensorflow/lite/"
 
 CXXFLAGS += "-fPIC"
 
