@@ -3,10 +3,8 @@ DESCRIPTION = "TensorFlow Lite C++ Library"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=64a34301f8e355f57ec992c2af3e5157"
 
-DEPENDS_MX8_mx8 =     "tim-vx"
-DEPENDS_MX8_mx8mm =   ""
-DEPENDS_MX8_mx8mnul = ""
-DEPENDS =              "zlib unzip-native python3 python3-numpy-native python3-pip-native python3-wheel-native python3-pybind11-native tensorflow-protobuf jpeg ${DEPENDS_MX8}"
+DEPENDS = "python3-numpy-native python3-pip-native python3-pybind11-native python3-wheel-native unzip-native \
+    python3 tensorflow-protobuf jpeg zlib"
 
 
 TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
@@ -19,16 +17,20 @@ SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobile
 SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
 SRC_URI[model-mobv1.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226dfe4cdcef3012555f691744166"
 
-inherit python3native cmake
-
 S = "${WORKDIR}/git"
 
-# Set the CMAKE_SYSROOT, as it is not set in CMAKE_TOOLCHAIN_FILE
-EXTRA_OECMAKE_MX8_mx8 =       " -DTFLITE_ENABLE_VX=on  -DTIM_VX_INSTALL=${STAGING_DIR_HOST}/usr "
-EXTRA_OECMAKE_MX8_mx8mm =     ""
-EXTRA_OECMAKE_MX8_mx8mnul =   ""
+inherit python3native cmake
+
+PACKAGECONFIG_OPENVX = ""
+PACKAGECONFIG_OPENVX_imxgpu3d_mx8 = "openvx"
+PACKAGECONFIG_OPENVX_mx8mm = ""
+
+PACKAGECONFIG ?= "${PACKAGECONFIG_OPENVX}"
+
+PACKAGECONFIG[openvx] = "-DTFLITE_ENABLE_VX=on -DTIM_VX_INSTALL=${STAGING_DIR_HOST}/usr,-DTFLITE_ENABLE_VX=off,tim-vx,libnn-imx nn-imx"
+
 EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR=}"
-EXTRA_OECMAKE += "-DTFLITE_ENABLE_XNNPACK=on -DTFLITE_ENABLE_RUY=on -DTFLITE_ENABLE_NNAPI=on ${EXTRA_OECMAKE_MX8} -DTFLITE_BUILD_EVALTOOLS=on -DTFLITE_BUILD_SHARED_LIB=on  ${S}/tensorflow/lite/"
+EXTRA_OECMAKE += "-DTFLITE_ENABLE_XNNPACK=on -DTFLITE_ENABLE_RUY=on -DTFLITE_ENABLE_NNAPI=on -DTFLITE_BUILD_EVALTOOLS=on -DTFLITE_BUILD_SHARED_LIB=on ${S}/tensorflow/lite/"
 
 CXXFLAGS += "-fPIC"
 
@@ -96,15 +98,10 @@ do_install() {
         ${WORKDIR}/tflite_pip/dist/tflite_runtime-*.whl
 }
 
-RDEPENDS_MX8       = ""
-RDEPENDS_MX8_mx8   = "libnn-imx nn-imx"
-RDEPENDS_MX8_mx8mm = ""
-RDEPENDS_MX8_mx8mnul = ""
 RDEPENDS_${PN}   = " \
     flatbuffers \
     python3 \
     python3-numpy \
-    ${RDEPENDS_MX8} \
 "
 # TensorFlow and TensorFlow Lite both exports few files, suppres the error
 # SSTATE_DUPWHITELIST = "${D}${includedir}"
