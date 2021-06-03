@@ -143,13 +143,6 @@ PACKAGE_FP_TYPE = "hardfp"
 HAS_GBM     = "false"
 HAS_GBM_mx8 = "true"
 
-GLES3_HEADER_REMOVALS        = "gl31.h gl32.h"
-GLES3_HEADER_REMOVALS_mx8m   = "gl32.h"
-GLES3_HEADER_REMOVALS_mx8mm  = "gl31.h gl32.h"
-GLES3_HEADER_REMOVALS_mx8qxp = ""
-GLES3_HEADER_REMOVALS_mx8qm  = ""
-GLES3_HEADER_REMOVALS_mx8ulp = "gl32.h"
-
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
@@ -226,9 +219,6 @@ do_install () {
         ln -sf libvulkan_VSI.so.1.1.6 ${D}${libdir}/libvulkan_VSI.so
         rm ${D}${libdir}/libvulkan.so*
     fi
-    for header in ${GLES3_HEADER_REMOVALS}; do
-        rm -f ${D}${includedir}/GLES3/${header}
-    done
 
     # skip packaging wayland libraries if no support is requested
     if [ "${USE_WL}" = "no" ]; then
