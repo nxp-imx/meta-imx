@@ -1,0 +1,155 @@
+SUMMARY = "NNStreamer, Stream Pipeline Paradigm for Nerual Network Applications"
+DESCRIPTION = "NNStreamer is a GStreamer plugin allowing to construct neural network applications with stream pipeline paradigm."
+SECTION = "AI"
+LICENSE = "LGPLv2+"
+LIC_FILES_CHKSUM = "\
+    file://LICENSE;md5=a6f89e2100d9b6cdffcea4f398e37343 \
+    file://debian/copyright;md5=0462ef8fa89a1f53f2e65e74940519ef \
+"
+
+DEPENDS = "\
+	orc-native \
+	bison-native \
+	flex-native \
+	glib-2.0 \
+	gstreamer1.0 \
+	gstreamer1.0-plugins-base \
+	gtest \
+	libpng \
+"
+
+SRC_URI = "git://github.com/nnstreamer/nnstreamer.git;branch=main;protocol=https"
+
+S = "${WORKDIR}/git"
+
+inherit meson pkgconfig
+
+PACKAGECONFIG ??= "tensorflow-lite python3 protobuf "
+
+PACKAGECONFIG[tensorflow-lite] = "\
+	-Dtflite2-support=enabled -Dtflite2-nnapi-delegate-support=true, \
+	-Dtflite2-support=disabled, \
+	tensorflow-lite flatbuffers, \
+	,,\
+"
+
+PACKAGECONFIG[python3] = "\
+	-Dpython3-support=enabled, \
+	-Dpython3-support=disabled, \
+	python3 python3-numpy-native, \
+	,,\
+"
+
+PACKAGECONFIG[grpc] = "\
+	-Dgrpc-support=enabled, \
+	-Dgrpc-support=disabled, \
+	grpc-native grpc, \
+	,,\
+"
+
+PACKAGECONFIG[protobuf] = "\
+	-Dprotobuf-support=enabled, \
+	-Dprotobuf-support=disabled, \
+	protobuf-native protobuf, \
+	,,\
+"
+
+PACKAGECONFIG[flatbuf] = "\
+	-Dflatbuf-support=enabled, \
+	-Dflatbuf-support=disabled, \
+	flatbuffers-native flatbuffers, \
+	,,\
+"
+
+EXTRA_OEMESON += "\
+	-Denable-test=true \
+	-Dinstall-test=true \
+"
+
+do_install_append() {
+    rm -f ${D}/${bindir}/unittest-nnstreamer/tests/test_models/models/tvm_add_one.so_
+}
+
+PACKAGES =+ "\
+	${PN}-unittest \
+	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'python3','${PN}-python3', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'protobuf','${PN}-protobuf', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'protobuf grpc','${PN}-grpc-protobuf', '', d)} \
+"
+
+RDEPENDS_${PN} = "\
+	gstreamer1.0-plugins-base \
+"
+
+RDEPENDS_${PN}-unittest = "nnstreamer gstreamer1.0-plugins-good ssat \
+	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'python3','${PN}-python3', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'protobuf','${PN}-protobuf', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'protobuf grpc','${PN}-grpc-protobuf', '', d)} \
+"
+
+FILES_${PN} += "\
+	${libdir}/*.so \
+	${libdir}/gstreamer-1.0/*.so \
+	${libdir}/nnstreamer/decoders/* \
+	${sysconfdir}/nnstreamer.ini \
+"
+
+FILES_${PN}-unittest += "\
+	${bindir}/unittest-nnstreamer/* \
+	${libdir}/libnnstreamer_unittest_util.so \
+	${libdir}/libcppfilter_test.so \
+	${libdir}/nnstreamer/customfilters/* \
+	${libdir}/nnstreamer/unittest/* \
+"
+
+FILES_${PN}-tensorflow-lite += "\
+	${libdir}/nnstreamer/filters/libnnstreamer_filter_tensorflow2-lite.so \
+"
+
+FILES_${PN}-python3 += "\
+	${libdir}/nnstreamer/converters/libnnstreamer_converter_python3.so \
+	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_python3.so \
+	${libdir}/nnstreamer/filters/libnnstreamer_filter_python3.so \
+	${libdir}/nnstreamer/extra/nnstreamer_python3.so \
+"
+
+FILES_${PN}-grpc += "\
+	${libdir}/gstreamer-1.0/libnnstreamer-grpc.so \
+"
+
+FILES_${PN}-protobuf += "\
+	${libdir}/nnstreamer/converters/libnnstreamer_converter_protobuf.so \
+	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_protobuf.so \
+	${libdir}/libnnstreamer_protobuf.so \
+"
+
+FILES_${PN}-grpc-protobuf += "\
+	${libdir}/libnnstreamer_grpc_protobuf.so \
+"
+
+FILES_${PN}-flatbuf += "\
+	${libdir}/nnstreamer/converters/libnnstreamer_converter_flatbuf.so \
+	${libdir}/nnstreamer/converters/libnnstreamer_converter_flexbuf.so \
+	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_flatbuf.so \
+	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_flexbuf.so \
+"
+
+FILES_${PN}-grpc-flatbuf += "\
+	${libdir}/libnnstreamer_grpc_flatbuf.so \
+"
+
+FILES_${PN}-dev = "\
+	${includedir}/nnstreamer/* \
+	${libdir}/*.a \
+	${libdir}/pkgconfig/*.pc \
+"
+
+INSANE_SKIP_${PN} += "dev-so"
