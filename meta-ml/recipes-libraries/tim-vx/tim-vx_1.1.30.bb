@@ -24,6 +24,6 @@ FILES_SOLIBSDEV = ""
 
 INSANE_SKIP_${PN} += "dev-so"
 
-COMPATIBLE_MACHINE = "(mx8)"
-COMPATIBLE_MACHINE_mx8mm = "(^$)"
-COMPATIBLE_MACHINE_mx8mnul = "(^$)"
+COMPATIBLE_MACHINE          = "(^$)"
+COMPATIBLE_MACHINE_imxgpu3d = "(mx8)"
+COMPATIBLE_MACHINE_mx8mm    = "(^$)"
