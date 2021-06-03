@@ -1,0 +1,7 @@
+Name: flatbuffers
+Description: memory efficient serialization library
+Version:  @version@
+Requires:
+Libs: -L@libdir@ -lflatbuffers
+Cflags: -I@includedir@
+
