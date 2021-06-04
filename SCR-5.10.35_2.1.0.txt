@@ -3,7 +3,7 @@ NXP Software Content Register
 Release - Linux 5.10.35_2.1.0
  June 2021
 
-Outgoing License: LA_OPT_NXP_Software_License v23 May 2021 - Additional distribution license granted - Section 2.3 applies
+Outgoing License: LA_OPT_NXP_Software_License v24 June 2021 - Additional distribution license granted - Section 2.3 applies
 License File:     COPYING
 
 Yocto Project recipe manifest:
@@ -94,6 +94,15 @@ Origin:                      NXP (proprietary)
                                     vpu_fw_imx8_enc.bin
                                  origin: Amphion Semiconductor Ltd  (proprietary)
 
+--------------------------------------------
+
+Package:                     firmware-upower-0.1.bin
+Outgoing License:            LA_OPT_NXP_Software_License v24 Jun 2021 - Additional distribution license granted - Section 2.3 applies 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             binary
+Description and comments:    uPower firmware
+Release Location:            Mirror
 --------------------------------------------
 
 Package:                     imx-mkimage.git
@@ -190,7 +199,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-firmware.git
-Outgoing License:            LA_OPT_NXP_Software_License v23 May 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                nxp/EULA.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -378,13 +387,15 @@ Description and comments:    2X signature verification library
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     v2sehsm.git
+Package:                     v2xsehsm.git
 Outgoing License:            BSD-3-Clause 
 License File:                BSD 3 Clause.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    V2X Secure Element library
 Release Location:            https://source.codeaurora.org/external/imx/v2xsehsm -b rel_imx_5.10.35_2.1.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 
 Package:                     vtest.git
