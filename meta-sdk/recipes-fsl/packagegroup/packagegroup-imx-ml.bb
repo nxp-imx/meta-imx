@@ -25,6 +25,7 @@ ML_PKGS_append_mx8 = " \
 ML_PKGS_append_mx8mm = "eiq-apps"
 ML_PKGS_append_mx8mp = "eiq-apps"
 
+ML_PKGS_remove_mx8mm = "tvm"
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
 "
