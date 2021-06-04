@@ -23,4 +23,6 @@ do_install_append() {
     # FIXME: weston should be run as weston, not as root
     update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
     update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
+
+    update_file "WatchdogSec=20" "WatchdogSec=40" ${D}${systemd_system_unitdir}/weston.service
 }
