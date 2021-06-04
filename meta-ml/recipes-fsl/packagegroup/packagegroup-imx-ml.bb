@@ -14,7 +14,6 @@ ML_PKGS_imxgpu_mx8 = " \
     onnxruntime \
     pytorch \
     torchvision \
-    tvm \
     deepview-rt-examples \
 "
 
@@ -22,8 +21,12 @@ ML_EIQ_PKGS       = ""
 ML_EIQ_PKGS_mx8mm = "eiq-apps"
 ML_EIQ_PKGS_mx8mp = "eiq-apps"
 
-ML_PKGS_remove_mx8mm = "tvm"
+ML_TVM_PKGS            = ""
+ML_TVM_PKGS_imxgpu_mx8 = "tvm"
+ML_TVM_PKGS_mx8mm      = ""
+
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
     ${ML_EIQ_PKGS} \
+    ${ML_TVM_PKGS} \
 "
