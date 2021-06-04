@@ -12,7 +12,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 VULKAN_TOOLS       = ""
-VULKAN_TOOLS_mx8   = "vulkan-loader vulkan-validationlayers vulkan-headers vkmark vulkan-tools"
+VULKAN_TOOLS_imxgpu3d_mx8   = "vulkan-loader vulkan-validationlayers vulkan-headers vkmark vulkan-tools"
 VULKAN_TOOLS_mx8mm = ""
 
 # Common tools independent of the graphics backend
