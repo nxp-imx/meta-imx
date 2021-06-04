@@ -722,7 +722,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     opencv-imx.git
-Outgoing License:            BSD-3-Clause 
+Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
