@@ -62,6 +62,7 @@ EXTRA_OECMAKE += " \
 
 ARMNN_INSTALL_DIR = "${bindir}/${P}"
 PYARMNN_INSTALL_DIR = "${ARMNN_INSTALL_DIR}/pyarmnn"
+PYARMNN_GENERATED_DIR = "${PYTHON_SITEPACKAGES_DIR}/pyarmnn/_generated"
 
 do_compile_append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'pyarmnn', 'true', 'false', d)}; then
@@ -102,7 +103,16 @@ do_install_append() {
             -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-deps \
             ${S}/python/pyarmnn/dist/pyarmnn-*.whl
         find ${D}/${PYTHON_SITEPACKAGES_DIR} -type d -name "__pycache__" -exec rm -Rf {} +
-
+                
+        # remove x86 suffix cpython for cross-compiled shared libs to link them universally
+        mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn.so
+        mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_caffeparser.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_caffeparser.so
+        mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_deserializer.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_deserializer.so
+        mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_onnxparser.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_onnxparser.so
+        mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_tfliteparser.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_tfliteparser.so
+        mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_tfparser.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_tfparser.so
+        mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_version*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_version.so
+        
         # pyarmnn examples for eiq
         cp -R ${S}/python/pyarmnn/examples ${D}${PYARMNN_INSTALL_DIR}
     fi
