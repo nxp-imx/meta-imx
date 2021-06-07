@@ -24,10 +24,9 @@ EXTRA_OECMAKE =  " \
     -DTIMVX_USE_EXTERNAL_OVXLIB=on \
 "
 
-FILES_${PN} += " ${libdir}/*"
+# Output library is unversioned
+SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
-
-INSANE_SKIP_${PN} += "dev-so"
 
 COMPATIBLE_MACHINE          = "(^$)"
 COMPATIBLE_MACHINE_imxgpu3d = "(mx8)"
