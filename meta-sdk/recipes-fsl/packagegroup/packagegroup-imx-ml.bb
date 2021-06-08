@@ -15,17 +15,15 @@ ML_PKGS = " \
     pytorch \
     torchvision \
     tvm \
-    deepview-rt \
-"
-
-ML_PKGS_append_mx8 = " \
     deepview-rt-examples \
 "
 
 ML_PKGS_append_mx8mm = "eiq-apps"
 ML_PKGS_append_mx8mp = "eiq-apps"
 
-ML_PKGS_remove_mx8mm = "tvm"
+ML_PKGS_remove_mx8mm = "tvm deepview-rt-examples"
+ML_PKGS_remove_mx8mnlite = "tvm deepview-rt-examples"
+
 RDEPENDS_${PN} = " \
     ${ML_PKGS} \
 "
