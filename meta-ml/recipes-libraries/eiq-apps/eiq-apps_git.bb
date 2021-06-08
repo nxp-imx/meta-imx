@@ -19,10 +19,6 @@ S = "${WORKDIR}/git"
 
 export SDKTARGETSYSROOT = "${RECIPE_SYSROOT}"
 
-do_configure_append () {
-    cp ${S}/COPYING-LGPL2.1 ${S}/COPYING
-}
-
 do_install() {
     install -d ${D}${bindir}
     install -d ${D}${libdir}/gstreamer-1.0
