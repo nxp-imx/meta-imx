@@ -1,12 +1,12 @@
 DESCRIPTION = "The DeepView Extras provides a library of additional functions which do not have the same portability requirements as the core engine. This library links against the C++ runtime though externally offers the same C API."
 
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=3c3fe2b904fd694f28d2f646ee16dddb"
+LIC_FILES_CHKSUM = "file://COPYING;md5=417b82f17fc02b88125331ed312f6f1b"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "5083f2c0e46ecc1a8f539f73ecd4efd8"
-SRC_URI[sha256sum] = "17872264d13cdd12ae2fbeea0a1c918862c3259fac4abbce6a1fb9517eb32894"
+SRC_URI[md5sum] = "d87103c3bdb773dfe9069d3e24a0da22"
+SRC_URI[sha256sum] = "f3a1ec5502a3907d3e697e1ebd274b9a7a07c81c795fc6831f6f8b81f86e4372"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
@@ -31,6 +31,8 @@ do_install () {
 }
 
 COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE_mx8mm = "(^$)"
+COMPATIBLE_MACHINE_mx8mnlite = "(^$)"
 BBCLASSEXTEND = "nativesdk"
 INSANE_SKIP_${PN} += "rpaths dev-deps"
 
