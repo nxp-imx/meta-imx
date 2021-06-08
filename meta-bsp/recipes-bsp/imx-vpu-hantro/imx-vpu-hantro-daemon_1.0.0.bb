@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cd8bc2a79509c22fc9c1782a151210b1"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "bdc4274124f8520c2b8799d130e941cf"
-SRC_URI[sha256sum] = "ab869a09541f4ff40745ce1678be50c8ffc64181d6103c34649d599d07a3f339"
+SRC_URI[md5sum] = "65417710ef22214523c37f50f34b6ab2"
+SRC_URI[sha256sum] = "897d174c4c0818f31012d8a60ed51fc83fdfc55fca2d2b0fc24a0db3e9f3b6e8"
 
 DEPENDS += "imx-vpu-hantro"
 DEPENDS_append_mx8mp = " imx-vpu-hantro-vc"
