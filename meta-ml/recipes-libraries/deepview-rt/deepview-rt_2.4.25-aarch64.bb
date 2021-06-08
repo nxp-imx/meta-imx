@@ -1,18 +1,19 @@
 DESCRIPTION = "This package includes the updated and experimental ModelRunner for TensorFlow Lite and ARM NN. Also in this repository is a pre-release of DeepViewRT with support for the OpenVX backend."
 
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=3c3fe2b904fd694f28d2f646ee16dddb"
+LIC_FILES_CHKSUM = "file://COPYING;md5=417b82f17fc02b88125331ed312f6f1b"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "6bdb4f7732dec574a2d342d09d035b05"
-SRC_URI[sha256sum] = "475f9eae3217771e67ba537c2638c9deb31538264f94486e14b981ecf47837e9"
+SRC_URI[md5sum] = "b705045e7eb2c31b396fb582f169fecb"
+SRC_URI[sha256sum] = "de344d462f70d21b00dfd3375ce11ed05cacf917164a1410a4ce486c040587ea"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
 inherit fsl-eula-unpack python3native
 
 DEPENDS = "python3 python3-pip-native opencv"
+RDEPENDS_${PN} += "nn-imx"
 
 do_install () {
     install -d ${D}${bindir}
@@ -45,4 +46,6 @@ INHIBIT_SYSROOT_STRIP = "1"
 INSANE_SKIP_${PN} += "dev-so dev-deps ldflags"
 
 COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE_mx8mm = "(^$)"
+COMPATIBLE_MACHINE_mx8mnlite = "(^$)"
 BBCLASSEXTEND = "nativesdk"
