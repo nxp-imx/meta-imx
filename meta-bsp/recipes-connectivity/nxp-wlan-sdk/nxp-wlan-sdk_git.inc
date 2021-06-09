@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=ab04ac0f249af12befccb94447c08b77"
 SRCBRANCH = "master"
 MRVL_SRC ?= "git://source.codeaurora.org/external/imx/mwifiex.git;protocol=https"
 SRC_URI = "${MRVL_SRC};branch=${SRCBRANCH}"
-SRCREV = "a63cac065978149d9c4c1064eddcdc1f11dda57c"
+SRCREV = "8649a841364622db5cc36c71563f96f070b44142"
 
 S = "${WORKDIR}/git/mxm_wifiex/wlan_src"
 
