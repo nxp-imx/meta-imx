@@ -1183,9 +1183,9 @@ Description and comments:    Google Coral Edge TPU Posenet Library
 Release Location:            https://source.codeaurora.org/external/imx/coral-posenet-imx -b rel_imx_5.10.35_2.0.0
 --------------------------------------------
 
-Package:                     deepview-rt-2.4.22-aarch64.bin
-Version:                     2.4.22-aarch64
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - No distribution license granted - Section 2.2 applies 
+Package:                     deepview-rt-2.4.25-aarch64.bin
+Version:                     2.4.25-aarch64
+Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - No distribution license granted - Section 2.2 applies 
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
@@ -1195,7 +1195,7 @@ Release Location:            Mirror
 
 Package:                     deepview-rt-examples-1.0.bin
 Version:                     1.0
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - No distribution license granted - Section 2.2 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - No distribution license granted - Section 2.2 applies 
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
@@ -1203,9 +1203,9 @@ Description and comments:    DeepViewRT Examples
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     deepview-rt-extras-2.4.22.bin
-Version:                     2.4.22
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - No distribution license granted - Section 2.2 applies 
+Package:                     deepview-rt-extras-2.4.25.bin
+Version:                     2.4.25
+Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - No distribution license granted - Section 2.2 applies 
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
