@@ -4,7 +4,6 @@ SRC_URI += "file://profile"
 
 INI_UNCOMMENT_ASSIGNMENTS_append_mx8ulp = " \
     use-g2d=1 \
-    gbm-format=rgb565 \
 "
 
 update_file() {
