@@ -24,6 +24,15 @@ EXTRA_OECMAKE =  " \
     -DTIMVX_USE_EXTERNAL_OVXLIB=on \
 "
 
+do_configure_prepend() {
+    # Set proxy here 
+    # avoid the failure when clone googletest.git
+    export HTTP_PROXY=${http_proxy}
+    export HTTPS_PROXY=${https_proxy}
+    export http_proxy=${http_proxy}
+    export https_proxy=${https_proxy}
+}
+
 # Output library is unversioned
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
