@@ -12,10 +12,10 @@ M4_DEFAULT_IMAGE_mx8dxl = "imx8dxl_m4_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_power_mode_switch.bin"
 
 # Setting for i.MX 8ULP
-IMX_M4_DEMOS_mx8ulp = ""
-M4_DEFAULT_IMAGE_mx8ulp = "m33_image.bin"
+IMX_M4_DEMOS_mx8ulp = "imx-m33-demos:do_deploy"
+M4_DEFAULT_IMAGE_mx8ulp = "imx8ulp_m33_SSRAM_rpmsg_lite_str_echo_rtos.bin"
 ATF_MACHINE_NAME_mx8ulp = "bl31-imx8ulp.bin"
-IMX_EXTRA_FIRMWARE_mx8ulp = "firmware-upower firmware-sentinel imx-upower"
+IMX_EXTRA_FIRMWARE_mx8ulp = "firmware-upower firmware-sentinel"
 SECO_FIRMWARE_NAME_mx8ulp = "mx8ulpa0-ahab-container.img"
 SOC_TARGET_mx8ulp = "iMX8ULP"
 SOC_FAMILY_mx8ulp = "mx8ulp"
@@ -35,7 +35,7 @@ do_compile_prepend() {
         cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_image.bin
         ;;
     mx8ulp)
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${M4_DEFAULT_IMAGE}       ${BOOT_STAGING}/m33_image.bin
+        cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}       ${BOOT_STAGING}/m33_image.bin
         ;;
     esac
 }
