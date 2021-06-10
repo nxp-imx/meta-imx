@@ -5,7 +5,7 @@ the backend binding for runtime frameworks such as Android NN, Tensorflow-Lite, 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ededf2503f5d147ae718276dfd28801f"
 
-DEPENDS = "imx-gpu-viv nn-imx googletest"
+DEPENDS = "imx-gpu-viv nn-imx"
 
 TIM_VX_SRC ?= "git://source.codeaurora.org/external/imx/tim-vx-imx.git;protocol=https"
 SRCBRANCH = "imx_v1.1.y"
@@ -23,6 +23,15 @@ EXTRA_OECMAKE =  " \
     -DTIMVX_REPLACE_COMPILER_FLAGS=off \
     -DTIMVX_USE_EXTERNAL_OVXLIB=on \
 "
+
+do_configure_prepend() {
+    # Set proxy here 
+    # avoid the failure when clone googletest.git
+    export HTTP_PROXY=${http_proxy}
+    export HTTPS_PROXY=${https_proxy}
+    export http_proxy=${http_proxy}
+    export https_proxy=${https_proxy}
+}
 
 # Output library is unversioned
 SOLIBS = ".so"
