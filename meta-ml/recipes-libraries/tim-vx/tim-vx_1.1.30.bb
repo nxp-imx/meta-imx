@@ -20,18 +20,10 @@ EXTRA_OECMAKE =  " \
     -DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR} \
     -DCMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT=on \
     -DCONFIG=YOCTO \
+    -DTIM_VX_ENABLE_TEST=off \
     -DTIMVX_REPLACE_COMPILER_FLAGS=off \
     -DTIMVX_USE_EXTERNAL_OVXLIB=on \
 "
-
-do_configure_prepend() {
-    # Set proxy here 
-    # avoid the failure when clone googletest.git
-    export HTTP_PROXY=${http_proxy}
-    export HTTPS_PROXY=${https_proxy}
-    export http_proxy=${http_proxy}
-    export https_proxy=${https_proxy}
-}
 
 # Output library is unversioned
 SOLIBS = ".so"
