@@ -12,6 +12,6 @@ RDEPENDS_${PN} = " \
     keyctl-caam \
     keyutils \
     lvm2 \
-    smw-tests \
     util-linux \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'smw-tests', '', d)} \
 "
