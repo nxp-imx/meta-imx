@@ -5,7 +5,7 @@
 
 DESCRIPTION = "GPU G2D library and apps for i.MX with 2D GPU and no DPU"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b3b0bab6ff55420d043cf1652c52d788"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b3b0bab6ff55420d043cf1652c52d788" 
 
 DEPENDS += "libgal-imx"
 PROVIDES += "virtual/libg2d"
