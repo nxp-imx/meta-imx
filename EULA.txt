@@ -96,7 +96,7 @@ in combination with a NXP Product.
 You may not distribute or sublicense the Licensed Software to others under the
 license granted in this Section 2.2.
 
-You may demonstrate the Licensed Software to your direct customers as part of
+You may demonstrate the Licensed Software to your direct costumers as part of
 an Authorized System so long as such demonstration is directly controlled by
 you and without prior approval by NXP; however, to all other third parties only
 if NXP has provided its advance, written approval (e.g. email approval) of your
