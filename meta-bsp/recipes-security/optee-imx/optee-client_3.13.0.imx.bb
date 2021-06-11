@@ -16,7 +16,9 @@ SRCREV = "7c9c423d00e96bf51debd5fe10fd70dce83be5cc"
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
-inherit python3native systemd
+inherit python3native systemd features_check
+
+REQUIRED_MACHINE_FEATURES = "optee"
 
 SYSTEMD_SERVICE_${PN} = "tee-supplicant.service"
 
