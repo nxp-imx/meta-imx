@@ -14,7 +14,7 @@ IMX_DEFAULT_KERNEL = "linux-imx"
 
 IMX_DEFAULT_BSP = "nxp"
 
-MACHINE_FEATURES += "pci wifi bluetooth"
+MACHINE_FEATURES += "pci wifi bluetooth optee"
 
 KERNEL_DEVICETREE = " \
     freescale/${KERNEL_DEVICETREE_BASENAME}.dtb \
