@@ -63,12 +63,14 @@ do_deploy_append() {
     mx8x)
         install -m 0644 ${BOOT_STAGING}/m4_image.bin         ${DEPLOYDIR}/${BOOT_TOOLS}
         ;;
+    mx8ulp)
+        install -m 0644 ${BOOT_STAGING}/m33_image.bin         ${DEPLOYDIR}/${BOOT_TOOLS}
+        ;;
     esac
 }
 
 deploy_mx8ulp() {
     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-#    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
     if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
         install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
