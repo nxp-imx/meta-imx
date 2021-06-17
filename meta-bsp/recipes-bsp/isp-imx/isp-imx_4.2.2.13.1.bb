@@ -21,6 +21,7 @@ OECMAKE_GENERATOR = "Unix Makefiles"
 SYSTEMD_SERVICE_${PN} = "imx8-isp.service"
 
 EXTRA_OECMAKE += " \
+    -DSDKTARGETSYSROOT=${STAGING_DIR_HOST} \
     -DCMAKE_BUILD_TYPE=release \
     -DISP_VERSION=ISP8000NANO_V1802 \
     -DPLATFORM=ARM64 \
@@ -37,10 +38,6 @@ EXTRA_OECMAKE += " \
     -DIMX_G2D=ON \
     -Wno-dev \
 "
-
-do_configure_prepend() {
-    export SDKTARGETSYSROOT=${STAGING_DIR_HOST}
-}
 
 do_install() {
     install -d ${D}/${libdir}
