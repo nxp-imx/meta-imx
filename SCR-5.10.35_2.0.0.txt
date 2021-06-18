@@ -71,7 +71,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     firmware-imx-8.12.bin
 Version:                     8.12
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -225,7 +225,7 @@ Origin:                      Qualcomm Atheros, Inc. (proprietary)
 Package:                     mwifiex.git
 Version:                     
 Outgoing License:            GPL-2.0 
-License File:                mwifiex*/gpl-2.0.txt
+License File:                mxm_wifiex/wlan_src/gpl-2.0.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP Wi-Fi linux SDK
@@ -236,7 +236,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-seco-3.8.1.bin
 Version:                     3.8.1
-Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -248,7 +248,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-seco-libs.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v23 May 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
@@ -383,7 +383,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     ml-security-1.0.4.bin
 Version:                     1.0.4
-Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -413,22 +413,27 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP i.MX keyctl tool to manage CAAM Keys
 Release Location:            https://source.codeaurora.org/external/imx/keyctl_caam -b rel_imx_5.10.35_2.0.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 
 Package:                     ecdsa-lib-imx-3.3.1.bin
 Version:                     3.3.1
-Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
 Description and comments:    2X signature verification library
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             trace - NXP (BSD-3-clause)
+
 --------------------------------------------
 
 Package:                     v2xsehsm.git
 Version:                     0.5
 Outgoing License:            BSD-3-Clause 
-License File:                BSD 3 Clause.txt
+License File:                BSD-3-Clause.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    V2X Secure Element library
@@ -568,25 +573,28 @@ Description and comments:    Graphics sample applications
 Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 5.7.1
 Origin:                      NXP (BSD-3-clause)
                          Demo Framework
-                             The Android Open Source Project (Apache-2.0) - https://source.android.com/
-                             Mono Xna (MIT) - https://code.google.com/archive/p/monoxna/
-                             Wayland (Seetex License) - http://cgit.freedesktop.org/~krh/wayland/
+                             Sascha Willems - Vulkan demo (MIT) - https://github.com/SaschaWillems/Vulkan
+                             MonoXNA - The Mono Xna Team (MIT) - https://code.google.com/archive/p/monoxna/
+                             MonoGame - The MonoGame Team - (MS-PL) - https://github.com/MonoGame/MonoGame
+                             Wayland - Benjamin Franzke (Seetex License) - http://cgit.freedesktop.org/~krh/wayland/
+                             Open Sans - Steve Matteson (Apache-2.0) - https://fonts.google.com/specimen/Open+Sans
                          Demo Apps
+                             Vivante Corporation (MIT)
                              "OpenGL(R) ES 3.0 Programming Guide" book samples (MIT) - http://github.com/zemanel/opengles-book-samples/
                              Norbert Nopper VKTS Examples (MIT) - https://github.com/McNopper/Vulkan
-                             Sascha Willems Vulkan Demo (MIT) - www.saschawillems.de
+                             Sascha Willems - Vulkan demo (MIT) - https://github.com/SaschaWillems/Vulkan
                           Imagery Sources in Demo Apps:
                              Emil Persson (CC-BY-3.0) - http://www.humus.name
                              CDmir (CC0-1.0) - http://opengameart.org/content/old-deer-male
                              Questquest Game icons - Justin Nichol (CC-BY-SA-4.0) - http://freeforall.cc/works/questquest-game-icons/
                              piacenti (CC-BY-3.0) - http://opengameart.org/content/knight-2
                           Third Party Apps Included:
+                             Open Asset Import Library [assimp] (BSD-3-Clause) - https://sourceforge.net/projects/assimp/
                              DevIL (LGPL-2.1+) - https://sourceforge.net/projects/openil/
                              G-Truc Creation [GLI] (MIT) - https://www.g-truc.net/
                              Khronos Group OpenVG (MIT) - https://www.khronos.org/openvg/
                              libpng (libpng) - https://sourceforge.net/projects/libpng/
                              libjpeg (IJG) - http://www.ijg.org/
-                             Open Asset Import Library [assimp] (BSD-3-Clause) - https://sourceforge.net/projects/assimp/
                              OpenGL Mathematics [GLM] (MIT) - https://sourceforge.net/projects/ogl-math/
                              RapidJSON (MIT) - https://github.com/miloyip/rapidjson/
                              SRA/SKC gettimeofday (MIT) - https://doxygen.postgresql.org/gettimeofday_8c_source.htm
@@ -707,7 +715,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     libgpuperfcnt-6.4.3.p2.0-aarch64-x11.bin
 Version:                     6.4.3.p2.0
-Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -743,7 +751,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     libgpuperfcnt-6.4.3.p2.0-arm-x11.bin
 Version:                     6.4.3.p2.0
-Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -927,7 +935,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-vpuwrap.git
 Version:                     4.6.1
-Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
@@ -969,7 +977,7 @@ Origin:                      VeriSilicon Inc. (proprietary)
 Package:                     imx-vpu-hantro-daemon-1.0.0
 Version:                     1.0.0
 Outgoing License:            MIT License 
-License File:                COPYING
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    VPU library
@@ -977,6 +985,7 @@ Release Location:            Mirror
 Origin:                      NXP (MIT)
                              VeriSilicon Inc. (MIT)
                              Intel Corporation - intel-vaapi-driver (MIT) - https://github.com/intel/intel-vaapi-driver
+
 --------------------------------------------
 
 Package:                     imx-vpu-hantro-vc-1.4.0.bin
@@ -1035,7 +1044,7 @@ M4 Processor Packages
 
 Package:                     imx7ulp-m4-demo-2.8.0.1.bin
 Version:                     2.8.0.1
-Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v13 June 2020 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1141,6 +1150,10 @@ Package Category:            M7_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
+                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
+
 --------------------------------------------
 
 Package:                     imx8mp-m7-demo-2.9.0.bin
@@ -1181,46 +1194,62 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Google Coral Edge TPU Posenet Library
 Release Location:            https://source.codeaurora.org/external/imx/coral-posenet-imx -b rel_imx_5.10.35_2.0.0
+Origin:                      NXP (LGPL-2.1)
+                             Google LLC - Google Coral Edge Project Posenet (Apache-2.0) https://github.com/google-coral/project-posenet/
+
 --------------------------------------------
 
 Package:                     deepview-rt-2.4.25-aarch64.bin
 Version:                     2.4.25-aarch64
-Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - No distribution license granted - Section 2.2 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v25 June 2021 - No distribution license granted - Section 2.2 applies 
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    Machine Learning Au-Zone DeepViewRT and ModelRunner for i.MX8 Application Processors
 Release Location:            Mirror
+Origin:                      Au-Zone Technologies (proprietary)
+
 --------------------------------------------
 
 Package:                     deepview-rt-examples-1.0.bin
 Version:                     1.0
-Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - No distribution license granted - Section 2.2 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v25 June 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    DeepViewRT Examples
 Release Location:            Mirror
+Origin:                      Au-Zone Technologies (proprietary)
+                               Viktor Kutuzov (MIT)
+
 --------------------------------------------
 
 Package:                     deepview-rt-extras-2.4.25.bin
 Version:                     2.4.25
-Outgoing License:            LA_OPT_NXP_Software_License v24 June 2021 - No distribution license granted - Section 2.2 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v25 June 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    DeepView API between NNTensor and XTensor
 Release Location:            Mirror
+Origin:                      Au Zone Technologies (proprietary)
+                              Johan Mabille, Sylvain Corlay and Wolf Vollprecht (BSD-3-Clause)
+                              QuantStack (BSD-3-Clause)
+                              Michael Park (BSL-1.0) 
+                              Tristan Brindle (BSL-1.0)
 --------------------------------------------
 
 Package:                     eiq-apps-imx.git
 Version:                     
 Outgoing License:            LGPL-2.1 
-License File:                COPYING
+License File:                COPYING-LGPL2.1
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Gstreamer Neural Network inference Demo
 Release Location:            https://source.codeaurora.org/external/imx/eiq-apps-imx -b rel_imx_5.10.35_2.0.0
+Origin:                      NXP (LGPL-2.1)
+                             Gstreamer plugins-Base (LGPL-2.1+) - http://gstreamer.freedesktop.org/src/gst-plugins-base/
+
 --------------------------------------------
 
 Package:                     eiq-tvm-imx.git
@@ -1231,6 +1260,9 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Open Deep Learning Compiler Stack
 Release Location:            https://source.codeaurora.org/external/imx/eiq-tvm-imx -b rel_imx_5.10.35_2.0.0
+Origin:                      NXP (Apache-2.0)
+                             Apache TVM (Apache-2.0) - https://github.com/apache/tvm
+
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
@@ -1295,6 +1327,9 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensor Interface Module for OpenVX
 Release Location:            https://source.codeaurora.org/external/imx/tim-vx-imx -b rel_imx_5.10.35_2.0.0
+Origin:                      Vivante Corporation (MIT)
+                             The Khronos Group Inc. (Apache-2.0) - https://www.khronos.org/
+                             The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
 --------------------------------------------
 Tools Packages
 --------------------------------------------
@@ -1335,6 +1370,8 @@ Package Category:            Tools
 Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use bcu.
 Release Location:            https://github.com/NXPmicro/bcu -b master
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 PATCHES IN META_IMX
 --------------------------------------------
@@ -1350,62 +1387,6 @@ Origin of patches:         NXP (GPL-2.0)
 
 --------------------------------------------
 
-Patches for:               bluez5
-Source Location:           http://www.kernel.org/pub/linux/bluetooth/bluez-5.48.tar.xz
-Patch Location:            meta-bsp/recipes-connectivity/bluez5
-Outgoing License:          GPL-2.0+
-License File:              COPYING
-Package Category:          Connectivity
-Description and comments:  Bluetooth protocol stack for Linux
-Origin of patches:         NXP (GPL-2.0+)
-
---------------------------------------------
-
-Patches for:               connman
-Source Location:           https://git.kernel.org/pub/scm/network/connman/connman.git/
-Patch Location:            meta-bsp/recipes-connectivity/connman/connman
-Outgoing License:          GPL-2.0
-License File:              COPYING
-Package Category:          Connectivity
-Description and comments:  Connection Manager
-Origin of patches:         NXP (GPL-2.0)
-                           WindRiver (GPL-2.0) - https://www.windriver.com/
-
---------------------------------------------
-
-Patches for:               gstreamer1.0-libav
-Source Location:           http://gstreamer.freedesktop.org/src/gst-libav
-Patch Location:            meta-bsp/recipes-multimedia/gstreamer/
-Outgoing License:          LGPL-2.0
-License File:              COPYING
-Package Category:          Multimedia
-Description and comments:  A plugin with a set of elements using the Libav library codecs
-Origin of patches:         Mathieu Duponchelle (LGPL-2.0)
-
---------------------------------------------
-
-Patches for:               alsa-libs
-Source Location:           ftp://ftp.alsa-project.org/pub/libs
-Patch Location:            meta-bsp/recipes-multimedia/alsa
-Outgoing License:          LGPL-2.0
-License File:              COPYING
-Package Category:          Multimedia
-Description and comments:  User space library to simplify application programming and provide higher level functionality
-Origin of patches:         NXP (LGPL-2.0)
-
---------------------------------------------
-
-Patches for:               alsa-utils
-Source Location:           ftp://ftp.alsa-project.org/pub/utils
-Patch Location:            meta-bsp/recipes-multimedia/alsa
-Outgoing License:          GPL-2.0
-License File:              COPYING
-Package Category:          Multimedia
-Description and comments:  Utilities to control sound cards
-Origin of patches:         alsa-utils contributors (GPL-2.0)
-
---------------------------------------------
-
 Patches for:               pulseaudio
 Source Location:           http://freedesktop.org/software/pulseaudio/releases/
 Patch Location:            meta-bsp/recipes-multimedia/pulaeaudio/pulaeaudio
@@ -1417,62 +1398,6 @@ Origin of patches:         NXP (LGPL-2.1)
 
 --------------------------------------------
 
-Patches for:               opencv
-Source Location:           http://github.com/opencv/opencv.git
-Patch Location:            meta-bsp/recipes-graphics/opencv/opencv
-Outgoing License:          BSD-3-Clause
-License File:              LICENSE
-Package Category:          Graphics
-Description and comments:  The Open Computer Vision Library
-Origin of patches:         NXP (BSD-3-Clause)
-
---------------------------------------------
-
-Patches for:               mesa-demos
-Source Location:           https://mesa.freedesktop.org/archive/demos/
-Patch Location:            meta-bsp/recipes-graphics/mesa/mesa-demos
-Outgoing License:          MIT
-License File:              
-Package Category:          Graphics
-Description and comments:  3-D Graphics
-Origin of patches:         NXP (MIT)
-                           Otavio Salvador (MIT)
-
---------------------------------------------
-
-Patches for:               xserver-xorg
-Source Location:           https://www.x.org/releases/individual/xserver/
-Patch Location:            meta-bsp/recipes-graphics/xorg-xserver/xserver-xorg
-Outgoing License:          MIT.X
-License File:              COPYING
-Package Category:          Linux
-Description and comments:  X11
-Origin of patches:         NXP (MIT.X)
-
---------------------------------------------
-
-Patches for:               glslang
-Source Location:           https://www.khronos.org/opengles/sdk/tools/Reference-Compiler
-Patch Location:            meta-sdk/recipes-graphics/vulkan/glslang
-Outgoing License:          BSD-3-Clause
-License File:              LICENSE
-Package Category:          Graphics
-Description and comments:  Official reference compiler front end for the OpenGL ES and OpenGL shading languages.
-Origin of patches:         NXP (BSD-3-Clause)
-
---------------------------------------------
-
-Patches for:               matchbox-wm 1.2.1
-Source Location:           git://git.yoctoproject.org/matchbox-window-manager
-Patch Location:            meta-bsp/recipes-graphics/matchbox-wm/matchbox-wm
-Outgoing License:          GPL-2.0
-License File:              COPYING
-Package Category:          Graphics
-Description and comments:  Window manager
-Origin of patches:         NXP (GPL-2.0)
-
---------------------------------------------
-
 Patches for:               vulkan
 Source Location:           git://github.com/vulkan
 Patch Location:            meta-sdk/recipes-graphics/vulkan/
@@ -1481,60 +1406,5 @@ License File:              LICENSE.md
 Package Category:          Graphics
 Description and comments:  cross-platform 3D graphics and compute AP
 Origin of patches:         NXP (MIT)
-
---------------------------------------------
-
-Patches for:               vulkan/vulkan-tools
-Source Location:           git://github.com/KhronosGroup/SPIRV-Tools
-Patch Location:            meta-sdk/recipes-graphics/vulkan/
-Outgoing License:          Apache-2.0
-License File:              LICENSE.txt
-Package Category:          Graphics
-Description and comments:  provides an API and commands for processing SPIR-V modules.
-Origin of patches:         NXP (Apache-2.0)
-
---------------------------------------------
-
-Patches for:               vulkan/vkmark
-Source Location:           git://github.com/vkmark/vkmark
-Patch Location:            meta-sdk/recipes-graphics/vulkan/
-Outgoing License:          LGPL-2.1
-License File:              COPYING-LGPL2.1
-Package Category:          Graphics
-Description and comments:  vkmark is an extensible Vulkan benchmarking suite with targeted, configurable scenes.
-Origin of patches:         NXP (LGPL-2.1)
-
---------------------------------------------
-
-Patches for:               qtbase
-Source Location:           https://github.com/qt/qtbase
-Patch Location:            recipes-qt5/qt5/qtbase
-Outgoing License:          LGPL-3.0+Qt Exception 1.1
-License File:              LGPL_EXCEPTION.txt
-Package Category:          Qt
-Description and comments:  Qt Base
-Origin of patches:         NXP (LGPL-2.1+Qt Exception 1.1)
-
---------------------------------------------
-
-Patches for:               qtwayland
-Source Location:           https://github.com/qt/qtwayland
-Patch Location:            meta-sdk/recipes-qt5/qt5/qtwayland
-Outgoing License:          LGPL-3.0+Qt Exception 1.1
-License File:              LGPL_EXCEPTION.txt
-Package Category:          Qt
-Description and comments:  A toolbox for making Qt based Wayland compositors.
-Origin of patches:         NXP (LGPL-2.1+Qt Exception 1.1)
-
---------------------------------------------
-
-Patches for:               gstreamer1.0-plugins-good-qt
-Source Location:           https://github.com/qt/gstreamer1.0-plugins-good-qt
-Patch Location:            meta-sdk/recipes-qt5/qt5/gstreamer1.0-plugins-good-qt
-Outgoing License:          LGPL-3.0+Qt Exception 1.1
-License File:              LGPL_EXCEPTION.txt
-Package Category:          Qt
-Description and comments:  
-Origin of patches:         NXP (LGPL-2.1+Qt Exception 1.1)
 
 --------------------------------------------
