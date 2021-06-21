@@ -1,12 +1,12 @@
 DESCRIPTION = "DeepViewRT examples"
 
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=417b82f17fc02b88125331ed312f6f1b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=f35df765ff17e69043ea21f350e3229c"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "6056d6da5fa9f094d5803ecf73fcfce6"
-SRC_URI[sha256sum] = "1dcb0ba39fd3f84954c1abf90c6f4b41d91ef4f67041beea978d59585076e0db"
+SRC_URI[md5sum] = "5c5df9328806032652fc17a338b8b794"
+SRC_URI[sha256sum] = "d4f1e11fabcb9a1ade38866298642bc6b395aa01cbf7cd818ea11ebdccec66f2"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 

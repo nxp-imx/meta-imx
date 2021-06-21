@@ -1,12 +1,12 @@
 DESCRIPTION = "This package includes the updated and experimental ModelRunner for TensorFlow Lite and ARM NN. Also in this repository is a pre-release of DeepViewRT with support for the OpenVX backend."
 
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=417b82f17fc02b88125331ed312f6f1b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=f35df765ff17e69043ea21f350e3229c"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "b705045e7eb2c31b396fb582f169fecb"
-SRC_URI[sha256sum] = "de344d462f70d21b00dfd3375ce11ed05cacf917164a1410a4ce486c040587ea"
+SRC_URI[md5sum] = "97312789878207dedd7636a36a4772d6"
+SRC_URI[sha256sum] = "640af9ce248d2974318b63aa6bd9f6069f710d9bc9ecf4d76fc34ca5ad19db14"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
