@@ -1,12 +1,12 @@
 DESCRIPTION = "The DeepView Extras provides a library of additional functions which do not have the same portability requirements as the core engine. This library links against the C++ runtime though externally offers the same C API."
 
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=417b82f17fc02b88125331ed312f6f1b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=f35df765ff17e69043ea21f350e3229c"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "d87103c3bdb773dfe9069d3e24a0da22"
-SRC_URI[sha256sum] = "f3a1ec5502a3907d3e697e1ebd274b9a7a07c81c795fc6831f6f8b81f86e4372"
+SRC_URI[md5sum] = "7e66d73a9457b247b60e5b60251f0a13"
+SRC_URI[sha256sum] = "af59b59da8543d0e3642ca911d3c88784c9b678613a3b4d62398f30a15af3cb8"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
