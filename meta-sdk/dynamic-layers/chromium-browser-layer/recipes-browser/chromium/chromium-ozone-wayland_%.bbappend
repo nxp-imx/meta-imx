@@ -1,7 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append = " file://0002-chromium-fix-build-after-y2038-changes-in-glibc.patch \
-"
 GN_ARGS += ' \
         use_lld=false \
 '
