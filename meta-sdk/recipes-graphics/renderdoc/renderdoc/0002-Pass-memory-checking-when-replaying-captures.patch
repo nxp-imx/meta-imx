@@ -1,4 +1,4 @@
-From 416aa27833cdf1fc08e4bdf04198e8808f43ace0 Mon Sep 17 00:00:00 2001
+From bfc32b2123009806d78d95d461654e981860ea5e Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
 Date: Wed, 15 Jul 2020 14:25:14 +0300
 Subject: [PATCH 2/6] Pass memory checking when replaying captures
@@ -19,7 +19,7 @@ Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
  1 file changed, 33 insertions(+)
 
 diff --git a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
-index 81c0d20..bc90f25 100644
+index bae5bb9..02180f7 100644
 --- a/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
 +++ b/renderdoc/driver/vulkan/wrappers/vk_resource_funcs.cpp
 @@ -283,6 +283,39 @@ bool WrappedVulkan::Serialise_vkAllocateMemory(SerialiserType &ser, VkDevice dev

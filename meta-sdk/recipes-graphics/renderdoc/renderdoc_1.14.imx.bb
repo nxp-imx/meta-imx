@@ -1,5 +1,6 @@
-require renderdoc-1.12.inc
+require renderdoc-1.13.inc
 
+SRCREV = "50b2cecc50918e6091f4a8b0e68c0854aca636f1"
 SRC_URI += " \
     file://0001-Continue-running-when-EnumerateDeviceExtensionProper.patch \
     file://0002-Pass-memory-checking-when-replaying-captures.patch \

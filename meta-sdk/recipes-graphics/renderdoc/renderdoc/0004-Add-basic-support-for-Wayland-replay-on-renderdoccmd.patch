@@ -1,4 +1,4 @@
-From 8728678c401ea0fcd030ef9e188aff4a3aaa9e0f Mon Sep 17 00:00:00 2001
+From c1a2f9998c143a7d5d832fde308db7d46fce0118 Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <and96x@gmail.com>
 Date: Wed, 25 Sep 2019 16:05:17 +0300
 Subject: [PATCH 4/6] Add basic support for Wayland replay on renderdoccmd
@@ -30,10 +30,10 @@ index 103ef82..35d52fe 100644
      return;
    }
 diff --git a/renderdoccmd/CMakeLists.txt b/renderdoccmd/CMakeLists.txt
-index da7563e..7736f41 100644
+index 5245443..0428807 100644
 --- a/renderdoccmd/CMakeLists.txt
 +++ b/renderdoccmd/CMakeLists.txt
-@@ -38,6 +38,10 @@ elseif(UNIX)
+@@ -46,6 +46,10 @@ elseif(UNIX)
          list(APPEND libraries PRIVATE -lX11-xcb)
      endif()
  

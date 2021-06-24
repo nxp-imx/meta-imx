@@ -1,4 +1,4 @@
-From 8b936fd10a879cfc824bfd7afe8b1c5dea66de8a Mon Sep 17 00:00:00 2001
+From bb7f05b1ef2ea3bacf2f154a0320b5e93224833e Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
 Date: Wed, 15 Jul 2020 14:17:17 +0300
 Subject: [PATCH 1/6] Continue running when EnumerateDeviceExtensionProperties
@@ -21,10 +21,10 @@ Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/renderdoc/driver/vulkan/vk_core.cpp b/renderdoc/driver/vulkan/vk_core.cpp
-index 371f536..1e23bbb 100644
+index 9063e34..c73fdbb 100644
 --- a/renderdoc/driver/vulkan/vk_core.cpp
 +++ b/renderdoc/driver/vulkan/vk_core.cpp
-@@ -1359,7 +1359,7 @@ VkResult WrappedVulkan::FilterDeviceExtensionProperties(VkPhysicalDevice physDev
+@@ -1404,7 +1404,7 @@ VkResult WrappedVulkan::FilterDeviceExtensionProperties(VkPhysicalDevice physDev
    vkr = ObjDisp(physDev)->EnumerateDeviceExtensionProperties(Unwrap(physDev), pLayerName, &numExts,
                                                               &exts[0]);
  
