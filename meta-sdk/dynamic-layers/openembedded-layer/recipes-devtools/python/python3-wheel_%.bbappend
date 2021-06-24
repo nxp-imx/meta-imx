@@ -1,2 +1,1 @@
-
-BBCLASSEXTEND = "native nativesdk"
+BBCLASSEXTEND += "nativesdk"
