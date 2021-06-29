@@ -21,6 +21,7 @@ ML_PKGS_imxgpu_mx8 = " \
     armnn \
     tensorflow-lite \
     onnxruntime \
+    ml-security \
     pytorch \
     torchvision \
 "
