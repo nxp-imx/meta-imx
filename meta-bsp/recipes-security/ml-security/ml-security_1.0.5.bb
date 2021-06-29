@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3c3fe2b904fd694f28d2f646ee16dddb"
 
 DEPENDS = "opencv"
 
-SRC_URI[md5sum] = "5f789532f11e5085278cbb637d7927d0"
-SRC_URI[sha256sum] = "44b5a43e1cbd2c34245a45798db35ad080e586a81a940771a6b9a75af310d0d1"
+SRC_URI[md5sum] = "65833fea2bb270a1381c1ffc1a902c43"
+SRC_URI[sha256sum] = "bc9c47b8b609dd2fbf27de0c89ad3ad4bb3684461272bd8b6d1b47677a6d318b"
 
 S = "${WORKDIR}/ml-security"
 
