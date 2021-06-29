@@ -1,6 +1,9 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
 # Copyright 2017-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
+#
+# SPDX-License-Identifier: MIT
+#
 
 SUMMARY = "Linux Kernel provided and supported by NXP"
 DESCRIPTION = "Linux Kernel provided and supported by NXP with focus on \
@@ -8,6 +11,7 @@ i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU 
 
 require recipes-kernel/linux/linux-imx.inc
 
+LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 DEPENDS += "lzop-native bc-native"
@@ -19,6 +23,11 @@ SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
 SRCREV = "6ad0f08d7231cb325990898a03d65ffa78728a1d"
 
+# PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
+# required by kernel-yocto.bbclass.
+#
+# LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
+# should be updated once patchlevel is merged.
 LINUX_VERSION = "5.10.35"
 
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
