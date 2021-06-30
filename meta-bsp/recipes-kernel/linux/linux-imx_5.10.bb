@@ -28,7 +28,7 @@ SRCREV = "6ad0f08d7231cb325990898a03d65ffa78728a1d"
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "5.10.35"
+INUX_VERSION = "5.10.46"
 
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
