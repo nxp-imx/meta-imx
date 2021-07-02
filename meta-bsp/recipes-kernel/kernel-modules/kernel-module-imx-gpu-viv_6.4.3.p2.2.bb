@@ -7,7 +7,7 @@ allowing flexibility to use a newer graphics release with an older kernel."
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-SRCBRANCH = "imx_5.10.y"
+SRCBRANCH = "lf-5.10.y"
 LOCALVERSION = "-imx-5.10.y"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = " \
