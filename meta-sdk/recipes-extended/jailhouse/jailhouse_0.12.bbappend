@@ -1,5 +1,5 @@
 SRCBRANCH = "imx_v0.12_y"
-SRCREV = "6a4d89fc27b33bc1d2657ffa7fd7380f061b21a4" 
+SRCREV = "ec702e3c06def22896afe0f8616873785c1d1b1d"
 IMX_JAILHOUSE_SRC ?= "git://source.codeaurora.org/external/imx/imx-jailhouse.git;protocol=ssh"
 SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH} \
            file://0001-tools-scripts-update-shebang-to-python3.patch \
