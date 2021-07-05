@@ -11,3 +11,5 @@ do_install_append() {
 }
 
 FILES_${PN} += "${nonarch_base_libdir}/firmware"
+
+COMPATIBLE_MACHINE = "(mx8m|mx8ulp)"
