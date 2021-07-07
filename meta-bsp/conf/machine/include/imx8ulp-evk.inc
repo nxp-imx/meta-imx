@@ -8,7 +8,6 @@ MACHINEOVERRIDES_EXTENDER_mx8ulp = "imxdrm:imxgpu:imxgpu2d:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT_use-mainline-bsp += " mx8ulp \
 "
 MACHINE_SOCARCH_SUFFIX = "-mx8ulp"
-#MACHINE_FIRMWARE_append = " firmware-imx-vpu-imx8"
 MACHINE_GSTREAMER_1_0_PLUGIN ?= "imx-gst1.0-plugin"
 IMX_DEFAULT_KERNEL = "linux-imx"
 
@@ -42,4 +41,4 @@ IMX_BOOT_SEEK = "32"
 SERIAL_CONSOLES = "115200;ttyLP1"
 
 # Add additional firmware
-MACHINE_FIRMWARE_append = " linux-firmware-ath10k"
+MACHINE_FIRMWARE_append = " firmware-imx-epdc"
