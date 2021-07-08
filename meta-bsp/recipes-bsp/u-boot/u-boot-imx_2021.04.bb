@@ -1,34 +1,21 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
+# Copyright 2018 (C) O.S. Systems Software LTDA.
 # Copyright 2017-2021 NXP
 
-DESCRIPTION = "i.MX U-Boot suppporting i.MX reference boards."
-require u-boot-common.inc
 require recipes-bsp/u-boot/u-boot.inc
-
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+require recipes-bsp/u-boot/u-boot-imx-common.inc
 
 PROVIDES += "u-boot"
-DEPENDS_append = " dtc-native"
-
-LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "lf_v2021.04"
-SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH} \
-"
+SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "0cf784bea052cc46423a73329d9ed342a4350273"
 
-S = "${WORKDIR}/git"
+LOCALVERSION ?= "-imx_v2021.04_5.10.31-2.0.0"
 
-inherit fsl-u-boot-localversion
-
-LOCALVERSION ?= "-5.10.31-2.0.0"
-
-BOOT_TOOLS = "imx-boot-tools"
-
-do_deploy_append_mx8m () {
-    # Deploy u-boot-nodtb.bin and fsl-imx8mq-XX.dtb, to be packaged in boot binary by imx-boot
+do_deploy_append_mx8m() {
+    # Deploy u-boot-nodtb.bin and fsl-imx8m*-XX.dtb for mkimage to generate boot binary
     if [ -n "${UBOOT_CONFIG}" ]
     then
         for config in ${UBOOT_MACHINE}; do
@@ -46,7 +33,6 @@ do_deploy_append_mx8m () {
         done
         unset  i
     fi
-
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
