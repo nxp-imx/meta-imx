@@ -7,7 +7,7 @@ IMXLIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-lib.git;protocol=htt
 SRC_URI = " \
     ${IMXLIB_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "7fc444875901ab4ee43407176b158b846842c3bf"
+SRCREV = "87ddd80953835eb29027d1d5a12044a08e809e40"
 
 PLATFORM_mx8ulp = "IMX8ULP"
 
