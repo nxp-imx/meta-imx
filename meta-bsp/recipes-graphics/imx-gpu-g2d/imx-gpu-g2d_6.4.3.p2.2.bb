@@ -15,8 +15,8 @@ FSLBIN_NAME     = "${PN}-${PV}-${TARGET_ARCH}"
 SRC_URI = "${FSL_MIRROR}/${FSLBIN_NAME}.bin;name=${TARGET_ARCH};fsl-eula=true"
 SRC_URI[aarch64.md5sum] = "ef531647daf6febdd38d72c9e4e8c353"
 SRC_URI[aarch64.sha256sum] = "821dd38c1b16a577dfda00d220b810a50d2e4bc137de017e58099171cd627b7e"
-SRC_URI[arm.md5sum] = "eb2bd10bde92463609577a255490fe2f"
-SRC_URI[arm.sha256sum] = "d523c1e59ee12c6b96158d30427bb53c1c24fda835813a3728e9c79878e7f273"
+SRC_URI[arm.md5sum] = "25d03300bb094ee81a2bf2081ce0906a"
+SRC_URI[arm.sha256sum] = "781fc43f94ef6b7586bceeec94fc06bad59f6221e701b417bc376dc444eb87e1"
 
 S = "${WORKDIR}/${FSLBIN_NAME}"
 
