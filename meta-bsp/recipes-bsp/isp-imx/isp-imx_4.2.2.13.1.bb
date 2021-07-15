@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f35df765ff17e69043ea21f350e3229c"
 DEPENDS = "python3 libdrm virtual/libg2d"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "d899569e70b6cfcc1940f49e675db76e"
-SRC_URI[sha256sum] = "a57ed9149d1b5a22fd8c4eac35ebd87cae968b47369d8e6a633fea8e4a6e5720"
+SRC_URI[md5sum] = "1eeffcb17eb777a3b9b12305bc6db5c2"
+SRC_URI[sha256sum] = "47a564d13dfbb9e145b1bb9d1bcd1ae7b56e9088bd34501880e047961eb0e4f0"
 
 inherit fsl-eula-unpack cmake systemd use-imx-headers
 
