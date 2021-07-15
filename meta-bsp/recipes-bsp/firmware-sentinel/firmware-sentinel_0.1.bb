@@ -2,7 +2,7 @@
 DESCRIPTION = "NXP i.MX 8ULP SECO Firmware"
 LICENSE = "Proprietary"
 SECTION = "BSP"
-LIC_FILES_CHKSUM = "file://COPYING;md5=f35df765ff17e69043ea21f350e3229c"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e565271ec9a80ce47abbddc4bffe56fa"
 
 inherit fsl-eula2-unpack2 pkgconfig deploy
 
