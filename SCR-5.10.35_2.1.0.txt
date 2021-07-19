@@ -368,18 +368,6 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-xen.git
-Version:                     4.13.0
-Outgoing License:            GPL-2.0 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    A Virtual Machine Monitor
-Release Location:            https://source.codeaurora.org/external/imx/imx-xen -b rel_imx_5.10.35_2.1.0
-Origin:                      NXP (GPL-2.0)
-
---------------------------------------------
-
 Package:                     imx-smw.git
 Version:                     0.1
 Outgoing License:            BSD-3-Clause 
