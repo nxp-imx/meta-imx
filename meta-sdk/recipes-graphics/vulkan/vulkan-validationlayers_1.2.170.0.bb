@@ -24,8 +24,7 @@ DEPENDS = "vulkan-headers glslang spirv-tools spirv-headers"
 EXTRA_OECMAKE = " \
     -DGLSLANG_INSTALL_DIR=${STAGING_DIR_HOST}/usr \
     -DSPIRV_HEADERS_INSTALL_DIR=${STAGING_DIR_HOST}/usr \
-    -DSPIRV_TOOLS_LIB=${STAGING_DIR_HOST}/usr \
-    -DSPIRV_TOOLS_OPT_LIB=${STAGING_DIR_HOST}/usr \
+    -DSPIRV_TOOLS_INSTALL_DIR=${STAGING_DIR_HOST}/usr \
 "
 
 # must choose x11 or wayland or both
