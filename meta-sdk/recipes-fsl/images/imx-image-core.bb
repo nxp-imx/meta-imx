@@ -27,6 +27,7 @@ CLINFO_mx8mm = ""
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
     imx-test \
+    firmwared \
     packagegroup-imx-core-tools \
     packagegroup-imx-security \
     curl \

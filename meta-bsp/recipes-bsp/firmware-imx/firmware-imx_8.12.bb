@@ -6,26 +6,12 @@ DESCRIPTION = "Freescale i.MX firmware such as for the VPU"
 
 require firmware-imx-${PV}.inc
 
-SRC_URI_append = " \
-    file://sdma \
-    file://epdc \
-    file://regulatory \
-    file://hdmi \
-"
-
 PE = "1"
 
 inherit allarch
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/imx
-
-    # Install loading scripts
-    install -d ${D}${sysconfdir}
-    install -m 0755 ${WORKDIR}/sdma ${D}${sysconfdir}
-    install -m 0755 ${WORKDIR}/epdc ${D}${sysconfdir}
-    install -m 0755 ${WORKDIR}/regulatory ${D}${sysconfdir}
-    install -m 0755 ${WORKDIR}/hdmi ${D}${sysconfdir}
 
     # SDMA Firmware section
     install -d ${D}${nonarch_base_libdir}/firmware/imx/sdma
@@ -133,11 +119,9 @@ PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-* ${PN}-easrc-* ${PN}-xcvr-* ${PN}-xu
 # is empty.
 # Therefore, we opt-out from producing -dev package here, since also for firmware
 # files it makes no sense.
-PACKAGES = "${PN}-epdc ${PN}-hdmi ${PN}-regulatory ${PN}-sdma"
+PACKAGES = "${PN} ${PN}-epdc ${PN}-hdmi"
 
-FILES_${PN}-epdc = "${nonarch_base_libdir}/firmware/imx/epdc/ ${sysconfdir}/epdc"
-FILES_${PN}-hdmi = "${nonarch_base_libdir}/firmware/imx/hdmi/ ${sysconfdir}/hdmi"
-FILES_${PN}-regulatory = "${sysconfdir}/regulatory"
-FILES_${PN}-sdma = "${sysconfdir}/sdma"
+FILES_${PN}-epdc = "${nonarch_base_libdir}/firmware/imx/epdc/"
+FILES_${PN}-hdmi = "${nonarch_base_libdir}/firmware/imx/hdmi/"
 
 COMPATIBLE_MACHINE = "(imx)"
