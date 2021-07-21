@@ -1,0 +1,39 @@
+From cc7a233b3f61ea16ef98e625d5e250d9ca205e22 Mon Sep 17 00:00:00 2001
+From: Xianzhong <xianzhong.li@nxp.com>
+Date: Tue, 8 Jan 2019 16:28:36 +0800
+Subject: [PATCH] MGS-4031 Report NotSupported for OpenVG tests on non-VG run
+
+If conformance build does not enable DEQP_SUPPORT_VG while building
+binary for non-VG conformance run then OpenVG specific tests
+should return NotSupported error instead of InternalError.
+
+The reason is because the specification does not enforce OpenVG support
+
+Components: OpenGL
+
+Signed-off-by: Xianzhong <xianzhong.li@nxp.com>
+(cherry picked from commit fbafdd071ac5c611cb1c70f5e0da6bd1db33c17b)
+---
+ modules/egl/teglRenderCase.cpp | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/modules/egl/teglRenderCase.cpp b/modules/egl/teglRenderCase.cpp
+index 7a8914019..33793ba50 100644
+--- a/modules/egl/teglRenderCase.cpp
++++ b/modules/egl/teglRenderCase.cpp
+@@ -105,6 +105,12 @@ static void checkBuildClientAPISupport (EGLint requiredAPIs)
+ {
+ 	const EGLint	builtClientAPIs		= getBuildClientAPIMask();
+ 
++#if !defined(DEQP_SUPPORT_VG)
++    if (requiredAPIs & EGL_OPENVG_BIT)
++        TCU_THROW(NotSupportedError, "Test case requires VG API not supported in current build");
++    else
++#endif
++
+ #if !defined(DEQP_SUPPORT_GLES1)
+     if (requiredAPIs & EGL_OPENGL_ES_BIT)
+         TCU_THROW(NotSupportedError, "Test case requires ES1.1 API not supported in current build");
+-- 
+2.17.1
+
