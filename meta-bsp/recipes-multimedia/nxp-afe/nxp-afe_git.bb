@@ -2,7 +2,7 @@
 
 DESCRIPTION = "NXP Audio Front End (AFE) for incorporating Voice Assistants"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b62b8f8a4d67b67c6afd28d3b7cb04d3"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e5f78129a8e1b2b35e44e7e7cf46966d"
 
 PV = "1.0+git${SRCPV}" 
 
