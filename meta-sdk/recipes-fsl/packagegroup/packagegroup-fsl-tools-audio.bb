@@ -33,9 +33,15 @@ ASRC_INSTALL_mx8 = "imx-dspc-asrc"
 PDM_INSTALL ?= ""
 PDM_INSTALL_mx8m = "imx-sw-pdm"
 
+NXPAFE_INSTALL ?= ""
+NXPAFE_INSTALL_mx8mm = "nxp-afe"
+NXPAFE_INSTALL_mx8mn = "nxp-afe"
+NXPAFE_INSTALL_mx8mp = "nxp-afe"
+
 RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "alsa",  "${ALSA_INSTALL}", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio",  "${PULSEAUDIO_INSTALL}", "", d)} \
     ${ASRC_INSTALL} \
     ${PDM_INSTALL} \
+    ${NXPAFE_INSTALL} \
 "
