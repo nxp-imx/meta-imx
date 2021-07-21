@@ -29,6 +29,7 @@ IMAGE_INSTALL += " \
     imx-test \
     packagegroup-imx-core-tools \
     packagegroup-imx-security \
+    curl \
     ${CLINFO} \
 "
 export IMAGE_BASENAME = "imx-image-core"
