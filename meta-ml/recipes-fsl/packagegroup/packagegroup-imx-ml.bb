@@ -26,6 +26,7 @@ ML_PKGS_imxgpu_mx8 = " \
     torchvision \
 "
 ML_PKGS_mx8ulp = " \
+    armnn \
     tensorflow-lite \
 "
 
