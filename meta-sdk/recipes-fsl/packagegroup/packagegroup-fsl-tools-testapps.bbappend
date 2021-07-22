@@ -27,7 +27,6 @@ RDEPENDS_${PN} += " \
     cpufrequtils \
     cryptodev-module \
     cryptodev-tests \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'dpdk', 'dpdk dpdk-examples', '', d)} \
     e2fsprogs-resize2fs \
     iw \
     linuxptp \
