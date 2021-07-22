@@ -25,6 +25,9 @@ ML_PKGS_imxgpu_mx8 = " \
     pytorch \
     torchvision \
 "
+ML_PKGS_mx8ulp = " \
+    tensorflow-lite \
+"
 
 ML_DEEPVIEW_PKGS            = ""
 ML_DEEPVIEW_PKGS_imxgpu_mx8 = "deepview-rt-examples"
