@@ -28,6 +28,7 @@ ML_PKGS_imxgpu_mx8 = " \
 ML_PKGS_mx8ulp = " \
     armnn \
     tensorflow-lite \
+    onnxruntime \
 "
 
 ML_DEEPVIEW_PKGS            = ""

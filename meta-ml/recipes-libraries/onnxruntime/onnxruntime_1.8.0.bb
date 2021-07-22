@@ -38,6 +38,7 @@ PACKAGECONFIG_VSI_NPU       = ""
 PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
 PACKAGECONFIG_VSI_NPU_mx8mnul = ""
+PACKAGECONFIG_VSI_NPU_mx8ulp = ""
 
 PACKAGECONFIG ?= "openmp test reports sharedlib armnn eigenblas acl acl-2102 nnapi ${PACKAGECONFIG_VSI_NPU}"
 
