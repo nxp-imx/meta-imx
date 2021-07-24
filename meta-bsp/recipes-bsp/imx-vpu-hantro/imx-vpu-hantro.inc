@@ -1,5 +1,4 @@
 # Copyright 2017-2020 NXP
-
 DESCRIPTION = "i.MX Hantro VPU library"
 LICENSE = "Proprietary"
 
@@ -15,14 +14,14 @@ PLATFORM_mx8mm = "IMX8MM"
 PLATFORM_mx8mq = "IMX8MQ"
 PLATFORM_mx8mp = "IMX8MP"
 
-do_compile () {
-    oe_runmake CROSS_COMPILE="${HOST_PREFIX}" \
-        SDKTARGETSYSROOT="${STAGING_DIR_TARGET}" \
-        PLATFORM="${PLATFORM}" all
-}
+EXTRA_OEMAKE = " \
+    CROSS_COMPILE="${HOST_PREFIX}" \
+    SDKTARGETSYSROOT="${STAGING_DIR_TARGET}" \
+    PLATFORM="${PLATFORM}" \
+"
 
 do_install () {
-    oe_runmake DEST_DIR="${D}" PLATFORM="${PLATFORM}" install
+    oe_runmake install DEST_DIR="${D}"
 }
 
 FILES_${PN} += "/unit_tests"
