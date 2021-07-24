@@ -1,0 +1,13 @@
+Index: imx-vpu-hantro-daemon-1.1.0/Makefile
+===================================================================
+--- imx-vpu-hantro-daemon-1.1.0.orig/Makefile
++++ imx-vpu-hantro-daemon-1.1.0/Makefile
+@@ -22,7 +22,7 @@ OUT_FILE = vsidaemon
+ DEC = nxp_enc_hw
+ ENC = nxp_dec_hw
+ LIBFILES = 
+-LD_FLAGS = -lpthread -lm
++LD_FLAGS = $(LDFLAGS) -lpthread -lm
+ 
+ PLATFORM ?= IMX8MP
+ 
