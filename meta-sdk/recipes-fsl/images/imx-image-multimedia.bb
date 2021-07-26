@@ -33,11 +33,6 @@ IMAGE_FEATURES += " \
 ERPC_COMPS ?= ""
 ERPC_COMPS_append_mx7ulp = "packagegroup-imx-erpc"
 
-HANTRO_PKGS = ""
-HANTRO_PKGS_mx8mm = "imx-vpu-hantro-daemon"
-HANTRO_PKGS_mx8mp = "imx-vpu-hantro-daemon"
-HANTRO_PKGS_mx8mq = "imx-vpu-hantro-daemon"
-
 V2X_PKGS = ""
 V2X_PKGS_mx8dxl = "packagegroup-imx-v2x"
 
@@ -55,6 +50,5 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-fsl-gstreamer1.0-full \
     firmwared \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
-    ${HANTRO_PKGS} \
     ${V2X_PKGS} \
 "

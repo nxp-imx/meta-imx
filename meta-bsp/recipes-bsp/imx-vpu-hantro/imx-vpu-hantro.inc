@@ -26,4 +26,6 @@ do_install () {
 
 FILES_${PN} += "/unit_tests"
 
+RDEPENDS_${PN} += "imx-vpu-hantro-daemon"
+
 COMPATIBLE_MACHINE = "(mx8mq|mx8mm|mx8mp)"
