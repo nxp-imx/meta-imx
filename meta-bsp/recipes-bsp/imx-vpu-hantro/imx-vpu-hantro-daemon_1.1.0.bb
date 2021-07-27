@@ -10,8 +10,8 @@ SRC_URI = " \
     ${FSL_MIRROR}/${BP}.tar.gz \
     file://0001-Makefile-Honor-LDFLAGS-from-toolchain.patch \
 "
-SRC_URI[md5sum] = "abdc86bde253b48f4e1685a70e4767e0"
-SRC_URI[sha256sum] = "906a2def3e99f5718d83a4da2242aa6a7245343513ec79f7df5850c761a0f9df"
+SRC_URI[md5sum] = "8487e6a79ea50f354396c829a77b9294"
+SRC_URI[sha256sum] = "eb4b025aaa19d7b80ca8d8dfb7dede1bb97f346352060c6d477a6ca324778470"
 
 PLATFORM_mx8mm = "IMX8MM"
 PLATFORM_mx8mq = "IMX8MQ"
