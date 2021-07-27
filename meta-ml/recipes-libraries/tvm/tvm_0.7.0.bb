@@ -23,7 +23,7 @@ SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                git://github.com/apache/incubator-tvm-vta;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/vta-hw;name=vta-hw \
 "
 
-SRCREV = "1ac52e340891ca22ad3bcc253a2657a474163aca"
+SRCREV = "419b6252e2060387dcec01d4614ba8100e9ce47d"
 SRCREV_dlpack = "3ec04430e89a6834e5a1b99471f415fa939bf642"
 SRCREV_dmlc-core = "6c401e242c59a1f4c913918246591bb13fd714e7"
 SRCREV_rang = "cabe04d6d6b05356fa8f9741704924788f0dd762"
