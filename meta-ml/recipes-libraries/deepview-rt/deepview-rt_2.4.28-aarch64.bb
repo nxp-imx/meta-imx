@@ -1,19 +1,30 @@
 DESCRIPTION = "This package includes the updated and experimental ModelRunner for TensorFlow Lite and ARM NN. Also in this repository is a pre-release of DeepViewRT with support for the OpenVX backend."
 
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=f35df765ff17e69043ea21f350e3229c"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e565271ec9a80ce47abbddc4bffe56fa"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "97312789878207dedd7636a36a4772d6"
-SRC_URI[sha256sum] = "640af9ce248d2974318b63aa6bd9f6069f710d9bc9ecf4d76fc34ca5ad19db14"
+SRC_URI[md5sum] = "d1b53ec6d0befe3de152506119692ec8"
+SRC_URI[sha256sum] = "177c594a2f038c762c972864b1e1a0dfc3a83f1e90d03fce0073914e144d77f3"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
 inherit fsl-eula-unpack python3native
 
 DEPENDS = "python3 python3-pip-native opencv"
-RDEPENDS_${PN} += "nn-imx"
+
+RDEPENDS_MX8       = ""
+RDEPENDS_MX8_mx8   = "nn-imx"
+RDEPENDS_MX8_mx8mm = ""
+RDEPENDS_MX8_mx8mnul = ""
+RDEPENDS_MX8_mx8ulp = ""
+RDEPENDS_${PN} += " ${RDEPENDS_MX8} "
+
+IS_RM_OVXRTM  = ""
+IS_RM_OVXRTM_mx8mm =  "1"
+IS_RM_OVXRTM_mx8mnul =  "1"
+IS_RM_OVXRTM_mx8ulp =  "1"
 
 do_install () {
     install -d ${D}${bindir}
@@ -23,6 +34,10 @@ do_install () {
 
     cp -fr   ${S}/modelrunner/bin/* ${D}${bindir}
     cp -frP  ${S}/modelrunner/lib/* ${D}${libdir}
+    if [ ${IS_RM_OVXRTM} = "1" ]  
+    then
+    	rm -fr  ${D}${libdir}/libovx-rtm.so
+    fi
     cp -frP  ${S}/${BPN}/lib/* ${D}${libdir}
     cp -fr   ${S}/${BPN}/include/* ${D}${includedir}
  
@@ -46,7 +61,4 @@ INHIBIT_SYSROOT_STRIP = "1"
 INSANE_SKIP_${PN} += "dev-so dev-deps ldflags"
 
 COMPATIBLE_MACHINE = "(mx8)"
-COMPATIBLE_MACHINE_mx8mm = "(^$)"
-COMPATIBLE_MACHINE_mx8mnlite = "(^$)"
 BBCLASSEXTEND = "nativesdk"
-
