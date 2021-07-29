@@ -9,7 +9,7 @@ DEPENDS = "imx-gpu-viv nn-imx"
 
 TIM_VX_SRC ?= "git://source.codeaurora.org/external/imx/tim-vx-imx.git;protocol=https"
 SRCBRANCH = "imx-v1.1.32"
-SRCREV = "8ce6c611e6a45feff0326b7f1fdf7c5e553f7f6d" 
+SRCREV = "8ce6c611e6a45feff0326b7f1fdf7c5e553f7f6d"
 SRC_URI = "${TIM_VX_SRC};branch=${SRCBRANCH}"
 
 S = "${WORKDIR}/git"
