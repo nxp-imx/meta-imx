@@ -13,7 +13,7 @@ M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_power_mode_switch.bin"
 
 # Setting for i.MX 8ULP
 IMX_M4_DEMOS_mx8ulp = "imx-m33-demos:do_deploy"
-M4_DEFAULT_IMAGE_mx8ulp = "imx8ulp_m33_SSRAM_rpmsg_lite_str_echo_rtos.bin"
+M4_DEFAULT_IMAGE_mx8ulp = "imx8ulp_m33_TCM_rpmsg_lite_str_echo_rtos.bin"
 ATF_MACHINE_NAME_mx8ulp = "bl31-imx8ulp.bin"
 IMX_EXTRA_FIRMWARE_mx8ulp = "firmware-upower firmware-sentinel"
 SECO_FIRMWARE_NAME_mx8ulp = "mx8ulpa0-ahab-container.img"
