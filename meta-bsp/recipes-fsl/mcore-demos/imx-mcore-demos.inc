@@ -1,7 +1,7 @@
-# Copyright 2017-2020 NXP
+# Copyright 2017-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-SUMMARY = "i.MX M4/M7 core Demo images"
+SUMMARY = "i.MX M4/M7/M33 core Demo images"
 SECTION = "app"
 LICENSE = "Proprietary"
 
@@ -17,11 +17,13 @@ SOC_mx8mp   = "imx8mp"
 SOC_mx8mq   = "imx8mq"
 SOC_mx8qm   = "imx8qm"
 SOC_mx8qxp  = "imx8qx"
+SOC_mx8ulp  = "imx8ulp"
 
 MCORE_TYPE  ?= "m4"
 MCORE_TYPE_mx8mn  = "m7"
 MCORE_TYPE_mx8mnul = "m7"
 MCORE_TYPE_mx8mp  = "m7"
+MCORE_TYPE_mx8ulp  = "m33"
 
 IMX_PACKAGE_NAME = "${SOC}-${MCORE_TYPE}-demo-${PV}"
 SRC_URI_append = ";name=${SOC}"

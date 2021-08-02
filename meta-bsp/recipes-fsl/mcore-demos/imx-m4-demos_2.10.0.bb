@@ -1,7 +1,7 @@
 # Copyright 2017-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-require imx-mcore-demos-2.8.inc
+require imx-mcore-demos.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=e565271ec9a80ce47abbddc4bffe56fa"
 

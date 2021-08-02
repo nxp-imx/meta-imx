@@ -21,7 +21,7 @@ SCR = "SCR-${SOC}-${MCORE_TYPE}-demo.txt"
 do_install () {
     # install elf format binary to /lib/firmware
     install -d ${D}${base_libdir}/firmware
-#    install -m 0644 ${S}/*.elf ${D}${base_libdir}/firmware
+    install -m 0644 ${S}/*.elf ${D}${base_libdir}/firmware
 }
 
 DEPLOY_FILE_EXT       ?= "bin"
