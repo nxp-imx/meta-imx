@@ -5,7 +5,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074"
 
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
-SRCBRANCH = "branches/armnn_21_02"
+SRCBRANCH = "lf-5.10.52_2.1.0"
 
 SRCREV = "5b6c2375443bb7535efb8cacaad7a091eaef3b55"
 
