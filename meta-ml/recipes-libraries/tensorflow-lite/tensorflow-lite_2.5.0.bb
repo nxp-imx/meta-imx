@@ -8,7 +8,7 @@ DEPENDS = "python3-numpy-native python3-pip-native python3-pybind11-native pytho
 
 
 TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
-SRCBRANCH = "imx-v2.5.0"
+SRCBRANCH = "lf-5.10.52_2.1.0"
 
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH}"
 SRCREV = "f11bf17f38974ae617169dddefa4a74d27bd39ac"
