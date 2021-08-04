@@ -5,7 +5,7 @@ require imx-mcore-demos.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=e565271ec9a80ce47abbddc4bffe56fa"
 
-SRC_URI[imx8ulp.md5sum] = "a80bf5423cd4bd2545d4f3a25c8dcd6a"
-SRC_URI[imx8ulp.sha256sum] = "89b76d95334f3bc96465dd7a874fca2766bbce8cb3f2be0f05afd34c8e4bdcab"
+SRC_URI[imx8ulp.md5sum] = "6688ef76632edbcfaf98abbc83aa1b72"
+SRC_URI[imx8ulp.sha256sum] = "f99d20bfb90a1c8e5b2ce983f6073309d021f8b5058d7b990c590f6eeb25354e"
 
 COMPATIBLE_MACHINE = "(mx8ulp)"
