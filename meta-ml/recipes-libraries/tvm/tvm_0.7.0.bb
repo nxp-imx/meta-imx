@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e313a9b6eda820e35716d9529001537f \
 DEPENDS = "tim-vx"
 RDEPENDS_${PN} = "tim-vx python3-decorator python3-numpy python3-attrs python3-psutil python3"
 
-SRCBRANCH = "eiq-tvm-v0.7"
+SRCBRANCH = "lf-5.10.52_2.1.0"
 TVM_SRC ?= "git://source.codeaurora.org/external/imx/eiq-tvm-imx.git;protocol=ssh"
 SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                git://github.com/dmlc/dlpack;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/dlpack;name=dlpack \
@@ -23,7 +23,7 @@ SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                git://github.com/apache/incubator-tvm-vta;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/vta-hw;name=vta-hw \
 "
 
-SRCREV = "419b6252e2060387dcec01d4614ba8100e9ce47d"
+SRCREV = "3d340a498a530353674bdebe06ca48cb851f62fe"
 SRCREV_dlpack = "3ec04430e89a6834e5a1b99471f415fa939bf642"
 SRCREV_dmlc-core = "6c401e242c59a1f4c913918246591bb13fd714e7"
 SRCREV_rang = "cabe04d6d6b05356fa8f9741704924788f0dd762"
