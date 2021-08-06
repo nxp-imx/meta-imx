@@ -38,7 +38,7 @@ RDEPENDS_${PN}   = " \
     ${RDEPENDS_MX8} \
 "
 PACKAGECONFIG_VSI_NPU       = ""
-PACKAGECONFIG_VSI_NPU_mx8   = "vsi-npu tim-vx"
+PACKAGECONFIG_VSI_NPU_mx8   = "vsi-npu"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
 PACKAGECONFIG_VSI_NPU_mx8mnul = ""
 PACKAGECONFIG_VSI_NPU_mx8ulp = ""
@@ -57,8 +57,7 @@ PACKAGECONFIG[ref] = "-DARMNNREF=1,-DARMNNREF=0"
 PACKAGECONFIG[vsi-npu] = "-DVSI_NPU=1,-DVSI_NPU=0,nn-imx"
 PACKAGECONFIG[pyarmnn] = ",,armnn-swig-native python3-native python3-pip-native python3-wheel-native python3-setuptools-native"
 PACKAGECONFIG[delegate] = "-DBUILD_ARMNN_TFLITE_DELEGATE=1 -DARMNN_SOURCE_DIR=${WORKDIR}/git -DTFLITE_INCLUDE_DIR=${STAGING_INCDIR} -DTFLITE_LIB_DIR=${STAGING_LIBDIR} -DFLATBUFFERS_ROOT=${STAGING_DIR_HOST}/${prefix},-DBUILD_ARMNN_TFLITE_DELEGATE=0,flatbuffers armnn-tensorflow-protobuf tensorflow-lite"
-# tim-vx is required by the delegate on VSI NPU platforms
-PACKAGECONFIG[tim-vx] = ",,tim-vx"
+
 EXTRA_OECMAKE += " \
     -DSHARED_BOOST=1 \
     -DHALF_INCLUDE=${STAGING_DIR_HOST} \
