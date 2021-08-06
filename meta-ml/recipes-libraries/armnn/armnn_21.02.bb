@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074"
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
 SRCBRANCH = "lf-5.10.52_2.1.0"
 
-SRCREV = "5b6c2375443bb7535efb8cacaad7a091eaef3b55"
+SRCREV = "1e60d74577557c6f612fdf97b20d824b549589f0"
 
 SRCREV_FORMAT = "armnn"
 
@@ -38,7 +38,7 @@ RDEPENDS_${PN}   = " \
     ${RDEPENDS_MX8} \
 "
 PACKAGECONFIG_VSI_NPU       = ""
-PACKAGECONFIG_VSI_NPU_mx8   = "vsi-npu"
+PACKAGECONFIG_VSI_NPU_mx8   = "vsi-npu tim-vx"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
 PACKAGECONFIG_VSI_NPU_mx8mnul = ""
 PACKAGECONFIG_VSI_NPU_mx8ulp = ""
@@ -56,7 +56,9 @@ PACKAGECONFIG[tests] = "-DBUILD_TESTS=1,-DBUILD_TESTS=0"
 PACKAGECONFIG[ref] = "-DARMNNREF=1,-DARMNNREF=0"
 PACKAGECONFIG[vsi-npu] = "-DVSI_NPU=1,-DVSI_NPU=0,nn-imx"
 PACKAGECONFIG[pyarmnn] = ",,armnn-swig-native python3-native python3-pip-native python3-wheel-native python3-setuptools-native"
-PACKAGECONFIG[delegate] = "-DBUILD_ARMNN_TFLITE_DELEGATE=1 -DARMNN_SOURCE_DIR=${WORKDIR}/git -DTFLITE_INCLUDE_DIR=${STAGING_DATADIR}/armnn-tensorflow-lite -DTFLITE_LIB_DIR=${STAGING_DATADIR}/armnn-tensorflow-lite -DFLATBUFFERS_ROOT=${STAGING_DIR_HOST}/${prefix},-DBUILD_ARMNN_TFLITE_DELEGATE=0,flatbuffers armnn-tensorflow-protobuf armnn-tensorflow-lite"
+PACKAGECONFIG[delegate] = "-DBUILD_ARMNN_TFLITE_DELEGATE=1 -DARMNN_SOURCE_DIR=${WORKDIR}/git -DTFLITE_INCLUDE_DIR=${STAGING_INCDIR} -DTFLITE_LIB_DIR=${STAGING_LIBDIR} -DFLATBUFFERS_ROOT=${STAGING_DIR_HOST}/${prefix},-DBUILD_ARMNN_TFLITE_DELEGATE=0,flatbuffers armnn-tensorflow-protobuf tensorflow-lite"
+# tim-vx is required by the delegate on VSI NPU platforms
+PACKAGECONFIG[tim-vx] = ",,tim-vx"
 EXTRA_OECMAKE += " \
     -DSHARED_BOOST=1 \
     -DHALF_INCLUDE=${STAGING_DIR_HOST} \
