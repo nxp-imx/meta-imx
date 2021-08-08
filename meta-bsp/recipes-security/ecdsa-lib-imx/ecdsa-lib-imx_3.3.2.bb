@@ -5,6 +5,7 @@ SUMMARY = "ECDSA Verification Engine using HSM"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e565271ec9a80ce47abbddc4bffe56fa"
 
+RDEPENDS_${PN} = "libcrypto"
 DEPENDS = "imx-seco-libs"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
