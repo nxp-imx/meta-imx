@@ -12,7 +12,7 @@ SRCBRANCH = "lf_v2021.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "67c3bfab61b9a4fa9b0670564e8ff87abb028794"
 
-LOCALVERSION ?= "-imx_v2021.04_5.10.31-2.0.0"
+LOCALVERSION = "-${SRCBRANCH}"
 
 do_deploy_append_mx8m() {
     # Deploy u-boot-nodtb.bin and fsl-imx8m*-XX.dtb for mkimage to generate boot binary
