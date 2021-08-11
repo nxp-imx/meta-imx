@@ -17,6 +17,19 @@ do_install() {
     # Install sof and sof-tplg folder
     install -d ${D}${nonarch_base_libdir}/firmware/imx/
     cp -r sof* ${D}${nonarch_base_libdir}/firmware/imx/
+
+    # Work-around to use GCC version of firmware of i.MX 8ULP
+    if [ -e ${D}${nonarch_base_libdir}/firmware/imx/sof-xcc ]; then
+        cd ${D}${nonarch_base_libdir}/firmware/imx/sof-xcc
+        SOF_8ULP_FILES="sof-imx8ulp.ldc sof-imx8ulp.ri"
+        for sof_file in $SOF_8ULP_FILES
+        do
+            if [ ! -e $sof_file ]; then
+                ln -s ../sof-gcc/$sof_file $sof_file
+            fi
+        done
+        cd -
+    fi
 }
 
 FILES_${PN} = "${nonarch_base_libdir}/firmware/imx"
