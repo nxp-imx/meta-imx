@@ -1,4 +1,4 @@
-require imx-gpu-viv-6.inc
+require imx-gpu-viv-6-overrides.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=e565271ec9a80ce47abbddc4bffe56fa" 
 
