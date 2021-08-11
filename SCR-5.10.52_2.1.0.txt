@@ -432,7 +432,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     ecdsa-lib-imx-3.3.2.bin
 Version:                     3.3.2
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -1183,7 +1183,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mnddr3l-m7-demo-2.10.0.bin
 Version:                     2.10.0
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2020 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
