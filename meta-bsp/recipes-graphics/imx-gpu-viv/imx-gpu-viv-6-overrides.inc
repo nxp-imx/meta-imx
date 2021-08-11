@@ -2,6 +2,8 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 PACKAGECONFIG ?= "valgrind"
 PACKAGES_remove = " \
+	libwayland-viv-imx libwayland-viv-imx-dev \
+	libgc-wayland-protocol-imx libgc-wayland-protocol-imx-dev \
 	libnn-imx-dev \
 "
 
