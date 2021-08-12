@@ -36,6 +36,7 @@ FILES_${PN}-dev += " \
     ${libdir}/libnnrt${SOLIBSDEV} \
     ${libdir}/libovxlib${SOLIBSDEV} \
 "
+INSANE_SKIP_${PN} += "dev-so"
 
 # Works for i.MX 8 with GPU except for 8M Mini
 COMPATIBLE_MACHINE        = "(^$)"
