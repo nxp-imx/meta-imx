@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7bdef19938f3503cfc4c586461f99012"
 
 PV = "1.0+git${SRCPV}" 
 
-SRCBRANCH = "master"
+SRCBRANCH = "MM_04.06.02_2108_L5.10.y"
 NXPAFE_SRC ?= "git://source.codeaurora.org/external/mmcsh/nxp-afe.git;protocol=https"
 SRC_URI = " \
     ${NXPAFE_SRC};branch=${SRCBRANCH} \
