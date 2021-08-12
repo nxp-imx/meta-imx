@@ -28,6 +28,15 @@ do_install () {
     cp -r ${S}/include/nnrt/* ${D}/${includedir}/nnrt
 }
 
+# libneuralnetworks.so is dynamically loaded and thus needed in the
+# main package
+FILES_${PN}-dev_remove = "${libdir}/lib*.so"
+FILES_${PN} += "${libdir}/libneuralnetworks${SOLIBSDEV}"
+FILES_${PN}-dev += " \
+    ${libdir}/libnnrt${SOLIBSDEV} \
+    ${libdir}/libovxlib${SOLIBSDEV} \
+"
+
 # Works for i.MX 8 with GPU except for 8M Mini
 COMPATIBLE_MACHINE        = "(^$)"
 COMPATIBLE_MACHINE_imxgpu = "(mx8)"
