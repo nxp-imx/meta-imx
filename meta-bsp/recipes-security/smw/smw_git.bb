@@ -13,7 +13,7 @@ SRCBRANCH = "master"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH} \
     file://0001-CMakeLists.txt-core-pkcs11-Use-CMAKE_INSTALL_LIBDIR-.patch"
-SRCREV = "475e91eb5e6ede908341d846d5241f601c0f7919"
+SRCREV = "bd38eb5b2a36ddc0b823d489489987afdf1a12c1"
 
 S = "${WORKDIR}/git"
 
