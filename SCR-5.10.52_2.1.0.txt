@@ -440,7 +440,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     v2xsehsm.git
-Version:                     0.5
+Version:                     
 Outgoing License:            BSD-3-Clause 
 License File:                BSD-3-Clause.txt
 Package Category:            BSP
