@@ -267,8 +267,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     sof-imx-1.9.0-1
-Version:                     1.9.0-1
+Package:                     sof-imx-1.9.0-2
+Version:                     1.9.0-2
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -732,18 +732,6 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p2.4-aarch64-x11.bin
-Version:                     6.4.3.p2.4
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Library to retrieve i.MX GPU performance data
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-
 Package:                     libgpuperfcnt-6.4.3.p2.4-arm-fb.bin
 Version:                     6.4.3.p2.4
 Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
@@ -759,18 +747,6 @@ Origin:                      NXP (proprietary)
 Package:                     libgpuperfcnt-6.4.3.p2.4-arm-wayland.bin
 Version:                     6.4.3.p2.4
 Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Library to retrieve i.MX GPU performance data
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-
-Package:                     libgpuperfcnt-6.4.3.p2.4-arm-x11.bin
-Version:                     6.4.3.p2.4
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
