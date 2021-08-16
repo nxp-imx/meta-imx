@@ -1,7 +1,7 @@
-BOOT_CONFIG_MACHINE_imx8qm-cockpit = "${BOOT_NAME}-imx8qmmek-${UBOOT_CONFIG}.bin"
+BOOT_CONFIG_MACHINE:imx8qm-cockpit = "${BOOT_NAME}-imx8qmmek-${UBOOT_CONFIG}.bin"
 MACHINE_COCKPIT = "imx8qm-cockpit-mek"
 
-do_compile_imx8qm-cockpit () {
+do_compile:imx8qm-cockpit () {
     bbnote 8QM cockpit boot binary build
 
     cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_TCM_power_mode_switch_m40.bin   ${BOOT_STAGING}/m4_image.bin
@@ -44,7 +44,7 @@ do_compile_imx8qm-cockpit () {
     fi
 }
 
-do_install_imx8qm-cockpit () {
+do_install:imx8qm-cockpit () {
     install -d ${D}/boot
     if ${DEPLOY_OPTEE}; then
       install -m 0644 ${BOOT_STAGING}/imx-boot-imx8qmmek-sd.bin-flash_cockpit_spl ${D}/boot/
@@ -53,7 +53,7 @@ do_install_imx8qm-cockpit () {
     fi
 }
 
-do_deploy_imx8qm-cockpit() {
+do_deploy:imx8qm-cockpit() {
     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0644 ${BOOT_STAGING}/m4_image.bin             ${DEPLOYDIR}/${BOOT_TOOLS}

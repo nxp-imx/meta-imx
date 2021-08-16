@@ -13,7 +13,7 @@ S = "${WORKDIR}/${BPN}-${PV}"
 inherit fsl-eula-unpack pkgconfig
 
 DEPENDS = "deepview-rt gstreamer1.0-plugins-base opencv curl"
-RDEPENDS_${PN} += "deepview-rt"
+RDEPENDS:${PN} += "deepview-rt"
 
 EXTRA_OEMAKE += "SDK_SYSROOT=${RECIPE_SYSROOT}"
 
@@ -30,7 +30,7 @@ do_install () {
     chown -R root:root "${D}"
 }
 
-INSANE_SKIP_${PN} += "rpaths dev-deps ldflags"
+INSANE_SKIP:${PN} += "rpaths dev-deps ldflags"
 CLEANBROKEN = "1"
 
 COMPATIBLE_MACHINE = "(mx8)"

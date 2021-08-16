@@ -1,4 +1,4 @@
-do_install_append () {
+do_install:append () {
     # If using systemd and NFSD is not configured in kernel then remove
     # the unnecessary files to avoid the failure massages at boot.
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then

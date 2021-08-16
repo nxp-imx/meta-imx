@@ -17,11 +17,11 @@ ML_NNSTREAMER_PKGS_LIST = " \
 "
 
 ML_NNSTREAMER_PKGS = ""
-ML_NNSTREAMER_PKGS_imxgpu_mx8 = "${ML_NNSTREAMER_PKGS_LIST}"
+ML_NNSTREAMER_PKGS:imxgpu:mx8 = "${ML_NNSTREAMER_PKGS_LIST}"
 
 
 ML_PKGS            = ""
-ML_PKGS_imxgpu_mx8 = " \
+ML_PKGS:imxgpu:mx8 = " \
     armnn \
     tensorflow-lite \
     tensorflow-lite-vx-delegate \
@@ -30,7 +30,7 @@ ML_PKGS_imxgpu_mx8 = " \
     pytorch \
     torchvision \
 "
-ML_PKGS_mx8ulp = " \
+ML_PKGS:mx8ulp = " \
     armnn \
     tensorflow-lite \
     onnxruntime \
@@ -40,18 +40,18 @@ ML_PKGS_mx8ulp = " \
 ML_PKGS_remove_mx8mm = "tensorflow-lite-vx-delegate"
 
 ML_DEEPVIEW_PKGS            = ""
-ML_DEEPVIEW_PKGS_imxgpu_mx8 = "deepview-rt-examples"
-ML_DEEPVIEW_PKGS_mx8mm      = ""
+ML_DEEPVIEW_PKGS:imxgpu:mx8 = "deepview-rt-examples"
+ML_DEEPVIEW_PKGS:mx8mm      = ""
 
 ML_EIQ_PKGS       = ""
-ML_EIQ_PKGS_mx8mm = "eiq-apps"
-ML_EIQ_PKGS_mx8mp = "eiq-apps"
+ML_EIQ_PKGS:mx8mm = "eiq-apps"
+ML_EIQ_PKGS:mx8mp = "eiq-apps"
 
 ML_TVM_PKGS            = ""
-ML_TVM_PKGS_imxgpu_mx8 = "tvm"
-ML_TVM_PKGS_mx8mm      = ""
+ML_TVM_PKGS:imxgpu:mx8 = "tvm"
+ML_TVM_PKGS:mx8mm      = ""
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     ${ML_PKGS} \
     ${ML_DEEPVIEW_PKGS} \
     ${ML_EIQ_PKGS} \

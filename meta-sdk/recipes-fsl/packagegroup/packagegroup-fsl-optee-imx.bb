@@ -8,4 +8,4 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 inherit packagegroup
 
-RDEPENDS_${PN} += "optee-client optee-os optee-test"
+RDEPENDS:${PN} += "optee-client optee-os optee-test"

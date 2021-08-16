@@ -3,27 +3,27 @@
 require imx-mkimage_git.inc
 
 IMX_M4_DEMOS      = ""
-IMX_M4_DEMOS_mx8  = "imx-m4-demos:do_deploy"
-IMX_M4_DEMOS_mx8m = ""
+IMX_M4_DEMOS:mx8  = "imx-m4-demos:do_deploy"
+IMX_M4_DEMOS:mx8m = ""
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
-M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_power_mode_switch.bin"
-M4_DEFAULT_IMAGE_mx8dxl = "imx8dxl_m4_TCM_power_mode_switch.bin"
-M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_power_mode_switch.bin"
+M4_DEFAULT_IMAGE:mx8qxp = "imx8qx_m4_TCM_power_mode_switch.bin"
+M4_DEFAULT_IMAGE:mx8dxl = "imx8dxl_m4_TCM_power_mode_switch.bin"
+M4_DEFAULT_IMAGE:mx8dx = "imx8qx_m4_TCM_power_mode_switch.bin"
 
 # Setting for i.MX 8ULP
-IMX_M4_DEMOS_mx8ulp = "imx-m33-demos:do_deploy"
-M4_DEFAULT_IMAGE_mx8ulp = "imx8ulp_m33_TCM_rpmsg_lite_str_echo_rtos.bin"
-ATF_MACHINE_NAME_mx8ulp = "bl31-imx8ulp.bin"
-IMX_EXTRA_FIRMWARE_mx8ulp = "firmware-upower firmware-sentinel"
-SECO_FIRMWARE_NAME_mx8ulp = "mx8ulpa0-ahab-container.img"
-SOC_TARGET_mx8ulp = "iMX8ULP"
-SOC_FAMILY_mx8ulp = "mx8ulp"
+IMX_M4_DEMOS:mx8ulp = "imx-m33-demos:do_deploy"
+M4_DEFAULT_IMAGE:mx8ulp = "imx8ulp_m33_TCM_rpmsg_lite_str_echo_rtos.bin"
+ATF_MACHINE_NAME:mx8ulp = "bl31-imx8ulp.bin"
+IMX_EXTRA_FIRMWARE:mx8ulp = "firmware-upower firmware-sentinel"
+SECO_FIRMWARE_NAME:mx8ulp = "mx8ulpa0-ahab-container.img"
+SOC_TARGET:mx8ulp = "iMX8ULP"
+SOC_FAMILY:mx8ulp = "mx8ulp"
 
 
 do_compile[depends] += "${IMX_M4_DEMOS}"
 
-do_compile_prepend() {
+do_compile:prepend() {
     case ${SOC_FAMILY} in
     mx8)
         cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_TCM_power_mode_switch_m40.bin \
@@ -54,7 +54,7 @@ compile_mx8ulp() {
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/upower.bin          ${BOOT_STAGING}/upower.bin
 }
 
-do_deploy_append() {
+do_deploy:append() {
     case ${SOC_FAMILY} in
     mx8)
         install -m 0644 ${BOOT_STAGING}/m4_image.bin         ${DEPLOYDIR}/${BOOT_TOOLS}

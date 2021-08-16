@@ -13,4 +13,4 @@ EXTRA_OECMAKE += "-DBUILD_TESTING=off"
 
 inherit cmake
 
-FILES_${PN} += "${datadir}/ECM"
+FILES:${PN} += "${datadir}/ECM"

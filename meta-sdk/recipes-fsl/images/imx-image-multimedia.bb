@@ -31,10 +31,10 @@ IMAGE_FEATURES += " \
                                                        '', d), d)} \
 "
 ERPC_COMPS ?= ""
-ERPC_COMPS_append_mx7ulp = "packagegroup-imx-erpc"
+ERPC_COMPS:append:mx7ulp = "packagegroup-imx-erpc"
 
 V2X_PKGS = ""
-V2X_PKGS_mx8dxl = "packagegroup-imx-v2x"
+V2X_PKGS:mx8dxl = "packagegroup-imx-v2x"
 
 DOCKER ?= ""
 DOCKER_mx8 = "docker"

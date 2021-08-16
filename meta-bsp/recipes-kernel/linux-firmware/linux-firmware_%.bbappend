@@ -1,6 +1,6 @@
 # Copyright 2017-2021 NXP
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 IMX_FIRMWARE_SRC ?= "git://github.com/NXP/imx-firmware.git;protocol=https"
 SRCBRANCH_imx-firmware = "master"
@@ -14,7 +14,7 @@ SRCREV_imx-firmware = "5f6f8f724d341f50e603e3767807ce0b37739056"
 
 SRCREV_FORMAT = "default_murata-qca_imx-firmware"
 
-do_install_append () {
+do_install:append () {
     # Use Murata's QCA calibration files
     install -m 0644 ${WORKDIR}/murata-qca/1CQ/board.bin ${D}${nonarch_base_libdir}/firmware/ath10k/QCA6174/hw3.0/
 
@@ -86,42 +86,42 @@ do_install_append () {
 }
 
 # Use the latest version of sdma firmware in firmware-imx
-PACKAGES_remove = "${PN}-imx-sdma-license ${PN}-imx-sdma-imx6q ${PN}-imx-sdma-imx7d"
+PACKAGES:remove = "${PN}-imx-sdma-license ${PN}-imx-sdma-imx6q ${PN}-imx-sdma-imx7d"
 PACKAGES =+ " ${PN}-bcm4359-pcie ${PN}-nxp89xx"
 
-FILES_${PN}-bcm4339 += " \
+FILES:${PN}-bcm4339 += " \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4339-sdio.txt \
        ${sysconfdir}/firmware/BCM4335C0.ZP.hcd \
 "
 
-FILES_${PN}-bcm43430 += " \
+FILES:${PN}-bcm43430 += " \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac43430-sdio.clm_blob \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac43430-sdio.txt \
        ${sysconfdir}/firmware/BCM43430A1.1DX.hcd \
 "
 
-FILES_${PN}-bcm43455 += " \
+FILES:${PN}-bcm43455 += " \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac43455-sdio.clm_blob \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac43455-sdio.txt \
        ${sysconfdir}/firmware/BCM4345C0.1MW.hcd \
 "
 
-FILES_${PN}-bcm4356-pcie += " \
+FILES:${PN}-bcm4356-pcie += " \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4356-pcie.clm_blob \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4356-pcie.txt \
        ${sysconfdir}/firmware/BCM4354A2.1CX.hcd \
 "
 
-LICENSE_${PN}-bcm4359-pcie = "Firmware-cypress"
-RDEPENDS_${PN}-bcm4359-pcie += "${PN}-cypress-license"
+LICENSE:${PN}-bcm4359-pcie = "Firmware-cypress"
+RDEPENDS:${PN}-bcm4359-pcie += "${PN}-cypress-license"
 
-FILES_${PN}-bcm4359-pcie = " \
+FILES:${PN}-bcm4359-pcie = " \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4359-pcie.bin \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4359-pcie.clm_blob \
        ${nonarch_base_libdir}/firmware/brcm/brcmfmac4359-pcie.txt \
        ${sysconfdir}/firmware/BCM4349B1_*.hcd \
 "
 
-FILES_${PN}-nxp89xx = " \
+FILES:${PN}-nxp89xx = " \
        ${nonarch_base_libdir}/firmware/nxp/* \
 "

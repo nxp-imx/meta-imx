@@ -1,5 +1,5 @@
-FILESEXTRAPATHS_prepend_imx := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend:imx := "${THISDIR}/${PN}:"
 
-DEPENDS_append = " readline"
+DEPENDS:append = " readline"
 
 PACKAGECONFIG ??= "openssl"

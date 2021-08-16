@@ -13,7 +13,7 @@ PACKAGECONFIG[afxdp] = ",,libbpf"
 PACKAGECONFIG[libvirt] = ",,libvirt"
 
 DPDK_EXAMPLES ?= "l2fwd,l3fwd,cmdif,l2fwd-qdma,l2fwd-crypto,ipsec-secgw,vhost,kni,ip_fragmentation,ip_reassembly"
-DPDK_EXAMPLES_imx = "l2fwd,l3fwd"
+DPDK_EXAMPLES:imx = "l2fwd,l3fwd"
 
 # kernel module is provide by dpdk-module recipe, so disable here
 EXTRA_OEMESON = " -Denable_kmods=false \
@@ -21,7 +21,7 @@ EXTRA_OEMESON = " -Denable_kmods=false \
                 --cross-file ${S}/config/arm/arm64_poky_linux_gcc \
 "
 
-do_install_append(){
+do_install:append(){
     # remove usr/lib/*.so
     rm -rf ${D}/${libdir}/*.so*
     rm -rf ${D}/${libdir}/dpdk
@@ -41,17 +41,17 @@ do_install_append(){
 
 PACKAGES =+ "${PN}-examples ${PN}-tools"
 
-FILES_${PN} = "${bindir}/dpdk-testpmd \
+FILES:${PN} = "${bindir}/dpdk-testpmd \
                ${bindir}/dpdk-proc-info \
 "
-RDEPENDS_${PN} += "pciutils python3-core"
+RDEPENDS:${PN} += "pciutils python3-core"
 
-FILES_${PN}-examples = " \
+FILES:${PN}-examples = " \
                         ${datadir}/dpdk/examples/* \
 "
-RDEPENDS_${PN}-examples += "bash"
+RDEPENDS:${PN}-examples += "bash"
 
-FILES_${PN}-tools = " \
+FILES:${PN}-tools = " \
                      ${bindir}/dpdk-pdump \
                      ${bindir}/dpdk-test \
                      ${bindir}/dpdk-test-* \

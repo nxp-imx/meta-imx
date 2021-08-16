@@ -1,5 +1,5 @@
 
-do_compile_append_imx8qm-cockpit () {
+do_compile:append:imx8qm-cockpit () {
     unset LDFLAGS
     export CFLAGS="${CFLAGS} --sysroot=${STAGING_DIR_HOST}"
     oe_runmake clean
@@ -10,7 +10,7 @@ do_compile_append_imx8qm-cockpit () {
     ${TARGET_PREFIX}objcopy -O binary ${B}/core/tee.elf ${B}/core/tee-a72.bin
 }
 
-do_deploy_append_imx8qm-cockpit () {
+do_deploy:append:imx8qm-cockpit () {
     install -d ${DEPLOYDIR}
     install ${B}/core/tee-a53.bin  ${DEPLOYDIR}
     install ${B}/core/tee-a72.bin  ${DEPLOYDIR}

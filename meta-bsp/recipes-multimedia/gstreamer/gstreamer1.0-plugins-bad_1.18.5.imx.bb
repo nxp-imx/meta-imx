@@ -148,13 +148,13 @@ EXTRA_OEMESON += " \
 
 export OPENCV_PREFIX = "${STAGING_DIR_TARGET}${prefix}"
 
-ARM_INSTRUCTION_SET_armv4 = "arm"
-ARM_INSTRUCTION_SET_armv5 = "arm"
+ARM_INSTRUCTION_SET:armv4 = "arm"
+ARM_INSTRUCTION_SET:armv5 = "arm"
 
-FILES_${PN}-freeverb += "${datadir}/gstreamer-1.0/presets/GstFreeverb.prs"
-FILES_${PN}-opencv += "${datadir}/gst-plugins-bad/1.0/opencv*"
-FILES_${PN}-transcode += "${datadir}/gstreamer-1.0/encoding-profiles"
-FILES_${PN}-voamrwbenc += "${datadir}/gstreamer-1.0/presets/GstVoAmrwbEnc.prs"
+FILES:${PN}-freeverb += "${datadir}/gstreamer-1.0/presets/GstFreeverb.prs"
+FILES:${PN}-opencv += "${datadir}/gst-plugins-bad/1.0/opencv*"
+FILES:${PN}-transcode += "${datadir}/gstreamer-1.0/encoding-profiles"
+FILES:${PN}-voamrwbenc += "${datadir}/gstreamer-1.0/presets/GstVoAmrwbEnc.prs"
 
 ########### End of OE-core copy ###########
 
@@ -162,27 +162,27 @@ FILES_${PN}-voamrwbenc += "${datadir}/gstreamer-1.0/presets/GstVoAmrwbEnc.prs"
 
 DEFAULT_PREFERENCE = "-1"
 
-DEPENDS_append_imxgpu2d = " virtual/libg2d"
+DEPENDS:append:imxgpu2d = " virtual/libg2d"
 
-SRC_URI_remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz"
+SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz"
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
 SRCBRANCH = "imx-1.18.x"
-SRC_URI_prepend = "${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} "
+SRC_URI:prepend = "${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} "
 SRCREV = "5624d3db79008a23628a4cf5f0af284d8b0d8eff"
 
 S = "${WORKDIR}/git"
 
 inherit use-imx-headers
 
-PACKAGE_ARCH_imxpxp = "${MACHINE_SOCARCH}"
-PACKAGE_ARCH_mx8 = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH:imxpxp = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH:mx8 = "${MACHINE_SOCARCH}"
 
 PACKAGECONFIG_REMOVE ?= " \
     dtls vulkan \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'gl', d)} \
 "
-PACKAGECONFIG_remove = "${PACKAGECONFIG_REMOVE}"
-PACKAGECONFIG_append_mx8 = " kms tinycompress"
+PACKAGECONFIG:remove = "${PACKAGECONFIG_REMOVE}"
+PACKAGECONFIG:append:mx8 = " kms tinycompress"
 
 PACKAGECONFIG[tinycompress]    = "-Dtinycompress=enabled,-Dtinycompress=disabled,tinycompress"
 

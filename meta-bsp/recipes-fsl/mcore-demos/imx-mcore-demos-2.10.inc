@@ -8,13 +8,13 @@ LICENSE = "Proprietary"
 inherit deploy fsl-eula2-unpack2
 
 SOC        ?= "INVALID"
-SOC_mx8ulp  = "imx8ulp"
+SOC:mx8ulp  = "imx8ulp"
 
 MCORE_TYPE  ?= "m33"
-MCORE_TYPE_mx8ulp  = "m33"
+MCORE_TYPE:mx8ulp  = "m33"
 
 IMX_PACKAGE_NAME = "${SOC}-${MCORE_TYPE}-demo-${PV}"
-SRC_URI_append = ";name=${SOC}"
+SRC_URI:append = ";name=${SOC}"
 
 SCR = "SCR-${SOC}-${MCORE_TYPE}-demo.txt"
 

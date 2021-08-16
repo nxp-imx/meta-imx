@@ -1,6 +1,6 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append = " file://0001-test_dvr_play-changed-to-output-TS.patch \
+SRC_URI:append = " file://0001-test_dvr_play-changed-to-output-TS.patch \
 "
 # Enable static lib as test build needs it
 export enable_static="yes"
@@ -13,7 +13,7 @@ do_compile () {
     oe_runmake -C test
 }
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${bindir}
     if [ -e ${S}/test/test_dvr_play ]; then
         cp ${S}/test/test_dvr_play ${D}${bindir}

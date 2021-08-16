@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "fa44c036766f8c4e1c277edd76960c58130a3b46a4dc0d87edb849360e
 
 USE_X11 = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "yes", "no", d)}"
 PLATFORM_HAS_VPU = " "
-PLATFORM_HAS_VPU_imxvpu = "yes"
+PLATFORM_HAS_VPU:imxvpu = "yes"
 
 # imx-qtapplications will be enabled on board with GPU 3D
 # For now, imxcamera & imxplayer can only be supported on x11 backend for SoC with VPU only (including i.MX6Q & i.MX6DL)
@@ -45,13 +45,13 @@ do_install () {
 }
 
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     ${datadir}/qt5/examples/*/* \
     ${datadir}/applications/* \
     ${datadir}/pixmaps/* \
 "
 
-INSANE_SKIP_${PN} += "debug-files"
+INSANE_SKIP:${PN} += "debug-files"
 
 COMPATIBLE_MACHINE = "(mx6|mx7ulp)"
 

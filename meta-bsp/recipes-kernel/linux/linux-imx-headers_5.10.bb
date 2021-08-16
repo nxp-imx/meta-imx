@@ -59,7 +59,7 @@ do_install() {
 # Without this setting the RDEPENDS in other recipes fails to find this
 # package, therefore causing the -dev package also to be skipped effectively not
 # populating it into SDK
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 
 INHIBIT_DEFAULT_DEPS = "1"
 DEPENDS += "unifdef-native bison-native rsync-native"

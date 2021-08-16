@@ -1,13 +1,13 @@
 # Freescale imx extra configuration 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-RDEPENDS_${PN} += " bash "
+RDEPENDS:${PN} += " bash "
 
 SYSVINIT-GPU = " file://rc_mxc.S file://rc_gpu.S"
 
-SRC_URI_append_imxgpu2d  = " ${SYSVINIT-GPU}"
+SRC_URI:append:imxgpu2d  = " ${SYSVINIT-GPU}"
 
-do_install_append_imxgpu2d() {
+do_install:append:imxgpu2d() {
 
     install -d ${D}${sysconfdir}
 
@@ -53,6 +53,6 @@ EOF
     install -m 0755 ${WORKDIR}/rc_gpu.S ${D}${sysconfdir}/init.d
 }
 
-FILES_${PN}_append_imxgpu2d = " ${sysconfdir}/init.d/rc_mxc.S ${sysconfdir}/init.d/rc_gpu.S"
+FILES:${PN}:append:imxgpu2d = " ${sysconfdir}/init.d/rc_mxc.S ${sysconfdir}/init.d/rc_gpu.S"
 
-PACKAGE_ARCH_imxgpu2d = "${MACHINE_ARCH}"
+PACKAGE_ARCH:imxgpu2d = "${MACHINE_ARCH}"

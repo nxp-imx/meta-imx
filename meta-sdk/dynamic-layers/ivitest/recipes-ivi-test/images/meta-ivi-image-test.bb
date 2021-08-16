@@ -1,7 +1,7 @@
 # Base this test image on the IVI image
 require recipes-yocto-ivi/images/meta-ivi-image.bb
 
-IMAGE_INSTALL_append += " openssl-ptest \
+IMAGE_INSTALL:append += " openssl-ptest \
 			  libusb1-test \
 			  dbus-ptest \
 			  curl-test \

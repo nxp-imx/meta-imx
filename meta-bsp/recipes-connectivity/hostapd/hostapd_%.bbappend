@@ -1,1 +1,1 @@
-FILESEXTRAPATHS_prepend_imx := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend:imx := "${THISDIR}/${PN}:"

@@ -15,18 +15,18 @@ inherit fsl-eula-unpack python3native
 DEPENDS = "python3 python3-pip-native opencv"
 
 RDEPENDS_MX8       = ""
-RDEPENDS_MX8_mx8   = "nn-imx"
-RDEPENDS_MX8_mx8mm = ""
-RDEPENDS_MX8_mx8mnul = ""
-RDEPENDS_MX8_mx8mpul = ""
-RDEPENDS_MX8_mx8ulp = ""
-RDEPENDS_${PN} += " ${RDEPENDS_MX8} "
+RDEPENDS_MX8:mx8   = "nn-imx"
+RDEPENDS_MX8:mx8mm = ""
+RDEPENDS_MX8:mx8mnul = ""
+RDEPENDS_MX8:mx8mpul = ""
+RDEPENDS_MX8:mx8ulp = ""
+RDEPENDS:${PN} += " ${RDEPENDS_MX8} "
 
 IS_RM_OVXRTM  = ""
-IS_RM_OVXRTM_mx8mm =  "1"
-IS_RM_OVXRTM_mx8mnul =  "1"
-IS_RM_OVXRTM_mx8mpul =  "1"
-IS_RM_OVXRTM_mx8ulp =  "1"
+IS_RM_OVXRTM:mx8mm =  "1"
+IS_RM_OVXRTM:mx8mnul =  "1"
+IS_RM_OVXRTM:mx8mpul =  "1"
+IS_RM_OVXRTM:mx8ulp =  "1"
 
 do_install () {
     install -d ${D}${bindir}
@@ -38,7 +38,7 @@ do_install () {
     cp -frP  ${S}/modelrunner/lib/* ${D}${libdir}
     if [ ${IS_RM_OVXRTM} = "1" ]  
     then
-    	rm -fr  ${D}${libdir}/libovx-rtm.so
+      rm -fr  ${D}${libdir}/libovx-rtm.so
     fi
     cp -frP  ${S}/${BPN}/lib/* ${D}${libdir}
     cp -fr   ${S}/${BPN}/include/* ${D}${includedir}
@@ -50,7 +50,7 @@ do_install () {
     chown -R root:root "${D}"
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libdir}/* \
 "
 
@@ -60,7 +60,7 @@ INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 
-INSANE_SKIP_${PN} += "dev-so dev-deps ldflags"
+INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
 
 COMPATIBLE_MACHINE = "(mx8)"
 BBCLASSEXTEND = "nativesdk"

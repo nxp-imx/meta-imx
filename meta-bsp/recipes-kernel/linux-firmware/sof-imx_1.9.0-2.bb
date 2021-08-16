@@ -19,5 +19,5 @@ do_install() {
     cp -r sof* ${D}${nonarch_base_libdir}/firmware/imx/
 }
 
-FILES_${PN} = "${nonarch_base_libdir}/firmware/imx"
+FILES:${PN} = "${nonarch_base_libdir}/firmware/imx"
 

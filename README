@@ -105,16 +105,16 @@ In local.conf
 - Define multilib targets
 require conf/multilib.conf
 MULTILIBS = "multilib:lib32"
-DEFAULTTUNE_virtclass-multilib-lib32 = "armv7athf-neon"
+DEFAULTTUNE:virtclass-multilib-lib32 = "armv7athf-neon"
 
 - 32-bit libraries to be added into the image
-IMAGE_INSTALL_append = " lib32-glibc lib32-libgcc lib32-libstdc++"
+IMAGE_INSTALL:append = " lib32-glibc lib32-libgcc lib32-libstdc++"
 
 Hardware Floating Point
 -----------------------
 This release enables hardware floating point by default.  This feature is enabled in both the machine 
 configurations and in the layer.conf. (Some machine files exist in the community meta-fsl-arm without this setting.)
-DEFAULTTUNE_mx6 = "cortexa9hf-neon
+DEFAULTTUNE:mx6 = "cortexa9hf-neon
 
 Software floating point is not supported starting with the 4.1.15_1.0.0_ga release
 
@@ -140,7 +140,7 @@ Chromium
 ---------
 Add Chromium to your Wayland or X11-based image by adding the following lines to local.conf:
 
-IMAGE_INSTALL_append = \
+IMAGE_INSTALL:append = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' chromium-ozone-wayland', \
         bb.utils.contains('DISTRO_FEATURES',     'x11', ' chromium-x11', \
                                                         '', d), d)}"
@@ -156,7 +156,7 @@ QTWebEngine
 --------
 Qtwebengine is not built by default so add this to local.conf or image recipe. It is supported only on the machines
 that has GPU.
- IMAGE_INSTALL_append = "packagegroup-qt5-webengine"
+ IMAGE_INSTALL:append = "packagegroup-qt5-webengine"
 
 There are many browsers available using QtWebEngine and can be found here:
 /usr/share/examples/webengine

@@ -10,7 +10,7 @@ CONFLICT_DISTRO_FEATURES = "directfb"
 
 # Add opencv for i.MX GPU
 OPENCV_PKGS       ?= ""
-OPENCV_PKGS_imxgpu = " \
+OPENCV_PKGS:imxgpu = " \
     opencv-apps \
     opencv-samples \
     python3-opencv \

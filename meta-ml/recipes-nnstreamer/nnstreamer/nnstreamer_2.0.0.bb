@@ -78,7 +78,7 @@ EXTRA_OEMESON += "\
 	-Dinstall-test=true \
 "
 
-do_install_append() {
+do_install:append() {
     rm -f ${D}/${bindir}/unittest-nnstreamer/tests/test_models/models/tvm_add_one.so_
 }
 
@@ -94,11 +94,11 @@ PACKAGES =+ "\
 	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
 	gstreamer1.0-plugins-base \
 "
 
-RDEPENDS_${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
+RDEPENDS:${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
 	${@bb.utils.contains('PACKAGECONFIG', 'armnn','${PN}-armnn', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
@@ -109,60 +109,60 @@ RDEPENDS_${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
 	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
 "
 
-FILES_${PN} += "\
+FILES:${PN} += "\
 	${libdir}/*.so \
 	${libdir}/gstreamer-1.0/*.so \
 	${libdir}/nnstreamer/decoders/* \
 	${sysconfdir}/nnstreamer.ini \
 "
 
-FILES_${PN}-armnn = "\
+FILES:${PN}-armnn = "\
 	${libdir}/nnstreamer/filters/libnnstreamer_filter_armnn.so \
 "
 
-FILES_${PN}-dev = "\
+FILES:${PN}-dev = "\
 	${includedir}/nnstreamer/* \
 	${libdir}/*.a \
 	${libdir}/pkgconfig/*.pc \
 "
 
-FILES_${PN}-flatbuf = "\
+FILES:${PN}-flatbuf = "\
 	${libdir}/nnstreamer/converters/libnnstreamer_converter_flatbuf.so \
 	${libdir}/nnstreamer/converters/libnnstreamer_converter_flexbuf.so \
 	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_flatbuf.so \
 	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_flexbuf.so \
 "
 
-FILES_${PN}-grpc = "\
+FILES:${PN}-grpc = "\
 	${libdir}/gstreamer-1.0/libnnstreamer-grpc.so \
 "
 
-FILES_${PN}-grpc-flatbuf = "\
+FILES:${PN}-grpc-flatbuf = "\
 	${libdir}/libnnstreamer_grpc_flatbuf.so \
 "
 
-FILES_${PN}-grpc-protobuf = "\
+FILES:${PN}-grpc-protobuf = "\
 	${libdir}/libnnstreamer_grpc_protobuf.so \
 "
 
-FILES_${PN}-protobuf = "\
+FILES:${PN}-protobuf = "\
 	${libdir}/nnstreamer/converters/libnnstreamer_converter_protobuf.so \
 	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_protobuf.so \
 	${libdir}/libnnstreamer_protobuf.so \
 "
 
-FILES_${PN}-python3 = "\
+FILES:${PN}-python3 = "\
 	${libdir}/nnstreamer/converters/libnnstreamer_converter_python3.so \
 	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_python3.so \
 	${libdir}/nnstreamer/filters/libnnstreamer_filter_python3.so \
 	${libdir}/nnstreamer/extra/nnstreamer_python3.so \
 "
 
-FILES_${PN}-tensorflow-lite = "\
+FILES:${PN}-tensorflow-lite = "\
 	${libdir}/nnstreamer/filters/libnnstreamer_filter_tensorflow2-lite.so \
 "
 
-FILES_${PN}-unittest = "\
+FILES:${PN}-unittest = "\
 	${bindir}/unittest-nnstreamer/* \
 	${libdir}/libnnstreamer_unittest_util.so \
 	${libdir}/libcppfilter_test.so \
@@ -170,12 +170,12 @@ FILES_${PN}-unittest = "\
 	${libdir}/nnstreamer/unittest/* \
 "
 
-INSANE_SKIP_${PN} += "dev-so"
+INSANE_SKIP:${PN} += "dev-so"
 
 #
 # Fixes: 076a78ea [TVM/test] Add models for more architectures
 #
-do_install_append() {
+do_install:append() {
     bash -c "shopt -s extglob;
     rm -f ${D}/${bindir}/unittest-nnstreamer/tests/test_models/models/tvm_add_one_!(${HOST_ARCH}).so_;
     shopt -u extglob;"

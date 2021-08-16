@@ -30,24 +30,24 @@ SRCREV = "89cf7a3b7074bc5bd502919ed43d69d8351db1fb"
 # should be updated once patchlevel is merged.
 LINUX_VERSION = "5.10.72"
 
-FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
+FILES:${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
 
 DEFAULT_PREFERENCE = "1"
 
 DO_CONFIG_V7_COPY = "no"
-DO_CONFIG_V7_COPY_mx6 = "yes"
-DO_CONFIG_V7_COPY_mx7 = "yes"
-DO_CONFIG_V7_COPY_mx8 = "no"
+DO_CONFIG_V7_COPY:mx6 = "yes"
+DO_CONFIG_V7_COPY:mx7 = "yes"
+DO_CONFIG_V7_COPY:mx8 = "no"
 
 # Add setting for LF Mainline build
 IMX_KERNEL_CONFIG_AARCH32 = "imx_v7_defconfig"
 IMX_KERNEL_CONFIG_AARCH64 = "imx_v8_defconfig"
 KBUILD_DEFCONFIG ?= ""
-KBUILD_DEFCONFIG_mx6= "${IMX_KERNEL_CONFIG_AARCH32}"
-KBUILD_DEFCONFIG_mx7= "${IMX_KERNEL_CONFIG_AARCH32}"
-KBUILD_DEFCONFIG_mx8= "${IMX_KERNEL_CONFIG_AARCH64}"
+KBUILD_DEFCONFIG:mx6= "${IMX_KERNEL_CONFIG_AARCH32}"
+KBUILD_DEFCONFIG:mx7= "${IMX_KERNEL_CONFIG_AARCH32}"
+KBUILD_DEFCONFIG:mx8= "${IMX_KERNEL_CONFIG_AARCH64}"
 
 
 # Use a verbatim copy of the defconfig from the linux-imx repo.
@@ -68,7 +68,7 @@ do_copy_defconfig () {
 }
 
 DELTA_KERNEL_DEFCONFIG ?= ""
-#DELTA_KERNEL_DEFCONFIG_mx8 = "imx.config"
+#DELTA_KERNEL_DEFCONFIG:mx8 = "imx.config"
 
 do_merge_delta_config[dirs] = "${B}"
 do_merge_delta_config[depends] += " \

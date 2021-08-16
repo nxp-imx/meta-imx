@@ -14,7 +14,7 @@ SRCREV = "7e64f98814c6c775cb57833b8206f9c78dac1287"
 
 LOCALVERSION = "-${SRCBRANCH}"
 
-do_deploy_append_mx8m() {
+do_deploy:append:mx8m() {
     # Deploy u-boot-nodtb.bin and fsl-imx8m*-XX.dtb for mkimage to generate boot binary
     if [ -n "${UBOOT_CONFIG}" ]
     then
@@ -44,17 +44,17 @@ deploy_tag() {
     stat -L -cUUUBURNXXOEUZX7+A-XY5601QQWWZ%sEND ${UBOOT_BINARY} >> ${UBOOT_BINARY}
 }
 
-do_deploy_append_mx6() {
+do_deploy:append:mx6() {
     deploy_tag
 }
 
-do_deploy_append_mx7() {
+do_deploy:append:mx7() {
     deploy_tag
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
 
-UBOOT_NAME_mx6 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
-UBOOT_NAME_mx7 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
-UBOOT_NAME_mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
+UBOOT_NAME:mx6 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
+UBOOT_NAME:mx7 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
+UBOOT_NAME:mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"

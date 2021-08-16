@@ -21,14 +21,14 @@ do_install () {
     cp -r -d --no-preserve=ownership ${S}/gpu-demos/opt ${D}
 }
 
-FILES_${PN} += "/opt"
-INSANE_SKIP_${PN} += "ldflags"
+FILES:${PN} += "/opt"
+INSANE_SKIP:${PN} += "ldflags"
 
-RDEPENDS_${PN} = "libgal-imx libdrm"
+RDEPENDS:${PN} = "libgal-imx libdrm"
 
 # This is required to provide support for VPU Amphion HEVC tile format
 # From NXP [MGS-5547] (commit e175d6b4f78deab24d319b852998bef55cdecc99):
 # VPU Amphion HEVC tile support was added using OpenCL, so add a dependency on libopencl-imx.
-RDEPENDS_${PN} += "libopencl-imx"
+RDEPENDS:${PN} += "libopencl-imx"
 
 COMPATIBLE_MACHINE = "(imxdpu)"

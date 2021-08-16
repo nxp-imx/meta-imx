@@ -27,9 +27,9 @@ inherit cmake
 
 S = "${WORKDIR}/git"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${bindir}
     install -m 0755 ${B}/flatc ${D}${bindir}
 }
 
-FILES_${PN} += "${libdir}"
+FILES:${PN} += "${libdir}"

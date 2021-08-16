@@ -1,13 +1,13 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://profile"
 
-INI_UNCOMMENT_ASSIGNMENTS_append_mx8ulp = " \
+INI_UNCOMMENT_ASSIGNMENTS:append:mx8ulp = " \
     use-g2d=1 \
 "
 
 WATCHDOG_SEC = "40"
-WATCHDOG_SEC_mx8ulp = "240"
+WATCHDOG_SEC:mx8ulp = "240"
 
 update_file() {
     if ! grep -q "$1" $3; then
@@ -16,7 +16,7 @@ update_file() {
     sed -i -e "s,$1,$2," $3
 }
 
-do_install_append() {
+do_install:append() {
     install -Dm0755 ${WORKDIR}/profile ${D}${sysconfdir}/profile.d/weston.sh
 
     # Add weston.log back, used by NXP for testing

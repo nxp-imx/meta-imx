@@ -14,8 +14,8 @@ S = "${WORKDIR}/ml-security"
 
 inherit fsl-eula2-unpack2
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/ml-security/examples/* \
 "
 
-RDEPENDS_${PN} = "bash"
+RDEPENDS:${PN} = "bash"

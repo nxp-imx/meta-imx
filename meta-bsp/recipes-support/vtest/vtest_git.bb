@@ -21,7 +21,7 @@ inherit systemd cmake
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[lttng] = "-DLTTNG_LIB=${STAGING_DIR_TARGET}${libdir}/liblttng-ust.so,,lttng-ust"
 
-SYSTEMD_SERVICE_${PN} = "seco_nvm_daemon.service"
+SYSTEMD_SERVICE:${PN} = "seco_nvm_daemon.service"
 
 EXTRA_OECMAKE += " \
     -DSECO_LIBS_DIR=${STAGING_DIR_TARGET}${libdir} \
@@ -29,7 +29,7 @@ EXTRA_OECMAKE += " \
     -DECC_SRC=${STAGING_DIR_TARGET}${libdir} \
 "
 
-do_install_append() {
+do_install:append() {
     install -d  ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/seco_nvm_daemon.service ${D}${systemd_system_unitdir}
 }

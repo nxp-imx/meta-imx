@@ -13,8 +13,8 @@ S = "${WORKDIR}/${IMX_PACKAGE_NAME}"
 # For native apps, insert the user-local sysroot path
 # For nativesdk apps, insert the correct distro folder
 D_SUBDIR                 = ""
-D_SUBDIR_class-native    = "${STAGING_DIR_NATIVE}"
-D_SUBDIR_class-nativesdk = "/opt/${DISTRO}"
+D_SUBDIR:class-native    = "${STAGING_DIR_NATIVE}"
+D_SUBDIR:class-nativesdk = "/opt/${DISTRO}"
 
 # SCR is the location and name of the Software Content Register file
 # relative to ${D}${D_SUBDIR}.
@@ -33,4 +33,4 @@ do_install () {
     rm ${D}${D_SUBDIR}/${SCR}
 }
 
-FILES_${PN} = "/"
+FILES:${PN} = "/"

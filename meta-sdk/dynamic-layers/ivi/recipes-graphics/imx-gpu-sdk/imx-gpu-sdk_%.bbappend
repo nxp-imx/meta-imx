@@ -1,4 +1,4 @@
 
-DEPENDS_append = " wayland-ivi-extension"
+DEPENDS:append = " wayland-ivi-extension"
 
 BACKEND = "Wayland_IVI"

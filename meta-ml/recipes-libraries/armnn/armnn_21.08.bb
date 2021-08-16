@@ -27,23 +27,23 @@ DEPENDS = " \
     half \
 "
 RDEPENDS_MX8       = ""
-RDEPENDS_MX8_mx8   = "nn-imx"
-RDEPENDS_MX8_mx8mm = ""
-RDEPENDS_MX8_mx8mnul = ""
-RDEPENDS_MX8_mx8mpul = ""
-RDEPENDS_MX8_mx8ulp = ""
-RDEPENDS_${PN}   = " \
+RDEPENDS_MX8:mx8   = "nn-imx"
+RDEPENDS_MX8:mx8mm = ""
+RDEPENDS_MX8:mx8mnul = ""
+RDEPENDS_MX8:mx8mpul = ""
+RDEPENDS_MX8:mx8ulp = ""
+RDEPENDS:${PN}   = " \
     arm-compute-library \
     protobuf \
     boost \
     ${RDEPENDS_MX8} \
 "
 PACKAGECONFIG_VSI_NPU       = ""
-PACKAGECONFIG_VSI_NPU_mx8   = "vsi-npu"
-PACKAGECONFIG_VSI_NPU_mx8mm = ""
-PACKAGECONFIG_VSI_NPU_mx8mnul = ""
-PACKAGECONFIG_VSI_NPU_mx8mpul = ""
-PACKAGECONFIG_VSI_NPU_mx8ulp = ""
+PACKAGECONFIG_VSI_NPU:mx8   = "vsi-npu"
+PACKAGECONFIG_VSI_NPU:mx8mm = ""
+PACKAGECONFIG_VSI_NPU:mx8mnul = ""
+PACKAGECONFIG_VSI_NPU:mx8mpul = ""
+PACKAGECONFIG_VSI_NPU:mx8ulp = ""
 
 PACKAGECONFIG ??= "neon ref tensorflow-lite onnx tests pyarmnn delegate ${PACKAGECONFIG_VSI_NPU}"
 
@@ -69,7 +69,7 @@ DELEGATE_INCLUDE_DIR = "${includedir}/armnn/delegate"
 PYARMNN_INSTALL_DIR = "${ARMNN_INSTALL_DIR}/pyarmnn"
 PYARMNN_GENERATED_DIR = "${PYTHON_SITEPACKAGES_DIR}/pyarmnn/_generated"
 
-do_compile_append() {
+do_compile:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'pyarmnn', 'true', 'false', d)}; then
         # copy required to link against pyarmnn wrappers
         # due to a bug in python/setuptools an explicit path cannot be set 
@@ -90,7 +90,7 @@ do_compile_append() {
     fi
 }
 
-do_install_append() {
+do_install:append() {
     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
     if ${@bb.utils.contains('PACKAGECONFIG', 'tests', 'true', 'false', d)}; then
         install -d ${D}${ARMNN_INSTALL_DIR}
@@ -132,10 +132,10 @@ do_install_append() {
 CXXFLAGS += "-fopenmp"
 LIBS += "-larmpl_lp64_mp"
 
-FILES_${PN} += "${libdir}/python*"
-FILES_${PN} += "${PYARMNN_INSTALL_DIR}/examples*"
-FILES_${PN}-dev += "${DELEGATE_INSTALL_DIR}/*"
-FILES_${PN}-dev += "${libdir}/ArmnnDelegateTargets-release.cmake ${libdir}/ArmnnDelegateConfig.cmake ${libdir}/ArmnnDelegateTargets.cmake"
+FILES:${PN} += "${libdir}/python*"
+FILES:${PN} += "${PYARMNN_INSTALL_DIR}/examples*"
+FILES:${PN}-dev += "${DELEGATE_INSTALL_DIR}/*"
+FILES:${PN}-dev += "${libdir}/ArmnnDelegateTargets-release.cmake ${libdir}/ArmnnDelegateConfig.cmake ${libdir}/ArmnnDelegateTargets.cmake"
 
 # We support i.MX8 only (for now)
 COMPATIBLE_MACHINE = "(mx8)"

@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9c57cfb31165de565a47b65b896391c2"
 
 DEPENDS = "python3 python3-pip-native python3-wheel-native"
-RDEPENDS_${PN} += "python3-core python3-numpy python3-future python3-typing-extensions"
+RDEPENDS:${PN} += "python3-core python3-numpy python3-future python3-typing-extensions"
 
 PV = "1.7.1"
 PYV = "cp39"
@@ -41,4 +41,4 @@ do_install(){
     rm -fr ${D}${PYTHON_SITEPACKAGES_DIR}/torch/bin/test_cpp_rpc
 }
 
-FILES_${PN} += "${libdir}/python*"
+FILES:${PN} += "${libdir}/python*"

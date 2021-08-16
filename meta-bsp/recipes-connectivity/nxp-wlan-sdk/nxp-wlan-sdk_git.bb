@@ -18,6 +18,6 @@ do_install () {
     install -m 0644 README_MLAN ${D}${datadir}/nxp_wireless
 }
 
-FILES_${PN} = "${datadir}/nxp_wireless"
+FILES:${PN} = "${datadir}/nxp_wireless"
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"

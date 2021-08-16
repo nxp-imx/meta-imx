@@ -1,4 +1,4 @@
-FILES_${PN}_class-nativesdk = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
+FILES:${PN}:class-nativesdk = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
             ${base_bindir}/* ${base_sbindir}/* \
             ${base_libdir}/*${SOLIBS} \
@@ -8,4 +8,4 @@ FILES_${PN}_class-nativesdk = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir
             ${datadir}/pixmaps ${datadir}/applications \
             ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
             ${libdir}/bonobo/servers"
-FILES_${PN}-dev_remove_class-nativesdk = "${bindir} ${datadir}/wayland"
+FILES:${PN}-dev:remove:class-nativesdk = "${bindir} ${datadir}/wayland"

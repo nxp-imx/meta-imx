@@ -1,4 +1,4 @@
 # Replace linux-mfgtool with virtual/kernel
 
-DEPENDS_remove = "linux-mfgtool"
-DEPENDS_append = " virtual/kernel"
+DEPENDS:remove = "linux-mfgtool"
+DEPENDS:append = " virtual/kernel"

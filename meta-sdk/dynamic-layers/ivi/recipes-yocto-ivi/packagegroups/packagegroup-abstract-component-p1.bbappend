@@ -1,2 +1,2 @@
 
-RDEPENDS_${PN}_append = " weston-init"
+RDEPENDS:${PN}:append = " weston-init"

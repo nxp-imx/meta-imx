@@ -4,24 +4,24 @@ PACKAGES += " \
     ${PN}-fslcodec-testapps \
 "
 
-RDEPENDS_${PN}-fslcodec-testapps += " \
+RDEPENDS:${PN}-fslcodec-testapps += " \
     imx-codec-test-bin \
     imx-codec-test-source \
 "
 
-ALLOW_EMPTY_${PN}-fslcodec-testapps = "1"
+ALLOW_EMPTY:${PN}-fslcodec-testapps = "1"
 
 # Update SOC_TOOLS_TEST defined in meta-freescale-distro
-SOC_TOOLS_TEST_append_imx    = " \
+SOC_TOOLS_TEST:append:imx    = " \
     imx-kobs \
     ${PN}-fslcodec-testapps \
 "
 
-SOC_TOOLS_TEST_append_mx8qm  = " imx-seco-libs dvbapp-tests"
-SOC_TOOLS_TEST_append_mx8x   = " imx-seco-libs"
-SOC_TOOLS_TEST_append_mx8m   = " kernel-tools-virtio"
+SOC_TOOLS_TEST:append:mx8qm  = " imx-seco-libs dvbapp-tests"
+SOC_TOOLS_TEST:append:mx8x   = " imx-seco-libs"
+SOC_TOOLS_TEST:append:mx8m   = " kernel-tools-virtio"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     can-utils \
     coreutils \
     cpufrequtils \

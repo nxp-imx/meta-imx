@@ -3,8 +3,8 @@ MACHINEOVERRIDES =. "mx8:mx8ulp:"
 require conf/machine/include/imx-base.inc
 require conf/machine/include/tune-cortexa35.inc
 
-DEFAULTTUNE_mx8ulp ?= "cortexa35-crypto"
-MACHINEOVERRIDES_EXTENDER_mx8ulp = "imxdrm:imxgpu:imxgpu2d:imxgpu3d"
+DEFAULTTUNE:mx8ulp ?= "cortexa35-crypto"
+MACHINEOVERRIDES_EXTENDER:mx8ulp = "imxdrm:imxgpu:imxgpu2d:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT_use-mainline-bsp += " mx8ulp \
 "
 MACHINE_SOCARCH_SUFFIX = "-mx8ulp"
@@ -42,4 +42,4 @@ IMX_BOOT_SEEK = "32"
 SERIAL_CONSOLES = "115200;ttyLP1"
 
 # Add additional firmware
-MACHINE_FIRMWARE_append = " firmware-imx-epdc"
+MACHINE_FIRMWARE:append = " firmware-imx-epdc"

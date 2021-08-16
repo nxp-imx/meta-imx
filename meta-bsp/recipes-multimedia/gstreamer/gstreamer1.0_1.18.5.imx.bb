@@ -68,10 +68,10 @@ GIR_MESON_DISABLE_FLAG = "disabled"
 PACKAGES += "${PN}-bash-completion"
 
 # Add the core element plugins to the main package
-FILES_${PN} += "${libdir}/gstreamer-1.0/*.so"
-FILES_${PN}-dev += "${libdir}/gstreamer-1.0/*.a ${libdir}/gstreamer-1.0/include"
-FILES_${PN}-bash-completion += "${datadir}/bash-completion/completions/ ${datadir}/bash-completion/helpers/gst*"
-FILES_${PN}-dbg += "${datadir}/gdb ${datadir}/gstreamer-1.0/gdb"
+FILES:${PN} += "${libdir}/gstreamer-1.0/*.so"
+FILES:${PN}-dev += "${libdir}/gstreamer-1.0/*.a ${libdir}/gstreamer-1.0/include"
+FILES:${PN}-bash-completion += "${datadir}/bash-completion/completions/ ${datadir}/bash-completion/helpers/gst*"
+FILES:${PN}-dbg += "${datadir}/gdb ${datadir}/gstreamer-1.0/gdb"
 
 CVE_PRODUCT = "gstreamer"
 
@@ -84,10 +84,10 @@ require recipes-multimedia/gstreamer/gstreamer1.0-ptest.inc
 DEFAULT_PREFERENCE = "-1"
 
 # Use i.MX fork of GST for customizations
-SRC_URI_remove = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.xz"
+SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.xz"
 GST1.0_SRC ?= "gitsm://source.codeaurora.org/external/imx/gstreamer.git;protocol=https"
 SRCBRANCH = "imx-1.18.x"
-SRC_URI_prepend = "${GST1.0_SRC};branch=${SRCBRANCH} "
+SRC_URI:prepend = "${GST1.0_SRC};branch=${SRCBRANCH} "
 SRCREV = "a55998c70940bd183d25d29e1b82fd3bc9f43df3"
 
 S = "${WORKDIR}/git"

@@ -26,4 +26,4 @@ do_deploy () {
 }
 
 COMPATIBLE_MACHINE = "(mx8)"
-COMPATIBLE_MACHINE_mx8m = "(^$)"
+COMPATIBLE_MACHINE:mx8m = "(^$)"

@@ -49,7 +49,7 @@ EXTRA_OEMAKE = '\
     DESTDIR="${D}" \
 '
 DO_BUILD_VIRTIO = "no"
-DO_BUILD_VIRTIO_mx8m = "yes"
+DO_BUILD_VIRTIO:mx8m = "yes"
 
 do_compile() {
     unset CFLAGS
@@ -68,12 +68,12 @@ do_install() {
     fi
 }
 
-ALLOW_EMPTY_${PN} = "1"
-ALLOW_EMPTY_${PN}-virtio = "1"
+ALLOW_EMPTY:${PN} = "1"
+ALLOW_EMPTY:${PN}-virtio = "1"
 
 PACKAGES =+ "${PN}-pci ${PN}-virtio"
 
-FILES_${PN}-pci = "${bindir}/pci*"
-FILES_${PN}-virtio = "${bindir}/virtio-ivshmem-*"
+FILES:${PN}-pci = "${bindir}/pci*"
+FILES:${PN}-virtio = "${bindir}/virtio-ivshmem-*"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

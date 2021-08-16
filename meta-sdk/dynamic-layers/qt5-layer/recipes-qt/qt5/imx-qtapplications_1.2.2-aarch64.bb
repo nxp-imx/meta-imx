@@ -20,11 +20,11 @@ do_install () {
     cp -r ${S}/usr/share/qt5/examples/multimedia/qmlgltest/ ${D}${datadir}/qt5/examples/multimedia/
 }
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     ${datadir}/qt5/examples/*/* \
 "
 
-INSANE_SKIP_${PN} += "debug-files"
+INSANE_SKIP:${PN} += "debug-files"
 
 COMPATIBLE_MACHINE = "(mx8)"
 

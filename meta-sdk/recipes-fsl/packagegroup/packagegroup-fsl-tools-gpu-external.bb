@@ -12,30 +12,30 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 VULKAN_TOOLS       = ""
-VULKAN_TOOLS_imxgpu3d_mx8   = "vulkan-loader vulkan-validationlayers vulkan-headers vkmark vulkan-tools"
-VULKAN_TOOLS_mx8mm = ""
+VULKAN_TOOLS:imxgpu3d:mx8   = "vulkan-loader vulkan-validationlayers vulkan-headers vkmark vulkan-tools"
+VULKAN_TOOLS:mx8mm = ""
 
 # Common tools independent of the graphics backend
 SOC_TOOLS_GPU                          = "${VULKAN_TOOLS}"
-SOC_TOOLS_GPU_append_imxdrm            = " kmscube"
+SOC_TOOLS_GPU:append:imxdrm            = " kmscube"
 
 # Tools for wayland and x11
 SOC_TOOLS_GPU_XWAYLAND                 = "mesa-demos gtkperf renderdoc"
-SOC_TOOLS_GPU_XWAYLAND_append_imxgpu3d = " glmark2"
+SOC_TOOLS_GPU_XWAYLAND:append:imxgpu3d = " glmark2"
 
 # Tools for wayland and !x11
 SOC_TOOLS_GPU_WAYLAND                  = ""
-SOC_TOOLS_GPU_WAYLAND_imxgpu3d         = "glmark2"
+SOC_TOOLS_GPU_WAYLAND:imxgpu3d         = "glmark2"
 
 # Tools for !wayland and x11
 SOC_TOOLS_GPU_X11                      = "mesa-demos gtkperf renderdoc"
-SOC_TOOLS_GPU_X11_append_imxgpu3d      = " glmark2"
+SOC_TOOLS_GPU_X11:append:imxgpu3d      = " glmark2"
 
 # Tools for !wayland and !x11
 SOC_TOOLS_GPU_FB                       = ""
-SOC_TOOLS_GPU_FB_append_mx8            = " glmark2"
+SOC_TOOLS_GPU_FB:append:mx8            = " glmark2"
 
-RDEPENDS_${PN}_append_imxgpu = " \
+RDEPENDS:${PN}:append:imxgpu = " \
     ${SOC_TOOLS_GPU} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "${SOC_TOOLS_GPU_XWAYLAND}", \
        bb.utils.contains("DISTRO_FEATURES",     "wayland", "${SOC_TOOLS_GPU_WAYLAND}", \

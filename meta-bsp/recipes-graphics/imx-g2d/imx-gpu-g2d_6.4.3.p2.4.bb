@@ -25,6 +25,6 @@ do_install () {
     cp -r -d --no-preserve=ownership ${S}/g2d/* ${D}
 }
 
-INSANE_SKIP_${PN} += "ldflags"
+INSANE_SKIP:${PN} += "ldflags"
 
 COMPATIBLE_MACHINE = "(imxgpu2d)"

@@ -1,1 +1,1 @@
-COMPATIBLE_HOST_imxgpu = "aarch64-poky-linux"
+COMPATIBLE_HOST:imxgpu = "aarch64-poky-linux"

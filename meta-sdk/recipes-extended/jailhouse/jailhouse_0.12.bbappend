@@ -12,14 +12,14 @@ do_compile() {
         KDIR=${STAGING_KERNEL_BUILDDIR}
 }
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
     install -m 0644 ${S}/pyjailhouse/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/pyjailhouse
 }
 
-FILES_${PN} += "${nonarch_base_libdir}/firmware"
+FILES:${PN} += "${nonarch_base_libdir}/firmware"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     pyjailhouse \
 "
 

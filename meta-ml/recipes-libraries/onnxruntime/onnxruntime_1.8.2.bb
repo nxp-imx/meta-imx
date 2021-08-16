@@ -35,11 +35,11 @@ EXTRA_OECMAKE += "\
 -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 "
 PACKAGECONFIG_VSI_NPU       = ""
-PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
-PACKAGECONFIG_VSI_NPU_mx8mm = ""
-PACKAGECONFIG_VSI_NPU_mx8mnul = ""
-PACKAGECONFIG_VSI_NPU_mx8mpul = ""
-PACKAGECONFIG_VSI_NPU_mx8ulp = ""
+PACKAGECONFIG_VSI_NPU:mx8   = "vsi_npu"
+PACKAGECONFIG_VSI_NPU:mx8mm = ""
+PACKAGECONFIG_VSI_NPU:mx8mnul = ""
+PACKAGECONFIG_VSI_NPU:mx8mpul = ""
+PACKAGECONFIG_VSI_NPU:mx8ulp = ""
 
 PACKAGECONFIG ?= "openmp reports sharedlib armnn eigenblas acl acl-2108 nnapi ${PACKAGECONFIG_VSI_NPU}"
 
@@ -72,7 +72,7 @@ PACKAGECONFIG[eigenthreadpool] = "-Donnxruntime_USE_EIGEN_THREADPOOL=ON, -Donnxr
 PACKAGECONFIG[tensorrt] = "-Donnxruntime_USE_TENSORRT=ON, -Donnxruntime_USE_TENSORRT=OFF"
 PACKAGECONFIG[crosscompiling] = "-Donnxruntime_CROSS_COMPILING=ON, -Donnxruntime_CROSS_COMPILING=OFF "
 PACKAGECONFIG[server] = "-Donnxruntime_BUILD_SERVER=ON, -Donnxruntime_BUILD_SERVER=OFF"
-PACKAGECONFIG[x86] = "-Donnxruntime_BUILD_x86=ON, -Donnxruntime_BUILD_x86=OFF"
+PACKAGECONFIG[x86] = "-Donnxruntime_BUILD:x86=ON, -Donnxruntime_BUILD:x86=OFF"
 PACKAGECONFIG[fullprotobuf] = "-Donnxruntime_USE_FULL_PROTOBUF=ON, -Donnxruntime_USE_FULL_PROTOBUF=OFF"
 PACKAGECONFIG[ops] = "-Donnxruntime_DISABLE_CONTRIB_OPS=ON, -Donnxruntime_DISABLE_CONTRIB_OPS=OFF"
 PACKAGECONFIG[staticruntime] = "-Donnxruntime_MSVC_STATIC_RUNTIME=ON, -Donnxruntime_MSVC_STATIC_RUNTIME=OFF"
@@ -96,16 +96,15 @@ PACKAGECONFIG[acl-2108] = "-Donnxruntime_USE_ACL_2108=ON, -Donnxruntime_USE_ACL_
 PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -Donnxruntime_OVXLIB_INCLUDE=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
 
 # libonnxruntime_providers_shared.so is being packaged into -dev which is intended
-INSANE_SKIP_${PN}-dev += "dev-elf"
+INSANE_SKIP:${PN}-dev += "dev-elf"
 
 # a separate tests package for the test binaries not appearing in the main package
 PACKAGE_BEFORE_PN = "${PN}-tests"
-FILES_${PN}-tests = "${bindir}/${BP}/tests/*"
+FILES:${PN}-tests = "${bindir}/${BP}/tests/*"
 
 # libcustom_op_library.so is in bindir, which is intended;
 # onnxruntime_shared_lib_test requires the shlib to be in the same directory as testdata to run properly
-INSANE_SKIP_${PN}-tests += "libdir"
-INSANE_SKIP_${PN}-dbg += "libdir"
+INSANE_SKIP:${PN}-tests += "libdir"
+INSANE_SKIP:${PN}-dbg += "libdir"
 
-RDEPENDS_${PN}-tests += "arm-compute-library"
-
+RDEPENDS:${PN}-tests += "arm-compute-library"

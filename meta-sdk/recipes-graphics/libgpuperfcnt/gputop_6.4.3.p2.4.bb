@@ -15,20 +15,20 @@ S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 
-do_compile_append () {
+do_compile:append () {
     oe_runmake -C ${S} man
 }
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/${mandir}
 	install -m 0444 ${S}/man/* ${D}/${mandir}
 }
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 PACKAGES = "${PN}"
-FILES_${PN} += "${mandir}/*"
-INSANE_SKIP_${PN} += "installed-vs-shipped dev-so rpaths dev-deps"
+FILES:${PN} += "${mandir}/*"
+INSANE_SKIP:${PN} += "installed-vs-shipped dev-so rpaths dev-deps"
 
 # Compatible only with i.MX with GPU
 COMPATIBLE_MACHINE        = "(^$)"
-COMPATIBLE_MACHINE_imxgpu = "${MACHINE}"
+COMPATIBLE_MACHINE:imxgpu = "${MACHINE}"

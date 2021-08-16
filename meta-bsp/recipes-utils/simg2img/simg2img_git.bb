@@ -22,4 +22,4 @@ do_install() {
     chmod a+x ${D}${bindir}/simg2img
 }
 
-INSANE_SKIP_${PN} = "ldflags"
+INSANE_SKIP:${PN} = "ldflags"

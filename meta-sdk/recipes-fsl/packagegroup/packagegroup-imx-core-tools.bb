@@ -8,10 +8,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 KERNEL_TEST_TOOLS      = "kernel-tools-pci spidev-test"
-KERNEL_TEST_TOOLS_mx8m = "kernel-tools-pci spidev-test kernel-tools-virtio"
+KERNEL_TEST_TOOLS:mx8m = "kernel-tools-pci spidev-test kernel-tools-virtio"
 
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     dosfstools \
     evtest \
     e2fsprogs-mke2fs \

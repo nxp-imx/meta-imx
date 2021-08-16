@@ -35,5 +35,5 @@ do_install() {
         install -m 0644 ${WORKDIR}/deploy_afe/TODO.md    ${D}/unit_tests/nxp-afe
 }
 
-FILES_${PN} += "/unit_tests"
-INSANE_SKIP_${PN} += "dev-so"
+FILES:${PN} += "/unit_tests"
+INSANE_SKIP:${PN} += "dev-so"

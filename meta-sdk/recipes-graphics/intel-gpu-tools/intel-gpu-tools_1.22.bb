@@ -5,15 +5,15 @@ DESCRIPTION = "Variety of small tools for testing intel graphics."
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=e4b3dd344780e0400593b21b115a6947"
 
-LICENSE_append = " & ISC"
+LICENSE:append = " & ISC"
 
 inherit autotools gtk-doc
 
 SRC_URI = "${XORG_MIRROR}/individual/app/${BP}.tar.xz"
 
 DEPENDS += "libdrm libpciaccess cairo udev glib-2.0 libxv libx11 libxext libxrandr procps libunwind"
-RDEPENDS_${PN} += "bash"
-RDEPENDS_${PN}-tests += "bash"
+RDEPENDS:${PN} += "bash"
+RDEPENDS:${PN}-tests += "bash"
 
 PACKAGE_BEFORE_PN = "${PN}-benchmarks ${PN}-tests"
 
@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "3d66c1dc5110712ca4d22199b3ce9853f261be1690064edf87e69e5392
 
 EXTRA_OECONF = "--disable-nouveau --disable-shader-debugger"
 COMPATIBLE_HOST = "(x86_64.*|i.86.*)-linux"
-COMPATIBLE_HOST_libc-musl_class-target = "null"
+COMPATIBLE_HOST:libc-musl:class-target = "null"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[audio] = "--enable-audio,--disable-audio,alsa-lib gsl"
@@ -32,9 +32,9 @@ gputools_sysroot_preprocess() {
 }
 SYSROOT_PREPROCESS_FUNCS += "gputools_sysroot_preprocess"
 
-FILES_${PN} += "${libdir}/intel_aubdump.so"
-FILES_${PN}-benchmarks += "${libexecdir}/intel-gpu-tools/benchmarks"
-FILES_${PN}-tests += "\
+FILES:${PN} += "${libdir}/intel_aubdump.so"
+FILES:${PN}-benchmarks += "${libexecdir}/intel-gpu-tools/benchmarks"
+FILES:${PN}-tests += "\
 		${libexecdir}/intel-gpu-tools/*\
 		${datadir}/intel-gpu-tools/1080p-right.png\
 		${datadir}/intel-gpu-tools/1080p-left.png\

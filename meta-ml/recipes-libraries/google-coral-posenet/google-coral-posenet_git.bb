@@ -40,5 +40,5 @@ do_install() {
     install -m 0644 ${S}/models/mobilenet/posenet_mobilenet_v1_075_353_481_quant_decoder.tflite ${D}${datadir}/gstnninferencedemo/google-coral/project-posenet
 }
 
-FILES_${PN} += "${datadir}/gstnninferencedemo/*"
-FILES_${PN} += "${libdir}"
+FILES:${PN} += "${datadir}/gstnninferencedemo/*"
+FILES:${PN} += "${libdir}"

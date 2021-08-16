@@ -7,7 +7,7 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     qtwebengine \
     qtwebengine-qmlplugins \
     qtquickcontrols-qmlplugins \

@@ -1,3 +1,3 @@
-RDEPENDS_${PN}_append = " \
+RDEPENDS:${PN}:append = " \
     iperf2 \
 "

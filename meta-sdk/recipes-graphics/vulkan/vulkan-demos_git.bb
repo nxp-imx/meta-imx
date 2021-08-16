@@ -23,7 +23,7 @@ REQUIRED_DISTRO_FEATURES = 'vulkan'
 inherit cmake features_check
 DEPENDS = "vulkan-loader assimp wayland-protocols wayland-native"
 
-do_install_append () {
+do_install:append () {
 
     mv ${D}${bindir}/screenshot ${D}${bindir}/vulkan-screenshot
 }

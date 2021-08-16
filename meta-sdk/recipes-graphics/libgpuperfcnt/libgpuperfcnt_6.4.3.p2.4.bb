@@ -24,8 +24,8 @@ inherit fsl-eula-unpack2 fsl-eula-graphics
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
-RDEPENDS_${PN} = "imx-gpu-viv"
+RDEPENDS:${PN} = "imx-gpu-viv"
 
 # Compatible only with i.MX with GPU
 COMPATIBLE_MACHINE        = "(^$)"
-COMPATIBLE_MACHINE_imxgpu = "${MACHINE}"
+COMPATIBLE_MACHINE:imxgpu = "${MACHINE}"

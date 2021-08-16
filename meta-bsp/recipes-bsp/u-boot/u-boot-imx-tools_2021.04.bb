@@ -1,9 +1,9 @@
 require recipes-bsp/u-boot/u-boot-tools.inc
 require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
 
-PROVIDES_append_class-target = " ${MLPREFIX}u-boot-tools"
-PROVIDES_append_class-native = " u-boot-tools-native"
-PROVIDES_append_class-nativesdk = " nativesdk-u-boot-tools"
+PROVIDES:append:class-target = " ${MLPREFIX}u-boot-tools"
+PROVIDES:append:class-native = " u-boot-tools-native"
+PROVIDES:append:class-nativesdk = " nativesdk-u-boot-tools"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

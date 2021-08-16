@@ -19,6 +19,6 @@ do_install () {
      ln -s ssat.sh ssat
 }
 
-FILES_${PN} += "${bindir}/ssat \
+FILES:${PN} += "${bindir}/ssat \
 	    ${bindir}/ssat.sh \
 	    ${bindir}/ssat-api.sh"

@@ -11,7 +11,7 @@ PACKAGES = "${PN} ${PN}-dbg"
 
 DEPENDS = "curl"
 
-LDFLAGS_append = " -lcurl"
+LDFLAGS:append = " -lcurl"
 
 do_compile() {
 	${CC} ${CFLAGS} ${WORKDIR}/libcurl-simple-test.c ${LDFLAGS} -o libcurl-simple-test
@@ -22,5 +22,5 @@ do_install() {
 	install -m 0755 libcurl-simple-test ${D}${libdir}/${PN}/
 }
 
-FILES_${PN} = "${libdir}/${PN}/*"
-FILES_${PN}-dbg = "${prefix}/src/* ${libdir}/${PN}/.debug/*"
+FILES:${PN} = "${libdir}/${PN}/*"
+FILES:${PN}-dbg = "${prefix}/src/* ${libdir}/${PN}/.debug/*"

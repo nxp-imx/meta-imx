@@ -8,7 +8,7 @@ IMAGE_FEATURES += 	" ssh-server-openssh \
 			  debug-tweaks \
 			"
 
-IMAGE_INSTALL_append =	" packagegroup-imx-v2x"
+IMAGE_INSTALL:append =	" packagegroup-imx-v2x"
 
 # Add 128 MB in root file system
 IMAGE_ROOTFS_EXTRA_SPACE = "131072"

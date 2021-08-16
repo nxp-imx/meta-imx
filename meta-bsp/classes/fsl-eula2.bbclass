@@ -9,8 +9,8 @@
 # configuration-specific archives, as can be seen in fsl-eula-graphics.bbclass
 # and fsl-eula2-package-arch.bbclass.
 IMX_PACKAGE_NAME                 = "${BPN}-${IMX_PACKAGE_VERSION}"
-IMX_PACKAGE_NAME_class-native    = "${PN}-${IMX_PACKAGE_VERSION}"
-IMX_PACKAGE_NAME_class-nativesdk = "${PN}-${IMX_PACKAGE_VERSION}"
+IMX_PACKAGE_NAME:class-native    = "${PN}-${IMX_PACKAGE_VERSION}"
+IMX_PACKAGE_NAME:class-nativesdk = "${PN}-${IMX_PACKAGE_VERSION}"
 
-INSANE_SKIP_${PN}     += "arch"
-INSANE_SKIP_${PN}-dbg += "arch"
+INSANE_SKIP:${PN}     += "arch"
+INSANE_SKIP:${PN}-dbg += "arch"

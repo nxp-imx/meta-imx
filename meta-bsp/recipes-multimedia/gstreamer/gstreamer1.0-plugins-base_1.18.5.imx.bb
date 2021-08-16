@@ -73,11 +73,11 @@ PACKAGECONFIG[gbm]          = ",,virtual/libgbm libgudev libdrm"
 PACKAGECONFIG[wayland]      = ",,wayland-native wayland wayland-protocols libdrm"
 PACKAGECONFIG[dispmanx]     = ",,virtual/libomxil"
 
-OPENGL_WINSYS_append = "${@bb.utils.contains('PACKAGECONFIG', 'x11', ' x11', '', d)}"
-OPENGL_WINSYS_append = "${@bb.utils.contains('PACKAGECONFIG', 'gbm', ' gbm', '', d)}"
-OPENGL_WINSYS_append = "${@bb.utils.contains('PACKAGECONFIG', 'wayland', ' wayland', '', d)}"
-OPENGL_WINSYS_append = "${@bb.utils.contains('PACKAGECONFIG', 'dispmanx', ' dispmanx', '', d)}"
-OPENGL_WINSYS_append = "${@bb.utils.contains('PACKAGECONFIG', 'egl', ' egl', '', d)}"
+OPENGL_WINSYS:append = "${@bb.utils.contains('PACKAGECONFIG', 'x11', ' x11', '', d)}"
+OPENGL_WINSYS:append = "${@bb.utils.contains('PACKAGECONFIG', 'gbm', ' gbm', '', d)}"
+OPENGL_WINSYS:append = "${@bb.utils.contains('PACKAGECONFIG', 'wayland', ' wayland', '', d)}"
+OPENGL_WINSYS:append = "${@bb.utils.contains('PACKAGECONFIG', 'dispmanx', ' dispmanx', '', d)}"
+OPENGL_WINSYS:append = "${@bb.utils.contains('PACKAGECONFIG', 'egl', ' egl', '', d)}"
 
 EXTRA_OEMESON += " \
     -Ddoc=disabled \
@@ -87,8 +87,8 @@ EXTRA_OEMESON += " \
     ${@get_opengl_cmdline_list('gl_winsys', d.getVar('OPENGL_WINSYS'), d)} \
 "
 
-FILES_${PN}-dev += "${libdir}/gstreamer-1.0/include/gst/gl/gstglconfig.h"
-FILES_${MLPREFIX}libgsttag-1.0 += "${datadir}/gst-plugins-base/1.0/license-translations.dict"
+FILES:${PN}-dev += "${libdir}/gstreamer-1.0/include/gst/gl/gstglconfig.h"
+FILES:${MLPREFIX}libgsttag-1.0 += "${datadir}/gst-plugins-base/1.0/license-translations.dict"
 
 def get_opengl_cmdline_list(switch_name, options, d):
     selected_options = []
@@ -109,9 +109,9 @@ CVE_PRODUCT += "gst-plugins-base"
 
 DEFAULT_PREFERENCE = "-1"
 
-DEPENDS_append_imxgpu2d = " virtual/libg2d"
+DEPENDS:append:imxgpu2d = " virtual/libg2d"
 
-SRC_URI_remove = " \
+SRC_URI:remove = " \
     https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${PV}.tar.xz \
     file://0001-ENGR00312515-get-caps-from-src-pad-when-query-caps.patch \
     file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch \
@@ -119,7 +119,7 @@ SRC_URI_remove = " \
 "
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "imx-1.18.x"
-SRC_URI_prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
+SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 SRCREV = "5fe4c49ad969d0bc5e104212ad261911b15a0b83"
 
 S = "${WORKDIR}/git"
@@ -127,10 +127,10 @@ S = "${WORKDIR}/git"
 inherit use-imx-headers
 
 PACKAGECONFIG_REMOVE ?= "jpeg"
-PACKAGECONFIG_remove = "${PACKAGECONFIG_REMOVE}"
-PACKAGECONFIG_GL_append = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' viv-fb', '', d)}"
+PACKAGECONFIG:remove = "${PACKAGECONFIG_REMOVE}"
+PACKAGECONFIG_GL:append = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' viv-fb', '', d)}"
 PACKAGECONFIG[viv-fb] = ",,virtual/libgles2"
-OPENGL_WINSYS_append = "${@bb.utils.contains('PACKAGECONFIG', 'viv-fb', ' viv-fb', '', d)}"
+OPENGL_WINSYS:append = "${@bb.utils.contains('PACKAGECONFIG', 'viv-fb', ' viv-fb', '', d)}"
 EXTRA_OEMESON += "-Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}""
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"

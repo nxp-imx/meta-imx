@@ -2,8 +2,8 @@ require ${BPN}.inc
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI_remove = "${VKGLCTS_SRC};name=vk-gl-cts;branch=imx-${BP}"
-SRC_URI_prepend = " \
+SRC_URI:remove = "${VKGLCTS_SRC};name=vk-gl-cts;branch=imx-${BP}"
+SRC_URI:prepend = " \
     git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts \
     file://0001-MGS-4031-Report-NotSupported-for-OpenVG-tests-on-non.patch \
 "

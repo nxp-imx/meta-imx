@@ -27,6 +27,6 @@ do_install() {
     install -m 0755 ${B}/src/.libs/libgstnninferencedemo.so ${D}${libdir}/gstreamer-1.0
 }
 
-FILES_${PN} += "${libdir}/gstreamer-1.0/*"
+FILES:${PN} += "${libdir}/gstreamer-1.0/*"
 
 COMPATIBLE_MACHINE = "(mx8mm|mx8mp)"

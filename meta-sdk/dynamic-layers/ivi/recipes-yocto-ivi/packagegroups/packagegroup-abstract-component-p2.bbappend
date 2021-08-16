@@ -1,2 +1,2 @@
 
-RDEPENDS_${PN}_remove = "audiomanagerplugins"
+RDEPENDS:${PN}:remove = "audiomanagerplugins"

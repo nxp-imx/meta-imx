@@ -37,6 +37,6 @@ PACKAGECONFIG[wayland] = "-DBUILD_WSI_WAYLAND_SUPPORT=ON, -DBUILD_WSI_WAYLAND_SU
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-RRECOMMENDS_${PN} = "mesa-vulkan-drivers"
+RRECOMMENDS:${PN} = "mesa-vulkan-drivers"
 
 UPSTREAM_CHECK_GITTAGREGEX = "sdk-(?P<pver>\d+(\.\d+)+)"

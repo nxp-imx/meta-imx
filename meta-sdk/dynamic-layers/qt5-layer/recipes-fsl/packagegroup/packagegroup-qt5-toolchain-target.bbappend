@@ -1,5 +1,5 @@
 
-RDEPENDS_${PN}_remove = "qtquick1-dev \
+RDEPENDS:${PN}:remove = "qtquick1-dev \
     qtquick1-mkspecs \
     qtquick1-plugins \
     qtquick1-qmlplugins \
@@ -9,7 +9,7 @@ RDEPENDS_${PN}_remove = "qtquick1-dev \
     qtwebkit-qmlplugins \
 "
 
-RDEPENDS_${PN}_append = " \
+RDEPENDS:${PN}:append = " \
     qtdeclarative-tools \
     qtquick3d \
     qtquick3d-dev \

@@ -8,7 +8,7 @@ MACHINE_FEATURES += "wifi bluetooth bcm43455 bcm4356"
 # NXP BSP can consume proprietary jailhouse and Broadcom drivers
 # OP-TEE is also applicable to NXP BSP, mainline BSP seems not to have
 # a full support for it yet.
-MACHINE_FEATURES_append_use-nxp-bsp = " jailhouse bcm4359 optee"
+MACHINE_FEATURES:append_use-nxp-bsp = " jailhouse bcm4359 optee"
 
 KERNEL_DEVICETREE = " \
 	freescale/${KERNEL_DEVICETREE_BASENAME}.dtb \
@@ -50,4 +50,4 @@ OPTEE_BIN_EXT = "8mn"
 TEE_LOAD_ADDR = "0x56000000"
 
 # Add additional firmware
-MACHINE_FIRMWARE_append = " linux-firmware-ath10k"
+MACHINE_FIRMWARE:append = " linux-firmware-ath10k"

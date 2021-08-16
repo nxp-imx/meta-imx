@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e313a9b6eda820e35716d9529001537f \
 "
 
 DEPENDS = "tim-vx"
-RDEPENDS_${PN} = "tim-vx python3-decorator python3-numpy python3-attrs python3-psutil python3"
+RDEPENDS:${PN} = "tim-vx python3-decorator python3-numpy python3-attrs python3-psutil python3"
 
 SRCBRANCH = "eiq-tvm-v0.7"
 TVM_SRC ?= "git://source.codeaurora.org/external/imx/eiq-tvm-imx.git;protocol=ssh"
@@ -53,9 +53,9 @@ do_install () {
     rm -fr ${D}${datadir}
 }
 
-INSANE_SKIP_${PN} += "dev-deps"
+INSANE_SKIP:${PN} += "dev-deps"
 
 FILES_SOLIBSDEV = ""
-FILES_${PN} = "${bindir}/* ${libdir}/*"
+FILES:${PN} = "${bindir}/* ${libdir}/*"
 
 COMPATIBLE_MACHINE = "(mx8)"

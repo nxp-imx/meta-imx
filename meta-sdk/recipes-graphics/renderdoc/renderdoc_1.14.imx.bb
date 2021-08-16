@@ -11,7 +11,7 @@ SRC_URI += " \
     file://0001-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
 "
 
-REQUIRED_DISTRO_FEATURES_remove = "opengl"
+REQUIRED_DISTRO_FEATURES:remove = "opengl"
 
 PACKAGECONFIG ?= " \
     egl \
@@ -26,7 +26,7 @@ PACKAGECONFIG[wayland] = "-DENABLE_WAYLAND=ON,-DENABLE_WAYLAND=OFF,wayland"
 PACKAGECONFIG[xcb]     = "-DENABLE_XCB=ON,-DENABLE_XCB=OFF"
 PACKAGECONFIG[xlib]    = "-DENABLE_XLIB=ON,-DENABLE_XLIB=OFF"
 
-do_compile_prepend () {
+do_compile:prepend () {
     if [ "${base_libdir}" != "lib" ]; then
         export LIB_SUFFIX="64"
     fi

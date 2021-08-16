@@ -1,2 +1,2 @@
 
-RDEPENDS_bluez5_remove = "libasound-module-bluez"
+RDEPENDS:bluez5:remove = "libasound-module-bluez"

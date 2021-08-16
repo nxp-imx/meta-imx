@@ -8,7 +8,7 @@ DEPENDS_BACKEND = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',  ' xrandr', \
                                                                 '', d), d)}"
 DEPENDS_MX8       = ""
-DEPENDS_MX8_mx8   = " \
+DEPENDS_MX8:mx8   = " \
     glslang-native \
     rapidopencl \
     rapidopenvx \
@@ -16,7 +16,7 @@ DEPENDS_MX8_mx8   = " \
     vulkan-headers \
     vulkan-loader \
 "
-DEPENDS_MX8_mx8mm = ""
+DEPENDS_MX8:mx8mm = ""
 DEPENDS = " \
     assimp \
     cmake-native \
@@ -36,8 +36,8 @@ DEPENDS = " \
     ${DEPENDS_BACKEND} \
     ${DEPENDS_MX8} \
 "
-DEPENDS_append_imxgpu2d = " virtual/libg2d virtual/libopenvg"
-DEPENDS_append_imxgpu3d = " virtual/libgles2"
+DEPENDS:append:imxgpu2d = " virtual/libg2d virtual/libopenvg"
+DEPENDS:append:imxgpu3d = " virtual/libgles2"
 
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
@@ -51,21 +51,21 @@ BACKEND = \
                                                              'FB', d), d)}"
 
 FEATURES                  = "EarlyAccess,EGL,GoogleUnitTest,OpenVG"
-FEATURES_append_imxgpu2d  = ",G2D"
-FEATURES_append_imxgpu3d  = ",OpenGLES2"
-FEATURES_append           = "${FEATURES_SOC}"
+FEATURES:append:imxgpu2d  = ",G2D"
+FEATURES:append:imxgpu3d  = ",OpenGLES2"
+FEATURES:append           = "${FEATURES_SOC}"
 
 FEATURES_SOC              = ""
-FEATURES_SOC_mx6q         = ",OpenGLES3"
-FEATURES_SOC_mx6dl        = ",OpenGLES3"
-FEATURES_SOC_mx8          = ",OpenCV,Vulkan,OpenGLES3.2,OpenCL1.2,OpenVX1.1"
-FEATURES_SOC_mx8mm        = ",OpenCV"
+FEATURES_SOC:mx6q         = ",OpenGLES3"
+FEATURES_SOC:mx6dl        = ",OpenGLES3"
+FEATURES_SOC:mx8          = ",OpenCV,Vulkan,OpenGLES3.2,OpenCL1.2,OpenVX1.1"
+FEATURES_SOC:mx8mm        = ",OpenCV"
 
 EXTENSIONS       = "*"
-EXTENSIONS_mx6q  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
-EXTENSIONS_mx6dl = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
-EXTENSIONS_mx8m  = "OpenGLES3:GL_EXT_color_buffer_float"
-EXTENSIONS_mx8mm = "*"
+EXTENSIONS:mx6q  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
+EXTENSIONS:mx6dl = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
+EXTENSIONS:mx8m  = "OpenGLES3:GL_EXT_color_buffer_float"
+EXTENSIONS:mx8mm = "*"
 
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
@@ -79,15 +79,15 @@ REMOVALS = " \
     GLES2/DirectMultiSamplingVideoYUV \
     GLES3/DirectMultiSamplingVideoYUV \
 "
-REMOVALS_append_imxdpu = " \
+REMOVALS:append:imxdpu = " \
     G2D/EightLayers \
 "
-REMOVALS_append_mx6q = " \
+REMOVALS:append:mx6q = " \
     GLES3/HDR02_FBBasicToneMapping \
     GLES3/HDR03_SkyboxTonemapping \
     GLES3/HDR04_HDRFramebuffer \
 "
-REMOVALS_append_mx6dl = " \
+REMOVALS:append:mx6dl = " \
     GLES3/HDR02_FBBasicToneMapping \
     GLES3/HDR03_SkyboxTonemapping \
     GLES3/HDR04_HDRFramebuffer \
@@ -101,9 +101,9 @@ do_install () {
     done
 }
 
-FILES_${PN} += "/opt/${PN}"
-FILES_${PN}-dbg += "/opt/${PN}/*/*/.debug /usr/src/debug"
-INSANE_SKIP_${PN} += "already-stripped rpaths"
+FILES:${PN} += "/opt/${PN}"
+FILES:${PN}-dbg += "/opt/${PN}/*/*/.debug /usr/src/debug"
+INSANE_SKIP:${PN} += "already-stripped rpaths"
 
 # Unfortunately recipes with an empty main package, like header-only libraries,
 # are not included in the SDK. Use RDEPENDS as a workaround.
@@ -118,26 +118,26 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
     stb \
 "
 RDEPENDS_EMPTY_MAIN_PACKAGE_MX8       = ""
-RDEPENDS_EMPTY_MAIN_PACKAGE_MX8_mx8   = " \
+RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8   = " \
     rapidopencl \
     rapidopenvx \
     rapidvulkan \
 "
-RDEPENDS_EMPTY_MAIN_PACKAGE_MX8_mx8mm = ""
+RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8mm = ""
 # vulkan-loader is dynamically loaded, so need to add an explicit
 # dependency
 RDEPENDS_VULKAN_LOADER       = ""
-RDEPENDS_VULKAN_LOADER_mx8   = "vulkan-validationlayers vulkan-loader"
-RDEPENDS_VULKAN_LOADER_mx8mm = ""
-RDEPENDS_${PN} += " \
+RDEPENDS_VULKAN_LOADER:mx8   = "vulkan-validationlayers vulkan-loader"
+RDEPENDS_VULKAN_LOADER:mx8mm = ""
+RDEPENDS:${PN} += " \
     ${RDEPENDS_EMPTY_MAIN_PACKAGE} \
     ${RDEPENDS_EMPTY_MAIN_PACKAGE_MX8} \
     ${RDEPENDS_VULKAN_LOADER} \
 "
 
 # For backwards compatibility
-RPROVIDES_${PN} = "fsl-gpu-sdk"
-RREPLACES_${PN} = "fsl-gpu-sdk"
-RCONFLICTS_${PN} = "fsl-gpu-sdk"
+RPROVIDES:${PN} = "fsl-gpu-sdk"
+RREPLACES:${PN} = "fsl-gpu-sdk"
+RCONFLICTS:${PN} = "fsl-gpu-sdk"
 
 COMPATIBLE_MACHINE = "(imxgpu)"

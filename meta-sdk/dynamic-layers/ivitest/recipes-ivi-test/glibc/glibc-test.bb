@@ -23,5 +23,5 @@ do_install() {
 	install -m 0755 glibc-simple-test-cxx ${D}${libdir}/${PN}/
 }
 
-FILES_${PN} = "${libdir}/*"
-FILES_${PN}-dbg = "${prefix}/src/*"
+FILES:${PN} = "${libdir}/*"
+FILES:${PN}-dbg = "${prefix}/src/*"

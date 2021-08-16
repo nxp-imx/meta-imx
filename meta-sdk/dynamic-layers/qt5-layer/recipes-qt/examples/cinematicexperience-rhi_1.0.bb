@@ -11,7 +11,7 @@ SRCREV = "5d44dd7d4fd563b33570a14c2274e7fa9cc7d84f"
 S = "${WORKDIR}/git"
 
 DEPENDS = "qtdeclarative qtgraphicaleffects"
-RDEPENDS_${PN} = "liberation-fonts qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
+RDEPENDS:${PN} = "liberation-fonts qtdeclarative-qmlplugins qtgraphicaleffects-qmlplugins"
 
 require recipes-qt/qt5/qt5.inc
 
@@ -31,4 +31,4 @@ do_install() {
     chmod +x ${D}${bindir}/qt5-cinematic-experience
 }
 
-FILES_${PN} += "${datadir}"
+FILES:${PN} += "${datadir}"

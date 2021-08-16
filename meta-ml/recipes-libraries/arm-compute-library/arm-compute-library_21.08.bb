@@ -100,7 +100,7 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-RDEPENDS_${PN} = "bash"
+RDEPENDS:${PN} = "bash"
 
 # We support i.MX8 only (for now)
 COMPATIBLE_MACHINE = "(mx8)"

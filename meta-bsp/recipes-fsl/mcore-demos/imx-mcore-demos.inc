@@ -8,26 +8,27 @@ LICENSE = "Proprietary"
 inherit deploy fsl-eula2-unpack2
 
 SOC        ?= "INVALID"
-SOC_mx7ulp  = "imx7ulp"
-SOC_mx8dxl  = "imx8dxl"
-SOC_mx8mm   = "imx8mm"
-SOC_mx8mn   = "imx8mn"
-SOC_mx8mnul = "imx8mnddr3l"
-SOC_mx8mp   = "imx8mp"
-SOC_mx8mpul = "imx8mp"
-SOC_mx8mq   = "imx8mq"
-SOC_mx8qm   = "imx8qm"
-SOC_mx8qxp  = "imx8qx"
-SOC_mx8ulp  = "imx8ulp"
+SOC:mx7ulp  = "imx7ulp"
+SOC:mx8dxl  = "imx8dxl"
+SOC:mx8mm   = "imx8mm"
+SOC:mx8mn   = "imx8mn"
+SOC:mx8mnul = "imx8mnddr3l"
+SOC:mx8mp   = "imx8mp"
+SOC:mx8mpul = "imx8mp"
+SOC:mx8mq   = "imx8mq"
+SOC:mx8qm   = "imx8qm"
+SOC:mx8qxp  = "imx8qx"
+SOC:mx8ulp  = "imx8ulp"
 
 MCORE_TYPE  ?= "m4"
-MCORE_TYPE_mx8mn  = "m7"
-MCORE_TYPE_mx8mnul = "m7"
-MCORE_TYPE_mx8mp  = "m7"
-MCORE_TYPE_mx8ulp  = "m33"
+MCORE_TYPE:mx8mn  = "m7"
+MCORE_TYPE:mx8mnul = "m7"
+MCORE_TYPE:mx8mp  = "m7"
+MCORE_TYPE:mx8mpul  = "m7"
+MCORE_TYPE:mx8ulp  = "m33"
 
 IMX_PACKAGE_NAME = "${SOC}-${MCORE_TYPE}-demo-${PV}"
-SRC_URI_append = ";name=${SOC}"
+SRC_URI:append = ";name=${SOC}"
 
 SCR = "SCR-${SOC}-${MCORE_TYPE}-demo.txt"
 
@@ -38,7 +39,7 @@ do_install () {
 }
 
 DEPLOY_FILE_EXT       ?= "bin"
-DEPLOY_FILE_EXT_mx7ulp = "img"
+DEPLOY_FILE_EXT:mx7ulp = "img"
 
 do_deploy () {
    # Install the demo binaries

@@ -17,4 +17,4 @@ do_install () {
     cp -r ${S}/include/* ${D}${includedir}
 }
 
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"

@@ -9,7 +9,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 
 DEPENDS = "zlib"
-DEPENDS_append_class-target = " tensorflow-protobuf-native"
+DEPENDS:append:class-target = " tensorflow-protobuf-native"
 
 SRCREV = "52b2447247f535663ac1c292e088b4b27d2910ef"
 
@@ -25,26 +25,26 @@ inherit autotools-brokensep pkgconfig
 
 EXTRA_OECONF += "--with-protoc=echo --includedir=${includedir}/tensorflow-protobuf "
 
-do_install_append() {
+do_install:append() {
     # Remove the symlinks for the shared libraries to avoid conflict with other protobuf versions
     rm ${D}${libdir}/*.so
     rm -r ${D}${libdir}/pkgconfig
 }
 
 PACKAGE_BEFORE_PN = "${PN}-compiler ${PN}-lite"
-FILES_${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
-FILES_${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
+FILES:${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
+FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
 
-RDEPENDS_${PN}-compiler = "${PN}"
-RDEPENDS_${PN}-dev += "${PN}-compiler"
+RDEPENDS:${PN}-compiler = "${PN}"
+RDEPENDS:${PN}-dev += "${PN}-compiler"
 
 MIPS_INSTRUCTION_SET = "mips"
 
 BBCLASSEXTEND = "native nativesdk"
 
-LDFLAGS_append_arm = " -latomic"
-LDFLAGS_append_mips = " -latomic"
-LDFLAGS_append_powerpc = " -latomic"
-LDFLAGS_append_mipsel = " -latomic"
+LDFLAGS:append:arm = " -latomic"
+LDFLAGS:append:mips = " -latomic"
+LDFLAGS:append:powerpc = " -latomic"
+LDFLAGS:append:mipsel = " -latomic"
 
-INSANE_SKIP_${PN} = "dev-so"
+INSANE_SKIP:${PN} = "dev-so"

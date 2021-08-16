@@ -12,10 +12,10 @@ BBLAYERS += "${BSPDIR}/sources/meta-imx/meta-v2x"
 
 For enabling profiling and tracing capabilities add the following in local.conf:
 #
-BBMASK_remove = "meta-v2x/recipes-kernel/"
-PACKAGECONFIG_pn-v2xsehsm_append = " lttng"
-PACKAGECONFIG_pn-vtest_append = " lttng"
-IMAGE_INSTALL_append = " lttng-tools"
+BBMASK:remove = "meta-v2x/recipes-kernel/"
+PACKAGECONFIG:pn-v2xsehsm:append = " lttng"
+PACKAGECONFIG:pn-vtest:append = " lttng"
+IMAGE_INSTALL:append = " lttng-tools"
 #
 
 The layer depends on:

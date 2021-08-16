@@ -18,9 +18,9 @@ S = "${WORKDIR}/git"
 inherit python3native cmake
 
 PACKAGECONFIG_OPENVX = ""
-PACKAGECONFIG_OPENVX_imxgpu3d_mx8 = "openvx"
-PACKAGECONFIG_OPENVX_mx8mm = ""
-PACKAGECONFIG_OPENVX_mx8ulp = ""
+PACKAGECONFIG_OPENVX:imxgpu3d:mx8 = "openvx"
+PACKAGECONFIG_OPENVX:mx8mm = ""
+PACKAGECONFIG_OPENVX:mx8ulp = ""
 
 PACKAGECONFIG ?= "${PACKAGECONFIG_OPENVX}"
 
@@ -41,7 +41,7 @@ EXTRA_OECMAKE += " \
 
 CXXFLAGS += "-fPIC"
 
-do_configure_prepend() {
+do_configure:prepend() {
     export HTTP_PROXY=${http_proxy}
     export HTTPS_PROXY=${https_proxy}
     export http_proxy=${http_proxy}
@@ -49,7 +49,7 @@ do_configure_prepend() {
 }
 
 
-do_compile_append () {
+do_compile:append () {
     # build pip package
       cd ${B}
       CI_BUILD_PYTHON=${PYTHON} BUILD_NUM_JOBS=8 ${S}/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake2.sh ${TARGET_ARCH}
@@ -100,7 +100,7 @@ do_install() {
         ${B}/tflite_pip/dist/tflite_runtime-*.whl
 }
 
-RDEPENDS_${PN}   = " \
+RDEPENDS:${PN}   = " \
     flatbuffers \
     python3 \
     python3-numpy \
@@ -111,9 +111,9 @@ SSTATE_DUPWHITELIST = "/"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-INSANE_SKIP_${PN} += " \
+INSANE_SKIP:${PN} += " \
     already-stripped \
     staticdev \
 "
 
-FILES_${PN} += "${libdir}/python*"
+FILES:${PN} += "${libdir}/python*"

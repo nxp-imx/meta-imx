@@ -28,7 +28,7 @@ PACKAGECONFIG[qt5] = '-Dqt5=enabled \
                      ,-Dqt5=disabled,qtbase qtdeclarative qtbase-native qtx11extras'
 
 # remove the duplicate libs except qtsink
-do_install_append() {
+do_install:append() {
     rm -rf ${D}/usr
     if [ -e ${WORKDIR}/build/ext/qt/libgstqmlgl.so ]; then
         mkdir -p ${D}${libdir}/gstreamer-1.0/
@@ -37,6 +37,6 @@ do_install_append() {
 }
 
 
-FILES_${PN}-equalizer += "${datadir}/gstreamer-1.0/presets/*.prs"
+FILES:${PN}-equalizer += "${datadir}/gstreamer-1.0/presets/*.prs"
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"

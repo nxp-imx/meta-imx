@@ -16,7 +16,7 @@ PULSEAUDIO_EXTRA_INSTALL = "${@bb.utils.contains('DISTRO_FEATURES','x11', \
                              pulseaudio-module-x11-bell', \
                             '', d)}"
 
-RDEPENDS_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio',  \
+RDEPENDS:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio',  \
     ' pulseaudio-server \
     pulseaudio-module-cli \
     pulseaudio-misc \

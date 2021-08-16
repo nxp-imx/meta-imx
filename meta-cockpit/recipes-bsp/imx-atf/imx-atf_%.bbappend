@@ -1,4 +1,4 @@
-do_compile_imx8qm-cockpit () {
+do_compile:imx8qm-cockpit () {
     unset ${CLEAR_FLAGS} COCKPIT_A72
     oe_runmake clean BUILD_BASE=a53
     oe_runmake BUILD_BASE=a53 COCKPIT_A53=1 SPD=none bl31
@@ -17,7 +17,7 @@ do_compile_imx8qm-cockpit () {
     fi
 }
 
-do_deploy_imx8qm-cockpit () {
+do_deploy:imx8qm-cockpit () {
     install -Dm 0644 ${S}/a53/${PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-a53
     install -m 0644 ${S}/a72/${PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-a72
     if ${BUILD_OPTEE}; then

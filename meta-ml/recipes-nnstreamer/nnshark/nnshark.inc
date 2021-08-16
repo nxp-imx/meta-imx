@@ -25,11 +25,11 @@ EXTRA_OECONF = " \
         --disable-gtk-doc \
 "
 
-do_configure_prepend() {
+do_configure:prepend() {
     sh autogen.sh --noconfigure
 }
 
-FILES_${PN} += "\
+FILES:${PN} += "\
        ${libdir}/gstreamer-1.0/libgstsharktracers.so  \
        ${libdir}/gstreamer-1.0/libgstsharktracers.la \
 "
