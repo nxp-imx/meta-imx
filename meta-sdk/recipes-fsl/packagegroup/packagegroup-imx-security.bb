@@ -10,6 +10,7 @@ inherit packagegroup
 RDEPENDS_${PN} = " \
     e2fsprogs-mke2fs \
     keyctl-caam \
+    crypto-af-alg \
     keyutils \
     lvm2 \
     util-linux \
