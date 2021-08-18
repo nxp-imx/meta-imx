@@ -10,7 +10,7 @@ SRCBRANCH = "v2x-dev"
 V2XSEHSM_SRC ?= "git://source.codeaurora.org/external/imx/v2xsehsm.git;protocol=ssh"
 SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH} \
     file://0001-Install-header-to-standard-location.patch"
-SRCREV = "cd567e1ed3038a5c9f188caed2257923cf7dadfb"
+SRCREV = "84b55c650eef3ce6f7c016c7025c6732908fa30d"
 
 S = "${WORKDIR}/git"
 
