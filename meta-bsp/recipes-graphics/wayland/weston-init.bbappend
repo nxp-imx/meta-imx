@@ -6,6 +6,9 @@ INI_UNCOMMENT_ASSIGNMENTS_append_mx8ulp = " \
     use-g2d=1 \
 "
 
+WATCHDOG_SEC = "40"
+WATCHDOG_SEC_mx8ulp = "120"
+
 update_file() {
     if ! grep -q "$1" $3; then
         bbfatal $1 not found in $3
@@ -23,5 +26,5 @@ do_install_append() {
     update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
     update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
 
-    update_file "WatchdogSec=20" "WatchdogSec=40" ${D}${systemd_system_unitdir}/weston.service
+    update_file "WatchdogSec=20" "WatchdogSec=${WATCHDOG_SEC}" ${D}${systemd_system_unitdir}/weston.service
 }
