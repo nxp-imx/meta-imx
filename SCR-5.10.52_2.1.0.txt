@@ -1315,7 +1315,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    The torchvision package consists of popular datasets model architectures and common image transformations for computer vision
-Release Location:            https://github.com/NXPmicro/pytorch-release -b rel_imx_5.10.52_2.1.0
+Release Location:            
 Origin:                      NXP (BSD-3-Clause)
                              pytorch (BSD-3-clause) - https://github.com/pytorch/pytorch
 
