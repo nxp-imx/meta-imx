@@ -9,5 +9,6 @@ SRC_URI_append_imxgpu = " \
     file://0006-glamor-Plumb-the-pixmap-through-fbo-creation-instead.patch \
     file://0007-glamor-Switch-the-gl_flavor-to-a-boolean-is_gles.patch \
     file://0008-glamor-Introduce-a-central-place-for-our-pixmap-form.patch \
+    file://0009-glamor-MGS-6375-ximagesink-show-wrong-color.patch \
 "
 
