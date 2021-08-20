@@ -5,7 +5,7 @@ Subject: [PATCH] glamor: MGS-6375 ximagesink show wrong color
 
 A workaround fix the wrong format added for gles
 
-Upstream-Status: Pending
+Upstream-Status: Inappropriate [workaround]
 Signed-off-by: Wujian sun <wujian.sun_1@nxp.com>
 ---
  glamor/glamor.c | 4 ++--
