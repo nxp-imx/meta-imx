@@ -7,7 +7,7 @@ INI_UNCOMMENT_ASSIGNMENTS_append_mx8ulp = " \
 "
 
 WATCHDOG_SEC = "40"
-WATCHDOG_SEC_mx8ulp = "120"
+WATCHDOG_SEC_mx8ulp = "240"
 
 update_file() {
     if ! grep -q "$1" $3; then
