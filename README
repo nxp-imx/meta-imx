@@ -1,7 +1,6 @@
 i.MX Linux Yocto Project BSP 5.4.70_2.3.4 Release
 =====================================================
 
-Note this is release is not a production release.
 Please see the release notes for the quality statement for each baord.
 
 The following boards were tested in this release.
