@@ -1,7 +1,5 @@
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
-EXTRA_PROVIDES_append_imxgpu3d = " virtual/libgl"
-
 PACKAGECONFIG ?= "valgrind"
 PACKAGES_remove = " \
 	libwayland-viv-imx libwayland-viv-imx-dev \
