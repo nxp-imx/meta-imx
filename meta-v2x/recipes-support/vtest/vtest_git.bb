@@ -12,7 +12,7 @@ SRC_URI = "${VTEST_SRC};branch=${SRCBRANCH} \
     file://seco_nvm_daemon.service \
     file://0001-Ignore-v2xsehsmConfig.cmake.patch \
 "
-SRCREV = "1df2cf992f0545a7710fed6583912de58eb87934"
+SRCREV = "f64efd5bb21512ff2d2a48b47e8f5f003e3f0a1a"
 
 S = "${WORKDIR}/git"
 
