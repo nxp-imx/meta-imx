@@ -10,7 +10,7 @@ PROVIDES += "u-boot"
 UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "lf_v2021.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "13ca08d55e2e92e0db18901b7ad18c7c56fe7cbd"
+SRCREV = "c7970f2a2151afc34d4632382c3abf422bb26fa7"
 
 LOCALVERSION = "-${SRCBRANCH}"
 
