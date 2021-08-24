@@ -8,5 +8,5 @@ SRC_URI = " \
     file://xwayland.weston-start \
     file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
 "
-SRCREV = "d5ad97f2f1dc02913354bc9be6016999c6dd40c7"
+SRCREV = "e73c641e076aa68e8ef69dbd56c7a252117b2c83"
 S = "${WORKDIR}/git"
