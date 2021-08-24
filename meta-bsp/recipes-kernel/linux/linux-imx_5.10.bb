@@ -21,7 +21,7 @@ LOCALVERSION = "-lts-5.10.y"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "6f752c183f1e3c0699d33dd4ced2b29bc3ac3fd4"
+SRCREV = "50d32f2b0e8bc6a27ef23140ebd27c36a963418d"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
