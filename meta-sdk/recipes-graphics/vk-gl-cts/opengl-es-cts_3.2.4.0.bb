@@ -16,3 +16,7 @@ SRCREV_spirv-tools = "0b0454c42c6b6f6746434bd5c78c5c70f65d9c51"
 SRCREV_FORMAT = "vk-gl-cts_glslang_spirv-headers_spirv-tools"
 
 inherit pythonnative
+
+do_compile_append() {
+    cp -r modules/gles3/gles3/graphicsfuzz external/openglcts/modules/gles3
+}
