@@ -1,0 +1,26 @@
+From 550e349c01da42cea902f86e2223654db3fbbbfa Mon Sep 17 00:00:00 2001
+From: Cristinel Panfir <cristinel.panfir@nxp.com>
+Date: Tue, 24 Aug 2021 08:53:38 +0000
+Subject: [PATCH] CMakeLists.txt: Fix lib path to work in multilib env
+
+Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3b9ac512..a706c9e8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -125,7 +125,7 @@ endif()
+ 
+ #add extra search paths for libraries and includes
+ SET(INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/include" CACHE PATH "The directory the headers are installed in")
+-SET(LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib" CACHE STRING "Directory where lib will install")
++SET(LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}" CACHE STRING "Directory where lib will install")
+ SET(DOC_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/doc/${PROJECT_NAME}" CACHE PATH "Path to the documentation")
+ 
+ IF(UNIX OR CYGWIN)
+-- 
+2.25.1
+
