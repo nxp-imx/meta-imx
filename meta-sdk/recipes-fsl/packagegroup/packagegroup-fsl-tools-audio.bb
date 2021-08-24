@@ -37,6 +37,7 @@ NXPAFE_INSTALL ?= ""
 NXPAFE_INSTALL_mx8mm = "nxp-afe"
 NXPAFE_INSTALL_mx8mn = "nxp-afe"
 NXPAFE_INSTALL_mx8mp = "nxp-afe"
+NXPAFE_INSTALL_mx8mnul = "nxp-afe"
 
 RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "alsa",  "${ALSA_INSTALL}", "", d)} \
