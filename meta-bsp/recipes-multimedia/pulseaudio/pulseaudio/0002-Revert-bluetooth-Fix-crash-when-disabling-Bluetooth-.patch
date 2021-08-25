@@ -15,10 +15,10 @@ auto killed issue.
  src/modules/bluetooth/bluez5-util.h   |  1 -
  3 files changed, 21 deletions(-)
 
-diff --git a/src/modules/bluetooth/backend-ofono.c b/src/modules/bluetooth/backend-ofono.c
-index 0e5bbe8b7da4..1f0efe923d23 100644
---- a/src/modules/bluetooth/backend-ofono.c
-+++ b/src/modules/bluetooth/backend-ofono.c
+Index: pulseaudio-15.0/src/modules/bluetooth/backend-ofono.c
+===================================================================
+--- pulseaudio-15.0.orig/src/modules/bluetooth/backend-ofono.c
++++ pulseaudio-15.0/src/modules/bluetooth/backend-ofono.c
 @@ -70,7 +70,6 @@ struct hf_audio_card {
      int (*acquire)(struct hf_audio_card *card);
  
@@ -27,7 +27,7 @@ index 0e5bbe8b7da4..1f0efe923d23 100644
  };
  
  struct pa_bluetooth_backend {
-@@ -182,17 +181,6 @@ static int card_acquire(struct hf_audio_card *card) {
+@@ -244,17 +243,6 @@ static int card_acquire(struct hf_audio_
      return -1;
  }
  
@@ -45,7 +45,7 @@ index 0e5bbe8b7da4..1f0efe923d23 100644
  static struct hf_audio_card *hf_audio_card_new(pa_bluetooth_backend *backend, const char *path) {
      struct hf_audio_card *card = pa_xnew0(struct hf_audio_card, 1);
  
-@@ -201,18 +189,12 @@ static struct hf_audio_card *hf_audio_card_new(pa_bluetooth_backend *backend, co
+@@ -263,18 +251,12 @@ static struct hf_audio_card *hf_audio_ca
      card->fd = -1;
      card->acquire = card_acquire;
  
@@ -64,11 +64,11 @@ index 0e5bbe8b7da4..1f0efe923d23 100644
      if (card->transport)
          pa_bluetooth_transport_free(card->transport);
  
-diff --git a/src/modules/bluetooth/bluez5-util.c b/src/modules/bluetooth/bluez5-util.c
-index a21896ede5f7..4439710d0e7f 100644
---- a/src/modules/bluetooth/bluez5-util.c
-+++ b/src/modules/bluetooth/bluez5-util.c
-@@ -562,8 +562,6 @@ static void device_free(pa_bluetooth_device *d) {
+Index: pulseaudio-15.0/src/modules/bluetooth/bluez5-util.c
+===================================================================
+--- pulseaudio-15.0.orig/src/modules/bluetooth/bluez5-util.c
++++ pulseaudio-15.0/src/modules/bluetooth/bluez5-util.c
+@@ -1080,8 +1080,6 @@ static void device_free(pa_bluetooth_dev
  
      device_stop_waiting_for_profiles(d);
  
@@ -77,18 +77,15 @@ index a21896ede5f7..4439710d0e7f 100644
      for (i = 0; i < PA_BLUETOOTH_PROFILE_COUNT; i++) {
          pa_bluetooth_transport *t;
  
-diff --git a/src/modules/bluetooth/bluez5-util.h b/src/modules/bluetooth/bluez5-util.h
-index ff172e0258eb..82739bffd0d8 100644
---- a/src/modules/bluetooth/bluez5-util.h
-+++ b/src/modules/bluetooth/bluez5-util.h
-@@ -47,7 +47,6 @@ typedef struct pa_bluetooth_backend pa_bluetooth_backend;
+Index: pulseaudio-15.0/src/modules/bluetooth/bluez5-util.h
+===================================================================
+--- pulseaudio-15.0.orig/src/modules/bluetooth/bluez5-util.h
++++ pulseaudio-15.0/src/modules/bluetooth/bluez5-util.h
+@@ -63,7 +63,6 @@ typedef struct pa_bluetooth_backend pa_b
  
  typedef enum pa_bluetooth_hook {
-     PA_BLUETOOTH_HOOK_DEVICE_CONNECTION_CHANGED,          /* Call data: pa_bluetooth_device */
--    PA_BLUETOOTH_HOOK_DEVICE_UNLINK,                      /* Call data: pa_bluetooth_device */
-     PA_BLUETOOTH_HOOK_TRANSPORT_STATE_CHANGED,            /* Call data: pa_bluetooth_transport */
-     PA_BLUETOOTH_HOOK_TRANSPORT_MICROPHONE_GAIN_CHANGED,  /* Call data: pa_bluetooth_transport */
-     PA_BLUETOOTH_HOOK_TRANSPORT_SPEAKER_GAIN_CHANGED,     /* Call data: pa_bluetooth_transport */
--- 
-2.27.0
-
+     PA_BLUETOOTH_HOOK_DEVICE_CONNECTION_CHANGED,        /* Call data: pa_bluetooth_device */
+-    PA_BLUETOOTH_HOOK_DEVICE_UNLINK,                    /* Call data: pa_bluetooth_device */
+     PA_BLUETOOTH_HOOK_TRANSPORT_STATE_CHANGED,          /* Call data: pa_bluetooth_transport */
+     PA_BLUETOOTH_HOOK_TRANSPORT_SOURCE_VOLUME_CHANGED,  /* Call data: pa_bluetooth_transport */
+     PA_BLUETOOTH_HOOK_TRANSPORT_SINK_VOLUME_CHANGED,    /* Call data: pa_bluetooth_transport */
