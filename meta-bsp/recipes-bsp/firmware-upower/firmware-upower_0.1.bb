@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e565271ec9a80ce47abbddc4bffe56fa"
 
 inherit fsl-eula2-unpack2 pkgconfig deploy
 
-SRC_URI[md5sum] = "74d639651eaba941a64ca32ab21d8e97"
-SRC_URI[sha256sum] = "970e08f1cc59f85abafd16989ca48bf658f67c92170b32e7a1d002445a04539d"
+SRC_URI[md5sum] = "cc004fc191203555ffe6338f889482eb"
+SRC_URI[sha256sum] = "16fa6fea2fbedad99896e06677b72e5f1a139bb40cd10565c36673e88aeb5424"
 
 do_configure[noexec] = "1"
 
