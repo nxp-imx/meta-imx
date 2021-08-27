@@ -65,6 +65,8 @@ EXTRA_OECMAKE += " \
 "
 
 ARMNN_INSTALL_DIR = "${bindir}/${P}"
+DELEGATE_INSTALL_DIR = "${ARMNN_INSTALL_DIR}/delegate"
+DELEGATE_INCLUDE_DIR = "${includedir}/armnn/delegate"
 PYARMNN_INSTALL_DIR = "${ARMNN_INSTALL_DIR}/pyarmnn"
 PYARMNN_GENERATED_DIR = "${PYTHON_SITEPACKAGES_DIR}/pyarmnn/_generated"
 
@@ -92,9 +94,9 @@ do_compile_append() {
 }
 
 do_install_append() {
+    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
     if ${@bb.utils.contains('PACKAGECONFIG', 'tests', 'true', 'false', d)}; then
         install -d ${D}${ARMNN_INSTALL_DIR}
-        CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"        
         find ${WORKDIR}/build/tests -maxdepth 1 -type f -executable -exec cp $CP_ARGS {} ${D}${ARMNN_INSTALL_DIR} \;
         chrpath -d ${D}${ARMNN_INSTALL_DIR}/*
     fi
@@ -118,7 +120,17 @@ do_install_append() {
         mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_version*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_version.so
         
         # pyarmnn examples for eiq
-        cp -R ${S}/python/pyarmnn/examples ${D}${PYARMNN_INSTALL_DIR}
+        cp $CP_ARGS ${S}/python/pyarmnn/examples ${D}${PYARMNN_INSTALL_DIR}
+    fi
+    
+    if ${@bb.utils.contains('PACKAGECONFIG', 'delegate', 'true', 'false', d)}; then
+        # Arm NN delegate header files
+        install -d ${D}${DELEGATE_INCLUDE_DIR}
+        cp $CP_ARGS ${S}/delegate/include/* ${D}${DELEGATE_INCLUDE_DIR}
+        
+        # example application (source code + README)
+        install -d ${D}${DELEGATE_INSTALL_DIR}
+        cp $CP_ARGS ${S}/delegate/samples/* ${D}${DELEGATE_INSTALL_DIR}
     fi
 }
 
@@ -127,6 +139,7 @@ LIBS += "-larmpl_lp64_mp"
 
 FILES_${PN} += "${libdir}/python*"
 FILES_${PN} += "${PYARMNN_INSTALL_DIR}/examples*"
+FILES_${PN}-dev += "${DELEGATE_INSTALL_DIR}/*"
 FILES_${PN}-dev += "${libdir}/ArmnnDelegateTargets-release.cmake ${libdir}/ArmnnDelegateConfig.cmake ${libdir}/ArmnnDelegateTargets.cmake"
 
 # We support i.MX8 only (for now)
