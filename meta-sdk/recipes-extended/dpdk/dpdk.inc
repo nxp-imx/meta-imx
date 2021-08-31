@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://license/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4
                     file://license/bsd-3-clause.txt;md5=0f00d99239d922ffd13cabef83b33444"
 
 DPDK_SRC ?= "git://source.codeaurora.org/external/qoriq/qoriq-components/dpdk;protocol=https"
-SRCBRANCH = "21.11-qoriq"
 SRC_URI = "${DPDK_SRC};branch=${SRCBRANCH} \
 "
 
