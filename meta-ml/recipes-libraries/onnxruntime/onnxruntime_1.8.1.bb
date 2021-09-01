@@ -9,7 +9,7 @@ DEPENDS = "libpng zlib ${BPN}-native"
 ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH = "imx_1.8.1"
 
-SRCREV = "d5a8f6797edf5aba2b92bb810e92877d00fc2ba6"
+SRCREV = "050672001449bd0443fe570678a9b21d92f4598c"
 
 SRC_URI = "\
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
