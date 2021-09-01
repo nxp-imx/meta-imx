@@ -11,9 +11,8 @@ DEPENDS_append_mx8qxp = " imx-seco-libs"
 
 SRCBRANCH = "master"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
-SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH} \
-    file://0001-CMakeLists.txt-core-pkcs11-Use-CMAKE_INSTALL_LIBDIR-.patch"
-SRCREV = "54a849a4aea258e39ab96d82809103babd25fa82"
+SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH}"
+SRCREV = "eb1a6e07edae236fb657fcc46236ec4457179f11"
 
 S = "${WORKDIR}/git"
 
