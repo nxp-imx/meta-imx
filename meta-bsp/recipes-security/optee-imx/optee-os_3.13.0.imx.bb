@@ -63,7 +63,7 @@ CXXFLAGS += "--sysroot=${STAGING_DIR_HOST}"
 
 do_deploy () {
     install -d ${DEPLOYDIR}
-    ${TARGET_PREFIX}objcopy -O binary ${B}/core/tee.elf ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin
+    cp ${B}/core/tee-raw.bin ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin
     ln -sf tee.${PLATFORM_FLAVOR}.bin ${DEPLOYDIR}/tee.bin
 
     if [ "${OPTEE_ARCH}" != "arm64" ]; then
