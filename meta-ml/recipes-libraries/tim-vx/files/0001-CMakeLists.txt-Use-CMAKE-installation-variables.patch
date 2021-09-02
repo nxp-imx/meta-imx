@@ -1,0 +1,33 @@
+From ae5658efabb46531afa8acbe8c2209b80360fa3b Mon Sep 17 00:00:00 2001
+From: Cristinel Panfir <cristinel.panfir@nxp.com>
+Date: Thu, 2 Sep 2021 11:55:57 +0300
+Subject: [PATCH] CMakeLists.txt: Use CMAKE installation variables
+
+Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
+---
+ src/tim/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/tim/CMakeLists.txt b/src/tim/CMakeLists.txt
+index d158420..b57a162 100644
+--- a/src/tim/CMakeLists.txt
++++ b/src/tim/CMakeLists.txt
+@@ -63,7 +63,7 @@ target_link_libraries(${TARGET_NAME}-static PRIVATE
+ 	-Wl,--whole-archive tim_internal -Wl,--no-whole-archive)
+ 
+ install(TARGETS ${TARGET_NAME} ${TARGET_NAME}-static
+-        DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
++	DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
+ 
+ install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/tim/vx DESTINATION ${CMAKE_INSTALL_PREFIX}/include/tim/)
+ 
+@@ -77,5 +77,5 @@ if (TIM_VX_ENABLE_TEST)
+     add_executable(unit_test ${UT_SRC})
+     target_link_libraries(unit_test gtest gtest_main gmock gmock_main ${TARGET_NAME}-static)
+ 
+-    install(TARGETS unit_test DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/)
++    install(TARGETS unit_test DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/)
+ endif()
+-- 
+2.25.1
+
