@@ -981,8 +981,8 @@ Origin:                      VeriSilicon Inc. (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.1.0
-Version:                     1.1.0
+Package:                     imx-vpu-hantro-daemon-1.1.1
+Version:                     1.1.1
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
 Package Category:            Multimedia
