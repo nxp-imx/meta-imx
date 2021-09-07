@@ -28,6 +28,7 @@ DEPENDS = " \
     gstreamer1.0-plugins-base \
     gtest \
     half \
+    jsoncpp-nlohmann \
     ninja-native \
     rapidjson \
     stb \
@@ -41,7 +42,7 @@ DEPENDS_append_imxgpu3d = " virtual/libgles2"
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
-SRCREV = "7ea472feb6dffc96104ca3e2eab637af62095a3b"
+SRCREV = "4070d7d3fd07d3789790920b756aa4f557749b7a"
 S = "${WORKDIR}/git"
 
 BACKEND = \
@@ -112,6 +113,7 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
     glm \
     googletest \
     half \
+    jsoncpp-nlohmann \
     rapidjson \
     stb \
 "
