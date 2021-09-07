@@ -21,6 +21,7 @@ SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                git://github.com/dmlc/dmlc-core;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/dmlc-core;name=dmlc-core \
                git://github.com/agauniyal/rang;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/rang;name=rang \
                git://github.com/apache/incubator-tvm-vta;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/vta-hw;name=vta-hw \
+               file://0001-tvm-CMakeLists.txt-Use-CMAKE-variables-for-libs-inst.patch \
 "
 
 SRCREV = "f50a1ae614496ac8a14139e55c7014e6645c66bb"
