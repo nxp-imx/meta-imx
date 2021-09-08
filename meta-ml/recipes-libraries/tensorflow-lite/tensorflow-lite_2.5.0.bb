@@ -17,6 +17,8 @@ SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobile
 SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
 SRC_URI[model-mobv1.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226dfe4cdcef3012555f691744166"
 
+SRC_URI += " file://0001-vx-delegate-CMakeLists.txt-Fix-TIM_VX-library-path.patch"
+
 S = "${WORKDIR}/git"
 
 inherit python3native cmake
