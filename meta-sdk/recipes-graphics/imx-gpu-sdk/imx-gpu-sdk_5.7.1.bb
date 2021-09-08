@@ -42,6 +42,7 @@ GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
 SRCREV = "7ea472feb6dffc96104ca3e2eab637af62095a3b"
+
 S = "${WORKDIR}/git"
 
 BACKEND = \
