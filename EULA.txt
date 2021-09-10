@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v27 July 2021
+LA_OPT_NXP_Software_License v29 August 2021
 
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
@@ -446,6 +446,10 @@ Party Software or specific components of the NXP proprietary software, the
 following terms apply to the extent they deviate from the terms in the
 Agreement:
 
+Airbiquity Inc.: The Airbiquity software may only be used in object code and
+Licensee may not sublicense the Airbiquity software to any third party.
+Licensee’s license to use the Airbiquity software expires on June 30, 2023.
+
 Amazon: Use of the Amazon software constitutes your acceptance of the terms of
 the Amazon Program Materials License Agreement (including the AVS Component
 Schedule, if applicable), located at
@@ -471,6 +475,10 @@ assert claims in small claims court if your claims qualify.
 
 Amphion Semiconductor Ltd.: Distribution of Amphion software must be a part of,
 or embedded within, Authorized Systems that include an Amphion Video Decoder.
+
+Apple MFi Software Development Kit: Use of Apple MFi Software and associated
+documentation is restricted to current Apple MFi licensees in accordance with
+the terms of their own valid and in-effect license from Apple.
 
 Aquantia Corp.: You may use Aquantia's API binaries solely to flash the API
 software to an NXP Product which mates with an Aquantia device.
