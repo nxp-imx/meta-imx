@@ -1,5 +1,5 @@
 require recipes-bsp/u-boot/u-boot-tools.inc
-require recipes-bsp/u-boot/u-boot-imx-common.inc
+require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
 
 PROVIDES_append_class-target = " ${MLPREFIX}u-boot-tools"
 PROVIDES_append_class-native = " u-boot-tools-native"
