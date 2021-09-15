@@ -20,7 +20,7 @@ SRCBRANCH = "imx-1.18.x"
 SRC_URI = " \
     ${GST1.0_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "2f20fd10eaf8629b3e8c134424c38412c4d3bd86"
+SRCREV = "a55998c70940bd183d25d29e1b82fd3bc9f43df3"
 
 S = "${WORKDIR}/git"
 
