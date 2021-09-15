@@ -32,5 +32,6 @@ IMAGE_INSTALL += " \
     packagegroup-imx-security \
     curl \
     ${CLINFO} \
+    docker \
 "
 export IMAGE_BASENAME = "imx-image-core"
