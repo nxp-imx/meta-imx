@@ -6,12 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7e17cca1ef4230861fb7868e96c387e"
 DEPENDS = "python3-numpy-native python3-pip-native python3-pybind11-native python3-wheel-native unzip-native \
     python3 tensorflow-protobuf jpeg zlib"
 
-
-TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
-SRCBRANCH = "imx-v2.6.0"
-
-SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH}"
-SRCREV = "9ede4ced23715d3b75508470b4531a6bab3cdf52"
+require tensorflow-lite-${PV}.inc
+SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf"
 
 SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz;name=model-mobv1"
 SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
@@ -28,7 +24,7 @@ PACKAGECONFIG_OPENVX_mx8ulp = ""
 
 PACKAGECONFIG ?= "${PACKAGECONFIG_OPENVX}"
 
-PACKAGECONFIG[openvx] = "-DTFLITE_ENABLE_VX=on -DTIM_VX_INSTALL=${STAGING_DIR_HOST}/usr,-DTFLITE_ENABLE_VX=off,tim-vx,libnn-imx nn-imx"
+PACKAGECONFIG[openvx] = ",,,libnn-imx nn-imx"
 
 EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR}"
 EXTRA_OECMAKE += " \
@@ -39,6 +35,7 @@ EXTRA_OECMAKE += " \
     -DTFLITE_ENABLE_RUY=on \
     -DTFLITE_ENABLE_XNNPACK=on \
     -DTFLITE_PYTHON_WRAPPER_BUILD_CMAKE2=on \
+    -DTFLITE_ENABLE_EXTERNAL_DELEGATE=on \
     ${S}/tensorflow/lite/ \
 "
 
