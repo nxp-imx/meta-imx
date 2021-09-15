@@ -16,13 +16,12 @@ SRCBRANCH = "imx-1.18.x"
 SRC_URI = " \
     ${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "0ca764b5354aaa770f46ab22e66472ebfd8e49d4"
+SRCREV = "5624d3db79008a23628a4cf5f0af284d8b0d8eff"
 
 S = "${WORKDIR}/git"
 
 LICENSE = "GPLv2+ & LGPLv2+ & LGPLv2.1+"
-LIC_FILES_CHKSUM = "file://COPYING;md5=73a5855a8119deb017f5f13cf327095d \
-                    file://COPYING.LIB;md5=21682e4e8fea52413fd26c60acb907e5 "
+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS += "gstreamer1.0-plugins-base"
 
