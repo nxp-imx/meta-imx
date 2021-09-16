@@ -492,6 +492,8 @@ Description and comments:    Data Plane Development Kit
 Release Location:            https://source.codeaurora.org/external/qoriq/qoriq-components/dpdk -b lf-5.10.52-2.1.0
 Origin:                      NXP (BSD-3-Clause)
                              DPDK - Intel Corporation (BSD-3-Clause) - https://github.com/DPDK/dpdk
+                             KNI Linux Device driver - Intel Corporation (GPL-2.0) Separate component of DPDK
+                             pmdinfogen - Neil Horman (GPL-2.0) - Separate tool in DPDK 
 
 
 --------------------------------------------
@@ -1341,7 +1343,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensor Interface Module for OpenVX
-Release Location:            https://source.codeaurora.org/external/imx/tim-vx-imx -b lf-5.10.52-2.1.0
+Release Location:            https://github.com/nxp/tim-vx-imx -b lf-5.10.52-2.1.0
 Origin:                      Vivante Corporation (MIT)
                              The Khronos Group Inc. (Apache-2.0) - https://www.khronos.org/
                              The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
