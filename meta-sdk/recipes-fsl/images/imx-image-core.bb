@@ -24,6 +24,9 @@ CLINFO ?= ""
 CLINFO_imxgpu = "clinfo"
 CLINFO_mx8mm = ""
 
+DOCKER ?= ""
+DOCKER_mx8 = "docker"
+
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
     imx-test \
@@ -32,6 +35,6 @@ IMAGE_INSTALL += " \
     packagegroup-imx-security \
     curl \
     ${CLINFO} \
-    docker \
+    ${DOCKER} \
 "
 export IMAGE_BASENAME = "imx-image-core"
