@@ -1328,7 +1328,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensor Interface Module for OpenVX
-Release Location:            https://source.codeaurora.org/external/imx/tim-vx-imx -b rel_imx_5.10.X-2.2.0
+Release Location:            https://github.com/nxp/tim-vx-imx -b rel_imx_5.10.X-2.2.0
 Origin:                      Vivante Corporation (MIT)
                              The Khronos Group Inc. (Apache-2.0) - https://www.khronos.org/
                              The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
