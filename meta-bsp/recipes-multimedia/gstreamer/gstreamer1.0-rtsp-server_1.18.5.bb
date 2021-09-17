@@ -8,10 +8,8 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base"
 
 PNREAL = "gst-rtsp-server"
 
-SRC_URI = "https://gstreamer.freedesktop.org/src/${PNREAL}/${PNREAL}-${PV}.tar.xz \
-           "
+SRC_URI = "https://gstreamer.freedesktop.org/src/${PNREAL}/${PNREAL}-${PV}.tar.xz"
 
-SRC_URI[md5sum] = "7f9cc2f69d0cf401fb14fe73624a28fe"
 SRC_URI[sha256sum] = "04d63bf48816c6f41c73f6de0f912a7cef0aab39c44162a7bcece1923dfc9d1f"
 
 S = "${WORKDIR}/${PNREAL}-${PV}"
@@ -19,6 +17,7 @@ S = "${WORKDIR}/${PNREAL}-${PV}"
 inherit meson pkgconfig upstream-version-is-even gobject-introspection
 
 EXTRA_OEMESON += " \
+    -Ddoc=disabled \
     -Dexamples=disabled \
     -Dtests=disabled \
 "
@@ -28,3 +27,5 @@ GIR_MESON_DISABLE_FLAG = "disabled"
 
 # Starting with 1.8.0 gst-rtsp-server includes dependency-less plugins as well
 require recipes-multimedia/gstreamer/gstreamer1.0-plugins-packaging.inc
+
+CVE_PRODUCT += "gst-rtsp-server"
