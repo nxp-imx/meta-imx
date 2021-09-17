@@ -4,3 +4,5 @@
 
 require u-boot-imx_${PV}.bb
 require recipes-bsp/u-boot/u-boot-mfgtool.inc
+
+UBOOT_TAGGED_BINARY = "u-boot-mfgtool-tagged.${UBOOT_SUFFIX}"
