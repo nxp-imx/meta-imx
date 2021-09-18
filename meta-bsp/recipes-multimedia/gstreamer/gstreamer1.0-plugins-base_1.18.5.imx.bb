@@ -109,6 +109,8 @@ CVE_PRODUCT += "gst-plugins-base"
 
 DEFAULT_PREFERENCE = "-1"
 
+DEPENDS_append_imxgpu2d = " virtual/libg2d"
+
 SRC_URI_remove = " \
     https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${PV}.tar.xz \
     file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch \
@@ -125,7 +127,7 @@ inherit use-imx-headers
 PACKAGECONFIG_REMOVE ?= "jpeg"
 PACKAGECONFIG_remove = "${PACKAGECONFIG_REMOVE}"
 PACKAGECONFIG_GL += "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'viv-fb', '', d)}"
-PACKAGECONFIG[viv-fb] = ",,virtual/libgles2 virtual/libg2d"
+PACKAGECONFIG[viv-fb] = ",,virtual/libgles2"
 OPENGL_WINSYS_append = "${@bb.utils.contains('PACKAGECONFIG', 'viv-fb', ' viv-fb', '', d)}"
 EXTRA_OEMESON += "-Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}""
 
