@@ -89,6 +89,10 @@ FILES_${PN}-equalizer += "${datadir}/gstreamer-1.0/presets/*.prs"
 
 DEFAULT_PREFERENCE = "-1"
 
+# fb implementation of v4l2 uses libdrm
+DEPENDS_V4L2 = "${@bb.utils.contains_any('DISTRO_FEATURES', 'wayland x11', '', 'libdrm', d)}"
+DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'v4l2', '${DEPENDS_V4L2}', '', d)}"
+
 SRC_URI_remove = " \
     https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz \
     file://0002-rtpjitterbuffer-Fix-parsing-of-the-mediaclk-direct-f.patch \
