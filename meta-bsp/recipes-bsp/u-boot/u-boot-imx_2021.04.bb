@@ -39,7 +39,7 @@ deploy_tag() {
     # Append a tag to the boot image used in the SD card image
     cp ${UBOOT_BINARY} u-boot-tagged.${UBOOT_SUFFIX}
     ln -sf u-boot-tagged.${UBOOT_SUFFIX} ${UBOOT_BINARY}
-    stat -cUUUBURNXXOEUZX7+A-XY5601QQWWZ%sEND ${UBOOT_BINARY} >> ${UBOOT_BINARY}
+    stat -L -cUUUBURNXXOEUZX7+A-XY5601QQWWZ%sEND ${UBOOT_BINARY} >> ${UBOOT_BINARY}
 }
 
 do_deploy_append_mx6() {
