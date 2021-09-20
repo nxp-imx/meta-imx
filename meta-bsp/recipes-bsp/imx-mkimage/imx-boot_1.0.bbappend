@@ -35,7 +35,7 @@ do_compile_prepend() {
         cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_image.bin
         ;;
     mx8ulp)
-        cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}       ${BOOT_STAGING}/m33_image.bin
+        cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m33_image.bin
         ;;
     esac
 }
@@ -70,8 +70,8 @@ do_deploy_append() {
 
     # Append a tag to the boot image used in the SD card image
     cp ${DEPLOYDIR}/${BOOT_NAME}                             ${DEPLOYDIR}/${BOOT_NAME}-tagged
-    ln -sf ${BOOT_NAME}-tagged                               ${DEPLOYDIR}/${BOOT_NAME}
-    stat -L -cUUUBURNXXOEUZX7+A-XY5601QQWWZ%sEND ${DEPLOYDIR}/${BOOT_NAME} \
+    mv ${BOOT_NAME}-tagged                                   ${DEPLOYDIR}/${BOOT_NAME}
+    stat -cUUUBURNXXOEUZX7+A-XY5601QQWWZ%sEND ${DEPLOYDIR}/${BOOT_NAME} \
                                                           >> ${DEPLOYDIR}/${BOOT_NAME}
 }
 
