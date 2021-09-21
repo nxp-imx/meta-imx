@@ -35,21 +35,6 @@ do_deploy_append_mx8m() {
     fi
 }
 
-deploy_tag() {
-    # Append a tag to the boot image used in the SD card image
-    cp ${UBOOT_BINARY} ${UBOOT_BINARY}-tagged
-    mv ${UBOOT_BINARY}-tagged ${UBOOT_BINARY}
-    stat -cUUUBURNXXOEUZX7+A-XY5601QQWWZ%sEND ${UBOOT_BINARY} >> ${UBOOT_BINARY}
-}
-
-do_deploy_append_mx6() {
-    deploy_tag
-}
-
-do_deploy_append_mx7() {
-    deploy_tag
-}
-
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
 
