@@ -3,7 +3,7 @@
 # recipe. The second section customizes the recipe for i.MX.
 
 ########### OE-core copy ##################
-# Upstream hash: 633739bc912cf84c78f5ae0f7fbcb41663a05c7f
+# Upstream hash: bb6ddc3691ab04162ec5fd69a2d5e7876713fd15
 
 SUMMARY = "GStreamer 1.0 multimedia framework"
 DESCRIPTION = "GStreamer is a multimedia framework for encoding and decoding video and sound. \
@@ -15,7 +15,7 @@ LICENSE = "LGPLv2+"
 
 DEPENDS = "glib-2.0 glib-2.0-native libxml2 bison-native flex-native"
 
-inherit meson pkgconfig gettext upstream-version-is-even gobject-introspection
+inherit meson pkgconfig gettext upstream-version-is-even gobject-introspection ptest-gnome
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6762ed442b3822387a51c92d928ead0d \
                     file://gst/gst.h;beginline=1;endline=21;md5=e059138481205ee2c6fc1c079c016d0d"
@@ -23,10 +23,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6762ed442b3822387a51c92d928ead0d \
 S = "${WORKDIR}/gstreamer-${PV}"
 
 SRC_URI = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.xz \
+           file://run-ptest \
            file://0001-gst-gstpluginloader.c-when-env-var-is-set-do-not-fal.patch \
            file://0002-Remove-unused-valgrind-detection.patch \
-           file://0003-meson-Add-option-for-installed-tests.patch \
-           file://0001-tests-seek-Don-t-use-too-strict-timeout-for-validati.patch \
+           file://0003-tests-seek-Don-t-use-too-strict-timeout-for-validati.patch \
+           file://0004-tests-respect-the-idententaion-used-in-meson.patch \
+           file://0005-tests-add-support-for-install-the-tests.patch \
+           file://0006-tests-use-a-dictionaries-for-environment.patch \
+           file://0007-tests-install-the-environment-for-installed_tests.patch \
            "
 SRC_URI[sha256sum] = "9aeec99b38e310817012aa2d1d76573b787af47f8a725a65b833880a094dfbc5"
 
@@ -75,7 +79,7 @@ FILES:${PN}-dbg += "${datadir}/gdb ${datadir}/gstreamer-1.0/gdb"
 
 CVE_PRODUCT = "gstreamer"
 
-require recipes-multimedia/gstreamer/gstreamer1.0-ptest.inc
+PTEST_BUILD_HOST_FILES = ""
 
 ########### End of OE-core copy ###########
 

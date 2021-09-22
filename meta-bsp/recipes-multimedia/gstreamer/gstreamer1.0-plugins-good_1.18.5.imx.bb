@@ -3,7 +3,7 @@
 # recipe. The second section customizes the recipe for i.MX.
 
 ########### OE-core copy ##################
-# Upstream hash: 633739bc912cf84c78f5ae0f7fbcb41663a05c7f
+# Upstream hash: bb6ddc3691ab04162ec5fd69a2d5e7876713fd15
 
 require recipes-multimedia/gstreamer/gstreamer1.0-plugins-common.inc
 
@@ -14,6 +14,7 @@ BUGTRACKER = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-good/-/issues
 SRC_URI = "https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz \
            file://0001-qt-include-ext-qt-gstqtgl.h-instead-of-gst-gl-gstglf.patch \
            file://0002-rtpjitterbuffer-Fix-parsing-of-the-mediaclk-direct-f.patch \
+           file://0003-Remove-volatile-from-static-vars-to-fix-build-with-g.patch \
            "
 
 SRC_URI[sha256sum] = "b6e50e3a9bbcd56ee6ec71c33aa8332cc9c926b0c1fae995aac8b3040ebe39b0"
@@ -96,6 +97,7 @@ DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'v4l2', '${DEPENDS_V4L2}', '',
 SRC_URI:remove = " \
     https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz \
     file://0002-rtpjitterbuffer-Fix-parsing-of-the-mediaclk-direct-f.patch \
+    file://0003-Remove-volatile-from-static-vars-to-fix-build-with-g.patch \
 "
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "imx-1.18.x"
