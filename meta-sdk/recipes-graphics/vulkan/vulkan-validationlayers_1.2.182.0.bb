@@ -7,10 +7,10 @@ BUGTRACKER = "https://github.com/KhronosGroup/Vulkan-ValidationLayers"
 SECTION = "libs"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7dbefed23242760aa3475ee42801c5ac"
-SRC_URI = "git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;branch=sdk-1.2.170"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8df9e8826734226d08cb412babfa599c"
+SRC_URI = "git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;branch=sdk-1.2.182"
 
-SRCREV = "4fdcd0eebfed3505732720fc6fd98293e847d697"
+SRCREV = "91fcffa8eca1a9573c8d736a54a028035ed4e06c"
 
 S = "${WORKDIR}/git"
 
@@ -25,6 +25,7 @@ EXTRA_OECMAKE = " \
     -DGLSLANG_INSTALL_DIR=${STAGING_DIR_HOST}/usr \
     -DSPIRV_HEADERS_INSTALL_DIR=${STAGING_DIR_HOST}/usr \
     -DSPIRV_TOOLS_INSTALL_DIR=${STAGING_DIR_HOST}/usr \
+    -DUSE_ROBIN_HOOD_HASHING=OFF \
 "
 
 # must choose x11 or wayland or both

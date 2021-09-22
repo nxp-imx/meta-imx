@@ -16,16 +16,7 @@ Index: git/layers/CMakeLists.txt
 ===================================================================
 --- git.orig/layers/CMakeLists.txt
 +++ git/layers/CMakeLists.txt
-@@ -93,7 +93,7 @@ if(BUILD_LAYERS)
-     elseif(UNIX) # UNIX includes APPLE
-         foreach(TARGET_NAME ${TARGET_NAMES})
-             install(FILES ${CMAKE_CURRENT_BINARY_DIR}/staging-json/${TARGET_NAME}.json
--                    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/vulkan/explicit_layer.d)
-+                    DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/vulkan/explicit_layer.d)
-         endforeach()
-     endif()
- endif()
-@@ -270,7 +270,7 @@ if(BUILD_LAYERS)
+@@ -337,7 +337,7 @@ if(BUILD_LAYERS)
                  -DVK_VERSION=1.2.${vk_header_version})
              # If this json file is not a metalayer, get the needed properties from that target
              if(TARGET ${TARGET_NAME})
@@ -34,3 +25,12 @@ Index: git/layers/CMakeLists.txt
              endif()
              add_custom_target(${TARGET_NAME}-staging-json ALL
                                COMMAND ${CMAKE_COMMAND} ${INSTALL_DEFINES} -P "${CMAKE_CURRENT_BINARY_DIR}/generator.cmake")
+@@ -351,7 +351,7 @@ if(BUILD_LAYERS)
+                     DESTINATION ${CMAKE_INSTALL_LIBDIR})
+         elseif(UNIX)
+             install(FILES ${CMAKE_CURRENT_BINARY_DIR}/staging-json/${TARGET_NAME}.json
+-                    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/vulkan/explicit_layer.d)
++                    DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/vulkan/explicit_layer.d)
+         endif()
+     endforeach()
+ endif()
