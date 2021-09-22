@@ -40,7 +40,7 @@ PACKAGECONFIG_VSI_NPU_mx8mm = ""
 PACKAGECONFIG_VSI_NPU_mx8mnul = ""
 PACKAGECONFIG_VSI_NPU_mx8ulp = ""
 
-PACKAGECONFIG ?= "openmp test reports sharedlib armnn eigenblas acl acl-2102 nnapi ${PACKAGECONFIG_VSI_NPU}"
+PACKAGECONFIG ?= "openmp reports sharedlib armnn eigenblas acl acl-2102 nnapi ${PACKAGECONFIG_VSI_NPU}"
 
 PACKAGECONFIG[nsync] = "-Donnxruntime_USE_NSYNC=ON, -Donnxruntime_USE_NSYNC=OFF"
 PACKAGECONFIG[prebuilt] = "-Donnxruntime_USE_PREBUILT_PB=ON, -Donnxruntime_USE_PREBUILT_PB=OFF"
@@ -75,8 +75,6 @@ PACKAGECONFIG[x86] = "-Donnxruntime_BUILD_x86=ON, -Donnxruntime_BUILD_x86=OFF"
 PACKAGECONFIG[fullprotobuf] = "-Donnxruntime_USE_FULL_PROTOBUF=ON, -Donnxruntime_USE_FULL_PROTOBUF=OFF"
 PACKAGECONFIG[ops] = "-Donnxruntime_DISABLE_CONTRIB_OPS=ON, -Donnxruntime_DISABLE_CONTRIB_OPS=OFF"
 PACKAGECONFIG[staticruntime] = "-Donnxruntime_MSVC_STATIC_RUNTIME=ON, -Donnxruntime_MSVC_STATIC_RUNTIME=OFF"
-PACKAGECONFIG[test] = "-Donnxruntime_BUILD_UNIT_TESTS=ON, -Donnxruntime_BUILD_UNIT_TESTS=OFF"
-PACKAGECONFIG[benchmark] = "-Donnxruntime_BUILD_BENCHMARKS=ON, -Donnxruntime_BUILD_BENCHMARKS=OFF"
 PACKAGECONFIG[runtests] = "-Donnxruntime_RUN_ONNX_TESTS=ON, -Donnxruntime_RUN_ONNX_TESTS=OFF"
 PACKAGECONFIG[reports] = "-Donnxruntime_GENERATE_TEST_REPORTS=ON, -Donnxruntime_GENERATE_TEST_REPORTS=OFF"
 PACKAGECONFIG[devmode] = "-Donnxruntime_DEV_MODE=ON, -Donnxruntime_DEV_MODE=OFF"
@@ -97,3 +95,15 @@ PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -Donnxruntime_OVXLIB_INCL
 
 # libonnxruntime_providers_shared.so is being packaged into -dev which is intended
 INSANE_SKIP_${PN}-dev += "dev-elf"
+
+# a separate tests package for the test binaries not appearing in the main package
+PACKAGE_BEFORE_PN = "${PN}-tests"
+FILES_${PN}-tests = "${bindir}/${BP}/tests/*"
+
+# libcustom_op_library.so is in bindir, which is intended;
+# onnxruntime_shared_lib_test requires the shlib to be in the same directory as testdata to run properly
+INSANE_SKIP_${PN}-tests += "libdir"
+INSANE_SKIP_${PN}-dbg += "libdir"
+
+RDEPENDS_${PN}-tests += "arm-compute-library"
+
