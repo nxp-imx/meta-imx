@@ -126,7 +126,7 @@ inherit use-imx-headers
 
 PACKAGECONFIG_REMOVE ?= "jpeg"
 PACKAGECONFIG_remove = "${PACKAGECONFIG_REMOVE}"
-PACKAGECONFIG_GL += "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'viv-fb', '', d)}"
+PACKAGECONFIG_GL_append = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' viv-fb', '', d)}"
 PACKAGECONFIG[viv-fb] = ",,virtual/libgles2"
 OPENGL_WINSYS_append = "${@bb.utils.contains('PACKAGECONFIG', 'viv-fb', ' viv-fb', '', d)}"
 EXTRA_OEMESON += "-Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}""
