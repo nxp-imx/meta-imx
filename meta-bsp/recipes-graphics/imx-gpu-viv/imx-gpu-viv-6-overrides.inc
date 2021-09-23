@@ -1,14 +1,8 @@
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 PACKAGECONFIG ?= "valgrind"
-PACKAGES_remove = " \
-	libwayland-viv-imx libwayland-viv-imx-dev \
-	libgc-wayland-protocol-imx libgc-wayland-protocol-imx-dev \
-	libnn-imx-dev \
-"
 
 INHIBIT_SYSROOT_STRIP = "1"
-INSANE_SKIP_${BPN}_remove = "already-stripped"
 
 IMX_SOC        = "IMX_SOC_NOT_SET"
 IMX_SOC_mx8qm  = "mx8qm"
@@ -28,7 +22,6 @@ do_install_append() {
     done
 }
 
-FILES_libclc-imx += "${includedir}/CL/cl_viv_vx_ext.h"
 
 RDEPENDS_libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 
