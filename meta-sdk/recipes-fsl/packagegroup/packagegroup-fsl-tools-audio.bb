@@ -39,10 +39,17 @@ NXPAFE_INSTALL_mx8mn = "nxp-afe"
 NXPAFE_INSTALL_mx8mp = "nxp-afe"
 NXPAFE_INSTALL_mx8mnul = "nxp-afe"
 
+SOFTOOLS_INSTALL ?= ""
+SOFTOOLS_INSTALL_mx8qm = "sof-tools"
+SOFTOOLS_INSTALL_mx8qxp = "sof-tools"
+SOFTOOLS_INSTALL_mx8mp = "sof-tools"
+SOFTOOLS_INSTALL_mx8ulp = "sof-tools"
+
 RDEPENDS_${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "alsa",  "${ALSA_INSTALL}", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio",  "${PULSEAUDIO_INSTALL}", "", d)} \
     ${ASRC_INSTALL} \
     ${PDM_INSTALL} \
     ${NXPAFE_INSTALL} \
+    ${SOFTOOLS_INSTALL} \
 "
