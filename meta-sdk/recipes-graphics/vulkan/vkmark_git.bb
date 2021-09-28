@@ -11,6 +11,7 @@ SRC_URI = " \
     git://github.com/vkmark/vkmark;protocol=https \
     file://0001-scenes-Use-depth-format-supported-by-i.MX.patch \
     file://0001-src-meson.build-Prepend-sysroot-for-the-includedir.patch \
+    file://0001-tests-catch.hpp-Fix-build-with-glibc-2.34.patch \
 "
 SRCREV = "53abc4f660191051fba91ea30de084f412e7c68e"
 S = "${WORKDIR}/git"
