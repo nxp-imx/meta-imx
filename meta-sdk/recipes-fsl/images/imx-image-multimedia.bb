@@ -39,6 +39,10 @@ V2X_PKGS_mx8dxl = "packagegroup-imx-v2x"
 DOCKER ?= ""
 DOCKER_mx8 = "docker"
 
+G2D_SAMPLES                 = ""
+G2D_SAMPLES_imxgpu2d        = "imx-g2d-samples"
+G2D_SAMPLES_imxgpu2d_imxdpu = ""
+
 CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-core-full-cmdline \
     packagegroup-tools-bluetooth \
@@ -55,4 +59,5 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
     ${V2X_PKGS} \
     ${DOCKER} \
+    ${G2D_SAMPLES} \
 "
