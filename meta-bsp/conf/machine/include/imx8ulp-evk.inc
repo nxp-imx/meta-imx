@@ -1,7 +1,7 @@
 MACHINEOVERRIDES =. "mx8:mx8ulp:"
 
 require conf/machine/include/imx-base.inc
-require conf/machine/include/tune-cortexa35.inc
+require conf/machine/include/arm/armv8a/tune-cortexa35.inc
 
 DEFAULTTUNE:mx8ulp ?= "cortexa35-crypto"
 MACHINEOVERRIDES_EXTENDER:mx8ulp = "imxdrm:imxgpu:imxgpu2d:imxgpu3d"
