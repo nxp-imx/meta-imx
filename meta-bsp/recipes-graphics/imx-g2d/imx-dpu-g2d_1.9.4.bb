@@ -14,15 +14,11 @@ SRC_URI[sha256sum] = "42d470373fd72b2e2aa8d8a226e133c61b0a88e4e5bddbfec9509f7d27
 inherit fsl-eula-unpack
 
 do_install () {
-    install -d ${D}${libdir}
-    install -d ${D}${includedir}
-    cp -r ${S}/g2d/usr/lib/*.so* ${D}${libdir}
-    cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
-    cp -r ${S}/gpu-demos/opt ${D}
+    cp -r -d --no-preserve=ownership ${S}/g2d/* ${D}
+    cp -r -d --no-preserve=ownership ${S}/gpu-demos/opt ${D}
 }
 
-FILES_${PN} = "${libdir}/libg2d* /opt"
-FILES_${PN}-dev = "${libdir}/libg2d${SOLIBSDEV} ${includedir}"
+FILES_${PN} += "/opt"
 INSANE_SKIP_${PN} += "ldflags"
 
 RDEPENDS_${PN} = "libgal-imx libdrm"
