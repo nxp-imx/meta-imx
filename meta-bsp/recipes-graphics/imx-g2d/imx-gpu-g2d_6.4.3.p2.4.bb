@@ -23,15 +23,8 @@ S = "${WORKDIR}/${FSLBIN_NAME}"
 inherit fsl-eula-unpack
 
 do_install () {
-    install -d ${D}${libdir}
-    install -d ${D}${includedir}
-    cp ${S}/g2d/usr/lib/*.so* ${D}${libdir}
-    cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
+    cp -r -d --no-preserve=ownership ${S}/g2d/* ${D}
 }
-
-FILES_${PN} = "${libdir}/libg2d*"
-FILES_${PN}-dev = "${includedir}"
-INSANE_SKIP_${PN} = "ldflags"
 
 RDEPENDS_${PN} = "libgal-imx"
 
