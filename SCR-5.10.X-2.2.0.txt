@@ -525,7 +525,7 @@ Origin:                      Basler AG (proprietary)
 --------------------------------------------
 
 Package:                     apitrace-imx.git
-Version:                     9.0.0
+Version:                     10.0.0
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
@@ -718,6 +718,16 @@ Description and comments:    Graphics 2D
 Release Location:            Mirror
 Origin:                      NXP (proprietary)
 
+--------------------------------------------
+
+Package:                     imx-g2d-samples.git
+Version:                     1.0.0
+Outgoing License:            BSD-3-Clause 
+License File:                COPYING
+Package Category:            Graphics
+Type of Content:             source
+Description and comments:    Graphics G2D sample applications
+Release Location:            https://source.codeaurora.org/external/imx/g2d-samples -b rel_imx_5.10.X-2.2.0
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p2.4-aarch64-fb.bin
