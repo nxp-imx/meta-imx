@@ -3,14 +3,13 @@
 # Copyright 2018 (C) O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "GPU G2D library and apps for i.MX with 2D GPU and no DPU"
+DESCRIPTION = "G2D library using i.MX GPU"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=28241cb895217d7946e40e7227136d02" 
+DEPENDS = "libgal-imx"
+PROVIDES = "virtual/libg2d"
 
-DEPENDS += "libgal-imx"
-PROVIDES += "virtual/libg2d"
-
-FSLBIN_NAME     = "${PN}-${PV}-${TARGET_ARCH}"
+FSLBIN_NAME = "${PN}-${PV}-${TARGET_ARCH}"
 
 SRC_URI = "${FSL_MIRROR}/${FSLBIN_NAME}.bin;name=${TARGET_ARCH};fsl-eula=true"
 SRC_URI[aarch64.md5sum] = "7211057ee93cff0e8a00df4077cee627"
