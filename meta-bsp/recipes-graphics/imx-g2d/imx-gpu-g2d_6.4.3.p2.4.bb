@@ -25,6 +25,8 @@ do_install () {
     cp -r -d --no-preserve=ownership ${S}/g2d/* ${D}
 }
 
+INSANE_SKIP_${PN} += "ldflags"
+
 RDEPENDS_${PN} = "libgal-imx"
 
 COMPATIBLE_MACHINE = "(imxgpu2d)"
