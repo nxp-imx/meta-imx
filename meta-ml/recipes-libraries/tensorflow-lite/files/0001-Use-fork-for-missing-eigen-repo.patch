@@ -1,0 +1,26 @@
+From efa751dddf0a07e5c71a57d283000ae495b62845 Mon Sep 17 00:00:00 2001
+From: "i.MX Yocto Project Build" <imx.build@nxp.com>
+Date: Mon, 4 Oct 2021 10:44:38 -0500
+Subject: [PATCH] Use fork for missing eigen repo
+
+Signed-off-by: i.MX Yocto Project Build <imx.build@nxp.com>
+---
+ tensorflow/lite/tools/cmake/modules/eigen.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tensorflow/lite/tools/cmake/modules/eigen.cmake b/tensorflow/lite/tools/cmake/modules/eigen.cmake
+index 345c7f6063a..a71e9a6b7b2 100644
+--- a/tensorflow/lite/tools/cmake/modules/eigen.cmake
++++ b/tensorflow/lite/tools/cmake/modules/eigen.cmake
+@@ -21,7 +21,7 @@ include(OverridableFetchContent)
+ 
+ OverridableFetchContent_Declare(
+   eigen
+-  GIT_REPOSITORY https://gitlab.com/libeigen/eigen
++  GIT_REPOSITORY https://gitlab.com/cantonios/eigen
+   # TODO: Verify this is the version required by TFLite
+   GIT_TAG f612df273689a19d25b45ca4f8269463207c4fe
+   # It's not currently (cmake 3.17) possible to shallow clone with a GIT TAG
+-- 
+2.25.1
+
