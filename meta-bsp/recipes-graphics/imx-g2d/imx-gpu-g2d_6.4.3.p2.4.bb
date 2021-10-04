@@ -27,6 +27,4 @@ do_install () {
 
 INSANE_SKIP_${PN} += "ldflags"
 
-RDEPENDS_${PN} = "libgal-imx"
-
 COMPATIBLE_MACHINE = "(imxgpu2d)"
