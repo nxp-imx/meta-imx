@@ -113,7 +113,6 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
     glm \
     googletest \
     half \
-    jsoncpp-nlohmann \
     rapidjson \
     stb \
 "
