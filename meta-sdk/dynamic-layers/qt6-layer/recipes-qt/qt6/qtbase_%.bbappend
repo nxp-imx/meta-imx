@@ -11,7 +11,7 @@ IMX_BACKEND = \
                                                              'fb', d), d)}"
 
 SRC_URI:append = " \
-    file://qt5-${IMX_BACKEND}.sh \
+    file://qt6-${IMX_BACKEND}.sh \
 "
 
 PACKAGECONFIG += "examples"
@@ -25,11 +25,11 @@ PARALLEL_MAKEINST = ""
 PARALLEL_MAKE:task-install = "${PARALLEL_MAKEINST}"
 
 do_install:append () {
-    if ls ${D}${libdir}/pkgconfig/Qt5*.pc >/dev/null 2>&1; then
-        sed -i 's,-L${STAGING_DIR_HOST}/usr/lib,,' ${D}${libdir}/pkgconfig/Qt5*.pc
+    if ls ${D}${libdir}/pkgconfig/Qt6*.pc >/dev/null 2>&1; then
+        sed -i 's,-L${STAGING_DIR_HOST}/usr/lib,,' ${D}${libdir}/pkgconfig/Qt6*.pc
     fi
     install -d ${D}${sysconfdir}/profile.d/
-    install -m 0755 ${WORKDIR}/qt5-${IMX_BACKEND}.sh ${D}${sysconfdir}/profile.d/qt5.sh
+    install -m 0755 ${WORKDIR}/qt6-${IMX_BACKEND}.sh ${D}${sysconfdir}/profile.d/qt6.sh
 }
 
 FILES:${PN} += "${sysconfdir}/profile.d/qt5.sh"

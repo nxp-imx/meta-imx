@@ -1,10 +1,10 @@
 # Copyright (C) 2015 Freescale Semiconductor
-# Copyright 2017-2020 NXP
+# Copyright 2017-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require recipes-fsl/images/imx-image-multimedia.bb
 
-inherit populate_sdk_qt5
+inherit populate_sdk_qt6_base
 
 CONFLICT_DISTRO_FEATURES = "directfb"
 
@@ -17,7 +17,8 @@ OPENCV_PKGS:imxgpu = " \
 "
 
 IMAGE_INSTALL += " \
-    packagegroup-qt5-imx \
+    packagegroup-imx-ml \
+    packagegroup-qt6-imx \
     tzdata \
     ${OPENCV_PKGS} \
 "
