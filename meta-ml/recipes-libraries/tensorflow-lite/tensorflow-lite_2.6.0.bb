@@ -1,17 +1,17 @@
 # Copyright 2020-2021 NXP
 DESCRIPTION = "TensorFlow Lite C++ Library"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=5131e32d71a4eb06326ea1772d0de6fd"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c7e17cca1ef4230861fb7868e96c387e"
 
 DEPENDS = "python3-numpy-native python3-pip-native python3-pybind11-native python3-wheel-native unzip-native \
     python3 tensorflow-protobuf jpeg zlib"
 
 
 TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
-SRCBRANCH = "imx-v2.5.0"
+SRCBRANCH = "imx-v2.6.0"
 
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH}"
-SRCREV = "53686a2ad172f3f77c65d66ed0ac69ea13d55fb6"
+SRCREV = "08b22172eacc2100b1634d86490a2b18655df44b"
 
 SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz;name=model-mobv1"
 SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
