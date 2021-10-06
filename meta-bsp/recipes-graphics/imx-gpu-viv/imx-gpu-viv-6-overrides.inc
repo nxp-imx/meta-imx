@@ -22,6 +22,16 @@ do_install_append() {
     done
 }
 
+# dri and libVDK.so are removed, make a workaround so base install is not broken
+do_install_prepend() {
+    mkdir -p ${S}/gpu-core/usr/lib/dri
+    mkdir -p ${S}/gpu-core/usr/lib/fb
+    touch ${S}/gpu-core/usr/lib/fb/libVDK.so.1.2.0
+}
+do_install_append() {
+    rm -rf ${D}${libdir}/dri
+    rm -f ${D}${libdir}/libVDK-fb.so.1.2.0
+}
 
 RDEPENDS_libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 
