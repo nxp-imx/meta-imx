@@ -1,9 +1,9 @@
-SUMMARY = "NNStreamer, Stream Pipeline Paradigm for Nerual Network Applications"
+SUMMARY = "NNStreamer, Stream Pipeline Paradigm for Neural Network Applications"
 DESCRIPTION = "NNStreamer is a GStreamer plugin allowing to construct neural network applications with stream pipeline paradigm."
 SECTION = "AI"
 LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "\
-    file://LICENSE;md5=a6f89e2100d9b6cdffcea4f398e37343 \
+    file://LICENSE;md5=c25e5c1949624d71896127788f1ba590 \
     file://debian/copyright;md5=0462ef8fa89a1f53f2e65e74940519ef \
 "
 
@@ -18,6 +18,7 @@ DEPENDS = "\
 	libpng \
 "
 
+SRCREV = "fcd2a35a2594ad30a7bd0bdc4e14b285c85e0009"
 SRC_URI = "git://github.com/nnstreamer/nnstreamer.git;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
