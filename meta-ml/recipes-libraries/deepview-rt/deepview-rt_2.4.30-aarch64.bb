@@ -18,12 +18,14 @@ RDEPENDS_MX8       = ""
 RDEPENDS_MX8_mx8   = "nn-imx"
 RDEPENDS_MX8_mx8mm = ""
 RDEPENDS_MX8_mx8mnul = ""
+RDEPENDS_MX8_mx8mpul = ""
 RDEPENDS_MX8_mx8ulp = ""
 RDEPENDS_${PN} += " ${RDEPENDS_MX8} "
 
 IS_RM_OVXRTM  = ""
 IS_RM_OVXRTM_mx8mm =  "1"
 IS_RM_OVXRTM_mx8mnul =  "1"
+IS_RM_OVXRTM_mx8mpul =  "1"
 IS_RM_OVXRTM_mx8ulp =  "1"
 
 do_install () {
