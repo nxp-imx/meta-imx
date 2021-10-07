@@ -7,14 +7,17 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 inherit packagegroup
 
-ML_NNSTREAMER_PKGS = ""
-ML_NNSTREAMER_PKGS_mx8mp = " \
-    nnstreamer \
-    nnstreamer-tensorflow-lite \
-    nnstreamer-python3 \
-    nnstreamer-protobuf \
+ML_NNSTREAMER_PKGS_LIST = " \
     nnshark \
+    nnstreamer \
+    nnstreamer-protobuf \
+    nnstreamer-python3 \
+    nnstreamer-tensorflow-lite \
 "
+
+ML_NNSTREAMER_PKGS = ""
+ML_NNSTREAMER_PKGS_imxgpu_mx8 = "${ML_NNSTREAMER_PKGS_LIST}"
+
 
 ML_PKGS            = ""
 ML_PKGS_imxgpu_mx8 = " \
