@@ -8,7 +8,7 @@ DEPENDS = "virtual/libg2d"
 GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxpmicro/gtec-g2d-samples.git;protocol=https"
 SRCBRANCH ?= "bugfix/mgs-6405-format-g2d-test"
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
-SRCREV = "564190c1f18a682092a13ff106a30627fd199b73"
+SRCREV = "fea298e68d26aaeb25cbb1c5c0cefc68db59547b"
 S = "${WORKDIR}/git"
 
 do_configure[noexec] = "1"
