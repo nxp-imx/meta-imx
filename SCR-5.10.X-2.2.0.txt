@@ -16,7 +16,7 @@ BSP Packages
 --------------------------------------------
 
 Package:                     linux-imx.git
-Version:                     5.10
+Version:                     5.15
 Outgoing License:            GPL-2.0 WITH Linux-syscall-note 
 License File:                COPYING
 Package Category:            BSP
@@ -80,7 +80,7 @@ Release Location:            Mirror
 Origin:                      NXP (proprietary)
 
                            In addition, these components contain code from the companies listed below.
-                             DDR:   origin: Synopsys (proprietary)
+                             DDR:   origin: Synopsys DDR (proprietary)
                              EASRC: origin: NXP (proprietary)
                              EPDC:  origin: E Ink Corporation (proprietary)
                              HDMI:  origin: Cadence Design Systems, Inc. (proprietary)
@@ -109,6 +109,8 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    S400 firmware
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+
 --------------------------------------------
 
 Package:                     firmware-upower-0.1.1.bin
@@ -119,6 +121,8 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    uPower firmware
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+
 --------------------------------------------
 
 Package:                     imx-mkimage.git
@@ -399,6 +403,9 @@ Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M33 core
 Release Location:            Mirror
 Origin:                      NXP (proprietary)
+                             ARM LIMITED (BSD-3-Clause)
+                             Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
+                             Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
 
 --------------------------------------------
 
@@ -483,12 +490,18 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    Data Plane Development Kit
 Release Location:            https://source.codeaurora.org/external/qoriq/qoriq-components/dpdk -b rel_imx_5.10.X-2.2.0
+Origin:                      NXP (BSD-3-Clause)
+                             DPDK - Intel Corporation (BSD-3-Clause) - https://github.com/DPDK/dpdk
+                             KNI Linux Device driver - Intel Corporation (GPL-2.0) Separate component of DPDK
+                             pmdinfogen - Neil Horman (GPL-2.0) - Separate tool in DPDK 
+
+
 --------------------------------------------
 Graphics Packages
 --------------------------------------------
 
 Package:                     isp-vvcam.git
-Version:                     4.2.2.15.1
+Version:                     4.2.2.15.2
 Outgoing License:            GPL-2.0 
 License File:                vvcam/LICENSE
 Package Category:            Graphics
@@ -525,7 +538,7 @@ Origin:                      Basler AG (proprietary)
 --------------------------------------------
 
 Package:                     apitrace-imx.git
-Version:                     10.0.0
+Version:                     9.0.0
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
@@ -1005,8 +1018,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-vc-4.6.3.bin
-Version:                     4.6.3
+Package:                     imx-vpu-hantro-vc-2.0.11.bin
+Version:                     2.0.11
 Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Multimedia
@@ -1065,6 +1078,8 @@ Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP Audio-Front-end is the software wrapper for ALSA
 Release Location:            https://source.codeaurora.org/external/imx/nxp-afe -b rel_imx_5.10.X-2.2.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 M4 Processor Packages
 --------------------------------------------
@@ -1319,7 +1334,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.6.0
+Version:                     2.5.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1342,6 +1357,7 @@ Release Location:            https://github.com/nxp/tim-vx-imx -b rel_imx_5.10.X
 Origin:                      Vivante Corporation (MIT)
                              The Khronos Group Inc. (Apache-2.0) - https://www.khronos.org/
                              The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
+
 --------------------------------------------
 Tools Packages
 --------------------------------------------
