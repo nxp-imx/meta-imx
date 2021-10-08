@@ -114,6 +114,7 @@ SRC_URI:remove = " \
     file://0001-ENGR00312515-get-caps-from-src-pad-when-query-caps.patch \
     file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch \
     file://0004-glimagesink-Downrank-to-marginal.patch \
+    file://4ef5c91697a141fea7317aff7f0f28e5a861db99.patch \
 "
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "imx-1.18.x"
