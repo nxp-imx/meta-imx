@@ -1,4 +1,4 @@
-From 193b1933eb12fbf25bc9c2983785fbf6d32459e4 Mon Sep 17 00:00:00 2001
+From be85cd1fffbf626ef993ed6fa6455b5734743f4f Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <and96x@gmail.com>
 Date: Thu, 26 Sep 2019 13:13:48 +0300
 Subject: [PATCH 5/6] Add window functionalities for Wayland replay support
@@ -38,7 +38,7 @@ index 8338c7e..ed99642 100644
  
      struct
 diff --git a/renderdoc/api/replay/renderdoc_replay.h b/renderdoc/api/replay/renderdoc_replay.h
-index 87e9350..d881ed3 100644
+index 9178151..c2cb495 100644
 --- a/renderdoc/api/replay/renderdoc_replay.h
 +++ b/renderdoc/api/replay/renderdoc_replay.h
 @@ -145,13 +145,16 @@ DOCUMENT(R"(Create a :class:`WindowingData` for an Wayland ``wl_surface`` handle
@@ -84,7 +84,7 @@ index 35d52fe..7815b54 100644
      return;
    }
 diff --git a/renderdoc/driver/vulkan/vk_replay.h b/renderdoc/driver/vulkan/vk_replay.h
-index 7a935f0..abd6188 100644
+index 337d940..3edd884 100644
 --- a/renderdoc/driver/vulkan/vk_replay.h
 +++ b/renderdoc/driver/vulkan/vk_replay.h
 @@ -87,6 +87,8 @@
@@ -97,10 +97,10 @@ index 7a935f0..abd6188 100644
  
  #else
 diff --git a/renderdoccmd/CMakeLists.txt b/renderdoccmd/CMakeLists.txt
-index 0428807..bfc4d2a 100644
+index 5872186..7e3a44f 100644
 --- a/renderdoccmd/CMakeLists.txt
 +++ b/renderdoccmd/CMakeLists.txt
-@@ -48,6 +48,7 @@ elseif(UNIX)
+@@ -52,6 +52,7 @@ elseif(UNIX)
  
      if(ENABLE_WAYLAND)
          list(APPEND libraries PRIVATE -lwayland-client)

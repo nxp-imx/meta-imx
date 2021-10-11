@@ -1,4 +1,4 @@
-From ee6517b4bf3ac79aaf448b5753ec9d428621e02d Mon Sep 17 00:00:00 2001
+From 3799ccc2f89e9e94e7679e64535b2a9152b693e2 Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
 Date: Wed, 15 Jul 2020 14:41:16 +0300
 Subject: [PATCH 3/6] Use specific integer format to generate a dummy
@@ -24,10 +24,10 @@ Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
  2 files changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/renderdoc/driver/vulkan/vk_debug.cpp b/renderdoc/driver/vulkan/vk_debug.cpp
-index 045c321..8708b32 100644
+index c099e25..73aadc9 100644
 --- a/renderdoc/driver/vulkan/vk_debug.cpp
 +++ b/renderdoc/driver/vulkan/vk_debug.cpp
-@@ -425,7 +425,8 @@ VulkanDebugManager::VulkanDebugManager(WrappedVulkan *driver)
+@@ -427,7 +427,8 @@ VulkanDebugManager::VulkanDebugManager(WrappedVulkan *driver)
    // few since hopefully we'll find one that will work.
    VkFormat attemptFormats[] = {VK_FORMAT_R8G8B8A8_UINT,     VK_FORMAT_R8_UINT,
                                 VK_FORMAT_S8_UINT,           VK_FORMAT_D32_SFLOAT_S8_UINT,
