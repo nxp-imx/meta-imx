@@ -154,3 +154,12 @@ FILES_${PN}-dev = "\
 "
 
 INSANE_SKIP_${PN} += "dev-so"
+
+#
+# Fixes: 076a78ea [TVM/test] Add models for more architectures
+#
+do_install_append() {
+    bash -c "shopt -s extglob;
+    rm -f ${D}/${bindir}/unittest-nnstreamer/tests/test_models/models/tvm_add_one_!(${HOST_ARCH}).so_;
+    shopt -u extglob;"
+}
