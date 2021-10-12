@@ -1,7 +1,5 @@
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
-SRC_URI += "file://0001-MGS-6394-ccc-Fix-backwards-compatibility-for-framebu.patch"
-
 PACKAGECONFIG ?= "valgrind"
 
 INHIBIT_SYSROOT_STRIP = "1"
