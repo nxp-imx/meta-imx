@@ -1278,7 +1278,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
-Version:                     1.8.1
+Version:                     1.8.2
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
