@@ -31,6 +31,13 @@ inherit meson pkgconfig
 
 PACKAGECONFIG ??= "protobuf python3 tensorflow-lite "
 
+PACKAGECONFIG[armnn] = "\
+	-Darmnn-support=enabled, \
+	-Darmnn-support=disabled, \
+	armnn, \
+	,,\
+"
+
 PACKAGECONFIG[flatbuf] = "\
 	-Dflatbuf-support=enabled, \
 	-Dflatbuf-support=disabled, \
@@ -77,6 +84,7 @@ do_install_append() {
 
 PACKAGES =+ "\
 	${PN}-unittest \
+	${@bb.utils.contains('PACKAGECONFIG', 'armnn','${PN}-armnn', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
@@ -91,6 +99,7 @@ RDEPENDS_${PN} = "\
 "
 
 RDEPENDS_${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
+	${@bb.utils.contains('PACKAGECONFIG', 'armnn','${PN}-armnn', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
@@ -105,6 +114,10 @@ FILES_${PN} += "\
 	${libdir}/gstreamer-1.0/*.so \
 	${libdir}/nnstreamer/decoders/* \
 	${sysconfdir}/nnstreamer.ini \
+"
+
+FILES_${PN}-armnn = "\
+	${libdir}/nnstreamer/filters/libnnstreamer_filter_armnn.so \
 "
 
 FILES_${PN}-dev = "\
