@@ -29,6 +29,7 @@ do_install() {
     cp -r ${S}/tools/sof-tools/logger ${D}/unit_tests/sof/tools/
     cp -r ${S}/tools/sof-tools/ctl ${D}/unit_tests/sof/tools/
     cp -r ${S}/tools/tune  ${D}/unit_tests/sof/tools/
+    cp -r ${S}/tools/ctl ${D}/unit_tests/sof/tools/
 }
 
 FILES_${PN} = "/unit_tests/sof/tools"
