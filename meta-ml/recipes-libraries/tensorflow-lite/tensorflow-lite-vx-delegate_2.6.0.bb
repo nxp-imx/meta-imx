@@ -32,7 +32,7 @@ EXTRA_OECMAKE += " \
 
 CXXFLAGS += "-fPIC"
 
-do_configure_prepend() {
+do_configure:prepend() {
     export HTTP_PROXY=${http_proxy}
     export HTTPS_PROXY=${https_proxy}
     export http_proxy=${http_proxy}
@@ -63,5 +63,5 @@ SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
 COMPATIBLE_MACHINE          = "(^$)"
-COMPATIBLE_MACHINE_imxgpu3d = "(mx8)"
-COMPATIBLE_MACHINE_mx8mm    = "(^$)"
+COMPATIBLE_MACHINE:imxgpu3d = "(mx8)"
+COMPATIBLE_MACHINE:mx8mm    = "(^$)"
