@@ -29,7 +29,7 @@ S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 
-PACKAGECONFIG ??= "protobuf python3 tensorflow-lite "
+PACKAGECONFIG ??= "armnn protobuf python3 tensorflow-lite "
 
 PACKAGECONFIG[armnn] = "\
 	-Darmnn-support=enabled, \
