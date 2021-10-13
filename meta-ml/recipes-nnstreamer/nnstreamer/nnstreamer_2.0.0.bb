@@ -25,19 +25,12 @@ S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 
-PACKAGECONFIG ??= "tensorflow-lite python3 protobuf "
+PACKAGECONFIG ??= "protobuf python3 tensorflow-lite "
 
-PACKAGECONFIG[tensorflow-lite] = "\
-	-Dtflite2-support=enabled -Dtflite2-nnapi-delegate-support=true, \
-	-Dtflite2-support=disabled, \
-	tensorflow-lite flatbuffers, \
-	,,\
-"
-
-PACKAGECONFIG[python3] = "\
-	-Dpython3-support=enabled, \
-	-Dpython3-support=disabled, \
-	python3 python3-numpy-native, \
+PACKAGECONFIG[flatbuf] = "\
+	-Dflatbuf-support=enabled, \
+	-Dflatbuf-support=disabled, \
+	flatbuffers-native flatbuffers, \
 	,,\
 "
 
@@ -55,10 +48,17 @@ PACKAGECONFIG[protobuf] = "\
 	,,\
 "
 
-PACKAGECONFIG[flatbuf] = "\
-	-Dflatbuf-support=enabled, \
-	-Dflatbuf-support=disabled, \
-	flatbuffers-native flatbuffers, \
+PACKAGECONFIG[python3] = "\
+	-Dpython3-support=enabled, \
+	-Dpython3-support=disabled, \
+	python3 python3-numpy-native, \
+	,,\
+"
+
+PACKAGECONFIG[tensorflow-lite] = "\
+	-Dtflite2-support=enabled -Dtflite2-nnapi-delegate-support=true, \
+	-Dtflite2-support=disabled, \
+	tensorflow-lite flatbuffers, \
 	,,\
 "
 
@@ -73,27 +73,27 @@ do_install_append() {
 
 PACKAGES =+ "\
 	${PN}-unittest \
-	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
-	${@bb.utils.contains('PACKAGECONFIG', 'python3','${PN}-python3', '', d)} \
-	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
-	${@bb.utils.contains('PACKAGECONFIG', 'protobuf','${PN}-protobuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'protobuf','${PN}-protobuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'protobuf grpc','${PN}-grpc-protobuf', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'python3','${PN}-python3', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
 "
 
 RDEPENDS_${PN} = "\
 	gstreamer1.0-plugins-base \
 "
 
-RDEPENDS_${PN}-unittest = "nnstreamer gstreamer1.0-plugins-good ssat \
-	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
-	${@bb.utils.contains('PACKAGECONFIG', 'python3','${PN}-python3', '', d)} \
-	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
-	${@bb.utils.contains('PACKAGECONFIG', 'protobuf','${PN}-protobuf', '', d)} \
+RDEPENDS_${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'protobuf','${PN}-protobuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'protobuf grpc','${PN}-grpc-protobuf', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'python3','${PN}-python3', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
 "
 
 FILES_${PN} += "\
@@ -103,54 +103,54 @@ FILES_${PN} += "\
 	${sysconfdir}/nnstreamer.ini \
 "
 
-FILES_${PN}-unittest += "\
-	${bindir}/unittest-nnstreamer/* \
-	${libdir}/libnnstreamer_unittest_util.so \
-	${libdir}/libcppfilter_test.so \
-	${libdir}/nnstreamer/customfilters/* \
-	${libdir}/nnstreamer/unittest/* \
+FILES_${PN}-dev = "\
+	${includedir}/nnstreamer/* \
+	${libdir}/*.a \
+	${libdir}/pkgconfig/*.pc \
 "
 
-FILES_${PN}-tensorflow-lite += "\
-	${libdir}/nnstreamer/filters/libnnstreamer_filter_tensorflow2-lite.so \
-"
-
-FILES_${PN}-python3 += "\
-	${libdir}/nnstreamer/converters/libnnstreamer_converter_python3.so \
-	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_python3.so \
-	${libdir}/nnstreamer/filters/libnnstreamer_filter_python3.so \
-	${libdir}/nnstreamer/extra/nnstreamer_python3.so \
-"
-
-FILES_${PN}-grpc += "\
-	${libdir}/gstreamer-1.0/libnnstreamer-grpc.so \
-"
-
-FILES_${PN}-protobuf += "\
-	${libdir}/nnstreamer/converters/libnnstreamer_converter_protobuf.so \
-	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_protobuf.so \
-	${libdir}/libnnstreamer_protobuf.so \
-"
-
-FILES_${PN}-grpc-protobuf += "\
-	${libdir}/libnnstreamer_grpc_protobuf.so \
-"
-
-FILES_${PN}-flatbuf += "\
+FILES_${PN}-flatbuf = "\
 	${libdir}/nnstreamer/converters/libnnstreamer_converter_flatbuf.so \
 	${libdir}/nnstreamer/converters/libnnstreamer_converter_flexbuf.so \
 	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_flatbuf.so \
 	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_flexbuf.so \
 "
 
-FILES_${PN}-grpc-flatbuf += "\
+FILES_${PN}-grpc = "\
+	${libdir}/gstreamer-1.0/libnnstreamer-grpc.so \
+"
+
+FILES_${PN}-grpc-flatbuf = "\
 	${libdir}/libnnstreamer_grpc_flatbuf.so \
 "
 
-FILES_${PN}-dev = "\
-	${includedir}/nnstreamer/* \
-	${libdir}/*.a \
-	${libdir}/pkgconfig/*.pc \
+FILES_${PN}-grpc-protobuf = "\
+	${libdir}/libnnstreamer_grpc_protobuf.so \
+"
+
+FILES_${PN}-protobuf = "\
+	${libdir}/nnstreamer/converters/libnnstreamer_converter_protobuf.so \
+	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_protobuf.so \
+	${libdir}/libnnstreamer_protobuf.so \
+"
+
+FILES_${PN}-python3 = "\
+	${libdir}/nnstreamer/converters/libnnstreamer_converter_python3.so \
+	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_python3.so \
+	${libdir}/nnstreamer/filters/libnnstreamer_filter_python3.so \
+	${libdir}/nnstreamer/extra/nnstreamer_python3.so \
+"
+
+FILES_${PN}-tensorflow-lite = "\
+	${libdir}/nnstreamer/filters/libnnstreamer_filter_tensorflow2-lite.so \
+"
+
+FILES_${PN}-unittest = "\
+	${bindir}/unittest-nnstreamer/* \
+	${libdir}/libnnstreamer_unittest_util.so \
+	${libdir}/libcppfilter_test.so \
+	${libdir}/nnstreamer/customfilters/* \
+	${libdir}/nnstreamer/unittest/* \
 "
 
 INSANE_SKIP_${PN} += "dev-so"
