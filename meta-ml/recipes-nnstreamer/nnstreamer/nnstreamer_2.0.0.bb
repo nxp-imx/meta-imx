@@ -19,7 +19,10 @@ DEPENDS = "\
 "
 
 SRCREV = "fcd2a35a2594ad30a7bd0bdc4e14b285c85e0009"
-SRC_URI = "git://github.com/nnstreamer/nnstreamer.git;branch=main;protocol=https"
+SRC_URI = "\
+    git://github.com/nnstreamer/nnstreamer.git;branch=main;protocol=https \
+    file://0001-armnn-adaptation-for-vsi-armnn-fork-to-support-npu-b.patch \
+"
 
 S = "${WORKDIR}/git"
 
