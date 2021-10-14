@@ -1,0 +1,28 @@
+From d78a74ccb8ef0bda3b79c45843d7039a259f13df Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Thu, 14 Oct 2021 13:31:07 -0500
+Subject: [PATCH] MGS-6424-2 [#ccc] Fix qtbase break on Wayland
+
+The qtbase build on Wayland is broken. The package sets EGL_API_FB.
+This setting used to have a lower precedence in eglplatform.h and so
+was not a problem. Now that EGL_API_FB is given top precedence, qualify
+it so it is not used if Wayland is also set.
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ driver/sdk/inc/EGL/eglplatform.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Index: imx-gpu-viv-6.4.3.p2.4-aarch64/gpu-core/usr/include/EGL/eglplatform.h
+===================================================================
+--- imx-gpu-viv-6.4.3.p2.4-aarch64.orig/gpu-core/usr/include/EGL/eglplatform.h
++++ imx-gpu-viv-6.4.3.p2.4-aarch64/gpu-core/usr/include/EGL/eglplatform.h
+@@ -48,7 +48,7 @@
+  * implementations.
+  */
+ 
+-#if defined(EGL_NO_PLATFORM_SPECIFIC_TYPES) || defined(EGL_API_FB)
++#if defined(EGL_NO_PLATFORM_SPECIFIC_TYPES) || defined(EGL_API_FB) && !defined(EGL_API_WL) && !defined(WL_EGL_PLATFORM)
+ 
+ typedef void *EGLNativeDisplayType;
+ typedef void *EGLNativePixmapType;
