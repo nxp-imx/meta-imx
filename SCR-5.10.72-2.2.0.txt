@@ -1332,7 +1332,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
-Version:                     1.1.32
+Version:                     1.1.34
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
