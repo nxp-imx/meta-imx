@@ -5,9 +5,9 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074"
 
 ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
-SRCBRANCH = "branches/armnn_21_02"
+SRCBRANCH = "branches/armnn_21_08"
 
-SRCREV = "a0751dfe4e27774d8d0a7e1914d709bec41ce77b"
+SRCREV = "811d3c0dd0dd60ad4b0a1ed8ed7fb98e07c1a70f"
 
 SRCREV_FORMAT = "armnn"
 
@@ -45,13 +45,11 @@ PACKAGECONFIG_VSI_NPU_mx8mnul = ""
 PACKAGECONFIG_VSI_NPU_mx8mpul = ""
 PACKAGECONFIG_VSI_NPU_mx8ulp = ""
 
-PACKAGECONFIG ??= "neon ref caffe tensorflow tensorflow-lite onnx tests pyarmnn delegate ${PACKAGECONFIG_VSI_NPU}"
+PACKAGECONFIG ??= "neon ref tensorflow-lite onnx tests pyarmnn delegate ${PACKAGECONFIG_VSI_NPU}"
 
-PACKAGECONFIG[caffe] = "-DBUILD_CAFFE_PARSER=1 -DCAFFE_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-caffe-protobuf,-DBUILD_CAFFE_PARSER=0,armnn-caffe-protobuf"
 PACKAGECONFIG[neon] = "-DARMCOMPUTENEON=1 -DARMCOMPUTE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libarm_compute.so -DARMCOMPUTE_CORE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libarm_compute_core.so,-DARMCOMPUTENEON=0,arm-compute-library"
 PACKAGECONFIG[onnx] = "-DBUILD_ONNX_PARSER=1 -DONNX_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-onnx-protobuf ,-DBUILD_ONNX_PARSER=0,armnn-onnx-protobuf"
 PACKAGECONFIG[opencl] = "-DARMCOMPUTECL=1,-DARMCOMPUTECL=0,opencl-headers"
-PACKAGECONFIG[tensorflow] = "-DBUILD_TF_PARSER=1 -DTF_GENERATED_SOURCES=${STAGING_DATADIR}/armnn-tensorflow-protobuf,-DBUILD_TF_PARSER=0, armnn-tensorflow-protobuf"
 PACKAGECONFIG[tensorflow-lite] = "-DTF_LITE_SCHEMA_INCLUDE_PATH=${STAGING_DATADIR}/armnn-tensorflow-protobuf-lite -DTF_LITE_GENERATED_PATH=${STAGING_DATADIR}/armnn-tensorflow-protobuf-lite -DBUILD_TF_LITE_PARSER=1 ,-DBUILD_TF_LITE_PARSER=0, flatbuffers armnn-tensorflow-protobuf"
 PACKAGECONFIG[unit-tests] = "-DBUILD_UNIT_TESTS=1,-DBUILD_UNIT_TESTS=0"
 PACKAGECONFIG[tests] = "-DBUILD_TESTS=1,-DBUILD_TESTS=0"
@@ -76,14 +74,12 @@ do_compile_append() {
         # copy required to link against pyarmnn wrappers
         # due to a bug in python/setuptools an explicit path cannot be set 
         # and default libdir must be used
-        cp -Rf ${WORKDIR}/build/libarmnnTfParser.so* ${STAGING_LIBDIR}
         cp -Rf ${WORKDIR}/build/libarmnnTfLiteParser.so* ${STAGING_LIBDIR}
         cp -Rf ${WORKDIR}/build/libarmnnOnnxParser.so* ${STAGING_LIBDIR}
-        cp -Rf ${WORKDIR}/build/libarmnnCaffeParser.so* ${STAGING_LIBDIR}
         cp -Rf ${WORKDIR}/build/libarmnn.so* ${STAGING_LIBDIR}
 
         export SWIG_EXECUTABLE=${STAGING_BINDIR_NATIVE}/swig
-        export ARMNN_INCLUDE=${S}/include
+        export ARMNN_INCLUDE=${S}/include:${S}/profiling/common/include
         export ARMNN_LIB=${WORKDIR}/build
 
         cd ${S}/python/pyarmnn
@@ -113,11 +109,9 @@ do_install_append() {
                 
         # remove x86 suffix cpython for cross-compiled shared libs to link them universally
         mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn.so
-        mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_caffeparser.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_caffeparser.so
         mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_deserializer.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_deserializer.so
         mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_onnxparser.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_onnxparser.so
         mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_tfliteparser.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_tfliteparser.so
-        mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_tfparser.*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_tfparser.so
         mv ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_version*.so ${D}/${PYARMNN_GENERATED_DIR}/_pyarmnn_version.so
         
         # pyarmnn examples for eiq
