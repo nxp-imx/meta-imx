@@ -6,7 +6,7 @@ SRC_URI = " \
     file://xwayland.weston-start \
     file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
 "
-SRCREV = "e73c641e076aa68e8ef69dbd56c7a252117b2c83"
+SRCREV = "78e17706f6e1c79d176318bf44f352ce9f01e415"
 
 EXTRA_OEMESON_remove = "-Dbackend-rdp=false"
 PACKAGECONFIG_append = " rdp"
