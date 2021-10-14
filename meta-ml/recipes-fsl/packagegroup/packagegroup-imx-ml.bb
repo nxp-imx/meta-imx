@@ -34,6 +34,7 @@ ML_PKGS_mx8ulp = " \
     tensorflow-lite \
     onnxruntime \
 "
+ML_PKGS_remove_mx8mm = "tensorflow-lite-vx-delegate"
 
 ML_DEEPVIEW_PKGS            = ""
 ML_DEEPVIEW_PKGS_imxgpu_mx8 = "deepview-rt-examples"
