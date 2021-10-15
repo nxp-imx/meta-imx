@@ -37,7 +37,7 @@ ML_PKGS:mx8ulp = " \
     pytorch \
     torchvision \
 "
-ML_PKGS_remove_mx8mm = "tensorflow-lite-vx-delegate"
+ML_PKGS:remove:mx8mm = "tensorflow-lite-vx-delegate"
 
 ML_DEEPVIEW_PKGS            = ""
 ML_DEEPVIEW_PKGS:imxgpu:mx8 = "deepview-rt-examples"
