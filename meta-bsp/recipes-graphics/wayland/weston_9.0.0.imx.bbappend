@@ -8,6 +8,6 @@ SRC_URI = " \
 "
 SRCREV = "78e17706f6e1c79d176318bf44f352ce9f01e415"
 
-EXTRA_OEMESON_remove = "-Dbackend-rdp=false"
-PACKAGECONFIG_append = " rdp"
+EXTRA_OEMESON:remove = "-Dbackend-rdp=false"
+PACKAGECONFIG:append = " rdp"
 PACKAGECONFIG[rdp] = "-Dbackend-rdp=true,-Dbackend-rdp=false,freerdp"
