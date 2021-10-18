@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 
 DEPENDS = "python3-pycrypto-native python3-pycryptodomex-native optee-os optee-client openssl"
 
-SRCBRANCH = "lf_3.13.y"
+SRCBRANCH = "lf_3.15.y"
 
 OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
@@ -16,7 +16,7 @@ SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
-SRCREV = "4095f5ae3eb94cd2b9d64644a479821e52c16a99"
+SRCREV = "77d61ba482d3fed333aeecd6ed97da7f200f64dd"
 
 inherit python3native
 
