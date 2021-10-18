@@ -1,0 +1,38 @@
+From 5f740b4148b7994a6f5710b2d616d35a3d55daaa Mon Sep 17 00:00:00 2001
+From: Cristinel Panfir <cristinel.panfir@nxp.com>
+Date: Mon, 18 Oct 2021 12:48:20 +0000
+Subject: [PATCH] CMakeLists.txt: Fix TIM_VX library path
+
+Use CMAKE variable to avoid hardcoded lib path.
+
+Multilib env error:
+
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| NOTE: VERBOSE=1 cmake --build /opt/work/multilib/trunk-hk-for-q4/build/tmp/work/cortexa72-cortexa53-crypto-poky-linux/tensorflow-lite-vx-delegate/2.6.0-r0/build --target all --
+| ninja: error: '/opt/work/multilib/trunk-hk-for-q4/build/tmp/work/cortexa72-cortexa53-crypto-poky-linux/tensorflow-lite-vx-delegate/2.6.0-r0/recipe-sysroot/usr/lib/libtim-vx.so', needed by 'libvx_delegate.so', missing and no known rule to make it
+| WARNING: exit code 1 from a shell command.
+| ERROR: Execution of '/opt/work/multilib/trunk-hk-for-q4/build/tmp/work/cortexa72-cortexa53-crypto-poky-linux/tensorflow-lite-vx-delegate/2.6.0-r0/temp/run.do_compile.996893' failed with exit code 1
+ERROR: Task (/opt/work/multilib/trunk-hk-for-q4/sources/meta-imx/meta-ml/recipes-libraries/tensorflow-lite/tensorflow-lite-vx-delegate_2.6.0.bb:do_compile) failed with exit code '1'
+
+Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e7bd962..911bab2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -94,7 +94,7 @@ endif()
+ 
+ message("=== Building with TIM_VX_LIBRIRIES from ${TIM_VX_INSTALL} ===")
+ include_directories(${TIM_VX_INSTALL}/include)
+-list(APPEND VX_DELEGATE_DEPENDENCIES ${TIM_VX_INSTALL}/lib/libtim-vx.so)
++list(APPEND VX_DELEGATE_DEPENDENCIES ${TIM_VX_INSTALL}/${CMAKE_INSTALL_LIBDIR}/libtim-vx.so)
+ 
+ add_library(vx_delegate SHARED ${VX_DELEGATES_SRCS})
+ target_link_libraries(vx_delegate ${VX_DELEGATE_DEPENDENCIES})
+-- 
+2.25.1
+

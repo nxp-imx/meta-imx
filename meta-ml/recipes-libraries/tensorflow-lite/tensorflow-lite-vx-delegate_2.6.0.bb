@@ -15,6 +15,7 @@ SRCREV_vx = "6eb03d3d07e23f783f27d8b04239c88daa223f9f"
 SRCREV_FORMAT = "vx_tf"
 SRC_URI = "${TENSORFLOW_LITE_VX_DELEGATE_SRC};branch=${SRCBRANCH_vx};name=vx \
            ${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf;destsuffix=tfgit \
+           file://0001-CMakeLists.txt-Fix-TIM_VX-library-path.patch \
 "
 
 S = "${WORKDIR}/git"
