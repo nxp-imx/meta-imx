@@ -5,13 +5,13 @@ HOMEPAGE = "http://www.optee.org/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=69663ab153298557a59c67a60a743e5b"
 
-SRCBRANCH = "lf_3.13.y"
+SRCBRANCH = "lf_3.15.y"
 OPTEE_CLIENT_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-client.git;protocol=https"
 SRC_URI = " \
     ${OPTEE_CLIENT_SRC};branch=${SRCBRANCH} \
     file://tee-supplicant.service \
 "
-SRCREV = "7c9c423d00e96bf51debd5fe10fd70dce83be5cc"
+SRCREV = "182874320395787a389e5b0f7df02b32f3c0a1b0"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
