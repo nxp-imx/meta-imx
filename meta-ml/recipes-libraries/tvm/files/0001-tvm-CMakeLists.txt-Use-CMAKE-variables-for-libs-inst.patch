@@ -1,0 +1,28 @@
+From 4cde5f7b4c1f28f7f8b8059d69a610f94d982c5c Mon Sep 17 00:00:00 2001
+From: Cristinel Panfir <cristinel.panfir@nxp.com>
+Date: Tue, 7 Sep 2021 13:46:16 +0300
+Subject: [PATCH] tvm: CMakeLists.txt: Use CMAKE variables for libs install
+
+Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 932611ca0..7eab8aefa 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -484,8 +484,8 @@ endif()
+ add_custom_target(runtime DEPENDS tvm_runtime)
+ 
+ # Installation rules
+-install(TARGETS tvm DESTINATION lib${LIB_SUFFIX})
+-install(TARGETS tvm_runtime DESTINATION lib${LIB_SUFFIX})
++install(TARGETS tvm DESTINATION ${CMAKE_INSTALL_LIBDIR})
++install(TARGETS tvm_runtime DESTINATION ${CMAKE_INSTALL_LIBDIR})
+ 
+ if (INSTALL_DEV)
+   install(
+-- 
+2.25.1
+
