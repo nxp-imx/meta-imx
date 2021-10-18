@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c1f21c4f72f372ef38a5a4aee55ec173"
 
 DEPENDS = "python3-pycryptodomex-native python3-pyelftools-native u-boot-mkimage-native"
 
-SRCBRANCH = "lf_3.13.y"
+SRCBRANCH = "lf_3.15.y"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
-SRCREV = "b332fbd11f0b557ef7edef3f6347895e68cff5b4"
+SRCREV = "f2b3ff97cffbe22fe1b79161831bf4b43d2ead6e"
 
 S = "${WORKDIR}/git"
 
