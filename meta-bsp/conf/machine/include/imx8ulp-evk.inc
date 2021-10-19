@@ -28,12 +28,13 @@ SPL_BINARY = "spl/u-boot-spl.bin"
 
 UBOOT_CONFIG ??= "sd"
 UBOOT_CONFIG[sd]   = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
+UBOOT_CONFIG[fspi] = "${UBOOT_CONFIG_BASENAME}_defconfig"
 
 # Set ATF platform name
 ATF_PLATFORM = "imx8ulp"
 
-
-IMXBOOT_TARGETS = "flash_singleboot_m33 flash_singleboot flash_singleboot_m33_flexspi flash_dualboot_m33 flash_dualboot"
+IMXBOOT_TARGETS = "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_singleboot_m33_flexspi', \
+                       'flash_singleboot_m33 flash_singleboot flash_dualboot_m33 flash_dualboot', d)}"
 IMX_BOOT_SOC_TARGET = "iMX8ULP"
 IMX_BOOT_SEEK = "32"
 
