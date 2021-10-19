@@ -10,7 +10,7 @@ require tensorflow-lite-${PV}.inc
 #TODO check when CAF repository is created
 TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://source.codeaurora.org/external/imx/tflite-vx-delegate-imx.git;protocol=https" 
 SRCBRANCH_vx = "imx-v2.6.0"
-SRCREV_vx = "6eb03d3d07e23f783f27d8b04239c88daa223f9f" 
+SRCREV_vx = "4bdefb8f7efe09eea7e7eee5b49d88df6eb4e3f7"
 
 SRCREV_FORMAT = "vx_tf"
 SRC_URI = "${TENSORFLOW_LITE_VX_DELEGATE_SRC};branch=${SRCBRANCH_vx};name=vx \
