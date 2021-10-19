@@ -26,10 +26,10 @@ OPTEE_ARCH ?= "arm32"
 OPTEE_ARCH_armv7a = "arm32"
 OPTEE_ARCH_aarch64 = "arm64"
 
-EXTRA_OEMAKE = "ARCH=${OPTEE_ARCH} O=${B}"
+EXTRA_OEMAKE = "ARCH=${OPTEE_ARCH} -C ${S} O=${B}"
 
 do_install () {
-	oe_runmake -C ${S} install
+	oe_runmake install
 
 	install -D -p -m0644 ${B}/export/usr/lib/libteec.so.1.0.0 ${D}${libdir}/libteec.so.1.0.0
 	ln -sf libteec.so.1.0.0 ${D}${libdir}/libteec.so.1
