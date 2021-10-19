@@ -33,6 +33,8 @@ ML_PKGS_mx8ulp = " \
     armnn \
     tensorflow-lite \
     onnxruntime \
+    pytorch \
+    torchvision \
 "
 ML_PKGS_remove_mx8mm = "tensorflow-lite-vx-delegate"
 
