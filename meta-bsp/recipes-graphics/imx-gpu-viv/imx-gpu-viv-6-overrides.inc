@@ -1,7 +1,5 @@
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
-SRC_URI += "file://0001-MGS-6424-2-ccc-Fix-qtbase-break-on-Wayland.patch"
-
 PACKAGECONFIG ?= "valgrind"
 
 INHIBIT_SYSROOT_STRIP = "1"
