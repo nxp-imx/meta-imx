@@ -2,5 +2,5 @@
 
 TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
 SRCBRANCH_tf = "imx-v2.6.0"
-SRCREV_tf = "562e8688ef018a4da650748bda3d2782a695efce"
+SRCREV_tf = "23161c5a06d0d9fa867c45eeb8e83502c186c5e3"
 
