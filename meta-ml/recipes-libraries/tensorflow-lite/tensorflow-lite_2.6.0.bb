@@ -95,7 +95,7 @@ do_install() {
 
     # Install pip package
     install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
-    ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
+    ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -vvv --platform linux_${TARGET_ARCH} \
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
         ${B}/tflite_pip/dist/tflite_runtime-*.whl
 }
