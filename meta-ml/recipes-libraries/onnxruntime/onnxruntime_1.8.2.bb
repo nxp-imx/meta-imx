@@ -9,7 +9,7 @@ DEPENDS = "libpng zlib ${BPN}-native"
 ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH = "imx_1.8.2"
 
-SRCREV = "5cbbc56a3d96198ac285694c8c469420e7486189"
+SRCREV = "2b0030bd19a243fc0e6c5d19c00e473f9f93ae04"
 
 SRC_URI = "\
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
@@ -41,7 +41,7 @@ PACKAGECONFIG_VSI_NPU_mx8mnul = ""
 PACKAGECONFIG_VSI_NPU_mx8mpul = ""
 PACKAGECONFIG_VSI_NPU_mx8ulp = ""
 
-PACKAGECONFIG ?= "openmp reports sharedlib eigenblas nnapi ${PACKAGECONFIG_VSI_NPU}"
+PACKAGECONFIG ?= "openmp reports sharedlib armnn eigenblas acl acl-2108 nnapi ${PACKAGECONFIG_VSI_NPU}"
 
 PACKAGECONFIG[nsync] = "-Donnxruntime_USE_NSYNC=ON, -Donnxruntime_USE_NSYNC=OFF"
 PACKAGECONFIG[prebuilt] = "-Donnxruntime_USE_PREBUILT_PB=ON, -Donnxruntime_USE_PREBUILT_PB=OFF"
@@ -92,6 +92,7 @@ PACKAGECONFIG[acl-1908] = "-Donnxruntime_USE_ACL_1908=ON, -Donnxruntime_USE_ACL_
 PACKAGECONFIG[acl-2002] = "-Donnxruntime_USE_ACL_2002=ON, -Donnxruntime_USE_ACL_2002=OFF, arm-compute-library"
 PACKAGECONFIG[acl-2008] = "-Donnxruntime_USE_ACL_2008=ON, -Donnxruntime_USE_ACL_2008=OFF, arm-compute-library"
 PACKAGECONFIG[acl-2102] = "-Donnxruntime_USE_ACL_2102=ON, -Donnxruntime_USE_ACL_2102=OFF, arm-compute-library"
+PACKAGECONFIG[acl-2108] = "-Donnxruntime_USE_ACL_2108=ON, -Donnxruntime_USE_ACL_2108=OFF, arm-compute-library"
 PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -Donnxruntime_OVXLIB_INCLUDE=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
 
 # libonnxruntime_providers_shared.so is being packaged into -dev which is intended
