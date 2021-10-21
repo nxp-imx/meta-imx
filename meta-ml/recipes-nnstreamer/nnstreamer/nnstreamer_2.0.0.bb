@@ -23,6 +23,7 @@ SRC_URI = "\
     git://github.com/nnstreamer/nnstreamer.git;branch=main;protocol=https \
     file://0001-armnn-adaptation-for-vsi-armnn-fork-to-support-npu-b.patch \
     file://0001-armnn-compilation-error-unused-parameter.patch \
+    file://0001-meson.build-Fix-subplugin-install.patch \
 "
 
 S = "${WORKDIR}/git"
