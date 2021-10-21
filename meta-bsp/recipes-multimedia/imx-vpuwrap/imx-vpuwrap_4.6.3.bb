@@ -13,7 +13,7 @@ DEPENDS_append_mx8mp = " imx-vpu-hantro-vc"
 IMX_VPUWRAP_SRC ?= "git://github.com/NXP/imx-vpuwrap.git;protocol=https"
 SRC_URI = "${IMX_VPUWRAP_SRC};branch=${SRCBRANCH}"
 
-SRCBRANCH = "master"
+SRCBRANCH = "MM_04.06.03_2110_L5.10.y"
 SRCREV = "2e36a71a30b80310ac28a4300e8d5184b07654c3"
 
 S = "${WORKDIR}/git"
