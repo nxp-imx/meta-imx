@@ -7,12 +7,13 @@ New headers are installed in ${includedir}/imx."
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-SRCBRANCH = "lf-5.10.y"
-LOCALVERSION = "-lts-5.10.y"
+SRCBRANCH = "next"
+LOCALVERSION = "-lts-next"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
+KBRANCH = "${SRCBRANCH}"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "89cf7a3b7074bc5bd502919ed43d69d8351db1fb"
+SRCREV = "a585590637b969e4fcb1f544db58cab439e426db"
 
 S = "${WORKDIR}/git"
 
@@ -22,7 +23,6 @@ IMX_UAPI_HEADERS = " \
     dma-buf.h \
     hantrodec.h \
     hx280enc.h \
-    ion.h \
     ipu.h \
     isl29023.h \
     imx_vpu.h \
@@ -43,9 +43,6 @@ do_install() {
     # installed by mistake.
     oe_runmake headers_install INSTALL_HDR_PATH=${B}${exec_prefix}
 
-    # FIXME: The ion.h is still on staging so "promote" it for now
-    cp ${S}/drivers/staging/android/uapi/ion.h ${B}${includedir}/linux
-
     # Install whitelisted headers only
     for h in ${IMX_UAPI_HEADERS}; do
         install -D -m 0644 ${B}${includedir}/linux/$h \
@@ -59,7 +56,7 @@ do_install() {
 # Without this setting the RDEPENDS in other recipes fails to find this
 # package, therefore causing the -dev package also to be skipped effectively not
 # populating it into SDK
-ALLOW_EMPTY:${PN} = "1"
+ALLOW_EMPTY_${PN} = "1"
 
 INHIBIT_DEFAULT_DEPS = "1"
 DEPENDS += "unifdef-native bison-native rsync-native"
@@ -69,4 +66,4 @@ PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 # Restrict this recipe to NXP BSP only, this recipe is not compatible
 # with mainline BSP
 COMPATIBLE_HOST = '(null)'
-COMPATIBLE_HOST_use-nxp-bsp = '.*'
+COMPATIBLE_HOST:use-nxp-bsp = '.*'

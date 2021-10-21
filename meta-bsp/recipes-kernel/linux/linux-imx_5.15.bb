@@ -16,21 +16,22 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 DEPENDS += "lzop-native bc-native"
 
-SRCBRANCH = "lf-5.10.y"
-LOCALVERSION = "-lts-5.10.y"
+SRCBRANCH = "next"
+LOCALVERSION = "-lts-next"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
+KBRANCH = "${SRCBRANCH}"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "89cf7a3b7074bc5bd502919ed43d69d8351db1fb"
+SRCREV = "a585590637b969e4fcb1f544db58cab439e426db"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "5.10.72"
+LINUX_VERSION = "5.15.0"
 
-FILES:${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
+FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
 
@@ -89,6 +90,8 @@ do_merge_delta_config() {
     cp .config ${WORKDIR}/defconfig
 }
 addtask merge_delta_config before do_kernel_localversion after do_copy_defconfig
+
+do_kernel_configcheck[noexec] = "1"
 
 KERNEL_VERSION_SANITY_SKIP="1"
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
