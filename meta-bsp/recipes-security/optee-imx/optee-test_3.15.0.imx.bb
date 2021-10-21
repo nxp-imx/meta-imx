@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 
 DEPENDS = "python3-pycrypto-native python3-pycryptodomex-native optee-os optee-client openssl"
 
-SRCBRANCH = "lf_3.15.y"
+SRCBRANCH = "lf-5.10.72_2.2.0"
 
 OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
