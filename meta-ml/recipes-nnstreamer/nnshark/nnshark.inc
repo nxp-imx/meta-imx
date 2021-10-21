@@ -12,7 +12,7 @@ DEPENDS = "\
 "
 
 NNSHARK_SRC ?= "git://source.codeaurora.org/external/imx/nnshark.git;protocol=https"
-SRCBRANCH ?= "imx-yocto"
+SRCBRANCH ?= "2021.10.imx"
 
 SRC_URI = "${NNSHARK_SRC};branch=${SRCBRANCH}"
 
