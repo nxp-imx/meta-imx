@@ -21,7 +21,6 @@ SRC_URI = " \
 "
 
 DEPENDS = " \
-    boost \
     protobuf \
     stb \
     half \
@@ -35,7 +34,6 @@ RDEPENDS_MX8:mx8ulp = ""
 RDEPENDS:${PN}   = " \
     arm-compute-library \
     protobuf \
-    boost \
     ${RDEPENDS_MX8} \
 "
 PACKAGECONFIG_VSI_NPU       = ""
@@ -55,11 +53,10 @@ PACKAGECONFIG[unit-tests] = "-DBUILD_UNIT_TESTS=1,-DBUILD_UNIT_TESTS=0"
 PACKAGECONFIG[tests] = "-DBUILD_TESTS=1,-DBUILD_TESTS=0"
 PACKAGECONFIG[ref] = "-DARMNNREF=1,-DARMNNREF=0"
 PACKAGECONFIG[vsi-npu] = "-DVSI_NPU=1,-DVSI_NPU=0,nn-imx"
-PACKAGECONFIG[pyarmnn] = ",,armnn-swig-native python3-native python3-pip-native python3-wheel-native python3-setuptools-native"
+PACKAGECONFIG[pyarmnn] = ",,armnn-swig-native ${PYTHON_PN}-native ${PYTHON_PN}-pip-native ${PYTHON_PN}-wheel-native ${PYTHON_PN}-setuptools-native, ${PYTHON_PN} ${PYTHON_PN}-numpy"
 PACKAGECONFIG[delegate] = "-DBUILD_ARMNN_TFLITE_DELEGATE=1 -DARMNN_SOURCE_DIR=${WORKDIR}/git -DTFLITE_INCLUDE_DIR=${STAGING_INCDIR} -DTFLITE_LIB_DIR=${STAGING_LIBDIR} -DFLATBUFFERS_ROOT=${STAGING_DIR_HOST}/${prefix},-DBUILD_ARMNN_TFLITE_DELEGATE=0,flatbuffers armnn-tensorflow-protobuf tensorflow-lite"
 
 EXTRA_OECMAKE += " \
-    -DSHARED_BOOST=1 \
     -DHALF_INCLUDE=${STAGING_DIR_HOST} \
 "
 
@@ -132,7 +129,7 @@ do_install:append() {
 CXXFLAGS += "-fopenmp"
 LIBS += "-larmpl_lp64_mp"
 
-FILES:${PN} += "${libdir}/python*"
+FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
 FILES:${PN} += "${PYARMNN_INSTALL_DIR}/examples*"
 FILES:${PN}-dev += "${DELEGATE_INSTALL_DIR}/*"
 FILES:${PN}-dev += "${libdir}/ArmnnDelegateTargets-release.cmake ${libdir}/ArmnnDelegateConfig.cmake ${libdir}/ArmnnDelegateTargets.cmake"
