@@ -34,6 +34,10 @@ EXTRA_OECMAKE += "\
 -DONNX_CUSTOM_PROTOC_EXECUTABLE=${STAGING_BINDIR_NATIVE}/${PN}-native/protoc \
 -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 "
+
+PYTHON_DEPENDS = "${PYTHON_PN}-native ${PYTHON_PN}-pip-native ${PYTHON_PN}-wheel-native ${PYTHON_PN}-setuptools-native ${PYTHON_PN}-numpy-native"
+PYTHON_RDEPENDS = "${PYTHON_PN} ${PYTHON_PN}-numpy ${PYTHON_PN}-protobuf flatbuffers-${PYTHON_PN}"
+
 PACKAGECONFIG_VSI_NPU       = ""
 PACKAGECONFIG_VSI_NPU_mx8   = "vsi_npu"
 PACKAGECONFIG_VSI_NPU_mx8mm = ""
@@ -41,7 +45,7 @@ PACKAGECONFIG_VSI_NPU_mx8mnul = ""
 PACKAGECONFIG_VSI_NPU_mx8mpul = ""
 PACKAGECONFIG_VSI_NPU_mx8ulp = ""
 
-PACKAGECONFIG ?= "openmp reports sharedlib armnn eigenblas acl acl-2108 nnapi ${PACKAGECONFIG_VSI_NPU}"
+PACKAGECONFIG ?= "openmp reports sharedlib armnn eigenblas acl acl-2108 nnapi python ${PACKAGECONFIG_VSI_NPU}"
 
 PACKAGECONFIG[nsync] = "-Donnxruntime_USE_NSYNC=ON, -Donnxruntime_USE_NSYNC=OFF"
 PACKAGECONFIG[prebuilt] = "-Donnxruntime_USE_PREBUILT_PB=ON, -Donnxruntime_USE_PREBUILT_PB=OFF"
@@ -49,7 +53,7 @@ PACKAGECONFIG[openmp] = "-Donnxruntime_USE_OPENMP=ON, -Donnxruntime_USE_OPENMP=O
 PACKAGECONFIG[trt] = "-Donnxruntime_USE_TRT=ON, -Donnxruntime_USE_TRT=OFF"
 PACKAGECONFIG[nuphar] = "-Donnxruntime_USE_NUPHAR=ON, -Donnxruntime_USE_NUPHAR=OFF"
 PACKAGECONFIG[brainslice] = "-Donnxruntime_USE_BRAINSLICE=ON, -Donnxruntime_USE_BRAINSLICE=OFF"
-PACKAGECONFIG[python] = "-Donnxruntime_ENABLE_PYTHON=ON, -Donnxruntime_ENABLE_PYTHON=OFF"
+PACKAGECONFIG[python] = "-Donnxruntime_ENABLE_PYTHON=ON, -Donnxruntime_ENABLE_PYTHON=OFF, ${PYTHON_DEPENDS}, ${PYTHON_RDEPENDS}"
 PACKAGECONFIG[sharedlib] = "-Donnxruntime_BUILD_SHARED_LIB=ON, -Donnxruntime_BUILD_SHARED_LIB=OFF"
 PACKAGECONFIG[eigenblas] = "-Donnxruntime_USE_EIGEN_FOR_BLAS=ON, -Donnxruntime_USE_EIGEN_FOR_BLAS=OFF"
 PACKAGECONFIG[openblas] = "-Donnxruntime_USE_OPENBLAS=ON, -Donnxruntime_USE_OPENBLAS=OFF"
@@ -95,12 +99,42 @@ PACKAGECONFIG[acl-2102] = "-Donnxruntime_USE_ACL_2102=ON, -Donnxruntime_USE_ACL_
 PACKAGECONFIG[acl-2108] = "-Donnxruntime_USE_ACL_2108=ON, -Donnxruntime_USE_ACL_2108=OFF, arm-compute-library"
 PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -Donnxruntime_OVXLIB_INCLUDE=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
 
+do_compile_prepend() {
+    if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
+        # required to pull pybind11
+        export HTTP_PROXY=${http_proxy}
+        export HTTPS_PROXY=${https_proxy}
+        export http_proxy=${http_proxy}
+        export https_proxy=${https_proxy}
+    fi
+}
+
+do_compile_append() {
+    if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
+        cd ${WORKDIR}/build
+        ${PYTHON} ${S}/setup.py bdist_wheel
+    fi
+}
+
+do_install_append() {
+    if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
+        export PIP_DISABLE_PIP_VERSION_CHECK=1
+        export PIP_NO_CACHE_DIR=1
+        install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
+        ${STAGING_BINDIR_NATIVE}/pip3 install -v \
+            -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-deps \
+            ${WORKDIR}/build/dist/onnxruntime-*.whl
+        find ${D}/${PYTHON_SITEPACKAGES_DIR} -type d -name "__pycache__" -exec rm -Rf {} +
+    fi
+}
+
 # libonnxruntime_providers_shared.so is being packaged into -dev which is intended
 INSANE_SKIP_${PN}-dev += "dev-elf"
 
 # a separate tests package for the test binaries not appearing in the main package
 PACKAGE_BEFORE_PN = "${PN}-tests"
 FILES_${PN}-tests = "${bindir}/${BP}/tests/*"
+FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
 
 # libcustom_op_library.so is in bindir, which is intended;
 # onnxruntime_shared_lib_test requires the shlib to be in the same directory as testdata to run properly
