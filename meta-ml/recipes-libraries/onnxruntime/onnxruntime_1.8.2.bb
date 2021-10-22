@@ -99,7 +99,7 @@ PACKAGECONFIG[acl-2102] = "-Donnxruntime_USE_ACL_2102=ON, -Donnxruntime_USE_ACL_
 PACKAGECONFIG[acl-2108] = "-Donnxruntime_USE_ACL_2108=ON, -Donnxruntime_USE_ACL_2108=OFF, arm-compute-library"
 PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -Donnxruntime_OVXLIB_INCLUDE=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
 
-do_compile_prepend() {
+do_compile:prepend() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
         # required to pull pybind11
         export HTTP_PROXY=${http_proxy}
@@ -109,14 +109,14 @@ do_compile_prepend() {
     fi
 }
 
-do_compile_append() {
+do_compile:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
         cd ${WORKDIR}/build
         ${PYTHON} ${S}/setup.py bdist_wheel
     fi
 }
 
-do_install_append() {
+do_install:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
         export PIP_DISABLE_PIP_VERSION_CHECK=1
         export PIP_NO_CACHE_DIR=1
