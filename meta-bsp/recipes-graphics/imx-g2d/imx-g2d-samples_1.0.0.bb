@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 DEPENDS = "virtual/libg2d"
 
 GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxpmicro/g2d-samples.git;protocol=https"
-SRCBRANCH ?= "master"
+SRCBRANCH ?= "imx_1.0"
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
-SRCREV = "733c7bb4b3e8f32ce2a9887fd26ed5e45c232969"
+SRCREV = "daf64d010666ef2458566573c074e238993f228c"
 S = "${WORKDIR}/git"
 
 do_configure[noexec] = "1"
