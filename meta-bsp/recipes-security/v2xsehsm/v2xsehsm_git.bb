@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://BSD-3-Clause.txt;md5=664939843ae3416d811479b21978e8b4
 
 DEPENDS = "imx-seco-libs"
 
-SRCBRANCH = "v2x-dev"
+SRCBRANCH = "imx_5.4.70_2.3.4"
 V2XSEHSM_SRC ?= "git://source.codeaurora.org/external/imx/v2xsehsm.git;protocol=ssh"
 SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH} \
     file://0001-Install-header-to-standard-location.patch"
