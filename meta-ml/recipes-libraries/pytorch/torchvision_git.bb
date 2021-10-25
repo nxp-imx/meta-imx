@@ -10,7 +10,7 @@ PV = "0.8.2"
 PYV = "cp39"
 
 PYTORCH_SRC ?= "git://github.com/nxpmicro/pytorch-release.git;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "lf-5.10.72_2.2.0"
 SRCREV = "736fea3eaaef727031b0d137ce1edaa466e21ae9"
 
 SRC_URI = " \

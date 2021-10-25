@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=55899200c3031a66eb11a57a52
 DEPENDS = "tensorflow-lite flatbuffers"
 
 GOOGLE_CORAL_POSENET_SRC ?= "git://source.codeaurora.org/external/imx/coral-posenet-imx.git;protocol=https"
-SRCBRANCH = "lf-5.10.y_2.0.0"
+SRCBRANCH = "lf-5.10.72_2.2.0"
 
 SRC_URI = "${GOOGLE_CORAL_POSENET_SRC};branch=${SRCBRANCH} \
            git://github.com/google-coral/project-posenet.git;protocol=https;name=project-posenet;subpath=models;destsuffix=git/edgetpu/models \
