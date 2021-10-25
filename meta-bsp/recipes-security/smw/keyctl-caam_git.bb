@@ -6,7 +6,7 @@ SECTION = "base"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982"
 
-SRCBRANCH = "lf-5.10.y_1.0.0"
+SRCBRANCH = "master"
 KEYCTL_CAAM_SRC ?= "git://source.codeaurora.org/external/imx/keyctl_caam.git;protocol=https"
 SRC_URI = "${KEYCTL_CAAM_SRC};branch=${SRCBRANCH}"
 
