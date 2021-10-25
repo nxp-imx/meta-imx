@@ -2,7 +2,7 @@
 DESCRIPTION = "GStreamer Neural Network Inference Demo"
 LICENSE = "LGPLv2.0+"
 LIC_FILES_CHKSUM = "file://COPYING-LGPL2.0;md5=6762ed442b3822387a51c92d928ead0d \
-                    file://COPYING-LGPL2.1;md5=fbc093901857fcd118f065f900982c24"
+                    file://COPYING-LGPL2.1;md5=6762ed442b3822387a51c92d928ead0d"
 
 
 DEPENDS = "google-coral-posenet gstreamer1.0-plugins-base opencv"
