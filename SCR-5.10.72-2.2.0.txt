@@ -1372,7 +1372,7 @@ Origin:                      Vivante Corporation (MIT)
 Tools Packages
 --------------------------------------------
 
-Package:                     VeriSiliconTool-6.4.3.p2.4.tgz
+Package:                     VivanteIDE-6.4.3.p2.4.tgz
 Version:                     6.4.3.p2.4
 Outgoing License:            VeriSilicon License 
 License File:                
@@ -1380,8 +1380,6 @@ Package Category:            Tools
 Type of Content:             binary
 Description and comments:    VeriSilicon Tools
 Release Location:            nxp.com
-Origin:                      VeriSilicon (proprietary)
-
 --------------------------------------------
 
 Package:                     mfgtools.git
