@@ -8,7 +8,7 @@ inherit packagegroup
 
 # Install Freescale QT demo applications
 QT6_IMAGE_INSTALL_APPS = ""
-#QT6_IMAGE_INSTALL_APPS_imxgpu3d = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
+#QT6_IMAGE_INSTALL_APPS:imxgpu3d = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
 
 # Install fonts
 QT6_FONTS = "ttf-dejavu-common ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-serif "
@@ -24,16 +24,16 @@ QT6_IMAGE_INSTALL_common = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxkbcommon', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d)}\
     "
-QT6_IMAGE_INSTALL_imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT6_IMAGE_INSTALL_common}', \
+QT6_IMAGE_INSTALL:imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT6_IMAGE_INSTALL_common}', \
     'qtbase qtbase-plugins', d)}"
 
-QT6_IMAGE_INSTALL_imxpxp = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT6_IMAGE_INSTALL_common}', \
+QT6_IMAGE_INSTALL:imxpxp = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT6_IMAGE_INSTALL_common}', \
     'qtbase qtbase-examples qtbase-plugins', d)}"
 
-#QT6_IMAGE_INSTALL_imxgpu3d = " \
+#QT6_IMAGE_INSTALL:imxgpu3d = " \
 #    ${QT6_IMAGE_INSTALL_common} \
 #    gstreamer1.0-plugins-good-qt"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     ${QT6_IMAGE_INSTALL} \
 "
