@@ -11,7 +11,7 @@ DEPENDS = "python3-pycryptodomex-native python3-pyelftools-native u-boot-mkimage
 SRCBRANCH = "lf_3.15.y"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
-SRCREV = "715fabe985dbc3fb5527ebdb3b8811058fed20b3"
+SRCREV = "a7c3788a4d3f4623312a04c5b9e0d659546909d7"
 
 S = "${WORKDIR}/git"
 
