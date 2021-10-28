@@ -20,6 +20,7 @@ SOC_TOOLS_TEST_append_imx    = " \
 SOC_TOOLS_TEST_append_mx8qm  = " imx-seco-libs dvbapp-tests"
 SOC_TOOLS_TEST_append_mx8x   = " imx-seco-libs"
 SOC_TOOLS_TEST_append_mx8m   = " kernel-tools-virtio"
+SOC_TOOLS_TEST_append_mx8ulp = " imx-secure-enclave"
 
 RDEPENDS_${PN} += " \
     can-utils \
