@@ -1,12 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += " \
-    file://0001-Add-support-for-wayland.patch \
-    file://0002-Wayland-support-Use-local-context-window-size.patch \
-    file://0003-wayland-support-for-Hello-triangle-sample.patch \
-    file://0004-glfw-define-GLFW_INCLUDE_NONE-to-avoid-using-default.patch \
-    file://0005-glfw-fix-glfw3.h-gl-error.patch \
-"
+SRC_URI += "file://0005-glfw-fix-glfw3.h-gl-error.patch"
 
 DEPENDS = "extra-cmake-modules"
 
