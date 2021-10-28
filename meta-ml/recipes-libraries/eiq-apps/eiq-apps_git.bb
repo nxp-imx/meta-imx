@@ -11,7 +11,7 @@ EIQ_APPS_SRC ?= "git://source.codeaurora.org/external/imx/eiq-apps-imx.git;proto
 SRCBRANCH = "lf-5.10.72_2.2.0"
 
 SRC_URI = "${EIQ_APPS_SRC};branch=${SRCBRANCH}"
-SRCREV = "e40d75512fcb37d0119a918b06e365fe57472075"
+SRCREV = "d1436358a6c5bcbe54d238b0a5f8e7fbd5e21350"
 
 inherit autotools pkgconfig
 
