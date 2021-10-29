@@ -2,6 +2,8 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 PACKAGECONFIG ?= "valgrind"
 
+LIBVULKAN_VERSION = "${LIBVULKAN_VERSION_MAJOR}.2.1"
+
 # dri and libVDK.so are removed, make a workaround so base install is not broken
 do_install:prepend() {
     mkdir -p ${S}/gpu-core/usr/lib/dri
@@ -14,6 +16,11 @@ do_install:append() {
 }
 
 RDEPENDS:libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
+
+PROVIDES += "libglu"
+PACKAGES =+ "libglu-imx libglu-imx-dev"
+FILES:libglu-imx = "${libdir}/libGLU${SOLIBS}"
+FILES:libglu-imx-dev = "${includedir}/GL/glu.h ${includedir}/GL/glu_mangle.h"
 
 # FIXME: Don't add .so to main package
 FILES:libvulkan-imx += "${libdir}/libvulkan_VSI${SOLIBS}"
