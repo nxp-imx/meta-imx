@@ -15,7 +15,6 @@ SRC_URI[md5sum] = "e365145072671bc2c5dab3e2f86ff195"
 SRC_URI[sha256sum] = "6e54414ba16308a799d1cd1649a8f9c8c090d5f04a9632e138a51d2a0bbd52bb"
 
 do_compile[noexec] = "1"
-
 do_install() {
 }
 
