@@ -2,8 +2,6 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 PACKAGECONFIG ?= "valgrind"
 
-INHIBIT_SYSROOT_STRIP = "1"
-
 IMX_SOC        = "IMX_SOC_NOT_SET"
 IMX_SOC:mx8qm  = "mx8qm"
 IMX_SOC:mx8mp  = "mx8mp"
@@ -35,8 +33,7 @@ do_install:append() {
 
 RDEPENDS:libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 
-FILES:libnn-imx:remove = "${libdir}/libnn*${SOLIBS} ${libdir}/libneuralnetworks${SOLIBS}"
-
+# FIXME: Don't add .so to main package
 FILES:libvulkan-imx += "${libdir}/libvulkan_VSI${SOLIBS}"
 INSANE_SKIP:libvulkan-imx += "dev-so"
 FILES:libopenvx-imx += "${libdir}/libOpenVX${SOLIBS}"
