@@ -9,6 +9,7 @@ GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxpmicro/g2d-samples.git;protocol=https
 SRCBRANCH ?= "master"
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
 SRCREV = "733c7bb4b3e8f32ce2a9887fd26ed5e45c232969"
+
 S = "${WORKDIR}/git"
 
 do_configure[noexec] = "1"
