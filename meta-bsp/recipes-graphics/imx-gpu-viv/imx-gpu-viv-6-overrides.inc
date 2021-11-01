@@ -2,24 +2,6 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 PACKAGECONFIG ?= "valgrind"
 
-IMX_SOC        = "IMX_SOC_NOT_SET"
-IMX_SOC:mx8qm  = "mx8qm"
-IMX_SOC:mx8mp  = "mx8mp"
-IMX_SOC:mx8mq  = "mx8mq"
-IMX_SOC:mx8qxp = "mx8qxp"
-IMX_SOC:mx8mn  = "mx8mn"
-IMX_SOC:mx8ulp = "mx8ulp"
-
-do_install:append() {
-    if [ -d ${S}/gpu-core/usr/lib/${IMX_SOC} ]; then
-        cp -r ${S}/gpu-core/usr/lib/${IMX_SOC}/* ${D}${libdir}
-    fi
-    # Undo removals
-    for header in ${GLES3_HEADER_REMOVALS}; do
-        cp ${S}/gpu-core/usr/include/GLES3/${header} ${D}${includedir}/GLES3
-    done
-}
-
 # dri and libVDK.so are removed, make a workaround so base install is not broken
 do_install:prepend() {
     mkdir -p ${S}/gpu-core/usr/lib/dri
