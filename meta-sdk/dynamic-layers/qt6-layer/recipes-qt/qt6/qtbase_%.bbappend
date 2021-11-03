@@ -12,15 +12,15 @@ SRC_URI:append:imxgpu = " \
     file://0001-egl.prf-Fix-build-error-when-egl-headers-need-platfo.patch \
 "
 
-PACKAGECONFIG_GL_IMX_GPU     = ""
-PACKAGECONFIG_GL_IMX_GPU:mx8 = "gbm kms"
+PACKAGECONFIG_GRAPHICS_IMX_GPU     = ""
+PACKAGECONFIG_GRAPHICS_IMX_GPU:mx8 = "gbm kms"
 
-PACKAGECONFIG_GL:imxpxp   = "gles2"
-PACKAGECONFIG_GL:imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' gl', '', d)} \
-                             ${PACKAGECONFIG_GL_IMX_GPU}"
-PACKAGECONFIG_GL:imxgpu3d = "gles2 \
-                             ${PACKAGECONFIG_GL_IMX_GPU}"
-PACKAGECONFIG_GL:use-mainline-bsp ?= "gles2 gbm kms"
+PACKAGECONFIG_GRAPHICS:imxpxp   = "gles2"
+PACKAGECONFIG_GRAPHICS:imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' gl', '', d)} \
+                             ${PACKAGECONFIG_GRAPHICS_IMX_GPU}"
+PACKAGECONFIG_GRAPHICS:imxgpu3d = "gles2 \
+                             ${PACKAGECONFIG_GRAPHICS_IMX_GPU}"
+PACKAGECONFIG_GRAPHICS:use-mainline-bsp ?= "gles2 gbm kms"
 
 PACKAGECONFIG_PLATFORM          = ""
 PACKAGECONFIG_PLATFORM:imxgpu2d = "no-opengl linuxfb"
