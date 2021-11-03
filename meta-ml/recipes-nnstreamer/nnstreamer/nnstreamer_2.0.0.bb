@@ -25,6 +25,8 @@ SRC_URI = "\
     file://0001-armnn-compilation-error-unused-parameter.patch \
     file://0001-meson.build-Fix-subplugin-install.patch \
     file://0001-Build-Add-g_memdup2-support-for-glib-2.68.patch \
+    file://0001-tensor-filter-common-unnecessary-usage-of-volatile.patch \
+    file://0001-Test-Fix-build-issue-with-GCC-11-Werror-maybe-uninit.patch \
 "
 
 S = "${WORKDIR}/git"
