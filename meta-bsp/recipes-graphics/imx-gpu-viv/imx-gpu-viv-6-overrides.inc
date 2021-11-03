@@ -19,8 +19,14 @@ RDEPENDS:libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 's
 
 PROVIDES += "libglu"
 PACKAGES =+ "libglu-imx libglu-imx-dev"
+do_install:append() {
+    # NOTE: Drop the if-statement when upstreaming, it's only needed internally
+    if [ -f ${S}/gpu-core/usr/lib/pkgconfig/glu.pc ]; then
+        install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/glu.pc ${D}${libdir}/pkgconfig/glu.pc
+    fi
+}
 FILES:libglu-imx = "${libdir}/libGLU${SOLIBS}"
-FILES:libglu-imx-dev = "${includedir}/GL/glu.h ${includedir}/GL/glu_mangle.h"
+FILES:libglu-imx-dev = "${includedir}/GL/glu.h ${includedir}/GL/glu_mangle.h ${libdir}/pkgconfig/glu.pc"
 
 # FIXME: Don't add .so to main package
 FILES:libvulkan-imx += "${libdir}/libvulkan_VSI${SOLIBS}"
