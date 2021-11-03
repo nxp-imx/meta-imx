@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9c57cfb31165de565a47b65b896391c2"
 DEPENDS = "python3 python3-pip-native python3-wheel-native"
 RDEPENDS:${PN} += "python3-core python3-numpy python3-future python3-typing-extensions"
 
-PV = "1.7.1"
+PV = "1.9.1"
 PYV = "cp39"
 
 PYTORCH_SRC ?= "git://github.com/nxpmicro/pytorch-release.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "736fea3eaaef727031b0d137ce1edaa466e21ae9"
+SRCREV = "753daeef9a16f95dc3acb56e5339ccc4fabdef5e"
 
 SRC_URI = " \
     ${PYTORCH_SRC};branch=${SRCBRANCH} \
@@ -28,7 +28,7 @@ do_install(){
     install -m 0555 ${S}/examples/* ${D}${bindir}/${PN}/examples
     install -m 0555 ${S}/src/build.sh ${D}${bindir}/${PN}/
 
-    ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
+    ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v --platform linux_${TARGET_ARCH} \
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
         ${S}/whl/torch-${PV}-${PYV}*.whl
 
