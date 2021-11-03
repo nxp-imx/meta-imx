@@ -1018,8 +1018,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-vc-4.6.3.bin
-Version:                     4.6.3
+Package:                     imx-vpu-hantro-vc-1.7.0.bin
+Version:                     1.7.0
 Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Multimedia
@@ -1344,6 +1344,16 @@ Release Location:            https://source.codeaurora.org/external/imx/tensorfl
 Origin:                      NXP (Apache-2.0)
                              TensorFlow (Apache-2.0) - https://github.com/tensorflow/tensorflow/
 
+--------------------------------------------
+
+Package:                     tflite-vx-delegate-imx.git
+Version:                     2.6.0
+Outgoing License:            MIT 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    TensorFlow Lite VX Delegate
+Release Location:            https://source.codeaurora.org/external/imx/tflite-vx-delegate-imx -b rel_imx_5.15.X-1.0.0
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
