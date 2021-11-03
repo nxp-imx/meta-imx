@@ -174,6 +174,7 @@ hook_in_layer meta-imx/meta-bsp
 hook_in_layer meta-imx/meta-sdk
 hook_in_layer meta-imx/meta-ml
 hook_in_layer meta-imx/meta-v2x
+hook_in_layer meta-nxp-demo-experience
 
 echo "" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-browser/meta-chromium\"" >> $BUILD_DIR/conf/bblayers.conf
