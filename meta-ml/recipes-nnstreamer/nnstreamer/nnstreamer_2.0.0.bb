@@ -24,6 +24,7 @@ SRC_URI = "\
     file://0001-armnn-adaptation-for-vsi-armnn-fork-to-support-npu-b.patch \
     file://0001-armnn-compilation-error-unused-parameter.patch \
     file://0001-meson.build-Fix-subplugin-install.patch \
+    file://0001-Build-Add-g_memdup2-support-for-glib-2.68.patch \
 "
 
 S = "${WORKDIR}/git"
