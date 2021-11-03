@@ -3,7 +3,7 @@ NXP Software Content Register
 Release - Linux 5.4.70_2.3.5
  November  2021
 
-Outgoing License: LA_OPT_NXP_Software_License v23 May 2021 - Additional distribution license granted - Section 2.3 applies
+Outgoing License: LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies
 License File:     COPYING
 
 Yocto Project recipe manifest:
@@ -54,7 +54,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     imx-sc-firmware-1.7.5.bin
-Outgoing License:            LA_OPT_NXP_Software_License v23 May 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -270,19 +270,8 @@ Origin:                      Basler AG (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-seco-3.8.3.bin
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    BSP firmware - SECO
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-
 Package:                     imx-seco-libs.git
-Outgoing License:            LA_OPT_NXP_Software_License v23 May 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
@@ -450,7 +439,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     ecdsa-lib-imx-3.3.2.1.bin
+Package:                     ecdsa-lib-imx-3.3.2.2.bin
 Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
