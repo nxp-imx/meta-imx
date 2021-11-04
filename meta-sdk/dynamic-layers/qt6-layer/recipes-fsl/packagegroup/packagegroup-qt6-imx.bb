@@ -14,7 +14,7 @@ QT6_IMAGE_INSTALL_APPS = ""
 QT6_FONTS = "ttf-dejavu-common ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-serif "
 
 # Install qtquick3d
-QT6_QTQUICK3D = "qtquick3d qtquick3d-dev"
+QT6_QTQUICK3D = "qtquick3d qtquick3d-dev qtquick3d-examples"
 
 QT6_IMAGE_INSTALL = ""
 QT6_IMAGE_INSTALL_common = " \
