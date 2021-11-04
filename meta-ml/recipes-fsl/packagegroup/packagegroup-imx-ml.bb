@@ -26,6 +26,7 @@ ML_PKGS:imxgpu:mx8 = " \
     tensorflow-lite \
     tensorflow-lite-vx-delegate \
     onnxruntime \
+    ml-security \
     pytorch \
     torchvision \
 "
