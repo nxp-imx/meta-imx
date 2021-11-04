@@ -6,6 +6,7 @@ SRC_URI += " \
     git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=git/external/glslang/src;name=glslang \
     git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers \
     git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=git/external/spirv-tools/src;name=spirv-tools \
+    file://0001-Include-limits-header.patch;patchdir=external/spirv-tools/src \
 "
 
 SRCREV_vk-gl-cts = "9dcb1667286fcae6b8d5a132cdd5e6bad2c896fa"

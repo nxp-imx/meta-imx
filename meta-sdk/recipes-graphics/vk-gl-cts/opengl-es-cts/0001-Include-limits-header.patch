@@ -1,0 +1,12 @@
+Index: src/source/validate_cfg.cpp
+===================================================================
+--- src.orig/source/validate_cfg.cpp
++++ src/source/validate_cfg.cpp
+@@ -19,6 +19,7 @@
+ #include <cassert>
+ #include <functional>
+ #include <iostream>
++#include <limits>
+ #include <map>
+ #include <string>
+ #include <tuple>
