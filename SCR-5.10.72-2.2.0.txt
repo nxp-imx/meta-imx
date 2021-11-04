@@ -103,7 +103,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     firmware-sentinel-0.2.bin
 Version:                     0.2
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -223,7 +223,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -249,7 +249,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-seco-3.8.3.bin
 Version:                     3.8.3
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -261,7 +261,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-seco-libs.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v23 May 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
@@ -396,7 +396,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx8ulp-m33-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -447,7 +447,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     ecdsa-lib-imx-3.3.2.bin
 Version:                     3.3.2
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -649,7 +649,7 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     imx-dpu-g2d-1.9.4.bin
 Version:                     1.9.4
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -745,7 +745,7 @@ Release Location:            https://source.codeaurora.org/external/imx/g2d-samp
 
 Package:                     libgpuperfcnt-6.4.3.p2.4-aarch64-fb.bin
 Version:                     6.4.3.p2.4
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -848,7 +848,7 @@ Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Addi
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
-Description and comments:    i.MX multimedia codec libraries:  Codecs and wrappers for: AAC AACD BMP BSAC DeInterlace FLAC GIF JPEG MP3 MP3d NB_AMR OGG PEQ PNG SBC SRC WB_AMR WBAMRD G.711 G.723 G.726 G.729ab
+Description and comments:    i.MX multimedia codec libraries: Codecs and wrappers for: AAC AACD BMP BSAC DeInterlace FLAC GIF JPEG MP3 MP3d NB_AMR OGG PEQ PNG SBC SRC WB_AMR WBAMRD G.711 G.723 G.726 G.729ab
 Release Location:            Mirror
 Origin:                      NXP (proprietary)
                              ISO/IEC 13818-7 and ISO/IEC 14496-3 standards 
@@ -927,8 +927,8 @@ Origin:                      NXP (LGPL-2.1)
 
 Package:                     gst-plugins-bad.git
 Version:                     1.18.5.imx
-Outgoing License:            LGPL-2.0 
-License File:                COPYING.LIB
+Outgoing License:            LGPL-2.1 
+License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Gstreamer plug-ins that aren't up to par compared to the rest. Close to good quality but missing something.
@@ -1186,7 +1186,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mnddr3l-m7-demo-2.10.0.bin
 Version:                     2.10.0
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2020 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1243,7 +1243,7 @@ Origin:                      NXP (LGPL-2.1)
 
 Package:                     deepview-rt-2.4.32-aarch64.bin
 Version:                     2.4.32-aarch64
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - No distribution license granted - Section 2.2 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - No distribution license granted - Section 2.2 applies 
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
@@ -1255,7 +1255,7 @@ Origin:                      Au-Zone Technologies (proprietary)
 
 Package:                     deepview-rt-examples-1.2.bin
 Version:                     1.2
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
@@ -1348,7 +1348,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     tflite-vx-delegate-imx.git
 Version:                     2.6.0
-Outgoing License:            MIT 
+Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
