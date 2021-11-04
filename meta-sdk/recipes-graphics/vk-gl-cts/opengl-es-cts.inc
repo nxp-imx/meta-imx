@@ -29,29 +29,30 @@ PACKAGECONFIG[x11]     = ",,libxcb libx11 libxrandr"
 PACKAGECONFIG[wayland] = "-DDEQP_TARGET=wayland,,wayland"
 
 do_install() {
-    dest_dir=${D}/opt/${PN}
-    install -d $dest_dir
+    install -d ${D}/${CTSDIR}
     src_dir=external/openglcts/modules
     for src in cts-runner glcts; do
-        install -m 0755 $src_dir/$src $dest_dir
+        install -m 0755 $src_dir/$src ${D}/${CTSDIR}
     done
     for src in gl_cts gles2 gles3 gles31; do
-        install -d $dest_dir/$src
+        install -d ${D}/${CTSDIR}/$src
         # Install data sub-folder
-        cp -R --no-dereference --preserve=mode,links -v $src_dir/$src/data $dest_dir/$src
+        cp -R --no-dereference --preserve=mode,links -v $src_dir/$src/data ${D}/${CTSDIR}/$src
         # Install shaders sub-folder
         case $src in
         gles2|gles3|gles31)
-            cp -R --no-dereference --preserve=mode,links -v $src_dir/$src/shaders $dest_dir/$src
+            cp -R --no-dereference --preserve=mode,links -v $src_dir/$src/shaders ${D}/${CTSDIR}/$src
             ;;
         esac
         # Install graphicsfuzz sub-folder
         case $src in
         gles3)
-            cp -R --no-dereference --preserve=mode,links -v $src_dir/$src/graphicsfuzz $dest_dir/$src
+            cp -R --no-dereference --preserve=mode,links -v $src_dir/$src/graphicsfuzz ${D}/${CTSDIR}/$src
             ;;
         esac
     done
 }
+
+CTSDIR = "/opt/${BPN}"
 
 FILES:${PN} = "/opt"
