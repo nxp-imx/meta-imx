@@ -27,6 +27,7 @@ PREFERRED_VERSION_gstreamer1.0-rtsp-server:mx8  = "1.18.5"
 
 PREFERRED_VERSION_opengl-es-cts:mx6 = "3.2.4.0"
 PREFERRED_VERSION_opengl-es-cts:mx7 = "3.2.4.0"
+PREFERRED_VERSION_opengl-es-cts:aarch64 = "3.2.7.0"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"
