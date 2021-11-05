@@ -51,7 +51,6 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-fsl-tools-gpu-external \
     packagegroup-fsl-tools-testapps \
     packagegroup-fsl-tools-benchmark \
-    packagegroup-imx-isp \
     packagegroup-imx-security \
     packagegroup-fsl-gstreamer1.0 \
     packagegroup-fsl-gstreamer1.0-full \
