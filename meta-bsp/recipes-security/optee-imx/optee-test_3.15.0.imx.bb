@@ -16,7 +16,7 @@ SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH}"
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
-SRCREV = "b0916c2ba4ae395e9cce28159234d9202daaa748"
+SRCREV = "c998f3c5e66509b1b466bd71370e21210a8a5b2a"
 
 inherit python3native
 
