@@ -1,3 +1,5 @@
+MACHINEOVERRIDES =. "mx8:mx8m:mx8mpul:"
+
 require conf/machine/include/imx-base.inc
 require conf/machine/include/tune-cortexa53.inc
 
