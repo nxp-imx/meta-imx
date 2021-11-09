@@ -24,6 +24,7 @@ MCORE_TYPE  ?= "m4"
 MCORE_TYPE_mx8mn  = "m7"
 MCORE_TYPE_mx8mnul = "m7"
 MCORE_TYPE_mx8mp  = "m7"
+MCORE_TYPE_mx8mpul  = "m7"
 MCORE_TYPE_mx8ulp  = "m33"
 
 IMX_PACKAGE_NAME = "${SOC}-${MCORE_TYPE}-demo-${PV}"
