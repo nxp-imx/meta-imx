@@ -271,8 +271,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     sof-imx-1.9.0-2
-Version:                     1.9.0-2
+Package:                     sof-imx-1.10.0
+Version:                     1.10.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
