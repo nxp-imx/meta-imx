@@ -28,8 +28,8 @@ DEPENDS = " \
     gstreamer1.0-plugins-base \
     gtest \
     half \
-    jsoncpp-nlohmann \
     ninja-native \
+    nlohmann-json \
     rapidjson \
     stb \
     zlib \
