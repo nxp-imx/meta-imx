@@ -7,6 +7,7 @@ SRC_URI += " \
     git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers \
     git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=git/external/spirv-tools/src;name=spirv-tools \
     file://0001-Include-limits-header.patch;patchdir=external/spirv-tools/src \
+    file://0001-Support-Python3-as-well-in-gen_release_info.py.patch \
 "
 
 SRCREV_vk-gl-cts = "9dcb1667286fcae6b8d5a132cdd5e6bad2c896fa"
@@ -16,7 +17,7 @@ SRCREV_spirv-tools = "0b0454c42c6b6f6746434bd5c78c5c70f65d9c51"
 
 SRCREV_FORMAT = "vk-gl-cts_glslang_spirv-headers_spirv-tools"
 
-inherit pythonnative
+inherit python3native
 
 do_compile:append() {
     cp -r modules/gles3/gles3/graphicsfuzz external/openglcts/modules/gles3

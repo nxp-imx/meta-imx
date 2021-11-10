@@ -1,0 +1,55 @@
+From 77403d88eb736562834d4321fa152090d9d0f821 Mon Sep 17 00:00:00 2001
+From: Eric Werness <ewerness@nvidia.com>
+Date: Fri, 16 Nov 2018 13:50:40 -0800
+Subject: [PATCH] Support Python3 as well in gen_release_info.py
+
+The CMake file version check can end up picking python3 in some cases -
+making the Python code compatible with python3 seems easier than
+adjusting the version check.
+
+Components: Frameworks
+Change-Id: Iab37090ab813dcb7839490225ca2a4bf2f721c12
+(cherry picked from commit f1bcdd5e9df1f83cc9dc4ef7235d3da16e9f7fab)
+(cherry picked from commit 506598e19e7154d58b258f61f3b8a4cf5c87d0c5)
+---
+ framework/qphelper/gen_release_info.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/framework/qphelper/gen_release_info.py b/framework/qphelper/gen_release_info.py
+index e50de8209..4d0375a1c 100644
+--- a/framework/qphelper/gen_release_info.py
++++ b/framework/qphelper/gen_release_info.py
+@@ -26,13 +26,13 @@ import sys
+ import argparse
+ 
+ def readFile (filename):
+-	f = open(filename, 'rb')
++	f = open(filename, 'rt')
+ 	d = f.read()
+ 	f.close()
+ 	return d
+ 
+ def writeFile (filename, data):
+-	f = open(filename, 'wb')
++	f = open(filename, 'wt')
+ 	f.write(data)
+ 	f.close()
+ 
+@@ -81,12 +81,12 @@ def parseArgs ():
+ 	args = parser.parse_args()
+ 
+ 	if (args.releaseName == None) != (args.releaseId == None):
+-		print "Both --name and --id must be specified"
++		print("Both --name and --id must be specified")
+ 		parser.print_help()
+ 		sys.exit(-1)
+ 
+ 	if (args.releaseName != None) == args.git:
+-		print "Either --name and --id, or --git must be specified"
++		print("Either --name and --id, or --git must be specified")
+ 		parser.print_help()
+ 		sys.exit(-1)
+ 
+-- 
+2.17.1
+
