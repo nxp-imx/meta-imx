@@ -810,7 +810,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     opencv-imx.git
-Version:                     4.5.2.imx
+Version:                     4.5.4.imx
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            Graphics
@@ -1004,8 +1004,8 @@ Origin:                      VeriSilicon Inc. (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.1.1
-Version:                     1.1.1
+Package:                     imx-vpu-hantro-daemon-1.1.2
+Version:                     1.1.2
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
 Package Category:            Multimedia
