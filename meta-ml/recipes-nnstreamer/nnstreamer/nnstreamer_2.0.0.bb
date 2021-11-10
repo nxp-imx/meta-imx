@@ -24,6 +24,7 @@ SRC_URI = "\
     file://0001-armnn-adaptation-for-vsi-armnn-fork-to-support-npu-b.patch \
     file://0001-armnn-compilation-error-unused-parameter.patch \
     file://0001-meson.build-Fix-subplugin-install.patch \
+    file://0001-Filter-TFLite-Disable-default-delegates-usage.patch \
 "
 
 S = "${WORKDIR}/git"
