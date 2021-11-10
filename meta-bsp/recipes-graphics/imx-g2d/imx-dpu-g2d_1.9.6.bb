@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=03bcadc8dc0a788f66ca9e2b89f56c6f"
 PROVIDES += "virtual/libg2d"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "40f4fc13b62aa8c2e613106903a9a02e"
-SRC_URI[sha256sum] = "028ecacbcc99d1bb12f3e59a4e7783b2bf91fcf5aa9c231f3a2cc50ab24d656f"
+SRC_URI[md5sum] = "31342c2f13f9af19169dd4ccbe951241"
+SRC_URI[sha256sum] = "1f240a87a8a148eb2ec8a874c3f88c90b5bcfcea13c7e0a3a60c8cc082b44626"
 
 inherit fsl-eula-unpack
 
