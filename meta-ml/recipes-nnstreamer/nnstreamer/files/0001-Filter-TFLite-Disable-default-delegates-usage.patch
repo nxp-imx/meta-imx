@@ -1,0 +1,55 @@
+From 1a4a48948428fb2e8c271657f674956050cd4c79 Mon Sep 17 00:00:00 2001
+From: Julien Vuillaumier <julien.vuillaumier@nxp.com>
+Date: Wed, 10 Nov 2021 16:45:19 +0100
+Subject: [PATCH] [Filter/TFLite] Disable default delegates usage
+
+TFLite libray may be built to use default delegates when
+no delegate is explicitly bound to the interpreter.
+
+In case default delegates are not supported by TFLite filter,
+system may crash.
+
+Make sure that no default delegate is applied by using relevant
+interpreter builder API available from TFLite 2.4 onward.
+
+Upstream-Status: Pending
+
+Signed-off-by: Julien Vuillaumier <julien.vuillaumier@nxp.com>
+---
+ .../tensor_filter/tensor_filter_tensorflow_lite.cc   | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc b/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
+index 33a2029f..df6136d7 100644
+--- a/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
++++ b/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
+@@ -81,6 +81,14 @@
+ #define TFLITE_SUBPLUGIN_NAME "tensorflow-lite"
+ #endif
+ 
++/**
++ * @brief prevent usage by TFLite of default delegates that may not be supported
++ */
++#if TFLITE_VERSION_MAJOR >= 2 && TFLITE_VERSION_MINOR >= 4
++#define TFLITE_RESOLVER_WITHOUT_DEFAULT_DELEGATES
++#endif
++
++
+ /**
+  * @brief Macro for debug mode.
+  */
+@@ -384,7 +392,11 @@ TFLiteInterpreter::loadModel (int num_threads, tflite_delegate_e delegate)
+ 
+   interpreter = nullptr;
+ 
++#ifdef TFLITE_RESOLVER_WITHOUT_DEFAULT_DELEGATES
++  tflite::ops::builtin::BuiltinOpResolverWithoutDefaultDelegates resolver;
++#else
+   tflite::ops::builtin::BuiltinOpResolver resolver;
++#endif
+   tflite::InterpreterBuilder (*model, resolver) (&interpreter);
+   if (!interpreter) {
+     ml_loge ("Failed to construct interpreter\n");
+-- 
+2.25.1
+

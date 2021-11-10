@@ -27,6 +27,7 @@ SRC_URI = "\
     file://0001-Build-Add-g_memdup2-support-for-glib-2.68.patch \
     file://0001-tensor-filter-common-unnecessary-usage-of-volatile.patch \
     file://0001-Test-Fix-build-issue-with-GCC-11-Werror-maybe-uninit.patch \
+    file://0001-Filter-TFLite-Disable-default-delegates-usage.patch \
 "
 
 S = "${WORKDIR}/git"
