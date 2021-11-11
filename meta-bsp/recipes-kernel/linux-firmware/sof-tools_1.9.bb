@@ -32,5 +32,5 @@ do_install() {
     cp -r ${S}/tools/ctl ${D}/unit_tests/sof/tools/
 }
 
-FILES:${PN} = "/unit_tests/sof/tools"
+FILES_${PN} = "/unit_tests/sof/tools"
 
