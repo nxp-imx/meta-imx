@@ -271,6 +271,16 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
+Package:                     imx-secure-enclave.git
+Version:                     
+Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
+License File:                EULA.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    NXP IMX SECURE ENCLAVE library
+Release Location:            https://github.com/NXP/imx-secure-enclave.git -b rel_imx_5.10.72-2.2.0
+--------------------------------------------
+
 Package:                     sof-imx-1.9.0-2
 Version:                     1.9.0-2
 Outgoing License:            BSD-3-Clause 
