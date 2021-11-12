@@ -12,10 +12,8 @@ SRCREV = "733c7bb4b3e8f32ce2a9887fd26ed5e45c232969"
 
 S = "${WORKDIR}/git"
 
-do_configure[noexec] = "1"
-
 do_install() {
-    oe_runmake install DESTDIR=${D} PREFIX=${exec_prefix}
+    oe_runmake install DESTDIR=${D}
 }
 
-FILES_${PN} += "/opt"
+FILES:${PN} += "/opt"
