@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "d0a6ecfe8cdd587dfbb7221c3fd182abd6c324ab4f29250e073cfc2e54
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-INSANE_SKIP_${PN} = "arch dev-so"
+INSANE_SKIP:${PN} = "arch dev-so"
 
-FILES_${PN} += "${libdir}/imx-mm/audio-codec ${datadir}/imx-mm"
+FILES:${PN} += "${libdir}/imx-mm/audio-codec ${datadir}/imx-mm"
 COMPATIBLE_MACHINE = "(mx8qm|mx8qxp|mx8mp|mx8ulp)"
