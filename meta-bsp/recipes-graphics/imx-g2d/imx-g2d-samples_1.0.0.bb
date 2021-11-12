@@ -8,9 +8,21 @@ DEPENDS = "virtual/libg2d"
 GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxpmicro/g2d-samples.git;protocol=https"
 SRCBRANCH ?= "master"
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
-SRCREV = "733c7bb4b3e8f32ce2a9887fd26ed5e45c232969"
+SRCREV = "57da8a73ccc1dd19cb1b39d2913ad3694770fbc5"
 
 S = "${WORKDIR}/git"
+
+# Wayland samples require DPU
+PACKAGECONFIG_WAYLAND = ""
+PACKAGECONFIG_WAYLAND_imxdpu = "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
+
+PACKAGECONFIG ??= "${PACKAGECONFIG_WAYLAND}"
+PACKAGECONFIG[wayland] = "USE_WAYLAND=true,USE_WAYLAND=false,wayland-native"
+
+EXTRA_OEMAKE += " \
+    SDKTARGETSYSROOT=${STAGING_DIR_HOST} \
+    ${PACKAGECONFIG_CONFARGS} \
+"
 
 do_install() {
     oe_runmake install DESTDIR=${D}
