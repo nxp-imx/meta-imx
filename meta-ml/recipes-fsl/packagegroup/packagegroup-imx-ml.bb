@@ -44,8 +44,14 @@ ML_DEEPVIEW_PKGS:imxgpu:mx8 = "deepview-rt-examples"
 ML_DEEPVIEW_PKGS:mx8mm      = ""
 
 ML_EIQ_PKGS       = ""
-ML_EIQ_PKGS:mx8mm = "eiq-apps"
-ML_EIQ_PKGS:mx8mp = "eiq-apps"
+ML_EIQ_PKGS:mx8mm = " \
+    eiq-apps \	
+    tensorflow-extras \
+"
+ML_EIQ_PKGS:mx8mp = " \
+    eiq-apps \
+    tensorflow-extras \
+"
 
 ML_TVM_PKGS            = ""
 ML_TVM_PKGS:imxgpu:mx8 = "tvm"
