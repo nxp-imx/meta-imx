@@ -15,6 +15,8 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
+TARGET_CC_ARCH += "${LDFLAGS}"
+
 do_compile:prepend() {
     cd ${S}/efficientdet/src
 }
