@@ -31,8 +31,6 @@ SRCREV = "b64a285b80c29f7a54bffa260f09306679992b96"
 # should be updated once patchlevel is merged.
 LINUX_VERSION = "5.15.0"
 
-FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
-
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
 
 DEFAULT_PREFERENCE = "1"
