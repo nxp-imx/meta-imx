@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=f674ee93878e0b25c4e95dc6c2d06cdd"
 SRCREV = "a0acad341455b08b1a4cc408dcb76c022f722fa3"
 SRC_URI = "git://github.com/thesofproject/sof.git;branch=imx-stable-v1.9;protocol=https"
 
-S="${WORKDIR}/git"
+S = "${WORKDIR}/git"
 
 DEPENDS += "alsa-lib"
 
@@ -32,5 +32,4 @@ do_install() {
     cp -r ${S}/tools/ctl ${D}/unit_tests/sof/tools/
 }
 
-FILES_${PN} = "/unit_tests/sof/tools"
-
+FILES:${PN} = "/unit_tests/sof/tools"
