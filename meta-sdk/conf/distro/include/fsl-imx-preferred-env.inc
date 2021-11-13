@@ -1,5 +1,6 @@
 PREFERRED_PROVIDER_virtual/bootloader:imx = "u-boot-imx"
 PREFERRED_PROVIDER_virtual/kernel:imx = "linux-imx"
+PREFERRED_PROVIDER_linux-imx-mfgtool = "linux-imx-mfgtool"
 
 PREFERRED_VERSION_linux-libc-headers:imx ?= "5.14"
 
