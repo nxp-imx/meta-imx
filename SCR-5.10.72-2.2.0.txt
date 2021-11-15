@@ -1080,6 +1080,30 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
+Package:                     imx-dsp-1.2.0.bin
+Version:                     1.2.0
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+License File:                
+Package Category:            Multimedia
+Type of Content:             binary
+Description and comments:    Proprietary codecs and parsers
+Release Location:            Mirror
+Origin:             NXP (proprietary)
+                    Cadence (MIT)
+                    Matt Redfearn (BSD-3-clause)
+
+--------------------------------------------
+
+Package:                     imx-dsp-codec-ext-1.2.0.bin
+Version:                     1.2.0
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+License File:                
+Package Category:            Multimedia
+Type of Content:             binary
+Description and comments:    Proprietary codecs and parsers
+Release Location:            Mirror
+--------------------------------------------
+
 Package:                     nxp-afe.git
 Version:                     1.0
 Outgoing License:            BSD-3-Clause 
