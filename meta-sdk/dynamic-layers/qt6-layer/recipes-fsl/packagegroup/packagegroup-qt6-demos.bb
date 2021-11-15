@@ -10,19 +10,7 @@ inherit packagegroup
 RDEPENDS:${PN}:append = " \
     qtbase-examples \
     qtdeclarative-examples \
-    quitindicators \
-    qt6-demo-extrafiles \
 "
-
-# Install the following apps on SoC with GPU
-RDEPENDS:${PN}:append:imxgpu = " \
-    qt6ledscreen \
-    quitbattery \
-    qt6everywheredemo \ 
-    qt6nmapcarousedemo \
-    qt6nmapper \
-"
-
 RDEPENDS:${PN}:append:imxgpu3d = " \
     qt3d-examples \
 "
