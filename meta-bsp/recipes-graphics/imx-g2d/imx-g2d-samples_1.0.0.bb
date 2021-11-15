@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
 
 # Wayland samples require DPU
 PACKAGECONFIG_WAYLAND = ""
-PACKAGECONFIG_WAYLAND_imxdpu = "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
+PACKAGECONFIG_WAYLAND:imxdpu = "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 
 PACKAGECONFIG ??= "${PACKAGECONFIG_WAYLAND}"
 PACKAGECONFIG[wayland] = "USE_WAYLAND=true,USE_WAYLAND=false,wayland-native"
