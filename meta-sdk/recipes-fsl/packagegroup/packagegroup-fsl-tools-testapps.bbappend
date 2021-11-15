@@ -38,6 +38,7 @@ RDEPENDS_${PN} += " \
     nano \
     ntpdate \
     openssl-bin \
+    openssl-engines \
     pciutils \
     procps \
     ptpd \
