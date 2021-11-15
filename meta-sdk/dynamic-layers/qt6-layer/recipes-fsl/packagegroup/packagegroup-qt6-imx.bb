@@ -18,6 +18,7 @@ QT6_QTQUICK3D = "qtquick3d qtquick3d-dev qtquick3d-examples"
 
 QT6_IMAGE_INSTALL = ""
 QT6_IMAGE_INSTALL_common = " \
+    packagegroup-qt6-demos \
     ${QT6_QTQUICK3D} \
     ${QT6_FONTS} \
     ${QT6_IMAGE_INSTALL_APPS} \
