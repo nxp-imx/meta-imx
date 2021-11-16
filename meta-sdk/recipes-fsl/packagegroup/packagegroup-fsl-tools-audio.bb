@@ -39,11 +39,11 @@ NXPAFE_INSTALL:mx8mn = "nxp-afe"
 NXPAFE_INSTALL:mx8mp = "nxp-afe"
 NXPAFE_INSTALL:mx8mnul = "nxp-afe"
 
-SOFTOOLS_INSTALL ?= ""
-SOFTOOLS_INSTALL_mx8qm = "sof-tools"
-SOFTOOLS_INSTALL_mx8qxp = "sof-tools"
-SOFTOOLS_INSTALL_mx8mp = "sof-tools"
-SOFTOOLS_INSTALL_mx8ulp = "sof-tools"
+SOFTOOLS_INSTALL       ?= ""
+SOFTOOLS_INSTALL:mx8qm  = "sof-tools"
+SOFTOOLS_INSTALL:mx8qxp = "sof-tools"
+SOFTOOLS_INSTALL:mx8mp  = "sof-tools"
+SOFTOOLS_INSTALL:mx8ulp = "sof-tools"
 
 RDEPENDS:${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "alsa",  "${ALSA_INSTALL}", "", d)} \
