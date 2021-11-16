@@ -17,7 +17,7 @@ PACKAGECONFIG_WAYLAND = ""
 PACKAGECONFIG_WAYLAND:imxdpu = "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 
 PACKAGECONFIG ??= "${PACKAGECONFIG_WAYLAND}"
-PACKAGECONFIG[wayland] = "USE_WAYLAND=true,USE_WAYLAND=false,wayland-native"
+PACKAGECONFIG[wayland] = "USE_WAYLAND=true,USE_WAYLAND=false,wayland-native wayland-protocols"
 
 EXTRA_OEMAKE += " \
     SDKTARGETSYSROOT=${STAGING_DIR_HOST} \
