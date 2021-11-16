@@ -37,7 +37,7 @@ V2X_PKGS = ""
 V2X_PKGS:mx8dxl = "packagegroup-imx-v2x"
 
 DOCKER ?= ""
-DOCKER_mx8 = "docker"
+DOCKER:mx8 = "docker"
 
 G2D_SAMPLES          = ""
 G2D_SAMPLES:imxgpu2d = "imx-g2d-samples"

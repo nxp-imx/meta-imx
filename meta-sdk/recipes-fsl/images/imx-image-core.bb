@@ -25,7 +25,7 @@ CLINFO:imxgpu = "clinfo"
 CLINFO:mx8mm = ""
 
 DOCKER ?= ""
-DOCKER_mx8 = "docker"
+DOCKER:mx8 = "docker"
 
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
