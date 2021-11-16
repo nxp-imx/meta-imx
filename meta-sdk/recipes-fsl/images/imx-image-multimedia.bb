@@ -39,9 +39,8 @@ V2X_PKGS:mx8dxl = "packagegroup-imx-v2x"
 DOCKER ?= ""
 DOCKER_mx8 = "docker"
 
-G2D_SAMPLES                 = ""
-G2D_SAMPLES_imxgpu2d        = "imx-g2d-samples"
-G2D_SAMPLES_imxgpu2d_imxdpu = ""
+G2D_SAMPLES          = ""
+G2D_SAMPLES:imxgpu2d = "imx-g2d-samples"
 
 CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-core-full-cmdline \
