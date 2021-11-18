@@ -18,9 +18,9 @@ DEPENDS += "lzop-native bc-native"
 
 SRCBRANCH = "next"
 LOCALVERSION = "-lts-next"
-KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
+KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 KBRANCH = "${SRCBRANCH}"
-SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${KERNEL_SRC}"
 
 SRCREV = "e631957cfccbb09737224e3d935c0a9ebf009132"
 
