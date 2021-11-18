@@ -2,10 +2,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://profile"
 
-INI_UNCOMMENT_ASSIGNMENTS:append:mx8ulp = " \
-    use-g2d=1 \
-"
-
 WATCHDOG_SEC = "40"
 WATCHDOG_SEC:mx8ulp = "240"
 
