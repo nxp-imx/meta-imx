@@ -8,7 +8,7 @@ DEPENDS = "virtual/libg2d"
 GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxpmicro/g2d-samples.git;protocol=https"
 SRCBRANCH ?= "master"
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
-SRCREV = "57da8a73ccc1dd19cb1b39d2913ad3694770fbc5"
+SRCREV = "d4f23654f21d4a1b31e29178454dda96774331d5"
 
 S = "${WORKDIR}/git"
 
