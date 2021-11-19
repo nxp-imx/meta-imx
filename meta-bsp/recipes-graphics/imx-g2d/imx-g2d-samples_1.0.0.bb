@@ -12,11 +12,8 @@ SRCREV = "d4f23654f21d4a1b31e29178454dda96774331d5"
 
 S = "${WORKDIR}/git"
 
-# Wayland samples require DPU
-PACKAGECONFIG_WAYLAND = ""
-PACKAGECONFIG_WAYLAND:imxdpu = "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 
-PACKAGECONFIG ??= "${PACKAGECONFIG_WAYLAND}"
 PACKAGECONFIG[wayland] = "USE_WAYLAND=true,USE_WAYLAND=false,wayland-native wayland-protocols"
 
 EXTRA_OEMAKE += " \
@@ -29,3 +26,5 @@ do_install() {
 }
 
 FILES:${PN} += "/opt"
+
+COMPATIBLE_MACHINE = "(imxgpu2d)"
