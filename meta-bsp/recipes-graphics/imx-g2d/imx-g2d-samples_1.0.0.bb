@@ -16,6 +16,9 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 
 PACKAGECONFIG[wayland] = "USE_WAYLAND=true,USE_WAYLAND=false,wayland-native wayland-protocols"
 
+# FIXME: Use single thread to avoid the race condition
+PARALLEL_MAKE="-j 1"
+
 EXTRA_OEMAKE += " \
     SDKTARGETSYSROOT=${STAGING_DIR_HOST} \
     ${PACKAGECONFIG_CONFARGS} \
