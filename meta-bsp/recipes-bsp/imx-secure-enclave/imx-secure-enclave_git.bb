@@ -12,8 +12,8 @@ EXTRA_OEMAKE = "PLAT=ele"
 
 SRCBRANCH = "master"
 SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
-SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
 
+SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
 SRCREV = "4bf83959c9a23d24e78c76a936ba8ae69b34422c"
 
 S = "${WORKDIR}/git"
