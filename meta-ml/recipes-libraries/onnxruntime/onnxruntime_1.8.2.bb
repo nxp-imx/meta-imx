@@ -11,9 +11,17 @@ SRCBRANCH = "lf-5.10.72_2.2.0"
 
 SRCREV = "f7ae553260e2aef966b762511a6da2b94369d96b"
 
-SRC_URI = "\
-    ${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
-"
+SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
+
+# Squeezenet sample model
+SRC_URI += "https://github.com/onnx/models/raw/6ab957a2fe61f34a76c670946f7cbd806d2cacca/vision/classification/squeezenet/model/squeezenet1.0-9.tar.gz;name=squeezenet-model"
+SRC_URI[squeezenet-model.md5sum] = "92e240a948f9bbc92534d752eb465317"
+SRC_URI[squeezenet-model.sha256sum] = "f4c9a2906a949f089bee5ef1bf9ea1c0dc1b49d5abeb1874fff3d206751d0f3b"
+SRC_URI += "https://github.com/onnx/models/raw/6ab957a2fe61f34a76c670946f7cbd806d2cacca/LICENSE;name=squeezenet-license"
+SRC_URI[squeezenet-license.md5sum] = "3b83ef96387f14655fc854ddc3c6bd57"
+SRC_URI[squeezenet-license.sha256sum] = "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+
+
 S = "${WORKDIR}/git"
 
 inherit cmake python3native
@@ -117,6 +125,12 @@ do_compile_append() {
 }
 
 do_install_append() {
+    CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
+    
+    # copy extracted squeezenet tarball and add Apache2 license
+    cp $CP_ARGS ${WORKDIR}/squeezenet ${D}${bindir}/${BP}
+    install -m 0644 ${WORKDIR}/LICENSE ${D}${bindir}/${BP}/squeezenet
+
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
         export PIP_DISABLE_PIP_VERSION_CHECK=1
         export PIP_NO_CACHE_DIR=1
@@ -135,6 +149,7 @@ INSANE_SKIP_${PN}-dev += "dev-elf"
 PACKAGE_BEFORE_PN = "${PN}-tests"
 FILES_${PN}-tests = "${bindir}/${BP}/tests/*"
 FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
+FILES_${PN} += "${bindir}/${BP}/squeezenet"
 
 # libcustom_op_library.so is in bindir, which is intended;
 # onnxruntime_shared_lib_test requires the shlib to be in the same directory as testdata to run properly
