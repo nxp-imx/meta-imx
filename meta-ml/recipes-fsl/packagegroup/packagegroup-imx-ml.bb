@@ -45,12 +45,10 @@ ML_DEEPVIEW_PKGS:mx8mm      = ""
 
 ML_EIQ_PKGS       = ""
 ML_EIQ_PKGS:mx8mm = " \
-    eiq-apps \	
-    tensorflow-extras \
+    eiq-apps \
 "
 ML_EIQ_PKGS:mx8mp = " \
     eiq-apps \
-    tensorflow-extras \
 "
 
 ML_TVM_PKGS            = ""
