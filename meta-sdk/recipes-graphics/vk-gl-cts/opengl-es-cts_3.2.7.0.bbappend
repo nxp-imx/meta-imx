@@ -1,3 +1,7 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+SRC_URI += "file://0001-MGS-4031-Report-NotSupported-for-OpenVG-tests-on-non.patch"
+
 PACKAGECONFIG ?= " \
     egl \
     gles2 \
