@@ -3,7 +3,7 @@
 DESCRIPTION = "Hardening Library for Machine Learning Security"
 SECTION = "security"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=f35df765ff17e69043ea21f350e3229c"
+LIC_FILES_CHKSUM = "file://COPYING;md5=03bcadc8dc0a788f66ca9e2b89f56c6f"
 
 DEPENDS = "opencv"
 
