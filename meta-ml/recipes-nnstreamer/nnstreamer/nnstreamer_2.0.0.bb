@@ -30,6 +30,8 @@ SRC_URI = "\
     file://0001-Filter-TFLite-Disable-default-delegates-usage.patch \
     file://0001-Filter-TFLite-Add-external-delegate-meson-build-opti.patch \
     file://0002-Filter-TFLite-Add-external-delegate-support.patch \
+    file://0001-Filter-TFLite-Add-XNNPACK-meson-build-option.patch \
+    file://0002-Filter-TFLite-Fix-XNNPACK-fixed-address-buffer-handl.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -74,7 +76,8 @@ PACKAGECONFIG[python3] = "\
 "
 
 PACKAGECONFIG[tensorflow-lite] = "\
-	-Dtflite2-support=enabled -Dtflite2-nnapi-delegate-support=true -Dtflite2-external-delegate-support=true, \
+	-Dtflite2-support=enabled -Dtflite2-nnapi-delegate-support=true \
+	-Dtflite2-external-delegate-support=true -Dtflite2-xnnpack-delegate-support=true, \
 	-Dtflite2-support=disabled, \
 	tensorflow-lite flatbuffers, \
 	,,\

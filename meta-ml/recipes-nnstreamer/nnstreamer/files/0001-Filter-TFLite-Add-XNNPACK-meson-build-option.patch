@@ -1,0 +1,44 @@
+From 7280ff15a0ce78b25322301618331ae471e6590d Mon Sep 17 00:00:00 2001
+From: Julien Vuillaumier <julien.vuillaumier@nxp.com>
+Date: Wed, 24 Nov 2021 12:09:39 +0100
+Subject: [PATCH 1/2] [Filter/TFLite] Add XNNPACK meson build option
+
+Upstream-Status: Accepted for 2.1.0
+(https://github.com/nnstreamer/nnstreamer/commit/7280ff15a0ce78b25322301618331ae471e6590d)
+
+Signed-off-by: Julien Vuillaumier <julien.vuillaumier@nxp.com>
+---
+ ext/nnstreamer/tensor_filter/meson.build | 4 ++++
+ meson_options.txt                        | 1 +
+ 2 files changed, 5 insertions(+)
+
+diff --git a/ext/nnstreamer/tensor_filter/meson.build b/ext/nnstreamer/tensor_filter/meson.build
+index aafa9402..d6812583 100644
+--- a/ext/nnstreamer/tensor_filter/meson.build
++++ b/ext/nnstreamer/tensor_filter/meson.build
+@@ -238,6 +238,10 @@ if tflite2_support_is_available
+     tflite2_compile_args += '-DTFLITE_EXTERNAL_DELEGATE_SUPPORTED'
+   endif
+ 
++  if get_option('tflite2-xnnpack-delegate-support')
++    tflite2_compile_args += '-DTFLITE_XNNPACK_DELEGATE_SUPPORTED'
++  endif
++
+   tflite2_extra_dep = declare_dependency(
+     compile_args : tflite2_compile_args
+   )
+diff --git a/meson_options.txt b/meson_options.txt
+index 30d472bc..1b1f417f 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -29,6 +29,7 @@ option('enable-pytorch-use-gpu', type: 'boolean', value: false) # default value,
+ option('tflite2-gpu-delegate-support', type: 'boolean', value: 'false')
+ option('tflite2-nnapi-delegate-support', type: 'boolean', value: 'false')
+ option('tflite2-external-delegate-support', type: 'boolean', value: 'false')
++option('tflite2-xnnpack-delegate-support', type: 'boolean', value: 'false')
+ option('enable-mediapipe', type: 'boolean', value: false)
+ option('enable-env-var', type: 'boolean', value: true)
+ option('enable-symbolic-link', type: 'boolean', value: true)
+-- 
+2.25.1
+
