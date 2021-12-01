@@ -19,7 +19,6 @@ ML_NNSTREAMER_PKGS_LIST = " \
 ML_NNSTREAMER_PKGS = ""
 ML_NNSTREAMER_PKGS:imxgpu:mx8 = "${ML_NNSTREAMER_PKGS_LIST}"
 
-
 ML_PKGS            = ""
 ML_PKGS:imxgpu:mx8 = " \
     armnn \
@@ -37,6 +36,12 @@ ML_PKGS:mx8ulp = " \
     pytorch \
     torchvision \
 "
+ML_PKGS:append:mx8qm = " \
+    tensorflow-lite-extras \
+"
+ML_PKGS:append:mx8mp = " \
+    tensorflow-lite-extras \
+"
 ML_PKGS:remove:mx8mm = "tensorflow-lite-vx-delegate"
 
 ML_DEEPVIEW_PKGS            = ""
@@ -46,11 +51,9 @@ ML_DEEPVIEW_PKGS:mx8mm      = ""
 ML_EIQ_PKGS       = ""
 ML_EIQ_PKGS:mx8mm = " \
     eiq-apps \
-    tensorflow-lite-extras \
 "
 ML_EIQ_PKGS:mx8mp = " \
     eiq-apps \
-    tensorflow-lite-extras \
 "
 
 ML_TVM_PKGS            = ""
