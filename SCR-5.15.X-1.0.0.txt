@@ -382,18 +382,6 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-xen.git
-Version:                     4.13.0
-Outgoing License:            GPL-2.0 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    A Virtual Machine Monitor
-Release Location:            https://source.codeaurora.org/external/imx/imx-xen -b rel_imx_5.15.X-1.0.0
-Origin:                      NXP (GPL-2.0)
-
---------------------------------------------
-
 Package:                     imx8ulp-m33-demo-2.11.0.bin
 Version:                     2.11.0
 Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
@@ -1029,30 +1017,6 @@ Release Location:            Mirror
 Origin:                      VeriSilicon Inc. (proprietary)
                              Alliance for Open Media (BSD-2-clause, AFOM Patent License) - http://www.aomedia.org/
                              The WebM project by Google Inc. (BSD-3-clause) https://bugs.chromium.org/p/webm/issues/list
-
---------------------------------------------
-
-Package:                     imx-qtapplications-1.2.2-aarch32.bin
-Version:                     1.2.2
-Outgoing License:            LA_OPT_BASE_LICENSE v26 June 2018 
-License File:                COPYING
-Package Category:            Multimedia
-Type of Content:             binary
-Description and comments:    i.MX QT multimedia player application
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-
-Package:                     imx-qtapplications-1.2.2-aarch64.bin
-Version:                     1.2.2
-Outgoing License:            LA_OPT_BASE_LICENSE v26 June 2018 
-License File:                COPYING
-Package Category:            Multimedia
-Type of Content:             binary
-Description and comments:    i.MX QT multimedia player application
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
