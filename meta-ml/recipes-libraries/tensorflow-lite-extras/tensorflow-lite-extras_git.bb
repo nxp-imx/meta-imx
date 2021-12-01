@@ -1,7 +1,7 @@
 # Copyright 2021 NXP
 DESCRIPTION = "Tensorflow-lite-extras package"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=58b894bdb769ed7c61370049c0b06b05"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7cfe6cb536a3395a386829e7a7a6e49d"
 
 DEPENDS = "opencv tensorflow-lite flatbuffers python3 python3-pip python3-numpy"
 
@@ -9,7 +9,7 @@ EFFICIENTDET_SRC ?= "git://source.codeaurora.org/external/imx/efficientdet-imx.g
 SRCBRANCH = "master"
 
 SRC_URI = "${EFFICIENTDET_SRC};branch=${SRCBRANCH}"
-SRCREV = "ba861cfd5fe7ce09975955408063855eee9ae562"
+SRCREV = "9cd64927f0cea5604b4511b4fd7e2044857357f1"
 
 S = "${WORKDIR}/git"
 
@@ -26,8 +26,8 @@ do_install() {
 
     install -m 0755 ${S}/efficientdet/models/efficientdet-lite0/* ${D}${bindir}/${BPN}
     install -m 0755 ${S}/efficientdet/src/efficientdet_demo ${D}${bindir}/${BPN}
-    install -m 0755 ${S}/efficientdet/src/efficientdet_demo_gpu ${D}${bindir}/${BPN}
     install -m 0755 ${S}/samples/cars_short.mp4 ${D}${bindir}/${BPN}
+    install -m 0755 ${S}/DEMO_README.md ${D}${bindir}/${BPN}
 }
 
 COMPATIBLE_MACHINE = "(mx8qm|mx8mp)"
