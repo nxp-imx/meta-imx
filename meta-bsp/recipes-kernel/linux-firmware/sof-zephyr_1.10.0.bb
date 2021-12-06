@@ -16,10 +16,8 @@ inherit allarch
 
 do_install() {
     # Install firmware image 
-    install -d ${D}${nonarch_base_libdir}/firmware/imx/sof
-    cp -r imx/sof/* ${D}${nonarch_base_libdir}/firmware/imx/sof
+    install -d ${D}${nonarch_base_libdir}/firmware/imx/sof-zephyr-gcc
+    cp -r imx/sof/* ${D}${nonarch_base_libdir}/firmware/imx/sof-zephyr-gcc
 }
 
-FILES:${PN} = "${nonarch_base_libdir}/firmware/imx/sof"
-
-
+FILES:${PN} = "${nonarch_base_libdir}/firmware/imx/sof-zephyr-gcc"
