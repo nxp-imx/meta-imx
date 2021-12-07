@@ -249,7 +249,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-seco-3.8.4.bin
 Version:                     3.8.4
-Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -279,6 +279,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP IMX SECURE ENCLAVE library
 Release Location:            https://github.com/NXP/imx-secure-enclave.git -b rel_imx_5.10.72-2.2.0
+Origin:                      NXP (proprietary)
+
 --------------------------------------------
 
 Package:                     sof-imx-1.9.0-2
@@ -406,7 +408,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx8ulp-m33-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -751,6 +753,8 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
 Release Location:            https://source.codeaurora.org/external/imx/g2d-samples -b rel_imx_5.10.72-2.2.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p2.4-aarch64-fb.bin
@@ -1083,7 +1087,7 @@ Origin:                      NXP (GPL-2.0)
 Package:                     imx-dsp-1.2.0.bin
 Version:                     1.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                
+License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    Proprietary codecs and parsers
@@ -1097,11 +1101,15 @@ Origin:             NXP (proprietary)
 Package:                     imx-dsp-codec-ext-1.2.0.bin
 Version:                     1.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                
+License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    Proprietary codecs and parsers
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             autoconf - Free Software Foundation (FSF All Permissive License)
+                             X Consortium (MIT)
+
 --------------------------------------------
 
 Package:                     nxp-afe.git
@@ -1388,6 +1396,9 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite VX Delegate
 Release Location:            https://source.codeaurora.org/external/imx/tflite-vx-delegate-imx -b rel_imx_5.10.72-2.2.0
+Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/VeriSilicon/tflite-vx-delegate.git
+                             The TensorFlow Authors (Apache-2.0) - https://cs.opensource.google/tensorflow/tensorflow/+/master:tensorflow/lite/examples/minimal/
+
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
