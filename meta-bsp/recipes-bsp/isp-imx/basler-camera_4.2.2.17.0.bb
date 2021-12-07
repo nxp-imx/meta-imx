@@ -8,8 +8,8 @@ inherit fsl-eula-unpack
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "34c6ec78fe76399388fc97ca9aea5bc2"
-SRC_URI[sha256sum] = "d5096a80cace7f5aa1bae5118bea4f413fcbb76bcd5047ac1659804747a341fe"
+SRC_URI[md5sum] = "83a7bb4f6d2297343cdcbc6e96325b9f"
+SRC_URI[sha256sum] = "9b6858f1c7ffdb4fcab44e4e3dc9fa1ae9c4abdf38b941b6a8a6fda156cbe405"
 
 do_install() {
     dest_dir=${D}/opt/imx8-isp/bin
