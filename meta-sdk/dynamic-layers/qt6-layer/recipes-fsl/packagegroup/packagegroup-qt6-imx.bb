@@ -23,6 +23,7 @@ QT6_IMAGE_INSTALL_common = " \
     ${QT6_FONTS} \
     ${QT6_IMAGE_INSTALL_APPS} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxkbcommon', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'nxp-demo-experience', '', d)}\
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d)}\
     "
 QT6_IMAGE_INSTALL:imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT6_IMAGE_INSTALL_common}', \
