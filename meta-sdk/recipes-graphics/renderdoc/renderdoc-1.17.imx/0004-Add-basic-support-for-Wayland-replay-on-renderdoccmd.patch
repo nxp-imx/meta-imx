@@ -1,4 +1,4 @@
-From 1c58f7b8f61c9f6c424f9a3b0bb2290af1c405a7 Mon Sep 17 00:00:00 2001
+From 8a8c29f0231d3ace07f57630041b206b46480e8c Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <and96x@gmail.com>
 Date: Wed, 25 Sep 2019 16:05:17 +0300
 Subject: [PATCH 4/6] Add basic support for Wayland replay on renderdoccmd
@@ -14,7 +14,7 @@ Upstream-Status: Inappropriate [i.MX specific]
  3 files changed, 254 insertions(+), 6 deletions(-)
 
 diff --git a/renderdoc/driver/vulkan/vk_linux.cpp b/renderdoc/driver/vulkan/vk_linux.cpp
-index 103ef82..35d52fe 100644
+index f9a3ca3..77303dd 100644
 --- a/renderdoc/driver/vulkan/vk_linux.cpp
 +++ b/renderdoc/driver/vulkan/vk_linux.cpp
 @@ -306,9 +306,8 @@ void VulkanReplay::GetOutputWindowDimensions(uint64_t id, int32_t &w, int32_t &h
@@ -30,10 +30,10 @@ index 103ef82..35d52fe 100644
      return;
    }
 diff --git a/renderdoccmd/CMakeLists.txt b/renderdoccmd/CMakeLists.txt
-index a801b58..5872186 100644
+index 1f0173d..05c2725 100644
 --- a/renderdoccmd/CMakeLists.txt
 +++ b/renderdoccmd/CMakeLists.txt
-@@ -50,6 +50,10 @@ elseif(UNIX)
+@@ -54,6 +54,10 @@ elseif(UNIX)
          list(APPEND libraries PRIVATE -lX11-xcb)
      endif()
  

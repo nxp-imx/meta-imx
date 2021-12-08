@@ -1,4 +1,4 @@
-From be85cd1fffbf626ef993ed6fa6455b5734743f4f Mon Sep 17 00:00:00 2001
+From ac2024533c80f2b28e35e8f59a1db1a50572ab4d Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <and96x@gmail.com>
 Date: Thu, 26 Sep 2019 13:13:48 +0300
 Subject: [PATCH 5/6] Add window functionalities for Wayland replay support
@@ -25,10 +25,10 @@ Upstream-Status: Inappropriate [i.MX specific]
  6 files changed, 220 insertions(+), 21 deletions(-)
 
 diff --git a/renderdoc/api/replay/control_types.h b/renderdoc/api/replay/control_types.h
-index 8338c7e..ed99642 100644
+index 059952f..4168a45 100644
 --- a/renderdoc/api/replay/control_types.h
 +++ b/renderdoc/api/replay/control_types.h
-@@ -903,6 +903,8 @@ struct WindowingData
+@@ -909,6 +909,8 @@ struct WindowingData
      {
        wl_display *display;
        wl_surface *window;
@@ -38,7 +38,7 @@ index 8338c7e..ed99642 100644
  
      struct
 diff --git a/renderdoc/api/replay/renderdoc_replay.h b/renderdoc/api/replay/renderdoc_replay.h
-index 9178151..c2cb495 100644
+index 735197d..11004d6 100644
 --- a/renderdoc/api/replay/renderdoc_replay.h
 +++ b/renderdoc/api/replay/renderdoc_replay.h
 @@ -145,13 +145,16 @@ DOCUMENT(R"(Create a :class:`WindowingData` for an Wayland ``wl_surface`` handle
@@ -60,7 +60,7 @@ index 9178151..c2cb495 100644
    return ret;
  }
 diff --git a/renderdoc/driver/vulkan/vk_linux.cpp b/renderdoc/driver/vulkan/vk_linux.cpp
-index 35d52fe..7815b54 100644
+index 77303dd..eeaf84e 100644
 --- a/renderdoc/driver/vulkan/vk_linux.cpp
 +++ b/renderdoc/driver/vulkan/vk_linux.cpp
 @@ -194,6 +194,8 @@ void VulkanReplay::OutputWindow::SetWindowHandle(WindowingData window)
@@ -84,7 +84,7 @@ index 35d52fe..7815b54 100644
      return;
    }
 diff --git a/renderdoc/driver/vulkan/vk_replay.h b/renderdoc/driver/vulkan/vk_replay.h
-index 337d940..3edd884 100644
+index fff618c..5aebe22 100644
 --- a/renderdoc/driver/vulkan/vk_replay.h
 +++ b/renderdoc/driver/vulkan/vk_replay.h
 @@ -87,6 +87,8 @@
@@ -97,10 +97,10 @@ index 337d940..3edd884 100644
  
  #else
 diff --git a/renderdoccmd/CMakeLists.txt b/renderdoccmd/CMakeLists.txt
-index 5872186..7e3a44f 100644
+index 05c2725..5e6254f 100644
 --- a/renderdoccmd/CMakeLists.txt
 +++ b/renderdoccmd/CMakeLists.txt
-@@ -52,6 +52,7 @@ elseif(UNIX)
+@@ -56,6 +56,7 @@ elseif(UNIX)
  
      if(ENABLE_WAYLAND)
          list(APPEND libraries PRIVATE -lwayland-client)

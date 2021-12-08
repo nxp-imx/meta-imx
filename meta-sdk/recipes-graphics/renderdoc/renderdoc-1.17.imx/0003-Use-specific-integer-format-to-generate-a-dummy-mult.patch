@@ -1,4 +1,4 @@
-From 3799ccc2f89e9e94e7679e64535b2a9152b693e2 Mon Sep 17 00:00:00 2001
+From e29046719281371a8db4846c66173e2222d49b85 Mon Sep 17 00:00:00 2001
 From: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
 Date: Wed, 15 Jul 2020 14:41:16 +0300
 Subject: [PATCH 3/6] Use specific integer format to generate a dummy
@@ -24,10 +24,10 @@ Signed-off-by: Andrei Catalin Ilie <andreicatalin.ilie@nxp.com>
  2 files changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/renderdoc/driver/vulkan/vk_debug.cpp b/renderdoc/driver/vulkan/vk_debug.cpp
-index c099e25..73aadc9 100644
+index f70475e..cec97c1 100644
 --- a/renderdoc/driver/vulkan/vk_debug.cpp
 +++ b/renderdoc/driver/vulkan/vk_debug.cpp
-@@ -427,7 +427,8 @@ VulkanDebugManager::VulkanDebugManager(WrappedVulkan *driver)
+@@ -426,7 +426,8 @@ VulkanDebugManager::VulkanDebugManager(WrappedVulkan *driver)
    // few since hopefully we'll find one that will work.
    VkFormat attemptFormats[] = {VK_FORMAT_R8G8B8A8_UINT,     VK_FORMAT_R8_UINT,
                                 VK_FORMAT_S8_UINT,           VK_FORMAT_D32_SFLOAT_S8_UINT,
@@ -38,10 +38,10 @@ index c099e25..73aadc9 100644
    for(VkFormat f : attemptFormats)
    {
 diff --git a/renderdoc/driver/vulkan/vk_resources.h b/renderdoc/driver/vulkan/vk_resources.h
-index ef20699..fedd16a 100644
+index 799b5f1..a3a32fb 100644
 --- a/renderdoc/driver/vulkan/vk_resources.h
 +++ b/renderdoc/driver/vulkan/vk_resources.h
-@@ -1343,6 +1343,10 @@ struct ImageSubresourceRange
+@@ -1349,6 +1349,10 @@ struct ImageSubresourceRange
      {
        aspectMask = info.Aspects();
      }
