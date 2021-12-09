@@ -13,7 +13,6 @@ RDEPENDS:${PN} = " \
     imx-seco-libs \
     ecdsa-lib-imx \
     v2xsehsm \
-    vtest \
     util-linux-fdisk \
     util-linux-rtcwake \
     e2fsprogs-resize2fs \
