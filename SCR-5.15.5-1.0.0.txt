@@ -433,8 +433,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     ecdsa-lib-imx-3.3.2.bin
-Version:                     3.3.2
+Package:                     ecdsa-lib-imx-3.3.2.3.bin
+Version:                     3.3.2.3
 Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
@@ -1217,8 +1217,8 @@ Origin:                      Au-Zone Technologies (proprietary)
 
 --------------------------------------------
 
-Package:                     deepview-rt-examples-1.2.bin
-Version:                     1.2
+Package:                     deepview-rt-examples-1.3.bin
+Version:                     1.3
 Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            MachineLearning
@@ -1254,6 +1254,16 @@ Release Location:            https://source.codeaurora.org/external/imx/eiq-tvm-
 Origin:                      NXP (Apache-2.0)
                              Apache TVM (Apache-2.0) - https://github.com/apache/tvm
 
+--------------------------------------------
+
+Package:                     nnshark.git
+Version:                     2021.10.imx
+Outgoing License:            GPL-2.0 
+License File:                COPYING
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    A GStreamer NNstreamer pipelines real-time profiling plugin
+Release Location:            https://source.codeaurora.org/external/imx/nnshark -b rel_imx_5.15.5-1.0.0
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
