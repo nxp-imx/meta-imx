@@ -1,7 +1,7 @@
 require recipes-support/opencv/opencv_4.5.2.imx.bb
 
 SRCBRANCH = "4.5.4_imx"
-SRCREV_opencv = "4ec72bbcf1a999d5c59bc84c306f589aa491bb7f"
+SRCREV_opencv = "9eb733fe4eadddb30a268d9d186ee5f114b16287"
 SRCREV_contrib = "2bc3e1a169afd2675ef68221176f32cc0ea5427a"
 SRCREV_extra = "822ee11240b969e98e20546663bc481a5e7089cc"
 SRC_URI:remove = " \
