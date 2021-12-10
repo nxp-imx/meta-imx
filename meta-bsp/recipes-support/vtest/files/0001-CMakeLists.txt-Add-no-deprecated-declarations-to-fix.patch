@@ -1,0 +1,27 @@
+From ae4cf4a4b9277b856c94ba5a692e3961c828091f Mon Sep 17 00:00:00 2001
+From: Lauren Post <lauren.post@nxp.com>
+Date: Fri, 10 Dec 2021 12:16:18 -0600
+Subject: [PATCH] CMakeLists.txt:  Add no-deprecated-declarations to fix
+ OpenSSL 3.0 upgrade build breaks with deprecated APIS
+
+Signed-off-by: Lauren Post <lauren.post@nxp.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 46e9f55..6f27742 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -64,7 +64,7 @@ target_link_libraries (vtest
+ 	crypto
+ 	)
+ 
+-target_compile_options(vtest PRIVATE -Werror -Wall)
++target_compile_options(vtest PRIVATE -Werror -Wall -Wno-deprecated-declarations)
+ 
+ target_link_options(vtest PRIVATE
+ 	-Wl,--unresolved-symbols=ignore-in-shared-libs)
+-- 
+2.25.1
+

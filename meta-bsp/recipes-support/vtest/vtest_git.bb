@@ -11,6 +11,7 @@ VTEST_SRC ?= "git://source.codeaurora.org/external/imx/vtest.git;protocol=ssh"
 SRC_URI = "${VTEST_SRC};branch=${SRCBRANCH} \
     file://seco_nvm_daemon.service \
     file://0001-Ignore-v2xsehsmConfig.cmake.patch \
+    file://0001-CMakeLists.txt-Add-no-deprecated-declarations-to-fix.patch \
 "
 SRCREV = "f64efd5bb21512ff2d2a48b47e8f5f003e3f0a1a"
 
