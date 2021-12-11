@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ededf2503f5d147ae718276dfd28801f"
 DEPENDS = "imx-gpu-viv nn-imx"
 
 TIM_VX_SRC ?= "git://github.com/nxpmicro/tim-vx-imx.git;protocol=https"
-SRCBRANCH = "imx-v1.1.34"
-SRCREV = "3542647dff0c171e1b151ca1a09d79838f9e3cc9"
+SRCBRANCH = "imx-v1.1.y"
+SRCREV = "75e94b3d9f005ab6ae095bf33c6a994925b5dc6c"
 SRC_URI = "${TIM_VX_SRC};branch=${SRCBRANCH} \
     file://0001-CMakeLists.txt-Use-CMAKE-installation-variables.patch"
 
