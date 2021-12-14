@@ -1267,7 +1267,7 @@ Release Location:            https://source.codeaurora.org/external/imx/nnshark 
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
-Version:                     1.8.2
+Version:                     1.10.0
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
