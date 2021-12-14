@@ -21,9 +21,9 @@ RDEPENDS:${PN} = " \
     iproute2 \
     ${KERNEL_TEST_TOOLS} \
     memtester \
-    python-subprocess \
-    python-datetime \
-    python-json \
+    python3-core \
+    python3-datetime \
+    python3-json \
     ethtool \
     mtd-utils \
     mtd-utils-ubifs \
