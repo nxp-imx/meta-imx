@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 DEPENDS = "libpng zlib ${BPN}-native"
 
 ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH = "imx_1.8.2"
+SRCBRANCH = "imx_1.10.0"
 
-SRCREV = "d3b750460a1d52b44b024548923117091d6e517a"
+SRCREV = "437fcc65fc52da26f1daeb7137de6c7cd796bd47"
 
 SRC_URI = "\
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
