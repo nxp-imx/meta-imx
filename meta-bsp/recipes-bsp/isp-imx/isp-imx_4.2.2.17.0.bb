@@ -64,14 +64,18 @@ do_install() {
 }
 
 # The build contains a mix of versioned and unversioned libraries, so
-# the default packaging configuration needs some modifications
+# the default packaging configuration needs some modification so that
+# unversioned .so libraries go to the main package and versioned .so
+# symlinks go to -dev.
 FILES_SOLIBSDEV = ""
-FILES:${PN} += "/opt ${libdir}/lib*${SOLIBSDEV}"
-FILES:${PN}-dev += " \
+FILES_SOLIBS_VERSIONED = " \
+    ${libdir}/libar1335.so \
     ${libdir}/libjsoncpp.so \
     ${libdir}/libos08a20.so \
     ${libdir}/libov2775.so \
 "
+FILES:${PN} += "/opt ${libdir}/lib*${SOLIBSDEV}"
+FILES:${PN}-dev += "${FILES_SOLIBS_VERSIONED}"
 
 INSANE_SKIP:${PN} = "rpaths"
 
