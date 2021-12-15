@@ -731,18 +731,6 @@ Description and comments:    Graphics G2D sample applications
 Release Location:            https://source.codeaurora.org/external/imx/g2d-samples -b rel_imx_5.15.5-1.0.0
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p4.0-aarch64-fb.bin
-Version:                     6.4.3.p4.0
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Library to retrieve i.MX GPU performance data
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-
 Package:                     libgpuperfcnt-6.4.3.p4.0-aarch64-wayland.bin
 Version:                     6.4.3.p4.0
 Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
