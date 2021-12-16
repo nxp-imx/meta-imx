@@ -2,7 +2,7 @@
 # Build tools and examples here
 include dpdk.inc
 
-DEPENDS = "numactl"
+DEPENDS = "numactl python3-pyelftools-native"
 
 S = "${WORKDIR}/git"
 
