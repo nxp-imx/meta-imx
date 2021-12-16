@@ -271,8 +271,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     sof-imx-1.10.0
-Version:                     1.10.0
+Package:                     sof-imx-2.0.0
+Version:                     2.0.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -471,7 +471,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     dpdk.git
-Version:                     20.11
+Version:                     21.11
 Outgoing License:            BSD-3-Clause 
 License File:                license/bsd-3-clause.txt
 Package Category:            BSP
