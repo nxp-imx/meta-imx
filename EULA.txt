@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v30 October 2021
+LA_OPT_NXP_Software_License v31 December 2021
 
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
@@ -698,6 +698,28 @@ computer at the designated physical address provided by you on the APEX license
 form.
 
 (4) The Licensed Software is not sub-licensable.
+
+T2 Labs / T2 Software (acquired by Sonos):  As a condition to the grant of any
+license under this Agreement, you represent and warrant that you will comply
+with all licenses, agreements, rules and bylaws of the Bluetooth SIG (Special
+Interest Group ) applicable to the licensed software and documentation and its
+use which may affect when and if you may take certain actions under licenses
+granted hereunder.
+
+The license grant under this Agreement is conditional to you being (i) a
+Bluetooth SIG Associate member until such time as the specifications for the
+software are made public to Bluetooth SIG members of any level and (ii)
+thereafter a Bluetooth SIG member of any level.
+
+Notwithstanding the terms contained in Section 2.3 (a), if the licensed
+software includes proprietary software in source code format, you may make
+modifications and create derivative works only to the extent necessary for
+improving the performance of the source code with the NXP products or your
+products and for creating enhancements of such products. You may not further
+sublicense or otherwise distribute the source code, or any modifications or
+derivatives thereof as stand-alone products.  You will be responsible for
+qualifying any modifications or derivatives with the Bluetooth SIG and any
+other qualifying bodies.
 
 TARA Systems: Use of TARA Systems GUI technology Embedded Wizard is limited to
 evaluation and demonstration only. Permitted distributions must be similarly
