@@ -2,7 +2,7 @@
 
 DESCRIPTION = "i.MX vc8000e encoder library for Kenrel 5.15"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=03bcadc8dc0a788f66ca9e2b89f56c6f" 
+LIC_FILES_CHKSUM = "file://COPYING;md5=dedee5689786754f61ea3a76035c8a81"
 
 SRC_URI[md5sum] = "362d73d4e17e64933e08aeb2e0b32657"
 SRC_URI[sha256sum] = "0fbd2e1b4464f288fdc2a2ec6d425a5998d67b632959cf19a394074698cbd795"
