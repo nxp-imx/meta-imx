@@ -729,8 +729,6 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
 Release Location:            https://source.codeaurora.org/external/imx/g2d-samples -b rel_imx_5.15.5-1.0.0
-Origin:                      NXP (BSD-3-Clause)
-
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p4.0-aarch64-wayland.bin
@@ -1318,9 +1316,6 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite VX Delegate
 Release Location:            https://source.codeaurora.org/external/imx/tflite-vx-delegate-imx -b rel_imx_5.15.5-1.0.0
-Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/VeriSilicon/tflite-vx-delegate.git
-                             The TensorFlow Authors (Apache-2.0) - https://cs.opensource.google/tensorflow/tensorflow/+/master:tensorflow/lite/examples/minimal/
-
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
