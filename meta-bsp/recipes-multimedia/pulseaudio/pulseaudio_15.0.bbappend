@@ -1,6 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 IMX_PATCHES = " file://0001-Fix-pulseaudio-mutex-issue-when-do-pause-in-gstreame.patch \
+                file://0001-bluetooth-Only-remove-cards-belonging-to-the-device.patch \
 "
 SRC_URI:append:mx6 = "${IMX_PATCHES}"
 SRC_URI:append:mx7 = "${IMX_PATCHES}"

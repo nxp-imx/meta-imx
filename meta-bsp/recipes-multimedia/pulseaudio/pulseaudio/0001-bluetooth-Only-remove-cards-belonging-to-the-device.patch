@@ -1,0 +1,37 @@
+From b1057f1a37c10ba23855b2a264491cc4a3b45eca Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Juho=20H=C3=A4m=C3=A4l=C3=A4inen?=
+ <juho.hamalainen@jolla.com>
+Date: Fri, 20 Aug 2021 12:55:40 +0300
+Subject: [PATCH] bluetooth: Only remove cards belonging to the device.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Commit f89d64b98e12bb71b6aa94fcef31eafc060f9759 fixed a crash
+when disabling adapters. However, now if any device is removed
+ofono card is removed, even if it belongs to different device.
+
+Add a check for the device being unlinked to our callback to fix.
+
+Signed-off-by: Juho HÃ¤mÃ¤lÃ¤inen <juho.hamalainen@jolla.com>
+Part-of: <https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/624>
+---
+ src/modules/bluetooth/backend-ofono.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/modules/bluetooth/backend-ofono.c b/src/modules/bluetooth/backend-ofono.c
+index 2a212eca03b4..36fe787cf9b1 100644
+--- a/src/modules/bluetooth/backend-ofono.c
++++ b/src/modules/bluetooth/backend-ofono.c
+@@ -250,6 +250,9 @@ static pa_hook_result_t device_unlink_cb(pa_bluetooth_discovery *y, const pa_blu
+     pa_assert(d);
+     pa_assert(card);
+ 
++    if (d != card->transport->device)
++        return PA_HOOK_OK;
++
+     hf_audio_agent_card_removed(card->backend, card->path);
+ 
+     return PA_HOOK_OK;
+-- 
+2.27.0
