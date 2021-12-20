@@ -6,7 +6,7 @@ include imx-parser.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=dedee5689786754f61ea3a76035c8a81"
 
-SRC_URI[md5sum] = "f5ab8b24a7733faee48c32614b24b4eb"
-SRC_URI[sha256sum] = "085abe1041371bec324f973b6fd5c83caa7806c2fbf22c4e57bca51010fce40c"
+SRC_URI[md5sum] = "21878e27ae7eaa53d5c91d4823cb5b79"
+SRC_URI[sha256sum] = "7a83cd3c7700746b8d631d1c1c1170c6a6080f6c94082c6823b83e4608418d72"
 
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
