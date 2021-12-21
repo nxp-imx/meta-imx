@@ -100,7 +100,7 @@ SRC_URI:remove = " \
     file://0003-Remove-volatile-from-static-vars-to-fix-build-with-g.patch \
 "
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
-SRCBRANCH = "imx-1.18.x"
+SRCBRANCH = "MM_04.06.04_2112_L5.15.y"
 SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
 SRCREV = "1e567fa894fc304957a6c54066c1af211bde026a"
 
