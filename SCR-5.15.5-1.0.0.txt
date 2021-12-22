@@ -382,9 +382,9 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx8ulp-m33-demo-2.11.0.bin
-Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Package:                     imx8ulp-m33-demo-2.11.1.bin
+Version:                     2.11.1
+Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -729,6 +729,8 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
 Release Location:            https://source.codeaurora.org/external/imx/g2d-samples -b rel_imx_5.15.5-1.0.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p4.0-aarch64-wayland.bin
@@ -1316,6 +1318,9 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite VX Delegate
 Release Location:            https://source.codeaurora.org/external/imx/tflite-vx-delegate-imx -b rel_imx_5.15.5-1.0.0
+Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/VeriSilicon/tflite-vx-delegate.git
+                             The TensorFlow Authors (Apache-2.0) - https://cs.opensource.google/tensorflow/tensorflow/+/master:tensorflow/lite/examples/minimal/
+
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
