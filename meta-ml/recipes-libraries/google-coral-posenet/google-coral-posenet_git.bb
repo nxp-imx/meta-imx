@@ -12,7 +12,7 @@ SRCBRANCH = "lf-5.15.5_1.0.0"
 SRC_URI = "${GOOGLE_CORAL_POSENET_SRC};branch=${SRCBRANCH} \
            git://github.com/google-coral/project-posenet.git;protocol=https;name=project-posenet;subpath=models;destsuffix=git/edgetpu/models \
 "
-SRCREV = "21e8d00dcd3c0dc4fd3cf91378f75ee3d1eef1e4"
+SRCREV = "938fb3bc4e78d4eaa3cf91baceaa87893547fa55"
 SRCREV_project-posenet = "58a611ed1135852b8e97a7626777a7304e8ecc21"
 
 SRC_URI += "https://dl.google.com/coral/canned_models/all_models.tar.gz;name=canned-models;subdir=canned-models"
