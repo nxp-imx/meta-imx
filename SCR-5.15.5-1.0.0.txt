@@ -1024,6 +1024,34 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
+Package:                     imx-dsp-1.2.1.bin
+Version:                     1.2.1
+Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
+License File:                
+Package Category:            Multimedia
+Type of Content:             binary
+Description and comments:    Proprietary codecs and parsers
+Release Location:            Mirror
+Origin:             NXP (proprietary)
+                    Cadence (MIT)
+                    Matt Redfearn (BSD-3-clause)
+
+--------------------------------------------
+
+Package:                     imx-dsp-codec-ext-1.2.1.bin
+Version:                     1.2.1
+Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
+License File:                
+Package Category:            Multimedia
+Type of Content:             binary
+Description and comments:    Proprietary codecs and parsers
+Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             autoconf - Free Software Foundation (FSF All Permissive License)
+                             X Consortium (MIT)
+
+--------------------------------------------
+
 Package:                     nxp-afe.git
 Version:                     1.0
 Outgoing License:            BSD-3-Clause 
@@ -1366,7 +1394,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.35
+Version:                     1.1.38
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
