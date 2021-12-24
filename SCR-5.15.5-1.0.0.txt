@@ -1027,7 +1027,7 @@ Origin:                      NXP (GPL-2.0)
 Package:                     imx-dsp-1.2.1.bin
 Version:                     1.2.1
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                
+License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    Proprietary codecs and parsers
@@ -1041,7 +1041,7 @@ Origin:             NXP (proprietary)
 Package:                     imx-dsp-codec-ext-1.2.1.bin
 Version:                     1.2.1
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                
+License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    Proprietary codecs and parsers
@@ -1223,9 +1223,9 @@ Origin:                      NXP (LGPL-2.1)
 
 --------------------------------------------
 
-Package:                     deepview-rt-2.4.32-aarch64.bin
-Version:                     2.4.32-aarch64
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - No distribution license granted - Section 2.2 applies 
+Package:                     deepview-rt-2.4.36-aarch64.bin
+Version:                     2.4.36-aarch64
+Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
@@ -1237,7 +1237,7 @@ Origin:                      Au-Zone Technologies (proprietary)
 
 Package:                     deepview-rt-examples-1.3.bin
 Version:                     1.3
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
