@@ -538,8 +538,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.3.p4.0-aarch32.bin
-Version:                     6.4.3.p4.0
+Package:                     imx-gpu-viv-6.4.3.p4.2-aarch32.bin
+Version:                     6.4.3.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -557,8 +557,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.3.p4.0-aarch64.bin
-Version:                     6.4.3.p4.0
+Package:                     imx-gpu-viv-6.4.3.p4.2-aarch64.bin
+Version:                     6.4.3.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -686,7 +686,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gputop.git
-Version:                     6.4.3.p4.0
+Version:                     6.4.3.p4.2
 Outgoing License:            MIT 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -697,8 +697,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.3.p4.0-arm.bin
-Version:                     6.4.3.p4.0
+Package:                     imx-gpu-g2d-6.4.3.p4.2-arm.bin
+Version:                     6.4.3.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -709,8 +709,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.3.p4.0-aarch64.bin
-Version:                     6.4.3.p4.0
+Package:                     imx-gpu-g2d-6.4.3.p4.2-aarch64.bin
+Version:                     6.4.3.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -731,8 +731,8 @@ Description and comments:    Graphics G2D sample applications
 Release Location:            https://source.codeaurora.org/external/imx/g2d-samples -b rel_imx_5.15.5-1.0.0
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p4.0-aarch64-wayland.bin
-Version:                     6.4.3.p4.0
+Package:                     libgpuperfcnt-6.4.3.p4.2-aarch64-wayland.bin
+Version:                     6.4.3.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -743,8 +743,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p4.0-arm-fb.bin
-Version:                     6.4.3.p4.0
+Package:                     libgpuperfcnt-6.4.3.p4.2-arm-fb.bin
+Version:                     6.4.3.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -755,8 +755,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p4.0-arm-wayland.bin
-Version:                     6.4.3.p4.0
+Package:                     libgpuperfcnt-6.4.3.p4.2-arm-wayland.bin
+Version:                     6.4.3.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -1022,6 +1022,30 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
+Package:                     imx-dsp-1.2.1.bin
+Version:                     1.2.1
+Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
+License File:                COPYING
+Package Category:            Multimedia
+Type of Content:             binary
+Description and comments:    Proprietary codecs and parsers
+Release Location:            Mirror
+Origin:             NXP (proprietary)
+                    Cadence (MIT)
+                    Matt Redfearn (BSD-3-clause)
+
+--------------------------------------------
+
+Package:                     imx-dsp-codec-ext-1.2.1.bin
+Version:                     1.2.1
+Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
+License File:                COPYING
+Package Category:            Multimedia
+Type of Content:             binary
+Description and comments:    Proprietary codecs and parsers
+Release Location:            Mirror
+--------------------------------------------
+
 Package:                     nxp-afe.git
 Version:                     1.0
 Outgoing License:            BSD-3-Clause 
@@ -1193,8 +1217,8 @@ Origin:                      NXP (LGPL-2.1)
 
 --------------------------------------------
 
-Package:                     deepview-rt-2.4.32-aarch64.bin
-Version:                     2.4.32-aarch64
+Package:                     deepview-rt-2.4.36-aarch64.bin
+Version:                     2.4.36-aarch64
 Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - No distribution license granted - Section 2.2 applies 
 License File:                COPYING
 Package Category:            MachineLearning
@@ -1334,8 +1358,8 @@ Origin:                      Vivante Corporation (MIT)
 Tools Packages
 --------------------------------------------
 
-Package:                     VivanteIDE-6.4.3.p4.0.tgz
-Version:                     6.4.3.p4.0
+Package:                     VivanteIDE-6.4.3.p4.2.tgz
+Version:                     6.4.3.p4.2
 Outgoing License:            VeriSilicon License 
 License File:                
 Package Category:            Tools
@@ -1361,7 +1385,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.35
+Version:                     1.1.38
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
