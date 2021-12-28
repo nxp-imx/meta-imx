@@ -17,6 +17,7 @@ KERNEL_PCITEST_SRC ?= " \
              tools/include \
              tools/lib \
              tools/Makefile \
+             tools/iio \
              tools/pci \
              tools/virtio \
              tools/scripts \
@@ -54,6 +55,7 @@ DO_BUILD_VIRTIO:mx8m = "yes"
 do_compile() {
     unset CFLAGS
     oe_runmake -C ${S}/tools/pci
+    oe_runmake -C ${S}/tools/iio
     if [ ${DO_BUILD_VIRTIO} = "yes" ]; then
         oe_runmake -C ${S}/tools/virtio  virtio-ivshmem-console virtio-ivshmem-block
     fi
@@ -62,6 +64,7 @@ do_compile() {
 do_install() {
     unset CFLAGS
     oe_runmake -C ${S}/tools/pci install
+    oe_runmake -C ${S}/tools/iio install
     if [ ${DO_BUILD_VIRTIO} = "yes" ]; then
         install ${S}/tools/virtio/virtio-ivshmem-console  ${D}${bindir}/
         install ${S}/tools/virtio/virtio-ivshmem-block    ${D}${bindir}/
@@ -71,9 +74,11 @@ do_install() {
 ALLOW_EMPTY:${PN} = "1"
 ALLOW_EMPTY:${PN}-virtio = "1"
 
-PACKAGES =+ "${PN}-pci ${PN}-virtio"
+PACKAGES =+ "${PN}-pci ${PN}-virtio ${PN}-iio"
 
 FILES:${PN}-pci = "${bindir}/pci*"
+FILES:${PN}-iio = "${bindir}/lsiio ${bindir}/iio*"
+
 FILES:${PN}-virtio = "${bindir}/virtio-ivshmem-*"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
