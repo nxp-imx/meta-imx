@@ -32,6 +32,7 @@ RDEPENDS:${PN} += " \
     e2fsprogs-resize2fs \
     iw \
     linuxptp \
+    kernel-tools-iio \
     kernel-tools-pci \
     minicom \
     mmc-utils \
