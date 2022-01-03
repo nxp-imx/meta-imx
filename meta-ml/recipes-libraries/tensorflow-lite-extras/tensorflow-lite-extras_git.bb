@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7cfe6cb536a3395a386829e7a7a6e49d"
 DEPENDS = "opencv tensorflow-lite flatbuffers python3 python3-pip python3-numpy"
 
 EFFICIENTDET_SRC ?= "git://source.codeaurora.org/external/imx/efficientdet-imx.git;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "lf-5.15.5_1.0.0"
 
 SRC_URI = "${EFFICIENTDET_SRC};branch=${SRCBRANCH}"
 SRCREV = "9cd64927f0cea5604b4511b4fd7e2044857357f1"
