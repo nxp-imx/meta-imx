@@ -32,6 +32,7 @@ SRC_URI = "\
     file://0002-Filter-TFLite-Add-external-delegate-support.patch \
     file://0001-Filter-TFLite-Add-XNNPACK-meson-build-option.patch \
     file://0002-Filter-TFLite-Fix-XNNPACK-fixed-address-buffer-handl.patch \
+    file://0001-Filter-TFLite-Fix-delegates-deleter-usage.patch \
 "
 
 S = "${WORKDIR}/git"
