@@ -1,11 +1,4 @@
-#@TYPE: Machine
-#@NAME: i.MX 8DXL EVK
-#@DESCRIPTION: i.MX 8DXL Evaluation Kit (EVK) board
-
-MACHINEOVERRIDES =. "mx8:mx8x:mx8dxl:"
-
-require conf/machine/include/imx-base.inc
-require conf/machine/include/arm/arch-arm64.inc
+# Provides the i.MX8DXL EVK common settings
 
 MACHINE_FEATURES_append = " pci bcm43455 bcm4356 bcm4359 nxp8997"
 
@@ -22,24 +15,8 @@ SERIAL_CONSOLES = "115200;ttyLP0"
 # auto-serial-console there
 USE_VT = "0"
 
-KERNEL_DEVICETREE = "freescale/imx8dxl-evk.dtb \
-                     freescale/imx8dxl-evk-enet0.dtb freescale/imx8dxl-evk-enet0-tja1100.dtb \
-                     freescale/imx8dxl-evk-inmate.dtb \
-                     freescale/imx8dxl-evk-lcdif.dtb freescale/imx8dxl-evk-lpspi-slave.dtb \
-                     freescale/imx8dxl-evk-pcie-ep.dtb \
-                     freescale/imx8dxl-evk-root.dtb \
-                     freescale/imx8dxl-evk-rpmsg.dtb"
-# Add DTB of i.MX 8DXL DDR3 EVK
-KERNEL_DEVICETREE += "freescale/imx8dxl-ddr3-evk.dtb \
-                     freescale/imx8dxl-ddr3-evk-rpmsg.dtb \
-"
-
 UBOOT_MAKE_TARGET = "all"
 SPL_BINARY = "spl/u-boot-spl.bin"
-
-UBOOT_CONFIG ??= "sd"
-UBOOT_CONFIG[sd]   = "imx8dxl_evk_defconfig,sdcard"
-UBOOT_CONFIG[fspi]   = "imx8dxl_evk_fspi_defconfig"
 
 IMAGE_BOOTLOADER = "imx-boot"
 IMX_BOOT_SEEK = "32"
@@ -53,5 +30,3 @@ IMXBOOT_TARGETS_FSPI = \
 IMXBOOT_TARGETS = \
     "${@bb.utils.contains('UBOOT_CONFIG',        'sd', '${IMXBOOT_TARGETS_SD}', \
                                                        '${IMXBOOT_TARGETS_FSPI}', d)}"
-
-BOARD_TYPE = "evk"
