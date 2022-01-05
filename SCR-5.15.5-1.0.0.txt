@@ -69,8 +69,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.15.bin
-Version:                     8.15
+Package:                     firmware-imx-8.16.bin
+Version:                     8.16
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
