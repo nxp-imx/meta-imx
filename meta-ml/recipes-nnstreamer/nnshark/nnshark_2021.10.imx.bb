@@ -13,7 +13,7 @@ DEPENDS = "\
 
 NNSHARK_SRC ?= "git://source.codeaurora.org/external/imx/nnshark.git;protocol=https"
 SRCBRANCH ?= "2021.10.imx"
-SRCREV = "b2943cdda24f23586ea82c3bf735cfa6a9045f59"
+SRCREV = "c815749eac865bfb7175c61ed13093e6837aea6f"
 
 SRC_URI = "${NNSHARK_SRC};branch=${SRCBRANCH}"
 
