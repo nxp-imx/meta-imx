@@ -6,6 +6,7 @@ PREFERRED_VERSION_linux-libc-headers:imx ?= "5.14"
 
 PREFERRED_PROVIDER_opencl-headers:imxgpu = "imx-gpu-viv"
 PREFERRED_PROVIDER_opencl-icd-loader:imxgpu = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libgles3:imxgpu3d = "imx-gpu-viv"
 
 PREFERRED_VERSION_gstreamer1.0-plugins-base = "1.18.5.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "1.18.5.imx"
