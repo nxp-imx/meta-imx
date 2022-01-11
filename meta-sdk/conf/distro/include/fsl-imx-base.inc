@@ -2,7 +2,7 @@ require conf/distro/poky.conf
 
 DISTRO = "imx-nxp"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION = "5.15-honister"
+DISTRO_VERSION = "5.15-kirkstone"
 
 MAINTAINER = "NXP <lauren.post@nxp.com>"
 
