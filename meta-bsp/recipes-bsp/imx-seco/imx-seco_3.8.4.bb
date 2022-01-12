@@ -1,10 +1,8 @@
-# Copyright 2019-2021 NXP
-
+# Copyright 2019-2022 NXP
 SUMMARY = "NXP i.MX SECO firmware"
-DESCRIPTION = "NXP IMX SECO firmware"
+DESCRIPTION = "Firmware for i.MX SECO Security Controller"
 SECTION = "base"
 LICENSE = "Proprietary"
-
 LIC_FILES_CHKSUM = "file://COPYING;md5=03bcadc8dc0a788f66ca9e2b89f56c6f"
 
 inherit fsl-eula-unpack use-imx-security-controller-firmware deploy

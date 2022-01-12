@@ -1,4 +1,4 @@
-# Copyright 2017-2021 NXP
+# Copyright 2017-2022 NXP
 
 require imx-mkimage_git.inc
 
@@ -16,7 +16,6 @@ IMX_M4_DEMOS:mx8ulp = "imx-m33-demos:do_deploy"
 M4_DEFAULT_IMAGE:mx8ulp = "imx8ulp_m33_TCM_rpmsg_lite_str_echo_rtos.bin"
 ATF_MACHINE_NAME:mx8ulp = "bl31-imx8ulp.bin"
 IMX_EXTRA_FIRMWARE:mx8ulp = "firmware-upower firmware-sentinel"
-SECO_FIRMWARE_NAME:mx8ulp = "mx8ulpa0-ahab-container.img"
 SOC_TARGET:mx8ulp = "iMX8ULP"
 SOC_FAMILY:mx8ulp = "mx8ulp"
 
@@ -42,16 +41,14 @@ do_compile:prepend() {
 
 compile_mx8ulp() {
     bbnote 8ULP boot binary build
+    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}/
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
+    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/upower.bin          ${BOOT_STAGING}/upower.bin
     cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${BOOT_STAGING}/u-boot.bin
     if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
         cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
                                                              ${BOOT_STAGING}/u-boot-spl.bin
     fi
-
-    # Copy SECO F/W and upower.bin
-    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SECO_FIRMWARE_NAME}  ${BOOT_STAGING}/
-    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/upower.bin          ${BOOT_STAGING}/upower.bin
 }
 
 do_deploy:append() {
@@ -77,6 +74,7 @@ do_deploy:append() {
 
 deploy_mx8ulp() {
     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
+    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
     if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
         install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
