@@ -16,6 +16,9 @@ do_install() {
     # SDMA Firmware section
     install -d ${D}${nonarch_base_libdir}/firmware/imx/sdma
     install -m 0644 ${S}/firmware/sdma/* ${D}${nonarch_base_libdir}/firmware/imx/sdma
+    # Comment these lines to use sdma-imx6q/7d.bin from here and not linux-firmware
+    #rm -f ${D}${nonarch_base_libdir}/firmware/imx/sdma/sdma-imx6q.bin
+    #rm -f ${D}${nonarch_base_libdir}/firmware/imx/sdma/sdma-imx7d.bin
 
     # EASRC Firmware section
     install -d ${D}${nonarch_base_libdir}/firmware/imx/easrc
@@ -127,4 +130,4 @@ FILES:${PN}-hdmi = " \
     ${nonarch_base_libdir}/firmware/dpfw.bin \
 "
 
-COMPATIBLE_MACHINE = "(imx)"
+COMPATIBLE_MACHINE = "(imx|use-mainline-bsp)"
