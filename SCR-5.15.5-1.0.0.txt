@@ -103,7 +103,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     firmware-sentinel-0.2.bin
 Version:                     0.2
-Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -223,7 +223,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -249,7 +249,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-seco-3.8.4.bin
 Version:                     3.8.4
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -261,7 +261,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-seco-libs.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v23 May 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
@@ -399,7 +399,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     ml-security-1.0.6.bin
 Version:                     1.0.6
-Outgoing License:            LA_OPT_NXP_Software_License v25 June 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -435,7 +435,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     ecdsa-lib-imx-3.3.2.3.bin
 Version:                     3.3.2.3
-Outgoing License:            LA_OPT_NXP_Software_License v22 April 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -929,7 +929,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-sw-pdm-1.0.2.bin
 Version:                     1.0.2
-Outgoing License:            LA_OPT_NXP_Software_License v15 August 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1047,7 +1047,7 @@ Release Location:            Mirror
 --------------------------------------------
 
 Package:                     nxp-afe.git
-Version:                     1.0
+Version:                     1
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Multimedia
@@ -1270,8 +1270,8 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     nnshark.git
 Version:                     2021.10.imx
-Outgoing License:            GPL-2.0 
-License File:                COPYING
+Outgoing License:            LGPL-2.1 
+License File:                COPYING.LESSER
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    A GStreamer NNstreamer pipelines real-time profiling plugin
