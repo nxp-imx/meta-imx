@@ -1090,7 +1090,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mm-m4-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1162,7 +1162,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mnddr3l-m7-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2020 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1306,19 +1306,6 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     torchvision.git
-Version:                     
-Outgoing License:            BSD-3-Clause 
-License File:                LICENSE
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    The torchvision package consists of popular datasets model architectures and common image transformations for computer vision
-Release Location:            https://github.com/NXPmicro/pytorch-release -b rel_imx_5.15.5-1.0.0
-Origin:                      NXP (BSD-3-Clause)
-                             pytorch (BSD-3-clause) - https://github.com/pytorch/pytorch
-
---------------------------------------------
-
 Package:                     tensorflow-imx.git
 Version:                     2.6.0
 Outgoing License:            Apache-2.0 
@@ -1334,7 +1321,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     tflite-vx-delegate-imx.git
 Version:                     2.6.0
-Outgoing License:            MIT 
+Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
@@ -1391,7 +1378,7 @@ License File:                LICENSE
 Package Category:            Tools
 Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use bcu.
-Release Location:            ssh://git@bitbucket.sw.nxp.com/imx/bcu.git -b master
+Release Location:            https://github.com/NXPmicro/bcu.git -b master
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
