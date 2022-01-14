@@ -16,7 +16,7 @@ SRC_URI = " \
 SRCREV = "53abc4f660191051fba91ea30de084f412e7c68e"
 S = "${WORKDIR}/git"
 
-inherit meson
+inherit meson pkgconfig
 
 PACKAGECONFIG ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
