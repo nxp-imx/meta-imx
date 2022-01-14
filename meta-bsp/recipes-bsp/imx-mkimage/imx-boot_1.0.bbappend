@@ -19,6 +19,8 @@ IMX_EXTRA_FIRMWARE:mx8ulp = "firmware-upower firmware-sentinel"
 SOC_TARGET:mx8ulp = "iMX8ULP"
 SOC_FAMILY:mx8ulp = "mx8ulp"
 
+REV_OPTION:mx8dxlb0 = "REVISION=B0"
+REV_OPTION:mx8dxla1 = "REVISION=A1"
 
 do_compile[depends] += "${IMX_M4_DEMOS}"
 
