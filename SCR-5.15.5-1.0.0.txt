@@ -247,18 +247,6 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-seco-3.8.4.bin
-Version:                     3.8.4
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    BSP firmware - SECO
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-
 Package:                     imx-seco-libs.git
 Version:                     
 Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
@@ -1047,7 +1035,7 @@ Release Location:            Mirror
 --------------------------------------------
 
 Package:                     nxp-afe.git
-Version:                     1
+Version:                     1.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Multimedia
