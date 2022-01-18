@@ -12,6 +12,8 @@ SRCREV = "267af142881d350218c2c2cead8f304a28bbee07"
 
 S = "${WORKDIR}/git"
 
+inherit pkgconfig
+
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 
 PACKAGECONFIG[wayland] = "USE_WAYLAND=true,USE_WAYLAND=false,wayland-native wayland-protocols"
