@@ -13,6 +13,7 @@ POKY_DEFAULT_DISTRO_FEATURES:append:mx8  = " jailhouse"
 
 DISTRO_FEATURES:append:mx8 = " virtualization"
 
-INHERIT:remove = "uninative"
+IMX_REMOVE_INHERIT_UNINATIVE ?= "uninative"
+INHERIT:remove = "${IMX_REMOVE_INHERIT_UNINATIVE}"
 
 PACKAGECONFIG:append:pn-gstreamer1.0-plugins-ugly = " x264"
