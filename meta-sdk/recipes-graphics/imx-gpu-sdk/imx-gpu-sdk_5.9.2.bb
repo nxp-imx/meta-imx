@@ -10,13 +10,16 @@ DEPENDS_BACKEND = \
 DEPENDS_MX8       = ""
 DEPENDS_MX8:mx8   = " \
     glslang-native \
+    opencv \
     rapidopencl \
     rapidopenvx \
     rapidvulkan \
     vulkan-headers \
     vulkan-loader \
 "
-DEPENDS_MX8:mx8mm = ""
+DEPENDS_MX8:mx8mm = " \
+    opencv \
+"
 DEPENDS = " \
     assimp \
     cmake-native \
@@ -42,7 +45,7 @@ DEPENDS:append:imxgpu3d = " virtual/libgles2"
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
-SRCREV = "fb908cb32966dc3b80168ef3509379ec71d89be3"
+SRCREV = "f012e4541edbf06a2a96d97b99af75841f1a811c"
 S = "${WORKDIR}/git"
 
 BACKEND = \
@@ -58,8 +61,8 @@ FEATURES:append           = "${FEATURES_SOC}"
 FEATURES_SOC              = ""
 FEATURES_SOC:mx6q         = ",OpenGLES3"
 FEATURES_SOC:mx6dl        = ",OpenGLES3"
-FEATURES_SOC:mx8          = ",OpenCV,Vulkan,OpenGLES3.2,OpenCL1.2,OpenVX1.1"
-FEATURES_SOC:mx8mm        = ",OpenCV"
+FEATURES_SOC:mx8          = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.1"
+FEATURES_SOC:mx8mm        = ",OpenCV4"
 
 EXTENSIONS       = "*"
 EXTENSIONS:mx6q  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
