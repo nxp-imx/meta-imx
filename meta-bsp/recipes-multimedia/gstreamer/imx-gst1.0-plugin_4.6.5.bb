@@ -26,7 +26,7 @@ SRCBRANCH = "master"
 
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "5fd1d6bcd2432fcf322f6c6b27fbff8b738ff2e0"
+SRCREV = "f217c49446e6ca6c09b699dbc28d665abac0544f"
 
 S = "${WORKDIR}/git"
 
