@@ -1,0 +1,104 @@
+From d6c1bf7031cbd96c1d0dec589f318ad942107d23 Mon Sep 17 00:00:00 2001
+From: Pankaj Gupta <pankaj.gupta@nxp.com>
+Date: Tue, 18 Jan 2022 17:37:37 +0530
+Subject: [PATCH 1/2] e_devcrypto: add func ptr for init, do, ctrl
+
+In engine "devcrypto", as part prepare_cipher_methods()
+- Added function pointer for init, do, ctrl and
+  variable "flags" such that:
+- New cipher can override them to support offloads
+  to h/w via devcrypto.
+
+Upstream-Status: Pending [i.MX, Layerscape specific]
+Signed-off-by: Pankaj Gupta <pankaj.gupta@nxp.com>
+---
+ engines/e_devcrypto.c | 34 ++++++++++++++++++++++++----------
+ 1 file changed, 24 insertions(+), 10 deletions(-)
+
+diff --git a/engines/e_devcrypto.c b/engines/e_devcrypto.c
+index fa01317db5..eb56baec19 100644
+--- a/engines/e_devcrypto.c
++++ b/engines/e_devcrypto.c
+@@ -408,7 +408,11 @@ static int known_cipher_nids_amount = -1; /* -1 indicates not yet initialised */
+ static EVP_CIPHER *known_cipher_methods[OSSL_NELEM(cipher_data)] = { NULL, };
+ static int selected_ciphers[OSSL_NELEM(cipher_data)];
+ static struct driver_info_st cipher_driver_info[OSSL_NELEM(cipher_data)];
+-
++int (*init)(EVP_CIPHER_CTX *ctx, const unsigned char *key,
++                const unsigned char *iv, int enc);
++int (*do_cipher)(EVP_CIPHER_CTX *ctx, unsigned char *out,
++                const unsigned char *in, size_t inl);
++int (*ctrl)(EVP_CIPHER_CTX *ctx, int type, int arg, void *ptr);
+
+ static int devcrypto_test_cipher(size_t cipher_data_index)
+ {
+@@ -427,6 +431,7 @@ static void prepare_cipher_methods(void)
+     size_t i;
+     session_op_t sess;
+     unsigned long cipher_mode;
++    unsigned long flags;
+ #ifdef CIOCGSESSION2
+     struct crypt_find_op fop;
+     enum devcrypto_accelerated_t accelerated;
+@@ -438,16 +443,26 @@ static void prepare_cipher_methods(void)
+
+     memset(&sess, 0, sizeof(sess));
+     sess.key = (void *)"01234567890123456789012345678901234567890123456789";
++    sess.mackey = (void *)"123456789ABCDEFGHIJKLMNO";
+
+     for (i = 0, known_cipher_nids_amount = 0;
+          i < OSSL_NELEM(cipher_data); i++) {
+
+         selected_ciphers[i] = 1;
++
++        init  = cipher_init;
++        ctrl  = cipher_ctrl;
++        flags = cipher_data[i].flags
++                | EVP_CIPH_CUSTOM_COPY
++                | EVP_CIPH_CTRL_INIT
++                | EVP_CIPH_FLAG_DEFAULT_ASN1;
++
+         /*
+          * Check that the cipher is usable
+          */
+         sess.cipher = cipher_data[i].devcryptoid;
+         sess.keylen = cipher_data[i].keylen;
++
+ #ifdef CIOCGSESSION2
+         /*
+          * When using CIOCGSESSION2, first try to allocate a hardware
+@@ -474,6 +489,10 @@ static void prepare_cipher_methods(void)
+
+         cipher_mode = cipher_data[i].flags & EVP_CIPH_MODE;
+
++        do_cipher = (cipher_mode == EVP_CIPH_CTR_MODE ?
++                                              ctr_do_cipher :
++                                              cipher_do_cipher);
++
+         if ((known_cipher_methods[i] =
+                  EVP_CIPHER_meth_new(cipher_data[i].nid,
+                                      cipher_mode == EVP_CIPH_CTR_MODE ? 1 :
+@@ -482,16 +501,11 @@ static void prepare_cipher_methods(void)
+             || !EVP_CIPHER_meth_set_iv_length(known_cipher_methods[i],
+                                               cipher_data[i].ivlen)
+             || !EVP_CIPHER_meth_set_flags(known_cipher_methods[i],
+-                                          cipher_data[i].flags
+-                                          | EVP_CIPH_CUSTOM_COPY
+-                                          | EVP_CIPH_CTRL_INIT
+-                                          | EVP_CIPH_FLAG_DEFAULT_ASN1)
+-            || !EVP_CIPHER_meth_set_init(known_cipher_methods[i], cipher_init)
++                                          flags)
++            || !EVP_CIPHER_meth_set_init(known_cipher_methods[i], init)
+             || !EVP_CIPHER_meth_set_do_cipher(known_cipher_methods[i],
+-                                     cipher_mode == EVP_CIPH_CTR_MODE ?
+-                                              ctr_do_cipher :
+-                                              cipher_do_cipher)
+-            || !EVP_CIPHER_meth_set_ctrl(known_cipher_methods[i], cipher_ctrl)
++                                              do_cipher)
++            || !EVP_CIPHER_meth_set_ctrl(known_cipher_methods[i], ctrl)
+             || !EVP_CIPHER_meth_set_cleanup(known_cipher_methods[i],
+                                             cipher_cleanup)
+             || !EVP_CIPHER_meth_set_impl_ctx_size(known_cipher_methods[i],
+--
+2.17.1
+
