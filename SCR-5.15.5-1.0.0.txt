@@ -584,13 +584,13 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     5.8.1
+Version:                     5.9.2
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics sample applications
-Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 5.8.1
+Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 5.9.2
 Origin:                      NXP (BSD-3-clause)
                          Demo Framework
                              Sascha Willems - Vulkan demo (MIT) - https://github.com/SaschaWillems/Vulkan
