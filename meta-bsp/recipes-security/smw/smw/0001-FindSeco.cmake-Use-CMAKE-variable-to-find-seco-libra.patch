@@ -1,0 +1,33 @@
+From 29a7f77ab2952466b0826b11d9d33eb1483e091d Mon Sep 17 00:00:00 2001
+From: Cristinel Panfir <cristinel.panfir@nxp.com>
+Date: Tue, 25 Jan 2022 13:35:46 +0200
+Subject: [PATCH] FindSeco.cmake: Use CMAKE variable to find seco libraries
+
+Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
+---
+ cmake/FindSeco.cmake | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/FindSeco.cmake b/cmake/FindSeco.cmake
+index cdf4b5f..fbc16c6 100644
+--- a/cmake/FindSeco.cmake
++++ b/cmake/FindSeco.cmake
+@@ -41,13 +41,13 @@ endif()
+ 
+ find_file(SECO_NVM_LIBRARY seco_nvm_manager.a
+           PATHS ${SECO_ROOT}
+-          PATH_SUFFIXES usr/lib lib)
++          PATH_SUFFIXES usr/${CMAKE_INSTALL_LIBDIR} ${CMAKE_INSTALL_LIBDIR})
+ find_path(SECO_NVM_INCLUDE_DIR seco_nvm.h
+           PATHS ${SECO_ROOT}
+           PATH_SUFFIXES usr/include include)
+ find_file(SECO_HSM_LIBRARY hsm_lib.a
+           PATHS ${SECO_ROOT}
+-          PATH_SUFFIXES usr/lib lib)
++          PATH_SUFFIXES usr/${CMAKE_INSTALL_LIBDIR} ${CMAKE_INSTALL_LIBDIR})
+ find_path(SECO_HSM_INCLUDE_DIR hsm_api.h
+           PATHS ${SECO_ROOT}
+           PATH_SUFFIXES usr/include/hsm include/hsm)
+-- 
+2.25.1
+

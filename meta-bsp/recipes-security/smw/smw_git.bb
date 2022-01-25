@@ -1,4 +1,4 @@
-# Copyright 2020-21 NXP
+# Copyright 2020-22 NXP
 
 SUMMARY = "NXP i.MX Security Middleware Library"
 DESCRIPTION = "NXP i.MX Security Middleware Library"
@@ -11,7 +11,8 @@ DEPENDS:append:mx8qxp = " imx-seco-libs"
 
 SRCBRANCH = "release/version_1.x"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
-SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH} \
+    file://0001-FindSeco.cmake-Use-CMAKE-variable-to-find-seco-libra.patch"
 SRCREV = "44a6014481047261647af68ef2c9dbd8294fa91e"
 
 S = "${WORKDIR}/git"
