@@ -17,8 +17,6 @@ do_install:append() {
 
 RDEPENDS:libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 
-RRECOMMENDS:libgal-imx:remove = "kernel-module-imx-gpu-viv"
-
 # FIXME: Don't add .so to main package
 FILES:libvulkan-imx += "${libdir}/libvulkan_VSI${SOLIBS}"
 INSANE_SKIP:libvulkan-imx += "dev-so"
