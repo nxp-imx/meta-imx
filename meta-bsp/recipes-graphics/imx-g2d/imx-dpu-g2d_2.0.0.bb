@@ -1,5 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
-# Copyright 2017-2021 NXP
+# Copyright 2017-2022 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "G2D library using i.MX DPU"
@@ -17,6 +17,9 @@ inherit fsl-eula-unpack
 
 do_install () {
     cp -r -d --no-preserve=ownership ${S}/g2d/* ${D}
+    if [ "${libdir}" != "/usr/lib" ]; then
+        mv ${D}/usr/lib ${D}${libdir}
+    fi
 }
 
 INSANE_SKIP:${PN} += "ldflags"
