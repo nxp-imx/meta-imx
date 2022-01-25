@@ -67,11 +67,6 @@ do_deploy:append() {
         ;;
     esac
 
-    # Append a tag to the bootloader image used in the SD card image
-    cp ${DEPLOYDIR}/${BOOT_NAME}                             ${DEPLOYDIR}/${BOOT_NAME}-tagged
-    ln -sf ${BOOT_NAME}-tagged                               ${DEPLOYDIR}/${BOOT_NAME}
-    stat -L -cUUUBURNXXOEUZX7+A-XY5601QQWWZ%sEND ${DEPLOYDIR}/${BOOT_NAME} \
-                                                          >> ${DEPLOYDIR}/${BOOT_NAME}
 }
 
 deploy_mx8ulp() {
