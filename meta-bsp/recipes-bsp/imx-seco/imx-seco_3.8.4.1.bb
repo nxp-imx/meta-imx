@@ -13,6 +13,7 @@ SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "4c35906436d8d45780de76ecd59f1c25"
 SRC_URI[sha256sum] = "0487e4cf6c475ba8f8b4d935d65732c8a6c78721f10d5ee3769162899c1e284f"
 
+
 do_compile[noexec] = "1"
 
 do_install() {
