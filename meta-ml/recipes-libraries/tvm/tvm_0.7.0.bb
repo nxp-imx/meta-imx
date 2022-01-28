@@ -48,7 +48,7 @@ do_install () {
     rm -f ${S}/setup.py ${S}/tvm
     ln -s ${S}/python/setup.py ${S}/setup.py
     ln -s ${S}/python/tvm ${S}/tvm
-    distutils3_do_install
+    setuptools3_do_install
 
     rm -fr ${D}${datadir}
 }
