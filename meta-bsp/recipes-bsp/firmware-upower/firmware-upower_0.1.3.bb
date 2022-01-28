@@ -2,7 +2,7 @@
 DESCRIPTION = "NXP i.MX uPower firmware"
 LICENSE = "Proprietary"
 SECTION = "BSP"
-LIC_FILES_CHKSUM = "file://COPYING;md5=17d2319de7baa686e8a755ba58a9ebf5"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e4098ac4459cb81b07d3f0c22b3e8370"
 
 inherit fsl-eula2-unpack2 pkgconfig deploy
 
