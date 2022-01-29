@@ -1,7 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://profile"
-
 WATCHDOG_SEC = "40"
 WATCHDOG_SEC:mx8ulp = "240"
 
@@ -13,8 +11,6 @@ update_file() {
 }
 
 do_install:append() {
-    install -Dm0755 ${WORKDIR}/profile ${D}${sysconfdir}/profile.d/weston.sh
-
     # Add weston.log back, used by NXP for testing
     update_file "ExecStart=/usr/bin/weston " "ExecStart=/usr/bin/weston --log=\$\{XDG_RUNTIME_DIR\}/weston.log " ${D}${systemd_system_unitdir}/weston.service
 
