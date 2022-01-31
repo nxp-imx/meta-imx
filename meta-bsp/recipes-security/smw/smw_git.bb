@@ -12,7 +12,7 @@ DEPENDS:append:mx8qxp = " imx-seco-libs"
 SRCBRANCH = "master"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "a48ca7f073e2111b22fd1e42ac5a21b977eb7e21"
+SRCREV = "ceec62807c18dd072e90522eca567bbbe709e937"
 
 S = "${WORKDIR}/git"
 
