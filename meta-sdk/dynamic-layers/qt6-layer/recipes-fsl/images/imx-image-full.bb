@@ -17,7 +17,6 @@ OPENCV_PKGS:imxgpu = " \
 "
 
 IMAGE_INSTALL += " \
-    packagegroup-imx-ml \
     packagegroup-qt6-imx \
     tzdata \
     ${OPENCV_PKGS} \
