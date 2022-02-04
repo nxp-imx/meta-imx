@@ -2,7 +2,7 @@ SUMMARY = "ONNX protobuf files - used in ARMNN for Caffe network models"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=077ce3eaeaea91462d41c566300d2a02"
 
-SRC_URI = "git://github.com/onnx/onnx.git"
+SRC_URI = "git://github.com/onnx/onnx.git;branch=rel-1.3.0"
 
 PV = "1.3.0"
 
