@@ -1,3 +1,4 @@
+REQUIRED_DISTRO_FEATURES:remove:imxgpu = "x11"
 PACKAGECONFIG_REMOVE_IF_GPU:imxgpu:append = " glx"
 PACKAGECONFIG_REMOVE_IF_GPU:imxgpu:remove = "glu"
 PACKAGECONFIG_APPEND_IF_GPU:imxgpu:remove = "glut"
