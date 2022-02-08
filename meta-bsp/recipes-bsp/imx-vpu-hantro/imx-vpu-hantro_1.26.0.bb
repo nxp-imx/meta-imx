@@ -2,7 +2,7 @@
 
 DESCRIPTION = "i.MX Hantro VPU library"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=e4098ac4459cb81b07d3f0c22b3e8370"
+LIC_FILES_CHKSUM = "file://COPYING;md5=be5ff43682ed6c57dfcbeb97651c2829"
 
 PROVIDES = "virtual/imxvpu"
 
