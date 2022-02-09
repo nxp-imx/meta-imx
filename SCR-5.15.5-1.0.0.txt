@@ -1318,7 +1318,7 @@ Release Location:            https://source.codeaurora.org/external/imx/tflite-v
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
-Version:                     1.1.34
+Version:                     1.1.37
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
