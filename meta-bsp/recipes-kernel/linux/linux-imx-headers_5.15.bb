@@ -13,7 +13,7 @@ KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=h
 KBRANCH = "${SRCBRANCH}"
 SRC_URI = "${KERNEL_SRC}"
 
-SRCREV = "9f155c532cd4a3f209c8d7f3b8ec64ed387c6369"
+SRCREV = "8bb2413ab5282b55a5dcf1be8015bb3794a05688"
 
 S = "${WORKDIR}/git"
 
