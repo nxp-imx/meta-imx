@@ -36,12 +36,6 @@ ML_PKGS:mx8ulp = " \
     pytorch \
     torchvision \
 "
-ML_PKGS:append:mx8qm = " \
-    tensorflow-lite-extras \
-"
-ML_PKGS:append:mx8mp = " \
-    tensorflow-lite-extras \
-"
 ML_PKGS:remove:mx8mm = "tensorflow-lite-vx-delegate"
 
 ML_DEEPVIEW_PKGS            = ""
