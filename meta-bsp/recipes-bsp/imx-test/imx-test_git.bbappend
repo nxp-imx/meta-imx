@@ -8,6 +8,6 @@ SRC_URI = " \
     ${IMXTEST_SRC};branch=${SRCBRANCH} \
     file://memtool_profile \
 "
-SRCREV = "5c7ff5ee144243cf34aab8e9db6c603f1b62354e"
+SRCREV = "b364c1aacc72a63290106ae065bb2f6a8c365ec6"
 
 PACKAGECONFIG:append:mx8m = " swpdm"
