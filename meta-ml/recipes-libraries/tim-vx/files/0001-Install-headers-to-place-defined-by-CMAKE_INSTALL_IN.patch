@@ -1,0 +1,35 @@
+From 4773435fe0900e2a3d73de4002a938dcb9cd4567 Mon Sep 17 00:00:00 2001
+From: Robert Kalmar <robert.kalmar@nxp.com>
+Date: Mon, 31 Jan 2022 12:21:42 +0100
+Subject: [PATCH] Install headers to place defined by CMAKE_INSTALL_INCLUDEDIR
+ variable
+
+---
+ src/tim/CMakeLists.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/tim/CMakeLists.txt b/src/tim/CMakeLists.txt
+index 0a8ab2b..54b56b2 100644
+--- a/src/tim/CMakeLists.txt
++++ b/src/tim/CMakeLists.txt
+@@ -88,14 +88,14 @@ install(TARGETS ${TARGET_NAME} ${TARGET_NAME}
+ 	DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
+ 
+ install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/tim/vx 
+-        DESTINATION ${CMAKE_INSTALL_PREFIX}/include/tim)
++        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/tim)
+ 
+ install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/tim/lite
+-        DESTINATION ${CMAKE_INSTALL_PREFIX}/include/tim)
++        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/tim)
+ 
+ if(TIM_VX_ENABLE_LAYOUT_INFER)
+     install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/tim/transform 
+-            DESTINATION ${CMAKE_INSTALL_PREFIX}/include/tim)
++            DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/tim)
+ endif()
+ 
+ if(TIM_VX_ENABLE_TEST)
+-- 
+2.35.1.windows.2
+

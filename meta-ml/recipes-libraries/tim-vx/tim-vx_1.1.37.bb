@@ -9,9 +9,9 @@ DEPENDS = "imx-gpu-viv nn-imx"
 
 TIM_VX_SRC ?= "git://github.com/nxpmicro/tim-vx-imx.git;protocol=https"
 SRCBRANCH = "imx-v1.1.y"
-SRCREV = "75e94b3d9f005ab6ae095bf33c6a994925b5dc6c" 
+SRCREV = "ed47c5c24c523a89f700646465bbcd70855581ff" 
 SRC_URI = "${TIM_VX_SRC};branch=${SRCBRANCH} \
-    file://0001-CMakeLists.txt-Use-CMAKE-installation-variables.patch"
+    file://0001-Install-headers-to-place-defined-by-CMAKE_INSTALL_IN.patch"
 
 S = "${WORKDIR}/git"
 
