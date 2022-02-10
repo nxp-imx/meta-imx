@@ -3,7 +3,7 @@ NXP Software Content Register
 Release - Linux 5.4.70_2.3.6
  February  2022
 
-Outgoing License: LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies
+Outgoing License: LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies
 License File:     COPYING
 
 Yocto Project recipe manifest:
@@ -54,7 +54,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     imx-sc-firmware-1.7.6.bin
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -271,7 +271,7 @@ Origin:                      Basler AG (proprietary)
 --------------------------------------------
 
 Package:                     imx-seco-libs.git
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
