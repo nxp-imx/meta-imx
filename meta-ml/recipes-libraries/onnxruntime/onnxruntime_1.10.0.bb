@@ -1,25 +1,27 @@
 # Copyright 2020-2022 NXP
 DESCRIPTION = "cross-platform, high performance scoring engine for ML models"
 SECTION = "devel"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
+LICENSE = "MIT & Apache-2.0"
+LIC_FILES_CHKSUM_runtime = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
+LIC_FILES_CHKSUM_model = "file://${WORKDIR}/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LIC_FILES_CHKSUM = "${LIC_FILES_CHKSUM_runtime} ${LIC_FILES_CHKSUM_model}"
 
 DEPENDS = "libpng zlib ${BPN}-native"
 
 ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH = "imx_1.10.0"
-
-SRCREV = "74203da80baecaf2b950464c48064e89c5e86e1a" 
-
-SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
-
-# Squeezenet sample model
-SRC_URI += "https://github.com/onnx/models/raw/6ab957a2fe61f34a76c670946f7cbd806d2cacca/vision/classification/squeezenet/model/squeezenet1.0-9.tar.gz;name=squeezenet-model"
-SRC_URI[squeezenet-model.md5sum] = "92e240a948f9bbc92534d752eb465317"
-SRC_URI[squeezenet-model.sha256sum] = "f4c9a2906a949f089bee5ef1bf9ea1c0dc1b49d5abeb1874fff3d206751d0f3b"
-SRC_URI += "https://github.com/onnx/models/raw/6ab957a2fe61f34a76c670946f7cbd806d2cacca/LICENSE;name=squeezenet-license"
-SRC_URI[squeezenet-license.md5sum] = "3b83ef96387f14655fc854ddc3c6bd57"
-SRC_URI[squeezenet-license.sha256sum] = "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+SRC_URI = " \
+    ${ONNXRUNTIME_SRC};branch=${SRCBRANCH};name=runtime \
+    https://github.com/onnx/models/raw/${SRCREV_model}/LICENSE;name=model-license \
+    https://github.com/onnx/models/raw/${SRCREV_model}/vision/classification/squeezenet/model/squeezenet1.0-9.tar.gz;name=model-squeezenet \
+"
+SRC_URI[model-license.md5sum] = "3b83ef96387f14655fc854ddc3c6bd57"
+SRC_URI[model-license.sha256sum] = "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+SRC_URI[model-squeezenet.md5sum] = "92e240a948f9bbc92534d752eb465317"
+SRC_URI[model-squeezenet.sha256sum] = "f4c9a2906a949f089bee5ef1bf9ea1c0dc1b49d5abeb1874fff3d206751d0f3b"
+SRCREV_runtime = "74203da80baecaf2b950464c48064e89c5e86e1a"
+SRCREV_model = "6ab957a2fe61f34a76c670946f7cbd806d2cacca"
+SRCREV_FORMAT = "runtime_model"
 
 S = "${WORKDIR}/git"
 
@@ -148,7 +150,6 @@ INSANE_SKIP:${PN}-dev += "dev-elf"
 PACKAGE_BEFORE_PN = "${PN}-tests"
 FILES:${PN}-tests = "${bindir}/${BP}/tests/*"
 FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
-FILES:${PN} += "${bindir}/${BP}/squeezenet"
 
 # libcustom_op_library.so is in bindir, which is intended;
 # onnxruntime_shared_lib_test requires the shlib to be in the same directory as testdata to run properly
