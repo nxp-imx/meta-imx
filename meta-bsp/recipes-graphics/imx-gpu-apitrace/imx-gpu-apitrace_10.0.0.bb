@@ -1,4 +1,4 @@
-require recipes-graphics/imx-gpu-apitrace/imx-gpu-apitrace_9.0.0.bb
+require recipes-graphics/imx-gpu-apitrace/imx-gpu-apitrace_10.0.0.bb
 
 APITRACE_SRC ?= "git://source.codeaurora.org/external/imx/apitrace-imx.git;protocol=https"
 SRCBRANCH = "imx_10.0"
