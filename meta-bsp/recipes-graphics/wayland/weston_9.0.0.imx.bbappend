@@ -1,11 +1,14 @@
-WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
-SRC_URI = " \
-    ${WESTON_SRC};branch=${SRCBRANCH} \
-    file://weston.png \
-    file://weston.desktop \
-    file://xwayland.weston-start \
-    file://0001-weston-launch-Provide-a-default-version-that-doesn-t.patch \
-"
+WESTON_SRC_CAF = "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
+WESTON_SRC ?= "${WESTON_SRC_CAF}"
+# If WESTON_SRC is overridden, override the main SRC_URI
+SRC_URI:remove = \
+    "${@bb.utils.contains('${WESTON_SRC}', '${WESTON_SRC_CAF}', \
+        '', \
+        '${WESTON_SRC_CAF};branch=${SRCBRANCH}', d)}"
+SRC_URI:prepend = \
+    "${@bb.utils.contains('${WESTON_SRC}', '${WESTON_SRC_CAF}', \
+        '', \
+        '${WESTON_SRC};branch=${SRCBRANCH} ', d)}"
 SRCREV = "7859a762617682bd804e210ad3bda6bdcd3ea24a"
 
 EXTRA_OEMESON:remove = "-Dbackend-rdp=false"
