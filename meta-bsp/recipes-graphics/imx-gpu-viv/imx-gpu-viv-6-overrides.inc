@@ -1,32 +1,15 @@
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
+PROVIDES_OPENGLES3       = ""
+PROVIDES_OPENGLES3:mx8   = "virtual/libgles3"
+PROVIDES_OPENGLES3:mx8mm = ""
+PROVIDES += "${PROVIDES_OPENGLES3}"
+
 PACKAGECONFIG ?= "valgrind"
 
 LIBVULKAN_VERSION = "${LIBVULKAN_VERSION_MAJOR}.2.1"
 
-# dri is removed and framebuffer is no longer built for 64-bit,
-# so make a workaround so the base install is not broken
-do_install:prepend() {
-    mkdir -p ${S}/gpu-core/usr/lib/dri
-    if [ "${IS_MX8}" = "1" ]; then
-        mkdir -p ${S}/gpu-core/usr/lib/fb
-        touch ${S}/gpu-core/usr/lib/fb/libVDK.so.1.2.0
-    fi
-}
-do_install:append() {
-    rm -rf ${D}${libdir}/dri
-    if [ "${IS_MX8}" = "1" ]; then
-        rm -f ${D}${libdir}/libVDK-fb.so.1.2.0
-    fi
-}
-
 RDEPENDS:libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
-
-PROVIDES_OPENGLES3       = ""
-PROVIDES_OPENGLES3:mx8   = "virtual/libgles3"
-PROVIDES_OPENGLES3:mx8mm = ""
-
-PROVIDES += "${PROVIDES_OPENGLES3}"
 
 # FIXME: Don't add .so to main package
 FILES:libvulkan-imx += "${libdir}/libvulkan_VSI${SOLIBS}"
