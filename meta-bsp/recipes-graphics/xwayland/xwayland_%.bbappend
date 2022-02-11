@@ -6,5 +6,3 @@ SRC_URI:append = " \
 "
 
 OPENGL_PKGCONFIGS:remove:imxgpu = "glx"
-
-RRECOMMENDS:${PN} += "xkbcomp"
