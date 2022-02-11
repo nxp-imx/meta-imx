@@ -11,6 +11,4 @@ SRC_URI:prepend = \
         '${WESTON_SRC};branch=${SRCBRANCH} ', d)}"
 SRCREV = "7859a762617682bd804e210ad3bda6bdcd3ea24a"
 
-EXTRA_OEMESON:remove = "-Dbackend-rdp=false"
 PACKAGECONFIG:append = " rdp"
-PACKAGECONFIG[rdp] = "-Dbackend-rdp=true,-Dbackend-rdp=false,freerdp"
