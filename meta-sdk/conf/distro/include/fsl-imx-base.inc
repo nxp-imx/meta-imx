@@ -15,4 +15,6 @@ DISTRO_FEATURES:append:mx8 = " virtualization"
 
 INHERIT:remove = "uninative"
 
+CONNECTIVITY_CHECK_URIS ?= "https://yoctoproject.org/connectivity.html"
+
 PACKAGECONFIG:append:pn-gstreamer1.0-plugins-ugly = " x264"
