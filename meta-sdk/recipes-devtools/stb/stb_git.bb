@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://stb.h;beginline=14418;endline=14433;md5=b10975d4c8155
 PV = "0.0+git${SRCPV}"
 
 SRCREV = "f67165c2bb2af3060ecae7d20d6f731173485ad0"
-SRC_URI = "git://github.com/nothings/stb.git"
+SRC_URI = "git://github.com/nothings/stb.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 

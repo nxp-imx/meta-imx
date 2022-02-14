@@ -10,7 +10,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://readme.md;beginline=19;endline=20;md5=ab03b667ee630c1abb1add70365a50fb"
 
 PV = "0.8.2.0+git${SRCPV}"
-SRC_URI = "git://github.com/g-truc/gli"
+SRC_URI = "git://github.com/g-truc/gli;protocol=https;branch=master"
 SRCREV = "0c171ee87fcfe35a7e0e0445adef06f92e0b6a91"
 S = "${WORKDIR}/git"
 
