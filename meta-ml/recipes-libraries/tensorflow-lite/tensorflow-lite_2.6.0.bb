@@ -26,8 +26,9 @@ PACKAGECONFIG ?= "${PACKAGECONFIG_OPENVX}"
 
 PACKAGECONFIG[openvx] = ",,,libnn-imx nn-imx"
 
-EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR}"
-EXTRA_OECMAKE += " \
+EXTRA_OECMAKE = " \
+    -DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR} \
+    -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
     -DTFLITE_BUILD_EVALTOOLS=on \
     -DTFLITE_BUILD_SHARED_LIB=on \
     -DTFLITE_ENABLE_NNAPI=on \
@@ -41,6 +42,7 @@ EXTRA_OECMAKE += " \
 
 CXXFLAGS += "-fPIC"
 
+do_configure[network] = "1"
 do_configure:prepend() {
     export HTTP_PROXY=${http_proxy}
     export HTTPS_PROXY=${https_proxy}
