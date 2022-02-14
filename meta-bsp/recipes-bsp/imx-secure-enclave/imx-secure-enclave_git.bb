@@ -1,4 +1,4 @@
-# Copyright 2021 NXP
+# Copyright 2021-2022 NXP
 
 SUMMARY = "NXP i.MX SECURE ENCLAVE library"
 DESCRIPTION = "NXP IMX SECURE ENCLAVE library"
@@ -14,7 +14,7 @@ SRCBRANCH = "master"
 SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
 
 SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "4bf83959c9a23d24e78c76a936ba8ae69b34422c"
+SRCREV = "84df462f6168e5e95837ac736b11128a054642fb"
 
 S = "${WORKDIR}/git"
 
