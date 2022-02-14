@@ -24,6 +24,7 @@ inherit python3native cmake
 
 EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR}"
 EXTRA_OECMAKE += " \
+     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
      -DTIM_VX_INSTALL=${STAGING_DIR_HOST}/usr \
      -DFETCHCONTENT_SOURCE_DIR_TENSORFLOW=${WORKDIR}/tfgit \
      -DVX_DELEGATE_USE_TFLITE_LIB_FROM_SDK=on \
@@ -32,6 +33,7 @@ EXTRA_OECMAKE += " \
 
 CXXFLAGS += "-fPIC"
 
+do_configure[network] = "1"
 do_configure:prepend() {
     export HTTP_PROXY=${http_proxy}
     export HTTPS_PROXY=${https_proxy}
