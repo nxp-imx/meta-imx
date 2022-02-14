@@ -9,6 +9,5 @@ SRC_URI:prepend = \
     "${@bb.utils.contains('WESTON_SRC', '${WESTON_SRC_CAF}', \
         '', \
         '${WESTON_SRC};branch=${SRCBRANCH} ', d)}"
-SRCREV = "7859a762617682bd804e210ad3bda6bdcd3ea24a"
 
 PACKAGECONFIG:append = " rdp"
