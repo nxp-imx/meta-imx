@@ -9,7 +9,7 @@ EFFICIENTDET_SRC ?= "git://source.codeaurora.org/external/imx/efficientdet-imx.g
 SRCBRANCH = "master"
 
 SRC_URI = "${EFFICIENTDET_SRC};branch=${SRCBRANCH}"
-SRCREV = "9cd64927f0cea5604b4511b4fd7e2044857357f1"
+SRCREV = "45946df40048fc58517febda84ba92ff0df149f1"
 
 S = "${WORKDIR}/git"
 
