@@ -2,8 +2,6 @@ PREFERRED_PROVIDER_virtual/bootloader:imx = "u-boot-imx"
 PREFERRED_PROVIDER_virtual/kernel:imx = "linux-imx"
 PREFERRED_PROVIDER_linux-imx-mfgtool = "linux-imx-mfgtool"
 
-PREFERRED_VERSION_linux-libc-headers:imx ?= "5.14"
-
 PREFERRED_PROVIDER_opencl-headers:imxgpu = "imx-gpu-viv"
 PREFERRED_PROVIDER_opencl-icd-loader:imxgpu = "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libgles3:imxgpu3d = "imx-gpu-viv"
