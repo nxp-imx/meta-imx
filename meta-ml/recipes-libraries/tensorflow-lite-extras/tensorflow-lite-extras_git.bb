@@ -1,7 +1,7 @@
 # Copyright 2021 NXP
 DESCRIPTION = "Tensorflow-lite-extras package"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7cfe6cb536a3395a386829e7a7a6e49d"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 DEPENDS = "opencv tensorflow-lite flatbuffers python3 python3-pip python3-numpy"
 
