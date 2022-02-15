@@ -26,15 +26,11 @@ ML_PKGS:imxgpu:mx8 = " \
     tensorflow-lite-vx-delegate \
     onnxruntime \
     ml-security \
-    pytorch \
-    torchvision \
 "
 ML_PKGS:mx8ulp = " \
     armnn \
     tensorflow-lite \
     onnxruntime \
-    pytorch \
-    torchvision \
 "
 ML_PKGS:remove:mx8mm = "tensorflow-lite-vx-delegate"
 
