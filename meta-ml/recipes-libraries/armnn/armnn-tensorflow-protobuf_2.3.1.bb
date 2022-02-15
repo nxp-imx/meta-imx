@@ -24,7 +24,7 @@ do_install() {
     install -d ${D}${datadir}/${BPN}
 
     # Convert protobuf sources to C sources and install
-    ${WORKDIR}/armnn/scripts/generate_tensorflow_protobuf.sh ${D}${datadir}/${BPN} ${STAGING_DIR_NATIVE}${prefix}
+    ${WORKDIR}/armnn/armnn/scripts/generate_tensorflow_protobuf.sh ${D}${datadir}/${BPN} ${STAGING_DIR_NATIVE}${prefix}
 
     # Install sources as required by ARMNN
     install -d ${D}${datadir}/${BPN}-lite
