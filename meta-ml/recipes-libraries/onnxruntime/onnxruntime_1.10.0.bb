@@ -108,6 +108,7 @@ PACKAGECONFIG[acl-2102] = "-Donnxruntime_USE_ACL_2102=ON, -Donnxruntime_USE_ACL_
 PACKAGECONFIG[acl-2108] = "-Donnxruntime_USE_ACL_2108=ON, -Donnxruntime_USE_ACL_2108=OFF, arm-compute-library"
 PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -Donnxruntime_OVXLIB_INCLUDE=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
 
+do_compile[network] = "1"
 do_compile:prepend() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
         # required to pull pybind11
