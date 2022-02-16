@@ -7,7 +7,7 @@ Outgoing License: LA_OPT_NXP_Software_License v31 December 2021 - Additional dis
 License File:     COPYING
 
 Yocto Project recipe manifest:
-repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-honister -m imx_5.15.5-1.0.0.xml
+repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-kirkstone -m imx_5.15.5-1.0.0.xml
 
 Release tag: rel_imx_5.15.5-1.0.0
 
@@ -729,6 +729,8 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
 Release Location:            https://source.codeaurora.org/external/imx/g2d-samples -b rel_imx_5.15.5-1.0.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p4.2-aarch64-wayland.bin
@@ -1044,6 +1046,10 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    Proprietary codecs and parsers
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             autoconf - Free Software Foundation (FSF All Permissive License)
+                             X Consortium (MIT)
+
 --------------------------------------------
 
 Package:                     nxp-afe.git
@@ -1276,6 +1282,11 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    A GStreamer NNstreamer pipelines real-time profiling plugin
 Release Location:            https://source.codeaurora.org/external/imx/nnshark -b rel_imx_5.15.5-1.0.0
+Origin:                      NXP (LGPL-2.1)
+                             GstShark (LGPL-2.1) - https://github.com/RidgeRun/gst-shark
+
+            Separate Component: Eclipse Tools (EPL-1.0) - These run separately on windows.
+
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
@@ -1327,6 +1338,9 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite VX Delegate
 Release Location:            https://source.codeaurora.org/external/imx/tflite-vx-delegate-imx -b rel_imx_5.15.5-1.0.0
+Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/VeriSilicon/tflite-vx-delegate.git
+                             The TensorFlow Authors (Apache-2.0) - https://cs.opensource.google/tensorflow/tensorflow/+/master:tensorflow/lite/examples/minimal/
+
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
@@ -1353,6 +1367,8 @@ Package Category:            Tools
 Type of Content:             binary
 Description and comments:    VeriSilicon Tools
 Release Location:            nxp.com
+Origin:                      VeriSilicon (proprietary)
+
 --------------------------------------------
 
 Package:                     mfgtools.git
