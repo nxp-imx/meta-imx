@@ -4,6 +4,8 @@
 DESCRIPTION = "Package group for i.MX Qt6"
 LICENSE = "MIT"
 
+PACKAGE_ARCH = "${TUNE_PKGARCH}"
+
 inherit packagegroup
 
 # Install Freescale QT demo applications
