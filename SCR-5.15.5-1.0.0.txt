@@ -648,7 +648,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     libdrm-imx.git
-Version:                     2.4.107.imx
+Version:                     2.4.109.imx
 Outgoing License:            MIT 
 License File:                COPYING
 Package Category:            Graphics
@@ -660,7 +660,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     wayland-protocols-imx.git
-Version:                     1.22.imx
+Version:                     1.25.imx
 Outgoing License:            MIT 
 License File:                COPYING
 Package Category:            Graphics
@@ -673,7 +673,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     weston-imx.git
-Version:                     9.0.0.imx
+Version:                     10.0.0.imx
 Outgoing License:            MIT 
 License File:                COPYING
 Package Category:            Graphics
@@ -1328,6 +1328,16 @@ Release Location:            https://source.codeaurora.org/external/imx/tensorfl
 Origin:                      NXP (Apache-2.0)
                              TensorFlow (Apache-2.0) - https://github.com/tensorflow/tensorflow/
 
+--------------------------------------------
+
+Package:                     tensorflow-lite-extras.git
+Version:                     
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    TensorFlow Lite extras packages
+Release Location:            https://github.com/NXPmicro/efficientdet-imx -b rel_imx_5.15.5-1.0.0
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
