@@ -14,7 +14,7 @@ IMX_LIBDRM_SRC ?= "git://source.codeaurora.org/external/imx/libdrm-imx.git;proto
 IMX_LIBDRM_BRANCH ?= "libdrm-imx-2.4.109"
 SRC_URI = "${IMX_LIBDRM_SRC};branch=${IMX_LIBDRM_BRANCH} \
            file://0001-meson-add-libdrm-vivante-to-the-meson-meta-data.patch "
-SRCREV = "3c682629398fd6ee702be9941758d44299a3280a"
+SRCREV = "3c682629398fd6ee702be9941758d44299a3280a" 
 S = "${WORKDIR}/git"
 
 DEFAULT_PREFERENCE = "-1"
