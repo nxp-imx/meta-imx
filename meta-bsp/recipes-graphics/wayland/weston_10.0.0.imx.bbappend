@@ -11,3 +11,7 @@ SRC_URI:prepend = \
         '${WESTON_SRC};branch=${SRCBRANCH} ', d)}"
 
 PACKAGECONFIG:append = " rdp"
+
+SRC_URI += "file://0001-build-Revert-backend-fbdev-rename-YOCIMX-5991.patch"
+PACKAGECONFIG[fbdev] = "-Dbackend-fbdev=true,-Dbackend-fbdev=false,udev mtdev"
+EXTRA_OEMESON:append:imxfbdev = " -Dbackend-default=fbdev"

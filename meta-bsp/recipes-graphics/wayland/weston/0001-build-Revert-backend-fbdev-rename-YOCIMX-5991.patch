@@ -1,0 +1,53 @@
+From b7c120baad8469245867e1e44067f3667da9dadb Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Sun, 20 Feb 2022 10:22:22 -0600
+Subject: [PATCH] build: Revert backend-fbdev rename [YOCIMX-5991]
+
+The renamed option deprecated-backend-fbdev does not work. Undo the
+renaming for now.
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ .gitlab-ci.yml                      | 1 -
+ libweston/backend-fbdev/meson.build | 2 +-
+ meson_options.txt                   | 2 +-
+ 3 files changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 02cfaa0d..236eb14b 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -283,7 +283,6 @@ aarch64-debian-container_prep:
+       -Dwerror=true
+       -Dtest-skip-is-failure=true
+       -Dlauncher-libseat=true
+-      -Ddeprecated-backend-fbdev=true
+       -Ddeprecated-weston-launch=true
+   after_script:
+   - ninja -C "$BUILDDIR" coverage-html > "$BUILDDIR/meson-logs/ninja-coverage-html.txt"
+diff --git a/libweston/backend-fbdev/meson.build b/libweston/backend-fbdev/meson.build
+index 8b69eed6..b8eb574f 100644
+--- a/libweston/backend-fbdev/meson.build
++++ b/libweston/backend-fbdev/meson.build
+@@ -1,4 +1,4 @@
+-if not get_option('deprecated-backend-fbdev')
++if not get_option('backend-fbdev')
+ 	subdir_done()
+ endif
+ 
+diff --git a/meson_options.txt b/meson_options.txt
+index e87c5f8c..114aed69 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -45,7 +45,7 @@ option(
+ 	description: 'Weston backend: X11 (nested)'
+ )
+ option(
+-	'deprecated-backend-fbdev',
++	'backend-fbdev',
+ 	type: 'boolean',
+ 	value: false,
+ 	description: 'Weston backend: fbdev (deprecated)'
+-- 
+2.25.1
+
