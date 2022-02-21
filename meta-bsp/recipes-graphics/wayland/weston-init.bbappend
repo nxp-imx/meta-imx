@@ -1,8 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-WATCHDOG_SEC = "40"
-WATCHDOG_SEC:mx8ulp = "240"
-
 update_file() {
     if ! grep -q "$1" $3; then
         bbfatal $1 not found in $3
@@ -17,6 +14,4 @@ do_install:append() {
     # FIXME: weston should be run as weston, not as root
     update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
     update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
-
-    update_file "WatchdogSec=20" "WatchdogSec=${WATCHDOG_SEC}" ${D}${systemd_system_unitdir}/weston.service
 }
