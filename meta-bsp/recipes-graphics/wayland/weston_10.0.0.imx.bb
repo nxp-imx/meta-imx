@@ -157,7 +157,7 @@ DEFAULT_PREFERENCE = "-1"
 SRCBRANCH = "weston-imx-10.0"
 SRC_URI:remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 SRC_URI:prepend = "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https;branch=${SRCBRANCH} "
-SRCREV = "a2508146c3fdd292ffd9a5230c728b7db2c80f97" 
+SRCREV = "9a20be5b995b48ad6feecd1b140285f208020c11"
 S = "${WORKDIR}/git"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
@@ -188,7 +188,6 @@ PACKAGECONFIG[imxg2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d
 # Weston with OpenGL support
 PACKAGECONFIG[opengl] = "-Dopengl=true,-Dopengl=false"
 
-SRC_URI += "file://0001-build-Revert-backend-fbdev-rename-YOCIMX-5991.patch"
 PACKAGECONFIG[fbdev] = "-Dbackend-fbdev=true,-Dbackend-fbdev=false,udev mtdev"
 EXTRA_OEMESON:append:imxfbdev = " -Dbackend-default=fbdev"
 
