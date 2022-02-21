@@ -188,6 +188,10 @@ PACKAGECONFIG[imxg2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d
 # Weston with OpenGL support
 PACKAGECONFIG[opengl] = "-Dopengl=true,-Dopengl=false"
 
+SRC_URI += "file://0001-build-Revert-backend-fbdev-rename-YOCIMX-5991.patch"
+PACKAGECONFIG[fbdev] = "-Dbackend-fbdev=true,-Dbackend-fbdev=false,udev mtdev"
+EXTRA_OEMESON:append:imxfbdev = " -Dbackend-default=fbdev"
+
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(imxfbdev|imxgpu)"
 
