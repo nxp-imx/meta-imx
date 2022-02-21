@@ -1338,6 +1338,16 @@ Origin:                      NXP (Apache-2.0)
 
 --------------------------------------------
 
+Package:                     tensorflow-lite-extras.git
+Version:                     
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    TensorFlow Lite extras packages
+Release Location:            https://github.com/NXPmicro/efficientdet-imx -b rel_imx_5.15.5-1.0.0
+--------------------------------------------
+
 Package:                     tflite-vx-delegate-imx.git
 Version:                     2.6.0
 Outgoing License:            MIT 
