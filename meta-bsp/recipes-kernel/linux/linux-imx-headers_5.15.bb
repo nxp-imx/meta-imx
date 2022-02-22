@@ -39,11 +39,9 @@ IMX_UAPI_HEADERS = " \
 
 do_install() {
     # We install all headers inside of B so we can copy only the
-    # whitelisted ones, and there is no risk of a new header to be
+    # required ones, and there is no risk of a new header to be
     # installed by mistake.
     oe_runmake headers_install INSTALL_HDR_PATH=${B}${exec_prefix}
-
-    # Install whitelisted headers only
     for h in ${IMX_UAPI_HEADERS}; do
         install -D -m 0644 ${B}${includedir}/linux/$h \
 	                   ${D}${includedir}/imx/linux/$h

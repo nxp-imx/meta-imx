@@ -7,9 +7,6 @@ PROVIDES:append:class-nativesdk = " nativesdk-u-boot-tools"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-# Set recipe as incompatible by default
 COMPATIBLE_MACHINE = "(^$)"
-
-# Whitelist its use for i.MX based machines
 COMPATIBLE_MACHINE_use-mainline-bsp = "(.)"
 COMPATIBLE_MACHINE_use-nxp-bsp = "(.)"
