@@ -16,8 +16,8 @@ Index: git/layers/CMakeLists.txt
 ===================================================================
 --- git.orig/layers/CMakeLists.txt
 +++ git/layers/CMakeLists.txt
-@@ -337,7 +337,7 @@ if(BUILD_LAYERS)
-                 -DVK_VERSION=1.2.${vk_header_version})
+@@ -359,7 +359,7 @@ if(BUILD_LAYERS)
+                 -DVK_VERSION=1.3.${vk_header_version})
              # If this json file is not a metalayer, get the needed properties from that target
              if(TARGET ${TARGET_NAME})
 -                set(INSTALL_DEFINES ${INSTALL_DEFINES} -DRELATIVE_LAYER_BINARY="$<TARGET_FILE_NAME:${TARGET_NAME}>")
@@ -25,7 +25,7 @@ Index: git/layers/CMakeLists.txt
              endif()
              add_custom_target(${TARGET_NAME}-staging-json ALL
                                COMMAND ${CMAKE_COMMAND} ${INSTALL_DEFINES} -P "${CMAKE_CURRENT_BINARY_DIR}/generator.cmake")
-@@ -351,7 +351,7 @@ if(BUILD_LAYERS)
+@@ -373,7 +373,7 @@ if(BUILD_LAYERS)
                      DESTINATION ${CMAKE_INSTALL_LIBDIR})
          elseif(UNIX)
              install(FILES ${CMAKE_CURRENT_BINARY_DIR}/staging-json/${TARGET_NAME}.json
