@@ -20,7 +20,7 @@ S = "${WORKDIR}/git"
 
 REQUIRED_DISTRO_FEATURES = 'vulkan'
 
-inherit cmake features_check
+inherit cmake features_check pkgconfig
 DEPENDS = "vulkan-loader assimp wayland-protocols wayland-native"
 
 do_install:append () {
