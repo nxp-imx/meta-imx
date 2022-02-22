@@ -129,7 +129,7 @@ RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8mm = ""
 # vulkan-loader is dynamically loaded, so need to add an explicit
 # dependency
 RDEPENDS_VULKAN_LOADER       = ""
-RDEPENDS_VULKAN_LOADER:mx8   = "vulkan-validationlayers vulkan-loader"
+RDEPENDS_VULKAN_LOADER:mx8   = "vulkan-loader"
 RDEPENDS_VULKAN_LOADER:mx8mm = ""
 RDEPENDS:${PN} += " \
     ${RDEPENDS_EMPTY_MAIN_PACKAGE} \
