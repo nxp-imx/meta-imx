@@ -1,10 +1,10 @@
-# Copyright 2020-2021 NXP
+# Copyright 2020-2022 NXP
 
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=be5ff43682ed6c57dfcbeb97651c2829" 
 
-DEPENDS = "python libdrm virtual/libg2d libtinyxml2"
+DEPENDS = "libdrm virtual/libg2d libtinyxml2"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "c9fd06eb833e48a2a3d35673d622a736"
@@ -79,6 +79,6 @@ FILES:${PN}-dev += "${FILES_SOLIBS_VERSIONED}"
 
 INSANE_SKIP:${PN} = "rpaths"
 
-RDEPENDS:${PN} = "libdrm libpython2 bash"
+RDEPENDS:${PN} = "libdrm bash"
 
 COMPATIBLE_MACHINE = "(mx8mp)"
