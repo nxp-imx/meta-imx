@@ -23,4 +23,4 @@ RDEPENDS:${PN} += " \
     pyjailhouse \
 "
 
-COMPATIBLE_MACHINE = "(mx8m|mx8ulp)"
+COMPATIBLE_MACHINE = "(mx8m-nxp-bsp|mx8ulp-nxp-bsp)"

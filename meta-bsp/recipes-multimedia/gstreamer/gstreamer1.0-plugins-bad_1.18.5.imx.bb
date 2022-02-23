@@ -179,14 +179,14 @@ S = "${WORKDIR}/git"
 inherit use-imx-headers
 
 PACKAGE_ARCH:imxpxp = "${MACHINE_SOCARCH}"
-PACKAGE_ARCH:mx8 = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH:mx8-nxp-bsp = "${MACHINE_SOCARCH}"
 
 PACKAGECONFIG_REMOVE ?= " \
     dtls vulkan \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'gl', d)} \
 "
 PACKAGECONFIG:remove = "${PACKAGECONFIG_REMOVE}"
-PACKAGECONFIG:append:mx8 = " kms tinycompress"
+PACKAGECONFIG:append:mx8-nxp-bsp = " kms tinycompress"
 
 PACKAGECONFIG[tinycompress]    = "-Dtinycompress=enabled,-Dtinycompress=disabled,tinycompress"
 
@@ -196,6 +196,6 @@ EXTRA_OEMESON += " \
     -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \
 "
 
-COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
+COMPATIBLE_MACHINE = "(mx6-nxp-bsp|mx7-nxp-bsp|mx8-nxp-bsp)"
 
 ########### End of i.MX overrides #########

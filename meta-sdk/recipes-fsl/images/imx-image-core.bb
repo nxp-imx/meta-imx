@@ -22,10 +22,10 @@ SDKIMAGE_FEATURES:append = " \
 "
 CLINFO ?= ""
 CLINFO:imxgpu = "clinfo"
-CLINFO:mx8mm = ""
+CLINFO:mx8mm-nxp-bsp = ""
 
 DOCKER ?= ""
-DOCKER:mx8 = "docker"
+DOCKER:mx8-nxp-bsp = "docker"
 
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \

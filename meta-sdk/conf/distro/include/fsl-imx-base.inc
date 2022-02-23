@@ -8,11 +8,11 @@ DISTROOVERRIDES = "fsl"
 MAINTAINER = "NXP <lauren.post@nxp.com>"
 
 REMOVE_VULKAN_FEATURE = "vulkan"
-REMOVE_VULKAN_FEATURE:mx8 = ""
+REMOVE_VULKAN_FEATURE:mx8-nxp-bsp = ""
 POKY_DEFAULT_DISTRO_FEATURES:remove      = "wayland ${REMOVE_VULKAN_FEATURE}"
-POKY_DEFAULT_DISTRO_FEATURES:append:mx8  = " jailhouse"
+POKY_DEFAULT_DISTRO_FEATURES:append:mx8-nxp-bsp  = " jailhouse"
 
-DISTRO_FEATURES:append:mx8 = " virtualization"
+DISTRO_FEATURES:append:mx8-nxp-bsp = " virtualization"
 
 IMX_REMOVE_INHERIT_UNINATIVE ?= "uninative"
 INHERIT:remove = "${IMX_REMOVE_INHERIT_UNINATIVE}"

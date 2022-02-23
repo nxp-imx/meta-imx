@@ -3,8 +3,8 @@ MACHINEOVERRIDES =. "mx8:mx8ulp:"
 require conf/machine/include/imx-base.inc
 require conf/machine/include/arm/armv8a/tune-cortexa35.inc
 
-DEFAULTTUNE:mx8ulp ?= "cortexa35-crypto"
-MACHINEOVERRIDES_EXTENDER:mx8ulp = "imxdrm:imxgpu:imxgpu2d:imxgpu3d"
+DEFAULTTUNE:mx8ulp-nxp-bsp ?= "cortexa35-crypto"
+MACHINEOVERRIDES_EXTENDER:mx8ulp-nxp-bsp = "imxdrm:imxgpu:imxgpu2d:imxgpu3d"
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT_use-mainline-bsp += " mx8ulp \
 "
 MACHINE_SOCARCH_SUFFIX = "-mx8ulp"

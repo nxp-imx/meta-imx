@@ -26,5 +26,5 @@ do_install () {
 	chown -R root:root "${D}"
 }
 
-COMPATIBLE_MACHINE = "(mx8)"
-COMPATIBLE_MACHINE:mx8m = "(^$)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
+COMPATIBLE_MACHINE:mx8m-nxp-bsp = "(^$)"

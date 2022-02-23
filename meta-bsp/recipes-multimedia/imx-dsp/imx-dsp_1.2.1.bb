@@ -22,10 +22,10 @@ FILES:${PN} = "${libdir}/imx-mm/audio-codec/dsp \
 "
 
 HIFI4_BIN ?= "hifi4_imx8qmqxp.bin"
-HIFI4_BIN:mx8qm = "hifi4_imx8qmqxp.bin"
-HIFI4_BIN:mx8qxp = "hifi4_imx8qmqxp.bin"
-HIFI4_BIN:mx8mp = "hifi4_imx8mp.bin"
-HIFI4_BIN:mx8ulp = "hifi4_imx8ulp.bin"
+HIFI4_BIN:mx8qm-nxp-bsp = "hifi4_imx8qmqxp.bin"
+HIFI4_BIN:mx8qxp-nxp-bsp = "hifi4_imx8qmqxp.bin"
+HIFI4_BIN:mx8mp-nxp-bsp = "hifi4_imx8mp.bin"
+HIFI4_BIN:mx8ulp-nxp-bsp = "hifi4_imx8ulp.bin"
 
 # No need to do install about fsl_unia.h & fsl_types.h, which are duplicate with the ones' in imx-codec
 do_install:append () {
@@ -54,4 +54,4 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx8qm|mx8qxp|mx8mp|mx8ulp)"
+COMPATIBLE_MACHINE = "(mx8qm-nxp-bsp|mx8qxp-nxp-bsp|mx8mp-nxp-bsp|mx8ulp-nxp-bsp)"

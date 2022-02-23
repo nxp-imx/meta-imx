@@ -18,7 +18,7 @@ SRCREV = "3c682629398fd6ee702be9941758d44299a3280a"
 S = "${WORKDIR}/git"
 
 DEFAULT_PREFERENCE = "-1"
-COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
+COMPATIBLE_MACHINE = "(mx6-nxp-bsp|mx7-nxp-bsp|mx8-nxp-bsp)"
 
 inherit meson pkgconfig manpages
 

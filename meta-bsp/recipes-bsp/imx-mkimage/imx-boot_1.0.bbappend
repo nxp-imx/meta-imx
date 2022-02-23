@@ -3,24 +3,24 @@
 require imx-mkimage_git.inc
 
 IMX_M4_DEMOS      = ""
-IMX_M4_DEMOS:mx8  = "imx-m4-demos:do_deploy"
-IMX_M4_DEMOS:mx8m = ""
+IMX_M4_DEMOS:mx8-nxp-bsp  = "imx-m4-demos:do_deploy"
+IMX_M4_DEMOS:mx8m-nxp-bsp = ""
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
-M4_DEFAULT_IMAGE:mx8qxp = "imx8qx_m4_TCM_power_mode_switch.bin"
-M4_DEFAULT_IMAGE:mx8dxl = "imx8dxl_m4_TCM_power_mode_switch.bin"
-M4_DEFAULT_IMAGE:mx8dx = "imx8qx_m4_TCM_power_mode_switch.bin"
+M4_DEFAULT_IMAGE:mx8qxp-nxp-bsp = "imx8qx_m4_TCM_power_mode_switch.bin"
+M4_DEFAULT_IMAGE:mx8dxl-nxp-bsp = "imx8dxl_m4_TCM_power_mode_switch.bin"
+M4_DEFAULT_IMAGE:mx8dx-nxp-bsp = "imx8qx_m4_TCM_power_mode_switch.bin"
 
 # Setting for i.MX 8ULP
-IMX_M4_DEMOS:mx8ulp = "imx-m33-demos:do_deploy"
-M4_DEFAULT_IMAGE:mx8ulp = "imx8ulp_m33_TCM_rpmsg_lite_str_echo_rtos.bin"
-ATF_MACHINE_NAME:mx8ulp = "bl31-imx8ulp.bin"
-IMX_EXTRA_FIRMWARE:mx8ulp = "firmware-upower firmware-sentinel"
-SOC_TARGET:mx8ulp = "iMX8ULP"
-SOC_FAMILY:mx8ulp = "mx8ulp"
+IMX_M4_DEMOS:mx8ulp-nxp-bsp = "imx-m33-demos:do_deploy"
+M4_DEFAULT_IMAGE:mx8ulp-nxp-bsp = "imx8ulp_m33_TCM_rpmsg_lite_str_echo_rtos.bin"
+ATF_MACHINE_NAME:mx8ulp-nxp-bsp = "bl31-imx8ulp.bin"
+IMX_EXTRA_FIRMWARE:mx8ulp-nxp-bsp = "firmware-upower firmware-sentinel"
+SOC_TARGET:mx8ulp-nxp-bsp = "iMX8ULP"
+SOC_FAMILY:mx8ulp-nxp-bsp = "mx8ulp"
 
-REV_OPTION:mx8dxlb0 = "REV=B0"
-REV_OPTION:mx8dxla1 = "REV=A1"
+REV_OPTION:mx8dxlb0-nxp-bsp = "REV=B0"
+REV_OPTION:mx8dxla1-nxp-bsp = "REV=A1"
 
 do_compile[depends] += "${IMX_M4_DEMOS}"
 

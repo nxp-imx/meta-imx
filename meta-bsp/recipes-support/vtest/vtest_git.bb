@@ -35,4 +35,4 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/seco_nvm_daemon.service ${D}${systemd_system_unitdir}
 }
 
-COMPATIBLE_MACHINE = "(mx8dxl)"
+COMPATIBLE_MACHINE = "(mx8dxl-nxp-bsp)"

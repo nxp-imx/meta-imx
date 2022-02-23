@@ -8,7 +8,7 @@ DEPENDS_BACKEND = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',  ' xrandr', \
                                                                 '', d), d)}"
 DEPENDS_MX8       = ""
-DEPENDS_MX8:mx8   = " \
+DEPENDS_MX8:mx8-nxp-bsp   = " \
     glslang-native \
     opencv \
     rapidopencl \
@@ -17,7 +17,7 @@ DEPENDS_MX8:mx8   = " \
     vulkan-headers \
     vulkan-loader \
 "
-DEPENDS_MX8:mx8mm = " \
+DEPENDS_MX8:mx8mm-nxp-bsp = " \
     opencv \
 "
 DEPENDS = " \
@@ -59,16 +59,16 @@ FEATURES:append:imxgpu3d  = ",OpenGLES2"
 FEATURES:append           = "${FEATURES_SOC}"
 
 FEATURES_SOC              = ""
-FEATURES_SOC:mx6q         = ",OpenGLES3"
-FEATURES_SOC:mx6dl        = ",OpenGLES3"
-FEATURES_SOC:mx8          = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.1"
-FEATURES_SOC:mx8mm        = ",OpenCV4"
+FEATURES_SOC:mx6q-nxp-bsp         = ",OpenGLES3"
+FEATURES_SOC:mx6dl-nxp-bsp        = ",OpenGLES3"
+FEATURES_SOC:mx8-nxp-bsp          = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.1"
+FEATURES_SOC:mx8mm-nxp-bsp        = ",OpenCV4"
 
 EXTENSIONS       = "*"
-EXTENSIONS:mx6q  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
-EXTENSIONS:mx6dl = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
-EXTENSIONS:mx8m  = "OpenGLES3:GL_EXT_color_buffer_float"
-EXTENSIONS:mx8mm = "*"
+EXTENSIONS:mx6q-nxp-bsp  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
+EXTENSIONS:mx6dl-nxp-bsp = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
+EXTENSIONS:mx8m-nxp-bsp  = "OpenGLES3:GL_EXT_color_buffer_float"
+EXTENSIONS:mx8mm-nxp-bsp = "*"
 
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
@@ -85,12 +85,12 @@ REMOVALS = " \
 REMOVALS:append:imxdpu = " \
     G2D/EightLayers \
 "
-REMOVALS:append:mx6q = " \
+REMOVALS:append:mx6q-nxp-bsp = " \
     GLES3/HDR02_FBBasicToneMapping \
     GLES3/HDR03_SkyboxTonemapping \
     GLES3/HDR04_HDRFramebuffer \
 "
-REMOVALS:append:mx6dl = " \
+REMOVALS:append:mx6dl-nxp-bsp = " \
     GLES3/HDR02_FBBasicToneMapping \
     GLES3/HDR03_SkyboxTonemapping \
     GLES3/HDR04_HDRFramebuffer \
@@ -120,17 +120,17 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
     stb \
 "
 RDEPENDS_EMPTY_MAIN_PACKAGE_MX8       = ""
-RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8   = " \
+RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8-nxp-bsp   = " \
     rapidopencl \
     rapidopenvx \
     rapidvulkan \
 "
-RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8mm = ""
+RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8mm-nxp-bsp = ""
 # vulkan-loader is dynamically loaded, so need to add an explicit
 # dependency
 RDEPENDS_VULKAN_LOADER       = ""
-RDEPENDS_VULKAN_LOADER:mx8   = "vulkan-loader"
-RDEPENDS_VULKAN_LOADER:mx8mm = ""
+RDEPENDS_VULKAN_LOADER:mx8-nxp-bsp   = "vulkan-loader"
+RDEPENDS_VULKAN_LOADER:mx8mm-nxp-bsp = ""
 RDEPENDS:${PN} += " \
     ${RDEPENDS_EMPTY_MAIN_PACKAGE} \
     ${RDEPENDS_EMPTY_MAIN_PACKAGE_MX8} \

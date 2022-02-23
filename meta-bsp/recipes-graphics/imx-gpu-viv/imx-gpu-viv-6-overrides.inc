@@ -1,8 +1,8 @@
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 PROVIDES_OPENGLES3       = ""
-PROVIDES_OPENGLES3:mx8   = "virtual/libgles3"
-PROVIDES_OPENGLES3:mx8mm = ""
+PROVIDES_OPENGLES3:mx8-nxp-bsp   = "virtual/libgles3"
+PROVIDES_OPENGLES3:mx8mm-nxp-bsp = ""
 PROVIDES += "${PROVIDES_OPENGLES3}"
 
 PACKAGECONFIG ?= "valgrind"

@@ -12,8 +12,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 VULKAN_TOOLS       = ""
-VULKAN_TOOLS:imxgpu3d:mx8   = "vulkan-loader vulkan-headers vkmark vulkan-tools"
-VULKAN_TOOLS:mx8mm = ""
+VULKAN_TOOLS:imxgpu3d:mx8-nxp-bsp   = "vulkan-loader vulkan-headers vkmark vulkan-tools"
+VULKAN_TOOLS:mx8mm-nxp-bsp = ""
 
 # Common tools independent of the graphics backend
 SOC_TOOLS_GPU                          = "${VULKAN_TOOLS}"
@@ -33,7 +33,7 @@ SOC_TOOLS_GPU_X11:append:imxgpu3d      = " glmark2"
 
 # Tools for !wayland and !x11
 SOC_TOOLS_GPU_FB                       = ""
-SOC_TOOLS_GPU_FB:append:mx8            = " glmark2"
+SOC_TOOLS_GPU_FB:append:mx8-nxp-bsp            = " glmark2"
 
 RDEPENDS:${PN}:append:imxgpu = " \
     ${SOC_TOOLS_GPU} \

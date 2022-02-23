@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8cf95184c220e247b9917e7244124c5a"
 inherit deploy fsl-eula-unpack
 
 M4_SOC ?= "INVALID"
-M4_SOC:mx7d = "imx7d-sabresd"
+M4_SOC:mx7d-nxp-bsp = "imx7d-sabresd"
 
 SRC_URI = "${FSL_MIRROR}/${M4_SOC}-m4-freertos-${PV}.bin;fsl-eula=true"
 S = "${WORKDIR}/${M4_SOC}-m4-freertos-${PV}"
@@ -24,5 +24,5 @@ do_deploy () {
 addtask deploy before do_build after do_compile
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
-COMPATIBLE_MACHINE = "(mx7d)"
+COMPATIBLE_MACHINE = "(mx7d-nxp-bsp)"
 

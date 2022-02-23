@@ -19,4 +19,4 @@ RDEPENDS:${PN} = " \
     e2fsprogs-resize2fs \
 "
 
-COMPATIBLE_MACHINE = "(mx8dxl)"
+COMPATIBLE_MACHINE = "(mx8dxl-nxp-bsp)"

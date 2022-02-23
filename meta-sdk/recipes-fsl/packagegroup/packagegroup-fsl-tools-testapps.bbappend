@@ -12,15 +12,15 @@ RDEPENDS:${PN}-fslcodec-testapps += " \
 ALLOW_EMPTY:${PN}-fslcodec-testapps = "1"
 
 # Update SOC_TOOLS_TEST defined in meta-freescale-distro
-SOC_TOOLS_TEST:append:imx    = " \
+SOC_TOOLS_TEST:append:imx-nxp-bsp    = " \
     imx-kobs \
     ${PN}-fslcodec-testapps \
 "
 
-SOC_TOOLS_TEST:append:mx8qm  = " imx-seco-libs dvbapp-tests"
-SOC_TOOLS_TEST:append:mx8x   = " imx-seco-libs"
-SOC_TOOLS_TEST:append:mx8m   = " kernel-tools-virtio"
-SOC_TOOLS_TEST:append:mx8ulp = " imx-secure-enclave"
+SOC_TOOLS_TEST:append:mx8qm-nxp-bsp  = " imx-seco-libs dvbapp-tests"
+SOC_TOOLS_TEST:append:mx8x-nxp-bsp   = " imx-seco-libs"
+SOC_TOOLS_TEST:append:mx8m-nxp-bsp   = " kernel-tools-virtio"
+SOC_TOOLS_TEST:append:mx8ulp-nxp-bsp = " imx-secure-enclave"
 
 RDEPENDS:${PN} += " \
     can-utils \

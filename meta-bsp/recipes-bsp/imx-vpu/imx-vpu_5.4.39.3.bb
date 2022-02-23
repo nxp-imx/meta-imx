@@ -28,4 +28,4 @@ do_install() {
     oe_runmake PLATFORM="${PLATFORM}" DEST_DIR="${D}" install
 }
 
-COMPATIBLE_MACHINE = "(mx6q|mx6dl)"
+COMPATIBLE_MACHINE = "(mx6q-nxp-bsp|mx6dl-nxp-bsp)"

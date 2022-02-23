@@ -8,5 +8,5 @@ SRC_URI:remove = " \
     file://0001-Use-the-one-argument-version-of-SetTotalBytesLimit.patch \
 "
 
-PACKAGECONFIG_OPENCL:mx8mnul = ""
-PACKAGECONFIG_OPENCL:mx8mpul = ""
+PACKAGECONFIG_OPENCL:mx8mnul-nxp-bsp = ""
+PACKAGECONFIG_OPENCL:mx8mpul-nxp-bsp = ""

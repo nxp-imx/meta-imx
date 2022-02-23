@@ -13,7 +13,7 @@ PACKAGECONFIG[afxdp] = ",,libbpf"
 PACKAGECONFIG[libvirt] = ",,libvirt"
 
 DPDK_EXAMPLES ?= "l2fwd,l3fwd,cmdif,l2fwd-qdma,l2fwd-crypto,ipsec-secgw,vhost,kni,ip_fragmentation,ip_reassembly"
-DPDK_EXAMPLES:imx = "l2fwd,l3fwd"
+DPDK_EXAMPLES:imx-nxp-bsp = "l2fwd,l3fwd"
 
 # kernel module is provide by dpdk-module recipe, so disable here
 EXTRA_OEMESON = " -Denable_kmods=false \
@@ -58,4 +58,4 @@ FILES:${PN}-tools = " \
                      ${bindir}/dpdk-*.py \
 "
 
-COMPATIBLE_MACHINE = "(imx|qoriq)"
+COMPATIBLE_MACHINE = "(imx-nxp-bsp|qoriq)"

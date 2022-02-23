@@ -19,8 +19,8 @@ EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8
 
 PACKAGECONFIG ?= ""
 # Enable vpu PACKAGECONFIG for aarch32 vpu platforms only
-PACKAGECONFIG:mx6q = "vpu"
-PACKAGECONFIG:mx6dl = "vpu"
+PACKAGECONFIG:mx6q-nxp-bsp = "vpu"
+PACKAGECONFIG:mx6dl-nxp-bsp = "vpu"
 
 PACKAGECONFIG[vpu] = "--enable-vpu,--disable-vpu,virtual/imxvpu"
 
@@ -115,5 +115,5 @@ FILES:${PN}-nb += "${libdir}/imx-mm/audio-codec/wrap/lib_nbamrd_wrap_arm*_elinux
 FILES:${PN}-wb += "${libdir}/imx-mm/audio-codec/wrap/lib_wbamrd_wrap_arm*_elinux.so.*"
 FILES:lib-src-ppp-arm11-elinux1 += "${libdir}/lib_src_ppp_arm11_elinux.so.1"
 
-PACKAGE_ARCH:mx6q = "${MACHINE_SOCARCH}"
-PACKAGE_ARCH:mx6dl = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH:mx6q-nxp-bsp = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH:mx6dl-nxp-bsp = "${MACHINE_SOCARCH}"

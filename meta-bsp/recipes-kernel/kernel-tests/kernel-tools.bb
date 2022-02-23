@@ -50,7 +50,7 @@ EXTRA_OEMAKE = '\
     DESTDIR="${D}" \
 '
 DO_BUILD_VIRTIO = "no"
-DO_BUILD_VIRTIO:mx8m = "yes"
+DO_BUILD_VIRTIO:mx8m-nxp-bsp = "yes"
 
 do_compile() {
     unset CFLAGS

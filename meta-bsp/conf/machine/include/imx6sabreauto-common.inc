@@ -5,6 +5,6 @@ require conf/machine/include/arm/armv7a/tune-cortexa9.inc
 
 SERIAL_CONSOLES = "115200;ttymxc3"
 
-MACHINE_FIRMWARE:append:mx6 = " linux-firmware-ath6k"
+MACHINE_FIRMWARE:append:mx6-nxp-bsp = " linux-firmware-ath6k"
 
 MACHINE_FEATURES += " pci wifi bluetooth"

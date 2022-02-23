@@ -36,17 +36,17 @@ KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddef
 DEFAULT_PREFERENCE = "1"
 
 DO_CONFIG_V7_COPY = "no"
-DO_CONFIG_V7_COPY:mx6 = "yes"
-DO_CONFIG_V7_COPY:mx7 = "yes"
-DO_CONFIG_V7_COPY:mx8 = "no"
+DO_CONFIG_V7_COPY:mx6-nxp-bsp = "yes"
+DO_CONFIG_V7_COPY:mx7-nxp-bsp = "yes"
+DO_CONFIG_V7_COPY:mx8-nxp-bsp = "no"
 
 # Add setting for LF Mainline build
 IMX_KERNEL_CONFIG_AARCH32 = "imx_v7_defconfig"
 IMX_KERNEL_CONFIG_AARCH64 = "imx_v8_defconfig"
 KBUILD_DEFCONFIG ?= ""
-KBUILD_DEFCONFIG:mx6= "${IMX_KERNEL_CONFIG_AARCH32}"
-KBUILD_DEFCONFIG:mx7= "${IMX_KERNEL_CONFIG_AARCH32}"
-KBUILD_DEFCONFIG:mx8= "${IMX_KERNEL_CONFIG_AARCH64}"
+KBUILD_DEFCONFIG:mx6-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH32}"
+KBUILD_DEFCONFIG:mx7-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH32}"
+KBUILD_DEFCONFIG:mx8-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH64}"
 
 
 # Use a verbatim copy of the defconfig from the linux-imx repo.
@@ -67,7 +67,7 @@ do_copy_defconfig () {
 }
 
 DELTA_KERNEL_DEFCONFIG ?= ""
-#DELTA_KERNEL_DEFCONFIG:mx8 = "imx.config"
+#DELTA_KERNEL_DEFCONFIG:mx8-nxp-bsp = "imx.config"
 
 do_merge_delta_config[dirs] = "${B}"
 do_merge_delta_config[depends] += " \
@@ -92,4 +92,4 @@ addtask merge_delta_config before do_kernel_localversion after do_copy_defconfig
 do_kernel_configcheck[noexec] = "1"
 
 KERNEL_VERSION_SANITY_SKIP="1"
-COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
+COMPATIBLE_MACHINE = "(mx6-nxp-bsp|mx7-nxp-bsp|mx8-nxp-bsp)"

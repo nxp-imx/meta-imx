@@ -7,7 +7,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982"
 
 DEPENDS = "json-c optee-os optee-client python3-pycryptodomex-native"
-DEPENDS:append:mx8qxp = " imx-seco-libs"
+DEPENDS:append:mx8qxp-nxp-bsp = " imx-seco-libs"
 
 SRCBRANCH = "master"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
@@ -26,7 +26,7 @@ EXTRA_OECMAKE = " \
     -DTEEC_ROOT=${STAGING_DIR_HOST} \
     -DJSONC_ROOT="${COMPONENTS_DIR}/${TARGET_ARCH}/json-c/usr" \
 "
-EXTRA_OECMAKE:append:mx8qxp = " -DSECO_ROOT=${STAGING_INCDIR}"
+EXTRA_OECMAKE:append:mx8qxp-nxp-bsp = " -DSECO_ROOT=${STAGING_INCDIR}"
 
 OECMAKE_TARGET_COMPILE += "build_tests"
 OECMAKE_TARGET_INSTALL += "install_tests"
@@ -39,4 +39,4 @@ FILES:${PN}-tests = "${bindir}/* ${datadir}/${BPN}/*"
 
 RDEPENDS:${PN}-tests += "bash cmake"
 
-COMPATIBLE_MACHINE = "(imx)"
+COMPATIBLE_MACHINE = "(imx-nxp-bsp)"

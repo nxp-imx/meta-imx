@@ -24,4 +24,4 @@ do_install () {
 	oe_runmake DESTDIR=${D} install
 }
 
-COMPATIBLE_MACHINE = "(mx8ulp)"
+COMPATIBLE_MACHINE = "(mx8ulp-nxp-bsp)"

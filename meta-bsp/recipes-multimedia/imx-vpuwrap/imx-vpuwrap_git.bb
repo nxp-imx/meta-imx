@@ -8,7 +8,7 @@ SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://COPYING;md5=${FSL_EULA_FILE_MD5SUM_LA_OPT_NXP_SOFTWARE_LICENSE_V34}"
 
 DEPENDS = "virtual/imxvpu"
-DEPENDS:append:mx8mp = " imx-vpu-hantro-vc"
+DEPENDS:append:mx8mp-nxp-bsp = " imx-vpu-hantro-vc"
 
 IMX_VPUWRAP_SRC ?= "git://github.com/NXP/imx-vpuwrap.git;protocol=https"
 SRC_URI = "${IMX_VPUWRAP_SRC};branch=${SRCBRANCH}"
