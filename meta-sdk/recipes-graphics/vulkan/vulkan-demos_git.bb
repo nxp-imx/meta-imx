@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/SaschaWillems/Vulkan.git;protocol=https;branch=maste
            git://github.com/g-truc/glm;destsuffix=git/external/glm;name=glm;protocol=https;branch=master  \
            git://github.com/KhronosGroup/KTX-Software;destsuffix=git/external/ktx;name=ktx;lfs=0;protocol=https;branch=master \
            file://0001-Don-t-build-demos-with-questionably-licensed-data.patch \
+           file://0001-Modify-parameter-in-vulkan-demo-computenbody.patch \
            "
 UPSTREAM_CHECK_COMMITS = "1"
 SRCREV = "a2a604be473c829763854ffb34f7978bc0358afb"
