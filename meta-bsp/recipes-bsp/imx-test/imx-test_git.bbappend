@@ -10,4 +10,4 @@ SRC_URI = " \
     ${IMXTEST_SRC};branch=${SRCBRANCH} \
     file://memtool_profile \
 "
-SRCREV = "7220faa2904a92fe9379d4d6550defb1808e28ea"
+SRCREV = "c7544a94eddb0aafe6cdf618a3da71197706e1a8"
