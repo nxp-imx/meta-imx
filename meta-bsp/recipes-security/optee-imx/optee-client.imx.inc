@@ -11,6 +11,8 @@ SRC_URI = " \
     file://tee-supplicant.service \
 "
 
+FILESEXTRAPATHS:append := ":${THISDIR}/optee-client"
+
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
