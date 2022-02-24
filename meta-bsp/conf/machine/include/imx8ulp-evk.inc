@@ -3,11 +3,6 @@ MACHINEOVERRIDES =. "mx8:mx8ulp:"
 require conf/machine/include/imx-base.inc
 require conf/machine/include/arm/armv8a/tune-cortexa35.inc
 
-DEFAULTTUNE:mx8ulp-generic-bsp ?= "cortexa35-crypto"
-MACHINEOVERRIDES_EXTENDER:mx8ulp:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:mx8-generic-bsp:mx8-nxp-bsp:mx8ulp-generic-bsp:mx8ulp-nxp-bsp:imxdrm:imxgpu:imxgpu2d:imxgpu3d"
-MACHINEOVERRIDES_EXTENDER_FILTER_OUT:use-mainline-bsp += "mx8ulp"
-MACHINE_SOCARCH_SUFFIX:mx8ulp-nxp-bsp = "-mx8ulp"
-
 MACHINE_GSTREAMER_1_0_PLUGIN ?= "imx-gst1.0-plugin"
 
 MACHINE_FEATURES += "pci wifi bluetooth optee jailhouse"
