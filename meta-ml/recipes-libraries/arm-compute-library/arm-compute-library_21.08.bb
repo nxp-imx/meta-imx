@@ -103,4 +103,4 @@ FILES_SOLIBSDEV = ""
 RDEPENDS:${PN} = "bash"
 
 # We support i.MX8 only (for now)
-COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"

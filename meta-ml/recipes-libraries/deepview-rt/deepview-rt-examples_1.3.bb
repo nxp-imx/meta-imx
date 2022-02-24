@@ -33,5 +33,5 @@ do_install () {
 INSANE_SKIP:${PN} += "rpaths dev-deps ldflags"
 CLEANBROKEN = "1"
 
-COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
 BBCLASSEXTEND = "nativesdk"

@@ -29,4 +29,4 @@ do_install() {
 
 FILES:${PN} += "${libdir}/gstreamer-1.0/*"
 
-COMPATIBLE_MACHINE = "(mx8mm|mx8mp)"
+COMPATIBLE_MACHINE = "(mx8mm-nxp-bsp|mx8mp-nxp-bsp)"

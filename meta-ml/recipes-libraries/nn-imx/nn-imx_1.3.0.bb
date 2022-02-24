@@ -40,5 +40,5 @@ INSANE_SKIP:${PN} += "dev-so"
 
 # Works for i.MX 8 with GPU except for 8M Mini
 COMPATIBLE_MACHINE        = "(^$)"
-COMPATIBLE_MACHINE:imxgpu = "(mx8)"
-COMPATIBLE_MACHINE:mx8mm  = "(^$)"
+COMPATIBLE_MACHINE:imxgpu = "(mx8-nxp-bsp)"
+COMPATIBLE_MACHINE:mx8mm-nxp-bsp  = "(^$)"

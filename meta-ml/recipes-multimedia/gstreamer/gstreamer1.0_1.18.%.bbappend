@@ -1,1 +1,1 @@
-PACKAGECONFIG:append:mx8m = " tracer-hooks"
+PACKAGECONFIG:append:mx8m-nxp-bsp = " tracer-hooks"

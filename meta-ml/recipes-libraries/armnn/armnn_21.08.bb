@@ -26,22 +26,22 @@ DEPENDS = " \
     half \
 "
 RDEPENDS_MX8       = ""
-RDEPENDS_MX8:mx8   = "nn-imx"
-RDEPENDS_MX8:mx8mm = ""
-RDEPENDS_MX8:mx8mnul = ""
-RDEPENDS_MX8:mx8mpul = ""
-RDEPENDS_MX8:mx8ulp = ""
+RDEPENDS_MX8:mx8-nxp-bsp   = "nn-imx"
+RDEPENDS_MX8:mx8mm-nxp-bsp = ""
+RDEPENDS_MX8:mx8mnul-nxp-bsp = ""
+RDEPENDS_MX8:mx8mpul-nxp-bsp = ""
+RDEPENDS_MX8:mx8ulp-nxp-bsp = ""
 RDEPENDS:${PN}   = " \
     arm-compute-library \
     protobuf \
     ${RDEPENDS_MX8} \
 "
 PACKAGECONFIG_VSI_NPU       = ""
-PACKAGECONFIG_VSI_NPU:mx8   = "vsi-npu"
-PACKAGECONFIG_VSI_NPU:mx8mm = ""
-PACKAGECONFIG_VSI_NPU:mx8mnul = ""
-PACKAGECONFIG_VSI_NPU:mx8mpul = ""
-PACKAGECONFIG_VSI_NPU:mx8ulp = ""
+PACKAGECONFIG_VSI_NPU:mx8-nxp-bsp   = "vsi-npu"
+PACKAGECONFIG_VSI_NPU:mx8mm-nxp-bsp = ""
+PACKAGECONFIG_VSI_NPU:mx8mnul-nxp-bsp = ""
+PACKAGECONFIG_VSI_NPU:mx8mpul-nxp-bsp = ""
+PACKAGECONFIG_VSI_NPU:mx8ulp-nxp-bsp = ""
 
 PACKAGECONFIG ??= "neon ref tensorflow-lite onnx tests pyarmnn delegate ${PACKAGECONFIG_VSI_NPU}"
 
@@ -135,7 +135,7 @@ FILES:${PN}-dev += "${DELEGATE_INSTALL_DIR}/*"
 FILES:${PN}-dev += "${libdir}/ArmnnDelegateTargets-release.cmake ${libdir}/ArmnnDelegateConfig.cmake ${libdir}/ArmnnDelegateTargets.cmake"
 
 # We support i.MX8 only (for now)
-COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
 
 # Ccache sometimes causes unexpected build break
 CCACHE_DISABLE = '1'

@@ -30,4 +30,4 @@ do_install() {
     install -m 0755 ${S}/DEMO_README.md ${D}${bindir}/${BPN}
 }
 
-COMPATIBLE_MACHINE = "(mx8qm|mx8mp)"
+COMPATIBLE_MACHINE = "(mx8qm-nxp-bsp|mx8mp-nxp-bsp)"

@@ -15,18 +15,18 @@ inherit fsl-eula-unpack python3native
 DEPENDS = "python3 python3-pip-native opencv"
 
 RDEPENDS_MX8       = ""
-RDEPENDS_MX8:mx8   = "nn-imx"
-RDEPENDS_MX8:mx8mm = ""
-RDEPENDS_MX8:mx8mnul = ""
-RDEPENDS_MX8:mx8mpul = ""
-RDEPENDS_MX8:mx8ulp = ""
+RDEPENDS_MX8:mx8-nxp-bsp   = "nn-imx"
+RDEPENDS_MX8:mx8mm-nxp-bsp = ""
+RDEPENDS_MX8:mx8mnul-nxp-bsp = ""
+RDEPENDS_MX8:mx8mpul-nxp-bsp = ""
+RDEPENDS_MX8:mx8ulp-nxp-bsp = ""
 RDEPENDS:${PN} += " ${RDEPENDS_MX8} "
 
 IS_RM_OVXRTM  = ""
-IS_RM_OVXRTM:mx8mm =  "1"
-IS_RM_OVXRTM:mx8mnul =  "1"
-IS_RM_OVXRTM:mx8mpul =  "1"
-IS_RM_OVXRTM:mx8ulp =  "1"
+IS_RM_OVXRTM:mx8mm-nxp-bsp =  "1"
+IS_RM_OVXRTM:mx8mnul-nxp-bsp =  "1"
+IS_RM_OVXRTM:mx8mpul-nxp-bsp =  "1"
+IS_RM_OVXRTM:mx8ulp-nxp-bsp =  "1"
 
 do_install () {
     install -d ${D}${bindir}
@@ -62,5 +62,5 @@ INHIBIT_SYSROOT_STRIP = "1"
 
 INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
 
-COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
 BBCLASSEXTEND = "nativesdk"

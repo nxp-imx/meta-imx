@@ -19,38 +19,38 @@ ML_NNSTREAMER_PKGS_LIST = " \
 "
 
 ML_NNSTREAMER_PKGS = ""
-ML_NNSTREAMER_PKGS:imxgpu:mx8 = "${ML_NNSTREAMER_PKGS_LIST}"
+ML_NNSTREAMER_PKGS:imxgpu:mx8-nxp-bsp = "${ML_NNSTREAMER_PKGS_LIST}"
 
 ML_PKGS            = ""
-ML_PKGS:imxgpu:mx8 = " \
+ML_PKGS:imxgpu:mx8-nxp-bsp = " \
     armnn \
     tensorflow-lite \
     tensorflow-lite-vx-delegate \
     onnxruntime \
     ml-security \
 "
-ML_PKGS:mx8ulp = " \
+ML_PKGS:mx8ulp-nxp-bsp = " \
     armnn \
     tensorflow-lite \
     onnxruntime \
 "
-ML_PKGS:remove:mx8mm = "tensorflow-lite-vx-delegate"
+ML_PKGS:remove:mx8mm-nxp-bsp = "tensorflow-lite-vx-delegate"
 
 ML_DEEPVIEW_PKGS            = ""
-ML_DEEPVIEW_PKGS:imxgpu:mx8 = "deepview-rt-examples"
-ML_DEEPVIEW_PKGS:mx8mm      = ""
+ML_DEEPVIEW_PKGS:imxgpu:mx8-nxp-bsp = "deepview-rt-examples"
+ML_DEEPVIEW_PKGS:mx8mm-nxp-bsp      = ""
 
 ML_EIQ_PKGS       = ""
-ML_EIQ_PKGS:mx8mm = " \
+ML_EIQ_PKGS:mx8mm-nxp-bsp = " \
     eiq-apps \
 "
-ML_EIQ_PKGS:mx8mp = " \
+ML_EIQ_PKGS:mx8mp-nxp-bsp = " \
     eiq-apps \
 "
 
 ML_TVM_PKGS            = ""
-ML_TVM_PKGS:imxgpu:mx8 = "tvm"
-ML_TVM_PKGS:mx8mm      = ""
+ML_TVM_PKGS:imxgpu:mx8-nxp-bsp = "tvm"
+ML_TVM_PKGS:mx8mm-nxp-bsp      = ""
 
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \

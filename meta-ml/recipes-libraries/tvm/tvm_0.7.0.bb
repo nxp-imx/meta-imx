@@ -58,4 +58,4 @@ INSANE_SKIP:${PN} += "dev-deps"
 FILES_SOLIBSDEV = ""
 FILES:${PN} = "${bindir}/* ${libdir}/*"
 
-COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"

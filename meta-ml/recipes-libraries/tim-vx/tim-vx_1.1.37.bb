@@ -29,5 +29,5 @@ SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
 COMPATIBLE_MACHINE          = "(^$)"
-COMPATIBLE_MACHINE:imxgpu3d = "(mx8)"
-COMPATIBLE_MACHINE:mx8mm    = "(^$)"
+COMPATIBLE_MACHINE:imxgpu3d = "(mx8-nxp-bsp)"
+COMPATIBLE_MACHINE:mx8mm-nxp-bsp    = "(^$)"
