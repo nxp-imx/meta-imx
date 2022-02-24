@@ -22,6 +22,7 @@ SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                git://github.com/agauniyal/rang;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/rang;name=rang \
                git://github.com/apache/incubator-tvm-vta;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/vta-hw;name=vta-hw \
                file://0001-tvm-CMakeLists.txt-Use-CMAKE-variables-for-libs-inst.patch \
+               file://tvm_runtime.pc.in \
 "
 
 SRCREV = "32c38730216147966f8d65f99b0c2d814fb8509b"
@@ -51,6 +52,14 @@ do_install () {
 
     setuptools3_do_install
     rm -fr ${D}${datadir}
+
+    # Install pkgconfig file for tvm_runtime lib
+    install -d ${D}${libdir}/pkgconfig
+    install -m 0644 ${WORKDIR}/tvm_runtime.pc.in ${D}${libdir}/pkgconfig/tvm_runtime.pc
+
+    sed -i 's:@version@:${PV}:g
+        s:@libdir@:${libdir}:g
+        s:@includedir@:${includedir}:g' ${D}${libdir}/pkgconfig/tvm_runtime.pc
 }
 
 INSANE_SKIP:${PN} += "dev-deps"
