@@ -33,7 +33,7 @@ S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 
-PACKAGECONFIG ??= "protobuf python3 tensorflow-lite deepview-rt "
+PACKAGECONFIG ??= "protobuf python3 tensorflow-lite deepview-rt tvm"
 
 PACKAGECONFIG[deepview-rt] = "\
        -Ddeepview-rt-support=enabled, \
@@ -77,6 +77,13 @@ PACKAGECONFIG[tensorflow-lite] = "\
 	,,\
 "
 
+PACKAGECONFIG[tvm] = "\
+	-Dtvm-support=enabled, \
+	-Dtvm-support=disabled, \
+	tvm, \
+	,,\
+"
+
 EXTRA_OEMESON += "\
 	-Denable-test=true \
 	-Dinstall-test=true \
@@ -97,6 +104,7 @@ PACKAGES =+ "\
 	${@bb.utils.contains('PACKAGECONFIG', 'protobuf grpc','${PN}-grpc-protobuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'python3','${PN}-python3', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'tvm','${PN}-tvm', '', d)} \
 "
 
 RDEPENDS:${PN} = "\
@@ -113,6 +121,7 @@ RDEPENDS:${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
 	${@bb.utils.contains('PACKAGECONFIG', 'protobuf grpc','${PN}-grpc-protobuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'python3','${PN}-python3', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'tvm','${PN}-tvm', '', d)} \
 "
 
 FILES:${PN} += "\
@@ -170,6 +179,10 @@ FILES:${PN}-python3 = "\
 
 FILES:${PN}-tensorflow-lite = "\
 	${libdir}/nnstreamer/filters/libnnstreamer_filter_tensorflow2-lite.so \
+"
+
+FILES:${PN}-tvm = "\
+	${libdir}/nnstreamer/filters/libnnstreamer_filter_tvm.so \
 "
 
 FILES:${PN}-unittest = "\
