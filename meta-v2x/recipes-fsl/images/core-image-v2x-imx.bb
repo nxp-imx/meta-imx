@@ -15,4 +15,4 @@ IMAGE_ROOTFS_EXTRA_SPACE = "131072"
 
 export IMAGE_BASENAME = "core-image-v2x-imx"
 
-COMPATIBLE_MACHINE = "(mx8dxl)"
+COMPATIBLE_MACHINE = "(mx8dxl-nxp-bsp)"
