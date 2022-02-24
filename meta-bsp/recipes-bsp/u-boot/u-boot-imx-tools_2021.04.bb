@@ -7,6 +7,4 @@ PROVIDES:append:class-nativesdk = " nativesdk-u-boot-tools"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "(^$)"
-COMPATIBLE_MACHINE_use-mainline-bsp = "(.)"
-COMPATIBLE_MACHINE_use-nxp-bsp = "(.)"
+COMPATIBLE_MACHINE = "(imx-generic-bsp)"
