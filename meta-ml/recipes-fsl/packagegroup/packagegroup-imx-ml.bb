@@ -16,6 +16,7 @@ ML_NNSTREAMER_PKGS_LIST = " \
     nnstreamer-protobuf \
     nnstreamer-python3 \
     nnstreamer-tensorflow-lite \
+    nnstreamer-tvm \
 "
 
 ML_NNSTREAMER_PKGS = ""
