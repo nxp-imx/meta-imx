@@ -60,6 +60,17 @@ do_install () {
     sed -i 's:@version@:${PV}:g
         s:@libdir@:${libdir}:g
         s:@includedir@:${includedir}:g' ${D}${libdir}/pkgconfig/tvm_runtime.pc
+
+    # Install additional header files that tvm public interface depends on
+    cd ${S}/3rdparty/dlpack/include
+    cp --parents \
+        $(find . -name "*.h*") \
+        ${D}${includedir}
+
+    cd ${S}/3rdparty/dmlc-core/include
+    cp --parents \
+        $(find . -name "*.h*") \
+        ${D}${includedir}
 }
 
 INSANE_SKIP:${PN} += "dev-deps"
