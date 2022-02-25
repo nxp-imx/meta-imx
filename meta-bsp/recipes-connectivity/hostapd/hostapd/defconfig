@@ -194,3 +194,6 @@ CONFIG_INTERWORKING=y
 # certain percentage of probe requests or auth/(re)assoc frames.
 #
 CONFIG_TESTING_OPTIONS=y
+
+# Support Operating Channel Validation
+CONFIG_OCV=y
