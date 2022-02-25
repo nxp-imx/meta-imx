@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL2.1;md5=4fbd65380cdd255951079008b364516c"
 DEPENDS = "vulkan-loader assimp glm"
 
 SRC_URI = " \
-    git://github.com/vkmark/vkmark;protocol=https \
+    git://github.com/vkmark/vkmark;protocol=https;branch=master \
     file://0001-scenes-Use-depth-format-supported-by-i.MX.patch \
     file://0001-src-meson.build-Prepend-sysroot-for-the-includedir.patch \
     file://0001-tests-catch.hpp-Fix-build-with-glibc-2.34.patch \
