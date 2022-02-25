@@ -3,7 +3,7 @@ SUMMARY = "ONNX protobuf files - used in Arm NN for ONNX parser"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=efff5c5110f124a1e2163814067b16e7"
 
-SRC_URI = "git://github.com/onnx/onnx.git;branch=rel-1.6.0"
+SRC_URI = "git://github.com/onnx/onnx.git;branch=rel-1.6.0;protocol=https"
 SRCREV = "553df22c67bee5f0fe6599cff60f1afc6748c635"
 DEPENDS = "protobuf-native"
 

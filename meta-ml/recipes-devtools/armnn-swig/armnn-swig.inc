@@ -12,7 +12,7 @@ SECTION = "devel"
 
 DEPENDS = "libpcre bison-native"
 
-SRC_URI = "git://github.com/swig/swig.git"
+SRC_URI = "git://github.com/swig/swig.git;branch=master;protocol=https"
 SRCREV = "efe5f181cf69975cf2fa1dcddefc29b93e4a6196"
 
 inherit autotools python3native pkgconfig

@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 
 # For ONNX Runtime v0.3.0 we need only 'protoc' to be compiled for native system
 # 3.16.0
-GIT_protobuf = "git://github.com/google/protobuf.git;branch=master;name=protobuf"
+GIT_protobuf = "git://github.com/google/protobuf.git;branch=master;name=protobuf;protocol=https"
 SRCREV_protobuf = "2dc747c574b68a808ea4699d26942c8132fe2b09"
 
 SRC_URI = "\
