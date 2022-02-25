@@ -612,3 +612,10 @@ CONFIG_WPS_ER=y
 # the resulting binary.
 CONFIG_READLINE=y
 
+# External PMKSA cache control
+# This can be used to enable control interface commands that allow the current
+# PMKSA cache entries to be fetched and new entries to be added.
+CONFIG_PMKSA_CACHE_EXTERNAL=y
+
+# Support Operating Channel Validation
+CONFIG_OCV=y
