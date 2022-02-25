@@ -1068,7 +1068,7 @@ M4 Processor Packages
 
 Package:                     imx7ulp-m4-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v32 January 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1096,7 +1096,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mm-m4-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v32 January 2022 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1110,7 +1110,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mq-m4-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v32 January 2022 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1154,7 +1154,7 @@ M7 Processor Packages
 
 Package:                     imx8mn-m7-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v32 January 2022 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1168,7 +1168,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mnddr3l-m7-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v32 January 2022 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1182,7 +1182,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mp-m7-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v32 January 2022 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
