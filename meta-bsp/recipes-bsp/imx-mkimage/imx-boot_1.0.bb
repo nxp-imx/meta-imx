@@ -98,8 +98,12 @@ SOC_FAMILY_mx8x = "mx8x"
 REV_OPTION ?= ""
 REV_OPTION_mx8qxpc0 = "REV=C0"
 REV_OPTION_mx8phantomdxl = "REV=C0"
+REV_OPTION_mx8dxl   = "ERROR_8DXL_REV_AMBIGUOUS"
 REV_OPTION_mx8dxlb0 = "REV=B0"
 REV_OPTION_mx8dxla1 = "REV=A1"
+
+IS_DXL        = "false"
+IS_DXL_mx8dxl = "true"
 
 compile_mx8m() {
     bbnote 8MQ/8MM boot binary build
@@ -155,6 +159,12 @@ compile_mx8x() {
     fi
 }
 do_compile() {
+    if ${IS_DXL}; then
+        bbwarn "!!! Booting with an image for the wrong DXL Rev will PERMANENTLY DAMAGE YOUR BOARD !!!"
+    fi
+    if [ "${REV_OPTION}" = "ERROR_8DXL_REV_AMBIGUOUS" ]; then
+        bbfatal "Machine ${MACHINE} cannot be used. Please select a machine with the correct Rev for your board."
+    fi
     compile_${SOC_FAMILY}
     # Copy TEE binary to SoC target folder to mkimage
     if ${DEPLOY_OPTEE}; then
