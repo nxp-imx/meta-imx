@@ -1,0 +1,2 @@
+PIP_INSTALL_DIST_PATH = "${S}/dist"
+PIP_INSTALL_PACKAGE = "pybind11"
