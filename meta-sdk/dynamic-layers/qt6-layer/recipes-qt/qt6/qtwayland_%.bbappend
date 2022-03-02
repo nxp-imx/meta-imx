@@ -11,10 +11,6 @@ PACKAGECONFIG:remove:mx8-nxp-bsp = "xcomposite-egl xcomposite-glx"
 
 ###### End of meta-freescale bbappend
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-
-SRC_URI:append:mx6sl-nxp-bsp = " file://0001-hardwareintegration-Do-not-include-shm-emulation-ser.patch"
-
 PACKAGECONFIG:remove:mx6sl-nxp-bsp = "wayland-egl"
 
 do_install:append() {
