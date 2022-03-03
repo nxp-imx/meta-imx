@@ -28,11 +28,15 @@ ML_PKGS:imxgpu:mx8-nxp-bsp = " \
     tensorflow-lite-vx-delegate \
     onnxruntime \
     ml-security \
+    pytorch \
+    torchvision \
 "
 ML_PKGS:mx8ulp-nxp-bsp = " \
     armnn \
     tensorflow-lite \
     onnxruntime \
+    pytorch \
+    torchvision \
 "
 ML_PKGS:remove:mx8mm-nxp-bsp = "tensorflow-lite-vx-delegate"
 
