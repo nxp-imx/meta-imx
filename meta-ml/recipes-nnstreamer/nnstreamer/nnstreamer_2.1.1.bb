@@ -178,6 +178,7 @@ FILES:${PN}-python3 = "\
 	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_python3.so \
 	${libdir}/nnstreamer/filters/libnnstreamer_filter_python3.so \
 	${libdir}/nnstreamer/extra/nnstreamer_python3.so \
+	${PYTHON_SITEPACKAGES_DIR}/nnstreamer_python.so \
 "
 
 FILES:${PN}-tensorflow-lite = "\
@@ -197,14 +198,19 @@ FILES:${PN}-unittest = "\
 "
 
 INSANE_SKIP:${PN} += "dev-so"
+INSANE_SKIP:${PN}-python3 += "dev-so"
 
-#
-# Fixes: 076a78ea [TVM/test] Add models for more architectures
-#
 do_install:append() {
+    # Fixes: 076a78ea [TVM/test] Add models for more architectures
     bash -c "shopt -s extglob;
     rm -f ${D}/${bindir}/unittest-nnstreamer/tests/test_models/models/tvm_add_one_!(${HOST_ARCH}).so_;
     shopt -u extglob;"
+
+    # Check if python3 is enabled then install python module
+    if ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'true', 'false', d)}; then
+        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/
+        ln -sf ${libdir}/nnstreamer/extra/nnstreamer_python3.so ${D}${PYTHON_SITEPACKAGES_DIR}/nnstreamer_python.so
+    fi
 }
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
