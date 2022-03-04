@@ -13,7 +13,7 @@ SRCBRANCH = "release/version_1.x"
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH} \
     file://0001-FindSeco.cmake-Use-CMAKE-variable-to-find-seco-libra.patch"
-SRCREV = "44a6014481047261647af68ef2c9dbd8294fa91e"
+SRCREV = "43f23a4c6d22cf34e00f4d68dfca2c449f5ef1e1"
 
 S = "${WORKDIR}/git"
 
