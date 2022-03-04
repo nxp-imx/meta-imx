@@ -10,7 +10,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8df9e8826734226d08cb412babfa599c"
 SRC_URI = "git://github.com/KhronosGroup/Vulkan-ValidationLayers.git;protocol=https;branch=sdk-1.3.204"
 
-SRCREV = "43323a7887d028df329f9d703b08138402b6acce"
+SRCREV = "26dc8574c8ceafc901e1bbd7a0929da7e0a5df20"
 
 S = "${WORKDIR}/git"
 
