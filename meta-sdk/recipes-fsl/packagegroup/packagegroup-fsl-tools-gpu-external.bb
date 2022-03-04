@@ -11,9 +11,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-VULKAN_TOOLS       = ""
-VULKAN_TOOLS:imxgpu3d:mx8-nxp-bsp   = "vulkan-loader vulkan-headers vkmark vulkan-tools"
-VULKAN_TOOLS:mx8mm-nxp-bsp = ""
+VULKAN_TOOLS                      = ""
+VULKAN_TOOLS:imxgpu3d:mx8-nxp-bsp = "vulkan-loader vulkan-validationlayers vulkan-headers vkmark vulkan-tools"
+VULKAN_TOOLS:mx8mm-nxp-bsp        = ""
 
 # Common tools independent of the graphics backend
 SOC_TOOLS_GPU                          = "${VULKAN_TOOLS}"
