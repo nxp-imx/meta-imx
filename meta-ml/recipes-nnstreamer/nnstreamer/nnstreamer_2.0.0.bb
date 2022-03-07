@@ -70,8 +70,9 @@ PACKAGECONFIG[python3] = "\
 "
 
 PACKAGECONFIG[tensorflow-lite] = "\
-	-Dtflite2-support=enabled -Dtflite2-nnapi-delegate-support=true \
-	-Dtflite2-external-delegate-support=true -Dtflite2-xnnpack-delegate-support=true, \
+	-Dtflite2-support=enabled \
+	-Dtflite2-external-delegate-support=true \
+	-Dtflite2-xnnpack-delegate-support=true, \
 	-Dtflite2-support=disabled, \
 	tensorflow-lite flatbuffers, \
 	,,\
