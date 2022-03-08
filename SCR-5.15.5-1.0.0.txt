@@ -635,8 +635,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-2.0.0.bin
-Version:                     2.0.0
+Package:                     imx-dpu-g2d-2.0.2.bin
+Version:                     2.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -722,7 +722,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     imx-g2d-samples.git
-Version:                     2.0.0
+Version:                     2.0
 Outgoing License:            BSD-3-Clause 
 License File:                COPYING
 Package Category:            Graphics
@@ -1195,19 +1195,6 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 MachineLearning Packages
---------------------------------------------
-
-Package:                     armnn.git
-Version:                     21.08
-Outgoing License:            MIT 
-License File:                LICENSE
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    ARM Neural Network SDK
-Release Location:            https://source.codeaurora.org/external/imx/armnn-imx -b rel_imx_5.15.5-1.0.0
-Origin:                      NXP (MIT)
-                             armnn (MIT) - https://github.com/ARM-software/armnn
-
 --------------------------------------------
 
 Package:                     coral-posenet-imx.git
