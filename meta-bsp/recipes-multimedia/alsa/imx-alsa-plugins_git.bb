@@ -3,7 +3,7 @@
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Freescale alsa-lib plugins"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 SECTION = "multimedia"
 DEPENDS = "alsa-lib"
 
@@ -17,9 +17,10 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 inherit autotools pkgconfig use-imx-headers
 
-IMXALSA_SRC ?= "git://source.codeaurora.org/external/imx/imx-alsa-plugins.git;protocol=https"
 SRCBRANCH = "master"
+PV = "1.0.26+${SRCPV}"
 
+IMXALSA_SRC ?= "git://source.codeaurora.org/external/imx/imx-alsa-plugins.git;protocol=https"
 SRC_URI = "${IMXALSA_SRC};branch=${SRCBRANCH}"
 SRCREV = "cde60d68ab2acee913dbfacb8aabb53d87dd3e38" 
 S = "${WORKDIR}/git"
@@ -34,4 +35,4 @@ FILES:${PN} += "${libdir}/alsa-lib/libasound_*.so"
 FILES:${PN}-dbg += "${libdir}/alsa-lib/.debug"
 FILES:${PN}-dev += "${libdir}/alsa-lib/*.la"
 
-COMPATIBLE_MACHINE = "(mx6-nxp-bsp|mx7-nxp-bsp|mx8-nxp-bsp)"
+COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
