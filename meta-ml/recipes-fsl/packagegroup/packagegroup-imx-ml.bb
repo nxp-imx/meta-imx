@@ -12,7 +12,6 @@ inherit packagegroup
 ML_NNSTREAMER_PKGS_LIST = " \
     nnshark \
     nnstreamer \
-    nnstreamer-armnn \
     nnstreamer-protobuf \
     nnstreamer-python3 \
     nnstreamer-tensorflow-lite \
@@ -23,7 +22,6 @@ ML_NNSTREAMER_PKGS:imxgpu:mx8-nxp-bsp = "${ML_NNSTREAMER_PKGS_LIST}"
 
 ML_PKGS            = ""
 ML_PKGS:imxgpu:mx8-nxp-bsp = " \
-    armnn \
     tensorflow-lite \
     tensorflow-lite-vx-delegate \
     onnxruntime \
@@ -32,7 +30,6 @@ ML_PKGS:imxgpu:mx8-nxp-bsp = " \
     torchvision \
 "
 ML_PKGS:mx8ulp-nxp-bsp = " \
-    armnn \
     tensorflow-lite \
     onnxruntime \
     pytorch \

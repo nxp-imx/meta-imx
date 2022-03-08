@@ -39,14 +39,7 @@ S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 
-PACKAGECONFIG ??= "armnn protobuf python3 tensorflow-lite "
-
-PACKAGECONFIG[armnn] = "\
-	-Darmnn-support=enabled, \
-	-Darmnn-support=disabled, \
-	armnn, \
-	,,\
-"
+PACKAGECONFIG ??= "protobuf python3 tensorflow-lite "
 
 PACKAGECONFIG[flatbuf] = "\
 	-Dflatbuf-support=enabled, \
