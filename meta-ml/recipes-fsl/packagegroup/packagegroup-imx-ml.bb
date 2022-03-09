@@ -24,14 +24,12 @@ ML_PKGS            = ""
 ML_PKGS:imxgpu:mx8-nxp-bsp = " \
     tensorflow-lite \
     tensorflow-lite-vx-delegate \
-    onnxruntime \
     ml-security \
     pytorch \
     torchvision \
 "
 ML_PKGS:mx8ulp-nxp-bsp = " \
     tensorflow-lite \
-    onnxruntime \
     pytorch \
     torchvision \
 "
