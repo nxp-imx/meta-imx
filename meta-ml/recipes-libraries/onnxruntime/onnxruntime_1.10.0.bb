@@ -44,7 +44,7 @@ EXTRA_OECMAKE += "\
 -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 "
 
-PYTHON_DEPENDS = "${PYTHON_PN}-native ${PYTHON_PN}-pip-native ${PYTHON_PN}-wheel-native ${PYTHON_PN}-setuptools-native ${PYTHON_PN}-numpy-native"
+PYTHON_DEPENDS = "${PYTHON_PN} ${PYTHON_PN}-native ${PYTHON_PN}-pip-native ${PYTHON_PN}-wheel-native ${PYTHON_PN}-setuptools-native ${PYTHON_PN}-numpy-native"
 PYTHON_RDEPENDS = "${PYTHON_PN} ${PYTHON_PN}-numpy ${PYTHON_PN}-protobuf flatbuffers-${PYTHON_PN}"
 
 PACKAGECONFIG_VSI_NPU       = ""
