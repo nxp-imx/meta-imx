@@ -60,12 +60,12 @@ PACKAGECONFIG ?= ""
 
 # FIXME: Add all features
 # feature from excluded mm packages
-PACKAGECONFIG[ac3] += ",,imx-ac3codec,imx-ac3codec"
+PACKAGECONFIG[ac3] = ",,imx-ac3codec,imx-ac3codec"
 # feature from special mm packages
-PACKAGECONFIG[aacp] += ",,imx-aacpcodec,imx-aacpcodec"
+PACKAGECONFIG[aacp] = ",,imx-aacpcodec,imx-aacpcodec"
 MSDEPENDS = "imx-msparser imx-mscodec"
-PACKAGECONFIG[wma10dec] += ",,${MSDEPENDS},${MSDEPENDS}"
-PACKAGECONFIG[wma8enc] += ",,${MSDEPENDS},${MSDEPENDS}"
+PACKAGECONFIG[wma10dec] = ",,${MSDEPENDS},${MSDEPENDS}"
+PACKAGECONFIG[wma8enc] = ",,${MSDEPENDS},${MSDEPENDS}"
 
 FILES:${PN} = "${libdir}/gstreamer-1.0/*.so ${datadir}"
 
