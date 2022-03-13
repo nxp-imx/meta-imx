@@ -56,4 +56,4 @@ do_install () {
 
 FILES:${PN} = "/usr/bin/ /lib*/optee_armtz/ /usr/lib/tee-supplicant/plugins/"
 
-COMPATIBLE_MACHINE = "(mx6-nxp-bsp|mx7-nxp-bsp|mx8-nxp-bsp)"
+COMPATIBLE_MACHINE = "(imx-nxp-bsp)"

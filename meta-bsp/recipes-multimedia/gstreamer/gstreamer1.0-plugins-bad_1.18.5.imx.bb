@@ -196,6 +196,6 @@ EXTRA_OEMESON += " \
     -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \
 "
 
-COMPATIBLE_MACHINE = "(mx6-nxp-bsp|mx7-nxp-bsp|mx8-nxp-bsp)"
+COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 
 ########### End of i.MX overrides #########

@@ -92,4 +92,4 @@ addtask merge_delta_config before do_kernel_localversion after do_copy_defconfig
 do_kernel_configcheck[noexec] = "1"
 
 KERNEL_VERSION_SANITY_SKIP="1"
-COMPATIBLE_MACHINE = "(mx6-nxp-bsp|mx7-nxp-bsp|mx8-nxp-bsp)"
+COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
