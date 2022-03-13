@@ -2,7 +2,7 @@ SUMMARY = "Vulkan benchmarking suite."
 DESCRIPTION = "vkmark is an extensible Vulkan benchmarking suite with \
                targeted, configurable scenes."
 SECTION = "graphics"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING-LGPL2.1;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = "vulkan-loader assimp glm"

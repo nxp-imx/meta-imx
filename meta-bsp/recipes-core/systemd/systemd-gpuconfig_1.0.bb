@@ -1,6 +1,6 @@
 SUMMARY = "i.MX GPU Configuration for systemd boot mode"
 DESCRIPTION = "Use systemd service to implement the former script rc_gpu.S and other scripts"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 
 SRC_URI = " file://gpuconfig \

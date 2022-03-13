@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "74e806bc5595b18c70e9ca93571e27e79dfb808e5d2e7967afa952b52e
 
 S = "${WORKDIR}/gst-plugins-bad-${PV}"
 
-LICENSE = "GPLv2+ & LGPLv2+ & LGPLv2.1+"
+LICENSE = "GPL-2.0-or-later & LGPL-2.0-or-later & LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS += "gstreamer1.0-plugins-base"

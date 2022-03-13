@@ -1,7 +1,7 @@
 SECTION = "devel"
 SUMMARY = "Linux Trace Toolkit KERNEL MODULE"
 DESCRIPTION = "The lttng-modules 2.0 package contains the kernel tracer modules"
-LICENSE = "LGPLv2.1 & GPLv2 & MIT"
+LICENSE = "LGPL-2.1-only & GPL-2.0-only & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3f882d431dc0f32f1f44c0707aa41128"
 
 inherit module

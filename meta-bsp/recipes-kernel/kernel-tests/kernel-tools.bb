@@ -3,7 +3,7 @@
 
 SUMMARY = "Kernel test tools for Linux"
 DESCRIPTION = "Kernel test tools for Linux"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 
 inherit linux-kernel-base kernel-arch
 inherit kernelsrc

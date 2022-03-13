@@ -1,5 +1,5 @@
 SUMMARY = "NXP Wi-Fi SDK for 88w8997 and 88w8987"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=ab04ac0f249af12befccb94447c08b77"
 
 # Kernel 5.4
