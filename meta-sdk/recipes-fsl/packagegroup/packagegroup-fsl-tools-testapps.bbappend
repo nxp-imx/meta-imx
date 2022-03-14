@@ -40,6 +40,8 @@ RDEPENDS:${PN} += " \
     ntpdate \
     openssl-bin \
     openssl-engines \
+    libp11 \
+    gnutls-bin \
     pciutils \
     procps \
     ptpd \
