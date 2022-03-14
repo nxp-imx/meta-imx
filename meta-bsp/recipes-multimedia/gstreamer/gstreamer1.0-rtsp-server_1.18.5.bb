@@ -29,3 +29,5 @@ GIR_MESON_DISABLE_FLAG = "disabled"
 require recipes-multimedia/gstreamer/gstreamer1.0-plugins-packaging.inc
 
 CVE_PRODUCT += "gst-rtsp-server"
+
+COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
