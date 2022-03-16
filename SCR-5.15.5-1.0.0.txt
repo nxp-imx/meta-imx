@@ -722,7 +722,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     imx-g2d-samples.git
-Version:                     2.0
+Version:                     git
 Outgoing License:            BSD-3-Clause 
 License File:                COPYING
 Package Category:            Graphics
