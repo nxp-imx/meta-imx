@@ -8,7 +8,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=f674ee93878e0b25c4e95dc6c2d06cdd"
 
 SRCREV = "618926e98b5497f166fc119c21ce391bd2805d6d"
-SRC_URI = "git://github.com/thesofproject/sof.git;branch=imx-stable-v2.1;protocol=https"
+SRC_URI = "git://github.com/thesofproject/sof.git;branch=imx-stable-v2.0;protocol=https"
 
 S = "${WORKDIR}/git"
 
