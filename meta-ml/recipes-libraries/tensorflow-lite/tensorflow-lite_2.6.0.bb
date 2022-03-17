@@ -18,7 +18,7 @@ S = "${WORKDIR}/git"
 inherit python3native cmake
 
 PACKAGECONFIG_OPENVX = ""
-PACKAGECONFIG_OPENVX:mx8-nxp-bsp = "openvx"
+PACKAGECONFIG_OPENVX:imxgpu3d:mx8-nxp-bsp = "openvx"
 PACKAGECONFIG_OPENVX:mx8mm-nxp-bsp = ""
 PACKAGECONFIG_OPENVX:mx8ulp-nxp-bsp = ""
 
