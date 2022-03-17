@@ -18,10 +18,10 @@ ML_NNSTREAMER_PKGS_LIST = " \
 "
 
 ML_NNSTREAMER_PKGS = ""
-ML_NNSTREAMER_PKGS:imxgpu:mx8-nxp-bsp = "${ML_NNSTREAMER_PKGS_LIST}"
+ML_NNSTREAMER_PKGS:mx8-nxp-bsp:imxgpu = "${ML_NNSTREAMER_PKGS_LIST}"
 
 ML_PKGS            = ""
-ML_PKGS:imxgpu:mx8-nxp-bsp = " \
+ML_PKGS:mx8-nxp-bsp:imxgpu = " \
     tensorflow-lite \
     tensorflow-lite-vx-delegate \
     onnxruntime \
@@ -37,8 +37,8 @@ ML_PKGS:mx8ulp-nxp-bsp = " \
 "
 ML_PKGS:remove:mx8mm-nxp-bsp = "tensorflow-lite-vx-delegate"
 
-ML_DEEPVIEW_PKGS            = ""
-ML_DEEPVIEW_PKGS:imxgpu:mx8-nxp-bsp = "deepview-rt-examples"
+ML_DEEPVIEW_PKGS                    = ""
+ML_DEEPVIEW_PKGS:mx8-nxp-bsp:imxgpu = "deepview-rt-examples"
 ML_DEEPVIEW_PKGS:mx8mm-nxp-bsp      = ""
 
 ML_EIQ_PKGS       = ""
@@ -49,8 +49,8 @@ ML_EIQ_PKGS:mx8mp-nxp-bsp = " \
     eiq-apps \
 "
 
-ML_TVM_PKGS            = ""
-ML_TVM_PKGS:imxgpu:mx8-nxp-bsp = "tvm"
+ML_TVM_PKGS                    = ""
+ML_TVM_PKGS:mx8-nxp-bsp:imxgpu = "tvm"
 ML_TVM_PKGS:mx8mm-nxp-bsp      = ""
 
 RDEPENDS:${PN} = " \
