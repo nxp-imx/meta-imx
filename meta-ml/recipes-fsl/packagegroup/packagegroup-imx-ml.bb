@@ -55,6 +55,7 @@ ML_TVM_PKGS:mx8mm-nxp-bsp      = ""
 
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \
+    ${ML_DEEPVIEW_PKGS} \
     ${ML_EIQ_PKGS} \
     ${ML_TVM_PKGS} \
     ${ML_NNSTREAMER_PKGS} \
