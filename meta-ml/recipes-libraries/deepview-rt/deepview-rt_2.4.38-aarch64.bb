@@ -50,7 +50,7 @@ INHIBIT_SYSROOT_STRIP = "1"
 INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
 
 RDEPENDS_MX8                 = ""
-RDEPENDS_MX8:mx8-nxp-bsp     = "nn-imx"
+RDEPENDS_MX8:mx8-nxp-bsp     = "nn-imx onnxruntime tensorflow-lite"
 RDEPENDS_MX8:mx8mm-nxp-bsp   = ""
 RDEPENDS_MX8:mx8mnul-nxp-bsp = ""
 RDEPENDS_MX8:mx8mpul-nxp-bsp = ""
