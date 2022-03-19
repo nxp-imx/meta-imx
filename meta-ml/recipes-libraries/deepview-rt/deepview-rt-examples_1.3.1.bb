@@ -29,7 +29,7 @@ do_install () {
 INSANE_SKIP:${PN} += "rpaths dev-deps ldflags"
 CLEANBROKEN = "1"
 
-RDEPENDS:${PN} += "deepview-rt"
+RDEPENDS:${PN} = "deepview-rt python3-core"
 
 BBCLASSEXTEND = "nativesdk"
 
