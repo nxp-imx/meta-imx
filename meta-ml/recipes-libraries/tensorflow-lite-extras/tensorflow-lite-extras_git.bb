@@ -1,11 +1,11 @@
-# Copyright 2022 NXP
+# Copyright 2021-2022 NXP
 DESCRIPTION = "Tensorflow-lite-extras package"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 DEPENDS = "opencv tensorflow-lite flatbuffers python3 python3-pip python3-numpy"
 
-EFFICIENTDET_SRC ?= "git://source.codeaurora.org/external/imx/efficientdet-imx.git;protocol=https"
+EFFICIENTDET_SRC ?= "git://github.com/NXP/efficientdet-imx.git;protocol=https"
 SRCBRANCH = "lf-5.15.32_2.0.0"
 
 SRC_URI = "${EFFICIENTDET_SRC};branch=${SRCBRANCH}"
