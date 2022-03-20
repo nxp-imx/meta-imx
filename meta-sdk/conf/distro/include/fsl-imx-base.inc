@@ -18,7 +18,6 @@ DISTRO_FEATURES:append:mx8-nxp-bsp = " virtualization"
 DEFAULTTUNE:mx8-nxp-bsp    ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8m-nxp-bsp   ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8qm-nxp-bsp  ?= "armv8a-crc-crypto"
-DEFAULTTUNE:mx8qxp-nxp-bsp ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8x-nxp-bsp   ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8ulp-nxp-bsp ?= "armv8a-crc-crypto"
 
