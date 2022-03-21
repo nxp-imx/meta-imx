@@ -7,12 +7,13 @@ SECTION = "Console/tools"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=f674ee93878e0b25c4e95dc6c2d06cdd"
 
-SRCREV = "618926e98b5497f166fc119c21ce391bd2805d6d"
+SRCREV = "d93efb7a68676e23306e1468ff345318b0eade06"
 SRC_URI = "git://github.com/thesofproject/sof.git;branch=imx-stable-v2.1;protocol=https"
 
 S = "${WORKDIR}/git"
 
 DEPENDS += "alsa-lib"
+RDEPENDS:${PN} += "bash"
 
 inherit cmake autotools
 
