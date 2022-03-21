@@ -1,4 +1,4 @@
-# Copyright 2020-2021 NXP
+# Copyright 2020-2022 NXP
 
 DESCRIPTION = "Basler camera binary drivers"
 LICENSE = "Proprietary"
@@ -22,6 +22,8 @@ do_install() {
 SYSTEMD_AUTO_ENABLE = "enable"
 
 FILES:${PN} = "${libdir} /opt"
-INSANE_SKIP:${PN} = "file-rdeps already-stripped"
+INSANE_SKIP:${PN} = "already-stripped"
+RDEPENDS:${PN} += "isp-imx"
+
 
 COMPATIBLE_MACHINE = "(mx8mp-nxp-bsp)"
