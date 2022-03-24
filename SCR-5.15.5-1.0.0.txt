@@ -56,8 +56,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     imx-sc-firmware-1.12.0.bin
-Version:                     1.12.0
+Package:                     imx-sc-firmware-1.12.1.bin
+Version:                     1.12.1
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
@@ -1276,8 +1276,8 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     nnshark.git
 Version:                     2021.10.imx
-Outgoing License:            GPL-2.0 
-License File:                COPYING
+Outgoing License:            LGPL-2.1 
+License File:                COPYING.LESSER
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    A GStreamer NNstreamer pipelines real-time profiling plugin
@@ -1388,7 +1388,7 @@ Release Location:            nxp.com
 --------------------------------------------
 
 Package:                     mfgtools.git
-Version:                     3
+Version:                     1.4.193
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
