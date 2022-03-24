@@ -11,3 +11,5 @@ SRC_URI:prepend = \
         '${WESTON_SRC};branch=${SRCBRANCH} ', d)}"
 
 PACKAGECONFIG:append = " rdp"
+
+EXTRA_OEMESON += "-Ddeprecated-wl-shell=true"
