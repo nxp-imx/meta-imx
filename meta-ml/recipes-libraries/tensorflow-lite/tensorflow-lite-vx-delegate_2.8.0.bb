@@ -7,15 +7,14 @@ DEPENDS = "tensorflow-lite tim-vx"
 
 require tensorflow-lite-${PV}.inc
 
-#TODO check when CAF repository is created
 TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://source.codeaurora.org/external/imx/tflite-vx-delegate-imx.git;protocol=https" 
-SRCBRANCH_vx = "imx-v2.6.0"
-SRCREV_vx = "1d786dd1ab579bf957a99ec79d171112aee4623d"
+SRCBRANCH_vx = "imx-v2.8.0"
+SRCREV_vx = "a44b97e35056e8701f98affbd657a07cd0b23224"
 
 SRCREV_FORMAT = "vx_tf"
+
 SRC_URI = "${TENSORFLOW_LITE_VX_DELEGATE_SRC};branch=${SRCBRANCH_vx};name=vx \
            ${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf;destsuffix=tfgit \
-           file://0001-CMakeLists.txt-Fix-TIM_VX-library-path.patch \
 "
 
 S = "${WORKDIR}/git"
