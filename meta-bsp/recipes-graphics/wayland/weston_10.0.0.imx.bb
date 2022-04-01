@@ -173,7 +173,10 @@ PACKAGECONFIG_OPENGL:imxgpu2d     = ""
 PACKAGECONFIG_OPENGL:imxgpu3d     = "opengl"
 
 PACKAGECONFIG:remove = "wayland x11"
-PACKAGECONFIG:append = " ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)}"
+PACKAGECONFIG:append = " \
+    rdp \
+    ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)} \
+"
 
 PACKAGECONFIG:remove:imxfbdev = "kms"
 PACKAGECONFIG:append:imxfbdev = " fbdev clients"
@@ -193,6 +196,8 @@ PACKAGECONFIG[opengl] = "-Dopengl=true,-Dopengl=false"
 
 PACKAGECONFIG[fbdev] = "-Dbackend-fbdev=true,-Dbackend-fbdev=false,udev mtdev"
 EXTRA_OEMESON:append:imxfbdev = " -Dbackend-default=fbdev"
+
+EXTRA_OEMESON += "-Ddeprecated-wl-shell=true"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(imxfbdev|imxgpu)"
