@@ -41,21 +41,12 @@ ML_DEEPVIEW_PKGS                    = ""
 ML_DEEPVIEW_PKGS:mx8-nxp-bsp:imxgpu = "deepview-rt-examples"
 ML_DEEPVIEW_PKGS:mx8mm-nxp-bsp      = ""
 
-ML_EIQ_PKGS       = ""
-ML_EIQ_PKGS:mx8mm-nxp-bsp = " \
-    eiq-apps \
-"
-ML_EIQ_PKGS:mx8mp-nxp-bsp = " \
-    eiq-apps \
-"
-
 ML_TVM_PKGS                    = ""
 ML_TVM_PKGS:mx8-nxp-bsp:imxgpu = "tvm"
 ML_TVM_PKGS:mx8mm-nxp-bsp      = ""
 
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \
-    ${ML_EIQ_PKGS} \
     ${ML_TVM_PKGS} \
     ${ML_NNSTREAMER_PKGS} \
 "
