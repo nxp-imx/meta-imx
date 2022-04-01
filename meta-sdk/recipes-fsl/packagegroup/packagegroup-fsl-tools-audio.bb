@@ -44,6 +44,7 @@ NXPAFE_INSTALL:mx8mnul-nxp-bsp = "nxp-afe"
 SOFTOOLS_INSTALL       ?= ""
 SOFTOOLS_INSTALL:mx8qm-nxp-bsp  = "sof-tools"
 SOFTOOLS_INSTALL:mx8qxp-nxp-bsp = "sof-tools"
+SOFTOOLS_INSTALL:mx8dx-nxp-bsp  = "sof-tools"
 SOFTOOLS_INSTALL:mx8mp-nxp-bsp  = "sof-tools"
 SOFTOOLS_INSTALL:mx8ulp-nxp-bsp = "sof-tools"
 
