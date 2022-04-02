@@ -247,8 +247,8 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-seco-3.8.5.2.bin
-Version:                     3.8.5.2
+Package:                     imx-seco-3.8.6.bin
+Version:                     3.8.6
 Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
@@ -1197,19 +1197,6 @@ Origin:                      NXP (proprietary)
 MachineLearning Packages
 --------------------------------------------
 
-Package:                     coral-posenet-imx.git
-Version:                     
-Outgoing License:            Apache-2.0 
-License File:                LICENSE
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    Google Coral Edge TPU Posenet Library
-Release Location:            https://source.codeaurora.org/external/imx/coral-posenet-imx -b rel_imx_5.15.5-1.0.0
-Origin:                      NXP (LGPL-2.1)
-                             Google LLC - Google Coral Edge Project Posenet (Apache-2.0) https://github.com/google-coral/project-posenet/
-
---------------------------------------------
-
 Package:                     deepview-rt-2.4.36-aarch64.bin
 Version:                     2.4.36-aarch64
 Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - No distribution license granted - Section 2.2 applies 
@@ -1232,19 +1219,6 @@ Description and comments:    DeepViewRT Examples
 Release Location:            Mirror
 Origin:                      Au-Zone Technologies (proprietary)
                                Viktor Kutuzov (MIT)
-
---------------------------------------------
-
-Package:                     eiq-apps-imx
-Version:                     
-Outgoing License:            LGPL-2.1 
-License File:                COPYING-LGPL2.1
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    Gstreamer Neural Network inference Demo
-Release Location:            https://source.codeaurora.org/external/imx/eiq-apps-imx -b rel_imx_5.15.5-1.0.0
-Origin:                      NXP (LGPL-2.1)
-                             Gstreamer plugins-Base (LGPL-2.1+) - http://gstreamer.freedesktop.org/src/gst-plugins-base/
 
 --------------------------------------------
 
@@ -1307,7 +1281,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     tensorflow-imx.git
 Version:                     2.6.0
 Outgoing License:            Apache-2.0 
-License File:                LICENSE
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite C++ Library
@@ -1317,14 +1291,14 @@ Origin:                      NXP (Apache-2.0)
 
 --------------------------------------------
 
-Package:                     tensorflow-lite-extras.git
+Package:                     efficientdet-imx.git
 Version:                     
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite extras packages
-Release Location:            https://github.com/NXPmicro/efficientdet-imx -b rel_imx_5.15.5-1.0.0
+Release Location:            NXP
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
