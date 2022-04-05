@@ -27,7 +27,11 @@ IMXBOOT_TARGETS_SD = \
 IMXBOOT_TARGETS_FSPI = \
     "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'flash_spl_flexspi', \
                                                        'flash_flexspi', d)}"
+IMXBOOT_TARGETS_NAND = \
+    "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'flash_spl_nand', \
+                                                       'flash_nand flash_nand_fw', d)}"
 IMXBOOT_TARGETS = \
     "${@bb.utils.contains('UBOOT_CONFIG',        'sd', '${IMXBOOT_TARGETS_SD}',   \
         bb.utils.contains('UBOOT_CONFIG',      'fspi', '${IMXBOOT_TARGETS_FSPI}', \
-                                                       'UNHANDLED_UBOOT_CONFIG_${UBOOT_CONFIG}', d), d)}"
+        bb.utils.contains('UBOOT_CONFIG',      'nand', '${IMXBOOT_TARGETS_NAND}', \
+                                                       'UNHANDLED_UBOOT_CONFIG_${UBOOT_CONFIG}', d), d), d)}"
