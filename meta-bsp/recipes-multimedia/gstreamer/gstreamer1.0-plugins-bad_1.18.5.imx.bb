@@ -172,7 +172,7 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plug
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
 SRCBRANCH = "imx-1.18.x"
 SRC_URI:prepend = "${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} "
-SRCREV = "8269219ad443fe9d6d313bdc267ffe1f54ac1fa6"
+SRCREV = "f426135a036efabc1f5a17c2c065557f4f7ff6bb"
 
 S = "${WORKDIR}/git"
 
