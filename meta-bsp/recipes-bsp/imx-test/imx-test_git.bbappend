@@ -11,6 +11,6 @@ SRC_URI = " \
     ${IMXTEST_SRC};branch=${SRCBRANCH} \
     file://memtool_profile \
 "
-SRCREV = "a6f67bfa487e2bd20931a05b24da3d3ab8a5cf5a"
+SRCREV = "49d3f4a7a7a2f88b5d8d9a903febaf12e94b369c"
 
 PLATFORM:mx8ulp-nxp-bsp = "IMX8ULP"
