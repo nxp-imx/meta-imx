@@ -90,7 +90,7 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV
 GST1.0_SRC ?= "gitsm://source.codeaurora.org/external/imx/gstreamer.git;protocol=https"
 SRCBRANCH = "imx-1.20.x"
 SRC_URI:prepend = "${GST1.0_SRC};branch=${SRCBRANCH} "
-SRCREV = "${AUTOREV}"
+SRCREV = "7afc123bc6974d68795f97466eb83ec7a093fb9b"
 
 S = "${WORKDIR}/git"
 
