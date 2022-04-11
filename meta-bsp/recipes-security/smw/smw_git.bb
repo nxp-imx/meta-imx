@@ -12,19 +12,17 @@ DEPENDS = "json-c optee-os optee-client python3-pycryptodomex-native"
 DEPENDS:append:mx8qxp-nxp-bsp = " imx-seco-libs"
 DEPENDS:append:mx8dx-nxp-bsp  = " imx-seco-libs"
 
-SRCBRANCH_SMW = "master"
-SRCBRANCH_PSA = "main"
-
-SRCREV_smw = "77c6118ab3714b04fa9af09d6a41850979559cd5"
-SRCREV_psa = "2a1852252a9b9af655cbe02d5d3c930952d0d798"
-
+SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw;destsuffix=git/smw \
+           ${PSA_LIB_SRC};branch=${SRCBRANCH_psa};name=psa;destsuffix=git/${PSA_ARCH_TESTS_SRC_PATH} \
+           "
 SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
 PSA_LIB_SRC ?= "git://github.com/ARM-software/psa-arch-tests.git;protocol=https"
 PSA_ARCH_TESTS_SRC_PATH = "psa-arch-tests"
-SRC_URI = "${SMW_LIB_SRC};name=smw;branch=${SRCBRANCH_SMW};destsuffix=git/smw \
-           ${PSA_LIB_SRC};name=psa;branch=${SRCBRANCH_PSA};destsuffix=git/${PSA_ARCH_TESTS_SRC_PATH} \
-           "
-
+SRCBRANCH_smw = "master"
+SRCBRANCH_psa = "main"
+SRCREV_smw = "77c6118ab3714b04fa9af09d6a41850979559cd5"
+SRCREV_psa = "2a1852252a9b9af655cbe02d5d3c930952d0d798"
+SRCREV_FORMAT = "smw_psa"
 S = "${WORKDIR}/git/smw"
 
 inherit cmake python3native
