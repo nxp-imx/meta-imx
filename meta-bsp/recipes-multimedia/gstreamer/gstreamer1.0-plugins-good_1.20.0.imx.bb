@@ -3,7 +3,7 @@
 # recipe. The second section customizes the recipe for i.MX.
 
 ########### OE-core copy ##################
-# Upstream hash: bb6ddc3691ab04162ec5fd69a2d5e7876713fd15
+# Upstream hash: a21649109374fde44cf77de845cfb3cb6cbfb138
 
 require recipes-multimedia/gstreamer/gstreamer1.0-plugins-common.inc
 
@@ -13,15 +13,13 @@ BUGTRACKER = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-good/-/issues
 
 SRC_URI = "https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz \
            file://0001-qt-include-ext-qt-gstqtgl.h-instead-of-gst-gl-gstglf.patch \
-           file://0002-rtpjitterbuffer-Fix-parsing-of-the-mediaclk-direct-f.patch \
-           file://0003-Remove-volatile-from-static-vars-to-fix-build-with-g.patch \
            "
 
-SRC_URI[sha256sum] = "b6e50e3a9bbcd56ee6ec71c33aa8332cc9c926b0c1fae995aac8b3040ebe39b0"
+SRC_URI[sha256sum] = "3c66876f821d507bcdbebffb08b4f31a322727d6753f65a0f02c905ecb7084aa"
 
 S = "${WORKDIR}/gst-plugins-good-${PV}"
 
-LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later"
+LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
                     file://gst/replaygain/rganalysis.c;beginline=1;endline=23;md5=b60ebefd5b2f5a8e0cab6bfee391a5fe"
 
@@ -96,13 +94,11 @@ DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'v4l2', '${DEPENDS_V4L2}', '',
 
 SRC_URI:remove = " \
     https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz \
-    file://0002-rtpjitterbuffer-Fix-parsing-of-the-mediaclk-direct-f.patch \
-    file://0003-Remove-volatile-from-static-vars-to-fix-build-with-g.patch \
 "
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
-SRCBRANCH = "imx-1.18.x"
+SRCBRANCH = "imx-1.20.x"
 SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
-SRCREV = "8490f4656a40498a98bb95ca3e7f564db74112de"
+SRCREV = "15a2c9d48dbf09d7727e8533c4ff0b2ec3126081"
 
 S = "${WORKDIR}/git"
 
