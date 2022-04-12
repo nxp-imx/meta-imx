@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2022 NXP
+# Copyright (C) 2017-2021 NXP
 
 SUMMARY = "OPTEE Client libs"
 HOMEPAGE = "http://www.optee.org/"
@@ -22,12 +22,11 @@ REQUIRED_MACHINE_FEATURES = "optee"
 
 SYSTEMD_SERVICE:${PN} = "tee-supplicant.service"
 
-OPTEE_ARCH:arm = "arm32"
+OPTEE_ARCH ?= "arm32"
+OPTEE_ARCH:armv7a = "arm32"
 OPTEE_ARCH:aarch64 = "arm64"
 
-EXTRA_OEMAKE = " \
-	-C ${S} O=${B} \
-"
+EXTRA_OEMAKE = "ARCH=${OPTEE_ARCH} -C ${S} O=${B}"
 
 do_install () {
 	oe_runmake install
