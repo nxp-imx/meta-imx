@@ -9,4 +9,4 @@ SRC_URI[sha256sum] = "338eaa313cfa6f93eee5930903386fca922f82fda3617ecb2597cc90cc
 
 inherit fsl-eula2-unpack2
 
-COMPATIBLE_MACHINE = "(imx8mpevk)"
+COMPATIBLE_MACHINE = "(mx8mp)"
