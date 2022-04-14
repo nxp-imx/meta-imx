@@ -1,0 +1,37 @@
+From 0e8e09c9ac12021fa62d06b7542cf2532f53d6c8 Mon Sep 17 00:00:00 2001
+From: Sherry Sun <sherry.sun@nxp.com>
+Date: Mon, 28 Mar 2022 16:22:38 +0800
+Subject: [PATCH] gobex: add a workaround patch for canceling obex transfer
+ hang issue
+
+This is a workaround patch to fix the obexd hang issue when canceling
+the on-going obex transfer.
+
+I have no idea regarding why the req_timeout can be triggered after
+canceling the transfer. This workaround patch make transfer_response()
+reture directly when called by req_timeout() to avoid use after free
+error.
+
+Upstream-Status: Inappropriate [NXP specific: temporary workaround]
+
+Signed-off-by: Sherry Sun <sherry.sun@nxp.com>
+---
+ gobex/gobex-transfer.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/gobex/gobex-transfer.c b/gobex/gobex-transfer.c
+index c94d018b2..695bdf79e 100644
+--- a/gobex/gobex-transfer.c
++++ b/gobex/gobex-transfer.c
+@@ -188,6 +188,9 @@ static void transfer_response(GObex *obex, GError *err, GObexPacket *rsp,
+ 
+ 	g_obex_debug(G_OBEX_DEBUG_TRANSFER, "transfer %u", transfer->id);
+ 
++	if (!transfer->req_id)
++		return;
++
+ 	id = transfer->req_id;
+ 	transfer->req_id = 0;
+ 
+-- 
+2.17.1
