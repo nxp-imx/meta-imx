@@ -58,7 +58,7 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     imx-sc-firmware-1.11.1.bin
 Version:                     1.11.1
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -249,7 +249,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-seco-3.8.5.bin
 Version:                     3.8.5
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v33 January 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -261,7 +261,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-seco-libs.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
@@ -1425,6 +1425,8 @@ Package Category:            Tools
 Type of Content:             binary
 Description and comments:    VeriSilicon Tools
 Release Location:            nxp.com
+Origin:                      VeriSilicon (proprietary)
+
 --------------------------------------------
 
 Package:                     mfgtools.git
