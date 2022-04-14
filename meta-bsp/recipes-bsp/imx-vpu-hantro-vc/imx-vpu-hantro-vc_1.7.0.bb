@@ -1,4 +1,4 @@
-# Copyright 2019-2021 NXP
+# Copyright 2019-2022 NXP
 
 DESCRIPTION = "i.MX vc8000e encoder library for Kenrel 5.15"
 LICENSE = "Proprietary"
@@ -9,4 +9,4 @@ SRC_URI[sha256sum] = "8af665f8e06e0e467f563e372f43583d94128f0d37f75321965bc26bd4
 
 inherit fsl-eula2-unpack2
 
-COMPATIBLE_MACHINE = "(imx8mpevk)"
+COMPATIBLE_MACHINE = "(mx8mp)"
