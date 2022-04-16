@@ -1,1 +1,1 @@
-RDEPENDS:${PN} += "python3-image"
+RDEPENDS:${PN} += "python3-image python3-distutils"
