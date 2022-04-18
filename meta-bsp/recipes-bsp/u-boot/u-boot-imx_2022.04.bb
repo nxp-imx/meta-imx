@@ -1,18 +1,34 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
 # Copyright 2018 (C) O.S. Systems Software LTDA.
-# Copyright 2017-2021 NXP
+# Copyright 2017-2022 NXP
 
 require recipes-bsp/u-boot/u-boot.inc
-require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
+###############################################################
+########### For upstream u-boot-imx-common_2022.04.inc ########
+DESCRIPTION = "i.MX U-Boot suppporting i.MX reference boards."
 
-PROVIDES += "u-boot"
+LICENSE = "GPL-2.0-or-later"
+LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
-SRCBRANCH = "lf_v2021.04"
+SRCBRANCH = "lf_v2022.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "9df69933f28258ab06e4bef13559b4c0c3e2ccd3"
-
+SRCREV = "${AUTOREV}"
 LOCALVERSION = "-${SRCBRANCH}"
+
+DEPENDS += "flex-native bison-native bc-native dtc-native gnutls-native"
+
+S = "${WORKDIR}/git"
+B = "${WORKDIR}/build"
+
+inherit fsl-u-boot-localversion
+
+BOOT_TOOLS = "imx-boot-tools"
+
+###############################################################
+# require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
+
+PROVIDES += "u-boot"
 
 do_deploy:append:mx8m-nxp-bsp() {
     # Deploy u-boot-nodtb.bin and fsl-imx8m*-XX.dtb for mkimage to generate boot binary
