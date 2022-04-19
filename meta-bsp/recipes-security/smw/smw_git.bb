@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982 \
 DEPENDS = "json-c optee-os optee-client python3-pycryptodomex-native"
 DEPENDS:append:mx8qxp-nxp-bsp = " imx-seco-libs"
 DEPENDS:append:mx8dx-nxp-bsp  = " imx-seco-libs"
+DEPENDS:append:mx8ulp-nxp-bsp  = " imx-secure-enclave"
 
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw;destsuffix=git/smw \
            ${PSA_LIB_SRC};branch=${SRCBRANCH_psa};name=psa;destsuffix=git/${PSA_ARCH_TESTS_SRC_PATH} \
@@ -44,8 +45,9 @@ EXTRA_OECMAKE = " \
     -DJSONC_ROOT="${COMPONENTS_DIR}/${TARGET_ARCH}/json-c/usr" \
     -DPSA_ARCH_TESTS_SRC_PATH=../${PSA_ARCH_TESTS_SRC_PATH} \
 "
-EXTRA_OECMAKE:append:mx8qxp-nxp-bsp = " -DSECO_ROOT=${STAGING_INCDIR}"
-EXTRA_OECMAKE:append:mx8dx-nxp-bsp  = " -DSECO_ROOT=${STAGING_INCDIR}"
+EXTRA_OECMAKE:append:mx8qxp-nxp-bsp = " -DSECO_ROOT=${STAGING_DIR_HOST}"
+EXTRA_OECMAKE:append:mx8dx-nxp-bsp  = " -DSECO_ROOT=${STAGING_DIR_HOST}"
+EXTRA_OECMAKE:append:mx8ulp-nxp-bsp  = " -DELE_ROOT=${STAGING_DIR_HOST}"
 
 OECMAKE_TARGET_COMPILE += "build_tests"
 OECMAKE_TARGET_INSTALL += "install_tests"
