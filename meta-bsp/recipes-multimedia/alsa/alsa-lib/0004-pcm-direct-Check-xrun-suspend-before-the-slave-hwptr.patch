@@ -1,0 +1,97 @@
+From c8370804efdbedbadaae4f5c0307b977862292cd Mon Sep 17 00:00:00 2001
+From: Takashi Iwai <tiwai@suse.de>
+Date: Thu, 10 Mar 2022 09:24:12 +0100
+Subject: [PATCH 4/4] pcm: direct: Check xrun/suspend before the slave hwptr
+ update
+
+The xrun/suspend may happen at any time and we should check it right
+after the slave hwptr update (but before the actual sync_ptr update in
+direct pcm side).  Otherwise the hwptr value may be screwed and get
+unexpected large read/write.
+
+Upstream-Status: Accepted
+
+Reported-by: S.J. Wang <shengjiu.wang@nxp.com>
+Acked-by: Shengjiu Wang <shengjiu.wang@nxp.com>
+Signed-off-by: Takashi Iwai <tiwai@suse.de>
+---
+ src/pcm/pcm_dmix.c   | 8 +++++---
+ src/pcm/pcm_dshare.c | 8 +++++---
+ src/pcm/pcm_dsnoop.c | 6 +++---
+ 3 files changed, 13 insertions(+), 9 deletions(-)
+
+diff --git a/src/pcm/pcm_dmix.c b/src/pcm/pcm_dmix.c
+index d00d53be..c6cb47f0 100644
+--- a/src/pcm/pcm_dmix.c
++++ b/src/pcm/pcm_dmix.c
+@@ -424,15 +424,17 @@ static int snd_pcm_dmix_sync_ptr0(snd_pcm_t *pcm, snd_pcm_uframes_t slave_hw_ptr
+ static int snd_pcm_dmix_sync_ptr(snd_pcm_t *pcm)
+ {
+ 	snd_pcm_direct_t *dmix = pcm->private_data;
++	snd_pcm_uframes_t slave_hw_ptr;
+ 	int err;
+ 
++	if (dmix->slowptr)
++		snd_pcm_hwsync(dmix->spcm);
++	slave_hw_ptr = *dmix->spcm->hw.ptr;
+ 	err = snd_pcm_direct_check_xrun(dmix, pcm);
+ 	if (err < 0)
+ 		return err;
+-	if (dmix->slowptr)
+-		snd_pcm_hwsync(dmix->spcm);
+ 
+-	return snd_pcm_dmix_sync_ptr0(pcm, *dmix->spcm->hw.ptr);
++	return snd_pcm_dmix_sync_ptr0(pcm, slave_hw_ptr);
+ }
+ 
+ /*
+diff --git a/src/pcm/pcm_dshare.c b/src/pcm/pcm_dshare.c
+index 0ff43a90..461adafc 100644
+--- a/src/pcm/pcm_dshare.c
++++ b/src/pcm/pcm_dshare.c
+@@ -199,15 +199,17 @@ static int snd_pcm_dshare_sync_ptr0(snd_pcm_t *pcm, snd_pcm_uframes_t slave_hw_p
+ static int snd_pcm_dshare_sync_ptr(snd_pcm_t *pcm)
+ {
+ 	snd_pcm_direct_t *dshare = pcm->private_data;
++	snd_pcm_uframes_t slave_hw_ptr;
+ 	int err;
+ 
++	if (dshare->slowptr)
++		snd_pcm_hwsync(dshare->spcm);
++	slave_hw_ptr = *dshare->spcm->hw.ptr;
+ 	err = snd_pcm_direct_check_xrun(dshare, pcm);
+ 	if (err < 0)
+ 		return err;
+-	if (dshare->slowptr)
+-		snd_pcm_hwsync(dshare->spcm);
+ 
+-	return snd_pcm_dshare_sync_ptr0(pcm, *dshare->spcm->hw.ptr);
++	return snd_pcm_dshare_sync_ptr0(pcm, slave_hw_ptr);
+ }
+ 
+ /*
+diff --git a/src/pcm/pcm_dsnoop.c b/src/pcm/pcm_dsnoop.c
+index 729ff447..9abbbef2 100644
+--- a/src/pcm/pcm_dsnoop.c
++++ b/src/pcm/pcm_dsnoop.c
+@@ -134,14 +134,14 @@ static int snd_pcm_dsnoop_sync_ptr(snd_pcm_t *pcm)
+ 	snd_pcm_sframes_t diff;
+ 	int err;
+ 
+-	err = snd_pcm_direct_check_xrun(dsnoop, pcm);
+-	if (err < 0)
+-		return err;
+ 	if (dsnoop->slowptr)
+ 		snd_pcm_hwsync(dsnoop->spcm);
+ 	old_slave_hw_ptr = dsnoop->slave_hw_ptr;
+ 	snoop_timestamp(pcm);
+ 	slave_hw_ptr = dsnoop->slave_hw_ptr;
++	err = snd_pcm_direct_check_xrun(dsnoop, pcm);
++	if (err < 0)
++		return err;
+ 	diff = pcm_frame_diff(slave_hw_ptr, old_slave_hw_ptr, dsnoop->slave_boundary);
+ 	if (diff == 0)		/* fast path */
+ 		return 0;
+-- 
+2.17.1
+

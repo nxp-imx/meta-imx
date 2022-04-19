@@ -1,0 +1,133 @@
+From c44cbc4075e889b9063ecea1fe69d8a50f52e7db Mon Sep 17 00:00:00 2001
+From: Takashi Iwai <tiwai@suse.de>
+Date: Thu, 3 Mar 2022 15:04:09 +0100
+Subject: [PATCH 1/4] pcm: direct: Propagate error code from
+ snd_pcm_direct_client_chk_xrun()
+
+Change the snd_pcm_direct_client_chk_xrun() function to return the
+current XRUN state via an error code instead of the state change.
+This allows the caller more straightforwardly returning its error, and
+also covers the case where XRUN has been set but the function gets
+called twice.
+
+Upstream-Status: Accepted
+
+Signed-off-by: Takashi Iwai <tiwai@suse.de>
+---
+ src/pcm/pcm_direct.c |  5 +++--
+ src/pcm/pcm_dmix.c   | 10 ++++++----
+ src/pcm/pcm_dshare.c | 10 ++++++----
+ src/pcm/pcm_dsnoop.c | 10 ++++++----
+ 4 files changed, 21 insertions(+), 14 deletions(-)
+
+diff --git a/src/pcm/pcm_direct.c b/src/pcm/pcm_direct.c
+index 90417b2f..193dc3e7 100644
+--- a/src/pcm/pcm_direct.c
++++ b/src/pcm/pcm_direct.c
+@@ -633,7 +633,7 @@ int snd_pcm_direct_slave_recover(snd_pcm_direct_t *direct)
+ 
+ /*
+  * enter xrun state, if slave xrun occurred
+- * @return: 0 - no xrun >0: xrun happened
++ * @return: 0 for no xrun or a negative error code for xrun
+  */
+ int snd_pcm_direct_client_chk_xrun(snd_pcm_direct_t *direct, snd_pcm_t *pcm)
+ {
+@@ -650,8 +650,9 @@ int snd_pcm_direct_client_chk_xrun(snd_pcm_direct_t *direct, snd_pcm_t *pcm)
+ 		 * snd_pcm_direct_clear_timer_queue(direct);
+ 		 */
+ 		direct->state = SND_PCM_STATE_XRUN;
+-		return 1;
+ 	}
++	if (direct->state == SND_PCM_STATE_XRUN)
++		return -EPIPE;
+ 	return 0;
+ }
+ 
+diff --git a/src/pcm/pcm_dmix.c b/src/pcm/pcm_dmix.c
+index 94dbb1e0..dfff18b9 100644
+--- a/src/pcm/pcm_dmix.c
++++ b/src/pcm/pcm_dmix.c
+@@ -437,8 +437,9 @@ static int snd_pcm_dmix_sync_ptr(snd_pcm_t *pcm)
+ 	default:
+ 		break;
+ 	}
+-	if (snd_pcm_direct_client_chk_xrun(dmix, pcm))
+-		return -EPIPE;
++	err = snd_pcm_direct_client_chk_xrun(dmix, pcm);
++	if (err < 0)
++		return err;
+ 	if (dmix->slowptr)
+ 		snd_pcm_hwsync(dmix->spcm);
+ 
+@@ -840,8 +841,9 @@ static snd_pcm_sframes_t snd_pcm_dmix_mmap_commit(snd_pcm_t *pcm,
+ 	default:
+ 		break;
+ 	}
+-	if (snd_pcm_direct_client_chk_xrun(dmix, pcm))
+-		return -EPIPE;
++	err = snd_pcm_direct_client_chk_xrun(dmix, pcm);
++	if (err < 0)
++		return err;
+ 	if (! size)
+ 		return 0;
+ 	snd_pcm_mmap_appl_forward(pcm, size);
+diff --git a/src/pcm/pcm_dshare.c b/src/pcm/pcm_dshare.c
+index 01814dc8..d63c86bd 100644
+--- a/src/pcm/pcm_dshare.c
++++ b/src/pcm/pcm_dshare.c
+@@ -212,8 +212,9 @@ static int snd_pcm_dshare_sync_ptr(snd_pcm_t *pcm)
+ 	default:
+ 		break;
+ 	}
+-	if (snd_pcm_direct_client_chk_xrun(dshare, pcm))
+-		return -EPIPE;
++	err = snd_pcm_direct_client_chk_xrun(dshare, pcm);
++	if (err < 0)
++		return err;
+ 	if (dshare->slowptr)
+ 		snd_pcm_hwsync(dshare->spcm);
+ 
+@@ -539,8 +540,9 @@ static snd_pcm_sframes_t snd_pcm_dshare_mmap_commit(snd_pcm_t *pcm,
+ 	default:
+ 		break;
+ 	}
+-	if (snd_pcm_direct_client_chk_xrun(dshare, pcm))
+-		return -EPIPE;
++	err = snd_pcm_direct_client_chk_xrun(dshare, pcm);
++	if (err < 0)
++		return err;
+ 	if (! size)
+ 		return 0;
+ 	snd_pcm_mmap_appl_forward(pcm, size);
+diff --git a/src/pcm/pcm_dsnoop.c b/src/pcm/pcm_dsnoop.c
+index 3f28df99..77ffbada 100644
+--- a/src/pcm/pcm_dsnoop.c
++++ b/src/pcm/pcm_dsnoop.c
+@@ -145,8 +145,9 @@ static int snd_pcm_dsnoop_sync_ptr(snd_pcm_t *pcm)
+ 	default:
+ 		break;
+ 	}
+-	if (snd_pcm_direct_client_chk_xrun(dsnoop, pcm))
+-		return -EPIPE;
++	err = snd_pcm_direct_client_chk_xrun(dsnoop, pcm);
++	if (err < 0)
++		return err;
+ 	if (dsnoop->slowptr)
+ 		snd_pcm_hwsync(dsnoop->spcm);
+ 	old_slave_hw_ptr = dsnoop->slave_hw_ptr;
+@@ -430,8 +431,9 @@ static snd_pcm_sframes_t snd_pcm_dsnoop_mmap_commit(snd_pcm_t *pcm,
+ 	default:
+ 		break;
+ 	}
+-	if (snd_pcm_direct_client_chk_xrun(dsnoop, pcm))
+-		return -EPIPE;
++	err = snd_pcm_direct_client_chk_xrun(dsnoop, pcm);
++	if (err < 0)
++		return err;
+ 	if (dsnoop->state == SND_PCM_STATE_RUNNING) {
+ 		err = snd_pcm_dsnoop_sync_ptr(pcm);
+ 		if (err < 0)
+-- 
+2.17.1
+
