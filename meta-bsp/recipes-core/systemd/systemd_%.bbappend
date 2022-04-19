@@ -5,12 +5,21 @@ SRC_URI += " \
             file://0020-logind.conf-Set-HandlePowerKey-to-ignore.patch \
             file://10-unmanage.network \
 "
+
+PACKAGECONFIG ?= ""
+
+PACKAGECONFIG[unmanaged-network] = ""
+
 do_install:append () {
+
     # Disable the assignment of the fixed network interface name
     install -d ${D}${sysconfdir}/systemd/network
     ln -s /dev/null ${D}${sysconfdir}/systemd/network/99-default.link
-    # custom network file
-    install -Dm 0644 ${WORKDIR}/10-unmanage.network ${D}${sysconfdir}/systemd/network/10-unmanage.network
+
+    # Configure the network as unmanaged
+    if [ "${@bb.utils.filter('PACKAGECONFIG', 'unmanaged-network', d)}" ]; then
+        install -Dm 0644 ${WORKDIR}/10-unmanage.network ${D}${sysconfdir}/systemd/network/10-unmanage.network
+    fi
 
     # Add special touchscreen rules
     if [ -e  ${D}${sysconfdir}/udev/rules.d/touchscreen.rules ]; then
