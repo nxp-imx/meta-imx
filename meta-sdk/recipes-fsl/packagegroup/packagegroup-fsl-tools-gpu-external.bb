@@ -17,8 +17,7 @@ RDEPENDS:${PN}:imxgpu = " \
     ${3D_TOOLS} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland", "${SOC_TOOLS_GPU_XWAYLAND}", \
        bb.utils.contains("DISTRO_FEATURES",     "wayland", "${SOC_TOOLS_GPU_WAYLAND}", \
-       bb.utils.contains("DISTRO_FEATURES",         "x11", "${SOC_TOOLS_GPU_X11}", \
-                                                           "${SOC_TOOLS_GPU_FB}", d), d), d)} \
+                                                           "", d)} \
     ${VULKAN_TOOLS} \
 "
 DRM_TOOLS         = ""
@@ -29,10 +28,6 @@ DRM_TOOLS:imxdrm  = "kmscube"
 SOC_TOOLS_GPU_XWAYLAND                 = "mesa-demos gtkperf renderdoc"
 # Tools for wayland and !x11
 SOC_TOOLS_GPU_WAYLAND                  = "mesa-demos"
-# Tools for !wayland and x11
-SOC_TOOLS_GPU_X11                      = "mesa-demos gtkperf renderdoc"
-# Tools for !wayland and !x11
-SOC_TOOLS_GPU_FB                       = ""
 VULKAN_TOOLS                      = ""
 VULKAN_TOOLS:mx8-nxp-bsp:imxgpu3d = "vulkan-loader vulkan-validationlayers vulkan-headers vkmark vulkan-tools gfxreconstruct"
 VULKAN_TOOLS:mx8mm-nxp-bsp        = ""
