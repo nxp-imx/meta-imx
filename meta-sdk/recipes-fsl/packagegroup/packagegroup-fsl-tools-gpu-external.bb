@@ -13,6 +13,7 @@ inherit packagegroup
 
 RDEPENDS:${PN}        = ""
 RDEPENDS:${PN}:imxgpu = " \
+    clblast \
     ${DRM_TOOLS} \
     ${3D_TOOLS} \
     ${VULKAN_TOOLS} \
