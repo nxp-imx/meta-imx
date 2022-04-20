@@ -28,7 +28,7 @@ DRM_TOOLS:imxdrm  = "kmscube"
 # Tools for wayland and x11
 SOC_TOOLS_GPU_XWAYLAND                 = "mesa-demos gtkperf renderdoc"
 # Tools for wayland and !x11
-SOC_TOOLS_GPU_WAYLAND                  = ""
+SOC_TOOLS_GPU_WAYLAND                  = "mesa-demos"
 # Tools for !wayland and x11
 SOC_TOOLS_GPU_X11                      = "mesa-demos gtkperf renderdoc"
 # Tools for !wayland and !x11
