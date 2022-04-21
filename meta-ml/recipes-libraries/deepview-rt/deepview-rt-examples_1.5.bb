@@ -22,6 +22,7 @@ do_install () {
     cp -fr ${S}/detectimg/detectv4_remote ${D}${bindir}/${BPN}
     cp -fr ${S}/ssdcam-gst/ssdcam-gst ${D}${bindir}/${BPN}
     cp -fr ${S}/labelcam-gst/labelcam-gst ${D}${bindir}/${BPN}
+    cp -fr ${S}/python-examples ${D}${bindir}/${BPN}
  
     chown -R root:root "${D}"
 }
