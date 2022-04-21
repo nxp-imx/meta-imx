@@ -27,3 +27,8 @@ MACHINEOVERRIDES_EXTENDER:mx8dxla1:use-mainline-bsp = "imx-generic-bsp:imx-mainl
 # i.MX 8DXL B0
 MACHINEOVERRIDES_EXTENDER:mx8dxlb0:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8x-generic-bsp:mx8x-nxp-bsp:mx8dxl-generic-bsp:mx8dxl-nxp-bsp:mx8dxlb0-generic-bsp:mx8dxlb0-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER:mx8dxlb0:use-mainline-bsp = "imx-generic-bsp:imx-mainline-bsp:mx8-generic-bsp:mx8-mainline-bsp:mx8x-generic-bsp:mx8x-mainline-bsp:mx8dxl-generic-bsp:mx8dxl-mainline-bsp:mx8dxlb0-generic-bsp:mx8dxlb0-mainline-bsp"
+
+# i.MX 93
+MACHINEOVERRIDES_EXTENDER:mx93:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:imxpxp:mx9-generic-bsp:mx9-nxp-bsp:mx93-generic-bsp:mx93-nxp-bsp"
+MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx93"
+MACHINE_SOCARCH_SUFFIX:mx93-nxp-bsp = "-mx93"
