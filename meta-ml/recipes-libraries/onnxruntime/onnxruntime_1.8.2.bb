@@ -132,6 +132,7 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/LICENSE ${D}${bindir}/${BP}/squeezenet
 
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
+        git config --global --add safe.directory ${WORKDIR}/build/pybind11/src/pybind11
         export PIP_DISABLE_PIP_VERSION_CHECK=1
         export PIP_NO_CACHE_DIR=1
         install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
