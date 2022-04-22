@@ -1,5 +1,5 @@
 # Copyright 2013-2016 Freescale Semiconductor
-# Copyright 2017-2021 NXP
+# Copyright 2017-2022 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Freescale alsa-lib plugins"
@@ -28,6 +28,9 @@ S = "${WORKDIR}/git"
 INCLUDE_DIR = "-I${STAGING_INCDIR_IMX}"
 
 EXTRA_OECONF = "CFLAGS="${INCLUDE_DIR}""
+
+PACKAGECONFIG:append:mx8-nxp-bsp = " swpdm"
+PACKAGECONFIG[swpdm] = "--enable-swpdm,--disable-swpdm,imx-sw-pdm"
 
 INSANE_SKIP:${PN} = "dev-so"
 
