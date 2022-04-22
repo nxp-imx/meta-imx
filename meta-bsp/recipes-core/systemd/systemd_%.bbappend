@@ -6,8 +6,6 @@ SRC_URI += " \
             file://10-unmanage.network \
 "
 
-PACKAGECONFIG ?= ""
-
 PACKAGECONFIG[unmanaged-network] = ""
 
 do_install:append () {
