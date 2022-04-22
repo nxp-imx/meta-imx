@@ -14,4 +14,5 @@ RDEPENDS:${PN} = " \
     keyutils \
     lvm2 \
     util-linux \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'smw-tests', '', d)} \
 "
