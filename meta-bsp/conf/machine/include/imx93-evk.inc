@@ -34,7 +34,7 @@ IMX_BOOT_SOC_TARGET = "iMX9"
 IMX_BOOT_SEEK = "32"
 
 # We have to disable SERIAL_CONSOLE due to auto-serial-console
-SERIAL_CONSOLES = "115200;ttyLP1"
+SERIAL_CONSOLES = "115200;ttyLP0"
 
 # Add additional firmware
 #MACHINE_FIRMWARE:append = " firmware-imx-epdc"
