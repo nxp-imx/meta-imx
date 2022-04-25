@@ -24,7 +24,8 @@ do_install () {
     install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
 
     cp -fr   ${S}/modelrunner/bin/* ${D}${bindir}
-    cp -frP  ${S}/modelrunner/lib/* ${D}${libdir}
+    cp -frP  ${S}/modelrunner/lib/libmodelrunner-rt.so ${D}${libdir}
+    cp -frP  ${S}/modelrunner/lib/libmodelrunner-tflite.so ${D}${libdir}
     if [ ${IS_RM_OVXRTM} = "1" ]  
     then
       rm -fr  ${D}${libdir}/libovx-rtm.so
@@ -50,7 +51,7 @@ INHIBIT_SYSROOT_STRIP = "1"
 INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
 
 RDEPENDS_MX8                 = ""
-RDEPENDS_MX8:mx8-nxp-bsp     = "nn-imx onnxruntime tensorflow-lite"
+RDEPENDS_MX8:mx8-nxp-bsp     = "nn-imx onnxruntime tensorflow-lite libopenvx-imx"
 RDEPENDS_MX8:mx8mm-nxp-bsp   = ""
 RDEPENDS_MX8:mx8mnul-nxp-bsp = ""
 RDEPENDS_MX8:mx8mpul-nxp-bsp = ""
