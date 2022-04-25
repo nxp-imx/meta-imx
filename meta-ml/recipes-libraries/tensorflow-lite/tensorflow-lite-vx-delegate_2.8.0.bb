@@ -1,7 +1,7 @@
 # Copyright 2020-2021 NXP
 DESCRIPTION = "TensorFlow Lite VX Delegate"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=7d6260e4f3f6f85de05af9c8f87e6fb5"
 
 DEPENDS = "tensorflow-lite tim-vx"
 
