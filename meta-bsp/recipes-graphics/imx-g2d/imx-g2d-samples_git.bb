@@ -3,7 +3,7 @@ DESCRIPTION = "Set of sample applications for i.MX G2D"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 
-DEPENDS = "virtual/libg2d"
+DEPENDS = "virtual/libg2d cairo"
 
 PV = "2.1+git${SRCPV}"
 
