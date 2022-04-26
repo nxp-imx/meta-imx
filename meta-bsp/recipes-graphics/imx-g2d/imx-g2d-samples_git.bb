@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 
 DEPENDS = "virtual/libg2d"
 
-PV = "2.0+git${SRCPV}"
+PV = "2.1+git${SRCPV}"
 
 GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxpmicro/g2d-samples.git;protocol=https"
 SRCBRANCH ?= "master"
