@@ -10,7 +10,7 @@ PV = "2.1+git${SRCPV}"
 GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxpmicro/g2d-samples.git;protocol=https"
 SRCBRANCH ?= "master"
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
-SRCREV = "2cc539f747488507a1013f0b383d4869394b45ec"
+SRCREV = "35c96c3ed265c58538563b398149fc4f4e13a926"
 
 S = "${WORKDIR}/git"
 
