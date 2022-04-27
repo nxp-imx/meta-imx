@@ -236,230 +236,6 @@ Release Location:            Mirror
 Origin:                      NXP (proprietary)
 
 --------------------------------------------
-BSP Packages
---------------------------------------------
-
-Package:                     linux-imx.git
-Version:                     5.15
-Outgoing License:            GPL-2.0 WITH Linux-syscall-note 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    The Linux kernel with i.MX-specific drivers
-Release Location:            https://source.codeaurora.org/external/imx/linux-imx -b rel_imx_5.15.32-2.0.0
-Origin:                      NXP (GPL-2.0)
-                             kernel.org (GPL-2.0) - https://www.kernel.org/
-
---------------------------------------------
-
-Package:                     uboot-imx.git
-Version:                     2022.04
-Outgoing License:            GPL-2.0 
-License File:                Licenses/gpl-2.0.txt
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    Bootloader with i.MX-specific capabilities
-Release Location:            https://source.codeaurora.org/external/imx/uboot-imx -b rel_imx_5.15.32-2.0.0
-Origin:                      NXP (GPL-2.0)
-                             Das U-Boot - Universal Bootloader (GPL-2.0) - http://www.denx.de/wiki/U-Boot/WebHome
-                             Android Open Source Project (BSD-2-Clause) - https://source.android.com/
-                             zlib (zlib license) - http://www.zlib.net/
-
---------------------------------------------
-
-Package:                     imx-atf.git
-Version:                     2.6
-Outgoing License:            BSD-3-Clause 
-License File:                docs/license.rst
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    ARM Trusted Firmware
-Release Location:            https://source.codeaurora.org/external/imx/imx-atf -b rel_imx_5.15.32-2.0.0
-Origin:                      NXP (BSD-3-clause)
-                             arm-trusted-firmware - ARM Limited (BSD-3-clause) - http://github.com/ARM-software/arm-trusted-firmware/
-
---------------------------------------------
-
-Package:                     imx-sc-firmware-1.13.0.bin
-Version:                     1.13.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    System Controller Firmware
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-                             ARM CMSIS Library (BSD-3-clause) - https://silver.arm.com/
-
---------------------------------------------
-
-Package:                     firmware-imx-8.16.bin
-Version:                     8.16
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    BSP firmware - DDR EPDC HDMI SDMA VPU
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
-                           In addition, these components contain code from the companies listed below.
-                             DDR:   origin: Synopsys DDR (proprietary)
-                             EASRC: origin: NXP (proprietary)
-                             EPDC:  origin: E Ink Corporation (proprietary)
-                             HDMI:  origin: Cadence Design Systems, Inc. (proprietary)
-                             SDMA:  origin: NXP (proprietary)
-                             XCVR:  origin: NXP (proprietary)
-                             XUVI:  origin: NXP (proprietary)
-                             VPU:   vpu_fw_imx27_TO1.bin
-                                    vpu_fw_imx27_TO2.bin
-                                    vpu_fw_imx51.bin
-                                    vpu_fw_imx53.bin
-                                    vpu_fw_imx6d.bin
-                                    vpu_fw_imx6q.bin
-                                 origin: Chips & Media, Inc.  (proprietary)
-
-                                    vpu_fw_imx8_dec.bin
-                                    vpu_fw_imx8_enc.bin
-                                 origin: Amphion Semiconductor Ltd  (proprietary)
-
---------------------------------------------
-
-Package:                     firmware-sentinel-0.3.bin
-Version:                     0.3
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    S400 firmware
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-
-Package:                     firmware-upower-0.1.3.bin
-Version:                     0.1.3
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    uPower firmware
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-BSP Packages
---------------------------------------------
-
-Package:                     linux-imx.git
-Version:                     5.15
-Outgoing License:            GPL-2.0 WITH Linux-syscall-note 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    The Linux kernel with i.MX-specific drivers
-Release Location:            https://source.codeaurora.org/external/imx/linux-imx -b rel_imx_5.15.32-2.0.0
-Origin:                      NXP (GPL-2.0)
-                             kernel.org (GPL-2.0) - https://www.kernel.org/
-
---------------------------------------------
-
-Package:                     uboot-imx.git
-Version:                     2022.04
-Outgoing License:            GPL-2.0 
-License File:                Licenses/gpl-2.0.txt
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    Bootloader with i.MX-specific capabilities
-Release Location:            https://source.codeaurora.org/external/imx/uboot-imx -b rel_imx_5.15.32-2.0.0
-Origin:                      NXP (GPL-2.0)
-                             Das U-Boot - Universal Bootloader (GPL-2.0) - http://www.denx.de/wiki/U-Boot/WebHome
-                             Android Open Source Project (BSD-2-Clause) - https://source.android.com/
-                             zlib (zlib license) - http://www.zlib.net/
-
---------------------------------------------
-
-Package:                     imx-atf.git
-Version:                     2.6
-Outgoing License:            BSD-3-Clause 
-License File:                docs/license.rst
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    ARM Trusted Firmware
-Release Location:            https://source.codeaurora.org/external/imx/imx-atf -b rel_imx_5.15.32-2.0.0
-Origin:                      NXP (BSD-3-clause)
-                             arm-trusted-firmware - ARM Limited (BSD-3-clause) - http://github.com/ARM-software/arm-trusted-firmware/
-
---------------------------------------------
-
-Package:                     imx-sc-firmware-1.13.0.bin
-Version:                     1.13.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    System Controller Firmware
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-                             ARM CMSIS Library (BSD-3-clause) - https://silver.arm.com/
-
---------------------------------------------
-
-Package:                     firmware-imx-8.16.bin
-Version:                     8.16
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    BSP firmware - DDR EPDC HDMI SDMA VPU
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
-                           In addition, these components contain code from the companies listed below.
-                             DDR:   origin: Synopsys DDR (proprietary)
-                             EASRC: origin: NXP (proprietary)
-                             EPDC:  origin: E Ink Corporation (proprietary)
-                             HDMI:  origin: Cadence Design Systems, Inc. (proprietary)
-                             SDMA:  origin: NXP (proprietary)
-                             XCVR:  origin: NXP (proprietary)
-                             XUVI:  origin: NXP (proprietary)
-                             VPU:   vpu_fw_imx27_TO1.bin
-                                    vpu_fw_imx27_TO2.bin
-                                    vpu_fw_imx51.bin
-                                    vpu_fw_imx53.bin
-                                    vpu_fw_imx6d.bin
-                                    vpu_fw_imx6q.bin
-                                 origin: Chips & Media, Inc.  (proprietary)
-
-                                    vpu_fw_imx8_dec.bin
-                                    vpu_fw_imx8_enc.bin
-                                 origin: Amphion Semiconductor Ltd  (proprietary)
-
---------------------------------------------
-
-Package:                     firmware-sentinel-0.3.bin
-Version:                     0.3
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    S400 firmware
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-
-Package:                     firmware-upower-0.1.3.bin
-Version:                     0.1.3
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    uPower firmware
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
 
 Package:                     imx-mkimage.git
 Version:                     
@@ -810,10 +586,6 @@ Graphics Packages
 --------------------------------------------
 Graphics Packages
 --------------------------------------------
-Graphics Packages
---------------------------------------------
-Graphics Packages
---------------------------------------------
 
 Package:                     isp-vvcam.git
 Version:                     4.2.2.18.0
@@ -1129,13 +901,9 @@ Multimedia Packages
 --------------------------------------------
 Multimedia Packages
 --------------------------------------------
-Multimedia Packages
---------------------------------------------
-Multimedia Packages
---------------------------------------------
 
-Package:                     imx-codec-4.6.5.bin
-Version:                     4.6.5
+Package:                     imx-codec-4.7.0.bin
+Version:                     4.7.0
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Multimedia
@@ -1151,8 +919,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.6.5.bin
-Version:                     4.6.5
+Package:                     imx-parser-4.7.0.bin
+Version:                     4.7.0
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Multimedia
@@ -1164,7 +932,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     imx-gst1.0-plugin.git
-Version:                     4.6.5
+Version:                     4.7.0
 Outgoing License:            LGPL-2.1 
 License File:                COPYING-LGPL-2.1
 Package Category:            Multimedia
@@ -1381,10 +1149,6 @@ M4 Processor Packages
 --------------------------------------------
 M4 Processor Packages
 --------------------------------------------
-M4 Processor Packages
---------------------------------------------
-M4 Processor Packages
---------------------------------------------
 
 Package:                     imx7ulp-m4-demo-2.11.0.bin
 Version:                     2.11.0
@@ -1473,10 +1237,6 @@ M7 Processor Packages
 --------------------------------------------
 M7 Processor Packages
 --------------------------------------------
-M7 Processor Packages
---------------------------------------------
-M7 Processor Packages
---------------------------------------------
 
 Package:                     imx8mn-m7-demo-2.11.1.bin
 Version:                     2.11.1
@@ -1524,10 +1284,6 @@ M33 Processor Packages
 --------------------------------------------
 M33 Processor Packages
 --------------------------------------------
-M33 Processor Packages
---------------------------------------------
-M33 Processor Packages
---------------------------------------------
 
 Package:                     imx8ulp-m33-demo-2.12.0.bin
 Version:                     2.12.0
@@ -1542,10 +1298,6 @@ Origin:                      NXP (proprietary)
                              Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
                              Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
 
---------------------------------------------
-MachineLearning Packages
---------------------------------------------
-MachineLearning Packages
 --------------------------------------------
 MachineLearning Packages
 --------------------------------------------
@@ -1685,14 +1437,6 @@ Origin:                      Vivante Corporation (MIT)
 Misc Packages
 --------------------------------------------
 Misc Packages
---------------------------------------------
-Misc Packages
---------------------------------------------
-Misc Packages
---------------------------------------------
-Tools Packages
---------------------------------------------
-Tools Packages
 --------------------------------------------
 Tools Packages
 --------------------------------------------
