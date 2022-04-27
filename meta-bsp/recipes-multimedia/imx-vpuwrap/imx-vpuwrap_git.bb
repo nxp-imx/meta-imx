@@ -14,7 +14,7 @@ IMX_VPUWRAP_SRC ?= "git://github.com/NXP/imx-vpuwrap.git;protocol=https"
 SRC_URI = "${IMX_VPUWRAP_SRC};branch=${SRCBRANCH}"
 
 SRCBRANCH = "master"
-SRCREV = "188f61177e3ac845078a6cd4441c38977a5694f1"
+SRCREV = "f7fdbd5a46e74d494bfdc29464551d9ce8588e41"
 
 S = "${WORKDIR}/git"
 
