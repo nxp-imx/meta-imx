@@ -22,18 +22,18 @@ FILES:${PN} = "${libdir}/imx-mm/audio-codec/dsp \
                /unit_tests \
 "
 
-HIFI4_BIN ?= "hifi4_imx8qmqxp.bin"
-HIFI4_BIN:mx8qm-nxp-bsp  = "hifi4_imx8qmqxp.bin"
-HIFI4_BIN:mx8qxp-nxp-bsp = "hifi4_imx8qmqxp.bin"
-HIFI4_BIN:mx8dx-nxp-bsp  = "hifi4_imx8qmqxp.bin"
-HIFI4_BIN:mx8mp-nxp-bsp  = "hifi4_imx8mp.bin"
-HIFI4_BIN:mx8ulp-nxp-bsp = "hifi4_imx8ulp.bin"
+HIFI4_PLATFORM               ?= "HIFI4_PLATFORM_IS_UNDEFINED"
+HIFI4_PLATFORM:mx8qm-nxp-bsp  = "imx8qmqxp"
+HIFI4_PLATFORM:mx8qxp-nxp-bsp = "imx8qmqxp"
+HIFI4_PLATFORM:mx8dx-nxp-bsp  = "imx8qmqxp"
+HIFI4_PLATFORM:mx8mp-nxp-bsp  = "imx8mp"
+HIFI4_PLATFORM:mx8ulp-nxp-bsp = "imx8ulp"
 
 do_install:append () {
-    # Rename DSP Firmware into hifi4.bin and remove unneeded binary
-    echo "---Rename ${D}/lib/firmware/imx/dsp/${HIFI4_BIN} into ${D}/lib/firmware/imx/dsp/hifi4.bin---"
-    mv ${D}/lib/firmware/imx/dsp/${HIFI4_BIN} ${D}/lib/firmware/imx/dsp/hifi4.bin
-    find ${D}/lib/firmware/imx/dsp -name hifi4_*.bin -exec rm {} \;
+    # Remove firmware not for this platform
+    find ${D}/lib/firmware/imx/dsp -name hifi4_*.bin -not -name *${HIFI4_PLATFORM}* -exec rm {} \;
+    # Set the expected generic name for the firmware
+    mv ${D}/lib/firmware/imx/dsp/hifi4_${HIFI4_PLATFORM}.bin ${D}/lib/firmware/imx/dsp/hifi4.bin
 }
 
 INSANE_SKIP:${PN} = "already-stripped arch ldflags dev-so"
