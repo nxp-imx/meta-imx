@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "\
 "
 
 DEPENDS = "\
-	orc-native \
 	bison-native \
 	flex-native \
 	glib-2.0 \
@@ -16,23 +15,12 @@ DEPENDS = "\
 	gstreamer1.0-plugins-base \
 	gtest \
 	libpng \
+	orc-native \
 "
 
-SRCREV = "fcd2a35a2594ad30a7bd0bdc4e14b285c85e0009"
+SRCREV = "354a149d8d174ad40f758bb19c6a6718f95d3103"
 SRC_URI = "\
     git://github.com/nnstreamer/nnstreamer.git;branch=main;protocol=https \
-    file://0001-armnn-adaptation-for-vsi-armnn-fork-to-support-npu-b.patch \
-    file://0001-armnn-compilation-error-unused-parameter.patch \
-    file://0001-meson.build-Fix-subplugin-install.patch \
-    file://0001-Build-Add-g_memdup2-support-for-glib-2.68.patch \
-    file://0001-tensor-filter-common-unnecessary-usage-of-volatile.patch \
-    file://0001-Test-Fix-build-issue-with-GCC-11-Werror-maybe-uninit.patch \
-    file://0001-Filter-TFLite-Disable-default-delegates-usage.patch \
-    file://0001-Filter-TFLite-Add-external-delegate-meson-build-opti.patch \
-    file://0002-Filter-TFLite-Add-external-delegate-support.patch \
-    file://0001-Filter-TFLite-Add-XNNPACK-meson-build-option.patch \
-    file://0002-Filter-TFLite-Fix-XNNPACK-fixed-address-buffer-handl.patch \
-    file://0001-Filter-TFLite-Fix-delegates-deleter-usage.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -70,9 +58,7 @@ PACKAGECONFIG[python3] = "\
 "
 
 PACKAGECONFIG[tensorflow-lite] = "\
-	-Dtflite2-support=enabled \
-	-Dtflite2-external-delegate-support=true \
-	-Dtflite2-xnnpack-delegate-support=true, \
+	-Dtflite2-support=enabled, \
 	-Dtflite2-support=disabled, \
 	tensorflow-lite flatbuffers, \
 	,,\
