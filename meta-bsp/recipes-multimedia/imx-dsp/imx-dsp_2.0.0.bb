@@ -29,22 +29,13 @@ HIFI4_BIN:mx8dx-nxp-bsp  = "hifi4_imx8qmqxp.bin"
 HIFI4_BIN:mx8mp-nxp-bsp  = "hifi4_imx8mp.bin"
 HIFI4_BIN:mx8ulp-nxp-bsp = "hifi4_imx8ulp.bin"
 
-# No need to do install about fsl_unia.h & fsl_types.h, which are duplicate with the ones' in imx-codec
 do_install:append () {
-    if [ -d ${D}/usr/include/imx-mm/audio-codec ]; then
-        rm -rf ${D}/usr/include/imx-mm/audio-codec
-    fi
     # Install different DSP Firmware according to the platform
     if [ -f ${D}/lib/firmware/imx/dsp/${HIFI4_BIN} ]; then
         # Rename DSP Firmware into hifi4.bin and remove unneeded binary
         echo "---Rename ${D}/lib/firmware/imx/dsp/${HIFI4_BIN} into ${D}/lib/firmware/imx/dsp/hifi4.bin---"
         mv ${D}/lib/firmware/imx/dsp/${HIFI4_BIN} ${D}/lib/firmware/imx/dsp/hifi4.bin
-        if [ "${HIFI4_BIN}" = "hifi4_imx8mp.bin" ]; then
-            echo "---Need to install hifi4_imx8mp_lpa.bin as well for i.MX8MP---"
-            find ${D}/lib/firmware/imx/dsp -name hifi4_*.bin -not -name hifi4_imx8mp_lpa.bin -exec rm {} \;
-        else
-            find ${D}/lib/firmware/imx/dsp -name hifi4_*.bin -exec rm {} \;
-        fi
+        find ${D}/lib/firmware/imx/dsp -name hifi4_*.bin -exec rm {} \;
     fi
 }
 
