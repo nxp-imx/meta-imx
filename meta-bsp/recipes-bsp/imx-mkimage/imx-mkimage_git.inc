@@ -10,7 +10,7 @@ SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH} \
            file://0001-Add-LDFLAGS-to-link-step.patch \
            file://0001-Add-support-for-overriding-BL31-BL32-and-BL33.patch \
 "
-SRCREV = "3ed3fb71e6eb443d86d72197325af0e9373cb3e6"
+SRCREV = "9ae3db3c23e9151679d0705d65696b044c56a9fb"
 S = "${WORKDIR}/git"
 
 BOOT_TOOLS = "imx-boot-tools"
