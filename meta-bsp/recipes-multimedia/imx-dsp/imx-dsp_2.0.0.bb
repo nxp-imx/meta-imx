@@ -30,13 +30,10 @@ HIFI4_BIN:mx8mp-nxp-bsp  = "hifi4_imx8mp.bin"
 HIFI4_BIN:mx8ulp-nxp-bsp = "hifi4_imx8ulp.bin"
 
 do_install:append () {
-    # Install different DSP Firmware according to the platform
-    if [ -f ${D}/lib/firmware/imx/dsp/${HIFI4_BIN} ]; then
-        # Rename DSP Firmware into hifi4.bin and remove unneeded binary
-        echo "---Rename ${D}/lib/firmware/imx/dsp/${HIFI4_BIN} into ${D}/lib/firmware/imx/dsp/hifi4.bin---"
-        mv ${D}/lib/firmware/imx/dsp/${HIFI4_BIN} ${D}/lib/firmware/imx/dsp/hifi4.bin
-        find ${D}/lib/firmware/imx/dsp -name hifi4_*.bin -exec rm {} \;
-    fi
+    # Rename DSP Firmware into hifi4.bin and remove unneeded binary
+    echo "---Rename ${D}/lib/firmware/imx/dsp/${HIFI4_BIN} into ${D}/lib/firmware/imx/dsp/hifi4.bin---"
+    mv ${D}/lib/firmware/imx/dsp/${HIFI4_BIN} ${D}/lib/firmware/imx/dsp/hifi4.bin
+    find ${D}/lib/firmware/imx/dsp -name hifi4_*.bin -exec rm {} \;
 }
 
 INSANE_SKIP:${PN} = "already-stripped arch ldflags dev-so"
