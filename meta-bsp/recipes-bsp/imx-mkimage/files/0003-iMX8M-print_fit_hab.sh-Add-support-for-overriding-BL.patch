@@ -1,19 +1,19 @@
-From ff3204addcf737b7285a0c44eb0a34c9ca82be4e Mon Sep 17 00:00:00 2001
+From 7871b1fc9aed94bf64f8692d55c6b3e52e6170f4 Mon Sep 17 00:00:00 2001
 From: Thomas Perrot <thomas.perrot@bootlin.com>
 Date: Tue, 26 Apr 2022 15:10:04 +0200
-Subject: [PATCH] Add support for overriding BL31, BL32 and BL33
-
-Upstream-Status: Pending
+Subject: [PATCH 3/3] iMX8M/print_fit_hab.sh: Add support for overriding BL31,
+ BL32 and BL33
 
 Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
 ---
  iMX8M/print_fit_hab.sh | 14 +++++++++-----
  1 file changed, 9 insertions(+), 5 deletions(-)
 
-Index: git/iMX8M/print_fit_hab.sh
-===================================================================
---- git.orig/iMX8M/print_fit_hab.sh
-+++ git/iMX8M/print_fit_hab.sh
+diff --git a/iMX8M/print_fit_hab.sh b/iMX8M/print_fit_hab.sh
+index 07d23a9..6f1a22d 100755
+--- a/iMX8M/print_fit_hab.sh
++++ b/iMX8M/print_fit_hab.sh
 @@ -1,12 +1,16 @@
  #!/bin/bash
  
@@ -58,3 +58,6 @@ Index: git/iMX8M/print_fit_hab.sh
  
  	let tee_sign_off=$(((atf_sign_off + atf_size + 3) & ~3))
  	let tee_load_addr=$TEE_LOAD_ADDR
+-- 
+2.25.1
+

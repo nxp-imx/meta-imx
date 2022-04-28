@@ -1,20 +1,19 @@
-From 2a6e2d40a4af78d4a0824e384c3aec55db758fee Mon Sep 17 00:00:00 2001
+From efbd63a1190bbb6fe89309c73090b693090018d6 Mon Sep 17 00:00:00 2001
 From: Erik Larsson <erik.larsson@combitech.se>
 Date: Tue, 6 Mar 2018 12:28:39 +0100
-Subject: [PATCH] Add LDFLAGS to link step
-
-Upstream-Status: Pending
+Subject: [PATCH 2/3] iMX8M/soc.mak: Add LDFLAGS to link step
 
 Signed-off-by: Erik Larsson <karl.erik.larsson@gmail.com>
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
 ---
  iMX8M/soc.mak | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/iMX8M/soc.mak b/iMX8M/soc.mak
-index 03b05f7aafeb..4d5df0777704 100644
+index 26a4dd0..b8daa3b 100644
 --- a/iMX8M/soc.mak
 +++ b/iMX8M/soc.mak
-@@ -84,7 +84,7 @@ FW_DIR = imx-boot/imx-boot-tools/$(PLAT)
+@@ -85,7 +85,7 @@ FW_DIR = imx-boot/imx-boot-tools/$(PLAT)
  $(MKIMG): mkimage_imx8.c
  	@echo "PLAT="$(PLAT) "HDMI="$(HDMI)
  	@echo "Compiling mkimage_imx8"
@@ -24,5 +23,5 @@ index 03b05f7aafeb..4d5df0777704 100644
  lpddr4_imem_1d = lpddr4_pmu_train_1d_imem$(LPDDR_FW_VERSION).bin
  lpddr4_dmem_1d = lpddr4_pmu_train_1d_dmem$(LPDDR_FW_VERSION).bin
 -- 
-2.35.1
+2.25.1
 

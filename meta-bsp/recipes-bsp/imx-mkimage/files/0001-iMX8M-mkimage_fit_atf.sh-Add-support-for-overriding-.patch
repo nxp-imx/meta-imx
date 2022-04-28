@@ -1,22 +1,22 @@
-From 4e4e06602f594b335b4c264a3b062bc7af961078 Mon Sep 17 00:00:00 2001
+From bce82912c8206edd0cc97af8c6b30240229fae7f Mon Sep 17 00:00:00 2001
 From: Erik Larsson <erik.larsson@combitech.se>
 Date: Thu, 8 Mar 2018 19:04:37 +0100
-Subject: [PATCH] Add support for overriding BL32 and BL33 not only BL31
-
-Upstream-Status: Pending
+Subject: [PATCH 1/3] iMX8M/mkimage_fit_atf.sh: Add support for overriding BL32
+ and BL33 not only BL31
 
 Signed-off-by: Erik Larsson <karl.erik.larsson@gmail.com>
 Signed-off-by: Christopher Dahlberg <crille.dahlberg@gmail.com>
 Signed-off-by: Marcus Folkesson <marcus.folkesson@gmail.com>
 Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
 ---
- iMX8M/mkimage_fit_atf.sh | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+ iMX8M/mkimage_fit_atf.sh | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
 
-Index: git/iMX8M/mkimage_fit_atf.sh
-===================================================================
---- git.orig/iMX8M/mkimage_fit_atf.sh
-+++ git/iMX8M/mkimage_fit_atf.sh
+diff --git a/iMX8M/mkimage_fit_atf.sh b/iMX8M/mkimage_fit_atf.sh
+index b39499c..f893df2 100755
+--- a/iMX8M/mkimage_fit_atf.sh
++++ b/iMX8M/mkimage_fit_atf.sh
 @@ -6,6 +6,7 @@
  # usage: $0 <dt_name> [<dt_name> [<dt_name] ...]
  
@@ -36,13 +36,16 @@ Index: git/iMX8M/mkimage_fit_atf.sh
  fi
  
  [ -z "$BL32" ] && BL32="tee.bin"
-@@ -29,12 +30,12 @@ if [ ! -f $BL32 ]; then
+@@ -28,13 +29,13 @@ LOADABLES="\"atf-1\""
+ if [ ! -f $BL32 ]; then
  	BL32=/dev/null
  else
- 	echo "Building with TEE support, make sure your bl31 is compiled with spd. If you do not want tee, please delete tee.bin" >&2
+-	echo "Building with TEE support, make sure your bl31 is compiled with spd. If you do not want tee, please delete tee.bin" >&2
 -	echo "tee.bin size: " >&2
+-	ls -lct tee.bin | awk '{print $5}' >&2
++	echo "Building with TEE support, make sure $BL31 is compiled with spd. If you do not want tee, please delete $BL32" >&2
 +	echo "$BL32 size: " >&2
- 	ls -lct tee.bin | awk '{print $5}' >&2
++	ls -lct $BL32 | awk '{print $5}' >&2
  	LOADABLES="$LOADABLES, \"tee-1\""
  fi
  
@@ -62,3 +65,6 @@ Index: git/iMX8M/mkimage_fit_atf.sh
  fi
  
  for dtname in $*
+-- 
+2.25.1
+
