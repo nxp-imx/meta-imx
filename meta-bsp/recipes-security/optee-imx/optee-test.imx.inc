@@ -52,6 +52,6 @@ do_install () {
 	install -m 444 ${B}/supp_plugin/*.plugin ${D}${libdir}/tee-supplicant/plugins/
 }
 
-FILES:${PN} = "/usr/bin/ /lib*/optee_armtz/ /usr/lib/tee-supplicant/plugins/"
+FILES:${PN} = "/usr/bin/ /lib*/optee_armtz/ ${libdir}/tee-supplicant/plugins/"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
