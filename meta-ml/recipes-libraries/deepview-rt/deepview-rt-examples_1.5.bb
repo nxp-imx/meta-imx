@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=be5ff43682ed6c57dfcbeb97651c2829"
 DEPENDS = "deepview-rt gstreamer1.0-plugins-base opencv curl"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "de4b95ba8f6c2a38d3672fd316779c57"
-SRC_URI[sha256sum] = "e142739b462d2e1f1804fd54f999edf198e353462379fb78cc9eb74bcc6610d8"
+SRC_URI[md5sum] = "ddb466dba0f3117f1d0d8e7f6542587e"
+SRC_URI[sha256sum] = "6912cabaed8b15b55c69a769e537af2b40f9a7e5b6ba9834abe9d3ca29ae64ae"
 S = "${WORKDIR}/${BPN}-${PV}"
 
 inherit fsl-eula-unpack pkgconfig
