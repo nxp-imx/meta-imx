@@ -1,0 +1,25 @@
+From 1ba241438dcc14852017757451521f5e27690290 Mon Sep 17 00:00:00 2001
+From: Cristinel Panfir <cristinel.panfir@nxp.com>
+Date: Mon, 2 May 2022 15:18:46 +0000
+Subject: [PATCH] Findtim-vx.cmake: Fix LIBDIR for multilib environment
+
+Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
+---
+ cmake/modules/Findtim-vx.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/modules/Findtim-vx.cmake b/cmake/modules/Findtim-vx.cmake
+index 6037156..41053f1 100644
+--- a/cmake/modules/Findtim-vx.cmake
++++ b/cmake/modules/Findtim-vx.cmake
+@@ -36,6 +36,6 @@ if((NOT DEFINED TIM_VX_INSTALL))
+ else()
+   message("=== Building with TIM_VX_LIBRIRIES from ${TIM_VX_INSTALL} ===")
+   include_directories(${TIM_VX_INSTALL}/include)
+-  set(LIBDIR lib)
++  set(LIBDIR ${CMAKE_INSTALL_LIBDIR})
+   list(APPEND VX_DELEGATE_DEPENDENCIES ${TIM_VX_INSTALL}/${LIBDIR}/libtim-vx.so)
+ endif()
+-- 
+2.25.1
+
