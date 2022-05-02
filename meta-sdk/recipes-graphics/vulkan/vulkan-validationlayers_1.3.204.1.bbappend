@@ -7,7 +7,7 @@ SRC_URI += " \
 
 do_configure:append() {
     # WORKAROUND: Patch build.ninja so /usr/lib/librt.so is found in recipe-sysroot
-    missing_lib=/usr/lib/librt.so
+    missing_lib=${libdir}/librt.so
     if ! grep "$missing_lib" build.ninja; then
         bbwarn "Library $missing_lib not found in ${B}/build.ninja. Please check if the recipe workaround is working and/or needed."
     elif ! grep " $missing_lib" build.ninja; then
