@@ -40,13 +40,13 @@ do_install () {
     install -d ${D}${includedir}
     install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
 
-    cp -fr   ${S}/modelrunner/bin/* ${D}${bindir}
-    cp -frP  ${S}/modelrunner/lib/* ${D}${libdir}
+    cp -r  ${S}/modelrunner/bin/* ${D}${bindir}
+    cp -rP ${S}/modelrunner/lib/* ${D}${libdir}
     if ! [ "${@bb.utils.filter('PACKAGECONFIG', 'openvx', d)}" ]; then
-        rm -fr ${D}${libdir}/libovx-rtm.so
+        rm ${D}${libdir}/libovx-rtm.so
     fi
-    cp -frP  ${S}/${BPN}/lib/* ${D}${libdir}
-    cp -fr   ${S}/${BPN}/include/* ${D}${includedir}
+    cp -rP ${S}/${BPN}/lib/* ${D}${libdir}
+    cp -r  ${S}/${BPN}/include/* ${D}${includedir}
  
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
