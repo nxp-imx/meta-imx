@@ -42,10 +42,10 @@ do_install () {
 
     cp -r  ${S}/modelrunner/bin/* ${D}${bindir}
     cp -rP ${S}/modelrunner/lib/* ${D}${libdir}
-    if ! [ "${@bb.utils.filter('PACKAGECONFIG', 'openvx', d)}" ]; then
-        rm ${D}${libdir}/libovx-rtm.so
-    fi
     cp -rP ${S}/${BPN}/lib/* ${D}${libdir}
+    if ! [ "${@bb.utils.filter('PACKAGECONFIG', 'openvx', d)}" ]; then
+        rm ${D}${libdir}/deepview-rt-openvx.so
+    fi
     cp -r  ${S}/${BPN}/include/* ${D}${includedir}
  
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
