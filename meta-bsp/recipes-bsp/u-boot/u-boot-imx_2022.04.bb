@@ -30,6 +30,15 @@ BOOT_TOOLS = "imx-boot-tools"
 
 PROVIDES += "u-boot"
 
+inherit uuu_bootloader_tag
+
+UUU_BOOTLOADER            = ""
+UUU_BOOTLOADER:mx6-nxp-bsp        = "${UBOOT_BINARY}"
+UUU_BOOTLOADER:mx7-nxp-bsp        = "${UBOOT_BINARY}"
+UUU_BOOTLOADER_TAGGED     = ""
+UUU_BOOTLOADER_TAGGED:mx6-nxp-bsp = "u-boot-tagged.${UBOOT_SUFFIX}"
+UUU_BOOTLOADER_TAGGED:mx7-nxp-bsp = "u-boot-tagged.${UBOOT_SUFFIX}"
+
 do_deploy:append:mx8m-nxp-bsp() {
     # Deploy u-boot-nodtb.bin and fsl-imx8m*-XX.dtb for mkimage to generate boot binary
     if [ -n "${UBOOT_CONFIG}" ]
@@ -51,25 +60,8 @@ do_deploy:append:mx8m-nxp-bsp() {
     fi
 }
 
-UBOOT_TAGGED_BINARY ?= "u-boot-tagged.${UBOOT_SUFFIX}"
-
-deploy_tag() {
-    # Append a tag to the bootloader image used in the SD card image
-    cp ${UBOOT_BINARY} ${UBOOT_TAGGED_BINARY}
-    ln -sf ${UBOOT_TAGGED_BINARY} ${UBOOT_BINARY}
-    stat -L -cUUUBURNXXOEUZX7+A-XY5601QQWWZ%sEND ${UBOOT_BINARY} >> ${UBOOT_BINARY}
-}
-
-do_deploy:append:mx6-nxp-bsp() {
-    deploy_tag
-}
-
-do_deploy:append:mx7-nxp-bsp() {
-    deploy_tag
-}
-
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx6-generic-bsp|mx7-generic-bsp|mx8-generic-bsp)"
 
 UBOOT_NAME:mx6-nxp-bsp = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 UBOOT_NAME:mx7-nxp-bsp = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
