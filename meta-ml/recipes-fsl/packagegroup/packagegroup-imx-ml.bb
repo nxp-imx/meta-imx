@@ -20,34 +20,26 @@ ML_NNSTREAMER_PKGS_LIST = " \
 ML_NNSTREAMER_PKGS = ""
 ML_NNSTREAMER_PKGS:mx8-nxp-bsp:imxgpu = "${ML_NNSTREAMER_PKGS_LIST}"
 
+# These packages don't require any acceleration
 ML_PKGS            = ""
-ML_PKGS:mx8-nxp-bsp:imxgpu = " \
-    tensorflow-lite \
-    tensorflow-lite-vx-delegate \
-    onnxruntime \
+ML_PKGS:mx8-nxp-bsp = " \
+    deepview-rt-examples \
     ml-security \
-    pytorch \
-    torchvision \
-"
-ML_PKGS:mx8ulp-nxp-bsp = " \
+    onnxruntime-tests \
     tensorflow-lite \
-    onnxruntime \
-    pytorch \
     torchvision \
 "
-ML_PKGS:remove:mx8mm-nxp-bsp = "tensorflow-lite-vx-delegate"
-
-ML_DEEPVIEW_PKGS                    = ""
-ML_DEEPVIEW_PKGS:mx8-nxp-bsp:imxgpu = "deepview-rt-examples"
-ML_DEEPVIEW_PKGS:mx8mm-nxp-bsp      = ""
-
-ML_TVM_PKGS                    = ""
-ML_TVM_PKGS:mx8-nxp-bsp:imxgpu = "tvm"
-ML_TVM_PKGS:mx8mm-nxp-bsp      = ""
+# These packages require acceleration, which currently maps to
+# all SOCs with GPU except for 8M Mini
+ML_ACCELERATED_PKGS                    = ""
+ML_ACCELERATED_PKGS:mx8-nxp-bsp:imxgpu = " \
+    tensorflow-lite-vx-delegate \
+    tvm \
+"
+ML_ACCELERATED_PKGS:mx8mm-nxp-bsp      = ""
 
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \
-    ${ML_DEEPVIEW_PKGS} \
-    ${ML_TVM_PKGS} \
+    ${ML_ACCELERATED_PKGS} \
     ${ML_NNSTREAMER_PKGS} \
 "
