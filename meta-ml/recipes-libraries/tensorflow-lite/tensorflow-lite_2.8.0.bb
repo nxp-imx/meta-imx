@@ -17,15 +17,6 @@ S = "${WORKDIR}/git"
 
 inherit python3native cmake
 
-PACKAGECONFIG_OPENVX = ""
-PACKAGECONFIG_OPENVX:mx8-nxp-bsp:imxgpu3d = "openvx"
-PACKAGECONFIG_OPENVX:mx8mm-nxp-bsp = ""
-PACKAGECONFIG_OPENVX:mx8ulp-nxp-bsp = ""
-
-PACKAGECONFIG ?= "${PACKAGECONFIG_OPENVX}"
-
-PACKAGECONFIG[openvx] = ",,,libnn-imx nn-imx"
-
 EXTRA_OECMAKE = " \
     -DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR} \
     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
@@ -107,7 +98,15 @@ RDEPENDS:${PN}   = " \
     flatbuffers \
     python3 \
     python3-numpy \
+    ${RDEPENDS_OPENVX} \
 "
+RDEPENDS_OPENVX                    = ""
+RDEPENDS_OPENVX:mx8-nxp-bsp:imxgpu = "libnn-imx nn-imx"
+RDEPENDS_OPENVX:mx8mm-nxp-bsp      = ""
+# The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
+# support OpenVX
+RDEPENDS_OPENVX:mx8ulp-nxp-bsp     = ""
+
 # TensorFlow and TensorFlow Lite both exports few files, suppress the error
 # SSTATE_ALLOW_OVERLAP_FILES = "${D}${includedir}"
 SSTATE_ALLOW_OVERLAP_FILES = "/"
