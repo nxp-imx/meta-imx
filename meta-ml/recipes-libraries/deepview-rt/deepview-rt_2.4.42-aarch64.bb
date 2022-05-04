@@ -11,28 +11,6 @@ S = "${WORKDIR}/${BPN}-${PV}"
 
 inherit fsl-eula-unpack python3native
 
-PACKAGECONFIG ?= " \
-    ${PACKAGECONFIG_DEFAULT} \
-    ${PACKAGECONFIG_OPENVX} \
-"
-PACKAGECONFIG_DEFAULT                 = ""
-PACKAGECONFIG_DEFAULT:mx8-nxp-bsp     = "onnxruntime tensorflow-lite"
-PACKAGECONFIG_DEFAULT:mx8mm-nxp-bsp   = ""
-PACKAGECONFIG_DEFAULT:mx8mnul-nxp-bsp = ""
-PACKAGECONFIG_DEFAULT:mx8mpul-nxp-bsp = ""
-PACKAGECONFIG_OPENVX                  = ""
-PACKAGECONFIG_OPENVX:mx8-nxp-bsp      = "openvx"
-PACKAGECONFIG_OPENVX:mx8mm-nxp-bsp    = ""
-PACKAGECONFIG_OPENVX:mx8mnul-nxp-bsp  = ""
-PACKAGECONFIG_OPENVX:mx8mpul-nxp-bsp  = ""
-# The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
-# support OpenVX
-PACKAGECONFIG_OPENVX:mx8ulp-nxp-bsp   = ""
-
-PACKAGECONFIG[onnxruntime] = ",,,onnxruntime"
-PACKAGECONFIG[openvx] = ",,,libopenvx-imx"
-PACKAGECONFIG[tensorflow-lite] = ",,,tensorflow-lite"
-
 do_install () {
     install -d ${D}${bindir}
     install -d ${D}${libdir}
@@ -57,6 +35,18 @@ do_install () {
 FILES_SOLIBSDEV = ""
 
 FILES:${PN} += "${libdir}/*"
+
+RDEPENDS:${PN} = " \
+    onnxruntime \
+    tensorflow-lite \
+    ${RDEPENDS_OPENVX} \
+"
+RDEPENDS_OPENVX                    = ""
+RDEPENDS_OPENVX:mx8-nxp-bsp:imxgpu = "libopenvx-imx"
+RDEPENDS_OPENVX:mx8mm-nxp-bsp      = ""
+# The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
+# support OpenVX
+RDEPENDS_OPENVX:mx8ulp-nxp-bsp     = ""
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
