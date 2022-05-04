@@ -60,8 +60,8 @@ DirectFB is no longer supported in i.MX graphic builds.
 The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7.  i.MX 8 should use xwayland only.
 XWayland is the default distro for all i.MX families.
 
-   imx-image-multimedia: This image contains all the packages except QT5/OpenCV/Machine Learning packages.
-   imx-image-full: This is the big image which includes imx-image-multimedia + OpenCV + QT5 + Machine Learning packages.
+   imx-image-multimedia: This image contains all the packages except QT6/OpenCV/Machine Learning packages.
+   imx-image-full: This is the big image which includes imx-image-multimedia + OpenCV + QT6 + Machine Learning packages.
 
 Here are some examples:
 (The example uses the imx6qsabresd MACHINE but substitute this with whatever you are using)
@@ -71,24 +71,24 @@ Building Frame Buffer (FB)
   DISTRO=fsl-imx-fb MACHINE=imx6qsabresd source imx-setup-release.sh -b build-fb
   bitbake <image>
 
-To run the QT5 examples use the following parameters:
-<QT5 Example> -platform eglfs -plugin evdevtouch:/dev/input/event0
+To run the QT6 examples use the following parameters:
+<QT6 Example> -platform eglfs -plugin evdevtouch:/dev/input/event0
 
 Building XWayland
 ---------------------------
   DISTRO=fsl-imx-xwayland MACHINE=imx6qsabresd source imx-setup-release.sh -b build-xwayland
   bitbake <image>
 
-To run the QT5 examples use the following parameters:
-<QT5 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
+To run the QT6 examples use the following parameters:
+<QT6 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
 
 Building Wayland-Weston (wayland)
 ---------------------------
   DISTRO=fsl-imx-wayland MACHINE=imx6qsabresd source imx-setup-release.sh -b build-wayland
   bitbake <image>
 
-To run the QT5 examples use the following parameters:
-<QT5 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
+To run the QT6 examples use the following parameters:
+<QT6 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
 
 Building with Multilib support
 ---------------------------
@@ -151,7 +151,7 @@ QTWebEngine
 --------
 Qtwebengine is not built by default so add this to local.conf or image recipe. It is supported only on the machines
 that has GPU.
- IMAGE_INSTALL:append = "packagegroup-qt5-webengine"
+ IMAGE_INSTALL:append = "packagegroup-qt6-webengine"
 
 There are many browsers available using QtWebEngine and can be found here:
 /usr/share/examples/webengine
@@ -174,7 +174,7 @@ By default, wayland plugin is enabled.We can switch to kms plugin by following t
 - killall weston
 - export QT_QPA_EGLFS_ALWAYS_SET_MODE=1
 - Run any qt application using -platform eglfs
-  Example: ./Qt5_CinematicExperience -platform eglfs
+  Example: ./Qt6_CinematicExperience -platform eglfs
 
 Systemd
 -------
