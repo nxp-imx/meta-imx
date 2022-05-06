@@ -114,7 +114,7 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plu
            file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch \
 "
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
-SRCBRANCH = "imx-1.20.x"
+SRCBRANCH = "MM_04.07.00_2205_L5.15.y"
 SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 SRCREV = "4b8559690bf7a66745cc65900baccd955b436d3c"
 
