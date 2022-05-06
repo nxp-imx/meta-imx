@@ -10,7 +10,7 @@ SRC_URI += " \
 "
 
 SRCREV_murata-qca = "a0026b646ce6adfb72f135ffa8a310f3614b2272"
-SRCREV_imx-firmware = "03975c5dc83a8ebc9cabb411f3cc95873abbebe4"
+SRCREV_imx-firmware = "317bdf28a2f812e62a359aca107f4a80a0eaf10f"
 
 SRCREV_FORMAT = "default_murata-qca_imx-firmware"
 
