@@ -9,8 +9,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "4d710c08f9b2787b83a175df45ba0640"
-SRC_URI[sha256sum] = "d15f109abd0f51fe908c01b9a58ecc69a112cb15cb4bea565e137dcdb88ac68e"
+SRC_URI[md5sum] = "4fdaf9f4ba08888d6e2e7f3c925828b5"
+SRC_URI[sha256sum] = "6a0015c77fa7c822ec537e4e00742bb38bb8c8425f93c8ca3e5db0a4dce49c0d"
 
 EXTRA_OECONF = "-datadir=${base_libdir}/firmware --bindir=/unit_tests ${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8', ' ', d)}"
 
