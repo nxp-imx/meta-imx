@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "${LIC_FILES_CHKSUM_runtime} ${LIC_FILES_CHKSUM_model}"
 DEPENDS = "libpng zlib ${BPN}-native"
 
 ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH = "imx_1.10.0"
+SRCBRANCH = "lf-5.15.32_2.0.0"
 SRC_URI = " \
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH};name=runtime \
     https://github.com/onnx/models/raw/${SRCREV_model}/LICENSE;name=model-license \
