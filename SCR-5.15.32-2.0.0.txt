@@ -56,8 +56,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     imx-sc-firmware-1.13.0.bin
-Version:                     1.13.0
+Package:                     imx-sc-firmware-1.14.0.bin
+Version:                     1.14.0
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
@@ -523,8 +523,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.3.p4.2-aarch32.bin
-Version:                     6.4.3.p4.2
+Package:                     imx-gpu-viv-6.4.3.p4.4-aarch32.bin
+Version:                     6.4.3.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -542,8 +542,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.3.p4.2-aarch64.bin
-Version:                     6.4.3.p4.2
+Package:                     imx-gpu-viv-6.4.3.p4.4-aarch64.bin
+Version:                     6.4.3.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -652,7 +652,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gputop.git
-Version:                     6.4.3.p4.2
+Version:                     6.4.3.p4.4
 Outgoing License:            MIT 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -663,8 +663,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.3.p4.2-arm.bin
-Version:                     6.4.3.p4.2
+Package:                     imx-gpu-g2d-6.4.3.p4.4-arm.bin
+Version:                     6.4.3.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -675,8 +675,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.3.p4.2-aarch64.bin
-Version:                     6.4.3.p4.2
+Package:                     imx-gpu-g2d-6.4.3.p4.4-aarch64.bin
+Version:                     6.4.3.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -699,8 +699,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p4.2-aarch64-wayland.bin
-Version:                     6.4.3.p4.2
+Package:                     libgpuperfcnt-6.4.3.p4.4-aarch64-wayland.bin
+Version:                     6.4.3.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -711,8 +711,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p4.2-arm-fb.bin
-Version:                     6.4.3.p4.2
+Package:                     libgpuperfcnt-6.4.3.p4.4-arm-fb.bin
+Version:                     6.4.3.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
@@ -723,8 +723,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p4.2-arm-wayland.bin
-Version:                     6.4.3.p4.2
+Package:                     libgpuperfcnt-6.4.3.p4.4-arm-wayland.bin
+Version:                     6.4.3.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
