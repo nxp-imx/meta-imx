@@ -7,7 +7,7 @@ IMX_MKIMAGE_SRC ?= "git://source.codeaurora.org/external/imx/imx-mkimage.git;pro
 SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH} \
            file://0001-iMX8M-soc.mak-use-native-mkimage-from-sysroot.patch \
 "
-SRCREV = "ff23c4fd84bb88d73b52a0ccad733522d2faa477"
+SRCREV = "dc4b1e2b9e7fcc8bc362b3349f3602579f7f1222"
 S = "${WORKDIR}/git"
 
 BOOT_TOOLS = "imx-boot-tools"
