@@ -1205,7 +1205,7 @@ Origin:                      Au-Zone Technologies (proprietary)
 
 --------------------------------------------
 
-Package:                     eiq-tvm-imx.git
+Package:                     EIQ-TVM-IMX.git
 Version:                     0.7.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -1213,9 +1213,6 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Open Deep Learning Compiler Stack
 Release Location:            https://source.codeaurora.org/external/imx/eiq-tvm-imx -b rel_imx_5.15.32-2.0.0
-Origin:                      NXP (Apache-2.0)
-                             Apache TVM (Apache-2.0) - https://github.com/apache/tvm
-
 --------------------------------------------
 
 Package:                     nnshark.git
@@ -1342,7 +1339,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.38
+Version:                     1.1.52
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
