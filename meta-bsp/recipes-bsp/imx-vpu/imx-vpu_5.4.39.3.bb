@@ -28,4 +28,5 @@ do_install() {
     oe_runmake PLATFORM="${PLATFORM}" DEST_DIR="${D}" install
 }
 
+# Compatible only for i.MX with Chips&Media VPU
 COMPATIBLE_MACHINE = "(mx6q-nxp-bsp|mx6dl-nxp-bsp)"

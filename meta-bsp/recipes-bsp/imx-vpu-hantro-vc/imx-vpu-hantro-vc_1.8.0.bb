@@ -1,6 +1,6 @@
 # Copyright 2019-2022 NXP
 
-DESCRIPTION = "i.MX vc8000e encoder library for Kenrel 5.15"
+DESCRIPTION = "i.MX VC8000E encoder library"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=be5ff43682ed6c57dfcbeb97651c2829" 
 
