@@ -8,7 +8,7 @@ DEPENDS = "virtual/libg2d cairo"
 PV = "2.1+git${SRCPV}"
 
 GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxpmicro/g2d-samples.git;protocol=https"
-SRCBRANCH ?= "master"
+SRCBRANCH ?= "imx_2.1"
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
 SRCREV = "3268f291a15b2d8d5f650f627764a52eb0a8fc15"
 
