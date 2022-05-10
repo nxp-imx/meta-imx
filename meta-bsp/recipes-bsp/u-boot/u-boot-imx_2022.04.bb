@@ -16,7 +16,7 @@ SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "06fd78876993771a3914572ef9620cb295ea85cc"
 LOCALVERSION = "-${SRCBRANCH}"
 
-DEPENDS += "flex-native bison-native bc-native dtc-native gnutls-native"
+DEPENDS += "flex-native bison-native bc-native dtc-native gnutls-native xxd-native"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
