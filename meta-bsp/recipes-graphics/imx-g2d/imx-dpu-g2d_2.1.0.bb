@@ -16,10 +16,10 @@ SRC_URI[sha256sum] = "d501b6f696b22ff4cc9b44f2f1f975b6ac8a20dd0fe086790051d7cc0c
 inherit fsl-eula-unpack
 
 do_install () {
-    cp -r -d --no-preserve=ownership ${S}/g2d/* ${D}
-    if [ "${libdir}" != "/usr/lib" ]; then
-        mv ${D}/usr/lib ${D}${libdir}
-    fi
+    install -d ${D}${libdir}
+    install -d ${D}${includedir}
+    cp -r ${S}/g2d/usr/lib/*.so* ${D}${libdir}
+    cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
 }
 
 INSANE_SKIP:${PN} += "ldflags"
