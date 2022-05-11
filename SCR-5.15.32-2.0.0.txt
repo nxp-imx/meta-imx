@@ -101,9 +101,9 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-sentinel-0.3.bin
-Version:                     0.3
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
+Package:                     firmware-sentinel-0.4.bin
+Version:                     0.4
+Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -395,7 +395,7 @@ Origin:                      NXP (NXP Proprietary)
 --------------------------------------------
 
 Package:                     imx-smw.git
-Version:                     0.1
+Version:                     2.0
 Outgoing License:            BSD-3-Clause 
 License File:                COPYING
 Package Category:            BSP
