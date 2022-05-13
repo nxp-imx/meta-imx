@@ -52,7 +52,7 @@ LDFLAGS[unexport] = "1"
 CFLAGS += "--sysroot=${STAGING_DIR_HOST}"
 CXXFLAGS += "--sysroot=${STAGING_DIR_HOST}"
 
-OPTEE_ARCH:arm = "arm32"
+OPTEE_ARCH:arm     = "arm32"
 OPTEE_ARCH:aarch64 = "arm64"
 
 do_configure[noexec] = "1"
@@ -81,8 +81,8 @@ do_install () {
     install -m 644 ${B}/core/*.bin ${D}${nonarch_base_libdir}/firmware/
 
     # Install embedded TAs
-    install -d ${D}${base_libdir}/optee_armtz/
-    install -m 444 ${B}/ta/*/*.ta ${D}${base_libdir}/optee_armtz/
+    install -d ${D}${nonarch_base_libdir}/optee_armtz/
+    install -m 444 ${B}/ta/*/*.ta ${D}${nonarch_base_libdir}/optee_armtz/
 
     # Install TA devkit
     install -d ${D}${includedir}/optee/export-user_ta_${OPTEE_ARCH}/
@@ -92,8 +92,8 @@ do_install () {
 
 addtask deploy after do_compile before do_install
 
-FILES:${PN} = "${nonarch_base_libdir}/firmware/ /lib*/optee_armtz/"
-FILES:${PN}-staticdev = "/usr/include/optee/"
+FILES:${PN} = "${nonarch_base_libdir}/firmware/ ${nonarch_base_libdir}/optee_armtz/"
+FILES:${PN}-staticdev = "${includedir}/optee/"
 RDEPENDS:${PN}-dev += "${PN}-staticdev"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
