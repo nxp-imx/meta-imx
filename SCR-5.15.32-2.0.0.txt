@@ -4,7 +4,7 @@ Release - Linux 5.15.32-2.0.0
  June 2022
 
 Outgoing License: LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies
-License File:     COPYING
+License File:     EULA.txt
 
 Yocto Project recipe manifest:
 repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-kirkstone -m imx_5.15.32-2.0.0.xml
