@@ -41,16 +41,7 @@ do_compile() {
 do_compile[cleandirs] = "${B}"
 
 do_install () {
-	# Install xtest
-	install -D -m 0755 ${B}/xtest/xtest ${D}/usr/bin/xtest
-
-	# Install TAs
-	install -d ${D}/lib/optee_armtz/
-	install -m 444 ${B}/ta/*/*.ta ${D}/lib/optee_armtz/
-
-	# Install plugins
-	install -d ${D}${libdir}/tee-supplicant/plugins/
-	install -m 444 ${B}/supp_plugin/*.plugin ${D}${libdir}/tee-supplicant/plugins/
+	oe_runmake install DESTDIR=${D}
 }
 
 FILES:${PN} += "${nonarch_base_libdir}/optee_armtz/ ${libdir}/tee-supplicant/plugins/"
