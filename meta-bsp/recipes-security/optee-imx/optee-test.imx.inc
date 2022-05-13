@@ -2,7 +2,8 @@
 
 SUMMARY = "OPTEE test"
 HOMEPAGE = "http://www.optee.org/"
-LICENSE = "GPL-2.0-only & BSD-2-Clause"
+
+LICENSE = "BSD-2-Clause & GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 
 DEPENDS = "python3-cryptography-native optee-os optee-client openssl"
@@ -18,21 +19,21 @@ inherit python3native features_check
 
 REQUIRED_MACHINE_FEATURES = "optee"
 
-OPTEE_ARCH:arm = "arm32"
+OPTEE_ARCH:arm     = "arm32"
 OPTEE_ARCH:aarch64 = "arm64"
+
+CFLAGS += "--sysroot=${STAGING_DIR_HOST}"
+CXXFLAGS += "--sysroot=${STAGING_DIR_HOST}"
 
 EXTRA_OEMAKE = " \
     TA_DEV_KIT_DIR=${STAGING_INCDIR}/optee/export-user_ta_${OPTEE_ARCH}/ \
-    OPTEE_CLIENT_EXPORT=${STAGING_DIR_HOST}/usr \
+    OPTEE_CLIENT_EXPORT=${STAGING_DIR_HOST}${exec_prefix} \
     CROSS_COMPILE_HOST=${HOST_PREFIX} \
     CROSS_COMPILE_TA=${HOST_PREFIX} \
     CROSS_COMPILE=${HOST_PREFIX} \
     OPENSSL_MODULES=${STAGING_LIBDIR_NATIVE}/ossl-modules \
     -C ${S} O=${B} \
 "
-
-CFLAGS += "--sysroot=${STAGING_DIR_HOST}"
-CXXFLAGS += "--sysroot=${STAGING_DIR_HOST}"
 
 do_compile() {
     oe_runmake all
@@ -52,6 +53,8 @@ do_install () {
 	install -m 444 ${B}/supp_plugin/*.plugin ${D}${libdir}/tee-supplicant/plugins/
 }
 
-FILES:${PN} = "/usr/bin/ /lib*/optee_armtz/ ${libdir}/tee-supplicant/plugins/"
+FILES:${PN} += "${nonarch_base_libdir}/optee_armtz/ ${libdir}/tee-supplicant/plugins/"
+
+RDEPENDS:${PN} = "optee-os"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
