@@ -30,21 +30,8 @@ EXTRA_OEMAKE = " \
 "
 
 do_install () {
-	oe_runmake install
-
-	install -D -p -m0644 ${B}/export/usr/lib/libteec.so.1.0.0 ${D}${libdir}/libteec.so.1.0.0
-	ln -sf libteec.so.1.0.0 ${D}${libdir}/libteec.so.1
-	ln -sf libteec.so.1.0.0 ${D}${libdir}/libteec.so
-
-	install -D -p -m0644 ${B}/export/usr/lib/libckteec.so.0.1.0 ${D}${libdir}/libckteec.so.0.1.0
-	ln -sf libckteec.so.0.1.0 ${D}${libdir}/libckteec.so.0
-	ln -sf libckteec.so.0.1.0 ${D}${libdir}/libckteec.so
-
-	install -D -p -m0755 ${B}/export/usr/sbin/tee-supplicant ${D}${bindir}/tee-supplicant
-
-	cp -a ${B}/export/usr/include ${D}${includedir}
-
-	sed -i -e s:/etc:${sysconfdir}:g -e s:/usr/bin:${bindir}:g ${WORKDIR}/tee-supplicant.service
+	oe_runmake install DESTDIR=${D}
+	sed -i -e s:/etc:${sysconfdir}:g -e s:/usr/sbin:${bindir}:g ${WORKDIR}/tee-supplicant.service
 	install -D -p -m0644 ${WORKDIR}/tee-supplicant.service ${D}${systemd_system_unitdir}/tee-supplicant.service
 }
 
