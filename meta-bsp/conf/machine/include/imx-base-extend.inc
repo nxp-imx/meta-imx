@@ -32,4 +32,6 @@ MACHINEOVERRIDES_EXTENDER:mx8dxlb0:use-mainline-bsp = "imx-generic-bsp:imx-mainl
 MACHINEOVERRIDES_EXTENDER:mx93:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:imxpxp:mx9-generic-bsp:mx9-nxp-bsp:mx93-generic-bsp:mx93-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx93"
 MACHINE_SOCARCH_SUFFIX:mx93-nxp-bsp = "-mx93"
+
+WKS_FILE_DEPENDS:append:mx9-nxp-bsp = " imx-boot"
 SOC_DEFAULT_WKS_FILE:mx9-nxp-bsp ?= "imx-imx-boot-bootpart.wks.in"
