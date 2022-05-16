@@ -8,5 +8,7 @@ SRC_URI:remove = " \
     file://0001-Use-the-one-argument-version-of-SetTotalBytesLimit.patch \
 "
 
+PACKAGECONFIG[qt6] = "-DWITH_QT=ON -DQT_HOST_PATH=${RECIPE_SYSROOT_NATIVE}${prefix_native},-DWITH_QT=OFF,qtbase qtbase-native,"
+
 PACKAGECONFIG_OPENCL:mx8mnul-nxp-bsp = ""
 PACKAGECONFIG_OPENCL:mx8mpul-nxp-bsp = ""
