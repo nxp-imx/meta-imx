@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
 "
 
 SRCBRANCH = "imx_v0.2_y"
-SRCREV = "bae629863bb7cfc4e627d72bd02d39b192dd08ee"
+SRCREV = "24ca3570746548bb88252017250431086970ccec"
 
 IMX_JAILHOUSE_SRC ?= "git://source.codeaurora.org/external/imx/imx-jailhouse.git;protocol=ssh"
 SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH}"
