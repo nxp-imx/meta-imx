@@ -39,6 +39,7 @@ DO_CONFIG_V7_COPY = "no"
 DO_CONFIG_V7_COPY:mx6-nxp-bsp = "yes"
 DO_CONFIG_V7_COPY:mx7-nxp-bsp = "yes"
 DO_CONFIG_V7_COPY:mx8-nxp-bsp = "no"
+DO_CONFIG_V7_COPY:mx9-nxp-bsp = "no"
 
 # Add setting for LF Mainline build
 IMX_KERNEL_CONFIG_AARCH32 = "imx_v7_defconfig"
@@ -47,6 +48,7 @@ KBUILD_DEFCONFIG ?= ""
 KBUILD_DEFCONFIG:mx6-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH32}"
 KBUILD_DEFCONFIG:mx7-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH32}"
 KBUILD_DEFCONFIG:mx8-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH64}"
+KBUILD_DEFCONFIG:mx9-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH64}"
 
 
 # Use a verbatim copy of the defconfig from the linux-imx repo.
