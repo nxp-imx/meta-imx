@@ -19,6 +19,13 @@ ATF_MACHINE_NAME:mx8ulp-nxp-bsp = "bl31-imx8ulp.bin"
 IMX_EXTRA_FIRMWARE:mx8ulp-nxp-bsp = "firmware-upower firmware-sentinel"
 SOC_TARGET:mx8ulp-nxp-bsp = "iMX8ULP"
 SOC_FAMILY:mx8ulp-nxp-bsp = "mx8ulp"
+# Setting for i.MX 93
+IMX_M4_DEMOS:mx9-nxp-bsp = ""
+M4_DEFAULT_IMAGE:mx9-nxp-bsp = ""
+ATF_MACHINE_NAME:mx9-nxp-bsp = "bl31-imx93.bin"
+IMX_EXTRA_FIRMWARE:mx9-nxp-bsp = " firmware-imx-9 firmware-sentinel"
+SOC_TARGET:mx9-nxp-bsp = "iMX93"
+SOC_FAMILY:mx9-nxp-bsp = "mx93"
 
 REV_OPTION:mx8dxl-nxp-bsp = "ERROR_8DXL_REV_AMBIGUOUS"
 REV_OPTION:mx8dxlb0-nxp-bsp = "REV=B0"
@@ -64,6 +71,22 @@ compile_mx8ulp() {
     fi
 }
 
+compile_mx93() {
+    bbnote i.MX 93 boot binary build
+    for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
+        bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
+        cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${BOOT_STAGING}
+    done
+
+    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}/
+    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
+    cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${BOOT_STAGING}/u-boot.bin
+    if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${BOOT_STAGING}/u-boot-spl.bin
+    fi
+}
+
 do_deploy:append() {
     case ${SOC_FAMILY} in
     mx8)
@@ -89,3 +112,20 @@ deploy_mx8ulp() {
                                                              ${DEPLOYDIR}/${BOOT_TOOLS}
     fi
 }
+
+deploy_mx93() {
+    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
+
+    for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/${ddr_firmware}  ${DEPLOYDIR}/${BOOT_TOOLS}
+    done
+
+    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
+    install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
+    if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
+                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
+    fi
+}
+
+COMPATIBLE_MACHINE = "(mx8-generic-bsp|mx9-generic-bsp)"
