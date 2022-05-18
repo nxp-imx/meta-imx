@@ -22,9 +22,6 @@ REQUIRED_MACHINE_FEATURES = "optee"
 
 SYSTEMD_SERVICE:${PN} = "tee-supplicant.service"
 
-OPTEE_ARCH:arm = "arm32"
-OPTEE_ARCH:aarch64 = "arm64"
-
 EXTRA_OEMAKE = " \
 	-C ${S} O=${B} \
 "
