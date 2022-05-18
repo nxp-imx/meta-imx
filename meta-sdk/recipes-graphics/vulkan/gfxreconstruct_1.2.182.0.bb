@@ -5,10 +5,11 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d2ddcd9b5c3b713fcf90c3223f6b10bd"
 
 SRC_URI = " \
-    git://github.com/LunarG/gfxreconstruct;protocol=https;branch=sdk-1.3.204 \
+    git://github.com/LunarG/gfxreconstruct.git;protocol=https;branch=dev \
     file://0001-FindVulkanVersion.cmake-Look-for-vulkan-headers-in-s.patch \
+    file://0002-make-s_alt_stack-dynamic-save-and-use-probed-size.patch \
 "
-SRCREV = "5fd460db416b6dc33a27639d8ad2ed4fe6f3719c"
+SRCREV = "75bc5b32da36cb172d57ef28f55d14458279c6f1"
 S = "${WORKDIR}/git"
 
 inherit cmake features_check
