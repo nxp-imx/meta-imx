@@ -16,7 +16,7 @@ do_install:append () {
 
     # Configure the network as unmanaged
     if [ "${@bb.utils.filter('PACKAGECONFIG', 'unmanaged-network', d)}" ]; then
-        install -Dm 0644 ${WORKDIR}/90-unmanage.network ${D}${sysconfdir}/systemd/network/
+        install -Dm 0644 ${WORKDIR}/89-unmanage.network ${D}${sysconfdir}/systemd/network/
     fi
 
     # Add special touchscreen rules
