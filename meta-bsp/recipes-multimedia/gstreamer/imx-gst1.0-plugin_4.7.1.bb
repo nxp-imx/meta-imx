@@ -41,6 +41,7 @@ PLATFORM:mx6sll-nxp-bsp = "MX6SLL"
 PLATFORM:mx7-nxp-bsp= "MX7D"
 PLATFORM:mx7ulp-nxp-bsp= "MX7ULP"
 PLATFORM:mx8-nxp-bsp = "MX8"
+PLATFORM:mx9-nxp-bsp = "MX9"
 
 # Todo add a mechanism to map possible build targets
 EXTRA_OEMESON = "-Dplatform=${PLATFORM} \
