@@ -13,7 +13,7 @@ S = "${WORKDIR}/git"
 inherit qt6-cmake
 
 DEPENDS = "qtdeclarative qtdeclarative-native qtshadertools-native"
-RDEPENDS_${PN} = "liberation-fonts qtdeclarative-qmlplugins"
+RDEPENDS:${PN} = "liberation-fonts qtdeclarative-qmlplugins"
 
 require recipes-qt/qt6/qt6.inc
 
@@ -31,4 +31,4 @@ do_install() {
     chmod +x ${D}${bindir}/qt6-cinematic-experience
 }
 
-FILES_${PN} += "${datadir}"
+FILES:${PN} += "${datadir}"
