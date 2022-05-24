@@ -8,7 +8,7 @@ DEPENDS = "imx-gpu-viv"
 NN_IMX_SRC ?= "git://source.codeaurora.org/external/imx/nn-imx.git;protocol=https"
 SRCBRANCH = "imx_1.3.0"
 
-SRCREV = "1a9aa6ae78e6de13291754b6fc17da7178cdd110"
+SRCREV = "87e262fc89a7f4819b35188f9b2e7117b8563b89"
 
 SRC_URI = "${NN_IMX_SRC};branch=${SRCBRANCH}"
 
