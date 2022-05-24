@@ -47,12 +47,12 @@ EXTRA_OECMAKE += "\
 PYTHON_DEPENDS = "${PYTHON_PN} ${PYTHON_PN}-pip-native ${PYTHON_PN}-wheel-native ${PYTHON_PN}-setuptools-native ${PYTHON_PN}-numpy-native"
 PYTHON_RDEPENDS = "${PYTHON_PN} ${PYTHON_PN}-numpy ${PYTHON_PN}-protobuf flatbuffers-${PYTHON_PN}"
 
-PACKAGECONFIG_VSI_NPU       = ""
-PACKAGECONFIG_VSI_NPU:mx8-nxp-bsp   = "vsi_npu"
-PACKAGECONFIG_VSI_NPU:mx8mm-nxp-bsp = ""
-PACKAGECONFIG_VSI_NPU:mx8mnul-nxp-bsp = ""
-PACKAGECONFIG_VSI_NPU:mx8mpul-nxp-bsp = ""
-PACKAGECONFIG_VSI_NPU:mx8ulp-nxp-bsp = ""
+PACKAGECONFIG_VSI_NPU                    = ""
+PACKAGECONFIG_VSI_NPU:mx8-nxp-bsp:imxgpu = "vsi_npu"
+PACKAGECONFIG_VSI_NPU:mx8mm-nxp-bsp      = ""
+# The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
+# support OpenVX
+PACKAGECONFIG_VSI_NPU:mx8ulp-nxp-bsp     = ""
 
 PACKAGECONFIG ?= "openmp reports sharedlib eigenblas nnapi python ${PACKAGECONFIG_VSI_NPU}"
 
