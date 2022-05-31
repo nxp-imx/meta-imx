@@ -3,6 +3,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 require imx-mkimage_git.inc
 
+DEPLOY_OPTEE_STMM = "${@bb.utils.contains('MACHINE_FEATURES', 'optee stmm', 'true', 'false', d)}"
+
 IMX_M4_DEMOS      = ""
 IMX_M4_DEMOS:mx8-nxp-bsp  = "imx-m4-demos:do_deploy"
 IMX_M4_DEMOS:mx8m-nxp-bsp = ""
@@ -77,6 +79,15 @@ do_deploy:append() {
         install -m 0644 ${BOOT_STAGING}/m33_image.bin        ${DEPLOYDIR}/${BOOT_TOOLS}
         ;;
     esac
+
+    if ${DEPLOY_OPTEE_STMM}; then
+        # Rename tee.bin to tee.bin-stmm
+        mv ${DEPLOYDIR}/${BOOT_TOOLS}/tee.bin ${DEPLOYDIR}/${BOOT_TOOLS}/tee.bin-stmm
+        # Rename flash.bin name with postfix "_stmm"
+        for target in ${IMXBOOT_TARGETS}; do
+            mv ${DEPLOYDIR}/${BOOT_CONFIG_MACHINE}-${target} ${DEPLOYDIR}/${BOOT_CONFIG_MACHINE}-${target}_stmm
+        done
+    fi
 
 }
 
