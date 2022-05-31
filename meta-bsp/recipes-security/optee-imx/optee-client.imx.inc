@@ -29,7 +29,10 @@ EXTRA_OEMAKE = " \
 do_install () {
 	oe_runmake install DESTDIR=${D}
 	install -D -p -m0644 ${WORKDIR}/tee-supplicant.service ${D}${systemd_system_unitdir}/tee-supplicant.service
-	sed -i -e s:/etc:${sysconfdir}:g -e s:/usr/sbin:${bindir}:g ${D}${systemd_system_unitdir}/tee-supplicant.service
+	sed -i \
+		-e s:/etc:${sysconfdir}:g \
+		-e s:/usr/sbin:${sbindir}:g \
+		${D}${systemd_system_unitdir}/tee-supplicant.service
 }
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
