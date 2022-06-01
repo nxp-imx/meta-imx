@@ -5,15 +5,15 @@ DESCRIPTION = "NXP IMX SECO firmware"
 SECTION = "base"
 LICENSE = "Proprietary"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=be5ff43682ed6c57dfcbeb97651c2829"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d3c315c6eaa43e07d8c130dc3a04a011"
 
 require imx-seco.inc
 inherit fsl-eula-unpack deploy
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "7719c2fabdbda99862546567a802b6ae"
-SRC_URI[sha256sum] = "2efb1ac1cb3c7701db2a6702baacf816b1d05e7b93ab2f3d3a0023b615fa00e3"
+SRC_URI[md5sum] = "86eeac55ade1e80c073c2ed14a8bf715"
+SRC_URI[sha256sum] = "0dfe5bf1c88923ea8b00caacc4804aff3148785f125f6fc36a80d0d0da1bb7b8"
 
 do_compile[noexec] = "1"
 
