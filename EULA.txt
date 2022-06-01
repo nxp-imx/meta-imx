@@ -1,4 +1,4 @@
-_OPT_NXP_Software_License v35 May 2022
+LA_OPT_NXP_Software_License v35 May 2022
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
 downloading, installing, or using the Licensed Software, you indicate that you
