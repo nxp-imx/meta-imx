@@ -10,17 +10,18 @@ LIC_FILES_CHKSUM = "\
 DEPENDS = "\
 	bison-native \
 	flex-native \
+	orc-native \
 	glib-2.0 \
 	gstreamer1.0 \
 	gstreamer1.0-plugins-base \
 	gtest \
 	libpng \
-	orc-native \
 "
 
 SRCREV = "354a149d8d174ad40f758bb19c6a6718f95d3103"
 SRC_URI = "\
     git://github.com/nnstreamer/nnstreamer.git;branch=main;protocol=https \
+    file://0001-decoder-bounding_box-Fix-ssd-box-decoding-without-po.patch \
 "
 
 S = "${WORKDIR}/git"

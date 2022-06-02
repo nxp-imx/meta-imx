@@ -1,0 +1,43 @@
+From ad3d7be280196229d2291276628ec92ff8a13893 Mon Sep 17 00:00:00 2001
+From: Julien Vuillaumier <julien.vuillaumier@nxp.com>
+Date: Tue, 31 May 2022 10:43:29 +0200
+Subject: [PATCH] [decoder/bounding_box] Fix ssd box decoding without
+ postprocessing
+
+Boxes whose detection scores do not exceed the specified sigmoid
+threshold shall never be reported as valid.
+
+This changeset fixes current implementation whereby valid field
+for a box is set only when its detection scores have passed the
+threshold tests. Thus, if score test is not passed, valid field for
+a box is inherited from the previous box score tests.
+
+Therefore without this change, whenever one box passes the score
+criteria, every subsequent boxes will be reported as valid, even though
+their detection scores are low.
+As a consequence, a very big number of boxes may be passed to the
+next stage of NMS processing which causes processing overhead.
+
+Upstream-Status: Accepted for 2.2.0
+(https://github.com/nnstreamer/nnstreamer/pull/3773)
+
+Signed-off-by: Julien Vuillaumier <julien.vuillaumier@nxp.com>
+---
+ ext/nnstreamer/tensor_decoder/tensordec-boundingbox.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/ext/nnstreamer/tensor_decoder/tensordec-boundingbox.c b/ext/nnstreamer/tensor_decoder/tensordec-boundingbox.c
+index 64d5fe39..149f09bf 100644
+--- a/ext/nnstreamer/tensor_decoder/tensordec-boundingbox.c
++++ b/ext/nnstreamer/tensor_decoder/tensordec-boundingbox.c
+@@ -1139,6 +1139,7 @@ typedef struct
+     float x_scale = data->params[MOBILENET_SSD_PARAMS_X_SCALE_IDX]; \
+     float h_scale = data->params[MOBILENET_SSD_PARAMS_H_SCALE_IDX]; \
+     float w_scale = data->params[MOBILENET_SSD_PARAMS_W_SCALE_IDX]; \
++    result->valid = FALSE; \
+     for (c = 1; c < total_labels; c++) { \
+       if (detinputptr[c] >= sigmoid_threshold) { \
+         gfloat score = _expit (detinputptr[c]); \
+-- 
+2.25.1
+
