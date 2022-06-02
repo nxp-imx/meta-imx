@@ -1,1 +1,8 @@
-PACKAGECONFIG:remove:imxgpu = "x11"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+SRC_URI += "file://0001-cmake-Don-t-enable-GLX-if-tests-are-disabled.patch"
+
+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 glx', '', d)}"
+PACKAGECONFIG:remove:imxgpu = "glx"
+
+PACKAGECONFIG[glx] = "-DPIGLIT_BUILD_GLX_TESTS=ON,-DPIGLIT_BUILD_GLX_TESTS=OFF"
