@@ -37,6 +37,7 @@ PLATFORM_FLAVOR:mx8dx-nxp-bsp     = "mx8dxmek"
 PLATFORM_FLAVOR:mx8dxl-nxp-bsp    = "mx8dxlevk"
 PLATFORM_FLAVOR:mx8mnul-nxp-bsp   = "mx8mnevk"
 PLATFORM_FLAVOR:mx8ulp-nxp-bsp    = "mx8ulpevk"
+PLATFORM_FLAVOR:mx93-nxp-bsp      = "mx93evk"
 
 EXTRA_OEMAKE = " \
     PLATFORM=imx-${PLATFORM_FLAVOR} \
