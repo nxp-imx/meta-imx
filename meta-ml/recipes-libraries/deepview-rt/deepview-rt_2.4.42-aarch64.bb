@@ -20,9 +20,6 @@ do_install () {
     cp -r  ${S}/modelrunner/bin/* ${D}${bindir}
     cp -rP ${S}/modelrunner/lib/* ${D}${libdir}
     cp -rP ${S}/${BPN}/lib/* ${D}${libdir}
-    if ! [ "${@bb.utils.filter('PACKAGECONFIG', 'openvx', d)}" ]; then
-        rm ${D}${libdir}/deepview-rt-openvx.so
-    fi
     cp -r  ${S}/${BPN}/include/* ${D}${includedir}
  
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
@@ -34,6 +31,8 @@ do_install () {
 
 FILES_SOLIBSDEV = ""
 
+PACKAGES =+ "${PN}-openvx"
+
 FILES:${PN} += "${libdir}/*"
 
 RDEPENDS:${PN} = " \
@@ -42,7 +41,7 @@ RDEPENDS:${PN} = " \
     ${RDEPENDS_OPENVX} \
 "
 RDEPENDS_OPENVX                    = ""
-RDEPENDS_OPENVX:mx8-nxp-bsp:imxgpu = "libopenvx-imx"
+RDEPENDS_OPENVX:mx8-nxp-bsp:imxgpu = "deepview-rt-openvx"
 RDEPENDS_OPENVX:mx8mm-nxp-bsp      = ""
 # The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
 # support OpenVX
@@ -53,6 +52,9 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 
 INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
+
+FILES:${PN}-openvx = "${libdir}/deepview-rt-openvx.so"
+RDEPENDS:${PN}-openvx = "libopenvx-imx"
 
 BBCLASSEXTEND = "nativesdk"
 
