@@ -3,13 +3,13 @@ NXP Software Content Register
 Release - Linux 5.15.32-2.0.0
  June 2022
 
-Outgoing License: LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies
+Outgoing License: LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:     COPYING
 
 Yocto Project recipe manifest:
 repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-kirkstone -m imx_5.15.32-2.0.0.xml
 
-Release tag: rel_imx_5.15.32-2.0.0
+Release tag: lf-5.15.32-2.0.0
 
 --------------------------------------------
 BSP Packages
@@ -22,7 +22,7 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    The Linux kernel with i.MX-specific drivers
-Release Location:            https://source.codeaurora.org/external/imx/linux-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/linux-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (GPL-2.0)
                              kernel.org (GPL-2.0) - https://www.kernel.org/
 
@@ -35,7 +35,7 @@ License File:                Licenses/gpl-2.0.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Bootloader with i.MX-specific capabilities
-Release Location:            https://source.codeaurora.org/external/imx/uboot-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/uboot-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (GPL-2.0)
                              Das U-Boot - Universal Bootloader (GPL-2.0) - http://www.denx.de/wiki/U-Boot/WebHome
                              Android Open Source Project (BSD-2-Clause) - https://source.android.com/
@@ -50,7 +50,7 @@ License File:                docs/license.rst
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    ARM Trusted Firmware
-Release Location:            https://source.codeaurora.org/external/imx/imx-atf -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/imx-atf -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-3-clause)
                              arm-trusted-firmware - ARM Limited (BSD-3-clause) - http://github.com/ARM-software/arm-trusted-firmware/
 
@@ -58,7 +58,7 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     imx-sc-firmware-1.13.0.bin
 Version:                     1.13.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -71,7 +71,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     firmware-imx-8.16.bin
 Version:                     8.16
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -101,9 +101,9 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-sentinel-0.4.bin
-Version:                     0.4
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Package:                     firmware-sentinel-0.5.bin
+Version:                     0.5
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -115,7 +115,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     firmware-upower-0.1.3.bin
 Version:                     0.1.3
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -132,7 +132,7 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Make Image BootLoader
-Release Location:            https://source.codeaurora.org/external/imx/imx-mkimage -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/imx-mkimage -b lf-5.15.32-2.0.0
 Origin:                      NXP (GPL-2.0)
                              Das U-Boot - Universal Bootloader (GPL-2.0) - http://www.denx.de/wiki/U-Boot/WebHome
 
@@ -157,7 +157,7 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Linux unit test applications
-Release Location:            https://source.codeaurora.org/external/imx/imx-test -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/imx-test -b lf-5.15.32-2.0.0
 Origin:                      NXP (GPL-2.0)
                              module_test: NXP (GPL-2.0+)
                                   Hantro Products Oy. (GPL-2.0+)
@@ -223,7 +223,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -242,14 +242,14 @@ License File:                mxm_wifiex/wlan_src/gpl-2.0.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP Wi-Fi linux SDK
-Release Location:            https://source.codeaurora.org/external/imx/mwifiex -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/mwifiex -b lf-5.15.32-2.0.0
 Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
 Package:                     imx-seco-3.8.6.bin
 Version:                     3.8.6
-Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -261,12 +261,12 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-seco-libs.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    BSP source - SECO
-Release Location:            https://github.com/NXP/imx-seco-libs.git -b rel_imx_5.15.32-2.0.0
+Release Location:            https://github.com/NXP/imx-seco-libs.git -b lf-5.15.32-2.0.0
 Origin:                      NXP (proprietary)
 
 --------------------------------------------
@@ -336,7 +336,7 @@ License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Open Portable Trusted Execution Environment for TEE Client library
-Release Location:            https://source.codeaurora.org/external/imx/imx-optee-client -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/imx-optee-client -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-2-Clause)
                              optee_client (BSD-2-Clause) - https://github.com/OP-TEE/optee_client
 
@@ -349,7 +349,7 @@ License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Open Portable Trusted Execution Environment for Linux on ARM
-Release Location:            https://source.codeaurora.org/external/imx/imx-optee-os -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/imx-optee-os -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-2-Clause)
                              OP-TEE Trusted OS (BSD-2-Clause) - https://github.com/OP-TEE/optee_os
                              Mbed TLS (Apache-2.0) - https://github.com/ARMmbed/mbedtls/ 
@@ -363,7 +363,7 @@ License File:                LICENSE.md
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Open Portable Trusted Execution Environment sanity tests
-Release Location:            https://source.codeaurora.org/external/imx/imx-optee-test -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/imx-optee-test -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-2-Clause)
                              optee_test (BSD-2-Clause) - https://github.com/OP-TEE/optee_test
 
@@ -376,15 +376,27 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A partitioning Hypervisor based on Linux
-Release Location:            https://source.codeaurora.org/external/imx/imx-jailhouse -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/imx-jailhouse -b lf-5.15.32-2.0.0
 Origin:                      NXP (GPL-2.0)
                              Siemens AG (GPL-2.0) - https://github.com/siemens/jailhouse
 
 --------------------------------------------
 
+Package:                     imx-secure-enclave.git
+Version:                     
+Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 - Additional distribution license granted - Section 2.3 applies
+License File:                EULA.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    i.MX8 SHE driver
+Release Location:            https://github.com/NXP/imx-secure-enclave.git -b lf-5.15.32-2.0.0
+Origin:                      NXP (proprietary)
+
+--------------------------------------------
+
 Package:                     ml-security-1.0.6.bin
 Version:                     1.0.6
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -401,7 +413,7 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP i.MX Security Middleware Library
-Release Location:            https://source.codeaurora.org/external/imx/imx-smw -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/imx-smw -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
@@ -413,14 +425,14 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP i.MX keyctl tool to manage CAAM Keys
-Release Location:            https://source.codeaurora.org/external/imx/keyctl_caam -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/keyctl_caam -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
 Package:                     ecdsa-lib-imx-3.3.2.3.bin
 Version:                     3.3.2.3
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -438,7 +450,7 @@ License File:                BSD-3-Clause.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    V2X Secure Element library
-Release Location:            https://source.codeaurora.org/external/imx/v2xsehsm -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/v2xsehsm -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
@@ -450,7 +462,7 @@ License File:                BSD-3-Clause.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    V2X Test Suite
-Release Location:            https://source.codeaurora.org/external/imx/vtest -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/vtest -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
@@ -462,7 +474,7 @@ License File:                license/bsd-3-clause.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Data Plane Development Kit
-Release Location:            https://source.codeaurora.org/external/qoriq/qoriq-components/dpdk -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/qoriq/qoriq-components/dpdk -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-3-Clause)
                              DPDK - Intel Corporation (BSD-3-Clause) - https://github.com/DPDK/dpdk
                              KNI Linux Device driver - Intel Corporation (GPL-2.0) Separate component of DPDK
@@ -480,14 +492,14 @@ License File:                vvcam/LICENSE
 Package Category:            Graphics
 Type of Content:             ISP Kernel Module source
 Description and comments:    Kernel Loadable Module for ISP
-Release Location:            https://source.codeaurora.org/external/imx/isp-vvcam -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/isp-vvcam -b lf-5.15.32-2.0.0
 Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 
 --------------------------------------------
 
 Package:                     isp-imx-4.2.2.18.0.bin
 Version:                     4.2.2.18.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -499,7 +511,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (proprietary)
 
 Package:                     basler-camera-4.2.2.18.0.bin
 Version:                     4.2.2.18.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -517,7 +529,7 @@ License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    GPU Core IP and test application source
-Release Location:            https://source.codeaurora.org/external/imx/apitrace-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/apitrace-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (MIT)
                              apitrace (MIT) - https://github.com/apitrace/apitrace
 
@@ -525,7 +537,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-gpu-viv-6.4.3.p4.2-aarch32.bin
 Version:                     6.4.3.p4.2
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -544,7 +556,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-gpu-viv-6.4.3.p4.2-aarch64.bin
 Version:                     6.4.3.p4.2
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -603,7 +615,7 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     imx-dpu-g2d-2.1.0.bin
 Version:                     2.1.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -620,7 +632,7 @@ License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    i.MX DRM Direct Rendering Manager
-Release Location:            https://source.codeaurora.org/external/imx/libdrm-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/libdrm-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (MIT)
 
 --------------------------------------------
@@ -632,7 +644,7 @@ License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Wayland protocol development
-Release Location:            https://source.codeaurora.org/external/imx/wayland-protocols-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/wayland-protocols-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (MIT)
                              Weston (MIT) - https://anongit.freedesktop.org/git/wayland/wayland-protocols.git
 
@@ -645,7 +657,7 @@ License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    A reference implementation of a Wayland compositor
-Release Location:            https://source.codeaurora.org/external/imx/weston-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/weston-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (MIT)
                              Weston (MIT) - http://github.com/wayland-project/weston/
 
@@ -658,14 +670,14 @@ License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Sample program to monitor i.MX GPU performance data
-Release Location:            https://source.codeaurora.org/external/imx/imx-gputop -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/imx-gputop -b lf-5.15.32-2.0.0
 Origin:                      NXP (MIT)
 
 --------------------------------------------
 
 Package:                     imx-gpu-g2d-6.4.3.p4.2-arm.bin
 Version:                     6.4.3.p4.2
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -677,7 +689,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-gpu-g2d-6.4.3.p4.2-aarch64.bin
 Version:                     6.4.3.p4.2
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -694,14 +706,14 @@ License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
-Release Location:            https://github.com/NXPmicro/g2d-samples -b rel_imx_5.15.32-2.0.0
+Release Location:            https://github.com/NXPmicro/g2d-samples -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p4.2-aarch64-wayland.bin
 Version:                     6.4.3.p4.2
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -713,7 +725,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     libgpuperfcnt-6.4.3.p4.2-arm-fb.bin
 Version:                     6.4.3.p4.2
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -725,7 +737,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     libgpuperfcnt-6.4.3.p4.2-arm-wayland.bin
 Version:                     6.4.3.p4.2
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -742,7 +754,7 @@ License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    i.MX Neural Networks Accelerator Plugin
-Release Location:            https://source.codeaurora.org/external/imx/nn-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/nn-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (MIT)
                              Vivante Corporation (MIT)
                              Boost Software (Boost) - https://www.boost.org/
@@ -760,7 +772,7 @@ License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    i.MX OpenCV
-Release Location:            https://source.codeaurora.org/external/imx/opencv-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/opencv-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-3-Cluse)
                              OpenCV Foundation (BSD-3-Clause) - https://github.com/opencv/opencv
                                 Intel Corporation  (BSD-3-Clause)
@@ -778,7 +790,7 @@ License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    ARM Compute Library fork
-Release Location:            https://source.codeaurora.org/external/imx/arm-computelibrary-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/arm-computelibrary-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (MIT)
                              ARM Software (MIT) - https://github.com/ARM-software/ComputeLibrary
 
@@ -788,7 +800,7 @@ Multimedia Packages
 
 Package:                     imx-codec-4.7.0.bin
 Version:                     4.7.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -805,7 +817,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-parser-4.7.0.bin
 Version:                     4.7.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -822,7 +834,7 @@ License File:                COPYING-LGPL-2.1
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    i.MX Gstreamer 1.0 plugins
-Release Location:            https://source.codeaurora.org/external/imx/imx-gst1.0-plugin -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/imx-gst1.0-plugin -b lf-5.15.32-2.0.0
 Origin:                      NXP (LGPL-2.1)
                              Gstreamer plugins-Base (LGPL-2.1+) - http://gstreamer.freedesktop.org/src/gst-plugins-base/
                              Gstreamer plugins-Good (LGPL-2.1+) - http://gstreamer.freedesktop.org/src/gst-plugins-good/
@@ -837,7 +849,7 @@ License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Open Source Multimedia Farmework
-Release Location:            https://source.codeaurora.org/external/imx/gstreamer -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/gstreamer -b lf-5.15.32-2.0.0
 Origin:                      NXP (LGPL-2.1)
                              GStreamer (LGPL-2.1+) - http://gstreamer.freedesktop.org/src/gstreamer/
 
@@ -850,7 +862,7 @@ License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Gstreamer plugins with good quality code and correct functionality
-Release Location:            https://source.codeaurora.org/external/imx/gst-plugins-good -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/gst-plugins-good -b lf-5.15.32-2.0.0
 Origin:                      NXP (LGPL-2.1)
                              Gstreamer plugins-Good (LGPL-2.1+) - http://gstreamer.freedesktop.org/src/gst-plugins-good/
 
@@ -863,7 +875,7 @@ License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Collection of well-groomed and well-maintained Gstreamer plugins
-Release Location:            https://source.codeaurora.org/external/imx/gst-plugins-base -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/gst-plugins-base -b lf-5.15.32-2.0.0
 Origin:                      NXP (LGPL-2.1)
                              Gstreamer plugins-Base (LGPL-2.1+) - http://gstreamer.freedesktop.org/src/gst-plugins-base/
 
@@ -876,7 +888,7 @@ License File:                COPYING.LIB
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Gstreamer plug-ins that aren't up to par compared to the rest. Close to good quality but missing something.
-Release Location:            https://source.codeaurora.org/external/imx/gst-plugins-bad -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/gst-plugins-bad -b lf-5.15.32-2.0.0
 Origin:                      NXP (LGPL-2.1)
                              Gstreamer plugins-Bad (LGPL-2.1+) - http://gstreamer.freedesktop.org/src/gst-plugins-bad/
 
@@ -884,7 +896,7 @@ Origin:                      NXP (LGPL-2.1)
 
 Package:                     imx-dspc-asrc-1.0.1.bin
 Version:                     1.0.1
-Outgoing License:            LA_OPT_NXP_Software_License v8 June 2019 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v8 June 2019 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -897,7 +909,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-sw-pdm-1.0.2.bin
 Version:                     1.0.2
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -909,12 +921,12 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-vpuwrap.git
 Version:                     git
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    i.MX VPU wrapper library
-Release Location:            https://github.com/NXP/imx-vpuwrap.git -b rel_imx_5.15.32-2.0.0
+Release Location:            https://github.com/NXP/imx-vpuwrap.git -b lf-5.15.32-2.0.0
 Origin:                      NXP (proprietary)
                              sqlite (Public Domain) - http://www.hwaci.com/sw/sqlite/index.html
 
@@ -922,7 +934,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-vpu-5.4.39.3.bin
 Version:                     5.4.39.3
-Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -935,7 +947,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-vpu-hantro-1.26.0.bin
 Version:                     1.26.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -964,7 +976,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-vpu-hantro-vc-1.8.0.bin
 Version:                     1.8.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -992,7 +1004,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-dsp-2.0.0.bin
 Version:                     2.0.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1006,7 +1018,7 @@ Origin:             NXP (proprietary)
 
 Package:                     imx-dsp-codec-ext-2.0.0.bin
 Version:                     2.0.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1025,7 +1037,7 @@ License File:                LICENSE
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP Audio-Front-end is the software wrapper for ALSA
-Release Location:            https://source.codeaurora.org/external/imx/nxp-afe -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/nxp-afe -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
@@ -1034,7 +1046,7 @@ M4 Processor Packages
 
 Package:                     imx7ulp-m4-demo-2.11.0.bin
 Version:                     2.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v32 January 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v32 January 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1048,7 +1060,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8dxl-m4-demo-2.9.0.bin
 Version:                     2.9.0
-Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v17 October 2020 - Production Use - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1062,7 +1074,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mm-m4-demo-2.11.1.bin
 Version:                     2.11.1
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1076,7 +1088,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mq-m4-demo-2.11.1.bin
 Version:                     2.11.1
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1090,7 +1102,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8qm-m4-demo-2.9.0.bin
 Version:                     2.9.0
-Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Production Use - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1104,7 +1116,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8qx-m4-demo-2.9.0.bin
 Version:                     2.9.0
-Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v19 February 2021 - Production Use - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1120,7 +1132,7 @@ M7 Processor Packages
 
 Package:                     imx8mn-m7-demo-2.11.1.bin
 Version:                     2.11.1
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1134,7 +1146,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mnddr3l-m7-demo-2.11.1.bin
 Version:                     2.11.1
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1148,7 +1160,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mp-m7-demo-2.11.1.bin
 Version:                     2.11.1
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1165,7 +1177,7 @@ M33 Processor Packages
 
 Package:                     imx8ulp-m33-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1182,7 +1194,7 @@ MachineLearning Packages
 
 Package:                     deepview-rt-2.4.42-aarch64.bin
 Version:                     2.4.42-aarch64
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
@@ -1194,7 +1206,7 @@ Origin:                      Au-Zone Technologies (proprietary)
 
 Package:                     deepview-rt-examples-1.5.bin
 Version:                     1.5
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 - Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
@@ -1212,7 +1224,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Open Deep Learning Compiler Stack
-Release Location:            https://source.codeaurora.org/external/imx/eiq-tvm-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/eiq-tvm-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (Apache-2.0)
                              Apache TVM (Apache-2.0) - https://github.com/apache/tvm
 
@@ -1225,7 +1237,7 @@ License File:                COPYING.LESSER
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    A GStreamer NNstreamer pipelines real-time profiling plugin
-Release Location:            https://source.codeaurora.org/external/imx/nnshark -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/nnshark -b lf-5.15.32-2.0.0
 Origin:                      NXP (LGPL-2.1)
                              GstShark (LGPL-2.1) - https://github.com/RidgeRun/gst-shark
 
@@ -1240,7 +1252,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Onnxruntime cross-platform scoring engine
-Release Location:            https://source.codeaurora.org/external/imx/onnxruntime-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/onnxruntime-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (MIT)
                              Microsoft/onnxruntime (MIT) - https://github.com/Microsoft/onnxruntime
                              Google's Protocol Buffer (BSD-3-clause) - https://tracker.debian.org/pkg/protobuf
@@ -1255,7 +1267,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensors and Dynamic neural networks in Python with strong GPU acceleration
-Release Location:            https://github.com/NXPmicro/pytorch-release -b rel_imx_5.15.32-2.0.0
+Release Location:            https://github.com/NXPmicro/pytorch-release -b lf-5.15.32-2.0.0
 Origin:                      NXP (BSD-3-Clause)
                              pytorch (BSD-3-clause) - https://github.com/pytorch/pytorch
 
@@ -1264,11 +1276,11 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     tensorflow-imx.git
 Version:                     2.8.0
 Outgoing License:            Apache-2.0 
-License File:                LICENSE.txt
+License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite C++ Library
-Release Location:            https://source.codeaurora.org/external/imx/tensorflow-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/tensorflow-imx -b lf-5.15.32-2.0.0
 Origin:                      NXP (Apache-2.0)
                              TensorFlow (Apache-2.0) - https://github.com/tensorflow/tensorflow/
 
@@ -1291,7 +1303,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite VX Delegate
-Release Location:            https://source.codeaurora.org/external/imx/tflite-vx-delegate-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://source.codeaurora.org/external/imx/tflite-vx-delegate-imx -b lf-5.15.32-2.0.0
 Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/VeriSilicon/tflite-vx-delegate.git
                              The TensorFlow Authors (Apache-2.0) - https://cs.opensource.google/tensorflow/tensorflow/+/master:tensorflow/lite/examples/minimal/
 
@@ -1304,7 +1316,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensor Interface Module for OpenVX
-Release Location:            https://github.com/nxp/tim-vx-imx -b rel_imx_5.15.32-2.0.0
+Release Location:            https://github.com/nxp/tim-vx-imx -b lf-5.15.32-2.0.0
 Origin:                      Vivante Corporation (MIT)
                              The Khronos Group Inc. (Apache-2.0) - https://www.khronos.org/
                              The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
