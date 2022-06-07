@@ -35,3 +35,7 @@ MACHINE_SOCARCH_SUFFIX:mx93-nxp-bsp = "-mx93"
 
 WKS_FILE_DEPENDS:append:mx9-nxp-bsp = " imx-boot"
 SOC_DEFAULT_WKS_FILE:mx9-nxp-bsp ?= "imx-imx-boot-bootpart.wks.in"
+
+# Graphics libraries
+PREFERRED_PROVIDER_virtual/libgles3:imxgpu3d ?= "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/opencl-icd:imxgpu ?= "imx-gpu-viv"
