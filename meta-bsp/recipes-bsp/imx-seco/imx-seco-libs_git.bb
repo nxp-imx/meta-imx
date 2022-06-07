@@ -15,7 +15,7 @@ SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
         file://0002-Makefile-Fix-install-to-clear-host-user-contaminated.patch \
         file://0001-add-v2x_test-to-the-installed-binaries.patch \
 "
-SRCREV = "6c41488e9fd3d5804eca13e338f1869baacf639c"
+SRCREV = "c24e99b750bd48668a2fcdc6a11a1f1c09b6ef17"
 
 S = "${WORKDIR}/git"
 
