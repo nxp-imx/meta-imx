@@ -22,13 +22,24 @@ SRCREV = "354a149d8d174ad40f758bb19c6a6718f95d3103"
 SRC_URI = "\
     git://github.com/nnstreamer/nnstreamer.git;branch=main;protocol=https \
     file://0001-decoder-bounding_box-Fix-ssd-box-decoding-without-po.patch \
+    file://0001-filter-deepview-rt-Add-filter-subplugin-for-DeepView.patch \
 "
+
+# Use git instead of quilt as patch tool to support patches with binary content
+PATCHTOOL = "git"
 
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 
-PACKAGECONFIG ??= "protobuf python3 tensorflow-lite "
+PACKAGECONFIG ??= "protobuf python3 tensorflow-lite deepview-rt "
+
+PACKAGECONFIG[deepview-rt] = "\
+       -Ddeepview-rt-support=enabled, \
+       -Ddeepview-rt-support=disabled, \
+       deepview-rt, \
+       ,,\
+"
 
 PACKAGECONFIG[flatbuf] = "\
 	-Dflatbuf-support=enabled, \
@@ -77,6 +88,7 @@ do_install:append() {
 PACKAGES =+ "\
 	${PN}-unittest \
 	${@bb.utils.contains('PACKAGECONFIG', 'armnn','${PN}-armnn', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'deepview-rt','${PN}-deepview-rt', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
@@ -92,6 +104,7 @@ RDEPENDS:${PN} = "\
 
 RDEPENDS:${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
 	${@bb.utils.contains('PACKAGECONFIG', 'armnn','${PN}-armnn', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'deepview-rt','${PN}-deepview-rt', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
@@ -110,6 +123,10 @@ FILES:${PN} += "\
 
 FILES:${PN}-armnn = "\
 	${libdir}/nnstreamer/filters/libnnstreamer_filter_armnn.so \
+"
+
+FILES:${PN}-deepview-rt = "\
+	${libdir}/nnstreamer/filters/libnnstreamer_filter_deepview-rt.so \
 "
 
 FILES:${PN}-dev = "\
