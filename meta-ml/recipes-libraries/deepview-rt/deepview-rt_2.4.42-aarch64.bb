@@ -11,6 +11,16 @@ S = "${WORKDIR}/${BPN}-${PV}"
 
 inherit fsl-eula-unpack python3native
 
+PACKAGECONFIG ?= "${PACKAGECONFIG_OPENVX}"
+PACKAGECONFIG_OPENVX                    = ""
+PACKAGECONFIG_OPENVX:mx8-nxp-bsp:imxgpu = "openvx"
+PACKAGECONFIG_OPENVX:mx8mm-nxp-bsp      = ""
+# The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
+# support OpenVX
+PACKAGECONFIG_OPENVX:mx8ulp-nxp-bsp     = ""
+
+PACKAGECONFIG[openvx] = ",,,deepview-rt-openvx libopenvx-imx"
+
 do_install () {
     install -d ${D}${bindir}
     install -d ${D}${libdir}
@@ -21,6 +31,9 @@ do_install () {
     cp -rP ${S}/modelrunner/lib/* ${D}${libdir}
     cp -rP ${S}/${BPN}/lib/* ${D}${libdir}
     cp -r  ${S}/${BPN}/include/* ${D}${includedir}
+    if ${@bb.utils.contains('PACKAGECONFIG', 'openvx', 'false', 'true', d)} ; then
+        rm ${D}{libdir}/deepview-rt-openvx.so
+    fi
  
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
@@ -35,23 +48,9 @@ INHIBIT_SYSROOT_STRIP = "1"
 
 FILES_SOLIBSDEV = ""
 
-PACKAGES =+ "${PN}-openvx"
-
 FILES:${PN} += "${libdir}/*"
-RDEPENDS:${PN} = " \
-    onnxruntime \
-    tensorflow-lite \
-    ${RDEPENDS_OPENVX} \
-"
-RDEPENDS_OPENVX                    = ""
-RDEPENDS_OPENVX:mx8-nxp-bsp:imxgpu = "deepview-rt-openvx libopenvx-imx"
-RDEPENDS_OPENVX:mx8mm-nxp-bsp      = ""
-# The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
-# support OpenVX
-RDEPENDS_OPENVX:mx8ulp-nxp-bsp     = ""
+RDEPENDS:${PN} = "onnxruntime tensorflow-lite"
 INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
-
-FILES:${PN}-openvx = "${libdir}/deepview-rt-openvx.so"
 
 BBCLASSEXTEND = "nativesdk"
 
