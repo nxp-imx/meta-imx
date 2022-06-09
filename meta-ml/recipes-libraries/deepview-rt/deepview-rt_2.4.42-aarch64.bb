@@ -44,7 +44,7 @@ RDEPENDS:${PN} = " \
     ${RDEPENDS_OPENVX} \
 "
 RDEPENDS_OPENVX                    = ""
-RDEPENDS_OPENVX:mx8-nxp-bsp:imxgpu = "deepview-rt-openvx"
+RDEPENDS_OPENVX:mx8-nxp-bsp:imxgpu = "deepview-rt-openvx libopenvx-imx"
 RDEPENDS_OPENVX:mx8mm-nxp-bsp      = ""
 # The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
 # support OpenVX
@@ -52,7 +52,6 @@ RDEPENDS_OPENVX:mx8ulp-nxp-bsp     = ""
 INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
 
 FILES:${PN}-openvx = "${libdir}/deepview-rt-openvx.so"
-RDEPENDS:${PN}-openvx = "libopenvx-imx"
 
 BBCLASSEXTEND = "nativesdk"
 
