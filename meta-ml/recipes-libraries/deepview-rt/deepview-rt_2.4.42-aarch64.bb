@@ -29,12 +29,15 @@ do_install () {
     chown -R root:root "${D}"
 }
 
+INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+INHIBIT_SYSROOT_STRIP = "1"
+
 FILES_SOLIBSDEV = ""
 
 PACKAGES =+ "${PN}-openvx"
 
 FILES:${PN} += "${libdir}/*"
-
 RDEPENDS:${PN} = " \
     onnxruntime \
     tensorflow-lite \
@@ -46,11 +49,6 @@ RDEPENDS_OPENVX:mx8mm-nxp-bsp      = ""
 # The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
 # support OpenVX
 RDEPENDS_OPENVX:mx8ulp-nxp-bsp     = ""
-
-INHIBIT_PACKAGE_STRIP = "1"
-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-INHIBIT_SYSROOT_STRIP = "1"
-
 INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
 
 FILES:${PN}-openvx = "${libdir}/deepview-rt-openvx.so"
