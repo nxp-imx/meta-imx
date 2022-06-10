@@ -13,10 +13,6 @@ inherit allarch
 do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/imx
 
-    # Camera Firmware section
-    install -d ${D}${nonarch_base_libdir}/firmware/imx/camera
-    install -m 0644 ${S}/firmware/camera/* ${D}${nonarch_base_libdir}/firmware/imx/camera
-
     # SDMA Firmware section
     install -d ${D}${nonarch_base_libdir}/firmware/imx/sdma
     install -m 0644 ${S}/firmware/sdma/* ${D}${nonarch_base_libdir}/firmware/imx/sdma
@@ -70,13 +66,6 @@ do_install() {
 # which contains only files that matches the pattern.
 #
 python populate_packages:prepend() {
-    cameradir = bb.data.expand('${nonarch_base_libdir}/firmware/imx/camera', d)
-    do_split_packages(d, cameradir, '([^_]*).*\.fw',
-                      output_pattern='firmware-imx-camera-%s',
-                      description='Freescale IMX Camera Firmware [%s]',
-                      extra_depends='',
-                      prepend=True)
-
     easrcdir = bb.data.expand('${nonarch_base_libdir}/firmware/imx/easrc', d)
     do_split_packages(d, easrcdir, '^easrc-([^_]*).*\.bin',
                       output_pattern='firmware-imx-easrc-%s',
@@ -114,7 +103,7 @@ python populate_packages:prepend() {
 }
 
 # Declare a contract that we would provide packages produced by prepend above
-PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-camera-* ${PN}-sdma-* ${PN}-easrc-* ${PN}-xcvr-* ${PN}-xuvi-*"
+PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-* ${PN}-easrc-* ${PN}-xcvr-* ${PN}-xuvi-*"
 
 #
 # Deal with the rest of Firmware packages here
