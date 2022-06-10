@@ -19,7 +19,7 @@ PACKAGECONFIG_OPENVX:mx8mm-nxp-bsp      = ""
 # support OpenVX
 PACKAGECONFIG_OPENVX:mx8ulp-nxp-bsp     = ""
 
-PACKAGECONFIG[openvx] = ",,,deepview-rt-openvx libopenvx-imx"
+PACKAGECONFIG[openvx] = ",,,libopenvx-imx"
 
 do_install () {
     install -d ${D}${bindir}
@@ -32,7 +32,7 @@ do_install () {
     cp -rP ${S}/${BPN}/lib/* ${D}${libdir}
     cp -r  ${S}/${BPN}/include/* ${D}${includedir}
     if ${@bb.utils.contains('PACKAGECONFIG', 'openvx', 'false', 'true', d)} ; then
-        rm ${D}{libdir}/deepview-rt-openvx.so
+        rm ${D}${libdir}/deepview-rt-openvx.so
     fi
  
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -v \
