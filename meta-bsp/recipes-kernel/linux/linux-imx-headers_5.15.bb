@@ -10,12 +10,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 SRCBRANCH = "imx_5.15.y"
 LOCALVERSION = "-lts-next"
 KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
-KBRANCH = "${SRCBRANCH}"
 SRC_URI = "${KERNEL_SRC}"
 
 SRCREV = "f60cab589440737d69f2fb0e8736ff28400e9a4e"
 
 S = "${WORKDIR}/git"
+
+do_configure[noexec] = "1"
 
 do_compile[noexec] = "1"
 
@@ -34,17 +35,26 @@ IMX_UAPI_HEADERS = " \
     mxcfb.h \
     pxp_device.h \
     pxp_dma.h \
+    version.h \
     videodev2.h \
 "
 
 do_install() {
     # We install all headers inside of B so we can copy only the
-    # required ones, and there is no risk of a new header to be
+    # i.MX-specific ones, and there is no risk of a new header to be
     # installed by mistake.
     oe_runmake headers_install INSTALL_HDR_PATH=${B}${exec_prefix}
+
+    # Kernel should not be exporting this header
+    rm -f ${B}${exec_prefix}/include/scsi/scsi.h
+
+    # The ..install.cmd conflicts between various configure runs
+    find ${B}${includedir} -name ..install.cmd | xargs rm -f
+
+    # Install i.MX-specific headers only
     for h in ${IMX_UAPI_HEADERS}; do
         install -D -m 0644 ${B}${includedir}/linux/$h \
-	                   ${D}${includedir}/imx/linux/$h
+                       ${D}${includedir}/imx/linux/$h
     done
 }
 
