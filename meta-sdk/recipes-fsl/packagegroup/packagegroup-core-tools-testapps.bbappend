@@ -10,4 +10,5 @@ IMX_CORE_TOOLS:imxpxp = " tslib"
 
 RDEPENDS:${PN} += " \
     ${IMX_CORE_TOOLS} \
+    libgpiod-tools \
 "

@@ -20,6 +20,7 @@ RDEPENDS:${PN} = " \
     i2c-tools \
     iproute2 \
     ${KERNEL_TEST_TOOLS} \
+    libgpiod-tools \
     memtester \
     python3-core \
     python3-datetime \
