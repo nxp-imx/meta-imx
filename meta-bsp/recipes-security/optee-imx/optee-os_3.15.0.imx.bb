@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2021 NXP
+# Copyright (C) 2017-2022 NXP
 
 SUMMARY = "OPTEE OS"
 DESCRIPTION = "OPTEE OS"
@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c1f21c4f72f372ef38a5a4aee55ec173"
 
 DEPENDS = "python3-pycryptodomex-native python3-pyelftools-native u-boot-mkimage-native"
 
-SRCBRANCH = "lf-5.10.72_2.2.0"
+SRCBRANCH = "lf-5.10.72_2.2.2"
 OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
-SRCREV = "c939619d64dea014ad1b8382356eee4d1cbfbb22"
+SRCREV = "186e6de229ae17df17e54b68424c291fe3e310d4"
 
 S = "${WORKDIR}/git"
 
