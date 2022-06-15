@@ -33,6 +33,8 @@ MACHINEOVERRIDES_EXTENDER:mx93:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxfb
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx93"
 MACHINE_SOCARCH_SUFFIX:mx93-nxp-bsp = "-mx93"
 
+SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.bz2 tar.bz2"
+
 WKS_FILE_DEPENDS:append:mx9-nxp-bsp = " imx-boot"
 SOC_DEFAULT_WKS_FILE:mx9-nxp-bsp ?= "imx-imx-boot-bootpart.wks.in"
 
