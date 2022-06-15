@@ -31,6 +31,7 @@ EXTRA_OECMAKE = " \
     -DTFLITE_ENABLE_EXTERNAL_DELEGATE=on \
     ${S}/tensorflow/lite/ \
 "
+EXTRA_OECMAKE_BUILD = "benchmark_model label_image"
 
 CXXFLAGS += "-fPIC"
 
@@ -40,6 +41,10 @@ do_configure:prepend() {
     export HTTPS_PROXY=${https_proxy}
     export http_proxy=${http_proxy}
     export https_proxy=${https_proxy}
+
+    # There is no Fortran compiler in the toolchain, but bitbake sets this variable anyway
+    # with unavailable binary.
+    export FC=""
 }
 
 
