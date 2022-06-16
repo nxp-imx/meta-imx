@@ -41,3 +41,4 @@ SOC_DEFAULT_WKS_FILE:mx9-nxp-bsp ?= "imx-imx-boot-bootpart.wks.in"
 # Graphics libraries
 PREFERRED_PROVIDER_virtual/libgles3:imxgpu3d ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/opencl-icd:imxgpu ?= "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libg2d:mx93-nxp-bsp ?= "imx-pxp-g2d"

@@ -21,6 +21,7 @@ PACKAGECONFIG_IMPLEMENTATION                   = ""
 PACKAGECONFIG_IMPLEMENTATION:imxgpu2d:imxdpu   = "dpu"
 PACKAGECONFIG_IMPLEMENTATION:imxgpu2d          = "gpu-drm"
 PACKAGECONFIG_IMPLEMENTATION:imxgpu2d:imxfbdev = "gpu-fbdev"
+PACKAGECONFIG_IMPLEMENTATION:mx93-nxp-bsp      = "pxp"
 
 PACKAGECONFIG[dpu] = " \
     BUILD_IMPLEMENTATION=dpu, \
@@ -28,21 +29,28 @@ PACKAGECONFIG[dpu] = " \
     imx-dpu-g2d wayland-native wayland-protocols, \
     , \
     , \
-    gpu-drm gpu-fbdev"
+    gpu-drm gpu-fbdev pxp"
 PACKAGECONFIG[gpu-drm] = " \
     BUILD_IMPLEMENTATION=gpu-drm, \
     , \
     imx-gpu-g2d wayland-native wayland-protocols, \
     , \
     , \
-    dpu gpu-fbdev"
+    dpu gpu-fbdev pxp"
 PACKAGECONFIG[gpu-fbdev] = " \
     BUILD_IMPLEMENTATION=gpu-fbdev, \
     , \
     imx-gpu-g2d, \
     , \
     , \
-    dpu gpu-drm"
+    dpu gpu-drm pxp"
+PACKAGECONFIG[pxp] = " \
+    BUILD_IMPLEMENTATION=pxp, \
+    , \
+    imx-pxp-g2d wayland-native wayland-protocols, \
+    , \
+    , \
+    dpu gpu-drm gpu-fbdev"
 
 EXTRA_OEMAKE += " \
     SDKTARGETSYSROOT=${STAGING_DIR_HOST} \
@@ -57,4 +65,4 @@ FILES:${PN} += "/opt"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
-COMPATIBLE_MACHINE = "(imxgpu2d)"
+COMPATIBLE_MACHINE = "(imxgpu2d|mx93-nxp-bsp)"
