@@ -30,6 +30,13 @@ ML_PKGS:mx8-nxp-bsp = " \
     tensorflow-lite \
     torchvision \
 "
+ML_PKGS:mx9-nxp-bsp = " \
+    deepview-rt-examples \
+    ml-security \
+    onnxruntime-tests \
+    tensorflow-lite \
+    torchvision \
+"
 # These packages require acceleration, which currently maps to
 # all SOCs with GPU except for 8M Mini
 ML_ACCELERATED_PKGS                    = ""

@@ -34,4 +34,4 @@ RDEPENDS:${PN} = "deepview-rt python3-core"
 
 BBCLASSEXTEND = "nativesdk"
 
-COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp|mx9-nxp-bsp)"
