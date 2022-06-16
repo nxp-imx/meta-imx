@@ -32,7 +32,6 @@ ML_PKGS:mx8-nxp-bsp = " \
 "
 ML_PKGS:mx9-nxp-bsp = " \
     deepview-rt-examples \
-    ml-security \
     onnxruntime-tests \
     tensorflow-lite \
     torchvision \
