@@ -24,14 +24,12 @@ ML_NNSTREAMER_PKGS:mx8-nxp-bsp:imxgpu = "${ML_NNSTREAMER_PKGS_LIST}"
 # These packages don't require any acceleration
 ML_PKGS            = ""
 ML_PKGS:mx8-nxp-bsp = " \
-    deepview-rt-examples \
     ml-security \
     onnxruntime-tests \
     tensorflow-lite \
     torchvision \
 "
 ML_PKGS:mx9-nxp-bsp = " \
-    deepview-rt-examples \
     onnxruntime-tests \
     tensorflow-lite \
     torchvision \
@@ -48,5 +46,4 @@ ML_ACCELERATED_PKGS:mx8mm-nxp-bsp      = ""
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \
     ${ML_ACCELERATED_PKGS} \
-    ${ML_NNSTREAMER_PKGS} \
 "
