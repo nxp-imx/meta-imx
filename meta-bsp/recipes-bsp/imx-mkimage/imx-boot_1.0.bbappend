@@ -1,8 +1,6 @@
 # Copyright 2017-2022 NXP
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-require imx-mkimage_git.inc
-
 DEPLOY_OPTEE_STMM = "${@bb.utils.contains('MACHINE_FEATURES', 'optee stmm', 'true', 'false', d)}"
 
 IMX_M4_DEMOS      = ""
