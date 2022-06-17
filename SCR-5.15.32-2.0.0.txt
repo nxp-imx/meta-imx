@@ -687,6 +687,16 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
+Package:                     imx-pxp-g2d-2.1.0.bin
+Version:                     2.1.0
+Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
+License File:                COPYING
+Package Category:            Graphics
+Type of Content:             binary
+Description and comments:    G2D implementation using PXP
+Release Location:            Mirror
+--------------------------------------------
+
 Package:                     imx-g2d-samples.git
 Version:                     2.1
 Outgoing License:            BSD-3-Clause 
@@ -1262,7 +1272,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.8.0
+Version:                     2.9.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
