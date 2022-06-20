@@ -8,8 +8,8 @@ DEPENDS = "tensorflow-lite tim-vx"
 require tensorflow-lite-${PV}.inc
 
 TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://source.codeaurora.org/external/imx/tflite-vx-delegate-imx.git;protocol=https" 
-SRCBRANCH_vx = "imx-v2.8.0"
-SRCREV_vx = "012763d869975263897b5c4ddf38022a4c329e74"
+SRCBRANCH_vx = "imx-v2.9.1"
+SRCREV_vx = "51a5a79cf7eb95495ada628a425119f503a124b3"
 
 SRCREV_FORMAT = "vx_tf"
 
@@ -27,7 +27,7 @@ EXTRA_OECMAKE += " \
      -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
      -DTIM_VX_INSTALL=${STAGING_DIR_HOST}/usr \
      -DFETCHCONTENT_SOURCE_DIR_TENSORFLOW=${WORKDIR}/tfgit \
-     -DVX_DELEGATE_USE_TFLITE_LIB_FROM_SDK=on \
+     -DTFLITE_LIB_LOC=${STAGING_DIR_HOST}/usr/lib/libtensorflow-lite.so \
      ${S} \
 "
 
