@@ -1295,7 +1295,7 @@ Release Location:            NXP
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
-Version:                     2.8.0
+Version:                     2.9.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1308,7 +1308,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
-Version:                     1.1.39
+Version:                     1.1.42
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
