@@ -288,6 +288,24 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
+Package:                     sof-zephyr-2.1.0
+Version:                     2.1.0
+Outgoing License:            BSD-3-Clause
+License File:                LICENCE
+Package Category:            BSP
+Type of Content:             binary
+Description and comments:    Sound Open Firmware with Zephyr RTOS
+Release Location:            Mirror
+Origin:                      NXP (BSD-3-clause)
+                             Intel Corporation (BSD-3-clause)
+                             zephyrproject.org (Apache-2.0)
+                             Cadence Design Systems, Inc. (MIT)
+                             Ulf Magnusson (ISC)
+                             FreeBSD (BSD-2-clause)
+                             source code in: https://github.com/thesofproject/sof
+
+--------------------------------------------
+
 Package:                     simg2img.git
 Version:                     
 Outgoing License:            Apache-2.0 
@@ -480,6 +498,18 @@ Origin:                      NXP (BSD-3-Clause)
                              KNI Linux Device driver - Intel Corporation (GPL-2.0) Separate component of DPDK
                              pmdinfogen - Neil Horman (GPL-2.0) - Separate tool in DPDK 
 
+--------------------------------------------
+
+Package:                     zephyr-demo-imx-3.0.0
+Version:                     3.0.0
+Outgoing License:            BSD-3-Clause
+License File:                LICENCE
+Package Category:            BSP
+Type of Content:             binary
+Description and comments:    Zephyr demo application for i.MX
+Release Location:            Mirror
+Origin:                      NXP (BSD-3-clause)
+                             zephyrproject.org (Apache-2.0) - https://github.com/zephyrproject-rtos/zephyr
 
 --------------------------------------------
 Graphics Packages
