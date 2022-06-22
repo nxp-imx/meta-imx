@@ -200,6 +200,6 @@ EXTRA_OEMESON:append:imxfbdev = " -Dbackend-default=fbdev"
 EXTRA_OEMESON += "-Ddeprecated-wl-shell=true"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
-COMPATIBLE_MACHINE = "(imxfbdev|imxgpu)"
+COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 
 ########### End of i.MX overrides #########
