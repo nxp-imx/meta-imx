@@ -1190,8 +1190,8 @@ Origin:                      NXP (proprietary)
 MachineLearning Packages
 --------------------------------------------
 
-Package:                     deepview-rt-2.4.42-aarch64.bin
-Version:                     2.4.42-aarch64
+Package:                     deepview-rt-2.4.44-aarch64.bin
+Version:                     2.4.44-aarch64
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            MachineLearning
