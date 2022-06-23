@@ -161,7 +161,7 @@ DEFAULT_PREFERENCE = "-1"
 SRCBRANCH = "weston-imx-10.0"
 SRC_URI:remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 SRC_URI:prepend = "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https;branch=${SRCBRANCH} "
-SRCREV = "c8c6e3106b03441db1037afa995f95fcb2f9f17d"
+SRCREV = "d23a85e5a20add84a87d1cb9f736ec3b3884aa29"
 S = "${WORKDIR}/git"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
