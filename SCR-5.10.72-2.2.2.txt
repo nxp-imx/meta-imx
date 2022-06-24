@@ -659,8 +659,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-1.9.4.bin
-Version:                     1.9.4
+Package:                     imx-dpu-g2d-1.9.6.bin
+Version:                     1.9.6
 Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
