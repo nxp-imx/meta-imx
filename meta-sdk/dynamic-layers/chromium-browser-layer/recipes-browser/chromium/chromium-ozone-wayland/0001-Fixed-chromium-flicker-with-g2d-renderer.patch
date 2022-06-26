@@ -8,6 +8,7 @@ in-fence feature caused the flicker.
 The rootcasue is that weston can not acquire fence fd.
 A workaround no checking supports_acquire_fence supported.
 
+Upstream-Status: Inappropriate [i.MX specific]
 Signed-off-by: Wujian sun <wujian.sun_1@nxp.com>
 ---
  ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc | 3 +--
