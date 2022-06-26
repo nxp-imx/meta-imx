@@ -18,10 +18,10 @@ Upstream-Status: Inappropriate [NXP specific]
  media/renderers/default_decoder_factory.cc | 8 ++++----
  5 files changed, 8 insertions(+), 23 deletions(-)
 
-Index: chromium-101.0.4951.54/build/config/features.gni
-===================================================================
---- chromium-101.0.4951.54.orig/build/config/features.gni
-+++ chromium-101.0.4951.54/build/config/features.gni
+diff --git a/build/config/features.gni b/build/config/features.gni
+index 62bf4bcb350f9..b8b9809d3daba 100644
+--- a/build/config/features.gni
++++ b/build/config/features.gni
 @@ -23,7 +23,7 @@ declare_args() {
    #
    # Note: this flag is used by WebRTC which is DEPSed into Chrome. Moving it
@@ -31,11 +31,11 @@ Index: chromium-101.0.4951.54/build/config/features.gni
  
    # libudev usage. This currently only affects the content layer.
    use_udev = (is_linux || is_chromeos) && !is_chromecast
-Index: chromium-101.0.4951.54/media/BUILD.gn
-===================================================================
---- chromium-101.0.4951.54.orig/media/BUILD.gn
-+++ chromium-101.0.4951.54/media/BUILD.gn
-@@ -57,12 +57,6 @@ buildflag_header("media_buildflags") {
+diff --git a/media/BUILD.gn b/media/BUILD.gn
+index d5c158c08f5c0..19eabf0ef9b4e 100644
+--- a/media/BUILD.gn
++++ b/media/BUILD.gn
+@@ -52,12 +52,6 @@ buildflag_header("media_buildflags") {
    ]
  }
  
@@ -48,24 +48,29 @@ Index: chromium-101.0.4951.54/media/BUILD.gn
  # Common configuration for targets in the media directory; these must not be
  # exported since things like USE_NEON and USE_CRAS have different meanings
  # elsewhere in the code base.
-Index: chromium-101.0.4951.54/media/base/supported_types.cc
-===================================================================
---- chromium-101.0.4951.54.orig/media/base/supported_types.cc
-+++ chromium-101.0.4951.54/media/base/supported_types.cc
-@@ -318,7 +318,7 @@ bool IsDefaultSupportedVideoType(const V
-     case VideoCodec::kVP9:
-       return IsVp9ProfileSupported(type);
+diff --git a/media/base/supported_types.cc b/media/base/supported_types.cc
+index 9c4e2eac5ea33..f375623c622c8 100644
+--- a/media/base/supported_types.cc
++++ b/media/base/supported_types.cc
+@@ -343,12 +343,7 @@ bool IsDefaultSupportedVideoType(const VideoType& type) {
+       return true;
+ 
      case VideoCodec::kHEVC:
--      return IsHevcProfileSupported(type);
+-#if BUILDFLAG(ENABLE_PLATFORM_ENCRYPTED_HEVC)
+-      return IsColorSpaceSupported(type.color_space) &&
+-             IsHevcProfileSupported(type.profile);
+-#else
+-      return false;
+-#endif  // BUILDFLAG(ENABLE_PLATFORM_ENCRYPTED_HEVC)
 +      return true;
-     case VideoCodec::kMPEG4:
-       return IsMPEG4Supported();
      case VideoCodec::kUnknown:
-Index: chromium-101.0.4951.54/media/media_options.gni
-===================================================================
---- chromium-101.0.4951.54.orig/media/media_options.gni
-+++ chromium-101.0.4951.54/media/media_options.gni
-@@ -90,16 +90,12 @@ declare_args() {
+     case VideoCodec::kVC1:
+     case VideoCodec::kMPEG2:
+diff --git a/media/media_options.gni b/media/media_options.gni
+index 3574b2aa056d6..0bdf55edf63d6 100644
+--- a/media/media_options.gni
++++ b/media/media_options.gni
+@@ -82,16 +82,12 @@ declare_args() {
    # Enable HEVC/H265 demuxing. Actual decoding must be provided by the
    # platform. Enabled by default for Chromecast, fuzzer builds and protected
    # video on ChromeOS and Windows.
@@ -84,11 +89,11 @@ Index: chromium-101.0.4951.54/media/media_options.gni
  }
  
  assert(
-Index: chromium-101.0.4951.54/media/renderers/default_decoder_factory.cc
-===================================================================
---- chromium-101.0.4951.54.orig/media/renderers/default_decoder_factory.cc
-+++ chromium-101.0.4951.54/media/renderers/default_decoder_factory.cc
-@@ -181,6 +181,10 @@ void DefaultDecoderFactory::CreateVideoD
+diff --git a/media/renderers/default_decoder_factory.cc b/media/renderers/default_decoder_factory.cc
+index 8f21c3301302a..793ca818b5656 100644
+--- a/media/renderers/default_decoder_factory.cc
++++ b/media/renderers/default_decoder_factory.cc
+@@ -181,6 +181,10 @@ void DefaultDecoderFactory::CreateVideoDecoders(
    }
  #endif
  
@@ -99,7 +104,7 @@ Index: chromium-101.0.4951.54/media/renderers/default_decoder_factory.cc
  #if BUILDFLAG(ENABLE_LIBVPX)
    video_decoders->push_back(std::make_unique<OffloadingVpxVideoDecoder>());
  #endif
-@@ -197,10 +201,6 @@ void DefaultDecoderFactory::CreateVideoD
+@@ -197,10 +201,6 @@ void DefaultDecoderFactory::CreateVideoDecoders(
          std::make_unique<OffloadingDav1dVideoDecoder>(media_log));
  #endif
    }
@@ -110,3 +115,6 @@ Index: chromium-101.0.4951.54/media/renderers/default_decoder_factory.cc
  }
  
  void DefaultDecoderFactory::Shutdown() {
+-- 
+2.17.0
+
