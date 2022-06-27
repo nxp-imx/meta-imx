@@ -5,7 +5,7 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0002-chromium-met-EGL-API-GetProcAddress-failures.patch \
     file://0003-Disable-dri-for-imx-gpu.patch \
 "
-SRC_URI:append:mx8-nxp-bsp = " \
+SRC_URI_DISABLED_PATCHES:append:mx8-nxp-bsp = " \
     file://0101-FFmpeg-enable-vp8-vp9-h264-hevc-v4l2-config.patch \
     file://0102-FFmpeg-change-call-sequence-to-pass-unit-test.patch \
     file://0103-FFmpeg-add-flush-operation-and-correct-timestamp.patch \
