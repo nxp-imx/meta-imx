@@ -7,7 +7,7 @@ Outgoing License: LA_OPT_NXP_Software_License v35 May 2022 - Additional distribu
 License File:     COPYING
 
 Yocto Project recipe manifest:
-repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-kirkstone -m imx_5.15.32-2.0.0.xml
+repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-kirkstone -m imx-5.15.32-2.0.0.xml
 
 Release tag: lf-5.15.32-2.0.0
 
