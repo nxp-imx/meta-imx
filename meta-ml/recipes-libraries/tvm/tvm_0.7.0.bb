@@ -24,7 +24,7 @@ SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                file://0001-tvm-CMakeLists.txt-Use-CMAKE-variables-for-libs-inst.patch \
 "
 
-SRCREV = "d56c112ef65fc0ce18249c32041d1377b98c9e9d"
+SRCREV = "7042d137a6a50588363c27297e0ab57b3e7f43a8"
 SRCREV_dlpack = "3ec04430e89a6834e5a1b99471f415fa939bf642"
 SRCREV_dmlc-core = "6c401e242c59a1f4c913918246591bb13fd714e7"
 SRCREV_rang = "cabe04d6d6b05356fa8f9741704924788f0dd762"
