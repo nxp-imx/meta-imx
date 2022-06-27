@@ -8,13 +8,13 @@ LIC_FILES_CHKSUM = "file://EULA.txt;md5=cdd540474054bab41b663abd3e9eb4a0"
 
 DEPENDS = "zlib"
 
-SRCBRANCH = "imx_5.4.70_2.3.7"
+SRCBRANCH = "master"
 SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
 SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
     file://0001-Makefile-Fix-LIBDIR-for-multilib.patch \
     file://0002-Makefile-Fix-install-to-clear-host-user-contaminated.patch \
 "
-SRCREV = "50204344a87d818de98a2ace14941593e2277f4c"
+SRCREV = "bbae88af4877fff8df2d62b579794e69d221421c"
 
 S = "${WORKDIR}/git"
 
