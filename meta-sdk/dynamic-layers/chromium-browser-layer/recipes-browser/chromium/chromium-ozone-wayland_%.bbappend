@@ -26,6 +26,6 @@ GN_ARGS_DISABLE_GBM:mx7-nxp-bsp = "${GN_ARGS_DISABLE_GBM:mx6-nxp-bsp}"
 GN_ARGS_USE_IMXGPU        = "use_imxgpu=false"
 GN_ARGS_USE_IMXGPU:imxgpu = "use_imxgpu=true"
 GN_ARGS_ENABLE_PROPRIETARY_CODECS             = ""
-GN_ARGS_ENABLE_PROPRIETARY_CODECS:mx8-nxp-bsp = "proprietary_codecs=true"
+#GN_ARGS_ENABLE_PROPRIETARY_CODECS:mx8-nxp-bsp = "proprietary_codecs=true"
 
 CHROMIUM_EXTRA_ARGS:append = " --disable-features=VizDisplayCompositor --in-process-gpu"
