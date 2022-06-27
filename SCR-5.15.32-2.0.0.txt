@@ -687,14 +687,14 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-pxp-g2d-2.1.0.bin
+Package:                     imx-pxp-g2d.git
 Version:                     2.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 - Additional distribution license granted - Section 2.3 applies 
 License File:                COPYING
 Package Category:            Graphics
-Type of Content:             binary
+Type of Content:             source
 Description and comments:    G2D implementation using PXP
-Release Location:            Mirror
+Release Location:            https://github.com/NXPmicro/g2d-pxp -b lf-5.15.32-2.0.0
 --------------------------------------------
 
 Package:                     imx-g2d-samples.git
