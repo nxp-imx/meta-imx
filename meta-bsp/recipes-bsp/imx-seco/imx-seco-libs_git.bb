@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://EULA.txt;md5=cdd540474054bab41b663abd3e9eb4a0"
 
 DEPENDS = "zlib"
 
-SRCBRANCH = "master"
+SRCBRANCH = "imx_5.4.70_2.3.8"
 SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
 SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
     file://0001-Makefile-Fix-LIBDIR-for-multilib.patch \
