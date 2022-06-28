@@ -1,19 +1,19 @@
-From 0ca483c1a85cbc73db47462a9866a1a2f2c3a842 Mon Sep 17 00:00:00 2001
-From: Qi Hou <nxf47649@lsv11151.swis.cn-sha01.nxp.com>
-Date: Mon, 29 Nov 2021 14:47:02 +0800
+From 4097837ac3c20fa3a71444cdb0abd93a4e4c1960 Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Tue, 28 Jun 2022 13:22:10 +0800
 Subject: [PATCH 2/4] FFmpeg: change call sequence to pass unit test
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- libavcodec/v4l2_context.c | 75 +++++++++++++++++----------------------
- libavcodec/v4l2_m2m_dec.c | 18 +++++-----
- 2 files changed, 40 insertions(+), 53 deletions(-)
+ libavcodec/v4l2_context.c |  3 +++
+ libavcodec/v4l2_m2m_dec.c | 18 ++++++++----------
+ 2 files changed, 11 insertions(+), 10 deletions(-)
 
-Index: chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/v4l2_context.c
-===================================================================
---- chromium-101.0.4951.54.orig/third_party/ffmpeg/libavcodec/v4l2_context.c
-+++ chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/v4l2_context.c
-@@ -560,6 +560,9 @@ int ff_v4l2_context_set_status(V4L2Conte
+diff --git a/third_party/ffmpeg/libavcodec/v4l2_context.c b/third_party/ffmpeg/libavcodec/v4l2_context.c
+index e891649f92..b08f0015c2 100644
+--- a/third_party/ffmpeg/libavcodec/v4l2_context.c
++++ b/third_party/ffmpeg/libavcodec/v4l2_context.c
+@@ -560,6 +560,9 @@ int ff_v4l2_context_set_status(V4L2Context* ctx, uint32_t cmd)
      int type = ctx->type;
      int ret;
  
@@ -23,11 +23,11 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/v4l2_context.c
      ret = ioctl(ctx_to_m2mctx(ctx)->fd, cmd, &type);
      if (ret < 0)
          return AVERROR(errno);
-Index: chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/v4l2_m2m_dec.c
-===================================================================
---- chromium-101.0.4951.54.orig/third_party/ffmpeg/libavcodec/v4l2_m2m_dec.c
-+++ chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/v4l2_m2m_dec.c
-@@ -153,6 +153,14 @@ static int v4l2_receive_frame(AVCodecCon
+diff --git a/third_party/ffmpeg/libavcodec/v4l2_m2m_dec.c b/third_party/ffmpeg/libavcodec/v4l2_m2m_dec.c
+index b0c3d30ac8..e67758531a 100644
+--- a/third_party/ffmpeg/libavcodec/v4l2_m2m_dec.c
++++ b/third_party/ffmpeg/libavcodec/v4l2_m2m_dec.c
+@@ -153,6 +153,14 @@ static int v4l2_receive_frame(AVCodecContext *avctx, AVFrame *frame)
      if (s->draining)
          goto dequeue;
  
@@ -42,7 +42,7 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/v4l2_m2m_dec.c
      ret = ff_v4l2_context_enqueue_packet(output, &s->buf_pkt);
      if (ret < 0 && ret != AVERROR(EAGAIN))
          goto fail;
-@@ -161,16 +169,6 @@ static int v4l2_receive_frame(AVCodecCon
+@@ -161,16 +169,6 @@ static int v4l2_receive_frame(AVCodecContext *avctx, AVFrame *frame)
      if (ret != AVERROR(EAGAIN))
          av_packet_unref(&s->buf_pkt);
  
@@ -59,3 +59,6 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/v4l2_m2m_dec.c
  dequeue:
      return ff_v4l2_context_dequeue_frame(capture, frame, -1);
  fail:
+-- 
+2.17.0
+

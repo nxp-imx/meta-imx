@@ -1,18 +1,18 @@
-From fed2e72a9f9c3b450adb2130700830460ab0eb10 Mon Sep 17 00:00:00 2001
+From 5fd3559c6ae775b697081c61d475dc92c5f2602f Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Thu, 31 Mar 2022 18:32:44 +0800
-Subject: [PATCH] FFmpeg: correctly select decoder according to soc_id
+Date: Tue, 28 Jun 2022 13:28:31 +0800
+Subject: [PATCH 4/4] FFmpeg: correctly select decoder according to soc_id
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- libavcodec/allcodecs.c | 31 +++++++++++++++++++++++++++++--
- 1 file changed, 29 insertions(+), 2 deletions(-)
+ libavcodec/allcodecs.c | 30 ++++++++++++++++++++++++++++--
+ 1 file changed, 28 insertions(+), 2 deletions(-)
 
 diff --git a/third_party/ffmpeg/libavcodec/allcodecs.c b/third_party/ffmpeg/libavcodec/allcodecs.c
-index 0b62ddb4da..83e2476d73 100644
+index 9572c4a030..7d79c4eb34 100644
 --- a/third_party/ffmpeg/libavcodec/allcodecs.c
 +++ b/third_party/ffmpeg/libavcodec/allcodecs.c
-@@ -889,6 +889,29 @@ static enum AVCodecID remap_deprecated_codec_id(enum AVCodecID id)
+@@ -893,6 +893,28 @@ static enum AVCodecID remap_deprecated_codec_id(enum AVCodecID id)
      }
  }
  
@@ -38,11 +38,10 @@ index 0b62ddb4da..83e2476d73 100644
 +    return ret;
 +}
 +
-+
  static const AVCodec *find_codec(enum AVCodecID id, int (*x)(const AVCodec *))
  {
      const AVCodec *p, *experimental = NULL;
-@@ -902,8 +925,12 @@ static const AVCodec *find_codec(enum AVCodecID id, int (*x)(const AVCodec *))
+@@ -906,8 +928,12 @@ static const AVCodec *find_codec(enum AVCodecID id, int (*x)(const AVCodec *))
          if (p->id == id) {
              if (p->capabilities & AV_CODEC_CAP_EXPERIMENTAL && !experimental) {
                  experimental = p;

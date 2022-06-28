@@ -1,6 +1,6 @@
-From 55b616fac8efc9c38d0a73bf975fbd87377f2802 Mon Sep 17 00:00:00 2001
-From: Qi Hou <nxf47649@lsv11151.swis.cn-sha01.nxp.com>
-Date: Mon, 29 Nov 2021 13:43:10 +0800
+From bc9d786a5ba9062f25c1e6215210b5abcadf053f Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Mon, 20 Jun 2022 10:17:49 +0800
 Subject: [PATCH 3/3] Chromium: change stride alignment from 32 to 16
 
 Upstream-Status: Inappropriate [NXP specific]

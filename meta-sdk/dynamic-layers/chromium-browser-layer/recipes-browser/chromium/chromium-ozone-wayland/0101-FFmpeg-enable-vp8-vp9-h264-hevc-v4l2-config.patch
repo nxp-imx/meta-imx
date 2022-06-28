@@ -1,27 +1,27 @@
-From 6ca188c138e54d8f82cc20def539eec89fe46ed8 Mon Sep 17 00:00:00 2001
+From a413e9c3d263c9aeeb78d3868a2d23c1a3bf4090 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Thu, 16 Dec 2021 10:01:46 +0800
+Date: Tue, 28 Jun 2022 13:09:09 +0800
 Subject: [PATCH 1/4] FFmpeg: enable vp8/vp9/h264/hevc v4l2 config
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- chromium/config/Chromium/linux/arm64/config.h | 52 ++++++-------
+ chromium/config/Chromium/linux/arm64/config.h | 54 ++++++-------
  .../linux/arm64/libavcodec/bsf_list.c         |  2 +
  .../linux/arm64/libavcodec/codec_list.c       |  8 ++
  .../linux/arm64/libavcodec/parser_list.c      |  3 +
  .../linux/arm64/libavformat/demuxer_list.c    |  3 +
- ffmpeg_generated.gni                          | 76 ++++++++++++++++---
+ ffmpeg_generated.gni                          | 77 ++++++++++++++++---
  libavcodec/allcodecs.c                        |  9 ++-
  libavcodec/autorename_libavcodec_h264dec.c    |  1 +
  libavcodec/autorename_libavcodec_hevcdec.c    |  1 +
- 9 files changed, 115 insertions(+), 40 deletions(-)
+ 9 files changed, 117 insertions(+), 41 deletions(-)
  create mode 100644 libavcodec/autorename_libavcodec_h264dec.c
  create mode 100644 libavcodec/autorename_libavcodec_hevcdec.c
 
-Index: chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h
-===================================================================
---- chromium-101.0.4951.54.orig/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h
-+++ chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h
+diff --git a/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h b/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h
+index d163de2972..a40364fd59 100644
+--- a/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h
++++ b/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h
 @@ -574,7 +574,7 @@
  #define CONFIG_VDPAU 0
  #define CONFIG_VIDEOTOOLBOX 0
@@ -48,6 +48,15 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/
  #define CONFIG_CBS 0
  #define CONFIG_CBS_AV1 0
  #define CONFIG_CBS_H264 0
+@@ -654,7 +654,7 @@
+ #define CONFIG_CBS_VP9 0
+ #define CONFIG_DIRAC_PARSE 1
+ #define CONFIG_DNN 0
+-#define CONFIG_DOVI_RPU 0
++#define CONFIG_DOVI_RPU 1
+ #define CONFIG_DVPROFILE 0
+ #define CONFIG_EXIF 0
+ #define CONFIG_FAANDCT 0
 @@ -667,12 +667,12 @@
  #define CONFIG_GOLOMB 1
  #define CONFIG_GPLV3 0
@@ -177,19 +186,19 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/
  #define CONFIG_HLS_DEMUXER 0
  #define CONFIG_HNM_DEMUXER 0
  #define CONFIG_ICO_DEMUXER 0
-Index: chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/bsf_list.c
-===================================================================
---- chromium-101.0.4951.54.orig/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/bsf_list.c
-+++ chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/bsf_list.c
+diff --git a/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/bsf_list.c b/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/bsf_list.c
+index 91fe508801..077e4a7eb4 100644
+--- a/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/bsf_list.c
++++ b/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/bsf_list.c
 @@ -1,2 +1,4 @@
  static const AVBitStreamFilter * const bitstream_filters[] = {
 +    &ff_h264_mp4toannexb_bsf,
 +    &ff_hevc_mp4toannexb_bsf,
      NULL };
-Index: chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/codec_list.c
-===================================================================
---- chromium-101.0.4951.54.orig/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/codec_list.c
-+++ chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/codec_list.c
+diff --git a/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/codec_list.c b/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/codec_list.c
+index 9407bd2775..537879460c 100644
+--- a/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/codec_list.c
++++ b/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/codec_list.c
 @@ -1,4 +1,12 @@
  static const AVCodec * const codec_list[] = {
 +    &ff_vp8_v4l2m2m_decoder,
@@ -203,10 +212,10 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/
      &ff_theora_decoder,
      &ff_vp3_decoder,
      &ff_vp8_decoder,
-Index: chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/parser_list.c
-===================================================================
---- chromium-101.0.4951.54.orig/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/parser_list.c
-+++ chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/parser_list.c
+diff --git a/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/parser_list.c b/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/parser_list.c
+index f81fbe8bbc..e2359e8c2e 100644
+--- a/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/parser_list.c
++++ b/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavcodec/parser_list.c
 @@ -1,4 +1,7 @@
  static const AVCodecParser * const parser_list[] = {
 +    &ff_h264_parser,
@@ -215,10 +224,10 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/
      &ff_flac_parser,
      &ff_mpegaudio_parser,
      &ff_opus_parser,
-Index: chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavformat/demuxer_list.c
-===================================================================
---- chromium-101.0.4951.54.orig/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavformat/demuxer_list.c
-+++ chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavformat/demuxer_list.c
+diff --git a/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavformat/demuxer_list.c b/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavformat/demuxer_list.c
+index 1908ba19e7..c37145b458 100644
+--- a/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavformat/demuxer_list.c
++++ b/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/libavformat/demuxer_list.c
 @@ -1,4 +1,7 @@
  static const AVInputFormat * const demuxer_list[] = {
 +    &ff_h264_demuxer,
@@ -227,11 +236,11 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/chromium/config/Chromium/linux/
      &ff_flac_demuxer,
      &ff_matroska_demuxer,
      &ff_mov_demuxer,
-Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
-===================================================================
---- chromium-101.0.4951.54.orig/third_party/ffmpeg/ffmpeg_generated.gni
-+++ chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
-@@ -251,7 +251,7 @@ if (use_linux_config && ffmpeg_branding
+diff --git a/third_party/ffmpeg/ffmpeg_generated.gni b/third_party/ffmpeg/ffmpeg_generated.gni
+index 7db1e45037..03509b0671 100644
+--- a/third_party/ffmpeg/ffmpeg_generated.gni
++++ b/third_party/ffmpeg/ffmpeg_generated.gni
+@@ -251,7 +251,7 @@ if (use_linux_config && ffmpeg_branding == "ChromeOS") {
    ]
  }
  
@@ -240,7 +249,7 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
    ffmpeg_c_sources += [
      "libavcodec/atsc_a53.c",
      "libavcodec/cabac.c",
-@@ -270,12 +270,14 @@ if ((is_mac && ffmpeg_branding == "Chrom
+@@ -270,12 +270,14 @@ if ((is_mac && ffmpeg_branding == "Chrome") || (is_win && ffmpeg_branding == "Ch
      "libavcodec/h264_slice.c",
      "libavcodec/h264chroma.c",
      "libavcodec/h264data.c",
@@ -256,9 +265,27 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
    ]
  }
  
-@@ -304,9 +306,49 @@ if ((use_linux_config && current_cpu ==
-     "libavcodec/x86/simple_idct10.asm",
-     "libavcodec/x86/xvididct.asm",
+@@ -306,7 +308,7 @@ if ((use_linux_config && current_cpu == "x64" && ffmpeg_branding == "ChromeOS")
+   ]
+ }
+ 
+-if ((current_cpu == "arm64" && ffmpeg_branding == "Chrome") || (current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_android && current_cpu == "arm" && arm_use_neon && ffmpeg_branding == "Chrome") || (is_android && current_cpu == "x86" && ffmpeg_branding == "Chrome") || (is_mac && ffmpeg_branding == "Chrome") || (is_win && ffmpeg_branding == "Chrome") || (use_linux_config && ffmpeg_branding == "Chrome") || (use_linux_config && ffmpeg_branding == "ChromeOS")) {
++if ((current_cpu == "arm64" && ffmpeg_branding == "Chrome") || (current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_android && current_cpu == "arm" && arm_use_neon && ffmpeg_branding == "Chrome") || (is_android && current_cpu == "x86" && ffmpeg_branding == "Chrome") || (is_mac && ffmpeg_branding == "Chrome") || (is_win && ffmpeg_branding == "Chrome") || (use_linux_config && ffmpeg_branding == "Chrome") || (use_linux_config)) {
+   ffmpeg_c_sources += [
+     "libavcodec/aac_ac3_parser.c",
+     "libavcodec/aac_parser.c",
+@@ -374,7 +376,7 @@ if ((is_mac && current_cpu == "x64") || (is_win && current_cpu == "x64") || (is_
+   ]
+ }
+ 
+-if ((is_mac && current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_win && current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_win && current_cpu == "x86" && ffmpeg_branding == "Chrome") || (use_linux_config && current_cpu == "x64" && ffmpeg_branding == "Chrome") || (use_linux_config && current_cpu == "x64" && ffmpeg_branding == "ChromeOS") || (use_linux_config && current_cpu == "x86" && ffmpeg_branding == "Chrome") || (use_linux_config && current_cpu == "x86" && ffmpeg_branding == "ChromeOS")) {
++if ((is_mac && current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_win && current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_win && current_cpu == "x86" && ffmpeg_branding == "Chrome") || (use_linux_config && current_cpu == "x64") || (use_linux_config && current_cpu == "x86")) {
+   ffmpeg_c_sources += [
+     "libavcodec/x86/h264_qpel.c",
+     "libavcodec/x86/h264chroma_init.c",
+@@ -498,6 +500,47 @@ if ((is_mac) || (is_win) || (use_linux_config)) {
+     "libavcodec/vp8_parser.c",
+     "libavcodec/vp8dsp.c",
    ]
 +
 +  ffmpeg_c_sources += [
@@ -299,24 +326,12 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
 +    "libavformat/hevc.c",
 +    "libavformat/hevcdec.c",
 +    "libavcodec/hevc_mp4toannexb_bsf.c",
++    "libavcodec/dovi_rpu.c",
 +  ]
  }
  
--if ((current_cpu == "arm64" && ffmpeg_branding == "Chrome") || (current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_android && current_cpu == "arm" && arm_use_neon && ffmpeg_branding == "Chrome") || (is_android && current_cpu == "x86" && ffmpeg_branding == "Chrome") || (is_mac && ffmpeg_branding == "Chrome") || (is_win && ffmpeg_branding == "Chrome") || (use_linux_config && ffmpeg_branding == "Chrome") || (use_linux_config && ffmpeg_branding == "ChromeOS")) {
-+if ((current_cpu == "arm64" && ffmpeg_branding == "Chrome") || (current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_android && current_cpu == "arm" && arm_use_neon && ffmpeg_branding == "Chrome") || (is_android && current_cpu == "x86" && ffmpeg_branding == "Chrome") || (is_mac && ffmpeg_branding == "Chrome") || (is_win && ffmpeg_branding == "Chrome") || (use_linux_config && ffmpeg_branding == "Chrome") || (use_linux_config)) {
-   ffmpeg_c_sources += [
-     "libavcodec/aac_ac3_parser.c",
-     "libavcodec/aac_parser.c",
-@@ -374,7 +416,7 @@ if ((is_mac && current_cpu == "x64") ||
-   ]
- }
- 
--if ((is_mac && current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_win && current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_win && current_cpu == "x86" && ffmpeg_branding == "Chrome") || (use_linux_config && current_cpu == "x64" && ffmpeg_branding == "Chrome") || (use_linux_config && current_cpu == "x64" && ffmpeg_branding == "ChromeOS") || (use_linux_config && current_cpu == "x86" && ffmpeg_branding == "Chrome") || (use_linux_config && current_cpu == "x86" && ffmpeg_branding == "ChromeOS")) {
-+if ((is_mac && current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_win && current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_win && current_cpu == "x86" && ffmpeg_branding == "Chrome") || (use_linux_config && current_cpu == "x64") || (use_linux_config && current_cpu == "x86")) {
-   ffmpeg_c_sources += [
-     "libavcodec/x86/h264_qpel.c",
-     "libavcodec/x86/h264chroma_init.c",
-@@ -506,6 +548,20 @@ if ((is_mac && current_cpu == "arm64") |
+ if ((is_mac && current_cpu == "arm64") || (is_win && current_cpu == "arm64") || (use_linux_config && current_cpu == "arm64")) {
+@@ -506,6 +549,20 @@ if ((is_mac && current_cpu == "arm64") || (is_win && current_cpu == "arm64") ||
      "libavcodec/aarch64/hpeldsp_init_aarch64.c",
      "libavcodec/aarch64/videodsp_init.c",
      "libavcodec/aarch64/vp8dsp_init_aarch64.c",
@@ -337,7 +352,7 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
    ]
    ffmpeg_gas_sources += [
      "libavcodec/aarch64/autorename_libavcodec_aarch64_h264pred_neon.S",
-@@ -515,7 +571,7 @@ if ((is_mac && current_cpu == "arm64") |
+@@ -515,7 +572,7 @@ if ((is_mac && current_cpu == "arm64") || (is_win && current_cpu == "arm64") ||
    ]
  }
  
@@ -346,7 +361,7 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
    ffmpeg_c_sources += [
      "libavcodec/aarch64/h264chroma_init_aarch64.c",
      "libavcodec/aarch64/h264dsp_init_aarch64.c",
-@@ -589,7 +645,7 @@ if ((use_linux_config && current_cpu ==
+@@ -589,7 +646,7 @@ if ((use_linux_config && current_cpu == "arm" && arm_use_neon && ffmpeg_branding
    ]
  }
  
@@ -355,7 +370,7 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
    ffmpeg_c_sources += [
      "libavcodec/aarch64/aacpsdsp_init_aarch64.c",
      "libavcodec/aarch64/sbrdsp_init_aarch64.c",
-@@ -600,7 +656,7 @@ if ((current_cpu == "arm64" && ffmpeg_br
+@@ -600,7 +657,7 @@ if ((current_cpu == "arm64" && ffmpeg_branding == "Chrome") || (use_linux_config
    ]
  }
  
@@ -364,7 +379,7 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
    ffmpeg_c_sources += [
      "libavcodec/aarch64/idctdsp_init_aarch64.c",
      "libavcodec/aarch64/pixblockdsp_init_aarch64.c",
-@@ -611,7 +667,7 @@ if (use_linux_config && current_cpu == "
+@@ -611,7 +668,7 @@ if (use_linux_config && current_cpu == "arm64" && ffmpeg_branding == "ChromeOS")
    ]
  }
  
@@ -373,7 +388,7 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
    ffmpeg_c_sources += [
      "libavcodec/x86/aacpsdsp_init.c",
      "libavcodec/x86/mdct15_init.c",
-@@ -619,7 +675,7 @@ if ((current_cpu == "x64" && ffmpeg_bran
+@@ -619,7 +676,7 @@ if ((current_cpu == "x64" && ffmpeg_branding == "Chrome") || (is_android && curr
    ]
  }
  
@@ -382,7 +397,7 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
    ffmpeg_asm_sources += [
      "libavcodec/x86/aacpsdsp.asm",
      "libavcodec/x86/mdct15.asm",
-@@ -647,7 +703,7 @@ if ((is_android && current_cpu == "arm"
+@@ -647,7 +704,7 @@ if ((is_android && current_cpu == "arm" && arm_use_neon) || (is_android && curre
    ]
  }
  
@@ -391,10 +406,10 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/ffmpeg_generated.gni
    ffmpeg_c_sources += [
      "libavcodec/neon/mpegvideo.c",
    ]
-Index: chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/allcodecs.c
-===================================================================
---- chromium-101.0.4951.54.orig/third_party/ffmpeg/libavcodec/allcodecs.c
-+++ chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/allcodecs.c
+diff --git a/third_party/ffmpeg/libavcodec/allcodecs.c b/third_party/ffmpeg/libavcodec/allcodecs.c
+index d1e10197de..9572c4a030 100644
+--- a/third_party/ffmpeg/libavcodec/allcodecs.c
++++ b/third_party/ffmpeg/libavcodec/allcodecs.c
 @@ -32,6 +32,11 @@
  #include "codec.h"
  #include "codec_id.h"
@@ -434,15 +449,20 @@ Index: chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/allcodecs.c
  extern const AVCodec ff_vqa_decoder;
  extern const AVCodec ff_webp_decoder;
  extern const AVCodec ff_wcmv_decoder;
-Index: chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/autorename_libavcodec_h264dec.c
-===================================================================
+diff --git a/third_party/ffmpeg/libavcodec/autorename_libavcodec_h264dec.c b/third_party/ffmpeg/libavcodec/autorename_libavcodec_h264dec.c
+new file mode 100644
+index 0000000000..47ede0f66f
 --- /dev/null
-+++ chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/autorename_libavcodec_h264dec.c
++++ b/third_party/ffmpeg/libavcodec/autorename_libavcodec_h264dec.c
 @@ -0,0 +1 @@
 +#include "h264dec.c"
-Index: chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/autorename_libavcodec_hevcdec.c
-===================================================================
+diff --git a/third_party/ffmpeg/libavcodec/autorename_libavcodec_hevcdec.c b/third_party/ffmpeg/libavcodec/autorename_libavcodec_hevcdec.c
+new file mode 100644
+index 0000000000..d7664ef012
 --- /dev/null
-+++ chromium-101.0.4951.54/third_party/ffmpeg/libavcodec/autorename_libavcodec_hevcdec.c
++++ b/third_party/ffmpeg/libavcodec/autorename_libavcodec_hevcdec.c
 @@ -0,0 +1 @@
 +#include "hevcdec.c"
+-- 
+2.17.0
+
