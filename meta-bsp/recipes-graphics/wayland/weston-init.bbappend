@@ -1,6 +1,9 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-INI_UNCOMMENT_ASSIGNMENTS:append:mx93-nxp-bsp = " use-g2d=1"
+INI_UNCOMMENT_ASSIGNMENTS:append:mx93-nxp-bsp = " \
+    repaint-window=16 \
+    use-g2d=1 \
+"
 
 update_file() {
     if ! grep -q "$1" $3; then
