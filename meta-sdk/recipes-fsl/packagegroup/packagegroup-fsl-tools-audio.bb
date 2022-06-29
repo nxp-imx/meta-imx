@@ -1,5 +1,5 @@
 # Copyright (C) 2015 Freescale Semiconductor
-# Copyright 2017-2020 NXP
+# Copyright 2017-2020,2022 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "Set of audio tools for inclusion on images"
@@ -40,6 +40,7 @@ NXPAFE_INSTALL:mx8mm-nxp-bsp = "nxp-afe"
 NXPAFE_INSTALL:mx8mn-nxp-bsp = "nxp-afe"
 NXPAFE_INSTALL:mx8mp-nxp-bsp = "nxp-afe"
 NXPAFE_INSTALL:mx8mnul-nxp-bsp = "nxp-afe"
+NXPAFE_INSTALL:mx93-nxp-bsp = "nxp-afe"
 
 SOFTOOLS_INSTALL       ?= ""
 SOFTOOLS_INSTALL:mx8qm-nxp-bsp  = "sof-tools"
