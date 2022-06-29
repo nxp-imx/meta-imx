@@ -1,7 +1,9 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-INI_UNCOMMENT_ASSIGNMENTS:append:mx93-nxp-bsp = " \
+INI_UNCOMMENT_ASSIGNMENTS:append:mx9-nxp-bsp = " \
     repaint-window=16 \
+"
+INI_UNCOMMENT_ASSIGNMENTS:append:mx93-nxp-bsp = " \
     use-g2d=1 \
 "
 
