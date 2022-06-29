@@ -627,7 +627,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     weston-imx.git
-Version:                     10.0.0.imx
+Version:                     10.0.1.imx
 Outgoing License:            MIT 
 License File:                COPYING
 Package Category:            Graphics
