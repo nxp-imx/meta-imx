@@ -1,15 +1,24 @@
 DESCRIPTION = "OpenGL CTS"
 
 require recipes-graphics/vk-gl-cts/khronos-cts.inc
-# opengl-es-cts-3.2.7.0
-SRCREV_vk-gl-cts = "7cba7113c40f2ff03573c8c2c90661b2249e04fa"
-SRCREV_amber = "4d0115cccfcb3b73d20b6513b1c40748e6403c50"
-SRCREV_glslang = "ffccefddfd9a02ec0c0b6dd04ef5e1042279c97f"
-SRCREV_spirv-headers = "104ecc356c1bea4476320faca64440cd1df655a3"
-SRCREV_spirv-tools = "cd590fa3341284cd6d1ee82366155786cfd44c96"
+
+DEPENDS += "python3-lxml-native"
+
+# opengl-es-cts-3.2.8.0
+SRC_URI += " \
+    git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;destsuffix=git/external/vulkan-docs/src;name=vulkan-docs;branch=main \
+"
+SRCREV_vk-gl-cts = "df6e80890c08084551657809815ab98535138b29"
+SRCREV_amber = "209d92e2c27a333e723d24497e8c7a07b2f2eb39"
+SRCREV_glslang = "9158061398a96033c990e69156bd28c67114544b"
+SRCREV_spirv-headers = "449bc986ba6f4c5e10e32828783f9daef2a77644"
+SRCREV_spirv-tools = "ee30773650eca50b1cd3c913babcc2b50d7b91fd"
+SRCREV_vulkan-docs = "d70e01c0be7b8a7d20b186b30b29a75b18bba75d"
 SRC_URI[renderdoc.sha256sum] = "e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e"
 
 S = "${WORKDIR}/git"
+
+inherit python3native
 
 do_install() {
 	install -d ${D}/${CTSDIR}

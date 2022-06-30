@@ -1,4 +1,4 @@
-From acd25c4b8d5b7e420a7a89bdfd6551c70de828b3 Mon Sep 17 00:00:00 2001
+From bc944a2809093a411f82c89e283fe292fa4455dc Mon Sep 17 00:00:00 2001
 From: Trevor Woerner <twoerner@gmail.com>
 Date: Thu, 23 Sep 2021 19:36:43 -0400
 Subject: [PATCH] use library sonames for linking
@@ -55,7 +55,7 @@ index d7e07fe18..ebdf68b14 100644
  	return "libEGL.dll";
  #else
 diff --git a/framework/platform/android/tcuAndroidPlatform.cpp b/framework/platform/android/tcuAndroidPlatform.cpp
-index b9a4c716f..05cec0b49 100644
+index f67185411..cfce3eaa4 100644
 --- a/framework/platform/android/tcuAndroidPlatform.cpp
 +++ b/framework/platform/android/tcuAndroidPlatform.cpp
 @@ -57,7 +57,7 @@ static const eglu::NativeWindow::Capability		WINDOW_CAPABILITIES		= (eglu::Nativ
@@ -94,7 +94,7 @@ index 97bc3a0ed..3a20d63d3 100644
  	~Display(void) {}
  	wayland::Display&			getWaylandDisplay	(void)	{ return *m_display; }
 diff --git a/framework/platform/surfaceless/tcuSurfacelessPlatform.cpp b/framework/platform/surfaceless/tcuSurfacelessPlatform.cpp
-index 9783eaeab..a1d8ac667 100644
+index 04f32c80f..9426ab22a 100644
 --- a/framework/platform/surfaceless/tcuSurfacelessPlatform.cpp
 +++ b/framework/platform/surfaceless/tcuSurfacelessPlatform.cpp
 @@ -69,7 +69,7 @@ using std::vector;
@@ -114,8 +114,8 @@ index 9783eaeab..a1d8ac667 100644
 +#	define DEQP_OPENGL_LIBRARY_PATH "libGL.so.1"
  #endif
  
- namespace tcu
-@@ -238,7 +238,7 @@ glu::RenderContext* ContextFactory::createContext(const glu::RenderConfig& confi
+ #if !defined(DEQP_VULKAN_LIBRARY_PATH)
+@@ -248,7 +248,7 @@ glu::RenderContext* ContextFactory::createContext(const glu::RenderConfig& confi
  }
  
  EglRenderContext::EglRenderContext(const glu::RenderConfig& config, const tcu::CommandLine& cmdLine)
@@ -124,3 +124,6 @@ index 9783eaeab..a1d8ac667 100644
  	, m_contextType(config.type)
  	, m_eglDisplay(EGL_NO_DISPLAY)
  	, m_eglContext(EGL_NO_CONTEXT)
+-- 
+2.25.1
+
