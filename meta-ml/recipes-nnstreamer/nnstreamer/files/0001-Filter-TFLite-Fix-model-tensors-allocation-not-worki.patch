@@ -1,0 +1,54 @@
+From eef6f4bb657e59d418f9ddd74e12fd9f664e7453 Mon Sep 17 00:00:00 2001
+From: Julien Vuillaumier <julien.vuillaumier@nxp.com>
+Date: Tue, 28 Jun 2022 09:31:40 +0200
+Subject: [PATCH] [Filter/TFLite] Fix model tensors allocation not working for
+ some delegates
+
+This change is correction for error below reported by the TFlite library
+during Invoke():
+
+"Invoke called on model that is not ready."
+
+Tensors allocation may be done by TFLite framework during call to
+ModifyGraphWithDelegate() but that is not guaranteed.
+Therefore, even if delegates are used, tensors allocation must be done
+explicitly with AllocateTensors(), prior to inferencing with Invoke().
+
+Upstream-Status: Accepted for 2.2.0
+(https://github.com/nnstreamer/nnstreamer/pull/3813)
+
+Signed-off-by: Julien Vuillaumier <julien.vuillaumier@nxp.com>
+---
+ .../tensor_filter/tensor_filter_tensorflow_lite.cc   | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc b/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
+index 875a1259..d85df9ba 100644
+--- a/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
++++ b/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
+@@ -549,16 +549,16 @@ TFLiteInterpreter::loadModel (int num_threads, tflite_delegate_e delegate_e)
+   delegate = getDelegate ();
+   if (delegate != nullptr) {
+     if (interpreter->ModifyGraphWithDelegate (delegate) != kTfLiteOk) {
+-      ml_loge ("Failed to allocate tensors with delegate\n");
+-      return -2;
+-    }
+-  } else {
+-    if (interpreter->AllocateTensors () != kTfLiteOk) {
+-      ml_loge ("Failed to allocate tensors\n");
++      ml_loge ("Failed to apply delegate\n");
+       return -2;
+     }
+   }
+ 
++  if (interpreter->AllocateTensors () != kTfLiteOk) {
++    ml_loge ("Failed to allocate tensors\n");
++    return -2;
++  }
++
+ #if (DBG)
+   stop_time = g_get_monotonic_time ();
+   ml_logi ("Model is loaded: %" G_GINT64_FORMAT, (stop_time - start_time));
+-- 
+2.25.1
+
