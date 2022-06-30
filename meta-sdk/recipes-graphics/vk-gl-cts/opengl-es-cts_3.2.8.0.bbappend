@@ -1,6 +1,9 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://0001-MGS-4031-Report-NotSupported-for-OpenVG-tests-on-non.patch"
+SRC_URI += " \
+    file://0001-MGS-4031-Report-NotSupported-for-OpenVG-tests-on-non.patch \
+    file://0001-CL489625-escts-3.2.8-Fix-escts3.2.8-fail-on-8mm-boar.patch \
+"
 SRC_URI:remove = " \
     file://0001-Workaround-for-GCC-11-uninit-variable-warnings-946.patch;patchdir=external/amber/src \
     file://0001-Include-limits-header-for-numeric_limits.patch;patchdir=external/vulkancts \
