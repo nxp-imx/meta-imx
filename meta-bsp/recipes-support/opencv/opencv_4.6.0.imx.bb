@@ -1,9 +1,9 @@
 require recipes-support/opencv/opencv_4.5.2.imx.bb
 
-SRCBRANCH = "4.5.4_imx"
-SRCREV_opencv = "9eb733fe4eadddb30a268d9d186ee5f114b16287"
-SRCREV_contrib = "2bc3e1a169afd2675ef68221176f32cc0ea5427a"
-SRCREV_extra = "822ee11240b969e98e20546663bc481a5e7089cc"
+SRCBRANCH = "4.6.0_imx"
+SRCREV_opencv = "d3440df40a6e90cd1d2a1b729bcbc16aa4d42f5d"
+SRCREV_contrib = "db16caf6ceee76b43b94c846be276e92a43e9700"
+SRCREV_extra = "936854e2b666853d6d0732a8eabc2d699f4fa3d8"
 SRC_URI:remove = " \
     file://0001-Use-the-one-argument-version-of-SetTotalBytesLimit.patch \
 "
