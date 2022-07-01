@@ -8,10 +8,10 @@ Subject: [PATCH] CL489625 [escts-3.2.8]: Fix escts3.2.8 fail on 8mm board.
 case:
 dEQP-GLES2.functional.fragment_ops.interaction.basic_shader.25
 
-This patch is inappropriate for upstreaming as-is. Perhaps it can be
-reworked so the threshold can be set appropriately based on context.
+This is a workaround. The problem has been reported here:
+https://gitlab.khronos.org/Tracker/vk-gl-cts/-/issues/3754
 
-Upstream-Status: Inappropriate [other]
+Upstream-Status: Pending
 Signed-off-by: Ke Feng <ke.feng@verisilicon.com>
 ---
  modules/glshared/glsFragOpInteractionCase.cpp | 2 +-

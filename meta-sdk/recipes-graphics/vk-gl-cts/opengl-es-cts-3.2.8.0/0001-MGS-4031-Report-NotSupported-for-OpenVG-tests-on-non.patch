@@ -9,8 +9,12 @@ should return NotSupported error instead of InternalError.
 
 The reason is because the specification does not enforce OpenVG support
 
+This change is done for NXP internal testing and is not appropriate
+for upstreaming.
+
 Components: OpenGL
 
+Upstream-Status: Inappropriate [other]
 Signed-off-by: Xianzhong <xianzhong.li@nxp.com>
 (cherry picked from commit fbafdd071ac5c611cb1c70f5e0da6bd1db33c17b)
 ---
