@@ -50,7 +50,7 @@ PREFERRED_VERSION_wayland-protocols:mx9-nxp-bsp = "1.25.imx"
 PREFERRED_VERSION_libdrm:mx9-nxp-bsp ?= "2.4.109.imx"
 
 # Note: The OpenCV recipe for the i.MX fork is not compatible with i.MX 6 or 7
-PREFERRED_VERSION_opencv:mx8-nxp-bsp = "4.6.0.imx"
+PREFERRED_VERSION_opencv:mx8-nxp-bsp = "4.5.4.imx"
 
 PREFERRED_VERSION_optee-client:mx6-nxp-bsp = "3.17.0.imx"
 PREFERRED_VERSION_optee-client:mx7-nxp-bsp = "3.17.0.imx"
