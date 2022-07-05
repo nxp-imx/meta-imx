@@ -9,6 +9,10 @@ PACKAGECONFIG ?= "valgrind"
 
 LIBVULKAN_VERSION = "${LIBVULKAN_VERSION_MAJOR}.2.1"
 
+do_install:append() {
+    rm -rf ${D}${includedir}/vulkan
+}
+
 RDEPENDS:libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 
 # FIXME: Don't add .so to main package
