@@ -26,7 +26,6 @@ ML_NNSTREAMER_PKGS:mx8-nxp-bsp:imxgpu = "${ML_NNSTREAMER_PKGS_LIST}"
 ML_PKGS            = ""
 ML_PKGS:mx8-nxp-bsp = " \
     deepview-rt-examples \
-    ml-security \
     onnxruntime-tests \
     tensorflow-lite \
     torchvision \
