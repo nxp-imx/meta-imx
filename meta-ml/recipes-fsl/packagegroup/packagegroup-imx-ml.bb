@@ -16,11 +16,11 @@ ML_NNSTREAMER_PKGS_LIST = " \
     nnstreamer-protobuf \
     nnstreamer-python3 \
     nnstreamer-tensorflow-lite \
-    nnstreamer-tvm \
 "
 
 ML_NNSTREAMER_PKGS = ""
-ML_NNSTREAMER_PKGS:mx8-nxp-bsp:imxgpu = "${ML_NNSTREAMER_PKGS_LIST}"
+ML_NNSTREAMER_PKGS:mx8-nxp-bsp:imxgpu = "${ML_NNSTREAMER_PKGS_LIST} nnstreamer-tvm"
+ML_NNSTREAMER_PKGS:mx8mm-nxp-bsp      = "${ML_NNSTREAMER_PKGS_LIST}"
 
 # These packages don't require any acceleration
 ML_PKGS            = ""

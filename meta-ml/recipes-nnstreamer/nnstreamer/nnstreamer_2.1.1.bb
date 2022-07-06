@@ -33,7 +33,10 @@ S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 
-PACKAGECONFIG ??= "protobuf python3 tensorflow-lite deepview-rt tvm"
+PACKAGECONFIG ??= "protobuf python3 ${PACKAGECONFIG_SOC}"
+PACKAGECONFIG_SOC                    ??= ""
+PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "deepview-rt tensorflow-lite tvm"
+PACKAGECONFIG_SOC:mx8mm-nxp-bsp      ??= "deepview-rt tensorflow-lite"
 
 PACKAGECONFIG[deepview-rt] = "\
        -Ddeepview-rt-support=enabled, \
@@ -203,3 +206,5 @@ do_install:append() {
     rm -f ${D}/${bindir}/unittest-nnstreamer/tests/test_models/models/tvm_add_one_!(${HOST_ARCH}).so_;
     shopt -u extglob;"
 }
+
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
