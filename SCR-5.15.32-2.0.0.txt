@@ -764,7 +764,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     opencv-imx.git
-Version:                     4.5.4.imx
+Version:                     4.6.0.imx
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            Graphics
@@ -1282,16 +1282,6 @@ Release Location:            https://source.codeaurora.org/external/imx/tensorfl
 Origin:                      NXP (Apache-2.0)
                              TensorFlow (Apache-2.0) - https://github.com/tensorflow/tensorflow/
 
---------------------------------------------
-
-Package:                     efficientdet-imx.git
-Version:                     
-Outgoing License:            Apache-2.0 
-License File:                LICENSE
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    TensorFlow Lite extras packages
-Release Location:            NXP
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
