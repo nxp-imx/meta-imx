@@ -45,7 +45,7 @@ DEPENDS:append:imxgpu3d = " virtual/libgles2"
 GPU_SDK_SRC ?= "git://github.com/nxpmicro/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
-SRCREV = "0bb954adfc4740e5df7cd4e511a0f1e87ed309e7"
+SRCREV = "6c2091752cb15ea68a7c4d227a3f320fb7147c8d"
 S = "${WORKDIR}/git"
 
 BACKEND = \
@@ -61,7 +61,7 @@ FEATURES:append           = "${FEATURES_SOC}"
 FEATURES_SOC              = ""
 FEATURES_SOC:mx6q-nxp-bsp         = ",OpenGLES3"
 FEATURES_SOC:mx6dl-nxp-bsp        = ",OpenGLES3"
-FEATURES_SOC:mx8-nxp-bsp          = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.1"
+FEATURES_SOC:mx8-nxp-bsp          = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.2"
 FEATURES_SOC:mx8mm-nxp-bsp        = ",OpenCV4"
 
 EXTENSIONS       = "*"
