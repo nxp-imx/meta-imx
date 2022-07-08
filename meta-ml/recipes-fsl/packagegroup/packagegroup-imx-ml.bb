@@ -10,7 +10,6 @@ PACKAGE_ARCH = "${TUNE_PKGARCH}"
 inherit packagegroup
 
 ML_NNSTREAMER_PKGS_LIST = " \
-    nnshark \
     nnstreamer \
     nnstreamer-deepview-rt \
     nnstreamer-protobuf \
@@ -21,6 +20,12 @@ ML_NNSTREAMER_PKGS_LIST = " \
 ML_NNSTREAMER_PKGS = ""
 ML_NNSTREAMER_PKGS:mx8-nxp-bsp:imxgpu = "${ML_NNSTREAMER_PKGS_LIST} nnstreamer-tvm"
 ML_NNSTREAMER_PKGS:mx8mm-nxp-bsp      = "${ML_NNSTREAMER_PKGS_LIST}"
+
+# i.MX8MP uses nnshark - other i.MX8/9 use raw gstshark
+ML_GST_PROFILER = ""
+ML_GST_PROFILER:mx8-nxp-bsp   = "gst-shark"
+ML_GST_PROFILER:mx8mp-nxp-bsp = "nnshark"
+ML_GST_PROFILER:mx9-nxp-bsp   = "gst-shark"
 
 # These packages don't require any acceleration
 ML_PKGS            = ""
@@ -49,4 +54,5 @@ RDEPENDS:${PN} = " \
     ${ML_PKGS} \
     ${ML_ACCELERATED_PKGS} \
     ${ML_NNSTREAMER_PKGS} \
+    ${ML_GST_PROFILER} \
 "
