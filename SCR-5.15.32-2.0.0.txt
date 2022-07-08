@@ -288,6 +288,26 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
+Package:                     sof-zephyr-2.1.0
+Version:                     2.1.0
+Outgoing License:            BSD-3-Clause 
+License File:                LICENCE
+Package Category:            BSP
+Type of Content:             binary
+Description and comments:    Sound Open Firmware with Zephyr
+Release Location:            Mirror
+--------------------------------------------
+
+Package:                     zephyr-demo-imx-3.0.0
+Version:                     3.0.0
+Outgoing License:            BSD-3-Clause 
+License File:                LICENCE
+Package Category:            BSP
+Type of Content:             binary
+Description and comments:    Zephyr Demo for i.MX
+Release Location:            Mirror
+--------------------------------------------
+
 Package:                     simg2img.git
 Version:                     
 Outgoing License:            Apache-2.0 
@@ -379,18 +399,6 @@ Description and comments:    A partitioning Hypervisor based on Linux
 Release Location:            https://source.codeaurora.org/external/imx/imx-jailhouse -b lf-5.15.32-2.0.0
 Origin:                      NXP (GPL-2.0)
                              Siemens AG (GPL-2.0) - https://github.com/siemens/jailhouse
-
---------------------------------------------
-
-Package:                     ml-security-1.0.6.bin
-Version:                     1.0.6
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    Machine Learning Security
-Release Location:            Mirror
-Origin:                      NXP (NXP Proprietary)
 
 --------------------------------------------
 
@@ -562,13 +570,13 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     5.9.2
+Version:                     6.0.0
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics sample applications
-Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 5.9.2
+Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 6.0.0
 Origin:                      NXP (BSD-3-clause)
                          Demo Framework
                              Sascha Willems - Vulkan demo (MIT) - https://github.com/SaschaWillems/Vulkan
