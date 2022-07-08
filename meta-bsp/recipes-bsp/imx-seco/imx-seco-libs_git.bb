@@ -4,18 +4,18 @@ SUMMARY = "NXP i.MX SECO library"
 DESCRIPTION = "NXP IMX SECO library"
 SECTION = "base"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://EULA.txt;md5=cdd540474054bab41b663abd3e9eb4a0"
+LIC_FILES_CHKSUM = "file://EULA.txt;md5=d3c315c6eaa43e07d8c130dc3a04a011"
 
 DEPENDS = "zlib"
 
-SRCBRANCH = "master"
+SRCBRANCH = "imx_5.4.70_2.3.9"
 SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
 SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
         file://0001-Makefile-Fix-LIBDIR-for-multilib.patch \
         file://0002-Makefile-Fix-install-to-clear-host-user-contaminated.patch \
         file://0001-add-v2x_test-to-the-installed-binaries.patch \
 "
-SRCREV = "c24e99b750bd48668a2fcdc6a11a1f1c09b6ef17"
+SRCREV = "b2550476388e1d1453bddbf356844301467c7bfa"
 
 S = "${WORKDIR}/git"
 
