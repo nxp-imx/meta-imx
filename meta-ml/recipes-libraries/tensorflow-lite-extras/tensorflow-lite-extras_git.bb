@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 DEPENDS = "opencv tensorflow-lite flatbuffers python3 python3-pip python3-numpy"
 
-EFFICIENTDET_SRC ?= "git://github.com/NXP/efficientdet-imx.git;protocol=https"
+EFFICIENTDET_SRC ?= "git://github.com/NXP/efficientdet-imx.git;protocol=https;lfs=0"
 SRCBRANCH = "lf-5.15.32_2.0.0"
 
 SRC_URI = "${EFFICIENTDET_SRC};branch=${SRCBRANCH}"
-SRCREV = "d0cf2775b079c76051e9a04170050ebe81fb18cd"
+SRCREV = "f6caf1069f306b2325c92da18d4582d33488d616"
 
 S = "${WORKDIR}/git"
 
