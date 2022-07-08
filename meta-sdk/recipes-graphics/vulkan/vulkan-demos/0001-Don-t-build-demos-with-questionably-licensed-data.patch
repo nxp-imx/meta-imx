@@ -1,0 +1,93 @@
+From 663d51cd31fd98411e25f37aaf52b591d9639bf5 Mon Sep 17 00:00:00 2001
+From: "Maxin B. John" <maxin.john@intel.com>
+Date: Mon, 30 Jul 2018 17:23:29 +0300
+Subject: [PATCH] Don't build demos with questionably licensed data
+
+Some of the models don't have open source compatible licenses:
+don't build demos using those. Also don't build demos that need
+resources that are not included.
+
+ssao:
+scenerendering:
+        Sibenik model, no license found
+
+deferred:
+deferredmultisampling:
+deferredshadows:
+        armor model, CC-BY-3.0
+
+vulkanscene:
+imgui:
+shadowmapping:
+        vulkanscene model, no license found
+
+indirectdraw:
+        plant model, no license found
+
+hdr:
+pbribl:
+pbrtexture:
+        Require external Vulkan Asset Pack
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Signed-off-by: Maxin B. John <maxin.john@intel.com>
+---
+ examples/CMakeLists.txt | 14 --------------
+ 1 file changed, 14 deletions(-)
+
+Index: git/examples/CMakeLists.txt
+===================================================================
+--- git.orig/examples/CMakeLists.txt
++++ git/examples/CMakeLists.txt
+@@ -72,9 +72,6 @@ set(EXAMPLES
+ 	conditionalrender
+ 	conservativeraster
+ 	debugmarker
+-	deferred
+-	deferredmultisampling
+-	deferredshadows
+ 	descriptorindexing
+ 	descriptorsets
+ 	displacement
+@@ -85,9 +82,6 @@ set(EXAMPLES
+ 	gltfloading
+ 	gltfscenerendering
+ 	gltfskinning
+-	hdr
+-	imgui
+-	indirectdraw
+ 	inlineuniformblocks
+ 	inputattachments
+ 	instancing
+@@ -101,8 +95,6 @@ set(EXAMPLES
+ 	parallaxmapping
+ 	particlefire
+ 	pbrbasic
+-	pbribl
+-	pbrtexture
+ 	pipelines
+ 	pipelinestatistics
+ 	pushconstants
+@@ -115,12 +107,8 @@ set(EXAMPLES
+ 	raytracingshadows	
+ 	renderheadless
+ 	screenshot
+-	shadowmapping
+-	shadowmappingomni
+-	shadowmappingcascade
+ 	specializationconstants
+ 	sphericalenvmapping
+-	ssao
+ 	stencilbuffer
+ 	subpasses
+ 	terraintessellation
+@@ -136,7 +124,6 @@ set(EXAMPLES
+ 	triangle
+ 	variablerateshading
+ 	viewportarray
+-	vulkanscene
+ )
+ 
+ buildExamples()

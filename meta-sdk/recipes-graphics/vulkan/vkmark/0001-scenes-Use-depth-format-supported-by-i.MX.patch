@@ -1,0 +1,56 @@
+From 436b5b09a0f5fcd3b4f2c1711e850b52b357befb Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Wed, 13 Jun 2018 22:02:20 +0000
+Subject: [PATCH] scenes: Use depth format supported by i.MX
+
+Upstream-Status: Inappropriate [i.MX-specific]
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ src/scenes/shading_scene.cpp | 2 +-
+ src/scenes/texture_scene.cpp | 2 +-
+ src/scenes/vertex_scene.cpp  | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/scenes/shading_scene.cpp b/src/scenes/shading_scene.cpp
+index fa496ba..3e19ee8 100644
+--- a/src/scenes/shading_scene.cpp
++++ b/src/scenes/shading_scene.cpp
+@@ -64,7 +64,7 @@ void ShadingScene::setup(
+     vulkan = &vulkan_;
+     extent = vulkan_images[0].extent;
+     format = vulkan_images[0].format;
+-    depth_format = vk::Format::eD32Sfloat;
++    depth_format = vk::Format::eD24UnormS8Uint;
+     aspect = static_cast<float>(extent.height) / extent.width;
+ 
+     mesh = Model{"cat.3ds"}.to_mesh(
+diff --git a/src/scenes/texture_scene.cpp b/src/scenes/texture_scene.cpp
+index 04a8207..ccc9d2f 100644
+--- a/src/scenes/texture_scene.cpp
++++ b/src/scenes/texture_scene.cpp
+@@ -65,7 +65,7 @@ void TextureScene::setup(
+     vulkan = &vulkan_;
+     extent = vulkan_images[0].extent;
+     format = vulkan_images[0].format;
+-    depth_format = vk::Format::eD32Sfloat;
++    depth_format = vk::Format::eD24UnormS8Uint;
+     aspect = static_cast<float>(extent.height) / extent.width;
+ 
+     mesh = Model{"cube.3ds"}.to_mesh(
+diff --git a/src/scenes/vertex_scene.cpp b/src/scenes/vertex_scene.cpp
+index 0fd7fe7..4f6d49a 100644
+--- a/src/scenes/vertex_scene.cpp
++++ b/src/scenes/vertex_scene.cpp
+@@ -66,7 +66,7 @@ void VertexScene::setup(
+     vulkan = &vulkan_;
+     extent = vulkan_images[0].extent;
+     format = vulkan_images[0].format;
+-    depth_format = vk::Format::eD32Sfloat;
++    depth_format = vk::Format::eD24UnormS8Uint;
+     aspect = static_cast<float>(extent.height) / extent.width;
+ 
+     mesh = Model{"horse.3ds"}.to_mesh(
+-- 
+2.7.4
+

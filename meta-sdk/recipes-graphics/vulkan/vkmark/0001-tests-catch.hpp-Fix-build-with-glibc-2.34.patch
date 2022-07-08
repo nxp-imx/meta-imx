@@ -1,0 +1,34 @@
+From 654eacd48a0d1950dc7aa02c5b32c7059de319d1 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Tue, 28 Sep 2021 12:33:57 -0500
+Subject: [PATCH] tests/catch.hpp: Fix build with glibc-2.34
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ tests/catch.hpp | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/tests/catch.hpp b/tests/catch.hpp
+index f7681f4..a08c890 100644
+--- a/tests/catch.hpp
++++ b/tests/catch.hpp
+@@ -6487,7 +6487,7 @@ namespace Catch {
+         static bool isSet;
+         static struct sigaction oldSigActions [sizeof(signalDefs)/sizeof(SignalDefs)];
+         static stack_t oldSigStack;
+-        static char altStackMem[SIGSTKSZ];
++        char *altStackMem = new char [SIGSTKSZ]();
+ 
+         static void handleSignal( int sig ) {
+             std::string name = "<unknown signal>";
+@@ -6538,7 +6538,6 @@ namespace Catch {
+     bool FatalConditionHandler::isSet = false;
+     struct sigaction FatalConditionHandler::oldSigActions[sizeof(signalDefs)/sizeof(SignalDefs)] = {};
+     stack_t FatalConditionHandler::oldSigStack = {};
+-    char FatalConditionHandler::altStackMem[SIGSTKSZ] = {};
+ 
+ } // namespace Catch
+ 
+-- 
+2.32.0
+

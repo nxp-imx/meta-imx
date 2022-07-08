@@ -1,0 +1,36 @@
+From 1f2837e05ed090ec553a3fc4fccee5618cf26d12 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Thu, 8 Aug 2019 11:27:01 -0500
+Subject: [PATCH] CMakeLists.txt: Change the installation path of JSON files
+
+Also modify the library path in JSON files to /usr/lib/libVK*.so
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ layers/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Index: git/layers/CMakeLists.txt
+===================================================================
+--- git.orig/layers/CMakeLists.txt
++++ git/layers/CMakeLists.txt
+@@ -337,7 +337,7 @@ if(BUILD_LAYERS)
+                 -DVK_VERSION=1.2.${vk_header_version})
+             # If this json file is not a metalayer, get the needed properties from that target
+             if(TARGET ${TARGET_NAME})
+-                set(INSTALL_DEFINES ${INSTALL_DEFINES} -DRELATIVE_LAYER_BINARY="$<TARGET_FILE_NAME:${TARGET_NAME}>")
++                set(INSTALL_DEFINES ${INSTALL_DEFINES} -DRELATIVE_LAYER_BINARY="${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/$<TARGET_FILE_NAME:${TARGET_NAME}>")
+             endif()
+             add_custom_target(${TARGET_NAME}-staging-json ALL
+                               COMMAND ${CMAKE_COMMAND} ${INSTALL_DEFINES} -P "${CMAKE_CURRENT_BINARY_DIR}/generator.cmake")
+@@ -351,7 +351,7 @@ if(BUILD_LAYERS)
+                     DESTINATION ${CMAKE_INSTALL_LIBDIR})
+         elseif(UNIX)
+             install(FILES ${CMAKE_CURRENT_BINARY_DIR}/staging-json/${TARGET_NAME}.json
+-                    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/vulkan/explicit_layer.d)
++                    DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/vulkan/explicit_layer.d)
+         endif()
+     endforeach()
+ endif()
