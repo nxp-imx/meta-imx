@@ -16,7 +16,7 @@ do_compile () {
     cd ${S}
     oe_runmake clean
     oe_runmake bin
-    oe_runmake -C iMX8M -f soc.mak mkimage_imx8
+    oe_runmake SOC_DIR=iMX8M -C iMX8M -f soc.mak mkimage_imx8
 }
 
 do_install () {
