@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v35 May 2022
+LA_OPT_NXP_Software_License v36 July 2022
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
 downloading, installing, or using the Licensed Software, you indicate that you
@@ -36,7 +36,7 @@ ownership of greater than fifty percent (50%) of the shares or similar
 interests entitled to vote for the election of directors or other persons
 performing similar functions. An entity is considered an Affiliate only so long
 as such Control exists.
-1.2      "Authorized System" means either (i) Licensee's hardware product which
+1.2	"Authorized System" means either (i) Licensee's hardware product which
 incorporates an NXP Product or (ii) Licensee's software program which is used
 exclusively in connection with an NXP Product and with which the Licensed
 Software will be integrated.
@@ -343,11 +343,11 @@ examination or audit.
 22.        NOTICES.             All notices and communications under this
 Agreement will be made in writing, and will be effective when received at the
 following addresses:
-          NXP:      	NXP B.V.
-                      	High Tech Campus 60
-                       	5656 AG Eindhoven
-                       	The Netherlands
-                   	ATTN: Legal Department
+          NXP:          NXP B.V.
+                        High Tech Campus 60
+                        5656 AG Eindhoven
+                        The Netherlands
+                        ATTN: Legal Department
 
           You:          The address provided at registration will be used.
 
@@ -618,6 +618,15 @@ Cortex-M3, Cortex-M4, Cortex-M33, Cortex-M7, and Cortex-A7 based products only.
 
 SEGGER Microcontroller - J-Link/J-Trace Software: Segger software must be used
 consistent with the terms found here: http://www.segger.com/jlink-software.html
+
+Synopsys/BLE Software: Your use of the Synopsys/BLE Software and related
+documentation is subject to the following:
+(1) Synopsys is third-party beneficiaries of, and thus may enforce against you,
+the license restrictions and confidentiality obligations in this agreement with
+respect to their intellectual property and proprietary information.
+(2) Your distribution of the Licensed Software shall subject any recipient to a
+written agreement at least as protective of the Licensed Software as provided
+in this Agreement.
 
 Synopsys/Target Compiler Technologies: Your use of the Synopsys/Target Compiler
 Technologies Licensed Software and related documentation is subject to the
