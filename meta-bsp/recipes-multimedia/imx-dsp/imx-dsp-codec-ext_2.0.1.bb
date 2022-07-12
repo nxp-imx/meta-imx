@@ -8,8 +8,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "dd8ba1afacb0e5c26322b54a72f88687"
-SRC_URI[sha256sum] = "0ab512bfd147dd81fdc8e84403c0aac5103af866d0af9919bf60f2cf0487eb12"
+SRC_URI[md5sum] = "e416c7dbdc01b76ccf943a6e76e63297"
+SRC_URI[sha256sum] = "64c0bdb1793074bf236fb3fd36d47fb0ef91da1f3a9306af39023a1483d3f2cb"
 
 # Fix strip command failed: 'Unable to recognise the format of the input file'
 INHIBIT_PACKAGE_STRIP = "1"
