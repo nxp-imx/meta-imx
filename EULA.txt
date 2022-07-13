@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v36 July 2022
+LA_OPT_NXP_Software_License v37 July 2022
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
 downloading, installing, or using the Licensed Software, you indicate that you
@@ -109,13 +109,13 @@ Section 2, are contained in Appendix A. The Licensed Software may be
 accompanied by a Software Content Register which will identify that portion of
 the Licensed Software, if any, that is subject to the different terms in
 Appendix A.
-2.5.         You may use subcontractors on your premises to exercise your
-rights under Section 2.2 and Section 2.3, if any, so long as you have an
-agreement in place with the subcontractor containing confidentiality
-restrictions no less stringent than those contained in this Agreement. You will
-remain liable for your subcontractors' adherence to the terms of this Agreement
-and for any and all acts and omissions of such subcontractors with respect to
-this Agreement and the Licensed Software.
+2.5.         You may use subcontractors to exercise your rights under Section
+2.2 and Section 2.3, if any, so long as you have an agreement in place with the
+subcontractor containing confidentiality restrictions no less stringent than
+those contained in this Agreement. You will remain liable for your
+subcontractors' adherence to the terms of this Agreement and for any and all
+acts and omissions of such subcontractors with respect to this Agreement and
+the Licensed Software.
 3.       LICENSE LIMITATIONS AND RESTRICTIONS.
 3.1.         The licenses granted above in Section 2 only extend to NXP
 Intellectual Property Rights that would be infringed by the unmodified Licensed
