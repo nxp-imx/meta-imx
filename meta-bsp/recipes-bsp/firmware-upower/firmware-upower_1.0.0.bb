@@ -1,4 +1,4 @@
-# Copyright 2021 NXP
+# Copyright 2021-2022 NXP
 DESCRIPTION = "NXP i.MX uPower firmware"
 LICENSE = "Proprietary"
 SECTION = "BSP"
@@ -20,7 +20,7 @@ BOOT_TOOLS = "imx-boot-tools"
 do_deploy () {
     # Deploy the related firmware to be package by imx-boot
     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${S}/upower.bin  ${DEPLOYDIR}/${BOOT_TOOLS}
+    install -m 0644 ${S}/upower_a0.1.bin  ${DEPLOYDIR}/${BOOT_TOOLS}/upower.bin
 }
 addtask deploy after do_install before do_build
 
