@@ -51,9 +51,16 @@ ML_ACCELERATED_PKGS:mx8-nxp-bsp:imxgpu = " \
 "
 ML_ACCELERATED_PKGS:mx8mm-nxp-bsp      = ""
 
+
+# ARM ethos-u-vela package
+VELA_PKGS = ""
+VELA_PKGS:mx93-nxp-bsp = "ethos-u-vela"
+
+
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \
     ${ML_ACCELERATED_PKGS} \
     ${ML_NNSTREAMER_PKGS} \
     ${ML_GST_PROFILER} \
+    ${VELA_PKGS} \
 "
