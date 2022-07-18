@@ -7,7 +7,7 @@ SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH} \
 "
 IMX_MKIMAGE_SRC ?= "git://source.codeaurora.org/external/imx/imx-mkimage.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "bd068a50533c972365d6516313e5e9b9382759b2"
+SRCREV = "47e6dd4800ece3609d582bb26b25ec8d2982b399"
 
 S = "${WORKDIR}/git"
 
