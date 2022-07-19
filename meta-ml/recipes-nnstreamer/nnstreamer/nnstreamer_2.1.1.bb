@@ -37,6 +37,7 @@ PACKAGECONFIG ??= "protobuf python3 ${PACKAGECONFIG_SOC}"
 PACKAGECONFIG_SOC                    ??= ""
 PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "deepview-rt tensorflow-lite tvm"
 PACKAGECONFIG_SOC:mx8mm-nxp-bsp      ??= "deepview-rt tensorflow-lite"
+PACKAGECONFIG_SOC:mx9-nxp-bsp        ??= "deepview-rt tensorflow-lite"
 
 PACKAGECONFIG[deepview-rt] = "\
        -Ddeepview-rt-support=enabled, \
