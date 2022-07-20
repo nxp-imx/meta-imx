@@ -99,7 +99,7 @@ SRC_URI:remove = " \
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "imx-1.20.x"
 SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
-SRCREV = "5459be91d74e6c14205f0d2b177c729d5cf64b73"
+SRCREV = "b9319a38b027c0db621db57502aadbdb6ef218e2"
 
 S = "${WORKDIR}/git"
 
