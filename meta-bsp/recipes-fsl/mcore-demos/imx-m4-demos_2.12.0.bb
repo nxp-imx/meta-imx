@@ -3,7 +3,7 @@
 
 require imx-mcore-demos.inc
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=37cb2d8c2bcf8bf2fbe0366d5d928c29"
+LIC_FILES_CHKSUM = "file://COPYING;md5=37cb2d8c2bcf8bf2fbe0366d5d928c29" 
 
 SRC_URI[imx8mm.md5sum] = "28c188d672848d4bf38ca0828aa3405d"
 SRC_URI[imx8mm.sha256sum] = "ed924d6fe00754f01080dedb9eaeeb7e3cf377376567e30c4b0502e2e8f5240d"
