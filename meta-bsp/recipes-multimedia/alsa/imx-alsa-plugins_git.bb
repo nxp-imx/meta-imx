@@ -22,7 +22,7 @@ PV = "1.0.26+${SRCPV}"
 
 IMXALSA_SRC ?= "git://source.codeaurora.org/external/imx/imx-alsa-plugins.git;protocol=https"
 SRC_URI = "${IMXALSA_SRC};branch=${SRCBRANCH}"
-SRCREV = "6fc1604130338b5957017d3dfd69dd676ef1d681"
+SRCREV = "a9643b8820dd89b7a8c99941a90e9498f1b68c14"
 S = "${WORKDIR}/git"
 
 INCLUDE_DIR = "-I${STAGING_INCDIR_IMX}"
