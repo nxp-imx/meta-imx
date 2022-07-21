@@ -27,4 +27,4 @@ GN_ARGS:append:imx-nxp-bsp = " \
     ${GN_ARGS_USE_IMXGPU} \
     ${GN_ARGS_ENABLE_PROPRIETARY_CODECS} \
 "
-CHROMIUM_EXTRA_ARGS:append = " --disable-features=VizDisplayCompositor --in-process-gpu"
+CHROMIUM_EXTRA_ARGS:append = " --disable-features=VizDisplayCompositor --in-process-gpu --disable-gpu-rasterization"
