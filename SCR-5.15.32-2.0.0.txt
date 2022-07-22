@@ -249,7 +249,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-seco-5.8.7.1.bin
 Version:                     5.8.7.1
-Outgoing License:            LA_OPT_NXP_Software_License v31 December 2021 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -1222,7 +1222,7 @@ Origin:                      Au-Zone Technologies (proprietary)
 
 Package:                     deepview-rt-examples-1.5.bin
 Version:                     1.5
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
