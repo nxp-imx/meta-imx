@@ -46,11 +46,13 @@ do_install() {
     install -d ${D}/${libdir}
     install -d ${D}/${includedir}
     install -d ${D}/opt/imx8-isp/bin
+    install -d ${D}/opt/imx8-isp/bin/dewarp_config
 
     cp -r ${B}/generated/release/bin/*_test ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/*2775* ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/*.xml ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/*.drv ${D}/opt/imx8-isp/bin
+    cp -r ${WORKDIR}/${BP}/dewarp/dewarp_config/ ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/isp_media_server ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/vvext ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/lib/*.so* ${D}/${libdir}
