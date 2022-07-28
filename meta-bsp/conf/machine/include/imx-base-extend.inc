@@ -33,10 +33,7 @@ MACHINEOVERRIDES_EXTENDER:mx93:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdr
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx93"
 MACHINE_SOCARCH_SUFFIX:mx93-nxp-bsp = "-mx93"
 
-SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.bz2 tar.bz2 ${EXTRA_SOC_DEFAULT_IMAGE_FSTYPES}"
-EXTRA_SOC_DEFAULT_IMAGE_FSTYPES               = ""
-EXTRA_SOC_DEFAULT_IMAGE_FSTYPES:mx8qm-nxp-bsp = "wic.zst tar.zst"
-EXTRA_SOC_DEFAULT_IMAGE_FSTYPES:mx8mp-nxp-bsp = "wic.zst tar.zst"
+SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
 ZSTD_COMPRESSION_LEVEL ?= "-10"
 
 WKS_FILE_DEPENDS:append:mx9-nxp-bsp = " imx-boot"
