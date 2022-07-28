@@ -39,3 +39,4 @@ SERIAL_CONSOLES = "115200;ttyLP0"
 
 # Add additional firmware
 #MACHINE_FIRMWARE:append = " firmware-imx-epdc"
+MACHINE_FIRMWARE:append = " ethos-u-firmware"
