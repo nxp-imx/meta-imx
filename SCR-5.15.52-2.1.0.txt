@@ -1266,6 +1266,16 @@ Description and comments:    Tool to compile a TensorFlow Lite for Microcontroll
 Release Location:            https://source.codeaurora.org/external/imx/vela-imx -b lf-5.15.52-2.1.0
 --------------------------------------------
 
+Package:                     ethos-u-driver-stack-imx.git
+Version:                     22.02
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    ethos-u-driver-stack is the user space driver library for ethos-u NPU on iMX93 platform
+Release Location:            https://source.codeaurora.org/external/imx/ethos-u-driver-stack-imx -b lf-5.15.52-2.1.0
+--------------------------------------------
+
 Package:                     nnshark.git
 Version:                     2021.10.imx
 Outgoing License:            LGPL-2.1 
