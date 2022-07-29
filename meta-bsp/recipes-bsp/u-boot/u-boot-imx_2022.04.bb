@@ -3,39 +3,32 @@
 # Copyright 2017-2022 NXP
 
 require recipes-bsp/u-boot/u-boot.inc
-###############################################################
-########### For upstream u-boot-imx-common_2022.04.inc ########
-DESCRIPTION = "i.MX U-Boot suppporting i.MX reference boards."
+require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
 
-LICENSE = "GPL-2.0-or-later"
+###############################################################
+# BEGIN: Changes to u-boot-imx-common_${PV}.inc
+
 LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
+SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "lf_v2022.04"
-SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "073efb92e263ee586a2196e26b3026201cdc8a3b"
 LOCALVERSION = "-${SRCBRANCH}"
 
-DEPENDS += "flex-native bison-native bc-native dtc-native gnutls-native xxd-native"
+DEPENDS += "gnutls-native xxd-native"
 
-S = "${WORKDIR}/git"
-B = "${WORKDIR}/build"
-
-inherit fsl-u-boot-localversion
-
-BOOT_TOOLS = "imx-boot-tools"
-
+# END: Changes to u-boot-imx-common_${PV}.inc
 ###############################################################
-# require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
 
 PROVIDES += "u-boot"
 
 inherit uuu_bootloader_tag
 
-UUU_BOOTLOADER            = ""
-UUU_BOOTLOADER:mx6-nxp-bsp        = "${UBOOT_BINARY}"
-UUU_BOOTLOADER:mx7-nxp-bsp        = "${UBOOT_BINARY}"
-UUU_BOOTLOADER_TAGGED     = ""
+UUU_BOOTLOADER             = ""
+UUU_BOOTLOADER:mx6-nxp-bsp = "${UBOOT_BINARY}"
+UUU_BOOTLOADER:mx7-nxp-bsp = "${UBOOT_BINARY}"
+UUU_BOOTLOADER_TAGGED             = ""
 UUU_BOOTLOADER_TAGGED:mx6-nxp-bsp = "u-boot-tagged.${UBOOT_SUFFIX}"
 UUU_BOOTLOADER_TAGGED:mx7-nxp-bsp = "u-boot-tagged.${UBOOT_SUFFIX}"
 
