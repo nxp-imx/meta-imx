@@ -19,6 +19,9 @@ ATF_MACHINE_NAME:mx8ulp-nxp-bsp = "bl31-imx8ulp.bin"
 IMX_EXTRA_FIRMWARE:mx8ulp-nxp-bsp = "firmware-upower firmware-sentinel"
 SOC_TARGET:mx8ulp-nxp-bsp = "iMX8ULP"
 SOC_FAMILY:mx8ulp-nxp-bsp = "mx8ulp"
+REV_OPTION:mx8ulp-generic-bsp = \
+    "${@bb.utils.contains('MACHINE_FEATURES', 'soc-reva0', '', \
+                                                           'REV=A1', d)}"
 # Setting for i.MX 93
 IMX_M4_DEMOS:mx9-nxp-bsp = ""
 M4_DEFAULT_IMAGE:mx9-nxp-bsp = ""
