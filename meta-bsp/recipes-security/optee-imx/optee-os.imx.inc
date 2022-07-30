@@ -98,4 +98,4 @@ FILES:${PN}-staticdev = "${includedir}/optee/"
 RDEPENDS:${PN}-dev += "${PN}-staticdev"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(imx-nxp-bsp|imx-boot-container)"
+COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
