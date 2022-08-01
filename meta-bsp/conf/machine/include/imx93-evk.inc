@@ -2,7 +2,7 @@ require conf/machine/include/imx-base.inc
 require conf/machine/include/arm/armv8-2a/tune-cortexa55.inc
 
 MACHINE_FEATURES += "pci wifi bluetooth"
-MACHINE_FEATURES:append:use-nxp-bsp = " optee jailhouse"
+MACHINE_FEATURES:append:use-nxp-bsp = " optee jailhouse iw612"
 
 KERNEL_DEVICETREE = " \
     freescale/${KERNEL_DEVICETREE_BASENAME}.dtb \
@@ -38,5 +38,4 @@ IMX_BOOT_SEEK = "32"
 SERIAL_CONSOLES = "115200;ttyLP0"
 
 # Add additional firmware
-#MACHINE_FIRMWARE:append = " firmware-imx-epdc"
 MACHINE_FIRMWARE:append = " ethos-u-firmware"
