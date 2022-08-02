@@ -36,7 +36,6 @@ MACHINE_SOCARCH_SUFFIX:mx93-nxp-bsp = "-mx93"
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
 ZSTD_COMPRESSION_LEVEL ?= "-10"
 
-UBOOT_PROVIDES_BOOT_CONTAINER:imx-nxp-bsp = "0"
 SOC_DEFAULT_WKS_FILE:mx9-nxp-bsp ?= "imx-imx-boot-bootpart.wks.in"
 
 # Graphics libraries
