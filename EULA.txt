@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v37 July 2022
+LA_OPT_NXP_Software_License v38 August 2022
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
 downloading, installing, or using the Licensed Software, you indicate that you
@@ -508,10 +508,10 @@ Global Locate (Broadcom Corporation): Use of Global Locate, Inc. software is
 limited to evaluation and demonstration only.  Permitted distributions must be
 similarly limited.  Further rights must be obtained from Global Locate.
 
-LC3plus: LC3plus short frame audio codec features as defined in ETSI TS 103634
-are included in the code. To enable the LC3plus features in a final product, a
-license has to be obtained from Fraunhofer. More information can be found on
-the following web page:
+LC3plus: the LC3plus Low Complexity Communication Codec Plus (LC3plus) per ETSI
+TS 103 634 V1.3.1, is subject to ETSI Intellectual Property Rights Policy, See
+https://portal.etsi.org/directives/45_directives_jun_2022.pdf. For application
+in an End Product, Fraunhofer communication applies, see
 https://www.iis.fraunhofer.de/en/ff/amm/communication/lc3.html
 
 Microsoft: Except for Microsoft PlayReady software, if the Licensed Software
