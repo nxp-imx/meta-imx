@@ -247,6 +247,16 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
+Package:                     mwifiex-iw612.git
+Version:                     
+Outgoing License:            GPL-2.0 
+License File:                gpl-2.0.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    NXP Wi-Fi IW612 linux SDK
+Release Location:            https://github.com/nxp-imx/mwifiex-iw612 -b lf-5.15.52-2.1.0
+--------------------------------------------
+
 Package:                     imx-seco-5.8.7.1.bin
 Version:                     5.8.7.1
 Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
@@ -1037,7 +1047,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     nxp-afe.git
-Version:                     1
+Version:                     1.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Multimedia
@@ -1055,7 +1065,7 @@ License File:                EULA.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP RetuneDSP Voice Seeker
-Release Location:             -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/NXP/imx-voiceUI  -b lf-5.15.52-2.1.0
 --------------------------------------------
 M4 Processor Packages
 --------------------------------------------
@@ -1191,8 +1201,8 @@ Origin:                      NXP (proprietary)
 M33 Processor Packages
 --------------------------------------------
 
-Package:                     imx8ulp-m33-demo-2.12.0.bin
-Version:                     2.12.0
+Package:                     imx8ulp-m33-demo-2.12.1.bin
+Version:                     2.12.1
 Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1274,6 +1284,16 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-driver-stack is the user space driver library for ethos-u NPU on iMX93 platform
 Release Location:            https://source.codeaurora.org/external/imx/ethos-u-driver-stack-imx -b lf-5.15.52-2.1.0
+--------------------------------------------
+
+Package:                     ethos-u-firmware.git
+Version:                     22.02
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    ethos-u-firmware is the binary NPU driver running on cortex-m33 core of NXP iMX93 platform
+Release Location:            https://source.codeaurora.org/external/imx/ethos-u-firmware -b lf-5.15.52-2.1.0
 --------------------------------------------
 
 Package:                     nnshark.git
