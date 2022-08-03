@@ -2,7 +2,7 @@ DESCRIPTION = "DeepViewRT examples"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d3c315c6eaa43e07d8c130dc3a04a011"
 
-DEPENDS = "deepview-rt gstreamer1.0-plugins-base opencv curl"
+DEPENDS = "deepview-rt" 
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "fe43a6bbcb31cea81893063faf96d555"
@@ -17,11 +17,7 @@ do_install () {
     install -d ${D}${bindir}/${BPN}
 
     cp -fr ${S}/labelimg/labelimg  ${D}${bindir}/${BPN}
-    cp -fr ${S}/labelimg/labelimg_remote  ${D}${bindir}/${BPN}
-    cp -fr ${S}/detectimg/detectv4 ${D}${bindir}/${BPN}
-    cp -fr ${S}/detectimg/detectv4_remote ${D}${bindir}/${BPN}
-    cp -fr ${S}/ssdcam-gst/ssdcam-gst ${D}${bindir}/${BPN}
-    cp -fr ${S}/labelcam-gst/labelcam-gst ${D}${bindir}/${BPN}
+    cp -fr ${S}/detect_ssd/detect_ssd ${D}${bindir}/${BPN}
     cp -fr ${S}/python-examples ${D}${bindir}/${BPN}
  
     chown -R root:root "${D}"
