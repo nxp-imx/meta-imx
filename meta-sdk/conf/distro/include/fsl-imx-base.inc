@@ -11,6 +11,7 @@ REMOVE_VULKAN_FEATURE = "vulkan"
 REMOVE_VULKAN_FEATURE:mx8-nxp-bsp = ""
 POKY_DEFAULT_DISTRO_FEATURES:remove      = "wayland ${REMOVE_VULKAN_FEATURE}"
 POKY_DEFAULT_DISTRO_FEATURES:append:mx8-nxp-bsp  = " jailhouse"
+POKY_DEFAULT_DISTRO_FEATURES:append:mx9-nxp-bsp  = " jailhouse"
 
 DISTRO_FEATURES:append:mx8-nxp-bsp = " virtualization"
 
