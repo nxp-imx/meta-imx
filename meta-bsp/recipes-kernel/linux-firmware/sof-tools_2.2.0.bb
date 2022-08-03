@@ -5,10 +5,10 @@ DESCRIPTION = "Utilities for debugging and configuration of Sound Open Firmware"
 HOMEPAGE = "https://www.sofproject.org"
 SECTION = "Console/tools"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=f674ee93878e0b25c4e95dc6c2d06cdd"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=14abb55d71048ebecff1a104640546b6"
 
-SRCREV = "d93efb7a68676e23306e1468ff345318b0eade06"
-SRC_URI = "git://github.com/thesofproject/sof.git;branch=imx-stable-v2.1;protocol=https"
+SRCREV = "57864296b07c5ffd673214dd5b1e3d07ee274a22"
+SRC_URI = "git://github.com/thesofproject/sof.git;branch=imx-stable-v2.2;protocol=https"
 
 S = "${WORKDIR}/git"
 
