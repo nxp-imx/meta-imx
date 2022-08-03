@@ -3,7 +3,7 @@ NXP Software Content Register
 Release - Linux 5.15.52-2.1.0
  September 2022
 
-Outgoing License: LA_OPT_NXP_Software_License v37 July 2022 - Additional distribution license granted - Section 2.3 applies
+Outgoing License: LA_OPT_NXP_Software_License v38 August 2022 - Additional distribution license granted - Section 2.3 applies
 License File:     EULA.txt
 
 Yocto Project recipe manifest:
@@ -58,7 +58,7 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     imx-sc-firmware-1.14.0.bin
 Version:                     1.14.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -71,7 +71,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     firmware-imx-8.17.bin
 Version:                     8.17
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -103,7 +103,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     firmware-sentinel-0.5.1.bin
 Version:                     0.5.1
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -115,7 +115,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     firmware-upower-1.0.0.bin
 Version:                     1.0.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -505,7 +505,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 
 Package:                     isp-imx-4.2.2.19.0.bin
 Version:                     4.2.2.19.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -517,7 +517,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (proprietary)
 
 Package:                     basler-camera-4.2.2.19.0.bin
 Version:                     4.2.2.19.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -543,7 +543,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-gpu-viv-6.4.3.p4.4-aarch32.bin
 Version:                     6.4.3.p4.4
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -562,7 +562,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-gpu-viv-6.4.3.p4.4-aarch64.bin
 Version:                     6.4.3.p4.4
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -671,7 +671,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-gpu-g2d-6.4.3.p4.4-arm.bin
 Version:                     6.4.3.p4.4
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -683,7 +683,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-gpu-g2d-6.4.3.p4.4-aarch64.bin
 Version:                     6.4.3.p4.4
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -695,7 +695,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-dpu-g2d-2.1.2.bin
 Version:                     2.1.2
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -707,7 +707,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-pxp-g2d.git
 Version:                     2.1.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
@@ -729,7 +729,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     libgpuperfcnt-6.4.3.p4.4-aarch64-wayland.bin
 Version:                     6.4.3.p4.4
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -741,7 +741,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     libgpuperfcnt-6.4.3.p4.4-arm-fb.bin
 Version:                     6.4.3.p4.4
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -753,7 +753,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     libgpuperfcnt-6.4.3.p4.4-arm-wayland.bin
 Version:                     6.4.3.p4.4
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -816,7 +816,7 @@ Multimedia Packages
 
 Package:                     imx-codec-4.7.1.bin
 Version:                     4.7.1
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -833,7 +833,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-parser-4.7.1.bin
 Version:                     4.7.1
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -937,7 +937,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-vpuwrap.git
 Version:                     git
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
@@ -963,7 +963,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-vpu-hantro-1.27.0.bin
 Version:                     1.27.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -992,7 +992,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-vpu-hantro-vc-1.8.0.bin
 Version:                     1.8.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1020,7 +1020,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-dsp-2.0.1.bin
 Version:                     2.0.1
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1034,7 +1034,7 @@ Origin:             NXP (proprietary)
 
 Package:                     imx-dsp-codec-ext-2.0.1.bin
 Version:                     2.0.1
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1060,7 +1060,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     nxp-afe-voiceseeker.git
 Version:                     2.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
 Package Category:            Multimedia
 Type of Content:             source
@@ -1072,7 +1072,7 @@ M4 Processor Packages
 
 Package:                     imx7ulp-m4-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1100,7 +1100,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mm-m4-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1114,7 +1114,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mq-m4-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1158,7 +1158,7 @@ M7 Processor Packages
 
 Package:                     imx8mn-m7-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1172,7 +1172,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mnddr3l-m7-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1186,7 +1186,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mp-m7-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1203,7 +1203,7 @@ M33 Processor Packages
 
 Package:                     imx8ulp-m33-demo-2.12.1.bin
 Version:                     2.12.1
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1218,7 +1218,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx93-m33-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1230,7 +1230,7 @@ MachineLearning Packages
 
 Package:                     deepview-rt-2.4.44-aarch64.bin
 Version:                     2.4.44-aarch64
-Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 No distribution license granted - Section 2.2 applies
+Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 No distribution license granted - Section 2.2 applies
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
@@ -1248,8 +1248,10 @@ Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    DeepViewRT Examples
 Release Location:            Mirror
-Origin:                      Au-Zone Technologies (proprietary)
-                               Viktor Kutuzov (MIT)
+Origin:                    Au-Zone Technologies (proprietary)
+                           mman-win32 (Author: Viktor Kutuzov, License: MIT) - https://github.com/klauspost/mman-win32
+                           panda.jpg (Author: Shizhao, License: CC BY-SA 3.0) - https://commons.wikimedia.org/wiki/File:Giant_Panda_in_Beijing_Zoo_1.JPG
+                           horse.jpg (public domain) - https://commons.wikimedia.org/wiki/File:Horsescd1l-095.jpg
 
 --------------------------------------------
 
