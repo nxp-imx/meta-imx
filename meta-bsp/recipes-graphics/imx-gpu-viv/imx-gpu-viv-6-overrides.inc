@@ -7,8 +7,6 @@ PROVIDES += "${PROVIDES_OPENGLES3}"
 
 PACKAGECONFIG ?= "valgrind"
 
-LIBVULKAN_VERSION = "${LIBVULKAN_VERSION_MAJOR}.2.1"
-
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
@@ -52,17 +50,6 @@ do_install () {
     if [ "${BACKEND}" = "wayland" ] && [ "${IS_MX8}" != "1" ]; then
         # Special case for libVDK on Wayland backend, deliver fb library as well.
         cp ${S}/gpu-core/usr/lib/fb/libVDK.so.1.2.0 ${D}${libdir}/libVDK-fb.so.1.2.0
-    fi
-    if [ "${IS_MX8}" = "1" ]; then
-        # Rename the vulkan implementation library which is wrapped by the vulkan-loader
-        # library of the same name
-        MAJOR=${LIBVULKAN_VERSION_MAJOR}
-        FULL=${LIBVULKAN_VERSION}
-        mv ${D}${libdir}/libvulkan.so.$FULL ${D}${libdir}/libvulkan_VSI.so.$FULL
-        patchelf --set-soname libvulkan_VSI.so.$MAJOR ${D}${libdir}/libvulkan_VSI.so.$FULL
-        rm ${D}${libdir}/libvulkan.so.$MAJOR ${D}${libdir}/libvulkan.so
-        ln -s libvulkan_VSI.so.$FULL ${D}${libdir}/libvulkan_VSI.so.$MAJOR
-        ln -s libvulkan_VSI.so.$FULL ${D}${libdir}/libvulkan_VSI.so
     fi
 
     # FIXME: MX6SL does not have 3D support; hack it for now
