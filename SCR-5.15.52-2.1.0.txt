@@ -580,13 +580,13 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     6.0.0
+Version:                     6.0.1
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics sample applications
-Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 6.0.0
+Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 6.0.1
 Origin:                      NXP (BSD-3-clause)
                          Demo Framework
                              Sascha Willems - Vulkan demo (MIT) - https://github.com/SaschaWillems/Vulkan
@@ -800,7 +800,7 @@ Origin:                      NXP (BSD-3-Cluse)
 --------------------------------------------
 
 Package:                     arm-computelibrary-imx.git
-Version:                     21.08
+Version:                     22.05
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
@@ -1228,8 +1228,8 @@ Release Location:            Mirror
 MachineLearning Packages
 --------------------------------------------
 
-Package:                     deepview-rt-2.4.44-aarch64.bin
-Version:                     2.4.44-aarch64
+Package:                     deepview-rt-2.4.46-aarch64.bin
+Version:                     2.4.46-aarch64
 Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 No distribution license granted - Section 2.2 applies
 License File:                COPYING
 Package Category:            MachineLearning
@@ -1240,8 +1240,8 @@ Origin:                      Au-Zone Technologies (proprietary)
 
 --------------------------------------------
 
-Package:                     deepview-rt-examples-1.5.bin
-Version:                     1.5
+Package:                     deepview-rt-examples-1.6.bin
+Version:                     1.6
 Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            MachineLearning
@@ -1266,34 +1266,34 @@ Origin:                      NXP (Apache-2.0)
 
 --------------------------------------------
 
-Package:                     vela-imx.git
+Package:                     ethos-u-vela.git
 Version:                     3.3.0
 Outgoing License:            Apache-2.0 
-License File:                LICENSE
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tool to compile a TensorFlow Lite for Microcontrollers neural network model
-Release Location:            https://source.codeaurora.org/external/imx/vela-imx -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/nxpmicro/ethos-u-vela -b lf-5.15.52-2.1.0
 --------------------------------------------
 
-Package:                     ethos-u-driver-stack-imx.git
+Package:                     ethos-u-driver-stack.git
 Version:                     22.02
 Outgoing License:            Apache-2.0 
-License File:                LICENSE
+License File:                LICENSE-APAchE-2.0.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-driver-stack is the user space driver library for ethos-u NPU on iMX93 platform
-Release Location:            https://source.codeaurora.org/external/imx/ethos-u-driver-stack-imx -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/nxpmicro/ethos-u-driver-stack -b lf-5.15.52-2.1.0
 --------------------------------------------
 
 Package:                     ethos-u-firmware.git
 Version:                     22.02
 Outgoing License:            Apache-2.0 
-License File:                LICENSE
+License File:                LICENSE-APACHE-2.0.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-firmware is the binary NPU driver running on cortex-m33 core of NXP iMX93 platform
-Release Location:            https://source.codeaurora.org/external/imx/ethos-u-firmware -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/nxpmicro/ethos-u-firmware -b lf-5.15.52-2.1.0
 --------------------------------------------
 
 Package:                     nnshark.git
