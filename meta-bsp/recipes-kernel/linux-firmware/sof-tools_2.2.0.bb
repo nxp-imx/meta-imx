@@ -7,7 +7,7 @@ SECTION = "Console/tools"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=14abb55d71048ebecff1a104640546b6"
 
-SRCREV = "57864296b07c5ffd673214dd5b1e3d07ee274a22"
+SRCREV = "7b89fdea56f06fad41cefbbce432e73c477988a7"
 SRC_URI = "git://github.com/thesofproject/sof.git;branch=imx-stable-v2.2;protocol=https"
 
 S = "${WORKDIR}/git"
