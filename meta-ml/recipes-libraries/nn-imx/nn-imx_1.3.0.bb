@@ -1,4 +1,4 @@
-# Copyright 2020-2021 NXP
+# Copyright 2020-2022 NXP
 DESCRIPTION = "i.MX Neural Networks Accelerator Plugin"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bba6cdb9c2b03c849ed4975ed9ed90dc"
@@ -8,7 +8,7 @@ SRC_URI = "${NN_IMX_SRC};branch=${SRCBRANCH}"
 NN_IMX_SRC ?= "git://source.codeaurora.org/external/imx/nn-imx.git;protocol=https"
 SRCBRANCH = "imx_1.3.0"
 
-SRCREV = "86080bc2d3269c52c590a3404ed6ab53fa80890a"
+SRCREV = "1b54f5a3e80cdf71fda9059c79d76cf7bd7e3972"
 
 S = "${WORKDIR}/git"
 
