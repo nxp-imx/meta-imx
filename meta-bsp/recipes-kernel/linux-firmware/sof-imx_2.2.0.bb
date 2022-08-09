@@ -1,4 +1,4 @@
-# Copyright (C) 2020-2021 NXP
+# Copyright (C) 2020-2022 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Sound Open Firmware"
