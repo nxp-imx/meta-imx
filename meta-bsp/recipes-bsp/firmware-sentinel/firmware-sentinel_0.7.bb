@@ -3,7 +3,7 @@ SUMMARY = "NXP i.MX Sentinel firmware"
 DESCRIPTION = "Firmware for i.MX Sentinel Security Controller"
 SECTION = "base"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=65c483bb431ccd9a1820e6872c604771"
+LIC_FILES_CHKSUM = "file://COPYING;md5=65c483bb431ccd9a1820e6872c604771" 
 
 inherit fsl-eula-unpack use-imx-security-controller-firmware deploy
 
