@@ -223,7 +223,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -271,7 +271,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-seco-libs.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
@@ -707,8 +707,8 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-pxp-g2d.git
 Version:                     2.1.0
-Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
+License File:                EULA.txt
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
@@ -814,8 +814,8 @@ Origin:                      NXP (MIT)
 Multimedia Packages
 --------------------------------------------
 
-Package:                     imx-codec-4.7.1.bin
-Version:                     4.7.1
+Package:                     imx-codec-4.7.2.bin
+Version:                     4.7.2
 Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -831,8 +831,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.7.1.bin
-Version:                     4.7.1
+Package:                     imx-parser-4.7.2.bin
+Version:                     4.7.2
 Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
