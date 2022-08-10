@@ -223,7 +223,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v27 July 2021 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -271,7 +271,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-seco-libs.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             source
@@ -308,8 +308,8 @@ Description and comments:    Sound Open Firmware with Zephyr
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-3.0.0
-Version:                     3.0.0
+Package:                     zephyr-demo-imx-3.1.0
+Version:                     3.1.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -707,8 +707,8 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-pxp-g2d.git
 Version:                     2.1.0
-Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
+License File:                EULA.txt
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
@@ -1047,7 +1047,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     nxp-afe.git
-Version:                     1.0
+Version:                     1
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Multimedia
@@ -1271,7 +1271,7 @@ Release Location:            https://github.com/nxpmicro/ethos-u-vela -b lf-5.15
 Package:                     ethos-u-driver-stack.git
 Version:                     22.02
 Outgoing License:            Apache-2.0 
-License File:                LICENSE-APAchE-2.0.txt
+License File:                LICENSE-APACHE-2.0.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-driver-stack is the user space driver library for ethos-u NPU on iMX93 platform
