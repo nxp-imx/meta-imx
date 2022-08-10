@@ -101,8 +101,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-sentinel-0.5.1.bin
-Version:                     0.5.1
+Package:                     firmware-sentinel-0.7.bin
+Version:                     0.7
 Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -1334,7 +1334,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     tensorflow-imx.git
 Version:                     2.9.1
 Outgoing License:            Apache-2.0 
-License File:                LICENSE.txt
+License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite C++ Library
@@ -1346,7 +1346,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     tflite-vx-delegate-imx.git
 Version:                     2.9.1
-Outgoing License:            Apache-2.0 
+Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
