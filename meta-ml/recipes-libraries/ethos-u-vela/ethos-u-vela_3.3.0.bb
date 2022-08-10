@@ -11,7 +11,7 @@ RDEPENDS:${PN} += "flatbuffers python3-numpy python3-lxml"
 
 VELA_SRC ?= "git://source.codeaurora.org/external/imx/vela-imx.git;protocol=https"
 SRCBRANCH = "imx_3.3.0"
-SRCREV = "4010268b6a7869845ae01159ed70e9663d17050e"
+SRCREV = "cd5fa83dfd1419aeaa79467d109da443a7154894"
 SRC_URI = "${VELA_SRC};branch=${SRCBRANCH}"
 
 S = "${WORKDIR}/git"
