@@ -1,9 +1,11 @@
 RDEPENDS:${PN}-base += " \
-    simg2img \
     gptfdisk \
     hdparm \
     iproute2 \
     nfs-utils \
+    simg2img \
+    tar \
+    zstd \
 "
 
 RDEPENDS:${PN}-extfs += " \
