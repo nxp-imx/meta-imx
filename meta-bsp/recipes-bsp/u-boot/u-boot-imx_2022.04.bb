@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "lf_v2022.04"
-SRCREV = "76f3bed8f51fc539044579615383b0230b26827e"
+SRCREV = "c5482207353db69908d334d6e7edf7a140c39a03"
 LOCALVERSION = "-${SRCBRANCH}"
 
 DEPENDS += "gnutls-native xxd-native"
