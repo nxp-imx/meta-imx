@@ -2,7 +2,7 @@ DESCRIPTION = "This package includes the updated and experimental ModelRunner fo
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=65c483bb431ccd9a1820e6872c604771" 
 
-DEPENDS = "python3 python3-pip-native opencv"
+DEPENDS = "python3 python3-pip-native"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "a09940f4bd8b42f8e5db3bcf3e836c58"
