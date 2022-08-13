@@ -3,7 +3,8 @@
 
 require imx-mcore-demos.inc
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=37cb2d8c2bcf8bf2fbe0366d5d928c29"
+LIC_FILES_CHKSUM:mx8mnul-nxp-bsp = "file://COPYING;md5=37cb2d8c2bcf8bf2fbe0366d5d928c29"
+LIC_FILES_CHKSUM:mx8mn-nxp-bsp = "file://COPYING;md5=37cb2d8c2bcf8bf2fbe0366d5d928c29"
 LIC_FILES_CHKSUM:mx8mp-nxp-bsp = "file://COPYING;md5=65c483bb431ccd9a1820e6872c604771"
 
 SRC_URI[imx8mnddr3l.md5sum] = "5044af3661d81dd7f2afcce33b538a82"
