@@ -45,6 +45,7 @@ do_deploy:append:mx8m-nxp-bsp() {
                     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
                     install -m 0777 ${B}/${config}/arch/arm/dts/${UBOOT_DTB_NAME}  ${DEPLOYDIR}/${BOOT_TOOLS}
                     install -m 0777 ${B}/${config}/u-boot-nodtb.bin  ${DEPLOYDIR}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${type}
+                    install -m 0777 ${B}/${config}/tools/mkeficapsule  ${DEPLOYDIR}/${BOOT_TOOLS}/mkeficapsule_uboot
                 fi
             done
             unset  j
