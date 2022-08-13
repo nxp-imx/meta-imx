@@ -105,12 +105,10 @@ do_deploy:append() {
     esac
 
     if ${DEPLOY_OPTEE_STMM}; then
-        # Rename tee.bin to tee.bin-stmm
-        mv ${DEPLOYDIR}/${BOOT_TOOLS}/tee.bin ${DEPLOYDIR}/${BOOT_TOOLS}/tee.bin-stmm
-        # Rename flash.bin name with postfix "_stmm"
-        for target in ${IMXBOOT_TARGETS}; do
-            mv ${DEPLOYDIR}/${BOOT_CONFIG_MACHINE}-${target} ${DEPLOYDIR}/${BOOT_CONFIG_MACHINE}-${target}_stmm
-        done
+        # Deploy STMM related files
+        install -m 0644 ${BOOT_STAGING}/tee.bin-stmm        ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0644 ${BOOT_STAGING}/capsule1.bin        ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0644 ${BOOT_STAGING}/CRT.*               ${DEPLOYDIR}/${BOOT_TOOLS}
     fi
 
 }
