@@ -101,8 +101,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-sentinel-0.5.1.bin
-Version:                     0.5.1
+Package:                     firmware-sentinel-0.7.bin
+Version:                     0.7
 Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -113,8 +113,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-upower-1.0.0.bin
-Version:                     1.0.0
+Package:                     firmware-upower-1.1.0.bin
+Version:                     1.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -992,7 +992,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-vpu-hantro-vc-1.8.0.bin
 Version:                     1.8.0
-Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1065,14 +1065,14 @@ License File:                EULA.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP RetuneDSP Voice Seeker
-Release Location:            https://github.com/NXP/imx-voiceUI  -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/NXP/imx-voiceUI -b lf-5.15.52-2.1.0
 --------------------------------------------
 M4 Processor Packages
 --------------------------------------------
 
 Package:                     imx7ulp-m4-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1114,7 +1114,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx8mq-m4-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1158,7 +1158,7 @@ M7 Processor Packages
 
 Package:                     imx8mn-m7-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v37 July 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1218,7 +1218,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx93-m33-demo-2.12.0.bin
 Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v38 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
