@@ -7,18 +7,21 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;m
 
 PV .= "+git${SRCPV}"
 
-SRCBRANCH = "lf_v2.6"
+SRC_URI = "${ATF_SRC};branch=${SRCBRANCH} \
+           file://0001-Makefile-Suppress-array-bounds-error.patch"
 ATF_SRC ?= "git://source.codeaurora.org/external/imx/imx-atf.git;protocol=https"
-SRC_URI = "${ATF_SRC};branch=${SRCBRANCH}"
+SRCBRANCH = "lf_v2.6"
 SRCREV = "c3cdc6c2550161bcddfb6d6fa7e30f37e1474caa"
 
 S = "${WORKDIR}/git"
 
 inherit deploy
 
-BOOT_TOOLS = "imx-boot-tools"
-
 ATF_PLATFORM ??= "INVALID"
+
+# FIXME: We should return INVALID here but currently only i.MX8M has support to override the UART
+# base address in source code.
+ATF_BOOT_UART_BASE ?= ""
 
 EXTRA_OEMAKE += " \
     CROSS_COMPILE="${TARGET_PREFIX}" \
@@ -32,7 +35,8 @@ AS[unexport] = "1"
 LD[unexport] = "1"
 
 # Baremetal, just need a compiler
-DEPENDS:remove = "virtual/${TARGET_PREFIX}compilerlibs virtual/libc"
+INHIBIT_DEFAULT_DEPS = "1"
+DEPENDS = "virtual/${HOST_PREFIX}gcc"
 
 BUILD_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
@@ -47,24 +51,38 @@ EXTRA_OEMAKE += 'LD="${@remove_options_tail(d.getVar('LD'))}"'
 
 EXTRA_OEMAKE += 'CC="${@remove_options_tail(d.getVar('CC'))}"'
 
+# Set the UART to use during the boot.
+EXTRA_OEMAKE += 'IMX_BOOT_UART_BASE=${ATF_BOOT_UART_BASE}'
+
+do_configure[noexec] = "1"
+
 do_compile() {
     # Clear LDFLAGS to avoid the option -Wl recognize issue
     oe_runmake bl31
     if ${BUILD_OPTEE}; then
-       oe_runmake clean BUILD_BASE=build-optee
-       oe_runmake BUILD_BASE=build-optee SPD=opteed bl31
+        oe_runmake clean BUILD_BASE=build-optee
+        oe_runmake BUILD_BASE=build-optee SPD=opteed bl31
     fi
 }
 
 do_install[noexec] = "1"
 
 do_deploy() {
-    install -Dm 0644 ${S}/build/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}.bin
+    install -Dm 0644 ${S}/build/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin
     if ${BUILD_OPTEE}; then
-       install -m 0644 ${S}/build-optee/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}.bin-optee
+        install -m 0644 ${S}/build-optee/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin-optee
     fi
 }
 addtask deploy after do_compile
 
-PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+BOOT_TOOLS = "imx-boot-tools"
+do_deploy:append() {
+    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
+    cp ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin ${DEPLOYDIR}/${BOOT_TOOLS}
+    if ${BUILD_OPTEE}; then
+        cp ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin-optee ${DEPLOYDIR}/${BOOT_TOOLS}
+    fi
+}
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(mx8-generic-bsp|mx9-generic-bsp)"
