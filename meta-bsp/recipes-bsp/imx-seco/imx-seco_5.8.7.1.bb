@@ -1,7 +1,7 @@
 # Copyright 2019-2022 NXP
 
 SUMMARY = "NXP i.MX SECO firmware"
-DESCRIPTION = "Firmware for i.MX SECO Security Controller"
+DESCRIPTION = "Firmware for i.MX Security Controller Subsystem"
 SECTION = "base"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d3c315c6eaa43e07d8c130dc3a04a011"

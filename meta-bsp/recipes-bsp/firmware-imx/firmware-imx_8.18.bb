@@ -1,5 +1,5 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
-# Copyright 2017-2020 NXP
+# Copyright 2017-2021 NXP
 # Copyright (C) 2018 O.S. Systems Software LTDA.
 SUMMARY = "Freescale i.MX firmware"
 DESCRIPTION = "Freescale i.MX firmware such as for the VPU"
@@ -155,4 +155,4 @@ FILES:${PN}-hdmi = " \
     ${nonarch_base_libdir}/firmware/dpfw.bin \
 "
 
-COMPATIBLE_MACHINE = "(imx-nxp-bsp|use-mainline-bsp)"
+COMPATIBLE_MACHINE = "(imx-generic-bsp)"

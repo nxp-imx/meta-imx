@@ -6,12 +6,10 @@ DEPENDS:append = " freetype"
 DEPENDS:append:mx8ulp-nxp-bsp = " imx-lib"
 DEPENDS:append:mx9-nxp-bsp = " imx-lib"
 
-SRCBRANCH = "master"
+SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH} \
+           file://memtool_profile"
 IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
-SRC_URI = " \
-    ${IMXTEST_SRC};branch=${SRCBRANCH} \
-    file://memtool_profile \
-"
+SRCBRANCH = "master"
 SRCREV = "be5b55daeac75750d6d605b1a99372b87af10336"
 
 PLATFORM:mx8ulp-nxp-bsp = "IMX8ULP"
