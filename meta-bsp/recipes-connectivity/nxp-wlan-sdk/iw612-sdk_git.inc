@@ -2,7 +2,7 @@ SUMMARY = "NXP Wi-Fi SDK for IW612"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=ab04ac0f249af12befccb94447c08b77"
 
-SRCBRANCH = "master"
+SRCBRANCH = "lf-5.15.52_2.1.0"
 IW612_SRC ?= "git://github.com/nxp-imx/mwifiex-iw612.git;protocol=https"
 SRC_URI = "${IW612_SRC};branch=${SRCBRANCH}"
 SRCREV = "3dbe90db512d22d51cd9e62078031bd7523966ab"
