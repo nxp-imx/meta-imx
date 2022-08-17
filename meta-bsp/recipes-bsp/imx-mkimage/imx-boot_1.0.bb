@@ -131,7 +131,7 @@ do_compile() {
             bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} V2X=NO ${target}"
             make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} V2X=NO dtbs=${UBOOT_DTB_NAME} flash_linux_m4
         elif [ "$target" = "flash_evk_stmm_capsule" ]; then
-            cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mkeficapsule_uboot ${BOOT_STAGING}/
+            cp ${RECIPE_SYSROOT_NATIVE}/${bindir}/mkeficapsule      ${BOOT_STAGING}
 
             bbnote "building ${IMX_BOOT_SOC_TARGET} - TEE=tee.bin-stmm ${target}"
             make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm delete_capsule_key

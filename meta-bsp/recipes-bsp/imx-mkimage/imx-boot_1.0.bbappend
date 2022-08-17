@@ -109,6 +109,8 @@ do_deploy:append() {
         install -m 0644 ${BOOT_STAGING}/tee.bin-stmm        ${DEPLOYDIR}/${BOOT_TOOLS}
         install -m 0644 ${BOOT_STAGING}/capsule1.bin        ${DEPLOYDIR}/${BOOT_TOOLS}
         install -m 0644 ${BOOT_STAGING}/CRT.*               ${DEPLOYDIR}/${BOOT_TOOLS}
+
+        install -m 0755 ${BOOT_STAGING}/mkeficapsule        ${DEPLOYDIR}/${BOOT_TOOLS}
     fi
 
 }
