@@ -1,0 +1,28 @@
+From a6f3d2945a5686226c225aa0634e8e84ab8f3444 Mon Sep 17 00:00:00 2001
+From: Jiwei Fu <jiwei.fu@nxp.com>
+Date: Tue, 16 Aug 2022 11:22:10 +0800
+Subject: [PATCH] [AIR-7521] Fix package version issue
+
+Use static version instead scm_version.
+
+Signed-off-by: Jiwei Fu <jiwei.fu@nxp.com>
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 4e2f8bf..6ebb7b2 100644
+--- a/setup.py
++++ b/setup.py
+@@ -62,7 +62,7 @@ mlw_module = Extension(
+ 
+ setup(
+     name="ethos-u-vela",
+-    use_scm_version=True,
++    version="3.3.0",
+     description="Neural network model compiler for Arm Ethos-U NPUs",
+     long_description=long_description,
+     long_description_content_type="text/markdown",
+-- 
+2.25.1
+
