@@ -33,6 +33,6 @@ do_install () {
     setuptools3_do_install
 }
 
-RDEPENDS:${PN} = "flatbuffers"
+RDEPENDS:${PN} = "flatbuffers python3-numpy python3-pillow"
 
 COMPATIBLE_MACHINE = "(mx93-nxp-bsp)"
