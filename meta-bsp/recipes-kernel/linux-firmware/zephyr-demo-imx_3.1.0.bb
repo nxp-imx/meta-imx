@@ -1,6 +1,6 @@
 # Copyright (C) 2022 NXP
 
-DESCRIPTION = "Zephyr Demo for i.MX"
+DESCRIPTION = "Zephyr demo for i.MX"
 HOMEPAGE = "https://github.com/zephyrproject-rtos/zephyr"
 SECTION = "kernel"
 LICENSE = "BSD-3-Clause"
