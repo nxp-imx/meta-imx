@@ -5,6 +5,11 @@ PROVIDES:append:class-target = " ${MLPREFIX}u-boot-tools"
 PROVIDES:append:class-native = " u-boot-tools-native"
 PROVIDES:append:class-nativesdk = " nativesdk-u-boot-tools"
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+do_install:append () {
+        # mkefivcapsule
+        install -m 0755 tools/mkeficapsule ${D}${bindir}/uboot-mkeficapsule
+        ln -sf uboot-mkeficapsule ${D}${bindir}/mkeficapsule
+}
 
-COMPATIBLE_MACHINE = "(imx-generic-bsp)"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+COMPATIBLE_MACHINE:class-target = "(imx-generic-bsp)"
