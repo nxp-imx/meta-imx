@@ -10,7 +10,7 @@ SRC_URI = "${VELA_SRC};branch=${SRCBRANCH} \
            file://0001-AIR-7521-Fix-package-version-issue.patch"
 VELA_SRC ?= "git://source.codeaurora.org/external/imx/vela-imx.git;protocol=https"
 SRCBRANCH = "imx_3.3.0"
-SRCREV = "cd5fa83dfd1419aeaa79467d109da443a7154894"
+SRCREV = "88754cb8f21bb8cffac669ea23e3be6088d130da"
 
 S = "${WORKDIR}/git"
 
