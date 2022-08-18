@@ -6,11 +6,10 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
 DEPENDS = "python3-pip-native python3-wheel-native flatbuffers python3-numpy python3-lxml"
 
-SRC_URI = "${VELA_SRC};branch=${SRCBRANCH} \
-           file://0001-AIR-7521-Fix-package-version-issue.patch"
+SRC_URI = "${VELA_SRC};branch=${SRCBRANCH}"
 VELA_SRC ?= "git://source.codeaurora.org/external/imx/vela-imx.git;protocol=https"
 SRCBRANCH = "imx_3.3.0"
-SRCREV = "88754cb8f21bb8cffac669ea23e3be6088d130da"
+SRCREV = "d64cd9fa40796553027f551a8afdf778c6005a61"
 
 S = "${WORKDIR}/git"
 
