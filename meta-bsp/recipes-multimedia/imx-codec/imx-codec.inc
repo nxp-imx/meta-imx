@@ -9,9 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
 # Backward compatibility
 PROVIDES += "libfslcodec"
 
-inherit fsl-eula-unpack autotools pkgconfig
-
-SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
+inherit autotools pkgconfig
 
 # Choose between 32bit and 64bit binaries
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8', \
