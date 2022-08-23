@@ -18,6 +18,7 @@ then
 fi
 
 # Set min_free_kbyte to avoid kernel dump from eth for 4K video playback use case
+while [ ! -f /sys/devices/soc0/soc_id ];do sleep 1;done
 CPUREV=$(cat /sys/devices/soc0/soc_id)
 if [ $CPUREV == "i.MX8QM" ] || [ $CPUREV == "i.MX8QXP" ] || [ $CPUREV == "i.MX8MQ" ]
 then
