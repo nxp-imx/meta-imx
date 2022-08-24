@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=65c483bb431ccd9a1820e6872c604771"
 DEPENDS = "deepview-rt" 
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "b25bc6aa20e59a14fb234c6b86f548df"
-SRC_URI[sha256sum] = "175b83a8693b2030cf7852c5e580c4b312b30224272bbc939c7e76132b7788ef"
+SRC_URI[md5sum] = "2d78260ec1be5bf89c326d6adab1093a"
+SRC_URI[sha256sum] = "cecbc43fb585bd11da55eb71a5e0c9b1c8dabdc519a974a265c0607b53fd9919"
 S = "${WORKDIR}/${BPN}-${PV}"
 
 inherit fsl-eula-unpack pkgconfig
