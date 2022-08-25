@@ -113,7 +113,7 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plu
            file://0003-viv-fb-Make-sure-config.h-is-included.patch \
            file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch \
 "
-GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
+GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "MM_04.07.01_2208_L5.15.y"
 SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 SRCREV = "db100facd1b3601c225bfac2fae7abc9f7a5f92c" 

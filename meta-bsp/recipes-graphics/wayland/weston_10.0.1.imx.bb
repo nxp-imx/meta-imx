@@ -160,7 +160,7 @@ DEFAULT_PREFERENCE = "-1"
 
 SRCBRANCH = "weston-imx-10.0.1"
 SRC_URI:remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
-SRC_URI:prepend = "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https;branch=${SRCBRANCH} "
+SRC_URI:prepend = "git://github.com/nxp-imx/weston-imx.git;protocol=https;branch=${SRCBRANCH} "
 SRCREV = "3f8f336b5d2cf7ea7aa4e047d669d093fc46dfe6"
 S = "${WORKDIR}/git"
 

@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bba6cdb9c2b03c849ed4975ed9ed90dc"
 DEPENDS = "imx-gpu-viv"
 
 SRC_URI = "${NN_IMX_SRC};branch=${SRCBRANCH}"
-NN_IMX_SRC ?= "git://source.codeaurora.org/external/imx/nn-imx.git;protocol=https"
+NN_IMX_SRC ?= "git://github.com/nxp-imx/nn-imx.git;protocol=https"
 SRCBRANCH = "imx_1.3.0"
 
 SRCREV = "1b54f5a3e80cdf71fda9059c79d76cf7bd7e3972"

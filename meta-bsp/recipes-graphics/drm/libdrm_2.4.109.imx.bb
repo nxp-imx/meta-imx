@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://xf86drm.c;beginline=9;endline=32;md5=c8a3b961af7667c5
 PROVIDES = "drm"
 DEPENDS = "libpthread-stubs"
 
-IMX_LIBDRM_SRC ?= "git://source.codeaurora.org/external/imx/libdrm-imx.git;protocol=https;nobranch=1"
+IMX_LIBDRM_SRC ?= "git://github.com/nxp-imx/libdrm-imx.git;protocol=https;nobranch=1"
 SRCBRANCH ?= "libdrm-imx-2.4.109"
 SRC_URI = "${IMX_LIBDRM_SRC};branch=${SRCBRANCH}"
 SRCREV = "93c9a82bdf31ea055d45cb54ce57cd42e22c90ae"

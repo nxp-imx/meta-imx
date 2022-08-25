@@ -7,7 +7,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982"
 
 SRCBRANCH = "master"
-KEYCTL_CAAM_SRC ?= "git://source.codeaurora.org/external/imx/keyctl_caam.git;protocol=https"
+KEYCTL_CAAM_SRC ?= "git://github.com/nxp-imx/keyctl_caam.git;protocol=https"
 SRC_URI = "${KEYCTL_CAAM_SRC};branch=${SRCBRANCH}"
 
 SRCREV = "81dc06cdb9c4d0d4ba10459d85af9a8603774948"

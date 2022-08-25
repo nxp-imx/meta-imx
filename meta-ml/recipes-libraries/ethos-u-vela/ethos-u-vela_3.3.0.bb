@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
 DEPENDS = "python3-pip-native python3-wheel-native flatbuffers python3-numpy python3-lxml"
 RDEPENDS:${PN} += "flatbuffers python3-numpy python3-lxml"
 
-VELA_SRC ?= "git://source.codeaurora.org/external/imx/vela-imx.git;protocol=https"
+VELA_SRC ?= "git://github.com/nxp-imx/vela-imx.git;protocol=https"
 SRCBRANCH = "lf-5.15.52_2.1.0"
 SRCREV = "c19d15035c8235a6a1dc97814e6c072bada56202"
 SRC_URI = "${VELA_SRC};branch=${SRCBRANCH}"
