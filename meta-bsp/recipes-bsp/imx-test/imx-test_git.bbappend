@@ -8,7 +8,7 @@ DEPENDS:append:mx9-nxp-bsp = " imx-lib"
 
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH} \
            file://memtool_profile"
-IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
+IMXTEST_SRC ?= "git://github.com/nxp-imx/imx-test.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "8788be3a29f440f6b20756fdf4086c16fcc411a3"
 

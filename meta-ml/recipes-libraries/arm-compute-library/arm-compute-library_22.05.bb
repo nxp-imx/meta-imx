@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f3c5879801d3cffc4ac2399f2b8e8ec5 \
                     file://include/half/LICENSE.txt;md5=fe7e5a4795c76b317919afd2d3da5983"
 
 SRC_URI = "${ARM_COMPUTELIBRARY_SRC};branch=${SRCBRANCH}"
-ARM_COMPUTELIBRARY_SRC ?= "git://source.codeaurora.org/external/imx/arm-computelibrary-imx.git;protocol=https"
+ARM_COMPUTELIBRARY_SRC ?= "git://github.com/nxp-imx/arm-computelibrary-imx.git;protocol=https"
 SRCBRANCH = "imx_22.05"
 SRCREV = "9423a53fc8a10f4c97ffcff6a1f198106a1f1c14"
 

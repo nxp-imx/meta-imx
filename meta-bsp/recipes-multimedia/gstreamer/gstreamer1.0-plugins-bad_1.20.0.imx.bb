@@ -183,7 +183,7 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plug
            file://0003-ensure-valid-sentinals-for-gst_structure_get-etc.patch \
            file://0005-msdk-fix-includedir-path.patch \
 "
-GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
+GST1.0-PLUGINS-BAD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-bad.git;protocol=https"
 SRCBRANCH = "imx-1.20.x"
 SRC_URI:prepend = "${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} "
 SRCREV = "b96d697149885c49c159e58d05bcbf8843acf80d"

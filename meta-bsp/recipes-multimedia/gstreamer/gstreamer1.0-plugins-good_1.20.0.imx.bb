@@ -96,7 +96,7 @@ RDEPENDS:${PN}-soup += "${@bb.utils.contains('PACKAGECONFIG', 'soup', 'libsoup-2
 SRC_URI:remove = " \
     https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz \
 "
-GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
+GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "imx-1.20.x"
 SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
 SRCREV = "b83d1e4a3cd702bbe0cf4544aa2acc55796e4a0f"
