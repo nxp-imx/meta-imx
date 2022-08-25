@@ -28,6 +28,6 @@ do_install () {
     cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
 }
 
-INSANE_SKIP:${PN} += "ldflags"
+INSANE_SKIP:${PN} = "ldflags"
 
 COMPATIBLE_MACHINE = "(imxgpu2d)"
