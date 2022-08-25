@@ -116,7 +116,7 @@ SRC_URI:remove = " \
     file://0004-glimagesink-Downrank-to-marginal.patch \
     file://4ef5c91697a141fea7317aff7f0f28e5a861db99.patch \
 "
-GST1.0-PLUGINS-BASE_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-base.git;protocol=https"
+GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "MM_04.06.04_2112_L5.15.y"
 SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 SRCREV = "d8f5d6e1d477a299ccb7f4ba7aacd36ff5e39f8b"

@@ -1,4 +1,4 @@
-WESTON_SRC ?= "git://source.codeaurora.org/external/imx/weston-imx.git;protocol=https"
+WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 SRC_URI = " \
     ${WESTON_SRC};branch=${SRCBRANCH} \
     file://weston.png \

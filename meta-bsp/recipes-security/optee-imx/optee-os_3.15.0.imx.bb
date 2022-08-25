@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c1f21c4f72f372ef38a5a4aee55ec173"
 DEPENDS = "python3-pycryptodomex-native python3-pyelftools-native u-boot-mkimage-native"
 
 SRCBRANCH = "lf-5.15.5_1.0.0"
-OPTEE_OS_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-os.git;protocol=https"
+OPTEE_OS_SRC ?= "git://github.com/nxp-imx/imx-optee-os.git;protocol=https"
 SRC_URI = "${OPTEE_OS_SRC};branch=${SRCBRANCH}"
 SRCREV = "807629a0889ad5e888f1fd187932ab7f701ddf8c"
 

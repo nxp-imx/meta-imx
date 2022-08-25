@@ -99,7 +99,7 @@ SRC_URI:remove = " \
     file://0002-rtpjitterbuffer-Fix-parsing-of-the-mediaclk-direct-f.patch \
     file://0003-Remove-volatile-from-static-vars-to-fix-build-with-g.patch \
 "
-GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
+GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "MM_04.06.04_2112_L5.15.y"
 SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
 SRCREV = "2438ae179ed4245fbeaa2ce36b1918ed7232d442"

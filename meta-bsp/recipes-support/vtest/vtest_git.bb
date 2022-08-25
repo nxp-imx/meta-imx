@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://BSD-3-Clause.txt;md5=664939843ae3416d811479b21978e8b4
 DEPENDS = "ecdsa-lib-imx v2xsehsm openssl"
 
 SRCBRANCH = "imx_5.4.70_2.3.4"
-VTEST_SRC ?= "git://source.codeaurora.org/external/imx/vtest.git;protocol=ssh"
+VTEST_SRC ?= "git://github.com/nxp-imx/vtest.git;protocol=ssh"
 SRC_URI = "${VTEST_SRC};branch=${SRCBRANCH} \
     file://seco_nvm_daemon.service \
     file://0001-Ignore-v2xsehsmConfig.cmake.patch \

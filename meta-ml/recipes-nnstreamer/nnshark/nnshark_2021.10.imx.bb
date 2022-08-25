@@ -11,7 +11,7 @@ DEPENDS = "\
         perf \
 "
 
-NNSHARK_SRC ?= "git://source.codeaurora.org/external/imx/nnshark.git;protocol=https"
+NNSHARK_SRC ?= "git://github.com/nxp-imx/nnshark.git;protocol=https"
 SRCBRANCH ?= "2021.10.imx"
 
 SRCREV = "c815749eac865bfb7175c61ed13093e6837aea6f"
