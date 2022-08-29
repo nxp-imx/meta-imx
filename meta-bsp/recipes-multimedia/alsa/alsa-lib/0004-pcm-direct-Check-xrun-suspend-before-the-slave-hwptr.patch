@@ -1,4 +1,4 @@
-From c8370804efdbedbadaae4f5c0307b977862292cd Mon Sep 17 00:00:00 2001
+From bb9f258e192980bb6cbef74ac57e348553805a0c Mon Sep 17 00:00:00 2001
 From: Takashi Iwai <tiwai@suse.de>
 Date: Thu, 10 Mar 2022 09:24:12 +0100
 Subject: [PATCH 4/4] pcm: direct: Check xrun/suspend before the slave hwptr
@@ -9,8 +9,7 @@ after the slave hwptr update (but before the actual sync_ptr update in
 direct pcm side).  Otherwise the hwptr value may be screwed and get
 unexpected large read/write.
 
-Upstream-Status: Accepted
-
+Upstream-Statue: Backport [https://github.com/alsa-project/alsa-lib/commit/bb9f258e192980bb6cbef74ac57e348553805a0c]
 Reported-by: S.J. Wang <shengjiu.wang@nxp.com>
 Acked-by: Shengjiu Wang <shengjiu.wang@nxp.com>
 Signed-off-by: Takashi Iwai <tiwai@suse.de>

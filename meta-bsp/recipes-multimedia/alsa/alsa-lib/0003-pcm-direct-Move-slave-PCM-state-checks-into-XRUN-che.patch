@@ -1,4 +1,4 @@
-From 9d8b5bb68203806c4555a310a43818e7f1ddfa75 Mon Sep 17 00:00:00 2001
+From 3577a7a26beb74285af776fbd499b519723a955a Mon Sep 17 00:00:00 2001
 From: Takashi Iwai <tiwai@suse.de>
 Date: Fri, 4 Mar 2022 10:31:08 +0100
 Subject: [PATCH 3/4] pcm: direct: Move slave PCM state checks into XRUN check
@@ -9,8 +9,7 @@ recoveries count check, so let's merge them to the common helper.
 Also rename the helper function to snd_pcm_direct_check_xrun() as it's
 checking both slave and client states now.
 
-Upstream-Status: Accepted
-
+Upstream-Statue: Backport [https://github.com/alsa-project/alsa-lib/commit/3577a7a26beb74285af776fbd499b519723a955a]
 Signed-off-by: Takashi Iwai <tiwai@suse.de>
 ---
  src/pcm/pcm_direct.c | 34 ++++++++++++++++++++--------------
