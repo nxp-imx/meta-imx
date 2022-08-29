@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=ab04ac0f249af12befccb94447c08b77"
 SRCBRANCH = "master"
 IW612_SRC ?= "git://github.com/nxp-imx/mwifiex-iw612.git;protocol=https"
 SRC_URI = "${IW612_SRC};branch=${SRCBRANCH}"
-SRCREV = "18ffe7f496c53d02e865950a181c2b2d37328af9"
+SRCREV = "b9251c7750afc1dbcdfa67f1f66f622123b5439b"
 
 S = "${WORKDIR}/git"
 
