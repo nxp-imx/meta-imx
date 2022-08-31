@@ -1,11 +1,6 @@
 require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
-PROVIDES_OPENGLES3       = ""
-PROVIDES_OPENGLES3:mx8-nxp-bsp   = "virtual/libgles3"
-PROVIDES_OPENGLES3:mx8mm-nxp-bsp = ""
-PROVIDES += "${PROVIDES_OPENGLES3}"
-
-PACKAGECONFIG ?= "valgrind"
+### Section 1: Changes to be upstreamed ###
 
 do_install () {
     install -d ${D}${libdir}
@@ -77,6 +72,10 @@ do_install () {
 
     chown -R root:root "${D}"
 }
+
+### Section 2: Changes to be kept in meta-imx ###
+
+PACKAGECONFIG ?= "valgrind"
 
 RDEPENDS:libopenvg-imx += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-gpuconfig', '', d)}"
 

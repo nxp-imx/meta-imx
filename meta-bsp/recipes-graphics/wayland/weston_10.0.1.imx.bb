@@ -158,9 +158,9 @@ SUMMARY = "Weston, a Wayland compositor, i.MX fork"
 
 DEFAULT_PREFERENCE = "-1"
 
-SRCBRANCH = "weston-imx-10.0.1"
 SRC_URI:remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 SRC_URI:prepend = "git://github.com/nxp-imx/weston-imx.git;protocol=https;branch=${SRCBRANCH} "
+SRCBRANCH = "weston-imx-10.0.1"
 SRCREV = "3f8f336b5d2cf7ea7aa4e047d669d093fc46dfe6"
 S = "${WORKDIR}/git"
 
@@ -175,8 +175,7 @@ PACKAGECONFIG_OPENGL:imxgpu3d     = "opengl"
 PACKAGECONFIG:remove = "wayland x11"
 PACKAGECONFIG:append = " \
     rdp \
-    ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)} \
-"
+    ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)}"
 
 PACKAGECONFIG:remove:imxfbdev = "kms"
 PACKAGECONFIG:append:imxfbdev = " fbdev clients"
