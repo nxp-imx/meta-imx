@@ -10,7 +10,7 @@ ISP_KERNEL_SRC ?= "git://github.com/nxp-imx/isp-vvcam.git;protocol=https"
 SRC_URI = " \
     ${ISP_KERNEL_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "62545f6ce20d63d71df05bfa92934b0ea70715ea"
+SRCREV = "b26ee8a5402afd7488716e06d82147669c05eb4a"
 
 S = "${WORKDIR}/git/vvcam/v4l2"
 
