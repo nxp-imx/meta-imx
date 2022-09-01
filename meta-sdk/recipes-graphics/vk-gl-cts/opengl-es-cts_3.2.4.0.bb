@@ -10,7 +10,7 @@ SRC_URI += " \
     file://0001-Support-Python3-as-well-in-gen_release_info.py.patch \
 "
 
-SRCREV_vk-gl-cts = "9dcb1667286fcae6b8d5a132cdd5e6bad2c896fa"
+SRCREV_vk-gl-cts = "2615cc4eb5d017a8376b689a54f0627b99ecd98f"
 SRCREV_glslang = "a5c5fb61180e8703ca85f36d618f98e16dc317e2"
 SRCREV_spirv-headers = "2bf02308656f97898c5f7e433712f21737c61e4e"
 SRCREV_spirv-tools = "0b0454c42c6b6f6746434bd5c78c5c70f65d9c51"
