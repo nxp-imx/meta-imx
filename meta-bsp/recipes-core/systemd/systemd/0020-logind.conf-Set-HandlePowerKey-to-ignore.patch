@@ -16,12 +16,12 @@ Index: git/src/login/logind.conf.in
 ===================================================================
 --- git.orig/src/login/logind.conf.in
 +++ git/src/login/logind.conf.in
-@@ -21,6 +21,8 @@
+@@ -23,6 +23,8 @@
  #InhibitDelayMaxSec=5
  #UserStopDelaySec=10
  #HandlePowerKey=poweroff
 +# i.MX-specific
 +HandlePowerKey=ignore
- #HandleSuspendKey=suspend
- #HandleHibernateKey=hibernate
- #HandleLidSwitch=suspend
+ #HandlePowerKeyLongPress=ignore
+ #HandleRebootKey=reboot
+ #HandleRebootKeyLongPress=poweroff
