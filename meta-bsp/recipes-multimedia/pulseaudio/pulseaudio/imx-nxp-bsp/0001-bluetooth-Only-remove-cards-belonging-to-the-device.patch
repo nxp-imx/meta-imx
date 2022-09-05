@@ -13,6 +13,7 @@ ofono card is removed, even if it belongs to different device.
 
 Add a check for the device being unlinked to our callback to fix.
 
+Upstream-Status: Backport [16.0]
 Signed-off-by: Juho HÃ¤mÃ¤lÃ¤inen <juho.hamalainen@jolla.com>
 Part-of: <https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/624>
 ---
