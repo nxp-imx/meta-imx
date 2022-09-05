@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5a0bf11f745e68024f37b4724a5364fe"
 DEPENDS = "python3 python3-pip-native"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "8d132f5b506f402884ba09577a727835"
-SRC_URI[sha256sum] = "85d0690441f604f70b6cb466b54a638829f10afc99ae3ff9a225928dfa9c82cc"
+SRC_URI[md5sum] = "c9693b096ad75852ad82f4e53062edbe"
+SRC_URI[sha256sum] = "c2bf31107b288d5cac8e5a17e555f30da07a9b99b4a3547f4dbf35544210995f"
 S = "${WORKDIR}/${BPN}-${PV}"
 
 inherit fsl-eula-unpack python3native
