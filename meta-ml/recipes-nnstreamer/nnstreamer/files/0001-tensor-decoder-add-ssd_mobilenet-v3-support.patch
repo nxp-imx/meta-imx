@@ -1,0 +1,36 @@
+From cf6ba869ea1b3a9fba796cc5f672b5d8079d65e5 Mon Sep 17 00:00:00 2001
+From: Aymen Sghaier <aymen.sghaier@nxp.com>
+Date: Tue, 9 Aug 2022 11:02:42 +0200
+Subject: [PATCH] tensor-decoder: add ssd_mobilenet v3 support
+
+This patch adds ssd_mobilent v3 support for post-processing,
+it is needed for models without post-processing layer
+
+ssd_mobilenet v3 models handle 2034 anchor boxes
+while previous models v2 and v1 handles only 1917 boxes
+thus updating the MAX value to 2034 adds support for v3 models
+
+Upstream-Status: Accepted for 2.2.0
+(https://github.com/nnstreamer/nnstreamer/pull/3870)
+
+Signed-off-by: Aymen Sghaier <aymen.sghaier@nxp.com>
+---
+ ext/nnstreamer/tensor_decoder/tensordec-boundingbox.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ext/nnstreamer/tensor_decoder/tensordec-boundingbox.c b/ext/nnstreamer/tensor_decoder/tensordec-boundingbox.c
+index 149f09bf..9be94a8b 100644
+--- a/ext/nnstreamer/tensor_decoder/tensordec-boundingbox.c
++++ b/ext/nnstreamer/tensor_decoder/tensordec-boundingbox.c
+@@ -114,7 +114,7 @@ void fini_bb (void) __attribute__ ((destructor));
+ extern uint8_t rasters[][13];
+ 
+ #define BOX_SIZE                                (4)
+-#define MOBILENET_SSD_DETECTION_MAX             (1917)
++#define MOBILENET_SSD_DETECTION_MAX             (2034) /* add ssd_mobilenet v3 support */
+ #define MOBILENET_SSD_MAX_TENSORS               (2U)
+ #define MOBILENET_SSD_PP_DETECTION_MAX          (100)
+ #define MOBILENET_SSD_PP_MAX_TENSORS            (4U)
+-- 
+2.35.1
+
