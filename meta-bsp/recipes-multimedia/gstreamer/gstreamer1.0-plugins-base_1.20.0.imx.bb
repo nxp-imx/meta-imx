@@ -106,27 +106,34 @@ CVE_PRODUCT += "gst-plugins-base"
 
 DEFAULT_PREFERENCE = "-1"
 
-DEPENDS:append:imxgpu2d = " virtual/libg2d"
-
-SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${PV}.tar.xz \
-           file://0001-ENGR00312515-get-caps-from-src-pad-when-query-caps.patch \
-           file://0003-viv-fb-Make-sure-config.h-is-included.patch \
-           file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch \
-"
+SRC_URI:remove = " \
+    https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${PV}.tar.xz \
+    file://0001-ENGR00312515-get-caps-from-src-pad-when-query-caps.patch \
+    file://0003-viv-fb-Make-sure-config.h-is-included.patch \
+    file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch"
+SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "imx-1.20.x"
-SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 SRCREV = "db100facd1b3601c225bfac2fae7abc9f7a5f92c"
 
 S = "${WORKDIR}/git"
 
 inherit use-imx-headers
 
+PACKAGECONFIG_GL:imxgpu2d = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'opengl viv-fb', '', d)}"
+PACKAGECONFIG_GL:imxgpu3d = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2 egl viv-fb', '', d)}"
+PACKAGECONFIG_GL:use-mainline-bsp = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2 egl gbm', '', d)}"
+
 PACKAGECONFIG_REMOVE ?= "jpeg"
 PACKAGECONFIG:remove = "${PACKAGECONFIG_REMOVE}"
-PACKAGECONFIG_GL:append = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' viv-fb', '', d)}"
+PACKAGECONFIG:append:imxgpu2d = " g2d"
+
+PACKAGECONFIG[g2d] = ",,virtual/libg2d"
 PACKAGECONFIG[viv-fb] = ",,virtual/libgles2"
-OPENGL_WINSYS:append = "${@bb.utils.contains('PACKAGECONFIG', 'viv-fb', ' viv-fb', '', d)}"
+
 EXTRA_OEMESON += "-Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}""
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
