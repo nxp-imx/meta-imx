@@ -24,6 +24,7 @@ SRC_URI = "\
     file://0001-decoder-bounding_box-Fix-ssd-box-decoding-without-po.patch \
     file://0001-filter-deepview-rt-Add-filter-subplugin-for-DeepView.patch \
     file://0001-Filter-TFLite-Fix-model-tensors-allocation-not-worki.patch \
+    file://0001-tensor-decoder-add-ssd_mobilenet-v3-support.patch \
 "
 
 # Use git instead of quilt as patch tool to support patches with binary content
