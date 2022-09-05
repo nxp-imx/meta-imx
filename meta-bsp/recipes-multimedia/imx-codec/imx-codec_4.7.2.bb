@@ -11,5 +11,3 @@ SRC_URI[md5sum] = "3a8474ddcf1f5ec3a80c1f2e697b304d"
 SRC_URI[sha256sum] = "3d54c41057270c27074155eab032b3f48ce880a058fcd5bc7f721a51fc4d9c71"
 
 inherit fsl-eula-unpack
-
-COMPATIBLE_MACHINE = "(imx-nxp-bsp)"

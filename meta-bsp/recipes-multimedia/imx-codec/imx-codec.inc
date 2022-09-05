@@ -4,36 +4,32 @@
 DESCRIPTION = "Freescale Multimedia codec libs"
 LICENSE = "Proprietary"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6b552f505eedab4a11ab538cf3db743a"
 
 # Backward compatibility
 PROVIDES += "libfslcodec"
 
 inherit autotools pkgconfig
 
-# Choose between 32bit and 64bit binaries
+PACKAGECONFIG ??= "${PACKAGECONFIG_VPU}"
+# Supports Chips&Media VPU only
+PACKAGECONFIG_VPU               = ""
+PACKAGECONFIG_VPU:mx6q-nxp-bsp  = "vpu"
+PACKAGECONFIG_VPU:mx6dl-nxp-bsp = "vpu"
+PACKAGECONFIG[vpu] = "--enable-vpu,--disable-vpu,virtual/imxvpu"
+
+# Choose between 32-bit and 64-bit binaries and between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8', \
                    bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--enable-fhw', '', d), d)}"
 
-PACKAGECONFIG ?= ""
-# Enable vpu PACKAGECONFIG for aarch32 vpu platforms only
-PACKAGECONFIG:mx6q-nxp-bsp = "vpu"
-PACKAGECONFIG:mx6dl-nxp-bsp = "vpu"
-
-PACKAGECONFIG[vpu] = "--enable-vpu,--disable-vpu,virtual/imxvpu"
-
 do_install:append() {
-    # FIXME: This link points to nowhere
-    if [ -e ${D}${libdir}/imx-mm/audio-codec/lib_src_ppp_arm11_elinux.so ]; then
-        rm ${D}${libdir}/imx-mm/audio-codec/lib_src_ppp_arm11_elinux.so
-    fi
-
     # LTIB move the files around or gst-fsl-plugin won't find them
     for p in $(find ${D}${libdir}/imx-mm -mindepth 2 -maxdepth 2 -not -type d); do
             mv $p ${D}${libdir}
     done
     rmdir ${D}${libdir}/imx-mm/video-codec
 
+    # Fixup ownership of files
+    chown -R root:root ${D}
 }
 
 python __set_insane_skip() {
@@ -63,7 +59,7 @@ python __split_libfslcodec_plugins() {
                       output_pattern='imx-codec-%s',
                       description='Freescale i.MX Codec (%s)',
                       extra_depends='')
-    pkgs = d.getVar('PACKAGES', True).split()
+    pkgs = d.getVar('PACKAGES').split()
     for pkg in pkgs:
         meta = pkg[10:]
         if meta != '':
@@ -87,11 +83,14 @@ python __set_metapkg_rdepends() {
 
 PACKAGESPLITFUNCS =+ "__split_libfslcodec_plugins __set_metapkg_rdepends"
 
+# We need to ensure we don't have '-src' package overrided
+PACKAGE_DEBUG_SPLIT_STYLE = 'debug-without-src'
+
 PACKAGES_DYNAMIC = "${PN}-*"
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-PACKAGES += "${PN}-meta ${PN}-test-bin ${PN}-test-source lib-src-ppp-arm11-elinux1"
+PACKAGES += "${PN}-meta ${PN}-test-bin ${PN}-test-source"
 
 ALLOW_EMPTY:${PN} = "1"
 ALLOW_EMPTY:${PN}-meta = "1"
@@ -111,7 +110,7 @@ FILES:${PN}-test-source += "${datadir}/imx-mm/*"
 FILES:${PN}-oggvorbis += "${libdir}/imx-mm/audio-codec/wrap/lib_vorbisd_wrap_arm*_elinux.so.*"
 FILES:${PN}-nb += "${libdir}/imx-mm/audio-codec/wrap/lib_nbamrd_wrap_arm*_elinux.so.*"
 FILES:${PN}-wb += "${libdir}/imx-mm/audio-codec/wrap/lib_wbamrd_wrap_arm*_elinux.so.*"
-FILES:lib-src-ppp-arm11-elinux1 += "${libdir}/lib_src_ppp_arm11_elinux.so.1"
 
-PACKAGE_ARCH:mx6q-nxp-bsp = "${MACHINE_SOCARCH}"
-PACKAGE_ARCH:mx6dl-nxp-bsp = "${MACHINE_SOCARCH}"
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+
+COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
