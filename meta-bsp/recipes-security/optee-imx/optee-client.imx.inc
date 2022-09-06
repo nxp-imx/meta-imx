@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.optee.org/"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=69663ab153298557a59c67a60a743e5b"
 
-OPTEE_CLIENT_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-client.git;protocol=https"
+OPTEE_CLIENT_SRC ?= "git://github.com/nxp-imx/imx-optee-client.git;protocol=https"
 SRC_URI = " \
     ${OPTEE_CLIENT_SRC};branch=${SRCBRANCH} \
     file://tee-supplicant.service \

@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "${LIC_FILES_CHKSUM_runtime} ${LIC_FILES_CHKSUM_model}"
 
 DEPENDS = "libpng zlib ${BPN}-native"
 
-ONNXRUNTIME_SRC ?= "gitsm://source.codeaurora.org/external/imx/onnxruntime-imx.git;protocol=https"
+ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH_runtime = "lf-5.15.32_2.0.0"
 SRC_URI = " \
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH_runtime};name=runtime \

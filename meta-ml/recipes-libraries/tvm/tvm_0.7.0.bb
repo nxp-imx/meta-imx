@@ -15,7 +15,7 @@ DEPENDS = "tim-vx"
 RDEPENDS:${PN} = "tim-vx python3-decorator python3-numpy python3-attrs python3-psutil python3"
 
 SRCBRANCH = "lf-5.15.32_2.0.0"
-TVM_SRC ?= "git://source.codeaurora.org/external/imx/eiq-tvm-imx.git;protocol=ssh"
+TVM_SRC ?= "git://github.com/nxp-imx/eiq-tvm-imx.git;protocol=ssh"
 SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                git://github.com/dmlc/dlpack;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/dlpack;name=dlpack \
                git://github.com/dmlc/dmlc-core;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/dmlc-core;name=dmlc-core \

@@ -7,7 +7,7 @@ DEPENDS = "tensorflow-lite tim-vx"
 
 require tensorflow-lite-${PV}.inc
 
-TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://source.codeaurora.org/external/imx/tflite-vx-delegate-imx.git;protocol=https" 
+TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-vx-delegate-imx.git;protocol=https" 
 SRCBRANCH_vx = "lf-5.15.32_2.0.0"
 SRCREV_vx = "b2db210794da007a31d75835af20b79a50d16c30"
 
