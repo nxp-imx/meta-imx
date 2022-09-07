@@ -551,6 +551,10 @@ CONFIG_AUTOSCAN_EXPONENTIAL=y
 # External password backend for testing purposes (developer use)
 #CONFIG_EXT_PASSWORD_TEST=y
 
+##################################
+# BEGIN NXP CUSTOMIZATION
+##################################
+
 CONFIG_SUITEB=y
 CONFIG_SUITEB192=y
 # Simultaneous Authentication of Equals (SAE), WPA3-Personal
