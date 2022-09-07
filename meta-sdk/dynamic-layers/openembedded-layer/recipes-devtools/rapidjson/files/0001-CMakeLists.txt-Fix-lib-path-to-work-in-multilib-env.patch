@@ -3,6 +3,7 @@ From: Cristinel Panfir <cristinel.panfir@nxp.com>
 Date: Tue, 24 Aug 2021 08:53:38 +0000
 Subject: [PATCH] CMakeLists.txt: Fix lib path to work in multilib env
 
+Upstream-Status: Pending
 Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
 ---
  CMakeLists.txt | 2 +-
