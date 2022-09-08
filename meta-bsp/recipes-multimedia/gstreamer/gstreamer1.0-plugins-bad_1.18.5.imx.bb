@@ -165,7 +165,7 @@ DEFAULT_PREFERENCE = "-1"
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
 
 SRC_URI_remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz"
-GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
+GST1.0-PLUGINS-BAD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-bad.git;protocol=https"
 SRCBRANCH = "MM_04.06.03_2110_L5.10.y"
 SRC_URI_prepend = "${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} "
 SRCREV = "64ea74a49cc06da92126cc680968497df679da8c"
