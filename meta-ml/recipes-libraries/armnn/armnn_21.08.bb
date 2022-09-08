@@ -4,7 +4,7 @@ DESCRIPTION = "Linux software and tools to enable machine learning workloads on 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074"
 
-ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
+ARMNN_SRC ?= "git://github.com/nxp-imx/armnn-imx.git;protocol=https"
 SRCBRANCH = "lf-5.10.72_2.2.0"
 
 SRCREV = "811d3c0dd0dd60ad4b0a1ed8ed7fb98e07c1a70f" 
