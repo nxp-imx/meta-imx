@@ -39,5 +39,7 @@ do_install:append () {
 	ln -sf uboot-mkeficapsule ${D}${bindir}/mkeficapsule
 }
 
+FILES:${PN} += "${bindir}/uboot-mkeficapsule ${bindir}/mkeficapsule"
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE:class-target = "(imx-generic-bsp)"
