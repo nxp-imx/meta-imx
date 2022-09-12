@@ -9,7 +9,7 @@ DEPENDS_MX8_mx8mnul = ""
 DEPENDS =              "zlib unzip-native python3 python3-numpy-native python3-pip-native python3-wheel-native python3-pybind11-native tensorflow-protobuf jpeg ${DEPENDS_MX8}"
 
 
-TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
+TENSORFLOW_LITE_SRC ?= "git://github.com/nxp-imx/tensorflow-imx.git;protocol=https"
 SRCBRANCH = "lf-5.10.y_2.0.0"
 
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH}"
