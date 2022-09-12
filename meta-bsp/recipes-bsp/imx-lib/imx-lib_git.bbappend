@@ -3,7 +3,7 @@
 PV = "5.9+${SRCPV}"
 
 SRCBRANCH = "lf-5.10.72_2.2.0"
-IMXLIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-lib.git;protocol=https"
+IMXLIB_SRC ?= "git://github.com/nxp-imx/imx-lib.git;protocol=https"
 SRC_URI = " \
     ${IMXLIB_SRC};branch=${SRCBRANCH} \
 "

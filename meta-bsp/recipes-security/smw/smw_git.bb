@@ -10,7 +10,7 @@ DEPENDS = "json-c optee-os optee-client python3-pycryptodomex-native"
 DEPENDS_append_mx8qxp = " imx-seco-libs"
 
 SRCBRANCH = "release/version_1.x"
-SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
+SMW_LIB_SRC ?= "git://github.com/nxp-imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH}"
 SRCREV = "4a2dbe0d616baad42d2767ba8b6e5fa44d8fb6b0"
 

@@ -11,7 +11,7 @@ download the firmware patches:
         hciattach /dev/ttyHS0 qca 3000000 -t120 flow -f0
 
 cherry-pick and merged from:
-	https://source.codeaurora.org/quic/la/platform/external/bluetooth/bluez
+	https://git.codelinaro.org/clo/la/platform/external/bluetooth/bluez
 	branch: LNX.LE.5.3
 	commit: commit bb96f3b759e0b99db70014302ca12929fb42f554
 

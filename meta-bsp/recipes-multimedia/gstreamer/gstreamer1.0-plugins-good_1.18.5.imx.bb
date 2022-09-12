@@ -97,7 +97,7 @@ SRC_URI_remove = " \
     https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz \
     file://0002-rtpjitterbuffer-Fix-parsing-of-the-mediaclk-direct-f.patch \
 "
-GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
+GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "MM_04.06.03_2110_L5.10.y"
 SRC_URI_prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
 SRCREV = "7113baa4dd681cf028b04ef4ebe70b06db4b0f08"
