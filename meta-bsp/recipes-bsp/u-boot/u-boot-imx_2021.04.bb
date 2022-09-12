@@ -7,7 +7,7 @@ require recipes-bsp/u-boot/u-boot-imx-common.inc
 
 PROVIDES += "u-boot"
 
-UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
+UBOOT_SRC ?= "git://github.com/nxp-imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "lf_v2021.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "1c0116f3da250c5a52858c53efb8b38c0963f477"

@@ -7,7 +7,7 @@ DEPENDS = "python3-numpy-native python3-pip-native python3-pybind11-native pytho
     python3 tensorflow-protobuf jpeg zlib"
 
 
-TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
+TENSORFLOW_LITE_SRC ?= "git://github.com/nxp-imx/tensorflow-imx.git;protocol=https"
 SRCBRANCH = "lf-5.10.52_2.1.0"
 
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH}"

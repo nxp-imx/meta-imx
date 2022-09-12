@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50"
 DEPENDS = "imx-gpu-viv zlib libpng procps"
 
-APITRACE_SRC ?= "git://source.codeaurora.org/external/imx/apitrace-imx.git;protocol=https"
+APITRACE_SRC ?= "git://github.com/nxp-imx/apitrace-imx.git;protocol=https"
 SRCBRANCH = "imx_9.0"
 SRC_URI = "${APITRACE_SRC};branch=${SRCBRANCH}"
 SRCREV = "c50e6a954e44998f2e3793a8de863e961f8008c6"
