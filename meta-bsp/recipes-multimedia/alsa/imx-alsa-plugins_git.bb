@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 inherit autotools pkgconfig use-imx-headers
 
-IMXALSA_SRC ?= "git://source.codeaurora.org/external/imx/imx-alsa-plugins.git;protocol=https"
+IMXALSA_SRC ?= "git://github.com/nxp-imx/imx-alsa-plugins.git;protocol=https"
 SRCBRANCH = "MM_04.06.02_2108_L5.10.y"
 
 SRC_URI = "${IMXALSA_SRC};branch=${SRCBRANCH}"

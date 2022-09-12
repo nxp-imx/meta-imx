@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL2.0;md5=6762ed442b3822387a51c92d928ead0d 
 
 DEPENDS = "google-coral-posenet gstreamer1.0-plugins-base opencv"
 
-EIQ_APPS_SRC ?= "git://source.codeaurora.org/external/imx/eiq-apps-imx.git;protocol=https"
+EIQ_APPS_SRC ?= "git://github.com/nxp-imx/eiq-apps-imx.git;protocol=https"
 SRCBRANCH = "lf-5.10.52_2.1.0"
 
 SRC_URI = "${EIQ_APPS_SRC};branch=${SRCBRANCH}"
