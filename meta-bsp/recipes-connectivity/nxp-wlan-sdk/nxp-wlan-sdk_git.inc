@@ -12,4 +12,4 @@ S = "${WORKDIR}/git/mxm_wifiex/wlan_src"
 
 EXTRA_OEMAKE = "KERNELDIR=${STAGING_KERNEL_BUILDDIR}"
 
-RRECOMMENDS:${PN} = "wireless-tools"
+RDEPENDS:${PN} = "wireless-tools"
