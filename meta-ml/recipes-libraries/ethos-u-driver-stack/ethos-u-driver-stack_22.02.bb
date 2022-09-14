@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE-APACHE-2.0.txt;md5=e3fc50a88d0a364313df4b21ef
 DEPENDS = "flatbuffers python3-pybind11 python3-pybind11-native"
 
 SRC_URI = "${ETHOS_U_SRC};branch=${SRCBRANCH}"
-ETHOS_U_SRC ?= "git://github.com/nxpmicro/ethos-u-driver-stack-imx.git;protocol=https"
+ETHOS_U_SRC ?= "git://github.com/nxp-imx/ethos-u-driver-stack-imx.git;protocol=https"
 SRCBRANCH = "imx_22.02"
 SRCREV = "5e889d88a92c55366a7ff83e2a1e9996e98fe3fa"
 

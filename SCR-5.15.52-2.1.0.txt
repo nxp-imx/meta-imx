@@ -1273,17 +1273,17 @@ License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tool to compile a TensorFlow Lite for Microcontrollers neural network model
-Release Location:            https://github.com/nxpmicro/ethos-u-vela -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/nxp-imx/ethos-u-vela -b lf-5.15.52-2.1.0
 --------------------------------------------
 
-Package:                     ethos-u-driver-stack.git
+Package:                     ethos-u-driver-stack-imx.git
 Version:                     22.02
 Outgoing License:            Apache-2.0 
 License File:                LICENSE-APAchE-2.0.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-driver-stack is the user space driver library for ethos-u NPU on iMX93 platform
-Release Location:            https://github.com/nxpmicro/ethos-u-driver-stack -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/nxp-imx/ethos-u-driver-stack-imx -b lf-5.15.52-2.1.0
 --------------------------------------------
 
 Package:                     ethos-u-firmware.git
@@ -1293,7 +1293,7 @@ License File:                LICENSE-APACHE-2.0.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-firmware is the binary NPU driver running on cortex-m33 core of NXP iMX93 platform
-Release Location:            https://github.com/nxpmicro/ethos-u-firmware -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/nxp-imx/ethos-u-firmware -b lf-5.15.52-2.1.0
 --------------------------------------------
 
 Package:                     nnshark.git
