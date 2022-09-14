@@ -1,6 +1,6 @@
 PV="1.16.2.imx"
 # Use i.MX fork of GST for customizations
-GST1.0_SRC ?= "gitsm://source.codeaurora.org/external/imx/gstreamer.git;protocol=https"
+GST1.0_SRC ?= "gitsm://github.com/nxp-imx/gstreamer.git;protocol=https"
 SRCBRANCH = "MM_04.05.07_2011_L5.4.70"
 SRCREV = "8514bc61ccab208a65e387eab9347276a8e770e7" 
 SRC_URI = " \

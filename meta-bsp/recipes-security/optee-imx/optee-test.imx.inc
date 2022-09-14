@@ -12,7 +12,7 @@ DEPENDS = "optee-os optee-client python3-pycrypto-native openssl"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-OPTEE_TEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-optee-test.git;protocol=https"
+OPTEE_TEST_SRC ?= "git://github.com/nxp-imx/imx-optee-test.git;protocol=https"
 
 SRC_URI = "${OPTEE_TEST_SRC};branch=${SRCBRANCH} \
 "
