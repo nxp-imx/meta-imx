@@ -9,7 +9,7 @@ LICENSE = "Apache-2.0"
 
 DEPENDS = "libpng zlib"
 
-VKGLCTS_SRC ?= "git://source.codeaurora.org/external/imx/vk-gl-cts-imx.git;protocol=https"
+VKGLCTS_SRC ?= "git://github.com/nxp-imx/vk-gl-cts-imx.git;protocol=https"
 SRC_URI = "${VKGLCTS_SRC};name=vk-gl-cts;branch=imx-${BP}"
 S = "${WORKDIR}/git"
 
