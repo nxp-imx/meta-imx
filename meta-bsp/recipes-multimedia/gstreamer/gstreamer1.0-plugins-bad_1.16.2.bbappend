@@ -3,7 +3,7 @@ PV="1.16.2.imx"
 DEPENDS += "jpeg libdrm"
 DEPENDS_append_imxgpu2d = " virtual/libg2d"
 
-GST1.0-PLUGINS-BAD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-bad.git;protocol=https"
+GST1.0-PLUGINS-BAD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-bad.git;protocol=https"
 SRCBRANCH = "MM_04.05.07_2011_L5.4.70"
 SRCREV = "cf7f2d0125424ce0d63ddc7f1eadc9ef71d10db1"
 SRC_URI = " \
