@@ -3,7 +3,7 @@ DESCRIPTION = "Linux software and tools to enable machine learning (Caffe/Tensor
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074"
 
-ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
+ARMNN_SRC ?= "git://github.com/nxp-imx/armnn-imx.git;protocol=https"
 SRCBRANCH = "imx_5.4.70_2.3.2"
 SRCREV = "c9e6465461e869a00478b57ea5c2780c04a9c321"
 
