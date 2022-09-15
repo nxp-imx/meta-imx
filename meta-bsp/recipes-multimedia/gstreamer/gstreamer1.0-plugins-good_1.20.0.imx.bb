@@ -104,7 +104,7 @@ SRC_URI:remove = " \
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "imx-1.20.x"
 SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
-SRCREV = "5073cdf01434a0d9111ec1da285c314d8178d868"
+SRCREV = "afe15e6f9da43967279774b7e5450db17078acd4"
 
 S = "${WORKDIR}/git"
 
