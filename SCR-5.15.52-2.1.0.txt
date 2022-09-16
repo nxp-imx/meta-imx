@@ -693,8 +693,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-2.1.2.bin
-Version:                     2.1.2
+Package:                     imx-dpu-g2d-2.1.4.bin
+Version:                     2.1.4
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -715,7 +715,7 @@ Description and comments:    G2D implementation using PXP
 Release Location:            https://github.com/NXPmicro/g2d-pxp -b lf-5.15.52-2.1.0
 --------------------------------------------
 
-Package:                     imx-g2d-samples.git
+Package:                     g2d-samples.git
 Version:                     2.1
 Outgoing License:            BSD-3-Clause 
 License File:                COPYING
@@ -723,8 +723,6 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
 Release Location:            https://github.com/NXPmicro/g2d-samples -b lf-5.15.52-2.1.0
-Origin:                      NXP (BSD-3-Clause)
-
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p4.6-aarch64-wayland.bin
@@ -860,7 +858,7 @@ Origin:                      NXP (LGPL-2.1)
 
 Package:                     gstreamer.git
 Version:                     1.20.0.imx
-Outgoing License:            LGPL-2.0 
+Outgoing License:            LGPL-2.1 
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
@@ -886,7 +884,7 @@ Origin:                      NXP (LGPL-2.1)
 
 Package:                     gst-plugins-base.git
 Version:                     1.20.0.imx
-Outgoing License:            LGPL-2.0 
+Outgoing License:            LGPL-2.1 
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
@@ -899,8 +897,8 @@ Origin:                      NXP (LGPL-2.1)
 
 Package:                     gst-plugins-bad.git
 Version:                     1.20.0.imx
-Outgoing License:            LGPL-2.0 
-License File:                COPYING.LIB
+Outgoing License:            LGPL-2.1 
+License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Gstreamer plug-ins that aren't up to par compared to the rest. Close to good quality but missing something.
@@ -1058,7 +1056,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-afe-voiceseeker.git
+Package:                     imx-voiceUI.git
 Version:                     2.0
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
@@ -1372,7 +1370,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensor Interface Module for OpenVX
-Release Location:            https://github.com/nxp/tim-vx-imx -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/nxp-imx/tim-vx-imx -b lf-5.15.52-2.1.0
 Origin:                      Vivante Corporation (MIT)
                              The Khronos Group Inc. (Apache-2.0) - https://www.khronos.org/
                              The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
