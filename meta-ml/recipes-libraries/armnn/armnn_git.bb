@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3e14a924c16f7d828b8335a59da64074 \
 #PR = "r1"
 PV = "20.02"
 
-ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
+ARMNN_SRC ?= "git://github.com/nxp-imx/armnn-imx.git;protocol=https"
 SRCBRANCH = "imx_5.4.70_2.3.0"
 SRCREV = "4e404141a95df3ad185b7c874fcf1bbb05c8a5fb"
 

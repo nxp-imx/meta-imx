@@ -13,7 +13,7 @@ SRC_URI_remove = " \
     git://github.com/opencv/opencv.git;name=opencv \
     file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
 "
-OPENCV_SRC ?= "git://source.codeaurora.org/external/imx/opencv-imx.git;protocol=https"
+OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https"
 SRCBRANCH = "4.4.0_imx"
 SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH};name=opencv"
 SRC_URI += " \
