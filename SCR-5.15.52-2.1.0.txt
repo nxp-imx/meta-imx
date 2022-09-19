@@ -857,7 +857,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gstreamer.git
-Version:                     1.20.0.imx
+Version:                     1.20.3.imx
 Outgoing License:            LGPL-2.1 
 License File:                COPYING
 Package Category:            Multimedia
@@ -870,7 +870,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gst-plugins-good.git
-Version:                     1.20.0.imx
+Version:                     1.20.3.imx
 Outgoing License:            LGPL-2.1 
 License File:                COPYING
 Package Category:            Multimedia
@@ -883,7 +883,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gst-plugins-base.git
-Version:                     1.20.0.imx
+Version:                     1.20.3.imx
 Outgoing License:            LGPL-2.1 
 License File:                COPYING
 Package Category:            Multimedia
@@ -896,7 +896,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gst-plugins-bad.git
-Version:                     1.20.0.imx
+Version:                     1.20.3.imx
 Outgoing License:            LGPL-2.1 
 License File:                COPYING
 Package Category:            Multimedia
