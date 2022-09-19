@@ -4,7 +4,7 @@ DEPENDS += "gstreamer1.0-plugins-base virtual/kernel libcap zlib bzip2 \
             ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)} \
 "
 
-GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://source.codeaurora.org/external/imx/gst-plugins-good.git;protocol=https"
+GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "MM_04.05.07_2011_L5.4.70"
 
 SRC_URI = " \

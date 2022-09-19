@@ -4,6 +4,6 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425
 
 SRCBRANCH = "imx_5.4.70_2.3.0"
 LOCALVERSION = "-2.3.0"
-KERNEL_SRC ?= "git://source.codeaurora.org/external/imx/linux-imx.git;protocol=https"
+KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https"
 
 SRCREV = "13b3c469663da0c79d385ce15887f6b5805f060d"
