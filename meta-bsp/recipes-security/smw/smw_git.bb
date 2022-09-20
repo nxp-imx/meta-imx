@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982"
 DEPENDS = "imx-seco-libs optee-os optee-client python3-pycryptodomex-native"
 
 SRCBRANCH = "imx_5.4.47_2.2.0"
-SMW_LIB_SRC ?= "git://source.codeaurora.org/external/imx/imx-smw.git;protocol=https"
+SMW_LIB_SRC ?= "git://github.com/nxp-imx/imx-smw.git;protocol=https"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH}"
 SRCREV = "bc123ef0843b96a10a43ef0b8ae6dbb302850890"
 
