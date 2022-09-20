@@ -292,11 +292,7 @@ Type of Content:             binary
 Description and comments:    Sound Open Firmware
 Release Location:            Mirror
 Origin:                      NXP (BSD-3-clause)
-                             Intel Corporation (BSD-3-clause)
-                             Cadence Design Systems, Inc. (MIT)
-                             Ulf Magnusson (ISC) 
-                             FreeBSD (BSD-2-clause)
-                             source code in: https://github.com/thesofproject/sof
+                             sof (BSD-3-Clause) - https://github.com/thesofproject/sof
 
 --------------------------------------------
 
@@ -308,6 +304,10 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Sound Open Firmware with Zephyr
 Release Location:            Mirror
+Origin:                      NXP (BSD-3-clause)
+                             sof (BSD-3-Clause) -  https://github.com/thesofproject/sof
+                             zephyr project (Apache-2.0) - https://github.com/zephyrproject-rtos/zephyr
+
 --------------------------------------------
 
 Package:                     zephyr-demo-imx-3.1.0.tar.gz
@@ -318,6 +318,10 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Zephyr Demo for i.MX
 Release Location:            Mirror
+Origin:                      NXP (BSD-3-clause)
+                             zephyr project (Apache-2.0) - https://github.com/zephyrproject-rtos/zephyr
+
+
 --------------------------------------------
 
 Package:                     simg2img.git
@@ -411,6 +415,18 @@ Description and comments:    A partitioning Hypervisor based on Linux
 Release Location:            https://github.com/nxp-imx/imx-jailhouse -b lf-5.15.52-2.1.0
 Origin:                      NXP (GPL-2.0)
                              Siemens AG (GPL-2.0) - https://github.com/siemens/jailhouse
+
+--------------------------------------------
+
+Package:                     imx-secure-enclave.git
+Version:                     
+Outgoing License:            LA_OPT_NXP_Software_License v29 Augest 2021 Additional distribution license granted - Section 2.3 applies
+License File:                EULA.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    i.MX secure enclave library
+Release Location:            https://github.com/NXP/imx-secure-enclave.git -b lf-5.15.52-2.1.0
+Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
@@ -1051,7 +1067,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     nxp-afe.git
-Version:                     1
+Version:                     1.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Multimedia
@@ -1059,6 +1075,22 @@ Type of Content:             source
 Description and comments:    NXP Audio-Front-end is the software wrapper for ALSA
 Release Location:            https://github.com/nxp-imx/nxp-afe -b lf-5.15.52-2.1.0
 Origin:                      NXP (BSD-3-Clause)
+
+--------------------------------------------
+
+Package:                     imx-voiceUI.git
+Version:                     2.0
+Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+License File:                EULA.txt
+Package Category:            Multimedia
+Type of Content:             source
+Description and comments:    NXP RetuneDSP Voice Seeker
+Release Location:            https://github.com/NXP-imx/imx-voiceUI -b lf-5.15.52-2.1.0
+Origin:                      NXP (Proprietary)
+                             Ne10 (BSD-3-Clause) - https://github.com/projectNe10/Ne10
+                             pugixml (MIT) - https://github.com/zeux/pugixml
+                             ARM ComputeLibrary (MIT) - https://github.com/ARM-software/ComputeLibrary
+                             CMSIS-5 (Apache-2.0) - https://github.com/ARM-software/CMSIS_5
 
 --------------------------------------------
 M4 Processor Packages
