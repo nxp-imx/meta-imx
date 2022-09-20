@@ -1,7 +1,7 @@
 require jailhouse.inc
 
 SRCBRANCH = "imx_5.4.3_2.0.0"
-IMX_JAILHOUSE_SRC ?= "git://source.codeaurora.org/external/imx/imx-jailhouse.git;protocol=ssh"
+IMX_JAILHOUSE_SRC ?= "git://github.com/nxp-imx/imx-jailhouse.git;protocol=ssh"
 
 SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH} \
            file://0001-scripts-include.mk-multilib-Fix-hardcoded-lib-in-fir.patch"
