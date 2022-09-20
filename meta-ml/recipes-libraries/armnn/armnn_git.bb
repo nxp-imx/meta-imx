@@ -9,7 +9,7 @@ PR = "r1"
 PV = "19.08"
 PV_MAJOR = "${@d.getVar('PV',d,1).split('.')[0]}"
 
-ARMNN_SRC ?= "git://source.codeaurora.org/external/imx/armnn-imx.git;protocol=https"
+ARMNN_SRC ?= "git://github.com/nxp-imx/armnn-imx.git;protocol=https"
 SRCBRANCH = "branches/armnn_19_08"
 SRCREV = "fd069479e05cd2616a2eacba1c13f99da59bb9a8"
 

@@ -7,7 +7,7 @@ SRCREV_extra = "cff02b5f48d3431daa04397321c46e0bbb1bde53"
 SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
 SRC_URI[tinydnn.sha256sum] = "e2c61ce8c5debaa644121179e9dbdcf83f497f39de853f8dd5175846505aa18b"
 SRCREV_FORMAT_append = "_extra"
-OPENCV_SRC ?= "git://source.codeaurora.org/external/imx/opencv-imx.git;protocol=https"
+OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https"
 SRCBRANCH = "4.1.2_imx"
 SRC_URI_remove = "git://github.com/opencv/opencv.git;name=opencv \
            file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \

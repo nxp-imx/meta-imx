@@ -3,7 +3,7 @@
 # Copyright 2017-2019 NXP
 
 SRCBRANCH = "lf-5.4.y"
-IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
+IMXTEST_SRC ?= "git://github.com/nxp-imx/imx-test.git;protocol=https"
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH}"
 SRC_URI_append = " file://memtool_profile "
 

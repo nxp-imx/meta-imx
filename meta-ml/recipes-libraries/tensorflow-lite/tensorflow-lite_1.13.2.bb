@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=01e86893010a1b87e69a213faa753ebd"
 
 DEPENDS = "zlib unzip-native"
 
-TENSORFLOW_LITE_SRC ?= "git://source.codeaurora.org/external/imx/tensorflow-imx.git;protocol=https"
+TENSORFLOW_LITE_SRC ?= "git://github.com/nxp-imx/tensorflow-imx.git;protocol=https"
 SRCBRANCH = "imx-v1.13.2"
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH} \
            file://0001-download_dependencies.sh-filter-out-mirror-when-down.patch \
