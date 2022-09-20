@@ -7,7 +7,7 @@ SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH} \
 "
 IMX_MKIMAGE_SRC ?= "git://github.com/nxp-imx/imx-mkimage.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "fe3cdb2f207eec3435857a54c123d7c1b0472cd5"
+SRCREV = "bf2924b906adbf316f807339d46cb8a672dad0c2"
 
 S = "${WORKDIR}/git"
 
