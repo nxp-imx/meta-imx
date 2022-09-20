@@ -3,7 +3,7 @@ require recipes-multimedia/gstreamer/gstreamer1.0_1.16.2.bb
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
 
 # Use i.MX fork of GST for customizations
-GST1.0_SRC ?= "gitsm://source.codeaurora.org/external/imx/gstreamer.git;protocol=https"
+GST1.0_SRC ?= "gitsm://github.com/nxp-imx/gstreamer.git;protocol=https"
 SRCBRANCH = "MM_04.05.06_2008_L5.4.47"
 SRCREV = "8514bc61ccab208a65e387eab9347276a8e770e7"
 SRC_URI = " \
