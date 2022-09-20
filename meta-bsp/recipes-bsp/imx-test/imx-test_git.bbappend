@@ -5,7 +5,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
 SRCBRANCH = "imx_5.4.3_2.0.0"
-IMXTEST_SRC ?= "git://source.codeaurora.org/external/imx/imx-test.git;protocol=https"
+IMXTEST_SRC ?= "git://github.com/nxp-imx/imx-test.git;protocol=https"
 SRC_URI = " \
     ${IMXTEST_SRC};branch=${SRCBRANCH} \
     file://0001-pxp-test-Fix-format-security-error.patch \
