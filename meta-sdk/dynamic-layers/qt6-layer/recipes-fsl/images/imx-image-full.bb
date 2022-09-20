@@ -8,17 +8,18 @@ inherit populate_sdk_qt6_base
 
 CONFLICT_DISTRO_FEATURES = "directfb"
 
-# Add opencv for i.MX GPU
-OPENCV_PKGS       ?= ""
-OPENCV_PKGS:imxgpu = " \
-    opencv-apps \
-    opencv-samples \
-    python3-opencv \
-"
-
 IMAGE_INSTALL += " \
     packagegroup-imx-ml \
     packagegroup-qt6-imx \
     tzdata \
-    ${OPENCV_PKGS} \
+    ${IMAGE_INSTALL_OPENCV} \
+"
+
+IMAGE_INSTALL_OPENCV              = ""
+IMAGE_INSTALL_OPENCV:imxgpu       = "${IMAGE_INSTALL_OPENCV_PKGS}"
+IMAGE_INSTALL_OPENCV:mx93-nxp-bsp = "${IMAGE_INSTALL_OPENCV_PKGS}"
+IMAGE_INSTALL_OPENCV_PKGS = " \
+    opencv-apps \
+    opencv-samples \
+    python3-opencv \
 "
