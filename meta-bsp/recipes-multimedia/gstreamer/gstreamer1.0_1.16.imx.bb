@@ -5,7 +5,7 @@ PV = "1.16.1.imx"
 FILESEXTRAPATHS_prepend := "${BSPDIR}/sources/poky/meta/recipes-multimedia/gstreamer/files:"
 
 # Use i.MX fork of GST for customizations
-GST1.0_SRC ?= "gitsm://source.codeaurora.org/external/imx/gstreamer.git;protocol=https"
+GST1.0_SRC ?= "gitsm://github.com/nxp-imx/gstreamer.git;protocol=https"
 SRCBRANCH = "MM_04.05.05_2005_L5.4.24"
 SRCREV = "beca1b382febc2ba38a21fcb8f5092209773eb7f"
 SRC_URI = " \
