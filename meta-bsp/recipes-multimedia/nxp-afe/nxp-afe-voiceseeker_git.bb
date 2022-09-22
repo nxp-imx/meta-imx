@@ -12,7 +12,7 @@ DEPENDS += "alsa-lib nxp-afe"
 SRCBRANCH = "voice_2.0"
 PV = "2.0+${SRCPV}"
 
-NXPAFE_VOICESEEKER_SRC ?= "git://github.com/nxp-afe/imx-voiceUI.git;protocol=https"
+NXPAFE_VOICESEEKER_SRC ?= "git://github.com/nxp-imx/imx-voiceui.git;protocol=https"
 SRC_URI = "${NXPAFE_VOICESEEKER_SRC};branch=${SRCBRANCH}"
 
 SRCREV = "413ff9b13c9c9eca3cad4fd35c5b08d6f1bb0d21"
