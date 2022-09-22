@@ -412,6 +412,16 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
+Package:                     mx-secure-enclave.git
+Version:                     
+Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 Additional distribution license granted - Section 2.3 applies
+License File:                EULA.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    i.MX secure enclave library
+Release Location:            https://github.com/NXP/imx-secure-enclave.git -b lf-5.15.52-2.1.0
+--------------------------------------------
+
 Package:                     imx-smw.git
 Version:                     0.1
 Outgoing License:            BSD-3-Clause 
@@ -480,7 +490,7 @@ License File:                license/bsd-3-clause.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Data Plane Development Kit
-Release Location:            https://github.com/nxp-qoriq/qoriq-components_dpdk -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/nxp-qoriq/dpdk -b lf-5.15.52-2.1.0
 Origin:                      NXP (BSD-3-Clause)
                              DPDK - Intel Corporation (BSD-3-Clause) - https://github.com/DPDK/dpdk
                              KNI Linux Device driver - Intel Corporation (GPL-2.0) Separate component of DPDK
@@ -705,14 +715,14 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-pxp-g2d.git
+Package:                     imx-g2d-pxp.git
 Version:                     2.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
-Release Location:            https://github.com/NXPmicro/g2d-pxp -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/nxp-imx/imx-g2d-pxp -b lf-5.15.52-2.1.0
 --------------------------------------------
 
 Package:                     g2d-samples.git
@@ -1063,7 +1073,7 @@ License File:                EULA.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP RetuneDSP Voice Seeker
-Release Location:            https://github.com/NXP/imx-voiceUI -b lf-5.15.52-2.1.0
+Release Location:            https://github.com/nxp-imx/imx-voiceUI -b lf-5.15.52-2.1.0
 --------------------------------------------
 M4 Processor Packages
 --------------------------------------------
