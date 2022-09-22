@@ -160,6 +160,8 @@ DEFAULT_PREFERENCE = "-1"
 
 SRC_URI:remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
 SRC_URI:prepend = "git://github.com/nxp-imx/weston-imx.git;protocol=https;branch=${SRCBRANCH} "
+SRC_URI += "file://0001-Revert-protocol-no-found-wayland-scanner-with-Yocto-.patch \
+            file://0001-g2d-renderer.c-Include-sys-stat.h.patch"
 SRCBRANCH = "weston-imx-10.0.1"
 SRCREV = "55c7f23212adc6a5682517162c0ab6555782da4f"
 S = "${WORKDIR}/git"
