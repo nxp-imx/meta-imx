@@ -42,8 +42,10 @@ do_install () {
         # Framebuffer backend for i.MX 8 and beyond
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl.pc         ${D}${libdir}/pkgconfig/egl.pc
         cp -r ${S}/gpu-core/usr/lib/wayland/* ${D}${libdir}
+        for f in ${FILES:libvdk-imx} ${FILES:libvdk-imx-dev}; do
+            rm -rf ${D}/$f
+        done
         rm -rf \
-            ${D}${libdir}/libVDK.so* \
             ${D}/opt/viv_samples/es20 \
             ${D}/opt/viv_samples/tiger \
             ${D}/opt/viv_samples/vdk
@@ -53,13 +55,28 @@ do_install () {
         cp ${S}/gpu-core/usr/lib/fb/libVDK.so.1.2.0 ${D}${libdir}/libVDK-fb.so.1.2.0
     fi
 
-    # Install Vendor ICDs for OpenCL's installable client driver loader (ICDs Loader)
-    install -d ${D}${sysconfdir}/OpenCL/vendors/
-    install -m 0644 ${S}/gpu-core/etc/Vivante.icd ${D}${sysconfdir}/OpenCL/vendors/Vivante.icd
+    if [ -z "${PACKAGES_OPENCL}" ]; then
+        for f in ${FILES:libopencl-imx} ${FILES:libopencl-imx-dev} ${FILES:libclc-imx} ${FILES:libclc-imx-dev}; do
+            rm -rf ${D}$f
+        done
+        rm -rf ${D}/opt/viv_samples/cl11
+    else
+        # Install Vendor ICDs for OpenCL's installable client driver loader (ICDs Loader)
+        install -d ${D}${sysconfdir}/OpenCL/vendors/
+        install -m 0644 ${S}/gpu-core/etc/Vivante.icd ${D}${sysconfdir}/OpenCL/vendors/Vivante.icd
+    fi
+
+    if [ -z "${PACKAGES_OPENVX}" ]; then
+        for f in ${FILES:libopenvx-imx} ${FILES:libopenvx-imx-dev}; do
+            rm -rf ${D}$f
+        done
+    fi
 
     if [ "${IS_MX8}" = "1" ]; then
         if [ -z "${PACKAGES_VULKAN}" ]; then
-            rm -f ${D}${libdir}/libvulkan_VSI.so* ${D}${libdir}/libSPIRV_viv${SOLIBS}*
+            for f in ${FILES:libvulkan-imx} ${FILES:libvulkan-imx-dev}; do
+                rm -rf ${D}$f
+            done
         fi
     fi
 
