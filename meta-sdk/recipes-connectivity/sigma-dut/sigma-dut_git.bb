@@ -1,5 +1,5 @@
 SUMMARY = "Tools for WFA Sigma DUT/CA"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause-Clear & BSD-3-Clause & MIT"
 LIC_FILES_CHKSUM = "file://README;md5=cb7b88c5098324bb9a20d2a79d76327e"
 SECTION = "base"
 
