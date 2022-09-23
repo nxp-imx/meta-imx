@@ -197,7 +197,7 @@ Type of Content:             source
 Description and comments:    QCA9377 WLAN linux driver
 Release Location:            https://github.com/nxp-imx/qcacld-2.0-imx -b rel_imx_5.4.70_2.3.11
 Origin:                      NXP (ISC)
-                             Qualcomm Atheros, Inc. (ISC) – https://source.codeaurora.org/external/wlan/qcacld-2.0
+                             Qualcomm Atheros, Inc. (ISC) – https://git.codelinaro.org/clo/la/platform/vendor/qcom-opensource/wlan/qcacld-2.0
 
 --------------------------------------------
 
