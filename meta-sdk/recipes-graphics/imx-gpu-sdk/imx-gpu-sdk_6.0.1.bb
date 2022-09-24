@@ -12,11 +12,11 @@ DEPENDS_MX8:mx8-nxp-bsp   = " \
     glslang-native \
     opencv \
     rapidopencl \
-    rapidopenvx \
     rapidvulkan \
     vulkan-headers \
     vulkan-loader \
 "
+DEPENDS_MX8:append:mx8qm-nxp-bsp = "rapidopenvx"
 DEPENDS_MX8:mx8mm-nxp-bsp = " \
     opencv \
 "
@@ -59,13 +59,14 @@ FEATURES:append:imxgpu2d  = ",G2D"
 FEATURES:append:imxgpu3d  = ",OpenGLES2"
 FEATURES:append           = "${FEATURES_SOC}"
 
-FEATURES_SOC              = ""
-FEATURES_SOC:mx6q-nxp-bsp         = ",OpenGLES3"
-FEATURES_SOC:mx6dl-nxp-bsp        = ",OpenGLES3"
-FEATURES_SOC:mx8-nxp-bsp          = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.2"
-FEATURES_SOC:mx8mm-nxp-bsp        = ",OpenCV4"
+FEATURES_SOC               = ""
+FEATURES_SOC:mx6q-nxp-bsp  = ",OpenGLES3"
+FEATURES_SOC:mx6dl-nxp-bsp = ",OpenGLES3"
+FEATURES_SOC:mx8-nxp-bsp   = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2"
+FEATURES_SOC:append:mx8qm-nxp-bsp = ",OpenVX1.2"
+FEATURES_SOC:mx8mm-nxp-bsp = ",OpenCV4"
 
-EXTENSIONS       = "*"
+EXTENSIONS               = "*"
 EXTENSIONS:mx6q-nxp-bsp  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 EXTENSIONS:mx6dl-nxp-bsp = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 EXTENSIONS:mx8m-nxp-bsp  = "OpenGLES3:GL_EXT_color_buffer_float"
@@ -120,11 +121,13 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
     rapidjson \
     stb \
 "
-RDEPENDS_EMPTY_MAIN_PACKAGE_MX8       = ""
-RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8-nxp-bsp   = " \
+RDEPENDS_EMPTY_MAIN_PACKAGE_MX8             = ""
+RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8-nxp-bsp = " \
     rapidopencl \
-    rapidopenvx \
     rapidvulkan \
+"
+RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:append:mx8qm-nxp-bsp = " \
+    rapidopenvx \
 "
 RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8mm-nxp-bsp = ""
 # vulkan-loader is dynamically loaded, so need to add an explicit
