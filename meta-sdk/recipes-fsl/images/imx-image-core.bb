@@ -17,15 +17,10 @@ IMAGE_FEATURES += " \
     hwcodecs \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston','', d)} \
 "
+
 SDKIMAGE_FEATURES:append = " \
     staticdev-pkgs \
 "
-CLINFO ?= ""
-CLINFO:imxgpu = "clinfo"
-CLINFO:mx8mm-nxp-bsp = ""
-
-DOCKER ?= ""
-DOCKER:mx8-nxp-bsp = "docker"
 
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
@@ -37,4 +32,13 @@ IMAGE_INSTALL += " \
     ${CLINFO} \
     ${DOCKER} \
 "
+
+CLINFO              ?= ""
+CLINFO:imxgpu        = "clinfo"
+CLINFO:mx8mm-nxp-bsp = ""
+CLINFO:mx7-nxp-bsp   = ""
+
+DOCKER            ?= ""
+DOCKER:mx8-nxp-bsp = "docker"
+
 export IMAGE_BASENAME = "imx-image-core"
