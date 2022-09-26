@@ -13,20 +13,28 @@ inherit packagegroup
 
 RDEPENDS:${PN}        = ""
 RDEPENDS:${PN}:imxgpu = " \
-    clblast \
     ${DRM_TOOLS} \
     ${VULKAN_TOOLS} \
+    ${OPENCL_TOOLS} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "${WAYLAND_TOOLS}", "", d)} \
 "
+
 DRM_TOOLS         = ""
 DRM_TOOLS:imxdrm  = "kmscube"
+
+OPENCL_TOOLS               = "clblast"
+OPENCL_TOOLS:mx7-nxp-bsp   = ""
+OPENCL_TOOLS:mx8mm-nxp-bsp = ""
+
 VULKAN_TOOLS                      = ""
 VULKAN_TOOLS:mx8-nxp-bsp:imxgpu3d = "vulkan-loader vulkan-validationlayers vulkan-headers vkmark vulkan-tools gfxreconstruct"
 VULKAN_TOOLS:mx8mm-nxp-bsp        = ""
+
 WAYLAND_TOOLS = " \
     mesa-demos \
     ${GLMARK2} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtkperf renderdoc", "", d)} \
 "
+
 GLMARK2          = ""
 GLMARK2:imxgpu3d = "glmark2"
