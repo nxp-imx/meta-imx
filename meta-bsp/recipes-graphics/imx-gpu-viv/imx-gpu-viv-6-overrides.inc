@@ -42,7 +42,9 @@ do_install () {
         # Framebuffer backend for i.MX 8 and beyond
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl.pc         ${D}${libdir}/pkgconfig/egl.pc
         cp -r ${S}/gpu-core/usr/lib/wayland/* ${D}${libdir}
+        set -f
         for f in ${FILES:libvdk-imx} ${FILES:libvdk-imx-dev}; do
+            set +f
             rm -rf ${D}/$f
         done
         rm -rf \
@@ -56,7 +58,9 @@ do_install () {
     fi
 
     if [ -z "${PACKAGES_OPENCL}" ]; then
+        set -f
         for f in ${FILES:libopencl-imx} ${FILES:libopencl-imx-dev} ${FILES:libclc-imx} ${FILES:libclc-imx-dev}; do
+            set +f
             rm -rf ${D}$f
         done
         rm -rf ${D}/opt/viv_samples/cl11
@@ -67,14 +71,18 @@ do_install () {
     fi
 
     if [ -z "${PACKAGES_OPENVX}" ]; then
+        set -f
         for f in ${FILES:libopenvx-imx} ${FILES:libopenvx-imx-dev}; do
+            set +f
             rm -rf ${D}$f
         done
     fi
 
     if [ "${IS_MX8}" = "1" ]; then
         if [ -z "${PACKAGES_VULKAN}" ]; then
+            set -f
             for f in ${FILES:libvulkan-imx} ${FILES:libvulkan-imx-dev}; do
+                set +f
                 rm -rf ${D}$f
             done
         fi
