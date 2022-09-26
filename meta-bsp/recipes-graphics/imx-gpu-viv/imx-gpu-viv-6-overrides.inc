@@ -2,6 +2,11 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 ### Section 1: Changes to be upstreamed ###
 
+PACKAGES_OPENCL:mx7-nxp-bsp   = "libopencl-imx libopencl-imx-dev libclc-imx libclc-imx-dev"
+PACKAGES_OPENCL:mx8mm-nxp-bsp = "libopencl-imx libopencl-imx-dev libclc-imx libclc-imx-dev"
+
+PACKAGES_VULKAN:mx8mm-nxp-bsp = "libvulkan-imx libvulkan-imx-dev"
+
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
