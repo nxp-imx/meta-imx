@@ -18,7 +18,7 @@ PACKAGECONFIG_OPENVX:mx8mm-nxp-bsp      = ""
 # The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
 # support OpenVX
 PACKAGECONFIG_OPENVX:mx8ulp-nxp-bsp     = ""
-PACKAGECONFIG_OPENVX:mx93-nxp-bsp       = ""
+
 PACKAGECONFIG[openvx] = ",,,libopenvx-imx"
 
 do_install () {
