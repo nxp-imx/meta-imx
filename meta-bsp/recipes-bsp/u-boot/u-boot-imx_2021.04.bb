@@ -10,7 +10,7 @@ PROVIDES += "u-boot"
 UBOOT_SRC ?= "git://github.com/nxp-imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "lf_v2021.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "8372631b287e98ffda15d6412a38ebe37433ea0b"
+SRCREV = "8b8a0e55673615a654f020b0bcf133f6a5511772"
 
 LOCALVERSION = "-${SRCBRANCH}"
 
