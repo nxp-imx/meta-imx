@@ -12,8 +12,8 @@ PROVIDES = "virtual/libg2d"
 FSLBIN_NAME = "${PN}-${PV}-${TARGET_ARCH}"
 
 SRC_URI = "${FSL_MIRROR}/${FSLBIN_NAME}.bin;name=${TARGET_ARCH};fsl-eula=true"
-SRC_URI[aarch64.md5sum] = "50af2975d54a4fbf8790e70c905b04b6"
-SRC_URI[aarch64.sha256sum] = "1d4969d361493631fae4387de69a744011de269cd06d32c696d65289b701d0e9"
+SRC_URI[aarch64.md5sum] = "a2314e9c92908b79c72f1e6fcc0d11e0"
+SRC_URI[aarch64.sha256sum] = "5aadc597dba6a9228464cc97fc12defc4b5831910d825f69c584e3c788e5c381"
 SRC_URI[arm.md5sum] = "f6bbadfaaa92e4ddbc3d9e244713ed3d"
 SRC_URI[arm.sha256sum] = "390cb9b60c81f95eb7e58fb7955ab0ab580115022907fba33a62f9e0808800f4"
 
