@@ -5,6 +5,12 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 PACKAGES_OPENCL:mx7-nxp-bsp   = "libopencl-imx libopencl-imx-dev libclc-imx libclc-imx-dev"
 PACKAGES_OPENCL:mx8mm-nxp-bsp = "libopencl-imx libopencl-imx-dev libclc-imx libclc-imx-dev"
 
+# Full OpenVX support is limited to 8QM. However, a limited set of OpenVX
+# functionality is provided for Machine Learning, so provide packages for
+# additional SOCs for this case.
+PACKAGES_OPENVX:mx8-nxp-bsp   = "libopenvx-imx libopenvx-imx-dev"
+PACKAGES_OPENVX:mx8mm-nxp-bsp = ""
+
 PACKAGES_VULKAN:mx8mm-nxp-bsp = "libvulkan-imx libvulkan-imx-dev"
 
 do_install () {
