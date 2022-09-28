@@ -21,16 +21,10 @@ S = "${WORKDIR}/${FSLBIN_NAME}"
 
 inherit fsl-eula-unpack
 
-IMX_SOC               = "IMX_SOC_NOT_SET"
-IMX_SOC:mx8mm-nxp-bsp = "mx8mm"
-
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
-    cp -d ${S}/g2d/usr/lib/*.so* ${D}${libdir}
-    if [ -d ${S}/g2d/usr/lib/${IMX_SOC} ]; then
-        cp -df ${S}/g2d/usr/lib/${IMX_SOC}/*.so* ${D}${libdir}
-    fi
+    cp -r ${S}/g2d/usr/lib/*.so* ${D}${libdir}
     cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
 }
 
