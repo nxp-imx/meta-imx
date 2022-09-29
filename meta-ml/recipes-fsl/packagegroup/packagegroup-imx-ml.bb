@@ -46,6 +46,7 @@ ML_PKGS:mx9-nxp-bsp = " \
 # all SOCs with GPU except for 8M Mini
 ML_ACCELERATED_PKGS                    = ""
 ML_ACCELERATED_PKGS:mx8-nxp-bsp:imxgpu = " \
+    tensorflow-lite-vx-delegate \
     tvm \
 "
 ML_ACCELERATED_PKGS:mx8mm-nxp-bsp      = ""
