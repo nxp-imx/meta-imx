@@ -24,6 +24,7 @@ SRC_URI:append:mx8-nxp-bsp = " \
     file://0116-V4L2VDA-Support-tile-to-linear-transform-for-amphion.patch \
     file://0117-V4L2VDA-Enlarge-input-buffer-count-to-16.patch \
     file://0118-V4L2VDA-Use-dlopen-to-dynamically-use-g2d-api.patch \
+    file://0119-V4L2VDA-dlopen-libg2d.so.2-to-avoid-segfault.patch \
 "
 
 GN_ARGS_DISABLE_GBM             = ""
