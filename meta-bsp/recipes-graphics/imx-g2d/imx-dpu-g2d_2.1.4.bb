@@ -18,10 +18,14 @@ inherit fsl-eula-unpack
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
-    cp -r ${S}/g2d/usr/lib/*.so* ${D}${libdir}
+    cp -d ${S}/g2d/usr/lib/*.so* ${D}${libdir}
     cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
 }
 
-INSANE_SKIP:${PN} += "ldflags"
+# The packaged binaries have been stripped of debug info, so disable
+# operations accordingly.
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_SYSROOT_STRIP = "1"
 
 COMPATIBLE_MACHINE = "(imxdpu)"
