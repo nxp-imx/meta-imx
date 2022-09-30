@@ -1348,7 +1348,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.10.0
+Version:                     2.9.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1361,7 +1361,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
-Version:                     2.10.0
+Version:                     2.9.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
