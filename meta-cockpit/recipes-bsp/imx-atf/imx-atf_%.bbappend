@@ -18,10 +18,14 @@ do_compile:imx8qm-cockpit () {
 }
 
 do_deploy:imx8qm-cockpit () {
-    install -Dm 0644 ${S}/a53/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-a53
-    install -m 0644 ${S}/a72/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-a72
-    if ${BUILD_OPTEE}; then
-       install -m 0644 ${S}/optee-a53/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-optee-a53
-       install -m 0644 ${S}/optee-a72/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-optee-a72
-    fi
+    for core in a53 a72; do
+        flavors=$core
+        if ${BUILD_OPTEE}; then
+            flavors="$core optee-$core"
+        fi
+        for flavor in $flavors; do
+            install -Dm 0644 ${S}/$flavor/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}-cockpit.bin-$flavor
+            install -Dm 0644 ${S}/$flavor/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}-cockpit.bin-$flavor
+        done
+    done
 }

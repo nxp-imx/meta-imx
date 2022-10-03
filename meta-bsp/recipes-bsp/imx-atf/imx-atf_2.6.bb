@@ -38,6 +38,9 @@ LD[unexport] = "1"
 INHIBIT_DEFAULT_DEPS = "1"
 DEPENDS = "virtual/${HOST_PREFIX}gcc"
 
+# Bring in clang compiler if using clang as default
+DEPENDS:append:toolchain-clang = " clang-cross-${TARGET_ARCH}"
+
 BUILD_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
 # CC and LD introduce arguments which conflict with those otherwise provided by
@@ -67,20 +70,15 @@ do_compile() {
 
 do_install[noexec] = "1"
 
+BOOT_TOOLS = "imx-boot-tools"
+
+addtask deploy after do_compile
 do_deploy() {
     install -Dm 0644 ${S}/build/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin
+    install -Dm 0644 ${S}/build/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}.bin
     if ${BUILD_OPTEE}; then
         install -m 0644 ${S}/build-optee/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin-optee
-    fi
-}
-addtask deploy after do_compile
-
-BOOT_TOOLS = "imx-boot-tools"
-do_deploy:append() {
-    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    cp ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin ${DEPLOYDIR}/${BOOT_TOOLS}
-    if ${BUILD_OPTEE}; then
-        cp ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin-optee ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0644 ${S}/build-optee/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}.bin-optee
     fi
 }
 
