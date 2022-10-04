@@ -754,18 +754,6 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.3.p2.8-aarch64-fb.bin
-Version:                     6.4.3.p2.8
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 - Additional distribution license granted - Section 2.3 applies 
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Library to retrieve i.MX GPU performance data
-Release Location:            Mirror
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-
 Package:                     libgpuperfcnt-6.4.3.p2.8-aarch64-wayland.bin
 Version:                     6.4.3.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 - Additional distribution license granted - Section 2.3 applies 
@@ -1255,7 +1243,7 @@ Origin:                      NXP (proprietary)
 MachineLearning Packages
 --------------------------------------------
 
-Package:                     armnn.git
+Package:                     armnn-imx.git
 Version:                     21.08
 Outgoing License:            MIT 
 License File:                LICENSE
@@ -1264,8 +1252,15 @@ Type of Content:             source
 Description and comments:    ARM Neural Network SDK
 Release Location:            https://github.com/nxp-imx/armnn-imx -b lf-5.10.72-2.2.3
 Origin:                      NXP (MIT)
-                             armnn (MIT) - https://github.com/ARM-software/armnn
-
+                             armnn - ARM Limited (MIT) - https://github.com/ARM-software/armnn
+                             Boost v1.64 - https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.bz2
+                             cxxopts v2.2 - Jarryd Beck (MIT) - https://github.com/jarro2783/cxxopts/
+                             fmt v7.0.1 - Victor Zverovich (MIT) - https://github.com/fmtlib/fmt/
+                             ghc v1.3.2 - Steffen Schümann (MIT) - https://github.com/gulrak/filesystem
+                             half v1.12.0 - Christian Rau (MIT) - http://half.sourceforge.net/
+                             stb v2.16 - Jorge L Rodriguez - (Public Domain) - http://github.com/nothings/stb
+                             mapbox/variant v1.1.3 - MapBox (BSD-3-clause) - https://github.com/mapbox/variant
+ 
 --------------------------------------------
 
 Package:                     coral-posenet-imx.git
