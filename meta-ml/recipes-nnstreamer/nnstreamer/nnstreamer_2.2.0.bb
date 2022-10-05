@@ -18,13 +18,9 @@ DEPENDS = "\
 	libpng \
 "
 
-SRCREV = "354a149d8d174ad40f758bb19c6a6718f95d3103"
+SRCREV = "f82789170b8f2696e50cbc5027b74b767f5e9415"
 SRC_URI = "\
     git://github.com/nnstreamer/nnstreamer.git;branch=main;protocol=https \
-    file://0001-decoder-bounding_box-Fix-ssd-box-decoding-without-po.patch \
-    file://0001-filter-deepview-rt-Add-filter-subplugin-for-DeepView.patch \
-    file://0001-Filter-TFLite-Fix-model-tensors-allocation-not-worki.patch \
-    file://0001-tensor-decoder-add-ssd_mobilenet-v3-support.patch \
 "
 
 # Use git instead of quilt as patch tool to support patches with binary content
