@@ -47,7 +47,7 @@ PACKAGECONFIG[gpu-fbdev] = " \
 PACKAGECONFIG[pxp] = " \
     BUILD_IMPLEMENTATION=pxp, \
     , \
-    imx-pxp-g2d wayland-native wayland-protocols, \
+    imx-pxp-g2d wayland-native wayland wayland-protocols, \
     , \
     , \
     dpu gpu-drm gpu-fbdev"
