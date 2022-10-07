@@ -194,10 +194,14 @@ PACKAGECONFIG[imxg2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d
 # Weston with OpenGL support
 PACKAGECONFIG[opengl] = "-Dopengl=true,-Dopengl=false"
 
-PACKAGECONFIG[fbdev] = "-Dbackend-fbdev=true,-Dbackend-fbdev=false,udev mtdev"
+PACKAGECONFIG[fbdev] = "-Dbackend-fbdev=true,-Dbackend-fbdev=false,udev mtdev libdrm"
 EXTRA_OEMESON:append:imxfbdev = " -Dbackend-default=fbdev"
 
 EXTRA_OEMESON += "-Ddeprecated-wl-shell=true"
+
+# links with imx-gpu libs which are pre-built for glibc
+# gcompat will address it during runtime
+LDFLAGS:append:imxgpu:libc-musl = " -Wl,--allow-shlib-undefined"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
