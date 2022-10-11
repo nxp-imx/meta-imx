@@ -1,0 +1,37 @@
+From 9dda2470b02a75328011803fdb0d0e43311540dd Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Tue, 11 Oct 2022 12:42:10 -0700
+Subject: [PATCH] meson.build: Enable native wayland scanner
+
+With openembedded commit e525db4eb9 ("wayland: update 1.20.0 -> 1.21.0")
+package config seems no longer to provide the path to the native
+wayland scanner.
+
+This patch fixes the following build break:
+
+Program /usr/bin/wayland-scanner found: NO
+|
+| ../git/src/meson.build:93:4: ERROR: Program '/usr/bin/wayland-scanner' not found or not executable
+|
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 996d7a5..137805e 100644
+--- a/meson.build
++++ b/meson.build
+@@ -29,7 +29,7 @@ xcb_icccm_dep = dependency('xcb-icccm', required : get_option('xcb') == 'true')
+ wayland_client_dep = dependency('wayland-client', required : get_option('wayland') == 'true')
+ wayland_protocols_dep = dependency('wayland-protocols', version : '>= 1.12',
+                                    required : get_option('wayland') == 'true')
+-wayland_scanner_dep = dependency('wayland-scanner', required : get_option('wayland') == 'true')
++wayland_scanner_dep = dependency('wayland-scanner', required : get_option('wayland') == 'true', native: true)
+ libdrm_dep = dependency('libdrm', required : get_option('kms') == 'true')
+ gbm_dep = dependency('gbm', required : get_option('kms') == 'true')
+ has_vulkan_intel_header = cpp.has_header('vulkan/vulkan_intel.h', dependencies: vulkan_dep)
+-- 
+2.25.1
+

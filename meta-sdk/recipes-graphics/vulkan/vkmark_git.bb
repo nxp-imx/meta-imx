@@ -12,6 +12,7 @@ SRC_URI = " \
     file://0001-scenes-Use-depth-format-supported-by-i.MX.patch \
     file://0001-src-meson.build-Prepend-sysroot-for-the-includedir.patch \
     file://0001-tests-catch.hpp-Fix-build-with-glibc-2.34.patch \
+    file://0001-meson.build-Enable-native-wayland-scanner.patch \
 "
 SRCREV = "53abc4f660191051fba91ea30de084f412e7c68e"
 S = "${WORKDIR}/git"
