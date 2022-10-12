@@ -24,4 +24,5 @@ DEFAULTTUNE:mx8ulp-nxp-bsp ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx9-nxp-bsp    ?= "armv8a-crc-crypto"
 
 PACKAGECONFIG:append:pn-gstreamer1.0-plugins-ugly = " x264"
+PACKAGECONFIG:append:pn-pulseaudio = " autospawn-for-root"
 PACKAGECONFIG:append:pn-systemd = " unmanaged-network"
