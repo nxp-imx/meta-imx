@@ -16,7 +16,9 @@ FILESEXTRAPATHS:append := ":${THISDIR}/optee-client"
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
-inherit python3native systemd features_check
+inherit python3native systemd features_check pkgconfig
+
+DEPENDS = "util-linux-libuuid"
 
 REQUIRED_MACHINE_FEATURES = "optee"
 
