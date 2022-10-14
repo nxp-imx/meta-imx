@@ -3,7 +3,7 @@
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5a0bf11f745e68024f37b4724a5364fe" 
-DEPENDS = "libdrm virtual/libg2d libtinyxml2"
+DEPENDS = "boost libdrm virtual/libg2d libtinyxml2"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
@@ -79,6 +79,9 @@ FILES:${PN} += "/opt ${libdir}/lib*${SOLIBSDEV}"
 FILES:${PN}-dev += "${FILES_SOLIBS_VERSIONED}"
 FILES_SOLIBS_VERSIONED = " \
     ${libdir}/libar1335.so \
+    ${libdir}/libcppnetlib-client-connections.so \
+    ${libdir}/libcppnetlib-server-parsers.so \
+    ${libdir}/libcppnetlib-uri.so \
     ${libdir}/libjsoncpp.so \
     ${libdir}/libos08a20.so \
     ${libdir}/libov2775.so \
