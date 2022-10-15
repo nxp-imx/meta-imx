@@ -53,6 +53,9 @@ do_install () {
     # Install backend-specific drivers
     if [ "${BACKEND}" = "wayland" ]; then
         # Wayland backend
+        if ! ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'true', 'false', d)}; then
+            install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/gl.pc ${D}${libdir}/pkgconfig/gl.pc
+        fi
         install -m 0644 ${S}/gpu-core/usr/lib/pkgconfig/egl_wayland.pc ${D}${libdir}/pkgconfig/egl.pc
         cp -r ${S}/gpu-core/usr/lib/wayland/* ${D}${libdir}
     elif [ "${IS_MX8}" != "1" ]; then
@@ -138,6 +141,9 @@ do_install () {
 
     chown -R root:root "${D}"
 }
+
+FILES:libgl-imx-dev += "${libdir}/pkgconfig/gl.pc"
+
 
 ### Section 2: Changes to be kept in meta-imx ###
 
