@@ -13,11 +13,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 DEPENDS += "lzop-native bc-native"
 
 SRCBRANCH = "imx_5.4.70_2.3.0"
-LOCALVERSION = "-2.3.2"
+LOCALVERSION = "-2.3.11"
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "fb1397475d07d81164304bbc38a13dce764e5372"
+SRCREV = "b34a9c9644c11a0393def0fb56d6f9184f722c24"
 
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
