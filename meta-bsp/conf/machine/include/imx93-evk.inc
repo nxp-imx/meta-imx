@@ -20,16 +20,13 @@ SPL_BINARY = "spl/u-boot-spl.bin"
 
 UBOOT_CONFIG ??= "sd"
 UBOOT_CONFIG[sd]   = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
-UBOOT_CONFIG[fspi] = "${UBOOT_CONFIG_BASENAME}_defconfig"
+UBOOT_CONFIG[ecc]  = "${UBOOT_CONFIG_BASENAME}_inline_ecc_defconfig"
+UBOOT_CONFIG[ld]   = "${UBOOT_CONFIG_BASENAME}_ld_defconfig"
 
 # Set ATF platform name
 ATF_PLATFORM = "imx93"
 
-IMXBOOT_TARGETS_SD   = "flash_singleboot"
-IMXBOOT_TARGETS_FSPI = "flash_singleboot_m33_flexspi flash_dualboot_flexspi"
-
-IMXBOOT_TARGETS = "${@bb.utils.contains('UBOOT_CONFIG',   'sd', '${IMXBOOT_TARGETS_SD}', \
-                                                                '${IMXBOOT_TARGETS_FSPI}', d)}"
+IMXBOOT_TARGETS = "flash_singleboot"
 
 IMX_BOOT_SOC_TARGET = "iMX9"
 IMX_BOOT_SEEK = "32"
