@@ -360,7 +360,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-optee-client.git
-Version:                     3.17.0.imx
+Version:                     3.19.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -373,7 +373,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-os.git
-Version:                     3.17.0.imx
+Version:                     3.19.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -387,7 +387,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-test.git
-Version:                     3.17.0.imx
+Version:                     3.19.0.imx
 Outgoing License:            BSD-2-Clause (ta/) and GPL-2.0 (host/) 
 License File:                LICENSE.md
 Package Category:            BSP
@@ -1285,7 +1285,7 @@ Release Location:            https://github.com/nxp-imx/ethos-u-vela -b lf-5.15.
 --------------------------------------------
 
 Package:                     ethos-u-driver-stack-imx.git
-Version:                     22.02
+Version:                     22.08
 Outgoing License:            Apache-2.0 
 License File:                LICENSE-APAchE-2.0.txt
 Package Category:            MachineLearning
@@ -1295,7 +1295,7 @@ Release Location:            https://github.com/nxp-imx/ethos-u-driver-stack-imx
 --------------------------------------------
 
 Package:                     ethos-u-firmware.git
-Version:                     22.02
+Version:                     22.08
 Outgoing License:            Apache-2.0 
 License File:                LICENSE-APACHE-2.0.txt
 Package Category:            MachineLearning
