@@ -28,7 +28,7 @@ EXTRA_OESCONS = " \
     build=cross_compile \
     os=linux \
     toolchain_prefix=' ' \
-    extra_cxx_flags='-fPIC' \
+    extra_cxx_flags='-fPIC -Wno-error=strict-overflow -Wno-error=array-bounds ' \
     ${PACKAGECONFIG_CONFARGS} \
 "
 EXTRA_OESCONS:append:aarch64 = " arch=arm64-v8a neon=1"
