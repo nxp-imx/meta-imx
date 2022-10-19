@@ -13,8 +13,8 @@ SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
            file://0002-Makefile-Fix-install-to-clear-host-user-contaminated.patch \
            file://0001-add-v2x_test-to-the-installed-binaries.patch"
 SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
-SRCBRANCH = "imx_5.4.70_2.3.9"
-SRCREV = "b2550476388e1d1453bddbf356844301467c7bfa"
+SRCBRANCH = "imx_5.4.70_2.3.11"
+SRCREV = "aa8d62900c41cc779c11fe4e6f58b40c3c9f82f0"
 
 S = "${WORKDIR}/git"
 
