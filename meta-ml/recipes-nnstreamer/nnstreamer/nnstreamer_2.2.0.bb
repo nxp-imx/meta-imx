@@ -86,6 +86,7 @@ PACKAGECONFIG[tvm] = "\
 "
 
 EXTRA_OEMESON += "\
+	-Denable-float16=true \
 	-Denable-test=true \
 	-Dinstall-test=true \
 "
