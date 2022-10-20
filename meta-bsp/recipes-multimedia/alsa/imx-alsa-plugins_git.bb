@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 inherit autotools pkgconfig use-imx-headers
 
-SRCBRANCH = "master"
+SRCBRANCH = "MM_04.07.02_2210_L5.15.y"
 PV = "1.0.26+${SRCPV}"
 
 IMXALSA_SRC ?= "git://github.com/nxp-imx/imx-alsa-plugins.git;protocol=https"
