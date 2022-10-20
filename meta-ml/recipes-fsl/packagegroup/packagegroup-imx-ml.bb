@@ -31,11 +31,13 @@ ML_GST_PROFILER:mx9-nxp-bsp   = "gst-shark"
 # These packages don't require any acceleration
 ML_PKGS            = ""
 ML_PKGS:mx8-nxp-bsp = " \
+    deepview-rt-examples \
     onnxruntime-tests \
     tensorflow-lite \
     torchvision \
 "
 ML_PKGS:mx9-nxp-bsp = " \
+    deepview-rt-examples \
     onnxruntime-tests \
     tensorflow-lite \
     torchvision \
@@ -61,6 +63,7 @@ ETHOS_U_PKGS:mx93-nxp-bsp = " \
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \
     ${ML_ACCELERATED_PKGS} \
+    ${ML_NNSTREAMER_PKGS} \
     ${ML_GST_PROFILER} \
     ${ETHOS_U_PKGS} \
 "
