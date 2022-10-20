@@ -5,7 +5,7 @@ require imx-mcore-demos.inc
 
 LIC_FILES_CHKSUM:mx93-nxp-bsp = "file://COPYING;md5=d3c315c6eaa43e07d8c130dc3a04a011"
 
-SRC_URI[imx93.md5sum] = "5480cb59db893244ee5da0dee2842fcf"
-SRC_URI[imx93.sha256sum] = "5cd7ef02dc7ecbf5db2f5d6168a0a022097b4f8ed3e7e403976b3a5c4575bf66"
+SRC_URI[imx93.md5sum] = "b63358a6ed6f2b95c8196c54140b4a23"
+SRC_URI[imx93.sha256sum] = "e87cd109bf4a20c5f28ea9e927d300f59386c0e2edeef95e2e3496882101469f"
 
 COMPATIBLE_MACHINE = "(mx93-nxp-bsp)"
