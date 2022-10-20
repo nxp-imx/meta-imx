@@ -109,6 +109,7 @@ do_install() {
 }
 
 RDEPENDS:${PN}   = " \
+    flatbuffers \
     python3 \
     python3-numpy \
     ${RDEPENDS_OPENVX} \
