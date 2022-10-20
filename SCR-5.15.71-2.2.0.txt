@@ -269,18 +269,6 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-seco-libs.git
-Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
-License File:                EULA.txt
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    BSP source - SECO
-Release Location:            https://github.com/NXP/imx-seco-libs.git -b lf-5.15.71-2.2.0
-Origin:                      NXP (proprietary)
-
---------------------------------------------
-
 Package:                     sof-imx-2.2.0
 Version:                     2.2.0
 Outgoing License:            BSD-3-Clause 
@@ -1348,7 +1336,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.9.1
+Version:                     2.10.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1361,7 +1349,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
-Version:                     2.9.1
+Version:                     2.10.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
