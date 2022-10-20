@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
                  file://driver/jailhouse.h;beginline=9;endline=36;md5=2825581c1666c44a17955dc574cfbfb3 \
 "
 
-SRCBRANCH = "imx_v0.2_y"
+SRCBRANCH = "lf-5.15.71_2.2.0"
 SRCREV = "d9fffb8035a8a2b8d1182c750bd0e90bb4c0027a"
 
 IMX_JAILHOUSE_SRC ?= "git://github.com/nxp-imx/imx-jailhouse.git;protocol=https"
