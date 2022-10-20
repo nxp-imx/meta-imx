@@ -3,7 +3,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=ab04ac0f249af12befccb94447c08b77"
 
 # For Kernel 5.4 and later
-SRCBRANCH = "master"
+SRCBRANCH = "lf-5.15.71_2.2.0"
 MRVL_SRC ?= "git://github.com/nxp-imx/mwifiex.git;protocol=https"
 SRC_URI = "${MRVL_SRC};branch=${SRCBRANCH}"
 SRCREV = "5a38226a471d0bd0799e8957cb1a4276b58467d1"
