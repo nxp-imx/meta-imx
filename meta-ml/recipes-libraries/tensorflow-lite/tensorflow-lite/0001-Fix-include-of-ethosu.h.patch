@@ -1,0 +1,40 @@
+From 20dc9a25deb5389dfc8589c69d9d771618f6b145 Mon Sep 17 00:00:00 2001
+From: "Tom Hochstein" <tom.hochstein@nxp.com>
+Date: Fri, 21 Oct 2022 12:49:57 -0500
+Subject: [PATCH] Fix include of ethosu.h
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ tensorflow/lite/kernels/ethos_u/ethosu.cc     | 2 +-
+ tensorflow/lite/kernels/ethos_u/ethosu_drv.cc | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tensorflow/lite/kernels/ethos_u/ethosu.cc b/tensorflow/lite/kernels/ethos_u/ethosu.cc
+index 0b3a1cbe4dc..ddc41ee6d52 100644
+--- a/tensorflow/lite/kernels/ethos_u/ethosu.cc
++++ b/tensorflow/lite/kernels/ethos_u/ethosu.cc
+@@ -27,7 +27,7 @@ limitations under the License.
+ #include "tensorflow/lite/kernels/kernel_util.h"
+ 
+ #include <tensorflow/lite/kernels/ethos_u/ethosu.hpp>
+-#include <ethosu.h>
++#include <linux/ethosu.h>
+ 
+ using namespace std;
+ using namespace EthosU;
+diff --git a/tensorflow/lite/kernels/ethos_u/ethosu_drv.cc b/tensorflow/lite/kernels/ethos_u/ethosu_drv.cc
+index 9283b6a4dc3..ee1d8a95cb5 100644
+--- a/tensorflow/lite/kernels/ethos_u/ethosu_drv.cc
++++ b/tensorflow/lite/kernels/ethos_u/ethosu_drv.cc
+@@ -17,7 +17,7 @@
+  */
+ 
+ #include <tensorflow/lite/kernels/ethos_u/ethosu.hpp>
+-#include <ethosu.h>
++#include <linux/ethosu.h>
+ 
+ #include <algorithm>
+ #include <queue>
+-- 
+2.25.1
+
