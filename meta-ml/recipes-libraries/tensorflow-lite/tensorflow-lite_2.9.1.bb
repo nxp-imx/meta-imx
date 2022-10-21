@@ -4,10 +4,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4158a261ca7f2525513e31ba9c50ae98"
 
 
-DEPENDS_ETHOSU       = ""
-DEPENDS_ETHOSU:mx93-nxp-bsp   = "ethos-u-driver-stack"
 DEPENDS = "python3-numpy-native python3-pip-native python3-pybind11-native python3-wheel-native unzip-native \
-    python3 tensorflow-protobuf jpeg zlib ${BPN}-host-tools-native ${DEPENDS_ETHOSU}"
+    python3 tensorflow-protobuf jpeg zlib ${BPN}-host-tools-native"
 
 require tensorflow-lite-${PV}.inc
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf"
@@ -24,7 +22,7 @@ PACKAGECONFIG ??= "${PACKAGECONFIG_ETHOSU}"
 PACKAGECONFIG_ETHOSU              = ""
 PACKAGECONFIG_ETHOSU:mx93-nxp-bsp = "ethosu"
 
-PACKAGECONFIG[ethosu] = "-DTFLITE_ENABLE_ETHOSU=on,-DTFLITE_ENABLE_ETHOSU=off"
+PACKAGECONFIG[ethosu] = "-DTFLITE_ENABLE_ETHOSU=on,-DTFLITE_ENABLE_ETHOSU=off,ethos-u-driver-stack"
 
 EXTRA_OECMAKE = " \
     -DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR} \
