@@ -1,13 +1,13 @@
 NXP Software Content Register
 
 Release - Linux 5.15.71-2.2.0
- September 2022
+ December 2022
 
 Outgoing License: LA_OPT_NXP_Software_License v39 August 2022 - Additional distribution license granted - Section 2.3 applies
 License File:     EULA.txt
 
 Yocto Project recipe manifest:
-repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-kirkstone -m imx_5.15.71-2.2.0.xml
+repo init -u https://github.com/nxp-imx/imx-manifest -b kirkstone-5.15.71-2.2.0 -m imx_5.15.71-2.2.0.xml
 
 Release tag: lf-5.15.71-2.2.0
 
@@ -255,6 +255,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP Wi-Fi IW612 linux SDK
 Release Location:            https://github.com/nxp-imx/mwifiex-iw612 -b lf-5.15.71-2.2.0
+Origin:                      NXP (GPL-2.0)
+
 --------------------------------------------
 
 Package:                     imx-seco-5.9.0.bin
@@ -290,11 +292,7 @@ Type of Content:             binary
 Description and comments:    Sound Open Firmware
 Release Location:            Mirror
 Origin:                      NXP (BSD-3-clause)
-                             Intel Corporation (BSD-3-clause)
-                             Cadence Design Systems, Inc. (MIT)
-                             Ulf Magnusson (ISC) 
-                             FreeBSD (BSD-2-clause)
-                             source code in: https://github.com/thesofproject/sof
+                             sof (BSD-3-Clause) - https://github.com/thesofproject/sof
 
 --------------------------------------------
 
@@ -306,6 +304,10 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Sound Open Firmware with Zephyr
 Release Location:            Mirror
+Origin:                      NXP (BSD-3-clause)
+                             sof (BSD-3-Clause) -  https://github.com/thesofproject/sof
+                             zephyr project (Apache-2.0) - https://github.com/zephyrproject-rtos/zephyr
+
 --------------------------------------------
 
 Package:                     zephyr-demo-imx-3.1.0
@@ -316,6 +318,10 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Zephyr Demo for i.MX
 Release Location:            Mirror
+Origin:                      NXP (BSD-3-clause)
+                             zephyr project (Apache-2.0) - https://github.com/zephyrproject-rtos/zephyr
+
+
 --------------------------------------------
 
 Package:                     simg2img.git
@@ -412,7 +418,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     mx-secure-enclave.git
+Package:                     imx-secure-enclave.git
 Version:                     
 Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
@@ -420,6 +426,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX secure enclave library
 Release Location:            https://github.com/NXP/imx-secure-enclave.git -b lf-5.15.71-2.2.0
+Origin:                      NXP (proprietary)
+
 --------------------------------------------
 
 Package:                     imx-smw.git
@@ -733,6 +741,8 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
 Release Location:            https://github.com/NXPmicro/g2d-samples -b lf-5.15.71-2.2.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 
 Package:                     libgpuperfcnt-6.4.3.p4.6-aarch64-wayland.bin
@@ -1074,6 +1084,12 @@ Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP RetuneDSP Voice Seeker
 Release Location:            https://github.com/nxp-imx/imx-voiceUI -b lf-5.15.71-2.2.0
+Origin:                      NXP (Proprietary)
+                             Ne10 (BSD-3-Clause) - https://github.com/projectNe10/Ne10
+                             pugixml (MIT) - https://github.com/zeux/pugixml
+                             ARM ComputeLibrary (MIT) - https://github.com/ARM-software/ComputeLibrary
+                             CMSIS-5 (Apache-2.0) - https://github.com/ARM-software/CMSIS_5
+
 --------------------------------------------
 M4 Processor Packages
 --------------------------------------------
@@ -1201,7 +1217,8 @@ Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
 Release Location:            Mirror
 Origin:                      NXP (proprietary)
-                             ARM LIMITED (BSD-3-Clause)
+                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
+                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
                              Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
 
@@ -1209,8 +1226,8 @@ Origin:                      NXP (proprietary)
 M33 Processor Packages
 --------------------------------------------
 
-Package:                     imx8ulp-m33-demo-2.12.1.bin
-Version:                     2.12.1
+Package:                     imx8ulp-m33-demo-2.12.2.bin
+Version:                     2.12.2
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1218,20 +1235,28 @@ Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M33 core
 Release Location:            Mirror
 Origin:                      NXP (proprietary)
-                             ARM LIMITED (BSD-3-Clause)
+                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
+                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
                              Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
 
 --------------------------------------------
 
-Package:                     imx93-m33-demo-2.12.0.bin
-Version:                     2.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
+Package:                     imx93-m33-demo-2.13.0.bin
+Version:                     2.13.0
+Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M33 core
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
+                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
+                             Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
+                             Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
+                             KEYnetik, Inc (Proprietary)
+
 --------------------------------------------
 MachineLearning Packages
 --------------------------------------------
@@ -1256,8 +1281,10 @@ Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    DeepViewRT Examples
 Release Location:            Mirror
-Origin:                      Au-Zone Technologies (proprietary)
-                               Viktor Kutuzov (MIT)
+Origin:                    Au-Zone Technologies (proprietary)
+                           mman-win32 (Author: Viktor Kutuzov, License: MIT) - https://github.com/klauspost/mman-win32
+                           panda.jpg (Author: Shizhao, License: CC BY-SA 3.0) - https://commons.wikimedia.org/wiki/File:Giant_Panda_in_Beijing_Zoo_1.JPG
+                           horse.jpg (public domain) - https://commons.wikimedia.org/wiki/File:Horsescd1l-095.jpg
 
 --------------------------------------------
 
@@ -1282,6 +1309,10 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tool to compile a TensorFlow Lite for Microcontrollers neural network model
 Release Location:            https://github.com/nxp-imx/ethos-u-vela -b lf-5.15.71-2.2.0
+Origin:                      NXP (BSD-3-Clause)
+                             ARM Limited ethos-u-vela v22.02 (Apache-2.0) - https://git.mlplatform.org/ml/ethos-u/ethos-u-vela.git
+                             FlatBuffers (Apache-2.0) 
+
 --------------------------------------------
 
 Package:                     ethos-u-driver-stack-imx.git
@@ -1292,6 +1323,11 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-driver-stack is the user space driver library for ethos-u NPU on iMX93 platform
 Release Location:            https://github.com/nxp-imx/ethos-u-driver-stack-imx -b lf-5.15.71-2.2.0
+Origin:                      NXP (BSD-3-Clause)
+                             ARM Limited ethos-u-linux-driver-stack v22.02 (Apache-2.0) - https://git.mlplatform.org/ml/ethos-u/ethos-u-linux-driver-stack.git
+                             FlatBuffers (Apache-2.0) 
+                             Linux Kernel Header file - ARM Limited (GPL-2.0) - https://git.mlplatform.org/ml/ethos-u/ethos-u-linux-driver-stack.git
+
 --------------------------------------------
 
 Package:                     ethos-u-firmware.git
@@ -1302,6 +1338,10 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-firmware is the binary NPU driver running on cortex-m33 core of NXP iMX93 platform
 Release Location:            https://github.com/nxp-imx/ethos-u-firmware -b lf-5.15.71-2.2.0
+Origin:                      NXP (BSD-3-Clause)
+                             ARM Limited ethos-u-linux-driver-stack v22.02 (Apache-2.0) - https://git.mlplatform.org/ml/ethos-u/ethos-u-core-software.git
+                             Amazon.com, Inc. FreeRTOS (MIT) - https://git.mlplatform.org/ml/ethos-u/ethos-u-core-software.git/tree/rtos/freertos_config/FreeRTOSConfig.h.in
+
 --------------------------------------------
 
 Package:                     nnshark.git
