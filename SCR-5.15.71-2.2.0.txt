@@ -283,8 +283,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     sof-imx-2.3.0
-Version:                     2.3.0
+Package:                     sof-imx-2.2.0
+Version:                     2.2.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -296,8 +296,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.3.0
-Version:                     2.3.0
+Package:                     sof-zephyr-2.2.0
+Version:                     2.2.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -310,8 +310,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-3.2.0
-Version:                     3.2.0
+Package:                     zephyr-demo-imx-3.1.0
+Version:                     3.1.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
