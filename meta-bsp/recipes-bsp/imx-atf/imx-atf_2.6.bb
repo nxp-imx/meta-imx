@@ -11,7 +11,7 @@ SRC_URI = "${ATF_SRC};branch=${SRCBRANCH} \
            file://0001-Makefile-Suppress-array-bounds-error.patch"
 ATF_SRC ?= "git://github.com/nxp-imx/imx-atf.git;protocol=https"
 SRCBRANCH = "lf_v2.6"
-SRCREV = "f123e1c3c50c44855ff1292f35bc714dbfb9f886"
+SRCREV = "13a157a94ec83459c0f9c77bf1820f117c53cd19"
 
 S = "${WORKDIR}/git"
 
