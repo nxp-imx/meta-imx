@@ -176,7 +176,7 @@ FILES:${PN}-python3 = "\
 	${libdir}/nnstreamer/converters/libnnstreamer_converter_python3.so \
 	${libdir}/nnstreamer/decoders/libnnstreamer_decoder_python3.so \
 	${libdir}/nnstreamer/filters/libnnstreamer_filter_python3.so \
-	${libdir}/nnstreamer/extra/nnstreamer_python3.so \
+	${libdir}/nnstreamer_python3.so \
 	${PYTHON_SITEPACKAGES_DIR}/nnstreamer_python.so \
 "
 
@@ -208,7 +208,7 @@ do_install:append() {
     # Check if python3 is enabled then install python module
     if ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'true', 'false', d)}; then
         install -d ${D}${PYTHON_SITEPACKAGES_DIR}/
-        ln -sf ${libdir}/nnstreamer/extra/nnstreamer_python3.so ${D}${PYTHON_SITEPACKAGES_DIR}/nnstreamer_python.so
+        ln -sf ${libdir}/nnstreamer_python3.so ${D}${PYTHON_SITEPACKAGES_DIR}/nnstreamer_python.so
     fi
 }
 
