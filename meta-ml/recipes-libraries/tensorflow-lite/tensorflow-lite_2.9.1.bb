@@ -8,9 +8,7 @@ DEPENDS = "python3-numpy-native python3-pip-native python3-pybind11-native pytho
     python3 tensorflow-protobuf jpeg zlib ${BPN}-host-tools-native"
 
 require tensorflow-lite-${PV}.inc
-
-SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf \
-           file://0001-Fix-include-of-ethosu.h.patch"
+SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf"
 
 SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz;name=model-mobv1"
 SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
