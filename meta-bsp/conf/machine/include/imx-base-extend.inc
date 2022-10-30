@@ -19,6 +19,7 @@ MACHINEOVERRIDES_EXTENDER:mx8ulp:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxd
 MACHINEOVERRIDES_EXTENDER:mx8ulp:use-mainline-bsp = "imx-generic-bsp:imx-mainline-bsp:mx8-generic-bsp:mx8-mainline-bsp:mx8ulp-generic-bsp:mx8ulp-mainline-bsp"
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx8ulp"
 MACHINE_SOCARCH_SUFFIX:mx8ulp-nxp-bsp = "-mx8ulp"
+IMX_EXTRA_FIRMWARE:mx8ulp-nxp-bsp = "firmware-upower firmware-sentinel"
 
 # i.MX 8DXL A1
 MACHINEOVERRIDES_EXTENDER:mx8dxla1:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8x-generic-bsp:mx8x-nxp-bsp:mx8dxl-generic-bsp:mx8dxl-nxp-bsp:mx8dxla1-generic-bsp:mx8dxla1-nxp-bsp"
@@ -32,6 +33,7 @@ MACHINEOVERRIDES_EXTENDER:mx8dxlb0:use-mainline-bsp = "imx-generic-bsp:imx-mainl
 MACHINEOVERRIDES_EXTENDER:mx93:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxpxp:mx9-generic-bsp:mx9-nxp-bsp:mx93-generic-bsp:mx93-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx93"
 MACHINE_SOCARCH_SUFFIX:mx93-nxp-bsp = "-mx93"
+IMX_EXTRA_FIRMWARE:mx9-nxp-bsp = " firmware-imx-9 firmware-sentinel"
 
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
 ZSTD_COMPRESSION_LEVEL ?= "-10"
