@@ -16,7 +16,6 @@ M4_DEFAULT_IMAGE:mx8dx-nxp-bsp = "imx8qx_m4_TCM_power_mode_switch.bin"
 IMX_M4_DEMOS:mx8ulp-nxp-bsp = "imx-m33-demos:do_deploy"
 M4_DEFAULT_IMAGE:mx8ulp-nxp-bsp = "imx8ulp_m33_TCM_power_mode_switch.bin"
 ATF_MACHINE_NAME:mx8ulp-nxp-bsp = "bl31-imx8ulp.bin"
-SOC_TARGET:mx8ulp-nxp-bsp = "iMX8ULP"
 SOC_FAMILY:mx8ulp-nxp-bsp = "mx8ulp"
 REV_OPTION:mx8ulp-generic-bsp = \
     "${@bb.utils.contains('MACHINE_FEATURES', 'soc-reva0', '', \
@@ -25,7 +24,6 @@ REV_OPTION:mx8ulp-generic-bsp = \
 IMX_M4_DEMOS:mx9-nxp-bsp = ""
 M4_DEFAULT_IMAGE:mx9-nxp-bsp = ""
 ATF_MACHINE_NAME:mx9-nxp-bsp = "bl31-imx93.bin"
-SOC_TARGET:mx9-nxp-bsp = "iMX93"
 SOC_FAMILY:mx9-nxp-bsp = "mx93"
 
 REV_OPTION:mx8dxl-nxp-bsp = "ERROR_8DXL_REV_AMBIGUOUS"
