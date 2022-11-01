@@ -23,6 +23,10 @@ PACKAGES_OPENVX:mx8mm-nxp-bsp = ""
 
 PACKAGES_VULKAN:mx8mm-nxp-bsp = "libvulkan-imx libvulkan-imx-dev"
 
+PACKAGES =+ "libspirv-imx"
+FILES:libvulkan-imx:remove = "${libdir}/libSPIRV_viv${SOLIBS}"
+FILES:libspirv-imx = "${libdir}/libSPIRV_viv${SOLIBS}"
+
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
