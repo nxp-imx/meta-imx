@@ -1,0 +1,302 @@
+From 745d68215ebcfaf7fdb2a460447a0b6da3fda85a Mon Sep 17 00:00:00 2001
+From: Piotr Byszewski <piotr.byszewski@mobica.com>
+Date: Tue, 19 Jul 2022 12:48:15 +0200
+Subject: [PATCH] Handle latest Wayland version
+
+CTS used a deprecated protocol wl_shell, which has been replaced
+in Ubuntu 22.04 by xdg-shell. This change replaces all wl_shell
+calls with corresponding xdg-shell calls.
+Note that xdg-shell is a protocol and in wayland-protocols repository
+we have only xml that defines this protocol. wayland-scanner tool is
+used to generate the .h and .c files in build directory.
+
+VK-GL-CTS issue: 3774
+
+Components: Vulkan
+
+Affects:
+*
+dEQP-VK.image.swapchain_mutable.wayland*
+dEQP-VK.wsi.wayland.swapchain.*
+dEQP-VK.wsi.wayland.incremental_present.*
+
+Change-Id: I44879d9eb072dbfa5e172eaac81968e65e8a276c
+---
+ framework/platform/CMakeLists.txt             | 28 ++++++-
+ .../platform/lnx/wayland/tcuLnxWayland.cpp    | 80 ++++++++++++-------
+ .../platform/lnx/wayland/tcuLnxWayland.hpp    | 21 +++--
+ 3 files changed, 89 insertions(+), 40 deletions(-)
+
+diff --git a/framework/platform/CMakeLists.txt b/framework/platform/CMakeLists.txt
+index eed019541..ea4ba239b 100644
+--- a/framework/platform/CMakeLists.txt
++++ b/framework/platform/CMakeLists.txt
+@@ -23,7 +23,7 @@ if (NOT DEFINED TCUTIL_PLATFORM_SRCS)
+ 
+ 		set(TCUTIL_PLATFORM_SRCS
+ 			lnx/tcuLnx.cpp
+-			lnx/tcuLnx.cpp
++			lnx/tcuLnx.hpp
+ 			lnx/tcuLnxPlatform.cpp
+ 			lnx/tcuLnxPlatform.hpp
+ 			lnx/tcuLnxEglPlatform.hpp
+@@ -73,13 +73,35 @@ if (NOT DEFINED TCUTIL_PLATFORM_SRCS)
+ 			add_definitions(-DDEQP_SUPPORT_WAYLAND=1)
+ 			include_directories(lnx/wayland)
+ 
++			pkg_get_variable(WAYLAND_PROTOCOLS_DIR wayland-protocols pkgdatadir)
++			pkg_get_variable(WAYLAND_SCANNER wayland-scanner wayland_scanner)
++
++			set(DEQP_XDG_SHELL_PROTOCOL ${WAYLAND_PROTOCOLS_DIR}/stable/xdg-shell/xdg-shell.xml)
++			set(DEQP_XDG_SHELL_GEN_OUTPUTS_DIR ${PROJECT_BINARY_DIR}/framework/platform)
++			set(DEQP_XDG_SHELL_OUTPUTS
++				${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR}/xdg-shell.c
++				${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR}/xdg-shell.h)
++
++			add_custom_command(
++				COMMAND ${WAYLAND_SCANNER} ARGS client-header ${DEQP_XDG_SHELL_PROTOCOL} xdg-shell.h
++				COMMAND ${WAYLAND_SCANNER} ARGS public-code ${DEQP_XDG_SHELL_PROTOCOL} xdg-shell.c
++				DEPENDS ${DEQP_XDG_SHELL_PROTOCOL}
++				OUTPUT ${DEQP_XDG_SHELL_OUTPUTS})
++
++			add_custom_target(
++				deqp-xdg-shell ALL
++				DEPENDS ${DEQP_XDG_SHELL_OUTPUTS})
++
+ 			set(TCUTIL_PLATFORM_SRCS
+ 				${TCUTIL_PLATFORM_SRCS}
+ 				lnx/wayland/tcuLnxWayland.hpp
+ 				lnx/wayland/tcuLnxWayland.cpp
+ 				lnx/wayland/tcuLnxWaylandEglDisplayFactory.cpp
+ 				lnx/wayland/tcuLnxWaylandEglDisplayFactory.hpp
++				${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR}/xdg-shell.c
++				${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR}/xdg-shell.h
+ 				)
++			include_directories(${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR})
+ 			include_directories(wayland)
+ 		endif()
+ 
+@@ -150,7 +172,9 @@ endif ()
+ include_directories(${PROJECT_BINARY_DIR}/external/vulkancts/framework/vulkan)
+ 
+ add_library(tcutil-platform STATIC ${TCUTIL_PLATFORM_SRCS})
+-
++if (DEQP_USE_WAYLAND)
++	add_dependencies(tcutil-platform deqp-xdg-shell)
++endif()
+ 
+ # Add vkutil to the deps before tcutil so that it picks up the c++11 dependencies
+ target_link_libraries(tcutil-platform vkutil)
+diff --git a/framework/platform/lnx/wayland/tcuLnxWayland.cpp b/framework/platform/lnx/wayland/tcuLnxWayland.cpp
+index f4808db28..b812d50ac 100644
+--- a/framework/platform/lnx/wayland/tcuLnxWayland.cpp
++++ b/framework/platform/lnx/wayland/tcuLnxWayland.cpp
+@@ -36,7 +36,7 @@ namespace lnx
+ namespace wayland
+ {
+ 
+-const struct wl_registry_listener Display::s_registryListener =
++const struct wl_registry_listener Display::s_registryListener
+ {
+ 	Display::handleGlobal,
+ 	Display::handleGlobalRemove
+@@ -44,11 +44,16 @@ const struct wl_registry_listener Display::s_registryListener =
+ 
+ Display::DisplayState Display::s_displayState = Display::DISPLAY_STATE_UNKNOWN;
+ 
+-const struct wl_shell_surface_listener Window::s_shellSurfaceListener =
++bool Window::s_addWMBaseListener = true;
++
++const struct xdg_surface_listener Window::s_xdgSurfaceListener
+ {
+-	Window::handlePing,
+-	Window::handleConfigure,
+-	Window::handlePopupDone,
++	Window::handleConfigure
++};
++
++const struct xdg_wm_base_listener Window::s_wmBaseListener
++{
++	Window::handlePing
+ };
+ 
+ void Display::handleGlobal (void* data, struct wl_registry* registry, uint32_t id, const char* interface, uint32_t version)
+@@ -58,9 +63,8 @@ void Display::handleGlobal (void* data, struct wl_registry* registry, uint32_t i
+ 
+ 	if (!strcmp(interface, "wl_compositor"))
+ 		_this->m_compositor = static_cast<struct wl_compositor*>(wl_registry_bind(registry, id, &wl_compositor_interface, version > 3 ? version : 3));
+-	/* Todo: when the xdg_shell protocol has stablized, we should move wl_shell to xdg_shell. */
+-	if (!strcmp(interface, "wl_shell"))
+-		_this->m_shell = static_cast<struct wl_shell*>(wl_registry_bind(registry, id, &wl_shell_interface, 1));
++	if (!strcmp(interface, "xdg_wm_base"))
++		_this->m_shell = static_cast<struct xdg_wm_base*>(wl_registry_bind(registry, id, &xdg_wm_base_interface, 1));
+ }
+ 
+ void Display::handleGlobalRemove (void* data, struct wl_registry* registry, uint32_t name)
+@@ -112,7 +116,7 @@ Display::Display (EventState& eventState, const char* name)
+ 	catch (...)
+ 	{
+ 		if (m_shell)
+-			wl_shell_destroy(m_shell);
++			xdg_wm_base_destroy(m_shell);
+ 
+ 		if (m_compositor)
+ 			wl_compositor_destroy(m_compositor);
+@@ -130,7 +134,7 @@ Display::Display (EventState& eventState, const char* name)
+ Display::~Display (void)
+ {
+ 	if (m_shell)
+-		wl_shell_destroy(m_shell);
++		xdg_wm_base_destroy(m_shell);
+ 
+ 	if (m_compositor)
+ 		wl_compositor_destroy(m_compositor);
+@@ -155,13 +159,34 @@ Window::Window (Display& display, int width, int height)
+ 		if (!m_surface)
+ 			throw ResourceError("Failed to create ", "surface", __FILE__, __LINE__);
+ 
+-		m_shellSurface = wl_shell_get_shell_surface(display.getShell(), m_surface);
+-		if (!m_shellSurface)
++		m_xdgSurface = xdg_wm_base_get_xdg_surface(display.getShell(), m_surface);
++		if (!m_xdgSurface)
+ 			throw ResourceError("Failed to create ", "shell_surface", __FILE__, __LINE__);
+ 
+-		wl_shell_surface_add_listener(m_shellSurface, &s_shellSurfaceListener, this);
+-		wl_shell_surface_set_title(m_shellSurface, "CTS for OpenGL (ES)");
+-		wl_shell_surface_set_toplevel(m_shellSurface);
++		// add wm base listener once
++		if (s_addWMBaseListener)
++		{
++			xdg_wm_base_add_listener(display.getShell(), &s_wmBaseListener, this);
++			s_addWMBaseListener = false;
++		}
++		xdg_surface_add_listener(m_xdgSurface, &s_xdgSurfaceListener, this);
++
++		// select xdg surface role
++		m_topLevel = xdg_surface_get_toplevel(m_xdgSurface);
++		xdg_toplevel_set_title(m_topLevel, "CTS for OpenGL (ES)");
++
++		// configure xdg surface
++		m_configured = false;
++		wl_surface_commit(m_surface);
++
++		// wait till xdg surface is configured
++		int dispatchedEvents = 0;
++		while(dispatchedEvents != -1)
++		{
++			dispatchedEvents = wl_display_dispatch(display.getDisplay());
++			if (m_configured)
++				break;
++		}
+ 
+ 		if (width == glu::RenderConfig::DONT_CARE)
+ 			width = DEFAULT_WINDOW_WIDTH;
+@@ -198,33 +223,28 @@ void Window::processEvents (void)
+ {
+ }
+ 
+-void Window::handlePing (void* data, struct wl_shell_surface* shellSurface, uint32_t serial)
++void Window::handlePing (void* data, struct xdg_wm_base* shell, uint32_t serial)
+ {
+ 	DE_UNREF(data);
+-	wl_shell_surface_pong(shellSurface, serial);
++	xdg_wm_base_pong(shell, serial);
+ }
+ 
+-void Window::handleConfigure (void* data, struct wl_shell_surface* shellSurface, uint32_t edges, int32_t width, int32_t height)
++void Window::handleConfigure (void* data, struct xdg_surface* xdgSurface, uint32_t serial)
+ {
+-	DE_UNREF(data);
+-	DE_UNREF(shellSurface);
+-	DE_UNREF(edges);
+-	DE_UNREF(width);
+-	DE_UNREF(height);
+-}
++	Window* window = reinterpret_cast<Window*>(data);
++	window->m_configured = true;
+ 
+-void Window::handlePopupDone (void* data, struct wl_shell_surface* shellSurface)
+-{
+-	DE_UNREF(data);
+-	DE_UNREF(shellSurface);
++	xdg_surface_ack_configure(xdgSurface, serial);
+ }
+ 
+ Window::~Window (void)
+ {
+ 	if (m_window)
+ 		wl_egl_window_destroy(m_window);
+-	if (m_shellSurface)
+-		wl_shell_surface_destroy(m_shellSurface);
++	if (m_topLevel)
++		xdg_toplevel_destroy(m_topLevel);
++	if (m_xdgSurface)
++		xdg_surface_destroy(m_xdgSurface);
+ 	if (m_surface)
+ 		wl_surface_destroy(m_surface);
+ }
+diff --git a/framework/platform/lnx/wayland/tcuLnxWayland.hpp b/framework/platform/lnx/wayland/tcuLnxWayland.hpp
+index b7c540a81..83466c1de 100644
+--- a/framework/platform/lnx/wayland/tcuLnxWayland.hpp
++++ b/framework/platform/lnx/wayland/tcuLnxWayland.hpp
+@@ -32,6 +32,7 @@
+ 
+ #include <wayland-client.h>
+ #include <wayland-egl.h>
++#include "xdg-shell.h"
+ 
+ namespace tcu
+ {
+@@ -48,10 +49,10 @@ public:
+ 
+ 	struct wl_display*		getDisplay				(void) { return m_display;		}
+ 	struct wl_compositor*	getCompositor			(void) { return m_compositor;	}
+-	struct wl_shell*		getShell				(void) { return m_shell;		}
++	struct xdg_wm_base*		getShell				(void) { return m_shell;		}
+ 
+ 	void					processEvents			(void);
+-	static bool				hasDisplay			(const char* name);
++	static bool				hasDisplay				(const char* name);
+ 
+ 	enum DisplayState
+ 	{
+@@ -66,7 +67,7 @@ protected:
+ 	struct wl_display*		m_display;
+ 	struct wl_registry*		m_registry;
+ 	struct wl_compositor*	m_compositor;
+-	struct wl_shell*		m_shell;
++	struct xdg_wm_base*		m_shell;
+ 
+ private:
+ 							Display					(const Display&);
+@@ -99,18 +100,22 @@ protected:
+ 	Display&					m_display;
+ 	struct wl_egl_window*		m_window;
+ 	struct wl_surface*			m_surface;
+-	struct wl_shell_surface*	m_shellSurface;
++	struct xdg_surface*			m_xdgSurface;
++	struct xdg_toplevel*		m_topLevel;
++	bool						m_configured;
+ 	bool						m_visible;
+ 
+ private:
+ 							Window					(const Window&);
+ 	Window&					operator=				(const Window&);
+ 
+-	static const struct wl_shell_surface_listener	s_shellSurfaceListener;
++	static const struct xdg_surface_listener	s_xdgSurfaceListener;
++	static const struct xdg_wm_base_listener	s_wmBaseListener;
+ 
+-	static void				handlePing				(void* data, struct wl_shell_surface* shellSurface, uint32_t serial);
+-	static void				handleConfigure			(void* data, struct wl_shell_surface* shellSurface, uint32_t edges, int32_t width, int32_t height);
+-	static void				handlePopupDone			(void* data, struct wl_shell_surface* shellSurface);
++	static void				handlePing				(void* data, struct xdg_wm_base* shellSurface, uint32_t serial);
++	static void				handleConfigure			(void* data, struct xdg_surface* shellSurface, uint32_t serial);
++
++	static bool				s_addWMBaseListener;
+ };
+ 
+ } // wayland
+-- 
+2.25.1
+
