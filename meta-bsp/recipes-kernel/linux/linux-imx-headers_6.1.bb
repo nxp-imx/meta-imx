@@ -25,7 +25,6 @@ IMX_UAPI_HEADERS = " \
     hantrodec.h \
     hx280enc.h \
     ipu.h \
-    isl29023.h \
     imx_vpu.h \
     mxc_asrc.h \
     mxc_dcic.h \
