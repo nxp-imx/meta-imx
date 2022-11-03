@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c7b12b6702da38ca028ace54aae3d484 \
 
 SRC_URI = "${WAYLAND_PROTOCOLS_SRC};branch=${SRCBRANCH}"
 WAYLAND_PROTOCOLS_SRC ?= "git://github.com/nxp-imx/wayland-protocols-imx.git;protocol=https"
-SRCBRANCH = "wayland-protocols-imx-1.25"
-SRCREV = "a104fb66d1b899dc04077422c2204638675ee4a6" 
+SRCBRANCH = "wayland-protocols-imx-1.27"
+SRCREV = "54333b760a7efc1b135853c56392f6dc7d01d5ad"
 
 S = "${WORKDIR}/git"
 
