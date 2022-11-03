@@ -1,4 +1,4 @@
-# Copyright 2017-2021 NXP
+# Copyright 2017-2022 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "Installs i.MX-specific kernel headers"
@@ -7,12 +7,12 @@ New headers are installed in ${includedir}/imx."
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-SRCBRANCH = "lf-5.15.y"
+SRCBRANCH = "next"
 LOCALVERSION = "-lts-next"
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRC_URI = "${KERNEL_SRC}"
 
-SRCREV = "dcb8cc194a93351c57938ead8c7bdd96d8bc8a64"
+SRCREV = "7305ef74f2eefd0094aa4795e73130711dda5210"
 
 S = "${WORKDIR}/git"
 
