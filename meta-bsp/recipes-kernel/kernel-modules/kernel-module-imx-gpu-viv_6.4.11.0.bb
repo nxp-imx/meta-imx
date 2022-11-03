@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171d
 SRC_URI = "${KERNEL_SRC};subpath=drivers/mxc/gpu-viv;destsuffix=git/src \
            file://Add-makefile.patch"
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
-SRCBRANCH = "lf-5.15.y"
+SRCBRANCH = "next"
 LOCALVERSION = "-lts-5.15.y"
 SRCREV = "3ec5cef5aea980247f9e0e23d3c6af6191cddbff"
 
