@@ -51,7 +51,10 @@ PREFERRED_VERSION_wayland-protocols:mx9-nxp-bsp ??= "1.25.imx"
 
 PREFERRED_VERSION_ffmpeg ??= "4.4.1"
 
-PREFERRED_VERSION_libdrm:mx9-nxp-bsp ??= "2.4.109.imx"
+PREFERRED_VERSION_libdrm:mx6-nxp-bsp ??= "2.4.113.imx"
+PREFERRED_VERSION_libdrm:mx7-nxp-bsp ??= "2.4.113.imx"
+PREFERRED_VERSION_libdrm:mx8-nxp-bsp ??= "2.4.113.imx"
+PREFERRED_VERSION_libdrm:mx9-nxp-bsp ??= "2.4.113.imx"
 
 PREFERRED_VERSION_optee-client:mx6-nxp-bsp ??= "3.19.0.imx"
 PREFERRED_VERSION_optee-client:mx7-nxp-bsp ??= "3.19.0.imx"
