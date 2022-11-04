@@ -247,18 +247,6 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     mwifiex-iw612.git
-Version:                     
-Outgoing License:            GPL-2.0 
-License File:                gpl-2.0.txt
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    NXP Wi-Fi IW612 linux SDK
-Release Location:            https://github.com/nxp-imx/mwifiex-iw612 -b lf-6.1.y-1.0.0
-Origin:                      NXP (GPL-2.0)
-
---------------------------------------------
-
 Package:                     imx-seco-5.9.0.bin
 Version:                     5.9.0
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
