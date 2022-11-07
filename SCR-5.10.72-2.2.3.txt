@@ -145,7 +145,7 @@ License File:                COPYING-LGPL-2.1
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    BSP libraries
-Release Location:            https://github.com/nxp-imx/imx-lib -b master
+Release Location:            https://github.com/nxp-imx/imx-lib -b lf-5.10.72-2.2.3
 Origin:                      NXP (LGPL-2.1)
 
 --------------------------------------------
@@ -228,7 +228,7 @@ License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             binary
 Description and comments:    BSP firmware - Bluetooth and WIFI
-Release Location:            https://github.com/NXP/imx-firmware -b master
+Release Location:            https://github.com/NXP/imx-firmware -b lf-5.10.72-2.2.3
 Origin:                      brcm: Broadcom Corporation (proprietary)
                              cyw-wifi-bt: Cypress Semiconductor Corporation (proprietary)
                              nxp: NXP (proprietary)
@@ -303,7 +303,7 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Tool to convert Android sparse images to raw images
-Release Location:            https://github.com/nxp-imx/simg2img -b master
+Release Location:            https://github.com/nxp-imx/simg2img -b lf-5.10.72-2.2.3
 Origin:                      NXP (Apache-2.0)
                              The Android Open Source Project (Apache-2.0) - https://android.googlesource.com/platform/system/core/+/master/libsparse
                              Gary S Brown (Public Domain) - http://www.opensource.apple.com/source/xnu/xnu-1456.1.26/bsd/libkern/crc32.c?txt
@@ -749,7 +749,7 @@ License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
-Release Location:            https://github.com/nxp-imx/g2d-samples -b lf-5.10.72-2.2.3
+Release Location:            https://github.com/NXPmicro/g2d-samples -b lf-5.10.72-2.2.3
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
@@ -1062,7 +1062,7 @@ License File:                COPYING.GPL
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Plugins for various audio libraries and sound servers
-Release Location:            https://github.com/nxp-imx/imx-alsa-plugins -b nxp/master
+Release Location:            https://github.com/nxp-imx/imx-alsa-plugins -b lf-5.10.72-2.2.3
 Origin:                      NXP (GPL-2.0)
                              Alsa Plugins (GPL-2.0+) - ftp://ftp.alsa-project.org/pub/plugins/
                              GNU libtool (GPL-2.0+) http://www.gnu.org/software/libtool/
@@ -1403,7 +1403,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensor Interface Module for OpenVX
-Release Location:            https://github.com/nxp/tim-vx-imx -b lf-5.10.72-2.2.3
+Release Location:            https://github.com/nxp-imx/tim-vx-imx -b lf-5.10.72-2.2.3
 Origin:                      Vivante Corporation (MIT)
                              The Khronos Group Inc. (Apache-2.0) - https://www.khronos.org/
                              The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
@@ -1447,7 +1447,7 @@ License File:                LICENSE
 Package Category:            Tools
 Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use bcu.
-Release Location:            ssh://git@bitbucket.sw.nxp.com/imx/bcu.git -b master
+Release Location:            https://github.com/NXPmicro/bcu.git -b master
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
