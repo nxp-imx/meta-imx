@@ -2,7 +2,7 @@
 
 DESCRIPTION = "Basler camera binary drivers"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=5a0bf11f745e68024f37b4724a5364fe" 
+LIC_FILES_CHKSUM = "file://COPYING;md5=5a0bf11f745e68024f37b4724a5364fe"
 
 inherit fsl-eula-unpack
 
