@@ -65,11 +65,11 @@ FEATURES_SOC:mx6dl-nxp-bsp        = ",OpenGLES3"
 FEATURES_SOC:mx8-nxp-bsp          = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.2"
 FEATURES_SOC:mx8mm-nxp-bsp        = ",OpenCV4"
 
-EXTENSIONS       = "*,-OpenGLES3:GL_VIV_direct_texture"
+EXTENSIONS       = "*,-OpenGLES:GL_VIV_direct_texture"
 EXTENSIONS:mx6q-nxp-bsp  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 EXTENSIONS:mx6dl-nxp-bsp = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 EXTENSIONS:mx8m-nxp-bsp  = "OpenGLES3:GL_EXT_color_buffer_float"
-EXTENSIONS:mx8mm-nxp-bsp = "*,-OpenGLES3:GL_VIV_direct_texture"
+EXTENSIONS:mx8mm-nxp-bsp = "*,-OpenGLES:GL_VIV_direct_texture"
 
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
