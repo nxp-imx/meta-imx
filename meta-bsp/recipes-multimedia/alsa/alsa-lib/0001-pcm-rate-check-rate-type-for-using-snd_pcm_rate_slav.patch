@@ -1,0 +1,46 @@
+From ceb791d69591b7428955d78c76c575ff877f8751 Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <shengjiu.wang@nxp.com>
+Date: Mon, 7 Nov 2022 11:49:54 +0800
+Subject: [PATCH] pcm: rate - check rate type for using
+
+Upstream Status: Submitted
+
+ snd_pcm_rate_slave_frames
+
+With plughw device and mmap case, the plug pcm fast_ops pointer is same
+as slave pcm fast_ops, but ops pointer is different, which cause
+the "bus error" in snd_pcm_rate_slave_frames.
+
+The test command is
+arecord -Dplughw:x -r12000 -c2 -fS16_LE -M temp.wav
+
+This patch is to add pcm type check as commit:
+d21e0e01 pcm: plugin - fix avail_min calculation on rate plugin
+
+Fixes: d9dbb57b ("pcm: rate - rewrite the may_wait_for_avail_min callback for the rate plugin")
+Signed-off-by: Shengjiu Wang <shengjiu.wang@nxp.com>
+---
+ src/pcm/pcm_rate.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/src/pcm/pcm_rate.c b/src/pcm/pcm_rate.c
+index e8815e8b..dc502202 100644
+--- a/src/pcm/pcm_rate.c
++++ b/src/pcm/pcm_rate.c
+@@ -1304,8 +1304,11 @@ static snd_pcm_uframes_t snd_pcm_rate_slave_frames(snd_pcm_t *pcm, snd_pcm_ufram
+ static int snd_pcm_rate_may_wait_for_avail_min(snd_pcm_t *pcm,
+ 					       snd_pcm_uframes_t avail)
+ {
+-	return snd_pcm_plugin_may_wait_for_avail_min_conv(pcm, avail,
+-							  snd_pcm_rate_slave_frames);
++	if (snd_pcm_type(pcm) == SND_PCM_TYPE_RATE)
++		return snd_pcm_plugin_may_wait_for_avail_min_conv(pcm, avail,
++								  snd_pcm_rate_slave_frames);
++	else
++		return snd_pcm_plugin_may_wait_for_avail_min_conv(pcm, avail, NULL);
+ }
+ 
+ static const snd_pcm_fast_ops_t snd_pcm_rate_fast_ops = {
+-- 
+2.34.1
+
