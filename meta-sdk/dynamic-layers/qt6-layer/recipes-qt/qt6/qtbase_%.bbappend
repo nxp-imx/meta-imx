@@ -46,7 +46,7 @@ IMX_BACKEND = \
                                                              'fb', d), d)}"
 
 SRC_URI:append = " \
-    file://qt6-${IMX_BACKEND}.sh \
+    file://qt-${IMX_BACKEND}.sh \
 "
 
 PACKAGECONFIG += "examples"
@@ -64,7 +64,5 @@ do_install:append () {
         sed -i 's,-L${STAGING_DIR_HOST}/usr/lib,,' ${D}${libdir}/pkgconfig/Qt6*.pc
     fi
     install -d ${D}${sysconfdir}/profile.d/
-    install -m 0755 ${WORKDIR}/qt6-${IMX_BACKEND}.sh ${D}${sysconfdir}/profile.d/qt6.sh
+    install -m 0755 ${WORKDIR}/qt-${IMX_BACKEND}.sh ${D}${sysconfdir}/profile.d/qt.sh
 }
-
-FILES:${PN} += "${sysconfdir}/profile.d/qt5.sh"
