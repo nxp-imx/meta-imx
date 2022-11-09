@@ -806,8 +806,8 @@ Origin:                      NXP (MIT)
 Multimedia Packages
 --------------------------------------------
 
-Package:                     imx-codec-4.7.2.bin
-Version:                     4.7.2
+Package:                     imx-codec-4.7.3.bin
+Version:                     4.7.3
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -823,8 +823,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.7.2.bin
-Version:                     4.7.2
+Package:                     imx-parser-4.7.3.bin
+Version:                     4.7.3
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
