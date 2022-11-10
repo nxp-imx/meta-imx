@@ -56,9 +56,6 @@ PACKAGECONFIG_PLATFORM_IMX_GPU:mx8-nxp-bsp = "eglfs"
 PACKAGECONFIG_PLATFORM:imxgpu2d += "${PACKAGECONFIG_PLATFORM_IMX_GPU}"
 PACKAGECONFIG_PLATFORM:imxgpu3d += "${PACKAGECONFIG_PLATFORM_IMX_GPU}"
 
-PARALLEL_MAKEINST = ""
-PARALLEL_MAKE:task-install = "${PARALLEL_MAKEINST}"
-
 do_install:append () {
     install -d ${D}${sysconfdir}/profile.d/
     install -m 0755 ${WORKDIR}/qt-${IMX_BACKEND}.sh ${D}${sysconfdir}/profile.d/qt.sh
