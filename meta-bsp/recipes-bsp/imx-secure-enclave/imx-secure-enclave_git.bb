@@ -14,7 +14,7 @@ SRCBRANCH = "master"
 SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
 
 SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "64aa85b2b8b621f02153a0a3e665e0903113776d"
+SRCREV = "e39f7b1aa54b8f654a13c6d8492e0c12eccbe6d7"
 
 
 S = "${WORKDIR}/git"
