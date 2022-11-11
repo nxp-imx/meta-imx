@@ -12,7 +12,7 @@ SRC_URI = "${ATF_SRC};branch=${SRCBRANCH} \
            file://rwx-segments.patch"
 ATF_SRC ?= "git://github.com/nxp-imx/imx-atf.git;protocol=https"
 SRCBRANCH = "lf_v2.6"
-SRCREV = "d5d7957874f3ccdbd05731b626f824a8072d8a96"
+SRCREV = "04adcb11b92ca08d219b0ed96121ab9756fc7e4c"
 
 S = "${WORKDIR}/git"
 
