@@ -5,13 +5,6 @@
 
 ### Copy qtbase bbappend from meta-freescale
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-
-SRC_URI:append:imxgpu = " \
-    file://0014-Add-IMX-GPU-support.patch \
-    file://0001-egl.prf-Fix-build-error-when-egl-headers-need-platfo.patch \
-"
-
 PACKAGECONFIG_GRAPHICS_IMX_GPU     = ""
 PACKAGECONFIG_GRAPHICS_IMX_GPU:mx8-nxp-bsp = "gbm kms"
 
@@ -40,14 +33,9 @@ PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'vulkan', '${PACKAGECO
 
 ##### End of meta-freescale qtbase bbappend
 
-IMX_BACKEND = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland',\
-        bb.utils.contains('DISTRO_FEATURES',     'x11',     'x11', \
-                                                             'fb', d), d)}"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI:append = " \
-    file://qt-${IMX_BACKEND}.sh \
-"
+SRC_URI += "file://qt-${IMX_BACKEND}.sh"
 
 PACKAGECONFIG += "examples"
 
@@ -55,6 +43,11 @@ PACKAGECONFIG_PLATFORM_IMX_GPU     = ""
 PACKAGECONFIG_PLATFORM_IMX_GPU:mx8-nxp-bsp = "eglfs"
 PACKAGECONFIG_PLATFORM:imxgpu2d += "${PACKAGECONFIG_PLATFORM_IMX_GPU}"
 PACKAGECONFIG_PLATFORM:imxgpu3d += "${PACKAGECONFIG_PLATFORM_IMX_GPU}"
+
+IMX_BACKEND = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland',\
+        bb.utils.contains('DISTRO_FEATURES',     'x11',     'x11', \
+                                                             'fb', d), d)}"
 
 do_install:append () {
     install -d ${D}${sysconfdir}/profile.d/
