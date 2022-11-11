@@ -27,10 +27,10 @@ PACKAGECONFIG:append:pn-gstreamer1.0-plugins-ugly = " x264"
 
 PACKAGECONFIG:append:pn-pulseaudio = " autospawn-for-root"
 
-PACKAGECONFIG:append:pn-qt3d        = " examples"
-PACKAGECONFIG:append:pn-qtbase      = " examples"
+PACKAGECONFIG:append:class-target:pn-qt3d          = " examples"
+PACKAGECONFIG:append:class-target:pn-qtbase        = " examples"
 PACKAGECONFIG:append:class-target:pn-qtdeclarative = " examples"
-PACKAGECONFIG:append:pn-qtquick3d   = " examples"
-PACKAGECONFIG:append:pn-qtwebengine = " examples"
+PACKAGECONFIG:append:class-target:pn-qtquick3d     = " examples"
+PACKAGECONFIG:append:class-target:pn-qtwebengine   = " examples"
 
 PACKAGECONFIG:append:pn-systemd = " unmanaged-network"
