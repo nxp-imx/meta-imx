@@ -30,7 +30,7 @@ S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 
-PACKAGECONFIG ??= "protobuf python3 ${PACKAGECONFIG_SOC}"
+PACKAGECONFIG ??= "protobuf python3 query ${PACKAGECONFIG_SOC}"
 PACKAGECONFIG_SOC                    ??= ""
 PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "deepview-rt tensorflow-lite tvm"
 PACKAGECONFIG_SOC:mx8mm-nxp-bsp      ??= "deepview-rt tensorflow-lite"
@@ -71,6 +71,13 @@ PACKAGECONFIG[python3] = "\
 	,,\
 "
 
+PACKAGECONFIG[query] = "\
+	-Dnnstreamer-edge-support=enabled, \
+	-Dnnstreamer-edge-support=disabled, \
+	nnstreamer-edge, \
+	,,\
+"
+
 PACKAGECONFIG[tensorflow-lite] = "\
 	-Dtflite2-support=enabled, \
 	-Dtflite2-support=disabled, \
@@ -105,6 +112,7 @@ PACKAGES =+ "\
 	${@bb.utils.contains('PACKAGECONFIG', 'protobuf','${PN}-protobuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'protobuf grpc','${PN}-grpc-protobuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'python3','${PN}-python3', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'query','${PN}-query', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'tvm','${PN}-tvm', '', d)} \
 "
@@ -122,6 +130,7 @@ RDEPENDS:${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
 	${@bb.utils.contains('PACKAGECONFIG', 'protobuf','${PN}-protobuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'protobuf grpc','${PN}-grpc-protobuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'python3','${PN}-python3', '', d)} \
+	${@bb.utils.contains('PACKAGECONFIG', 'query','${PN}-query', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'tensorflow-lite','${PN}-tensorflow-lite', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'tvm','${PN}-tvm', '', d)} \
 "
@@ -178,6 +187,10 @@ FILES:${PN}-python3 = "\
 	${libdir}/nnstreamer/filters/libnnstreamer_filter_python3.so \
 	${libdir}/nnstreamer_python3.so \
 	${PYTHON_SITEPACKAGES_DIR}/nnstreamer_python.so \
+"
+
+FILES:${PN}-query = "\
+	${libdir}/gstreamer-1.0/libgstedge.so \
 "
 
 FILES:${PN}-tensorflow-lite = "\
