@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
 "
 
 SRCBRANCH = "imx_v0.2_y"
-SRCREV = "d9fffb8035a8a2b8d1182c750bd0e90bb4c0027a"
+SRCREV = "b0817a39f4c6e3ef8df9fff54bb354bdd42a10f0"
 
 IMX_JAILHOUSE_SRC ?= "git://github.com/nxp-imx/imx-jailhouse.git;protocol=https"
 SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH}"
