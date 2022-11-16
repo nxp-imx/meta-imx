@@ -32,7 +32,7 @@ QT6_IMAGE_INSTALL:imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${Q
     'qtbase qtbase-plugins', d)}"
 
 QT6_IMAGE_INSTALL:imxpxp = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT6_IMAGE_INSTALL_common}', \
-    'qtbase qtbase-examples qtbase-plugins', d)}"
+    'qtbase qtbase-plugins', d)}"
 
 QT6_IMAGE_INSTALL:imxgpu3d = " \
     ${QT6_IMAGE_INSTALL_common} \

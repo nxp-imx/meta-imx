@@ -7,15 +7,6 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-RDEPENDS:${PN}:append = " \
-    qtbase-examples \
-    qtdeclarative-examples \
-"
-
 RDEPENDS_${PN}:append:imxgpu = " \
     cinematicexperience-rhi \
-"
-
-RDEPENDS:${PN}:append:imxgpu3d = " \
-    qt3d-examples \
 "
