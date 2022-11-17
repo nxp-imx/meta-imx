@@ -14,6 +14,7 @@ ML_NNSTREAMER_PKGS_LIST = " \
     nnstreamer-deepview-rt \
     nnstreamer-protobuf \
     nnstreamer-python3 \
+    nnstreamer-query \
     nnstreamer-tensorflow-lite \
 "
 
