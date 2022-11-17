@@ -7,6 +7,6 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-RDEPENDS_${PN}:append:imxgpu = " \
+RDEPENDS:${PN}:append:imxgpu = " \
     cinematicexperience-rhi \
 "
