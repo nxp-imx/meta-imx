@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ededf2503f5d147ae718276dfd28801f"
 
 DEPENDS = "imx-gpu-viv nn-imx"
 
-TIM_VX_SRC ?= "git://github.com/nxpmicro/tim-vx-imx.git;protocol=https"
+TIM_VX_SRC ?= "git://github.com/nxp-imx/tim-vx-imx.git;protocol=https"
 SRCBRANCH = "lf-5.15.71_2.2.0"
 SRCREV = "88d433978fef6254045ca09db955611cd5375fa0"
 SRC_URI = "${TIM_VX_SRC};branch=${SRCBRANCH}"

@@ -8,7 +8,7 @@ DEPENDS = "cairo"
 PV = "2.1+git${SRCPV}"
 
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
-GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxpmicro/g2d-samples.git;protocol=https"
+GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxp-imxo/g2d-samples.git;protocol=https"
 SRCBRANCH ?= "imx_2.1"
 SRCREV = "3efd75a90e3c606c9b7bed6791bcd4085ae69b9b"
 
