@@ -3,7 +3,7 @@
 DESCRIPTION = "NXP RetuneDSP Voice Seeker Libraries"
 SECTION = "multimedia"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://EULA.txt;md5=${FSL_EULA_FILE_MD5SUM_LA_OPT_NXP_SOFTWARE_LICENSE_V38}"
+LIC_FILES_CHKSUM = "file://EULA.txt;md5=${FSL_EULA_FILE_MD5SUM_LA_OPT_NXP_SOFTWARE_LICENSE_V39}"
 
 inherit autotools pkgconfig
 
