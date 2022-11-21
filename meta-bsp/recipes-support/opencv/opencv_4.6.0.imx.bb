@@ -14,7 +14,13 @@ PACKAGECONFIG:append:mx9-nxp-bsp = " dnn text"
 PACKAGECONFIG_OPENCL:mx8mnul-nxp-bsp = ""
 PACKAGECONFIG_OPENCL:mx8mpul-nxp-bsp = ""
 
-PACKAGECONFIG[qt6] = "-DWITH_QT=ON -DQT_HOST_PATH=${RECIPE_SYSROOT_NATIVE}${prefix_native},-DWITH_QT=OFF,qtbase qtbase-native,"
+PACKAGECONFIG[qt6] = "\
+    -DWITH_QT=ON -DQT_HOST_PATH=${RECIPE_SYSROOT_NATIVE}${prefix_native}, \
+    -DWITH_QT=OFF, \
+    qtbase qtbase-native, \
+    ${RDEPENDS_QTWAYLAND}"
+RDEPENDS_QTWAYLAND = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)}"
 PACKAGECONFIG[tim-vx] = "-DWITH_TIMVX=ON -DTIMVX_INSTALL_DIR=${STAGING_DIR_HOST}${libdir},-DWITH_TIMVX=OFF,tim-vx"
 
 # Disable cvv module in opencv_contrib as it is not yet suppported for Qt6
