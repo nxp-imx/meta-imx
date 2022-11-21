@@ -3,7 +3,6 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 ### Section 1: Changes to be upstreamed ###
 
 PROVIDES:remove = "${PROVIDES_REMOVE_OPENCL}"
-
 PROVIDES_REMOVE_OPENCL               = ""
 PROVIDES_REMOVE_OPENCL:mx7-nxp-bsp   = "${PROVIDES_OPENCL}"
 PROVIDES_REMOVE_OPENCL:mx8mm-nxp-bsp = "${PROVIDES_OPENCL}"
@@ -14,12 +13,6 @@ PROVIDES_OPENCL = " \
     virtual/opencl-icd"
 
 PACKAGES_OPENCL:mx8mm-nxp-bsp = ""
-
-# Full OpenVX support is limited to 8QM. However, a limited set of OpenVX
-# functionality is provided for Machine Learning, so provide packages for
-# additional SOCs for this case.
-PACKAGES_OPENVX:mx8-nxp-bsp   = "libopenvx-imx libopenvx-imx-dev"
-PACKAGES_OPENVX:mx8mm-nxp-bsp = ""
 
 PACKAGES_VULKAN:mx8mm-nxp-bsp = "libvulkan-imx libvulkan-imx-dev"
 
