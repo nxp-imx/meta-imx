@@ -20,6 +20,10 @@ PACKAGES =+ "libspirv-imx"
 FILES:libvulkan-imx:remove = "${libdir}/libSPIRV_viv${SOLIBS}"
 FILES:libspirv-imx = "${libdir}/libSPIRV_viv${SOLIBS}"
 
+PACKAGES_OPENCL = "libclc-imx libclc-imx-dev libopencl-imx libopencl-imx-dev"
+FILES:libclc-imx-dev:remove = "${includedir}/CL"
+FILES:libglslc-imx-dev:remove = "${includedir}/CL"
+
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
