@@ -21,8 +21,8 @@ QT6_IMAGE_INSTALL:imxgpu3d = " \
     ${QT6_IMAGE_INSTALL_COMMON}"
 
 QT6_IMAGE_INSTALL_COMMON = " \
-    packagegroup-qt6-demos \
     ${QT6_IMAGE_INSTALL_APPS} \
+    ${QT6_IMAGE_INSTALL_CINEMATICEXPERIENCE} \
     ${QT6_IMAGE_INSTALL_FONTS} \
     ${QT6_IMAGE_INSTALL_QUICK3D} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11',     'libxkbcommon', '', d)} \
@@ -32,6 +32,8 @@ QT6_IMAGE_INSTALL_COMMON = " \
 QT6_IMAGE_INSTALL_APPS = ""
 #QT6_IMAGE_INSTALL_APPS:imxgpu3d = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
 
+QT6_IMAGE_INSTALL_CINEMATICEXPERIENCE        = ""
+QT6_IMAGE_INSTALL_CINEMATICEXPERIENCE:imxgpu = "cinematicexperience-rhi"
 
 QT6_IMAGE_INSTALL_FONTS = "ttf-dejavu-common ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-serif "
 
