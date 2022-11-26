@@ -26,6 +26,7 @@ SYSTEMD_SERVICE:${PN} = "imx8-isp.service"
 EXTRA_OECMAKE += " \
     -DSDKTARGETSYSROOT=${STAGING_DIR_HOST} \
     -DCMAKE_BUILD_TYPE=release \
+    -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
     -DISP_VERSION=ISP8000NANO_V1802 \
     -DPLATFORM=ARM64 \
     -DAPPMODE=V4L2 \
@@ -86,8 +87,6 @@ FILES_SOLIBS_VERSIONED = " \
     ${libdir}/libos08a20.so \
     ${libdir}/libov2775.so \
 "
-
-INSANE_SKIP:${PN} = "rpaths"
 
 RDEPENDS:${PN} = "libdrm"
 
