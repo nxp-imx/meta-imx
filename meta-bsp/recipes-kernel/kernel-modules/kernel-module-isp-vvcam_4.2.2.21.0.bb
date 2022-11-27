@@ -13,14 +13,8 @@ S = "${WORKDIR}/git/vvcam/v4l2"
 
 inherit module
 
-DEBUG_PREFIX_MAP = " \
+DEBUG_PREFIX_MAP:prepend = " \
     -fmacro-prefix-map=${WORKDIR}/git/vvcam=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR} \
-    -fdebug-prefix-map=${WORKDIR}/git/vvcam=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR} \
-    -fmacro-prefix-map=${B}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR} \
-    -fdebug-prefix-map=${B}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR} \
-    -fdebug-prefix-map=${STAGING_DIR_HOST}= \
-    -fmacro-prefix-map=${STAGING_DIR_HOST}= \
-    -fdebug-prefix-map=${STAGING_DIR_NATIVE}= \
-"
+    -fdebug-prefix-map=${WORKDIR}/git/vvcam=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR} "
 
 COMPATIBLE_MACHINE = "(mx8mp-nxp-bsp)"
