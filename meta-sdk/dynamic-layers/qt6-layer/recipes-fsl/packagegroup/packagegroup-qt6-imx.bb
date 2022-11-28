@@ -9,6 +9,7 @@ PACKAGE_ARCH = "${TUNE_PKGARCH}"
 inherit packagegroup
 
 RDEPENDS:${PN} = "${QT6_IMAGE_INSTALL}"
+RDEPENDS:${PN}:remove = "cinematicexperience-rhi"
 
 QT6_IMAGE_INSTALL          = ""
 QT6_IMAGE_INSTALL:imxpxp   = " \
