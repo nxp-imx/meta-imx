@@ -1,4 +1,4 @@
-# Copyright 2021-2022 NXP
+# Copyright 2021-2023 NXP
 SUMMARY = "NXP i.MX Sentinel firmware"
 DESCRIPTION = "Firmware for i.MX Sentinel Security Controller"
 SECTION = "base"
