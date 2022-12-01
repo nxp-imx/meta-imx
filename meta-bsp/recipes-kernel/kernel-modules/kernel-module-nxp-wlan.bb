@@ -1,6 +1,6 @@
 require recipes-connectivity/nxp-wlan-sdk/nxp-wlan-sdk_git.inc
 
-SUMMARY = "NXP Wi-Fi driver for module 88w8997/8987"
+SUMMARY = "Kernel loadable module for NXP Wi-Fi module 88w8801/8987/8997/9098 IW416/612"
 
 inherit module
 
