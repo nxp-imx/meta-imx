@@ -1,8 +1,9 @@
-From e1e86ce259da74edbfbb99c79d0bbb8465381bcc Mon Sep 17 00:00:00 2001
+From 620537a78393a0200740111609bdb31e5d62ea77 Mon Sep 17 00:00:00 2001
 From: Neena Busireddy <neenareddy.busireddy@nxp.com>
 Date: Mon, 17 Dec 2018 10:02:19 -0600
-Subject: [PATCH] systemd-udevd.service.in: Set PrivateMounts to no to fix
- automount problem in systemd 239 version.
+Subject: [PATCH] units/systemd-udevd: Set PrivateMounts to no
+
+Fix automount problem in systemd 239 version.
 
 In systemd 239 version, A new unit file setting PrivateMounts= has been added.
 It's a boolean option. If enabled the unit's processes are invoked in their own file
@@ -23,23 +24,25 @@ Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
  units/systemd-udevd.service.in | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
-Index: git/units/systemd-udevd.service.in
-===================================================================
---- git.orig/units/systemd-udevd.service.in
-+++ git/units/systemd-udevd.service.in
-@@ -28,14 +28,13 @@ ExecStart={{ROOTLIBEXECDIR}}/systemd-ude
+diff --git a/units/systemd-udevd.service.in b/units/systemd-udevd.service.in
+index e9dbe85ef4..b0e9bd0b06 100644
+--- a/units/systemd-udevd.service.in
++++ b/units/systemd-udevd.service.in
+@@ -28,13 +28,12 @@ ExecStart={{ROOTLIBEXECDIR}}/systemd-udevd
  ExecReload=udevadm control --reload --timeout 0
  KillMode=mixed
  TasksMax=infinity
 -PrivateMounts=yes
 +PrivateMounts=no
- ProtectClock=yes
  ProtectHostname=yes
  MemoryDenyWriteExecute=yes
  RestrictAddressFamilies=AF_UNIX AF_NETLINK AF_INET AF_INET6
  RestrictRealtime=yes
  RestrictSUIDSGID=yes
 -SystemCallFilter=@system-service @module @raw-io bpf
+ SystemCallFilter=~@clock
  SystemCallErrorNumber=EPERM
  SystemCallArchitectures=native
- LockPersonality=yes
+-- 
+2.25.1
+

@@ -1,10 +1,8 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
-SRC_URI += " \
-            file://0001-systemd-udevd.service.in-Set-PrivateMounts-to-no-to-.patch \
+SRC_URI += "file://0001-units-systemd-udevd-Set-PrivateMounts-to-no.patch \
             file://0020-logind.conf-Set-HandlePowerKey-to-ignore.patch \
-            file://89-unmanage.network \
-"
+            file://89-unmanage.network"
 
 PACKAGECONFIG[unmanaged-network] = ""
 
