@@ -101,8 +101,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-sentinel-0.8.bin
-Version:                     0.8
+Package:                     firmware-sentinel-0.9.bin
+Version:                     0.9
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -705,8 +705,6 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
 Release Location:            https://github.com/nxp-imx/imx-g2d-pxp -b lf-6.1.y-1.0.0
-Origin:                      NXP (Proprietary)
-
 --------------------------------------------
 
 Package:                     g2d-samples.git
