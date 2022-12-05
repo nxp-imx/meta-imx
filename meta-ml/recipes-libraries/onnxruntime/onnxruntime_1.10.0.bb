@@ -45,7 +45,7 @@ EXTRA_OECMAKE += "\
 "
 
 PYTHON_DEPENDS = "${PYTHON_PN} ${PYTHON_PN}-pip-native ${PYTHON_PN}-wheel-native ${PYTHON_PN}-setuptools-native ${PYTHON_PN}-numpy-native"
-PYTHON_RDEPENDS = "${PYTHON_PN} ${PYTHON_PN}-numpy ${PYTHON_PN}-protobuf flatbuffers-${PYTHON_PN}"
+PYTHON_RDEPENDS = "${PYTHON_PN} ${PYTHON_PN}-numpy ${PYTHON_PN}-protobuf ${PYTHON_PN}-flatbuffers"
 
 PACKAGECONFIG_VSI_NPU                    = ""
 PACKAGECONFIG_VSI_NPU:mx8-nxp-bsp:imxgpu = "vsi_npu"
