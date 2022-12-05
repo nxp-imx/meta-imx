@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4158a261ca7f2525513e31ba9c50ae98"
 
 
-DEPENDS = "python3-numpy-native python3-pip-native python3-pybind11-native python3-wheel-native unzip-native \
+DEPENDS = "flatbuffers python3-numpy-native python3-pip-native python3-pybind11-native python3-wheel-native unzip-native \
     python3 tensorflow-protobuf jpeg zlib ${BPN}-host-tools-native"
 
 require tensorflow-lite-${PV}.inc
@@ -107,7 +107,6 @@ do_install() {
 }
 
 RDEPENDS:${PN}   = " \
-    flatbuffers \
     python3 \
     python3-numpy \
     ${RDEPENDS_OPENVX} \
