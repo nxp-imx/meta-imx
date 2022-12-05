@@ -176,9 +176,7 @@ PACKAGECONFIG_OPENGL:imxgpu3d     = "opengl"
 
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
-PACKAGECONFIG:append = " \
-    rdp \
-    ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)}"
+PACKAGECONFIG:append = " ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)}"
 
 PACKAGECONFIG:remove:imxfbdev = "kms"
 PACKAGECONFIG:append:imxfbdev = " fbdev clients"
