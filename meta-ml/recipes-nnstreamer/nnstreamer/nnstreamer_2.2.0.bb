@@ -32,9 +32,12 @@ inherit meson pkgconfig
 
 PACKAGECONFIG ??= "protobuf python3 query ${PACKAGECONFIG_SOC}"
 PACKAGECONFIG_SOC                    ??= ""
-PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "deepview-rt tensorflow-lite tvm"
-PACKAGECONFIG_SOC:mx8mm-nxp-bsp      ??= "deepview-rt tensorflow-lite"
-PACKAGECONFIG_SOC:mx9-nxp-bsp        ??= "deepview-rt tensorflow-lite"
+# PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "deepview-rt tensorflow-lite tvm"
+PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "tensorflow-lite tvm"
+# PACKAGECONFIG_SOC:mx8mm-nxp-bsp      ??= "deepview-rt tensorflow-lite"
+PACKAGECONFIG_SOC:mx8mm-nxp-bsp      ??= "tensorflow-lite"
+# PACKAGECONFIG_SOC:mx9-nxp-bsp        ??= "deepview-rt tensorflow-lite"
+PACKAGECONFIG_SOC:mx9-nxp-bsp        ??= "tensorflow-lite"
 
 PACKAGECONFIG[deepview-rt] = "\
        -Ddeepview-rt-support=enabled, \
