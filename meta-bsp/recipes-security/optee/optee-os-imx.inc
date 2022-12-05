@@ -37,6 +37,11 @@ OPTEEMACHINE:mx93-nxp-bsp      = "imx-mx93evk"
 # Strip the leading imx-
 PLATFORM_FLAVOR = "${@d.getVar('OPTEEMACHINE')[4:]}"
 
+EXTRA_OEMAKE:append = " \
+    CFG_TEE_TA_LOG_LEVEL=0 \
+    CFG_TEE_CORE_LOG_LEVEL=0 \
+"
+
 do_compile:arm() {
     oe_runmake -C ${S} all uTee
 }
