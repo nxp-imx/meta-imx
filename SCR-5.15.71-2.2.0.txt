@@ -731,6 +731,8 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
 Release Location:            https://github.com/nxp-imx/imx-g2d-pxp -b lf-5.15.71-2.2.0
+Origin:                      NXP (Proprietary)
+
 --------------------------------------------
 
 Package:                     g2d-samples.git
@@ -1318,7 +1320,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     ethos-u-driver-stack-imx.git
 Version:                     22.08
 Outgoing License:            Apache-2.0 
-License File:                LICENSE-APAchE-2.0.txt
+License File:                LICENSE-APACHE-2.0.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-driver-stack is the user space driver library for ethos-u NPU on iMX93 platform
@@ -1390,7 +1392,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     tensorflow-imx.git
 Version:                     2.9.1
 Outgoing License:            Apache-2.0 
-License File:                LICENSE.txt
+License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite C++ Library
@@ -1402,7 +1404,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     tflite-vx-delegate-imx.git
 Version:                     2.9.1
-Outgoing License:            Apache-2.0 
+Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
