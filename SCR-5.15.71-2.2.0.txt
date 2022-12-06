@@ -7,7 +7,7 @@ Outgoing License: LA_OPT_NXP_Software_License v39 August 2022 - Additional distr
 License File:     EULA.txt
 
 Yocto Project recipe manifest:
-repo init -u https://github.com/nxp-imx/imx-manifest -b kirkstone-5.15.71-2.2.0 -m imx_5.15.71-2.2.0.xml
+repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-kirkstone -m imx_5.15.71-2.2.0.xml
 
 Release tag: lf-5.15.71-2.2.0
 
@@ -604,7 +604,7 @@ License File:                License.md
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics sample applications
-Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 6.0.3
+Release Location:            https://github.com/nxp-imx/gtec-demo-framework -b 6.0.3
 Origin:                      NXP (BSD-3-clause)
                          Demo Framework
                              Sascha Willems - Vulkan demo (MIT) - https://github.com/SaschaWillems/Vulkan
@@ -740,7 +740,7 @@ License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
-Release Location:            https://github.com/NXPmicro/g2d-samples -b lf-5.15.71-2.2.0
+Release Location:            https://github.com/nxp-imx/g2d-samples -b lf-5.15.71-2.2.0
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
@@ -1381,7 +1381,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensors and Dynamic neural networks in Python with strong GPU acceleration
-Release Location:            https://github.com/NXPmicro/pytorch-release -b lf-5.15.71-2.2.0
+Release Location:            https://github.com/nxp-imx/pytorch-release -b lf-5.15.71-2.2.0
 Origin:                      NXP (BSD-3-Clause)
                              pytorch (BSD-3-clause) - https://github.com/pytorch/pytorch
 
