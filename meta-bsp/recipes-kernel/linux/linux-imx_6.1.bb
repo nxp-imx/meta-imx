@@ -22,7 +22,7 @@ KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SR
 KBRANCH = "${SRCBRANCH}"
 SRC_URI = "${KERNEL_SRC}"
 
-SRCREV = "5cc8b1c0bb3b406d3ee3ca24b547e90fea82034e"
+SRCREV = "37a79e664385206aeb0b51e00e2bcbe7fae73278"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
