@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5a0bf11f745e68024f37b4724a5364fe"
 PROVIDES = "virtual/imxvpu"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "7ea856ebe77f21bcc22bb0ddc07cd9dd"
-SRC_URI[sha256sum] = "2820e01af27d23166c2cd0c5ffbd87d1517181682877b1deb2b55eaa3afabfe8"
+SRC_URI[md5sum] = "4fb8e4b6471e3249e27ab6b2df6040df"
+SRC_URI[sha256sum] = "785090d79a173f33c0705749735b2dba2675a4527137ac77a1c94d0583f4beac"
 
 inherit fsl-eula-unpack use-imx-headers
 
