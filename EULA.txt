@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v39 August 2022
+LA_OPT_NXP_Software_License v40 December 2022
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
 downloading, installing, or using the Licensed Software, you indicate that you
@@ -343,13 +343,13 @@ examination or audit.
 22.        NOTICES.             All notices and communications under this
 Agreement will be made in writing, and will be effective when received at the
 following addresses:
-          NXP:          NXP B.V.
-                        High Tech Campus 60
-                        5656 AG Eindhoven
-                        The Netherlands
-                        ATTN: Legal Department
+          NXP:      NXP B.V.
+                    High Tech Campus 60
+                    5656 AG Eindhoven
+                    The Netherlands
+                    ATTN: Legal Department
 
-          You:          The address provided at registration will be used.
+          You:      The address provided at registration will be used.
 
 23.        RELATIONSHIP OF THE PARTIES.     The parties are independent
 contractors. Nothing in this Agreement will be construed to create any
@@ -452,6 +452,13 @@ by licensees of the relevant Cadence SDK and distribution is limited to
 distribution of one copy embedded in a single NXP Product. Your use of Cadence
 NatureDSP Libraries whether in source code or in binary is restricted to NXP
 SoC based systems or emulation enablement based on NXP SoC.
+
+CEVA D.S.P. Ltd. and CEVA Technologies Inc. (“CEVA”): The CEVA-SPF2 linear
+algebra, CEVA-SPF2 Neural Network Libraries, CEVA-SPF2 Core Libraries,
+CEVA-SPF2 OpenAMP and CEVA-SPF2 STL licensed modules are owned by CEVA and such
+materials may only be used in connection with an NXP product containing the
+S250 or S125 integrated circuits, whether or not the CEVA-SPF2 Core is
+physically implemented and/or enabled on such NXP product
 
 Cirque Corporation: Use of Cirque Corporation technology is limited to
 evaluation, demonstration, or certification testing only. Permitted
