@@ -7,12 +7,12 @@ do_install:append () {
 }
 
 do_deploy:append() {
-    cp ${B}/core/tee-raw.bin ${DEPLOYDIR}/tee.${PLATFORM_FLAVOR}.bin
-    ln -sf tee.${PLATFORM_FLAVOR}.bin ${DEPLOYDIR}/tee.bin
+    cp ${B}/core/tee-raw.bin ${DEPLOYDIR}/${MLPREFIX}optee/tee.${PLATFORM_FLAVOR}.bin
+    ln -sf ${MLPREFIX}optee/tee.${PLATFORM_FLAVOR}.bin ${DEPLOYDIR}/tee.bin
 }
 
 do_deploy:append:arm() {
-    cp ${B}/core/uTee ${DEPLOYDIR}/uTee-${OPTEE_BIN_EXT}
+    cp ${B}/core/uTee ${DEPLOYDIR}/${MLPREFIX}optee/uTee-${OPTEE_BIN_EXT}
 }
 
 FILES:${PN} += "${nonarch_base_libdir}/optee_armtz"
