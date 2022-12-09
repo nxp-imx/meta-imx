@@ -49,11 +49,10 @@ PREFERRED_PROVIDER_virtual/opencl-icd:imxgpu ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libg2d:mx93-nxp-bsp ?= "imx-pxp-g2d"
 
 PREFERRED_VERSION_weston:imx-nxp-bsp ??= "10.0.1.imx"
-
-PREFERRED_VERSION_wayland-protocols:mx6-nxp-bsp ??= "1.27.imx"
-PREFERRED_VERSION_wayland-protocols:mx7-nxp-bsp ??= "1.27.imx"
-PREFERRED_VERSION_wayland-protocols:mx8-nxp-bsp ??= "1.27.imx"
-PREFERRED_VERSION_wayland-protocols:mx9-nxp-bsp ??= "1.27.imx"
+PREFERRED_VERSION_wayland-protocols:mx6-nxp-bsp ??= "1.31.imx"
+PREFERRED_VERSION_wayland-protocols:mx7-nxp-bsp ??= "1.31.imx"
+PREFERRED_VERSION_wayland-protocols:mx8-nxp-bsp ??= "1.31.imx"
+PREFERRED_VERSION_wayland-protocols:mx9-nxp-bsp ??= "1.31.imx"
 
 PREFERRED_VERSION_ffmpeg ??= "4.4.1"
 
