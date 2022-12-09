@@ -20,8 +20,8 @@ do_compile:imx8qm-cockpit () {
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-optee-a53   ${BOOT_STAGING}/bl31-optee-a53.bin
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-optee-a72   ${BOOT_STAGING}/bl31-optee-a72.bin
 
-        cp ${DEPLOY_DIR_IMAGE}/tee-a53.bin            ${BOOT_STAGING}/tee.bin
-        cp ${DEPLOY_DIR_IMAGE}/tee-a72.bin            ${BOOT_STAGING}
+        cp ${DEPLOY_DIR_IMAGE}/${MLPREFIX}optee/tee-a53.bin ${BOOT_STAGING}/tee.bin
+        cp ${DEPLOY_DIR_IMAGE}/${MLPREFIX}optee/tee-a72.bin ${BOOT_STAGING}
 
         cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE_COCKPIT}-a53   ${BOOT_STAGING}/u-boot-spl.bin
         cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE_COCKPIT}-a72   ${BOOT_STAGING}/u-boot-spl-a72.bin
