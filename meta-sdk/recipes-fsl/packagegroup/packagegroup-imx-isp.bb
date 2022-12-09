@@ -17,5 +17,4 @@ ISP_PKGS:mx8mp-nxp-bsp = " \
     kernel-module-isp-vvcam \
 "
 RDEPENDS:${PN} = " \
-    ${ISP_PKGS} \
 "
