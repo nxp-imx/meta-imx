@@ -394,7 +394,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     mx-secure-enclave.git
+Package:                     imx-secure-enclave.git
 Version:                     
 Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
@@ -402,6 +402,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX secure enclave library
 Release Location:            https://github.com/NXP/imx-secure-enclave.git -b lf-6.1.y-1.0.0
+Origin:                      NXP (proprietary)
+
 --------------------------------------------
 
 Package:                     imx-smw.git
@@ -578,7 +580,7 @@ License File:                License.md
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics sample applications
-Release Location:            https://github.com/NXPmicro/gtec-demo-framework -b 6.1.0
+Release Location:            https://github.com/nxp-imx/gtec-demo-framework -b 6.1.0
 Origin:                      NXP (BSD-3-clause)
                          Demo Framework
                              Sascha Willems - Vulkan demo (MIT) - https://github.com/SaschaWillems/Vulkan
@@ -714,7 +716,7 @@ License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
-Release Location:            https://github.com/NXPmicro/g2d-samples -b lf-6.1.y-1.0.0
+Release Location:            https://github.com/nxp-imx/g2d-samples -b lf-6.1.y-1.0.0
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
@@ -1200,8 +1202,8 @@ Origin:                      NXP (proprietary)
 M33 Processor Packages
 --------------------------------------------
 
-Package:                     imx8ulp-m33-demo-2.12.2.bin
-Version:                     2.12.2
+Package:                     imx8ulp-m33-demo-2.13.0.bin
+Version:                     2.13.0
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1355,14 +1357,14 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensors and Dynamic neural networks in Python with strong GPU acceleration
-Release Location:            https://github.com/NXPmicro/pytorch-release -b lf-6.1.y-1.0.0
+Release Location:            https://github.com/nxp-imx/pytorch-release -b lf-6.1.y-1.0.0
 Origin:                      NXP (BSD-3-Clause)
                              pytorch (BSD-3-clause) - https://github.com/pytorch/pytorch
 
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.9.1
+Version:                     2.10.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1375,7 +1377,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
-Version:                     2.9.1
+Version:                     2.10.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
