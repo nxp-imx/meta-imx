@@ -707,8 +707,6 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
 Release Location:            https://github.com/nxp-imx/imx-g2d-pxp -b lf-6.1.y-1.0.0
-Origin:                      NXP (Proprietary)
-
 --------------------------------------------
 
 Package:                     g2d-samples.git
@@ -1280,7 +1278,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     ethos-u-vela.git
-Version:                     3.5.0
+Version:                     3.6.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
