@@ -1,4 +1,4 @@
-# Copyright 2018-2020 NXP
+# Copyright 2018-2020,2022 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Packagegroup to provide necessary tools for basic core image"
@@ -12,33 +12,34 @@ KERNEL_TEST_TOOLS:mx8m-nxp-bsp = "kernel-tools-iio kernel-tools-pci spidev-test 
 
 
 RDEPENDS:${PN} = " \
+    can-utils \
+    coreutils \
+    cpufrequtils \
     dosfstools \
+    ethtool \
     evtest \
     e2fsprogs-mke2fs \
-    fsl-rc-local \
+    e2fsprogs-resize2fs \
     fbset \
-    i2c-tools \
+    fsl-rc-local \
     iproute2 \
+    iw \
+    i2c-tools \
     ${KERNEL_TEST_TOOLS} \
     libgpiod-tools \
+    linuxptp \
     memtester \
+    minicom \
+    mmc-utils \
+    mtd-utils \
+    mtd-utils-ubifs \
+    nano \
+    parted \
+    procps \
+    ptpd \
+    ntpdate \
     python3-core \
     python3-datetime \
     python3-json \
-    ethtool \
-    mtd-utils \
-    mtd-utils-ubifs \
-    procps \
-    ptpd \
-    linuxptp \
-    iw \
-    can-utils \
-    cpufrequtils \
-    nano \
-    ntpdate \
-    minicom \
-    coreutils \
-    mmc-utils \
     udev-extraconf \
-    e2fsprogs-resize2fs \
 "

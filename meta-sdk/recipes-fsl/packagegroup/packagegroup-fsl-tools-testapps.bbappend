@@ -31,7 +31,9 @@ RDEPENDS:${PN} += " \
     cryptodev-tests \
     ${@bb.utils.contains('MACHINE_FEATURES', 'dpdk', 'dpdk dpdk-examples', '', d)} \
     e2fsprogs-resize2fs \
+    gnutls-bin \
     iw \
+    libp11 \
     linuxptp \
     kernel-tools-iio \
     kernel-tools-pci \
@@ -41,8 +43,7 @@ RDEPENDS:${PN} += " \
     ntpdate \
     openssl-bin \
     openssl-engines \
-    libp11 \
-    gnutls-bin \
+    parted \
     pciutils \
     procps \
     ptpd \
