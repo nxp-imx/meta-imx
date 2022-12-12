@@ -14,6 +14,8 @@ SRC_URI[sha256sum] = "2ec672929ff302923e44670ae9fd066c4b70d9180b55605e184f2b7815
 do_compile[noexec] = "1"
 
 do_install() {
+   install -d ${D}${nonarch_base_libdir}/firmware/ele
+   install -m 0644 ${S}/${SECO_FIRMWARE_NAME} ${D}${nonarch_base_libdir}/firmware/ele
 }
 
 do_deploy () {
@@ -21,5 +23,7 @@ do_deploy () {
     install -m 0644 ${S}/${SECO_FIRMWARE_NAME}  ${DEPLOYDIR}
 }
 addtask deploy after do_install before do_build
+
+FILES:${PN} += "${nonarch_base_libdir}/firmware/ele/${SECO_FIRMWARE_NAME}"
 
 COMPATIBLE_MACHINE = "(mx8ulp-nxp-bsp|mx9-nxp-bsp)"
