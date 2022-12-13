@@ -156,6 +156,8 @@ GROUPADD_PARAM:${PN} = "--system weston-launch"
 
 SUMMARY = "Weston, a Wayland compositor, i.MX fork"
 
+PROVIDES += "weston"
+
 DEFAULT_PREFERENCE = "-1"
 
 SRC_URI:remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
@@ -203,6 +205,12 @@ EXTRA_OEMESON += "-Ddeprecated-wl-shell=true"
 # links with imx-gpu libs which are pre-built for glibc
 # gcompat will address it during runtime
 LDFLAGS:append:imxgpu:libc-musl = " -Wl,--allow-shlib-undefined"
+
+# For recipe weston-10, can't use BPN for the weston install folder name
+FILES:${PN}-dev:remove = "${libdir}/${BPN}/libexec_weston.so"
+FILES:${PN}:remove = "${libdir}/${BPN}/*.so*"
+FILES:${PN}-dev += "${libdir}/weston/libexec_weston.so"
+FILES:${PN} += "${libdir}/weston/*.so*"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"

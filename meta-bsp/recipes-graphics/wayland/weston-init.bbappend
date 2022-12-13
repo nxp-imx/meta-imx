@@ -28,3 +28,8 @@ do_install:append() {
         sed -i -e "s|^command=${bindir}/weston .*|& --rdp-tls-cert=${sysconfdir}/freerdp/keys/server.crt --rdp-tls-key=${sysconfdir}/freerdp/keys/server.key|" ${D}${sysconfdir}/xdg/weston/weston.ini
     fi
 }
+
+RDEPENDS:${PN}:remove:mx6-nxp-bsp = "weston"
+RDEPENDS:${PN}:remove:mx7-nxp-bsp = "weston"
+RDEPENDS:${PN}:append:mx6-nxp-bsp = " weston-10"
+RDEPENDS:${PN}:append:mx7-nxp-bsp = " weston-10"
