@@ -49,11 +49,7 @@ PREFERRED_PROVIDER_virtual/opencl-icd:imxgpu ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libg2d:mx93-nxp-bsp ?= "imx-pxp-g2d"
 
 PREFERRED_VERSION_weston:imx-nxp-bsp ??= "11.0.0.imx"
-
 # i.MX 6 & 7 stay on weston 10.0 for fbdev
-PREFERRED_PROVIDER_weston             ??= "weston"
-PREFERRED_PROVIDER_weston:mx6-nxp-bsp ??= "weston-10"
-PREFERRED_PROVIDER_weston:mx7-nxp-bsp ??= "weston-10"
 PREFERRED_VERSION_weston:mx6-nxp-bsp ??= "10.0.1.imx"
 PREFERRED_VERSION_weston:mx7-nxp-bsp ??= "10.0.1.imx"
 
