@@ -6,17 +6,17 @@
 #
 #   !!! DO NOT ADD UNRELATED LOGIC IN THIS SECTION !!!
 #
-WESTON_SRC_CAF = "git://github.com/nxp-imx/weston-imx.git;protocol=https"
-WESTON_SRC ?= "${WESTON_SRC_CAF}"
 # If WESTON_SRC is overridden, override the main SRC_URI
 SRC_URI:remove = \
-    "${@bb.utils.contains('WESTON_SRC', '${WESTON_SRC_CAF}', \
+    "${@bb.utils.contains('WESTON_SRC', '${WESTON_SRC_DEFAULT}', \
         '', \
-        '${WESTON_SRC_CAF};branch=${SRCBRANCH}', d)}"
+        '${WESTON_SRC_DEFAULT};branch=${SRCBRANCH}', d)}"
 SRC_URI:prepend = \
-    "${@bb.utils.contains('WESTON_SRC', '${WESTON_SRC_CAF}', \
+    "${@bb.utils.contains('WESTON_SRC', '${WESTON_SRC_DEFAULT}', \
         '', \
         '${WESTON_SRC};branch=${SRCBRANCH} ', d)}"
+WESTON_SRC ?= "${WESTON_SRC_DEFAULT}"
+WESTON_SRC_DEFAULT = "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 #
 #   !!! DO NOT ADD UNRELATED LOGIC IN THIS SECTION !!!
 #
