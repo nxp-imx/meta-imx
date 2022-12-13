@@ -153,47 +153,23 @@ SUMMARY = "Weston, a Wayland compositor, i.MX fork"
 
 DEFAULT_PREFERENCE = "-1"
 
-SRC_URI:remove = "https://wayland.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
+SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}/downloads/${BPN}-${PV}.tar.xz"
 SRC_URI:prepend = "git://github.com/nxp-imx/weston-imx.git;protocol=https;branch=${SRCBRANCH} "
-SRC_URI += "file://0001-Revert-protocol-no-found-wayland-scanner-with-Yocto-.patch \
-            file://0001-g2d-renderer.c-Include-sys-stat.h.patch"
-SRCBRANCH = "weston-imx-10.0.1"
+SRCBRANCH = "weston-imx-11.0"
 SRCREV = "b3ccf36b718d16f5fb38ccfc2cccaf45c79854d8"
 S = "${WORKDIR}/git"
 
-# Disable OpenGL for parts with GPU support for 2D but not 3D
-REQUIRED_DISTRO_FEATURES          = "opengl"
-REQUIRED_DISTRO_FEATURES:imxgpu2d = ""
-REQUIRED_DISTRO_FEATURES:imxgpu3d = "opengl"
-PACKAGECONFIG_OPENGL              = "opengl"
-PACKAGECONFIG_OPENGL:imxgpu2d     = ""
-PACKAGECONFIG_OPENGL:imxgpu3d     = "opengl"
-
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
-PACKAGECONFIG:append = " ${@bb.utils.filter('DISTRO_FEATURES', '${PACKAGECONFIG_OPENGL}', d)}"
 
-PACKAGECONFIG:remove:imxfbdev = "kms"
-PACKAGECONFIG:append:imxfbdev = " fbdev clients"
-PACKAGECONFIG:append:imxgpu   = " imxgpu"
 PACKAGECONFIG:append:imxgpu2d = " imxg2d"
-PACKAGECONFIG:append:mx93-nxp-bsp = " imxgpu imxg2d"
-
-SIMPLECLIENTS:imxfbdev = "damage,im,egl,shm,touch,dmabuf-v4l"
+PACKAGECONFIG:append:mx93-nxp-bsp = " imxg2d"
 
 # Override
 PACKAGECONFIG[xwayland] = "-Dxwayland=true,-Dxwayland=false,libxcursor"
-# Weston with i.MX GPU support
-PACKAGECONFIG[imxgpu] = "-Dimxgpu=true,-Dimxgpu=false,virtual/egl"
+
 # Weston with i.MX G2D renderer
 PACKAGECONFIG[imxg2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d"
-# Weston with OpenGL support
-PACKAGECONFIG[opengl] = "-Dopengl=true,-Dopengl=false"
-
-PACKAGECONFIG[fbdev] = "-Dbackend-fbdev=true,-Dbackend-fbdev=false,udev mtdev libdrm"
-EXTRA_OEMESON:append:imxfbdev = " -Dbackend-default=fbdev"
-
-EXTRA_OEMESON += "-Ddeprecated-wl-shell=true"
 
 # links with imx-gpu libs which are pre-built for glibc
 # gcompat will address it during runtime
