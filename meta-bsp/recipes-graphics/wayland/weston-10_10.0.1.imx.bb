@@ -165,7 +165,7 @@ SRC_URI:prepend = "git://github.com/nxp-imx/weston-imx.git;protocol=https;branch
 SRC_URI += "file://0001-Revert-protocol-no-found-wayland-scanner-with-Yocto-.patch \
             file://0001-g2d-renderer.c-Include-sys-stat.h.patch"
 SRCBRANCH = "weston-imx-10.0.1"
-SRCREV = "b3ccf36b718d16f5fb38ccfc2cccaf45c79854d8"
+SRCREV = "b3ccf36b718d16f5fb38ccfc2cccaf45c79854d8" 
 S = "${WORKDIR}/git"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
