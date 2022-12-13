@@ -156,7 +156,7 @@ DEFAULT_PREFERENCE = "-1"
 SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}/downloads/${BPN}-${PV}.tar.xz"
 SRC_URI:prepend = "git://github.com/nxp-imx/weston-imx.git;protocol=https;branch=${SRCBRANCH} "
 SRCBRANCH = "weston-imx-11.0"
-SRCREV = "b3ccf36b718d16f5fb38ccfc2cccaf45c79854d8"
+SRCREV = "fe805b2979da2fa5251f0326be3442f03e785ecd"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
