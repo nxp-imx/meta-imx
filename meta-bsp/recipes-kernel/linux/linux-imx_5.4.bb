@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 DEPENDS += "lzop-native bc-native"
 
-KERNEL_BRANCH ?= "imx_5.4.3_2.0.0"
-LOCALVERSION = "-2.0.0"
+KERNEL_BRANCH ?= "imx_5.4.3_2.0.2"
+LOCALVERSION = "-2.0.2"
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
 
