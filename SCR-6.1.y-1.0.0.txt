@@ -626,7 +626,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     wayland-protocols-imx.git
-Version:                     1.27.imx
+Version:                     1.31.imx
 Outgoing License:            MIT 
 License File:                COPYING
 Package Category:            Graphics
@@ -639,7 +639,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     weston-imx.git
-Version:                     10.0.1.imx
+Version:                     11.0.0.imx
 Outgoing License:            MIT 
 License File:                COPYING
 Package Category:            Graphics
@@ -649,6 +649,16 @@ Release Location:            https://github.com/nxp-imx/weston-imx -b lf-6.1.y-1
 Origin:                      NXP (MIT)
                              Weston (MIT) - http://github.com/wayland-project/weston/
 
+--------------------------------------------
+
+Package:                     weston-10-imx.git
+Version:                     10.0.1.imx
+Outgoing License:            MIT 
+License File:                COPYING
+Package Category:            Graphics
+Type of Content:             source
+Description and comments:    A reference implementation of a Wayland compositor
+Release Location:            https://github.com/nxp-imx/weston-imx -b lf-6.1.y-1.0.0
 --------------------------------------------
 
 Package:                     imx-gputop.git
