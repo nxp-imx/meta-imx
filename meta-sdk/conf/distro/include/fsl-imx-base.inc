@@ -17,6 +17,7 @@ DISTRO_FEATURES:append:mx8-nxp-bsp = " virtualization"
 SKIP_META_VIRT_SANITY_CHECK = "1"
 
 SKIP_META_SECURITY_SANITY_CHECK = "1"
+SKIP_META_TPM_SANITY_CHECK = "1"
 
 # Set a more generic tuning for code reuse across parts
 DEFAULTTUNE:mx8-nxp-bsp    ?= "armv8a-crc-crypto"
