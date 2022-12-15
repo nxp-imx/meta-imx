@@ -61,6 +61,7 @@ ETHOS_U_PKGS:mx93-nxp-bsp = " \
     ethos-u-vela \
     ethos-u-driver-stack \
     tensorflow-lite-ethosu-delegate \
+    eiq-examples \
 "
 
 
