@@ -43,7 +43,7 @@ PREFERRED_PROVIDER_virtual/libgles3:imxgpu3d ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/opencl-icd:imxgpu ?= "imx-gpu-viv"
 PREFERRED_PROVIDER_virtual/libg2d:mx93-nxp-bsp ?= "imx-pxp-g2d"
 
-PREFERRED_VERSION_weston:imx-nxp-bsp ??= "10.0.1.imx"
+PREFERRED_VERSION_weston:imx-nxp-bsp ??= "10.0.3.imx"
 
 PREFERRED_VERSION_wayland-protocols:mx9-nxp-bsp ??= "1.25.imx"
 
