@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 SRC_URI = "${EIQ_EXAMPLES_SRC};branch=${SRCBRANCH}"
 EIQ_EXAMPLES_SRC ?= "git://github.com/nxp-imx/eiq-examples.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "e14c90f624a0e83a5f7e5a02d7babc1fbdd65727"
+SRCREV = "4c725c262cb0941ea7350606ddd322f62727fe98"
 
 S = "${WORKDIR}/git"
 
@@ -21,7 +21,7 @@ do_install () {
     cp -r ${S}/gesture_detection ${D}${bindir}/${PN}-${PV}/
 }
 
-RDEPENDS:${PN} = "python3 python3-numpy python3-pillow \
+RDEPENDS:${PN} = "python3 python3-numpy python3-pillow python3-requests \
                   python3-opencv python3-pillow tensorflow-lite"
 
 #Only support imx93 currently, will add other plantform support.
