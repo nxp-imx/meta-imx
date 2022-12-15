@@ -24,7 +24,8 @@ IMAGE_INSTALL_OPENCV_PKGS = " \
     opencv-samples \
     python3-opencv"
 
-IMAGE_INSTALL_PARSEC = " \
+IMAGE_INSTALL_PARSEC = ""
+IMAGE_INSTALL_PARSEC:aarch64 = " \
     packagegroup-security-tpm2 \
     packagegroup-security-parsec \
     swtpm \
