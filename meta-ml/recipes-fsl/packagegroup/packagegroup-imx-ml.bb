@@ -48,6 +48,9 @@ ML_PKGS:mx9-nxp-bsp = " \
 ML_ACCELERATED_PKGS                    = ""
 ML_ACCELERATED_PKGS:mx8-nxp-bsp:imxgpu = " \
     tensorflow-lite-vx-delegate \
+"
+ML_ACCELERATED_PKGS:mx8mp-nxp-bsp      = " \
+    tensorflow-lite-vx-delegate \
     tvm \
 "
 ML_ACCELERATED_PKGS:mx8mm-nxp-bsp      = ""
