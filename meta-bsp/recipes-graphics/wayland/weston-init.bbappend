@@ -5,9 +5,10 @@ PACKAGECONFIG[rdp] = ",,"
 INI_UNCOMMENT_ASSIGNMENTS = " \
     ${@bb.utils.contains('PACKAGECONFIG', 'rdp', 'modules=screen-share.so', '', d)}"
 INI_UNCOMMENT_ASSIGNMENTS:append:mx9-nxp-bsp  = " \
+    use-g2d=true \
     repaint-window=16"
 INI_UNCOMMENT_USE_G2D:imxgpu2d       = "use-g2d=true"
-INI_UNCOMMENT_USE_G2D:mx93-nxp-bsp   = "use-g2d=true"
+#INI_UNCOMMENT_USE_G2D:mx93-nxp-bsp   = "use-g2d=true"
 
 update_file() {
     if ! grep -q "$1" $3; then
