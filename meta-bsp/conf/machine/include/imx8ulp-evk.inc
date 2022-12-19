@@ -43,4 +43,4 @@ IMX_BOOT_SEEK = "32"
 SERIAL_CONSOLES = "115200;ttyLP1"
 
 # Add additional firmware
-MACHINE_FIRMWARE:append = " firmware-sentinel firmware-imx-epdc"
+MACHINE_FIRMWARE:append = " firmware-imx-epdc"
