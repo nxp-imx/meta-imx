@@ -23,6 +23,9 @@ PACKAGECONFIG[use-g2d] = ",,"
 INI_UNCOMMENT_ASSIGNMENTS:remove = "repaint-window=16"
 INI_UNCOMMENT_ASSIGNMENTS:remove = "use-g2d=1"
 
+USE_G2D_VALUE             = "true"
+USE_G2D_VALUE:mx6-nxp-bsp = "1"
+USE_G2D_VALUE:mx7-nxp-bsp = "1"
 
 update_file() {
     if ! grep -q "$1" $3; then
@@ -49,6 +52,6 @@ do_install:append() {
     fi
 
     if [ "${@bb.utils.contains('PACKAGECONFIG', 'use-g2d', 'yes', 'no', d)}" = "yes" ]; then
-        sed -i -e "/^\[core\]/a use-g2d=true" ${D}${sysconfdir}/xdg/weston/weston.ini
+        sed -i -e "/^\[core\]/a use-g2d=${USE_G2D_VALUE}" ${D}${sysconfdir}/xdg/weston/weston.ini
     fi
 }
