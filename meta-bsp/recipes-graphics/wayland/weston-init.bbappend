@@ -1,14 +1,28 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PACKAGECONFIG[rdp] = ",,"
+PACKAGECONFIG ??= " \
+    no-idle-timeout \
+    ${PACKAGECONFIG_REPAINT_WINDOW} \
+    ${PACKAGECONFIG_USE_G2D}"
 
-INI_UNCOMMENT_ASSIGNMENTS = " \
-    ${@bb.utils.contains('PACKAGECONFIG', 'rdp', 'modules=screen-share.so', '', d)}"
-INI_UNCOMMENT_ASSIGNMENTS:append:mx9-nxp-bsp  = " \
-    use-g2d=true \
-    repaint-window=16"
-INI_UNCOMMENT_USE_G2D:imxgpu2d       = "use-g2d=true"
-#INI_UNCOMMENT_USE_G2D:mx93-nxp-bsp   = "use-g2d=true"
+PACKAGECONFIG_REPAINT_WINDOW             ?= ""
+PACKAGECONFIG_REPAINT_WINDOW:mx8-nxp-bsp ?= "repaint-window"
+PACKAGECONFIG_REPAINT_WINDOW:mx9-nxp-bsp ?= "repaint-window"
+
+PACKAGECONFIG_USE_G2D                ?= ""
+PACKAGECONFIG_USE_G2D:imxgpu2d       ?= "use-g2d"
+PACKAGECONFIG_USE_G2D:mx8qm-nxp-bsp  ?= ""
+PACKAGECONFIG_USE_G2D:mx8qxp-nxp-bsp ?= ""
+PACKAGECONFIG_USE_G2D:mx8dx-nxp-bsp  ?= ""
+PACKAGECONFIG_USE_G2D:mx93-nxp-bsp   ?= "use-g2d"
+
+PACKAGECONFIG[rdp] = ",,"
+PACKAGECONFIG[repaint-window] = ",,"
+PACKAGECONFIG[use-g2d] = ",,"
+
+INI_UNCOMMENT_ASSIGNMENTS:remove = "repaint-window=16"
+INI_UNCOMMENT_ASSIGNMENTS:remove = "use-g2d=1"
+
 
 update_file() {
     if ! grep -q "$1" $3; then
@@ -27,5 +41,14 @@ do_install:append() {
 
     if [ "${@bb.utils.contains('PACKAGECONFIG', 'rdp', 'yes', 'no', d)}" = "yes" ]; then
         sed -i -e "s|^command=${bindir}/weston .*|& --rdp-tls-cert=${sysconfdir}/freerdp/keys/server.crt --rdp-tls-key=${sysconfdir}/freerdp/keys/server.key|" ${D}${sysconfdir}/xdg/weston/weston.ini
+        sed -i -e "/^\[core\]/a modules=screen-share.so" ${D}${sysconfdir}/xdg/weston/weston.ini
+    fi
+
+    if [ "${@bb.utils.contains('PACKAGECONFIG', 'repaint-window', 'yes', 'no', d)}" = "yes" ]; then
+        sed -i -e "/^\[core\]/a repaint-window=16" ${D}${sysconfdir}/xdg/weston/weston.ini
+    fi
+
+    if [ "${@bb.utils.contains('PACKAGECONFIG', 'use-g2d', 'yes', 'no', d)}" = "yes" ]; then
+        sed -i -e "/^\[core\]/a use-g2d=true" ${D}${sysconfdir}/xdg/weston/weston.ini
     fi
 }
