@@ -717,8 +717,6 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
 Release Location:            https://github.com/nxp-imx/imx-g2d-pxp -b lf-6.1.y-1.0.0
-Origin:                      NXP (Proprietary)
-
 --------------------------------------------
 
 Package:                     g2d-samples.git
@@ -982,8 +980,8 @@ Origin:                      VeriSilicon Inc. (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.1.5
-Version:                     1.1.5
+Package:                     imx-vpu-hantro-daemon-1.1.6
+Version:                     1.1.6
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1214,8 +1212,8 @@ Origin:                      NXP (proprietary)
 M33 Processor Packages
 --------------------------------------------
 
-Package:                     imx8ulp-m33-demo-2.13.0.bin
-Version:                     2.13.0
+Package:                     imx8ulp-m33-demo-2.13.1.bin
+Version:                     2.13.1
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1230,8 +1228,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx93-m33-demo-2.13.0.bin
-Version:                     2.13.0
+Package:                     imx93-m33-demo-2.13.1.bin
+Version:                     2.13.1
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
