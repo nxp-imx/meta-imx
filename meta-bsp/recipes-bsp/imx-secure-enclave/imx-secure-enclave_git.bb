@@ -10,11 +10,11 @@ DEPENDS = "zlib"
 
 EXTRA_OEMAKE = "PLAT=ele"
 
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.1.1_1.0.0"
 SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
 
 SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "e39f7b1aa54b8f654a13c6d8492e0c12eccbe6d7"
+SRCREV = "4ff929d60102cb1bd7afe86c89b1b4dfad52063e"
 
 
 S = "${WORKDIR}/git"
