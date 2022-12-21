@@ -259,6 +259,18 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
+Package:                     imx-seco-libs.git
+Version:                     
+Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
+License File:                EULA.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    BSP source - SECO
+Release Location:            https://github.com/NXP/imx-seco-libs.git -b lf-6.1.y-1.0.0
+Origin:                      NXP (proprietary)
+
+--------------------------------------------
+
 Package:                     sof-imx-2.4.0
 Version:                     2.4.0
 Outgoing License:            BSD-3-Clause 
@@ -717,6 +729,8 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
 Release Location:            https://github.com/nxp-imx/imx-g2d-pxp -b lf-6.1.y-1.0.0
+Origin:                      NXP (Proprietary)
+
 --------------------------------------------
 
 Package:                     g2d-samples.git
@@ -1214,7 +1228,7 @@ M33 Processor Packages
 
 Package:                     imx8ulp-m33-demo-2.13.1.bin
 Version:                     2.13.1
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1230,7 +1244,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx93-m33-demo-2.13.1.bin
 Version:                     2.13.1
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
