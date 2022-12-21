@@ -29,4 +29,5 @@ IMAGE_INSTALL_PARSEC:aarch64 = " \
     packagegroup-security-parsec \
     swtpm \
     softhsm \
-    os-release"
+    os-release \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-client optee-os', '', d)}"
