@@ -249,7 +249,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-seco-5.9.0.bin
 Version:                     5.9.0
-Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -1261,8 +1261,8 @@ Origin:                      NXP (proprietary)
 MachineLearning Packages
 --------------------------------------------
 
-Package:                     deepview-rt-2.4.46-aarch64.bin
-Version:                     2.4.46-aarch64
+Package:                     deepview-rt-2.4.46.1-aarch64.bin
+Version:                     2.4.46.1-aarch64
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 No distribution license granted - Section 2.2 applies
 License File:                COPYING
 Package Category:            MachineLearning
