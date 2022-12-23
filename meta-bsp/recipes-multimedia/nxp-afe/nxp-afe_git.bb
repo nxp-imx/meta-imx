@@ -12,7 +12,7 @@ SRC_URI = " \
     ${NXPAFE_SRC};branch=${SRCBRANCH} \
 "
 
-SRCREV = "68457c2efa5dbcca28db66fe0f52281f996440bb"
+SRCREV = "68457c2efa5dbcca28db66fe0f52281f996440bb" 
 
 S = "${WORKDIR}/git"
 
