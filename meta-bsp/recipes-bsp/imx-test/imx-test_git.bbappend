@@ -6,7 +6,7 @@ DEPENDS:append = " freetype"
 DEPENDS:append:mx8ulp-nxp-bsp = " imx-lib"
 DEPENDS:append:mx9-nxp-bsp = " imx-lib"
 
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.1.1_1.0.0"
 IMXTEST_SRC ?= "git://github.com/nxp-imx/imx-test.git;protocol=https"
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH} \
            file://memtool_profile"
