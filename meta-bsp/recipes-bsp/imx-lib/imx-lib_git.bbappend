@@ -1,7 +1,7 @@
 SRC_URI = "${IMXLIB_SRC};branch=${SRCBRANCH}"
 IMXLIB_SRC ?= "git://github.com/nxp-imx/imx-lib.git;protocol=https"
 SRCBRANCH = "lf-6.1.1_1.0.0"
-SRCREV = "87ddd80953835eb29027d1d5a12044a08e809e40"
+SRCREV = "87ddd80953835eb29027d1d5a12044a08e809e40" 
 
 PLATFORM:mx9-nxp-bsp = "IMX8ULP"
 
