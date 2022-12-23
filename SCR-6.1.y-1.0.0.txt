@@ -1275,7 +1275,7 @@ Origin:                      Au-Zone Technologies (proprietary)
 
 Package:                     deepview-rt-examples-1.6.bin
 Version:                     1.6
-Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
