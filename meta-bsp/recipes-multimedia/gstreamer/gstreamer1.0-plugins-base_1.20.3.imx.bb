@@ -113,7 +113,7 @@ SRC_URI:remove = " \
     file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch"
 SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
-SRCBRANCH = "imx-1.20.x"
+SRCBRANCH = "MM_04.07.03_2301_L6.1.y"
 SRCREV = "cbf542ce3e0bad1009d5ecf72707e870c375c3f0" 
 
 S = "${WORKDIR}/git"
