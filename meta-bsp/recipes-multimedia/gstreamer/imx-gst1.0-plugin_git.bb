@@ -28,7 +28,7 @@ SRCBRANCH = "MM_04.07.03_2301_L6.1.y"
 
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "ae30e4570ed165fd927f8506d6ef345c7f63df6e"
+SRCREV = "ae30e4570ed165fd927f8506d6ef345c7f63df6e" 
 PV = "4.7.3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
