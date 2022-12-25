@@ -1,4 +1,4 @@
-# Copyright 2017-2021 NXP
+# Copyright 2017-2022 NXP
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
@@ -10,7 +10,7 @@ SRC_URI += " \
 "
 
 SRCREV_murata-qca = "a0026b646ce6adfb72f135ffa8a310f3614b2272"
-SRCREV_imx-firmware = "6fa6713672ec4a2632ec4c06bf5f0628ee4a906a"
+SRCREV_imx-firmware = "87d24428306241b180576aca3f09e330047a864f"
 
 SRCREV_FORMAT = "default_murata-qca_imx-firmware"
 
@@ -88,7 +88,9 @@ do_install:append () {
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_IW416_SD/sdiouartiw416_combo_v0.bin ${D}${nonarch_base_libdir}/firmware/nxp
 
     # Install NXP Connectivity IW612 firmware
-    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_IW612_SD/* ${D}${nonarch_base_libdir}/firmware/nxp
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_IW612_SD/sduart_nw61x_v1.bin.se ${D}${nonarch_base_libdir}/firmware/nxp
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_IW612_SD/sd_w61x_v1.bin.se      ${D}${nonarch_base_libdir}/firmware/nxp
+    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_IW612_SD/uartspi_n61x_v1.bin.se ${D}${nonarch_base_libdir}/firmware/nxp
 }
 
 # Use the latest version of sdma firmware in firmware-imx
