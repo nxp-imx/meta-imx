@@ -1,4 +1,4 @@
-SUMMARY = "NXP Wi-Fi SDK for 88w8997 and 88w8987"
+SUMMARY = "NXP Wi-Fi SDK for module 88w8801/8987/8997/9098 and IW416/612"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=ab04ac0f249af12befccb94447c08b77"
 
