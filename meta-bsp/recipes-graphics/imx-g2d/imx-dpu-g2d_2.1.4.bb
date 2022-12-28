@@ -10,8 +10,8 @@ DEPENDS = "libgal-imx libdrm"
 PROVIDES += "virtual/libg2d"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "488d9f63b2d02c687a0bc8c3debfb51c"
-SRC_URI[sha256sum] = "62050bc5dd35e942c97e7a8ab22b0b98d02e27a38935b585e622cdc5221ef2a3"
+SRC_URI[md5sum] = "daebf756dd10b1b92d09ebaf8f7dc1d4"
+SRC_URI[sha256sum] = "53b39f78f1d4b7bd73ead643747ee422e5848c2def6673f30561e06827e9df06"
 
 inherit fsl-eula-unpack
 
