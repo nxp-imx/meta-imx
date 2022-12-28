@@ -547,8 +547,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.0-aarch32.bin
-Version:                     6.4.11.0
+Package:                     imx-gpu-viv-6.4.11.p1.0-aarch32.bin
+Version:                     6.4.11.p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -566,8 +566,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.0-aarch64.bin
-Version:                     6.4.11.0
+Package:                     imx-gpu-viv-6.4.11.p1.0-aarch64.bin
+Version:                     6.4.11.p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -674,7 +674,7 @@ Release Location:            https://github.com/nxp-imx/weston-imx -b lf-6.1.y-1
 --------------------------------------------
 
 Package:                     imx-gputop.git
-Version:                     6.4.11.0
+Version:                     6.4.11.p1.0
 Outgoing License:            MIT 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -685,8 +685,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.0-arm.bin
-Version:                     6.4.11.0
+Package:                     imx-gpu-g2d-6.4.11.p1.0-arm.bin
+Version:                     6.4.11.p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -697,8 +697,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.0-aarch64.bin
-Version:                     6.4.11.0
+Package:                     imx-gpu-g2d-6.4.11.p1.0-aarch64.bin
+Version:                     6.4.11.p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -711,7 +711,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-dpu-g2d-2.1.4.bin
 Version:                     2.1.4
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -729,8 +729,6 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
 Release Location:            https://github.com/nxp-imx/imx-g2d-pxp -b lf-6.1.y-1.0.0
-Origin:                      NXP (Proprietary)
-
 --------------------------------------------
 
 Package:                     g2d-samples.git
@@ -745,8 +743,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.0-aarch64-wayland.bin
-Version:                     6.4.11.0
+Package:                     libgpuperfcnt-6.4.11.p1.0-aarch64-wayland.bin
+Version:                     6.4.11.p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -757,8 +755,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.0-arm-fb.bin
-Version:                     6.4.11.0
+Package:                     libgpuperfcnt-6.4.11.p1.0-arm-fb.bin
+Version:                     6.4.11.p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -769,8 +767,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.0-arm-wayland.bin
-Version:                     6.4.11.0
+Package:                     libgpuperfcnt-6.4.11.p1.0-arm-wayland.bin
+Version:                     6.4.11.p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
