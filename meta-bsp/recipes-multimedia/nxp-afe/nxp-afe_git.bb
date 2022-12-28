@@ -33,7 +33,7 @@ do_install() {
         install -m 0755 ${WORKDIR}/deploy_afe/afe ${D}/unit_tests/nxp-afe
         install -m 0644 ${WORKDIR}/deploy_afe/asound.conf*    ${D}/unit_tests/nxp-afe
         install -m 0644 ${WORKDIR}/deploy_afe/TODO.md    ${D}/unit_tests/nxp-afe
-        install -m 0644 ${WORKDIR}/deploy_afe/UAC_VCOM_composite.sh    ${D}/unit_tests/nxp-afe
+        install -m 0755 ${WORKDIR}/deploy_afe/UAC_VCOM_composite.sh    ${D}/unit_tests/nxp-afe
 }
 
 FILES:${PN} += "/unit_tests"
