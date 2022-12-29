@@ -709,8 +709,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-2.1.4.bin
-Version:                     2.1.4
+Package:                     imx-dpu-g2d-2.1.6.bin
+Version:                     2.1.6
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
