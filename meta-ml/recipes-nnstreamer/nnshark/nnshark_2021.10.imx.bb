@@ -11,7 +11,7 @@ DEPENDS = "\
         perf \
 "
 
-NNSHARK_SRC ?= "git://github.com/nxp-imx/nnshark.git;protocol=https"
+NNSHARK_SRC ?= "gitsm://github.com/nxp-imx/nnshark.git;protocol=https"
 SRCBRANCH ?= "2021.10.imx"
 SRC_URI = "${NNSHARK_SRC};branch=${SRCBRANCH}"
 
@@ -25,6 +25,7 @@ EXTRA_OECONF = " \
         --disable-graphviz \
         --disable-gtk-doc \
 "
+
 
 do_configure:prepend() {
     sh autogen.sh --noconfigure
