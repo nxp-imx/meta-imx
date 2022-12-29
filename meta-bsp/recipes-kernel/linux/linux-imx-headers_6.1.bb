@@ -44,11 +44,15 @@ do_install() {
     # installed by mistake.
     oe_runmake headers_install INSTALL_HDR_PATH=${B}${exec_prefix}
 
+    ################################################
+    # BEGIN Copy of exceptional logic from linux-libc-headers
     # Kernel should not be exporting this header
     rm -f ${B}${exec_prefix}/include/scsi/scsi.h
 
     # The ..install.cmd conflicts between various configure runs
     find ${B}${includedir} -name ..install.cmd | xargs rm -f
+    # END Copy from linux-libc-headers
+    ################################################
 
     # Install i.MX-specific headers only
     for h in ${IMX_UAPI_HEADERS}; do
