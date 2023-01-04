@@ -66,9 +66,9 @@ FEATURES_SOC:mx8-nxp-bsp          = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,Op
 FEATURES_SOC:mx8mm-nxp-bsp        = ",OpenCV4"
 
 EXTENSIONS               = "*"
-EXTENSIONS:mx6q-nxp-bsp  = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
-EXTENSIONS:mx6dl-nxp-bsp = "OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
-EXTENSIONS:mx8m-nxp-bsp  = "OpenGLES3:GL_EXT_color_buffer_float"
+EXTENSIONS:mx6q-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
+EXTENSIONS:mx6dl-nxp-bsp = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
+EXTENSIONS:mx8m-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_color_buffer_float"
 EXTENSIONS:mx8mm-nxp-bsp = "*"
 
 do_compile () {
