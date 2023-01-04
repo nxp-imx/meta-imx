@@ -10,7 +10,7 @@ SRC_URI:append = " file://0001-core-Define-section-attributes-for-clang.patch"
 SRC_URI:remove = "file://0008-no-warn-rwx-segments.patch"
 OPTEE_OS_SRC ?= "git://github.com/nxp-imx/imx-optee-os.git;protocol=https"
 SRCBRANCH = "lf-6.1.1_1.0.0"
-SRCREV = "a0359fd6df523e64cc1e4d2fc84f3d15d7f2362e"
+SRCREV = "a0359fd6df523e64cc1e4d2fc84f3d15d7f2362e" 
 
 inherit features_check
 
