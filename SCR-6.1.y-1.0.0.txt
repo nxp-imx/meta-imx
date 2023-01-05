@@ -547,8 +547,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p1.0-aarch32.bin
-Version:                     6.4.11.p1.0
+Package:                     imx-gpu-viv-6.4.11.p1.2-aarch32.bin
+Version:                     6.4.11.p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -566,8 +566,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p1.0-aarch64.bin
-Version:                     6.4.11.p1.0
+Package:                     imx-gpu-viv-6.4.11.p1.2-aarch64.bin
+Version:                     6.4.11.p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -674,7 +674,7 @@ Release Location:            https://github.com/nxp-imx/weston-imx -b lf-6.1.y-1
 --------------------------------------------
 
 Package:                     imx-gputop.git
-Version:                     6.4.11.p1.0
+Version:                     6.4.11.p1.2
 Outgoing License:            MIT 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -685,8 +685,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p1.0-arm.bin
-Version:                     6.4.11.p1.0
+Package:                     imx-gpu-g2d-6.4.11.p1.2-arm.bin
+Version:                     6.4.11.p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -697,8 +697,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p1.0-aarch64.bin
-Version:                     6.4.11.p1.0
+Package:                     imx-gpu-g2d-6.4.11.p1.2-aarch64.bin
+Version:                     6.4.11.p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -729,6 +729,8 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
 Release Location:            https://github.com/nxp-imx/imx-g2d-pxp -b lf-6.1.y-1.0.0
+Origin:                      NXP (Proprietary)
+
 --------------------------------------------
 
 Package:                     g2d-samples.git
@@ -743,8 +745,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p1.0-aarch64-wayland.bin
-Version:                     6.4.11.p1.0
+Package:                     libgpuperfcnt-6.4.11.p1.2-aarch64-wayland.bin
+Version:                     6.4.11.p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -755,8 +757,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p1.0-arm-fb.bin
-Version:                     6.4.11.p1.0
+Package:                     libgpuperfcnt-6.4.11.p1.2-arm-fb.bin
+Version:                     6.4.11.p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -767,8 +769,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p1.0-arm-wayland.bin
-Version:                     6.4.11.p1.0
+Package:                     libgpuperfcnt-6.4.11.p1.2-arm-wayland.bin
+Version:                     6.4.11.p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -812,19 +814,6 @@ Origin:                      NXP (BSD-3-Cluse)
                                 NVIDIA Corporation  (BSD-3-Clause)
                                 Advanced Micro Devices, Inc.  (BSD-3-Clause)
                                 Itseez Inc.  (BSD-3-Clause)
-
---------------------------------------------
-
-Package:                     arm-computelibrary-imx.git
-Version:                     22.05
-Outgoing License:            MIT 
-License File:                LICENSE
-Package Category:            Graphics
-Type of Content:             source
-Description and comments:    ARM Compute Library fork
-Release Location:            https://github.com/nxp-imx/arm-computelibrary-imx -b lf-6.1.y-1.0.0
-Origin:                      NXP (MIT)
-                             ARM Software (MIT) - https://github.com/ARM-software/ComputeLibrary
 
 --------------------------------------------
 Multimedia Packages
@@ -1259,6 +1248,19 @@ Origin:                      NXP (proprietary)
 MachineLearning Packages
 --------------------------------------------
 
+Package:                     arm-computelibrary-imx.git
+Version:                     22.05
+Outgoing License:            MIT 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    ARM Compute Library fork
+Release Location:            https://github.com/nxp-imx/arm-computelibrary-imx -b lf-6.1.y-1.0.0
+Origin:                      NXP (MIT)
+                             ARM Software (MIT) - https://github.com/ARM-software/ComputeLibrary
+
+--------------------------------------------
+
 Package:                     deepview-rt-2.4.46.1-aarch64.bin
 Version:                     2.4.46.1-aarch64
 Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 No distribution license granted - Section 2.2 applies
@@ -1284,6 +1286,16 @@ Origin:                    Au-Zone Technologies (proprietary)
                            panda.jpg (Author: Shizhao, License: CC BY-SA 3.0) - https://commons.wikimedia.org/wiki/File:Giant_Panda_in_Beijing_Zoo_1.JPG
                            horse.jpg (public domain) - https://commons.wikimedia.org/wiki/File:Horsescd1l-095.jpg
 
+--------------------------------------------
+
+Package:                     eiq-examples.git
+Version:                     
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    eIQ examples based on TensorFlow Lite
+Release Location:            https://github.com/nxp-imx/eiq-examples -b lf-6.1.y-1.0.0
 --------------------------------------------
 
 Package:                     eiq-tvm-imx.git
@@ -1396,6 +1408,16 @@ Release Location:            https://github.com/nxp-imx/tensorflow-imx -b lf-6.1
 Origin:                      NXP (Apache-2.0)
                              TensorFlow (Apache-2.0) - https://github.com/tensorflow/tensorflow/
 
+--------------------------------------------
+
+Package:                     tflite-ethosu-delegate.git
+Version:                     2.10.0
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    TensorFlow Lite Ethos-u Delegate
+Release Location:            https://github.com/nxp-imx/tflite-ethosu-delegate-imx -b lf-6.1.y-1.0.0
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
