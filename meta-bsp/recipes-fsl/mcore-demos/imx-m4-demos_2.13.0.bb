@@ -1,4 +1,4 @@
-# Copyright 2017-2022 NXP
+# Copyright 2017-2023 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 require imx-mcore-demos.inc
