@@ -1,13 +1,13 @@
-DEPENDS += "extra-cmake-modules"
+SRC_URI:remove = "gitsm://github.com/KhronosGroup/Vulkan-Samples.git;branch=master;protocol=https;lfs=0"
+SRC_URI:prepend = "gitsm://github.com/prabhusundar/Vulkan-Samples.git;branch=master;protocol=https;lfs=0 "
+SRCREV = "f969381ecff383efa4020abeb966c16b7ad1f055"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-
-SRC_URI += "file://0005-glfw-fix-glfw3.h-gl-error.patch"
+inherit pkgconfig
 
 # Can only pick one of [wayland,xcb]
 PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', 'xcb', d)}"
 PACKAGECONFIG[wayland] = " \
-    -DVKB_BUILD_WAYLAND=1 -DGLFW_USE_WAYLAND=1, \
+    -DVKB_WSI_SELECTION=WAYLAND -DGLFW_BUILD_WAYLAND=true -DGLFW_BUILD_X11=false -DGLFW_INCLUDE_VULKAN=true, \
     , \
     wayland wayland-native wayland-protocols libxkbcommon, \
     , \
