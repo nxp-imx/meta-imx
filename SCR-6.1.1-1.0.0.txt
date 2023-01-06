@@ -10,6 +10,7 @@ Yocto Project recipe manifest:
 repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-langdale -m imx_6.1.1-1.0.0.xml
 
 Release tag: lf-6.1.1-1.0.0
+Release Location: https://www.nxp.com/design/software/embedded-software/i-mx-software/embedded-linux-for-i-mx-applications-processors:IMXLINUX
 
 --------------------------------------------
 BSP Packages
