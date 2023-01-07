@@ -740,8 +740,6 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
 Release Location:            https://github.com/nxp-imx/imx-g2d-pxp -b lf-6.1.y-1.0.0
-Origin:                      NXP (Proprietary)
-
 --------------------------------------------
 
 Package:                     g2d-samples.git
@@ -1092,9 +1090,9 @@ Origin:                      NXP (Proprietary)
 M4 Processor Packages
 --------------------------------------------
 
-Package:                     imx7ulp-m4-demo-2.12.1.bin
-Version:                     2.12.1
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Package:                     imx7ulp-m4-demo-2.13.0.bin
+Version:                     2.13.0
+Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1120,9 +1118,9 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx8mm-m4-demo-2.12.1.bin
-Version:                     2.12.1
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mm-m4-demo-2.13.0.bin
+Version:                     2.13.0
+Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1134,9 +1132,9 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx8mq-m4-demo-2.12.1.bin
-Version:                     2.12.1
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mq-m4-demo-2.13.0.bin
+Version:                     2.13.0
+Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1178,9 +1176,9 @@ Origin:                      NXP (proprietary)
 M7 Processor Packages
 --------------------------------------------
 
-Package:                     imx8mn-m7-demo-2.12.1.bin
-Version:                     2.12.1
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mn-m7-demo-2.13.0.bin
+Version:                     2.13.0
+Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1192,9 +1190,9 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx8mnddr3l-m7-demo-2.12.1.bin
-Version:                     2.12.1
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mnddr3l-m7-demo-2.13.0.bin
+Version:                     2.13.0
+Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1206,9 +1204,9 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx8mp-m7-demo-2.12.1.bin
-Version:                     2.12.1
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mp-m7-demo-2.13.0.bin
+Version:                     2.13.0
+Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
