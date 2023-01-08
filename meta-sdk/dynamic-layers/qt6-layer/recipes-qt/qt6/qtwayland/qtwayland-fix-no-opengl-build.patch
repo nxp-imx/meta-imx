@@ -1,0 +1,118 @@
+diff --git a/tests/auto/client/datadevicev1/tst_datadevicev1.cpp b/tests/auto/client/datadevicev1/tst_datadevicev1.cpp
+index 0c5e8872..0c02fc81 100644
+--- a/tests/auto/client/datadevicev1/tst_datadevicev1.cpp
++++ b/tests/auto/client/datadevicev1/tst_datadevicev1.cpp
+@@ -28,7 +28,9 @@
+ 
+ #include "mockcompositor.h"
+ 
++#if QT_CONFIG(opengl)
+ #include <QtOpenGL/QOpenGLWindow>
++#endif
+ #include <QtGui/QRasterWindow>
+ #include <QtGui/QClipboard>
+ #include <QtGui/QDrag>
+diff --git a/tests/auto/client/primaryselectionv1/tst_primaryselectionv1.cpp b/tests/auto/client/primaryselectionv1/tst_primaryselectionv1.cpp
+index 0f0c1610..ae97b07e 100644
+--- a/tests/auto/client/primaryselectionv1/tst_primaryselectionv1.cpp
++++ b/tests/auto/client/primaryselectionv1/tst_primaryselectionv1.cpp
+@@ -30,7 +30,9 @@
+ 
+ #include <qwayland-server-wp-primary-selection-unstable-v1.h>
+ 
++#if QT_CONFIG(opengl)
+ #include <QtOpenGL/QOpenGLWindow>
++#endif
+ #include <QtGui/QRasterWindow>
+ #include <QtGui/QClipboard>
+ #include <QtCore/private/qcore_unix_p.h>
+diff --git a/tests/auto/client/seat/tst_seat.cpp b/tests/auto/client/seat/tst_seat.cpp
+index b8405eb6..6570909b 100644
+--- a/tests/auto/client/seat/tst_seat.cpp
++++ b/tests/auto/client/seat/tst_seat.cpp
+@@ -27,7 +27,9 @@
+ ****************************************************************************/
+ 
+ #include "mockcompositor.h"
++#if QT_CONFIG(opengl)
+ #include <QtOpenGL/QOpenGLWindow>
++#endif
+ #include <QtGui/QRasterWindow>
+ #include <QtGui/QEventPoint>
+ 
+diff --git a/tests/auto/client/seatv4/tst_seatv4.cpp b/tests/auto/client/seatv4/tst_seatv4.cpp
+index 2f5d8f71..47c93db9 100644
+--- a/tests/auto/client/seatv4/tst_seatv4.cpp
++++ b/tests/auto/client/seatv4/tst_seatv4.cpp
+@@ -28,7 +28,9 @@
+ 
+ #include "mockcompositor.h"
+ 
++#if QT_CONFIG(opengl)
+ #include <QtOpenGL/QOpenGLWindow>
++#endif
+ #include <QtGui/QRasterWindow>
+ #if QT_CONFIG(cursor)
+ #include <wayland-cursor.h>
+diff --git a/tests/auto/client/shared/CMakeLists.txt b/tests/auto/client/shared/CMakeLists.txt
+index b028dff1..536ee8b1 100644
+--- a/tests/auto/client/shared/CMakeLists.txt
++++ b/tests/auto/client/shared/CMakeLists.txt
+@@ -44,10 +44,14 @@ qt6_generate_wayland_protocol_server_sources(SharedClientTest
+         ${PROJECT_SOURCE_DIR}/src/3rdparty/protocol/xdg-shell.xml
+ )
+ 
++if(QT_FEATURE_opengl)
++    set(ADDITIONAL_TARGETS Qt::OpenGL)
++endif()
++
+ target_link_libraries(SharedClientTest
+     PUBLIC
+         Qt::Gui
+-        Qt::OpenGL
++        ${ADDITIONAL_TARGETS}
+         Qt::WaylandClientPrivate
+         Wayland::Server
+         Threads::Threads # special case
+diff --git a/tests/auto/client/xdgdecorationv1/tst_xdgdecorationv1.cpp b/tests/auto/client/xdgdecorationv1/tst_xdgdecorationv1.cpp
+index 98c0e044..03c7b371 100644
+--- a/tests/auto/client/xdgdecorationv1/tst_xdgdecorationv1.cpp
++++ b/tests/auto/client/xdgdecorationv1/tst_xdgdecorationv1.cpp
+@@ -30,7 +30,9 @@
+ 
+ #include <qwayland-server-xdg-decoration-unstable-v1.h>
+ 
++#if QT_CONFIG(opengl)
+ #include <QtOpenGL/QOpenGLWindow>
++#endif
+ #include <QtGui/QRasterWindow>
+ #include <QtGui/QClipboard>
+ #include <QtCore/private/qcore_unix_p.h>
+diff --git a/tests/auto/client/xdgoutput/tst_xdgoutput.cpp b/tests/auto/client/xdgoutput/tst_xdgoutput.cpp
+index 0e5b2c87..bc05dbc7 100644
+--- a/tests/auto/client/xdgoutput/tst_xdgoutput.cpp
++++ b/tests/auto/client/xdgoutput/tst_xdgoutput.cpp
+@@ -29,7 +29,9 @@
+ #include "xdgoutputv1.h"
+ #include "mockcompositor.h"
+ 
++#if QT_CONFIG(opengl)
+ #include <QtOpenGL/QOpenGLWindow>
++#endif
+ #include <QtGui/QRasterWindow>
+ #include <QtGui/QScreen>
+ 
+diff --git a/tests/auto/client/xdgshell/tst_xdgshell.cpp b/tests/auto/client/xdgshell/tst_xdgshell.cpp
+index b8b41d1e..d2cd1166 100644
+--- a/tests/auto/client/xdgshell/tst_xdgshell.cpp
++++ b/tests/auto/client/xdgshell/tst_xdgshell.cpp
+@@ -27,7 +27,9 @@
+ ****************************************************************************/
+ 
+ #include "mockcompositor.h"
++#if QT_CONFIG(opengl)
+ #include <QtOpenGL/QOpenGLWindow>
++#endif
+ #include <QtGui/QRasterWindow>
+ #include <QtGui/qpa/qplatformnativeinterface.h>
+ #include <QtWaylandClient/private/wayland-wayland-client-protocol.h>
