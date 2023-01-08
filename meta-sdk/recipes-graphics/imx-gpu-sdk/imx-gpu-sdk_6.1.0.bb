@@ -4,9 +4,9 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://License.md;md5=9d58a2573275ce8c35d79576835dbeb8"
 
 DEPENDS_BACKEND = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11',  ' xrandr', \
-                                                                '', d), d)}"
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' libxdg-shell wayland', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11',               ' xrandr', \
+                                                                             '', d), d)}"
 DEPENDS_MX8       = ""
 DEPENDS_MX8:mx8-nxp-bsp   = " \
     glslang-native \
@@ -46,10 +46,10 @@ require imx-gpu-sdk-src.inc
 
 S = "${WORKDIR}/git"
 
-BACKEND = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11',     'X11', \
-                                                             'FB', d), d)}"
+WINDOW_SYSTEM = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland_XDG', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11',         'X11', \
+                                                                 'FB', d), d)}"
 
 FEATURES                  = "EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,OpenVG"
 FEATURES:append:imxgpu2d  = ",G2D"
@@ -72,7 +72,7 @@ do_compile () {
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     . ./prepare.sh
-    FslBuild.py -vvvvv -t sdk --UseFeatures [${FEATURES}] --UseExtensions [${EXTENSIONS}] --Variants [WindowSystem=${BACKEND}] --BuildThreads ${@oe.utils.parallel_make(d)} -c install --CMakeInstallPrefix ${S}
+    FslBuild.py -vvvvv -t sdk --UseFeatures [${FEATURES}] --UseExtensions [${EXTENSIONS}] --Variants [WindowSystem=${WINDOW_SYSTEM}] --BuildThreads ${@oe.utils.parallel_make(d)} -c install --CMakeInstallPrefix ${S}
 }
 
 REMOVALS = " \
