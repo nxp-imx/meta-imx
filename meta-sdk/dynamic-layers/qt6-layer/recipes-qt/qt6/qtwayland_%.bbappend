@@ -1,5 +1,10 @@
 ###Copy qtwayland bbappend from meta-freescale
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+SRC_URI:append = " \
+    file://qtwayland-fix-no-opengl-build.patch \
+"
+
 # etnaviv mesa does not have glx
 PACKAGECONFIG:remove:use-mainline-bsp = "xcomposite-glx"
 

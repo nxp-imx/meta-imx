@@ -18,8 +18,7 @@ QT6_FONTS = "ttf-dejavu-common ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-s
 # Install qtquick3d
 QT6_QTQUICK3D = "qtquick3d qtquick3d-dev qtquick3d-examples"
 
-QT6_IMAGE_INSTALL = ""
-QT6_IMAGE_INSTALL_common = " \
+QT6_IMAGE_INSTALL = " \
     packagegroup-qt6-demos \
     ${QT6_QTQUICK3D} \
     ${QT6_FONTS} \
@@ -28,15 +27,7 @@ QT6_IMAGE_INSTALL_common = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'nxp-demo-experience', '', d)}\
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d)}\
     "
-QT6_IMAGE_INSTALL:imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT6_IMAGE_INSTALL_common}', \
-    'qtbase qtbase-plugins', d)}"
 
-QT6_IMAGE_INSTALL:imxpxp = "${@bb.utils.contains('DISTRO_FEATURES', 'x11','${QT6_IMAGE_INSTALL_common}', \
-    'qtbase qtbase-examples qtbase-plugins', d)}"
-
-QT6_IMAGE_INSTALL:imxgpu3d = " \
-    ${QT6_IMAGE_INSTALL_common} \
-"
 RDEPENDS:${PN} += " \
     ${QT6_IMAGE_INSTALL} \
 "
