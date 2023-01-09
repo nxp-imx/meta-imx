@@ -3,6 +3,7 @@ From: Cristinel Panfir <cristinel.panfir@nxp.com>
 Date: Mon, 27 Jul 2020 18:55:30 +0000
 Subject: [PATCH] Makefile: Fix LIBDIR for multilib
 
+Upstream-Status: Pending
 Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
 ---
  Makefile | 3 ++-

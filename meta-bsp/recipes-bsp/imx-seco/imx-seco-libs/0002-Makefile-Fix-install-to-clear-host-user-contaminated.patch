@@ -1,6 +1,6 @@
-From 99249f0f199d95f4a5213561dc0ce33f70b1e717 Mon Sep 17 00:00:00 2001
+From 59608dcb0f0a6f6d8154b1d331c2403d7c1143eb Mon Sep 17 00:00:00 2001
 From: Cristinel Panfir <cristinel.panfir@nxp.com>
-Date: Mon, 29 Mar 2021 15:20:55 +0300
+Date: Fri, 5 Feb 2021 19:27:00 +0200
 Subject: [PATCH] Makefile: Fix install to clear host-user-contaminated
  warnings [HSM-483]
 
@@ -9,6 +9,8 @@ imx-seco-libs: /usr/lib/hsm_lib.a is owned by uid 26292, which is the same as th
 imx-seco-libs: /usr/lib/she_lib.a is owned by uid 26292, which is the same as the user running bitbake. This may be due to host contamination
 imx-seco-libs: /usr/lib/seco_nvm_manager.a is owned by uid 26292, which is the same as the user running bitbake.
 This may be due to host contamination [host-user-contaminated]
+
+Upstream-Status: Pending
 
 Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
 ---
@@ -30,4 +32,3 @@ index 492d700..25ad333 100644
  
 -- 
 2.25.1
-
