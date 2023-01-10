@@ -9,6 +9,7 @@ inherit populate_sdk_qt6
 CONFLICT_DISTRO_FEATURES = "directfb"
 
 IMAGE_INSTALL += " \
+    curl \
     packagegroup-imx-ml \
     packagegroup-qt6-imx \
     tzdata \
