@@ -112,6 +112,7 @@ SRC_URI:remove = " \
     file://0003-viv-fb-Make-sure-config.h-is-included.patch \
     file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch"
 SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
+SRC_URI += "file://0001-gstallocatorphymem.c-Typecast-result-of-gst_phymem_g.patch"
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "imx-1.20.x"
 SRCREV = "cbf542ce3e0bad1009d5ecf72707e870c375c3f0" 
@@ -135,6 +136,10 @@ PACKAGECONFIG[g2d] = ",,virtual/libg2d"
 PACKAGECONFIG[viv-fb] = ",,virtual/libgles2"
 
 EXTRA_OEMESON += "-Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}""
+
+# links with imx-gpu libs which are pre-built for glibc
+# gcompat will address it during runtime
+LDFLAGS:append:imxgpu:libc-musl = " -Wl,--allow-shlib-undefined"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 

@@ -3,7 +3,7 @@
 # recipe. The second section customizes the recipe for i.MX.
 
 ########### OE-core copy ##################
-# Upstream hash: 4aee173335f8d0d0723d629a0dd16a0d1c4ce463
+# Upstream hash: 66ba273c10b7d738f18620b5a2883d735fff3162
 
 require recipes-multimedia/gstreamer/gstreamer1.0-plugins-common.inc
 
@@ -94,16 +94,13 @@ FILES:${PN}-equalizer += "${datadir}/gstreamer-1.0/presets/*.prs"
 DEFAULT_PREFERENCE = "-1"
 
 # fb implementation of v4l2 uses libdrm
-DEPENDS_V4L2 = "${@bb.utils.contains_any('DISTRO_FEATURES', 'wayland x11', '', 'libdrm', d)}"
 DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'v4l2', '${DEPENDS_V4L2}', '', d)}"
-RDEPENDS:${PN}-soup += "${@bb.utils.contains('PACKAGECONFIG', 'soup', 'libsoup-2.4', '', d)}"
+DEPENDS_V4L2 = "${@bb.utils.contains_any('DISTRO_FEATURES', 'wayland x11', '', 'libdrm', d)}"
 
-SRC_URI:remove = " \
-    https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz \
-"
+SRC_URI:remove  = "https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz"
+SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "imx-1.20.x"
-SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
 SRCREV = "1e4e795fc09cbaf475af5cf0a64dd267daf1d1c0"
 
 S = "${WORKDIR}/git"
