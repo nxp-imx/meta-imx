@@ -2,7 +2,6 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
 # Copyright 2017-2021 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
-
 DESCRIPTION = "Freescale Multimedia parser libs"
 LICENSE = "Proprietary"
 SECTION = "multimedia"

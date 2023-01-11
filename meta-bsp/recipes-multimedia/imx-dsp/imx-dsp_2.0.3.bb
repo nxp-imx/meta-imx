@@ -12,14 +12,10 @@ SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "cff9760c1538ffa0c038d40ce54ab396"
 SRC_URI[sha256sum] = "b0c74ca8cef25746866c34d6e52a6ff575f25096268f7035706d98f4fdd74fc0"
 
-EXTRA_OECONF = "-datadir=${base_libdir}/firmware --bindir=/unit_tests ${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8', ' ', d)}"
-
-RDEPENDS:${PN} += " imx-dsp-codec-ext"
-
-FILES:${PN} = "${libdir}/imx-mm/audio-codec/dsp \
-               ${libdir}/imx-mm/audio-codec/wrap \
-               ${base_libdir}/firmware/imx/dsp \
-               /unit_tests \
+EXTRA_OECONF = " \
+    -datadir=${base_libdir}/firmware \
+    --bindir=/unit_tests \
+    ${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8', '', d)} \
 "
 
 HIFI4_PLATFORM               ?= "HIFI4_PLATFORM_IS_UNDEFINED"
@@ -42,6 +38,13 @@ do_install:append () {
         find ${D}/unit_tests/DSP -name $unsupported_test* -exec rm {} \;
     done
 }
+
+FILES:${PN} = "${libdir}/imx-mm/audio-codec/dsp \
+               ${libdir}/imx-mm/audio-codec/wrap \
+               ${base_libdir}/firmware/imx/dsp \
+               /unit_tests \
+"
+RDEPENDS:${PN} += "imx-dsp-codec-ext"
 
 INSANE_SKIP:${PN} = "already-stripped arch ldflags dev-so"
 

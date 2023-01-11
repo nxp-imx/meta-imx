@@ -11,7 +11,7 @@ PROVIDES += "libfslcodec"
 inherit autotools pkgconfig
 
 PACKAGECONFIG ??= "${PACKAGECONFIG_VPU}"
-# Supports Chips&Media VPU only
+# Support Chips&Media VPU only
 PACKAGECONFIG_VPU               = ""
 PACKAGECONFIG_VPU:mx6q-nxp-bsp  = "vpu"
 PACKAGECONFIG_VPU:mx6dl-nxp-bsp = "vpu"
@@ -36,7 +36,7 @@ python __set_insane_skip() {
     # Ensure we have PACKAGES expanded
     bb.build.exec_func("read_subpackage_metadata", d)
 
-    for p in d.getVar('PACKAGES', True).split():
+    for p in d.getVar('PACKAGES').split():
         # Even though we are packaging libraries those are plugins so we
         # shouldn't rename the packages to follow its sonames.
         d.setVar("DEBIAN_NOAUTONAME:%s" % p, "1")
@@ -112,5 +112,4 @@ FILES:${PN}-nb += "${libdir}/imx-mm/audio-codec/wrap/lib_nbamrd_wrap_arm*_elinux
 FILES:${PN}-wb += "${libdir}/imx-mm/audio-codec/wrap/lib_wbamrd_wrap_arm*_elinux.so.*"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
-
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
