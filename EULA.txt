@@ -1,4 +1,5 @@
-LA_OPT_NXP_Software_License v40 December 2022
+LA_OPT_NXP_Software_License v42 January 2023
+
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
 downloading, installing, or using the Licensed Software, you indicate that you
@@ -343,13 +344,16 @@ examination or audit.
 22.        NOTICES.             All notices and communications under this
 Agreement will be made in writing, and will be effective when received at the
 following addresses:
-          NXP:      NXP B.V.
-                    High Tech Campus 60
-                    5656 AG Eindhoven
-                    The Netherlands
-                    ATTN: Legal Department
 
-          You:      The address provided at registration will be used.
+NXP:
+NXP B.V.
+High Tech Campus 60
+5656 AG Eindhoven
+The Netherlands
+ATTN: Legal Department
+
+You:
+The address provided at registration will be used.
 
 23.        RELATIONSHIP OF THE PARTIES.     The parties are independent
 contractors. Nothing in this Agreement will be construed to create any
@@ -600,6 +604,13 @@ manufacturer in good standing with a current license with Real Networks for the
 commercial use and distribution of products containing the GStreamer Optimized
 Real Format Client Code implementation or OpenMax Optimized Real Format Client
 Code
+
+Real-Time Innovations, Inc.: Not withstanding anything in this Agreement,
+Real-Time Innovations, Inc. software must be used strictly in accordance with
+Real-Time Innovations, Inc.'s Automotive Software Evaluation License Agreement,
+available here:
+https://www.rti.com/hubfs/_Collateral/Services_and_Support/Automotive_Evaluation
+_SLA_90_dayNXP.pdf .  Any other use is expressly prohibited.
 
 RivieraWaves SAS (a member of the CEVA, Inc. family of companies): You may not
 use the RivieraWaves intellectual property licensed under this Agreement if you
