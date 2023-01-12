@@ -1,4 +1,4 @@
-# Copyright 2020-2022 NXP
+# Copyright 2020-2023 NXP
 DESCRIPTION = "cross-platform, high performance scoring engine for ML models"
 SECTION = "devel"
 LICENSE = "MIT & Apache-2.0"
@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "${LIC_FILES_CHKSUM_runtime} ${LIC_FILES_CHKSUM_model}"
 DEPENDS = "libpng zlib ${BPN}-native"
 
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH_runtime = "imx_1.10.0"
+SRCBRANCH_runtime = "imx_1.13.1"
 SRC_URI = " \
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH_runtime};name=runtime \
     https://github.com/onnx/models/raw/${SRCREV_model}/LICENSE;name=model-license \
@@ -19,7 +19,7 @@ SRC_URI[model-license.md5sum] = "3b83ef96387f14655fc854ddc3c6bd57"
 SRC_URI[model-license.sha256sum] = "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
 SRC_URI[model-squeezenet.md5sum] = "92e240a948f9bbc92534d752eb465317"
 SRC_URI[model-squeezenet.sha256sum] = "f4c9a2906a949f089bee5ef1bf9ea1c0dc1b49d5abeb1874fff3d206751d0f3b"
-SRCREV_runtime = "c2d1ebb00ad9e4dd0300e28808a46e7a543284a8"
+SRCREV_runtime = "e519764c754716da6aff5c1bf3dfafe52057f0e1" 
 SRCREV_model = "6ab957a2fe61f34a76c670946f7cbd806d2cacca"
 SRCREV_FORMAT = "runtime_model"
 
@@ -38,23 +38,36 @@ OECMAKE_GENERATOR = "Unix Makefiles"
 # Eigen: 
 #   - the git operation within CMake fails, so we treat it as 'pre-installed' although it's fetched during fetch phase
 #   - the eigen_SOURCE_PATH needs to match 'destsuffix' in SRC_URI for eigen
+# Abseil:
+#   - FETCHCONTENT_FULLY_DISCONNECTED=OFF and do_configure:prepend() added to allow
+#     abseil build process (the issue was related to CMake not fetching sources)
 
 EXTRA_OECMAKE += "\
--DONNX_CUSTOM_PROTOC_EXECUTABLE=${STAGING_BINDIR_NATIVE}/${PN}-native/protoc \
--DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DONNX_CUSTOM_PROTOC_EXECUTABLE=${STAGING_BINDIR_NATIVE}/${PN}-native/protoc \
+    -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -Donnxruntime_BUILD_UNIT_TESTS=ON \
 "
 
-PYTHON_DEPENDS = "${PYTHON_PN} ${PYTHON_PN}-pip-native ${PYTHON_PN}-wheel-native ${PYTHON_PN}-setuptools-native ${PYTHON_PN}-numpy-native"
-PYTHON_RDEPENDS = "${PYTHON_PN} ${PYTHON_PN}-numpy ${PYTHON_PN}-protobuf ${PYTHON_PN}-flatbuffers"
+PYTHON_DEPENDS = "\
+    ${PYTHON_PN} \
+    ${PYTHON_PN}-pip-native \
+    ${PYTHON_PN}-wheel-native \
+    ${PYTHON_PN}-setuptools-native \
+    ${PYTHON_PN}-numpy-native \
+    ${PYTHON_PN}-packaging-native\
+"
 
-PACKAGECONFIG_VSI_NPU                    = ""
-PACKAGECONFIG_VSI_NPU:mx8-nxp-bsp:imxgpu = "vsi_npu"
-PACKAGECONFIG_VSI_NPU:mx8mm-nxp-bsp      = ""
-# The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
-# support OpenVX
-PACKAGECONFIG_VSI_NPU:mx8ulp-nxp-bsp     = ""
+PYTHON_RDEPENDS = "\
+    ${PYTHON_PN} \
+    ${PYTHON_PN}-numpy \
+    ${PYTHON_PN}-protobuf \
+    ${PYTHON_PN}-coloredlogs \
+    ${PYTHON_PN}-flatbuffers \
+    ${PYTHON_PN}-sympy \
+"
 
-PACKAGECONFIG ?= "openmp reports sharedlib eigenblas nnapi python ${PACKAGECONFIG_VSI_NPU}"
+PACKAGECONFIG ?= "crosscompiling sharedlib nnapi python"
 
 PACKAGECONFIG[nsync] = "-Donnxruntime_USE_NSYNC=ON, -Donnxruntime_USE_NSYNC=OFF"
 PACKAGECONFIG[prebuilt] = "-Donnxruntime_USE_PREBUILT_PB=ON, -Donnxruntime_USE_PREBUILT_PB=OFF"
@@ -98,7 +111,14 @@ PACKAGECONFIG[jemalloc] = "-Donnxruntime_USE_JEMALLOC=ON, -Donnxruntime_USE_JEMA
 PACKAGECONFIG[mimalloc] = "-Donnxruntime_USE_MIMALLOC=ON, -Donnxruntime_USE_MIMALLOC=OFF"
 PACKAGECONFIG[csharp] = "-Donnxruntime_BUILD_CSHARP=ON, -Donnxruntime_BUILD_CSHARP=OFF"
 PACKAGECONFIG[java] = "-Donnxruntime_BUILD_JAVA=ON, -Donnxruntime_BUILD_JAVA=OFF"
-PACKAGECONFIG[vsi_npu] = "-Donnxruntime_USE_VSI_NPU=ON -Donnxruntime_OVXLIB_INCLUDE=${STAGING_INCDIR}/OVXLIB, -Donnxruntime_USE_VSI_NPU=OFF, nn-imx"
+
+do_configure[network] = "1"
+do_configure:prepend() {
+    export HTTP_PROXY=${http_proxy}
+    export HTTPS_PROXY=${https_proxy}
+    export http_proxy=${http_proxy}
+    export https_proxy=${https_proxy}
+}
 
 do_compile[network] = "1"
 do_compile:prepend() {
@@ -122,9 +142,30 @@ do_compile:append() {
 do_install:append() {
     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
     
-    # copy extracted squeezenet tarball and add Apache2 license
+    # Ensure target dir exists
+    install -d ${D}${bindir}/${BP}
+
+    # Copy extracted squeezenet tarball and add Apache2 license
     cp $CP_ARGS ${WORKDIR}/squeezenet ${D}${bindir}/${BP}
     install -m 0644 ${WORKDIR}/LICENSE ${D}${bindir}/${BP}/squeezenet
+
+    # If cmake installs 'onnx_test_runner' at bindir level, move to package
+    if [ -f ${D}${bindir}/onnx_test_runner ]; then
+        mv ${D}${bindir}/onnx_test_runner ${D}${bindir}/${BP}/
+    fi
+
+    # Install onnxruntime_perf_test in main package
+    install -m 0755 ${B}/onnxruntime_perf_test ${D}${bindir}/${BP}
+
+    # Install test binaries and data in test package
+    install -d ${D}${bindir}/${BP}/tests
+    install -m 0744 ${B}/libcustom_op_library.so ${D}${bindir}/${BP}/tests
+    install -m 0744 ${B}/onnxruntime_api_tests_without_env ${D}${bindir}/${BP}/tests
+    install -m 0744 ${B}/onnxruntime_global_thread_pools_test ${D}${bindir}/${BP}/tests
+    install -m 0744 ${B}/onnxruntime_mlas_test ${D}${bindir}/${BP}/tests
+    install -m 0744 ${B}/onnxruntime_shared_lib_test ${D}${bindir}/${BP}/tests
+    install -m 0744 ${B}/onnxruntime_test_all ${D}${bindir}/${BP}/tests
+    cp $CP_ARGS ${B}/testdata ${D}${bindir}/${BP}/tests
 
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
         export PIP_DISABLE_PIP_VERSION_CHECK=1
@@ -140,7 +181,7 @@ do_install:append() {
 # libonnxruntime_providers_shared.so is being packaged into -dev which is intended
 INSANE_SKIP:${PN}-dev += "dev-elf"
 
-# a separate tests package for the test binaries not appearing in the main package
+# A separate tests package for the test binaries not appearing in the main package
 PACKAGE_BEFORE_PN = "${PN}-tests"
 FILES:${PN}-tests = "${bindir}/${BP}/tests/*"
 FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
