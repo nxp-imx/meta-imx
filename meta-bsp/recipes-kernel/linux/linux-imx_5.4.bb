@@ -17,7 +17,7 @@ LOCALVERSION = "-2.1.4"
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https"
 SRC_URI = "${KERNEL_SRC};branch=${KERNEL_BRANCH}"
 
-SRCREV = "babac008e5cf168abca1a85bda2e8071ca27a5c0"
+SRCREV = "b84dec983830baf89594fc8aa5eccd707480ede8"
 
 FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
 
