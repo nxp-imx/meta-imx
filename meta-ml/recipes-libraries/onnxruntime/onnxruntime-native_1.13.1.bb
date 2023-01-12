@@ -1,13 +1,13 @@
-# Copyright 2021 NXP
+# Copyright 2023 NXP
 DESCRIPTION = "Parts of ONNX Runtime that needs to be compiled for native system"
 SECTION = "devel"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 
 # For ONNX Runtime v0.3.0 we need only 'protoc' to be compiled for native system
-# 3.16.0
-GIT_protobuf = "git://github.com/google/protobuf.git;branch=main;name=protobuf;protocol=https"
-SRCREV_protobuf = "2dc747c574b68a808ea4699d26942c8132fe2b09"
+# 3.18.3
+GIT_protobuf = "git://github.com/google/protobuf.git;nobranch=1;name=protobuf;protocol=https"
+SRCREV_protobuf = "a902b39270841beafc307dfa709610aa1cac2f06" 
 
 SRC_URI = "\
     ${GIT_protobuf} \
