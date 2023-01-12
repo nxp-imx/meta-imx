@@ -13,6 +13,7 @@ DEPENDS = "json-c optee-os-tadevkit optee-client python3-cryptography-native"
 DEPENDS:append:mx8qxp-nxp-bsp = " imx-seco-libs"
 DEPENDS:append:mx8dx-nxp-bsp  = " imx-seco-libs"
 DEPENDS:append:mx8ulp-nxp-bsp  = " imx-secure-enclave"
+DEPENDS:append:mx93-nxp-bsp  = " imx-secure-enclave"
 
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw;destsuffix=git/smw \
            ${PSA_LIB_SRC};branch=${SRCBRANCH_psa};name=psa;destsuffix=git/${PSA_ARCH_TESTS_SRC_PATH} \
@@ -46,6 +47,7 @@ EXTRA_OECMAKE = " \
 EXTRA_OECMAKE_IMX:mx8qxp-nxp-bsp = "-DSECO_ROOT=${STAGING_DIR_HOST}"
 EXTRA_OECMAKE_IMX:mx8dx-nxp-bsp  = "-DSECO_ROOT=${STAGING_DIR_HOST}"
 EXTRA_OECMAKE_IMX:mx8ulp-nxp-bsp = "-DELE_ROOT=${STAGING_DIR_HOST}"
+EXTRA_OECMAKE_IMX:mx93-nxp-bsp = "-DELE_ROOT=${STAGING_DIR_HOST}"
 
 OECMAKE_TARGET_COMPILE += "build_tests"
 OECMAKE_TARGET_INSTALL += "install_tests"
