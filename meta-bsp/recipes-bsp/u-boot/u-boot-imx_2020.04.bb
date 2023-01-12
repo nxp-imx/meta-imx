@@ -18,7 +18,7 @@ UBOOT_SRC ?= "git://github.com/nxp-imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "imx_v2020.04_5.4.24_2.1.0"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH} \
 "
-SRCREV = "4979a99482f7e04a3c1f4fb55e3182395ee8f710"
+SRCREV = "020c486ae434087040a873bd14714ca9a8aa19c4"
 
 S = "${WORKDIR}/git"
 
