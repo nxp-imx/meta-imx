@@ -105,6 +105,13 @@ SRCREV = "66192ef050c12fc3f510295c93e79ab7fd5f1ae5"
 
 S = "${WORKDIR}/git"
 
+PACKAGECONFIG[soup] = "-Dsoup=enabled,-Dsoup=disabled"
+# Starting with version 1.20, the GStreamer soup plugin loads libsoup with dlopen()
+# instead of linking to it. And instead of using the default libsoup C headers, it
+# uses its own stub header. Consequently, objdump will not show the libsoup .so as
+# a dependency, and libsoup won't be added to an image.
+RDEPENDS:${PN}-soup += "libsoup-2.4"
+
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 
 ########### End of i.MX overrides #########
