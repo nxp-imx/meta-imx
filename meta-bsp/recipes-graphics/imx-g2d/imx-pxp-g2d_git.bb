@@ -13,7 +13,7 @@ PV = "2.1.0+git${SRCPV}"
 SRC_URI = "${IMX_PXP_G2D_SRC};branch=${SRCBRANCH}"
 IMX_PXP_G2D_SRC ?= "git://github.com/nxp-imx/imx-g2d-pxp.git;protocol=https"
 SRCBRANCH ?= "master"
-SRCREV = "77fbd103752265b8b3d637fc4e80d70401a5d44a"
+SRCREV = "c2385b5617f991c741b669c7a2e1237fa6c376ca"
 
 S = "${WORKDIR}/git"
 
