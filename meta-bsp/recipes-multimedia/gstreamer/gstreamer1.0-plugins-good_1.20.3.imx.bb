@@ -106,7 +106,7 @@ SRCREV = "66192ef050c12fc3f510295c93e79ab7fd5f1ae5"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG[soup] = "-Dsoup=enabled,-Dsoup=disabled,libsoup-2.4"
-RDEPENDS:${PN}-soup += "libsoup-2.4"
+RDEPENDS:${PN}-soup += "${MLPREFIX}libsoup-2.4"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 
