@@ -119,6 +119,7 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
 "
 RDEPENDS_EMPTY_MAIN_PACKAGE_MX8       = ""
 RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8-nxp-bsp   = " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'libxdg-shell', '', d)} \
     rapidopencl \
     rapidopenvx \
     rapidvulkan \
