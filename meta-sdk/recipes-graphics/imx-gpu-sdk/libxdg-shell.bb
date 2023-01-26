@@ -14,3 +14,6 @@ EXTRA_OECMAKE = " \
     -DWAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner \
     -DWAYLAND_PROTOCOLS_DIR=${STAGING_DATADIR}/wayland-protocols \
 "
+
+ALLOW_EMPTY:${PN} = "1"
+FILES:${PN}-dev += "${libdir}/*.a"
