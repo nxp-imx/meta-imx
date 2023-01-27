@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "${LIC_FILES_CHKSUM_runtime} ${LIC_FILES_CHKSUM_model}"
 
 DEPENDS = "libpng zlib ${BPN}-native"
 
+inherit setuptools3
+
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH_runtime = "imx_1.13.1"
 SRC_URI = " \
@@ -52,8 +54,6 @@ EXTRA_OECMAKE += "\
 PYTHON_DEPENDS = "\
     ${PYTHON_PN} \
     ${PYTHON_PN}-pip-native \
-    ${PYTHON_PN}-wheel-native \
-    ${PYTHON_PN}-setuptools-native \
     ${PYTHON_PN}-numpy-native \
     ${PYTHON_PN}-packaging-native\
 "
@@ -131,10 +131,18 @@ do_compile:prepend() {
     fi
 }
 
+SETUPTOOLS_SETUP_PATH = "${B}"
+
 do_compile:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
-        cd ${WORKDIR}/build
-        ${PYTHON} ${S}/setup.py bdist_wheel
+        # Copy 'setup.py' to build dir
+        cp ${S}/setup.py ${B}
+
+        # Copy path file with path 'docs/python/README.rst' to build dir
+        mkdir -p ${B}/docs/python && cp ${S}/docs/python/README.rst ${B}/docs/python
+        
+        setuptools3_do_compile
+        
         git config --global --add safe.directory ${WORKDIR}/build/pybind11/src/pybind11
     fi
 }
@@ -168,15 +176,15 @@ do_install:append() {
     cp $CP_ARGS ${B}/testdata ${D}${bindir}/${BP}/tests
 
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
-        export PIP_DISABLE_PIP_VERSION_CHECK=1
-        export PIP_NO_CACHE_DIR=1
-        install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
-        ${STAGING_BINDIR_NATIVE}/pip3 install -v \
-            -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-deps \
-            ${WORKDIR}/build/dist/onnxruntime-*.whl
+        setuptools3_do_install
         find ${D}/${PYTHON_SITEPACKAGES_DIR} -type d -name "__pycache__" -exec rm -Rf {} +
     fi
 }
+
+# Adjust the Python runtime dependency inherited from setuptools3-base.bbclass
+# since Python support for this recipe is conditional
+RDEPENDS:${PN}:remove:class-target = " \
+    ${@bb.utils.contains('PACKAGECONFIG', 'python', '', '${PYTHON_PN}-core', d)}"
 
 # libonnxruntime_providers_shared.so is being packaged into -dev which is intended
 INSANE_SKIP:${PN}-dev += "dev-elf"
@@ -184,7 +192,6 @@ INSANE_SKIP:${PN}-dev += "dev-elf"
 # A separate tests package for the test binaries not appearing in the main package
 PACKAGE_BEFORE_PN = "${PN}-tests"
 FILES:${PN}-tests = "${bindir}/${BP}/tests/*"
-FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
 
 # libcustom_op_library.so is in bindir, which is intended;
 # onnxruntime_shared_lib_test requires the shlib to be in the same directory as testdata to run properly
