@@ -142,8 +142,6 @@ do_compile:append() {
         mkdir -p ${B}/docs/python && cp ${S}/docs/python/README.rst ${B}/docs/python
         
         setuptools3_do_compile
-        
-        git config --global --add safe.directory ${WORKDIR}/build/pybind11/src/pybind11
     fi
 }
 
