@@ -115,8 +115,8 @@ imx8*)
     ;;
 esac
 
-# Override the click-through in meta-freescale/EULA
-FSL_EULA_FILE=$CWD/sources/meta-imx/EULA.txt
+# Override the click-through in meta-freescale
+FSL_EULA_FILE=$CWD/sources/meta-imx/LICENSE.txt
 
 # Set up the basic yocto environment
 if [ -z "$DISTRO" ]; then
