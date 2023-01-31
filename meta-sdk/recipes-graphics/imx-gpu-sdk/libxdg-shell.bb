@@ -16,4 +16,4 @@ EXTRA_OECMAKE = " \
 "
 
 ALLOW_EMPTY:${PN} = "1"
-FILES:${PN}-dev += "${libdir}/*.a"
+RDEPENDS:${PN}-dev = "${PN}-staticdev"
