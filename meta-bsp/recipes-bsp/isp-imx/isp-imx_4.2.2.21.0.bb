@@ -50,15 +50,15 @@ do_install() {
     install -d ${D}/opt/imx8-isp/bin/dewarp_config
 
     cp -r ${B}/generated/release/bin/*_test ${D}/opt/imx8-isp/bin
-    cp -r ${B}/generated/release/bin/*2775* ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/*.xml ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/*.drv ${D}/opt/imx8-isp/bin
-    cp -r ${WORKDIR}/${BP}/dewarp/dewarp_config/ ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/isp_media_server ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/vvext ${D}/opt/imx8-isp/bin
+
     cp -r ${B}/generated/release/lib/*.so* ${D}/${libdir}
     cp -r ${B}/generated/release/include/* ${D}/${includedir}
 
+    cp -r ${S}/dewarp/dewarp_config/ ${D}/opt/imx8-isp/bin
     cp ${S}/imx/run.sh ${D}/opt/imx8-isp/bin
     cp ${S}/imx/start_isp.sh ${D}/opt/imx8-isp/bin
 
@@ -79,13 +79,11 @@ FILES_SOLIBSDEV = ""
 FILES:${PN} += "/opt ${libdir}/lib*${SOLIBSDEV}"
 FILES:${PN}-dev += "${FILES_SOLIBS_VERSIONED}"
 FILES_SOLIBS_VERSIONED = " \
-    ${libdir}/libar1335.so \
     ${libdir}/libcppnetlib-client-connections.so \
     ${libdir}/libcppnetlib-server-parsers.so \
     ${libdir}/libcppnetlib-uri.so \
     ${libdir}/libjsoncpp.so \
     ${libdir}/libos08a20.so \
-    ${libdir}/libov2775.so \
 "
 
 RDEPENDS:${PN} = "libdrm"
