@@ -114,7 +114,6 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
     glm \
     googletest \
     half \
-    nlohmann-json \
     rapidjson \
     stb \
 "
