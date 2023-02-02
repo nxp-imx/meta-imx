@@ -52,6 +52,7 @@ WINDOW_SYSTEM = \
                                                                  'FB', d), d)}"
 
 FEATURES                  = "EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,OpenVG"
+FEATURES:append:imxgpu    = ",HW_GPU_VIVANTE"
 FEATURES:append:imxgpu2d  = ",G2D"
 FEATURES:append:imxgpu3d  = ",OpenGLES2"
 FEATURES:append           = "${FEATURES_SOC}"
