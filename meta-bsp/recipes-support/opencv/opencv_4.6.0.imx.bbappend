@@ -1,4 +1,4 @@
-SRCREV_opencv = "d3440df40a6e90cd1d2a1b729bcbc16aa4d42f5d"
+SRCREV_opencv = "98c1567914d53d17d82fd6b78a0106cf6e175db2"
 
 PACKAGECONFIG:append:mx9-nxp-bsp = " dnn text"
 
