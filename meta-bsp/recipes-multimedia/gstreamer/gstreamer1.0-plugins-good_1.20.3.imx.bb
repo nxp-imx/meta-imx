@@ -93,6 +93,11 @@ FILES:${PN}-equalizer += "${datadir}/gstreamer-1.0/presets/*.prs"
 
 DEFAULT_PREFERENCE = "-1"
 
+LIC_FILES_CHKSUM = " \
+    file://LICENSE.txt;md5=a6f89e2100d9b6cdffcea4f398e37343 \
+    file://gst/replaygain/rganalysis.c;beginline=1;endline=23;md5=b60ebefd5b2f5a8e0cab6bfee391a5fe \
+"
+
 # fb implementation of v4l2 uses libdrm
 DEPENDS_V4L2 = "${@bb.utils.contains_any('DISTRO_FEATURES', 'wayland x11', '', 'libdrm', d)}"
 DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'v4l2', '${DEPENDS_V4L2}', '', d)}"
