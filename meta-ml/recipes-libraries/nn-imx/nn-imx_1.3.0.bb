@@ -7,7 +7,7 @@ DEPENDS = "imx-gpu-viv"
 SRC_URI = "${NN_IMX_SRC};branch=${SRCBRANCH}"
 NN_IMX_SRC ?= "git://github.com/nxp-imx/nn-imx.git;protocol=https"
 SRCBRANCH = "imx_1.3.0"
-SRCREV = "c4d3f4b1f98ca2669df9eb43f55ea15349f9634a"
+SRCREV = "da5357bb1e8bd2be4c5b50b3e8abe440102dc4b4"
 
 S = "${WORKDIR}/git"
 
