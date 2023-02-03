@@ -20,8 +20,7 @@ RREPLACES:${PN} = "gst1.0-fsl-plugin"
 RPROVIDES:${PN} = "gst1.0-fsl-plugin"
 RCONFLICTS:${PN} = "gst1.0-fsl-plugin"
 
-LIC_FILES_CHKSUM = "file://COPYING-LGPL-2;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-                    file://COPYING-LGPL-2.1;md5=fbc093901857fcd118f065f900982c24"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
 
 IMXGST_SRC ?= "git://github.com/nxp-imx/imx-gst1.0-plugin.git;protocol=https"
 SRCBRANCH = "MM_04.07.03_2301_L6.1.y"
