@@ -9,7 +9,7 @@ DEPENDS = "libgpuperfcnt"
 GPUTOP_SRC ?= "git://github.com/nxp-imx/imx-gputop.git;protocol=https"
 SRCBRANCH = "release"
 SRC_URI = "${GPUTOP_SRC};branch=${SRCBRANCH} "
-SRCREV = "df99005c6c5a36551a9313032fbecfac5c399f77" 
+SRCREV = "5b9d7d38fa346e1171639459eee2ee3dd7bc0bd1"
 
 S = "${WORKDIR}/git"
 
