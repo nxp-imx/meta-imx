@@ -15,7 +15,7 @@ NNSHARK_SRC ?= "gitsm://github.com/nxp-imx/nnshark.git;protocol=https"
 SRCBRANCH ?= "2021.10.imx"
 SRC_URI = "${NNSHARK_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "c815749eac865bfb7175c61ed13093e6837aea6f"
+SRCREV = "e905828f16e3c374da7da9af30a5922086da4400"
 
 S = "${WORKDIR}/git"
 
