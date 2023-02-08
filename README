@@ -1,4 +1,4 @@
-i.MX Linux Yocto Project BSP 5.15.X_2.2.0 Release
+i.MX Linux Yocto Project BSP 6.1.1_1.0.0 Release
 =====================================================
 
 Note this is release is not a production release.
@@ -12,7 +12,7 @@ The following boards were tested in this release.
    * NXP i.MX 8MNano EVK (imx8mnevk)
    * NXP i.MX 8MPlus EVK (imx8mpevk)
    * NXP i.MX 8QuadMax MEK (imx8qmmek)
-   * NXP i.MX 8QuadXPlus MEK (imx8qxpmek, imx8qxpc0mek)
+   * NXP i.MX 8QuadXPlus MEK (imx8qxpc0mek)
    * NXP i.MX 8DXL EVK (imx8dxlevk)
    * NXP i.MX 8ULP EVK (imx8ulpevk)
    * NXP i.MX 7ULP EVK (imx7ulpevk)
@@ -31,7 +31,7 @@ Quick Start Guide
 See the i.MX Yocto Project User's Guide for instructions on installing repo.
 
 First install the i.MX Linux BSP repo
-$: repo init -u git://github.com/nxp-imx/imx-manifest.git -b imx-linux-kirkstone -m imx-5.15.X-2.2.0.xml
+$: repo init -u git://github.com/nxp-imx/imx-manifest.git -b imx-linux-langdale -m imx-6.1.1-1.0.0.xml
 
 Download the Yocto Project Layers:
 $: repo sync
