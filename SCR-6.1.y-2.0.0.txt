@@ -381,16 +381,6 @@ Origin:                      NXP (BSD-2-Clause)
 
 --------------------------------------------
 
-Package:                     imx-optee-os-tadevkit.git
-Version:                     3.19.0.imx
-Outgoing License:            BSD-2-Clause 
-License File:                LICENSE
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    Open Portable Trusted Execution Environment TA Devkit for Linux on ARM
-Release Location:            https://github.com/nxp-imx/imx-optee-os -b lf-6.1.y-2.0.0
---------------------------------------------
-
 Package:                     imx-optee-test.git
 Version:                     3.19.0.imx
 Outgoing License:            BSD-2-Clause (ta/) and GPL-2.0 (host/) 
@@ -740,8 +730,6 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
 Release Location:            https://github.com/nxp-imx/imx-g2d-pxp -b lf-6.1.y-2.0.0
-Origin:                      NXP (Proprietary)
-
 --------------------------------------------
 
 Package:                     g2d-samples.git
@@ -1381,7 +1369,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
-Version:                     1.10.0
+Version:                     1.13.1
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
