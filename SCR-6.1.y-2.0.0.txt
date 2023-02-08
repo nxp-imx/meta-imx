@@ -334,7 +334,7 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NAND boot writer
-Release Location:            https://github.com/NXPmicro/imx-kobs -b master
+Release Location:            nxp-imx
 Origin:                      NXP (GPL-2.0)
                              AES (BSD-3-Clause) - http://brgladman.org/oldsite/AES/
                              Secure Hash Algorithm Implementation (Public Domain) - http://www.nic.funet.fi/pub/crypt/hash/sha/
@@ -349,7 +349,7 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A daemon for mfgtools.
-Release Location:            https://github.com/NXPmicro/imx-uuc -b master
+Release Location:            nxp-imx
 Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
@@ -593,7 +593,7 @@ License File:                License.md
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics sample applications
-Release Location:            https://github.com/nxp-imx/gtec-demo-framework -b 6.1.0
+Release Location:            nxp-imx
 Origin:                      NXP (BSD-3-clause)
                          Demo Framework
                              Sascha Willems - Vulkan demo (MIT) - https://github.com/SaschaWillems/Vulkan
@@ -741,7 +741,7 @@ License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
-Release Location:            https://github.com/nxp-imx/g2d-samples -b lf-6.1.y-2.0.0
+Release Location:            nxp-imx
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
@@ -1392,7 +1392,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensors and Dynamic neural networks in Python with strong GPU acceleration
-Release Location:            https://github.com/nxp-imx/pytorch-release -b lf-6.1.y-2.0.0
+Release Location:            nxp-imx
 Origin:                      NXP (BSD-3-Clause)
                              pytorch (BSD-3-clause) - https://github.com/pytorch/pytorch
 
@@ -1469,7 +1469,7 @@ License File:                LICENSE
 Package Category:            Tools
 Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use uuu.
-Release Location:            https://github.com/NXPmicro/mfgtools -b master
+Release Location:            nxp-imx
 Origin:                      NXP (BSD-3-clause)
                              zlib (zlib) - https://github.com/madler/zlib
                              libusb (LGPL-2.1) [libusb-1.0.dll] [dynamic link] - https://github.com/libusb/libusb
@@ -1485,7 +1485,7 @@ License File:                LICENSE
 Package Category:            Tools
 Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use bcu.
-Release Location:            https://github.com/NXPmicro/bcu.git -b master
+Release Location:            nxp-imx
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
