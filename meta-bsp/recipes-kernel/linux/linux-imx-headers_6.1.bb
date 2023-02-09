@@ -12,7 +12,7 @@ LOCALVERSION = "-lts-next"
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRC_URI = "${KERNEL_SRC}"
 
-SRCREV = "e15d7475d152dddd6d8ceb0e67667a359b0e297e"
+SRCREV = "52d15b8b2d82da512ad833a5d3eaa6ddbd0d5017"
 
 S = "${WORKDIR}/git"
 
