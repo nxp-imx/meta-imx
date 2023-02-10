@@ -1479,7 +1479,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.52
+Version:                     1.1.56
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
