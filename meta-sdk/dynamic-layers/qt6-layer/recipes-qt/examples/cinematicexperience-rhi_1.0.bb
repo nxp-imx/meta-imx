@@ -17,6 +17,8 @@ RDEPENDS:${PN} = "liberation-fonts qtdeclarative-qmlplugins"
 
 require recipes-qt/qt6/qt6.inc
 
+QT_PTEST_ENABLED = "0"
+
 do_install() {
     install -d ${D}${datadir}/${P}
     install -m 0755 ${B}/qt5-cinematic-experience ${D}${datadir}/${P}/qt6-cinematic-experience
