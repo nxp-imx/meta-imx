@@ -1,0 +1,141 @@
+From 3c4daafb54f961e376104a461ca7ec114ff0331a Mon Sep 17 00:00:00 2001
+From: Ludek Slosarcik <ludek.slosarcik@nxp.com>
+Date: Fri, 14 Feb 2020 15:46:50 +0100
+Subject: [PATCH] opencv_dnn: added video device for 2 examples, and change text labels
+
+Signed-off-by: Ludek Slosarcik <ludek.slosarcik@nxp.com>
+
+Upstream-Status: Pending
+---
+ samples/cpp/logistic_regression.cpp |  2 +-
+ samples/dnn/classification.cpp      |  7 ++++---
+ samples/dnn/object_detection.cpp    | 10 +++++-----
+ samples/dnn/segmentation.cpp        |  2 +-
+ samples/dnn/text_detection.cpp      |  5 +++--
+ 5 files changed, 14 insertions(+), 12 deletions(-)
+
+Index: git/samples/cpp/logistic_regression.cpp
+===================================================================
+--- git.orig/samples/cpp/logistic_regression.cpp
++++ git/samples/cpp/logistic_regression.cpp
+@@ -28,7 +28,7 @@ static float calculateAccuracyPercent(co
+ 
+ int main()
+ {
+-    const String filename = samples::findFile("data01.xml");
++    const String filename = samples::findFile("../data/data01.xml");
+     cout << "**********************************************************************" << endl;
+     cout << filename
+          << " contains digits 0 and 1 of 20 samples each, collected on an Android device" << endl;
+Index: git/samples/dnn/classification.cpp
+===================================================================
+--- git.orig/samples/dnn/classification.cpp
++++ git/samples/dnn/classification.cpp
+@@ -12,6 +12,7 @@ std::string keys =
+     "{ help  h          | | Print help message. }"
+     "{ @alias           | | An alias name of model to extract preprocessing parameters from models.yml file. }"
+     "{ zoo              | models.yml | An optional path to file with preprocessing parameters }"
++    "{ device           | 0 | camera device number. }"
+     "{ input i          | | Path to input image or video file. Skip this argument to capture frames from a camera.}"
+     "{ initial_width    | 0 | Preprocess input image by initial resizing to a specific width.}"
+     "{ initial_height   | 0 | Preprocess input image by initial resizing to a specific height.}"
+@@ -113,7 +114,7 @@ int main(int argc, char** argv)
+     if (parser.has("input"))
+         cap.open(parser.get<String>("input"));
+     else
+-        cap.open(0);
++        cap.open(parser.get<int>("device"));
+     //! [Open a video file or an image file or a camera stream]
+ 
+     // Process frames.
+@@ -195,14 +196,14 @@ int main(int argc, char** argv)
+         }
+         std::string label = format("Inference time of 1 round: %.2f ms", t1);
+         std::string label2 = format("Average time of 200 rounds: %.2f ms", timeRecorder.getTimeMilli()/200);
+-        putText(frame, label, Point(0, 15), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
+-        putText(frame, label2, Point(0, 35), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
++        putText(frame, label, Point(0, 20), FONT_HERSHEY_SIMPLEX, 0.8, Scalar(0, 0, 255), 2, 8, false);
++        putText(frame, label2, Point(0, 45), FONT_HERSHEY_SIMPLEX, 0.8, Scalar(0, 0, 255), 2, 8, false);
+ 
+         // Print predicted class.
+         label = format("%s: %.4f", (classes.empty() ? format("Class #%d", classId).c_str() :
+                                                       classes[classId].c_str()),
+                                    confidence);
+-        putText(frame, label, Point(0, 55), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
++        putText(frame, label, Point(0, 70), FONT_HERSHEY_SIMPLEX, 0.8, Scalar(0, 0, 255), 2, 8, false);
+ 
+         imshow(kWinName, frame);
+     }
+Index: git/samples/dnn/object_detection.cpp
+===================================================================
+--- git.orig/samples/dnn/object_detection.cpp
++++ git/samples/dnn/object_detection.cpp
+@@ -260,13 +260,13 @@ int main(int argc, char** argv)
+         if (predictionsQueue.counter > 1)
+         {
+             std::string label = format("Camera: %.2f FPS", framesQueue.getFPS());
+-            putText(frame, label, Point(0, 15), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
++            putText(frame, label, Point(0, 20), FONT_HERSHEY_SIMPLEX, 0.8, Scalar(0, 0, 255), 2, 8, false);
+ 
+             label = format("Network: %.2f FPS", predictionsQueue.getFPS());
+-            putText(frame, label, Point(0, 30), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
++            putText(frame, label, Point(0, 45), FONT_HERSHEY_SIMPLEX, 0.8, Scalar(0, 0, 255), 2, 8, false);
+ 
+             label = format("Skipped frames: %d", framesQueue.counter - predictionsQueue.counter);
+-            putText(frame, label, Point(0, 45), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
++            putText(frame, label, Point(0, 70), FONT_HERSHEY_SIMPLEX, 0.8, Scalar(0, 0, 255), 2, 8, false);
+         }
+         imshow(kWinName, frame);
+     }
+@@ -302,7 +302,7 @@ int main(int argc, char** argv)
+         double freq = getTickFrequency() / 1000;
+         double t = net.getPerfProfile(layersTimes) / freq;
+         std::string label = format("Inference time: %.2f ms", t);
+-        putText(frame, label, Point(0, 15), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
++        putText(frame, label, Point(0, 20), FONT_HERSHEY_SIMPLEX, 0.8, Scalar(0, 0, 255), 2, 8, false);
+ 
+         imshow(kWinName, frame);
+     }
+@@ -471,7 +471,7 @@ void drawPred(int classId, float conf, i
+     top = max(top, labelSize.height);
+     rectangle(frame, Point(left, top - labelSize.height),
+               Point(left + labelSize.width, top + baseLine), Scalar::all(255), FILLED);
+-    putText(frame, label, Point(left, top), FONT_HERSHEY_SIMPLEX, 0.5, Scalar());
++    putText(frame, label, Point(left, top), FONT_HERSHEY_SIMPLEX, 0.8, Scalar());
+ }
+ 
+ void callback(int pos, void*)
+Index: git/samples/dnn/segmentation.cpp
+===================================================================
+--- git.orig/samples/dnn/segmentation.cpp
++++ git/samples/dnn/segmentation.cpp
+@@ -162,7 +162,7 @@ int main(int argc, char** argv)
+         double freq = getTickFrequency() / 1000;
+         double t = net.getPerfProfile(layersTimes) / freq;
+         std::string label = format("Inference time: %.2f ms", t);
+-        putText(frame, label, Point(0, 15), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255, 0));
++        putText(frame, label, Point(0, 20), FONT_HERSHEY_SIMPLEX, 0.8, Scalar(0, 0, 255), 2, 8, false);
+ 
+         imshow(kWinName, frame);
+         if (!classes.empty())
+Index: git/samples/dnn/text_detection.cpp
+===================================================================
+--- git.orig/samples/dnn/text_detection.cpp
++++ git/samples/dnn/text_detection.cpp
+@@ -30,6 +30,7 @@ using namespace cv::dnn;
+ const char* keys =
+     "{ help  h              | | Print help message. }"
+     "{ input i              | | Path to input image or video file. Skip this argument to capture frames from a camera.}"
++    "{ device               | 0 | camera device number. }"
+     "{ detModel dmp         | | Path to a binary .pb file contains trained detector network.}"
+     "{ width                | 320 | Preprocess input image by resizing to a specific width. It should be multiple by 32. }"
+     "{ height               | 320 | Preprocess input image by resizing to a specific height. It should be multiple by 32. }"
+@@ -106,7 +107,7 @@ int main(int argc, char** argv)
+ 
+     // Open a video file or an image file or a camera stream.
+     VideoCapture cap;
+-    bool openSuccess = parser.has("input") ? cap.open(parser.get<String>("input")) : cap.open(0);
++    bool openSuccess = parser.has("input") ? cap.open(parser.get<String>("input")) : cap.open(parser.get<int>("device"));
+     CV_Assert(openSuccess);
+ 
+     static const std::string kWinName = "EAST: An Efficient and Accurate Scene Text Detector";
