@@ -261,7 +261,7 @@ SRC_URI:remove = "git://github.com/opencv/opencv.git;name=opencv;branch=master;p
 SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH};name=opencv"
 OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=master"
 SRCBRANCH = "4.6.0_imx"
-SRCREV_opencv = "d3440df40a6e90cd1d2a1b729bcbc16aa4d42f5d"
+SRCREV_opencv = "47a0a1553d1b2885e558afb9478676a5f2bcf4d7"
 
 # Add opencv_extra
 SRC_URI += " \
@@ -276,14 +276,19 @@ SRC_URI += " \
     file://OpenCV_DNN_examples.patch \
 "
 
-PACKAGECONFIG:remove        = "eigen"
-PACKAGECONFIG:append:mx8-nxp-bsp    = " dnn text"
-PACKAGECONFIG_OPENCL        = ""
-PACKAGECONFIG_OPENCL:mx8-nxp-bsp    = "opencl"
-PACKAGECONFIG_OPENCL:mx8dxl-nxp-bsp = ""
-PACKAGECONFIG_OPENCL:mx8mm-nxp-bsp  = ""
-PACKAGECONFIG_OPENCL:mx8mnlite-nxp-bsp  = ""
-PACKAGECONFIG:append        = " ${PACKAGECONFIG_OPENCL}"
+PACKAGECONFIG:remove = "eigen"
+
+PACKAGECONFIG:append:mx8-nxp-bsp = " dnn text"
+PACKAGECONFIG:append:mx9-nxp-bsp = " dnn text"
+
+PACKAGECONFIG:append = " ${PACKAGECONFIG_OPENCL}"
+PACKAGECONFIG_OPENCL                   = ""
+PACKAGECONFIG_OPENCL:mx8-nxp-bsp       = "opencl"
+PACKAGECONFIG_OPENCL:mx8dxl-nxp-bsp    = ""
+PACKAGECONFIG_OPENCL:mx8mm-nxp-bsp     = ""
+PACKAGECONFIG_OPENCL:mx8mnlite-nxp-bsp = ""
+PACKAGECONFIG_OPENCL:mx8mnul-nxp-bsp   = ""
+PACKAGECONFIG_OPENCL:mx8mpul-nxp-bsp   = ""
 
 PACKAGECONFIG[openvx] = "-DWITH_OPENVX=ON -DOPENVX_ROOT=${STAGING_LIBDIR} -DOPENVX_LIB_CANDIDATES='OpenVX;OpenVXU',-DWITH_OPENVX=OFF,virtual/libopenvx,"
 PACKAGECONFIG[qt5] = "-DWITH_QT=ON -DOE_QMAKE_PATH_EXTERNAL_HOST_BINS=${STAGING_BINDIR_NATIVE} -DCMAKE_PREFIX_PATH=${STAGING_BINDIR_NATIVE}/cmake,-DWITH_QT=OFF,qtbase qtbase-native,"
