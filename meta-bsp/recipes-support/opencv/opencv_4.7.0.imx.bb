@@ -259,17 +259,23 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 # Replace the opencv URL with the fork
 SRC_URI:remove = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol=https"
 SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH};name=opencv"
+SRC_URI:remove = "file://0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch"
 OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=master"
-SRCBRANCH = "4.6.0_imx"
-SRCREV_opencv = "47a0a1553d1b2885e558afb9478676a5f2bcf4d7"
+SRCBRANCH = "4.7.0_imx"
+SRCREV_opencv = "3acf6a50fcb4f774728d2338553ad646ccc14b14"
+
+# Update opencv_contrib
+SRC_URI:remove = "git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=master;protocol=https"
+SRC_URI += "git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=4.x;protocol=https"
+SRCREV_contrib = "e247b680a6bd396f110274b6c214406a93171350"
 
 # Add opencv_extra
 SRC_URI += " \
-    git://github.com/opencv/opencv_extra.git;destsuffix=extra;name=extra;branch=master;protocol=https \
+    git://github.com/opencv/opencv_extra.git;destsuffix=extra;name=extra;branch=4.x;protocol=https \
     file://0001-Add-smaller-version-of-download_models.py.patch;patchdir=../extra \
 "
 SRCREV_FORMAT:append = "_extra"
-SRCREV_extra = "936854e2b666853d6d0732a8eabc2d699f4fa3d8"
+SRCREV_extra = "5abbd7e0546bbb34ae7487170383d3e571fb1dd1"
 
 # Patch DNN example
 SRC_URI += " \
