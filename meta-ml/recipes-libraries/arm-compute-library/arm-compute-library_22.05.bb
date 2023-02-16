@@ -32,6 +32,7 @@ EXTRA_OESCONS = " \
     ${PACKAGECONFIG_CONFARGS} \
 "
 EXTRA_OESCONS:append:aarch64 = " arch=arm64-v8a neon=1"
+SCONS_MAXLINELENGTH = ""
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
