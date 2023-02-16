@@ -1,4 +1,4 @@
-SRC_URI:remove = "gitsm://github.com/KhronosGroup/Vulkan-Samples.git;branch=master;protocol=https;lfs=0"
+SRC_URI:remove = "gitsm://github.com/KhronosGroup/Vulkan-Samples.git;branch=main;protocol=https;lfs=0"
 SRC_URI:prepend = "gitsm://github.com/prabhusundar/Vulkan-Samples.git;branch=master;protocol=https;lfs=0 "
 SRCREV = "f969381ecff383efa4020abeb966c16b7ad1f055"
 
