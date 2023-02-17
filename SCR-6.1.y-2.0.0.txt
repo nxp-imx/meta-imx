@@ -710,8 +710,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-2.1.6.bin
-Version:                     2.1.6
+Package:                     imx-dpu-g2d-2.1.8.bin
+Version:                     2.1.8
 Outgoing License:            LA_OPT_NXP_Software_License v42 January 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -801,7 +801,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     opencv-imx.git
-Version:                     4.6.0.imx
+Version:                     4.7.0.imx
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            Graphics
