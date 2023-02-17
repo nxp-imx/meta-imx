@@ -21,17 +21,10 @@ MACHINEOVERRIDES_EXTENDER:mx8dxla1:use-mainline-bsp = "imx-generic-bsp:imx-mainl
 MACHINEOVERRIDES_EXTENDER:mx8dxlb0:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8x-generic-bsp:mx8x-nxp-bsp:mx8dxl-generic-bsp:mx8dxl-nxp-bsp:mx8dxlb0-generic-bsp:mx8dxlb0-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER:mx8dxlb0:use-mainline-bsp = "imx-generic-bsp:imx-mainline-bsp:mx8-generic-bsp:mx8-mainline-bsp:mx8x-generic-bsp:mx8x-mainline-bsp:mx8dxl-generic-bsp:mx8dxl-mainline-bsp:mx8dxlb0-generic-bsp:mx8dxlb0-mainline-bsp"
 
-SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
-ZSTD_COMPRESSION_LEVEL ?= "-10"
-
-# Graphics libraries
-PREFERRED_PROVIDER_virtual/libgles3:imxgpu3d ?= "imx-gpu-viv"
-PREFERRED_PROVIDER_virtual/opencl-icd:imxgpu ?= "imx-gpu-viv"
-
-PREFERRED_VERSION_weston:imx-nxp-bsp ??= "11.0.1.imx"
 # i.MX 6 & 7 stay on weston 10.0 for fbdev
 PREFERRED_VERSION_weston:mx6-nxp-bsp ??= "10.0.3.imx"
 PREFERRED_VERSION_weston:mx7-nxp-bsp ??= "10.0.3.imx"
+PREFERRED_VERSION_weston:imx-nxp-bsp ??= "11.0.1.imx"
 
 PREFERRED_VERSION_wayland-protocols:mx6-nxp-bsp ??= "1.31.imx"
 PREFERRED_VERSION_wayland-protocols:mx7-nxp-bsp ??= "1.31.imx"
@@ -64,3 +57,6 @@ PREFERRED_VERSION_optee-os-tadevkit:mx9-nxp-bsp   ??= "3.19.0.imx"
 
 PREFERRED_VERSION_opencv:mx8-nxp-bsp ??= "4.7.0.imx"
 PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.7.0.imx"
+
+SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
+ZSTD_COMPRESSION_LEVEL ?= "-10"
