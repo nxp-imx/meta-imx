@@ -27,5 +27,7 @@ EXTRA_OEMESON += "-Dtests=false"
 PACKAGES = "${PN}"
 FILES:${PN} += "${datadir}/pkgconfig/wayland-protocols.pc"
 
+BBCLASSEXTEND = "native nativesdk"
+
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
