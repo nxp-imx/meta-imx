@@ -16,8 +16,6 @@ SRCBRANCH = "lf_v2022.04"
 SRCREV = "20eaeb1407cc9c562fb549e51dfd0d4f7e180bba"
 LOCALVERSION = "-${SRCBRANCH}"
 
-DEPENDS += "gnutls-native xxd-native"
-
 # END: Changes to u-boot-imx-common_${PV}.inc
 ###############################################################
 
@@ -26,13 +24,13 @@ PROVIDES += "u-boot"
 inherit uuu_bootloader_tag
 
 UUU_BOOTLOADER             = ""
-UUU_BOOTLOADER:mx6-nxp-bsp = "${UBOOT_BINARY}"
-UUU_BOOTLOADER:mx7-nxp-bsp = "${UBOOT_BINARY}"
+UUU_BOOTLOADER:mx6-generic-bsp = "${UBOOT_BINARY}"
+UUU_BOOTLOADER:mx7-generic-bsp = "${UBOOT_BINARY}"
 UUU_BOOTLOADER_TAGGED             = ""
-UUU_BOOTLOADER_TAGGED:mx6-nxp-bsp = "u-boot-tagged.${UBOOT_SUFFIX}"
-UUU_BOOTLOADER_TAGGED:mx7-nxp-bsp = "u-boot-tagged.${UBOOT_SUFFIX}"
+UUU_BOOTLOADER_TAGGED:mx6-generic-bsp = "u-boot-tagged.${UBOOT_SUFFIX}"
+UUU_BOOTLOADER_TAGGED:mx7-generic-bsp = "u-boot-tagged.${UBOOT_SUFFIX}"
 
-do_deploy:append:mx8m-nxp-bsp() {
+do_deploy:append:mx8m-generic-bsp() {
     # Deploy u-boot-nodtb.bin and fsl-imx8m*-XX.dtb for mkimage to generate boot binary
     if [ -n "${UBOOT_CONFIG}" ]
     then
