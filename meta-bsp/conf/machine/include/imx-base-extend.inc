@@ -63,3 +63,4 @@ PREFERRED_VERSION_optee-os-tadevkit:mx8-nxp-bsp   ??= "3.19.0.imx"
 PREFERRED_VERSION_optee-os-tadevkit:mx9-nxp-bsp   ??= "3.19.0.imx"
 
 PREFERRED_VERSION_opencv:mx8-nxp-bsp ??= "4.7.0.imx"
+PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.7.0.imx"
