@@ -6,25 +6,15 @@ DEPLOY_OPTEE_STMM = "${@bb.utils.contains('MACHINE_FEATURES', 'optee stmm', 'tru
 IMX_M4_DEMOS      = ""
 IMX_M4_DEMOS:mx8-nxp-bsp  = "imx-m4-demos:do_deploy"
 IMX_M4_DEMOS:mx8m-nxp-bsp = ""
+IMX_M4_DEMOS:mx8ulp-nxp-bsp = "imx-m33-demos:do_deploy"
+IMX_M4_DEMOS:mx9-nxp-bsp = ""
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
 M4_DEFAULT_IMAGE:mx8qxp-nxp-bsp = "imx8qx_m4_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE:mx8dxl-nxp-bsp = "imx8dxl_m4_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE:mx8dx-nxp-bsp = "imx8qx_m4_TCM_power_mode_switch.bin"
-
-# Setting for i.MX 8ULP
-IMX_M4_DEMOS:mx8ulp-nxp-bsp = "imx-m33-demos:do_deploy"
 M4_DEFAULT_IMAGE:mx8ulp-nxp-bsp = "imx8ulp_m33_TCM_power_mode_switch.bin"
-ATF_MACHINE_NAME:mx8ulp-nxp-bsp = "bl31-imx8ulp.bin"
-SOC_FAMILY:mx8ulp-nxp-bsp = "mx8ulp"
-REV_OPTION:mx8ulp-generic-bsp = \
-    "${@bb.utils.contains('MACHINE_FEATURES', 'soc-reva0', '', \
-                                                           'REV=A1', d)}"
-# Setting for i.MX 93
-IMX_M4_DEMOS:mx9-nxp-bsp = ""
 M4_DEFAULT_IMAGE:mx9-nxp-bsp = ""
-ATF_MACHINE_NAME:mx9-nxp-bsp = "bl31-imx93.bin"
-SOC_FAMILY:mx9-nxp-bsp = "mx93"
 
 REV_OPTION:mx8dxl-nxp-bsp = "ERROR_8DXL_REV_AMBIGUOUS"
 REV_OPTION:mx8dxlb0-nxp-bsp = "REV=B0"
@@ -58,34 +48,6 @@ do_compile:prepend() {
     esac
 }
 
-compile_mx8ulp() {
-    bbnote 8ULP boot binary build
-    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}/
-    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
-    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/upower.bin          ${BOOT_STAGING}/upower.bin
-    cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${BOOT_STAGING}/u-boot.bin
-    if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
-                                                             ${BOOT_STAGING}/u-boot-spl.bin
-    fi
-}
-
-compile_mx93() {
-    bbnote i.MX 93 boot binary build
-    for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
-        bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
-        cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${BOOT_STAGING}
-    done
-
-    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}/
-    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
-    cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${BOOT_STAGING}/u-boot.bin
-    if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
-                                                             ${BOOT_STAGING}/u-boot-spl.bin
-    fi
-}
-
 do_deploy:append() {
     case ${SOC_FAMILY} in
     mx8)
@@ -110,30 +72,3 @@ do_deploy:append() {
     fi
 
 }
-
-deploy_mx8ulp() {
-    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
-    if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
-                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
-    fi
-}
-
-deploy_mx93() {
-    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-
-    for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/${ddr_firmware}  ${DEPLOYDIR}/${BOOT_TOOLS}
-    done
-
-    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
-    if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ] ; then
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
-                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
-    fi
-}
-
-COMPATIBLE_MACHINE = "(mx8-generic-bsp|mx9-generic-bsp)"
