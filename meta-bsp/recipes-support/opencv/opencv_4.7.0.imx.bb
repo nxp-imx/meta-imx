@@ -319,6 +319,6 @@ do_install:append() {
 
 FILES:${PN}-samples += "${datadir}/OpenCV/samples"
 
-COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp|mx9-nxp-bsp)"
 
 ########## End of i.MX overrides ##########
