@@ -1,1 +1,1 @@
-PTEST_ENABLED = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest x11', '1', '0', d)}"
+RDEPENDS:${PN}-ptest:remove = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', 'tk', d)}"
