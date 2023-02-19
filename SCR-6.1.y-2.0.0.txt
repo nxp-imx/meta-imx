@@ -499,7 +499,7 @@ Graphics Packages
 --------------------------------------------
 
 Package:                     isp-vvcam.git
-Version:                     4.2.2.21.0
+Version:                     4.2.2.22.0
 Outgoing License:            GPL-2.0 
 License File:                vvcam/LICENSE
 Package Category:            Graphics
@@ -510,8 +510,8 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.21.0.bin
-Version:                     4.2.2.21.0
+Package:                     isp-imx-4.2.2.22.0.bin
+Version:                     4.2.2.22.0
 Outgoing License:            LA_OPT_NXP_Software_License v42 January 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -522,8 +522,8 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (proprietary)
 
 --------------------------------------------
 
-Package:                     basler-camera-4.2.2.21.0.bin
-Version:                     4.2.2.21.0
+Package:                     basler-camera-4.2.2.22.0.bin
+Version:                     4.2.2.22.0
 Outgoing License:            LA_OPT_NXP_Software_License v42 January 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
