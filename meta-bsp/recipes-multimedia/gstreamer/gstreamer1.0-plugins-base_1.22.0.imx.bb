@@ -117,7 +117,7 @@ SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 SRC_URI += "file://0001-This-fixes-a-warning-error-found-with-clang-15.patch"
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "imx-1.22.x"
-SRCREV = "f0d52fb185cd8b912c2adb313302db012d9db5f7"
+SRCREV = "789e5c4923a6e3676bc43a61bb2893403fee50fd"
 
 S = "${WORKDIR}/git"
 
