@@ -51,7 +51,7 @@ WINDOW_SYSTEM = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',         'X11', \
                                                                  'FB', d), d)}"
 
-FEATURES                  = "EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,OpenVG"
+FEATURES                  = "ConsoleHost,EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,OpenVG,Test_RequireUserInputToExit,WindowHost"
 FEATURES:append:imxgpu    = ",HW_GPU_VIVANTE"
 FEATURES:append:imxgpu2d  = ",G2D"
 FEATURES:append:imxgpu3d  = ",OpenGLES2"
