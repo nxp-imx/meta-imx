@@ -105,8 +105,8 @@ DEPENDS_V4L2 = "${@bb.utils.contains_any('DISTRO_FEATURES', 'wayland x11', '', '
 SRC_URI:remove  = "https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-${PV}.tar.xz"
 SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;protocol=https"
-SRCBRANCH = "imx-1.22.x"
-SRCREV = "468b3e144f249564c8cce46ec6cf54fb1fce12c5"
+SRCBRANCH = "imx-1.20.x"
+SRCREV = "66192ef050c12fc3f510295c93e79ab7fd5f1ae5"
 
 S = "${WORKDIR}/git"
 

@@ -114,10 +114,10 @@ SRC_URI:remove = " \
     file://0003-viv-fb-Make-sure-config.h-is-included.patch \
     file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch"
 SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
-SRC_URI += "file://0001-This-fixes-a-warning-error-found-with-clang-15.patch"
+SRC_URI += "file://0001-gstallocatorphymem.c-Typecast-result-of-gst_phymem_g.patch"
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
-SRCBRANCH = "imx-1.22.x"
-SRCREV = "789e5c4923a6e3676bc43a61bb2893403fee50fd"
+SRCBRANCH = "imx-1.20.x"
+SRCREV = "91533ea8c68417c7e1c98f9af985c878a0bf4340"
 
 S = "${WORKDIR}/git"
 
