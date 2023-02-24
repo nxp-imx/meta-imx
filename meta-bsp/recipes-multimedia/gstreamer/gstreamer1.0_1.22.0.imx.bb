@@ -3,7 +3,7 @@
 # recipe. The second section customizes the recipe for i.MX.
 
 ########### OE-core copy ##################
-# Upstream hash: a21649109374fde44cf77de845cfb3cb6cbfb138
+# Upstream hash: 2f80b9ee3edfab97f8b3abb551db70e7bfc7c5a0
 
 SUMMARY = "GStreamer 1.0 multimedia framework"
 DESCRIPTION = "GStreamer is a multimedia framework for encoding and decoding video and sound. \
@@ -24,13 +24,12 @@ S = "${WORKDIR}/gstreamer-${PV}"
 
 SRC_URI = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.xz \
            file://run-ptest \
-           file://0001-tests-respect-the-idententaion-used-in-meson.patch;striplevel=3 \
-           file://0002-tests-add-support-for-install-the-tests.patch;striplevel=3 \
+           file://0001-tests-respect-the-idententaion-used-in-meson.patch \
+           file://0002-tests-add-support-for-install-the-tests.patch \
            file://0003-tests-use-a-dictionaries-for-environment.patch;striplevel=3 \
            file://0004-tests-add-helper-script-to-run-the-installed_tests.patch;striplevel=3 \
-           file://0005-tests-remove-gstbin-test_watch_for_state_change-test.patch \
            "
-SRC_URI[sha256sum] = "de094a404a3ad8f4977829ea87edf695a4da0b5c8f613ebe54ab414bac89f031"
+SRC_URI[sha256sum] = "78d21b5469ac93edafc6d8ceb63bc82f6cbbee94d2f866cca6b9252157ee0a09"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
                    check \
@@ -91,10 +90,15 @@ LIC_FILES_CHKSUM = " \
 "
 
 # Use i.MX fork of GST for customizations
-SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.xz"
+SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.xz \
+                file://0001-tests-respect-the-idententaion-used-in-meson.patch \
+                file://0002-tests-add-support-for-install-the-tests.patch \
+                file://0003-tests-use-a-dictionaries-for-environment.patch;striplevel=3 \
+                file://0004-tests-add-helper-script-to-run-the-installed_tests.patch;striplevel=3 \
+"
 SRC_URI:prepend = "${GST1.0_SRC};branch=${SRCBRANCH} "
 GST1.0_SRC ?= "gitsm://github.com/nxp-imx/gstreamer.git;protocol=https"
-SRCBRANCH = "imx-1.20.x"
+SRCBRANCH = "imx-1.22.x"
 SRCREV = "64f45268a01004c220f4963a4fe4db25a97fe9d0"
 
 S = "${WORKDIR}/git"
