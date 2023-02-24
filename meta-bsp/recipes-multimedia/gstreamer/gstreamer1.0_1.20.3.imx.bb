@@ -3,7 +3,7 @@
 # recipe. The second section customizes the recipe for i.MX.
 
 ########### OE-core copy ##################
-# Upstream hash: 2f80b9ee3edfab97f8b3abb551db70e7bfc7c5a0
+# Upstream hash: a21649109374fde44cf77de845cfb3cb6cbfb138
 
 SUMMARY = "GStreamer 1.0 multimedia framework"
 DESCRIPTION = "GStreamer is a multimedia framework for encoding and decoding video and sound. \
@@ -24,12 +24,13 @@ S = "${WORKDIR}/gstreamer-${PV}"
 
 SRC_URI = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.xz \
            file://run-ptest \
-           file://0001-tests-respect-the-idententaion-used-in-meson.patch \
-           file://0002-tests-add-support-for-install-the-tests.patch \
+           file://0001-tests-respect-the-idententaion-used-in-meson.patch;striplevel=3 \
+           file://0002-tests-add-support-for-install-the-tests.patch;striplevel=3 \
            file://0003-tests-use-a-dictionaries-for-environment.patch;striplevel=3 \
            file://0004-tests-add-helper-script-to-run-the-installed_tests.patch;striplevel=3 \
+           file://0005-tests-remove-gstbin-test_watch_for_state_change-test.patch \
            "
-SRC_URI[sha256sum] = "78d21b5469ac93edafc6d8ceb63bc82f6cbbee94d2f866cca6b9252157ee0a09"
+SRC_URI[sha256sum] = "de094a404a3ad8f4977829ea87edf695a4da0b5c8f613ebe54ab414bac89f031"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
                    check \
@@ -40,7 +41,7 @@ PACKAGECONFIG[debug] = "-Dgst_debug=true,-Dgst_debug=false"
 PACKAGECONFIG[tracer-hooks] = "-Dtracer_hooks=true,-Dtracer_hooks=false"
 PACKAGECONFIG[coretracers] = "-Dcoretracers=enabled,-Dcoretracers=disabled"
 PACKAGECONFIG[check] = "-Dcheck=enabled,-Dcheck=disabled"
-# PACKAGECONFIG[tests] = "-Dtests=enabled -Dinstalled_tests=true,-Dtests=disabled -Dinstalled_tests=false"
+PACKAGECONFIG[tests] = "-Dtests=enabled -Dinstalled_tests=true,-Dtests=disabled -Dinstalled_tests=false"
 PACKAGECONFIG[unwind] = "-Dlibunwind=enabled,-Dlibunwind=disabled,libunwind"
 PACKAGECONFIG[dw] = "-Dlibdw=enabled,-Dlibdw=disabled,elfutils"
 PACKAGECONFIG[bash-completion] = "-Dbash-completion=enabled,-Dbash-completion=disabled,bash-completion"
@@ -90,20 +91,13 @@ LIC_FILES_CHKSUM = " \
 "
 
 # Use i.MX fork of GST for customizations
-SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.xz \
-                file://0001-tests-respect-the-idententaion-used-in-meson.patch \
-                file://0002-tests-add-support-for-install-the-tests.patch \
-                file://0003-tests-use-a-dictionaries-for-environment.patch;striplevel=3 \
-                file://0004-tests-add-helper-script-to-run-the-installed_tests.patch;striplevel=3 \
-"
+SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.xz"
 SRC_URI:prepend = "${GST1.0_SRC};branch=${SRCBRANCH} "
 GST1.0_SRC ?= "gitsm://github.com/nxp-imx/gstreamer.git;protocol=https"
-SRCBRANCH = "imx-1.22.x"
-SRCREV = "9b6a8acb4ab718172241924ee4e9b27e1c9eec5c"
+SRCBRANCH = "imx-1.20.x"
+SRCREV = "6d2a525316b3f5cbda6a87fc5b213ab03055f320" 
 
 S = "${WORKDIR}/git"
-
-PACKAGECONFIG[tests] = "-Dtests=enabled,-Dtests=disabled"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 

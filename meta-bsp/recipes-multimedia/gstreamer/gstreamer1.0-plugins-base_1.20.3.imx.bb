@@ -3,7 +3,7 @@
 # recipe. The second section customizes the recipe for i.MX.
 
 ########### OE-core copy ##################
-# Upstream hash: 01ef63c104f3a1ced34330dc07888bc8bcf6f972
+# Upstream hash: a21649109374fde44cf77de845cfb3cb6cbfb138
 
 require recipes-multimedia/gstreamer/gstreamer1.0-plugins-common.inc
 
@@ -18,13 +18,15 @@ SRC_URI = "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-ba
            file://0003-viv-fb-Make-sure-config.h-is-included.patch \
            file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch \
            "
-SRC_URI[sha256sum] = "f53672294f3985d56355c8b1df8f6b49c8c8721106563e19f53be3507ff2229d"
+SRC_URI[sha256sum] = "96d8a6413ba9394fbec1217aeef63741a729d476a505a797c1d5337d8fa7c204"
 
 S = "${WORKDIR}/gst-plugins-base-${PV}"
 
 DEPENDS += "iso-codes util-linux zlib"
 
 inherit gobject-introspection
+
+PACKAGES_DYNAMIC =+ "^libgst.*"
 
 # opengl packageconfig factored out to make it easy for distros
 # and BSP layers to choose OpenGL APIs/platforms/window systems
@@ -53,8 +55,6 @@ PACKAGECONFIG[ogg]          = "-Dogg=enabled,-Dogg=disabled,libogg"
 PACKAGECONFIG[opus]         = "-Dopus=enabled,-Dopus=disabled,libopus"
 PACKAGECONFIG[pango]        = "-Dpango=enabled,-Dpango=disabled,pango"
 PACKAGECONFIG[png]          = "-Dgl-png=enabled,-Dgl-png=disabled,libpng"
-# This enables Qt5 QML examples in -base. The Qt5 GStreamer
-# qmlglsink and qmlglsrc plugins still exist in -good.
 PACKAGECONFIG[qt5]          = "-Dqt5=enabled,-Dqt5=disabled,qtbase qtdeclarative qtbase-native"
 PACKAGECONFIG[theora]       = "-Dtheora=enabled,-Dtheora=disabled,libtheora"
 PACKAGECONFIG[tremor]       = "-Dtremor=enabled,-Dtremor=disabled,tremor"
@@ -100,7 +100,7 @@ def get_opengl_cmdline_list(switch_name, options, d):
 
 CVE_PRODUCT += "gst-plugins-base"
 
-########### End of OE-core copy ###########grep -r
+########### End of OE-core copy ###########
 
 ########### i.MX overrides ################
 
@@ -114,10 +114,10 @@ SRC_URI:remove = " \
     file://0003-viv-fb-Make-sure-config.h-is-included.patch \
     file://0002-ssaparse-enhance-SSA-text-lines-parsing.patch"
 SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
-
+SRC_URI += "file://0001-gstallocatorphymem.c-Typecast-result-of-gst_phymem_g.patch"
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
-SRCBRANCH = "imx-1.22.x"
-SRCREV = "47f6a54d0a6ca0edaea85123a78a0379aeadbb5d"
+SRCBRANCH = "imx-1.20.x"
+SRCREV = "91533ea8c68417c7e1c98f9af985c878a0bf4340"
 
 S = "${WORKDIR}/git"
 
