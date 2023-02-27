@@ -1,6 +1,10 @@
 SRC_URI:remove = "gitsm://github.com/KhronosGroup/Vulkan-Samples.git;branch=main;protocol=https;lfs=0"
-SRC_URI:prepend = "gitsm://github.com/prabhusundar/Vulkan-Samples.git;branch=master;protocol=https;lfs=0 "
-SRCREV = "f969381ecff383efa4020abeb966c16b7ad1f055"
+SRC_URI += " \
+    gitsm://github.com/KhronosGroup/Vulkan-Samples.git;branch=main;protocol=https;lfs=0;name=main \
+    git://github.com/glfw/glfw.git;branch=master;protocol=https;name=glfw;destsuffix=git/third_party/glfw"
+SRCREV_FORMAT = "main_glfw"
+SRCREV_main = "8b945bebf8b2fd987dcf0eeca048068adf4ea44d"
+SRCREV_glfw = "8f470597d625ae28758c16b4293dd42d63e8a83a"
 
 inherit pkgconfig
 
