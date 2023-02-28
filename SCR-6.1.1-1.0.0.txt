@@ -129,7 +129,7 @@ Origin:                      NXP (proprietary)
 Package:                     imx-mkimage.git
 Version:                     
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Make Image BootLoader
@@ -142,7 +142,7 @@ Origin:                      NXP (GPL-2.0)
 Package:                     imx-lib.git
 Version:                     
 Outgoing License:            LGPL-2.1 
-License File:                COPYING-LGPL-2.1
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    BSP libraries
@@ -224,7 +224,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v34 February 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
 License File:                EULA.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -334,7 +334,7 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NAND boot writer
-Release Location:            nxp-imx
+Release Location:            https://github.com/nxp-imx/imx-kobs -b master
 Origin:                      NXP (GPL-2.0)
                              AES (BSD-3-Clause) - http://brgladman.org/oldsite/AES/
                              Secure Hash Algorithm Implementation (Public Domain) - http://www.nic.funet.fi/pub/crypt/hash/sha/
@@ -349,7 +349,7 @@ License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A daemon for mfgtools.
-Release Location:            nxp-imx
+Release Location:            https://github.com/nxp-imx/imx-uuc -b master
 Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
@@ -434,7 +434,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     keyctl_caam.git
 Version:                     
 Outgoing License:            BSD-3-Clause 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP i.MX keyctl tool to manage CAAM Keys
@@ -593,7 +593,7 @@ License File:                License.md
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics sample applications
-Release Location:            nxp-imx
+Release Location:            https://github.com/nxp-imx/gtec-demo-framework -b 6.1.0
 Origin:                      NXP (BSD-3-clause)
                          Demo Framework
                              Sascha Willems - Vulkan demo (MIT) - https://github.com/SaschaWillems/Vulkan
@@ -741,7 +741,7 @@ License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
-Release Location:            nxp-imx
+Release Location:            https://github.com/nxp-imx/g2d-samples -b lf-6.1.1-1.0.0
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
@@ -852,7 +852,7 @@ Origin:                      NXP (proprietary)
 Package:                     imx-gst1.0-plugin.git
 Version:                     git
 Outgoing License:            LGPL-2.1 
-License File:                COPYING-LGPL-2.1
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    i.MX Gstreamer 1.0 plugins
@@ -867,7 +867,7 @@ Origin:                      NXP (LGPL-2.1)
 Package:                     gstreamer.git
 Version:                     1.20.3.imx
 Outgoing License:            LGPL-2.1 
-License File:                COPYING
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Open Source Multimedia Farmework
@@ -880,7 +880,7 @@ Origin:                      NXP (LGPL-2.1)
 Package:                     gst-plugins-good.git
 Version:                     1.20.3.imx
 Outgoing License:            LGPL-2.1 
-License File:                COPYING
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Gstreamer plugins with good quality code and correct functionality
@@ -893,7 +893,7 @@ Origin:                      NXP (LGPL-2.1)
 Package:                     gst-plugins-base.git
 Version:                     1.20.3.imx
 Outgoing License:            LGPL-2.1 
-License File:                COPYING
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Collection of well-groomed and well-maintained Gstreamer plugins
@@ -906,7 +906,7 @@ Origin:                      NXP (LGPL-2.1)
 Package:                     gst-plugins-bad.git
 Version:                     1.20.3.imx
 Outgoing License:            LGPL-2.1 
-License File:                COPYING
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Gstreamer plug-ins that aren't up to par compared to the rest. Close to good quality but missing something.
@@ -1013,7 +1013,7 @@ Origin:                      VeriSilicon Inc. (proprietary)
 Package:                     imx-alsa-plugins.git
 Version:                     
 Outgoing License:            GPL-2.0 
-License File:                COPYING.GPL
+License File:                LICENSE.GPL
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Plugins for various audio libraries and sound servers
@@ -1329,7 +1329,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     ethos-u-driver-stack-imx.git
 Version:                     22.08
 Outgoing License:            Apache-2.0 
-License File:                LICENSE-Apache-2.0.txt
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-driver-stack is the user space driver library for ethos-u NPU on iMX93 platform
@@ -1344,7 +1344,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     ethos-u-firmware.git
 Version:                     22.08
 Outgoing License:            Apache-2.0 
-License File:                LICENSE-APACHE-2.0.txt
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-firmware is the binary NPU driver running on cortex-m33 core of NXP iMX93 platform
@@ -1392,7 +1392,7 @@ License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Tensors and Dynamic neural networks in Python with strong GPU acceleration
-Release Location:            nxp-imx
+Release Location:            https://github.com/nxp-imx/pytorch-release -b lf-6.1.1-1.0.0
 Origin:                      NXP (BSD-3-Clause)
                              pytorch (BSD-3-clause) - https://github.com/pytorch/pytorch
 
@@ -1469,7 +1469,7 @@ License File:                LICENSE
 Package Category:            Tools
 Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use uuu.
-Release Location:            nxp-imx
+Release Location:            https://github.com/nxp-imx/mfgtools -b master
 Origin:                      NXP (BSD-3-clause)
                              zlib (zlib) - https://github.com/madler/zlib
                              libusb (LGPL-2.1) [libusb-1.0.dll] [dynamic link] - https://github.com/libusb/libusb
@@ -1485,7 +1485,7 @@ License File:                LICENSE
 Package Category:            Tools
 Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use bcu.
-Release Location:            nxp-imx
+Release Location:            https://github.com/nxp-imx/bcu.git -b master
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
