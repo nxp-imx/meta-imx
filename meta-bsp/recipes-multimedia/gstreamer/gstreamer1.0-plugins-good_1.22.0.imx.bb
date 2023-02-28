@@ -113,9 +113,6 @@ SRCREV = "468b3e144f249564c8cce46ec6cf54fb1fce12c5"
 
 S = "${WORKDIR}/git"
 
-PACKAGECONFIG[soup] = "-Dsoup=enabled,-Dsoup=disabled,libsoup-2.4"
-RDEPENDS:${PN}-soup += "${MLPREFIX}libsoup-2.4"
-
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 
 ########### End of i.MX overrides #########
