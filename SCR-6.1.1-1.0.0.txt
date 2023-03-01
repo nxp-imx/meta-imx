@@ -239,7 +239,7 @@ Origin:                      brcm: Broadcom Corporation (proprietary)
 Package:                     mwifiex.git
 Version:                     
 Outgoing License:            GPL-2.0 
-License File:                mxm_wifiex/wlan_src/gpl-2.0.txt
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP Wi-Fi linux SDK
@@ -1013,7 +1013,7 @@ Origin:                      VeriSilicon Inc. (proprietary)
 Package:                     imx-alsa-plugins.git
 Version:                     
 Outgoing License:            GPL-2.0 
-License File:                LICENSE.GPL
+License File:                LICENSE
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Plugins for various audio libraries and sound servers
@@ -1423,7 +1423,7 @@ Release Location:            https://github.com/nxp-imx/tflite-ethosu-delegate-i
 
 Package:                     tflite-vx-delegate-imx.git
 Version:                     2.10.0
-Outgoing License:            Apache-2.0 
+Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
