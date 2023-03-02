@@ -9,7 +9,7 @@ require tensorflow-lite-${PV}.inc
 
 TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-vx-delegate-imx.git;protocol=https" 
 SRCBRANCH_vx = "lf-6.1.1_1.0.0"
-SRCREV_vx = "a595f8f91d91dcb35b10d36cbc4b7ce9a4a1c939"
+SRCREV_vx = "ae9a193a3801ae7b027df65e5ecd97724c64af12"
 
 SRCREV_FORMAT = "vx_tf"
 
