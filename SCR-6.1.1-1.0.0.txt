@@ -154,7 +154,7 @@ Origin:                      NXP (LGPL-2.1)
 Package:                     imx-test.git
 Version:                     
 Outgoing License:            Each test has its own license. It is one of GPL-2.0 LGPL-2.1 or Apache-2.0
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Linux unit test applications
@@ -316,7 +316,7 @@ Origin:                      NXP (BSD-3-clause)
 Package:                     simg2img.git
 Version:                     
 Outgoing License:            Apache-2.0 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Tool to convert Android sparse images to raw images
