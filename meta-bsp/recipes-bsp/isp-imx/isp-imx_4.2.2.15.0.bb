@@ -1,4 +1,4 @@
-# Copyright 2020-2021 NXP
+# Copyright 2020-2021,2023 NXP
 
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e565271ec9a80ce47abbddc4bffe56fa"
 DEPENDS = "python3 libdrm virtual/libg2d libtinyxml2"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "e9e0943b9f4923c767d07901e550c41c"
-SRC_URI[sha256sum] = "13274c0fd442da4b3b9900a7568c59872ffa6408f5699d35eebc6760a8e51297"
+SRC_URI[md5sum] = "a6c4f567c98de977b86be740ad55d043"
+SRC_URI[sha256sum] = "3dfea7dd29949c1dc9c54d9552b016ddbb66533afdf6995c02cd8a8e29173e0e"
 
 inherit fsl-eula-unpack cmake systemd use-imx-headers
 
@@ -45,7 +45,6 @@ do_install() {
     install -d ${D}/opt/imx8-isp/bin
 
     cp -r ${WORKDIR}/build/generated/release/bin/*_test ${D}/opt/imx8-isp/bin
-    cp -r ${WORKDIR}/build/generated/release/bin/*2775* ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/bin/isp_media_server ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/bin/vvext ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/lib/*.so* ${D}/${libdir}
