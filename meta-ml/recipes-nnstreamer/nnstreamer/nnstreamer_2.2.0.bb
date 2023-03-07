@@ -32,9 +32,17 @@ inherit meson pkgconfig
 
 PACKAGECONFIG ??= "protobuf python3 query ${PACKAGECONFIG_SOC}"
 PACKAGECONFIG_SOC                    ??= ""
-PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "deepview-rt tensorflow-lite"
-PACKAGECONFIG_SOC:mx8mp-nxp-bsp      ??= "deepview-rt tensorflow-lite tvm"
-PACKAGECONFIG_SOC:mx9-nxp-bsp        ??= "deepview-rt tensorflow-lite"
+
+# deepview-rt config has been temporarily removed from 
+# PACKAGECONFIG_SOC:{mx8-nxp-bsp:imxgpu, mx8mp-nxp-bsp, mx9-nxp-bsp}
+# prior the ONNX Runtime 1.13.1 upgrade
+
+# PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "deepview-rt tensorflow-lite"
+PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "tensorflow-lite"
+# PACKAGECONFIG_SOC:mx8mp-nxp-bsp      ??= "deepview-rt tensorflow-lite tvm"
+PACKAGECONFIG_SOC:mx8mp-nxp-bsp      ??= "tensorflow-lite tvm"
+# PACKAGECONFIG_SOC:mx9-nxp-bsp        ??= "deepview-rt tensorflow-lite"
+PACKAGECONFIG_SOC:mx9-nxp-bsp        ??= "tensorflow-lite"
 
 PACKAGECONFIG[deepview-rt] = "\
        -Ddeepview-rt-support=enabled, \
