@@ -9,10 +9,9 @@ PACKAGE_ARCH = "${TUNE_PKGARCH}"
 
 inherit packagegroup
 
-# nnstreamer-deepview-rt package has been temporarily removed
-# from the ML_NNSTREAMER_PKGS_LIST below prior the ONNX Runtime 1.13.1 upgrade
 ML_NNSTREAMER_PKGS_LIST = " \
     nnstreamer \
+    nnstreamer-deepview-rt \
     nnstreamer-protobuf \
     nnstreamer-python3 \
     nnstreamer-query \
@@ -32,15 +31,14 @@ ML_GST_PROFILER:mx9-nxp-bsp   = "gst-shark"
 
 # These packages don't require any acceleration
 ML_PKGS            = ""
-# deepview-rt-examples package has been temporarily removed from both
-# the ML_PKGS:mx8-nxp-bsp and ML_PKGS:mx9-nxp-bsp packages
-# prior the ONNX Runtime 1.13.1 upgrade
 ML_PKGS:mx8-nxp-bsp = " \
+    deepview-rt-examples \
     onnxruntime-tests \
     tensorflow-lite \
     torchvision \
 "
 ML_PKGS:mx9-nxp-bsp = " \
+    deepview-rt-examples \
     onnxruntime-tests \
     tensorflow-lite \
     torchvision \
