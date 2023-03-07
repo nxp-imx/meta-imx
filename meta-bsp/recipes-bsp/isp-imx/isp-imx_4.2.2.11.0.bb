@@ -1,4 +1,4 @@
-# Copyright 2020-2021 NXP
+# Copyright 2020-2021,2023 NXP
 
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
@@ -8,8 +8,8 @@ inherit fsl-eula-unpack cmake systemd use-imx-headers
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "75f79ba556c47172b9a0cbc3a877e604"
-SRC_URI[sha256sum] = "28e2ee909f29a256c4eac87ef8336932d90a88a2a183389ac0868212954af42c"
+SRC_URI[md5sum] = "af593af74266310e45056c141db82577"
+SRC_URI[sha256sum] = "bd4569c6a71f8fff4234f41349a900fa99bb34d6b998c003e92ec503de449a79"
 
 DEPENDS = "python libdrm virtual/libg2d"
 
@@ -48,7 +48,6 @@ do_install() {
     install -d ${D}/opt/imx8-isp/bin
 
     cp -r ${WORKDIR}/build/generated/release/bin/*_test ${D}/opt/imx8-isp/bin
-    cp -r ${WORKDIR}/build/generated/release/bin/*2775* ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/bin/isp_media_server ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/build/generated/release/bin/vvext ${D}/opt/imx8-isp/bin
     cp -r ${WORKDIR}/${PN}-${PV}/dewarp/dewarp_config/ ${D}/opt/imx8-isp/bin
