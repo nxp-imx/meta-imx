@@ -7,8 +7,8 @@ SECTION = "Console/tools"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=14abb55d71048ebecff1a104640546b6"
 
-SRCREV = "a0d9a4e4acf776cebba1b857fecda253e970d20f"
 SRC_URI = "git://github.com/thesofproject/sof.git;branch=main;protocol=https"
+SRCREV = "b637889efb5e99e9f87f0ed1b081826f6ff992f0"
 
 S = "${WORKDIR}/git"
 
