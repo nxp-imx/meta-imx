@@ -5,7 +5,7 @@ DESCRIPTION = "Sound Open Firmware"
 HOMEPAGE = "https://www.sofproject.org"
 SECTION = "kernel"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=0f00d99239d922ffd13cabef83b33444"
+LIC_FILES_CHKSUM = "file://COPYING;md5=0f00d99239d922ffd13cabef83b33444"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "e5806dfddc531897de0821bf27f5363c"
