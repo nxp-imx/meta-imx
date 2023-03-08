@@ -1,5 +1,5 @@
-require recipes-multimedia/gstreamer/gstreamer1.0-plugins-common.inc
-require recipes-multimedia/gstreamer/gstreamer1.0-plugins-license.inc
+require gstreamer1.0-plugins-common.inc
+require gstreamer1.0-plugins-license.inc
 
 DESCRIPTION = "'Ugly GStreamer plugins"
 HOMEPAGE = "https://gstreamer.freedesktop.org/"
