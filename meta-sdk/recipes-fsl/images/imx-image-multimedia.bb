@@ -23,7 +23,7 @@ IMAGE_FEATURES += " \
     splash \
     nfs-server \
     tools-debug \
-    ssh-server-dropbear \
+    ssh-server-openssh \
     tools-testapps \
     hwcodecs \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston', \
