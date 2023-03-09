@@ -57,8 +57,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     imx-sc-firmware-1.16.0.bin
-Version:                     1.16.0
+Package:                     imx-sc-firmware-1.15.0.bin
+Version:                     1.15.0
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -114,8 +114,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-upower-1.2.0.bin
-Version:                     1.2.0
+Package:                     firmware-upower-1.3.0.bin
+Version:                     1.3.0
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -260,10 +260,10 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     sof-imx-2.4.0
-Version:                     2.4.0
+Package:                     sof-imx-2.5.0
+Version:                     2.5.0
 Outgoing License:            BSD-3-Clause 
-License File:                LICENCE
+License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Sound Open Firmware
@@ -273,10 +273,10 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.4.0
-Version:                     2.4.0
+Package:                     sof-zephyr-2.5.0
+Version:                     2.5.0
 Outgoing License:            BSD-3-Clause 
-License File:                LICENCE
+License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Sound Open Firmware with Zephyr
@@ -1300,20 +1300,6 @@ Origin:                      NXP (Apache-2.0)
 
 --------------------------------------------
 
-Package:                     ethos-u-vela.git
-Version:                     3.6.0
-Outgoing License:            Apache-2.0 
-License File:                LICENSE.txt
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    Tool to compile a TensorFlow Lite for Microcontrollers neural network model
-Release Location:            https://github.com/nxp-imx/ethos-u-vela -b lf-6.1.y-2.0.0
-Origin:                      NXP (BSD-3-Clause)
-                             ARM Limited ethos-u-vela v22.02 (Apache-2.0) - https://git.mlplatform.org/ml/ethos-u/ethos-u-vela.git
-                             FlatBuffers (Apache-2.0) 
-
---------------------------------------------
-
 Package:                     ethos-u-driver-stack-imx.git
 Version:                     22.08
 Outgoing License:            Apache-2.0 
@@ -1343,6 +1329,20 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
+Package:                     ethos-u-vela.git
+Version:                     3.6.0
+Outgoing License:            Apache-2.0 
+License File:                LICENSE.txt
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    Tool to compile a TensorFlow Lite for Microcontrollers neural network model
+Release Location:            https://github.com/nxp-imx/ethos-u-vela -b lf-6.1.y-2.0.0
+Origin:                      NXP (BSD-3-Clause)
+                             ARM Limited ethos-u-vela v22.02 (Apache-2.0) - https://git.mlplatform.org/ml/ethos-u/ethos-u-vela.git
+                             FlatBuffers (Apache-2.0) 
+
+--------------------------------------------
+
 Package:                     nnshark.git
 Version:                     2021.10.imx
 Outgoing License:            LGPL-2.1 
@@ -1359,7 +1359,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
-Version:                     1.10.0
+Version:                     1.13.1
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
