@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=ab04ac0f249af12befccb94447
 SRCBRANCH = "master"
 MRVL_SRC ?= "git://github.com/nxp-imx/mwifiex.git;protocol=https"
 SRC_URI = "${MRVL_SRC};branch=${SRCBRANCH}"
-SRCREV = "f965f1f2cf9c08c4409778e6479fda9835ed9548"
+SRCREV = "5ddbfb80396367082e194b4c307d8fbdcabdf7e9"
 
 S = "${WORKDIR}/git/mxm_wifiex/wlan_src"
 
