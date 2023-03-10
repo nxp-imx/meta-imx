@@ -263,7 +263,7 @@ Origin:                      NXP (proprietary)
 Package:                     sof-imx-2.5.0
 Version:                     2.5.0
 Outgoing License:            BSD-3-Clause 
-License File:                COPYING
+License File:                LICENCE
 Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Sound Open Firmware
@@ -276,7 +276,7 @@ Origin:                      NXP (BSD-3-clause)
 Package:                     sof-zephyr-2.5.0
 Version:                     2.5.0
 Outgoing License:            BSD-3-Clause 
-License File:                COPYING
+License File:                LICENCE
 Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Sound Open Firmware with Zephyr
@@ -1401,7 +1401,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     tflite-ethosu-delegate.git
 Version:                     2.10.0
-Outgoing License:            MIT 
+Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
