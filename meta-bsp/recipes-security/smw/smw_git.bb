@@ -1,4 +1,4 @@
-# Copyright 2020-22 NXP
+# Copyright 2020-2023 NXP
 require recipes-security/optee/optee.inc
 
 SUMMARY = "NXP i.MX Security Middleware Library"
@@ -6,7 +6,7 @@ DESCRIPTION = "NXP i.MX Security Middleware Library"
 SECTION = "base"
 LICENSE = "BSD-3-Clause"
 LICENSE = "Apache-2.0 & BSD-3-Clause & Zlib"
-LIC_FILES_CHKSUM = "file://COPYING;md5=8636bd68fc00cc6a3809b7b58b45f982 \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8636bd68fc00cc6a3809b7b58b45f982 \
                     file://../psa-arch-tests/LICENSE.md;md5=2a944942e1496af1886903d274dedb13"
 
 DEPENDS = "json-c optee-os-tadevkit optee-client python3-cryptography-native"
@@ -22,7 +22,7 @@ PSA_LIB_SRC ?= "git://github.com/ARM-software/psa-arch-tests.git;protocol=https"
 PSA_ARCH_TESTS_SRC_PATH = "psa-arch-tests"
 SRCBRANCH_smw = "release/version_2.x"
 SRCBRANCH_psa = "main"
-SRCREV_smw = "1fbba0baeca2f210b47bde609ce18931c49778e4"
+SRCREV_smw = "f0f63a90cb3e5b53438028ff6015c5ff3c23bea3"
 SRCREV_psa = "2a1852252a9b9af655cbe02d5d3c930952d0d798"
 SRCREV_FORMAT = "smw_psa"
 S = "${WORKDIR}/git/smw"
