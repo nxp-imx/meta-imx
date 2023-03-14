@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/siemens/jailhouse"
 SECTION = "jailhouse"
 LICENSE = "GPL-2.0-only"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
                  file://tools/root-cell-config.c.tmpl;beginline=6;endline=33;md5=2825581c1666c44a17955dc574cfbfb3 \
                  file://include/jailhouse/hypercall.h;beginline=9;endline=36;md5=2825581c1666c44a17955dc574cfbfb3 \
                  file://include/jailhouse/cell-config.h;beginline=9;endline=36;md5=2825581c1666c44a17955dc574cfbfb3 \
@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
 "
 
 SRCBRANCH = "lf-6.1.1_1.0.0"
-SRCREV = "b0817a39f4c6e3ef8df9fff54bb354bdd42a10f0" 
+SRCREV = "8faaeb45b989f6f74f0d56e6ae9aaddbf5ebfb06"
 
 IMX_JAILHOUSE_SRC ?= "git://github.com/nxp-imx/imx-jailhouse.git;protocol=https"
 SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH}"
