@@ -1,12 +1,12 @@
 DESCRIPTION = "DeepViewRT examples"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=5a0bf11f745e68024f37b4724a5364fe"
+LIC_FILES_CHKSUM = "file://COPYING;md5=ea25d099982d035af85d193c88a1b479"
 
 DEPENDS = "deepview-rt" 
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "0057ac72f1091b072f4347a945da03f5"
-SRC_URI[sha256sum] = "c24339bd9531bed6c71f3383262317ee23369302ef50084f8edce0467fcc9a5e"
+SRC_URI[md5sum] = "540cb3aaa22ef96ee44a59bbedb004b9"
+SRC_URI[sha256sum] = "333f145d7e742f2cbe08276e9eb5831973ff6520200353b2fe710b1255e63c01"
 S = "${WORKDIR}/${BPN}-${PV}"
 
 inherit fsl-eula-unpack pkgconfig
