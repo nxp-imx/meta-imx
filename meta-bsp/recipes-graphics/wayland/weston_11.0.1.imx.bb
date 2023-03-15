@@ -9,7 +9,7 @@ SUMMARY = "Weston, a Wayland compositor"
 DESCRIPTION = "Weston is the reference implementation of a Wayland compositor"
 HOMEPAGE = "http://wayland.freedesktop.org"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d79ee9e66bb0f95d3386a7acae780b70 \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d79ee9e66bb0f95d3386a7acae780b70 \
                     file://libweston/compositor.c;endline=27;md5=eb6d5297798cabe2ddc65e2af519bcf0 \
                     "
 
@@ -157,7 +157,7 @@ SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}
 SRC_URI:prepend = "git://github.com/nxp-imx/weston-imx.git;protocol=https;branch=${SRCBRANCH} "
 SRC_URI += "file://0001-Revert-protocol-no-found-wayland-scanner-with-Yocto-.patch"
 SRCBRANCH = "weston-imx-11.0.1"
-SRCREV = "abd260bec01d7d4c2dad567f4ce396acebae144f"
+SRCREV = "36ab06f0ad8e8981a482df6a08f39e1ae2a6a2dd"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
