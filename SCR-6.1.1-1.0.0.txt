@@ -397,7 +397,7 @@ Origin:                      NXP (BSD-2-Clause)
 Package:                     imx-jailhouse.git
 Version:                     0.2
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A partitioning Hypervisor based on Linux
@@ -422,7 +422,7 @@ Origin:                      NXP (proprietary)
 Package:                     imx-smw.git
 Version:                     0.1
 Outgoing License:            BSD-3-Clause 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP i.MX Security Middleware Library
@@ -459,7 +459,7 @@ Origin:                      NXP (proprietary)
 Package:                     v2xsehsm.git
 Version:                     
 Outgoing License:            BSD-3-Clause 
-License File:                BSD-3-Clause.txt
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    V2X Secure Element library
@@ -471,7 +471,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     vtest.git
 Version:                     
 Outgoing License:            BSD-3-Clause 
-License File:                BSD-3-Clause.txt
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    V2X Test Suite
@@ -629,7 +629,7 @@ Origin:                      NXP (BSD-3-clause)
 Package:                     libdrm-imx.git
 Version:                     2.4.114.imx
 Outgoing License:            MIT 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    i.MX DRM Direct Rendering Manager
@@ -724,8 +724,8 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-g2d-pxp.git
 Version:                     2.1.0
-Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
-License File:                EULA.txt
+Outgoing License:            LA_OPT_NXP_Software_License v42 January 2023 Additional distribution license granted - Section 2.3 applies
+License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
@@ -737,7 +737,7 @@ Origin:                      NXP (Proprietary)
 Package:                     g2d-samples.git
 Version:                     2.1
 Outgoing License:            BSD-3-Clause 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
@@ -1066,8 +1066,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     imx-voiceUI.git
 Version:                     2.0
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
-License File:                EULA.txt
+Outgoing License:            LA_OPT_NXP_Software_License v42 January 2023 Additional distribution license granted - Section 2.3 applies
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP RetuneDSP Voice Seeker
@@ -1297,6 +1297,10 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    eIQ examples based on TensorFlow Lite
 Release Location:            https://github.com/nxp-imx/eiq-examples -b lf-6.1.1-1.0.0
+Origin:                      NXP (Apache-2.0)
+                             tensorflow v2.10.0 (Apache-2.0) - https://github.com/tensorflow/tensorflow
+                             hand_tracking (Apache-2.0) - https://github.com/wolterlw/hand_tracking
+
 --------------------------------------------
 
 Package:                     eiq-tvm-imx.git
@@ -1413,12 +1417,16 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     tflite-ethosu-delegate.git
 Version:                     2.10.0
-Outgoing License:            MIT 
+Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite Ethos-u Delegate
 Release Location:            https://github.com/nxp-imx/tflite-ethosu-delegate-imx -b lf-6.1.1-1.0.0
+Origin:                      NXP (Apache-2.0)
+                             tensorflow v2.10.0 (Apache-2.0) - https://github.com/tensorflow/tensorflow
+                             ARM ethos-u-linux-driver-stack v22.08 (Apache-2.0) - https://git.mlplatform.org/ml/ethos-u/ethos-u-linux-driver-stack.git
+
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
