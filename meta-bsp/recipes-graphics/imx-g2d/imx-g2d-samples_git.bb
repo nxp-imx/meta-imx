@@ -1,7 +1,7 @@
 SUMMARY = "i.MX G2D Samples"
 DESCRIPTION = "Set of sample applications for i.MX G2D"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 
 DEPENDS = "cairo"
 
@@ -10,7 +10,7 @@ PV = "2.1+git${SRCPV}"
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
 GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxp-imx/g2d-samples.git;protocol=https"
 SRCBRANCH ?= "imx_2.1"
-SRCREV = "d6fdf85b7f0e3552600a17da20abb5907fb4ba95"
+SRCREV = "a5f620fcf0e986a19e4acdfa48c95eaf79a5c570"
 
 S = "${WORKDIR}/git"
 
