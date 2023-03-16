@@ -1,7 +1,7 @@
-From 19f69fdfa94f16ae4f824968a9e6e0d4bfaf9d7e Mon Sep 17 00:00:00 2001
+From f674b2f81a18af2146291eda1bbf60d6f71b2935 Mon Sep 17 00:00:00 2001
 From: Pankaj Gupta <pankaj.gupta@nxp.com>
 Date: Tue, 18 Jan 2022 17:38:11 +0530
-Subject: [PATCH 2/2] e_devcrypto: add support for TLS1.2 algorithms offload
+Subject: [PATCH] e_devcrypto: add support for TLS1.2 algorithms offload
 
     - aes-128-cbc-hmac-sha256
     - aes-256-cbc-hmac-sha256
@@ -17,38 +17,39 @@ Fix: Remove the support for TLS1.0.
 
 Upstream-Status: Pending [i.MX, Layerscape specific]
 Signed-off-by: Pankaj Gupta <pankaj.gupta@nxp.com>
+
 ---
  engines/e_devcrypto.c | 273 ++++++++++++++++++++++++++++++++++++++----
  1 file changed, 249 insertions(+), 24 deletions(-)
 
 diff --git a/engines/e_devcrypto.c b/engines/e_devcrypto.c
-index eb56baec19..b0f53376f0 100644
+index 02f3abc..8529bac 100644
 --- a/engines/e_devcrypto.c
 +++ b/engines/e_devcrypto.c
-@@ -27,6 +27,7 @@
- #include "crypto/cryptodev.h"
-
+@@ -28,6 +28,7 @@
+ #include "internal/nelem.h"
+ 
  /* #define ENGINE_DEVCRYPTO_DEBUG */
 +#define TLS1_1_VERSION  0x0302
-
+ 
  #if CRYPTO_ALGORITHM_MIN < CRYPTO_ALGORITHM_MAX
  # define CHECK_BSD_STYLE_MACROS
-@@ -106,10 +107,14 @@ struct cipher_ctx {
+@@ -107,10 +108,14 @@ struct cipher_ctx {
      session_op_t sess;
      int op;                      /* COP_ENCRYPT or COP_DECRYPT */
      unsigned long mode;          /* EVP_CIPH_*_MODE */
 +    unsigned char *aad;
 +    unsigned int aad_len;
 +    unsigned int len;
-
+ 
      /* to handle ctr mode being a stream cipher */
      unsigned char partial[EVP_MAX_BLOCK_LENGTH];
      unsigned int blocksize, num;
 +    unsigned int tls_ver;
  };
-
+ 
  static const struct cipher_data_st {
-@@ -119,49 +124,66 @@ static const struct cipher_data_st {
+@@ -120,49 +125,66 @@ static const struct cipher_data_st {
      int ivlen;
      int flags;
      int devcryptoid;
@@ -136,11 +137,11 @@ index eb56baec19..b0f53376f0 100644
 +      CRYPTO_CAMELLIA_CBC, 0 },
  #endif
  };
-
-@@ -196,6 +218,193 @@ static const struct cipher_data_st *get_cipher_data(int nid)
+ 
+@@ -197,6 +219,193 @@ static const struct cipher_data_st *get_cipher_data(int nid)
      return &cipher_data[get_cipher_data_index(nid)];
  }
-
+ 
 +/*
 + * Save the encryption key provided by upper layers. This function is called
 + * by EVP_CipherInit_ex to initialize the algorithm's extra data. We can't do
@@ -331,18 +332,18 @@ index eb56baec19..b0f53376f0 100644
  /*
   * Following are the three necessary functions to map OpenSSL functionality
   * with cryptodev.
-@@ -462,6 +671,7 @@ static void prepare_cipher_methods(void)
+@@ -463,6 +672,7 @@ static void prepare_cipher_methods(void)
           */
          sess.cipher = cipher_data[i].devcryptoid;
          sess.keylen = cipher_data[i].keylen;
 +        sess.mackeylen = cipher_data[i].mackeylen;
-
+ 
  #ifdef CIOCGSESSION2
          /*
-@@ -493,6 +703,15 @@ static void prepare_cipher_methods(void)
+@@ -494,6 +704,15 @@ static void prepare_cipher_methods(void)
                                                ctr_do_cipher :
                                                cipher_do_cipher);
-
+ 
 +        if (cipher_data[i].nid == NID_aes_128_cbc_hmac_sha1
 +                || cipher_data[i].nid == NID_aes_256_cbc_hmac_sha1
 +                || cipher_data[i].nid == NID_aes_128_cbc_hmac_sha256
@@ -355,7 +356,7 @@ index eb56baec19..b0f53376f0 100644
          if ((known_cipher_methods[i] =
                   EVP_CIPHER_meth_new(cipher_data[i].nid,
                                       cipher_mode == EVP_CIPH_CTR_MODE ? 1 :
-@@ -537,11 +756,17 @@ static void prepare_cipher_methods(void)
+@@ -538,11 +757,17 @@ static void prepare_cipher_methods(void)
              }
  #endif /* CIOCGSESSINFO */
          }
@@ -374,7 +375,4 @@ index eb56baec19..b0f53376f0 100644
 -        }
      }
  }
-
---
-2.17.1
-
+ 
