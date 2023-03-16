@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=664939843ae3416d811479b21978e8b4"
 
 DEPENDS = "imx-seco-libs"
 
-SRCBRANCH = "imx_5.4.70_2.3.4"
+SRCBRANCH = "lf-6.1.1_1.0.0"
 V2XSEHSM_SRC ?= "git://github.com/nxp-imx/v2xsehsm.git;protocol=https"
 SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH} \
     file://0001-Install-header-to-standard-location.patch"
