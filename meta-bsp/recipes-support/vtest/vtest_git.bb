@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=664939843ae3416d811479b21978e8b4"
 
 DEPENDS = "ecdsa-lib-imx v2xsehsm openssl"
 
-SRCBRANCH = "lf-5.15.52_2.1.0"
+SRCBRANCH = "lf-6.1.1_1.0.0"
 VTEST_SRC ?= "git://github.com/nxp-imx/vtest.git;protocol=https"
 SRC_URI = "${VTEST_SRC};branch=${SRCBRANCH} \
     file://seco_nvm_daemon.service \
