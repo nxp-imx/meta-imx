@@ -1,8 +1,8 @@
-# Copyright (C) 2019-2021 NXP
+# Copyright (C) 2019-2021,2023 NXP
 
 SUMMARY = "Test program for v2x adaptation layer v2xhsm"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://BSD-3-Clause.txt;md5=664939843ae3416d811479b21978e8b4"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=664939843ae3416d811479b21978e8b4"
 
 DEPENDS = "ecdsa-lib-imx v2xsehsm openssl"
 
@@ -13,7 +13,7 @@ SRC_URI = "${VTEST_SRC};branch=${SRCBRANCH} \
     file://0001-Ignore-v2xsehsmConfig.cmake.patch \
     file://0001-CMakeLists.txt-Add-no-deprecated-declarations-to-fix.patch \
 "
-SRCREV = "f64efd5bb21512ff2d2a48b47e8f5f003e3f0a1a"
+SRCREV = "46314ea4fc472c9ac78f2f4cb2b6d1cb7ba05bee"
 
 S = "${WORKDIR}/git"
 
