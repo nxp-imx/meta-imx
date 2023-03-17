@@ -26,11 +26,11 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}/unit_tests/sof/tools
+    install -d ${D}/unit_tests/sof/tools/ctl
     cp -r ${S}/tools/sof-tools/logger ${D}/unit_tests/sof/tools/
     cp -r ${S}/tools/sof-tools/ctl ${D}/unit_tests/sof/tools/
     cp -r ${S}/tools/tune  ${D}/unit_tests/sof/tools/
-    cp -r ${S}/tools/ctl ${D}/unit_tests/sof/tools/
+    cp -r ${S}/tools/ctl/ipc3 ${D}/unit_tests/sof/tools/ctl/
 }
 
 FILES:${PN} = "/unit_tests/sof/tools"
