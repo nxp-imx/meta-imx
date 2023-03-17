@@ -1,4 +1,4 @@
-From ef9f6626d08d6d19767d20845c8d6f374f05465d Mon Sep 17 00:00:00 2001
+From 30a083530848de24432aa824760c54c6d3e6150f Mon Sep 17 00:00:00 2001
 From: Tom Hochstein <tom.hochstein@nxp.com>
 Date: Tue, 3 Apr 2018 14:07:32 -0500
 Subject: [PATCH] logind.conf: Set HandlePowerKey to ignore
@@ -8,14 +8,15 @@ For i.MX, we don't want systemd to handle the power key.
 Upstream-Status: Inappropriate [i.MX-specific]
 
 Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+
 ---
  src/login/logind.conf.in | 2 ++
  1 file changed, 2 insertions(+)
 
-Index: git/src/login/logind.conf.in
-===================================================================
---- git.orig/src/login/logind.conf.in
-+++ git/src/login/logind.conf.in
+diff --git a/src/login/logind.conf.in b/src/login/logind.conf.in
+index 0b10df6839..7e1ff86851 100644
+--- a/src/login/logind.conf.in
++++ b/src/login/logind.conf.in
 @@ -23,6 +23,8 @@
  #InhibitDelayMaxSec=5
  #UserStopDelaySec=10
