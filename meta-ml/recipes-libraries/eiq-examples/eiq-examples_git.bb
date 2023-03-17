@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 SRC_URI = "${EIQ_EXAMPLES_SRC};branch=${SRCBRANCH}"
-EIQ_EXAMPLES_SRC ?= "git://github.com/nxp-imx/eiq-examples.git;protocol=https"
+EIQ_EXAMPLES_SRC ?= "git://github.com/nxp-imx/eiq-example.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "4c725c262cb0941ea7350606ddd322f62727fe98" 
 
