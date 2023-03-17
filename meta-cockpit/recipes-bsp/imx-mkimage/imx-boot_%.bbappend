@@ -11,14 +11,11 @@ do_compile:imx8qm-cockpit () {
 
     cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE_COCKPIT}.bin-a53    ${BOOT_STAGING}/u-boot.bin
     cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE_COCKPIT}.bin-a72    ${BOOT_STAGING}/u-boot-a72.bin
-    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-a53   ${BOOT_STAGING}/bl31.bin
-    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-a72   ${BOOT_STAGING}/bl31-a72.bin
-
     if ${DEPLOY_OPTEE}; then
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mx8qm-mek_cockpit-scfw-tcm.bin  ${BOOT_STAGING}/scfw_tcm.bin
 
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-optee-a53   ${BOOT_STAGING}/bl31-optee-a53.bin
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-optee-a72   ${BOOT_STAGING}/bl31-optee-a72.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-optee-a53   ${BOOT_STAGING}/bl31.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-optee-a72   ${BOOT_STAGING}/bl31-a72.bin
 
         cp ${DEPLOY_DIR_IMAGE}/${MLPREFIX}optee/tee-a53.bin ${BOOT_STAGING}/tee.bin
         cp ${DEPLOY_DIR_IMAGE}/${MLPREFIX}optee/tee-a72.bin ${BOOT_STAGING}
@@ -34,6 +31,9 @@ do_compile:imx8qm-cockpit () {
         fi
     else
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mx8qm-mek_cockpit-nospl-scfw-tcm.bin  ${BOOT_STAGING}/scfw_tcm.bin
+
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-a53   ${BOOT_STAGING}/bl31.bin
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/bl31-imx8qm-cockpit.bin-a72   ${BOOT_STAGING}/bl31-a72.bin
 
         make SOC=iMX8QM flash_cockpit
         if [ -e "${BOOT_STAGING}/flash.bin" ]; then
