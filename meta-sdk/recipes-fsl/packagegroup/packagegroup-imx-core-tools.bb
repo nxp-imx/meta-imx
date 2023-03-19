@@ -37,7 +37,6 @@ RDEPENDS:${PN} = " \
     parted \
     procps \
     ptpd \
-    ntpdate \
     python3-core \
     python3-datetime \
     python3-json \

@@ -40,7 +40,6 @@ RDEPENDS:${PN} += " \
     minicom \
     mmc-utils \
     nano \
-    ntpdate \
     openssl-bin \
     openssl-engines \
     parted \
