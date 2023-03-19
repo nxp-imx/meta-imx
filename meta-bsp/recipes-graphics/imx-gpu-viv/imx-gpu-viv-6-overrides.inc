@@ -2,6 +2,9 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 ### Section 1: Changes to be upstreamed ###
 
+SRC_URI:remove  = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
+SRC_URI:prepend = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true "
+
 PROVIDES:remove = "${PROVIDES_REMOVE_OPENCL}"
 PROVIDES_REMOVE_OPENCL               = ""
 PROVIDES_REMOVE_OPENCL:mx7-nxp-bsp   = "${PROVIDES_OPENCL}"
