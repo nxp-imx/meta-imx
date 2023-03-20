@@ -102,8 +102,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-sentinel-0.9.bin
-Version:                     0.9
+Package:                     firmware-sentinel-0.10.bin
+Version:                     0.10
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
