@@ -7,7 +7,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/optee-os:"
 SRC_URI:remove = "git://github.com/OP-TEE/optee_os.git;branch=master;protocol=https"
 SRC_URI:prepend = "${OPTEE_OS_SRC};branch=${SRCBRANCH} "
 SRC_URI:append = " file://0001-core-Define-section-attributes-for-clang.patch"
-SRC_URI:remove = "file://0006-allow-setting-sysroot-for-libgcc-lookup.patch"
+SRC_URI:remove = "file://0001-allow-setting-sysroot-for-libgcc-lookup.patch"
 SRC_URI:remove = "file://0008-no-warn-rwx-segments.patch"
 
 OPTEE_OS_SRC ?= "git://github.com/nxp-imx/imx-optee-os.git;protocol=https"
