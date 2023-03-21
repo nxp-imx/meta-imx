@@ -447,7 +447,7 @@ Origin:                      NXP (proprietary)
 Package:                     v2xsehsm.git
 Version:                     
 Outgoing License:            BSD-3-Clause 
-License File:                BSD-3-Clause.txt
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    V2X Secure Element library
@@ -459,7 +459,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     vtest.git
 Version:                     
 Outgoing License:            BSD-3-Clause 
-License File:                BSD-3-Clause.txt
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    V2X Test Suite
@@ -1262,9 +1262,9 @@ Origin:                      Au-Zone Technologies (proprietary)
 
 --------------------------------------------
 
-Package:                     deepview-rt-examples-1.6.bin
-Version:                     1.6
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Package:                     deepview-rt-examples-1.6.1.bin
+Version:                     1.6.1
+Outgoing License:            LA_OPT_NXP_Software_License v42 January 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
