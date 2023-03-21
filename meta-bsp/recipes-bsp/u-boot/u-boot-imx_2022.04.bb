@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 UBOOT_SRC ?= "git://github.com/nxp-imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "lf_v2022.04"
-SRCREV = "78cbb2418bdae64f449395f27baa699f4657959b"
+SRCREV = "4af16aa488b4e52ce5bb4d621bb342a8703fd478"
 LOCALVERSION = "-${SRCBRANCH}"
 
 # END: Changes to u-boot-imx-common_${PV}.inc
