@@ -12,6 +12,11 @@ PROVIDES_OPENCL = " \
     opencl-icd-loader \
     virtual/opencl-icd"
 
+SRC_URI:remove  = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
+SRC_URI:prepend = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true "
+
+S:append = "-${IMX_SRCREV_ABBREV}"
+
 PACKAGES_OPENCL:mx8mm-nxp-bsp = ""
 
 PACKAGES_VULKAN:mx8mm-nxp-bsp = "libvulkan-imx libvulkan-imx-dev"
