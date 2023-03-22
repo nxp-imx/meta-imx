@@ -383,7 +383,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-jailhouse.git
-Version:                     0.2
+Version:                     git
 Outgoing License:            GPL-2.0 
 License File:                COPYING
 Package Category:            BSP
