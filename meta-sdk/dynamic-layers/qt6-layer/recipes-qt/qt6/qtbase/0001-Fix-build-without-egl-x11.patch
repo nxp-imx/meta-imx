@@ -1,0 +1,92 @@
+Parent:     580fc133 (Doc/QButtonGroup: Do not mention deprecated/removed signal)
+Author:     Ilya Fedin <fedin-ilja2010@ya.ru>
+AuthorDate: 2023-03-22 23:47:00 +0400
+Commit:     Ilya Fedin <fedin-ilja2010@ya.ru>
+CommitDate: 2023-03-23 02:01:54 +0400
+
+Fix build without egl_x11
+
+Amends 49d29440457a89bb0438ed882eb47f4f28fd328a
+
+Pick-to: 6.5 6.5.0
+Change-Id: I5ff94135245cdb617aa5eea5a0e2782f810b36dc
+Upstream-Status: Submitted [https://codereview.qt-project.org/c/qt/qtbase/+/468419]
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+diff --git a/src/gui/opengl/platform/egl/qeglstreamconvenience.cpp b/src/gui/opengl/platform/egl/qeglstreamconvenience.cpp
+index 869e763bb8..220118f258 100644
+--- a/src/gui/opengl/platform/egl/qeglstreamconvenience.cpp
++++ b/src/gui/opengl/platform/egl/qeglstreamconvenience.cpp
+@@ -27,6 +27,7 @@ QEGLStreamConvenience::QEGLStreamConvenience()
+     query_devices = reinterpret_cast<PFNEGLQUERYDEVICESEXTPROC>(eglGetProcAddress("eglQueryDevicesEXT"));
+     query_device_string = reinterpret_cast<PFNEGLQUERYDEVICESTRINGEXTPROC>(eglGetProcAddress("eglQueryDeviceStringEXT"));
+     get_platform_display = reinterpret_cast<PFNEGLGETPLATFORMDISPLAYEXTPROC>(eglGetProcAddress("eglGetPlatformDisplayEXT"));
++    create_platform_window_surface = reinterpret_cast<PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC>(eglGetProcAddress("eglCreatePlatformWindowSurfaceEXT"));
+ 
+     has_egl_device_base = strstr(extensions, "EGL_EXT_device_base");
+     has_egl_platform_device = strstr(extensions, "EGL_EXT_platform_device");
+diff --git a/src/gui/opengl/platform/egl/qeglstreamconvenience_p.h b/src/gui/opengl/platform/egl/qeglstreamconvenience_p.h
+index edf73fe981..577649eb1b 100644
+--- a/src/gui/opengl/platform/egl/qeglstreamconvenience_p.h
++++ b/src/gui/opengl/platform/egl/qeglstreamconvenience_p.h
+@@ -28,6 +28,7 @@ typedef intptr_t EGLAttrib;
+ 
+ #ifndef EGL_EXT_platform_base
+ typedef EGLDisplay (EGLAPIENTRYP PFNEGLGETPLATFORMDISPLAYEXTPROC) (EGLenum platform, void *native_display, const EGLint *attrib_list);
++typedef EGLSurface (EGLAPIENTRYP PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC) (EGLDisplay dpy, EGLConfig config, void *native_window, const EGLint *attrib_list);
+ #endif
+ 
+ #ifndef EGL_EXT_device_base
+@@ -134,6 +135,7 @@ public:
+     void initialize(EGLDisplay dpy);
+ 
+     PFNEGLGETPLATFORMDISPLAYEXTPROC get_platform_display;
++    PFNEGLCREATEPLATFORMWINDOWSURFACEEXTPROC create_platform_window_surface;
+     PFNEGLQUERYDEVICESEXTPROC query_devices;
+     PFNEGLQUERYDEVICESTRINGEXTPROC query_device_string;
+     PFNEGLCREATESTREAMKHRPROC create_stream;
+diff --git a/src/plugins/platforms/xcb/gl_integrations/xcb_egl/qxcbeglintegration.cpp b/src/plugins/platforms/xcb/gl_integrations/xcb_egl/qxcbeglintegration.cpp
+index 1e93ea6805..6206cd03fd 100644
+--- a/src/plugins/platforms/xcb/gl_integrations/xcb_egl/qxcbeglintegration.cpp
++++ b/src/plugins/platforms/xcb/gl_integrations/xcb_egl/qxcbeglintegration.cpp
+@@ -97,11 +97,16 @@ bool QXcbEglIntegration::initialize(QXcbConnection *connection)
+ 
+     EGLint major, minor;
+     bool success = eglInitialize(m_egl_display, &major, &minor);
++#if QT_CONFIG(egl_x11)
+     if (!success) {
+         m_egl_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+         qCDebug(lcQpaGl) << "Xcb EGL gl-integration retrying with display" << m_egl_display;
+         success = eglInitialize(m_egl_display, &major, &minor);
+     }
++#else
++    if (success)
++        success = QEGLStreamConvenience().create_platform_window_surface;
++#endif
+ 
+     m_native_interface_handler.reset(new QXcbEglNativeInterfaceHandler(connection->nativeInterface()));
+ 
+diff --git a/src/plugins/platforms/xcb/gl_integrations/xcb_egl/qxcbeglwindow.cpp b/src/plugins/platforms/xcb/gl_integrations/xcb_egl/qxcbeglwindow.cpp
+index 4d87b08db8..54248cf870 100644
+--- a/src/plugins/platforms/xcb/gl_integrations/xcb_egl/qxcbeglwindow.cpp
++++ b/src/plugins/platforms/xcb/gl_integrations/xcb_egl/qxcbeglwindow.cpp
+@@ -6,6 +6,7 @@
+ #include "qxcbeglintegration.h"
+ 
+ #include <QtGui/private/qeglconvenience_p.h>
++#include <QtGui/private/qeglstreamconvenience_p.h>
+ 
+ QT_BEGIN_NAMESPACE
+ 
+@@ -42,7 +43,12 @@ void QXcbEglWindow::create()
+ {
+     QXcbWindow::create();
+ 
++#if QT_CONFIG(egl_x11)
+     m_surface = eglCreateWindowSurface(m_glIntegration->eglDisplay(), m_config, m_window, nullptr);
++#else
++    QEGLStreamConvenience streamFuncs;
++    m_surface = streamFuncs.create_platform_window_surface(m_glIntegration->eglDisplay(), m_config, reinterpret_cast<void *>(m_window), nullptr);
++#endif
+ }
+ 
+ QT_END_NAMESPACE
