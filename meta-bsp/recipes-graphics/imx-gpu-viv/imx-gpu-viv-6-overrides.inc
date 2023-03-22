@@ -15,7 +15,7 @@ PROVIDES_OPENCL = " \
 SRC_URI:remove  = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 SRC_URI:prepend = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true "
 
-S:append = "-${IMX_SRCREV_ABBREV}"
+S = "${WORKDIR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}"
 
 PACKAGES_OPENCL:mx8mm-nxp-bsp = ""
 
