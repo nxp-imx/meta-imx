@@ -1,9 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += " \
-    file://qt-${IMX_BACKEND}.sh \
-    file://qtbase-fix-no-opengl-build.patch \
-"
+SRC_URI += "file://0001-Revert-EGL-X11-Plugin-enablement-change.patch"
+SRC_URI += "file://qt-${IMX_BACKEND}.sh"
 
 PACKAGECONFIG_GRAPHICS:imxpxp = ""
 
