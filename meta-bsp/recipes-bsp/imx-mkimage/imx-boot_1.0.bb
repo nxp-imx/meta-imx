@@ -75,7 +75,7 @@ REV_OPTION:mx8qxp-generic-bsp = \
 REV_OPTION:mx8dx-generic-bsp  = "REV=C0"
 REV_OPTION:mx8ulp-generic-bsp = \
     "${@bb.utils.contains('MACHINE_FEATURES', 'soc-reva0', '', \
-                                                           'REV=A1', d)}"
+                                                           'REV=A2', d)}"
 
 compile_mx8m() {
     bbnote 8MQ/8MM/8MN/8MP boot binary build
