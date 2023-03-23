@@ -1,7 +1,10 @@
 NXP Software Content Register
 
 Release - Linux 5.4.24_2.1.4
-  January 2023
+  March 2023
+
+Outgoing License: LA_OPT_NXP_Software_License v42 January 2023 - Production Use - Section 2.3 applies 
+License File:     EULA.txt
 
 Yocto Project recipe manifest:
 repo init -u https://github.com/nxp-imx/imx/imx-manifest -b imx-linux-zeus -m imx_5.4.24_2.1.4.xml
@@ -26,7 +29,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     uboot-imx.git
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                Licenses/gpl-2.0.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Bootloader with i.MX-specific capabilities
@@ -51,7 +54,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     imx-sc-firmware-1.5.4.bin
-Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 - Production Use - Section 2.3 applies 
+Outgoing License:            LA_OPT_NXP_Software_License v42 January 2023 - Production Use - Section 2.3 applies 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
