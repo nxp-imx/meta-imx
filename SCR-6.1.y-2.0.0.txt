@@ -45,7 +45,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-atf.git
-Version:                     2.6
+Version:                     2.8
 Outgoing License:            BSD-3-Clause 
 License File:                docs/license.rst
 Package Category:            BSP
