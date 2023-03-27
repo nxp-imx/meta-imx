@@ -1,4 +1,4 @@
-# Copyright 2021-2022 NXP
+# Copyright 2021-2023 NXP
 
 SUMMARY = "NXP i.MX SECURE ENCLAVE library"
 DESCRIPTION = "NXP IMX SECURE ENCLAVE library"
@@ -6,15 +6,14 @@ SECTION = "base"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://EULA.txt;md5=76871788f27c28af824e2ec1ca187832"
 
-DEPENDS = "zlib"
+DEPENDS = " openssl"
+EXTRA_OEMAKE = "PLAT=ele OPENSSL_PATH=${STAGING_INCDIR}"
 
-EXTRA_OEMAKE = "PLAT=ele"
-
-SRCBRANCH = "lf-6.1.1_1.0.0"
+SRCBRANCH = "master"
 SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
 
 SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
-SRCREV = "4ff929d60102cb1bd7afe86c89b1b4dfad52063e"
+SRCREV = "620875138888ac5130cf5208e663378b788ed486"
 
 
 S = "${WORKDIR}/git"
