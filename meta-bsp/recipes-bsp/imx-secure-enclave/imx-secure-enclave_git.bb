@@ -23,4 +23,6 @@ do_install () {
 	oe_runmake DESTDIR=${D} install_tests
 }
 
+FILES:${PN} += "${datadir}/se"
+
 COMPATIBLE_MACHINE = "(mx8ulp-nxp-bsp|mx93-nxp-bsp)"
