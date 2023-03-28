@@ -7,16 +7,15 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://EULA.txt;md5=76871788f27c28af824e2ec1ca187832"
 
 DEPENDS = " openssl"
-EXTRA_OEMAKE = "PLAT=ele OPENSSL_PATH=${STAGING_INCDIR}"
-
-SRCBRANCH = "master"
-SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
 
 SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
+SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
+SRCBRANCH = "master"
 SRCREV = "620875138888ac5130cf5208e663378b788ed486"
 
-
 S = "${WORKDIR}/git"
+
+EXTRA_OEMAKE = "PLAT=ele OPENSSL_PATH=${STAGING_INCDIR}"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
