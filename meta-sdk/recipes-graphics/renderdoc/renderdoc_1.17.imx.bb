@@ -8,9 +8,7 @@ SRC_URI += " \
     file://0004-Add-basic-support-for-Wayland-replay-on-renderdoccmd.patch \
     file://0005-Add-window-functionalities-for-Wayland-replay-suppor.patch \
     file://0006-Fix-compilation-for-iMX.patch \
-    file://0007-Change-wl_shell-to-xdg_shell-for-renderdoccmd-replay.patch \
-    file://0008-renderdoccmd-CMakeLists.txt-add-xdg-shell.patch \
-    file://0009-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
+    file://0001-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
 "
 
 REQUIRED_DISTRO_FEATURES:remove = "opengl"
