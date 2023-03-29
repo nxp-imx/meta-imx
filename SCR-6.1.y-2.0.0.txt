@@ -808,8 +808,8 @@ Origin:                      NXP (BSD-3-Cluse)
 Multimedia Packages
 --------------------------------------------
 
-Package:                     imx-codec-4.7.4.bin
-Version:                     4.7.4
+Package:                     imx-codec-4.8.0.bin
+Version:                     4.8.0
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -825,8 +825,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.7.4.bin
-Version:                     4.7.4
+Package:                     imx-parser-4.8.0.bin
+Version:                     4.8.0
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
