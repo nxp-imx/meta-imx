@@ -8,7 +8,10 @@ SRC_URI += " \
     file://0004-Add-basic-support-for-Wayland-replay-on-renderdoccmd.patch \
     file://0005-Add-window-functionalities-for-Wayland-replay-suppor.patch \
     file://0006-Fix-compilation-for-iMX.patch \
-    file://0001-renderdoc-CMakeLists.txt-Set-TARGET-DESTINATION-usin.patch \
+    file://0007-Change-wl_shell-to-xdg_shell-for-renderdoccmd-replay.patch \
+    file://0008-renderdoccmd-CMakeLists.txt-add-xdg-shell.patch \
+    file://0009-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
+    file://0010-renderdoc-CMakeLists.txt-Fix-multilib-case.patch \
 "
 
 REQUIRED_DISTRO_FEATURES:remove = "opengl"
@@ -22,9 +25,14 @@ PACKAGECONFIG[egl]     = "-DENABLE_EGL=ON,-DENABLE_EGL=OFF"
 PACKAGECONFIG[gl]      = "-DENABLE_GL=ON,-DENABLE_GL=OFF,virtual/libgl"
 PACKAGECONFIG[gles]    = "-DENABLE_GLES=ON,-DENABLE_GLES=OFF"
 PACKAGECONFIG[vulkan]  = "-DENABLE_VULKAN=ON,-DENABLE_VULKAN=OFF"
-PACKAGECONFIG[wayland] = "-DENABLE_WAYLAND=ON,-DENABLE_WAYLAND=OFF,wayland"
+PACKAGECONFIG[wayland] = "-DENABLE_WAYLAND=ON,-DENABLE_WAYLAND=OFF,wayland-native wayland wayland-protocols"
 PACKAGECONFIG[xcb]     = "-DENABLE_XCB=ON,-DENABLE_XCB=OFF"
 PACKAGECONFIG[xlib]    = "-DENABLE_XLIB=ON,-DENABLE_XLIB=OFF"
+
+EXTRA_OECMAKE += "\
+    -DWAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner \
+    -DWAYLAND_PROTOCOLS_DIR=${STAGING_DATADIR}/wayland-protocols \
+"
 
 do_compile:prepend () {
     if [ "${base_libdir}" != "lib" ]; then

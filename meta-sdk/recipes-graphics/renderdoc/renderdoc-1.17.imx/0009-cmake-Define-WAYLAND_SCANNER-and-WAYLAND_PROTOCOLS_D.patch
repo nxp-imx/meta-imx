@@ -1,0 +1,36 @@
+From d82229410744fba18580984a413ca0a92a64ac2a Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Tue, 4 Apr 2023 12:02:59 +0800
+Subject: [PATCH] cmake: Define WAYLAND_SCANNER and WAYLAND_PROTOCOLS_DIR if
+ not already defined
+
+This helps with cross compiling and providing these knobs from cmake
+cmdline
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ renderdoccmd/CMakeLists.txt | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/renderdoccmd/CMakeLists.txt b/renderdoccmd/CMakeLists.txt
+index b176629b9..21e4efb62 100644
+--- a/renderdoccmd/CMakeLists.txt
++++ b/renderdoccmd/CMakeLists.txt
+@@ -1,7 +1,10 @@
+ if(ENABLE_WAYLAND)
+-
+-    pkg_get_variable(WAYLAND_PROTOCOLS_DIR wayland-protocols pkgdatadir)
+-    pkg_get_variable(WAYLAND_SCANNER wayland-scanner wayland_scanner)
++    if (NOT DEFINED WAYLAND_PROTOCOLS_DIR)
++            pkg_get_variable(WAYLAND_PROTOCOLS_DIR wayland-protocols pkgdatadir)
++    endif()
++    if (NOT DEFINED WAYLAND_SCANNER)
++            pkg_get_variable(WAYLAND_SCANNER wayland-scanner wayland_scanner)
++    endif()
+ 
+     set(DEQP_XDG_SHELL_PROTOCOL ${WAYLAND_PROTOCOLS_DIR}/stable/xdg-shell/xdg-shell.xml)
+     set(DEQP_XDG_SHELL_GEN_OUTPUTS_DIR ${PROJECT_SOURCE_DIR}/renderdoccmd)
+-- 
+2.17.1

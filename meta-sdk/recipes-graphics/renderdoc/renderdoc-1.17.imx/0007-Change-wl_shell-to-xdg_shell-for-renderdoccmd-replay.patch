@@ -1,0 +1,211 @@
+From 55ea5b078338c6cbf521f5476d85549e0c839b46 Mon Sep 17 00:00:00 2001
+From: Yuan Tian <yuan.tian@nxp.com>
+Date: Tue, 28 Mar 2023 11:12:49 +0800
+Subject: [PATCH 1/2] Change wl_shell to xdg_shell for renderdoccmd replay to
+ be compatible with weston11.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
+---
+ renderdoccmd/renderdoccmd_linux.cpp | 98 +++++++++++++++++++++++------
+ 1 file changed, 78 insertions(+), 20 deletions(-)
+
+diff --git a/renderdoccmd/renderdoccmd_linux.cpp b/renderdoccmd/renderdoccmd_linux.cpp
+index 0c8045862..2cdf8c268 100644
+--- a/renderdoccmd/renderdoccmd_linux.cpp
++++ b/renderdoccmd/renderdoccmd_linux.cpp
+@@ -45,6 +45,7 @@
+ #include <sys/mman.h>
+ #include <errno.h>
+ #include <linux/input.h>
++#include "xdg-shell.h"
+ #endif
+ 
+ #include <replay/renderdoc_replay.h>
+@@ -57,8 +58,9 @@
+   static struct wl_compositor *compositor = NULL;
+ 
+   static struct wl_surface *surface = NULL;
+-  static struct wl_shell *shell = NULL;
+-  static struct wl_shell_surface *shell_surface = NULL;
++  static struct xdg_wm_base *g_wm_base = NULL;
++  static struct xdg_surface *g_xdg_surface = NULL;
++  static struct xdg_toplevel *g_xdg_toplevel = NULL;
+   static struct wl_seat *seat = NULL;
+ 
+   static struct wl_shm *shm = NULL;
+@@ -81,6 +83,7 @@
+ 
+   static bool fullscreen = false;
+   static bool esc_pressed = false;
++  static bool wait_for_configure = true;
+ #endif
+ 
+ void Daemonise()
+@@ -105,6 +108,7 @@ static void pointer_handle_enter(void *data, struct wl_pointer *pointer,
+                                   uint32_t serial, struct wl_surface *surface,
+                                   wl_fixed_t sx, wl_fixed_t sy)
+ {
++
+   struct wl_buffer *buff;
+   struct wl_cursor_image *image;
+ 
+@@ -132,7 +136,7 @@ static void pointer_handle_button(void *data, struct wl_pointer *wl_pointer,
+                                   uint32_t button, uint32_t state)
+ {
+   if (button == BTN_LEFT && state == WL_POINTER_BUTTON_STATE_PRESSED)
+-    wl_shell_surface_move(shell_surface, seat, serial);
++    xdg_toplevel_move(g_xdg_toplevel, seat, serial);
+ }
+ 
+ static void pointer_handle_axis(void *data, struct wl_pointer *wl_pointer,
+@@ -176,7 +180,7 @@ static void keyboard_handle_key(void *data, struct wl_keyboard *keyboard,
+       fullscreen = false;
+       *global_width = base_width;
+       *global_height = base_height;
+-      wl_shell_surface_set_transient(shell_surface, surface, 0, 0, 0);
++      xdg_toplevel_unset_fullscreen(g_xdg_toplevel);
+       create_window(base_width, base_height);
+     }
+     else
+@@ -184,9 +188,7 @@ static void keyboard_handle_key(void *data, struct wl_keyboard *keyboard,
+       fullscreen = true;
+       *global_width = fullscreen_width;
+       *global_height = fullscreen_height;
+-      wl_shell_surface_set_fullscreen(shell_surface,
+-                WL_SHELL_SURFACE_FULLSCREEN_METHOD_DEFAULT,
+-                0, NULL);
++      xdg_toplevel_set_fullscreen(g_xdg_toplevel, NULL);
+       create_window(fullscreen_width, fullscreen_height);
+     }
+   }
+@@ -245,6 +247,16 @@ static const struct wl_seat_listener seat_listener = {
+   seat_handle_capabilities,
+ };
+ 
++static void
++xdg_wm_base_ping(void *data, struct xdg_wm_base *shell, uint32_t serial)
++{
++    xdg_wm_base_pong(shell, serial);
++}
++
++static const struct xdg_wm_base_listener xdg_wm_base_listener = {
++    xdg_wm_base_ping,
++};
++
+ static void registry_handler(void *data, struct wl_registry *registry,
+                               uint32_t id, const char *interface,
+                               uint32_t version)
+@@ -254,9 +266,9 @@ static void registry_handler(void *data, struct wl_registry *registry,
+     compositor = (wl_compositor *) wl_registry_bind(registry, id,
+                   &wl_compositor_interface, 1);
+   }
+-  else if (strcmp(interface, "wl_shell") == 0)
+-  {
+-    shell = (wl_shell *) wl_registry_bind(registry, id, &wl_shell_interface, 1);
++  else if (strcmp(interface, "xdg_wm_base") == 0) {
++    g_wm_base = (xdg_wm_base*)wl_registry_bind(registry, id, &xdg_wm_base_interface, 1);
++    xdg_wm_base_add_listener(g_wm_base, &xdg_wm_base_listener, NULL);
+   }
+   else if (strcmp(interface, "wl_shm") == 0)
+   {
+@@ -401,6 +413,36 @@ static void create_window(uint32_t width, uint32_t height)
+   wl_surface_damage(surface, 0, 0, width, height);
+   wl_surface_commit(surface);
+ }
++
++static void
++handle_xdg_surface_configure(void *data, struct xdg_surface *surface,
++                             uint32_t serial)
++{
++  xdg_surface_ack_configure(surface, serial);
++
++  wait_for_configure = false;
++}
++
++static const struct xdg_surface_listener xdg_surface_listener = {
++  handle_xdg_surface_configure,
++};
++
++static void
++handle_xdg_toplevel_configure(void *data, struct xdg_toplevel *xdg_toplevel,
++                              int32_t width, int32_t height,
++                              struct wl_array *state)
++{
++}
++
++static void
++handle_xdg_toplevel_close(void *data, struct xdg_toplevel *xdg_toplevel)
++{
++}
++
++static const struct xdg_toplevel_listener xdg_toplevel_listener = {
++  handle_xdg_toplevel_configure,
++  handle_xdg_toplevel_close,
++};
+ #endif
+ 
+ WindowingData DisplayRemoteServerPreview(bool active, const rdcarray<WindowingSystem> &systems)
+@@ -676,33 +718,49 @@ void DisplayRendererPreview(IReplayController *renderer, TextureDisplay &display
+     return;
+   }
+ 
+-  registry = wl_display_get_registry(display);
+   wl_registry_add_listener(registry, &registry_listener, NULL);
+ 
+   wl_display_dispatch(display);
+   wl_display_roundtrip(display);
+ 
+-  if (!compositor || !shell || !seat)
++/*  cursor_surface = wl_compositor_create_surface(compositor);*/
++  surface = wl_compositor_create_surface(compositor);
++  if(surface == NULL)
+   {
+-    std::cerr << "Could not bind Wayland protocols!" << std::endl;
++    std::cerr << "Could not create surface for Wayland compositor" << std::endl;
+     return;
+   }
+ 
+-  surface = wl_compositor_create_surface(compositor);
+-  if(surface == NULL)
++  if (!compositor || !seat)
+   {
+-    std::cerr << "Could not create surface for Wayland compositor" << std::endl;
++    std::cerr << "Could not bind Wayland protocols!" << std::endl;
+     return;
+   }
+ 
+-  shell_surface = wl_shell_get_shell_surface(shell, surface);
+-  if(shell_surface == NULL)
++  if (!g_wm_base)
+   {
+-    std::cerr << "Could not get shell surface for Wayland surface" << std::endl;
++    std::cerr << "Could not bind XDG protocols!" << std::endl;
+     return;
+   }
+ 
+-  wl_shell_surface_set_toplevel(shell_surface);
++  g_xdg_surface = xdg_wm_base_get_xdg_surface(g_wm_base, surface);
++  xdg_surface_add_listener(g_xdg_surface, &xdg_surface_listener, NULL);
++  if (g_xdg_surface == NULL) {
++    fprintf(stderr, "Can't create xdg-shell surface\n");
++    return;
++  }
++
++  g_xdg_toplevel = xdg_surface_get_toplevel(g_xdg_surface);
++  xdg_toplevel_add_listener(g_xdg_toplevel, &xdg_toplevel_listener, NULL);
++  if (g_xdg_toplevel == NULL) {
++    fprintf(stderr, "Can't create xdg-shell toplevel\n");
++    return;
++  }
++
++  wl_surface_commit(surface);
++  wl_display_dispatch(display);
++  while (wait_for_configure)
++    usleep(1000);
+ 
+   base_width = width;
+   base_height = height;
+-- 
+2.17.1
