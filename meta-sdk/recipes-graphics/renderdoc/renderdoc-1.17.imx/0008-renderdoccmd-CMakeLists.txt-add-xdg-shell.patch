@@ -1,0 +1,63 @@
+From a42fd15a08564c2e3c0bdaaba3f14d35c9ee2d4e Mon Sep 17 00:00:00 2001
+From: Yuan Tian <yuan.tian@nxp.com>
+Date: Wed, 29 Mar 2023 11:47:42 +0800
+Subject: [PATCH 2/2] renderdoccmd/CMakeLists.txt: add xdg-shell
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
+---
+ renderdoccmd/CMakeLists.txt | 41 ++++++++++++++++++++++++++++++++-----
+ 1 file changed, 36 insertions(+), 5 deletions(-)
+
+diff --git a/renderdoccmd/CMakeLists.txt b/renderdoccmd/CMakeLists.txt
+index 5e6254f26..b176629b9 100644
+--- a/renderdoccmd/CMakeLists.txt
++++ b/renderdoccmd/CMakeLists.txt
+@@ -1,8 +1,39 @@
+-set(sources
+-    renderdoccmd.cpp
+-    renderdoccmd.h
+-    3rdparty/cmdline/cmdline.h
+-    )
++if(ENABLE_WAYLAND)
++
++    pkg_get_variable(WAYLAND_PROTOCOLS_DIR wayland-protocols pkgdatadir)
++    pkg_get_variable(WAYLAND_SCANNER wayland-scanner wayland_scanner)
++
++    set(DEQP_XDG_SHELL_PROTOCOL ${WAYLAND_PROTOCOLS_DIR}/stable/xdg-shell/xdg-shell.xml)
++    set(DEQP_XDG_SHELL_GEN_OUTPUTS_DIR ${PROJECT_SOURCE_DIR}/renderdoccmd)
++    set(DEQP_XDG_SHELL_OUTPUTS
++        ${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR}/xdg-shell.c
++        ${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR}/xdg-shell.h)
++
++    add_custom_command(
++        COMMAND ${WAYLAND_SCANNER} ARGS client-header ${DEQP_XDG_SHELL_PROTOCOL} ${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR}/xdg-shell.h
++        COMMAND ${WAYLAND_SCANNER} ARGS public-code ${DEQP_XDG_SHELL_PROTOCOL} ${DEQP_XDG_SHELL_GEN_OUTPUTS_DIR}/xdg-shell.c
++        DEPENDS ${DEQP_XDG_SHELL_PROTOCOL}
++        OUTPUT ${DEQP_XDG_SHELL_OUTPUTS})
++
++    add_custom_target(
++        deqp-xdg-shell ALL
++        DEPENDS ${DEQP_XDG_SHELL_OUTPUTS})
++
++    set(sources
++        xdg-shell.c
++        xdg-shell.h
++        renderdoccmd.cpp
++        renderdoccmd.h
++        3rdparty/cmdline/cmdline.h
++        )
++else()
++    set(sources
++        renderdoccmd.cpp
++        renderdoccmd.h
++        3rdparty/cmdline/cmdline.h
++        )
++endif()
++
+ set(includes PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty ${CMAKE_SOURCE_DIR}/renderdoc/api)
+ set(libraries PRIVATE renderdoc)
+ 
+-- 
+2.17.1
