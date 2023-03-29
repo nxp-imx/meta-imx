@@ -117,7 +117,7 @@ SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "imx-1.22.x"
-SRCREV = "ffa196e591928974c7e197fa8e77cc27fcd7a05d"
+SRCREV = "a95bde0e80f4dd444f78b5c946677a6d9d41f236"
 
 S = "${WORKDIR}/git"
 
