@@ -917,8 +917,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-sw-pdm-1.0.2.bin
-Version:                     1.0.2
+Package:                     imx-sw-pdm-1.0.3.bin
+Version:                     1.0.3
 Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
