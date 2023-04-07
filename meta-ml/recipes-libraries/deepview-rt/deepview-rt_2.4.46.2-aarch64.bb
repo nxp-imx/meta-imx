@@ -22,13 +22,10 @@ PACKAGECONFIG_OPENVX:mx8ulp-nxp-bsp     = ""
 PACKAGECONFIG[openvx] = ",,,libopenvx-imx"
 
 do_install () {
-    install -d ${D}${bindir}
     install -d ${D}${libdir}
     install -d ${D}${includedir}
     install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
 
-    cp -r  ${S}/modelrunner/bin/* ${D}${bindir}
-    cp -rP ${S}/modelrunner/lib/* ${D}${libdir}
     cp -rP ${S}/${BPN}/lib/* ${D}${libdir}
     cp -r  ${S}/${BPN}/include/* ${D}${includedir}
     if ${@bb.utils.contains('PACKAGECONFIG', 'openvx', 'false', 'true', d)} ; then
@@ -49,7 +46,6 @@ INHIBIT_SYSROOT_STRIP = "1"
 FILES_SOLIBSDEV = ""
 
 FILES:${PN} += "${libdir}/*"
-RDEPENDS:${PN} = "onnxruntime tensorflow-lite"
 INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
 
 BBCLASSEXTEND = "nativesdk"
