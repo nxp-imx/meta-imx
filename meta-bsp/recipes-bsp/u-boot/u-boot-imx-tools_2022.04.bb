@@ -1,6 +1,15 @@
 require recipes-bsp/u-boot/u-boot-tools.inc
 require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
 
+###############################################################
+# BEGIN: Changes to u-boot-imx-common_${PV}.inc
+
+SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
+UBOOT_SRC ?= "git://github.com/nxp-imx/uboot-imx.git;protocol=https"
+
+# END: Changes to u-boot-imx-common_${PV}.inc
+###############################################################
+
 DEPENDS += "gnutls util-linux"
 
 PROVIDES:append:class-target = " ${MLPREFIX}u-boot-tools"
