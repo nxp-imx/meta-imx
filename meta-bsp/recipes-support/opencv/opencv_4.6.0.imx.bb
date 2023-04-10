@@ -1,4 +1,4 @@
-require recipes-support/opencv/opencv_4.5.2.imx.bb
+require recipes-support/opencv/opencv_4.6.0.imx.bb
 
 SRCBRANCH = "4.6.0_imx"
 SRCREV_opencv = "d3440df40a6e90cd1d2a1b729bcbc16aa4d42f5d"
