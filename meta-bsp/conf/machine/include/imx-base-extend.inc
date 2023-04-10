@@ -4,19 +4,15 @@
 UBOOT_PROVIDES_BOOT_CONTAINER:imx-nxp-bsp = "0"
 UBOOT_PROVIDES_BOOT_CONTAINER:mx8m-nxp-bsp = "0"
 
+IMX_SOC_REV       ??= ""
+IMX_SOC_REV_LOWER   = "${@d.getVar('IMX_SOC_REV').lower()}"
+IMX_SOC_REV_UPPER   = "${@d.getVar('IMX_SOC_REV').upper()}"
+
 # i.MX 8M Plus UltraLite
 MACHINEOVERRIDES_EXTENDER:mx8mpul:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8m-generic-bsp:mx8m-nxp-bsp:mx8mpul-generic-bsp:mx8mpul-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER:mx8mpul:use-mainline-bsp = "imx-generic-bsp:imx-mainline-bsp:mx8-generic-bsp:mx8-mainline-bsp:mx8m-generic-bsp:mx8m-mainline-bsp:mx8mpul-generic-bsp:mx8mpul-mainline-bsp"
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx8mpul"
 MACHINE_SOCARCH_SUFFIX:mx8mpul-nxp-bsp = "-mx8mpul"
-
-# i.MX 8DXL A1
-MACHINEOVERRIDES_EXTENDER:mx8dxla1:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8x-generic-bsp:mx8x-nxp-bsp:mx8dxl-generic-bsp:mx8dxl-nxp-bsp:mx8dxla1-generic-bsp:mx8dxla1-nxp-bsp"
-MACHINEOVERRIDES_EXTENDER:mx8dxla1:use-mainline-bsp = "imx-generic-bsp:imx-mainline-bsp:mx8-generic-bsp:mx8-mainline-bsp:mx8x-generic-bsp:mx8x-mainline-bsp:mx8dxl-generic-bsp:mx8dxl-mainline-bsp:mx8dxla1-generic-bsp:mx8dxla1-mainline-bsp"
-
-# i.MX 8DXL B0
-MACHINEOVERRIDES_EXTENDER:mx8dxlb0:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8x-generic-bsp:mx8x-nxp-bsp:mx8dxl-generic-bsp:mx8dxl-nxp-bsp:mx8dxlb0-generic-bsp:mx8dxlb0-nxp-bsp"
-MACHINEOVERRIDES_EXTENDER:mx8dxlb0:use-mainline-bsp = "imx-generic-bsp:imx-mainline-bsp:mx8-generic-bsp:mx8-mainline-bsp:mx8x-generic-bsp:mx8x-mainline-bsp:mx8dxl-generic-bsp:mx8dxl-mainline-bsp:mx8dxlb0-generic-bsp:mx8dxlb0-mainline-bsp"
 
 # i.MX 6 & 7 stay on weston 10.0 for fbdev
 PREFERRED_VERSION_weston:mx6-nxp-bsp ??= "10.0.3.imx"

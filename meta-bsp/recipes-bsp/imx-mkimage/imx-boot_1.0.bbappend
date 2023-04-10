@@ -16,9 +16,7 @@ M4_DEFAULT_IMAGE:mx8dx-nxp-bsp = "imx8qx_m4_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE:mx8ulp-nxp-bsp = "imx8ulp_m33_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE:mx9-nxp-bsp = ""
 
-REV_OPTION:mx8dxl-nxp-bsp = "ERROR_8DXL_REV_AMBIGUOUS"
-REV_OPTION:mx8dxlb0-nxp-bsp = "REV=B0"
-REV_OPTION:mx8dxla1-nxp-bsp = "REV=A1"
+REV_OPTION:mx8dxl-nxp-bsp = "REV=${IMX_SOC_REV_UPPER}"
 
 IS_DXL                = "false"
 IS_DXL:mx8dxl-nxp-bsp = "true"
@@ -28,9 +26,6 @@ do_compile[depends] += "${IMX_M4_DEMOS}"
 do_compile:prepend() {
     if ${IS_DXL}; then
         bbwarn "!!! Booting with an image for the wrong DXL Rev will PERMANENTLY DAMAGE YOUR BOARD !!!"
-    fi
-    if [ "${REV_OPTION}" = "ERROR_8DXL_REV_AMBIGUOUS" ]; then
-        bbfatal "Machine ${MACHINE} cannot be used. Please select a machine with the correct Rev for your board."
     fi
     case ${SOC_FAMILY} in
     mx8)
