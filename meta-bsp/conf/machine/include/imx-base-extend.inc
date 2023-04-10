@@ -1,7 +1,8 @@
 # This file is included from meta-freescale/conf/machine/include/imx-base.inc
 # and provides a simple mechanism to override settings in the file
 
-UBOOT_PROVIDES_BOOT_CONTAINER:imx-boot-container = "0"
+UBOOT_PROVIDES_BOOT_CONTAINER:imx-nxp-bsp = "0"
+UBOOT_PROVIDES_BOOT_CONTAINER:mx8m-nxp-bsp = "0"
 
 # i.MX 8M Plus UltraLite
 MACHINEOVERRIDES_EXTENDER:mx8mpul:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8m-generic-bsp:mx8m-nxp-bsp:mx8mpul-generic-bsp:mx8mpul-nxp-bsp"
