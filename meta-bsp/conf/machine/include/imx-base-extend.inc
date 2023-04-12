@@ -1,9 +1,6 @@
 # This file is included from meta-freescale/conf/machine/include/imx-base.inc
 # and provides a simple mechanism to override settings in the file
 
-UBOOT_PROVIDES_BOOT_CONTAINER:imx-nxp-bsp = "0"
-UBOOT_PROVIDES_BOOT_CONTAINER:mx8m-nxp-bsp = "0"
-
 IMX_SOC_REV       ??= ""
 IMX_SOC_REV_LOWER   = "${@d.getVar('IMX_SOC_REV').lower()}"
 IMX_SOC_REV_UPPER   = "${@d.getVar('IMX_SOC_REV').upper()}"
