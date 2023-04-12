@@ -1,5 +1,6 @@
-require recipes-support/opencv/opencv_4.5.2.imx.bb
+require opencv_4.5.2.imx.inc
 
+OPENCV_SRC = "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=master"
 SRCBRANCH = "4.5.4_imx"
 SRCREV_opencv = "9eb733fe4eadddb30a268d9d186ee5f114b16287"
 SRCREV_contrib = "2bc3e1a169afd2675ef68221176f32cc0ea5427a"
