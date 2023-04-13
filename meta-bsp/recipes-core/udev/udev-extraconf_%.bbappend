@@ -3,6 +3,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI:append:mx6-nxp-bsp = " file://blacklist.conf "
 SRC_URI:append:mx7-nxp-bsp = " file://blacklist.conf"
+SRC_URI:append:mx8-nxp-bsp = " file://blacklist.conf"
+SRC_URI:append:mx9-nxp-bsp = " file://blacklist.conf"
 
 do_install:prepend () {
     if [ -e "${WORKDIR}/blacklist.conf" ]; then
