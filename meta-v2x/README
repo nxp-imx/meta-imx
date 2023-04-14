@@ -32,7 +32,7 @@ URI: git://git.yoctoproject.org/meta-freescale-distro
 branch: zeus
 revision: Reference to the release manifest file (.xml) in the imx-manifest.git
 
-URI: git://source.codeaurora.org/external/imx/meta-imx
+URI: https://github.com/nxp-imx/meta-imx
 subdirectory: meta-bsp
 branch: the same branch as this layer
 revision: the same revision as this layer
