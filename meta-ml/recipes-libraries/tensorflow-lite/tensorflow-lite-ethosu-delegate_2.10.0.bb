@@ -9,7 +9,7 @@ require tensorflow-lite-${PV}.inc
 
 TENSORFLOW_LITE_ETHOSU_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-ethosu-delegate-imx.git;protocol=https" 
 SRCBRANCH_ethosu = "master"
-SRCREV_ethosu = "3b09b4a58ef0415effab2cfe913f6789e67a46ae"
+SRCREV_ethosu = "6c6517a331b9b80aaca5bbdb652e7b7b4072441c"
 
 SRCREV_FORMAT = "ethosu_tf"
 
