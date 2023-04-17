@@ -12,3 +12,7 @@ POKY_DEFAULT_DISTRO_FEATURES_remove      = "wayland ${REMOVE_VULKAN_FEATURE}"
 POKY_DEFAULT_DISTRO_FEATURES_append_mx8  = " jailhouse"
 
 INHERIT_remove = "uninative"
+
+# Set nobranch since bugfix branches like 5.15.2 were dropped
+QT_MODULE_BRANCH_PARAM = "${QT_MODULE_BRANCH_PARAM_IMX}"
+QT_MODULE_BRANCH_PARAM_IMX ?= "nobranch=1"
