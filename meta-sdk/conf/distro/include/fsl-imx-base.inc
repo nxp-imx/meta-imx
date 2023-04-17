@@ -16,3 +16,7 @@ DISTRO_FEATURES_append_mx8 = " virtualization"
 INHERIT_remove = "uninative"
 
 PACKAGECONFIG_append_pn-gstreamer1.0-plugins-ugly = " x264"
+
+# Set nobranch since bugfix branches like 5.15.2 were dropped
+QT_MODULE_BRANCH_PARAM = "${QT_MODULE_BRANCH_PARAM_IMX}"
+QT_MODULE_BRANCH_PARAM_IMX ?= "nobranch=1"
