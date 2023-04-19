@@ -1250,8 +1250,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     deepview-rt-2.4.46.1-aarch64.bin
-Version:                     2.4.46.1-aarch64
+Package:                     deepview-rt-2.4.46.2-aarch64.bin
+Version:                     2.4.46.2-aarch64
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 No distribution license granted - Section 2.2 applies
 License File:                COPYING
 Package Category:            MachineLearning
@@ -1434,6 +1434,16 @@ Origin:                      Vivante Corporation (MIT)
                              The Khronos Group Inc. (Apache-2.0) - https://www.khronos.org/
                              The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
 
+--------------------------------------------
+
+Package:                     modelrunner-2.0.0.bin
+Version:                     2.0.0
+Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 No distribution license granted - Section 2.2 applies
+License File:                COPYING
+Package Category:            MachineLearning
+Type of Content:             binary
+Description and comments:    Machine Learning Au-Zone ModelRunner for i.MX8 Application Processors
+Release Location:            Mirror
 --------------------------------------------
 Tools Packages
 --------------------------------------------
