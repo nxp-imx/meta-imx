@@ -178,6 +178,7 @@ do_install:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'python', 'true', 'false', d)}; then
         setuptools3_do_install
         find ${D}/${PYTHON_SITEPACKAGES_DIR} -type d -name "__pycache__" -exec rm -Rf {} +
+        git config --global --unset-all safe.directory ${TMPDIR}/.*/${PN}/.*/build/pybind11/src/pybind11
     fi
 }
 
