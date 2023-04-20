@@ -1,6 +1,6 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
 # Copyright 2018 (C) O.S. Systems Software LTDA.
-# Copyright 2017-2022 NXP
+# Copyright 2017-2023 NXP
 
 require recipes-bsp/u-boot/u-boot.inc
 require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
@@ -8,13 +8,13 @@ require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
 ###############################################################
 # BEGIN: Changes to u-boot-imx-common_${PV}.inc
 
-LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+#LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-UBOOT_SRC ?= "git://github.com/nxp-imx/uboot-imx.git;protocol=https"
-SRCBRANCH = "lf_v2022.04"
-SRCREV = "53e957f8115a38519004d5a7325f95013015df23"
-LOCALVERSION = "-${SRCBRANCH}"
+#SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
+#UBOOT_SRC ?= "git://github.com/nxp-imx/uboot-imx.git;protocol=https"
+#SRCBRANCH = "lf_v2023.04"
+#SRCREV = "${AUTOREV}"
+#LOCALVERSION = "-${SRCBRANCH}"
 
 # END: Changes to u-boot-imx-common_${PV}.inc
 ###############################################################
