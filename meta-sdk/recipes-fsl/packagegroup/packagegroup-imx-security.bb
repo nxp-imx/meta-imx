@@ -16,3 +16,6 @@ RDEPENDS:${PN} = " \
     util-linux \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'smw-tests', '', d)} \
 "
+
+RDEPENDS:${PN}:remove:mx8ulp-nxp-bsp = "smw-tests"
+RDEPENDS:${PN}:remove:mx9-nxp-bsp = "smw-tests"
