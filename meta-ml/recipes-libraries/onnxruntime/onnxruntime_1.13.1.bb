@@ -56,6 +56,8 @@ PYTHON_DEPENDS = "\
     ${PYTHON_PN}-pip-native \
     ${PYTHON_PN}-numpy-native \
     ${PYTHON_PN}-packaging-native\
+    ${PYTHON_PN}-pybind11\
+    ${PYTHON_PN}-pybind11-native\
 "
 
 PYTHON_RDEPENDS = "\
