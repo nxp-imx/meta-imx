@@ -15,7 +15,7 @@ PV = "2.0+${SRCPV}"
 NXPAFE_VOICESEEKER_SRC ?= "git://github.com/nxp-imx/imx-voiceui.git;protocol=https"
 SRC_URI = "${NXPAFE_VOICESEEKER_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "c74e99d30549e36500ddd167b50e9a3178661514"
+SRCREV = "031318f25eac6dce32fdffe38e55e798f3678bd0"
 S = "${WORKDIR}/git"
 
 EXTRA_CONF = "--enable-armv8 --bindir=/unit_tests/ --libdir=/usr/lib/"
