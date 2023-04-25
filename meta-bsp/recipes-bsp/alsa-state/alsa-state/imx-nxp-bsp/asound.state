@@ -1365,7 +1365,7 @@ state.wm8962audio {
 	control.116 {
 		iface MIXER
 		name 'INPGAR IN1R Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1375,7 +1375,7 @@ state.wm8962audio {
 	control.117 {
 		iface MIXER
 		name 'INPGAR IN2R Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1425,7 +1425,7 @@ state.wm8962audio {
 	control.122 {
 		iface MIXER
 		name 'INPGAL IN3L Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -11213,7 +11213,7 @@ state.sofwm8962audio {
 	control.116 {
 		iface MIXER
 		name 'INPGAR IN1R Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -11223,7 +11223,7 @@ state.sofwm8962audio {
 	control.117 {
 		iface MIXER
 		name 'INPGAR IN2R Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -11273,7 +11273,7 @@ state.sofwm8962audio {
 	control.122 {
 		iface MIXER
 		name 'INPGAL IN3L Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
