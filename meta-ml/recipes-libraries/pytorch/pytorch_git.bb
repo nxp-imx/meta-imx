@@ -4,7 +4,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9c57cfb31165de565a47b65b896391c2"
 
 DEPENDS = "python3 python3-pip-native python3-wheel-native"
-RDEPENDS:${PN} += "python3-core python3-numpy python3-future python3-typing-extensions"
+RDEPENDS:${PN} += "python3-core python3-numpy python3-future python3-typing-extensions numactl"
 
 PV = "2.0.0"
 PYV = "cp311"
