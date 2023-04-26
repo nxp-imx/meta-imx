@@ -7,7 +7,7 @@ Outgoing License: LA_OPT_NXP_Software_License v44 March 2023 - Additional distri
 License File:     EULA.txt
 
 Yocto Project recipe manifest:
-repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-langdale -m imx-6.1.22-2.0.0.xml
+repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-mickledore -m imx-6.1.22-2.0.0.xml
 
 Release tag: lf-6.1.22-2.0.0
 Release Location: https://www.nxp.com/design/software/embedded-software/i-mx-software/embedded-linux-for-i-mx-applications-processors:IMXLINUX
@@ -78,27 +78,27 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    BSP firmware - DDR EPDC HDMI SDMA VPU
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
                            In addition, these components contain code from the companies listed below.
-                             DDR:   origin: Synopsys DDR (proprietary)
-                             EASRC: origin: NXP (proprietary)
-                             EPDC:  origin: E Ink Corporation (proprietary)
-                             HDMI:  origin: Cadence Design Systems, Inc. (proprietary)
-                             SDMA:  origin: NXP (proprietary)
-                             XCVR:  origin: NXP (proprietary)
-                             XUVI:  origin: NXP (proprietary)
+                             DDR:   origin: Synopsys DDR (LA_OPT_NXP_Software_License)
+                             EASRC: origin: NXP (LA_OPT_NXP_Software_License)
+                             EPDC:  origin: E Ink Corporation (LA_OPT_NXP_Software_License)
+                             HDMI:  origin: Cadence Design Systems, Inc. (LA_OPT_NXP_Software_License)
+                             SDMA:  origin: NXP (LA_OPT_NXP_Software_License)
+                             XCVR:  origin: NXP (LA_OPT_NXP_Software_License)
+                             XUVI:  origin: NXP (LA_OPT_NXP_Software_License)
                              VPU:   vpu_fw_imx27_TO1.bin
                                     vpu_fw_imx27_TO2.bin
                                     vpu_fw_imx51.bin
                                     vpu_fw_imx53.bin
                                     vpu_fw_imx6d.bin
                                     vpu_fw_imx6q.bin
-                                 origin: Chips & Media, Inc.  (proprietary)
+                                 origin: Chips & Media, Inc.  (LA_OPT_NXP_Software_License)
 
                                     vpu_fw_imx8_dec.bin
                                     vpu_fw_imx8_enc.bin
-                                 origin: Amphion Semiconductor Ltd  (proprietary)
+                                 origin: Amphion Semiconductor Ltd  (LA_OPT_NXP_Software_License - see appendix)
 
 --------------------------------------------
 
@@ -230,9 +230,9 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    BSP firmware - Bluetooth and WIFI
 Release Location:            https://github.com/NXP/imx-firmware -b master
-Origin:                      brcm: Broadcom Corporation (proprietary)
-                             cyw-wifi-bt: Cypress Semiconductor Corporation (proprietary)
-                             nxp: NXP (proprietary)
+Origin:                      brcm: Broadcom Corporation (LA_OPT_NXP_Software_License - see appendix)
+                             cyw-wifi-bt: Cypress Semiconductor Corporation (LA_OPT_NXP_Software_License - see appendix)
+                             nxp: NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -518,8 +518,8 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    Basler camera binary drivers
 Release Location:            Mirror
-Origin:                      Basler AG (proprietary)
-                             VeriSilicon Holdings Co., Ltd. (proprietary)
+Origin:                      Basler AG (LA_OPT_NXP_Software_License)
+                             VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -912,8 +912,8 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    NXP Asynchronous Sample Rate Converter
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
-                             DSP Concepts, Inc. (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+                             DSP Concepts, Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -950,8 +950,8 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    VPU library
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
-                             Chips & Media, Inc. (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+                             Chips & Media, Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -1258,7 +1258,7 @@ Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    Machine Learning Au-Zone DeepViewRT and ModelRunner for i.MX8 Application Processors
 Release Location:            Mirror
-Origin:                      Au-Zone Technologies (proprietary)
+Origin:                      Au-Zone Technologies (LA_OPT_NXP_Software_License - see appendix)
 
 --------------------------------------------
 
@@ -1270,7 +1270,7 @@ Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    DeepViewRT Examples
 Release Location:            Mirror
-Origin:                    Au-Zone Technologies (proprietary)
+Origin:                    Au-Zone Technologies (LA_OPT_NXP_Software_License - see appendix)
                            mman-win32 (Author: Viktor Kutuzov, License: MIT) - https://github.com/klauspost/mman-win32
                            panda.jpg (Author: Shizhao, License: CC BY-SA 3.0) - https://commons.wikimedia.org/wiki/File:Giant_Panda_in_Beijing_Zoo_1.JPG
                            horse.jpg (public domain) - https://commons.wikimedia.org/wiki/File:Horsescd1l-095.jpg
@@ -1285,6 +1285,10 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    eIQ examples based on TensorFlow Lite
 Release Location:            https://github.com/nxp-imx/eiq-examples -b lf-6.1.22-2.0.0
+Origin:                      NXP (Apache-2.0)
+                             tensorflow v2.10.0 (Apache-2.0) - https://github.com/tensorflow/tensorflow
+                             hand_tracking (Apache-2.0) - https://github.com/wolterlw/hand_tracking
+
 --------------------------------------------
 
 Package:                     eiq-tvm-imx.git
@@ -1407,6 +1411,10 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite Ethos-u Delegate
 Release Location:            https://github.com/nxp-imx/tflite-ethosu-delegate-imx -b lf-6.1.22-2.0.0
+Origin:                      NXP (Apache-2.0)
+                             tensorflow v2.10.0 (Apache-2.0) - https://github.com/tensorflow/tensorflow
+                             ARM ethos-u-linux-driver-stack v22.08 (Apache-2.0) - https://git.mlplatform.org/ml/ethos-u/ethos-u-linux-driver-stack.git
+
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
@@ -1456,7 +1464,7 @@ Package Category:            Tools
 Type of Content:             binary
 Description and comments:    VeriSilicon Tools
 Release Location:            nxp.com
-Origin:                      VeriSilicon (proprietary)
+Origin:                      VeriSilicon (Verisilicon License)
 
 --------------------------------------------
 
