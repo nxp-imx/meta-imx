@@ -18,13 +18,15 @@ DEPENDS:append:mx93-nxp-bsp  = " imx-secure-enclave"
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw;destsuffix=git/smw \
            ${PSA_LIB_SRC};branch=${SRCBRANCH_psa};name=psa;destsuffix=git/${PSA_ARCH_TESTS_SRC_PATH} \
            "
+SRC_URI:append = "file://0001-Fixes-cmake-3.25-build.patch;patchdir=../${PSA_ARCH_TESTS_SRC_PATH}"
+
 SMW_LIB_SRC ?= "git://github.com/nxp-imx/imx-smw.git;protocol=https"
 PSA_LIB_SRC ?= "git://github.com/ARM-software/psa-arch-tests.git;protocol=https"
 PSA_ARCH_TESTS_SRC_PATH = "psa-arch-tests"
 SRCBRANCH_smw = "master"
 SRCBRANCH_psa = "main"
 SRCREV_smw = "919d3dc9b9401c7dfb65cee83e99d427a9a6f784"
-SRCREV_psa = "2a1852252a9b9af655cbe02d5d3c930952d0d798"
+SRCREV_psa = "7f286dae2b080d70bf7d4ae081431d960a5ea293"
 SRCREV_FORMAT = "smw_psa"
 S = "${WORKDIR}/git/smw"
 
