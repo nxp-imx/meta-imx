@@ -1,4 +1,4 @@
-# Copyright 2017-2020 NXP
+# Copyright 2017-2020,2023 NXP
 
 DESCRIPTION = "i.MX Hantro VPU library"
 LICENSE = "Proprietary"
