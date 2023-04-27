@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://mwifiex_8997/gpl-2.0.txt;md5=ab04ac0f249af12befccb944
 MRVL_SRC ?= "git://github.com/nxp-imx/mwifiex.git;protocol=https"
 
 # Kernel 5.4
-SRCBRANCH = "master"
+SRCBRANCH = "imx_5.4.70_2.3.0"
 SRC_URI = "${MRVL_SRC};branch=${SRCBRANCH}"
-SRCREV = "5fc6a71423db3a07f7cf804ed052c0353bd9d1be"
+SRCREV = "9b08cf4d6418bbde260581677e186464c720583d"
 
 S = "${WORKDIR}/git"
 
