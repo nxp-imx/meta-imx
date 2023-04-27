@@ -1,6 +1,9 @@
 # Drop the poky hardknott commit 6bb1621815f41fd09c971a0e26fb4bcd0963ab8a
 #   As the script cannot handle the element MetricName
 
+PACKAGECONFIG[libtraceevent] = ",NO_LIBTRACEEVENT=1"
+PACKAGECONFIG[bpf] = ",NO_BPF_SKEL=1"
+
 base_do_configure:prepend () {
     # Drop the feature for sort pmu-event
     if [ -e "${S}/tools/perf/pmu-events/Build" ]; then
