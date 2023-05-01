@@ -330,7 +330,7 @@ Origin:                      NXP (Apache-2.0)
 Package:                     imx-kobs.git
 Version:                     
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NAND boot writer
@@ -641,7 +641,7 @@ Origin:                      NXP (MIT)
 Package:                     wayland-protocols-imx.git
 Version:                     1.31.imx
 Outgoing License:            MIT 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Wayland protocol development
@@ -654,7 +654,7 @@ Origin:                      NXP (MIT)
 Package:                     weston-imx.git
 Version:                     11.0.1.imx
 Outgoing License:            MIT 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    A reference implementation of a Wayland compositor
@@ -667,7 +667,7 @@ Origin:                      NXP (MIT)
 Package:                     weston-10-imx.git
 Version:                     10.0.3.imx
 Outgoing License:            MIT 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    A reference implementation of a Wayland compositor
