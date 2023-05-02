@@ -318,7 +318,7 @@ Origin:                      NXP (Apache-2.0)
 Package:                     imx-kobs.git
 Version:                     
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NAND boot writer
@@ -343,7 +343,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-optee-client.git
-Version:                     3.19.0.imx
+Version:                     3.21.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -356,7 +356,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-os.git
-Version:                     3.19.0.imx
+Version:                     3.21.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -370,7 +370,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-test.git
-Version:                     3.19.0.imx
+Version:                     3.21.0.imx
 Outgoing License:            BSD-2-Clause (ta/) and GPL-2.0 (host/) 
 License File:                LICENSE.md
 Package Category:            BSP
@@ -385,7 +385,7 @@ Origin:                      NXP (BSD-2-Clause)
 Package:                     imx-jailhouse.git
 Version:                     git
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A partitioning Hypervisor based on Linux
@@ -617,7 +617,7 @@ Origin:                      NXP (BSD-3-clause)
 Package:                     libdrm-imx.git
 Version:                     2.4.114.imx
 Outgoing License:            MIT 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    i.MX DRM Direct Rendering Manager
@@ -629,7 +629,7 @@ Origin:                      NXP (MIT)
 Package:                     wayland-protocols-imx.git
 Version:                     1.31.imx
 Outgoing License:            MIT 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Wayland protocol development
@@ -642,7 +642,7 @@ Origin:                      NXP (MIT)
 Package:                     weston-imx.git
 Version:                     11.0.1.imx
 Outgoing License:            MIT 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    A reference implementation of a Wayland compositor
@@ -655,7 +655,7 @@ Origin:                      NXP (MIT)
 Package:                     weston-10-imx.git
 Version:                     10.0.3.imx
 Outgoing License:            MIT 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    A reference implementation of a Wayland compositor
@@ -725,7 +725,7 @@ Origin:                      NXP (Proprietary)
 Package:                     g2d-samples.git
 Version:                     2.1
 Outgoing License:            BSD-3-Clause 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    Graphics G2D sample applications
@@ -1202,8 +1202,8 @@ Origin:                      NXP (proprietary)
 M33 Processor Packages
 --------------------------------------------
 
-Package:                     imx8ulp-m33-demo-2.13.1.bin
-Version:                     2.13.1
+Package:                     imx8ulp-m33-demo-2.14.0.bin
+Version:                     2.14.0
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
