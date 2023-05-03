@@ -1,5 +1,9 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
+SRC_URI += " \
+    file://0001-Fix-build-in-Python-3.11-invalid-mode-rU.patch \
+"
+
 SRC_URI:append:imx-nxp-bsp = " \
     file://0001-Fixed-chromium-flicker-with-g2d-renderer.patch \
     file://0002-chromium-met-EGL-API-GetProcAddress-failures.patch \
