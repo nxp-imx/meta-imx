@@ -3,15 +3,11 @@ require ${BPN}.inc
 LIC_FILES_CHKSUM = "file://LICENSE;md5=67d07a07ec29a50a3ded12b2ba952257"
 
 SRC_URI += " \
-    file://0001-Support-Python3-as-well-in-gen_release_info.py.patch \
-    \
     git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=git/external/glslang/src;name=glslang;branch=master \
-    \
     git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers;branch=master \
-    \
     git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=git/external/spirv-tools/src;name=spirv-tools;branch=master \
     file://0001-Include-limits-header.patch;patchdir=external/spirv-tools/src \
-    file://0002-Python-3-remove-deprecated-U-qualifier-on-open-3019.patch;patchdir=external/spirv-tools/src \
+    file://0001-Support-Python3-as-well-in-gen_release_info.py.patch \
 "
 
 SRCREV_vk-gl-cts = "2615cc4eb5d017a8376b689a54f0627b99ecd98f"
