@@ -1,0 +1,29 @@
+From 72bd632f557f4e99a35e3c301afebf967882eb1e Mon Sep 17 00:00:00 2001
+From: David Neto <dneto@google.com>
+Date: Thu, 7 Nov 2019 08:39:09 -0500
+Subject: [PATCH] Python 3: remove deprecated U qualifier on 'open' (#3019)
+
+The U qualifier (universal line endings) has no effect
+in Python3. Remove its use to avoid a Python warning.
+
+Upstream-Status: Backport [8a35bf030bc26751b992cd0c61e60cdaff3291fd]
+---
+ utils/update_build_version.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/utils/update_build_version.py b/utils/update_build_version.py
+index d71aeccd9..69a5bd0d3 100755
+--- a/utils/update_build_version.py
++++ b/utils/update_build_version.py
+@@ -88,7 +88,7 @@ def deduce_software_version(directory):
+     # Linux.
+     pattern = re.compile(r'^(v\d+\.\d+(-dev)?) \d\d\d\d-\d\d-\d\d\s*$')
+     changes_file = os.path.join(directory, 'CHANGES')
+-    with open(changes_file, mode='rU') as f:
++    with open(changes_file, mode='r') as f:
+         for line in f.readlines():
+             match = pattern.match(line)
+             if match:
+-- 
+2.25.1
+
