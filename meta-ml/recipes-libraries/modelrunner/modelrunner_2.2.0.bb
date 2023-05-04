@@ -36,7 +36,7 @@ INHIBIT_SYSROOT_STRIP = "1"
 FILES_SOLIBSDEV = ""
 
 FILES:${PN} += "${libdir}/*"
-RDEPENDS:${PN} = "onnxruntime tensorflow-lite"
+RDEPENDS:${PN} = "deepview-rt onnxruntime tensorflow-lite"
 INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
 
 BBCLASSEXTEND = "nativesdk"
