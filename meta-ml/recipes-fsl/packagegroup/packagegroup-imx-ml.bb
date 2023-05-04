@@ -34,11 +34,13 @@ ML_PKGS            = ""
 ML_PKGS:mx8-nxp-bsp = " \
     onnxruntime-tests \
     deepview-rt-examples \
+    modelrunner \
     tensorflow-lite \
 "
 ML_PKGS:mx9-nxp-bsp = " \
     onnxruntime-tests \
     deepview-rt-examples \
+    modelrunner \
     tensorflow-lite \
 "
 # These packages require acceleration, which currently maps to
