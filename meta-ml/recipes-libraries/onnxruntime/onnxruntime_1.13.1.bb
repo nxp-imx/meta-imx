@@ -11,7 +11,7 @@ DEPENDS = "libpng zlib ${BPN}-native"
 inherit setuptools3
 
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH_runtime = "imx_1.13.1"
+SRCBRANCH_runtime = "lf-6.1.22_2.0.0"
 SRC_URI = " \
     ${ONNXRUNTIME_SRC};branch=${SRCBRANCH_runtime};name=runtime \
     https://github.com/onnx/models/raw/${SRCREV_model}/LICENSE;name=model-license \
