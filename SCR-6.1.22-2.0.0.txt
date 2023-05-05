@@ -102,8 +102,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-sentinel-0.10.bin
-Version:                     0.10
+Package:                     firmware-sentinel-0.11.bin
+Version:                     0.11
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -260,8 +260,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     sof-imx-2.5.0
-Version:                     2.5.0
+Package:                     sof-imx-2.6.0
+Version:                     2.6.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -273,8 +273,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.5.0
-Version:                     2.5.0
+Package:                     sof-zephyr-2.6.0
+Version:                     2.6.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -536,8 +536,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p1.2-aarch32.bin
-Version:                     6.4.11.p1.2
+Package:                     imx-gpu-viv-6.4.11.p1.4-aarch32.bin
+Version:                     6.4.11.p1.4
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -555,8 +555,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p1.2-aarch64.bin
-Version:                     6.4.11.p1.2
+Package:                     imx-gpu-viv-6.4.11.p1.4-aarch64.bin
+Version:                     6.4.11.p1.4
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -663,7 +663,7 @@ Release Location:            https://github.com/nxp-imx/weston-imx -b lf-6.1.22-
 --------------------------------------------
 
 Package:                     imx-gputop.git
-Version:                     6.4.11.p1.2
+Version:                     6.4.11.p1.4
 Outgoing License:            MIT 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -674,8 +674,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p1.2-arm.bin
-Version:                     6.4.11.p1.2
+Package:                     imx-gpu-g2d-6.4.11.p1.4-arm.bin
+Version:                     6.4.11.p1.4
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -686,8 +686,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p1.2-aarch64.bin
-Version:                     6.4.11.p1.2
+Package:                     imx-gpu-g2d-6.4.11.p1.4-aarch64.bin
+Version:                     6.4.11.p1.4
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -734,8 +734,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p1.2-aarch64-wayland.bin
-Version:                     6.4.11.p1.2
+Package:                     libgpuperfcnt-6.4.11.p1.4-aarch64-wayland.bin
+Version:                     6.4.11.p1.4
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -746,8 +746,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p1.2-arm-fb.bin
-Version:                     6.4.11.p1.2
+Package:                     libgpuperfcnt-6.4.11.p1.4-arm-fb.bin
+Version:                     6.4.11.p1.4
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -758,8 +758,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p1.2-arm-wayland.bin
-Version:                     6.4.11.p1.2
+Package:                     libgpuperfcnt-6.4.11.p1.4-arm-wayland.bin
+Version:                     6.4.11.p1.4
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -1218,8 +1218,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx93-m33-demo-2.13.1.bin
-Version:                     2.13.1
+Package:                     imx93-m33-demo-2.14.0.bin
+Version:                     2.14.0
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1444,8 +1444,8 @@ Origin:                      Vivante Corporation (MIT)
 
 --------------------------------------------
 
-Package:                     modelrunner-2.0.0.bin
-Version:                     2.0.0
+Package:                     modelrunner-2.2.0.bin
+Version:                     2.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 No distribution license granted - Section 2.2 applies
 License File:                COPYING
 Package Category:            MachineLearning
@@ -1456,8 +1456,8 @@ Release Location:            Mirror
 Tools Packages
 --------------------------------------------
 
-Package:                     VivanteIDE-6.4.11.2.tgz
-Version:                     6.4.11.2
+Package:                     VivanteIDE-6.4.11.p1.tgz
+Version:                     6.4.11.p1
 Outgoing License:            VeriSilicon License 
 License File:                
 Package Category:            Tools
