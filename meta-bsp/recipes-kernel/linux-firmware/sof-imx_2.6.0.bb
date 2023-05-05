@@ -8,8 +8,8 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=0f00d99239d922ffd13cabef83b33444"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "c2bbced65b90f4700f4f3b1660d27d4b"
-SRC_URI[sha256sum] = "ac9328f4abbe0aeb9d07e05bfbe0d8893efae1efbe455d82a6f72c80034c6e19"
+SRC_URI[md5sum] = "5a53c84629fe0984da7ea8e570c3cc83"
+SRC_URI[sha256sum] = "d34e704eecd2eafebecd82511c7413ecafe8ed7fd94c83b987652de31d3281b1"
 
 inherit allarch
 
