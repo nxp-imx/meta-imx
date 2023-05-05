@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
 "
 
 SRCBRANCH = "lf-6.1.22_2.0.0"
-SRCREV = "e090abc70bb395f705f85659ad92bdafbe407628"
+SRCREV = "e090abc70bb395f705f85659ad92bdafbe407628" 
 
 PV = "2023.03+git${SRCPV}"
 
