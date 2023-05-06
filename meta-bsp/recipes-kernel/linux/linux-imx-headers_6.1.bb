@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 SRC_URI = "${KERNEL_SRC}"
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.1.y"
-LOCALVERSION = "-lts-${SRCBRANCH}"
+LOCALVERSION = "-lts-6.1.22"
 SRCREV = "910178d16dd3e4cba08bebde148c493308cd3fd7"
 
 S = "${WORKDIR}/git"

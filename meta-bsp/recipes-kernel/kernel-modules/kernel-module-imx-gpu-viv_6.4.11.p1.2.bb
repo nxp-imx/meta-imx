@@ -11,7 +11,7 @@ SRC_URI = "${KERNEL_SRC};subpath=drivers/mxc/gpu-viv;destsuffix=git/src \
            file://Add-makefile.patch"
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.1.y"
-LOCALVERSION = "-lts-5.15.y"
+LOCALVERSION = "-lts-6.1.22"
 SRCREV = "a03940c3d4323970c3b647ed4a060a37b85f050d"
 
 S = "${WORKDIR}/git"

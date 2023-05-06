@@ -21,7 +21,7 @@ SRC_URI = "${KERNEL_SRC}"
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 KBRANCH = "${SRCBRANCH}"
 SRCBRANCH = "lf-6.1.y"
-LOCALVERSION = "-lts-next"
+LOCALVERSION = "-lts-6.1.22"
 SRCREV = "910178d16dd3e4cba08bebde148c493308cd3fd7"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
@@ -29,7 +29,7 @@ SRCREV = "910178d16dd3e4cba08bebde148c493308cd3fd7"
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "6.1.y"
+LINUX_VERSION = "6.1.22"
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
 
