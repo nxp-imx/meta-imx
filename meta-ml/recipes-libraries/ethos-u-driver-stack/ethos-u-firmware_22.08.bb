@@ -2,7 +2,7 @@ SUMMARY = "The firmware of Cortex(R)-M33 for Arm(R) Ethos(TM)-U NPU"
 DESCRIPTION = "The firmware of Cortex(R)-M33 for Arm(R) Ethos(TM)-U NPU"
 LICENSE = "Apache-2.0 & GPL-2.0-only & BSD-3-Clause"
 LIC_FILES_CHKSUM = "\
-    file://LICENSE-APACHE-2.0.txt;md5=e3fc50a88d0a364313df4b21ef20c29e \
+    file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e \
     file://LICENSE-GPL-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://LICENSE-BSD-3.txt;md5=0858ec9c7a80c4a2cf16e4f825a2cc91 \
 "
