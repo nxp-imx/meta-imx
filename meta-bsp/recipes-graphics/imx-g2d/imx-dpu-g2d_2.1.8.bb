@@ -9,7 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7853b7bf2936b2c25c893eac7033374"
 DEPENDS = "libgal-imx libdrm"
 PROVIDES += "virtual/libg2d"
 
-SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
+IMX_SRCREV_ABBREV = ""
 SRC_URI[md5sum] = "9b8197e52eb49a2fe8e72886e8ba990c"
 SRC_URI[sha256sum] = "ac08a1b6fac5dfeb1cccc11b6cdc9898ee324337f9dca9085e2c77a6aa471c1c"
 
