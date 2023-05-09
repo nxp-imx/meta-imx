@@ -9,16 +9,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7853b7bf2936b2c25c893eac7033374"
 DEPENDS = "libgal-imx"
 PROVIDES = "virtual/libg2d"
 
-FSLBIN_NAME = "${PN}-${PV}-${TARGET_ARCH}"
-
-SRC_URI = "${FSL_MIRROR}/${FSLBIN_NAME}-${IMX_SRCREV_ABBREV}.bin;name=${TARGET_ARCH};fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${IMX_BIN_NAME}.bin;name=${TARGET_ARCH};fsl-eula=true"
+IMX_BIN_NAME = "${BP}-${TARGET_ARCH}-${IMX_SRCREV_ABBREV}"
 IMX_SRCREV_ABBREV =  "60b77d8"
 SRC_URI[aarch64.md5sum] = "331b0a68120ad46791b4d3aca8b63267"
 SRC_URI[aarch64.sha256sum] = "65439432b02c79a47dbdd8041379d1a7541b86d1402a4367dda46d5e74e2e5be"
 SRC_URI[arm.md5sum] = "63e9b88f6c7e705a2296809008a93bcc"
 SRC_URI[arm.sha256sum] = "64ae925338f1c74af3e0f614e9974dc348d488a5b3a1c3665147ed7761c7cb8a"
 
-S = "${WORKDIR}/${FSLBIN_NAME}"
+S = "${WORKDIR}/${IMX_BIN_NAME}"
 
 inherit fsl-eula-unpack
 
