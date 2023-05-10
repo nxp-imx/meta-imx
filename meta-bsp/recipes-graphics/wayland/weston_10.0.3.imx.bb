@@ -155,6 +155,9 @@ GROUPADD_PARAM:${PN} = "--system weston-launch"
 
 SUMMARY = "Weston, a Wayland compositor, i.MX fork"
 
+LIC_FILES_CHKSUM:remove = "file://COPYING;md5=d79ee9e66bb0f95d3386a7acae780b70"
+LIC_FILES_CHKSUM:append = "file://LICENSE;md5=d79ee9e66bb0f95d3386a7acae780b70"
+
 DEFAULT_PREFERENCE = "-1"
 
 SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}/downloads/${BPN}-${PV}.tar.xz"
@@ -162,7 +165,7 @@ SRC_URI:prepend = "git://github.com/nxp-imx/weston-imx.git;protocol=https;branch
 SRC_URI += "file://0001-Revert-protocol-no-found-wayland-scanner-with-Yocto-.patch \
             file://0001-g2d-renderer.c-Include-sys-stat.h.patch"
 SRCBRANCH = "weston-imx-10.0.3"
-SRCREV = "1e69d816c1b5a56fae00ff2df9449bed39785ab5"
+SRCREV = "c41675dc616886828219eba9b9ce22ec17533090"
 S = "${WORKDIR}/git"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
