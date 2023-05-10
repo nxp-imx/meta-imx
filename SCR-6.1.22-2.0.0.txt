@@ -698,8 +698,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-2.1.8.bin
-Version:                     2.1.8
+Package:                     imx-dpu-g2d-2.1.10.bin
+Version:                     2.1.10
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -808,8 +808,8 @@ Origin:                      NXP (BSD-3-Cluse)
 Multimedia Packages
 --------------------------------------------
 
-Package:                     imx-codec-4.8.0.bin
-Version:                     4.8.0
+Package:                     imx-codec-4.8.1.bin
+Version:                     4.8.1
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -825,8 +825,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.8.0.bin
-Version:                     4.8.0
+Package:                     imx-parser-4.8.1.bin
+Version:                     4.8.1
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -970,8 +970,8 @@ Origin:                      VeriSilicon Inc. (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.1.7
-Version:                     1.1.7
+Package:                     imx-vpu-hantro-daemon-1.1.8
+Version:                     1.1.8
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1322,7 +1322,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     ethos-u-firmware.git
 Version:                     22.08
 Outgoing License:            Apache-2.0 
-License File:                LICENSE-APACHE-2.0.txt
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-firmware is the binary NPU driver running on cortex-m33 core of NXP iMX93 platform
