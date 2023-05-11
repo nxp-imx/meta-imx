@@ -17,5 +17,16 @@ INHIBIT_SYSROOT_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INSANE_SKIP:${PN} = "arch dev-so ldflags"
 
+DSP_PLATFORM:mx8qm-nxp-bsp  = "imx8qmqxp"
+DSP_PLATFORM:mx8qxp-nxp-bsp = "imx8qmqxp"
+DSP_PLATFORM:mx8mp-nxp-bsp  = "imx8m"
+DSP_PLATFORM:mx8dx-nxp-bsp  = "imx8m"
+DSP_PLATFORM:mx8ulp-nxp-bsp = "imx8ulp"
+do_install() {
+    install -d ${D}${libdir}/imx-mm/audio-codec
+
+    cp -rfv ${S}/release/lib/dsp/${DSP_PLATFORM}/lib*so ${D}${libdir}/imx-mm/audio-codec
+}
+
 FILES:${PN} += "${libdir}/imx-mm/audio-codec ${datadir}/imx-mm"
 COMPATIBLE_MACHINE = "(mx8qm-nxp-bsp|mx8qxp-nxp-bsp|mx8dx-nxp-bsp|mx8mp-nxp-bsp|mx8ulp-nxp-bsp)"
