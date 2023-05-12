@@ -23,10 +23,10 @@ DSP_PLATFORM:mx8mp-nxp-bsp  = "imx8m"
 DSP_PLATFORM:mx8dx-nxp-bsp  = "imx8m"
 DSP_PLATFORM:mx8ulp-nxp-bsp = "imx8ulp"
 do_install() {
-    install -d ${D}${libdir}/imx-mm/audio-codec
+    install -d ${D}${libdir}/imx-mm/audio-codec/dsp
 
-    cp -rfv ${S}/release/lib/dsp/${DSP_PLATFORM}/lib*so ${D}${libdir}/imx-mm/audio-codec
+    cp -rfv ${S}/release/lib/dsp/${DSP_PLATFORM}/lib*so ${D}${libdir}/imx-mm/audio-codec/dsp
 }
 
-FILES:${PN} += "${libdir}/imx-mm/audio-codec ${datadir}/imx-mm"
+FILES:${PN} += "${libdir}/imx-mm/audio-codec/dsp ${datadir}/imx-mm"
 COMPATIBLE_MACHINE = "(mx8qm-nxp-bsp|mx8qxp-nxp-bsp|mx8dx-nxp-bsp|mx8mp-nxp-bsp|mx8ulp-nxp-bsp)"
