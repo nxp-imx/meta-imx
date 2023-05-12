@@ -3,7 +3,7 @@ DESCRIPTION = "cross-platform, high performance scoring engine for ML models"
 SECTION = "devel"
 LICENSE = "MIT & Apache-2.0"
 LIC_FILES_CHKSUM_runtime = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
-LIC_FILES_CHKSUM_model = "file://${WORKDIR}/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LIC_FILES_CHKSUM_model = "file://${S}/example-models/squeezenet/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 LIC_FILES_CHKSUM = "${LIC_FILES_CHKSUM_runtime} ${LIC_FILES_CHKSUM_model}"
 
 DEPENDS = "libpng zlib ${BPN}-native"
@@ -12,17 +12,9 @@ inherit setuptools3
 
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH_runtime = "lf-6.1.22_2.0.0"
-SRC_URI = " \
-    ${ONNXRUNTIME_SRC};branch=${SRCBRANCH_runtime};name=runtime \
-    https://github.com/onnx/models/raw/${SRCREV_model}/LICENSE;name=model-license \
-    https://github.com/onnx/models/raw/${SRCREV_model}/vision/classification/squeezenet/model/squeezenet1.0-9.tar.gz;name=model-squeezenet \
-"
-SRC_URI[model-license.md5sum] = "3b83ef96387f14655fc854ddc3c6bd57"
-SRC_URI[model-license.sha256sum] = "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
-SRC_URI[model-squeezenet.md5sum] = "92e240a948f9bbc92534d752eb465317"
-SRC_URI[model-squeezenet.sha256sum] = "f4c9a2906a949f089bee5ef1bf9ea1c0dc1b49d5abeb1874fff3d206751d0f3b"
+SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH_runtime};name=runtime"
+
 SRCREV_runtime = "f600bb26c13f26bcda84edf6b875cc7522824fc3"
-SRCREV_model = "6ab957a2fe61f34a76c670946f7cbd806d2cacca"
 SRCREV_FORMAT = "runtime_model"
 
 S = "${WORKDIR}/git"
@@ -155,9 +147,10 @@ do_install:append() {
     # Ensure target dir exists
     install -d ${D}${bindir}/${BP}
 
-    # Copy extracted squeezenet tarball and add Apache2 license
-    cp $CP_ARGS ${WORKDIR}/squeezenet ${D}${bindir}/${BP}
-    install -m 0644 ${WORKDIR}/LICENSE ${D}${bindir}/${BP}/squeezenet
+    # Copy squeezenet updated model from imx-onnxruntime repo
+    if [ -d ${S}/example-models/ ]; then
+        cp $CP_ARGS ${S}/example-models/squeezenet ${D}${bindir}/${BP}/
+    fi
 
     # If cmake installs 'onnx_test_runner' at bindir level, move to package
     if [ -f ${D}${bindir}/onnx_test_runner ]; then
