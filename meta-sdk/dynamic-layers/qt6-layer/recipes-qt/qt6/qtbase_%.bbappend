@@ -7,6 +7,8 @@ PACKAGECONFIG_GRAPHICS:imxpxp = ""
 
 PACKAGECONFIG_PLATFORM = "no-opengl linuxfb"
 
+PACKAGECONFIG_VULKAN_IMX_GPU:mx8mm-nxp-bsp = "vulkan"
+
 IMX_BACKEND = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
         bb.utils.contains('DISTRO_FEATURES',     'x11', 'x11', \
