@@ -1012,8 +1012,8 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-dsp-2.0.5.bin
-Version:                     2.0.5
+Package:                     imx-dsp-2.1.5.bin
+Version:                     2.1.5
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -1026,8 +1026,8 @@ Origin:             NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     imx-dsp-codec-ext-2.0.5.bin
-Version:                     2.0.5
+Package:                     imx-dsp-codec-ext-2.1.5.bin
+Version:                     2.1.5
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
