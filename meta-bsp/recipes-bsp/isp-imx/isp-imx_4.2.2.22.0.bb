@@ -30,6 +30,7 @@ EXTRA_OECMAKE += " \
     -DISP_VERSION=ISP8000NANO_V1802 \
     -DPLATFORM=ARM64 \
     -DAPPMODE=V4L2 \
+    -DTUNINGEXT=1 \
     -DQTLESS=1 \
     -DFULL_SRC_COMPILE=1 \
     -DWITH_DRM=1 \
@@ -52,6 +53,7 @@ do_install() {
     cp -r ${B}/generated/release/bin/*_test ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/*.xml ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/*.drv ${D}/opt/imx8-isp/bin
+    cp -r ${B}/generated/release/bin/tuningext ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/isp_media_server ${D}/opt/imx8-isp/bin
     cp -r ${B}/generated/release/bin/vvext ${D}/opt/imx8-isp/bin
 
