@@ -1,4 +1,4 @@
-# Copyright 2018-2021 NXP
+# Copyright 2018-2021,2023 NXP
 
 DESCRIPTION = "i.MX DSP Codec Wrapper and Lib owned by NXP"
 LICENSE = "Proprietary"
@@ -17,16 +17,11 @@ INHIBIT_SYSROOT_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INSANE_SKIP:${PN} = "arch dev-so ldflags"
 
-DSP_PLATFORM:mx8qm-nxp-bsp  = "imx8qmqxp"
-DSP_PLATFORM:mx8qxp-nxp-bsp = "imx8qmqxp"
-DSP_PLATFORM:mx8mp-nxp-bsp  = "imx8m"
-DSP_PLATFORM:mx8dx-nxp-bsp  = "imx8m"
-DSP_PLATFORM:mx8ulp-nxp-bsp = "imx8ulp"
-do_install() {
-    install -d ${D}${libdir}/imx-mm/audio-codec/dsp
-
-    cp -rfv ${S}/release/lib/dsp/${DSP_PLATFORM}/lib*so ${D}${libdir}/imx-mm/audio-codec/dsp
-}
+EXTRA_OECONF:append:mx8qm-nxp-bsp = " --enable-imx8qmqxp"
+EXTRA_OECONF:append:mx8qxp-nxp-bsp = " --enable-imx8qmqxp"
+EXTRA_OECONF:append:mx8dx-nxp-bsp = " --enable-imx8qmqxp"
+EXTRA_OECONF:append:mx8mp-nxp-bsp = " --enable-imx8m"
+EXTRA_OECONF:append:mx8ulp-nxp-bsp = " --enable-imx8ulp"
 
 FILES:${PN} += "${libdir}/imx-mm/audio-codec/dsp ${datadir}/imx-mm"
 COMPATIBLE_MACHINE = "(mx8qm-nxp-bsp|mx8qxp-nxp-bsp|mx8dx-nxp-bsp|mx8mp-nxp-bsp|mx8ulp-nxp-bsp)"
