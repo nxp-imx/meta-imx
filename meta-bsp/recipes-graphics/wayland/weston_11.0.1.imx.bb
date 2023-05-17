@@ -169,7 +169,7 @@ PACKAGECONFIG:append:imxgpu2d = " imxg2d"
 PACKAGECONFIG:append:mx93-nxp-bsp = " imxg2d"
 
 # Override
-PACKAGECONFIG[xwayland] = "-Dxwayland=true,-Dxwayland=false,libxcursor"
+PACKAGECONFIG[xwayland] = "-Dxwayland=true,-Dxwayland=false,libxcursor xwayland"
 
 # Weston with i.MX G2D renderer
 PACKAGECONFIG[imxg2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d"
