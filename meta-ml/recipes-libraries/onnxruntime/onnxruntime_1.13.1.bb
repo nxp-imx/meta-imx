@@ -21,7 +21,7 @@ SRC_URI[model-license.md5sum] = "3b83ef96387f14655fc854ddc3c6bd57"
 SRC_URI[model-license.sha256sum] = "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
 SRC_URI[model-squeezenet.md5sum] = "92e240a948f9bbc92534d752eb465317"
 SRC_URI[model-squeezenet.sha256sum] = "f4c9a2906a949f089bee5ef1bf9ea1c0dc1b49d5abeb1874fff3d206751d0f3b"
-SRCREV_runtime = "ac35b899920c3caff89f6e23c415e5e56addb97c" 
+SRCREV_runtime = "f600bb26c13f26bcda84edf6b875cc7522824fc3"
 SRCREV_model = "6ab957a2fe61f34a76c670946f7cbd806d2cacca"
 SRCREV_FORMAT = "runtime_model"
 
