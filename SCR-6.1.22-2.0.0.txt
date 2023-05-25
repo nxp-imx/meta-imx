@@ -114,8 +114,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     firmware-upower-1.3.0.bin
-Version:                     1.3.0
+Package:                     firmware-upower-1.3.1.bin
+Version:                     1.3.1
 Outgoing License:            LA_OPT_NXP_Software_License v44 March 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
