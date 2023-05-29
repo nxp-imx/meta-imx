@@ -50,7 +50,7 @@ EXTRA_OECMAKE_IMX:mx8ulp-nxp-bsp = "-DELE_ROOT=${STAGING_DIR_HOST}"
 OECMAKE_TARGET_COMPILE += "build_tests"
 OECMAKE_TARGET_INSTALL += "install_tests"
 
-INSANE_SKIP_${PN}-tests = "textrel"
+INSANE_SKIP:${PN}-tests = "textrel"
 
 PACKAGES =+ "${PN}-tests"
 
