@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9fa7f895f96bde2d47fd5b7d95b6ba4d \
 "
 
 SRCBRANCH = "imx_jailhouse_2023.03"
-SRCREV = "e090abc70bb395f705f85659ad92bdafbe407628"
+SRCREV = "d3484c68313c2c837eb213ca1aa373e491fbc55f"
 
 PV = "2023.03+git${SRCPV}"
 
