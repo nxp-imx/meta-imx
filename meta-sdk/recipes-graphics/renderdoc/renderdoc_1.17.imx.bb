@@ -12,6 +12,7 @@ SRC_URI += " \
     file://0008-renderdoccmd-CMakeLists.txt-add-xdg-shell.patch \
     file://0009-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
     file://0010-renderdoc-CMakeLists.txt-Fix-multilib-case.patch \
+    file://0011-Fix-a-xdg_shell-bug-on-8ulp.patch \
 "
 
 REQUIRED_DISTRO_FEATURES:remove = "opengl"

@@ -1,0 +1,87 @@
+From b410eca917f0963cdbe4d999254b3a6b32f11940 Mon Sep 17 00:00:00 2001
+From: Yuan Tian <yuan.tian@nxp.com>
+Date: Mon, 29 May 2023 09:49:46 +0800
+Subject: [PATCH] Fix a xdg_shell bug on 8ulp: error 4: xdg_surface geometry
+ (1920 x 1080) is larger than the configured fullscreen state (720 x 480)
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
+---
+ renderdoccmd/renderdoccmd_linux.cpp | 39 +++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+
+diff --git a/renderdoccmd/renderdoccmd_linux.cpp b/renderdoccmd/renderdoccmd_linux.cpp
+index 2cdf8c268..efedf390a 100644
+--- a/renderdoccmd/renderdoccmd_linux.cpp
++++ b/renderdoccmd/renderdoccmd_linux.cpp
+@@ -62,6 +62,7 @@
+   static struct xdg_surface *g_xdg_surface = NULL;
+   static struct xdg_toplevel *g_xdg_toplevel = NULL;
+   static struct wl_seat *seat = NULL;
++  static struct wl_output *output = NULL;
+ 
+   static struct wl_shm *shm = NULL;
+   static struct wl_buffer *buffer = NULL;
+@@ -247,6 +248,32 @@ static const struct wl_seat_listener seat_listener = {
+   seat_handle_capabilities,
+ };
+ 
++static void output_handle_geometry(void* data, struct wl_output* wl_output, int32_t x, int32_t y, int32_t physical_width, int32_t physical_height,
++                                   int32_t subpixel, const char* make, const char* model, int32_t output_transform)
++{
++}
++
++static void output_handle_mode(void* data, struct wl_output* wl_output, uint32_t flags, int32_t width, int32_t height, int32_t refresh)
++{
++  fullscreen_width = width;
++  fullscreen_height = height;
++}
++
++static void output_handle_done(void* data, struct wl_output* wl_output)
++{
++}
++
++static void output_handle_scale(void* data, struct wl_output* wl_output, int32_t scale)
++{
++}
++
++static const struct wl_output_listener output_listener = {
++  output_handle_geometry,
++  output_handle_mode,
++  output_handle_done,
++  output_handle_scale,
++};
++
+ static void
+ xdg_wm_base_ping(void *data, struct xdg_wm_base *shell, uint32_t serial)
+ {
+@@ -283,6 +310,12 @@ static void registry_handler(void *data, struct wl_registry *registry,
+     seat = (wl_seat *) wl_registry_bind(registry, id, &wl_seat_interface, 1);
+     wl_seat_add_listener(seat, &seat_listener, NULL);
+   }
++  else if (strcmp(interface, "wl_output") == 0)
++  {
++    version = std::min(version, uint32_t{2});
++    output = (wl_output*)wl_registry_bind(registry, id, &wl_output_interface, version);
++    wl_output_add_listener(output, &output_listener, NULL);
++  }
+ }
+ 
+ static void registry_remover(void *data, struct wl_registry *registry,
+@@ -762,6 +795,12 @@ void DisplayRendererPreview(IReplayController *renderer, TextureDisplay &display
+   while (wait_for_configure)
+     usleep(1000);
+ 
++  if(width > fullscreen_width)
++    width = fullscreen_width;
++
++  if(height > fullscreen_height)
++    height = fullscreen_height;
++
+   base_width = width;
+   base_height = height;
+   global_width = (uint32_t *) malloc(sizeof(uint32_t));
+-- 
+2.17.1
+
