@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7853b7bf2936b2c25c893eac7033374"
 inherit fsl-eula-unpack use-imx-security-controller-firmware deploy
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "69bb6b902ca925eceb175c9bfca7209d"
-SRC_URI[sha256sum] = "dce4f6aebd10c5fc0155fdbb63e76413108a610213b8f98b4c04f9fec6e0737c"
+SRC_URI[md5sum] = "a18cbf9447b7f7c3493e11f1ea2a5c63"
+SRC_URI[sha256sum] = "07263a5d49eca47034fa8f625464437d4cd36c48e13562b3f0bcaa3be5f9e788"
 
 do_compile[noexec] = "1"
 
