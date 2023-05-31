@@ -52,8 +52,6 @@ EXTRA_OECMAKE_IMX:mx93-nxp-bsp = "-DELE_ROOT=${STAGING_DIR_HOST}"
 OECMAKE_TARGET_COMPILE += "build_tests"
 OECMAKE_TARGET_INSTALL += "install_tests"
 
-INSANE_SKIP_${PN}-tests = "textrel"
-
 PACKAGES =+ "${PN}-tests"
 
 FILES:${PN} += "${base_libdir}/optee_armtz/*"
