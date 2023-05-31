@@ -7,7 +7,7 @@ require imx-codec.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7853b7bf2936b2c25c893eac7033374" 
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "608178c174707d6a605215ff8decadd9"
-SRC_URI[sha256sum] = "aab3e1061f77258d7d5bf14b6a63b9b90887a5a2e9bdf89470bec2d4dfb3181e"
+SRC_URI[md5sum] = "7f94e54bc78bf0f4626808fa3bf5c23e"
+SRC_URI[sha256sum] = "2594a7e196899f634be0e090332f5ce073ae9796819b9a7601191ec752b921cc"
 
 inherit fsl-eula-unpack
