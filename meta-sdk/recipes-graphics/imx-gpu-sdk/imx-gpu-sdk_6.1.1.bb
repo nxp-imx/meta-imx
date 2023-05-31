@@ -128,10 +128,12 @@ RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8-nxp-bsp   = " \
 "
 RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8mm-nxp-bsp = ""
 
-RDEPENDS_OPENCL_DEV                = ""
-RDEPENDS_OPENCL_DEV:mx8-nxp-bsp    = "libopencl-imx-dev"
-INSANE_SKIP_OPENCL_DEV             = ""
-INSANE_SKIP_OPENCL_DEV:mx8-nxp-bsp = "dev-deps"
+RDEPENDS_OPENCL_DEV                  = ""
+RDEPENDS_OPENCL_DEV:mx8-nxp-bsp      = "libopencl-imx-dev"
+RDEPENDS_OPENCL_DEV:mx8mm-nxp-bsp    = ""
+INSANE_SKIP_OPENCL_DEV               = ""
+INSANE_SKIP_OPENCL_DEV:mx8-nxp-bsp   = "dev-deps"
+INSANE_SKIP_OPENCL_DEV:mx8mm-nxp-bsp = ""
 
 # vulkan-loader is dynamically loaded, so need to add an explicit
 # dependency
