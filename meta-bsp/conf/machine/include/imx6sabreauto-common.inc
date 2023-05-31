@@ -7,4 +7,4 @@ SERIAL_CONSOLES = "115200;ttymxc3"
 
 MACHINE_FIRMWARE:append:mx6-nxp-bsp = " linux-firmware-ath6k"
 
-MACHINE_FEATURES += " pci wifi bluetooth"
+MACHINE_FEATURES += " pci wifi bluetooth nxp8987-sdio"
