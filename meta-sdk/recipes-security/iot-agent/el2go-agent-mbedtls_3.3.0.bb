@@ -22,13 +22,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SECTION = "libs"
 
+DEPENDS = "python3-jsonschema-native python3-jinja2-native"
+
 S = "${WORKDIR}/git"
-SRCREV = "89f040a5c938985c5f30728baed21e49d0846a53"
-SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=mbedtls-2.28 \
+SRCREV = "01f6e617816b9b73381244013a4e1112406f8853"
+SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=development \
            file://run-ptest \
           "
 
-inherit cmake update-alternatives ptest
+inherit cmake update-alternatives ptest python3native
 
 PACKAGECONFIG ??= "shared-libs programs ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
 PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
@@ -38,8 +40,6 @@ PACKAGECONFIG[werror] = "-DMBEDTLS_FATAL_WARNINGS=ON,-DMBEDTLS_FATAL_WARNINGS=OF
 # https://github.com/Mbed-TLS/mbedtls/blob/development/docs/use-psa-crypto.md
 PACKAGECONFIG[psa] = ""
 PACKAGECONFIG[tests] = "-DENABLE_TESTING=ON,-DENABLE_TESTING=OFF"
-
-EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:STRING=${libdir}"
 
 # For now the only way to enable PSA is to explicitly pass a -D via CFLAGS
 CFLAGS:append = "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' -DMBEDTLS_USE_PSA_CRYPTO', '', d)}"
@@ -57,21 +57,12 @@ BBCLASSEXTEND = "native nativesdk"
 
 CVE_PRODUCT = "mbed_tls"
 
-# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/pull/5310
-CVE_CHECK_IGNORE += "CVE-2021-43666"
-# Fix merged upstream https://github.com/Mbed-TLS/mbedtls/commit/9a4a9c66a48edfe9ece03c7e4a53310adf73a86c
-CVE_CHECK_IGNORE += "CVE-2021-45451"
-
-# Export source files/headers needed by Arm Trusted Firmware
-sysroot_stage_all:append() {
-	sysroot_stage_dir "${S}/library" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/library"
-	sysroot_stage_dir "${S}/include" "${SYSROOT_DESTDIR}/usr/share/mbedtls-source/include"
-}
-
 do_install_ptest () {
-	install -d ${D}${PTEST_PATH}/tests
-	cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
-	find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
-	cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
+	if ${@bb.utils.contains('PACKAGECONFIG', 'tests', 'true', 'false', d)}; then
+		install -d ${D}${PTEST_PATH}/tests
+		cp -f ${B}/tests/test_suite_* ${D}${PTEST_PATH}/tests/
+		find ${D}${PTEST_PATH}/tests/ -type f -name "*.c" -delete
+		cp -fR ${S}/tests/data_files ${D}${PTEST_PATH}/tests/
+	fi
 }
 
