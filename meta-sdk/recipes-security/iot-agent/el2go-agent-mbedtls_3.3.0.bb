@@ -18,6 +18,9 @@ SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=developmen
 
 inherit cmake update-alternatives ptest python3native
 
+SRC_URI:append = "file://0001-crypto_struct-change-psa_key_attributes_t-layout.patch \
+                  file://0002-library-tls-disable-PSA-APIs-for-most-operations.patch"
+
 PACKAGECONFIG = "psa"
 PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
 PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
