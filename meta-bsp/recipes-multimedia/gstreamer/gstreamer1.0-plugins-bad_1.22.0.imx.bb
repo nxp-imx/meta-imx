@@ -207,10 +207,7 @@ PACKAGECONFIG:append:mx8-nxp-bsp = " kms tinycompress"
 
 PACKAGECONFIG[tinycompress]    = "-Dtinycompress=enabled,-Dtinycompress=disabled,tinycompress"
 
-# Disable introspection to fix [GstPlayer-1.0.gir] Error
-# -Dintrospection=disabled
 EXTRA_OEMESON += " \
-    -Donnx=disabled \
     -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \
 "
 
