@@ -142,7 +142,7 @@ Origin:                      NXP (GPL-2.0)
 Package:                     imx-lib.git
 Version:                     
 Outgoing License:            LGPL-2.1 
-License File:                LICENSE-LGPL-2.1
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    BSP libraries
@@ -233,6 +233,18 @@ Release Location:            https://github.com/NXP/imx-firmware -b master
 Origin:                      brcm: Broadcom Corporation (LA_OPT_NXP_Software_License - see appendix)
                              cyw-wifi-bt: Cypress Semiconductor Corporation (LA_OPT_NXP_Software_License - see appendix)
                              nxp: NXP (LA_OPT_NXP_Software_License)
+
+--------------------------------------------
+
+Package:                     mwifiex.git
+Version:                     
+Outgoing License:            GPL-2.0 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    NXP Wi-Fi linux SDK
+Release Location:            https://github.com/nxp-imx/mwifiex -b lf-6.1.22-2.0.0
+Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
@@ -333,7 +345,7 @@ Origin:                      NXP (GPL-2.0)
 Package:                     imx-uuc.git
 Version:                     
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A daemon for mfgtools.
@@ -385,7 +397,7 @@ Origin:                      NXP (BSD-2-Clause)
 Package:                     imx-jailhouse.git
 Version:                     git
 Outgoing License:            GPL-2.0 
-License File:                LICENSE
+License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A partitioning Hypervisor based on Linux
@@ -397,8 +409,8 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-secure-enclave.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v29 August 2021 Additional distribution license granted - Section 2.3 applies
-License File:                EULA.txt
+Outgoing License:            BSD-3-Clause Additional distribution license granted - Section 2.3 applies
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX secure enclave library
@@ -410,7 +422,7 @@ Origin:                      NXP (proprietary)
 Package:                     imx-smw.git
 Version:                     0.1
 Outgoing License:            BSD-3-Clause 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP i.MX Security Middleware Library
@@ -713,7 +725,7 @@ Origin:                      NXP (proprietary)
 Package:                     imx-g2d-pxp.git
 Version:                     2.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
-License File:                EULA.txt
+License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using PXP
@@ -1055,7 +1067,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     imx-voiceUI.git
 Version:                     2.0
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
-License File:                EULA.txt
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP RetuneDSP Voice Seeker
@@ -1419,7 +1431,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     tflite-vx-delegate-imx.git
 Version:                     2.10.0
-Outgoing License:            Apache-2.0 
+Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
