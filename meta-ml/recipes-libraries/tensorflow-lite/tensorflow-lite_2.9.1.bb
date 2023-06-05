@@ -45,6 +45,12 @@ EXTRA_OECMAKE_BUILD = "benchmark_model label_image"
 
 CXXFLAGS += "-fPIC"
 
+PYBIND11_INCLUDE = "${PYTHON_INCLUDE_DIR}/pybind11"
+NUMPY_INCLUDE = "${PKG_CONFIG_SYSROOT_DIR}/${PYTHON_SITEPACKAGES_DIR}/numpy/core/include"
+
+OECMAKE_C_FLAGS += "-I${PYTHON_INCLUDE_DIR} -I${PYBIND11_IN} -I${NUMPY_INCLUDE}"
+OECMAKE_CXX_FLAGS += "-I${PYTHON_INCLUDE_DIR} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"
+
 do_configure[network] = "1"
 do_configure:prepend() {
     export HTTP_PROXY=${http_proxy}
