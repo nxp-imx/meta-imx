@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v45 May 2023
+LA_OPT_NXP_Software_License v46 June 2023
 IMPORTANT.  Read the following NXP Software License Agreement (“Agreement”)
 completely. By selecting the “I Accept” button at the end of this page, or
 by downloading, installing, or using the Licensed Software, you indicate that
@@ -575,9 +575,10 @@ MQX RTOS Code: MQX RTOS source code may not be re-distributed by any NXP
 Licensee under any circumstance, even by a signed written amendment to this
 Agreement.
 
-NXP Voice Software: VoiceSpot, VoiceSeeker (including AEC), and Conversa may be
-used for evaluation or demonstration purposes only. Any commercial distribution
-rights are subject to a separate royalty agreement obtained from NXP.
+NXP Voice Software: VoiceSpot, VoiceSeeker (including AEC), VIT Speech to
+Intent, and Conversa may be used for evaluation or demonstration purposes only.
+Any commercial distribution rights are subject to a separate royalty agreement
+obtained from NXP.
 
 NXP Wireless Charging Library: License to the Software is limited to use in
 inductive coupling or wireless charging applications
