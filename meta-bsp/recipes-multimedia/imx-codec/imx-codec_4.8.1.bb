@@ -4,7 +4,7 @@
 
 require imx-codec.inc
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=63a38e9f392d8813d6f1f4d0d6fbe657"
+LIC_FILES_CHKSUM = "file://COPYING;md5=673fa34349fa40f59e0713cb0ac22b1f"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "e4d1e50f2d0829283e2f1aa0cb2e7ba3"
