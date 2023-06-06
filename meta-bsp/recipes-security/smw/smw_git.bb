@@ -24,7 +24,7 @@ PSA_ARCH_TESTS_SRC_PATH = "psa-arch-tests"
 SRCBRANCH_smw = "master"
 SRCBRANCH_psa = "main"
 SRCREV_smw = "b9b38961a6e703e085627675a3367867968ff3bf"
-SRCREV_psa = "ed3f1c0afbcb6236f8ab1116cbab8ebaba1fa95a"
+SRCREV_psa = "463cb95ada820bc6f758d50066cf8c0ed5cc3a02"
 SRCREV_FORMAT = "smw_psa"
 S = "${WORKDIR}/git/smw"
 
