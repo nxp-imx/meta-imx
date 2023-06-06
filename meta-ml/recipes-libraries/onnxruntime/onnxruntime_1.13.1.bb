@@ -14,7 +14,7 @@ ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=http
 SRCBRANCH_runtime = "lf-6.1.22_2.0.0"
 SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH_runtime};name=runtime"
 
-SRCREV_runtime = "dff8eb5bf7f6bbbcaf37482d6c2345a6f53ac695"
+SRCREV_runtime = "6cde05cc61834eff462570f6e96bee37e67ee85e"
 SRCREV_FORMAT = "runtime_model"
 
 S = "${WORKDIR}/git"
