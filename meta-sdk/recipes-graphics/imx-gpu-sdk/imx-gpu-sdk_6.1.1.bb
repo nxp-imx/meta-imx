@@ -127,26 +127,15 @@ RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8-nxp-bsp   = " \
     rapidvulkan \
 "
 RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8mm-nxp-bsp = ""
-
-RDEPENDS_OPENCL_DEV                = ""
-RDEPENDS_OPENCL_DEV:mx8-nxp-bsp    = "libopencl-imx-dev"
-INSANE_SKIP_OPENCL_DEV             = ""
-INSANE_SKIP_OPENCL_DEV:mx8-nxp-bsp = "dev-deps"
-
 # vulkan-loader is dynamically loaded, so need to add an explicit
 # dependency
 RDEPENDS_VULKAN_LOADER       = ""
 RDEPENDS_VULKAN_LOADER:mx8-nxp-bsp   = "vulkan-validationlayers vulkan-loader"
 RDEPENDS_VULKAN_LOADER:mx8mm-nxp-bsp = ""
-
 RDEPENDS:${PN} += " \
     ${RDEPENDS_EMPTY_MAIN_PACKAGE} \
     ${RDEPENDS_EMPTY_MAIN_PACKAGE_MX8} \
-    ${RDEPENDS_OPENCL_DEV} \
     ${RDEPENDS_VULKAN_LOADER} \
-"
-INSANE_SKIP:${PN} += " \
-    ${INSANE_SKIP_OPENCL_DEV} \
 "
 
 # For backwards compatibility
