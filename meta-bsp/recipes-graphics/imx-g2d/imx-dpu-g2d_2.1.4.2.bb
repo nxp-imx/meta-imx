@@ -4,7 +4,7 @@
 
 DESCRIPTION = "G2D library using i.MX DPU"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=63a38e9f392d8813d6f1f4d0d6fbe657"
+LIC_FILES_CHKSUM = "file://COPYING;md5=673fa34349fa40f59e0713cb0ac22b1f"
 
 DEPENDS = "libgal-imx libdrm"
 PROVIDES += "virtual/libg2d"
