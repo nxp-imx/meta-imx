@@ -2,6 +2,8 @@ DESCRIPTION = "A library to retrieve i.MX GPU performance data"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=673fa34349fa40f59e0713cb0ac22b1f"
 
+IMX_SRCREV_ABBREV = ""
+
 SRC_URI[arm-fb.md5sum] = "11aa7f3b1ef903b81bdb7ad1cdc53fb5"
 SRC_URI[arm-fb.sha256sum] = "e2b16810c2239655e205837d4bbf06252d39821935bbf0f285c796581bf4aa06"
 
@@ -20,7 +22,7 @@ SRC_URI[aarch64-wayland.sha256sum] = "30d26d54eebb96dceca2efd6b710f838132c6f6c8d
 SRC_URI[aarch64-x11.md5sum] = "bb862e55b8ee79ee5a83b0119618cd07"
 SRC_URI[aarch64-x11.sha256sum] = "85c1b51d33e5939600af311d509191387b864db2e0b55e11347b93831e662228"
 
-inherit fsl-eula-unpack2 fsl-eula-graphics
+inherit fsl-eula-unpack2 fsl-eula-graphics fsl-eula-recent
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
