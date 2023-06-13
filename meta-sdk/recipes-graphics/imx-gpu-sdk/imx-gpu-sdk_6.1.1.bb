@@ -130,7 +130,7 @@ RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8mm-nxp-bsp = ""
 # vulkan-loader is dynamically loaded, so need to add an explicit
 # dependency
 RDEPENDS_VULKAN_LOADER       = ""
-RDEPENDS_VULKAN_LOADER:mx8-nxp-bsp   = "vulkan-validationlayers vulkan-loader"
+RDEPENDS_VULKAN_LOADER:mx8-nxp-bsp   = "vulkan-loader"
 RDEPENDS_VULKAN_LOADER:mx8mm-nxp-bsp = ""
 RDEPENDS:${PN} += " \
     ${RDEPENDS_EMPTY_MAIN_PACKAGE} \
