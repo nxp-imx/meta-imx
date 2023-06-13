@@ -27,7 +27,7 @@ OPENCL_TOOLS:mx7-nxp-bsp   = ""
 OPENCL_TOOLS:mx8mm-nxp-bsp = ""
 
 VULKAN_TOOLS                      = ""
-VULKAN_TOOLS:mx8-nxp-bsp:imxgpu3d = "vulkan-loader vulkan-validationlayers vulkan-headers vkmark vulkan-tools gfxreconstruct"
+VULKAN_TOOLS:mx8-nxp-bsp:imxgpu3d = "vulkan-validation-layers vkmark vulkan-tools gfxreconstruct"
 VULKAN_TOOLS:mx8mm-nxp-bsp        = ""
 
 WAYLAND_TOOLS = " \
