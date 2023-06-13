@@ -133,7 +133,7 @@ Yocto build to untar packages from the NXP mirror. Please read this license agre
 setup process because, once accepted, all further work in the Yocto environment is tied to this accepted agreement.
 
 Chromium
----------
+--------
 Add Chromium to your Wayland or X11-based image by adding the following lines to local.conf:
 
 IMAGE_INSTALL:append = \
@@ -148,11 +148,18 @@ Build server host requirements for chromium 74 version:
 
 Chromium will have compilation errors, if any of the above host requirements are not met.
 
-QTWebEngine
---------
-Qtwebengine is not built by default so add this to local.conf or image recipe. It is supported only on the machines
-that has GPU.
- IMAGE_INSTALL:append = "packagegroup-qt6-webengine"
+QtWebEngine
+-----------
+QtWebEngine is not built by default, so add this to local.conf or image recipe. It is supported only on the machines
+that have GPU.
+
+IMAGE_INSTALL:append = "packagegroup-qt6-webengine"
+
+QtWebEngine is not compatible with the meta-chromium layer used by the release. If you are using the NXP build setup,
+please be sure to remove meta-chromium from bblayers.conf:
+
+# Commented out due to incompatibility with qtwebengine
+#BBLAYERS += "${BSPDIR}/sources/meta-browser/meta-chromium"
 
 There are many browsers available using QtWebEngine and can be found here:
 /usr/share/examples/webengine
