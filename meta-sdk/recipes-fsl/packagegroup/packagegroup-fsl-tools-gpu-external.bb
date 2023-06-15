@@ -19,8 +19,9 @@ RDEPENDS:${PN}:imxgpu = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "${WAYLAND_TOOLS}", "", d)} \
 "
 
-DRM_TOOLS         = ""
-DRM_TOOLS:imxdrm  = "kmscube"
+DRM_TOOLS               = ""
+DRM_TOOLS:imxdrm        = "kmscube"
+DRM_TOOLS:mx8mm-nxp-bsp = ""
 
 OPENCL_TOOLS               = "clblast"
 OPENCL_TOOLS:mx7-nxp-bsp   = ""
