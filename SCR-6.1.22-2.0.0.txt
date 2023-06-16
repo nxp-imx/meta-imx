@@ -65,7 +65,7 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    System Controller Firmware
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              ARM CMSIS Library (BSD-3-clause) - https://silver.arm.com/
 
 --------------------------------------------
@@ -110,7 +110,7 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    S400 firmware
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -122,7 +122,7 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    uPower firmware
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -256,7 +256,7 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    BSP firmware - SECO
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -268,7 +268,7 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    BSP source - SECO
 Release Location:            https://github.com/NXP/imx-seco-libs.git -b lf-6.1.22-2.0.0
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -415,7 +415,7 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX secure enclave library
 Release Location:            https://github.com/NXP/imx-secure-enclave.git -b lf-6.1.22-2.0.0
-Origin:                      NXP (proprietary)
+Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
@@ -451,7 +451,7 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    2X signature verification library
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              trace - NXP (BSD-3-clause)
 
 --------------------------------------------
@@ -518,7 +518,7 @@ Package Category:            Graphics
 Type of Content:             binary and source
 Description and comments:    i.MX software ISP
 Release Location:            Mirror
-Origin:                      VeriSilicon Holdings Co., Ltd. (proprietary)
+Origin:                      VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -556,8 +556,8 @@ Package Category:            Graphics
 Type of Content:             binary and source
 Description and comments:    GPU Core IP in binary and test application source
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
-                             Verisilicon (formerly Vivante Corp.) (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+                             Verisilicon (formerly Vivante Corp.) (LA_OPT_NXP_Software_License - see appendix)
                              opengleskul (MIT) - https://code.google.com/archive/p/opengleskul/
                              The Khronos Group Inc. (MIT) - http://www.khronos.org/opencl/
                              Mesa3D - Mesa Lib [GL3ext header] (SGI-B-2.0) - http://mesa3d.sourceforge.net/
@@ -575,8 +575,8 @@ Package Category:            Graphics
 Type of Content:             binary and source
 Description and comments:    GPU Core IP in binary and test application source
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
-                             Verisilicon (formerly Vivante Corp.) (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+                             Verisilicon (formerly Vivante Corp.) (LA_OPT_NXP_Software_License - see appendix)
                              opengleskul (MIT) - https://code.google.com/archive/p/opengleskul/
                              The Khronos Group Inc. (MIT) - http://www.khronos.org/opencl/
                              Mesa3D - Mesa Lib [GL3ext header] (SGI-B-2.0) - http://mesa3d.sourceforge.net/
@@ -694,7 +694,7 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    Graphics 2D
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -706,7 +706,7 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    Graphics 2D
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -718,7 +718,7 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    G2D implementation using DPU
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -754,7 +754,7 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    Library to retrieve i.MX GPU performance data
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -766,7 +766,7 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    Library to retrieve i.MX GPU performance data
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -778,7 +778,7 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    Library to retrieve i.MX GPU performance data
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -828,7 +828,7 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    i.MX multimedia codec libraries:  Codecs and wrappers for: AAC AACD BMP BSAC DeInterlace FLAC GIF JPEG MP3 MP3d NB_AMR OGG PEQ PNG SBC SRC WB_AMR WBAMRD G.711 G.723 G.726 G.729ab
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              ISO/IEC 13818-7 and ISO/IEC 14496-3 standards 
                              3GPP 26.173 standard 
                              FLAC (BSD-3-clause) - https://sourceforge.net/projects/flac/ 
@@ -845,7 +845,7 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    i.MX multimedia parser libraries: Parsers for: APE AVI FLV MKV MP3 MP4 MPG2 OGG
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -937,7 +937,7 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    NXP PDM to PCM Software Decimation SIMD Library
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
@@ -949,7 +949,7 @@ Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    i.MX VPU wrapper library
 Release Location:            https://github.com/NXP/imx-vpuwrap.git -b lf-6.1.22-2.0.0
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              sqlite (Public Domain) - http://www.hwaci.com/sw/sqlite/index.html
 
 --------------------------------------------
@@ -975,7 +975,7 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    VPU library
 Release Location:            Mirror
-Origin:                      VeriSilicon Inc. (proprietary)
+Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
                              The WebM project by Google Inc. (BSD-3-clause) https://bugs.chromium.org/p/webm/issues/list -- decoder_sw/software/source/vp9/;  decoder_sw/software/test/common/vpxfilereader.c; decoder_sw/software/test/vp8/vp8filereader.c
                              MD5 - Command Line Mesage Digest Utility by Colin Plumb (Public Domain) http://www.fourmilab.ch/md5/ -- decoder_sw/software/test/common/swhw/md5.c&h
                              Khronos Group - OpenMAX (version?) (MIT) https://www.khronos.org/openmax/ -- openmax_il/headers/
@@ -1004,7 +1004,7 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    VPU vc8000e encoder library
 Release Location:            Mirror
-Origin:                      VeriSilicon Inc. (proprietary)
+Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
                              Alliance for Open Media (BSD-2-clause, AFOM Patent License) - http://www.aomedia.org/
                              The WebM project by Google Inc. (BSD-3-clause) https://bugs.chromium.org/p/webm/issues/list
 
@@ -1032,9 +1032,9 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    Proprietary codecs and parsers
 Release Location:            Mirror
-Origin:             NXP (proprietary)
-                    Cadence (MIT)
-                    Matt Redfearn (BSD-3-clause)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+                             Cadence (MIT)
+                             Matt Redfearn (BSD-3-clause)
 
 --------------------------------------------
 
@@ -1046,7 +1046,7 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    Proprietary codecs and parsers
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              autoconf - Free Software Foundation (FSF All Permissive License)
                              X Consortium (MIT)
 
@@ -1090,7 +1090,7 @@ Package Category:            M4_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M4 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
 
@@ -1104,7 +1104,7 @@ Package Category:            M4_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M4 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
 
@@ -1118,7 +1118,7 @@ Package Category:            M4_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M4 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
 
@@ -1132,7 +1132,7 @@ Package Category:            M4_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M4 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
 
@@ -1146,7 +1146,7 @@ Package Category:            M4_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M4 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
 
@@ -1160,7 +1160,7 @@ Package Category:            M4_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M4 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
 
@@ -1176,7 +1176,7 @@ Package Category:            M7_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
 
@@ -1190,7 +1190,7 @@ Package Category:            M7_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
 
@@ -1204,7 +1204,7 @@ Package Category:            M7_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
@@ -1222,7 +1222,7 @@ Package Category:            M33_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M33 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
@@ -1238,7 +1238,7 @@ Package Category:            M33_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M33 core
 Release Location:            Mirror
-Origin:                      NXP (proprietary)
+Origin:                      NXP (LA_OPT_NXP_Software_License)
                              CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
                              Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
