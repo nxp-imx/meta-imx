@@ -443,6 +443,16 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
+Package:                     el2go-agent.git
+Version:                     
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    Contains communication protocol stack
+Release Location:            https://github.com/NXP/el2go-agent -b lf-6.1.22-2.0.0
+--------------------------------------------
+
 Package:                     ecdsa-lib-imx-3.3.2.3.bin
 Version:                     3.3.2.3
 Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 Additional distribution license granted - Section 2.3 applies
