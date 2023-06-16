@@ -7,6 +7,8 @@ SRC_URI:prepend = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=
 
 S = "${WORKDIR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}"
 
+PROVIDES_OPENGLES3:mx8mm-nxp-bsp = "virtual/libgles3"
+
 ### Section 2: Changes to be kept in meta-imx ###
 
 PACKAGECONFIG ?= "valgrind"
