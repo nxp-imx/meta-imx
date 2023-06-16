@@ -10,7 +10,7 @@ DEPENDS = "smw el2go-agent-mbedtls"
 SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH}"
 
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
-EL2GO_AGENT_SRCBRANCH = "master"
+EL2GO_AGENT_SRCBRANCH ?= "master"
 
 SRCREV = "32241f0dba2899b701a0103bdee029ae7f7d9741"
 S = "${WORKDIR}/git"
