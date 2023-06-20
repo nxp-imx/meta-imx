@@ -25,7 +25,7 @@ SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                file://tvm_runtime.pc.in \
 "
 
-SRCREV = "e3cd8c993038e7e06b099c711a33b4e436cc5384"
+SRCREV = "d71312a9c5b81737f97c89c06a316151fc1d9fef"
 SRCREV_dlpack = "3ec04430e89a6834e5a1b99471f415fa939bf642"
 SRCREV_dmlc-core = "6c401e242c59a1f4c913918246591bb13fd714e7"
 SRCREV_rang = "cabe04d6d6b05356fa8f9741704924788f0dd762"
