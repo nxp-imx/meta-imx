@@ -25,6 +25,7 @@ DEFAULTTUNE:mx8m-nxp-bsp   ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8qm-nxp-bsp  ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8x-nxp-bsp   ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8ulp-nxp-bsp ?= "armv8a-crc-crypto"
+DEFAULTTUNE:mx91p-nxp-bsp  ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx93-nxp-bsp   ?= "armv8a-crc-crypto"
 
 PACKAGECONFIG:append:pn-gstreamer1.0-plugins-ugly = " x264"
