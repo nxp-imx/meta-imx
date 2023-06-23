@@ -161,7 +161,8 @@ LIC_FILES_CHKSUM:append = "file://LICENSE;md5=d79ee9e66bb0f95d3386a7acae780b70"
 DEFAULT_PREFERENCE = "-1"
 
 SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}/downloads/${BPN}-${PV}.tar.xz"
-SRC_URI:prepend = "git://github.com/nxp-imx/weston-imx.git;protocol=https;branch=${SRCBRANCH} "
+SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
+WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 SRC_URI += "file://0001-Revert-protocol-no-found-wayland-scanner-with-Yocto-.patch \
             file://0001-g2d-renderer.c-Include-sys-stat.h.patch"
 SRCBRANCH = "weston-imx-10.0.3"
