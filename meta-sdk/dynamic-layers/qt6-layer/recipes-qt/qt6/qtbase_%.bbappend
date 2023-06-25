@@ -3,6 +3,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://0001-Fix-build-without-egl-x11.patch"
 SRC_URI += "file://qt-${IMX_BACKEND}.sh"
 
+PACKAGECONFIG_GRAPHICS:imxdrm = "gbm kms"
 PACKAGECONFIG_GRAPHICS:imxpxp = "${PACKAGECONFIG_GRAPHICS_IMX_DRM}"
 PACKAGECONFIG_GRAPHICS_IMX_DRM        = ""
 PACKAGECONFIG_GRAPHICS_IMX_DRM:imxdrm = "gbm kms"
