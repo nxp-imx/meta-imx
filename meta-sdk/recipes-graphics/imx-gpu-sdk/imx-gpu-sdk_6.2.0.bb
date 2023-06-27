@@ -4,9 +4,9 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://License.md;md5=9d58a2573275ce8c35d79576835dbeb8"
 
 DEPENDS_BACKEND = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' libxdg-shell wayland', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11',               ' xrandr', \
-                                                                             '', d), d)}"
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland-native wayland wayland-protocols', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', ' xrandr', \
+                                                        '', d), d)}"
 DEPENDS_MX8       = ""
 DEPENDS_MX8:mx8-nxp-bsp   = " \
     glslang-native \
@@ -42,7 +42,10 @@ DEPENDS = " \
 DEPENDS:append:imxgpu2d = " virtual/libg2d virtual/libopenvg"
 DEPENDS:append:imxgpu3d = " virtual/libgles2"
 
-require imx-gpu-sdk-src.inc
+SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
+GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
+GPU_SDK_SRC_BRANCH ?= "master"
+SRCREV = "3978980a87277071218ae0de96332cd4b445cc00"
 
 S = "${WORKDIR}/git"
 
@@ -69,11 +72,22 @@ EXTENSIONS:mx6dl-nxp-bsp = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geom
 EXTENSIONS:mx8m-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_color_buffer_float"
 EXTENSIONS:mx8mm-nxp-bsp = "*"
 
+CMAKE_CONFIG_GLOBAL_ARGS = " \
+    -DWAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner \
+    -DWAYLAND_PROTOCOLS_DIR=${STAGING_DATADIR}/wayland-protocols \
+"
+
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
     . ./prepare.sh
-    FslBuild.py -vvvvv -t sdk --UseFeatures [${FEATURES}] --UseExtensions [${EXTENSIONS}] --Variants [WindowSystem=${WINDOW_SYSTEM}] --BuildThreads ${@oe.utils.parallel_make(d)} -c install --CMakeInstallPrefix ${S}
+    FslBuild.py -vvvvv -t sdk -c install \
+        --BuildThreads ${@oe.utils.parallel_make(d)} \
+        --CMakeConfigGlobalArgs "${CMAKE_CONFIG_GLOBAL_ARGS}" \
+        --CMakeInstallPrefix ${S} \
+        --UseFeatures [${FEATURES}] \
+        --UseExtensions [${EXTENSIONS}] \
+        --Variants [WindowSystem=${WINDOW_SYSTEM}]
 }
 
 REMOVALS = " \
@@ -121,7 +135,6 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
 "
 RDEPENDS_EMPTY_MAIN_PACKAGE_MX8       = ""
 RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8-nxp-bsp   = " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'libxdg-shell', '', d)} \
     rapidopencl \
     rapidopenvx \
     rapidvulkan \
