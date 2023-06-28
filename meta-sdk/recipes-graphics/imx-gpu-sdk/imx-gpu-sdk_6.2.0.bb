@@ -33,6 +33,7 @@ DEPENDS = " \
     half \
     ninja-native \
     nlohmann-json \
+    pugixml \
     rapidjson \
     stb \
     zlib \
@@ -54,7 +55,7 @@ WINDOW_SYSTEM = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',         'X11', \
                                                                  'FB', d), d)}"
 
-FEATURES                  = "ConsoleHost,EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,OpenVG,Test_RequireUserInputToExit,WindowHost"
+FEATURES                  = "ConsoleHost,EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,Lib_pugixml,OpenVG,Test_RequireUserInputToExit,WindowHost"
 FEATURES:append:imxgpu    = ",HW_GPU_VIVANTE"
 FEATURES:append:imxgpu2d  = ",G2D"
 FEATURES:append:imxgpu3d  = ",OpenGLES2"
@@ -130,6 +131,7 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
     googletest \
     half \
     nlohmann-json \
+    pugixml \
     rapidjson \
     stb \
 "
