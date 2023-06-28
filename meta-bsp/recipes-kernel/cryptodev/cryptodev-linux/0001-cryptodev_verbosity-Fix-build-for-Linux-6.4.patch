@@ -1,0 +1,44 @@
+From b3a829ec02c3ae30ee037edcc02164de41e8a6f9 Mon Sep 17 00:00:00 2001
+From: Gaurav Jain <gaurav.jain@nxp.com>
+Date: Wed, 28 Jun 2023 12:44:32 +0530
+Subject: [PATCH] cryptodev_verbosity: Fix build for Linux 6.4
+
+register_sysctl_table api is removed in kernel.
+migrate to the new api register_sysctl.
+
+child is also removed in linux 6.4 ctl_table struct.
+
+Upstream-Status: Pending
+Signed-off-by: Gaurav Jain <gaurav.jain@nxp.com>
+---
+ ioctl.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/ioctl.c b/ioctl.c
+index 8f241b8..3e65603 100644
+--- a/ioctl.c
++++ b/ioctl.c
+@@ -1246,7 +1246,9 @@ static struct ctl_table verbosity_ctl_root[] = {
+ 	{
+ 		.procname       = "ioctl",
+ 		.mode           = 0555,
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 4, 0))
+ 		.child          = verbosity_ctl_dir,
++#endif
+ 	},
+ 	{},
+ };
+@@ -1267,7 +1269,10 @@ static int __init init_cryptodev(void)
+ 		return rc;
+ 	}
+ 
++#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 4, 0))
+ 	verbosity_sysctl_header = register_sysctl_table(verbosity_ctl_root);
++#endif
++	verbosity_sysctl_header = register_sysctl(verbosity_ctl_root->procname, verbosity_ctl_dir);
+ 
+ 	pr_info(PFX "driver %s loaded.\n", VERSION);
+ 
+-- 
+2.25.1
+
