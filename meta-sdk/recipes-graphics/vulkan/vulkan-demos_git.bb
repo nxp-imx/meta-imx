@@ -1,7 +1,7 @@
 DESCRIPTION = "Vulkan C++ examples and demos"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=dcf473723faabf17baa9b5f2207599d0 \
-                    file://examples/triangle/triangle.cpp;endline=12;md5=bccd1bf9cadd9e10086cf7872157e4fa"
+                    file://examples/triangle/triangle.cpp;endline=12;md5=6ff76c9a8e7b7dd640157f5d77b79339"
 DEPENDS = "assimp vulkan-loader zlib"
 
 SRC_URI = "git://github.com/SaschaWillems/Vulkan.git;protocol=https;branch=master \
@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/SaschaWillems/Vulkan.git;protocol=https;branch=maste
            file://0001-Don-t-build-demos-with-questionably-licensed-data.patch \
            file://0001-Modify-parameter-in-vulkan-demo-computenbody.patch \
            "
-SRCREV = "a2a604be473c829763854ffb34f7978bc0358afb"
+SRCREV = "b82ee755c5b8db9ea1740e72e8568af6d474e6c2"
 SRCREV_glm = "1ad55c5016339b83b7eec98c31007e0aee57d2bf"
 SRCREV_ktx = "726d14d02c95bb21ec9e43807751b491d295dd3c"
 S = "${WORKDIR}/git"
