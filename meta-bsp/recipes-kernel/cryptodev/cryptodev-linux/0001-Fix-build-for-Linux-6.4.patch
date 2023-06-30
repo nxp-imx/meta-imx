@@ -7,7 +7,7 @@ get_user_pages_remote api prototype is changed in kernel.
 struct vm_area_struct **vmas argument is removed.
 Migrate to the new API.
 
-Upstream-Status: Pending
+Upstream-Status: Backport
 Signed-off-by: Gaurav Jain <gaurav.jain@nxp.com>
 ---
  zc.c | 6 +++++-

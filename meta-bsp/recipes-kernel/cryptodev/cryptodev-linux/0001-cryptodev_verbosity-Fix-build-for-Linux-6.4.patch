@@ -8,7 +8,7 @@ migrate to the new api register_sysctl.
 
 child is also removed in linux 6.4 ctl_table struct.
 
-Upstream-Status: Pending
+Upstream-Status: Backport
 Signed-off-by: Gaurav Jain <gaurav.jain@nxp.com>
 ---
  ioctl.c | 6 ++++++
