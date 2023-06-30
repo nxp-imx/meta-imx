@@ -46,7 +46,7 @@ DEPENDS:append:imxgpu3d = " virtual/libgles2"
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
 GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
-SRCREV = "3978980a87277071218ae0de96332cd4b445cc00"
+SRCREV = "7aa84275a1f6c74b489578d0ca0d2d354d5f6cb6"
 
 S = "${WORKDIR}/git"
 
