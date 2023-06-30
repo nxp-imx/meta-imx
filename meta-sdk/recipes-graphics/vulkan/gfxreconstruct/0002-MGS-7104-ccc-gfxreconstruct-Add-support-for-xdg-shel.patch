@@ -1,0 +1,588 @@
+From ba39d3ac768c81a55539d56e705dc3fab4acb3dd Mon Sep 17 00:00:00 2001
+From: Kratika Jain <kratika.jain@nxp.com>
+Date: Tue, 6 Jun 2023 12:33:20 +0530
+Subject: [PATCH 1/2] MGS-7104 [#ccc] gfxreconstruct: Add support for xdg-shell
+
+Work is derived from https://github.com/LunarG/gfxreconstruct/pull/698
+
+Upstream-Status: Inappropriate [not author]
+Signed-off-by: Kratika Jain <kratika.jain@nxp.com>
+---
+ framework/application/wayland_context.cpp | 21 +++--
+ framework/application/wayland_context.h   |  7 +-
+ framework/application/wayland_window.cpp  | 96 ++++++++++++-----------
+ framework/application/wayland_window.h    | 20 ++---
+ framework/util/wayland_loader.cpp         | 12 ++-
+ framework/util/wayland_loader.h           | 87 ++++++++++++--------
+ 6 files changed, 144 insertions(+), 99 deletions(-)
+
+diff --git a/framework/application/wayland_context.cpp b/framework/application/wayland_context.cpp
+index ac4ebb76..1bfa87d1 100644
+--- a/framework/application/wayland_context.cpp
++++ b/framework/application/wayland_context.cpp
+@@ -37,6 +37,7 @@ struct wl_keyboard_listener WaylandContext::keyboard_listener_;
+ struct wl_seat_listener     WaylandContext::seat_listener_;
+ struct wl_registry_listener WaylandContext::registry_listener_;
+ struct wl_output_listener   WaylandContext::output_listener_;
++struct xdg_wm_base_listener WaylandContext::shell_listener_;
+ 
+ WaylandContext::WaylandContext(Application* application) : WsiContext(application)
+ {
+@@ -47,6 +48,7 @@ WaylandContext::WaylandContext(Application* application) : WsiContext(applicatio
+     registry_listener_.global_remove = HandleRegistryGlobalRemove;
+ 
+     seat_listener_.capabilities = HandleSeatCapabilities;
++    shell_listener_.ping      = HandleBaseCapabilities;
+ 
+     keyboard_listener_.keymap    = HandleKeyboardKeymap;
+     keyboard_listener_.enter     = HandleKeyboardEnter;
+@@ -99,7 +101,7 @@ WaylandContext::WaylandContext(Application* application) : WsiContext(applicatio
+             GFXRECON_LOG_ERROR("Failed to bind Wayland compositor");
+             success = false;
+         }
+-        else if (shell_ == nullptr)
++        else if (wm_base_ == nullptr)
+         {
+             GFXRECON_LOG_ERROR("Failed to bind Wayland shell");
+             success = false;
+@@ -130,9 +132,9 @@ WaylandContext::~WaylandContext()
+         wl.seat_destroy(seat_);
+     }
+ 
+-    if (shell_)
++    if (wm_base_)
+     {
+-        wl.shell_destroy(shell_);
++        wl.shell_destroy(wm_base_);
+     }
+ 
+     if (compositor_)
+@@ -205,9 +207,10 @@ void WaylandContext::HandleRegistryGlobal(
+         wayland_context->compositor_ = reinterpret_cast<wl_compositor*>(
+             wl.registry_bind(registry, id, wl.compositor_interface, WL_SURFACE_SET_BUFFER_SCALE_SINCE_VERSION));
+     }
+-    else if (util::platform::StringCompare(interface, "wl_shell") == 0)
++    else if (util::platform::StringCompare(interface, "xdg_wm_base") == 0)
+     {
+-        wayland_context->shell_ = reinterpret_cast<wl_shell*>(wl.registry_bind(registry, id, wl.shell_interface, 1));
++        wayland_context->wm_base_ = reinterpret_cast<xdg_wm_base*>(wl.registry_bind(registry, id, wl.shell_base_interface, 1));
++        wl.xdg_wm_base_add_listener(wayland_context->wm_base_, &shell_listener_, wayland_context);
+     }
+     else if (util::platform::StringCompare(interface, "wl_seat") == 0)
+     {
+@@ -254,6 +257,12 @@ void WaylandContext::HandleSeatCapabilities(void* data, wl_seat* seat, uint32_t
+     }
+ }
+ 
++void WaylandContext::HandleBaseCapabilities(void* data, xdg_wm_base* xdg_wm_base, uint32_t serial)
++{
++    auto window     = reinterpret_cast<WaylandWindow*>(data);
++    window->HandlePing(data, xdg_wm_base, serial);
++}
++
+ void WaylandContext::HandleKeyboardKeymap(
+     void* data, struct wl_keyboard* keyboard, uint32_t format, int fd, uint32_t size)
+ {}
+@@ -356,7 +365,7 @@ void WaylandContext::HandlePointerButton(
+         WaylandWindow* window = entry->second;
+         if ((button == BTN_LEFT) && (state == WL_POINTER_BUTTON_STATE_PRESSED))
+         {
+-            wl.shell_surface_move(window->GetShellSurface(), wayland_context->seat_, serial);
++            wl.xdg_toplevel_move(window->GetShellSurface(), wayland_context->seat_, serial);
+         }
+     }
+ }
+diff --git a/framework/application/wayland_context.h b/framework/application/wayland_context.h
+index 9fefd3b1..faae4ecc 100644
+--- a/framework/application/wayland_context.h
++++ b/framework/application/wayland_context.h
+@@ -57,7 +57,7 @@ class WaylandContext : public WsiContext
+ 
+     struct wl_display* GetDisplay() const { return display_; }
+ 
+-    struct wl_shell* GetShell() const { return shell_; }
++    struct xdg_wm_base* Getbase() const { return wm_base_; }
+ 
+     struct wl_compositor* GetCompositor() const { return compositor_; }
+ 
+@@ -77,6 +77,8 @@ class WaylandContext : public WsiContext
+ 
+     static void HandleSeatCapabilities(void* data, wl_seat* seat, uint32_t caps);
+ 
++    static void HandleBaseCapabilities(void* data, xdg_wm_base* xdg_wm_base, uint32_t serial);
++
+     static void HandleKeyboardKeymap(void* data, struct wl_keyboard* keyboard, uint32_t format, int fd, uint32_t size);
+ 
+     static void HandleKeyboardEnter(
+@@ -137,8 +139,9 @@ class WaylandContext : public WsiContext
+     static struct wl_seat_listener     seat_listener_;
+     static struct wl_registry_listener registry_listener_;
+     static struct wl_output_listener   output_listener_;
++    static struct xdg_wm_base_listener shell_listener_;
+     struct wl_display*                 display_{};
+-    struct wl_shell*                   shell_{};
++    struct xdg_wm_base*                wm_base_{};
+     struct wl_compositor*              compositor_{};
+     struct wl_registry*                registry_{};
+     struct wl_seat*                    seat_{};
+diff --git a/framework/application/wayland_window.cpp b/framework/application/wayland_window.cpp
+index 55d7d7d2..5b313d09 100644
+--- a/framework/application/wayland_window.cpp
++++ b/framework/application/wayland_window.cpp
+@@ -31,22 +31,16 @@
+ GFXRECON_BEGIN_NAMESPACE(gfxrecon)
+ GFXRECON_BEGIN_NAMESPACE(application)
+ 
+-struct wl_surface_listener       WaylandWindow::surface_listener_;
+-struct wl_shell_surface_listener WaylandWindow::shell_surface_listener_;
++struct xdg_surface_listener       WaylandWindow::surface_listener_;
++bool m_configured = false;
+ 
+ WaylandWindow::WaylandWindow(WaylandContext* wayland_context) :
+-    wayland_context_(wayland_context), surface_(nullptr), shell_surface_(nullptr), width_(0), height_(0), scale_(1),
++    wayland_context_(wayland_context), surface_(nullptr), xdg_toplevel_(nullptr), width_(0), height_(0), scale_(1),
+     output_(nullptr)
+ {
+     assert(wayland_context_ != nullptr);
+ 
+-    // Populate callback structs
+-    surface_listener_.enter = HandleSurfaceEnter;
+-    surface_listener_.leave = HandleSurfaceLeave;
+-
+-    shell_surface_listener_.ping       = HandlePing;
+-    shell_surface_listener_.configure  = HandleConfigure;
+-    shell_surface_listener_.popup_done = HandlePopupDone;
++    surface_listener_.configure = HandleConfigure;
+ }
+ 
+ WaylandWindow::~WaylandWindow()
+@@ -54,9 +48,13 @@ WaylandWindow::~WaylandWindow()
+     auto& wl = wayland_context_->GetWaylandFunctionTable();
+     if (surface_)
+     {
+-        if (shell_surface_)
++        if (xdg_toplevel_)
++        {
++            wl.xdg_toplevel_destroy(xdg_toplevel_);
++        }
++        if(xdg_surface_)
+         {
+-            wl.shell_surface_destroy(shell_surface_);
++            wl.xdg_surface_destroy(xdg_surface_);
+         }
+ 
+         wl.surface_destroy(surface_);
+@@ -68,32 +66,41 @@ bool WaylandWindow::Create(
+ {
+     GFXRECON_UNREFERENCED_PARAMETER(x);
+     GFXRECON_UNREFERENCED_PARAMETER(y);
+-
++    
+     auto& wl = wayland_context_->GetWaylandFunctionTable();
++    
+     surface_ = wl.compositor_create_surface(wayland_context_->GetCompositor());
+-
+     if (surface_ == nullptr)
+     {
+         GFXRECON_LOG_ERROR("Failed to create Wayland surface");
+         return false;
+     }
++    
++    m_configured = false;
++    if (wayland_context_->Getbase())
++    {
++        xdg_surface_ = wl.xdg_wm_base_get_xdg_surface(wayland_context_->Getbase(), surface_);
++        if (!xdg_surface_)
++        {
++            GFXRECON_LOG_ERROR("Failed to create xdg shell surface");
++            return false;
++        }
++        wayland_context_->RegisterWaylandWindow(this);
+ 
+-    shell_surface_ = wl.shell_get_shell_surface(wayland_context_->GetShell(), surface_);
+-    if (!shell_surface_)
++        wl.xdg_surface_add_listener(xdg_surface_, &WaylandWindow::surface_listener_, this);
++        xdg_toplevel_= wl.xdg_surface_get_toplevel(xdg_surface_);
++    }
++    if(xdg_toplevel_)
+     {
+-        GFXRECON_LOG_ERROR("Failed to create Wayland shell surface");
+-        return false;
++        wl.xdg_toplevel_set_title(xdg_toplevel_, title.c_str());
++        wl.wl_surface_commit(surface_);
+     }
+ 
+-    wayland_context_->RegisterWaylandWindow(this);
+-
+-    wl.surface_add_listener(surface_, &WaylandWindow::surface_listener_, this);
+-    wl.shell_surface_add_listener(shell_surface_, &WaylandWindow::shell_surface_listener_, this);
+-    wl.shell_surface_set_title(shell_surface_, title.c_str());
+-
+     width_  = width;
+     height_ = height;
+     UpdateWindowSize();
++    while(!m_configured)
++        wl.display_dispatch(wayland_context_->GetDisplay());
+ 
+     return true;
+ }
+@@ -103,10 +110,15 @@ bool WaylandWindow::Destroy()
+     if (surface_)
+     {
+         auto& wl = wayland_context_->GetWaylandFunctionTable();
+-        if (shell_surface_)
++        if (xdg_toplevel_)
++        {
++            wl.xdg_toplevel_destroy(xdg_toplevel_);
++            xdg_toplevel_= nullptr;
++        }
++        if (xdg_surface_)
+         {
+-            wl.shell_surface_destroy(shell_surface_);
+-            shell_surface_ = nullptr;
++            wl.xdg_surface_destroy(xdg_surface_);
++            xdg_surface_ = nullptr;
+         }
+ 
+         wl.surface_destroy(surface_);
+@@ -121,14 +133,13 @@ bool WaylandWindow::Destroy()
+ void WaylandWindow::SetTitle(const std::string& title)
+ {
+     auto& wl = wayland_context_->GetWaylandFunctionTable();
+-    wl.shell_surface_set_title(shell_surface_, title.c_str());
++    wl.xdg_toplevel_set_title(xdg_toplevel_, title.c_str());
+ }
+ 
+ void WaylandWindow::SetPosition(const int32_t x, const int32_t y)
+ {
+     GFXRECON_UNREFERENCED_PARAMETER(x);
+     GFXRECON_UNREFERENCED_PARAMETER(y);
+-    // TODO: May be possible with xdg-shell extension.
+ }
+ 
+ void WaylandWindow::SetSize(const uint32_t width, const uint32_t height)
+@@ -215,19 +226,18 @@ void WaylandWindow::UpdateWindowSize()
+ 
+         if (output_info.width == width_ && output_info.height == height_)
+         {
+-            wl.shell_surface_set_fullscreen(shell_surface_, WL_SHELL_SURFACE_FULLSCREEN_METHOD_DEFAULT, 0, output_);
++            wl.xdg_toplevel_set_fullscreen(xdg_toplevel_, NULL);
+         }
+-        else
+-        {
+-            wl.shell_surface_set_toplevel(shell_surface_);
+-        }
+-    }
+-    else
+-    {
+-        wl.shell_surface_set_toplevel(shell_surface_);
+     }
+ }
+ 
++void WaylandWindow::HandleConfigure(void* data, struct xdg_surface* surface, uint32_t serial)
++{
++    auto& wl = reinterpret_cast<WaylandWindow*>(data)->wayland_context_->GetWaylandFunctionTable();
++    wl.xdg_surface_ack_configure(surface, serial);
++    m_configured = true;
++}
++
+ void WaylandWindow::HandleSurfaceEnter(void* data, struct wl_surface* surface, struct wl_output* output)
+ {
+     auto window     = reinterpret_cast<WaylandWindow*>(data);
+@@ -238,17 +248,13 @@ void WaylandWindow::HandleSurfaceEnter(void* data, struct wl_surface* surface, s
+ 
+ void WaylandWindow::HandleSurfaceLeave(void* data, struct wl_surface* surface, struct wl_output* output) {}
+ 
+-void WaylandWindow::HandlePing(void* data, wl_shell_surface* shell_surface, uint32_t serial)
++void WaylandWindow::HandlePing(void* data, xdg_wm_base* xdg_wm_base, uint32_t serial)
+ {
+     auto& wl = reinterpret_cast<WaylandWindow*>(data)->wayland_context_->GetWaylandFunctionTable();
+-    wl.shell_surface_pong(shell_surface, serial);
++    wl.xdg_wm_base_pong(xdg_wm_base, serial);
+ }
+ 
+-void WaylandWindow::HandleConfigure(
+-    void* data, wl_shell_surface* shell_surface, uint32_t edges, int32_t width, int32_t height)
+-{}
+-
+-void WaylandWindow::HandlePopupDone(void* data, wl_shell_surface* shell_surface) {}
++void WaylandWindow::HandlePopupDone(void* data, xdg_toplevel* shell_surface) {}
+ 
+ WaylandWindowFactory::WaylandWindowFactory(WaylandContext* wayland_context) : wayland_context_(wayland_context)
+ {
+diff --git a/framework/application/wayland_window.h b/framework/application/wayland_window.h
+index a4966557..a14096f7 100644
+--- a/framework/application/wayland_window.h
++++ b/framework/application/wayland_window.h
+@@ -29,6 +29,7 @@
+ #include "util/defines.h"
+ 
+ #include <wayland-client.h>
++#include "util/xdg-shell-client-protocol.h"
+ 
+ GFXRECON_BEGIN_NAMESPACE(gfxrecon)
+ GFXRECON_BEGIN_NAMESPACE(application)
+@@ -42,7 +43,9 @@ class WaylandWindow : public decode::Window
+ 
+     struct wl_surface* GetSurface() const { return surface_; }
+ 
+-    struct wl_shell_surface* GetShellSurface() const { return shell_surface_; }
++    static void HandlePing(void* data, xdg_wm_base* xdg_wm_base, uint32_t serial);
++
++    struct xdg_toplevel* GetShellSurface() const { return xdg_toplevel_; }
+ 
+     virtual bool Create(const std::string& title,
+                         const int32_t      x,
+@@ -80,21 +83,20 @@ class WaylandWindow : public decode::Window
+     static void HandleSurfaceEnter(void* data, struct wl_surface* surface, struct wl_output* output);
+     static void HandleSurfaceLeave(void* data, struct wl_surface* surface, struct wl_output* output);
+ 
+-    static void HandlePing(void* data, wl_shell_surface* shell_surface, uint32_t serial);
+-
+     static void
+-    HandleConfigure(void* data, wl_shell_surface* shell_surface, uint32_t edges, int32_t width, int32_t height);
++    HandleConfigure(void* data, struct xdg_surface* shell_surface, uint32_t serial);
+ 
+-    static void HandlePopupDone(void* data, wl_shell_surface* shell_surface);
++    static void HandlePopupDone(void* data, xdg_toplevel* xdg_toplevel);
+ 
+     void UpdateWindowSize();
+ 
+   private:
+-    static struct wl_surface_listener       surface_listener_;
+-    static struct wl_shell_surface_listener shell_surface_listener_;
++    static struct xdg_surface_listener      surface_listener_;
++    static struct xdg_toplevel_listener     xdg_toplevel_listener_;
+     WaylandContext*                         wayland_context_;
+     struct wl_surface*                      surface_;
+-    struct wl_shell_surface*                shell_surface_;
++    struct xdg_surface*                     xdg_surface_;
++    struct xdg_toplevel*                    xdg_toplevel_;
+     uint32_t                                width_;
+     uint32_t                                height_;
+     int32_t                                 scale_;
+@@ -124,4 +126,4 @@ class WaylandWindowFactory : public decode::WindowFactory
+ GFXRECON_END_NAMESPACE(util)
+ GFXRECON_END_NAMESPACE(gfxrecon)
+ 
+-#endif // GFXRECON_APPLICATION_WAYLAND_WINDOW_H
+\ No newline at end of file
++#endif // GFXRECON_APPLICATION_WAYLAND_WINDOW_H
+diff --git a/framework/util/wayland_loader.cpp b/framework/util/wayland_loader.cpp
+index 53565d80..086816e1 100644
+--- a/framework/util/wayland_loader.cpp
++++ b/framework/util/wayland_loader.cpp
+@@ -72,10 +72,10 @@ bool WaylandLoader::Initialize()
+                 util::platform::GetProcAddress(libwayland_, "wl_display_roundtrip"));
+             function_table_.compositor_interface = reinterpret_cast<decltype(wl_compositor_interface)*>(
+                 util::platform::GetProcAddress(libwayland_, "wl_compositor_interface"));
+-            function_table_.shell_interface = reinterpret_cast<decltype(wl_shell_interface)*>(
+-                util::platform::GetProcAddress(libwayland_, "wl_shell_interface"));
+             function_table_.seat_interface = reinterpret_cast<decltype(wl_seat_interface)*>(
+                 util::platform::GetProcAddress(libwayland_, "wl_seat_interface"));
++            function_table_.shell_base_interface = reinterpret_cast<decltype(xdg_wm_base_interface)*>(&xdg_wm_base_interface);
++
+ 
+             // Proxy functions
+             function_table_.proxy_add_listener = reinterpret_cast<decltype(wl_proxy_add_listener)*>(
+@@ -89,6 +89,10 @@ bool WaylandLoader::Initialize()
+             function_table_.proxy_marshal_constructor_versioned =
+                 reinterpret_cast<decltype(wl_proxy_marshal_constructor_versioned)*>(
+                     util::platform::GetProcAddress(libwayland_, "wl_proxy_marshal_constructor_versioned"));
++            function_table_.proxy_marshal_flags = reinterpret_cast<decltype(wl_proxy_marshal_flags)*>(
++                util::platform::GetProcAddress(libwayland_, "wl_proxy_marshal_flags"));
++            function_table_.proxy_marshal_array_flags = reinterpret_cast<decltype(wl_proxy_marshal_array_flags)*>(
++                util::platform::GetProcAddress(libwayland_, "wl_proxy_marshal_array_flags"));
+ 
+             // Interfaces
+             function_table_.registry_interface = reinterpret_cast<decltype(wl_registry_interface)*>(
+@@ -99,10 +103,10 @@ bool WaylandLoader::Initialize()
+                 util::platform::GetProcAddress(libwayland_, "wl_output_interface"));
+             function_table_.pointer_interface = reinterpret_cast<decltype(wl_pointer_interface)*>(
+                 util::platform::GetProcAddress(libwayland_, "wl_pointer_interface"));
+-            function_table_.shell_surface_interface = reinterpret_cast<decltype(wl_shell_surface_interface)*>(
+-                util::platform::GetProcAddress(libwayland_, "wl_shell_surface_interface"));
+             function_table_.surface_interface = reinterpret_cast<decltype(wl_surface_interface)*>(
+                 util::platform::GetProcAddress(libwayland_, "wl_surface_interface"));
++            function_table_.shell_surface_interface = reinterpret_cast<decltype(xdg_surface_interface)*>(&xdg_surface_interface);
++            function_table_.toplevel_interface = reinterpret_cast<decltype(xdg_toplevel_interface)*>(&xdg_toplevel_interface);
+         }
+         else
+         {
+diff --git a/framework/util/wayland_loader.h b/framework/util/wayland_loader.h
+index 8c704670..70643246 100644
+--- a/framework/util/wayland_loader.h
++++ b/framework/util/wayland_loader.h
+@@ -28,6 +28,7 @@
+ #include "util/platform.h"
+ 
+ #include <wayland-client.h>
++#include "xdg-shell-client-protocol.h"
+ 
+ GFXRECON_BEGIN_NAMESPACE(gfxrecon)
+ GFXRECON_BEGIN_NAMESPACE(util)
+@@ -46,7 +47,7 @@ class WaylandLoader
+         decltype(wl_display_flush)*            display_flush;
+         decltype(wl_display_roundtrip)*        display_roundtrip;
+         decltype(wl_compositor_interface)*     compositor_interface;
+-        decltype(wl_shell_interface)*          shell_interface;
++        decltype(xdg_wm_base_interface)*       shell_base_interface;
+         decltype(wl_seat_interface)*           seat_interface;
+ 
+         // proxy functions
+@@ -55,20 +56,23 @@ class WaylandLoader
+         decltype(wl_proxy_marshal)*                       proxy_marshal;
+         decltype(wl_proxy_marshal_constructor)*           proxy_marshal_constructor;
+         decltype(wl_proxy_marshal_constructor_versioned)* proxy_marshal_constructor_versioned;
++        decltype(wl_proxy_marshal_flags)*                 proxy_marshal_flags;
++        decltype(wl_proxy_marshal_array_flags)*           proxy_marshal_array_flags;
++	
+ 
+         // interfaces
+         decltype(wl_registry_interface)*      registry_interface;
+         decltype(wl_keyboard_interface)*      keyboard_interface;
+         decltype(wl_output_interface)*        output_interface;
+         decltype(wl_pointer_interface)*       pointer_interface;
+-        decltype(wl_shell_surface_interface)* shell_surface_interface;
++        decltype(xdg_surface_interface)*      shell_surface_interface;
++        decltype(xdg_toplevel_interface)*     toplevel_interface;
+         decltype(wl_surface_interface)*       surface_interface;
+ 
+         // inline functions, adapted from wayland-client-protocol.h
+         struct wl_surface* compositor_create_surface(struct wl_compositor* wl_compositor) const
+         {
+             struct wl_proxy* id;
+-
+             id = this->proxy_marshal_constructor(reinterpret_cast<struct wl_proxy*>(wl_compositor),
+                                                  WL_COMPOSITOR_CREATE_SURFACE,
+                                                  this->surface_interface,
+@@ -76,6 +80,10 @@ class WaylandLoader
+ 
+             return reinterpret_cast<struct wl_surface*>(id);
+         }
++        void wl_surface_commit(struct wl_surface *wl_surface) const
++        {
++            this->proxy_marshal(reinterpret_cast<struct wl_proxy*>(wl_surface), WL_SURFACE_COMMIT);
++        }
+ 
+         void compositor_destroy(struct wl_compositor* wl_compositor) const
+         {
+@@ -185,72 +193,85 @@ class WaylandLoader
+             return reinterpret_cast<struct wl_pointer*>(id);
+         }
+ 
+-        void shell_destroy(struct wl_shell* wl_shell) const
++        void shell_destroy(struct xdg_wm_base* xdg_wm_base) const
+         {
+-            this->proxy_destroy(reinterpret_cast<struct wl_proxy*>(wl_shell));
++            this->proxy_destroy(reinterpret_cast<struct wl_proxy*>(xdg_wm_base));
+         }
+ 
+-        struct wl_shell_surface* shell_get_shell_surface(struct wl_shell* wl_shell, struct wl_surface* surface) const
++        struct xdg_surface* xdg_wm_base_get_xdg_surface(struct xdg_wm_base* xdg_wm_base, struct wl_surface* surface) const
+         {
+             struct wl_proxy* id;
+-
+-            id = this->proxy_marshal_constructor(reinterpret_cast<struct wl_proxy*>(wl_shell),
+-                                                 WL_SHELL_GET_SHELL_SURFACE,
++            id = this->proxy_marshal_constructor(reinterpret_cast<struct wl_proxy*>(xdg_wm_base),
++                                                 XDG_WM_BASE_GET_XDG_SURFACE,
+                                                  this->shell_surface_interface,
+                                                  NULL,
+                                                  surface);
+ 
+-            return reinterpret_cast<struct wl_shell_surface*>(id);
++            return reinterpret_cast<struct xdg_surface*>(id);
+         }
+ 
+-        int shell_surface_add_listener(struct wl_shell_surface*          wl_shell_surface,
+-                                       struct wl_shell_surface_listener* listener,
+-                                       void*                             data) const
++        struct xdg_toplevel* xdg_surface_get_toplevel(struct xdg_surface* xdg_surface) const
+         {
+-            return this->proxy_add_listener(reinterpret_cast<struct wl_proxy*>(wl_shell_surface),
+-                                            reinterpret_cast<void (**)(void)>(listener),
+-                                            data);
++            struct wl_proxy *id;
++            id = this->proxy_marshal_constructor(reinterpret_cast<struct wl_proxy*>(xdg_surface), 
++                XDG_SURFACE_GET_TOPLEVEL, this->toplevel_interface, NULL);
++
++            return reinterpret_cast<struct xdg_toplevel*>(id);
++        }
++
++        void xdg_toplevel_destroy(struct xdg_toplevel* xdg_toplevel) const
++        {
++            this->proxy_destroy(reinterpret_cast<struct wl_proxy*>(xdg_toplevel));
+         }
+ 
+-        void shell_surface_destroy(struct wl_shell_surface* wl_shell_surface) const
++        void xdg_surface_destroy(struct xdg_surface *xdg_surface) const
+         {
+-            this->proxy_destroy(reinterpret_cast<struct wl_proxy*>(wl_shell_surface));
++            this->proxy_destroy(reinterpret_cast<struct wl_proxy*>(xdg_surface));
+         }
+ 
+-        void shell_surface_move(struct wl_shell_surface* wl_shell_surface, struct wl_seat* seat, uint32_t serial) const
++        void xdg_toplevel_move(struct xdg_toplevel* xdg_toplevel, struct wl_seat* seat, uint32_t serial) const
+         {
+             this->proxy_marshal(
+-                reinterpret_cast<struct wl_proxy*>(wl_shell_surface), WL_SHELL_SURFACE_MOVE, seat, serial);
++                reinterpret_cast<struct wl_proxy*>(xdg_toplevel), XDG_TOPLEVEL_MOVE, seat, serial);
++        }
++        int xdg_wm_base_add_listener(struct xdg_wm_base* xdg_wm_base,
++                                    struct xdg_wm_base_listener *listener,
++                                    void *data) const
++        {
++            return this->proxy_add_listener(reinterpret_cast<struct wl_proxy*>(xdg_wm_base),
++                                            reinterpret_cast<void (**)(void)>(listener),
++                                            data);
++        }
++        void xdg_surface_ack_configure(struct xdg_surface *xdg_surface, uint32_t serial) const
++        {
++            this->proxy_marshal(reinterpret_cast<struct wl_proxy*>(xdg_surface), XDG_SURFACE_ACK_CONFIGURE, serial);
+         }
+ 
+-        void shell_surface_pong(struct wl_shell_surface* wl_shell_surface, uint32_t serial) const
++        void xdg_wm_base_pong(struct xdg_wm_base* xdg_wm_base, uint32_t serial) const
+         {
+-            this->proxy_marshal(reinterpret_cast<struct wl_proxy*>(wl_shell_surface), WL_SHELL_SURFACE_PONG, serial);
++            this->proxy_marshal(reinterpret_cast<struct wl_proxy*>(xdg_wm_base), XDG_WM_BASE_PONG, serial);
+         }
+ 
+-        void shell_surface_set_fullscreen(struct wl_shell_surface* wl_shell_surface,
+-                                          uint32_t                 method,
+-                                          uint32_t                 framerate,
+-                                          struct wl_output*        output) const
++        void xdg_toplevel_set_fullscreen(struct xdg_toplevel *xdg_toplevel, struct wl_output *output) const
+         {
+-            this->proxy_marshal(reinterpret_cast<struct wl_proxy*>(wl_shell_surface), WL_SHELL_SURFACE_SET_FULLSCREEN);
++            this->proxy_marshal(reinterpret_cast<struct wl_proxy*>(xdg_toplevel), XDG_TOPLEVEL_SET_FULLSCREEN, output);
+         }
+ 
+-        void shell_surface_set_title(struct wl_shell_surface* wl_shell_surface, const char* title) const
++        void xdg_toplevel_set_title(struct xdg_toplevel* xdg_toplevel, const char* title) const
+         {
+             this->proxy_marshal(
+-                reinterpret_cast<struct wl_proxy*>(wl_shell_surface), WL_SHELL_SURFACE_SET_TITLE, title);
++                reinterpret_cast<struct wl_proxy*>(xdg_toplevel), XDG_TOPLEVEL_SET_TITLE, title);
+         }
+ 
+-        void shell_surface_set_toplevel(struct wl_shell_surface* wl_shell_surface) const
++        void shell_surface_set_toplevel(struct xdg_toplevel* xdg_toplevel) const
+         {
+-            this->proxy_marshal(reinterpret_cast<struct wl_proxy*>(wl_shell_surface), WL_SHELL_SURFACE_SET_TOPLEVEL);
++            this->proxy_marshal(reinterpret_cast<struct wl_proxy*>(xdg_toplevel), WL_SHELL_SURFACE_SET_TOPLEVEL);
+         }
+ 
+-        int surface_add_listener(struct wl_surface* wl_surface, struct wl_surface_listener* listener, void* data) const
++        int xdg_surface_add_listener(struct xdg_surface* xdg_surface, struct xdg_surface_listener* listener, void* data) const
+         {
+             return this->proxy_add_listener(
+-                reinterpret_cast<struct wl_proxy*>(wl_surface), reinterpret_cast<void (**)(void)>(listener), data);
++                reinterpret_cast<struct wl_proxy*>(xdg_surface), reinterpret_cast<void (**)(void)>(listener), data);
+         }
+ 
+         void surface_set_buffer_scale(struct wl_surface* wl_surface, int32_t scale) const
+-- 
+2.34.1
+
