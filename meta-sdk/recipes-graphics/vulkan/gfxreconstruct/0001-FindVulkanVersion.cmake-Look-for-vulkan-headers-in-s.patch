@@ -3,6 +3,7 @@ From: Neena Busireddy <neenareddy.busireddy@nxp.com>
 Date: Wed, 6 Apr 2022 12:53:34 -0700
 Subject: [PATCH] FindVulkanVersion.cmake: Look for vulkan-headers in sysroot
 
+Upstream-Status: Pending
 Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
 ---
  cmake/FindVulkanVersion.cmake | 8 ++++----
