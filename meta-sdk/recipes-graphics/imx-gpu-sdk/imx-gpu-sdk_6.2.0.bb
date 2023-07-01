@@ -3,23 +3,6 @@ DESCRIPTION = "Set of sample applications for i.MX GPU"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://License.md;md5=9d58a2573275ce8c35d79576835dbeb8"
 
-DEPENDS_BACKEND = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland-native wayland wayland-protocols', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11', ' xrandr', \
-                                                        '', d), d)}"
-DEPENDS_MX8       = ""
-DEPENDS_MX8:mx8-nxp-bsp   = " \
-    glslang-native \
-    opencv \
-    rapidopencl \
-    rapidopenvx \
-    rapidvulkan \
-    vulkan-headers \
-    vulkan-loader \
-"
-DEPENDS_MX8:mx8mm-nxp-bsp = " \
-    opencv \
-"
 DEPENDS = " \
     assimp \
     cmake-native \
@@ -37,11 +20,36 @@ DEPENDS = " \
     rapidjson \
     stb \
     zlib \
+    ${DEPENDS_2D} \
+    ${DEPENDS_3D} \
     ${DEPENDS_BACKEND} \
     ${DEPENDS_MX8} \
 "
-DEPENDS:append:imxgpu2d = " virtual/libg2d virtual/libopenvg"
-DEPENDS:append:imxgpu3d = " virtual/libgles2"
+DEPENDS_2D = " \
+    virtual/libg2d \
+    virtual/libopenvg \
+"
+DEPENDS_3D = " \
+    virtual/libgles2 \
+"
+DEPENDS_BACKEND = " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland-native wayland wayland-protocols', \
+       bb.utils.contains('DISTRO_FEATURES',     'x11', ' xrandr', \
+                                                       '', d), d)} \
+"
+DEPENDS_MX8 = ""
+DEPENDS_MX8:mx8-nxp-bsp = " \
+    glslang-native \
+    opencv \
+    rapidopencl \
+    rapidopenvx \
+    rapidvulkan \
+    vulkan-headers \
+    vulkan-loader \
+"
+DEPENDS_MX8:mx8mm-nxp-bsp = " \
+    opencv \
+"
 
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
 GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
