@@ -25,11 +25,13 @@ DEPENDS = " \
     ${DEPENDS_BACKEND} \
     ${DEPENDS_DRM} \
 "
-DEPENDS_2D = " \
+DEPENDS_2D = ""
+DEPENDS_2D:imxgpu2d = " \
     virtual/libg2d \
     virtual/libopenvg \
 "
-DEPENDS_3D = " \
+DEPENDS_3D = ""
+DEPENDS_3D:imxgpu3d = " \
     virtual/libgles2 \
 "
 DEPENDS_BACKEND = " \
