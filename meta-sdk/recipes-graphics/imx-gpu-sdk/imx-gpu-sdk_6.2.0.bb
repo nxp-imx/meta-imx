@@ -23,7 +23,7 @@ DEPENDS = " \
     ${DEPENDS_2D} \
     ${DEPENDS_3D} \
     ${DEPENDS_BACKEND} \
-    ${DEPENDS_MX8} \
+    ${DEPENDS_DRM} \
 "
 DEPENDS_2D = " \
     virtual/libg2d \
@@ -37,8 +37,8 @@ DEPENDS_BACKEND = " \
        bb.utils.contains('DISTRO_FEATURES',     'x11', ' xrandr', \
                                                        '', d), d)} \
 "
-DEPENDS_MX8 = ""
-DEPENDS_MX8:mx8-nxp-bsp = " \
+DEPENDS_DRM = ""
+DEPENDS_DRM:imxdrm = " \
     glslang-native \
     opencv \
     rapidopencl \
@@ -47,7 +47,7 @@ DEPENDS_MX8:mx8-nxp-bsp = " \
     vulkan-headers \
     vulkan-loader \
 "
-DEPENDS_MX8:mx8mm-nxp-bsp = " \
+DEPENDS_DRM:mx8mm-nxp-bsp = " \
     opencv \
 "
 
