@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2020 NXP
+# Copyright (C) 2017-2023 NXP
 
 require imx-mkimage_git.inc
 
@@ -79,7 +79,7 @@ REV_OPTION:mx8ulp-generic-bsp = \
     "${@bb.utils.contains('MACHINE_FEATURES', 'soc-reva0', '', \
                                                            'REV=A2', d)}"
 REV_OPTION:mx91p-generic-bsp = "REV=A1"
-REV_OPTION:mx93-generic-bsp  = "REV=A0"
+REV_OPTION:mx93-generic-bsp  = "REV=A1"
 
 compile_mx8m() {
     bbnote 8MQ/8MM/8MN/8MP boot binary build
