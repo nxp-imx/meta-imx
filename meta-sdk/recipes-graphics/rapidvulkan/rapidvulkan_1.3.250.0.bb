@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b98f636daed34d12d11e25f3185c0204"
 DEPENDS = "vulkan-loader"
 
 SRC_URI = "git://github.com/Unarmed1000/RapidVulkan;protocol=https;branch=master"
-SRCREV = "e4e2e69f9a25ba19ad41e71c546105717cb167ea"
+SRCREV = "186a85bea780414f55baec2b6c803002080b4ac8"
 
 S = "${WORKDIR}/git"
 
