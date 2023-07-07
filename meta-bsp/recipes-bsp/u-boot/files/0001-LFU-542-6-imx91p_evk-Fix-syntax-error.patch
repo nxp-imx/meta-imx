@@ -1,0 +1,31 @@
+From b4609c9c71fc8016bde1993955ae8fd62bb6bdde Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Fri, 7 Jul 2023 14:38:43 -0500
+Subject: [PATCH] LFU-542-6 imx91p_evk: Fix syntax error
+
+Fix the build break:
+```
+board/freescale/imx93_evk/Makefile:16: *** unterminated variable reference.  Stop.
+```
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ board/freescale/imx93_evk/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/board/freescale/imx93_evk/Makefile b/board/freescale/imx93_evk/Makefile
+index 703922f988..1d4e346e84 100644
+--- a/board/freescale/imx93_evk/Makefile
++++ b/board/freescale/imx93_evk/Makefile
+@@ -13,7 +13,7 @@ obj-$(CONFIG_IMX93_EVK_LPDDR4X) += lpddr4x_timing_ld.o
+ else
+ ifdef CONFIG_IMX9_DRAM_INLINE_ECC
+ obj-$(CONFIG_IMX93_EVK_LPDDR4X) += lpddr4x_timing_ecc.o
+-obj-$(CONFIG_TARGET_IMX91P_11X11_EVK += lpddr4_timing_2400mts_ecc.o
++obj-$(CONFIG_TARGET_IMX91P_11X11_EVK) += lpddr4_timing_2400mts_ecc.o
+ else
+ obj-$(CONFIG_IMX93_EVK_LPDDR4X) += lpddr4x_timing.o
+ obj-$(CONFIG_TARGET_IMX91P_11X11_EVK) += lpddr4_timing_2400mts.o
+-- 
+2.25.1
+
