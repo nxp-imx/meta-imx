@@ -56,7 +56,7 @@ DEPENDS_DRM:mx8mm-nxp-bsp = " \
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
 GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
-SRCREV = "7aa84275a1f6c74b489578d0ca0d2d354d5f6cb6"
+SRCREV = "c70eedf03996f8a0e37576e1189f01d912964527"
 
 S = "${WORKDIR}/git"
 
@@ -83,18 +83,13 @@ EXTENSIONS:mx6dl-nxp-bsp = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geom
 EXTENSIONS:mx8m-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_color_buffer_float"
 EXTENSIONS:mx8mm-nxp-bsp = "*"
 
-CMAKE_CONFIG_GLOBAL_ARGS = " \
-    -DWAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner \
-    -DWAYLAND_PROTOCOLS_DIR=${STAGING_DATADIR}/wayland-protocols \
-"
-
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
     export ROOTFS=${STAGING_DIR_HOST}
+    export FSL_HOST_ROOTFS=${STAGING_DIR_NATIVE}
     . ./prepare.sh
     FslBuild.py -vvvvv -t sdk -c install \
         --BuildThreads ${@oe.utils.parallel_make(d)} \
-        --CMakeConfigGlobalArgs "${CMAKE_CONFIG_GLOBAL_ARGS}" \
         --CMakeInstallPrefix ${S} \
         --UseFeatures [${FEATURES}] \
         --UseExtensions [${EXTENSIONS}] \
