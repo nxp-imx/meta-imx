@@ -9,6 +9,8 @@ S = "${WORKDIR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}"
 
 PROVIDES_OPENGLES3:mx8mm-nxp-bsp = "virtual/libgles3"
 
+LIBVULKAN_API_VERSION = "1.3.239"
+
 ### Section 2: Changes to be kept in meta-imx ###
 
 PACKAGECONFIG ?= "valgrind"
