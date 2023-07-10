@@ -8,7 +8,8 @@ SRC_URI = "git://github.com/SaschaWillems/Vulkan.git;protocol=https;branch=maste
            git://github.com/g-truc/glm;destsuffix=git/external/glm;name=glm;protocol=https;branch=master  \
            git://github.com/KhronosGroup/KTX-Software;destsuffix=git/external/ktx;name=ktx;lfs=0;protocol=https;branch=master \
            file://0001-Don-t-build-demos-with-questionably-licensed-data.patch \
-           file://0001-Modify-parameter-in-vulkan-demo-computenbody.patch \
+           file://0002-Modify-parameter-in-vulkan-demo-computenbody.patch \
+           file://0003-Fix-install-location-for-assets-and-shaders.patch \
            "
 SRCREV = "b82ee755c5b8db9ea1740e72e8568af6d474e6c2"
 SRCREV_glm = "1ad55c5016339b83b7eec98c31007e0aee57d2bf"
