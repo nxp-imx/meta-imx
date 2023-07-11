@@ -1,0 +1,26 @@
+From 458d5849c326ede58772001bac0226252db406fc Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Tue, 11 Jul 2023 10:52:52 -0500
+Subject: [PATCH] Revert recent change to assets install for cross-compile
+
+It didn't have any effect, and wasn't solving any problem, so just
+switch it back.
+
+Upstream-Status: Pending
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Index: git/CMakeLists.txt
+===================================================================
+--- git.orig/CMakeLists.txt
++++ git/CMakeLists.txt
+@@ -121,7 +121,7 @@ endfunction(buildExamples)
+ if(RESOURCE_INSTALL_DIR)
+ 	add_definitions(-DVK_EXAMPLE_ASSETS_DIR=\"${RESOURCE_INSTALL_DIR}/\")
+ 	add_definitions(-DVK_EXAMPLE_SHADERS_DIR=\"${RESOURCE_INSTALL_DIR}/shaders/\")
+-	install(DIRECTORY assets/ DESTINATION ${RESOURCE_INSTALL_DIR}/assets/)
++	install(DIRECTORY assets/ DESTINATION ${RESOURCE_INSTALL_DIR}/)
+ 	install(DIRECTORY shaders/ DESTINATION ${RESOURCE_INSTALL_DIR}/shaders/)
+ else()
+ 	add_definitions(-DVK_EXAMPLE_ASSETS_DIR=\"${CMAKE_SOURCE_DIR}/assets/\")

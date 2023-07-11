@@ -1,0 +1,38 @@
+From 38a87923a3dbfb45356fc740597d8f6074a7d967 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Tue, 11 Jul 2023 08:45:28 -0500
+Subject: [PATCH 2/2] Fix shaders path for computeheadless and renderheadless
+
+Upstream-Status: Pending
+
+---
+ examples/computeheadless/computeheadless.cpp | 2 +-
+ examples/renderheadless/renderheadless.cpp   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+Index: git/examples/computeheadless/computeheadless.cpp
+===================================================================
+--- git.orig/examples/computeheadless/computeheadless.cpp
++++ git/examples/computeheadless/computeheadless.cpp
+@@ -414,7 +414,7 @@ public:
+ 			if (commandLineParser.isSet("shaders")) {
+ 				shaderDir = commandLineParser.getValueAsString("shaders", "glsl");
+ 			}
+-			const std::string shadersPath = getAssetPath() + "shaders/"+shaderDir+"/computeheadless/";
++			const std::string shadersPath = getShaderBasePath() + shaderDir + "/computeheadless/";
+ 
+ 			VkPipelineShaderStageCreateInfo shaderStage = {};
+ 			shaderStage.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+Index: git/examples/renderheadless/renderheadless.cpp
+===================================================================
+--- git.orig/examples/renderheadless/renderheadless.cpp
++++ git/examples/renderheadless/renderheadless.cpp
+@@ -647,7 +647,7 @@ public:
+ 			if (commandLineParser.isSet("shaders")) {
+ 				shaderDir = commandLineParser.getValueAsString("shaders", "glsl");
+ 			}
+-			const std::string shadersPath = getAssetPath() + "shaders/" + shaderDir + "/renderheadless/";
++			const std::string shadersPath = getShaderBasePath() + shaderDir + "/renderheadless/";
+ 
+ 			shaderStages[0].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+ 			shaderStages[0].stage = VK_SHADER_STAGE_VERTEX_BIT;

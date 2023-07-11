@@ -9,6 +9,9 @@ SRC_URI = "git://github.com/SaschaWillems/Vulkan.git;protocol=https;branch=maste
            git://github.com/KhronosGroup/KTX-Software;destsuffix=git/external/ktx;name=ktx;lfs=0;protocol=https;branch=master \
            file://0001-Don-t-build-demos-with-questionably-licensed-data.patch \
            file://0002-Modify-parameter-in-vulkan-demo-computenbody.patch \
+           file://0003-Fix-shaders-path-for-cross-compile-case.patch \
+           file://0004-Fix-shaders-path-for-computeheadless-and-renderheadl.patch \
+           file://0005-Revert-recent-change-to-assets-install-for-cross-com.patch \
            "
 SRCREV = "e2093e845c50bfc05db9e45e8d32fdbe6eb906b6"
 SRCREV_glm = "1ad55c5016339b83b7eec98c31007e0aee57d2bf"
