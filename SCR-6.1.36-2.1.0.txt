@@ -299,8 +299,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-3.3.0
-Version:                     3.3.0
+Package:                     zephyr-demo-imx-3.4.0
+Version:                     3.4.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
