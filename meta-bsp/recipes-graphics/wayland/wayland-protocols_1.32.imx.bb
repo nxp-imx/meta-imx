@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7b12b6702da38ca028ace54aae3d484 \
 
 SRC_URI = "${WAYLAND_PROTOCOLS_SRC};branch=${SRCBRANCH}"
 WAYLAND_PROTOCOLS_SRC ?= "git://github.com/nxp-imx/wayland-protocols-imx.git;protocol=https"
-SRCBRANCH = "wayland-protocols-imx-1.31"
-SRCREV = "99a2a439fc6b5d25d41bfec9c9b459408a45bf92"
+SRCBRANCH = "wayland-protocols-imx-${@oe.utils.trim_version("${PV}", 2)}"
+SRCREV = "9298dea5945b0eb83057fb3aed49f366cdf0eb68"
 
 S = "${WORKDIR}/git"
 
