@@ -68,4 +68,4 @@ if test -z "$XDG_RUNTIME_DIR"; then
 	fi
 fi
 
-su -c "XDG_RUNTIME_DIR=/run/user/`id -u ${WESTON_USER}` weston $weston_args --log=/tmp/weston.log" $WESTON_USER
+su -c "XDG_RUNTIME_DIR=/run/user/`id -u ${WESTON_USER}` weston $weston_args --socket=/run/wayland-0 --log=/tmp/weston.log" $WESTON_USER

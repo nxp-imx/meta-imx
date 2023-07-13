@@ -15,5 +15,8 @@ do_install:append() {
         # FIXME: weston should be run as weston, not as root
         update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
         update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
+    else
+        # Install weston-socket.sh for sysvinit as well
+        install -D -p -m0644 ${WORKDIR}/weston-socket.sh ${D}${sysconfdir}/profile.d/weston-socket.sh
     fi
 }
