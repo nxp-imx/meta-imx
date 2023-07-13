@@ -18,7 +18,7 @@ do_install() {
     cp -r *.elf ${D}${nonarch_base_libdir}/firmware/imx/zephyr
 }
 
-INSANE_SKIP:${PN} = "arch"
+INSANE_SKIP:${PN} = "arch already-stripped"
 
 FILES:${PN} += "${nonarch_base_libdir}/firmware/imx/zephyr/*.elf"
 
