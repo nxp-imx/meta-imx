@@ -19,4 +19,7 @@ do_install:append() {
         # Install weston-socket.sh for sysvinit as well
         install -D -p -m0644 ${WORKDIR}/weston-socket.sh ${D}${sysconfdir}/profile.d/weston-socket.sh
     fi
+
+    # Remove weston.sh installed by meta-freescale, it is superceded by weston-socket.sh
+    rm ${D}${sysconfdir}/profile.d/weston.sh
 }
