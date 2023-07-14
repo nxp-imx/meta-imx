@@ -597,7 +597,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     6.2.0
+Version:                     6.2.1
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
@@ -649,7 +649,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     wayland-protocols-imx.git
-Version:                     1.31.imx
+Version:                     1.32.imx
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
