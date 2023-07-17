@@ -1,0 +1,29 @@
+From 404f8fea1573b4a12b37e85ede7979874e8544a0 Mon Sep 17 00:00:00 2001
+From: Eric Guo <eric.guo@nxp.com>
+Date: Mon, 17 Jul 2023 18:14:17 +0800
+Subject: [PATCH] Disable OpenCL kernel preprocessor optimization
+
+Avoid compilation error on Mali GPU.
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Eric Guo <eric.guo@nxp.com>
+---
+ src/utilities/compile.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/utilities/compile.cpp b/src/utilities/compile.cpp
+index 59aa6107..3a24eb8e 100644
+--- a/src/utilities/compile.cpp
++++ b/src/utilities/compile.cpp
+@@ -106,7 +106,7 @@ std::shared_ptr<Program> CompileFromSource(
+   // Runs a pre-processor to unroll loops and perform array-to-register promotion. Most OpenCL
+   // compilers do this, but some don't.
+   auto do_run_preprocessor = false;
+-  if (run_preprocessor == 0) { do_run_preprocessor = (device.IsARM() && device.IsGPU()); }
++  if (run_preprocessor == 0) { do_run_preprocessor = 0; }
+   if (run_preprocessor == 1) { do_run_preprocessor = true; }
+   auto kernel_string = header_string + source_string;
+   if (do_run_preprocessor) {
+-- 
+2.25.1
+
