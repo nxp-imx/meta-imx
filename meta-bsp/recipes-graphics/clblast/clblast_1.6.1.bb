@@ -4,7 +4,7 @@ DEPENDS = "virtual/opencl-icd"
 
 SRC_URI = "git://github.com/CNugteren/CLBlast.git;protocol=https;branch=master"
 
-SRCREV = "70016e869881df837402def4904b2888247e02d9"
+SRCREV = "e3ce21bb937f07b8282dccf4823e2acbdf286d17"
 
 S = "${WORKDIR}/git"
 
