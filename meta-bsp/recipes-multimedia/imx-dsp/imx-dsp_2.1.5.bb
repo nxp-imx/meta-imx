@@ -9,8 +9,8 @@ inherit fsl-eula-unpack autotools pkgconfig
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "f79d2663adc2d33a4498e9fe31286d05"
-SRC_URI[sha256sum] = "e59569f55da5ada4f30426ab6b60312d8285a8a21dc1fa95c377774bac4b4144"
+SRC_URI[md5sum] = "111ca708334f2846f13fbb014ea1a393"
+SRC_URI[sha256sum] = "55d88fa4e814b196ef233c6ca258e6c3418284960054d591cc46bae6bc09c4aa"
 
 EXTRA_OECONF = " \
     -datadir=${base_libdir}/firmware \
