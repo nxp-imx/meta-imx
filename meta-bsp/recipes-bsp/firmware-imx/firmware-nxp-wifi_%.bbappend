@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://EULA.txt;md5=673fa34349fa40f59e0713cb0ac22b1f"
 
 SRC_URI = "${IMX_FIRMWARE_SRC};branch=${SRCBRANCH}"
 SRCBRANCH = "master"
-SRCREV = "9ba6bfbcda14be2c5841ecfba525d98c66698925"
+SRCREV = "ec4840300959f5a37dfca319acabede898aa6ad2"
 
 do_install() {
     # Install various flavors of Broadcom firmware provided by Murata:
