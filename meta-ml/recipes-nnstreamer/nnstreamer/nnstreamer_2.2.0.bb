@@ -34,16 +34,9 @@ PACKAGECONFIG ??= "protobuf python3 query ${PACKAGECONFIG_SOC}"
 PACKAGECONFIG_SOC                    ??= ""
 
 
-PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "deepview-rt tensorflow-lite"
-PACKAGECONFIG_SOC:mx8mp-nxp-bsp      ??= "deepview-rt tensorflow-lite tvm"
-PACKAGECONFIG_SOC:mx9-nxp-bsp        ??= "deepview-rt tensorflow-lite"
-
-PACKAGECONFIG[deepview-rt] = "\
-       -Ddeepview-rt-support=enabled, \
-       -Ddeepview-rt-support=disabled, \
-       deepview-rt, \
-       ,,\
-"
+PACKAGECONFIG_SOC:mx8-nxp-bsp:imxgpu ??= "tensorflow-lite"
+PACKAGECONFIG_SOC:mx8mp-nxp-bsp      ??= "tensorflow-lite tvm"
+PACKAGECONFIG_SOC:mx9-nxp-bsp        ??= "tensorflow-lite"
 
 PACKAGECONFIG[flatbuf] = "\
 	-Dflatbuf-support=enabled, \
@@ -113,7 +106,6 @@ do_install:append() {
 PACKAGES =+ "\
 	${PN}-unittest \
 	${@bb.utils.contains('PACKAGECONFIG', 'armnn','${PN}-armnn', '', d)} \
-	${@bb.utils.contains('PACKAGECONFIG', 'deepview-rt','${PN}-deepview-rt', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
@@ -131,7 +123,6 @@ RDEPENDS:${PN} = "\
 
 RDEPENDS:${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
 	${@bb.utils.contains('PACKAGECONFIG', 'armnn','${PN}-armnn', '', d)} \
-	${@bb.utils.contains('PACKAGECONFIG', 'deepview-rt','${PN}-deepview-rt', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
@@ -152,10 +143,6 @@ FILES:${PN} += "\
 
 FILES:${PN}-armnn = "\
 	${libdir}/nnstreamer/filters/libnnstreamer_filter_armnn.so \
-"
-
-FILES:${PN}-deepview-rt = "\
-	${libdir}/nnstreamer/filters/libnnstreamer_filter_deepview-rt.so \
 "
 
 FILES:${PN}-dev = "\

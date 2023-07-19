@@ -11,7 +11,6 @@ inherit packagegroup
 
 ML_NNSTREAMER_PKGS_LIST = " \
     nnstreamer \
-    nnstreamer-deepview-rt \
     nnstreamer-protobuf \
     nnstreamer-python3 \
     nnstreamer-query \
