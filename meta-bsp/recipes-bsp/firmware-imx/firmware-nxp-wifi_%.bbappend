@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://EULA.txt;md5=673fa34349fa40f59e0713cb0ac22b1f"
 
 SRC_URI = "${IMX_FIRMWARE_SRC};branch=${SRCBRANCH}"
 SRCBRANCH = "master"
-SRCREV = "ec4840300959f5a37dfca319acabede898aa6ad2"
+SRCREV = "8e310c33cd7e258a239f0847dce2a8db4a8de27a"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/nxp
