@@ -105,7 +105,6 @@ do_install:append() {
 
 PACKAGES =+ "\
 	${PN}-unittest \
-	${@bb.utils.contains('PACKAGECONFIG', 'armnn','${PN}-armnn', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
@@ -122,7 +121,6 @@ RDEPENDS:${PN} = "\
 "
 
 RDEPENDS:${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
-	${@bb.utils.contains('PACKAGECONFIG', 'armnn','${PN}-armnn', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf','${PN}-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'flatbuf grpc','${PN}-grpc-flatbuf', '', d)} \
 	${@bb.utils.contains('PACKAGECONFIG', 'grpc','${PN}-grpc', '', d)} \
@@ -139,10 +137,6 @@ FILES:${PN} += "\
 	${libdir}/gstreamer-1.0/*.so \
 	${libdir}/nnstreamer/decoders/* \
 	${sysconfdir}/nnstreamer.ini \
-"
-
-FILES:${PN}-armnn = "\
-	${libdir}/nnstreamer/filters/libnnstreamer_filter_armnn.so \
 "
 
 FILES:${PN}-dev = "\
