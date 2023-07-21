@@ -1,5 +1,5 @@
 require recipes-bsp/u-boot/u-boot-tools.inc
-require recipes-bsp/u-boot/u-boot-imx-common_${PV}.inc
+require u-boot-imx-common_${PV}.inc
 
 DEPENDS += "gnutls util-linux python3-setuptools-native"
 
