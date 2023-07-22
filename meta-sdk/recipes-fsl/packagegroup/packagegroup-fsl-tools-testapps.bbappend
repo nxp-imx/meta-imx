@@ -14,6 +14,8 @@ ALLOW_EMPTY:${PN}-fslcodec-testapps = "1"
 # Update SOC_TOOLS_TEST defined in meta-freescale-distro
 SOC_TOOLS_TEST:append:imx-nxp-bsp    = " \
     imx-kobs \
+    kernel-tools-iio \
+    kernel-tools-pci \
     ${PN}-fslcodec-testapps \
 "
 
@@ -35,8 +37,6 @@ RDEPENDS:${PN} += " \
     iw \
     libp11 \
     linuxptp \
-    kernel-tools-iio \
-    kernel-tools-pci \
     minicom \
     mmc-utils \
     nano \
