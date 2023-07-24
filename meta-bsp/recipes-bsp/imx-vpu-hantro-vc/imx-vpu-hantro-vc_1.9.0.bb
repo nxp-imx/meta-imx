@@ -1,4 +1,4 @@
-# Copyright 2019-2023 NXP
+# Copyright 2019-2022 NXP
 
 DESCRIPTION = "i.MX VC8000E encoder library"
 LICENSE = "Proprietary"
