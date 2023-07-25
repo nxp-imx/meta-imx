@@ -1006,8 +1006,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-vc-1.9.0.bin
-Version:                     1.9.0
+Package:                     imx-vpu-hantro-vc-1.9.1.bin
+Version:                     1.9.1
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
