@@ -1,5 +1,9 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
+PACKAGECONFIG_GBM_FORMAT:mx93-nxp-bsp ?= "gbm-format"
+
+GBM_FORMAT_VALUE = "argb8888"
+
 update_file() {
     if ! grep -q "$1" $3; then
         bbfatal $1 not found in $3
@@ -22,4 +26,9 @@ do_install:append() {
 
     # Remove weston.sh installed by meta-freescale, it is superceded by weston-socket.sh
     rm ${D}${sysconfdir}/profile.d/weston.sh
+
+    # Include commented gbm-format
+    if ! [ "${@bb.utils.contains('PACKAGECONFIG', 'gbm-format', 'yes', 'no', d)}" = "yes" ]; then
+        sed -i -e "/^\[core\]/a #gbm-format=${GBM_FORMAT_VALUE}" ${D}${sysconfdir}/xdg/weston/weston.ini
+    fi
 }
