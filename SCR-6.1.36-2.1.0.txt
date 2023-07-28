@@ -1272,33 +1272,6 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     deepview-rt-2.4.46.2-aarch64.bin
-Version:                     2.4.46.2-aarch64
-Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 No distribution license granted - Section 2.2 applies
-License File:                COPYING
-Package Category:            MachineLearning
-Type of Content:             binary
-Description and comments:    Machine Learning Au-Zone DeepViewRT and ModelRunner for i.MX8 Application Processors
-Release Location:            Mirror
-Origin:                      Au-Zone Technologies (LA_OPT_NXP_Software_License - see appendix)
-
---------------------------------------------
-
-Package:                     deepview-rt-examples-1.6.1.bin
-Version:                     1.6.1
-Outgoing License:            LA_OPT_NXP_Software_License v42 January 2023 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            MachineLearning
-Type of Content:             binary
-Description and comments:    DeepViewRT Examples
-Release Location:            Mirror
-Origin:                    Au-Zone Technologies (LA_OPT_NXP_Software_License - see appendix)
-                           mman-win32 (Author: Viktor Kutuzov, License: MIT) - https://github.com/klauspost/mman-win32
-                           panda.jpg (Author: Shizhao, License: CC BY-SA 3.0) - https://commons.wikimedia.org/wiki/File:Giant_Panda_in_Beijing_Zoo_1.JPG
-                           horse.jpg (public domain) - https://commons.wikimedia.org/wiki/File:Horsescd1l-095.jpg
-
---------------------------------------------
-
 Package:                     eiq-examples.git
 Version:                     
 Outgoing License:            Apache-2.0 
