@@ -1,4 +1,4 @@
-DESCRIPTION = "This package includes the updated and experimental ModelRunner for TensorFlow Lite and ARM NN. Also in this repository is a pre-release of DeepViewRT with support for the OpenVX backend."
+DESCRIPTION = "This package includes the updated and experimental ModelRunner for TensorFlow Lite and ARM NN"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9135422c7a38dac21bf1f858b6ef3bac"
 
@@ -36,7 +36,7 @@ INHIBIT_SYSROOT_STRIP = "1"
 FILES_SOLIBSDEV = ""
 
 FILES:${PN} += "${libdir}/*"
-RDEPENDS:${PN} = "deepview-rt onnxruntime tensorflow-lite"
+RDEPENDS:${PN} = "onnxruntime tensorflow-lite"
 INSANE_SKIP:${PN} += "dev-so dev-deps ldflags"
 
 BBCLASSEXTEND = "nativesdk"
