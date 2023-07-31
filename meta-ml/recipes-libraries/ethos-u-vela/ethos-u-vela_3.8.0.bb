@@ -1,4 +1,4 @@
-# Copyright 2022 NXP
+# Copyright 2023 NXP
 DESCRIPTION = "The vela tool is used to compile a TensorFlow Lite for \
 Microcontrollers neural network model into an optimised version that \
 can run on an embedded system containing an Arm Ethos-U NPU"
@@ -8,8 +8,8 @@ DEPENDS = "python3-pip-native python3-wheel-native flatbuffers python3-numpy pyt
 
 SRC_URI = "${VELA_SRC};branch=${SRCBRANCH}"
 VELA_SRC ?= "git://github.com/nxp-imx/ethos-u-vela.git;protocol=https"
-SRCBRANCH = "imx_3.7.0"
-SRCREV = "ae6d133ae475afb2ea93a621f4f3989fa4c09cff"
+SRCBRANCH = "imx_3.8.0"
+SRCREV = "8c8e91ea707e66b9c4fb5e354a1d7888257a1d2b"
 
 S = "${WORKDIR}/git"
 
