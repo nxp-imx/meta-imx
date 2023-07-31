@@ -3,8 +3,8 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9135422c7a38dac21bf1f858b6ef3bac" 
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "03d0ff1ca3ae418dd82306b7848121e1"
-SRC_URI[sha256sum] = "14c2fbc7fb4025f05bfeb492ed844cd6ece7e48fdc00acd4bd645ac3b328cf9b"
+SRC_URI[md5sum] = "7437844644098c9f8cc350da8507335a"
+SRC_URI[sha256sum] = "9066b3917be717028c914a5a87a03268f84e196d1f143b57c78dfc2ddc20ac11"
 S = "${WORKDIR}/${BPN}-${PV}"
 
 inherit fsl-eula-unpack python3native
