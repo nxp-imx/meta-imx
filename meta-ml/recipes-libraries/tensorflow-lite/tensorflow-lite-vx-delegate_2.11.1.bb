@@ -8,8 +8,8 @@ DEPENDS = "tensorflow-lite tim-vx"
 require tensorflow-lite-${PV}.inc
 
 TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-vx-delegate-imx.git;protocol=https" 
-SRCBRANCH_vx = "imx-v2.10.0"
-SRCREV_vx = "5567b50501a3aaedce7df1069071adf7095f4b96"
+SRCBRANCH_vx = "imx-v2.11.1"
+SRCREV_vx = "d0ce320ebb9adba83877252dc4362a9b7c426664"
 
 SRCREV_FORMAT = "vx_tf"
 
