@@ -1,6 +1,6 @@
 DESCRIPTION = "This package includes the updated and experimental ModelRunner for TensorFlow Lite and ARM NN"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=9135422c7a38dac21bf1f858b6ef3bac"
+LIC_FILES_CHKSUM = "file://COPYING;md5=9135422c7a38dac21bf1f858b6ef3bac" 
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "03d0ff1ca3ae418dd82306b7848121e1"
