@@ -7,8 +7,8 @@ IMX_SRCREV_ABBREV = "e4ba456"
 SRC_URI[arm-fb.md5sum] = "aba5dcebd00326a86fd1b81617aab392"
 SRC_URI[arm-fb.sha256sum] = "4bb903a2cb28b689733b1eaca6c4e9a316a3eede136da87068f7fa753d48bba9"
 
-SRC_URI[arm-wayland.md5sum] = "e7cbe06172a644bf28bb79f310ed3522"
-SRC_URI[arm-wayland.sha256sum] = "7ba3daa2bb486838d03ead2956d22cc4312becd32f19b1d397fcc6509ff96198"
+SRC_URI[arm-wayland.md5sum] = "a1988eb637336d43c9580ba3e029b3d4"
+SRC_URI[arm-wayland.sha256sum] = "696702e6b426419a74fc6b718ad42db6a26eb62176a997de7747520970ec65e3"
 
 SRC_URI[arm-x11.md5sum] = "62788042779d29e9f69931f607c79826"
 SRC_URI[arm-x11.sha256sum] = "35fb8d4fb54e0a64d783ee0d602c42b5bc1511f0c8dd4a0946a287cf6247f80b"
