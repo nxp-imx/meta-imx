@@ -13,7 +13,7 @@ SRC_URI[imx8mm.sha256sum] = "fe024edb89bac0ab0a5b74ad2b0a231cba92b9b2c0cdab496e4
 SRC_URI[imx8mq.md5sum] = "2860266c99a4535c2bd14adb7ceaf6ba"
 SRC_URI[imx8mq.sha256sum] = "cc13003b637d6912780dc70f37c78b60403a080c6edbb0bf3c7f9bf5a2f98971"
 
-SRC_URI[imx7ulp.md5sum] = "5ca17160cfbac5ce84d9f0fa04cf9ecf"
-SRC_URI[imx7ulp.sha256sum] = "eba89bcd1c162a5d81707abdba5bea2ef862acd8c5558bce2f3435e27c00ada9"
+SRC_URI[imx7ulp.md5sum] = "4ec757b7a2a2bdf33f583c328a4631f1"
+SRC_URI[imx7ulp.sha256sum] = "51715bee5e300ee6160c92979e7075e3aa7f7114e7742699bfaa9779113a6fe9"
 
 COMPATIBLE_MACHINE = "(mx7ulp-nxp-bsp|mx8mm-nxp-bsp|mx8mq-nxp-bsp)"
