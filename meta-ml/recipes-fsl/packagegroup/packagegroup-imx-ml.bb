@@ -32,11 +32,13 @@ ML_GST_PROFILER:mx9-nxp-bsp   = "gst-shark"
 ML_PKGS            = ""
 ML_PKGS:mx8-nxp-bsp = " \
     onnxruntime-tests \
+    modelrunner \
     tensorflow-lite \
     torchvision \
 "
 ML_PKGS:mx9-nxp-bsp = " \
     onnxruntime-tests \
+    modelrunner \
     tensorflow-lite \
     torchvision \
 "
