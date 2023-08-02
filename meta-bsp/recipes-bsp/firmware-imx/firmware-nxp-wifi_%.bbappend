@@ -3,7 +3,7 @@
 LIC_FILES_CHKSUM = "file://EULA.txt;md5=9135422c7a38dac21bf1f858b6ef3bac"
 
 SRC_URI = "${IMX_FIRMWARE_SRC};branch=${SRCBRANCH}"
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.1.36_2.1.0"
 SRCREV = "8e310c33cd7e258a239f0847dce2a8db4a8de27a"
 
 do_install() {
