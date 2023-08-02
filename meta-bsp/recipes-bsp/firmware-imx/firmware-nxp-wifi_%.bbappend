@@ -1,6 +1,6 @@
 # Use the latest revision
 
-LIC_FILES_CHKSUM = "file://EULA.txt;md5=9135422c7a38dac21bf1f858b6ef3bac"
+LIC_FILES_CHKSUM = "file://EULA.txt;md5=db4762b09b6bda63da103963e6e081de"
 
 SRC_URI = "${IMX_FIRMWARE_SRC};branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.1.36_2.1.0"
