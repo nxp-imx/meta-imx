@@ -11,7 +11,7 @@ PYV = "cp311"
 
 PYTORCH_SRC ?= "git://github.com/nxp-imx/pytorch-release.git;protocol=https"
 SRCBRANCH = "lf-6.1.36_2.1.0"
-SRCREV = "6948822f1d3e6cdbbd067b9e21885b697a70f18a"
+SRCREV = "6948822f1d3e6cdbbd067b9e21885b697a70f18a" 
 
 SRC_URI = " \
     ${PYTORCH_SRC};branch=${SRCBRANCH} \
