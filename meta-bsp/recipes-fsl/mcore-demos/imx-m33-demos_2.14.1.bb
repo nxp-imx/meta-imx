@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM:mx8ulp-nxp-bsp = "file://COPYING;md5=9135422c7a38dac21bf1f858b6
 SRC_URI[imx8ulp.md5sum] = "e44631b2d0f39a1d062e5eacfc1a08ae"
 SRC_URI[imx8ulp.sha256sum] = "bb94a035cac226617dd15b218b397b4eb2d12749610f9b7be6fb9e63363e06ea"
 
-SRC_URI[imx93.md5sum] = "5eb97a5afed0aafda98ea5bdc665811c"
-SRC_URI[imx93.sha256sum] = "54ca75f62baf0f197f77837822fe8fb0e4fa2e2450c81dca60d24ca5f59d48bd"
+SRC_URI[imx93.md5sum] = "bd6eb48c527c3ba2ad32fa6ae1f1495a"
+SRC_URI[imx93.sha256sum] = "a3fd0c9a724dde1785959ee12bbdb9ff604db0bced005e81b19a47b877013884"
 
 COMPATIBLE_MACHINE = "(mx8ulp-nxp-bsp|mx93-nxp-bsp)"
