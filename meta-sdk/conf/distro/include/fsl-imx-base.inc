@@ -36,6 +36,3 @@ PACKAGECONFIG:append:class-target:pn-qtquick3d     = " examples"
 PACKAGECONFIG:append:class-target:pn-qtwebengine   = " examples"
 
 PACKAGECONFIG:append:pn-systemd = " unmanaged-network"
-
-PACKAGECONFIG:append:pn-qtbase = " gles2"
-PACKAGECONFIG:remove:pn-qtbase = "no-opengl linuxfb"
