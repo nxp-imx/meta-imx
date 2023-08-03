@@ -37,5 +37,5 @@ PACKAGECONFIG:append:class-target:pn-qtwebengine   = " examples"
 
 PACKAGECONFIG:append:pn-systemd = " unmanaged-network"
 
-PACKAGECONFIG:append:pn-qtbase = " gles2"
-PACKAGECONFIG:remove:pn-qtbase = "no-opengl linuxfb"
+PACKAGECONFIG:append:mx93-nxp-bsp:pn-qtbase = " gles2"
+PACKAGECONFIG:remove:mx93-nxp-bsp:pn-qtbase = "no-opengl linuxfb"
