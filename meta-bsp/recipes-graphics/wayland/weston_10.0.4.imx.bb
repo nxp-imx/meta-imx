@@ -185,7 +185,6 @@ PACKAGECONFIG:remove:imxfbdev = "kms"
 PACKAGECONFIG:append:imxfbdev = " fbdev clients"
 PACKAGECONFIG:append:imxgpu   = " imxgpu"
 PACKAGECONFIG:append:imxgpu2d = " imxg2d"
-PACKAGECONFIG:append:mx93-nxp-bsp = " imxgpu imxg2d"
 
 SIMPLECLIENTS:imxfbdev = "damage,im,egl,shm,touch,dmabuf-v4l"
 
