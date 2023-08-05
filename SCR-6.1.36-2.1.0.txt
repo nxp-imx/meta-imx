@@ -299,8 +299,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-3.3.0
-Version:                     3.3.0
+Package:                     zephyr-demo-imx-3.4.0
+Version:                     3.4.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -355,7 +355,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-optee-client.git
-Version:                     lf-6.1.36_2.1.0
+Version:                     3.21.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -368,7 +368,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-os.git
-Version:                     lf-6.1.36_2.1.0
+Version:                     3.21.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -382,7 +382,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-test.git
-Version:                     lf-6.1.36_2.1.0
+Version:                     3.21.0.imx
 Outgoing License:            BSD-2-Clause (ta/) and GPL-2.0 (host/) 
 License File:                LICENSE.md
 Package Category:            BSP
@@ -405,6 +405,26 @@ Release Location:            https://github.com/nxp-imx/imx-jailhouse -b lf-6.1.
 Origin:                      NXP (GPL-2.0)
                              Siemens AG (GPL-2.0) - https://github.com/siemens/jailhouse
 
+--------------------------------------------
+
+Package:                     crypto-af-alg.git
+Version:                     
+Outgoing License:            BSD-3-Clause 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    i.MX crypto af alg tool to perform symmetric operation
+Release Location:            https://github.com/nxp-imx/crypto_af_alg -b lf-6.1.36-2.1.0
+--------------------------------------------
+
+Package:                     el2go-agent.git
+Version:                     
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    Contains communication protocol stack
+Release Location:            https://github.com/NXP/el2go-agent -b lf-6.1.36-2.1.0
 --------------------------------------------
 
 Package:                     imx-secure-enclave.git
@@ -441,16 +461,6 @@ Description and comments:    NXP i.MX keyctl tool to manage CAAM Keys
 Release Location:            https://github.com/nxp-imx/keyctl_caam -b lf-6.1.36-2.1.0
 Origin:                      NXP (BSD-3-Clause)
 
---------------------------------------------
-
-Package:                     el2go-agent.git
-Version:                     
-Outgoing License:            Apache-2.0 
-License File:                LICENSE
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    Contains communication protocol stack
-Release Location:            https://github.com/NXP/el2go-agent -b lf-6.1.36-2.1.0
 --------------------------------------------
 
 Package:                     ecdsa-lib-imx-3.3.2.3.bin
@@ -637,7 +647,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     libdrm-imx.git
-Version:                     2.4.114.imx
+Version:                     2.4.115.imx
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
@@ -1342,6 +1352,16 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
+Package:                     modelrunner-2.3.0.bin
+Version:                     2.3.0
+Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 No distribution license granted - Section 2.2 applies
+License File:                COPYING
+Package Category:            MachineLearning
+Type of Content:             binary
+Description and comments:    Machine Learning Au-Zone ModelRunner for i.MX8 Application Processors
+Release Location:            Mirror
+--------------------------------------------
+
 Package:                     nnshark.git
 Version:                     2021.10.imx
 Outgoing License:            LGPL-2.1 
@@ -1438,16 +1458,6 @@ Origin:                      Vivante Corporation (MIT)
                              The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
 
 --------------------------------------------
-
-Package:                     modelrunner-2.3.0.bin
-Version:                     2.3.0
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 No distribution license granted - Section 2.2 applies
-License File:                COPYING
-Package Category:            MachineLearning
-Type of Content:             binary
-Description and comments:    Machine Learning Au-Zone ModelRunner for i.MX8 Application Processors
-Release Location:            Mirror
---------------------------------------------
 Tools Packages
 --------------------------------------------
 
@@ -1480,7 +1490,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.56
+Version:                     1.1.71
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
