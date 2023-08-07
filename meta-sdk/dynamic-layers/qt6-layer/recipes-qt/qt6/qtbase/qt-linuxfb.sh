@@ -5,4 +5,3 @@ if test -z $XDG_RUNTIME_DIR; then
 		mkdir -m 700 -p $XDG_RUNTIME_DIR
 	fi
 fi
-export QT_QPA_PLATFORM=linuxfb
