@@ -13,9 +13,9 @@ RDEPENDS:${PN} = " \
     ${QT6_IMAGE_INSTALL_CINEMATICEXPERIENCE} \
     ${QT6_IMAGE_INSTALL_FONTS} \
     ${QT6_IMAGE_INSTALL_QUICK3D} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11',     'libxkbcommon', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'nxp-demo-experience', '', d)}\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland qtwayland-plugins', '', d)}"
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11',         'libxkbcommon', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'nxp-demo-experience', '', d)}\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland',     'qtwayland qtwayland-plugins', '', d)}"
 
 QT6_IMAGE_INSTALL_APPS = ""
 #QT6_IMAGE_INSTALL_APPS:imxgpu3d = "${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-qtapplications", "", d)}"
