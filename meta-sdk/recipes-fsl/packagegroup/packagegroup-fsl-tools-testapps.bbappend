@@ -23,6 +23,7 @@ SOC_TOOLS_TEST:append:mx8qm-nxp-bsp  = " imx-seco-libs dvbapp-tests"
 SOC_TOOLS_TEST:append:mx8x-nxp-bsp   = " imx-seco-libs"
 SOC_TOOLS_TEST:append:mx8m-nxp-bsp   = " kernel-tools-virtio"
 SOC_TOOLS_TEST:append:mx8ulp-nxp-bsp = " imx-secure-enclave"
+SOC_TOOLS_TEST:append:mx91p-nxp-bsp = " imx-secure-enclave"
 SOC_TOOLS_TEST:append:mx93-nxp-bsp = " imx-secure-enclave"
 
 RDEPENDS:${PN} += " \
