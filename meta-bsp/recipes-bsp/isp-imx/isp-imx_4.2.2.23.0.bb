@@ -1,4 +1,4 @@
-# Copyright 2020-2022 NXP
+# Copyright 2020-2023 NXP
 
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
@@ -45,31 +45,12 @@ EXTRA_OECMAKE += " \
 "
 
 do_install() {
-    install -d ${D}/${libdir}
-    install -d ${D}/${includedir}
-    install -d ${D}/opt/imx8-isp/bin
-    install -d ${D}/opt/imx8-isp/bin/dewarp_config
-
-    cp -r ${B}/generated/release/bin/*_test ${D}/opt/imx8-isp/bin
-    cp -r ${B}/generated/release/bin/*.xml ${D}/opt/imx8-isp/bin
-    cp -r ${B}/generated/release/bin/*.drv ${D}/opt/imx8-isp/bin
-    cp -r ${B}/generated/release/bin/tuningext ${D}/opt/imx8-isp/bin
-    cp -r ${B}/generated/release/bin/isp_media_server ${D}/opt/imx8-isp/bin
-    cp -r ${B}/generated/release/bin/vvext ${D}/opt/imx8-isp/bin
-
-    cp -r ${B}/generated/release/lib/*.so* ${D}/${libdir}
-    cp -r ${B}/generated/release/include/* ${D}/${includedir}
-
-    cp -r ${S}/dewarp/dewarp_config/ ${D}/opt/imx8-isp/bin
-    cp ${S}/imx/run.sh ${D}/opt/imx8-isp/bin
-    cp ${S}/imx/start_isp.sh ${D}/opt/imx8-isp/bin
-
-    chmod +x ${D}/opt/imx8-isp/bin/run.sh
-    chmod +x ${D}/opt/imx8-isp/bin/start_isp.sh
+    # Use Makefile to install
+    oe_runmake -f ${S}/Makefile install INSTALL_DIR=${D} SOURCE_DIR=${S}
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-      install -d ${D}${systemd_system_unitdir}
-      install -m 0644 ${S}/imx/imx8-isp.service ${D}${systemd_system_unitdir}
+        install -d ${D}${systemd_system_unitdir}
+        install -m 0644 ${S}/imx/imx8-isp.service ${D}${systemd_system_unitdir}
     fi
 }
 
