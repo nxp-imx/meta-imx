@@ -1206,8 +1206,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mp-m7-demo-2.14.0.bin
-Version:                     2.14.0
+Package:                     imx8mp-m7-demo-2.14.1.bin
+Version:                     2.14.1
 Outgoing License:            LA_OPT_NXP_Software_License v42 January 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
