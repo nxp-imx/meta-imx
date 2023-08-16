@@ -9,7 +9,7 @@ DEPENDS = "python3-pip-native python3-wheel-native flatbuffers python3-numpy pyt
 SRC_URI = "${VELA_SRC};branch=${SRCBRANCH}"
 VELA_SRC ?= "git://github.com/nxp-imx/ethos-u-vela.git;protocol=https"
 SRCBRANCH = "imx_3.8.0"
-SRCREV = "d8fbd07bb69ebeddfa7065e5d89616eefd49a766"
+SRCREV = "90396f4dcd1fea48b0d430016664c9cc218875fa"
 
 S = "${WORKDIR}/git"
 
