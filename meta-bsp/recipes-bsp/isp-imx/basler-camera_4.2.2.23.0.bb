@@ -14,7 +14,11 @@ SRC_URI[sha256sum] = "deb0ea83e3ec0681d1a8852b46d89d761cfadf7ca12c00ea68c1360c1a
 do_compile[noexec] = "1"
 
 do_install() {
-    oe_runmake install INSTALL_DIR=${D}
+    dest_dir=${D}/opt/imx8-isp/bin
+    install -d ${D}/${libdir}
+    install -d $dest_dir
+    cp -r ${S}/opt/imx8-isp/bin/* $dest_dir
+    cp -r ${S}/usr/lib/* ${D}/${libdir}
 }
 
 SYSTEMD_AUTO_ENABLE = "enable"
