@@ -425,6 +425,11 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    Contains communication protocol stack
 Release Location:            https://github.com/NXP/el2go-agent -b lf-6.1.36-2.1.0
+Origin:                      NXP(Apache-2.0)
+                             Mbed-TLS(Apache-2.0) - https://github.com/Mbed-TLS/mbedtls
+                             nanopb(zlib License) - https://cocoapods.org/pods/nanopb
+
+
 --------------------------------------------
 
 Package:                     imx-secure-enclave.git
