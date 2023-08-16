@@ -25,4 +25,4 @@ do_install () {
 
 FILES:${PN} += "${datadir}/se"
 
-COMPATIBLE_MACHINE = "(mx8ulp-nxp-bsp|mx91p-nxp-bsp|mx93-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp|mx9-nxp-bsp)"
