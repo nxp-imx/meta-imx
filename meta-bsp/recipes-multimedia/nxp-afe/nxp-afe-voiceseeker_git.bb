@@ -3,7 +3,7 @@
 DESCRIPTION = "NXP RetuneDSP Voice Seeker Libraries"
 SECTION = "multimedia"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=63a38e9f392d8813d6f1f4d0d6fbe657"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=db4762b09b6bda63da103963e6e081de"
 
 inherit autotools pkgconfig
 
