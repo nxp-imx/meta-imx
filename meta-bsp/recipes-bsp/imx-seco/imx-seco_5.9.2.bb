@@ -5,14 +5,14 @@ DESCRIPTION = "Firmware for i.MX Security Controller Subsystem"
 SECTION = "base"
 LICENSE = "Proprietary"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=5a0bf11f745e68024f37b4724a5364fe"
+LIC_FILES_CHKSUM = "file://COPYING;md5=db4762b09b6bda63da103963e6e081de"
 
 inherit fsl-eula-unpack use-imx-security-controller-firmware deploy
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "b722a534c4d3cc90270e05eaa812514d"
-SRC_URI[sha256sum] = "c3bd761f457e939035b01a0ab36e79064a2a1bc6c3cdb3cd847f7f38df0964df"
+SRC_URI[md5sum] = "d5e0bba9de234e6a3a9d11f1dc3cfb00"
+SRC_URI[sha256sum] = "81601f73d1b2c1d051760e6f6174e084256a1a10ed21a5c616c139e630c4e709"
 
 do_compile[noexec] = "1"
 
