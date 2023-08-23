@@ -11,6 +11,9 @@ do_install() {
     oe_runmake install INSTALLDIR=${D}${nonarch_base_libdir}/firmware/nxp
 }
 
+
+PACKAGES:remove = "${PN}-bcm4359-pcie"
+
 FILES:${PN}-nxp-common += " \
     ${nonarch_base_libdir}/firmware/nxp/helper_uart_3000000.bin \
 "
