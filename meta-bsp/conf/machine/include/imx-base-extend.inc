@@ -62,3 +62,7 @@ PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.7.0.imx"
 
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
 ZSTD_COMPRESSION_LEVEL ?= "-10"
+
+# Overwrite BCM Wi-Fi setting
+MACHINE_FIRMWARE:remove = "firmware-nxp-wifi-bcm4359-pcie"
+MACHINE_FIRMWARE:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'bcm4359', 'linux-firmware-bcm4359-pcie', '', d)}"
