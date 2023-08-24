@@ -5,7 +5,7 @@ require imx-mcore-demos.inc
 
 LIC_FILES_CHKSUM:mx8mm-nxp-bsp = "file://COPYING;md5=9135422c7a38dac21bf1f858b6ef3bac"
 
-SRC_URI[imx8mm.md5sum] = "788192fd5e42d0eab95a27a3738b8615"
-SRC_URI[imx8mm.sha256sum] = "178150e9720b84838f26cfcf14d25be247bd9e55e39bfb8238e47aee2d0f6244"
+SRC_URI[imx8mm.md5sum] = "8db99da9efe8a5409a246c8a63d418dc"
+SRC_URI[imx8mm.sha256sum] = "8269d7461efcdba0b8c3e684df8b45c2d8ace3fdf426b81bdfb46855a1577987"
 
 COMPATIBLE_MACHINE = "(mx8mm-nxp-bsp)"
