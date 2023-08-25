@@ -59,7 +59,7 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     imx-sc-firmware-1.15.0.bin
 Version:                     1.15.0
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -225,7 +225,7 @@ Origin:                      NXP (GPL-2.0)
 Package:                     imx-firmware.git
 Version:                     
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
-License File:                EULA.txt
+License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             binary
 Description and comments:    BSP firmware - Bluetooth and WIFI
@@ -415,6 +415,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX crypto af alg tool to perform symmetric operation
 Release Location:            https://github.com/nxp-imx/crypto_af_alg -b lf-6.1.36-2.1.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 
 Package:                     el2go-agent.git
@@ -959,7 +961,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-sw-pdm-1.0.3.bin
 Version:                     1.0.3
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v45 May 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1138,34 +1140,6 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mm-m4-demo-2.14.1.bin
-Version:                     2.14.1
-Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            M4_Processor
-Type of Content:             binary
-Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M4 core
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
-                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
-
---------------------------------------------
-
-Package:                     imx8mq-m4-demo-2.14.0.bin
-Version:                     2.14.0
-Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            M4_Processor
-Type of Content:             binary
-Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M4 core
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
-                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
-
---------------------------------------------
-
 Package:                     imx8mm-m4-demo-2.14.0.bin
 Version:                     2.14.0
 Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
@@ -1222,50 +1196,6 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 M7 Processor Packages
---------------------------------------------
-
-Package:                     imx8mn-m7-demo-2.14.0.bin
-Version:                     2.14.0
-Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            M7_Processor
-Type of Content:             binary
-Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
-                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
-
---------------------------------------------
-
-Package:                     imx8mnddr3l-m7-demo-2.14.0.bin
-Version:                     2.14.0
-Outgoing License:            LA_OPT_NXP_Software_License v40 December 2022 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            M7_Processor
-Type of Content:             binary
-Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
-                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
-
---------------------------------------------
-
-Package:                     imx8mp-m7-demo-2.14.1.bin
-Version:                     2.14.1
-Outgoing License:            LA_OPT_NXP_Software_License v42 January 2023 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            M7_Processor
-Type of Content:             binary
-Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
-                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
-                             Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
-                             Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
-
 --------------------------------------------
 
 Package:                     imx8mn-m7-demo-2.14.0.bin
