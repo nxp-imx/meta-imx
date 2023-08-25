@@ -272,8 +272,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     sof-imx-2.6.0
-Version:                     2.6.0
+Package:                     sof-imx-2.7.0
+Version:                     2.7.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -285,8 +285,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.6.0
-Version:                     2.6.0
+Package:                     sof-zephyr-2.7.0
+Version:                     2.7.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -687,6 +687,9 @@ Package Category:            Graphics
 Type of Content:             source
 Description and comments:    A reference implementation of a Wayland compositor
 Release Location:            https://github.com/nxp-imx/weston-imx -b lf-6.1.36-2.1.0
+Origin:                      NXP (MIT)
+                             Weston (MIT) - http://github.com/wayland-project/weston/
+
 --------------------------------------------
 
 Package:                     imx-gputop.git
@@ -1452,6 +1455,8 @@ Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    Machine Learning Au-Zone ModelRunner for i.MX8 Application Processors
 Release Location:            Mirror
+Origin:                      Au-Zone Technologies (LA_OPT_NXP_Software_License - see appendix)
+
 --------------------------------------------
 Tools Packages
 --------------------------------------------
