@@ -14,7 +14,6 @@ RDEPENDS:${PN} = " \
     ${QT6_IMAGE_INSTALL_FONTS} \
     ${QT6_IMAGE_INSTALL_QUICK3D} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11',         'libxkbcommon', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'nxp-demo-experience', '', d)}\
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland',     'qtwayland qtwayland-plugins', '', d)}"
 
 QT6_IMAGE_INSTALL_APPS = ""
