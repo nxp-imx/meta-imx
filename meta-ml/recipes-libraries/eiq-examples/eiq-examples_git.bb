@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 SRC_URI = "${EIQ_EXAMPLES_SRC};branch=${SRCBRANCH}"
 EIQ_EXAMPLES_SRC ?= "git://github.com/nxp-imx/eiq-example.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "b819d5009b1b8dba30b49d447a19d234f105d209"
+SRCREV = "3d0dbdc409ce8bd0346d0e5ff55d831fa89c792a"
 
 S = "${WORKDIR}/git"
 
