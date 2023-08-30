@@ -258,10 +258,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 # Replace the opencv URL with the fork
 SRC_URI:remove = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol=https"
-SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH};name=opencv"
+SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH_opencv};name=opencv"
 SRC_URI:remove = "file://0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch"
 OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=master"
-SRCBRANCH = "4.7.0_imx"
+SRCBRANCH_opencv = "4.7.0_imx"
 SRCREV_opencv = "3acf6a50fcb4f774728d2338553ad646ccc14b14"
 
 # Update opencv_contrib
