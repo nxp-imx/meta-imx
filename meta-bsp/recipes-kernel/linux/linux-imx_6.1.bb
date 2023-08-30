@@ -29,7 +29,7 @@ SRCREV = "006068aa6e64506dec5862d5a6309955722ac42e"
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "6.1.y"
+LINUX_VERSION = "6.1.36"
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
 
