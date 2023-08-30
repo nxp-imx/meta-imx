@@ -1140,9 +1140,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mm-m4-demo-2.14.0.bin
-Version:                     2.14.0
-Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mm-m4-demo-2.14.1.bin
+Version:                     2.14.1
+Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1228,7 +1228,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx8mp-m7-demo-2.14.1.bin
 Version:                     2.14.1
-Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
