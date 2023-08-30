@@ -11,4 +11,8 @@ IMX_CORE_TOOLS:imxpxp = " tslib"
 RDEPENDS:${PN} += " \
     ${IMX_CORE_TOOLS} \
     libgpiod-tools \
+    pipewire \
+    pipewire-spa-tools \
+    pipewire-tools \
+    pipewire-v4l2 \
 "

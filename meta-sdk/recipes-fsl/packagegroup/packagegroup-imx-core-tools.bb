@@ -35,6 +35,10 @@ RDEPENDS:${PN} = " \
     mtd-utils-ubifs \
     nano \
     parted \
+    pipewire \
+    pipewire-spa-tools \
+    pipewire-tools \
+    pipewire-v4l2 \
     procps \
     ptpd \
     ntp \
