@@ -12,6 +12,6 @@ SRC_URI = "${DPDK_SRC};nobranch=1 \
 
 STABLE = "-stable"
 
-SRCREV = "d16a77de5b5e53056ff2504b195a90d32d5aef7c"
+SRCREV = "88b35ea813829371c77dc8172ba46152d8e5fdbd"
 
 CVE_PRODUCT = "data_plane_development_kit"
