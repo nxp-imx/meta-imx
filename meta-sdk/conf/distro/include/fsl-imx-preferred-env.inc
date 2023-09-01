@@ -18,6 +18,14 @@ PREFERRED_VERSION_gstreamer1.0-plugins-ugly:mx8-nxp-bsp = "1.22.%"
 PREFERRED_VERSION_gstreamer1.0-libav:mx8-nxp-bsp        = "1.22.%"
 PREFERRED_VERSION_gstreamer1.0-rtsp-server:mx8-nxp-bsp  = "1.22.%"
 
+PREFERRED_VERSION_gstreamer1.0:mx9-nxp-bsp              = "1.22.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-base:mx9-nxp-bsp = "1.22.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-good:mx9-nxp-bsp = "1.22.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-bad:mx9-nxp-bsp  = "1.22.0.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-ugly:mx9-nxp-bsp = "1.22.%"
+PREFERRED_VERSION_gstreamer1.0-libav:mx9-nxp-bsp        = "1.22.%"
+PREFERRED_VERSION_gstreamer1.0-rtsp-server:mx9-nxp-bsp  = "1.22.%"
+
 BBMASK += "meta-freescale/recipes-multimedia/gstreamer"
 
 PREFERRED_VERSION_opengl-es-cts:mx6-nxp-bsp = "3.2.4.0"
