@@ -16,15 +16,15 @@ MACHINE_FEATURES += "pci wifi bluetooth bcm43455 bcm4356"
 # OP-TEE is also applicable to NXP BSP, mainline BSP seems not to have
 # a full support for it yet.
 
-MACHINE_FEATURES:append_use-nxp-bsp = " optee bcm4359"
+MACHINE_FEATURES:append:use-nxp-bsp = " optee bcm4359"
 
 KERNEL_DEVICETREE = " \
     freescale/${KERNEL_DEVICETREE_BASENAME}.dtb \
 "
 UBOOT_DTB_NAME = "${KERNEL_DEVICETREE_BASENAME}.dtb"
 
-IMX_DEFAULT_BOOTLOADER_use-nxp-bsp = "u-boot-imx"
-IMX_DEFAULT_BOOTLOADER_use-mainline-bsp = "u-boot-fslc"
+IMX_DEFAULT_BOOTLOADER:use-nxp-bsp = "u-boot-imx"
+IMX_DEFAULT_BOOTLOADER:use-mainline-bsp = "u-boot-fslc"
 
 UBOOT_CONFIG ??= "sd"
 UBOOT_CONFIG[sd]       = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
