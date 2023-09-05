@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f3c5879801d3cffc4ac2399f2b8e8ec5 \
 SRC_URI = "${ARM_COMPUTELIBRARY_SRC};branch=${SRCBRANCH}"
 ARM_COMPUTELIBRARY_SRC ?= "git://github.com/nxp-imx/arm-computelibrary-imx.git;protocol=https"
 SRCBRANCH = "lf-6.1.36_2.1.0"
-SRCREV = "37fc035060646db5048648da01db3738f08e3bfa"
+SRCREV = "b956e65221fca7dadfd8bdfd13279beacce17bc9"
 
 S = "${WORKDIR}/git"
 
