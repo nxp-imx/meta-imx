@@ -10,7 +10,7 @@ SRCBRANCH = "lf-6.1.36_2.1.0"
 CRYPTO_AF_ALG_SRC ?= "git://github.com/nxp-imx/crypto_af_alg.git;protocol=https"
 SRC_URI = "${CRYPTO_AF_ALG_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "5374e10edbaad7f8cde0f1c9a9d5825a783b19e6"
+SRCREV = "0be7a9fe7f0e8333f5469b19da94c2fca2998ffc"
 
 S = "${WORKDIR}/git"
 
