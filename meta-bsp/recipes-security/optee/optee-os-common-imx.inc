@@ -44,7 +44,7 @@ EXTRA_OEMAKE:append = " \
     CFG_TEE_CORE_LOG_LEVEL=0 \
 "
 
-EXTRA_OEMAKE:append:imx8mq-wevk = " \
+EXTRA_OEMAKE:append:imx8mq-lpddr4-wevk = " \
     CFG_CORE_LARGE_PHYS_ADDR=y \
     CFG_CORE_ARM64_PA_BITS=36 \
     CFG_DDR_SIZE=0x100000000 \
