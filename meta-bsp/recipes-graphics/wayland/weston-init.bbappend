@@ -24,9 +24,6 @@ do_install:append() {
         install -D -p -m0644 ${WORKDIR}/weston-socket.sh ${D}${sysconfdir}/profile.d/weston-socket.sh
     fi
 
-    # Remove weston.sh installed by meta-freescale, it is superceded by weston-socket.sh
-    rm ${D}${sysconfdir}/profile.d/weston.sh
-
     # Include commented gbm-format
     if ! [ "${@bb.utils.contains('PACKAGECONFIG', 'gbm-format', 'yes', 'no', d)}" = "yes" ]; then
         sed -i -e "/^\[core\]/a #gbm-format=${GBM_FORMAT_VALUE}" ${D}${sysconfdir}/xdg/weston/weston.ini
