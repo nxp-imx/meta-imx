@@ -13,6 +13,9 @@ SRC_URI = "git://github.com/SaschaWillems/Vulkan.git;protocol=https;branch=maste
 SRCREV = "054a765eaaa552d5d12d869373dea211eda6fb16"
 SRCREV_glm = "1ad55c5016339b83b7eec98c31007e0aee57d2bf"
 SRCREV_ktx = "726d14d02c95bb21ec9e43807751b491d295dd3c"
+
+SRCREV_FORMAT = "default_glm_ktx"
+
 S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_COMMITS = "1"
