@@ -14,6 +14,9 @@ DEPENDS:append:mx8ulp-nxp-bsp = " imx-lib"
 DEPENDS:append:mx9-nxp-bsp = " imx-lib"
 DEPENDS:append:imxvpu = " imx-vpuwrap"
 DEPENDS:append:imxfbdev:imxgpu = " libdrm"
+DEPENDS:append:mx8-nxp-bsp = " imx-opencl-converter"
+DEPENDS:remove:mx8mm-nxp-bsp = " imx-opencl-converter"
+DEPENDS:remove:mx8dxl-nxp-bsp = " imx-opencl-converter"
 
 # For backwards compatibility
 RREPLACES:${PN} = "gst1.0-fsl-plugin"
