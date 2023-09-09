@@ -15,14 +15,14 @@ SRC_URI:append:imxgpu = " \
 PACKAGECONFIG_GRAPHICS_IMX_GPU     = ""
 PACKAGECONFIG_GRAPHICS_IMX_GPU:mx8-nxp-bsp = "gbm kms"
 
-PACKAGECONFIG_GRAPHICS:imxpxp   = "gles2"
+PACKAGECONFIG_GRAPHICS:imxpxp   = ""
 PACKAGECONFIG_GRAPHICS:imxgpu2d = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' gl', '', d)} \
                              ${PACKAGECONFIG_GRAPHICS_IMX_GPU}"
 PACKAGECONFIG_GRAPHICS:imxgpu3d = "gles2 \
                              ${PACKAGECONFIG_GRAPHICS_IMX_GPU}"
 PACKAGECONFIG_GRAPHICS:use-mainline-bsp ?= "gles2 gbm kms"
 
-PACKAGECONFIG_PLATFORM          = ""
+PACKAGECONFIG_PLATFORM          = "no-opengl linuxfb"
 PACKAGECONFIG_PLATFORM:imxgpu2d = "no-opengl linuxfb"
 PACKAGECONFIG_PLATFORM:imxgpu3d = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11',     '', \
@@ -40,13 +40,16 @@ PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'vulkan', '${PACKAGECO
 
 ##### End of meta-freescale qtbase bbappend
 
+IMX_BACKEND_FB = "linuxfb"
+IMX_BACKEND_FB:imxgpu3d = "eglfs"
 IMX_BACKEND = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland',\
         bb.utils.contains('DISTRO_FEATURES',     'x11',     'x11', \
-                                                             'fb', d), d)}"
+                                                             '${IMX_BACKEND_FB}', d), d)}"
 
 SRC_URI:append = " \
     file://qt6-${IMX_BACKEND}.sh \
+    file://qtbase-fix-no-opengl-build.patch \
 "
 
 PACKAGECONFIG += "examples"
@@ -67,4 +70,4 @@ do_install:append () {
     install -m 0755 ${WORKDIR}/qt6-${IMX_BACKEND}.sh ${D}${sysconfdir}/profile.d/qt6.sh
 }
 
-FILES:${PN} += "${sysconfdir}/profile.d/qt5.sh"
+FILES:${PN} += "${sysconfdir}/profile.d/qt6.sh"
