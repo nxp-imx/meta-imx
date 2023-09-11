@@ -23,7 +23,7 @@ index 2cdf8c268..efedf390a 100644
  
    static struct wl_shm *shm = NULL;
    static struct wl_buffer *buffer = NULL;
-@@ -247,6 +248,32 @@ static const struct wl_seat_listener seat_listener = {
+@@ -247,6 +248,35 @@ static const struct wl_seat_listener seat_listener = {
    seat_handle_capabilities,
  };
  
@@ -34,8 +34,11 @@ index 2cdf8c268..efedf390a 100644
 +
 +static void output_handle_mode(void* data, struct wl_output* wl_output, uint32_t flags, int32_t width, int32_t height, int32_t refresh)
 +{
-+  fullscreen_width = width;
-+  fullscreen_height = height;
++  if (flags & WL_OUTPUT_MODE_CURRENT)
++  {
++    fullscreen_width = width;
++    fullscreen_height = height;
++  }
 +}
 +
 +static void output_handle_done(void* data, struct wl_output* wl_output)
@@ -56,7 +59,7 @@ index 2cdf8c268..efedf390a 100644
  static void
  xdg_wm_base_ping(void *data, struct xdg_wm_base *shell, uint32_t serial)
  {
-@@ -283,6 +310,12 @@ static void registry_handler(void *data, struct wl_registry *registry,
+@@ -283,6 +313,12 @@ static void registry_handler(void *data, struct wl_registry *registry,
      seat = (wl_seat *) wl_registry_bind(registry, id, &wl_seat_interface, 1);
      wl_seat_add_listener(seat, &seat_listener, NULL);
    }
@@ -69,7 +72,7 @@ index 2cdf8c268..efedf390a 100644
  }
  
  static void registry_remover(void *data, struct wl_registry *registry,
-@@ -762,6 +795,12 @@ void DisplayRendererPreview(IReplayController *renderer, TextureDisplay &display
+@@ -762,6 +798,12 @@ void DisplayRendererPreview(IReplayController *renderer, TextureDisplay &display
    while (wait_for_configure)
      usleep(1000);
  
