@@ -37,7 +37,7 @@ VIRTUAL-RUNTIME_init_manager = "systemd"
 PREFERRED_PROVIDER_udev = "systemd"
 PREFERRED_PROVIDER_udev-utils = "systemd"
 DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
-POKY_DEFAULT_DISTRO_FEATURES += " systemd"
+POKY_DEFAULT_DISTRO_FEATURES += " systemd usrmerge"
 
 # Use virtual-runc as a default container runtime
 # runtime: runc, crun, runv, runx
