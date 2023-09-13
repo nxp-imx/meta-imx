@@ -70,16 +70,7 @@ SOC_FAMILY:mx8ulp-generic-bsp = "mx8ulp"
 SOC_FAMILY:mx91p-generic-bsp  = "mx93"
 SOC_FAMILY:mx93-generic-bsp   = "mx93"
 
-REV_OPTION ?= ""
-REV_OPTION:mx8qxp-generic-bsp = \
-    "${@bb.utils.contains('MACHINE_FEATURES', 'soc-revb0', '', \
-                                                           'REV=C0', d)}"
-REV_OPTION:mx8dx-generic-bsp  = "REV=C0"
-REV_OPTION:mx8ulp-generic-bsp = \
-    "${@bb.utils.contains('MACHINE_FEATURES', 'soc-reva0', '', \
-                                                           'REV=A2', d)}"
-REV_OPTION:mx91p-generic-bsp = "REV=A1"
-REV_OPTION:mx93-generic-bsp  = "REV=A1"
+REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
 
 compile_mx8m() {
     bbnote 8MQ/8MM/8MN/8MP boot binary build

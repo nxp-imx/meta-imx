@@ -1,23 +1,22 @@
 # This file is included from meta-freescale/conf/machine/include/imx-base.inc
 # and provides a simple mechanism to override settings in the file
 
-IMX_SOC_REV       ??= ""
-IMX_SOC_REV_LOWER   = "${@d.getVar('IMX_SOC_REV').lower()}"
-IMX_SOC_REV_UPPER   = "${@d.getVar('IMX_SOC_REV').upper()}"
+# Update i.MX 8ULP
+IMX_EXTRA_FIRMWARE:mx8ulp-generic-bsp = "imx-boot-firmware-files firmware-ele-imx"
 
-# i.MX 8M Plus UltraLite
+# Update i.MX 93
+IMX_SOC_REV:mx93-generic-bsp  ?= "A1"
+IMX_EXTRA_FIRMWARE:mx93-generic-bsp = "imx-boot-firmware-files firmware-ele-imx"
+
+# Add new machine i.MX 8M Plus UltraLite
 MACHINEOVERRIDES_EXTENDER:mx8mpul:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8m-generic-bsp:mx8m-nxp-bsp:mx8mpul-generic-bsp:mx8mpul-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER:mx8mpul:use-mainline-bsp = "imx-generic-bsp:imx-mainline-bsp:mx8-generic-bsp:mx8-mainline-bsp:mx8m-generic-bsp:mx8m-mainline-bsp:mx8mpul-generic-bsp:mx8mpul-mainline-bsp"
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx8mpul"
 MACHINE_SOCARCH_SUFFIX:mx8mpul-nxp-bsp = "-mx8mpul"
 
-# i.MX 8ULP
-IMX_EXTRA_FIRMWARE:mx8ulp-generic-bsp = "imx-boot-firmware-files firmware-ele-imx"
-
-# i.MX 93
-IMX_EXTRA_FIRMWARE:mx93-generic-bsp = "imx-boot-firmware-files firmware-ele-imx"
-
-# i.MX 91 Phantom
+# Add new machine i.MX 91 Phantom
+IMX_SOC_REV:mx91p-generic-bsp ?= "A1"
+SECO_FIRMWARE_NAME:mx91p-generic-bsp ?= "mx93${IMX_SOC_REV_LOWER}-ahab-container.img"
 MACHINEOVERRIDES_EXTENDER:mx91p:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:mx9-generic-bsp:mx9-nxp-bsp:mx91p-generic-bsp:mx91p-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER:mx91p:use-mainline-bsp  = "imx-generic-bsp:imx-mainline-bsp:mx9-generic-bsp:mx9-mainline-bsp:mx91p-generic-bsp:mx91p-mainline-bsp"
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx91p"

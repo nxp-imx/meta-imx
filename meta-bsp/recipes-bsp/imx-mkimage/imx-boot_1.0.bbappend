@@ -16,8 +16,6 @@ M4_DEFAULT_IMAGE:mx8dx-nxp-bsp = "imx8qx_m4_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE:mx8ulp-nxp-bsp = "imx8ulp_m33_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE:mx9-nxp-bsp = ""
 
-REV_OPTION:mx8dxl-nxp-bsp = "REV=${IMX_SOC_REV_UPPER}"
-
 IS_DXL                = "false"
 IS_DXL:mx8dxl-nxp-bsp = "true"
 
