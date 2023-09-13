@@ -1,6 +1,6 @@
 # Copyright 2021-2023 NXP
-SUMMARY = "NXP i.MX Sentinel firmware"
-DESCRIPTION = "Firmware for i.MX Sentinel Security Controller"
+SUMMARY = "NXP i.MX ELE firmware"
+DESCRIPTION = "EdgeLock Enclave firmware for i.MX series SoCs"
 SECTION = "base"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=db4762b09b6bda63da103963e6e081de"
