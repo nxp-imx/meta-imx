@@ -2,7 +2,7 @@
 # and provides a simple mechanism to override settings in the file
 
 # Update i.MX 8ULP
-IMX_EXTRA_FIRMWARE:mx8ulp-generic-bsp = "imx-boot-firmware-files firmware-ele-imx"
+IMX_EXTRA_FIRMWARE:mx8ulp-generic-bsp = "firmware-upower firmware-ele-imx"
 
 # Update i.MX 93
 IMX_SOC_REV:mx93-generic-bsp  ?= "A1"
