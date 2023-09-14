@@ -4,8 +4,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4158a261ca7f2525513e31ba9c50ae98"
 
 
-DEPENDS = "python3-numpy-native python3-pip-native python3-pybind11-native python3-wheel-native unzip-native \
-    python3 tensorflow-protobuf jpeg zlib ${BPN}-host-tools-native"
+DEPENDS = " \
+    python3-numpy-native python3-pip-native python3-pybind11-native \
+    python3-wheel-native unzip-native python3 python3-numpy python3-pybind11 \
+    tensorflow-protobuf jpeg zlib ${BPN}-host-tools-native\
+"
 
 require tensorflow-lite-${PV}.inc
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf"
@@ -41,6 +44,12 @@ EXTRA_OECMAKE = " \
 EXTRA_OECMAKE_BUILD = "benchmark_model label_image"
 
 CXXFLAGS += "-fPIC"
+
+PYBIND11_INCLUDE = "${PYTHON_INCLUDE_DIR}/pybind11"
+NUMPY_INCLUDE = "${PKG_CONFIG_SYSROOT_DIR}/${PYTHON_SITEPACKAGES_DIR}/numpy/core/include"
+
+OECMAKE_C_FLAGS += "-I${PYTHON_INCLUDE_DIR} -I${PYBIND11_IN} -I${NUMPY_INCLUDE}"
+OECMAKE_CXX_FLAGS += "-I${PYTHON_INCLUDE_DIR} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"
 
 do_configure[network] = "1"
 do_configure:prepend() {
