@@ -102,7 +102,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-sentinel-0.11.bin
+Package:                     firmware-ele-imx-0.11.bin
 Version:                     0.11
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -110,8 +110,6 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    S400 firmware
 Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
 --------------------------------------------
 
 Package:                     firmware-upower-1.3.1.bin
@@ -299,8 +297,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-3.3.0
-Version:                     3.3.0
+Package:                     zephyr-demo-imx-3.4.0
+Version:                     3.4.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -563,8 +561,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.0-aarch32.bin
-Version:                     6.4.11.p2.0
+Package:                     imx-gpu-viv-6.4.11.p2.2-aarch32.bin
+Version:                     6.4.11.p2.2
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -582,8 +580,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.0-aarch64.bin
-Version:                     6.4.11.p2.0
+Package:                     imx-gpu-viv-6.4.11.p2.2-aarch64.bin
+Version:                     6.4.11.p2.2
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -667,7 +665,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     weston-imx.git
-Version:                     11.0.2.imx
+Version:                     11.0.3.imx
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
@@ -680,7 +678,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     weston-10-imx.git
-Version:                     10.0.4.imx
+Version:                     10.0.5.imx
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
@@ -693,7 +691,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gputop.git
-Version:                     6.4.11.p2.0
+Version:                     6.4.11.p2.2
 Outgoing License:            MIT 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -704,8 +702,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.0-arm.bin
-Version:                     6.4.11.p2.0
+Package:                     imx-gpu-g2d-6.4.11.p2.2-arm.bin
+Version:                     6.4.11.p2.2
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -716,8 +714,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.0-aarch64.bin
-Version:                     6.4.11.p2.0
+Package:                     imx-gpu-g2d-6.4.11.p2.2-aarch64.bin
+Version:                     6.4.11.p2.2
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -764,8 +762,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.0-aarch64-wayland.bin
-Version:                     6.4.11.p2.0
+Package:                     libgpuperfcnt-6.4.11.p2.2-aarch64-wayland.bin
+Version:                     6.4.11.p2.2
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -776,8 +774,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.0-arm-fb.bin
-Version:                     6.4.11.p2.0
+Package:                     libgpuperfcnt-6.4.11.p2.2-arm-fb.bin
+Version:                     6.4.11.p2.2
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -788,8 +786,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.0-arm-wayland.bin
-Version:                     6.4.11.p2.0
+Package:                     libgpuperfcnt-6.4.11.p2.2-arm-wayland.bin
+Version:                     6.4.11.p2.2
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
