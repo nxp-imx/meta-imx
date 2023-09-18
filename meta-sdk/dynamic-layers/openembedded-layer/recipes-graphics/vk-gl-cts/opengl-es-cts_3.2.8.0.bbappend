@@ -6,15 +6,9 @@ SRC_URI += " \
     file://0001-Handle-latest-Wayland-version.patch \
     file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch"
 
-PACKAGECONFIG ?= " \
-    egl \
-    gles2 \
-    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl wayland x11', d)}"
+PACKAGECONFIG ?= "egl ${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11', d)}"
 
-PACKAGECONFIG[egl]     = ",,virtual/egl"
-PACKAGECONFIG[gles1]   = ",,virtual/libgles1"
-PACKAGECONFIG[gles2]   = ",,virtual/libgles2"
-PACKAGECONFIG[opengl]  = ",,virtual/libgl"
-PACKAGECONFIG[x11]     = ",,libxcb libx11 libxrandr"
+PACKAGECONFIG[egl] = ",,virtual/egl"
+PACKAGECONFIG[x11] = ",,libxcb libx11 libxrandr"
 
 CTSDIR = "/opt/${BPN}"
