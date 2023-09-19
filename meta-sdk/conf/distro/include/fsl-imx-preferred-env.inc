@@ -27,6 +27,7 @@ PREFERRED_VERSION_gstreamer1.0-libav:mx9-nxp-bsp        = "1.22.%"
 PREFERRED_VERSION_gstreamer1.0-rtsp-server:mx9-nxp-bsp  = "1.22.%"
 
 BBMASK += "meta-freescale/recipes-multimedia/gstreamer"
+BBMASK += "meta-arm/meta-arm/recipes-kernel/linux/linux-yocto_5.15%.bbappend"
 
 PREFERRED_VERSION_opengl-es-cts:mx6-nxp-bsp = "3.2.4.0"
 PREFERRED_VERSION_opengl-es-cts:mx7-nxp-bsp = "3.2.4.0"
