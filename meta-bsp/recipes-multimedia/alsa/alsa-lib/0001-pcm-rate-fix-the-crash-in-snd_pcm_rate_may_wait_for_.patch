@@ -3,7 +3,7 @@ From: Jaroslav Kysela <perex@perex.cz>
 Date: Wed, 9 Nov 2022 08:11:42 +0100
 Subject: [PATCH] pcm: rate - fix the crash in
 
-Upstream Status: Backport
+Upstream-Status: Backport
 
  snd_pcm_rate_may_wait_for_avail_min()
 

@@ -3,7 +3,7 @@ From: Chancel Liu <chancel.liu@nxp.com>
 Date: Fri, 29 Jul 2022 16:12:37 +0800
 Subject: [PATCH] add conf for imx-cs42448 sound card
 
-Upstream Status: Inappropriate [i.MX specific]
+Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Chancel Liu <chancel.liu@nxp.com>
 ---
