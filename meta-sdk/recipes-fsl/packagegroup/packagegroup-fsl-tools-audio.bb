@@ -37,9 +37,7 @@ PDM_INSTALL:mx8m-nxp-bsp = "imx-sw-pdm"
 
 NXPAFE_INSTALL ?= ""
 NXPAFE_INSTALL:mx8mm-nxp-bsp = "nxp-afe nxp-afe-voiceseeker"
-NXPAFE_INSTALL:mx8mn-nxp-bsp = "nxp-afe nxp-afe-voiceseeker"
 NXPAFE_INSTALL:mx8mp-nxp-bsp = "nxp-afe nxp-afe-voiceseeker"
-NXPAFE_INSTALL:mx8mnul-nxp-bsp = "nxp-afe nxp-afe-voiceseeker"
 NXPAFE_INSTALL:mx93-nxp-bsp = "nxp-afe nxp-afe-voiceseeker"
 
 SOFTOOLS_INSTALL       ?= ""
