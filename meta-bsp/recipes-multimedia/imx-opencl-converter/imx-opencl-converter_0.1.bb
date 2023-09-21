@@ -6,8 +6,8 @@ SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://COPYING;md5=db4762b09b6bda63da103963e6e081de" 
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "ce1c8140a01ad693f74ec558805dc2e9"
-SRC_URI[sha256sum] = "a58a922987b0478ff4697e7ad809771737b216232be16596088577e5ee7ebc23"
+SRC_URI[md5sum] = "c9b372a5f899b7e259c03192ec90c529"
+SRC_URI[sha256sum] = "353f03642d145e16782b117dfcbbf81a832360ec9df179cc06b9033a611898d2"
 
 DEPENDS = "opencl-headers"
 
