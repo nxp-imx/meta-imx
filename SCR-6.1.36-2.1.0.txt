@@ -17,7 +17,7 @@ BSP Packages
 --------------------------------------------
 
 Package:                     linux-imx.git
-Version:                     6.1
+Version:                     6.6
 Outgoing License:            GPL-2.0 WITH Linux-syscall-note 
 License File:                COPYING
 Package Category:            BSP
@@ -955,6 +955,16 @@ Description and comments:    NXP PDM to PCM Software Decimation SIMD Library
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
 
+--------------------------------------------
+
+Package:                     imx-opencl-converter-0.1.bin
+Version:                     0.1
+Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+License File:                COPYING
+Package Category:            Multimedia
+Type of Content:             binary
+Description and comments:    i.MX multimedia opencl converter library
+Release Location:            Mirror
 --------------------------------------------
 
 Package:                     imx-vpuwrap.git
