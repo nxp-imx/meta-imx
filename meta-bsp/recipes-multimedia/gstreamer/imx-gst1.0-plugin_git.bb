@@ -2,28 +2,35 @@
 # Copyright 2017-2021 NXP
 # Copyright (C) 2012-2015 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
-
 DESCRIPTION = "Gstreamer freescale plugins"
-LICENSE = "GPL-2.0-only & LGPL-2.0-only & LGPL-2.1-only"
 SECTION = "multimedia"
+LICENSE = "GPL-2.0-only & LGPL-2.0-only & LGPL-2.1-only"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
 
-DEPENDS = "imx-codec imx-parser gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad"
+DEPENDS = " \
+    gstreamer1.0 \
+    gstreamer1.0-plugins-base \
+    gstreamer1.0-plugins-bad \
+    imx-codec \
+    imx-parser \
+    ${DEPENDS_IMXGPU} \
+"
 DEPENDS:append:mx6-nxp-bsp = " imx-lib"
 DEPENDS:append:mx7-nxp-bsp = " imx-lib"
 DEPENDS:append:mx8ulp-nxp-bsp = " imx-lib"
 DEPENDS:append:mx9-nxp-bsp = " imx-lib"
 DEPENDS:append:imxvpu = " imx-vpuwrap"
 DEPENDS:append:imxfbdev:imxgpu = " libdrm"
-DEPENDS:append:mx8-nxp-bsp = " imx-opencl-converter"
-DEPENDS:remove:mx8mm-nxp-bsp = " imx-opencl-converter"
-DEPENDS:remove:mx8dxl-nxp-bsp = " imx-opencl-converter"
+DEPENDS_IMXGPU        = ""
+DEPENDS_IMXGPU:imxgpu = "${DEPENDS_IMX_OPENCL_CONVERTER}"
+DEPENDS_IMX_OPENCL_CONVERTER               = ""
+DEPENDS_IMX_OPENCL_CONVERTER:mx8-nxp-bsp   = "imx-opencl-converter"
+DEPENDS_IMX_OPENCL_CONVERTER:mx8mm-nxp-bsp = ""
 
 # For backwards compatibility
-RREPLACES:${PN} = "gst1.0-fsl-plugin"
-RPROVIDES:${PN} = "gst1.0-fsl-plugin"
+RREPLACES:${PN}  = "gst1.0-fsl-plugin"
+RPROVIDES:${PN}  = "gst1.0-fsl-plugin"
 RCONFLICTS:${PN} = "gst1.0-fsl-plugin"
-
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
 
 PV = "4.8.2+git${SRCPV}"
 
