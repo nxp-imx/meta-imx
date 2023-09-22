@@ -15,4 +15,10 @@ RDEPENDS:${PN} = " \
     lvm2 \
     util-linux \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'smw-tests', '', d)} \
+    ${RDEPENDS_EDGE_LOCK} \
+"
+
+RDEPENDS_EDGE_LOCK ?= " \
+    openssl-provider-se050 \
+    plug-and-trust-ecc \
 "
