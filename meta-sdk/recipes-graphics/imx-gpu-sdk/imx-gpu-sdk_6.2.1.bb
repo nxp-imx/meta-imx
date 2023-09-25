@@ -60,6 +60,8 @@ SRCREV = "f2b9a3480ef849efd0a6edf401cf6a225ce2a34c"
 
 S = "${WORKDIR}/git"
 
+inherit pkgconfig
+
 WINDOW_SYSTEM = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland_XDG', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',         'X11', \
