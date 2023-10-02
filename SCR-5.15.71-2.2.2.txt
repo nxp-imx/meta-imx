@@ -71,7 +71,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     firmware-imx-8.18.1.bin
 Version:                     8.18.1
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v46 June 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
