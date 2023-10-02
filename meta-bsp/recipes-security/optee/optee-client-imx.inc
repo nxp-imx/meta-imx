@@ -10,3 +10,5 @@ SRC_URI:prepend = "${OPTEE_CLIENT_SRC};branch=${SRCBRANCH} "
 OPTEE_CLIENT_SRC ?= "git://github.com/nxp-imx/imx-optee-client.git;protocol=https"
 
 inherit pkgconfig
+
+EXTRA_OECMAKE += "-DCFG_TEE_CLIENT_LOAD_PATH=${nonarch_base_libdir}"
