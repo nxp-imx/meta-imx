@@ -31,6 +31,8 @@ SRCREV_dmlc-core = "6c401e242c59a1f4c913918246591bb13fd714e7"
 SRCREV_rang = "cabe04d6d6b05356fa8f9741704924788f0dd762"
 SRCREV_vta-hw = "87ce9acfae550d1a487746e9d06c2e250076e54c"
 
+SRCREV_FORMAT = "default_dlpack_dmlc-core_rang_vta-hw"
+
 S = "${WORKDIR}/git"
 SETUPTOOLS_SETUP_PATH = "${S}/python"
 
