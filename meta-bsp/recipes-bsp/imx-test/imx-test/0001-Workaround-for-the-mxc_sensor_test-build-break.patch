@@ -1,0 +1,26 @@
+From 148216e4da6dd2245c42a2c6bd50964d5afc1607 Mon Sep 17 00:00:00 2001
+From: Han Xu <han.xu@nxp.com>
+Date: Wed, 4 Oct 2023 17:25:13 -0500
+Subject: [PATCH] Workaround for the mxc_sensor_test build break
+
+Redefine the _TIME_BITS to 32 to workaround the unit test build break.
+
+Upstream-Status: Inappropriate [other, just a workaround not formal fix]
+
+Signed-off-by: Han Xu <han.xu@nxp.com>
+---
+ test/mxc_sensor_test/Makefile | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/test/mxc_sensor_test/Makefile b/test/mxc_sensor_test/Makefile
+index 33cdb19..ef9f1ab 100644
+--- a/test/mxc_sensor_test/Makefile
++++ b/test/mxc_sensor_test/Makefile
+@@ -1,3 +1,4 @@
+ DIR = Sensors
+ BUILD = acctest.out evtest.out
+ COPY = README
++CFLAGS = -D_TIME_BITS=32
+-- 
+2.34.1
+
