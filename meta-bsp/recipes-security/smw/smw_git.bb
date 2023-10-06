@@ -54,7 +54,7 @@ OECMAKE_TARGET_INSTALL += "install_tests"
 
 PACKAGES =+ "${PN}-tests"
 
-FILES:${PN} += "${base_libdir}/optee_armtz/*"
+FILES:${PN} += "${nonarch_base_libdir}/optee_armtz/*"
 
 FILES:${PN}-tests = "${bindir}/* ${datadir}/${BPN}/*"
 
