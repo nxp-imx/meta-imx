@@ -1,0 +1,107 @@
+From 04b005c26257d6898848b5ac548c0a4cf5abd35b Mon Sep 17 00:00:00 2001
+From: Cedric Neveux <cedric.neveux@nxp.com>
+Date: Tue, 3 Oct 2023 16:29:47 +0200
+Subject: [PATCH] SSMW-492 scripts: Allow to install TEE TAs in dedicated
+ directory
+
+Add a build option TEE_TA_DESTDIR allowing to install TEE TA in
+a dedicated directory where the optee_armtz is created.
+
+If TEE_TA_DESTDIR is not defined the default path where is installed the
+TA is `[DESTDIR]/lib/optee_armtz`
+
+if TEE_TA_DESTDIR is defined the TA is installed in the
+the path `[DESTDIR]/[TEE_TA_DESTDIR]/optee_armtz`
+
+The variable `DESTDIR` is the cmake environment variable that could be
+specified during the install cmake command.
+E.g. `make install DESTDIR=tmp`
+
+Signed-off-by: Cedric Neveux <cedric.neveux@nxp.com>
+---
+ CHANGELOG.md                       |  8 ++++++++
+ CMakeLists.txt                     | 10 ++++++++++
+ pkcs11/tests/tee/ta/CMakeLists.txt |  2 +-
+ tests/psa/tee/ta/CMakeLists.txt    |  2 +-
+ tests/tee/ta/CMakeLists.txt        |  2 +-
+ 5 files changed, 21 insertions(+), 3 deletions(-)
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 07c2d0c2..32890942 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -53,6 +53,14 @@ The failure is due to the storage manager which is already loaded and a new inst
+ 
+ #### SMW Tests - _version 2.5_
+ 
++* Fix test F_TEE_Keymgr_005 instability.
++* Add TEE and HSM tests to validate smw_commit_key_storage(). No ELE test provided
++  because incrementing the rollback protection implies to reload the key storage
++  saved when counter was incremented and it's not feasable in the CI test suite.
++* Add tests to validate smw_device_get_lifecycle() and smw_device_set_lifecycle().
++* Add project option `TEE_TA_DESTDIR` to install TAs in a directory other than
++  the system `\lib` directory.
++
+ #### PKCS#11 Library - _version 2.5_
+ 
+ #### PKCS#11 Tests - _version 2.5_
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 75b62d95..70ff304d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -95,6 +95,16 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
+ # Installing SMW and/PKCS11 tests with make command
+ # "make install_tests [DESTDIR=dir]"
+ #
++# Allow OPTEE TA to be installed in a dedicated directory if the
++# TEE_TA_DESTDIR is defined as cmake option.
++if(NOT TEE_TA_DESTDIR)
++  set(TEE_TA_DESTDIR ${CMAKE_INSTALL_LIBDIR})
++endif()
++string(APPEND TEE_TA_DESTDIR "/optee_armtz")
++string(PREPEND TEE_TA_DESTDIR "/")
++string(REGEX REPLACE "[/]+" "/" TEE_TA_DESTDIR ${TEE_TA_DESTDIR})
++file(TO_NATIVE_PATH ${TEE_TA_DESTDIR} TEE_TA_DESTDIR)
++
+ add_custom_target(build_tests)
+ add_custom_target(install_tests)
+ 
+diff --git a/pkcs11/tests/tee/ta/CMakeLists.txt b/pkcs11/tests/tee/ta/CMakeLists.txt
+index 3b805a1d..f4465319 100644
+--- a/pkcs11/tests/tee/ta/CMakeLists.txt
++++ b/pkcs11/tests/tee/ta/CMakeLists.txt
+@@ -28,6 +28,6 @@ set_property(DIRECTORY APPEND PROPERTY
+ 
+ # Install TA with parent project install target
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${TA_FILE}
+-	DESTINATION ${DESTDIR}/${CMAKE_INSTALL_LIBDIR}/optee_armtz
++	DESTINATION ${DESTDIR}${TEE_TA_DESTDIR}
+ 	EXCLUDE_FROM_ALL
+ 	COMPONENT ${PROJECT_NAME})
+diff --git a/tests/psa/tee/ta/CMakeLists.txt b/tests/psa/tee/ta/CMakeLists.txt
+index b8454818..a1b3b0c4 100644
+--- a/tests/psa/tee/ta/CMakeLists.txt
++++ b/tests/psa/tee/ta/CMakeLists.txt
+@@ -28,6 +28,6 @@ set_property(DIRECTORY APPEND PROPERTY
+ 
+ # Install TA with parent project install target
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${TA_FILE}
+-	DESTINATION ${DESTDIR}/${CMAKE_INSTALL_LIBDIR}/optee_armtz
++	DESTINATION ${DESTDIR}${TEE_TA_DESTDIR}
+ 	EXCLUDE_FROM_ALL
+ 	COMPONENT ${PROJECT_NAME})
+diff --git a/tests/tee/ta/CMakeLists.txt b/tests/tee/ta/CMakeLists.txt
+index 7aa22e3e..8b5c791c 100644
+--- a/tests/tee/ta/CMakeLists.txt
++++ b/tests/tee/ta/CMakeLists.txt
+@@ -28,6 +28,6 @@ set_property(DIRECTORY APPEND PROPERTY
+ 
+ # Install TA with parent project install target
+ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${TA_FILE}
+-	DESTINATION ${DESTDIR}/${CMAKE_INSTALL_LIBDIR}/optee_armtz
++	DESTINATION ${DESTDIR}${TEE_TA_DESTDIR}
+ 	EXCLUDE_FROM_ALL
+ 	COMPONENT ${PROJECT_NAME})
+-- 
+2.39.2
+

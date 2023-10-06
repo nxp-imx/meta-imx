@@ -17,6 +17,7 @@ DEPENDS:append:mx93-nxp-bsp  = " imx-secure-enclave"
 
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw;destsuffix=git/smw \
            ${PSA_LIB_SRC};branch=${SRCBRANCH_psa};name=psa;destsuffix=git/${PSA_ARCH_TESTS_SRC_PATH} \
+           file://0001-SSMW-492-scripts-Allow-to-install-TEE-TAs-in-dedicat.patch \
            "
 SMW_LIB_SRC ?= "git://github.com/nxp-imx/imx-smw.git;protocol=https"
 PSA_LIB_SRC ?= "git://github.com/ARM-software/psa-arch-tests.git;protocol=https"
@@ -43,6 +44,7 @@ EXTRA_OECMAKE = " \
     -DTEEC_ROOT=${STAGING_DIR_HOST} \
     -DJSONC_ROOT="${COMPONENTS_DIR}/${TARGET_ARCH}/json-c/usr" \
     -DPSA_ARCH_TESTS_SRC_PATH=../${PSA_ARCH_TESTS_SRC_PATH} \
+    -DTEE_TA_DESTDIR=${nonarch_base_libdir} \
     ${EXTRA_OECMAKE_IMX}"
 EXTRA_OECMAKE_IMX:mx8qxp-nxp-bsp = "-DSECO_ROOT=${STAGING_DIR_HOST}"
 EXTRA_OECMAKE_IMX:mx8dx-nxp-bsp  = "-DSECO_ROOT=${STAGING_DIR_HOST}"
