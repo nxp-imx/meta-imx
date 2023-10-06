@@ -1,0 +1,45 @@
+From c191664c18b106c8fd8b72e4b4a9b60400ed8880 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Fri, 6 Oct 2023 14:25:52 -0500
+Subject: [PATCH] Fix install with usrmerge
+
+The logic allowing the toolchain to set the library install location
+for multilib does not work when usrmerge is enabled, resulting in the
+following incorrect install:
+```
+  /usr/usr/lib/libele_hsm.so.1
+  /usr/usr/lib/libele_hsm.so
+  /usr/usr/lib/libele_nvm.so
+  /usr/usr/lib/libele_hsm.so.1.0
+  /usr/usr/lib/libele_nvm.so.1.0
+  /usr/usr/lib/libele_nvm.so.1
+```
+
+The problem is the use of the toolchain variable `base_libdir`, which
+does take the value /usr/lib when usrmerge is enabled.
+
+Fix the problem by using the toolchain variable `libdir` instead.
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 51e724d..bf34831 100644
+--- a/Makefile
++++ b/Makefile
+@@ -7,8 +7,8 @@ CFLAGS := -O1 -Werror -Wformat -fPIC
+ LDFLAGS =
+ DESTDIR ?= export
+ BINDIR ?= /usr/bin
+-base_libdir ?= lib
+-LIBDIR ?= /usr/$(base_libdir)
++libdir ?= /usr/lib
++LIBDIR = $(libdir)
+ INCLUDEDIR ?= /usr/include
+ SYSTEMD_DIR ?= /etc/systemd/system
+ ETC_DIR ?= /etc
+-- 
+2.25.1
+
