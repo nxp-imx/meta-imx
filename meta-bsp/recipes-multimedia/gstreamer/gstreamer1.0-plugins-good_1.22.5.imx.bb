@@ -110,7 +110,7 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plu
 SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "imx-1.22.x"
-SRCREV = "5618f297533af226c0e1de65de6d607bb8d2fee2"
+SRCREV = "45ffb91739f5439fee5704ad5e04426d480e3706"
 
 S = "${WORKDIR}/git"
 
