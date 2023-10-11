@@ -10,7 +10,7 @@ SRC_URI = " \
     file://0002-MGS-7104-ccc-gfxreconstruct-Add-support-for-xdg-shel.patch \
     file://0003-MGS-7104-ccc-gfxreconstruct-Generate-xdg-shell-proto.patch \
 "
-SRCREV = "4968caff88d628b6614bdc574737d8fa7d570842"
+SRCREV = "55c1cddf95370f754b8b5e5145384fd55be32d0f"
 S = "${WORKDIR}/git"
 
 inherit cmake features_check

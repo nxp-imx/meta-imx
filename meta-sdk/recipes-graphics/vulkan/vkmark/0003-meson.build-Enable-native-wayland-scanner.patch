@@ -1,4 +1,4 @@
-From 9dda2470b02a75328011803fdb0d0e43311540dd Mon Sep 17 00:00:00 2001
+From ec56eaab16cb99dad7d9b3fa45ddbcd3a3bc469c Mon Sep 17 00:00:00 2001
 From: Neena Busireddy <neenareddy.busireddy@nxp.com>
 Date: Tue, 11 Oct 2022 12:42:10 -0700
 Subject: [PATCH] meson.build: Enable native wayland scanner
@@ -15,12 +15,13 @@ Program /usr/bin/wayland-scanner found: NO
 |
 
 Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+
 ---
  meson.build | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meson.build b/meson.build
-index 996d7a5..137805e 100644
+index 0d83918..9c33652 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -29,7 +29,7 @@ xcb_icccm_dep = dependency('xcb-icccm', required : get_option('xcb') == 'true')
@@ -31,7 +32,4 @@ index 996d7a5..137805e 100644
 +wayland_scanner_dep = dependency('wayland-scanner', required : get_option('wayland') == 'true', native: true)
  libdrm_dep = dependency('libdrm', required : get_option('kms') == 'true')
  gbm_dep = dependency('gbm', required : get_option('kms') == 'true')
- has_vulkan_intel_header = cpp.has_header('vulkan/vulkan_intel.h', dependencies: vulkan_dep)
--- 
-2.25.1
-
+ 

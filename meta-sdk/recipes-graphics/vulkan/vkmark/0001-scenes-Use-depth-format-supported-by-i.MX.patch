@@ -1,4 +1,4 @@
-From 436b5b09a0f5fcd3b4f2c1711e850b52b357befb Mon Sep 17 00:00:00 2001
+From d88b1869c51581c56624eaf6cbedfdf6bdb19a41 Mon Sep 17 00:00:00 2001
 From: Tom Hochstein <tom.hochstein@nxp.com>
 Date: Wed, 13 Jun 2018 22:02:20 +0000
 Subject: [PATCH] scenes: Use depth format supported by i.MX
@@ -6,6 +6,7 @@ Subject: [PATCH] scenes: Use depth format supported by i.MX
 Upstream-Status: Inappropriate [i.MX-specific]
 
 Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+
 ---
  src/scenes/shading_scene.cpp | 2 +-
  src/scenes/texture_scene.cpp | 2 +-
@@ -51,6 +52,3 @@ index 0fd7fe7..4f6d49a 100644
      aspect = static_cast<float>(extent.height) / extent.width;
  
      mesh = Model{"horse.3ds"}.to_mesh(
--- 
-2.7.4
-

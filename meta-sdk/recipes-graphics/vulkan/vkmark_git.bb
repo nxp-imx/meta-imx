@@ -13,7 +13,7 @@ SRC_URI = " \
     file://0002-src-meson.build-Prepend-sysroot-for-the-includedir.patch \
     file://0003-meson.build-Enable-native-wayland-scanner.patch \
 "
-SRCREV = "30d2cd37f0566589d90914501fc7c51a4e51f559"
+SRCREV = "ab6e6f34077722d5ae33f6bd40b18ef9c0e99a15"
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
