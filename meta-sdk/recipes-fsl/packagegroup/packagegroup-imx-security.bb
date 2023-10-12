@@ -21,4 +21,8 @@ RDEPENDS:${PN} = " \
 RDEPENDS_EDGE_LOCK ?= " \
     openssl-provider-se050 \
     plug-and-trust-ecc \
+    ${RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE} \
 "
+RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE = ""
+RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8ulp-nxp-bsp = "itest"
+RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx93-nxp-bsp = "itest"
