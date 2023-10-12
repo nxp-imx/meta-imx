@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "\
 SRC_URI = "${ETHOS_U_FIRMWARE_SRC};branch=${SRCBRANCH}"
 ETHOS_U_FIRMWARE_SRC ?= "git://github.com/nxp-imx/ethos-u-firmware.git;protocol=https"
 SRCBRANCH = "imx_23.08"
-SRCREV = "9b9122fbdb25a273fafec352d827632d812ab0f8"
+SRCREV = "5fff874731d02bb232159108ccfa6833e92b6942"
 
 S = "${WORKDIR}/git"
 
