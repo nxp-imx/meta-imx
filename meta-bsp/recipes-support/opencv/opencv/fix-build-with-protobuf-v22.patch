@@ -87,6 +87,11 @@ Index: git/modules/dnn/CMakeLists.txt
  set(perf_path "${CMAKE_CURRENT_LIST_DIR}/perf")
  file(GLOB_RECURSE perf_srcs "${perf_path}/*.cpp")
  file(GLOB_RECURSE perf_hdrs "${perf_path}/*.hpp" "${perf_path}/*.h")
+@@ -280,3 +295,4 @@ if(TARGET ocv.3rdparty.cann AND OPENCV_T
+     ocv_target_link_libraries(opencv_test_dnn ocv.3rdparty.cann)
+   endif()
+ endif()
++
 Index: git/modules/dnn/test/test_layers.cpp
 ===================================================================
 --- git.orig/modules/dnn/test/test_layers.cpp
@@ -107,7 +112,7 @@ Index: git/modules/dnn/test/test_layers.cpp
  }
  
  TEST_P(Test_Caffe_layers, FlowWarp)
-@@ -778,28 +782,40 @@ TEST_P(Test_Caffe_layers, ChannelNorm)
+@@ -778,27 +782,39 @@ TEST_P(Test_Caffe_layers, ChannelNorm)
  
  TEST_P(Test_Caffe_layers, DataAugmentation)
  {
@@ -143,11 +148,10 @@ Index: git/modules/dnn/test/test_layers.cpp
          applyTestTag(CV_TEST_TAG_DNN_SKIP_IE_NGRAPH, CV_TEST_TAG_DNN_SKIP_IE_NN_BUILDER,
                       CV_TEST_TAG_DNN_SKIP_OPENCL, CV_TEST_TAG_DNN_SKIP_OPENCL_FP16);
      testLayerUsingCaffeModels("correlation", false, false, 0.0, 0.0, 2);
- }
 +#endif
+ }
  
  TEST_P(Test_Caffe_layers, Convolution2Inputs)
- {
 @@ -1639,12 +1655,11 @@ private:
      int outWidth, outHeight, zoomFactor;
  };
