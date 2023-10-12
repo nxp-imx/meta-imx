@@ -3,7 +3,7 @@ NXP Software Content Register
 Release - Linux 6.1.36-2.1.0
  Augest 2023
 
-Outgoing License: LA_OPT_NXP_Software_License v48 July 2023 - Additional distribution license granted - Section 2.3 applies
+Outgoing License: LA_OPT_NXP_Software_License v49 September 2023 - Additional distribution license granted - Section 2.3 applies
 License File:     LICENSE.txt
 
 Yocto Project recipe manifest:
@@ -17,7 +17,7 @@ BSP Packages
 --------------------------------------------
 
 Package:                     linux-imx.git
-Version:                     6.6
+Version:                     6.1
 Outgoing License:            GPL-2.0 WITH Linux-syscall-note 
 License File:                COPYING
 Package Category:            BSP
@@ -59,7 +59,7 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     imx-sc-firmware-1.15.0.bin
 Version:                     1.15.0
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -72,7 +72,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     firmware-imx-8.21.bin
 Version:                     8.21
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -104,7 +104,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     firmware-ele-imx-0.11.bin
 Version:                     0.11
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -114,7 +114,7 @@ Release Location:            Mirror
 
 Package:                     firmware-upower-1.3.1.bin
 Version:                     1.3.1
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -456,6 +456,26 @@ Origin:                      NXP(Apache-2.0)
 
 --------------------------------------------
 
+Package:                     openssl-provider-se050.git
+Version:                     1.0.0
+Outgoing License:            Apache-2.0 
+License File:                LICENSE.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    se05x openssl provider
+Release Location:            NXPPlugNTrust
+--------------------------------------------
+
+Package:                     plug-and-trust-ecc.git
+Version:                     4.4.0
+Outgoing License:            Apache-2.0 
+License File:                Apache_2_0.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    Plug & Trust ECC example for SE050
+Release Location:            https://github.com/NXP/plug-and-trust -b lf-6.1.36-2.1.0
+--------------------------------------------
+
 Package:                     ecdsa-lib-imx-3.3.2.3.bin
 Version:                     3.3.2.3
 Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 Additional distribution license granted - Section 2.3 applies
@@ -525,7 +545,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 
 Package:                     isp-imx-4.2.2.24.0.bin
 Version:                     4.2.2.24.0
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -537,7 +557,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software
 
 Package:                     basler-camera-4.2.2.24.0.bin
 Version:                     4.2.2.24.0
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -563,7 +583,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-gpu-viv-6.4.11.p2.2-aarch32.bin
 Version:                     6.4.11.p2.2
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -582,7 +602,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-gpu-viv-6.4.11.p2.2-aarch64.bin
 Version:                     6.4.11.p2.2
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -704,7 +724,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-gpu-g2d-6.4.11.p2.2-arm.bin
 Version:                     6.4.11.p2.2
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -716,7 +736,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-gpu-g2d-6.4.11.p2.2-aarch64.bin
 Version:                     6.4.11.p2.2
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -728,7 +748,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-dpu-g2d-2.1.10.bin
 Version:                     2.1.10
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -764,7 +784,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     libgpuperfcnt-6.4.11.p2.2-aarch64-wayland.bin
 Version:                     6.4.11.p2.2
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -776,7 +796,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     libgpuperfcnt-6.4.11.p2.2-arm-fb.bin
 Version:                     6.4.11.p2.2
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -788,7 +808,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     libgpuperfcnt-6.4.11.p2.2-arm-wayland.bin
 Version:                     6.4.11.p2.2
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -838,7 +858,7 @@ Multimedia Packages
 
 Package:                     imx-codec-4.8.2.bin
 Version:                     4.8.2
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -855,7 +875,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-parser-4.8.2.bin
 Version:                     4.8.2
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -959,7 +979,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-opencl-converter-0.1.bin
 Version:                     0.1
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -969,7 +989,7 @@ Release Location:            Mirror
 
 Package:                     imx-vpuwrap.git
 Version:                     git
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
@@ -1008,8 +1028,8 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.1.8
-Version:                     1.1.8
+Package:                     imx-vpu-hantro-daemon-1.1.9
+Version:                     1.1.9
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1024,7 +1044,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-vpu-hantro-vc-1.9.1.bin
 Version:                     1.9.1
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1052,7 +1072,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-dsp-2.1.6.bin
 Version:                     2.1.6
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1066,7 +1086,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-dsp-codec-ext-2.1.6.bin
 Version:                     2.1.6
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1079,7 +1099,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 --------------------------------------------
 
 Package:                     nxp-afe.git
-Version:                     1
+Version:                     1.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Multimedia
@@ -1091,7 +1111,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     imx-voiceUI.git
-Version:                     2
+Version:                     2.0
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1242,7 +1262,7 @@ M33 Processor Packages
 
 Package:                     imx8ulp-m33-demo-2.14.1.bin
 Version:                     2.14.1
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1258,7 +1278,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx93-m33-demo-2.14.1.bin
 Version:                     2.14.1
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1316,7 +1336,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     ethos-u-driver-stack-imx.git
-Version:                     22.08
+Version:                     23.08
 Outgoing License:            Apache-2.0 
 License File:                LICENSE-APACHE-2.0.txt
 Package Category:            MachineLearning
@@ -1331,7 +1351,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     ethos-u-firmware.git
-Version:                     22.08
+Version:                     23.08
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1345,7 +1365,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     ethos-u-vela.git
-Version:                     3.8.0
+Version:                     3.9.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
