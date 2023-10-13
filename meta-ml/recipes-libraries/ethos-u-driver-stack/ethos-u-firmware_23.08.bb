@@ -17,6 +17,7 @@ S = "${WORKDIR}/git"
 ETHOS_U_FIRMWARE = "ethosu_firmware"
 ETHOS_U_FIRMWARE:imx93-9x9-lpddr4-qsb    = "ethosu_firmware_9x9"
 ETHOS_U_FIRMWARE:imx93-11x11-lpddr4x-evk = "ethosu_firmware_11x11"
+ETHOS_U_FIRMWARE:imx93-14x14-lpddr4x-evk = "ethosu_firmware_14x14"
 
 do_install () {
     install -d ${D}${nonarch_base_libdir}/firmware
