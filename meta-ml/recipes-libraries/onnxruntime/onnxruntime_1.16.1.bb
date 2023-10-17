@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 
 DEPENDS = "libpng zlib"
 
+inherit setuptools3
+
 SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH = "imx_1.16.1"
@@ -13,7 +15,7 @@ SRCREV = "d8a0966a19cff5616df07e718a2eee354180d822"
 
 S = "${WORKDIR}/git"
 
-inherit cmake setuptools3 python3native
+inherit cmake python3native
 
 OECMAKE_SOURCEPATH = "${S}/cmake"
 OECMAKE_GENERATOR = "Unix Makefiles"
