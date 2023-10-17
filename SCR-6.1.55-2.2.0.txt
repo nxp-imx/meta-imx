@@ -353,7 +353,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-optee-client.git
-Version:                     3.21.0.imx
+Version:                     4.0.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -366,7 +366,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-os.git
-Version:                     3.21.0.imx
+Version:                     4.0.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -380,7 +380,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-test.git
-Version:                     3.21.0.imx
+Version:                     4.0.0.imx
 Outgoing License:            BSD-2-Clause (ta/) and GPL-2.0 (host/) 
 License File:                LICENSE.md
 Package Category:            BSP
@@ -1394,7 +1394,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
-Version:                     1.13.1
+Version:                     1.16.1
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1422,7 +1422,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.11.1
+Version:                     2.12.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1435,7 +1435,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-ethosu-delegate.git
-Version:                     2.11.1
+Version:                     2.12.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1449,7 +1449,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
-Version:                     2.11.1
+Version:                     2.12.1
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
