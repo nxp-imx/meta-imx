@@ -20,16 +20,16 @@ DEPENDS += "lzop-native bc-native"
 SRC_URI = "${KERNEL_SRC}"
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 KBRANCH = "${SRCBRANCH}"
-SRCBRANCH = "lf-6.1.y"
+SRCBRANCH = "next"
 LOCALVERSION = "-lts-next"
-SRCREV = "65017d1e16f68c58af9a74a683e33cf5dd6ac22f"
+SRCREV = "2b0a6444e24ed47ee0cc18847b6eb0704bfc0b11"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "6.1.y"
+LINUX_VERSION = "6.6.y"
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
 
@@ -95,3 +95,4 @@ do_kernel_configcheck[noexec] = "1"
 
 KERNEL_VERSION_SANITY_SKIP="1"
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
+COMPATIBLE_MACHINE:mx91p-nxp-bsp = "(^$)"
