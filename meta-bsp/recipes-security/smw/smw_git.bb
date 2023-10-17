@@ -17,14 +17,13 @@ DEPENDS:append:mx93-nxp-bsp  = " imx-secure-enclave"
 
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw;destsuffix=git/smw \
            ${PSA_LIB_SRC};branch=${SRCBRANCH_psa};name=psa;destsuffix=git/${PSA_ARCH_TESTS_SRC_PATH} \
-           file://0001-SSMW-492-scripts-Allow-to-install-TEE-TAs-in-dedicat.patch \
            "
 SMW_LIB_SRC ?= "git://github.com/nxp-imx/imx-smw.git;protocol=https"
 PSA_LIB_SRC ?= "git://github.com/ARM-software/psa-arch-tests.git;protocol=https"
 PSA_ARCH_TESTS_SRC_PATH = "psa-arch-tests"
 SRCBRANCH_smw = "master"
 SRCBRANCH_psa = "main"
-SRCREV_smw = "b74d99dd6755f98be607a8c14f070899d1c9d0f7"
+SRCREV_smw = "0105bc53ea0c103d289e359385a8b6534f112f0c"
 SRCREV_psa = "463cb95ada820bc6f758d50066cf8c0ed5cc3a02"
 SRCREV_FORMAT = "smw_psa"
 S = "${WORKDIR}/git/smw"
