@@ -10,10 +10,10 @@ DEPENDS:append:mx8ulp-nxp-bsp  = " imx-secure-enclave"
 DEPENDS:append:mx93-nxp-bsp  = " imx-secure-enclave"
 
 ITEST_BRANCH = "itest_ele"
-ITEST_SRC ?= "git://bitbucket.sw.nxp.com/sli/itest.git;protocol=ssh"
+ITEST_SRC ?= "git://github.com/nxp-imx/itest.git;protocol=https"
 SRC_URI = "${ITEST_SRC};branch=${ITEST_BRANCH}"
 
-SRCREV = "902c200b105c70c820346e1bec2127f4c7e21986"
+SRCREV = "d4d4f932e8de8893c1a06874b43f6c9626187c32"
 S = "${WORKDIR}/git"
 
 inherit cmake
