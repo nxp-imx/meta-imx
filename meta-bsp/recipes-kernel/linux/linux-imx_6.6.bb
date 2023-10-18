@@ -93,6 +93,28 @@ addtask merge_delta_config before do_kernel_localversion after do_copy_defconfig
 
 do_kernel_configcheck[noexec] = "1"
 
+IMX_KERNEL_DEVICETREE_UPDATE_ENABLED ?= "1"
+
+python __anonymous() {
+    import os.path
+    import re
+    if d.getVar('IMX_KERNEL_DEVICETREE_UPDATE_ENABLED') != "1":
+        return
+    new = ""
+    expanded = False
+    for devicetree in d.getVar('KERNEL_DEVICETREE').split():
+        if re.match("^imx[67]", devicetree):
+            expanded = True
+            new_devicetree = os.path.join("nxp/imx", devicetree)
+            new += new_devicetree + " "
+            bb.warn("Devicetrees are moved to sub-folder nxp/imx, please fix KERNEL_DEVICETREE: %s -> %s" % (devicetree, new_devicetree))
+        else:
+            new += devicetree + " "
+    if expanded:
+        bb.warn("Updating KERNEL_DEVICETREE for move to sub-folder nxp/imx. Set IMX_KERNEL_DEVICETREE_UPDATE_ENABLED = \"0\" to disable this.")
+        d.setVar('KERNEL_DEVICETREE', new)
+}
+
 KERNEL_VERSION_SANITY_SKIP="1"
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 COMPATIBLE_MACHINE:mx91p-nxp-bsp = "(^$)"
