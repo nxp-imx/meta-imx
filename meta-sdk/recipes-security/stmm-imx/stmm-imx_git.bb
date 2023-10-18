@@ -17,5 +17,5 @@ do_install:imx-nxp-bsp() {
     install ${B}/Build/${EDK2_PLATFORM}/${EDK2_BUILD_MODE}_${EDK_COMPILER}/FV/${EDK2_BIN_NAME} ${D}/firmware/
 }
 
-COMPATIBLE_MACHINE:imx-nxp-bsp = "(mx8-nxp-bsp)"
+COMPATIBLE_MACHINE:imx-nxp-bsp = "(mx8-nxp-bsp|mx9-nxp-bsp)"
 PACKAGE_ARCH:imx-nxp-bsp = "${TUNE_PKGARCH}"
