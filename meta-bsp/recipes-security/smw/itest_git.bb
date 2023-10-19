@@ -13,7 +13,7 @@ ITEST_BRANCH = "itest_ele"
 ITEST_SRC ?= "git://github.com/nxp-imx/itest.git;protocol=https"
 SRC_URI = "${ITEST_SRC};branch=${ITEST_BRANCH}"
 
-SRCREV = "d4d4f932e8de8893c1a06874b43f6c9626187c32"
+SRCREV = "fe9494809298c09a65e414ea9da19cc6cf7f2aef"
 S = "${WORKDIR}/git"
 
 inherit cmake
