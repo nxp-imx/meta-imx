@@ -18,6 +18,7 @@ DEPENDS += " \
 # xxd is a dependency of fspi_packer.sh
 DEPENDS += "xxd-native"
 DEPENDS:append:mx8m-generic-bsp = " u-boot-mkimage-native dtc-native"
+DEPENDS:append:mx93-generic-bsp = " u-boot-mkimage-native dtc-native"
 BOOT_NAME = "imx-boot"
 PROVIDES = "${BOOT_NAME}"
 
@@ -152,21 +153,25 @@ do_compile() {
     fi
     for target in ${IMXBOOT_TARGETS}; do
         compile_${SOC_FAMILY}
-        if [ "$target" = "flash_linux_m4_no_v2x" ]; then
+        case $target in
+        *no_v2x)
             # Special target build for i.MX 8DXL with V2X off
             bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} V2X=NO ${target}"
             make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} V2X=NO dtbs=${UBOOT_DTB_NAME} flash_linux_m4
-        elif [ "$target" = "flash_evk_stmm_capsule" ]; then
+        ;;
+        *stmm_capsule)
             cp ${RECIPE_SYSROOT_NATIVE}/${bindir}/mkeficapsule      ${BOOT_STAGING}
-
             bbnote "building ${IMX_BOOT_SOC_TARGET} - TEE=tee.bin-stmm ${target}"
             make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm delete_capsule_key
-            make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm capsule_key
-            make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm dtbs=${UBOOT_DTB_NAME} ${target}
-        else
+            make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm ${REV_OPTION} capsule_key
+            make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm dtbs=${UBOOT_DTB_NAME} ${REV_OPTION} ${target}
+        ;;
+        *)
             bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${target}"
             make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} ${target}
-        fi
+        ;;
+        esac
+
         if [ -e "${BOOT_STAGING}/flash.bin" ]; then
             cp ${BOOT_STAGING}/flash.bin ${S}/${BOOT_CONFIG_MACHINE}-${target}
         fi
