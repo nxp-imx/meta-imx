@@ -102,8 +102,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.11.bin
-Version:                     0.11
+Package:                     firmware-ele-imx-0.1.0.bin
+Version:                     0.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -144,7 +144,7 @@ License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    BSP libraries
-Release Location:            https://github.com/nxp-imx/imx-lib -b master
+Release Location:            https://github.com/nxp-imx/imx-lib -b lf-6.1.55_2.2.0
 Origin:                      NXP (LGPL-2.1)
 
 --------------------------------------------
@@ -297,8 +297,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-3.4.0
-Version:                     3.4.0
+Package:                     zephyr-demo-imx-3.5.0
+Version:                     3.5.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
