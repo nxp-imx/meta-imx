@@ -8,7 +8,7 @@ DEPENDS = "tensorflow-lite ethos-u-driver-stack"
 require tensorflow-lite-${PV}.inc
 
 TENSORFLOW_LITE_ETHOSU_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-ethosu-delegate-imx.git;protocol=https" 
-SRCBRANCH_ethosu = "master"
+SRCBRANCH_ethosu = "lf-6.1.55_2.2.0"
 SRCREV_ethosu = "f32e701751fad7a85dc92c724a9ce305bf9a50a9"
 
 SRCREV_FORMAT = "ethosu_tf"
