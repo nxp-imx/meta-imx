@@ -170,8 +170,10 @@ S = "${WORKDIR}/git"
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
 
-PACKAGECONFIG:append:imxgpu2d = " imxg2d"
-PACKAGECONFIG:append:mx93-nxp-bsp = " imxg2d"
+PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D}"
+PACKAGECONFIG_G2D              ??= ""
+PACKAGECONFIG_G2D:imxgpu2d     ??= "imxg2d"
+PACKAGECONFIG_G2D:mx93-nxp-bsp ??= "imxg2d"
 
 # Override
 PACKAGECONFIG[xwayland] = "-Dxwayland=true,-Dxwayland=false,libxcursor xwayland"
