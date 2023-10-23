@@ -180,8 +180,6 @@ DEFAULT_PREFERENCE = "-1"
 
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
 
-DEPENDS:append:imxgpu2d = " virtual/libg2d"
-
 SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \
            file://0001-fix-maybe-uninitialized-warnings-when-compiling-with.patch \
            file://0002-avoid-including-sys-poll.h-directly.patch \
@@ -205,6 +203,11 @@ PACKAGECONFIG_REMOVE ?= " \
 PACKAGECONFIG:remove = "${PACKAGECONFIG_REMOVE}"
 PACKAGECONFIG:append:mx8-nxp-bsp = " kms tinycompress"
 
+PACKAGECONFIG += "${PACKAGECONFIG_G2D}"
+PACKAGECONFIG_G2D          ??= ""
+PACKAGECONFIG_G2D:imxgpu2d ??= "g2d"
+
+PACKAGECONFIG[g2d] = ",,virtual/libg2d"
 PACKAGECONFIG[tinycompress]    = "-Dtinycompress=enabled,-Dtinycompress=disabled,tinycompress"
 
 EXTRA_OEMESON += " \
