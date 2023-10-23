@@ -11,7 +11,7 @@ SRC_URI = " \
 "
 S = "${WORKDIR}/git"
 
-DEPENDS += "virtual/libx11 virtual/libgl libxcb xcb-util-keysyms vim-native"
+DEPENDS += "virtual/libx11 libxcb xcb-util-keysyms vim-native"
 
 RDEPENDS:${PN} = "libxcb xcb-util-keysyms"
 
