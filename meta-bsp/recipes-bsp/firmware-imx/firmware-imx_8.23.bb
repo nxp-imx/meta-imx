@@ -1,5 +1,5 @@
 # Copyright (C) 2012-2016 Freescale Semiconductor
-# Copyright 2017-2021 NXP
+# Copyright 2017-2021,2023 NXP
 # Copyright (C) 2018 O.S. Systems Software LTDA.
 SUMMARY = "Freescale i.MX firmware"
 DESCRIPTION = "Freescale i.MX firmware such as for the VPU"
@@ -54,6 +54,9 @@ do_install() {
     # as some of other files are provided by packages from other recipes.
     install -d ${D}${nonarch_base_libdir}/firmware/vpu
     install -m 0644 ${S}/firmware/vpu/vpu_fw_imx*.bin ${D}${nonarch_base_libdir}/firmware/vpu
+    # Update i.MX8 vpu firmware path to align with kernel6.5+
+    install -d ${D}${nonarch_base_libdir}/firmware/amphion/vpu/
+    mv ${D}${nonarch_base_libdir}/firmware/vpu/vpu_fw_imx8* ${D}${nonarch_base_libdir}/firmware/amphion/vpu/
 }
 
 #
@@ -146,7 +149,7 @@ PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-* ${PN}-easrc-* ${PN}-xcvr-* ${PN}-xu
 # is empty.
 # Therefore, we opt-out from producing -dev package here, since also for firmware
 # files it makes no sense.
-PACKAGES = "${PN} ${PN}-epdc ${PN}-hdmi"
+PACKAGES = "${PN} ${PN}-epdc ${PN}-hdmi ${PN}-vpu-imx8"
 
 FILES:${PN}-epdc = "${nonarch_base_libdir}/firmware/imx/epdc/"
 FILES:${PN}-hdmi = " \
@@ -154,5 +157,6 @@ FILES:${PN}-hdmi = " \
     ${nonarch_base_libdir}/firmware/hdmirxfw.bin \
     ${nonarch_base_libdir}/firmware/dpfw.bin \
 "
+FILES:${PN}-vpu-imx8 = "${nonarch_base_libdir}/firmware/amphion/vpu/*"
 
 COMPATIBLE_MACHINE = "(imx-generic-bsp)"
