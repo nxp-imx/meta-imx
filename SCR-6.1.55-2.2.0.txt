@@ -70,8 +70,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.21.bin
-Version:                     8.21
+Package:                     firmware-imx-8.22.bin
+Version:                     8.22
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -246,8 +246,8 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-seco-5.9.0.bin
-Version:                     5.9.0
+Package:                     imx-seco-5.9.2.bin
+Version:                     5.9.2
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -527,6 +527,16 @@ Origin:                      NXP (BSD-3-Clause)
                              pmdinfogen - Neil Horman (GPL-2.0) - Separate tool in DPDK 
 
 
+--------------------------------------------
+
+Package:                     dpdk-extras.git
+Version:                     git
+Outgoing License:            GPL-2.0 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    Kernel module for dpdk
+Release Location:            https://github.com/nxp-qoriq/dpdk-extras -b lf-6.1.55-2.2.0
 --------------------------------------------
 Graphics Packages
 --------------------------------------------
