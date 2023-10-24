@@ -40,10 +40,10 @@ PREFERRED_VERSION_vulkan-validation-layers:imxvulkan ??= "1.3.261.1"
 
 PREFERRED_VERSION_ffmpeg ??= "4.4.1"
 
-PREFERRED_VERSION_libdrm:mx6-nxp-bsp ??= "2.4.115.imx"
-PREFERRED_VERSION_libdrm:mx7-nxp-bsp ??= "2.4.115.imx"
-PREFERRED_VERSION_libdrm:mx8-nxp-bsp ??= "2.4.115.imx"
-PREFERRED_VERSION_libdrm:mx9-nxp-bsp ??= "2.4.115.imx"
+PREFERRED_VERSION_libdrm:mx6-nxp-bsp ??= "2.4.116.imx"
+PREFERRED_VERSION_libdrm:mx7-nxp-bsp ??= "2.4.116.imx"
+PREFERRED_VERSION_libdrm:mx8-nxp-bsp ??= "2.4.116.imx"
+PREFERRED_VERSION_libdrm:mx9-nxp-bsp ??= "2.4.116.imx"
 
 PREFERRED_VERSION_optee-client:mx6-nxp-bsp ??= "4.0.0.imx"
 PREFERRED_VERSION_optee-client:mx7-nxp-bsp ??= "4.0.0.imx"

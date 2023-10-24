@@ -11,10 +11,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9eb1f4831351ab42d762c40b3ebb7add \
 PROVIDES = "drm"
 DEPENDS = "libpthread-stubs"
 
-SRC_URI = "${IMX_LIBDRM_SRC};branch=${SRCBRANCH}"
-IMX_LIBDRM_SRC ?= "git://github.com/nxp-imx/libdrm-imx.git;protocol=https;nobranch=1"
-SRCBRANCH = "libdrm-imx-2.4.115"
-SRCREV = "0f889a1f9640f6210132dd565141eb19005245fb"
+SRC_URI = "${IMX_LIBDRM_SRC};branch=${SRCBRANCH} \
+           file://0001-meson-fix-pthread-stubs-configure-error.patch"
+IMX_LIBDRM_SRC ?= "git://github.com/nxp-imx/libdrm-imx.git;protocol=https"
+SRCBRANCH = "libdrm-imx-2.4.116"
+SRCREV = "980767f59029db08cfb52fa35cd4a52f9284591f"
 
 S = "${WORKDIR}/git"
 
@@ -45,7 +46,7 @@ PACKAGECONFIG[manpages] = "-Dman-pages=enabled,-Dman-pages=disabled,libxslt-nati
 
 ALLOW_EMPTY:${PN}-drivers = "1"
 PACKAGES =+ "${PN}-tests ${PN}-drivers ${PN}-radeon ${PN}-nouveau ${PN}-omap \
-             ${PN}-intel ${PN}-exynos ${PN}-kms ${PN}-freedreno ${PN}-amdgpu \
+             ${PN}-intel ${PN}-exynos ${PN}-freedreno ${PN}-amdgpu \
              ${PN}-etnaviv"
 
 RRECOMMENDS:${PN}-drivers = "${PN}-radeon ${PN}-nouveau ${PN}-omap ${PN}-intel \
@@ -58,7 +59,6 @@ FILES:${PN}-nouveau = "${libdir}/libdrm_nouveau.so.*"
 FILES:${PN}-omap = "${libdir}/libdrm_omap.so.*"
 FILES:${PN}-intel = "${libdir}/libdrm_intel.so.*"
 FILES:${PN}-exynos = "${libdir}/libdrm_exynos.so.*"
-FILES:${PN}-kms = "${libdir}/libkms*.so.*"
 FILES:${PN}-freedreno = "${libdir}/libdrm_freedreno.so.*"
 FILES:${PN}-amdgpu = "${libdir}/libdrm_amdgpu.so.* ${datadir}/${PN}/amdgpu.ids"
 FILES:${PN}-etnaviv = "${libdir}/libdrm_etnaviv.so.*"

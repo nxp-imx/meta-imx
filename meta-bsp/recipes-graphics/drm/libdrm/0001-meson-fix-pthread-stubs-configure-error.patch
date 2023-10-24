@@ -1,0 +1,42 @@
+From d56bc2ef82d03f5899be544a631f96bd1ca00168 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Tue, 24 Oct 2023 09:09:01 -0500
+Subject: [PATCH] meson: fix pthread-stubs configure error
+
+Build is failing during meson configure:
+```
+| ../git/vivante/meson.build:33:18: ERROR: Unknown variable "dep_pthread_stubs".
+```
+
+A recent cherry-pick seems related:
+
+    332809f3 meson: drop pthread-stubs dependency on BSDs
+
+    pthread-stubs >= 0.4 simply passes -pthread which is similar to what
+    dependency('threads') returns. And make it a private dependency
+    for subprojects even on Linux.
+
+Extending the logic to vivante/meson.build does fix the build break.
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ vivante/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/vivante/meson.build b/vivante/meson.build
+index f6adb598..d6c27f56 100644
+--- a/vivante/meson.build
++++ b/vivante/meson.build
+@@ -30,7 +30,7 @@ libdrm_vivante = shared_library(
+   include_directories : [inc_root, inc_drm],
+   link_with : libdrm,
+   c_args : libdrm_c_args,
+-  dependencies : [dep_pthread_stubs, dep_rt, dep_atomic_ops],
++  dependencies : [dep_threads, dep_rt, dep_atomic_ops],
+   version : '1.0.0',
+   install : true,
+ )
+-- 
+2.25.1
+
