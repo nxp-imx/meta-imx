@@ -1,0 +1,44 @@
+From c4fdd52842b1ce80c2531c00b43e40d173757e93 Mon Sep 17 00:00:00 2001
+From: Yuan Tian <yuan.tian@nxp.com>
+Date: Tue, 24 Oct 2023 17:32:08 +0800
+Subject: [PATCH] The workload of case 16bit_arithmetic is heavy for 8ulp and
+ 8mn board. It caused TIMEOUT and running aborted. Increase timeout value to
+ resolve the issue.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
+---
+ framework/fence_pool.cpp | 2 +-
+ framework/fence_pool.h   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/framework/fence_pool.cpp b/framework/fence_pool.cpp
+index f2fecd2..a0b77ed 100644
+--- a/framework/fence_pool.cpp
++++ b/framework/fence_pool.cpp
+@@ -66,7 +66,7 @@ VkFence FencePool::request_fence()
+ 	return fences.back();
+ }
+ 
+-VkResult FencePool::wait(uint32_t timeout) const
++VkResult FencePool::wait(uint64_t timeout) const
+ {
+ 	if (active_fence_count < 1 || fences.empty())
+ 	{
+diff --git a/framework/fence_pool.h b/framework/fence_pool.h
+index 934990e..8a5037c 100644
+--- a/framework/fence_pool.h
++++ b/framework/fence_pool.h
+@@ -40,7 +40,7 @@ class FencePool
+ 
+ 	VkFence request_fence();
+ 
+-	VkResult wait(uint32_t timeout = std::numeric_limits<uint32_t>::max()) const;
++	VkResult wait(uint64_t timeout = std::numeric_limits<uint64_t>::max()) const;
+ 
+ 	VkResult reset();
+ 
+-- 
+2.17.1
+
