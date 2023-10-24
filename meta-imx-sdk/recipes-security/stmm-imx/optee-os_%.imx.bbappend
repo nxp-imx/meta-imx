@@ -1,9 +1,10 @@
 # StandAlomeMM: Require edk2-firmware to generate BL32_AP_MM.fd
 DEPENDS:append = " ${@bb.utils.contains('MACHINE_FEATURES', 'stmm', 'stmm-imx', '', d)}"
 
-# i.MX 8MQ EVK emmc is dev 0
+# i.MX 8MQ and 93 EVK emmc is dev 0
 RPMB_FS_DEV_ID ?= "2"
 RPMB_FS_DEV_ID:mx8mq-nxp-bsp = "0"
+RPMB_FS_DEV_ID:mx93-nxp-bsp = "0"
 
 STMM_EXTRA_OEMAKE = " \
         CFG_STMM_PATH=${STAGING_DIR_TARGET}/firmware/BL32_AP_MM.fd \
