@@ -11,11 +11,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9eb1f4831351ab42d762c40b3ebb7add \
 PROVIDES = "drm"
 DEPENDS = "libpthread-stubs"
 
-SRC_URI = "${IMX_LIBDRM_SRC};branch=${SRCBRANCH} \
-           file://0001-meson-fix-pthread-stubs-configure-error.patch"
+SRC_URI = "${IMX_LIBDRM_SRC};branch=${SRCBRANCH}"
 IMX_LIBDRM_SRC ?= "git://github.com/nxp-imx/libdrm-imx.git;protocol=https"
 SRCBRANCH = "libdrm-imx-2.4.116"
-SRCREV = "980767f59029db08cfb52fa35cd4a52f9284591f"
+SRCREV = "f12b931c498630e6a3ce4c230e9e897131245891"
 
 S = "${WORKDIR}/git"
 
