@@ -2,9 +2,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BP}:"
 
 SRC_URI += " \
     file://0001-MGS-4031-Report-NotSupported-for-OpenVG-tests-on-non.patch \
-    file://0001-CL489625-escts-3.2.8-Fix-escts3.2.8-fail-on-8mm-boar.patch \
-    file://0001-Handle-latest-Wayland-version.patch \
-    file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch"
+    file://0001-CL489625-escts-3.2.8-Fix-escts3.2.8-fail-on-8mm-boar.patch"
 
 PACKAGECONFIG ?= "egl ${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11', d)}"
 

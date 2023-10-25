@@ -31,7 +31,7 @@ BBMASK += "meta-arm/meta-arm/recipes-kernel/linux/linux-yocto_5.15%.bbappend"
 
 PREFERRED_VERSION_opengl-es-cts:mx6-nxp-bsp = "3.2.4.0"
 PREFERRED_VERSION_opengl-es-cts:mx7-nxp-bsp = "3.2.4.0"
-PREFERRED_VERSION_opengl-es-cts:aarch64 = "3.2.8.0"
+PREFERRED_VERSION_opengl-es-cts:aarch64 = "3.2.9.3"
 
 # Use systemd as default init manager
 VIRTUAL-RUNTIME_init_manager = "systemd"
