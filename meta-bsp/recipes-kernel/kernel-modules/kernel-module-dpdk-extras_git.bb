@@ -12,4 +12,4 @@ S = "${WORKDIR}/git/linux/kpage_ncache"
 EXTRA_OEMAKE += "-C ${STAGING_KERNEL_BUILDDIR} M=${S}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp|mx9-nxp-bsp)"
