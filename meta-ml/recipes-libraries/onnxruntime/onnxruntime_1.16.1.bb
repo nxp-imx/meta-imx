@@ -2,20 +2,16 @@
 DESCRIPTION = "cross-platform, high performance scoring engine for ML models"
 SECTION = "devel"
 LICENSE = "MIT & Apache-2.0"
-LIC_FILES_CHKSUM_runtime = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
-LIC_FILES_CHKSUM_model = "file://${S}/example-models/squeezenet/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-LIC_FILES_CHKSUM = "${LIC_FILES_CHKSUM_runtime} ${LIC_FILES_CHKSUM_model}"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 
 DEPENDS = "libpng zlib"
 
 inherit setuptools3
 
+SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH_runtime = "lf-6.1.55_2.2.0"
-SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH_runtime};name=runtime"
-
-SRCREV_runtime = "ad074cf540053949ae49c27dcef2d3017c7ec108"
-SRCREV_FORMAT = "runtime_model"
+SRCBRANCH = "lf-6.1.55_2.2.0"
+SRCREV = "ad074cf540053949ae49c27dcef2d3017c7ec108" 
 
 S = "${WORKDIR}/git"
 
