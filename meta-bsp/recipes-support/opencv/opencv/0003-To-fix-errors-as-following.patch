@@ -1,4 +1,4 @@
-From f42c9b8c7bafcadc7e95fb25a391707f970eb426 Mon Sep 17 00:00:00 2001
+From 9a21e28642d64393153d6f304278a11b6ebd3f7b Mon Sep 17 00:00:00 2001
 From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 Date: Fri, 19 May 2017 04:27:50 +0900
 Subject: [PATCH] To fix errors as following:
@@ -21,10 +21,10 @@ Signed-off-by: Ismo Puustinen <ismo.puustinen@intel.com>
  3 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/modules/ts/include/opencv2/ts.hpp b/modules/ts/include/opencv2/ts.hpp
-index ed7491a89a..80919d13ee 100644
+index 86f2d07761..5b3ee560ca 100644
 --- a/modules/ts/include/opencv2/ts.hpp
 +++ b/modules/ts/include/opencv2/ts.hpp
-@@ -728,7 +728,7 @@ protected:
+@@ -735,7 +735,7 @@ protected:
      }
  };
  
@@ -33,7 +33,7 @@ index ed7491a89a..80919d13ee 100644
  
  struct DefaultRngAuto
  {
-@@ -791,7 +791,7 @@ private:
+@@ -798,7 +798,7 @@ private:
  #endif
  #endif
  
@@ -43,7 +43,7 @@ index ed7491a89a..80919d13ee 100644
  #define CV_TEST_INIT0_NOOP (void)0
  
 diff --git a/modules/ts/include/opencv2/ts/ocl_test.hpp b/modules/ts/include/opencv2/ts/ocl_test.hpp
-index 11572e9f48..438112e2aa 100644
+index 717eb7b14c..c845b5e014 100644
 --- a/modules/ts/include/opencv2/ts/ocl_test.hpp
 +++ b/modules/ts/include/opencv2/ts/ocl_test.hpp
 @@ -82,7 +82,7 @@ inline UMat ToUMat(InputArray src)
@@ -56,7 +56,7 @@ index 11572e9f48..438112e2aa 100644
  #define MAX_VALUE 357
  
 diff --git a/modules/ts/include/opencv2/ts/ts_ext.hpp b/modules/ts/include/opencv2/ts/ts_ext.hpp
-index b2a4cac241..b94c681c0c 100644
+index efa4860510..515b7c9ec4 100644
 --- a/modules/ts/include/opencv2/ts/ts_ext.hpp
 +++ b/modules/ts/include/opencv2/ts/ts_ext.hpp
 @@ -9,7 +9,7 @@

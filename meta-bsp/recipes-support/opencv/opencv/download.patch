@@ -1,4 +1,4 @@
-From b18a280fab06a680d9f831bf8b462647f3cb6214 Mon Sep 17 00:00:00 2001
+From 0c2f6044aea4cdcd3b084867ddb801771f949100 Mon Sep 17 00:00:00 2001
 From: Ross Burton <ross.burton@intel.com>
 Date: Thu, 9 Jan 2020 16:24:24 +0000
 Subject: [PATCH] opencv: abort configure if we need to download
@@ -16,7 +16,7 @@ Signed-off-by: Ross Burton <ross.burton@intel.com>
  1 file changed, 6 insertions(+)
 
 diff --git a/cmake/OpenCVDownload.cmake b/cmake/OpenCVDownload.cmake
-index 63cf6d3238..4acf477f70 100644
+index 3e46515537..e03fc5bbb8 100644
 --- a/cmake/OpenCVDownload.cmake
 +++ b/cmake/OpenCVDownload.cmake
 @@ -14,6 +14,7 @@
@@ -27,7 +27,7 @@ index 63cf6d3238..4acf477f70 100644
  set(HELP_OPENCV_DOWNLOAD_PATH "Cache directory for downloaded files")
  if(DEFINED ENV{OPENCV_DOWNLOAD_PATH})
    set(OPENCV_DOWNLOAD_PATH "$ENV{OPENCV_DOWNLOAD_PATH}" CACHE PATH "${HELP_OPENCV_DOWNLOAD_PATH}")
-@@ -156,6 +157,11 @@ function(ocv_download)
+@@ -202,6 +203,11 @@ function(ocv_download)
  
    # Download
    if(NOT EXISTS "${CACHE_CANDIDATE}")

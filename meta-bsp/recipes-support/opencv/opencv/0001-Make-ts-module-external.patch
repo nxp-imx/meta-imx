@@ -1,4 +1,4 @@
-From 11bbf909e08594628bd757d989ae34cf1bfe200b Mon Sep 17 00:00:00 2001
+From 4acc58d225b51f337fdd5a2e21cd97a467460fee Mon Sep 17 00:00:00 2001
 From: Mingli Yu <mingli.yu@windriver.com>
 Date: Thu, 18 Jun 2020 05:51:38 +0000
 Subject: [PATCH] Make ts module external
@@ -10,12 +10,13 @@ Reference: https://github.com/qbonnard/opencv/commit/6b229c5834cb9a0930425e762a6
 Upstream-Status: Submitted [https://github.com/opencv/opencv/issues/8408]
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+
 ---
  modules/ts/CMakeLists.txt | 5 +----
  1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/modules/ts/CMakeLists.txt b/modules/ts/CMakeLists.txt
-index f95bed0793..66f315bcca 100644
+index c1d249ea14..9cc6859890 100644
 --- a/modules/ts/CMakeLists.txt
 +++ b/modules/ts/CMakeLists.txt
 @@ -4,9 +4,6 @@ if(NOT BUILD_opencv_ts AND NOT BUILD_TESTS AND NOT BUILD_PERF_TESTS)
@@ -37,6 +38,3 @@ index f95bed0793..66f315bcca 100644
  
  ocv_glob_module_sources()
  ocv_module_include_directories()
--- 
-2.24.1
-

@@ -3,8 +3,7 @@
 # recipe. The second section customizes the recipe for i.MX.
 
 ########## meta-openembedded copy ###########
-# Upstream hash: 72dc42966be7da07f9553f75b825123b81704f0b
-# Commit https://github.com/openembedded/meta-openembedded/commit/225ce6a14a8110ab6b573b4dc9f5297a03d17e0f added
+# Upstream hash: 3efcb6b16d9fe8ab90b1432a980f09a15b25d9c2
 
 SUMMARY = "Opencv : The Open Computer Vision Library"
 HOMEPAGE = "http://opencv.org/"
@@ -18,48 +17,27 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "b0dc474160e389b9c9045da5db49d03ae17c6a6b"
-SRCREV_contrib = "7b77c355a8fdc97667b3fa1e7a0d37e4973fc868"
-SRCREV_ipp = "a56b6ac6f030c312b2dce17430eef13aed9af274"
+SRCREV_opencv = "f9a59f2592993d3dcc080e495f4f5e02dd8ec7ef"
+SRCREV_contrib = "f10c84d48b0714f2b408c9e5cccfac1277c8e6cc"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
 SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
 
-def ipp_filename(d):
-    import re
-    arch = d.getVar('TARGET_ARCH')
-    if re.match("i.86$", arch):
-        return "ippicv_2020_lnx_ia32_20191018_general.tgz"
-    else:
-        return "ippicv_2020_lnx_intel64_20191018_general.tgz"
-
-def ipp_md5sum(d):
-    import re
-    arch = d.getVar('TARGET_ARCH')
-    if re.match("i.86$", arch):
-        return "ad189a940fb60eb71f291321322fe3e8"
-    else:
-        return "7421de0095c7a39162ae13a6098782f9"
-
-IPP_FILENAME = "${@ipp_filename(d)}"
-IPP_MD5 = "${@ipp_md5sum(d)}"
 
 SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
-SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol=https \
-           git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=master;protocol=https \
-           git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20191018;destsuffix=git/ipp;name=ipp;protocol=https \
+SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https \
+           git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=4.x;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=git/boostdesc;name=boostdesc;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=git/vgg;name=vgg;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=git/face;name=face;protocol=https \
            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=git/wechat_qrcode;name=wechat-qrcode;protocol=https \
-           file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
            file://0003-To-fix-errors-as-following.patch \
            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
            file://0001-Dont-use-isystem.patch \
            file://download.patch \
            file://0001-Make-ts-module-external.patch \
-           file://0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch \
+           file://0008-Do-not-embed-build-directory-in-binaries.patch \
            file://fix-build-with-protobuf-v22.patch \
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
@@ -71,7 +49,6 @@ S = "${WORKDIR}/git"
 OPENCV_DLDIR = "${WORKDIR}/downloads"
 
 do_unpack_extra() {
-    tar xzf ${S}/ipp/ippicv/${IPP_FILENAME} -C ${S}
 
     md5() {
         # Return the MD5 of $1
@@ -100,8 +77,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${S}/contrib/modules \
     -DWITH_1394=OFF \
     -DENABLE_PRECOMPILED_HEADERS=OFF \
     -DCMAKE_SKIP_RPATH=ON \
-    -DOPENCV_ICV_HASH=${IPP_MD5} \
-    -DIPPROOT=${S}/ippicv_lnx \
+    -DWITH_IPP=OFF \
     -DOPENCV_GENERATE_PKGCONFIG=ON \
     -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
     -DOPENCV_ALLOW_DOWNLOADS=OFF \
@@ -142,6 +118,7 @@ PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
 PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
 PACKAGECONFIG[libv4l] = "-DWITH_LIBV4L=ON,-DWITH_LIBV4L=OFF,v4l-utils,"
 PACKAGECONFIG[opencl] = "-DWITH_OPENCL=ON,-DWITH_OPENCL=OFF,opencl-headers virtual/opencl-icd,"
+PACKAGECONFIG[openvino] = "-DWITH_OPENVINO=ON,-DWITH_OPENVINO=OFF,openvino-inference-engine,openvino-inference-engine"
 PACKAGECONFIG[oracle-java] = "-DJAVA_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${ORACLE_JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native oracle-jse-jdk oracle-jse-jdk-native,"
 PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
 PACKAGECONFIG[python2] = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include,,python-numpy,"
@@ -193,7 +170,7 @@ python populate_packages:prepend () {
 
     metapkg =  pn
     d.setVar('ALLOW_EMPTY:' + metapkg, "1")
-    blacklist = [ metapkg, "libopencv-ts" ]
+    blacklist = [ metapkg ]
     metapkg_rdepends = [ ]
     for pkg in packages[1:]:
         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') and not pkg.endswith('-locale') and not pkg.endswith('-staticdev'):
@@ -259,17 +236,16 @@ SUMMARY = "Opencv : The Open Computer Vision Library, i.MX Fork"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 # Replace the opencv URL with the fork
-SRC_URI:remove = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol=https"
+SRC_URI:remove = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https"
 SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH_opencv};name=opencv"
-SRC_URI:remove = "file://0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch"
 OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=master"
-SRCBRANCH_opencv = "4.7.0_imx"
-SRCREV_opencv = "3acf6a50fcb4f774728d2338553ad646ccc14b14"
+SRCBRANCH_opencv = "4.8.1_imx"
+SRCREV_opencv = "35fb387337db7241a33a170e733aac2e25ec288e"
 
 # Update opencv_contrib
 SRC_URI:remove = "git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=master;protocol=https"
 SRC_URI += "git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=4.x;protocol=https"
-SRCREV_contrib = "e247b680a6bd396f110274b6c214406a93171350"
+SRCREV_contrib = "f10c84d48b0714f2b408c9e5cccfac1277c8e6cc"
 
 # Add opencv_extra
 SRC_URI += " \
@@ -277,7 +253,7 @@ SRC_URI += " \
     file://0001-Add-smaller-version-of-download_models.py.patch;patchdir=../extra \
 "
 SRCREV_FORMAT:append = "_extra"
-SRCREV_extra = "5abbd7e0546bbb34ae7487170383d3e571fb1dd1"
+SRCREV_extra = "fdd66bfcc3ced243d682fe03f0858bf43867656c"
 
 # Patch DNN example
 SRC_URI += " \
