@@ -70,8 +70,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.21.bin
-Version:                     8.21
+Package:                     firmware-imx-8.23.bin
+Version:                     8.23
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -102,8 +102,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.11.bin
-Version:                     0.11
+Package:                     firmware-ele-imx-0.1.0.bin
+Version:                     0.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -246,8 +246,8 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-seco-5.9.0.bin
-Version:                     5.9.0
+Package:                     imx-seco-5.9.2.bin
+Version:                     5.9.2
 Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -619,6 +619,16 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
+Package:                     mali-imx-1.0.0.bin
+Version:                     1.0.0
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+License File:                COPYING
+Package Category:            Graphics
+Type of Content:             binary and source
+Description and comments:    GPU Core IP in binary and test application source
+Release Location:            Mirror
+--------------------------------------------
+
 Package:                     gtec-demo-framework.git
 Version:                     6.2.1
 Outgoing License:            BSD-3-Clause 
@@ -837,7 +847,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     opencv-imx.git
-Version:                     4.7.0.imx
+Version:                     4.8.1.imx
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            Graphics
@@ -856,8 +866,8 @@ Origin:                      NXP (BSD-3-Cluse)
 Multimedia Packages
 --------------------------------------------
 
-Package:                     imx-codec-4.8.2.bin
-Version:                     4.8.2
+Package:                     imx-codec-4.8.3.bin
+Version:                     4.8.3
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -873,8 +883,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.8.2.bin
-Version:                     4.8.2
+Package:                     imx-parser-4.8.3.bin
+Version:                     4.8.3
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -977,8 +987,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.1.bin
-Version:                     0.1
+Package:                     imx-opencl-converter-0.2.0.bin
+Version:                     0.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
