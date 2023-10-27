@@ -1,4 +1,4 @@
-# Copyright 2017-2022 NXP
+# Copyright 2017-2023 NXP
  
 DEPENDS = "zlib-native openssl-native"
 
@@ -7,7 +7,7 @@ SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH} \
 "
 IMX_MKIMAGE_SRC ?= "git://github.com/nxp-imx/imx-mkimage.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "96092c91fb920f3b34ea0fc56d08128270104f38"
+SRCREV = "f3a1dcfdc82985752ae2c30a5c9c4740f5bb266c"
 
 S = "${WORKDIR}/git"
 
