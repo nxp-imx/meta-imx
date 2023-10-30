@@ -9,11 +9,11 @@ DEPENDS = " zlib"
 DEPENDS:append:mx8ulp-nxp-bsp  = " imx-secure-enclave"
 DEPENDS:append:mx93-nxp-bsp  = " imx-secure-enclave"
 
-ITEST_BRANCH = "itest_ele"
+SRC_URI = "${ITEST_SRC};branch=${SRCBRANCH}"
 ITEST_SRC ?= "git://github.com/nxp-imx/itest.git;protocol=https"
-SRC_URI = "${ITEST_SRC};branch=${ITEST_BRANCH}"
-
+SRCBRANCH = "itest_ele"
 SRCREV = "732cd110975790c43e4d2aeaacfa86203f6bf220"
+
 S = "${WORKDIR}/git"
 
 inherit cmake
