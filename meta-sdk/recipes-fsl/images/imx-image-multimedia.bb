@@ -21,7 +21,7 @@ IMAGE_FEATURES += " \
     tools-sdk \
     package-management \
     splash \
-    nfs-server \
+    nfs-client \
     tools-debug \
     ssh-server-openssh \
     tools-testapps \
