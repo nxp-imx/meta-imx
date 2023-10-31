@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "dbus ncurses"
 
-SRCREV = "31cd694602cc37ada3a6d02a5a381f4e3933ecef"
+SRCREV = "35cca08d2bef14248ac25ff2a1efb0bf274d0a6f"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https \
            file://0001-audioconvert-fix-noise-issue-for-neon-function.patch \
 "
@@ -37,7 +37,6 @@ SYSTEMD_PACKAGES = "${PN}"
 # a specially prepared kernel, and is currently unavailable
 # in Yocto.
 #
-# Vulkan support is currently (as of version 0.3.44) not functional.
 #
 # manpage generation requires xmltoman, which is not available.
 #
@@ -139,7 +138,7 @@ PACKAGECONFIG[udev] = "-Dudev=enabled,-Dudev=disabled,udev"
 PACKAGECONFIG[v4l2] = "-Dv4l2=enabled,-Dv4l2=disabled,udev"
 PACKAGECONFIG[volume] = "-Dvolume=enabled,-Dvolume=disabled"
 PACKAGECONFIG[vulkan] = "-Dvulkan=enabled,-Dvulkan=disabled,vulkan-headers vulkan-loader"
-PACKAGECONFIG[webrtc-echo-cancelling] = "-Decho-cancel-webrtc=enabled,-Decho-cancel-webrtc=disabled,webrtc-audio-processing"
+PACKAGECONFIG[webrtc-echo-cancelling] = "-Decho-cancel-webrtc=enabled,-Decho-cancel-webrtc=disabled,webrtc-audio-processing-1"
 PACKAGECONFIG[wireplumber] = ",,,wireplumber,,media-session"
 
 PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
@@ -267,6 +266,7 @@ FILES:${PN} = " \
     ${systemd_user_unitdir} \
     ${bindir}/pipewire \
     ${bindir}/pipewire-avb \
+    ${bindir}/pipewire-vulkan \
 "
 
 RRECOMMENDS:${PN}:class-target += " \
