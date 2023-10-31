@@ -57,6 +57,28 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
+Package:                     imx-oei.git
+Version:                     1.0.0
+Outgoing License:            SCR: Outgoing License TBD SCR: License Addition TBD
+License File:                SCR: License File TBD
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    i.MX BootROM Optional Execution Image
+Release Location:            https://github.com/nxp-imx/imx-oei -b lf-6.1.55-2.2.0
+Origin:                      NXP (GPL-2.0)
+
+--------------------------------------------
+
+Package:                     imx-system-manager.git
+Version:                     1.0.0
+Outgoing License:            SCR: Outgoing License TBD SCR: License Addition TBD
+License File:                SCR: License File TBD
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    i.MX System Manager
+Release Location:            https://github.com/nxp-imx/imx-system-manager -b lf-6.1.55-2.2.0
+--------------------------------------------
+
 Package:                     imx-sc-firmware-1.15.0.bin
 Version:                     1.15.0
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
@@ -695,7 +717,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     weston-imx.git
-Version:                     11.0.3.imx
+Version:                     12.0.2.imx
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
