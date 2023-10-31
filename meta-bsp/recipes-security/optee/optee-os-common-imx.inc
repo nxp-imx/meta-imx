@@ -51,4 +51,8 @@ EXTRA_OEMAKE:append:imx8mq-lpddr4-wevk = " \
     CFG_TZDRAM_START=0xfe000000 \
 "
 
+EXTRA_OEMAKE:append:imx8dxlb0-fips-lpddr4-evk = " \
+    CFG_NXP_CAAM=n \
+"
+
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
