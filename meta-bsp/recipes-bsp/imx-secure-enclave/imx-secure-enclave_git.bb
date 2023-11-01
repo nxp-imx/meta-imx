@@ -26,4 +26,4 @@ do_install () {
 FILES:${PN} += "${datadir}/se"
 RDEPENDS:${PN} += "bash"
 
-COMPATIBLE_MACHINE = "(mx8-nxp-bsp|mx9-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8ulp-nxp-bsp|mx9-nxp-bsp)"
