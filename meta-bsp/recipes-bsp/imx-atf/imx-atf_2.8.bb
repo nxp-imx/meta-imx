@@ -56,6 +56,11 @@ EXTRA_OEMAKE += 'CC="${@remove_options_tail(d.getVar('CC'))}"'
 # Set the UART to use during the boot.
 EXTRA_OEMAKE += 'IMX_BOOT_UART_BASE=${ATF_BOOT_UART_BASE}'
 
+# Set to 1 for debugging
+ATF_DEBUG ?= "0"
+EXTRA_OEMAKE += 'DEBUG=${ATF_DEBUG}'
+OUTPUT_FOLDER = "${@bb.utils.contains('ATF_DEBUG', '0', 'release', 'debug', d)}"
+
 do_configure[noexec] = "1"
 
 do_compile() {
@@ -73,11 +78,11 @@ BOOT_TOOLS = "imx-boot-tools"
 
 addtask deploy after do_compile
 do_deploy() {
-    install -Dm 0644 ${S}/build/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin
-    install -Dm 0644 ${S}/build/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}.bin
+    install -Dm 0644 ${S}/build/${ATF_PLATFORM}/${OUTPUT_FOLDER}/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin
+    install -Dm 0644 ${S}/build/${ATF_PLATFORM}/${OUTPUT_FOLDER}/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}.bin
     if ${BUILD_OPTEE}; then
-        install -m 0644 ${S}/build-optee/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin-optee
-        install -m 0644 ${S}/build-optee/${ATF_PLATFORM}/release/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}.bin-optee
+        install -m 0644 ${S}/build-optee/${ATF_PLATFORM}/${OUTPUT_FOLDER}/bl31.bin ${DEPLOYDIR}/bl31-${ATF_PLATFORM}.bin-optee
+        install -m 0644 ${S}/build-optee/${ATF_PLATFORM}/${OUTPUT_FOLDER}/bl31.bin ${DEPLOYDIR}/${BOOT_TOOLS}/bl31-${ATF_PLATFORM}.bin-optee
     fi
 }
 
