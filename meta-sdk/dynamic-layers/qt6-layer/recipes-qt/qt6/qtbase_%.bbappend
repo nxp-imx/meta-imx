@@ -1,6 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://0001-Fix-build-without-egl-x11.patch"
 SRC_URI += "file://qt-linuxfb.sh"
 
 PACKAGECONFIG_GRAPHICS:imxdrm = "gbm kms"
