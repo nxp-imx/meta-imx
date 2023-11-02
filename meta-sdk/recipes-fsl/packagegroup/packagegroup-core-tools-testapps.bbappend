@@ -15,4 +15,5 @@ RDEPENDS:${PN} += " \
     pipewire-spa-tools \
     pipewire-tools \
     pipewire-v4l2 \
+    pipewire-pulse \
 "
