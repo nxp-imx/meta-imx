@@ -1,6 +1,6 @@
-From 1c7fd64b69feb0ea14047ce1ed68138ccf33687e Mon Sep 17 00:00:00 2001
-From: Wujian sun <wujian.sun_1@nxp.com>
-Date: Mon, 5 Jul 2021 10:28:44 +0800
+From 569329de60b83026839c64332dc9ccb944469c49 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Wed, 1 Nov 2023 18:19:23 +0800
 Subject: [PATCH] Fixed chromium flicker with g2d-renderer
 
 chromium V89 reland linux_explicit_synchronization_protocol for
@@ -9,17 +9,18 @@ The rootcasue is that weston can not acquire fence fd.
 A workaround no checking supports_acquire_fence supported.
 
 Upstream-Status: Inappropriate [i.MX specific]
-Signed-off-by: Wujian sun <wujian.sun_1@nxp.com>
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
 ---
  ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc b/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
-index e7d3e7268a08..83c57fd65d72 100644
+index aee5dd043676c..c6678c5946117 100644
 --- a/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
 +++ b/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
-@@ -112,8 +112,7 @@ void GbmSurfacelessWayland::SwapBuffersAsync(
- 
+@@ -203,8 +203,7 @@ void GbmSurfacelessWayland::Present(SwapCompletionCallback completion_callback,
+   unsubmitted_frames_.back()->configs.reserve(frame->configs.size());
    // If Wayland server supports linux_explicit_synchronization_protocol, fences
    // should be shipped with buffers. Otherwise, we will wait for fences.
 -  if (buffer_manager_->supports_acquire_fence() || !use_egl_fence_sync_ ||

@@ -1,13 +1,11 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += " \
-    file://0001-Fix-build-in-Python-3.11-invalid-mode-rU.patch \
-"
-
 SRC_URI:append:imx-nxp-bsp = " \
     file://0001-Fixed-chromium-flicker-with-g2d-renderer.patch \
     file://0002-chromium-met-EGL-API-GetProcAddress-failures.patch \
     file://0003-Disable-dri-for-imx-gpu.patch \
+    file://0004-Fix-chromium-build-failure.patch \
+    file://0005-Revert-ui-gbm_wrapper-Ensure-to-create-BOs-with-impo.patch \
 "
 SRC_URI:append:mx8-nxp-bsp = " \
     file://0101-V4L2VDA-Switch-to-use-VDA-instead-of-direct-VideoDec.patch \
@@ -53,3 +51,10 @@ GN_ARGS:append:imx-nxp-bsp = " \
     ${GN_ARGS_USE_LINUX_V4L2_ONLY} \
 "
 CHROMIUM_EXTRA_ARGS:append = " --disable-features=VizDisplayCompositor --in-process-gpu --disable-gpu-rasterization"
+
+#Remove installed ANGLE libraries
+do_install:append() {
+        rm -rf ${D}${libdir}/chromium/libEGL.so
+        rm -rf ${D}${libdir}/chromium/libGLESv2.so
+        rm -rf ${D}${libdir}/chromium/libvulkan.so.1
+}

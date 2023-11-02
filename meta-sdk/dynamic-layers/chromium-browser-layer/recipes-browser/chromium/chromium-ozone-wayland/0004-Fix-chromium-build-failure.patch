@@ -1,0 +1,46 @@
+From 646c202157ac0d0603e3e3c7a68fc2230f9af56d Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Wed, 18 Oct 2023 15:56:59 +0800
+Subject: [PATCH] Fix chromium build failure
+
+| aarch64-poky-linux-ld.lld: error: undefined symbol:
+gl::NativeViewGLSurfaceEGL::NativeViewGLSurfaceEGL(gl::GLDisplayEGL*,
+void*, std::__1::unique_ptr<gfx::VSyncProvider,
+std::__1::default_deletegfx::VSyncProvider >)
+| >>> referenced by gl_surface_wayland.cc:35
+(./../../ui/ozone/platform/wayland/gpu/gl_surface_wayland.cc:35)
+| >>>
+thinlto-cache/Thin-7f2605.tmp.o:(ui::GLSurfaceWayland::GLSurfaceWayland(gl::GLDisplayEGL*,
+std::__1::unique_ptr<wl_egl_window, ui::EGLWindowDeleter>,
+ui::WaylandWindow*))
+
+Upstream-Status: Inappropriate [i.MX-specific]
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ ui/gl/BUILD.gn | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/ui/gl/BUILD.gn b/ui/gl/BUILD.gn
+index bea950fb342ca..6ab09c0baacfe 100644
+--- a/ui/gl/BUILD.gn
++++ b/ui/gl/BUILD.gn
+@@ -253,6 +253,15 @@ component("gl") {
+         data_deps += [ "//third_party/vulkan-deps/vulkan-loader/src:libvulkan" ]
+       }
+     }
++    if(ozone_platform_wayland) {
++      defines += [ "WAYLAND_GBM" ]
++
++      deps += [
++        "//third_party/minigbm",
++        "//ui/gfx:memory_buffer",
++        "//ui/gfx/linux:gbm",
++      ]
++   }
+   }
+ 
+   if (ozone_platform_x11) {
+-- 
+2.17.1
+

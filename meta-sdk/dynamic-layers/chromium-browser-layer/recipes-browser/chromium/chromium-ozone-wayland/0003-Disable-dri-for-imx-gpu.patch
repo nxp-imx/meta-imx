@@ -1,8 +1,20 @@
-Index: chromium-96.0.4664.45/content/gpu/BUILD.gn
-===================================================================
---- chromium-96.0.4664.45.orig/content/gpu/BUILD.gn
-+++ chromium-96.0.4664.45/content/gpu/BUILD.gn
-@@ -7,6 +7,11 @@ import("//build/config/ui.gni")
+From aba13d7970bbfae907d1cd0406e3d2eefc555f2d Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Mon, 23 Oct 2023 15:21:53 +0800
+Subject: [PATCH] Disable dri for imx gpu
+
+Upstream-Status: Inappropriate [i.MX-specific]
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ content/gpu/BUILD.gn | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/content/gpu/BUILD.gn b/content/gpu/BUILD.gn
+index 93559f6092c7a..644903031ff95 100644
+--- a/content/gpu/BUILD.gn
++++ b/content/gpu/BUILD.gn
+@@ -8,6 +8,11 @@ import("//build/config/ui.gni")
  import("//gpu/vulkan/features.gni")
  import("//media/media_options.gni")
  
@@ -14,12 +26,15 @@ Index: chromium-96.0.4664.45/content/gpu/BUILD.gn
  # See //content/BUILD.gn for how this works.
  group("gpu") {
    visibility = [ "//content/*" ]  # This is an internal content API.
-@@ -136,7 +141,7 @@ target(link_target_type, "gpu_sources")
+@@ -140,7 +145,7 @@ target(link_target_type, "gpu_sources") {
  
    # Use DRI on desktop Linux builds.
    if (current_cpu != "s390x" && current_cpu != "ppc64" && is_linux &&
--      (!is_chromecast || is_cast_desktop_build)) {
-+      (!is_chromecast || is_cast_desktop_build) && !use_imxgpu) {
+-      !is_castos) {
++      !is_castos && !use_imxgpu) {
      configs += [ "//build/config/linux/dri" ]
    }
  }
+-- 
+2.17.1
+
