@@ -38,6 +38,7 @@ RDEPENDS:${PN} = " \
     pipewire \
     pipewire-spa-tools \
     pipewire-tools \
+    pipewire-pulse \
     pipewire-v4l2 \
     procps \
     ptpd \
