@@ -7,7 +7,7 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0004-Fix-chromium-build-failure.patch \
     file://0005-Revert-ui-gbm_wrapper-Ensure-to-create-BOs-with-impo.patch \
 "
-SRC_URI:append:mx8-nxp-bsp = " \
+SRC_URI_DISABLED_PATCHES:append:mx8-nxp-bsp = " \
     file://0101-V4L2VDA-Switch-to-use-VDA-instead-of-direct-VideoDec.patch \
     file://0102-GenericV4L2Device-Correct-v4l2-decoder-device-path.patch \
     file://0103-V4L2VDA-Add-macro-use_linux_v4l2.patch \
@@ -35,13 +35,13 @@ GN_ARGS_DISABLE_GBM:mx7-nxp-bsp = "${GN_ARGS_DISABLE_GBM:mx6-nxp-bsp}"
 GN_ARGS_USE_IMXGPU        = "use_imxgpu=false"
 GN_ARGS_USE_IMXGPU:imxgpu = "use_imxgpu=true"
 GN_ARGS_ENABLE_PROPRIETARY_CODECS             = ""
-GN_ARGS_ENABLE_PROPRIETARY_CODECS:mx8-nxp-bsp = "proprietary_codecs=true"
+#GN_ARGS_ENABLE_PROPRIETARY_CODECS:mx8-nxp-bsp = "proprietary_codecs=true"
 GN_ARGS_FFMPEG_BRANDING             = ""
-GN_ARGS_FFMPEG_BRANDING:mx8-nxp-bsp = "ffmpeg_branding="Chrome""
+#GN_ARGS_FFMPEG_BRANDING:mx8-nxp-bsp = "ffmpeg_branding="Chrome""
 GN_ARGS_USE_V4L2_CODEC             = ""
-GN_ARGS_USE_V4L2_CODEC:mx8-nxp-bsp = "use_v4l2_codec=true"
+#GN_ARGS_USE_V4L2_CODEC:mx8-nxp-bsp = "use_v4l2_codec=true"
 GN_ARGS_USE_LINUX_V4L2_ONLY             = ""
-GN_ARGS_USE_LINUX_V4L2_ONLY:mx8-nxp-bsp = "use_linux_v4l2_only=true"
+#GN_ARGS_USE_LINUX_V4L2_ONLY:mx8-nxp-bsp = "use_linux_v4l2_only=true"
 GN_ARGS:append:imx-nxp-bsp = " \
     ${GN_ARGS_DISABLE_GBM} \
     ${GN_ARGS_USE_IMXGPU} \
