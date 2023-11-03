@@ -16,14 +16,9 @@ S = "${WORKDIR}/git"
 
 inherit cmake
 
-OPENSSL_PATH="${STAGING_DIR_HOST}/usr"
-ELE_LIB_PATH="${STAGING_DIR_HOST}/usr"
-LIB_PATH="${STAGING_DIR_HOST}${libdir}"
-
 EXTRA_OECMAKE = " \
-    -DOPENSSL_PATH="${OPENSSL_PATH}" \
-    -DELE_LIB_PATH="${ELE_LIB_PATH}" \
-    -DLIB_PATH="${LIB_PATH}" \
-    ${EXTRA_OECMAKE_IMX}"
+    -DOPENSSL_PATH="${STAGING_DIR_HOST}/usr" \
+    -DELE_LIB_PATH="${STAGING_DIR_HOST}/usr" \
+    -DLIB_PATH="${STAGING_DIR_HOST}${libdir}""
 
 COMPATIBLE_MACHINE = "(mx8ulp-nxp-bsp|mx93-nxp-bsp)"
