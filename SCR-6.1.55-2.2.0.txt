@@ -692,7 +692,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     libdrm-imx.git
-Version:                     2.4.114.imx
+Version:                     2.4.116.imx
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
