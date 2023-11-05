@@ -31,9 +31,8 @@ VULKAN_TOOLS:mx8-nxp-bsp:imxgpu3d = "vulkan-validation-layers vkmark vulkan-tool
 VULKAN_TOOLS:mx8mm-nxp-bsp        = ""
 
 WAYLAND_TOOLS = " \
-    mesa-demos \
     ${GLMARK2} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtkperf renderdoc", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtkperf mesa-demos renderdoc", "", d)} \
 "
 
 GLMARK2          = ""
