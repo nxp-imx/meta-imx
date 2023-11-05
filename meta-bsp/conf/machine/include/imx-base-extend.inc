@@ -23,6 +23,10 @@ MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx91p"
 MACHINE_SOCARCH_SUFFIX:mx91p-nxp-bsp = "-mx91"
 IMX_EXTRA_FIRMWARE:mx91p-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx"
 
+PREFERRED_PROVIDER_virtual/libgl:imxgpu   ?= "mesa-gl"
+PREFERRED_PROVIDER_virtual/libgl:imxgpu3d  = "mesa-gl"
+PREFERRED_PROVIDER_virtual/mesa:imxgpu    ?= "mesa-gl"
+
 # i.MX 6 & 7 stay on weston 10.0 for fbdev
 PREFERRED_VERSION_weston:mx6-nxp-bsp ??= "10.0.5.imx"
 PREFERRED_VERSION_weston:mx7-nxp-bsp ??= "10.0.5.imx"

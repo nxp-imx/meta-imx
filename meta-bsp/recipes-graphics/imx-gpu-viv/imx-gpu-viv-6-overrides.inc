@@ -2,6 +2,10 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 ### Section 1: Changes to be upstreamed ###
 
+DEPENDS:remove = "mesa"
+PACKAGES:remove = "libgl-imx libgl-imx-dev"
+PROVIDES:remove = "virtual/libgl"
+
 PROVIDES_OPENGLES3:mx8mm-nxp-bsp = "virtual/libgles3"
 
 LIBVULKAN_API_VERSION = "1.3.239"
