@@ -107,7 +107,7 @@ python imx_kernel_devicetree_32bit_compatibility_update() {
             expanded = True
             new_devicetree = os.path.join("nxp/imx", devicetree)
             new += new_devicetree + " "
-            bb.warn("Devicetrees are moved to sub-folder nxp/imx, please fix KERNEL_DEVICETREE: %s -> %s" % (devicetree, new_devicetree))
+            bb.note("Devicetrees are moved to sub-folder nxp/imx, please fix KERNEL_DEVICETREE: %s -> %s" % (devicetree, new_devicetree))
         else:
             new += devicetree + " "
     if expanded:
