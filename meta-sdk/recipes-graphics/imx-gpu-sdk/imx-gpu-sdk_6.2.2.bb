@@ -67,17 +67,22 @@ WINDOW_SYSTEM = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',         'X11', \
                                                                  'FB', d), d)}"
 
-FEATURES                  = "ConsoleHost,EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,Lib_pugixml,OpenVG,Test_RequireUserInputToExit,WindowHost"
-FEATURES:append:imxgpu    = ",HW_GPU_VIVANTE"
-FEATURES:append:imxgpu2d  = ",G2D"
-FEATURES:append:imxgpu3d  = ",OpenGLES2"
-FEATURES:append           = "${FEATURES_SOC}"
+FEATURES = "ConsoleHost,EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,Lib_pugixml,OpenVG,Test_RequireUserInputToExit,WindowHost"
+FEATURES:append = "${FEATURES_GPU}${FEATURES_G2D}${FEATURES_3D}${FEATURES_SOC}"
 
-FEATURES_SOC              = ""
-FEATURES_SOC:mx6q-nxp-bsp         = ",OpenGLES3"
-FEATURES_SOC:mx6dl-nxp-bsp        = ",OpenGLES3"
-FEATURES_SOC:mx8-nxp-bsp          = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.2"
-FEATURES_SOC:mx8mm-nxp-bsp        = ",OpenCV4"
+FEATURES_GPU               = ",HW_GPU_VIVANTE"
+
+FEATURES_G2D               = ""
+FEATURES_G2D:imxgpu2d      = ",G2D"
+
+FEATURES_3D                = ""
+FEATURES_3D:imxgpu3d       = ",OpenGLES2"
+
+FEATURES_SOC               = ""
+FEATURES_SOC:mx6q-nxp-bsp  = ",OpenGLES3"
+FEATURES_SOC:mx6dl-nxp-bsp = ",OpenGLES3"
+FEATURES_SOC:mx8-nxp-bsp   = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.2"
+FEATURES_SOC:mx8mm-nxp-bsp = ",OpenCV4"
 
 EXTENSIONS               = "*"
 EXTENSIONS:mx6q-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
