@@ -56,7 +56,7 @@ DEPENDS_DRM:mx8mm-nxp-bsp = " \
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
 GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
-SRCREV = "f2b9a3480ef849efd0a6edf401cf6a225ce2a34c"
+SRCREV = "5bcee4777b403aa5c374df67e7a5c0c74f81e981"
 
 S = "${WORKDIR}/git"
 
