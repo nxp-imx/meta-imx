@@ -1,0 +1,63 @@
+From cd26159d92d138d6c34ca6acd72940e9a2f9af7f Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Mon, 6 Nov 2023 17:31:56 +0900
+Subject: [PATCH 19/19] V4L2VDA: Add back legacy VideoDecoderType kVda
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ .../services/gpu_mojo_media_client_linux.cc    | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/media/mojo/services/gpu_mojo_media_client_linux.cc b/media/mojo/services/gpu_mojo_media_client_linux.cc
+index 1d63dce496709..f23b32fc1cc55 100644
+--- a/media/mojo/services/gpu_mojo_media_client_linux.cc
++++ b/media/mojo/services/gpu_mojo_media_client_linux.cc
+@@ -28,6 +28,10 @@ VideoDecoderType GetPreferredLinuxDecoderImplementation() {
+     return VideoDecoderType::kOutOfProcess;
+   }
+ 
++  if (!base::FeatureList::IsEnabled(kUseChromeOSDirectVideoDecoder)) {
++    return VideoDecoderType::kVda;
++  }
++
+   return VideoDecoderType::kVaapi;
+ }
+ 
+@@ -56,6 +60,11 @@ VideoDecoderType GetActualPlatformDecoderImplementation(
+       return VideoDecoderType::kUnknown;
+     case VideoDecoderType::kOutOfProcess:
+       return VideoDecoderType::kOutOfProcess;
++    case VideoDecoderType::kVda: {
++      return gpu_preferences.gr_context_type == gpu::GrContextType::kGL
++                 ? VideoDecoderType::kVda
++                 : VideoDecoderType::kUnknown;
++    }
+     case VideoDecoderType::kVaapi: {
+       // Allow VaapiVideoDecoder on GL.
+       if (gpu_preferences.gr_context_type == gpu::GrContextType::kGL) {
+@@ -148,6 +157,13 @@ std::unique_ptr<VideoDecoder> CreatePlatformVideoDecoder(
+           GetPreferredRenderableFourccs(traits.gpu_preferences),
+           traits.media_log->Clone(), /*oop_video_decoder=*/{});
+     }
++    case VideoDecoderType::kVda: {
++      return VdaVideoDecoder::Create(
++          traits.task_runner, traits.gpu_task_runner, traits.media_log->Clone(),
++          *traits.target_color_space, traits.gpu_preferences,
++          *traits.gpu_workarounds, traits.get_command_buffer_stub_cb,
++          VideoDecodeAccelerator::Config::OutputMode::ALLOCATE);
++    }
+     default:
+       return nullptr;
+   }
+@@ -183,6 +199,8 @@ GetPlatformSupportedVideoDecoderConfigs(
+   base::UmaHistogramEnumeration("Media.VaapiLinux.SupportedVideoDecoder",
+                                 decoder_implementation);
+   switch (decoder_implementation) {
++    case VideoDecoderType::kVda:
++      return std::move(get_vda_configs).Run();
+     case VideoDecoderType::kOutOfProcess:
+     case VideoDecoderType::kVaapi:
+     case VideoDecoderType::kV4L2:
+-- 
+2.34.1
+

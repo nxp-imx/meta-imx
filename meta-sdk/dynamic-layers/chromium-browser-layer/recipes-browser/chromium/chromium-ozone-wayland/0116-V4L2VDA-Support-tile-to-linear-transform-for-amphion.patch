@@ -1,34 +1,34 @@
-From 346a96e47990cae31b4afe774d9fabf53219c3a9 Mon Sep 17 00:00:00 2001
+From 5b086374612ab4d19fcb038f3c52e6cff930d8d8 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Mon, 5 Sep 2022 14:14:10 +0800
-Subject: [PATCH 16/17] V4L2VDA: Support tile to linear transform for amphion
+Date: Thu, 2 Nov 2023 15:29:30 +0900
+Subject: [PATCH 16/19] V4L2VDA: Support tile to linear transform for amphion
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- media/gpu/v4l2/BUILD.gn       |   1 +
- media/gpu/v4l2/v4l2_device.cc | 182 +++++++++++++++++++++++++++++++++-
- media/gpu/v4l2/v4l2_device.h  |   1 +
- 3 files changed, 179 insertions(+), 5 deletions(-)
+ media/gpu/v4l2/BUILD.gn      |   1 +
+ media/gpu/v4l2/v4l2_queue.cc | 189 ++++++++++++++++++++++++++++++++++-
+ media/gpu/v4l2/v4l2_queue.h  |   1 +
+ 3 files changed, 186 insertions(+), 5 deletions(-)
 
 diff --git a/media/gpu/v4l2/BUILD.gn b/media/gpu/v4l2/BUILD.gn
-index ebd0a4ad64646..273f6066de175 100644
+index 50b3beecc090e..0e4e85232b9a2 100644
 --- a/media/gpu/v4l2/BUILD.gn
 +++ b/media/gpu/v4l2/BUILD.gn
-@@ -86,6 +86,7 @@ source_set("v4l2") {
+@@ -96,6 +96,7 @@ source_set("v4l2") {
      "EGL",
      "GLESv2",
    ]
 +  libs += [ "g2d" ]
  
-   if (use_v4l2_codec_aml) {
-     sources += [
-diff --git a/media/gpu/v4l2/v4l2_device.cc b/media/gpu/v4l2/v4l2_device.cc
-index 5a1057c845e85..42cd8386f41cb 100644
---- a/media/gpu/v4l2/v4l2_device.cc
-+++ b/media/gpu/v4l2/v4l2_device.cc
-@@ -40,6 +40,11 @@
- #include "media/gpu/v4l2/aml_v4l2_device.h"
- #endif
+   configs += [ "//third_party/libyuv:libyuv_config" ]
+ 
+diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
+index 5f6001275ae80..fa7c7daaa1e46 100644
+--- a/media/gpu/v4l2/v4l2_queue.cc
++++ b/media/gpu/v4l2/v4l2_queue.cc
+@@ -18,6 +18,11 @@
+ #include "media/gpu/chromeos/platform_video_frame_utils.h"
+ #include "media/gpu/macros.h"
  
 +#include "g2d.h"
 +#include "g2dExt.h"
@@ -38,7 +38,7 @@ index 5a1057c845e85..42cd8386f41cb 100644
  namespace media {
  
  namespace {
-@@ -169,6 +174,11 @@ class V4L2Buffer {
+@@ -181,6 +186,11 @@ class V4L2Buffer {
    size_t GetMemoryUsage() const;
    const struct v4l2_buffer& v4l2_buffer() const { return v4l2_buffer_; }
    scoped_refptr<VideoFrame> GetVideoFrame();
@@ -49,10 +49,10 @@ index 5a1057c845e85..42cd8386f41cb 100644
 +  const struct v4l2_format& GetFmt() const {return format_;}
  
   private:
-   V4L2Buffer(scoped_refptr<V4L2Device> device,
-@@ -181,6 +191,12 @@ class V4L2Buffer {
- 
-   scoped_refptr<V4L2Device> device_;
+   V4L2Buffer(const IoctlAsCallback& ioctl_cb,
+@@ -195,6 +205,12 @@ class V4L2Buffer {
+   const IoctlAsCallback ioctl_cb_;
+   const MmapAsCallback mmap_cb_;
    std::vector<void*> plane_mappings_;
 +  int dmafd0;
 +  int dmafd1;
@@ -63,7 +63,7 @@ index 5a1057c845e85..42cd8386f41cb 100644
  
    // V4L2 data as queried by QUERYBUF.
    struct v4l2_buffer v4l2_buffer_;
-@@ -230,6 +246,9 @@ V4L2Buffer::V4L2Buffer(scoped_refptr<V4L2Device> device,
+@@ -244,6 +260,9 @@ V4L2Buffer::V4L2Buffer(const IoctlAsCallback& ioctl_cb,
    v4l2_buffer_.type = type;
    v4l2_buffer_.memory = memory;
    plane_mappings_.resize(V4L2_TYPE_IS_MULTIPLANAR(type) ? v4l2_buffer_.length : 1);
@@ -73,11 +73,11 @@ index 5a1057c845e85..42cd8386f41cb 100644
  }
  
  V4L2Buffer::~V4L2Buffer() {
-@@ -242,6 +261,32 @@ V4L2Buffer::~V4L2Buffer() {
+@@ -256,6 +275,32 @@ V4L2Buffer::~V4L2Buffer() {
        }
      }
    }
-+  if(g2dbuf_p0 && g2dbuf_p1) {
++  if(g2d_free && g2dbuf_p0 && g2dbuf_p1) {
 +	  g2d_free(g2dbuf_p0);
 +	  g2d_free(g2dbuf_p1);
 +  }
@@ -106,7 +106,7 @@ index 5a1057c845e85..42cd8386f41cb 100644
  }
  
  bool V4L2Buffer::Query() {
-@@ -325,6 +370,61 @@ scoped_refptr<VideoFrame> V4L2Buffer::CreateVideoFrame() {
+@@ -340,6 +385,66 @@ scoped_refptr<VideoFrame> V4L2Buffer::CreateVideoFrame() {
        DLOG(ERROR) << "Fail to get DMABUFs of V4L2 buffer - invalid fd";
        return nullptr;
      }
@@ -139,14 +139,18 @@ index 5a1057c845e85..42cd8386f41cb 100644
 +    else
 +      phys_1 = query1.phys;
 +
-+    g2dbuf_p0 = g2d_alloc(format_.fmt.pix_mp.width * format_.fmt.pix_mp.height, 0);
-+    g2dbuf_p1 = g2d_alloc(format_.fmt.pix_mp.width * format_.fmt.pix_mp.height / 2, 0);
++    if (g2d_alloc) {
++      g2dbuf_p0 = g2d_alloc(format_.fmt.pix_mp.width * format_.fmt.pix_mp.height, 0);
++      g2dbuf_p1 = g2d_alloc(format_.fmt.pix_mp.width * format_.fmt.pix_mp.height / 2, 0);
++    }
 +    if((!g2dbuf_p0) || (!g2dbuf_p1)){
 +      DLOG(ERROR)<<"g2d buf alloc failed";
 +      return nullptr;
 +    }
 +
-+    int tmpfd = g2d_buf_export_fd(g2dbuf_p0);
++    int tmpfd = -1;
++    if (g2d_buf_export_fd)
++      tmpfd = g2d_buf_export_fd(g2dbuf_p0);
 +    tmpfd = dup(tmpfd);
 +    if(tmpfd > 0)
 +      g2dbufs_fds.push_back(base::ScopedFD(tmpfd));
@@ -156,7 +160,8 @@ index 5a1057c845e85..42cd8386f41cb 100644
 +      return nullptr;
 +    }
 +
-+    tmpfd = g2d_buf_export_fd(g2dbuf_p1);
++    if (g2d_buf_export_fd)
++      tmpfd = g2d_buf_export_fd(g2dbuf_p1);
 +    tmpfd = dup(tmpfd);
 +    if(tmpfd>0)
 +      g2dbufs_fds.push_back(base::ScopedFD(tmpfd));
@@ -168,7 +173,7 @@ index 5a1057c845e85..42cd8386f41cb 100644
    }
  
    // Duplicate the fd of the last v4l2 plane until the number of fds are the
-@@ -339,13 +439,16 @@ scoped_refptr<VideoFrame> V4L2Buffer::CreateVideoFrame() {
+@@ -354,13 +459,16 @@ scoped_refptr<VideoFrame> V4L2Buffer::CreateVideoFrame() {
      dmabuf_fds.emplace_back(duped_fd);
    }
  
@@ -190,28 +195,28 @@ index 5a1057c845e85..42cd8386f41cb 100644
  }
  
  scoped_refptr<VideoFrame> V4L2Buffer::GetVideoFrame() {
-@@ -1047,6 +1150,10 @@ V4L2Queue::V4L2Queue(scoped_refptr<V4L2Device> dev,
-     DVLOGF(4) << "Queue supports request API.";
-   }
- #endif
+@@ -1059,6 +1167,10 @@ V4L2Queue::V4L2Queue(const IoctlAsCallback& ioctl_cb,
+   VPLOG_IF(4, supports_requests_)
+       << "This queue does " << (supports_requests_ ? "" : "not")
+       << " support requests.";
 +
 +  g2d_handle = NULL;
-+  if(g2d_open(&g2d_handle))
++  if(g2d_open && g2d_open(&g2d_handle))
 +    VLOGF(1) << "g2d_open fail";
  }
  
  V4L2Queue::~V4L2Queue() {
-@@ -1065,6 +1172,9 @@ V4L2Queue::~V4L2Queue() {
-     DeallocateBuffers();
+@@ -1074,6 +1186,9 @@ V4L2Queue::~V4L2Queue() {
+     VQLOGF(1) << "Failed to deallocate queue buffers";
    }
  
-+  if(g2d_handle)
++  if(g2d_close && g2d_handle)
 +	  g2d_close(g2d_handle);
 +
    std::move(destroy_cb_).Run();
  }
  
-@@ -1103,6 +1213,8 @@ std::pair<absl::optional<struct v4l2_format>, int> V4L2Queue::GetFormat() {
+@@ -1115,6 +1230,8 @@ std::pair<absl::optional<struct v4l2_format>, int> V4L2Queue::GetFormat() {
      VPQLOGF(2) << "Failed to get format";
      return std::make_pair(absl::nullopt, errno);
    }
@@ -220,12 +225,13 @@ index 5a1057c845e85..42cd8386f41cb 100644
  
    return std::make_pair(format, 0);
  }
-@@ -1404,6 +1516,66 @@ std::pair<bool, V4L2ReadableBufferRef> V4L2Queue::DequeueBuffer() {
-     device_->SchedulePoll();
+@@ -1426,6 +1543,68 @@ std::pair<bool, V4L2ReadableBufferRef> V4L2Queue::DequeueBuffer() {
+   }
  
    DCHECK(free_buffers_);
 +
-+  if(type_ == V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE)
++  if(type_ == V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE &&
++      buffers_[v4l2_buffer.index]->GetFmt().fmt.pix_mp.pixelformat == V4L2_PIX_FMT_NV12M_8L128)
 +  {
 +	  std::pair<unsigned int, unsigned int> v4l_phys = buffers_[v4l2_buffer.index]->GetSavedphys();
 +	  int width = buffers_[v4l2_buffer.index]->GetFmt().fmt.pix_mp.width;
@@ -281,17 +287,18 @@ index 5a1057c845e85..42cd8386f41cb 100644
 +	  src->global_alpha = 0xff;
 +	  src->blendfunc = G2D_ONE;
 +
-+	  g2d_blitEx(g2d_handle, &srcEx, &dstEx);
++    if (g2d_blitEx)
++	    g2d_blitEx(g2d_handle, &srcEx, &dstEx);
 +  }
 +
    return std::make_pair(true, V4L2BufferRefFactory::CreateReadableRef(
                                    v4l2_buffer, weak_this_factory_.GetWeakPtr(),
                                    std::move(queued_frame)));
-diff --git a/media/gpu/v4l2/v4l2_device.h b/media/gpu/v4l2/v4l2_device.h
-index 86ef80fd09579..516d0a63b5689 100644
---- a/media/gpu/v4l2/v4l2_device.h
-+++ b/media/gpu/v4l2/v4l2_device.h
-@@ -457,6 +457,7 @@ class MEDIA_GPU_EXPORT V4L2Queue
+diff --git a/media/gpu/v4l2/v4l2_queue.h b/media/gpu/v4l2/v4l2_queue.h
+index c45735a58f074..3e8a7df978738 100644
+--- a/media/gpu/v4l2/v4l2_queue.h
++++ b/media/gpu/v4l2/v4l2_queue.h
+@@ -561,6 +561,7 @@ class MEDIA_GPU_EXPORT V4L2Queue
    absl::optional<struct v4l2_format> current_format_;
  
    std::vector<std::unique_ptr<V4L2Buffer>> buffers_;
@@ -300,5 +307,5 @@ index 86ef80fd09579..516d0a63b5689 100644
    // Buffers that are available for client to get and submit.
    // Buffers in this list are not referenced by anyone else than ourselves.
 -- 
-2.17.1
+2.34.1
 

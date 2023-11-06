@@ -1,46 +1,45 @@
-From 59bf28174104b591088a08e2ed61644cc93101fd Mon Sep 17 00:00:00 2001
+From 27df324953c16b75a384b7a0ebec4e2b4cf58295 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Thu, 22 Sep 2022 11:10:46 +0800
-Subject: [PATCH] V4L2VDA: Use dlopen to dynamically use g2d api
+Date: Thu, 2 Nov 2023 17:41:28 +0900
+Subject: [PATCH 18/19] V4L2VDA: Use dlopen to dynamically use g2d api
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- media/gpu/v4l2/BUILD.gn       |   1 -
- media/gpu/v4l2/v4l2_device.cc | 205 ++++++++++++++++++++++++++++++++--
- 2 files changed, 194 insertions(+), 12 deletions(-)
+ media/gpu/v4l2/BUILD.gn      |   1 -
+ media/gpu/v4l2/v4l2_queue.cc | 183 ++++++++++++++++++++++++++++++++++-
+ 2 files changed, 181 insertions(+), 3 deletions(-)
 
 diff --git a/media/gpu/v4l2/BUILD.gn b/media/gpu/v4l2/BUILD.gn
-index 273f6066de175..ebd0a4ad64646 100644
+index 0e4e85232b9a2..50b3beecc090e 100644
 --- a/media/gpu/v4l2/BUILD.gn
 +++ b/media/gpu/v4l2/BUILD.gn
-@@ -86,7 +86,6 @@ source_set("v4l2") {
+@@ -96,7 +96,6 @@ source_set("v4l2") {
      "EGL",
      "GLESv2",
    ]
 -  libs += [ "g2d" ]
  
-   if (use_v4l2_codec_aml) {
-     sources += [
-diff --git a/media/gpu/v4l2/v4l2_device.cc b/media/gpu/v4l2/v4l2_device.cc
-index 42cd8386f41cb..af71f54d141aa 100644
---- a/media/gpu/v4l2/v4l2_device.cc
-+++ b/media/gpu/v4l2/v4l2_device.cc
-@@ -40,10 +40,12 @@
- #include "media/gpu/v4l2/aml_v4l2_device.h"
- #endif
+   configs += [ "//third_party/libyuv:libyuv_config" ]
+ 
+diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
+index fa7c7daaa1e46..6ed9ca4309798 100644
+--- a/media/gpu/v4l2/v4l2_queue.cc
++++ b/media/gpu/v4l2/v4l2_queue.cc
+@@ -18,10 +18,11 @@
+ #include "media/gpu/chromeos/platform_video_frame_utils.h"
+ #include "media/gpu/macros.h"
  
 -#include "g2d.h"
 -#include "g2dExt.h"
 +// #include "g2d.h"
 +// #include "g2dExt.h"
-+
  #include <linux/dma-buf.h>
  #include <time.h>
 +#include <dlfcn.h>
  
  namespace media {
  
-@@ -142,6 +144,158 @@ void V4L2ProcessingTrace(const struct v4l2_buffer* v4l2_buffer, bool start) {
+@@ -153,6 +154,159 @@ std::vector<base::ScopedFD> GetDmabufsForV4L2Buffer(
  
  }  // namespace
  
@@ -186,6 +185,7 @@ index 42cd8386f41cb..af71f54d141aa 100644
 +typedef int (*g2d_api_buf_export_fd)(struct g2d_buf *);
 +typedef int (*g2d_api_blitEx)(void *handle, struct g2d_surfaceEx *srcEx, struct g2d_surfaceEx *dstEx);
 +
++#define G2D_LIB_NAME "/usr/lib/libg2d.so.2"
 +#define G2D_API_SYM(name) g2d_api_##name g2d_##name = nullptr
 +G2D_API_SYM(open);
 +G2D_API_SYM(close);
@@ -199,86 +199,16 @@ index 42cd8386f41cb..af71f54d141aa 100644
  V4L2ExtCtrl::V4L2ExtCtrl(uint32_t id) {
    memset(&ctrl, 0, sizeof(ctrl));
    ctrl.id = id;
-@@ -261,7 +415,7 @@ V4L2Buffer::~V4L2Buffer() {
-       }
-     }
-   }
--  if(g2dbuf_p0 && g2dbuf_p1) {
-+  if(g2d_free && g2dbuf_p0 && g2dbuf_p1) {
- 	  g2d_free(g2dbuf_p0);
- 	  g2d_free(g2dbuf_p1);
-   }
-@@ -399,14 +553,18 @@ scoped_refptr<VideoFrame> V4L2Buffer::CreateVideoFrame() {
-     else
-       phys_1 = query1.phys;
+@@ -1168,6 +1322,31 @@ V4L2Queue::V4L2Queue(const IoctlAsCallback& ioctl_cb,
+       << "This queue does " << (supports_requests_ ? "" : "not")
+       << " support requests.";
  
--    g2dbuf_p0 = g2d_alloc(format_.fmt.pix_mp.width * format_.fmt.pix_mp.height, 0);
--    g2dbuf_p1 = g2d_alloc(format_.fmt.pix_mp.width * format_.fmt.pix_mp.height / 2, 0);
-+    if (g2d_alloc) {
-+      g2dbuf_p0 = g2d_alloc(format_.fmt.pix_mp.width * format_.fmt.pix_mp.height, 0);
-+      g2dbuf_p1 = g2d_alloc(format_.fmt.pix_mp.width * format_.fmt.pix_mp.height / 2, 0);
-+    }
-     if((!g2dbuf_p0) || (!g2dbuf_p1)){
-       DLOG(ERROR)<<"g2d buf alloc failed";
-       return nullptr;
-     }
- 
--    int tmpfd = g2d_buf_export_fd(g2dbuf_p0);
-+    int tmpfd = -1;
-+    if (g2d_buf_export_fd)
-+      tmpfd = g2d_buf_export_fd(g2dbuf_p0);
-     tmpfd = dup(tmpfd);
-     if(tmpfd > 0)
-       g2dbufs_fds.push_back(base::ScopedFD(tmpfd));
-@@ -416,7 +574,8 @@ scoped_refptr<VideoFrame> V4L2Buffer::CreateVideoFrame() {
-       return nullptr;
-     }
- 
--    tmpfd = g2d_buf_export_fd(g2dbuf_p1);
-+    if (g2d_buf_export_fd)
-+      tmpfd = g2d_buf_export_fd(g2dbuf_p1);
-     tmpfd = dup(tmpfd);
-     if(tmpfd>0)
-       g2dbufs_fds.push_back(base::ScopedFD(tmpfd));
-@@ -1152,7 +1311,7 @@ V4L2Queue::V4L2Queue(scoped_refptr<V4L2Device> dev,
- #endif
- 
-   g2d_handle = NULL;
--  if(g2d_open(&g2d_handle))
-+  if(g2d_open && g2d_open(&g2d_handle))
-     VLOGF(1) << "g2d_open fail";
- }
- 
-@@ -1172,7 +1331,7 @@ V4L2Queue::~V4L2Queue() {
-     DeallocateBuffers();
-   }
- 
--  if(g2d_handle)
-+  if(g2d_close && g2d_handle)
- 	  g2d_close(g2d_handle);
- 
-   std::move(destroy_cb_).Run();
-@@ -1573,7 +1732,8 @@ std::pair<bool, V4L2ReadableBufferRef> V4L2Queue::DequeueBuffer() {
- 	  src->global_alpha = 0xff;
- 	  src->blendfunc = G2D_ONE;
- 
--	  g2d_blitEx(g2d_handle, &srcEx, &dstEx);
-+    if (g2d_blitEx)
-+	    g2d_blitEx(g2d_handle, &srcEx, &dstEx);
-   }
- 
-   return std::make_pair(true, V4L2BufferRefFactory::CreateReadableRef(
-@@ -1747,8 +1907,31 @@ scoped_refptr<V4L2Device> V4L2Device::Create() {
- #endif
- 
-   device = new GenericV4L2Device();
--  if (device->Initialize())
-+  if (device->Initialize()) {
-+    dl_handle = dlopen("/usr/lib/libg2d.so",
++  if (dl_handle == NULL) {
++    dl_handle = dlopen(G2D_LIB_NAME,
 +                        RTLD_NOW | RTLD_GLOBAL | RTLD_NODELETE | RTLD_LAZY);
 +    if (!dl_handle) {
-+      VLOGF(1) << "Has no libg2d.so";
-+      return device;
++      VLOGF(1) << "Failed to dlopen " << G2D_LIB_NAME;
++      return;
 +    }
 +
 +#define G2D_API_DLSYM(lib, name)                                               \
@@ -295,12 +225,12 @@ index 42cd8386f41cb..af71f54d141aa 100644
 +    G2D_API_DLSYM(dl_handle, buf_export_fd);
 +    G2D_API_DLSYM(dl_handle, blitEx);
 +
-     return device;
++    dlclose(dl_handle);
 +  }
 +
- 
-   VLOGF(1) << "Failed to create a V4L2Device";
-   return nullptr;
+   g2d_handle = NULL;
+   if(g2d_open && g2d_open(&g2d_handle))
+     VLOGF(1) << "g2d_open fail";
 -- 
-2.17.1
+2.34.1
 
