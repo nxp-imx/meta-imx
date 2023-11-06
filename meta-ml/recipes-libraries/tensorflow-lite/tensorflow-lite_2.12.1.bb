@@ -106,7 +106,7 @@ RDEPENDS:${PN}   = " \
     ${RDEPENDS_OPENVX} \
 "
 RDEPENDS_OPENVX                    = ""
-RDEPENDS_OPENVX:mx8-nxp-bsp:imxgpu = "libnn-imx nn-imx"
+RDEPENDS_OPENVX:mx8-nxp-bsp:imxgpu = ""
 RDEPENDS_OPENVX:mx8mm-nxp-bsp      = ""
 # The tensorflow-lite implementation for 8ULP uses CPU, and so doesn't
 # support OpenVX

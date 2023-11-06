@@ -5,7 +5,7 @@ the backend binding for runtime frameworks such as Android NN, Tensorflow-Lite, 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d72cd187d764d96d91db827cb65b48a7"
 
-DEPENDS = "imx-gpu-viv nn-imx"
+DEPENDS = "imx-gpu-viv"
 
 SRC_URI = "${TIM_VX_SRC};branch=${SRCBRANCH}"
 TIM_VX_SRC ?= "git://github.com/nxp-imx/tim-vx-imx.git;protocol=https"
@@ -20,8 +20,7 @@ EXTRA_OECMAKE =  " \
     -DCONFIG=YOCTO \
     -DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR} \
     -DTIM_VX_ENABLE_TEST=off \
-    -DTIM_VX_USE_EXTERNAL_OVXLIB=on \
-    -DOVXLIB_INC=${PKG_CONFIG_SYSROOT_DIR}/usr/include/OVXLIB \
+    -DTIM_VX_USE_EXTERNAL_OVXLIB=off \
 "
 
 # Output library is unversioned
