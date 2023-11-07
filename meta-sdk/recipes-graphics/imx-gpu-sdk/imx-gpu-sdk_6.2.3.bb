@@ -30,6 +30,8 @@ DEPENDS_2D:imxgpu2d = " \
     virtual/libg2d \
     virtual/libopenvg \
 "
+DEPENDS_2D:mx95-nxp-bsp = " \
+"
 DEPENDS_3D = ""
 DEPENDS_3D:imxgpu3d = " \
     virtual/libgles2 \
@@ -56,7 +58,7 @@ DEPENDS_DRM:mx8mm-nxp-bsp = " \
 SRC_URI = "${GPU_SDK_SRC};branch=${GPU_SDK_SRC_BRANCH}"
 GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
 GPU_SDK_SRC_BRANCH ?= "master"
-SRCREV = "5bcee4777b403aa5c374df67e7a5c0c74f81e981"
+SRCREV = "93fbf4b62842681bbb6aa293b2b7271e10f89620"
 
 S = "${WORKDIR}/git"
 
@@ -67,13 +69,15 @@ WINDOW_SYSTEM = \
         bb.utils.contains('DISTRO_FEATURES',     'x11',         'X11', \
                                                                  'FB', d), d)}"
 
-FEATURES = "ConsoleHost,EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,Lib_pugixml,OpenVG,Test_RequireUserInputToExit,WindowHost"
+FEATURES = "ConsoleHost,EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,Lib_pugixml,Test_RequireUserInputToExit,WindowHost"
 FEATURES:append = "${FEATURES_GPU}${FEATURES_G2D}${FEATURES_3D}${FEATURES_SOC}"
 
-FEATURES_GPU               = ",HW_GPU_VIVANTE"
+FEATURES_GPU               = ",HW_GPU_VIVANTE,OpenVG"
+FEATURES_GPU:mx95-nxp-bsp  = ""
 
 FEATURES_G2D               = ""
 FEATURES_G2D:imxgpu2d      = ",G2D"
+FEATURES_G2D:mx95-nxp-bsp  = ""
 
 FEATURES_3D                = ""
 FEATURES_3D:imxgpu3d       = ",OpenGLES2"
@@ -83,12 +87,14 @@ FEATURES_SOC:mx6q-nxp-bsp  = ",OpenGLES3"
 FEATURES_SOC:mx6dl-nxp-bsp = ",OpenGLES3"
 FEATURES_SOC:mx8-nxp-bsp   = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.2"
 FEATURES_SOC:mx8mm-nxp-bsp = ",OpenCV4"
+FEATURES_SOC:mx95-nxp-bsp  = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2"
 
 EXTENSIONS               = "*"
 EXTENSIONS:mx6q-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 EXTENSIONS:mx6dl-nxp-bsp = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 EXTENSIONS:mx8m-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_color_buffer_float"
 EXTENSIONS:mx8mm-nxp-bsp = "*"
+EXTENSIONS:mx95-nxp-bsp  = "OpenGLES3:GL_EXT_color_buffer_float,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
