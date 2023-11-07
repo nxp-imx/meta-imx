@@ -652,7 +652,7 @@ Release Location:            Mirror
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     6.2.1
+Version:                     6.2.3
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
@@ -847,24 +847,6 @@ Type of Content:             binary
 Description and comments:    Library to retrieve i.MX GPU performance data
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
-
---------------------------------------------
-
-Package:                     nn-imx.git
-Version:                     1.3.0
-Outgoing License:            MIT 
-License File:                LICENSE
-Package Category:            Graphics
-Type of Content:             source
-Description and comments:    i.MX Neural Networks Accelerator Plugin
-Release Location:            https://github.com/nxp-imx/nn-imx -b lf-6.1.55-2.2.0
-Origin:                      NXP (MIT)
-                             Vivante Corporation (MIT)
-                             Boost Software (Boost) - https://www.boost.org/
-                             Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
-                             OpenCV (BSD-3-clause) - https://github.com/opencv/opencv/
-                             JSON-CPP (public domain) - https://github.com/open-source-parsers/jsoncpp/
-                             libjpeg (IJG) - http://www.ijg.org/
 
 --------------------------------------------
 
@@ -1102,8 +1084,8 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-dsp-2.1.6.bin
-Version:                     2.1.6
+Package:                     imx-dsp-2.1.7.bin
+Version:                     2.1.7
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -1116,8 +1098,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dsp-codec-ext-2.1.6.bin
-Version:                     2.1.6
+Package:                     imx-dsp-codec-ext-2.1.7.bin
+Version:                     2.1.7
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
