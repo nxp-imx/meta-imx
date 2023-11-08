@@ -14,8 +14,8 @@ inherit packagegroup
 RDEPENDS:${PN}        = ""
 RDEPENDS:${PN}:imxgpu = " \
     ${DRM_TOOLS} \
-    ${VULKAN_TOOLS} \
     ${OPENCL_TOOLS} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "vulkan", "${VULKAN_TOOLS}", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "${WAYLAND_TOOLS}", "", d)} \
 "
 
@@ -26,9 +26,14 @@ OPENCL_TOOLS               = "clblast"
 OPENCL_TOOLS:mx7-nxp-bsp   = ""
 OPENCL_TOOLS:mx8mm-nxp-bsp = ""
 
-VULKAN_TOOLS                      = ""
-VULKAN_TOOLS:mx8-nxp-bsp:imxgpu3d = "vulkan-validation-layers vkmark vulkan-tools gfxreconstruct"
-VULKAN_TOOLS:mx8mm-nxp-bsp        = ""
+VULKAN_TOOLS = ""
+VULKAN_TOOLS:imxgpu3d = " \
+    gfxreconstruct \
+    vkmark \
+    vulkan-tools \
+    vulkan-validation-layers \
+"
+VULKAN_TOOLS:mx8mm-nxp-bsp = ""
 
 WAYLAND_TOOLS = " \
     ${GLMARK2} \
