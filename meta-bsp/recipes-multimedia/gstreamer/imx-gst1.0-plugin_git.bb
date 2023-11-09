@@ -38,7 +38,7 @@ SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
            file://0011-meson-Undef-_TIME_BITS-along-with-_FILE_OFFSET_BITS.patch"
 IMXGST_SRC ?= "git://github.com/nxp-imx/imx-gst1.0-plugin.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "849b01439c1990b671e38dcafe164627a8d3d3ac"
+SRCREV = "c760209898da74b6ef131d445eac0d816e85a21a"
 
 S = "${WORKDIR}/git"
 
