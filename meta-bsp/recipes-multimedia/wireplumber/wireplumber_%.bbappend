@@ -1,6 +1,8 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI:append = " file://51-bluez-imx-config.lua"
+SRC_URI:append = " file://51-bluez-imx-config.lua \
+                   file://0001-wpctl-fix-set-default-Segmentation-fault-on-32bit-pl.patch \
+                 "
 
 do_install:append() {
 
