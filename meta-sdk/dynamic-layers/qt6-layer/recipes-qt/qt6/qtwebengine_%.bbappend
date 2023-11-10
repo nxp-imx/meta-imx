@@ -1,3 +1,3 @@
-DISTRO_FEATURES:remove = "x11"
-
-DEPENDS += "libdrm"
+DEPENDS += " \
+    libdrm \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xdamage', '', d)}"
