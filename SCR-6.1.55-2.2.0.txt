@@ -81,7 +81,7 @@ Release Location:            https://github.com/nxp-imx/imx-system-manager -b lf
 
 Package:                     imx-sc-firmware-1.15.0.bin
 Version:                     1.15.0
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -270,7 +270,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-seco-5.9.2.bin
 Version:                     5.9.2
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
