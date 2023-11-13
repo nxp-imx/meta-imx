@@ -1,0 +1,40 @@
+From 2ed69dec466c95c253d4c6397e9fa8d915a3c749 Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Wed, 29 Nov 2023 11:00:59 +0900
+Subject: [PATCH] V4L2Buffer: Add support for imx95
+
+Imx95 allocate capture buffers using NV12 format, while
+amphion allocate capture buffers using NV12M format.
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ media/gpu/v4l2/v4l2_queue.cc | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
+index 6ed9ca4309798..2c53bbffe6fe5 100644
+--- a/media/gpu/v4l2/v4l2_queue.cc
++++ b/media/gpu/v4l2/v4l2_queue.cc
+@@ -546,7 +546,8 @@ scoped_refptr<VideoFrame> V4L2Buffer::CreateVideoFrame() {
+   }
+ 
+   std::vector<base::ScopedFD> g2dbufs_fds;
+-  if (V4L2_TYPE_IS_MULTIPLANAR(v4l2_buffer_.type)) {
++  if (V4L2_TYPE_IS_MULTIPLANAR(v4l2_buffer_.type) &&
++      format_.fmt.pix_mp.pixelformat == V4L2_PIX_FMT_NV12M_8L128) {
+     struct dma_buf_phys{
+       unsigned long phys;
+     };
+@@ -613,7 +614,8 @@ scoped_refptr<VideoFrame> V4L2Buffer::CreateVideoFrame() {
+     dmabuf_fds.emplace_back(duped_fd);
+   }
+ 
+-  if (V4L2_TYPE_IS_MULTIPLANAR(v4l2_buffer_.type)) {
++  if (V4L2_TYPE_IS_MULTIPLANAR(v4l2_buffer_.type) &&
++      format_.fmt.pix_mp.pixelformat == V4L2_PIX_FMT_NV12M_8L128) {
+     gfx::Size size(format_.fmt.pix_mp.width, format_.fmt.pix_mp.height);
+     return VideoFrame::WrapExternalDmabufs(
+         *layout, gfx::Rect(size), size, std::move(g2dbufs_fds), base::TimeDelta());
+-- 
+2.34.1
+
