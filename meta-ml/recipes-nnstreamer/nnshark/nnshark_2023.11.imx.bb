@@ -15,7 +15,7 @@ DEPENDS = "\
 NNSHARK_SRC ?= "gitsm://github.com/nxp-imx/nnshark.git;protocol=https"
 SRCBRANCH ?= "2023.11.imx"
 SRC_URI = "${NNSHARK_SRC};branch=${SRCBRANCH}"
-SRCREV = "${AUTOREV}"
+SRCREV = "a5096a6dd1e05c9f1aa4613d9ff3fa46ef205883"
 
 S = "${WORKDIR}/git"
 
