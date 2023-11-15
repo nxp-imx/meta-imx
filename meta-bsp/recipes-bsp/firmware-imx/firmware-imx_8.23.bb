@@ -57,6 +57,8 @@ do_install() {
     # Update i.MX8 vpu firmware path to align with kernel6.5+
     install -d ${D}${nonarch_base_libdir}/firmware/amphion/vpu/
     mv ${D}${nonarch_base_libdir}/firmware/vpu/vpu_fw_imx8* ${D}${nonarch_base_libdir}/firmware/amphion/vpu/
+    # Install i.MX 95 VPU firmware
+    install -m 0644 ${S}/firmware/vpu/wave633c_codec_fw.bin ${D}${nonarch_base_libdir}/firmware
 }
 
 #
@@ -149,7 +151,7 @@ PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-* ${PN}-easrc-* ${PN}-xcvr-* ${PN}-xu
 # is empty.
 # Therefore, we opt-out from producing -dev package here, since also for firmware
 # files it makes no sense.
-PACKAGES = "${PN} ${PN}-epdc ${PN}-hdmi ${PN}-vpu-imx8"
+PACKAGES = "${PN} ${PN}-epdc ${PN}-hdmi ${PN}-vpu-imx8 ${PN}-vpu-imx95"
 
 FILES:${PN}-epdc = "${nonarch_base_libdir}/firmware/imx/epdc/"
 FILES:${PN}-hdmi = " \
@@ -158,5 +160,6 @@ FILES:${PN}-hdmi = " \
     ${nonarch_base_libdir}/firmware/dpfw.bin \
 "
 FILES:${PN}-vpu-imx8 = "${nonarch_base_libdir}/firmware/amphion/vpu/*"
+FILES:${PN}-vpu-imx95 = "${nonarch_base_libdir}/firmware/wave633c_codec_fw.bin"
 
 COMPATIBLE_MACHINE = "(imx-generic-bsp)"
