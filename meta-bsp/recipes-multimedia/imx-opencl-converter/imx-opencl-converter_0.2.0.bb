@@ -14,5 +14,5 @@ inherit fsl-eula-unpack autotools pkgconfig meson
 FILES:${PN} += "${datadir}/"
 
 COMPATIBLE_MACHINE               = "(^$)"
-COMPATIBLE_MACHINE:imxgpu        = "(mx8-nxp-bsp)"
+COMPATIBLE_MACHINE:imxgpu        = "(mx8-nxp-bsp|mx95-nxp-bsp)"
 COMPATIBLE_MACHINE:mx8mm-nxp-bsp = "(^$)"
