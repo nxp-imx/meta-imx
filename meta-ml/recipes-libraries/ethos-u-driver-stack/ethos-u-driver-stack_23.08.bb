@@ -11,7 +11,7 @@ DEPENDS = "flatbuffers python3-pybind11 python3-pybind11-native"
 SRC_URI = "${ETHOS_U_SRC};branch=${SRCBRANCH}"
 ETHOS_U_SRC ?= "git://github.com/nxp-imx/ethos-u-driver-stack-imx.git;protocol=https"
 SRCBRANCH = "imx_23.08"
-SRCREV = "241d8d239b85f4584d6f780134689f657722fd03"
+SRCREV = "2acb7e2626fe3ff8764019e385829105a6e210bb"
 
 S = "${WORKDIR}/git"
 
