@@ -1389,7 +1389,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     nnshark.git
-Version:                     2021.10.imx
+Version:                     2023.11.imx
 Outgoing License:            LGPL-2.1 
 License File:                COPYING.LESSER
 Package Category:            MachineLearning
