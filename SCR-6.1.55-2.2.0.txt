@@ -66,13 +66,15 @@ Type of Content:             source
 Description and comments:    i.MX BootROM Optional Execution Image
 Release Location:            https://github.com/nxp-imx/imx-oei -b lf-6.1.55-2.2.0
 Origin:                      NXP (GPL-2.0)
+                             Das U-Boot - Universal Bootloader (GPL-2.0) - http://www.denx.de/wiki/U-Boot/WebHome
+
 
 --------------------------------------------
 
 Package:                     imx-system-manager.git
 Version:                     1.0.0
-Outgoing License:            SCR: Outgoing License TBD SCR: License Addition TBD
-License File:                SCR: License File TBD
+Outgoing License:            BSD-3-Clause 
+License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX System Manager
