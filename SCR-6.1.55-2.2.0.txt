@@ -1273,6 +1273,16 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
                              Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
 
 --------------------------------------------
+
+Package:                     imx95-m7-demo-2.14.0.bin
+Version:                     2.14.0
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+License File:                COPYING
+Package Category:            M7_Processor
+Type of Content:             binary
+Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
+Release Location:            Mirror
+--------------------------------------------
 M33 Processor Packages
 --------------------------------------------
 
