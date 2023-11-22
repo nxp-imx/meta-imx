@@ -126,8 +126,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.0.bin
-Version:                     0.1.0
+Package:                     firmware-ele-imx-0.1.1.bin
+Version:                     0.1.1
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -453,6 +453,16 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
+Package:                     itest.git
+Version:                     
+Outgoing License:            BSD-3-Clause 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    Tools to test EdgeLock Enclave api bridge on the ele_libs layer
+Release Location:            https://github.com/nxp-imx/itest -b lf-6.1.55-2.2.0
+--------------------------------------------
+
 Package:                     keyctl_caam.git
 Version:                     
 Outgoing License:            BSD-3-Clause 
@@ -551,6 +561,16 @@ Origin:                      NXP (BSD-3-Clause)
                              pmdinfogen - Neil Horman (GPL-2.0) - Separate tool in DPDK 
 
 
+--------------------------------------------
+
+Package:                     dpdk-extras.git
+Version:                     git
+Outgoing License:            GPL-2.0 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    Kernel module for dpdk
+Release Location:            https://github.com/nxp-qoriq/dpdk-extras -b lf-6.1.55-2.2.0
 --------------------------------------------
 Graphics Packages
 --------------------------------------------
