@@ -1322,8 +1322,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx93-m33-demo-2.14.1.bin
-Version:                     2.14.1
+Package:                     imx93-m33-demo-2.14.2.bin
+Version:                     2.14.2
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1425,7 +1425,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     nnshark.git
-Version:                     2021.10.imx
+Version:                     2023.11.imx
 Outgoing License:            LGPL-2.1 
 License File:                COPYING.LESSER
 Package Category:            MachineLearning
