@@ -1,4 +1,5 @@
 # Copyright 2023 NXP
+
 SUMMARY = "NXP i.MX EdgeLock 2GO IoT Agent"
 DESCRIPTION = "NXP i.MX EdgeLock 2GO IoT Agent"
 SECTION = "base"
