@@ -9,6 +9,14 @@ IMX_SOC_REV:mx93-generic-bsp  ?= "A1"
 IMX_EXTRA_FIRMWARE:mx93-generic-bsp = "imx-boot-firmware-files firmware-ele-imx"
 
 # Add new SoC i.MX 95
+DEFAULTTUNE:mx95-nxp-bsp   ?= "armv8a-crc-crypto"
+
+MACHINEOVERRIDES_EXTENDER:mx95:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxdpu:imxgpu:imxgpu2d:imxgpu3d:mx9-generic-bsp:mx9-nxp-bsp:mx95-generic-bsp:mx95-nxp-bsp"
+MACHINEOVERRIDES_EXTENDER:mx95:use-mainline-bsp  = "imx-generic-bsp:imx-mainline-bsp:mx9-generic-bsp:mx9-mainline-bsp:mx95-generic-bsp:mx95-mainline-bsp"
+MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx95"
+MACHINE_SOCARCH_SUFFIX:mx95-nxp-bsp = "-mx95"
+IMX_EXTRA_FIRMWARE:mx95-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx imx-system-manager imx-oei"
+MACHINE_FIRMWARE:append:mx95-nxp-bsp  = " firmware-imx-vpu-imx95"
 SECO_FIRMWARE_NAME:mx95-generic-bsp ?= "mx95${IMX_SOC_REV_LOWER}-ahab-container.img"
 
 # Add new machine i.MX 8M Plus UltraLite
@@ -25,6 +33,16 @@ MACHINEOVERRIDES_EXTENDER:mx91p:use-mainline-bsp  = "imx-generic-bsp:imx-mainlin
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx91p"
 MACHINE_SOCARCH_SUFFIX:mx91p-nxp-bsp = "-mx91"
 IMX_EXTRA_FIRMWARE:mx91p-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx"
+
+# Extend imx-base.inc for mali
+PREFERRED_PROVIDER_virtual/egl:mx95-nxp-bsp        ?= "mali-imx"
+PREFERRED_PROVIDER_virtual/libgles1:mx95-nxp-bsp   ?= "mali-imx"
+PREFERRED_PROVIDER_virtual/libgles2:mx95-nxp-bsp   ?= "mali-imx"
+PREFERRED_PROVIDER_virtual/libgles3:mx95-nxp-bsp   ?= "mali-imx"
+PREFERRED_PROVIDER_opencl-clhpp:mx95-nxp-bsp       ?= "mali-imx"
+PREFERRED_PROVIDER_opencl-headers:mx95-nxp-bsp     ?= "mali-imx"
+PREFERRED_PROVIDER_opencl-icd-loader:mx95-nxp-bsp  ?= "mali-imx"
+PREFERRED_PROVIDER_virtual/opencl-icd:mx95-nxp-bsp ?= "mali-imx"
 
 PREFERRED_PROVIDER_virtual/libgl:imxgpu   ?= "mesa-gl"
 PREFERRED_PROVIDER_virtual/libgl:imxgpu3d  = "mesa-gl"
