@@ -6,6 +6,7 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0003-Disable-dri-for-imx-gpu.patch \
     file://0004-Fix-chromium-build-failure.patch \
     file://0005-Revert-ui-gbm_wrapper-Ensure-to-create-BOs-with-impo.patch \
+    file://0006-Fixed-chromium-crash-after-upgrading.patch \
 "
 SRC_URI:append:mx8-nxp-bsp = " \
     file://0101-V4L2VDA-Switch-to-use-VDA-instead-of-direct-VideoDec.patch \
