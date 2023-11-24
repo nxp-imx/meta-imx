@@ -1092,20 +1092,6 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-alsa-plugins.git
-Version:                     
-Outgoing License:            GPL-2.0 
-License File:                LICENSE
-Package Category:            Multimedia
-Type of Content:             source
-Description and comments:    Plugins for various audio libraries and sound servers
-Release Location:            https://github.com/nxp-imx/imx-alsa-plugins -b nxp/master
-Origin:                      NXP (GPL-2.0)
-                             Alsa Plugins (GPL-2.0+) - ftp://ftp.alsa-project.org/pub/plugins/
-                             GNU libtool (GPL-2.0+) http://www.gnu.org/software/libtool/
-
---------------------------------------------
-
 Package:                     imx-dsp-2.1.7.bin
 Version:                     2.1.7
 Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
@@ -1552,7 +1538,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.56
+Version:                     1.1.71
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
