@@ -5,7 +5,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/imx-test:"
 
 DEPENDS:append:mx8ulp-nxp-bsp = " imx-lib"
-DEPENDS:append:mx9-nxp-bsp = " imx-lib"
+DEPENDS:append:mx93-nxp-bsp = " imx-lib"
 
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH} \
            file://memtool_profile"
@@ -15,4 +15,5 @@ SRCBRANCH = "master"
 SRCREV = "735510f44dca8be789ce24292ea06b178d4021cb"
 
 PLATFORM:mx8ulp-nxp-bsp = "IMX8ULP"
-PLATFORM:mx9-nxp-bsp = "IMX8ULP"
+PLATFORM:mx93-nxp-bsp = "IMX8ULP"
+PLATFORM:mx95-nxp-bsp = "IMX8"
