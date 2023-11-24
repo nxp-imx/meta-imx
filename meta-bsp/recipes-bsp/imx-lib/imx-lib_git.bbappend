@@ -5,6 +5,6 @@ IMXLIB_SRC ?= "git://github.com/nxp-imx/imx-lib.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "8f124c3914d82019849fb697baeb730e4cb1b547"
 
-PLATFORM:mx9-nxp-bsp = "IMX8ULP"
+PLATFORM:mx93-nxp-bsp = "IMX8ULP"
 
-COMPATIBLE_MACHINE = "(mx6-nxp-bsp|mx7-nxp-bsp|mx8ulp-nxp-bsp|mx9-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx6-nxp-bsp|mx7-nxp-bsp|mx8ulp-nxp-bsp|mx93-nxp-bsp)"
