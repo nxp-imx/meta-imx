@@ -22,9 +22,17 @@ PACKAGECONFIG_IMPLEMENTATION:imxgpu2d:imxdpu   = "dpu"
 PACKAGECONFIG_IMPLEMENTATION:imxgpu2d          = "gpu-drm"
 PACKAGECONFIG_IMPLEMENTATION:imxgpu2d:imxfbdev = "gpu-fbdev"
 PACKAGECONFIG_IMPLEMENTATION:mx93-nxp-bsp      = "pxp"
+PACKAGECONFIG_IMPLEMENTATION:mx95-nxp-bsp      = "dpu95"
 
 PACKAGECONFIG[dpu] = " \
     BUILD_IMPLEMENTATION=dpu, \
+    , \
+    imx-dpu-g2d wayland-native wayland wayland-protocols, \
+    , \
+    , \
+    gpu-drm gpu-fbdev pxp"
+PACKAGECONFIG[dpu95] = " \
+    BUILD_IMPLEMENTATION=dpu95, \
     , \
     imx-dpu-g2d wayland-native wayland wayland-protocols, \
     , \
@@ -65,4 +73,4 @@ FILES:${PN} += "/opt"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
-COMPATIBLE_MACHINE = "(imxgpu2d|mx93-nxp-bsp)"
+COMPATIBLE_MACHINE = "(imxgpu2d|mx93-nxp-bsp|mx95-nxp-bsp)"
