@@ -12,6 +12,9 @@ inherit packagegroup
 RDEPENDS:${PN} = " \
     ${SOC_TOOLS_GPU} \
 "
+
+SOC_TOOLS_GPU:mx95-nxp-bsp = "imx-gpu-sdk"
+
 SOC_TOOLS_GPU = "${SOC_TOOLS_GPU_DRM}"
 SOC_TOOLS_GPU:imxgpu ??= " \
     ${SOC_TOOLS_GPU_APITRACE} \
