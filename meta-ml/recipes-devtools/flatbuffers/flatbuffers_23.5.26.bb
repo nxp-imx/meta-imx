@@ -10,9 +10,9 @@ RDEPENDS:${PN}-compiler = "${PN}"
 RDEPENDS:${PN}-${PYTHON_PN} = "${PN}"
 RDEPENDS:${PN}-dev += "${PN}-compiler"
 
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "8367664f15c3ea2ee58c67dacf9d630b49466de5"
+SRCREV = "0100f6a5779831fa7a651e4b67ef389a8752bd9b"
 
 SRC_URI = "git://github.com/google/flatbuffers.git;branch=master;protocol=https"
 
