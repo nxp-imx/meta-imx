@@ -3,9 +3,9 @@ require recipes-graphics/mali/mali-imx.inc
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2827219e81f28aba7c6a569f7c437fa7"
 
-SRC_URI[md5sum] = "250753b878d810bf0f2693d79761ba4a"
-SRC_URI[sha256sum] = "f255266546f39ca669f53037d3ac88e79d38f4093df6b23292f5f5027d43bfb8"
-IMX_SRCREV_ABBREV = "66a6632"
+SRC_URI[md5sum] = "cc702c45679b3617e8c2e7ccd4d83df0"
+SRC_URI[sha256sum] = "19794cb2fb3159822aa62d32cad4b1a29d408c378f7e64990343f1b0d1b2f4ed"
+IMX_SRCREV_ABBREV = "047f9c7"
 
 S = "${WORKDIR}/git"
 
