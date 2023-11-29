@@ -40,6 +40,10 @@ do_compile[depends] += " \
 "
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
+SC_FIRMWARE_NAME:mx95-nxp-bsp = "m33_image.bin"
+
+OEI_ENABLE = "${@bb.utils.contains('DEPENDS', 'imx-oei', 'YES', 'NO', d)}"
+OEI_NAME ?= "oei-${OEI_CORE}-${OEI_CONFIG}.bin"
 
 ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
 ATF_MACHINE_NAME:append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
@@ -63,6 +67,7 @@ BOOT_STAGING:mx8m-generic-bsp  = "${S}/iMX8M"
 BOOT_STAGING:mx8dx-generic-bsp = "${S}/iMX8QX"
 BOOT_STAGING:mx91-generic-bsp  = "${S}/iMX91"
 BOOT_STAGING:mx93-generic-bsp  = "${S}/iMX93"
+BOOT_STAGING:mx95-generic-bsp  = "${S}/iMX95"
 
 SOC_FAMILY                    = "INVALID"
 SOC_FAMILY:mx8-generic-bsp    = "mx8"
@@ -71,8 +76,10 @@ SOC_FAMILY:mx8x-generic-bsp   = "mx8x"
 SOC_FAMILY:mx8ulp-generic-bsp = "mx8ulp"
 SOC_FAMILY:mx91p-generic-bsp  = "mx93"
 SOC_FAMILY:mx93-generic-bsp   = "mx93"
+SOC_FAMILY:mx95-generic-bsp   = "mx95"
 
 REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
+REV_OPTION:append:mx95-nxp-bsp = " OEI=${OEI_ENABLE}"
 
 compile_mx8m() {
     bbnote 8MQ/8MM/8MN/8MP boot binary build
@@ -142,6 +149,14 @@ compile_mx93() {
     fi
 }
 
+compile_mx95() {
+    bbnote i.MX 95 boot binary build
+    compile_mx93
+
+    # Copy System-Manger firmware here
+    cp ${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME}               ${BOOT_STAGING}/m33_image.bin
+}
+
 do_compile() {
     # mkimage for i.MX8
     # Copy TEE binary to SoC target folder to mkimage
@@ -152,6 +167,11 @@ do_compile() {
             cp ${DEPLOY_DIR_IMAGE}/tee.bin ${BOOT_STAGING}/tee.bin-stmm
         fi
     fi
+    # Copy OEI firmware to SoC target folder to mkimage
+    if [ "${OEI_ENABLE}" = "YES" ]; then
+        cp ${DEPLOY_DIR_IMAGE}/${OEI_NAME}               ${BOOT_STAGING}
+    fi
+
     for target in ${IMXBOOT_TARGETS}; do
         compile_${SOC_FAMILY}
         case $target in
@@ -242,6 +262,12 @@ deploy_mx93() {
     fi
 }
 
+deploy_mx95() {
+    deploy_mx93
+
+    install -m 0644 ${BOOT_STAGING}/${SC_FIRMWARE_NAME}      ${DEPLOYDIR}/${BOOT_TOOLS}
+}
+
 do_deploy() {
     deploy_${SOC_FAMILY}
     # copy the sc fw, dcd and uboot to deploy path
@@ -250,6 +276,11 @@ do_deploy() {
     # copy tee.bin to deploy path
     if ${DEPLOY_OPTEE}; then
        install -m 0644 ${DEPLOY_DIR_IMAGE}/tee.bin ${DEPLOYDIR}/${BOOT_TOOLS}
+    fi
+
+    # copy oei to deploy path
+    if [ "${OEI_ENABLE}" = "YES" ]; then
+        install -m 0644 ${BOOT_STAGING}/${OEI_NAME}          ${DEPLOYDIR}/${BOOT_TOOLS}
     fi
 
     # copy makefile (soc.mak) for reference
