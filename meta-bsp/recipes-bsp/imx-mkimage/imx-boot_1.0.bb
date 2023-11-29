@@ -43,7 +43,7 @@ SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 SC_FIRMWARE_NAME:mx95-nxp-bsp = "m33_image.bin"
 
 OEI_ENABLE = "${@bb.utils.contains('DEPENDS', 'imx-oei', 'YES', 'NO', d)}"
-OEI_NAME ?= "oei-${OEI_CORE}-${OEI_CONFIG}.bin"
+OEI_NAME ?= "oei-${OEI_CORE}-*.bin"
 
 ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
 ATF_MACHINE_NAME:append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"

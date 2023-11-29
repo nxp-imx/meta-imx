@@ -25,7 +25,7 @@ UBOOT_CONFIG[fspi] = "${UBOOT_CONFIG_BASENAME}_evk_fspi_defconfig"
 # Set ATF platform name
 ATF_PLATFORM = "imx95"
 SYSTEM_MANAGER_CONFIG = "mx95evk"
-OEI_CONFIG = "ddr"
+OEI_CONFIGS = "ddr tcm"
 OEI_CORE   = "m33"
 OEI_SOC    = "mx95"
 OEI_BOARD  = "mx95lp5"

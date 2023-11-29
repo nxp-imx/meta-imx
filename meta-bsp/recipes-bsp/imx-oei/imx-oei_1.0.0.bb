@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
 
 inherit deploy
 
-OEI_CONFIG ?= "UNDEFINED"
+OEI_CONFIGS ?= "UNDEFINED"
 OEI_CORE   ?= "UNDEFINED"
 OEI_SOC    ?= "UNDEFINED"
 OEI_BOARD  ?= "UNDEFINED"
@@ -24,17 +24,21 @@ LDFLAGS[unexport] = "1"
 
 EXTRA_OEMAKE = "\
     board=${OEI_BOARD} \
-    oei=${OEI_CONFIG} \
     DEBUG=1 \
     OEI_CROSS_COMPILE=arm-none-eabi-"
 
 do_compile() {
-    oe_runmake all
+    for oei_config in ${OEI_CONFIGS}; do
+        oe_runmake clean oei=${oei_config}
+        oe_runmake all oei=${oei_config}
+    done
 }
 
 do_install() {
     install -d ${D}/firmware
-    install -m 0644 ${B}/build/${OEI_BOARD}/${OEI_CONFIG}/oei-*.bin ${D}/firmware
+    for oei_config in ${OEI_CONFIGS}; do
+       install -m 0644 ${B}/build/${OEI_BOARD}/${oei_config}/oei-*.bin ${D}/firmware
+    done
 }
 
 addtask deploy after do_install
