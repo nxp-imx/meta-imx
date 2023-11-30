@@ -1,5 +1,10 @@
 require imx-secure-enclave.inc
 
+inherit systemd
+
+SYSTEMD_AUTO_ENABLE = "disable"
+SYSTEMD_SERVICE:${PN} = "nvm_daemon.service"
+
 PLAT = "ele"
 
 FILES:${PN} += "${datadir}/se"
