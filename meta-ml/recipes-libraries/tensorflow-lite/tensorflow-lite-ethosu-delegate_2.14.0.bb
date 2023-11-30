@@ -15,6 +15,7 @@ SRCREV_FORMAT = "ethosu_tf"
 
 SRC_URI = "${TENSORFLOW_LITE_ETHOSU_DELEGATE_SRC};branch=${SRCBRANCH_ethosu};name=ethosu \
            ${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf;destsuffix=tfgit \
+           file://0001-Fix-build-for-non-existent-BuildTfLiteIntArray.patch \
 "
 
 S = "${WORKDIR}/git"
