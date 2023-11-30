@@ -21,7 +21,7 @@ S = "${WORKDIR}/git"
 EXTRA_CONF = "--enable-armv8 --bindir=/unit_tests/ --libdir=${libdir}"
 
 EXTRA_OEMAKE:mx8-nxp-bsp = "BUILD_ARCH=CortexA53"
-EXTRA_OEMAKE:mx93-nxp-bsp = "BUILD_ARCH=CortexA55"
+EXTRA_OEMAKE:mx9-nxp-bsp = "BUILD_ARCH=CortexA55"
 
 do_compile () {
     echo "====Enter into ${WORKDIR}/git===="
