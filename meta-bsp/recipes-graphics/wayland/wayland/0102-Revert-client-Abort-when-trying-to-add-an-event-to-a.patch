@@ -1,0 +1,128 @@
+From ebc08059a18a66f0296e530351be830e8f3e7e53 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Wed, 29 Nov 2023 17:05:39 +0800
+Subject: [PATCH 2/4] Revert "client: Abort when trying to add an event to a
+ destroyed queue"
+
+This reverts commit d72f9007c36f2f8ad2dc26178545e8a7f5b993a0.
+---
+ src/wayland-client.c |  5 ----
+ tests/queue-test.c   | 61 --------------------------------------------
+ 2 files changed, 66 deletions(-)
+
+diff --git a/src/wayland-client.c b/src/wayland-client.c
+index baebfa9..564e227 100644
+--- a/src/wayland-client.c
++++ b/src/wayland-client.c
+@@ -312,7 +312,6 @@ wl_event_queue_release(struct wl_event_queue *queue)
+ 			wl_log("  %s@%u still attached\n",
+ 			       proxy->object.interface->name,
+ 			       proxy->object.id);
+-			proxy->queue = NULL;
+ 			wl_list_remove(&proxy->queue_link);
+ 			wl_list_init(&proxy->queue_link);
+ 		}
+@@ -542,7 +541,6 @@ proxy_destroy(struct wl_proxy *proxy)
+ 
+ 	proxy->flags |= WL_PROXY_FLAG_DESTROYED;
+ 
+-	proxy->queue = NULL;
+ 	wl_list_remove(&proxy->queue_link);
+ 	wl_list_init(&proxy->queue_link);
+ 
+@@ -1567,9 +1565,6 @@ queue_event(struct wl_display *display, int len)
+ 	else
+ 		queue = proxy->queue;
+ 
+-	if (!queue)
+-		wl_abort("Tried to add event to destroyed queue\n");
+-
+ 	wl_list_insert(queue->event_list.prev, &closure->link);
+ 
+ 	return size;
+diff --git a/tests/queue-test.c b/tests/queue-test.c
+index 63abc19..f9254f7 100644
+--- a/tests/queue-test.c
++++ b/tests/queue-test.c
+@@ -34,7 +34,6 @@
+ #include <sys/types.h>
+ #include <sys/wait.h>
+ #include <assert.h>
+-#include <signal.h>
+ 
+ #include "wayland-client.h"
+ #include "wayland-server.h"
+@@ -385,43 +384,6 @@ client_test_queue_destroy_with_attached_proxies(void)
+ 	wl_display_disconnect(display);
+ }
+ 
+-static void
+-client_test_queue_proxy_event_to_destroyed_queue(void)
+-{
+-	struct wl_event_queue *queue;
+-	struct wl_display *display;
+-	struct wl_display *display_wrapper;
+-	struct wl_callback *callback;
+-
+-	display = wl_display_connect(NULL);
+-	assert(display);
+-
+-	/* Pretend we are in a separate thread where a thread-local queue is
+-	 * used. */
+-	queue = wl_display_create_queue(display);
+-	assert(queue);
+-
+-	/* Create a sync dispatching events on the thread-local queue. */
+-	display_wrapper = wl_proxy_create_wrapper(display);
+-	assert(display_wrapper);
+-	wl_proxy_set_queue((struct wl_proxy *) display_wrapper, queue);
+-	callback = wl_display_sync(display_wrapper);
+-	wl_proxy_wrapper_destroy(display_wrapper);
+-	assert(callback != NULL);
+-	wl_display_flush(display);
+-
+-	/* Destroy the queue before the attached object. */
+-	wl_event_queue_destroy(queue);
+-
+-	/* During this roundtrip we should receive the done event on 'callback',
+-	 * try to queue it to the destroyed queue, and abort. */
+-	wl_display_roundtrip(display);
+-
+-	wl_callback_destroy(callback);
+-
+-	wl_display_disconnect(display);
+-}
+-
+ static void
+ dummy_bind(struct wl_client *client,
+ 	   void *data, uint32_t version, uint32_t id)
+@@ -513,26 +475,3 @@ TEST(queue_destroy_with_attached_proxies)
+ 
+ 	display_destroy(d);
+ }
+-
+-TEST(queue_proxy_event_to_destroyed_queue)
+-{
+-	struct display *d = display_create();
+-	struct client_info *ci;
+-	char *client_log;
+-	size_t client_log_len;
+-
+-	test_set_timeout(2);
+-
+-	ci = client_create_noarg(d, client_test_queue_proxy_event_to_destroyed_queue);
+-	display_run(d);
+-
+-	/* Check that the final line in the log mentions the expected reason
+-	 * for the abort. */
+-	client_log = map_file(ci->log_fd, &client_log_len);
+-	assert(!strcmp(last_line_of(client_log),
+-		       "Tried to add event to destroyed queue\n"));
+-	munmap(client_log, client_log_len);
+-
+-	/* Check that the client aborted. */
+-	display_destroy_expect_signal(d, SIGABRT);
+-}
+-- 
+2.17.1
+

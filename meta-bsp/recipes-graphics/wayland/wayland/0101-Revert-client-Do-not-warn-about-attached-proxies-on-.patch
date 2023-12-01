@@ -1,0 +1,133 @@
+From 7a890bbf1d6eef0f1b52a701640afe2e495aaa8c Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Wed, 29 Nov 2023 17:04:51 +0800
+Subject: [PATCH 1/4] Revert "client: Do not warn about attached proxies on
+ default queue destruction."
+
+This reverts commit b01a85dfd5e8cda7170b7ba6fe66fc3800f93990.
+---
+ src/wayland-client.c | 14 ++++------
+ tests/queue-test.c   | 63 +-------------------------------------------
+ 2 files changed, 6 insertions(+), 71 deletions(-)
+
+diff --git a/src/wayland-client.c b/src/wayland-client.c
+index 105f9be..baebfa9 100644
+--- a/src/wayland-client.c
++++ b/src/wayland-client.c
+@@ -304,18 +304,14 @@ wl_event_queue_release(struct wl_event_queue *queue)
+ 	if (!wl_list_empty(&queue->proxy_list)) {
+ 		struct wl_proxy *proxy, *tmp;
+ 
+-		if (queue != &queue->display->default_queue) {
+-			wl_log("warning: queue %p destroyed while proxies "
+-			       "still attached:\n", queue);
+-		}
++		wl_log("warning: queue %p destroyed while proxies still "
++		       "attached:\n", queue);
+ 
+ 		wl_list_for_each_safe(proxy, tmp, &queue->proxy_list,
+ 				      queue_link) {
+-			if (queue != &queue->display->default_queue) {
+-				wl_log("  %s@%u still attached\n",
+-				       proxy->object.interface->name,
+-				       proxy->object.id);
+-			}
++			wl_log("  %s@%u still attached\n",
++			       proxy->object.interface->name,
++			       proxy->object.id);
+ 			proxy->queue = NULL;
+ 			wl_list_remove(&proxy->queue_link);
+ 			wl_list_init(&proxy->queue_link);
+diff --git a/tests/queue-test.c b/tests/queue-test.c
+index 4129310..63abc19 100644
+--- a/tests/queue-test.c
++++ b/tests/queue-test.c
+@@ -308,22 +308,12 @@ client_test_queue_set_queue_race(void)
+ }
+ 
+ static char *
+-maybe_map_file(int fd, size_t *len)
++map_file(int fd, size_t *len)
+ {
+ 	char *data;
+ 
+ 	*len = lseek(fd, 0, SEEK_END);
+ 	data = mmap(0, *len, PROT_READ, MAP_PRIVATE, fd, 0);
+-
+-	return data;
+-}
+-
+-static char *
+-map_file(int fd, size_t *len)
+-{
+-	char *data;
+-
+-	data = maybe_map_file(fd, len);
+ 	assert(data != MAP_FAILED && "Failed to mmap file");
+ 
+ 	return data;
+@@ -432,45 +422,6 @@ client_test_queue_proxy_event_to_destroyed_queue(void)
+ 	wl_display_disconnect(display);
+ }
+ 
+-static void
+-client_test_queue_destroy_default_with_attached_proxies(void)
+-{
+-	struct wl_display *display;
+-	struct wl_callback *callback;
+-	char *log;
+-	size_t log_len;
+-	char callback_name[24];
+-	int ret;
+-
+-	display = wl_display_connect(NULL);
+-	assert(display);
+-
+-	/* Create a sync dispatching events on the default queue. */
+-	callback = wl_display_sync(display);
+-	assert(callback != NULL);
+-
+-	/* Destroy the default queue (by disconnecting) before the attached
+-	 * object. */
+-	wl_display_disconnect(display);
+-
+-	/* Check that the log does not contain any warning about the attached
+-	 * wl_callback proxy. */
+-	log = maybe_map_file(client_log_fd, &log_len);
+-	ret = snprintf(callback_name, sizeof(callback_name), "wl_callback@%u",
+-		       wl_proxy_get_id((struct wl_proxy *) callback));
+-	assert(ret > 0 && ret < (int)sizeof(callback_name) &&
+-	       "callback name creation failed (possibly truncated)");
+-	assert(log == MAP_FAILED || strstr(log, callback_name) == NULL);
+-	if (log != MAP_FAILED)
+-		munmap(log, log_len);
+-
+-	/* HACK: Directly free the memory of the wl_callback proxy to appease
+-	 * ASan. We would normally use wl_callback_destroy(), but since we have
+-	 * destroyed the associated wl_display, using this function would lead
+-	 * to memory errors. */
+-	free(callback);
+-}
+-
+ static void
+ dummy_bind(struct wl_client *client,
+ 	   void *data, uint32_t version, uint32_t id)
+@@ -585,15 +536,3 @@ TEST(queue_proxy_event_to_destroyed_queue)
+ 	/* Check that the client aborted. */
+ 	display_destroy_expect_signal(d, SIGABRT);
+ }
+-
+-TEST(queue_destroy_default_with_attached_proxies)
+-{
+-	struct display *d = display_create();
+-
+-	test_set_timeout(2);
+-
+-	client_create_noarg(d, client_test_queue_destroy_default_with_attached_proxies);
+-	display_run(d);
+-
+-	display_destroy(d);
+-}
+-- 
+2.17.1
+
