@@ -19,10 +19,10 @@ inherit pkgconfig
 PACKAGECONFIG ??= "${PACKAGECONFIG_IMPLEMENTATION}"
 PACKAGECONFIG_IMPLEMENTATION                   = ""
 PACKAGECONFIG_IMPLEMENTATION:imxgpu2d:imxdpu   = "dpu"
+PACKAGECONFIG_IMPLEMENTATION:mx95-nxp-bsp      = "dpu95"
 PACKAGECONFIG_IMPLEMENTATION:imxgpu2d          = "gpu-drm"
 PACKAGECONFIG_IMPLEMENTATION:imxgpu2d:imxfbdev = "gpu-fbdev"
 PACKAGECONFIG_IMPLEMENTATION:mx93-nxp-bsp      = "pxp"
-PACKAGECONFIG_IMPLEMENTATION:mx95-nxp-bsp      = "dpu95"
 
 PACKAGECONFIG[dpu] = " \
     BUILD_IMPLEMENTATION=dpu, \
@@ -30,35 +30,35 @@ PACKAGECONFIG[dpu] = " \
     imx-dpu-g2d wayland-native wayland wayland-protocols, \
     , \
     , \
-    gpu-drm gpu-fbdev pxp"
+    dpu95 gpu-drm gpu-fbdev pxp"
 PACKAGECONFIG[dpu95] = " \
     BUILD_IMPLEMENTATION=dpu95, \
     , \
     imx-dpu-g2d wayland-native wayland wayland-protocols, \
     , \
     , \
-    gpu-drm gpu-fbdev pxp"
+    dpu gpu-drm gpu-fbdev pxp"
 PACKAGECONFIG[gpu-drm] = " \
     BUILD_IMPLEMENTATION=gpu-drm, \
     , \
     imx-gpu-g2d wayland-native wayland wayland-protocols, \
     , \
     , \
-    dpu gpu-fbdev pxp"
+    dpu dpu95 gpu-fbdev pxp"
 PACKAGECONFIG[gpu-fbdev] = " \
     BUILD_IMPLEMENTATION=gpu-fbdev, \
     , \
     imx-gpu-g2d, \
     , \
     , \
-    dpu gpu-drm pxp"
+    dpu dpu95 gpu-drm pxp"
 PACKAGECONFIG[pxp] = " \
     BUILD_IMPLEMENTATION=pxp, \
     , \
     imx-pxp-g2d wayland-native wayland wayland-protocols, \
     , \
     , \
-    dpu gpu-drm gpu-fbdev"
+    dpu dpu95 gpu-drm gpu-fbdev"
 
 EXTRA_OEMAKE += " \
     SDKTARGETSYSROOT=${STAGING_DIR_HOST} \
