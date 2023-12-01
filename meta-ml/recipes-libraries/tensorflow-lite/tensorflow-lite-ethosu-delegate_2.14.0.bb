@@ -9,13 +9,12 @@ require tensorflow-lite-${PV}.inc
 
 TENSORFLOW_LITE_ETHOSU_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-ethosu-delegate-imx.git;protocol=https" 
 SRCBRANCH_ethosu = "master"
-SRCREV_ethosu = "963cc3acde3936c669dce3e3559b479a8f0f42c1" 
+SRCREV_ethosu = "582975be4ce875a289c52aa349f241fbe426b3e7"
 
 SRCREV_FORMAT = "ethosu_tf"
 
 SRC_URI = "${TENSORFLOW_LITE_ETHOSU_DELEGATE_SRC};branch=${SRCBRANCH_ethosu};name=ethosu \
            ${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf;destsuffix=tfgit \
-           file://0001-Fix-build-for-non-existent-BuildTfLiteIntArray.patch \
 "
 
 S = "${WORKDIR}/git"
