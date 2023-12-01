@@ -1,4 +1,4 @@
-require recipes-graphics/mali/mali-imx.inc
+require mali-imx.inc
 
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2827219e81f28aba7c6a569f7c437fa7"
