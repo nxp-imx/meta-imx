@@ -478,6 +478,7 @@ Type of Content:             source
 Description and comments:    se05x openssl provider
 Release Location:            https://github.com/NXPPlugNTrust/se05x-openssl-provider -b lf-6.1.55-2.2.0
 Origin:                      NXP (Apache-2.0)
+                             OpenSSL 1.1 (OpenSSL) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
 
 --------------------------------------------
 
