@@ -1423,7 +1423,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     ethos-u-vela.git
-Version:                     3.9.0
+Version:                     3.10.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1480,7 +1480,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.12.1
+Version:                     2.14.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
