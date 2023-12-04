@@ -34,6 +34,10 @@ MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx91p"
 MACHINE_SOCARCH_SUFFIX:mx91p-nxp-bsp = "-mx91"
 IMX_EXTRA_FIRMWARE:mx91p-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx"
 
+# Add new variabe for ELE extra Firmware
+SECOEXT_FIRMWARE_NAME ?= "UNDEFINED"
+SECOEXT_FIRMWARE_NAME:mx8ulp-generic-bsp ?= "mx8ulp${IMX_SOC_REV_LOWER}ext-ahab-container.img"
+
 # Extend imx-base.inc for mali
 PREFERRED_PROVIDER_virtual/egl:mx95-nxp-bsp        ?= "mali-imx"
 PREFERRED_PROVIDER_virtual/libgles1:mx95-nxp-bsp   ?= "mali-imx"
