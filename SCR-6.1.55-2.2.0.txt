@@ -440,6 +440,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    Tools to test EdgeLock Enclave api bridge on the ele_libs layer
 Release Location:            https://github.com/nxp-imx/itest -b lf-6.1.55-2.2.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 
 Package:                     keyctl_caam.git
