@@ -484,14 +484,14 @@ Origin:                      NXP (Apache-2.0)
 
 --------------------------------------------
 
-Package:                     plug-and-trust-ecc.git
-Version:                     4.4.0
+Package:                     plug-and-trust.git
+Version:                     v04.04.00
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Plug & Trust ECC example for SE050
-Release Location:            https://github.com/NXP/plug-and-trust -b lf-6.1.55-2.2.0
+Release Location:            https://github.com/NXP/plug-and-trust
 Origin:                      NXP (Apache-2.0)
                              MbedTLS (Apache-2.0) - https://github.com/Mbed-TLS/mbedtls
                              OpenSSL 1.1 (OpenSSL) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
