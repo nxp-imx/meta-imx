@@ -66,6 +66,7 @@ ETHOS_U_PKGS:mx93-nxp-bsp = " \
 NEUTRON_PKGS = ""
 NEUTRON_PKGS:mx95-nxp-bsp = " \
     neutron \
+    tensorflow-lite-neutron-delegate \
 "
 
 RDEPENDS:${PN} = " \
