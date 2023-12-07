@@ -8,11 +8,11 @@ This layer applies to i.MX 8DXL parts only.
 
 To use the layer add the following line to $BUILDDIR/conf/bblayers.conf:
 
-BBLAYERS += "${BSPDIR}/sources/meta-imx/meta-v2x"
+BBLAYERS += "${BSPDIR}/sources/meta-imx/meta-imx-v2x"
 
 For enabling profiling and tracing capabilities add the following in local.conf:
 #
-BBMASK:remove = "meta-v2x/recipes-kernel/"
+BBMASK:remove = "meta-imx-v2x/recipes-kernel/"
 PACKAGECONFIG:pn-v2xsehsm:append = " lttng"
 PACKAGECONFIG:pn-vtest:append = " lttng"
 IMAGE_INSTALL:append = " lttng-tools"
@@ -33,10 +33,10 @@ branch: zeus
 revision: Reference to the release manifest file (.xml) in the imx-manifest.git
 
 URI: git://github.com/nxp-imx/meta-imx
-subdirectory: meta-bsp
+subdirectory: meta-imx-bsp
 branch: the same branch as this layer
 revision: the same revision as this layer
 
-subdirectory: meta-sdk
+subdirectory: meta-imx-sdk
 branch: the same branch as this layer
 revision: the same revision as this layer

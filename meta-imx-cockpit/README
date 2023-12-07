@@ -4,8 +4,8 @@ To add the Digital Cockpit to the Linux Yocto Project build, follow the commands
 
 $ MACHINE=imx8qmmek-cockpit-mek DISTRO=fsl-imx-xwayland .  ./imx-setup-release.sh -b build-cockpit
 
-- Hook in the meta-cockpit layer
-$ hook_in_layer meta-imx/meta-cockpit
+- Hook in the meta-imx-cockpit layer
+$ hook_in_layer meta-imx/meta-imx-cockpit
 
 
 Before building add the following line to the local.conf
