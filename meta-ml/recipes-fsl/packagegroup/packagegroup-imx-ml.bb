@@ -62,6 +62,11 @@ ETHOS_U_PKGS:mx93-nxp-bsp = " \
     eiq-examples \
 "
 
+# Neutron package
+NEUTRON_PKGS = ""
+NEUTRON_PKGS:mx95-nxp-bsp = " \
+    neutron \
+"
 
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \
@@ -69,4 +74,5 @@ RDEPENDS:${PN} = " \
     ${ML_NNSTREAMER_PKGS} \
     ${ML_GST_PROFILER} \
     ${ETHOS_U_PKGS} \
+    ${NEUTRON_PKGS} \
 "
