@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://Apache_2_0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 DEPENDS = ""
 
 SRC_URI = "git://github.com/NXP/plug-and-trust.git;protocol=https;branch=master"
-SRCREV = "5aae9189b07286f80847d1280de3be8462e5f001"
+SRCREV = "92d003642bc154c025cf7e9ab011cac08c1de54b"
 
 S = "${WORKDIR}/git"
 
