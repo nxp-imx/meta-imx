@@ -187,4 +187,4 @@ By default, wayland plugin is enabled.We can switch to kms plugin by following t
 Systemd
 -------
 Systemd support is enabled as default but it can be disabled by commenting out the systemd settings in
-meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc.
+meta-imx-sdk/conf/distro/include/fsl-imx-preferred-env.inc.

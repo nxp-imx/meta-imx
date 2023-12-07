@@ -1582,7 +1582,7 @@ PATCHES IN META_IMX
 
 Patches for:               systemd
 Source Location:           https://github.com/systemd/systemd-bootchart.git
-Patch Location:            meta-bsp/recipes-core/systemd/systemd
+Patch Location:            meta-imx-bsp/recipes-core/systemd/systemd
 Outgoing License:          GPL-2.0
 License File:              LICENSE.GPL2
 Package Category:          BSP
@@ -1593,7 +1593,7 @@ Origin of patches:         NXP (GPL-2.0)
 
 Patches for:               pulseaudio
 Source Location:           http://freedesktop.org/software/pulseaudio/releases/
-Patch Location:            meta-bsp/recipes-multimedia/pulaeaudio/pulaeaudio
+Patch Location:            meta-imx-bsp/recipes-multimedia/pulaeaudio/pulaeaudio
 Outgoing License:          LGPL-2.1
 License File:              LICENSE
 Package Category:          Multimedia
@@ -1604,7 +1604,7 @@ Origin of patches:         NXP (LGPL-2.1)
 
 Patches for:               vulkan
 Source Location:           git://github.com/vulkan
-Patch Location:            meta-sdk/recipes-graphics/vulkan/
+Patch Location:            meta-imx-sdk/recipes-graphics/vulkan/
 Outgoing License:          MIT
 License File:              LICENSE.md
 Package Category:          Graphics
