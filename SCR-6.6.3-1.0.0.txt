@@ -511,10 +511,6 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    Plug & Trust ECC example for SE050
 Release Location:            https://github.com/NXP/plug-and-trust -b lf-6.6.3-1.0.0
-Origin:                      NXP (Apache-2.0)
-                             MbedTLS (Apache-2.0) - https://github.com/Mbed-TLS/mbedtls
-                             OpenSSL 1.1 (OpenSSL) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
-
 --------------------------------------------
 
 Package:                     ecdsa-lib-imx-3.3.2.3.bin
