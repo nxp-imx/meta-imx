@@ -9,3 +9,6 @@ DEPENDS:append:mx95-nxp-bsp = " libdrm"
 PACKAGECONFIG:remove:mx95-nxp-bsp = "libcamera"
 PACKAGECONFIG:remove = "gstreamer"
 PACKAGECONFIG:class-target:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez-lc3', '', d)}"
+
+# FIXME: Needs to qualify on PACKAGECONFIG
+SYSTEMD_SERVICE:${PN}-pulse = "pipewire-pulse.service"
