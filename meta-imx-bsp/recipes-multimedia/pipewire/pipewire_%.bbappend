@@ -4,5 +4,8 @@ SRC_URI:append:imx-nxp-bsp = " file://0001-launch-allow-pipewire-pulse-can-be-st
 
 SYSTEMD_AUTO_ENABLE = "disable"
 
+DEPENDS:append:mx95-nxp-bsp = " libdrm"
+
+PACKAGECONFIG:remove:mx95-nxp-bsp = "libcamera"
 PACKAGECONFIG:remove = "gstreamer"
 PACKAGECONFIG:class-target:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez-lc3', '', d)}"
