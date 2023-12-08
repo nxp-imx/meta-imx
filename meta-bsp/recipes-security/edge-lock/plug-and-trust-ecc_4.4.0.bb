@@ -5,7 +5,7 @@ operation using NXP Plug & Trust middleware for EdgeLock SE050 secure \
 element family."
 SECTION = "apps"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://Apache_2_0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 DEPENDS = ""
 
 SRC_URI = "git://github.com/NXP/plug-and-trust.git;protocol=https;branch=master"
