@@ -18,7 +18,7 @@ DEPENDS = "gcc-arm-none-eabi-native"
 SRC_URI = "${IMX_SYSTEM_MANAGER_SRC};branch=${SRCBRANCH}"
 IMX_SYSTEM_MANAGER_SRC ?= "git://github.com/nxp-imx/imx-system-manager.git;protocol=https"
 SRCBRANCH = "dev"
-SRCREV = "78f35e5ac80e99b5aeb3a5173287f6dc0892a976"
+SRCREV = "b1d9458e373579a1a5a31f43e6ed305b98168e77"
 
 S = "${WORKDIR}/git"
 
