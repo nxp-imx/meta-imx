@@ -10,19 +10,25 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 RDEPENDS:${PN} = " \
+    ${SOC_TOOLS_DRM} \
     ${SOC_TOOLS_GPU} \
 "
 
-SOC_TOOLS_GPU:mx95-nxp-bsp = "imx-gpu-sdk"
+SOC_TOOLS_DRM ??= ""
+SOC_TOOLS_DRM:imxdrm ??= " \
+    libdrm-tests"
 
-SOC_TOOLS_GPU = "${SOC_TOOLS_GPU_DRM}"
+SOC_TOOLS_GPU ??= ""
 SOC_TOOLS_GPU:imxgpu ??= " \
-    ${SOC_TOOLS_GPU_APITRACE} \
-    ${SOC_TOOLS_GPU_DRM} \
-    gputop \
     imx-gpu-sdk \
-    imx-gpu-viv-tools"
-SOC_TOOLS_GPU_APITRACE          = ""
-SOC_TOOLS_GPU_APITRACE:imxgpu3d = "imx-gpu-apitrace"
-SOC_TOOLS_GPU_DRM               = ""
-SOC_TOOLS_GPU_DRM:imxdrm        = "libdrm-tests"
+    ${SOC_TOOLS_GPU_VIVANTE}"
+
+SOC_TOOLS_GPU_VIVANTE = " \
+    gputop \
+    imx-gpu-viv-tools \
+    ${SOC_TOOLS_GPU_APITRACE}"
+SOC_TOOLS_GPU_VIVANTE:mx95-nxp-bsp = ""
+
+SOC_TOOLS_GPU_APITRACE = ""
+SOC_TOOLS_GPU_APITRACE:imxgpu3d = " \
+    imx-gpu-apitrace"
