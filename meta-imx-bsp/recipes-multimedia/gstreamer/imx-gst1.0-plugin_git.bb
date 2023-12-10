@@ -26,7 +26,7 @@ DEPENDS_IMXGPU:imxgpu = "${DEPENDS_IMX_OPENCL_CONVERTER}"
 DEPENDS_IMX_OPENCL_CONVERTER               = ""
 DEPENDS_IMX_OPENCL_CONVERTER:mx8-nxp-bsp   = "imx-opencl-converter"
 DEPENDS_IMX_OPENCL_CONVERTER:mx8mm-nxp-bsp = ""
-#DEPENDS_IMX_OPENCL_CONVERTER:mx95-nxp-bsp   = "imx-opencl-converter"
+DEPENDS_IMX_OPENCL_CONVERTER:mx95-nxp-bsp   = "imx-opencl-converter"
 
 # For backwards compatibility
 RREPLACES:${PN}  = "gst1.0-fsl-plugin"
