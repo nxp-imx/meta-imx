@@ -589,7 +589,7 @@ Graphics Packages
 --------------------------------------------
 
 Package:                     isp-vvcam.git
-Version:                     4.2.2.24.0
+Version:                     4.2.2.24.1
 Outgoing License:            GPL-2.0 
 License File:                vvcam/LICENSE
 Package Category:            Graphics
@@ -600,8 +600,8 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.24.0.bin
-Version:                     4.2.2.24.0
+Package:                     isp-imx-4.2.2.24.1.bin
+Version:                     4.2.2.24.1
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -612,8 +612,8 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software
 
 --------------------------------------------
 
-Package:                     basler-camera-4.2.2.24.0.bin
-Version:                     4.2.2.24.0
+Package:                     basler-camera-4.2.2.24.1.bin
+Version:                     4.2.2.24.1
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -1469,14 +1469,14 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     neutron-1.0.0
+Package:                     neutron.git
 Version:                     1.0.0
 Outgoing License:            Proprietary 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
-Description and comments:    The firmware
-Release Location:            http://bitbucket.sw.nxp.com/scm/aitec/neutron-software-stack.git -b lf-6.6.3-1.0.0
+Description and comments:    The firmware library and converter for i.MX Neutron NPU
+Release Location:            https://github.com/nxp-imx/neutron -b lf-6.6.3-1.0.0
 --------------------------------------------
 
 Package:                     pytorch-release.git
@@ -1506,7 +1506,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-ethosu-delegate.git
-Version:                     2.12.1
+Version:                     2.14.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1520,7 +1520,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
-Version:                     2.12.1
+Version:                     2.14.0
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
