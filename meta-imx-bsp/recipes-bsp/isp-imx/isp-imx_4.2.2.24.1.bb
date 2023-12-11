@@ -8,8 +8,8 @@ DEPENDS = "boost libdrm virtual/libg2d libtinyxml2"
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true \
            file://0001-cpp-netlib-parsers.ipp-add-missing-include.patch"
 
-SRC_URI[md5sum] = "f4d41eadd4bda8f3e354f0bb98235e70"
-SRC_URI[sha256sum] = "34b23f5b9f0856a8f5722e339a7ad4ccf4d99614788598306ff8b20093c1e846"
+SRC_URI[md5sum] = "3b3ca7a3ebc25ebbd86f57a16b120f82"
+SRC_URI[sha256sum] = "c091a789444c2fdd46177c67af7251ad9d86a7325a72d2b17468ea90fcaa7940"
 
 inherit fsl-eula-unpack cmake systemd use-imx-headers
 
