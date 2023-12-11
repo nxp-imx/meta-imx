@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f"
 DEPENDS = "boost libdrm virtual/libg2d libtinyxml2"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true \
-           file://0001-cpp-netlib-parsers.ipp-add-missing-include.patch"
+"
 
 SRC_URI[md5sum] = "3b3ca7a3ebc25ebbd86f57a16b120f82"
 SRC_URI[sha256sum] = "c091a789444c2fdd46177c67af7251ad9d86a7325a72d2b17468ea90fcaa7940"
