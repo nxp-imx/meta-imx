@@ -50,6 +50,7 @@ FILES:${PN}-libgles2 = " \
 # Note: libGLESv2.so contains both GLES 2 and 3 implementations
 RDEPENDS:${PN}-libgles3-dev = "${PN}-libgles2-dev"
 FILES:${PN}-libopencl = " \
+    ${bindir}/mali_clcc \
     ${libdir}/libOpenCL${SOLIBS} \
     ${sysconfdir}/OpenCL"
 FILES:${PN}-libvulkan = " \
