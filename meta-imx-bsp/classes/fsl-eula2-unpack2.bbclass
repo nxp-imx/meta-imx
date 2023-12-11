@@ -27,7 +27,7 @@ do_install () {
     # Adjust for multilib and usrmerge
     # FIXME: This does not handle nonarch_base_libdir
     if [ -d "${D}/lib" ] && [ "/lib" != "${base_libdir}" ]; then
-        install -d ${D}/${base_libdir}
+        install -d ${D}${base_libdir}
         mv ${D}/lib/* ${D}${base_libdir}
         rm -r ${D}/lib
     fi
