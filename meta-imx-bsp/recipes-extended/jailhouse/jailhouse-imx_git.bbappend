@@ -10,3 +10,4 @@ SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH}"
 RDEPENDS:${PN} += " \
     pyjailhouse \
 "
+COMPATIBLE_MACHINE = "(mx8m-nxp-bsp|mx8ulp-nxp-bsp|mx9-nxp-bsp)"
