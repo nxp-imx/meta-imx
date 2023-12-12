@@ -21,12 +21,13 @@ SOC_TOOLS_DRM:imxdrm ??= " \
 SOC_TOOLS_GPU ??= ""
 SOC_TOOLS_GPU:imxgpu ??= " \
     imx-gpu-sdk \
+    ${SOC_TOOLS_GPU_APITRACE} \
     ${SOC_TOOLS_GPU_VIVANTE}"
 
 SOC_TOOLS_GPU_VIVANTE = " \
     gputop \
     imx-gpu-viv-tools \
-    ${SOC_TOOLS_GPU_APITRACE}"
+"
 SOC_TOOLS_GPU_VIVANTE:mx95-nxp-bsp = ""
 
 SOC_TOOLS_GPU_APITRACE = ""
