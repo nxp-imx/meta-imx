@@ -22,7 +22,14 @@ SOC_TOOLS_GPU ??= ""
 SOC_TOOLS_GPU:imxgpu ??= " \
     imx-gpu-sdk \
     ${SOC_TOOLS_GPU_APITRACE} \
+    ${SOC_TOOLS_GPU_MALI} \
     ${SOC_TOOLS_GPU_VIVANTE}"
+
+SOC_TOOLS_GPU_MALI = ""
+SOC_TOOLS_GPU_MALI:mx95-nxp-bsp = " \
+    mali-imx-dev \
+    mali-imx-libopencl-dev \
+"
 
 SOC_TOOLS_GPU_VIVANTE = " \
     gputop \
