@@ -6,7 +6,8 @@ inherit fsl-eula-unpack fsl-eula2
 
 IMX_PACKAGE_VERSION = "${PV}"
 
-SRC_URI = "${FSL_MIRROR}/${IMX_PACKAGE_NAME}.bin;fsl-eula=true"
+SRC_URI = "${NXP_BASE_URL}/${IMX_PACKAGE_NAME}.bin;fsl-eula=true"
+NXP_BASE_URL ??= "${FSL_MIRROR}"
 
 S = "${WORKDIR}/${IMX_PACKAGE_NAME}"
 
