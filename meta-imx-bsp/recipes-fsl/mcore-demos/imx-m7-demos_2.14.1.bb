@@ -5,7 +5,7 @@ require imx-mcore-demos.inc
 
 LIC_FILES_CHKSUM:mx8mp-nxp-bsp = "file://COPYING;md5=db4762b09b6bda63da103963e6e081de"
 LIC_FILES_CHKSUM:mx8mpul-nxp-bsp = "file://COPYING;md5=db4762b09b6bda63da103963e6e081de"
-LIC_FILES_CHKSUM:mx95-nxp-bsp = "file://COPYING;md5=2827219e81f28aba7c6a569f7c437fa7"
+LIC_FILES_CHKSUM:mx95-nxp-bsp = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f"
 
 SRC_URI[imx95.md5sum] = "4dc6dd694190de11db8be6884dcf394e"
 SRC_URI[imx95.sha256sum] = "a6018f45a406d67800cfd1e5af7990a721857101f15b96b58f9ab2ae9598a34f"
