@@ -50,12 +50,13 @@ FILES:${PN}-libgles2 = " \
 # Note: libGLESv2.so contains both GLES 2 and 3 implementations
 RDEPENDS:${PN}-libgles3-dev = "${PN}-libgles2-dev"
 FILES:${PN}-libopencl = " \
-    ${bindir}/mali_clcc \
     ${libdir}/libOpenCL${SOLIBS} \
     ${sysconfdir}/OpenCL"
 FILES:${PN}-libvulkan = " \
     ${sysconfdir}/vulkan"
 
+FILES:${PN}-dev = " \
+    ${bindir}/malisc"
 FILES:${PN}-libegl-dev = " \
     ${includedir}/EGL \
     ${includedir}/KHR \
@@ -76,6 +77,7 @@ FILES:${PN}-libgles2-dev = " \
 FILES:${PN}-libgles3-dev = " \
     ${includedir}/GLES3"
 FILES:${PN}-libopencl-dev = " \
+    ${bindir}/mali_clcc \
     ${includedir}/CL \
     ${libdir}/libOpenCL${SOLIBSDEV} \
     ${libdir}/pkgconfig/OpenCL.pc"
