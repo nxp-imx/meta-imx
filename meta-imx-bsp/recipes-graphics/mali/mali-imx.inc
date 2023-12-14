@@ -47,8 +47,6 @@ FILES:${PN}-libgles1 = " \
     ${libdir}/libGLESv1_CM${SOLIBS}"
 FILES:${PN}-libgles2 = " \
     ${libdir}/libGLESv2${SOLIBS}"
-# Note: libGLESv2.so contains both GLES 2 and 3 implementations
-RDEPENDS:${PN}-libgles3-dev = "${PN}-libgles2-dev"
 FILES:${PN}-libopencl = " \
     ${libdir}/libOpenCL${SOLIBS} \
     ${sysconfdir}/OpenCL"
@@ -76,6 +74,9 @@ FILES:${PN}-libgles2-dev = " \
     ${libdir}/pkgconfig/glesv2.pc"
 FILES:${PN}-libgles3-dev = " \
     ${includedir}/GLES3"
+# Note: libGLESv2.so contains both GLES 2 and 3 implementations, so pull in
+# GLES 3 headers manually
+RDEPENDS:${PN}-libgles2-dev = "${PN}-libgles3-dev"
 FILES:${PN}-libopencl-dev = " \
     ${bindir}/mali_clcc \
     ${includedir}/CL \
