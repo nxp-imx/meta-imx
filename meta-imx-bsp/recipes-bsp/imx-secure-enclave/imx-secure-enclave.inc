@@ -11,7 +11,7 @@ DEPENDS = " openssl"
 SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
 SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "3f2102b353338a93ffee36ac97a77dc635f61931"
+SRCREV = "f76e9e860d0fdaeb43ded8e4d445378948328361"
 
 S = "${WORKDIR}/git"
 
