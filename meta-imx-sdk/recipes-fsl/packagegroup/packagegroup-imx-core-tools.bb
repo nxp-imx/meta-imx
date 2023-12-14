@@ -15,6 +15,7 @@ RDEPENDS:${PN} = " \
     can-utils \
     coreutils \
     cpufrequtils \
+    dmidecode \
     dosfstools \
     ethtool \
     evtest \
@@ -28,6 +29,7 @@ RDEPENDS:${PN} = " \
     ${KERNEL_TEST_TOOLS} \
     libgpiod-tools \
     linuxptp \
+    lshw \
     memtester \
     minicom \
     mmc-utils \

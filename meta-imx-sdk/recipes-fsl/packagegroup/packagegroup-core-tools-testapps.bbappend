@@ -9,8 +9,10 @@ IMX_CORE_TOOLS:imxgpu2d = " tslib"
 IMX_CORE_TOOLS:imxpxp = " tslib"
 
 RDEPENDS:${PN} += " \
+    dmidecode \
     ${IMX_CORE_TOOLS} \
     libgpiod-tools \
+    lshw \
     pipewire \
     pipewire-spa-tools \
     pipewire-tools \
