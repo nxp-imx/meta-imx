@@ -3,7 +3,7 @@
 
 require imx-mcore-demos.inc
 
-LIC_FILES_CHKSUM:mx93-nxp-bsp = "file://COPYING;md5=2827219e81f28aba7c6a569f7c437fa7"
+LIC_FILES_CHKSUM:mx93-nxp-bsp = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f"
 
 
 SRC_URI[imx93.md5sum] = "473674800105643f5d300af9662c1fc0"
