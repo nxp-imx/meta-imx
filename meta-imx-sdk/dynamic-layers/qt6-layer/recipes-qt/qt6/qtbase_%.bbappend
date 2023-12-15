@@ -10,6 +10,7 @@ PACKAGECONFIG_GRAPHICS_IMX_DRM:imxdrm = "gbm kms"
 PACKAGECONFIG_PLATFORM = "no-opengl linuxfb"
 
 PACKAGECONFIG_VULKAN_IMX_GPU:mx8mm-nxp-bsp = "vulkan"
+PACKAGECONFIG_VULKAN_IMX_GPU:mx9-nxp-bsp   = "vulkan"
 
 QT_QPA_DEFAULT_PLATFORM = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '${QT_QPA_DEFAULT_PLATFORM_FB}', d)}"
