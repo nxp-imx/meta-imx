@@ -24,3 +24,5 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 do_install() {
 	oe_runmake -C ${S} DESTDIR=${D} install_tests
 }
+
+FILES:${PN} += "${datadir}/se"

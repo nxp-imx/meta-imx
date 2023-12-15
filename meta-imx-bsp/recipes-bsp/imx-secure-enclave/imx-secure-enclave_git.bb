@@ -7,7 +7,6 @@ SYSTEMD_SERVICE:${PN} = "nvm_daemon.service"
 
 PLAT = "ele"
 
-FILES:${PN} += "${datadir}/se"
 RDEPENDS:${PN} += "bash"
 RDEPENDS:${PN}:append:mx95-nxp-bsp = " imx-secure-enclave-seco"
 
