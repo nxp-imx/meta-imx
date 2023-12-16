@@ -26,3 +26,4 @@ do_install() {
 }
 
 FILES:${PN} += "${datadir}/se"
+RDEPENDS:${PN} += "bash"
