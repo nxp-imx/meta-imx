@@ -1,4 +1,4 @@
-# Copyright (C) 2020-2021 NXP
+# Copyright (C) 2020-2023 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 # The recipe is licensed under MIT (see COPYING.MIT for the terms)
 
@@ -20,6 +20,8 @@ do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/imx/sof-zephyr-xcc
     cp -r sof-zephyr-gcc/* ${D}${nonarch_base_libdir}/firmware/imx/sof-zephyr-gcc
     cp -r sof-zephyr-xcc/* ${D}${nonarch_base_libdir}/firmware/imx/sof-zephyr-xcc
+    # Copy symbolic link
+    cp -P sof  ${D}${nonarch_base_libdir}/firmware/imx/
 }
 
-FILES:${PN} = "${nonarch_base_libdir}/firmware/imx/sof-zephyr-*"
+FILES:${PN} = "${nonarch_base_libdir}/firmware/imx/sof*"
