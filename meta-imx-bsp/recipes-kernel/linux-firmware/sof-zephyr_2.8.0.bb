@@ -20,7 +20,6 @@ do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/imx/sof-zephyr-xcc
     cp -r sof-zephyr-gcc/* ${D}${nonarch_base_libdir}/firmware/imx/sof-zephyr-gcc
     cp -r sof-zephyr-xcc/* ${D}${nonarch_base_libdir}/firmware/imx/sof-zephyr-xcc
-    cp -r sof/ ${D}${nonarch_base_libdir}/firmware/imx/
 }
 
 FILES:${PN} = "${nonarch_base_libdir}/firmware/imx/sof-zephyr-*"
