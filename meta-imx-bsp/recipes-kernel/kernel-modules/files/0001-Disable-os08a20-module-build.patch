@@ -1,0 +1,36 @@
+From 6158c218dcd44273c0c39904c70283f99a179fb9 Mon Sep 17 00:00:00 2001
+From: Jun Zhu <junzhu@nxp.com>
+Date: Sun, 17 Dec 2023 18:39:36 +0800
+Subject: [PATCH] Disable os08a20 module build
+
+Signed-off-by: Jun Zhu <junzhu@nxp.com>
+---
+ vvcam/v4l2/sensor/Makefile | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/sensor/Makefile b/sensor/Makefile
+index 92f515f..b9fb4e2 100644
+--- a/sensor/Makefile
++++ b/sensor/Makefile
+@@ -1,18 +1,15 @@
+ all:
+ 	@cd ov2775;  make || exit $$?;
+-	@cd os08a20; make || exit $$?;
+ 	@cd ar1335;  make || exit $$?;
+ 	@cd camera-proxy-driver;  make || exit $$?;
+ 
+ clean:
+ 	@cd ov2775;   make clean;
+-	@cd os08a20;  make clean;
+ 	@cd ar1335;   make clean;
+ 	@cd camera-proxy-driver;   make clean;
+ 
+ modules_install:
+ 	@cd ov2775;   make modules_install;
+-	@cd os08a20;  make modules_install;
+ 	@cd ar1335;   make modules_install;
+ 	@cd camera-proxy-driver;   make modules_install;
+ 
+-- 
+2.25.1
+
