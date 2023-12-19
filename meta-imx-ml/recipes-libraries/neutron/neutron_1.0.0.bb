@@ -1,12 +1,12 @@
 SUMMARY = "The firmware, library and converter for i.MX Neutron NPU"
 DESCRIPTION = "The firmware library and converter for i.MX Neutron NPU"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3d7aaf8cc156393cada035b7ff497237"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=44a8052c384584ba09077e85a3d1654f"
 
 SRC_URI = "${NEUTRON_SRC};branch=${SRCBRANCH}"
 NEUTRON_SRC ?= "git://github.com/nxp-imx/neutron.git;protocol=https"
 SRCBRANCH = "lf-6.6.3_1.0.0"
-SRCREV = "e2a6860b7b9f7fdd0e4bf30306b4106d655afbff"
+SRCREV = "2b12bade2e7a5a191fc2d481d41d79b11e6ec19f"
 
 S = "${WORKDIR}/git"
 
@@ -25,10 +25,6 @@ do_install () {
     # install libraries
     install -d ${D}${libdir}
     cp --no-preserve=ownership -d ${S}/${NEUTRON_TARGET}/library/* ${D}${libdir}
-
-    # install neutron converter
-    install -d ${D}${bindir}/
-    install -m 0555 ${S}/converter/neutron-converter ${D}${bindir}
 }
 
 FILES:${PN} += "${nonarch_base_libdir}/firmware/*"
