@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f"
 DEPENDS = "opencl-headers"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "7152581384ac8c8e00137633b0820745"
-SRC_URI[sha256sum] = "7fcd5a4184868615c42f125a1952cd944613f9243309d5ebadc1ded0b3dcb1e6"
+SRC_URI[md5sum] = "769cec8112697e69cd4d7a55b2c2e8ef"
+SRC_URI[sha256sum] = "153806be529453c328649da5e2fb692db0c004aaf84a85bbeb7ce0c8f75936cc"
 
 inherit fsl-eula-unpack autotools pkgconfig meson
 
