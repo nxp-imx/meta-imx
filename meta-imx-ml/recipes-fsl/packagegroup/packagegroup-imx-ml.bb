@@ -31,11 +31,13 @@ ML_GST_PROFILER:mx9-nxp-bsp   = "gst-shark"
 # These packages don't require any acceleration
 ML_PKGS            = ""
 ML_PKGS:mx8-nxp-bsp = " \
+    arm-compute-library \
     onnxruntime-tests \
     tensorflow-lite \
     torchvision \
 "
 ML_PKGS:mx9-nxp-bsp = " \
+    arm-compute-library \
     onnxruntime-tests \
     tensorflow-lite \
     torchvision \
