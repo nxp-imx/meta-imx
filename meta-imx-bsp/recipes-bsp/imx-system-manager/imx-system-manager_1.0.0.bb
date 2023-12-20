@@ -16,7 +16,7 @@ INHIBIT_DEFAULT_DEPS = "1"
 DEPENDS = "gcc-arm-none-eabi-native"
 
 SRC_URI = "${IMX_SYSTEM_MANAGER_SRC};branch=${SRCBRANCH}"
-IMX_SYSTEM_MANAGER_SRC ?= "git://github.com/nxp-imx/imx-system-manager.git;protocol=https"
+IMX_SYSTEM_MANAGER_SRC ?= "git://github.com/nxp-imx/imx-sm.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "b2b143a0e75002fc487ba159a3c0880ab3330b29"
 
