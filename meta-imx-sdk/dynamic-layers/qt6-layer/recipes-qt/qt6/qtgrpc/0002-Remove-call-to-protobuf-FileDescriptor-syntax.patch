@@ -1,0 +1,63 @@
+From aa8c9c7d92900d9be1521d1a0ab159a508750b4a Mon Sep 17 00:00:00 2001
+From: Konrad Kujawa <konrad.kujawa@qt.io>
+Date: Thu, 29 Jun 2023 13:33:09 +0200
+Subject: [PATCH 2/2] Remove call to protobuf FileDescriptor::syntax()
+
+In the new version of protobuf FileDescriptor::syntax() should not
+be used. Instead, protobuf API should be working with both,
+proto2 and proto3 syntax.
+
+Task-number: QTBUG-114833
+Task-number: QTBUG-114962
+Pick-to: 6.6
+Change-Id: I86542cfcc0cc247f1e75e6d711e269ff3537f8a4
+Reviewed-by: Alexey Edelev <alexey.edelev@qt.io>
+Upstream-Status: Backport [https://code.qt.io/cgit.cgi/qt/qtgrpc.git/commit/?id=e55cc9deb1e2d115f7d99fecf7c2756e47cc9379&h=dev]
+---
+ src/tools/qtgrpcgen/qgrpcgenerator.cpp         | 6 +-----
+ src/tools/qtprotobufgen/qprotobufgenerator.cpp | 7 +------
+ 2 files changed, 2 insertions(+), 11 deletions(-)
+
+diff --git a/src/tools/qtgrpcgen/qgrpcgenerator.cpp b/src/tools/qtgrpcgen/qgrpcgenerator.cpp
+index 9a11c3c..87d0896 100644
+--- a/src/tools/qtgrpcgen/qgrpcgenerator.cpp
++++ b/src/tools/qtgrpcgen/qgrpcgenerator.cpp
+@@ -30,13 +30,9 @@ QGrpcGenerator::~QGrpcGenerator() = default;
+ bool QGrpcGenerator::Generate(const FileDescriptor *file,
+                               [[maybe_unused]] const std::string &parameter,
+                               GeneratorContext *generatorContext,
+-                              std::string *error) const
++                              [[maybe_unused]] std::string *error) const
+ {
+     assert(file != nullptr && generatorContext != nullptr);
+-    if (file->syntax() != FileDescriptor::SYNTAX_PROTO3) {
+-        *error = "Invalid proto used. qtgrpcgen only supports 'proto3' syntax";
+-        return false;
+-    }
+ 
+     // Check if .proto files contain client side or bidirectional streaming
+     // methods which are not supported.
+diff --git a/src/tools/qtprotobufgen/qprotobufgenerator.cpp b/src/tools/qtprotobufgen/qprotobufgenerator.cpp
+index 17d9449..99852e8 100644
+--- a/src/tools/qtprotobufgen/qprotobufgenerator.cpp
++++ b/src/tools/qtprotobufgen/qprotobufgenerator.cpp
+@@ -36,15 +36,10 @@ QProtobufGenerator::~QProtobufGenerator() = default;
+ bool QProtobufGenerator::Generate(const FileDescriptor *file,
+                                   [[maybe_unused]] const std::string &parameter,
+                                   GeneratorContext *generatorContext,
+-                                  std::string *error) const
++                                  [[maybe_unused]] std::string *error) const
+ {
+     assert(file != nullptr && generatorContext != nullptr);
+ 
+-    if (file->syntax() != FileDescriptor::SYNTAX_PROTO3) {
+-        *error = "Invalid proto used. qtprotobufgen only supports 'proto3' syntax";
+-        return false;
+-    }
+-
+     return GenerateMessages(file, generatorContext);
+ }
+ 
+-- 
+2.34.1
+
