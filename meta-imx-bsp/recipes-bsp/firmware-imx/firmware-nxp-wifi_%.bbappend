@@ -3,7 +3,7 @@
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=44a8052c384584ba09077e85a3d1654f"
 
 SRC_URI = "${IMX_FIRMWARE_SRC};branch=${SRCBRANCH}"
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.6.3_1.0.0"
 SRCREV = "d962eb9ad42289a9eeba1be86538807835ce027a"
 
 do_install() {
