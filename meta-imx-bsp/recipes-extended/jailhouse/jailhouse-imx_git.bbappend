@@ -1,5 +1,5 @@
 
-SRCBRANCH = "imx_jailhouse_2023.03"
+SRCBRANCH = "lf-6.6.3_1.0.0"
 SRCREV = "13f07b8da8cd9d9008b4fbf8e124dbec6e0c0ee7"
 
 PV = "2023.03+git${SRCPV}"
