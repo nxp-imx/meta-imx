@@ -10,6 +10,7 @@ do_install:append() {
     for i in common hsm nvm.h; do
         rm -rf ${D}${includedir}/$i
     done
+    rm ${D}${datadir}/se/README
 }
 
 COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
