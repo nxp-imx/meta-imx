@@ -171,7 +171,7 @@ RDEPENDS:${PN} += " \
     ${RDEPENDS_VULKAN_LOADER} \
 "
 
-RRECOMMENDS:${PN}:append:class-nativesdk = " ${RRECOMMENDS_NATIVESDK_DRM}"
+RRECOMMENDS:${PN}:class-nativesdk = " ${RRECOMMENDS_NATIVESDK_DRM}"
 RRECOMMENDS_NATIVESDK_DRM               = ""
 RRECOMMENDS_NATIVESDK_DRM:imxdrm        = "nativesdk-glslang"
 RRECOMMENDS_NATIVESDK_DRM:mx8mm-nxp-bsp = ""
