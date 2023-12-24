@@ -94,8 +94,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.23.bin
-Version:                     8.23
+Package:                     firmware-imx-8.24.bin
+Version:                     8.24
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -132,7 +132,7 @@ Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Addit
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
-Description and comments:    S400 firmware
+Description and comments:    EdgeLock Enclave firmware
 Release Location:            Mirror
 Origin:                      NXP (proprietary)
                              CMSIS header files (Apache License 2.0; https://github.com/ARM-software/CMSIS_5)
@@ -640,8 +640,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.4-aarch32.bin
-Version:                     6.4.11.p2.4
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32.bin
+Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -659,8 +659,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.4-aarch64.bin
-Version:                     6.4.11.p2.4
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64.bin
+Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -678,8 +678,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-1.0.0.bin
-Version:                     1.0.0
+Package:                     mali-imx-1.0.2.bin
+Version:                     1.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -780,7 +780,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gputop.git
-Version:                     6.4.11.p2.4
+Version:                     6.4.11.p2.6
 Outgoing License:            MIT 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -791,8 +791,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.4-arm.bin
-Version:                     6.4.11.p2.4
+Package:                     imx-gpu-g2d-6.4.11.p2.6-arm.bin
+Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -803,8 +803,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.4-aarch64.bin
-Version:                     6.4.11.p2.4
+Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64.bin
+Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -851,8 +851,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.4-aarch64-wayland.bin
-Version:                     6.4.11.p2.4
+Package:                     libgpuperfcnt-6.4.11.p2.6-aarch64-wayland.bin
+Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -863,8 +863,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.4-arm-fb.bin
-Version:                     6.4.11.p2.4
+Package:                     libgpuperfcnt-6.4.11.p2.6-arm-fb.bin
+Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -875,8 +875,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.4-arm-wayland.bin
-Version:                     6.4.11.p2.4
+Package:                     libgpuperfcnt-6.4.11.p2.6-arm-wayland.bin
+Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -907,8 +907,8 @@ Origin:                      NXP (BSD-3-Cluse)
 Multimedia Packages
 --------------------------------------------
 
-Package:                     imx-codec-4.8.3.bin
-Version:                     4.8.3
+Package:                     imx-codec-4.8.4.bin
+Version:                     4.8.4
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -924,8 +924,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.8.3.bin
-Version:                     4.8.3
+Package:                     imx-parser-4.8.4.bin
+Version:                     4.8.4
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -1028,8 +1028,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.2.0.bin
-Version:                     0.2.0
+Package:                     imx-opencl-converter-0.3.0.bin
+Version:                     0.3.0
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
