@@ -132,7 +132,7 @@ Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Addit
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
-Description and comments:    S400 firmware
+Description and comments:    EdgeLock Enclave firmware
 Release Location:            Mirror
 Origin:                      NXP (proprietary)
                              CMSIS header files (Apache License 2.0; https://github.com/ARM-software/CMSIS_5)
