@@ -5,7 +5,6 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${S}/../LICENSE;md5=64381a6ea83b48c39fe524c85f65fb44"
 
 SRC_URI = "${ISP_KERNEL_SRC};branch=${SRCBRANCH}"
-SRC_URI += "file://0001-Disable-os08a20-module-build.patch"
 ISP_KERNEL_SRC ?= "git://github.com/nxp-imx/isp-vvcam.git;protocol=https"
 SRCBRANCH = "lf-6.6.y"
 SRCREV = "2102360b58d9d1b36bc0c654c8301e4014b33951" 
