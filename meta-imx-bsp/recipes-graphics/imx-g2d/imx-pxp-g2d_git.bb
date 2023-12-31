@@ -25,4 +25,5 @@ do_install() {
     oe_runmake install
 }
 
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx93-nxp-bsp)"
