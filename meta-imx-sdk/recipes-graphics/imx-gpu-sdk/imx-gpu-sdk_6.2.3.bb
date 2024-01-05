@@ -171,11 +171,6 @@ RDEPENDS:${PN} += " \
     ${RDEPENDS_VULKAN_LOADER} \
 "
 
-RRECOMMENDS:${PN}:class-nativesdk = " ${RRECOMMENDS_NATIVESDK_DRM}"
-RRECOMMENDS_NATIVESDK_DRM               = ""
-RRECOMMENDS_NATIVESDK_DRM:imxdrm        = "nativesdk-glslang"
-RRECOMMENDS_NATIVESDK_DRM:mx8mm-nxp-bsp = ""
-
 # For backwards compatibility
 RPROVIDES:${PN} = "fsl-gpu-sdk"
 RREPLACES:${PN} = "fsl-gpu-sdk"
