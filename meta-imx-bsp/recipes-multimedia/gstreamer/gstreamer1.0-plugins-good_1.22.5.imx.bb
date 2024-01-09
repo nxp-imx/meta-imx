@@ -112,7 +112,7 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plu
 SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;protocol=https"
 SRCBRANCH = "MM_04.08.03_2312_L6.6.y"
-SRCREV = "b40dde6c593ad645d8df9efc9dfaf8afdcc9db70"
+SRCREV = "5e49f02daffa24702ac67c724193dcd55ea0bb12"
 
 # set 32bit compile timer for 32-bit platform
 GLIBC_64BIT_TIME_FLAGS:mx6-nxp-bsp = ""
