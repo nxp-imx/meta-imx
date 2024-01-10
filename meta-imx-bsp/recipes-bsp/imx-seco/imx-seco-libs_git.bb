@@ -15,7 +15,7 @@ SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
            file://0001-Fix-return-value-of-void-functions.patch"
 SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "aa8d62900c41cc779c11fe4e6f58b40c3c9f82f0"
+SRCREV = "273553f207425f773400be7a7f3a7c425d892d6f"
 
 S = "${WORKDIR}/git"
 
