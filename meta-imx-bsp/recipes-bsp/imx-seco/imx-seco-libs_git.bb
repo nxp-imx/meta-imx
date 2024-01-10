@@ -14,7 +14,7 @@ SRC_URI = "${SECO_LIB_SRC};branch=${SRCBRANCH} \
            file://0001-add-v2x_test-to-the-installed-binaries.patch \
            file://0001-Fix-return-value-of-void-functions.patch"
 SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
-SRCBRANCH = "imx_5.4.70_2.3.11"
+SRCBRANCH = "master"
 SRCREV = "aa8d62900c41cc779c11fe4e6f58b40c3c9f82f0"
 
 S = "${WORKDIR}/git"
