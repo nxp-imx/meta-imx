@@ -4,7 +4,7 @@ DESCRIPTION = "ECDSA Verification Engine using HSM"
 SUMMARY = "ECDSA Verification Engine using HSM"
 
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=03bcadc8dc0a788f66ca9e2b89f56c6f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f"
 
 DEPENDS = "imx-seco-libs openssl"
 
