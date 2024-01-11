@@ -4,6 +4,7 @@ LICENSE = "Proprietary"
 SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f" 
 DEPENDS = "opencl-headers"
+DEPENDS:append:mx95-nxp-bsp = " virtual/opencl-icd"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
 SRC_URI[md5sum] = "0e57c076b8a9f5aad6b29f506a6191ca"
