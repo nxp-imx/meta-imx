@@ -28,7 +28,7 @@ SOC_TOOLS_GPU:imxgpu ??= " \
 SOC_TOOLS_GPU_MALI = ""
 SOC_TOOLS_GPU_MALI:mx95-nxp-bsp = " \
     mali-imx-dev \
-    mali-imx-libopencl-dev \
+    mali-imx-opencl-icd-dev \
 "
 
 SOC_TOOLS_GPU_VIVANTE = " \
