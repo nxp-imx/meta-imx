@@ -25,6 +25,7 @@ SOC_TOOLS_TEST:append:mx8m-nxp-bsp   = " kernel-tools-virtio"
 SOC_TOOLS_TEST:mx95-nxp-bsp   = "imx-test"
 
 RDEPENDS:${PN} += " \
+    bridge-utils \
     can-utils \
     coreutils \
     cpufrequtils \
