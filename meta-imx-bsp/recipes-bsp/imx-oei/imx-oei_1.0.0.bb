@@ -16,9 +16,9 @@ S = "${WORKDIR}/git"
 inherit deploy
 
 OEI_CONFIGS ?= "UNDEFINED"
-OEI_CORE   ?= "UNDEFINED"
-OEI_SOC    ?= "UNDEFINED"
-OEI_BOARD  ?= "UNDEFINED"
+OEI_CORE    ?= "UNDEFINED"
+OEI_SOC     ?= "UNDEFINED"
+OEI_BOARD   ?= "UNDEFINED"
 
 LDFLAGS[unexport] = "1"
 
@@ -27,17 +27,22 @@ EXTRA_OEMAKE = "\
     DEBUG=1 \
     OEI_CROSS_COMPILE=arm-none-eabi-"
 
+do_configure() {
+    for oei_config in ${OEI_CONFIGS}; do
+        oe_runmake clean oei=$oei_config
+    done
+}
+
 do_compile() {
     for oei_config in ${OEI_CONFIGS}; do
-        oe_runmake clean oei=${oei_config}
-        oe_runmake all oei=${oei_config}
+        oe_runmake oei=$oei_config
     done
 }
 
 do_install() {
     install -d ${D}/firmware
     for oei_config in ${OEI_CONFIGS}; do
-       install -m 0644 ${B}/build/${OEI_BOARD}/${oei_config}/oei-*.bin ${D}/firmware
+        install -m 0644 ${B}/build/${OEI_BOARD}/$oei_config/oei-*.bin ${D}/firmware
     done
 }
 
