@@ -31,6 +31,7 @@ DEPENDS_2D:imxgpu2d = " \
     virtual/libopenvg \
 "
 DEPENDS_2D:mx95-nxp-bsp = " \
+    virtual/libg2d \
 "
 DEPENDS_3D = ""
 DEPENDS_3D:imxgpu3d = " \
@@ -77,7 +78,6 @@ FEATURES_GPU:mx95-nxp-bsp  = ""
 
 FEATURES_G2D               = ""
 FEATURES_G2D:imxgpu2d      = ",G2D"
-FEATURES_G2D:mx95-nxp-bsp  = ""
 
 FEATURES_3D                = ""
 FEATURES_3D:imxgpu3d       = ",OpenGLES2"
