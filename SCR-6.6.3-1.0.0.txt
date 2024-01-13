@@ -522,8 +522,8 @@ Origin:                      NXP (Apache-2.0)
 
 --------------------------------------------
 
-Package:                     ecdsa-lib-imx-3.3.2.3.bin
-Version:                     3.3.2.3
+Package:                     ecdsa-lib-imx-3.3.2.4.bin
+Version:                     3.3.2.4
 Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
