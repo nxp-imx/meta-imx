@@ -7,8 +7,8 @@ DEPENDS = "opencl-headers"
 DEPENDS:append:mx95-nxp-bsp = " virtual/opencl-icd"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
-SRC_URI[md5sum] = "def95324f43cbce818643d1190c7cb4e"
-SRC_URI[sha256sum] = "a0f7154587a28412f189f14b9ac6066b3ff65cff4585c8095123b637dd9987a2"
+SRC_URI[md5sum] = "c254250f391f696176af87215712a908"
+SRC_URI[sha256sum] = "e8abc74169b3920ba46489cd06cdc39ad9a1d50db0ecc96451a4efb368d23847"
 
 inherit fsl-eula-unpack autotools pkgconfig meson
 
