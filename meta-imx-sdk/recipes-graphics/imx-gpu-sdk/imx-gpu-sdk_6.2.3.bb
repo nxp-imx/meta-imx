@@ -140,6 +140,9 @@ FILES:${PN} += "/opt/${PN}"
 FILES:${PN}-dbg += "/opt/${PN}/*/*/.debug /usr/src/debug"
 INSANE_SKIP:${PN} += "already-stripped rpaths"
 
+RDEPENDS:${PN} += " \
+    ${RDEPENDS_EMPTY_MAIN_PACKAGE} \
+    ${RDEPENDS_VULKAN_LOADER}"
 # Unfortunately recipes with an empty main package, like header-only libraries,
 # are not included in the SDK. Use RDEPENDS as a workaround.
 RDEPENDS_EMPTY_MAIN_PACKAGE = " \
@@ -152,24 +155,24 @@ RDEPENDS_EMPTY_MAIN_PACKAGE = " \
     pugixml \
     rapidjson \
     stb \
-"
-RDEPENDS_EMPTY_MAIN_PACKAGE_MX8       = ""
-RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8-nxp-bsp   = " \
+    ${RDEPENDS_EMPTY_MAIN_PACKAGE_SOC}"
+RDEPENDS_EMPTY_MAIN_PACKAGE_SOC = ""
+RDEPENDS_EMPTY_MAIN_PACKAGE_SOC:mx8-nxp-bsp   = " \
     rapidopencl \
     rapidopenvx \
-    rapidvulkan \
-"
-RDEPENDS_EMPTY_MAIN_PACKAGE_MX8:mx8mm-nxp-bsp = ""
+    rapidvulkan"
+RDEPENDS_EMPTY_MAIN_PACKAGE_SOC:mx8mm-nxp-bsp = ""
+RDEPENDS_EMPTY_MAIN_PACKAGE_SOC:mx95-nxp-bsp = " \
+    rapidopencl \
+    rapidvulkan"
 # vulkan-loader is dynamically loaded, so need to add an explicit
 # dependency
-RDEPENDS_VULKAN_LOADER       = ""
-RDEPENDS_VULKAN_LOADER:mx8-nxp-bsp   = "vulkan-loader"
+RDEPENDS_VULKAN_LOADER = ""
+RDEPENDS_VULKAN_LOADER:mx8-nxp-bsp = " \
+    vulkan-loader"
 RDEPENDS_VULKAN_LOADER:mx8mm-nxp-bsp = ""
-RDEPENDS:${PN} += " \
-    ${RDEPENDS_EMPTY_MAIN_PACKAGE} \
-    ${RDEPENDS_EMPTY_MAIN_PACKAGE_MX8} \
-    ${RDEPENDS_VULKAN_LOADER} \
-"
+RDEPENDS_VULKAN_LOADER:mx95-nxp-bsp = " \
+    vulkan-loader"
 
 # For backwards compatibility
 RPROVIDES:${PN} = "fsl-gpu-sdk"
