@@ -297,8 +297,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     sof-imx-2.8.0
-Version:                     2.8.0
+Package:                     sof-imx-2.9.0
+Version:                     2.9.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -310,8 +310,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.8.0
-Version:                     2.8.0
+Package:                     sof-zephyr-2.9.0
+Version:                     2.9.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENCE
 Package Category:            BSP
@@ -689,7 +689,7 @@ Release Location:            Mirror
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     6.2.3
+Version:                     6.3.0
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
