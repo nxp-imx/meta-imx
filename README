@@ -6,6 +6,7 @@ Please see the release notes for the quality statement for each board.
 
 The following boards were tested in this release.
 
+   * NXP i.MX 95 LPDDR5 EVK (imx95-19x19-lpddr5-evk)
    * NXP i.MX 93 EVK (imx93evk)
    * NXP i.MX 8MQuad EVK (imx8mqevk)
    * NXP i.MX 8MMini EVK (imx8mmevk)
