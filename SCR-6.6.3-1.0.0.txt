@@ -432,6 +432,18 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
+Package:                     crypto-af-alg.git
+Version:                     
+Outgoing License:            BSD-3-Clause Additional distribution license granted - Section 2.3 applies
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    NXP i.MX crypto af alg tool to perform symmetric operation
+Release Location:            https://github.com/nxp-imx/crypto_af_alg.git -b lf-6.6.3-1.0.0
+Origin:                      NXP (BSD-3-Clause)
+
+--------------------------------------------
+
 Package:                     imx-secure-enclave.git
 Version:                     
 Outgoing License:            BSD-3-Clause Additional distribution license granted - Section 2.3 applies
