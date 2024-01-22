@@ -1,0 +1,37 @@
+From af0cc7309e07f149cf24abb7e12cc6b214dc8798 Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Thu, 11 Jan 2024 16:49:03 +0800
+Subject: [PATCH] tests: Fix cl test
+ program@execute@builtin@builtin-float-degrees-1.0.generated issue about
+ tolerance.
+
+Initially, there is no tolerance for degrees operations set in gen_cl_common_builtins.py, which will cause the test to fail.
+
+According to OpenCL related standards, the error value of the result calculated by the degrees function can be within the range of 2ulp.
+
+Modified the tolerance of degrees function in the gen_cl_common_builtins.py file.
+
+Upstream-Status: Pending [https://gitlab.freedesktop.org/mesa/piglit/-/merge_requests/860]
+
+Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
+---
+ generated_tests/gen_cl_common_builtins.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/generated_tests/gen_cl_common_builtins.py b/generated_tests/gen_cl_common_builtins.py
+index 0a51c8402..33c889078 100644
+--- a/generated_tests/gen_cl_common_builtins.py
++++ b/generated_tests/gen_cl_common_builtins.py
+@@ -68,7 +68,8 @@ tests = {
+         'values': [
+             [degrees(0.5), degrees(-0.5), 180.0, 0.0, 360, 1800.0, 18000, 90], #Result
+             [0.5,                   -0.5, pi,    0.0, 2*pi, 10*pi, 100*pi, pi/2] #Arg0
+-        ]
++        ],
++        'tolerance' : 2
+     },
+     'max' : {
+         'arg_types': [F, F, F],
+-- 
+2.34.1
+
