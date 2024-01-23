@@ -1,0 +1,26 @@
+From c6946a8f96a73fadf4ad1bc9b28cf5568feba473 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Mon, 22 Jan 2024 17:34:17 -0600
+Subject: [PATCH] CMakeLists.txt: Switch to python3
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ patrace/project/cmake/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/patrace/project/cmake/CMakeLists.txt b/patrace/project/cmake/CMakeLists.txt
+index 8704beb..3edd4a9 100644
+--- a/patrace/project/cmake/CMakeLists.txt
++++ b/patrace/project/cmake/CMakeLists.txt
+@@ -1,7 +1,7 @@
+ cmake_minimum_required (VERSION 2.8.4)
+ 
+ project (patrace)
+-set (PYTHON_EXECUTABLE python)
++set (PYTHON_EXECUTABLE python3)
+ 
+ message(STATUS "main ar: ${CMAKE_AR}")
+ 
+-- 
+2.34.1
+
