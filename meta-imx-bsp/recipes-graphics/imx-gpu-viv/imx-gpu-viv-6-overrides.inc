@@ -6,6 +6,8 @@ DEPENDS:remove = "mesa"
 PACKAGES:remove = "libgl-imx libgl-imx-dev"
 PROVIDES:remove = "virtual/libgl"
 
+RDEPENDS:libopencl-imx:append = "opencl-headers"
+
 ### Section 2: Changes to be kept in meta-imx ###
 
 PACKAGECONFIG ?= "valgrind"
