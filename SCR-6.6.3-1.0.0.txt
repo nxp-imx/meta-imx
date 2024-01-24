@@ -701,7 +701,7 @@ Release Location:            Mirror
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     6.2.3
+Version:                     6.2.4
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
