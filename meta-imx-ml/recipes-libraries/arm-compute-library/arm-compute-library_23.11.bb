@@ -18,7 +18,7 @@ PACKAGECONFIG ?= "cppthreads examples"
 
 PACKAGECONFIG[Werror] = "Werror=1,Werror=0"
 PACKAGECONFIG[tests] = "benchmark_tests=1 validation_tests=1,benchmark_tests=0 validation_tests=0"
-PACKAGECONFIG[opencl] = "opencl=1,opencl=0,opencl-headers opencl-icd-loader"
+PACKAGECONFIG[opencl] = "opencl=1,opencl=0,virtual/opencl-icd"
 PACKAGECONFIG[embed] = "embed_kernels=1,embed_kernels=0"
 PACKAGECONFIG[debug] = "debug=1,debug=0"
 PACKAGECONFIG[cppthreads] = "cppthreads=1,cppthreads=0"
