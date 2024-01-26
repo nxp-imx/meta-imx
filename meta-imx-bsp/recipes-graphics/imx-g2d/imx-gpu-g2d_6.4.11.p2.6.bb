@@ -11,11 +11,11 @@ PROVIDES = "virtual/libg2d"
 
 SRC_URI = "${FSL_MIRROR}/${IMX_BIN_NAME}.bin;name=${TARGET_ARCH};fsl-eula=true"
 IMX_BIN_NAME = "${BP}-${TARGET_ARCH}-${IMX_SRCREV_ABBREV}"
-IMX_SRCREV_ABBREV = "8a8ea95"
+IMX_SRCREV_ABBREV = "06d6875"
 SRC_URI[aarch64.md5sum] = "26a7c349b8ef9fc5c4d2a4ecb12b1b92"
 SRC_URI[aarch64.sha256sum] = "c8285e902c2003b3227595adb3dbff2fafe1f3957b207a42949eec15102e3b07"
-SRC_URI[arm.md5sum] = "d5afb59fca050bfbff83c06fc5b2874c"
-SRC_URI[arm.sha256sum] = "183e1eee6d8cb81fb4b00cfa264ed40cde0be985257e7c5f8590c2bdd0953bca"
+SRC_URI[arm.md5sum] = "d915989ed8359a8cf92acf798cdab27c"
+SRC_URI[arm.sha256sum] = "74959caa08622d8e0d44900fc0a118a781dac18f15aca8a383c4be52497b6620"
 
 S = "${WORKDIR}/${IMX_BIN_NAME}"
 
