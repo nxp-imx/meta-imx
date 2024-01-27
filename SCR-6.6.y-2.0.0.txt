@@ -465,6 +465,10 @@ Type of Content:             source
 Description and comments:    NXP i.MX Security Middleware Library
 Release Location:            https://github.com/nxp-imx/imx-smw -b lf-6.6.y-2.0.0
 Origin:                      NXP (BSD-3-Clause)
+                             PSA API (BSD-3-Clause) - https://sourceforge.net/projects/psa-api/
+                             mbed-TLS (Apache-2.0) - https://github.com/Mbed-TLS/mbedtls
+                             pks11 (MIT) - https://github.com/Roostify/pkcs11
+                             
 
 --------------------------------------------
 
@@ -529,9 +533,8 @@ Type of Content:             source
 Description and comments:    Plug & Trust ECC example for SE050
 Release Location:            https://github.com/NXP/plug-and-trust -b lf-6.6.y-2.0.0
 Origin:                      NXP (Apache-2.0)
-                             MbedTLS (Apache-2.0) - https://github.com/Mbed-TLS/mbedtls
-                             OpenSSL 1.1 (OpenSSL) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
-
+                             Mbed-TLS (Apache-2.0) - https://github.com/Mbed-TLS/mbedtls
+                             OpenSSL 1.1 (OpenSSL License) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
 --------------------------------------------
 
 Package:                     ecdsa-lib-imx-3.3.2.4.bin
