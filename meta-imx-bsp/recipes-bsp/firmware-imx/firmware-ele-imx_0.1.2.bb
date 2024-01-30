@@ -12,7 +12,7 @@ IMX_SRCREV_ABBREV = "e1b3a59"
 
 SRC_URI[md5sum] = "736fbc4b92da6bda7467942156dafebb"
 SRC_URI[sha256sum] = "6b2735d5c853704d8d4f04807e0ea2e2c9029eafff357d3205f808c47516cd84"
-
+S="${WORKDIR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}"
 do_compile[noexec] = "1"
 
 do_install() {
