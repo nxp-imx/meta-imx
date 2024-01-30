@@ -71,14 +71,19 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-system-manager.git
+Package:                     imx-sm.git
 Version:                     1.0.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX System Manager
-Release Location:            https://github.com/nxp-imx/imx-system-manager -b lf-6.6.y-2.0.0
+Release Location:            https://github.com/nxp-imx/imx-sm -b lf-6.6.y-2.0.0
+Origin:                      NXP (BSD-3-Clause)
+                             CMSIS_5 (Apache-2.0) - http://silver.arm.com
+                                IAR (Apache-2.0) in CMSIS
+                             cygwin (BSD-3-Clause) - https://sourceware.org/git/?p=newlib-cygwin.git;a=tree;h=refs/tags/cygwin-3_3_6-release
+
 --------------------------------------------
 
 Package:                     imx-sc-firmware-1.15.0.bin
@@ -126,8 +131,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.1.bin
-Version:                     0.1.1
+Package:                     firmware-ele-imx-0.1.2.bin
+Version:                     0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -830,13 +835,25 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-2.1.12.bin
+Package:                     imx-dpu-g2d-2.1.12-v1.bin
 Version:                     2.1.12
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
-Description and comments:    G2D implementation using DPU
+Description and comments:    G2D v1 implementation using DPU
+Release Location:            Mirror
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+
+--------------------------------------------
+
+Package:                     imx-dpu-g2d-2.1.12-v2.bin
+Version:                     2.1.12
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
+License File:                COPYING
+Package Category:            Graphics
+Type of Content:             binary
+Description and comments:    G2D v2 implementation using DPU
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
 
