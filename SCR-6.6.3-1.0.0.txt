@@ -1604,20 +1604,14 @@ Origin:                      VeriSilicon (Verisilicon License)
 
 --------------------------------------------
 
-Package:                     mfgtools.git
-Version:                     3
+Package:                     mfgtool.git
+Version:                     1.5.163
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
 Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use uuu.
 Release Location:            https://github.com/nxp-imx/mfgtools -b master
-Origin:                      NXP (BSD-3-clause)
-                             zlib (zlib) - https://github.com/madler/zlib
-                             libusb (LGPL-2.1) [libusb-1.0.dll] [dynamic link] - https://github.com/libusb/libusb
-                             bzip2 (BSD-4-clause) - https://github.com/enthought/bzip2-1.0.6/tree/288acf97a15d558f96c24c89f578b724d6e06b0c
-                             Android Open Source Project (Apache-2.0) [sparse_format.h] - https://developer.android.com/
-
 --------------------------------------------
 
 Package:                     bcu.git
