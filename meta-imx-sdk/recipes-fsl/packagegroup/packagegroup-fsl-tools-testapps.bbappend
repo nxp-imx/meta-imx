@@ -37,6 +37,7 @@ RDEPENDS:${PN} += " \
     iw \
     libp11 \
     linuxptp \
+    media-ctl \
     minicom \
     mmc-utils \
     nano \
