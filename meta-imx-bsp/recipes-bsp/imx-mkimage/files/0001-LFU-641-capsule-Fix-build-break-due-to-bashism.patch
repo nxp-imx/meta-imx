@@ -1,0 +1,86 @@
+From 3b5ab6a12eb0c4e8eade7d43bf55f8b8121c07b5 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Thu, 1 Feb 2024 09:37:42 -0600
+Subject: [PATCH] LFU-641: capsule: Fix build break due to bashism
+
+Fixes:
+```
+| NOTE: building iMX8MP - TEE=tee.bin-stmm flash_evk_stmm_capsule
+| ls: cannot access 'CRT.*': No such file or directory
+| ls: cannot access 'CRT.*': No such file or directory
+| ls: cannot access 'CRT.*': No such file or directory
+| ****************************************************************
+| Key  already existed
+| If you not wanna use new Key, please not run target: capsule_key
+| Otherwise, please delete CRT.* and re-run capsule_key
+| ****************************************************************
+| make[1]: *** [soc.mak:259: capsule_key] Error 1
+```
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ iMX8M/soc.mak | 6 +++---
+ iMX91/soc.mak | 6 +++---
+ iMX93/soc.mak | 6 +++---
+ 3 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/iMX8M/soc.mak b/iMX8M/soc.mak
+index baf687e..085224d 100644
+--- a/iMX8M/soc.mak
++++ b/iMX8M/soc.mak
+@@ -247,11 +247,11 @@ flash_ddr4_val: flash_ddr4_val_no_hdmi
+ endif
+ 
+ ifeq ($(TEE),tee.bin-stmm)
+-KEY_EXISTS = $(shell if ls CRT.* &> /dev/null 2>&1; then echo "exist"; else echo "noexist"; fi)
++KEY_EXISTS = $(shell find -maxdepth 1 -name "CRT.*")
+ capsule_key:
+-ifeq ($(KEY_EXISTS),exist)
++ifneq ($(KEY_EXISTS),)
+ 	@echo "****************************************************************"
+-	@echo "Key $(shell ls CRT.*) already existed"
++	@echo "Key $(KEY_EXISTS) already existed"
+ 	@echo "If you not wanna use new Key, please not run target: capsule_key"
+ 	@echo "Otherwise, please delete CRT.* and re-run capsule_key"
+ 	@echo "****************************************************************"
+diff --git a/iMX91/soc.mak b/iMX91/soc.mak
+index 87ea397..3b92c26 100644
+--- a/iMX91/soc.mak
++++ b/iMX91/soc.mak
+@@ -166,11 +166,11 @@ clean:
+ 
+ # Add for System ready
+ ifeq ($(TEE),tee.bin-stmm)
+-KEY_EXISTS = $(shell if ls *CRT.* &> /dev/null 2>&1; then echo "exist"; else echo "noexist"; fi)
++KEY_EXISTS = $(shell find -maxdepth 1 -name "CRT.*")
+ capsule_key:
+-ifeq ($(KEY_EXISTS),exist)
++ifneq ($(KEY_EXISTS),)
+ 	@echo "****************************************************************"
+-	@echo "Key $(shell ls CRT.*) already existed"
++	@echo "Key $(KEY_EXISTS) already existed"
+ 	@echo "If you not wanna use new Key, please not run target: capsule_key"
+ 	@echo "Otherwise, please delete CRT.* and re-run capsule_key"
+ 	@echo "****************************************************************"
+diff --git a/iMX93/soc.mak b/iMX93/soc.mak
+index 8617df8..d94d115 100644
+--- a/iMX93/soc.mak
++++ b/iMX93/soc.mak
+@@ -173,11 +173,11 @@ clean:
+ 
+ # Add for System ready
+ ifeq ($(TEE),tee.bin-stmm)
+-KEY_EXISTS = $(shell if ls *CRT.* &> /dev/null 2>&1; then echo "exist"; else echo "noexist"; fi)
++KEY_EXISTS = $(shell find -maxdepth 1 -name "CRT.*")
+ capsule_key:
+-ifeq ($(KEY_EXISTS),exist)
++ifneq ($(KEY_EXISTS),)
+ 	@echo "****************************************************************"
+-	@echo "Key $(shell ls CRT.*) already existed"
++	@echo "Key $(KEY_EXISTS) already existed"
+ 	@echo "If you not wanna use new Key, please not run target: capsule_key"
+ 	@echo "Otherwise, please delete CRT.* and re-run capsule_key"
+ 	@echo "****************************************************************"
+-- 
+2.25.1
+
