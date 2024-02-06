@@ -36,6 +36,9 @@ do_install () {
     cp -Pr ${S}/g2d/usr/include/* ${D}${includedir}
 }
 
+INSANE_SKIP:append:libc-musl = " file-rdeps"
+RDEPENDS:${PN}:append:libc-musl = " gcompat"
+
 # The packaged binaries have been stripped of debug info, so disable
 # operations accordingly.
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
