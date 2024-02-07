@@ -1605,7 +1605,7 @@ Origin:                      VeriSilicon (Verisilicon License)
 --------------------------------------------
 
 Package:                     mfgtool.git
-Version:                     1.5.163
+Version:                     1.5.165
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
