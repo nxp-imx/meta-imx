@@ -1,4 +1,4 @@
-From 30a083530848de24432aa824760c54c6d3e6150f Mon Sep 17 00:00:00 2001
+From 10f7f659137e7a85db30253b5e98971c1ee9da22 Mon Sep 17 00:00:00 2001
 From: Tom Hochstein <tom.hochstein@nxp.com>
 Date: Tue, 3 Apr 2018 14:07:32 -0500
 Subject: [PATCH] logind.conf: Set HandlePowerKey to ignore
@@ -14,10 +14,10 @@ Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/src/login/logind.conf.in b/src/login/logind.conf.in
-index 0b10df6839..7e1ff86851 100644
+index e5fe924681..509932585c 100644
 --- a/src/login/logind.conf.in
 +++ b/src/login/logind.conf.in
-@@ -23,6 +23,8 @@
+@@ -25,6 +25,8 @@
  #InhibitDelayMaxSec=5
  #UserStopDelaySec=10
  #HandlePowerKey=poweroff

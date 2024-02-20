@@ -1,4 +1,4 @@
-From 1de860062220597308d45bcbf6bcbab324c4363c Mon Sep 17 00:00:00 2001
+From f611772a8dc4431cf464c1c6ef5d215d9553bf3a Mon Sep 17 00:00:00 2001
 From: Neena Busireddy <neenareddy.busireddy@nxp.com>
 Date: Mon, 17 Dec 2018 10:02:19 -0600
 Subject: [PATCH] units/systemd-udevd: Set PrivateMounts to no
@@ -26,11 +26,11 @@ Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/units/systemd-udevd.service.in b/units/systemd-udevd.service.in
-index dfc2a0e341..d2e0e0d069 100644
+index b59fdef9b0..6be8309895 100644
 --- a/units/systemd-udevd.service.in
 +++ b/units/systemd-udevd.service.in
-@@ -27,13 +27,12 @@ RestartSec=0
- ExecStart={{ROOTLIBEXECDIR}}/systemd-udevd
+@@ -28,13 +28,12 @@ RestartSec=0
+ ExecStart={{LIBEXECDIR}}/systemd-udevd
  KillMode=mixed
  TasksMax=infinity
 -PrivateMounts=yes
