@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.23.bin
+Package:                     firmware-imx-8.23-f07448f.bin
 Version:                     8.23
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.1.bin
+Package:                     firmware-ele-imx-0.1.1-aa807fc.bin
 Version:                     0.1.1
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -660,7 +660,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.4-aarch32.bin
+Package:                     imx-gpu-viv-6.4.11.p2.4-aarch32-b07999b.bin
 Version:                     6.4.11.p2.4
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -679,7 +679,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.4-aarch64.bin
+Package:                     imx-gpu-viv-6.4.11.p2.4-aarch64-b07999b.bin
 Version:                     6.4.11.p2.4
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -698,7 +698,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r47.0.bin
+Package:                     mali-imx-r47.0-b867f39.bin
 Version:                     r47.0
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -811,7 +811,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.4-arm.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.4-arm-b07999b.bin
 Version:                     6.4.11.p2.4
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -823,7 +823,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.4-aarch64.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.4-aarch64-b07999b.bin
 Version:                     6.4.11.p2.4
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -835,7 +835,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-2.1.12-v1.bin
+Package:                     imx-dpu-g2d-v1-2.1.12-ee47ef7.bin
 Version:                     2.1.12
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -843,11 +843,9 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    G2D v1 implementation using DPU
 Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-2.1.12-v2.bin
+Package:                     imx-dpu-g2d-v2-2.1.12-ee47ef7.bin
 Version:                     2.1.12
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -855,8 +853,6 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    G2D v2 implementation using DPU
 Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
 --------------------------------------------
 
 Package:                     imx-g2d-pxp.git
@@ -883,7 +879,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.4-aarch64-wayland.bin
+Package:                     libgpuperfcnt-6.4.11.p2.4-aarch64-wayland-e4ba456.bin
 Version:                     6.4.11.p2.4
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -895,7 +891,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.4-arm-fb.bin
+Package:                     libgpuperfcnt-6.4.11.p2.4-arm-fb-e4ba456.bin
 Version:                     6.4.11.p2.4
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -907,7 +903,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.4-arm-wayland.bin
+Package:                     libgpuperfcnt-6.4.11.p2.4-arm-wayland-e4ba456.bin
 Version:                     6.4.11.p2.4
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
