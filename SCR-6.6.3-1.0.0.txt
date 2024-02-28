@@ -1,7 +1,7 @@
 NXP Software Content Register
 
 Release - Linux 6.6.3-1.0.0
- Martch 2024
+ March 2024
 
 Outgoing License: LA_OPT_NXP_Software_License v53 December 2023 - Additional distribution license granted - Section 2.3 applies
 License File:     LICENSE.txt
