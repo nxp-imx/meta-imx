@@ -59,8 +59,8 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     imx-oei.git
 Version:                     1.0.0
-Outgoing License:            SCR: Outgoing License TBD SCR: License Addition TBD
-License File:                SCR: License File TBD
+Outgoing License:            GPL-2.0 
+License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX BootROM Optional Execution Image
@@ -146,7 +146,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     firmware-upower-1.3.1.bin
 Version:                     1.3.1
-Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -254,8 +254,8 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v45 May 2023 Additional distribution license granted - Section 2.3 applies
-License File:                EULA.txt
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
+License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             binary
 Description and comments:    BSP firmware - Bluetooth and WIFI
@@ -857,7 +857,7 @@ Release Location:            Mirror
 
 Package:                     imx-g2d-pxp.git
 Version:                     2.1.0
-Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -1070,8 +1070,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-vpuwrap.git
 Version:                     git
-Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
+Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    i.MX VPU wrapper library
@@ -1355,22 +1355,6 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
                              Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
 --------------------------------------------
 M33 Processor Packages
---------------------------------------------
-
-Package:                     imx8ulp-m33-demo-2.14.1.bin
-Version:                     2.14.1
-Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            M33_Processor
-Type of Content:             binary
-Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M33 core
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
-                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
-                             Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
-                             Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
-
 --------------------------------------------
 
 Package:                     imx93-m33-demo-2.15.000.bin
