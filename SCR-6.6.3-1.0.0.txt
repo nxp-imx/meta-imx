@@ -706,6 +706,15 @@ Package Category:            Graphics
 Type of Content:             binary and source
 Description and comments:    GPU Core IP in binary and test application source
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             Arm Limited (or its affiliates). (proprietary)
+                             Vulkan Header (Apache-2.0)- https://github.com/KhronosGroup/Vulkan-Headers
+                             OpenGLES Header (Apache-2.0)- https://github.com/KhronosGroup/OpenGL-Registry
+                             Mali GPUs Android Gralloc module (Apache-2.0) - https://developer.arm.com/downloads/-/mali-drivers/android-gralloc-module
+                             vulkan-wsi (MIT) - https://gitlab.freedesktop.org/mesa/vulkan-wsi-layer
+                             Open Source LLVM/Clang Source Code (Apache-2.0 with LLVM Exceptions) - https://github.com/llvm/llvm-project
+
+
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
@@ -843,6 +852,8 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    G2D v1 implementation using DPU
 Release Location:            Mirror
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+
 --------------------------------------------
 
 Package:                     imx-dpu-g2d-v2-2.1.12-ee47ef7.bin
@@ -853,6 +864,8 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    G2D v2 implementation using DPU
 Release Location:            Mirror
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+
 --------------------------------------------
 
 Package:                     imx-g2d-pxp.git
