@@ -1,4 +1,4 @@
-# Copyright 2020-2021 NXP
+# Copyright 2020-2021,2024 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Packagegroup for i.MX security packages"
@@ -9,8 +9,7 @@ inherit packagegroup
 
 RDEPENDS:${PN} = " \
     e2fsprogs-mke2fs \
-    keyctl-caam \
-    crypto-af-alg \
+    ${RDEPENDS_CAAM_CRYPTO_APPS} \
     keyutils \
     lvm2 \
     util-linux \
@@ -23,6 +22,11 @@ RDEPENDS_EDGE_LOCK ?= " \
     plug-and-trust-ecc \
     ${RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE} \
 "
+
+RDEPENDS_CAAM_CRYPTO_APPS ?= "keyctl-caam crypto-af-alg"
+RDEPENDS_CAAM_CRYPTO_APPS:mx93-nxp-bsp = ""
+RDEPENDS_CAAM_CRYPTO_APPS:mx95-nxp-bsp = ""
+
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE = ""
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8ulp-nxp-bsp = "itest"
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx93-nxp-bsp   = "itest"
