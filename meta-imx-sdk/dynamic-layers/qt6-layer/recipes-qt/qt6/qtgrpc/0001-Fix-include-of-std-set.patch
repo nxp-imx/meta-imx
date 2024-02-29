@@ -1,0 +1,80 @@
+From 0a0f3ab0830f43b7f30927ba359148d69f69dad0 Mon Sep 17 00:00:00 2001
+From: Konrad Kujawa <konrad.kujawa@qt.io>
+Date: Thu, 22 Jun 2023 15:30:20 +0200
+Subject: [PATCH 1/2] Fix include of std::set
+
+With new version of gRPC, compiler complains about missing include of
+the std::set. Move include from .cpp to .h files.
+
+Pick-to: 6.6
+Change-Id: Ibfef277598cb9e620ab1b693a42564706302c9cc
+Reviewed-by: Alexey Edelev <alexey.edelev@qt.io>
+Upstream-Status: Backport [https://code.qt.io/cgit.cgi/qt/qtgrpc.git/commit/?id=65a8796022777a7539d81834be056eb5825f242c&h=dev]
+---
+ src/tools/qtgrpcgen/qgrpcgenerator.cpp         | 1 -
+ src/tools/qtgrpcgen/qgrpcgenerator.h           | 3 ++-
+ src/tools/qtprotobufgen/qprotobufgenerator.cpp | 4 ++--
+ src/tools/qtprotobufgen/qprotobufgenerator.h   | 2 ++
+ 4 files changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/src/tools/qtgrpcgen/qgrpcgenerator.cpp b/src/tools/qtgrpcgen/qgrpcgenerator.cpp
+index a715bae..9a11c3c 100644
+--- a/src/tools/qtgrpcgen/qgrpcgenerator.cpp
++++ b/src/tools/qtgrpcgen/qgrpcgenerator.cpp
+@@ -10,7 +10,6 @@
+ #include "utils.h"
+ #include "options.h"
+ 
+-#include <set>
+ #include <google/protobuf/compiler/code_generator.h>
+ #include <google/protobuf/descriptor.h>
+ #include <google/protobuf/io/printer.h>
+diff --git a/src/tools/qtgrpcgen/qgrpcgenerator.h b/src/tools/qtgrpcgen/qgrpcgenerator.h
+index 809925e..996d37c 100644
+--- a/src/tools/qtgrpcgen/qgrpcgenerator.h
++++ b/src/tools/qtgrpcgen/qgrpcgenerator.h
+@@ -4,8 +4,9 @@
+ #ifndef QGRPCGENERATOR_H
+ #define QGRPCGENERATOR_H
+ 
+-#include <memory>
+ #include "generatorbase.h"
++#include <memory>
++#include <set>
+ 
+ namespace google::protobuf {
+ class FileDescriptor;
+diff --git a/src/tools/qtprotobufgen/qprotobufgenerator.cpp b/src/tools/qtprotobufgen/qprotobufgenerator.cpp
+index 85f7444..17d9449 100644
+--- a/src/tools/qtprotobufgen/qprotobufgenerator.cpp
++++ b/src/tools/qtprotobufgen/qprotobufgenerator.cpp
+@@ -12,11 +12,11 @@
+ #include "utils.h"
+ #include "options.h"
+ 
+-#include <cassert>
+ 
+ #include <array>
++#include <cassert>
+ #include <numeric>
+-#include <set>
++
+ #include <google/protobuf/stubs/common.h>
+ #include <google/protobuf/io/printer.h>
+ #include <google/protobuf/io/zero_copy_stream.h>
+diff --git a/src/tools/qtprotobufgen/qprotobufgenerator.h b/src/tools/qtprotobufgen/qprotobufgenerator.h
+index 8aec33a..6239fd4 100644
+--- a/src/tools/qtprotobufgen/qprotobufgenerator.h
++++ b/src/tools/qtprotobufgen/qprotobufgenerator.h
+@@ -7,6 +7,8 @@
+ 
+ #include "generatorbase.h"
+ 
++#include <set>
++
+ namespace google::protobuf {
+ class FileDescriptor;
+ class Descriptor;
+-- 
+2.34.1
+
