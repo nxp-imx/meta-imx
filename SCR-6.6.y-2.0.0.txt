@@ -532,7 +532,7 @@ Origin:                      NXP (Apache-2.0)
 Package:                     plug-and-trust.git
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
-License File:                Apache_2_0.txt
+License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Plug & Trust ECC example for SE050
@@ -544,7 +544,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     ecdsa-lib-imx-3.3.2.4.bin
 Version:                     3.3.2.4
-Outgoing License:            LA_OPT_NXP_Software_License v30 October 2021 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -706,6 +706,15 @@ Package Category:            Graphics
 Type of Content:             binary and source
 Description and comments:    GPU Core IP in binary and test application source
 Release Location:            Mirror
+Origin:                      NXP (proprietary)
+                             Arm Limited (or its affiliates). (proprietary)
+                             Vulkan Header (Apache-2.0)- https://github.com/KhronosGroup/Vulkan-Headers
+                             OpenGLES Header (Apache-2.0)- https://github.com/KhronosGroup/OpenGL-Registry
+                             Mali GPUs Android Gralloc module (Apache-2.0) - https://developer.arm.com/downloads/-/mali-drivers/android-gralloc-module
+                             vulkan-wsi (MIT) - https://gitlab.freedesktop.org/mesa/vulkan-wsi-layer
+                             Open Source LLVM/Clang Source Code (Apache-2.0 with LLVM Exceptions) - https://github.com/llvm/llvm-project
+
+
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
@@ -843,6 +852,8 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    G2D v1 implementation using DPU
 Release Location:            Mirror
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+
 --------------------------------------------
 
 Package:                     imx-dpu-g2d-v2-2.1.12-ee47ef7.bin
@@ -853,6 +864,8 @@ Package Category:            Graphics
 Type of Content:             binary
 Description and comments:    G2D v2 implementation using DPU
 Release Location:            Mirror
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+
 --------------------------------------------
 
 Package:                     imx-g2d-pxp.git
@@ -1193,7 +1206,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     imx-voiceUI.git
 Version:                     2.0
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 No distribution granted - Section 2.2 applies - See appendix on NXP Voice Software
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
@@ -1419,7 +1432,7 @@ Origin:                      NXP (Apache-2.0)
 Package:                     ethos-u-driver-stack-imx.git
 Version:                     23.08
 Outgoing License:            Apache-2.0 
-License File:                LICENSE-APACHE-2.0.txt
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    ethos-u-driver-stack is the user space driver library for ethos-u NPU on iMX93 platform
@@ -1491,7 +1504,7 @@ Origin:                      NXP (MIT)
 
 Package:                     neutron.git
 Version:                     1.0.0
-Outgoing License:            Proprietary 
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
@@ -1557,7 +1570,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 Package:                     tflite-neutron-delegate.git
 Version:                     2.14.0
 Outgoing License:            Apache-2.0 
-License File:                LICENSE
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    TensorFlow Lite Neutron Delegate
