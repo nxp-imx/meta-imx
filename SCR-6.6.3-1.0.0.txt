@@ -1107,8 +1107,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-1.31.0.bin
-Version:                     1.31.0
+Package:                     imx-vpu-hantro-1.32.0.bin
+Version:                     1.32.0
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
