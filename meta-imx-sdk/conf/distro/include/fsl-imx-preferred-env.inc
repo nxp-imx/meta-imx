@@ -34,11 +34,7 @@ PREFERRED_VERSION_opengl-es-cts:mx7-nxp-bsp = "3.2.4.0"
 PREFERRED_VERSION_opengl-es-cts:aarch64 = "3.2.9.3"
 
 # Use systemd as default init manager
-VIRTUAL-RUNTIME_init_manager = "systemd"
-PREFERRED_PROVIDER_udev = "systemd"
-PREFERRED_PROVIDER_udev-utils = "systemd"
-DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
-POKY_DEFAULT_DISTRO_FEATURES += " systemd usrmerge"
+POKY_INIT_MANAGER = "systemd"
 
 # Use virtual-runc as a default container runtime
 # runtime: runc, crun, runv, runx
