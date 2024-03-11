@@ -1,9 +1,6 @@
 # This file is included from meta-freescale/conf/machine/include/imx-base.inc
 # and provides a simple mechanism to override settings in the file
 
-WKS_FILE_DEPENDS:remove = "bmaptool-native"
-WKS_FILE_DEPENDS:append = " bmap-tools-native"
-
 # Update i.MX 8ULP
 IMX_EXTRA_FIRMWARE:mx8ulp-generic-bsp = "firmware-upower firmware-ele-imx"
 
