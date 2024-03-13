@@ -10,7 +10,7 @@ DEPENDS = "imx-secure-enclave"
 SRC_URI = "${ITEST_SRC};branch=${SRCBRANCH}"
 ITEST_SRC ?= "git://github.com/nxp-imx/itest.git;protocol=https"
 SRCBRANCH = "itest_ele"
-SRCREV = "267e78b6a982d871c1a89992417a26c3c3c6fcdb"
+SRCREV = "f603807675655b78ab1fd122a0b20fc9297211c9"
 
 S = "${WORKDIR}/git"
 
