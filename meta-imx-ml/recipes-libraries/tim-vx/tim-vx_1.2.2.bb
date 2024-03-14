@@ -3,14 +3,14 @@ DESCRIPTION = "TIM-VX is a software integration module provided by VeriSilicon \
 to facilitate deployment of Neural-Networks on OpenVX enabled ML accelerators. It serves as \
 the backend binding for runtime frameworks such as Android NN, Tensorflow-Lite, MLIR, TVM and more."
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d72cd187d764d96d91db827cb65b48a7"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a223f028c6a73fd2bd9223b79a38dcf6"
 
 DEPENDS = "imx-gpu-viv"
 
 SRC_URI = "${TIM_VX_SRC};branch=${SRCBRANCH}"
 TIM_VX_SRC ?= "git://github.com/nxp-imx/tim-vx-imx.git;protocol=https"
-SRCBRANCH = "imx-v1.1.y"
-SRCREV = "720f0a485a3952560d6d9ab7bea0e6abc1514680"
+SRCBRANCH = "imx-main"
+SRCREV = "1b38f2068e2c6f0709d6d67b46c14d78ae843690" 
 
 S = "${WORKDIR}/git"
 
