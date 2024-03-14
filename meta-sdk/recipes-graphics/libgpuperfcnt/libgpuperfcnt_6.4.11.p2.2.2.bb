@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f"
 
 IMX_SRCREV_ABBREV = "e4ba456"
 
-SRC_URI[arm-fb.md5sum] = "68b150d02fa96eaa7a69c0909cabefa9"
-SRC_URI[arm-fb.sha256sum] = "b0820f9cfecb8a4d8a400be18a2d9e59847c87501d415d40145ef9031ff0dbb7"
+SRC_URI[arm-fb.md5sum] = "f91970f00a87f3326f4529fc733f15d2"
+SRC_URI[arm-fb.sha256sum] = "4f876b323a46c4ff6141db6dd84aeccfa8d899bdc47302ae105b06c817ecd60c"
 
 SRC_URI[arm-wayland.md5sum] = "b7a00937ecd563ff8d1fa36fec4f81a5"
 SRC_URI[arm-wayland.sha256sum] = "4a039074e5f81e6b8318a212a6bcecd67a5c07e847f762b0b7ff8b6dddc2e4cb"
