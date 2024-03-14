@@ -4,16 +4,16 @@
 
 DESCRIPTION = "G2D library using i.MX DPU"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=9135422c7a38dac21bf1f858b6ef3bac"
 
 DEPENDS = "libgal-imx libdrm"
 PROVIDES += "virtual/libg2d"
 
 SRC_URI = "${FSL_MIRROR}/${IMX_BIN_NAME}.bin;fsl-eula=true"
 IMX_BIN_NAME = "${BP}-${IMX_SRCREV_ABBREV}"
-IMX_SRCREV_ABBREV = "512ece3"
-SRC_URI[md5sum] = "68105e9850eafdc5ac6f7f0d08aa9f66"
-SRC_URI[sha256sum] = "f3e84eb44272f73ec7ae5060c3a95568d33d265130bb422bf7af5d02b37634f9"
+IMX_SRCREV_ABBREV = "7ed5396"
+SRC_URI[md5sum] = "a20e3e0322a8a7e9fc5af2b4871d3fd1"
+SRC_URI[sha256sum] = "77c60f5be91c1bace5b7cbb89e2f20554e8a2c2d2a5cc3481a624803b7dafdd7"
 
 S = "${WORKDIR}/${IMX_BIN_NAME}"
 
