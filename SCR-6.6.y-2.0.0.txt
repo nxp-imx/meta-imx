@@ -844,7 +844,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.1.14-512ece3.bin
+Package:                     imx-dpu-g2d-v1-2.1.14-a48c34b.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -856,7 +856,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.1.14-512ece3.bin
+Package:                     imx-dpu-g2d-v2-2.1.14-a48c34b.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1528,7 +1528,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.14.0
+Version:                     2.15.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1541,7 +1541,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-ethosu-delegate.git
-Version:                     2.14.0
+Version:                     2.15.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1555,7 +1555,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
-Version:                     2.14.0
+Version:                     2.15.0
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1568,7 +1568,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 --------------------------------------------
 
 Package:                     tflite-neutron-delegate.git
-Version:                     2.14.0
+Version:                     2.15.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1576,20 +1576,6 @@ Type of Content:             source
 Description and comments:    TensorFlow Lite Neutron Delegate
 Release Location:            https://github.com/nxp-imx/tflite-neutron-delegate -b lf-6.6.y-2.0.0
 Origin:                      NXP (Apache-2.0)
---------------------------------------------
-
-Package:                     tim-vx-imx.git
-Version:                     1.1.88
-Outgoing License:            MIT 
-License File:                LICENSE
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    Tensor Interface Module for OpenVX
-Release Location:            https://github.com/nxp-imx/tim-vx-imx -b lf-6.6.y-2.0.0
-Origin:                      Vivante Corporation (MIT)
-                             The Khronos Group Inc. (Apache-2.0) - https://www.khronos.org/
-                             The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
-
 --------------------------------------------
 Tools Packages
 --------------------------------------------
