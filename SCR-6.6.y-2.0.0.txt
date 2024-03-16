@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.2-aa807fc.bin
+Package:                     firmware-ele-imx-0.1.2-4253b28.bin
 Version:                     0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
