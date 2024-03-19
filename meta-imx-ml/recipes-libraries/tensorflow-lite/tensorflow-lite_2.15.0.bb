@@ -18,6 +18,9 @@ S = "${WORKDIR}/git"
 
 inherit python3native cmake
 
+TFLITE_ENABLE_GPU = "off"
+TFLITE_ENABLE_GPU:mx95-nxp-bsp = "on"
+
 EXTRA_OECMAKE = " \
     -DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR} \
     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
@@ -30,6 +33,7 @@ EXTRA_OECMAKE = " \
     -DTFLITE_ENABLE_XNNPACK=on \
     -DTFLITE_PYTHON_WRAPPER_BUILD_CMAKE2=on \
     -DTFLITE_ENABLE_EXTERNAL_DELEGATE=on \
+    -DTFLITE_ENABLE_GPU=${TFLITE_ENABLE_GPU} \
     ${S}/tensorflow/lite/ \
 "
 EXTRA_OECMAKE_BUILD = "benchmark_model label_image"
@@ -99,6 +103,8 @@ do_install() {
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
         ${B}/tflite_pip/dist/tflite_runtime-*.whl
 }
+
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
 RDEPENDS:${PN}   = " \
     python3 \
