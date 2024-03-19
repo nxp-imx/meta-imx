@@ -44,6 +44,6 @@ PACKAGECONFIG:append:class-target:pn-qtwebengine   = " examples"
 PACKAGECONFIG:append:pn-systemd = " unmanaged-network"
 
 PACKAGECONFIG:append:pn-qtbase = " gles2"
-PACKAGECONFIG:remove:pn-qtbase = "no-opengl ${PACKAGECONFIG_QTBASE_REMOVE}"
+PACKAGECONFIG:remove:pn-qtbase = "gl no-opengl ${PACKAGECONFIG_QTBASE_REMOVE}"
 PACKAGECONFIG_QTBASE_REMOVE          = "linuxfb"
 PACKAGECONFIG_QTBASE_REMOVE:imxfbdev = ""
