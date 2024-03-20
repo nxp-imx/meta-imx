@@ -18,8 +18,9 @@ DPDK_EXAMPLES:imx-nxp-bsp = "l2fwd,l3fwd"
 # kernel module is provide by dpdk-module recipe, so disable here
 EXTRA_OEMESON = " -Denable_kmods=false \
                 -Dexamples=${DPDK_EXAMPLES} \
-                --cross-file ${S}/config/arm/arm64_poky_linux_gcc \
 "
+EXTRA_OEMESON:append:mx8-nxp-bsp = " --cross-file ${S}/config/arm/arm64_poky_linux_gcc"
+EXTRA_OEMESON:append:mx9-nxp-bsp = " --cross-file ${S}/config/arm/arm64_imx_poky_linux_gcc"
 
 do_install:append(){
     # remove usr/lib/*.so
