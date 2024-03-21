@@ -8,7 +8,7 @@ DPDK_EXTRAS_SRC ?= "git://github.com/nxp-qoriq/dpdk-extras.git;protocol=https"
 SRC_URI = "${DPDK_EXTRAS_SRC};nobranch=1"
 SRCREV = "b3422d9668e76229b4554f24dad42c61a2011254"
 
-S = "${WORKDIR}/git/linux/"
+S = "${WORKDIR}/git/linux"
 
 EXTRA_OEMAKE += " -C ${STAGING_KERNEL_BUILDDIR} M=${S}"
 
