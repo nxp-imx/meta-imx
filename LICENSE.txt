@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v53 December 2023
+LA_OPT_NXP_Software_License v54 February 2024
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
 downloading, installing, or using the Licensed Software, you indicate that you
@@ -727,9 +727,15 @@ sublicense or otherwise distribute the source code, or any modifications or
 derivatives thereof as stand-alone products.  You will be responsible for
 qualifying any modifications or derivatives with the Bluetooth SIG and any
 other qualifying bodies.
+
 TARA Systems: Use of TARA Systems GUI technology Embedded Wizard is limited to
 evaluation and demonstration only. Permitted distributions must be similarly
 limited. Further rights must be obtained directly from TARA Systems.
+
+Teensyduino Core Library:  If the Teensyduino Core Library or documentation is
+incorporated into a build system that allows selection among a list of target
+devices, then similar target devices manufactured by PJRC.com must be included
+in the list of target devices and selectable in the same manner.
 
 Texas Instruments: Your use of Texas Instruments Inc. WiLink8 Licensed Software
 is restricted to NXP SoC based systems that include a compatible connectivity
