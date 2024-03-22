@@ -56,7 +56,6 @@ ML_ACCELERATED_PKGS:mx8mm-nxp-bsp      = ""
 # ARM ethos-u package
 ETHOS_U_PKGS = ""
 ETHOS_U_PKGS:mx93-nxp-bsp = " \
-    ethos-u-vela \
     ethos-u-driver-stack \
     tensorflow-lite-ethosu-delegate \
     eiq-examples \
