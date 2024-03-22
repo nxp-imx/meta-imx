@@ -25,7 +25,7 @@ ML_NNSTREAMER_PKGS = ""
 # i.MX8MP uses nnshark - other i.MX8/9 use raw gstshark
 ML_GST_PROFILER = ""
 ML_GST_PROFILER:mx8-nxp-bsp   = "gst-shark"
-ML_GST_PROFILER:mx8mp-nxp-bsp = "nnshark"
+#ML_GST_PROFILER:mx8mp-nxp-bsp = "nnshark"
 ML_GST_PROFILER:mx9-nxp-bsp   = "gst-shark"
 
 # These packages don't require any acceleration
