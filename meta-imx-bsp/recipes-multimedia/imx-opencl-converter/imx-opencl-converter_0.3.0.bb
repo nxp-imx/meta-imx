@@ -2,7 +2,7 @@
 DESCRIPTION = "NXP Multimedia opencl converter lib"
 LICENSE = "Proprietary"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f" 
+LIC_FILES_CHKSUM = "file://COPYING;md5=1142bc333cf4971d6b10bd8292363f02"
 DEPENDS = "virtual/opencl-icd"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
