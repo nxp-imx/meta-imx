@@ -14,8 +14,8 @@ IMX_BIN_NAME = "${BP}-${TARGET_ARCH}-${IMX_SRCREV_ABBREV}"
 IMX_SRCREV_ABBREV = "ecd2e76"
 SRC_URI[aarch64.md5sum] = "d368a51cee913ac90029bd455a879824"
 SRC_URI[aarch64.sha256sum] = "03ea41919e4ff6c4aec190e4cccbb5ac1cab41cdd3237ccb351c0a47aeff0bb3"
-SRC_URI[arm.md5sum] = "cd7af556247e7b1ba51d975504f2a29e"
-SRC_URI[arm.sha256sum] = "f1f1bfc9dea5d6b09d7490f656fdbb8071e403e3438ebcbd70d2ad6270f9c939"
+SRC_URI[arm.md5sum] = "9ab1cf90e088c5ce9a750188d10f8e68"
+SRC_URI[arm.sha256sum] = "a46046ecac0a31377c17fb25eeaf4e55ed2242449b1d9f14669b7f6e77883233"
 
 S = "${WORKDIR}/${IMX_BIN_NAME}"
 
