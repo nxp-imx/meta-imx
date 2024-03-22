@@ -3,7 +3,7 @@
 # Copyright (C) 2018 O.S. Systems Software LTDA.
 SECTION = "base"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f" 
+LIC_FILES_CHKSUM = "file://COPYING;md5=1142bc333cf4971d6b10bd8292363f02"
 
 # Note: This .inc file is used from differently named recipes, so the package
 # name must be hard-coded, i.e., ${BPN} cannot be used.
