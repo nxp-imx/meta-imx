@@ -1,5 +1,5 @@
 # Copyright (C) 2015 Freescale Semiconductor
-# Copyright 2017-2020,2022 NXP
+# Copyright 2017-2020,2022,2024 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "Set of audio tools for inclusion on images"
@@ -38,6 +38,7 @@ PDM_INSTALL:mx8m-nxp-bsp = "imx-sw-pdm"
 NXPAFE_INSTALL ?= ""
 NXPAFE_INSTALL:mx8mm-nxp-bsp = "nxp-afe nxp-afe-voiceseeker"
 NXPAFE_INSTALL:mx8mp-nxp-bsp = "nxp-afe nxp-afe-voiceseeker"
+NXPAFE_INSTALL:mx8ulp-nxp-bsp = "nxp-afe nxp-afe-voiceseeker"
 NXPAFE_INSTALL:mx93-nxp-bsp = "nxp-afe nxp-afe-voiceseeker"
 NXPAFE_INSTALL:mx95-nxp-bsp = "nxp-afe nxp-afe-voiceseeker"
 
