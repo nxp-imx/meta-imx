@@ -1,6 +1,10 @@
 # This file is included from meta-freescale/conf/machine/include/imx-base.inc
 # and provides a simple mechanism to override settings in the file
 
+# Update i.MX 8MQ
+SOC_ATF_BOOT_UART_BASE:mx8mq-generic-bsp   = "0x30860000"
+
+
 # Update i.MX 8ULP
 IMX_EXTRA_FIRMWARE:mx8ulp-generic-bsp = "firmware-upower firmware-ele-imx"
 
