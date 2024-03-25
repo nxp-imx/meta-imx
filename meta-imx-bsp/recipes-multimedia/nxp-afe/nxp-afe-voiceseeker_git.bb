@@ -1,4 +1,4 @@
-# Copyright 2021-2023 NXP
+# Copyright 2021-2024 NXP
 
 DESCRIPTION = "NXP RetuneDSP Voice Seeker Libraries"
 SECTION = "multimedia"
@@ -21,6 +21,7 @@ S = "${WORKDIR}/git"
 EXTRA_CONF = "--enable-armv8 --bindir=/unit_tests/ --libdir=${libdir}"
 
 EXTRA_OEMAKE:mx8-nxp-bsp = "BUILD_ARCH=CortexA53"
+EXTRA_OEMAKE:mx8ulp-nxp-bsp = "BUILD_ARCH=CortexA35"
 EXTRA_OEMAKE:mx9-nxp-bsp = "BUILD_ARCH=CortexA55"
 
 do_compile () {
