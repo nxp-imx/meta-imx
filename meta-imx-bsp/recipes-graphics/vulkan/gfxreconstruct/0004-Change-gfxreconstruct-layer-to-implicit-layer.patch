@@ -1,0 +1,87 @@
+From 2f0b7d10e49d0156afe9f20f8847a25fcc32e5d9 Mon Sep 17 00:00:00 2001
+From: Yuan Tian <yuan.tian@nxp.com>
+Date: Mon, 25 Mar 2024 15:40:15 +0800
+Subject: [PATCH] Change gfxreconstruct layer to implicit layer
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
+---
+ layer/CMakeLists.txt                          |  2 +-
+ layer/json/VkLayer_gfxreconstruct.json.in     |  6 +++++
+ .../capture-vulkan/gfxrecon-capture-vulkan.py | 23 +++----------------
+ 3 files changed, 10 insertions(+), 21 deletions(-)
+
+diff --git a/layer/CMakeLists.txt b/layer/CMakeLists.txt
+index 856b72f3..29be8159 100644
+--- a/layer/CMakeLists.txt
++++ b/layer/CMakeLists.txt
+@@ -91,7 +91,7 @@ endif()
+ 
+ install(TARGETS VkLayer_gfxreconstruct RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+ if (UNIX)
+-    install(FILES $<TARGET_FILE_DIR:VkLayer_gfxreconstruct>/staging-json/VkLayer_gfxreconstruct.json DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/vulkan/explicit_layer.d)
++    install(FILES $<TARGET_FILE_DIR:VkLayer_gfxreconstruct>/staging-json/VkLayer_gfxreconstruct.json DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/vulkan/implicit_layer.d)
+ else()
+     install(FILES $<TARGET_FILE_DIR:VkLayer_gfxreconstruct>/VkLayer_gfxreconstruct.json DESTINATION ${CMAKE_INSTALL_BINDIR})
+ endif()
+diff --git a/layer/json/VkLayer_gfxreconstruct.json.in b/layer/json/VkLayer_gfxreconstruct.json.in
+index 914f8e62..e568c8b3 100644
+--- a/layer/json/VkLayer_gfxreconstruct.json.in
++++ b/layer/json/VkLayer_gfxreconstruct.json.in
+@@ -473,6 +473,12 @@
+                     ]
+                 }
+             ]
++        },
++        "enable_environment": {
++          "ENABLE_VULKAN_GFXRECONSTRUCT_CAPTURE": "1"
++        },
++        "disable_environment": {
++          "DISABLE_VULKAN_GFXRECONSTRUCT_CAPTURE": "1"
+         }
+     }
+ }
+diff --git a/tools/capture-vulkan/gfxrecon-capture-vulkan.py b/tools/capture-vulkan/gfxrecon-capture-vulkan.py
+index 6ad804c4..93937918 100644
+--- a/tools/capture-vulkan/gfxrecon-capture-vulkan.py
++++ b/tools/capture-vulkan/gfxrecon-capture-vulkan.py
+@@ -250,24 +250,8 @@ def validate_args(args):
+ def set_env_vars(args):
+     '''Set environment variables for capture layer
+     '''
+-    # Set VK_INSTANCE_LAYERS
+-    # If gfxr layer is not already in VK_INSTANCE_LAYER, append gfxr layer
+-    # to VK_INSTANCE_LAYERS
+-    if os.getenv('VK_INSTANCE_LAYERS') is None:
+-        os.environ['VK_INSTANCE_LAYERS'] = 'VK_LAYER_LUNARG_gfxreconstruct'
+-    elif (not ('VK_LAYER_LUNARG_gfxreconstruct' in os.getenv('VK_INSTANCE_LAYERS'))):
+-        os.environ['VK_INSTANCE_LAYERS'] = os.environ['VK_INSTANCE_LAYERS'] + \
+-            os.pathsep + 'VK_LAYER_LUNARG_gfxreconstruct'
+-    if args.capture_layer is not None:
+-        # Prefix the layer path provided by the user to the layer search path
+-        path_delimiter = ':'
+-        if 'windows' == platform.system().lower():
+-            path_delimiter = ';'
+-        vk_layer_path = ''
+-        if 'VK_LAYER_PATH' in os.environ:
+-            vk_layer_path = os.environ['VK_LAYER_PATH']
+-        os.environ['VK_LAYER_PATH'] = path_delimiter.join([
+-            args.capture_layer, vk_layer_path])
++    # Set ENABLE_VULKAN_GFXRECONSTRUCT_CAPTURE
++    os.environ['ENABLE_VULKAN_GFXRECONSTRUCT_CAPTURE'] = '1'
+ 
+     # Set GFXRECON_* capture options
+     # The capture layer will validate these options and generate errors as needed
+@@ -311,8 +295,7 @@ def PrintLayerEnv():
+     print_env_var('GFXRECON_LOG_LEVEL')
+     print_env_var('GFXRECON_LOG_OUTPUT_TO_OS_DEBUG_STRING')
+     print_env_var('GFXRECON_MEMORY_TRACKING_MODE')
+-    print_env_var('VK_INSTANCE_LAYERS')
+-    print_env_var('VK_LAYER_PATH')
++    print_env_var('ENABLE_VULKAN_GFXRECONSTRUCT_CAPTURE')
+ 
+ 
+ if '__main__' == __name__:
+-- 
+2.17.1
+

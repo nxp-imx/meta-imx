@@ -9,6 +9,7 @@ SRC_URI = " \
     file://0001-FindVulkanVersion.cmake-Look-for-vulkan-headers-in-s.patch \
     file://0002-MGS-7104-ccc-gfxreconstruct-Add-support-for-xdg-shel.patch \
     file://0003-MGS-7104-ccc-gfxreconstruct-Generate-xdg-shell-proto.patch \
+    file://0004-Change-gfxreconstruct-layer-to-implicit-layer.patch \
 "
 SRCREV = "55c1cddf95370f754b8b5e5145384fd55be32d0f"
 S = "${WORKDIR}/git"
