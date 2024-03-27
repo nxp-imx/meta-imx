@@ -4,7 +4,9 @@ SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI = "gitsm://github.com/NXPPlugNTrust/se05x-openssl-provider.git;protocol=https;branch=main"
+SRC_URI = "${OPENSSL_SE050_SRC};branch=${OPENSSL_SE050_SRCBRANCH}"
+OPENSSL_SE050_SRC ?= "gitsm://github.com/NXPPlugNTrust/se05x-openssl-provider.git;protocol=https"
+OPENSSL_SE050_SRCBRANCH ?= "main"
 SRCREV = "0f7c63e30ba379e0ed911539ffc8c6c4531fec12"
 
 S = "${WORKDIR}/git"
