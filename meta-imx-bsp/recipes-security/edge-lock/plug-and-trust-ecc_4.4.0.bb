@@ -9,7 +9,9 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 DEPENDS = ""
 
-SRC_URI = "git://github.com/NXP/plug-and-trust.git;protocol=https;branch=master"
+SRC_URI = "${PLUG_AND_TRUST_SRC};branch=${PLUG_AND_TRUST_SRCBRANCH}"
+PLUG_AND_TRUST_SRC ?= "git://github.com/NXP/plug-and-trust.git;protocol=https"
+PLUG_AND_TRUST_SRCBRANCH ?= "master"
 SRCREV = "92d003642bc154c025cf7e9ab011cac08c1de54b"
 
 S = "${WORKDIR}/git"
