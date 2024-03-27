@@ -2,7 +2,7 @@
 # Build tools and examples here
 include dpdk.inc
 
-DEPENDS = "numactl python3-pyelftools-native"
+DEPENDS = "numactl python3-pyelftools-native libpcap"
 
 S = "${WORKDIR}/git"
 
@@ -26,6 +26,9 @@ do_install:append(){
     # remove usr/lib/*.so
     rm -rf ${D}/${libdir}/*.so*
     rm -rf ${D}/${libdir}/dpdk
+
+    # remove usr/bin/dpdk-dumpcap
+    rm -rf ${D}/${bindir}/dpdk-dumpcap
 
     # remove  source files
     rm -rf ${D}/${datadir}/dpdk/examples/*
