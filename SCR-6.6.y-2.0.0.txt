@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.24-f07448f.bin
+Package:                     firmware-imx-8.24-c7757b9.bin
 Version:                     8.24
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.2-4253b28.bin
+Package:                     firmware-ele-imx-0.1.2-34635ef.bin
 Version:                     0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
