@@ -24,7 +24,7 @@ UBOOT_CONFIG[ecc]  = "${UBOOT_CONFIG_BASENAME}_inline_ecc_defconfig"
 UBOOT_CONFIG[ld]   = "${UBOOT_CONFIG_BASENAME}_ld_defconfig"
 
 # Set ATF platform name
-ATF_PLATFORM = "imx91p"
+ATF_PLATFORM = "imx91"
 
 IMXBOOT_TARGETS = "flash_singleboot"
 

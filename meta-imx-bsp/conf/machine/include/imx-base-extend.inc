@@ -29,14 +29,14 @@ MACHINEOVERRIDES_EXTENDER:mx8mpul:use-mainline-bsp = "imx-generic-bsp:imx-mainli
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx8mpul"
 MACHINE_SOCARCH_SUFFIX:mx8mpul-nxp-bsp = "-mx8mpul"
 
-# Add new machine i.MX 91 Phantom
-IMX_SOC_REV:mx91p-generic-bsp ?= "A1"
-SECO_FIRMWARE_NAME:mx91p-generic-bsp ?= "mx93${IMX_SOC_REV_LOWER}-ahab-container.img"
-MACHINEOVERRIDES_EXTENDER:mx91p:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:mx9-generic-bsp:mx9-nxp-bsp:mx91p-generic-bsp:mx91p-nxp-bsp"
-MACHINEOVERRIDES_EXTENDER:mx91p:use-mainline-bsp  = "imx-generic-bsp:imx-mainline-bsp:mx9-generic-bsp:mx9-mainline-bsp:mx91p-generic-bsp:mx91p-mainline-bsp"
-MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx91p"
-MACHINE_SOCARCH_SUFFIX:mx91p-nxp-bsp = "-mx91"
-IMX_EXTRA_FIRMWARE:mx91p-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx"
+# Add new machine i.MX 91
+IMX_SOC_REV:mx91-generic-bsp ?= "A0"
+SECO_FIRMWARE_NAME:mx91-generic-bsp ?= "mx91${IMX_SOC_REV_LOWER}-ahab-container.img"
+MACHINEOVERRIDES_EXTENDER:mx91:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:mx9-generic-bsp:mx9-nxp-bsp:mx91-generic-bsp:mx91-nxp-bsp"
+MACHINEOVERRIDES_EXTENDER:mx91:use-mainline-bsp  = "imx-generic-bsp:imx-mainline-bsp:mx9-generic-bsp:mx9-mainline-bsp:mx91-generic-bsp:mx91-mainline-bsp"
+MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx91"
+MACHINE_SOCARCH_SUFFIX:mx91-nxp-bsp = "-mx91"
+IMX_EXTRA_FIRMWARE:mx91-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx"
 
 # Add new variabe for ELE extra Firmware
 SECOEXT_FIRMWARE_NAME ?= "UNDEFINED"
