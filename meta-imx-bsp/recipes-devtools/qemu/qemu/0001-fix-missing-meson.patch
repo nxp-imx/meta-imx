@@ -1,0 +1,31 @@
+From a29870b921f650d67e6bc126200cc675f67c416e Mon Sep 17 00:00:00 2001
+From: Zelan Zou <zelan.zou@nxp.com>
+Date: Tue, 26 Mar 2024 14:41:53 +0900
+Subject: [PATCH 01/11] fix missing meson
+Upstream-Status: Inappropriate [workaround, would need a real fix for upstream]
+Signed-off-by: Zelan Zou <zelan.zou@nxp.com>
+---
+ configure | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/configure b/configure
+index d3ab436045..430799662d 100755
+--- a/configure
++++ b/configure
+@@ -955,12 +955,7 @@ fi
+ $mkvenv ensuregroup --dir "${source_path}/python/wheels" \
+      ${source_path}/pythondeps.toml meson || exit 1
+ 
+-# At this point, we expect Meson to be installed and available.
+-# We expect mkvenv or pip to have created pyvenv/bin/meson for us.
+-# We ignore PATH completely here: we want to use the venv's Meson
+-# *exclusively*.
+-
+-meson="$(cd pyvenv/bin; pwd)/meson"
++meson=`which meson`
+ 
+ # Conditionally ensure Sphinx is installed.
+ 
+-- 
+2.34.1
+
