@@ -183,11 +183,12 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
 SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \
            file://0001-fix-maybe-uninitialized-warnings-when-compiling-with.patch \
            file://0002-avoid-including-sys-poll.h-directly.patch \
+           file://0004-opencv-resolve-missing-opencv-data-dir-in-yocto-buil.patch \
            "
 SRC_URI:prepend = "${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} "
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-bad.git;protocol=https"
-SRCBRANCH = "imx-1.22.x"
-SRCREV = "ecda1dfe05eb38874f20c6b7a8c14bb3f6bc97ff"
+SRCBRANCH = "imx-1.24.x"
+SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
@@ -212,6 +213,10 @@ PACKAGECONFIG[tinycompress]    = "-Dtinycompress=enabled,-Dtinycompress=disabled
 
 EXTRA_OEMESON += " \
     -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \
+"
+
+EXTRA_OEMESON:remove = " \
+    -Dkate=disabled \
 "
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
