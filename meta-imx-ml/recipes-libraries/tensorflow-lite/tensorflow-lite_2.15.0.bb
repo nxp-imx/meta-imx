@@ -78,6 +78,14 @@ do_install() {
     install -d ${D}${includedir}/tensorflow/core/public
     cp ${S}/tensorflow/core/public/version.h ${D}${includedir}/tensorflow/core/public
 
+    # install ctstring_internal.h from core
+    install -d ${D}${includedir}/tensorflow/core/platform
+    cp ${S}/tensorflow/core/platform/ctstring_internal.h ${D}${includedir}/tensorflow/core/platform
+
+    # install ctstring_internal.h from tsl
+    install -d ${D}${includedir}/tsl/platform
+    cp ${S}/third_party/xla/third_party/tsl/tsl/platform/ctstring_internal.h ${D}${includedir}/tsl/platform
+
     # install examples
     install -d ${D}${bindir}/${PN}-${PV}/examples
     install -m 0555 ${B}/examples/label_image/label_image ${D}${bindir}/${PN}-${PV}/examples
