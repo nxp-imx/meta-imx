@@ -2,7 +2,7 @@ require conf/machine/include/imx-base.inc
 require conf/machine/include/arm/armv8-2a/tune-cortexa55.inc
 
 MACHINE_FEATURES += "pci wifi bluetooth"
-MACHINE_FEATURES:append:use-nxp-bsp = " optee nxpwifi-all-sdio"
+MACHINE_FEATURES:append:use-nxp-bsp = " nxpwifi-all-sdio"
 
 KERNEL_DEVICETREE = " \
     freescale/${KERNEL_DEVICETREE_BASENAME}.dtb \
