@@ -75,7 +75,7 @@ SOC_FAMILY:mx8-generic-bsp    = "mx8"
 SOC_FAMILY:mx8m-generic-bsp   = "mx8m"
 SOC_FAMILY:mx8x-generic-bsp   = "mx8x"
 SOC_FAMILY:mx8ulp-generic-bsp = "mx8ulp"
-SOC_FAMILY:mx91p-generic-bsp  = "mx93"
+SOC_FAMILY:mx91-generic-bsp  = "mx91"
 SOC_FAMILY:mx93-generic-bsp   = "mx93"
 SOC_FAMILY:mx95-generic-bsp   = "mx95"
 
@@ -145,6 +145,11 @@ compile_mx8ulp() {
         cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
                                                              ${BOOT_STAGING}/u-boot-spl.bin
     fi
+}
+
+compile_mx91() {
+    bbnote i.MX 91 boot binary build
+    compile_mx93
 }
 
 compile_mx93() {
@@ -259,6 +264,10 @@ deploy_mx8ulp() {
         install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} \
                                                              ${DEPLOYDIR}/${BOOT_TOOLS}
     fi
+}
+
+deploy_mx91() {
+    deploy_mx93
 }
 
 deploy_mx93() {
