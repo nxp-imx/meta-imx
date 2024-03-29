@@ -15,5 +15,6 @@ SRCBRANCH = "master"
 SRCREV = "7695a1c6459a219d6449e3cfaaad281800806bfb"
 
 PLATFORM:mx8ulp-nxp-bsp = "IMX8ULP"
+PLATFORM:mx91-nxp-bsp = "IMX8"
 PLATFORM:mx93-nxp-bsp = "IMX8ULP"
 PLATFORM:mx95-nxp-bsp = "IMX8"
