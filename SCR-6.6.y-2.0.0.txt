@@ -7,7 +7,7 @@ Outgoing License: LA_OPT_NXP_Software_License v54 February 2024 - Additional dis
 License File:     LICENSE.txt
 
 Yocto Project recipe manifest:
-repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-nanbield -m imx-6.6.y-2.0.0.xml
+repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-scarthgap -m imx-6.6.y-2.0.0.xml
 
 Release tag: lf-6.6.y-2.0.0
 Release Location: https://www.nxp.com/design/software/embedded-software/i-mx-software/embedded-linux-for-i-mx-applications-processors:IMXLINUX
@@ -660,7 +660,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-ecd2e76.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-f397231.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -679,7 +679,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-ecd2e76.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-f397231.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -820,7 +820,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-ecd2e76.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-f397231.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -832,7 +832,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-ecd2e76.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-f397231.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -844,7 +844,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.1.14-a48c34b.bin
+Package:                     imx-dpu-g2d-v1-2.1.14-5df8b5d.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -856,7 +856,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.1.14-a48c34b.bin
+Package:                     imx-dpu-g2d-v2-2.1.14-5df8b5d.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
