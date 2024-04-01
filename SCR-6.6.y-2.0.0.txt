@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.24-c7757b9.bin
+Package:                     firmware-imx-8.24-fbe0a4c.bin
 Version:                     8.24
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -611,7 +611,7 @@ Graphics Packages
 --------------------------------------------
 
 Package:                     isp-vvcam.git
-Version:                     4.2.2.24.1
+Version:                     4.2.2.24.2
 Outgoing License:            GPL-2.0 
 License File:                vvcam/LICENSE
 Package Category:            Graphics
@@ -622,8 +622,8 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.24.1.bin
-Version:                     4.2.2.24.1
+Package:                     isp-imx-4.2.2.24.2.bin
+Version:                     4.2.2.24.2
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -634,8 +634,8 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software
 
 --------------------------------------------
 
-Package:                     basler-camera-4.2.2.24.1.bin
-Version:                     4.2.2.24.1
+Package:                     basler-camera-4.2.2.24.2.bin
+Version:                     4.2.2.24.2
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -660,7 +660,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-f397231.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-c3931da.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -679,7 +679,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-f397231.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-c3931da.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -820,7 +820,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-f397231.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-c3931da.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -832,7 +832,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-f397231.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-c3931da.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
