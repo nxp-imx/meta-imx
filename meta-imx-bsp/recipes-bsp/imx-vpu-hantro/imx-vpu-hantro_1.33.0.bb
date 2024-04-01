@@ -1,4 +1,4 @@
-# Copyright 2017-2020,2023 NXP
+# Copyright 2017-2020,2023-2024 NXP
 
 DESCRIPTION = "i.MX Hantro VPU library"
 LICENSE = "Proprietary"
@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=44a8052c384584ba09077e85a3d1654f"
 
 PROVIDES = "virtual/imxvpu"
 
-SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
+IMX_SRCREV_ABBREV = "6ea544b"
+
 SRC_URI[md5sum] = "2d6e310773577bbed4991e2bd0dda89e"
 SRC_URI[sha256sum] = "f751ab7369d48e610ea3b6b0dc5a885c70a510861d6b46296ffc063fed370003"
 
