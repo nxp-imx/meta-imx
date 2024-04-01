@@ -12,6 +12,8 @@ IMX_SRCREV_ABBREV = "918c194"
 SRC_URI[md5sum] = "fdea27996e1accb6877fd59f1be3e3eb"
 SRC_URI[sha256sum] = "1188c5c4a327d3f39be8bd1ced96229ec15f3c8b203e1085a80856773ca06b1e"
 
+S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
+
 PLATFORM:mx8mm-nxp-bsp = "IMX8MM"
 PLATFORM:mx8mq-nxp-bsp = "IMX8MQ"
 PLATFORM:mx8mp-nxp-bsp = "IMX8MP"

@@ -12,6 +12,8 @@ IMX_SRCREV_ABBREV = "7a434fc"
 SRC_URI[md5sum] = "01b446069625e63b1475e3d3916d69a3"
 SRC_URI[sha256sum] = "436a789fc971211fd8a2955a5e39e46594c72fee40333090260469d617b0ac32"
 
+S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
+
 inherit fsl-eula-unpack use-imx-headers
 
 PARALLEL_MAKE="-j 1"
