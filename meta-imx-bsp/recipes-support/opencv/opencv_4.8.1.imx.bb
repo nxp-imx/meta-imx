@@ -17,7 +17,7 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "35fb387337db7241a33a170e733aac2e25ec288e"
+SRCREV_opencv = "23ded1c10e0a6815f83847c67caee43743a04ff0"
 SRCREV_contrib = "f10c84d48b0714f2b408c9e5cccfac1277c8e6cc"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
@@ -240,7 +240,7 @@ SRC_URI:remove = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;prot
 SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH_opencv};name=opencv"
 OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=master"
 SRCBRANCH_opencv = "4.8.1_imx"
-SRCREV_opencv = "35fb387337db7241a33a170e733aac2e25ec288e"
+SRCREV_opencv = "23ded1c10e0a6815f83847c67caee43743a04ff0"
 
 # Update opencv_contrib
 SRC_URI:remove = "git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=master;protocol=https"
