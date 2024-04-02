@@ -25,6 +25,11 @@ EXTRA_OEMAKE = " \
     PLATFORM="${PLATFORM}" \
 "
 
+do_compile () {
+    oe_runmake clean
+    oe_runmake PLATFORM="${PLATFORM}" all
+}
+
 do_install () {
     oe_runmake install DEST_DIR="${D}"
 }
