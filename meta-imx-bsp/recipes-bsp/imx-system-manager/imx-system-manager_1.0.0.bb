@@ -33,20 +33,11 @@ EXTRA_OEMAKE = " \
     config=${SYSTEM_MANAGER_CONFIG} \
     SM_CROSS_COMPILE=arm-none-eabi-"
 
-do_compile() {
-    oe_runmake img
-}
+do_install[noexec] = "1"
 
-do_install() {
-    install -D -p -m 0644 ${B}/build/${SYSTEM_MANAGER_CONFIG}/m33_image.bin ${D}/firmware/m33_image.bin
-}
-
-addtask deploy after do_install
+addtask deploy after do_compile
 do_deploy() {
-    cp -rf ${D}/firmware/* ${DEPLOYDIR}/
+    install -D -p -m 0644 ${B}/build/${SYSTEM_MANAGER_CONFIG}/m33_image.bin ${DEPLOYDIR}/
 }
-
-FILES:${PN} = "/firmware"
-SYSROOT_DIRS += "/firmware"
 
 COMPATIBLE_MACHINE = "(mx95-generic-bsp)"
