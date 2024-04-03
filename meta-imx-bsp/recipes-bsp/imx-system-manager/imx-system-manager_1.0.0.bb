@@ -22,23 +22,4 @@ SRCREV = "49c0dc185833bbcc9f810dedcf9c78720aa003a5"
 
 S = "${WORKDIR}/git"
 
-inherit deploy
-
-SYSTEM_MANAGER_CONFIG ?= "UNDEFINED"
-
-LDFLAGS[unexport] = "1"
-
-EXTRA_OEMAKE = " \
-    V=y \
-    config=${SYSTEM_MANAGER_CONFIG} \
-    SM_CROSS_COMPILE=arm-none-eabi-"
-
-do_install[noexec] = "1"
-
-addtask deploy after do_compile
-do_deploy() {
-    install -D -p -m 0644 ${B}/build/${SYSTEM_MANAGER_CONFIG}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin \
-                                                             ${DEPLOYDIR}/
-}
-
-COMPATIBLE_MACHINE = "(mx95-generic-bsp)"
+require imx-system-manager.inc

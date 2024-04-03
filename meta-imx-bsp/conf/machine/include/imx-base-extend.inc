@@ -24,9 +24,10 @@ MACHINE_FIRMWARE:append:mx95-nxp-bsp  = " firmware-imx-vpu-imx95"
 SECO_FIRMWARE_NAME:mx95-generic-bsp ?= "mx95${IMX_SOC_REV_LOWER}-ahab-container.img"
 SYSTEM_MANAGER_RPROVIDER ?= "imx-system-manager"
 # The System Manager Firmware Name corresponds to a particular binary implementation
-# in the Yocto deploy folder, e.g., m33_image.bin and m33_image-fusa.bin for the
-# standard BSP version and FuSa version, respectively
-SYSTEM_MANAGER_FIRMWARE_NAME                  ?= "${SYSTEM_MANAGER_FIRMWARE_BASENAME}"
+# in the Yocto deploy folder. The name is comprised of the Firmware Basename and the
+# default system manager Config name, e.g., m33_image-mx95evk.bin and
+# m33_image-mx95evk_fusa.bin for the standard BSP version and FuSa version, respectively
+SYSTEM_MANAGER_FIRMWARE_NAME                  ?= "${SYSTEM_MANAGER_FIRMWARE_BASENAME}-${SYSTEM_MANAGER_CONFIG}"
 # The System Manager Firmware Basename is an alias used by imx-boot instead of using
 # a unique name for each implementation, e.g., m33_image.bin for i.MX 95
 SYSTEM_MANAGER_FIRMWARE_BASENAME              ?= "INVALID"

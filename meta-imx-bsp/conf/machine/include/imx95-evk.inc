@@ -22,13 +22,13 @@ UBOOT_CONFIG ??= "sd"
 UBOOT_CONFIG[sd] = "${UBOOT_CONFIG_BASENAME}_evk_defconfig,sdcard"
 UBOOT_CONFIG[fspi] = "${UBOOT_CONFIG_BASENAME}_evk_fspi_defconfig"
 
-# Set ATF platform name
 ATF_PLATFORM = "imx95"
-SYSTEM_MANAGER_CONFIG = "mx95evk"
 OEI_CONFIGS = "ddr tcm"
 OEI_CORE   = "m33"
 OEI_SOC    = "mx95"
 OEI_BOARD  = "mx95lp5"
+SYSTEM_MANAGER_CONFIG  ?= "mx95evk"
+SYSTEM_MANAGER_CONFIGS ?= "${SYSTEM_MANAGER_CONFIG}"
 
 IMXBOOT_TARGETS = " \
     ${@bb.utils.contains('UBOOT_CONFIG', 'fspi', '${IMXBOOT_TARGETS_BASENAME}_a55_flexspi', '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d)} \
