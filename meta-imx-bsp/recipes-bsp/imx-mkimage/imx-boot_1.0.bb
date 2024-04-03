@@ -49,7 +49,8 @@ ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
 ATF_MACHINE_NAME:append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
 UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
-BOOT_CONFIG_MACHINE = "${BOOT_NAME}-${MACHINE}-${UBOOT_CONFIG}.bin"
+BOOT_CONFIG_MACHINE = "${BOOT_NAME}${BOOT_VARIANT}-${MACHINE}-${UBOOT_CONFIG}.bin"
+BOOT_VARIANT ?= ""
 
 TOOLS_NAME ?= "mkimage_imx8"
 
