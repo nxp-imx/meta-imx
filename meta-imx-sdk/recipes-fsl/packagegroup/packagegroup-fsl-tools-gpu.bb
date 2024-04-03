@@ -14,6 +14,10 @@ RDEPENDS:${PN} = " \
     ${SOC_TOOLS_GPU} \
 "
 
+RDEPENDS:${PN}:append:imxgpu = " ${GLES1_PACKAGE}"
+GLES1_PACKAGE              = "libgles1-imx"
+GLES1_PACKAGE:mx95-nxp-bsp = "mali-imx-libgles1 mali-imx-libgles1-dev"
+
 SOC_TOOLS_DRM ??= ""
 SOC_TOOLS_DRM:imxdrm ??= " \
     libdrm-tests"
