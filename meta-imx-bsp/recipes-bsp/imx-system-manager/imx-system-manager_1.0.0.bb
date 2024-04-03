@@ -37,7 +37,8 @@ do_install[noexec] = "1"
 
 addtask deploy after do_compile
 do_deploy() {
-    install -D -p -m 0644 ${B}/build/${SYSTEM_MANAGER_CONFIG}/m33_image.bin ${DEPLOYDIR}/
+    install -D -p -m 0644 ${B}/build/${SYSTEM_MANAGER_CONFIG}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin \
+                                                             ${DEPLOYDIR}/
 }
 
 COMPATIBLE_MACHINE = "(mx95-generic-bsp)"

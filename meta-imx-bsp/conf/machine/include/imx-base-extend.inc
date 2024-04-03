@@ -23,6 +23,14 @@ IMX_EXTRA_FIRMWARE:mx95-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SY
 MACHINE_FIRMWARE:append:mx95-nxp-bsp  = " firmware-imx-vpu-imx95"
 SECO_FIRMWARE_NAME:mx95-generic-bsp ?= "mx95${IMX_SOC_REV_LOWER}-ahab-container.img"
 SYSTEM_MANAGER_RPROVIDER ?= "imx-system-manager"
+# The System Manager Firmware Name corresponds to a particular binary implementation
+# in the Yocto deploy folder, e.g., m33_image.bin and m33_image-fusa.bin for the
+# standard BSP version and FuSa version, respectively
+SYSTEM_MANAGER_FIRMWARE_NAME                  ?= "${SYSTEM_MANAGER_FIRMWARE_BASENAME}"
+# The System Manager Firmware Basename is an alias used by imx-boot instead of using
+# a unique name for each implementation, e.g., m33_image.bin for i.MX 95
+SYSTEM_MANAGER_FIRMWARE_BASENAME              ?= "INVALID"
+SYSTEM_MANAGER_FIRMWARE_BASENAME:mx95-nxp-bsp ?= "m33_image"
 
 # Add new machine i.MX 8M Plus UltraLite
 MACHINEOVERRIDES_EXTENDER:mx8mpul:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8m-generic-bsp:mx8m-nxp-bsp:mx8mpul-generic-bsp:mx8mpul-nxp-bsp"

@@ -41,7 +41,6 @@ do_compile[depends] += " \
 "
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
-SC_FIRMWARE_NAME:mx95-nxp-bsp = "m33_image.bin"
 
 OEI_ENABLE = "${@bb.utils.contains('DEPENDS', 'imx-oei', 'YES', 'NO', d)}"
 OEI_NAME ?= "oei-${OEI_CORE}-*.bin"
@@ -172,8 +171,8 @@ compile_mx95() {
     bbnote i.MX 95 boot binary build
     compile_mx93
 
-    # Copy System-Manger firmware here
-    cp ${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME}               ${BOOT_STAGING}/m33_image.bin
+    cp ${DEPLOY_DIR_IMAGE}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin \
+                                                             ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin
 }
 
 do_compile() {
@@ -287,8 +286,8 @@ deploy_mx93() {
 
 deploy_mx95() {
     deploy_mx93
-
-    install -m 0644 ${BOOT_STAGING}/${SC_FIRMWARE_NAME}      ${DEPLOYDIR}/${BOOT_TOOLS}
+    install -m 0644 ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin \
+                                                             ${DEPLOYDIR}/${BOOT_TOOLS}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin
 }
 
 do_deploy() {
