@@ -1504,7 +1504,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
-Version:                     1.16.1
+Version:                     1.17.1
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
