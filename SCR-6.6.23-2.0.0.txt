@@ -660,7 +660,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-c3931da.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-e5cffa7.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -679,7 +679,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-c3931da.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-e5cffa7.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -698,7 +698,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r47.2-6b97897.bin
+Package:                     mali-imx-r47.2-25e94c5.bin
 Version:                     r47.2
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -820,7 +820,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-c3931da.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-e5cffa7.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -832,7 +832,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-c3931da.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-e5cffa7.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -844,7 +844,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.1.14-5df8b5d.bin
+Package:                     imx-dpu-g2d-v1-2.1.14-6eca64c.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -856,7 +856,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.1.14-5df8b5d.bin
+Package:                     imx-dpu-g2d-v2-2.1.14-6eca64c.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v54 February 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -993,7 +993,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gstreamer.git
-Version:                     1.22.5.imx
+Version:                     1.24.0.imx
 Outgoing License:            LGPL-2.1 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1006,7 +1006,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gst-plugins-good.git
-Version:                     1.22.5.imx
+Version:                     1.24.0.imx
 Outgoing License:            LGPL-2.1 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1019,7 +1019,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gst-plugins-base.git
-Version:                     1.22.5.imx
+Version:                     1.24.0.imx
 Outgoing License:            LGPL-2.1 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1032,7 +1032,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gst-plugins-bad.git
-Version:                     1.22.5.imx
+Version:                     1.24.0.imx
 Outgoing License:            LGPL-2.1 
 License File:                LICENSE.txt
 Package Category:            Multimedia
