@@ -80,7 +80,7 @@ SOC_FAMILY:mx93-generic-bsp   = "mx93"
 SOC_FAMILY:mx95-generic-bsp   = "mx95"
 
 REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
-REV_OPTION:append:mx95-nxp-bsp = " OEI=${OEI_ENABLE}"
+REV_OPTION:append:mx95-nxp-bsp = " OEI=${OEI_ENABLE} LPDDR_TYPE=${DDR_TYPE}"
 
 do_uboot_assemble_fitimage:prepend:imx-generic-bsp() {
     for config in ${UBOOT_MACHINE}; do
