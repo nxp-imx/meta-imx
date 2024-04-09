@@ -21,10 +21,10 @@ INHIBIT_SYSROOT_STRIP = "1"
 PACKAGES =+ " \
     ${PN}-libegl     ${PN}-libegl-dev \
     ${PN}-libgbm     ${PN}-libgbm-dev \
-    ${PN}-libgles1   ${PN}-libgles1-dev \
-    ${PN}-libgles2   ${PN}-libgles2-dev \
-    ${PN}-libgles3   ${PN}-libgles3-dev \
-    ${PN}-libvulkan \
+    ${PN}-libgles1   \
+    ${PN}-libgles2   \
+    ${PN}-libgles3   ${PN}-libgles-dev \
+    ${PN}-libvulkan  \
     ${PN}-opencl-icd ${PN}-opencl-icd-dev"
 
 # Since libmali.so is loaded by dlopen, include it in the main package
@@ -57,19 +57,14 @@ FILES:${PN}-libgbm-dev = " \
     ${includedir}/gbm.h \
     ${libdir}/libgbm${SOLIBSDEV} \
     ${libdir}/pkgconfig/gbm.pc"
-FILES:${PN}-libgles1-dev = " \
-    ${includedir}/GLES \
-    ${libdir}/libGLESv1_CM${SOLIBSDEV} \
-    ${libdir}/pkgconfig/glesv1_cm.pc"
-FILES:${PN}-libgles2-dev = " \
-    ${includedir}/GLES2 \
-    ${libdir}/libGLESv2${SOLIBSDEV} \
-    ${libdir}/pkgconfig/glesv2.pc"
-FILES:${PN}-libgles3-dev = " \
-    ${includedir}/GLES3"
-# Note: libGLESv2.so contains both GLES 2 and 3 implementations, so pull in
-# GLES 3 headers manually
-RDEPENDS:${PN}-libgles2-dev = "${PN}-libgles3-dev"
+FILES:${PN}-libgles-dev = " \
+    ${includedir}/GLES* \
+    ${libdir}/libGLES*${SOLIBSDEV} \
+    ${libdir}/pkgconfig/gles*.pc"
+RPROVIDES:${PN}-libgles-dev = " \
+    ${PN}-libgles1-dev \
+    ${PN}-libgles2-dev \
+    ${PN}-libgles3-dev"
 FILES:${PN}-opencl-icd-dev = " \
     ${bindir}/mali_clcc"
 
