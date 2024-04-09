@@ -85,8 +85,11 @@ python __anonymous() {
         # libmali.so is loaded with dlopen, so an explicit runtime dependency is necessary
         d.appendVar("RDEPENDS:"   + fullp, "${PN}")
 
-        # For -dev, the first element is both the Debian and original name
-        fullp += "-dev"
+    # For -dev
+    for p in (("libegl",    "libegl1"      ),
+              ("libgbm",    "libgbm1"      ),
+              ("libgles",                 )):
+        fullp = "${PN}-" + p[0] + "-dev"
         pkgs = p[0] + "-dev"
         d.setVar("DEBIAN_NOAUTONAME:" + fullp, "1")
         d.appendVar("RREPLACES:"  + fullp, pkgs)
