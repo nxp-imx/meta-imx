@@ -1,7 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://Use-pc-sysrootdir-in-pkgdatadir.patch"
-
 SRC_URI:append:imxgpu:arm = " \
     file://0101-Revert-client-Do-not-warn-about-attached-proxies-on-.patch \
     file://0102-Revert-client-Abort-when-trying-to-add-an-event-to-a.patch \
