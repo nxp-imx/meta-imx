@@ -30,7 +30,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     uboot-imx.git
-Version:                     2023.04
+Version:                     2024.04
 Outgoing License:            GPL-2.0 
 License File:                Licenses/gpl-2.0.txt
 Package Category:            BSP
