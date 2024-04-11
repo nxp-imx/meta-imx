@@ -419,8 +419,10 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    Open Portable Trusted Execution Environment sanity tests
 Release Location:            https://github.com/nxp-imx/imx-optee-test -b lf-6.6.23-2.0.0
-Origin:                      NXP (BSD-2-Clause)
-                             optee_test (BSD-2-Clause) - https://github.com/OP-TEE/optee_test
+Origin:                      NXP (BSD-2-Clause) (We are not using /host)
+                             optee_test/ta (BSD-2-Clause) - https://github.com/OP-TEE/optee_test
+                             optee_test/host (GPL-2.0) - https://github.com/OP-TEE/optee_test
+
 
 --------------------------------------------
 
@@ -718,7 +720,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     6.3.0
+Version:                     6.3.1
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
@@ -929,7 +931,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 --------------------------------------------
 
 Package:                     opencv-imx.git
-Version:                     4.8.1.imx
+Version:                     4.9.0.imx
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            Graphics
