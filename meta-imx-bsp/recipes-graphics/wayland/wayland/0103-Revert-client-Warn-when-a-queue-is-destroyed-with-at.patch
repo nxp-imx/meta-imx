@@ -5,6 +5,7 @@ Subject: [PATCH 3/4] Revert "client: Warn when a queue is destroyed with
  attached proxies"
 
 This reverts commit 0ba650202e742b23150054cf0740168cd529b010.
+Upstream-Status: Inappropriate [i.MX specific]
 ---
  src/wayland-client.c | 16 --------
  tests/queue-test.c   | 93 --------------------------------------------

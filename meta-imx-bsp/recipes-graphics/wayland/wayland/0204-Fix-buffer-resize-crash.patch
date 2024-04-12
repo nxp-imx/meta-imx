@@ -60,6 +60,7 @@ https://gitlab.freedesktop.org/wayland/wayland/-/merge_requests/188#note_2010874
 
 Bug: 1451333
 Change-Id: I87853e3ff26c1d693f199fd0045fef796c3730c9
+Upstream-Status: Pending
 ---
  src/connection.c        |  2 +-
  tests/connection-test.c | 26 ++++++++++++++++++++++++++

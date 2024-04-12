@@ -9,6 +9,7 @@ upstream.
 
 Bug: 1394755
 Change-Id: If8f495b6aa70871920de9f66a1f1600dce917a10
+Upstream-Status: Pending
 ---
  src/connection.c | 9 ++++++++-
  1 file changed, 8 insertions(+), 1 deletion(-)

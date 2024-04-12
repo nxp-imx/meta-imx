@@ -5,6 +5,7 @@ Subject: [PATCH 1/4] Revert "client: Do not warn about attached proxies on
  default queue destruction."
 
 This reverts commit b01a85dfd5e8cda7170b7ba6fe66fc3800f93990.
+Upstream-Status: Inappropriate [i.MX specific]
 ---
  src/wayland-client.c | 14 ++++------
  tests/queue-test.c   | 63 +-------------------------------------------

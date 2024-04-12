@@ -10,6 +10,7 @@ Note that I am not the author. This CL has been reviewed upstream.
 
 Bug: 1342356
 Change-Id: I24f90fb31248a52aa97f1813a5ff9b30157aa350
+Upstream-Status: Pending
 ---
  src/connection.c          | 303 ++++++++++++++++++++++++++++----------
  src/wayland-client.c      |   2 +-

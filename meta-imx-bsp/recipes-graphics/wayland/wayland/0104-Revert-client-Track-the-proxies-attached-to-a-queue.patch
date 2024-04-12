@@ -4,6 +4,7 @@ Date: Wed, 29 Nov 2023 17:06:22 +0800
 Subject: [PATCH 4/4] Revert "client: Track the proxies attached to a queue"
 
 This reverts commit 674145dc3f621e5a3673714c7527d0e1c5336ab1.
+Upstream-Status: Inappropriate [i.MX specific]
 ---
  src/wayland-client.c | 22 ----------------------
  1 file changed, 22 deletions(-)

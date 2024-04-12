@@ -5,6 +5,7 @@ Subject: [PATCH 2/4] Revert "client: Abort when trying to add an event to a
  destroyed queue"
 
 This reverts commit d72f9007c36f2f8ad2dc26178545e8a7f5b993a0.
+Upstream-Status: Inappropriate [i.MX specific]
 ---
  src/wayland-client.c |  5 ----
  tests/queue-test.c   | 61 --------------------------------------------

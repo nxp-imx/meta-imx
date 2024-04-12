@@ -5,6 +5,7 @@ Subject: [PATCH 2/5] Set the default max buffer size to unbounded.
 
 Bug: 1342356
 Change-Id: I6e6c353504d6817b9bf76bc7e8b24001d7957ad6
+Upstream-Status: Pending
 ---
  src/connection.c      | 2 +-
  src/wayland-private.h | 5 ++++-

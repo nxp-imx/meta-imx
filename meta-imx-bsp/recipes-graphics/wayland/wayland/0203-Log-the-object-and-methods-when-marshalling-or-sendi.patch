@@ -9,6 +9,7 @@ signature.
 
 Bug: 1451333
 Change-Id: I06a0a1294c5431d0f8261e522aaa469e2c427725
+Upstream-Status: Pending
 ---
  src/wayland-client.c | 6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
