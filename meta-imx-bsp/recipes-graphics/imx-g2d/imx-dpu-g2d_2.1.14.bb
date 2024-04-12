@@ -22,8 +22,8 @@ SRC_URI[v1.sha256sum] = "c016a3e17256ce3451ceab02a4a3feb6d4fc2e67d64637d9ee9bc2a
 
 IMX_SRCREV_ABBREV:mx95-nxp-bsp = "6eca64c"
 IMX_SRC_URI_NAME:mx95-nxp-bsp = "v2"
-SRC_URI[v2.md5sum] = "248343273b5555f519af53558e6d1e05"
-SRC_URI[v2.sha256sum] = "dfbbf16a620aea9c26c234b28d317f3b25912cbc1b12ebbe9df98c24d55bc69d"
+SRC_URI[v2.md5sum] = "fc30a6fc889df0dec0e3e89f3b81a2be"
+SRC_URI[v2.sha256sum] = "7c90a709bb1b804d491a5f68cc628c1c29c1551067686a4bde9a1f8215aecd4d"
 
 S = "${WORKDIR}/${IMX_BIN_NAME}"
 
