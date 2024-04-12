@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.2-34635ef.bin
+Package:                     firmware-ele-imx-0.1.2-9f369e2.bin
 Version:                     0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
