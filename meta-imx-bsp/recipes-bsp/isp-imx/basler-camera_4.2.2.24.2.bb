@@ -8,8 +8,8 @@ inherit fsl-eula-unpack
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[md5sum] = "274c23056a425f52bcd18f962e5613fc"
-SRC_URI[sha256sum] = "68f759847bff93876241d366813c1026f2617f09039a127cc7b6afc74d14df03"
+SRC_URI[md5sum] = "fdb15c9541913a6493fd9578d39e18f0"
+SRC_URI[sha256sum] = "822356390ebbc4630764f037a2ae22ec4d3cb3cb3e0ca2164fb119f992b93fa0"
 
 do_compile[noexec] = "1"
 
