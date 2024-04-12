@@ -1,4 +1,4 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/imx-nxp-bsp"
+FILESEXTRAPATHS:prepend := "${THISDIR}/imx-nxp-bsp:"
 
 SRC_URI:append:imx-nxp-bsp = " file://51-bluez-imx.conf \
                                file://0001-wpctl-fix-set-default-Segmentation-fault-on-32bit-pl.patch \
