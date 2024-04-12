@@ -1,16 +1,16 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/imx-nxp-bsp"
 
-SRC_URI:append = " file://51-bluez-imx.lua \
-                   file://0001-wpctl-fix-set-default-Segmentation-fault-on-32bit-pl.patch \
-                 "
+SRC_URI:append:imx-nxp-bsp = " file://51-bluez-imx.conf \
+                               file://0001-wpctl-fix-set-default-Segmentation-fault-on-32bit-pl.patch \
+                             "
 
 do_install:append() {
 
-    install -d ${D}${sysconfdir}
+    install -d ${D}${datadir}
 
-    # Install 51-bluez-imx.lua to /etc/wireplumber/bluetooth.lua.d
-    install -d ${D}${sysconfdir}/wireplumber/bluetooth.lua.d
-    install -m 0755 ${WORKDIR}/51-bluez-imx.lua ${D}${sysconfdir}/wireplumber/bluetooth.lua.d
+    # Install 51-bluez-imx.conf to /usr/share/wireplumber/wireplumber.conf.d
+    install -d ${D}${datadir}/wireplumber/wireplumber.conf.d
+    install -m 0755 ${WORKDIR}/51-bluez-imx.conf ${D}${datadir}/wireplumber/wireplumber.conf.d
 }
 
-FILES:${PN}:append = " ${sysconfdir}/wireplumber/bluetooth.lua.d"
+FILES:${PN}:append = " ${datadir}/wireplumber/wireplumber.conf.d"
