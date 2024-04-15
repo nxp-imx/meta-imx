@@ -52,6 +52,14 @@ do_deploy:append:mx8m-generic-bsp() {
         done
         unset  i
     fi
+
+    # Deploy CRT.* from u-boot for stmm
+    install -m 0644 ${S}/CRT.*     ${DEPLOYDIR}
+}
+
+do_deploy:append:mx93-generic-bsp() {
+    # Deploy CRT.* from u-boot for stmm
+    install -m 0644 ${S}/CRT.*     ${DEPLOYDIR}
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
