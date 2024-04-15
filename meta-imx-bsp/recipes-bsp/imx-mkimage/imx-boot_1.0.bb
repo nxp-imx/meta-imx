@@ -202,8 +202,7 @@ do_compile() {
         *stmm_capsule)
             cp ${RECIPE_SYSROOT_NATIVE}/${bindir}/mkeficapsule      ${BOOT_STAGING}
             bbnote "building ${IMX_BOOT_SOC_TARGET} - TEE=tee.bin-stmm ${target}"
-            make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm delete_capsule_key
-            make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm ${REV_OPTION} capsule_key
+            cp ${DEPLOY_DIR_IMAGE}/CRT.*                 ${BOOT_STAGING}
             make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm dtbs=${UBOOT_DTB_NAME} ${REV_OPTION} ${target}
         ;;
         *)
