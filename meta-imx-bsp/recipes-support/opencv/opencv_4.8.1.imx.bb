@@ -240,7 +240,7 @@ SRC_URI:remove = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;prot
 SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH_opencv};name=opencv"
 OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=master"
 SRCBRANCH_opencv = "4.8.1_imx"
-SRCREV_opencv = "35fb387337db7241a33a170e733aac2e25ec288e"
+SRCREV_opencv = "23ded1c10e0a6815f83847c67caee43743a04ff0"
 
 # Update opencv_contrib
 SRC_URI:remove = "git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=master;protocol=https"
