@@ -86,9 +86,9 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     imx-sc-firmware-1.15.0.bin
-Version:                     1.15.0
-Outgoing License:            LA_OPT_NXP_Software_License v39 August 2022 Additional distribution license granted - Section 2.3 applies
+Package:                     imx-sc-firmware-1.16.0.bin
+Version:                     1.16.0
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.2-9f369e2.bin
+Package:                     firmware-ele-imx-0.1.2-dfc06fc.bin
 Version:                     0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -426,6 +426,18 @@ Origin:                      NXP (BSD-2-Clause) (We are not using /host)
 
 --------------------------------------------
 
+Package:                     imx-xen.git
+Version:                     4.18.imx
+Outgoing License:            GPL-2.0 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    A Virtual Machine Monitor
+Release Location:            https://github.com/nxp-imx/imx-xen -b lf-6.6.23-2.0.0
+Origin:                      NXP (GPL-2.0)
+
+--------------------------------------------
+
 Package:                     imx-jailhouse.git
 Version:                     git
 Outgoing License:            GPL-2.0 
@@ -437,6 +449,16 @@ Release Location:            https://github.com/nxp-imx/imx-jailhouse -b lf-6.6.
 Origin:                      NXP (GPL-2.0)
                              Siemens AG (GPL-2.0) - https://github.com/siemens/jailhouse
 
+--------------------------------------------
+
+Package:                     imx-qemu.git
+Version:                     8.2.2.imx
+Outgoing License:            GPL-2.0 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    A Virtual Machine Monitor
+Release Location:            https://github.com/nxp-imx/imx-qemu -b lf-6.6.23-2.0.0
 --------------------------------------------
 
 Package:                     crypto-af-alg.git
@@ -662,7 +684,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-e5cffa7.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-4208dc4.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -681,7 +703,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-e5cffa7.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-4208dc4.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -822,7 +844,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-e5cffa7.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-4208dc4.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -834,7 +856,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-e5cffa7.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-4208dc4.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -846,7 +868,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.1.14-6eca64c.bin
+Package:                     imx-dpu-g2d-v1-2.1.14-98af447.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1354,8 +1376,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx95-m7-demo-2.15.000.bin
-Version:                     2.15.000
+Package:                     imx95-m7-demo-2.16.000.bin
+Version:                     2.16.000
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
