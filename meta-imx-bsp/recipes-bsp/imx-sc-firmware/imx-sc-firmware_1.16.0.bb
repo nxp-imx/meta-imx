@@ -1,5 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
-# Copyright 2017-2022 NXP
+# Copyright 2017-2022,2024 NXP
 
 DESCRIPTION = "i.MX System Controller Firmware"
 LICENSE = "Proprietary"
