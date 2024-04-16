@@ -2,7 +2,7 @@ require opencv-4.5.2.imx.inc
 
 OPENCV_SRC = "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=${SRCBRANCH};name=opencv"
 SRCBRANCH = "4.6.0_imx"
-SRCREV_opencv = "47a0a1553d1b2885e558afb9478676a5f2bcf4d7"
+SRCREV_opencv = "2d6bcde367a9ff4559ad06ace5e55380293fbab0"
 SRCREV_contrib = "db16caf6ceee76b43b94c846be276e92a43e9700"
 SRCREV_extra = "936854e2b666853d6d0732a8eabc2d699f4fa3d8"
 SRC_URI:remove = " \
