@@ -13,5 +13,6 @@ require recipes-extended/xen/xen-tools.inc
 require xen-common.inc
 
 FILES:${PN}:append = " \
-    ${sysconfdir}/xen/imx95.conf \
+    ${sysconfdir}/xen/*.conf \
+    ${libdir}/xen/bin/xen-9pfsd \
 "
