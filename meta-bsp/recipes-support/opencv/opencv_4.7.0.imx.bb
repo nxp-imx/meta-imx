@@ -262,7 +262,7 @@ SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH_opencv};name=opencv"
 SRC_URI:remove = "file://0001-Add-missing-header-for-LIBAVCODEC_VERSION_INT.patch"
 OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=master"
 SRCBRANCH_opencv = "4.7.0_imx"
-SRCREV_opencv = "3acf6a50fcb4f774728d2338553ad646ccc14b14"
+SRCREV_opencv = "8408a1a7aa1ed31d451a44d6d4d771d02f58e6cf"
 
 # Update opencv_contrib
 SRC_URI:remove = "git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=master;protocol=https"
