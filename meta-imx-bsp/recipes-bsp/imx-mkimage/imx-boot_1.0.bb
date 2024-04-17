@@ -82,6 +82,9 @@ SOC_FAMILY:mx95-generic-bsp   = "mx95"
 REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
 REV_OPTION:append:mx95-nxp-bsp = " OEI=${OEI_ENABLE} LPDDR_TYPE=${DDR_TYPE}"
 
+MKIMAGE_EXTRA_ARGS ?= ""
+MKIMAGE_EXTRA_ARGS:append:mx95-nxp-bsp = "${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95alt', 'MSEL=1', '', d)}"
+
 do_uboot_assemble_fitimage:prepend:imx-generic-bsp() {
     for config in ${UBOOT_MACHINE}; do
         mkdir -p ${B}/${config}
@@ -206,8 +209,8 @@ do_compile() {
             make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm dtbs=${UBOOT_DTB_NAME} ${REV_OPTION} ${target}
         ;;
         *)
-            bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${target}"
-            make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} ${target}
+            bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} ${target}"
+            make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} dtbs=${UBOOT_DTB_NAME} ${target}
         ;;
         esac
 
