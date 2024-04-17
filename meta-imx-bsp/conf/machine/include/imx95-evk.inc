@@ -28,11 +28,29 @@ OEI_CORE   = "m33"
 OEI_SOC    = "mx95"
 OEI_BOARD  ?= "mx95lp5"
 DDR_TYPE   ?= "lpddr5"
-SYSTEM_MANAGER_CONFIG ?= "mx95evk"
+
+IMXBOOT_VARIANT ?= ""
+BOOT_VARIANT = "${@bb.utils.contains_any('IMXBOOT_VARIANT', 'alt jailhouse netc', '-${IMXBOOT_VARIANT}', '', d)}"
+
+# Multiple system manager configs by IMXBOOT_VARIANT
+SYSTEM_MANAGER_CONFIG = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       'mx95alt', \
+                            bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse', 'mx95evkjailhouse', \
+                            bb.utils.contains('IMXBOOT_VARIANT', 'netc',      'mx95netc', \
+                                                                              'mx95evk', d), d), d)}"
+
+# imx-boot (flash.bin) targets based on UBOOT_CONFIG and IMXBOOT_VARIANT
+IMXBOOT_TARGETS_SD = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       '${IMXBOOT_TARGETS_BASENAME}_mx95alt', \
+                         bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse', '${IMXBOOT_TARGETS_BASENAME}_mx95jailhouse', \
+                         bb.utils.contains('IMXBOOT_VARIANT', 'netc',      '${IMXBOOT_TARGETS_BASENAME}_mx95netc', \
+                                                                           '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d), d), d)} \
+"
 
 IMXBOOT_TARGETS = " \
-    ${@bb.utils.contains('UBOOT_CONFIG', 'fspi', '${IMXBOOT_TARGETS_BASENAME}_a55_flexspi', '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d)} \
+    ${@bb.utils.contains('UBOOT_CONFIG', 'fspi', '${IMXBOOT_TARGETS_BASENAME}_a55_flexspi', '${IMXBOOT_TARGETS_SD}', d)} \
 "
+
+M4_DEFAULT_IMAGE_MX95 = "${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95netc', 'imx95-19x19-evk_m7_TCM_netc_share_sm.bin', \
+                                                                                   'imx95-19x19-evk_m7_TCM_rpmsg_lite_str_echo_rtos.bin', d)}"
 
 IMX_BOOT_SOC_TARGET = "iMX95"
 IMX_BOOT_SEEK = "32"
