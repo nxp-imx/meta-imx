@@ -10,6 +10,7 @@ EXTRA_OEMAKE = " \
 
 do_configure() {
     oe_runmake config=${SYSTEM_MANAGER_CONFIG} clean
+    oe_runmake config=${SYSTEM_MANAGER_CONFIG} cfg
 }
 
 do_compile() {
