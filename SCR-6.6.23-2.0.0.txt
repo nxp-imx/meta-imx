@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.2-dfc06fc.bin
+Package:                     firmware-ele-imx-0.1.2-54155ec.bin
 Version:                     0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -703,7 +703,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-4208dc4.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-95a96b3.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -844,7 +844,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-4208dc4.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-95a96b3.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -856,7 +856,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-4208dc4.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-95a96b3.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
