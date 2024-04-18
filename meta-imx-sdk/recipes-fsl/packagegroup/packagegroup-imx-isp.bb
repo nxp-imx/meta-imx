@@ -1,4 +1,4 @@
-# Copyright 2020 NXP
+# Copyright 2020,2024 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Add packages for ISP build"
