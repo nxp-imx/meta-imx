@@ -29,8 +29,7 @@ OEI_SOC    = "mx95"
 OEI_BOARD  ?= "mx95lp5"
 DDR_TYPE   ?= "lpddr5"
 
-IMXBOOT_VARIANT ?= ""
-BOOT_VARIANT = "${@bb.utils.contains_any('IMXBOOT_VARIANT', 'alt jailhouse netc', '-${IMXBOOT_VARIANT}', '', d)}"
+IMXBOOT_VARIANTS = "alt jailhouse netc"
 
 # Multiple system manager configs by IMXBOOT_VARIANT
 SYSTEM_MANAGER_CONFIG = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       'mx95alt', \
