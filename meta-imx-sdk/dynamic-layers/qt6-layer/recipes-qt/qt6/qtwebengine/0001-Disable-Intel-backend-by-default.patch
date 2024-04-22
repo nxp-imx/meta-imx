@@ -1,0 +1,36 @@
+From 9519b20c406df7c0518e5caeec4699a7efe842e4 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@oss.nxp.com>
+Date: Tue, 2 Apr 2024 17:06:26 -0500
+Subject: [PATCH] Disable Intel backend by default
+
+Fixes build break:
+```
+| ld: build/src/core/Release/arm/obj/third_party/minigbm/minigbm/i915.o: in function `i915_clflush':
+| /usr/src/debug/qtwebengine/6.7.0/src/3rdparty/chromium/third_party/minigbm/src/i915.c:403:(.text.i915_bo_flush+0x20): undefined reference to `__builtin_ia32_mfence'
+| ld: /usr/src/debug/qtwebengine/6.7.0/src/3rdparty/chromium/third_party/minigbm/src/i915.c:405:(.text.i915_bo_flush+0x2a): undefined reference to `__builtin_ia32_clflush'
+| collect2: error: ld returned 1 exit status
+```
+
+Upstream-Status: Pending
+Fixes: 1f5b24f83baa747336b253cfcf18bf9231772cf0.
+Signed-off-by: Tom Hochstein <tom.hochstein@oss.nxp.com>
+---
+ chromium/third_party/minigbm/BUILD.gn | 4 ++--
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/chromium/third_party/minigbm/BUILD.gn b/chromium/third_party/minigbm/BUILD.gn
+index 4f121c0d900..739e2781cf8 100644
+--- a/chromium/third_party/minigbm/BUILD.gn
++++ b/chromium/third_party/minigbm/BUILD.gn
+@@ -16,7 +16,7 @@ declare_args() {
+ 
+   use_amdgpu_minigbm = false
+   use_exynos_minigbm = false
+-  use_intel_minigbm = true
++  use_intel_minigbm = false
+   use_marvell_minigbm = false
+   use_mediatek_minigbm = false
+   use_meson_minigbm = false
+-- 
+2.34.1
+
