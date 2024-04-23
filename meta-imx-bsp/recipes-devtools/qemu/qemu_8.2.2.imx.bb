@@ -26,4 +26,8 @@ PACKAGECONFIG:class-nativesdk ??= "fdt sdl kvm pie slirp \
 # ppc32 hosts are no longer supported in qemu
 COMPATIBLE_HOST:powerpc = "null"
 
+#----------------------overrides ---------------------
+# audio backend confiure
+PACKAGECONFIG:append = " pipewire jack"
+
 # COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
