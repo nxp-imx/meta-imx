@@ -3,7 +3,7 @@ NXP Software Content Register
 Release - Linux 6.1.55-2.2.1
  December 2023
 
-Outgoing License: LA_OPT_NXP_Software_License v49 September 2023 - Additional distribution license granted - Section 2.3 applies
+Outgoing License: LA_OPT_NXP_Software_License v53 December 2023 - Additional distribution license granted - Section 2.3 applies
 License File:     LICENSE.txt
 
 Yocto Project recipe manifest:
@@ -390,8 +390,10 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    Open Portable Trusted Execution Environment sanity tests
 Release Location:            https://github.com/nxp-imx/imx-optee-test -b lf-6.1.55-2.2.1
-Origin:                      NXP (BSD-2-Clause)
-                             optee_test (BSD-2-Clause) - https://github.com/OP-TEE/optee_test
+Origin:                      NXP (BSD-2-Clause) (We are not using /host)
+                             optee_test/ta (BSD-2-Clause) - https://github.com/OP-TEE/optee_test
+                             optee_test/host (GPL-2.0) - https://github.com/OP-TEE/optee_test
+
 
 --------------------------------------------
 
@@ -619,9 +621,9 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.2.2-aarch32.bin
+Package:                     imx-gpu-viv-6.4.11.p2.2.2-aarch32-f8f136f.bin
 Version:                     6.4.11.p2.2.2
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -638,9 +640,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.2.2-aarch64.bin
+Package:                     imx-gpu-viv-6.4.11.p2.2.2-aarch64-f8f136f.bin
 Version:                     6.4.11.p2.2.2
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -760,9 +762,9 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.2.2-arm.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.2.2-arm-f8f136f.bin
 Version:                     6.4.11.p2.2.2
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -772,9 +774,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.2.2-aarch64.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.2.2-aarch64-f8f136f.bin
 Version:                     6.4.11.p2.2.2
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -784,7 +786,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-2.1.10.bin
+Package:                     imx-dpu-g2d-2.1.10-7ed5396.bin
 Version:                     2.1.10
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -798,7 +800,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-g2d-pxp.git
 Version:                     2.1.0
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -820,9 +822,9 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.2.2-aarch64-wayland.bin
+Package:                     libgpuperfcnt-6.4.11.p2.2.2-aarch64-wayland-e4ba456.bin
 Version:                     6.4.11.p2.2.2
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -832,9 +834,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.2.2-arm-fb.bin
+Package:                     libgpuperfcnt-6.4.11.p2.2.2-arm-fb-e4ba456.bin
 Version:                     6.4.11.p2.2.2
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -844,9 +846,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.2.2-arm-wayland.bin
+Package:                     libgpuperfcnt-6.4.11.p2.2.2-arm-wayland-e4ba456.bin
 Version:                     6.4.11.p2.2.2
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
