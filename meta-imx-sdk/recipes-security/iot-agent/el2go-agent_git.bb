@@ -16,6 +16,8 @@ EL2GO_AGENT_SRCBRANCH ?= "master"
 SRCREV = "eb57e0121788452ac336bc41383c7db5c5d70b7b"
 S = "${WORKDIR}/git"
 
+PV = "5.1.0+git${SRCPV}"
+
 inherit cmake
 
 CFLAGS[unexport] = "1"
