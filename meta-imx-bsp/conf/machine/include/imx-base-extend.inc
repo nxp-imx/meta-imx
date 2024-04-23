@@ -4,7 +4,7 @@
 # IMXBOOT_VARIANT infrastructure
 IMXBOOT_VARIANT  ?= ""
 IMXBOOT_VARIANTS ?= "NONE"
-BOOT_VARIANT = "${@bb.utils.contains_any('IMXBOOT_VARIANT', '${IMXBOOT_VARIANTS}', '-${IMXBOOT_VARIANT}', '', d)}"
+BOOT_VARIANT = "${@bb.utils.contains_any('IMXBOOT_VARIANT', '${IMXBOOT_VARIANTS}', '-variant-${IMXBOOT_VARIANT}', '', d)}"
 
 # Update i.MX 8MQ
 SOC_ATF_BOOT_UART_BASE:mx8mq-generic-bsp   = "0x30860000"
