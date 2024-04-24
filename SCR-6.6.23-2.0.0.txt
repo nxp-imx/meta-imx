@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.2-54155ec.bin
+Package:                     firmware-ele-imx-0.1.2-d74ead9.bin
 Version:                     0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -547,7 +547,7 @@ License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    se05x openssl provider
-Release Location:            NXPPlugNTrust
+Release Location:            https://github.com/NXPPlugNTrust/se05x-openssl-provider -b lf-6.6.23-2.0.0
 Origin:                      NXP (Apache-2.0)
                              OpenSSL 1.1 (OpenSSL) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
 
@@ -684,7 +684,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-95a96b3.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-7dd67f6.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -703,7 +703,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-95a96b3.bin
+Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-7dd67f6.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -844,7 +844,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-95a96b3.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-7dd67f6.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -856,7 +856,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-95a96b3.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-7dd67f6.bin
 Version:                     6.4.11.p2.6
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
