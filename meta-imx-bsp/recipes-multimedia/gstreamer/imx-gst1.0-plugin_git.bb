@@ -33,7 +33,7 @@ RREPLACES:${PN}  = "gst1.0-fsl-plugin"
 RPROVIDES:${PN}  = "gst1.0-fsl-plugin"
 RCONFLICTS:${PN} = "gst1.0-fsl-plugin"
 
-PV = "4.8.4+git${SRCPV}"
+PV = "4.9.0+git${SRCPV}"
 
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH} \
            file://0011-meson-Undef-_TIME_BITS-along-with-_FILE_OFFSET_BITS.patch"
