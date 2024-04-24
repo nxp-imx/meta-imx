@@ -1,6 +1,6 @@
-# Copyright 2021-2024 NXP
+# Copyright 2024 NXP
 
-DESCRIPTION = "NXP RetuneDSP Voice Seeker Libraries"
+DESCRIPTION = "NXP Voice detection"
 SECTION = "multimedia"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=10c0fda810c63b052409b15a5445671a"
