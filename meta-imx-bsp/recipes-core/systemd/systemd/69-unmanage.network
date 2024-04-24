@@ -1,0 +1,7 @@
+[Match]
+Name=*
+KernelCommandLine=nfsroot
+KernelCommandLine=ip
+ 
+[Link]
+Unmanaged=yes

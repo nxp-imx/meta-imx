@@ -2,7 +2,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 SRC_URI += "file://0001-units-systemd-udevd-Set-PrivateMounts-to-no.patch \
             file://0020-logind.conf-Set-HandlePowerKey-to-ignore.patch \
-            file://89-unmanage.network"
+            file://69-unmanage.network"
 
 PACKAGECONFIG[unmanaged-network] = ""
 
@@ -14,7 +14,7 @@ do_install:append () {
 
     # Configure the network as unmanaged
     if [ "${@bb.utils.filter('PACKAGECONFIG', 'unmanaged-network', d)}" ]; then
-        install -Dm 0644 ${WORKDIR}/89-unmanage.network ${D}${sysconfdir}/systemd/network/
+        install -Dm 0644 ${WORKDIR}/69-unmanage.network ${D}${sysconfdir}/systemd/network/
     fi
 
     # Add special touchscreen rules
