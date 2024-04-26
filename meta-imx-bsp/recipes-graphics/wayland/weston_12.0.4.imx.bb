@@ -170,8 +170,8 @@ SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}
 SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 SRC_URI += "file://0001-Revert-protocol-no-found-wayland-scanner-with-Yocto-.patch"
-SRCBRANCH = "weston-imx-12.0.3"
-SRCREV = "d078b5d1113b02a2c0a015bcf98b7067a7e8e4a8"
+SRCBRANCH = "weston-imx-12.0.4"
+SRCREV = "4f28004dbbc41abd6fbe84040327c852a1bc6ad5"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
