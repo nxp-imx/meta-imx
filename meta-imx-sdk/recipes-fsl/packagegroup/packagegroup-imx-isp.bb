@@ -10,12 +10,6 @@ PACKAGE_ARCH = "${TUNE_PKGARCH}"
 inherit packagegroup
 
 ISP_PKGS      ?= ""
-ISP_PKGS:mx8mp-nxp-bsp = " \
-    isp-imx \
-    basler-camera \
-    basler-camera-dev \
-    kernel-module-isp-vvcam \
-"
 ISP_PKGS:mx95-nxp-bsp = " \
     libcamera \
     libcamera-gst \
