@@ -1,0 +1,37 @@
+From 77dfdc3fd8bf508e64d4d31b55be2b632d4e3404 Mon Sep 17 00:00:00 2001
+From: Viorel Suman <viorel.suman@nxp.com>
+Date: Fri, 26 Apr 2024 23:29:17 +0300
+Subject: [PATCH] ensure file name passed to HOLD option is not empty
+Content-Type: text/plain; charset="iso-8859-1"
+
+Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
+---
+ src/imx8qxb0.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/src/imx8qxb0.c b/src/imx8qxb0.c
+index 25a71bc..a20e6f1 100644
+--- a/src/imx8qxb0.c
++++ b/src/imx8qxb0.c
+@@ -826,7 +826,7 @@ int build_container_qx_qm_b0(soc_type_t soc, uint32_t sector_size, uint32_t ivt_
+ 				fprintf(stderr, "No container found\n");
+ 				exit(EXIT_FAILURE);
+ 			}
+-			if (img_sp->filename) {
++			if (img_sp->filename && strlen(img_sp->filename)) {
+ 				check_file(&sbuf, img_sp->filename);
+ 				if (sbuf.st_size > img_sp->entry) {
+ 					fprintf(stderr,
+@@ -962,7 +962,8 @@ int build_container_qx_qm_b0(soc_type_t soc, uint32_t sector_size, uint32_t ivt_
+ 			copy_file_aligned(ofd, img_sp->filename, img_sp->src, sector_size);
+ 			break;
+ 		case HOLD:
+-			if (img_sp->filename) { /* in this case file is optional  */
++			/* in this case file is optional  */
++			if (img_sp->filename && strlen(img_sp->filename)) {
+ 				copy_file_aligned(ofd, img_sp->filename, img_sp->src, sector_size);
+ 			}
+ 			break;
+-- 
+2.34.1
+
