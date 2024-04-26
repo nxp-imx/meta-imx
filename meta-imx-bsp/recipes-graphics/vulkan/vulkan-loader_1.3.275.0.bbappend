@@ -1,3 +1,7 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+SRC_URI += "file://0001-LF-11869-change-mali-wsi-layer-activating-order.patch"
+
 # libvulkan.so is loaded dynamically, so put it in the main package
 SOLIBS          = ".so*"
 FILES_SOLIBSDEV = ""
