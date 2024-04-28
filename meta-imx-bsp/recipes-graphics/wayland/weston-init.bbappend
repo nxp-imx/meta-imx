@@ -1,7 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-PACKAGECONFIG_GBM_FORMAT:mx93-nxp-bsp ?= "gbm-format"
-
 GBM_FORMAT_VALUE = "argb8888"
 
 update_file() {
