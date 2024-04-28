@@ -9,7 +9,7 @@ require tensorflow-lite-${PV}.inc
 
 NEUTRON_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-neutron-delegate.git;protocol=https"
 SRCBRANCH_neutron = "offline_compile"
-SRCREV_neutron = "f6ed0fc8ebea2980b28f54658a9c79e757508a0e"
+SRCREV_neutron = "575941779aa9718c1e69ff892bea822fcf181066"
 
 SRCREV_FORMAT = "neutron_tf"
 
