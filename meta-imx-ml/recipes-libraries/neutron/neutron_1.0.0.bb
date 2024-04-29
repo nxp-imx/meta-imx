@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=44a8052c384584ba09077e85a3d1654f"
 SRC_URI = "${NEUTRON_SRC};branch=${SRCBRANCH}"
 NEUTRON_SRC ?= "git://github.com/nxp-imx/neutron.git;protocol=https"
 SRCBRANCH = "main"
-SRCREV = "1c7f3bffc840354e171bf4c01ac651719324b5fb"
+SRCREV = "04d0d08cdec284070573e5751c241e7c59b39507"
 
 S = "${WORKDIR}/git"
 
@@ -26,6 +26,16 @@ do_install () {
     install -d ${D}${libdir}
     cp --no-preserve=ownership -d ${S}/${NEUTRON_TARGET}/library/* ${D}${libdir}
 }
+
+# The packaged binaries have been stripped of debug info, so disable
+# operations accordingly.
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_SYSROOT_STRIP = "1"
+
+# Library file is unversioned
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
 
 FILES:${PN} += "${nonarch_base_libdir}/firmware/*"
 INSANE_SKIP:${PN} = "arch"
