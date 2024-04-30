@@ -48,9 +48,6 @@ IMXBOOT_TARGETS = " \
     ${@bb.utils.contains('UBOOT_CONFIG', 'fspi', '${IMXBOOT_TARGETS_BASENAME}_a55_flexspi', '${IMXBOOT_TARGETS_SD}', d)} \
 "
 
-M4_DEFAULT_IMAGE_MX95 = "${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95netc', 'imx95-19x19-evk_m7_TCM_netc_share_sm.bin', \
-                                                                                   'imx95-19x19-evk_m7_TCM_rpmsg_lite_str_echo_rtos.bin', d)}"
-
 IMX_BOOT_SOC_TARGET = "iMX95"
 IMX_BOOT_SEEK = "32"
 
