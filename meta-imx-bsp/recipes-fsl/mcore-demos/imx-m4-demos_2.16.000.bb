@@ -3,7 +3,7 @@
 
 require imx-mcore-demos.inc
 
-LIC_FILES_CHKSUM:mx7ulp-nxp-bsp = "file://COPYING;md5=9135422c7a38dac21bf1f858b6ef3bac"
+LIC_FILES_CHKSUM:mx7ulp-nxp-bsp = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
 LIC_FILES_CHKSUM:mx8mm-nxp-bsp = "file://COPYING;md5=db4762b09b6bda63da103963e6e081de"
 LIC_FILES_CHKSUM:mx8mq-nxp-bsp = "file://COPYING;md5=9135422c7a38dac21bf1f858b6ef3bac"
 
