@@ -19,7 +19,7 @@ SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
 "
 
-SRCREV = "960d0c1e19feaf310321c906e14bd5410c6be629"
+SRCREV = "a052fdc78c910052d31d4a233096313bdd6fa155"
 
 PE = "1"
 
@@ -88,7 +88,7 @@ SRC_URI:remove = " \
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "gitsm://github.com/nxp-imx/libcamera.git;protocol=https"
 SRCBRANCH = "imx/next"
-SRCREV = "${AUTOREV}"
+SRCREV = "a052fdc78c910052d31d4a233096313bdd6fa155"
 PACKAGECONFIG = "gst"
 
 COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
