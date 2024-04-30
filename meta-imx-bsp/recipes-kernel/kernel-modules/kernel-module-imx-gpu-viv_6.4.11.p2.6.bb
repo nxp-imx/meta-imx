@@ -12,7 +12,7 @@ SRC_URI = "${KERNEL_SRC};subpath=drivers/mxc/gpu-viv;destsuffix=git/src \
 KERNEL_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.6.y"
 LOCALVERSION = "-lts-next"
-SRCREV = "a5fa17c1c2b73bc30f683f55277ea1e21e48c273"
+SRCREV = "b87cc878c696671b6ba531005366d06b917e4e3f"
 
 S = "${WORKDIR}/git"
 
