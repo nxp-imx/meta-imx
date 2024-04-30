@@ -6,8 +6,8 @@ require imx-mcore-demos.inc
 LIC_FILES_CHKSUM:mx8mn-nxp-bsp = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
 LIC_FILES_CHKSUM:mx8mnul-nxp-bsp = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
 
-LIC_FILES_CHKSUM:mx8mp-nxp-bsp = "file://COPYING;md5=db4762b09b6bda63da103963e6e081de"
-LIC_FILES_CHKSUM:mx8mpul-nxp-bsp = "file://COPYING;md5=db4762b09b6bda63da103963e6e081de"
+LIC_FILES_CHKSUM:mx8mp-nxp-bsp = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
+LIC_FILES_CHKSUM:mx8mpul-nxp-bsp = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
 
 LIC_FILES_CHKSUM:mx95-nxp-bsp = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
 
