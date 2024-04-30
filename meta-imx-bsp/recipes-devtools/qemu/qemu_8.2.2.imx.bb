@@ -28,6 +28,6 @@ COMPATIBLE_HOST:powerpc = "null"
 
 #----------------------overrides ---------------------
 # audio backend confiure
-PACKAGECONFIG:append = " pipewire"
+PACKAGECONFIG:append = " pipewire aio vhost"
 
 # COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
