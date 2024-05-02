@@ -1,0 +1,26 @@
+From 4e5cd19246966c61bfa6ef3d203a048e0dcbb7f3 Mon Sep 17 00:00:00 2001
+From: Nicolas <nicolas.goueslain@nxp.com>
+Date: Thu, 2 May 2024 10:33:32 +0200
+Subject: [PATCH] [PATCH] increase to cpp17 version
+
+Upstream-Status: Pending
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index de26b948..fdd4267a 100644
+--- a/meson.build
++++ b/meson.build
+@@ -9,7 +9,7 @@ project('nnstreamer', 'c', 'cpp',
+     'werror=true',
+     'warning_level=2',
+     'c_std=gnu89',
+-    'cpp_std=c++14'
++    'cpp_std=c++17'
+   ]
+ )
+ 
+-- 
+2.25.1
