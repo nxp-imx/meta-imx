@@ -18,9 +18,9 @@ ML_NNSTREAMER_PKGS_LIST = " \
 "
 
 ML_NNSTREAMER_PKGS = ""
-#ML_NNSTREAMER_PKGS:mx8-nxp-bsp:imxgpu = "${ML_NNSTREAMER_PKGS_LIST}"
-#ML_NNSTREAMER_PKGS:mx8mp-nxp-bsp      = "${ML_NNSTREAMER_PKGS_LIST} nnstreamer-tvm nnstreamer-unittest"
-#ML_NNSTREAMER_PKGS:mx9-nxp-bsp        = "${ML_NNSTREAMER_PKGS_LIST}"
+ML_NNSTREAMER_PKGS:mx8-nxp-bsp:imxgpu = "${ML_NNSTREAMER_PKGS_LIST}"
+ML_NNSTREAMER_PKGS:mx8mp-nxp-bsp      = "${ML_NNSTREAMER_PKGS_LIST} nnstreamer-tvm nnstreamer-unittest"
+ML_NNSTREAMER_PKGS:mx9-nxp-bsp        = "${ML_NNSTREAMER_PKGS_LIST}"
 
 # i.MX8MP uses nnshark - other i.MX8/9 use raw gstshark
 ML_GST_PROFILER = ""
