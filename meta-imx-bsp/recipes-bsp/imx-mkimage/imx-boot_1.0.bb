@@ -80,10 +80,12 @@ SOC_FAMILY:mx93-generic-bsp   = "mx93"
 SOC_FAMILY:mx95-generic-bsp   = "mx95"
 
 REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
-REV_OPTION:append:mx95-nxp-bsp = " OEI=${OEI_ENABLE} LPDDR_TYPE=${DDR_TYPE}"
 
 MKIMAGE_EXTRA_ARGS ?= ""
-MKIMAGE_EXTRA_ARGS:append:mx95-nxp-bsp = "${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95alt', 'MSEL=1', '', d)}"
+MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp ?= " \
+    OEI=${OEI_ENABLE} \
+    LPDDR_TYPE=${DDR_TYPE} \
+    ${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95alt', 'MSEL=1', '', d)}"
 
 do_uboot_assemble_fitimage:prepend:imx-generic-bsp() {
     for config in ${UBOOT_MACHINE}; do
