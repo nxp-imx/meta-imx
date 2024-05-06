@@ -86,6 +86,9 @@ MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp ?= " \
     OEI=${OEI_ENABLE} \
     LPDDR_TYPE=${DDR_TYPE} \
     ${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95alt', 'MSEL=1', '', d)}"
+MKIMAGE_EXTRA_ARGS:imx95-19x19-verdin ?= " \
+    ${MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp} \
+    QSPI_HEADER=./scripts/fspi_header_133"
 
 do_uboot_assemble_fitimage:prepend:imx-generic-bsp() {
     for config in ${UBOOT_MACHINE}; do
