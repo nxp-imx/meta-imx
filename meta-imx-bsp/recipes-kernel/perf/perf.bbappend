@@ -1,1 +1,1 @@
-PACKAGECONFIG:append = "jevents"
+PACKAGECONFIG:append = " jevents"
