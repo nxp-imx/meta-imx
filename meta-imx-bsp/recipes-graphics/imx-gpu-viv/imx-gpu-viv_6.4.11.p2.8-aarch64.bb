@@ -1,6 +1,6 @@
 require imx-gpu-viv-6-overrides.inc
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a" 
 
 IMX_SRCREV_ABBREV = "d38ce5e"
 
