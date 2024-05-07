@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.24-fbe0a4c.bin
+Package:                     firmware-imx-8.24-11c647b.bin
 Version:                     8.24
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -868,7 +868,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.1.14-98af447.bin
+Package:                     imx-dpu-g2d-v1-2.1.14-32e0525.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -880,7 +880,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.1.14-98af447.bin
+Package:                     imx-dpu-g2d-v2-2.1.14-32e0525.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1256,8 +1256,8 @@ Release Location:            https://github.com/nxp-imx/imx-voicespot -b lf-6.6.
 M4 Processor Packages
 --------------------------------------------
 
-Package:                     imx7ulp-m4-demo-2.14.0.bin
-Version:                     2.14.0
+Package:                     imx7ulp-m4-demo-2.16.000.bin
+Version:                     2.16.000
 Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
@@ -1284,8 +1284,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mm-m4-demo-2.14.1.bin
-Version:                     2.14.1
+Package:                     imx8mm-m4-demo-2.16.000.bin
+Version:                     2.16.000
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
@@ -1298,8 +1298,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mq-m4-demo-2.14.0.bin
-Version:                     2.14.0
+Package:                     imx8mq-m4-demo-2.16.000.bin
+Version:                     2.16.000
 Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
@@ -1342,8 +1342,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 M7 Processor Packages
 --------------------------------------------
 
-Package:                     imx8mn-m7-demo-2.14.0.bin
-Version:                     2.14.0
+Package:                     imx8mn-m7-demo-2.16.000.bin
+Version:                     2.16.000
 Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
@@ -1370,8 +1370,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mp-m7-demo-2.14.1.bin
-Version:                     2.14.1
+Package:                     imx8mp-m7-demo-2.16.000.bin
+Version:                     2.16.000
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
@@ -1404,8 +1404,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 M33 Processor Packages
 --------------------------------------------
 
-Package:                     imx8ulp-m33-demo-2.14.1.bin
-Version:                     2.14.1
+Package:                     imx8ulp-m33-demo-2.16.000.bin
+Version:                     2.16.000
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1420,8 +1420,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx93-m33-demo-2.15.000.bin
-Version:                     2.15.000
+Package:                     imx93-m33-demo-2.16.000.bin
+Version:                     2.16.000
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
