@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
 # Note: This .inc file is used from differently named recipes, so the package
 # name must be hard-coded, i.e., ${BPN} cannot be used.
 SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
-IMX_SRCREV_ABBREV = "fbe0a4c"
-SRC_URI[md5sum] = "440b125e897614d77fac663d90bcffc8"
-SRC_URI[sha256sum] = "2e27962332197ebebbb30138f6dfb365361d48d7efa565df97c4f79285b1ca50"
+IMX_SRCREV_ABBREV = "11c647b"
+SRC_URI[md5sum] = "7dac040dbf95f10de432ac1a0340f236"
+SRC_URI[sha256sum] = "96631b6e0057cb83ce18252e411b8a8da77a000a6ed80ef820a684e42a1941c6"
 
 S = "${WORKDIR}/firmware-imx-${PV}-${IMX_SRCREV_ABBREV}"
 
