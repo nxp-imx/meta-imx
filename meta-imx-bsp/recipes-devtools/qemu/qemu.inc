@@ -311,7 +311,7 @@ SYSTEMD_SERVICE:${PN}-guest-agent = "qemu-guest-agent.service"
 
 ########### i.MX overrides ################
 
-SRCBRANCH_imx-qemu = "imx_8.2.y"
+SRCBRANCH_imx-qemu = "lf-6.6.23_2.0.0"
 QEMU_SRC ?= "git://bitbucket.sw.nxp.com/imx/imx-qemu.git;protocol=ssh;"
 SRC_URI = " \
     ${QEMU_SRC};branch=${SRCBRANCH_imx-qemu};name=imx-qemu;\
