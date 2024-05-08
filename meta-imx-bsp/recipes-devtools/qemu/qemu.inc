@@ -311,10 +311,10 @@ SYSTEMD_SERVICE:${PN}-guest-agent = "qemu-guest-agent.service"
 
 ########### i.MX overrides ################
 
-SRCBRANCH = "imx_8.2.y"
+SRCBRANCH_imx-qemu = "imx_8.2.y"
 QEMU_SRC ?= "git://bitbucket.sw.nxp.com/imx/imx-qemu.git;protocol=ssh;"
 SRC_URI = " \
-    ${QEMU_SRC};branch=${SRCBRANCH};name=imx-qemu;\
+    ${QEMU_SRC};branch=${SRCBRANCH_imx-qemu};name=imx-qemu;\
     file://0001-fix-missing-meson.patch \
     file://0002-Ensure-pip-and-the-python-venv-aren-t-used-for-meson.patch \
     git://gitlab.com/qemu-project/berkeley-softfloat-3.git;destsuffix=git/subprojects/berkeley-softfloat-3;protocol=https;branch=master;name=berkeley-softfloat-3 \
