@@ -6,7 +6,7 @@ inherit module
 
 DPDK_EXTRAS_SRC ?= "git://github.com/nxp-qoriq/dpdk-extras.git;protocol=https"
 SRC_URI = "${DPDK_EXTRAS_SRC};nobranch=1"
-SRCREV = "b3422d9668e76229b4554f24dad42c61a2011254"
+SRCREV = "c84c5a8bfe30dadcaded73d048095b511c2f8935"
 
 S = "${WORKDIR}/git/linux"
 
