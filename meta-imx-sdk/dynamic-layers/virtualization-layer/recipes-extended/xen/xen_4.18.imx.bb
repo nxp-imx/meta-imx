@@ -8,7 +8,7 @@ require recipes-extended/xen/xen.inc
 require xen-hypervisor.inc
 require xen-common.inc
 
-DEPENDS:apennd = "qemu"
+DEPENDS:append = " qemu"
 
 S = "${WORKDIR}/git"
 
