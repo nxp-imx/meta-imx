@@ -684,8 +684,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch32-d38ce5e.bin
-Version:                     6.4.11.p2.6
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-211689f.bin
+Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -703,8 +703,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.6-aarch64-d38ce5e.bin
-Version:                     6.4.11.p2.6
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-211689f.bin
+Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -722,8 +722,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r47.2-25e94c5.bin
-Version:                     r47.2
+Package:                     mali-imx-r47.4-25e94c5.bin
+Version:                     r47.4
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -833,7 +833,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gputop.git
-Version:                     6.4.11.p2.6
+Version:                     6.4.11.p2.8
 Outgoing License:            MIT 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -844,8 +844,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-arm-d38ce5e.bin
-Version:                     6.4.11.p2.6
+Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-211689f.bin
+Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -856,8 +856,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.6-aarch64-d38ce5e.bin
-Version:                     6.4.11.p2.6
+Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-211689f.bin
+Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -916,8 +916,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.6-aarch64-wayland-e4ba456.bin
-Version:                     6.4.11.p2.6
+Package:                     libgpuperfcnt-6.4.11.p2.8-aarch64-wayland-e4ba456.bin
+Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -928,8 +928,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.6-arm-fb-e4ba456.bin
-Version:                     6.4.11.p2.6
+Package:                     libgpuperfcnt-6.4.11.p2.8-arm-fb-e4ba456.bin
+Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -940,8 +940,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.6-arm-wayland-e4ba456.bin
-Version:                     6.4.11.p2.6
+Package:                     libgpuperfcnt-6.4.11.p2.8-arm-wayland-e4ba456.bin
+Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -1093,8 +1093,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.4.0.bin
-Version:                     0.4.0
+Package:                     imx-opencl-converter-0.5.0.bin
+Version:                     0.5.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -1245,7 +1245,7 @@ Origin:                      NXP (Proprietary)
 --------------------------------------------
 
 Package:                     imx-voiceSpot.git
-Version:                     2.0
+Version:                     2.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 No distribution granted - Section 2.2 applies - See appendix on NXP Voice Software
 License File:                LICENSE.txt
 Package Category:            Multimedia
