@@ -1,5 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
-# Copyright 2017-2022 NXP
+# Copyright 2017-2024 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "G2D library using i.MX DPU"
@@ -17,8 +17,8 @@ IMX_BIN_NAME = "${BPN}-${IMX_SRC_URI_NAME}-${PV}-${IMX_SRCREV_ABBREV}"
 
 IMX_SRCREV_ABBREV = "334c226"
 IMX_SRC_URI_NAME = "v1"
-SRC_URI[v1.md5sum] = "cce6d77e64fbfb10738fc6fc8939bcc2"
-SRC_URI[v1.sha256sum] = "e1f3e864553ace7f66cd05777169ff58894a52f7e2b68b7af27c94c035c43605"
+SRC_URI[v1.md5sum] = "b378a296aa58ac05a14412ee08603c16"
+SRC_URI[v1.sha256sum] = "219db1df18fe9598bd4d392bbc8057e91565c899c0f45d157c1e3e81cdfeeb3f"
 
 IMX_SRCREV_ABBREV:mx95-nxp-bsp = "334c226"
 IMX_SRC_URI_NAME:mx95-nxp-bsp = "v2"
