@@ -99,38 +99,6 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.24-11c647b.bin
-Version:                     8.24
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    BSP firmware - DDR EPDC HDMI SDMA VPU
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
-                           In addition, these components contain code from the companies listed below.
-                             DDR:   origin: Synopsys DDR (LA_OPT_NXP_Software_License)
-                             EASRC: origin: NXP (LA_OPT_NXP_Software_License)
-                             EPDC:  origin: E Ink Corporation (LA_OPT_NXP_Software_License)
-                             HDMI:  origin: Cadence Design Systems, Inc. (LA_OPT_NXP_Software_License)
-                             SDMA:  origin: NXP (LA_OPT_NXP_Software_License)
-                             XCVR:  origin: NXP (LA_OPT_NXP_Software_License)
-                             XUVI:  origin: NXP (LA_OPT_NXP_Software_License)
-                             VPU:   vpu_fw_imx27_TO1.bin
-                                    vpu_fw_imx27_TO2.bin
-                                    vpu_fw_imx51.bin
-                                    vpu_fw_imx53.bin
-                                    vpu_fw_imx6d.bin
-                                    vpu_fw_imx6q.bin
-                                 origin: Chips & Media, Inc.  (LA_OPT_NXP_Software_License)
-
-                                    vpu_fw_imx8_dec.bin
-                                    vpu_fw_imx8_enc.bin
-                                 origin: Amphion Semiconductor Ltd  (LA_OPT_NXP_Software_License - see appendix)
-
---------------------------------------------
-
 Package:                     firmware-ele-imx-0.1.2-ccebc3d.bin
 Version:                     0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
