@@ -1142,6 +1142,16 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
+Package:                     libcamera.git
+Version:                     0.2.0.imx
+Outgoing License:            LGPL-2.1-or-later 
+License File:                LICENSES/LGPL-2.1-or-later.txt
+Package Category:            Multimedia
+Type of Content:             source
+Description and comments:    A Linux camera management framework.
+Release Location:            https://github.com/nxp-imx/libcamera -b lf-6.6.23-2.0.0
+--------------------------------------------
+
 Package:                     imx-alsa-plugins.git
 Version:                     
 Outgoing License:            GPL-2.0 
