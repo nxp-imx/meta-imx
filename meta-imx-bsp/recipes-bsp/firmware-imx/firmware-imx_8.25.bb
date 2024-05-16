@@ -10,15 +10,21 @@ PE = "1"
 
 inherit allarch
 
+IMX_USE_LINUX_FIRMWARE_SDMA ?= "1"
+
 do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/imx
 
     # SDMA Firmware section
     install -d ${D}${nonarch_base_libdir}/firmware/imx/sdma
     install -m 0644 ${S}/firmware/sdma/* ${D}${nonarch_base_libdir}/firmware/imx/sdma
-    # Comment these lines to use sdma-imx6q/7d.bin from here and not linux-firmware
-    #rm -f ${D}${nonarch_base_libdir}/firmware/imx/sdma/sdma-imx6q.bin
-    #rm -f ${D}${nonarch_base_libdir}/firmware/imx/sdma/sdma-imx7d.bin
+    # Define IMX_USE_LINUX_FIRMWARE_SDMA = "0" in layer.conf, machine.conf, local.conf
+    # or in .bbappend to use sdma-imx6q/7d.bin from here and not linux-firmware
+    if [ ${IMX_USE_LINUX_FIRMWARE_SDMA} -gt 0 ]
+    then
+        rm -f ${D}${nonarch_base_libdir}/firmware/imx/sdma/sdma-imx6q.bin
+        rm -f ${D}${nonarch_base_libdir}/firmware/imx/sdma/sdma-imx7d.bin
+    fi
 
     # EASRC Firmware section
     install -d ${D}${nonarch_base_libdir}/firmware/imx/easrc
@@ -151,7 +157,7 @@ PACKAGES_DYNAMIC = "${PN}-vpu-* ${PN}-sdma-* ${PN}-easrc-* ${PN}-xcvr-* ${PN}-xu
 # is empty.
 # Therefore, we opt-out from producing -dev package here, since also for firmware
 # files it makes no sense.
-PACKAGES = "${PN} ${PN}-epdc ${PN}-hdmi ${PN}-vpu-imx8 ${PN}-vpu-imx95"
+PACKAGES = "${PN} ${PN}-epdc ${PN}-hdmi ${PN}-vpu-amphion ${PN}-vpu-wave"
 
 FILES:${PN}-epdc = "${nonarch_base_libdir}/firmware/imx/epdc/"
 FILES:${PN}-hdmi = " \
@@ -159,7 +165,7 @@ FILES:${PN}-hdmi = " \
     ${nonarch_base_libdir}/firmware/hdmirxfw.bin \
     ${nonarch_base_libdir}/firmware/dpfw.bin \
 "
-FILES:${PN}-vpu-imx8 = "${nonarch_base_libdir}/firmware/amphion/vpu/*"
-FILES:${PN}-vpu-imx95 = "${nonarch_base_libdir}/firmware/wave633c_codec_fw.bin"
+FILES:${PN}-vpu-amphion = "${nonarch_base_libdir}/firmware/amphion/vpu/*"
+FILES:${PN}-vpu-wave = "${nonarch_base_libdir}/firmware/wave633c_codec_fw.bin"
 
 COMPATIBLE_MACHINE = "(imx-generic-bsp)"
