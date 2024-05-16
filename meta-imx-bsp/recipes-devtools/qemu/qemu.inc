@@ -312,7 +312,7 @@ SYSTEMD_SERVICE:${PN}-guest-agent = "qemu-guest-agent.service"
 ########### i.MX overrides ################
 
 SRCBRANCH_imx-qemu = "imx_8.2.y"
-QEMU_SRC ?= "git://bitbucket.sw.nxp.com/imx/imx-qemu.git;protocol=ssh;"
+QEMU_SRC ?= "git://github.com/nxp-imx/imx-qemu.git;protocol=https;"
 SRC_URI = " \
     ${QEMU_SRC};branch=${SRCBRANCH_imx-qemu};name=imx-qemu;\
     file://0001-fix-missing-meson.patch \
