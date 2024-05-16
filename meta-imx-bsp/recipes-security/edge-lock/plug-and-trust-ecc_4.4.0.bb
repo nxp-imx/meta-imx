@@ -6,11 +6,11 @@ element family."
 
 SECTION = "apps"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=25d592776b78ef09663409514483b8c9"
 DEPENDS = ""
 
 SRC_URI = "git://github.com/NXP/plug-and-trust.git;protocol=https;branch=master"
-SRCREV = "92d003642bc154c025cf7e9ab011cac08c1de54b"
+SRCREV = "1e17cde135868491a621304e2628e1814cd296b0"
 
 S = "${WORKDIR}/git"
 
