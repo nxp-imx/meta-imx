@@ -9,6 +9,8 @@ SRCREV = "5cd815344eba63cb87369c49daa886f01900f9df"
 
 S = "${WORKDIR}/git"
 
+PV = "1.0.2+git${SRCPV}"
+
 inherit cmake
 
 PACKAGECONFIG ??= "host-openssl"
