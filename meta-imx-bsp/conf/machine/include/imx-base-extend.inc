@@ -25,7 +25,7 @@ MACHINEOVERRIDES_EXTENDER:mx95:use-mainline-bsp  = "imx-generic-bsp:imx-mainline
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx95"
 MACHINE_SOCARCH_SUFFIX:mx95-nxp-bsp = "-mx95"
 IMX_EXTRA_FIRMWARE:mx95-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SYSTEM_MANAGER_RPROVIDER} imx-oei"
-MACHINE_FIRMWARE:append:mx95-nxp-bsp  = " firmware-imx-vpu-imx95"
+MACHINE_FIRMWARE:append:mx95-nxp-bsp  = " firmware-imx-vpu-wave"
 SECO_FIRMWARE_NAME:mx95-generic-bsp ?= "mx95${IMX_SOC_REV_LOWER}-ahab-container.img"
 SYSTEM_MANAGER_RPROVIDER ?= "imx-system-manager"
 # The System Manager Firmware Name corresponds to a particular binary implementation
