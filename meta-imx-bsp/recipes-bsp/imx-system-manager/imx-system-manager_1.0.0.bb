@@ -8,12 +8,8 @@ and then starts other cores in the system. After starting these cores, it \
 enters a service mode where it provides access to clocking, power, sensor, \
 and pin control via a client RPC API based on ARM's System Control and \
 Management Interface (SCMI)."
-
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
-
-INHIBIT_DEFAULT_DEPS = "1"
-DEPENDS = "gcc-arm-none-eabi-native"
 
 SRC_URI = "${IMX_SYSTEM_MANAGER_SRC};branch=${SRCBRANCH}"
 IMX_SYSTEM_MANAGER_SRC ?= "git://github.com/nxp-imx/imx-sm.git;protocol=https"
