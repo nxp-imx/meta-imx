@@ -509,7 +509,7 @@ Origin:                      NXP(Apache-2.0)
 --------------------------------------------
 
 Package:                     se05x-openssl-provider.git
-Version:                     1.0.0
+Version:                     1.0.2
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            BSP
@@ -522,8 +522,8 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     plug-and-trust.git
-Version:                     4.4.0
-Outgoing License:            Apache-2.0 
+Version:                     4.5.3
+Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
@@ -652,7 +652,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-81816f3.bin
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-34ea654.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -671,7 +671,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-81816f3.bin
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-34ea654.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -812,7 +812,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-81816f3.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-34ea654.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -824,7 +824,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-81816f3.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-34ea654.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -957,8 +957,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.9.0.bin
-Version:                     4.9.0
+Package:                     imx-parser-4.9.1.bin
+Version:                     4.9.1
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
