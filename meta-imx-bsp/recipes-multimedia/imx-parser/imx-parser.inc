@@ -12,7 +12,8 @@ RREPLACES:${PN} = "libfslparser"
 RPROVIDES:${PN} = "libfslparser"
 RCONFLICTS:${PN} = "libfslparser"
 
-SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true"
+SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
+S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
