@@ -87,11 +87,13 @@ do_deploy() {
 #   at least run afer that task has completed
 # - the hypervisor binaries may be included in the image filesystem, so we
 #   must ensure that the binaries deployed match what is staged in the sysroot:
-#   so do deploy must run after do_populate_sysroot -- which is always after
-#   do_compile, so that handles 'after do_compile' too
+#   so do_deploy must run after do_populate_sysroot and after do_compile is
+#   also needed for when having rm_work and bitbake needs to re-run do_deploy,
+#   we ensure that the ${B} is re-generated, otherwise the deploy-xen will be
+#   empty
 # - add the task before do_build to ensure that deployment has completed when
 #   the recipe build done stamp is written
-addtask deploy after do_populate_sysroot before do_build
+addtask deploy after do_compile do_populate_sysroot before do_build
 # To ensure that a deployed hypervisor has matching tools, add a dependency to
 # make sure that the tools have built and been staged:
 do_deploy[depends] += "xen-tools:do_populate_sysroot"
