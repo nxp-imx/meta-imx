@@ -459,6 +459,9 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    A Virtual Machine Monitor
 Release Location:            https://github.com/nxp-imx/imx-qemu -b lf-6.6.23-2.0.0
+Origin:                      NXP (GPL-2.0)
+                             qemu (GPL-2.0) - https://download.qemu.org/qemu-9.0.0.tar.xz
+
 --------------------------------------------
 
 Package:                     crypto-af-alg.git
