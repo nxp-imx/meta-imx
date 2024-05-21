@@ -427,6 +427,9 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    A Virtual Machine Monitor
 Release Location:            https://github.com/nxp-imx/imx-qemu -b lf-6.6.23-2.0.0
+Origin:                      NXP (GPL-2.0)
+                             qemu (GPL-2.0) - https://download.qemu.org/qemu-9.0.0.tar.xz
+
 --------------------------------------------
 
 Package:                     crypto-af-alg.git
@@ -690,7 +693,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r47.4-01561d4.bin
+Package:                     mali-imx-r47.4-e27b629.bin
 Version:                     r47.4
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
