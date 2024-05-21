@@ -30,8 +30,14 @@ EXTRA_OECMAKE = " \
 CFLAGS += "-Wno-maybe-uninitialized"
 CXXFLAGS += "-Wno-range-loop-construct -Wno-unused-variable"
 
-SOLIBS = ".so"
-FILES_SOLIBSDEV = ""
+do_install:append() {
+    ln -s libEGL.so       ${D}/opt/${BPN}/lib/libEGL.so.1
+    ln -s libEGL.so       ${D}/opt/${BPN}/lib/libEGL.so.1.4.0
+    ln -s libGLESv1_CM.so ${D}/opt/${BPN}/lib/libGLESv1_CM.so.1
+    ln -s libGLESv1_CM.so ${D}/opt/${BPN}/lib/libGLESv1_CM.so.1.1.0
+    ln -s libGLESv2.so    ${D}/opt/${BPN}/lib/libGLESv2.so.2
+    ln -s libGLESv2.so    ${D}/opt/${BPN}/lib/libGLESv2.so.2.1.0
+}
 
 FILES:${PN} = "/opt"
 
