@@ -7,7 +7,6 @@ MACHINE_FEATURES:append:use-nxp-bsp = " optee nxpwifi-all-sdio"
 KERNEL_DEVICETREE = " \
     freescale/${KERNEL_DEVICETREE_BASENAME}.dtb \
 "
-UBOOT_DTB_NAME = "${KERNEL_DEVICETREE_BASENAME}.dtb"
 
 IMX_DEFAULT_BOOTLOADER:use-nxp-bsp = "u-boot-imx"
 IMX_DEFAULT_BOOTLOADER:use-mainline-bsp = "u-boot-fslc"
