@@ -22,7 +22,7 @@ RDEPENDS:${PN} = " \
     e2fsprogs-resize2fs \
     fbset \
     fsl-rc-local \
-    iproute2 \
+    iproute2 iproute2-tc \
     iw \
     i2c-tools \
     ${KERNEL_TEST_TOOLS} \
