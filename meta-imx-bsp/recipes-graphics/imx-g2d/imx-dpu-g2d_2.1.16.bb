@@ -17,12 +17,10 @@ IMX_BIN_NAME = "${BPN}-${IMX_SRC_URI_NAME}-${PV}-${IMX_SRCREV_ABBREV}"
 
 IMX_SRCREV_ABBREV = "ea1adcb"
 IMX_SRC_URI_NAME = "v1"
-SRC_URI[v1.md5sum] = "3532eef3ebb9772fdd9d2c309c2db945"
 SRC_URI[v1.sha256sum] = "350febf99c72b5e173ace976d126296c3f9ba415e7e8cb03351b11e74661bc85"
 
 IMX_SRCREV_ABBREV:mx95-nxp-bsp = "ea1adcb"
 IMX_SRC_URI_NAME:mx95-nxp-bsp = "v2"
-SRC_URI[v2.md5sum] = "d0731a872bd4fedf3a4d72bcfa38983a"
 SRC_URI[v2.sha256sum] = "fde3eeebc0f5aaeeb49c5dc06f58b0eeb88d7bd655265a54d7f72a0351ffd96f"
 
 S = "${WORKDIR}/${IMX_BIN_NAME}"

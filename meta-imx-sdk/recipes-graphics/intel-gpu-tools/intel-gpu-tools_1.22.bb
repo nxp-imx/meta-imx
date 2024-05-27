@@ -17,7 +17,6 @@ RDEPENDS:${PN}-tests += "bash"
 
 PACKAGE_BEFORE_PN = "${PN}-benchmarks ${PN}-tests"
 
-SRC_URI[md5sum] = "965c591b23a132084113c2a0604f537a"
 SRC_URI[sha256sum] = "3d66c1dc5110712ca4d22199b3ce9853f261be1690064edf87e69e5392e39a5c"
 
 EXTRA_OECONF = "--disable-nouveau --disable-shader-debugger"
