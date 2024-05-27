@@ -8,7 +8,6 @@ DEPENDS = "virtual/opencl-icd"
 SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
 IMX_SRCREV_ABBREV = "92d93c8"
 
-SRC_URI[md5sum] = "3f4e9cd63b48a5151793e5fff89ab02f"
 SRC_URI[sha256sum] = "3785d6306a1d55781bb744ec590aa7f505d2fe2865e9d68a9023c6ad14120d39"
 
 S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"

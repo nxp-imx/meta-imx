@@ -14,7 +14,6 @@ SRC_URI = "https://lttng.org/files/${BPN}/${BPN}-${PV}.tar.bz2 \
            file://0001-Fix-writeback_queue_io-issue-with-kernel-5.4.62.patch \
            "
 
-SRC_URI[md5sum] = "0d964723c8765b39835e5e6efc60a604"
 SRC_URI[sha256sum] = "d3e5648937e59dee983ef844f9316c55e9961f9dc8515b9260c473bbb70696c1"
 
 export INSTALL_MOD_DIR="kernel/lttng-modules"

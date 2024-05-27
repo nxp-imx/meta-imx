@@ -11,7 +11,6 @@ require tensorflow-lite-${PV}.inc
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf"
 
 SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz;name=model-mobv1"
-SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
 SRC_URI[model-mobv1.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226dfe4cdcef3012555f691744166"
 
 S = "${WORKDIR}/git"

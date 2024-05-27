@@ -14,7 +14,6 @@ SRC_URI = "https://hewlettpackard.github.io/wireless-tools/wireless_tools.${PV}.
            file://avoid_strip.patch \
            file://ldflags.patch \
           "
-SRC_URI[md5sum] = "ca91ba7c7eff9bfff6926b1a34a4697d"
 SRC_URI[sha256sum] = "abd9c5c98abf1fdd11892ac2f8a56737544fe101e1be27c6241a564948f34c63"
 
 UPSTREAM_CHECK_URI = "https://hewlettpackard.github.io/wireless-tools/Tools.html"
