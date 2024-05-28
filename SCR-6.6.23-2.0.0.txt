@@ -693,7 +693,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r47.4-e27b629.bin
+Package:                     mali-imx-r47.4-54cab89.bin
 Version:                     r47.4
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -839,7 +839,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.1.14-61f658a.bin
+Package:                     imx-dpu-g2d-v1-2.1.14-ebe31ec.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -851,7 +851,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.1.14-61f658a.bin
+Package:                     imx-dpu-g2d-v2-2.1.14-ebe31ec.bin
 Version:                     2.1.14
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
