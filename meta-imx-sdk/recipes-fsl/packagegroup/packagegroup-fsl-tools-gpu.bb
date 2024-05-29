@@ -26,7 +26,6 @@ SOC_TOOLS_DRM:imxdrm ??= " \
 
 SOC_TOOLS_GPU ??= ""
 SOC_TOOLS_GPU:imxgpu ??= " \
-    gputop \
     imx-gpu-sdk \
     ${SOC_TOOLS_GPU_APITRACE} \
     ${SOC_TOOLS_GPU_MALI} \
@@ -43,5 +42,6 @@ SOC_TOOLS_GPU_MALI:mx95-nxp-bsp = " \
     patrace"
 
 SOC_TOOLS_GPU_VIVANTE = " \
+    gputop \
     imx-gpu-viv-tools"
 SOC_TOOLS_GPU_VIVANTE:mx95-nxp-bsp = ""
