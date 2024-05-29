@@ -254,7 +254,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -558,7 +558,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     plug-and-trust.git
 Version:                     4.4.0
-Outgoing License:            Apache-2.0 
+Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
@@ -897,7 +897,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-g2d-pxp.git
 Version:                     2.1.0
-Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -1110,7 +1110,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-vpuwrap.git
 Version:                     git
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
@@ -1185,6 +1185,10 @@ Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    A Linux camera management framework.
 Release Location:            https://github.com/nxp-imx/libcamera -b lf-6.6.23-2.0.0
+Origin:                      NXP (LGPL-2.1-or-later)
+                             libcamera (LGPL-2.1-or-later) - https://git.libcamera.org/libcamera/libcamera.git
+                             libcamera apps and unit tests (GPL-2.0) (same as libcamera)
+
 --------------------------------------------
 
 Package:                     imx-alsa-plugins.git
@@ -1241,22 +1245,6 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     imx-voiceUI.git
-Version:                     2.0
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 No distribution granted - Section 2.2 applies - See appendix on NXP Voice Software
-License File:                LICENSE.txt
-Package Category:            Multimedia
-Type of Content:             source
-Description and comments:    NXP RetuneDSP Voice Seeker
-Release Location:            https://github.com/nxp-imx/imx-voiceUI -b lf-6.6.23-2.0.0
-Origin:                      NXP (Proprietary)
-                             Ne10 (BSD-3-Clause) - https://github.com/projectNe10/Ne10
-                             pugixml (MIT) - https://github.com/zeux/pugixml
-                             ARM ComputeLibrary (MIT) - https://github.com/ARM-software/ComputeLibrary
-                             CMSIS-5 (Apache-2.0) - https://github.com/ARM-software/CMSIS_5
-
---------------------------------------------
-
 Package:                     imx-voiceSpot.git
 Version:                     2.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 No distribution granted - Section 2.2 applies - See appendix on NXP Voice Software
@@ -1271,7 +1259,7 @@ M4 Processor Packages
 
 Package:                     imx7ulp-m4-demo-2.16.000.bin
 Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1299,7 +1287,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx8mm-m4-demo-2.16.000.bin
 Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1313,7 +1301,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx8mq-m4-demo-2.16.000.bin
 Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1357,7 +1345,7 @@ M7 Processor Packages
 
 Package:                     imx8mn-m7-demo-2.16.000.bin
 Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1371,7 +1359,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx8mnddr3l-m7-demo-2.14.0.bin
 Version:                     2.14.0
-Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1385,7 +1373,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx8mp-m7-demo-2.16.000.bin
 Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1419,7 +1407,7 @@ M33 Processor Packages
 
 Package:                     imx8ulp-m33-demo-2.16.000.bin
 Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1568,7 +1556,7 @@ Origin:                      NXP (MIT)
 Package:                     neutron.git
 Version:                     1.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 
-License File:                LICENSE
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    The firmware library and converter for i.MX Neutron NPU
