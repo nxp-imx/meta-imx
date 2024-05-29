@@ -693,7 +693,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r47.4-54cab89.bin
+Package:                     mali-imx-r47.4-f95a6cd.bin
 Version:                     r47.4
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1153,6 +1153,10 @@ Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    A Linux camera management framework.
 Release Location:            https://github.com/nxp-imx/libcamera -b lf-6.6.23-2.0.0
+Origin:                      NXP (LGPL-2.1-or-later)
+                             libcamera (LGPL-2.1-or-later) - https://git.libcamera.org/libcamera/libcamera.git
+                             libcamera apps and unit tests (GPL-2.0) (same as libcamera)
+
 --------------------------------------------
 
 Package:                     imx-alsa-plugins.git
