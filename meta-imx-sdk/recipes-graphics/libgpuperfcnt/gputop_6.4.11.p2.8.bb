@@ -15,6 +15,8 @@ S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 
+EXTRA_OECMAKE:mx95-nxp-bsp = "-DMALI_GPU=1"
+
 do_compile:append () {
     oe_runmake -C ${S} man
 }
