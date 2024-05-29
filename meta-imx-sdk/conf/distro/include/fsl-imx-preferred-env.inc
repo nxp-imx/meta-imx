@@ -28,10 +28,9 @@ PREFERRED_VERSION_gstreamer1.0-rtsp-server:mx9-nxp-bsp  = "1.24.%"
 
 PREFERRED_VERSION_xen-tools = "4.18.imx+stable"
 PREFERRED_VERSION_xen = "4.18.imx+stable"
-PREFERRED_VERSION_qemu = "8.2.2.imx"
-PREFERRED_VERSION_qemu-native = "8.2.2.imx"
-PREFERRED_VERSION_qemu-system-native = "8.2.2.imx"
-PREFERRED_VERSION_nativesdk-qemu = "8.2.2.imx"
+
+QEMUVERSION              = "8.2.1"
+QEMUVERSION:mx95-nxp-bsp = "8.2.2.imx"
 
 BBMASK += "meta-freescale/recipes-multimedia/gstreamer"
 BBMASK += "meta-arm/meta-arm/recipes-kernel/linux/linux-yocto_5.15%.bbappend"
