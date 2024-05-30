@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.2-51f96d0.bin
+Package:                     firmware-ele-imx-0.1.2-5deebf3.bin
 Version:                     0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1627,6 +1627,20 @@ Type of Content:             source
 Description and comments:    TensorFlow Lite Neutron Delegate
 Release Location:            https://github.com/nxp-imx/tflite-neutron-delegate -b lf-6.6.23-2.0.0
 Origin:                      NXP (Apache-2.0)
+--------------------------------------------
+
+Package:                     tim-vx-imx.git
+Version:                     1.2.2
+Outgoing License:            MIT 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    Tensor Interface Module for OpenVX
+Release Location:            https://github.com/nxp-imx/tim-vx-imx -b lf-6.6.23-2.0.0
+Origin:                      Vivante Corporation (MIT)
+                             The Khronos Group Inc. (Apache-2.0) - https://www.khronos.org/
+                             The Android Open Source Project (Apache 2.0) - https://developer.android.com/index.html
+
 --------------------------------------------
 Tools Packages
 --------------------------------------------
