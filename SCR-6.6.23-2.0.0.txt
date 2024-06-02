@@ -429,7 +429,7 @@ Origin:                      NXP (BSD-2-Clause) (We are not using /host)
 Package:                     imx-xen.git
 Version:                     4.18.imx
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A Virtual Machine Monitor
@@ -1245,14 +1245,20 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     imx-voiceSpot.git
-Version:                     2.0.0
+Package:                     imx-voiceUI.git
+Version:                     2.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 No distribution granted - Section 2.2 applies - See appendix on NXP Voice Software
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
-Description and comments:    NXP Voice detection
-Release Location:            https://github.com/nxp-imx/imx-voicespot -b lf-6.6.23-2.0.0
+Description and comments:    NXP RetuneDSP Voice Seeker
+Release Location:            https://github.com/nxp-imx/imx-voiceUI -b lf-6.6.23-2.0.0
+Origin:                      NXP (Proprietary)
+                             Ne10 (BSD-3-Clause) - https://github.com/projectNe10/Ne10
+                             pugixml (MIT) - https://github.com/zeux/pugixml
+                             ARM ComputeLibrary (MIT) - https://github.com/ARM-software/ComputeLibrary
+                             CMSIS-5 (Apache-2.0) - https://github.com/ARM-software/CMSIS_5
+
 --------------------------------------------
 M4 Processor Packages
 --------------------------------------------
