@@ -1,4 +1,4 @@
-# Copyright (C) 2022 NXP
+# Copyright (C) 2022-2024 NXP
 
 DESCRIPTION = "Zephyr Demo for i.MX"
 HOMEPAGE = "https://github.com/zephyrproject-rtos/zephyr"
