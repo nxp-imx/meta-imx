@@ -1,4 +1,4 @@
-# Copyright (C) 2020-2023 NXP
+# Copyright (C) 2020-2024 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 # The recipe is licensed under MIT (see COPYING.MIT for the terms)
 
