@@ -1,4 +1,4 @@
-# Copyright 2019-2022 NXP
+# Copyright 2019-2022,2024 NXP
 
 SUMMARY = "NXP i.MX SECO firmware"
 DESCRIPTION = "Firmware for i.MX Security Controller Subsystem"
