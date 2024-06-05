@@ -70,6 +70,8 @@ FILES_SOLIBS_VERSIONED = " \
     ${libdir}/libos08a20.so \
 "
 
+INSANE_SKIP:${PN} = "already-stripped"
+
 RDEPENDS:${PN} = "libdrm"
 
 COMPATIBLE_MACHINE = "(mx8mp-nxp-bsp)"
