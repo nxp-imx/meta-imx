@@ -5,7 +5,7 @@ DESCRIPTION = "Firmware for i.MX Security Controller Subsystem"
 SECTION = "base"
 LICENSE = "Proprietary"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=db4762b09b6bda63da103963e6e081de"
+LIC_FILES_CHKSUM = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
 
 inherit fsl-eula-unpack use-imx-security-controller-firmware deploy
 
