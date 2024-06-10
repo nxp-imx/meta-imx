@@ -12,12 +12,11 @@ DEPENDS = "python3-jsonschema-native python3-jinja2-native"
 
 S = "${WORKDIR}/git"
 SRCREV = "2ca6c285a0dd3f33982dd57299012dacab1ff206"
-SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls;protocol=https;branch=development"
+SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls;protocol=https;branch=development \
+           file://0001-crypto_struct-change-psa_key_attributes_t-layout.patch \
+           file://0002-library-tls-disable-PSA-APIs-for-most-operations.patch"
 
 inherit cmake
-
-SRC_URI:append = "file://0001-crypto_struct-change-psa_key_attributes_t-layout.patch \
-                  file://0002-library-tls-disable-PSA-APIs-for-most-operations.patch"
 
 PACKAGECONFIG = "psa"
 PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
