@@ -117,7 +117,9 @@ PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 RDEPENDS:${PN}   = " \
     python3 \
     python3-numpy \
+    opencl-icd-loader-dev \
 "
+INSANE_SKIP:${PN} += "dev-deps"
 
 # TensorFlow and TensorFlow Lite both exports few files, suppress the error
 # SSTATE_ALLOW_OVERLAP_FILES = "${D}${includedir}"
