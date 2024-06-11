@@ -117,8 +117,11 @@ PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 RDEPENDS:${PN}   = " \
     python3 \
     python3-numpy \
-    opencl-icd-loader-dev \
+    ${RDEPENDS_OPENCL} \
 "
+RDEPENDS_OPENCL               = "opencl-icd-loader-dev"
+RDEPENDS_OPENCL:mx8mm-nxp-bsp = ""
+
 INSANE_SKIP:${PN} += "dev-deps"
 
 # TensorFlow and TensorFlow Lite both exports few files, suppress the error
