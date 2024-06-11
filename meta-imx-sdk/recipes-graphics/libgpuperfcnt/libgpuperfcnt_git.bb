@@ -13,12 +13,18 @@ SRC_URI[arm-wayland.sha256sum] = "f7bac07e3953bf7b88a445c749bec99a2855f87f39d6a6
 SRC_URI[aarch64-wayland.md5sum] = "3fa63dbc5e9dba65923c2c4ed9077e60"
 SRC_URI[aarch64-wayland.sha256sum] = "b0fb7f7a2151f400d499d71f206cb18396b39b10c637d278ce2d0fd246b50645"
 
+SRC_URI[aarch64-wayland-mali.md5sum] = "b5befdbcd32329b884a3e21f75e913da"
+SRC_URI[aarch64-wayland-mali.sha256sum] = "63387deafb389acd270586992496a5130341c04b2358834859c703d839a656ae"
 
 inherit fsl-eula-unpack2 fsl-eula-graphics fsl-eula-recent
 
-PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+PACKAGECONFIG ??= "vivante"
+PACKAGECONFIG:mx95-nxp-bsp = "mali"
 
-RDEPENDS:${PN} = "imx-gpu-viv"
+PACKAGECONFIG[mali] = ",,,mali-imx,,vivante"
+PACKAGECONFIG[vivante] = ",,,imx-gpu-viv,,mali"
+
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
 # Compatible only with i.MX with GPU
 COMPATIBLE_MACHINE        = "(^$)"

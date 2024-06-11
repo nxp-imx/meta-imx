@@ -15,6 +15,12 @@ S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 
+PACKAGECONFIG ??= "vivante"
+PACKAGECONFIG:mx95-nxp-bsp = "mali"
+
+PACKAGECONFIG[mali] = "-DMALI_GPU=1,,,,,vivante"
+PACKAGECONFIG[vivante] = ",,,,,mali"
+
 do_compile:append () {
     oe_runmake -C ${S} man
 }
