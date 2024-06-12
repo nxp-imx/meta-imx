@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-0.1.3-7c1fbf6.bin
+Package:                     firmware-ele-imx-0.1.3-40b9925.bin
 Version:                     0.1.3
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -278,9 +278,9 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-seco-5.9.2.bin
-Version:                     5.9.2
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Package:                     imx-seco-5.9.4.bin
+Version:                     5.9.4
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -836,7 +836,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gputop.git
-Version:                     6.4.11.p2.8
+Version:                     git
 Outgoing License:            MIT 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -919,8 +919,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.8-aarch64-wayland-N/A.bin
-Version:                     6.4.11.p2.8
+Package:                     libgpuperfcnt-git-aarch64-wayland-99ab423.bin
+Version:                     git
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -931,8 +931,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.8-arm-fb-N/A.bin
-Version:                     6.4.11.p2.8
+Package:                     libgpuperfcnt-git-aarch64-wayland-mali-99ab423.bin
+Version:                     git
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -943,8 +943,20 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p2.8-arm-wayland-N/A.bin
-Version:                     6.4.11.p2.8
+Package:                     libgpuperfcnt-git-arm-fb-99ab423.bin
+Version:                     git
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+License File:                COPYING
+Package Category:            Graphics
+Type of Content:             binary
+Description and comments:    Library to retrieve i.MX GPU performance data
+Release Location:            Mirror
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+
+--------------------------------------------
+
+Package:                     libgpuperfcnt-git-arm-wayland-99ab423.bin
+Version:                     git
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -992,7 +1004,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.9.1.bin
+Package:                     imx-parser-4.9.1-2bb0842.bin
 Version:                     4.9.1
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1096,7 +1108,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.5.0.bin
+Package:                     imx-opencl-converter-0.5.0-92d93c8.bin
 Version:                     0.5.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1134,7 +1146,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-1.33.0.bin
+Package:                     imx-vpu-hantro-1.33.0-7a434fc.bin
 Version:                     1.33.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1149,7 +1161,7 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.2.0
+Package:                     imx-vpu-hantro-daemon-1.2.0-67fa7a7
 Version:                     1.2.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
@@ -1664,7 +1676,7 @@ Origin:                      VeriSilicon (Verisilicon License)
 --------------------------------------------
 
 Package:                     mfgtool.git
-Version:                     1.5.181
+Version:                     1.5.182
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
