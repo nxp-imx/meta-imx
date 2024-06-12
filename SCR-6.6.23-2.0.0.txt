@@ -17,7 +17,7 @@ BSP Packages
 --------------------------------------------
 
 Package:                     linux-imx.git
-Version:                     6.6
+Version:                     6.9
 Outgoing License:            GPL-2.0 WITH Linux-syscall-note 
 License File:                COPYING
 Package Category:            BSP
@@ -278,9 +278,9 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-seco-5.9.4.bin
-Version:                     5.9.4
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Package:                     imx-seco-5.9.2.bin
+Version:                     5.9.2
+Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -836,7 +836,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gputop.git
-Version:                     git
+Version:                     6.4.11.p2.8
 Outgoing License:            MIT 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -919,8 +919,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-git-aarch64-wayland-e4ba456.bin
-Version:                     git
+Package:                     libgpuperfcnt-6.4.11.p2.8-aarch64-wayland-N/A.bin
+Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -931,8 +931,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-git-aarch64-wayland-mali-N/A.bin
-Version:                     git
+Package:                     libgpuperfcnt-6.4.11.p2.8-arm-fb-N/A.bin
+Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -943,20 +943,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-git-arm-fb-e4ba456.bin
-Version:                     git
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Library to retrieve i.MX GPU performance data
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
---------------------------------------------
-
-Package:                     libgpuperfcnt-git-arm-wayland-e4ba456.bin
-Version:                     git
+Package:                     libgpuperfcnt-6.4.11.p2.8-arm-wayland-N/A.bin
+Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -1676,7 +1664,7 @@ Origin:                      VeriSilicon (Verisilicon License)
 --------------------------------------------
 
 Package:                     mfgtool.git
-Version:                     1.5.182
+Version:                     1.5.181
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
