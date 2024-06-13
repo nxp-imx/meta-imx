@@ -329,10 +329,10 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-3.6.0
-Version:                     3.6.0
+Package:                     zephyr-demo-imx-3.6.1
+Version:                     3.6.1
 Outgoing License:            BSD-3-Clause 
-License File:                LICENCE
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             binary
 Description and comments:    Zephyr Demo for i.MX
