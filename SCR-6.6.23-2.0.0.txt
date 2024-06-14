@@ -871,8 +871,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.1.14-6a00326.bin
-Version:                     2.1.14
+Package:                     imx-dpu-g2d-v1-2.1.16-0053184.bin
+Version:                     2.1.16
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -883,8 +883,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.1.14-6a00326.bin
-Version:                     2.1.14
+Package:                     imx-dpu-g2d-v2-2.1.16-0053184.bin
+Version:                     2.1.16
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -1375,8 +1375,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mnddr3l-m7-demo-2.14.0.bin
-Version:                     2.14.0
+Package:                     imx8mnddr3l-m7-demo-2.16.000.bin
+Version:                     2.16.000
 Outgoing License:            LA_OPT_NXP_Software_License v47 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
