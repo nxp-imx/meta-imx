@@ -36,6 +36,7 @@ EXTRA_OECMAKE += "\
 PYTHON_DEPENDS = "\
     ${PYTHON_PN} \
     ${PYTHON_PN}-pip-native \
+    ${PYTHON_PN}-numpy \
     ${PYTHON_PN}-numpy-native \
     ${PYTHON_PN}-packaging-native\
     ${PYTHON_PN}-pybind11\
