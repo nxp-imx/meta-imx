@@ -1686,7 +1686,7 @@ Release Location:            https://github.com/nxp-imx/mfgtools -b master
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.75
+Version:                     1.1.89
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
