@@ -1247,7 +1247,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     imx-voiceUI.git
 Version:                     2.0
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 No distribution granted - Section 2.2 applies - See appendix on NXP Voice Software
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
