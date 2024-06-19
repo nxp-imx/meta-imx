@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     zephyr-demo-imx-3.6.1
 Version:                     3.6.1
-Outgoing License:            Apache-2.0 
+Outgoing License:            Apache-2.0
 License File:                LICENSE
 Package Category:            BSP
 Type of Content:             binary
@@ -1096,7 +1096,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.4.0.bin
+Package:                     imx-opencl-converter-0.4.0-efe25d6.bin
 Version:                     0.4.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1134,7 +1134,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-1.33.0.bin
+Package:                     imx-vpu-hantro-1.33.0-7a434fc.bin
 Version:                     1.33.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1149,7 +1149,7 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.2.0
+Package:                     imx-vpu-hantro-daemon-1.2.0-67fa7a7
 Version:                     1.2.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
@@ -1251,7 +1251,7 @@ Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Addition
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
-Description and comments:    NXP RetuneDSP Voice Seeker
+Description and comments:    Application for voice detection
 Release Location:            https://github.com/nxp-imx/imx-voiceUI -b lf-6.6.23-2.0.0
 Origin:                      NXP (Proprietary)
                              Ne10 (BSD-3-Clause) - https://github.com/projectNe10/Ne10
@@ -1363,8 +1363,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mnddr3l-m7-demo-2.14.0.bin
-Version:                     2.14.0
+Package:                     imx8mnddr3l-m7-demo-2.16.000.bin
+Version:                     2.16.000
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
@@ -1671,10 +1671,16 @@ Package Category:            Tools
 Type of Content:             source
 Description and comments:    NXP I.MX Chip image deploy tools. Use uuu.
 Release Location:            https://github.com/nxp-imx/mfgtools -b master
+Origin:                      NXP (BSD-3-clause)
+                             zlib (zlib) - https://github.com/madler/zlib
+                             libusb (LGPL-2.1) [libusb-1.0.dll] [dynamic link] - https://github.com/libusb/libusb
+                             bzip2 (BSD-4-clause) - https://github.com/enthought/bzip2-1.0.6/tree/288acf97a15d558f96c24c89f578b724d6e06b0c
+                             Android Open Source Project (Apache-2.0) [sparse_format.h] - https://developer.android.com/
+
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.75
+Version:                     1.1.89
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
