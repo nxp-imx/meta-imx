@@ -1252,7 +1252,7 @@ License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP RetuneDSP Voice Seeker
-Release Location:            nxp.com
+Release Location:            https://github.com/nxp-imx/imx-voiceUI -b lf-6.6.23-2.0.0
 Origin:                      NXP (Proprietary)
                              Ne10 (BSD-3-Clause) - https://github.com/projectNe10/Ne10
                              pugixml (MIT) - https://github.com/zeux/pugixml
