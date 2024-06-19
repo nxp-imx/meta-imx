@@ -2,4 +2,4 @@
 
 TENSORFLOW_LITE_SRC ?= "git://github.com/nxp-imx/tensorflow-imx.git;protocol=https"
 SRCBRANCH_tf = "imx-v2.15.0"
-SRCREV_tf = "af1c3cc29a939892326e6c495662365914ed10dd"
+SRCREV_tf = "f8c6098438c9de0ed41f30c8d923a85c7dfa6888"
