@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.25-11c647b.bin
+Package:                     firmware-imx-8.25-4024c45.bin
 Version:                     8.25
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -871,7 +871,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.1.16-0053184.bin
+Package:                     imx-dpu-g2d-v1-2.1.16-ea1adcb.bin
 Version:                     2.1.16
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -883,7 +883,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.1.16-0053184.bin
+Package:                     imx-dpu-g2d-v2-2.1.16-ea1adcb.bin
 Version:                     2.1.16
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1146,8 +1146,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-1.33.0-7a434fc.bin
-Version:                     1.33.0
+Package:                     imx-vpu-hantro-1.34.0-e9f425f.bin
+Version:                     1.34.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
