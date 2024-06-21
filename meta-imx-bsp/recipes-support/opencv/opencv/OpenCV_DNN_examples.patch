@@ -16,11 +16,11 @@ Upstream-Status: Pending
  samples/dnn/text_detection.cpp      |  3 ++-
  5 files changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/samples/cpp/logistic_regression.cpp b/samples/cpp/logistic_regression.cpp
-index 1bc2bf9711..ab5eebcbab 100644
---- a/samples/cpp/logistic_regression.cpp
-+++ b/samples/cpp/logistic_regression.cpp
-@@ -28,7 +28,7 @@ static float calculateAccuracyPercent(const Mat &original, const Mat &predicted)
+Index: git/samples/cpp/logistic_regression.cpp
+===================================================================
+--- git.orig/samples/cpp/logistic_regression.cpp
++++ git/samples/cpp/logistic_regression.cpp
+@@ -28,7 +28,7 @@ static float calculateAccuracyPercent(co
  
  int main()
  {
@@ -29,10 +29,10 @@ index 1bc2bf9711..ab5eebcbab 100644
      cout << "**********************************************************************" << endl;
      cout << filename
           << " contains digits 0 and 1 of 20 samples each, collected on an Android device" << endl;
-diff --git a/samples/dnn/classification.cpp b/samples/dnn/classification.cpp
-index 51893666ab..187a7807cd 100644
---- a/samples/dnn/classification.cpp
-+++ b/samples/dnn/classification.cpp
+Index: git/samples/dnn/classification.cpp
+===================================================================
+--- git.orig/samples/dnn/classification.cpp
++++ git/samples/dnn/classification.cpp
 @@ -12,6 +12,7 @@ std::string keys =
      "{ help  h          | | Print help message. }"
      "{ @alias           | | An alias name of model to extract preprocessing parameters from models.yml file. }"
@@ -68,10 +68,10 @@ index 51893666ab..187a7807cd 100644
  
          imshow(kWinName, frame);
      }
-diff --git a/samples/dnn/object_detection.cpp b/samples/dnn/object_detection.cpp
-index 6fc8b2ab61..b299a22912 100644
---- a/samples/dnn/object_detection.cpp
-+++ b/samples/dnn/object_detection.cpp
+Index: git/samples/dnn/object_detection.cpp
+===================================================================
+--- git.orig/samples/dnn/object_detection.cpp
++++ git/samples/dnn/object_detection.cpp
 @@ -260,13 +260,13 @@ int main(int argc, char** argv)
          if (predictionsQueue.counter > 1)
          {
@@ -98,7 +98,7 @@ index 6fc8b2ab61..b299a22912 100644
  
          imshow(kWinName, frame);
      }
-@@ -471,7 +471,7 @@ void drawPred(int classId, float conf, int left, int top, int right, int bottom,
+@@ -471,7 +471,7 @@ void drawPred(int classId, float conf, i
      top = max(top, labelSize.height);
      rectangle(frame, Point(left, top - labelSize.height),
                Point(left + labelSize.width, top + baseLine), Scalar::all(255), FILLED);
@@ -107,10 +107,10 @@ index 6fc8b2ab61..b299a22912 100644
  }
  
  void callback(int pos, void*)
-diff --git a/samples/dnn/segmentation.cpp b/samples/dnn/segmentation.cpp
-index 777badf51e..e8d821b485 100644
---- a/samples/dnn/segmentation.cpp
-+++ b/samples/dnn/segmentation.cpp
+Index: git/samples/dnn/segmentation.cpp
+===================================================================
+--- git.orig/samples/dnn/segmentation.cpp
++++ git/samples/dnn/segmentation.cpp
 @@ -162,7 +162,7 @@ int main(int argc, char** argv)
          double freq = getTickFrequency() / 1000;
          double t = net.getPerfProfile(layersTimes) / freq;
@@ -120,18 +120,18 @@ index 777badf51e..e8d821b485 100644
  
          imshow(kWinName, frame);
          if (!classes.empty())
-diff --git a/samples/dnn/text_detection.cpp b/samples/dnn/text_detection.cpp
-index 24902abfd7..a4ab162763 100644
---- a/samples/dnn/text_detection.cpp
-+++ b/samples/dnn/text_detection.cpp
+Index: git/samples/dnn/text_detection.cpp
+===================================================================
+--- git.orig/samples/dnn/text_detection.cpp
++++ git/samples/dnn/text_detection.cpp
 @@ -30,6 +30,7 @@ using namespace cv::dnn;
  const char* keys =
      "{ help  h              | | Print help message. }"
      "{ input i              | | Path to input image or video file. Skip this argument to capture frames from a camera.}"
 +    "{ device               | 0 | camera device number. }"
      "{ detModel dmp         | | Path to a binary .pb file contains trained detector network.}"
-     "{ width                | 320 | Preprocess input image by resizing to a specific width. It should be multiple by 32. }"
-     "{ height               | 320 | Preprocess input image by resizing to a specific height. It should be multiple by 32. }"
+     "{ width                | 320 | Preprocess input image by resizing to a specific width. It should be a multiple of 32. }"
+     "{ height               | 320 | Preprocess input image by resizing to a specific height. It should be a multiple of 32. }"
 @@ -106,7 +107,7 @@ int main(int argc, char** argv)
  
      // Open a video file or an image file or a camera stream.
