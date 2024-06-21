@@ -30,5 +30,8 @@ EXTRA_OECMAKE += "\
 
 export SDKTARGETSYSROOT = "${STAGING_DIR_HOST}"
 
+# The lib is unversioned
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
+
 FILES:${PN} += "${datadir}/vulkan"
-INSANE_SKIP:${PN}-dev += "dev-elf"
