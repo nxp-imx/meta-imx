@@ -14,7 +14,9 @@ IMAGE_INSTALL += " \
     packagegroup-qt6-imx \
     tzdata \
     ${IMAGE_INSTALL_OPENCV} \
-    ${IMAGE_INSTALL_PARSEC}"
+    ${IMAGE_INSTALL_PARSEC} \
+    ${IMAGE_INSTALL_PKCS11TOOL} \
+"
 
 IMAGE_INSTALL_OPENCV              = ""
 IMAGE_INSTALL_OPENCV:imxgpu       = "${IMAGE_INSTALL_OPENCV_PKGS}"
@@ -31,3 +33,7 @@ IMAGE_INSTALL_PARSEC = " \
     softhsm \
     os-release \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-client optee-os', '', d)}"
+
+IMAGE_INSTALL_PKCS11TOOL = ""
+IMAGE_INSTALL_PKCS11TOOL:mx8-nxp-bsp = "opensc pkcs11-provider"
+IMAGE_INSTALL_PKCS11TOOL:mx9-nxp-bsp = "opensc pkcs11-provider"
