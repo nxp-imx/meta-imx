@@ -968,7 +968,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 --------------------------------------------
 
 Package:                     opencv-imx.git
-Version:                     4.9.0.imx
+Version:                     4.10.0.imx
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            Graphics
