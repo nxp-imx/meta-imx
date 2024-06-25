@@ -113,8 +113,8 @@ PREFERRED_VERSION_optee-os-tadevkit:mx7-nxp-bsp   ??= "4.2.0.imx"
 PREFERRED_VERSION_optee-os-tadevkit:mx8-nxp-bsp   ??= "4.2.0.imx"
 PREFERRED_VERSION_optee-os-tadevkit:mx9-nxp-bsp   ??= "4.2.0.imx"
 
-PREFERRED_VERSION_opencv:mx8-nxp-bsp ??= "4.10.0.imx"
-PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.10.0.imx"
+PREFERRED_VERSION_opencv:mx8-nxp-bsp ??= "4.9.0.imx"
+PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.9.0.imx"
 
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
 ZSTD_COMPRESSION_LEVEL ?= "-10"
