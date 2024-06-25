@@ -5,13 +5,20 @@ SM_COMPILER ?= "gcc-arm-none-eabi-native"
 
 inherit deploy
 
+# Set monitor mode for none, one, or two
+PACKAGECONFIG[m0] = "M=0,,,,,m1 m2"
+PACKAGECONFIG[m1] = ",,,,,m0 m2"
+PACKAGECONFIG[m2] = "M=2,,,,,m0 m1"
+
 SYSTEM_MANAGER_CONFIG ?= "INVALID"
 
 LDFLAGS[unexport] = "1"
 
 EXTRA_OEMAKE = " \
     V=y \
-    SM_CROSS_COMPILE=arm-none-eabi-"
+    SM_CROSS_COMPILE=arm-none-eabi- \
+    ${PACKAGECONFIG_CONFARGS} \
+"
 
 do_configure() {
     oe_runmake config=${SYSTEM_MANAGER_CONFIG} clean
