@@ -19,3 +19,5 @@ SRCREV = "4c00785197815f89eb79a52db0a2db03326da167"
 S = "${WORKDIR}/git"
 
 require imx-system-manager.inc
+
+PACKAGECONFIG ??= "m2"
