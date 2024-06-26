@@ -99,7 +99,7 @@ fi
 
 case $MACHINE in
 imx8*)
-    case $DISTRO in
+    case $FSLDISTRO in
     *wayland)
         : ok
         ;;
@@ -119,11 +119,7 @@ esac
 FSL_EULA_FILE=$CWD/sources/meta-imx/LICENSE.txt
 
 # Set up the basic yocto environment
-if [ -z "$DISTRO" ]; then
-   DISTRO=$FSLDISTRO MACHINE=$MACHINE . ./$PROGNAME $BUILD_DIR
-else
-   MACHINE=$MACHINE . ./$PROGNAME $BUILD_DIR
-fi
+DISTRO=$FSLDISTRO MACHINE=$MACHINE . ./$PROGNAME $BUILD_DIR
 
 # Point to the current directory since the last command changed the directory to $BUILD_DIR
 BUILD_DIR=.
