@@ -31,7 +31,7 @@ RDEPENDS:${PN} += " \
     cpufrequtils \
     cryptodev-module \
     cryptodev-tests \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'dpdk', 'dpdk dpdk-examples dpdk-tools', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'dpdk', '${RDEPENDS_DPDK}', '', d)} \
     e2fsprogs-resize2fs \
     gnutls-bin \
     iw \
@@ -59,3 +59,7 @@ RDEPENDS:${PN} += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-examples', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wifi', 'hostapd sigma-dut', '', d)} \
 "
+
+RDEPENDS_DPDK ?= "dpdk dpdk-examples dpdk-tools ${RDEPENDS_DPDK_FPR}"
+RDEPENDS_DPDK_FPR = ""
+RDEPENDS_DPDK_FPR:mx95-nxp-bsp = "dpdk-fpr"
