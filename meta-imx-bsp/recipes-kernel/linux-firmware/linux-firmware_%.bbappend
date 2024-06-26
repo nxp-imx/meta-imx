@@ -103,8 +103,6 @@ do_install:append () {
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_IW612_SD/sduart_nw61x_v1.bin.se ${D}${nonarch_base_libdir}/firmware/nxp
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_IW612_SD/sd_w61x_v1.bin.se      ${D}${nonarch_base_libdir}/firmware/nxp
     install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_IW612_SD/uartspi_n61x_v1.bin.se ${D}${nonarch_base_libdir}/firmware/nxp
-    install -d ${D}${nonarch_base_libdir}/firmware/nxp/IW612_SD_RFTest
-    install -m 0644 ${WORKDIR}/imx-firmware/nxp/FwImage_IW612_SD/IW612_SD_RFTest/*      ${D}${nonarch_base_libdir}/firmware/nxp/IW612_SD_RFTest
 }
 
 # Use the latest version of sdma firmware in firmware-imx
