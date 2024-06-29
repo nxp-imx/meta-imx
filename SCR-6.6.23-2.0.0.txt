@@ -725,8 +725,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r49.0-5c82b4e.bin
-Version:                     r49.0
+Package:                     mali-imx-r50.0-045ab3f.bin
+Version:                     r50.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
