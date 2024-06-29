@@ -11,9 +11,10 @@ SECTION = "System Environment/Libraries"
 LICENSE = "LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
 
-#v0.21.0
-SRCREV = "0a4b772d6fdab9bfaaa3123775a48a7cb6c5e7c6"
-SRC_URI = "git://github.com/OpenSC/OpenSC;branch=stable-0.25;protocol=https"
+PV = "0.25.1+git${SRCPV}"
+
+SRCREV = "b90191e6c53aba954370e1db9a09a843124c24f5"
+SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https"
 DEPENDS = "virtual/libiconv openssl"
 
 S = "${WORKDIR}/git"
