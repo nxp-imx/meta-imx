@@ -1,1 +1,0 @@
-BBCLASSEXTEND:append = " native"
