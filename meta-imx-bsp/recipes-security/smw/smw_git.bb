@@ -9,13 +9,26 @@ LICENSE = "Apache-2.0 & BSD-3-Clause & Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8636bd68fc00cc6a3809b7b58b45f982 \
                     file://../psa-arch-tests/LICENSE.md;md5=2a944942e1496af1886903d274dedb13"
 
-DEPENDS = "json-c optee-os-tadevkit optee-client python3-cryptography-native"
-DEPENDS:append:mx8qxp-nxp-bsp = " imx-seco-libs"
-DEPENDS:append:mx8dx-nxp-bsp  = " imx-seco-libs"
-DEPENDS:append:mx8ulp-nxp-bsp = " imx-secure-enclave"
-DEPENDS:append:mx91-nxp-bsp   = " imx-secure-enclave"
-DEPENDS:append:mx93-nxp-bsp   = " imx-secure-enclave"
-DEPENDS:append:mx95-nxp-bsp   = " imx-secure-enclave"
+DEPENDS = " \
+    python3-cryptography-native \
+    json-c \
+    optee-client \
+    optee-os-tadevkit \
+    ${DEPENDS_SECO_LIBS} \
+    ${DEPENDS_SECURE_ENCLAVE} \
+"
+
+DEPENDS_SECO_LIBS                = ""
+DEPENDS_SECO_LIBS:mx8qxp-nxp-bsp = "imx-seco-libs"
+DEPENDS_SECO_LIBS:mx8dx-nxp-bsp  = "imx-seco-libs"
+
+DEPENDS_SECURE_ENCLAVE                = ""
+# Temporary, moving 8X to Secure Enclave, add to rootfs for now
+RDEPENDS:${PN}:append:mx8x-nxp-bsp    = "imx-secure-enclave-seco"
+DEPENDS_SECURE_ENCLAVE:mx8ulp-nxp-bsp = "imx-secure-enclave"
+DEPENDS_SECURE_ENCLAVE:mx91-nxp-bsp   = "imx-secure-enclave"
+DEPENDS_SECURE_ENCLAVE:mx93-nxp-bsp   = "imx-secure-enclave"
+DEPENDS_SECURE_ENCLAVE:mx95-nxp-bsp   = "imx-secure-enclave"
 
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw;destsuffix=git/smw \
            ${PSA_LIB_SRC};branch=${SRCBRANCH_psa};name=psa;destsuffix=git/${PSA_ARCH_TESTS_SRC_PATH} \
