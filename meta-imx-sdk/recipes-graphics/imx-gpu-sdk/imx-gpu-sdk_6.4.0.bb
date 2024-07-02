@@ -1,7 +1,7 @@
 SUMMARY = "i.MX GPU SDK Samples"
 DESCRIPTION = "Set of sample applications for i.MX GPU"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://License.md;md5=9d58a2573275ce8c35d79576835dbeb8"
+LIC_FILES_CHKSUM = "file://License.md;md5=fd7441e2140e0125c5d317593ad2d670"
 
 DEPENDS = " \
     assimp \
@@ -58,17 +58,17 @@ DEPENDS_DRM:mx8mm-nxp-bsp = " \
 
 SRC_URI = "${GPU_SDK_SRC};branch=${SRCBRANCH}"
 GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
-SRCBRANCH = "master"
-SRCREV = "4bdb1c43f05c4f592f725aa997b6a1132c0c59eb"
+SRCBRANCH = "release/6.4.0"
+SRCREV = "946d3785d8641a53793684a8644c51445d36ca96"
 
 S = "${WORKDIR}/git"
 
 inherit pkgconfig
 
 WINDOW_SYSTEM = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland_XDG', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11',         'X11', \
-                                                                 'FB', d), d)}"
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11',     'X11', \
+                                                             'FB', d), d)}"
 
 FEATURES = "ConsoleHost,EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,Lib_pugixml,Test_RequireUserInputToExit,WindowHost"
 FEATURES:append = "${FEATURES_GPU}${FEATURES_G2D}${FEATURES_3D}${FEATURES_SOC}"
