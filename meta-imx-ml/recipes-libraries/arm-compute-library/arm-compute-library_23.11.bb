@@ -36,8 +36,22 @@ SCONS_MAXLINELENGTH = ""
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
-# Override scons_do_compile which includes unknown variables PREFIX and prefix
-do_compile() {
+# OVERRIDE: do_configure from scons.bbclass. Fixes:
+# | Unknown variables: PREFIX prefix
+do_configure() {
+	if [ -n "${CONFIGURESTAMPFILE}" -a "${S}" = "${B}" ]; then
+		if [ -e "${CONFIGURESTAMPFILE}" -a "`cat ${CONFIGURESTAMPFILE}`" != "${BB_TASKHASH}" -a "${CLEANBROKEN}" != "1" ]; then
+			${STAGING_BINDIR_NATIVE}/scons --directory=${S} --clean ${EXTRA_OESCONS}
+		fi
+
+		mkdir -p `dirname ${CONFIGURESTAMPFILE}`
+		echo ${BB_TASKHASH} > ${CONFIGURESTAMPFILE}
+	fi
+}
+
+# OVERRIDE: scons_do_compile from scons.bbclass. Fixes:
+# | Unknown variables: PREFIX prefix
+scons_do_compile() {
     ${STAGING_BINDIR_NATIVE}/scons --directory=${S} ${PARALLEL_MAKE} ${EXTRA_OESCONS} || \
     die "scons build execution failed."
 }
