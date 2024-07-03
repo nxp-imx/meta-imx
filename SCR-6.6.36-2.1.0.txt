@@ -745,7 +745,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     6.3.1
+Version:                     6.4.0
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
@@ -1161,8 +1161,8 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.2.0-67fa7a7
-Version:                     1.2.0
+Package:                     imx-vpu-hantro-daemon-1.3.0-56aebf2
+Version:                     1.3.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1175,8 +1175,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-vc-1.9.1.bin
-Version:                     1.9.1
+Package:                     imx-vpu-hantro-vc-1.10.0.bin
+Version:                     1.10.0
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
