@@ -11,6 +11,7 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0008-six-Update-vendored-copy-of-six-to-1.16.0.patch \
     file://0009-Update-LegacyStatsCollector-to-conform-with.patch \
     file://0010-Replace-imp.load_source-with-importlib-equivalent.patch \
+    file://0012-LF-12406-Fixed-webgl-test-fail-for-GL_MAX_SAMPLES-ch.patch \
 "
 VDA_PATCH_SET = " \
     file://0101-V4L2VDA-Switch-to-use-VDA-instead-of-direct-VideoDec.patch \

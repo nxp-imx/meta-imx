@@ -1,0 +1,44 @@
+From 28567067416e15649c9be2b67adff81b4fb21e3b Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Thu, 27 Jun 2024 14:43:08 +0800
+Subject: [PATCH] LF-12406: Fixed webgl test fail for GL_MAX_SAMPLES checking
+
+Differences Between WebGL and OpenGL ES 3.0 about GL_MAX_SAMPLES.
+
+https://registry.khronos.org/OpenGL-Refpages/es3.0/html/glGetInternalformativ.xhtml
+
+So disable the GL_MAX_SAMPLES checking for webgl context.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ gpu/command_buffer/service/gles2_cmd_decoder.cc | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/gpu/command_buffer/service/gles2_cmd_decoder.cc b/gpu/command_buffer/service/gles2_cmd_decoder.cc
+index 4197db097b4b9..938112364d762 100644
+--- a/gpu/command_buffer/service/gles2_cmd_decoder.cc
++++ b/gpu/command_buffer/service/gles2_cmd_decoder.cc
+@@ -8644,11 +8644,13 @@ bool GLES2DecoderImpl::ValidateRenderbufferStorageMultisample(
+     }
+   }
+ 
+-  if (samples > renderbuffer_manager()->max_samples()) {
+-    LOCAL_SET_GL_ERROR(
+-        GL_INVALID_VALUE,
+-        "glRenderbufferStorageMultisample", "samples too large");
+-    return false;
++  if (!feature_info_->IsWebGLContext()) {
++    if (samples > renderbuffer_manager()->max_samples()) {
++      LOCAL_SET_GL_ERROR(
++          GL_INVALID_VALUE,
++          "glRenderbufferStorageMultisample", "samples too large");
++      return false;
++    }
+   }
+ 
+   if (width > renderbuffer_manager()->max_renderbuffer_size() ||
+-- 
+2.39.2.windows.1
+
