@@ -11,6 +11,7 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0008-six-Update-vendored-copy-of-six-to-1.16.0.patch \
     file://0009-Update-LegacyStatsCollector-to-conform-with.patch \
     file://0010-Replace-imp.load_source-with-importlib-equivalent.patch \
+    file://0011-MGS-7765-Blacklist-MSAA-for-GPU-Raster-on-Vivante-GP.patch \
     file://0012-LF-12406-Fixed-webgl-test-fail-for-GL_MAX_SAMPLES-ch.patch \
 "
 VDA_PATCH_SET = " \
@@ -65,7 +66,15 @@ GN_ARGS:append:imx-nxp-bsp = " \
     use_pulseaudio=true \
 "
 DEPENDS:append = " pulseaudio"
-CHROMIUM_EXTRA_ARGS:append = " --disable-features=VizDisplayCompositor --in-process-gpu --disable-gpu-rasterization"
+CHROMIUM_EXTRA_ARGS:append = " \
+    --disable-features=VizDisplayCompositor \
+    --in-process-gpu \
+    ${CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION} \
+"
+CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION             = "--disable-gpu-rasterization"
+CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION:imxgpu      = ""
+CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION:mx6-nxp-bsp = "--disable-gpu-rasterization"
+CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION:mx7-nxp-bsp = "--disable-gpu-rasterization"
 
 #Remove installed ANGLE libraries
 do_install:append() {
