@@ -1,6 +1,5 @@
-require renderdoc-1.13.inc
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRCREV = "22d4dc45749c8d1ddbb9e869ec5db142bfe1d7bd"
 SRC_URI += " \
     file://0001-Continue-running-when-EnumerateDeviceExtensionProper.patch \
     file://0002-Pass-memory-checking-when-replaying-captures.patch \
