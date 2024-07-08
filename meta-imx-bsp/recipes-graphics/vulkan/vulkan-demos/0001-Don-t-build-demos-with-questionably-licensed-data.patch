@@ -1,4 +1,4 @@
-From 663d51cd31fd98411e25f37aaf52b591d9639bf5 Mon Sep 17 00:00:00 2001
+From 34a185854c0a8ce0f748785f08c76a4258ec4549 Mon Sep 17 00:00:00 2001
 From: "Maxin B. John" <maxin.john@intel.com>
 Date: Mon, 30 Jul 2018 17:23:29 +0300
 Subject: [PATCH] Don't build demos with questionably licensed data
@@ -34,43 +34,44 @@ Upstream-Status: Inappropriate [configuration]
 Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
 Signed-off-by: Maxin B. John <maxin.john@intel.com>
 ---
- examples/CMakeLists.txt | 14 --------------
- 1 file changed, 14 deletions(-)
+ examples/CMakeLists.txt | 13 -------------
+ 1 file changed, 13 deletions(-)
 
-Index: git/examples/CMakeLists.txt
-===================================================================
---- git.orig/examples/CMakeLists.txt
-+++ git/examples/CMakeLists.txt
-@@ -89,9 +89,6 @@ set(EXAMPLES
- 	conditionalrender
+diff --git a/examples/CMakeLists.txt b/examples/CMakeLists.txt
+index 3e95b6cd..136229fb 100644
+--- a/examples/CMakeLists.txt
++++ b/examples/CMakeLists.txt
+@@ -97,9 +97,6 @@ set(EXAMPLES
  	conservativeraster
- 	debugmarker
+ 	debugprintf
+ 	debugutils
 -	deferred
 -	deferredmultisampling
 -	deferredshadows
  	descriptorbuffer
  	descriptorindexing
  	descriptorsets
-@@ -106,9 +103,6 @@ set(EXAMPLES
+@@ -114,10 +111,7 @@ set(EXAMPLES
  	gltfscenerendering
  	gltfskinning
  	graphicspipelinelibrary
 -	hdr
+ 	hostimagecopy
 -	imgui
 -	indirectdraw
  	inlineuniformblocks
  	inputattachments
  	instancing
-@@ -123,8 +117,6 @@ set(EXAMPLES
+@@ -132,8 +126,6 @@ set(EXAMPLES
  	parallaxmapping
- 	particlefire
+ 	particlesystem
  	pbrbasic
 -	pbribl
 -	pbrtexture
  	pipelines
  	pipelinestatistics
  	pushconstants
-@@ -141,12 +133,8 @@ set(EXAMPLES
+@@ -152,12 +144,8 @@ set(EXAMPLES
  	renderheadless
  	screenshot
  	shaderobjects
@@ -83,7 +84,7 @@ Index: git/examples/CMakeLists.txt
  	stencilbuffer
  	subpasses
  	terraintessellation
-@@ -163,7 +151,6 @@ set(EXAMPLES
+@@ -174,7 +162,6 @@ set(EXAMPLES
  	variablerateshading
  	vertexattributes
  	viewportarray
@@ -91,3 +92,6 @@ Index: git/examples/CMakeLists.txt
  )
  
  buildExamples()
+-- 
+2.34.1
+
