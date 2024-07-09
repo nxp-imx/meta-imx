@@ -114,12 +114,6 @@ GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;prot
 SRCBRANCH = "imx-1.24.x"
 SRCREV = "d8727edd56536a5c39de7905f073fce61896c0af"
 
-# set 32bit compile timer for 32-bit platform
-GLIBC_64BIT_TIME_FLAGS:mx6-nxp-bsp = ""
-GLIBC_64BIT_TIME_FLAGS:mx7-nxp-bsp = ""
-INSANE_SKIP:mx6-nxp-bsp:append = " 32bit-time"
-INSANE_SKIP:mx7-nxp-bsp:append = " 32bit-time"
-
 S = "${WORKDIR}/git"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
