@@ -35,4 +35,3 @@ FILES:${PN}-staticdev += "${libdir}/gstreamer-1.0/*.a"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 
-LICENSE_FLAGS_ACCEPTED += " commercial "
