@@ -634,6 +634,16 @@ Origin:                      NXP (GPL-2.0 or BSD-3-Clause)
                              DPDK-kmods (GPL-2.0) - http://git.dpdk.org/dpdk-kmods/
 
 --------------------------------------------
+
+Package:                     dpdk-fpr.git
+Version:                     22.11
+Outgoing License:            BSD-3-Clause 
+License File:                license/bsd-3-clause.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    DPDK Fast Path Routing
+Release Location:            https://github.com/nxp/dpdk-fpr -b lf-6.6.36-2.1.0
+--------------------------------------------
 Graphics Packages
 --------------------------------------------
 
@@ -725,7 +735,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r50.0-60756dd.bin
+Package:                     mali-imx-r50.0-7a1fc31.bin
 Version:                     r50.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1004,7 +1014,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.9.1-2bb0842.bin
+Package:                     imx-parser-4.9.1-24099d3.bin
 Version:                     4.9.1
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
