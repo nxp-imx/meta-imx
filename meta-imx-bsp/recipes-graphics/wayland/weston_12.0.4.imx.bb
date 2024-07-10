@@ -185,6 +185,9 @@ PACKAGECONFIG_G2D:mx93-nxp-bsp ??= "imxg2d"
 # Weston with i.MX G2D renderer
 PACKAGECONFIG[imxg2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d"
 
+# Weston on RDP, fix for base recipe
+PACKAGECONFIG[rdp] = "-Dbackend-rdp=true,-Dbackend-rdp=false,freerdp,freerdp"
+
 # links with imx-gpu libs which are pre-built for glibc
 # gcompat will address it during runtime
 LDFLAGS:append:imxgpu:libc-musl = " -Wl,--allow-shlib-undefined"
