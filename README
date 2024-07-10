@@ -136,12 +136,11 @@ setup process because, once accepted, all further work in the Yocto environment 
 
 Chromium
 --------
-Add Chromium to your Wayland or X11-based image by adding the following lines to local.conf:
-
-IMAGE_INSTALL:append = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' chromium-ozone-wayland', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11', ' chromium-x11', \
-                                                        '', d), d)}"
+Add Chromium to a Wayland-based image:
+- add the recipe to the image, e.g., by adding to local.conf:
+   IMAGE_INSTALL:append = " chromium-ozone-wayland"
+- add the meta-chromium layer:
+   $: bitbake-layers add-layer ../sources/meta-browser/meta-chromium
 
 Build server host requirements for chromium 74 version:
 
@@ -154,18 +153,11 @@ QtWebEngine
 -----------
 QtWebEngine is not built by default, so add this to local.conf or image recipe. It is supported only on the machines
 that have GPU.
-
-IMAGE_INSTALL:append = "packagegroup-qt6-webengine"
-
-QtWebEngine is not compatible with the meta-chromium layer used by the release. If you are using the NXP build setup,
-please be sure to remove meta-chromium from bblayers.conf:
-
-# Commented out due to incompatibility with qtwebengine
-#BBLAYERS += "${BSPDIR}/sources/meta-browser/meta-chromium"
+   IMAGE_INSTALL:append = " packagegroup-qt6-webengine"
 
 There are many browsers available using QtWebEngine and can be found here:
-/usr/share/examples/webengine
-/usr/share/examples/webenginewidgets
+   /usr/share/examples/webengine
+   /usr/share/examples/webenginewidgets
 
 Qt
 --
