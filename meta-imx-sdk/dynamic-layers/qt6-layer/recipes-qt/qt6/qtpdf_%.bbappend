@@ -1,1 +1,1 @@
-DEPENDS += "cups"
+DEPENDS += "cups libdrm"
