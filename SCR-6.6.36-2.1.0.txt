@@ -254,7 +254,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -907,7 +907,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-g2d-pxp.git
 Version:                     2.1.0
-Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -1132,7 +1132,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-vpuwrap.git
 Version:                     git
-Outgoing License:            LA_OPT_NXP_Software_License v49 September 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
