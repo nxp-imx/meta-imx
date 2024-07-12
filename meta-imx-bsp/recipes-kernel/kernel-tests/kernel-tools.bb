@@ -21,6 +21,7 @@ KERNEL_PCITEST_SRC ?= " \
              tools/pci \
              tools/virtio \
              tools/scripts \
+             tools/testing/vsock \
 "
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
@@ -48,6 +49,7 @@ EXTRA_OEMAKE = '\
     AR="${AR}" \
     LD="${LD}" \
     DESTDIR="${D}" \
+    VSOCK_INSTALL_PATH="${D}${bindir}" \
 '
 DO_BUILD_VIRTIO = "no"
 DO_BUILD_VIRTIO:mx8m-nxp-bsp = "yes"
@@ -56,6 +58,7 @@ do_compile() {
     unset CFLAGS
     oe_runmake -C ${S}/tools/pci
     oe_runmake -C ${S}/tools/iio
+    oe_runmake -C ${S}/tools/testing/vsock
     if [ ${DO_BUILD_VIRTIO} = "yes" ]; then
         oe_runmake -C ${S}/tools/virtio  virtio-ivshmem-console virtio-ivshmem-block
     fi
@@ -65,6 +68,7 @@ do_install() {
     unset CFLAGS
     oe_runmake -C ${S}/tools/pci install
     oe_runmake -C ${S}/tools/iio install
+    oe_runmake -C ${S}/tools/testing/vsock install
     if [ ${DO_BUILD_VIRTIO} = "yes" ]; then
         install ${S}/tools/virtio/virtio-ivshmem-console  ${D}${bindir}/
         install ${S}/tools/virtio/virtio-ivshmem-block    ${D}${bindir}/
@@ -74,10 +78,11 @@ do_install() {
 ALLOW_EMPTY:${PN} = "1"
 ALLOW_EMPTY:${PN}-virtio = "1"
 
-PACKAGES =+ "${PN}-pci ${PN}-virtio ${PN}-iio"
+PACKAGES =+ "${PN}-pci ${PN}-virtio ${PN}-iio ${PN}-vsock"
 
 FILES:${PN}-pci = "${bindir}/pci*"
 FILES:${PN}-iio = "${bindir}/lsiio ${bindir}/iio*"
+FILES:${PN}-vsock = "${bindir}/vsock*"
 
 FILES:${PN}-virtio = "${bindir}/virtio-ivshmem-*"
 
