@@ -22,6 +22,7 @@ SOC_TOOLS_TEST:append:imx-nxp-bsp    = " \
 SOC_TOOLS_TEST:append:mx8qm-nxp-bsp  = " imx-seco-libs dvbapp-tests"
 SOC_TOOLS_TEST:append:mx8x-nxp-bsp   = " imx-seco-libs"
 SOC_TOOLS_TEST:append:mx8m-nxp-bsp   = " kernel-tools-virtio"
+SOC_TOOLS_TEST:append:mx9-nxp-bsp   = " kernel-tools-vsock"
 SOC_TOOLS_TEST:mx95-nxp-bsp   = "imx-test"
 
 RDEPENDS:${PN} += " \

@@ -8,6 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 KERNEL_TEST_TOOLS      = "kernel-tools-iio kernel-tools-pci spidev-test"
+KERNEL_TEST_TOOLS:mx9-nxp-bsp = "kernel-tools-vsock"
 KERNEL_TEST_TOOLS:mx8m-nxp-bsp = "kernel-tools-iio kernel-tools-pci spidev-test kernel-tools-virtio"
 
 
