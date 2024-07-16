@@ -7,11 +7,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-KERNEL_TEST_TOOLS      = "kernel-tools-iio kernel-tools-pci spidev-test"
-KERNEL_TEST_TOOLS:mx9-nxp-bsp = "kernel-tools-vsock"
-KERNEL_TEST_TOOLS:mx8m-nxp-bsp = "kernel-tools-iio kernel-tools-pci spidev-test kernel-tools-virtio"
-
-
 RDEPENDS:${PN} = " \
     can-utils \
     coreutils \
@@ -26,7 +21,11 @@ RDEPENDS:${PN} = " \
     iproute2 iproute2-tc \
     iw \
     i2c-tools \
-    ${KERNEL_TEST_TOOLS} \
+    kernel-tools-iio \
+    kernel-tools-pci \
+    kernel-tools-virtio \
+    kernel-tools-vsock \
+    spidev-test \
     libgpiod-tools \
     linuxptp \
     memtester \
