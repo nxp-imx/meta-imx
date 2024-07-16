@@ -23,7 +23,11 @@ SOC_TOOLS_TEST:append:imx-nxp-bsp    = " \
 
 SOC_TOOLS_TEST:append:mx8qm-nxp-bsp  = " imx-seco-libs dvbapp-tests"
 SOC_TOOLS_TEST:append:mx8x-nxp-bsp   = " imx-seco-libs"
-SOC_TOOLS_TEST:mx95-nxp-bsp   = "imx-test"
+
+SOC_TOOLS_TEST:imxgpu  = "imx-test ${SOC_TOOLS_TEST_VIVANTE}"
+SOC_TOOLS_TEST_VIVANTE             = ""
+SOC_TOOLS_TEST_VIVANTE:mx6-nxp-bsp = "imx-gpu-viv-demos"
+SOC_TOOLS_TEST_VIVANTE:mx7-nxp-bsp = "imx-gpu-viv-demos"
 
 RDEPENDS:${PN} += " \
     bridge-utils \
