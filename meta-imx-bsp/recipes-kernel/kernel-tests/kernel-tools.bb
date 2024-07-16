@@ -14,9 +14,13 @@ S = "${WORKDIR}/${BP}"
 
 PACKAGECONFIG ??= " \
     ${PACKAGECONFIG_VIRTIO} \
+    ${PACKAGECONFIG_VSOCK} \
 "
 PACKAGECONFIG_VIRTIO              = ""
 PACKAGECONFIG_VIRTIO:mx8m-nxp-bsp = "virtio"
+PACKAGECONFIG_VSOCK               = "vsock"
+PACKAGECONFIG_VSOCK:mx6-nxp-bsp   = ""
+PACKAGECONFIG_VSOCK:mx7-nxp-bsp   = ""
 
 KERNEL_PCITEST_SRC ?= " \
     include \
@@ -29,7 +33,7 @@ KERNEL_PCITEST_SRC ?= " \
     tools/pci \
     tools/scripts \
     ${@bb.utils.contains('PACKAGECONFIG', 'virtio', 'tools/virtio', '', d)} \
-    tools/testing/vsock \
+    ${@bb.utils.contains('PACKAGECONFIG', 'vsock',  'tools/testing/vsock', '', d)} \
 "
 
 do_configure[prefuncs] += "copy_pci_source_from_kernel"
@@ -63,7 +67,9 @@ do_compile() {
     unset CFLAGS
     oe_runmake -C ${S}/tools/pci
     oe_runmake -C ${S}/tools/iio
-    oe_runmake -C ${S}/tools/testing/vsock
+    if [ ${@bb.utils.filter('PACKAGECONFIG', 'vsock', d)} = "vsock" ]; then
+        oe_runmake -C ${S}/tools/testing/vsock
+    fi
     if [ ${@bb.utils.filter('PACKAGECONFIG', 'virtio', d)} = "virtio" ]; then
         oe_runmake -C ${S}/tools/virtio  virtio-ivshmem-console virtio-ivshmem-block
     fi
@@ -73,7 +79,9 @@ do_install() {
     unset CFLAGS
     oe_runmake -C ${S}/tools/pci install
     oe_runmake -C ${S}/tools/iio install
-    oe_runmake -C ${S}/tools/testing/vsock install
+    if [ ${@bb.utils.filter('PACKAGECONFIG', 'vsock', d)} = "vsock" ]; then
+        oe_runmake -C ${S}/tools/testing/vsock install
+    fi
     if [ ${@bb.utils.filter('PACKAGECONFIG', 'virtio', d)} = "virtio" ]; then
         install ${S}/tools/virtio/virtio-ivshmem-console  ${D}${bindir}/
         install ${S}/tools/virtio/virtio-ivshmem-block    ${D}${bindir}/
@@ -82,6 +90,7 @@ do_install() {
 
 ALLOW_EMPTY:${PN} = "1"
 ALLOW_EMPTY:${PN}-virtio = "1"
+ALLOW_EMPTY:${PN}-vsock = "1"
 
 PACKAGES =+ "${PN}-pci ${PN}-virtio ${PN}-iio ${PN}-vsock"
 
