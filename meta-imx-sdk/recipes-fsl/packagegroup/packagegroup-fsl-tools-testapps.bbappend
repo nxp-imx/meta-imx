@@ -28,6 +28,7 @@ SOC_TOOLS_TEST:imxgpu  = "imx-test ${SOC_TOOLS_TEST_VIVANTE}"
 SOC_TOOLS_TEST_VIVANTE             = ""
 SOC_TOOLS_TEST_VIVANTE:mx6-nxp-bsp = "imx-gpu-viv-demos"
 SOC_TOOLS_TEST_VIVANTE:mx7-nxp-bsp = "imx-gpu-viv-demos"
+SOC_TOOLS_TEST_VIVANTE:mx8-nxp-bsp = "imx-gpu-viv-demos"
 
 RDEPENDS:${PN} += " \
     bridge-utils \
