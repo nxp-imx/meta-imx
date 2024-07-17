@@ -7,6 +7,17 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
+PIPEWIRE_TOOLS = " \
+    pipewire \
+    pipewire-pulse \
+    pipewire-spa-tools \
+    pipewire-tools \
+    ${PIPEWIRE_V4L2} \
+"
+PIPEWIRE_V4L2 = "pipewire-v4l2"
+PIPEWIRE_V4L2:mx6-nxp-bsp = ""
+PIPEWIRE_V4L2:mx7-nxp-bsp = ""
+
 RDEPENDS:${PN} = " \
     can-utils \
     coreutils \
@@ -35,11 +46,7 @@ RDEPENDS:${PN} = " \
     mtd-utils-ubifs \
     nano \
     parted \
-    pipewire \
-    pipewire-spa-tools \
-    pipewire-tools \
-    pipewire-pulse \
-    pipewire-v4l2 \
+    ${PIPEWIRE_TOOLS} \
     procps \
     ptpd \
     ntp \

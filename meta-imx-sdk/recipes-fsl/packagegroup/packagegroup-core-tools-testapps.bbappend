@@ -8,12 +8,19 @@ IMX_CORE_TOOLS = ""
 IMX_CORE_TOOLS:imxgpu2d = " tslib"
 IMX_CORE_TOOLS:imxpxp = " tslib"
 
+PIPEWIRE_TOOLS = " \
+    pipewire \
+    pipewire-pulse \
+    pipewire-spa-tools \
+    pipewire-tools \
+    ${PIPEWIRE_V4L2} \
+"
+PIPEWIRE_V4L2 = "pipewire-v4l2"
+PIPEWIRE_V4L2:mx6-nxp-bsp = ""
+PIPEWIRE_V4L2:mx7-nxp-bsp = ""
+
 RDEPENDS:${PN} += " \
     ${IMX_CORE_TOOLS} \
     libgpiod-tools \
-    pipewire \
-    pipewire-spa-tools \
-    pipewire-tools \
-    pipewire-v4l2 \
-    pipewire-pulse \
+    ${PIPEWIRE_TOOLS} \
 "
