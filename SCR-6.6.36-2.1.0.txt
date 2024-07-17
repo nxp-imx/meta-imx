@@ -569,8 +569,8 @@ Origin:                      NXP (Apache-2.0)
                              OpenSSL 1.1 (OpenSSL License) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
 --------------------------------------------
 
-Package:                     ecdsa-lib-imx-3.3.2.4.bin
-Version:                     3.3.2.4
+Package:                     ecdsa-lib-imx-3.3.3.bin
+Version:                     3.3.3
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -643,6 +643,11 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    DPDK Fast Path Routing
 Release Location:            https://github.com/nxp/dpdk-fpr -b lf-6.6.36-2.1.0
+Origin:                      DPDK - Intel Corporation (BSD-3-Clause) - https://github.com/DPDK/dpdk
+                             Packet Journey - Gandi S.A.S (BSD-2-Clause) - https://github.com/Gandi/packet-journey
+                             snmp_passpersist.py - Nicolas AGIUS (GPL-3.0) - Separate tool for SNMP
+                             NXP (BSD-3-Clause)
+
 --------------------------------------------
 Graphics Packages
 --------------------------------------------
@@ -881,8 +886,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.1.16-39731e1.bin
-Version:                     2.1.16
+Package:                     imx-dpu-g2d-v1-2.2.0-d4bdda2.bin
+Version:                     2.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -893,8 +898,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.1.16-39731e1.bin
-Version:                     2.1.16
+Package:                     imx-dpu-g2d-v2-2.2.0-d4bdda2.bin
+Version:                     2.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
