@@ -10,7 +10,7 @@ DEPENDS = "imx-seco-libs openssl"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
-SRC_URI[sha256sum] = "eccd12cb8178f3705c251f81b93611c54671560562001408a5153f33dae8a470" 
+SRC_URI[sha256sum] = "36f9ccbbb6f5ef28be9e9ba92eedfb3e4a39eb25a182a401f12970f83d942161"
 
 inherit fsl-eula-unpack
 
