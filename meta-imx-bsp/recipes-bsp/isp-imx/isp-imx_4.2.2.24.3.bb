@@ -8,7 +8,7 @@ DEPENDS = "boost libdrm virtual/libg2d libtinyxml2"
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true \
 "
 
-SRC_URI[sha256sum] = "d9595c04de21b6ca9b236365d68c3b7d5f9e7a6eab4a457c2cf487bd70495ab0"
+SRC_URI[sha256sum] = "a59a28af848f243a5a8f21255a810a3fce26c5139de5c36ccba09ef5db75e449"
 
 inherit fsl-eula-unpack cmake systemd use-imx-headers
 
