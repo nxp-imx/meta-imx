@@ -12,9 +12,6 @@ do_install() {
     oe_runmake install INSTALLDIR=${D}${nonarch_base_libdir}/firmware/nxp
 }
 
-FILES:${PN}-nxp-common += " \
-    ${nonarch_base_libdir}/firmware/nxp/helper_uart_3000000.bin \
-"
 
 FILES:${PN}-nxpiw612-sdio += " \
     ${nonarch_base_libdir}/firmware/nxp/uartuart_n61x_v1.bin.se \
