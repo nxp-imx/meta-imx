@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
 # name must be hard-coded, i.e., ${BPN} cannot be used.
 SRC_URI = "${FSL_MIRROR}/firmware-imx-${PV}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
 IMX_SRCREV_ABBREV = "324bca9"
-SRC_URI[sha256sum] = "4f5041b8815eebd01c254fd1e34026ebd52e84bee9210395327c26262011d463"
+SRC_URI[sha256sum] = "4e06cec52929f86b7100f6afd1200bba6c21d294e0936562720e3baca69a34a9"
 
 S = "${WORKDIR}/firmware-imx-${PV}-${IMX_SRCREV_ABBREV}"
 
