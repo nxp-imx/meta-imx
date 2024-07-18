@@ -5,13 +5,24 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=10c0fda810c63b052409b15a5445671a"
 IMX_FIRMWARE_SRC ?= "git://github.com/nxp-imx/imx-firmware.git;protocol=https"
 SRC_URI = "${IMX_FIRMWARE_SRC};branch=${SRCBRANCH}"
 SRCBRANCH = "master"
-SRCREV = "7e038c6afba3118bcee91608764ac3c633bce0c4"
+SRCREV = "18a4a0795862feaa982a65c878315a5be7752743"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/nxp
     oe_runmake install INSTALLDIR=${D}${nonarch_base_libdir}/firmware/nxp
 }
 
+FILES:${PN}-nxp8997-common = " \
+    ${nonarch_base_libdir}/firmware/nxp/ed_mac_ctrl_V3_8997.conf \
+    ${nonarch_base_libdir}/firmware/nxp/txpwrlimit_cfg_8997.conf \
+    ${nonarch_base_libdir}/firmware/nxp/uart8997_bt_v4.bin \
+"
+
+FILES:${PN}-nxp9098-common = " \
+    ${nonarch_base_libdir}/firmware/nxp/ed_mac_ctrl_V3_909x.conf \
+    ${nonarch_base_libdir}/firmware/nxp/txpwrlimit_cfg_9098.conf \
+    ${nonarch_base_libdir}/firmware/nxp/uart9098_bt_v1.bin \
+"
 
 FILES:${PN}-nxpiw612-sdio += " \
     ${nonarch_base_libdir}/firmware/nxp/uartuart_n61x_v1.bin.se \
