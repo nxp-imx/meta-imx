@@ -10,8 +10,6 @@ do_configure[depends] += "virtual/kernel:do_shared_workdir"
 inherit linux-kernel-base kernel-arch
 inherit kernelsrc
 
-DEPENDS = "liburing"
-
 S = "${WORKDIR}/${BP}"
 
 PACKAGECONFIG ??= " \
@@ -23,6 +21,8 @@ PACKAGECONFIG_VIRTIO:mx8m-nxp-bsp = "virtio"
 PACKAGECONFIG_VSOCK               = "vsock"
 PACKAGECONFIG_VSOCK:mx6-nxp-bsp   = ""
 PACKAGECONFIG_VSOCK:mx7-nxp-bsp   = ""
+
+PACKAGECONFIG[vsock] = ",,liburing"
 
 KERNEL_PCITEST_SRC ?= " \
     include \
