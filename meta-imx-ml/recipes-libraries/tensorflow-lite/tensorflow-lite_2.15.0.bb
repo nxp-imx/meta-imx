@@ -1,4 +1,4 @@
-# Copyright 2020-2021 NXP
+# Copyright 2020-2021, 2024 NXP
 DESCRIPTION = "TensorFlow Lite C++ Library"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4158a261ca7f2525513e31ba9c50ae98"
@@ -16,6 +16,10 @@ SRC_URI[model-mobv1.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226dfe4cdce
 S = "${WORKDIR}/git"
 
 inherit python3native cmake
+
+PACKAGECONFIG ??= "python-example"
+
+PACKAGECONFIG[python-example] = ",,,python3-pillow"
 
 TFLITE_ENABLE_GPU = "off"
 TFLITE_ENABLE_GPU:mx95-nxp-bsp = "on"
@@ -38,6 +42,7 @@ EXTRA_OECMAKE = " \
 EXTRA_OECMAKE_BUILD = "benchmark_model label_image"
 
 CXXFLAGS += "-fPIC"
+
 
 do_configure[network] = "1"
 do_configure:prepend() {
@@ -99,7 +104,9 @@ do_install() {
 
 
     # Install python example
-    cp ${S}/tensorflow/lite/examples/python/label_image.py ${D}${bindir}/${PN}-${PV}/examples
+    if ${@bb.utils.contains('PACKAGECONFIG', 'python-example', 'true', 'false', d)}; then
+        cp ${S}/tensorflow/lite/examples/python/label_image.py ${D}${bindir}/${PN}-${PV}/examples
+    fi
 
     # Install mobilenet tflite file
     cp ${WORKDIR}/mobilenet_*.tflite ${D}${bindir}/${PN}-${PV}/examples
