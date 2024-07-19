@@ -643,10 +643,9 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    DPDK Fast Path Routing
 Release Location:            https://github.com/nxp/dpdk-fpr -b lf-6.6.36-2.1.0
-Origin:                      DPDK - Intel Corporation (BSD-3-Clause) - https://github.com/DPDK/dpdk
+Origin:                      NXP (BSD-3-Clause)
+                             DPDK - Intel Corporation (BSD-3-Clause) - https://github.com/DPDK/dpdk
                              Packet Journey - Gandi S.A.S (BSD-2-Clause) - https://github.com/Gandi/packet-journey
-                             snmp_passpersist.py - Nicolas AGIUS (GPL-3.0) - Separate tool for SNMP
-                             NXP (BSD-3-Clause)
 
 --------------------------------------------
 Graphics Packages
@@ -702,7 +701,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-dce14a6.bin
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-e780cf0.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -721,7 +720,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-dce14a6.bin
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-e780cf0.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -862,7 +861,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-dce14a6.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-e780cf0.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -874,7 +873,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-dce14a6.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-e780cf0.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -886,7 +885,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.2.0-d4bdda2.bin
+Package:                     imx-dpu-g2d-v1-2.2.0-1e41abf.bin
 Version:                     2.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -898,7 +897,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.2.0-d4bdda2.bin
+Package:                     imx-dpu-g2d-v2-2.2.0-1e41abf.bin
 Version:                     2.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1123,7 +1122,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.5.0-7adb5ef.bin
+Package:                     imx-opencl-converter-0.5.0-4485878.bin
 Version:                     0.5.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
