@@ -302,19 +302,6 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     sof-imx-2.10.0
-Version:                     2.10.0
-Outgoing License:            BSD-3-Clause 
-License File:                LICENCE
-Package Category:            BSP
-Type of Content:             binary
-Description and comments:    Sound Open Firmware
-Release Location:            Mirror
-Origin:                      NXP (BSD-3-clause)
-                             sof (BSD-3-Clause) - https://github.com/thesofproject/sof
-
---------------------------------------------
-
 Package:                     sof-zephyr-2.10.0
 Version:                     2.10.0
 Outgoing License:            BSD-3-Clause 
