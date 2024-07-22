@@ -1,7 +1,7 @@
 SUMMARY = "i.MX Optional Execution Image"
 
 LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=59530bdf33659b29e73d4adb9f9f6552"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b66f32a90f9577a5a3255c21d79bc619"
 
 INHIBIT_DEFAULT_DEPS = "1"
 DEPENDS = "gcc-arm-none-eabi-native"
