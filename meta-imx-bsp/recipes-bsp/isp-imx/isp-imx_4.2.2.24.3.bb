@@ -52,6 +52,9 @@ do_install() {
         install -d ${D}${systemd_system_unitdir}
         install -m 0644 ${S}/imx/imx8-isp.service ${D}${systemd_system_unitdir}
     fi
+
+    # work-around for duplicated libjsoncpp.so conflict with opensource jsoncpp
+    rm ${D}${libdir}/libjsoncpp.so
 }
 
 # The build contains a mix of versioned and unversioned libraries, so
