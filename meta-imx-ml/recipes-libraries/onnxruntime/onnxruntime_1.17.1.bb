@@ -13,7 +13,7 @@ inherit setuptools3
 SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH = "imx_1.17.1"
-SRCREV = "0530fe328cb63e7eddb9e6ba280ffa14b4a72cf1"
+SRCREV = "813b93f64103847a21227725cb5ab04b6ca5b5ed"
 
 S = "${WORKDIR}/git"
 
