@@ -15,11 +15,12 @@ S = "${WORKDIR}/git"
 inherit pkgconfig
 
 do_install() {
-    install -d ${D}${datadir}/dpdk-fpr
-    install -m 0644 ${S}/nxp/*.txt ${D}${datadir}/dpdk-fpr/
-    install -m 0644 ${S}/nxp/fpr.conf ${D}${datadir}/dpdk-fpr/
-    install -m 0755 ${S}/nxp/up ${D}${datadir}/dpdk-fpr/
-    install -m 0755 ${S}/app/dpdk-fpr ${D}${datadir}/dpdk-fpr/
+    install -d ${D}${sysconfdir}/dpdk-fpr
+    install -d ${D}${bindir}
+    install -m 0644 ${S}/nxp/*.txt ${D}${sysconfdir}/dpdk-fpr/
+    install -m 0644 ${S}/nxp/fpr.conf ${D}${sysconfdir}/dpdk-fpr/
+    install -m 0755 ${S}/nxp/up ${D}${sysconfdir}/dpdk-fpr/
+    install -m 0755 ${S}/app/dpdk-fpr ${D}${bindir}/
 }
 
 RDEPENDS:${PN} += " socat kernel-module-dpdk-extras"

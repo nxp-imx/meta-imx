@@ -8,17 +8,16 @@ S = "${WORKDIR}/git"
 
 inherit meson
 
-PACKAGECONFIG ??= " "
+
+PACKAGECONFIG ??= " examples"
+PACKAGECONFIG[examples] = " -Dexamples=${DPDK_EXAMPLES},,"
 PACKAGECONFIG[afxdp] = ",,libbpf"
 PACKAGECONFIG[libvirt] = ",,libvirt"
+PACKAGECONFIG[kmods] = " -Denable_kmods=true, -Denable_kmods=false"
 
 DPDK_EXAMPLES ?= "l2fwd,l3fwd,cmdif,l2fwd-qdma,l2fwd-crypto,ipsec-secgw,vhost,kni,ip_fragmentation,ip_reassembly"
 DPDK_EXAMPLES:imx-nxp-bsp = "l2fwd,l3fwd"
 
-# kernel module is provide by dpdk-module recipe, so disable here
-EXTRA_OEMESON = " -Denable_kmods=false \
-                -Dexamples=${DPDK_EXAMPLES} \
-"
 EXTRA_OEMESON:append:mx8-nxp-bsp = " --cross-file ${S}/config/arm/arm64_poky_linux_gcc"
 EXTRA_OEMESON:append:mx9-nxp-bsp = " --cross-file ${S}/config/arm/arm64_imx_poky_linux_gcc"
 
@@ -31,35 +30,19 @@ do_install:append(){
     rm -rf ${D}/${bindir}/dpdk-dumpcap
 
     # remove  source files
-    rm -rf ${D}/${datadir}/dpdk/examples/*
+    rm -rf ${D}/${datadir}
 
     # Install examples
-    install -m 0755 -d ${D}/${datadir}/dpdk/examples/
     for dirname in ${B}/examples/dpdk-*
     do
         if [ ! -d ${dirname} ] && [ -x ${dirname} ]; then
-            install -m 0755 ${dirname} ${D}/${datadir}/dpdk/examples/
+            install -m 0755 ${dirname} ${D}/${bindir}/
         fi
     done
 }
 
-PACKAGES =+ "${PN}-examples ${PN}-tools"
-
-FILES:${PN} = "${bindir}/dpdk-testpmd \
-               ${bindir}/dpdk-proc-info \
+FILES:${PN} = "${bindir}/dpdk* \
 "
 RDEPENDS:${PN} += "pciutils python3-core"
-
-FILES:${PN}-examples = " \
-                        ${datadir}/dpdk/examples/* \
-"
-RDEPENDS:${PN}-examples += "bash"
-
-FILES:${PN}-tools = " \
-                     ${bindir}/dpdk-pdump \
-                     ${bindir}/dpdk-test \
-                     ${bindir}/dpdk-test-* \
-                     ${bindir}/dpdk-*.py \
-"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp|qoriq)"
