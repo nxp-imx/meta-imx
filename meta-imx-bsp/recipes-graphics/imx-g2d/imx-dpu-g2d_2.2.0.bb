@@ -19,9 +19,9 @@ IMX_SRCREV_ABBREV = "1e41abf"
 IMX_SRC_URI_NAME = "v1"
 SRC_URI[v1.sha256sum] = "665e3011f401ea9a9b825ffb83ede2a4a1dd01bc03cb4a75d3eb42903eb0a380"
 
-IMX_SRCREV_ABBREV:mx95-nxp-bsp = "1e41abf"
+IMX_SRCREV_ABBREV:mx95-nxp-bsp = "0eec00e"
 IMX_SRC_URI_NAME:mx95-nxp-bsp = "v2"
-SRC_URI[v2.sha256sum] = "bc2e8a72ca53d80647cbd5a3a167083aceaf42398af467a6c2a9313a218cd952"
+SRC_URI[v2.sha256sum] = "d74c4d94a7d6c25c849a670034e1c1b9ac8d3ec963dcb9c5318de6105b6349fa"
 
 S = "${WORKDIR}/${IMX_BIN_NAME}"
 
