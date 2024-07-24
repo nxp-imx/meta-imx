@@ -872,7 +872,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.2.0-1e41abf.bin
+Package:                     imx-dpu-g2d-v1-2.2.0-0eec00e.bin
 Version:                     2.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -884,7 +884,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.2.0-1e41abf.bin
+Package:                     imx-dpu-g2d-v2-2.2.0-0eec00e.bin
 Version:                     2.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1109,7 +1109,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.5.0-4485878.bin
+Package:                     imx-opencl-converter-0.5.0-a77de9b.bin
 Version:                     0.5.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
