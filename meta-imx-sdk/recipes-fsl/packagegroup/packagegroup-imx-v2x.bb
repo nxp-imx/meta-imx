@@ -10,13 +10,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 RDEPENDS:${PN} = " \
-    imx-seco-libs \
-    ecdsa-lib-imx \
-    v2xsehsm \
-    vtest \
+    e2fsprogs-resize2fs \
     util-linux-fdisk \
     util-linux-rtcwake \
-    e2fsprogs-resize2fs \
+    vtest \
 "
 
 COMPATIBLE_MACHINE = "(mx8dxl-nxp-bsp)"
