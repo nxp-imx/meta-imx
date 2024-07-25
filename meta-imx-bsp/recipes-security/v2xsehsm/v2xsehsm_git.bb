@@ -1,10 +1,10 @@
-# Copyright (C) 2019-2021,2023 NXP
+# Copyright (C) 2019-2024 NXP
 
 SUMMARY = "Adaptation layer between v2xCryptoLibrary SE API and HSM API"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=664939843ae3416d811479b21978e8b4"
 
-DEPENDS = "imx-seco-libs"
+DEPENDS = "imx-secure-enclave-seco"
 
 SRCBRANCH = "lf-6.1.1_1.0.0"
 V2XSEHSM_SRC ?= "git://github.com/nxp-imx/v2xsehsm.git;protocol=https"
