@@ -6,14 +6,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=664939843ae3416d811479b21978e8b4"
 
 DEPENDS = "ecdsa-lib-imx v2xsehsm openssl"
 
+SRCBRANCH = "lf-6.1.1_1.0.0"
+VTEST_SRC ?= "git://github.com/nxp-imx/vtest.git;protocol=https"
 SRC_URI = "${VTEST_SRC};branch=${SRCBRANCH} \
     file://seco_nvm_daemon.service \
     file://0001-Ignore-v2xsehsmConfig.cmake.patch \
     file://0001-CMakeLists.txt-Add-no-deprecated-declarations-to-fix.patch \
 "
-VTEST_SRC ?= "git://github.com/nxp-imx/vtest.git;protocol=https"
-SRCBRANCH = "v2x-dev"
-SRCREV = "b45bb7e4630d15cfeca4234c6f4d149efeb43c6b"
+SRCREV = "46314ea4fc472c9ac78f2f4cb2b6d1cb7ba05bee"
 
 S = "${WORKDIR}/git"
 
