@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=664939843ae3416d811479b21978e8b4"
 
 DEPENDS = "imx-secure-enclave-seco"
 
-SRCBRANCH = "lf-6.1.1_1.0.0"
-V2XSEHSM_SRC ?= "git://github.com/nxp-imx/v2xsehsm.git;protocol=https"
 SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH} \
     file://0001-Install-header-to-standard-location.patch"
-SRCREV = "34267fa3494f3f13a0522334351e280e052ddacf"
+V2XSEHSM_SRC ?= "git://github.com/nxp-imx/v2xsehsm.git;protocol=https"
+SRCBRANCH = "v2x-dev"
+SRCREV = "ba40834b39205571a6d65ec9d1f7d02b8aa7ce34"
 
 S = "${WORKDIR}/git"
 
