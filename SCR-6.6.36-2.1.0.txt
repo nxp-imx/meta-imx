@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.25-324bca9.bin
+Package:                     firmware-imx-8.25-27879f8.bin
 Version:                     8.25
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -726,7 +726,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r50.0-32be16d.bin
+Package:                     mali-imx-r50.0-b6556d5.bin
 Version:                     r50.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1255,6 +1255,18 @@ Type of Content:             source
 Description and comments:    NXP Audio-Front-end is the software wrapper for ALSA
 Release Location:            https://github.com/nxp-imx/nxp-afe -b lf-6.6.36-2.1.0
 Origin:                      NXP (BSD-3-Clause)
+
+--------------------------------------------
+
+Package:                     nxp-ssrc-2.2.1.bin
+Version:                     2.2.1
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 
+License File:                LICENSE.txt
+Package Category:            Multimedia
+Type of Content:             binary
+Description and comments:    Synchronous Sample Rate Convertor for ARM Cortex-A
+Release Location:            Mirror
+Origin:                    NXP (proprietary)
 
 --------------------------------------------
 
