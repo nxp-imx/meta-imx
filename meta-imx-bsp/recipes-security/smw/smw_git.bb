@@ -14,15 +14,13 @@ DEPENDS = " \
     json-c \
     optee-client \
     optee-os-tadevkit \
-    ${DEPENDS_SECO_LIBS} \
     ${DEPENDS_SECURE_ENCLAVE} \
 "
 
-DEPENDS_SECO_LIBS                = ""
-DEPENDS_SECO_LIBS:mx8qxp-nxp-bsp = "imx-seco-libs"
-DEPENDS_SECO_LIBS:mx8dx-nxp-bsp  = "imx-seco-libs"
 
 DEPENDS_SECURE_ENCLAVE                = ""
+DEPENDS_SECURE_ENCLAVE:mx8qxp-nxp-bsp = "imx-secure-enclave-seco"
+DEPENDS_SECURE_ENCLAGE:mx8dx-nxp-bsp  = "imx-secure-enclave-seco"
 DEPENDS_SECURE_ENCLAVE:mx8ulp-nxp-bsp = "imx-secure-enclave"
 DEPENDS_SECURE_ENCLAVE:mx91-nxp-bsp   = "imx-secure-enclave"
 DEPENDS_SECURE_ENCLAVE:mx93-nxp-bsp   = "imx-secure-enclave"
