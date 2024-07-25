@@ -29,8 +29,10 @@ PULSEAUDIO_INSTALL = " \
                                            "", d)} \
 "
 
-ASRC_INSTALL ?= ""
-ASRC_INSTALL:mx8-nxp-bsp = "imx-dspc-asrc"
+# for synchronous and asynchronous sample rate converter
+SRC_INSTALL ?= ""
+SRC_INSTALL:mx8-nxp-bsp = "imx-dspc-asrc"
+SRC_INSTALL:mx9-nxp-bsp = "nxp-ssrc"
 
 PDM_INSTALL ?= ""
 PDM_INSTALL:mx8m-nxp-bsp = "imx-sw-pdm"
@@ -52,7 +54,7 @@ SOFTOOLS_INSTALL:mx8ulp-nxp-bsp = "sof-tools"
 RDEPENDS:${PN} = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "alsa",  "${ALSA_INSTALL}", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio",  "${PULSEAUDIO_INSTALL}", "", d)} \
-    ${ASRC_INSTALL} \
+    ${SRC_INSTALL} \
     ${PDM_INSTALL} \
     ${NXPAFE_INSTALL} \
     ${SOFTOOLS_INSTALL} \
