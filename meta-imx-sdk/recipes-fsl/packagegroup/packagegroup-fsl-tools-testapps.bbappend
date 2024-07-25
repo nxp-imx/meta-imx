@@ -21,8 +21,7 @@ SOC_TOOLS_TEST:append:imx-nxp-bsp    = " \
     ${PN}-fslcodec-testapps \
 "
 
-SOC_TOOLS_TEST:append:mx8qm-nxp-bsp  = " imx-seco-libs dvbapp-tests"
-SOC_TOOLS_TEST:append:mx8x-nxp-bsp   = " imx-seco-libs"
+SOC_TOOLS_TEST:append:mx8qm-nxp-bsp  = " dvbapp-tests"
 
 SOC_TOOLS_TEST:imxgpu  = "imx-test ${SOC_TOOLS_TEST_VIVANTE}"
 SOC_TOOLS_TEST_VIVANTE             = ""
