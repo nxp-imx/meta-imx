@@ -14,17 +14,7 @@ DEPENDS = " \
     json-c \
     optee-client \
     optee-os-tadevkit \
-    ${DEPENDS_SECURE_ENCLAVE} \
 "
-
-
-DEPENDS_SECURE_ENCLAVE                = ""
-DEPENDS_SECURE_ENCLAVE:mx8qxp-nxp-bsp = "imx-secure-enclave-seco"
-DEPENDS_SECURE_ENCLAGE:mx8dx-nxp-bsp  = "imx-secure-enclave-seco"
-DEPENDS_SECURE_ENCLAVE:mx8ulp-nxp-bsp = "imx-secure-enclave"
-DEPENDS_SECURE_ENCLAVE:mx91-nxp-bsp   = "imx-secure-enclave"
-DEPENDS_SECURE_ENCLAVE:mx93-nxp-bsp   = "imx-secure-enclave"
-DEPENDS_SECURE_ENCLAVE:mx95-nxp-bsp   = "imx-secure-enclave"
 
 SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw;destsuffix=git/smw \
            ${PSA_LIB_SRC};branch=${SRCBRANCH_psa};name=psa;destsuffix=git/${PSA_ARCH_TESTS_SRC_PATH} \
@@ -41,6 +31,18 @@ S = "${WORKDIR}/git/smw"
 
 inherit cmake python3native
 
+PACKAGECONFIG ??= "${PACKAGECONFIG_DRIVERS}"
+PACKAGECONFIG_DRIVERS                = ""
+PACKAGECONFIG_DRIVERS:mx8qxp-nxp-bsp = "ele-seco"
+PACKAGECONFIG_DRIVERS:mx8dx-nxp-bsp  = "ele-seco"
+PACKAGECONFIG_DRIVERS:mx8ulp-nxp-bsp = "ele"
+PACKAGECONFIG_DRIVERS:mx91-nxp-bsp   = "ele"
+PACKAGECONFIG_DRIVERS:mx93-nxp-bsp   = "ele"
+PACKAGECONFIG_DRIVERS:mx95-nxp-bsp   = "ele"
+
+PACKAGECONFIG[ele] = "-DELE_ROOT=${STAGING_DIR_HOST},,imx-secure-enclave,,,ele-seco"
+PACKAGECONFIG[ele-seco] = "-DSECO_ROOT=${STAGING_DIR_HOST},,imx-secure-enclave-seco,,,ele"
+
 CFLAGS[unexport] = "1"
 CPPFLAGS[unexport] = "1"
 AS[unexport] = "1"
@@ -55,13 +57,7 @@ EXTRA_OECMAKE = " \
     -DJSONC_ROOT="${COMPONENTS_DIR}/${TARGET_ARCH}/json-c/usr" \
     -DPSA_ARCH_TESTS_SRC_PATH=../${PSA_ARCH_TESTS_SRC_PATH} \
     -DTEE_TA_DESTDIR=${nonarch_base_libdir} \
-    ${EXTRA_OECMAKE_IMX}"
-EXTRA_OECMAKE_IMX:mx8qxp-nxp-bsp = "-DSECO_ROOT=${STAGING_DIR_HOST}"
-EXTRA_OECMAKE_IMX:mx8dx-nxp-bsp  = "-DSECO_ROOT=${STAGING_DIR_HOST}"
-EXTRA_OECMAKE_IMX:mx8ulp-nxp-bsp = "-DELE_ROOT=${STAGING_DIR_HOST}"
-EXTRA_OECMAKE_IMX:mx91-nxp-bsp   = "-DELE_ROOT=${STAGING_DIR_HOST}"
-EXTRA_OECMAKE_IMX:mx93-nxp-bsp   = "-DELE_ROOT=${STAGING_DIR_HOST}"
-EXTRA_OECMAKE_IMX:mx95-nxp-bsp   = "-DELE_ROOT=${STAGING_DIR_HOST}"
+"
 
 OECMAKE_TARGET_COMPILE += "build_tests"
 OECMAKE_TARGET_INSTALL += "install_tests"
