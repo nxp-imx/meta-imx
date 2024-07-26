@@ -1,0 +1,46 @@
+From b9992861d5356c04e060660be09517f158d50523 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Fri, 26 Jul 2024 12:39:18 -0500
+Subject: [PATCH] LF-12750: Use standard linux build assumptions
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ CMakeLists.txt | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b9996bc..c07571f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -34,9 +34,7 @@ add_library (v2xCrypto SHARED
+ 
+ if(UNIFIED_LIBS)
+ target_link_libraries(v2xCrypto
+-	${HSM_LIBS_DIR}/lib_hsm.so
+-	${HSM_LIBS_DIR}/lib_hsm.so.0
+-	${HSM_LIBS_DIR}/lib_hsm.so.0.1
++	:lib_hsm.so
+ 	)
+ endif(UNIFIED_LIBS)
+ 
+@@ -56,7 +54,7 @@ target_include_directories(v2xCrypto PRIVATE
+ 
+ target_include_directories (v2xCrypto PUBLIC
+ 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+-	$<INSTALL_INTERFACE:include/v2xsehsm>
++	$<INSTALL_INTERFACE:include>
+ 	)
+ 
+ set_target_properties (v2xCrypto PROPERTIES
+@@ -83,7 +81,7 @@ add_custom_target(doc
+ install (TARGETS v2xCrypto
+ 	EXPORT v2xsehsmTargets
+ 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/v2xsehsm
++	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+ 	)
+ 
+ write_basic_package_version_file (
+-- 
+2.34.1
+
