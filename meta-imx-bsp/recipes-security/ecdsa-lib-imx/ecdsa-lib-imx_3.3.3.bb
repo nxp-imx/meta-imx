@@ -1,4 +1,4 @@
-# Copyright (C) 2019-2021 NXP
+# Copyright (C) 2019-2024 NXP
 
 DESCRIPTION = "ECDSA Verification Engine using HSM"
 SUMMARY = "ECDSA Verification Engine using HSM"
@@ -6,7 +6,7 @@ SUMMARY = "ECDSA Verification Engine using HSM"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ca53281cc0caa7e320d4945a896fb837"
 
-DEPENDS = "imx-seco-libs openssl"
+DEPENDS = "imx-secure-enclave-seco openssl zlib"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
 
