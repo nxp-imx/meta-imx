@@ -688,7 +688,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-e780cf0.bin
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-1aebd32.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -707,7 +707,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-e780cf0.bin
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-1aebd32.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -848,7 +848,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-e780cf0.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-1aebd32.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -860,7 +860,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-e780cf0.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-1aebd32.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -872,7 +872,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.2.0-0eec00e.bin
+Package:                     imx-dpu-g2d-v1-2.2.0-645f166.bin
 Version:                     2.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -884,7 +884,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.2.0-0eec00e.bin
+Package:                     imx-dpu-g2d-v2-2.2.0-645f166.bin
 Version:                     2.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1260,13 +1260,13 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     nxp-ssrc-2.2.1.bin
 Version:                     2.2.1
-Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applie
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    Synchronous Sample Rate Convertor for ARM Cortex-A
 Release Location:            Mirror
-Origin:                    NXP (proprietary)
+Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
@@ -1416,22 +1416,6 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
                              Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
                              Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
 
---------------------------------------------
-
-Package:                     imx95-m7-demo-2.16.000.bin
-Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            M7_Processor
-Type of Content:             binary
-Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-                             NXP (BSD-3-Clause)
-                             CMSIS Core Header files - ARM Limited (BSD-3-clause) - http://silver.arm.com
-                             CMSIS DSP Library - ARM Limited (BSD-3-clause) - http://silver.arm.com
-                             Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
-                             Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
 --------------------------------------------
 M33 Processor Packages
 --------------------------------------------
