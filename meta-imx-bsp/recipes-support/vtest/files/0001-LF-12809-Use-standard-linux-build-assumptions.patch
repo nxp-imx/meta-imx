@@ -1,0 +1,32 @@
+From 78f6313cf3928bda0977ddaafed99f5fbc51dc73 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Fri, 26 Jul 2024 12:43:40 -0500
+Subject: [PATCH] LF-12750: Use standard linux build assumptions
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ CMakeLists.txt | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a589de8..8d43da6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -59,11 +59,9 @@ target_include_directories (vtest
+ if(UNIFIED_LIBS)
+ target_link_libraries (vtest
+ 	v2xCrypto
+-	${HSM_LIBS_DIR}/lib_hsm.so
+-	${HSM_LIBS_DIR}/lib_hsm.so.0
+-	${HSM_LIBS_DIR}/lib_hsm.so.0.1
+-	${ZLIB_DIR}/libz.a
+-	${ECC_SRC}/libECDSA.so
++	:lib_hsm.so
++	z
++	ECDSA
+ 	pthread
+ 	rt
+ 	${LTTNG_LIB}
+-- 
+2.34.1
+
