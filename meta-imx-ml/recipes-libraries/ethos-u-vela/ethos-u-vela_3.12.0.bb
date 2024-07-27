@@ -1,4 +1,4 @@
-# Copyright 2023 NXP
+# Copyright 2023-2024 NXP
 DESCRIPTION = "The vela tool is used to compile a TensorFlow Lite for \
 Microcontrollers neural network model into an optimised version that \
 can run on an embedded system containing an Arm Ethos-U NPU"
