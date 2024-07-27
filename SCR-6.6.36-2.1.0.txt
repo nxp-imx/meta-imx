@@ -1496,7 +1496,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     ethos-u-driver-stack-imx.git
-Version:                     23.08
+Version:                     24.05
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1511,7 +1511,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     ethos-u-firmware.git
-Version:                     23.08
+Version:                     24.05
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1525,7 +1525,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     ethos-u-vela.git
-Version:                     3.11.0
+Version:                     3.12.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
