@@ -1,21 +1,32 @@
-# Splitter kernel module build in another recipe
-# Build tools and examples here
-include dpdk.inc
+DESCRIPTION = "Intel(r) Data Plane Development Kit"
+HOMEPAGE = "http://dpdk.org"
+
+LICENSE = "BSD-3-Clause & LGPL-2.1-only & GPL-2.0-only"
+LIC_FILES_CHKSUM = "file://license/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                    file://license/lgpl-2.1.txt;md5=4b54a1fd55a448865a0b32d41598759d \
+                    file://license/bsd-3-clause.txt;md5=0f00d99239d922ffd13cabef83b33444"
 
 DEPENDS = "numactl python3-pyelftools-native libpcap"
+
+SRC_URI = "${DPDK_SRC};nobranch=1"
+DPDK_SRC ?= "git://github.com/nxp-qoriq/dpdk;protocol=https"
+
+STABLE = "-stable"
+SRCREV = "edc4936f37351709c0f9be71fd6113954c8e190f"
+
+CVE_PRODUCT = "data_plane_development_kit"
 
 S = "${WORKDIR}/git"
 
 inherit meson
 
+PACKAGECONFIG ??= "examples"
 
-PACKAGECONFIG ??= " examples"
-PACKAGECONFIG[examples] = " -Dexamples=${DPDK_EXAMPLES},,"
 PACKAGECONFIG[afxdp] = ",,libbpf"
+PACKAGECONFIG[examples] = "-Dexamples=${DPDK_EXAMPLES}"
 PACKAGECONFIG[libvirt] = ",,libvirt"
-PACKAGECONFIG[kmods] = " -Denable_kmods=true, -Denable_kmods=false"
 
-DPDK_EXAMPLES ?= "l2fwd,l3fwd,cmdif,l2fwd-qdma,l2fwd-crypto,ipsec-secgw,vhost,kni,ip_fragmentation,ip_reassembly"
+DPDK_EXAMPLES ?= ""
 DPDK_EXAMPLES:imx-nxp-bsp = "l2fwd,l3fwd"
 DPDK_EXAMPLES:append:mx95-nxp-bsp = ",ip_fragmentation,ip_reassembly"
 
@@ -42,8 +53,7 @@ do_install:append(){
     done
 }
 
-FILES:${PN} = "${bindir}/dpdk* \
-"
-RDEPENDS:${PN} += "pciutils python3-core"
+FILES:${PN} = "${bindir}/dpdk*"
+RDEPENDS:${PN} += "kernel-module-dpdk-extras pciutils python3-core"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp|qoriq)"

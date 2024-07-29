@@ -65,6 +65,6 @@ RDEPENDS:${PN} += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wifi', 'hostapd sigma-dut', '', d)} \
 "
 
-RDEPENDS_DPDK ?= "dpdk kernel-module-dpdk-extras ${RDEPENDS_DPDK_FPR}"
+RDEPENDS_DPDK ?= "dpdk ${RDEPENDS_DPDK_FPR}"
 RDEPENDS_DPDK_FPR = ""
 RDEPENDS_DPDK_FPR:mx95-nxp-bsp = "dpdk-fpr"
