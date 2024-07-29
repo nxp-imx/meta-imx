@@ -278,8 +278,8 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-seco-5.9.4.bin
-Version:                     5.9.4
+Package:                     imx-seco-5.9.4.1-0333596.bin
+Version:                     5.9.4.1
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -1453,19 +1453,6 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 MachineLearning Packages
---------------------------------------------
-
-Package:                     arm-computelibrary-imx.git
-Version:                     23.11
-Outgoing License:            MIT 
-License File:                LICENSE
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    ARM Compute Library fork
-Release Location:            https://github.com/nxp-imx/arm-computelibrary-imx -b lf-6.6.36-2.1.0
-Origin:                      NXP (MIT)
-                             ARM Software (MIT) - https://github.com/ARM-software/ComputeLibrary
-
 --------------------------------------------
 
 Package:                     eiq-examples.git
