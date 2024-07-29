@@ -688,7 +688,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-1aebd32.bin
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-0b5dbcd.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -707,7 +707,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-1aebd32.bin
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-0b5dbcd.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -848,7 +848,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-1aebd32.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-0b5dbcd.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -860,7 +860,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-1aebd32.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-0b5dbcd.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1260,7 +1260,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     nxp-ssrc-2.2.1.bin
 Version:                     2.2.1
-Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applie
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             binary
