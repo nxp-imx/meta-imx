@@ -36,6 +36,8 @@ DEFAULTTUNE:mx93-nxp-bsp   ?= "armv8a-crc-crypto"
 
 PACKAGECONFIG:append:pn-gstreamer1.0-plugins-ugly = " x264"
 
+PACKAGECONFIG:append:pn-perf = " jevents"
+
 PACKAGECONFIG:append:pn-pulseaudio = " autospawn-for-root"
 
 PACKAGECONFIG:append:class-target:pn-qtquick3d     = " examples"
