@@ -12,7 +12,7 @@ RDEPENDS:${PN}-dev += "${PN}-compiler"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "0100f6a5779831fa7a651e4b67ef389a8752bd9b"
+SRCREV = "7d6d99c6befa635780a4e944d37ebfd58e68a108"
 
 SRC_URI = "git://github.com/google/flatbuffers.git;branch=master;protocol=https"
 
