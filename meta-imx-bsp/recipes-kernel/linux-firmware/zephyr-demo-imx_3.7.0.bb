@@ -4,10 +4,10 @@ DESCRIPTION = "Zephyr Demo for i.MX"
 HOMEPAGE = "https://github.com/zephyrproject-rtos/zephyr"
 SECTION = "kernel"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f562198c0123d3829f9a8dab92f09e92"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.tar.gz"
-SRC_URI[sha256sum] = "0247831ca935036351485180ad4de4dc402fb8fcec5a0b049463c63c612467df"
+SRC_URI[sha256sum] = "13ade618558e3cdccb77885ad5f80fd1768789eb2016c71c3511d5e2398c2daf"
 
 inherit allarch
 
