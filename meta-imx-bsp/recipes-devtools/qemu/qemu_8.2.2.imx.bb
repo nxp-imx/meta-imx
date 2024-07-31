@@ -28,6 +28,8 @@ COMPATIBLE_HOST:powerpc = "null"
 
 #----------------------overrides ---------------------
 # audio backend confiure
-PACKAGECONFIG:append = " pipewire aio vhost libusb"
+PACKAGECONFIG:append = " pipewire aio vhost libusb vhost_user"
+
+PACKAGECONFIG[vhost_user] = "-Dlibvhost-user:xen=enabled,-Dlibvhost-user:xen=disable,xen-tools"
 
 # COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
