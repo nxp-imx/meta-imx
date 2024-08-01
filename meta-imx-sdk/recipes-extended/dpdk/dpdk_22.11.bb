@@ -23,7 +23,7 @@ inherit meson
 PACKAGECONFIG ??= "examples"
 
 PACKAGECONFIG[afxdp] = ",,libbpf"
-PACKAGECONFIG[examples] = "-Dexamples=${DPDK_EXAMPLES},,,bash"
+PACKAGECONFIG[examples] = "-Dexamples=${DPDK_EXAMPLES}"
 PACKAGECONFIG[libvirt] = ",,libvirt"
 
 DPDK_EXAMPLES ?= ""
@@ -34,17 +34,26 @@ EXTRA_OEMESON:append:mx8-nxp-bsp = " --cross-file ${S}/config/arm/arm64_poky_lin
 EXTRA_OEMESON:append:mx9-nxp-bsp = " --cross-file ${S}/config/arm/arm64_imx_poky_linux_gcc"
 
 do_install:append(){
+    # remove usr/lib/*.so
+    rm -rf ${D}/${libdir}/*.so*
+    rm -rf ${D}/${libdir}/dpdk
+
+    # remove usr/bin/dpdk-dumpcap
+    rm -rf ${D}/${bindir}/dpdk-dumpcap
+
+    # remove  source files
+    rm -rf ${D}/${datadir}
+
     # Install examples
     for dirname in ${B}/examples/dpdk-*
     do
         if [ ! -d ${dirname} ] && [ -x ${dirname} ]; then
-            install -m 0755 ${dirname} ${D}${bindir}/
+            install -m 0755 ${dirname} ${D}/${bindir}/
         fi
     done
 }
 
-FILES:${PN}     += "${libdir}/dpdk/pmds-23.0/lib*${SOLIBS}"
-FILES_SOLIBSDEV += "${libdir}/dpdk/pmds-23.0/lib*${SOLIBSDEV}"
-RDEPENDS:${PN} = "kernel-module-dpdk-extras pciutils python3-core"
+FILES:${PN} = "${bindir}/dpdk*"
+RDEPENDS:${PN} += "kernel-module-dpdk-extras pciutils python3-core"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp|qoriq)"
