@@ -177,14 +177,6 @@ echo "BBLAYERS += \"\${BSPDIR}/sources/meta-virtualization\"" >> $BUILD_DIR/conf
 echo BSPDIR=$BSPDIR
 echo BUILD_DIR=$BUILD_DIR
 
-# Support integrating community meta-freescale instead of meta-fsl-arm
-if [ -d ../sources/meta-freescale ]; then
-    echo meta-freescale directory found
-    # Change settings according to environment
-    sed -e "s,meta-fsl-arm\s,meta-freescale ,g" -i conf/bblayers.conf
-    sed -e "s,\$.BSPDIR./sources/meta-fsl-arm-extra\s,,g" -i conf/bblayers.conf
-fi
-
 cd  $BUILD_DIR
 clean_up
 unset FSLDISTRO
