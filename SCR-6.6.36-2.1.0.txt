@@ -86,8 +86,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     imx-sc-firmware-1.16.0-N/A.bin
-Version:                     1.16.0
+Package:                     imx-sc-firmware-1.17.0-a1f1a01.bin
+Version:                     1.17.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -650,7 +650,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.24.3.bin
+Package:                     isp-imx-4.2.2.24.3-a114af7.bin
 Version:                     4.2.2.24.3
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
