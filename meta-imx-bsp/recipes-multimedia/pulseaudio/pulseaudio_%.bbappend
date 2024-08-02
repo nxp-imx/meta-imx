@@ -6,7 +6,7 @@ EXTRA_OEMESON += "-Denable-smoother-2=false"
 PACKAGE_ARCH:mx9-nxp-bsp = "${MACHINE_SOCARCH}"
 
 # Disable oss-output on 32-bit to avoid Y2038 bug
-PACKAGECONFIG += "${PACKAGECONFIG_OSS}"
+PACKAGECONFIG:append = " ${PACKAGECONFIG_OSS}"
 PACKAGECONFIG_OSS                 = "oss-output"
 PACKAGECONFIG_OSS:arm:imx-nxp-bsp = ""
 PACKAGECONFIG[oss-output] = "-Doss-output=enabled,-Doss-output=disabled"
