@@ -12,7 +12,7 @@ SRC_URI = "${DPDK_SRC};nobranch=1"
 DPDK_SRC ?= "git://github.com/nxp-qoriq/dpdk;protocol=https"
 
 STABLE = "-stable"
-SRCREV = "a4d2efa2d2adb45cc8c79ce3a930cf06ea8213f2"
+SRCREV = "4d94e5ca157a342a9f7b1222713ce094185fb0e3"
 
 CVE_PRODUCT = "data_plane_development_kit"
 
@@ -23,37 +23,20 @@ inherit meson
 PACKAGECONFIG ??= "examples"
 
 PACKAGECONFIG[afxdp] = ",,libbpf"
-PACKAGECONFIG[examples] = "-Dexamples=${DPDK_EXAMPLES}"
+PACKAGECONFIG[examples] = "-Denable_examples_bin_install=true -Dexamples=${DPDK_EXAMPLES},-Denable_examples_bin_install=false"
 PACKAGECONFIG[libvirt] = ",,libvirt"
 
 DPDK_EXAMPLES ?= ""
 DPDK_EXAMPLES:imx-nxp-bsp = "l2fwd,l3fwd"
 DPDK_EXAMPLES:append:mx95-nxp-bsp = ",ip_fragmentation,ip_reassembly"
 
+EXTRA_OEMESON = " \
+    -Ddrivers_install_subdir= \
+    -Denable_examples_source_install=false \
+"
 EXTRA_OEMESON:append:mx8-nxp-bsp = " --cross-file ${S}/config/arm/arm64_poky_linux_gcc"
 EXTRA_OEMESON:append:mx9-nxp-bsp = " --cross-file ${S}/config/arm/arm64_imx_poky_linux_gcc"
 
-do_install:append(){
-    # remove usr/lib/*.so
-    rm -rf ${D}/${libdir}/*.so*
-    rm -rf ${D}/${libdir}/dpdk
-
-    # remove usr/bin/dpdk-dumpcap
-    rm -rf ${D}/${bindir}/dpdk-dumpcap
-
-    # remove  source files
-    rm -rf ${D}/${datadir}
-
-    # Install examples
-    for dirname in ${B}/examples/dpdk-*
-    do
-        if [ ! -d ${dirname} ] && [ -x ${dirname} ]; then
-            install -m 0755 ${dirname} ${D}/${bindir}/
-        fi
-    done
-}
-
-FILES:${PN} = "${bindir}/dpdk*"
-RDEPENDS:${PN} += "kernel-module-dpdk-extras pciutils python3-core"
+RDEPENDS:${PN} = "kernel-module-dpdk-extras pciutils python3-core"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp|qoriq)"
