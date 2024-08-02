@@ -3,14 +3,16 @@
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ca53281cc0caa7e320d4945a896fb837"
-DEPENDS = "boost libdrm virtual/libg2d libtinyxml2"
+DEPENDS = "boost libdrm virtual/libg2d libtinyxml2 jsoncpp"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true \
 "
 
-SRC_URI[sha256sum] = "a59a28af848f243a5a8f21255a810a3fce26c5139de5c36ccba09ef5db75e449"
+SRC_URI[sha256sum] = "a96847bb70f602f464c10ae2c1149177e07886418cd1b1dee76c33f176013996"
 
-inherit fsl-eula-unpack cmake systemd use-imx-headers
+IMX_SRCREV_ABBREV = "a114af7"
+
+inherit fsl-eula2-unpack2 fsl-eula-recent cmake systemd use-imx-headers
 
 # Build the sub-folder appshell
 OECMAKE_SOURCEPATH = "${S}/appshell"
@@ -26,21 +28,19 @@ SYSTEMD_SERVICE:${PN} = "imx8-isp.service"
 EXTRA_OECMAKE += " \
     -DSDKTARGETSYSROOT=${STAGING_DIR_HOST} \
     -DCMAKE_BUILD_TYPE=release \
-    -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
     -DISP_VERSION=ISP8000NANO_V1802 \
     -DPLATFORM=ARM64 \
-    -DAPPMODE=V4L2 \
     -DTUNINGEXT=1 \
     -DQTLESS=1 \
     -DFULL_SRC_COMPILE=1 \
     -DWITH_DRM=1 \
     -DWITH_DWE=1 \
-    -DSERVER_LESS=1 \
     -DSUBDEV_V4L2=1 \
-    -DENABLE_IRQ=1 \
     -DPARTITION_BUILD=0 \
     -D3A_SRC_BUILD=0 \
     -DIMX_G2D=ON \
+    -DCMAKE_INSTALL_LIBDIR="${libdir}" \
+    -DCMAKE_INSTALL_INCLUDEDIR="${includedir}" \
     -Wno-dev \
 "
 
@@ -52,9 +52,6 @@ do_install() {
         install -d ${D}${systemd_system_unitdir}
         install -m 0644 ${S}/imx/imx8-isp.service ${D}${systemd_system_unitdir}
     fi
-
-    # work-around for duplicated libjsoncpp.so conflict with opensource jsoncpp
-    rm ${D}${libdir}/libjsoncpp.so
 }
 
 # The build contains a mix of versioned and unversioned libraries, so
