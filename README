@@ -111,7 +111,7 @@ IMAGE_INSTALL:append = " lib32-glibc lib32-libgcc lib32-libstdc++"
 Hardware Floating Point
 -----------------------
 This release enables hardware floating point by default.  This feature is enabled in both the machine 
-configurations and in the layer.conf. (Some machine files exist in the community meta-fsl-arm without this setting.)
+configurations and in the layer.conf. (Some machine files exist in the community meta-freescale without this setting.)
 DEFAULTTUNE:mx6-nxp-bsp = "cortexa9hf-neon
 
 Software floating point is not supported starting with the 4.1.15_1.0.0_ga release
