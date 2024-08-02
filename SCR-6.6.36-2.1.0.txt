@@ -86,7 +86,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     imx-sc-firmware-1.16.0.bin
+Package:                     imx-sc-firmware-1.16.0-N/A.bin
 Version:                     1.16.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -316,8 +316,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-3.6.1
-Version:                     3.6.1
+Package:                     zephyr-demo-imx-3.7.0
+Version:                     3.7.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -1581,7 +1581,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.15.0
+Version:                     2.16.2
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1594,7 +1594,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-ethosu-delegate.git
-Version:                     2.15.0
+Version:                     2.16.2
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1608,7 +1608,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
-Version:                     2.15.0
+Version:                     2.16.2
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1621,7 +1621,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 --------------------------------------------
 
 Package:                     tflite-neutron-delegate.git
-Version:                     2.15.0
+Version:                     2.16.2
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
