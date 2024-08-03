@@ -9,7 +9,7 @@ inherit autotools pkgconfig
 
 DEPENDS += "alsa-lib nxp-afe"
 
-SRCBRANCH = "voice_2.0"
+SRCBRANCH = "MM_04.09.01_2408_L6.6.y"
 PV = "2.0+${SRCPV}"
 
 NXPAFE_VOICESEEKER_SRC ?= "git://github.com/nxp-imx/imx-voiceui.git;protocol=https"
