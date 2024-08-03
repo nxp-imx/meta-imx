@@ -87,7 +87,7 @@ SRC_URI:remove = " \
 "
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "gitsm://github.com/nxp-imx/libcamera.git;protocol=https"
-SRCBRANCH = "imx/next"
+SRCBRANCH = "lf-6.6.36_2.1.0"
 SRCREV = "9882e1276c57c599a320306af9acf9a2a5c5da06"
 PACKAGECONFIG = "gst"
 
