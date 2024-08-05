@@ -343,6 +343,8 @@ S = "${WORKDIR}/git"
 # this configure option need to remove as invoke meson subprojects download 
 # EXTRA_OECONF:remove =  "--disable-download"
 
+PACKAGECONFIG[libvhost_user] = "-Dlibvhost-user:xen=enabled,-Dlibvhost-user:xen=disabled,xen-tools"
+
 do_configure:prepend() {
     cp ${S}/subprojects/packagefiles/berkeley-softfloat-3/* ${S}/subprojects/berkeley-softfloat-3/
     cp ${S}/subprojects/packagefiles/berkeley-testfloat-3/* ${S}/subprojects/berkeley-testfloat-3/
