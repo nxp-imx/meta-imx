@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ca53281cc0caa7e320d4945a896fb837"
 IMX_FIRMWARE_SRC ?= "git://github.com/nxp-imx/imx-firmware.git;protocol=https"
 SRC_URI = "${IMX_FIRMWARE_SRC};branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.6.36_2.1.0"
-SRCREV = "6101bcdc386f2b926febea1fce20f1ba0207b70f" 
+SRCREV = "04e96d304888aeddaac9081b1a0a014f4716b7e1"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/nxp
