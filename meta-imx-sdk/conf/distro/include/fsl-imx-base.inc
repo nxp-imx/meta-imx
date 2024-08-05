@@ -2,7 +2,7 @@ require conf/distro/poky.conf
 
 DISTRO = "imx-nxp"
 DISTRO_NAME = "NXP i.MX Release Distro"
-DISTRO_VERSION ?= "6.6-scarthgap"
+DISTRO_VERSION = "6.6-scarthgap"
 DISTROOVERRIDES = "fsl"
 
 MAINTAINER = "NXP <lauren.post@nxp.com>"
