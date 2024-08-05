@@ -14,10 +14,15 @@ S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
 inherit fsl-eula-unpack autotools pkgconfig
 
-EXTRA_OECONF:append = " --enable-armv8 --bindir=/unit_tests/ --libdir=/usr/lib/"
+EXTRA_OECONF = "--enable-armv8 --bindir=/unit_tests/ --libdir=${libdir}"
 
 FILES:${PN} += "/unit_tests/NXP_SSRC/* \
-                /usr/share/* \
+                ${datadir}/* \
 "
+FILES:${PN}-dev = "${includedir}* \
+                   ${libdir}/* \
+"
+
+INSANE_SKIP:${PN} += "dev-deps"
 
 COMPATIBLE_MACHINE = "(mx9-nxp-bsp)"
