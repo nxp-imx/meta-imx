@@ -39,7 +39,7 @@ EXTRA_OEMESON:append:mx9-nxp-bsp = " --cross-file ${S}/config/arm/arm64_imx_poky
 
 do_install:append() {
     # FIXME: fix the source so it doesn't install this nonsense file with embedded wildcards
-    rm -f ${D}${libdir}/'librte_*.so*'
+    rm -f '/usr/lib/librte_*.so*'
 }
 
 RDEPENDS:${PN} = "kernel-module-dpdk-extras pciutils python3-core"
