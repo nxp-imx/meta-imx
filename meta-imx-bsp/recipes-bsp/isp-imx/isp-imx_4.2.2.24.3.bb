@@ -39,8 +39,6 @@ EXTRA_OECMAKE += " \
     -DPARTITION_BUILD=0 \
     -D3A_SRC_BUILD=0 \
     -DIMX_G2D=ON \
-    -DCMAKE_INSTALL_LIBDIR="${libdir}" \
-    -DCMAKE_INSTALL_INCLUDEDIR="${includedir}" \
     -Wno-dev \
 "
 
