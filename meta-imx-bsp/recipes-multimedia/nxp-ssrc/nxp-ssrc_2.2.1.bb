@@ -16,13 +16,18 @@ inherit fsl-eula-unpack autotools pkgconfig
 
 EXTRA_OECONF = "--enable-armv8 --bindir=/unit_tests/ --libdir=${libdir}"
 
-FILES:${PN} += "/unit_tests/NXP_SSRC/* \
-                ${datadir}/* \
-"
-FILES:${PN}-dev = "${includedir}* \
-                   ${libdir}/* \
-"
+PACKAGES += "${PN}-test-source"
 
-INSANE_SKIP:${PN} += "dev-deps"
+python __anonymous() {
+    # Avoid Debian-renaming, we shouldn't rename the packages to follow its sonames.
+    for p in d.getVar('PACKAGES').split():
+        d.setVar("DEBIAN_NOAUTONAME:%s" % p, "1")
+}
+
+FILES:${PN} += "/unit_tests/NXP_SSRC/* "
+FILES:${PN}-test-source += "${datadir}/imx-mm/*"
+
+# make sure dev gets into rootfs when add test source code
+RRECOMMENDS:${PN}-test-source = "${PN}-dev"
 
 COMPATIBLE_MACHINE = "(mx9-nxp-bsp)"
