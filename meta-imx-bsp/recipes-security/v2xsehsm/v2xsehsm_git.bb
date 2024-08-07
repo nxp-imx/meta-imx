@@ -9,7 +9,7 @@ DEPENDS = "imx-secure-enclave-seco"
 SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH} \
     file://0001-LF-12809-Use-standard-linux-build-assumptions.patch"
 V2XSEHSM_SRC ?= "git://github.com/nxp-imx/v2xsehsm.git;protocol=https"
-SRCBRANCH = "v2x-dev"
+SRCBRANCH = "lf-6.6.36_2.1.0"
 SRCREV = "0e7ecffc0bca7f5e280e9cf69c71eebf6ec3b142"
 
 S = "${WORKDIR}/git"
