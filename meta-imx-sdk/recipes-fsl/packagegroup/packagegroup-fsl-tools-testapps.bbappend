@@ -7,6 +7,10 @@ PACKAGES += " \
 RDEPENDS:${PN}-fslcodec-testapps += " \
     imx-codec-test-bin \
     imx-codec-test-source \
+    ${RDEPENDS_CODEC_SRC} \
+"
+RDEPENDS_CODEC_SRC             = ""
+RDEPENDS_CODEC_SRC:mx9-nxp-bsp = " \
     nxp-ssrc-test-source \
 "
 
