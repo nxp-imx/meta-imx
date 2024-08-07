@@ -7,6 +7,7 @@ PACKAGES += " \
 RDEPENDS:${PN}-fslcodec-testapps += " \
     imx-codec-test-bin \
     imx-codec-test-source \
+    nxp-ssrc-test-source \
 "
 
 ALLOW_EMPTY:${PN}-fslcodec-testapps = "1"
