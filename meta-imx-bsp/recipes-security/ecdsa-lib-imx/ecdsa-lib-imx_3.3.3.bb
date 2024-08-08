@@ -8,11 +8,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ca53281cc0caa7e320d4945a896fb837"
 
 DEPENDS = "imx-secure-enclave-seco openssl zlib"
 
-SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
+SRC_URI[sha256sum] = "22e2634f841de378db3e67fce698680e275d9dbf89917fe8f4ab9cb25014f001"
 
-SRC_URI[sha256sum] = "5d3776fa8d709289f607bdef6046fd54e0e00a6cf3becb5b14173ab0a84e7372"
+IMX_SRCREV_ABBREV = "e69b2b8"
 
-inherit fsl-eula-unpack
+inherit fsl-eula2-unpack2 fsl-eula-recent
 
 do_install(){
     install -d ${D}${libdir}
