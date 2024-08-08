@@ -1,15 +1,15 @@
-From b9992861d5356c04e060660be09517f158d50523 Mon Sep 17 00:00:00 2001
+From 7dde6805a1308b9e03ccdf12d08602787d9f5ee8 Mon Sep 17 00:00:00 2001
 From: Tom Hochstein <tom.hochstein@nxp.com>
 Date: Fri, 26 Jul 2024 12:39:18 -0500
-Subject: [PATCH] LF-12750: Use standard linux build assumptions
+Subject: [PATCH] LF-12809: Use standard linux build assumptions
 
 Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
 ---
- CMakeLists.txt | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+ CMakeLists.txt | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b9996bc..c07571f 100644
+index b9996bc..aeca6dc 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -34,9 +34,7 @@ add_library (v2xCrypto SHARED
@@ -23,10 +23,15 @@ index b9996bc..c07571f 100644
  	)
  endif(UNIFIED_LIBS)
  
-@@ -56,7 +54,7 @@ target_include_directories(v2xCrypto PRIVATE
+@@ -52,11 +50,11 @@ target_include_directories(v2xCrypto PRIVATE
+ 	${HSM_LIBS_DIR}/include/hsm/
+ 	${LTTNG_DIR}/include/
+ 	${URCU_DIR}/include/
++	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+ 	)
  
  target_include_directories (v2xCrypto PUBLIC
- 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 -	$<INSTALL_INTERFACE:include/v2xsehsm>
 +	$<INSTALL_INTERFACE:include>
  	)
