@@ -1,0 +1,54 @@
+From 9be4854ab4d0be0a6e56c2e30411d1d0cb8a4b5f Mon Sep 17 00:00:00 2001
+From: Ilie Halip <ilie.halip@nxp.com>
+Date: Thu, 8 Aug 2024 11:52:26 +0300
+Subject: [PATCH] agent: use the new SMW APIs
+
+SMW 4.x removes a deprecated function and uses enum values instead of
+strings in some functions. Update the agent code to use the new APIs.
+
+Upstream-Status: Pending
+
+Signed-off-by: Ilie Halip <ilie.halip@nxp.com>
+---
+ ex/src/iot_agent_demo.c   | 4 ++--
+ platform/smw/device_mgr.c | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/ex/src/iot_agent_demo.c b/ex/src/iot_agent_demo.c
+index eb6b726..362ba38 100644
+--- a/ex/src/iot_agent_demo.c
++++ b/ex/src/iot_agent_demo.c
+@@ -296,7 +296,7 @@ iot_agent_status_t initialize_psa_ext_lib(void)
+     int res;
+ 
+     /* Configure the ELE Subsystem */
+-    res = smw_osal_set_subsystem_info("ELE", (struct se_info *)&se_iot_info,
++    res = smw_osal_set_subsystem_info(SMW_SUBSYSTEM_NAME_ELE, (struct se_info *)&se_iot_info,
+                                       sizeof(se_iot_info));
+     if (res != SMW_STATUS_OK) {
+ 			IOT_AGENT_ERROR("SMW ELE initialization failed %d", res);
+@@ -304,7 +304,7 @@ iot_agent_status_t initialize_psa_ext_lib(void)
+     }
+ 
+     /* Open/Create the SMW key database */
+-    res = smw_osal_open_key_db(IOT_SMW_KEY_DB, strlen(IOT_SMW_KEY_DB) + 1);
++    res = smw_osal_open_obj_db(IOT_SMW_KEY_DB, strlen(IOT_SMW_KEY_DB) + 1);
+     if (res != SMW_STATUS_OK)
+ 			IOT_AGENT_ERROR("SMW Open/Create Key database failed %d", res);
+ 
+diff --git a/platform/smw/device_mgr.c b/platform/smw/device_mgr.c
+index 74e636c..58bbaf4 100644
+--- a/platform/smw/device_mgr.c
++++ b/platform/smw/device_mgr.c
+@@ -16,7 +16,7 @@ int read_device_uuid(uint8_t *buffer, size_t *len)
+ 	enum smw_status_code status;
+ 	struct smw_device_uuid_args args = { 0 };
+ 
+-	args.subsystem_name = "ELE";
++	args.subsystem_name = SMW_SUBSYSTEM_NAME_ELE;
+ 	args.uuid_length = *len;
+ 	args.uuid = buffer;
+ 
+-- 
+2.25.1
+

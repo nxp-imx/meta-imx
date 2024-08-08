@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 DEPENDS = "smw el2go-agent-mbedtls"
 
-SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH}"
+SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH} \
+           file://0003-agent-use-the-new-SMW-APIs.patch"
 
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
 EL2GO_AGENT_SRCBRANCH ?= "master"
