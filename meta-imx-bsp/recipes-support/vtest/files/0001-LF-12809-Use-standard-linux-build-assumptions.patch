@@ -1,7 +1,7 @@
 From 78f6313cf3928bda0977ddaafed99f5fbc51dc73 Mon Sep 17 00:00:00 2001
 From: Tom Hochstein <tom.hochstein@nxp.com>
 Date: Fri, 26 Jul 2024 12:43:40 -0500
-Subject: [PATCH] LF-12750: Use standard linux build assumptions
+Subject: [PATCH] LF-12809: Use standard linux build assumptions
 
 Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
 ---
