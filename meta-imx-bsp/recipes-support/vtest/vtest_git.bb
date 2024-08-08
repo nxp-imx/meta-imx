@@ -9,7 +9,7 @@ DEPENDS = "ecdsa-lib-imx v2xsehsm openssl"
 SRC_URI = "${VTEST_SRC};branch=${SRCBRANCH} \
     file://0001-LF-12809-Use-standard-linux-build-assumptions.patch"
 VTEST_SRC ?= "git://github.com/nxp-imx/vtest.git;protocol=https"
-SRCBRANCH = "v2x-dev"
+SRCBRANCH = "lf-6.6.36_2.1.0"
 SRCREV = "b45bb7e4630d15cfeca4234c6f4d149efeb43c6b"
 
 S = "${WORKDIR}/git"
