@@ -556,7 +556,7 @@ Origin:                      NXP (Apache-2.0)
                              OpenSSL 1.1 (OpenSSL License) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
 --------------------------------------------
 
-Package:                     ecdsa-lib-imx-3.3.3.bin
+Package:                     ecdsa-lib-imx-3.3.3-dd6eac8.bin
 Version:                     3.3.3
 Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
