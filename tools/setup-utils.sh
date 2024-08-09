@@ -2,7 +2,7 @@
 #
 # FSL Build Environment Setup Utility Functions
 #
-# Copyright 2017 NXP
+# Copyright 2017, 2019-2021, 2023 NXP
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

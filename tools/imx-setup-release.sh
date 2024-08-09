@@ -3,7 +3,7 @@
 # i.MX Yocto Project Build Environment Setup Script
 #
 # Copyright (C) 2011-2016 Freescale Semiconductor
-# Copyright 2017 NXP
+# Copyright 2017, 2019-2024 NXP
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
