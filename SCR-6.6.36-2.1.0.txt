@@ -476,7 +476,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     imx-smw.git
-Version:                     0.4
+Version:                     git
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -558,7 +558,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     ecdsa-lib-imx-3.3.3-dd6eac8.bin
 Version:                     3.3.3
-Outgoing License:            LA_OPT_NXP_Software_License v53 December 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -990,7 +990,7 @@ Multimedia Packages
 
 Package:                     imx-codec-4.9.0.bin
 Version:                     4.9.0
-Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1220,7 +1220,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-dsp-2.1.8.bin
 Version:                     2.1.8
-Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1234,7 +1234,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-dsp-codec-ext-2.1.8.bin
 Version:                     2.1.8
-Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1438,7 +1438,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx93-m33-demo-2.16.000.bin
 Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
