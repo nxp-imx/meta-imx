@@ -1,0 +1,44 @@
+From a73d4f8ccfed7dc42e72cb037a50fccff7c359be Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Mon, 12 Aug 2024 12:26:18 -0500
+Subject: [PATCH] LF-12809: Fix cmake install for cross-compile
+
+The installed file v2xsehsmTargets.cmake does set the library location
+incorrectly to the absolute path during the build. The problem is
+flagged with a warning:
+```
+WARNING: v2xsehsm-git-r0 do_package_qa: QA Issue: File /usr/lib/v2xsehsm/cmake/v2xsehsmTargets.cmake in package v2xsehsm contains reference to TMPDIR [buildpaths]
+```
+
+This problem leads to the following build break if v2xsehsm is
+installed from a package and not built locally:
+```
+| ninja: error: '/home/bamboo/bamboo-agent-home/xml-data/build-dir/IMXYOCTO-LFML-IMX8DXL/elastic-ci-tools/192/build/tmp/work/armv8a-poky-linux/v2xsehsm/git/build/libv2xCrypto.so.0.7.0', needed by 'vtest', missing and no known rule to make it
+```
+
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ CMakeLists.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 523e337..a4082c8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -90,13 +90,13 @@ write_basic_package_version_file (
+ 	COMPATIBILITY AnyNewerVersion
+ 	)
+ 
+-export (EXPORT v2xsehsmTargets
+-	FILE "${CMAKE_CURRENT_BINARY_DIR}/v2xsehsm/v2xsehsmTargets.cmake"
++install(EXPORT v2xsehsmTargets
++	FILE v2xsehsmTargets.cmake
++	DESTINATION ${CMAKE_INSTALL_LIBDIR}/v2xsehsm/cmake
+ 	)
+ 
+ install (FILES
+ 	${PROJECT_SOURCE_DIR}/v2xsehsmConfig.cmake
+-	${CMAKE_CURRENT_BINARY_DIR}/v2xsehsm/v2xsehsmTargets.cmake
+ 	${CMAKE_CURRENT_BINARY_DIR}/v2xsehsmConfigVersion.cmake
+ 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/v2xsehsm/cmake
+ 	)

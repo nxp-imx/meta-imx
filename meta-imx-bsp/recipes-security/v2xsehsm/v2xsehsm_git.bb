@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=664939843ae3416d811479b21978e8b4"
 DEPENDS = "imx-secure-enclave-seco"
 
 SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH} \
-    file://0001-LF-12809-Use-standard-linux-build-assumptions.patch"
+           file://0001-LF-12809-Use-standard-linux-build-assumptions.patch \
+           file://0001-LF-12809-Fix-cmake-install-for-cross-compile.patch \
+           "
 V2XSEHSM_SRC ?= "git://github.com/nxp-imx/v2xsehsm.git;protocol=https"
 SRCBRANCH = "lf-6.6.36_2.1.0"
 SRCREV = "0e7ecffc0bca7f5e280e9cf69c71eebf6ec3b142" 
