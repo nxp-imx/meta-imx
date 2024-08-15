@@ -726,7 +726,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r50.0-1101dda.bin
+Package:                     mali-imx-r50.0-ca078f2.bin
 Version:                     r50.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1176,7 +1176,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-vc-1.10.0.bin
+Package:                     imx-vpu-hantro-vc-1.10.0-1f2f5e5.bin
 Version:                     1.10.0
 Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1258,7 +1258,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-ssrc-2.2.1.bin
+Package:                     nxp-ssrc-2.2.1-0187bb7.bin
 Version:                     2.2.1
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
