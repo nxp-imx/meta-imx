@@ -59,7 +59,7 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     imx-oei.git
 Version:                     1.0.0
-Outgoing License:            GPL-2.0 
+Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
@@ -318,7 +318,7 @@ Origin:                      NXP (BSD-3-clause)
 
 Package:                     zephyr-demo-imx-3.7.0
 Version:                     3.7.0
-Outgoing License:            BSD-3-Clause 
+Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            BSP
 Type of Content:             binary
@@ -726,7 +726,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r50.0-ca078f2.bin
+Package:                     mali-imx-r50.0-aa04fd9.bin
 Version:                     r50.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1178,7 +1178,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-vpu-hantro-vc-1.10.0-1f2f5e5.bin
 Version:                     1.10.0
-Outgoing License:            LA_OPT_NXP_Software_License v48 July 2023 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1258,10 +1258,10 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-ssrc-2.2.1-0187bb7.bin
+Package:                     nxp-ssrc-2.2.1-90fef91.bin
 Version:                     2.2.1
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
-License File:                LICENSE.txt
+License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    Synchronous Sample Rate Convertor for ARM Cortex-A
