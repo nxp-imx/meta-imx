@@ -238,7 +238,7 @@ SRC_URI += " \
     file://0001-Add-smaller-version-of-download_models.py.patch;patchdir=../extra \
 "
 SRCREV_FORMAT:append = "_extra"
-SRCREV_extra = "7f0ba7adefcbbbe3df7d939f5246ba0382c7c629"
+SRCREV_extra = "dd1fbd0717ef4d83f86899b4144fdd9bc0364a5f"
 
 # Patch DNN example
 SRC_URI += " \
