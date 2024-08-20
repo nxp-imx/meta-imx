@@ -416,7 +416,7 @@ Origin:                      NXP (BSD-2-Clause) (We are not using /host)
 Package:                     imx-xen.git
 Version:                     4.18.imx
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A Virtual Machine Monitor
@@ -726,7 +726,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r50.0-aa04fd9.bin
+Package:                     mali-imx-r50.0-19b45a4.bin
 Version:                     r50.0
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
