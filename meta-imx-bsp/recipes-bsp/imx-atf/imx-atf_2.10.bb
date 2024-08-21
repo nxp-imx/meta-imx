@@ -10,7 +10,7 @@ PV .= "+git${SRCPV}"
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH}"
 ATF_SRC ?= "git://github.com/nxp-imx/imx-atf.git;protocol=https"
 SRCBRANCH = "lf_v2.10"
-SRCREV = "233b101882ec7a7fc55542a60b7fce1c7049fd4b"
+SRCREV = "4701cab65a368d306d666b3f50c3c60aedcbc55e"
 
 S = "${WORKDIR}/git"
 
