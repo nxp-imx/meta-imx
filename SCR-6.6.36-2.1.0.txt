@@ -688,7 +688,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-8c00f11.bin
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch32-476f8ad.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -707,7 +707,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-8c00f11.bin
+Package:                     imx-gpu-viv-6.4.11.p2.8-aarch64-476f8ad.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -848,7 +848,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-8c00f11.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.8-arm-476f8ad.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -860,7 +860,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-8c00f11.bin
+Package:                     imx-gpu-g2d-6.4.11.p2.8-aarch64-476f8ad.bin
 Version:                     6.4.11.p2.8
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1162,7 +1162,7 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.3.0-56aebf2
+Package:                     imx-vpu-hantro-daemon-1.3.0-33b724c
 Version:                     1.3.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
