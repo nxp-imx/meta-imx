@@ -1,7 +1,7 @@
 SUMMARY = "i.MX GPU SDK Samples"
 DESCRIPTION = "Set of sample applications for i.MX GPU"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://License.md;md5=fd7441e2140e0125c5d317593ad2d670"
+LIC_FILES_CHKSUM = "file://License.md;md5=f989c2fba947eb886cd6cb09cee89518"
 
 DEPENDS = " \
     assimp \
