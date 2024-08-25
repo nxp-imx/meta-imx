@@ -304,7 +304,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     sof-zephyr-2.10.0
 Version:                     2.10.0
-Outgoing License:            BSD-3-Clause 
+Outgoing License:            Apache-2.0 
 License File:                LICENCE
 Package Category:            BSP
 Type of Content:             binary
