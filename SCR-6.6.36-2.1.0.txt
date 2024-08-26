@@ -746,7 +746,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     6.4.0
+Version:                     6.4.1
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
