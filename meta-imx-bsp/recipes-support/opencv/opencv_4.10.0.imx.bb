@@ -247,10 +247,13 @@ SRC_URI += " \
 
 PACKAGECONFIG:remove = "eigen"
 
-PACKAGECONFIG:append:mx8-nxp-bsp = " dnn text"
-PACKAGECONFIG:append:mx9-nxp-bsp = " dnn text"
+PACKAGECONFIG:append = " \
+    dnn \
+    text \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt6-layer', 'qt6', '', d)} \
+    ${PACKAGECONFIG_OPENCL} \
+"
 
-PACKAGECONFIG:append = " ${PACKAGECONFIG_OPENCL}"
 PACKAGECONFIG_OPENCL                   = ""
 PACKAGECONFIG_OPENCL:mx8-nxp-bsp       = "opencl"
 PACKAGECONFIG_OPENCL:mx8dxl-nxp-bsp    = ""
