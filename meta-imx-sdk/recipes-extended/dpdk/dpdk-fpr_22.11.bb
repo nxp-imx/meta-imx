@@ -8,7 +8,7 @@ DEPENDS = "dpdk"
 SRC_URI = "${DPDK_FPR_SRC};branch=${SRCBRANCH}"
 DPDK_FPR_SRC ?= "git://github.com/nxp/dpdk-fpr;protocol=https"
 SRCBRANCH = "main"
-SRCREV = "359c3226938e1ef38feb57c43871e458f0821dc3"
+SRCREV = "4be3498dd4e816785129e3a49d52270410548dc6"
 
 S = "${WORKDIR}/git"
 
