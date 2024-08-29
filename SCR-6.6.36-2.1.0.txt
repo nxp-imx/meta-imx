@@ -290,18 +290,6 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-seco-libs.git
-Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v35 May 2022 Additional distribution license granted - Section 2.3 applies
-License File:                EULA.txt
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    BSP source - SECO
-Release Location:            https://github.com/NXP/imx-seco-libs.git -b lf-6.6.36-2.1.0
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
---------------------------------------------
-
 Package:                     sof-zephyr-2.10.0
 Version:                     2.10.0
 Outgoing License:            Apache-2.0 
@@ -662,7 +650,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software
 
 --------------------------------------------
 
-Package:                     basler-camera-4.2.2.24.3.bin
+Package:                     basler-camera-4.2.2.24.3-d1f506a.bin
 Version:                     4.2.2.24.3
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
