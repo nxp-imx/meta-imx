@@ -1,12 +1,12 @@
-# Copyright 2020-2023 NXP
+# Copyright 2020-2024 NXP
 
 DESCRIPTION = "Basler camera binary drivers"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ca53281cc0caa7e320d4945a896fb837"
 
-inherit fsl-eula-unpack
+IMX_SRCREV_ABBREV = "d1f506a"
 
-SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}.bin;fsl-eula=true"
+inherit fsl-eula2-unpack2 fsl-eula-recent
 
 SRC_URI[sha256sum] = "f95c9aec0b2369a6df74bb20ba9504d671ce7886ec0213cfd88da45c53dbd363"
 
