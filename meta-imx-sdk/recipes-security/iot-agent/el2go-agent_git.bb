@@ -8,16 +8,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 DEPENDS = "smw el2go-agent-mbedtls"
 
-SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH} \
-           file://0003-agent-use-the-new-SMW-APIs.patch"
+SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH}"
 
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
 EL2GO_AGENT_SRCBRANCH ?= "master"
 
-SRCREV = "9c2f920074b9c05f9e5e9b415eba5cb63757b24a"
+SRCREV = "54bd67ea2f47d56af8db378497b1dde6394ac0d6"
 S = "${WORKDIR}/git"
 
-PV = "5.2.0+git${SRCPV}"
+PV = "5.2.1+git${SRCPV}"
 
 inherit cmake
 
