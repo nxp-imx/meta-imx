@@ -1,0 +1,59 @@
+From 9bfd1392d8933a6edb61639cecffdaddb601f380 Mon Sep 17 00:00:00 2001
+From: Nicolas <nicolas.goueslain@nxp.com>
+Date: Mon, 2 Sep 2024 12:36:04 +0200
+Subject: [PATCH] AIR-11938: tensor-filter-use-memcpy-ethosu-delegate
+
+Signed-off-by: Nicolas <nicolas.goueslain@nxp.com>
+---
+ .../tensor_filter/tensor_filter_tensorflow_lite.cc     | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc b/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
+index e9394398..ec1c9002 100644
+--- a/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
++++ b/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
+@@ -214,6 +214,7 @@ class TFLiteInterpreter
+   char *model_path;
+   bool is_cached_after_first_invoke; /**< To cache again after first invoke */
+   bool is_xnnpack_delegated; /**< To check if XNNPACK delegate is used */
++  bool is_ethosu_delegated;
+   char *ext_delegate_path; /**< path to external delegate lib */
+   GHashTable *ext_delegate_kv_table; /**< external delegate key values options */
+ 
+@@ -297,6 +298,7 @@ TFLiteInterpreter::TFLiteInterpreter ()
+ 
+   is_cached_after_first_invoke = false;
+   is_xnnpack_delegated = false;
++  is_ethosu_delegated = false;
+ }
+ 
+ /**
+@@ -331,7 +333,7 @@ TFLiteInterpreter::invoke (const GstTensorMemory *input, GstTensorMemory *output
+    * Therefore tensor data is to be manually copied from/to input/output GStreamer
+    * buffers memory whose address changes at every round.
+    */
+-  if (is_xnnpack_delegated) {
++  if (is_xnnpack_delegated || is_ethosu_delegated) {
+     for (unsigned int i = 0; i < inputTensorMeta.num_tensors; ++i) {
+       tensor_ptr = inputTensorPtr[i];
+       g_assert(tensor_ptr->bytes == input[i].size);
+@@ -356,7 +358,7 @@ TFLiteInterpreter::invoke (const GstTensorMemory *input, GstTensorMemory *output
+   start_time = g_get_monotonic_time ();
+   status = interpreter->Invoke ();
+ 
+-  if (is_xnnpack_delegated) {
++  if (is_xnnpack_delegated || is_ethosu_delegated) {
+     for (unsigned int i = 0; i < outputTensorMeta.num_tensors; ++i) {
+       tensor_ptr = outputTensorPtr[i];
+       g_assert(tensor_ptr->bytes == output[i].size);
+@@ -518,7 +520,9 @@ TFLiteInterpreter::loadModel (int num_threads, tflite_delegate_e delegate_e)
+       TfLiteExternalDelegateOptions options;
+ 
+       options = TfLiteExternalDelegateOptionsDefault (ext_delegate_path);
+-
++      if (strcmp(ext_delegate_path, "libethosu_delegate.so") == 0){
++	      is_ethosu_delegated = true;
++      }
+       /* Add optional key values to delegate configuration */
+       if (ext_delegate_kv_table) {
+         GHashTable *table = ext_delegate_kv_table;

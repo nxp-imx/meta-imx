@@ -20,7 +20,9 @@ DEPENDS = "\
 
 SRCREV = "f82789170b8f2696e50cbc5027b74b767f5e9415"
 SRC_URI = "git://github.com/nnstreamer/nnstreamer.git;branch=main;protocol=https \
-           file://0001-PATCH-increase-to-cpp17-version.patch"
+           file://0001-PATCH-increase-to-cpp17-version.patch \
+           file://0001-AIR-11938-tensor-filter-use-memcpy-ethosu-delegate.patch \
+           "
 
 # Use git instead of quilt as patch tool to support patches with binary content
 PATCHTOOL = "git"
