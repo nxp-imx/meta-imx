@@ -638,7 +638,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.24.3-c73e0b8.bin
+Package:                     isp-imx-4.2.2.24.3-270791f.bin
 Version:                     4.2.2.24.3
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
