@@ -20,4 +20,3 @@ do_install() {
 INSANE_SKIP:${PN} = "arch already-stripped"
 
 FILES:${PN} += "${nonarch_base_libdir}/firmware/imx/zephyr/*.elf"
-
