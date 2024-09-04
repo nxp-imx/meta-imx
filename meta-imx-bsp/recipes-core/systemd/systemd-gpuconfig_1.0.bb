@@ -16,8 +16,8 @@ do_install () {
     install -d ${D}${systemd_unitdir}/system/
     install -d ${D}${sysconfdir}/systemd/system/multi-user.target.wants/
 
-    install -m 0755 ${WORKDIR}/gpuconfig ${D}${sysconfdir}
-    install -m 0644 ${WORKDIR}/gpuconfig.service ${D}${systemd_unitdir}/system
+    install -m 0755 ${UNPACKDIR}/gpuconfig ${D}${sysconfdir}
+    install -m 0644 ${UNPACKDIR}/gpuconfig.service ${D}${systemd_unitdir}/system
 
     # Enable the gpuconfig.service
     ln -sf ${systemd_unitdir}/system/gpuconfig.service \

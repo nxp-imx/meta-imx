@@ -10,7 +10,7 @@ do_install:append() {
 
     # Install 51-bluez-imx.conf to /usr/share/wireplumber/wireplumber.conf.d
     install -d ${D}${datadir}/wireplumber/wireplumber.conf.d
-    install -m 0755 ${WORKDIR}/51-bluez-imx.conf ${D}${datadir}/wireplumber/wireplumber.conf.d
+    install -m 0755 ${UNPACKDIR}/51-bluez-imx.conf ${D}${datadir}/wireplumber/wireplumber.conf.d
 }
 
 FILES:${PN}:append = " ${datadir}/wireplumber/wireplumber.conf.d"
