@@ -3,6 +3,8 @@ From: Nicolas <nicolas.goueslain@nxp.com>
 Date: Mon, 2 Sep 2024 12:36:04 +0200
 Subject: [PATCH] AIR-11938: tensor-filter-use-memcpy-ethosu-delegate
 
+Upstream-Status: Inappropriate [i.MX specific]
+
 Signed-off-by: Nicolas <nicolas.goueslain@nxp.com>
 ---
  .../tensor_filter/tensor_filter_tensorflow_lite.cc     | 10 +++++++---
