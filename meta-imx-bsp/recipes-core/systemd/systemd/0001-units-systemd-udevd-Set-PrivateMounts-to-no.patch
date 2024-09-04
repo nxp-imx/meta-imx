@@ -1,4 +1,4 @@
-From f611772a8dc4431cf464c1c6ef5d215d9553bf3a Mon Sep 17 00:00:00 2001
+From 19a8729bcd3252e564456586d1b6908d8033a008 Mon Sep 17 00:00:00 2001
 From: Neena Busireddy <neenareddy.busireddy@nxp.com>
 Date: Mon, 17 Dec 2018 10:02:19 -0600
 Subject: [PATCH] units/systemd-udevd: Set PrivateMounts to no
@@ -20,16 +20,15 @@ https://unix.stackexchange.com/questions/464959/udev-rule-to-automount-media-dev
 Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
-
 ---
  units/systemd-udevd.service.in | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/units/systemd-udevd.service.in b/units/systemd-udevd.service.in
-index b59fdef9b0..6be8309895 100644
+index f4a4482088..4f35415b0f 100644
 --- a/units/systemd-udevd.service.in
 +++ b/units/systemd-udevd.service.in
-@@ -28,13 +28,12 @@ RestartSec=0
+@@ -29,13 +29,12 @@ RestartSec=0
  ExecStart={{LIBEXECDIR}}/systemd-udevd
  KillMode=mixed
  TasksMax=infinity
