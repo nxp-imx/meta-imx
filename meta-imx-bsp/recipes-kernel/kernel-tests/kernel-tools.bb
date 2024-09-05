@@ -22,6 +22,7 @@ PACKAGECONFIG_VSOCK               = "vsock"
 PACKAGECONFIG_VSOCK:mx6-nxp-bsp   = ""
 PACKAGECONFIG_VSOCK:mx7-nxp-bsp   = ""
 
+PACKAGECONFIG[virtio] = ",,"
 PACKAGECONFIG[vsock] = ",,liburing"
 
 KERNEL_PCITEST_SRC ?= " \
