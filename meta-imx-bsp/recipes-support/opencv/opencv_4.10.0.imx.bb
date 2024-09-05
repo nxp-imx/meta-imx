@@ -3,7 +3,7 @@
 # recipe. The second section customizes the recipe for i.MX.
 
 ########## meta-openembedded copy ###########
-# Upstream hash: b149b1e6a1de2bdea10b0a6de34d5a5bbba4a657
+# Upstream hash: f8342855a440fa5c4194fc57285e8db9e034fcaa
 
 SUMMARY = "Opencv : The Open Computer Vision Library"
 HOMEPAGE = "http://opencv.org/"
@@ -17,7 +17,7 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "93bb210db7cb5ae3dcd80dd6e3f8e5cfb42aa5fa"
+SRCREV_opencv = "dad8af6b17f8e60d7b95a1203a1b4d22f56574cf"
 SRCREV_contrib = "c7602a8f74205e44389bd6a4e8d727d32e7e27b4"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
@@ -93,7 +93,7 @@ EXTRA_OECMAKE:append:x86 = " -DX86=ON"
 EXTRA_OECMAKE:remove:x86 = " -DENABLE_SSE41=1 -DENABLE_SSE42=1"
 
 PACKAGECONFIG ??= "gapi python3 eigen jpeg png tiff v4l libv4l gstreamer samples tbb gphoto2 \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
+    ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)} \
     ${@bb.utils.contains_any("LICENSE_FLAGS_ACCEPTED", "commercial_ffmpeg commercial", "libav", "", d)}"
 
 # TBB does not build for powerpc so disable that package config
@@ -235,7 +235,7 @@ SRCREV_contrib = "1ed3dd2c53888e3289afdb22ec4e9ebbff3dba87"
 # Add opencv_extra
 SRC_URI += " \
     git://github.com/opencv/opencv_extra.git;destsuffix=extra;name=extra;branch=4.x;protocol=https \
-    file://0001-Add-smaller-version-of-download_models.py.patch;patchdir=../extra \
+    file://0001-Add-smaller-version-of-download_models.py.patch;patchdir=${UNPACKDIR}/extra \
 "
 SRCREV_FORMAT:append = "_extra"
 SRCREV_extra = "dd1fbd0717ef4d83f86899b4144fdd9bc0364a5f"
