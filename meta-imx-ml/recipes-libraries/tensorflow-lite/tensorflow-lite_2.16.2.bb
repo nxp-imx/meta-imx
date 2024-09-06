@@ -108,7 +108,7 @@ do_install() {
     fi
 
     # Install mobilenet tflite file
-    cp ${WORKDIR}/mobilenet_*.tflite ${D}${bindir}/${PN}-${PV}/examples
+    cp ${UNPACKDIR}/mobilenet_*.tflite ${D}${bindir}/${PN}-${PV}/examples
 
     # Install pip package
     install -d ${D}/${PYTHON_SITEPACKAGES_DIR}
