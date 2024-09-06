@@ -5,6 +5,8 @@ Subject: [PATCH] CMakeLists: Use CMAKE_INSTALL_LIBDIR for install libs/pc
 
 Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
 ---
+Upstream-Status: Pending
+
  src-IL/CMakeLists.txt   | 6 +++---
  src-ILU/CMakeLists.txt  | 6 +++---
  src-ILUT/CMakeLists.txt | 6 +++---
