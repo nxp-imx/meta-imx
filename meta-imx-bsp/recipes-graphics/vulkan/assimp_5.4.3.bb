@@ -11,7 +11,7 @@ DEPENDS = "zlib"
 SRC_URI = "git://github.com/assimp/assimp.git;protocol=https;branch=master"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>(\d+(\.\d+)+))"
 
-SRCREV = "9519a62dd20799c5493c638d1ef5a6f484e5faf1"
+SRCREV = "c35200e38ea8f058812b83de2ef32c6093b0ece2"
 
 S = "${WORKDIR}/git"
 
@@ -30,3 +30,6 @@ remove_non_compliant_source() {
 EXTRA_OECMAKE = "-DASSIMP_BUILD_ASSIMP_TOOLS=OFF -DASSIMP_BUILD_TESTS=OFF -DASSIMP_LIB_INSTALL_DIR=${baselib}"
 
 BBCLASSEXTEND = "native nativesdk"
+
+# Work around do_package_qa error
+INSANE_SKIP:${PN}-dev += "buildpaths"
