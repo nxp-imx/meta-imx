@@ -138,6 +138,7 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INSANE_SKIP:${PN} += " \
     already-stripped \
     staticdev \
+    buildpaths \
 "
 
 FILES:${PN} += "${libdir}/python*"
