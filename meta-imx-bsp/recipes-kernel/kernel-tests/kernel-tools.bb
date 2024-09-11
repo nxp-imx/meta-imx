@@ -102,4 +102,7 @@ FILES:${PN}-iio = "${bindir}/lsiio ${bindir}/iio*"
 FILES:${PN}-virtio = "${bindir}/virtio-ivshmem-*"
 FILES:${PN}-vsock = "${bindir}/vsock*"
 
+# Work around do_package_qa error
+INSANE_SKIP:${PN}-dbg += "buildpaths"
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
