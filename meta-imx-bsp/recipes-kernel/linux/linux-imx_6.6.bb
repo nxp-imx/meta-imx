@@ -89,4 +89,7 @@ do_merge_delta_config() {
 }
 addtask merge_delta_config before do_kernel_localversion after do_copy_defconfig
 
+# Work around do_package_qa error
+INSANE_SKIP:${PN}-src += "buildpaths"
+
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
