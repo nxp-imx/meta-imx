@@ -35,3 +35,6 @@ do_install() {
 }
 
 FILES:${PN} = "/unit_tests/sof/tools"
+
+# Work around do_package_qa error
+INSANE_SKIP:${PN} += "buildpaths"
