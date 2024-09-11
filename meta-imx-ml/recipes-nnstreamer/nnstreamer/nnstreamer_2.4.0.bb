@@ -203,7 +203,9 @@ FILES:${PN}-unittest = "\
 "
 
 INSANE_SKIP:${PN} += "dev-so"
+INSANE_SKIP:${PN}-src += "buildpaths"
 INSANE_SKIP:${PN}-python3 += "dev-so"
+INSANE_SKIP:${PN}-unittest += "buildpaths"
 
 do_install:append() {
     # Fixes: 076a78ea [TVM/test] Add models for more architectures
