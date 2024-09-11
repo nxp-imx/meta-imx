@@ -5,6 +5,8 @@ Subject: [PATCH] Findtim-vx.cmake: Fix LIBDIR for multilib environment
 
 Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
 ---
+Upstream-Status: Pending
+
  cmake/modules/Findtim-vx.cmake | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
