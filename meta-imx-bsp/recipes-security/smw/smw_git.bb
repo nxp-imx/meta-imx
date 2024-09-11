@@ -1,4 +1,4 @@
-# Copyright 2020-23 NXP
+# Copyright 2020-2024 NXP
 require recipes-security/optee/optee.inc
 
 SUMMARY = "NXP i.MX Security Middleware Library"
@@ -68,6 +68,11 @@ PACKAGES =+ "${PN}-tests"
 FILES:${PN} += "${nonarch_base_libdir}/optee_armtz/*"
 
 FILES:${PN}-tests = "${bindir}/* ${datadir}/${BPN}/*"
+
+# Work around do_package_qa QA errors
+INSANE_SKIP:${PN}-dbg += "buildpaths"
+INSANE_SKIP:${PN}-dev += "buildpaths"
+INSANE_SKIP:${PN}-tests += "buildpaths"
 
 RDEPENDS:${PN}-tests += "bash cmake"
 
