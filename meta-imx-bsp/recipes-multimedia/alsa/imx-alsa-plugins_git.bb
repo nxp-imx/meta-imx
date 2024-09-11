@@ -37,6 +37,8 @@ PACKAGECONFIG_SWPDM:mx8-nxp-bsp = "swpdm"
 PACKAGECONFIG[swpdm] = "--enable-swpdm,--disable-swpdm,imx-sw-pdm"
 
 INSANE_SKIP:${PN} = "dev-so"
+# Work around do_package_qa error
+INSANE_SKIP:${PN}-dbg += "buildpaths"
 
 FILES:${PN} += "${libdir}/alsa-lib/libasound_*.so"
 FILES:${PN}-dbg += "${libdir}/alsa-lib/.debug"
