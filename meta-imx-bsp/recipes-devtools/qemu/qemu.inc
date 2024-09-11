@@ -143,7 +143,7 @@ EXTRA_OECONF = " \
 EXTRA_OECONF:append:class-target = " --cross-prefix=${HOST_PREFIX}"
 EXTRA_OECONF:append:class-nativesdk = " --cross-prefix=${HOST_PREFIX}"
 
-#B = "${WORKDIR}/build"
+#B = "${UNPACKDIR}/build"
 
 #EXTRA_OECONF:append = " --python=${HOSTTOOLS_DIR}/python3"
 
@@ -168,11 +168,11 @@ do_install () {
 	# If we built the guest agent, also install startup/udev rules
 	if [ -e "${D}${bindir}/qemu-ga" ]; then
 		install -d ${D}${sysconfdir}/init.d/
-		install -m 0755 ${WORKDIR}/qemu-guest-agent.init ${D}${sysconfdir}/init.d/qemu-guest-agent
+		install -m 0755 ${UNPACKDIR}/qemu-guest-agent.init ${D}${sysconfdir}/init.d/qemu-guest-agent
 		sed -i 's:@bindir@:${bindir}:' ${D}${sysconfdir}/init.d/qemu-guest-agent
 
 		install -d ${D}${sysconfdir}/udev/rules.d/
-		install -m 0644 ${WORKDIR}/qemu-guest-agent.udev ${D}${sysconfdir}/udev/rules.d/60-qemu-guest-agent.rules
+		install -m 0644 ${UNPACKDIR}/qemu-guest-agent.udev ${D}${sysconfdir}/udev/rules.d/60-qemu-guest-agent.rules
 
 		install -d ${D}${systemd_unitdir}/system/
 		install -m 0644 ${S}/contrib/systemd/qemu-guest-agent.service ${D}${systemd_unitdir}/system
@@ -338,7 +338,7 @@ SRCREV_berkeley-softfloat-3 = "b64af41c3276f97f0e181920400ee056b9c88037"
 SRCREV_berkeley-testfloat-3 = "e7af9751d9f9fd3b47911f51a5cfd08af256a9ab"
 SRCREV_keycodemapdb = "f5772a62ec52591ff6870b7e8ef32482371f22c6"
 SRCREV_FORMAT = "imx-qemu_berkeley-softfloat-3_berkeley-testfloat-3_keycodemapdb"
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 # this configure option need to remove as invoke meson subprojects download 
 # EXTRA_OECONF:remove =  "--disable-download"
