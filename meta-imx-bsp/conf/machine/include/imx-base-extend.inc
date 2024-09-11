@@ -112,7 +112,7 @@ PREFERRED_VERSION_wayland-protocols:imx-nxp-bsp ??= "1.37.imx"
 
 PREFERRED_VERSION_xwayland:imx-nxp-bsp ??= ""
 
-PREFERRED_VERSION_libdrm:imx-nxp-bsp ??= "2.4.116.imx"
+PREFERRED_VERSION_libdrm:imx-nxp-bsp ??= "2.4.123.imx"
 
 PREFERRED_VERSION_spirv-headers:imxvulkan            ??= "1.3.275.0"
 PREFERRED_VERSION_spirv-tools:imxvulkan              ??= "1.3.275.0"
