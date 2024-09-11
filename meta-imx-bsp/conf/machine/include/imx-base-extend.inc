@@ -99,7 +99,7 @@ PREFERRED_VERSION_gstreamer1.0-plugins-good:mx9-nxp-bsp ??= "1.24.7.imx"
 
 # GStreamer downgrade ffmpeg
 # Downgrade for 6 and 7, unlike meta-freescale
-PREFERRED_VERSION_ffmpeg:imx-nxp-bsp ??= "4.4.1"
+#PREFERRED_VERSION_ffmpeg:imx-nxp-bsp ??= "4.4.1"
 PREFERRED_VERSION_ffmpeg:mx8-nxp-bsp ??= "4.4.1"
 PREFERRED_VERSION_ffmpeg:mx9-nxp-bsp ??= "4.4.1"
 
