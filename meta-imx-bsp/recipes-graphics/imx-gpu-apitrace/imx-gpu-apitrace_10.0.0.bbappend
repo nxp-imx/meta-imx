@@ -7,3 +7,5 @@ SRCREV = "522cb2981289b7ba20d6dd4b4bf75097e079815b"
 DEPENDS:remove:mx95-nxp-bsp = "imx-gpu-viv"
 PACKAGECONFIG_BACKEND:mx95-nxp-bsp = "waffle"
 PACKAGECONFIG_GPU2D:mx95-nxp-bsp   = ""
+
+INSANE_SKIP:${PN} += "buildpaths"
