@@ -3,6 +3,8 @@ From: Nirav Shah <nnshah@codeaurora.org>
 Date: Tue, 17 Oct 2017 10:49:11 +0530
 Subject: [PATCH] Add handling of DYN_BW_SGNL command for AP mode
 
+Upstream-Status: Pending
+
 When DYN_BW_SGNL command is issued, the corresponding iwpriv command
 needs to be invoked by sigma_dut. This fix adds the handing DYN_BW_SGNL
 command for DRIVER_WCN and DRIVER_LINUX_WCN for AP mode.
