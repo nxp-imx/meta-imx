@@ -10,3 +10,6 @@ SRCREV = "e3ce21bb937f07b8282dccf4823e2acbdf286d17"
 S = "${WORKDIR}/git"
 
 inherit cmake
+
+# Work around do_package_qa error
+INSANE_SKIP:${PN}-dev += "buildpaths"
