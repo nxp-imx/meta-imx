@@ -14,6 +14,8 @@ Program /usr/bin/wayland-scanner found: NO
 | ../git/src/meson.build:93:4: ERROR: Program '/usr/bin/wayland-scanner' not found or not executable
 |
 
+Upstream-Status: Pending
+
 Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
 
 ---
