@@ -144,7 +144,7 @@ PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.10.0.imx"
 PREFERRED_VERSION_xen-tools = "4.18.imx+stable"
 PREFERRED_VERSION_xen       = "4.18.imx+stable"
 
-QEMUVERSION              = "8.2.3"
+QEMUVERSION              = "9.0.2"
 QEMUVERSION:mx95-nxp-bsp = "8.2.2.imx"
 
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
