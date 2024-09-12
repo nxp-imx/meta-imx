@@ -3,6 +3,8 @@ From: Tom Hochstein <tom.hochstein@nxp.com>
 Date: Mon, 22 Jan 2024 17:34:17 -0600
 Subject: [PATCH] CMakeLists.txt: Switch to python3
 
+Upstream-Status: Inappropriate [i.MX specific]
+
 Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
 ---
  patrace/project/cmake/CMakeLists.txt | 2 +-
