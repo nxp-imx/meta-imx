@@ -1,7 +1,8 @@
 SUMMARY = "Tools for the capture and replay of Vulkan API calls"
 SECTION = "graphics"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d2ddcd9b5c3b713fcf90c3223f6b10bd"
+LICENSE = "Apache-2.0 & MIT"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d2ddcd9b5c3b713fcf90c3223f6b10bd \
+                    file://external/SPIRV-Reflect/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 DEPENDS = "vulkan-headers spirv-headers zstd lz4"
 
 SRC_URI = " \
