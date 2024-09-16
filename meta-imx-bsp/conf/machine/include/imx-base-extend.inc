@@ -114,12 +114,12 @@ PREFERRED_VERSION_xwayland:imx-nxp-bsp ??= ""
 
 PREFERRED_VERSION_libdrm:imx-nxp-bsp ??= "2.4.123.imx"
 
-PREFERRED_VERSION_spirv-headers:imxvulkan            ??= "1.3.275.0"
-PREFERRED_VERSION_spirv-tools:imxvulkan              ??= "1.3.275.0"
-PREFERRED_VERSION_vulkan-headers:imxvulkan           ??= "1.3.275.0"
-PREFERRED_VERSION_vulkan-loader:imxvulkan            ??= "1.3.275.0"
-PREFERRED_VERSION_vulkan-tools:imxvulkan             ??= "1.3.275.0"
-PREFERRED_VERSION_vulkan-validation-layers:imxvulkan ??= "1.3.275.0"
+PREFERRED_VERSION_spirv-headers:imxvulkan            ??= "1.3.290.0"
+PREFERRED_VERSION_spirv-tools:imxvulkan              ??= "1.3.290.0"
+PREFERRED_VERSION_vulkan-headers:imxvulkan           ??= "1.3.290.0"
+PREFERRED_VERSION_vulkan-loader:imxvulkan            ??= "1.3.290.0"
+PREFERRED_VERSION_vulkan-tools:imxvulkan             ??= "1.3.290.0"
+PREFERRED_VERSION_vulkan-validation-layers:imxvulkan ??= "1.3.290.0"
 
 PREFERRED_VERSION_optee-client:mx6-nxp-bsp ??= "4.4.0.imx"
 PREFERRED_VERSION_optee-client:mx7-nxp-bsp ??= "4.4.0.imx"
