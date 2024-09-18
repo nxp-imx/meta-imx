@@ -19,6 +19,8 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
+CFLAGS += " -Wno-error=implicit-function-declaration"
+
 do_install:append() {
     # FIXME: Drop examples for now
     rm -r ${D}${datadir}
