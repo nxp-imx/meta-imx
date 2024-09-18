@@ -3,6 +3,8 @@ From: Cristinel Panfir <cristinel.panfir@nxp.com>
 Date: Tue, 7 Sep 2021 13:46:16 +0300
 Subject: [PATCH] tvm: CMakeLists.txt: Use CMAKE variables for libs install
 
+Upstream-Status: Pending
+
 Signed-off-by: Cristinel Panfir <cristinel.panfir@nxp.com>
 ---
  CMakeLists.txt | 4 ++--
