@@ -3,7 +3,7 @@
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ca53281cc0caa7e320d4945a896fb837" 
-DEPENDS = "boost libdrm virtual/libg2d libtinyxml2 jsoncpp"
+DEPENDS = "boost libdrm virtual/libg2d libtinyxml2 jsoncpp patchelf-native"
 
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true \
 "
@@ -41,6 +41,13 @@ EXTRA_OECMAKE += " \
     -DIMX_G2D=ON \
     -Wno-dev \
 "
+
+do_configure:prepend () {
+    # FIXME: Should be rebuild.
+    patchelf --replace-needed libjsoncpp.so.25 libjsoncpp.so.26 ${S}/mediacontrol/install/lib/libmedia_server.so
+    patchelf --replace-needed libjsoncpp.so.25 libjsoncpp.so.26 ${S}/mediacontrol/install/bin/isp_media_server
+    patchelf --replace-needed libjsoncpp.so.25 libjsoncpp.so.26 ${S}/tuningext/install/tuningext
+}
 
 do_install() {
     # Use Makefile to install
