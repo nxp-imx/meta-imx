@@ -57,7 +57,7 @@ do_install () {
 
     # Install pkgconfig file for tvm_runtime lib
     install -d ${D}${libdir}/pkgconfig
-    install -m 0644 ${WORKDIR}/tvm_runtime.pc.in ${D}${libdir}/pkgconfig/tvm_runtime.pc
+    install -m 0644 ${UNPACKDIR}/tvm_runtime.pc.in ${D}${libdir}/pkgconfig/tvm_runtime.pc
 
     sed -i 's:@version@:${PV}:g
         s:@libdir@:${libdir}:g
