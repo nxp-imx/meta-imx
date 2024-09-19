@@ -40,5 +40,5 @@ do_install:append() {
 }
 
 FILES:${PN} = "/opt"
-
+INSANE_SKIP:${PN}-src += "buildpaths"
 COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
