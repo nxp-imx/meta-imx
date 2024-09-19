@@ -54,7 +54,6 @@ ETHOS_U_PKGS = ""
 ETHOS_U_PKGS:mx93-nxp-bsp = " \
     ethos-u-vela \
     ethos-u-driver-stack \
-    tensorflow-lite-ethosu-delegate \
     eiq-examples \
 "
 
@@ -62,7 +61,6 @@ ETHOS_U_PKGS:mx93-nxp-bsp = " \
 NEUTRON_PKGS = ""
 NEUTRON_PKGS:mx95-nxp-bsp = " \
     neutron \
-    tensorflow-lite-neutron-delegate \
 "
 
 RDEPENDS:${PN} = " \
