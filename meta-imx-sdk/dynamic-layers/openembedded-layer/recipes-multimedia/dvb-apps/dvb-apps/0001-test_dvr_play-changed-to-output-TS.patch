@@ -5,7 +5,7 @@ Subject: [PATCH] test_dvr_play: changed to output TS.
 
 Changed to output TS and remove print log.
 
-Upstream Status: i.MX Specific
+Upstream-Status: i.MX Specific
 
 Signed-off-by: Bing Song <bing.song@nxp.com>
 ---
