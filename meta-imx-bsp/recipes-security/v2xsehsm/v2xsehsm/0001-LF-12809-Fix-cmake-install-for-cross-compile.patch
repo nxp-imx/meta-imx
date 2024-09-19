@@ -3,6 +3,8 @@ From: Tom Hochstein <tom.hochstein@nxp.com>
 Date: Mon, 12 Aug 2024 12:26:18 -0500
 Subject: [PATCH] LF-12809: Fix cmake install for cross-compile
 
+Upstream-Status: Pending
+
 The installed file v2xsehsmTargets.cmake does set the library location
 incorrectly to the absolute path during the build. The problem is
 flagged with a warning:
