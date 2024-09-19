@@ -26,6 +26,6 @@ QT_QPA_DEFAULT_EGLFS_INTEGRATION:imxgpu3d = \
 
 do_install:append () {
     if ! ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'true', 'false', d)}; then
-        install -Dm 0755 ${WORKDIR}/qt-linuxfb.sh ${D}${sysconfdir}/profile.d/qt-linuxfb.sh
+        install -Dm 0755 ${UNPACKDIR}/qt-linuxfb.sh ${D}${sysconfdir}/profile.d/qt-linuxfb.sh
     fi
 }
