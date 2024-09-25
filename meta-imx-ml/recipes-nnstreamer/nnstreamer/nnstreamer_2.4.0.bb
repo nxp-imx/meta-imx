@@ -100,6 +100,9 @@ EXTRA_OEMESON += "\
 	-Dtflite2-custom-support=disabled \
 "
 
+# FIXME: Remove this when the source warnings are fixed
+CFLAGS += "-Wno-error"
+
 do_install:append() {
     rm -f ${D}/${bindir}/unittest-nnstreamer/tests/test_models/models/tvm_add_one.so_
 }
