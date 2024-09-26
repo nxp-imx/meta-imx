@@ -32,5 +32,6 @@ PACKAGECONFIG:append = " pipewire aio vhost libusb \
                          ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'libvhost_user', '', d)} \
 "
 INSANE_SKIP:${PN}-ptest += "buildpaths"
+INSANE_SKIP:nativesdk-qemu-user-mips = "build-deps"
 
 # COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
