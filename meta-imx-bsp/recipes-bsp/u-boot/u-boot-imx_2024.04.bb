@@ -14,6 +14,8 @@ inherit uuu_bootloader_tag
 UUU_BOOTLOADER:mx8-generic-bsp = ""
 UUU_BOOTLOADER:mx9-generic-bsp = ""
 
+TOOLCHAIN_OPTIONS:append = " -Wno-error=implicit-function-declaration"
+
 do_deploy:append:mx8m-generic-bsp() {
     # Deploy u-boot-nodtb.bin and fsl-imx8m*-XX.dtb for mkimage to generate boot binary
     if [ -n "${UBOOT_CONFIG}" ]
