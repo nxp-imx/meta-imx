@@ -9,7 +9,7 @@ PROVIDES:remove:imx-nxp-bsp = "virtual/bootloader"
 SRC_URI:append:imx-nxp-bsp = " file://iMXStandaloneMmRpmb.dsc"
 
 EDK2_PLATFORM:imx-nxp-bsp = "MmStandaloneRpmb"
-EDK2_PLATFORM_DSC:imx-nxp-bsp = "../../iMXStandaloneMmRpmb.dsc"
+EDK2_PLATFORM_DSC:imx-nxp-bsp = "${UNPACKDIR}/iMXStandaloneMmRpmb.dsc"
 EDK2_BIN_NAME:imx-nxp-bsp = "BL32_AP_MM.fd"
 
 do_install:imx-nxp-bsp() {

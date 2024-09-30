@@ -112,7 +112,10 @@ do_install() {
 FILES:${PN} = "/firmware"
 SYSROOT_DIRS += "/firmware"
 # Skip QA check for relocations in .text of elf binaries
-INSANE_SKIP:${PN} = "textrel"
+INSANE_SKIP:${PN} += "textrel"
+# Build paths are currently embedded
+INSANE_SKIP:${PN} += "buildpaths"
+
 
 do_deploy() {
     # Copy the images to deploy directory
