@@ -1,5 +1,5 @@
 # Copyright (C) 2015 Freescale Semiconductor
-# Copyright 2017,2023 NXP
+# Copyright 2017,2023-2024 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "A tool to convert Android sparse images to raw images"
 LICENSE = "Apache-2.0"
@@ -23,3 +23,4 @@ do_install() {
 }
 
 INSANE_SKIP:${PN} = "ldflags"
+INSANE_SKIP:${PN}-dbg += "buildpaths"
