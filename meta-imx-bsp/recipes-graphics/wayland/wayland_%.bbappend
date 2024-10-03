@@ -1,7 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 # Add patches specific to i.MX 6 and 7 with GPU and set package arch accordingly
-SRC_URI += "${SRC_URI_IMXGPU_PATCHES}"
+#SRC_URI += "${SRC_URI_IMXGPU_PATCHES}"
 SRC_URI_IMXGPU_PATCHES                    = ""
 SRC_URI_IMXGPU_PATCHES:imxgpu:mx6-nxp-bsp = " \
     file://0101-Revert-client-Do-not-warn-about-attached-proxies-on-.patch \
@@ -15,5 +15,5 @@ SRC_URI_IMXGPU_PATCHES:imxgpu:mx6-nxp-bsp = " \
     file://0205-connection-avoid-calling-memcpy-on-NULL-0.patch"
 SRC_URI_IMXGPU_PATCHES:imxgpu:mx7-nxp-bsp = " \
     ${SRC_URI_IMXGPU_PATCHES:imxgpu:mx6-nxp-bsp}"
-PACKAGE_ARCH:imxgpu:mx6-nxp-bsp = "${MACHINE_SOCARCH}"
-PACKAGE_ARCH:imxgpu:mx7-nxp-bsp = "${MACHINE_SOCARCH}"
+#PACKAGE_ARCH:imxgpu:mx6-nxp-bsp = "${MACHINE_SOCARCH}"
+#PACKAGE_ARCH:imxgpu:mx7-nxp-bsp = "${MACHINE_SOCARCH}"
