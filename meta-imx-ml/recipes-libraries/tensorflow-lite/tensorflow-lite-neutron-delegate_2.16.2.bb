@@ -58,4 +58,7 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
+# Work around do_package_qa error
+INSANE_SKIP:${PN} += "buildpaths"
+
 COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
