@@ -17,19 +17,16 @@ Signed-off-by: Ke Feng <ke.feng@verisilicon.com>
  modules/glshared/glsFragOpInteractionCase.cpp | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/modules/glshared/glsFragOpInteractionCase.cpp b/modules/glshared/glsFragOpInteractionCase.cpp
-index 557539fd1..5adb60a6e 100644
---- a/modules/glshared/glsFragOpInteractionCase.cpp
-+++ b/modules/glshared/glsFragOpInteractionCase.cpp
-@@ -608,7 +608,7 @@ FragOpInteractionCase::IterateResult FragOpInteractionCase::iterate (void)
- 	}
+Index: git/modules/glshared/glsFragOpInteractionCase.cpp
+===================================================================
+--- git.orig/modules/glshared/glsFragOpInteractionCase.cpp
++++ git/modules/glshared/glsFragOpInteractionCase.cpp
+@@ -670,7 +670,7 @@ FragOpInteractionCase::IterateResult Fra
  
- 	{
--		const tcu::RGBA		threshold		= m_renderCtx.getRenderTarget().getPixelFormat().getColorThreshold()+tcu::RGBA(3,3,3,3);
-+		const tcu::RGBA		threshold		= m_renderCtx.getRenderTarget().getPixelFormat().getColorThreshold()+tcu::RGBA(4,4,4,4);
- 		const bool			compareOk		= tcu::bilinearCompare(m_testCtx.getLog(), "CompareResult", "Image comparison result", reference.getAccess(), rendered.getAccess(), threshold, tcu::COMPARE_LOG_RESULT);
- 
- 		if (!compareOk)
--- 
-2.25.1
-
+     {
+         const tcu::RGBA threshold =
+-            m_renderCtx.getRenderTarget().getPixelFormat().getColorThreshold() + tcu::RGBA(3, 3, 3, 3);
++            m_renderCtx.getRenderTarget().getPixelFormat().getColorThreshold() + tcu::RGBA(4, 4, 4, 4);
+         const bool compareOk =
+             tcu::bilinearCompare(m_testCtx.getLog(), "CompareResult", "Image comparison result", reference.getAccess(),
+                                  rendered.getAccess(), threshold, tcu::COMPARE_LOG_RESULT);
