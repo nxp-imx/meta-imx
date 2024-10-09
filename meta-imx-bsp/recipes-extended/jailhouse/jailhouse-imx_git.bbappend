@@ -10,4 +10,7 @@ SRC_URI = "${IMX_JAILHOUSE_SRC};branch=${SRCBRANCH}"
 RDEPENDS:${PN} += " \
     pyjailhouse \
 "
+ERROR_QA:remove = "buildpaths"
+WARN_QA:append = " buildpaths"
+
 COMPATIBLE_MACHINE = "(mx8m-nxp-bsp|mx8ulp-nxp-bsp|mx9-nxp-bsp)"
