@@ -1,7 +1,3 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-
-SRC_URI:append = " file://0001-spa-libcamera-fix-RGB-mappings.patch"
-
 # Disable pipewire-v4l2 on 32-bit to avoid Y2038 bug
 PACKAGECONFIG:append = " ${PACKAGECONFIG_PIPEWIRE_V4L2}"
 PACKAGECONFIG_PIPEWIRE_V4L2             = "pipewire-v4l2"
