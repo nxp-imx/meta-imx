@@ -1725,3 +1725,28 @@ Description and comments:  cross-platform 3D graphics and compute AP
 Origin of patches:         NXP (MIT)
 
 --------------------------------------------
+
+Package:                     obx-imx-ipc.git
+Version:                     6.1
+Outgoing License:            GPL-2.0
+License File:                LICENSE.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    SPI IPC utility (using spidev driver)
+Release Location:            https://github.com/nxp-imx/obx_imx_ipc -b v1.0
+Origin:                      NXP (GPL-2.0)
+
+--------------------------------------------
+
+Package:                     obx-statstool.git
+Version:                     6.1
+Outgoing License:            BSD-3-Clause
+License File:                LICENSE.txt
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    The command line interface tool should capture information about V2X, WiFi, Bluetooth, accelerometer, gps, temperature and ethernet switches SJA1110D and print it in user space
+Release Location:            https://github.com/nxp-imx/obx_statstool -b v1.0
+Origin:                      NXP (BSD-3-Clause)
+
+--------------------------------------------
+
