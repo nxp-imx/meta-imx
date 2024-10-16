@@ -15,19 +15,23 @@ require recipes-kernel/linux/linux-imx.inc
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
+DEPENDS += "coreutils-native"
+
 SRC_URI = "${LINUX_IMX_SRC}"
 LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
-SRCBRANCH = "lf-6.6.y"
+SRCBRANCH = "next"
 KBRANCH = "${SRCBRANCH}"
 LOCALVERSION = "-lts-next"
-SRCREV = "fcab0c7e9b503da586c00fdf686dbacd0a66f2a4"
+SRCREV = "6eb4d611a48780ea5f6ddcf87ab3e9161814bad2"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "6.6.52"
+LINUX_VERSION = "6.12.y"
+# FIXME: Drop this line once LINUX_VERSION is stable
+KERNEL_VERSION_SANITY_SKIP = "1"
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
 
@@ -88,8 +92,5 @@ do_merge_delta_config() {
     cp .config ${WORKDIR}/defconfig
 }
 addtask merge_delta_config before do_kernel_localversion after do_copy_defconfig
-
-# Work around do_package_qa error
-INSANE_SKIP:${PN}-src += "buildpaths"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
