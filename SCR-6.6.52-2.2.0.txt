@@ -304,8 +304,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-3.7.0
-Version:                     3.7.0
+Package:                     zephyr-demo-imx-3.7.5
+Version:                     3.7.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            BSP
@@ -1160,7 +1160,7 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.4.0-4d5a292
+Package:                     imx-vpu-hantro-daemon-1.4.0-6e6946f
 Version:                     1.4.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
@@ -1536,21 +1536,6 @@ Release Location:            https://github.com/nxp-imx/ethos-u-vela -b lf-6.6.5
 Origin:                      NXP (BSD-3-Clause)
                              ARM Limited ethos-u-vela v22.02 (Apache-2.0) - https://git.mlplatform.org/ml/ethos-u/ethos-u-vela.git
                              FlatBuffers (Apache-2.0) 
-
---------------------------------------------
-
-Package:                     nnshark.git
-Version:                     2023.11.imx
-Outgoing License:            LGPL-2.1 
-License File:                COPYING.LESSER
-Package Category:            MachineLearning
-Type of Content:             source
-Description and comments:    A GStreamer NNstreamer pipelines real-time profiling plugin
-Release Location:            https://github.com/nxp-imx/nnshark -b lf-6.6.52-2.2.0
-Origin:                      NXP (LGPL-2.1)
-                             GstShark (LGPL-2.1) - https://github.com/RidgeRun/gst-shark
-
-            Separate Component: Eclipse Tools (EPL-1.0) - These run separately on windows.
 
 --------------------------------------------
 
