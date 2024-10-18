@@ -11,7 +11,7 @@ SRC_URI = "${LINUX_IMX_SRC}"
 LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "next"
 LOCALVERSION = "-lts-${SRCBRANCH}"
-SRCREV = "9b08bb6e5d9011d425aa7cb62b63b703e5c70d05"
+SRCREV = "029ea4364ad14d740e268139ee48bc45d11adaf2"
 
 S = "${WORKDIR}/git"
 
