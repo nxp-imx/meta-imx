@@ -25,5 +25,3 @@ do_install:append () {
 inherit ${@oe.utils.conditional('VIRTUAL-RUNTIME_dev_manager', 'busybox-mdev', '', 'useradd', d)}
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM:${PN} = "--system ${TEE_GROUP_NAME}"
-
-FILES:${PN} += "${libdir}/* ${includedir}/*"
