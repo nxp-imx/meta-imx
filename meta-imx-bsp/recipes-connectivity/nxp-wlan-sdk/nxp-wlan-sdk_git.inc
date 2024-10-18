@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/git/LICENSE;md5=ab04ac0f249af12befccb94447
 SRCBRANCH = "master"
 MRVL_SRC ?= "git://github.com/nxp-imx/mwifiex.git;protocol=https"
 SRC_URI = "${MRVL_SRC};branch=${SRCBRANCH}"
-SRCREV = "b07af394d5b378d3fffde57b85a1b74167c16da0"
+SRCREV = "89c9f522e1a5bf80360274b8e92db4c08bb8c959"
 
 S = "${WORKDIR}/git"
 
