@@ -1,0 +1,39 @@
+From 2695d417f95b5004fc43c0e5a98037fd0642925e Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <shengjiu.wang@nxp.com>
+Date: Tue, 22 Oct 2024 10:59:26 +0800
+Subject: [PATCH] alsa-utils: alsactl: Enable '--no-lock' flag for service
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: Shengjiu Wang <shengjiu.wang@nxp.com>
+---
+ alsactl/alsa-restore.service.in | 4 ++--
+ alsactl/alsa-state.service.in   | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/alsactl/alsa-restore.service.in b/alsactl/alsa-restore.service.in
+index 80fd5fd..ca4e02f 100644
+--- a/alsactl/alsa-restore.service.in
++++ b/alsactl/alsa-restore.service.in
+@@ -11,5 +11,5 @@ ConditionPathExistsGlob=/dev/snd/control*
+ [Service]
+ Type=oneshot
+ RemainAfterExit=true
+-ExecStart=-@sbindir@/alsactl restore
+-ExecStop=-@sbindir@/alsactl store
++ExecStart=-@sbindir@/alsactl restore -L
++ExecStop=-@sbindir@/alsactl store -L
+diff --git a/alsactl/alsa-state.service.in b/alsactl/alsa-state.service.in
+index 5a8fe5e..6134457 100644
+--- a/alsactl/alsa-state.service.in
++++ b/alsactl/alsa-state.service.in
+@@ -9,5 +9,5 @@ ConditionPathExists=@daemonswitch@
+ 
+ [Service]
+ Type=simple
+-ExecStart=-@sbindir@/alsactl -s -n 19 -c rdaemon
+-ExecStop=-@sbindir@/alsactl -s kill save_and_quit
++ExecStart=-@sbindir@/alsactl -s -n 19 -c rdaemon -L
++ExecStop=-@sbindir@/alsactl -s kill save_and_quit -L
+-- 
+2.34.1
+
