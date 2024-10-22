@@ -13,10 +13,10 @@ SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH}"
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
 EL2GO_AGENT_SRCBRANCH ?= "master"
 
-SRCREV = "54bd67ea2f47d56af8db378497b1dde6394ac0d6"
+SRCREV = "${AUTOREV}"
 S = "${WORKDIR}/git"
 
-PV = "5.2.1+git${SRCPV}"
+PV = "6.0.0+git${SRCPV}"
 
 inherit cmake
 
