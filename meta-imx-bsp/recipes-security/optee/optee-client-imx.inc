@@ -11,5 +11,11 @@ inherit pkgconfig
 
 EXTRA_OECMAKE += "-DCFG_TEE_CLIENT_LOAD_PATH=${nonarch_base_libdir}"
 
+do_install:append () {
+    if [ "${libdir}" != "${nonarch_base_libdir}" ]; then
+        rm -rf ${D}${libdir}/systemd
+    fi
+}
+
 inherit ${@oe.utils.conditional('VIRTUAL-RUNTIME_dev_manager', 'busybox-mdev', '', 'useradd', d)}
 USERADD_PACKAGES = "${PN}"
