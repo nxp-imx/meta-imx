@@ -1,7 +1,7 @@
-From aba13d7970bbfae907d1cd0406e3d2eefc555f2d Mon Sep 17 00:00:00 2001
+From 18bda704c4e54bd947746729a0ddde672376c081 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Mon, 23 Oct 2023 15:21:53 +0800
-Subject: [PATCH] Disable dri for imx gpu
+Subject: [PATCH 2/7] Disable dri for imx gpu
 
 Upstream-Status: Inappropriate [i.MX-specific]
 
@@ -11,7 +11,7 @@ Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
  1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/content/gpu/BUILD.gn b/content/gpu/BUILD.gn
-index 93559f6092c7a..644903031ff95 100644
+index 098082510efab..9befdb8c01499 100644
 --- a/content/gpu/BUILD.gn
 +++ b/content/gpu/BUILD.gn
 @@ -8,6 +8,11 @@ import("//build/config/ui.gni")
@@ -26,7 +26,7 @@ index 93559f6092c7a..644903031ff95 100644
  # See //content/BUILD.gn for how this works.
  group("gpu") {
    visibility = [ "//content/*" ]  # This is an internal content API.
-@@ -140,7 +145,7 @@ target(link_target_type, "gpu_sources") {
+@@ -128,7 +133,7 @@ target(link_target_type, "gpu_sources") {
  
    # Use DRI on desktop Linux builds.
    if (current_cpu != "s390x" && current_cpu != "ppc64" && is_linux &&
@@ -36,5 +36,5 @@ index 93559f6092c7a..644903031ff95 100644
    }
  }
 -- 
-2.17.1
+2.34.1
 

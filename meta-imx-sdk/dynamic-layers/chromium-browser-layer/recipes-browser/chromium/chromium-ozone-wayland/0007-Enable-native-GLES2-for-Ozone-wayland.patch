@@ -1,0 +1,33 @@
+From 5dfac9d33977e7db161c04d8e701fb255f9a5710 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Fri, 6 Sep 2024 14:04:35 +0800
+Subject: [PATCH 7/7] Enable native GLES2 for Ozone wayland
+
+Our GPU not support ANGLE extension
+
+Revert "Remove native GLES2 implementation from Ozone."
+
+This reverts commit e10fc690c15674d0434e94a959e99ef510e4ceb0.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc b/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
+index d9fe372879061..20ca068659d6b 100644
+--- a/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
++++ b/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
+@@ -225,6 +225,7 @@ WaylandSurfaceFactory::GetAllowedGLImplementations() {
+     impls.emplace_back(gl::ANGLEImplementation::kOpenGLES);
+     impls.emplace_back(gl::ANGLEImplementation::kSwiftShader);
+     impls.emplace_back(gl::ANGLEImplementation::kVulkan);
++    impls.emplace_back(gl::kGLImplementationEGLGLES2);
+   }
+   return impls;
+ }
+-- 
+2.34.1
+

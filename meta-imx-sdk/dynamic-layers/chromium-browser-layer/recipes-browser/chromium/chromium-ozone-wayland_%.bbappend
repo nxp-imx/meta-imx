@@ -2,17 +2,12 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI:append:imx-nxp-bsp = " \
     file://0001-Fixed-chromium-flicker-with-g2d-renderer.patch \
-    file://0002-chromium-met-EGL-API-GetProcAddress-failures.patch \
-    file://0003-Disable-dri-for-imx-gpu.patch \
-    file://0004-Fix-chromium-build-failure.patch \
-    file://0005-Revert-ui-gbm_wrapper-Ensure-to-create-BOs-with-impo.patch \
-    file://0006-Fixed-chromium-crash-after-upgrading.patch \
-    file://0007-ToTLinux-Fix-some-narrowing-errors.patch \
-    file://0008-six-Update-vendored-copy-of-six-to-1.16.0.patch \
-    file://0009-Update-LegacyStatsCollector-to-conform-with.patch \
-    file://0010-Replace-imp.load_source-with-importlib-equivalent.patch \
-    file://0011-MGS-7765-Blacklist-MSAA-for-GPU-Raster-on-Vivante-GP.patch \
-    file://0012-LF-12406-Fixed-webgl-test-fail-for-GL_MAX_SAMPLES-ch.patch \
+    file://0002-Disable-dri-for-imx-gpu.patch \
+    file://0003-Fix-chromium-build-failure.patch \
+    file://0004-Fixed-chromium-crash-after-upgrading.patch \
+    file://0005-MGS-7765-Blacklist-MSAA-for-GPU-Raster-on-Vivante-GP.patch \
+    file://0006-LF-12406-Fixed-webgl-test-fail-for-GL_MAX_SAMPLES-ch.patch \
+    file://0007-Enable-native-GLES2-for-Ozone-wayland.patch \
 "
 VDA_PATCH_SET = " \
     file://0101-V4L2VDA-Switch-to-use-VDA-instead-of-direct-VideoDec.patch \

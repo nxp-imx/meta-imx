@@ -1,7 +1,7 @@
-From ff65d380391692f57de3f3517b2e92f79623add6 Mon Sep 17 00:00:00 2001
+From 7104f3eb76e3efa58764a53fe125583dc228a806 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Wed, 22 Nov 2023 16:52:59 +0800
-Subject: [PATCH] Fixed chromium crash after upgrading
+Subject: [PATCH 4/7] Fixed chromium crash after upgrading
 
 Native display fail to get GBM platform,
 add EGL_PLATFORM_GBM_KHR for WAYLAND_GBM.
@@ -31,23 +31,23 @@ index 8fd34e8c7d434..fa5e6a58544bc 100644
  
  }  // namespace ui
 diff --git a/ui/gfx/linux/gbm_wrapper.cc b/ui/gfx/linux/gbm_wrapper.cc
-index 6ed61c072ff9d..2c790d79d1c9e 100644
+index 7a1ae26444f36..415640e5825e3 100644
 --- a/ui/gfx/linux/gbm_wrapper.cc
 +++ b/ui/gfx/linux/gbm_wrapper.cc
-@@ -390,6 +390,8 @@ class Device final : public ui::GbmDevice {
+@@ -467,6 +467,8 @@ class Device final : public ui::GbmDevice {
    }
  #endif
  
-+ gbm_device* get() {return device_;};
++  gbm_device* get() {return device_.get();}
 +
   private:
-   const raw_ptr<gbm_device> device_;
- };
+   std::vector<uint64_t> GetFilteredModifiers(
+       uint32_t format,
 diff --git a/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc b/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
-index b3530699f56ba..f2d1c0e27de8d 100644
+index 4e725c5814969..0258548fd80b2 100644
 --- a/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
 +++ b/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
-@@ -349,8 +349,6 @@ GbmDevice* WaylandBufferManagerGpu::GetGbmDevice() {
+@@ -363,8 +363,6 @@ GbmDevice* WaylandBufferManagerGpu::GetGbmDevice() {
    if (!supports_dmabuf_ || (!gl::GLSurfaceEGL::GetGLDisplayEGL()
                                   ->ext->b_EGL_EXT_image_dma_buf_import &&
                              !use_fake_gbm_device_for_test_)) {
@@ -57,10 +57,10 @@ index b3530699f56ba..f2d1c0e27de8d 100644
  
    if (gbm_device_ || use_fake_gbm_device_for_test_)
 diff --git a/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc b/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
-index 7ed05c48f13e3..991118193b2c9 100644
+index bab048c4afac1..d9fe372879061 100644
 --- a/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
 +++ b/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
-@@ -164,6 +164,16 @@ scoped_refptr<gl::GLSurface> GLOzoneEGLWayland::CreateOffscreenGLSurface(
+@@ -172,6 +172,16 @@ scoped_refptr<gl::GLSurface> GLOzoneEGLWayland::CreateOffscreenGLSurface(
  }
  
  gl::EGLDisplayPlatform GLOzoneEGLWayland::GetNativeDisplay() {
@@ -74,9 +74,9 @@ index 7ed05c48f13e3..991118193b2c9 100644
 +    }
 +  }
 +#endif
-   if (connection_)
-     return gl::EGLDisplayPlatform(
-         reinterpret_cast<EGLNativeDisplayType>(connection_->display()));
+   if (connection_) {
+     return connection_->GetNativeDisplay();
+   }
 -- 
-2.17.1
+2.34.1
 

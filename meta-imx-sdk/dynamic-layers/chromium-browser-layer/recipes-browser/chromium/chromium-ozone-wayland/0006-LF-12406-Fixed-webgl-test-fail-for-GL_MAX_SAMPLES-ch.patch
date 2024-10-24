@@ -1,7 +1,8 @@
-From 28567067416e15649c9be2b67adff81b4fb21e3b Mon Sep 17 00:00:00 2001
+From dd7196aac0a632cf11bfe37be6832b6f11026aac Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Thu, 27 Jun 2024 14:43:08 +0800
-Subject: [PATCH] LF-12406: Fixed webgl test fail for GL_MAX_SAMPLES checking
+Subject: [PATCH 6/7] LF-12406: Fixed webgl test fail for GL_MAX_SAMPLES
+ checking
 
 Differences Between WebGL and OpenGL ES 3.0 about GL_MAX_SAMPLES.
 
@@ -17,10 +18,10 @@ Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
  1 file changed, 7 insertions(+), 5 deletions(-)
 
 diff --git a/gpu/command_buffer/service/gles2_cmd_decoder.cc b/gpu/command_buffer/service/gles2_cmd_decoder.cc
-index 4197db097b4b9..938112364d762 100644
+index 895524c824bdb..0132e2c712183 100644
 --- a/gpu/command_buffer/service/gles2_cmd_decoder.cc
 +++ b/gpu/command_buffer/service/gles2_cmd_decoder.cc
-@@ -8644,11 +8644,13 @@ bool GLES2DecoderImpl::ValidateRenderbufferStorageMultisample(
+@@ -8209,11 +8209,13 @@ bool GLES2DecoderImpl::ValidateRenderbufferStorageMultisample(
      }
    }
  
@@ -40,5 +41,5 @@ index 4197db097b4b9..938112364d762 100644
  
    if (width > renderbuffer_manager()->max_renderbuffer_size() ||
 -- 
-2.39.2.windows.1
+2.34.1
 
