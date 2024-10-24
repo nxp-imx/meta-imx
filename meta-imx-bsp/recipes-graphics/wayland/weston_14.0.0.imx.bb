@@ -162,13 +162,16 @@ LIC_FILES_CHKSUM +=       "file://LICENSE;md5=d79ee9e66bb0f95d3386a7acae780b70"
 
 DEFAULT_PREFERENCE = "-1"
 
+DEPENDS:append = " libdisplay-info"
+
 SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}/downloads/${BPN}-${PV}.tar.xz"
 SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
-SRC_URI += "file://0001-Revert-protocol-no-found-wayland-scanner-with-Yocto-.patch"
 SRCBRANCH = "weston-imx-14.0.0"
 SRCREV = "69c49553d194d6f4c64f91df56aefa7b66131396" 
 S = "${WORKDIR}/git"
+
+SRC_URI:remove = "file://0001-libweston-tools-Include-libgen.h-for-basename-signat.patch"
 
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
@@ -177,6 +180,9 @@ PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D}"
 PACKAGECONFIG_G2D              ??= ""
 PACKAGECONFIG_G2D:imxgpu2d     ??= "imxg2d"
 PACKAGECONFIG_G2D:mx93-nxp-bsp ??= "imxg2d"
+
+# Remove no longer supported colord
+PACKAGECONFIG[colord] = ""
 
 # Weston with i.MX G2D renderer
 PACKAGECONFIG[imxg2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d"
