@@ -10,6 +10,8 @@ RPROVIDES_OPENCL               = "opencl-icd-loader-dev"
 RPROVIDES_OPENCL:mx7-nxp-bsp   = ""
 RPROVIDES_OPENCL:mx8mm-nxp-bsp = ""
 
+FILES:libgal-imx-dev:remove = "${includedir}/HAL"
+
 ### Section 2: Changes to be kept in meta-imx ###
 
 PACKAGECONFIG ?= "valgrind"
