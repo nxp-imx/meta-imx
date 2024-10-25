@@ -31,8 +31,8 @@ VDA_PATCH_SET = " \
     file://0119-VideoDecoderPipeline-Get-V4L2VideoDecoder-supported-.patch \
     file://0120-V4L2VideoDecoder-Fix-amphion-cannot-streamoff-after-.patch \
 "
-SRC_URI_DISABLED_PATCHES:append:mx8-nxp-bsp = " ${VDA_PATCH_SET}"
-SRC_URI_DISABLED_PATCHES:append:mx95-nxp-bsp = " ${VDA_PATCH_SET}"
+SRC_URI:append:mx8-nxp-bsp = " ${VDA_PATCH_SET}"
+SRC_URI:append:mx95-nxp-bsp = " ${VDA_PATCH_SET}"
 
 GN_ARGS_DISABLE_GBM             = ""
 GN_ARGS_DISABLE_GBM:mx6-nxp-bsp = "use_system_minigbm=false use_wayland_gbm=false"
