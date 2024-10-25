@@ -18,7 +18,7 @@ VDA_PATCH_SET = " \
     file://0106-V4L2VideoDecoder-Add-function-IsMultiQueue-for-S_FMT.patch \
     file://0107-V4L2VideoDecoder-Use-correct-plane-size-and-bytesuse.patch \
     file://0108-V4L2VideoDecoder-Add-hevc-format-support.patch \
-    file://0109-display-Add-fps-in-SkiaOutputSurfaceImplOnGpu-by-VLO \
+    file://0109-display-Add-fps-in-SkiaOutputSurfaceImplOnGpu-by-VLO.patch \
     file://0110-V4L2VideoDecoder-Comment-some-unused-ioctl.patch \
     file://0111-V4L2VideoDecoder-Add-V4L2_PIX_FMT_NV12M_8L128-format.patch \
     file://0112-V4L2VideoDecoder-Support-tile-to-linear-transform-fo.patch \
