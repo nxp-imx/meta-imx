@@ -1,0 +1,55 @@
+From ce372a56ed44ddd6cda68080e9594e6d02d2279a Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Fri, 13 Sep 2024 23:21:51 +0900
+Subject: [PATCH 16/19] VideoDecoderPipeline: Add resolution change support
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ media/gpu/chromeos/video_decoder_pipeline.cc | 31 ++++++++++----------
+ 1 file changed, 16 insertions(+), 15 deletions(-)
+
+diff --git a/media/gpu/chromeos/video_decoder_pipeline.cc b/media/gpu/chromeos/video_decoder_pipeline.cc
+index a92b0a297e22d..7cf16cc9faa77 100644
+--- a/media/gpu/chromeos/video_decoder_pipeline.cc
++++ b/media/gpu/chromeos/video_decoder_pipeline.cc
+@@ -647,21 +647,22 @@ void VideoDecoderPipeline::InitializeTask(const VideoDecoderConfig& config,
+           &OOPVideoDecoder::GetOriginalFrame,
+           base::Unretained(static_cast<OOPVideoDecoder*>(decoder_.get())));
+     } else {
+-      CHECK(main_frame_pool_);
+-      PlatformVideoFramePool* platform_video_frame_pool =
+-          main_frame_pool_->AsPlatformVideoFramePool();
+-      // The only |frame_converter_| that needs the GetOriginalFrameCB callback
+-      // is the MailboxVideoFrameConverter. When it is used, the
+-      // |main_frame_pool_| should always be a PlatformVideoFramePool.
+-      CHECK(platform_video_frame_pool);
+-
+-      // Note: base::Unretained() is safe because either a) the
+-      // |main_frame_pool_| outlives |frame_converter_| or b) we call
+-      // |frame_converter_|->set_get_original_frame_cb() with a null
+-      // GetOriginalFrameCB before destroying |main_frame_pool_|.
+-      get_original_frame_cb =
+-          base::BindRepeating(&PlatformVideoFramePool::GetOriginalFrame,
+-                              base::Unretained(platform_video_frame_pool));
++      if (main_frame_pool_) {
++        PlatformVideoFramePool* platform_video_frame_pool =
++            main_frame_pool_->AsPlatformVideoFramePool();
++        // The only |frame_converter_| that needs the GetOriginalFrameCB callback
++        // is the MailboxVideoFrameConverter. When it is used, the
++        // |main_frame_pool_| should always be a PlatformVideoFramePool.
++        CHECK(platform_video_frame_pool);
++
++        // Note: base::Unretained() is safe because either a) the
++        // |main_frame_pool_| outlives |frame_converter_| or b) we call
++        // |frame_converter_|->set_get_original_frame_cb() with a null
++        // GetOriginalFrameCB before destroying |main_frame_pool_|.
++        get_original_frame_cb =
++            base::BindRepeating(&PlatformVideoFramePool::GetOriginalFrame,
++                                base::Unretained(platform_video_frame_pool));
++      }
+     }
+ 
+     frame_converter_->set_get_original_frame_cb(
+-- 
+2.34.1
+

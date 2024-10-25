@@ -10,26 +10,26 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0007-Enable-native-GLES2-for-Ozone-wayland.patch \
 "
 VDA_PATCH_SET = " \
-    file://0101-V4L2VDA-Switch-to-use-VDA-instead-of-direct-VideoDec.patch \
-    file://0102-GenericV4L2Device-Correct-v4l2-decoder-device-path.patch \
-    file://0103-V4L2VDA-Add-macro-use_linux_v4l2.patch \
-    file://0104-V4L2VDA-Create-single-multi-plane-queues.patch \
-    file://0105-V4L2Buffer-Allocate-correct-v4l2-buffers-for-queues.patch \
-    file://0106-V4L2VDA-Create-videoframe-according-to-v4l2buffer.patch \
-    file://0107-V4L2VDA-Add-function-IsMultiQueue-for-S_FMT-and-G_FM.patch \
-    file://0108-V4L2VDA-Use-correct-size-to-allocate-CAPTURE-buffer.patch \
-    file://0109-V4L2VDA-Use-correct-plane-size-and-bytesused.patch \
-    file://0110-V4L2VDA-Add-hevc-format-support.patch \
-    file://0111-V4L2VDA-fix-vp9-crash-caused-by-DequeueResolutionCha.patch \
-    file://0112-V4L2VDA-Add-fps-in-SkiaOutputSurfaceImplOnGpu-by-VLO.patch \
-    file://0113-V4L2VDA-Comment-some-unused-ioctl.patch \
-    file://0114-V4L2VDA-Set-OUTPUT-format-with-parsed-resolution-for.patch \
-    file://0115-V4L2VDA-Add-V4L2_PIX_FMT_NV12M_8L128-format-for-amph.patch \
-    file://0116-V4L2VDA-Support-tile-to-linear-transform-for-amphion.patch \
-    file://0117-V4L2VDA-Enlarge-input-buffer-count-to-16.patch \
-    file://0118-V4L2VDA-Use-dlopen-to-dynamically-use-g2d-api.patch \
-    file://0119-V4L2VDA-Add-back-legacy-VideoDecoderType-kVda.patch \
-    file://0120-V4L2Buffer-Add-support-for-imx95.patch \
+    file://0101-V4L2Device-Correct-v4l2-codec-device-path.patch \
+    file://0102-V4L2VideoDecoder-Add-macro-use_linux_v4l2.patch \
+    file://0103-V4L2VideoDecoder-Create-single-multi-plane-queues.patch \
+    file://0104-V4L2Buffer-Allocate-correct-v4l2-buffers-for-queues.patch \
+    file://0105-V4L2VideoDecoder-Create-videoframe-according-to-v4l2.patch \
+    file://0106-V4L2VideoDecoder-Add-function-IsMultiQueue-for-S_FMT.patch \
+    file://0107-V4L2VideoDecoder-Use-correct-plane-size-and-bytesuse.patch \
+    file://0108-V4L2VideoDecoder-Add-hevc-format-support.patch \
+    file://0109-display-Add-fps-in-SkiaOutputSurfaceImplOnGpu-by-VLO \
+    file://0110-V4L2VideoDecoder-Comment-some-unused-ioctl.patch \
+    file://0111-V4L2VideoDecoder-Add-V4L2_PIX_FMT_NV12M_8L128-format.patch \
+    file://0112-V4L2VideoDecoder-Support-tile-to-linear-transform-fo.patch \
+    file://0113-V4L2VideoDecoder-Use-dlopen-to-dynamically-use-g2d-a.patch \
+    file://0114-V4L2VideoDecoderBackend-Create-queue-according-to-qu.patch \
+    file://0115-V4L2VideoDecoder-support-gpu-import-NV12-format.patch \
+    file://0116-VideoDecoderPipeline-Add-resolution-change-support.patch \
+    file://0117-V4L2StatefulVideoDecoderBackend-Enlarge-input-buffer.patch \
+    file://0118-V4L2VideoDecoder-Fix-amphion-report-size-mismatch.patch \
+    file://0119-VideoDecoderPipeline-Get-V4L2VideoDecoder-supported-.patch \
+    file://0120-V4L2VideoDecoder-Fix-amphion-cannot-streamoff-after-.patch \
 "
 SRC_URI_DISABLED_PATCHES:append:mx8-nxp-bsp = " ${VDA_PATCH_SET}"
 SRC_URI_DISABLED_PATCHES:append:mx95-nxp-bsp = " ${VDA_PATCH_SET}"

@@ -1,69 +1,19 @@
-From 65d0565e830b6ca00347d38a54521a1c7e4febf9 Mon Sep 17 00:00:00 2001
+From c175fe907f93f5db9327ca1030820cdba8df137c Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Wed, 1 Nov 2023 23:20:47 +0900
-Subject: [PATCH 04/19] V4L2VDA: Create single/multi plane queues
+Date: Fri, 13 Sep 2024 22:36:04 +0900
+Subject: [PATCH 03/19] V4L2VideoDecoder: Create single/multi plane queues
 
 Decide to create single-plane queue or multi-plane queue according to
 the capabilities returned by VIDIOC_QUERYCAP.
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- .../legacy/v4l2_video_decode_accelerator.cc   | 28 +++++++++++++-----
- media/gpu/v4l2/v4l2_device.cc                 | 29 ++++++++++++++-----
- 2 files changed, 42 insertions(+), 15 deletions(-)
+ media/gpu/v4l2/v4l2_device.cc        | 29 ++++++++++++++++++++--------
+ media/gpu/v4l2/v4l2_video_decoder.cc | 27 ++++++++++++++++++--------
+ 2 files changed, 40 insertions(+), 16 deletions(-)
 
-diff --git a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
-index 99adb3de8f367..a1b6fce057aea 100644
---- a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
-+++ b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
-@@ -327,24 +327,38 @@ bool V4L2VideoDecodeAccelerator::CheckConfig(const Config& config) {
- 
-   // Capabilities check.
-   struct v4l2_capability caps;
--  const __u32 kCapsRequired = V4L2_CAP_VIDEO_M2M_MPLANE | V4L2_CAP_STREAMING;
--  IOCTL_OR_ERROR_RETURN_FALSE(VIDIOC_QUERYCAP, &caps);
--  if ((caps.capabilities & kCapsRequired) != kCapsRequired) {
--    VLOGF(1) << "ioctl() failed: VIDIOC_QUERYCAP"
--             << ", caps check failed: 0x" << std::hex << caps.capabilities;
-+  unsigned int device_caps;
-+  enum v4l2_buf_type input_type, output_type;
-+  if (device_->Ioctl(VIDIOC_QUERYCAP, &caps) != 0) {
-+    VPLOGF(1) << "ioctl() failed: VIDIOC_QUERYCAP"
-+              << ", caps check failed: 0x" << std::hex << caps.capabilities;
-     return false;
-   }
- 
-+  if (caps.capabilities & V4L2_CAP_DEVICE_CAPS)
-+    device_caps = caps.device_caps;
-+  else
-+    device_caps = caps.capabilities;
-+
-+  if (device_caps & (V4L2_CAP_VIDEO_OUTPUT_MPLANE | V4L2_CAP_VIDEO_M2M_MPLANE))
-+    input_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
-+  else
-+    input_type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
-+  if (device_caps & (V4L2_CAP_VIDEO_CAPTURE_MPLANE | V4L2_CAP_VIDEO_M2M_MPLANE))
-+    output_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
-+  else
-+    output_type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-+
-   workarounds_ =
-       CreateV4L2StatefulWorkarounds(V4L2Device::Type::kDecoder, config.profile);
- 
-   output_mode_ = config.output_mode;
- 
--  input_queue_ = device_->GetQueue(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
-+  input_queue_ = device_->GetQueue(input_type);
-   if (!input_queue_)
-     return false;
- 
--  output_queue_ = device_->GetQueue(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
-+  output_queue_ = device_->GetQueue(output_type);
-   if (!output_queue_)
-     return false;
- 
 diff --git a/media/gpu/v4l2/v4l2_device.cc b/media/gpu/v4l2/v4l2_device.cc
-index 40e463cbed435..c06a57a6f0df7 100644
+index ebbf240a3c5e7..c04873fe2ae84 100644
 --- a/media/gpu/v4l2/v4l2_device.cc
 +++ b/media/gpu/v4l2/v4l2_device.cc
 @@ -92,6 +92,8 @@ scoped_refptr<V4L2Queue> V4L2Device::GetQueue(enum v4l2_buf_type type) {
@@ -75,7 +25,7 @@ index 40e463cbed435..c06a57a6f0df7 100644
        break;
      default:
        VLOGF(1) << "Unsupported V4L2 queue type: " << type;
-@@ -598,9 +600,17 @@ V4L2Device::EnumerateSupportedDecodeProfiles(
+@@ -538,9 +540,17 @@ V4L2Device::EnumerateSupportedDecodeProfiles(
      const std::vector<uint32_t>& pixelformats) {
    VideoDecodeAccelerator::SupportedProfiles profiles;
  
@@ -95,7 +45,7 @@ index 40e463cbed435..c06a57a6f0df7 100644
  
    for (uint32_t pixelformat : v4l2_codecs_as_pix_fmts) {
      if (!base::Contains(pixelformats, pixelformat)) {
-@@ -914,27 +924,28 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -859,27 +869,28 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
    static const std::string kJpegEncoderDevicePattern = "/dev/jpeg-enc";
  
    std::string device_pattern;
@@ -130,15 +80,15 @@ index 40e463cbed435..c06a57a6f0df7 100644
        break;
    }
  
-@@ -954,6 +965,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -899,6 +910,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
  
    Devices devices;
    for (const auto& path : candidate_paths) {
 +  for (const auto& buf_type : candidate_buf_types){
-     if (!OpenDevicePath(path, type)) {
+     if (!OpenDevicePath(path)) {
        continue;
      }
-@@ -967,6 +979,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -912,6 +924,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
  
      CloseDevice();
    }
@@ -146,6 +96,47 @@ index 40e463cbed435..c06a57a6f0df7 100644
  
    DCHECK_EQ(devices_by_type_.count(type), 0u);
    devices_by_type_[type] = devices;
+diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
+index 5765761592344..857576ae56d6a 100644
+--- a/media/gpu/v4l2/v4l2_video_decoder.cc
++++ b/media/gpu/v4l2/v4l2_video_decoder.cc
+@@ -454,17 +454,28 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
+ #endif  // BUILDFLAG(USE_CHROMEOS_PROTECTED_MEDIA)
+ 
+   struct v4l2_capability caps;
+-  const __u32 kCapsRequired = V4L2_CAP_VIDEO_M2M_MPLANE | V4L2_CAP_STREAMING;
+-  if (device_->Ioctl(VIDIOC_QUERYCAP, &caps) ||
+-      (caps.capabilities & kCapsRequired) != kCapsRequired) {
+-    VLOGF(1) << "ioctl() failed: VIDIOC_QUERYCAP, "
+-             << "caps check failed: 0x" << std::hex << caps.capabilities;
++  unsigned int device_caps;
++  enum v4l2_buf_type input_type, output_type;
++  if (device_->Ioctl(VIDIOC_QUERYCAP, &caps) != 0)
+     return V4L2Status::Codes::kFailedFileCapabilitiesCheck;
+-  }
++
++  if (caps.capabilities & V4L2_CAP_DEVICE_CAPS)
++    device_caps = caps.device_caps;
++  else
++    device_caps = caps.capabilities;
++
++  if (device_caps & (V4L2_CAP_VIDEO_OUTPUT_MPLANE | V4L2_CAP_VIDEO_M2M_MPLANE))
++    input_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
++  else
++    input_type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
++  if (device_caps & (V4L2_CAP_VIDEO_CAPTURE_MPLANE | V4L2_CAP_VIDEO_M2M_MPLANE))
++    output_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
++  else
++    output_type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+ 
+   // Create Input/Output V4L2Queue
+-  input_queue_ = device_->GetQueue(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
+-  output_queue_ = device_->GetQueue(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
++  input_queue_ = device_->GetQueue(input_type);
++  output_queue_ = device_->GetQueue(output_type);
+   if (!input_queue_ || !output_queue_) {
+     VLOGF(1) << "Failed to create V4L2 queue.";
+     return V4L2Status::Codes::kFailedResourceAllocation;
 -- 
 2.34.1
 

@@ -1,0 +1,52 @@
+From f68295ed3d0a313948d8693e169933e3450156fb Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Fri, 13 Sep 2024 23:19:48 +0900
+Subject: [PATCH 15/19] V4L2VideoDecoder: support gpu import NV12 format
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ media/mojo/services/gpu_mojo_media_client_linux.cc | 6 ++++++
+ ui/gfx/linux/gbm_wrapper.cc                        | 3 ++-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/media/mojo/services/gpu_mojo_media_client_linux.cc b/media/mojo/services/gpu_mojo_media_client_linux.cc
+index 6c8dcffca0505..f0be46c786975 100644
+--- a/media/mojo/services/gpu_mojo_media_client_linux.cc
++++ b/media/mojo/services/gpu_mojo_media_client_linux.cc
+@@ -58,6 +58,12 @@ std::vector<Fourcc> GetPreferredRenderableFourccs(
+   }
+ #endif  // BUILDFLAG(ENABLE_VULKAN)
+ 
++  // HACK: Support for zero-copy NV12 textures preferentially.
++  if (gpu_preferences.gr_context_type == gpu::GrContextType::kGL) {
++    renderable_fourccs.emplace_back(Fourcc::NV12);
++    renderable_fourccs.emplace_back(Fourcc::NA12);
++  }
++
+   // Support 1-copy argb textures.
+   renderable_fourccs.emplace_back(Fourcc::AR24);
+ 
+diff --git a/ui/gfx/linux/gbm_wrapper.cc b/ui/gfx/linux/gbm_wrapper.cc
+index 7a1ae26444f36..b5a1f5776b90a 100644
+--- a/ui/gfx/linux/gbm_wrapper.cc
++++ b/ui/gfx/linux/gbm_wrapper.cc
+@@ -32,6 +32,7 @@
+ #include <dlfcn.h>
+ #include <fcntl.h>
+ #include <xf86drm.h>
++#include <libdrm/drm_fourcc.h>
+ 
+ #include "base/strings/stringize_macros.h"
+ #endif
+@@ -414,7 +415,7 @@ class Device final : public ui::GbmDevice {
+     fd_data.height = size.height();
+     fd_data.format = format;
+     fd_data.num_fds = handle.planes.size();
+-    fd_data.modifier = handle.modifier;
++    fd_data.modifier = DRM_FORMAT_MOD_LINEAR;
+ 
+     // One specific situation where we expect 4 planes is for Intel media
+     // compressed buffers: the number of planes for such buffers and format
+-- 
+2.34.1
+

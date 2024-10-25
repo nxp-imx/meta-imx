@@ -1,7 +1,7 @@
-From 27df324953c16b75a384b7a0ebec4e2b4cf58295 Mon Sep 17 00:00:00 2001
+From 44d6b2c7ec8fc21cb3151688008384bf5fad39dc Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Thu, 2 Nov 2023 17:41:28 +0900
-Subject: [PATCH 18/19] V4L2VDA: Use dlopen to dynamically use g2d api
+Date: Fri, 13 Sep 2024 23:13:36 +0900
+Subject: [PATCH 13/19] V4L2VideoDecoder: Use dlopen to dynamically use g2d api
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -10,10 +10,10 @@ Upstream-Status: Inappropriate [NXP specific]
  2 files changed, 181 insertions(+), 3 deletions(-)
 
 diff --git a/media/gpu/v4l2/BUILD.gn b/media/gpu/v4l2/BUILD.gn
-index 0e4e85232b9a2..50b3beecc090e 100644
+index 836ee0bc7504c..0aa466ba9cec5 100644
 --- a/media/gpu/v4l2/BUILD.gn
 +++ b/media/gpu/v4l2/BUILD.gn
-@@ -96,7 +96,6 @@ source_set("v4l2") {
+@@ -92,7 +92,6 @@ source_set("v4l2") {
      "EGL",
      "GLESv2",
    ]
@@ -22,10 +22,10 @@ index 0e4e85232b9a2..50b3beecc090e 100644
    configs += [ "//third_party/libyuv:libyuv_config" ]
  
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index fa7c7daaa1e46..6ed9ca4309798 100644
+index 945e7a7df9b93..9fc55cfd59459 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
-@@ -18,10 +18,11 @@
+@@ -20,10 +20,11 @@
  #include "media/gpu/chromeos/platform_video_frame_utils.h"
  #include "media/gpu/macros.h"
  
@@ -39,7 +39,7 @@ index fa7c7daaa1e46..6ed9ca4309798 100644
  
  namespace media {
  
-@@ -153,6 +154,159 @@ std::vector<base::ScopedFD> GetDmabufsForV4L2Buffer(
+@@ -160,6 +161,159 @@ std::vector<base::ScopedFD> GetDmabufsForV4L2Buffer(
  
  }  // namespace
  
@@ -199,7 +199,7 @@ index fa7c7daaa1e46..6ed9ca4309798 100644
  V4L2ExtCtrl::V4L2ExtCtrl(uint32_t id) {
    memset(&ctrl, 0, sizeof(ctrl));
    ctrl.id = id;
-@@ -1168,6 +1322,31 @@ V4L2Queue::V4L2Queue(const IoctlAsCallback& ioctl_cb,
+@@ -1245,6 +1399,31 @@ V4L2Queue::V4L2Queue(const IoctlAsCallback& ioctl_cb,
        << "This queue does " << (supports_requests_ ? "" : "not")
        << " support requests.";
  

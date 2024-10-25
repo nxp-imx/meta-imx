@@ -1,7 +1,7 @@
-From 4467bd6a54593357a593a17ea9703395641c4eba Mon Sep 17 00:00:00 2001
+From ac51e4353acbe44ec8beef3f36715faa9568231c Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Thu, 2 Nov 2023 11:26:12 +0900
-Subject: [PATCH 12/19] V4L2VDA: Add fps in SkiaOutputSurfaceImplOnGpu by
+Date: Fri, 11 Oct 2024 18:16:14 +0900
+Subject: [PATCH 09/19] display: Add fps in SkiaOutputSurfaceImplOnGpu by
  VLOG(1)
 
 Upstream-Status: Inappropriate [NXP specific]
@@ -11,18 +11,18 @@ Upstream-Status: Inappropriate [NXP specific]
  2 files changed, 19 insertions(+)
 
 diff --git a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc
-index 2d82ab0f062c9..db11a0b994073 100644
+index 1ad55916b42a5..227173cd9bc76 100644
 --- a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc
 +++ b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc
-@@ -8,6 +8,7 @@
- #include <string>
+@@ -15,6 +15,7 @@
+ #include <string_view>
  #include <utility>
  #include <vector>
 +#include <sys/time.h>
  
  #include "base/debug/crash_logging.h"
  #include "base/debug/dump_without_crashing.h"
-@@ -131,6 +132,15 @@
+@@ -138,6 +139,15 @@
  #include "components/viz/service/display_embedder/output_presenter_fuchsia.h"
  #endif
  
@@ -38,7 +38,7 @@ index 2d82ab0f062c9..db11a0b994073 100644
  namespace viz {
  
  namespace {
-@@ -330,6 +340,7 @@ SkiaOutputSurfaceImplOnGpu::SkiaOutputSurfaceImplOnGpu(
+@@ -341,6 +351,7 @@ SkiaOutputSurfaceImplOnGpu::SkiaOutputSurfaceImplOnGpu(
        async_read_result_lock_(base::MakeRefCounted<AsyncReadResultLock>()) {
    DCHECK_CALLED_ON_VALID_THREAD(thread_checker_);
  
@@ -46,7 +46,7 @@ index 2d82ab0f062c9..db11a0b994073 100644
    weak_ptr_ = weak_ptr_factory_.GetWeakPtr();
    buffer_presented_callback_ = CreateSafeRepeatingCallback(
        weak_ptr_, std::move(buffer_presented_callback));
-@@ -599,7 +610,13 @@ void SkiaOutputSurfaceImplOnGpu::SwapBuffers(OutputSurfaceFrame frame) {
+@@ -595,7 +606,13 @@ void SkiaOutputSurfaceImplOnGpu::SwapBuffers(OutputSurfaceFrame frame) {
    TRACE_EVENT0("viz", "SkiaOutputSurfaceImplOnGpu::SwapBuffers");
    DCHECK_CALLED_ON_VALID_THREAD(thread_checker_);
  
@@ -59,23 +59,23 @@ index 2d82ab0f062c9..db11a0b994073 100644
 +  VLOG(1) << "total showed " << swap_buffers_number_ << " frames, total time " << (stop_time - start_time) << " ms, fps is " << swap_buffers_number_*1e6/(stop_time - start_time) << std::endl;
  }
  
- void SkiaOutputSurfaceImplOnGpu::EnsureMinNumberOfBuffers(int n) {
-@@ -1888,6 +1905,7 @@ bool SkiaOutputSurfaceImplOnGpu::Initialize() {
-   if (context_state_)
-     context_state_->AddContextLostObserver(this);
+ void SkiaOutputSurfaceImplOnGpu::SetDependenciesResolvedTimings(
+@@ -1938,6 +1955,7 @@ bool SkiaOutputSurfaceImplOnGpu::Initialize() {
+   // allow neither to be set in the offscreen case.
+   DCHECK(!(gl_surface_ != nullptr && presenter_ != nullptr));
  
 +  start_time = NowMicros();
    return true;
  }
  
 diff --git a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h
-index 8c13e3f5855ce..e75d4e5b74af1 100644
+index b82de4041e78a..532866bc30297 100644
 --- a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h
 +++ b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h
-@@ -500,6 +500,7 @@ class SkiaOutputSurfaceImplOnGpu
+@@ -498,6 +498,7 @@ class SkiaOutputSurfaceImplOnGpu
    ScheduleGpuTaskCallback schedule_gpu_task_;
-   GpuVSyncCallback gpu_vsync_callback_;
    AddChildWindowToBrowserCallback add_child_window_to_browser_callback_;
+   SkiaOutputDevice::ReleaseOverlaysCallback release_overlays_callback_;
 +  size_t swap_buffers_number_;
  
    // ImplOnGpu::CopyOutput can create SharedImages via ImplOnGpu's

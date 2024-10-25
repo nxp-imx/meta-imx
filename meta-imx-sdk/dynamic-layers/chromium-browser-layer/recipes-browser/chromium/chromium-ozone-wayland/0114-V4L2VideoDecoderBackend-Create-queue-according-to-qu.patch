@@ -1,0 +1,51 @@
+From c8b82b832fc6c34ff27f73739c60472c15ca7380 Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Fri, 13 Sep 2024 23:15:59 +0900
+Subject: [PATCH 14/19] V4L2VideoDecoderBackend: Create queue according to
+ queried caps capabilities
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ media/gpu/v4l2/v4l2_video_decoder_backend.cc | 26 ++++++++++++++++++--
+ 1 file changed, 24 insertions(+), 2 deletions(-)
+
+diff --git a/media/gpu/v4l2/v4l2_video_decoder_backend.cc b/media/gpu/v4l2/v4l2_video_decoder_backend.cc
+index ff08c18100e0c..0e5747a5a83e7 100644
+--- a/media/gpu/v4l2/v4l2_video_decoder_backend.cc
++++ b/media/gpu/v4l2/v4l2_video_decoder_backend.cc
+@@ -14,8 +14,30 @@ V4L2VideoDecoderBackend::V4L2VideoDecoderBackend(
+     Client* const client,
+     scoped_refptr<V4L2Device> device)
+     : client_(client), device_(std::move(device)) {
+-  input_queue_ = device_->GetQueue(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
+-  output_queue_ = device_->GetQueue(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
++  struct v4l2_capability caps;
++  unsigned int device_caps;
++  enum v4l2_buf_type input_type, output_type;
++  if (device_->Ioctl(VIDIOC_QUERYCAP, &caps) != 0) {
++    LOG(ERROR) << "QUERYCAP failed";
++  }
++
++  if (caps.capabilities & V4L2_CAP_DEVICE_CAPS)
++    device_caps = caps.device_caps;
++  else
++    device_caps = caps.capabilities;
++
++  if (device_caps & (V4L2_CAP_VIDEO_OUTPUT_MPLANE | V4L2_CAP_VIDEO_M2M_MPLANE))
++    input_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
++  else
++    input_type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
++  if (device_caps & (V4L2_CAP_VIDEO_CAPTURE_MPLANE | V4L2_CAP_VIDEO_M2M_MPLANE))
++    output_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
++  else
++    output_type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
++
++  input_queue_ = device_->GetQueue(input_type);
++  output_queue_ = device_->GetQueue(output_type);
++
+   if (!input_queue_ || !output_queue_) {
+     VLOGF(1) << "Failed to get V4L2 queue. This should not happen since the "
+              << "queues are supposed to be initialized when we are called.";
+-- 
+2.34.1
+

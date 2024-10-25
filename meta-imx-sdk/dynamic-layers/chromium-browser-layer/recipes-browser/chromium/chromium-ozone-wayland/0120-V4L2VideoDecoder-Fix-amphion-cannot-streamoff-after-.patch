@@ -1,0 +1,61 @@
+From 2cf45a6abd796448126d1c1cc6f13e5e347d8c05 Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Wed, 23 Oct 2024 19:08:46 +0900
+Subject: [PATCH] V4L2VideoDecoder: Fix amphion cannot streamoff after eos
+
+Amphion vpu driver directly return EPIPE without dequeuing extra
+empty buffer when eos. Need to streamoff correctly for this case.
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ .../gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc  | 6 ++++--
+ media/gpu/v4l2/v4l2_video_decoder.cc                        | 2 +-
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc b/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc
+index 7d35c58d4cae8..4bd6ac7fe1fcf 100644
+--- a/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc
++++ b/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc
+@@ -4,6 +4,7 @@
+ 
+ #include "media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.h"
+ 
++#include <errno.h>
+ #include <cstddef>
+ #include <memory>
+ #include <optional>
+@@ -438,7 +439,7 @@ void V4L2StatefulVideoDecoderBackend::OnOutputBufferDequeued(
+   DVLOGF(3);
+ 
+   // Zero-bytes buffers are returned as part of a flush and can be dismissed.
+-  if (buffer->GetPlaneBytesUsed(0) > 0) {
++  if (buffer && buffer->GetPlaneBytesUsed(0) > 0) {
+     // TODO(mcasas): Consider using TimeValToTimeDelta().
+     const struct timeval timeval = buffer->GetTimeStamp();
+     const struct timespec timespec = {
+@@ -489,7 +490,8 @@ void V4L2StatefulVideoDecoderBackend::OnOutputBufferDequeued(
+   // The order here is important! A flush event may come after a resolution
+   // change event (but not the opposite), so we must make sure both events
+   // are processed in the correct order.
+-  if (buffer->IsLast()){
++  if (errno == EPIPE || buffer->IsLast()){
++    VLOGF(3) << "Got buffer with last flag or got EPIPE";
+     // Check that we don't have a resolution change event pending. If we do
+     // then this LAST buffer was related to it.
+     ProcessEventQueue();
+diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
+index 4c33ed4fea41f..d0f35414c69c9 100644
+--- a/media/gpu/v4l2/v4l2_video_decoder.cc
++++ b/media/gpu/v4l2/v4l2_video_decoder.cc
+@@ -1282,7 +1282,7 @@ void V4L2VideoDecoder::ServiceDeviceTask(bool event) {
+       SetState(State::kError);
+       return;
+     }
+-    if (!dequeued_buffer)
++    if (!dequeued_buffer && errno != EPIPE)
+       break;
+ 
+     if (backend_)
+-- 
+2.34.1
+
