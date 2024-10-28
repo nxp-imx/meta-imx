@@ -2,7 +2,7 @@ FILESEXTRAPATHS:prepend:imx-nxp-bsp := "${THISDIR}/${PN}:"
 
 DEPENDS += "readline"
 
-SRC_URI:prepend:imx-nxp-bsp = "file://defconfig"
+SRC_URI:prepend:imx-nxp-bsp = " file://defconfig "
 
 PACKAGECONFIG ??= "${PACKAGECONFIG_NXP}"
 PACKAGECONFIG_NXP             = ""
