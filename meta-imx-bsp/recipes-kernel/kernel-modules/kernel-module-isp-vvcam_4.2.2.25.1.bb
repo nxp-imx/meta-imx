@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${S}/../LICENSE;md5=64381a6ea83b48c39fe524c85f65fb44"
 SRC_URI = "${ISP_KERNEL_SRC};branch=${SRCBRANCH}"
 ISP_KERNEL_SRC ?= "git://github.com/nxp-imx/isp-vvcam.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "${AUTOREV}"
+SRCREV = "f4d98182d2efa6f1d376d0a2aca943f2a75d8e94"
 
 S = "${WORKDIR}/git/vvcam/v4l2"
 
