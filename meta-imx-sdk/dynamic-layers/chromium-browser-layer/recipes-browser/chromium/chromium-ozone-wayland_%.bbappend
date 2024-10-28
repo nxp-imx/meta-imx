@@ -71,6 +71,9 @@ CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION:imxgpu      = ""
 CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION:mx6-nxp-bsp = "--disable-gpu-rasterization"
 CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION:mx7-nxp-bsp = "--disable-gpu-rasterization"
 
+# Set parallel threads to 8 as a workaround to fix memory issues
+PARALLEL_MAKE="-j 8"
+
 #Remove installed ANGLE libraries
 do_install:append() {
         rm -rf ${D}${libdir}/chromium/libEGL.so
