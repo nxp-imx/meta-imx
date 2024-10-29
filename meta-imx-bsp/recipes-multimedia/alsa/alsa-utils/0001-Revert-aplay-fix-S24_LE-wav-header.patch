@@ -1,0 +1,34 @@
+From 663919f72555e1df3cff93f374c3b753233518e9 Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <shengjiu.wang@nxp.com>
+Date: Tue, 29 Oct 2024 10:23:00 +0800
+Subject: [PATCH] Revert "aplay: fix S24_LE wav header"
+
+This reverts commit 9cdcbe0e932b97fac88a6195f87647159a6c7194.
+
+Upstream-Status: Pending
+Signed-off-by: Shengjiu Wang <shengjiu.wang@nxp.com>
+---
+ aplay/aplay.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/aplay/aplay.c b/aplay/aplay.c
+index c58c2e9..d11e63a 100644
+--- a/aplay/aplay.c
++++ b/aplay/aplay.c
+@@ -2719,11 +2719,11 @@ static void begin_wave(int fd, size_t cnt)
+ 	case SND_PCM_FORMAT_S16_LE:
+ 		bits = 16;
+ 		break;
+-	case SND_PCM_FORMAT_S24_LE: /* S24_LE is 24 bits stored in 32 bit width with 8 bit padding */
+ 	case SND_PCM_FORMAT_S32_LE:
+-	case SND_PCM_FORMAT_FLOAT_LE:
++        case SND_PCM_FORMAT_FLOAT_LE:
+ 		bits = 32;
+ 		break;
++	case SND_PCM_FORMAT_S24_LE:
+ 	case SND_PCM_FORMAT_S24_3LE:
+ 		bits = 24;
+ 		break;
+-- 
+2.34.1
+
