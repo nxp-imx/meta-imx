@@ -1,0 +1,44 @@
+From 9fe0cbd72e1e26a8f8fd95b060cf5d20448e1244 Mon Sep 17 00:00:00 2001
+From: Shufen Ma <shufen.ma@arm.com>
+Date: Sun, 28 Apr 2024 16:33:53 +0800
+Subject: [PATCH] Fix transform feedback issue
+
+Test deleted_output.buffer_transform_feedback intends to test
+that when a buffer is detached from a transform feedback object,
+and transform feedback is performed again, the buffer with same
+buffer name will not be affected. However, glBeginTransformFeedback
+should return GL_INVALID_OPERATION if any binding point used in
+transform feedback mode does not have a buffer object bound per
+spec. This patch captures this error and early out.
+
+Affected tests:
+dEQP-GLES3.functional.lifetime.*
+
+VK-GL-CTS issue: 5086
+
+Components: AOSP
+Change-Id: I1513a425f054a51e422007314f3a42a9b901e873
+
+Upstream-Status: Backport [https://github.com/KhronosGroup/VK-GL-CTS/commit/261b2928759208b1ff7623c51b8c754c592b5431]
+---
+ modules/gles3/functional/es3fLifetimeTests.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/modules/gles3/functional/es3fLifetimeTests.cpp b/modules/gles3/functional/es3fLifetimeTests.cpp
+index 3909173c6..30dad0009 100644
+--- a/modules/gles3/functional/es3fLifetimeTests.cpp
++++ b/modules/gles3/functional/es3fLifetimeTests.cpp
+@@ -141,7 +141,11 @@ void ScaleProgram::draw (GLuint vao, GLfloat scale, bool tf, Surface* dst)
+ 	gl.uniform1f(m_scaleLoc, scale);
+ 
+ 	if (tf)
++	{
+ 		gl.beginTransformFeedback(GL_TRIANGLES);
++		if (gl.getError() == GL_INVALID_OPERATION)
++			return ;
++	}
+ 	GLU_CHECK_CALL_ERROR(gl.drawArrays(GL_TRIANGLES, 0, 3), gl.getError());
+ 	if (tf)
+ 		gl.endTransformFeedback();
+-- 
+2.34.1
