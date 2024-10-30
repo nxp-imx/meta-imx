@@ -59,8 +59,6 @@ GN_ARGS:append:imx-nxp-bsp = " \
     ${GN_ARGS_USE_V4L2_CODEC} \
     ${GN_ARGS_USE_LINUX_V4L2_ONLY} \
     use_pulseaudio=true \
-    use_lld=false \
-    use_gold=true \
 "
 DEPENDS:append = " pulseaudio"
 CHROMIUM_EXTRA_ARGS:append = " \
