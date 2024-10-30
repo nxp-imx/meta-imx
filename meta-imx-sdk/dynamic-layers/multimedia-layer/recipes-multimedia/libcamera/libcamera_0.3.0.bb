@@ -12,11 +12,10 @@ SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
         file://0001-media_device-Add-bool-return-type-to-unlock.patch \
         file://0002-options-Replace-use-of-VLAs-in-C.patch \
-        file://0001-rpi-Use-alloca-instead-of-variable-length-arrays.patch \
-        file://0001-ipu3-Use-posix-basename.patch \
+        file://0001-rpi-Use-malloc-instead-of-variable-length-arrays.patch \
 "
 
-SRCREV = "89227a428a82e724548399d35c98ea89566f9045"
+SRCREV = "aee16c06913422a0ac84ee3217f87a9795e3c2d9"
 
 PE = "1"
 
@@ -25,7 +24,7 @@ S = "${WORKDIR}/git"
 DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python3-jinja2-native udev gnutls chrpath-native libevent libyaml"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
 
-PACKAGES =+ "${PN}-gst"
+PACKAGES =+ "${PN}-gst ${PN}-pycamera"
 
 # Disable v4l2 on 32-bit to avoid Y2038 bug
 PACKAGECONFIG ??= "${PACKAGECONFIG_V4L2}"
@@ -33,6 +32,7 @@ PACKAGECONFIG_V4L2            ?= "v4l2"
 PACKAGECONFIG_V4L2:arm:imx-nxp-bsp = ""
 
 PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
+PACKAGECONFIG[pycamera] = "-Dpycamera=enabled,-Dpycamera=disabled,python3 python3-pybind11"
 PACKAGECONFIG[v4l2] = "-Dv4l2=true,-Dv4l2=false"
 
 LIBCAMERA_PIPELINES ??= "auto"
@@ -78,6 +78,7 @@ do_package_recalculate_ipa_signatures() {
 
 FILES:${PN} += " ${libexecdir}/libcamera/v4l2-compat.so"
 FILES:${PN}-gst = "${libdir}/gstreamer-1.0"
+FILES:${PN}-pycamera = "${PYTHON_SITEPACKAGES_DIR}/libcamera"
 
 # Set _FILE_OFFSET_BITS=32 to get access to both 32 and 64 bit file APIs when support v4l2 on 32bit platform
 GLIBC_64BIT_TIME_FLAGS:arm:imx-nxp-bsp = " \
