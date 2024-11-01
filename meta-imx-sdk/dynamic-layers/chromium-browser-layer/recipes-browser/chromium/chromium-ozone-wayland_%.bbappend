@@ -64,12 +64,8 @@ DEPENDS:append = " pulseaudio"
 CHROMIUM_EXTRA_ARGS:append = " \
     --disable-features=VizDisplayCompositor \
     --in-process-gpu \
-    ${CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION} \
+    --disable-gpu-rasterization \
 "
-CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION             = "--disable-gpu-rasterization"
-CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION:imxgpu      = ""
-CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION:mx6-nxp-bsp = "--disable-gpu-rasterization"
-CHROMIUM_EXTRA_ARGS_DISABLE_GPU_RASTERIZATION:mx7-nxp-bsp = "--disable-gpu-rasterization"
 
 #Remove installed ANGLE libraries
 do_install:append() {
