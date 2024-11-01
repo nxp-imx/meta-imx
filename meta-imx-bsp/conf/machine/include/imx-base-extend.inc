@@ -103,7 +103,7 @@ PREFERRED_VERSION_gstreamer1.0-plugins-good:mx9-nxp-bsp ??= "1.24.7.imx"
 PREFERRED_VERSION_ffmpeg:mx8-nxp-bsp ??= "4.4.1"
 PREFERRED_VERSION_ffmpeg:mx9-nxp-bsp ??= "4.4.1"
 
-PREFERRED_VERSION_weston:imx-nxp-bsp ??= "14.0.0.imx"
+PREFERRED_VERSION_weston:imx-nxp-bsp ??= "14.0.1.imx"
 # i.MX 6 & 7 stay on weston 10.0 for fbdev
 PREFERRED_VERSION_weston:mx6-nxp-bsp ??= "10.0.5.imx"
 PREFERRED_VERSION_weston:mx7-nxp-bsp ??= "10.0.5.imx"
