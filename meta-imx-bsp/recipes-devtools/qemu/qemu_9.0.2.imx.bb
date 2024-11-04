@@ -6,7 +6,7 @@ DEPENDS += "glib-2.0 zlib pixman"
 
 DEPENDS:append:libc-musl = " libucontext"
 
-CFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-DEGL_NO_X11=1', d)} -Wno-error=implicit-function-declaration -Wno-error=int-conversion"
+CFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '-DEGL_NO_X11=1', d)}"
 
 RDEPENDS:${PN}-common:class-target += "bash"
 
@@ -31,6 +31,7 @@ COMPATIBLE_HOST:powerpc = "null"
 PACKAGECONFIG:append = " pipewire aio vhost libusb \
                          ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'libvhost_user', '', d)} \
 "
+CFLAGS += " -Wno-error=implicit-function-declaration -Wno-error=int-conversion"
 
 INSANE_SKIP:${PN}-ptest += "buildpaths"
 INSANE_SKIP:nativesdk-qemu-user-mips = "build-deps"

@@ -18,64 +18,34 @@ inherit pkgconfig ptest update-rc.d systemd python3native
 LIC_FILES_CHKSUM = "file://COPYING;md5=441c28d2cf86e15a37fa47e15a72fbac \
                     file://COPYING.LIB;endline=24;md5=8c5efda6cf1e1b03dcfd0e6c0d271c7f"
 
-SRC_URI = "https://download.qemu.org/${BPN}-8.2.2.tar.xz \
+SRC_URI = "https://download.qemu.org/${BPN}-${PV}.tar.xz \
            file://powerpc_rom.bin \
            file://run-ptest \
            file://0001-qemu-Add-addition-environment-space-to-boot-loader-q.patch \
-           file://0003-apic-fixup-fallthrough-to-PIC.patch \
-           file://0004-configure-Add-pkg-config-handling-for-libgcrypt.patch \
-           file://0005-qemu-Do-not-include-file-if-not-exists.patch \
-           file://0006-qemu-Add-some-user-space-mmap-tweaks-to-address-musl.patch \
-           file://0007-qemu-Determinism-fixes.patch \
-           file://0008-tests-meson.build-use-relative-path-to-refer-to-file.patch \
-           file://0009-Define-MAP_SYNC-and-MAP_SHARED_VALIDATE-on-needed-li.patch \
-           file://0010-hw-pvrdma-Protect-against-buggy-or-malicious-guest-d.patch \
-           file://0002-linux-user-Replace-use-of-lfs64-related-functions-an.patch \
-           file://fixedmeson.patch \
-           file://no-pip.patch \
-           file://4a8579ad8629b57a43daa62e46cc7af6e1078116.patch \
-           file://0001-linux-user-x86_64-Handle-the-vsyscall-page-in-open_s.patch \
-           file://0002-linux-user-loongarch64-Remove-TARGET_FORCE_SHMLBA.patch \
-           file://0003-linux-user-Add-strace-for-shmat.patch \
-           file://0004-linux-user-Rewrite-target_shmat.patch \
-           file://0005-tests-tcg-Check-that-shmat-does-not-break-proc-self-.patch \
+           file://0002-apic-fixup-fallthrough-to-PIC.patch \
+           file://0003-configure-Add-pkg-config-handling-for-libgcrypt.patch \
+           file://0004-qemu-Do-not-include-file-if-not-exists.patch \
+           file://0005-qemu-Add-some-user-space-mmap-tweaks-to-address-musl.patch \
+           file://0006-qemu-Determinism-fixes.patch \
+           file://0007-tests-meson.build-use-relative-path-to-refer-to-file.patch \
+           file://0008-Define-MAP_SYNC-and-MAP_SHARED_VALIDATE-on-needed-li.patch \
+           file://0009-linux-user-Replace-use-of-lfs64-related-functions-an.patch \
+           file://0010-configure-lookup-meson-exutable-from-PATH.patch \
+           file://0011-qemu-Ensure-pip-and-the-python-venv-aren-t-used-for-.patch \
            file://qemu-guest-agent.init \
            file://qemu-guest-agent.udev \
            "
-#UPSTREAM_CHECK_REGEX = "qemu-(?P<pver>\d+(\.\d+)+)\.tar"
+UPSTREAM_CHECK_REGEX = "qemu-(?P<pver>\d+(\.\d+)+)\.tar"
 
-# SDK_OLDEST_KERNEL is set below 4.17, which is the minimum version required by QEMU >= 8.1
-# This is due to two MMAP flags being used at certain points
-SRC_URI:append:class-nativesdk = " \
-	file://0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch \
-	file://0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch \
-        "
-
-# Support building and using native version on pre 4.17 kernels
-SRC_URI:append:class-native = " \
-	file://0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch \
-	file://0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch \
-        "
-
-SRC_URI[sha256sum] = "847346c1b82c1a54b2c38f6edbd85549edeb17430b7d4d3da12620e2962bc4f3"
+SRC_URI[sha256sum] = "a8c3f596aece96da3b00cafb74baafa0d14515eafb8ed1ee3f7f5c2d0ebf02b6"
 
 CVE_STATUS[CVE-2007-0998] = "not-applicable-config: The VNC server can expose host files uder some circumstances. We don't enable it by default."
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1609015#c11
 CVE_STATUS[CVE-2018-18438] = "disputed: The issues identified by this CVE were determined to not constitute a vulnerability."
 
-# As per https://nvd.nist.gov/vuln/detail/CVE-2023-0664
-# https://bugzilla.redhat.com/show_bug.cgi?id=2167423
-CVE_STATUS[CVE-2023-0664] = "not-applicable-platform: Issue only applies on Windows"
-
 # As per https://bugzilla.redhat.com/show_bug.cgi?id=2203387
 CVE_STATUS[CVE-2023-2680] = "not-applicable-platform: RHEL specific issue."
-
-CVE_STATUS[CVE-2023-3019] = "cpe-incorrect: Applies only against versions before 8.2.0"
-
-CVE_STATUS[CVE-2023-5088] = "cpe-incorrect: Applies only against version 8.2.0 and earlier"
-
-CVE_STATUS[CVE-2023-6693] = "cpe-incorrect: Applies only against version 8.2.0 and earlier"
 
 COMPATIBLE_HOST:mipsarchn32 = "null"
 COMPATIBLE_HOST:mipsarchn64 = "null"
@@ -110,7 +80,7 @@ do_install_ptest() {
 	sed -i -e "s#^SRC_PATH=.*#SRC_PATH=${PTEST_PATH}#g" $makfiles
 
 	# https://gitlab.com/qemu-project/qemu/-/issues/1403
-#	rm ${D}${PTEST_PATH}/tests/unit/test-io-channel-command
+	rm ${D}${PTEST_PATH}/tests/unit/test-io-channel-command
 }
 
 # QEMU_TARGETS is overridable variable
@@ -137,13 +107,12 @@ EXTRA_OECONF = " \
     --host-cc='${BUILD_CC}' \
     --disable-af-xdp \
     ${PACKAGECONFIG_CONFARGS} \
-    --python=python3 \
     "
 
 EXTRA_OECONF:append:class-target = " --cross-prefix=${HOST_PREFIX}"
 EXTRA_OECONF:append:class-nativesdk = " --cross-prefix=${HOST_PREFIX}"
 
-#B = "${UNPACKDIR}/build"
+B = "${WORKDIR}/build"
 
 #EXTRA_OECONF:append = " --python=${HOSTTOOLS_DIR}/python3"
 
@@ -159,7 +128,7 @@ do_configure() {
     export PKG_CONFIG=pkg-config
     ${S}/configure ${EXTRA_OECONF}
 }
-#do_configure[cleandirs] += "${B}"
+do_configure[cleandirs] += "${B}"
 
 do_install () {
 	export STRIP=""
@@ -182,21 +151,9 @@ do_install () {
 	rm ${D}${datadir}/qemu/s390-netboot.img -f
 	# ELF binary /usr/share/qemu/s390-ccw.img has relocations in .text [textrel]
 	rm ${D}${datadir}/qemu/s390-ccw.img -f
+	# We don't support PARISC and these cause strip and SDK relocation errors
+	rm ${D}${datadir}/qemu/hppa* -f
 }
-
-# The following fragment will create a wrapper for qemu-mips user emulation
-# binary in order to work around a segmentation fault issue. Basically, by
-# default, the reserved virtual address space for 32-on-64 bit is set to 4GB.
-# This will trigger a MMU access fault in the virtual CPU. With this change,
-# the qemu-mips works fine.
-# IMPORTANT: This piece needs to be removed once the root cause is fixed!
-do_install:append() {
-	if [ -e "${D}/${bindir}/qemu-mips" ]; then
-		create_wrapper ${D}/${bindir}/qemu-mips \
-			QEMU_RESERVED_VA=0x0
-	fi
-}
-# END of qemu-mips workaround
 
 # Disable kvm/virgl/mesa on targets that do not support it
 PACKAGECONFIG:remove:darwin = "kvm virglrenderer epoxy gtk+"
@@ -287,9 +244,6 @@ python split_qemu_packages () {
     subpackages += do_split_packages(d, archdir, r'^qemu-((?!system|edid|ga|img|io|nbd|pr-helper|storage-daemon).*)$', '${PN}-user-%s', 'QEMU full user emulation binaries(%s)' , prepend=True, extra_depends='${PN}-common')
     if subpackages:
         d.appendVar('RDEPENDS:' + d.getVar('PN'), ' ' + ' '.join(subpackages))
-    mipspackage = d.getVar('PN') + "-user-mips"
-    if mipspackage in ' '.join(subpackages):
-        d.appendVar('RDEPENDS:' + mipspackage, ' ' + d.getVar("MLPREFIX") + 'bash')
 }
 
 # Put the guest agent in a separate package
@@ -311,7 +265,7 @@ SYSTEMD_SERVICE:${PN}-guest-agent = "qemu-guest-agent.service"
 
 ########### i.MX overrides ################
 
-SRCBRANCH_imx-qemu = "imx_8.2.y"
+SRCBRANCH_imx-qemu = "imx-9.0.y"
 QEMU_SRC ?= "git://github.com/nxp-imx/imx-qemu.git;protocol=https;"
 SRC_URI = " \
     ${QEMU_SRC};branch=${SRCBRANCH_imx-qemu};name=imx-qemu;\
@@ -333,7 +287,7 @@ SRC_URI:remove:class-native = " \
 	file://0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch \
 	file://0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch \
         "
-SRCREV_imx-qemu = "2c4cfad6df3a7d9a9642f616936914b244d04e9c"
+SRCREV_imx-qemu = "${AUTOREV}"
 SRCREV_berkeley-softfloat-3 = "b64af41c3276f97f0e181920400ee056b9c88037"
 SRCREV_berkeley-testfloat-3 = "e7af9751d9f9fd3b47911f51a5cfd08af256a9ab"
 SRCREV_keycodemapdb = "f5772a62ec52591ff6870b7e8ef32482371f22c6"

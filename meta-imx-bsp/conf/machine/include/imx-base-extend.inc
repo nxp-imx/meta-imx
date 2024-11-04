@@ -145,7 +145,7 @@ PREFERRED_VERSION_xen-tools = "4.18.imx+stable"
 PREFERRED_VERSION_xen       = "4.18.imx+stable"
 
 QEMUVERSION              = "9.0.2"
-QEMUVERSION:mx95-nxp-bsp = "8.2.2.imx"
+QEMUVERSION:mx95-nxp-bsp = "9.0.2.imx"
 
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
 ZSTD_COMPRESSION_LEVEL ?= "-10"
