@@ -1,0 +1,14 @@
+Upstream-Status: Inappropriate [workaround]
+
+Index: 3rdparty/chromium/build/config/compiler/BUILD.gn
+===================================================================
+--- 3rdparty.orig/chromium/build/config/compiler/BUILD.gn
++++ 3rdparty/chromium/build/config/compiler/BUILD.gn
+@@ -453,6 +453,7 @@ config("compiler") {
+       cflags_cc += [
+         "-Wno-deprecated-copy",
+         "-Wno-expansion-to-defined",
++        "-Wno-error=implicit-function-declaration",
+       ]
+     }
+   }
