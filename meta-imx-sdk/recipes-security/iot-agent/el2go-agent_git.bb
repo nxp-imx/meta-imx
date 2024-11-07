@@ -25,6 +25,8 @@ CPPFLAGS[unexport] = "1"
 AS[unexport] = "1"
 LD[unexport] = "1"
 
+ASNEEDED = ""
+
 EXTRA_OECMAKE = " \
     -DSSS_HAVE_HOSTCRYPTO_MBEDTLS=ON \
     -DNXP_IOT_AGENT_HAVE_PSA_IMPL_SMW=ON \
