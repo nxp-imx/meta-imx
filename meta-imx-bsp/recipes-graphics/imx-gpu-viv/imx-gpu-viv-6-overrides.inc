@@ -6,18 +6,6 @@ LIBVULKAN_API_VERSION   = "unused"
 
 FILES:libgal-imx-dev:remove = "${includedir}/HAL"
 
-PROVIDES_OPENCL = ""
-PACKAGES_OPENCL = "libclc-imx ${PN}-opencl-icd"
-FILES:libopencl-imx     = ""
-FILES:libopencl-imx-dev = ""
-FILES:${PN}-opencl-icd = " \
-    ${libdir}/libOpenCL_VSI${REALSOLIBS} \
-    ${libdir}/libLLVM_viv${SOLIBS} \
-    ${includedir}/CL \
-    ${sysconfdir}/OpenCL"
-OPENCL_VX_INTRINSIC_EXTENSION_PACKAGES:mx8qm-nxp-bsp = "libclc-imx ${PN}-opencl-icd"
-OPENCL_VX_INTRINSIC_EXTENSION_PACKAGES:mx8mp-nxp-bsp = "libclc-imx ${PN}-opencl-icd"
-
 SRC_URI:remove = "imx_icd.json"
 do_install () {
     install -d ${D}${libdir}
