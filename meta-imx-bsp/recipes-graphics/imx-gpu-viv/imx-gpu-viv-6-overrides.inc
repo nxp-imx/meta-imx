@@ -6,6 +6,8 @@ LIBVULKAN_API_VERSION   = "unused"
 
 FILES:libgal-imx-dev:remove = "${includedir}/HAL"
 
+FILES:libopencl-imx:append = " ${libdir}/libOpenCL_VSI${REALSOLIBS}"
+
 SRC_URI:remove = "imx_icd.json"
 do_install () {
     install -d ${D}${libdir}
