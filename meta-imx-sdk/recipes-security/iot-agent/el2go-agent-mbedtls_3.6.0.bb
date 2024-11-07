@@ -30,6 +30,8 @@ PACKAGECONFIG[tests] = "-DENABLE_TESTING=ON,-DENABLE_TESTING=OFF"
 # For now the only way to enable PSA is to explicitly pass a -D via CFLAGS
 CFLAGS:append = "${@bb.utils.contains('PACKAGECONFIG', 'psa', ' -DMBEDTLS_USE_PSA_CRYPTO', '', d)}"
 
+CFLAGS:append = " -fPIC"
+
 CVE_PRODUCT = "mbed_tls"
 
 EXTRA_OECMAKE:append = " \
