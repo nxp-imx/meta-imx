@@ -22,7 +22,10 @@ FILES:${PN}-dev += " \
     ${datadir}/cmake \
 "
 
-# Enable mali-imx ICD implementation
-RDEPENDS:${PN}:append:mx95-nxp-bsp = " mali-imx-opencl-icd"
+# Enable ICD implementation
+RDEPENDS:${PN}:append:imxgpu = " ${OPENCL_ICD_IMXGPU}"
+OPENCL_ICD_IMXGPU              = ""
+OPENCL_ICD_IMXGPU:imxgpu       = "imx-gpu-viv-opencl-icd"
+OPENCL_ICD_IMXGPU:mx95-nxp-bsp = "mali-imx-opencl-icd"
 
 RDEPENDS:${PN} += "opencl-headers"
