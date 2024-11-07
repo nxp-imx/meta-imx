@@ -8,6 +8,7 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0005-MGS-7765-Blacklist-MSAA-for-GPU-Raster-on-Vivante-GP.patch \
     file://0006-LF-12406-Fixed-webgl-test-fail-for-GL_MAX_SAMPLES-ch.patch \
     file://0007-Enable-native-GLES2-for-Ozone-wayland.patch \
+    file://0008-Fix-build-fail-after-clang-llvm-upgrade.patch \
 "
 VDA_PATCH_SET = " \
     file://0101-V4L2Device-Correct-v4l2-codec-device-path.patch \

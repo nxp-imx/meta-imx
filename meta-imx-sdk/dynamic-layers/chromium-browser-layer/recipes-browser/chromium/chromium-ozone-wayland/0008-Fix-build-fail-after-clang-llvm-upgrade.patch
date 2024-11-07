@@ -1,0 +1,38 @@
+From 7299ca8b360cd3596c7fbc5f31fae48ce1060e24 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Thu, 7 Nov 2024 10:34:46 +0800
+Subject: [PATCH] Fix build fail after clang/llvm upgrade
+
+Disable thinlto cache for need large memory.
+
+| terminate called after throwing an instance of 'std::bad_alloc'
+|   what():  std::bad_alloc
+| terminate called recursively
+| aarch64-poky-linux-clang++: error: unable to execute command: Aborted
+(core dumped)
+| aarch64-poky-linux-clang++: error: linker command failed due to signal
+(use -v to see invocation)
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ build/config/compiler/BUILD.gn | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/build/config/compiler/BUILD.gn b/build/config/compiler/BUILD.gn
+index 45086d6838cac..8a148e4f53e0b 100644
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -131,7 +131,7 @@ declare_args() {
+   # Whether to enable thin lto incremental builds.
+   # See: https://clang.llvm.org/docs/ThinLTO.html#incremental
+   # The cache can lead to non-determinism: https://crbug.com/1486045
+-  thin_lto_enable_cache = true
++  thin_lto_enable_cache = false
+ 
+   # Initialize all local variables with a pattern. This flag will fill
+   # uninitialized floating-point types (and 32-bit pointers) with 0xFF and the
+-- 
+2.34.1
+
