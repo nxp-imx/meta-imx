@@ -2,10 +2,11 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 ### Section 1: Changes to be upstreamed ###
 
-LIBVULKAN_API_VERSION   = "1.3.204"
+LIBVULKAN_API_VERSION   = "unused"
 
 FILES:libgal-imx-dev:remove = "${includedir}/HAL"
 
+SRC_URI:remove = "imx_icd.json"
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
@@ -73,8 +74,7 @@ do_install () {
         rm -rf ${D}/opt/viv_samples/cl11
     else
         # Install Vendor ICDs for OpenCL's installable client driver loader (ICDs Loader)
-        install -d ${D}${sysconfdir}/OpenCL/vendors/
-        install -m 0644 ${S}/gpu-core/etc/Vivante.icd ${D}${sysconfdir}/OpenCL/vendors/Vivante.icd
+        install -Dm 0644 ${S}/gpu-core/etc/OpenCL/vendors/Vivante.icd ${D}${sysconfdir}/OpenCL/vendors/Vivante.icd
 
         if [ "${OPENCL_VX_INTRINSIC_EXTENSION_PACKAGES}" = "" ]; then
             rm -f ${D}${includedir}/CL/cl_viv_vx_ext.h
@@ -97,9 +97,8 @@ do_install () {
                 rm -rf ${D}$f
             done
         else
-            install -Dm 0644 ${UNPACKDIR}/imx_icd.json ${D}${sysconfdir}/vulkan/icd.d/imx_icd.json
-            sed -i "s,%libdir%,${libdir}," ${D}${sysconfdir}/vulkan/icd.d/imx_icd.json
-            sed -i "s,%api_version%,${LIBVULKAN_API_VERSION}," ${D}${sysconfdir}/vulkan/icd.d/imx_icd.json
+            install -Dm 0644 ${S}/gpu-core/etc/vulkan/icd.d/imx_icd.json ${D}${sysconfdir}/vulkan/icd.d/imx_icd.json
+            sed -i "s,/usr/lib,${libdir}," ${D}${sysconfdir}/vulkan/icd.d/imx_icd.json
         fi
     fi
 
