@@ -83,8 +83,8 @@ do_merge_delta_config() {
         if [ -f ${S}/arch/${ARCH}/configs/${deltacfg} ]; then
             ${KERNEL_CONFIG_COMMAND}
             oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} ${deltacfg}
-        elif [ -f "${WORKDIR}/${deltacfg}" ]; then
-            ${S}/scripts/kconfig/merge_config.sh -m .config ${WORKDIR}/${deltacfg}
+        elif [ -f "${UNPACKDIR}/${deltacfg}" ]; then
+            ${S}/scripts/kconfig/merge_config.sh -m .config ${UNPACKDIR}/${deltacfg}
         elif [ -f "${deltacfg}" ]; then
             ${S}/scripts/kconfig/merge_config.sh -m .config ${deltacfg}
         fi
