@@ -54,7 +54,6 @@ PLATFORM:mx7ulp-nxp-bsp= "MX7ULP"
 PLATFORM:mx8-nxp-bsp = "MX8"
 PLATFORM:mx9-nxp-bsp = "MX9"
 
-CFLAGS += " -Wno-error=incompatible-pointer-types"
 # Todo add a mechanism to map possible build targets
 EXTRA_OEMESON = "-Dplatform=${PLATFORM} \
                  -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \
