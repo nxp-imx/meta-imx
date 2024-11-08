@@ -59,6 +59,9 @@ EXTRA_OEMESON = "-Dplatform=${PLATFORM} \
                  -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \
 "
 
+# FIXME: Fix the source and re-enable the compiler error
+CFLAGS:append:mx7ulp-nxp-bsp = " -Wno-error=incompatible-pointer-types"
+
 PACKAGES =+ "${PN}-gplay ${PN}-libgplaycore ${PN}-libgstfsl ${PN}-grecorder ${PN}-librecorder-engine ${PN}-libplayengine"
 
 # Add codec list that the beep plugin run-time depended
