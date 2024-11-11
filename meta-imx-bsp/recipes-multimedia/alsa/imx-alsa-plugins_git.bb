@@ -1,5 +1,5 @@
 # Copyright 2013-2016 Freescale Semiconductor
-# Copyright 2017-2022 NXP
+# Copyright 2017-2022,2024 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Freescale alsa-lib plugins"
@@ -26,9 +26,7 @@ SRCREV = "b2ba082e70333f187972ee4e85f63f9d2f608331"
 
 S = "${WORKDIR}/git"
 
-INCLUDE_DIR = "-I${STAGING_INCDIR_IMX}"
-
-EXTRA_OECONF = "CFLAGS="${INCLUDE_DIR}""
+CFLAGS:append = " -I${STAGING_INCDIR_IMX}"
 
 PACKAGECONFIG ??= "${PACKAGECONFIG_SWPDM}"
 PACKAGECONFIG_SWPDM             = ""
