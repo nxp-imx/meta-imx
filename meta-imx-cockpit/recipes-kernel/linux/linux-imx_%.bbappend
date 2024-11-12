@@ -1,3 +1,5 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+SRC_URI:append = " file://0001-YOCIMX-8508-net-imx-shmem-net-Fix-Wincompatible-poin.patch"
 
 do_copy_defconfig:append:imx8qm-cockpit () {
 
