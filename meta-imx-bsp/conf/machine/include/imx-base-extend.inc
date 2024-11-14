@@ -97,11 +97,9 @@ PREFERRED_VERSION_gstreamer1.0-plugins-bad:mx9-nxp-bsp  ??= "1.24.7.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-base:mx9-nxp-bsp ??= "1.24.7.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-good:mx9-nxp-bsp ??= "1.24.7.imx"
 
-# GStreamer downgrade ffmpeg
-# Downgrade for 6 and 7, unlike meta-freescale
-#PREFERRED_VERSION_ffmpeg:imx-nxp-bsp ??= "4.4.1"
-PREFERRED_VERSION_ffmpeg:mx8-nxp-bsp ??= "4.4.1"
-PREFERRED_VERSION_ffmpeg:mx9-nxp-bsp ??= "4.4.1"
+# Keep ffmpeg version align with OE upstream
+PREFERRED_VERSION_ffmpeg:mx8-nxp-bsp ??= "7.0.2"
+PREFERRED_VERSION_ffmpeg:mx9-nxp-bsp ??= "7.0.2"
 
 PREFERRED_VERSION_weston:imx-nxp-bsp ??= "14.0.1.imx"
 # i.MX 6 & 7 stay on weston 10.0 for fbdev
