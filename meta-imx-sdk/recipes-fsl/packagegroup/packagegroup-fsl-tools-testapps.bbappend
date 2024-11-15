@@ -76,4 +76,4 @@ RDEPENDS_DPDK_FPR:mx93-nxp-bsp = "dpdk-fpr"
 RDEPENDS_DPDK_FPR:mx95-nxp-bsp = "dpdk-fpr"
 
 RDEPENDS_MTCP_DPDK = ""
-RDEPENDS_DPDK_FPR:mx95-nxp-bsp = "mtcp-dpdk"
+RDEPENDS_MTCP_DPDK:mx95-nxp-bsp = "mtcp-dpdk"
