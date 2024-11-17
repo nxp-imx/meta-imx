@@ -6,7 +6,7 @@ DESCRIPTION = "NXP i.MX Security Middleware Library"
 SECTION = "base"
 LICENSE = "BSD-3-Clause"
 LICENSE = "Apache-2.0 & BSD-3-Clause & Zlib"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=8636bd68fc00cc6a3809b7b58b45f982 \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6087d19da5441648e33f85ae64cf2a7d \
                     file://../psa-arch-tests/LICENSE.md;md5=2a944942e1496af1886903d274dedb13"
 
 DEPENDS = " \
