@@ -11,5 +11,7 @@ S = "${WORKDIR}/git"
 
 inherit cmake
 
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+
 # Work around do_package_qa error
 INSANE_SKIP:${PN}-dev += "buildpaths"
