@@ -31,6 +31,7 @@ VDA_PATCH_SET = " \
     file://0118-V4L2VideoDecoder-Fix-amphion-report-size-mismatch.patch \
     file://0119-VideoDecoderPipeline-Get-V4L2VideoDecoder-supported-.patch \
     file://0120-V4L2VideoDecoder-Fix-amphion-cannot-streamoff-after-.patch \
+    file://0121-V4L2VideoDecoder-Set-OUTPUT-format-with-parsed-resol.patch \
 "
 SRC_URI:append:mx8-nxp-bsp = " ${VDA_PATCH_SET}"
 SRC_URI:append:mx95-nxp-bsp = " ${VDA_PATCH_SET}"

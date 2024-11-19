@@ -1,0 +1,37 @@
+From 13e0146475ec26b59c706249c7a61c7d9ee2d360 Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Mon, 18 Nov 2024 14:59:51 +0900
+Subject: [PATCH] V4L2VideoDecoder: Set OUTPUT format with parsed resolution
+
+For VP8, VC1l, rv, amphion needs to set correct resolution for OUTPUT
+queue as it will be added to amphion customized header.
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ media/gpu/v4l2/v4l2_video_decoder.cc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
+index d0f35414c69c9..05c8d61f5f9fb 100644
+--- a/media/gpu/v4l2/v4l2_video_decoder.cc
++++ b/media/gpu/v4l2/v4l2_video_decoder.cc
+@@ -328,6 +328,7 @@ void V4L2VideoDecoder::Initialize(const VideoDecoderConfig& config,
+   aspect_ratio_ = config.aspect_ratio();
+   color_space_ = config.color_space_info();
+   current_resolution_ = config.visible_rect().size();
++  VLOGF(3) << "resolution is " << current_resolution_.width() << "x" << current_resolution_.height();
+ 
+   if (profile_ == VIDEO_CODEC_PROFILE_UNKNOWN) {
+     VLOGF(1) << "Unknown profile.";
+@@ -632,7 +633,7 @@ bool V4L2VideoDecoder::SetupInputFormat() {
+ 
+   // Setup the input format.
+   auto format =
+-      input_queue_->SetFormat(input_format_fourcc_, gfx::Size(), input_size);
++      input_queue_->SetFormat(input_format_fourcc_, current_resolution_, input_size);
+   if (!format) {
+     VPLOGF(1) << "Failed to call IOCTL to set input format.";
+     return false;
+-- 
+2.34.1
+
