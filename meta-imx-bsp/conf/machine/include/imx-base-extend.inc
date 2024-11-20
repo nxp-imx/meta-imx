@@ -119,6 +119,7 @@ PREFERRED_VERSION_xwayland:imx-nxp-bsp ??= ""
 PREFERRED_VERSION_libdrm:imx-nxp-bsp ??= "2.4.123.imx"
 
 PREFERRED_VERSION_gfxreconstruct:imxvulkan           ??= "1.3.275.0"
+PREFERRED_VERSION_glslang:imxvulkan                  ??= "1.3.275.0.imx"
 PREFERRED_VERSION_vulkan-utility-libraries:imxvulkan ??= "1.3.275.0.imx"
 
 PREFERRED_VERSION_optee-client:mx6-nxp-bsp ??= "4.4.0.imx"
