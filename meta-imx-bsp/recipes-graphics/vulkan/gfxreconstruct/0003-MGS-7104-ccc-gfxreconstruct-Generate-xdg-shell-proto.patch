@@ -1,0 +1,65 @@
+From 7ab6040ea9b7a0c93d3df918d7164b25940c925a Mon Sep 17 00:00:00 2001
+From: Kratika Jain <kratika.jain@nxp.com>
+Date: Tue, 6 Jun 2023 13:19:49 +0530
+Subject: [PATCH 2/2] MGS-7104 [#ccc] gfxreconstruct: Generate xdg-shell
+ protocol files
+
+Work is derived from https://github.com/LunarG/gfxreconstruct/pull/698
+
+Upstream-Status: Inappropriate [not author]
+Signed-off-by: Kratika Jain <kratika.jain@nxp.com>
+---
+ framework/util/CMakeLists.txt | 31 ++++++++++++++++++++++++++++++-
+ 1 file changed, 30 insertions(+), 1 deletion(-)
+
+Index: git/framework/util/CMakeLists.txt
+===================================================================
+--- git.orig/framework/util/CMakeLists.txt
++++ git/framework/util/CMakeLists.txt
+@@ -27,9 +27,36 @@
+ ###############################################################################
+ 
+ add_library(gfxrecon_util STATIC "")
++add_library(gfxrecon_xdg STATIC "")
++project(gfxrecon_xdg C)
++
++find_library(WAYLAND_CLIENT_LIBRARY NAMES wayland-client libwayland-client)
++find_library(WAYLAND_EGL_LIBRARY NAMES wayland-egl libwayland-egl )
++find_library(WAYLAND_CURSOR_LIBRARY NAMES wayland-cursor libwayland-cursor)
++
++add_custom_command(
++    OUTPUT  ${CMAKE_CURRENT_SOURCE_DIR}/xdg-shell-client-protocol.h
++    COMMAND wayland-scanner client-header
++              $ENV{SDKTARGETSYSROOT}/usr/share/wayland-protocols/stable/xdg-shell/xdg-shell.xml
++              ${CMAKE_CURRENT_SOURCE_DIR}/xdg-shell-client-protocol.h
++    COMMENT "Generating sources...")
++
++add_custom_command(
++    OUTPUT  ${CMAKE_CURRENT_SOURCE_DIR}/xdg-shell-protocol.c
++    COMMAND wayland-scanner private-code
++              $ENV{SDKTARGETSYSROOT}/usr/share/wayland-protocols/stable/xdg-shell/xdg-shell.xml
++              ${CMAKE_CURRENT_SOURCE_DIR}/xdg-shell-protocol.c
++    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/xdg-shell-client-protocol.h
++    COMMENT "Generating sources...")
++
++set_source_files_properties(${CMAKE_CURRENT_LIST_DIR}/xdg-shell-protocol.c PROPERTIES GENERATED 1)
++
++target_sources(gfxrecon_xdg PRIVATE ${CMAKE_CURRENT_LIST_DIR}/xdg-shell-protocol.c)
+ 
+ target_sources(gfxrecon_util
+                PRIVATE
++                    ${CMAKE_CURRENT_LIST_DIR}/xdg-shell-client-protocol.h
++                    ${CMAKE_CURRENT_LIST_DIR}/xdg-shell-protocol.c
+                     ${CMAKE_CURRENT_LIST_DIR}/argument_parser.h
+                     ${CMAKE_CURRENT_LIST_DIR}/argument_parser.cpp
+                     ${CMAKE_CURRENT_LIST_DIR}/compressor.h
+@@ -112,6 +139,9 @@ target_include_directories(gfxrecon_util
+                            PUBLIC
+                                ${CMAKE_SOURCE_DIR}/framework
+                                $<$<BOOL:${D3D12_SUPPORT}>:${CMAKE_SOURCE_DIR}/external/AgilitySDK/inc>)
++
++target_link_libraries(gfxrecon_xdg ${WAYLAND_CLIENT_LIBRARY} ${WAYLAND_EGL_LIBRARY} ${WAYLAND_CURSOR_LIBRARY})
++target_link_libraries(gfxrecon_util gfxrecon_xdg)
+ target_link_libraries(gfxrecon_util platform_specific vulkan_registry nlohmann_json::nlohmann_json ${CMAKE_DL_LIBS})
+ target_link_libraries(gfxrecon_util $<$<BOOL:${WIN32}>:version.lib>)
+ 
