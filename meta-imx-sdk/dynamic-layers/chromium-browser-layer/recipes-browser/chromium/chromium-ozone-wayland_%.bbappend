@@ -9,6 +9,7 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0006-LF-12406-Fixed-webgl-test-fail-for-GL_MAX_SAMPLES-ch.patch \
     file://0007-Enable-native-GLES2-for-Ozone-wayland.patch \
     file://0008-Fix-build-fail-after-clang-llvm-upgrade.patch \
+    file://0009-Fix-chromium-crash-when-run-webgl-2.0.0-cts.patch \
 "
 VDA_PATCH_SET = " \
     file://0101-V4L2Device-Correct-v4l2-codec-device-path.patch \
