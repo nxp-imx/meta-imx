@@ -19,7 +19,7 @@ B = "${S}"
 
 do_configure() {
     export SYSROOT_DPDK=${PKG_CONFIG_SYSROOT_DIR}
-    ${S}/configure --host aarch64-fsl-linux --with-dpdk-lib=${SYSROOT_DPDK}/usr
+    ${S}/configure --host aarch64-fsl-linux --with-dpdk-lib=${SYSROOT_DPDK}/usr --libdir=${libdir} --baselib=${baselib}
 }
 
 do_compile() {
