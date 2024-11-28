@@ -37,6 +37,9 @@ SOC_TOOLS_TEST_VIVANTE:mx8-nxp-bsp = "imx-gpu-viv-demos"
 RDEPENDS:${PN} += " \
     bridge-utils \
     can-utils \
+    can-utils-access \
+    can-utils-cantest \
+    can-utils-slcan \
     coreutils \
     cpufrequtils \
     cryptodev-module \
