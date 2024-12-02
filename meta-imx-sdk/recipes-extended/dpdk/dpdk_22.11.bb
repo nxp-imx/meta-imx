@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://license/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4
                     file://license/lgpl-2.1.txt;md5=4b54a1fd55a448865a0b32d41598759d \
                     file://license/bsd-3-clause.txt;md5=0f00d99239d922ffd13cabef83b33444"
 
-DEPENDS = "numactl python3-pyelftools-native libpcap"
+DEPENDS = "numactl python3-pyelftools-native libpcap openssl"
 
 SRC_URI = "${DPDK_SRC};nobranch=1"
 DPDK_SRC ?= "git://github.com/nxp-qoriq/dpdk;protocol=https"
 
 STABLE = "-stable"
-SRCREV = "4bd6638cd171c06ba7a289bbcd40c1a6e697de41"
+SRCREV = "be33f6af02c6ecabe228e71f2035e10dc0627b74"
 
 CVE_PRODUCT = "data_plane_development_kit"
 
@@ -28,7 +28,7 @@ PACKAGECONFIG[libvirt] = ",,libvirt"
 
 DPDK_EXAMPLES ?= ""
 DPDK_EXAMPLES:imx-nxp-bsp = "l2fwd,l3fwd"
-DPDK_EXAMPLES:append:mx95-nxp-bsp = ",ip_fragmentation,ip_reassembly"
+DPDK_EXAMPLES:append:mx95-nxp-bsp = ",ip_fragmentation,ip_reassembly,ipsec-secgw"
 
 EXTRA_OEMESON = " \
     -Ddrivers_install_subdir= \
@@ -36,6 +36,13 @@ EXTRA_OEMESON = " \
 "
 EXTRA_OEMESON:append:mx8-nxp-bsp = " --cross-file ${S}/config/arm/arm64_poky_linux_gcc"
 EXTRA_OEMESON:append:mx9-nxp-bsp = " --cross-file ${S}/config/arm/arm64_imx_poky_linux_gcc"
+
+do_install:append:mx95-nxp-bsp (){
+    install -d ${D}${bindir}
+    install -m 0644 ${S}/nxp/crypto_perf_test.sh ${D}${bindir}/
+    install -d ${D}/${sysconfdir}/dpdk
+    install -m 0644 ${S}/nxp/ipsec/*.cfg ${D}/${sysconfdir}/dpdk
+}
 
 RDEPENDS:${PN} = "kernel-module-dpdk-extras pciutils python3-core"
 
