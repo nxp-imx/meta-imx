@@ -18,7 +18,7 @@ CVE_PRODUCT = "data_plane_development_kit"
 
 S = "${WORKDIR}/git"
 
-inherit meson
+inherit meson pkgconfig
 
 PACKAGECONFIG ??= "examples"
 
