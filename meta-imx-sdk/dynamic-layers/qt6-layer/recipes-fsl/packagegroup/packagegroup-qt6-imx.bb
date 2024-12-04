@@ -12,6 +12,7 @@ RDEPENDS:${PN} = " \
     ${QT6_IMAGE_INSTALL_APPS} \
     ${QT6_IMAGE_INSTALL_CINEMATICEXPERIENCE} \
     ${QT6_IMAGE_INSTALL_FONTS} \
+    ${QT6_IMAGE_INSTALL_PYTHON_MODULES} \
     ${QT6_IMAGE_INSTALL_QUICK3D} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11',         'libxkbcommon', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'packagegroup-imx-gopoint', '', d)}\
@@ -24,5 +25,7 @@ QT6_IMAGE_INSTALL_CINEMATICEXPERIENCE        = ""
 QT6_IMAGE_INSTALL_CINEMATICEXPERIENCE:imxgpu = "cinematicexperience-rhi"
 
 QT6_IMAGE_INSTALL_FONTS = "ttf-dejavu-common ttf-dejavu-sans ttf-dejavu-sans-mono ttf-dejavu-serif "
+
+QT6_IMAGE_INSTALL_PYTHON_MODULES = "python3-pyside6 python3-shiboken6"
 
 QT6_IMAGE_INSTALL_QUICK3D = "qtquick3d qtquick3d-dev qtquick3d-examples"
