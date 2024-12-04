@@ -1,0 +1,41 @@
+From ec2d12903526759aff8b6ab62a31b8ec10baabce Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Wed, 4 Dec 2024 10:30:27 -0600
+Subject: [PATCH] Add libz for openssl support [YOCIMX-8529]
+
+Upstream-Status: Pending
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ apps/example/Makefile.in | 2 +-
+ apps/perf/Makefile.in    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/apps/example/Makefile.in b/apps/example/Makefile.in
+index 8d0ba5d1..aa8def49 100644
+--- a/apps/example/Makefile.in
++++ b/apps/example/Makefile.in
+@@ -50,7 +50,7 @@ endif
+ ifeq ($(DPDK),1)
+ DPDK_MACHINE_LINKER_FLAGS=$${RTE_SDK}/$${RTE_TARGET}/lib/ldflags.txt
+ LDFLAGS+=-L@DPDKLIBPATH@/@baselib@
+-LIBS += -g -O3 -pthread -lrt -march=native ${MTCP_FLD}/lib/libmtcp.a -lnuma -lmtcp -lpthread -lrt -lm -latomic -ldl -lgmp -Wl,--whole-archive -ldpdk -Wl,--no-whole-archive ${LDFLAGS}
++LIBS += -g -O3 -pthread -lrt -march=native ${MTCP_FLD}/lib/libmtcp.a -lnuma -lmtcp -lpthread -lrt -lm -latomic -ldl -lgmp -lz -Wl,--whole-archive -ldpdk -Wl,--no-whole-archive ${LDFLAGS}
+ endif
+ 
+ # onvm-specific variables
+diff --git a/apps/perf/Makefile.in b/apps/perf/Makefile.in
+index a3773293..4986cf96 100644
+--- a/apps/perf/Makefile.in
++++ b/apps/perf/Makefile.in
+@@ -50,7 +50,7 @@ endif
+ ifeq ($(DPDK),1)
+ DPDK_MACHINE_LINKER_FLAGS=$${RTE_SDK}/$${RTE_TARGET}/lib/ldflags.txt
+ LDFLAGS+=-L@DPDKLIBPATH@/@baselib@
+-LIBS += -g -O3 -pthread -lrt -march=native ${MTCP_FLD}/lib/libmtcp.a -lnuma -lmtcp -lpthread -lrt -lm -latomic -ldl -lgmp -Wl,--whole-archive -ldpdk -Wl,--no-whole-archive  ${LDFLAGS}
++LIBS += -g -O3 -pthread -lrt -march=native ${MTCP_FLD}/lib/libmtcp.a -lnuma -lmtcp -lpthread -lrt -lm -latomic -ldl -lgmp -lz -Wl,--whole-archive -ldpdk -Wl,--no-whole-archive  ${LDFLAGS}
+ endif
+ 
+ # onvm-specific variables
+-- 
+2.34.1
+

@@ -4,7 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6a36820ca4ad07a1d62df52c596df642"
 
 DEPENDS = "gmp numactl dpdk bc-native zlib"
 
-SRC_URI = "${MTCP_DPDK_SRC};nobranch=1"
+SRC_URI = "${MTCP_DPDK_SRC};nobranch=1 \
+           file://0001-Add-libz-for-openssl-support-YOCIMX-8529.patch"
 MTCP_DPDK_SRC ?= "git://github.com/nxp-mcuxpresso/mtcp;protocol=https"
 SRCREV = "c1dee662b4d0e33c8bf2b6ee4feec27efd96a61d"
 
