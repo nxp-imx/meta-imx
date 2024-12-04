@@ -168,7 +168,7 @@ SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}
 SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-14.0.1"
-SRCREV = "25fb7fe8e1c1c5d9ca328e93348ec1261708a940"
+SRCREV = "8c90849ba0b1cf84cf89b948d5dba346503fe789"
 S = "${WORKDIR}/git"
 
 SRC_URI:remove = "file://0001-libweston-tools-Include-libgen.h-for-basename-signat.patch"
