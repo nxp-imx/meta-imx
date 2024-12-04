@@ -2,7 +2,7 @@ DESCRIPTION = "mTCP on DPDK"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6a36820ca4ad07a1d62df52c596df642"
 
-DEPENDS = "gmp numactl dpdk bc-native"
+DEPENDS = "gmp numactl dpdk bc-native zlib"
 
 SRC_URI = "${MTCP_DPDK_SRC};nobranch=1"
 MTCP_DPDK_SRC ?= "git://github.com/nxp-mcuxpresso/mtcp;protocol=https"
