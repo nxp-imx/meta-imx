@@ -6,9 +6,9 @@ SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ca53281cc0caa7e320d4945a896fb837" 
 
 SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
-IMX_SRCREV_ABBREV = "90fef91"
+IMX_SRCREV_ABBREV = "1bd75d0"
 
-SRC_URI[sha256sum] = "18d1ed502d8985aa8dafc6c3100f2fe4d5c2d721b3926fa68e23f7ca4b1e6ebb"
+SRC_URI[sha256sum] = "28cd27ab7736ff979ab243a7b7ab1db2a5537ff763e445e0dacb67ae082a8f7d"
 
 S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
