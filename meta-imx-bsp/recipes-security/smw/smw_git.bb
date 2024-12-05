@@ -34,8 +34,7 @@ inherit cmake python3native
 
 PACKAGECONFIG ??= "${PACKAGECONFIG_DRIVERS}"
 PACKAGECONFIG_DRIVERS                = ""
-PACKAGECONFIG_DRIVERS:mx8qxp-nxp-bsp = "ele-seco"
-PACKAGECONFIG_DRIVERS:mx8dx-nxp-bsp  = "ele-seco"
+PACKAGECONFIG_DRIVERS:mx8x-nxp-bsp   = "ele-seco"
 PACKAGECONFIG_DRIVERS:mx8ulp-nxp-bsp = "ele"
 PACKAGECONFIG_DRIVERS:mx91-nxp-bsp   = "ele"
 PACKAGECONFIG_DRIVERS:mx93-nxp-bsp   = "ele"
