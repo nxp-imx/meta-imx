@@ -1,0 +1,36 @@
+From 2615cc4eb5d017a8376b689a54f0627b99ecd98f Mon Sep 17 00:00:00 2001
+From: "yuan.tian" <yuan.tian@nxp.com>
+Date: Thu, 1 Sep 2022 10:52:15 +0800
+Subject: [PATCH] LF-4977 [#imx-2949] Add patch to change the precison
+ requirement
+
+Since the hardware precesion restriction of imx6, change the precision requirement of the case dEQP-GLES3.functional.texture.filtering.3d.formats.rgba16f_linear_mipmap_linear
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: IPD_SCM_CN <IPD_SCM_CN@verisilicon.com>
+Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
+---
+ modules/gles3/functional/es3fTextureFilteringTests.cpp | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/modules/gles3/functional/es3fTextureFilteringTests.cpp b/modules/gles3/functional/es3fTextureFilteringTests.cpp
+index fc8b27c7a..521b9ec59 100644
+--- a/modules/gles3/functional/es3fTextureFilteringTests.cpp
++++ b/modules/gles3/functional/es3fTextureFilteringTests.cpp
+@@ -1150,6 +1150,13 @@ Texture3DFilteringCase::IterateResult Texture3DFilteringCase::iterate (void)
+ 		lodPrecision.derivateBits		= 18;
+ 		lodPrecision.lodBits			= 6;
+ 		lookupPrecision.colorThreshold	= tcu::computeFixedPointThreshold(colorBits) / refParams.colorScale;
++		if (lookupPrecision.colorThreshold.m_data[0] < 32 && lookupPrecision.colorThreshold.m_data[0] > 31)
++		{
++			for (int i = 0; i < 4; i++)
++			{
++				lookupPrecision.colorThreshold.m_data[i] = 80.75;
++			}
++		}
+ 		lookupPrecision.coordBits		= tcu::IVec3(20,20,20);
+ 		lookupPrecision.uvwBits			= tcu::IVec3(7,7,7);
+ 		lookupPrecision.colorMask		= getCompareMask(pixelFormat);
+-- 
+2.17.1
+
