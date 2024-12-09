@@ -10,14 +10,9 @@ HOMEPAGE = "https://github.com/latchset/pkcs11-provider"
 SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b53b787444a60266932bd270d1cf2d45"
-DEPENDS = "\
-    openssl \
-    p11-kit \
-"
+DEPENDS = "openssl"
 
-PV = "0.5+git${SRCPV}"
-
-SRCREV = "07101bf32bcf104ee47246711aa772d860619415"
+SRCREV = "93bd41c505cf54dc1ecef6c963df347b9f4abf6d"
 
 SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
 
