@@ -19,7 +19,7 @@ DEPENDS += "coreutils-native"
 
 SRC_URI = "${LINUX_IMX_SRC}"
 LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
-SRCBRANCH = "next"
+SRCBRANCH = "lf-6.12.y"
 KBRANCH = "${SRCBRANCH}"
 LOCALVERSION = "-lts-next"
 SRCREV = "e7ee12d27d21f19b8e49f408641f0d431b82a7b2"
