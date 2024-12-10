@@ -4,12 +4,12 @@ Microcontrollers neural network model into an optimised version that \
 can run on an embedded system containing an Arm Ethos-U NPU"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
-DEPENDS = "python3-pip-native python3-wheel-native flatbuffers python3-numpy python3-lxml python3-numpy-native python3-setuptools-scm-native"
+DEPENDS = "flatbuffers python3-numpy python3-lxml python3-numpy-native"
 
 SRC_URI = "${VELA_SRC};branch=${SRCBRANCH}"
 VELA_SRC ?= "git://github.com/nxp-imx/ethos-u-vela.git;protocol=https"
-SRCBRANCH = "imx_3.12.0"
-SRCREV = "135efab5b1a30b08d4dcc075cb8bed2fadc28407"
+SRCBRANCH = "imx_4.1.0"
+SRCREV = "84f3150e22db5a51d3b224819fd41a17bdf697b8"
 
 S = "${WORKDIR}/git"
 
@@ -26,3 +26,5 @@ do_compile:prepend() {
 RDEPENDS:${PN} += "python3-flatbuffers python3-numpy python3-lxml"
 
 COMPATIBLE_MACHINE = "(mx93-nxp-bsp)"
+
+INSANE_SKIP:${PN} = "already-stripped"
