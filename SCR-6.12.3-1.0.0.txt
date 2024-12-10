@@ -1006,7 +1006,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.9.3-5239d12.bin
+Package:                     imx-parser-4.9.3-9f41a74.bin
 Version:                     4.9.3
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
