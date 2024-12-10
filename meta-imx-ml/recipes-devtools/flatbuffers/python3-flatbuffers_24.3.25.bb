@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "7d6d99c6befa635780a4e944d37ebfd58e68a108"
+SRCREV = "e6463926479bd6b330cbcf673f7e917803fd5831"
 SRC_URI = "git://github.com/google/flatbuffers.git;branch=master;protocol=https"
 S = "${WORKDIR}/git/python"
 
