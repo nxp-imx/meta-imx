@@ -77,6 +77,12 @@ do_install() {
         $(find . -name "*.h*") \
         ${D}${includedir}/tensorflow/lite
 
+    install -d ${D}${includedir}/tensorflow/compiler/mlir/lite
+    cd ${S}/tensorflow/compiler/mlir/lite
+    cp --parents \
+        $(find . -name "*.h*") \
+        ${D}${includedir}/tensorflow/compiler/mlir/lite
+
     # install version.h from core
     install -d ${D}${includedir}/tensorflow/core/public
     cp ${S}/tensorflow/core/public/version.h ${D}${includedir}/tensorflow/core/public

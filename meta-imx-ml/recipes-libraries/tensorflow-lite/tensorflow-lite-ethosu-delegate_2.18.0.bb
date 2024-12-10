@@ -1,9 +1,9 @@
-# Copyright 2020-2023 NXP
+# Copyright 2020-2024 NXP
 DESCRIPTION = "TensorFlow Lite Ethos-u Delegate"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
-DEPENDS = "tensorflow-lite ethos-u-driver-stack"
+DEPENDS = "tensorflow-lite ethos-u-driver-stack tensorflow-lite-host-tools-native"
 
 require tensorflow-lite-${PV}.inc
 
@@ -24,6 +24,7 @@ inherit python3native cmake
 EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR}"
 EXTRA_OECMAKE += " \
      -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
+     -DTFLITE_HOST_TOOLS_DIR=${STAGING_BINDIR_NATIVE} \
      -DFETCHCONTENT_SOURCE_DIR_TENSORFLOW=${UNPACKDIR}/tfgit \
      -DTFLITE_LIB_LOC=${STAGING_DIR_HOST}${libdir}/libtensorflow-lite.so \
      ${S} \

@@ -1,21 +1,20 @@
-# Copyright 2020-2021 NXP
-DESCRIPTION = "TensorFlow Lite VX Delegate"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7d6260e4f3f6f85de05af9c8f87e6fb5"
+# Copyright 2023-2024 NXP
+DESCRIPTION = "TensorFlow Lite Neutron Delegate"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
 
-DEPENDS = "tensorflow-lite tim-vx"
+DEPENDS = "tensorflow-lite neutron tensorflow-lite-host-tools-native"
 
 require tensorflow-lite-${PV}.inc
 
-TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-vx-delegate-imx.git;protocol=https" 
-SRCBRANCH_vx = "imx-v2.16.2"
-SRCREV_vx = "4277fd719fc1849c3d448d77ac01af1a84dd3bf3"
+NEUTRON_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-neutron-delegate.git;protocol=https"
+SRCBRANCH_neutron = "main"
+SRCREV_neutron = "ee5e77ae2582b24e14b0d74acdf8a1c111842005"
 
-SRCREV_FORMAT = "vx_tf"
+SRCREV_FORMAT = "neutron_tf"
 
-SRC_URI = "${TENSORFLOW_LITE_VX_DELEGATE_SRC};branch=${SRCBRANCH_vx};name=vx \
+SRC_URI = "${NEUTRON_DELEGATE_SRC};branch=${SRCBRANCH_neutron};name=neutron \
            ${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf;destsuffix=tfgit \
-           file://0001-Findtim-vx.cmake-Fix-LIBDIR-for-multilib-environment.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -25,7 +24,7 @@ inherit python3native cmake
 EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR}"
 EXTRA_OECMAKE += " \
      -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
-     -DTIM_VX_INSTALL=${STAGING_DIR_HOST}/usr \
+     -DTFLITE_HOST_TOOLS_DIR=${STAGING_BINDIR_NATIVE} \
      -DFETCHCONTENT_SOURCE_DIR_TENSORFLOW=${UNPACKDIR}/tfgit \
      -DTFLITE_LIB_LOC=${STAGING_DIR_HOST}${libdir}/libtensorflow-lite.so \
      ${S} \
@@ -52,14 +51,6 @@ do_install() {
     do
         cp --no-preserve=ownership -d $lib ${D}${libdir}
     done
-
-    # install header files
-    install -d ${D}${includedir}/tensorflow-lite-vx-delegate
-    cd ${S}
-    cp --parents \
-        $(find . -name "*.h*") \
-        ${D}${includedir}/tensorflow-lite-vx-delegate
-
 }
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
@@ -68,6 +59,7 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-COMPATIBLE_MACHINE          = "(^$)"
-COMPATIBLE_MACHINE:imxgpu3d = "(mx8-nxp-bsp)"
-COMPATIBLE_MACHINE:mx8mm-nxp-bsp    = "(^$)"
+# Work around do_package_qa error
+INSANE_SKIP:${PN} += "buildpaths"
+
+COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
