@@ -86,8 +86,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     imx-sc-firmware-1.17.0-83624b9.bin
-Version:                     1.17.0
+Package:                     imx-sc-firmware-1.18.0-91992b7.bin
+Version:                     1.18.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -1529,7 +1529,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     ethos-u-vela.git
-Version:                     3.12.0
+Version:                     4.1.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1598,7 +1598,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.16.2
+Version:                     2.18.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1611,7 +1611,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-ethosu-delegate.git
-Version:                     2.16.2
+Version:                     2.18.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1625,7 +1625,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-neutron-delegate.git
-Version:                     2.16.2
+Version:                     2.18.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1636,7 +1636,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
-Version:                     2.16.2
+Version:                     2.18.0
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
