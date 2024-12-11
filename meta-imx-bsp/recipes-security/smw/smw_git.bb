@@ -32,7 +32,7 @@ S = "${WORKDIR}/git/smw"
 
 inherit cmake python3native
 
-PACKAGECONFIG ??= "${PACKAGECONFIG_DRIVERS}"
+PACKAGECONFIG ??= "${PACKAGECONFIG_DRIVERS} ${PACKAGECONFIG_FEATURES}"
 PACKAGECONFIG_DRIVERS                = ""
 PACKAGECONFIG_DRIVERS:mx8x-nxp-bsp   = "ele-seco"
 PACKAGECONFIG_DRIVERS:mx8ulp-nxp-bsp = "ele"
@@ -40,8 +40,13 @@ PACKAGECONFIG_DRIVERS:mx91-nxp-bsp   = "ele"
 PACKAGECONFIG_DRIVERS:mx93-nxp-bsp   = "ele"
 PACKAGECONFIG_DRIVERS:mx95-nxp-bsp   = "ele"
 
+PACKAGECONFIG_FEATURES              = ""
+PACKAGECONFIG_FEATURES:mx91-nxp-bsp = "tls12"
+PACKAGECONFIG_FEATURES:mx93-nxp-bsp = "tls12"
+
 PACKAGECONFIG[ele] = "-DELE_ROOT=${STAGING_DIR_HOST},,imx-secure-enclave,,,ele-seco"
 PACKAGECONFIG[ele-seco] = "-DSECO_ROOT=${STAGING_DIR_HOST},,imx-secure-enclave-seco,,,ele"
+PACKAGECONFIG[tls12] = "-DENABLE_TLS12=ON,-DENABLE_TLS12=OFF,openssl"
 
 CFLAGS[unexport] = "1"
 CPPFLAGS[unexport] = "1"
