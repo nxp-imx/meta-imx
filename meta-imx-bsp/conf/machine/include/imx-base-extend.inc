@@ -28,6 +28,12 @@ IMX_SOC_REV:mx93-generic-bsp  ?= "A1"
 IMX_EXTRA_FIRMWARE:mx93-generic-bsp = "imx-boot-firmware-files firmware-ele-imx"
 UBOOT_DTB_NAME:mx93-generic-bsp = ""
 
+# Add new SoC i.MX 943
+MACHINEOVERRIDES_EXTENDER:mx943:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxpxp:mx9-generic-bsp:mx9-nxp-bsp:mx93-generic-bsp:mx93-nxp-bsp:mx943-generic-bsp:mx943-nxp-bsp"
+MACHINE_SOCARCH_SUFFIX:mx943-nxp-bsp = "-mx943"
+IMX_EXTRA_FIRMWARE:mx943-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SYSTEM_MANAGER_RPROVIDER} imx-oei"
+SECO_FIRMWARE_NAME:mx943-generic-bsp ?= "mx943${IMX_SOC_REV_LOWER}-ahab-container.img"
+
 # Add new SoC i.MX 95
 DEFAULTTUNE:mx95-nxp-bsp   ?= "armv8a-crc-crypto"
 
