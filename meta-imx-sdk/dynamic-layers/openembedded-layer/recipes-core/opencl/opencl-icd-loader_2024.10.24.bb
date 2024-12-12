@@ -13,7 +13,7 @@ RPROVIDES:${PN} = "virtual-opencl-icd"
 
 S = "${WORKDIR}/git"
 
-SRCREV = "861b68b290e76d08e7241608479c16431f529945"
+SRCREV = "5907ac1114079de4383cecddf1c8640e3f52f92b"
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"
 
 EXTRA_OECMAKE:append = " \
@@ -41,7 +41,7 @@ PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
 FILES:${PN} = " \
     ${bindir}/icd_loader_test \
     ${libdir}/libOpenCLDriverStub.so \
-    ${libdir}/libOpenCL.so.1.2 \
+    ${libdir}/libOpenCL.so.1.0.0 \
     ${libdir}/libOpenCL.so.1 \
 "
 FILES:${PN}-dev = " \
