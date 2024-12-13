@@ -29,7 +29,6 @@ RDEPENDS_CAAM_CRYPTO_APPS:mx93-nxp-bsp = ""
 RDEPENDS_CAAM_CRYPTO_APPS:mx95-nxp-bsp = ""
 
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE = ""
-RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8qm-nxp-bsp  = "imx-secure-enclave-seco"
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8dxl-nxp-bsp = "itest python3-requests"
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8ulp-nxp-bsp = "itest python3-requests"
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx91-nxp-bsp   = "itest python3-requests"

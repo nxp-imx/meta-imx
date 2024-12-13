@@ -5,7 +5,6 @@ DESCRIPTION += "SECO"
 
 PLAT = "seco"
 
-EXTRA_OEMAKE:append:mx8qm-nxp-bsp = " COMPATIBLE_MACHINE=mx8dxl-nxp-bsp"
 EXTRA_OEMAKE:append:mx8x-nxp-bsp = " COMPATIBLE_MACHINE=mx8dxl-nxp-bsp"
 
 do_install:append:mx95-nxp-bsp() {
@@ -17,4 +16,4 @@ do_install:append:mx95-nxp-bsp() {
     rm ${D}${bindir}/nvmd_conf_setup.sh
 }
 
-COMPATIBLE_MACHINE = "(mx8qm-nxp-bsp|mx8x-nxp-bsp|mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8x-nxp-bsp|mx95-nxp-bsp)"
