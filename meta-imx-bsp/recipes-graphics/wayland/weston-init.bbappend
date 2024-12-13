@@ -24,3 +24,11 @@ do_install:append() {
         sed -i -e "/^\[core\]/a #gbm-format=${GBM_FORMAT_VALUE}" ${D}${sysconfdir}/xdg/weston/weston.ini
     fi
 }
+
+do_install:append:mx6-nxp-bsp() {
+    update_file "--no-resizeable" "--no-clients-resize" ${D}${sysconfdir}/xdg/weston/weston.ini
+}
+
+do_install:append:mx7-nxp-bsp() {
+    update_file "--no-resizeable" "--no-clients-resize" ${D}${sysconfdir}/xdg/weston/weston.ini
+}
