@@ -3,9 +3,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 GBM_FORMAT_VALUE = "argb8888"
 
 update_file() {
-    if ! grep -q "$1" $3; then
-        bbfatal $1 not found in $3
-    fi
     sed -i -e "s,$1,$2," $3
 }
 
