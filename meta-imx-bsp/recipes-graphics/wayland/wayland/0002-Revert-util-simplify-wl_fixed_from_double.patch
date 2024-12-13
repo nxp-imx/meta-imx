@@ -1,0 +1,35 @@
+From 11d424a44a3d33798db902142f9863700695694f Mon Sep 17 00:00:00 2001
+From: Haihua Hu <jared.hu@nxp.com>
+Date: Fri, 13 Dec 2024 15:38:07 +0900
+Subject: [PATCH 2/2] Revert "util: simplify wl_fixed_from_double()"
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+This reverts commit 2a91f01d6c617f8f2bd1c5bf18cfa9bd21a732f6.
+---
+ src/wayland-util.h | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/src/wayland-util.h b/src/wayland-util.h
+index bcb903c..8cbc4ef 100644
+--- a/src/wayland-util.h
++++ b/src/wayland-util.h
+@@ -642,7 +642,14 @@ wl_fixed_to_double(wl_fixed_t f)
+ static inline wl_fixed_t
+ wl_fixed_from_double(double d)
+ {
+-	return (wl_fixed_t) (d * 256.0);
++	union {
++		double d;
++		int64_t i;
++	} u;
++
++	u.d = d + (3LL << (51 - 8));
++
++	return (wl_fixed_t)u.i;
+ }
+ 
+ /**
+-- 
+2.34.1
+

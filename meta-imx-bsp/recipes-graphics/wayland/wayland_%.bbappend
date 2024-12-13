@@ -15,5 +15,11 @@ SRC_URI_IMXGPU_PATCHES:imxgpu:mx6-nxp-bsp = " \
     file://0205-connection-avoid-calling-memcpy-on-NULL-0.patch"
 SRC_URI_IMXGPU_PATCHES:imxgpu:mx7-nxp-bsp = " \
     ${SRC_URI_IMXGPU_PATCHES:imxgpu:mx6-nxp-bsp}"
+
+SRC_URI:append = " \
+    file://0001-Revert-util-simplify-wl_fixed_to_double.patch \
+    file://0002-Revert-util-simplify-wl_fixed_from_double.patch \
+"
+
 #PACKAGE_ARCH:imxgpu:mx6-nxp-bsp = "${MACHINE_SOCARCH}"
 #PACKAGE_ARCH:imxgpu:mx7-nxp-bsp = "${MACHINE_SOCARCH}"
