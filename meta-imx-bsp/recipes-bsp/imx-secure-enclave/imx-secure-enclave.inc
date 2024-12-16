@@ -11,7 +11,7 @@ DEPENDS = " mbedtls openssl"
 SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
 SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "086c433e69804613da9c75de6b81189235394b35"
+SRCREV = "a7cdf0f36894f8162dd65f66584ff81641856f19"
 
 S = "${WORKDIR}/git"
 
