@@ -3,8 +3,8 @@ require mali-imx.inc
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3" 
 
-SRC_URI[sha256sum] = "5c33bdd30c73eae039bd8ff9911bddfae583816cc32225a962290f535807d845"
-IMX_SRCREV_ABBREV = "2214e74"
+SRC_URI[sha256sum] = "d14caf328c62bb1c0bebbd3debb216f94e3aea248b9700b4f486526b5ef16c8f"
+IMX_SRCREV_ABBREV = "9cb28e2"
 
 S = "${WORKDIR}/git"
 
