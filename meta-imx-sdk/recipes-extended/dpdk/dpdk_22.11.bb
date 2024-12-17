@@ -30,9 +30,12 @@ DPDK_EXAMPLES ?= ""
 DPDK_EXAMPLES:imx-nxp-bsp = "l2fwd,l3fwd"
 DPDK_EXAMPLES:append:mx95-nxp-bsp = ",ip_fragmentation,ip_reassembly,ipsec-secgw"
 
+DPDK_APPS ?= "pdump,test-pmd,dumpcap,proc-info,test-crypto-perf"
+
 EXTRA_OEMESON = " \
     -Ddrivers_install_subdir= \
     -Denable_examples_source_install=false \
+    -Denable_apps=${DPDK_APPS} \
 "
 EXTRA_OEMESON:append:mx8-nxp-bsp = " --cross-file ${S}/config/arm/arm64_poky_linux_gcc"
 EXTRA_OEMESON:append:mx9-nxp-bsp = " --cross-file ${S}/config/arm/arm64_imx_poky_linux_gcc"
