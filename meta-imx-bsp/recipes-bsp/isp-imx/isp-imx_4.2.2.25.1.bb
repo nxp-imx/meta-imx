@@ -42,13 +42,6 @@ EXTRA_OECMAKE += " \
     -Wno-dev \
 "
 
-do_configure:prepend () {
-    # FIXME: Should be rebuild.
-    patchelf --replace-needed libjsoncpp.so.25 libjsoncpp.so.26 ${S}/mediacontrol/install/lib/libmedia_server.so
-    patchelf --replace-needed libjsoncpp.so.25 libjsoncpp.so.26 ${S}/mediacontrol/install/bin/isp_media_server
-    patchelf --replace-needed libjsoncpp.so.25 libjsoncpp.so.26 ${S}/tuningext/install/tuningext
-}
-
 do_install() {
     # Use Makefile to install
     oe_runmake -f ${S}/Makefile install INSTALL_DIR=${D} SOURCE_DIR=${S}
