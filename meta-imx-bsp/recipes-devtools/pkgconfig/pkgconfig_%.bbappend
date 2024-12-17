@@ -3,8 +3,4 @@ do_install:append:class-nativesdk () {
         -e "s|@LIBDIR_NATIVE@|\$OECORE_NATIVE_SYSROOT/usr/lib/pkgconfig|" \
         < ${UNPACKDIR}/pkg-config-native.in > ${B}/pkg-config-native
     install -m755 ${B}/pkg-config-native ${D}${bindir}/pkg-config-native
-    sed -e "s|@PATH_NATIVE@|\$OECORE_NATIVE_SYSROOT|" \
-        -e "s|@LIBDIR_NATIVE@|\$OECORE_NATIVE_SYSROOT/usr/lib/pkgconfig|" \
-        < ${UNPACKDIR}/pkg-config-esdk.in > ${B}/pkg-config-esdk
-    install -m755 ${B}/pkg-config-esdk ${D}${bindir}/pkg-config-esdk
 }
