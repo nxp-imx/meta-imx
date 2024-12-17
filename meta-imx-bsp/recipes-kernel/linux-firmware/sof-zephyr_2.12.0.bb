@@ -22,6 +22,10 @@ do_install() {
     cp -r sof-zephyr-xcc/* ${D}${nonarch_base_libdir}/firmware/imx/sof-zephyr-xcc
     cp -r sof-tplg ${D}${nonarch_base_libdir}/firmware/imx/
     # Copy symbolic link
+    if [ ${OEI_SOC} = "mx95" ]; then
+       rm -rf sof
+       ln -sf sof-zephyr-gcc sof
+    fi
     cp -P sof  ${D}${nonarch_base_libdir}/firmware/imx/
 }
 
