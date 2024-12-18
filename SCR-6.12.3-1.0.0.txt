@@ -176,7 +176,7 @@ License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    BSP libraries
-Release Location:            https://github.com/nxp-imx/imx-lib -b master
+Release Location:            https://github.com/nxp-imx/imx-lib -b lf-6.12.3-1.0.0
 Origin:                      NXP (LGPL-2.1)
 
 --------------------------------------------
@@ -689,8 +689,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.12-aarch32-1c7872f.bin
-Version:                     6.4.11.p2.12
+Package:                     imx-gpu-viv-6.4.11.p3.0-aarch32-5d85a59.bin
+Version:                     6.4.11.p3.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -708,8 +708,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.12-aarch64-1c7872f.bin
-Version:                     6.4.11.p2.12
+Package:                     imx-gpu-viv-6.4.11.p3.0-aarch64-5d85a59.bin
+Version:                     6.4.11.p3.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -849,8 +849,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.12-arm-1c7872f.bin
-Version:                     6.4.11.p2.12
+Package:                     imx-gpu-g2d-6.4.11.p3.0-arm-5d85a59.bin
+Version:                     6.4.11.p3.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -861,8 +861,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.12-aarch64-1c7872f.bin
-Version:                     6.4.11.p2.12
+Package:                     imx-gpu-g2d-6.4.11.p3.0-aarch64-5d85a59.bin
+Version:                     6.4.11.p3.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -873,8 +873,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.2.4-e2dce80.bin
-Version:                     2.2.4
+Package:                     imx-dpu-g2d-v1-2.3.0-d852f93.bin
+Version:                     2.3.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -885,8 +885,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.2.4-e2dce80.bin
-Version:                     2.2.4
+Package:                     imx-dpu-g2d-v2-2.3.0-d852f93.bin
+Version:                     2.3.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
