@@ -11,7 +11,7 @@ SRC_URI = "${LINUX_IMX_SRC}"
 LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.12.y"
 LOCALVERSION = "-lts-${SRCBRANCH}"
-SRCREV = "a7240ceab9c069b7c23d08c9bb0649273746e4ff"
+SRCREV = "c3932bc70f3fc166abcb2d76d24611bc92aad490"
 
 S = "${WORKDIR}/git"
 
@@ -25,7 +25,6 @@ IMX_UAPI_HEADERS = " \
     hx280enc.h \
     ipu.h \
     imx_vpu.h \
-    mxc_asrc.h \
     mxc_dcic.h \
     mxc_mlb.h \
     mxc_sim_interface.h \
@@ -35,6 +34,11 @@ IMX_UAPI_HEADERS = " \
     pxp_dma.h \
     version.h \
     videodev2.h \
+"
+
+IMX_UAPI_HEADERS_SOUND = " \
+    sound/compress_offload.h \
+    sound/compress_params.h \
 "
 
 do_install() {
@@ -57,6 +61,11 @@ do_install() {
     for h in ${IMX_UAPI_HEADERS}; do
         install -D -m 0644 ${B}${includedir}/linux/$h \
                        ${D}${includedir}/imx/linux/$h
+    done
+    install -d ${D}${includedir}/imx/linux/sound
+    for h in ${IMX_UAPI_HEADERS_SOUND}; do
+        install -D -m 0644 ${B}${includedir}/$h \
+                       ${D}${includedir}/imx/$h
     done
 }
 
