@@ -95,7 +95,7 @@ SRC_URI:remove = " \
 "
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "gitsm://github.com/nxp-imx/libcamera.git;protocol=https"
-SRCBRANCH = "imx/next"
+SRCBRANCH = "lf-6.12.3_1.0.0"
 SRCREV = "17687598fb4002a5b44e584376b000311f625d32"
 
 PACKAGECONFIG = "gst pycamera tiff"
