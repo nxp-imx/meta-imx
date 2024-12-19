@@ -118,7 +118,7 @@ SRC_URI:remove = " \
 SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
-SRCBRANCH = "imx-1.24.x"
+SRCBRANCH = "MM_04.09.03_2412_L6.12.y"
 SRCREV = "7e25988381a1bb679157b9964fc7d4c641a792c7"
 
 S = "${WORKDIR}/git"
