@@ -689,7 +689,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.0-aarch32-504697a.bin
+Package:                     imx-gpu-viv-6.4.11.p3.0-aarch32-f6c6055.bin
 Version:                     6.4.11.p3.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -708,7 +708,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.0-aarch64-504697a.bin
+Package:                     imx-gpu-viv-6.4.11.p3.0-aarch64-f6c6055.bin
 Version:                     6.4.11.p3.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -849,7 +849,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.0-arm-504697a.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.0-arm-f6c6055.bin
 Version:                     6.4.11.p3.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -861,7 +861,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.0-aarch64-504697a.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.0-aarch64-f6c6055.bin
 Version:                     6.4.11.p3.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
