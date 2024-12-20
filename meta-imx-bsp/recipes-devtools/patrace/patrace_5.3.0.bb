@@ -9,10 +9,9 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a1fcde5f6838616beb564260554a388f"
 DEPENDS = "wayland"
 
-SRC_URI = " \
-    gitsm://github.com/ARM-software/${BPN}.git;branch=master;protocol=https \
-    file://0001-CMakeLists.txt-Switch-to-python3.patch"
-SRCREV = "ca798a0223c876dcc680b68b00ca1147db121954"
+SRC_URI = "gitsm://github.com/ARM-software/${BPN}.git;branch=master;protocol=https \
+           file://0001-CMakeLists.txt-Switch-to-python3.patch"
+SRCREV = "c6945d4fcb42c09abf6983171a476acde2c3cd8b"
 
 S = "${WORKDIR}/git"
 
