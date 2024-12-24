@@ -18,10 +18,18 @@ FILES:${PN}-nxp8997-common = " \
     ${nonarch_base_libdir}/firmware/nxp/uart8997_bt_v4.bin \
 "
 
+FILES:${PN}-nxp8997-sdio = " \
+    ${nonarch_base_libdir}/firmware/nxp/sd*8997* \
+"
+
 FILES:${PN}-nxp9098-common = " \
     ${nonarch_base_libdir}/firmware/nxp/ed_mac_ctrl_V3_909x.conf \
     ${nonarch_base_libdir}/firmware/nxp/txpwrlimit_cfg_9098.conf \
     ${nonarch_base_libdir}/firmware/nxp/uart9098_bt_v1.bin \
+"
+
+FILES:${PN}-nxp9098-sdio = " \
+    ${nonarch_base_libdir}/firmware/nxp/sd*9098* \
 "
 
 FILES:${PN}-nxpiw610-sdio += " \
