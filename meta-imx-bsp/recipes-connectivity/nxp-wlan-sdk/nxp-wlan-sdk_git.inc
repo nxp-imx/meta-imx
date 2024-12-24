@@ -12,4 +12,3 @@ S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "KERNELDIR=${STAGING_KERNEL_BUILDDIR}"
 
-RDEPENDS:${PN} = "wireless-tools"
