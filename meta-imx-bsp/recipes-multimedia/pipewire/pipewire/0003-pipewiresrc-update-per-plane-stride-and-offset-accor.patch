@@ -1,0 +1,76 @@
+From 9a5813786fa1d6130ef074e4ad022b126daa674b Mon Sep 17 00:00:00 2001
+From: Elliot Chen <elliot.chen@nxp.com>
+Date: Wed, 16 Oct 2024 15:14:26 +0900
+Subject: [PATCH 3/3] pipewiresrc: update per-plane stride and offset according
+ to chunk info
+
+Upstream-Status: Pending
+
+---
+ meson.build              |  5 +++++
+ src/gst/gstpipewiresrc.c | 32 +++++++++++++++++++++++++++-----
+ 2 files changed, 32 insertions(+), 5 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 198fe4bf4..d8331d886 100644
+--- a/meson.build
++++ b/meson.build
+@@ -369,6 +369,11 @@ gst_deps_def = {
+   'gstreamer-allocators-1.0': {},
+ }
+ 
++gst_video_dep = dependency('gstreamer-video-1.0', required: gst_option)
++if gst_video_dep.version().version_compare('< 1.22.0')
++  error('gstreamer-video-1.0 version must be 1.22.0 or higher')
++endif
++
+ gst_dep = []
+ gst_dma_drm_found = false
+ foreach depname, kwargs: gst_deps_def
+diff --git a/src/gst/gstpipewiresrc.c b/src/gst/gstpipewiresrc.c
+index b4ccc55b7..1a5f42b49 100644
+--- a/src/gst/gstpipewiresrc.c
++++ b/src/gst/gstpipewiresrc.c
+@@ -644,12 +644,34 @@ static GstBuffer *dequeue_buffer(GstPipeWireSrc *pwsrc)
+                              info->offset,
+                              info->stride);
+ 
+-    for (i = 0; i < MIN (b->buffer->n_datas, GST_VIDEO_MAX_PLANES); i++) {
+-      struct spa_data *d = &b->buffer->datas[i];
+-      meta->offset[i] = video_size;
+-      meta->stride[i] = d->chunk->stride;
++    if (b->buffer->n_datas < GST_VIDEO_INFO_N_PLANES (info)) {
++      /* If the buffer number is smaller than the plane number,
++       * we should update the stride and offset for all planes.
++       */
++      gsize offset = 0;
++      guint stride;
++      for (i = 0; i < GST_VIDEO_INFO_N_PLANES(info); i++) {
++        if (i < b->buffer->n_datas) {
++          struct spa_data *d = &b->buffer->datas[i];
++          stride = d->chunk->stride;
++        } else {
++          stride = gst_video_format_info_extrapolate_stride (info->finfo,
++              i, b->buffer->datas[0].chunk->stride);
++        }
+ 
+-      video_size += d->chunk->size;
++        meta->stride[i] = stride;
++        meta->offset[i] = offset;
++        offset += stride * GST_VIDEO_FORMAT_INFO_SCALE_HEIGHT (info->finfo,
++            i, GST_VIDEO_INFO_HEIGHT(info));
++      }
++    } else {
++      for (i = 0; i < MIN (b->buffer->n_datas, GST_VIDEO_MAX_PLANES); i++) {
++        struct spa_data *d = &b->buffer->datas[i];
++        meta->offset[i] = video_size;
++        meta->stride[i] = d->chunk->stride;
++
++        video_size += d->chunk->size;
++      }
+     }
+   }
+ 
+-- 
+2.25.1
+
