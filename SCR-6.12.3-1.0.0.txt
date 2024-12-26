@@ -546,7 +546,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     ecdsa-lib-imx-3.3.3-dd6eac8.bin
 Version:                     3.3.3
-Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -899,7 +899,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-g2d-pxp.git
 Version:                     2.2
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -1124,7 +1124,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-vpuwrap.git
 Version:                     git
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
@@ -1179,7 +1179,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-vpu-hantro-vc-1.10.1-c0244a1.bin
 Version:                     1.10.1
-Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1259,7 +1259,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-voiceUI.git
 Version:                     2.0
-Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
