@@ -1,0 +1,67 @@
+From 2aba4b9b1cd734780e46ce3999d62836646c8014 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Fri, 27 Dec 2024 14:14:38 +0800
+Subject: [PATCH] MGS-7985: Patrace fail to capture weston-simple-egl
+
+Patrace can't support eglCreatePlatformWindowSurfaceEXT,
+add the EGL extension supporting.
+
+Upstream-Status: Pending
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ patrace/src/retracer/retrace_egl.cpp | 1 +
+ patrace/src/specs/eglapi.py          | 2 +-
+ patrace/src/tracer/trace.py          | 4 ++--
+ 3 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/patrace/src/retracer/retrace_egl.cpp b/patrace/src/retracer/retrace_egl.cpp
+index 59db3b3..77ba138 100644
+--- a/patrace/src/retracer/retrace_egl.cpp
++++ b/patrace/src/retracer/retrace_egl.cpp
+@@ -1400,6 +1400,7 @@ const common::EntryMap retracer::egl_callbacks = {
+     {"eglCreateWindowSurface", std::make_pair((void*)retrace_eglCreateWindowSurface, false)},
+     {"eglCreateWindowSurface2", std::make_pair((void*)retrace_eglCreateWindowSurface2, false)},
+     {"eglCreatePlatformWindowSurface", std::make_pair((void*)retrace_eglCreateWindowSurface, false)},
++    {"eglCreatePlatformWindowSurfaceEXT", std::make_pair((void*)retrace_eglCreateWindowSurface, false)},
+     {"eglCreatePbufferSurface", std::make_pair((void*)retrace_eglCreatePbufferSurface, false)},
+     //{"eglCreatePixmapSurface", std::make_pair((void*)ignore, true)},
+     {"eglDestroySurface", std::make_pair((void*)retrace_eglDestroySurface, false)},
+diff --git a/patrace/src/specs/eglapi.py b/patrace/src/specs/eglapi.py
+index 0bf8b93..0909721 100644
+--- a/patrace/src/specs/eglapi.py
++++ b/patrace/src/specs/eglapi.py
+@@ -394,7 +394,7 @@ eglapi.addFunctions([
+ 
+     # EGL_EXT_platform_base
+     GlFunction(EGLDisplay, "eglGetPlatformDisplayEXT", [(EGLenum, "platform"), (OpaquePointer(Void), "native_display"), (EGLAttribList, "attrib_list")]),
+-    GlFunction(EGLSurface, "eglCreatePlatformWindowSurfaceEXT", [(EGLDisplay, "dpy"), (EGLConfig, "config"), (OpaquePointer(Void), "native_window"), (EGLAttribList, "attrib_list")]),
++    GlFunction(EGLSurface, "eglCreatePlatformWindowSurfaceEXT", [(EGLDisplay, "dpy"), (EGLConfig, "config"), (EGLNativeWindowType, "win"), (EGLAttribList, "attrib_list")]),
+     GlFunction(EGLSurface, "eglCreatePlatformPixmapSurfaceEXT", [(EGLDisplay, "dpy"), (EGLConfig, "config"), (OpaquePointer(Void), "native_pixmap"), (EGLAttribList, "attrib_list")]),
+ 
+     # EGL_KHR_partial_update
+diff --git a/patrace/src/tracer/trace.py b/patrace/src/tracer/trace.py
+index d414fb3..1368ee5 100644
+--- a/patrace/src/tracer/trace.py
++++ b/patrace/src/tracer/trace.py
+@@ -416,7 +416,7 @@ class Tracer:
+ 
+         self.invokeFunction(func)
+ 
+-        if func.name == 'eglCreateWindowSurface':
++        if func.name in ['eglCreateWindowSurface', 'eglCreatePlatformWindowSurfaceEXT']:
+             print('    EGLint x = 0, y = 0, width = 0, height = 0;')
+             print('    if (_eglQuerySurface(dpy, _result, EGL_WIDTH, (EGLint*) &width) == EGL_FALSE)')
+             print('        DBG_LOG("Failed to query surface width\\n");')
+@@ -866,7 +866,7 @@ class Tracer:
+             print('    gTraceOut->mpBinAndMeta->writeHeader(true);')
+         if func.name == 'eglMakeCurrent':
+             print('    after_eglMakeCurrent(dpy, draw, ctx);')
+-        if func.name == 'eglCreateWindowSurface':
++        if func.name in ['eglCreateWindowSurface', 'eglCreatePlatformWindowSurfaceEXT']:
+             print('    after_eglCreateWindowSurface(dpy, config, _result, x, y, width, height);')
+         if func.name == 'eglCreatePbufferSurface':
+             print('    after_eglCreatePbufferSurface(dpy, config, _result);')
+-- 
+2.34.1
+
