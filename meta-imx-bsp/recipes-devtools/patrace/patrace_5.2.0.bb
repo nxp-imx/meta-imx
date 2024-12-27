@@ -11,7 +11,9 @@ DEPENDS = "wayland"
 
 SRC_URI = " \
     gitsm://github.com/ARM-software/${BPN}.git;branch=master;protocol=https \
-    file://0001-CMakeLists.txt-Switch-to-python3.patch"
+    file://0001-CMakeLists.txt-Switch-to-python3.patch \
+    file://0001-MGS-7985-Patrace-fail-to-capture-weston-simple-egl.patch \
+"
 SRCREV = "ca798a0223c876dcc680b68b00ca1147db121954"
 
 S = "${WORKDIR}/git"
