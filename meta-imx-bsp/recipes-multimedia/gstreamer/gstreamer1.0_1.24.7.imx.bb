@@ -101,7 +101,7 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV
 SRC_URI:prepend = "${GST1.0_SRC};branch=${SRCBRANCH} "
 GST1.0_SRC ?= "gitsm://github.com/nxp-imx/gstreamer.git;protocol=https"
 SRCBRANCH = "MM_04.09.03_2412_L6.12.y"
-SRCREV = "0ebc3f4829b9c8b8fe01c290a8b5129f3655683f"
+SRCREV = "e0d37a7d773a502956f54eced8cd701ec7fa5ff5"
 
 S = "${WORKDIR}/git"
 
