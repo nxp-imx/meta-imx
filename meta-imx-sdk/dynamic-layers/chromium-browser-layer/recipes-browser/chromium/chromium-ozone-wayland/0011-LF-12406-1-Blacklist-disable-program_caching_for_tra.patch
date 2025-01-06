@@ -1,0 +1,48 @@
+From c0b01bd497e34bc9d8f0fcb72cd3d5ec36a72f75 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Fri, 3 Jan 2025 14:23:43 +0800
+Subject: [PATCH] LF-12406-1: Blacklist disable
+ program_caching_for_transform_feedback on Mali GPUs
+
+Mali GPU can't pass webgl cts case transform_feedback.
+conformance2/transform_feedback/transform_feedback.html
+
+Seems a bug where program binaries don't cache transform feedback
+varyings.
+
+The same workaround as other GPU vendor having the same issue.
+https://codereview.chromium.org/2615573002
+
+Upstream-Status: Pending
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ gpu/config/gpu_driver_bug_list.json | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/gpu/config/gpu_driver_bug_list.json b/gpu/config/gpu_driver_bug_list.json
+index 86ce0297db4f4..332a5c15768be 100644
+--- a/gpu/config/gpu_driver_bug_list.json
++++ b/gpu/config/gpu_driver_bug_list.json
+@@ -3410,6 +3410,18 @@
+       "features": [
+         "msaa_is_slow"
+       ]
++    },
++    {
++      "id": 437,
++      "description": "Program binaries don't contain transform feedback varyings on Mali GPUs",
++      "os": {
++        "type": "linux"
++      },
++      "gl_vendor": "ARM.*",
++      "gl_renderer": "Mali.*",
++      "features": [
++        "disable_program_caching_for_transform_feedback"
++      ]
+     }
+   ]
+ }
+-- 
+2.34.1
+
