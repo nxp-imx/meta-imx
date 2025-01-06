@@ -254,7 +254,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -418,7 +418,7 @@ Origin:                      NXP (GPL-2.0)
 Package:                     imx-xen.git
 Version:                     4.18.imx
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A Virtual Machine Monitor
@@ -441,7 +441,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     imx-seco-5.9.4.1-0333596.bin
 Version:                     5.9.4.1
-Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -613,7 +613,7 @@ Origin:                      NXP (GPL-2.0 or BSD-3-Clause)
 Package:                     dpdk-fpr.git
 Version:                     22.11
 Outgoing License:            BSD-3-Clause 
-License File:                license/bsd-3-clause.txt
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    DPDK Fast Path Routing
@@ -627,7 +627,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     mtcp-dpdk.git
 Version:                     22.11
 Outgoing License:            BSD-3-Clause 
-License File:                license/bsd-3-clause.txt
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    mTCP on DPDK
@@ -899,7 +899,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-g2d-pxp.git
 Version:                     2.2
-Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -1205,9 +1205,9 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-dsp-2.1.9-a3074e2.bin
-Version:                     2.1.9
-Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
+Package:                     imx-dsp-2.1.10-ea4fe3f.bin
+Version:                     2.1.10
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1421,7 +1421,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx95-m7-demo-24.12.00.bin
 Version:                     24.12.00
-Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1545,7 +1545,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     neutron.git
 Version:                     1.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 
-License File:                LICENSE
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    The firmware library and converter for i.MX Neutron NPU
