@@ -1,7 +1,7 @@
 require mali-imx.inc
 
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3" 
+LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3"
 
 SRC_URI[sha256sum] = "b68b641e3cd289daa5ce9b2315b0ae66af0dbccbbf91b58fc574f9998db1a816"
 IMX_SRCREV_ABBREV = "1926a0d"
