@@ -1,4 +1,4 @@
-From b2638bbe486e468379e99c53ce50c528a41f3c54 Mon Sep 17 00:00:00 2001
+From 4850cb4d7eb2d81beb7e4d2311b225b7b1c0bc25 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Tue, 19 Nov 2024 14:11:21 +0800
 Subject: [PATCH] Fix chromium crash when run webgl 2.0.0 cts
@@ -13,25 +13,24 @@ Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
 ---
- ui/gfx/linux/gbm_wrapper.cc | 5 +++++
- 1 file changed, 5 insertions(+)
+ ui/gfx/linux/gbm_wrapper.cc | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/ui/gfx/linux/gbm_wrapper.cc b/ui/gfx/linux/gbm_wrapper.cc
-index 415640e5825e3..682238603f942 100644
+index 415640e5825e3..ae99206f28f6a 100644
 --- a/ui/gfx/linux/gbm_wrapper.cc
 +++ b/ui/gfx/linux/gbm_wrapper.cc
-@@ -248,6 +248,11 @@ std::unique_ptr<Buffer> CreateBufferForBO(struct gbm_bo* bo,
+@@ -313,6 +313,10 @@ class Device final : public ui::GbmDevice {
+       return CreateBuffer(format, requested_size, flags);
+     }
  
-   const uint64_t modifier = gbm_bo_get_modifier(bo);
-   const int plane_count = GetPlaneCount(bo);
++    //Most display not support YUV format SCANOUT usage
++    if (format == GBM_FORMAT_NV12 && (flags & GBM_BO_USE_SCANOUT))
++      return nullptr;
 +
-+  //Most display not support YUV format SCANOUT usage
-+  if (format == GBM_FORMAT_NV12 && (flags & GBM_BO_USE_SCANOUT))
-+    return nullptr;
-+
-   // The Mesa's gbm implementation explicitly checks whether plane count <= and
-   // returns 1 if the condition is true. Nevertheless, use a DCHECK here to make
-   // sure the condition is not broken there.
+     // Buggy drivers prevent us from getting plane FDs from a BO which had its
+     // previously imported BO destroyed. E.g: Nvidia. Thus, on Linux Desktop, we
+     // do the create/import modifiers validation loop below using a separate set
 -- 
 2.34.1
 
