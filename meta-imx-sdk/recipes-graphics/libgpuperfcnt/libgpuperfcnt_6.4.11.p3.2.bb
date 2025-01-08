@@ -12,3 +12,6 @@ SRC_URI[aarch64-wayland.sha256sum] = "4053ef06969e8845b3f9519dfd04233b975277bbe3
 inherit fsl-eula-unpack2 fsl-eula-graphics fsl-eula-recent
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+
+COMPATIBLE_MACHINE         = "(imxgpu)"
+COMPATIBLE_MACHINE:imxmali = "(^$)"

@@ -10,3 +10,5 @@ SRC_URI[aarch64-wayland-mali.sha256sum] = "891f571fb4b4c4b555c23a3d17a1fb8a9a57d
 inherit fsl-eula-unpack2 fsl-eula-graphics fsl-eula-recent
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+
+COMPATIBLE_MACHINE = "(imxmali)"
