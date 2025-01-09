@@ -32,6 +32,7 @@ EXTRA_OECMAKE += "\
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -Donnxruntime_BUILD_UNIT_TESTS=ON \
 "
+CXXFLAGS += "-Wno-error=range-loop-construct"
 
 PYTHON_DEPENDS = "\
     ${PYTHON_PN} \
