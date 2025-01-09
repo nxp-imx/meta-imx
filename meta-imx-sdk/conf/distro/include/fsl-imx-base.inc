@@ -31,8 +31,9 @@ DEFAULTTUNE:mx8qm-nxp-bsp  ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8x-nxp-bsp   ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8ulp-nxp-bsp ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx9-nxp-bsp    ?= "armv8a-crc-crypto"
-DEFAULTTUNE:mx91-nxp-bsp  ?= "armv8a-crc-crypto"
+DEFAULTTUNE:mx91-nxp-bsp   ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx93-nxp-bsp   ?= "armv8a-crc-crypto"
+DEFAULTTUNE:mx95-nxp-bsp   ?= "armv8a-crc-crypto"
 
 # Use systemd as default init manager
 POKY_INIT_MANAGER = "systemd"
