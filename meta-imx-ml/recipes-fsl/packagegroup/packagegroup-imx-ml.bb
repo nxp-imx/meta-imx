@@ -31,12 +31,10 @@ ML_GST_PROFILER:mx9-nxp-bsp   = "gst-shark"
 # These packages don't require any acceleration
 ML_PKGS            = ""
 ML_PKGS:mx8-nxp-bsp = " \
-    onnxruntime-tests \
     pytorch \
     tensorflow-lite \
 "
 ML_PKGS:mx9-nxp-bsp = " \
-    onnxruntime-tests \
     pytorch \
     tensorflow-lite \
 "
