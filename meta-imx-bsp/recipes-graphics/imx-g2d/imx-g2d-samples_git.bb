@@ -23,6 +23,7 @@ PACKAGECONFIG_IMPLEMENTATION:mx95-nxp-bsp      = "dpu95"
 PACKAGECONFIG_IMPLEMENTATION:imxgpu2d          = "gpu-drm"
 PACKAGECONFIG_IMPLEMENTATION:imxgpu2d:imxfbdev = "gpu-fbdev"
 PACKAGECONFIG_IMPLEMENTATION:mx93-nxp-bsp      = "pxp"
+PACKAGECONFIG_IMPLEMENTATION:mx943-nxp-bsp     = "pxp"
 
 PACKAGECONFIG[dpu] = " \
     BUILD_IMPLEMENTATION=dpu, \
@@ -73,4 +74,4 @@ FILES:${PN} += "/opt"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
-COMPATIBLE_MACHINE = "(imxgpu2d|mx93-nxp-bsp|mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(imxgpu2d|mx93-nxp-bsp|mx943-nxp-bsp|mx95-nxp-bsp)"

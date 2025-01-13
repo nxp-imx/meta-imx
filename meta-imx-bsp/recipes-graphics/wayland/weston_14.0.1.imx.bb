@@ -180,6 +180,7 @@ PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D}"
 PACKAGECONFIG_G2D              ??= ""
 PACKAGECONFIG_G2D:imxgpu2d     ??= "imxg2d"
 PACKAGECONFIG_G2D:mx93-nxp-bsp ??= "imxg2d"
+PACKAGECONFIG_G2D:mx943-nxp-bsp ??= "imxg2d"
 
 # Remove no longer supported colord
 PACKAGECONFIG[colord] = ""

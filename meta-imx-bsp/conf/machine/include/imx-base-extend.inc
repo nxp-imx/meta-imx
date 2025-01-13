@@ -35,6 +35,8 @@ MACHINE_SOCARCH_SUFFIX:mx943-nxp-bsp = "-mx943"
 IMX_EXTRA_FIRMWARE:mx943-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SYSTEM_MANAGER_RPROVIDER} imx-oei"
 SECO_FIRMWARE_NAME:mx943-generic-bsp ?= "mx943${IMX_SOC_REV_LOWER}-ahab-container.img"
 
+PREFERRED_PROVIDER_virtual/libg2d:mx943-nxp-bsp ?= "imx-pxp-g2d"
+
 # Add new SoC i.MX 95
 MACHINEOVERRIDES_EXTENDER:mx95:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxdpu:imxgpu:imxmali:imxgpu2d:imxgpu3d:mx9-generic-bsp:mx9-nxp-bsp:mx95-generic-bsp:mx95-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER:mx95:use-mainline-bsp  = "imx-generic-bsp:imx-mainline-bsp:mx9-generic-bsp:mx9-mainline-bsp:mx95-generic-bsp:mx95-mainline-bsp"

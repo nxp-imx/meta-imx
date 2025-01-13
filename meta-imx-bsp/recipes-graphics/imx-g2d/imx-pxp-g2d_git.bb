@@ -1,5 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
-# Copyright 2017-2023 NXP
+# Copyright 2017-2025 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "G2D library using i.MX PXP"
@@ -26,4 +26,4 @@ do_install() {
 }
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
-COMPATIBLE_MACHINE = "(mx93-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx93-nxp-bsp|mx943-nxp-bsp)"
