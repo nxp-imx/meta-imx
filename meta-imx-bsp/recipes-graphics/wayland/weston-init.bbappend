@@ -3,6 +3,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 GBM_FORMAT_VALUE = "argb8888"
 
 PACKAGECONFIG_GBM_FORMAT:mx943-nxp-bsp  ?= ""
+PACKAGECONFIG_USE_G2D:mx943-nxp-bsp   ?= "use-g2d"
 
 update_file() {
     sed -i -e "s,$1,$2," $3
