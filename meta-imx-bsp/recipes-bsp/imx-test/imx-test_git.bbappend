@@ -4,8 +4,6 @@
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/imx-test:"
 
-DEPENDS:append:mx8ulp-nxp-bsp = " imx-lib"
-DEPENDS:append:mx93-nxp-bsp = " imx-lib"
 DEPENDS:append:mx943-nxp-bsp = " imx-lib"
 
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH} \
@@ -15,8 +13,5 @@ IMXTEST_SRC ?= "git://github.com/nxp-imx/imx-test.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "853a484ef39b5d9b17203e92cc6f7a41d54bfa81"
 
-PLATFORM:mx8ulp-nxp-bsp = "IMX8ULP"
 PLATFORM:mx91-nxp-bsp = "IMX8"
-PLATFORM:mx93-nxp-bsp = "IMX8ULP"
 PLATFORM:mx943-nxp-bsp = "IMX8ULP"
-PLATFORM:mx95-nxp-bsp = "IMX8"
