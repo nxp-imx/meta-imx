@@ -18,6 +18,7 @@ PACKAGECONFIG:mx8dxl-nxp-bsp ??= "ele-seco"
 PACKAGECONFIG:mx8ulp-nxp-bsp ??= "ele"
 PACKAGECONFIG:mx91-nxp-bsp   ??= "ele"
 PACKAGECONFIG:mx93-nxp-bsp   ??= "ele"
+PACKAGECONFIG:mx943-nxp-bsp  ??= "ele"
 PACKAGECONFIG:mx95-nxp-bsp   ??= "ele ele-seco"
 
 PACKAGECONFIG[ele]      = "-DELE=1,,imx-secure-enclave"
@@ -30,4 +31,4 @@ EXTRA_OECMAKE = " \
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
-COMPATIBLE_MACHINE = "(mx8dxl-nxp-bsp|mx8ulp-nxp-bsp|mx91-nxp-bsp|mx93-nxp-bsp|mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8dxl-nxp-bsp|mx8ulp-nxp-bsp|mx91-nxp-bsp|mx93-nxp-bsp|mx943-nxp-bsp|mx95-nxp-bsp)"
