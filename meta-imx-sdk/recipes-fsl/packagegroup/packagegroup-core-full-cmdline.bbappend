@@ -2,6 +2,7 @@ RDEPENDS:packagegroup-core-full-cmdline-sys-services:remove = "${RDEPENDS_IMX_RE
 
 RDEPENDS:packagegroup-core-full-cmdline-extended:append = "\
     iproute2-tc \
+    iproute2-bridge \
 "
 RDEPENDS:packagegroup-core-full-cmdline-extended:mx95-nxp-bsp:append = "\
     iproute2-devlink \
