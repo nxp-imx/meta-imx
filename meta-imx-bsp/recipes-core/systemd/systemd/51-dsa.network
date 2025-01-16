@@ -1,0 +1,7 @@
+[Match]
+Name=swp*
+
+[Network]
+DHCP=yes
+LinkLocalAddressing=no
+KeepConfiguration=no
