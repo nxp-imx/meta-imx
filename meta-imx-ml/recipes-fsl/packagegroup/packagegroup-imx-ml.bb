@@ -1,4 +1,4 @@
-# Copyright 2019-2021 NXP
+# Copyright 2019-2025 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Add packages for AI/ML build"
@@ -64,6 +64,10 @@ ETHOS_U_PKGS:mx93-nxp-bsp = " \
 
 # Neutron package
 NEUTRON_PKGS = ""
+NEUTRON_PKGS:mx943-nxp-bsp = " \
+    neutron \
+    tensorflow-lite-neutron-delegate \
+"
 NEUTRON_PKGS:mx95-nxp-bsp = " \
     neutron \
     tensorflow-lite-neutron-delegate \
