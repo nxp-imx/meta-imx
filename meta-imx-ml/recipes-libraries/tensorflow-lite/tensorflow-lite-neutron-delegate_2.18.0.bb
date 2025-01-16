@@ -1,4 +1,4 @@
-# Copyright 2023-2024 NXP
+# Copyright 2023-2025 NXP
 DESCRIPTION = "TensorFlow Lite Neutron Delegate"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
@@ -62,4 +62,4 @@ FILES_SOLIBSDEV = ""
 # Work around do_package_qa error
 INSANE_SKIP:${PN} += "buildpaths"
 
-COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx943-nxp-bsp|mx95-nxp-bsp)"
