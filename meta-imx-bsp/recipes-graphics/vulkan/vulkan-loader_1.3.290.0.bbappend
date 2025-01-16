@@ -1,6 +1,8 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend:imx-nxp-bsp := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://0001-LF-11869-change-mali-wsi-layer-activating-order.patch"
+SRC_URI:append:imx-nxp-bsp = " \
+    file://0001-LF-11869-change-mali-wsi-layer-activating-order.patch \
+"
 
 # libvulkan.so is loaded dynamically, so put it in the main package
 SOLIBS          = ".so*"
