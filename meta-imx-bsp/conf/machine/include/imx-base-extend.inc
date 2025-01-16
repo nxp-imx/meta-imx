@@ -75,20 +75,6 @@ IMX_EXTRA_FIRMWARE:mx91-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx"
 SECOEXT_FIRMWARE_NAME ?= "UNDEFINED"
 SECOEXT_FIRMWARE_NAME:mx8ulp-generic-bsp ?= "mx8ulp${IMX_SOC_REV_LOWER}ext-ahab-container.img"
 
-# Extend imx-base.inc for mali
-PREFERRED_PROVIDER_virtual/egl:mx95-nxp-bsp        ?= "mali-imx"
-PREFERRED_PROVIDER_virtual/libgles1:mx95-nxp-bsp   ?= "mali-imx"
-PREFERRED_PROVIDER_virtual/libgles2:mx95-nxp-bsp   ?= "mali-imx"
-PREFERRED_PROVIDER_virtual/libgles3:mx95-nxp-bsp   ?= "mali-imx"
-PREFERRED_PROVIDER_opencl-clhpp:mx95-nxp-bsp       ?= "opencl-clhpp"
-PREFERRED_PROVIDER_opencl-headers:mx95-nxp-bsp     ?= "opencl-headers"
-PREFERRED_PROVIDER_opencl-icd-loader:mx95-nxp-bsp  ?= "opencl-icd-loader"
-PREFERRED_PROVIDER_virtual/opencl-icd:mx95-nxp-bsp ?= "opencl-icd-loader"
-
-PREFERRED_PROVIDER_virtual/libgl:imxgpu   ?= "mesa-gl"
-PREFERRED_PROVIDER_virtual/libgl:imxgpu3d  = "mesa-gl"
-PREFERRED_PROVIDER_virtual/mesa:imxgpu    ?= "mesa-gl"
-
 # GStreamer forked recipes
 PREFERRED_VERSION_gstreamer1.0:imx-nxp-bsp              ??= "1.24.7.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad:imx-nxp-bsp  ??= "1.24.7.imx"
