@@ -48,18 +48,18 @@ PACKAGECONFIG:append:pn-perf = " jevents"
 
 PACKAGECONFIG:append:pn-pulseaudio = " autospawn-for-root"
 
-PACKAGECONFIG:append:class-target:pn-qtquick3d = " examples"
-PACKAGECONFIG:remove:class-target:pn-qtquick3d = "openxr"
+# For qtbase without GPU, gles2 is disabled by default due to poor performance.
+# Enable it here in the distro for testing purposes.
+PACKAGECONFIG:append:pn-qtbase:mx93-nxp-bsp = " gles2"
+PACKAGECONFIG:remove:pn-qtbase:mx93-nxp-bsp = "no-opengl linuxfb"
+PACKAGECONFIG:append:pn-qtbase:mx943-nxp-bsp = " gles2"
+PACKAGECONFIG:remove:pn-qtbase:mx943-nxp-bsp = "no-opengl linuxfb"
 
-PACKAGECONFIG:append:class-target:pn-qtwebengine = " examples"
+PACKAGECONFIG:append:pn-qtquick3d:class-target = " examples"
+PACKAGECONFIG:remove:pn-qtquick3d:class-target = "openxr"
+
+PACKAGECONFIG:append:pn-qtwebengine:class-target = " examples"
 
 PACKAGECONFIG:append:pn-systemd = " unmanaged-network"
+PACKAGECONFIG:append:pn-systemd:mx943-nxp-bsp = " eth0 dsa"
 
-# Configure the network for imx943
-PACKAGECONFIG:append:mx943-nxp-bsp:pn-systemd = " eth0 dsa"
-
-PACKAGECONFIG:append:mx93-nxp-bsp:pn-qtbase = " gles2"
-PACKAGECONFIG:remove:mx93-nxp-bsp:pn-qtbase = "no-opengl linuxfb"
-
-PACKAGECONFIG:append:mx943-nxp-bsp:pn-qtbase = " gles2"
-PACKAGECONFIG:remove:mx943-nxp-bsp:pn-qtbase = "no-opengl linuxfb"
