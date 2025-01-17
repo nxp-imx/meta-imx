@@ -1,4 +1,4 @@
-# Copyright 2023-2024 NXP
+# Copyright 2023-2025 NXP
 SUMMARY = "NXP i.MX Itest"
 DESCRIPTION = "NXP i.MX Itest"
 SECTION = "base"
@@ -18,7 +18,7 @@ PACKAGECONFIG:mx8dxl-nxp-bsp ??= "ele-seco"
 PACKAGECONFIG:mx8ulp-nxp-bsp ??= "ele"
 PACKAGECONFIG:mx91-nxp-bsp   ??= "ele"
 PACKAGECONFIG:mx93-nxp-bsp   ??= "ele"
-PACKAGECONFIG:mx943-nxp-bsp  ??= "ele"
+PACKAGECONFIG:mx943-nxp-bsp  ??= "ele ele-seco"
 PACKAGECONFIG:mx95-nxp-bsp   ??= "ele ele-seco"
 
 PACKAGECONFIG[ele]      = "-DELE=1,,imx-secure-enclave"
