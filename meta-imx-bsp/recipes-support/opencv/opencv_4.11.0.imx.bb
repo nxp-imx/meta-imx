@@ -228,8 +228,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SRC_URI:remove = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https"
 SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH_opencv};name=opencv"
 OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=master"
-SRCBRANCH_opencv = "4.10.0_imx"
-SRCREV_opencv = "1ebbfb4aeeb558d03a76f3efa5bd9020f3e4397c"
+SRCBRANCH_opencv = "4.11.0_imx"
+SRCREV_opencv = "72d2d2d005609a38aa80924e7aaf5fd23b6f2c55"
 SRCREV_contrib = "1ed3dd2c53888e3289afdb22ec4e9ebbff3dba87"
 
 # Add opencv_extra
