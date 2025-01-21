@@ -11,7 +11,8 @@ SRCREV = "810480927a3d7ee7dca16e51bebaef94c5c95e0b"
 S = "${WORKDIR}/git"
 
 NEUTRON_TARGET = ""
-NEUTRON_TARGET:mx95-nxp-bsp= "imx95"
+NEUTRON_TARGET:mx943-nxp-bsp = "imx943"
+NEUTRON_TARGET:mx95-nxp-bsp  = "imx95"
 
 do_install () {
     # install firmware
@@ -40,4 +41,4 @@ FILES_SOLIBSDEV = ""
 FILES:${PN} += "${nonarch_base_libdir}/firmware/*"
 INSANE_SKIP:${PN} = "arch"
 
-COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx943-nxp-bsp|mx95-nxp-bsp)"
