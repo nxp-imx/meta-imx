@@ -7,5 +7,5 @@ IMX_PACKAGE_NAME_APPEND:class-target = \
     "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '-wayland', \
         bb.utils.contains('DISTRO_FEATURES',     'x11',     '-x11', \
                                                              '-fb', d), d)}"
-IMX_PACKAGE_NAME_APPEND_MALI              = ""
-IMX_PACKAGE_NAME_APPEND_MALI:mx95-nxp-bsp = "-mali"
+IMX_PACKAGE_NAME_APPEND_MALI         = ""
+IMX_PACKAGE_NAME_APPEND_MALI:imxmali = "-mali"

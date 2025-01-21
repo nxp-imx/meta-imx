@@ -26,11 +26,11 @@ DEPENDS = " \
     ${DEPENDS_DRM} \
 "
 DEPENDS_2D = ""
-DEPENDS_2D:imxgpu2d = " \
+DEPENDS_2D:imxgpu2d:imxviv = " \
     virtual/libg2d \
     virtual/libopenvg \
 "
-DEPENDS_2D:mx95-nxp-bsp = " \
+DEPENDS_2D:imxgpu2d:imxmali = " \
     virtual/libg2d \
 "
 DEPENDS_3D = ""
@@ -73,8 +73,8 @@ WINDOW_SYSTEM = \
 FEATURES = "ConsoleHost,EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,Lib_pugixml,Test_RequireUserInputToExit,WindowHost"
 FEATURES:append = "${FEATURES_GPU}${FEATURES_G2D}${FEATURES_3D}${FEATURES_SOC}"
 
-FEATURES_GPU               = ",HW_GPU_VIVANTE,OpenVG"
-FEATURES_GPU:mx95-nxp-bsp  = ""
+FEATURES_GPU               = ""
+FEATURES_GPU:imxviv        = ",HW_GPU_VIVANTE,OpenVG"
 
 FEATURES_G2D               = ""
 FEATURES_G2D:imxgpu2d      = ",G2D"
@@ -87,14 +87,14 @@ FEATURES_SOC:mx6q-nxp-bsp  = ",OpenGLES3"
 FEATURES_SOC:mx6dl-nxp-bsp = ",OpenGLES3"
 FEATURES_SOC:mx8-nxp-bsp   = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.2"
 FEATURES_SOC:mx8mm-nxp-bsp = ",OpenCV4"
-FEATURES_SOC:mx95-nxp-bsp  = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2"
+FEATURES_SOC:imxmali       = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2"
 
 EXTENSIONS               = "*"
 EXTENSIONS:mx6q-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 EXTENSIONS:mx6dl-nxp-bsp = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 EXTENSIONS:mx8m-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_color_buffer_float"
 EXTENSIONS:mx8mm-nxp-bsp = "*"
-EXTENSIONS:mx95-nxp-bsp  = "OpenGLES3:GL_EXT_color_buffer_float,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
+EXTENSIONS:imxmali       = "OpenGLES3:GL_EXT_color_buffer_float,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
 
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
@@ -162,7 +162,7 @@ RDEPENDS_EMPTY_MAIN_PACKAGE_SOC:mx8-nxp-bsp   = " \
     rapidopenvx \
     rapidvulkan"
 RDEPENDS_EMPTY_MAIN_PACKAGE_SOC:mx8mm-nxp-bsp = ""
-RDEPENDS_EMPTY_MAIN_PACKAGE_SOC:mx95-nxp-bsp = " \
+RDEPENDS_EMPTY_MAIN_PACKAGE_SOC:imxmali = " \
     rapidopencl \
     rapidvulkan"
 # vulkan-loader is dynamically loaded, so need to add an explicit
@@ -171,7 +171,7 @@ RDEPENDS_VULKAN_LOADER = ""
 RDEPENDS_VULKAN_LOADER:mx8-nxp-bsp = " \
     vulkan-loader"
 RDEPENDS_VULKAN_LOADER:mx8mm-nxp-bsp = ""
-RDEPENDS_VULKAN_LOADER:mx95-nxp-bsp = " \
+RDEPENDS_VULKAN_LOADER:imxmali = " \
     vulkan-loader"
 
 # For backwards compatibility

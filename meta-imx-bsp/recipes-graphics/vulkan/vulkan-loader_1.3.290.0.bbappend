@@ -4,10 +4,12 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0001-LF-11869-change-mali-wsi-layer-activating-order.patch \
 "
 
+PACKAGE_ARCH:imxvulkan = "${MACHINE_SOCARCH}"
+
 # libvulkan.so is loaded dynamically, so put it in the main package
 SOLIBS          = ".so*"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP:${PN} += "dev-so"
 
 # Override default mesa drivers with i.MX GPU drivers
-RRECOMMENDS:${PN}:mx95-nxp-bsp = "mali-imx-libvulkan"
+RRECOMMENDS:${PN}:imxmali = "mali-imx-libvulkan"

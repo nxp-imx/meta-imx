@@ -1,5 +1,5 @@
 # Copyright (C) 2016 Freescale Semiconductor
-# Copyright 2017-2022 NXP
+# Copyright 2017-2025 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "G2D library using i.MX DPU"
@@ -7,8 +7,8 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3" 
 
 DEPENDS = "libdrm ${LIBGAL_IMX}"
-LIBGAL_IMX              = "libgal-imx"
-LIBGAL_IMX:mx95-nxp-bsp = ""
+LIBGAL_IMX        = ""
+LIBGAL_IMX:imxviv = "libgal-imx"
 
 PROVIDES += "virtual/libg2d"
 
@@ -19,8 +19,8 @@ IMX_SRCREV_ABBREV = "d852f93"
 IMX_SRC_URI_NAME = "v1"
 SRC_URI[v1.sha256sum] = "4c68898df12f72192e4acccc4619c7f629b85d3102ec08548573588ed223496a"
 
-IMX_SRCREV_ABBREV:mx95-nxp-bsp = "d852f93"
-IMX_SRC_URI_NAME:mx95-nxp-bsp = "v2"
+IMX_SRCREV_ABBREV:imxmali = "d852f93"
+IMX_SRC_URI_NAME:imxmali = "v2"
 SRC_URI[v2.sha256sum] = "363e6720d3aa8243d1993c99ae431cd0d3c7857fc6bbd0acca542743fdb15ddd"
 
 S = "${WORKDIR}/${IMX_BIN_NAME}"

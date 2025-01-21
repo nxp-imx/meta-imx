@@ -27,6 +27,6 @@ EXTRA_OECMAKE =  " \
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-COMPATIBLE_MACHINE          = "(^$)"
-COMPATIBLE_MACHINE:imxgpu3d = "(mx8-nxp-bsp)"
-COMPATIBLE_MACHINE:mx8mm-nxp-bsp    = "(^$)"
+COMPATIBLE_MACHINE               = "(^$)"
+COMPATIBLE_MACHINE:mx8-nxp-bsp   = "(imxviv)"
+COMPATIBLE_MACHINE:mx8mm-nxp-bsp = "(^$)"

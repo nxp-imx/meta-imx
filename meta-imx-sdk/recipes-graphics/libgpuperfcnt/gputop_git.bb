@@ -16,7 +16,7 @@ S = "${WORKDIR}/git"
 inherit cmake pkgconfig
 
 PACKAGECONFIG ??= "vivante"
-PACKAGECONFIG:mx95-nxp-bsp = "mali"
+PACKAGECONFIG:imxmali = "mali"
 
 PACKAGECONFIG[mali] = "-DMALI_GPU=1,,,,,vivante"
 PACKAGECONFIG[vivante] = ",,,,,mali"

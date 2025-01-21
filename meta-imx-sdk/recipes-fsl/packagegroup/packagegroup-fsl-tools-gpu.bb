@@ -37,11 +37,11 @@ SOC_TOOLS_GPU_APITRACE:imxgpu3d = " \
     apitrace"
 
 SOC_TOOLS_GPU_MALI = ""
-SOC_TOOLS_GPU_MALI:mx95-nxp-bsp = " \
+SOC_TOOLS_GPU_MALI:imxmali = " \
     mali-imx-dev \
     mali-imx-opencl-icd-dev \
     patrace"
 
-SOC_TOOLS_GPU_VIVANTE = " \
+SOC_TOOLS_GPU_VIVANTE = ""
+SOC_TOOLS_GPU_VIVANTE:imxviv = " \
     imx-gpu-viv-tools"
-SOC_TOOLS_GPU_VIVANTE:mx95-nxp-bsp = ""
