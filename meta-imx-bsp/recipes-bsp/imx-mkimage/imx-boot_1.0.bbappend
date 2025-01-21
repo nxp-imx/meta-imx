@@ -1,4 +1,4 @@
-# Copyright 2017-2022 NXP
+# Copyright 2017-2025 NXP
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 IMX_M4_DEMOS      = ""
@@ -7,6 +7,7 @@ IMX_M4_DEMOS:mx8m-nxp-bsp = ""
 IMX_M4_DEMOS:mx8ulp-nxp-bsp = "imx-m33-demos:do_deploy"
 IMX_M4_DEMOS:mx91-nxp-bsp = ""
 IMX_M4_DEMOS:mx93-nxp-bsp = ""
+IMX_M4_DEMOS:mx943-nxp-bsp = ""
 IMX_M4_DEMOS:mx95-nxp-bsp = "imx-m7-demos:do_deploy"
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
@@ -16,6 +17,7 @@ M4_DEFAULT_IMAGE:mx8dx-nxp-bsp = "imx8qx_m4_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE:mx8ulp-nxp-bsp = "imx8ulp_m33_TCM_power_mode_switch.bin"
 M4_DEFAULT_IMAGE:mx91-nxp-bsp = ""
 M4_DEFAULT_IMAGE:mx93-nxp-bsp = ""
+M4_DEFAULT_IMAGE:mx943-nxp-bsp = ""
 M4_DEFAULT_IMAGE:mx95-nxp-bsp = "${M4_DEFAULT_IMAGE_MX95}"
 
 do_compile[depends] += "${IMX_M4_DEMOS}"
