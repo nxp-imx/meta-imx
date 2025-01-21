@@ -134,8 +134,8 @@ PREFERRED_VERSION_optee-os-tadevkit:mx7-nxp-bsp   ??= "4.4.0.imx"
 PREFERRED_VERSION_optee-os-tadevkit:mx8-nxp-bsp   ??= "4.4.0.imx"
 PREFERRED_VERSION_optee-os-tadevkit:mx9-nxp-bsp   ??= "4.4.0.imx"
 
-PREFERRED_VERSION_opencv:mx8-nxp-bsp ??= "4.10.0.imx"
-PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.10.0.imx"
+PREFERRED_VERSION_opencv:mx8-nxp-bsp ??= "4.11.0.imx"
+PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.11.0.imx"
 
 PREFERRED_VERSION_xen-tools = "4.18.imx+stable"
 PREFERRED_VERSION_xen       = "4.18.imx+stable"
