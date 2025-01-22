@@ -7,54 +7,27 @@ DEPENDS = " \
     assimp \
     cmake-native \
     devil \
+    gstreamer1.0 \
+    gstreamer1.0-plugins-base \
+    ninja-native \
+    zlib \
+    ${EMPTY_MAIN_PACKAGE_RECIPES} \
+"
+# Unfortunately, recipes with an empty main package, like header-only libraries,
+# are not included in the SDK. Use RDEPENDS as a workaround.
+EMPTY_MAIN_PACKAGE_RECIPES = " \
     fmt \
     gli \
     glm \
-    gstreamer1.0 \
-    gstreamer1.0-plugins-base \
     gtest \
     half \
-    ninja-native \
     nlohmann-json \
     pugixml \
     rapidjson \
     stb \
-    zlib \
-    ${DEPENDS_2D} \
-    ${DEPENDS_3D} \
-    ${DEPENDS_BACKEND} \
-    ${DEPENDS_DRM} \
 "
-DEPENDS_2D = ""
-DEPENDS_2D:imxgpu2d:imxviv = " \
-    virtual/libg2d \
-    virtual/libopenvg \
-"
-DEPENDS_2D:imxgpu2d:imxmali = " \
-    virtual/libg2d \
-"
-DEPENDS_3D = ""
-DEPENDS_3D:imxgpu3d = " \
-    virtual/libgles2 \
-"
-DEPENDS_BACKEND = " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' wayland-native wayland wayland-protocols', \
-       bb.utils.contains('DISTRO_FEATURES',     'x11', ' xrandr', \
-                                                       '', d), d)} \
-"
-DEPENDS_DRM = ""
-DEPENDS_DRM:imxdrm = " \
-    glslang-native \
-    opencv \
-    rapidopencl \
-    rapidopenvx \
-    rapidvulkan \
-    vulkan-headers \
-    vulkan-loader \
-"
-DEPENDS_DRM:mx8mm-nxp-bsp = " \
-    opencv \
-"
+EMPTY_MAIN_PACKAGES = \
+    "${@d.getVar('EMPTY_MAIN_PACKAGE_RECIPES').replace("gtest", "googletest")}"
 
 SRC_URI = "${GPU_SDK_SRC};branch=${SRCBRANCH}"
 GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
@@ -65,29 +38,65 @@ S = "${WORKDIR}/git"
 
 inherit pkgconfig
 
-WINDOW_SYSTEM = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11',     'X11', \
-                                                             'FB', d), d)}"
+PACKAGECONFIG ??= " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', 'x11', d)} \
+    ${PACKAGECONFIG_DRM} \
+    ${PACKAGECONFIG_G2D} \
+    ${PACKAGECONFIG_GLES} \
+    ${PACKAGECONFIG_GPUTYPE} \
+    ${PACKAGECONFIG_OPENVG} \
+"
 
-FEATURES = "ConsoleHost,EarlyAccess,EGL,GoogleUnitTest,Lib_NlohmannJson,Lib_pugixml,Test_RequireUserInputToExit,WindowHost"
-FEATURES:append = "${FEATURES_GPU}${FEATURES_G2D}${FEATURES_3D}${FEATURES_SOC}"
+PACKAGECONFIG_DRM                          = ""
+PACKAGECONFIG_DRM:imxdrm:imxmali           = "opencl opencv vulkan"
+PACKAGECONFIG_DRM:imxdrm:imxviv            = "opencl opencv openvx vulkan"
+PACKAGECONFIG_DRM:imxdrm:mx8mm-nxp-bsp     = "opencv"
 
-FEATURES_GPU               = ""
-FEATURES_GPU:imxviv        = ",HW_GPU_VIVANTE,OpenVG"
+PACKAGECONFIG_G2D                          = ""
+PACKAGECONFIG_G2D:imxgpu2d                 = "g2d"
 
-FEATURES_G2D               = ""
-FEATURES_G2D:imxgpu2d      = ",G2D"
+PACKAGECONFIG_GLES                         = ""
+PACKAGECONFIG_GLES:imxgpu3d                = "gles2 gles3 gles32"
+PACKAGECONFIG_GLES:imxgpu3d:mx6-nxp-bsp    = "gles2 gles3"
+PACKAGECONFIG_GLES:imxgpu3d:mx7-nxp-bsp    = "gles2 gles3"
+PACKAGECONFIG_GLES:imxgpu3d:mx7ulp-nxp-bsp = "gles2"
+PACKAGECONFIG_GLES:imxgpu3d:mx8mm-nxp-bsp  = "gles2"
 
-FEATURES_3D                = ""
-FEATURES_3D:imxgpu3d       = ",OpenGLES2"
+PACKAGECONFIG_GPUTYPE:imxmali              = "mali"
+PACKAGECONFIG_GPUTYPE:imxviv               = "vivante"
 
-FEATURES_SOC               = ""
-FEATURES_SOC:mx6q-nxp-bsp  = ",OpenGLES3"
-FEATURES_SOC:mx6dl-nxp-bsp = ",OpenGLES3"
-FEATURES_SOC:mx8-nxp-bsp   = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2,OpenVX1.2"
-FEATURES_SOC:mx8mm-nxp-bsp = ",OpenCV4"
-FEATURES_SOC:imxmali       = ",OpenCV4,Vulkan1.2,OpenGLES3.2,OpenCL1.2"
+PACKAGECONFIG_OPENVG                       = ""
+PACKAGECONFIG_OPENVG:imxviv                = "openvg"
+
+PACKAGECONFIG[g2d] = "G2D,,virtual/libg2d"
+PACKAGECONFIG[gles2] = "OpenGLES2,,virtual/libgles2"
+PACKAGECONFIG[gles3] = "OpenGLES3,,virtual/libgles3"
+PACKAGECONFIG[gles32] = "OpenGLES3.2,,virtual/libgles3"
+PACKAGECONFIG[mali] = ""
+# RDEPENDS: rapidopencl is header-only
+PACKAGECONFIG[opencl] = "OpenCL1.2,,rapidopencl,rapidopencl"
+PACKAGECONFIG[opencv] = "OpenCV4,,opencv"
+PACKAGECONFIG[openvg] = "OpenVG,,virtual/libopenvg"
+# RDEPENDS: rapidopenvx is header-only
+PACKAGECONFIG[openvx] = "OpenVX1.2,,rapidopenvx,rapidopenvx"
+PACKAGECONFIG[vivante] = "HW_GPU_VIVANTE"
+# RDEPENDS: rapidvulkan is header-only, vulkan-loader is dynamically loaded
+PACKAGECONFIG[vulkan] = "Vulkan1.2,,glslang-native rapidvulkan vulkan-loader,rapidvulkan vulkan-loader"
+PACKAGECONFIG[wayland] = ",,wayland-native wayland wayland-protocols,,,x11"
+PACKAGECONFIG[x11] = ",,xrandr,,,wayland"
+
+PACKAGECONFIG_CONFARGS = " \
+    ConsoleHost \
+    EarlyAccess \
+    EGL \
+    GoogleUnitTest \
+    Lib_NlohmannJson \
+    Lib_pugixml \
+    Test_RequireUserInputToExit \
+    WindowHost \
+"
+
+FEATURES = "${@','.join(d.getVar('PACKAGECONFIG_CONFARGS').split())}"
 
 EXTENSIONS               = "*"
 EXTENSIONS:mx6q-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
@@ -95,6 +104,11 @@ EXTENSIONS:mx6dl-nxp-bsp = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_geom
 EXTENSIONS:mx8m-nxp-bsp  = "OpenGLES:GL_VIV_direct_texture,OpenGLES3:GL_EXT_color_buffer_float"
 EXTENSIONS:mx8mm-nxp-bsp = "*"
 EXTENSIONS:imxmali       = "OpenGLES3:GL_EXT_color_buffer_float,OpenGLES3:GL_EXT_geometry_shader,OpenGLES3:GL_EXT_tessellation_shader"
+
+WINDOW_SYSTEM = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'Wayland', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11',     'X11', \
+                                                             'FB', d), d)}"
 
 do_compile () {
     export FSL_PLATFORM_NAME=Yocto
@@ -140,39 +154,8 @@ FILES:${PN} += "/opt/${PN}"
 FILES:${PN}-dbg += "/opt/${PN}/*/*/.debug /usr/src/debug"
 INSANE_SKIP:${PN} += "already-stripped rpaths"
 
-RDEPENDS:${PN} += " \
-    ${RDEPENDS_EMPTY_MAIN_PACKAGE} \
-    ${RDEPENDS_VULKAN_LOADER}"
-# Unfortunately recipes with an empty main package, like header-only libraries,
-# are not included in the SDK. Use RDEPENDS as a workaround.
-RDEPENDS_EMPTY_MAIN_PACKAGE = " \
-    fmt \
-    gli \
-    glm \
-    googletest \
-    half \
-    nlohmann-json \
-    pugixml \
-    rapidjson \
-    stb \
-    ${RDEPENDS_EMPTY_MAIN_PACKAGE_SOC}"
-RDEPENDS_EMPTY_MAIN_PACKAGE_SOC = ""
-RDEPENDS_EMPTY_MAIN_PACKAGE_SOC:mx8-nxp-bsp   = " \
-    rapidopencl \
-    rapidopenvx \
-    rapidvulkan"
-RDEPENDS_EMPTY_MAIN_PACKAGE_SOC:mx8mm-nxp-bsp = ""
-RDEPENDS_EMPTY_MAIN_PACKAGE_SOC:imxmali = " \
-    rapidopencl \
-    rapidvulkan"
-# vulkan-loader is dynamically loaded, so need to add an explicit
-# dependency
-RDEPENDS_VULKAN_LOADER = ""
-RDEPENDS_VULKAN_LOADER:mx8-nxp-bsp = " \
-    vulkan-loader"
-RDEPENDS_VULKAN_LOADER:mx8mm-nxp-bsp = ""
-RDEPENDS_VULKAN_LOADER:imxmali = " \
-    vulkan-loader"
+# See earlier comment
+RDEPENDS:${PN} = "${EMPTY_MAIN_PACKAGES}"
 
 # For backwards compatibility
 RPROVIDES:${PN} = "fsl-gpu-sdk"
