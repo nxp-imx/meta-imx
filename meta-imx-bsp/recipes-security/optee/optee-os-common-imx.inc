@@ -35,6 +35,7 @@ OPTEEMACHINE:mx8mnul-nxp-bsp   = "imx-mx8mnevk"
 OPTEEMACHINE:mx8ulp-nxp-bsp    = "imx-mx8ulpevk"
 OPTEEMACHINE:mx91-nxp-bsp      = "imx-mx91evk"
 OPTEEMACHINE:mx93-nxp-bsp      = "imx-mx93evk"
+OPTEEMACHINE:mx943-nxp-bsp     = "imx-mx943evk"
 OPTEEMACHINE:mx95-nxp-bsp      = "imx-mx95evk"
 
 # Strip the leading imx-
