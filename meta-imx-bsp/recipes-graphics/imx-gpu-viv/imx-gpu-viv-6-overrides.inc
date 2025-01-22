@@ -2,6 +2,8 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 ### Section 1: Changes to be upstreamed ###
 
+PROVIDES_OPENGLES3 = "virtual/libgles3"
+
 LIBVULKAN_API_VERSION   = "unused"
 
 FILES:libgal-imx-dev:remove = "${includedir}/HAL"
