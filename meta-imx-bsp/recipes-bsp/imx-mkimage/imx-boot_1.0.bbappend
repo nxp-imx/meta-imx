@@ -7,7 +7,7 @@ IMX_M4_DEMOS:mx8m-nxp-bsp = ""
 IMX_M4_DEMOS:mx8ulp-nxp-bsp = "imx-m33-demos:do_deploy"
 IMX_M4_DEMOS:mx91-nxp-bsp = ""
 IMX_M4_DEMOS:mx93-nxp-bsp = ""
-IMX_M4_DEMOS:mx943-nxp-bsp = ""
+IMX_M4_DEMOS:mx943-nxp-bsp = "imx-mcore-demos:do_deploy"
 IMX_M4_DEMOS:mx95-nxp-bsp = "imx-m7-demos:do_deploy"
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
@@ -36,6 +36,14 @@ do_compile:prepend() {
     mx8ulp)
         cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}       ${BOOT_STAGING}/m33_image.bin
         ;;
+    mx943)
+        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm33_core1_TCM_rpmsg_lite_str_echo_rtos.bin \
+                                                            ${BOOT_STAGING}/m33s_image.bin
+        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm7_core0_TCM_hello_world.bin \
+                                                            ${BOOT_STAGING}/m70_image.bin
+        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm7_core1_TCM_hello_world.bin \
+                                                            ${BOOT_STAGING}/m71_image.bin
+    ;;
     mx95)
         cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m7_image.bin
         ;;
@@ -53,6 +61,11 @@ do_deploy:append() {
         ;;
     mx8ulp)
         install -m 0644 ${BOOT_STAGING}/m33_image.bin        ${DEPLOYDIR}/${BOOT_TOOLS}
+        ;;
+    mx943)
+        install -m 0644 ${BOOT_STAGING}/m33s_image.bin ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0644 ${BOOT_STAGING}/m70_image.bin ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0644 ${BOOT_STAGING}/m71_image.bin ${DEPLOYDIR}/${BOOT_TOOLS}
         ;;
     mx95)
         install -m 0644 ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}         ${DEPLOYDIR}/${BOOT_TOOLS}
