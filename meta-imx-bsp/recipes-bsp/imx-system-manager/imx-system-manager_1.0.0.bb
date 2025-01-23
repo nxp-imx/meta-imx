@@ -21,4 +21,3 @@ S = "${WORKDIR}/git"
 require imx-system-manager.inc
 
 PACKAGECONFIG ??= "m2"
-PACKAGECONFIG:mx943-nxp-bsp = ""
