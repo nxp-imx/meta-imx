@@ -39,7 +39,9 @@ S = "${WORKDIR}/git"
 inherit pkgconfig
 
 PACKAGECONFIG ??= " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', 'x11', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', \
+       bb.utils.contains('DISTRO_FEATURES',     'x11',     'x11', \
+                                                              '', d), d)} \
     ${PACKAGECONFIG_DRM} \
     ${PACKAGECONFIG_G2D} \
     ${PACKAGECONFIG_GLES} \
