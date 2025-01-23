@@ -82,6 +82,7 @@ MKIMAGE_EXTRA_ARGS ?= ""
 MKIMAGE_EXTRA_ARGS:mx943-nxp-bsp ?= " \
     OEI=${OEI_ENABLE} \
     LPDDR_TYPE=${DDR_TYPE} \
+    MSEL=${MSEL_TYPE} \
 "
 MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp ?= " \
     OEI=${OEI_ENABLE} \
