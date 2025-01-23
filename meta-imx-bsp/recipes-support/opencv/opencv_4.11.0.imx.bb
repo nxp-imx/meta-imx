@@ -1,6 +1,7 @@
-# This recipe is for the i.MX fork of opencv. For ease of
-# maintenance, the top section is a verbatim copy of an OE-core
-# recipe. The second section customizes the recipe for i.MX.
+# This recipe is modified for i.MX.
+# For ease of maintenance, the top section is a verbatim copy
+# of an OE-core recipe, and the second section customizes the
+# recipe for i.MX.
 
 ########## meta-openembedded copy ###########
 # Upstream hash: f8342855a440fa5c4194fc57285e8db9e034fcaa
@@ -224,12 +225,15 @@ SUMMARY = "Opencv : The Open Computer Vision Library, i.MX Fork"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-# Replace the opencv URL with the fork
-SRC_URI:remove = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https"
-SRC_URI =+ "${OPENCV_SRC};branch=${SRCBRANCH_opencv};name=opencv"
-OPENCV_SRC ?= "git://github.com/nxp-imx/opencv-imx.git;protocol=https;branch=master"
-SRCBRANCH_opencv = "4.11.0_imx"
-SRCREV_opencv = "72d2d2d005609a38aa80924e7aaf5fd23b6f2c55"
+# i.MX patches
+SRC_URI += " \
+    file://0101-MGS-6470-ccc-Modify-host-ptr-alignment-size-in-UMAT.patch \
+    file://0102-MGS-6470-ccc-Add-configuration-parameter-to-force-en.patch \
+    file://0103-MGS-6470-ccc-Change-configuration-to-enable-hostptr-.patch \
+    file://0104-MGS-8011-ccc-Fix-the-problem-of-syntax-error-at-doub.patch \
+"
+
+SRCREV_opencv = "31b0eeea0b44b370fd0712312df4214d4ae1b158"
 SRCREV_contrib = "1ed3dd2c53888e3289afdb22ec4e9ebbff3dba87"
 
 # Add opencv_extra
