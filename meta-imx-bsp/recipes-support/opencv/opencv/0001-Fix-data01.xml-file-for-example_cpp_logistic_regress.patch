@@ -1,0 +1,26 @@
+From 8cb3ef177c870ba4fe0d139a4f0e8631e456fc4c Mon Sep 17 00:00:00 2001
+From: MaximSmolskiy <mithridatus@mail.ru>
+Date: Sat, 25 Jan 2025 00:53:52 +0300
+Subject: [PATCH] Fix data01.xml file for example_cpp_logistic_regression
+
+Upstream-Status: Backport [https://github.com/opencv/opencv/commit/8cb3ef177c870ba4fe0d139a4f0e8631e456fc4c]
+---
+ samples/data/data01.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/samples/data/data01.xml b/samples/data/data01.xml
+index d17167ccae..079d2960c1 100644
+--- a/samples/data/data01.xml
++++ b/samples/data/data01.xml
+@@ -50,7 +50,7 @@
+ <labelsmat type_id="opencv-matrix">
+     <rows>40</rows>
+     <cols>1</cols>
+-    <dt>d</dt>
++    <dt>f</dt>
+     <data>
+         0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+     </data>
+-- 
+2.34.1
+
