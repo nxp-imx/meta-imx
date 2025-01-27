@@ -26,4 +26,4 @@ do_install() {
 
 RDEPENDS:${PN} += " socat kernel-module-dpdk-extras"
 
-COMPATIBLE_MACHINE = "(mx93-nxp-bsp|mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx93-nxp-bsp|mx943-nxp-bsp|mx95-nxp-bsp)"

@@ -28,6 +28,7 @@ PACKAGECONFIG[libvirt] = ",,libvirt"
 
 DPDK_EXAMPLES ?= ""
 DPDK_EXAMPLES:imx-nxp-bsp = "l2fwd,l3fwd"
+DPDK_EXAMPLES:append:mx943-nxp-bsp = ",ip_fragmentation,ip_reassembly,ipsec-secgw"
 DPDK_EXAMPLES:append:mx95-nxp-bsp = ",ip_fragmentation,ip_reassembly,ipsec-secgw"
 
 DPDK_APPS ?= "pdump,test-pmd,dumpcap,proc-info,test-crypto-perf"
@@ -39,6 +40,13 @@ EXTRA_OEMESON = " \
 "
 EXTRA_OEMESON:append:mx8-nxp-bsp = " --cross-file ${S}/config/arm/arm64_poky_linux_gcc"
 EXTRA_OEMESON:append:mx9-nxp-bsp = " --cross-file ${S}/config/arm/arm64_imx_poky_linux_gcc"
+
+do_install:append:mx943-nxp-bsp (){
+    install -d ${D}${bindir}
+    install -m 0644 ${S}/nxp/crypto_perf_test.sh ${D}${bindir}/
+    install -d ${D}/${sysconfdir}/dpdk
+    install -m 0644 ${S}/nxp/ipsec/*.cfg ${D}/${sysconfdir}/dpdk
+}
 
 do_install:append:mx95-nxp-bsp (){
     install -d ${D}${bindir}

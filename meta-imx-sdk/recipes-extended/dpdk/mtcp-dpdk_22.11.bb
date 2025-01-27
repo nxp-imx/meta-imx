@@ -38,4 +38,4 @@ do_install() {
     install -m 0644 ${S}/README_nxp                 ${D}${bindir}/mtcp
 }
 
-COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx943-nxp-bsp|mx95-nxp-bsp)"

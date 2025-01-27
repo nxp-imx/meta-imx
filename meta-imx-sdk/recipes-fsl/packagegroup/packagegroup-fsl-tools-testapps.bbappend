@@ -76,7 +76,9 @@ RDEPENDS:${PN} += " \
 RDEPENDS_DPDK ?= "dpdk ${RDEPENDS_DPDK_FPR} ${RDEPENDS_MTCP_DPDK}"
 RDEPENDS_DPDK_FPR = ""
 RDEPENDS_DPDK_FPR:mx93-nxp-bsp = "dpdk-fpr"
+RDEPENDS_DPDK_FPR:mx943-nxp-bsp = "dpdk-fpr"
 RDEPENDS_DPDK_FPR:mx95-nxp-bsp = "dpdk-fpr"
 
 RDEPENDS_MTCP_DPDK = ""
+RDEPENDS_MTCP_DPDK:mx943-nxp-bsp = "mtcp-dpdk"
 RDEPENDS_MTCP_DPDK:mx95-nxp-bsp = "mtcp-dpdk"
