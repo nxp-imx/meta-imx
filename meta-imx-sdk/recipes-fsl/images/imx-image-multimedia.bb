@@ -16,7 +16,6 @@ inherit core-image
 
 ## Select Image Features
 IMAGE_FEATURES += " \
-    debug-tweaks \
     tools-profile \
     tools-sdk \
     package-management \
@@ -26,6 +25,10 @@ IMAGE_FEATURES += " \
     ssh-server-openssh \
     tools-testapps \
     hwcodecs \
+    allow-empty-password \
+    allow-root-login \
+    empty-root-password \
+    post-install-logging \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston', \
        bb.utils.contains('DISTRO_FEATURES',     'x11', 'x11-base x11-sato', \
                                                        '', d), d)} \

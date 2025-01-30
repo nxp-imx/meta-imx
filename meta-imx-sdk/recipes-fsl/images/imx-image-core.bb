@@ -6,7 +6,6 @@ DESCRIPTION = "This is the basic core image with minimal tests"
 inherit core-image
 
 IMAGE_FEATURES += " \
-    debug-tweaks \
     tools-profile \
     tools-sdk \
     package-management \
@@ -15,6 +14,10 @@ IMAGE_FEATURES += " \
     tools-debug \
     ssh-server-openssh \
     hwcodecs \
+    allow-empty-password \
+    allow-root-login \
+    empty-root-password \
+    post-install-logging \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston','', d)} \
 "
 
