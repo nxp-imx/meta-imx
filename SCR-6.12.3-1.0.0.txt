@@ -86,7 +86,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     imx-sc-firmware-1.18.0-015d587.bin
+Package:                     imx-sc-firmware-1.18.0-654907b.bin
 Version:                     1.18.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
