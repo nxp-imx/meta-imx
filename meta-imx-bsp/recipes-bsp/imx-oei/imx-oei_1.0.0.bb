@@ -56,4 +56,4 @@ do_deploy() {
 FILES:${PN} = "/firmware"
 SYSROOT_DIRS += "/firmware"
 
-COMPATIBLE_MACHINE = "(mx95-generic-bsp)"
+COMPATIBLE_MACHINE = "(mx95-generic-bsp|mx943-generic-bsp)"
