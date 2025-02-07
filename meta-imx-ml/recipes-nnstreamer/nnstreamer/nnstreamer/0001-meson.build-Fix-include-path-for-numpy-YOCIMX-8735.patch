@@ -1,0 +1,39 @@
+From eb73f8819970cfb01802b332f66c21e39947041f Mon Sep 17 00:00:00 2001
+From: "i.MX Release" <imx.release@nxp.com>
+Date: Thu, 6 Feb 2025 17:26:42 -0600
+Subject: [PATCH] meson.build: Fix include path for numpy [YOCIMX-8735]
+
+On walnascar, a numpy include path change causes a build break:
+
+Check usable header "numpy/arrayobject.h" with dependency python3-embed: NO
+../git/meson.build:574: WARNING: Found python3, but failed to find numpy.
+../git/meson.build:575: WARNING: Disable nnstreamer-python3.
+../git/meson.build:581:4: ERROR: Problem encountered: Cannot find python3 with numpy support
+ERROR: meson failed
+
+Upstream-Status: Pending
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ meson.build | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 5085c8c9..8e740f09 100644
+--- a/meson.build
++++ b/meson.build
+@@ -551,10 +551,10 @@ if not get_option('python3-support').disabled()
+ 
+     python3_inc_args = []
+     python3_inc_args += run_command(pg_pkgconfig, ['python3', '--cflags'], check : true).stdout().strip().split()
+-    python3_inc_args += run_command('python3', ['-c', 'import site\nfor i in site.getsitepackages(): print("-I" + i + "/numpy/core/include")'], check : true).stdout().strip().split()
++    python3_inc_args += run_command('python3', ['-c', 'import site\nfor i in site.getsitepackages(): print("-I" + i + "/numpy/_core/include")'], check : true).stdout().strip().split()
+     r = run_command('python3', ['-m', 'site', '--user-site'], check : false)
+     if r.returncode() == 0
+-      python3_inc_args += '-I' + r.stdout().strip() + '/numpy/core/include'
++      python3_inc_args += '-I' + r.stdout().strip() + '/numpy/_core/include'
+     endif
+     python3_inc_valid_args = []
+ 
+-- 
+2.34.1
+
