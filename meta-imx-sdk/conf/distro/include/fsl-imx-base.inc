@@ -59,6 +59,3 @@ PACKAGECONFIG:append:pn-qtquick3d:class-target = " examples"
 PACKAGECONFIG:remove:pn-qtquick3d:class-target = "openxr"
 
 PACKAGECONFIG:append:pn-qtwebengine:class-target = " examples"
-
-PACKAGECONFIG:append:pn-systemd-conf = " unmanaged-network"
-

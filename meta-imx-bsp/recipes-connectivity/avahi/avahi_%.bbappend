@@ -2,11 +2,7 @@
 ALLOW_INTERFACES ??= ""
 DENY_INTERFACES  ??= ""
 
-# Disable switch port management
-DENY_INTERFACES:mx943-nxp-bsp ??= "eth0,swp0,swp1,swp2"
-PACKAGE_ARCH:mx943-nxp-bsp = "${MACHINE_SOCARCH}"
-
-do_install:append:mx943-nxp-bsp() {
+do_install:append() {
     if [ "${ALLOW_INTERFACES}" != "" ]; then
         sed -i -E "s/#?allow-interfaces=.*/allow-interfaces=${ALLOW_INTERFACES}/g" \
             ${D}${sysconfdir}/avahi/avahi-daemon.conf
