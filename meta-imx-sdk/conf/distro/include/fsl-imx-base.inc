@@ -60,6 +60,5 @@ PACKAGECONFIG:remove:pn-qtquick3d:class-target = "openxr"
 
 PACKAGECONFIG:append:pn-qtwebengine:class-target = " examples"
 
-PACKAGECONFIG:append:pn-systemd = " unmanaged-network"
-PACKAGECONFIG:append:pn-systemd:mx943-nxp-bsp = " eth0 dsa"
+PACKAGECONFIG:append:pn-systemd-conf = " unmanaged-network"
 
