@@ -235,7 +235,7 @@ SRC_URI += " \
 "
 
 SRCREV_opencv = "31b0eeea0b44b370fd0712312df4214d4ae1b158"
-SRCREV_contrib = "1ed3dd2c53888e3289afdb22ec4e9ebbff3dba87"
+SRCREV_contrib = "0e5254ebf54d2aed6e7eaf6660bf3b797cf50a02"
 
 # Add opencv_extra
 SRC_URI += " \
@@ -243,7 +243,7 @@ SRC_URI += " \
     file://0001-Add-smaller-version-of-download_models.py.patch;patchdir=${UNPACKDIR}/extra \
 "
 SRCREV_FORMAT:append = "_extra"
-SRCREV_extra = "dd1fbd0717ef4d83f86899b4144fdd9bc0364a5f"
+SRCREV_extra = "a74cf6bae7fd75d91282b877c559168b3a62148a"
 
 # Patch DNN example
 SRC_URI += " \
