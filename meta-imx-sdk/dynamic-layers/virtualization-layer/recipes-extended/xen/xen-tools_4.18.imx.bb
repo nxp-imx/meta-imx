@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM ?= "file://COPYING;md5=d1a1e216f80b6d8da95fec897d0dbec9"
 S = "${WORKDIR}/git"
 
 DEFAULT_PREFERENCE ??= "-1"
-DEPENDS:apennd = "qemu"
+DEPENDS:append = " qemu"
 
 require xen-common.inc
 require recipes-extended/xen/xen.inc
