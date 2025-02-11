@@ -130,4 +130,4 @@ QEMUVERSION              = "9.0.2"
 QEMUVERSION:mx95-nxp-bsp = "9.0.2.imx"
 
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
-ZSTD_COMPRESSION_LEVEL ?= "-10"
+ZSTD_COMPRESSION_LEVEL ?= "10"
