@@ -14,6 +14,11 @@ IMX_SRCREV_ABBREV = "327f21d"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent cmake systemd use-imx-headers
 
+PACKAGECONFIG = ""
+# Note: building with tuningext fails with boost 1.87.
+# (update to 1.87 with walnascar)
+PACKAGECONFIG[tuningext] = "-DTUNINGEXT=1,-DTUNINGEXT=0"
+
 # Build the sub-folder appshell
 OECMAKE_SOURCEPATH = "${S}/appshell"
 
@@ -30,7 +35,6 @@ EXTRA_OECMAKE += " \
     -DCMAKE_BUILD_TYPE=release \
     -DISP_VERSION=ISP8000NANO_V1802 \
     -DPLATFORM=ARM64 \
-    -DTUNINGEXT=1 \
     -DQTLESS=1 \
     -DFULL_SRC_COMPILE=1 \
     -DWITH_DRM=1 \
@@ -43,8 +47,16 @@ EXTRA_OECMAKE += " \
 "
 
 do_install() {
-    # Use Makefile to install
+    # The Makefile unconditionally installs tuningext even if it is not built
+    if ${@bb.utils.contains('PACKAGECONFIG','tuningext','false','true',d)}; then
+        touch ${B}/generated/release/bin/tuningext
+    fi
+
     oe_runmake -f ${S}/Makefile install INSTALL_DIR=${D} SOURCE_DIR=${S}
+
+    if ${@bb.utils.contains('PACKAGECONFIG','tuningext','false','true',d)}; then
+        rm ${D}/opt/imx8-isp/bin/tuningext
+    fi
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_system_unitdir}
