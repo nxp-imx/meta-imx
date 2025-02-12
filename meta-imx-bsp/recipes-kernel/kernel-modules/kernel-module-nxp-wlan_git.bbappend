@@ -1,3 +1,3 @@
 # Use latest NXP Wi-Fi kernel module
 SRCBRANCH = "master"
-SRCREV = "0396cfb38ad73a3d587cd0f8c139b47801e70891"
+SRCREV = "58368fe6e6a10684d5fb32bbcca387c72d5fe00b"
