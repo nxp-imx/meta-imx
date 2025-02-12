@@ -32,7 +32,7 @@ UBOOT_MAKE_TARGET = ""
 SPL_BINARY = "spl/u-boot-spl.bin"
 
 UBOOT_CONFIG ??= "sd"
-UBOOT_CONFIG[sd]   = "${UBOOT_CONFIG_BASENAME}_bringup_defconfig,sdcard"
+UBOOT_CONFIG[sd]   = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
 UBOOT_CONFIG[xspi] = "${UBOOT_CONFIG_BASENAME}_xspi_defconfig"
 
 # Set ATF platform name
