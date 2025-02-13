@@ -53,6 +53,7 @@ RDEPENDS:${PN} = " \
     python3-core \
     python3-datetime \
     python3-json \
+    rt-tests \
     udev-extraconf \
 "
 RDEPENDS:${PN}:append:mx95-nxp-bsp = " iproute2-devlink"
