@@ -18,6 +18,7 @@ RDEPENDS:${PN} = " \
 "
 
 RDEPENDS_EDGE_LOCK ?= " \
+    openssl-provider-se050 \
     plug-and-trust-ecc \
     ${RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE} \
 "
