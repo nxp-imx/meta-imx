@@ -13,10 +13,10 @@ SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH}"
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
 EL2GO_AGENT_SRCBRANCH ?= "release/v6.12.3-1.0.0-yocto"
 
-SRCREV = "a976cb71f37647af6228ed830fe296b5a6a5a7bc"
+SRCREV = "755409a33886d74941938f4cbbb5def69af8e5b6"
 S = "${WORKDIR}/git"
 
-PV = "6.1.0+git${SRCPV}"
+PV = "6.1.1+git${SRCPV}"
 
 inherit cmake
 
