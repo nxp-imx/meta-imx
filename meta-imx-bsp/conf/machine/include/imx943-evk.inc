@@ -36,7 +36,7 @@ UBOOT_CONFIG[sd]   = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
 UBOOT_CONFIG[xspi] = "${UBOOT_CONFIG_BASENAME}_xspi_defconfig"
 
 # Set ATF platform name
-ATF_PLATFORM = "imx943"
+ATF_PLATFORM = "imx94"
 OEI_CONFIGS = "ddr"
 OEI_CORE = "m33"
 
