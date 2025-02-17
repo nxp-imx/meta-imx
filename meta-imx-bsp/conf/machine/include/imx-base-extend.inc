@@ -65,6 +65,7 @@ MACHINE_SOCARCH_SUFFIX:mx8mpul-nxp-bsp = "-mx8mpul"
 # Add new variabe for ELE extra Firmware
 SECOEXT_FIRMWARE_NAME ?= "UNDEFINED"
 SECOEXT_FIRMWARE_NAME:mx8ulp-generic-bsp ?= "mx8ulp${IMX_SOC_REV_LOWER}ext-ahab-container.img"
+SECOEXT_FIRMWARE_NAME:mx95-generic-bsp ?= "mx95${IMX_SOC_REV_LOWER}runtime-ahab-container.img"
 
 # GStreamer forked recipes
 PREFERRED_VERSION_gstreamer1.0:imx-nxp-bsp              ??= "1.24.7.imx"
