@@ -37,14 +37,8 @@ SECO_FIRMWARE_NAME:mx943-generic-bsp ?= "mx943${IMX_SOC_REV_LOWER}-ahab-containe
 
 PREFERRED_PROVIDER_virtual/libg2d:mx943-nxp-bsp ?= "imx-pxp-g2d"
 
-# Add new SoC i.MX 95
-MACHINEOVERRIDES_EXTENDER:mx95:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxdpu:imxgpu:imxmali:imxgpu2d:imxgpu3d:mx9-generic-bsp:mx9-nxp-bsp:mx95-generic-bsp:mx95-nxp-bsp"
-MACHINEOVERRIDES_EXTENDER:mx95:use-mainline-bsp  = "imx-generic-bsp:imx-mainline-bsp:mx9-generic-bsp:mx9-mainline-bsp:mx95-generic-bsp:mx95-mainline-bsp"
-MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx95"
-MACHINE_SOCARCH_SUFFIX:mx95-nxp-bsp = "-mx95"
+# Update i.MX 95
 IMX_EXTRA_FIRMWARE:mx95-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SYSTEM_MANAGER_RPROVIDER} imx-oei"
-MACHINE_FIRMWARE:append:mx95-nxp-bsp  = " firmware-imx-vpu-wave"
-SECO_FIRMWARE_NAME:mx95-generic-bsp ?= "mx95${IMX_SOC_REV_LOWER}-ahab-container.img"
 SYSTEM_MANAGER_RPROVIDER ?= "imx-system-manager"
 # The System Manager Firmware Name corresponds to a particular binary implementation
 # in the Yocto deploy folder. The name is comprised of the Firmware Basename and the
