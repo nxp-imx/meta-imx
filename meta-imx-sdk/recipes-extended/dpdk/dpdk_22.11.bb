@@ -57,6 +57,4 @@ do_install:append:mx95-nxp-bsp (){
 
 RDEPENDS:${PN} = "kernel-module-dpdk-extras pciutils python3-core"
 
-INSANE_SKIP:${PN} += "useless-rpaths"
-
 COMPATIBLE_MACHINE = "(imx-nxp-bsp|qoriq)"
