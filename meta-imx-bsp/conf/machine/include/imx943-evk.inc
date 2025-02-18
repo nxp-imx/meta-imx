@@ -6,19 +6,12 @@ require conf/machine/include/arm/armv8-2a/tune-cortexa55.inc
 MACHINE_FEATURES += "pci wifi bluetooth"
 MACHINE_FEATURES:append:use-nxp-bsp = " optee dpdk nxpiw612-sdio nxp9098-pcie"
 
+KERNEL_DEVICETREE_BASENAME = "imx943-evk"
 KERNEL_DEVICETREE = " \
     freescale/${KERNEL_DEVICETREE_BASENAME}.dtb \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-boe-wxga-lvds-panel.dtb \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-i2c-spi-slave.dtb \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-lpuart.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-mqs.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-pcie1-ep.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-pcie1-ep.dtbo \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-rpmsg.dtb \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-sgmii.dtb \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-sdwifi.dtb \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-xspi.dtb \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-rmii.dtb \
 "
 UBOOT_DTB_NAME = "${KERNEL_DEVICETREE_BASENAME}.dtb"
 
