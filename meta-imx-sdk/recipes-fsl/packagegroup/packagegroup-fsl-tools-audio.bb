@@ -1,5 +1,5 @@
 # Copyright (C) 2015 Freescale Semiconductor
-# Copyright 2017-2020,2022,2024 NXP
+# Copyright 2017-2020,2022,2024,2025 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "Set of audio tools for inclusion on images"
@@ -31,7 +31,7 @@ PULSEAUDIO_INSTALL = " \
 
 # for synchronous and asynchronous sample rate converter
 SRC_INSTALL ?= ""
-SRC_INSTALL:mx8-nxp-bsp = "imx-dspc-asrc"
+SRC_INSTALL:mx8-nxp-bsp = "imx-dspc-asrc nxp-ssrc"
 SRC_INSTALL:mx9-nxp-bsp = "nxp-ssrc"
 
 PDM_INSTALL ?= ""

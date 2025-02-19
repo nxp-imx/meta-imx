@@ -1,4 +1,4 @@
-# Copyright 2024 NXP
+# Copyright 2024,2025 NXP
 
 DESCRIPTION = "NXP synchronous sample rate converter"
 LICENSE = "Proprietary"
@@ -30,4 +30,4 @@ FILES:${PN}-test-source += "${datadir}/imx-mm/*"
 # make sure dev gets into rootfs when add test source code
 RRECOMMENDS:${PN}-test-source = "${PN}-dev"
 
-COMPATIBLE_MACHINE = "(mx9-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp|mx9-nxp-bsp)"
