@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.1-26a49e4.bin
+Package:                     firmware-ele-imx-2.0.1-b982cbb.bin
 Version:                     2.0.1
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -544,8 +544,8 @@ Origin:                      NXP (Apache-2.0)
                              OpenSSL 1.1 (OpenSSL License) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
 --------------------------------------------
 
-Package:                     ecdsa-lib-imx-3.3.3-dd6eac8.bin
-Version:                     3.3.3
+Package:                     ecdsa-lib-imx-3.3.4-dd6eac8.bin
+Version:                     3.3.4
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
