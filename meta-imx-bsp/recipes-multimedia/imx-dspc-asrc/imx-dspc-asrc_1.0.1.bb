@@ -18,4 +18,4 @@ INHIBIT_PACKAGE_DEBUG_SPLIT  = "1"
 
 FILES:${PN} += "/unit_tests ${datadir}/imx-mm"
 
-COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp|mx9-nxp-bsp)"

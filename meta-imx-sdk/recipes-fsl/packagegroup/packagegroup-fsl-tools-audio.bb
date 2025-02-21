@@ -32,7 +32,7 @@ PULSEAUDIO_INSTALL = " \
 # for synchronous and asynchronous sample rate converter
 SRC_INSTALL ?= ""
 SRC_INSTALL:mx8-nxp-bsp = "imx-dspc-asrc nxp-ssrc"
-SRC_INSTALL:mx9-nxp-bsp = "nxp-ssrc"
+SRC_INSTALL:mx9-nxp-bsp = "imx-dspc-asrc nxp-ssrc"
 
 PDM_INSTALL ?= ""
 PDM_INSTALL:mx8m-nxp-bsp = "imx-sw-pdm"
