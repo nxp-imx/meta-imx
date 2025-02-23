@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8636bd68fc00cc6a3809b7b58b45f982"
 SRC_URI = "${ITEST_SRC};branch=${SRCBRANCH}"
 ITEST_SRC ?= "git://github.com/nxp-imx/itest.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "181204b1ce30ef880af2104e3c75c4b7f6b45dbf"
+SRCREV = "1f124e90292ddb0f3716945c3de28454cc2718ba"
 
 S = "${WORKDIR}/git"
 
