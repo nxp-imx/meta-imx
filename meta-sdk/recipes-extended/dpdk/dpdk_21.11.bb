@@ -12,6 +12,10 @@ PACKAGECONFIG ??= " "
 PACKAGECONFIG[afxdp] = ",,libbpf"
 PACKAGECONFIG[libvirt] = ",,libvirt"
 
+SRC_URI += " \
+    file://CVE-2024-11614.patch \
+    "
+
 DPDK_EXAMPLES ?= "l2fwd,l3fwd,cmdif,l2fwd-qdma,l2fwd-crypto,ipsec-secgw,vhost,kni,ip_fragmentation,ip_reassembly"
 DPDK_EXAMPLES:imx-nxp-bsp = "l2fwd,l3fwd"
 
