@@ -31,13 +31,13 @@ DDR_TYPE   ?= "lpddr5"
 IMXBOOT_VARIANTS = "alt jailhouse netc rpmsg sof"
 
 # Multiple system manager configs by IMXBOOT_VARIANT
-SYSTEM_MANAGER_CONFIG = " \
-    ${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       'mx95alt', \
-       bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse', 'mx95evkjailhouse', \
-       bb.utils.contains('IMXBOOT_VARIANT', 'netc',      'mx95netc', \
-       bb.utils.contains('IMXBOOT_VARIANT', 'rpmsg',     'mx95evkrpmsg', \
-       bb.utils.contains('IMXBOOT_VARIANT', 'sof',       'mx95evksof', \
-                                                         'mx95evk', d), d), d), d), d)}"
+SYSTEM_MANAGER_CONFIG = \
+    "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       'mx95alt', \
+        bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse', 'mx95evkjailhouse', \
+        bb.utils.contains('IMXBOOT_VARIANT', 'netc',      'mx95netc', \
+        bb.utils.contains('IMXBOOT_VARIANT', 'rpmsg',     'mx95evkrpmsg', \
+        bb.utils.contains('IMXBOOT_VARIANT', 'sof',       'mx95evksof', \
+                                                          'mx95evk', d), d), d), d), d)}"
 
 # imx-boot (flash.bin) targets based on UBOOT_CONFIG and IMXBOOT_VARIANT
 IMXBOOT_TARGETS_SD = " \
