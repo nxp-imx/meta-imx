@@ -1,4 +1,4 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/imx-nxp-bsp:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI:append:imx-nxp-bsp = " file://51-bluez-imx.conf \
                                file://80-disable-logind.conf \
