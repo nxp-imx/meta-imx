@@ -9,8 +9,6 @@ MACHINE_FEATURES:append:use-nxp-bsp = " optee dpdk nxpiw612-sdio nxp9098-pcie"
 KERNEL_DEVICETREE_BASENAME = "imx943-evk"
 KERNEL_DEVICETREE = " \
     freescale/${KERNEL_DEVICETREE_BASENAME}.dtb \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-it6263-lvds.dtb \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-it6263-lvds.dtbo \
     freescale/${KERNEL_DEVICETREE_BASENAME}-mqs.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-pcie1-ep.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-pcie1-ep.dtbo \
