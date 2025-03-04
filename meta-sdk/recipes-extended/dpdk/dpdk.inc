@@ -10,6 +10,8 @@ DPDK_SRC ?= "git://github.com/nxp-qoriq/dpdk;protocol=https"
 SRC_URI = "${DPDK_SRC};nobranch=1 \
 "
 
+SRC_URI:append = " file://CVE-2024-11614.patch"
+
 STABLE = "-stable"
 SRCREV = "de541ae3fa6e18fa0293991b40e84ac3814a750c"
 
