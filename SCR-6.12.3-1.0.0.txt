@@ -546,7 +546,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     ecdsa-lib-imx-3.3.4-dd6eac8.bin
 Version:                     3.3.4
-Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
