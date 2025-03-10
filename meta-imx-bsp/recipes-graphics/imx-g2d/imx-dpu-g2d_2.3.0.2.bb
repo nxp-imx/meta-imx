@@ -21,7 +21,7 @@ SRC_URI[v1.sha256sum] = "91453b7f1b3aabf15ecdb8c70299606baa8c1df7e076b6cba22fc42
 
 IMX_SRCREV_ABBREV:imxmali = "8d2a88d"
 IMX_SRC_URI_NAME:imxmali = "v2"
-SRC_URI[v2.sha256sum] = "eb7108256cb55d996c07f6941d0d4a76beaf73458494b2c902d907bc8228eeeb"
+SRC_URI[v2.sha256sum] = "d4bbca172ecc32fff4841cd5ba8c465a0bb1920706ec3fb3a2fe7aada298c7e8"
 
 S = "${WORKDIR}/${IMX_BIN_NAME}"
 
