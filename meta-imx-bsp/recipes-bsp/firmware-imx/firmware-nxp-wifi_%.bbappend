@@ -19,6 +19,10 @@ FILES:${PN}-nxp9098-sdio = " \
     ${nonarch_base_libdir}/firmware/nxp/sd*9098* \
 "
 
+FILES:${PN}-nxpiw610-sdio += " \
+    ${nonarch_base_libdir}/firmware/nxp/sduartspi_iw610.bin.se \
+"
+
 PACKAGES += "${PN}-all-sdio ${PN}-all-pcie"
 
 RDEPENDS:${PN}-all-sdio = " \
