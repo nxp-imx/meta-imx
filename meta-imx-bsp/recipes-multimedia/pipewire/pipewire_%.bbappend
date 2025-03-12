@@ -10,7 +10,5 @@ GLIBC_64BIT_TIME_FLAGS:arm:imx-nxp-bsp = " \
 INSANE_SKIP:remove:imx-nxp-bsp = "32bit-time"
 
 SRC_URI:append:mx95-nxp-bsp = " \
-    file://0001-libcamera-allocate-memory-according-to-the-number-of.patch \
-    file://0002-libcamera-update-buffers-datas-information-according.patch \
     file://0003-pipewiresrc-update-per-plane-stride-and-offset-accor.patch \
 "
