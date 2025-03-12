@@ -38,6 +38,7 @@ SECO_FIRMWARE_NAME:mx943-generic-bsp ?= "mx943${IMX_SOC_REV_LOWER}-ahab-containe
 PREFERRED_PROVIDER_virtual/libg2d:mx943-nxp-bsp ?= "imx-pxp-g2d"
 
 # Update i.MX 95
+IMX_SOC_REV:mx95-generic-bsp ?= "B0"
 IMX_EXTRA_FIRMWARE:mx95-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SYSTEM_MANAGER_RPROVIDER} imx-oei"
 SYSTEM_MANAGER_RPROVIDER ?= "imx-system-manager"
 # The System Manager Firmware Name corresponds to a particular binary implementation
