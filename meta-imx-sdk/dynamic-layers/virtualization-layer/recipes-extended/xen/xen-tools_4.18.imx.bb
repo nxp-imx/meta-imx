@@ -10,7 +10,7 @@ DEFAULT_PREFERENCE ??= "-1"
 
 require xen-common.inc
 require recipes-extended/xen/xen.inc
-require recipes-extended/xen/xen-tools.inc
+require xen-tools.inc
 
 FILES:${PN}:append = " \
     ${sysconfdir}/xen/*.conf \
