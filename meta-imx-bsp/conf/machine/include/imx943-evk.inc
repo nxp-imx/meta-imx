@@ -40,7 +40,8 @@ IMXBOOT_VARIANTS = "alt"
 
 # Multiple system manager configs by IMXBOOT_VARIANT
 SYSTEM_MANAGER_CONFIG = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       'mx94alt', \
-                                                                              'mx94evk', d)}"
+                           bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse',  'mx94evkjailhouse', \
+                                                                              'mx94evk', d), d)}"
 
 MSEL_TYPE = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       '1', \
                                                                   '0', d)}"
@@ -51,7 +52,8 @@ IMXBOOT_TARGETS_BASENAME = "flash"
 
 # imx-boot (flash.bin) targets based on UBOOT_CONFIG and IMXBOOT_VARIANT
 IMXBOOT_TARGETS_SD = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       '${IMXBOOT_TARGETS_BASENAME}_a55', \
-                                                                           '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d)} \
+                         bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse', '${IMXBOOT_TARGETS_BASENAME}_jailhouse', \
+                                                                           '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d), d)} \
 "
 
 IMXBOOT_TARGETS = "${@bb.utils.contains('UBOOT_CONFIG', 'xspi', 'flash_a55_xspi', '${IMXBOOT_TARGETS_SD}', d)}"
