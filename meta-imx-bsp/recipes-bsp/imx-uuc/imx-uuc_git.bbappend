@@ -1,1 +1,4 @@
 SRCREV = "25f65e10368aa07056f9536e88ed911ac7f38f99"
+
+do_configure() {
+}
