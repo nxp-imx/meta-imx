@@ -10,19 +10,19 @@ Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
  loader/loader.c | 12 ++++++++++++
  1 file changed, 12 insertions(+)
 
-diff --git a/loader/loader.c b/loader/loader.c
-index e646b28b4..55912c178 100644
---- a/loader/loader.c
-+++ b/loader/loader.c
-@@ -2906,6 +2906,7 @@ VkResult add_data_files(const struct loader_instance *inst, char *search_path, s
+Index: git/loader/loader.c
+===================================================================
+--- git.orig/loader/loader.c
++++ git/loader/loader.c
+@@ -3022,6 +3022,7 @@ VkResult add_data_files(const struct loa
  #if !defined(_WIN32)
      char temp_path[2048];
  #endif
 +    bool has_wsi_layer = false;
  
      // Now, parse the paths
-     next_file = search_path;
-@@ -2965,6 +2966,10 @@ VkResult add_data_files(const struct loader_instance *inst, char *search_path, s
+     char *next_file = search_path;
+@@ -3088,6 +3089,10 @@ VkResult add_data_files(const struct loa
                  name = full_path;
  
                  VkResult local_res;
@@ -33,7 +33,7 @@ index e646b28b4..55912c178 100644
                  local_res = add_if_manifest_file(inst, name, out_files);
  
                  // Incomplete means this was not a valid data file.
-@@ -2975,6 +2980,13 @@ VkResult add_data_files(const struct loader_instance *inst, char *search_path, s
+@@ -3098,6 +3103,13 @@ VkResult add_data_files(const struct loa
                      break;
                  }
              }
@@ -47,6 +47,3 @@ index e646b28b4..55912c178 100644
              loader_closedir(inst, dir_stream);
              if (vk_result != VK_SUCCESS) {
                  goto out;
--- 
-2.34.1
-
