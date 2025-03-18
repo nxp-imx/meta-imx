@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d2ddcd9b5c3b713fcf90c3223f6b10bd \
 DEPENDS = "vulkan-headers spirv-headers zstd lz4"
 
 SRC_URI = " \
-    git://github.com/LunarG/gfxreconstruct.git;protocol=https;branch=vulkan-sdk-1.3.296 \
-    git://github.com/KhronosGroup/SPIRV-Reflect;destsuffix=git/external/SPIRV-Reflect;name=SPIRV-Reflect;lfs=0;protocol=https;branch=vulkan-sdk-1.3.296 \
+    git://github.com/LunarG/gfxreconstruct.git;protocol=https;branch=vulkan-sdk-1.4.309 \
+    git://github.com/KhronosGroup/SPIRV-Reflect;destsuffix=git/external/SPIRV-Reflect;name=SPIRV-Reflect;lfs=0;protocol=https;branch=vulkan-sdk-1.4.309 \
     file://0001-FindVulkanVersion.cmake-Look-for-vulkan-headers-in-s.patch \
     file://0004-Change-gfxreconstruct-layer-to-implicit-layer.patch \
 "
-SRCREV = "35e963814b64d3a2c11070e38cc2f1b442e2f70d"
-SRCREV_SPIRV-Reflect = "8542f37bd9bb202e6c49dc6a9da364c58c34d2a4"
+SRCREV = "c081f1b1b02b8fcdbfafac70c69797a39fd46c19"
+SRCREV_SPIRV-Reflect = "c637858562fbce1b6f5dc7ca48d4e8a5bd117b70"
 
 SRCREV_FORMAT = "default_SPIRV-Reflect"
 
