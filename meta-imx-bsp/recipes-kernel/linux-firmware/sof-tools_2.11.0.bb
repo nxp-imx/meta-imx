@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
 DEPENDS += "alsa-lib"
 RDEPENDS:${PN} += "bash"
 
-inherit cmake
+inherit cmake autotools
 
 do_compile() {
     install -d ${S}/tools/sof-tools
