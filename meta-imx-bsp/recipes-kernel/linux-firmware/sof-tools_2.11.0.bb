@@ -15,6 +15,9 @@ S = "${WORKDIR}/git"
 
 inherit cmake autotools
 
+do_configure() {
+}
+
 do_compile() {
     install -d ${S}/tools/sof-tools
     cd ${S}/tools/sof-tools
