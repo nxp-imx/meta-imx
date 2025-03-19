@@ -6,14 +6,12 @@ HOMEPAGE = "https://www.sofproject.org"
 SECTION = "Console/tools"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=14abb55d71048ebecff1a104640546b6"
+DEPENDS = "alsa-lib"
 
 SRC_URI = "git://github.com/thesofproject/sof.git;branch=imx-stable-v2.11;protocol=https"
 SRCREV = "fa77d8b2220c77436695a28cbc53e6636b04c97a"
 
 S = "${WORKDIR}/git"
-
-DEPENDS += "alsa-lib"
-RDEPENDS:${PN} += "bash"
 
 inherit cmake autotools
 
@@ -35,6 +33,7 @@ do_install() {
 }
 
 FILES:${PN} = "/unit_tests/sof/tools"
+RDEPENDS:${PN} = "bash"
 
-# Work around do_package_qa error
-INSANE_SKIP:${PN} += "buildpaths"
+# FIXME: don't ignore the underlying problem
+INSANE_SKIP:${PN} = "buildpaths"
