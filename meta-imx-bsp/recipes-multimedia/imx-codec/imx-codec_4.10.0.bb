@@ -6,7 +6,7 @@ require imx-codec.inc
 inherit fsl-eula-unpack fsl-eula2 fsl-eula-recent
 LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3"
 
-IMX_SRCREV_ABBREV = "394336b"
+IMX_SRCREV_ABBREV = "464e9d8"
 IMX_PACKAGE_VERSION = "${PV}"
 
 SRC_URI = "${FSL_MIRROR}/${IMX_PACKAGE_NAME}.bin;fsl-eula=true"
