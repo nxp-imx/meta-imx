@@ -1,16 +1,11 @@
-# Copyright 2020 NXP
+# Copyright 2020,2025 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "Kernel test tools for Linux"
 DESCRIPTION = "Kernel test tools for Linux"
 LICENSE = "GPL-2.0-only"
 
-do_configure[depends] += "virtual/kernel:do_shared_workdir"
-
-inherit linux-kernel-base kernel-arch
-inherit kernelsrc
-
-S = "${WORKDIR}/${BP}"
+require kernel-tools.inc
 
 PACKAGECONFIG ??= " \
     ${PACKAGECONFIG_VIRTIO} \
@@ -25,50 +20,18 @@ PACKAGECONFIG_VSOCK:mx7-nxp-bsp   = ""
 PACKAGECONFIG[virtio] = ",,"
 PACKAGECONFIG[vsock] = ",,liburing"
 
-KERNEL_PCITEST_SRC ?= " \
-    include \
-    tools/arch \
-    tools/build \
-    tools/include \
-    tools/lib \
-    tools/Makefile \
+KERNEL_TOOLS_SRC:append = " \
     tools/iio \
-    tools/pci \
-    tools/scripts \
     ${@bb.utils.contains('PACKAGECONFIG', 'virtio', 'tools/virtio', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'vsock',  'tools/testing/vsock', '', d)} \
 "
 
-do_configure[prefuncs] += "copy_pci_source_from_kernel"
-python copy_pci_source_from_kernel() {
-    sources = (d.getVar("KERNEL_PCITEST_SRC") or "").split()
-    src_dir = d.getVar("STAGING_KERNEL_DIR")
-    dest_dir = d.getVar("S")
-    bb.utils.mkdirhier(dest_dir)
-    for s in sources:
-        src = oe.path.join(src_dir, s)
-        dest = oe.path.join(dest_dir, s)
-        if not os.path.exists(src):
-            bb.fatal("Path does not exist: %s. Maybe PERF_SRC does not match the kernel version." % src)
-        if os.path.isdir(src):
-            oe.path.copyhardlinktree(src, dest)
-        else:
-            bb.utils.copyfile(src, dest)
-}
-
-EXTRA_OEMAKE = '\
-    CROSS_COMPILE=${TARGET_PREFIX} \
-    ARCH=${ARCH} \
-    CC="${CC}" \
-    AR="${AR}" \
-    LD="${LD}" \
-    DESTDIR="${D}" \
+EXTRA_OEMAKE:append = ' \
     VSOCK_INSTALL_PATH="${D}${bindir}" \
 '
 
 do_compile() {
     unset CFLAGS
-    oe_runmake -C ${S}/tools/pci
     oe_runmake -C ${S}/tools/iio
     if [ ${@bb.utils.filter('PACKAGECONFIG', 'vsock', d)} = "vsock" ]; then
         oe_runmake -C ${S}/tools/testing/vsock
@@ -80,7 +43,6 @@ do_compile() {
 
 do_install() {
     unset CFLAGS
-    oe_runmake -C ${S}/tools/pci install
     oe_runmake -C ${S}/tools/iio install
     if [ ${@bb.utils.filter('PACKAGECONFIG', 'vsock', d)} = "vsock" ]; then
         oe_runmake -C ${S}/tools/testing/vsock install
@@ -91,18 +53,12 @@ do_install() {
     fi
 }
 
-ALLOW_EMPTY:${PN} = "1"
+
 ALLOW_EMPTY:${PN}-virtio = "1"
 ALLOW_EMPTY:${PN}-vsock = "1"
 
-PACKAGES =+ "${PN}-pci ${PN}-virtio ${PN}-iio ${PN}-vsock"
+PACKAGES =+ "${PN}-virtio ${PN}-iio ${PN}-vsock"
 
-FILES:${PN}-pci = "${bindir}/pci*"
 FILES:${PN}-iio = "${bindir}/lsiio ${bindir}/iio*"
 FILES:${PN}-virtio = "${bindir}/virtio-ivshmem-*"
 FILES:${PN}-vsock = "${bindir}/vsock*"
-
-# Work around do_package_qa error
-INSANE_SKIP:${PN}-dbg += "buildpaths"
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
