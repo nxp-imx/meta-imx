@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2024 NXP
+# Copyright (C) 2017-2025 NXP
 
 DESCRIPTION = "i.MX ARM Trusted Firmware"
 SECTION = "BSP"
@@ -9,8 +9,8 @@ PV .= "+git${SRCPV}"
 
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH}"
 ATF_SRC ?= "git://github.com/nxp-imx/imx-atf.git;protocol=https"
-SRCBRANCH = "lf_v2.10"
-SRCREV = "778681902a4469276eeff9f960b5c249567a2c8a"
+SRCBRANCH = "lf_v2.12"
+SRCREV = "e4924f63516066c38f33bd159c11b44be55334d7"
 
 S = "${WORKDIR}/git"
 
