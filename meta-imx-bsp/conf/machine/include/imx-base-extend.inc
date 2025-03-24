@@ -30,11 +30,11 @@ UBOOT_DTB_NAME:mx93-generic-bsp = ""
 
 # Add new SoC i.MX 95
 DEFAULTTUNE:mx95-nxp-bsp   ?= "armv8a-crc-crypto"
-
 MACHINEOVERRIDES_EXTENDER:mx95:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxdpu:imxgpu:imxgpu2d:imxgpu3d:mx9-generic-bsp:mx9-nxp-bsp:mx95-generic-bsp:mx95-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER:mx95:use-mainline-bsp  = "imx-generic-bsp:imx-mainline-bsp:mx9-generic-bsp:mx9-mainline-bsp:mx95-generic-bsp:mx95-mainline-bsp"
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx95"
 MACHINE_SOCARCH_SUFFIX:mx95-nxp-bsp = "-mx95"
+IMX_SOC_REV:mx95-generic-bsp ?= "B0"
 IMX_EXTRA_FIRMWARE:mx95-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SYSTEM_MANAGER_RPROVIDER} imx-oei"
 MACHINE_FIRMWARE:append:mx95-nxp-bsp  = " firmware-imx-vpu-wave"
 SECO_FIRMWARE_NAME:mx95-generic-bsp ?= "mx95${IMX_SOC_REV_LOWER}-ahab-container.img"
