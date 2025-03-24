@@ -44,6 +44,9 @@ VIRTUAL-RUNTIME_container_runtime = "virtual-runc"
 
 PACKAGECONFIG:append:pn-gstreamer1.0-plugins-ugly = " x264"
 
+PACKAGECONFIG:append:pn-mesa-demos = " ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
+PACKAGECONFIG:remove:pn-mesa-demos = "vulkan"
+
 PACKAGECONFIG:append:pn-perf = " jevents"
 
 PACKAGECONFIG:append:pn-pulseaudio = " autospawn-for-root"
