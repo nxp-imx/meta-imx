@@ -4,9 +4,9 @@ LICENSE = "Proprietary"
 SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3"
 
-IMX_SRCREV_ABBREV = "5afe2a5"
+IMX_SRCREV_ABBREV = "ce4ae5a"
 
-SRC_URI[sha256sum] = "5c2f204d42b2c8730a672af380fce73a26f15e2dcbab23eb42cbc4007f5185fd"
+SRC_URI[sha256sum] = "15f6ace2713103ac845fc3905ccb9ef68748ce65e9542ee30b9ef4c91a2dd438"
 
 inherit fsl-eula-recent fsl-eula2-unpack2 autotools pkgconfig
 
