@@ -15,11 +15,10 @@ DEPENDS = "\
     p11-kit \
 "
 
-PV = "0.5+git${SRCPV}"
-
-SRCREV = "07101bf32bcf104ee47246711aa772d860619415"
-
-SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
+SRC_URI = "${PKCS11_PROVIDER_SRC};branch=${SRCBRANCH}"
+PKCS11_PROVIDER_SRC ?= "git://github.com/nxp-imx/${BPN}.git;branch=main;protocol=https"
+SRCBRANCH = "lf_1.0.y"
+SRCREV = "8f6b94409d4872265076df310492da1e5f6abdf7"
 
 S = "${WORKDIR}/git"
 
