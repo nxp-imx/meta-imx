@@ -12,9 +12,10 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b53b787444a60266932bd270d1cf2d45"
 DEPENDS = "openssl"
 
-SRCREV = "93bd41c505cf54dc1ecef6c963df347b9f4abf6d"
-
-SRC_URI = "git://github.com/latchset/${BPN}.git;branch=main;protocol=https"
+SRC_URI = "${PKCS11_PROVIDER_SRC};branch=${SRCBRANCH}"
+PKCS11_PROVIDER_SRC ?= "git://github.com/nxp-imx/${BPN}.git;branch=main;protocol=https"
+SRCBRANCH = "lf_1.0.y"
+SRCREV = "8f6b94409d4872265076df310492da1e5f6abdf7"
 
 S = "${WORKDIR}/git"
 
