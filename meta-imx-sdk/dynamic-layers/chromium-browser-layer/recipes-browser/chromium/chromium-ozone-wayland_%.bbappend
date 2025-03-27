@@ -56,6 +56,7 @@ GN_ARGS_USE_V4L2_CODEC:mx95-nxp-bsp = "use_v4l2_codec=true"
 GN_ARGS_USE_LINUX_V4L2_ONLY             = ""
 GN_ARGS_USE_LINUX_V4L2_ONLY:mx8-nxp-bsp = "use_linux_v4l2_only=true"
 GN_ARGS_USE_LINUX_V4L2_ONLY:mx95-nxp-bsp = "use_linux_v4l2_only=true"
+
 GN_ARGS:append:imx-nxp-bsp = " \
     ${GN_ARGS_DISABLE_GBM} \
     ${GN_ARGS_USE_IMXGPU} \
@@ -66,14 +67,41 @@ GN_ARGS:append:imx-nxp-bsp = " \
     use_pulseaudio=true \
 "
 DEPENDS:append = " pulseaudio"
+
+CHROMIUM_EXTRA_ARGS_ENABLE_ANGLE = ""
+CHROMIUM_EXTRA_ARGS_ENABLE_ANGLE:mx93-nxp-bsp = "--use-gl=angle --use-angle=gles-egl"
+CHROMIUM_EXTRA_ARGS_ENABLE_ANGLE:mx943-nxp-bsp = "--use-gl=angle --use-angle=gles-egl"
+
+CHROMIUM_EXTRA_ARGS:remove:mx93-nxp-bsp = "--use-gl=egl"
+CHROMIUM_EXTRA_ARGS:remove:mx943-nxp-bsp = "--use-gl=egl"
+
 CHROMIUM_EXTRA_ARGS:append = " \
     --disable-features=VizDisplayCompositor \
     --in-process-gpu \
     --disable-gpu-rasterization \
+    ${CHROMIUM_EXTRA_ARGS_ENABLE_ANGLE} \
 "
 
 #Remove installed ANGLE libraries
-do_install:append() {
+do_install:append:mx6-nxp-bsp() {
+        rm -rf ${D}${libdir}/chromium/libEGL.so
+        rm -rf ${D}${libdir}/chromium/libGLESv2.so
+        rm -rf ${D}${libdir}/chromium/libvulkan.so.1
+}
+
+do_install:append:mx7-nxp-bsp() {
+        rm -rf ${D}${libdir}/chromium/libEGL.so
+        rm -rf ${D}${libdir}/chromium/libGLESv2.so
+        rm -rf ${D}${libdir}/chromium/libvulkan.so.1
+}
+
+do_install:append:mx8-nxp-bsp() {
+        rm -rf ${D}${libdir}/chromium/libEGL.so
+        rm -rf ${D}${libdir}/chromium/libGLESv2.so
+        rm -rf ${D}${libdir}/chromium/libvulkan.so.1
+}
+
+do_install:append:mx95-nxp-bsp() {
         rm -rf ${D}${libdir}/chromium/libEGL.so
         rm -rf ${D}${libdir}/chromium/libGLESv2.so
         rm -rf ${D}${libdir}/chromium/libvulkan.so.1
