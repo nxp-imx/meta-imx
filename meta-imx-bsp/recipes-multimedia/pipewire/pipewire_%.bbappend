@@ -12,3 +12,6 @@ INSANE_SKIP:remove:imx-nxp-bsp = "32bit-time"
 SRC_URI:append:mx95-nxp-bsp = " \
     file://0003-pipewiresrc-update-per-plane-stride-and-offset-accor.patch \
 "
+SRC_URI:remove = " \
+    file://0001-launch-allow-pipewire-pulse-can-be-started-by-root.patch \
+"
