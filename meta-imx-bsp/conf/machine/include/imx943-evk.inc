@@ -36,12 +36,13 @@ ATF_PLATFORM = "imx94"
 OEI_CONFIGS = "ddr"
 OEI_CORE = "m33"
 
-IMXBOOT_VARIANTS = "alt"
+IMXBOOT_VARIANTS = "alt jailhouse rpmsg"
 
 # Multiple system manager configs by IMXBOOT_VARIANT
 SYSTEM_MANAGER_CONFIG = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       'mx94alt', \
                            bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse',  'mx94evkjailhouse', \
-                                                                              'mx94evk', d), d)}"
+                           bb.utils.contains('IMXBOOT_VARIANT', 'rpmsg',      'mx94evkrpmsg', \
+                                                                              'mx94evk', d), d), d)}"
 
 MSEL_TYPE = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       '1', \
                                                                   '0', d)}"
@@ -53,7 +54,8 @@ IMXBOOT_TARGETS_BASENAME = "flash"
 # imx-boot (flash.bin) targets based on UBOOT_CONFIG and IMXBOOT_VARIANT
 IMXBOOT_TARGETS_SD = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       '${IMXBOOT_TARGETS_BASENAME}_a55', \
                          bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse', '${IMXBOOT_TARGETS_BASENAME}_jailhouse', \
-                                                                           '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d), d)} \
+                         bb.utils.contains('IMXBOOT_VARIANT', 'rpmsg',     '${IMXBOOT_TARGETS_BASENAME}_a55', \
+                                                                           '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d), d), d)} \
 "
 
 IMXBOOT_TARGETS = "${@bb.utils.contains('UBOOT_CONFIG', 'xspi', 'flash_a55_xspi', '${IMXBOOT_TARGETS_SD}', d)}"
