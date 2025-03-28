@@ -22,7 +22,7 @@ SRC_URI = " \
         file://0001-rpi-Use-malloc-instead-of-variable-length-arrays.patch \
 "
 
-SRCREV = "02ed725e8ac83888b65114e309d1070dae7e9ec6"
+SRCREV = "b405e0a3b69104b360d3b420f5a3e89d773d6845"
 
 PE = "1"
 
@@ -96,7 +96,7 @@ SRC_URI:remove = " \
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "gitsm://github.com/nxp-imx/libcamera.git;protocol=https"
 SRCBRANCH = "imx/next"
-SRCREV = "02ed725e8ac83888b65114e309d1070dae7e9ec6"
+SRCREV = "b405e0a3b69104b360d3b420f5a3e89d773d6845"
 
 PACKAGECONFIG = "gst pycamera tiff"
 
