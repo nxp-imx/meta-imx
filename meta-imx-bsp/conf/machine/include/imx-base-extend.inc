@@ -7,33 +7,16 @@ IMX_DEFAULT_BSP = "nxp"
 IMX_DEFAULT_BOOTLOADER:imx-nxp-bsp = "u-boot-imx"
 IMX_DEFAULT_KERNEL:imx-nxp-bsp     = "linux-imx"
 
-# FIXME: Remove the hard-coded assignment to u-boot-fslc that exists
-# in imx6sllevk.conf so the following workaround can also be removed
-PREFERRED_PROVIDER_u-boot:imx6sllevk             = "${IMX_DEFAULT_BOOTLOADER}"
-PREFERRED_PROVIDER_virtual/bootloader:imx6sllevk = "${IMX_DEFAULT_BOOTLOADER}"
-
 # IMXBOOT_VARIANT infrastructure
 IMXBOOT_VARIANT  ?= ""
 IMXBOOT_VARIANTS ?= "NONE"
 BOOT_VARIANT = "${@bb.utils.contains_any('IMXBOOT_VARIANT', '${IMXBOOT_VARIANTS}', '-variant-${IMXBOOT_VARIANT}', '', d)}"
 
-# Update i.MX 8MQ
-SOC_ATF_BOOT_UART_BASE:mx8mq-generic-bsp   = "0x30860000"
-
-# Update i.MX 8ULP
-IMX_EXTRA_FIRMWARE:mx8ulp-generic-bsp = "firmware-upower firmware-ele-imx"
-
-# Update i.MX 93
-IMX_SOC_REV:mx93-generic-bsp  ?= "A1"
-IMX_EXTRA_FIRMWARE:mx93-generic-bsp = "imx-boot-firmware-files firmware-ele-imx"
-
 # Add new SoC i.MX 943
-IMX_SOC_REV:mx943-generic-bsp  ?= "A0"
 MACHINEOVERRIDES_EXTENDER:mx943:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxpxp:mx9-generic-bsp:mx9-nxp-bsp:mx94-generic-bsp:mx94-nxp-bsp:mx943-generic-bsp:mx943-nxp-bsp"
 MACHINE_SOCARCH_SUFFIX:mx943-nxp-bsp = "-mx943"
 IMX_EXTRA_FIRMWARE:mx943-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SYSTEM_MANAGER_RPROVIDER} imx-oei"
 SECO_FIRMWARE_NAME:mx943-generic-bsp ?= "mx943${IMX_SOC_REV_LOWER}-ahab-container.img"
-
 PREFERRED_PROVIDER_virtual/libg2d:mx943-nxp-bsp ?= "imx-pxp-g2d"
 
 # Update i.MX 95
