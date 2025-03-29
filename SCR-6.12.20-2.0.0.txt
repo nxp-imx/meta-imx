@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.28-6b8d890.bin
+Package:                     firmware-imx-8.28-70fe942.bin
 Version:                     8.28
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1130,7 +1130,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-1.37.0-e4432eb.bin
+Package:                     imx-vpu-hantro-1.37.0-6d6498f.bin
 Version:                     1.37.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1145,7 +1145,7 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.6.0-62d8bbb
+Package:                     imx-vpu-hantro-daemon-1.6.0-cc9a838
 Version:                     1.6.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
