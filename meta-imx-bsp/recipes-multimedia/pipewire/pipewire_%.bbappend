@@ -15,6 +15,3 @@ SRC_URI:append:imx-nxp-bsp = " \
 SRC_URI:append:mx95-nxp-bsp = " \
     file://0003-pipewiresrc-update-per-plane-stride-and-offset-accor.patch \
 "
-SRC_URI:remove = " \
-    file://0001-launch-allow-pipewire-pulse-can-be-started-by-root.patch \
-"
