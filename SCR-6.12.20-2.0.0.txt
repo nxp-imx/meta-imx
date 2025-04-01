@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.13.0
+Package:                     sof-zephyr-2.13.0-88c6e53
 Version:                     2.13.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.1
+Package:                     zephyr-demo-imx-4.1-fa45beb
 Version:                     4.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -727,7 +727,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r53.2-660ab78.bin
+Package:                     mali-imx-r53.2-cd3970a.bin
 Version:                     r53.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1092,7 +1092,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.8.0-c950a21.bin
+Package:                     imx-opencl-converter-0.8.0-4a83820.bin
 Version:                     0.8.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1130,7 +1130,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-1.37.0-6d6498f.bin
+Package:                     imx-vpu-hantro-1.37.0-deec65e.bin
 Version:                     1.37.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1159,8 +1159,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-vc-1.10.1-c0244a1.bin
-Version:                     1.10.1
+Package:                     imx-vpu-hantro-vc-1.10.2-fc03682.bin
+Version:                     1.10.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
