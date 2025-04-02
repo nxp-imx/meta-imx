@@ -9,10 +9,6 @@ SRC_URI += " \
 "
 
 do_install:append () {
-    # Disable the assignment of the fixed network interface name
-    install -d ${D}${sysconfdir}/systemd/network
-    ln -s /dev/null ${D}${sysconfdir}/systemd/network/99-default.link
-
     install -D -m0644 ${S}/imx-logind.conf ${D}${systemd_unitdir}/logind.conf.d/00-${PN}-imx.conf
     install -D -m0644 ${S}/imx-touchscreen.rules ${D}${sysconfdir}/udev/rules.d/00-${PN}-imx.rules
     install -D -m0644 ${S}/imx-unmanage.network ${D}${systemd_unitdir}/network/69-${PN}-imx.network
