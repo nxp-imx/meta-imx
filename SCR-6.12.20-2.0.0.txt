@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.2-5e46c45.bin
+Package:                     firmware-ele-imx-2.0.2-5c25abb.bin
 Version:                     2.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.13.0-88c6e53
+Package:                     sof-zephyr-2.13.0-2b5ed2f
 Version:                     2.13.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -727,8 +727,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r53.2-cd3970a.bin
-Version:                     r53.2
+Package:                     mali-imx-r54.0-4c30b1d.bin
+Version:                     r54.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -957,8 +957,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-r53.2-aarch64-wayland-mali-95b9a52.bin
-Version:                     r53.2
+Package:                     libgpuperfcnt-r54.0-aarch64-wayland-mali-95b9a52.bin
+Version:                     r54.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
