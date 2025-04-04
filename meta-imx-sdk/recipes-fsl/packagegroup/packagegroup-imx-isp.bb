@@ -20,6 +20,7 @@ ISP_PKGS:mx95-nxp-bsp = " \
     libcamera \
     libcamera-gst \
     libcamera-pycamera \
+    neo-ipa-uguzzi \
 "
 RDEPENDS:${PN} = " \
     ${ISP_PKGS} \
