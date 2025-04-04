@@ -94,7 +94,7 @@ SRC_URI:remove = " \
         file://0001-rpi-Use-malloc-instead-of-variable-length-arrays.patch \
 "
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
-LIBCAMERA_SRC ?= "gitsm://github.com/nxp-imx/libcamera.git;protocol=https"
+LIBCAMERA_SRC ?= "git://github.com/nxp-imx/libcamera.git;protocol=https"
 SRCBRANCH = "imx/next"
 SRCREV = "b405e0a3b69104b360d3b420f5a3e89d773d6845"
 
