@@ -38,3 +38,4 @@ do_install() {
 SECURITY_CFLAGS:riscv64 = "${SECURITY_NOPIE_CFLAGS}"
 LTO = ""
 
+COMPATIBLE_MACHINE = "imxviv"

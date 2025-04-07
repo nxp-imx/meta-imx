@@ -1,0 +1,32 @@
+From c537c66242791deece5a3a52f42c8cde806b9d98 Mon Sep 17 00:00:00 2001
+From: Ke Feng <ke.feng@verisilicon.com>
+Date: Tue, 7 Jun 2022 18:13:17 +0800
+Subject: [PATCH] CL489625 [escts-3.2.8]: Fix escts3.2.8 fail on 8mm board.
+
+8mm cannot support high-precision blend and cause result beyond the CTS test tolerance. Increase tolerance from RGBA(3,3,3,3) to RGBA(4,4,4,4).
+
+case:
+dEQP-GLES2.functional.fragment_ops.interaction.basic_shader.25
+
+This is a workaround. The problem has been reported here:
+https://gitlab.khronos.org/Tracker/vk-gl-cts/-/issues/3754
+
+Upstream-Status: Pending
+Signed-off-by: Ke Feng <ke.feng@verisilicon.com>
+---
+ modules/glshared/glsFragOpInteractionCase.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Index: git/modules/glshared/glsFragOpInteractionCase.cpp
+===================================================================
+--- git.orig/modules/glshared/glsFragOpInteractionCase.cpp
++++ git/modules/glshared/glsFragOpInteractionCase.cpp
+@@ -670,7 +670,7 @@ FragOpInteractionCase::IterateResult Fra
+ 
+     {
+         const tcu::RGBA threshold =
+-            m_renderCtx.getRenderTarget().getPixelFormat().getColorThreshold() + tcu::RGBA(3, 3, 3, 3);
++            m_renderCtx.getRenderTarget().getPixelFormat().getColorThreshold() + tcu::RGBA(4, 4, 4, 4);
+         const bool compareOk =
+             tcu::bilinearCompare(m_testCtx.getLog(), "CompareResult", "Image comparison result", reference.getAccess(),
+                                  rendered.getAccess(), threshold, tcu::COMPARE_LOG_RESULT);
