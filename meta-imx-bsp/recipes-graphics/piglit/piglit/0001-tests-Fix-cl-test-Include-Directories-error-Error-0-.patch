@@ -16,22 +16,10 @@ Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
  tests/cl/program/build/include-directories.cl | 2 +-
  2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index dd2bf6712..8b859a3eb 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -553,6 +553,7 @@ install (
- 	DIRECTORY tests
- 	DESTINATION ${PIGLIT_INSTALL_LIBDIR}
- 	FILES_MATCHING REGEX ".*\\.(xml|xml.gz|py|program_test|shader_test|shader_source|frag|vert|geom|tesc|tese|comp|spv|ktx|cl|txt|inc|vk_shader_test)$"
-+	REGEX "include_test.h"
- 	REGEX "CMakeFiles|CMakeLists|serializer.py|opengl.py|cl.py|quick_gl.py|glslparser.py|shader.py|quick_shader.py|no_error.py|llvmpipe_gl.py|sanity.py" EXCLUDE
- )
- 
-diff --git a/tests/cl/program/build/include-directories.cl b/tests/cl/program/build/include-directories.cl
-index 40ed9443a..23238f212 100644
---- a/tests/cl/program/build/include-directories.cl
-+++ b/tests/cl/program/build/include-directories.cl
+Index: git/tests/cl/program/build/include-directories.cl
+===================================================================
+--- git.orig/tests/cl/program/build/include-directories.cl
++++ git/tests/cl/program/build/include-directories.cl
 @@ -2,7 +2,7 @@
  [config]
  name: Include Directories
@@ -41,6 +29,3 @@ index 40ed9443a..23238f212 100644
  !*/
  
  #include "include_test.h"
--- 
-2.34.1
-
