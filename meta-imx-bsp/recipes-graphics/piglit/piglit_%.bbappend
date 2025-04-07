@@ -1,3 +1,6 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+SRC_URI += "file://0001-tests-Fix-cl-test-Include-Directories-error-Error-0-.patch"
 
 PACKAGECONFIG:append = " \
     ${PACKAGECONFIG_GBM} \
