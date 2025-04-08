@@ -21,7 +21,7 @@ SRC_URI = " \
         file://0002-libcamera-Add-missing-stdint.h-include-to-dma_buf_al.patch \
 "
 
-SRCREV = "35ed4b91291d9f3d08e4b51acfb51163e65df8f8"
+SRCREV = "b405e0a3b69104b360d3b420f5a3e89d773d6845"
 
 PE = "1"
 
