@@ -87,9 +87,13 @@ GLIBC_64BIT_TIME_FLAGS = ""
 ########### End of meta-openembedded copy ###########
 
 ########### i.MX overrides ################
+
+DEPENDS += "libpisp"
+
 SRC_URI:remove = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
         file://0001-media_device-Add-bool-return-type-to-unlock.patch \
+        file://0002-libcamera-Add-missing-stdint.h-include-to-dma_buf_al.patch \
 "
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "git://github.com/nxp-imx/libcamera.git;protocol=https"
@@ -99,4 +103,5 @@ SRCREV = "b405e0a3b69104b360d3b420f5a3e89d773d6845"
 PACKAGECONFIG = "gst pycamera dng"
 
 COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
+
 ########### End of i.MX overrides #########
