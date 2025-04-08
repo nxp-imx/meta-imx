@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.13.0-d3e3fce
+Package:                     sof-zephyr-2.13.0-5a099d9
 Version:                     2.13.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -689,7 +689,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-5d71c44.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-544e2c7.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -708,7 +708,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-5d71c44.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-544e2c7.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -849,7 +849,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-5d71c44.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-544e2c7.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -861,7 +861,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-5d71c44.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-544e2c7.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1266,6 +1266,20 @@ Release Location:            https://github.com/nxp-imx/libcamera -b lf-6.12.20-
 Origin:                      NXP (LGPL-2.1-or-later)
                              libcamera (LGPL-2.1-or-later) - https://git.libcamera.org/libcamera/libcamera.git
                              libcamera apps and unit tests (GPL-2.0) (same as libcamera)
+
+--------------------------------------------
+
+Package:                     neo-ipa-uguzzi.git
+Version:                     0.2.1
+Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+License File:                LICENSES/LA_OPT_NXP_Software_License.txt
+Package Category:            Multimedia
+Type of Content:             binary and source
+Description and comments:    uGuzzi IPA for the libcamera NXP NEO pipeline
+Release Location:            https://github.com/nxp-imx/neo-ipa-uguzzi -b lf-6.12.20-2.0.0
+Origin:                      NXP (LGPL-2.1-or-later)
+                             Libcamera (LGPL-2.1-or-later, and additional licenses. See libcamera's original COPYING file for full list) - https://git.libcamera.org/libcamera/libcamera.git/
+                             MM Solutions EAD (libs/libuguzzi*.so - LICENSES/LA_OPT_NXP_Software_License.txt)
 
 --------------------------------------------
 M4 Processor Packages
