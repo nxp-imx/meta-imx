@@ -18,3 +18,5 @@ S = "${WORKDIR}/git"
 inherit meson pkgconfig
 
 EXTRA_OEMESON = "-Dlogging=disabled"
+
+INSANE_SKIP:${PN} = "buildpaths"
