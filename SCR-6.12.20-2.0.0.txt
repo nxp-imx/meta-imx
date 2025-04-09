@@ -259,7 +259,7 @@ License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             binary
 Description and comments:    BSP firmware - Bluetooth and WIFI
-Release Location:            https://github.com/NXP/imx-firmware -b master
+Release Location:            https://github.com/NXP/imx-firmware -b lf-6.12.20-2.0.0
 Origin:                      brcm: Broadcom Corporation (LA_OPT_NXP_Software_License - see appendix)
                              cyw-wifi-bt: Cypress Semiconductor Corporation (LA_OPT_NXP_Software_License - see appendix)
                              nxp: NXP (LA_OPT_NXP_Software_License)
@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.13.0-5a099d9
+Package:                     sof-zephyr-2.13.0-f58e079
 Version:                     2.13.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.1-a7106a1
+Package:                     zephyr-demo-imx-4.1-6061deb
 Version:                     4.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -525,7 +525,7 @@ License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    se05x openssl provider
-Release Location:            https://github.com/NXPPlugNTrust/se05x-openssl-provider -b lf-6.12.20-2.0.0
+Release Location:            https://github.com/NXPPlugNTrust/se05x-openssl-provider -b main
 Origin:                      NXP (Apache-2.0)
                              OpenSSL 1.1 (OpenSSL) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
 
@@ -538,7 +538,7 @@ License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Plug & Trust ECC example for SE050
-Release Location:            https://github.com/NXP/plug-and-trust -b lf-6.12.20-2.0.0
+Release Location:            https://github.com/NXP/plug-and-trust -b master
 Origin:                      NXP (Apache-2.0)
                              Mbed-TLS (Apache-2.0) - https://github.com/Mbed-TLS/mbedtls
                              OpenSSL 1.1 (OpenSSL License) - https://github.com/openssl/openssl/tree/OpenSSL_1_1_1-stable
@@ -1180,7 +1180,7 @@ License File:                LICENSE
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Plugins for various audio libraries and sound servers
-Release Location:            https://github.com/nxp-imx/imx-alsa-plugins -b nxp/master
+Release Location:            https://github.com/nxp-imx/imx-alsa-plugins -b lf-6.12.20-2.0.0
 Origin:                      NXP (GPL-2.0)
                              Alsa Plugins (GPL-2.0+) - ftp://ftp.alsa-project.org/pub/plugins/
                              GNU libtool (GPL-2.0+) http://www.gnu.org/software/libtool/
@@ -1256,7 +1256,7 @@ Origin:                      NXP (Proprietary)
 --------------------------------------------
 
 Package:                     libcamera.git
-Version:                     0.3.0.imx
+Version:                     0.5.0.imx
 Outgoing License:            LGPL-2.1-or-later 
 License File:                LICENSES/LGPL-2.1-or-later.txt
 Package Category:            Multimedia
