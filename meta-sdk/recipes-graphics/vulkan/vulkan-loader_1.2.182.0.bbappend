@@ -1,5 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
+SRC_URI:remove = "git://github.com/KhronosGroup/Vulkan-Loader.git;branch=master;protocol=https"
+SRC_URI:prepend = "git://github.com/KhronosGroup/Vulkan-Loader.git;branch=main;protocol=https"
 SRC_URI += "file://0001-STDIO-844-No-need-to-change-the-App-s-apiVersion-to-.patch"
 
 # libvulkan.so is loaded dynamically, so put it in the main package
