@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.1-6061deb
+Package:                     zephyr-demo-imx-4.1-7abda99
 Version:                     4.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -689,7 +689,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-544e2c7.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-42af0b6.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -708,7 +708,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-544e2c7.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-42af0b6.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -849,7 +849,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-544e2c7.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-42af0b6.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -861,7 +861,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-544e2c7.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-42af0b6.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1463,6 +1463,21 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
                              Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
                              Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
                              KEYnetik, Inc (Proprietary)
+
+--------------------------------------------
+
+Package:                     imx943-mcore-demo-25.03.00.bin
+Version:                     25.03.00
+Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
+License File:                COPYING
+Package Category:            MCore_Processor
+Type of Content:             binary
+Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M core
+Release Location:            Mirror
+Origin:                      NXP (BSD-3-Clause and Proprietary)
+                             ARM LIMITED (BSD-3-Clause)
+                             Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
+                             Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
 
 --------------------------------------------
 MachineLearning Packages
