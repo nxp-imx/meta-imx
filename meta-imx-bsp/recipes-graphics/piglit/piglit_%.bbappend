@@ -1,6 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://0001-tests-Fix-cl-test-Include-Directories-error-Error-0-.patch"
+SRC_URI += "file://0001-tests-Fix-cl-test-Include-Directories-error-Error-0-.patch \
+            file://0002-cl-Add-mutually-exclusive-memory-flags-for-CL_MEM_KE.patch"
 
 PACKAGECONFIG:append = " \
     ${PACKAGECONFIG_GBM} \
