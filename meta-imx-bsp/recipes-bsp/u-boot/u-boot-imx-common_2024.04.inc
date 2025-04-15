@@ -9,7 +9,7 @@ SRC_URI += "file://0001-scripts-dtc-pylibfdt-libfdt.i_shipped-Use-SWIG_Appen.pat
 UBOOT_SRC ?= "git://github.com/nxp-imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "lf_v2024.04"
 LOCALVERSION ?= "-${SRCBRANCH}"
-SRCREV = "2aad6b7f26eed4a9278098d14eb124c6ade1e292"
+SRCREV = "8178946db38de86c9e8ef12ccd619a531240751f"
 
 DEPENDS += " \
     bc-native \
