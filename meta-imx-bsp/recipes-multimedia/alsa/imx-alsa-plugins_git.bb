@@ -22,7 +22,7 @@ PV = "1.0.26+${SRCPV}"
 SRC_URI = "${IMXALSA_SRC};branch=${SRCBRANCH}"
 IMXALSA_SRC ?= "git://github.com/nxp-imx/imx-alsa-plugins.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "94d82cd111177d6e2d660294266f15f41fe6cb4b"
+SRCREV = "40e45c8023f95c06c4ea10185ca85db7eb2dfcd8"
 
 S = "${WORKDIR}/git"
 
