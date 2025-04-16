@@ -30,7 +30,6 @@ EXTRA_OEMAKE = "\
     OEI_CROSS_COMPILE=arm-none-eabi-"
 
 EXTRA_OEMAKE:append:mx95-nxp-bsp = " r=${IMX_SOC_REV}"
-EXTRA_OEMAKE:append:imx95a1evk = " DDR_CONFIG=XIMX95LPD5EVK19_6400mbps_train_timing_a1"
 
 do_configure() {
     for oei_config in ${OEI_CONFIGS}; do
