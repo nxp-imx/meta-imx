@@ -7,9 +7,9 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.tar.gz"
-SRC_URI[sha256sum] = "778dad7ef1d8d57b1ff69382faae410fcf97d3a1dcbb67d66e8e40208e6c2b05"
+SRC_URI[sha256sum] = "355e6f7c4d05bc78296974420fa7f293098363eb551cfb2b53c2185e63e1db1e"
 
-IMX_SRCREV_ABBREV = "8b54e8a"
+IMX_SRCREV_ABBREV = "86293eb"
 
 inherit allarch
 
