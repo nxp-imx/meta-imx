@@ -21,6 +21,7 @@ OEI_CONFIGS ?= "UNDEFINED"
 OEI_CORE    ?= "UNDEFINED"
 OEI_SOC     ?= "UNDEFINED"
 OEI_BOARD   ?= "UNDEFINED"
+DDR_CONFIG  ?= ""
 
 LDFLAGS[unexport] = "1"
 
@@ -30,6 +31,7 @@ EXTRA_OEMAKE = "\
     OEI_CROSS_COMPILE=arm-none-eabi-"
 
 EXTRA_OEMAKE:append:mx95-nxp-bsp = " r=${IMX_SOC_REV}"
+EXTRA_OEMAKE:append = " ${@' DDR_CONFIG=${DDR_CONFIG}' if d.getVar('DDR_CONFIG') else ''}"
 
 do_configure() {
     for oei_config in ${OEI_CONFIGS}; do
