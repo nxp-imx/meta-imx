@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.1-8b54e8a
+Package:                     zephyr-demo-imx-4.1-86293eb
 Version:                     4.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -689,7 +689,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-42af0b6.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-a0d76fe.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -708,7 +708,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-42af0b6.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-a0d76fe.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -727,7 +727,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54.0-4c30b1d.bin
+Package:                     mali-imx-r54.0-73f7a82.bin
 Version:                     r54.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -849,7 +849,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-42af0b6.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-a0d76fe.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -861,7 +861,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-42af0b6.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-a0d76fe.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
