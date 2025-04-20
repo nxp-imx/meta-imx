@@ -8,7 +8,7 @@ DEPENDS = "virtual/opencl-icd"
 SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
 IMX_SRCREV_ABBREV = "6222121"
 
-SRC_URI[sha256sum] = "3123c537facd000b634cc89f204a8b6fbbc437a6c47c44e464ed4286f107566f"
+SRC_URI[sha256sum] = "55a5bb511ad3defd79e2c2eb424a014cfab691666f7708f06184489fe6d611c7"
 
 S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 inherit fsl-eula-unpack autotools pkgconfig meson
