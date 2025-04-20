@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3"
 
 IMX_SRCREV_ABBREV = "ce4ae5a"
 
-SRC_URI[sha256sum] = "15f6ace2713103ac845fc3905ccb9ef68748ce65e9542ee30b9ef4c91a2dd438"
+SRC_URI[sha256sum] = "458bed4acc65bf5d88987b111ea4f3f8ebdfce84bcccfc079abf0f89ade7ce2b"
 
 inherit fsl-eula-recent fsl-eula2-unpack2 autotools pkgconfig
 
