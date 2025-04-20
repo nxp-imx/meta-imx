@@ -4,7 +4,7 @@ DESCRIPTION = "i.MX VC8000E encoder library"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3"
 
-SRC_URI[sha256sum] = "382c33c804eb4f0800e106685d25838c349aaeb3c9798b98b89dc862d5331e01"
+SRC_URI[sha256sum] = "1583390edda9048aff3566b231f7e38c1185f41dba4e464bfeb5fe08ab1922f8"
 IMX_SRCREV_ABBREV = "fc03682"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
