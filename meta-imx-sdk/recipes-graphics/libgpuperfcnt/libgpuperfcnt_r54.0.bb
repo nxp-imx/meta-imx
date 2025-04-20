@@ -5,7 +5,7 @@ DEPENDS = "mali-imx"
 
 IMX_SRCREV_ABBREV = "95b9a52"
 
-SRC_URI[aarch64-wayland-mali.sha256sum] = "2f0216199f48deeaa9c46e78b2d2fde8da3ff6ee2ccc5c7e0eaa2523695f8e3c"
+SRC_URI[aarch64-wayland-mali.sha256sum] = "e9c7694cc78012efad7c6ac7bb236d6727ab48b7454a8124a9b7c78d433e69c4"
 
 inherit fsl-eula-unpack2 fsl-eula-graphics fsl-eula-recent
 
