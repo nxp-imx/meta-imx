@@ -8,7 +8,7 @@ IMX_SRCREV_ABBREV = "ea4fe3f"
 
 inherit fsl-eula-recent autotools pkgconfig fsl-eula2-unpack2
 
-SRC_URI[sha256sum] = "24eea3ed28fb6a587fd914a2395da61ae854d97b37bb9469ad0346e4dbd693f4"
+SRC_URI[sha256sum] = "b748574e985b448ee138fd37dfe1f43b3c96289854659a4048b6e2434e435c6b"
 
 EXTRA_OECONF = " \
     -datadir=${base_libdir}/firmware \
