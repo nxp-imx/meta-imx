@@ -16,6 +16,3 @@ do_install:append () {
         rm -rf ${D}${libdir}/systemd
     fi
 }
-
-inherit ${@oe.utils.conditional('VIRTUAL-RUNTIME_dev_manager', 'busybox-mdev', '', 'useradd', d)}
-USERADD_PACKAGES = "${PN}"
