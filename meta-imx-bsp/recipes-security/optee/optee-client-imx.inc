@@ -12,8 +12,7 @@ inherit pkgconfig
 EXTRA_OECMAKE += "-DCFG_TEE_CLIENT_LOAD_PATH=${nonarch_base_libdir}"
 
 do_install:append () {
-    # Fix for multilib
     if [ "${libdir}" != "${nonarch_base_libdir}" ]; then
-        mv -r ${D}${libdir}/systemd ${D}${systemd_unitdir}
+        rm -rf ${D}${libdir}/systemd
     fi
 }
