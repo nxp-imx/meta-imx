@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.1-86293eb
+Package:                     zephyr-demo-imx-4.1-e41909a
 Version:                     4.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -1092,7 +1092,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.8.0-6222121.bin
+Package:                     imx-opencl-converter-0.8.0-6a58c6c.bin
 Version:                     0.8.0
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
