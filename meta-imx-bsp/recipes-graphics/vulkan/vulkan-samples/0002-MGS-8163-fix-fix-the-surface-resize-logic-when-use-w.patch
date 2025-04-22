@@ -1,0 +1,69 @@
+From 2f387b312f052ec6489a5a328a9068d449ef938e Mon Sep 17 00:00:00 2001
+From: ryan <ryan.zhang@nxp.com>
+Date: Tue, 22 Apr 2025 09:40:07 +0800
+Subject: [PATCH] [MGS-8163] fix: fix the surface resize logic when use wayland
+ wsi
+
+According to the Vulkan Spec:https://registry.khronos.org/vulkan/
+specs/latest/man/html/VkSurfaceCapabilitiesKHR.html
+
+VkSurfaceCapabilitiesKHR->currentExtent can be set to 0xFFFFFFFF
+which indicating that surface size will be determined by the extent
+of swapchain targeting the surface rather than driver.
+
+In mali umd, currentExtent are always set to 0xFFFFFFFF which is
+comply with spec. Since the surface extent size of wayland depends
+on the dynamic negotiation between the client and compositor, the
+Vulkan driver cannot determine the valid value of current Extent
+before vkQueuePresentKHR submission, so the driver alwayas return
+0xFFFFFFFF when use wayland wsi.
+
+Affected cases:
+    oit_depth_peeling
+    oit_linked_lists
+    hpp_oit_depth_peeling
+    hpp_oit_linked_lists
+
+Upstream-Status: Submitted [https://github.com/KhronosGroup/Vulkan-Samples/pull/1336]
+Signed-off-by: Ryan Zhang ryan.zhang@nxp.com
+
+---
+ framework/api_vulkan_sample.cpp     | 5 ++++-
+ framework/hpp_api_vulkan_sample.cpp | 5 ++++-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/framework/api_vulkan_sample.cpp b/framework/api_vulkan_sample.cpp
+index 1c09279..59f3eb0 100644
+--- a/framework/api_vulkan_sample.cpp
++++ b/framework/api_vulkan_sample.cpp
+@@ -972,7 +972,10 @@ void ApiVulkanSample::handle_surface_changes()
+ 	if (surface_properties.currentExtent.width != get_render_context().get_surface_extent().width ||
+ 	    surface_properties.currentExtent.height != get_render_context().get_surface_extent().height)
+ 	{
+-		resize(surface_properties.currentExtent.width, surface_properties.currentExtent.height);
++		if ((surface_properties.currentExtent.width != 0xFFFFFFFF) && (surface_properties.currentExtent.height != 0xFFFFFFFF))
++		{
++			resize(surface_properties.currentExtent.width, surface_properties.currentExtent.height);
++		}
+ 	}
+ }
+ 
+diff --git a/framework/hpp_api_vulkan_sample.cpp b/framework/hpp_api_vulkan_sample.cpp
+index 0052444..afaaf69 100644
+--- a/framework/hpp_api_vulkan_sample.cpp
++++ b/framework/hpp_api_vulkan_sample.cpp
+@@ -843,7 +843,10 @@ void HPPApiVulkanSample::handle_surface_changes()
+ 
+ 	if (surface_properties.currentExtent != get_render_context().get_surface_extent())
+ 	{
+-		resize(surface_properties.currentExtent.width, surface_properties.currentExtent.height);
++		if ((surface_properties.currentExtent.width != 0xFFFFFFFF) && (surface_properties.currentExtent.height != 0xFFFFFFFF))
++		{
++			resize(surface_properties.currentExtent.width, surface_properties.currentExtent.height);
++		}
+ 	}
+ }
+ 
+-- 
+2.34.1
+
