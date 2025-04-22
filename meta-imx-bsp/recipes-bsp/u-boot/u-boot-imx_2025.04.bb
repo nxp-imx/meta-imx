@@ -37,11 +37,15 @@ do_deploy:append:mx8m-generic-bsp() {
                             bbnote "UBOOT_CONFIG = $type, UBOOT_DTB_NAME = $dtb_name"
                             # There is only one ${dtb_name}, the first one. All the other are with the type appended
                             if [ ! -f "${DEPLOYDIR}/${BOOT_TOOLS}/${dtb_name}" ]; then
-                                install -m 0644 ${B}/${config}/dts/upstream/src/arm64/freescale/${dtb_name}  ${DEPLOYDIR}/${BOOT_TOOLS}/${dtb_name}
+                                # install -m 0644 ${B}/${config}/dts/upstream/src/arm64/freescale/${dtb_name}  ${DEPLOYDIR}/${BOOT_TOOLS}/${dtb_name}
+                                # 8mp-ddr4 -- > arch/arm/dts/
+                                # 8m others -- > dts/upstream/src/arm64/freescale/
+                                find ${B}/${config} -name ${dtb_name} -exec  cp {} ${DEPLOYDIR}/${BOOT_TOOLS}/${dtb_name} \;
                             else
                                 bbwarn "Use custom wks.in for $dtb_name = $type"
                             fi
-                            install -m 0644 ${B}/${config}/dts/upstream/src/arm64/freescale/${dtb_name}  ${DEPLOYDIR}/${BOOT_TOOLS}/${dtb_name}-${type}
+                            # install -m 0644 ${B}/${config}/dts/upstream/src/arm64/freescale/${dtb_name}  ${DEPLOYDIR}/${BOOT_TOOLS}/${dtb_name}-${type}
+                            find ${B}/${config} -name ${dtb_name} -exec  cp {} ${DEPLOYDIR}/${BOOT_TOOLS}/${dtb_name}-${type} \;
                         fi
                         unset type_key
                         unset dtb_name
