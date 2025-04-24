@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cf2070b16b9d4acf60a98e8cbc32a25a"
 IMX_FIRMWARE_SRC ?= "git://github.com/nxp-imx/imx-firmware.git;protocol=https"
 SRC_URI = "${IMX_FIRMWARE_SRC};branch=${SRCBRANCH}"
 SRCBRANCH = "master"
-SRCREV = "fae7802e10ff6fa7c6b049c7c695e0bf333a980f"
+SRCREV = "3264fe7f7891362f4a35997f8db4420091c08f2a"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/nxp
@@ -23,7 +23,16 @@ FILES:${PN}-nxpiw610-sdio += " \
     ${nonarch_base_libdir}/firmware/nxp/sduartspi_iw610.bin.se \
 "
 
-PACKAGES += "${PN}-all-sdio ${PN}-all-pcie"
+FILES:${PN}-nxpiw610-usb += " \
+    ${nonarch_base_libdir}/firmware/nxp/usb*_iw610.bin.se \
+"
+
+FILES:${PN}-nxpaw693-pcie += " \
+    ${nonarch_base_libdir}/firmware/nxp/pcie*aw693* \
+    ${nonarch_base_libdir}/firmware/nxp/uart*aw693* \
+"
+
+PACKAGES += "${PN}-all-sdio ${PN}-all-pcie ${PN}-all-usb ${PN}-nxpiw610-usb ${PN}-nxpaw693-pcie"
 
 RDEPENDS:${PN}-all-sdio = " \
     ${PN}-nxp8801-sdio \
@@ -34,11 +43,16 @@ RDEPENDS:${PN}-all-sdio = " \
     ${PN}-nxpiw610-sdio \
     ${PN}-nxpiw612-sdio \
 "
+RDEPENDS:${PN}-all-usb = " \
+    ${PN}-nxpiw610-usb \
+"
 
 RDEPENDS:${PN}-all-pcie = " \
     ${PN}-nxp8997-pcie \
     ${PN}-nxp9098-pcie \
+    ${PN}-nxpaw693-pcie \
 "
 
 ALLOW_EMPTY:${PN}-all-sdio = "1"
 ALLOW_EMPTY:${PN}-all-pcie = "1"
+ALLOW_EMPTY:${PN}-all-usb = "1"
