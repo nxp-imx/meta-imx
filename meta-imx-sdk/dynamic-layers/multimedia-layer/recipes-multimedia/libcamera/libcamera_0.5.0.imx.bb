@@ -102,6 +102,6 @@ SRCREV = "93560bd0c5a45962ee54bbc7bc8ab9e19db99489"
 
 PACKAGECONFIG = "gst pycamera dng"
 
-COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx95-nxp-bsp|mx8mm-nxp-bsp|mx8ulp-nxp-bsp|mx8mq-nxp-bsp)"
 
 ########### End of i.MX overrides #########
