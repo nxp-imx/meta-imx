@@ -11,11 +11,10 @@ LIC_FILES_CHKSUM = "\
 SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
         file://0001-media_device-Add-bool-return-type-to-unlock.patch \
-        file://0002-options-Replace-use-of-VLAs-in-C.patch \
-        file://0001-rpi-Use-malloc-instead-of-variable-length-arrays.patch \
+        file://0002-libcamera-Add-missing-stdint.h-include-to-dma_buf_al.patch \
 "
 
-SRCREV = "aee16c06913422a0ac84ee3217f87a9795e3c2d9"
+SRCREV = "35ed4b91291d9f3d08e4b51acfb51163e65df8f8"
 
 PE = "1"
 
@@ -25,6 +24,9 @@ DEPENDS = "python3-pyyaml-native python3-jinja2-native python3-ply-native python
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native', '', d)}"
 
 PACKAGES =+ "${PN}-gst ${PN}-pycamera"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[dng] = ",,tiff"
 
 # Disable v4l2 on 32-bit to avoid Y2038 bug
 PACKAGECONFIG ??= "${PACKAGECONFIG_V4L2}"
@@ -50,7 +52,7 @@ RDEPENDS:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayla
 inherit meson pkgconfig python3native
 
 do_configure:prepend() {
-    sed -i -e 's|py_compile=True,||' ${S}/utils/ipc/mojo/public/tools/mojom/mojom/generate/template_expander.py
+    sed -i -e 's|py_compile=True,||' ${S}/utils/codegen/ipc/mojo/public/tools/mojom/mojom/generate/template_expander.py
 }
 
 do_install:append() {
