@@ -42,13 +42,13 @@ PACKAGECONFIG_DRIVERS:mx943-nxp-bsp  = "ele"
 PACKAGECONFIG_DRIVERS:mx95-nxp-bsp   = "ele"
 
 PACKAGECONFIG_FEATURES              = ""
-PACKAGECONFIG_FEATURES:mx91-nxp-bsp = "tls"
-PACKAGECONFIG_FEATURES:mx93-nxp-bsp = "tls"
-PACKAGECONFIG_FEATURES:mx943-nxp-bsp = "tls"
+PACKAGECONFIG_FEATURES:mx91-nxp-bsp = "tls12"
+PACKAGECONFIG_FEATURES:mx93-nxp-bsp = "tls12"
+PACKAGECONFIG_FEATURES:mx943-nxp-bsp = "tls12"
 
 PACKAGECONFIG[ele] = "-DELE_ROOT=${STAGING_DIR_HOST},,imx-secure-enclave,,,ele-seco"
 PACKAGECONFIG[ele-seco] = "-DSECO_ROOT=${STAGING_DIR_HOST},,imx-secure-enclave-seco,,,ele"
-PACKAGECONFIG[tls] = "-DENABLE_TLS=ON,-DENABLE_TLS=OFF,openssl"
+PACKAGECONFIG[tls12] = "-DENABLE_TLS12=ON,-DENABLE_TLS12=OFF,openssl"
 
 CFLAGS[unexport] = "1"
 CPPFLAGS[unexport] = "1"
