@@ -21,8 +21,8 @@ ISP_PKGS:mx8mp-nxp-bsp = " \
     basler-camera-dev \
     kernel-module-isp-vvcam \
 "
-ISP_PKGS:mx8mm-nxp-bsp = "${LIBCAMERA_PKGS}"
-ISP_PKGS:mx8qm-nxp-bsp = "${LIBCAMERA_PKGS}"
+ISP_PKGS:mx8mm-nxp-bsp  = "${LIBCAMERA_PKGS}"
+ISP_PKGS:mx8mq-nxp-bsp  = "${LIBCAMERA_PKGS}"
 ISP_PKGS:mx8ulp-nxp-bsp = "${LIBCAMERA_PKGS}"
 ISP_PKGS:mx95-nxp-bsp = " \
     ${LIBCAMERA_PKGS} \
