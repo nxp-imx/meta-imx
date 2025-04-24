@@ -1,2 +1,1 @@
-# FIXME: The install does not handle multilib, see https://bugreports.qt.io/browse/PYSIDE-3080
-FILES:${PN} += "${exec_prefix}/lib"
+EXTRA_OECMAKE += "-DQFP_PYTHON_SITE_PACKAGES=${PYTHON_SITEPACKAGES_DIR}"
