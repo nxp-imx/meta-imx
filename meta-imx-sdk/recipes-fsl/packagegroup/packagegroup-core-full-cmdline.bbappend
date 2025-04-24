@@ -3,7 +3,7 @@ RDEPENDS:packagegroup-core-full-cmdline-sys-services:remove = "${RDEPENDS_IMX_RE
 RDEPENDS:packagegroup-core-full-cmdline-extended:append = "\
     iproute2-tc \
 "
-RDEPENDS:packagegroup-core-full-cmdline-extended:mx95-nxp-bsp:append = "\
+RDEPENDS:packagegroup-core-full-cmdline-extended:append:mx95-nxp-bsp = "\
     iproute2-devlink \
 "
 # The default i.MX kernel config doesn't include NFS server support, but
