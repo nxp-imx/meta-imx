@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.2-8fa1d9c.bin
+Package:                     firmware-ele-imx-2.0.2-7e2dd42.bin
 Version:                     2.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -640,7 +640,7 @@ Graphics Packages
 --------------------------------------------
 
 Package:                     isp-vvcam.git
-Version:                     4.2.2.25.1
+Version:                     4.2.2.25.2
 Outgoing License:            GPL-2.0 
 License File:                vvcam/LICENSE
 Package Category:            Graphics
@@ -651,8 +651,8 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.25.1-N/A.bin
-Version:                     4.2.2.25.1
+Package:                     isp-imx-4.2.2.25.2-3cac1fb.bin
+Version:                     4.2.2.25.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -663,8 +663,8 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software
 
 --------------------------------------------
 
-Package:                     basler-camera-4.2.2.25.1-N/A.bin
-Version:                     4.2.2.25.1
+Package:                     basler-camera-4.2.2.25.2-dd86758.bin
+Version:                     4.2.2.25.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -898,8 +898,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 --------------------------------------------
 
 Package:                     imx-g2d-pxp.git
-Version:                     2.2
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Version:                     2.4
+Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -910,7 +910,7 @@ Origin:                      NXP (Proprietary)
 --------------------------------------------
 
 Package:                     g2d-samples.git
-Version:                     2.2
+Version:                     2.4
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Graphics
@@ -988,7 +988,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.10.0-639aa9c.bin
+Package:                     imx-parser-4.10.0-60cb340.bin
 Version:                     4.10.0
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
