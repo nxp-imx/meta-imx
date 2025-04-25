@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.28-70fe942.bin
+Package:                     firmware-imx-8.28-994fa14.bin
 Version:                     8.28
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.2-5c25abb.bin
+Package:                     firmware-ele-imx-2.0.2-8fa1d9c.bin
 Version:                     2.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.13.0-b1c979d
+Package:                     sof-zephyr-2.13.0-150c9ff
 Version:                     2.13.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.1-e41909a
+Package:                     zephyr-demo-imx-4.1-b4c1dc6
 Version:                     4.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -651,7 +651,7 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.25.1-327f21d.bin
+Package:                     isp-imx-4.2.2.25.1-N/A.bin
 Version:                     4.2.2.25.1
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -663,7 +663,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software
 
 --------------------------------------------
 
-Package:                     basler-camera-4.2.2.25.1-d1f506a.bin
+Package:                     basler-camera-4.2.2.25.1-N/A.bin
 Version:                     4.2.2.25.1
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -727,7 +727,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54.0-73f7a82.bin
+Package:                     mali-imx-r54.0-b4b02da.bin
 Version:                     r54.0
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -849,7 +849,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-b5128f5.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-6fcfd61.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -861,7 +861,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-b5128f5.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-6fcfd61.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -873,8 +873,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.3.0.2-8d2a88d.bin
-Version:                     2.3.0.2
+Package:                     imx-dpu-g2d-v1-2.4.0.0-9e8bbf1.bin
+Version:                     2.4.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -885,8 +885,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.3.0.2-8d2a88d.bin
-Version:                     2.3.0.2
+Package:                     imx-dpu-g2d-v2-2.4.0.0-9e8bbf1.bin
+Version:                     2.4.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -1540,7 +1540,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     ethos-u-vela.git
-Version:                     4.1.0
+Version:                     4.2.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
