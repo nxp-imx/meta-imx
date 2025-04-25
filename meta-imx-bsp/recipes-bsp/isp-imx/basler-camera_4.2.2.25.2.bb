@@ -4,11 +4,11 @@ DESCRIPTION = "Basler camera binary drivers"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cf2070b16b9d4acf60a98e8cbc32a25a"
 
-IMX_SRCREV_ABBREV = "d1f506a"
+IMX_SRCREV_ABBREV = "dd86758"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
 
-SRC_URI[sha256sum] = "354189a4acf54808669c85bc1cad89da00d2ac3a0365e0b429749b95dff08e84"
+SRC_URI[sha256sum] = "75263665ecd0148ed8dcbad2b55333cb59e012ac722011a7af6383f103fc5762"
 
 do_compile[noexec] = "1"
 
