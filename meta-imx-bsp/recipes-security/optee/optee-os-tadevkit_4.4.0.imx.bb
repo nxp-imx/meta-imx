@@ -1,4 +1,4 @@
 require optee-os-tadevkit-imx.inc
 
 SRCBRANCH = "lf_4.4.y"
-SRCREV = "2d9202b2c4236b873ea271c26abb8c8224a58104"
+SRCREV = "a4c055749f5129880cb66c0c0908a5b4295c43dc"
