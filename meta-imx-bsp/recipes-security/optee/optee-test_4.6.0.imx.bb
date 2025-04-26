@@ -7,5 +7,5 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=a8fa504109e4cd7ea575bc49ea4be560 \
                     file://LICENSE-GPL;md5=10e86b5d2a6cb0e2b9dcfdd26a9ac58d"
 
 
-SRCBRANCH = "lf_4.4.y"
-SRCREV = "dafc98ed8364d7281a9a7f0788dd0a2067844a59"
+SRCBRANCH = "lf_4.6.y"
+SRCREV = "${AUTOREV}"
