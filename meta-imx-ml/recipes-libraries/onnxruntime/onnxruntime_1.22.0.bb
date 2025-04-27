@@ -1,4 +1,4 @@
-# Copyright 2020-2023 NXP
+# Copyright 2020-2025 NXP
 DESCRIPTION = "cross-platform, high performance scoring engine for ML models"
 SECTION = "devel"
 LICENSE = "MIT & Apache-2.0"
@@ -12,8 +12,8 @@ inherit setuptools3
 
 SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH = "imx_1.17.1"
-SRCREV = "3616ba2f9cd2b7b882252a95e171f0c0c0f1826f"
+SRCBRANCH = "imx_1.22.0"
+SRCREV = "f4fae8f04b325ab1cbef144c3b8670d3a2b264d4"
 
 S = "${WORKDIR}/git"
 
@@ -31,8 +31,8 @@ EXTRA_OECMAKE += "\
     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -Donnxruntime_BUILD_UNIT_TESTS=ON \
+    -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
 "
-CXXFLAGS += "-Wno-error=range-loop-construct"
 
 PYTHON_DEPENDS = "\
     ${PYTHON_PN} \
@@ -53,7 +53,10 @@ PYTHON_RDEPENDS = "\
     ${PYTHON_PN}-sympy \
 "
 
-PACKAGECONFIG ?= "crosscompiling sharedlib python"
+PACKAGECONFIG ?= "crosscompiling sharedlib python kleidiai ${PACKAGECONFIG_NPU}"
+PACKAGECONFIG_NPU             = ""
+PACKAGECONFIG_NPU:mx95-nxp-bsp = "neutron"
+PACKAGECONFIG_NPU:mx8-nxp-bsp   = "vsinpu"
 
 PACKAGECONFIG[nsync] = "-Donnxruntime_USE_NSYNC=ON, -Donnxruntime_USE_NSYNC=OFF"
 PACKAGECONFIG[prebuilt] = "-Donnxruntime_USE_PREBUILT_PB=ON, -Donnxruntime_USE_PREBUILT_PB=OFF"
@@ -97,6 +100,9 @@ PACKAGECONFIG[jemalloc] = "-Donnxruntime_USE_JEMALLOC=ON, -Donnxruntime_USE_JEMA
 PACKAGECONFIG[mimalloc] = "-Donnxruntime_USE_MIMALLOC=ON, -Donnxruntime_USE_MIMALLOC=OFF"
 PACKAGECONFIG[csharp] = "-Donnxruntime_BUILD_CSHARP=ON, -Donnxruntime_BUILD_CSHARP=OFF"
 PACKAGECONFIG[java] = "-Donnxruntime_BUILD_JAVA=ON, -Donnxruntime_BUILD_JAVA=OFF"
+PACKAGECONFIG[kleidiai] = "-Donnxruntime_USE_KLEIDIAI=ON, -Donnxruntime_USE_KLEIDIAI=OFF"
+PACKAGECONFIG[neutron] = "-Donnxruntime_USE_NEUTRON=ON, -Donnxruntime_USE_NEUTRON=OFF, neutron"
+PACKAGECONFIG[vsinpu] = "-Donnxruntime_USE_VSINPU=ON, -Donnxruntime_USE_VSINPU=OFF, tim-vx"
 
 do_configure[network] = "1"
 do_configure:prepend() {
@@ -124,18 +130,20 @@ do_compile:append() {
         # Copy 'setup.py' to build dir
         cp ${S}/setup.py ${B}
 
+        cp -r ${S}/onnxruntime/python ${B}/onnxruntime/
+
         # Copy path file with path 'docs/python/README.rst' to build dir
         mkdir -p ${B}/docs/python && cp ${S}/docs/python/README.rst ${B}/docs/python
-        
+
         setuptools3_do_compile
-        
+
         git config --global --add safe.directory ${WORKDIR}/build/pybind11/src/pybind11
     fi
 }
 
 do_install:append() {
     CP_ARGS="-Prf --preserve=mode,timestamps --no-preserve=ownership"
-    
+
     # Ensure target dir exists
     install -d ${D}${bindir}/${BP}
 
@@ -166,7 +174,11 @@ do_install:append() {
         find ${D}/${PYTHON_SITEPACKAGES_DIR} -type d -name "__pycache__" -exec rm -Rf {} +
         git config --global --unset-all safe.directory ${TMPDIR}/.*/${PN}/.*/build/pybind11/src/pybind11
     fi
+    rm ${D}/${PYTHON_SITEPACKAGES_DIR}/${PN}/capi/libonnxruntime.so*
 }
+
+# Make the package arch SOC-specific since the recipe now builds with SOC-specific configuration:
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
 # Adjust the Python runtime dependency inherited from setuptools3-base.bbclass
 # since Python support for this recipe is conditional
