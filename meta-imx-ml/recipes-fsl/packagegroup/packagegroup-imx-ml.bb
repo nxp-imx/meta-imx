@@ -68,10 +68,12 @@ ETHOS_U_PKGS:mx93-nxp-bsp = " \
 # Neutron package
 NEUTRON_PKGS = ""
 NEUTRON_PKGS:mx943-nxp-bsp = " \
+    litert-neutron-delegate \
     neutron \
     tensorflow-lite-neutron-delegate \
 "
 NEUTRON_PKGS:mx95-nxp-bsp = " \
+    litert-neutron-delegate \
     neutron \
     tensorflow-lite-neutron-delegate \
 "
