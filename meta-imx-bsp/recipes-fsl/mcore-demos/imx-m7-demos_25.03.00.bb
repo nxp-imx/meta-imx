@@ -15,7 +15,7 @@ SRC_URI[imx8mn.sha256sum] = "5e1e41039d69a31c9fe70305aa732840a27f23185bee2670eb6
 
 SRC_URI[imx8mnddr3l.sha256sum] = "e6587326e6e2ef41e854882abc4a9234825d857380e8b1b6e8980d690bb08f49"
 
-SRC_URI[imx8mp.sha256sum] = "672af1e1d8fcc1ebd12b45c6dc4cfc7abc85ea9ebbf114d15f4bfe7540e24ea1"
+SRC_URI[imx8mp.sha256sum] = "bf87fdce2266126f12f011abefa9cde943fe3aff6d2d86d19a03a6f7e5318c21"
 
 SRC_URI[imx95.sha256sum] = "8d394b62a4fbad8303acf43f9f8672e5d1c17f1af8f47d7665740272819c0cc1"
 
