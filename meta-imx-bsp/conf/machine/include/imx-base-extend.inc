@@ -43,6 +43,7 @@ MACHINE_SOCARCH_SUFFIX:mx8mpul-nxp-bsp = "-mx8mpul"
 SECOEXT_FIRMWARE_NAME ?= "UNDEFINED"
 SECOEXT_FIRMWARE_NAME:mx8ulp-generic-bsp ?= "mx8ulp${IMX_SOC_REV_LOWER}ext-ahab-container.img"
 SECOEXT_FIRMWARE_NAME:mx95-generic-bsp ?= "mx95${IMX_SOC_REV_LOWER}runtime-ahab-container.img"
+SECOEXT_FIRMWARE_NAME:mx943-generic-bsp ?= "mx943${IMX_SOC_REV_LOWER}runtime-ahab-container.img"
 
 # GStreamer forked recipes
 PREFERRED_VERSION_gstreamer1.0:imx-nxp-bsp              ??= "1.26.0.imx"
