@@ -3,15 +3,11 @@
 
 require imx-mcore-demos.inc
 
-LIC_FILES_CHKSUM:mx7ulp-nxp-bsp = "file://COPYING;md5=10c0fda810c63b052409b15a5445671a"
 LIC_FILES_CHKSUM:mx8mm-nxp-bsp = "file://COPYING;md5=cf2070b16b9d4acf60a98e8cbc32a25a"
 LIC_FILES_CHKSUM:mx8mq-nxp-bsp = "file://COPYING;md5=cf2070b16b9d4acf60a98e8cbc32a25a"
 
-SRC_URI[imx7ulp.sha256sum] = "1fbb26f8e0a69a2e3925e07cf0cc4a13b13e3ff6321a2ba3dc39c454c82b398b"
-
 SRC_URI[imx8mm.sha256sum] = "2d44d2b0d98d053e9b469dfdcd26efaf297e6c590c1b671e39865f29f8ea8c97"
-
 SRC_URI[imx8mq.sha256sum] = "6d464805f5edac54a06127a40a41b61fcfb930778e22ec1b795394d64107391b"
 
-COMPATIBLE_MACHINE = "(mx7ulp-nxp-bsp|mx8mm-nxp-bsp|mx8mq-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8mm-nxp-bsp|mx8mq-nxp-bsp)"
 
