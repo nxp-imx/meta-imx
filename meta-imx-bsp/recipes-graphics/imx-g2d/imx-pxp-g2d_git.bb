@@ -19,7 +19,9 @@ S = "${WORKDIR}/git"
 
 inherit use-imx-headers
 
-EXTRA_OEMAKE = "PLATFORM=IMX93 INCLUDE='-I${STAGING_INCDIR_IMX}' DEST_DIR=${D}"
+EXTRA_OEMAKE = "PLATFORM=${IMX_PLATFORM} INCLUDE='-I${STAGING_INCDIR_IMX}' DEST_DIR=${D}"
+IMX_PLATFORM:mx93-nxp-bsp  = "IMX93"
+IMX_PLATFORM:mx943-nxp-bsp = "IMX943"
 
 do_install() {
     oe_runmake install
