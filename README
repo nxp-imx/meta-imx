@@ -28,26 +28,40 @@ The following boards were tested in this release.
    * NXP i.MX 6ULL EVK (imx6ull14x14evk)
    * NXP i.MX 6ULZ EVK (imx6ulz14x14evk)
 
-Quick Start Guide
------------------
+
+Install the `repo` utility
+--------------------------
 See the i.MX Yocto Project User's Guide for instructions on installing repo.
 
+
+Install essential host packages
+------------------------------
+Your Build Host must install required packages for the Yocto build.
+Reference to the section *Build Host Packages* in the document ***Yocto Project Quick build***.
+- https://docs.yoctoproject.org/brief-yoctoprojectqs/index.html#build-host-packages
+
+
+Download the Yocto Project BSP
+------------------------------
 First install the i.MX Linux BSP repo
+```
 $: repo init -u https://github.com/nxp-imx/imx-manifest.git -b imx-linux-styhead -m imx-6.12.3-1.0.0.xml
-
+```
 Download the Yocto Project Layers:
+```
 $: repo sync
-
+```
 If errors on repo init, remove the .repo directory and try repo init again.
 
 Run i.MX Linux Yocto Project Setup:
+```
 $: [MACHINE=<machine>] [DISTRO=fsl-imx-<backend>] source ./imx-setup-release.sh -b <build folder>
-
 where
- <machine> defaults to imx6qsabresd
- <build folder> specifies the build folder name 
-
+    <machine> defaults to imx6qsabresd
+    <build folder> specifies the build folder name
+```
 After this your system will be configured to start a Yocto Project build.
+
 
 Build images
 ---------------------
@@ -63,55 +77,73 @@ DirectFB is no longer supported in i.MX graphic builds.
 The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7.  i.MX 8 and i.MX 9 should use xwayland only.
 XWayland is the default distro for all i.MX families.
 
-   imx-image-multimedia: This image contains all the packages except QT6/OpenCV/Machine Learning packages.
-   imx-image-full: This is the big image which includes imx-image-multimedia + OpenCV + QT6 + Machine Learning packages.
+Image Name           | Description
+---------------------|---------------------------------------------------
+imx-image-multimedia | image with multimedia and graphics
+imx-image-full       | image with multimedia and machine learning and Qt
 
 Here are some examples:
 (The example uses the imx6qsabresd MACHINE but substitute this with whatever you are using)
 
+
 Building Frame Buffer (FB)
 ---------------------------
-  DISTRO=fsl-imx-fb MACHINE=imx6qsabresd source imx-setup-release.sh -b build-fb
-  bitbake <image>
-
+```
+$: DISTRO=fsl-imx-fb MACHINE=imx6qsabresd source imx-setup-release.sh -b build-fb
+$: bitbake <image>
+```
 To run the QT6 examples use the following parameters:
-<QT6 Example> -platform eglfs -plugin evdevtouch:/dev/input/event0
+```
+$: <QT6 Example> -platform eglfs -plugin evdevtouch:/dev/input/event0
+```
+
 
 Building XWayland
 ---------------------------
-  DISTRO=fsl-imx-xwayland MACHINE=imx6qsabresd source imx-setup-release.sh -b build-xwayland
-  bitbake <image>
-
+```
+$: DISTRO=fsl-imx-xwayland MACHINE=imx6qsabresd source imx-setup-release.sh -b build-xwayland
+$: bitbake <image>
+```
 To run the QT6 examples use the following parameters:
-<QT6 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
+```
+$: <QT6 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
+```
+
 
 Building Wayland-Weston (wayland)
 ---------------------------
-  DISTRO=fsl-imx-wayland MACHINE=imx6qsabresd source imx-setup-release.sh -b build-wayland
-  bitbake <image>
-
+```
+$: DISTRO=fsl-imx-wayland MACHINE=imx6qsabresd source imx-setup-release.sh -b build-wayland
+$: bitbake <image>
+```
 To run the QT6 examples use the following parameters:
-<QT6 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
+```
+$: <QT6 example> platform wayland-egl -plugin evdevtouch:/dev/input/event0 --fullscreen
+```
+
 
 Hardware Floating Point
 -----------------------
 This release enables hardware floating point by default.  This feature is enabled in both the machine 
 configurations and in the layer.conf. (Some machine files exist in the community meta-freescale without this setting.)
-DEFAULTTUNE:mx6-nxp-bsp = "cortexa9hf-neon
-
+```
+DEFAULTTUNE:mx6-nxp-bsp = "cortexa9hf-neon"
+```
 Software floating point is not supported starting with the 4.1.15_1.0.0_ga release
+
 
 Restricted Codecs
 -----------------
 These codecs have contractual restrictions that require separate distribution.
 
+
 The Manufacturing Tool - MFGTool
 --------------------------------
 In this release MFGTool uses the community setup.  
 To build MFGTool, build the following:
-
-   bitbake fsl-image-mfgtool-initramfs
-
+```
+$: bitbake fsl-image-mfgtool-initramfs
+```
 End User License Agreement
 --------------------------
 During the NXP Yocto Project Community BSP setup-environment process, the NXP i.MX End User License Agreement (EULA)
@@ -119,28 +151,39 @@ is displayed. To continue, users must agree to the conditions of this license. T
 Yocto build to untar packages from the NXP mirror. Please read this license agreement carefully during the
 setup process because, once accepted, all further work in the Yocto environment is tied to this accepted agreement.
 
+
 Chromium for 64-bit
 -------------------
 Add Chromium to a Wayland-based image:
 - add the recipe to the image, e.g., by adding to local.conf:
-   IMAGE_INSTALL:append = " chromium-ozone-wayland"
+```
+IMAGE_INSTALL:append = " chromium-ozone-wayland"
+```
 - add the meta-chromium layer:
-   $: bitbake-layers add-layer ../sources/meta-browser/meta-chromium
+```
+$: bitbake-layers add-layer ../sources/meta-browser/meta-chromium
+```
+
 
 Chromium for 32-bit
 -------------------
 Chromium is no longer supported for 32-bit. The problem is Chromium no longer supports fbdev, which is required by
 the Vivante GPU drivers.
 
+
 QtWebEngine
 -----------
 QtWebEngine is not built by default, so add this to local.conf or image recipe. It is supported only on the machines
 that have GPU.
-   IMAGE_INSTALL:append = " packagegroup-qt6-webengine"
-
+```
+IMAGE_INSTALL:append = " packagegroup-qt6-webengine"
+```
 There are many browsers available using QtWebEngine and can be found here:
-   /usr/share/examples/webengine
-   /usr/share/examples/webenginewidgets
+```
+  /usr/share/examples/webengine
+  /usr/share/examples/webenginewidgets
+```
+
 
 Qt
 --
@@ -151,6 +194,7 @@ the differences between each license.
 
 Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
 
+
 Qt with kms
 --
 Some customers wants to use QT without wayland/weston and the alternative for that is to use through kms plugin.
@@ -159,7 +203,11 @@ By default, wayland plugin is enabled.We can switch to kms plugin by following t
 - killall weston
 - export QT_QPA_EGLFS_ALWAYS_SET_MODE=1
 - Run any qt application using -platform eglfs
-  Example: ./Qt6_CinematicExperience -platform eglfs
+  Example:
+```
+$: ./Qt6_CinematicExperience -platform eglfs
+```
+
 
 Systemd
 -------
