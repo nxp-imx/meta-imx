@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.13.0-150c9ff
+Package:                     sof-zephyr-2.13.0-1ed3cbe
 Version:                     2.13.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.1-cf6f9e3
+Package:                     zephyr-demo-imx-4.1-95db3a6
 Version:                     4.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -1313,9 +1313,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mm-m4-demo-2.16.000.bin
-Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mm-m4-demo-25.03.00.bin
+Version:                     25.03.00
+Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1327,9 +1327,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mq-m4-demo-2.16.000.bin
-Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mq-m4-demo-25.03.00.bin
+Version:                     25.03.00
+Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1371,9 +1371,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 M7 Processor Packages
 --------------------------------------------
 
-Package:                     imx8mn-m7-demo-2.16.000.bin
-Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mn-m7-demo-25.03.00.bin
+Version:                     25.03.00
+Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1385,9 +1385,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mnddr3l-m7-demo-2.16.000.bin
-Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mnddr3l-m7-demo-25.03.00.bin
+Version:                     25.03.00
+Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1399,9 +1399,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mp-m7-demo-2.16.000.bin
-Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8mp-m7-demo-25.03.00.bin
+Version:                     25.03.00
+Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1415,8 +1415,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx95-m7-demo-24.12.00.bin
-Version:                     24.12.00
+Package:                     imx95-m7-demo-25.06.00.bin
+Version:                     25.06.00
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
@@ -1433,9 +1433,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 M33 Processor Packages
 --------------------------------------------
 
-Package:                     imx8ulp-m33-demo-2.16.000.bin
-Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Package:                     imx8ulp-m33-demo-25.03.00.bin
+Version:                     25.03.00
+Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1449,9 +1449,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx93-m33-demo-2.16.000.bin
-Version:                     2.16.000
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Package:                     imx93-m33-demo-25.03.00.bin
+Version:                     25.03.00
+Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1466,8 +1466,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx943-mcore-demo-25.03.00.bin
-Version:                     25.03.00
+Package:                     imx943-mcore-demo-25.06.00.bin
+Version:                     25.06.00
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            MCore_Processor
