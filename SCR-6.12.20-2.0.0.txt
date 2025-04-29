@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.13.0-1ed3cbe
+Package:                     sof-zephyr-2.13.0-b6ee409
 Version:                     2.13.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -988,7 +988,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.10.0-60cb340.bin
+Package:                     imx-parser-4.10.0-e8a7ec7.bin
 Version:                     4.10.0
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1551,6 +1551,16 @@ Origin:                      NXP (BSD-3-Clause)
                              ARM Limited ethos-u-vela v22.02 (Apache-2.0) - https://git.mlplatform.org/ml/ethos-u/ethos-u-vela.git
                              FlatBuffers (Apache-2.0) 
 
+--------------------------------------------
+
+Package:                     litert-imx.git
+Version:                     1.2.0
+Outgoing License:            Apache-2.0 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    Google's open-source high-performance runtime for on-device AI
+Release Location:            https://github.com/nxp-imx/litert-imx -b lf-6.12.20-2.0.0
 --------------------------------------------
 
 Package:                     neutron.git
