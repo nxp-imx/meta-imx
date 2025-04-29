@@ -1,4 +1,4 @@
 # Use latest NXP Wi-Fi kernel module
 SRC_URI = "${MRVL_SRC};branch=${SRCBRANCH}"
 SRCBRANCH = "master"
-SRCREV = "bc7387bfe754da0bbbb503c996cffe34dffec2a9"
+SRCREV = "2da89e4cadc6acafa0a7d20e5bb103f0c646fbaa"
