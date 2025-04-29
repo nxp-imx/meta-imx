@@ -31,11 +31,13 @@ ML_GST_PROFILER:mx9-nxp-bsp   = "gst-shark"
 # These packages don't require any acceleration
 ML_PKGS            = ""
 ML_PKGS:mx8-nxp-bsp = " \
+    litert \
     onnxruntime-tests \
     pytorch \
     tensorflow-lite \
 "
 ML_PKGS:mx9-nxp-bsp = " \
+    litert \
     onnxruntime-tests \
     pytorch \
     tensorflow-lite \
@@ -58,6 +60,7 @@ ETHOS_U_PKGS = ""
 ETHOS_U_PKGS:mx93-nxp-bsp = " \
     ethos-u-vela \
     ethos-u-driver-stack \
+    litert-ethosu-delegate \
     tensorflow-lite-ethosu-delegate \
     eiq-examples \
 "
@@ -65,10 +68,12 @@ ETHOS_U_PKGS:mx93-nxp-bsp = " \
 # Neutron package
 NEUTRON_PKGS = ""
 NEUTRON_PKGS:mx943-nxp-bsp = " \
+    litert-neutron-delegate \
     neutron \
     tensorflow-lite-neutron-delegate \
 "
 NEUTRON_PKGS:mx95-nxp-bsp = " \
+    litert-neutron-delegate \
     neutron \
     tensorflow-lite-neutron-delegate \
 "
