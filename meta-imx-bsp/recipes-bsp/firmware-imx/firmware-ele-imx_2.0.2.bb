@@ -23,17 +23,12 @@ do_install() {
 }
 
 do_deploy () {
-    # Deploy the related firmware to be package by imx-boot
+    # Deploy the related firmware to be packaged by imx-boot
     install -m 0644 ${S}/${SECO_FIRMWARE_NAME}  ${DEPLOYDIR}
 }
 addtask deploy after do_install before do_build
 
-PACKAGES += "${PN}-ext"
-
-ALLOW_EMPTY:${PN}-ext = "1"
-
-FILES:${PN} += "${nonarch_base_libdir}/firmware/imx/ele/${SECO_FIRMWARE_NAME}"
-FILES:${PN}-ext += "${nonarch_base_libdir}/firmware/imx/ele/${SECOEXT_FIRMWARE_NAME}"
+FILES:${PN} = "${nonarch_base_libdir}/firmware"
 
 RREPLACES:${PN} = "firmware-sentinel"
 RPROVIDES:${PN} = "firmware-sentinel"
