@@ -17,10 +17,9 @@ do_compile[noexec] = "1"
 
 do_install() {
     install -d ${D}${nonarch_base_libdir}/firmware/imx/ele
-    install -m 0644 ${S}/${SECO_FIRMWARE_NAME} ${D}${nonarch_base_libdir}/firmware/imx/ele
-    if [ -e ${S}/${SECOEXT_FIRMWARE_NAME} ]; then
-        install -m 0644 ${S}/${SECOEXT_FIRMWARE_NAME} ${D}${nonarch_base_libdir}/firmware/imx/ele
-    fi
+    for fw in ${SECO_FIRMWARE_NAME} ${SECOEXT_FIRMWARE_NAME}; do
+        install -m 0644 ${S}/$fw ${D}${nonarch_base_libdir}/firmware/imx/ele
+    done
 }
 
 do_deploy () {
