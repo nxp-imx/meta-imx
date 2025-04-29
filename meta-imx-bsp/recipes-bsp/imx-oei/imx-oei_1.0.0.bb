@@ -60,4 +60,6 @@ do_deploy() {
 FILES:${PN} = "/firmware"
 SYSROOT_DIRS += "/firmware"
 
+PROVIDES += "virtual/imx-oei"
+
 COMPATIBLE_MACHINE = "(mx95-generic-bsp|mx943-generic-bsp)"
