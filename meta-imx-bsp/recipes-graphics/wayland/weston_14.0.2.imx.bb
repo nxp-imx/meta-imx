@@ -144,9 +144,7 @@ RDEPENDS:${PN}-xwayland += "xwayland"
 
 RDEPENDS:${PN} += "xkeyboard-config"
 RRECOMMENDS:${PN} = "weston-init liberation-fonts"
-# i.MX: FIXME: Revert this when wayland-protocols is updated
-#RDEPENDS:${PN}-dev += "wayland-protocols-dev"
-RRECOMMENDS:${PN}-dev += "wayland-protocols"
+RDEPENDS:${PN}-dev += "wayland-protocols-dev"
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM:${PN} = "--system weston-launch"
