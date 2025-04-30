@@ -24,7 +24,7 @@ Affected cases:
     hpp_oit_depth_peeling
     hpp_oit_linked_lists
 
-Upstream-Status: Submitted [https://github.com/KhronosGroup/Vulkan-Samples/pull/1336]
+Upstream-Status: Submitted [https://github.com/KhronosGroup/Vulkan-Samples/pull/1338]
 Signed-off-by: Ryan Zhang ryan.zhang@nxp.com
 
 ---
