@@ -33,9 +33,9 @@ FILES:${PN}-nxpaw693-pcie += " \
 "
 
 PACKAGES += "${PN}-all-sdio ${PN}-all-pcie ${PN}-all-usb ${PN}-nxpiw610-usb ${PN}-nxpaw693-pcie"
+PACKAGES:remove = "${PN}-nxp8801-sdio"
 
 RDEPENDS:${PN}-all-sdio = " \
-    ${PN}-nxp8801-sdio \
     ${PN}-nxp8987-sdio \
     ${PN}-nxp8997-sdio \
     ${PN}-nxp9098-sdio \
