@@ -1,0 +1,1 @@
+DEPENDS += "qtquick3d"
