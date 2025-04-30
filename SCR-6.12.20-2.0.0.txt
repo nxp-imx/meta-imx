@@ -292,8 +292,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.1-95db3a6
-Version:                     4.1
+Package:                     zephyr-demo-imx-4.1.5-N/A
+Version:                     4.1.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            BSP
@@ -799,7 +799,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     wayland-protocols-imx.git
-Version:                     1.37.imx
+Version:                     1.41.imx
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
@@ -812,7 +812,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     weston-imx.git
-Version:                     14.0.1.imx
+Version:                     14.0.2.imx
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            Graphics
@@ -988,7 +988,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.10.0-e8a7ec7.bin
+Package:                     imx-parser-4.10.0-c2dc97c.bin
 Version:                     4.10.0
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1591,7 +1591,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
-Version:                     1.17.1
+Version:                     1.22.0
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1714,7 +1714,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.100
+Version:                     1.1.115
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
