@@ -1,4 +1,4 @@
-# Copyright 2020-2024 NXP
+# Copyright 2020-2025 NXP
 DESCRIPTION = "TensorFlow Lite VX Delegate"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7d6260e4f3f6f85de05af9c8f87e6fb5"
@@ -9,13 +9,12 @@ require tensorflow-lite-${PV}.inc
 
 TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-vx-delegate-imx.git;protocol=https" 
 SRCBRANCH_vx = "imx-v2.18.0"
-SRCREV_vx = "0e187d143e23b1d8cbd8e4ca12fc9c809e1a21c4"
+SRCREV_vx = "940fc06f7152c4bfe4c2d85a27399a4f83342d15"
 
 SRCREV_FORMAT = "vx_tf"
 
 SRC_URI = "${TENSORFLOW_LITE_VX_DELEGATE_SRC};branch=${SRCBRANCH_vx};name=vx \
            ${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf;destsuffix=tfgit \
-           file://0001-Findtim-vx.cmake-Fix-LIBDIR-for-multilib-environment.patch \
 "
 
 S = "${WORKDIR}/git"
