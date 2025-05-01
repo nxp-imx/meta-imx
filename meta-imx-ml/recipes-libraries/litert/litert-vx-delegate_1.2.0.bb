@@ -15,6 +15,7 @@ SRCREV_FORMAT = "vx_tf"
 
 SRC_URI = "${TENSORFLOW_LITE_VX_DELEGATE_SRC};branch=${SRCBRANCH_vx};name=vx \
            ${LITERT_SRC};branch=${SRCBRANCH_litert};name=litert;destsuffix=litertgit \
+           file://0001-Findtim-vx.cmake-Fix-hard-coded-lib-dir-name.patch \
 "
 
 S = "${WORKDIR}/git"
