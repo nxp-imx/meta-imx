@@ -13,7 +13,7 @@ do_install:append () {
     install -D -m0644 ${S}/imx-logind.conf ${D}${systemd_unitdir}/logind.conf.d/00-${PN}-imx.conf
     install -D -m0644 ${S}/imx-touchscreen.rules ${D}${sysconfdir}/udev/rules.d/00-${PN}-imx.rules
     install -D -m0644 ${S}/imx-unmanage.network ${D}${systemd_unitdir}/network/69-${PN}-imx.network
-    install -D -m0644 ${S}/imx-wait-online.conf ${D}${sysconfdir}/systemd/system/systemd-networkd-wait-online.service.d/imx.conf
+    install -D -m0644 ${S}/imx-wait-online.conf ${D}${sysconfdir}/systemd/system/systemd-networkd-wait-online.service.d/50-${PN}-imx.conf
 }
 
 do_install:append:mx943-nxp-bsp() {
@@ -22,5 +22,6 @@ do_install:append:mx943-nxp-bsp() {
 }
 
 FILES:${PN} += " \
+    ${sysconfdir}/systemd/system/ \
     ${sysconfdir}/udev/rules.d/ \
 "
