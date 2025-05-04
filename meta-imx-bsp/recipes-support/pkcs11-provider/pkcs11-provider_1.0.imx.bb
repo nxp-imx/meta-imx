@@ -15,7 +15,7 @@ DEPENDS = "openssl"
 SRC_URI = "${PKCS11_PROVIDER_SRC};branch=${SRCBRANCH}"
 PKCS11_PROVIDER_SRC ?= "git://github.com/nxp-imx/${BPN}.git;branch=main;protocol=https"
 SRCBRANCH = "lf_1.0.y"
-SRCREV = "8f6b94409d4872265076df310492da1e5f6abdf7"
+SRCREV = "61379607f382c904d02ebbf4a4574768a4f2fa8e"
 
 S = "${WORKDIR}/git"
 
