@@ -10,7 +10,10 @@ HOMEPAGE = "https://github.com/latchset/pkcs11-provider"
 SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b53b787444a60266932bd270d1cf2d45"
-DEPENDS = "openssl"
+DEPENDS = "\
+    openssl \
+    p11-kit \
+"
 
 SRC_URI = "${PKCS11_PROVIDER_SRC};branch=${SRCBRANCH}"
 PKCS11_PROVIDER_SRC ?= "git://github.com/nxp-imx/${BPN}.git;branch=main;protocol=https"
@@ -20,5 +23,8 @@ SRCREV = "61379607f382c904d02ebbf4a4574768a4f2fa8e"
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
+
+# Overwrite default pkcs11 module path
+#EXTRA_OEMESON += "-Ddefault_pkcs11_module=/path/to/mymodule.so"
 
 FILES:${PN} += "${libdir}/ossl-modules/pkcs11.so"
