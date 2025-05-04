@@ -22,6 +22,5 @@ do_install:append:mx943-nxp-bsp() {
 }
 
 FILES:${PN} += " \
-    ${sysconfdir}/systemd/network/ \
     ${sysconfdir}/udev/rules.d/ \
 "
