@@ -17,11 +17,14 @@ DEPENDS = "\
 
 SRC_URI = "${PKCS11_PROVIDER_SRC};branch=${SRCBRANCH}"
 PKCS11_PROVIDER_SRC ?= "git://github.com/nxp-imx/${BPN}.git;branch=main;protocol=https"
-SRCBRANCH = "lf_1.0.y"
-SRCREV = "8f6b94409d4872265076df310492da1e5f6abdf7"
+SRCBRANCH = "lf-6.6.52_2.2.2"
+SRCREV = "721b94996a96409cb870d6ebb8072c6802c4047d"
 
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
+
+# Overwrite default pkcs11 module path
+#EXTRA_OEMESON += "-Ddefault_pkcs11_module=/path/to/mymodule.so"
 
 FILES:${PN} += "${libdir}/ossl-modules/pkcs11.so"
