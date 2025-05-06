@@ -9,13 +9,12 @@ require litert-${PV}.inc
 
 TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-vx-delegate-imx.git;protocol=https" 
 SRCBRANCH_vx = "imx-v2.18.0"
-SRCREV_vx = "0e187d143e23b1d8cbd8e4ca12fc9c809e1a21c4"
+SRCREV_vx = "91640adca6a5dd51242162ecda205938a2acd59c"
 
 SRCREV_FORMAT = "vx_tf"
 
 SRC_URI = "${TENSORFLOW_LITE_VX_DELEGATE_SRC};branch=${SRCBRANCH_vx};name=vx \
            ${LITERT_SRC};branch=${SRCBRANCH_litert};name=litert;destsuffix=litertgit \
-           file://0001-Findtim-vx.cmake-Fix-hard-coded-lib-dir-name.patch \
 "
 
 S = "${WORKDIR}/git"
