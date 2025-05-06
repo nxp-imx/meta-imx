@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.2-7e2dd42.bin
+Package:                     firmware-ele-imx-2.0.2-094e2af.bin
 Version:                     2.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -737,7 +737,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54.0-b4b02da.bin
+Package:                     mali-imx-r54.0-aca7199.bin
 Version:                     r54.0
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1724,7 +1724,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.115
+Version:                     1.1.117
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
