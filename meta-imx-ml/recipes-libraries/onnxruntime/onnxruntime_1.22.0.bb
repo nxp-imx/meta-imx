@@ -14,7 +14,7 @@ SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
            file://0001-CMakeLists.txt-Fix-python-component-search-failure.patch"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH = "imx_1.22.0"
-SRCREV = "f4fae8f04b325ab1cbef144c3b8670d3a2b264d4" 
+SRCREV = "2f18b4c939cdbccc480a1541d8b6a6b070e52e99"
 
 S = "${WORKDIR}/git"
 
