@@ -8,7 +8,7 @@ DEPENDS = "tensorflow-lite tim-vx tensorflow-lite-host-tools-native"
 require tensorflow-lite-${PV}.inc
 
 TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-vx-delegate-imx.git;protocol=https" 
-SRCBRANCH_vx = "imx-v2.18.0"
+SRCBRANCH_vx = "lf-6.12.20_2.0.0"
 SRCREV_vx = "91640adca6a5dd51242162ecda205938a2acd59c"
 
 SRCREV_FORMAT = "vx_tf"
