@@ -8,7 +8,7 @@ DEPENDS = "tensorflow-lite neutron tensorflow-lite-host-tools-native"
 require tensorflow-lite-${PV}.inc
 
 NEUTRON_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-neutron-delegate.git;protocol=https"
-SRCBRANCH_neutron = "main"
+SRCBRANCH_neutron = "lf-6.12.20_2.0.0"
 SRCREV_neutron = "d508cdbfaf0d9fdb162264fef1d7e66c6e5e1147"
 
 SRCREV_FORMAT = "neutron_tf"
