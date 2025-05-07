@@ -4,8 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=94fa01670a2a8f2d3ab2de15004e0848"
 
 DEPENDS = "clang-cross-${TARGET_ARCH} elfutils libbpf zlib zstd"
 
-SRC_URI = "${DPDK_XDP_SRC};branch=${SRCBRANCH} \
-           file://0001-build-Simplify-toolchain-integration-YOCIMX-8897.patch"
+SRC_URI = "${DPDK_XDP_SRC};branch=${SRCBRANCH}"
 DPDK_XDP_SRC ?= "git://github.com/nxp-imx/imx-xdp-fp;protocol=https"
 SRCBRANCH = "fpr"
 SRCREV = "${AUTOREV}"
