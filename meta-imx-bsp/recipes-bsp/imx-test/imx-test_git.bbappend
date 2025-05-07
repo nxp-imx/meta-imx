@@ -10,7 +10,7 @@ SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH} \
            file://memtool_profile"
 
 IMXTEST_SRC ?= "git://github.com/nxp-imx/imx-test.git;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.12.20_2.0.0"
 SRCREV = "38f9cf1f08bb6fcdd6aaf9191e0b53f02e02537b"
 
 PLATFORM:mx91-nxp-bsp = "IMX8"
