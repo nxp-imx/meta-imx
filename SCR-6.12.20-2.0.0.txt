@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.2-094e2af.bin
+Package:                     firmware-ele-imx-2.0.2-8316b7a.bin
 Version:                     2.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -699,7 +699,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-6fcfd61.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-cd63178.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -718,7 +718,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-6fcfd61.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-cd63178.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -737,7 +737,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54.0-aca7199.bin
+Package:                     mali-imx-r54.0-1253370.bin
 Version:                     r54.0
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -859,7 +859,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-6fcfd61.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-cd63178.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -871,7 +871,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-6fcfd61.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-cd63178.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -998,7 +998,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.10.0-c2dc97c.bin
+Package:                     imx-parser-4.10.0-e8a7ec7.bin
 Version:                     4.10.0
 Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
