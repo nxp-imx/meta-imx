@@ -7,7 +7,7 @@ IMX_SRCREV_ABBREV = "95b9a52"
 
 SRC_URI[arm-fb.sha256sum] = "b76f20ca06bbbdd625eaf9735c14df10febefacedd38e31c9daf524f7281b21f"
 SRC_URI[arm-wayland.sha256sum] = "552ce96e7f9fccfd316e19a93cf82fe1d91d7c5610a6fa483894b6400b07c533"
-SRC_URI[aarch64-wayland.sha256sum] = "1d82911a8b18980540afc7e859d7fde6789d7721129773f8135133d476be6889"
+SRC_URI[aarch64-wayland.sha256sum] = "5991c819cc7d571302c92055ad968bf19dfa32b969d64c76e64e0a8302eba15a"
 
 inherit fsl-eula-unpack2 fsl-eula-graphics fsl-eula-recent
 
