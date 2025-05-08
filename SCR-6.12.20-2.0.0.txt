@@ -3,7 +3,7 @@ NXP Software Content Register
 Release - Linux 6.12.20-2.0.0
  June 2025
 
-Outgoing License: LA_OPT_NXP_Software_License v60 February 2025 - Additional distribution license granted - Section 2.3 applies
+Outgoing License: LA_OPT_NXP_Software_License v62 May 2025 - Additional distribution license granted - Section 2.3 applies
 License File:     LICENSE.txt
 
 Yocto Project recipe manifest:
@@ -88,7 +88,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     imx-sc-firmware-1.18.0-654907b.bin
 Version:                     1.18.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -101,7 +101,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     firmware-imx-8.28-994fa14.bin
 Version:                     8.28
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -131,9 +131,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.2-8316b7a.bin
+Package:                     firmware-ele-imx-2.0.2-e4eb87b.bin
 Version:                     2.0.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -441,7 +441,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     imx-seco-5.9.4.1-0333596.bin
 Version:                     5.9.4.1
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -556,7 +556,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     ecdsa-lib-imx-3.3.4-dd6eac8.bin
 Version:                     3.3.4
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -663,7 +663,7 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 Package:                     isp-imx-4.2.2.25.2-3cac1fb.bin
 Version:                     4.2.2.25.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -675,7 +675,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software
 
 Package:                     basler-camera-4.2.2.25.2-dd86758.bin
 Version:                     4.2.2.25.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -699,9 +699,9 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-cd63178.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-37e8be5.bin
 Version:                     6.4.11.p3.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -718,9 +718,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-cd63178.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-37e8be5.bin
 Version:                     6.4.11.p3.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -739,7 +739,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     mali-imx-r54.0-1253370.bin
 Version:                     r54.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary and source
@@ -859,9 +859,9 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-cd63178.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-37e8be5.bin
 Version:                     6.4.11.p3.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -871,9 +871,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-cd63178.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-37e8be5.bin
 Version:                     6.4.11.p3.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -885,7 +885,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-dpu-g2d-v1-2.4.0.0-9e8bbf1.bin
 Version:                     2.4.0.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -897,7 +897,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-dpu-g2d-v2-2.4.0.0-9e8bbf1.bin
 Version:                     2.4.0.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -933,7 +933,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     libgpuperfcnt-6.4.11.p3.2-aarch64-wayland-95b9a52.bin
 Version:                     6.4.11.p3.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -945,7 +945,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     libgpuperfcnt-6.4.11.p3.2-arm-fb-95b9a52.bin
 Version:                     6.4.11.p3.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -957,7 +957,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     libgpuperfcnt-6.4.11.p3.2-arm-wayland-95b9a52.bin
 Version:                     6.4.11.p3.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -969,7 +969,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     libgpuperfcnt-r54.0-aarch64-wayland-mali-95b9a52.bin
 Version:                     r54.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
 Type of Content:             binary
@@ -983,7 +983,7 @@ Multimedia Packages
 
 Package:                     imx-codec-4.10.0-464e9d8.bin
 Version:                     4.10.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1000,7 +1000,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-parser-4.10.0-e8a7ec7.bin
 Version:                     4.10.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1104,7 +1104,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-opencl-converter-0.8.0-6a58c6c.bin
 Version:                     0.8.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1142,7 +1142,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-vpu-hantro-1.37.0-deec65e.bin
 Version:                     1.37.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1171,7 +1171,7 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-vpu-hantro-vc-1.10.2-fc03682.bin
 Version:                     1.10.2
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1199,7 +1199,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-dsp-2.1.10-ea4fe3f.bin
 Version:                     2.1.10
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1239,7 +1239,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     nxp-ssrc-2.2.3-5865e8f.bin
 Version:                     2.2.3
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1251,7 +1251,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-voiceUI.git
 Version:                     2.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
@@ -1325,7 +1325,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx8mm-m4-demo-25.03.00.bin
 Version:                     25.03.00
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1339,7 +1339,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx8mq-m4-demo-25.03.00.bin
 Version:                     25.03.00
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1383,7 +1383,7 @@ M7 Processor Packages
 
 Package:                     imx8mn-m7-demo-25.03.00.bin
 Version:                     25.03.00
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1397,7 +1397,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx8mnddr3l-m7-demo-25.03.00.bin
 Version:                     25.03.00
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1411,7 +1411,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx8mp-m7-demo-25.03.00.bin
 Version:                     25.03.00
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1427,7 +1427,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx95-m7-demo-25.06.00.bin
 Version:                     25.06.00
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
 Type of Content:             binary
@@ -1445,7 +1445,7 @@ M33 Processor Packages
 
 Package:                     imx8ulp-m33-demo-25.03.00.bin
 Version:                     25.03.00
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1461,7 +1461,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx93-m33-demo-25.03.00.bin
 Version:                     25.03.00
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1478,7 +1478,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx943-mcore-demo-25.06.00.bin
 Version:                     25.06.00
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            MCore_Processor
 Type of Content:             binary
@@ -1575,7 +1575,7 @@ Release Location:            https://github.com/nxp-imx/litert-imx -b lf-6.12.20
 
 Package:                     neutron.git
 Version:                     1.0.0
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
@@ -1724,7 +1724,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.117
+Version:                     1.1.118
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
