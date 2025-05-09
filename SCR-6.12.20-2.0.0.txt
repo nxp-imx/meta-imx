@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.13.0-2ffe42f
+Package:                     sof-zephyr-2.13.0-2c49c14
 Version:                     2.13.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -464,7 +464,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     imx-smw.git
-Version:                     0.4
+Version:                     5.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -646,6 +646,16 @@ Origin:                      NXP (BSD-3-Clause)
                              mTCP (BSD-3-Clause) https://github.com/mtcp-stack/mtcp
 
 --------------------------------------------
+
+Package:                     xdp-fp.git
+Version:                     1.0.0
+Outgoing License:            GPL-2.0 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    XDP Fastpath Networking Application
+Release Location:            https://github.com/nxp-imx/imx-xdp-fp -b lf-6.12.20-2.0.0
+--------------------------------------------
 Graphics Packages
 --------------------------------------------
 
@@ -699,7 +709,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-37e8be5.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch32-3c5e429.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -718,7 +728,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-37e8be5.bin
+Package:                     imx-gpu-viv-6.4.11.p3.2-aarch64-3c5e429.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -737,7 +747,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54.0-1253370.bin
+Package:                     mali-imx-r54.0-2943b3d.bin
 Version:                     r54.0
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -859,7 +869,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-37e8be5.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-arm-3c5e429.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -871,7 +881,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-37e8be5.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.2-aarch64-3c5e429.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1102,7 +1112,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.8.0-6a58c6c.bin
+Package:                     imx-opencl-converter-0.8.0-b81b785.bin
 Version:                     0.8.0
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
