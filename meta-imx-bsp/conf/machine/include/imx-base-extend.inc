@@ -103,7 +103,7 @@ PREFERRED_VERSION_ffmpeg:imx-nxp-bsp ??= "4.4.1"
 PREFERRED_VERSION_ffmpeg:mx8-nxp-bsp ??= "4.4.1"
 PREFERRED_VERSION_ffmpeg:mx9-nxp-bsp ??= "4.4.1"
 
-PREFERRED_VERSION_weston:imx-nxp-bsp ??= "12.0.4.imx"
+PREFERRED_VERSION_weston:imx-nxp-bsp ??= "12.0.5.imx"
 # i.MX 6 & 7 stay on weston 10.0 for fbdev
 PREFERRED_VERSION_weston:mx6-nxp-bsp ??= "10.0.5.imx"
 PREFERRED_VERSION_weston:mx7-nxp-bsp ??= "10.0.5.imx"
