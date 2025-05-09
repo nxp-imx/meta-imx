@@ -1,6 +1,6 @@
 # Use the latest revision
 
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cf2070b16b9d4acf60a98e8cbc32a25a"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a93b654673e1bc8398ed1f30e0813359"
 
 IMX_FIRMWARE_SRC ?= "git://github.com/nxp-imx/imx-firmware.git;protocol=https"
 SRC_URI = "${IMX_FIRMWARE_SRC};branch=${SRCBRANCH}"
