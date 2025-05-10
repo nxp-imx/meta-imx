@@ -5,11 +5,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI = "gitsm://github.com/NXPPlugNTrust/se05x-openssl-provider.git;protocol=https;branch=main"
-SRCREV = "644d97d93225b2377612070818c5911cb6556732"
+SRCREV = "12999e82cc24733e3194689b959c79f4e9f3da05"
 
 S = "${WORKDIR}/git"
 
-PV = "1.0.2+git${SRCPV}"
+PV = "1.1.2+git${SRCPV}"
 
 inherit cmake
 
