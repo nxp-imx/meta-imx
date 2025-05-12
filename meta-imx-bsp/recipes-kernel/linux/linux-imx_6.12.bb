@@ -1,5 +1,5 @@
 # Copyright 2013-2016 Freescale Semiconductor
-# Copyright 2017-2024 NXP
+# Copyright 2017-2025 NXP
 # Copyright 2018 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 #
@@ -22,7 +22,7 @@ LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=$
 SRCBRANCH = "lf-6.12.y"
 KBRANCH = "${SRCBRANCH}"
 LOCALVERSION = "-lts-next"
-SRCREV = "bd1b1a167896d0a87495e94c81af74ee632b743b"
+SRCREV = "fd335e51e37b8fa81b556522b41221ed543a7341"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
