@@ -9,7 +9,7 @@ SRC_URI = "${DPDK_FPR_SRC};branch=${SRCBRANCH}"
 DPDK_FPR_SRC ?= "git://github.com/nxp/dpdk-fpr;protocol=https"
 
 SRCBRANCH = "main"
-SRCREV = "bbd2b14e395e172c60f2bac8334f3500d307510e"
+SRCREV = "9623f815a532d9097f910084106a2d5dc4c97dfb"
 
 S = "${WORKDIR}/git"
 
