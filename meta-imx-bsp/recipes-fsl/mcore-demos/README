@@ -9,7 +9,8 @@ The M7 demo app version of each SoCs are followed:
 * 25.06.00 --  i.MX95
 
 The M33 demo app version of each SoCs are followed:
-* 25.03.00 --  i.MX 8ULP, i.MX 93
+* 25.03.00 --  i.MX 8ULP
+* 25.06.00 --  i.MX 93
 
 The MCore demo app version of each SoCs are followed:
 * 25.06.00 --  i.MX 943
