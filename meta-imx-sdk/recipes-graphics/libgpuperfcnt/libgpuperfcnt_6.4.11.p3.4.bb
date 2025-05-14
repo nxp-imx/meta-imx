@@ -5,7 +5,7 @@ DEPENDS = "imx-gpu-viv"
 
 IMX_SRCREV_ABBREV = "e0a132a"
 
-SRC_URI[arm-fb.sha256sum] = "03b169c5355be8d62a21561637a419923b09d5d8f22f1552a60b7a2fdf7194b5"
+SRC_URI[arm-fb.sha256sum] = "7aeeffc63ce0648edc2d0dcc78e5d9889c80dd96c8854d2d09cc2fe82b850f1b"
 SRC_URI[arm-wayland.sha256sum] = "8c58f90889efddc9173e1d63ae91ce236d6c9f7647691645050718e7873eb8e0"
 SRC_URI[aarch64-wayland.sha256sum] = "625b05d5d24b3c4871be81dc3e3edbae8246ea39de83126fc470b9858b2826ca"
 
