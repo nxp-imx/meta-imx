@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.13.0-bb6972d
+Package:                     sof-zephyr-2.13.0-f5da507
 Version:                     2.13.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -941,7 +941,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p3.2-aarch64-wayland-95b9a52.bin
+Package:                     libgpuperfcnt-6.4.11.p3.2-aarch64-wayland-e0a132a.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -953,7 +953,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p3.2-arm-fb-95b9a52.bin
+Package:                     libgpuperfcnt-6.4.11.p3.2-arm-fb-e0a132a.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -965,7 +965,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p3.2-arm-wayland-95b9a52.bin
+Package:                     libgpuperfcnt-6.4.11.p3.2-arm-wayland-e0a132a.bin
 Version:                     6.4.11.p3.2
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -977,7 +977,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-r54.0-aarch64-wayland-mali-95b9a52.bin
+Package:                     libgpuperfcnt-r54.0-aarch64-wayland-mali-e0a132a.bin
 Version:                     r54.0
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
