@@ -10,14 +10,14 @@ LIC_FILES_CHKSUM = " \
     file://LICENSES/BSD-2-Clause.txt;md5=63d6ee386b8aaba70b1bf15a79ca50f2 \
     file://LICENSES/GPL-2.0-or-later.txt;md5=fed54355545ffd980b814dab4a3b312c \
     file://LICENSES/LGPL-2.1-or-later.txt;md5=3c328714bf889b2c3c7cd842e3e4893b \
-    file://LICENSES/LA_OPT_NXP_Software_License.txt;md5=b5ee000acad87f2e615a327bfe6f0828 \
+    file://LICENSES/LA_OPT_NXP_Software_License.txt;md5=a93b654673e1bc8398ed1f30e0813359 \
     file://LICENSES/MIT.txt;md5=38aa75cf4c4c87f018227d5ec9638d75 "
 DEPENDS = "libcamera"
 
 SRC_URI = "${NEO_IPA_UGUZZI_SRC};branch=${SRCBRANCH}"
 NEO_IPA_UGUZZI_SRC ?= "git://github.com/nxp-imx/neo-ipa-uguzzi;protocol=https"
 SRCBRANCH = "imx/next"
-SRCREV = "fe7bc159c7e2e06d0d485a5ed683e4391e9c98a1"
+SRCREV = "b4bb3fbbc4d28d0a3f05431b829d4de81303f190"
 
 S = "${WORKDIR}/git"
 
