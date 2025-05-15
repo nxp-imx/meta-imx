@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a93b654673e1bc8398ed1f30e0813359"
 PROVIDES = "virtual/imxvpu"
 
 SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
-IMX_SRCREV_ABBREV = "deec65e"
+IMX_SRCREV_ABBREV = "785f534"
 
-SRC_URI[sha256sum] = "16846584c40416dbffd985bfe4917bebece6ddeadebfd3475b029e16155323e4"
+SRC_URI[sha256sum] = "4cc1cdfad50b2b9e37450de620abf8607529ebf5d2bb29ab6fdbc23205edb73c"
 
 S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
