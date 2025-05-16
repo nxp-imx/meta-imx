@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM:mx8mnul-nxp-bsp = "file://COPYING;md5=cf2070b16b9d4acf60a98e8cb
 LIC_FILES_CHKSUM:mx8mp-nxp-bsp = "file://COPYING;md5=cf2070b16b9d4acf60a98e8cbc32a25a"
 LIC_FILES_CHKSUM:mx8mpul-nxp-bsp = "file://COPYING;md5=cf2070b16b9d4acf60a98e8cbc32a25a"
 
-SRC_URI[imx8mn.sha256sum] = "5e1e41039d69a31c9fe70305aa732840a27f23185bee2670eb6a0084f9d2cddd"
+SRC_URI[imx8mn.sha256sum] = "66e160a4267efcd2660b932d46ad6bcc645c9f2865c8ea873d4194d67fcf342c"
 
 SRC_URI[imx8mnddr3l.sha256sum] = "e6587326e6e2ef41e854882abc4a9234825d857380e8b1b6e8980d690bb08f49"
 
