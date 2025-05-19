@@ -88,7 +88,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     imx-sc-firmware-1.18.0-654907b.bin
 Version:                     1.18.0
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v58 November Novemeber 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -254,7 +254,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-firmware.git
 Version:                     
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             binary
@@ -418,7 +418,7 @@ Origin:                      NXP (GPL-2.0)
 Package:                     imx-xen.git
 Version:                     4.19.imx
 Outgoing License:            GPL-2.0 
-License File:                COPYING
+License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    A Virtual Machine Monitor
@@ -441,7 +441,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     imx-seco-5.9.4.1-0333596.bin
 Version:                     5.9.4.1
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -493,12 +493,14 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     pkcs11-provider.git
 Version:                     1.0.imx
-Outgoing License:            Apache-2 
+Outgoing License:            Apache-2.0 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX fork of an OpenSSL provider that allows direct interfacing with pkcs11 drivers
 Release Location:            https://github.com/nxp-imx/pkcs11-provider.git -b lf-6.12.20-2.0.0
+Origin:                   Latchset (Apache-2.0) - https://github.com/latchset/pkcs11-provider
+
 --------------------------------------------
 
 Package:                     keyctl_caam.git
@@ -556,7 +558,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     ecdsa-lib-imx-3.3.4-dd6eac8.bin
 Version:                     3.3.4
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v58 November Novemeber 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -623,7 +625,7 @@ Origin:                      NXP (GPL-2.0 or BSD-3-Clause)
 Package:                     dpdk-fpr.git
 Version:                     22.11
 Outgoing License:            BSD-3-Clause 
-License File:                license/bsd-3-clause.txt
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    DPDK Fast Path Routing
@@ -637,7 +639,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     mtcp-dpdk.git
 Version:                     22.11
 Outgoing License:            BSD-3-Clause 
-License File:                license/bsd-3-clause.txt
+License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    mTCP on DPDK
@@ -919,7 +921,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-g2d-pxp.git
 Version:                     2.4
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -1089,7 +1091,7 @@ Origin:                      NXP (LGPL-2.1)
 
 Package:                     imx-dspc-asrc-1.0.2-ce4ae5a.bin
 Version:                     1.0.2
-Outgoing License:            LA_OPT_NXP_Software_License v8 June 2019 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1126,7 +1128,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-vpuwrap.git
 Version:                     git
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
@@ -1261,7 +1263,7 @@ Origin:                      NXP (proprietary)
 
 Package:                     imx-voiceUI.git
 Version:                     2.0
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
@@ -1291,7 +1293,7 @@ Origin:                      NXP (LGPL-2.1-or-later)
 
 Package:                     neo-ipa-uguzzi.git
 Version:                     0.2.1
-Outgoing License:            LA_OPT_NXP_Software_License v60 February 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSES/LA_OPT_NXP_Software_License.txt
 Package Category:            Multimedia
 Type of Content:             binary and source
@@ -1581,12 +1583,15 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Google's open-source high-performance runtime for on-device AI
 Release Location:            https://github.com/nxp-imx/litert-imx -b lf-6.12.20-2.0.0
+Origin:                      NXP (Apache-2.0)
+                             tensorflow 1.2.0 (Apache-2.0) - https://github.com/google-ai-edge/LiteRT
+
 --------------------------------------------
 
 Package:                     neutron.git
 Version:                     1.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 
-License File:                LICENSE
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    The firmware library and converter for i.MX Neutron NPU
