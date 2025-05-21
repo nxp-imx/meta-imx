@@ -657,6 +657,9 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    XDP Fastpath Networking Application
 Release Location:            https://github.com/nxp-imx/imx-xdp-fp -b lf-6.12.20-2.0.0
+Origin:                      NXP (GPL-2.0-or-later)
+                             xdp_fpr_user.c - David Ahern (GPL-2.0) - Userspace tool to load XDP program
+
 --------------------------------------------
 Graphics Packages
 --------------------------------------------
