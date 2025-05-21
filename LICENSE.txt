@@ -1,4 +1,4 @@
-LA_OPT_NXP_Software_License v60 February 2025
+LA_OPT_NXP_Software_License v62 May 2025
 IMPORTANT.  Read the following NXP Software License Agreement ("Agreement")
 completely. By selecting the "I Accept" button at the end of this page, or by
 downloading, installing, or using the Licensed Software, you indicate that you
@@ -576,7 +576,7 @@ provide Fraunhofer your name and contact information.
 
 Future Technology Devices International Ltd.: Future Technology Devices
 International software must be used consistent with the terms found here:
-http://www.ftdichip.com/Drivers/FTDriverLicenceTerms.htm
+https://ftdichip.com/driver-licence-terms-details/
 
 Global Locate (Broadcom Corporation): Use of Global Locate, Inc. software is
 limited to evaluation and demonstration only.  Permitted distributions must be
