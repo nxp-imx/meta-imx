@@ -6,6 +6,10 @@ update_file() {
     sed -i -e "s,$1,$2," $3
 }
 
+insert_line_after() {
+    sed -i -e "/$1/a $2" $3
+}
+
 do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         # Add weston.log back, used by NXP for testing
@@ -14,6 +18,9 @@ do_install:append() {
         # FIXME: weston should be run as weston, not as root
         update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
         update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
+
+        # FIXME: fix the underlying problem and drop this
+        insert_line_after "ExecStart=" "Restart=always" ${D}${systemd_system_unitdir}/weston.service
     else
         # Install weston-socket.sh for sysvinit as well
         install -D -p -m0644 ${WORKDIR}/weston-socket.sh ${D}${sysconfdir}/profile.d/weston-socket.sh
