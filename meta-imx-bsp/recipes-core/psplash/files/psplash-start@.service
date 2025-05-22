@@ -1,0 +1,13 @@
+[Unit]
+Description=Start psplash boot splash screen
+DefaultDependencies=no
+RequiresMountsFor=/run
+ConditionFileIsExecutable=/usr/bin/psplash
+After=dev-%i.device
+Wants=dev-%i.device
+
+[Service]
+Type=notify
+ExecStartPre=/bin/sh -c "if [ -e /sys/class/graphics/fbcon/cursor_blink ]; then echo 0 > /sys/class/graphics/fbcon/cursor_blink; fi"
+ExecStart=/bin/sh -c "s=$(/usr/sbin/fbset -i -fb /dev/fb0 | grep epdc); if [ -z "$s" ]; then i=0; else i=1; fi; if [ -e /dev/fb$i ]; then /usr/bin/psplash -n -f $i; fi"
+RemainAfterExit=yes
