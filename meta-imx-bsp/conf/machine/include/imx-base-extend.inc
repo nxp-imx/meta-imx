@@ -102,8 +102,11 @@ PREFERRED_VERSION_libdrm:imx-nxp-bsp ??= "2.4.123.imx"
 
 PREFERRED_VERSION_gfxreconstruct:imxvulkan             ??= "1.3.275.0"
 PREFERRED_VERSION_glslang:imxvulkan                    ??= "1.3.275.0.imx"
+PREFERRED_VERSION_vulkan-samples:imxvulkan             ??= "viv"
 PREFERRED_VERSION_vulkan-utility-libraries:imxvulkan   ??= "1.3.275.0.imx"
+
 PREFERRED_VERSION_glslang:imx-nxp-bsp                  ??= "1.4.309.0"
+PREFERRED_VERSION_vulkan-samples:imx-nxp-bsp           ??= "git"
 PREFERRED_VERSION_vulkan-utility-libraries:imx-nxp-bsp ??= "1.4.309.0"
 
 PREFERRED_VERSION_optee-client:mx6-nxp-bsp ??= "4.6.0.imx"
