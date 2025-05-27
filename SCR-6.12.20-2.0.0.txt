@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.13.0-f5da507
+Package:                     sof-zephyr-2.13.0-3d67d3f
 Version:                     2.13.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.1.5-e1d97fa
+Package:                     zephyr-demo-imx-4.1.5-97523f9
 Version:                     4.1.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
