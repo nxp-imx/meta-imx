@@ -19,7 +19,10 @@ REQUIRED_DISTRO_FEATURES:remove = "opengl"
 PACKAGECONFIG ?= " \
     egl \
     ${@bb.utils.filter('DISTRO_FEATURES', 'vulkan wayland', d)} \
+    ${PACKAGECONFIG_GLES} \
 "
+PACKAGECONFIG_GLES = ""
+PACKAGECONFIG_GLES:imxmali:imxgpu3d = "gles"
 
 PACKAGECONFIG[egl]     = "-DENABLE_EGL=ON,-DENABLE_EGL=OFF"
 PACKAGECONFIG[gl]      = "-DENABLE_GL=ON,-DENABLE_GL=OFF,virtual/libgl"
@@ -34,3 +37,5 @@ do_compile:prepend () {
         export LIB_SUFFIX="64"
     fi
 }
+
+PACKAGE_ARCH:imxmali:imxgpu3d = "${MACHINE_SOCARCH}"
