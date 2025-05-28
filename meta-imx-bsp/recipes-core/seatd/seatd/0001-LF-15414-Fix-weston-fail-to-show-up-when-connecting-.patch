@@ -1,0 +1,81 @@
+From 116f10477d551e9b1d1024c6f33b01efa707f055 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Wed, 28 May 2025 18:02:01 +0800
+Subject: [PATCH] LF-15414: Fix weston fail to show up when connecting three
+ displays
+
+Add back session activation to avoid some display connect slowly.
+
+Revert "logind: Skip session activation"
+
+This reverts commit 0a86b9785ab22124144c05d572d5dd8b24fcf57e
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ libseat/backend/logind.c | 42 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+
+diff --git a/libseat/backend/logind.c b/libseat/backend/logind.c
+index b5eeed2..bc7b71d 100644
+--- a/libseat/backend/logind.c
++++ b/libseat/backend/logind.c
+@@ -278,6 +278,38 @@ static const char *seat_name(struct libseat *base) {
+ 	return backend->seat;
+ }
+ 
++static int session_activate(struct backend_logind *session) {
++	sd_bus_message *msg = NULL;
++	sd_bus_error error = SD_BUS_ERROR_NULL;
++
++	// Note: the Activate call might not make the session active immediately
++	int ret = sd_bus_call_method(session->bus, "org.freedesktop.login1", session->path,
++				     "org.freedesktop.login1.Session", "Activate", &error, &msg, "");
++	if (ret < 0) {
++		log_errorf("Could not activate session: %s", error.message);
++	}
++
++	sd_bus_error_free(&error);
++	sd_bus_message_unref(msg);
++	return ret;
++}
++
++static int session_check_active(struct backend_logind *session) {
++	sd_bus_error error = SD_BUS_ERROR_NULL;
++	int active = 0;
++	int ret = sd_bus_get_property_trivial(session->bus, "org.freedesktop.login1", session->path,
++					      "org.freedesktop.login1.Session", "Active", &error,
++					      'b', &active);
++	if (ret < 0) {
++		log_errorf("Could not check if session is active: %s", error.message);
++	} else {
++		session->active = (bool)active;
++	}
++
++	sd_bus_error_free(&error);
++	return ret;
++}
++
+ static int session_get_active(struct backend_logind *session, bool *active) {
+ 	sd_bus_error error = SD_BUS_ERROR_NULL;
+ 	int ret = sd_bus_get_property_trivial(session->bus, "org.freedesktop.login1", session->path,
+@@ -669,6 +701,16 @@ static struct libseat *logind_open_seat(const struct libseat_seat_listener *list
+ 		goto error;
+ 	}
+ 
++	ret = session_activate(backend);
++	if (ret < 0) {
++		goto error;
++	}
++
++	ret = session_check_active(backend);
++	if (ret < 0) {
++		goto error;
++	}
++
+ 	ret = session_get_active(backend, &backend->active);
+ 	if (ret < 0) {
+ 		goto error;
+-- 
+2.34.1
+
