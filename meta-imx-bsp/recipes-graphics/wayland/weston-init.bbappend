@@ -19,8 +19,8 @@ do_install:append() {
         update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
         update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
 
-        # FIXME: fix the underlying problem and drop this
-        insert_line_after "ExecStart=" "Restart=always" ${D}${systemd_system_unitdir}/weston.service
+        # FIXME: fix the underlying problem and drop this workaround
+        insert_line_after "ExecStart=" "Restart=on-failure" ${D}${systemd_system_unitdir}/weston.service
     else
         # Install weston-socket.sh for sysvinit as well
         install -D -p -m0644 ${WORKDIR}/weston-socket.sh ${D}${sysconfdir}/profile.d/weston-socket.sh
