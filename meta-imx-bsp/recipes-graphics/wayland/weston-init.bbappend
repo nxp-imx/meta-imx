@@ -6,6 +6,10 @@ update_file() {
     sed -i -e "s,$1,$2," $3
 }
 
+insert_line_before() {
+    sed -i -e "/$1/i $2" $3
+}
+
 insert_line_after() {
     sed -i -e "/$1/a $2" $3
 }
@@ -18,6 +22,9 @@ do_install:append() {
         # FIXME: weston should be run as weston, not as root
         update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
         update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
+
+        # FIXME: Upstream this change
+        insert_line_before "ExecStart=" "ExecStartPre=+chvt 7" ${D}${systemd_system_unitdir}/weston.service
 
         # FIXME: fix the underlying problem and drop this workaround
         insert_line_after "ExecStart=" "Restart=on-failure" ${D}${systemd_system_unitdir}/weston.service
