@@ -306,20 +306,6 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     simg2img.git
-Version:                     
-Outgoing License:            Apache-2.0 
-License File:                LICENSE
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    Tool to convert Android sparse images to raw images
-Release Location:            https://github.com/nxp-imx/simg2img -b master
-Origin:                      NXP (Apache-2.0)
-                             The Android Open Source Project (Apache-2.0) - https://android.googlesource.com/platform/system/core/+/master/libsparse
-                             Gary S Brown (Public Domain) - http://www.opensource.apple.com/source/xnu/xnu-1456.1.26/bsd/libkern/crc32.c?txt
-
---------------------------------------------
-
 Package:                     imx-kobs.git
 Version:                     
 Outgoing License:            GPL-2.0 
