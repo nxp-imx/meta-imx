@@ -24,7 +24,8 @@ EXTRA_OEMAKE = " \
     ${PACKAGECONFIG_CONFARGS} \
 "
 
-do_configure:append() {
+do_configure() {
+    oe_runmake clean
     oe_runmake cfg
 }
 
