@@ -18,19 +18,11 @@ SYSTEM_MANAGER_CONFIG ?= "INVALID"
 LDFLAGS[unexport] = "1"
 
 EXTRA_OEMAKE = " \
-    V=y \
+    CONFIG=${SYSTEM_MANAGER_CONFIG} \
     SM_CROSS_COMPILE=arm-none-eabi- \
+    V=y \
     ${PACKAGECONFIG_CONFARGS} \
 "
-
-do_configure() {
-    oe_runmake config=${SYSTEM_MANAGER_CONFIG} clean
-    oe_runmake config=${SYSTEM_MANAGER_CONFIG} cfg
-}
-
-do_compile() {
-    oe_runmake config=${SYSTEM_MANAGER_CONFIG}
-}
 
 do_install[noexec] = "1"
 
