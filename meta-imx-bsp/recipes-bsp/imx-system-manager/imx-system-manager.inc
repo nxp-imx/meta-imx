@@ -24,6 +24,10 @@ EXTRA_OEMAKE = " \
     ${PACKAGECONFIG_CONFARGS} \
 "
 
+do_configure:append() {
+    oe_runmake cfg
+}
+
 do_install[noexec] = "1"
 
 addtask deploy after do_compile
