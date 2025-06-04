@@ -43,5 +43,6 @@ CLINFO:mx7-nxp-bsp   = ""
 
 DOCKER            ?= ""
 DOCKER:mx8-nxp-bsp = "docker"
+DOCKER:mx9-nxp-bsp = "docker"
 
 export IMAGE_BASENAME = "imx-image-core"
