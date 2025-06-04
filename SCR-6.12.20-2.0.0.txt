@@ -88,7 +88,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     imx-sc-firmware-1.18.0-654907b.bin
 Version:                     1.18.0
-Outgoing License:            LA_OPT_NXP_Software_License v58 Novemeber 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.2-10d37b3.bin
+Package:                     firmware-ele-imx-2.0.2-9b65b90.bin
 Version:                     2.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.1.5-97523f9
+Package:                     zephyr-demo-imx-4.1.5-93eb2b7
 Version:                     4.1.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -544,7 +544,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     ecdsa-lib-imx-3.3.4-dd6eac8.bin
 Version:                     3.3.4
-Outgoing License:            LA_OPT_NXP_Software_License v58 Novemeber 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
