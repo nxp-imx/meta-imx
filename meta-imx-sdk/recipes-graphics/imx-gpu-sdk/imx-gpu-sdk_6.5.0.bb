@@ -32,7 +32,7 @@ EMPTY_MAIN_PACKAGES = \
 SRC_URI = "${GPU_SDK_SRC};branch=${SRCBRANCH}"
 GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "e8840f58de1ebd0233391a663d15c4ca8a45d35c"
+SRCREV = "1f512be500cecb392b24a154e83f0e7cd4655f3e"
 
 S = "${WORKDIR}/git"
 
