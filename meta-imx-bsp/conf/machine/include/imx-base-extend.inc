@@ -65,7 +65,7 @@ MACHINE_SOCARCH_SUFFIX:mx91-nxp-bsp = "-mx91"
 IMX_EXTRA_FIRMWARE:mx91-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx"
 
 # Add new variabe for ELE extra Firmware
-SECOEXT_FIRMWARE_NAME                    ?= ""
+SECOEXT_FIRMWARE_NAME                     = ""
 SECOEXT_FIRMWARE_NAME:mx8ulp-generic-bsp ?= "mx8ulp${IMX_SOC_REV_LOWER}ext-ahab-container.img"
 SECOEXT_FIRMWARE_NAME:mx95-generic-bsp   ?= "mx95a0runtime-ahab-container.img mx95b0runtime-ahab-container.img"
 
