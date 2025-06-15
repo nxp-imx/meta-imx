@@ -10,9 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc \
                     file://LICENCE-sof;md5=14abb55d71048ebecff1a104640546b6 \
 "
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.tar.gz"
-SRC_URI[sha256sum] = "e080130ef1984326f5908ad840ef786c2dfa7919d34017001d18dddb0f066337"
+SRC_URI[sha256sum] = "a44a2e609b493a690804e1b89ac844f952f5c04f4b24263a548e83b7ee35a24d"
 
-IMX_SRCREV_ABBREV = "97f869c"
+IMX_SRCREV_ABBREV = "2e15fc5"
 
 inherit allarch
 
