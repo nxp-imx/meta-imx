@@ -2,7 +2,7 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2025-06-13T17:57:29Z",
+    "created": "2025-06-18T09:51:40Z",
     "creators": [
       "Organization: NXP"
     ],
@@ -1218,8 +1218,8 @@
       "SPDXID": "SPDXRef-package-8b0d1a1c-e4fe-497f-86d9-db0b3e5feb9d",
       "name": "imx-dsp",
       "versionInfo": "2.1.10",
-      "licenseConcluded": "LicenseRef-e60c2706-136b-49be-84a4-218b5ca0c384",
-      "licenseDeclared": "LicenseRef-e60c2706-136b-49be-84a4-218b5ca0c384",
+      "licenseConcluded": "LicenseRef-2f839f4f-a98b-4a7a-846e-3ee4fd935aec",
+      "licenseDeclared": "LicenseRef-2f839f4f-a98b-4a7a-846e-3ee4fd935aec",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com",
       "originator": "Organization: NXP",
