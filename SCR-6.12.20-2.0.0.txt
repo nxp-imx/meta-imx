@@ -1209,7 +1209,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-dsp-2.1.10-ea4fe3f.bin
 Version:                     2.1.10
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024,Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
