@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/baldurk/renderdoc"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=5536c2b72eeed14bafaf4d2a6c032b87"
 
-SRCREV = "cd94206b0fd995bfb3e5ed95c1e68d4f5d38ea7e"
+SRCREV = "e6905876838977faf2f70958a4b5cfc5558f2527"
 SRC_URI = " \
     git://github.com/baldurk/${BPN}.git;protocol=https;branch=v1.x \
 "
