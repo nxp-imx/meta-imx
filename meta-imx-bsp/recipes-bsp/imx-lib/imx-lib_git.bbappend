@@ -3,7 +3,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fbc093901857fcd118f065f900982c24"
 SRC_URI = "${IMXLIB_SRC};branch=${SRCBRANCH}"
 IMXLIB_SRC ?= "git://github.com/nxp-imx/imx-lib.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "8f124c3914d82019849fb697baeb730e4cb1b547"
+SRCREV = "36ac3833badc62bd59eec4c33535c95805da7cd2"
 
 PLATFORM:mx93-nxp-bsp = "IMX8ULP"
 PLATFORM:mx943-nxp-bsp = "IMX8ULP"
