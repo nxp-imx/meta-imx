@@ -9,5 +9,5 @@ Wants=dev-%i.device
 [Service]
 Type=notify
 ExecCondition=/bin/sh -c '! /usr/sbin/fbset -i -fb /dev/fb0 | grep -q epdc'
-ExecStart=/usr/bin/psplash
+ExecStart=/usr/bin/psplash -n
 RemainAfterExit=yes
