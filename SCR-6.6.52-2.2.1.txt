@@ -714,8 +714,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.10-aarch32-accdd64.bin
-Version:                     6.4.11.p2.10
+Package:                     imx-gpu-viv-6.4.11.p2.12-aarch32-4402ac2.bin
+Version:                     6.4.11.p2.12
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -733,8 +733,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p2.10-aarch64-accdd64.bin
-Version:                     6.4.11.p2.10
+Package:                     imx-gpu-viv-6.4.11.p2.12-aarch64-4402ac2.bin
+Version:                     6.4.11.p2.12
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -752,8 +752,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r50.2-710cfb6.bin
-Version:                     r50.2
+Package:                     mali-imx-r50.4-696f9a6.bin
+Version:                     r50.4
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -874,8 +874,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.10-arm-accdd64.bin
-Version:                     6.4.11.p2.10
+Package:                     imx-gpu-g2d-6.4.11.p2.12-arm-4402ac2.bin
+Version:                     6.4.11.p2.12
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -886,8 +886,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p2.10-aarch64-accdd64.bin
-Version:                     6.4.11.p2.10
+Package:                     imx-gpu-g2d-6.4.11.p2.12-aarch64-4402ac2.bin
+Version:                     6.4.11.p2.12
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -946,8 +946,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-git-aarch64-wayland-99ab423.bin
-Version:                     git
+Package:                     libgpuperfcnt-6.4.11.p2.12-aarch64-wayland-e0a132a.bin
+Version:                     6.4.11.p2.12
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -958,8 +958,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-git-aarch64-wayland-mali-99ab423.bin
-Version:                     git
+Package:                     libgpuperfcnt-6.4.11.p2.12-arm-fb-e0a132a.bin
+Version:                     6.4.11.p2.12
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -970,8 +970,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-git-arm-fb-99ab423.bin
-Version:                     git
+Package:                     libgpuperfcnt-6.4.11.p2.12-arm-wayland-e0a132a.bin
+Version:                     6.4.11.p2.12
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -982,8 +982,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-git-arm-wayland-99ab423.bin
-Version:                     git
+Package:                     libgpuperfcnt-r50.4-aarch64-wayland-mali-e0a132a.bin
+Version:                     r50.4
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
