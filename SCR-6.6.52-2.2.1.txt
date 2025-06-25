@@ -1426,8 +1426,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx95-m7-demo-24.12.00.bin
-Version:                     24.12.00
+Package:                     imx95-m7-demo-25.06.00.bin
+Version:                     25.06.00
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
