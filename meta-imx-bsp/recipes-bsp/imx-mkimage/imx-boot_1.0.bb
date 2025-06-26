@@ -84,6 +84,9 @@ MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp ?= " \
 MKIMAGE_EXTRA_ARGS:imx95-19x19-verdin ?= " \
     ${MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp} \
     QSPI_HEADER=./scripts/fspi_header_133"
+MKIMAGE_EXTRA_ARGS:imx95-a1-19x19-verdin ?= " \
+    ${MKIMAGE_EXTRA_ARGS:imx95-19x19-verdin} \
+"
 
 UBOOT_DTB_BINARY ?= "u-boot.dtb"
 
