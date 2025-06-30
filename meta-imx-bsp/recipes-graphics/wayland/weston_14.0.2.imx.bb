@@ -169,11 +169,15 @@ S = "${WORKDIR}/git"
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
 
-PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D}"
+PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D} ${PACKAGECONFIG_PIPEWIRE}"
 PACKAGECONFIG_G2D              ??= ""
 PACKAGECONFIG_G2D:imxgpu2d     ??= "imxg2d"
 PACKAGECONFIG_G2D:mx93-nxp-bsp ??= "imxg2d"
 PACKAGECONFIG_G2D:mx943-nxp-bsp ??= "imxg2d"
+
+PACKAGECONFIG_PIPEWIRE             ??= ""
+PACKAGECONFIG_PIPEWIRE:mx8-nxp-bsp ??= "pipewire"
+PACKAGECONFIG_PIPEWIRE:mx9-nxp-bsp ??= "pipewire"
 
 # Weston with i.MX G2D renderer
 PACKAGECONFIG[imxg2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d"
