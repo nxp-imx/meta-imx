@@ -29,7 +29,7 @@ SRCREV = "dfaf2136deb2af2e60b994421281ba42f1c087e0"
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "6.12.20"
+LINUX_VERSION = "6.12.34"
 # FIXME: Drop this line once LINUX_VERSION is stable
 KERNEL_VERSION_SANITY_SKIP = "1"
 
