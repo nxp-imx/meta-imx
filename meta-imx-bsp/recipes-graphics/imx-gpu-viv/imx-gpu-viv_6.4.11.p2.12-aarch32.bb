@@ -4,6 +4,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a93b654673e1bc8398ed1f30e0813359"
 
 IMX_SRCREV_ABBREV = "4402ac2"
 
-SRC_URI[sha256sum] = "f7da1312c00a83d18919e646ecb1d6b391a7876f2fa226d9eb1530acfb6ddd21"
+SRC_URI[sha256sum] = "06617e2569144edbe5dd585be18c6b89bdf2da6ab56e04149c4c076e73f7884d"
 
 COMPATIBLE_MACHINE = "(mx6q-nxp-bsp|mx6dl-nxp-bsp|mx6sx-nxp-bsp|mx6sl-nxp-bsp|mx7ulp-nxp-bsp)"
