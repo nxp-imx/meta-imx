@@ -1,4 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
 # Disable pipewire-v4l2 on 32-bit to avoid Y2038 bug
 PACKAGECONFIG:append = " ${PACKAGECONFIG_PIPEWIRE_V4L2}"
 PACKAGECONFIG_PIPEWIRE_V4L2             = "pipewire-v4l2"
@@ -13,6 +14,7 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0001-systemd-allow-pipewire-user-services-for-root.patch \
     file://0001-pipewiresrc-add-provide-clock-property.patch \
     file://0001-pipewiresrc-fix-sending-last-buffer-failure-if-waiti.patch \
+    file://0001-YOCIMX-9095-pipewiresrc-set-rank-to-secondary.patch \
 "
 SRC_URI:append:mx95-nxp-bsp = " \
     file://0003-pipewiresrc-update-per-plane-stride-and-offset-accor.patch \
