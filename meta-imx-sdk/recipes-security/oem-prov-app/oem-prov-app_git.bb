@@ -10,12 +10,11 @@ DEPENDS = "cyaml smw el2go-agent"
 
 SRC_URI = "${PROVAPP_SRC};branch=${PROVAPP_SRCBRANCH};name=oem-prov-app"
 PROVAPP_SRC ?= "git://github.com/nxp-imx/oem-prov-app.git;protocol=https"
-PROVAPP_SRCBRANCH = "release/version_1.x"
+PROVAPP_SRCBRANCH = "master"
 
 PV = "1.1+git${SRCPV}"
 
-SRCREV = "release_1.1"
-
+SRCREV = "b8dd0bb741569cf1fbb99a62fa4de4c4fa7f2172"
 S = "${WORKDIR}/git"
 
 inherit cmake
@@ -27,7 +26,7 @@ LD[unexport] = "1"
 
 EXTRA_OECMAKE = " \
     -DNXP_SMW_DIR=${STAGING_DIR_HOST}${libdir}/cmake \
-    -DEL2GOAGENT_ROOT=${STAGING_DIR_HOST} \
+    -Del2go_agent_DIR=${STAGING_DIR_HOST}${libdir}/cmake/el2go-agent \
     -DCYAML_ROOT=${STAGING_DIR_HOST} \
     -DVERBOSE=2"
 
