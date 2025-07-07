@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.14.0-4ecaa95
+Package:                     sof-zephyr-2.14.0-ee58c00
 Version:                     2.14.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.2.0-ad4c3e3
+Package:                     zephyr-demo-imx-4.2.0-4852719
 Version:                     4.2.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -1100,7 +1100,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.9.0-9cff013.bin
+Package:                     imx-opencl-converter-0.9.0-5329b39.bin
 Version:                     0.9.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
