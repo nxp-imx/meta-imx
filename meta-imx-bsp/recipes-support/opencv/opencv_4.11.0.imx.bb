@@ -4,7 +4,7 @@
 # recipe for i.MX.
 
 ########## meta-openembedded copy ###########
-# Upstream hash: f8342855a440fa5c4194fc57285e8db9e034fcaa
+# Upstream hash: 12da079155c7b5e764122e96ed672c5e69354fd5
 
 SUMMARY = "Opencv : The Open Computer Vision Library"
 HOMEPAGE = "http://opencv.org/"
@@ -18,27 +18,31 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "72d2d2d005609a38aa80924e7aaf5fd23b6f2c55"
-SRCREV_contrib = "c7602a8f74205e44389bd6a4e8d727d32e7e27b4"
+SRCREV_opencv = "31b0eeea0b44b370fd0712312df4214d4ae1b158"
+SRCREV_contrib = "0e5254ebf54d2aed6e7eaf6660bf3b797cf50a02"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
 SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
+SRCREV_fastcv = "f4413cc2ab7233fdfc383a4cded402c072677fb0"
 
 
-SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
+SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv"
 SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https \
            git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=4.x;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=git/boostdesc;name=boostdesc;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=git/vgg;name=vgg;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=git/face;name=face;protocol=https \
            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=git/wechat_qrcode;name=wechat-qrcode;protocol=https \
+           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250212;destsuffix=git/fastcv;name=fastcv;protocol=https \
            file://0003-To-fix-errors-as-following.patch \
            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
            file://0001-Dont-use-isystem.patch \
            file://download.patch \
            file://0001-Make-ts-module-external.patch \
            file://0008-Do-not-embed-build-directory-in-binaries.patch \
+           file://0001-core-fixed-VSX-intrinsics-implementation.patch \
+           file://0001-FROMLIST-Switch-to-static-instance-of-FastCV-on-Linux.patch \
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
 
@@ -68,6 +72,7 @@ do_unpack_extra() {
     cache data ${S}/face/*.dat
     cache wechat_qrcode ${S}/wechat_qrcode/*.caffemodel
     cache wechat_qrcode ${S}/wechat_qrcode/*.prototxt
+    cache fastcv ${S}/fastcv/fastcv/*.tgz
 }
 addtask unpack_extra after do_unpack before do_patch
 
@@ -128,13 +133,14 @@ PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON,-DBUILD_TESTS=OFF,,"
 PACKAGECONFIG[text] = "-DBUILD_opencv_text=ON,-DBUILD_opencv_text=OFF,tesseract,"
 PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
 PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
+PACKAGECONFIG[fastcv] = "-DWITH_FASTCV=ON ,-DWITH_FASTCV=OFF,,"
 
 inherit pkgconfig cmake setuptools3-base python3native
 
-export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
-export ORACLE_JAVA_HOME="${STAGING_DIR_NATIVE}/usr/bin/java"
-export JAVA_HOME="${STAGING_DIR_NATIVE}/usr/lib/jvm/openjdk-8-native"
-export ANT_DIR="${STAGING_DIR_NATIVE}/usr/share/ant/"
+export PYTHON_CSPEC = "-I${STAGING_INCDIR}/${PYTHON_DIR}"
+export ORACLE_JAVA_HOME = "${STAGING_DIR_NATIVE}/usr/bin/java"
+export JAVA_HOME = "${STAGING_DIR_NATIVE}/usr/lib/jvm/openjdk-8-native"
+export ANT_DIR = "${STAGING_DIR_NATIVE}/usr/share/ant/"
 
 TARGET_CC_ARCH += "-I${S}/include "
 
