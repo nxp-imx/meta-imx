@@ -227,21 +227,24 @@ do_install:append() {
 
 ########## i.MX overrides ##########
 
-SUMMARY = "Opencv : The Open Computer Vision Library, i.MX Fork"
-
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 # i.MX patches
 SRC_URI += " \
-    file://0001-Fix-data01.xml-file-for-example_cpp_logistic_regress.patch \
     file://0101-MGS-6470-ccc-Modify-host-ptr-alignment-size-in-UMAT.patch \
     file://0102-MGS-6470-ccc-Add-configuration-parameter-to-force-en.patch \
     file://0103-MGS-6470-ccc-Change-configuration-to-enable-hostptr-.patch \
     file://0104-MGS-8011-ccc-Fix-the-problem-of-syntax-error-at-doub.patch \
 "
 
-SRCREV_opencv = "31b0eeea0b44b370fd0712312df4214d4ae1b158"
-SRCREV_contrib = "0e5254ebf54d2aed6e7eaf6660bf3b797cf50a02"
+# Drop un-necessary patch for 4.12
+SRC_URI:remove = " \
+    file://0001-core-fixed-VSX-intrinsics-implementation.patch \
+    file://0001-FROMLIST-Switch-to-static-instance-of-FastCV-on-Linux.patch \
+"
+
+SRCREV_opencv = "49486f61fb25722cbcf586b7f4320921d46fb38e"
+SRCREV_contrib = "d943e1d61c8bc556a13783e1546ee7c1a9e0b1cf"
 
 # Add opencv_extra
 SRC_URI += " \
@@ -249,7 +252,7 @@ SRC_URI += " \
     file://0001-Add-smaller-version-of-download_models.py.patch;patchdir=${UNPACKDIR}/extra \
 "
 SRCREV_FORMAT:append = "_extra"
-SRCREV_extra = "a74cf6bae7fd75d91282b877c559168b3a62148a"
+SRCREV_extra = "b6db059e9b80072d80d009d2ab344f8606a8e964"
 
 # Patch DNN example
 SRC_URI += " \
