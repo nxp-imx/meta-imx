@@ -1,0 +1,31 @@
+From aded30538baa37bf430413c5935314896ced3bee Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Wed, 9 Jul 2025 07:26:57 -0700
+Subject: [PATCH] fixup! screenshooter: screen recorder display abnormally with
+ g2d_renderer
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ libweston/screenshooter.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/libweston/screenshooter.c b/libweston/screenshooter.c
+index 69408a57..e21fd478 100644
+--- a/libweston/screenshooter.c
++++ b/libweston/screenshooter.c
+@@ -343,7 +343,11 @@ weston_recorder_frame_notify(struct wl_listener *listener, void *data)
+ 		width = r[i].x2 - r[i].x1;
+ 		height = r[i].y2 - r[i].y1;
+ 
++#if defined(ENABLE_IMXG2D)
+ 		if (do_yflip && compositor->renderer->type != WESTON_RENDERER_G2D)
++#else
++		if (do_yflip)
++#endif
+ 			y_orig = output->current_mode->height - r[i].y2;
+ 		else
+ 			y_orig = r[i].y1;
+-- 
+2.34.1
+
