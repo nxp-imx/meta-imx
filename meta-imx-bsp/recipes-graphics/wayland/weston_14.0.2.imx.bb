@@ -166,8 +166,6 @@ SRCBRANCH = "weston-imx-14.0.2"
 SRCREV = "3089f3ea9da2d6672ad3d2ff3d6b9cc3912e589e"
 S = "${WORKDIR}/git"
 
-SRC_URI += "file://0001-fixup-screenshooter-screen-recorder-display-abnormal.patch"
-
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
 
