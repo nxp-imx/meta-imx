@@ -74,13 +74,8 @@ PACKAGES =+ "${PN}-tests"
 FILES:${PN} += "${nonarch_base_libdir}/optee_armtz/*"
 
 FILES:${PN}-tests = "${bindir}/* ${datadir}/${BPN}/*"
-
-# Work around do_package_qa QA errors
-INSANE_SKIP:${PN}-dbg += "buildpaths"
-INSANE_SKIP:${PN}-dev += "buildpaths"
-INSANE_SKIP:${PN}-tests += "buildpaths"
-
-RDEPENDS:${PN}-tests += "bash cmake"
+RDEPENDS:${PN}-tests = "bash cmake"
+INSANE_SKIP:${PN}-tests = "buildpaths"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
