@@ -1,4 +1,4 @@
-# Copyright 2021-2024 NXP
+# Copyright 2021-2025 NXP
 
 SUMMARY = "NXP i.MX SECURE ENCLAVE library"
 DESCRIPTION = "NXP IMX SECURE ENCLAVE library"
@@ -11,7 +11,7 @@ DEPENDS = " mbedtls openssl"
 SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
 SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
 SRCBRANCH = "lf-6.6.52_2.2.1"
-SRCREV = "2c4dd2a73265d60b83d288a4b3936a773790c139"
+SRCREV = "4f0340fb4cf6b16a64c7d65281b4880c5d1cd453"
 
 S = "${WORKDIR}/git"
 
