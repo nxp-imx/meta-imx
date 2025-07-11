@@ -21,7 +21,13 @@ RDEPENDS_EDGE_LOCK ?= " \
     openssl-provider-se050 \
     plug-and-trust-ecc \
     ${RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE} \
+    ${RDEPENDS_EDGE_LOCK_APPS} \
 "
+
+RDEPENDS_EDGE_LOCK_APPS ?= ""
+RDEPENDS_EDGE_LOCK_APPS:mx8ulp-nxp-bsp = "oem-prov-app"
+RDEPENDS_EDGE_LOCK_APPS:mx91-nxp-bsp   = "oem-prov-app"
+RDEPENDS_EDGE_LOCK_APPS:mx93-nxp-bsp   = "oem-prov-app"
 
 RDEPENDS_CAAM_CRYPTO_APPS ?= "keyctl-caam crypto-af-alg python3-requests"
 RDEPENDS_CAAM_CRYPTO_APPS:mx91-nxp-bsp = ""
