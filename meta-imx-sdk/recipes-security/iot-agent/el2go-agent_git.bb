@@ -33,8 +33,8 @@ EXTRA_OECMAKE = " \
     -DSSS_HAVE_MBEDTLS_ALT_PSA=ON \
     -DSSS_HAVE_HOST_LINUX_LIKE=ON \
     -DCMAKE_SYSROOT=${STAGING_DIR_HOST} \
-    -DMbedTLS_DIR=${STAGING_DIR_HOST}/usr/local/el2go/lib/cmake/MbedTLS \
-    -DNXP_SMW_DIR=${STAGING_DIR_HOST}/usr/lib/cmake"
+    -DMbedTLS_DIR=${STAGING_DIR_HOST}/usr/local/el2go/${baselib}/cmake/MbedTLS \
+    -DNXP_SMW_DIR=${STAGING_LIBDIR}/cmake"
 
 CFLAGS:append = " -DMBEDTLS_SSL_MAX_CONTENT_LEN=4096"
 CFLAGS:append = " -DMBEDTLS_USE_PSA_CRYPTO"
