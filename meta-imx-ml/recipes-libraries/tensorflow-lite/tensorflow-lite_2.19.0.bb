@@ -1,4 +1,4 @@
-# Copyright 2020-2021, 2024 NXP
+# Copyright 2020-2025 NXP
 DESCRIPTION = "TensorFlow Lite C++ Library"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4158a261ca7f2525513e31ba9c50ae98"
