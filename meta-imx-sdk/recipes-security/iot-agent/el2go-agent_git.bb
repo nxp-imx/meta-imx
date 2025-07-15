@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 DEPENDS = "smw el2go-agent-mbedtls"
 
-SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH}"
+SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH} \
+           file://0001-Fix-install-for-multilib.patch"
 
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
 EL2GO_AGENT_SRCBRANCH ?= "release/v6.12.20-2.0.0-yocto"
@@ -40,4 +41,3 @@ CFLAGS:append = " -DMBEDTLS_SSL_MAX_CONTENT_LEN=4096"
 CFLAGS:append = " -DMBEDTLS_USE_PSA_CRYPTO"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
-
