@@ -1630,7 +1630,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     tensorflow-imx.git
-Version:                     2.18.0
+Version:                     2.19.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1643,7 +1643,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-ethosu-delegate.git
-Version:                     2.18.0
+Version:                     2.19.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1657,7 +1657,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-neutron-delegate.git
-Version:                     2.18.0
+Version:                     2.19.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1668,7 +1668,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     tflite-vx-delegate-imx.git
-Version:                     2.18.0
+Version:                     2.19.0
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
