@@ -39,7 +39,7 @@ PV = "4.10.1+git${SRCPV}"
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH}"
 IMXGST_SRC ?= "git://github.com/nxp-imx/imx-gst1.0-plugin.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "b38af0ed3326073396e37f67578d6af51b9244b7"
+SRCREV = "e056e4fe6e73bebd4431149e4869ac9c17800f47"
 
 S = "${WORKDIR}/git"
 
