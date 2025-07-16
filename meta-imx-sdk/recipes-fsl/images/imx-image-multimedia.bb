@@ -19,7 +19,7 @@ IMAGE_FEATURES += " \
     tools-profile \
     tools-sdk \
     package-management \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'splash', d)} \
+    splash \
     nfs-client \
     tools-debug \
     ssh-server-openssh \
