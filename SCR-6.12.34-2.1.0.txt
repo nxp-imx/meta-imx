@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.14.0-97fbd99
+Package:                     sof-zephyr-2.14.0-c743cbc
 Version:                     2.14.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.2.0-e22ca6b
+Package:                     zephyr-demo-imx-4.2.0-f52d71c
 Version:                     4.2.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -475,6 +475,16 @@ Description and comments:    Tools to test EdgeLock Enclave api bridge on the el
 Release Location:            https://github.com/nxp-imx/itest -b lf-6.12.34-2.1.0
 Origin:                      NXP (BSD-3-Clause)
 
+--------------------------------------------
+
+Package:                     oem-prov-app.git
+Version:                     
+Outgoing License:            BSD-3-Clause 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    NXP i.MX EdgeLock 2GO OEM provisioning application
+Release Location:            https://github.com/nxp-imx/oem-prov-app.git -b lf-6.12.34-2.1.0
 --------------------------------------------
 
 Package:                     pkcs11-provider.git
@@ -881,8 +891,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.4.0.0-9e8bbf1.bin
-Version:                     2.4.0.0
+Package:                     imx-dpu-g2d-v1-2.4.0.2-3d4bd33.bin
+Version:                     2.4.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -893,8 +903,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.4.0.0-9e8bbf1.bin
-Version:                     2.4.0.0
+Package:                     imx-dpu-g2d-v2-2.4.0.2-3d4bd33.bin
+Version:                     2.4.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
