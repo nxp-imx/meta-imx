@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.2.0-f52d71c
+Package:                     zephyr-demo-imx-4.2.0-66acb36
 Version:                     4.2.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -707,7 +707,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.4-aarch32-7cde918.bin
+Package:                     imx-gpu-viv-6.4.11.p3.4-aarch32-a76135a.bin
 Version:                     6.4.11.p3.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -726,7 +726,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p3.4-aarch64-7cde918.bin
+Package:                     imx-gpu-viv-6.4.11.p3.4-aarch64-a76135a.bin
 Version:                     6.4.11.p3.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -867,7 +867,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.4-arm-7cde918.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.4-arm-a76135a.bin
 Version:                     6.4.11.p3.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -879,7 +879,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p3.4-aarch64-7cde918.bin
+Package:                     imx-gpu-g2d-6.4.11.p3.4-aarch64-a76135a.bin
 Version:                     6.4.11.p3.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
