@@ -20,6 +20,11 @@ DEPENDS += "xxd-native"
 DEPENDS:append:mx8m-generic-bsp = " u-boot-mkimage-native dtc-native"
 DEPENDS:append:mx93-generic-bsp = " u-boot-mkimage-native dtc-native"
 
+#u-boot-mkeficapsule is a dependency of mkeficapsule
+DEPENDS:append:mx8m-generic-bsp = " u-boot-mkeficapsule-native"
+DEPENDS:append:mx93-generic-bsp = " u-boot-mkeficapsule-native"
+DEPENDS:append:mx95-generic-bsp = " u-boot-mkeficapsule-native"
+
 inherit deploy uuu_bootloader_tag
 
 UUU_BOOTLOADER = "imx-boot"
@@ -253,7 +258,7 @@ do_compile() {
                         ;;
                     *stmm_capsule)
                         # target for flash_evk_stmm_capsule or
-                        # flash_singleboot_stmm_capsule
+                        # flash_singleboot_stmm_capsule or flash_lpboot_sm_all_stmm_capsule
                         cp ${RECIPE_SYSROOT_NATIVE}/${bindir}/mkeficapsule ${BOOT_STAGING}
                         bbnote "building ${IMX_BOOT_SOC_TARGET} - TEE=tee.bin-stmm ${target}"
                         cp ${DEPLOY_DIR_IMAGE}/CRT.* ${BOOT_STAGING}
