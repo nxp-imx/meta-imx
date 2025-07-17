@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.3-ac00da8.bin
+Package:                     firmware-ele-imx-2.0.3-37d53e5.bin
 Version:                     2.0.3
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.14.0-c743cbc
+Package:                     sof-zephyr-2.14.0-be35b0d
 Version:                     2.14.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -1006,7 +1006,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.10.1-bc73865.bin
+Package:                     imx-parser-4.10.1-e68b1f2.bin
 Version:                     4.10.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
