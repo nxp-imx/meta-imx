@@ -14,7 +14,7 @@ PROVAPP_SRCBRANCH = "master"
 
 PV = "1.1+git${SRCPV}"
 
-SRCREV = "b8dd0bb741569cf1fbb99a62fa4de4c4fa7f2172" 
+SRCREV = "e868f5f67d44ff3211c103795a72733fc6b2b441"
 S = "${WORKDIR}/git"
 
 inherit cmake
