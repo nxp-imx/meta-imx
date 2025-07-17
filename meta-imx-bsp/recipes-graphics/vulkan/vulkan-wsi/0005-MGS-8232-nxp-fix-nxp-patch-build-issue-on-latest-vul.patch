@@ -1,0 +1,85 @@
+From 3f3645d21cb4e0b1e4ca2f019f54aa0c57da078a Mon Sep 17 00:00:00 2001
+From: Ryan Zhang <ryan.zhang@nxp.com>
+Date: Thu, 17 Jul 2025 16:31:47 +0800
+Subject: [PATCH 5/5] MGS-8232 [#nxp] fix nxp patch build issue on latest
+ vulkan wsi
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+-Wextra has been add into CMAKE_CXX_FLAGS after commit:5c3d3a9.
+
+Nxp patch will meet below build issue on latest vulkan wsi:
+/vulkan-wsi-layer/wsi/wayland/swapchain.hpp:211:30: error: missing
+initializer for member ‘wsi::wayland::wl_context::wl_compositor’
+[-Werror=missing-field-initializers]
+/vulkan-wsi-layer/wsi/wayland/swapchain.cpp:162:66: error: unused
+parameter ‘serial’ [-Werror=unused-parameter]
+/vulkan-wsi-layer/wsi/wayland/swapchain.cpp:226:1: error: missing
+initializer for member ‘wl_registry_listener::global_remove’
+[-Werror=missing-field-initializers]
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Ryan Zhang <ryan.zhang@nxp.com>
+---
+ wsi/wayland/swapchain.cpp | 9 +++++----
+ wsi/wayland/swapchain.hpp | 2 +-
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/wsi/wayland/swapchain.cpp b/wsi/wayland/swapchain.cpp
+index 72cb1c624..56b4fc4d7 100644
+--- a/wsi/wayland/swapchain.cpp
++++ b/wsi/wayland/swapchain.cpp
+@@ -84,7 +84,7 @@ swapchain::~swapchain()
+       wl_compositor_destroy(wlc.wl_compositor);
+       wl_registry_destroy(wlc.registry);
+       wl_region_destroy(wlc.opaque_region);
+-      wlc = {0};
++      wlc = {};
+    }
+    if (m_buffer_queue != nullptr)
+    {
+@@ -159,7 +159,7 @@ dispatch_queue_op(struct wl_display *wl_dpy,
+ }
+ 
+ static void
+-sync_callback(void *data, struct wl_callback *callback, uint32_t serial)
++sync_callback(void *data, struct wl_callback *callback, uint32_t /*serial*/)
+ {
+    int *done = (int *)data;
+ 
+@@ -210,7 +210,7 @@ roundtrip_queue(struct wl_display *wl_dpy, struct wl_event_queue *wl_queue)
+ 
+ static void
+ registry_handle_global(void *data, struct wl_registry *registry, uint32_t name,
+-                       const char *interface, uint32_t version)
++                       const char * /*interface*/, uint32_t /*version*/)
+ {
+    wl_context *pwlc = (wl_context *)data;
+ 
+@@ -222,7 +222,8 @@ registry_handle_global(void *data, struct wl_registry *registry, uint32_t name,
+ }
+ 
+ static const struct wl_registry_listener registry_listener = {
+-   registry_handle_global
++   registry_handle_global,
++   nullptr
+ };
+ 
+ VkResult swapchain::add_required_extensions(VkDevice device, const VkSwapchainCreateInfoKHR *swapchain_create_info)
+diff --git a/wsi/wayland/swapchain.hpp b/wsi/wayland/swapchain.hpp
+index 5b38502d9..313d69fa5 100644
+--- a/wsi/wayland/swapchain.hpp
++++ b/wsi/wayland/swapchain.hpp
+@@ -208,7 +208,7 @@ private:
+ 
+    struct wl_display *m_display;
+    struct wl_surface *m_surface;
+-   struct wl_context wlc = {0};
++   struct wl_context wlc = {};
+    /** Raw pointer to the WSI Surface that this swapchain was created from. The Vulkan specification ensures that the
+     * surface is valid until swapchain is destroyed. */
+    surface *m_wsi_surface;
+-- 
+2.43.0
+
