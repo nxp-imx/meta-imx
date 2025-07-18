@@ -8,9 +8,9 @@ DEPENDS = "boost libdrm virtual/libg2d libtinyxml2 jsoncpp patchelf-native"
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true \
 "
 
-SRC_URI[sha256sum] = "8fa5094da6438505287f4dcc8033dad3057ab81bf98c858884f7c3a2e521b252"
+SRC_URI[sha256sum] = "df81a216e7657f39a54d0d069eb330a71785de40adf765b73fc14ddb22b698bf"
 
-IMX_SRCREV_ABBREV = "3cac1fb"
+IMX_SRCREV_ABBREV = "ba3fb45"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent cmake systemd use-imx-headers
 
