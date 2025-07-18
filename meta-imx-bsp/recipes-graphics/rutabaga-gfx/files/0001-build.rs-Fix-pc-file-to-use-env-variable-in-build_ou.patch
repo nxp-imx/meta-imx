@@ -1,0 +1,41 @@
+From 71957e35ed70ce14bf77899ea5627caa83665dd0 Mon Sep 17 00:00:00 2001
+From: Zelan Zou <zelan.zou@nxp.com>
+Date: Wed, 23 Jul 2025 18:49:25 +0800
+Subject: [PATCH] build.rs: Fix pc file to use env variable in build_out path
+
+| `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "No such file or directory" }
+
+Upstream-Status: Pending
+Signed-off-by: Zelan Zou <zelan.zou@nxp.com>
+---
+ build.rs | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/build.rs b/build.rs
+index 3a407c711..2bf5d1f08 100644
+--- a/build.rs
++++ b/build.rs
+@@ -32,13 +32,14 @@ Libs: -L${libdir} -lrutabaga_gfx_ffi
+ "###,
+     );
+ 
++   let out_dir = env::var("RUTABAGA_OUT_DIR").unwrap_or(format!(
++           "{}/{}",
++            env::var("CARGO_TARGET_DIR").as_deref().unwrap_or("target"),
++            env::var("PROFILE").unwrap()
++   ));
++   let pc_file = format!("{out_dir}/rutabaga_gfx_ffi.pc");
++   let mut pc_file = File::create(pc_file).unwrap();
+     // Write the .pc file to the output directory
+-    let mut pc_file = File::create(format!(
+-        "{}/{}/rutabaga_gfx_ffi.pc",
+-        env::var("CARGO_TARGET_DIR").as_deref().unwrap_or("target"),
+-        env::var("PROFILE").unwrap()
+-    ))
+-    .unwrap();
+     pc_file.write_all(pc_contents.as_bytes()).unwrap();
+ 
+     println!("cargo:rerun-if-changed=build.rs"); // Rebuild if build.rs changes
+-- 
+2.34.1
+
