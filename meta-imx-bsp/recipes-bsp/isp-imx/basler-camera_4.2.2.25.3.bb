@@ -8,7 +8,7 @@ IMX_SRCREV_ABBREV = "dd86758"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
 
-SRC_URI[sha256sum] = "aa86adeb0c53c3306f7e1c004ffa78ebb7db3e9136c78759e4029b4b5e1b1a64"
+SRC_URI[sha256sum] = "c7ebbf04024b9125e71248f377ffb35adcebe7f439372bca86a70fcd1b1aa41f"
 
 do_compile[noexec] = "1"
 
