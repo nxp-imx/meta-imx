@@ -8,16 +8,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 DEPENDS = "smw el2go-agent-mbedtls"
 
-SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH} \
-           file://0001-Fix-install-for-multilib.patch"
+SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH}"
 
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
-EL2GO_AGENT_SRCBRANCH ?= "release/v6.12.20-2.0.0-yocto"
+EL2GO_AGENT_SRCBRANCH ?= "release/v6.12.34-2.1.0-yocto"
 
-SRCREV = "4cfb154b8e066134753ca97ccf9f044dc70dfb4c"
+SRCREV = "792acc58ddd559aaabc68ffb77498f404fb0d95b"
 S = "${WORKDIR}/git"
 
-PV = "6.3.0+git${SRCPV}"
+PV = "6.4.0+git"
 
 inherit cmake
 
