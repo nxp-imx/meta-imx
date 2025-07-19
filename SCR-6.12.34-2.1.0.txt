@@ -669,7 +669,7 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.25.2-3cac1fb.bin
+Package:                     isp-imx-4.2.2.25.2-N/A.bin
 Version:                     4.2.2.25.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -681,7 +681,7 @@ Origin:                      VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software
 
 --------------------------------------------
 
-Package:                     basler-camera-4.2.2.25.2-dd86758.bin
+Package:                     basler-camera-4.2.2.25.2-N/A.bin
 Version:                     4.2.2.25.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -745,8 +745,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54.2-8070251.bin
-Version:                     r54.2
+Package:                     mali-imx-r54p1.0-a0ee07c.bin
+Version:                     r54p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -975,8 +975,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-r54.2-aarch64-wayland-mali-e0a132a.bin
-Version:                     r54.2
+Package:                     libgpuperfcnt-r54p1.0-aarch64-wayland-mali-e0a132a.bin
+Version:                     r54p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
