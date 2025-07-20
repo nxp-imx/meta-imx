@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.2.0-66acb36
+Package:                     zephyr-demo-imx-4.2.0-366d45f
 Version:                     4.2.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
