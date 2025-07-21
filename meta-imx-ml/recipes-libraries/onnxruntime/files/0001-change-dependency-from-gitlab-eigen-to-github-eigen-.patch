@@ -1,0 +1,32 @@
+From 3d3c00c22053432e177421573ec7af1198685ef7 Mon Sep 17 00:00:00 2001
+From: Prathik Rao <prathik.rao@gmail.com>
+Date: Thu, 29 May 2025 16:09:09 -0700
+Subject: [PATCH] change dependency from gitlab eigen to github eigen-mirror
+ (#24884)
+
+Fix for https://github.com/microsoft/onnxruntime/issues/24861
+
+---------
+
+Upstream-Status: Backport [https://github.com/microsoft/onnxruntime/commit/f57db79743c4d1a3553aa05cf95bcd10966030e6]
+Co-authored-by: Yulong Wang <7679871+fs-eire@users.noreply.github.com>
+---
+ cmake/deps.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/deps.txt b/cmake/deps.txt
+index ba9c2bb73..f2d50c4ef 100644
+--- a/cmake/deps.txt
++++ b/cmake/deps.txt
+@@ -21,7 +21,7 @@ dlpack;https://github.com/dmlc/dlpack/archive/refs/tags/v0.6.zip;4d565dd2e5b3132
+ # it contains changes on top of 3.4.0 which are required to fix build issues.
+ # Until the 3.4.1 release this is the best option we have.
+ # Issue link: https://gitlab.com/libeigen/eigen/-/issues/2744
+-eigen;https://gitlab.com/libeigen/eigen/-/archive/e7248b26a1ed53fa030c5c459f7ea095dfd276ac/eigen-e7248b26a1ed53fa030c5c459f7ea095dfd276ac.zip;be8be39fdbc6e60e94fa7870b280707069b5b81a
++eigen;https://github.com/eigen-mirror/eigen/archive/e7248b26a1ed53fa030c5c459f7ea095dfd276ac/eigen-e7248b26a1ed53fa030c5c459f7ea095dfd276ac.zip;61418a349000ba7744a3ad03cf5071f22ebf860a
+ flatbuffers;https://github.com/google/flatbuffers/archive/refs/tags/v1.12.0.zip;ba0a75fd12dbef8f6557a74e611b7a3d0c5fe7bf
+ fp16;https://github.com/Maratyszcza/FP16/archive/0a92994d729ff76a58f692d3028ca1b64b145d91.zip;b985f6985a05a1c03ff1bb71190f66d8f98a1494
+ fxdiv;https://github.com/Maratyszcza/FXdiv/archive/63058eff77e11aa15bf531df5dd34395ec3017c8.zip;a5658f4036402dbca7cebee32be57fb8149811e1
+-- 
+2.34.1
+

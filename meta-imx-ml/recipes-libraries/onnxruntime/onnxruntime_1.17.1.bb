@@ -10,7 +10,8 @@ DEPENDS = "libpng zlib"
 
 inherit setuptools3
 
-SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
+           file://0001-change-dependency-from-gitlab-eigen-to-github-eigen-.patch"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH = "lf-6.6.52_2.2.0"
 SRCREV = "3616ba2f9cd2b7b882252a95e171f0c0c0f1826f" 
