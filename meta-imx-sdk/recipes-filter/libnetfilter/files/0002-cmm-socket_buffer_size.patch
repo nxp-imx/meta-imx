@@ -1,0 +1,27 @@
+From 7e96edab86ee5e879d5476c12424b169a84193dd Mon Sep 17 00:00:00 2001
+From: Gagandeep Singh <g.singh@nxp.com>
+Date: Wed, 27 Nov 2024 15:12:08 +0530
+Subject: [PATCH 2/4] cmm-socket_buffer_size
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Gagandeep Singh <g.singh@nxp.com>
+---
+ src/main.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/main.c b/src/main.c
+index 4011ad6..0ba2067 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -89,6 +89,8 @@ struct nfct_handle *nfct_open(uint8_t subsys_id, unsigned subscriptions)
+ 	if (!nfnlh)
+ 		return NULL;
+ 
++	nfnl_rcvbufsiz(nfnlh, 10000000);
++
+ 	nfcth = nfct_open_nfnl(nfnlh, subsys_id, subscriptions);
+ 	if (!nfcth)
+ 		nfnl_close(nfnlh);
+-- 
+2.40.1
+

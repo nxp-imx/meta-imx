@@ -1,0 +1,27 @@
+From d137a736a5875b31dfafad407a244a26081306f7 Mon Sep 17 00:00:00 2001
+From: Gagandeep Singh <g.singh@nxp.com>
+Date: Wed, 27 Nov 2024 15:14:03 +0530
+Subject: [PATCH 4/4] cmm-do_not_deprecate_nfct_maxsize
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Gagandeep Singh <g.singh@nxp.com>
+---
+ include/libnetfilter_conntrack/libnetfilter_conntrack.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/libnetfilter_conntrack/libnetfilter_conntrack.h b/include/libnetfilter_conntrack/libnetfilter_conntrack.h
+index bd5b0f4..1422ff7 100644
+--- a/include/libnetfilter_conntrack/libnetfilter_conntrack.h
++++ b/include/libnetfilter_conntrack/libnetfilter_conntrack.h
+@@ -234,7 +234,7 @@ struct nf_conntrack *nfct_clone(const struct nf_conntrack *ct);
+ extern __attribute__((deprecated)) size_t nfct_sizeof(const struct nf_conntrack *ct);
+ 
+ /* maximum object size */
+-extern __attribute__((deprecated)) size_t nfct_maxsize(void);
++extern size_t nfct_maxsize(void);
+ 
+ /* set option */
+ enum {
+-- 
+2.40.1
+
