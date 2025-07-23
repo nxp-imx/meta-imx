@@ -19,9 +19,9 @@ IMX_SRCREV_ABBREV = "3d4bd33"
 IMX_SRC_URI_NAME = "v1"
 SRC_URI[v1.sha256sum] = "2cc7134cda51f6af02a3c2163fd5cd127eb297d7c9c1ef56756be9756d87af65"
 
-IMX_SRCREV_ABBREV:imxmali = "3d4bd33"
+IMX_SRCREV_ABBREV:imxmali = "e2d77b7"
 IMX_SRC_URI_NAME:imxmali = "v2"
-SRC_URI[v2.sha256sum] = "d17aeca2b1b202a05248545b4db84b0ff4e770bbd0dc9b56673815796dbc3a99"
+SRC_URI[v2.sha256sum] = "babca98cba8f310eac684fed7f465865d8ae30f65896eb77c6fcc15ab7d12fc5"
 
 S = "${WORKDIR}/${IMX_BIN_NAME}"
 
