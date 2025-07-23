@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.2.0-1f69b91
+Package:                     zephyr-demo-imx-4.2.0-47b07e5
 Version:                     4.2.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -893,7 +893,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.4.0.2-3d4bd33.bin
+Package:                     imx-dpu-g2d-v1-2.4.0.2-e2d77b7.bin
 Version:                     2.4.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -905,7 +905,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.4.0.2-3d4bd33.bin
+Package:                     imx-dpu-g2d-v2-2.4.0.2-e2d77b7.bin
 Version:                     2.4.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1112,7 +1112,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.9.0-5329b39.bin
+Package:                     imx-opencl-converter-0.9.0-f371f54.bin
 Version:                     0.9.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
