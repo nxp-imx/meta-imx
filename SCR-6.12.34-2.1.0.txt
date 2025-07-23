@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.14.0-be35b0d
+Package:                     sof-zephyr-2.14.0-632dca3
 Version:                     2.14.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.2.0-87917a1
+Package:                     zephyr-demo-imx-4.2.0-1f69b91
 Version:                     4.2.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -485,6 +485,8 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    NXP i.MX EdgeLock 2GO OEM provisioning application
 Release Location:            https://github.com/nxp-imx/oem-prov-app.git -b lf-6.12.34-2.1.0
+Origin:                   NXP (BSD-3-clause)
+
 --------------------------------------------
 
 Package:                     pkcs11-provider.git
@@ -1006,7 +1008,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.10.1-e68b1f2.bin
+Package:                     imx-parser-4.10.1-ac58c04.bin
 Version:                     4.10.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
