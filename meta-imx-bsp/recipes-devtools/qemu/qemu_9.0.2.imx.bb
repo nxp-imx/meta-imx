@@ -29,7 +29,7 @@ COMPATIBLE_HOST:powerpc = "null"
 #----------------------overrides ---------------------
 # audio backend confiure
 PACKAGECONFIG:append = " pipewire aio vhost libusb \
-                         ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'libvhost_user', '', d)} \
+                         ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'libvhost-user', '', d)} \
 "
 CFLAGS += " -Wno-error=implicit-function-declaration -Wno-error=int-conversion"
 
