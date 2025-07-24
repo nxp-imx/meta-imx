@@ -17,8 +17,12 @@ do_compile[depends] += " \
     virtual/bootloader:do_deploy \
     ${@' '.join('%s:do_deploy' % r for r in '${IMX_EXTRA_FIRMWARE}'.split() )} \
     imx-atf:do_deploy \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
-"
+    ${@bb.utils.contains('UBOOT_CONFIG', 'crrm', '${CRRM_DEPLOY_DEPENDS}', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os:do_deploy', '', d)}"
+CRRM_DEPLOY_DEPENDS ?= " \
+    virtual/kernel:do_deploy \
+    ${CRRM_INITRAMFS}:do_build"
+CRRM_INITRAMFS ??= "imx-image-crrm-initramfs"
 
 inherit use-imx-security-controller-firmware uboot-config
 inherit deploy uuu_bootloader_tag
@@ -34,6 +38,7 @@ OEI_ENABLE = "${@bb.utils.contains('DEPENDS', 'imx-oei', 'YES', 'NO', d)}"
 OEI_NAME ?= "oei-${OEI_CORE}-*.bin"
 
 ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
+ATF_MACHINE_NAME:append = "${@bb.utils.contains('UBOOT_CONFIG', 'crrm', '-crrm', '', d)}"
 ATF_MACHINE_NAME:append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
 BOOT_VARIANT ?= ""
@@ -89,6 +94,13 @@ MKIMAGE_EXTRA_ARGS:imx95-a1-19x19-verdin ?= " \
 "
 
 UBOOT_DTB_BINARY ?= "u-boot.dtb"
+
+CRRM_FILES = " \
+    ${KERNEL_IMAGETYPE}.gz \
+    ${KERNEL_IMAGETYPE}_crrm.gz \
+    ${KERNEL_DEVICETREE_BASENAME}.dtb \
+    ${KERNEL_DEVICETREE_BASENAME}-crrm.dtb \
+    ${CRRM_INITRAMFS}-${MACHINE}.cpio.zst.u-boot"
 
 compile_mx8m() {
     bbnote 8MQ/8MM/8MN/8MP boot binary build
@@ -208,6 +220,14 @@ do_compile() {
     # Copy OEI firmware to SoC target folder to mkimage
     if [ "${OEI_ENABLE}" = "YES" ]; then
         cp ${DEPLOY_DIR_IMAGE}/${OEI_NAME} ${BOOT_STAGING}
+    fi
+    # Copy CRRM binaries to SoC target folder to mkimage
+    if [ ${@bb.utils.filter('UBOOT_CONFIG', 'crrm', d)} ]; then
+        for f in ${CRRM_FILES}; do
+            cp ${DEPLOY_DIR_IMAGE}/$f ${BOOT_STAGING}/$f
+        done
+        ln -s ${CRRM_INITRAMFS}-${MACHINE}.cpio.zst.u-boot \
+            ${BOOT_STAGING}/initramfs.cpio.zst.u-boot
     fi
 
     for type in ${UBOOT_CONFIG}; do
@@ -381,6 +401,14 @@ do_deploy() {
     # copy oei to deploy path
     if [ "${OEI_ENABLE}" = "YES" ]; then
         install -m 0644 ${BOOT_STAGING}/${OEI_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
+    fi
+
+    # copy crrm to deploy path
+    if [ ${@bb.utils.filter('UBOOT_CONFIG', 'crrm', d)} ]; then
+        for f in ${CRRM_FILES}; do
+            cp ${DEPLOY_DIR_IMAGE}/$f                        ${DEPLOYDIR}/${BOOT_TOOLS}/$f
+        done
+        ln -s ${CRRM_INITRAMFS}-${MACHINE}.cpio.zst.u-boot   ${DEPLOYDIR}/${BOOT_TOOLS}/initramfs.cpio.zst.u-boot
     fi
 
     # copy makefile (soc.mak) for reference
