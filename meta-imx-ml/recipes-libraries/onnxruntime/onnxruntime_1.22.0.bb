@@ -10,8 +10,7 @@ DEPENDS = "libpng zlib"
 
 inherit setuptools3
 
-SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
-           file://0001-CMakeLists.txt-Fix-python-component-search-failure.patch"
+SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH = "imx_1.22.0"
 SRCREV = "1edb7f8f421b9c3ff5b5f96fac2c7d58744bdc87"
