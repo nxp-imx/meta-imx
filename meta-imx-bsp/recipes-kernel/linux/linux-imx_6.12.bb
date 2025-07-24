@@ -93,4 +93,16 @@ do_merge_delta_config() {
 }
 addtask merge_delta_config before do_kernel_localversion after do_copy_defconfig
 
+do_deploy:append() {
+    if [ ${@bb.utils.filter('UBOOT_CONFIG', 'crrm', d)} ]; then
+        baseName=${KERNEL_IMAGETYPE}-${KERNEL_IMAGE_NAME}
+        gzip -c ${DEPLOYDIR}/$baseName${KERNEL_IMAGE_BIN_EXT} > \
+            ${DEPLOYDIR}/$baseName${KERNEL_IMAGE_BIN_EXT}.gz
+        ln -sf $baseName${KERNEL_IMAGE_BIN_EXT}.gz $deployDir/${KERNEL_IMAGETYPE}.gz
+        # FIXME: For now, the CRRM kernel is just a copy of the regular kernel
+        ln -sf $baseName${KERNEL_IMAGE_BIN_EXT}    $deployDir/${KERNEL_IMAGETYPE}_crrm
+        ln -sf $baseName${KERNEL_IMAGE_BIN_EXT}.gz $deployDir/${KERNEL_IMAGETYPE}_crrm.gz
+    fi
+}
+
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
