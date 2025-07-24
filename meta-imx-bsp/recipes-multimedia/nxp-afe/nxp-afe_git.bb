@@ -1,4 +1,4 @@
-# Copyright 2021 NXP
+# Copyright 2021, 2025 NXP
 
 DESCRIPTION = "NXP Audio Front End (AFE) for incorporating Voice Assistants"
 LICENSE = "BSD-3-Clause"
@@ -17,6 +17,11 @@ SRCREV = "07072bb980e7ad7290a55b3181746d81902db8e7"
 S = "${WORKDIR}/git"
 
 DEPENDS += "alsa-lib"
+
+RDEPENDS:${PN}:mx8mm-nxp-bsp = " nxp-afe-voiceaec"
+RDEPENDS:${PN}:mx8mp-nxp-bsp = " nxp-afe-voiceaec"
+RDEPENDS:${PN}:mx93-nxp-bsp = " nxp-afe-voiceaec"
+RDEPENDS:${PN}:mx95-nxp-bsp = " nxp-afe-voiceaec"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
