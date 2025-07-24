@@ -21,7 +21,7 @@ SRC_URI = " \
         file://0002-libcamera-Add-missing-stdint.h-include-to-dma_buf_al.patch \
 "
 
-SRCREV = "20fa2b0bd69bddb804813aee3e5ba3587768a27e"
+SRCREV = "06ab365292c0b4b709c7238865316cc466067d0a"
 
 PE = "1"
 
@@ -98,7 +98,7 @@ SRC_URI:remove = " \
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "git://github.com/nxp-imx/libcamera.git;protocol=https"
 SRCBRANCH = "imx/next"
-SRCREV = "20fa2b0bd69bddb804813aee3e5ba3587768a27e"
+SRCREV = "06ab365292c0b4b709c7238865316cc466067d0a"
 
 PACKAGECONFIG = "gst pycamera dng"
 
