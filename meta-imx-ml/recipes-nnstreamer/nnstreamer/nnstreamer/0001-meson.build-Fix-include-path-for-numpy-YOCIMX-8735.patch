@@ -1,27 +1,31 @@
-From eb73f8819970cfb01802b332f66c21e39947041f Mon Sep 17 00:00:00 2001
-From: "i.MX Release" <imx.release@nxp.com>
-Date: Thu, 6 Feb 2025 17:26:42 -0600
+From 8a4783a2938b508dacf411742e7c0be41cec0190 Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Wed, 23 Jul 2025 11:57:31 +0000
 Subject: [PATCH] meson.build: Fix include path for numpy [YOCIMX-8735]
 
 On walnascar, a numpy include path change causes a build break:
 
-Check usable header "numpy/arrayobject.h" with dependency python3-embed: NO
-../git/meson.build:574: WARNING: Found python3, but failed to find numpy.
+Check usable header "numpy/arrayobject.h" with dependency python3-embed:
+NO
+../git/meson.build:574: WARNING: Found python3, but failed to find
+numpy.
 ../git/meson.build:575: WARNING: Disable nnstreamer-python3.
-../git/meson.build:581:4: ERROR: Problem encountered: Cannot find python3 with numpy support
+../git/meson.build:581:4: ERROR: Problem encountered: Cannot find
+python3 with numpy support
 ERROR: meson failed
 
 Upstream-Status: Pending
 Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
 ---
  meson.build | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/meson.build b/meson.build
-index 5085c8c9..8e740f09 100644
+index f5015b1c..e3a8f197 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -551,10 +551,10 @@ if not get_option('python3-support').disabled()
+@@ -458,10 +458,10 @@ if not get_option('python3-support').disabled()
  
      python3_inc_args = []
      python3_inc_args += run_command(pg_pkgconfig, ['python3', '--cflags'], check : true).stdout().strip().split()

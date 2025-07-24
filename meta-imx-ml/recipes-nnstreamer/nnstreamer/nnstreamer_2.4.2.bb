@@ -18,12 +18,13 @@ DEPENDS = "\
 	libpng \
 "
 
-SRCREV = "807060954acfdb6cec130559d00eef1af61457cf"
-SRC_URI = "git://github.com/nnstreamer/nnstreamer.git;branch=lts/2.4.0.b;protocol=https \
-           file://0001-PATCH-increase-to-cpp17-version.patch \
+SRCREV = "9cf11e0768892636622480fe1b5fc042b5a224ad"
+SRC_URI = "git://github.com/nnstreamer/nnstreamer.git;branch=prod/tizen-9.0;protocol=https \
            file://0001-AIR-11938-tensor-filter-use-memcpy-ethosu-delegate.patch \
            file://0001-meson.build-Fix-include-path-for-numpy-YOCIMX-8735.patch \
-           "
+           file://0001-rgb888_support_nnstreamer.patch \
+           file://0001-Fix-libnnstreamer_customfilter_passthrough.so-path.patch \
+"
 
 # Use git instead of quilt as patch tool to support patches with binary content
 PATCHTOOL = "git"
@@ -95,12 +96,6 @@ EXTRA_OEMESON += "\
 	-Dinstall-test=true \
 "
 
-# Temporary workaround for https://github.com/nnstreamer/nnstreamer/issues/3964
-# explicitly disable tflite2-custom feature to avoid build breakage
-EXTRA_OEMESON += "\
-	-Dtflite2-custom-support=disabled \
-"
-
 # FIXME: Remove this when the source warnings are fixed
 CFLAGS += "-Wno-error"
 
@@ -137,17 +132,12 @@ RDEPENDS:${PN}-unittest = "gstreamer1.0-plugins-good nnstreamer ssat \
 	${@bb.utils.contains('PACKAGECONFIG', 'tvm','${PN}-tvm', '', d)} \
 "
 
-FILES:${PN} += "\
-	${libdir}/*.so \
-	${libdir}/gstreamer-1.0/*.so \
-	${libdir}/nnstreamer/decoders/* \
-	${sysconfdir}/nnstreamer.ini \
-"
+# The libraries are unversioned
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
 
-FILES:${PN}-dev = "\
-	${includedir}/nnstreamer/* \
-	${libdir}/*.a \
-	${libdir}/pkgconfig/*.pc \
+FILES:${PN} += "\
+	${libdir}/gstreamer-1.0/lib*${SOLIBS} \
 "
 
 FILES:${PN}-flatbuf = "\
@@ -203,10 +193,19 @@ FILES:${PN}-unittest = "\
 	${libdir}/nnstreamer/unittest/* \
 "
 
-INSANE_SKIP:${PN} += "dev-so"
-INSANE_SKIP:${PN}-src += "buildpaths"
-INSANE_SKIP:${PN}-python3 += "dev-so"
-INSANE_SKIP:${PN}-unittest += "buildpaths"
+# Libraries are unversioned, and the main package requires the symlink
+# /usr/lib/libnnstreamer.so -> /usr/lib64/gstreamer-1.0/libnnstreamer.so,
+# so disable QA dev-so
+INSANE_SKIP:${PN} = "dev-so"
+# The python3 package requires the symlink /usr/lib/python3.13/site-packages/nnstreamer_python.so,
+# so disable QA dev-so
+INSANE_SKIP:${PN}-python3 = "dev-so"
+# The unittest package /usr/bin/unittest-nnstreamer/tests/libnnstreamer-edge-custom-test.so is correct,
+# so silence the QA error
+INSANE_SKIP:${PN}-unittest = "libdir"
+# The dbg package requires /usr/bin/unittest-nnstreamer/tests/.debug/libnnstreamer-edge-custom-test.so,
+# so silence the QA error
+INSANE_SKIP:${PN}-dbg = "libdir"
 
 do_install:append() {
     # Fixes: 076a78ea [TVM/test] Add models for more architectures

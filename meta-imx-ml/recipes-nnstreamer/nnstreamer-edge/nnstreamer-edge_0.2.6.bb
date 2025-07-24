@@ -8,8 +8,8 @@ DEPENDS = "\
 "
 
 NNS_EDGE_SRC ?= "git://github.com/nnstreamer/nnstreamer-edge.git;protocol=https"
-SRCBRANCH = "lts/0.2.4.b"
-SRCREV = "2bf50d57f0f8d856ae38cf82b0a0f3746f46a08a"
+SRCBRANCH = "prod/tizen-9.0"
+SRCREV = "e73acb740dce3ecbf8a650f45fab790afb400a95"
 SRC_URI = "${NNS_EDGE_SRC};branch=${SRCBRANCH}"
 
 S = "${WORKDIR}/git"
@@ -19,3 +19,8 @@ inherit cmake pkgconfig
 EXTRA_OECMAKE =  " \
     -DENABLE_TEST=ON \
 "
+
+# The build produces a mix of versioned and unversioned libs, so custom packaging is required
+FILES_SOLIBSDEV:remove = "${libdir}/lib*${SOLIBSDEV}"
+FILES:${PN}     += "${libdir}/libnnstreamer-edge-custom-test${SOLIBSDEV}"
+FILES:${PN}-dev += "${libdir}/libnnstreamer-edge${SOLIBSDEV}"
