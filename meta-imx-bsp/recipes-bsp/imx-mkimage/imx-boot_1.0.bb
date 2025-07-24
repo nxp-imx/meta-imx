@@ -7,31 +7,10 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 SECTION = "BSP"
 
-inherit use-imx-security-controller-firmware uboot-config
-
-DEPENDS += " \
-    u-boot \
-    ${IMX_EXTRA_FIRMWARE} \
-    imx-atf \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os', '', d)} \
-"
-# xxd is a dependency of fspi_packer.sh
 DEPENDS += "xxd-native"
-DEPENDS:append:mx8m-generic-bsp = " u-boot-mkimage-native dtc-native"
-DEPENDS:append:mx93-generic-bsp = " u-boot-mkimage-native dtc-native"
-
-#u-boot-mkeficapsule is a dependency of mkeficapsule
-DEPENDS:append:mx8m-generic-bsp = " u-boot-mkeficapsule-native"
-DEPENDS:append:mx93-generic-bsp = " u-boot-mkeficapsule-native"
+DEPENDS:append:mx8m-generic-bsp = " u-boot-mkimage-native dtc-native u-boot-mkeficapsule-native"
+DEPENDS:append:mx93-generic-bsp = " u-boot-mkimage-native dtc-native u-boot-mkeficapsule-native"
 DEPENDS:append:mx95-generic-bsp = " u-boot-mkeficapsule-native"
-
-inherit deploy uuu_bootloader_tag
-
-UUU_BOOTLOADER = "imx-boot"
-
-# Add CFLAGS with native INCDIR & LIBDIR for imx-mkimage build
-CFLAGS = "-O2 -Wall -std=c99 -I ${STAGING_INCDIR_NATIVE} -L ${STAGING_LIBDIR_NATIVE}"
-
 # This package aggregates output deployed by other packages,
 # so set the appropriate dependencies
 do_compile[depends] += " \
@@ -40,6 +19,14 @@ do_compile[depends] += " \
     imx-atf:do_deploy \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
 "
+
+inherit use-imx-security-controller-firmware uboot-config
+inherit deploy uuu_bootloader_tag
+
+UUU_BOOTLOADER = "imx-boot"
+
+# Add CFLAGS with native INCDIR & LIBDIR for imx-mkimage build
+CFLAGS = "-O2 -Wall -std=c99 -I ${STAGING_INCDIR_NATIVE} -L ${STAGING_LIBDIR_NATIVE}"
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
