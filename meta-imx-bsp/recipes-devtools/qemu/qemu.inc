@@ -298,6 +298,7 @@ S = "${UNPACKDIR}/git"
 # EXTRA_OECONF:remove =  "--disable-download"
 
 PACKAGECONFIG[libvhost-user] = "-Dlibvhost-user:xen=enabled,-Dlibvhost-user:xen=disabled,xen-tools"
+PACKAGECONFIG[rutabaga-gfx] = "--enable-rutabaga-gfx,--disable-rutabaga-gfx,rutabaga-gfx-ffi"
 
 do_configure:prepend() {
     cp ${S}/subprojects/packagefiles/berkeley-softfloat-3/* ${S}/subprojects/berkeley-softfloat-3/

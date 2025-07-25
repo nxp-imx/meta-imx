@@ -28,7 +28,7 @@ COMPATIBLE_HOST:powerpc = "null"
 
 #----------------------overrides ---------------------
 # audio backend confiure
-PACKAGECONFIG:append = " pipewire aio vhost libusb \
+PACKAGECONFIG:append = " pipewire aio vhost libusb rutabaga-gfx \
                          ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'libvhost-user', '', d)} \
 "
 CFLAGS += " -Wno-error=implicit-function-declaration -Wno-error=int-conversion"
