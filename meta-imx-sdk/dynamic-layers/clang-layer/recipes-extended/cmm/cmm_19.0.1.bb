@@ -1,3 +1,5 @@
+# Copyright 2025 NXP
+
 DESCRIPTION = "Connection Montitoring Manager for offloading kernel and register entity info "
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=94fa01670a2a8f2d3ab2de15004e0848"
