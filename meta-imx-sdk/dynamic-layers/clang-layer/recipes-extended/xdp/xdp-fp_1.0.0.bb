@@ -21,4 +21,4 @@ do_install() {
 FILES:${PN} = "/opt"
 INSANE_SKIP:${PN} = "buildpaths"
 
-COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx943-nxp-bsp|mx95-nxp-bsp)"
