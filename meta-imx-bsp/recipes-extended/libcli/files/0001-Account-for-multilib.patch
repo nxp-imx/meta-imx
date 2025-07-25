@@ -1,0 +1,45 @@
+From 8015a49cec3b73a90404a6b63f7f744f8145ead4 Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Thu, 24 Jul 2025 12:39:02 -0700
+Subject: [PATCH] Account for multilib
+
+Upstream-Status: Pending
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ Makefile | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 9da8244..3b91934 100644
+--- a/Makefile
++++ b/Makefile
+@@ -8,6 +8,7 @@ TESTS ?= 1
+ UNAME = $(shell sh -c 'uname -s 2>/dev/null || echo not')
+ DESTDIR =
+ PREFIX ?= /usr/local
++BASELIB ?= lib
+ 
+ MAJOR = 1
+ MINOR = 9
+@@ -64,14 +65,14 @@ clean:
+ 	rm -f *.o $(LIB)* $(LIB_STATIC) clitest libcli-$(MAJOR).$(MINOR).$(REVISION).tar.gz
+ 
+ install: $(TARGET_LIBS)
+-	install -d $(DESTDIR)$(PREFIX)/include $(DESTDIR)$(PREFIX)/lib
++	install -d $(DESTDIR)$(PREFIX)/include $(DESTDIR)$(PREFIX)/$(BASELIB)
+ 	install -m 0644 libcli.h $(DESTDIR)$(PREFIX)/include
+   ifeq (1,$(STATIC_LIB))
+-	install -m 0644 $(LIB_STATIC) $(DESTDIR)$(PREFIX)/lib
++	install -m 0644 $(LIB_STATIC) $(DESTDIR)$(PREFIX)/$(BASELIB)
+   endif
+   ifeq (1,$(DYNAMIC_LIB))
+-	install -m 0755 $(LIB).$(MAJOR).$(MINOR).$(REVISION) $(DESTDIR)$(PREFIX)/lib
+-	cd $(DESTDIR)$(PREFIX)/lib && \
++	install -m 0755 $(LIB).$(MAJOR).$(MINOR).$(REVISION) $(DESTDIR)$(PREFIX)/$(BASELIB)
++	cd $(DESTDIR)$(PREFIX)/$(BASELIB) && \
+ 	    ln -fs $(LIB).$(MAJOR).$(MINOR).$(REVISION) $(LIB).$(MAJOR).$(MINOR) && \
+ 	    ln -fs $(LIB).$(MAJOR).$(MINOR) $(LIB)
+   endif
+-- 
+2.34.1
+
