@@ -591,6 +591,16 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
+Package:                     cmm.git
+Version:                     19.0.1
+Outgoing License:            GPL-2.0 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    Connection Montitoring Manager for offloading kernel and register entity info
+Release Location:            https://github.com/nxp-imx/fpr-cmm -b lf-6.12.34-2.1.0
+--------------------------------------------
+
 Package:                     dpdk.git
 Version:                     22.11
 Outgoing License:            BSD-3-Clause 
@@ -709,7 +719,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.0-aarch32-56f4699.bin
+Package:                     imx-gpu-viv-6.4.11.p4.0-aarch32-12b25e9.bin
 Version:                     6.4.11.p4.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -728,7 +738,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.0-aarch64-a76135a.bin
+Package:                     imx-gpu-viv-6.4.11.p4.0-aarch64-12b25e9.bin
 Version:                     6.4.11.p4.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -747,7 +757,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.0-a0ee07c.bin
+Package:                     mali-imx-r54p1.0-b6352d2.bin
 Version:                     r54p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -869,7 +879,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.0-arm-a76135a.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.0-arm-12b25e9.bin
 Version:                     6.4.11.p4.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -881,7 +891,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.0-aarch64-a76135a.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.0-aarch64-12b25e9.bin
 Version:                     6.4.11.p4.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1255,6 +1265,8 @@ Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP voice library base on tensorflow lite which is used by audio-front-end
 Release Location:            https://github.com/nxp-imx/imx-voice-tflite -b lf-6.12.34-2.1.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 
 Package:                     nxp-ssrc-2.2.3-5865e8f.bin
@@ -1286,7 +1298,7 @@ Origin:                      NXP (Proprietary)
 --------------------------------------------
 
 Package:                     libcamera.git
-Version:                     0.5.0.imx
+Version:                     0.5.1.imx
 Outgoing License:            LGPL-2.1-or-later 
 License File:                LICENSES/LGPL-2.1-or-later.txt
 Package Category:            Multimedia
@@ -1300,7 +1312,7 @@ Origin:                      NXP (LGPL-2.1-or-later)
 --------------------------------------------
 
 Package:                     neo-ipa-uguzzi.git
-Version:                     0.2.1
+Version:                     0.2.3
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSES/LA_OPT_NXP_Software_License.txt
 Package Category:            Multimedia
