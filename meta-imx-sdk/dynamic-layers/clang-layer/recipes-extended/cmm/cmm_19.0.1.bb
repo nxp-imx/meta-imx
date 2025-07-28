@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=94fa01670a2a8f2d3ab2de15004e0848"
 
 DEPENDS = "libnfnetlink libnetfilter-conntrack libxcrypt elfutils libbpf zlib libcli"
 
-SRC_URI = "${DPDK_CMM_SRC};branch=${SRCBRANCH} \
-           file://0001-cmm-support-for-multilib.patch"
+SRC_URI = "${DPDK_CMM_SRC};branch=${SRCBRANCH}"
 DPDK_CMM_SRC ?= "git://github.com/nxp-imx/fpr-cmm;protocol=https"
 
 SRCBRANCH = "xdp_cmm19_01"
-SRCREV = "02dea2496142be0f6ab28721e1847fa653b75a9e"
+SRCREV = "15da2d64aa29951550e85ba460227febbc432afe"
 
 inherit autotools pkgconfig
 
