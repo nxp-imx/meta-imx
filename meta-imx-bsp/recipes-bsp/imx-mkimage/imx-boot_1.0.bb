@@ -34,7 +34,9 @@ CFLAGS = "-O2 -Wall -std=c99 -I ${STAGING_INCDIR_NATIVE} -L ${STAGING_LIBDIR_NAT
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
-OEI_ENABLE = "${@bb.utils.contains('DEPENDS', 'imx-oei', 'YES', 'NO', d)}"
+OEI_ENABLE ?= "NO"
+OEI_ENABLE:mx95-nxp-bsp = "YES"
+OEI_ENABLE:mx943-nxp-bsp = "YES"
 OEI_NAME ?= "oei-${OEI_CORE}-*.bin"
 
 ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
