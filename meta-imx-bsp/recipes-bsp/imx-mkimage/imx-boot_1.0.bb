@@ -269,9 +269,9 @@ do_compile() {
                         # target for flash_evk_stmm_capsule or
                         # flash_singleboot_stmm_capsule or flash_lpboot_sm_all_stmm_capsule
                         cp ${RECIPE_SYSROOT_NATIVE}/${bindir}/mkeficapsule ${BOOT_STAGING}
-                        bbnote "building ${IMX_BOOT_SOC_TARGET} - TEE=tee.bin-stmm ${target}"
+                        bbnote "building ${IMX_BOOT_SOC_TARGET} - TEE=tee.bin-stmm ${MKIMAGE_EXTRA_ARGS} ${target}"
                         cp ${DEPLOY_DIR_IMAGE}/CRT.* ${BOOT_STAGING}
-                        make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm dtbs=${UBOOT_DTB_NAME} ${REV_OPTION} ${target}
+                        make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm ${MKIMAGE_EXTRA_ARGS} dtbs=${UBOOT_DTB_NAME} ${REV_OPTION} ${target}
                         ;;
                     *)
                         bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} ${target}"
