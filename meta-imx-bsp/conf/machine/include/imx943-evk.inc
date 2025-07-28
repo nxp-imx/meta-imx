@@ -4,7 +4,7 @@ require conf/machine/include/imx-base.inc
 require conf/machine/include/arm/armv8-2a/tune-cortexa55.inc
 
 MACHINE_FEATURES += "pci wifi bluetooth"
-MACHINE_FEATURES:append:use-nxp-bsp = " crrm optee dpdk nxpiw612-sdio nxp9098-pcie nxpaw693-pcie jailhouse"
+MACHINE_FEATURES:append:use-nxp-bsp = " crrm optee dpdk nxpiw612-sdio nxp9098-pcie nxpaw693-pcie jailhouse rvgpu-emu"
 
 KERNEL_DEVICETREE_BASENAME = "imx943-evk"
 KERNEL_DEVICETREE = " \
