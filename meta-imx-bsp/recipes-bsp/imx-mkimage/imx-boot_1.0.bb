@@ -34,9 +34,6 @@ CFLAGS = "-O2 -Wall -std=c99 -I ${STAGING_INCDIR_NATIVE} -L ${STAGING_LIBDIR_NAT
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
-OEI_ENABLE ?= "NO"
-OEI_ENABLE:mx95-nxp-bsp = "YES"
-OEI_ENABLE:mx943-nxp-bsp = "YES"
 OEI_NAME ?= "oei-${OEI_CORE}-*.bin"
 
 ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
@@ -79,12 +76,12 @@ REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
 
 MKIMAGE_EXTRA_ARGS ?= ""
 MKIMAGE_EXTRA_ARGS:mx943-nxp-bsp ?= " \
-    OEI=${OEI_ENABLE} \
+    OEI=YES \
     LPDDR_TYPE=${DDR_TYPE} \
     MSEL=${MSEL_TYPE} \
 "
 MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp ?= " \
-    OEI=${OEI_ENABLE} \
+    OEI=YES \
     LPDDR_TYPE=${DDR_TYPE} \
     ${@'LPDDR_FW_VERSION='+d.getVar('LPDDR_FW_VERSION') if d.getVar('LPDDR_FW_VERSION') else ''} \
     ${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95alt', 'MSEL=1', '', d)}"
@@ -197,6 +194,7 @@ compile_mx943() {
     bbnote i.MX 943 boot binary build
     compile_mx93
 
+    cp ${DEPLOY_DIR_IMAGE}/${OEI_NAME} ${BOOT_STAGING}
     cp ${DEPLOY_DIR_IMAGE}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin \
        ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin
 }
@@ -205,6 +203,7 @@ compile_mx95() {
     bbnote i.MX 95 boot binary build
     compile_mx93
 
+    cp ${DEPLOY_DIR_IMAGE}/${OEI_NAME} ${BOOT_STAGING}
     cp ${DEPLOY_DIR_IMAGE}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin \
        ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin
 }
@@ -218,10 +217,6 @@ do_compile() {
             # Copy tee.bin to tee.bin-stmm
             cp ${DEPLOY_DIR_IMAGE}/tee.bin ${BOOT_STAGING}/tee.bin-stmm
         fi
-    fi
-    # Copy OEI firmware to SoC target folder to mkimage
-    if [ "${OEI_ENABLE}" = "YES" ]; then
-        cp ${DEPLOY_DIR_IMAGE}/${OEI_NAME} ${BOOT_STAGING}
     fi
     # Copy CRRM binaries to SoC target folder to mkimage
     if [ ${@bb.utils.filter('UBOOT_CONFIG', 'crrm', d)} ]; then
@@ -382,12 +377,14 @@ deploy_mx93() {
 
 deploy_mx943() {
     deploy_mx93
+    install -m 0644 ${BOOT_STAGING}/${OEI_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0644 ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin \
                 ${DEPLOYDIR}/${BOOT_TOOLS}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin
 }
 
 deploy_mx95() {
     deploy_mx93
+    install -m 0644 ${BOOT_STAGING}/${OEI_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0644 ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin \
                 ${DEPLOYDIR}/${BOOT_TOOLS}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin
 }
@@ -398,11 +395,6 @@ do_deploy() {
     # copy tee.bin to deploy path
     if ${DEPLOY_OPTEE}; then
        install -m 0644 ${DEPLOY_DIR_IMAGE}/tee.bin ${DEPLOYDIR}/${BOOT_TOOLS}
-    fi
-
-    # copy oei to deploy path
-    if [ "${OEI_ENABLE}" = "YES" ]; then
-        install -m 0644 ${BOOT_STAGING}/${OEI_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
     fi
 
     # copy crrm to deploy path
