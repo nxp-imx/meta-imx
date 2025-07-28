@@ -1,0 +1,390 @@
+From a64d081ddffaacf7f9885b192f8c5d0f027dfb31 Mon Sep 17 00:00:00 2001
+From: Eric Guo <eric.guo@nxp.com>
+Date: Wed, 23 Apr 2025 14:45:24 +0800
+Subject: [PATCH 3/3] * Enable rvgpu vertex shader * Only check environment
+ variable MESA_SW once * Fix assert issue while run glcts with MESA_SW=1
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: Eric Guo <eric.guo@nxp.com>
+---
+ src/gallium/auxiliary/cso_cache/cso_context.c | 23 ++++++++++++++
+ src/gallium/auxiliary/draw/draw_vs.h          |  4 +++
+ src/gallium/auxiliary/draw/draw_vs_exec.c     | 30 ++++++++++++++-----
+ src/gallium/auxiliary/tgsi/tgsi_exec.c        | 10 +------
+ src/gallium/auxiliary/tgsi/tgsi_exec.h        |  2 +-
+ .../auxiliary/tgsi/tgsi_info_opcodes.h        | 15 +++++++++-
+ src/gallium/drivers/softpipe/sp_clear.c       | 20 ++++++-------
+ src/gallium/drivers/softpipe/sp_context.c     |  1 +
+ src/gallium/drivers/softpipe/sp_prim_vbuf.c   | 11 ++-----
+ .../drivers/softpipe/sp_state_derived.c       | 12 ++++++++
+ .../drivers/softpipe/sp_state_shader.c        |  4 ++-
+ .../drivers/softpipe/sp_state_surface.c       |  4 +++
+ src/gallium/include/pipe/p_shader_tokens.h    |  9 ++++--
+ 13 files changed, 105 insertions(+), 40 deletions(-)
+
+diff --git a/src/gallium/auxiliary/cso_cache/cso_context.c b/src/gallium/auxiliary/cso_cache/cso_context.c
+index fd24be07d2d..d897d5d6137 100644
+--- a/src/gallium/auxiliary/cso_cache/cso_context.c
++++ b/src/gallium/auxiliary/cso_cache/cso_context.c
+@@ -789,10 +789,33 @@ cso_set_framebuffer(struct cso_context *cso,
+ {
+    struct cso_context_priv *ctx = (struct cso_context_priv *)cso;
+ 
++#ifdef RVGPU
++   char* mesaSwEnv = NULL;
++   static bool firsttime = true;
++   static bool mesaSW;
++
++   if (firsttime) {
++      mesaSwEnv = getenv("MESA_SW");
++      if (mesaSwEnv != NULL && strcmp(mesaSwEnv, "0")) {
++         mesaSW = true;
++      } else {
++         mesaSW = false;
++      }
++      firsttime = false;
++   }
++#endif
++
+    if (memcmp(&ctx->fb, fb, sizeof(*fb)) != 0) {
+       util_copy_framebuffer_state(&ctx->fb, fb);
+       ctx->base.pipe->set_framebuffer_state(ctx->base.pipe, fb);
+    }
++#ifdef RVGPU
++   else {
++      if(!mesaSW) {
++         ctx->base.pipe->set_framebuffer_state(ctx->base.pipe, NULL);
++      }
++   }
++#endif
+ }
+ 
+ 
+diff --git a/src/gallium/auxiliary/draw/draw_vs.h b/src/gallium/auxiliary/draw/draw_vs.h
+index 3a704803d1a..eaeddb81836 100644
+--- a/src/gallium/auxiliary/draw/draw_vs.h
++++ b/src/gallium/auxiliary/draw/draw_vs.h
+@@ -140,6 +140,10 @@ struct draw_vertex_shader {
+    void (*delete)(struct draw_vertex_shader *);
+ };
+ 
++struct exec_vertex_shader {
++   struct draw_vertex_shader base;
++   struct tgsi_exec_machine *machine;
++};
+ 
+ struct draw_vs_variant *
+ draw_vs_lookup_variant(struct draw_vertex_shader *base,
+diff --git a/src/gallium/auxiliary/draw/draw_vs_exec.c b/src/gallium/auxiliary/draw/draw_vs_exec.c
+index b56283cde0b..0b1a2d95478 100644
+--- a/src/gallium/auxiliary/draw/draw_vs_exec.c
++++ b/src/gallium/auxiliary/draw/draw_vs_exec.c
+@@ -45,13 +45,9 @@
+ #include "tgsi/tgsi_parse.h"
+ #include "tgsi/tgsi_scan.h"
+ #include "tgsi/tgsi_exec.h"
+-
+-
+-struct exec_vertex_shader {
+-   struct draw_vertex_shader base;
+-   struct tgsi_exec_machine *machine;
+-};
+-
++#ifdef RVGPU
++#include "fw_mesa_adaptor.h"
++#endif
+ 
+ static struct exec_vertex_shader *
+ exec_vertex_shader(struct draw_vertex_shader *vs)
+@@ -104,6 +100,26 @@ vs_exec_run_linear(struct draw_vertex_shader *shader,
+    unsigned slot;
+    bool clamp_vertex_color = shader->draw->rasterizer->clamp_vertex_color;
+ 
++#ifdef RVGPU
++   char* mesaSwEnv = NULL;
++   static bool firsttime = true;
++   static bool mesaSW;
++
++   if (firsttime) {
++      mesaSwEnv = getenv("MESA_SW");
++      if (mesaSwEnv != NULL && strcmp(mesaSwEnv, "0")) {
++         mesaSW = true;
++      } else {
++         mesaSW = false;
++      }
++      firsttime = false;
++   }
++   if (!mesaSW) {
++      AdptSetupVertex(machine, input, output, count, shader->info.num_inputs, shader->info.num_outputs, input_stride, output_stride);
++      return;
++   }
++#endif
++
+    assert(!shader->draw->llvm);
+    tgsi_exec_set_constant_buffers(machine, PIPE_MAX_CONSTANT_BUFFERS,
+                                   (const struct tgsi_exec_consts_info *)constants);
+diff --git a/src/gallium/auxiliary/tgsi/tgsi_exec.c b/src/gallium/auxiliary/tgsi/tgsi_exec.c
+index ff54b8c3f80..417d9b371ae 100644
+--- a/src/gallium/auxiliary/tgsi/tgsi_exec.c
++++ b/src/gallium/auxiliary/tgsi/tgsi_exec.c
+@@ -63,9 +63,6 @@
+ #include "util/u_memory.h"
+ #include "util/u_math.h"
+ #include "util/rounding.h"
+-#ifdef RVGPU
+-#include "fw_mesa_adaptor.h"
+-#endif
+ 
+ 
+ #define DEBUG_EXECUTION 0
+@@ -1207,12 +1204,6 @@ tgsi_exec_machine_bind_shader(
+    FREE(mach->Instructions);
+    mach->Instructions = instructions;
+    mach->NumInstructions = numInstructions;
+-
+-#ifdef RVGPU
+-   if (!mach->mesa_sw_flag) {
+-      AdpBindTgsiShader(mach);
+-   }
+-#endif
+ }
+ 
+ 
+@@ -1239,6 +1230,7 @@ tgsi_exec_machine_create(enum pipe_shader_type shader_type)
+       } else {
+          mesaSW = false;
+       }
++      firsttime = false;
+    }
+    mach->mesa_sw_flag = mesaSW;
+ #endif
+diff --git a/src/gallium/auxiliary/tgsi/tgsi_exec.h b/src/gallium/auxiliary/tgsi/tgsi_exec.h
+index 491a99ae471..623f7257a67 100644
+--- a/src/gallium/auxiliary/tgsi/tgsi_exec.h
++++ b/src/gallium/auxiliary/tgsi/tgsi_exec.h
+@@ -294,7 +294,7 @@ struct rvgpu_tgsi_mach_padding {
+    uint regnum[TGSI_FILE_COUNT];
+    const uint8_t *output_semantic_name;
+    const uint8_t *output_semantic_index;
+-   uint* output_semantic_buf[PIPE_MAX_SHADER_OUTPUTS];
++   bool clamp_vertex_color;
+ 
+    int reserved[512];
+ };
+diff --git a/src/gallium/auxiliary/tgsi/tgsi_info_opcodes.h b/src/gallium/auxiliary/tgsi/tgsi_info_opcodes.h
+index 4b3b8811006..bc6f5ea475f 100644
+--- a/src/gallium/auxiliary/tgsi/tgsi_info_opcodes.h
++++ b/src/gallium/auxiliary/tgsi/tgsi_info_opcodes.h
+@@ -65,7 +65,11 @@ OPCODE(0, 0, NONE, CAL, .is_branch = 1)
+ OPCODE(0, 0, NONE, RET)
+ OPCODE(1, 1, COMP, SSG)
+ OPCODE(1, 3, COMP, CMP)
++#ifdef RVGPU
++OPCODE(0, 0, NONE, START)
++#else
+ OPCODE_GAP(67) /* removed */
++#endif
+ OPCODE(1, 2, OTHR, TXB, .is_tex = 1)
+ OPCODE(1, 1, OTHR, FBFETCH)
+ OPCODE(1, 2, COMP, DIV)
+@@ -79,8 +83,13 @@ OPCODE(0, 0, NONE, ELSE, .is_branch = 1, .pre_dedent = 1, .post_indent = 1)
+ OPCODE(0, 0, NONE, ENDIF, .pre_dedent = 1)
+ OPCODE(1, 1, COMP, DDX_FINE)
+ OPCODE(1, 1, COMP, DDY_FINE)
++#ifdef RVGPU
++OPCODE(1, 0, COMP, LOAD_DEPTH)
++OPCODE(1, 0, COMP, STORE_DEPTH)
++#else
+ OPCODE_GAP(81) /* removed */
+ OPCODE_GAP(82) /* removed */
++#endif
+ OPCODE(1, 1, COMP, CEIL)
+ OPCODE(1, 1, COMP, I2F)
+ OPCODE(1, 1, COMP, NOT)
+@@ -91,7 +100,11 @@ OPCODE(1, 2, COMP, AND)
+ OPCODE(1, 2, COMP, OR)
+ OPCODE(1, 2, COMP, MOD)
+ OPCODE(1, 2, COMP, XOR)
++#ifdef RVGPU
++OPCODE(1, 1, COMP, ZONLY_TEST)
++#else
+ OPCODE_GAP(93) /* removed */
++#endif
+ OPCODE(1, 2, OTHR, TXF, .is_tex = 1)
+ OPCODE(1, 2, OTHR, TXQ, .is_tex = 1)
+ OPCODE(0, 0, NONE, CONT)
+@@ -253,5 +266,5 @@ OPCODE(1, 3, OTHR, LOD)
+ OPCODE(1, 3, OTHR, ATOMINC_WRAP, .is_store = 1)
+ OPCODE(1, 3, OTHR, ATOMDEC_WRAP, .is_store = 1)
+ #ifdef RVGPU
+-OPCODE_GAP(252) /* TGSI_OPCODE_DUMP */
++OPCODE(0, 0, NONE, DUMP)
+ #endif
+\ No newline at end of file
+diff --git a/src/gallium/drivers/softpipe/sp_clear.c b/src/gallium/drivers/softpipe/sp_clear.c
+index e550941aabd..76513d8e7f9 100644
+--- a/src/gallium/drivers/softpipe/sp_clear.c
++++ b/src/gallium/drivers/softpipe/sp_clear.c
+@@ -87,18 +87,16 @@ softpipe_clear(struct pipe_context *pipe, unsigned buffers,
+ #ifdef RVGPU
+    bool clearZs = false;
+    if (zs_buffers &&
+-       util_format_is_depth_and_stencil(zsbuf->texture->format) &&
+-       zs_buffers != PIPE_CLEAR_DEPTHSTENCIL) {
+-      assert(softpipe->mesa_rendered == false);
++      util_format_is_depth_and_stencil(zsbuf->texture->format) &&
++      zs_buffers != PIPE_CLEAR_DEPTHSTENCIL) {
+       if (softpipe->mesa_sw_flag) {
+-          /* Clearing only depth or stencil in a combined depth-stencil buffer. */
+-          util_clear_depth_stencil(pipe, zsbuf, zs_buffers, depth, stencil,
+-                               0, 0, zsbuf->width, zsbuf->height);
+-      }
+-      else
+-      {
+-          AdpFlushTile(softpipe);
+-          clearZs = true;
++         /* Clearing only depth or stencil in a combined depth-stencil buffer. */
++         util_clear_depth_stencil(pipe, zsbuf, zs_buffers, depth, stencil,
++                                  0, 0, zsbuf->width, zsbuf->height);
++      } else {
++         assert(softpipe->mesa_rendered == false);
++         AdpFlushTile(softpipe);
++         clearZs = true;
+       }
+    }
+    else if (zs_buffers) {
+diff --git a/src/gallium/drivers/softpipe/sp_context.c b/src/gallium/drivers/softpipe/sp_context.c
+index 058d915551a..0595fc233c9 100644
+--- a/src/gallium/drivers/softpipe/sp_context.c
++++ b/src/gallium/drivers/softpipe/sp_context.c
+@@ -201,6 +201,7 @@ softpipe_create_context(struct pipe_screen *screen,
+       } else {
+          mesaSW = false;
+       }
++      firsttime = false;
+    }
+    softpipe->mesa_sw_flag = mesaSW;
+ #endif
+diff --git a/src/gallium/drivers/softpipe/sp_prim_vbuf.c b/src/gallium/drivers/softpipe/sp_prim_vbuf.c
+index 3cff3be53f1..ec480608b82 100644
+--- a/src/gallium/drivers/softpipe/sp_prim_vbuf.c
++++ b/src/gallium/drivers/softpipe/sp_prim_vbuf.c
+@@ -177,11 +177,8 @@ sp_vbuf_draw_elements(struct vbuf_render *vbr, const uint16_t *indices, uint nr)
+        cvbr->prim == MESA_PRIM_TRIANGLE_FAN)
+       )
+    {
+-      void *ibuf = malloc(nr * sizeof(uint16_t));
+-      void *vbuf = malloc(cvbr->vertex_buffer_size);
+-      memcpy(ibuf, indices, nr * sizeof(uint16_t));
+-      memcpy(vbuf, vertex_buffer, cvbr->vertex_buffer_size);
+-      AdptSetupDraw(setup, cvbr->prim, vbuf, ibuf, nr, stride, flatshade_first);
++      int size = cvbr->vertex_buffer_size;
++      AdptSetupDraw(setup, cvbr->prim, vertex_buffer, size, indices, nr, stride, flatshade_first);
+       return;
+    }
+    softpipe->mesa_rendered = true;
+@@ -392,9 +389,7 @@ sp_vbuf_draw_arrays(struct vbuf_render *vbr, uint start, uint nr)
+       )
+    {
+       int size = cvbr->vertex_buffer_size-((long)vertex_buffer-(long)cvbr->vertex_buffer);
+-      void *vbuf = malloc(size);
+-      memcpy(vbuf, vertex_buffer, size);
+-      AdptSetupDraw(setup, cvbr->prim, vbuf, NULL, nr, stride, flatshade_first);
++      AdptSetupDraw(setup, cvbr->prim, vertex_buffer, size, NULL, nr, stride, flatshade_first);
+       return;
+    }
+    softpipe->mesa_rendered = true;
+diff --git a/src/gallium/drivers/softpipe/sp_state_derived.c b/src/gallium/drivers/softpipe/sp_state_derived.c
+index 175f5a17435..6a4183604b1 100644
+--- a/src/gallium/drivers/softpipe/sp_state_derived.c
++++ b/src/gallium/drivers/softpipe/sp_state_derived.c
+@@ -31,6 +31,7 @@
+ #include "pipe/p_shader_tokens.h"
+ #include "draw/draw_context.h"
+ #include "draw/draw_vertex.h"
++#include "draw/draw_vs.h"
+ #include "sp_context.h"
+ #include "sp_screen.h"
+ #include "sp_state.h"
+@@ -408,9 +409,20 @@ softpipe_update_derived(struct softpipe_context *softpipe, unsigned prim)
+                           SP_NEW_TEXTURE |
+                           SP_NEW_FS | 
+                           SP_NEW_VS)) {
++      struct exec_vertex_shader *vs = (struct exec_vertex_shader *)softpipe->vs->draw_data;
+       update_tgsi_samplers( softpipe );
+ #ifdef RVGPU
+       if(!softpipe->mesa_sw_flag) {
++         struct exec_vertex_shader *vs = (struct exec_vertex_shader *)softpipe->vs->draw_data;
++         memcpy(vs->machine->pad.regnum, &softpipe->vs->draw_data->info.file_count, sizeof(vs->machine->pad.regnum));
++         /* Vertex shaders can have inputs with holes between them. */
++         vs->machine->pad.regnum[TGSI_FILE_INPUT] = softpipe->vs->draw_data->info.file_max[TGSI_FILE_INPUT]+1;
++         vs->machine->pad.output_semantic_name = &softpipe->vs->draw_data->info.output_semantic_name[0];
++         vs->machine->pad.output_semantic_index = &softpipe->vs->draw_data->info.output_semantic_index[0];
++         vs->machine->pad.clamp_vertex_color = softpipe->vs->draw_data->draw->rasterizer->clamp_vertex_color;
++
++         AdpUpdTgsiSamp(vs->machine);
++
+          AdpUpdTgsiSamp(softpipe->fs_machine);
+       }
+ #endif
+diff --git a/src/gallium/drivers/softpipe/sp_state_shader.c b/src/gallium/drivers/softpipe/sp_state_shader.c
+index 84f5271e7e8..c3d4397925a 100644
+--- a/src/gallium/drivers/softpipe/sp_state_shader.c
++++ b/src/gallium/drivers/softpipe/sp_state_shader.c
+@@ -403,8 +403,10 @@ softpipe_set_constant_buffer(struct pipe_context *pipe,
+    if (cb && cb->user_buffer) {
+       pipe_resource_reference(&constants, NULL);
+ #ifdef RVGPU
++      struct exec_vertex_shader *vs = softpipe->vs ? (struct exec_vertex_shader *)softpipe->vs->draw_data : NULL;
++      struct tgsi_exec_machine *mach = shader == PIPE_SHADER_VERTEX ? vs->machine : softpipe->fs_machine;
+       if(!softpipe->mesa_sw_flag) {
+-         AdpSetConstBuf(shader, &(softpipe->mapped_constants), softpipe->fs_machine);
++         AdpSetConstBuf(shader, &(softpipe->mapped_constants), mach);
+       }
+ #endif
+    }
+diff --git a/src/gallium/drivers/softpipe/sp_state_surface.c b/src/gallium/drivers/softpipe/sp_state_surface.c
+index c95434eadf5..2cb4186d809 100644
+--- a/src/gallium/drivers/softpipe/sp_state_surface.c
++++ b/src/gallium/drivers/softpipe/sp_state_surface.c
+@@ -58,6 +58,10 @@ softpipe_set_framebuffer_state(struct pipe_context *pipe,
+ #ifdef RVGPU
+    if (!sp->mesa_sw_flag) {
+        AdpFlushTile(sp);
++       if (!fb) {
++          AdpUpdTileCachAndFramBuf(sp);
++          return;
++       }
+    }
+ #endif
+ 
+diff --git a/src/gallium/include/pipe/p_shader_tokens.h b/src/gallium/include/pipe/p_shader_tokens.h
+index 06492d2d554..80347ca63be 100644
+--- a/src/gallium/include/pipe/p_shader_tokens.h
++++ b/src/gallium/include/pipe/p_shader_tokens.h
+@@ -427,7 +427,10 @@ enum tgsi_opcode {
+    TGSI_OPCODE_ENDIF              = 78,
+    TGSI_OPCODE_DDX_FINE           = 79,
+    TGSI_OPCODE_DDY_FINE           = 80,
+-   /* gap */
++#ifdef RVGPU
++   TGSI_OPCODE_LOAD_DEPTH         = 81,
++   TGSI_OPCODE_STORE_DEPTH        = 82,
++#endif
+    TGSI_OPCODE_CEIL               = 83,
+    TGSI_OPCODE_I2F                = 84,
+    TGSI_OPCODE_NOT                = 85,
+@@ -438,7 +441,9 @@ enum tgsi_opcode {
+    TGSI_OPCODE_OR                 = 90,
+    TGSI_OPCODE_MOD                = 91,
+    TGSI_OPCODE_XOR                = 92,
+-   /* gap */
++#ifdef RVGPU
++   TGSI_OPCODE_ZONLY_TEST         = 93,
++#endif
+    TGSI_OPCODE_TXF                = 94,
+    TGSI_OPCODE_TXQ                = 95,
+    TGSI_OPCODE_CONT               = 96,
+-- 
+2.34.1
+

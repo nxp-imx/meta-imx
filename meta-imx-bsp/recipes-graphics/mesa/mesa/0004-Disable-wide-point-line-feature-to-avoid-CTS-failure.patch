@@ -1,0 +1,109 @@
+From 2654eeafd0feca5ee01297c944ce997d26b8b6af Mon Sep 17 00:00:00 2001
+From: Xianzhong Li <xianzhong.li@nxp.com>
+Date: Wed, 18 Jun 2025 17:13:48 +0800
+Subject: [PATCH 4/6] Disable wide point/line feature to avoid CTS failure
+
+dEQP-GLES2.functional.clipping.point.wide_point_clip*
+dEQP-GLES2.functional.rasterization.interpolation.basic.lines_wide
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: Xianzhong Li <xianzhong.li@nxp.com>
+
+Update MAX_SHADER_SAMPLER_VIEWS to 32 to avoid CTS OOM
+dEQP-EGL.functional.multithread.*
+
+Signed-off-by: Eric Guo <eric.guo@nxp.com>
+
+Create texture tile cache when setup sampler view
+
+Fix i.MX93 out of memory for shared_context test
+
+Signed-off-by: Xianzhong Li <xianzhong.li@nxp.com>
+---
+ src/gallium/drivers/softpipe/sp_context.c       | 4 ++++
+ src/gallium/drivers/softpipe/sp_screen.c        | 4 ++--
+ src/gallium/drivers/softpipe/sp_state_sampler.c | 5 +++++
+ src/gallium/include/pipe/p_state.h              | 2 +-
+ 4 files changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/src/gallium/drivers/softpipe/sp_context.c b/src/gallium/drivers/softpipe/sp_context.c
+index 0595fc233c9..fe34165cd21 100644
+--- a/src/gallium/drivers/softpipe/sp_context.c
++++ b/src/gallium/drivers/softpipe/sp_context.c
+@@ -90,8 +90,10 @@ softpipe_destroy( struct pipe_context *pipe )
+ 
+    for (sh = 0; sh < ARRAY_SIZE(softpipe->tex_cache); sh++) {
+       for (i = 0; i < ARRAY_SIZE(softpipe->tex_cache[0]); i++) {
++        if (softpipe->tex_cache[sh][i]) {
+          sp_destroy_tex_tile_cache(softpipe->tex_cache[sh][i]);
+          pipe_sampler_view_reference(&softpipe->sampler_views[sh][i], NULL);
++        }
+       }
+    }
+ 
+@@ -257,6 +259,7 @@ softpipe_create_context(struct pipe_screen *screen,
+       softpipe->cbuf_cache[i] = sp_create_tile_cache( &softpipe->pipe );
+    softpipe->zsbuf_cache = sp_create_tile_cache( &softpipe->pipe );
+ 
++#if 0
+    /* Allocate texture caches */
+    for (sh = 0; sh < ARRAY_SIZE(softpipe->tex_cache); sh++) {
+       for (i = 0; i < ARRAY_SIZE(softpipe->tex_cache[0]); i++) {
+@@ -265,6 +268,7 @@ softpipe_create_context(struct pipe_screen *screen,
+             goto fail;
+       }
+    }
++#endif
+ 
+    softpipe->fs_machine = tgsi_exec_machine_create(PIPE_SHADER_FRAGMENT);
+ 
+diff --git a/src/gallium/drivers/softpipe/sp_screen.c b/src/gallium/drivers/softpipe/sp_screen.c
+index cc76e6b5c6a..7a64f0f3089 100644
+--- a/src/gallium/drivers/softpipe/sp_screen.c
++++ b/src/gallium/drivers/softpipe/sp_screen.c
+@@ -360,11 +360,11 @@ softpipe_get_paramf(struct pipe_screen *screen, enum pipe_capf param)
+    case PIPE_CAPF_MAX_LINE_WIDTH:
+       FALLTHROUGH;
+    case PIPE_CAPF_MAX_LINE_WIDTH_AA:
+-      return 255.0; /* arbitrary */
++      return 1.0; /* arbitrary */
+    case PIPE_CAPF_MAX_POINT_SIZE:
+       FALLTHROUGH;
+    case PIPE_CAPF_MAX_POINT_SIZE_AA:
+-      return 255.0; /* arbitrary */
++      return 1.0; /* arbitrary */
+    case PIPE_CAPF_MAX_TEXTURE_ANISOTROPY:
+       return 16.0;
+    case PIPE_CAPF_MAX_TEXTURE_LOD_BIAS:
+diff --git a/src/gallium/drivers/softpipe/sp_state_sampler.c b/src/gallium/drivers/softpipe/sp_state_sampler.c
+index c20de39a881..6d1cfbc9dab 100644
+--- a/src/gallium/drivers/softpipe/sp_state_sampler.c
++++ b/src/gallium/drivers/softpipe/sp_state_sampler.c
+@@ -125,6 +125,11 @@ softpipe_set_sampler_views(struct pipe_context *pipe,
+       } else {
+          pipe_sampler_view_reference(pview, views[i]);
+       }
++
++      if (!softpipe->tex_cache[shader][start + i]) {
++         softpipe->tex_cache[shader][start + i] = sp_create_tex_tile_cache(&softpipe->pipe);
++      }
++
+       sp_tex_tile_cache_set_sampler_view(softpipe->tex_cache[shader][start + i],
+                                          views[i]);
+       /*
+diff --git a/src/gallium/include/pipe/p_state.h b/src/gallium/include/pipe/p_state.h
+index 069c32b1fa0..ba588113c63 100644
+--- a/src/gallium/include/pipe/p_state.h
++++ b/src/gallium/include/pipe/p_state.h
+@@ -65,7 +65,7 @@ extern "C" {
+ #define PIPE_MAX_SAMPLERS         32
+ #define PIPE_MAX_SHADER_INPUTS    80 /* 32 GENERIC + 32 PATCH + 16 others */
+ #define PIPE_MAX_SHADER_OUTPUTS   80 /* 32 GENERIC + 32 PATCH + 16 others */
+-#define PIPE_MAX_SHADER_SAMPLER_VIEWS 128
++#define PIPE_MAX_SHADER_SAMPLER_VIEWS 32
+ #define PIPE_MAX_SHADER_BUFFERS   32
+ #define PIPE_MAX_SHADER_IMAGES    64
+ #define PIPE_MAX_TEXTURE_LEVELS   16
+-- 
+2.34.1
+
