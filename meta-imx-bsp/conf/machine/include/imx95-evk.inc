@@ -19,8 +19,8 @@ UBOOT_MAKE_TARGET = ""
 SPL_BINARY = "spl/u-boot-spl.bin"
 
 UBOOT_CONFIG ??= "sd"
-UBOOT_CONFIG[sd] = "${UBOOT_CONFIG_BASENAME}_evk_defconfig,sdcard"
-UBOOT_CONFIG[fspi] = "${UBOOT_CONFIG_BASENAME}_evk_fspi_defconfig"
+UBOOT_CONFIG[sd] = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
+UBOOT_CONFIG[fspi] = "${UBOOT_CONFIG_BASENAME}_fspi_defconfig"
 
 ATF_PLATFORM = "imx95"
 OEI_CONFIGS = "ddr tcm"
