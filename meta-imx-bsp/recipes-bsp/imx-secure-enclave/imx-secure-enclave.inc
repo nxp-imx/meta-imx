@@ -25,5 +25,13 @@ do_install() {
 	oe_runmake -C ${S} DESTDIR=${D} install_tests
 }
 
+PACKAGES =+ "${PN}-crrm"
+
 FILES:${PN} += "${datadir}/se"
-RDEPENDS:${PN} += "bash"
+RDEPENDS:${PN} = " \
+    bash \
+    ${@bb.utils.contains('UBOOT_CONFIG', 'crrm', '${PN}-crrm', '', d)}"
+
+FILES:${PN}-crrm = " \
+    ${bindir}/ele_crrm_test \
+    ${libdir}/lib*crrm${SOLIBS}"
