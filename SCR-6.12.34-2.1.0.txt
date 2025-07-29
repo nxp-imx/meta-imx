@@ -599,6 +599,15 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    Connection Montitoring Manager for offloading kernel and register entity info
 Release Location:            https://github.com/nxp-imx/fpr-cmm -b lf-6.12.34-2.1.0
+Origin:                      NXP (GPL-2.0-or-later)
+       		                 libnfnetlink - netfilter.org (GPLv2+) - https://git.netfilter.org/libnfnetlink
+			                 libmnl - netfilter.org (LGPLv2.1+) - https://netfilter.org/projects/libmnl/
+			                 libnetfilter_conntrack - netfilter.org (GPLv2+) - https://netfilter.org/projects/libnetfilter_conntrack/
+			                 libxcrypt (LGPLv2.1) - https://github.com/besser82/libxcrypt
+			                 libcli - David Parrish (LGPLv2.1) - https://github.com/dparrish/libcli
+			                 zlib - (BSD-3-Clause)
+			                 xdp-tools - (GPL-2.0) - https://github.com/xdp-project/xdp-tools
+
 --------------------------------------------
 
 Package:                     dpdk.git
