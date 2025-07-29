@@ -24,7 +24,7 @@ do_install() {
     ln -sf -r ${D}${libdir}/nxp-afe/libvoiceaec.so.* ${D}${libdir}/nxp-afe/libvoiceaec.so
 }
 
-FILES:${PN} += "${libdir}/nxp-afe/* "
-INSANE_SKIP:${PN} += "dev-so"
+FILES:${PN} += "${libdir}/nxp-afe/lib*${SOLIBS}"
+FILES:${PN}-dev += "${libdir}/nxp-afe/lib*${SOLIBSDEV} "
 
 COMPATIBLE_MACHINE = "(mx8mm-nxp-bsp|mx8mp-nxp-bsp|mx93-nxp-bsp|mx95-nxp-bsp)"
