@@ -72,8 +72,8 @@ do_deploy() {
     OUTPUT_FOLDER="${@bb.utils.contains('PACKAGECONFIG', 'debug', 'debug', 'release', d)}"
     for deploydir in ${DEPLOYDIR} ${DEPLOYDIR}/imx-boot-tools; do
         install -Dm 0644 ${S}/build/${ATF_PLATFORM}/${OUTPUT_FOLDER}/bl31.bin $deploydir/${ANNOTATED_NAME}
-        ln -sf ${ANNOTATED_NAME} $deploydir/bl31.bin
     done
+    ln -sf ${ANNOTATED_NAME} ${DEPLOYDIR}/bl31.bin
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
