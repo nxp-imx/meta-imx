@@ -14,6 +14,7 @@ do_install:append:mx95-nxp-bsp() {
     done
     rm ${D}${datadir}/se/README
     rm ${D}${bindir}/nvmd_conf_setup.sh
+    rm ${D}${bindir}/se_tools
 }
 
 COMPATIBLE_MACHINE = "(mx8x-nxp-bsp|mx95-nxp-bsp)"
