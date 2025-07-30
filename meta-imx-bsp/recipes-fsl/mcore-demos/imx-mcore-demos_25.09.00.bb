@@ -5,6 +5,6 @@ require imx-mcore-demos.inc
 
 LIC_FILES_CHKSUM:mx943-nxp-bsp = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 
-SRC_URI[imx943.sha256sum] = "10651d8dfe1f4e93b8aa5f9b099d74d973aa5a69273a8583a74d8be1c928f30a"
+SRC_URI[imx943.sha256sum] = "d3cdf096406f16890b9aae1c2391496c8a7441a67f7362a2dcdd4ba1a070a8a4"
 
 COMPATIBLE_MACHINE = "(mx943-nxp-bsp)"
