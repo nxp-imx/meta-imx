@@ -1,0 +1,9 @@
+
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a93b654673e1bc8398ed1f30e0813359"
+
+SRCBRANCH = "main"
+SRCREV = "f97b62d491e8233b183f558af6f413d06644bb9e"
+
+NEUTRON_TARGET:mx943-nxp-bsp = "imx943"
+
+COMPATIBLE_MACHINE = "(mx943-nxp-bsp|mx95-nxp-bsp)"

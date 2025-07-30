@@ -1,6 +1,0 @@
- Name: tvm
- Description: tvm library
- Version: @version@
- Requires:
- Libs: -L@libdir@ -ltvm_runtime
- Cflags: -I@includedir@
