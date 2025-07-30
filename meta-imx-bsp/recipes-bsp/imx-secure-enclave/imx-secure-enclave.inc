@@ -25,6 +25,8 @@ do_install() {
 	oe_runmake -C ${S} DESTDIR=${D} install_tests
 }
 
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+
 PACKAGES =+ "${PN}-crrm"
 
 FILES:${PN} += "${datadir}/se"
