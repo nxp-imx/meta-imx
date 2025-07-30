@@ -3,9 +3,11 @@ DESCRIPTION = "Initramfs designed for NXP Cyber Resilient Recovery Module suppor
 LICENSE = "MIT"
 
 PACKAGE_INSTALL = " \
+    busybox \
     firmware-ele-imx \
     imx-secure-enclave-crrm \
     imx-uuc \
+    inetutils-tftp \
     libssl"
 
 # Ensure the initramfs only contains the bare minimum
