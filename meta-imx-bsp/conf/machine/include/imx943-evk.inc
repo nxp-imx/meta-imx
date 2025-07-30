@@ -11,6 +11,7 @@ KERNEL_DEVICETREE = " \
     freescale/${KERNEL_DEVICETREE_BASENAME}.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-crrm.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-inmate.dtb \
+    freescale/${KERNEL_DEVICETREE_BASENAME}-netc-rpmsg.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-mqs.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-pcie1-ep.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-pcie1-ep.dtbo \
