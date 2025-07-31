@@ -8,7 +8,8 @@ PACKAGE_INSTALL = " \
     imx-secure-enclave-crrm \
     imx-uuc \
     inetutils-tftp \
-    libssl"
+    libssl \
+    util-linux-mount"
 
 # Ensure the initramfs only contains the bare minimum
 IMAGE_FEATURES = ""
