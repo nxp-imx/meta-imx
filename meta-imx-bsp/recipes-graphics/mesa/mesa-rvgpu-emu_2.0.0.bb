@@ -20,4 +20,4 @@ INSANE_SKIP:${PN} += "arch"
 
 BBCLASSEXTEND = "native nativesdk"
 
-COMPATIBLE_MACHINE = "(mx93-nxp-bsp|mx943-nxp-bxp)"
+COMPATIBLE_MACHINE = "(mx93-nxp-bsp|mx943-nxp-bsp)"
