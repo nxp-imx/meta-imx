@@ -27,13 +27,5 @@ do_install() {
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
-PACKAGES =+ "${PN}-crrm"
-
 FILES:${PN} += "${datadir}/se"
-RDEPENDS:${PN} = " \
-    bash \
-    ${@bb.utils.contains('UBOOT_CONFIG', 'crrm', '${PN}-crrm', '', d)}"
-
-FILES:${PN}-crrm = " \
-    ${bindir}/ele_crrm_test \
-    ${libdir}/lib*crrm${SOLIBS}"
+RDEPENDS:${PN}:append = " bash"
