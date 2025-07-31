@@ -37,11 +37,11 @@ do_compile:prepend() {
         cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}       ${BOOT_STAGING}/m33_image.bin
         ;;
     mx943)
-        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm33_core1_TCM_netc_share.bin \
+        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm33_core1_TCM_power_mode_switch.bin \
                                                             ${BOOT_STAGING}/m33s_image.bin
-        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm33_core1_TCM_all_reset_but_netc_switch.bin \
+        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm7_core0_TCM_power_mode_switch.bin \
                                                             ${BOOT_STAGING}/m70_image.bin
-        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm7_core1_TCM_all_reset_but_netc_trigger.bin \
+        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm7_core1_TCM_power_mode_switch.bin \
                                                             ${BOOT_STAGING}/m71_image.bin
     ;;
     mx95)
