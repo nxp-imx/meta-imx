@@ -223,7 +223,7 @@ do_compile() {
         for f in ${CRRM_FILES}; do
             cp ${DEPLOY_DIR_IMAGE}/$f ${BOOT_STAGING}/$f
         done
-        ln -s ${CRRM_INITRAMFS}-${MACHINE}.cpio.zst.u-boot \
+        ln -sf ${CRRM_INITRAMFS}-${MACHINE}.cpio.zst.u-boot \
             ${BOOT_STAGING}/initramfs.cpio.zst.u-boot
     fi
 
