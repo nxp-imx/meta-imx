@@ -728,7 +728,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.0-aarch32-a65319b.bin
+Package:                     imx-gpu-viv-6.4.11.p4.0-aarch32-032324a.bin
 Version:                     6.4.11.p4.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -747,7 +747,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.0-aarch64-a65319b.bin
+Package:                     imx-gpu-viv-6.4.11.p4.0-aarch64-032324a.bin
 Version:                     6.4.11.p4.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -766,7 +766,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.0-b6352d2.bin
+Package:                     mali-imx-r54p1.0-96dded5.bin
 Version:                     r54p1.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -782,6 +782,18 @@ Origin:                      NXP (proprietary)
                              vulkan-wsi (MIT) - https://gitlab.freedesktop.org/mesa/vulkan-wsi-layer
                              Open Source LLVM/Clang Source Code (Apache-2.0 with LLVM Exceptions) - https://github.com/llvm/llvm-project
 
+
+--------------------------------------------
+
+Package:                     mesa-rvgpu-emu-2.0.0.bin
+Version:                     2.0.0
+Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
+License File:                LICENSE.txt
+Package Category:            Graphics
+Type of Content:             binary and source
+Description and comments:    RISC-V GPU Emulator-based graphics renderer for Mesa
+Release Location:            Mirror
+Origin:                    NXP (proprietary)
 
 --------------------------------------------
 
@@ -888,7 +900,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.0-arm-a65319b.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.0-arm-032324a.bin
 Version:                     6.4.11.p4.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -900,7 +912,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.0-aarch64-a65319b.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.0-aarch64-032324a.bin
 Version:                     6.4.11.p4.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -912,7 +924,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.4.0.2-7330a34.bin
+Package:                     imx-dpu-g2d-v1-2.4.0.2-b1bc9c8.bin
 Version:                     2.4.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -924,7 +936,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.4.0.2-7330a34.bin
+Package:                     imx-dpu-g2d-v2-2.4.0.2-b1bc9c8.bin
 Version:                     2.4.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1131,7 +1143,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.9.0-f371f54.bin
+Package:                     imx-opencl-converter-0.9.0-4dc7fb7.bin
 Version:                     0.9.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1198,7 +1210,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-vc-1.10.3-30847b6.bin
+Package:                     imx-vpu-hantro-vc-1.10.3-0eec750.bin
 Version:                     1.10.3
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
