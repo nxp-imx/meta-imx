@@ -32,7 +32,7 @@ PACKAGES =+ "${PN}-crrm"
 FILES:${PN} += "${datadir}/se"
 RDEPENDS:${PN} = " \
     bash \
-    ${PN}-crrm"
+    ${@bb.utils.contains('UBOOT_CONFIG', 'crrm', '${PN}-crrm', '', d)}"
 
 FILES:${PN}-crrm = " \
     ${bindir}/ele_crrm_test \
