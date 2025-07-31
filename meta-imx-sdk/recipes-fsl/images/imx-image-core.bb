@@ -27,6 +27,7 @@ SDKIMAGE_FEATURES:append = " \
 
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'crrm', 'imx-secure-enclave-crrm', '', d)} \
     imx-test \
     firmwared \
     packagegroup-imx-core-tools \
