@@ -8,7 +8,6 @@ PACKAGE_INSTALL = " \
     firmware-ele-imx \
     imx-secure-enclave-crrm \
     imx-uuc \
-    inetutils-tftp \
     libssl \
     util-linux-mount"
 
