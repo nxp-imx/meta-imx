@@ -27,11 +27,17 @@ PACKAGECONFIG:class-nativesdk ??= "fdt sdl kvm pie slirp \
 COMPATIBLE_HOST:powerpc = "null"
 
 #----------------------overrides ---------------------
-# audio backend confiure
-PACKAGECONFIG:append = " pipewire aio vhost libusb rutabaga-gfx \
-                         ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'libvhost-user', '', d)} \
+
+PACKAGECONFIG:append = " \
+    aio \
+    libusb \
+    pipewire \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'rutabaga-gfx', '', d)} \
+    vhost \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'libvhost-user', '', d)} \
 "
-CFLAGS += " -Wno-error=implicit-function-declaration -Wno-error=int-conversion"
+
+CFLAGS += "-Wno-error=implicit-function-declaration -Wno-error=int-conversion"
 
 INSANE_SKIP:${PN}-ptest += "buildpaths"
 INSANE_SKIP:nativesdk-qemu-user-mips = "build-deps"
