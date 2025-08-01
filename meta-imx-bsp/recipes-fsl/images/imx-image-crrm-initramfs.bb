@@ -3,6 +3,7 @@ DESCRIPTION = "Initramfs designed for NXP Cyber Resilient Recovery Module suppor
 LICENSE = "MIT"
 
 PACKAGE_INSTALL = " \
+    bash \
     busybox \
     firmware-ele-imx \
     imx-secure-enclave-crrm \
