@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=dcf473723faabf17baa9b5f2207599d0 \
 DEPENDS = "assimp vulkan-loader zlib"
 
 SRC_URI = "gitsm://github.com/SaschaWillems/Vulkan.git;protocol=https;branch=master \
-           git://github.com/KhronosGroup/KTX-Software;destsuffix=git/external/ktx;name=ktx;lfs=0;protocol=https;branch=master \
+           git://github.com/KhronosGroup/KTX-Software;destsuffix=git/external/ktx;name=ktx;lfs=0;protocol=https;branch=main \
            file://0001-Don-t-build-demos-with-questionably-licensed-data.patch \
            file://0002-Modify-parameter-in-vulkan-demo-computenbody.patch \
            "
