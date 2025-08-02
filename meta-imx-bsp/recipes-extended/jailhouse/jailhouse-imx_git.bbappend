@@ -1,7 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI += "file://0001-Revert-driver-sysfs-Update-bin_attribute-version-che.patch"
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.12.34_2.1.0"
 SRCREV = "7b9bbf71f81b12f98269e52f209634de8678fcdd"
 
 PV = "2023.03+git${SRCPV}"
