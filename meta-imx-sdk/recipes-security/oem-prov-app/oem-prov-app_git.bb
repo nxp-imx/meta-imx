@@ -14,7 +14,7 @@ SRCBRANCH = "release/version_2.x"
 
 PV = "2.0+git${SRCPV}"
 
-SRCREV = "e868f5f67d44ff3211c103795a72733fc6b2b441"
+SRCREV = "e868f5f67d44ff3211c103795a72733fc6b2b441" 
 S = "${WORKDIR}/git"
 
 inherit cmake
