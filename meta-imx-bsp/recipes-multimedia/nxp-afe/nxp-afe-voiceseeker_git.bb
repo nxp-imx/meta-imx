@@ -9,7 +9,7 @@ inherit pkgconfig
 
 DEPENDS += "alsa-lib nxp-afe"
 
-SRCBRANCH = "voice_2.0"
+SRCBRANCH = "MM_04.10.01_2508_L6.12.34"
 PV = "2.0+${SRCPV}"
 
 NXPAFE_VOICESEEKER_SRC ?= "git://github.com/nxp-imx/imx-voiceui.git;protocol=https"
