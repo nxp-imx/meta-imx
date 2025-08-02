@@ -37,9 +37,4 @@ PACKAGECONFIG:append = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'libvhost-user', '', d)} \
 "
 
-CFLAGS += "-Wno-error=implicit-function-declaration -Wno-error=int-conversion"
-
-INSANE_SKIP:${PN}-ptest += "buildpaths"
-INSANE_SKIP:nativesdk-qemu-user-mips = "build-deps"
-
 COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
