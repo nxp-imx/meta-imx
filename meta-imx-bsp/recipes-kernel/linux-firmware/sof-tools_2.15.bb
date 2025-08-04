@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=14abb55d71048ebecff1a104640546b6"
 DEPENDS = "alsa-lib"
 
 SRC_URI = "git://github.com/thesofproject/sof.git;branch=main;protocol=https"
-SRCREV = "fa77d8b2220c77436695a28cbc53e6636b04c97a"
+SRCREV = "2977518f4c3140f7aea28112321315e454b1f617"
 
 S = "${WORKDIR}/git"
 
