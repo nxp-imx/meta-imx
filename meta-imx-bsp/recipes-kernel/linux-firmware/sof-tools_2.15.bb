@@ -8,7 +8,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=14abb55d71048ebecff1a104640546b6"
 DEPENDS = "alsa-lib"
 
-SRC_URI = "git://github.com/thesofproject/sof.git;branch=imx-stable-v2.11;protocol=https"
+SRC_URI = "git://github.com/thesofproject/sof.git;branch=main;protocol=https"
 SRCREV = "fa77d8b2220c77436695a28cbc53e6636b04c97a"
 
 S = "${WORKDIR}/git"
