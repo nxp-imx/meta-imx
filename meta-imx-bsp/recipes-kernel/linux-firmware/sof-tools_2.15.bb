@@ -37,6 +37,4 @@ do_install() {
 
 FILES:${PN} = "/unit_tests/sof/tools"
 RDEPENDS:${PN} = "bash"
-
-# FIXME: don't ignore the underlying problem
-INSANE_SKIP:${PN} = "buildpaths"
+INSANE_SKIP:${PN} = "buildpaths rpaths"
