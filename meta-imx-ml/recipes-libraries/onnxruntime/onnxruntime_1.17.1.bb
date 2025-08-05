@@ -1,4 +1,4 @@
-# Copyright 2020-2023 NXP
+# Copyright 2020-2025 NXP
 DESCRIPTION = "cross-platform, high performance scoring engine for ML models"
 SECTION = "devel"
 LICENSE = "MIT & Apache-2.0"
@@ -13,7 +13,7 @@ inherit setuptools3
 SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
 SRCBRANCH = "lf-6.6.36_2.1.0"
-SRCREV = "813b93f64103847a21227725cb5ab04b6ca5b5ed"
+SRCREV = "d7ba81fabf6c2ee985714bb9994b79bba5cfbb9e"
 
 S = "${WORKDIR}/git"
 
