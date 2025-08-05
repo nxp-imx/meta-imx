@@ -90,7 +90,8 @@ FILES:${PN}-staticdev += "${libdir}/gstreamer-1.0/*.a"
 FILES:${PN}-gplay = "${bindir}/gplay-1.0"
 FILES:${PN}-libgplaycore = "${libdir}/libgplaycore-1.0${SOLIBS}"
 FILES:${PN}-libgstfsl = "${libdir}/libgstfsl-1.0${SOLIBS}"
-FILES:${PN}-grecorder = "${bindir}/grecorder-1.0"
+FILES:${PN}-grecorder = "${bindir}/grecorder-1.0 \
+                         ${bindir}/pipewire_recorder.py"
 FILES:${PN}-librecorder-engine = "${libdir}/librecorder_engine-1.0${SOLIBS}"
 FILES:${PN}-libplayengine = "${libdir}/libplayengine-1.0${SOLIBS}"
 
