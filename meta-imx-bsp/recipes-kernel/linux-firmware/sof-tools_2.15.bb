@@ -36,5 +36,4 @@ do_install() {
 }
 
 FILES:${PN} = "/unit_tests/sof/tools"
-RDEPENDS:${PN} = "bash"
 INSANE_SKIP:${PN} = "buildpaths rpaths"
