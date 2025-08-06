@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.3-ae152f5.bin
+Package:                     firmware-ele-imx-2.0.3-81645c3.bin
 Version:                     2.0.3
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1196,7 +1196,7 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.7.0-9191767
+Package:                     imx-vpu-hantro-daemon-1.7.0-f1f580e
 Version:                     1.7.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
@@ -1764,7 +1764,7 @@ Origin:                      VeriSilicon (Verisilicon License)
 --------------------------------------------
 
 Package:                     mfgtools.git
-Version:                     1.5.201
+Version:                     1.5.220
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
