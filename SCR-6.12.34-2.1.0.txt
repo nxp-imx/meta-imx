@@ -1039,8 +1039,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.10.1-ac58c04.bin
-Version:                     4.10.1
+Package:                     imx-parser-4.10.2-3b38456.bin
+Version:                     4.10.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -1143,8 +1143,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.9.0-4dc7fb7.bin
-Version:                     0.9.0
+Package:                     imx-opencl-converter-0.10.0-0011615.bin
+Version:                     0.10.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -1764,7 +1764,7 @@ Origin:                      VeriSilicon (Verisilicon License)
 --------------------------------------------
 
 Package:                     mfgtools.git
-Version:                     1.5.201
+Version:                     1.5.220
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
