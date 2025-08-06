@@ -10,7 +10,7 @@ SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                file://0001-tvm-CMakeLists.txt-Use-CMAKE-variables-for-libs-inst.patch \
                file://tvm_runtime.pc.in \
 "
-SRCREV = "4f710ec5796ac0eb0b0a23d3c808ca68e13173f6"
+SRCREV = "4f710ec5796ac0eb0b0a23d3c808ca68e13173f6" 
 
 do_install () {
     cmake_do_install
