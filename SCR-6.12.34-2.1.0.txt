@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.3-ae152f5.bin
+Package:                     firmware-ele-imx-2.0.3-81645c3.bin
 Version:                     2.0.3
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.15.0-2977518
+Package:                     sof-zephyr-2.15.0-bd08ae0
 Version:                     2.15.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -292,7 +292,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.0-5ac8c48
+Package:                     zephyr-demo-imx-4.3.0-0f66e9c
 Version:                     4.3.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -1196,7 +1196,7 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.7.0-9191767
+Package:                     imx-vpu-hantro-daemon-1.7.0-f1f580e
 Version:                     1.7.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
