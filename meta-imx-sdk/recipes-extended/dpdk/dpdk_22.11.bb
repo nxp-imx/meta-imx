@@ -11,6 +11,8 @@ DEPENDS = "numactl python3-pyelftools-native libpcap"
 SRC_URI = "${DPDK_SRC};nobranch=1"
 DPDK_SRC ?= "git://github.com/nxp-qoriq/dpdk;protocol=https"
 
+SRC_URI:append = " file://CVE-2024-11614.patch"
+
 STABLE = "-stable"
 SRCREV = "9298b898fe38482fbb293d431cdeea4297c17e70"
 
