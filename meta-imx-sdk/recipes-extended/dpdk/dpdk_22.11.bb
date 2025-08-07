@@ -44,14 +44,14 @@ EXTRA_OEMESON:append:mx9-nxp-bsp = " --cross-file ${S}/config/arm/arm64_imx_poky
 
 do_install:append:mx943-nxp-bsp (){
     install -d ${D}${bindir}
-    install -m 0644 ${S}/nxp/crypto_perf_test.sh ${D}${bindir}/
+    install -m 0755 ${S}/nxp/crypto_perf_test.sh ${D}${bindir}/
     install -d ${D}/${sysconfdir}/dpdk
     install -m 0644 ${S}/nxp/ipsec/*.cfg ${D}/${sysconfdir}/dpdk
 }
 
 do_install:append:mx95-nxp-bsp (){
     install -d ${D}${bindir}
-    install -m 0644 ${S}/nxp/crypto_perf_test.sh ${D}${bindir}/
+    install -m 0755 ${S}/nxp/crypto_perf_test.sh ${D}${bindir}/
     install -d ${D}/${sysconfdir}/dpdk
     install -m 0644 ${S}/nxp/ipsec/*.cfg ${D}/${sysconfdir}/dpdk
 }
