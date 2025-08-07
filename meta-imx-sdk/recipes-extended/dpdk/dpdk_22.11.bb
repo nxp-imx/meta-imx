@@ -56,6 +56,6 @@ do_install:append:mx95-nxp-bsp (){
     install -m 0644 ${S}/nxp/ipsec/*.cfg ${D}/${sysconfdir}/dpdk
 }
 
-RDEPENDS:${PN} = "kernel-module-dpdk-extras pciutils python3-core"
+RDEPENDS:${PN} = "kernel-module-dpdk-extras pciutils python3-core bash"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp|qoriq)"
