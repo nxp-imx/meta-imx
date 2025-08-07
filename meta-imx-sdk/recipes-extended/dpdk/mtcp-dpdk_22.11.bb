@@ -4,8 +4,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6a36820ca4ad07a1d62df52c596df642"
 
 DEPENDS = "gmp numactl dpdk bc-native zlib"
 
-SRC_URI = "${MTCP_DPDK_SRC};nobranch=1"
+SRC_URI = "${MTCP_DPDK_SRC};branch=${SRCBRANCH}"
 MTCP_DPDK_SRC ?= "git://github.com/nxp-mcuxpresso/mtcp;protocol=https"
+SRCBRANCH = "mtcp-dpdk"
 SRCREV = "7198e5e38127f847747e2d413b3b449a8dbc20ad"
 
 S = "${WORKDIR}/git"
