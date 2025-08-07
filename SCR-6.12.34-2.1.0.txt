@@ -278,7 +278,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.15.0-bd08ae0
+Package:                     sof-zephyr-2.15.0-9fcc269
 Version:                     2.15.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
