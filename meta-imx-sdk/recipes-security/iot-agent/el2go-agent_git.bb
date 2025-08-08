@@ -13,7 +13,7 @@ SRC_URI = "${EL2GO_AGENT_SRC};branch=${EL2GO_AGENT_SRCBRANCH}"
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
 EL2GO_AGENT_SRCBRANCH ?= "release/v6.12.34-2.1.0-yocto"
 
-SRCREV = "792acc58ddd559aaabc68ffb77498f404fb0d95b"
+SRCREV = "33d48593dbcdfca2f6d004ccfaeef41674a49135"
 S = "${WORKDIR}/git"
 
 PV = "6.4.0+git"
