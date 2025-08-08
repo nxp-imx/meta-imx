@@ -87,6 +87,8 @@ MKIMAGE_EXTRA_ARGS:imx95-19x19-verdin ?= " \
 
 UBOOT_DTB_BINARY ?= "u-boot.dtb"
 
+IMX_BOOT_DTBS ?= "${UBOOT_DTB_NAME} ${UBOOT_DTB_NAME_EXTRA}"
+
 compile_mx8m() {
     bbnote 8MQ/8MM/8MN/8MP boot binary build
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
@@ -101,12 +103,26 @@ compile_mx8m() {
 
     if [ "x${UBOOT_SIGN_ENABLE}" = "x1" ] ; then
         # Use DTB binary patched with signature node
-        cp ${DEPLOY_DIR_IMAGE}/${UBOOT_DTB_BINARY}           ${BOOT_STAGING}/${UBOOT_DTB_NAME_EXTRA}
+        cp ${DEPLOY_DIR_IMAGE}/${UBOOT_DTB_BINARY}           ${BOOT_STAGING}/${UBOOT_DTB_EXTRA}
     else
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${UBOOT_DTB_NAME_EXTRA} \
+        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${UBOOT_DTB_EXTRA} \
                                                              ${BOOT_STAGING}
+
+        if [ -n "${UBOOT_DTB_NAME_EXTRA}" ]; then
+            cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${UBOOT_DTB_NAME_EXTRA} \
+                                                                      ${BOOT_STAGING}
+        fi
     fi
-    ln -sf ${UBOOT_DTB_NAME_EXTRA}                           ${BOOT_STAGING}/${UBOOT_DTB_NAME}
+
+    if [ "${UBOOT_DTB_EXTRA}" != "${UBOOT_DTB_NAME}" ] ; then
+        ln -sf ${UBOOT_DTB_EXTRA}                       ${BOOT_STAGING}/${UBOOT_DTB_NAME}
+    fi
+
+    if [ ! -z "${UBOOT_DTB_NAME_EXTRA}" ] && \
+            [ "${UBOOT_DTB_EXTRA_EXTRA}" != "${UBOOT_DTB_NAME_EXTRA}" ]; \
+    then
+        ln -sf ${UBOOT_DTB_EXTRA_EXTRA}            ${BOOT_STAGING}/${UBOOT_DTB_NAME_EXTRA}
+    fi
 
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${UBOOT_CONFIG_EXTRA} \
                                                              ${BOOT_STAGING}/u-boot-nodtb.bin
@@ -114,7 +130,6 @@ compile_mx8m() {
     cp ${DEPLOY_DIR_IMAGE}/${ATF_MACHINE_NAME}               ${BOOT_STAGING}/bl31.bin
 
     cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME_EXTRA}               ${BOOT_STAGING}/u-boot.bin
-
 }
 
 compile_mx8() {
@@ -200,13 +215,18 @@ do_compile() {
     for type in ${UBOOT_CONFIG}; do
         if [ "${@d.getVarFlags('UBOOT_DTB_NAME')}" = "None" ]; then
             UBOOT_DTB_NAME_FLAGS="${type}:${UBOOT_DTB_NAME}"
+            if [ -n "${UBOOT_DTB_NAME_EXTRA}" ]; then
+                UBOOT_DTB_NAME_FLAGS="${UBOOT_DTB_NAME_FLAGS}:${UBOOT_DTB_NAME_EXTRA}"
+            fi
         else
             UBOOT_DTB_NAME_FLAGS="${@' '.join(flag + ':' + dtb for flag, dtb in (d.getVarFlags('UBOOT_DTB_NAME')).items()) if d.getVarFlags('UBOOT_DTB_NAME') is not None else '' }"
         fi
 
         for key_value in ${UBOOT_DTB_NAME_FLAGS}; do
             type_key="${key_value%%:*}"
-            dtb_name="${key_value#*:}"
+            dtbs="${key_value#*:}"
+            dtb_name="${dtbs%%:*}"
+            dtb_name_extra="${dtbs#*:}"
 
             if [ "$type_key" = "$type" ]
             then
@@ -214,13 +234,21 @@ do_compile() {
 
                 UBOOT_CONFIG_EXTRA="$type_key"
                 if [ -e ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${dtb_name}-${type} ] ; then
-                    UBOOT_DTB_NAME_EXTRA="${dtb_name}-${type}"
+                    UBOOT_DTB_EXTRA="${dtb_name}-${type}"
                 else
                     # backward compatibility
-                    UBOOT_DTB_NAME_EXTRA="${dtb_name}"
+                    UBOOT_DTB_EXTRA="${dtb_name}"
                 fi
+
+                if [ -e ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${dtb_name_extra}-${type} ] ; then
+                    UBOOT_DTB_EXTRA_EXTRA="${dtb_name_extra}-${type}"
+                else
+                    # backward compatibility
+                    UBOOT_DTB_EXTRA_EXTRA="${dtb_name_extra}"
+                fi
+
                 UBOOT_NAME_EXTRA="u-boot-${MACHINE}.bin-${UBOOT_CONFIG_EXTRA}"
-                BOOT_CONFIG_MACHINE_EXTRA="imx-boot${BOOT_VARIANT}-${MACHINE}-${UBOOT_CONFIG_EXTRA}.bin"
+                BOOT_CONFIG_MACHINE_EXTRA="imx-boot-${MACHINE}-${UBOOT_CONFIG_EXTRA}.bin"
 
                 for target in ${IMXBOOT_TARGETS}; do
                     compile_${SOC_FAMILY}
@@ -228,7 +256,7 @@ do_compile() {
                     *no_v2x)
                         # Special target build for i.MX 8DXL with V2X off
                         bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} V2X=NO ${target}"
-                        make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} V2X=NO dtbs=${UBOOT_DTB_NAME_EXTRA} flash_linux_m4
+                        make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} V2X=NO dtbs=${UBOOT_DTB_EXTRA} flash_linux_m4
                         ;;
                     *stmm_capsule)
                         # target for flash_evk_stmm_capsule or
@@ -236,11 +264,11 @@ do_compile() {
                         cp ${RECIPE_SYSROOT_NATIVE}/${bindir}/mkeficapsule ${BOOT_STAGING}
                         bbnote "building ${IMX_BOOT_SOC_TARGET} - TEE=tee.bin-stmm ${target}"
                         cp ${DEPLOY_DIR_IMAGE}/CRT.* ${BOOT_STAGING}
-                        make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm dtbs=${UBOOT_DTB_NAME} ${REV_OPTION} ${target}
+                        make SOC=${IMX_BOOT_SOC_TARGET} TEE=tee.bin-stmm dtbs="${IMX_BOOT_DTBS}" ${REV_OPTION} ${target}
                         ;;
                     *)
                         bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} ${target}"
-                        make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} dtbs=${UBOOT_DTB_NAME} ${target}
+                        make SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} dtbs="${IMX_BOOT_DTBS}" ${target}
                         ;;
                     esac
 
@@ -250,7 +278,8 @@ do_compile() {
                 done
 
                 unset UBOOT_CONFIG_EXTRA
-                unset UBOOT_DTB_NAME_EXTRA
+                unset UBOOT_DTB_EXTRA
+                unset UBOOT_DTB_EXTRA_EXTRA
                 unset UBOOT_NAME_EXTRA
                 unset BOOT_CONFIG_MACHINE_EXTRA
             fi
@@ -271,7 +300,7 @@ do_install () {
         bbnote "UBOOT_CONFIG = $type"
 
         UBOOT_CONFIG_EXTRA="$type"
-        BOOT_CONFIG_MACHINE_EXTRA="imx-boot${BOOT_VARIANT}-${MACHINE}-${UBOOT_CONFIG_EXTRA}.bin"
+        BOOT_CONFIG_MACHINE_EXTRA="imx-boot-${MACHINE}-${UBOOT_CONFIG_EXTRA}.bin"
 
         for target in ${IMXBOOT_TARGETS}; do
             install -m 0644 ${S}/${BOOT_CONFIG_MACHINE_EXTRA}-${target} ${D}/boot/
@@ -378,7 +407,7 @@ do_deploy() {
     for type in ${UBOOT_CONFIG}; do
         UBOOT_CONFIG_EXTRA="$type"
         UBOOT_NAME_EXTRA="u-boot-${MACHINE}.bin-${UBOOT_CONFIG_EXTRA}"
-        BOOT_CONFIG_MACHINE_EXTRA="imx-boot${BOOT_VARIANT}-${MACHINE}-${UBOOT_CONFIG_EXTRA}.bin"
+        BOOT_CONFIG_MACHINE_EXTRA="imx-boot-${MACHINE}-${UBOOT_CONFIG_EXTRA}.bin"
 
         if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG_EXTRA} ] ; then
             install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG_EXTRA} \
