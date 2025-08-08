@@ -235,6 +235,7 @@ SRC_URI += " \
     file://0102-MGS-6470-ccc-Add-configuration-parameter-to-force-en.patch \
     file://0103-MGS-6470-ccc-Change-configuration-to-enable-hostptr-.patch \
     file://0104-MGS-8011-ccc-Fix-the-problem-of-syntax-error-at-doub.patch \
+    file://0105-MGS-8318-ccc-Fix-error-implicit-declaration-of-funct.patch \
 "
 
 # Drop un-necessary patch for 4.12
