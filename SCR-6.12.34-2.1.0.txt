@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.29-1a65016.bin
+Package:                     firmware-imx-8.29-2eca77a.bin
 Version:                     8.29
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -278,6 +278,26 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
+Package:                     hostapd-2.11
+Version:                     2.11
+Outgoing License:            BSD-3-Clause 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             binary
+Description and comments:    
+Release Location:            Mirror
+--------------------------------------------
+
+Package:                     wpa-supplicant-2.11
+Version:                     2.11
+Outgoing License:            BSD-3-Clause 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             binary
+Description and comments:    
+Release Location:            Mirror
+--------------------------------------------
+
 Package:                     sof-zephyr-2.15.0-9fcc269
 Version:                     2.15.0
 Outgoing License:            Apache-2.0 
@@ -292,7 +312,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.0-0f66e9c
+Package:                     zephyr-demo-imx-4.3.0-a91b959
 Version:                     4.3.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
