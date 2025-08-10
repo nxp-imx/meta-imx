@@ -14,7 +14,7 @@ SRCBRANCH = "master"
 
 PV = "2.0+git${SRCPV}"
 
-SRCREV = "ad89cf1aa65f608ab1fbc3317d52311e97f19779"
+SRCREV = "e23ceb463eb1bb6095171582e3e1f772595e006e"
 S = "${WORKDIR}/git"
 
 inherit cmake
