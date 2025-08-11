@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a93b654673e1bc8398ed1f30e0813359"
 SRC_URI = "${NEUTRON_SRC};branch=${SRCBRANCH}"
 NEUTRON_SRC ?= "git://github.com/nxp-imx/neutron.git;protocol=https"
 SRCBRANCH = "lf-6.12.34_2.1.0"
-SRCREV = "714b0cdc5833c58fda357f4bf9abe065e1dc3033"
+SRCREV = "4bd0b7c34f1ca2fd8765e0c255d45fe90b97fb32"
 
 S = "${WORKDIR}/git"
 
