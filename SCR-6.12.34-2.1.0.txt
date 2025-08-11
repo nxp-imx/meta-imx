@@ -131,8 +131,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.3-81645c3.bin
-Version:                     2.0.3
+Package:                     firmware-ele-imx-2.0.4-81645c3.bin
+Version:                     2.0.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -298,7 +298,7 @@ Description and comments:
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.15.0-9fcc269
+Package:                     sof-zephyr-2.15.0-7ed4499
 Version:                     2.15.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -312,7 +312,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.0-a91b959
+Package:                     zephyr-demo-imx-4.3.0-3ae962f
 Version:                     4.3.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -786,7 +786,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.2-96dded5.bin
+Package:                     mali-imx-r54p1.2-ddd1ced.bin
 Version:                     r54p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -805,8 +805,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     mesa-rvgpu-emu-2.0.0.bin
-Version:                     2.0.0
+Package:                     mesa-rvgpu-emu-2.0.1.bin
+Version:                     2.0.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
