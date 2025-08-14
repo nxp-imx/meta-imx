@@ -1303,8 +1303,8 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     nxp-afe-voiceaec.git
 Version:                     1.0
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 
-License File:                LICENSE.txt
+Outgoing License:            BSD-3-Clause 
+License File:                LICENSE
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP voice library base on tensorflow lite which is used by audio-front-end
@@ -1787,7 +1787,7 @@ Origin:                      VeriSilicon (Verisilicon License)
 --------------------------------------------
 
 Package:                     mfgtools.git
-Version:                     1.5.220
+Version:                     1.5.222
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
