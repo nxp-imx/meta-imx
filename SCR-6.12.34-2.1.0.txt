@@ -312,7 +312,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.0-3ae962f
+Package:                     zephyr-demo-imx-4.3.0-d77b58a
 Version:                     4.3.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -686,7 +686,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     xdp-fp.git
+Package:                     imx-xdp-fp.git
 Version:                     1.0.0
 Outgoing License:            GPL-2.0 
 License File:                LICENSE
@@ -694,6 +694,9 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    XDP Fastpath Networking Application
 Release Location:            https://github.com/nxp-imx/imx-xdp-fp -b lf-6.12.34-2.1.0
+Origin:                      NXP (GPL-2.0-or-later)
+                             xdp_fpr_user.c - David Ahern (GPL-2.0) - Userspace tool to load XDP program
+
 --------------------------------------------
 Graphics Packages
 --------------------------------------------
@@ -970,7 +973,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-g2d-pxp.git
 Version:                     2.4
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -1044,7 +1047,7 @@ Multimedia Packages
 
 Package:                     imx-codec-4.10.0-464e9d8.bin
 Version:                     4.10.0
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1140,7 +1143,7 @@ Origin:                      NXP (LGPL-2.1)
 
 Package:                     imx-dspc-asrc-1.0.2-ce4ae5a.bin
 Version:                     1.0.2
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1260,7 +1263,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-dsp-2.1.10-ea4fe3f.bin
 Version:                     2.1.10
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1301,7 +1304,7 @@ Origin:                      NXP (BSD-3-Clause)
 Package:                     nxp-afe-voiceaec.git
 Version:                     1.0
 Outgoing License:            BSD-3-Clause 
-License File:                LICENSE.txt
+License File:                LICENSE
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP voice library base on tensorflow lite which is used by audio-front-end
@@ -1312,7 +1315,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     nxp-ssrc-2.2.3-5865e8f.bin
 Version:                     2.2.3
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1518,7 +1521,7 @@ M33 Processor Packages
 
 Package:                     imx8ulp-m33-demo-25.03.00.bin
 Version:                     25.03.00
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1534,7 +1537,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx93-m33-demo-25.06.00.bin
 Version:                     25.06.00
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1652,7 +1655,7 @@ Origin:                      NXP (Apache-2.0)
 Package:                     neutron.git
 Version:                     1.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 
-License File:                LICENSE
+License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    The firmware library and converter for i.MX Neutron NPU
