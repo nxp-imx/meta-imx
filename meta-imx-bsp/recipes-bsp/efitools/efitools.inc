@@ -84,6 +84,4 @@ fakeroot python do_sign() {
 
 FILES:${PN} += "${EFI_BOOT_PATH}"
 
-BBCLASSEXTEND = "nativesdk"
-
 SSTATE_ALLOW_OVERLAP_FILES += "${DEPLOY_DIR_IMAGE}/LockDown.efi"
