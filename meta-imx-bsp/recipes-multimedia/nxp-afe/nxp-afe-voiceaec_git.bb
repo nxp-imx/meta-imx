@@ -3,7 +3,7 @@
 DESCRIPTION = "NXP Voice Acoustic Echo Cancellation (AEC) library based on TensorFlow-lite, which is used by audio-front-end"
 SECTION = "multimedia"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bc649096ad3928ec06a8713b8d787eac"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=7bdef19938f3503cfc4c586461f99012"
 
 DEPENDS = "alsa-lib tensorflow-lite"
 
