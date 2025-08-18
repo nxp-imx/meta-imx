@@ -27,4 +27,4 @@ do_install() {
 FILES:${PN} += "${libdir}/nxp-afe/lib*${SOLIBS}"
 FILES:${PN}-dev += "${libdir}/nxp-afe/lib*${SOLIBSDEV} "
 
-COMPATIBLE_MACHINE = "(mx8mm-nxp-bsp|mx8mp-nxp-bsp|mx93-nxp-bsp|mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8mm-nxp-bsp|mx8mp-nxp-bsp|mx91-nxp-bsp|mx93-nxp-bsp|mx95-nxp-bsp)"
