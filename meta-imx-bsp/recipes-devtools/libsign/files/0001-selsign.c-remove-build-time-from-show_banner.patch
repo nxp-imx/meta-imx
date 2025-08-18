@@ -1,0 +1,39 @@
+From 052b1e9326bcc707a0b28842969745aa78580c5c Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Fri, 20 Aug 2021 12:17:55 +0800
+Subject: [PATCH] selsign.c: remove build time from show_banner
+
+Fix build reproducibility issue:
+
+| selsign.c: In function 'show_banner':
+| selsign.c:57:62: error: macro "__DATE__" might prevent reproducible
+builds [-Werror=date-time]
+|    57 |         info_cont("Build Time: " __DATE__ " " __TIME__ "\n\n");
+|       |                                                              ^
+| selsign.c:57:34: error: macro "__TIME__" might prevent reproducible builds [-Werror=date-time]
+|    57 |         info_cont("Build Time: " __DATE__ " " __TIME__ "\n\n");
+|       |                                  ^~~~~~~~
+| cc1: all warnings being treated as errors
+
+Upstream-Status: Pending
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ src/selsign/selsign.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/selsign/selsign.c b/src/selsign/selsign.c
+index 0109237..498b895 100644
+--- a/src/selsign/selsign.c
++++ b/src/selsign/selsign.c
+@@ -54,7 +54,6 @@ show_banner(void)
+ 		  "<jia.zhang@windriver.com>\n");
+ 	info_cont("Version: %s+git%s\n", LIBSIGN_VERSION, libsign_git_commit);
+ 	info_cont("Build Machine: %s\n", libsign_build_machine);
+-	info_cont("Build Time: " __DATE__ " " __TIME__ "\n\n");
+ }
+ 
+ static void
+-- 
+2.17.1
+

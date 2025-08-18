@@ -1,0 +1,40 @@
+From a0fe0c9e3b59a5502956f4e2b2b53f290e11c5cf Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Fri, 20 Aug 2021 12:42:49 +0800
+Subject: [PATCH] env.mk: fix LDFLAGS expansion
+
+When LDFLAGS expands, The -fmacro-prefix-map and -fdebug-prefix-map will
+be prefixed with -Wl, which will cause compilation error:
+ld: -f may not be used without -shared
+
+Upstream-Status: Pending
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ env.mk | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/env.mk b/env.mk
+index 68ec154..e7e6114 100644
+--- a/env.mk
++++ b/env.mk
+@@ -25,13 +25,13 @@ DESTDIR ?=
+ BINDIR ?= $(bindir)
+ LIBDIR ?= $(libdir)
+ 
+-LDFLAGS := --warn-common --no-undefined --fatal-warnings \
+-	   $(patsubst $(join -Wl,,)%,%,$(EXTRA_LDFLAGS))
++LDFLAGS := -Wl,--warn-common -Wl,--no-undefined -Wl,--fatal-warnings \
++	   $(EXTRA_LDFLAGS)
+ CFLAGS := -std=gnu11 -O2 -DLIBSIGN_VERSION=\"$(LIBSIGN_VERSION)\" \
+ 	  -Wall -Wsign-compare -Werror \
+ 	  $(addprefix $(join -L,),$(libdir)) \
+ 	  -lcrypto $(addprefix -I, $(TOPDIR)/src/include) \
+-	  $(EXTRA_CFLAGS) $(addprefix $(join -Wl,,),$(LDFLAGS))
++	  $(EXTRA_CFLAGS) $(LDFLAGS)
+ 
+ ifneq ($(DEBUG_BUILD),)
+ 	CFLAGS += -ggdb -DDEBUG_BUILD
+-- 
+2.17.1
+
