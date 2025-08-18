@@ -20,6 +20,7 @@ DEPENDS += "alsa-lib"
 
 RDEPENDS:${PN}:mx8mm-nxp-bsp = " nxp-afe-voiceaec"
 RDEPENDS:${PN}:mx8mp-nxp-bsp = " nxp-afe-voiceaec"
+RDEPENDS:${PN}:mx91-nxp-bsp = " nxp-afe-voiceaec"
 RDEPENDS:${PN}:mx93-nxp-bsp = " nxp-afe-voiceaec"
 RDEPENDS:${PN}:mx95-nxp-bsp = " nxp-afe-voiceaec"
 
