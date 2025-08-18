@@ -11,7 +11,7 @@ SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH} \
 
 IMXTEST_SRC ?= "git://github.com/nxp-imx/imx-test.git;protocol=https"
 SRCBRANCH = "lf-6.12.34_2.1.0"
-SRCREV = "f38695ee139d4d319a811aad9950c515aa8ab329" 
+SRCREV = "7bda4b9f552ed1c91023e96b4a1de20023add683"
 
 PLATFORM:mx91-nxp-bsp = "IMX8"
 PLATFORM:mx943-nxp-bsp = "IMX8ULP"
