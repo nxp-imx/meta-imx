@@ -12,4 +12,6 @@ do_install:append:imx-generic-bsp() {
     fi
 }
 
+PACKAGE_ARCH:imx-generic-bsp = "${MACHINE_SOCARCH}"
+
 FILES:${PN}:append:imx-generic-bsp = " ${systemd_system_unitdir}/psplash-start@.service.d"
