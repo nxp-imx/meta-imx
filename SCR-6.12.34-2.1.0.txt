@@ -562,7 +562,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     plug-and-trust.git
-Version:                     4.7.0
+Version:                     4.7.1
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            BSP
