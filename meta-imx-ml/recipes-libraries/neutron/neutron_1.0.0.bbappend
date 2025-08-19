@@ -2,7 +2,7 @@
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bc649096ad3928ec06a8713b8d787eac"
 
 SRCBRANCH = "main"
-SRCREV = "4bd0b7c34f1ca2fd8765e0c255d45fe90b97fb32"
+SRCREV = "20174c2c28f0ad2a8a6ea0fc5de0230ad5825c42"
 
 NEUTRON_TARGET:mx943-nxp-bsp = "imx943"
 
