@@ -298,7 +298,7 @@ Description and comments:
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.15.0-172589b
+Package:                     sof-zephyr-2.15.0-d677107
 Version:                     2.15.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -312,7 +312,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.0-ffb28ee
+Package:                     zephyr-demo-imx-4.3.0-090130c
 Version:                     4.3.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
