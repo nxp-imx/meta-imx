@@ -9,7 +9,7 @@ PROVIDES = "virtual/imxvpu"
 SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
 IMX_SRCREV_ABBREV = "785f534"
 
-SRC_URI[sha256sum] = "accca47cad7a35e113feb5a3f8364341a18ee6214e0f8dafbe3ee5537cfe14b3"
+SRC_URI[sha256sum] = "81d8b3debea2077220a964211b025f90aaacae9e23b8b75024de40943a6f6d97"
 
 S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
