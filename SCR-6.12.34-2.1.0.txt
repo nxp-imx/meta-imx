@@ -78,7 +78,7 @@ License File:                LICENSE.txt
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX System Manager
-Release Location:            https://github.com/nxp-imx/imx-sm -b master
+Release Location:            https://github.com/nxp-imx/imx-sm -b lf-6.12.34-2.1.0
 Origin:                      NXP (BSD-3-Clause)
                              CMSIS_5 (Apache-2.0) - http://silver.arm.com
                                 IAR (Apache-2.0) in CMSIS
