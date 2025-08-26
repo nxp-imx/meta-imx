@@ -298,7 +298,7 @@ Description and comments:
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.15.0-d677107
+Package:                     sof-zephyr-2.15.0-a71a460
 Version:                     2.15.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
