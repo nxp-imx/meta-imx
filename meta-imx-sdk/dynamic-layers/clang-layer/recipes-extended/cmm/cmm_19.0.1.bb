@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=94fa01670a2a8f2d3ab2de15004e0848"
 DEPENDS = "libnfnetlink libnetfilter-conntrack libxcrypt elfutils libbpf zlib libcli"
 
 SRC_URI = "${DPDK_CMM_SRC};branch=${SRCBRANCH}"
-DPDK_CMM_SRC ?= "git://github.com/nxp-imx/fpr-cmm;protocol=https"
+DPDK_CMM_SRC ?= "git://github.com/nxp-imx/cmm;protocol=https"
 
 SRCBRANCH = "xdp_cmm"
 SRCREV = "fe75c41d969bbd638035af99b48c5e95f6197946"
