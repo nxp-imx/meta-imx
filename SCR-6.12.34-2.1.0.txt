@@ -618,7 +618,7 @@ License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    Connection Montitoring Manager for offloading kernel and register entity info
-Release Location:            https://github.com/nxp-imx/fpr-cmm -b lf-6.12.34-2.1.0
+Release Location:            https://github.com/nxp-imx/cmm -b lf-6.12.34-2.1.0
 Origin:                      NXP (GPL-2.0-or-later)
        		                 libnfnetlink - netfilter.org (GPLv2+) - https://git.netfilter.org/libnfnetlink
 			                 libmnl - netfilter.org (LGPLv2.1+) - https://netfilter.org/projects/libmnl/
