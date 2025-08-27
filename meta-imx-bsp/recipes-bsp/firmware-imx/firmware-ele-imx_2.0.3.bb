@@ -9,7 +9,7 @@ inherit fsl-eula-unpack use-imx-security-controller-firmware deploy
 
 SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
 IMX_SRCREV_ABBREV = "18a5d17"
-SRC_URI[sha256sum] = "3e03776db179e78a5b6409761da1884ab02430033f45c0a53e9eff12bf33f17e"
+SRC_URI[sha256sum] = "d880d8e4cc8a542fcf2e332d629c6e650ad47abb5f43f7589d92ad3179af84cb"
 
 S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
