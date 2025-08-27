@@ -51,6 +51,7 @@ SOFTOOLS_INSTALL:mx8mp-nxp-bsp  = "sof-tools"
 SOFTOOLS_INSTALL:mx8ulp-nxp-bsp = "sof-tools"
 
 RDEPENDS:${PN} = " \
+    bluealsa \
     ${@bb.utils.contains("DISTRO_FEATURES", "alsa",  "${ALSA_INSTALL}", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio",  "${PULSEAUDIO_INSTALL}", "", d)} \
     ${SRC_INSTALL} \
