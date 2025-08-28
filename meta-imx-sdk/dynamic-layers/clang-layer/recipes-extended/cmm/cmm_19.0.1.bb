@@ -10,7 +10,7 @@ SRC_URI = "${DPDK_CMM_SRC};branch=${SRCBRANCH}"
 DPDK_CMM_SRC ?= "git://github.com/nxp-imx/cmm;protocol=https"
 
 SRCBRANCH = "xdp_cmm"
-SRCREV = "fe75c41d969bbd638035af99b48c5e95f6197946"
+SRCREV = "0d47e4d1aabfb955c8b7ff35fbacaf73b94f5862"
 
 inherit autotools pkgconfig
 
