@@ -1,5 +1,4 @@
 # Copyright (C) 2022-2024 NXP
-
 DESCRIPTION = "Zephyr Demo for i.MX"
 HOMEPAGE = "https://github.com/zephyrproject-rtos/zephyr"
 SECTION = "kernel"
@@ -10,6 +9,8 @@ SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.tar.gz"
 SRC_URI[sha256sum] = "c17dedc05dd434a2c2d6366e4c20569939c029904f1b039952b16c4507e3a40c"
 
 IMX_SRCREV_ABBREV = "302ab40"
+
+S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
 inherit allarch
 

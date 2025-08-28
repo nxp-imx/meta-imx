@@ -1,18 +1,19 @@
 # Copyright (C) 2020-2024 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 # The recipe is licensed under MIT (see COPYING.MIT for the terms)
-
 DESCRIPTION = "Sound Open Firmware with Zephyr"
 HOMEPAGE = "https://www.sofproject.org"
 SECTION = "kernel"
 LICENSE = "Apache-2.0 & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc \
-                    file://LICENCE-sof;md5=14abb55d71048ebecff1a104640546b6 \
-"
+                    file://LICENCE-sof;md5=14abb55d71048ebecff1a104640546b6"
+
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.tar.gz"
 SRC_URI[sha256sum] = "036c1abc6944b15c8c29bef3178829b665e4ed4f0f6cd9dd02a050f9a023cec8"
 
 IMX_SRCREV_ABBREV = "4b0b578"
+
+S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
 inherit allarch
 
