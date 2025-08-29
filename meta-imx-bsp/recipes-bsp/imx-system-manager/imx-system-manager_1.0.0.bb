@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f2a70813bc08547f509361c08b718861"
 SRC_URI = "${IMX_SYSTEM_MANAGER_SRC};branch=${SRCBRANCH}"
 IMX_SYSTEM_MANAGER_SRC ?= "git://github.com/nxp-imx/imx-sm.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "f041b9472f933db645f34608e3e32829f65af48a"
+SRCREV = "af1e37026c6ba19cdca98fd6e91494efd3e7b5ec"
 
 S = "${WORKDIR}/git"
 
