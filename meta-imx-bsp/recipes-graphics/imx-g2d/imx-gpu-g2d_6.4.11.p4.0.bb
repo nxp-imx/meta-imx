@@ -13,7 +13,7 @@ SRC_URI = "${FSL_MIRROR}/${IMX_BIN_NAME}.bin;name=${TARGET_ARCH};fsl-eula=true"
 IMX_BIN_NAME = "${BP}-${TARGET_ARCH}-${IMX_SRCREV_ABBREV}"
 IMX_SRCREV_ABBREV = "032324a"
 SRC_URI[aarch64.sha256sum] = "dd7c043bbc9d63383e1de3b0e7a6c9b3f8efb365824e7936b48ef59eab1ec0ea"
-SRC_URI[arm.sha256sum] = "6e9134afa10073bd6e79d1a7c6afca06582e7ca58f7ddc92b97fd273b1cf1cff"
+SRC_URI[arm.sha256sum] = "fde0fd5445f325addf296eb4fb7010004d9a097532550f08df7ae7dafe047203"
 
 S = "${WORKDIR}/${IMX_BIN_NAME}"
 
