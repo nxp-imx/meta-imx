@@ -17,13 +17,22 @@ D_SUBDIR                 = ""
 D_SUBDIR:class-native    = "${STAGING_DIR_NATIVE}"
 D_SUBDIR:class-nativesdk = "/opt/${DISTRO}"
 
-# SCR is the location and name of the Software Content Register file
-# relative to ${D}${D_SUBDIR}.
+# SCR and SBOM are the location and name of the Software Content Register file
+# and Software Bill of Materials file relative to ${D}${D_SUBDIR}
 SCR = "SCR.txt"
+SBOM = "SBOM.spdx.json"
 
 do_install () {
     install -d ${D}${D_SUBDIR}
     cp -r ${S}/* ${D}${D_SUBDIR}
+    rm ${D}${D_SUBDIR}/COPYING
+    if [ ! -f ${D}${D_SUBDIR}/${SCR} ]; then
+        bbfatal "Missing Software Content Register \"${D}${D_SUBDIR}/${SCR}\""
+    fi
+
+    # Don't install the SCR or SBOM
+    rm ${D}${D_SUBDIR}/${SCR}
+    rm -f ${D}${D_SUBDIR}/${SBOM}
 
     # Adjust for multilib and usrmerge
     # FIXME: This does not handle nonarch_base_libdir
@@ -37,12 +46,6 @@ do_install () {
         mv ${D}/usr/lib/* ${D}${libdir}
         rm -r ${D}/usr/lib
     fi
-
-    rm ${D}${D_SUBDIR}/COPYING
-    if [ ! -f ${D}${D_SUBDIR}/${SCR} ]; then
-        bbfatal "Missing Software Content Register \"${D}${D_SUBDIR}/${SCR}\""
-    fi
-    rm ${D}${D_SUBDIR}/${SCR}
 }
 
 FILES:${PN} = "/"
