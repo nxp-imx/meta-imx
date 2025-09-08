@@ -16,7 +16,6 @@ DEPENDS += " \
     dtc-native \
     flex-native \
     gnutls-native \
-    efitools-native \
     python3-setuptools-native \
     xxd-native \
 "
