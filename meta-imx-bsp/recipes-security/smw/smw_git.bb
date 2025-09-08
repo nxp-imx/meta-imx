@@ -32,7 +32,7 @@ S = "${WORKDIR}/git/smw"
 
 inherit cmake python3native
 
-PACKAGECONFIG ??= "${PACKAGECONFIG_DRIVERS}"
+PACKAGECONFIG ??= "${PACKAGECONFIG_DRIVERS} ${PACKAGECONFIG_FEATURES}"
 PACKAGECONFIG_DRIVERS                = ""
 PACKAGECONFIG_DRIVERS:mx8qxp-nxp-bsp = "ele-seco"
 PACKAGECONFIG_DRIVERS:mx8dx-nxp-bsp  = "ele-seco"
@@ -41,8 +41,14 @@ PACKAGECONFIG_DRIVERS:mx91-nxp-bsp   = "ele"
 PACKAGECONFIG_DRIVERS:mx93-nxp-bsp   = "ele"
 PACKAGECONFIG_DRIVERS:mx95-nxp-bsp   = "ele"
 
+PACKAGECONFIG_FEATURES              = ""
+PACKAGECONFIG_FEATURES:mx91-nxp-bsp = "tls"
+PACKAGECONFIG_FEATURES:mx93-nxp-bsp = "tls"
+PACKAGECONFIG_FEATURES:mx95-nxp-bsp = "tls"
+
 PACKAGECONFIG[ele] = "-DELE_ROOT=${STAGING_DIR_HOST},,imx-secure-enclave,,,ele-seco"
 PACKAGECONFIG[ele-seco] = "-DSECO_ROOT=${STAGING_DIR_HOST},,imx-secure-enclave-seco,,,ele"
+PACKAGECONFIG[tls] = "-DENABLE_TLS=ON,-DENABLE_TLS=OFF,openssl"
 
 CFLAGS[unexport] = "1"
 CPPFLAGS[unexport] = "1"
@@ -53,6 +59,7 @@ LD[unexport] = "1"
 TARGET_LDFLAGS:remove = "${DEBUG_PREFIX_MAP}"
 
 EXTRA_OECMAKE = " \
+    -DYOCTO_BUILD=ON \
     -DTA_DEV_KIT_ROOT=${TA_DEV_KIT_DIR} \
     -DTEEC_ROOT=${STAGING_DIR_HOST} \
     -DJSONC_ROOT="${COMPONENTS_DIR}/${TARGET_ARCH}/json-c/usr" \
@@ -69,7 +76,7 @@ FILES:${PN} += "${nonarch_base_libdir}/optee_armtz/*"
 
 FILES:${PN}-tests = "${bindir}/* ${datadir}/${BPN}/*"
 
-RDEPENDS:${PN}-tests += "bash cmake"
+RDEPENDS:${PN}-tests += "cmake"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
