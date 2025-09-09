@@ -10,7 +10,7 @@ SRC_URI:append:imx-nxp-bsp = " ${FSL_MIRROR}/wpa_supplicant-${PV}-${IMX_SRCREV_A
 
 IMX_SRCREV_ABBREV = "aaa7ec2f"
 
-SRC_URI[sha256sum] = "ef4e49140f158b7f7be21e12b2609ba5901eff56a5b7a1ca936348560a9dbaea"
+SRC_URI[sha256sum] = "10d31e37d6d08a7d383e907aac252895d42518e9cd53d122d6591e08f0f1cd87"
 
 S = "${WORKDIR}/wpa_supplicant-${PV}-${IMX_SRCREV_ABBREV}"
 
