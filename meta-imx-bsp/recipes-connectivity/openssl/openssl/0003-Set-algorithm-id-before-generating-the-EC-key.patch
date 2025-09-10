@@ -1,0 +1,70 @@
+From 27e4bd35a42287248bd5253836c265dd555b1ee2 Mon Sep 17 00:00:00 2001
+From: Ilie Halip <ilie.halip@nxp.com>
+Date: Wed, 10 Sep 2025 08:46:50 +0200
+Subject: [PATCH] [PATCH] Set "algorithm-id" before generating the EC key.
+
+Upstream-Status: Pending
+
+Signed-off-by: Ilie Halip <ilie.halip@nxp.com>
+---
+ ssl/s3_lib.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+
+diff --git a/ssl/s3_lib.c b/ssl/s3_lib.c
+index d6ed169f39..68938bb8fb 100644
+--- a/ssl/s3_lib.c
++++ b/ssl/s3_lib.c
+@@ -4742,6 +4742,30 @@ int ssl_generate_master_secret(SSL_CONNECTION *s, unsigned char *pms,
+     return ret;
+ }
+ 
++void ssl_generate_set_pkey_alg(SSL_CONNECTION *s, EVP_PKEY_CTX *pctx)
++{
++    const char *alg = NULL;
++    OSSL_PARAM algparams[2] = { 0 };
++
++    switch (s->version) {
++        case TLS1_2_VERSION:
++            alg = "tls1.2";
++            break;
++        case TLS1_3_VERSION:
++            alg = "tls1.3";
++            break;
++    }
++
++    if (alg) {
++        algparams[0] = OSSL_PARAM_construct_utf8_string(OSSL_PKEY_PARAM_ALGORITHM_ID,
++            (char *)alg, 0);
++        algparams[1] = OSSL_PARAM_construct_end();
++
++        /* intentionally ignore the result */
++        EVP_PKEY_CTX_set_params(pctx, algparams);
++    }
++}
++
+ /* Generate a private key from parameters */
+ EVP_PKEY *ssl_generate_pkey(SSL_CONNECTION *s, EVP_PKEY *pm)
+ {
+@@ -4756,6 +4780,9 @@ EVP_PKEY *ssl_generate_pkey(SSL_CONNECTION *s, EVP_PKEY *pm)
+         goto err;
+     if (EVP_PKEY_keygen_init(pctx) <= 0)
+         goto err;
++        
++    ssl_generate_set_pkey_alg(s, pctx);
++
+     if (EVP_PKEY_keygen(pctx, &pkey) <= 0) {
+         EVP_PKEY_free(pkey);
+         pkey = NULL;
+@@ -4794,6 +4821,9 @@ EVP_PKEY *ssl_generate_pkey_group(SSL_CONNECTION *s, uint16_t id)
+         SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_EVP_LIB);
+         goto err;
+     }
++
++    ssl_generate_set_pkey_alg(s, pctx);
++
+     if (EVP_PKEY_keygen(pctx, &pkey) <= 0) {
+         SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_EVP_LIB);
+         EVP_PKEY_free(pkey);
+-- 
+2.43.0
+
