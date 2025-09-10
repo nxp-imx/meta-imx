@@ -1,0 +1,10 @@
+# Vim temporary files
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+
+*.orig
+*.rej
+*~
+
+# Source Code files with incompatible licenses
+*.patch
