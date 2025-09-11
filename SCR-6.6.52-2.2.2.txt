@@ -131,9 +131,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.2.1-d30b14a.bin
-Version:                     2.0.2.1
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
+Package:                     firmware-ele-imx-2.0.3-286c884.bin
+Version:                     2.0.3
+Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
@@ -752,7 +752,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r50.6-696f9a6.bin
+Package:                     mali-imx-r50.6-a43c3df.bin
 Version:                     r50.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
