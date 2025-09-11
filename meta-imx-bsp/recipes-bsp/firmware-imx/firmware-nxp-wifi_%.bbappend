@@ -15,24 +15,7 @@ do_install() {
 PACKAGES += "${PN}-all-sdio ${PN}-all-pcie ${PN}-all-usb"
 PACKAGES:remove = "${PN}-nxp8801-sdio"
 
-RDEPENDS:${PN}-all-sdio = " \
-    ${PN}-nxp8987-sdio \
-    ${PN}-nxp8997-sdio \
-    ${PN}-nxp9098-sdio \
-    ${PN}-nxpiw416-sdio \
-    ${PN}-nxpiw610-sdio \
-    ${PN}-nxpiw612-sdio \
-"
-RDEPENDS:${PN}-all-usb = " \
-    ${PN}-nxpiw610-usb \
-"
+RDEPENDS:${PN}-all-sdio:remove = "${PN}-nxp8801-sdio"
+RDEPENDS:${PN}-all-sdio += "${PN}-nxp8997-sdio"
 
-RDEPENDS:${PN}-all-pcie = " \
-    ${PN}-nxp8997-pcie \
-    ${PN}-nxp9098-pcie \
-    ${PN}-nxpaw693-pcie \
-"
-
-ALLOW_EMPTY:${PN}-all-sdio = "1"
-ALLOW_EMPTY:${PN}-all-pcie = "1"
 ALLOW_EMPTY:${PN}-all-usb = "1"
