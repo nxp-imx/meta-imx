@@ -95,4 +95,6 @@ FILES:${PN}-grecorder = "${bindir}/grecorder-1.0 \
 FILES:${PN}-librecorder-engine = "${libdir}/librecorder_engine-1.0${SOLIBS}"
 FILES:${PN}-libplayengine = "${libdir}/libplayengine-1.0${SOLIBS}"
 
+INSANE_SKIP:${PN} = "build-deps"
+
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
