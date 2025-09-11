@@ -12,27 +12,7 @@ do_install() {
     oe_runmake install INSTALLDIR=${D}${nonarch_base_libdir}/firmware/nxp
 }
 
-FILES:${PN}-nxp8997-sdio = " \
-    ${nonarch_base_libdir}/firmware/nxp/sd*8997* \
-"
-FILES:${PN}-nxp9098-sdio = " \
-    ${nonarch_base_libdir}/firmware/nxp/sd*9098* \
-"
-
-FILES:${PN}-nxpiw610-sdio += " \
-    ${nonarch_base_libdir}/firmware/nxp/sduartspi_iw610.bin.se \
-"
-
-FILES:${PN}-nxpiw610-usb += " \
-    ${nonarch_base_libdir}/firmware/nxp/usb*_iw610.bin.se \
-"
-
-FILES:${PN}-nxpaw693-pcie += " \
-    ${nonarch_base_libdir}/firmware/nxp/pcie*aw693* \
-    ${nonarch_base_libdir}/firmware/nxp/uart*aw693* \
-"
-
-PACKAGES += "${PN}-all-sdio ${PN}-all-pcie ${PN}-all-usb ${PN}-nxpiw610-usb ${PN}-nxpaw693-pcie"
+PACKAGES += "${PN}-all-sdio ${PN}-all-pcie ${PN}-all-usb"
 PACKAGES:remove = "${PN}-nxp8801-sdio"
 
 RDEPENDS:${PN}-all-sdio = " \
