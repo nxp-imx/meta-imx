@@ -765,7 +765,7 @@ Origin:                      NXP (proprietary)
                              Vulkan Header (Apache-2.0)- https://github.com/KhronosGroup/Vulkan-Headers
                              OpenGLES Header (Apache-2.0)- https://github.com/KhronosGroup/OpenGL-Registry
                              Mali GPUs Android Gralloc module (Apache-2.0) - https://developer.arm.com/downloads/-/mali-drivers/android-gralloc-module
-                             vulkan-wsi (MIT) - https://gitlab.freedesktop.org/mesa/vulkan-wsi-layer
+                             Vulkan Window System Integration Layer (MIT) - https://gitlab.freedesktop.org/mesa/vulkan-wsi-layer
                              Open Source LLVM/Clang Source Code (Apache-2.0 with LLVM Exceptions) - https://github.com/llvm/llvm-project
 
 
