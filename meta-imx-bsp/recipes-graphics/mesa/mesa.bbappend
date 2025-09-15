@@ -7,9 +7,6 @@ SRC_URI_RVGPU = "file://0001-egl-Avoid-initializing-zink-driver-if-not-enabled-a
                  file://0003-Enable-rvgpu-vertex-shader.patch \
                  file://0004-Disable-wide-point-line-feature-to-avoid-CTS-failure.patch \
 "
-# Below patch can be dropped on mesa v25
-SRC_URI:append:mx93-nxp-bsp = " file://0001-MGS-7673-egl-dri2-fix-video-showing-wrong-frame.patch"
-SRC_URI:append:imx-nxp-bsp  = " file://0001-MGS-7599-cso-fix-virgl-driver-assert-issue.patch"
 
 PACKAGECONFIG:append = "${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', ' rvgpu', '', d)}"
 PACKAGECONFIG:remove = "${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', 'virgl zink', '', d)}"
