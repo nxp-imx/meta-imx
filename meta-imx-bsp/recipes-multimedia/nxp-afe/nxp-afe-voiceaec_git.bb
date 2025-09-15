@@ -24,6 +24,7 @@ do_install() {
     ln -sf -r ${D}${libdir}/nxp-afe/libvoiceaec.so.* ${D}${libdir}/nxp-afe/libvoiceaec.so
 }
 
+# Library is dynamically loaded, so include .so in main package
 FILES:${PN} += "${libdir}/nxp-afe/* "
 INSANE_SKIP:${PN} += "dev-so"
 
