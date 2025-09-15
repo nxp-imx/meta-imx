@@ -2,8 +2,8 @@ require imx-gpu-viv-6-overrides.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 
-IMX_SRCREV_ABBREV = "8c6f747"
+IMX_SRCREV_ABBREV = "ce27226"
 
-SRC_URI[sha256sum] = "c597aa28a013ddb762fa5b40c80943a6422607bd31492613e1b19f270278e0ad"
+SRC_URI[sha256sum] = "149acf1ccf7476fe3e949692bbaffb2d6ca4b636b329c36c4bdd0d04fcbff808"
 
 COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
