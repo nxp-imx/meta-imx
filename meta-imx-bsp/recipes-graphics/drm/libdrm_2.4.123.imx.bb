@@ -16,8 +16,6 @@ IMX_LIBDRM_SRC ?= "git://github.com/nxp-imx/libdrm-imx.git;protocol=https"
 SRCBRANCH = "libdrm-imx-2.4.123"
 SRCREV = "9e42c1b2bfd30a43eafbfc7c45effd3abc0e202d"
 
-S = "${WORKDIR}/git"
-
 DEFAULT_PREFERENCE = "-1"
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 

@@ -103,8 +103,6 @@ GST1.0_SRC ?= "gitsm://github.com/nxp-imx/gstreamer.git;protocol=https"
 SRCBRANCH = "imx-1.26.x"
 SRCREV = "c2001a45f587d342c0906ac1b85e5a868e7f5129"
 
-S = "${WORKDIR}/git"
-
 PACKAGECONFIG[tests] = "-Dtests=enabled,-Dtests=disabled"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
