@@ -4,9 +4,9 @@ DESCRIPTION = "Mesa graphics renderer providing improved software-based performa
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 
-SRC_URI[sha256sum] = "c20f63b1100c39740c6f1ad6bc4ddf3bccc36cc2f45eb3d643460af738ee676e"
+SRC_URI[sha256sum] = "60f67e4a44fe5a19d2ab144711225d306cb36523f598395e7fcbadf2f5b49ddd"
 
-IMX_SRCREV_ABBREV = "8caa1b0"
+IMX_SRCREV_ABBREV = "572aa04"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
 
