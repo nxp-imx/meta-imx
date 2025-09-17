@@ -1,4 +1,4 @@
-From a6eb5e0b205533420b6453da47d46dc791d5c3cd Mon Sep 17 00:00:00 2001
+From ff41491403a63422921358a25a4798b2cdfa5e9d Mon Sep 17 00:00:00 2001
 From: Fugang Duan <fugang.duan@nxp.com>
 Date: Mon, 10 Aug 2020 17:36:19 +0800
 Subject: [PATCH] MLK-23858 profiles: audio: increased the MTU size to MAX MTU
@@ -12,12 +12,17 @@ which will help to set 3-DH5 packet type during A2DP streaming.
 Upstream-Status: Inappropriate [i.MX specific]
 
 Signed-off-by: Fugang Duan <fugang.duan@nxp.com>
+---
+ profiles/audio/a2dp.c  |  4 ++++
+ profiles/audio/avctp.h |  2 +-
+ profiles/audio/avdtp.c | 25 +++++++++++++++++++++++--
+ 3 files changed, 28 insertions(+), 3 deletions(-)
 
-Index: bluez-5.62/profiles/audio/a2dp.c
-===================================================================
---- bluez-5.62.orig/profiles/audio/a2dp.c
-+++ bluez-5.62/profiles/audio/a2dp.c
-@@ -2507,6 +2507,8 @@ static bool a2dp_server_listen(struct a2
+diff --git a/profiles/audio/a2dp.c b/profiles/audio/a2dp.c
+index 7c0f9c5..aa6650f 100644
+--- a/profiles/audio/a2dp.c
++++ b/profiles/audio/a2dp.c
+@@ -2676,6 +2676,8 @@ static bool a2dp_server_listen(struct a2dp_server *server)
  {
  	GError *err = NULL;
  	BtIOMode mode;
@@ -26,19 +31,19 @@ Index: bluez-5.62/profiles/audio/a2dp.c
  
  	if (server->io)
  		return true;
-@@ -2519,6 +2521,8 @@ static bool a2dp_server_listen(struct a2
+@@ -2688,6 +2690,8 @@ static bool a2dp_server_listen(struct a2dp_server *server)
  				BT_IO_OPT_PSM, AVDTP_PSM,
  				BT_IO_OPT_MODE, mode,
  				BT_IO_OPT_SEC_LEVEL, BT_IO_SEC_MEDIUM,
 +				BT_IO_OPT_OMTU, option_omtu,
 +				BT_IO_OPT_IMTU, option_imtu,
  				BT_IO_OPT_CENTRAL, true,
- 				BT_IO_OPT_INVALID);
- 	if (server->io)
-Index: bluez-5.62/profiles/audio/avctp.h
-===================================================================
---- bluez-5.62.orig/profiles/audio/avctp.h
-+++ bluez-5.62/profiles/audio/avctp.h
+ 				/* Set Input MTU to 0 for auto-tune attempt */
+ 				BT_IO_OPT_IMTU, 0,
+diff --git a/profiles/audio/avctp.h b/profiles/audio/avctp.h
+index 02712bf..9055832 100644
+--- a/profiles/audio/avctp.h
++++ b/profiles/audio/avctp.h
 @@ -12,7 +12,7 @@
  #define AVCTP_CONTROL_PSM		23
  #define AVCTP_BROWSING_PSM		27
@@ -48,11 +53,11 @@ Index: bluez-5.62/profiles/audio/avctp.h
  #define AVC_HEADER_LENGTH 3
  
  /* ctype entries */
-Index: bluez-5.62/profiles/audio/avdtp.c
-===================================================================
---- bluez-5.62.orig/profiles/audio/avdtp.c
-+++ bluez-5.62/profiles/audio/avdtp.c
-@@ -2354,6 +2354,9 @@ static void avdtp_connect_cb(GIOChannel
+diff --git a/profiles/audio/avdtp.c b/profiles/audio/avdtp.c
+index 17671a1..14e7f37 100644
+--- a/profiles/audio/avdtp.c
++++ b/profiles/audio/avdtp.c
+@@ -2397,6 +2397,9 @@ static void avdtp_connect_cb(GIOChannel *chan, GError *err, gpointer user_data)
  	struct avdtp *session = user_data;
  	char address[18];
  	int err_no = EIO;
@@ -62,7 +67,7 @@ Index: bluez-5.62/profiles/audio/avdtp.c
  
  	if (err) {
  		err_no = err->code;
-@@ -2363,6 +2366,20 @@ static void avdtp_connect_cb(GIOChannel
+@@ -2406,6 +2409,20 @@ static void avdtp_connect_cb(GIOChannel *chan, GError *err, gpointer user_data)
  
  	if (!session->io)
  		session->io = g_io_channel_ref(chan);
@@ -83,7 +88,7 @@ Index: bluez-5.62/profiles/audio/avdtp.c
  
  	/* Check if kernel supports reading packet types */
  	bt_io_get(chan, NULL, BT_IO_OPT_PHY, &session->phy, BT_IO_OPT_INVALID);
-@@ -2468,6 +2485,8 @@ static GIOChannel *l2cap_connect(struct
+@@ -2511,6 +2528,8 @@ static GIOChannel *l2cap_connect(struct avdtp *session, BtIOMode mode)
  	GError *err = NULL;
  	GIOChannel *io;
  	const bdaddr_t *src;
@@ -92,7 +97,7 @@ Index: bluez-5.62/profiles/audio/avdtp.c
  	src = btd_adapter_get_address(device_get_adapter(session->device));
  
  	if (session->phy)
-@@ -2479,8 +2498,8 @@ static GIOChannel *l2cap_connect(struct
+@@ -2522,8 +2541,8 @@ static GIOChannel *l2cap_connect(struct avdtp *session, BtIOMode mode)
  					BT_IO_OPT_PSM, AVDTP_PSM,
  					BT_IO_OPT_MODE, mode,
  					BT_IO_OPT_SEC_LEVEL, BT_IO_SEC_MEDIUM,
@@ -103,7 +108,7 @@ Index: bluez-5.62/profiles/audio/avdtp.c
  					BT_IO_OPT_INVALID);
  	else
  		io = bt_io_connect(avdtp_connect_cb, session,
-@@ -2491,6 +2510,8 @@ static GIOChannel *l2cap_connect(struct
+@@ -2534,6 +2553,8 @@ static GIOChannel *l2cap_connect(struct avdtp *session, BtIOMode mode)
  					BT_IO_OPT_PSM, AVDTP_PSM,
  					BT_IO_OPT_MODE, mode,
  					BT_IO_OPT_SEC_LEVEL, BT_IO_SEC_MEDIUM,
