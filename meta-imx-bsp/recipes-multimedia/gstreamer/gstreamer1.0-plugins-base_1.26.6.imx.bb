@@ -20,8 +20,6 @@ SRC_URI = "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-ba
            "
 SRC_URI[sha256sum] = "edd4338b45c26a9af28c0d35aab964a024c3884ba6f520d8428df04212c8c93a"
 
-S = "${WORKDIR}/gst-plugins-base-${PV}"
-
 DEPENDS += "iso-codes util-linux zlib"
 
 inherit gobject-introspection

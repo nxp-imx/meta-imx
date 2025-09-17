@@ -8,7 +8,6 @@ SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf"
 
 inherit cmake
 
-S = "${WORKDIR}/git"
 OECMAKE_SOURCEPATH = "${S}/tensorflow/lite/tools/cmake/native_tools"
 
 BBCLASSEXTEND = "native nativesdk"

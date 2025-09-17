@@ -46,8 +46,6 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
 
-S = "${WORKDIR}/git"
-
 # OpenCV wants to download more files during configure.  We download these in
 # do_fetch and construct a source cache in the format it expects
 OPENCV_DLDIR = "${WORKDIR}/downloads"
