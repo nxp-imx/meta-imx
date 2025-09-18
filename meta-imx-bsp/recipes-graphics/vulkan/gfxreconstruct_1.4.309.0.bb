@@ -16,7 +16,6 @@ SRCREV_SPIRV-Reflect = "c637858562fbce1b6f5dc7ca48d4e8a5bd117b70"
 
 SRCREV_FORMAT = "default_SPIRV-Reflect"
 
-S = "${WORKDIR}/git"
 
 inherit cmake features_check
 

@@ -17,8 +17,6 @@ SECO_LIB_SRC ?= "git://github.com/NXP/imx-seco-libs.git;protocol=https"
 SRCBRANCH = "lf-6.6.3_1.0.0"
 SRCREV = "273553f207425f773400be7a7f3a7c425d892d6f"
 
-S = "${WORKDIR}/git"
-
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install () {

@@ -18,7 +18,6 @@ SRC_URI += "\
         git://github.com/nvpro-samples/vk_video_samples.git;protocol=https;destsuffix=git/external/video-parser/src;name=video-parser;branch=main \
         file://gen-framework-path.patch \
         "
-S = "${WORKDIR}/git"
 
 do_install() {
 	install -d ${D}/${CTSDIR}

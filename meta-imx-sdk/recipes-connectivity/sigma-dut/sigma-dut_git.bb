@@ -10,7 +10,6 @@ SRC_URI = "git://git.codelinaro.org/clo/la/platform/vendor/qcom-opensource/wlan/
 
 SRCREV = "fd7359aed6aaba745e31dd0a9fed80578372d554"
 
-S = "${WORKDIR}/git"
 
 do_install() {
         install -d ${D}${sbindir}

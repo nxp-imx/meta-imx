@@ -167,7 +167,6 @@ SRC_URI += "file://0001-Revert-protocol-no-found-wayland-scanner-with-Yocto-.pat
             file://0001-g2d-renderer.c-Include-sys-stat.h.patch"
 SRCBRANCH = "weston-imx-10.0.5"
 SRCREV = "e85e89f2f852fee2bf15cc2544924b0791031ac7"
-S = "${WORKDIR}/git"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
 REQUIRED_DISTRO_FEATURES          = "opengl"

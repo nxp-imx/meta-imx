@@ -7,7 +7,6 @@ SRC_URI = "git://gitlab.freedesktop.org/emersion/libdisplay-info.git;branch=main
 
 DEPENDS = "hwdata-native"
 
-S = "${WORKDIR}/git"
 PV = "0.1.1"
 SRCREV = "92b031749c0fe84ef5cdf895067b84a829920e25"
 

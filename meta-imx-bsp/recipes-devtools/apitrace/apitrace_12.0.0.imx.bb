@@ -12,8 +12,6 @@ APITRACE_SRC ?= "gitsm://github.com/nxp-imx/apitrace-imx.git;protocol=https"
 SRCBRANCH = "imx_12.0"
 SRCREV = "4d4f66baea618fb743c91aac149f44f9965d3b3b"
 
-S = "${WORKDIR}/git"
-
 inherit cmake pkgconfig
 
 PACKAGECONFIG ??= " \

@@ -12,7 +12,6 @@ SRC_URI = " \
     file://0004-Change-gfxreconstruct-layer-to-implicit-layer.patch \
 "
 SRCREV = "ad85498e33a53f4c89979e0af8e3fe3b512aa47c"
-S = "${WORKDIR}/git"
 
 inherit cmake features_check
 

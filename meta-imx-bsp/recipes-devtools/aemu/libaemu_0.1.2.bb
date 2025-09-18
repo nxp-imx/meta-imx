@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ff39be111c2cce0426721beaa1211c63"
 
 SRC_URI = "git://android.googlesource.com/platform/hardware/google/aemu;protocol=https;branch=main"
 SRCREV = "dd8b929c247ce9872c775e0e5ddc4300011d0e82"
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

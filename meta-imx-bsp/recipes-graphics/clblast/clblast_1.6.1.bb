@@ -7,7 +7,6 @@ SRC_URI = "git://github.com/CNugteren/CLBlast.git;protocol=https;branch=master \
 
 SRCREV = "e3ce21bb937f07b8282dccf4823e2acbdf286d17"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

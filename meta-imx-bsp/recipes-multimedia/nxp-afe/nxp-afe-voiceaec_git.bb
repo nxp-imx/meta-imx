@@ -14,7 +14,6 @@ NXPAFE_VOICETFLITE_SRC ?= "git://github.com/nxp-imx/imx-voice-tflite.git;protoco
 SRCBRANCH = "master"
 SRCREV = "004cb31d0cfd699df65e5568f0d22d5f3af2a52a"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig
 

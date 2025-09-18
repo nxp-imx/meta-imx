@@ -14,8 +14,6 @@ SRC_URI = "gitsm://github.com/ARM-software/${BPN}.git;branch=master;protocol=htt
 "
 SRCREV = "9e0f8ce6b5d6056a4ede30ece59836a7bcaf5ea0"
 
-S = "${WORKDIR}/git"
-
 inherit cmake pkgconfig
 
 OECMAKE_GENERATOR = "Unix Makefiles"

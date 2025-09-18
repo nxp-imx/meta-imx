@@ -17,7 +17,6 @@ SRCREV = "b90191e6c53aba954370e1db9a09a843124c24f5"
 SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https"
 DEPENDS = "virtual/libiconv openssl"
 
-S = "${WORKDIR}/git"
 inherit autotools pkgconfig bash-completion
 
 EXTRA_OECONF = " \

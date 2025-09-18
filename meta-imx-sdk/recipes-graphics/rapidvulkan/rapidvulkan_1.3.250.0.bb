@@ -7,8 +7,6 @@ DEPENDS = "vulkan-loader"
 SRC_URI = "git://github.com/Unarmed1000/RapidVulkan;protocol=https;branch=master"
 SRCREV = "186a85bea780414f55baec2b6c803002080b4ac8"
 
-S = "${WORKDIR}/git"
-
 inherit cmake
 
 ALLOW_EMPTY:${PN} = "1"

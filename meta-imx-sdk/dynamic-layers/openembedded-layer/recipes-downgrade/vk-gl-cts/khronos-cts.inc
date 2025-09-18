@@ -14,11 +14,9 @@ SRC_URI = "\
         git://github.com/Igalia/vk_video_samples.git;protocol=https;destsuffix=git/external/nvidia-video-samples/src;name=video-parser;nobranch=1 \
 "
 
-S = "${WORKDIR}/git"
 
 SRCREV_FORMAT = "vk-gl-cts_amber_glslang_spirv-headers_spirv-tools_jsoncpp_vulkan-docs"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig cmake features_check python3native qemu
 

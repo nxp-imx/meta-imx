@@ -14,7 +14,6 @@ SRCREV = "b4bf9396179aadbd1eade7d97b0269baa1c98c01"
 
 inherit autotools pkgconfig
 
-S = "${WORKDIR}/git"
 
 EXTRA_OECONF += " --with-cpal=bpf"
 

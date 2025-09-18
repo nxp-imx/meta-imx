@@ -9,7 +9,6 @@ DPDK_XDP_SRC ?= "git://github.com/nxp-imx/imx-xdp-fp;protocol=https"
 SRCBRANCH = "fpr"
 SRCREV = "01bd3e1dba565c803d36c3adcfb1c10dc153fe51"
 
-S = "${WORKDIR}/git"
 
 export SDKTARGETSYSROOT = "${STAGING_DIR_TARGET}"
 

@@ -8,7 +8,6 @@ SRC_URI = "git://github.com/alpqr/qt5-cinematic-experience.git;branch=master;pro
 
 SRCREV = "fea04d7004a1608308c11189d74bb92d3decbe3d"
 
-S = "${WORKDIR}/git"
 
 inherit qt6-cmake
 

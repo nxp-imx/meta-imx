@@ -11,7 +11,6 @@ DEPENDS += "opencl-headers"
 PROVIDES = "virtual/opencl-icd"
 RPROVIDES:${PN} = "virtual-opencl-icd"
 
-S = "${WORKDIR}/git"
 
 SRCREV = "5907ac1114079de4383cecddf1c8640e3f52f92b"
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"

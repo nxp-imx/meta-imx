@@ -9,7 +9,6 @@ MTCP_DPDK_SRC ?= "git://github.com/nxp-mcuxpresso/mtcp;protocol=https"
 SRCBRANCH = "mtcp-dpdk"
 SRCREV = "5892949eb66307573b284ee348b324c9aa4e810a"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

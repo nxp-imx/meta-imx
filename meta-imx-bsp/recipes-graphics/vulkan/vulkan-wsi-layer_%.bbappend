@@ -9,4 +9,3 @@ SRC_URI = "git://gitlab.freedesktop.org/mesa/vulkan-wsi-layer.git;protocol=https
            file://0006-MGS-8368-nxp-fix-the-function-pointer-query-logic.patch"
 SRCREV = "5097740a4575e69ea17f6910ff62eea59a380bbf"
 
-S = "${WORKDIR}/git"

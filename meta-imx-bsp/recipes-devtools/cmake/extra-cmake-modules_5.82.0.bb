@@ -7,8 +7,6 @@ SRCREV = "77e9318d5245c6782e4381699d6f485876e8e9cd"
 SRC_URI = " \
     git://github.com/KDE/extra-cmake-modules;protocol=https;branch=master \
 "
-S = "${WORKDIR}/git"
-
 EXTRA_OECMAKE += "-DBUILD_TESTING=off"
 
 inherit cmake

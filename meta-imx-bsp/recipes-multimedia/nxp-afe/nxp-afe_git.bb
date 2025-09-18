@@ -14,7 +14,6 @@ SRC_URI = " \
 
 SRCREV = "dba6953332b98fff0494a4335a4f43f119107d6e"
 
-S = "${WORKDIR}/git"
 
 DEPENDS += "alsa-lib"
 

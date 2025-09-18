@@ -28,7 +28,7 @@ SRCBRANCH_psa = "main"
 SRCREV_smw = "1c580caab0118a8f20ea6526398ca0d0b09e6347"
 SRCREV_psa = "463cb95ada820bc6f758d50066cf8c0ed5cc3a02"
 SRCREV_FORMAT = "smw_psa"
-S = "${WORKDIR}/git/smw"
+S = "${UNPACKDIR}/git/smw"
 
 inherit cmake python3native
 

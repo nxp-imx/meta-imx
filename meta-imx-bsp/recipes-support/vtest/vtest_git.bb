@@ -12,8 +12,6 @@ VTEST_SRC ?= "git://github.com/nxp-imx/vtest.git;protocol=https"
 SRCBRANCH = "main"
 SRCREV = "a0f844e1455020dba53a3312eb313cd6a568e149"
 
-S = "${WORKDIR}/git"
-
 inherit cmake
 
 PACKAGECONFIG ?= ""

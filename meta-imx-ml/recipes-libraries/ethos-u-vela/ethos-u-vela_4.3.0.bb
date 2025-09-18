@@ -11,8 +11,6 @@ VELA_SRC ?= "git://github.com/nxp-imx/ethos-u-vela.git;protocol=https"
 SRCBRANCH = "imx_4.3.0"
 SRCREV = "9e05bf6e316d8658554827dd2b3ac97323ee4819"
 
-S = "${WORKDIR}/git"
-
 inherit setuptools3
 
 do_compile[network] = "1"

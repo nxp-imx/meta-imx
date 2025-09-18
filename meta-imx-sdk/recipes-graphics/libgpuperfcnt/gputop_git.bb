@@ -11,7 +11,6 @@ SRCBRANCH = "release"
 SRC_URI = "${GPUTOP_SRC};branch=${SRCBRANCH} "
 SRCREV = "af82e215a1d50a7ad98b144fe5a0990a8e025fef"
 
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 

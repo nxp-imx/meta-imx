@@ -15,7 +15,6 @@ IMX_PXP_G2D_SRC ?= "git://github.com/nxp-imx/imx-g2d-pxp.git;protocol=https"
 SRCBRANCH = "imx_2.5"
 SRCREV = "47127059e8eba6607205dc50f42b99b9fdd7ef16"
 
-S = "${WORKDIR}/git"
 
 inherit use-imx-headers
 

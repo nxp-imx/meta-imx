@@ -11,7 +11,6 @@ DEPENDS = "alsa-lib"
 SRC_URI = "git://github.com/thesofproject/sof.git;branch=main;protocol=https"
 SRCREV = "2977518f4c3140f7aea28112321315e454b1f617"
 
-S = "${WORKDIR}/git"
 
 inherit cmake autotools
 

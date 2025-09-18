@@ -11,7 +11,6 @@ DEPENDS = "libaemu libdrm virtual/libx11 virtual/egl virtual/libgl"
 
 SRC_URI = "git://android.googlesource.com/platform/hardware/google/gfxstream;protocol=https;branch=main"
 SRCREV = "23d05703b94035ac045df60823fb1fc4be0fdf1c"
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

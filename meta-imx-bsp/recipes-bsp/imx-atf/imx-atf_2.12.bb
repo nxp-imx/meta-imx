@@ -12,8 +12,6 @@ ATF_SRC ?= "git://github.com/nxp-imx/imx-atf.git;protocol=https"
 SRCBRANCH = "lf_v2.12"
 SRCREV = "d6f58c88a35b0ff4824273772fd0384035d86a70"
 
-S = "${WORKDIR}/git"
-
 inherit deploy
 
 PACKAGECONFIG ??= " \

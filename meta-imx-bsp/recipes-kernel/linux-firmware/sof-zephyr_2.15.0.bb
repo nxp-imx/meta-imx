@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "f4fce6b98c92b7f417b3095cd81ad8753ea75af225bc08a6fafb8316d5
 
 IMX_SRCREV_ABBREV = "f9c56ae"
 
-S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
+S = "${UNPACKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
 inherit allarch
 

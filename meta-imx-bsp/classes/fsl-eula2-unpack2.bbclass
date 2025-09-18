@@ -9,7 +9,7 @@ IMX_PACKAGE_VERSION = "${PV}"
 SRC_URI = "${NXP_BASE_URL}/${IMX_PACKAGE_NAME}.bin;fsl-eula=true"
 NXP_BASE_URL ??= "${FSL_MIRROR}"
 
-S = "${WORKDIR}/${IMX_PACKAGE_NAME}"
+S = "${UNPACKDIR}/${IMX_PACKAGE_NAME}"
 
 # For native apps, insert the user-local sysroot path
 # For nativesdk apps, insert the correct distro folder

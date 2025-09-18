@@ -14,7 +14,6 @@ V2XSEHSM_SRC ?= "git://github.com/nxp-imx/v2xsehsm.git;protocol=https"
 SRCBRANCH = "main"
 SRCREV = "447dbe2a1090d28e0330d3b2e4e9117960f6c263"
 
-S = "${WORKDIR}/git"
 
 inherit cmake
 

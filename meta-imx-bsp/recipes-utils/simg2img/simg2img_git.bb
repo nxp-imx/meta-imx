@@ -12,7 +12,6 @@ SRC_BRANCH = "master"
 
 SRC_URI = "${SIMG2IMG_SRC};branch=${SRC_BRANCH}"
 SRCREV = "7fa7e281c6b681497be29ba442ed0c9ab45304e9"
-S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE += 'CC="${CC}"'
 

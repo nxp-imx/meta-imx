@@ -10,7 +10,6 @@ require recipes-extended/xen/xen-hypervisor.inc
 
 DEPENDS:append = " qemu"
 
-S = "${WORKDIR}/git"
 
 do_deploy:append (){
     cd ${DEPLOYDIR}

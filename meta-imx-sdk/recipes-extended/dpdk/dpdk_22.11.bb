@@ -17,7 +17,6 @@ SRCREV = "e1617d2b9bb6255f6d108a9c2558158f4f595480"
 
 CVE_PRODUCT = "data_plane_development_kit"
 
-S = "${WORKDIR}/git"
 
 inherit meson pkgconfig
 

@@ -20,8 +20,6 @@ PKCS11_PROVIDER_SRC ?= "git://github.com/nxp-imx/${BPN}.git;branch=main;protocol
 SRCBRANCH = "lf_1.0.y"
 SRCREV = "e996068189c4403eafd546127814df4e810a427b"
 
-S = "${WORKDIR}/git"
-
 inherit meson pkgconfig
 
 # Overwrite default pkcs11 module path

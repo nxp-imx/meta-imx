@@ -10,8 +10,6 @@ ITEST_SRC ?= "git://github.com/nxp-imx/itest.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "48c02c07840c5aebf571c3a01f2062e6a5c8ac43"
 
-S = "${WORKDIR}/git"
-
 inherit cmake
 
 PACKAGECONFIG:mx8dxl-nxp-bsp ??= "ele-seco"

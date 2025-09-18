@@ -11,8 +11,6 @@ IMX_OEI_SRC ?= "git://github.com/nxp-imx/imx-oei.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "2a63fb2a414e028c4ca49dcd2b35826dbe5b8c08"
 
-S = "${WORKDIR}/git"
-
 inherit deploy
 
 PACKAGECONFIG ??= " \

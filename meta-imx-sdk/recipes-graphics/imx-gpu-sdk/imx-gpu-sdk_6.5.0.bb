@@ -34,7 +34,6 @@ GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "1f512be500cecb392b24a154e83f0e7cd4655f3e"
 
-S = "${WORKDIR}/git"
 
 inherit pkgconfig
 

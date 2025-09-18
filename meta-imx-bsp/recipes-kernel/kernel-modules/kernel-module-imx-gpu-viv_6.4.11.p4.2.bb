@@ -14,7 +14,6 @@ SRCBRANCH = "lf-6.12.y"
 LOCALVERSION = "-lts-next"
 SRCREV = "919ae1917cfa2110894629597e2e712bd442ab5b"
 
-S = "${WORKDIR}/git"
 
 inherit module
 

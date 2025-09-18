@@ -30,8 +30,6 @@ SRC_URI = "git://github.com/nnstreamer/nnstreamer.git;branch=prod/tizen-9.0;prot
 # Use git instead of quilt as patch tool to support patches with binary content
 PATCHTOOL = "git"
 
-S = "${WORKDIR}/git"
-
 inherit meson pkgconfig
 
 PACKAGECONFIG ??= "protobuf python3 query ${PACKAGECONFIG_SOC}"

@@ -12,8 +12,6 @@ SRC_URI = "${CRYPTO_AF_ALG_SRC};branch=${SRCBRANCH}"
 
 SRCREV = "0be7a9fe7f0e8333f5469b19da94c2fca2998ffc"
 
-S = "${WORKDIR}/git"
-
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install () {

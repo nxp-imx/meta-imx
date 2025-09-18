@@ -17,7 +17,7 @@ SRC_URI = "https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-go
 
 SRC_URI[sha256sum] = "b67b31313a54c6929b82969d41d3cfdf2f58db573fb5f491e6bba5d84aea0778"
 
-S = "${WORKDIR}/gst-plugins-good-${PV}"
+S = "${UNPACKDIR}/gst-plugins-good-${PV}"
 
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
@@ -114,7 +114,6 @@ GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;prot
 SRCBRANCH = "imx-1.26.x"
 SRCREV = "2b499dea5fa74bd256149265a01d517eda75dc83" 
 
-S = "${WORKDIR}/git"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 

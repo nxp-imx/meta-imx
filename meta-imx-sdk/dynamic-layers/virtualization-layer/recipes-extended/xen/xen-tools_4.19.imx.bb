@@ -4,8 +4,6 @@ LICENSE = "GPL-2.0-only"
 SECTION = "console/tools"
 LIC_FILES_CHKSUM ?= "file://COPYING;md5=d1a1e216f80b6d8da95fec897d0dbec9"
 
-S = "${WORKDIR}/git"
-
 DEFAULT_PREFERENCE ??= "-1"
 
 require xen-common.inc

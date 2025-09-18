@@ -21,7 +21,6 @@ DEPENDS += " \
     xxd-native \
 "
 
-S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
 inherit fsl-u-boot-localversion

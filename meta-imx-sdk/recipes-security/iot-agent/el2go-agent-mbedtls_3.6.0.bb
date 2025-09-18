@@ -10,7 +10,6 @@ SECTION = "libs"
 
 DEPENDS = "python3-jsonschema-native python3-jinja2-native"
 
-S = "${WORKDIR}/git"
 SRCREV = "2ca6c285a0dd3f33982dd57299012dacab1ff206"
 SRC_URI = "gitsm://github.com/Mbed-TLS/mbedtls;protocol=https;branch=development \
            file://0001-crypto_struct-change-psa_key_attributes_t-layout.patch \

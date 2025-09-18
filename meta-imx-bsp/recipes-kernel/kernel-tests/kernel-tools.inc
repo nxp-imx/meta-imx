@@ -3,7 +3,7 @@ do_configure[depends] += "virtual/kernel:do_shared_workdir"
 inherit linux-kernel-base kernel-arch
 inherit kernelsrc
 
-S = "${WORKDIR}/${BP}"
+S = "${UNPACKDIR}/${BP}"
 
 do_configure[prefuncs] += "copy_source_from_kernelsrc"
 python copy_source_from_kernelsrc() {

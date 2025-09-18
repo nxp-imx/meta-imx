@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SRC_URI = "gitsm://github.com/NXPPlugNTrust/se05x-openssl-provider.git;protocol=https;branch=main"
 SRCREV = "12999e82cc24733e3194689b959c79f4e9f3da05"
 
-S = "${WORKDIR}/git"
 
 PV = "1.1.2+git${SRCPV}"
 

@@ -27,8 +27,6 @@ EXTRA_OECMAKE:append:class-target = " -DFLATBUFFERS_FLATC_EXECUTABLE=${STAGING_B
 
 inherit cmake python3native
 
-S = "${WORKDIR}/git"
-
 FILES:${PN}-compiler = "${bindir}"
 
 BBCLASSEXTEND = "native nativesdk"

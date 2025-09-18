@@ -15,7 +15,6 @@ IMX_VPUWRAP_SRC ?= "git://github.com/NXP/imx-vpuwrap.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "85c5e986ea0a775bca594c91bf113929d0273ecb"
 
-S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 

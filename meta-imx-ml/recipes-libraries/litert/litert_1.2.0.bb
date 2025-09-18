@@ -13,8 +13,6 @@ SRC_URI = "${LITERT_SRC};branch=${SRCBRANCH_litert};name=litert"
 SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz;name=model-mobv1"
 SRC_URI[model-mobv1.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226dfe4cdcef3012555f691744166"
 
-S = "${WORKDIR}/git"
-
 inherit python3native cmake
 
 PACKAGECONFIG ??= "python-example ${PACKAGECONFIG_GPU_DELEGATE}"

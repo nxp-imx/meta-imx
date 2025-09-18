@@ -14,7 +14,6 @@ UPSTREAM_CHECK_COMMITS = "1"
 SRCREV = "fdce530c029514e2f66296288f9ee26a05058ec1"
 
 UPSTREAM_CHECK_GITTAGREGEX = "These are not the releases you're looking for"
-S = "${WORKDIR}/git"
 
 REQUIRED_DISTRO_FEATURES = 'vulkan'
 

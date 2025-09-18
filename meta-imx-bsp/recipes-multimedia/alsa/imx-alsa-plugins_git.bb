@@ -24,7 +24,6 @@ IMXALSA_SRC ?= "git://github.com/nxp-imx/imx-alsa-plugins.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "4d4173da9361ce7e4b820b8302233dfe988cedb1"
 
-S = "${WORKDIR}/git"
 
 CFLAGS:append = " -I${STAGING_INCDIR_IMX}"
 

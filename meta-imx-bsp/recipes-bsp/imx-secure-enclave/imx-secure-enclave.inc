@@ -13,8 +13,6 @@ SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=
 SRCBRANCH = "master"
 SRCREV = "1cfdaddb37d673fff5e4b60ef2614a4c544dabd3"
 
-S = "${WORKDIR}/git"
-
 PLAT ?= "UNDEFINED"
 
 EXTRA_OEMAKE = "PLAT=${PLAT} OPENSSL_PATH=${STAGING_INCDIR} MBEDTLS_PATH=${STAGING_DIR_HOST}${datadir}/mbedtls-source"

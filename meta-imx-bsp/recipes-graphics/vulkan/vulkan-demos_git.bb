@@ -14,7 +14,6 @@ SRCREV_ktx = "726d14d02c95bb21ec9e43807751b491d295dd3c"
 
 SRCREV_FORMAT = "default_ktx"
 
-S = "${WORKDIR}/git"
 
 UPSTREAM_CHECK_COMMITS = "1"
 UPSTREAM_CHECK_GITTAGREGEX = "These are not the releases you're looking for"

@@ -12,8 +12,6 @@ SRCBRANCH = "prod/tizen-9.0"
 SRCREV = "e73acb740dce3ecbf8a650f45fab790afb400a95"
 SRC_URI = "${NNS_EDGE_SRC};branch=${SRCBRANCH}"
 
-S = "${WORKDIR}/git"
-
 inherit cmake pkgconfig
 
 EXTRA_OECMAKE =  " \
