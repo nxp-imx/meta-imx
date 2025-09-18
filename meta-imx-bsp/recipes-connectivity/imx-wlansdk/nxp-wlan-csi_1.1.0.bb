@@ -3,7 +3,7 @@
 DESCRIPTION = "NXP WLAN app to get/set channel state information"
 LICENSE = "Proprietary"
 SECTION = "network"
-LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
+LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac" 
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
 
