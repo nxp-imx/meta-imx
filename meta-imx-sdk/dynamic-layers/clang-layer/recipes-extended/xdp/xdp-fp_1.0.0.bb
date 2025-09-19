@@ -7,7 +7,7 @@ DEPENDS = "clang-cross-${TARGET_ARCH} elfutils libbpf zlib zstd"
 SRC_URI = "${DPDK_XDP_SRC};branch=${SRCBRANCH}"
 DPDK_XDP_SRC ?= "git://github.com/nxp-imx/imx-xdp-fp;protocol=https"
 SRCBRANCH = "fpr"
-SRCREV = "b3222000ba4d8a19d680ca9b07270309f364802a"
+SRCREV = "01bd3e1dba565c803d36c3adcfb1c10dc153fe51"
 
 S = "${WORKDIR}/git"
 
