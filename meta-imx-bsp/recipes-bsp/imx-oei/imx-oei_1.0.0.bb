@@ -15,9 +15,13 @@ S = "${WORKDIR}/git"
 
 inherit deploy
 
+PACKAGECONFIG ??= "ddr"
+
+PACKAGECONFIG[ddr] = ""
+PACKAGECONFIG[tcm] = ""
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-OEI_CONFIGS ?= "UNDEFINED"
 OEI_CORE    ?= "UNDEFINED"
 OEI_SOC     ?= "UNDEFINED"
 OEI_BOARD   ?= "UNDEFINED"
@@ -34,20 +38,20 @@ EXTRA_OEMAKE:append:mx95-nxp-bsp = " r=${IMX_SOC_REV}"
 EXTRA_OEMAKE:append = " ${@' DDR_CONFIG=${OEI_DDRCONFIG}' if d.getVar('OEI_DDRCONFIG') else ''}"
 
 do_configure() {
-    for oei_config in ${OEI_CONFIGS}; do
+    for oei_config in ${PACKAGECONFIG}; do
         oe_runmake clean oei=$oei_config
     done
 }
 
 do_compile() {
-    for oei_config in ${OEI_CONFIGS}; do
+    for oei_config in ${PACKAGECONFIG}; do
         oe_runmake oei=$oei_config
     done
 }
 
 do_install() {
     install -d ${D}/firmware
-    for oei_config in ${OEI_CONFIGS}; do
+    for oei_config in ${PACKAGECONFIG}; do
         install -m 0644 ${B}/build/${OEI_BOARD}/$oei_config/oei-*.bin ${D}/firmware
     done
 }
