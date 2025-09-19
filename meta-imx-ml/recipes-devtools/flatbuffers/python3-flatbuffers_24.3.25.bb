@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRCREV = "e6463926479bd6b330cbcf673f7e917803fd5831"
 SRC_URI = "git://github.com/google/flatbuffers.git;branch=master;protocol=https"
-S = "${UNPACKDIR}/git/python"
+S = "${UNPACKDIR}/${BP}/python"
 
 RDEPENDS:${PN} = "flatbuffers"
 

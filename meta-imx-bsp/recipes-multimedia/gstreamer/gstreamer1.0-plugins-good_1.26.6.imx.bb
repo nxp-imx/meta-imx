@@ -114,6 +114,7 @@ GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;prot
 SRCBRANCH = "imx-1.26.x"
 SRCREV = "2b499dea5fa74bd256149265a01d517eda75dc83" 
 
+S = "${UNPACKDIR}/${BP}"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 

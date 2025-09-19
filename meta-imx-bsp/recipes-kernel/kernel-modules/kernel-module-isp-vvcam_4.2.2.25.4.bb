@@ -9,7 +9,7 @@ ISP_KERNEL_SRC ?= "git://github.com/nxp-imx/isp-vvcam.git;protocol=https"
 SRCBRANCH = "lf-6.12.y_2.2.0"
 SRCREV = "3e7040f43dd60c5045f07bdc93c46ac825dcfc27"
 
-S = "${WORKDIR}/git/vvcam/v4l2"
+S = "${UNPACKDIR}/git/vvcam/v4l2"
 
 inherit module
 
