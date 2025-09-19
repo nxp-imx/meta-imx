@@ -34,6 +34,10 @@ SOC_TOOLS_TEST_VIVANTE:mx6-nxp-bsp = "imx-gpu-viv-demos"
 SOC_TOOLS_TEST_VIVANTE:mx7-nxp-bsp = "imx-gpu-viv-demos"
 SOC_TOOLS_TEST_VIVANTE:mx8-nxp-bsp = "imx-gpu-viv-demos"
 
+WLAN_SDK_TOOLS = ""
+WLAN_SDK_TOOLS:mx8-nxp-bsp = "nxp-wlan-csi"
+WLAN_SDK_TOOLS:mx9-nxp-bsp = "nxp-wlan-csi"
+
 RDEPENDS:${PN} += " \
     bridge-utils \
     can-utils \
@@ -67,6 +71,7 @@ RDEPENDS:${PN} += " \
     tmux \
     udev-extraconf \
     vlan \
+    ${WLAN_SDK_TOOLS} \
     zstd \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-examples', '', d)} \
