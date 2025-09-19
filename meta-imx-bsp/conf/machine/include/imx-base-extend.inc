@@ -15,14 +15,13 @@ BOOT_VARIANT = "${@bb.utils.contains_any('IMXBOOT_VARIANT', '${IMXBOOT_VARIANTS}
 # Add new SoC i.MX 943
 MACHINEOVERRIDES_EXTENDER:mx943:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxpxp:mx9-generic-bsp:mx9-nxp-bsp:mx94-generic-bsp:mx94-nxp-bsp:mx943-generic-bsp:mx943-nxp-bsp"
 MACHINE_SOCARCH_SUFFIX:mx943-nxp-bsp = "-mx943"
-IMX_EXTRA_FIRMWARE:mx943-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SYSTEM_MANAGER_RPROVIDER} imx-oei"
+IMX_EXTRA_FIRMWARE:mx943-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx virtual/imx-system-manager virtual/imx-oei"
 SECO_FIRMWARE_NAME:mx943-generic-bsp ?= "mx943${IMX_SOC_REV_LOWER}-ahab-container.img"
 PREFERRED_PROVIDER_virtual/libg2d:mx943-nxp-bsp ?= "imx-pxp-g2d"
 
 # Update i.MX 95
 IMX_SOC_REV:mx95-generic-bsp ?= "B0"
-IMX_EXTRA_FIRMWARE:mx95-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SYSTEM_MANAGER_RPROVIDER} imx-oei"
-SYSTEM_MANAGER_RPROVIDER ?= "imx-system-manager"
+IMX_EXTRA_FIRMWARE:mx95-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx virtual/imx-system-manager virtual/imx-oei"
 # The System Manager Firmware Name corresponds to a particular binary implementation
 # in the Yocto deploy folder. The default name is comprised of the Firmware Basename
 # and the default system manager Config name, e.g., m33_image-mx95evk.bin and
