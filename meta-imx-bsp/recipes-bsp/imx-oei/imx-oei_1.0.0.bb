@@ -15,9 +15,10 @@ S = "${WORKDIR}/git"
 
 inherit deploy
 
-PACKAGECONFIG ??= "ddr"
+PACKAGECONFIG ??= " \
+    ${@bb.utils.contains('UBOOT_CONFIG', 'sd-ecc', 'ecc', '', d)}"
 
-PACKAGECONFIG[ddr] = ""
+PACKAGECONFIG[ecc] = ""
 PACKAGECONFIG[tcm] = ""
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -25,7 +26,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 OEI_CORE    ?= "UNDEFINED"
 OEI_SOC     ?= "UNDEFINED"
 OEI_BOARD   ?= "UNDEFINED"
-OEI_DDRCONFIG  ?= ""
+OEI_CONFIGS ?= "ddr ${@bb.utils.filter('PACKAGECONFIG', 'tcm', d)}"
 
 LDFLAGS[unexport] = "1"
 
@@ -35,30 +36,39 @@ EXTRA_OEMAKE = "\
     OEI_CROSS_COMPILE=arm-none-eabi-"
 
 EXTRA_OEMAKE:append:mx95-nxp-bsp = " r=${IMX_SOC_REV}"
-EXTRA_OEMAKE:append = " ${@' DDR_CONFIG=${OEI_DDRCONFIG}' if d.getVar('OEI_DDRCONFIG') else ''}"
 
 do_configure() {
-    for oei_config in ${PACKAGECONFIG}; do
-        oe_runmake clean oei=$oei_config
+    if [ "${@bb.utils.filter('PACKAGECONFIG', 'ecc', d)}" ]; then
+        ddr_config=${OEI_DDR_CONFIG_ECC}
+    else
+        ddr_config=${OEI_DDR_CONFIG}
+    fi
+    for oei_config in ${OEI_CONFIGS}; do
+        oe_runmake clean oei=$oei_config DDR_CONFIG=$ddr_config
     done
 }
 
 do_compile() {
-    for oei_config in ${PACKAGECONFIG}; do
-        oe_runmake oei=$oei_config
+    if [ "${@bb.utils.filter('PACKAGECONFIG', 'ecc', d)}" ]; then
+        ddr_config=${OEI_DDR_CONFIG_ECC}
+    else
+        ddr_config=${OEI_DDR_CONFIG}
+    fi
+    for oei_config in ${OEI_CONFIGS}; do
+        oe_runmake oei=$oei_config DDR_CONFIG=$ddr_config
     done
 }
 
 do_install() {
     install -d ${D}/firmware
-    for oei_config in ${PACKAGECONFIG}; do
+    for oei_config in ${OEI_CONFIGS}; do
         install -m 0644 ${B}/build/${OEI_BOARD}/$oei_config/oei-*.bin ${D}/firmware
     done
 }
 
 addtask deploy after do_install
 do_deploy() {
-    cp -rf ${D}/firmware/* ${DEPLOYDIR}/
+    cp -rf --no-dereference ${D}/firmware/* ${DEPLOYDIR}/
 }
 
 FILES:${PN} = "/firmware"

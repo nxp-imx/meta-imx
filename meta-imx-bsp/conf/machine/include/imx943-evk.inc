@@ -32,9 +32,10 @@ UBOOT_MAKE_TARGET = ""
 SPL_BINARY = "spl/u-boot-spl.bin"
 
 UBOOT_CONFIG ??= "${@bb.utils.contains('COMBINED_FEATURES', 'crrm', 'crrm', 'sd', d)}"
-UBOOT_CONFIG[sd]   = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
-UBOOT_CONFIG[crrm] = "${UBOOT_CONFIG_BASENAME}_xspi_crrm_defconfig"
-UBOOT_CONFIG[xspi] = "${UBOOT_CONFIG_BASENAME}_xspi_defconfig"
+UBOOT_CONFIG[sd]     = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
+UBOOT_CONFIG[sd-ecc] = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
+UBOOT_CONFIG[crrm]   = "${UBOOT_CONFIG_BASENAME}_xspi_crrm_defconfig"
+UBOOT_CONFIG[xspi]   = "${UBOOT_CONFIG_BASENAME}_xspi_defconfig"
 
 ATF_PLATFORM = "imx94"
 OEI_CORE = "m33"
@@ -79,9 +80,10 @@ IMXBOOT_TARGETS_SD = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       '${IM
 "
 
 IMXBOOT_TARGETS = " \
-    ${@bb.utils.contains('UBOOT_CONFIG', 'crrm', 'flash_a55_xspi_crrm', \
-       bb.utils.contains('UBOOT_CONFIG', 'xspi', 'flash_a55_xspi', \
-                                                 '${IMXBOOT_TARGETS_SD}', d), d)}"
+    ${@bb.utils.contains('UBOOT_CONFIG', 'crrm',   'flash_a55_xspi_crrm', \
+       bb.utils.contains('UBOOT_CONFIG', 'xspi',   'flash_a55_xspi', \
+       bb.utils.contains('UBOOT_CONFIG', 'sd-ecc', '${IMXBOOT_TARGETS_BASENAME}_all', \
+                                                   '${IMXBOOT_TARGETS_SD}', d), d), d)}"
 
 IMX_BOOT_SOC_TARGET = "iMX94"
 IMX_BOOT_SEEK = "32"
