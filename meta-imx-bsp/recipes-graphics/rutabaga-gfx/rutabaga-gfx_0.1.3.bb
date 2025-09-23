@@ -26,4 +26,4 @@ do_configure:prepend() {
     cp ${UNPACKDIR}/rutabaga-gfx-Cargo.lock ${S}/Cargo.lock
 }
 
-do_install[noexec]="1"
+do_install[noexec] = "1"

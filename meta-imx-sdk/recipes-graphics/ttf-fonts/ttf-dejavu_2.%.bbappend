@@ -1,7 +1,7 @@
 # Fix up the fonts to the right location
 # Install the ttf files into /usr/lib/fonts directory
 
-PATH_TTF_FONTS="${libdir}/fonts"
+PATH_TTF_FONTS = "${libdir}/fonts"
 do_install:append() {
     if [ ! -d ${D}/${PATH_TTF_FONTS} ]; then
         mkdir -p ${D}/${PATH_TTF_FONTS}

@@ -15,7 +15,7 @@ S = "${UNPACKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
 inherit fsl-eula-unpack use-imx-headers
 
-PARALLEL_MAKE="-j 1"
+PARALLEL_MAKE = "-j 1"
 
 PLATFORM:mx8mm-nxp-bsp = "IMX8MM"
 PLATFORM:mx8mq-nxp-bsp = "IMX8MQ"
