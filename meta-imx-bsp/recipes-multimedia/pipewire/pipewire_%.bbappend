@@ -17,7 +17,6 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0001-pipewiresrc-add-provide-clock-property.patch \
     file://0001-pipewiresrc-fix-sending-last-buffer-failure-if-waiti.patch \
     file://0001-YOCIMX-9095-pipewiresrc-set-rank-to-secondary.patch \
-    file://0001-gst-pipewiresrc-Fixate-caps-if-intersect-did-not-ret.patch \
 "
 SRC_URI:append:mx95-nxp-bsp = " \
     file://0003-pipewiresrc-update-per-plane-stride-and-offset-accor.patch \
