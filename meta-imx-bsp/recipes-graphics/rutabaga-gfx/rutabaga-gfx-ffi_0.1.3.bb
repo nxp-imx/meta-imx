@@ -27,7 +27,7 @@ S = "${UNPACKDIR}/cargo_home/bitbake/rutabaga_gfx_ffi-${PV}"
 
 inherit cargo pkgconfig cargo-update-recipe-crates
 
-export RUTABAGA_OUT_DIR="${B}/target/${BUILD_DIR}"
+export RUTABAGA_OUT_DIR = "${B}/target/${BUILD_DIR}"
 CARGO_BUILD_FLAGS += "--offline --features=gfxstream"
 CARGO_BUILD_FLAGS:remove = "--frozen"
 
