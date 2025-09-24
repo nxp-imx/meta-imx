@@ -23,7 +23,7 @@ SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw;destsuffix=git/smw \
 SMW_LIB_SRC ?= "git://github.com/nxp-imx/imx-smw.git;protocol=https"
 PSA_LIB_SRC ?= "git://github.com/ARM-software/psa-arch-tests.git;protocol=https"
 PSA_ARCH_TESTS_SRC_PATH = "psa-arch-tests"
-SRCBRANCH_smw = "release/version_5.x"
+SRCBRANCH_smw = "release/release_5.x_LF6.6"
 SRCBRANCH_psa = "main"
 SRCREV_smw = "8934fdecacb88b227d09690283e7e2578387b7ee"
 SRCREV_psa = "463cb95ada820bc6f758d50066cf8c0ed5cc3a02"
