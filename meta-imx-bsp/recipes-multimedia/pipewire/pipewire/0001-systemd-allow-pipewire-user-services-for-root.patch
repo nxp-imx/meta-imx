@@ -16,22 +16,22 @@ Signed-off-by: Shengjiu Wang <shengjiu.wang@nxp.com>
  src/daemon/systemd/user/pipewire.socket     | 1 -
  2 files changed, 2 deletions(-)
 
-diff --git a/src/daemon/systemd/user/pipewire.service.in b/src/daemon/systemd/user/pipewire.service.in
-index f0c8d9cd5..2e6c5c482 100644
---- a/src/daemon/systemd/user/pipewire.service.in
-+++ b/src/daemon/systemd/user/pipewire.service.in
+Index: pipewire-1.4.8/src/daemon/systemd/user/pipewire.service.in
+===================================================================
+--- pipewire-1.4.8.orig/src/daemon/systemd/user/pipewire.service.in
++++ pipewire-1.4.8/src/daemon/systemd/user/pipewire.service.in
 @@ -14,7 +14,6 @@ Description=PipeWire Multimedia Service
  # After=pipewire.socket is not needed, as it is already implicit in the
  # socket-service relationship, see systemd.socket(5).
- Requires=pipewire.socket
+ Requires=pipewire.socket @PW_SERVICE_REQS@
 -ConditionUser=!root
  
  [Service]
  LockPersonality=yes
-diff --git a/src/daemon/systemd/user/pipewire.socket b/src/daemon/systemd/user/pipewire.socket
-index 890342abb..16e23a7b6 100644
---- a/src/daemon/systemd/user/pipewire.socket
-+++ b/src/daemon/systemd/user/pipewire.socket
+Index: pipewire-1.4.8/src/daemon/systemd/user/pipewire.socket
+===================================================================
+--- pipewire-1.4.8.orig/src/daemon/systemd/user/pipewire.socket
++++ pipewire-1.4.8/src/daemon/systemd/user/pipewire.socket
 @@ -1,6 +1,5 @@
  [Unit]
  Description=PipeWire Multimedia System Sockets
@@ -39,6 +39,3 @@ index 890342abb..16e23a7b6 100644
  
  [Socket]
  Priority=6
--- 
-2.34.1
-
