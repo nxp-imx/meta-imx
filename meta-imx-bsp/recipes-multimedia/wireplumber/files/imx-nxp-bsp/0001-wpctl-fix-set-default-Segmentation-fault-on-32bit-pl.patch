@@ -9,11 +9,11 @@ Signed-off-by: Shengjiu Wang <shengjiu.wang@nxp.com>
  src/tools/wpctl.c | 10 +++++++++-
  1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/src/tools/wpctl.c b/src/tools/wpctl.c
-index a1834943..5d12b90e 100644
---- a/src/tools/wpctl.c
-+++ b/src/tools/wpctl.c
-@@ -777,9 +777,17 @@ set_default_parse_positional (gint argc, gchar ** argv, GError **error)
+Index: wireplumber-0.5.11/src/tools/wpctl.c
+===================================================================
+--- wireplumber-0.5.11.orig/src/tools/wpctl.c
++++ wireplumber-0.5.11/src/tools/wpctl.c
+@@ -832,9 +832,16 @@ set_default_parse_positional (gint argc,
  static gboolean
  set_default_prepare (WpCtl * self, GError ** error)
  {
@@ -24,14 +24,10 @@ index a1834943..5d12b90e 100644
 +    fprintf(stderr, "Translate ID error.\n");
 +    return FALSE;
 +  }
-+
    wp_object_manager_add_interest (self->om, WP_TYPE_NODE,
        WP_CONSTRAINT_TYPE_PW_GLOBAL_PROPERTY,
--      "object.id", "=u", cmdline.set_default.id,
+-      "object.id", "=u", (guint32) cmdline.set_default.id,
 +      "object.id", "=u", id,
        NULL);
-   wp_object_manager_request_object_features (self->om, WP_TYPE_METADATA,
-       WP_OBJECT_FEATURES_ALL);
--- 
-2.34.1
-
+   wp_object_manager_request_object_features (self->om, WP_TYPE_NODE,
+       WP_PIPEWIRE_OBJECT_FEATURES_MINIMAL);
