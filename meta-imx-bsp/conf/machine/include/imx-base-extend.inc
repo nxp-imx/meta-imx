@@ -47,41 +47,18 @@ SECOEXT_FIRMWARE_NAME:mx95-generic-bsp   ?= "mx95a0runtime-ahab-container.img mx
 SECOEXT_FIRMWARE_NAME:mx943-generic-bsp  ?= "mx943${IMX_SOC_REV_LOWER}runtime-ahab-container.img"
 
 # GStreamer forked recipes
-PREFERRED_VERSION_gstreamer1.0:imx-nxp-bsp              ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-bad:imx-nxp-bsp  ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-base:imx-nxp-bsp ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-good:imx-nxp-bsp ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0-libav:imx-nxp-bsp        ??= "1.26.0"
-
-# To overwrite imx-base.inc
-PREFERRED_VERSION_gstreamer1.0:mx8-nxp-bsp              ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-bad:mx8-nxp-bsp  ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-base:mx8-nxp-bsp ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-good:mx8-nxp-bsp ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0:mx9-nxp-bsp              ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-bad:mx9-nxp-bsp  ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-base:mx9-nxp-bsp ??= "1.26.0.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-good:mx9-nxp-bsp ??= "1.26.0.imx"
-PREFERRED_VERSION_gst-devtools:mx8-nxp-bsp              ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-libav:mx8-nxp-bsp        ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-plugins-ugly:mx8-nxp-bsp ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-python:mx8-nxp-bsp       ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-rtsp-server:mx8-nxp-bsp  ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-vaapi:mx8-nxp-bsp        ??= "1.26.0"
-PREFERRED_VERSION_gst-devtools:mx9-nxp-bsp              ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-libav:mx9-nxp-bsp        ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-plugins-ugly:mx9-nxp-bsp ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-python:mx9-nxp-bsp       ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-rtsp-server:mx9-nxp-bsp  ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-vaapi:mx9-nxp-bsp        ??= "1.26.0"
+PREFERRED_VERSION_gstreamer1.0:imx-nxp-bsp              ??= "1.26.6.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-bad:imx-nxp-bsp  ??= "1.26.6.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-base:imx-nxp-bsp ??= "1.26.6.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-good:imx-nxp-bsp ??= "1.26.6.imx"
 
 # GStreamer backport recipes
-PREFERRED_VERSION_gstreamer1.0-libav:imx-nxp-bsp        ??= "1.26.0"
-PREFERRED_VERSION_gst-devtools:imx-nxp-bsp              ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-plugins-ugly:imx-nxp-bsp ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-python:imx-nxp-bsp       ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-rtsp-server:imx-nxp-bsp  ??= "1.26.0"
-PREFERRED_VERSION_gstreamer1.0-vaapi:imx-nxp-bsp        ??= "1.26.0"
+PREFERRED_VERSION_gstreamer1.0-libav:imx-nxp-bsp        ??= "1.26.6"
+PREFERRED_VERSION_gst-devtools:imx-nxp-bsp              ??= "1.26.6"
+PREFERRED_VERSION_gstreamer1.0-plugins-ugly:imx-nxp-bsp ??= "1.26.6"
+PREFERRED_VERSION_gstreamer1.0-python:imx-nxp-bsp       ??= "1.26.6"
+PREFERRED_VERSION_gstreamer1.0-rtsp-server:imx-nxp-bsp  ??= "1.26.6"
+PREFERRED_VERSION_gstreamer1.0-vaapi:imx-nxp-bsp        ??= "1.26.6"
 
 
 # Keep ffmpeg version align with OE upstream
