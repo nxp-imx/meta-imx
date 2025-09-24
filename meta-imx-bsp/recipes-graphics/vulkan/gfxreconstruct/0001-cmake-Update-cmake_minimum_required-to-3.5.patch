@@ -1,0 +1,57 @@
+From 457b75d61ef576cc2b124cabc26ef68f6fe4f732 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Wed, 24 Sep 2025 13:45:38 -0500
+Subject: [PATCH] cmake: Update cmake_minimum_required to 3.5
+
+|   Compatibility with CMake < 3.5 has been removed from CMake.
+|
+|   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+|   to tell CMake that the project requires at least <min> but has been updated
+|   to work with policies introduced by <max> or earlier.
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ cmake/Lint.cmake                 | 2 +-
+ cmake/Test.cmake                 | 2 +-
+ external/nlohmann/CMakeLists.txt | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/cmake/Lint.cmake b/cmake/Lint.cmake
+index 61aca783c..82dea7960 100644
+--- a/cmake/Lint.cmake
++++ b/cmake/Lint.cmake
+@@ -23,7 +23,7 @@
+ # Description: CMake code static analysis build directives
+ ###############################################################################
+ 
+-cmake_minimum_required(VERSION 3.4.1)
++cmake_minimum_required(VERSION 3.5)
+ 
+ if(NOT (${CMAKE_GENERATOR} MATCHES "^.*Makefiles$|^Ninja$"))
+     if(NOT ("" STREQUAL "${CMAKE_CXX_CLANG_TIDY}"))
+diff --git a/cmake/Test.cmake b/cmake/Test.cmake
+index 72742b9f7..ef874e980 100644
+--- a/cmake/Test.cmake
++++ b/cmake/Test.cmake
+@@ -23,7 +23,7 @@
+ # Description: CMake test build directives
+ ###############################################################################
+ 
+-cmake_minimum_required(VERSION 3.4.1)
++cmake_minimum_required(VERSION 3.5)
+ 
+ option(RUN_TESTS "Run unit tests" OFF)
+ 
+diff --git a/external/nlohmann/CMakeLists.txt b/external/nlohmann/CMakeLists.txt
+index 872d481e1..c013bd86c 100644
+--- a/external/nlohmann/CMakeLists.txt
++++ b/external/nlohmann/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.1)
++cmake_minimum_required(VERSION 3.5)
+ 
+ ##
+ ## PROJECT
+-- 
+2.34.1
+
