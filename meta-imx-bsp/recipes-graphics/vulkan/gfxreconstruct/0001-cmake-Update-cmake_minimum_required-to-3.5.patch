@@ -9,6 +9,7 @@ Subject: [PATCH] cmake: Update cmake_minimum_required to 3.5
 |   to tell CMake that the project requires at least <min> but has been updated
 |   to work with policies introduced by <max> or earlier.
 
+Upstream-Status: Pending
 Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
 ---
  cmake/Lint.cmake                 | 2 +-
