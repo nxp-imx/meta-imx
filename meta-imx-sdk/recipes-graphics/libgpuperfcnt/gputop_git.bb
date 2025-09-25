@@ -8,7 +8,8 @@ DEPENDS = "libgpuperfcnt"
 
 GPUTOP_SRC ?= "git://github.com/nxp-imx/imx-gputop.git;protocol=https"
 SRCBRANCH = "release"
-SRC_URI = "${GPUTOP_SRC};branch=${SRCBRANCH} "
+SRC_URI = "${GPUTOP_SRC};branch=${SRCBRANCH} \
+          file://0001-CMakeLists.txt-Update-cmake_minimum_required-to-3.5.patch"
 SRCREV = "af82e215a1d50a7ad98b144fe5a0990a8e025fef"
 
 

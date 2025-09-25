@@ -1,0 +1,36 @@
+From d4ab1b9ad09db9831512e06bbbe7875991c5f3ec Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Thu, 25 Sep 2025 16:01:09 -0500
+Subject: [PATCH] CMakeLists.txt: Update cmake_minimum_required to 3.5
+
+CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 has been removed from CMake.
+
+   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+   to tell CMake that the project requires at least <min> but has been updated
+   to work with policies introduced by <max> or earlier.
+
+   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4621aa9..a38bf6a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,6 +1,6 @@
+ project (gputop C CXX)
+ 
+-cmake_minimum_required(VERSION 3.0)
++cmake_minimum_required(VERSION 3.5)
+ set (CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+ 
+ include(GNUInstallDirs)
+-- 
+2.34.1
+
