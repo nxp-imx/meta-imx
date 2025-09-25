@@ -14,7 +14,6 @@ SRC_URI = " \
 
 SRCREV = "dba6953332b98fff0494a4335a4f43f119107d6e"
 
-
 DEPENDS += "alsa-lib"
 
 RDEPENDS:${PN}:mx8mm-nxp-bsp = " nxp-afe-voiceaec"
@@ -25,20 +24,15 @@ RDEPENDS:${PN}:mx95-nxp-bsp = " nxp-afe-voiceaec"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
-do_compile() {
-        oe_runmake clean
-        oe_runmake all
-}
-
 do_install() {
         install -d ${D}${libdir}/nxp-afe
         install -d ${D}/unit_tests/nxp-afe
-        install -m 0644 ${WORKDIR}/deploy_afe/*.so.1.0 ${D}${libdir}/nxp-afe
+        install -m 0644 ${UNPACKDIR}/deploy_afe/*.so.1.0 ${D}${libdir}/nxp-afe
         ln -sf -r ${D}${libdir}/nxp-afe/libdummyimpl.so.1.0 ${D}${libdir}/nxp-afe/libdummyimpl.so
-        install -m 0755 ${WORKDIR}/deploy_afe/afe ${D}/unit_tests/nxp-afe
-        install -m 0644 ${WORKDIR}/deploy_afe/asound.conf*    ${D}/unit_tests/nxp-afe
-        install -m 0644 ${WORKDIR}/deploy_afe/TODO.md    ${D}/unit_tests/nxp-afe
-        install -m 0755 ${WORKDIR}/deploy_afe/UAC_VCOM_composite.sh    ${D}/unit_tests/nxp-afe
+        install -m 0755 ${UNPACKDIR}/deploy_afe/afe ${D}/unit_tests/nxp-afe
+        install -m 0644 ${UNPACKDIR}/deploy_afe/asound.conf*    ${D}/unit_tests/nxp-afe
+        install -m 0644 ${UNPACKDIR}/deploy_afe/TODO.md    ${D}/unit_tests/nxp-afe
+        install -m 0755 ${UNPACKDIR}/deploy_afe/UAC_VCOM_composite.sh    ${D}/unit_tests/nxp-afe
 }
 
 FILES:${PN} += "/unit_tests"

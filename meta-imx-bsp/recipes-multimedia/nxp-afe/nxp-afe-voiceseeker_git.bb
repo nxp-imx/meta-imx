@@ -23,20 +23,13 @@ EXTRA_OEMAKE:mx8-nxp-bsp = "BUILD_ARCH=CortexA53"
 EXTRA_OEMAKE:mx8ulp-nxp-bsp = "BUILD_ARCH=CortexA35"
 EXTRA_OEMAKE:mx9-nxp-bsp = "BUILD_ARCH=CortexA55"
 
-do_compile () {
-    echo "====Enter into ${WORKDIR}/git===="
-    cd ${WORKDIR}/git
-    echo "====make all==="
-    oe_runmake all
-}
-
 do_install() {
     install -d ${D}${libdir}/nxp-afe
     install -d ${D}/unit_tests/nxp-afe
-    install -m 0644 ${WORKDIR}/git/release/*.so.2.0    ${D}${libdir}/nxp-afe/
+    install -m 0644 ${S}/release/*.so.2.0    ${D}${libdir}/nxp-afe/
     ln -sf -r ${D}${libdir}/nxp-afe/libvoiceseekerlight.so.2.0 ${D}${libdir}/nxp-afe/libvoiceseekerlight.so
-    install -m 0755 ${WORKDIR}/git/release/voice_ui_app    ${D}/unit_tests/nxp-afe
-    install -m 0644 ${WORKDIR}/git/release/Config.ini    ${D}/unit_tests/nxp-afe
+    install -m 0755 ${S}/release/voice_ui_app    ${D}/unit_tests/nxp-afe
+    install -m 0644 ${S}/release/Config.ini    ${D}/unit_tests/nxp-afe
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
