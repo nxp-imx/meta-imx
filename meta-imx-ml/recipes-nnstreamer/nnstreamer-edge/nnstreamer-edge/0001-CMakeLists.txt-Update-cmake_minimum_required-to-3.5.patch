@@ -1,0 +1,34 @@
+From ce758dd3055e9cc0a7a6ab9648bbd22a5c3fc483 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Thu, 25 Sep 2025 14:14:56 -0500
+Subject: [PATCH] CMakeLists.txt: Update cmake_minimum_required to 3.5
+
+CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 has been removed from CMake.
+
+   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+   to tell CMake that the project requires at least <min> but has been updated
+   to work with policies introduced by <max> or earlier.
+
+   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 03ad053..7497a88 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
++CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
+ PROJECT(nnstreamer-edge)
+ 
+ INCLUDE(FindPkgConfig)
+-- 
+2.34.1
+
