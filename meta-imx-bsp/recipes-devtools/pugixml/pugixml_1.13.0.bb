@@ -4,7 +4,8 @@ SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=297dbdec580de5365d8b69c3250629eb"
 
-SRC_URI = "git://github.com/zeux/pugixml.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/zeux/pugixml.git;branch=master;protocol=https \
+           file://0001-CMakeLists.txt-Update-cmake_minimum_required-to-3.5.patch"
 
 SRCREV = "a0e064336317c9347a91224112af9933598714e9"
 
