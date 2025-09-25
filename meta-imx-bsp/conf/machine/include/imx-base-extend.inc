@@ -62,8 +62,8 @@ PREFERRED_VERSION_gstreamer1.0-vaapi:imx-nxp-bsp        ??= "1.26.6"
 
 
 # Keep ffmpeg version align with OE upstream
-PREFERRED_VERSION_ffmpeg:mx8-nxp-bsp ??= "7.1.1"
-PREFERRED_VERSION_ffmpeg:mx9-nxp-bsp ??= "7.1.1"
+PREFERRED_VERSION_ffmpeg:mx8-nxp-bsp ??= "7.%"
+PREFERRED_VERSION_ffmpeg:mx9-nxp-bsp ??= "7.%"
 
 PREFERRED_VERSION_weston:imx-nxp-bsp ??= "14.0.2.imx"
 # i.MX 6 & 7 stay on weston 10.0 for fbdev
