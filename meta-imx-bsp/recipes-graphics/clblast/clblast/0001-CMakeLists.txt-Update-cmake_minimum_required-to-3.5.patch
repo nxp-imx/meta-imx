@@ -1,0 +1,37 @@
+From 34ad63b4675aae7d9f1134c848fe10e9b1dec04c Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Thu, 25 Sep 2025 14:31:12 -0500
+Subject: [PATCH] CMakeLists.txt: Update cmake_minimum_required to 3.5
+
+CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 has been removed from CMake.
+
+   Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+   to tell CMake that the project requires at least <min> but has been updated
+   to work with policies introduced by <max> or earlier.
+
+   Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 115285ee..7cbe947b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -9,7 +9,7 @@
+ #
+ # ==================================================================================================
+ 
+-cmake_minimum_required(VERSION 2.8.11)
++cmake_minimum_required(VERSION 3.5)
+ 
+ # Overrides for MSVC static runtime
+ option(OVERRIDE_MSVC_FLAGS_TO_MT "Override compiler flags for MSVC to build with a static runtime (/MT instead of /MD)" ON)
+-- 
+2.34.1
+
