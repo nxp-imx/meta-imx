@@ -13,7 +13,7 @@ SRC_URI = "${EL2GO_AGENT_SRC};branch=${SRCBRANCH}"
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
 SRCBRANCH = "master"
 
-SRCREV = "792acc58ddd559aaabc68ffb77498f404fb0d95b"
+SRCREV = "8712573de4f486ac06492e7c8a4a37c5ede2d22f"
 S = "${WORKDIR}/git"
 
 PV = "6.4.0+git"
