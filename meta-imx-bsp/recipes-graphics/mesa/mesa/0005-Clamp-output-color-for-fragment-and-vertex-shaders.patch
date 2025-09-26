@@ -1,0 +1,52 @@
+From 957070c96926beb799a55373d83818bc735d12cf Mon Sep 17 00:00:00 2001
+From: Xianzhong Li <xianzhong.li@nxp.com>
+Date: Fri, 26 Sep 2025 11:43:51 +0800
+Subject: [PATCH 1/2] Clamp output color for fragment and vertex shaders
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: Xianzhong Li <xianzhong.li@nxp.com>
+---
+ src/gallium/auxiliary/tgsi/tgsi_exec.h          | 2 +-
+ src/gallium/drivers/softpipe/sp_state_derived.c | 6 +++++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/src/gallium/auxiliary/tgsi/tgsi_exec.h b/src/gallium/auxiliary/tgsi/tgsi_exec.h
+index 623f7257a67..052820e4cae 100644
+--- a/src/gallium/auxiliary/tgsi/tgsi_exec.h
++++ b/src/gallium/auxiliary/tgsi/tgsi_exec.h
+@@ -294,7 +294,7 @@ struct rvgpu_tgsi_mach_padding {
+    uint regnum[TGSI_FILE_COUNT];
+    const uint8_t *output_semantic_name;
+    const uint8_t *output_semantic_index;
+-   bool clamp_vertex_color;
++   bool clamp_output_color;
+ 
+    int reserved[512];
+ };
+diff --git a/src/gallium/drivers/softpipe/sp_state_derived.c b/src/gallium/drivers/softpipe/sp_state_derived.c
+index 6a4183604b1..e2c5d725a0b 100644
+--- a/src/gallium/drivers/softpipe/sp_state_derived.c
++++ b/src/gallium/drivers/softpipe/sp_state_derived.c
+@@ -350,6 +350,10 @@ update_fragment_shader(struct softpipe_context *softpipe, unsigned prim)
+          memcpy(softpipe->fs_machine->pad.regnum, &softpipe->fs_variant->info.file_count, sizeof(softpipe->fs_machine->pad.regnum));
+          softpipe->fs_machine->pad.output_semantic_name = &softpipe->fs_variant->info.output_semantic_name[0];
+          softpipe->fs_machine->pad.output_semantic_index = &softpipe->fs_variant->info.output_semantic_index[0];
++         if (softpipe->framebuffer.cbufs[0]) {
++             const struct util_format_description *desc = util_format_description(softpipe->framebuffer.cbufs[0]->format);
++             softpipe->fs_machine->pad.clamp_output_color = !!desc->is_unorm;
++         }
+       }
+ #endif
+ 
+@@ -419,7 +423,7 @@ softpipe_update_derived(struct softpipe_context *softpipe, unsigned prim)
+          vs->machine->pad.regnum[TGSI_FILE_INPUT] = softpipe->vs->draw_data->info.file_max[TGSI_FILE_INPUT]+1;
+          vs->machine->pad.output_semantic_name = &softpipe->vs->draw_data->info.output_semantic_name[0];
+          vs->machine->pad.output_semantic_index = &softpipe->vs->draw_data->info.output_semantic_index[0];
+-         vs->machine->pad.clamp_vertex_color = softpipe->vs->draw_data->draw->rasterizer->clamp_vertex_color;
++         vs->machine->pad.clamp_output_color = softpipe->vs->draw_data->draw->rasterizer->clamp_vertex_color;
+ 
+          AdpUpdTgsiSamp(vs->machine);
+ 
+-- 
+2.34.1
+

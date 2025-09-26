@@ -6,6 +6,7 @@ SRC_URI_RVGPU = "file://0001-egl-Avoid-initializing-zink-driver-if-not-enabled-a
                  file://0002-Use-rvgpu-firmware-to-render-triangle.patch \
                  file://0003-Enable-rvgpu-vertex-shader.patch \
                  file://0004-Disable-wide-point-line-feature-to-avoid-CTS-failure.patch \
+                 file://0005-Clamp-output-color-for-fragment-and-vertex-shaders.patch \
 "
 
 PACKAGECONFIG:append = "${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', ' rvgpu', '', d)}"
