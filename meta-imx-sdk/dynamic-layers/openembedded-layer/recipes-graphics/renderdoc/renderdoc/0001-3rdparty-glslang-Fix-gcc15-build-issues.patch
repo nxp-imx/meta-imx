@@ -1,0 +1,32 @@
+From 7f1245a902b18827e638c07af3a4408a8194e1c4 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Fri, 26 Sep 2025 11:47:59 -0500
+Subject: [PATCH] 3rdparty/glslang: Fix gcc15 build issues
+
+https://gcc.gnu.org/gcc-15/porting_to.html#cxx
+Some C++ Standard Library headers have been changed to
+no longer include other headers that were being used
+internally by the library.
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ renderdoc/3rdparty/glslang/SPIRV/SpvBuilder.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/renderdoc/3rdparty/glslang/SPIRV/SpvBuilder.h b/renderdoc/3rdparty/glslang/SPIRV/SpvBuilder.h
+index 70edf250d..b17675b72 100644
+--- a/renderdoc/3rdparty/glslang/SPIRV/SpvBuilder.h
++++ b/renderdoc/3rdparty/glslang/SPIRV/SpvBuilder.h
+@@ -50,6 +50,7 @@
+ #include "Logger.h"
+ #include "spirv.hpp"
+ #include "spvIR.h"
++#include <stdint.h>
+ namespace spv {
+     #include "GLSL.ext.KHR.h"
+     #include "NonSemanticShaderDebugInfo100.h"
+-- 
+2.34.1
+
