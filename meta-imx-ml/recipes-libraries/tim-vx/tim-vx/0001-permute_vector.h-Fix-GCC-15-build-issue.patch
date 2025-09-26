@@ -1,0 +1,32 @@
+From 36a8159c9d859cc11caf70356164ecb471053d91 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Fri, 26 Sep 2025 12:39:56 -0500
+Subject: [PATCH] permute_vector.h: Fix GCC 15 build issue
+
+https://gcc.gnu.org/gcc-15/porting_to.html#cxx
+Some C++ Standard Library headers have been changed to
+no longer include other headers that were being used
+internally by the library.
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ src/tim/transform/permute_vector.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/tim/transform/permute_vector.h b/src/tim/transform/permute_vector.h
+index 4fd3bd4..9025356 100644
+--- a/src/tim/transform/permute_vector.h
++++ b/src/tim/transform/permute_vector.h
+@@ -29,6 +29,7 @@
+ #include <memory>
+ #include <vector>
+ #include <string>
++#include <stdint.h>
+ 
+ namespace tim {
+ namespace transform {
+-- 
+2.34.1
+
