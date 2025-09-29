@@ -8,7 +8,7 @@ inherit pkgconfig cmake
 
 DEPENDS += "opencl-headers"
 
-PROVIDES = "virtual/opencl-icd"
+PROVIDES = "virtual/libopencl1"
 RPROVIDES:${PN} = "virtual-opencl-icd"
 
 
