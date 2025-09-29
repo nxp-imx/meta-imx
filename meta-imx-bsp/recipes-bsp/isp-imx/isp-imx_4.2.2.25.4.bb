@@ -8,7 +8,7 @@ DEPENDS = "boost libdrm virtual/libg2d libtinyxml2 jsoncpp patchelf-native"
 SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true \
 "
 
-SRC_URI[sha256sum] = "d228415660ed94e1588fc319c0d302d6a9341afe3d388ff64336c22586fd7c1d"
+SRC_URI[sha256sum] = "654116bf475c12b4608b0e8514a1f6f2cd9266a09118050d38a26beae383805c"
 
 IMX_SRCREV_ABBREV = "ba3fb45"
 
