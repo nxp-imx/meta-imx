@@ -14,8 +14,5 @@ PACKAGECONFIG[rvgpu] = "${RVGPU_ENABLED},${RVGPU_DISABLED},mesa-rvgpu-emu"
 RVGPU_ENABLED = "${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', '-Dmesa-rvgpu=true', '', d)}"
 RVGPU_DISABLED = "${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', '-Dmesa-rvgpu=false', '', d)}"
 
-# Extend support for 943
-SRC_URI:append:mx943-nxp-bsp = " file://0001-MGS-7673-egl-dri2-fix-video-showing-wrong-frame.patch"
-
 # Fix package arch
 PACKAGE_ARCH:imx-nxp-bsp = "${MACHINE_SOCARCH}"
