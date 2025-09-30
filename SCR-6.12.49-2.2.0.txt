@@ -322,7 +322,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.0-83132c7
+Package:                     zephyr-demo-imx-4.3.0-06daf0e
 Version:                     4.3.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -723,7 +723,7 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.25.4-ba3fb45.bin
+Package:                     isp-imx-4.2.2.25.4-acc2fb2.bin
 Version:                     4.2.2.25.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -818,7 +818,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     mesa-rvgpu-emu-2.0.1-d4fbe94.bin
+Package:                     mesa-rvgpu-emu-2.0.1-345aa9d.bin
 Version:                     2.0.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
