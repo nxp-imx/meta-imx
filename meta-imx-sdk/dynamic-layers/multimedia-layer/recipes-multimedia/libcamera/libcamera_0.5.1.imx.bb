@@ -103,6 +103,8 @@ SRCREV = "06ab365292c0b4b709c7238865316cc466067d0a"
 
 PACKAGECONFIG = "gst pycamera dng"
 
+ARM_PIPELINES .= ",nxp/neo"
+
 COMPATIBLE_MACHINE = "(mx95-nxp-bsp|mx8mm-nxp-bsp|mx8ulp-nxp-bsp|mx8mq-nxp-bsp)"
 
 ########### End of i.MX overrides #########
