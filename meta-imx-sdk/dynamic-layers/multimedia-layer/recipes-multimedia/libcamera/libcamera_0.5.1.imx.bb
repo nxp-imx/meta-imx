@@ -3,7 +3,7 @@
 # recipe. The second section customizes the recipe for i.MX.
 
 ########### meta-openembedded copy ##################
-# Upstream hash: 65f0ffec504ccf6f61b72bf11bbbb092047d7287
+# Upstream hash: f4b9dfa0c903bc94c344c657917a3fbb229c322f
 
 SUMMARY = "Linux libcamera framework"
 SECTION = "libs"
@@ -16,12 +16,10 @@ LIC_FILES_CHKSUM = "\
 "
 
 SRC_URI = " \
-        git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
-        file://0001-media_device-Add-bool-return-type-to-unlock.patch \
-        file://0002-libcamera-Add-missing-stdint.h-include-to-dma_buf_al.patch \
+        git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
 "
 
-SRCREV = "06ab365292c0b4b709c7238865316cc466067d0a"
+SRCREV = "096c50ca881f72d858aca19757a5e73b4775a7cc"
 
 PE = "1"
 
@@ -36,8 +34,17 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[dng] = ",,tiff"
 PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[pycamera] = "-Dpycamera=enabled,-Dpycamera=disabled,python3 python3-pybind11"
+PACKAGECONFIG[raspberrypi] = ",,libpisp"
+
+# Raspberry Pi requires the meta-raspberrypi layer
+# These values are coming from the project's meson.build file,
+# which lists the supported values by arch.
+ARM_PIPELINES = "${@bb.utils.contains('PACKAGECONFIG', 'raspberrypi', 'rpi/pisp,rpi/vc4,', '', d)}"
+ARM_PIPELINES .= "imx8-isi,mali-c55,simple,uvcvideo"
 
 LIBCAMERA_PIPELINES ??= "auto"
+LIBCAMERA_PIPELINES:arm ??= "${ARM_PIPELINES}"
+LIBCAMERA_PIPELINES:aarch64 ??= "${ARM_PIPELINES}"
 
 EXTRA_OEMESON = " \
     -Dpipelines=${LIBCAMERA_PIPELINES} \
@@ -88,13 +95,7 @@ GLIBC_64BIT_TIME_FLAGS = ""
 
 ########### i.MX overrides ################
 
-DEPENDS += "libpisp"
-
-SRC_URI:remove = " \
-        git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
-        file://0001-media_device-Add-bool-return-type-to-unlock.patch \
-        file://0002-libcamera-Add-missing-stdint.h-include-to-dma_buf_al.patch \
-"
+SRC_URI:remove = "git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV}"
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "git://github.com/nxp-imx/libcamera.git;protocol=https"
 SRCBRANCH = "imx/next"
