@@ -7,6 +7,6 @@ NXP_MATTER_TOOLS:imx-nxp-bsp = " \
     packagegroup-nxp-openthread \
 "
 
-RDEPENDS:${PN} += " \
-    ${NXP_MATTER_TOOLS} \
-"
+#RDEPENDS:${PN} += " \
+#    ${NXP_MATTER_TOOLS} \
+#"
