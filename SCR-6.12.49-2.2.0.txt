@@ -288,7 +288,7 @@ Description and comments:
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     nxp-wlan-csi-1.1.0-655b1a9.bin
+Package:                     nxp-wlan-csi-1.1.0-6071385.bin
 Version:                     1.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
