@@ -1,0 +1,32 @@
+From 4dd8aeb30a68249d464301544bcb30d1223ba0fd Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Thu, 2 Oct 2025 12:04:40 -0500
+Subject: [PATCH] optimizer_api.h: Fix gcc15 build issues
+
+https://gcc.gnu.org/gcc-15/porting_to.html#cxx
+Some C++ Standard Library headers have been changed to
+no longer include other headers that were being used
+internally by the library.
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ .../core/optimizer/transpose_optimization/optimizer_api.h        | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/onnxruntime/core/optimizer/transpose_optimization/optimizer_api.h b/onnxruntime/core/optimizer/transpose_optimization/optimizer_api.h
+index e4d59ea73..25e69dc3c 100644
+--- a/onnxruntime/core/optimizer/transpose_optimization/optimizer_api.h
++++ b/onnxruntime/core/optimizer/transpose_optimization/optimizer_api.h
+@@ -11,6 +11,7 @@
+ #include <unordered_map>
+ #include <unordered_set>
+ #include <vector>
++#include <cstdint>
+ 
+ namespace onnx_transpose_optimization {
+ namespace api {
+-- 
+2.34.1
+
