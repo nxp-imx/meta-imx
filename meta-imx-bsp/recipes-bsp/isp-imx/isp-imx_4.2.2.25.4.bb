@@ -41,6 +41,7 @@ EXTRA_OECMAKE += " \
     -D3A_SRC_BUILD=0 \
     -DIMX_G2D=ON \
     -Wno-dev \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 "
 
 do_install() {
