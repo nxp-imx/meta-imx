@@ -1,0 +1,85 @@
+From 2b34514d5b27545d5614e916b6a6a5da88f2708d Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Mon, 6 Oct 2025 13:53:58 -0500
+Subject: [PATCH] host: Fix gcc15 build issues
+
+https://gcc.gnu.org/gcc-15/porting_to.html#cxx
+Some C++ Standard Library headers are no longer
+including other headers that were being used
+internally by the library.
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ host/BorrowedImage.h                                | 2 ++
+ host/compressedTextureFormats/AstcCpuDecompressor.h | 1 +
+ host/magma/Connection.h                             | 1 +
+ host/magma/DrmContext.h                             | 1 +
+ host/vulkan/BufferVk.h                              | 1 +
+ 5 files changed, 6 insertions(+)
+
+diff --git a/host/BorrowedImage.h b/host/BorrowedImage.h
+index ed2890568..4833fb848 100644
+--- a/host/BorrowedImage.h
++++ b/host/BorrowedImage.h
+@@ -14,6 +14,8 @@
+ 
+ #pragma once
+ 
++#include <cstdint>
++
+ namespace gfxstream {
+ 
+ // Common base struct representing images (Gl/Vk) that are borrowed
+diff --git a/host/compressedTextureFormats/AstcCpuDecompressor.h b/host/compressedTextureFormats/AstcCpuDecompressor.h
+index 4823ee255..3af0bdc64 100644
+--- a/host/compressedTextureFormats/AstcCpuDecompressor.h
++++ b/host/compressedTextureFormats/AstcCpuDecompressor.h
+@@ -15,6 +15,7 @@
+ 
+ #include <memory>
+ #include <string>
++#include <cstdint>
+ 
+ namespace gfxstream {
+ namespace vk {
+diff --git a/host/magma/Connection.h b/host/magma/Connection.h
+index 3e0c5a3c9..a5dec5f75 100644
+--- a/host/magma/Connection.h
++++ b/host/magma/Connection.h
+@@ -17,6 +17,7 @@
+ #include <memory>
+ #include <optional>
+ #include <unordered_map>
++#include <cstdint>
+ 
+ #include "DrmContext.h"
+ 
+diff --git a/host/magma/DrmContext.h b/host/magma/DrmContext.h
+index db3ef45e4..5030c7dd6 100644
+--- a/host/magma/DrmContext.h
++++ b/host/magma/DrmContext.h
+@@ -16,6 +16,7 @@
+ 
+ #include <memory>
+ #include <optional>
++#include <cstdint>
+ 
+ #include "aemu/base/Compiler.h"
+ 
+diff --git a/host/vulkan/BufferVk.h b/host/vulkan/BufferVk.h
+index 9016fd745..a8a3fe3eb 100644
+--- a/host/vulkan/BufferVk.h
++++ b/host/vulkan/BufferVk.h
+@@ -14,6 +14,7 @@
+ 
+ #include <memory>
+ #include <vector>
++#include <cstdint>
+ 
+ namespace gfxstream {
+ namespace vk {
+-- 
+2.34.1
+
