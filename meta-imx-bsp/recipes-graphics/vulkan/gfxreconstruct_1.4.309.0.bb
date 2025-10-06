@@ -31,6 +31,9 @@ EXTRA_OECMAKE += "\
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 "
 
+# FIXME: Work around deprecated-declarations warning treated as error on GCC 15
+CXXFLAGS += " -Wno-deprecated-declarations"
+
 export SDKTARGETSYSROOT = "${STAGING_DIR_HOST}"
 
 # The lib is unversioned
