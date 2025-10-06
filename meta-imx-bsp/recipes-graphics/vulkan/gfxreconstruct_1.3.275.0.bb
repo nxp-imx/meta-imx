@@ -25,6 +25,7 @@ PACKAGECONFIG[x11] = "-DBUILD_WSI_XCB_SUPPORT=ON,-DBUILD_WSI_XCB_SUPPORT=OFF,lib
 EXTRA_OECMAKE += "\
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR} \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 "
 
 # FIXME: Work around deprecated-declarations warning treated as error on GCC 15
