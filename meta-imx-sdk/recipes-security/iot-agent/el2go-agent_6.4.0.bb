@@ -1,22 +1,16 @@
 # Copyright 2023-2025 NXP
-
 SUMMARY = "NXP i.MX EdgeLock 2GO IoT Agent"
 DESCRIPTION = "NXP i.MX EdgeLock 2GO IoT Agent"
 SECTION = "base"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
-
 DEPENDS = "smw el2go-agent-mbedtls"
 
 SRC_URI = "${EL2GO_AGENT_SRC};branch=${SRCBRANCH}"
-
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
 SRCBRANCH = "master"
-
 SRCREV = "8712573de4f486ac06492e7c8a4a37c5ede2d22f"
 S = "${WORKDIR}/git"
-
-PV = "6.4.0+git"
 
 inherit cmake
 
