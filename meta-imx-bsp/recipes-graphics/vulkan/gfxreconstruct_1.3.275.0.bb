@@ -10,7 +10,6 @@ SRC_URI = " \
     file://0002-MGS-7104-ccc-gfxreconstruct-Add-support-for-xdg-shel.patch \
     file://0003-MGS-7104-ccc-gfxreconstruct-Generate-xdg-shell-proto.patch \
     file://0004-Change-gfxreconstruct-layer-to-implicit-layer.patch \
-    file://0001-cmake-Update-cmake_minimum_required-to-3.5.patch \
 "
 SRCREV = "ad85498e33a53f4c89979e0af8e3fe3b512aa47c"
 
