@@ -1,4 +1,4 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += " file://0001-ethosu.hpp-Fix-gcc15-build-issues.patch"
 SRCBRANCH = "imx_24.05"
