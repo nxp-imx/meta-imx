@@ -3,16 +3,16 @@ SECTION = "graphics"
 LICENSE = "Apache-2.0 & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d2ddcd9b5c3b713fcf90c3223f6b10bd \
                     file://external/SPIRV-Reflect/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
-DEPENDS = "vulkan-headers spirv-headers zstd lz4"
+DEPENDS = "lz4 nlohmann-json spirv-headers vulkan-headers zstd"
 
 SRC_URI = " \
-    git://github.com/LunarG/gfxreconstruct.git;protocol=https;branch=vulkan-sdk-1.4.309 \
-    git://github.com/KhronosGroup/SPIRV-Reflect;destsuffix=${S}/external/SPIRV-Reflect;name=SPIRV-Reflect;lfs=0;protocol=https;branch=vulkan-sdk-1.4.309 \
+    git://github.com/LunarG/gfxreconstruct.git;protocol=https;branch=vulkan-sdk-1.4.321 \
+    git://github.com/KhronosGroup/SPIRV-Reflect;destsuffix=${S}/external/SPIRV-Reflect;name=SPIRV-Reflect;lfs=0;protocol=https;branch=vulkan-sdk-1.4.321 \
     file://0001-FindVulkanVersion.cmake-Look-for-vulkan-headers-in-s.patch \
-    file://0004-Change-gfxreconstruct-layer-to-implicit-layer.patch \
+    file://0002-Change-gfxreconstruct-layer-to-implicit-layer.patch \
 "
-SRCREV = "c081f1b1b02b8fcdbfafac70c69797a39fd46c19"
-SRCREV_SPIRV-Reflect = "c637858562fbce1b6f5dc7ca48d4e8a5bd117b70"
+SRCREV = "e8b2afd199e34274ac5108a08b9dcf22a8f52065"
+SRCREV_SPIRV-Reflect = "e55086b044225f9b511ae44dbf9b079d3625943f"
 
 SRCREV_FORMAT = "default_SPIRV-Reflect"
 
@@ -28,11 +28,8 @@ PACKAGECONFIG[x11] = "-DBUILD_WSI_XCB_SUPPORT=ON,-DBUILD_WSI_XCB_SUPPORT=OFF,lib
 EXTRA_OECMAKE += "\
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR} \
-    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+    -DGFXRECON_ENABLE_OPENXR=OFF \
 "
-
-# FIXME: Work around deprecated-declarations warning treated as error on GCC 15
-CXXFLAGS += " -Wno-deprecated-declarations"
 
 export SDKTARGETSYSROOT = "${STAGING_DIR_HOST}"
 

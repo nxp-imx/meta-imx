@@ -1,0 +1,40 @@
+From f366dae84ab43bc645c1dc066ff5c3e22c7d0564 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Wed, 6 Apr 2022 12:53:34 -0700
+Subject: [PATCH] FindVulkanVersion.cmake: Look for vulkan-headers in sysroot
+
+Upstream-Status: Pending
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ cmake/FindVulkanVersion.cmake | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
+
+diff --git a/cmake/FindVulkanVersion.cmake b/cmake/FindVulkanVersion.cmake
+index 3821c2c8d..50016827d 100644
+--- a/cmake/FindVulkanVersion.cmake
++++ b/cmake/FindVulkanVersion.cmake
+@@ -13,9 +13,7 @@ set(FIND_VULKAN_DIR ${CMAKE_CURRENT_LIST_DIR})
+ find_file (VULKAN_HEADER
+             vulkan_core.h
+             HINTS
+-                external/Vulkan-Headers/include/vulkan
+-		${FIND_VULKAN_DIR}/../external/Vulkan-Headers/include/vulkan
+-		${FIND_VULKAN_DIR}/../../external/Vulkan-Headers/include/vulkan
++                ${CMAKE_SYSROOT}/usr/include/vulkan
+ 	    NO_DEFAULT_PATH
+ 	    NO_CMAKE_FIND_ROOT_PATH
+ 	)
+@@ -28,9 +26,7 @@ else()
+     find_file(VULKAN_HEADER
+                 vulkan.h
+                 HINTS
+-                    external/Vulkan-Headers/include/vulkan
+-		    ${FIND_VULKAN_DIR}/../external/Vulkan-Headers/include/vulkan
+-		    ${FIND_VULKAN_DIR}/../../external/Vulkan-Headers/include/vulkan
++                    ${CMAKE_SYSROOT}/usr/include/vulkan
+ 	        NO_DEFAULT_PATH
+ 	        NO_CMAKE_FIND_ROOT_PATH
+ 	)
+-- 
+2.34.1
+
