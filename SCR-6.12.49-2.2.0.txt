@@ -322,7 +322,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.0-06daf0e
+Package:                     zephyr-demo-imx-4.3.0-9ae10ea
 Version:                     4.3.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -544,7 +544,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     el2go-agent.git
-Version:                     
+Version:                     6.4.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            BSP
