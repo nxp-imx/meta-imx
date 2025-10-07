@@ -9,7 +9,7 @@ DEPENDS = "smw el2go-agent-mbedtls"
 SRC_URI = "${EL2GO_AGENT_SRC};branch=${SRCBRANCH}"
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "8712573de4f486ac06492e7c8a4a37c5ede2d22f"
+SRCREV = "deccd425cce7a3493b6bc2caf900363f09804a2a"
 S = "${WORKDIR}/git"
 
 inherit cmake
