@@ -11,7 +11,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-RDEPENDS:${PN}        = ""
+RDEPENDS:${PN}        = " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', 'glmark2', '', d)} \
+"
 RDEPENDS:${PN}:imxgpu = " \
     ${DRM_TOOLS} \
     ${OPENCL_TOOLS} \
@@ -37,7 +39,7 @@ VULKAN_TOOLS:mx8mm-nxp-bsp = ""
 
 WAYLAND_TOOLS = " \
     ${GLMARK2} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtkperf mesa-demos renderdoc", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtkperf mesa-demos", "", d)} \
 "
 
 GLMARK2          = ""

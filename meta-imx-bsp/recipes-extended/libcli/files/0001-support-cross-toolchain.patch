@@ -1,0 +1,38 @@
+From 4ee319b0de1a9376a1c508253bde5a44167e83c6 Mon Sep 17 00:00:00 2001
+From: Gagandeep Singh <g.singh@nxp.com>
+Date: Mon, 2 Dec 2024 18:23:37 +0530
+Subject: [PATCH] support cross toolchain
+
+Upstream-Status: Submitted [https://github.com/dparrish/libcli/pull/102/commits/81097331e722b057c50b326a9780ad075116f0b5]
+Signed-off-by: Gagandeep Singh <g.singh@nxp.com>
+---
+ Makefile | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index b082edf..9da8244 100644
+--- a/Makefile
++++ b/Makefile
+@@ -7,7 +7,7 @@ TESTS ?= 1
+ 
+ UNAME = $(shell sh -c 'uname -s 2>/dev/null || echo not')
+ DESTDIR =
+-PREFIX = /usr/local
++PREFIX ?= /usr/local
+ 
+ MAJOR = 1
+ MINOR = 9
+@@ -15,8 +15,8 @@ REVISION = 8
+ LIB = libcli.so
+ LIB_STATIC = libcli.a
+ 
+-CC = gcc
+-AR = ar
++CC ?= gcc
++AR ?= ar
+ ARFLAGS = rcs
+ DEBUG = -g
+ OPTIM = -O3
+-- 
+2.25.1
+

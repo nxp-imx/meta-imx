@@ -1,0 +1,41 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+SRC_URI += " \
+    file://0001-Continue-running-when-EnumerateDeviceExtensionProper.patch \
+    file://0002-Pass-memory-checking-when-replaying-captures.patch \
+    file://0003-Use-specific-integer-format-to-generate-a-dummy-mult.patch \
+    file://0004-Add-basic-support-for-Wayland-replay-on-renderdoccmd.patch \
+    file://0005-Add-window-functionalities-for-Wayland-replay-suppor.patch \
+    file://0006-Fix-compilation-for-iMX.patch \
+    file://0007-Change-wl_shell-to-xdg_shell-for-renderdoccmd-replay.patch \
+    file://0008-renderdoccmd-CMakeLists.txt-add-xdg-shell.patch \
+    file://0009-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
+    file://0010-renderdoc-CMakeLists.txt-Fix-multilib-case.patch \
+    file://0011-Fix-a-xdg_shell-bug-on-8ulp.patch \
+"
+
+REQUIRED_DISTRO_FEATURES:remove = "opengl"
+
+PACKAGECONFIG ?= " \
+    egl \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'vulkan wayland', d)} \
+    ${PACKAGECONFIG_GLES} \
+"
+PACKAGECONFIG_GLES = ""
+PACKAGECONFIG_GLES:imxmali:imxgpu3d = "gles"
+
+PACKAGECONFIG[egl]     = "-DENABLE_EGL=ON,-DENABLE_EGL=OFF"
+PACKAGECONFIG[gl]      = "-DENABLE_GL=ON,-DENABLE_GL=OFF,virtual/libgl"
+PACKAGECONFIG[gles]    = "-DENABLE_GLES=ON,-DENABLE_GLES=OFF,virtual/libgles1 virtual/libgles2 virtual/libgles3"
+PACKAGECONFIG[vulkan]  = "-DENABLE_VULKAN=ON,-DENABLE_VULKAN=OFF"
+PACKAGECONFIG[wayland] = "-DENABLE_WAYLAND=ON -DENABLE_UNSUPPORTED_EXPERIMENTAL_POSSIBLY_BROKEN_WAYLAND=ON -DWAYLAND_SCANNER=${STAGING_BINDIR_NATIVE}/wayland-scanner -DWAYLAND_PROTOCOLS_DIR=${STAGING_DATADIR}/wayland-protocols,-DENABLE_WAYLAND=OFF,wayland-native wayland wayland-protocols"
+PACKAGECONFIG[xcb]     = "-DENABLE_XCB=ON,-DENABLE_XCB=OFF,libxcb xcb-util-keysyms,libxcb xcb-util-keysyms"
+PACKAGECONFIG[xlib]    = "-DENABLE_XLIB=ON,-DENABLE_XLIB=OFF,virtual/libx11"
+
+do_compile:prepend () {
+    if [ "${base_libdir}" != "lib" ]; then
+        export LIB_SUFFIX="64"
+    fi
+}
+
+PACKAGE_ARCH:imxmali:imxgpu3d = "${MACHINE_SOCARCH}"

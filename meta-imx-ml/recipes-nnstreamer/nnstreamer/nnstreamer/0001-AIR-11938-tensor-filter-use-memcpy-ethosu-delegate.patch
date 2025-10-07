@@ -1,28 +1,28 @@
-From baa131798d24b6b23f6891978e0e69de8a5954d1 Mon Sep 17 00:00:00 2001
-From: Nicolas <nicolas.goueslain@nxp.com>
-Date: Fri, 6 Sep 2024 17:02:43 +0200
+From fd05c3f40c9ae1bdf2e05fc3581a00ec967fb9e3 Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Wed, 23 Jul 2025 12:28:07 +0000
 Subject: [PATCH] AIR-11938: tensor-filter-use-memcpy-ethosu-delegate
 
 Upstream-Status: Inappropriate [i.MX specific]
 
-Signed-off-by: Nicolas <nicolas.goueslain@nxp.com>
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
 ---
- .../tensor_filter/tensor_filter_tensorflow_lite.cc     | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+ .../tensor_filter/tensor_filter_tensorflow_lite.cc       | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc b/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
-index 78b7df33..040bc29e 100644
+index 95ab68c6..86879932 100644
 --- a/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
 +++ b/ext/nnstreamer/tensor_filter/tensor_filter_tensorflow_lite.cc
-@@ -218,6 +218,7 @@ class TFLiteInterpreter
+@@ -244,6 +244,7 @@ class TFLiteInterpreter
    char *model_path;
    bool is_cached_after_first_invoke; /**< To cache again after first invoke */
    bool is_xnnpack_delegated; /**< To check if XNNPACK delegate is used */
 +  bool is_ethosu_delegated;
    char *ext_delegate_path; /**< path to external delegate lib */
    GHashTable *ext_delegate_kv_table; /**< external delegate key values options */
- 
-@@ -301,6 +302,7 @@ TFLiteInterpreter::TFLiteInterpreter ()
+   QNNBackendType qnn_backend_type; /**< QNN Delegate backend type */
+@@ -332,6 +333,7 @@ TFLiteInterpreter::TFLiteInterpreter ()
  
    is_cached_after_first_invoke = false;
    is_xnnpack_delegated = false;
@@ -30,7 +30,7 @@ index 78b7df33..040bc29e 100644
  }
  
  /**
-@@ -335,7 +337,7 @@ TFLiteInterpreter::invoke (const GstTensorMemory *input, GstTensorMemory *output
+@@ -366,7 +368,7 @@ TFLiteInterpreter::invoke (const GstTensorMemory *input, GstTensorMemory *output
     * Therefore tensor data is to be manually copied from/to input/output
     * GStreamer buffers memory whose address changes at every round.
     */
@@ -39,7 +39,7 @@ index 78b7df33..040bc29e 100644
      for (unsigned int i = 0; i < inputTensorMeta.num_tensors; ++i) {
        tensor_ptr = inputTensorPtr[i];
        g_assert (tensor_ptr->bytes == input[i].size);
-@@ -364,7 +366,7 @@ TFLiteInterpreter::invoke (const GstTensorMemory *input, GstTensorMemory *output
+@@ -395,7 +397,7 @@ TFLiteInterpreter::invoke (const GstTensorMemory *input, GstTensorMemory *output
     * After the very first invoke, the output buffer address may change.
     * To handle the case, memcpy the output buffer directly.
     */
@@ -48,14 +48,16 @@ index 78b7df33..040bc29e 100644
      for (unsigned int i = 0; i < outputTensorMeta.num_tensors; ++i) {
        tensor_ptr = outputTensorPtr[i];
        g_assert (tensor_ptr->bytes == output[i].size);
-@@ -523,7 +525,9 @@ TFLiteInterpreter::loadModel (int num_threads, tflite_delegate_e delegate_e)
-         TfLiteExternalDelegateOptions options;
+@@ -555,6 +557,9 @@ TFLiteInterpreter::loadModel (int num_threads, tflite_delegate_e delegate_e)
  
          options = TfLiteExternalDelegateOptionsDefault (ext_delegate_path);
--
+ 
 +        if (strcmp(ext_delegate_path, "libethosu_delegate.so") == 0){
 +          is_ethosu_delegated = true;
-+        }
++	}
          /* Add optional key values to delegate configuration */
          if (ext_delegate_kv_table) {
            GHashTable *table = ext_delegate_kv_table;
+-- 
+2.34.1
+

@@ -1,0 +1,154 @@
+From e0669b08c7d6fc5298b62c927273c28bbabcc36b Mon Sep 17 00:00:00 2001
+From: Gagandeep Singh <g.singh@nxp.com>
+Date: Wed, 27 Nov 2024 15:23:23 +0530
+Subject: [PATCH] libnfnetlink-1.0.2:add non blocking mode and missing includes
+
+Upstream-Status: Inappropriate [i.MX-specific]
+
+Signed-off-by: Gagandeep Singh <g.singh@nxp.com>
+---
+ include/libnfnetlink/libnfnetlink.h    |  4 +++
+ include/libnfnetlink/linux_nfnetlink.h |  2 +-
+ src/libnfnetlink.c                     | 49 ++++++++++++++++++++++++--
+ src/nfnl.version                       |  3 +-
+ 4 files changed, 54 insertions(+), 4 deletions(-)
+
+diff --git a/include/libnfnetlink/libnfnetlink.h b/include/libnfnetlink/libnfnetlink.h
+index 49ce878..09d04ad 100644
+--- a/include/libnfnetlink/libnfnetlink.h
++++ b/include/libnfnetlink/libnfnetlink.h
+@@ -17,6 +17,7 @@
+ 
+ #include <stdint.h>
+ #include <sys/socket.h>	/* for sa_family_t */
++#include <sys/types.h>
+ #include <linux/netlink.h>
+ #include <libnfnetlink/linux_nfnetlink.h>
+ 
+@@ -66,6 +67,9 @@ struct nfnl_callback {
+ struct nfnl_handle;
+ struct nfnl_subsys_handle;
+ 
++extern NFNL_EXPORT int nfnl_set_nonblocking_mode(struct nfnl_handle *h);
++extern NFNL_EXPORT int nfnl_unset_nonblocking_mode(struct nfnl_handle *h);
++
+ extern NFNL_EXPORT int nfnl_fd(struct nfnl_handle *h);
+ extern NFNL_EXPORT unsigned int nfnl_portid(const struct nfnl_handle *h);
+ 
+diff --git a/include/libnfnetlink/linux_nfnetlink.h b/include/libnfnetlink/linux_nfnetlink.h
+index 44a38d6..bba3087 100644
+--- a/include/libnfnetlink/linux_nfnetlink.h
++++ b/include/libnfnetlink/linux_nfnetlink.h
+@@ -1,6 +1,6 @@
+ #ifndef _NFNETLINK_H
+ #define _NFNETLINK_H
+-#include <linux/types.h>
++#include <sys/types.h>
+ #include <libnfnetlink/linux_nfnetlink_compat.h>
+ 
+ enum nfnetlink_groups {
+diff --git a/src/libnfnetlink.c b/src/libnfnetlink.c
+index 667e5ef..6f171ed 100644
+--- a/src/libnfnetlink.c
++++ b/src/libnfnetlink.c
+@@ -42,6 +42,7 @@
+ #include <errno.h>
+ #include <string.h>
+ #include <time.h>
++#include <fcntl.h>
+ #include <netinet/in.h>
+ #include <assert.h>
+ #include <linux/types.h>
+@@ -103,6 +104,7 @@ struct nfnl_subsys_handle {
+ #define		NFNL_MAX_SUBSYS			16 /* enough for now */
+ 
+ #define NFNL_F_SEQTRACK_ENABLED		(1 << 0)
++#define NFNL_F_NONBLOCKING_MODE    (1 << 1)
+ 
+ struct nfnl_handle {
+ 	int			fd;
+@@ -280,6 +282,48 @@ void nfnl_set_rcv_buffer_size(struct nfnl_handle *h, unsigned int size)
+ {
+ 	h->rcv_buffer_size = size;
+ }
++/*
++ * nfnl_set_nonblocking_mode - set non blocking mode for netlink socket
++ * @h: nfnetlink handler
++ */
++int nfnl_set_nonblocking_mode(struct nfnl_handle *h)
++{
++	int ret;
++
++	ret = fcntl(h->fd, F_GETFL);
++	if (ret < 0)
++		return ret;
++
++	ret = fcntl(h->fd, F_SETFL, ret | O_NONBLOCK);
++	if (ret < 0)
++		return ret;
++
++	h->flags |= NFNL_F_NONBLOCKING_MODE;
++
++	return 0;
++}
++
++
++/**
++ * nfnl_unset_nonblocking_mode - unset non blocking mode for netlink socket
++ * @h: nfnetlink handler
++ */
++int nfnl_unset_nonblocking_mode(struct nfnl_handle *h)
++{
++	int ret;
++
++	ret = fcntl(h->fd, F_GETFL);
++	if (ret < 0)
++		return ret;
++
++	ret = fcntl(h->fd, F_SETFL, ret & ~O_NONBLOCK);
++	if (ret < 0)
++		return ret;
++
++	h->flags &= ~NFNL_F_NONBLOCKING_MODE;
++
++  return 0;
++}
+ 
+ /**
+  * nfnl_subsys_open - open a netlink subsystem
+@@ -1549,7 +1593,7 @@ int nfnl_catch(struct nfnl_handle *h)
+ 
+ 	assert(h);
+ 
+-	while (1) {
++	do {
+ 		unsigned char buf[h->rcv_buffer_size]
+ 			__attribute__ ((aligned));
+ 
+@@ -1564,7 +1608,8 @@ int nfnl_catch(struct nfnl_handle *h)
+ 		ret = nfnl_process(h, buf, ret);
+ 		if (ret <= NFNL_CB_STOP)
+ 			break; 
+-	}
++
++	} while (!(h->flags & NFNL_F_NONBLOCKING_MODE));
+ 
+ 	return ret;
+ }
+diff --git a/src/nfnl.version b/src/nfnl.version
+index c3817dd..e6f2479 100644
+--- a/src/nfnl.version
++++ b/src/nfnl.version
+@@ -49,7 +49,8 @@ NFNETLINK_1.0.1 {
+     nlif_catch;
+     nlif_index2name;
+     nlif_get_ifflags;
+-
++    nfnl_set_nonblocking_mode;
++    nfnl_unset_nonblocking_mode;	
+   local:
+     *;
+ };
+-- 
+2.40.1
+

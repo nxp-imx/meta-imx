@@ -8,7 +8,11 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base"
 
 PNREAL = "gst-rtsp-server"
 
-SRC_URI = "https://gstreamer.freedesktop.org/src/${PNREAL}/${PNREAL}-${PV}.tar.xz"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+
+SRC_URI = "https://gstreamer.freedesktop.org/src/${PNREAL}/${PNREAL}-${PV}.tar.xz \
+           file://0001-YOCIMX-9113-rtsp-examples-install-test-launch-and-te.patch \
+          "
 
 SRC_URI[sha256sum] = "e983c039496e3f75e39696554ce74db4120e2465de17aa1cc37160568e9b40bc"
 
@@ -18,7 +22,7 @@ inherit meson pkgconfig upstream-version-is-even gobject-introspection
 
 EXTRA_OEMESON += " \
     -Ddoc=disabled \
-    -Dexamples=disabled \
+    -Dexamples=enabled \
     -Dtests=disabled \
 "
 

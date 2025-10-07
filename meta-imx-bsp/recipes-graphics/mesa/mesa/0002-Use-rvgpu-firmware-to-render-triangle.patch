@@ -1,0 +1,529 @@
+From f30154531babcb8748afe6cff4695648ea765fe1 Mon Sep 17 00:00:00 2001
+From: Eric Guo <eric.guo@nxp.com>
+Date: Tue, 6 Feb 2024 13:29:01 +0800
+Subject: [PATCH 2/4] Use rvgpu firmware to render triangle
+
+export MESA_SW=1 to force softpipe rendering
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: Eric Guo <eric.guo@nxp.com>
+---
+ src/gallium/auxiliary/tgsi/tgsi_exec.c        | 25 ++++++++++
+ src/gallium/auxiliary/tgsi/tgsi_exec.h        | 15 ++++++
+ .../auxiliary/tgsi/tgsi_info_opcodes.h        |  3 ++
+ src/gallium/drivers/softpipe/sp_clear.c       | 46 ++++++++++++++++++-
+ src/gallium/drivers/softpipe/sp_context.c     | 16 +++++++
+ src/gallium/drivers/softpipe/sp_context.h     |  5 ++
+ src/gallium/drivers/softpipe/sp_flush.c       | 23 ++++++++++
+ src/gallium/drivers/softpipe/sp_prim_vbuf.c   | 36 +++++++++++++++
+ .../drivers/softpipe/sp_state_derived.c       | 24 +++++++++-
+ .../drivers/softpipe/sp_state_shader.c        |  9 +++-
+ .../drivers/softpipe/sp_state_surface.c       | 22 ++++++++-
+ src/gallium/include/pipe/p_shader_tokens.h    |  9 +++-
+ 12 files changed, 227 insertions(+), 6 deletions(-)
+
+diff --git a/src/gallium/auxiliary/tgsi/tgsi_exec.c b/src/gallium/auxiliary/tgsi/tgsi_exec.c
+index ff54a01648f..ff54b8c3f80 100644
+--- a/src/gallium/auxiliary/tgsi/tgsi_exec.c
++++ b/src/gallium/auxiliary/tgsi/tgsi_exec.c
+@@ -63,6 +63,9 @@
+ #include "util/u_memory.h"
+ #include "util/u_math.h"
+ #include "util/rounding.h"
++#ifdef RVGPU
++#include "fw_mesa_adaptor.h"
++#endif
+ 
+ 
+ #define DEBUG_EXECUTION 0
+@@ -1204,6 +1207,12 @@ tgsi_exec_machine_bind_shader(
+    FREE(mach->Instructions);
+    mach->Instructions = instructions;
+    mach->NumInstructions = numInstructions;
++
++#ifdef RVGPU
++   if (!mach->mesa_sw_flag) {
++      AdpBindTgsiShader(mach);
++   }
++#endif
+ }
+ 
+ 
+@@ -1218,6 +1227,22 @@ tgsi_exec_machine_create(enum pipe_shader_type shader_type)
+ 
+    memset(mach, 0, sizeof(*mach));
+ 
++#ifdef RVGPU
++   char* mesaSwEnv = NULL;
++   static bool firsttime = true;
++   static bool mesaSW;
++
++   if (firsttime) {
++      mesaSwEnv = getenv("MESA_SW");
++      if (mesaSwEnv != NULL && strcmp(mesaSwEnv, "0")) {
++         mesaSW = true;
++      } else {
++         mesaSW = false;
++      }
++   }
++   mach->mesa_sw_flag = mesaSW;
++#endif
++
+    mach->ShaderType = shader_type;
+ 
+    if (shader_type != PIPE_SHADER_COMPUTE) {
+diff --git a/src/gallium/auxiliary/tgsi/tgsi_exec.h b/src/gallium/auxiliary/tgsi/tgsi_exec.h
+index 6d3cb47384f..491a99ae471 100644
+--- a/src/gallium/auxiliary/tgsi/tgsi_exec.h
++++ b/src/gallium/auxiliary/tgsi/tgsi_exec.h
+@@ -289,6 +289,16 @@ typedef void (* apply_sample_offset_func)(
+    float ofs_y,
+    union tgsi_exec_channel *out_chan);
+ 
++#ifdef RVGPU
++struct rvgpu_tgsi_mach_padding {
++   uint regnum[TGSI_FILE_COUNT];
++   const uint8_t *output_semantic_name;
++   const uint8_t *output_semantic_index;
++   uint* output_semantic_buf[PIPE_MAX_SHADER_OUTPUTS];
++
++   int reserved[512];
++};
++#endif
+ /**
+  * Run-time virtual machine state for executing TGSI shader.
+  */
+@@ -405,6 +415,11 @@ struct tgsi_exec_machine
+    bool UsedGeometryShader;
+ 
+    int pc;
++   
++#ifdef RVGPU
++   bool mesa_sw_flag;
++   struct rvgpu_tgsi_mach_padding pad;
++#endif
+ };
+ 
+ struct tgsi_exec_machine *
+diff --git a/src/gallium/auxiliary/tgsi/tgsi_info_opcodes.h b/src/gallium/auxiliary/tgsi/tgsi_info_opcodes.h
+index 99ee14d724e..4b3b8811006 100644
+--- a/src/gallium/auxiliary/tgsi/tgsi_info_opcodes.h
++++ b/src/gallium/auxiliary/tgsi/tgsi_info_opcodes.h
+@@ -252,3 +252,6 @@ OPCODE(1, 2, COMP, DDIV)
+ OPCODE(1, 3, OTHR, LOD)
+ OPCODE(1, 3, OTHR, ATOMINC_WRAP, .is_store = 1)
+ OPCODE(1, 3, OTHR, ATOMDEC_WRAP, .is_store = 1)
++#ifdef RVGPU
++OPCODE_GAP(252) /* TGSI_OPCODE_DUMP */
++#endif
+\ No newline at end of file
+diff --git a/src/gallium/drivers/softpipe/sp_clear.c b/src/gallium/drivers/softpipe/sp_clear.c
+index bc896db073b..e550941aabd 100644
+--- a/src/gallium/drivers/softpipe/sp_clear.c
++++ b/src/gallium/drivers/softpipe/sp_clear.c
+@@ -40,7 +40,9 @@
+ #include "sp_screen.h"
+ #include "sp_query.h"
+ #include "sp_tile_cache.h"
+-
++#ifdef RVGPU
++#include "fw_mesa_adaptor.h"
++#endif
+ 
+ /**
+  * Clear the given buffers to the specified values.
+@@ -57,6 +59,9 @@ softpipe_clear(struct pipe_context *pipe, unsigned buffers,
+    unsigned zs_buffers = buffers & PIPE_CLEAR_DEPTHSTENCIL;
+    uint64_t cv;
+    uint i;
++#ifdef RVGPU
++   bool clearColor = false;
++#endif
+ 
+    if (unlikely(sp_debug & SP_DBG_NO_RAST))
+       return;
+@@ -70,11 +75,47 @@ softpipe_clear(struct pipe_context *pipe, unsigned buffers,
+ 
+    if (buffers & PIPE_CLEAR_COLOR) {
+       for (i = 0; i < softpipe->framebuffer.nr_cbufs; i++) {
+-         if (buffers & (PIPE_CLEAR_COLOR0 << i))
++         if (buffers & (PIPE_CLEAR_COLOR0 << i)) {
+             sp_tile_cache_clear(softpipe->cbuf_cache[i], color, 0);
++#ifdef RVGPU
++            clearColor = true;
++#endif
++         }
++      }
++   }
++
++#ifdef RVGPU
++   bool clearZs = false;
++   if (zs_buffers &&
++       util_format_is_depth_and_stencil(zsbuf->texture->format) &&
++       zs_buffers != PIPE_CLEAR_DEPTHSTENCIL) {
++      assert(softpipe->mesa_rendered == false);
++      if (softpipe->mesa_sw_flag) {
++          /* Clearing only depth or stencil in a combined depth-stencil buffer. */
++          util_clear_depth_stencil(pipe, zsbuf, zs_buffers, depth, stencil,
++                               0, 0, zsbuf->width, zsbuf->height);
+       }
++      else
++      {
++          AdpFlushTile(softpipe);
++          clearZs = true;
++      }
++   }
++   else if (zs_buffers) {
++       clearZs = true;
+    }
+ 
++   if (clearZs) {
++      static const union pipe_color_union zero;
++
++      cv = util_pack64_z_stencil(zsbuf->format, depth, stencil);
++      sp_tile_cache_clear(softpipe->zsbuf_cache, &zero, cv);
++   }
++
++   if (!softpipe->mesa_sw_flag && (clearColor || clearZs)) {
++      AdpClearTile(buffers, softpipe, clearColor, clearZs, zs_buffers);
++   }
++#else
+    if (zs_buffers &&
+        util_format_is_depth_and_stencil(zsbuf->texture->format) &&
+        zs_buffers != PIPE_CLEAR_DEPTHSTENCIL) {
+@@ -88,6 +129,7 @@ softpipe_clear(struct pipe_context *pipe, unsigned buffers,
+       cv = util_pack64_z_stencil(zsbuf->format, depth, stencil);
+       sp_tile_cache_clear(softpipe->zsbuf_cache, &zero, cv);
+    }
++#endif
+ 
+    softpipe->dirty_render_cache = true;
+ }
+diff --git a/src/gallium/drivers/softpipe/sp_context.c b/src/gallium/drivers/softpipe/sp_context.c
+index 36662dc6fc5..058d915551a 100644
+--- a/src/gallium/drivers/softpipe/sp_context.c
++++ b/src/gallium/drivers/softpipe/sp_context.c
+@@ -189,6 +189,22 @@ softpipe_create_context(struct pipe_screen *screen,
+    struct softpipe_context *softpipe = CALLOC_STRUCT(softpipe_context);
+    uint i, sh;
+ 
++#ifdef RVGPU
++   char* mesaSwEnv = NULL;
++   static bool firsttime = true;
++   static bool mesaSW;
++   
++   if (firsttime) {
++      mesaSwEnv = getenv("MESA_SW");
++      if (mesaSwEnv != NULL && strcmp(mesaSwEnv, "0")) {
++         mesaSW = true;
++      } else {
++         mesaSW = false;
++      }
++   }
++   softpipe->mesa_sw_flag = mesaSW;
++#endif
++
+    util_init_math();
+ 
+    for (i = 0; i < PIPE_SHADER_TYPES; i++) {
+diff --git a/src/gallium/drivers/softpipe/sp_context.h b/src/gallium/drivers/softpipe/sp_context.h
+index 89ddd301ec7..753032e9b2c 100644
+--- a/src/gallium/drivers/softpipe/sp_context.h
++++ b/src/gallium/drivers/softpipe/sp_context.h
+@@ -180,6 +180,11 @@ struct softpipe_context {
+ 
+    unsigned tex_timestamp;
+ 
++#ifdef RVGPU
++   bool mesa_sw_flag;
++   bool mesa_rendered;
++#endif
++
+    /*
+     * Texture caches for vertex, fragment, geometry stages.
+     * Don't use PIPE_SHADER_TYPES here to avoid allocating unused memory
+diff --git a/src/gallium/drivers/softpipe/sp_flush.c b/src/gallium/drivers/softpipe/sp_flush.c
+index a5c786d6e0e..b74d31542d8 100644
+--- a/src/gallium/drivers/softpipe/sp_flush.c
++++ b/src/gallium/drivers/softpipe/sp_flush.c
+@@ -41,6 +41,9 @@
+ #include "util/u_debug_image.h"
+ #include "util/u_memory.h"
+ #include "util/u_string.h"
++#ifdef RVGPU
++#include "fw_mesa_adaptor.h"
++#endif
+ 
+ 
+ void
+@@ -63,17 +66,37 @@ softpipe_flush( struct pipe_context *pipe,
+       }
+    }
+ 
++#ifdef RVGPU
++   if (!softpipe->mesa_sw_flag) {
++       AdpFlushTile(softpipe);
++   }
++#endif
++
+    /* If this is a swapbuffers, just flush color buffers.
+     *
+     * The zbuffer changes are not discarded, but held in the cache
+     * in the hope that a later clear will wipe them out.
+     */
++#ifdef RVGPU
++   for (i = 0; i < softpipe->framebuffer.nr_cbufs; i++) {
++      if (softpipe->cbuf_cache[i] && (softpipe->mesa_sw_flag || softpipe->mesa_rendered)) {
++            sp_flush_tile_cache(softpipe->cbuf_cache[i]);
++      }
++   }
++
++   if (softpipe->zsbuf_cache && (softpipe->mesa_sw_flag || softpipe->mesa_rendered)) {
++      sp_flush_tile_cache(softpipe->zsbuf_cache);
++   }
++
++   softpipe->mesa_rendered = false;
++#else
+    for (i = 0; i < softpipe->framebuffer.nr_cbufs; i++)
+       if (softpipe->cbuf_cache[i])
+          sp_flush_tile_cache(softpipe->cbuf_cache[i]);
+ 
+    if (softpipe->zsbuf_cache)
+       sp_flush_tile_cache(softpipe->zsbuf_cache);
++#endif
+ 
+    softpipe->dirty_render_cache = false;
+ 
+diff --git a/src/gallium/drivers/softpipe/sp_prim_vbuf.c b/src/gallium/drivers/softpipe/sp_prim_vbuf.c
+index d91946377d9..3cff3be53f1 100644
+--- a/src/gallium/drivers/softpipe/sp_prim_vbuf.c
++++ b/src/gallium/drivers/softpipe/sp_prim_vbuf.c
+@@ -44,6 +44,9 @@
+ #include "draw/draw_vbuf.h"
+ #include "util/u_memory.h"
+ #include "util/u_prim.h"
++#ifdef RVGPU
++#include "fw_mesa_adaptor.h"
++#endif
+ 
+ 
+ #define SP_MAX_VBUF_INDEXES 1024
+@@ -167,6 +170,23 @@ sp_vbuf_draw_elements(struct vbuf_render *vbr, const uint16_t *indices, uint nr)
+    const bool flatshade_first = softpipe->rasterizer->flatshade_first;
+    unsigned i;
+ 
++#ifdef RVGPU
++   if (!softpipe->mesa_sw_flag &&
++      (cvbr->prim == MESA_PRIM_TRIANGLES ||
++       cvbr->prim == MESA_PRIM_TRIANGLE_STRIP ||
++       cvbr->prim == MESA_PRIM_TRIANGLE_FAN)
++      )
++   {
++      void *ibuf = malloc(nr * sizeof(uint16_t));
++      void *vbuf = malloc(cvbr->vertex_buffer_size);
++      memcpy(ibuf, indices, nr * sizeof(uint16_t));
++      memcpy(vbuf, vertex_buffer, cvbr->vertex_buffer_size);
++      AdptSetupDraw(setup, cvbr->prim, vbuf, ibuf, nr, stride, flatshade_first);
++      return;
++   }
++   softpipe->mesa_rendered = true;
++#endif
++
+    switch (cvbr->prim) {
+    case MESA_PRIM_POINTS:
+       for (i = 0; i < nr; i++) {
+@@ -364,6 +384,22 @@ sp_vbuf_draw_arrays(struct vbuf_render *vbr, uint start, uint nr)
+    const bool flatshade_first = softpipe->rasterizer->flatshade_first;
+    unsigned i;
+ 
++#ifdef RVGPU
++   if (!softpipe->mesa_sw_flag &&
++      (cvbr->prim == MESA_PRIM_TRIANGLES ||
++       cvbr->prim == MESA_PRIM_TRIANGLE_STRIP ||
++       cvbr->prim == MESA_PRIM_TRIANGLE_FAN)
++      )
++   {
++      int size = cvbr->vertex_buffer_size-((long)vertex_buffer-(long)cvbr->vertex_buffer);
++      void *vbuf = malloc(size);
++      memcpy(vbuf, vertex_buffer, size);
++      AdptSetupDraw(setup, cvbr->prim, vbuf, NULL, nr, stride, flatshade_first);
++      return;
++   }
++   softpipe->mesa_rendered = true;
++#endif
++
+    switch (cvbr->prim) {
+    case MESA_PRIM_POINTS:
+       for (i = 0; i < nr; i++) {
+diff --git a/src/gallium/drivers/softpipe/sp_state_derived.c b/src/gallium/drivers/softpipe/sp_state_derived.c
+index 8436b320b95..7f74f268e91 100644
+--- a/src/gallium/drivers/softpipe/sp_state_derived.c
++++ b/src/gallium/drivers/softpipe/sp_state_derived.c
+@@ -37,6 +37,9 @@
+ #include "sp_texture.h"
+ #include "sp_tex_sample.h"
+ #include "sp_tex_tile_cache.h"
++#ifdef RVGPU
++#include "fw_mesa_adaptor.h"
++#endif
+ 
+ 
+ /**
+@@ -341,6 +344,14 @@ update_fragment_shader(struct softpipe_context *softpipe, unsigned prim)
+       softpipe->fs_variant = softpipe_find_fs_variant(softpipe,
+                                                       softpipe->fs, &key);
+ 
++#ifdef RVGPU
++      if(!softpipe->mesa_sw_flag) {
++         memcpy(softpipe->fs_machine->pad.regnum, &softpipe->fs_variant->info.file_count, sizeof(softpipe->fs_machine->pad.regnum));
++         softpipe->fs_machine->pad.output_semantic_name = &softpipe->fs_variant->info.output_semantic_name[0];
++         softpipe->fs_machine->pad.output_semantic_index = &softpipe->fs_variant->info.output_semantic_index[0];
++      }
++#endif
++
+       /* prepare the TGSI interpreter for FS execution */
+       softpipe->fs_variant->prepare(softpipe->fs_variant, 
+                                     softpipe->fs_machine,
+@@ -396,8 +407,14 @@ softpipe_update_derived(struct softpipe_context *softpipe, unsigned prim)
+    if (softpipe->dirty & (SP_NEW_SAMPLER |
+                           SP_NEW_TEXTURE |
+                           SP_NEW_FS | 
+-                          SP_NEW_VS))
++                          SP_NEW_VS)) {
+       update_tgsi_samplers( softpipe );
++#ifdef RVGPU
++      if(!softpipe->mesa_sw_flag) {
++         AdpUpdTgsiSamp(softpipe->fs_machine);
++      }
++#endif
++   }
+ 
+    if (softpipe->dirty & (SP_NEW_RASTERIZER |
+                           SP_NEW_FS |
+@@ -415,5 +432,10 @@ softpipe_update_derived(struct softpipe_context *softpipe, unsigned prim)
+                           SP_NEW_FS))
+       sp_build_quad_pipeline(softpipe);
+ 
++#ifdef RVGPU
++      if(!softpipe->mesa_sw_flag) {
++         AdpUpdQuadPipe(softpipe);
++      }
++#endif
+    softpipe->dirty = 0;
+ }
+diff --git a/src/gallium/drivers/softpipe/sp_state_shader.c b/src/gallium/drivers/softpipe/sp_state_shader.c
+index a2ff6af1125..84f5271e7e8 100644
+--- a/src/gallium/drivers/softpipe/sp_state_shader.c
++++ b/src/gallium/drivers/softpipe/sp_state_shader.c
+@@ -45,7 +45,9 @@
+ #include "tgsi/tgsi_scan.h"
+ #include "tgsi/tgsi_parse.h"
+ #include "compiler/shader_enums.h"
+-
++#ifdef RVGPU
++#include "fw_mesa_adaptor.h"
++#endif
+ 
+ /**
+  * Create a new fragment shader variant.
+@@ -400,6 +402,11 @@ softpipe_set_constant_buffer(struct pipe_context *pipe,
+ 
+    if (cb && cb->user_buffer) {
+       pipe_resource_reference(&constants, NULL);
++#ifdef RVGPU
++      if(!softpipe->mesa_sw_flag) {
++         AdpSetConstBuf(shader, &(softpipe->mapped_constants), softpipe->fs_machine);
++      }
++#endif
+    }
+ }
+ 
+diff --git a/src/gallium/drivers/softpipe/sp_state_surface.c b/src/gallium/drivers/softpipe/sp_state_surface.c
+index 4a83709016b..c95434eadf5 100644
+--- a/src/gallium/drivers/softpipe/sp_state_surface.c
++++ b/src/gallium/drivers/softpipe/sp_state_surface.c
+@@ -36,7 +36,9 @@
+ 
+ #include "util/format/u_format.h"
+ #include "util/u_inlines.h"
+-
++#ifdef RVGPU
++#include "fw_mesa_adaptor.h"
++#endif
+ 
+ /**
+  * XXX this might get moved someday
+@@ -53,12 +55,21 @@ softpipe_set_framebuffer_state(struct pipe_context *pipe,
+ 
+    draw_flush(sp->draw);
+ 
++#ifdef RVGPU
++   if (!sp->mesa_sw_flag) {
++       AdpFlushTile(sp);
++   }
++#endif
++
+    for (i = 0; i < PIPE_MAX_COLOR_BUFS; i++) {
+       struct pipe_surface *cb = i < fb->nr_cbufs ? fb->cbufs[i] : NULL;
+ 
+       /* check if changing cbuf */
+       if (sp->framebuffer.cbufs[i] != cb) {
+          /* flush old */
++#ifdef RVGPU
++         if (sp->mesa_sw_flag)
++#endif
+          sp_flush_tile_cache(sp->cbuf_cache[i]);
+ 
+          /* assign new */
+@@ -74,6 +85,9 @@ softpipe_set_framebuffer_state(struct pipe_context *pipe,
+    /* zbuf changing? */
+    if (sp->framebuffer.zsbuf != fb->zsbuf) {
+       /* flush old */
++#ifdef RVGPU
++      if (sp->mesa_sw_flag)
++#endif
+       sp_flush_tile_cache(sp->zsbuf_cache);
+ 
+       /* assign new */
+@@ -98,4 +112,10 @@ softpipe_set_framebuffer_state(struct pipe_context *pipe,
+    sp->framebuffer.layers = fb->layers;
+ 
+    sp->dirty |= SP_NEW_FRAMEBUFFER | SP_NEW_TEXTURE;
++
++#ifdef RVGPU
++   if(!sp->mesa_sw_flag) {
++      AdpUpdTileCachAndFramBuf(sp);
++   }
++#endif
+ }
+diff --git a/src/gallium/include/pipe/p_shader_tokens.h b/src/gallium/include/pipe/p_shader_tokens.h
+index 170c5e4082b..06492d2d554 100644
+--- a/src/gallium/include/pipe/p_shader_tokens.h
++++ b/src/gallium/include/pipe/p_shader_tokens.h
+@@ -410,6 +410,9 @@ enum tgsi_opcode {
+    TGSI_OPCODE_RET                = 64,
+    TGSI_OPCODE_SSG                = 65 /* SGN */,
+    TGSI_OPCODE_CMP                = 66,
++#ifdef RVGPU
++   TGSI_OPCODE_START              = 67,
++#endif
+    /* gap */
+    TGSI_OPCODE_TXB                = 68,
+    TGSI_OPCODE_FBFETCH            = 69,
+@@ -616,8 +619,12 @@ enum tgsi_opcode {
+ 
+    TGSI_OPCODE_ATOMINC_WRAP       = 250,
+    TGSI_OPCODE_ATOMDEC_WRAP       = 251,
+-
++#ifdef RVGPU
++   TGSI_OPCODE_DUMP               = 252,
++   TGSI_OPCODE_LAST               = 253,
++#else
+    TGSI_OPCODE_LAST               = 252,
++#endif
+ };
+ 
+ 
+-- 
+2.34.1
+

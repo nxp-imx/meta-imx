@@ -12,6 +12,7 @@ inherit packagegroup
 RDEPENDS:${PN} = " \
     ${SOC_TOOLS_DRM} \
     ${SOC_TOOLS_GPU} \
+    ${SOC_TOOLS_RVGPU} \
 "
 
 RDEPENDS:${PN}:append:imxgpu = " ${GLES1_PACKAGE}"
@@ -45,3 +46,9 @@ SOC_TOOLS_GPU_MALI:imxmali = " \
 SOC_TOOLS_GPU_VIVANTE = ""
 SOC_TOOLS_GPU_VIVANTE:imxviv = " \
     imx-gpu-viv-tools"
+
+SOC_TOOLS_RVGPU = "${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', '${SOC_TOOLS_RVGPU_PACKAGES}', '', d)}"
+SOC_TOOLS_RVGPU_PACKAGES = " \
+    apitrace \
+    libgles1-mesa \
+"

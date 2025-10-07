@@ -1,12 +1,12 @@
 SUMMARY = "The firmware, library and converter for i.MX Neutron NPU"
 DESCRIPTION = "The firmware library and converter for i.MX Neutron NPU"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a93b654673e1bc8398ed1f30e0813359"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bc649096ad3928ec06a8713b8d787eac"
 
 SRC_URI = "${NEUTRON_SRC};branch=${SRCBRANCH}"
 NEUTRON_SRC ?= "git://github.com/nxp-imx/neutron.git;protocol=https"
-SRCBRANCH = "lf-6.12.20_2.0.0"
-SRCREV = "1e636c9bce8490929d492c8cecea2263c302a99f"
+SRCBRANCH = "lf-6.12.34_2.1.0"
+SRCREV = "2887d2dcf47eda7e3f20afe3c2c1f4d1a2970386"
 
 S = "${WORKDIR}/git"
 

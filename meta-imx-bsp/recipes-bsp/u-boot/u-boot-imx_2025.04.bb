@@ -73,5 +73,10 @@ do_deploy:append:mx93-generic-bsp() {
     install -m 0644 ${S}/CRT.*     ${DEPLOYDIR}
 }
 
+do_deploy:append:mx95-generic-bsp() {
+    # Deploy CRT.* from u-boot for stmm
+    install -m 0644 ${S}/CRT.*     ${DEPLOYDIR}
+}
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(mx6-generic-bsp|mx7-generic-bsp|mx8-generic-bsp|mx9-generic-bsp)"

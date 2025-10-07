@@ -1,0 +1,29 @@
+From e4cf9d0626a677e4507873af9dfb789654ce77d7 Mon Sep 17 00:00:00 2001
+From: Gagandeep Singh <g.singh@nxp.com>
+Date: Wed, 27 Nov 2024 15:11:48 +0530
+Subject: [PATCH 1/4] cmm-ips_status_definitions
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Gagandeep Singh <g.singh@nxp.com>
+---
+ include/libnetfilter_conntrack/linux_nf_conntrack_common.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/include/libnetfilter_conntrack/linux_nf_conntrack_common.h b/include/libnetfilter_conntrack/linux_nf_conntrack_common.h
+index 131ca25..d971dcf 100644
+--- a/include/libnetfilter_conntrack/linux_nf_conntrack_common.h
++++ b/include/libnetfilter_conntrack/linux_nf_conntrack_common.h
+@@ -123,6 +123,10 @@ enum ip_conntrack_status {
+ 	IPS_HW_OFFLOAD_BIT = 15,
+ 	IPS_HW_OFFLOAD = (1 << IPS_HW_OFFLOAD_BIT),
+ 
++	/* Connection  cannot expire */
++	IPS_PERMANENT_BIT = 16,
++	IPS_PERMANENT = (1 << IPS_PERMANENT_BIT),
++
+ 	/* Be careful here, modifying these bits can make things messy,
+ 	 * so don't let users modify them directly.
+ 	 */
+-- 
+2.40.1
+

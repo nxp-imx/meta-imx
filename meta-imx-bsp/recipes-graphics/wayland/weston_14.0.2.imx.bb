@@ -163,17 +163,21 @@ SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}
 SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-14.0.2"
-SRCREV = "c267ba8e6eed3a824e042a200bcc1b4c370ba88f"
+SRCREV = "b8807ef38efdf96d33be59adbe364a6d58703b6b"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
 
-PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D}"
+PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D} ${PACKAGECONFIG_PIPEWIRE}"
 PACKAGECONFIG_G2D              ??= ""
 PACKAGECONFIG_G2D:imxgpu2d     ??= "imxg2d"
 PACKAGECONFIG_G2D:mx93-nxp-bsp ??= "imxg2d"
 PACKAGECONFIG_G2D:mx943-nxp-bsp ??= "imxg2d"
+
+PACKAGECONFIG_PIPEWIRE             ??= ""
+PACKAGECONFIG_PIPEWIRE:mx8-nxp-bsp ??= "pipewire"
+PACKAGECONFIG_PIPEWIRE:mx9-nxp-bsp ??= "pipewire"
 
 # Weston with i.MX G2D renderer
 PACKAGECONFIG[imxg2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d"

@@ -10,8 +10,8 @@ DEPENDS = " mbedtls openssl"
 
 SRC_URI = "${SECURE_ENCLAVE_LIB_SRC};branch=${SRCBRANCH}"
 SECURE_ENCLAVE_LIB_SRC ?= "git://github.com/NXP/imx-secure-enclave.git;protocol=https"
-SRCBRANCH = "lf-6.12.20_2.0.0"
-SRCREV = "2c4dd2a73265d60b83d288a4b3936a773790c139"
+SRCBRANCH = "lf-6.12.34_2.1.0"
+SRCREV = "1cfdaddb37d673fff5e4b60ef2614a4c544dabd3"
 
 S = "${WORKDIR}/git"
 
@@ -25,5 +25,7 @@ do_install() {
 	oe_runmake -C ${S} DESTDIR=${D} install_tests
 }
 
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+
 FILES:${PN} += "${datadir}/se"
-RDEPENDS:${PN} += "bash"
+RDEPENDS:${PN}:append = " bash"

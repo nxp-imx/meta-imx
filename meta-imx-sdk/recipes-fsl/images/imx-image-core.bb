@@ -27,6 +27,7 @@ SDKIMAGE_FEATURES:append = " \
 
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'crrm', 'imx-secure-enclave-crrm', '', d)} \
     imx-test \
     firmwared \
     packagegroup-imx-core-tools \
@@ -43,5 +44,6 @@ CLINFO:mx7-nxp-bsp   = ""
 
 DOCKER            ?= ""
 DOCKER:mx8-nxp-bsp = "docker"
+DOCKER:mx9-nxp-bsp = "docker"
 
 export IMAGE_BASENAME = "imx-image-core"

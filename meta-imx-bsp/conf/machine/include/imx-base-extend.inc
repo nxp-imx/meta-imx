@@ -24,8 +24,8 @@ IMX_SOC_REV:mx95-generic-bsp ?= "B0"
 IMX_EXTRA_FIRMWARE:mx95-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx ${SYSTEM_MANAGER_RPROVIDER} imx-oei"
 SYSTEM_MANAGER_RPROVIDER ?= "imx-system-manager"
 # The System Manager Firmware Name corresponds to a particular binary implementation
-# in the Yocto deploy folder. The name is comprised of the Firmware Basename and the
-# default system manager Config name, e.g., m33_image-mx95evk.bin and
+# in the Yocto deploy folder. The default name is comprised of the Firmware Basename
+# and the default system manager Config name, e.g., m33_image-mx95evk.bin and
 # m33_image-mx95evk_fusa.bin for the standard BSP version and FuSa version, respectively
 SYSTEM_MANAGER_FIRMWARE_NAME                  ?= "${SYSTEM_MANAGER_FIRMWARE_BASENAME}-${SYSTEM_MANAGER_CONFIG}"
 # The System Manager Firmware Basename is an alias used by imx-boot instead of using
@@ -126,8 +126,8 @@ PREFERRED_VERSION_optee-os-tadevkit:mx7-nxp-bsp   ??= "4.6.0.imx"
 PREFERRED_VERSION_optee-os-tadevkit:mx8-nxp-bsp   ??= "4.6.0.imx"
 PREFERRED_VERSION_optee-os-tadevkit:mx9-nxp-bsp   ??= "4.6.0.imx"
 
-PREFERRED_VERSION_opencv:mx8-nxp-bsp ??= "4.11.0.imx"
-PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.11.0.imx"
+PREFERRED_VERSION_opencv:mx8-nxp-bsp ??= "4.12.0.imx"
+PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.12.0.imx"
 
 PREFERRED_VERSION_xen-tools = "4.19.imx+stable"
 PREFERRED_VERSION_xen       = "4.19.imx+stable"

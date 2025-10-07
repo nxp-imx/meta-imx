@@ -34,12 +34,12 @@ RREPLACES:${PN}  = "gst1.0-fsl-plugin"
 RPROVIDES:${PN}  = "gst1.0-fsl-plugin"
 RCONFLICTS:${PN} = "gst1.0-fsl-plugin"
 
-PV = "4.10.0+git${SRCPV}"
+PV = "4.10.1+git${SRCPV}"
 
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH}"
 IMXGST_SRC ?= "git://github.com/nxp-imx/imx-gst1.0-plugin.git;protocol=https"
-SRCBRANCH = "MM_04.10.0_2505_L6.12.20"
-SRCREV = "6861aec99901375f5ebcd5170ce1f5232cd38fd6"
+SRCBRANCH = "MM_04.10.01_2508_L6.12.34"
+SRCREV = "939e6176ae7e41fa8f3f48e2726bcb7a8b5d12f6"
 
 S = "${WORKDIR}/git"
 
@@ -90,7 +90,8 @@ FILES:${PN}-staticdev += "${libdir}/gstreamer-1.0/*.a"
 FILES:${PN}-gplay = "${bindir}/gplay-1.0"
 FILES:${PN}-libgplaycore = "${libdir}/libgplaycore-1.0${SOLIBS}"
 FILES:${PN}-libgstfsl = "${libdir}/libgstfsl-1.0${SOLIBS}"
-FILES:${PN}-grecorder = "${bindir}/grecorder-1.0"
+FILES:${PN}-grecorder = "${bindir}/grecorder-1.0 \
+                         ${bindir}/pipewire_recorder.py"
 FILES:${PN}-librecorder-engine = "${libdir}/librecorder_engine-1.0${SOLIBS}"
 FILES:${PN}-libplayengine = "${libdir}/libplayengine-1.0${SOLIBS}"
 

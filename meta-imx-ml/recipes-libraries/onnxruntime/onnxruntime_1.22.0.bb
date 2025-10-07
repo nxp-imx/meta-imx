@@ -10,11 +10,10 @@ DEPENDS = "libpng zlib"
 
 inherit setuptools3
 
-SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
-           file://0001-CMakeLists.txt-Fix-python-component-search-failure.patch"
+SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH = "lf-6.12.20_2.0.0"
-SRCREV = "1edb7f8f421b9c3ff5b5f96fac2c7d58744bdc87"
+SRCBRANCH = "lf-6.12.34_2.1.0"
+SRCREV = "868cb88cd799d12d201829d51f93c72365567957"
 
 S = "${WORKDIR}/git"
 
@@ -103,7 +102,7 @@ PACKAGECONFIG[mimalloc] = "-Donnxruntime_USE_MIMALLOC=ON, -Donnxruntime_USE_MIMA
 PACKAGECONFIG[csharp] = "-Donnxruntime_BUILD_CSHARP=ON, -Donnxruntime_BUILD_CSHARP=OFF"
 PACKAGECONFIG[java] = "-Donnxruntime_BUILD_JAVA=ON, -Donnxruntime_BUILD_JAVA=OFF"
 PACKAGECONFIG[kleidiai] = "-Donnxruntime_USE_KLEIDIAI=ON, -Donnxruntime_USE_KLEIDIAI=OFF"
-PACKAGECONFIG[neutron] = "-Donnxruntime_USE_NEUTRON=ON, -Donnxruntime_USE_NEUTRON=OFF, neutron"
+PACKAGECONFIG[neutron] = "-Donnxruntime_USE_NEUTRON=ON, -Donnxruntime_USE_NEUTRON=OFF, neutron nlohmann-json"
 PACKAGECONFIG[vsinpu] = "-Donnxruntime_USE_VSINPU=ON, -Donnxruntime_USE_VSINPU=OFF, tim-vx"
 
 do_configure[network] = "1"

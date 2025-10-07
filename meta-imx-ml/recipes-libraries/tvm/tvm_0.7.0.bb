@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e313a9b6eda820e35716d9529001537f \
 DEPENDS = "tim-vx"
 RDEPENDS:${PN} = "tim-vx python3-decorator python3-numpy python3-attrs python3-psutil python3"
 
-SRCBRANCH = "lf-6.12.20_2.0.0"
+SRCBRANCH = "lf-6.12.34_2.1.0"
 TVM_SRC ?= "git://github.com/nxp-imx/eiq-tvm-imx.git;protocol=https"
 SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                git://github.com/dmlc/dlpack;protocol=https;nobranch=1;destsuffix=git/3rdparty/dlpack;name=dlpack \
@@ -25,7 +25,7 @@ SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
                file://tvm_runtime.pc.in \
 "
 
-SRCREV = "4f710ec5796ac0eb0b0a23d3c808ca68e13173f6" 
+SRCREV = "2a0afb968fb985ceace4587c6ffd4f9173a550d2"
 SRCREV_dlpack = "3ec04430e89a6834e5a1b99471f415fa939bf642"
 SRCREV_dmlc-core = "6c401e242c59a1f4c913918246591bb13fd714e7"
 SRCREV_rang = "cabe04d6d6b05356fa8f9741704924788f0dd762"

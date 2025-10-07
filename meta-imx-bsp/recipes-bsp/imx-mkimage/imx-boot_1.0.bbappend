@@ -37,12 +37,9 @@ do_compile:prepend() {
         cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}       ${BOOT_STAGING}/m33_image.bin
         ;;
     mx943)
-        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm33_core1_TCM_power_mode_switch.bin \
-                                                            ${BOOT_STAGING}/m33s_image.bin
-        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm7_core0_TCM_power_mode_switch.bin \
-                                                            ${BOOT_STAGING}/m70_image.bin
-        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/imx943evk_cm7_core1_TCM_power_mode_switch.bin \
-                                                            ${BOOT_STAGING}/m71_image.bin
+        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M33_IMAGE} ${BOOT_STAGING}/m33s_image.bin
+        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M70_IMAGE} ${BOOT_STAGING}/m70_image.bin
+        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M71_IMAGE} ${BOOT_STAGING}/m71_image.bin
     ;;
     mx95)
         cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m7_image.bin
@@ -63,9 +60,9 @@ do_deploy:append() {
         install -m 0644 ${BOOT_STAGING}/m33_image.bin        ${DEPLOYDIR}/${BOOT_TOOLS}
         ;;
     mx943)
-        install -m 0644 ${BOOT_STAGING}/m33s_image.bin ${DEPLOYDIR}/${BOOT_TOOLS}
-        install -m 0644 ${BOOT_STAGING}/m70_image.bin ${DEPLOYDIR}/${BOOT_TOOLS}
-        install -m 0644 ${BOOT_STAGING}/m71_image.bin ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/mcore-demos/${M33_IMAGE}                ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/mcore-demos/${M70_IMAGE}                ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0644 ${DEPLOY_DIR_IMAGE}/mcore-demos/${M71_IMAGE}                ${DEPLOYDIR}/${BOOT_TOOLS}
         ;;
     mx95)
         install -m 0644 ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}         ${DEPLOYDIR}/${BOOT_TOOLS}

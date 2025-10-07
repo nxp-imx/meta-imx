@@ -39,6 +39,7 @@ V2X_PKGS:mx8dxl-nxp-bsp = "packagegroup-imx-v2x"
 
 DOCKER ?= ""
 DOCKER:mx8-nxp-bsp = "docker"
+DOCKER:mx9-nxp-bsp = "docker"
 
 G2D_SAMPLES              = ""
 G2D_SAMPLES:imxgpu2d     = "imx-g2d-samples"
@@ -58,6 +59,7 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     packagegroup-fsl-gstreamer1.0 \
     packagegroup-fsl-gstreamer1.0-full \
     firmwared \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'crrm', 'imx-secure-enclave-crrm', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11 wayland', 'weston-xwayland xterm', '', d)} \
     ${V2X_PKGS} \
     ${DOCKER} \

@@ -1,0 +1,29 @@
+From 9bc4a4e55d3aa278bab58cace204e85c1fc1ac8b Mon Sep 17 00:00:00 2001
+From: Zelan Zou <zelan.zou@nxp.com>
+Date: Tue, 24 Jun 2025 17:21:46 +0800
+Subject: [PATCH] Revert "driver/sysfs: Update bin_attribute version check to
+ 6.16"
+
+Upstream-Status: Pending
+
+This reverts commit 51eb19631be500334bdb2107c0d8f92b34e91210.
+---
+ driver/sysfs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/driver/sysfs.c b/driver/sysfs.c
+index 8ea13491..3775f6fe 100644
+--- a/driver/sysfs.c
++++ b/driver/sysfs.c
+@@ -535,7 +535,7 @@ static ssize_t remap_pool_used_show(struct device *dev,
+ 	return info_show(dev, buffer, JAILHOUSE_INFO_REMAP_POOL_USED);
+ }
+ 
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,16,0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,15,0)
+ static ssize_t core_show(struct file *filp, struct kobject *kobj,
+ 			 const struct bin_attribute *attr, char *buf, loff_t off,
+ 			 size_t count)
+-- 
+2.34.1
+

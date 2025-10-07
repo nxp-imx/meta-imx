@@ -9,8 +9,8 @@ DEPENDS = "python3 python3-pip-native python3-wheel-native"
 RDEPENDS:${PN} += "python3-core python3-numpy python3-future python3-typing-extensions python3-pillow numactl libjpeg-turbo lcms openjpeg"
 
 PYTORCH_SRC ?= "git://github.com/nxp-imx/pytorch-release.git;protocol=https"
-SRCBRANCH = "lf-6.12.20_2.0.0"
-SRCREV = "012e780225f891b90747592e254b2399d6ec07fb" 
+SRCBRANCH = "lf-6.12.34_2.1.0"
+SRCREV = "cc03fda98c2ef26db2f823eaba36ca96107eee23"
 
 SRC_URI = " \
     ${PYTORCH_SRC};branch=${SRCBRANCH} \

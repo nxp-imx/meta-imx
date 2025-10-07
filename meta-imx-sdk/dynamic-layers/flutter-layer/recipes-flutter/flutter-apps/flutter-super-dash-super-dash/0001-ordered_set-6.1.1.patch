@@ -1,0 +1,41 @@
+From 10560e741ab489797b9b15d976f3b5029a850672 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Fri, 24 Jan 2025 14:03:57 +0800
+Subject: [PATCH] ordered_set -> 6.1.1
+
+NOTE: Output:
+  Resolving dependencies...
+  Because every version of flame_tiled from git depends on flame ^1.23.0
+which depends on ordered_set ^6.0.0, every version of flame_tiled from
+git requires ordered_set ^6.0.0.
+  So, because super_dash depends on both ordered_set ^5.0.2 and
+flame_tiled from git, version solving failed.
+
+  You can try the following suggestion to make the pubspec resolve:
+  * Try upgrading your constraint on ordered_set: dart pub add
+    ordered_set:^6.1.1
+ERROR: dart pub --suppress-analytics --directory . get --example failed:
+1
+DEBUG: Python function do_archive_pub_cache finished
+
+Upstream-Status: Inappropriate
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ pubspec.yaml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pubspec.yaml b/pubspec.yaml
+index 9e1e0f5..51d6a24 100644
+--- a/pubspec.yaml
++++ b/pubspec.yaml
+@@ -35,7 +35,7 @@ dependencies:
+     path: packages/leaderboard_repository
+   leap: ^0.2.1
+   logging: ^1.2.0
+-  ordered_set: ^5.0.2
++  ordered_set: ^6.1.1
+   path: ^1.8.3
+   pathxp: ^0.4.0
+   provider: ^6.0.5
+-- 
+2.43.0

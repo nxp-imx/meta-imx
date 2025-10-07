@@ -1,0 +1,38 @@
+From 73b2fba3224b983547423d7eeb088f176a59c5d7 Mon Sep 17 00:00:00 2001
+From: Eric Guo <eric.guo@nxp.com>
+Date: Thu, 5 Jun 2025 17:23:34 +0800
+Subject: [PATCH] egl: Avoid initializing zink driver if not enabled at build
+ time
+
+Previously, Mesa would attempt to initialize the EGL driver with the zink option set to true even if zink was not enabled during compilation. This could lead to warning messages such as:
+
+libEGL warning: MESA-LOADER: failed to open zink: /lib/dri/zink_dri.so: cannot open shared object file: No such file or directory (search paths /lib/dri, suffix _dri)
+
+With this change, EGL will no longer attempt to initialize the zink driver unless it was enabled at build time, eliminating unnecessary warning messages when running graphics programs.
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: Eric Guo <eric.guo@nxp.com>
+---
+ src/egl/main/eglapi.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/egl/main/eglapi.c b/src/egl/main/eglapi.c
+index 3ee3f1b598c..da818a9737f 100644
+--- a/src/egl/main/eglapi.c
++++ b/src/egl/main/eglapi.c
+@@ -697,10 +697,12 @@ eglInitialize(EGLDisplay dpy, EGLint *major, EGLint *minor)
+             RETURN_EGL_ERROR(disp, EGL_NOT_INITIALIZED, EGL_FALSE);
+          else {
+             bool success = false;
++#if defined(HAVE_ZINK)
+             if (!disp->Options.Zink && !getenv("GALLIUM_DRIVER")) {
+                disp->Options.Zink = EGL_TRUE;
+                success = _eglDriver.Initialize(disp);
+             }
++#endif /* HAVE_ZINK */
+             if (!success) {
+                disp->Options.Zink = EGL_FALSE;
+                disp->Options.ForceSoftware = EGL_TRUE;
+-- 
+2.34.1
+

@@ -6,8 +6,8 @@ SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH} \
            file://0001-iMX8M-soc.mak-use-native-mkimage-from-sysroot.patch \
 "
 IMX_MKIMAGE_SRC ?= "git://github.com/nxp-imx/imx-mkimage.git;protocol=https"
-SRCBRANCH = "lf-6.12.20_2.0.0"
-SRCREV = "4c2e5b25232f5aa003976ddca9d1d2fb9667beb1"
+SRCBRANCH = "lf-6.12.34_2.1.0"
+SRCREV = "8737dc3604e430c902c455da344975e22a594ffe"
 
 S = "${WORKDIR}/git"
 

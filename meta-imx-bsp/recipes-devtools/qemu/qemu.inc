@@ -265,7 +265,7 @@ SYSTEMD_SERVICE:${PN}-guest-agent = "qemu-guest-agent.service"
 
 ########### i.MX overrides ################
 
-SRCBRANCH_imx-qemu = "lf-6.12.20_2.0.0"
+SRCBRANCH_imx-qemu = "lf-6.12.34_2.1.0"
 QEMU_SRC ?= "git://github.com/nxp-imx/imx-qemu.git;protocol=https;"
 SRC_URI = " \
     ${QEMU_SRC};branch=${SRCBRANCH_imx-qemu};name=imx-qemu;\
@@ -287,7 +287,7 @@ SRC_URI:remove:class-native = " \
 	file://0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch \
 	file://0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch \
         "
-SRCREV_imx-qemu = "eb50218d4b5b2c20bcecad5b563769fb8f8b509b" 
+SRCREV_imx-qemu = "d4187118bf1a915e5aa470c4258281917df07f9d"
 SRCREV_berkeley-softfloat-3 = "b64af41c3276f97f0e181920400ee056b9c88037"
 SRCREV_berkeley-testfloat-3 = "e7af9751d9f9fd3b47911f51a5cfd08af256a9ab"
 SRCREV_keycodemapdb = "f5772a62ec52591ff6870b7e8ef32482371f22c6"
@@ -297,7 +297,8 @@ S = "${UNPACKDIR}/git"
 # this configure option need to remove as invoke meson subprojects download 
 # EXTRA_OECONF:remove =  "--disable-download"
 
-PACKAGECONFIG[libvhost_user] = "-Dlibvhost-user:xen=enabled,-Dlibvhost-user:xen=disabled,xen-tools"
+PACKAGECONFIG[libvhost-user] = "-Dlibvhost-user:xen=enabled,-Dlibvhost-user:xen=disabled,xen-tools"
+PACKAGECONFIG[rutabaga-gfx] = "--enable-rutabaga-gfx,--disable-rutabaga-gfx,rutabaga-gfx-ffi"
 
 do_configure:prepend() {
     cp ${S}/subprojects/packagefiles/berkeley-softfloat-3/* ${S}/subprojects/berkeley-softfloat-3/

@@ -1,0 +1,33 @@
+From 67f757ec749d0634c9ed3e9596c39b640bdd7f0c Mon Sep 17 00:00:00 2001
+From: Yuan Tian <yuan.tian@nxp.com>
+Date: Thu, 23 Nov 2023 01:55:05 +0800
+Subject: [PATCH 4/5] MGS-7487 [#nxp] fix Vulkan test report warning msg
+
+destroy wl_compositor and wl_registry attached to opaque region for VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR to fix warnings.
+
+warning: queue 0xaaaaa6940 destroyed while proxies still attached:
+wl_compositor@18 still attached
+wl_registry@16 still attached
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
+---
+ wsi/wayland/swapchain.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/wsi/wayland/swapchain.cpp b/wsi/wayland/swapchain.cpp
+index 141967cab..72cb1c624 100644
+--- a/wsi/wayland/swapchain.cpp
++++ b/wsi/wayland/swapchain.cpp
+@@ -81,6 +81,8 @@ swapchain::~swapchain()
+    m_wsi_allocator = nullptr;
+    if (wlc.opaque_region)
+    {
++      wl_compositor_destroy(wlc.wl_compositor);
++      wl_registry_destroy(wlc.registry);
+       wl_region_destroy(wlc.opaque_region);
+       wlc = {0};
+    }
+-- 
+2.43.0
+

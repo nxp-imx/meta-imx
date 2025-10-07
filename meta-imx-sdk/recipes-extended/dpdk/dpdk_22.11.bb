@@ -8,11 +8,12 @@ LIC_FILES_CHKSUM = "file://license/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4
 
 DEPENDS = "numactl python3-pyelftools-native libpcap openssl"
 
-SRC_URI = "${DPDK_SRC};nobranch=1"
+SRC_URI = "${DPDK_SRC};branch=${SRCBRANCH}"
 DPDK_SRC ?= "git://github.com/nxp-qoriq/dpdk;protocol=https"
+SRCBRANCH = "22.11-qoriq-lf-rel"
 
 STABLE = "-stable"
-SRCREV = "f6926c7c0712444f15b51d5fac30ec0788d2b7d0"
+SRCREV = "e1617d2b9bb6255f6d108a9c2558158f4f595480"
 
 CVE_PRODUCT = "data_plane_development_kit"
 
@@ -43,18 +44,18 @@ EXTRA_OEMESON:append:mx9-nxp-bsp = " --cross-file ${S}/config/arm/arm64_imx_poky
 
 do_install:append:mx943-nxp-bsp (){
     install -d ${D}${bindir}
-    install -m 0644 ${S}/nxp/crypto_perf_test.sh ${D}${bindir}/
+    install -m 0755 ${S}/nxp/crypto_perf_test.sh ${D}${bindir}/
     install -d ${D}/${sysconfdir}/dpdk
     install -m 0644 ${S}/nxp/ipsec/*.cfg ${D}/${sysconfdir}/dpdk
 }
 
 do_install:append:mx95-nxp-bsp (){
     install -d ${D}${bindir}
-    install -m 0644 ${S}/nxp/crypto_perf_test.sh ${D}${bindir}/
+    install -m 0755 ${S}/nxp/crypto_perf_test.sh ${D}${bindir}/
     install -d ${D}/${sysconfdir}/dpdk
     install -m 0644 ${S}/nxp/ipsec/*.cfg ${D}/${sysconfdir}/dpdk
 }
 
-RDEPENDS:${PN} = "kernel-module-dpdk-extras pciutils python3-core"
+RDEPENDS:${PN} = "kernel-module-dpdk-extras pciutils python3-core bash"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp|qoriq)"

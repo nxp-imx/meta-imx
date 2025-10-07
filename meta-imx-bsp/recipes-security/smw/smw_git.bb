@@ -25,7 +25,7 @@ PSA_LIB_SRC ?= "git://github.com/ARM-software/psa-arch-tests.git;protocol=https"
 PSA_ARCH_TESTS_SRC_PATH = "psa-arch-tests"
 SRCBRANCH_smw = "release/version_5.x"
 SRCBRANCH_psa = "main"
-SRCREV_smw = "8934fdecacb88b227d09690283e7e2578387b7ee"
+SRCREV_smw = "6daf09b24a6f5e944f5ba10e82ccb0c098fbf84d"
 SRCREV_psa = "463cb95ada820bc6f758d50066cf8c0ed5cc3a02"
 SRCREV_FORMAT = "smw_psa"
 S = "${WORKDIR}/git/smw"
@@ -59,6 +59,7 @@ LD[unexport] = "1"
 TARGET_LDFLAGS:remove = "${DEBUG_PREFIX_MAP}"
 
 EXTRA_OECMAKE = " \
+    -DYOCTO_BUILD=ON \
     -DTA_DEV_KIT_ROOT=${TA_DEV_KIT_DIR} \
     -DTEEC_ROOT=${STAGING_DIR_HOST} \
     -DJSONC_ROOT="${COMPONENTS_DIR}/${TARGET_ARCH}/json-c/usr" \
@@ -73,14 +74,11 @@ PACKAGES =+ "${PN}-tests"
 
 FILES:${PN} += "${nonarch_base_libdir}/optee_armtz/*"
 
+INSANE_SKIP:${PN}-dbg = "buildpaths"
+
 FILES:${PN}-tests = "${bindir}/* ${datadir}/${BPN}/*"
-
-# Work around do_package_qa QA errors
-INSANE_SKIP:${PN}-dbg += "buildpaths"
-INSANE_SKIP:${PN}-dev += "buildpaths"
-INSANE_SKIP:${PN}-tests += "buildpaths"
-
-RDEPENDS:${PN}-tests += "bash cmake"
+RDEPENDS:${PN}-tests = "cmake"
+INSANE_SKIP:${PN}-tests = "buildpaths"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 

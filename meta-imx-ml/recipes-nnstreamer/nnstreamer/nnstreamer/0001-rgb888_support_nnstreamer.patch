@@ -1,0 +1,45 @@
+From ccf4eea69e320d23013e5ec526d8b4f52a89192c Mon Sep 17 00:00:00 2001
+From: Elliot Chen <elliot.chen@nxp.com>
+Date: Wed, 23 Jul 2025 12:55:32 +0000
+Subject: [PATCH] tensor_converter: calculate the offset by video meta when
+ removing padding
+
+Changes for imxvideoconvert_g2d RGB888 support introduced 4-bytes alignment [MMFMWK-9523].
+Padding is used for dimensions that are not multiple of 4.
+NNStreamer tensor_converter padding removal is done using a padding size calculated on the 4-bytes alignment of width value in bytes.
+The attached patch fixes the mismatch by adjusting the offset used for padding removal in NNStreamer to the actual stride value coming in video meta from the GStreamer plugins.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Elliot Chen <elliot.chen@nxp.com>
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ gst/nnstreamer/elements/gsttensor_converter.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/gst/nnstreamer/elements/gsttensor_converter.c b/gst/nnstreamer/elements/gsttensor_converter.c
+index c03fe87e..78f62247 100644
+--- a/gst/nnstreamer/elements/gsttensor_converter.c
++++ b/gst/nnstreamer/elements/gsttensor_converter.c
+@@ -1100,9 +1100,15 @@ gst_tensor_converter_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
+          */
+         size = offset = type * color * width;
+ 
+-        g_assert (offset % 4); /** Internal logic error! */
+-        if (offset % 4) {
+-          offset += 4 - (offset % 4);
++        /* Calculate the offset by video meta if is exist */
++        GstVideoMeta *video_meta = gst_buffer_get_video_meta (buf);
++        if (video_meta) {
++           offset = video_meta->stride[0];
++        } else {
++          g_assert (offset % 4); /** Internal logic error! */
++          if (offset % 4) {
++            offset += 4 - (offset % 4);
++          }
+         }
+ 
+         for (d0 = 0; d0 < frames_in; d0++) {
+-- 
+2.34.1
+

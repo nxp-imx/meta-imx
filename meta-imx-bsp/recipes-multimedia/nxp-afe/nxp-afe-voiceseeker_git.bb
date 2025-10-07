@@ -9,13 +9,13 @@ inherit pkgconfig
 
 DEPENDS += "alsa-lib nxp-afe"
 
-SRCBRANCH = "MM_04.10.0_2505_L6.12.20"
+SRCBRANCH = "MM_04.10.01_2508_L6.12.34"
 PV = "2.0+${SRCPV}"
 
 NXPAFE_VOICESEEKER_SRC ?= "git://github.com/nxp-imx/imx-voiceui.git;protocol=https"
 SRC_URI = "${NXPAFE_VOICESEEKER_SRC};branch=${SRCBRANCH}"
 
-SRCREV = "737c156469eeede28fe1a0777c968becf6fea886" 
+SRCREV = "4121f382713685295e2bf6fb88c90b04f3c08f7a"
 S = "${WORKDIR}/git"
 
 EXTRA_CONF = "--enable-armv8 --bindir=/unit_tests/ --libdir=${libdir}"
