@@ -3,7 +3,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 SRC_URI:append = " file://0001-test_dvr_play-changed-to-output-TS.patch \
 "
 # Enable static lib as test build needs it
-export enable_static="yes"
+export enable_static = "yes"
 
 do_compile () {
     # Build test to generate test_dvr_play
