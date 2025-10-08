@@ -1,0 +1,32 @@
+From 061a49854beb1d66298d83e8eee9bc8cbd2f6a81 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Wed, 8 Oct 2025 10:22:30 -0500
+Subject: [PATCH] ethosu_drv.h: Fix gcc15 build issues
+
+https://gcc.gnu.org/gcc-15/porting_to.html#cxx
+Some C++ Standard Library headers are no longer
+including other headers that were being used
+internally by the library.
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ ethosu_drv.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/ethosu_drv.h b/ethosu_drv.h
+index b20de92..067f99d 100644
+--- a/ethosu_drv.h
++++ b/ethosu_drv.h
+@@ -13,6 +13,7 @@
+ #include <memory>
+ #include <string>
+ #include <vector>
++#include <cstdint>
+ 
+ #include "linux/ethosu.h"
+ /*
+-- 
+2.34.1
+
