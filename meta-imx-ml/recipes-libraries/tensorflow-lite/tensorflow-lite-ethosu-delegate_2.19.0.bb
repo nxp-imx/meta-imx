@@ -15,6 +15,7 @@ SRCREV_FORMAT = "ethosu_tf"
 
 SRC_URI = "${TENSORFLOW_LITE_ETHOSU_DELEGATE_SRC};branch=${SRCBRANCH_ethosu};name=ethosu \
            ${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf;destsuffix=tfgit \
+           file://0001-ethosu_drv.h-Fix-gcc15-build-issues.patch \
 "
 
 inherit python3native cmake
