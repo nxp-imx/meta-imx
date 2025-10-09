@@ -4,7 +4,7 @@
 # recipe for i.MX.
 
 ########## meta-openembedded copy ###########
-# Upstream hash: b9fc1c079bc03cf09fd2b1504db81542f47eeec0
+# Upstream hash: 91e428d4cd5a1c0de7d2ca4826705eb5eee7ec29
 
 SUMMARY = "Opencv : The Open Computer Vision Library"
 HOMEPAGE = "http://opencv.org/"
@@ -42,7 +42,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
            file://0001-Make-ts-module-external.patch \
            file://0008-Do-not-embed-build-directory-in-binaries.patch \
            file://27691.patch \
-           file://0001-Renamed-templated-BlocksCompensator-feed-method-to-e.patch \
+	   file://0001-Renamed-templated-BlocksCompensator-feed-method-to-e.patch \
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
 
@@ -208,11 +208,6 @@ do_install:append() {
         mv ${D}/usr/lib/* ${D}/${libdir}/
         rm -rf ${D}/usr/lib
     fi
-    # remove build host path to improve reproducibility
-    if [ -f ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake ]; then
-        sed -e 's@${STAGING_DIR_HOST}@@g' \
-            -i ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake
-    fi
     # remove setup_vars_opencv4.sh as its content is confusing and useless
     if [ -f ${D}${bindir}/setup_vars_opencv4.sh ]; then
         rm -rf ${D}${bindir}/setup_vars_opencv4.sh
@@ -231,6 +226,15 @@ do_install:append() {
     fi
 }
 
+do_install:append:class-target() {
+    # remove build host path to improve reproducibility
+    if [ -f ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake ]; then
+        sed -e 's@${STAGING_DIR_HOST}@@g' \
+            -i ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake
+    fi
+}
+
+BBCLASSEXTEND = "native"
 
 ########## End of meta-openembedded copy ##########
 
