@@ -1,12 +1,9 @@
-# Copyright 2020-2024 NXP
+# Copyright 2020-2025 NXP
 
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 DEPENDS = "boost libdrm virtual/libg2d libtinyxml2 jsoncpp patchelf-native"
-
-SRC_URI = "${FSL_MIRROR}/${BP}.bin;fsl-eula=true \
-"
 
 SRC_URI[sha256sum] = "f8bf735dff86439841f571f66cc8a94ae9cd75e028416aa0a5bc9a79d457047f"
 
@@ -75,7 +72,6 @@ FILES_SOLIBS_VERSIONED = " \
     ${libdir}/libcppnetlib-client-connections.so \
     ${libdir}/libcppnetlib-server-parsers.so \
     ${libdir}/libcppnetlib-uri.so \
-    ${libdir}/libjsoncpp.so \
     ${libdir}/libos08a20.so \
 "
 
