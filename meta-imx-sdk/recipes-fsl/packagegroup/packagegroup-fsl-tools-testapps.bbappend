@@ -28,7 +28,7 @@ SOC_TOOLS_TEST:append:imx-nxp-bsp    = " \
 SOC_TOOLS_TEST:remove:imx-nxp-bsp = "imx-test"
 SOC_TOOLS_TEST:append:mx8qm-nxp-bsp  = " dvbapp-tests"
 
-SOC_TOOLS_TEST:imxgpu  = "${SOC_TOOLS_TEST_VIVANTE}"
+SOC_TOOLS_TEST:imxgpu  = "imx-test ${SOC_TOOLS_TEST_VIVANTE}"
 SOC_TOOLS_TEST_VIVANTE             = ""
 SOC_TOOLS_TEST_VIVANTE:mx6-nxp-bsp = "imx-gpu-viv-demos"
 SOC_TOOLS_TEST_VIVANTE:mx7-nxp-bsp = "imx-gpu-viv-demos"
