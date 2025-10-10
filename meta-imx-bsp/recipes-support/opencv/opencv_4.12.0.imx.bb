@@ -249,6 +249,7 @@ SRC_URI += " \
     file://0103-MGS-6470-ccc-Change-configuration-to-enable-hostptr-.patch \
     file://0104-MGS-8011-ccc-Fix-the-problem-of-syntax-error-at-doub.patch \
     file://0105-MGS-8318-ccc-Fix-error-implicit-declaration-of-funct.patch \
+    file://0106-Fix-Ninja-build-error-by-replacing-add_definitions-w.patch \
 "
 
 # Drop un-necessary patch for 4.12

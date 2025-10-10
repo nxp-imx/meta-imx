@@ -1,0 +1,32 @@
+From 8377afeec118afbf26ba6b4e75b3e6cd298b11e3 Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Sat, 11 Oct 2025 09:08:20 +0800
+Subject: [PATCH] Fix Ninja build error by replacing add_definitions with
+ link_libraries for Qt
+
+Avoids unescaped generator expressions from Qt6 causing build failures by linking Qt
+
+targets directly instead of injecting raw definitions.
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
+---
+ modules/highgui/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/modules/highgui/CMakeLists.txt b/modules/highgui/CMakeLists.txt
+index f0a668e4b5..ae9c49c1cf 100644
+--- a/modules/highgui/CMakeLists.txt
++++ b/modules/highgui/CMakeLists.txt
+@@ -125,7 +125,7 @@ elseif(HAVE_QT)
+     endif()
+ 
+     foreach(dt_dep ${qt_deps})
+-      add_definitions(${Qt${QT_VERSION_MAJOR}${dt_dep}_DEFINITIONS})
++      link_libraries(${Qt${QT_VERSION_MAJOR}${dt_dep}})
+       include_directories(${Qt${QT_VERSION_MAJOR}${dt_dep}_INCLUDE_DIRS})
+       list(APPEND HIGHGUI_LIBRARIES ${Qt${QT_VERSION_MAJOR}${dt_dep}_LIBRARIES})
+     endforeach()
+-- 
+2.34.1
+
