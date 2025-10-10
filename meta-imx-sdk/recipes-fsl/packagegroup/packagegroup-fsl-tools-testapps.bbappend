@@ -25,7 +25,7 @@ SOC_TOOLS_TEST:append:imx-nxp-bsp    = " \
     kernel-tools-vsock \
     ${PN}-fslcodec-testapps \
 "
-SOC_TOOLS_TEST:remove:imx-nxp-bsp = "imx-test"
+
 SOC_TOOLS_TEST:append:mx8qm-nxp-bsp  = " dvbapp-tests"
 
 SOC_TOOLS_TEST:imxgpu  = "imx-test ${SOC_TOOLS_TEST_VIVANTE}"
