@@ -14,5 +14,8 @@ PACKAGECONFIG[rvgpu] = "${RVGPU_ENABLED},${RVGPU_DISABLED},mesa-rvgpu-emu"
 RVGPU_ENABLED = "${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', '-Dmesa-rvgpu=true', '', d)}"
 RVGPU_DISABLED = "${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', '-Dmesa-rvgpu=false', '', d)}"
 
+# Fix missing clang dependency
+DEPENDS:append = "${@bb.utils.contains('PACKAGECONFIG', 'opencl', ' clang', '', d)}"
+
 # Fix package arch
 PACKAGE_ARCH:imx-nxp-bsp = "${MACHINE_SOCARCH}"
