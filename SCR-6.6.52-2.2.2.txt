@@ -491,6 +491,18 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
+Package:                     pkcs11-provider.git
+Version:                     1.0.imx
+Outgoing License:            Apache-2 
+License File:                COPYING
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    i.MX fork of an OpenSSL provider that allows direct interfacing with pkcs11 drivers
+Release Location:            https://github.com/nxp-imx/pkcs11-provider.git -b lf-6.6.52-2.2.2
+Origin:                   Latchset (Apache-2.0) - https://github.com/latchset/pkcs11-provider
+
+--------------------------------------------
+
 Package:                     keyctl_caam.git
 Version:                     
 Outgoing License:            BSD-3-Clause 
