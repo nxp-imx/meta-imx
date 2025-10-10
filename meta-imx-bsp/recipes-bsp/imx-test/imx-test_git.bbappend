@@ -7,7 +7,9 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/imx-test:"
 DEPENDS:append:mx943-nxp-bsp = " imx-lib"
 
 SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH} \
-           file://memtool_profile"
+           file://memtool_profile \
+           file://0001-mxc_uart_xmit_test.c-Fix-termio.h-replaced-by-termio.patch \
+          "
 
 IMXTEST_SRC ?= "git://github.com/nxp-imx/imx-test.git;protocol=https"
 SRCBRANCH = "master"
