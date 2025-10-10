@@ -32,13 +32,11 @@ ML_GST_PROFILER:mx9-nxp-bsp   = "gst-shark"
 ML_PKGS            = ""
 ML_PKGS:mx8-nxp-bsp = " \
     litert \
-    onnxruntime-tests \
     pytorch \
     tensorflow-lite \
 "
 ML_PKGS:mx9-nxp-bsp = " \
     litert \
-    onnxruntime-tests \
     pytorch \
     tensorflow-lite \
 "
@@ -83,8 +81,6 @@ NEUTRON_PKGS:mx95-nxp-bsp = " \
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \
     ${ML_ACCELERATED_PKGS} \
-    ${ML_NNSTREAMER_PKGS} \
     ${ML_GST_PROFILER} \
-    ${ETHOS_U_PKGS} \
     ${NEUTRON_PKGS} \
 "
