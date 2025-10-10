@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 
 DEPENDS = "cairo"
 
-PV = "2.4+git"
+PV = "2.5.0+git"
 
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
 GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxp-imx/g2d-samples.git;protocol=https"
-SRCBRANCH = "imx_2.4"
-SRCREV = "8edce87212f98cc1da4b4f12f04a5319973263e7"
+SRCBRANCH = "imx_2.5"
+SRCREV = "18c0cfa46c7cd494972fd274c20cbba95e715161"
 
 S = "${WORKDIR}/git"
 
