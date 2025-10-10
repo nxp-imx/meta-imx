@@ -21,6 +21,7 @@ EXTRA_OECMAKE += " \
     -DSECO_LIBS_DIR=${STAGING_DIR_TARGET}${libdir} \
     -DZLIB_DIR=${STAGING_DIR_TARGET}${libdir} \
     -DECC_SRC=${STAGING_DIR_TARGET}${libdir} \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 "
 CFLAGS += "-Wno-error=deprecated-declarations"
 LDFLAGS += "-L${STAGING_LIBDIR}"
