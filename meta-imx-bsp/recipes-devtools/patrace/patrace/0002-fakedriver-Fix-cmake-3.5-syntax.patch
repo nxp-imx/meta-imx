@@ -1,0 +1,86 @@
+From 68540971b4468745f4b2cf7f849bf5d1bb0ad03d Mon Sep 17 00:00:00 2001
+From: Zelan Zou <zelan.zou@nxp.com>
+Date: Fri, 10 Oct 2025 11:12:44 +0800
+Subject: [PATCH 2/2] fakedriver: Fix cmake >3.5 syntax
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Zelan Zou <zelan.zou@nxp.com>
+---
+ .../project/cmake/fakedriver/CMakeLists.txt   |  6 ++---
+ patrace/project/cmake/fakedriver/src.cmake    | 24 +++++++++++++++++--
+ 2 files changed, 25 insertions(+), 5 deletions(-)
+
+diff --git a/patrace/project/cmake/fakedriver/CMakeLists.txt b/patrace/project/cmake/fakedriver/CMakeLists.txt
+index 876de24..f44e74a 100644
+--- a/patrace/project/cmake/fakedriver/CMakeLists.txt
++++ b/patrace/project/cmake/fakedriver/CMakeLists.txt
+@@ -6,7 +6,7 @@ include_directories(
+ add_library(EGL SHARED
+ 	${SRC_FAKEDRIVER_EGL}
+ )
+-add_dependencies(EGL ${SRC_ROOT}/fakedriver/egl/auto.cpp)
++add_dependencies(EGL egl_auto_src_generation)
+ 
+ target_link_libraries (EGL
+     dl
+@@ -16,7 +16,7 @@ set_target_properties(EGL PROPERTIES LINK_FLAGS "-z max-page-size=16384")
+ add_library(GLESv1_CM SHARED
+ 	${SRC_FAKEDRIVER_GLES1}
+ )
+-add_dependencies(GLESv1_CM ${SRC_ROOT}/fakedriver/gles1/auto.cpp)
++add_dependencies(GLESv1_CM gles1_auto_src_generation)
+ 
+ target_link_libraries (GLESv1_CM
+     dl
+@@ -26,7 +26,7 @@ set_target_properties(GLESv1_CM PROPERTIES LINK_FLAGS "-z max-page-size=16384")
+ add_library(GLESv2 SHARED
+ 	${SRC_FAKEDRIVER_GLES2_GLES3}
+ )
+-add_dependencies(GLESv2 ${SRC_ROOT}/fakedriver/gles2/auto.cpp)
++add_dependencies(GLESv2 gles2_auto_src_generation)
+ 
+ target_link_libraries (GLESv2
+     dl
+diff --git a/patrace/project/cmake/fakedriver/src.cmake b/patrace/project/cmake/fakedriver/src.cmake
+index 0e5d795..2a2a35d 100644
+--- a/patrace/project/cmake/fakedriver/src.cmake
++++ b/patrace/project/cmake/fakedriver/src.cmake
+@@ -1,12 +1,32 @@
+ add_custom_command (
+     OUTPUT ${SRC_ROOT}/fakedriver/egl/auto.cpp
+-        ${SRC_ROOT}/fakedriver/gles1/auto.cpp
+-        ${SRC_ROOT}/fakedriver/gles2/auto.cpp
+     COMMAND ${PYTHON_EXECUTABLE} ${SRC_ROOT}/fakedriver/autogencode.py
+     DEPENDS
++        ${SRC_FAKEDRIVER_EGL}
+         ${SRC_ROOT}/fakedriver/autogencode.py
+     WORKING_DIRECTORY ${SRC_ROOT}/fakedriver
+ )
++add_custom_target(egl_auto_src_generation DEPENDS ${SRC_ROOT}/fakedriver/egl/auto.cpp)
++
++add_custom_command (
++    OUTPUT ${SRC_ROOT}/fakedriver/gles1/auto.cpp
++    COMMAND ${PYTHON_EXECUTABLE} ${SRC_ROOT}/fakedriver/autogencode.py
++    DEPENDS
++        ${SRC_FAKEDRIVER_GLES1}
++        ${SRC_ROOT}/fakedriver/autogencode.py
++    WORKING_DIRECTORY ${SRC_ROOT}/fakedriver
++)
++add_custom_target(gles1_auto_src_generation DEPENDS ${SRC_ROOT}/fakedriver/gles1/auto.cpp)
++
++add_custom_command (
++    OUTPUT ${SRC_ROOT}/fakedriver/gles2/auto.cpp
++    COMMAND ${PYTHON_EXECUTABLE} ${SRC_ROOT}/fakedriver/autogencode.py
++    DEPENDS
++        ${SRC_FAKEDRIVER_GLES2_GLES3}
++        ${SRC_ROOT}/fakedriver/autogencode.py
++    WORKING_DIRECTORY ${SRC_ROOT}/fakedriver
++)
++add_custom_target(gles2_auto_src_generation DEPENDS ${SRC_ROOT}/fakedriver/gles2/auto.cpp)
+ 
+ set(SRC_FAKEDRIVER_EGL
+     ${SRC_ROOT}/fakedriver/common.cpp
+-- 
+2.34.1
+

@@ -1,0 +1,45 @@
+From 68354019625c7c70848c9350946f5c3b502923bd Mon Sep 17 00:00:00 2001
+From: Zelan Zou <zelan.zou@nxp.com>
+Date: Fri, 10 Oct 2025 11:09:56 +0800
+Subject: [PATCH 1/2] fastforward/CMakeLists.txt: Fix
+ call_parser_src_generation condition added if not exist
+
+| CMake Error at fastforward/CMakeLists.txt:61 (add_dependencies):
+|   The dependency target "call_parser_src_generation" of target "fastforward"
+|   does not exist.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Zelan Zou <zelan.zou@nxp.com>
+---
+ patrace/project/cmake/fastforward/CMakeLists.txt | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/patrace/project/cmake/fastforward/CMakeLists.txt b/patrace/project/cmake/fastforward/CMakeLists.txt
+index 78754e6..e59a13a 100644
+--- a/patrace/project/cmake/fastforward/CMakeLists.txt
++++ b/patrace/project/cmake/fastforward/CMakeLists.txt
+@@ -58,12 +58,18 @@ target_link_libraries (fastforward
+     jsoncpp
+     hwcpipe
+ )
+-add_dependencies(fastforward
++
++set(FASTFORWARD_DEPENDENCIES
+     retrace_gles_auto_src_generation
+     eglproc_auto_src_generation
+-    call_parser_src_generation
+     glxml_header
+ )
++if(TARGET call_parser_src_generation)
++    list(APPEND FASTFORWARD_DEPENDENCIES call_parser_src_generation)
++endif()
++
++add_dependencies(fastforward ${FASTFORWARD_DEPENDENCIES})
++
+ set_target_properties(fastforward PROPERTIES LINK_FLAGS "-pthread -z max-page-size=16384" COMPILE_FLAGS "-pthread")
+ install(TARGETS fastforward
+     RUNTIME DESTINATION bin)
+-- 
+2.34.1
+

@@ -11,6 +11,8 @@ DEPENDS = "wayland"
 
 SRC_URI = "gitsm://github.com/ARM-software/${BPN}.git;branch=master;protocol=https \
            file://0001-CMakeLists.txt-Switch-to-python3.patch \
+           file://0001-fastforward-CMakeLists.txt-Fix-call_parser_src_gener.patch \
+           file://0002-fakedriver-Fix-cmake-3.5-syntax.patch \
 "
 SRCREV = "9e0f8ce6b5d6056a4ede30ece59836a7bcaf5ea0"
 
@@ -22,11 +24,17 @@ OECMAKE_SOURCEPATH = "${S}/patrace/project/cmake"
 
 EXTRA_OECMAKE = " \
     -DWINDOWSYSTEM=wayland \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DCMAKE_INSTALL_PREFIX:PATH=/opt/${BPN}"
 
+#FIXME:error: 'uint32_t' was not declared in this scope
+do_configure:prepend(){
+    sed -i '/#include <memory>/a #include <cstdint>' ${S}/thirdparty/hwcpipe/backend/device/include/device/handle.hpp
+}
+
 # FIXME: Don't ignore problems
-CFLAGS += "-Wno-maybe-uninitialized"
-CXXFLAGS += "-Wno-range-loop-construct -Wno-unused-variable"
+CFLAGS += "-Wno-maybe-uninitialized -Wno-old-style-definition"
+CXXFLAGS += "-Wno-range-loop-construct -Wno-unused-variable -Wno-old-style-definition"
 
 do_install:append() {
     ln -s libEGL.so       ${D}/opt/${BPN}/${baselib}/libEGL.so.1
