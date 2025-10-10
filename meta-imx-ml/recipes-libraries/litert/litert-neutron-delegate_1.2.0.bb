@@ -9,7 +9,7 @@ require litert-${PV}.inc
 
 NEUTRON_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-neutron-delegate.git;protocol=https"
 SRCBRANCH_neutron = "main"
-SRCREV_neutron = "85ac4dc777f5dc8357255958e462bd66797c4c8a"
+SRCREV_neutron = "d099859e63b805d684fa8223fe73c5331c3c3d51"
 
 SRCREV_FORMAT = "neutron_tf"
 
