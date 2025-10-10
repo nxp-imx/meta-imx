@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.4-52f7740.bin
+Package:                     firmware-ele-imx-2.0.4-06674ef.bin
 Version:                     2.0.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -322,7 +322,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.0-c8d9103
+Package:                     zephyr-demo-imx-4.3.0-169cf86
 Version:                     4.3.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -761,7 +761,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.2-aarch32-ccdc7dd.bin
+Package:                     imx-gpu-viv-6.4.11.p4.2-aarch32-e633a88.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -780,7 +780,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.2-aarch64-ccdc7dd.bin
+Package:                     imx-gpu-viv-6.4.11.p4.2-aarch64-e633a88.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -818,7 +818,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     mesa-rvgpu-emu-2.0.1-345aa9d.bin
+Package:                     mesa-rvgpu-emu-2.0.1-72e9a5b.bin
 Version:                     2.0.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
@@ -933,7 +933,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.2-arm-ccdc7dd.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.2-arm-e633a88.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -945,7 +945,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.2-aarch64-ccdc7dd.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.2-aarch64-e633a88.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -957,8 +957,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.4.0.2-b1bc9c8.bin
-Version:                     2.4.0.2
+Package:                     imx-dpu-g2d-v1-2.5.0.0-07e4d19.bin
+Version:                     2.5.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -969,8 +969,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.4.0.2-b1bc9c8.bin
-Version:                     2.4.0.2
+Package:                     imx-dpu-g2d-v2-2.5.0.0-07e4d19.bin
+Version:                     2.5.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -982,7 +982,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 --------------------------------------------
 
 Package:                     imx-g2d-pxp.git
-Version:                     2.4
+Version:                     2.5
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -994,7 +994,7 @@ Origin:                      NXP (Proprietary)
 --------------------------------------------
 
 Package:                     g2d-samples.git
-Version:                     2.4
+Version:                     2.5
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Graphics
