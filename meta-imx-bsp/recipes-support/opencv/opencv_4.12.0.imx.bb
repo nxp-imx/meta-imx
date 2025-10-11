@@ -302,7 +302,20 @@ do_install:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'tests-imx', 'true', 'false', d)}; then
         cp -r share/opencv4/testdata/cv/face/* ${D}${datadir}/opencv4/testdata/cv/face/
     fi
+    rm -rf ${D}${bindir}/
+    install -d ${D}${bindir}/
+    cp -f bin/opencv_* ${D}${bindir}/
 }
+
+FILES:${PN}-apps = "${datadir}/opencv4 ${datadir}/licenses \
+                    ${bindir}/opencv_annotation \
+                    ${bindir}/opencv_interactive-calibration \
+                    ${bindir}/opencv_model_diagnostics \
+                    ${bindir}/opencv_version \
+                    ${bindir}/opencv_visualisation \
+                    ${bindir}/opencv_waldboost_detector \
+                    ${bindir}/opencv_perf* \
+"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
