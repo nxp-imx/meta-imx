@@ -315,6 +315,7 @@ FILES:${PN}-apps = "${datadir}/opencv4 ${datadir}/licenses \
                     ${bindir}/opencv_visualisation \
                     ${bindir}/opencv_waldboost_detector \
                     ${bindir}/opencv_perf* \
+                    ${bindir}/opencv_test* \
 "
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
