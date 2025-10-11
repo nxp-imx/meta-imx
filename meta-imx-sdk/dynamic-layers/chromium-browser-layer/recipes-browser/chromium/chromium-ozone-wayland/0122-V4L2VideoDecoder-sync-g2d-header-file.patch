@@ -1,0 +1,78 @@
+From 79be7d27c0165e3ba7695e2991687abd2900b945 Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Sat, 11 Oct 2025 11:04:22 +0800
+Subject: [PATCH] V4L2VideoDecoder: sync g2d header file
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ media/gpu/v4l2/v4l2_queue.cc | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
+
+diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
+index 9fc55cfd59459..4fd6bb250b068 100644
+--- a/media/gpu/v4l2/v4l2_queue.cc
++++ b/media/gpu/v4l2/v4l2_queue.cc
+@@ -162,15 +162,22 @@ std::vector<base::ScopedFD> GetDmabufsForV4L2Buffer(
+ }  // namespace
+ 
+ /*  g2d.h  g2dExt.h  */
++#if defined(__QNX__)
++#include <sys/types.h>
++typedef off64_t g2d_phys_addr_t;
++#else
++typedef unsigned long g2d_phys_addr_t;
++#endif
++
+ enum g2d_format
+ {
+ //rgb formats
+-     G2D_RGB565               = 0,    /* [0:4] Blue;  [5:10] Green; [11:15] Red                      */
++     G2D_RGB565               = 0,    /* [0:4] Red;   [5:10] Green; [11:15] Blue                     */
+      G2D_RGBA8888             = 1,    /* [0:7] Red;   [8:15] Green; [16:23] Blue; [23:31] Alpha      */
+      G2D_RGBX8888             = 2,    /* [0:7] Red;   [8:15] Green; [16:23] Blue; [23:31] don't care */
+      G2D_BGRA8888             = 3,    /* [0:7] Blue;  [8:15] Green; [16:23] Red; [23:31] Alpha       */
+      G2D_BGRX8888             = 4,    /* [0:7] Blue;  [8:15] Green; [16:23] Red; [23:31] don't care  */
+-     G2D_BGR565               = 5,    /* [0:4] Red;   [5:10] Green; [11:15] Blue                     */
++     G2D_BGR565               = 5,    /* [0:4] Blue;  [5:10] Green; [11:15] Red                      */
+ 
+      G2D_ARGB8888             = 6,    /* [0:7] Alpha; [8:15] Red;   [16:23] Green; [23:31] Blue      */
+      G2D_ABGR8888             = 7,    /* [0:7] Alpha; [8:15] Blue;  [16:23] Green; [23:31] Red       */
+@@ -183,6 +190,9 @@ enum g2d_format
+      G2D_RGBX5551             = 13,    /* [0:4] Red;   [5:9] Green; [10:14] Blue; [15] don't care */
+      G2D_BGRA5551             = 14,    /* [0:4] Blue;  [5:9] Green; [10:14] Red;  [15] Alpha       */
+      G2D_BGRX5551             = 15,    /* [0:4] Blue;  [5:9] Green; [10:14] Red;  [15] don't care  */
++     G2D_RGBA1010102          = 16,    /* [0:9] Red;   [10:19] Green; [20:29] Blue; [30:31] Alpha     */
++
++     G2D_GRAY8                = 19,    /* [0:7] Gray                                                  */
+ 
+ //yuv formats
+      G2D_NV12                 = 20,   /* 2 plane 420 format; plane 1: [0:7] Y ; plane 2: [0:7] U; [8:15] V */
+@@ -204,6 +214,7 @@ enum g2d_tiling
+     G2D_SUPERTILED          = 0x4,
+     G2D_AMPHION_TILED       = 0x8,
+     G2D_AMPHION_INTERLACED  = 0x10,
++    G2D_INTERLACED          = G2D_AMPHION_INTERLACED,
+     G2D_TILED_STATUS        = 0x20,
+     G2D_AMPHION_TILED_10BIT = 0x40,
+ };
+@@ -221,7 +232,7 @@ struct g2d_buf
+ {
+     void *buf_handle;
+     void *buf_vaddr;
+-    int  buf_paddr;
++    g2d_phys_addr_t  buf_paddr;
+     int  buf_size;
+ };
+ 
+@@ -255,7 +266,7 @@ struct g2d_surface
+ {
+     enum g2d_format format;
+ 
+-    int planes[3];//surface buffer addresses are set in physical planes separately
++    g2d_phys_addr_t planes[3];//surface buffer addresses are set in physical planes separately
+                   //RGB:  planes[0] - RGB565/RGBA8888/RGBX8888/BGRA8888/BRGX8888
+                   //NV12: planes[0] - Y, planes[1] - packed UV
+                   //I420: planes[0] - Y, planes[1] - U, planes[2] - V
+-- 
+2.43.0
+
