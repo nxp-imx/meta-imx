@@ -322,7 +322,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.0-169cf86
+Package:                     zephyr-demo-imx-4.3.0-b8419e6
 Version:                     4.3.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -818,7 +818,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     mesa-rvgpu-emu-2.0.1-72e9a5b.bin
+Package:                     mesa-rvgpu-emu-2.0.1-4909785.bin
 Version:                     2.0.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
