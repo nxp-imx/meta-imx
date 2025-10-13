@@ -68,7 +68,7 @@ do_install() {
 
 addtask deploy after do_install
 do_deploy() {
-    cp -rf --no-dereference ${D}/firmware/* ${DEPLOYDIR}/
+    cp -rf ${D}/firmware/* ${DEPLOYDIR}/
 }
 
 FILES:${PN} = "/firmware"
