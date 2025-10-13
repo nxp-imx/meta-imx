@@ -14,7 +14,7 @@ DEPENDS = "libpthread-stubs"
 SRC_URI = "${IMX_LIBDRM_SRC};branch=${SRCBRANCH}"
 IMX_LIBDRM_SRC ?= "git://github.com/nxp-imx/libdrm-imx.git;protocol=https"
 SRCBRANCH = "libdrm-imx-2.4.123"
-SRCREV = "4d8f7eccd59fcbd5602f0f8d22a9ca204d5f1bf6"
+SRCREV = "9e42c1b2bfd30a43eafbfc7c45effd3abc0e202d"
 
 S = "${WORKDIR}/git"
 
