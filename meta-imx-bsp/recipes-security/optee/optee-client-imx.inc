@@ -7,8 +7,6 @@ SRC_URI:remove = "git://github.com/OP-TEE/optee_client.git;branch=master;protoco
 SRC_URI:prepend = "${OPTEE_CLIENT_SRC};branch=${SRCBRANCH} "
 OPTEE_CLIENT_SRC ?= "git://github.com/nxp-imx/imx-optee-client.git;protocol=https"
 
-SRC_URI += "file://0001-tee-supplicant-Fix-non-arch-service-unit-install-pat.patch"
-
 inherit pkgconfig
 
 EXTRA_OECMAKE += "-DCFG_TEE_CLIENT_LOAD_PATH=${nonarch_base_libdir}"
