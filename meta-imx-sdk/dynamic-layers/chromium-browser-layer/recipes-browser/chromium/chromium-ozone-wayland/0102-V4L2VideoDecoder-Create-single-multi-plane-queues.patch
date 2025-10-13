@@ -1,7 +1,7 @@
-From c175fe907f93f5db9327ca1030820cdba8df137c Mon Sep 17 00:00:00 2001
+From 195e4de0c8910d601a59be8f52a5aa776fbe5e69 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Fri, 13 Sep 2024 22:36:04 +0900
-Subject: [PATCH 03/19] V4L2VideoDecoder: Create single/multi plane queues
+Date: Mon, 22 Sep 2025 15:42:28 +0900
+Subject: [PATCH 02/20] V4L2VideoDecoder: Create single/multi plane queues
 
 Decide to create single-plane queue or multi-plane queue according to
 the capabilities returned by VIDIOC_QUERYCAP.
@@ -13,10 +13,10 @@ Upstream-Status: Inappropriate [NXP specific]
  2 files changed, 40 insertions(+), 16 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_device.cc b/media/gpu/v4l2/v4l2_device.cc
-index ebbf240a3c5e7..c04873fe2ae84 100644
+index a12f3d2715df5..8f7f26cbf0a33 100644
 --- a/media/gpu/v4l2/v4l2_device.cc
 +++ b/media/gpu/v4l2/v4l2_device.cc
-@@ -92,6 +92,8 @@ scoped_refptr<V4L2Queue> V4L2Device::GetQueue(enum v4l2_buf_type type) {
+@@ -97,6 +97,8 @@ scoped_refptr<V4L2Queue> V4L2Device::GetQueue(enum v4l2_buf_type type) {
      // Supported queue types.
      case V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE:
      case V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE:
@@ -25,7 +25,7 @@ index ebbf240a3c5e7..c04873fe2ae84 100644
        break;
      default:
        VLOGF(1) << "Unsupported V4L2 queue type: " << type;
-@@ -538,9 +540,17 @@ V4L2Device::EnumerateSupportedDecodeProfiles(
+@@ -543,9 +545,17 @@ V4L2Device::EnumerateSupportedDecodeProfiles(
      const std::vector<uint32_t>& pixelformats) {
    VideoDecodeAccelerator::SupportedProfiles profiles;
  
@@ -45,8 +45,8 @@ index ebbf240a3c5e7..c04873fe2ae84 100644
  
    for (uint32_t pixelformat : v4l2_codecs_as_pix_fmts) {
      if (!base::Contains(pixelformats, pixelformat)) {
-@@ -859,27 +869,28 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
-   static const std::string kJpegEncoderDevicePattern = "/dev/jpeg-enc";
+@@ -876,27 +886,28 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+ #endif
  
    std::string device_pattern;
 -  v4l2_buf_type buf_type;
@@ -80,7 +80,7 @@ index ebbf240a3c5e7..c04873fe2ae84 100644
        break;
    }
  
-@@ -899,6 +910,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -925,6 +936,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
  
    Devices devices;
    for (const auto& path : candidate_paths) {
@@ -88,7 +88,7 @@ index ebbf240a3c5e7..c04873fe2ae84 100644
      if (!OpenDevicePath(path)) {
        continue;
      }
-@@ -912,6 +924,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -938,6 +950,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
  
      CloseDevice();
    }
@@ -97,10 +97,10 @@ index ebbf240a3c5e7..c04873fe2ae84 100644
    DCHECK_EQ(devices_by_type_.count(type), 0u);
    devices_by_type_[type] = devices;
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index 5765761592344..857576ae56d6a 100644
+index cb536173faa57..10bbf4e1dcc90 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
-@@ -454,17 +454,28 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
+@@ -458,17 +458,28 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
  #endif  // BUILDFLAG(USE_CHROMEOS_PROTECTED_MEDIA)
  
    struct v4l2_capability caps;

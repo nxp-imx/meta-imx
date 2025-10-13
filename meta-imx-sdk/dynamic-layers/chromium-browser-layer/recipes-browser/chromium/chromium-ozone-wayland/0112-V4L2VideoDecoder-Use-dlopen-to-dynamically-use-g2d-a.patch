@@ -1,49 +1,37 @@
-From 44d6b2c7ec8fc21cb3151688008384bf5fad39dc Mon Sep 17 00:00:00 2001
+From 8d3abf94a413f3ec78922a2db940f33ce5be8477 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Fri, 13 Sep 2024 23:13:36 +0900
-Subject: [PATCH 13/19] V4L2VideoDecoder: Use dlopen to dynamically use g2d api
+Date: Fri, 10 Oct 2025 11:49:38 +0900
+Subject: [PATCH] V4L2VideoDecoder: Use dlopen to dynamically use g2d api
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- media/gpu/v4l2/BUILD.gn      |   1 -
- media/gpu/v4l2/v4l2_queue.cc | 183 ++++++++++++++++++++++++++++++++++-
- 2 files changed, 181 insertions(+), 3 deletions(-)
+ media/gpu/v4l2/v4l2_queue.cc | 190 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 190 insertions(+)
 
-diff --git a/media/gpu/v4l2/BUILD.gn b/media/gpu/v4l2/BUILD.gn
-index 836ee0bc7504c..0aa466ba9cec5 100644
---- a/media/gpu/v4l2/BUILD.gn
-+++ b/media/gpu/v4l2/BUILD.gn
-@@ -92,7 +92,6 @@ source_set("v4l2") {
-     "EGL",
-     "GLESv2",
-   ]
--  libs += [ "g2d" ]
- 
-   configs += [ "//third_party/libyuv:libyuv_config" ]
- 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index 945e7a7df9b93..9fc55cfd59459 100644
+index e99f057a786d6..67af0e22f679c 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
-@@ -20,10 +20,11 @@
- #include "media/gpu/chromeos/platform_video_frame_utils.h"
- #include "media/gpu/macros.h"
+@@ -30,6 +30,7 @@
  
--#include "g2d.h"
--#include "g2dExt.h"
-+// #include "g2d.h"
-+// #include "g2dExt.h"
  #include <linux/dma-buf.h>
  #include <time.h>
 +#include <dlfcn.h>
  
  namespace media {
  
-@@ -160,6 +161,159 @@ std::vector<base::ScopedFD> GetDmabufsForV4L2Buffer(
+@@ -166,6 +167,170 @@ std::vector<base::ScopedFD> GetDmabufsForV4L2Buffer(
  
  }  // namespace
  
 +/*  g2d.h  g2dExt.h  */
++#if defined(__QNX__)
++#include <sys/types.h>
++typedef off64_t g2d_phys_addr_t;
++#else
++typedef unsigned long g2d_phys_addr_t;
++#endif
++
 +enum g2d_format
 +{
 +//rgb formats
@@ -65,6 +53,9 @@ index 945e7a7df9b93..9fc55cfd59459 100644
 +     G2D_RGBX5551             = 13,    /* [0:4] Red;   [5:9] Green; [10:14] Blue; [15] don't care */
 +     G2D_BGRA5551             = 14,    /* [0:4] Blue;  [5:9] Green; [10:14] Red;  [15] Alpha       */
 +     G2D_BGRX5551             = 15,    /* [0:4] Blue;  [5:9] Green; [10:14] Red;  [15] don't care  */
++     G2D_RGBA1010102          = 16,    /* [0:9] Red;   [10:19] Green; [20:29] Blue; [30:31] Alpha     */
++
++     G2D_GRAY8                = 19,    /* [0:7] Gray                                                  */
 +
 +//yuv formats
 +     G2D_NV12                 = 20,   /* 2 plane 420 format; plane 1: [0:7] Y ; plane 2: [0:7] U; [8:15] V */
@@ -86,6 +77,7 @@ index 945e7a7df9b93..9fc55cfd59459 100644
 +    G2D_SUPERTILED          = 0x4,
 +    G2D_AMPHION_TILED       = 0x8,
 +    G2D_AMPHION_INTERLACED  = 0x10,
++    G2D_INTERLACED          = G2D_AMPHION_INTERLACED,
 +    G2D_TILED_STATUS        = 0x20,
 +    G2D_AMPHION_TILED_10BIT = 0x40,
 +};
@@ -103,7 +95,7 @@ index 945e7a7df9b93..9fc55cfd59459 100644
 +{
 +    void *buf_handle;
 +    void *buf_vaddr;
-+    int  buf_paddr;
++    g2d_phys_addr_t  buf_paddr;
 +    int  buf_size;
 +};
 +
@@ -137,7 +129,7 @@ index 945e7a7df9b93..9fc55cfd59459 100644
 +{
 +    enum g2d_format format;
 +
-+    int planes[3];//surface buffer addresses are set in physical planes separately
++    g2d_phys_addr_t planes[3];//surface buffer addresses are set in physical planes separately
 +                  //RGB:  planes[0] - RGB565/RGBA8888/RGBX8888/BGRA8888/BRGX8888
 +                  //NV12: planes[0] - Y, planes[1] - packed UV
 +                  //I420: planes[0] - Y, planes[1] - U, planes[2] - V
@@ -199,7 +191,7 @@ index 945e7a7df9b93..9fc55cfd59459 100644
  V4L2ExtCtrl::V4L2ExtCtrl(uint32_t id) {
    memset(&ctrl, 0, sizeof(ctrl));
    ctrl.id = id;
-@@ -1245,6 +1399,31 @@ V4L2Queue::V4L2Queue(const IoctlAsCallback& ioctl_cb,
+@@ -1255,6 +1420,31 @@ V4L2Queue::V4L2Queue(base::PassKey<PassKey>,
        << "This queue does " << (supports_requests_ ? "" : "not")
        << " support requests.";
  

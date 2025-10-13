@@ -1,0 +1,295 @@
+From cdfd7c72670eb02652f788ce32c448b2132dd5d1 Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Fri, 26 Sep 2025 11:01:49 +0900
+Subject: [PATCH] V4L2VideoDecoder: Add back HEVC code for stateful video
+ decoder
+
+Below commit remove HEVC code since they thought no device is using
+HEVC decoding. Need to add back those code.
+
+commit b9d6d557be83909454fec0b964e23392be75f829
+Author: Hirokazu Honda <hiroh@chromium.org>
+Date:   Fri Nov 22 22:21:46 2024 +0000
+
+    media/gpu/v4l2: Remove HEVC code for stateful video decoder
+
+    We have no device that supports HEVC decoding with V4L2 stateful
+    decoders. This CL removes unnecessary code.
+
+    Bug: 380070929
+    Test: vda_tests on trogdor
+    Change-Id: If21fc2ad1e1f388a4db42cfea97d93a1aa47da29
+    Reviewed-on: https://chromium-review.googlesource.com/c/chromium/src/+/6039471
+    Commit-Queue: Hirokazu Honda <hiroh@chromium.org>
+    Reviewed-by: Nathan Hebert <nhebert@chromium.org>
+    Cr-Commit-Position: refs/heads/main@{#1387086}
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ .../v4l2_video_decoder_backend_stateful.cc    |   3 +
+ media/gpu/v4l2/v4l2_utils.cc                  |   4 +
+ media/gpu/v4l2/v4l2_vda_helpers.cc            | 144 ++++++++++++++++++
+ media/gpu/v4l2/v4l2_vda_helpers.h             |  30 ++++
+ 4 files changed, 181 insertions(+)
+
+diff --git a/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc b/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc
+index 5e6275b4eff22..b703f184a4638 100644
+--- a/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc
++++ b/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc
+@@ -762,6 +762,9 @@ bool V4L2StatefulVideoDecoderBackend::IsSupportedProfile(
+   if (supported_profiles_.empty()) {
+     const std::vector<uint32_t> kSupportedInputFourccs = {
+         V4L2_PIX_FMT_H264,
++#if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++        V4L2_PIX_FMT_HEVC,
++#endif  // BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
+         V4L2_PIX_FMT_VP8,
+         V4L2_PIX_FMT_VP9,
+     };
+diff --git a/media/gpu/v4l2/v4l2_utils.cc b/media/gpu/v4l2/v4l2_utils.cc
+index bda084857a76d..0d8325f0baf01 100644
+--- a/media/gpu/v4l2/v4l2_utils.cc
++++ b/media/gpu/v4l2/v4l2_utils.cc
+@@ -355,6 +355,7 @@ static const std::map<v4l2_enum_type, v4l2_enum_type>
+         {V4L2_PIX_FMT_H264_SLICE, V4L2_CID_MPEG_VIDEO_H264_PROFILE},
+ #endif
+ #if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++        {V4L2_PIX_FMT_HEVC, V4L2_CID_MPEG_VIDEO_HEVC_PROFILE},
+ #if !BUILDFLAG(USE_LINUX_V4L2)
+         {V4L2_PIX_FMT_HEVC_SLICE, V4L2_CID_MPEG_VIDEO_HEVC_PROFILE},
+ #endif
+@@ -698,6 +699,9 @@ bool IsV4L2DecoderStateful() {
+   // V4L2 stateful formats (don't end up with _SLICE or _FRAME) supported.
+   constexpr std::array<uint32_t, 4> kSupportedStatefulInputCodecs = {
+       V4L2_PIX_FMT_H264,
++#if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++      V4L2_PIX_FMT_HEVC,
++#endif  // BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
+       V4L2_PIX_FMT_VP8,
+       V4L2_PIX_FMT_VP9,
+   };
+diff --git a/media/gpu/v4l2/v4l2_vda_helpers.cc b/media/gpu/v4l2/v4l2_vda_helpers.cc
+index 4a162eee45fbd..a3c6900ad9541 100644
+--- a/media/gpu/v4l2/v4l2_vda_helpers.cc
++++ b/media/gpu/v4l2/v4l2_vda_helpers.cc
+@@ -21,6 +21,9 @@
+ #include "media/gpu/v4l2/v4l2_device.h"
+ #include "media/gpu/v4l2/v4l2_image_processor_backend.h"
+ #include "media/parsers/h264_parser.h"
++#if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++#include "media/parsers/h265_parser.h"
++#endif  // BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
+ 
+ namespace media {
+ namespace v4l2_vda_helpers {
+@@ -156,6 +159,11 @@ InputBufferFragmentSplitter::CreateFromProfile(
+     case VideoCodec::kH264:
+       return std::make_unique<
+           v4l2_vda_helpers::H264InputBufferFragmentSplitter>();
++#if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++    case VideoCodec::kHEVC:
++      return std::make_unique<
++          v4l2_vda_helpers::HEVCInputBufferFragmentSplitter>();
++#endif  // BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
+     case VideoCodec::kVP8:
+     case VideoCodec::kVP9:
+       // VP8/VP9 don't need any frame splitting, use the default implementation.
+@@ -278,5 +286,141 @@ bool H264InputBufferFragmentSplitter::IsPartialFramePending() const {
+   return partial_frame_pending_;
+ }
+ 
++#if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++HEVCInputBufferFragmentSplitter::HEVCInputBufferFragmentSplitter()
++    : h265_parser_(new H265Parser()) {}
++
++HEVCInputBufferFragmentSplitter::~HEVCInputBufferFragmentSplitter() = default;
++
++bool HEVCInputBufferFragmentSplitter::AdvanceFrameFragment(const uint8_t* data,
++                                                           size_t size,
++                                                           size_t* endpos) {
++  DCHECK(h265_parser_);
++
++  // For HEVC, we need to feed HW one frame at a time. This parses the bitstream
++  // to determine frame boundaries.
++  h265_parser_->SetStream(data, size);
++  H265NALU nalu;
++  H265Parser::Result result;
++  *endpos = 0;
++
++  // Keep on peeking the next NALs while they don't indicate a frame
++  // boundary.
++  while (true) {
++    bool end_of_frame = false;
++    result = h265_parser_->AdvanceToNextNALU(&nalu);
++    if (result == H265Parser::kInvalidStream ||
++        result == H265Parser::kUnsupportedStream) {
++      return false;
++    }
++    if (result == H265Parser::kEOStream) {
++      // We've reached the end of the buffer before finding a frame boundary.
++      if (*endpos != 0)
++        partial_frame_pending_ = true;
++      *endpos = size;
++      return true;
++    }
++    switch (nalu.nal_unit_type) {
++      case H265NALU::BLA_W_LP:
++      case H265NALU::BLA_W_RADL:
++      case H265NALU::BLA_N_LP:
++      case H265NALU::IDR_W_RADL:
++      case H265NALU::IDR_N_LP:
++      case H265NALU::TRAIL_N:
++      case H265NALU::TRAIL_R:
++      case H265NALU::TSA_N:
++      case H265NALU::TSA_R:
++      case H265NALU::STSA_N:
++      case H265NALU::STSA_R:
++      case H265NALU::RADL_N:
++      case H265NALU::RADL_R:
++      case H265NALU::RASL_N:
++      case H265NALU::RASL_R:
++      case H265NALU::CRA_NUT: {
++        // Rec. ITU-T H.265, section 7.3.1.2 NAL unit header syntax
++        constexpr uint8_t kHevcNaluHeaderSize = 2;
++
++        // These NALU's have a slice header which starts after the NAL unit
++        // header. This ensures that there is enough data in the NALU to contain
++        // contain at least one byte of the slice header.
++        if (nalu.size <= kHevcNaluHeaderSize)
++          return false;
++
++        // From Rec. ITU-T H.265, section 7.3.6 Slice segment header syntax, the
++        // first bit in the slice header is first_slice_segment_in_pic_flag. If
++        // it is set, then the slice starts a new frame.
++        if ((nalu.data[kHevcNaluHeaderSize] & 0x80) == 0x80) {
++          if (slice_data_pending_) {
++            end_of_frame = true;
++            break;
++          }
++        }
++        slice_data_pending_ = true;
++        break;
++      }
++      case H265NALU::SPS_NUT:
++      case H265NALU::PPS_NUT:
++        // Only creates a new frame if there is already slice data. This groups
++        // the SPS and PPS with the first frame. This is needed for the Venus
++        // driver for HEVC. Curiously, the same treatment is not needed for
++        // H.264.
++        // TODO(b/227247905): If a different policy is needed for the Stateless
++        // backend, then make the behavior externally configurable.
++        if (slice_data_pending_) {
++          end_of_frame = true;
++        }
++        break;
++      case H265NALU::EOS_NUT:
++      case H265NALU::EOB_NUT:
++      case H265NALU::AUD_NUT:
++      case H265NALU::RSV_NVCL41:
++      case H265NALU::RSV_NVCL42:
++      case H265NALU::RSV_NVCL43:
++      case H265NALU::RSV_NVCL44:
++      case H265NALU::UNSPEC48:
++      case H265NALU::UNSPEC49:
++      case H265NALU::UNSPEC50:
++      case H265NALU::UNSPEC51:
++      case H265NALU::UNSPEC52:
++      case H265NALU::UNSPEC53:
++      case H265NALU::UNSPEC54:
++      case H265NALU::UNSPEC55:
++        // These unconditionally signal a frame boundary.
++        end_of_frame = true;
++        break;
++      default:
++        // For all others, keep going.
++        break;
++    }
++    if (end_of_frame) {
++      if (!partial_frame_pending_ && *endpos == 0) {
++        // The frame was previously restarted, and we haven't filled the
++        // current frame with any contents yet. Start the new frame here and
++        // continue parsing NALs.
++      } else {
++        // The frame wasn't previously restarted and/or we have contents for
++        // the current frame; signal the start of a new frame here: we don't
++        // have a partial frame anymore.
++        partial_frame_pending_ = false;
++        slice_data_pending_ = false;
++        return true;
++      }
++    }
++    *endpos = (nalu.data + base::checked_cast<size_t>(nalu.size)) - data;
++  }
++  NOTREACHED();
++}
++
++void HEVCInputBufferFragmentSplitter::Reset() {
++  partial_frame_pending_ = false;
++  slice_data_pending_ = false;
++  h265_parser_.reset(new H265Parser());
++}
++
++bool HEVCInputBufferFragmentSplitter::IsPartialFramePending() const {
++  return partial_frame_pending_;
++}
++#endif  // BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++
+ }  // namespace v4l2_vda_helpers
+ }  // namespace media
+diff --git a/media/gpu/v4l2/v4l2_vda_helpers.h b/media/gpu/v4l2/v4l2_vda_helpers.h
+index 12e06c1001245..bc3d7d480fdaa 100644
+--- a/media/gpu/v4l2/v4l2_vda_helpers.h
++++ b/media/gpu/v4l2/v4l2_vda_helpers.h
+@@ -13,12 +13,17 @@
+ #include "media/base/video_codecs.h"
+ #include "media/gpu/chromeos/fourcc.h"
+ #include "media/gpu/chromeos/image_processor.h"
++#include "media/media_buildflags.h"
+ #include "ui/gfx/geometry/size.h"
+ 
+ namespace media {
+ 
+ class V4L2Device;
+ class H264Parser;
++#if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++class H265Parser;
++#endif  // BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++
+ 
+ // Helper static methods to be shared between V4L2VideoDecodeAccelerator and
+ // V4L2SliceVideoDecodeAccelerator. This avoids some code duplication between
+@@ -116,6 +121,31 @@ class H264InputBufferFragmentSplitter : public InputBufferFragmentSplitter {
+   bool partial_frame_pending_ = false;
+ };
+ 
++#if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++// Splitter for HEVC, making sure to properly report when a partial frame
++// may be pending.
++class HEVCInputBufferFragmentSplitter : public InputBufferFragmentSplitter {
++ public:
++  explicit HEVCInputBufferFragmentSplitter();
++  ~HEVCInputBufferFragmentSplitter() override;
++
++  bool AdvanceFrameFragment(const uint8_t* data,
++                            size_t size,
++                            size_t* endpos) override;
++  void Reset() override;
++  bool IsPartialFramePending() const override;
++
++ private:
++  // For HEVC decode, hardware requires that we send it frame-sized chunks.
++  // We'll need to parse the stream.
++  std::unique_ptr<H265Parser> h265_parser_;
++  // Set if we have a pending incomplete frame in the input buffer.
++  bool partial_frame_pending_ = false;
++  // Set if we have pending slice data in the input buffer.
++  bool slice_data_pending_ = false;
++};
++#endif  // BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
++
+ }  // namespace v4l2_vda_helpers
+ }  // namespace media
+ 
+-- 
+2.34.1
+

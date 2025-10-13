@@ -1,7 +1,7 @@
-From 074a419931f1691e312cde9da3beeb454d31ee36 Mon Sep 17 00:00:00 2001
+From ea9e76371941052add0450ca0b07cafd869426ad Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 23:22:56 +0900
-Subject: [PATCH 17/19] V4L2StatefulVideoDecoderBackend: Enlarge input buffer
+Subject: [PATCH 16/20] V4L2StatefulVideoDecoderBackend: Enlarge input buffer
  number to 16
 
 Upstream-Status: Inappropriate [NXP specific]
@@ -10,10 +10,10 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc b/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc
-index 8929feb42d89c..7d35c58d4cae8 100644
+index b77f2b08d7b58..4141a66f575c9 100644
 --- a/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc
 +++ b/media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.cc
-@@ -778,7 +778,7 @@ bool V4L2StatefulVideoDecoderBackend::StopInputQueueOnResChange() const {
+@@ -779,7 +779,7 @@ bool V4L2StatefulVideoDecoderBackend::StopInputQueueOnResChange() const {
  size_t V4L2StatefulVideoDecoderBackend::GetNumOUTPUTQueueBuffers(
      bool secure_mode) const {
    CHECK(!secure_mode);

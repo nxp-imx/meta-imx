@@ -1,45 +1,30 @@
-From 591913ea8a59426be9902599cec129445804c8d7 Mon Sep 17 00:00:00 2001
+From 32b6872eb59bb29bd5bfdcec52c0c75122985ec0 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 23:09:35 +0900
-Subject: [PATCH 12/19] V4L2VideoDecoder: Support tile to linear transform for
+Subject: [PATCH] V4L2VideoDecoder: Support tile to linear transform for
  amphion
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- media/gpu/v4l2/BUILD.gn      |   1 +
- media/gpu/v4l2/v4l2_queue.cc | 211 ++++++++++++++++++++++++++++++++++-
+ media/gpu/v4l2/v4l2_queue.cc | 209 ++++++++++++++++++++++++++++++++++-
  media/gpu/v4l2/v4l2_queue.h  |   1 +
- 3 files changed, 209 insertions(+), 4 deletions(-)
+ 2 files changed, 206 insertions(+), 4 deletions(-)
 
-diff --git a/media/gpu/v4l2/BUILD.gn b/media/gpu/v4l2/BUILD.gn
-index 0aa466ba9cec5..836ee0bc7504c 100644
---- a/media/gpu/v4l2/BUILD.gn
-+++ b/media/gpu/v4l2/BUILD.gn
-@@ -92,6 +92,7 @@ source_set("v4l2") {
-     "EGL",
-     "GLESv2",
-   ]
-+  libs += [ "g2d" ]
- 
-   configs += [ "//third_party/libyuv:libyuv_config" ]
- 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index de74d0da308c3..945e7a7df9b93 100644
+index fe4a1d32adc37..e99f057a786d6 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
-@@ -20,6 +20,11 @@
+@@ -28,6 +28,9 @@
  #include "media/gpu/chromeos/platform_video_frame_utils.h"
  #include "media/gpu/macros.h"
  
-+#include "g2d.h"
-+#include "g2dExt.h"
 +#include <linux/dma-buf.h>
 +#include <time.h>
 +
  namespace media {
  
  namespace {
-@@ -189,6 +194,11 @@ class V4L2Buffer {
+@@ -197,6 +200,11 @@ class V4L2Buffer {
    size_t GetMemoryUsage() const;
    const struct v4l2_buffer& v4l2_buffer() const { return v4l2_buffer_; }
    const scoped_refptr<FrameResource>& GetFrameResource();
@@ -51,7 +36,7 @@ index de74d0da308c3..945e7a7df9b93 100644
  
   private:
    V4L2Buffer(const IoctlAsCallback& ioctl_cb,
-@@ -203,6 +213,13 @@ class V4L2Buffer {
+@@ -211,6 +219,13 @@ class V4L2Buffer {
    const IoctlAsCallback ioctl_cb_;
    const MmapAsCallback mmap_cb_;
    std::vector<void*> plane_mappings_;
@@ -65,7 +50,7 @@ index de74d0da308c3..945e7a7df9b93 100644
  
    // V4L2 data as queried by QUERYBUF.
    struct v4l2_buffer v4l2_buffer_;
-@@ -257,6 +274,90 @@ V4L2Buffer::V4L2Buffer(const IoctlAsCallback& ioctl_cb,
+@@ -265,6 +280,90 @@ V4L2Buffer::V4L2Buffer(const IoctlAsCallback& ioctl_cb,
    v4l2_buffer_.type = type;
    v4l2_buffer_.memory = memory;
    plane_mappings_.resize(V4L2_TYPE_IS_MULTIPLANAR(type) ? v4l2_buffer_.length : 1);
@@ -156,7 +141,7 @@ index de74d0da308c3..945e7a7df9b93 100644
  }
  
  V4L2Buffer::~V4L2Buffer() {
-@@ -269,6 +370,32 @@ V4L2Buffer::~V4L2Buffer() {
+@@ -277,6 +376,32 @@ V4L2Buffer::~V4L2Buffer() {
        }
      }
    }
@@ -189,7 +174,7 @@ index de74d0da308c3..945e7a7df9b93 100644
  }
  
  bool V4L2Buffer::Query() {
-@@ -368,13 +495,18 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
+@@ -376,13 +501,18 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
      dmabuf_fds.emplace_back(duped_fd);
    }
  
@@ -212,7 +197,7 @@ index de74d0da308c3..945e7a7df9b93 100644
  }
  
  const scoped_refptr<FrameResource>& V4L2Buffer::GetFrameResource() {
-@@ -1112,6 +1244,10 @@ V4L2Queue::V4L2Queue(const IoctlAsCallback& ioctl_cb,
+@@ -1124,6 +1254,10 @@ V4L2Queue::V4L2Queue(base::PassKey<PassKey>,
    VPLOG_IF(4, supports_requests_)
        << "This queue does " << (supports_requests_ ? "" : "not")
        << " support requests.";
@@ -223,7 +208,7 @@ index de74d0da308c3..945e7a7df9b93 100644
  }
  
  V4L2Queue::~V4L2Queue() {
-@@ -1127,6 +1263,9 @@ V4L2Queue::~V4L2Queue() {
+@@ -1139,6 +1273,9 @@ V4L2Queue::~V4L2Queue() {
      VQLOGF(1) << "Failed to deallocate queue buffers";
    }
  
@@ -233,7 +218,7 @@ index de74d0da308c3..945e7a7df9b93 100644
    std::move(destroy_cb_).Run();
  }
  
-@@ -1170,6 +1309,8 @@ std::pair<std::optional<struct v4l2_format>, int> V4L2Queue::GetFormat() {
+@@ -1182,6 +1319,8 @@ std::pair<std::optional<struct v4l2_format>, int> V4L2Queue::GetFormat() {
      VPQLOGF(2) << "Failed to get format";
      return std::make_pair(std::nullopt, errno);
    }
@@ -242,7 +227,7 @@ index de74d0da308c3..945e7a7df9b93 100644
  
    return std::make_pair(format, 0);
  }
-@@ -1529,6 +1670,68 @@ std::pair<bool, V4L2ReadableBufferRef> V4L2Queue::DequeueBuffer() {
+@@ -1542,6 +1681,68 @@ std::pair<bool, V4L2ReadableBufferRef> V4L2Queue::DequeueBuffer() {
    }
  
    DCHECK(free_buffers_);
@@ -312,10 +297,10 @@ index de74d0da308c3..945e7a7df9b93 100644
                                    v4l2_buffer, weak_this_factory_.GetWeakPtr(),
                                    std::move(queued_frame)));
 diff --git a/media/gpu/v4l2/v4l2_queue.h b/media/gpu/v4l2/v4l2_queue.h
-index 85c7920417935..1cc22fff58277 100644
+index 2a18544afd4b3..6476b62ef4cf8 100644
 --- a/media/gpu/v4l2/v4l2_queue.h
 +++ b/media/gpu/v4l2/v4l2_queue.h
-@@ -584,6 +584,7 @@ class MEDIA_GPU_EXPORT V4L2Queue
+@@ -604,6 +604,7 @@ class MEDIA_GPU_EXPORT V4L2Queue
    std::optional<struct v4l2_format> current_format_;
  
    std::vector<std::unique_ptr<V4L2Buffer>> buffers_;

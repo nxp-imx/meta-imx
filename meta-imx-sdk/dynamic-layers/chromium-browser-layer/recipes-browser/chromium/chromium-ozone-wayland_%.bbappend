@@ -14,28 +14,28 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0011-LF-12406-1-Blacklist-disable-program_caching_for_tra.patch \
 "
 VDA_PATCH_SET = " \
-    file://0101-V4L2Device-Correct-v4l2-codec-device-path.patch \
-    file://0102-V4L2VideoDecoder-Add-macro-use_linux_v4l2.patch \
-    file://0103-V4L2VideoDecoder-Create-single-multi-plane-queues.patch \
-    file://0104-V4L2Buffer-Allocate-correct-v4l2-buffers-for-queues.patch \
-    file://0105-V4L2VideoDecoder-Create-videoframe-according-to-v4l2.patch \
-    file://0106-V4L2VideoDecoder-Add-function-IsMultiQueue-for-S_FMT.patch \
-    file://0107-V4L2VideoDecoder-Use-correct-plane-size-and-bytesuse.patch \
-    file://0108-V4L2VideoDecoder-Add-hevc-format-support.patch \
-    file://0109-display-Add-fps-in-SkiaOutputSurfaceImplOnGpu-by-VLO.patch \
-    file://0110-V4L2VideoDecoder-Comment-some-unused-ioctl.patch \
-    file://0111-V4L2VideoDecoder-Add-V4L2_PIX_FMT_NV12M_8L128-format.patch \
-    file://0112-V4L2VideoDecoder-Support-tile-to-linear-transform-fo.patch \
-    file://0113-V4L2VideoDecoder-Use-dlopen-to-dynamically-use-g2d-a.patch \
-    file://0114-V4L2VideoDecoderBackend-Create-queue-according-to-qu.patch \
-    file://0115-V4L2VideoDecoder-support-gpu-import-NV12-format.patch \
-    file://0116-VideoDecoderPipeline-Add-resolution-change-support.patch \
-    file://0117-V4L2StatefulVideoDecoderBackend-Enlarge-input-buffer.patch \
-    file://0118-V4L2VideoDecoder-Fix-amphion-report-size-mismatch.patch \
-    file://0119-VideoDecoderPipeline-Get-V4L2VideoDecoder-supported-.patch \
-    file://0120-V4L2VideoDecoder-Fix-amphion-cannot-streamoff-after-.patch \
-    file://0121-V4L2VideoDecoder-Set-OUTPUT-format-with-parsed-resol.patch \
-    file://0122-V4L2VideoDecoder-sync-g2d-header-file.patch \
+    file://0101-V4L2VideoDecoder-Add-macro-use_linux_v4l2.patch \
+    file://0102-V4L2VideoDecoder-Create-single-multi-plane-queues.patch \
+    file://0103-V4L2Buffer-Allocate-correct-v4l2-buffers-for-queues.patch \
+    file://0104-V4L2VideoDecoder-Create-videoframe-according-to-v4l2.patch \
+    file://0105-V4L2VideoDecoder-Add-function-IsMultiQueue-for-S_FMT.patch \
+    file://0106-V4L2VideoDecoder-Use-correct-plane-size-and-bytesuse.patch \
+    file://0107-V4L2VideoDecoder-Add-hevc-format-support.patch \
+    file://0108-display-Add-fps-in-SkiaOutputSurfaceImplOnGpu-by-VLO.patch \
+    file://0109-V4L2VideoDecoder-Comment-some-unused-ioctl.patch \
+    file://0110-V4L2VideoDecoder-Add-V4L2_PIX_FMT_NV12M_8L128-format.patch \
+    file://0111-V4L2VideoDecoder-Support-tile-to-linear-transform-fo.patch \
+    file://0112-V4L2VideoDecoder-Use-dlopen-to-dynamically-use-g2d-a.patch \
+    file://0113-V4L2VideoDecoderBackend-Create-queue-according-to-qu.patch \
+    file://0114-V4L2VideoDecoder-support-gpu-import-NV12-format.patch \
+    file://0115-VideoDecoderPipeline-Add-resolution-change-support.patch \
+    file://0116-V4L2StatefulVideoDecoderBackend-Enlarge-input-buffer.patch \
+    file://0117-V4L2VideoDecoder-Fix-amphion-report-size-mismatch.patch \
+    file://0118-VideoDecoderPipeline-Get-V4L2VideoDecoder-supported-.patch \
+    file://0119-V4L2VideoDecoder-Fix-amphion-cannot-streamoff-after-.patch \
+    file://0120-V4L2VideoDecoder-Set-OUTPUT-format-with-parsed-resol.patch \
+    file://0121-V4L2VideoDecoder-Add-back-HEVC-code-for-stateful-vid.patch \
+    file://0122-V4L2VideoDecoder-Disable-decoder-prioritization-acco.patch \
 "
 SRC_URI:append:mx8-nxp-bsp = " ${VDA_PATCH_SET}"
 SRC_URI:append:mx95-nxp-bsp = " ${VDA_PATCH_SET}"
@@ -82,28 +82,3 @@ CHROMIUM_EXTRA_ARGS:append = " \
     --disable-gpu-rasterization \
     ${CHROMIUM_EXTRA_ARGS_ENABLE_ANGLE} \
 "
-
-#Remove installed ANGLE libraries
-do_install:append:mx6-nxp-bsp() {
-        rm -rf ${D}${libdir}/chromium/libEGL.so
-        rm -rf ${D}${libdir}/chromium/libGLESv2.so
-        rm -rf ${D}${libdir}/chromium/libvulkan.so.1
-}
-
-do_install:append:mx7-nxp-bsp() {
-        rm -rf ${D}${libdir}/chromium/libEGL.so
-        rm -rf ${D}${libdir}/chromium/libGLESv2.so
-        rm -rf ${D}${libdir}/chromium/libvulkan.so.1
-}
-
-do_install:append:mx8-nxp-bsp() {
-        rm -rf ${D}${libdir}/chromium/libEGL.so
-        rm -rf ${D}${libdir}/chromium/libGLESv2.so
-        rm -rf ${D}${libdir}/chromium/libvulkan.so.1
-}
-
-do_install:append:mx95-nxp-bsp() {
-        rm -rf ${D}${libdir}/chromium/libEGL.so
-        rm -rf ${D}${libdir}/chromium/libGLESv2.so
-        rm -rf ${D}${libdir}/chromium/libvulkan.so.1
-}

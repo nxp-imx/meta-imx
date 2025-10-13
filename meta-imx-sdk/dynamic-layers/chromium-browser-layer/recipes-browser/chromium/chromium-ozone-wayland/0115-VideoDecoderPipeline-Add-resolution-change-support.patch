@@ -1,7 +1,7 @@
-From ce372a56ed44ddd6cda68080e9594e6d02d2279a Mon Sep 17 00:00:00 2001
+From b9fd618e8a52e8dc406795ca8c0363c59b7a728a Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 23:21:51 +0900
-Subject: [PATCH 16/19] VideoDecoderPipeline: Add resolution change support
+Subject: [PATCH 15/20] VideoDecoderPipeline: Add resolution change support
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -9,10 +9,10 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 16 insertions(+), 15 deletions(-)
 
 diff --git a/media/gpu/chromeos/video_decoder_pipeline.cc b/media/gpu/chromeos/video_decoder_pipeline.cc
-index a92b0a297e22d..7cf16cc9faa77 100644
+index b2f1d19491e8d..e56f977afccd3 100644
 --- a/media/gpu/chromeos/video_decoder_pipeline.cc
 +++ b/media/gpu/chromeos/video_decoder_pipeline.cc
-@@ -647,21 +647,22 @@ void VideoDecoderPipeline::InitializeTask(const VideoDecoderConfig& config,
+@@ -671,21 +671,22 @@ void VideoDecoderPipeline::InitializeTask(const VideoDecoderConfig& config,
            &OOPVideoDecoder::GetOriginalFrame,
            base::Unretained(static_cast<OOPVideoDecoder*>(decoder_.get())));
      } else {

@@ -1,0 +1,69 @@
+From 53acece2b2b62708c4a4d475031b161f9a05eda7 Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Fri, 10 Oct 2025 16:46:04 +0900
+Subject: [PATCH] V4L2VideoDecoder: Disable decoder prioritization according to
+ resolutions
+
+Below commit enabled decoder prioritization according to different
+resolutions, it causes clips that height is lower than 360 to select
+software decoder first. So disable this feature.
+
+commit fda2916b9565074bd8f3133ae6d01eb1ca19700a
+Author: Dale Curtis <dalecurtis@chromium.org>
+Date:   Mon Mar 31 14:23:05 2025 -0700
+
+    Reland "Enable resolution based priority for src= playbacks."
+
+    This is a reland of commit a808cad79e6993eb45ba6985d40f44366fc3d5f8
+
+    Crash fixed in https://crbug.com/407493654
+
+    Original change's description:
+    > Enable resolution based priority for src= playbacks.
+    >
+    > Data shows this significantly improves rebuffering events and time
+    > to first frame for src= playbacks, but is neutral to negative for
+    > MSE based playbacks.
+    >
+    > As a side effect of this change Android will return to allowing
+    > platform decoders for low resolution MSE playbacks. I'll monitor
+    > gpu crash rates to see if this regresses the improvements gained
+    > when we launched the software decoder there.
+    >
+    > Bug: 368085608
+    > Change-Id: Ib6a5a093fe8c05b88b671e7d53b789ae18350cc2
+    > Reviewed-on: https://chromium-review.googlesource.com/c/chromium/src/+/6410634
+    > Reviewed-by: Eugene Zemtsov <eugene@chromium.org>
+    > Commit-Queue: Dale Curtis <dalecurtis@chromium.org>
+    > Cr-Commit-Position: refs/heads/main@{#1439915}
+
+    Bug: 368085608
+    Change-Id: I35088b393f29a3dba5868334b08fcc518984ecb4
+    Reviewed-on: https://chromium-review.googlesource.com/c/chromium/src/+/6417975
+    Commit-Queue: Rubber Stamper <rubber-stamper@appspot.gserviceaccount.com>
+    Commit-Queue: Dale Curtis <dalecurtis@chromium.org>
+    Bot-Commit: Rubber Stamper <rubber-stamper@appspot.gserviceaccount.com>
+    Auto-Submit: Dale Curtis <dalecurtis@chromium.org>
+    Cr-Commit-Position: refs/heads/main@{#1440556}
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ media/base/media_switches.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/media/base/media_switches.cc b/media/base/media_switches.cc
+index da77bedca7336..360c0a8b996b3 100644
+--- a/media/base/media_switches.cc
++++ b/media/base/media_switches.cc
+@@ -1015,7 +1015,7 @@ BASE_FEATURE(kHardwareMediaKeyHandling,
+ // decoders over software decoders or vice-versa.
+ BASE_FEATURE(kResolutionBasedDecoderPriority,
+              "ResolutionBasedDecoderPriority",
+-             base::FEATURE_ENABLED_BY_DEFAULT);
++             base::FEATURE_DISABLED_BY_DEFAULT);
+ 
+ // Allows the AutoPictureInPictureTabHelper to automatically enter
+ // picture-in-picture for websites with video playback (instead of only websites
+-- 
+2.34.1
+

@@ -1,7 +1,7 @@
-From fe9d852a4f33d4efdcbf52e761a9c32c76970517 Mon Sep 17 00:00:00 2001
+From 74eea0796aa492465611a46c9cf7637d71e45b5c Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:59:46 +0900
-Subject: [PATCH 11/19] V4L2VideoDecoder: Add V4L2_PIX_FMT_NV12M_8L128 format
+Subject: [PATCH 10/20] V4L2VideoDecoder: Add V4L2_PIX_FMT_NV12M_8L128 format
  for amphion
 
 Upstream-Status: Inappropriate [NXP specific]
@@ -13,7 +13,7 @@ Upstream-Status: Inappropriate [NXP specific]
  4 files changed, 13 insertions(+)
 
 diff --git a/media/gpu/chromeos/fourcc.cc b/media/gpu/chromeos/fourcc.cc
-index 5b7444a7b6319..6236034447322 100644
+index ba58b518ed195..e24be618fd8dd 100644
 --- a/media/gpu/chromeos/fourcc.cc
 +++ b/media/gpu/chromeos/fourcc.cc
 @@ -24,6 +24,7 @@ std::optional<Fourcc> Fourcc::FromUint32(uint32_t fourcc) {
@@ -24,7 +24,7 @@ index 5b7444a7b6319..6236034447322 100644
      case NV12:
      case NV21:
      case NM12:
-@@ -172,6 +173,7 @@ VideoPixelFormat Fourcc::ToVideoPixelFormat() const {
+@@ -170,6 +171,7 @@ VideoPixelFormat Fourcc::ToVideoPixelFormat() const {
        return PIXEL_FORMAT_YUY2;
      case NV12:
      case NM12:
@@ -48,10 +48,10 @@ index 6f08dba1de919..12b71cbb8f394 100644
      // https://linuxtv.org/downloads/v4l-dvb-apis-new/userspace-api/v4l/pixfmt-yuv422p.html
      // Maps to PIXEL_FORMAT_I422, V4L2_PIX_FMT_YUV422P.
 diff --git a/media/gpu/v4l2/v4l2_device.cc b/media/gpu/v4l2/v4l2_device.cc
-index c04873fe2ae84..08a3fe203cb81 100644
+index 8f7f26cbf0a33..c42986da675f7 100644
 --- a/media/gpu/v4l2/v4l2_device.cc
 +++ b/media/gpu/v4l2/v4l2_device.cc
-@@ -42,6 +42,7 @@ uint32_t V4L2PixFmtToDrmFormat(uint32_t format) {
+@@ -47,6 +47,7 @@ uint32_t V4L2PixFmtToDrmFormat(uint32_t format) {
    switch (format) {
      case V4L2_PIX_FMT_NV12:
      case V4L2_PIX_FMT_NV12M:
@@ -60,10 +60,10 @@ index c04873fe2ae84..08a3fe203cb81 100644
  
      case V4L2_PIX_FMT_YUV420:
 diff --git a/media/gpu/v4l2/v4l2_device.h b/media/gpu/v4l2/v4l2_device.h
-index 2d2800f3925f5..34e1b4d9380b2 100644
+index 210bf4a0bac32..62f626cef08df 100644
 --- a/media/gpu/v4l2/v4l2_device.h
 +++ b/media/gpu/v4l2/v4l2_device.h
-@@ -63,6 +63,12 @@
+@@ -56,6 +56,12 @@
    v4l2_fourcc('Q', '1', '0', 'C') /* Qualcomm 10-bit compressed */
  #endif
  

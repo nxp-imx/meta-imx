@@ -1,7 +1,7 @@
-From c8b82b832fc6c34ff27f73739c60472c15ca7380 Mon Sep 17 00:00:00 2001
+From ab215487111f67397c4e73fd43edf166a606b543 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Fri, 13 Sep 2024 23:15:59 +0900
-Subject: [PATCH 14/19] V4L2VideoDecoderBackend: Create queue according to
+Date: Mon, 22 Sep 2025 15:54:29 +0900
+Subject: [PATCH 13/20] V4L2VideoDecoderBackend: Create queue according to
  queried caps capabilities
 
 Upstream-Status: Inappropriate [NXP specific]
@@ -10,7 +10,7 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 24 insertions(+), 2 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_video_decoder_backend.cc b/media/gpu/v4l2/v4l2_video_decoder_backend.cc
-index ff08c18100e0c..0e5747a5a83e7 100644
+index 58c22b5f1d80b..7399c48b64849 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder_backend.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder_backend.cc
 @@ -14,8 +14,30 @@ V4L2VideoDecoderBackend::V4L2VideoDecoderBackend(
@@ -44,8 +44,8 @@ index ff08c18100e0c..0e5747a5a83e7 100644
 +  output_queue_ = device_->GetQueue(output_type);
 +
    if (!input_queue_ || !output_queue_) {
-     VLOGF(1) << "Failed to get V4L2 queue. This should not happen since the "
-              << "queues are supposed to be initialized when we are called.";
+     NOTREACHED()
+         << "Failed to get V4L2 queue. This should not happen since the queues "
 -- 
 2.34.1
 

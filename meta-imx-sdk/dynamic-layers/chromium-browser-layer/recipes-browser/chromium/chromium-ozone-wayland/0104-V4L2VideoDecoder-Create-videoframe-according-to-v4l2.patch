@@ -1,7 +1,7 @@
-From 41cb3357eeace1686fa453ec3c18c01c879f58c9 Mon Sep 17 00:00:00 2001
+From 9d0353765eba21c3fb4148915152093bd269f8f3 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:43:15 +0900
-Subject: [PATCH 05/19] V4L2VideoDecoder: Create videoframe according to
+Subject: [PATCH 04/20] V4L2VideoDecoder: Create videoframe according to
  v4l2buffer
 
 Upstream-Status: Inappropriate [NXP specific]
@@ -11,10 +11,10 @@ Upstream-Status: Inappropriate [NXP specific]
  2 files changed, 48 insertions(+), 22 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index 8bcf8101f3a20..ffa94c3d2c9f8 100644
+index a237e06c2b449..13866efd23b00 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
-@@ -334,7 +334,7 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
+@@ -342,7 +342,7 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
    }
  
    std::vector<base::ScopedFD> dmabuf_fds = GetDmabufsForV4L2Buffer(
@@ -23,7 +23,7 @@ index 8bcf8101f3a20..ffa94c3d2c9f8 100644
        static_cast<enum v4l2_buf_type>(v4l2_buffer_.type));
    if (dmabuf_fds.empty()) {
      VLOGF(1) << "Failed to get DMABUFs of V4L2 buffer";
-@@ -361,7 +361,10 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
+@@ -369,7 +369,10 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
      dmabuf_fds.emplace_back(duped_fd);
    }
  
@@ -36,10 +36,10 @@ index 8bcf8101f3a20..ffa94c3d2c9f8 100644
    return NativePixmapFrameResource::Create(
        *layout, gfx::Rect(size), size, std::move(dmabuf_fds), base::TimeDelta());
 diff --git a/media/gpu/v4l2/v4l2_utils.cc b/media/gpu/v4l2/v4l2_utils.cc
-index bb3ffb4f4642b..06b4329764b3f 100644
+index 7d4c8eac803f3..ac303c1751715 100644
 --- a/media/gpu/v4l2/v4l2_utils.cc
 +++ b/media/gpu/v4l2/v4l2_utils.cc
-@@ -219,13 +219,9 @@ size_t GetNumPlanesOfV4L2PixFmt(uint32_t pix_fmt) {
+@@ -230,13 +230,9 @@ size_t GetNumPlanesOfV4L2PixFmt(uint32_t pix_fmt) {
  
  std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
      const struct v4l2_format& format) {
@@ -55,7 +55,7 @@ index bb3ffb4f4642b..06b4329764b3f 100644
    const auto video_fourcc = Fourcc::FromV4L2PixFmt(pix_fmt);
    if (!video_fourcc) {
      VLOGF(1) << "Failed to convert pixel format to VideoPixelFormat: "
-@@ -233,7 +229,7 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -244,7 +240,7 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
      return std::nullopt;
    }
    const VideoPixelFormat video_format = video_fourcc->ToVideoPixelFormat();
@@ -64,7 +64,7 @@ index bb3ffb4f4642b..06b4329764b3f 100644
    const size_t num_color_planes = VideoFrame::NumPlanes(video_format);
    if (num_color_planes == 0) {
      VLOGF(1) << "Unsupported video format for NumPlanes(): "
-@@ -251,9 +247,17 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -262,9 +258,17 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
    std::vector<ColorPlaneLayout> planes;
    planes.reserve(num_color_planes);
    for (size_t i = 0; i < num_buffers; ++i) {
@@ -85,7 +85,7 @@ index bb3ffb4f4642b..06b4329764b3f 100644
    }
    // For the case that #color planes > #buffers, it fills stride of color
    // plane which does not map to buffer.
-@@ -267,8 +271,12 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -278,8 +282,12 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
        case V4L2_PIX_FMT_NV12:
          // The stride of UV is the same as Y in NV12.
          // The height is half of Y plane.
@@ -100,7 +100,7 @@ index bb3ffb4f4642b..06b4329764b3f 100644
          DCHECK_EQ(2u, planes.size());
          break;
        case V4L2_PIX_FMT_YUV420:
-@@ -276,13 +284,18 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -287,13 +295,18 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
          // The spec claims that two Cx rows (including padding) is exactly as
          // long as one Y row (including padding). So stride of Y must be even
          // number.
@@ -121,7 +121,7 @@ index bb3ffb4f4642b..06b4329764b3f 100644
          const size_t plane_1_area = plane_0_area / 4;
          planes.emplace_back(half_stride, plane_0_area, plane_1_area);
          planes.emplace_back(half_stride, plane_0_area + plane_1_area,
-@@ -301,13 +314,23 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -312,13 +325,23 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
    // such devices individually, so set this as a video frame layout property.
    constexpr size_t buffer_alignment = 0x1000;
    if (num_buffers == 1) {

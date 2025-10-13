@@ -1,7 +1,7 @@
-From 2822bbb8da30ab6f8415db4c98014418519f6b42 Mon Sep 17 00:00:00 2001
+From 708f4ebf036d325a9f7dabde1080c09c41f4ac9f Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
-Date: Wed, 26 Jun 2024 15:33:23 +0800
-Subject: [PATCH 5/7] MGS-7765: Blacklist MSAA for GPU Raster on Vivante GPUs
+Date: Thu, 25 Sep 2025 10:08:22 +0800
+Subject: [PATCH 1/2] MGS-7765: Blacklist MSAA for GPU Raster on Vivante GPUs
 
 Vivante had poor performance when enbale MSAA, disable MSAA
 for Vivante GPU.
@@ -11,22 +11,23 @@ https://codereview.chromium.org/1374043005
 
 Upstream-Status: Pending
 
+Change-Id: I7e562f29fb3039fe3c0e1ee36c04e7d8e8c10b37
 Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
 ---
  gpu/config/gpu_driver_bug_list.json | 11 +++++++++++
  1 file changed, 11 insertions(+)
 
 diff --git a/gpu/config/gpu_driver_bug_list.json b/gpu/config/gpu_driver_bug_list.json
-index 27fc6e04be012..86ce0297db4f4 100644
+index 51da7b954332c..147cbc72c74c0 100644
 --- a/gpu/config/gpu_driver_bug_list.json
 +++ b/gpu/config/gpu_driver_bug_list.json
-@@ -3399,6 +3399,17 @@
+@@ -3455,6 +3455,17 @@
        "features": [
-         "disable_accelerated_h264_encode"
+         "force_rgb10a2_overlay_support"
        ]
 +    },
 +    {
-+      "id": 436,
++      "id": 443,
 +      "description": "On Vivante GPUs MSAA performance is not acceptable for GPU rasterization",
 +      "os": {
 +        "type": "linux"
