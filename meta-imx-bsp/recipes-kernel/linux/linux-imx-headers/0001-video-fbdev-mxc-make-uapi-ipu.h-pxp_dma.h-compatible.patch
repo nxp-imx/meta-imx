@@ -32,23 +32,6 @@ index c92f292bcc9d..a7b60730bbd4 100644
  #define irqreturn_t int
  #define dma_addr_t int
  #define uint32_t unsigned int
-diff --git a/include/uapi/linux/pxp_dma.h b/include/uapi/linux/pxp_dma.h
-index 9b5228504095..e2deff07516d 100644
---- a/include/uapi/linux/pxp_dma.h
-+++ b/include/uapi/linux/pxp_dma.h
-@@ -25,8 +25,12 @@
- 
- #ifndef __KERNEL__
- typedef unsigned long dma_addr_t;
-+#if defined __STDC_VERSION__ && __STDC_VERSION__ > 201710L
-+/* bool, true and false are keywords.  */
-+#else
- typedef unsigned char bool;
- #endif
-+#endif
- 
- /*  PXP Pixel format definitions */
- /*  Four-character-code (FOURCC) */
 -- 
 2.42.0
 
