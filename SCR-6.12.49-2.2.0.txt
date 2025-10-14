@@ -288,7 +288,7 @@ Description and comments:
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     nxp-wlan-csi-1.1.0-6071385.bin
+Package:                     nxp-wlan-apps-1.1.0-N/A.bin
 Version:                     1.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -308,7 +308,7 @@ Description and comments:
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.15.0-4d898ff
+Package:                     sof-zephyr-2.15.0-f9c56ae
 Version:                     2.15.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -322,7 +322,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.0-b8419e6
+Package:                     zephyr-demo-imx-4.3.0-fb7a74e
 Version:                     4.3.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -799,7 +799,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.2-9d4979d.bin
+Package:                     mali-imx-r54p1.2-54ba139.bin
 Version:                     r54p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -818,7 +818,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     mesa-rvgpu-emu-2.0.1-4909785.bin
+Package:                     mesa-rvgpu-emu-2.0.1-0c818f4.bin
 Version:                     2.0.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
@@ -1214,8 +1214,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-1.38.0-785f534.bin
-Version:                     1.38.0
+Package:                     imx-vpu-hantro-1.39.0-ea804d0.bin
+Version:                     1.39.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -1229,8 +1229,8 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.7.0-f1f580e
-Version:                     1.7.0
+Package:                     imx-vpu-hantro-daemon-1.8.0-6d3ec73
+Version:                     1.8.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1243,8 +1243,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-vc-1.10.3-0eec750.bin
-Version:                     1.10.3
+Package:                     imx-vpu-hantro-vc-1.11.0-5e18a84.bin
+Version:                     1.11.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
