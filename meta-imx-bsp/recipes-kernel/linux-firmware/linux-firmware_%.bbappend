@@ -19,8 +19,8 @@ do_install:append () {
     install -m 0644 ${UNPACKDIR}/murata-qca/1CQ/board.bin ${D}${nonarch_base_libdir}/firmware/ath10k/QCA6174/hw3.0/
 
     # No need to do install for imx sdma binaries
-    if [ -d ${D}${base_libdir}/firmware/imx/sdma ]; then
-        rm -rf ${D}${base_libdir}/firmware/imx
+    if [ -d ${D}${nonarch_base_libdir}/firmware/imx/sdma ]; then
+        rm -rf ${D}${nonarch_base_libdir}/firmware/imx
     fi
 
     install -d ${D}${sysconfdir}/firmware
