@@ -1,4 +1,4 @@
-# Copyright 2017-2022,2024 NXP
+# Copyright 2017-2022,2025 NXP
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
@@ -20,7 +20,7 @@ do_install:append () {
 
     # No need to do install for imx sdma binaries
     if [ -d ${D}${base_libdir}/firmware/imx/sdma ]; then
-        rm -rf ${D}${base_libdir}/firmware/imx/sdma
+        rm -rf ${D}${base_libdir}/firmware/imx
     fi
 
     install -d ${D}${sysconfdir}/firmware
