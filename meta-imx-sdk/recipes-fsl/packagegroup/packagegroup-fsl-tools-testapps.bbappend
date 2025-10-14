@@ -34,9 +34,9 @@ SOC_TOOLS_TEST_VIVANTE:mx6-nxp-bsp = "imx-gpu-viv-demos"
 SOC_TOOLS_TEST_VIVANTE:mx7-nxp-bsp = "imx-gpu-viv-demos"
 SOC_TOOLS_TEST_VIVANTE:mx8-nxp-bsp = "imx-gpu-viv-demos"
 
-WLAN_SDK_TOOLS = ""
-WLAN_SDK_TOOLS:mx8-nxp-bsp = "nxp-wlan-csi"
-WLAN_SDK_TOOLS:mx9-nxp-bsp = "nxp-wlan-csi"
+WLAN_SDK_TOOLS = "nxp-wlan-apps"
+WLAN_SDK_TOOLS:mx6-nxp-bsp = ""
+WLAN_SDK_TOOLS:mx7-nxp-bsp = ""
 
 RDEPENDS:${PN} += " \
     bridge-utils \
