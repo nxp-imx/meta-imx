@@ -8,7 +8,6 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 SRC_URI = "${LINUX_IMX_SRC}"
-SRC_URI += " file://0001-video-fbdev-mxc-make-uapi-ipu.h-pxp_dma.h-compatible.patch"
 
 LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.12.y"
