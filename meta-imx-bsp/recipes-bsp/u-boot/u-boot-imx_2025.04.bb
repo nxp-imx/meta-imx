@@ -26,8 +26,9 @@ do_deploy:append:mx8m-generic-bsp() {
                 j=$(expr $j + 1);
                 if [ $j -eq $i ]
                 then
+                    builddir="${config}-${type}"
                     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-                    install -m 0644 ${B}/${config}/u-boot-nodtb.bin ${DEPLOYDIR}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${type}
+                    install -m 0644 ${B}/${builddir}/u-boot-nodtb.bin ${DEPLOYDIR}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${type}
                     UBOOT_DTB_NAME_FLAGS="${type}:${UBOOT_DTB_NAME}"
                     for key_value in ${UBOOT_DTB_NAME_FLAGS}; do
                         local type_key="${key_value%%:*}"
@@ -38,10 +39,10 @@ do_deploy:append:mx8m-generic-bsp() {
                             bbnote "UBOOT_CONFIG = $type, UBOOT_DTB_NAME = $dtb_name"
                             # There is only one ${dtb_name}, the first one. All the other are with the type appended
                             if [ ! -f "${DEPLOYDIR}/${BOOT_TOOLS}/${dtb_name}" ]; then
-                                if [ -f "${B}/${config}/dts/upstream/src/arm64/freescale/${dtb_name}" ];then
-                                    dtb_path="${B}/${config}/dts/upstream/src/arm64/freescale"
-                                elif [ -f "${B}/${config}/arch/arm/dts/${dtb_name}" ];then
-                                    dtb_path="${B}/${config}/arch/arm/dts/"
+                                if [ -f "${B}/${builddir}/dts/upstream/src/arm64/freescale/${dtb_name}" ];then
+                                    dtb_path="${B}/${builddir}/dts/upstream/src/arm64/freescale"
+                                elif [ -f "${B}/${builddir}/arch/arm/dts/${dtb_name}" ];then
+                                    dtb_path="${B}/${builddir}/arch/arm/dts/"
                                 else
                                      bbfatal "no such ${dtb_name}"
                                 fi
