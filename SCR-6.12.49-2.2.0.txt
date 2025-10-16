@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.30-7855570.bin
+Package:                     firmware-imx-8.30-3fa84fd.bin
 Version:                     8.30
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -288,8 +288,8 @@ Description and comments:
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.1.0-N/A.bin
-Version:                     1.1.0
+Package:                     nxp-wlan-apps-1.0.0-c82a870.bin
+Version:                     1.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -364,7 +364,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-optee-client.git
-Version:                     4.6.0.imx
+Version:                     4.8.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -377,7 +377,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-os.git
-Version:                     4.6.0.imx
+Version:                     4.8.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -391,7 +391,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-test.git
-Version:                     4.6.0.imx
+Version:                     4.8.0.imx
 Outgoing License:            BSD-2-Clause (ta/) and GPL-2.0 (host/) 
 License File:                LICENSE.md
 Package Category:            BSP
@@ -799,7 +799,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.2-2b33992.bin
+Package:                     mali-imx-r54p1.2-eb0f5f6.bin
 Version:                     r54p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1352,7 +1352,7 @@ Origin:                      NXP (Proprietary)
 --------------------------------------------
 
 Package:                     libcamera.git
-Version:                     0.5.1.imx
+Version:                     0.5.2.imx
 Outgoing License:            LGPL-2.1-or-later 
 License File:                LICENSES/LGPL-2.1-or-later.txt
 Package Category:            Multimedia
