@@ -18,7 +18,7 @@ DEPENDS = "\
 SRC_URI = "${PKCS11_PROVIDER_SRC};branch=${SRCBRANCH}"
 PKCS11_PROVIDER_SRC ?= "git://github.com/nxp-imx/${BPN}.git;branch=main;protocol=https"
 SRCBRANCH = "lf_1.0.y"
-SRCREV = "e8b3b82ab90046da31eb48e41169979c26593031"
+SRCREV = "e996068189c4403eafd546127814df4e810a427b"
 
 S = "${WORKDIR}/git"
 
