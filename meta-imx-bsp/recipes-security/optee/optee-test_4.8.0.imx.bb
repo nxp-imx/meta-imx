@@ -8,4 +8,4 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=a8fa504109e4cd7ea575bc49ea4be560 \
 
 
 SRCBRANCH = "lf_4.8.y"
-SRCREV = "eec89907d9e07f605b17cd908235a09aad165cf5"
+SRCREV = "dd7e84f4ab67e6be151172a0dabab1d70b3e6af9"
