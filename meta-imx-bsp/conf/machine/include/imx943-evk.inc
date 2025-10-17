@@ -98,15 +98,16 @@ IMAGE_BOOT_FILES:append:imx-nxp-bsp = " \
     mcore-demos/imx943evk_cm33_core1_TCM_all_reset_but_netc_switch.bin \
     mcore-demos/imx943evk_cm33_core1_TCM_hello_world.bin \
     mcore-demos/imx943evk_cm33_core1_TCM_netc_share.bin \
+    mcore-demos/imx943evk_cm33_core1_TCM_netc_switch_standalone.bin \
     mcore-demos/imx943evk_cm33_core1_TCM_power_mode_switch.bin \
     mcore-demos/imx943evk_cm33_core1_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin \
     mcore-demos/imx943evk_cm33_core1_TCM_rpmsg_lite_str_echo_rtos.bin \
-    mcore-demos/imx943evk_cm7_core1_TCM_all_reset_but_netc_trigger.bin \
     mcore-demos/imx943evk_cm7_core0_TCM_hello_world.bin \
     mcore-demos/imx943evk_cm7_core0_TCM_power_mode_switch.bin \
     mcore-demos/imx943evk_cm7_core0_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin \
     mcore-demos/imx943evk_cm7_core0_TCM_rpmsg_lite_str_echo_rtos.bin \
     mcore-demos/imx943evk_cm7_core0_TCM_sai_low_power_audio.bin \
+    mcore-demos/imx943evk_cm7_core1_TCM_all_reset_but_netc_trigger.bin \
     mcore-demos/imx943evk_cm7_core1_TCM_hello_world.bin \
     mcore-demos/imx943evk_cm7_core1_TCM_power_mode_switch.bin \
     mcore-demos/imx943evk_cm7_core1_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin \
