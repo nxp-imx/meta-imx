@@ -148,9 +148,14 @@ do_install:append() {
     # Ensure target dir exists
     install -d ${D}${bindir}/${BP}
 
-    # Copy squeezenet updated model from imx-onnxruntime repo
+    # Copy squeezenet updated model from onnxruntime-imx repo
     if [ -d ${S}/example-models/ ]; then
         cp $CP_ARGS ${S}/example-models/squeezenet ${D}${bindir}/${BP}/
+    fi
+
+    # Copy label_image_onnx.py tool from onnxruntime-imx repo
+    if [ -f ${S}/onnxruntime/core/providers/neutron/tools/label_image_onnx.py ]; then
+        cp ${S}/onnxruntime/core/providers/neutron/tools/label_image_onnx.py ${D}${bindir}/${BP}/
     fi
 
     # If cmake installs 'onnx_test_runner' at bindir level, move to package
