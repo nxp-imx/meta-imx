@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.4-06674ef.bin
+Package:                     firmware-ele-imx-2.0.4-6f4c7fb.bin
 Version:                     2.0.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -799,7 +799,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.2-eb0f5f6.bin
+Package:                     mali-imx-r54p1.2-02812b4.bin
 Version:                     r54p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1511,8 +1511,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx95-m7-demo-25.09.00.bin
-Version:                     25.09.00
+Package:                     imx95-m7-demo-25.12.00.bin
+Version:                     25.12.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
@@ -1529,8 +1529,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 M33 Processor Packages
 --------------------------------------------
 
-Package:                     imx8ulp-m33-demo-25.03.00.bin
-Version:                     25.03.00
+Package:                     imx8ulp-m33-demo-25.12.00.bin
+Version:                     25.12.00
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1545,8 +1545,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx93-m33-demo-25.06.00.bin
-Version:                     25.06.00
+Package:                     imx93-m33-demo-25.12.00.bin
+Version:                     25.12.00
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1562,8 +1562,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx943-mcore-demo-25.09.00.bin
-Version:                     25.09.00
+Package:                     imx943-mcore-demo-25.12.00.bin
+Version:                     25.12.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            MCore_Processor
