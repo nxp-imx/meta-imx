@@ -19,7 +19,7 @@ S = "${WORKDIR}/git"
 EXTRA_OECONF += " --with-cpal=bpf"
 
 # Use LS1043 platform for i.MX
-CFLAGS +=" -I${STAGING_INCDIR}/ -DIPSEC_SUPPORT_DISABLED -DLS1043"
+CFLAGS +=" -I${STAGING_INCDIR}/ -DIPSEC_SUPPORT_DISABLED"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/cmm
