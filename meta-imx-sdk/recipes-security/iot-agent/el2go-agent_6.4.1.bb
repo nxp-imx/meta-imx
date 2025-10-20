@@ -8,7 +8,7 @@ DEPENDS = "smw el2go-agent-mbedtls"
 
 SRC_URI = "${EL2GO_AGENT_SRC};branch=${SRCBRANCH}"
 EL2GO_AGENT_SRC ?= "git://github.com/NXP/el2go-agent;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "release/v6.12.49-2.2.0-yocto"
 SRCREV = "deccd425cce7a3493b6bc2caf900363f09804a2a"
 S = "${WORKDIR}/git"
 
