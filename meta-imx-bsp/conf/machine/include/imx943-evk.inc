@@ -40,28 +40,30 @@ UBOOT_CONFIG[xspi]   = "${UBOOT_CONFIG_BASENAME}_xspi_defconfig"
 ATF_PLATFORM = "imx94"
 OEI_CORE = "m33"
 
-IMXBOOT_VARIANTS = "alt jailhouse rpmsg netc netc_reset"
+IMXBOOT_VARIANTS = "alt jailhouse rpmsg netc netc_reset netc_standalone"
 # imx943 netc have different mcore demo for different bootloader
-#| |Standard | netc | netc_reset |
-#|--|--|--|--|
-#| M33S | imx943evk_cm33_core1_TCM_power_mode_switch.bin | imx943evk_cm33_core1_TCM_netc_share.bin | imx943evk_cm33_core1_TCM_all_reset_but_netc_switch.bin |
-#| M70 | imx943evk_cm7_core0_TCM_power_mode_switch.bin | imx943evk_cm7_core0_TCM_power_mode_switch.bin | imx943evk_cm7_core0_TCM_power_mode_switch.bin |
-#| M71 | imx943evk_cm7_core1_TCM_power_mode_switch.bin | imx943evk_cm7_core1_TCM_power_mode_switch.bin | imx943evk_cm7_core1_TCM_all_reset_but_netc_trigger.bin |
+#| |Standard | netc | netc_reset | netc_standalone
+#|--|--|--|--|--|
+#| M33S | imx943evk_cm33_core1_TCM_power_mode_switch.bin | imx943evk_cm33_core1_TCM_netc_share.bin | imx943evk_cm33_core1_TCM_all_reset_but_netc_switch.bin | imx943evk_cm33_core1_TCM_netc_switch_standalone.bin |
+#| M70 | imx943evk_cm7_core0_TCM_power_mode_switch.bin | imx943evk_cm7_core0_TCM_power_mode_switch.bin | imx943evk_cm7_core0_TCM_power_mode_switch.bin | imx943evk_cm7_core0_TCM_power_mode_switch.bin |
+#| M71 | imx943evk_cm7_core1_TCM_power_mode_switch.bin | imx943evk_cm7_core1_TCM_power_mode_switch.bin | imx943evk_cm7_core1_TCM_all_reset_but_netc_trigger.bin | imx943evk_cm7_core1_TCM_power_mode_switch.bin |
 
-M33_IMAGE = "${@bb.utils.contains('IMXBOOT_VARIANT', 'netc',       'imx943evk_cm33_core1_TCM_netc_share.bin', \
-                bb.utils.contains('IMXBOOT_VARIANT', 'netc_reset', 'imx943evk_cm33_core1_TCM_all_reset_but_netc_switch.bin', \
-                                                                   'imx943evk_cm33_core1_TCM_power_mode_switch.bin', d), d)}"
+M33_IMAGE = "${@bb.utils.contains('IMXBOOT_VARIANT', 'netc',            'imx943evk_cm33_core1_TCM_netc_share.bin', \
+                bb.utils.contains('IMXBOOT_VARIANT', 'netc_reset',      'imx943evk_cm33_core1_TCM_all_reset_but_netc_switch.bin', \
+                bb.utils.contains('IMXBOOT_VARIANT', 'netc_standalone', 'imx943evk_cm33_core1_TCM_netc_switch_standalone.bin', \
+                                                                        'imx943evk_cm33_core1_TCM_power_mode_switch.bin', d), d), d)}"
 M70_IMAGE = "imx943evk_cm7_core0_TCM_power_mode_switch.bin"
 M71_IMAGE = "${@bb.utils.contains('IMXBOOT_VARIANT', 'netc_reset', 'imx943evk_cm7_core1_TCM_all_reset_but_netc_trigger.bin', \
                                                                    'imx943evk_cm7_core1_TCM_power_mode_switch.bin', d)}"
 
 # Multiple system manager configs by IMXBOOT_VARIANT
-SYSTEM_MANAGER_CONFIG = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       'mx94alt', \
-                           bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse',  'mx94evkjailhouse', \
-                           bb.utils.contains('IMXBOOT_VARIANT', 'netc',       'mx94evknetc', \
-                           bb.utils.contains('IMXBOOT_VARIANT', 'netc_reset', 'mx94evknetc', \
-                           bb.utils.contains('IMXBOOT_VARIANT', 'rpmsg',      'mx94evkrpmsg', \
-                                                                              'mx94evk', d), d), d), d), d) }"
+SYSTEM_MANAGER_CONFIG = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',            'mx94alt', \
+                           bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse',       'mx94evkjailhouse', \
+                           bb.utils.contains('IMXBOOT_VARIANT', 'netc',            'mx94evknetc', \
+                           bb.utils.contains('IMXBOOT_VARIANT', 'netc_standalone', 'mx94evknetc', \
+                           bb.utils.contains('IMXBOOT_VARIANT', 'netc_reset',      'mx94evknetc', \
+                           bb.utils.contains('IMXBOOT_VARIANT', 'rpmsg',           'mx94evkrpmsg', \
+                                                                                   'mx94evk', d), d), d), d), d),d) }"
 
 MSEL_TYPE = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       '1', \
                                                                   '0', d)}"
@@ -71,12 +73,13 @@ SYSTEM_MANAGER_FIRMWARE_BASENAME = "m33_image"
 IMXBOOT_TARGETS_BASENAME = "flash"
 
 # imx-boot (flash.bin) targets based on UBOOT_CONFIG and IMXBOOT_VARIANT
-IMXBOOT_TARGETS_SD = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       '${IMXBOOT_TARGETS_BASENAME}_a55', \
-                         bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse', '${IMXBOOT_TARGETS_BASENAME}_jailhouse', \
-                         bb.utils.contains('IMXBOOT_VARIANT', 'netc',      '${IMXBOOT_TARGETS_BASENAME}_all', \
-                         bb.utils.contains('IMXBOOT_VARIANT', 'netc_reset','${IMXBOOT_TARGETS_BASENAME}_all', \
-                         bb.utils.contains('IMXBOOT_VARIANT', 'rpmsg',     '${IMXBOOT_TARGETS_BASENAME}_a55', \
-                                                                           '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d), d), d), d), d)} \
+IMXBOOT_TARGETS_SD = "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',             '${IMXBOOT_TARGETS_BASENAME}_a55', \
+                         bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse',       '${IMXBOOT_TARGETS_BASENAME}_jailhouse', \
+                         bb.utils.contains('IMXBOOT_VARIANT', 'netc',            '${IMXBOOT_TARGETS_BASENAME}_all', \
+                         bb.utils.contains('IMXBOOT_VARIANT', 'netc_standalone', '${IMXBOOT_TARGETS_BASENAME}_all', \
+                         bb.utils.contains('IMXBOOT_VARIANT', 'netc_reset',      '${IMXBOOT_TARGETS_BASENAME}_all', \
+                         bb.utils.contains('IMXBOOT_VARIANT', 'rpmsg',           '${IMXBOOT_TARGETS_BASENAME}_a55', \
+                                                                                 '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d), d), d), d), d), d)} \
 "
 
 IMXBOOT_TARGETS = " \
