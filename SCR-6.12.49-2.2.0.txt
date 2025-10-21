@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.4-6f4c7fb.bin
+Package:                     firmware-ele-imx-2.0.4-39dba42.bin
 Version:                     2.0.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -761,7 +761,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.2-aarch32-e633a88.bin
+Package:                     imx-gpu-viv-6.4.11.p4.2-aarch32-91d6045.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -780,7 +780,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.2-aarch64-e633a88.bin
+Package:                     imx-gpu-viv-6.4.11.p4.2-aarch64-91d6045.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -799,7 +799,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.2-02812b4.bin
+Package:                     mali-imx-r54p1.2-bec698a.bin
 Version:                     r54p1.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -933,7 +933,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.2-arm-e633a88.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.2-arm-91d6045.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -945,7 +945,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.2-aarch64-e633a88.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.2-aarch64-91d6045.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1366,7 +1366,7 @@ Origin:                      NXP (LGPL-2.1-or-later)
 --------------------------------------------
 
 Package:                     neo-ipa-uguzzi.git
-Version:                     0.2.3
+Version:                     0.2.5
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSES/LA_OPT_NXP_Software_License.txt
 Package Category:            Multimedia
@@ -1545,8 +1545,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx93-m33-demo-25.06.00.bin
-Version:                     25.06.00
+Package:                     imx93-m33-demo-25.12.00.bin
+Version:                     25.12.00
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1813,7 +1813,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.120
+Version:                     1.1.121
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
