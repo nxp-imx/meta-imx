@@ -83,3 +83,32 @@ CHROMIUM_EXTRA_ARGS:append = " \
     --disable-gpu-rasterization \
     ${CHROMIUM_EXTRA_ARGS_ENABLE_ANGLE} \
 "
+do_copy_clang_library() {
+    cp -r "${STAGING_LIBDIR_NATIVE}/clang/latest" "${STAGING_DIR_HOST}${nonarch_libdir}/clang/"
+    cd "${STAGING_DIR_HOST}${nonarch_libdir}/clang" || return
+
+    lib_files=$(find . \( -name "libclang_rt.builtins-*" -o -name "liborc_rt-*" \))
+    export ARCH="${TARGET_ARCH}"
+
+    target_dir="latest/lib/${ARCH}-unknown-linux-gnu"
+    mkdir -p "$target_dir"
+
+    for lib_file in $lib_files; do
+        # Avoid copying if source and destination are the same
+        dest_path="$target_dir/$(basename "$lib_file")"
+        if [ "$(realpath "$lib_file")" != "$(realpath "$dest_path")" ]; then
+            cp "$lib_file" "$target_dir/"
+        fi
+    done
+
+    cd "$target_dir" || return
+
+    for file in *-"${ARCH}".a; do
+        new_name=$(echo "$file" | sed "s/-${ARCH}//")
+        mv "$file" "$new_name"
+    done
+
+    native_arch_path="${STAGING_LIBDIR_NATIVE}/clang/latest/lib/${ARCH}-unknown-linux-gnu/"
+    mkdir -p "$native_arch_path"
+    cp -r * "$native_arch_path"
+}
