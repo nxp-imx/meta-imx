@@ -11,7 +11,6 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0008-Fix-build-fail-after-clang-llvm-upgrade.patch \
     file://0009-Fix-chromium-crash-when-run-webgl-2.0.0-cts.patch \
     file://0010-Fix-canvas-test-fail-for-webgl.patch \
-    file://0011-LF-12406-1-Blacklist-disable-program_caching_for_tra.patch \
 "
 VDA_PATCH_SET = " \
     file://0101-V4L2VideoDecoder-Add-macro-use_linux_v4l2.patch \

@@ -13,32 +13,25 @@ Upstream-Status: Pending
 
 Change-Id: I7e562f29fb3039fe3c0e1ee36c04e7d8e8c10b37
 Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
----
- gpu/config/gpu_driver_bug_list.json | 11 +++++++++++
- 1 file changed, 11 insertions(+)
 
-diff --git a/gpu/config/gpu_driver_bug_list.json b/gpu/config/gpu_driver_bug_list.json
-index 51da7b954332c..147cbc72c74c0 100644
---- a/gpu/config/gpu_driver_bug_list.json
-+++ b/gpu/config/gpu_driver_bug_list.json
-@@ -3455,6 +3455,17 @@
+diff -Naur chromium-140.0.7339.136_org/gpu/config/gpu_driver_bug_list.json chromium-140.0.7339.136/gpu/config/gpu_driver_bug_list.json
+--- chromium-140.0.7339.136_org/gpu/config/gpu_driver_bug_list.json	2025-10-21 14:10:19.064204129 -0500
++++ chromium-140.0.7339.136/gpu/config/gpu_driver_bug_list.json	2025-10-21 14:22:20.000000000 -0500
+@@ -3681,6 +3681,17 @@
        "features": [
-         "force_rgb10a2_overlay_support"
+         "disable_d3d12_h264_encoding"
        ]
-+    },
-+    {
-+      "id": 443,
-+      "description": "On Vivante GPUs MSAA performance is not acceptable for GPU rasterization",
-+      "os": {
-+        "type": "linux"
-+      },
-+      "gl_vendor": "Vivante Corporation",
-+      "features": [
-+        "msaa_is_slow"
-+      ]
++     },
++     {
++       "id": 458,
++       "description": "On Vivante GPUs MSAA performance is not acceptable for GPU rasterization",
++       "os": {
++         "type": "linux"
++       },
++       "gl_vendor": "Vivante Corporation",
++       "features": [
++         "msaa_is_slow"
++       ]
      }
    ]
  }
--- 
-2.34.1
-

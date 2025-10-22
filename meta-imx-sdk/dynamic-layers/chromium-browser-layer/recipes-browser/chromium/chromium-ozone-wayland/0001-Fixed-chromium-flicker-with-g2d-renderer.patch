@@ -15,20 +15,17 @@ Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
  ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc b/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
-index acb4a60ba01ea..e93533cecaeb7 100644
---- a/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
-+++ b/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
-@@ -208,8 +208,7 @@ void GbmSurfacelessWayland::Present(SwapCompletionCallback completion_callback,
+Index: chromium-140.0.7339.136/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
+===================================================================
+--- chromium-140.0.7339.136.orig/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
++++ chromium-140.0.7339.136/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
+@@ -202,8 +202,7 @@ void GbmSurfacelessWayland::Present(Swap
    unsubmitted_frames_.back()->configs.reserve(frame->configs.size());
-   // If Wayland server supports linux_explicit_synchronization_protocol, fences
-   // should be shipped with buffers. Otherwise, we will wait for fences.
+   // If Wayland server supports acquire_fences, they should be shipped with
+   // buffers. Otherwise, we will wait for fences.
 -  if (buffer_manager_->supports_acquire_fence() || !use_egl_fence_sync_ ||
 -      !frame->schedule_planes_succeeded) {
 +  if (!use_egl_fence_sync_ || !frame->schedule_planes_succeeded) {
      frame->ready = true;
      MaybeSubmitFrames();
      return;
--- 
-2.34.1
-

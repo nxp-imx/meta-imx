@@ -10,18 +10,11 @@ Upstream-Status: Inappropriate [i.MX-specific]
 
 Signed-off-by: Xianzhong Li <xianzhong.li@nxp.com
 Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
----
- ui/gfx/linux/gbm_device.h                              |  2 ++
- ui/gfx/linux/gbm_wrapper.cc                            |  2 ++
- .../platform/wayland/gpu/wayland_buffer_manager_gpu.cc |  2 --
- .../platform/wayland/gpu/wayland_surface_factory.cc    | 10 ++++++++++
- 4 files changed, 14 insertions(+), 2 deletions(-)
 
-diff --git a/ui/gfx/linux/gbm_device.h b/ui/gfx/linux/gbm_device.h
-index 8fd34e8c7d434..fa5e6a58544bc 100644
---- a/ui/gfx/linux/gbm_device.h
-+++ b/ui/gfx/linux/gbm_device.h
-@@ -34,6 +34,8 @@ class GbmDevice {
+diff -Naur chromium-140.0.7339.136_org/ui/gfx/linux/gbm_device.h chromium-140.0.7339.136/ui/gfx/linux/gbm_device.h
+--- chromium-140.0.7339.136_org/ui/gfx/linux/gbm_device.h	2025-10-21 13:36:08.294726727 -0500
++++ chromium-140.0.7339.136/ui/gfx/linux/gbm_device.h	2025-10-21 13:40:03.000000000 -0500
+@@ -35,6 +35,8 @@
        gfx::NativePixmapHandle handle) = 0;
  
    virtual bool CanCreateBufferForFormat(uint32_t format) = 0;
@@ -30,24 +23,22 @@ index 8fd34e8c7d434..fa5e6a58544bc 100644
  };
  
  }  // namespace ui
-diff --git a/ui/gfx/linux/gbm_wrapper.cc b/ui/gfx/linux/gbm_wrapper.cc
-index 7a1ae26444f36..415640e5825e3 100644
---- a/ui/gfx/linux/gbm_wrapper.cc
-+++ b/ui/gfx/linux/gbm_wrapper.cc
-@@ -467,6 +467,8 @@ class Device final : public ui::GbmDevice {
+diff -Naur chromium-140.0.7339.136_org/ui/gfx/linux/gbm_wrapper.cc chromium-140.0.7339.136/ui/gfx/linux/gbm_wrapper.cc
+--- chromium-140.0.7339.136_org/ui/gfx/linux/gbm_wrapper.cc	2025-10-21 13:36:08.294726727 -0500
++++ chromium-140.0.7339.136/ui/gfx/linux/gbm_wrapper.cc	2025-10-21 13:44:10.000000000 -0500
+@@ -462,6 +462,8 @@
    }
  #endif
  
-+  gbm_device* get() {return device_.get();}
++gbm_device* get() {return device_.get();}
 +
   private:
    std::vector<uint64_t> GetFilteredModifiers(
        uint32_t format,
-diff --git a/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc b/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
-index 4e725c5814969..0258548fd80b2 100644
---- a/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
-+++ b/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
-@@ -363,8 +363,6 @@ GbmDevice* WaylandBufferManagerGpu::GetGbmDevice() {
+diff -Naur chromium-140.0.7339.136_org/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc chromium-140.0.7339.136/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
+--- chromium-140.0.7339.136_org/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc	2025-10-21 13:36:08.357727100 -0500
++++ chromium-140.0.7339.136/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc	2025-10-21 13:46:16.000000000 -0500
+@@ -321,8 +321,6 @@
    if (!supports_dmabuf_ || (!gl::GLSurfaceEGL::GetGLDisplayEGL()
                                   ->ext->b_EGL_EXT_image_dma_buf_import &&
                              !use_fake_gbm_device_for_test_)) {
@@ -55,28 +46,24 @@ index 4e725c5814969..0258548fd80b2 100644
 -    return nullptr;
    }
  
-   if (gbm_device_ || use_fake_gbm_device_for_test_)
-diff --git a/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc b/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
-index bab048c4afac1..d9fe372879061 100644
---- a/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
-+++ b/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
-@@ -172,6 +172,16 @@ scoped_refptr<gl::GLSurface> GLOzoneEGLWayland::CreateOffscreenGLSurface(
+   MaybeCreateGbmDevice();
+diff -Naur chromium-140.0.7339.136_org/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc chromium-140.0.7339.136/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
+--- chromium-140.0.7339.136_org/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc	2025-10-21 13:36:08.358727106 -0500
++++ chromium-140.0.7339.136/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc	2025-10-21 13:48:50.000000000 -0500
+@@ -173,6 +173,16 @@
  }
  
  gl::EGLDisplayPlatform GLOzoneEGLWayland::GetNativeDisplay() {
-+#if defined(WAYLAND_GBM)
-+  GbmDevice* const device = buffer_manager_->GetGbmDevice();
-+  if (device != nullptr) {
-+    gbm_device* gbm = device->get();
-+    if (gbm) {
-+      return gl::EGLDisplayPlatform(
-+          reinterpret_cast<EGLNativeDisplayType>(gbm), EGL_PLATFORM_GBM_KHR);
++  #if defined(WAYLAND_GBM)
++    GbmDevice* const device = buffer_manager_->GetGbmDevice();
++    if (device != nullptr) {
++      gbm_device* gbm = device->get();
++      if (gbm) {
++        return gl::EGLDisplayPlatform(
++            reinterpret_cast<EGLNativeDisplayType>(gbm), EGL_PLATFORM_GBM_KHR);
++      }
 +    }
-+  }
-+#endif
++  #endif
    if (connection_) {
      return connection_->GetNativeDisplay();
    }
--- 
-2.34.1
-
