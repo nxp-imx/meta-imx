@@ -7,12 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
 
 DEPENDS = "zlib libpng procps python3-native"
 
-SRC_URI = "${APITRACE_SRC};branch=${SRCBRANCH} \
-           file://0001-thirdparty-libbacktrace.cmake-Update-cmake_minimum_r.patch \
-           file://0001-apitrace-Add-apitrace-build-issues-related-to-GCC-15.patch"
+SRC_URI = "${APITRACE_SRC};branch=${SRCBRANCH}"
 APITRACE_SRC ?= "gitsm://github.com/nxp-imx/apitrace-imx.git;protocol=https"
-SRCBRANCH = "imx_12.0"
-SRCREV = "4d4f66baea618fb743c91aac149f44f9965d3b3b"
+SRCBRANCH = "imx_13.0"
+SRCREV = "ce1339a9d114285647d9ea915613fe66740dc42b"
 
 inherit cmake pkgconfig
 
