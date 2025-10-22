@@ -818,7 +818,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     mesa-rvgpu-emu-2.0.1-0c818f4.bin
+Package:                     mesa-rvgpu-emu-2.0.1-d009dd3.bin
 Version:                     2.0.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
@@ -1663,7 +1663,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     neutron.git
-Version:                     1.0.0
+Version:                     2.2.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1813,7 +1813,7 @@ Origin:                      NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     bcu.git
-Version:                     1.1.121
+Version:                     1.1.123
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
