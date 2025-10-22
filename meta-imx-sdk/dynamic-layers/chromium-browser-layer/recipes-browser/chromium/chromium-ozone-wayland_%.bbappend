@@ -36,8 +36,8 @@ VDA_PATCH_SET = " \
     file://0121-V4L2VideoDecoder-Add-back-HEVC-code-for-stateful-vid.patch \
     file://0122-V4L2VideoDecoder-Disable-decoder-prioritization-acco.patch \
 "
-SRC_URI:append:mx8-nxp-bsp = " ${VDA_PATCH_SET}"
-SRC_URI:append:mx95-nxp-bsp = " ${VDA_PATCH_SET}"
+#SRC_URI:append:mx8-nxp-bsp = " ${VDA_PATCH_SET}"
+#SRC_URI:append:mx95-nxp-bsp = " ${VDA_PATCH_SET}"
 
 DEPENDS:append:imxgpu2d = " virtual/libg2d"
 
