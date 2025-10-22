@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7b12b6702da38ca028ace54aae3d484 \
 SRC_URI = "${WAYLAND_PROTOCOLS_SRC};branch=${SRCBRANCH}"
 WAYLAND_PROTOCOLS_SRC ?= "git://github.com/nxp-imx/wayland-protocols-imx.git;protocol=https"
 SRCBRANCH = "wayland-protocols-imx-1.45"
-SRCREV = "6a9cd17c22cd58883ac38c27622a72173ca209c9"
+SRCREV = "f8749c37b38d8283be395a763857ca1599672029"
 
 UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/wayland/wayland-protocols/-/tags"
 UPSTREAM_CHECK_REGEX = "releases/(?P<pver>.+)"
