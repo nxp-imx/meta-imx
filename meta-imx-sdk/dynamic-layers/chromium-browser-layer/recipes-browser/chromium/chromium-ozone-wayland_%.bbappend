@@ -39,6 +39,8 @@ VDA_PATCH_SET = " \
 SRC_URI:append:mx8-nxp-bsp = " ${VDA_PATCH_SET}"
 SRC_URI:append:mx95-nxp-bsp = " ${VDA_PATCH_SET}"
 
+DEPENDS:append:imxgpu2d = " virtual/libg2d"
+
 GN_ARGS_DISABLE_GBM             = ""
 GN_ARGS_DISABLE_GBM:mx6-nxp-bsp = "use_system_minigbm=false use_wayland_gbm=false"
 GN_ARGS_DISABLE_GBM:mx7-nxp-bsp = "${GN_ARGS_DISABLE_GBM:mx6-nxp-bsp}"
