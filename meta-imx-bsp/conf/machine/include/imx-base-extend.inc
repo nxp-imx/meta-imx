@@ -74,7 +74,7 @@ PREFERRED_VERSION_wayland-protocols:imx-nxp-bsp ??= "1.41.imx"
 
 PREFERRED_VERSION_xwayland:imx-nxp-bsp ??= ""
 
-PREFERRED_VERSION_libdrm:imx-nxp-bsp ??= "2.4.123.imx"
+PREFERRED_VERSION_libdrm:imx-nxp-bsp ??= "2.4.127.imx"
 
 PREFERRED_VERSION_gfxreconstruct:imxvulkan             ??= "1.3.275.0"
 PREFERRED_VERSION_vulkan-samples:imxvulkan             ??= "viv"
