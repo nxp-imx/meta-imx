@@ -1,0 +1,34 @@
+From 05cba38dff617ae4f8b3379569dce91581540148 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 7 Apr 2025 08:18:56 -0700
+Subject: [PATCH] framework: Include stdint.h (#1314)
+
+Needed for uint32_t used in this header
+GCC 15 gets upset about it.
+
+Upstream-Status: Backport [https://github.com/KhronosGroup/Vulkan-Samples/commit/05cba38dff617ae4f8b3379569dce91581540148]
+---
+ framework/platform/configuration.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/framework/platform/configuration.h b/framework/platform/configuration.h
+index f6a9cae2..6473b107 100644
+--- a/framework/platform/configuration.h
++++ b/framework/platform/configuration.h
+@@ -1,4 +1,4 @@
+-/* Copyright (c) 2019, Arm Limited and Contributors
++/* Copyright (c) 2019-2025, Arm Limited and Contributors
+  *
+  * SPDX-License-Identifier: Apache-2.0
+  *
+@@ -18,6 +18,7 @@
+ #pragma once
+ 
+ #include <algorithm>
++#include <cstdint>
+ #include <map>
+ #include <memory>
+ #include <string>
+-- 
+2.34.1
+
