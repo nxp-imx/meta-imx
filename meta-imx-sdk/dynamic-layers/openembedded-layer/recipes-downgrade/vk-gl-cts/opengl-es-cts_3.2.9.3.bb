@@ -15,9 +15,13 @@ SRCREV_video-parser = "7d68747d3524842afaf050c5e00a10f5b8c07904"
 SRC_URI[renderdoc.sha256sum] = "e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e"
 
 SRC_URI += "\
-        git://github.com/nvpro-samples/vk_video_samples.git;protocol=https;destsuffix=git/external/video-parser/src;name=video-parser;branch=main \
+        git://github.com/nvpro-samples/vk_video_samples.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/video-parser/src;name=video-parser;branch=main \
         file://gen-framework-path.patch \
+        file://0001-Fix-missing-include-cstdint-causing-build-failures.patch;patchdir=external/amber/src \
+        file://0001-SPIRV-SpvBuilder.h-Fix-missing-include-cstdint-causi.patch;patchdir=external/glslang/src \
         "
+
+EXTRA_OECMAKE += " -DCMAKE_POLICY_VERSION_MINIMUM=3.5"
 
 do_install() {
 	install -d ${D}/${CTSDIR}

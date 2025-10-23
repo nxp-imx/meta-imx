@@ -3,20 +3,18 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI = "\
 	git://github.com/KhronosGroup/VK-GL-CTS.git;protocol=https;name=vk-gl-cts;nobranch=1 \
-	git://github.com/google/amber;protocol=https;destsuffix=git/external/amber/src;name=amber;branch=main \
-	git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=git/external/glslang/src;name=glslang;branch=main \
-	git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=git/external/spirv-headers/src;name=spirv-headers;branch=main \
-	git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=git/external/spirv-tools/src;name=spirv-tools;branch=main \
-        git://github.com/open-source-parsers/jsoncpp.git;protocol=https;destsuffix=git/external/jsoncpp/src;name=jsoncpp;branch=master \
-        git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;destsuffix=git/external/vulkan-docs/src;name=vulkan-docs;branch=main \
-        https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=git/external/renderdoc/src;name=renderdoc \
-        git://github.com/Igalia/ESExtractor.git;protocol=https;destsuffix=git/external/ESExtractor/src;name=ESExtractor;branch=main \
-        git://github.com/Igalia/vk_video_samples.git;protocol=https;destsuffix=git/external/nvidia-video-samples/src;name=video-parser;nobranch=1 \
+	git://github.com/google/amber;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/amber/src;name=amber;branch=main \
+	git://github.com/KhronosGroup/glslang.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/glslang/src;name=glslang;branch=main \
+	git://github.com/KhronosGroup/SPIRV-Headers.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-headers/src;name=spirv-headers;branch=main \
+	git://github.com/KhronosGroup/SPIRV-Tools.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/spirv-tools/src;name=spirv-tools;branch=main \
+        git://github.com/open-source-parsers/jsoncpp.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/jsoncpp/src;name=jsoncpp;branch=master \
+        git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/vulkan-docs/src;name=vulkan-docs;branch=main \
+        https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=${BB_GIT_DEFAULT_DESTSUFFIX}/external/renderdoc/src;name=renderdoc \
+        git://github.com/Igalia/ESExtractor.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/ESExtractor/src;name=ESExtractor;branch=main \
+        git://github.com/Igalia/vk_video_samples.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/nvidia-video-samples/src;name=video-parser;nobranch=1 \
 "
 
-
 SRCREV_FORMAT = "vk-gl-cts_amber_glslang_spirv-headers_spirv-tools_jsoncpp_vulkan-docs"
-
 
 inherit pkgconfig cmake features_check python3native qemu
 

@@ -1,0 +1,28 @@
+From fa511c5c4e35e856bf35bb29fcb8ffdb17866092 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Thu, 23 Oct 2025 12:11:42 -0500
+Subject: [PATCH] SPIRV/SpvBuilder.h: Fix missing #include <cstdint> causing
+ build failures
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ SPIRV/SpvBuilder.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/SPIRV/SpvBuilder.h b/SPIRV/SpvBuilder.h
+index f7fdc6ad8..fd57f7571 100644
+--- a/SPIRV/SpvBuilder.h
++++ b/SPIRV/SpvBuilder.h
+@@ -50,6 +50,7 @@
+ #include "Logger.h"
+ #include "spirv.hpp"
+ #include "spvIR.h"
++#include <cstdint>
+ namespace spv {
+     #include "GLSL.ext.KHR.h"
+     #include "NonSemanticShaderDebugInfo100.h"
+-- 
+2.34.1
+
