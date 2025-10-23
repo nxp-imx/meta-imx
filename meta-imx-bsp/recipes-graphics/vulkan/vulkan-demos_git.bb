@@ -28,7 +28,9 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland',
 PACKAGECONFIG[wayland] = "-DUSE_WAYLAND_WSI=ON,-DUSE_WAYLAND_WSI=OFF,wayland-native wayland wayland-protocols"
 PACKAGECONFIG[xcb] = ",,libxcb"
 
-EXTRA_OECMAKE = "-DRESOURCE_INSTALL_DIR=${datadir}/vulkan-demos"
+EXTRA_OECMAKE = "-DRESOURCE_INSTALL_DIR=${datadir}/vulkan-demos \
+                 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+                "
 
 do_install:append () {
     mv ${D}${bindir}/screenshot ${D}${bindir}/vulkan-screenshot
