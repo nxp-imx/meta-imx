@@ -8,3 +8,5 @@ SRC_URI += "file://Fix-gcc-13.patch"
 SRCREV_FORMAT = "main_glfw"
 SRCREV_main = "8b945bebf8b2fd987dcf0eeca048068adf4ea44d"
 SRCREV_glfw = "8f470597d625ae28758c16b4293dd42d63e8a83a"
+
+EXTRA_OECMAKE += "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
