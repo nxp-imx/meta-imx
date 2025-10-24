@@ -818,8 +818,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     mesa-rvgpu-emu-2.0.1-d009dd3.bin
-Version:                     2.0.1
+Package:                     mesa-rvgpu-emu-2.0.0.1-d009dd3.bin
+Version:                     2.0.0.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
