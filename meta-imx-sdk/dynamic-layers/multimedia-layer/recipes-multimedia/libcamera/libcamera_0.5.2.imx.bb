@@ -103,6 +103,9 @@ PACKAGECONFIG = "gst pycamera dng"
 
 ARM_PIPELINES .= ",nxp/neo"
 
+# Qt installs native tools to /usr/libexec, but this is not in PATH
+PATH:prepend = "${@bb.utils.contains('DISTRO_FEATURES', 'qt', '${STAGING_LIBEXECDIR_NATIVE}:', '', d)}"
+
 COMPATIBLE_MACHINE = "(mx95-nxp-bsp|mx8mm-nxp-bsp|mx8ulp-nxp-bsp|mx8mq-nxp-bsp)"
 
 ########### End of i.MX overrides #########

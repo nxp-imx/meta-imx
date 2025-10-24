@@ -53,6 +53,9 @@ EXTRA_OEMESON = " \
 
 RDEPENDS:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
 
+# Qt installs native tools to /usr/libexec, but this is not in PATH
+PATH:prepend = "${@bb.utils.contains('DISTRO_FEATURES', 'qt', '${STAGING_LIBEXECDIR_NATIVE}:', '', d)}"
+
 inherit meson pkgconfig python3native
 
 do_configure:prepend() {
