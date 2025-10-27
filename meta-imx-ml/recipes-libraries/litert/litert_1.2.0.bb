@@ -66,6 +66,9 @@ do_install() {
     # remove the build host info to improve reproducibility
     sed -i "s#${WORKDIR}#/workdir#g" \
         ${D}/${PYTHON_SITEPACKAGES_DIR}/ai_edge_litert-${PV}.dist-info/direct_url.json
+
+    # Fixup ownership of files
+    chown -R root:root ${D}
 }
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"

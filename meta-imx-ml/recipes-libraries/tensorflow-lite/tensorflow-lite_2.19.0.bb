@@ -119,6 +119,9 @@ do_install() {
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -vvv --platform linux_${TARGET_ARCH} \
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
         ${B}/tflite_pip/dist/tflite_runtime-*.whl
+
+    # Fixup ownership of files
+    chown -R root:root ${D}
 }
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
