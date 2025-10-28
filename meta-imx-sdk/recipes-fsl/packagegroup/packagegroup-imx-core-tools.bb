@@ -1,4 +1,4 @@
-# Copyright 2018-2020,2022,2025 NXP
+# Copyright 2018-2020,2022 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Packagegroup to provide necessary tools for basic core image"
@@ -18,11 +18,6 @@ PIPEWIRE_V4L2 = "pipewire-v4l2"
 PIPEWIRE_V4L2:mx6-nxp-bsp = ""
 PIPEWIRE_V4L2:mx7-nxp-bsp = ""
 
-VPU_HANTRO_DAEMON ?= ""
-VPU_HANTRO_DAEMON:mx8mm-nxp-bsp = "imx-vpu-hantro-daemon"
-VPU_HANTRO_DAEMON:mx8mp-nxp-bsp = "imx-vpu-hantro-daemon"
-VPU_HANTRO_DAEMON:mx8mq-nxp-bsp = "imx-vpu-hantro-daemon"
-
 RDEPENDS:${PN} = " \
     can-utils \
     coreutils \
@@ -34,7 +29,6 @@ RDEPENDS:${PN} = " \
     e2fsprogs-resize2fs \
     fbset \
     fsl-rc-local \
-    ${VPU_HANTRO_DAEMON} \
     iproute2 iproute2-tc \
     iw \
     i2c-tools \
