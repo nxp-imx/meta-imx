@@ -252,12 +252,6 @@ SRC_URI += " \
     file://0106-Fix-Ninja-build-error-by-replacing-add_definitions-w.patch \
 "
 
-# Drop un-necessary patch for 4.12
-SRC_URI:remove = " \
-    file://0001-core-fixed-VSX-intrinsics-implementation.patch \
-    file://0001-FROMLIST-Switch-to-static-instance-of-FastCV-on-Linux.patch \
-"
-
 SRCREV_opencv = "49486f61fb25722cbcf586b7f4320921d46fb38e"
 SRCREV_contrib = "d943e1d61c8bc556a13783e1546ee7c1a9e0b1cf"
 
@@ -302,21 +296,9 @@ do_install:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'tests-imx', 'true', 'false', d)}; then
         cp -r share/opencv4/testdata/cv/face/* ${D}${datadir}/opencv4/testdata/cv/face/
     fi
-    rm -rf ${D}${bindir}/
-    install -d ${D}${bindir}/
-    cp -f bin/opencv_* ${D}${bindir}/
+    # Rename cpp folder to avoid collision with GCC /usr/bin/cpp.
+    mv ${D}${bindir}/cpp ${D}${bindir}/opencv_cpp
 }
-
-FILES:${PN}-apps = "${datadir}/opencv4 ${datadir}/licenses \
-                    ${bindir}/opencv_annotation \
-                    ${bindir}/opencv_interactive-calibration \
-                    ${bindir}/opencv_model_diagnostics \
-                    ${bindir}/opencv_version \
-                    ${bindir}/opencv_visualisation \
-                    ${bindir}/opencv_waldboost_detector \
-                    ${bindir}/opencv_perf* \
-                    ${bindir}/opencv_test* \
-"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
