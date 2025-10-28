@@ -1,4 +1,4 @@
-# Copyright 2017-2020,2023-2025 NXP
+# Copyright 2017-2020,2023-2024 NXP
 
 DESCRIPTION = "i.MX Hantro VPU library"
 LICENSE = "Proprietary"
@@ -32,6 +32,8 @@ do_install () {
 }
 
 FILES:${PN} += "/unit_tests"
+
+RDEPENDS:${PN} += "imx-vpu-hantro-daemon"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 COMPATIBLE_MACHINE = "(mx8mq-nxp-bsp|mx8mm-nxp-bsp|mx8mp-nxp-bsp)"
