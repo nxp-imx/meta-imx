@@ -38,11 +38,6 @@ WLAN_SDK_TOOLS = "nxp-wlan-apps"
 WLAN_SDK_TOOLS:mx6-nxp-bsp = ""
 WLAN_SDK_TOOLS:mx7-nxp-bsp = ""
 
-VPU_HANTRO_DAEMON ?= ""
-VPU_HANTRO_DAEMON:mx8mm-nxp-bsp = "imx-vpu-hantro-daemon"
-VPU_HANTRO_DAEMON:mx8mp-nxp-bsp = "imx-vpu-hantro-daemon"
-VPU_HANTRO_DAEMON:mx8mq-nxp-bsp = "imx-vpu-hantro-daemon"
-
 RDEPENDS:${PN} += " \
     bridge-utils \
     can-utils \
@@ -76,7 +71,6 @@ RDEPENDS:${PN} += " \
     tmux \
     udev-extraconf \
     vlan \
-    ${VPU_HANTRO_DAEMON} \
     ${WLAN_SDK_TOOLS} \
     zstd \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'tk', '', d)} \
