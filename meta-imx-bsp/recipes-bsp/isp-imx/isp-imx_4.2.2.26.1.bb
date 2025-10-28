@@ -5,15 +5,6 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 DEPENDS = "boost libdrm virtual/libg2d libtinyxml2 jsoncpp patchelf-native"
 
-ISP_CMAKE_PATCH = " \
-    file://0003-appshell-cmake-drop-deprecated-use-of-target_link_li.patch \
-    file://0004-units-targets.cmake-fix-check-if-a-target-exists.patch \
-    file://0005-units-cmake-fix-use-of-add_dependencies.patch \
-"
-SRC_URI:append = " \
-    ${ISP_CMAKE_PATCH} \
-"
-
 SRC_URI[sha256sum] = "9bd15b3f8c53f176647c0f8f510df58336481eef1785e1733529704ae58ffcc1"
 
 IMX_SRCREV_ABBREV = "9437c65"
