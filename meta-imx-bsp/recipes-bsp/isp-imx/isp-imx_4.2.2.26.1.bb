@@ -14,9 +14,9 @@ SRC_URI:append = " \
     ${ISP_CMAKE_PATCH} \
 "
 
-SRC_URI[sha256sum] = "f8bf735dff86439841f571f66cc8a94ae9cd75e028416aa0a5bc9a79d457047f"
+SRC_URI[sha256sum] = "9bd15b3f8c53f176647c0f8f510df58336481eef1785e1733529704ae58ffcc1"
 
-IMX_SRCREV_ABBREV = "acc2fb2"
+IMX_SRCREV_ABBREV = "9437c65"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent cmake systemd use-imx-headers
 
