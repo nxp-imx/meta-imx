@@ -1,6 +1,0 @@
- Name: tensorflow lite
- Description: tensorflow lite static library
- Version: @version@
- Requires:
- Libs: -L@libdir@ -ltensorflow-lite -lrt
- Cflags: -I@includedir@
