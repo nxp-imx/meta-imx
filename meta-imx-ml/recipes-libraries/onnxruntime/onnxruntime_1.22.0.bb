@@ -154,9 +154,7 @@ do_install:append() {
     fi
 
     # Copy label_image_onnx.py tool from onnxruntime-imx repo
-    if [ -f ${S}/onnxruntime/core/providers/neutron/tools/label_image_onnx.py ]; then
-        cp ${S}/onnxruntime/core/providers/neutron/tools/label_image_onnx.py ${D}${bindir}/${BP}/
-    fi
+    cp ${S}/onnxruntime/core/providers/neutron/tools/label_image_onnx.py ${D}${bindir}/${BP}/
 
     # If cmake installs 'onnx_test_runner' at bindir level, move to package
     if [ -f ${D}${bindir}/onnx_test_runner ]; then
