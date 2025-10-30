@@ -33,3 +33,10 @@ GIR_MESON_DISABLE_FLAG = "disabled"
 require recipes-multimedia/gstreamer/gstreamer1.0-plugins-packaging.inc
 
 CVE_PRODUCT += "gst-rtsp-server"
+
+########### i.MX overrides ################
+
+EXTRA_OEMESON:append:mx93-nxp-bsp = " -Dintrospection=disabled "
+EXTRA_OEMESON:append:mx943-nxp-bsp = " -Dintrospection=disabled "
+
+########### End of i.MX overrides #########

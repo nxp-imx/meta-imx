@@ -50,3 +50,10 @@ do_install:append () {
 
 GIR_MESON_ENABLE_FLAG = "enabled"
 GIR_MESON_DISABLE_FLAG = "disabled"
+
+########### i.MX overrides ################
+
+EXTRA_OEMESON:append:mx93-nxp-bsp = " -Dintrospection=disabled "
+EXTRA_OEMESON:append:mx943-nxp-bsp = " -Dintrospection=disabled "
+
+########### End of i.MX overrides #########
