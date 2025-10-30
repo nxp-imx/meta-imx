@@ -286,6 +286,9 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    
 Release Location:            Mirror
+Origin:                    NXP (BSD-3-Clause)
+                           https://w1.fi/cgit
+
 --------------------------------------------
 
 Package:                     nxp-wlan-apps-1.0.0-c82a870.bin
@@ -296,6 +299,8 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    nxp wlan sdk
 Release Location:            Mirror
+Origin:                    NXP (proprietary)
+
 --------------------------------------------
 
 Package:                     wpa-supplicant-2.11-aaa7ec2f
@@ -761,7 +766,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.2-aarch32-91d6045.bin
+Package:                     imx-gpu-viv-6.4.11.p4.2-aarch32-a3667ea.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -780,7 +785,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.2-aarch64-91d6045.bin
+Package:                     imx-gpu-viv-6.4.11.p4.2-aarch64-a3667ea.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -933,7 +938,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.2-arm-91d6045.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.2-arm-a3667ea.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -945,7 +950,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.2-aarch64-91d6045.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.2-aarch64-a3667ea.bin
 Version:                     6.4.11.p4.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
