@@ -526,7 +526,7 @@ Origin:                   NXP (BSD-3-clause)
 
 Package:                     pkcs11-provider.git
 Version:                     1.0.imx
-Outgoing License:            Apache-2 
+Outgoing License:            Apache-2.0 
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
@@ -1536,7 +1536,7 @@ M33 Processor Packages
 
 Package:                     imx8ulp-m33-demo-25.12.00.bin
 Version:                     25.12.00
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
@@ -1552,7 +1552,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx93-m33-demo-25.12.00.bin
 Version:                     25.12.00
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
 Type of Content:             binary
