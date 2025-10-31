@@ -1,7 +1,7 @@
-From 0e75d2bcfb3bc916b13c05b8a6665d1e1ab51864 Mon Sep 17 00:00:00 2001
+From 9763f56bb12ec0ae9445bb64f0f91ec40c6d5ee4 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:48:10 +0900
-Subject: [PATCH 06/20] V4L2VideoDecoder: Use correct plane size and bytesused
+Subject: [PATCH 06/22] V4L2VideoDecoder: Use correct plane size and bytesused
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -9,7 +9,7 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 16 insertions(+), 4 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index 1a3b31d8f351c..6ccf6464929ec 100644
+index 0398dd2be24a8..e0e4175ff40be 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
 @@ -861,7 +861,10 @@ size_t V4L2WritableBufferRef::GetPlaneSize(const size_t plane) const {

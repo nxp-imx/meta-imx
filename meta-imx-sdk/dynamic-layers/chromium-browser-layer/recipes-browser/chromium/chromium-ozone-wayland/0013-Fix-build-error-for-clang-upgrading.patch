@@ -1,0 +1,43 @@
+From 5090202e2f0198a03ff44161d7ef81ada1c5ab10 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Wed, 29 Oct 2025 17:29:00 +0800
+Subject: [PATCH 2/2] Fix build error for clang upgrading
+
+Backport the chromium fix
+https://chromium-review.googlesource.com/c/chromium/src/+/6633292
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Change-Id: Ie648ab2bfb6df46e5c75607f945120c2c8285b72
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ base/metrics/histogram_macros_internal.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/base/metrics/histogram_macros_internal.h b/base/metrics/histogram_macros_internal.h
+index 39b232bc1023b..daa5515c2ab35 100644
+--- a/base/metrics/histogram_macros_internal.h
++++ b/base/metrics/histogram_macros_internal.h
+@@ -28,16 +28,16 @@ namespace base::internal {
+ template <typename Enum>
+   requires(std::is_enum_v<Enum>)
+ struct EnumSizeTraits {
+-  static constexpr Enum Count() {
++  static constexpr uintmax_t Count() {
+     if constexpr (requires { Enum::kMaxValue; }) {
+       // Since the UMA histogram macros expect a value one larger than the max
+       // defined enumerator value, add one.
+-      return static_cast<Enum>(base::to_underlying(Enum::kMaxValue) + 1);
++      return static_cast<uintmax_t>(base::to_underlying(Enum::kMaxValue) + 1);
+     } else {
+       static_assert(
+           sizeof(Enum) == 0,
+           "enumerator must define kMaxValue enumerator to use this macro!");
+-      return Enum();
++      return 0;
+     }
+   }
+ };
+-- 
+2.34.1
+

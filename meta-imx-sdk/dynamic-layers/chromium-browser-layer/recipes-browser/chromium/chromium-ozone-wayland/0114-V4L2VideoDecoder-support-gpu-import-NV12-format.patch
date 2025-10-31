@@ -1,7 +1,7 @@
-From c4d35564925eef61949f80250405232254efe6f9 Mon Sep 17 00:00:00 2001
+From f70201173f74774948366c2448034a76d0e4d007 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Mon, 22 Sep 2025 15:56:54 +0900
-Subject: [PATCH 14/20] V4L2VideoDecoder: support gpu import NV12 format
+Subject: [PATCH 14/22] V4L2VideoDecoder: support gpu import NV12 format
 
 Upstream-Status: Inappropriate [NXP specific]
 ---

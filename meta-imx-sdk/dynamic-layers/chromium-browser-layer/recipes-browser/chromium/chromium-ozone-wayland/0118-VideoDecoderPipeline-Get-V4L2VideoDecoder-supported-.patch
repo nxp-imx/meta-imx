@@ -1,7 +1,7 @@
-From 36365301f761eae184bf259ac2b15cf88dda9980 Mon Sep 17 00:00:00 2001
+From 6fd63a4bc4d1285d2f000819a1957eb0d0c60313 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Thu, 19 Sep 2024 15:12:47 +0900
-Subject: [PATCH 18/20] VideoDecoderPipeline: Get V4L2VideoDecoder supported
+Subject: [PATCH 18/22] VideoDecoderPipeline: Get V4L2VideoDecoder supported
  configs
 
 Upstream-Status: Inappropriate [NXP specific]
@@ -10,10 +10,10 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/media/gpu/chromeos/video_decoder_pipeline.cc b/media/gpu/chromeos/video_decoder_pipeline.cc
-index e56f977afccd3..43ab222ddfccd 100644
+index ff8f1ccf04ca3..8ffc0a2780e81 100644
 --- a/media/gpu/chromeos/video_decoder_pipeline.cc
 +++ b/media/gpu/chromeos/video_decoder_pipeline.cc
-@@ -377,7 +377,7 @@ VideoDecoderPipeline::GetSupportedConfigs(
+@@ -376,7 +376,7 @@ VideoDecoderPipeline::GetSupportedConfigs(
        break;
  #elif BUILDFLAG(USE_V4L2_CODEC)
      case VideoDecoderType::kV4L2:

@@ -1,7 +1,7 @@
-From 42cd9da97d3bb9653b4c5bed25d98bb0531b57e0 Mon Sep 17 00:00:00 2001
+From 0fa707e1c15b9ebb27dc0b19a39f2e883fa0e2f5 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:39:10 +0900
-Subject: [PATCH 03/20] V4L2Buffer: Allocate correct v4l2 buffers for queues
+Subject: [PATCH 03/22] V4L2Buffer: Allocate correct v4l2 buffers for queues
 
 For single plane queue, need to fill v4l2_planes_[0] with
 correct size quried from v4l2 driver.
@@ -12,7 +12,7 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 27 insertions(+), 12 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index c165302b8da71..a237e06c2b449 100644
+index 19454e9a88048..f149dbb570de1 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
 @@ -245,24 +245,28 @@ V4L2Buffer::V4L2Buffer(const IoctlAsCallback& ioctl_cb,

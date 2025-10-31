@@ -1,7 +1,7 @@
-From 54aa186cd2f92bbb28cf9b2e1f86076eaf48dd58 Mon Sep 17 00:00:00 2001
+From 4c4e0fbf845ca65e6330b4a3c7aad8ff098b4236 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:57:00 +0900
-Subject: [PATCH 09/20] V4L2VideoDecoder: Comment some unused ioctl
+Subject: [PATCH 09/22] V4L2VideoDecoder: Comment some unused ioctl
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -9,7 +9,7 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 22 insertions(+)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index 6ccf6464929ec..fe4a1d32adc37 100644
+index e0e4175ff40be..a8f43c2671f8e 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
 @@ -1113,10 +1113,12 @@ V4L2Queue::V4L2Queue(base::PassKey<PassKey>,

@@ -1,0 +1,45 @@
+From 9ab331dea52a29512db38aa76bc2c172c67562cf Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Wed, 29 Oct 2025 17:19:49 +0800
+Subject: [PATCH 1/2] Fix build error for rust 1.90
+
+Backport these two patches
+https://chromium-review.googlesource.com/c/chromium/src/+/6624733
+https://chromium-review.googlesource.com/c/chromium/src/+/6875644
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Change-Id: I11e7cbf3832636322e70b30b3939ac0f2228da39
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ build/rust/allocator/lib.rs | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/build/rust/allocator/lib.rs b/build/rust/allocator/lib.rs
+index c49d424922435..a7fa7a470f000 100644
+--- a/build/rust/allocator/lib.rs
++++ b/build/rust/allocator/lib.rs
+@@ -86,11 +86,18 @@ mod both_allocators {
+     /// As part of rustc's contract for using `#[global_allocator]` without
+     /// rustc-generated shims we must define this symbol, since we are opting in
+     /// to unstable functionality. See https://github.com/rust-lang/rust/issues/123015
+-    #[no_mangle]
++    #[rustc_std_internal_symbol]
+     #[linkage = "weak"]
+-    static __rust_no_alloc_shim_is_unstable: u8 = 0;
++    fn __rust_no_alloc_shim_is_unstable_v2() {}
++
++    #[rustc_std_internal_symbol]
++    #[linkage = "weak"]
++    fn __rust_alloc_error_handler_should_panic_v2() -> u8 {
++        0
++    }
+ 
+     // Mangle the symbol name as rustc expects.
++    // TODO(crbug.com/440481922): Remove this after rolling past https://github.com/rust-lang/rust/pull/143387
+     #[rustc_std_internal_symbol]
+     #[allow(non_upper_case_globals)]
+     #[linkage = "weak"]
+-- 
+2.34.1
+

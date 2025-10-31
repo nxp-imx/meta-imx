@@ -1,7 +1,7 @@
-From fa55a7b2e5859468a1f050b7f8421e79271d11e9 Mon Sep 17 00:00:00 2001
+From 9f1baa31de6b163b2b605ed6b56b1332150175f4 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 23:23:56 +0900
-Subject: [PATCH 17/20] V4L2VideoDecoder: Fix amphion report size mismatch
+Subject: [PATCH 17/22] V4L2VideoDecoder: Fix amphion report size mismatch
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -9,10 +9,10 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index b3d1599844b5d..8e1293ab46f75 100644
+index 975ba8f5f4b06..e6c6c1e57eee7 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
-@@ -740,7 +740,8 @@ CroStatus V4L2VideoDecoder::SetupOutputFormat(const gfx::Size& size,
+@@ -732,7 +732,8 @@ CroStatus V4L2VideoDecoder::SetupOutputFormat(const gfx::Size& size,
        output_queue_->SetFormat(fourcc.ToV4L2PixFmt(), picked_size, 0);
    DCHECK(format);
    gfx::Size adjusted_size(format->fmt.pix_mp.width, format->fmt.pix_mp.height);

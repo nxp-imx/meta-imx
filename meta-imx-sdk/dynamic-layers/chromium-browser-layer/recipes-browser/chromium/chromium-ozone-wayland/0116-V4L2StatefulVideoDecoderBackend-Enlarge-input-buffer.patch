@@ -1,7 +1,7 @@
-From ea9e76371941052add0450ca0b07cafd869426ad Mon Sep 17 00:00:00 2001
+From 1c58cb8c761c9949348c4a9d6af19c6ac61699fb Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 23:22:56 +0900
-Subject: [PATCH 16/20] V4L2StatefulVideoDecoderBackend: Enlarge input buffer
+Subject: [PATCH 16/22] V4L2StatefulVideoDecoderBackend: Enlarge input buffer
  number to 16
 
 Upstream-Status: Inappropriate [NXP specific]

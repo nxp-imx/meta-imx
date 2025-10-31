@@ -1,7 +1,7 @@
-From 9d0353765eba21c3fb4148915152093bd269f8f3 Mon Sep 17 00:00:00 2001
+From 7d868c1067adbd960fd4eca820a322395bd9cc0d Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:43:15 +0900
-Subject: [PATCH 04/20] V4L2VideoDecoder: Create videoframe according to
+Subject: [PATCH 04/22] V4L2VideoDecoder: Create videoframe according to
  v4l2buffer
 
 Upstream-Status: Inappropriate [NXP specific]
@@ -11,7 +11,7 @@ Upstream-Status: Inappropriate [NXP specific]
  2 files changed, 48 insertions(+), 22 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index a237e06c2b449..13866efd23b00 100644
+index f149dbb570de1..1b0f9fb134b41 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
 @@ -342,7 +342,7 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
@@ -36,10 +36,10 @@ index a237e06c2b449..13866efd23b00 100644
    return NativePixmapFrameResource::Create(
        *layout, gfx::Rect(size), size, std::move(dmabuf_fds), base::TimeDelta());
 diff --git a/media/gpu/v4l2/v4l2_utils.cc b/media/gpu/v4l2/v4l2_utils.cc
-index 7d4c8eac803f3..ac303c1751715 100644
+index cb00d852e91fc..aa80766dc6a5e 100644
 --- a/media/gpu/v4l2/v4l2_utils.cc
 +++ b/media/gpu/v4l2/v4l2_utils.cc
-@@ -230,13 +230,9 @@ size_t GetNumPlanesOfV4L2PixFmt(uint32_t pix_fmt) {
+@@ -231,13 +231,9 @@ size_t GetNumPlanesOfV4L2PixFmt(uint32_t pix_fmt) {
  
  std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
      const struct v4l2_format& format) {
@@ -55,7 +55,7 @@ index 7d4c8eac803f3..ac303c1751715 100644
    const auto video_fourcc = Fourcc::FromV4L2PixFmt(pix_fmt);
    if (!video_fourcc) {
      VLOGF(1) << "Failed to convert pixel format to VideoPixelFormat: "
-@@ -244,7 +240,7 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -245,7 +241,7 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
      return std::nullopt;
    }
    const VideoPixelFormat video_format = video_fourcc->ToVideoPixelFormat();
@@ -64,7 +64,7 @@ index 7d4c8eac803f3..ac303c1751715 100644
    const size_t num_color_planes = VideoFrame::NumPlanes(video_format);
    if (num_color_planes == 0) {
      VLOGF(1) << "Unsupported video format for NumPlanes(): "
-@@ -262,9 +258,17 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -263,9 +259,17 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
    std::vector<ColorPlaneLayout> planes;
    planes.reserve(num_color_planes);
    for (size_t i = 0; i < num_buffers; ++i) {
@@ -85,7 +85,7 @@ index 7d4c8eac803f3..ac303c1751715 100644
    }
    // For the case that #color planes > #buffers, it fills stride of color
    // plane which does not map to buffer.
-@@ -278,8 +282,12 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -279,8 +283,12 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
        case V4L2_PIX_FMT_NV12:
          // The stride of UV is the same as Y in NV12.
          // The height is half of Y plane.
@@ -100,7 +100,7 @@ index 7d4c8eac803f3..ac303c1751715 100644
          DCHECK_EQ(2u, planes.size());
          break;
        case V4L2_PIX_FMT_YUV420:
-@@ -287,13 +295,18 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -288,13 +296,18 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
          // The spec claims that two Cx rows (including padding) is exactly as
          // long as one Y row (including padding). So stride of Y must be even
          // number.
@@ -121,7 +121,7 @@ index 7d4c8eac803f3..ac303c1751715 100644
          const size_t plane_1_area = plane_0_area / 4;
          planes.emplace_back(half_stride, plane_0_area, plane_1_area);
          planes.emplace_back(half_stride, plane_0_area + plane_1_area,
-@@ -312,13 +325,23 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -313,13 +326,23 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
    // such devices individually, so set this as a video frame layout property.
    constexpr size_t buffer_alignment = 0x1000;
    if (num_buffers == 1) {

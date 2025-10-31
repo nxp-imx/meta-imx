@@ -1,7 +1,7 @@
-From b1bba4699702fc96957bec62b4e23b7debe181fd Mon Sep 17 00:00:00 2001
+From 0c821f86b8851e96eb5c5ccf59328b5b313a47f6 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Mon, 22 Sep 2025 15:48:36 +0900
-Subject: [PATCH 07/20] V4L2VideoDecoder: Add hevc format support
+Subject: [PATCH 07/22] V4L2VideoDecoder: Add hevc format support
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -24,10 +24,10 @@ index 2ce29798709ef..c1a6d7120c4d4 100644
        return IsDecoderDolbyVisionProfileSupported(type);
      case VideoCodec::kUnknown:
 diff --git a/media/gpu/v4l2/v4l2_utils.cc b/media/gpu/v4l2/v4l2_utils.cc
-index ac303c1751715..bda084857a76d 100644
+index aa80766dc6a5e..61be297519a9e 100644
 --- a/media/gpu/v4l2/v4l2_utils.cc
 +++ b/media/gpu/v4l2/v4l2_utils.cc
-@@ -547,7 +547,7 @@ void GetSupportedResolution(const IoctlAsCallback& ioctl_cb,
+@@ -548,7 +548,7 @@ void GetSupportedResolution(const IoctlAsCallback& ioctl_cb,
                              uint32_t pixelformat,
                              gfx::Size* min_resolution,
                              gfx::Size* max_resolution) {
@@ -36,7 +36,7 @@ index ac303c1751715..bda084857a76d 100644
    *max_resolution = kDefaultMaxCodedSize;
    constexpr gfx::Size kDefaultMinCodedSize(16, 16);
    *min_resolution = kDefaultMinCodedSize;
-@@ -590,6 +590,8 @@ uint32_t VideoCodecProfileToV4L2PixFmt(VideoCodecProfile profile,
+@@ -591,6 +591,8 @@ uint32_t VideoCodecProfileToV4L2PixFmt(VideoCodecProfile profile,
      return V4L2_PIX_FMT_VP8;
    } else if (profile >= VP9PROFILE_MIN && profile <= VP9PROFILE_MAX) {
      return V4L2_PIX_FMT_VP9;
@@ -46,10 +46,10 @@ index ac303c1751715..bda084857a76d 100644
      return V4L2_PIX_FMT_HEVC;
    } else {
 diff --git a/media/media_options.gni b/media/media_options.gni
-index 34fe6f57e4ff7..a49f2bc29a41a 100644
+index ae57faa90b739..0bc2e824f650b 100644
 --- a/media/media_options.gni
 +++ b/media/media_options.gni
-@@ -147,7 +147,7 @@ declare_args() {
+@@ -146,7 +146,7 @@ declare_args() {
    # applies to video-capable devices.
    enable_platform_hevc =
        proprietary_codecs &&

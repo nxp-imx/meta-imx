@@ -1,7 +1,7 @@
-From 4247c21d47ecfcb7ee262fc385ff0c76346922e0 Mon Sep 17 00:00:00 2001
+From b54bbb6c43b973a2c4d7d4559888e0e79846a709 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:46:22 +0900
-Subject: [PATCH 05/20] V4L2VideoDecoder: Add function IsMultiQueue for S_FMT
+Subject: [PATCH 05/22] V4L2VideoDecoder: Add function IsMultiQueue for S_FMT
  and G_FMT
 
 Function IsMultiQueue() is used to set correct fotmat type for
@@ -15,7 +15,7 @@ Upstream-Status: Inappropriate [NXP specific]
  3 files changed, 31 insertions(+), 10 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index 13866efd23b00..1a3b31d8f351c 100644
+index 1b0f9fb134b41..0398dd2be24a8 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
 @@ -49,11 +49,18 @@ struct v4l2_format BuildV4L2Format(const enum v4l2_buf_type type,
@@ -88,10 +88,10 @@ index 08ab8af212315..2a18544afd4b3 100644
    [[nodiscard]] size_t AllocatedBuffersCount() const;
    // Returns the number of currently free buffers on this queue.
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index 10bbf4e1dcc90..b3d1599844b5d 100644
+index 7d16dfa2af818..975ba8f5f4b06 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
-@@ -612,7 +612,7 @@ bool V4L2VideoDecoder::SetupInputFormat() {
+@@ -604,7 +604,7 @@ bool V4L2VideoDecoder::SetupInputFormat() {
    // Check if the format is supported.
    const auto v4l2_codecs_as_pix_fmts = EnumerateSupportedPixFmts(
        base::BindRepeating(&V4L2Device::Ioctl, device_),
@@ -100,7 +100,7 @@ index 10bbf4e1dcc90..b3d1599844b5d 100644
    if (!base::Contains(v4l2_codecs_as_pix_fmts, input_format_fourcc_)) {
      DVLOGF(1) << FourccToString(input_format_fourcc_)
                << " not recognised, skipping...";
-@@ -681,7 +681,7 @@ CroStatus V4L2VideoDecoder::SetupOutputFormat(const gfx::Size& size,
+@@ -673,7 +673,7 @@ CroStatus V4L2VideoDecoder::SetupOutputFormat(const gfx::Size& size,
  
    const auto v4l2_pix_fmts = EnumerateSupportedPixFmts(
        base::BindRepeating(&V4L2Device::Ioctl, device_),

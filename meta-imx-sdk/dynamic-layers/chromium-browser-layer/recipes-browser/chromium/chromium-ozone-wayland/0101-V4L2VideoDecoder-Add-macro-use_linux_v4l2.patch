@@ -1,7 +1,7 @@
-From f0a5bd2da5efeba8d425e46e866668bae231d5f6 Mon Sep 17 00:00:00 2001
+From 03eecc3c676424f5858e6794b6a7c5d931f769e3 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Mon, 22 Sep 2025 12:35:24 +0900
-Subject: [PATCH 01/20] V4L2VideoDecoder: Add macro use_linux_v4l2
+Date: Fri, 24 Oct 2025 14:26:31 +0900
+Subject: [PATCH 01/22] V4L2VideoDecoder: Add macro use_linux_v4l2
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -28,7 +28,7 @@ index a3a6ae60a2cfc..9b6bfbc7f7992 100644
  #endif
  
 diff --git a/media/gpu/BUILD.gn b/media/gpu/BUILD.gn
-index de5d127c168fe..81d73f2068df5 100644
+index a244407c530b6..10c2124df463d 100644
 --- a/media/gpu/BUILD.gn
 +++ b/media/gpu/BUILD.gn
 @@ -21,6 +21,7 @@ buildflag_header("buildflags") {
@@ -36,11 +36,11 @@ index de5d127c168fe..81d73f2068df5 100644
      "USE_V4L2_CODEC=$use_v4l2_codec",
      "USE_LIBV4L2=$use_v4lplugin",
 +    "USE_LINUX_V4L2=$use_linux_v4l2_only",
+     "USE_LINUX_VIDEO_ACCELERATION=$use_linux_video_acceleration",
    ]
  }
- 
 diff --git a/media/gpu/args.gni b/media/gpu/args.gni
-index 0abd35896eec7..69a061d24dbff 100644
+index 7a64c3474b33b..dd4837a806727 100644
 --- a/media/gpu/args.gni
 +++ b/media/gpu/args.gni
 @@ -12,6 +12,10 @@ declare_args() {
@@ -55,7 +55,7 @@ index 0abd35896eec7..69a061d24dbff 100644
    # is typically the case on x86-based ChromeOS devices.
    # VA-API should also be compiled by default on x11/wayland linux devices
 diff --git a/media/gpu/v4l2/BUILD.gn b/media/gpu/v4l2/BUILD.gn
-index 43bcf03798836..630981b85a8a5 100644
+index f5dcc83ac4e03..a0736276471d9 100644
 --- a/media/gpu/v4l2/BUILD.gn
 +++ b/media/gpu/v4l2/BUILD.gn
 @@ -19,9 +19,6 @@ source_set("v4l2") {
@@ -96,10 +96,10 @@ index 43bcf03798836..630981b85a8a5 100644
    if (enable_hevc_parser_and_hw_decoder) {
      sources += [
 diff --git a/media/gpu/v4l2/v4l2_utils.cc b/media/gpu/v4l2/v4l2_utils.cc
-index c8b65c28f16d1..7d4c8eac803f3 100644
+index 4ae99deb0fade..cb00d852e91fc 100644
 --- a/media/gpu/v4l2/v4l2_utils.cc
 +++ b/media/gpu/v4l2/v4l2_utils.cc
-@@ -328,14 +328,22 @@ using v4l2_enum_type = decltype(V4L2_PIX_FMT_H264);
+@@ -329,14 +329,22 @@ using v4l2_enum_type = decltype(V4L2_PIX_FMT_H264);
  static const std::map<v4l2_enum_type, v4l2_enum_type>
      kV4L2CodecPixFmtToProfileCID = {
          {V4L2_PIX_FMT_H264, V4L2_CID_MPEG_VIDEO_H264_PROFILE},
@@ -122,7 +122,7 @@ index c8b65c28f16d1..7d4c8eac803f3 100644
  #if BUILDFLAG(IS_CHROMEOS)
          {V4L2_PIX_FMT_AV1, V4L2_CID_MPEG_VIDEO_AV1_PROFILE},
          {V4L2_PIX_FMT_AV1_FRAME, V4L2_CID_MPEG_VIDEO_AV1_PROFILE},
-@@ -547,7 +555,27 @@ uint32_t VideoCodecProfileToV4L2PixFmt(VideoCodecProfile profile,
+@@ -548,7 +556,27 @@ uint32_t VideoCodecProfileToV4L2PixFmt(VideoCodecProfile profile,
        << "Unsupported profile: " << GetProfileName(profile);
  
    const auto& v4l2_pix_fmt = kVideoCodecProfileToV4L2CodecPixFmt.at(profile);
@@ -152,7 +152,7 @@ index c8b65c28f16d1..7d4c8eac803f3 100644
  
  base::TimeDelta TimeValToTimeDelta(const struct timeval& timeval) {
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index 8fa928e8ff6cb..cb536173faa57 100644
+index f88b2917954d9..72a3fa1f7f180 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
 @@ -38,7 +38,9 @@
@@ -191,7 +191,7 @@ index 8fa928e8ff6cb..cb536173faa57 100644
  };
  
  // These values are logged to UMA. Entries should not be renumbered and numeric
-@@ -475,6 +481,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
+@@ -467,6 +473,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
               << " and fourcc: " << FourccToString(input_format_fourcc_);
      backend_ = std::make_unique<V4L2StatefulVideoDecoderBackend>(
          this, device_, profile_, color_space_, decoder_task_runner_);
@@ -199,7 +199,7 @@ index 8fa928e8ff6cb..cb536173faa57 100644
    } else {
      DCHECK_EQ(preferred_api_and_format.first, kStateless);
      VLOGF(1) << "Using a stateless API for profile: "
-@@ -483,6 +490,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
+@@ -475,6 +482,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
      backend_ = std::make_unique<V4L2StatelessVideoDecoderBackend>(
          this, device_, profile_, color_space_, decoder_task_runner_,
          cdm_context_ref_ ? cdm_context_ref_->GetCdmContext() : nullptr);

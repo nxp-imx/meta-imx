@@ -1,7 +1,7 @@
-From 1df47fd0ec0acc4ff0d9c75f57bff29093e93762 Mon Sep 17 00:00:00 2001
+From 0a0a5fe45363fb7748bad25dfb5da8ba5a813e43 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Mon, 22 Sep 2025 15:51:13 +0900
-Subject: [PATCH 08/20] display: Add fps in SkiaOutputSurfaceImplOnGpu by
+Subject: [PATCH 08/22] display: Add fps in SkiaOutputSurfaceImplOnGpu by
  VLOG(1)
 
 Upstream-Status: Inappropriate [NXP specific]
@@ -11,7 +11,7 @@ Upstream-Status: Inappropriate [NXP specific]
  2 files changed, 19 insertions(+)
 
 diff --git a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc
-index 370f9ef85e95b..ff9ad1996acaf 100644
+index 5088d0a6bba8a..968811ca3fd5b 100644
 --- a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc
 +++ b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc
 @@ -10,6 +10,7 @@
@@ -22,7 +22,7 @@ index 370f9ef85e95b..ff9ad1996acaf 100644
  
  #include "base/containers/span.h"
  #include "base/debug/crash_logging.h"
-@@ -134,6 +135,15 @@
+@@ -135,6 +136,15 @@
  #include "components/viz/service/display_embedder/output_presenter_fuchsia.h"
  #endif
  
@@ -38,7 +38,7 @@ index 370f9ef85e95b..ff9ad1996acaf 100644
  namespace viz {
  
  namespace {
-@@ -329,6 +339,7 @@ SkiaOutputSurfaceImplOnGpu::SkiaOutputSurfaceImplOnGpu(
+@@ -330,6 +340,7 @@ SkiaOutputSurfaceImplOnGpu::SkiaOutputSurfaceImplOnGpu(
        async_read_result_lock_(base::MakeRefCounted<AsyncReadResultLock>()) {
    DCHECK_CALLED_ON_VALID_THREAD(thread_checker_);
  
@@ -46,7 +46,7 @@ index 370f9ef85e95b..ff9ad1996acaf 100644
    weak_ptr_ = weak_ptr_factory_.GetWeakPtr();
    buffer_presented_callback_ = CreateSafeRepeatingCallback(
        weak_ptr_, std::move(buffer_presented_callback));
-@@ -584,7 +595,13 @@ void SkiaOutputSurfaceImplOnGpu::SwapBuffers(OutputSurfaceFrame frame) {
+@@ -585,7 +596,13 @@ void SkiaOutputSurfaceImplOnGpu::SwapBuffers(OutputSurfaceFrame frame) {
    TRACE_EVENT0("viz", "SkiaOutputSurfaceImplOnGpu::SwapBuffers");
    DCHECK_CALLED_ON_VALID_THREAD(thread_checker_);
  
@@ -60,7 +60,7 @@ index 370f9ef85e95b..ff9ad1996acaf 100644
  }
  
  void SkiaOutputSurfaceImplOnGpu::SetDependenciesResolvedTimings(
-@@ -1947,6 +1964,7 @@ bool SkiaOutputSurfaceImplOnGpu::Initialize() {
+@@ -1952,6 +1969,7 @@ bool SkiaOutputSurfaceImplOnGpu::Initialize() {
    // allow neither to be set in the offscreen case.
    DCHECK(!(gl_surface_ != nullptr && presenter_ != nullptr));
  
@@ -69,10 +69,10 @@ index 370f9ef85e95b..ff9ad1996acaf 100644
  }
  
 diff --git a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h
-index ef10b7911b49c..f022ca9aff0a0 100644
+index e615ffb2f0e26..ae33e847f3f87 100644
 --- a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h
 +++ b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h
-@@ -126,6 +126,7 @@ class SkiaOutputSurfaceImplOnGpu
+@@ -125,6 +125,7 @@ class SkiaOutputSurfaceImplOnGpu
        ScheduleGpuTaskCallback schedule_gpu_task,
        AddChildWindowToBrowserCallback parent_child_Window_to_browser_callback,
        SkiaOutputDevice::ReleaseOverlaysCallback release_overlays_callback);

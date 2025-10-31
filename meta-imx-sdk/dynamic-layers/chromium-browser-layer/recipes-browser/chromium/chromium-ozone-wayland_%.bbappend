@@ -11,6 +11,11 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0008-Fix-build-fail-after-clang-llvm-upgrade.patch \
     file://0009-Fix-chromium-crash-when-run-webgl-2.0.0-cts.patch \
     file://0010-Fix-canvas-test-fail-for-webgl.patch \
+    file://0011-LF-12406-1-Blacklist-disable-program_caching_for_tra.patch \
+    file://0012-Fix-build-error-for-rust-1.90.patch \
+    file://0013-Fix-build-error-for-clang-upgrading.patch \
+    file://0014-Fixed-build-error-caused-by-rust.patch \
+    file://0015-Fix-build-errors-by-rust.patch \
 "
 VDA_PATCH_SET = " \
     file://0101-V4L2VideoDecoder-Add-macro-use_linux_v4l2.patch \
@@ -36,8 +41,9 @@ VDA_PATCH_SET = " \
     file://0121-V4L2VideoDecoder-Add-back-HEVC-code-for-stateful-vid.patch \
     file://0122-V4L2VideoDecoder-Disable-decoder-prioritization-acco.patch \
 "
-#SRC_URI:append:mx8-nxp-bsp = " ${VDA_PATCH_SET}"
-#SRC_URI:append:mx95-nxp-bsp = " ${VDA_PATCH_SET}"
+SRC_URI:remove = "file://0008-Use-the-correct-path-to-libclang_rt.builtins.a.patch"
+SRC_URI:append:mx8-nxp-bsp = " ${VDA_PATCH_SET}"
+SRC_URI:append:mx95-nxp-bsp = " ${VDA_PATCH_SET}"
 
 DEPENDS:append:imxgpu2d = " virtual/libg2d"
 
@@ -58,6 +64,9 @@ GN_ARGS_USE_V4L2_CODEC:mx95-nxp-bsp = "use_v4l2_codec=true"
 GN_ARGS_USE_LINUX_V4L2_ONLY             = ""
 GN_ARGS_USE_LINUX_V4L2_ONLY:mx8-nxp-bsp = "use_linux_v4l2_only=true"
 GN_ARGS_USE_LINUX_V4L2_ONLY:mx95-nxp-bsp = "use_linux_v4l2_only=true"
+GN_ARGS_USE_IMXG2D               = ""
+GN_ARGS_USE_IMXG2D:mx8qm-nxp-bsp = "use_imxg2d=true"
+GN_ARGS_USE_IMXG2D:mx8qxp-nxp-bsp = "use_imxg2d=true"
 
 GN_ARGS:append:imx-nxp-bsp = " \
     ${GN_ARGS_DISABLE_GBM} \
@@ -66,6 +75,7 @@ GN_ARGS:append:imx-nxp-bsp = " \
     ${GN_ARGS_FFMPEG_BRANDING} \
     ${GN_ARGS_USE_V4L2_CODEC} \
     ${GN_ARGS_USE_LINUX_V4L2_ONLY} \
+    ${GN_ARGS_USE_IMXG2D} \
     use_pulseaudio=true \
 "
 DEPENDS:append = " pulseaudio"

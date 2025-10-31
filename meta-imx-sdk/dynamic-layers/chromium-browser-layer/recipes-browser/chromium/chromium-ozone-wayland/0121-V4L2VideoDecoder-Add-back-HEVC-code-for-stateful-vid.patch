@@ -1,7 +1,7 @@
-From cdfd7c72670eb02652f788ce32c448b2132dd5d1 Mon Sep 17 00:00:00 2001
+From a1413578976ab6b830d72573bdf15962588a54b1 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 26 Sep 2025 11:01:49 +0900
-Subject: [PATCH] V4L2VideoDecoder: Add back HEVC code for stateful video
+Subject: [PATCH 21/22] V4L2VideoDecoder: Add back HEVC code for stateful video
  decoder
 
 Below commit remove HEVC code since they thought no device is using
@@ -47,10 +47,10 @@ index 5e6275b4eff22..b703f184a4638 100644
          V4L2_PIX_FMT_VP9,
      };
 diff --git a/media/gpu/v4l2/v4l2_utils.cc b/media/gpu/v4l2/v4l2_utils.cc
-index bda084857a76d..0d8325f0baf01 100644
+index 61be297519a9e..9bcd2705cdf89 100644
 --- a/media/gpu/v4l2/v4l2_utils.cc
 +++ b/media/gpu/v4l2/v4l2_utils.cc
-@@ -355,6 +355,7 @@ static const std::map<v4l2_enum_type, v4l2_enum_type>
+@@ -356,6 +356,7 @@ static const std::map<v4l2_enum_type, v4l2_enum_type>
          {V4L2_PIX_FMT_H264_SLICE, V4L2_CID_MPEG_VIDEO_H264_PROFILE},
  #endif
  #if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
@@ -58,7 +58,7 @@ index bda084857a76d..0d8325f0baf01 100644
  #if !BUILDFLAG(USE_LINUX_V4L2)
          {V4L2_PIX_FMT_HEVC_SLICE, V4L2_CID_MPEG_VIDEO_HEVC_PROFILE},
  #endif
-@@ -698,6 +699,9 @@ bool IsV4L2DecoderStateful() {
+@@ -699,6 +700,9 @@ bool IsV4L2DecoderStateful() {
    // V4L2 stateful formats (don't end up with _SLICE or _FRAME) supported.
    constexpr std::array<uint32_t, 4> kSupportedStatefulInputCodecs = {
        V4L2_PIX_FMT_H264,

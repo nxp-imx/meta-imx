@@ -1,7 +1,7 @@
-From 8d3abf94a413f3ec78922a2db940f33ce5be8477 Mon Sep 17 00:00:00 2001
+From 654ecf96c9c96a3a3fce63590cf69207e1736567 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 10 Oct 2025 11:49:38 +0900
-Subject: [PATCH] V4L2VideoDecoder: Use dlopen to dynamically use g2d api
+Subject: [PATCH 12/22] V4L2VideoDecoder: Use dlopen to dynamically use g2d api
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -9,7 +9,7 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 190 insertions(+)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index e99f057a786d6..67af0e22f679c 100644
+index 1651ef4ef9674..e1fea714bed5f 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
 @@ -30,6 +30,7 @@

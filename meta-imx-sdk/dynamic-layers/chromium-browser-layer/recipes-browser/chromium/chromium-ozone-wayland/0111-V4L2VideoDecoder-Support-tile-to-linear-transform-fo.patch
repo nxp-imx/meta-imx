@@ -1,7 +1,7 @@
-From 32b6872eb59bb29bd5bfdcec52c0c75122985ec0 Mon Sep 17 00:00:00 2001
+From de271a927672badd544a3e5f8c119142e4229970 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 23:09:35 +0900
-Subject: [PATCH] V4L2VideoDecoder: Support tile to linear transform for
+Subject: [PATCH 11/22] V4L2VideoDecoder: Support tile to linear transform for
  amphion
 
 Upstream-Status: Inappropriate [NXP specific]
@@ -11,7 +11,7 @@ Upstream-Status: Inappropriate [NXP specific]
  2 files changed, 206 insertions(+), 4 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index fe4a1d32adc37..e99f057a786d6 100644
+index a8f43c2671f8e..1651ef4ef9674 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
 @@ -28,6 +28,9 @@
