@@ -1,6 +1,6 @@
 
 SRCBRANCH = "imx_1.22.0"
-SRCREV = "9a4555e2fd15b49d3a56bcc8c482898b73ed02ff" 
+SRCREV = "3404b271960933a9d793073fea26364273341185"
 
 do_install:append() {
     # Copy label_image_onnx.py tool from onnxruntime-imx repo
