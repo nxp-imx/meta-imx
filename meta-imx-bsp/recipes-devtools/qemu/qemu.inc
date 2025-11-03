@@ -265,36 +265,23 @@ SYSTEMD_SERVICE:${PN}-guest-agent = "qemu-guest-agent.service"
 
 ########### i.MX overrides ################
 
-SRCBRANCH_imx-qemu = "imx-9.0.y"
-QEMU_SRC ?= "git://github.com/nxp-imx/imx-qemu.git;protocol=https;"
 SRC_URI = " \
     ${QEMU_SRC};branch=${SRCBRANCH_imx-qemu};name=imx-qemu;\
     file://0001-fix-missing-meson.patch \
     file://0002-Ensure-pip-and-the-python-venv-aren-t-used-for-meson.patch \
-    git://gitlab.com/qemu-project/berkeley-softfloat-3.git;destsuffix=${S}/subprojects/berkeley-softfloat-3;protocol=https;branch=master;name=berkeley-softfloat-3 \
-    git://gitlab.com/qemu-project/berkeley-testfloat-3.git;destsuffix=${S}/subprojects/berkeley-testfloat-3;protocol=https;branch=master;name=berkeley-testfloat-3 \
-    git://gitlab.com/qemu-project/keycodemapdb.git;destsuffix=${S}/subprojects/keycodemapdb;protocol=https;branch=master;name=keycodemapdb \
+    git://gitlab.com/qemu-project/berkeley-softfloat-3.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/subprojects/berkeley-softfloat-3;protocol=https;branch=master;name=berkeley-softfloat-3 \
+    git://gitlab.com/qemu-project/berkeley-testfloat-3.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/subprojects/berkeley-testfloat-3;protocol=https;branch=master;name=berkeley-testfloat-3 \
+    git://gitlab.com/qemu-project/keycodemapdb.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/subprojects/keycodemapdb;protocol=https;branch=master;name=keycodemapdb \
     file://qemu-guest-agent.init \
     file://qemu-guest-agent.udev \
 "
-SRC_URI:remove:class-nativesdk = " \
-	file://0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch \
-	file://0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch \
-        "
-
-# Support building and using native version on pre 4.17 kernels
-SRC_URI:remove:class-native = " \
-	file://0011-linux-user-workaround-for-missing-MAP_FIXED_NOREPLAC.patch \
-	file://0012-linux-user-workaround-for-missing-MAP_SHARED_VALIDAT.patch \
-        "
+QEMU_SRC ?= "git://github.com/nxp-imx/imx-qemu.git;protocol=https;"
+SRCBRANCH_imx-qemu = "imx-9.0.y"
 SRCREV_imx-qemu = "eb50218d4b5b2c20bcecad5b563769fb8f8b509b"
 SRCREV_berkeley-softfloat-3 = "b64af41c3276f97f0e181920400ee056b9c88037"
 SRCREV_berkeley-testfloat-3 = "e7af9751d9f9fd3b47911f51a5cfd08af256a9ab"
 SRCREV_keycodemapdb = "f5772a62ec52591ff6870b7e8ef32482371f22c6"
 SRCREV_FORMAT = "imx-qemu_berkeley-softfloat-3_berkeley-testfloat-3_keycodemapdb"
-
-# this configure option need to remove as invoke meson subprojects download 
-# EXTRA_OECONF:remove =  "--disable-download"
 
 PACKAGECONFIG[libvhost-user] = "-Dlibvhost-user:xen=enabled,-Dlibvhost-user:xen=disabled,xen-tools"
 PACKAGECONFIG[rutabaga-gfx] = "--enable-rutabaga-gfx,--disable-rutabaga-gfx,rutabaga-gfx-ffi"

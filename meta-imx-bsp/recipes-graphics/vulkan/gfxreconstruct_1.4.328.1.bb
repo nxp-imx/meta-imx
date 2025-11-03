@@ -7,7 +7,7 @@ DEPENDS = "lz4 nlohmann-json spirv-headers vulkan-headers zstd"
 
 SRC_URI = " \
     git://github.com/LunarG/gfxreconstruct.git;protocol=https;branch=vulkan-sdk-1.4.328 \
-    git://github.com/KhronosGroup/SPIRV-Reflect;destsuffix=${S}/external/SPIRV-Reflect;name=SPIRV-Reflect;lfs=0;protocol=https;branch=vulkan-sdk-1.4.328 \
+    git://github.com/KhronosGroup/SPIRV-Reflect;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/SPIRV-Reflect;name=SPIRV-Reflect;lfs=0;protocol=https;branch=vulkan-sdk-1.4.328 \
     file://0001-FindVulkanVersion.cmake-Look-for-vulkan-headers-in-s.patch \
     file://0002-Change-gfxreconstruct-layer-to-implicit-layer.patch \
 "

@@ -7,7 +7,7 @@ SECTION = "base"
 LICENSE = "BSD-3-Clause"
 LICENSE = "Apache-2.0 & BSD-3-Clause & Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6087d19da5441648e33f85ae64cf2a7d \
-                    file://../psa-arch-tests/LICENSE.md;md5=2a944942e1496af1886903d274dedb13"
+                    file://${PSA_ARCH_TESTS_SRC_PATH}/LICENSE.md;md5=2a944942e1496af1886903d274dedb13"
 
 DEPENDS = " \
     python3-cryptography-native \
@@ -17,18 +17,16 @@ DEPENDS = " \
     sqlite3 \
 "
 
-SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw;destsuffix=git/smw \
-           ${PSA_LIB_SRC};branch=${SRCBRANCH_psa};name=psa;destsuffix=git/${PSA_ARCH_TESTS_SRC_PATH} \
-           "
+SRC_URI = "${SMW_LIB_SRC};branch=${SRCBRANCH_smw};name=smw \
+           ${PSA_LIB_SRC};branch=${SRCBRANCH_psa};name=psa;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/${PSA_ARCH_TESTS_SRC_PATH}"
 SMW_LIB_SRC ?= "git://github.com/nxp-imx/imx-smw.git;protocol=https"
 PSA_LIB_SRC ?= "git://github.com/ARM-software/psa-arch-tests.git;protocol=https"
-PSA_ARCH_TESTS_SRC_PATH = "psa-arch-tests"
+PSA_ARCH_TESTS_SRC_PATH = "../psa-arch-tests"
 SRCBRANCH_smw = "master"
 SRCBRANCH_psa = "main"
 SRCREV_smw = "073299a2ff1ee3c4e015fd89249705a7007288ab"
 SRCREV_psa = "463cb95ada820bc6f758d50066cf8c0ed5cc3a02"
 SRCREV_FORMAT = "smw_psa"
-S = "${UNPACKDIR}/git/smw"
 
 inherit cmake python3native
 
@@ -64,7 +62,7 @@ EXTRA_OECMAKE = " \
     -DTA_DEV_KIT_ROOT=${TA_DEV_KIT_DIR} \
     -DTEEC_ROOT=${STAGING_DIR_HOST} \
     -DJSONC_ROOT="${COMPONENTS_DIR}/${TARGET_ARCH}/json-c/usr" \
-    -DPSA_ARCH_TESTS_SRC_PATH=../${PSA_ARCH_TESTS_SRC_PATH} \
+    -DPSA_ARCH_TESTS_SRC_PATH=${PSA_ARCH_TESTS_SRC_PATH} \
     -DTEE_TA_DESTDIR=${nonarch_base_libdir} \
 "
 

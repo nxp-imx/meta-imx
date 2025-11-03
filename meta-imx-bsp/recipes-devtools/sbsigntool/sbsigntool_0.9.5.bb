@@ -10,7 +10,7 @@ DEPENDS = "binutils openssl gnu-efi util-linux-libuuid"
 
 SRC_URI = " \
     git://git.kernel.org/pub/scm/linux/kernel/git/jejb/sbsigntools.git;protocol=https;name=sbsigntools;branch=master \
-    git://github.com/rustyrussell/ccan.git;protocol=https;destsuffix=${S}/lib/ccan.git;name=ccan;branch=master \
+    git://github.com/rustyrussell/ccan.git;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/lib/ccan.git;name=ccan;branch=master \
     file://0001-configure-Dont-t-check-for-gnu-efi.patch \
     file://0002-docs-Don-t-build-man-pages.patch \
     file://0003-sbsign-add-x-option-to-avoid-overwrite-existing-sign.patch  \
@@ -21,7 +21,6 @@ SRC_URI = " \
 SRCREV_sbsigntools  ?= "9cfca9fe7aa7a8e29b92fe33ce8433e212c9a8ba"
 SRCREV_ccan         ?= "b1f28e17227f2320d07fe052a8a48942fe17caa5"
 SRCREV_FORMAT       =  "sbsigntools_ccan"
-
 
 COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*|riscv64.*)-linux"
 COMPATIBLE_HOST:armv4 = 'null'

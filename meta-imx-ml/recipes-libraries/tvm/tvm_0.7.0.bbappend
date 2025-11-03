@@ -1,15 +1,15 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRCBRANCH = "eiq-tvm-v0.7"
-TVM_SRC ?= "git://github.com/nxp-imx/eiq-tvm-imx.git;protocol=https"
 SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
-               git://github.com/dmlc/dlpack;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/dlpack;name=dlpack \
-               git://github.com/dmlc/dmlc-core;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/dmlc-core;name=dmlc-core \
-               git://github.com/agauniyal/rang;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/rang;name=rang \
-               git://github.com/apache/incubator-tvm-vta;protocol=https;nobranch=1;destsuffix=${S}/3rdparty/vta-hw;name=vta-hw \
+               git://github.com/dmlc/dlpack;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/3rdparty/dlpack;name=dlpack \
+               git://github.com/dmlc/dmlc-core;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/3rdparty/dmlc-core;name=dmlc-core \
+               git://github.com/agauniyal/rang;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/3rdparty/rang;name=rang \
+               git://github.com/apache/incubator-tvm-vta;protocol=https;nobranch=1;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/3rdparty/vta-hw;name=vta-hw \
                file://0001-tvm-CMakeLists.txt-Use-CMAKE-variables-for-libs-inst.patch \
                file://tvm_runtime.pc.in \
 "
+TVM_SRC ?= "git://github.com/nxp-imx/eiq-tvm-imx.git;protocol=https"
+SRCBRANCH = "eiq-tvm-v0.7"
 SRCREV = "249079f58739cb5604ec99c25e8f4c10d38dde59"
 
 EXTRA_OECMAKE += "\

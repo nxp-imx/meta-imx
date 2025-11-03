@@ -1,7 +1,7 @@
 SRC_URI:remove = "gitsm://github.com/KhronosGroup/Vulkan-Samples.git;branch=main;protocol=https;lfs=0"
 SRC_URI += " \
     gitsm://github.com/KhronosGroup/Vulkan-Samples.git;branch=main;protocol=https;lfs=0;name=main \
-    git://github.com/glfw/glfw.git;branch=master;protocol=https;name=glfw;destsuffix=${S}/third_party/glfw"
+    git://github.com/glfw/glfw.git;branch=master;protocol=https;name=glfw;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/third_party/glfw"
 SRC_URI:remove = "file://32bit.patch"
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://0001-parser.h-Including-missing-cstdint-602.patch"

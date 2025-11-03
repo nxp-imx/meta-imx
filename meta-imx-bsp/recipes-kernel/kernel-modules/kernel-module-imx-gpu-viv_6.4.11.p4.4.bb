@@ -7,13 +7,12 @@ allowing flexibility to use a newer graphics release with an older kernel."
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 
-SRC_URI = "${LINUX_IMX_SRC};subpath=drivers/mxc/gpu-viv;destsuffix=git/src \
+SRC_URI = "${LINUX_IMX_SRC};subpath=drivers/mxc/gpu-viv;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src \
            file://Add-makefile.patch"
 LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.12.y"
 LOCALVERSION = "-lts-next"
 SRCREV = "919ae1917cfa2110894629597e2e712bd442ab5b"
-
 
 inherit module
 

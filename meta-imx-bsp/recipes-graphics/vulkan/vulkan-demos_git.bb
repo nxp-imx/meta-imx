@@ -5,15 +5,13 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=dcf473723faabf17baa9b5f2207599d0 \
 DEPENDS = "assimp vulkan-loader zlib"
 
 SRC_URI = "gitsm://github.com/SaschaWillems/Vulkan.git;protocol=https;branch=master \
-           git://github.com/KhronosGroup/KTX-Software;destsuffix=git/external/ktx;name=ktx;lfs=0;protocol=https;branch=main \
+           git://github.com/KhronosGroup/KTX-Software;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/external/ktx;name=ktx;lfs=0;protocol=https;branch=main \
            file://0001-Don-t-build-demos-with-questionably-licensed-data.patch \
            file://0002-Modify-parameter-in-vulkan-demo-computenbody.patch \
            "
 SRCREV = "8b4ee5903364c86bc4d572b53ee8f1ac80501851"
 SRCREV_ktx = "726d14d02c95bb21ec9e43807751b491d295dd3c"
-
 SRCREV_FORMAT = "default_ktx"
-
 
 UPSTREAM_CHECK_COMMITS = "1"
 UPSTREAM_CHECK_GITTAGREGEX = "These are not the releases you're looking for"
