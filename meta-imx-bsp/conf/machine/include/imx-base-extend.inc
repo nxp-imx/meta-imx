@@ -12,6 +12,10 @@ IMXBOOT_VARIANT  ?= ""
 IMXBOOT_VARIANTS ?= "NONE"
 BOOT_VARIANT = "${@bb.utils.contains_any('IMXBOOT_VARIANT', '${IMXBOOT_VARIANTS}', '-variant-${IMXBOOT_VARIANT}', '', d)}"
 
+# Add new Soc i.MX 952
+MACHINEOVERRIDES_EXTENDER:mx952:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:mx9-generic-bsp:mx9-nxp-bsp:mx952-generic-bsp:mx952-nxp-bsp"
+MACHINE_SOCARCH_SUFFIX:mx952-nxp-bsp = "-mx952"
+
 # Add new SoC i.MX 943
 MACHINEOVERRIDES_EXTENDER:mx943:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxpxp:mx9-generic-bsp:mx9-nxp-bsp:mx94-generic-bsp:mx94-nxp-bsp:mx943-generic-bsp:mx943-nxp-bsp"
 MACHINE_SOCARCH_SUFFIX:mx943-nxp-bsp = "-mx943"
