@@ -131,7 +131,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.4-c3c65c4.bin
+Package:                     firmware-ele-imx-2.0.4-c33bfc5.bin
 Version:                     2.0.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -564,7 +564,7 @@ Origin:                      NXP(Apache-2.0)
 --------------------------------------------
 
 Package:                     se05x-openssl-provider.git
-Version:                     1.0.2
+Version:                     1.1.2
 Outgoing License:            Apache-2.0 
 License File:                LICENSE.txt
 Package Category:            BSP
