@@ -1,0 +1,583 @@
+From 26795d41f44b7ad96a964d67af070077bd2589f3 Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <shengjiu.wang@nxp.com>
+Date: Tue, 21 Oct 2025 16:35:46 +0800
+Subject: [PATCH] ucm2: NXP: add alsa-ucm support
+
+add alsa-ucm support for wm8960, wm8962, wm8524, bt-sco, mqs, micfil,
+hdmi-tx
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Shengjiu Wang <shengjiu.wang@nxp.com>
+---
+ ucm2/NXP/BT-SCO.conf                          | 42 ++++++++++
+ ucm2/NXP/HDMI-TX.conf                         | 22 ++++++
+ ucm2/NXP/MICFIL.conf                          | 22 ++++++
+ ucm2/NXP/MQS.conf                             | 22 ++++++
+ ucm2/NXP/spdif.conf                           | 40 ++++++++++
+ ucm2/NXP/wm8524.conf                          | 22 ++++++
+ ucm2/NXP/wm8960.conf                          | 70 +++++++++++++++++
+ ucm2/NXP/wm8962.conf                          | 76 +++++++++++++++++++
+ ucm2/conf.d/audio-hdmi/audio-hdmi.conf        |  9 +++
+ ucm2/conf.d/fsl-asoc-card/imx-spdif.conf      |  9 +++
+ ucm2/conf.d/fsl-asoc-card/mqs-audio.conf      |  9 +++
+ ucm2/conf.d/fsl-asoc-card/wm8524-audio.conf   |  9 +++
+ ucm2/conf.d/fsl-asoc-card/wm8960-audio.conf   |  9 +++
+ ucm2/conf.d/fsl-asoc-card/wm8962-audio.conf   |  9 +++
+ .../imx-audio-hdmi-/imx-audio-hdmi-tx.conf    |  9 +++
+ ucm2/conf.d/micfil-audio/micfil-audio.conf    |  9 +++
+ ucm2/conf.d/simple-card/bt-sco-audio.conf     |  9 +++
+ ucm2/conf.d/simple-card/mqs-audio.conf        |  9 +++
+ ucm2/conf.d/simple-card/wm8524-audio.conf     |  9 +++
+ 19 files changed, 415 insertions(+)
+ create mode 100644 ucm2/NXP/BT-SCO.conf
+ create mode 100644 ucm2/NXP/HDMI-TX.conf
+ create mode 100644 ucm2/NXP/MICFIL.conf
+ create mode 100644 ucm2/NXP/MQS.conf
+ create mode 100644 ucm2/NXP/spdif.conf
+ create mode 100644 ucm2/NXP/wm8524.conf
+ create mode 100644 ucm2/NXP/wm8960.conf
+ create mode 100644 ucm2/NXP/wm8962.conf
+ create mode 100644 ucm2/conf.d/audio-hdmi/audio-hdmi.conf
+ create mode 100644 ucm2/conf.d/fsl-asoc-card/imx-spdif.conf
+ create mode 100644 ucm2/conf.d/fsl-asoc-card/mqs-audio.conf
+ create mode 100644 ucm2/conf.d/fsl-asoc-card/wm8524-audio.conf
+ create mode 100644 ucm2/conf.d/fsl-asoc-card/wm8960-audio.conf
+ create mode 100644 ucm2/conf.d/fsl-asoc-card/wm8962-audio.conf
+ create mode 100644 ucm2/conf.d/imx-audio-hdmi-/imx-audio-hdmi-tx.conf
+ create mode 100644 ucm2/conf.d/micfil-audio/micfil-audio.conf
+ create mode 100644 ucm2/conf.d/simple-card/bt-sco-audio.conf
+ create mode 100644 ucm2/conf.d/simple-card/mqs-audio.conf
+ create mode 100644 ucm2/conf.d/simple-card/wm8524-audio.conf
+
+diff --git a/ucm2/NXP/BT-SCO.conf b/ucm2/NXP/BT-SCO.conf
+new file mode 100644
+index 0000000..d84ea4c
+--- /dev/null
++++ b/ucm2/NXP/BT-SCO.conf
+@@ -0,0 +1,42 @@
++SectionVerb {
++	EnableSequence [
++	]
++}
++
++SectionDevice."BT-SCO-uplink" {
++	Comment "BT SCO"
++
++	ConflictingDevice [
++	]
++
++	EnableSequence [
++	]
++
++	DisableSequence [
++	]
++
++	Value {
++		PlaybackPriority "100"
++		PlaybackChannels 1
++		PlaybackPCM "hw:${CardId}"
++	}
++}
++
++SectionDevice."BT-SCO-downlink" {
++	Comment "BT SCO"
++
++	ConflictingDevice [
++	]
++
++	EnableSequence [
++	]
++
++	DisableSequence [
++	]
++
++	Value {
++		CapturePriority "100"
++		CaptureChannels 1
++		CapturePCM "hw:${CardId}"
++	}
++}
+diff --git a/ucm2/NXP/HDMI-TX.conf b/ucm2/NXP/HDMI-TX.conf
+new file mode 100644
+index 0000000..16ee889
+--- /dev/null
++++ b/ucm2/NXP/HDMI-TX.conf
+@@ -0,0 +1,22 @@
++SectionVerb {
++	EnableSequence [
++	]
++}
++
++SectionDevice."HDMI-TX" {
++	Comment "HDMI TX"
++
++	ConflictingDevice [
++	]
++
++	EnableSequence [
++	]
++
++	DisableSequence [
++	]
++
++	Value {
++		PlaybackPriority "100"
++		PlaybackPCM "hw:${CardId}"
++	}
++}
+diff --git a/ucm2/NXP/MICFIL.conf b/ucm2/NXP/MICFIL.conf
+new file mode 100644
+index 0000000..74c3b12
+--- /dev/null
++++ b/ucm2/NXP/MICFIL.conf
+@@ -0,0 +1,22 @@
++SectionVerb {
++	EnableSequence [
++	]
++}
++
++SectionDevice."MICFIL" {
++	Comment "MICFIL"
++
++	ConflictingDevice [
++	]
++
++	EnableSequence [
++	]
++
++	DisableSequence [
++	]
++
++	Value {
++		CapturePriority "100"
++		CapturePCM "hw:${CardId}"
++	}
++}
+diff --git a/ucm2/NXP/MQS.conf b/ucm2/NXP/MQS.conf
+new file mode 100644
+index 0000000..490420c
+--- /dev/null
++++ b/ucm2/NXP/MQS.conf
+@@ -0,0 +1,22 @@
++SectionVerb {
++	EnableSequence [
++	]
++}
++
++SectionDevice."MQS" {
++	Comment "MQS"
++
++	ConflictingDevice [
++	]
++
++	EnableSequence [
++	]
++
++	DisableSequence [
++	]
++
++	Value {
++		PlaybackPriority "100"
++		PlaybackPCM "hw:${CardId}"
++	}
++}
+diff --git a/ucm2/NXP/spdif.conf b/ucm2/NXP/spdif.conf
+new file mode 100644
+index 0000000..622fc29
+--- /dev/null
++++ b/ucm2/NXP/spdif.conf
+@@ -0,0 +1,40 @@
++SectionVerb {
++	EnableSequence [
++	]
++}
++
++SectionDevice."spdif-tx" {
++	Comment "SPDIF"
++
++	ConflictingDevice [
++	]
++
++	EnableSequence [
++	]
++
++	DisableSequence [
++	]
++
++	Value {
++		PlaybackPriority "100"
++		PlaybackPCM "hw:${CardId}"
++	}
++}
++
++SectionDevice."spdif-rx" {
++	Comment "SPDIF"
++
++	ConflictingDevice [
++	]
++
++	EnableSequence [
++	]
++
++	DisableSequence [
++	]
++
++	Value {
++		CapturePriority "100"
++		CapturePCM "hw:${CardId}"
++	}
++}
+diff --git a/ucm2/NXP/wm8524.conf b/ucm2/NXP/wm8524.conf
+new file mode 100644
+index 0000000..8f92956
+--- /dev/null
++++ b/ucm2/NXP/wm8524.conf
+@@ -0,0 +1,22 @@
++SectionVerb {
++	EnableSequence [
++	]
++}
++
++SectionDevice."Speaker" {
++	Comment "Speaker"
++
++	ConflictingDevice [
++	]
++
++	EnableSequence [
++	]
++
++	DisableSequence [
++	]
++
++	Value {
++		PlaybackPriority "100"
++		PlaybackPCM "hw:${CardId}"
++	}
++}
+diff --git a/ucm2/NXP/wm8960.conf b/ucm2/NXP/wm8960.conf
+new file mode 100644
+index 0000000..60b0ebc
+--- /dev/null
++++ b/ucm2/NXP/wm8960.conf
+@@ -0,0 +1,70 @@
++SectionVerb {
++	EnableSequence [
++	]
++}
++
++SectionDevice."Speaker" {
++	Comment "Speaker"
++
++	ConflictingDevice [
++		"Headphones"
++	]
++
++	EnableSequence [
++	]
++
++	DisableSequence [
++	]
++
++	Value {
++		PlaybackPriority "500"
++		PlaybackVolume "name='Speaker Playback Volume'"
++		PlaybackMixerElem "Speaker"
++		PlaybackPCM "hw:${CardId}"
++	}
++}
++
++SectionDevice."Headphones" {
++	Comment "Headphones"
++
++	ConflictingDevice [
++		"Speaker"
++	]
++
++	EnableSequence [
++	]
++
++	DisableSequence [
++	]
++
++	Value {
++		PlaybackPriority "1000"
++		PlaybackVolume "name='Headphone Playback Volume'"
++		PlaybackMixerElem "Headphone"
++		PlaybackPCM "hw:${CardId}"
++		JackControl "Headphone Jack"
++	}
++}
++
++SectionDevice."Headset" {
++        Comment "Headset Microphone"
++
++        ConflictingDevice [
++        ]
++
++        EnableSequence [
++                cset "name='Capture Switch' on,on"
++        ]
++
++        DisableSequence [
++                cset "name='Capture Switch' off,off"
++        ]
++
++        Value {
++                CapturePriority "100"
++                CaptureVolume "name='Capture Volume'"
++                CaptureMixerElem "Capture"
++                CapturePCM "hw:${CardId}"
++                JackControl "Headphone Jack"
++        }
++}
+diff --git a/ucm2/NXP/wm8962.conf b/ucm2/NXP/wm8962.conf
+new file mode 100644
+index 0000000..44e40c2
+--- /dev/null
++++ b/ucm2/NXP/wm8962.conf
+@@ -0,0 +1,76 @@
++SectionVerb {
++	EnableSequence [
++	]
++}
++
++SectionDevice."Speaker" {
++	Comment "Speaker"
++
++	ConflictingDevice [
++		"Headphones"
++	]
++
++	EnableSequence [
++		cset "name='Speaker Switch' on,on"
++	]
++
++	DisableSequence [
++		cset "name='Speaker Switch' off,off"
++	]
++
++	Value {
++		PlaybackPriority "500"
++		PlaybackVolume "name='Speaker Volume'"
++		PlaybackSwitch "name='Speaker Switch'"
++		PlaybackMixerElem "Speaker"
++		PlaybackPCM "hw:${CardId}"
++	}
++}
++
++SectionDevice."Headphones" {
++	Comment "Headphones"
++
++	ConflictingDevice [
++		"Speaker"
++	]
++
++	EnableSequence [
++		cset "name='Headphone Switch' on,on"
++	]
++
++	DisableSequence [
++		cset "name='Headphone Switch' off off"
++	]
++
++	Value {
++		PlaybackPriority "1000"
++		PlaybackVolume "name='Headphone Volume'"
++		PlaybackSwitch "name='Headphone Switch'"
++		PlaybackMixerElem "Headphone"
++		PlaybackPCM "hw:${CardId}"
++		JackControl "Headphone Jack"
++	}
++}
++
++SectionDevice."Headset" {
++	Comment "Headset Microphone"
++
++	ConflictingDevice [
++	]
++
++	EnableSequence [
++		cset "name='Capture Switch' on,on"
++	]
++
++	DisableSequence [
++		cset "name='Capture Switch' off,off"
++	]
++
++	Value {
++		CapturePriority "100"
++		CaptureVolume "name='Capture Volume'"
++		CaptureMixerElem "Capture"
++		CapturePCM "hw:${CardId}"
++		JackControl "Headphone Jack"
++	}
++}
+diff --git a/ucm2/conf.d/audio-hdmi/audio-hdmi.conf b/ucm2/conf.d/audio-hdmi/audio-hdmi.conf
+new file mode 100644
+index 0000000..60177c0
+--- /dev/null
++++ b/ucm2/conf.d/audio-hdmi/audio-hdmi.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."HDMI-TX" {
++        File "/NXP/HDMI-TX.conf"
++        Comment "HDMI Transmitter"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/fsl-asoc-card/imx-spdif.conf b/ucm2/conf.d/fsl-asoc-card/imx-spdif.conf
+new file mode 100644
+index 0000000..bd68de5
+--- /dev/null
++++ b/ucm2/conf.d/fsl-asoc-card/imx-spdif.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."spdif" {
++        File "/NXP/spdif.conf"
++        Comment "Sound from and to spdif"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/fsl-asoc-card/mqs-audio.conf b/ucm2/conf.d/fsl-asoc-card/mqs-audio.conf
+new file mode 100644
+index 0000000..a7dfbd1
+--- /dev/null
++++ b/ucm2/conf.d/fsl-asoc-card/mqs-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."HiFi" {
++	File "/NXP/MQS.conf"
++	Comment "Play medium quality music"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/fsl-asoc-card/wm8524-audio.conf b/ucm2/conf.d/fsl-asoc-card/wm8524-audio.conf
+new file mode 100644
+index 0000000..81296ed
+--- /dev/null
++++ b/ucm2/conf.d/fsl-asoc-card/wm8524-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."wm8524" {
++        File "/NXP/wm8524.conf"
++        Comment "Play sound"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/fsl-asoc-card/wm8960-audio.conf b/ucm2/conf.d/fsl-asoc-card/wm8960-audio.conf
+new file mode 100644
+index 0000000..4330f79
+--- /dev/null
++++ b/ucm2/conf.d/fsl-asoc-card/wm8960-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."HiFi" {
++	File "/NXP/wm8960.conf"
++	Comment "Play high quality music"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/fsl-asoc-card/wm8962-audio.conf b/ucm2/conf.d/fsl-asoc-card/wm8962-audio.conf
+new file mode 100644
+index 0000000..48849ec
+--- /dev/null
++++ b/ucm2/conf.d/fsl-asoc-card/wm8962-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."HiFi" {
++	File "/NXP/wm8962.conf"
++	Comment "Play high quality music"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/imx-audio-hdmi-/imx-audio-hdmi-tx.conf b/ucm2/conf.d/imx-audio-hdmi-/imx-audio-hdmi-tx.conf
+new file mode 100644
+index 0000000..60177c0
+--- /dev/null
++++ b/ucm2/conf.d/imx-audio-hdmi-/imx-audio-hdmi-tx.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."HDMI-TX" {
++        File "/NXP/HDMI-TX.conf"
++        Comment "HDMI Transmitter"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/micfil-audio/micfil-audio.conf b/ucm2/conf.d/micfil-audio/micfil-audio.conf
+new file mode 100644
+index 0000000..a7f1580
+--- /dev/null
++++ b/ucm2/conf.d/micfil-audio/micfil-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."MICFIL" {
++        File "/NXP/MICFIL.conf"
++        Comment "Sound from digital microphone"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/simple-card/bt-sco-audio.conf b/ucm2/conf.d/simple-card/bt-sco-audio.conf
+new file mode 100644
+index 0000000..9aa1419
+--- /dev/null
++++ b/ucm2/conf.d/simple-card/bt-sco-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."BT-SCO" {
++        File "/NXP/BT-SCO.conf"
++        Comment "Sound from and to bt sco"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/simple-card/mqs-audio.conf b/ucm2/conf.d/simple-card/mqs-audio.conf
+new file mode 100644
+index 0000000..970cf55
+--- /dev/null
++++ b/ucm2/conf.d/simple-card/mqs-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."MQS" {
++	File "/NXP/MQS.conf"
++	Comment "Play medium quality music"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/simple-card/wm8524-audio.conf b/ucm2/conf.d/simple-card/wm8524-audio.conf
+new file mode 100644
+index 0000000..81296ed
+--- /dev/null
++++ b/ucm2/conf.d/simple-card/wm8524-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."wm8524" {
++        File "/NXP/wm8524.conf"
++        Comment "Play sound"
++}
++
++BootSequence [
++]
+-- 
+2.34.1
+
