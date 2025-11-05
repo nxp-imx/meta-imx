@@ -1,0 +1,30 @@
+From 5341800d683353d2b2a8ea576916ddfd3fadf035 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Wed, 5 Nov 2025 13:19:51 -0600
+Subject: [PATCH] CMakeLists.txt: GoogleTest 1.17.0 requires at least C++17
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 03ad053..cc29c22 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -14,8 +14,8 @@ IF (NOT DEFINED VERSION)
+     SET(VERSION    0.2.6)
+ ENDIF()
+ 
+-# GoogleTest requires at least C++11 and match the nnstreamer cpp version.
+-SET(CMAKE_CXX_STANDARD 14)
++# GoogleTest requires at least C++17 and match the nnstreamer cpp version.
++SET(CMAKE_CXX_STANDARD 17)
+ 
+ # Set CFLAGS
+ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
+-- 
+2.34.1
+
