@@ -1,0 +1,42 @@
+From daca09b634b7f191d51a072b3758e2ef2ba7bfb9 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Thu, 6 Nov 2025 12:39:35 +0800
+Subject: [PATCH] Fix build failure caused by GCC 15 changes
+
+error: 'uint8_t' does not name a type
+   16 | typedef std::function<void(const uint8_t* reply, size_t reply_size)>
+
+Upstream-Status: Pending
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ .../common/client_wrapper/include/flutter/binary_messenger.h     | 1 +
+ .../common/client_wrapper/include/flutter/message_codec.h        | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flutter/binary_messenger.h b/src/flutter/shell/platform/common/client_wrapper/include/flutter/binary_messenger.h
+index d552b49..82e47da 100644
+--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/binary_messenger.h
++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/binary_messenger.h
+@@ -7,6 +7,7 @@
+ 
+ #include <functional>
+ #include <string>
++#include <cstdint>
+ 
+ namespace flutter {
+ 
+diff --git a/src/flutter/shell/platform/common/client_wrapper/include/flutter/message_codec.h b/src/flutter/shell/platform/common/client_wrapper/include/flutter/message_codec.h
+index c84d25f..c007b1e 100644
+--- a/src/flutter/shell/platform/common/client_wrapper/include/flutter/message_codec.h
++++ b/src/flutter/shell/platform/common/client_wrapper/include/flutter/message_codec.h
+@@ -8,6 +8,7 @@
+ #include <memory>
+ #include <string>
+ #include <vector>
++#include <cstdint>
+ 
+ namespace flutter {
+ 
+-- 
+2.43.0
+
