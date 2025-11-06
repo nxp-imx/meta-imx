@@ -35,6 +35,7 @@ SYSTEM_MANAGER_FIRMWARE_NAME                  ?= "${SYSTEM_MANAGER_FIRMWARE_BASE
 # a unique name for each implementation, e.g., m33_image.bin for i.MX 95
 SYSTEM_MANAGER_FIRMWARE_BASENAME              ?= "INVALID"
 SYSTEM_MANAGER_FIRMWARE_BASENAME:mx95-nxp-bsp ?= "m33_image"
+SYSTEM_MANAGER_FIRMWARE_BASENAME:mx952-nxp-bsp ?= "m33_image"
 
 # Add new machine i.MX 8M Plus UltraLite
 MACHINEOVERRIDES_EXTENDER:mx8mpul:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8m-generic-bsp:mx8m-nxp-bsp:mx8mpul-generic-bsp:mx8mpul-nxp-bsp"
