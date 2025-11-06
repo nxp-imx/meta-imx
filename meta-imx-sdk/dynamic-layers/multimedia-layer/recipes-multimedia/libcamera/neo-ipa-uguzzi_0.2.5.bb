@@ -18,7 +18,7 @@ DEPENDS = "libcamera"
 SRC_URI = "${NEO_IPA_UGUZZI_SRC};branch=${SRCBRANCH}"
 NEO_IPA_UGUZZI_SRC ?= "git://github.com/nxp-imx/neo-ipa-uguzzi;protocol=https"
 SRCBRANCH = "lf-6.12.49_2.2.0"
-SRCREV = "0ec752483a074572be40edeff9a65ec5896657ea"
+SRCREV = "b9f2e9d55bdf8b5ac9c59be0f829a36dbfc85409"
 
 S = "${WORKDIR}/git"
 
