@@ -82,9 +82,6 @@ PREFERRED_VERSION_xwayland:imx-nxp-bsp ??= ""
 PREFERRED_VERSION_libdrm:imx-nxp-bsp ??= "2.4.127.imx"
 
 PREFERRED_VERSION_gfxreconstruct:imxvulkan             ??= "1.3.275.0"
-PREFERRED_VERSION_vulkan-samples:imxvulkan             ??= "viv"
-
-PREFERRED_VERSION_vulkan-samples:imx-nxp-bsp           ??= "git"
 
 PREFERRED_VERSION_optee-os:imx-nxp-bsp     ??= "4.8.0.imx"
 PREFERRED_VERSION_optee-client:imx-nxp-bsp ??= "4.8.0.imx"
