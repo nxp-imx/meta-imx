@@ -1,0 +1,40 @@
+From 3ddc54e5c1b9627d5e3e29cb5bb06021b6528b7d Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Tue, 4 Nov 2025 17:06:41 +0800
+Subject: [PATCH] RVGPU/FW: Remove support for eglBindWaylandDisplayWL on
+ i.MX93.
+
+On i.MX93, the EGL driver may fall back to software rendering (swrast),
+which typically lacks a DRM device. In such cases, attempting to bind EGL
+to Wayland via EGL_WL_bind_wayland_display will fail.
+
+This change adds a check to ensure that EGL_WL_bind_wayland_display
+is only enabled when the driver is not swrast and has a valid DRI image
+interface, avoiding unnecessary initialization failures.
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
+---
+ src/egl/drivers/dri2/egl_dri2.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/egl/drivers/dri2/egl_dri2.h b/src/egl/drivers/dri2/egl_dri2.h
+index 15da921421a..31f85ead38c 100644
+--- a/src/egl/drivers/dri2/egl_dri2.h
++++ b/src/egl/drivers/dri2/egl_dri2.h
+@@ -594,8 +594,10 @@ dri2_set_WL_bind_wayland_display(_EGLDisplay *disp)
+ #ifdef HAVE_BIND_WL_DISPLAY
+    struct dri2_egl_display *dri2_dpy = dri2_egl_display(disp);
+ 
+-   disp->Extensions.WL_bind_wayland_display =
+-      dri2_dpy->has_dmabuf_import && dri2_dpy->has_dmabuf_export;
++   if (!dri2_dpy->swrast)
++   {
++      disp->Extensions.WL_bind_wayland_display = dri2_dpy->has_dmabuf_import && dri2_dpy->has_dmabuf_export;
++   }
+ #endif
+ }
+ 
+-- 
+2.34.1
+
