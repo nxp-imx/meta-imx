@@ -15,3 +15,5 @@ inherit cargo-update-recipe-crates
 inherit pkgconfig
 
 include vhost-device-input-crates.inc
+
+CARGO_BUILD_FLAGS += " --features=xen"
