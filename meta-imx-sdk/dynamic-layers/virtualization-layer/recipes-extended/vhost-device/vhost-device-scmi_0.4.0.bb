@@ -16,4 +16,3 @@ inherit pkgconfig
 
 include vhost-device-scmi-crates.inc
 
-CARGO_BUILD_FLAGS += " --features=xen"
