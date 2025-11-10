@@ -1,0 +1,36 @@
+From b6f1fd787c27592c45d9f85b12b5f273b662becc Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Mon, 10 Nov 2025 18:02:44 +0800
+Subject: [PATCH] Disable GL_ANGLE_instanced_arrays extension
+
+ANGLE can't handle out of bounds well, so disable the
+extension to pass the webgl 1.0.3 test.
+
+conformance/extensions/angle-instanced-arrays-out-of-bounds.html
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Change-Id: Id41636a7a7e91626ee87b9fed52083ee6807b7fa
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ gpu/command_buffer/service/feature_info.cc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/gpu/command_buffer/service/feature_info.cc b/gpu/command_buffer/service/feature_info.cc
+index 5d1bbc144796c..a9def19fafc04 100644
+--- a/gpu/command_buffer/service/feature_info.cc
++++ b/gpu/command_buffer/service/feature_info.cc
+@@ -448,8 +448,8 @@ void FeatureInfo::EnableOESTextureHalfFloatLinear() {
+ void FeatureInfo::EnableANGLEInstancedArrayIfPossible(
+     const gfx::ExtensionSet& extensions) {
+   if (!feature_flags_.angle_instanced_arrays) {
+-    if (gfx::HasExtension(extensions, "GL_ANGLE_instanced_arrays") ||
+-        gl_version_info_->is_es3) {
++    if ((gfx::HasExtension(extensions, "GL_ANGLE_instanced_arrays") ||
++        gl_version_info_->is_es3) && !IsWebGLContext()) {
+       AddExtensionString("GL_ANGLE_instanced_arrays");
+       feature_flags_.angle_instanced_arrays = true;
+       validators_.vertex_attribute.AddValue(
+-- 
+2.34.1
+
