@@ -14,6 +14,7 @@ DEPENDS = " \
     imx-codec \
     imx-parser \
     ${DEPENDS_IMXGPU} \
+    libinput \
 "
 DEPENDS:append:mx6-nxp-bsp = " imx-lib"
 DEPENDS:append:mx7-nxp-bsp = " imx-lib"
