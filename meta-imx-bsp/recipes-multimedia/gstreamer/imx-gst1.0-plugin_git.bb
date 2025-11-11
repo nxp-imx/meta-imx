@@ -82,7 +82,7 @@ MSDEPENDS = "imx-msparser imx-mscodec"
 PACKAGECONFIG[wma10dec] = ",,${MSDEPENDS},${MSDEPENDS}"
 PACKAGECONFIG[wma8enc] = ",,${MSDEPENDS},${MSDEPENDS}"
 
-FILES:${PN} = "${libdir}/gstreamer-1.0/*.so ${datadir}"
+FILES:${PN} = "${libdir}/gstreamer-1.0/*.so ${datadir} ${bindir}/remote_input"
 
 FILES:${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"
 FILES:${PN}-dev += "${libdir}/gstreamer-1.0/*.la ${libdir}/pkgconfig/*.pc"
