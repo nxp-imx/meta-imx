@@ -85,6 +85,10 @@ MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp ?= " \
     LPDDR_TYPE=${DDR_TYPE} \
     ${@'LPDDR_FW_VERSION='+d.getVar('LPDDR_FW_VERSION') if d.getVar('LPDDR_FW_VERSION') else ''} \
     ${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95alt', 'MSEL=1', '', d)}"
+MKIMAGE_EXTRA_ARGS:imx95-19x19-lpddr5-frdm-pro ?= " \
+    ${MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp} \
+    QSPI_HEADER=./scripts/fspi_header-W25Q512NWEIQ"
+
 MKIMAGE_EXTRA_ARGS:imx95-19x19-verdin ?= " \
     ${MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp} \
     QSPI_HEADER=./scripts/fspi_header_133"
