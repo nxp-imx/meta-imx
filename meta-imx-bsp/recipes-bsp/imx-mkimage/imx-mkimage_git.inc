@@ -7,7 +7,7 @@ SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH} \
 "
 IMX_MKIMAGE_SRC ?= "git://github.com/nxp-imx/imx-mkimage.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "8f1d766f22ad3e10b600f1221ca5563a59819269"
+SRCREV = "20112d52420f5820d2683dd332b017045bf7487b"
 
 BOOT_TOOLS = "imx-boot-tools"
 SYSROOT_DIRS += "/boot"
