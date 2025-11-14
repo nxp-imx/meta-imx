@@ -1,2 +1,4 @@
+# Use NXP latest version
+
 SRCBRANCH ?= "2023.11.imx"
 SRCREV = "cedca5ab20a0230042b7c14be1a00532f0387f1e"
