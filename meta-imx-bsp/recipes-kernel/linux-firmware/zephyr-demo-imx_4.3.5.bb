@@ -6,9 +6,9 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.tar.gz"
-SRC_URI[sha256sum] = "381bfe51fa9b59af69e9bbb183a1576a9d641b65a167b3d29eeafca56b9682ba"
+SRC_URI[sha256sum] = "eddfc86bbbd102962f7fdaef15a375133010badb2cbbe0f9fd78ead8e8fc4e22"
 
-IMX_SRCREV_ABBREV = "0b93c2f"
+IMX_SRCREV_ABBREV = "3cf7b20"
 
 S = "${UNPACKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
