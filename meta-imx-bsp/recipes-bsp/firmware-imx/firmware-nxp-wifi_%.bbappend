@@ -16,6 +16,12 @@ PACKAGES += "${PN}-all-sdio ${PN}-all-pcie ${PN}-all-usb"
 PACKAGES:remove = "${PN}-nxp8801-sdio"
 
 RDEPENDS:${PN}-all-sdio:remove = "${PN}-nxp8801-sdio"
-RDEPENDS:${PN}-all-sdio += "${PN}-nxp8997-sdio"
+
+PACKAGES:remove = " \
+    ${PN}-nxp8997-common \
+    ${PN}-nxp8997-pcie \
+    ${PN}-nxp8997-sdio \
+"
+RDEPENDS:${PN}-all-pcie:remove = "${PN}-nxp8997-pcie"
 
 ALLOW_EMPTY:${PN}-all-usb = "1"
