@@ -11,13 +11,13 @@ LIC_FILES_CHKSUM = "file://License.txt;md5=2b415520383f7964e96700ae12b4570a"
 LIC_FILES_CHKSUM += "file://edk2-platforms/License.txt;md5=2b415520383f7964e96700ae12b4570a"
 
 # These can be overridden as needed
-EDK2_SRC_URI = "gitsm://github.com/tianocore/edk2.git;branch=master;protocol=https"
-EDK2_PLATFORMS_SRC_URI = "git://github.com/tianocore/edk2-platforms.git;branch=master;protocol=https"
-
+SRC_URI_EDK2 ?= "gitsm://github.com/tianocore/edk2.git;protocol=https"
+SRC_URI_EDK2_PLATFORMS ?= "git://github.com/tianocore/edk2-platforms.git;protocol=https"
+SRCBRANCH_edk2 = "master"
+SRCBRANCH_edk2_platforms = "master"
 SRC_URI = "\
-    ${EDK2_SRC_URI};name=edk2;destsuffix=edk2;nobranch=1 \
-    ${EDK2_PLATFORMS_SRC_URI};name=edk2-platforms;destsuffix=edk2/edk2-platforms;nobranch=1 \
-    file://unaligned.patch \
+    ${SRC_URI_EDK2};branch=${SRCBRANCH_edk2};name=edk2;destsuffix=edk2 \
+    ${SRC_URI_EDK2_PLATFORMS};branch=${SRCBRANCH_edk2_platforms};name=edk2-platforms;destsuffix=edk2/edk2-platforms \
 "
 
 SRCREV_FORMAT         = "edk2_edk2-platforms"
@@ -27,10 +27,6 @@ COMPATIBLE_MACHINE ?= "invalid"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 EDK2_BUILD_RELEASE = "1"
-# Release builds don't work with clang yet:
-# https://bugzilla.tianocore.org/show_bug.cgi?id=3758.
-# Can be removed in 202202 (c9b7c6e)
-EDK2_BUILD_RELEASE:toolchain-clang = "0"
 
 EDK2_PLATFORM      = "unset"
 # build --platform
@@ -44,6 +40,9 @@ EDK2_ARCH:x86      = "IA32"
 EDK2_ARCH:x86-64   = "X64"
 EDK2_ARCH:riscv64  = "RISCV64"
 
+# Use the package version as the version to be printed out but allow for it to be overridden
+EDK2_VERSION ?= "${PV}"
+
 # Extra arguments passed to build
 EDK2_EXTRA_BUILD   = ""
 
@@ -53,6 +52,7 @@ EDK2_BUILD_MODE ?= "${@bb.utils.contains('EDK2_BUILD_RELEASE', '1', 'RELEASE', '
 # Baremetal, no need for a C library
 DEPENDS:remove = "virtual/${TARGET_PREFIX}compilerlibs virtual/libc"
 DEPENDS += "util-linux-native iasl-native"
+DEPENDS:append:toolchain-clang = " lld-native"
 
 inherit deploy
 
@@ -74,12 +74,14 @@ export BTOOLS_PATH = "${EDK_TOOLS_PATH}/BinWrappers/PosixLike"
 
 EDK_COMPILER ?= "GCC5"
 export GCC5_AARCH64_PREFIX = "${TARGET_PREFIX}"
+export GCC5_ARM_PREFIX = "${TARGET_PREFIX}"
 
-EDK_COMPILER:toolchain-clang = "CLANG38"
+EDK_COMPILER:toolchain-clang = "CLANGDWARF"
 export CLANG38_AARCH64_PREFIX = "${TARGET_PREFIX}"
+export CLANG38_ARM_PREFIX = "${TARGET_PREFIX}"
 
 do_configure:prepend() {
-    sed -i -e "s#-target ${HOST_ARCH}-linux-gnu*#-target ${HOST_SYS}#" ${S}/BaseTools/Conf/tools_def.template
+    sed -i -e "s#-target ${HOST_ARCH}-linux-gnu.*#-target ${HOST_SYS}#" ${S}/BaseTools/Conf/tools_def.template
 }
 
 do_compile() {
@@ -91,8 +93,13 @@ do_compile() {
     cp ${EDK_TOOLS_PATH}/Conf/tools_def.template ${S}/Conf/tools_def.txt
     cp ${EDK_TOOLS_PATH}/Conf/target.template ${S}/Conf/target.txt
 
-    # Build basetools
-    oe_runmake -C ${S}/BaseTools
+    # Build basetools for the build host
+    oe_runmake -C ${S}/BaseTools \
+        CC="${BUILD_CC}" \
+        CXX="${BUILD_CXX}" \
+        AS="${BUILD_AS}" \
+        AR="${BUILD_AR}" \
+        LD="${BUILD_LD}"
 
     PATH="${WORKSPACE}:${BTOOLS_PATH}:$PATH" \
     build \
@@ -101,6 +108,7 @@ do_compile() {
        --tagname ${EDK_COMPILER} \
        --platform ${EDK2_PLATFORM_DSC} \
        ${@oe.utils.parallel_make_argument(d, "-n %d")} \
+       -D FIRMWARE_VER="${EDK2_VERSION}" \
        ${EDK2_EXTRA_BUILD}
 }
 
@@ -115,7 +123,6 @@ SYSROOT_DIRS += "/firmware"
 INSANE_SKIP:${PN} += "textrel"
 # Build paths are currently embedded
 INSANE_SKIP:${PN} += "buildpaths"
-
 
 do_deploy() {
     # Copy the images to deploy directory
