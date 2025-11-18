@@ -9,7 +9,7 @@ DEPENDS:append:mx8mp-nxp-bsp = " imx-vpu-hantro-vc"
 SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.tar.gz"
 IMX_SRCREV_ABBREV = "6d3ec73"
 
-SRC_URI[sha256sum] = "d5035e493f2fe8fb1f517a770385a1a8e46fe524824bdb751e03cc6eb1b10556"
+SRC_URI[sha256sum] = "4d0a6bb06c671cf0091dd3c756cfc36e381ffaa7777b216e28625d5368930c93"
 
 S = "${WORKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
