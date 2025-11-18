@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3"
 
 DEPENDS = "imx-secure-enclave-seco openssl zlib"
 
-SRC_URI[sha256sum] = "061c1ae3938768b2ef2afe9e74f140f8739a458771a2578cbd31256e3f10b0ae"
+SRC_URI[sha256sum] = "d95d8bf8df1ebf1af8115294758f184fed1be2a0932c49c70df545b5ff82084d"
 
-IMX_SRCREV_ABBREV = "dd6eac8"
+IMX_SRCREV_ABBREV = "18480d8"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
 
