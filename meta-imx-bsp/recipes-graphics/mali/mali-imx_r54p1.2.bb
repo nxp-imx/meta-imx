@@ -3,7 +3,7 @@ require mali-imx.inc
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 
-SRC_URI[sha256sum] = "0f883e72743a90601b4dbe051978f94ca6892cbdd3e8721045db5a2f250421c3"
+SRC_URI[sha256sum] = "183ebc97fb08518fe0c9faae9d5bfa2bde64d631d52f5d3925cc3b1a4abae513"
 IMX_SRCREV_ABBREV = "bec698a"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
