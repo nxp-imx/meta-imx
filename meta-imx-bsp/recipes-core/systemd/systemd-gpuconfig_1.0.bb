@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0-only;m
 SRC_URI = " file://gpuconfig \
             file://gpuconfig.service \
 "
+S = "${UNPACKDIR}"
 
 RDEPENDS:${PN} = "systemd"
 
