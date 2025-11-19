@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 
 DEPENDS = "imx-secure-enclave-seco openssl zlib"
 
-SRC_URI[sha256sum] = "d95d8bf8df1ebf1af8115294758f184fed1be2a0932c49c70df545b5ff82084d"
+SRC_URI[sha256sum] = "41a70618881a3b2c8de785cdddde90a6b17a8ea7df88715b6e406799e0d8d64e"
 
 IMX_SRCREV_ABBREV = "18480d8"
 
