@@ -10,7 +10,7 @@ DEPENDS = "zlib libpng procps python3-native"
 SRC_URI = "${APITRACE_SRC};branch=${SRCBRANCH}"
 APITRACE_SRC ?= "gitsm://github.com/nxp-imx/apitrace-imx.git;protocol=https"
 SRCBRANCH = "imx_12.0"
-SRCREV = "4d4f66baea618fb743c91aac149f44f9965d3b3b"
+SRCREV = "79704ef306e9bb89e999c2369e5c099cddad28fb"
 
 S = "${WORKDIR}/git"
 
