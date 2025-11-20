@@ -25,6 +25,7 @@ SRC_URI = "git://github.com/nnstreamer/nnstreamer.git;branch=prod/tizen-9.0;prot
            file://0001-rgb888_support_nnstreamer.patch \
            file://0001-Fix-libnnstreamer_customfilter_passthrough.so-path.patch \
            file://0001-gray8_padding_removal.patch \
+           file://0001-Fix-to-provide-default-delegates.patch \
 "
 
 # Use git instead of quilt as patch tool to support patches with binary content
