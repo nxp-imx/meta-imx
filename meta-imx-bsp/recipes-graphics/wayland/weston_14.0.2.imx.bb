@@ -163,7 +163,7 @@ SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}
 SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-14.0.2"
-SRCREV = "c3d839702294b57e5977a808e0c9cb4cff9581d8"
+SRCREV = "be99fd1adad7e77c8c31926b09520ade5cdaca35"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
