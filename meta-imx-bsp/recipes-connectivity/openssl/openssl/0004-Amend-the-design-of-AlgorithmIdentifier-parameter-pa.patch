@@ -1,4 +1,4 @@
-From be9a05f931dbc7b5425c89fe12cf963d3aa15897 Mon Sep 17 00:00:00 2001
+From 284653acb6df4d68e276d4515a45ccd50ff54eab Mon Sep 17 00:00:00 2001
 From: Richard Levitte <levitte@openssl.org>
 Date: Thu, 25 Jul 2024 11:56:13 +0200
 Subject: [PATCH] Amend the design of AlgorithmIdentifier parameter passing
@@ -29,12 +29,11 @@ Upstream-Status: Backport [https://github.com/openssl/openssl/commit/0941666728c
 Reviewed-by: Matt Caswell <matt@openssl.org>
 Reviewed-by: Neil Horman <nhorman@openssl.org>
 (Merged from https://github.com/openssl/openssl/pull/25000)
-
 ---
  .../passing-algorithmidentifier-parameters.md | 65 ++++++++++++-------
  doc/man3/EVP_EncryptInit.pod                  | 19 ++++--
- util/perl/OpenSSL/paramnames.pm               | 62 ++++++++++++++----
- 3 files changed, 105 insertions(+), 41 deletions(-)
+ util/perl/OpenSSL/paramnames.pm               | 57 ++++++++++++----
+ 3 files changed, 101 insertions(+), 40 deletions(-)
 
 diff --git a/doc/designs/passing-algorithmidentifier-parameters.md b/doc/designs/passing-algorithmidentifier-parameters.md
 index bb3821e337..f33862e45e 100644
@@ -45,35 +44,35 @@ index bb3821e337..f33862e45e 100644
 -====================================================
 +Handling AlgorithmIdentifier and its parameters with provider operations
 +========================================================================
-
+ 
  Quick background
  ----------------
-
+ 
  We currently only support passing the AlgorithmIdentifier (`X509_ALGOR`)
 -parameter field to symmetric cipher provider implementations.
 +parameter field to symmetric cipher provider implementations.  We currently
 +only support getting full AlgorithmIdentifier (`X509_ALGOR`) from signature
 +provider implementations.
-
+ 
  We do support passing them to legacy implementations of other types of
  operation algorithms as well, but it's done in a way that can't be supported
 @@ -15,18 +17,30 @@ libcrypto and the backend implementation.
  For a longer background and explanation, see
  [Background / tl;dr](#background-tldr) at the end of this design.
-
+ 
 -Establish an OSSL_PARAM key that any algorithms may become aware of
 --------------------------------------------------------------------
 +Establish OSSL_PARAM keys that any algorithms may become aware of
 +-----------------------------------------------------------------
-
+ 
 -We already have a parameter key, but it's currently only specified for
 -`EVP_CIPHER`, in support of `EVP_CIPHER_param_to_asn1()` and
 -`EVP_CIPHER_asn1_to_param()`.
 +We already have known parameter keys:
-
+ 
 -"alg_id_param", also known as the macro `OSSL_CIPHER_PARAM_ALGORITHM_ID_PARAMS`
 +- "algor_id_param", also known as the macro `OSSL_CIPHER_PARAM_ALGORITHM_ID_PARAMS`.
-
+ 
 -This parameter can be used in the exact same manner with other operations,
 -with the value of the AlgorithmIdentifier parameter as an octet string, to
 -be interpreted by the implementations in whatever way they see fit.
@@ -94,16 +93,16 @@ index bb3821e337..f33862e45e 100644
 +operations, with the value of the AlgorithmIdentifier as well as its
 +parameters as octet strings, to be used and interpreted by applications and
 +provider implementations alike in whatever way they see fit.
-
+ 
  Applications can choose to add these in an `OSSL_PARAM` array, to be passed
  with the multitude of initialization functions that take such an array, or
 @@ -34,7 +48,7 @@ using specific operation `OSSL_PARAM` setters and getters (such as
  `EVP_PKEY_CTX_set_params`), or using other available convenience functions
  (see below).
-
+ 
 -This parameter will have to be documented in the following files:
 +These parameter will have to be documented in the following files:
-
+ 
  - `doc/man7/provider-asym_cipher.pod`
  - `doc/man7/provider-cipher.pod`
 @@ -67,20 +81,25 @@ such parameter data from them.
@@ -115,41 +114,41 @@ index bb3821e337..f33862e45e 100644
 +EVP_CIPHER_CTX_set_algor_params(EVP_CIPHER_CTX *ctx, const X509_ALGOR *alg);
 +EVP_CIPHER_CTX_get_algor_params(EVP_CIPHER_CTX *ctx, X509_ALGOR *alg);
 +EVP_CIPHER_CTX_get_algor(EVP_CIPHER_CTX *ctx, X509_ALGOR **alg);
-
+ 
 -EVP_MD_CTX_set_algor_param(EVP_PKEY_CTX *ctx, X509_ALGOR *alg);
 -EVP_MD_CTX_get_algor_param(EVP_PKEY_CTX *ctx, X509_ALGOR *alg);
 +EVP_MD_CTX_set_algor_params(EVP_MD_CTX *ctx, const X509_ALGOR *alg);
 +EVP_MD_CTX_get_algor_params(EVP_MD_CTX *ctx, X509_ALGOR *alg);
 +EVP_MD_CTX_get_algor(EVP_MD_CTX *ctx, X509_ALGOR **alg);
-
+ 
 -EVP_MAC_CTX_set_algor_param(EVP_PKEY_CTX *ctx, X509_ALGOR *alg);
 -EVP_MAC_CTX_get_algor_param(EVP_PKEY_CTX *ctx, X509_ALGOR *alg);
 +EVP_MAC_CTX_set_algor_params(EVP_MAC_CTX *ctx, const X509_ALGOR *alg);
 +EVP_MAC_CTX_get_algor_params(EVP_MAC_CTX *ctx, X509_ALGOR *alg);
 +EVP_MAC_CTX_get_algor(EVP_MAC_CTX *ctx, X509_ALGOR **alg);
-
+ 
 -EVP_KDF_CTX_set_algor_param(EVP_PKEY_CTX *ctx, X509_ALGOR *alg);
 -EVP_KDF_CTX_get_algor_param(EVP_PKEY_CTX *ctx, X509_ALGOR *alg);
 +EVP_KDF_CTX_set_algor_params(EVP_KDF_CTX *ctx, const X509_ALGOR *alg);
 +EVP_KDF_CTX_get_algor_params(EVP_KDF_CTX *ctx, X509_ALGOR *alg);
 +EVP_KDF_CTX_get_algor(EVP_KDF_CTX *ctx, X509_ALGOR **alg);
-
+ 
 -EVP_PKEY_CTX_set_algor_param(EVP_PKEY_CTX *ctx, X509_ALGOR *alg);
 -EVP_PKEY_CTX_get_algor_param(EVP_PKEY_CTX *ctx, X509_ALGOR *alg);
 +EVP_PKEY_CTX_set_algor_params(EVP_PKEY_CTX *ctx, const X509_ALGOR *alg);
 +EVP_PKEY_CTX_get_algor_params(EVP_PKEY_CTX *ctx, X509_ALGOR *alg);
 +EVP_PKEY_CTX_get_algor(EVP_PKEY_CTX *ctx, X509_ALGOR **alg);
  ```
-
+ 
  Note that all might not need to be added immediately, depending on if they
 diff --git a/doc/man3/EVP_EncryptInit.pod b/doc/man3/EVP_EncryptInit.pod
-index 3e9f4a3746..cf84a08add 100644
+index 45c3cb062c..648dc60853 100644
 --- a/doc/man3/EVP_EncryptInit.pod
 +++ b/doc/man3/EVP_EncryptInit.pod
 @@ -770,12 +770,23 @@ The length of the "keybits" parameter should not exceed that of a B<size_t>.
  Gets or sets the number of rounds to be used for a cipher.
  This is used by the RC5 cipher.
-
+ 
 -=item "alg_id_param" (B<OSSL_CIPHER_PARAM_ALGORITHM_ID_PARAMS>) <octet string>
 +=item "algorithm-id" (B<OSSL_CIPHER_PARAM_ALGORITHM_ID>) <octet string>
 +
@@ -158,7 +157,7 @@ index 3e9f4a3746..cf84a08add 100644
 +parameter.
 +
 +=item "algorithm-id-params" (B<OSSL_CIPHER_PARAM_ALGORITHM_ID_PARAMS>) <octet string>
-
+ 
  Used to pass the DER encoded AlgorithmIdentifier parameter to or from
 -the cipher implementation.  Functions like L<EVP_CIPHER_param_to_asn1(3)>
 -and L<EVP_CIPHER_asn1_to_param(3)> use this parameter for any implementation
@@ -171,24 +170,17 @@ index 3e9f4a3746..cf84a08add 100644
 +
 +An deprecated alias for "algorithm-id-params", only used by
 +L<EVP_CIPHER_param_to_asn1(3)> and L<EVP_CIPHER_asn1_to_param(3)>.
-
+ 
  =item "cts_mode" (B<OSSL_CIPHER_PARAM_CTS_MODE>) <UTF8 string>
-
+ 
 diff --git a/util/perl/OpenSSL/paramnames.pm b/util/perl/OpenSSL/paramnames.pm
-index c6bab2ed98..8c70a594b9 100644
+index bfa75f760c..8c70a594b9 100644
 --- a/util/perl/OpenSSL/paramnames.pm
 +++ b/util/perl/OpenSSL/paramnames.pm
-@@ -1,5 +1,5 @@
- #! /usr/bin/env perl
--# Copyright 2023-2024 The OpenSSL Project Authors. All Rights Reserved.
-+# Copyright 2023-2025 The OpenSSL Project Authors. All Rights Reserved.
- #
- # Licensed under the Apache License 2.0 (the "License").  You may not use
- # this file except in compliance with the License.  You can obtain a copy
 @@ -68,6 +68,16 @@ my %params = (
      'ALG_PARAM_MAC' =>          "mac",          # utf8_string
      'ALG_PARAM_PROPERTIES' =>   "properties",   # utf8_string
-
+ 
 +    # For any operation that deals with AlgorithmIdentifier, they should
 +    # implement both of these.
 +    # ALG_PARAM_ALGORITHM_ID is intended to be gettable, and is the
@@ -219,26 +211,22 @@ index c6bab2ed98..8c70a594b9 100644
 +    'CIPHER_PARAM_ALGORITHM_ID_PARAMS' =>  '*ALG_PARAM_ALGORITHM_ID_PARAMS',
 +    'CIPHER_PARAM_ALGORITHM_ID_PARAMS_OLD' => "alg_id_param", # octet_string
      'CIPHER_PARAM_XTS_STANDARD' =>         "xts_standard",# utf8_string
-
+ 
      'CIPHER_PARAM_TLS1_MULTIBLOCK_MAX_SEND_FRAGMENT' =>  "tls1multi_maxsndfrag",# uint
-@@ -246,7 +264,14 @@ my %params = (
-     'PKEY_PARAM_DIST_ID' =>             "distid",
-     'PKEY_PARAM_PUB_KEY' =>             "pub",
-     'PKEY_PARAM_PRIV_KEY' =>            "priv",
-+    # PKEY_PARAM_IMPLICIT_REJECTION isn't actually used, or meaningful.  We keep
-+    # it for API stability, but please use ASYM_CIPHER_PARAM_IMPLICIT_REJECTION
-+    # instead.
+@@ -250,6 +268,10 @@ my %params = (
+     # it for API stability, but please use ASYM_CIPHER_PARAM_IMPLICIT_REJECTION
+     # instead.
      'PKEY_PARAM_IMPLICIT_REJECTION' =>  "implicit-rejection",
 +    'PKEY_PARAM_FIPS_DIGEST_CHECK' =>   "digest-check",
 +    'PKEY_PARAM_FIPS_KEY_CHECK' =>      "key-check",
 +    'PKEY_PARAM_ALGORITHM_ID' =>        '*ALG_PARAM_ALGORITHM_ID',
 +    'PKEY_PARAM_ALGORITHM_ID_PARAMS' => '*ALG_PARAM_ALGORITHM_ID_PARAMS',
-
+ 
  # Diffie-Hellman/DSA Parameters
      'PKEY_PARAM_FFC_P' =>               "p",
-@@ -375,17 +400,26 @@ my %params = (
+@@ -378,17 +400,26 @@ my %params = (
      'EXCHANGE_PARAM_KDF_UKM' =>               "kdf-ukm",
-
+ 
  # Signature parameters
 -    'SIGNATURE_PARAM_ALGORITHM_ID' =>       "algorithm-id",
 -    'SIGNATURE_PARAM_PAD_MODE' =>           '*PKEY_PARAM_PAD_MODE',
@@ -271,9 +259,9 @@ index c6bab2ed98..8c70a594b9 100644
 +    'SIGNATURE_PARAM_FIPS_SIGN_X931_PAD_CHECK' => "sign-x931-pad-check",
 +    'SIGNATURE_PARAM_FIPS_APPROVED_INDICATOR' => '*ALG_PARAM_FIPS_APPROVED_INDICATOR',
 +    'SIGNATURE_PARAM_SIGNATURE' =>          "signature",
-
+ 
  # Asym cipher parameters
      'ASYM_CIPHER_PARAM_DIGEST' =>                   '*PKEY_PARAM_DIGEST',
---
-2.34.1
+-- 
+2.43.0
 
