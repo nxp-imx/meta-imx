@@ -18,8 +18,6 @@ SRCREV = "95ebf16bda6183ec217c7f529191360bbc285968"
 
 inherit autotools pkgconfig
 
-CFLAGS += " -Wno-error=implicit-function-declaration"
-
 do_install:append() {
     # FIXME: Drop examples for now
     rm -r ${D}${datadir}
