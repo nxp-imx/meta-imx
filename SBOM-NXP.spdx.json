@@ -2,7 +2,7 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2025-11-13T07:07:41Z",
+    "created": "2025-11-27T03:08:09Z",
     "creators": [
       "Organization: NXP"
     ],
@@ -305,19 +305,6 @@
       "filesAnalyzed": false
     },
     {
-      "SPDXID": "SPDXRef-package-1da79339-8dc0-46cd-9587-0ad7f8d27430",
-      "name": "libcamera",
-      "versionInfo": "libcamera--lf-6.12.49_2.2.0",
-      "licenseConcluded": "LGPL-2.1-or-later",
-      "licenseDeclared": "LGPL-2.1-or-later",
-      "homepage": "https://github.com/nxp-imx/libcamera",
-      "downloadLocation": "https://github.com/nxp-imx/libcamera -b lf-6.12.49-2.2.0",
-      "originator": "Organization: NXP",
-      "supplier": "NOASSERTION",
-      "externalRefs": [],
-      "filesAnalyzed": false
-    },
-    {
       "SPDXID": "SPDXRef-package-243f196e-38b2-437e-8ccc-cc7b8bd95c5e",
       "name": "uboot-imx",
       "versionInfo": "LF_6.12.49_2.2.0",
@@ -547,6 +534,19 @@
       "licenseDeclared": "BSD-3-Clause",
       "homepage": "https://github.com/nxp/dpdk-fpr",
       "downloadLocation": "https://github.com/nxp/dpdk-fpr -b lf-6.12.49-2.2.0",
+      "originator": "Organization: NXP",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    },
+    {
+      "SPDXID": "SPDXRef-package-4e6f9878-b4bd-4b6d-9ccb-f5b450917950",
+      "name": "libcamera",
+      "versionInfo": "LF_6.12.49_2.2.0",
+      "licenseConcluded": "LGPL-2.1-or-later",
+      "licenseDeclared": "LGPL-2.1-or-later",
+      "homepage": "https://github.com/nxp-imx/libcamera",
+      "downloadLocation": "https://github.com/nxp-imx/libcamera -b lf-6.12.49-2.2.0",
       "originator": "Organization: NXP",
       "supplier": "NOASSERTION",
       "externalRefs": [],
@@ -1094,6 +1094,19 @@
       "licenseDeclared": "LicenseRef-e60c2706-136b-49be-84a4-218b5ca0c384",
       "homepage": "https://github.com/nxp-imx/imx-g2d-pxp",
       "downloadLocation": "https://github.com/nxp-imx/imx-g2d-pxp -b lf-6.12.49-2.2.0",
+      "originator": "Organization: NXP",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    },
+    {
+      "SPDXID": "SPDXRef-package-8d03ce81-f611-4c05-a7e8-b2a37a45200b",
+      "name": "imx8mp-m7-demo",
+      "versionInfo": "25.09.00",
+      "licenseConcluded": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
+      "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
+      "homepage": "https://mcuxpresso.nxp.com/",
+      "downloadLocation": "https://mcuxpresso.nxp.com/",
       "originator": "Organization: NXP",
       "supplier": "NOASSERTION",
       "externalRefs": [],
@@ -1811,11 +1824,6 @@
     {
       "spdxElementId": "SPDXRef-package-d2da2da7-7bf9-4bc0-b93d-d87c568e07e2",
       "relationshipType": "DYNAMIC_LINK",
-      "relatedSpdxElement": "SPDXRef-package-1da79339-8dc0-46cd-9587-0ad7f8d27430"
-    },
-    {
-      "spdxElementId": "SPDXRef-package-d2da2da7-7bf9-4bc0-b93d-d87c568e07e2",
-      "relationshipType": "DYNAMIC_LINK",
       "relatedSpdxElement": "SPDXRef-package-243f196e-38b2-437e-8ccc-cc7b8bd95c5e"
     },
     {
@@ -1902,6 +1910,11 @@
       "spdxElementId": "SPDXRef-package-d2da2da7-7bf9-4bc0-b93d-d87c568e07e2",
       "relationshipType": "DYNAMIC_LINK",
       "relatedSpdxElement": "SPDXRef-package-4c245649-7bc8-40ee-bd63-e80fa96eded6"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-d2da2da7-7bf9-4bc0-b93d-d87c568e07e2",
+      "relationshipType": "DYNAMIC_LINK",
+      "relatedSpdxElement": "SPDXRef-package-4e6f9878-b4bd-4b6d-9ccb-f5b450917950"
     },
     {
       "spdxElementId": "SPDXRef-package-d2da2da7-7bf9-4bc0-b93d-d87c568e07e2",
@@ -2112,6 +2125,11 @@
       "spdxElementId": "SPDXRef-package-d2da2da7-7bf9-4bc0-b93d-d87c568e07e2",
       "relationshipType": "DYNAMIC_LINK",
       "relatedSpdxElement": "SPDXRef-package-8c98a123-0c6f-4551-b55b-478676737883"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-d2da2da7-7bf9-4bc0-b93d-d87c568e07e2",
+      "relationshipType": "DYNAMIC_LINK",
+      "relatedSpdxElement": "SPDXRef-package-8d03ce81-f611-4c05-a7e8-b2a37a45200b"
     },
     {
       "spdxElementId": "SPDXRef-package-d2da2da7-7bf9-4bc0-b93d-d87c568e07e2",
