@@ -24,6 +24,7 @@ VPU_HANTRO_DAEMON:mx8mp-nxp-bsp = "imx-vpu-hantro-daemon"
 VPU_HANTRO_DAEMON:mx8mq-nxp-bsp = "imx-vpu-hantro-daemon"
 
 RDEPENDS:${PN} = " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'packagegroup-fsl-optee-imx', '', d)} \
     can-utils \
     coreutils \
     cpufrequtils \
