@@ -306,6 +306,9 @@ Package Category:            BSP
 Type of Content:             binary
 Description and comments:    
 Release Location:            Mirror
+Origin:                    NXP (BSD-3-Clause)
+                           https://w1.fi/cgit
+ 
 --------------------------------------------
 
 Package:                     sof-zephyr-2.15.0-f9c56ae
