@@ -106,4 +106,4 @@ python __anonymous() {
         d.appendVar("RCONFLICTS:" + fullp, pkgs)
 }
 
-COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(imxmali)"
