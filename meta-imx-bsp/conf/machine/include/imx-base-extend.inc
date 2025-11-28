@@ -13,7 +13,7 @@ IMXBOOT_VARIANTS ?= "NONE"
 BOOT_VARIANT = "${@bb.utils.contains_any('IMXBOOT_VARIANT', '${IMXBOOT_VARIANTS}', '-variant-${IMXBOOT_VARIANT}', '', d)}"
 
 # Add new Soc i.MX 952
-MACHINEOVERRIDES_EXTENDER:mx952:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxdpu:imxgpu:imxmali:imxgpu2d:imxgpu3d:mx9-generic-bsp:mx9-nxp-bsp:mx952-generic-bsp:mx952-nxp-bsp"
+MACHINEOVERRIDES_EXTENDER:mx952:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxdpu:imxgpu:imxmali:imxgpu2d:imxgpu3d:mx9-generic-bsp:mx9-nxp-bsp:mx95-generic-bsp:mx95-nxp-bsp:mx952-generic-bsp:mx952-nxp-bsp"
 MACHINE_SOCARCH_SUFFIX:mx952-nxp-bsp = "-mx952"
 SECO_FIRMWARE_NAME:mx952-generic-bsp ?= "mx952${IMX_SOC_REV_LOWER}-ahab-container.img"
 IMX_SOC_REV:mx952-generic-bsp   ??= "A0"
