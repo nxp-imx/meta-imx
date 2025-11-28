@@ -72,7 +72,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-sm.git
-Version:                     2025q4
+Version:                     2025q3
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            BSP
