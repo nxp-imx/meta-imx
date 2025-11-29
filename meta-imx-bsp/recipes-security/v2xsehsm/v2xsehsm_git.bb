@@ -10,7 +10,7 @@ SRC_URI = "${V2XSEHSM_SRC};branch=${SRCBRANCH} \
            "
 V2XSEHSM_SRC ?= "git://github.com/nxp-imx/v2xsehsm.git;protocol=https"
 SRCBRANCH = "main"
-SRCREV = "447dbe2a1090d28e0330d3b2e4e9117960f6c263"
+SRCREV = "24bab7716c2e67be7734fe07efdbbfe100902b68"
 
 inherit cmake
 
