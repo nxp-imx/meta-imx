@@ -10,8 +10,7 @@ DEPENDS = "libpng zlib"
 
 inherit setuptools3
 
-SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH} \
-           file://0001-optimizer_api.h-Fix-gcc15-build-issues.patch"
+SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
 
 inherit cmake python3native
@@ -30,6 +29,7 @@ EXTRA_OECMAKE += "\
     -Donnxruntime_BUILD_UNIT_TESTS=ON \
     -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON \
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+    -DCMAKE_CXX_FLAGS='-I${B}' \
 "
 
 PYTHON_DEPENDS = "\
@@ -174,6 +174,9 @@ do_install:append() {
         git config --global --unset-all safe.directory ${TMPDIR}/.*/${PN}/.*/build/pybind11/src/pybind11
     fi
     rm ${D}/${PYTHON_SITEPACKAGES_DIR}/${PN}/capi/libonnxruntime.so*
+   
+    # Copy label_image_onnx.py tool from onnxruntime-imx repo
+    cp ${S}/onnxruntime/core/providers/neutron/tools/label_image_onnx.py ${D}${bindir}/${BP}/
 }
 
 # Make the package arch SOC-specific since the recipe now builds with SOC-specific configuration:
@@ -185,7 +188,7 @@ RDEPENDS:${PN}:remove:class-target = " \
     ${@bb.utils.contains('PACKAGECONFIG', 'python', '', '${PYTHON_PN}-core', d)}"
 
 # libonnxruntime_providers_shared.so is being packaged into -dev which is intended
-INSANE_SKIP:${PN}-dev += "dev-elf"
+INSANE_SKIP:${PN}-dev += "dev-elf buildpaths"
 
 # A separate tests package for the test binaries not appearing in the main package
 PACKAGE_BEFORE_PN = "${PN}-tests"
@@ -193,6 +196,8 @@ FILES:${PN}-tests = "${bindir}/${BP}/tests/*"
 
 # libcustom_op_library.so is in bindir, which is intended;
 # onnxruntime_shared_lib_test requires the shlib to be in the same directory as testdata to run properly
-INSANE_SKIP:${PN}-tests += "libdir"
-INSANE_SKIP:${PN}-dbg += "libdir"
+INSANE_SKIP:${PN}-tests += "libdir buildpaths"
+INSANE_SKIP:${PN}-dbg += "libdir buildpaths"
+
+INSANE_SKIP:${PN} += "buildpaths"
 
