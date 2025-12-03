@@ -40,7 +40,7 @@ The following development boards were tested in this release.
 |                 | FRDM   | imx93-11x11-lpddr4x-frdm                                                  |
 | i.MX 94         | EVK    | imx943-19x19-lpddr5-evk, imx943-15x15-lpddr4-evk, imx943-19x19-lpddr4-evk |
 | i.MX 95         | EVK    | imx95-19x19-lpddr5-evk, imx95-15x15-lpddr4x-evk                           |
-|                 | FRDM   | imx95-15x15-lpddr4x-frdm                                                  |
+|                 | FRDM   | imx95-15x15-lpddr4x-frdm, imx95-19x19-lpddr5-frdm-pro                     |
 |                 | Verdin | imx95-19x19-verdin                                                        |
 
 ## Quick Start Guide
