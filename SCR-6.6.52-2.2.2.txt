@@ -493,7 +493,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     pkcs11-provider.git
 Version:                     1.0.imx
-Outgoing License:            Apache-2 
+Outgoing License:            Apache-2.0
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
