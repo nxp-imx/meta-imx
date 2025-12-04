@@ -41,7 +41,7 @@ do_compile:prepend() {
         cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M70_IMAGE} ${BOOT_STAGING}/m70_image.bin
         cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M71_IMAGE} ${BOOT_STAGING}/m71_image.bin
     ;;
-    mx95)
+    mx95*)
         cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m7_image.bin
         ;;
     esac
