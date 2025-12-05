@@ -25,14 +25,13 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native'
 
 PACKAGES =+ "${PN}-gst ${PN}-pycamera"
 
-PACKAGECONFIG ??= ""
-PACKAGECONFIG[dng] = ",,tiff"
+PACKAGECONFIG ??= "${PACKAGECONFIG_V4L2}"
 
 # Disable v4l2 on 32-bit to avoid Y2038 bug
-PACKAGECONFIG ??= "${PACKAGECONFIG_V4L2}"
-PACKAGECONFIG_V4L2            ?= "v4l2"
+PACKAGECONFIG_V4L2                ?= "v4l2"
 PACKAGECONFIG_V4L2:arm:imx-nxp-bsp = ""
 
+PACKAGECONFIG[dng] = ",,tiff"
 PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[pycamera] = "-Dpycamera=enabled,-Dpycamera=disabled,python3 python3-pybind11"
 PACKAGECONFIG[v4l2] = "-Dv4l2=true,-Dv4l2=false"
@@ -48,6 +47,9 @@ EXTRA_OEMESON = " \
 "
 
 RDEPENDS:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland qt', 'qtwayland', '', d)}"
+
+# Qt installs native tools to /usr/libexec, but this is not in PATH
+PATH:prepend = "${@bb.utils.contains('DISTRO_FEATURES', 'qt', '${STAGING_LIBEXECDIR_NATIVE}:', '', d)}"
 
 inherit meson pkgconfig python3native
 

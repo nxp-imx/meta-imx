@@ -14,10 +14,10 @@ SRCBRANCH = "release/version_2.x"
 
 PV = "2.0+git${SRCPV}"
 
-SRCREV = "ca6cd963315b27d163d1c23c41851b68964c2a2f"
+SRCREV = "032d0467b4804e2cd61ed33a4d55df739ded13bd"
 S = "${WORKDIR}/git"
 
-inherit cmake
+inherit cmake pkgconfig
 
 CFLAGS[unexport] = "1"
 CPPFLAGS[unexport] = "1"
@@ -27,7 +27,6 @@ LD[unexport] = "1"
 EXTRA_OECMAKE = " \
     -DNXP_SMW_DIR=${STAGING_DIR_HOST}${libdir}/cmake \
     -Del2go_agent_DIR=${STAGING_DIR_HOST}${libdir}/cmake/el2go-agent \
-    -DCYAML_ROOT=${STAGING_DIR_HOST} \
     -DVERBOSE=2"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"

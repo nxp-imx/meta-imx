@@ -13,7 +13,9 @@ POKY_DEFAULT_DISTRO_FEATURES_IMX_REMOVE:mx6-nxp-bsp ?= "wayland vulkan"
 POKY_DEFAULT_DISTRO_FEATURES_IMX_REMOVE:mx7-nxp-bsp ?= "wayland vulkan"
 DISTRO_FEATURES:remove = "pulseaudio"
 
-POKY_DEFAULT_DISTRO_FEATURES:append = " ${POKY_DEFAULT_DISTRO_FEATURES_IMX_APPEND}"
+POKY_DEFAULT_DISTRO_FEATURES:append = " \
+    qt \
+    ${POKY_DEFAULT_DISTRO_FEATURES_IMX_APPEND}"
 POKY_DEFAULT_DISTRO_FEATURES_IMX_APPEND             ?= "jailhouse xen"
 POKY_DEFAULT_DISTRO_FEATURES_IMX_APPEND:mx6-nxp-bsp ?= ""
 POKY_DEFAULT_DISTRO_FEATURES_IMX_APPEND:mx7-nxp-bsp ?= ""
@@ -62,3 +64,7 @@ PACKAGECONFIG:append:pn-qtquick3d:class-target = " examples"
 PACKAGECONFIG:remove:pn-qtquick3d:class-target = "openxr"
 
 PACKAGECONFIG:append:pn-qtwebengine:class-target = " examples"
+
+# For bluealsa enable msbc in order to validate Bluetooth HFP profile with WBS.
+# Supporting encode/decode of SCO packets with SBC codec
+PACKAGECONFIG:append:pn-bluealsa = " msbc"

@@ -1,0 +1,3 @@
+
+SRCBRANCH = "lf-6.12.49_2.2.0"
+SRCREV = "bcb8aa2dfaa48e2860e575d534d98a2ad92adac6"

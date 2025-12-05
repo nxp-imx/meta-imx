@@ -59,7 +59,7 @@ Follow the instructions here: https://docs.yoctoproject.org/5.2.2/singleindex.ht
 
 Use the i.MX Linux BSP manifest repository to create the Yocto Project layers.
 ```
-$: repo init -u https://github.com/nxp-imx/imx-manifest.git -b imx-linux-walnascar -m imx-6.12.34-2.1.0.xml
+$: repo init -u https://github.com/nxp-imx/imx-manifest.git -b imx-linux-walnascar -m imx-6.12.49-2.2.0.xml
 $: repo sync
 ```
 

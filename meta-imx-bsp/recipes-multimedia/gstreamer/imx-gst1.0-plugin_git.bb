@@ -34,12 +34,12 @@ RREPLACES:${PN}  = "gst1.0-fsl-plugin"
 RPROVIDES:${PN}  = "gst1.0-fsl-plugin"
 RCONFLICTS:${PN} = "gst1.0-fsl-plugin"
 
-PV = "4.10.1+git${SRCPV}"
+PV = "4.10.2+git${SRCPV}"
 
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH}"
 IMXGST_SRC ?= "git://github.com/nxp-imx/imx-gst1.0-plugin.git;protocol=https"
-SRCBRANCH = "MM_04.10.01_2508_L6.12.34"
-SRCREV = "939e6176ae7e41fa8f3f48e2726bcb7a8b5d12f6"
+SRCBRANCH = "MM_04.10.02_2510_L6.12.49"
+SRCREV = "663b07393f6b43d3ede6078c161b646fc3ddba88"
 
 S = "${WORKDIR}/git"
 
@@ -94,5 +94,7 @@ FILES:${PN}-grecorder = "${bindir}/grecorder-1.0 \
                          ${bindir}/pipewire_recorder.py"
 FILES:${PN}-librecorder-engine = "${libdir}/librecorder_engine-1.0${SOLIBS}"
 FILES:${PN}-libplayengine = "${libdir}/libplayengine-1.0${SOLIBS}"
+
+INSANE_SKIP:${PN} = "build-deps"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"

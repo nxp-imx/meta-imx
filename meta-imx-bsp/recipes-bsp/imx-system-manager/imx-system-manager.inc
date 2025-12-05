@@ -4,6 +4,8 @@ DEPENDS = "${SM_COMPILER}"
 DEPENDS:append:mx943-nxp-bsp = " srecord-native"
 SM_COMPILER ?= "gcc-arm-none-eabi-native"
 
+PROVIDES = "virtual/imx-system-manager"
+
 inherit deploy
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

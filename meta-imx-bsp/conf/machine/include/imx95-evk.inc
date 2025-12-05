@@ -20,14 +20,15 @@ SPL_BINARY = "spl/u-boot-spl.bin"
 
 UBOOT_CONFIG ??= "sd"
 UBOOT_CONFIG[sd] = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
+UBOOT_CONFIG[sd-ecc] = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
 UBOOT_CONFIG[fspi] = "${UBOOT_CONFIG_BASENAME}_fspi_defconfig"
 
 ATF_PLATFORM = "imx95"
-OEI_CONFIGS = "ddr ${OEI_CONFIGS_TCM}"
-OEI_CONFIGS_TCM = "${@'tcm' if d.getVar('IMX_SOC_REV')[0] == 'A' else ''}"
+
 OEI_CORE   = "m33"
 OEI_SOC    = "mx95"
 OEI_BOARD  ?= "mx95lp5"
+
 DDR_TYPE   ?= "lpddr5"
 
 IMXBOOT_VARIANTS = "alt jailhouse netc rpmsg sof"
@@ -52,7 +53,9 @@ IMXBOOT_TARGETS_SD = " \
 "
 
 IMXBOOT_TARGETS = " \
-    ${@bb.utils.contains('UBOOT_CONFIG', 'fspi', '${IMXBOOT_TARGETS_BASENAME}_a55_flexspi', '${IMXBOOT_TARGETS_SD}', d)} \
+    ${@bb.utils.contains('UBOOT_CONFIG', 'fspi',   '${IMXBOOT_TARGETS_BASENAME}_a55_flexspi', \
+       bb.utils.contains('UBOOT_CONFIG', 'sd-ecc', '${IMXBOOT_TARGETS_BASENAME}_all', \
+                                                   '${IMXBOOT_TARGETS_SD}', d), d)} \
 "
 
 IMX_BOOT_SOC_TARGET = "iMX95"

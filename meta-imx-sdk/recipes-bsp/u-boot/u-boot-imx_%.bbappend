@@ -1,0 +1,2 @@
+
+DEPENDS:append = " efitools-native"

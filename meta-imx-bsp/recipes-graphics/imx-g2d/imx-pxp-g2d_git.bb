@@ -8,12 +8,12 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a93b654673e1bc8398ed1f30e0813359"
 
 PROVIDES += "virtual/libg2d"
 
-PV = "2.4+git${SRCPV}"
+PV = "2.5.0+git"
 
 SRC_URI = "${IMX_PXP_G2D_SRC};branch=${SRCBRANCH}"
 IMX_PXP_G2D_SRC ?= "git://github.com/nxp-imx/imx-g2d-pxp.git;protocol=https"
-SRCBRANCH = "imx_2.4"
-SRCREV = "e84c713db1ce50c75087aad32ff0bfed30de4978"
+SRCBRANCH = "imx_2.5"
+SRCREV = "5f2e4e7db2666909752128b7f32a02ba091ac90e"
 
 S = "${WORKDIR}/git"
 

@@ -8,7 +8,7 @@ SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 UBOOT_SRC ?= "git://github.com/nxp-imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "lf_v2025.04"
 LOCALVERSION ?= "-${SRCBRANCH}"
-SRCREV = "44898b9f3cfe5ff881c11ab1c44b714041f2b4ac"
+SRCREV = "4ddbad60eff308a5b356fb9ab8734ac382ddd692"
 
 DEPENDS += " \
     bc-native \
@@ -16,7 +16,6 @@ DEPENDS += " \
     dtc-native \
     flex-native \
     gnutls-native \
-    efitools-native \
     python3-setuptools-native \
     xxd-native \
 "

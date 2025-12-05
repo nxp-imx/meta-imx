@@ -11,13 +11,13 @@ LIC_FILES_CHKSUM = "file://License.txt;md5=2b415520383f7964e96700ae12b4570a"
 LIC_FILES_CHKSUM += "file://edk2-platforms/License.txt;md5=2b415520383f7964e96700ae12b4570a"
 
 # These can be overridden as needed
-EDK2_SRC_URI = "gitsm://github.com/tianocore/edk2.git;branch=master;protocol=https"
-EDK2_PLATFORMS_SRC_URI = "git://github.com/tianocore/edk2-platforms.git;branch=master;protocol=https"
-
+SRC_URI_EDK2 ?= "gitsm://github.com/tianocore/edk2.git;protocol=https"
+SRC_URI_EDK2_PLATFORMS ?= "git://github.com/tianocore/edk2-platforms.git;protocol=https"
+SRCBRANCH_edk2 = "master"
+SRCBRANCH_edk2_platforms = "master"
 SRC_URI = "\
-    ${EDK2_SRC_URI};name=edk2;destsuffix=edk2;nobranch=1 \
-    ${EDK2_PLATFORMS_SRC_URI};name=edk2-platforms;destsuffix=edk2/edk2-platforms;nobranch=1 \
-    file://unaligned.patch \
+    ${SRC_URI_EDK2};branch=${SRCBRANCH_edk2};name=edk2;destsuffix=edk2 \
+    ${SRC_URI_EDK2_PLATFORMS};branch=${SRCBRANCH_edk2_platforms};name=edk2-platforms;destsuffix=edk2/edk2-platforms \
 "
 
 SRCREV_FORMAT         = "edk2_edk2-platforms"
@@ -27,10 +27,6 @@ COMPATIBLE_MACHINE ?= "invalid"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 EDK2_BUILD_RELEASE = "1"
-# Release builds don't work with clang yet:
-# https://bugzilla.tianocore.org/show_bug.cgi?id=3758.
-# Can be removed in 202202 (c9b7c6e)
-EDK2_BUILD_RELEASE:toolchain-clang = "0"
 
 EDK2_PLATFORM      = "unset"
 # build --platform
@@ -43,6 +39,9 @@ EDK2_ARCH:aarch64  = "AARCH64"
 EDK2_ARCH:x86      = "IA32"
 EDK2_ARCH:x86-64   = "X64"
 EDK2_ARCH:riscv64  = "RISCV64"
+
+# Use the package version as the version to be printed out but allow for it to be overridden
+EDK2_VERSION ?= "${PV}"
 
 # Extra arguments passed to build
 EDK2_EXTRA_BUILD   = ""
@@ -74,12 +73,28 @@ export BTOOLS_PATH = "${EDK_TOOLS_PATH}/BinWrappers/PosixLike"
 
 EDK_COMPILER ?= "GCC5"
 export GCC5_AARCH64_PREFIX = "${TARGET_PREFIX}"
+export GCC5_ARM_PREFIX = "${TARGET_PREFIX}"
 
 EDK_COMPILER:toolchain-clang = "CLANG38"
 export CLANG38_AARCH64_PREFIX = "${TARGET_PREFIX}"
+export CLANG38_ARM_PREFIX = "${TARGET_PREFIX}"
+
+# These variables were changed in edk2 commit
+# 206168e83f0901cbc1815ef5df4ac6598ad9721b, which was part of edk2-202305
+export CC = "${BUILD_CC}"
+export CXX = "${BUILD_CXX}"
+export AS = "${BUILD_AS}"
+export AR = "${BUILD_AR}"
+export LD = "${BUILD_LD}"
+export CFLAGS = "${BUILD_CFLAGS}"
+export CPPFLAGS = "${BUILD_CPPFLAGS}"
+export LDFLAGS = "${BUILD_LFLAGS}"
+
+#FIXME - arm32 doesn't work with clang due to a linker issue
+TOOLCHAIN:arm = "gcc"
 
 do_configure:prepend() {
-    sed -i -e "s#-target ${HOST_ARCH}-linux-gnu*#-target ${HOST_SYS}#" ${S}/BaseTools/Conf/tools_def.template
+    sed -i -e "s#-target ${HOST_ARCH}-linux-gnu.*#-target ${HOST_SYS}#" ${S}/BaseTools/Conf/tools_def.template
 }
 
 do_compile() {
@@ -101,6 +116,7 @@ do_compile() {
        --tagname ${EDK_COMPILER} \
        --platform ${EDK2_PLATFORM_DSC} \
        ${@oe.utils.parallel_make_argument(d, "-n %d")} \
+       -D FIRMWARE_VER="${EDK2_VERSION}" \
        ${EDK2_EXTRA_BUILD}
 }
 

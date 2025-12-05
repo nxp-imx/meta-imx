@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7bdef19938f3503cfc4c586461f99012"
 
 PV = "1.0+git${SRCPV}" 
 
-SRCBRANCH = "MM_04.10.01_2508_L6.12.34"
+SRCBRANCH = "MM_04.10.02_2510_L6.12.49"
 NXPAFE_SRC ?= "git://github.com/nxp-imx/nxp-afe.git;protocol=https"
 SRC_URI = " \
     ${NXPAFE_SRC};branch=${SRCBRANCH} \
 "
 
-SRCREV = "dba6953332b98fff0494a4335a4f43f119107d6e"
+SRCREV = "e5d22596210b1be1b215954804252844df71b0d4"
 
 S = "${WORKDIR}/git"
 

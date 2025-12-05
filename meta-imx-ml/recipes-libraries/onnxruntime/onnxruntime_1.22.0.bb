@@ -12,8 +12,8 @@ inherit setuptools3
 
 SRC_URI = "${ONNXRUNTIME_SRC};branch=${SRCBRANCH}"
 ONNXRUNTIME_SRC ?= "gitsm://github.com/nxp-imx/onnxruntime-imx.git;protocol=https"
-SRCBRANCH = "lf-6.12.34_2.1.0"
-SRCREV = "868cb88cd799d12d201829d51f93c72365567957"
+SRCBRANCH = "lf-6.12.49_2.2.0"
+SRCREV = "2ef0bb77e4b886c1d075b2bbc4ce0dc5b60c268b"
 
 S = "${WORKDIR}/git"
 
@@ -56,6 +56,7 @@ PYTHON_RDEPENDS = "\
 PACKAGECONFIG ?= "crosscompiling sharedlib python kleidiai ${PACKAGECONFIG_NPU}"
 PACKAGECONFIG_NPU                    = ""
 PACKAGECONFIG_NPU:mx95-nxp-bsp       = "neutron"
+PACKAGECONFIG_NPU:mx943-nxp-bsp      = "neutron"
 PACKAGECONFIG_NPU:mx8-nxp-bsp:imxgpu = "vsinpu"
 PACKAGECONFIG_NPU:mx8mm-nxp-bsp      = ""
 
@@ -148,10 +149,13 @@ do_install:append() {
     # Ensure target dir exists
     install -d ${D}${bindir}/${BP}
 
-    # Copy squeezenet updated model from imx-onnxruntime repo
+    # Copy squeezenet updated model from onnxruntime-imx repo
     if [ -d ${S}/example-models/ ]; then
         cp $CP_ARGS ${S}/example-models/squeezenet ${D}${bindir}/${BP}/
     fi
+
+    # Copy label_image_onnx.py tool from onnxruntime-imx repo
+    cp ${S}/onnxruntime/core/providers/neutron/tools/label_image_onnx.py ${D}${bindir}/${BP}/
 
     # If cmake installs 'onnx_test_runner' at bindir level, move to package
     if [ -f ${D}${bindir}/onnx_test_runner ]; then

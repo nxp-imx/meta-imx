@@ -10,7 +10,7 @@ SRC_URI = "${DPDK_CMM_SRC};branch=${SRCBRANCH}"
 DPDK_CMM_SRC ?= "git://github.com/nxp-imx/cmm;protocol=https"
 
 SRCBRANCH = "xdp_cmm"
-SRCREV = "17e82c5c6f21002037ddcca17d20a3faf146234e"
+SRCREV = "870772a5e865ebddb7e6684b575927f4264cae66"
 
 inherit autotools pkgconfig
 
@@ -19,7 +19,7 @@ S = "${WORKDIR}/git"
 EXTRA_OECONF += " --with-cpal=bpf"
 
 # Use LS1043 platform for i.MX
-CFLAGS +=" -I${STAGING_INCDIR}/ -DIPSEC_SUPPORT_DISABLED -DLS1043"
+CFLAGS +=" -I${STAGING_INCDIR}/ -DIPSEC_SUPPORT_DISABLED"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/cmm

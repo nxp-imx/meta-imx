@@ -8,8 +8,8 @@ DEPENDS = "litert neutron tensorflow-lite-host-tools-native"
 require litert-${PV}.inc
 
 NEUTRON_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-neutron-delegate.git;protocol=https"
-SRCBRANCH_neutron = "lf-6.12.34_2.1.0"
-SRCREV_neutron = "be8bf3997c70247bf46649f2304209fef82d4802"
+SRCBRANCH_neutron = "lf-6.12.49_2.2.0"
+SRCREV_neutron = "f24d08e5e1d461e669ece3c476c6dd340ce355cb"
 
 SRCREV_FORMAT = "neutron_tf"
 

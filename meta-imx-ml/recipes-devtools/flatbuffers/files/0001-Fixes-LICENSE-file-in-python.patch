@@ -1,0 +1,39 @@
+From 6cb4d671a88e054744ce3029df9e733dc724ee76 Mon Sep 17 00:00:00 2001
+From: Derek Bailey <dbaileychess@gmail.com>
+Date: Mon, 19 Aug 2024 16:08:46 -0700
+Subject: [PATCH] Fixes LICENSE file in python
+
+Fixes: #8376
+Upstream-Status: Backport [https://github.com/google/flatbuffers/commit/6cb4d671a88e054744ce3029df9e733dc724ee76]
+---
+ python/setup.cfg | 2 +-
+ python/setup.py  | 1 -
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/python/setup.cfg b/python/setup.cfg
+index e3647037..0c43b1cf 100644
+--- a/python/setup.cfg
++++ b/python/setup.cfg
+@@ -3,4 +3,4 @@ universal=1
+ 
+ [metadata]
+ license_files =
+-   ../license
+\ No newline at end of file
++   ../LICENSE
+\ No newline at end of file
+diff --git a/python/setup.py b/python/setup.py
+index 065b2754..21ddecb9 100644
+--- a/python/setup.py
++++ b/python/setup.py
+@@ -18,7 +18,6 @@ setup(
+     name='flatbuffers',
+     version='24.3.25',
+     license='Apache 2.0',
+-    license_files='../LICENSE',
+     author='Derek Bailey',
+     author_email='derekbailey@google.com',
+     url='https://google.github.io/flatbuffers/',
+-- 
+2.34.1
+
