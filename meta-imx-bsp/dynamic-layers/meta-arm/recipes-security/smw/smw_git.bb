@@ -6,7 +6,7 @@ DESCRIPTION = "NXP i.MX Security Middleware Library"
 SECTION = "base"
 LICENSE = "BSD-3-Clause"
 LICENSE = "Apache-2.0 & BSD-3-Clause & Zlib"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=6087d19da5441648e33f85ae64cf2a7d \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ff20c8e51b28869d9cdec70a818d163f \
                     file://${PSA_ARCH_TESTS_SRC_PATH}/LICENSE.md;md5=2a944942e1496af1886903d274dedb13"
 
 DEPENDS = " \
@@ -27,7 +27,7 @@ PV = "5.2+git"
 
 SRCBRANCH_smw = "master"
 SRCBRANCH_psa = "main"
-SRCREV_smw = "17a34e7fc771c4bcc73a59b8fea7975d185fa292"
+SRCREV_smw = "4da9d03b37b5bca32093b8e73e880e5994d54df9"
 SRCREV_psa = "463cb95ada820bc6f758d50066cf8c0ed5cc3a02"
 SRCREV_FORMAT = "smw_psa"
 
