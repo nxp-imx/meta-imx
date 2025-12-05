@@ -1,8 +1,5 @@
 require imx-secure-enclave.inc
 
-DEPENDS:append:mx95-nxp-bsp = " imx-secure-enclave-seco"
-DEPENDS:append:mx943-nxp-bsp = " imx-secure-enclave-prime"
-
 inherit systemd
 
 SYSTEMD_AUTO_ENABLE = "disable"
