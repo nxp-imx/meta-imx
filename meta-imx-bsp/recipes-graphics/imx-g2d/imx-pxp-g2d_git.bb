@@ -13,7 +13,7 @@ PV = "2.5.0+git"
 SRC_URI = "${IMX_PXP_G2D_SRC};branch=${SRCBRANCH}"
 IMX_PXP_G2D_SRC ?= "git://github.com/nxp-imx/imx-g2d-pxp.git;protocol=https"
 SRCBRANCH = "imx_2.5"
-SRCREV = "5f2e4e7db2666909752128b7f32a02ba091ac90e"
+SRCREV = "c6d903043d1229ca15e7af154df06261fa80e1d1"
 
 
 inherit use-imx-headers
