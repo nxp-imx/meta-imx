@@ -488,7 +488,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     imx-smw.git
-Version:                     5.0
+Version:                     5.2
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            BSP
