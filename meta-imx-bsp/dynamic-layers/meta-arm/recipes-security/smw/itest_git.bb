@@ -18,6 +18,7 @@ PACKAGECONFIG:mx91-nxp-bsp   ??= "ele"
 PACKAGECONFIG:mx93-nxp-bsp   ??= "ele"
 PACKAGECONFIG:mx943-nxp-bsp  ??= "ele ele-seco prime"
 PACKAGECONFIG:mx95-nxp-bsp   ??= "ele ele-seco"
+PACKAGECONFIG:mx952-nxp-bsp  ??= "ele ele-seco prime"
 
 PACKAGECONFIG[ele]      = "-DELE=1,,imx-secure-enclave"
 PACKAGECONFIG[ele-seco] = "-DV2X=1,,imx-secure-enclave-seco"
