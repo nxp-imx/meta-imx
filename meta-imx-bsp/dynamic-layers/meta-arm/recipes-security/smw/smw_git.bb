@@ -27,7 +27,7 @@ PV = "5.2+git"
 
 SRCBRANCH_smw = "master"
 SRCBRANCH_psa = "main"
-SRCREV_smw = "4da9d03b37b5bca32093b8e73e880e5994d54df9"
+SRCREV_smw = "4da9d03b37b5bca32093b8e73e880e5994d54df9" 
 SRCREV_psa = "463cb95ada820bc6f758d50066cf8c0ed5cc3a02"
 SRCREV_FORMAT = "smw_psa"
 
