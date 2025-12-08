@@ -17,4 +17,4 @@ do_install:append:mx9-nxp-bsp() {
     rm ${D}${bindir}/se_tools
 }
 
-COMPATIBLE_MACHINE = "(mx8x-nxp-bsp|mx943-nxp-bsp|mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8x-nxp-bsp|mx943-nxp-bsp|mx95-nxp-bsp|mx952-nxp-bsp)"
