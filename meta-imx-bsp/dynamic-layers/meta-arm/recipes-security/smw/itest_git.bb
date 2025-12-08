@@ -31,4 +31,4 @@ EXTRA_OECMAKE = " \
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
-COMPATIBLE_MACHINE = "(mx8dxl-nxp-bsp|mx8ulp-nxp-bsp|mx91-nxp-bsp|mx93-nxp-bsp|mx943-nxp-bsp|mx95-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8dxl-nxp-bsp|mx8ulp-nxp-bsp|mx9-nxp-bsp)"
