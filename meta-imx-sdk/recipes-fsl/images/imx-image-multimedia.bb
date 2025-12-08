@@ -65,3 +65,5 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     ${DOCKER} \
     ${G2D_SAMPLES} \
 "
+
+IMAGE_BOOT_FILES:append:mx95-nxp-bsp = " ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'xen', '', d)}"
