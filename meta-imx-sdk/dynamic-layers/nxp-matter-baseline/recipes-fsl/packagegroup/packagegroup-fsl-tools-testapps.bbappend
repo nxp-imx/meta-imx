@@ -6,6 +6,6 @@ NXP_MATTER_TOOLS:imx-nxp-bsp = " \
     packagegroup-nxp-matter-baseline \
 "
 
-#RDEPENDS:${PN} += " \
-#    ${NXP_MATTER_TOOLS} \
-#"
+RDEPENDS:${PN} += " \
+    ${NXP_MATTER_TOOLS} \
+"
