@@ -12,6 +12,8 @@ IMXBOOT_VARIANT  ?= ""
 IMXBOOT_VARIANTS ?= "NONE"
 BOOT_VARIANT = "${@bb.utils.contains_any('IMXBOOT_VARIANT', '${IMXBOOT_VARIANTS}', '-variant-${IMXBOOT_VARIANT}', '', d)}"
 
+MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx8mpul mx93w mx952"
+
 # Add new Soc i.MX 93W
 MACHINEOVERRIDES_EXTENDER:mx93w:use-nxp-bsp  = "mx93w-generic-bsp:mx93w-nxp-bsp"
 
@@ -46,7 +48,6 @@ SYSTEM_MANAGER_FIRMWARE_BASENAME:mx952-nxp-bsp ?= "m33_image"
 # Add new machine i.MX 8M Plus UltraLite
 MACHINEOVERRIDES_EXTENDER:mx8mpul:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8m-generic-bsp:mx8m-nxp-bsp:mx8mpul-generic-bsp:mx8mpul-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER:mx8mpul:use-mainline-bsp = "imx-generic-bsp:imx-mainline-bsp:mx8-generic-bsp:mx8-mainline-bsp:mx8m-generic-bsp:mx8m-mainline-bsp:mx8mpul-generic-bsp:mx8mpul-mainline-bsp"
-MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx8mpul"
 MACHINE_SOCARCH_SUFFIX:mx8mpul-nxp-bsp = "-mx8mpul"
 
 # ELE extra/runtime firmware, to be installed and accessed from userspace.
