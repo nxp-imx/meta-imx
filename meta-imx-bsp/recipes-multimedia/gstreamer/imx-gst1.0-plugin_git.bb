@@ -40,7 +40,7 @@ PV = "4.10.3+git${SRCPV}"
 SRC_URI = "${IMXGST_SRC};branch=${SRCBRANCH}"
 IMXGST_SRC ?= "git://github.com/nxp-imx/imx-gst1.0-plugin.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "5dbab9c8ebacbeb823b5e1d8af57d11949ad84ba"
+SRCREV = "e3d665bb760eb129d8373ecd58e361cc92308fe7"
 
 
 inherit meson pkgconfig use-imx-headers
