@@ -83,8 +83,6 @@ RDEPENDS:${PN} += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston-examples', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wifi', 'hostapd sigma-dut', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'packagegroup-fsl-optee-imx', '', d)} \
-    ${@bb.utils.contains('COMBINED_FEATURES', 'jailhouse', 'jailhouse', '', d)} \
-    ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'xen xen-tools', '', d)} \
 "
 
 RDEPENDS_DPDK ?= "dpdk ${RDEPENDS_DPDK_FPR} ${RDEPENDS_MTCP_DPDK}"
