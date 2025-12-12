@@ -12,8 +12,9 @@ SRC_URI += " \
     file://0009-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
     file://0010-renderdoc-CMakeLists.txt-Fix-multilib-case.patch \
     file://0011-Fix-a-xdg_shell-bug-on-8ulp.patch \
-    file://0001-CMakeLists.txt-Update-cmake_minimum_required-to-3.5.patch \
-    file://0001-3rdparty-glslang-Fix-gcc15-build-issues.patch \
+    file://0012-CMakeLists.txt-Update-cmake_minimum_required-to-3.5.patch \
+    file://0013-3rdparty-glslang-Fix-gcc15-build-issues.patch \
+    file://0014-Pass-rdynamic-to-renderdoccmd-link.patch \
 "
 
 REQUIRED_DISTRO_FEATURES:remove = "opengl"

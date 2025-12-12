@@ -1,0 +1,28 @@
+From d26f634aeb931073ed745fd1327eb9864830dab6 Mon Sep 17 00:00:00 2001
+From: David McFarland <corngood@gmail.com>
+Date: Wed, 26 Nov 2025 14:26:48 -0400
+Subject: [PATCH] Pass -rdynamic to renderdoccmd link
+
+This ensures replay marker sym is exported, and matches qrenderdoc.
+
+Upstream-Status: Backport [https://github.com/baldurk/renderdoc/commit/d26f634aeb931073ed745fd1327eb9864830dab6]
+---
+ renderdoccmd/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/renderdoccmd/CMakeLists.txt b/renderdoccmd/CMakeLists.txt
+index 94a5158e9..64922895b 100644
+--- a/renderdoccmd/CMakeLists.txt
++++ b/renderdoccmd/CMakeLists.txt
+@@ -67,7 +67,7 @@ elseif(UNIX)
+ 
+     # Make sure that for the target executable we don't throw away
+     # any shared libraries.
+-    set(LINKER_FLAGS "-Wl,--no-as-needed")
++    set(LINKER_FLAGS "-Wl,--no-as-needed -rdynamic")
+ endif()
+ 
+ if(ANDROID)
+-- 
+2.34.1
+
