@@ -1,6 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://0001-MGS-8163-fix-fix-the-surface-resize-logic-when-use-w.patch \
-            file://0002-fix-Initialize-handle-to-prevent-freeing-uninitializ.patch"
+            file://0002-fix-Initialize-handle-to-prevent-freeing-uninitializ.patch \
+            file://0003-fix-Initialize-all-handle-which-will-free-in-destruc.patch"
 
 inherit pkgconfig
 
