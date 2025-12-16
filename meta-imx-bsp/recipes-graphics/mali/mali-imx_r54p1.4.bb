@@ -1,4 +1,4 @@
-require mali-imx.inc
+require mali-imx-overrides.inc
 
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac" 
