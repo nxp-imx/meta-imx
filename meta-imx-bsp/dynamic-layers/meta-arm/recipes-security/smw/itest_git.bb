@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8636bd68fc00cc6a3809b7b58b45f982"
 SRC_URI = "${ITEST_SRC};branch=${SRCBRANCH}"
 ITEST_SRC ?= "git://github.com/nxp-imx/itest.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "8cffb30494763496146c9d1386f229ac92160c90"
+SRCREV = "0b48ac22fe16721b3af6e7e305b9f708085cd382"
 
 inherit cmake
 
