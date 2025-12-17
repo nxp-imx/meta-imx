@@ -103,6 +103,10 @@ PACKAGECONFIG = "gst pycamera dng"
 
 ARM_PIPELINES .= ",nxp/neo"
 
+EXTRA_OEMESON += " \
+    --python.platlibdir=${PYTHON_SITEPACKAGES_DIR} \
+"
+
 # Qt installs native tools to /usr/libexec, but this is not in PATH
 PATH:prepend = "${@bb.utils.contains('DISTRO_FEATURES', 'qt', '${STAGING_LIBEXECDIR_NATIVE}:', '', d)}"
 
