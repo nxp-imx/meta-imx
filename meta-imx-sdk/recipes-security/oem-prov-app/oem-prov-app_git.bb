@@ -4,7 +4,7 @@ SUMMARY = "NXP i.MX EdgeLock 2GO OEM provisioning application"
 DESCRIPTION = "NXP i.MX EdgeLock 2GO OEM provisioning application"
 SECTION = "base"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=526003fe435291c11167e5ec08a53268"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=7fc11e65b98453fd7684bb39ad6dfb48"
 
 DEPENDS = "cyaml smw el2go-agent"
 
