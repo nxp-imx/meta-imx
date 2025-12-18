@@ -1,4 +1,4 @@
-From 26795d41f44b7ad96a964d67af070077bd2589f3 Mon Sep 17 00:00:00 2001
+From 2bdb48f5aad0eb4273bc8bbd697f92bcdee6e4db Mon Sep 17 00:00:00 2001
 From: Shengjiu Wang <shengjiu.wang@nxp.com>
 Date: Tue, 21 Oct 2025 16:35:46 +0800
 Subject: [PATCH] ucm2: NXP: add alsa-ucm support
@@ -15,7 +15,7 @@ Signed-off-by: Shengjiu Wang <shengjiu.wang@nxp.com>
  ucm2/NXP/MQS.conf                             | 22 ++++++
  ucm2/NXP/spdif.conf                           | 40 ++++++++++
  ucm2/NXP/wm8524.conf                          | 22 ++++++
- ucm2/NXP/wm8960.conf                          | 70 +++++++++++++++++
+ ucm2/NXP/wm8960.conf                          | 69 +++++++++++++++++
  ucm2/NXP/wm8962.conf                          | 76 +++++++++++++++++++
  ucm2/conf.d/audio-hdmi/audio-hdmi.conf        |  9 +++
  ucm2/conf.d/fsl-asoc-card/imx-spdif.conf      |  9 +++
@@ -28,7 +28,7 @@ Signed-off-by: Shengjiu Wang <shengjiu.wang@nxp.com>
  ucm2/conf.d/simple-card/bt-sco-audio.conf     |  9 +++
  ucm2/conf.d/simple-card/mqs-audio.conf        |  9 +++
  ucm2/conf.d/simple-card/wm8524-audio.conf     |  9 +++
- 19 files changed, 415 insertions(+)
+ 19 files changed, 414 insertions(+)
  create mode 100644 ucm2/NXP/BT-SCO.conf
  create mode 100644 ucm2/NXP/HDMI-TX.conf
  create mode 100644 ucm2/NXP/MICFIL.conf
@@ -257,10 +257,10 @@ index 0000000..8f92956
 +}
 diff --git a/ucm2/NXP/wm8960.conf b/ucm2/NXP/wm8960.conf
 new file mode 100644
-index 0000000..60b0ebc
+index 0000000..1724cf9
 --- /dev/null
 +++ b/ucm2/NXP/wm8960.conf
-@@ -0,0 +1,70 @@
+@@ -0,0 +1,69 @@
 +SectionVerb {
 +	EnableSequence [
 +	]
@@ -328,7 +328,6 @@ index 0000000..60b0ebc
 +                CaptureVolume "name='Capture Volume'"
 +                CaptureMixerElem "Capture"
 +                CapturePCM "hw:${CardId}"
-+                JackControl "Headphone Jack"
 +        }
 +}
 diff --git a/ucm2/NXP/wm8962.conf b/ucm2/NXP/wm8962.conf
@@ -460,13 +459,13 @@ index 0000000..a7dfbd1
 +]
 diff --git a/ucm2/conf.d/fsl-asoc-card/wm8524-audio.conf b/ucm2/conf.d/fsl-asoc-card/wm8524-audio.conf
 new file mode 100644
-index 0000000..81296ed
+index 0000000..862a2a4
 --- /dev/null
 +++ b/ucm2/conf.d/fsl-asoc-card/wm8524-audio.conf
 @@ -0,0 +1,9 @@
 +Syntax 4
 +
-+SectionUseCase."wm8524" {
++SectionUseCase."analog-HiFi" {
 +        File "/NXP/wm8524.conf"
 +        Comment "Play sound"
 +}
@@ -475,13 +474,13 @@ index 0000000..81296ed
 +]
 diff --git a/ucm2/conf.d/fsl-asoc-card/wm8960-audio.conf b/ucm2/conf.d/fsl-asoc-card/wm8960-audio.conf
 new file mode 100644
-index 0000000..4330f79
+index 0000000..ab431d8
 --- /dev/null
 +++ b/ucm2/conf.d/fsl-asoc-card/wm8960-audio.conf
 @@ -0,0 +1,9 @@
 +Syntax 4
 +
-+SectionUseCase."HiFi" {
++SectionUseCase."analog-HiFi" {
 +	File "/NXP/wm8960.conf"
 +	Comment "Play high quality music"
 +}
@@ -490,13 +489,13 @@ index 0000000..4330f79
 +]
 diff --git a/ucm2/conf.d/fsl-asoc-card/wm8962-audio.conf b/ucm2/conf.d/fsl-asoc-card/wm8962-audio.conf
 new file mode 100644
-index 0000000..48849ec
+index 0000000..4a876ad
 --- /dev/null
 +++ b/ucm2/conf.d/fsl-asoc-card/wm8962-audio.conf
 @@ -0,0 +1,9 @@
 +Syntax 4
 +
-+SectionUseCase."HiFi" {
++SectionUseCase."analog-HiFi" {
 +	File "/NXP/wm8962.conf"
 +	Comment "Play high quality music"
 +}
