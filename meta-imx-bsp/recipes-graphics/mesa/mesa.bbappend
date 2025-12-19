@@ -1,5 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/mesa:"
 
+SRC_URI += "file://0001-LF-16845-Set-default-wayland-initialization-to-swras.patch"
+
 # RVGPU Emulator feature
 SRC_URI += "${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', '${SRC_URI_RVGPU}', '', d)}"
 SRC_URI_RVGPU = "file://0001-PATCH-mesa-rvgpu-emu-patch-for-Mesa25.2.3.patch \
