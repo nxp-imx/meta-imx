@@ -2,6 +2,10 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 ### Section 1: Changes to be upstreamed ###
 
+FILES:libvulkan-imx = "\
+    ${libdir}/libvulkan_VSI${REALSOLIBS} \
+    ${datadir}/vulkan"
+
 ### Section 2: Changes to be kept in meta-imx ###
 
 PACKAGECONFIG ?= "valgrind"
