@@ -1,0 +1,38 @@
+From 42cd9e88ed1e2759a2832602befef6c9c14fe073 Mon Sep 17 00:00:00 2001
+From: Kshitiz Varshney <kshitiz.varshney@nxp.com>
+Date: Thu, 16 Oct 2025 11:05:22 +0200
+Subject: [PATCH] util.c: Fix cryptodev build failure
+
+Build failure:
+```
+| util.c:49:25: error: implicit declaration of function 'nth_page'; did you mean 'pte_page'? [-Wimplicit-function-declaration]
+|    49 |                         nth_page(sg_page(sg), sg->offset / PAGE_SIZE);
+|       |                         ^~~~~~~~
+|       |                         pte_page
+```
+
+This is due to the 6.17 kernel API change:
+    commit c506f8ec0d22 ("mm: remove nth_page()")
+
+Upstream-Status: Pending
+Signed-off-by: Kshitiz Varshney <kshitiz.varshney@nxp.com>
+---
+ util.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/util.c b/util.c
+index 9eba483..3373a72 100644
+--- a/util.c
++++ b/util.c
+@@ -45,7 +45,7 @@ struct scatterlist *sg_advance(struct scatterlist *sg, int consumed)
+ 
+ 	if (sg->offset >= PAGE_SIZE) {
+ 		struct page *page =
+-			nth_page(sg_page(sg), sg->offset / PAGE_SIZE);
++			sg_page(sg) + (sg->offset / PAGE_SIZE);
+ 		sg_set_page(sg, page, sg->length, sg->offset % PAGE_SIZE);
+ 	}
+ 
+-- 
+2.25.1
+
