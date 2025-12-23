@@ -7,17 +7,17 @@ LICENSE = "GPL-2.0-only"
 
 require kernel-tools.inc
 
-KERNEL_PCITEST_SRC = "tools/pci"
+KERNEL_PCITEST_SRC = "tools/testing/selftests"
 
 KERNEL_TOOLS_SRC:append = " ${KERNEL_PCITEST_SRC}"
 
+DEPENDS:append = " rsync-native"
 do_compile() {
-    unset CFLAGS
-    oe_runmake -C ${S}/${KERNEL_PCITEST_SRC}
+    oe_runmake -C ${S}/${KERNEL_PCITEST_SRC} TARGETS="pci_endpoint"
 }
 
 do_install() {
-    unset CFLAGS
-    oe_runmake -C ${S}/${KERNEL_PCITEST_SRC} install
+    oe_runmake -C ${S}/${KERNEL_PCITEST_SRC} INSTALL_PATH=${D}/${bindir} TARGETS="pci_endpoint" install
+    chown root:root  -R ${D}/${bindir}
 }
 

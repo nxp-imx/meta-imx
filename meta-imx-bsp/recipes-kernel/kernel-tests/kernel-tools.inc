@@ -30,6 +30,7 @@ KERNEL_TOOLS_SRC ?= " \
     tools/lib \
     tools/Makefile \
     tools/scripts \
+    scripts \
 "
 
 EXTRA_OEMAKE = '\
