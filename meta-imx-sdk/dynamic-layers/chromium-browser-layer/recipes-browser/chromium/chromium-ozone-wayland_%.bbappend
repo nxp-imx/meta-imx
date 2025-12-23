@@ -17,6 +17,7 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0014-Fixed-build-error-caused-by-rust.patch \
     file://0015-Fix-build-errors-by-rust.patch \
     file://0016-Disable-GL_ANGLE_instanced_arrays-extension.patch \
+    file://0017-Fix-webgl-regression-after-angle-upgrade.patch \
 "
 VDA_PATCH_SET = " \
     file://0101-V4L2VideoDecoder-Add-macro-use_linux_v4l2.patch \
