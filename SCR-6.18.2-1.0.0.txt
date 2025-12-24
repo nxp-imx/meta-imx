@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.31-aff27ee.bin
+Package:                     firmware-imx-8.31-839e282.bin
 Version:                     8.31
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -316,7 +316,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-70828dd
+Package:                     sof-zephyr-2.16.0-ee15b8c
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -330,7 +330,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.5-965e921
+Package:                     zephyr-demo-imx-4.3.5-e93279e
 Version:                     4.3.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -731,7 +731,7 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.26.1-9437c65.bin
+Package:                     isp-imx-4.2.2.26.1-f0ba53e.bin
 Version:                     4.2.2.26.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -807,7 +807,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.4-18f26af.bin
+Package:                     mali-imx-r54p1.4-4179b39.bin
 Version:                     r54p1.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1803,7 +1803,7 @@ Origin:                      VeriSilicon (Verisilicon License)
 --------------------------------------------
 
 Package:                     mfgtools.git
-Version:                     1.5.222
+Version:                     1.5.243
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Tools
