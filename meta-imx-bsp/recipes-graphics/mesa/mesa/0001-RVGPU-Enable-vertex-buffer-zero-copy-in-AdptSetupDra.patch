@@ -1,0 +1,37 @@
+From 74b0460d90cc3504db48c8c72d63f8dabb9f66c7 Mon Sep 17 00:00:00 2001
+From: Xianzhong Li <xianzhong.li@nxp.com>
+Date: Fri, 26 Dec 2025 15:54:59 +0800
+Subject: [PATCH] RVGPU: Enable vertex buffer zero-copy in AdptSetupDraw
+
+FW will use and free the vertex buffer asynchronously
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Signed-off-by: Xianzhong Li <xianzhong.li@nxp.com>
+---
+ src/gallium/drivers/softpipe/sp_prim_vbuf.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/gallium/drivers/softpipe/sp_prim_vbuf.c b/src/gallium/drivers/softpipe/sp_prim_vbuf.c
+index ec480608b82..591c2e184a2 100644
+--- a/src/gallium/drivers/softpipe/sp_prim_vbuf.c
++++ b/src/gallium/drivers/softpipe/sp_prim_vbuf.c
+@@ -179,6 +179,7 @@ sp_vbuf_draw_elements(struct vbuf_render *vbr, const uint16_t *indices, uint nr)
+    {
+       int size = cvbr->vertex_buffer_size;
+       AdptSetupDraw(setup, cvbr->prim, vertex_buffer, size, indices, nr, stride, flatshade_first);
++      cvbr->vertex_buffer = align_malloc(size, 16);
+       return;
+    }
+    softpipe->mesa_rendered = true;
+@@ -390,6 +391,7 @@ sp_vbuf_draw_arrays(struct vbuf_render *vbr, uint start, uint nr)
+    {
+       int size = cvbr->vertex_buffer_size-((long)vertex_buffer-(long)cvbr->vertex_buffer);
+       AdptSetupDraw(setup, cvbr->prim, vertex_buffer, size, NULL, nr, stride, flatshade_first);
++      cvbr->vertex_buffer = align_malloc(size, 16);
+       return;
+    }
+    softpipe->mesa_rendered = true;
+-- 
+2.34.1
+
