@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.31-839e282.bin
+Package:                     firmware-imx-8.31-4fa5b46.bin
 Version:                     8.31
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -330,7 +330,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.5-e93279e
+Package:                     zephyr-demo-imx-4.3.5-23354f3
 Version:                     4.3.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -826,7 +826,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     mesa-rvgpu-emu-2.0.0.2-edc3bc2.bin
+Package:                     mesa-rvgpu-emu-2.0.0.2-201a007.bin
 Version:                     2.0.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
