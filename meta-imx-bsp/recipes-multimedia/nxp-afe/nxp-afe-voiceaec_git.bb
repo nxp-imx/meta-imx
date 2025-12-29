@@ -11,7 +11,7 @@ PV = "1.0+git"
 
 SRC_URI = "${NXPAFE_VOICETFLITE_SRC};branch=${SRCBRANCH}"
 NXPAFE_VOICETFLITE_SRC ?= "git://github.com/nxp-imx/imx-voice-tflite.git;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "MM_04.10.03_2512_L6.18.2"
 SRCREV = "442d753008d051e4f8faf9fbb9c18bfcb59dade3"
 
 
