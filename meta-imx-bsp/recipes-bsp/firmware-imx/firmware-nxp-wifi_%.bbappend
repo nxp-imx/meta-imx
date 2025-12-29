@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bc649096ad3928ec06a8713b8d787eac"
 
 IMX_FIRMWARE_SRC ?= "git://github.com/nxp-imx/imx-firmware.git;protocol=https"
 SRC_URI = "${IMX_FIRMWARE_SRC};branch=${SRCBRANCH}"
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.18.2_1.0.0"
 SRCREV = "e7b47c4c49f3f4492fed108f364ab77f6d466636"
 
 do_install() {
