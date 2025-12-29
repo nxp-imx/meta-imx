@@ -1,3 +1,3 @@
 
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.18.2_1.0.0"
 SRCREV = "e899cf573b7ee5d6af1dcbc397eb727b7f345900"
