@@ -2,9 +2,9 @@ require imx-gpu-viv-6-overrides.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac" 
 
-IMX_SRCREV_ABBREV = "182a8ae"
+IMX_SRCREV_ABBREV = "4378efb"
 
-SRC_URI[sha256sum] = "787d6b7f9d356f90b7a1e9450f0317cf665dbf5e25e25010c041cdda44f396e4"
+SRC_URI[sha256sum] = "33c4d398350b434c9cb4eb1fc720a1359d560a935360defa4a540a4940fb9ff8"
 
 do_install:prepend() {
     if [ "${IS_MX8}" = "1" ]; then
