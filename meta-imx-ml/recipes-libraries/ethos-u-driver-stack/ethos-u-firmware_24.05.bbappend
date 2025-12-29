@@ -1,3 +1,3 @@
 
-SRCBRANCH = "imx_24.05"
+SRCBRANCH = "lf-6.18.2_1.0.0"
 SRCREV = "847c1d6d6e18a567ead99428ee20d52f385cd8ba"
