@@ -60,7 +60,7 @@ EXTRA_OEMESON = "-Dplatform=${PLATFORM} \
                  -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \
 "
 
-PACKAGES =+ "${PN}-gplay ${PN}-libgplaycore ${PN}-libgstfsl ${PN}-grecorder ${PN}-librecorder-engine ${PN}-libplayengine"
+PACKAGES =+ "${PN}-tools ${PN}-libgstfsl"
 
 # Add codec list that the beep plugin run-time depended
 BEEP_RDEPENDS = "imx-codec-aac imx-codec-mp3 imx-codec-oggvorbis"
@@ -82,18 +82,12 @@ MSDEPENDS = "imx-msparser imx-mscodec"
 PACKAGECONFIG[wma10dec] = ",,${MSDEPENDS},${MSDEPENDS}"
 PACKAGECONFIG[wma8enc] = ",,${MSDEPENDS},${MSDEPENDS}"
 
-FILES:${PN} = "${libdir}/gstreamer-1.0/*.so ${datadir} ${bindir}/remote_input"
+FILES:${PN} = "${libdir}/gstreamer-1.0/*.so ${datadir}"
 
 FILES:${PN}-dbg += "${libdir}/gstreamer-1.0/.debug"
 FILES:${PN}-dev += "${libdir}/gstreamer-1.0/*.la ${libdir}/pkgconfig/*.pc"
-FILES:${PN}-staticdev += "${libdir}/gstreamer-1.0/*.a"
-FILES:${PN}-gplay = "${bindir}/gplay-1.0"
-FILES:${PN}-libgplaycore = "${libdir}/libgplaycore-1.0${SOLIBS}"
+FILES:${PN}-tools += "${bindir}/* ${libdir}/librecorder_engine-1.0${SOLIBS}"
 FILES:${PN}-libgstfsl = "${libdir}/libgstfsl-1.0${SOLIBS}"
-FILES:${PN}-grecorder = "${bindir}/grecorder-1.0 \
-                         ${bindir}/pipewire_recorder.py"
-FILES:${PN}-librecorder-engine = "${libdir}/librecorder_engine-1.0${SOLIBS}"
-FILES:${PN}-libplayengine = "${libdir}/libplayengine-1.0${SOLIBS}"
 
 INSANE_SKIP:${PN} = "build-deps"
 
