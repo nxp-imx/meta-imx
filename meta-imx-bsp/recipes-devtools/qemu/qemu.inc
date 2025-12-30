@@ -276,7 +276,7 @@ SRC_URI = " \
     file://qemu-guest-agent.udev \
 "
 QEMU_SRC ?= "git://github.com/nxp-imx/imx-qemu.git;protocol=https;"
-SRCBRANCH_imx-qemu = "imx-9.0.y"
+SRCBRANCH_imx-qemu = "lf-6.18.2_1.0.0"
 SRCREV_imx-qemu = "eb50218d4b5b2c20bcecad5b563769fb8f8b509b"
 SRCREV_berkeley-softfloat-3 = "b64af41c3276f97f0e181920400ee056b9c88037"
 SRCREV_berkeley-testfloat-3 = "e7af9751d9f9fd3b47911f51a5cfd08af256a9ab"
