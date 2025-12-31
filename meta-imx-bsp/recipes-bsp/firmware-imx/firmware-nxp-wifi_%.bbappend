@@ -24,4 +24,12 @@ PACKAGES:remove = " \
 "
 RDEPENDS:${PN}-all-pcie:remove = "${PN}-nxp8997-pcie"
 
+FILES:${PN}-nxpiw612-sdio = " \
+    ${nonarch_base_libdir}/firmware/nxp/sd_w61x_v1.bin.se \
+    ${nonarch_base_libdir}/firmware/nxp/sduart_nw61x_*.bin.se \
+    ${nonarch_base_libdir}/firmware/nxp/uartspi_n61x_*.bin.se \
+    ${nonarch_base_libdir}/firmware/nxp/uartuart_n61x_*.bin.se \
+    ${nonarch_base_libdir}/firmware/nxp/IW612_SD_RFTest/ \
+"
+
 ALLOW_EMPTY:${PN}-all-usb = "1"
