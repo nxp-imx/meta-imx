@@ -2,7 +2,7 @@
 SUMMARY = "Mesa emulated RISC-V GPU renderer"
 DESCRIPTION = "Mesa graphics renderer providing improved software-based performance via emulated RISC-V GPU"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
+LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac" 
 
 SRC_URI[sha256sum] = "2593f5fd39b51b566c992253e1c92da6c9d99ad5e83ace3cbff31b823ca0a12e"
 
