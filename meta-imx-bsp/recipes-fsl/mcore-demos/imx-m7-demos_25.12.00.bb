@@ -9,6 +9,6 @@ LIC_FILES_CHKSUM:mx952-nxp-bsp = "file://COPYING;md5=bc649096ad3928ec06a8713b8d7
 
 SRC_URI[imx95.sha256sum] = "1ed885757d570a1bcd4309cd41d158827f855af451d140d056fa02f92e8b73eb"
 
-SRC_URI[imx952.sha256sum] = "651aeb0bd78143d8febf8913bfe33e2eaa899119ee846578244ce35d6fe03ade"
+SRC_URI[imx952.sha256sum] = "7295c3cb9bc51000dd20cbf23b2007982aec6376f50d1fdbbf092ef782f11bb2"
 
 COMPATIBLE_MACHINE = "(mx95-nxp-bsp|mx952-nxp-bsp)"
