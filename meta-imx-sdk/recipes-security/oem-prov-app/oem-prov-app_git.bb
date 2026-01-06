@@ -1,4 +1,4 @@
-# Copyright 2025 NXP
+# Copyright 2025-2026 NXP
 
 SUMMARY = "NXP i.MX EdgeLock 2GO OEM provisioning application"
 DESCRIPTION = "NXP i.MX EdgeLock 2GO OEM provisioning application"
