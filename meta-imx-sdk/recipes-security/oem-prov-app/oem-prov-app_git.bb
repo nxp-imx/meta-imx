@@ -10,7 +10,7 @@ DEPENDS = "cyaml smw el2go-agent"
 
 SRC_URI = "${PROVAPP_SRC};branch=${SRCBRANCH};name=oem-prov-app"
 PROVAPP_SRC ?= "git://github.com/nxp-imx/oem-prov-app.git;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "release/version_2.x"
 
 PV = "2.0+git${SRCPV}"
 
