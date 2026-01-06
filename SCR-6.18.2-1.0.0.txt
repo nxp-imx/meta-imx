@@ -99,8 +99,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.31-4fa5b46.bin
-Version:                     8.31
+Package:                     firmware-imx-8.32-5cc1cc6.bin
+Version:                     8.32
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -316,8 +316,8 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.15.5-c86f335
-Version:                     2.15.5
+Package:                     sof-zephyr-2.16.0-8828ae0
+Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            BSP
@@ -330,7 +330,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.3.5-7c67dea
+Package:                     zephyr-demo-imx-4.3.5-9d9529f
 Version:                     4.3.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -463,18 +463,6 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     oem-prov-app.git
-Version:                     
-Outgoing License:            BSD-3-Clause 
-License File:                LICENSE
-Package Category:            BSP
-Type of Content:             source
-Description and comments:    NXP i.MX EdgeLock 2GO OEM provisioning application
-Release Location:            https://github.com/nxp-imx/oem-prov-app.git -b lf-6.18.2-1.0.0
-Origin:                   NXP (BSD-3-clause)
-
---------------------------------------------
-
 Package:                     imx-seco-5.9.4.1-0333596.bin
 Version:                     5.9.4.1
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
@@ -524,6 +512,18 @@ Type of Content:             source
 Description and comments:    Tools to test EdgeLock Enclave api bridge on the ele_libs layer
 Release Location:            https://github.com/nxp-imx/itest -b lf-6.18.2-1.0.0
 Origin:                      NXP (BSD-3-Clause)
+
+--------------------------------------------
+
+Package:                     oem-prov-app.git
+Version:                     
+Outgoing License:            BSD-3-Clause 
+License File:                LICENSE
+Package Category:            BSP
+Type of Content:             source
+Description and comments:    NXP i.MX EdgeLock 2GO OEM provisioning application
+Release Location:            https://github.com/nxp-imx/oem-prov-app.git -b lf-6.18.2-1.0.0
+Origin:                   NXP (BSD-3-clause)
 
 --------------------------------------------
 
@@ -769,7 +769,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.4-aarch32-4378efb.bin
+Package:                     imx-gpu-viv-6.4.11.p4.4-aarch32-182a8ae.bin
 Version:                     6.4.11.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -788,7 +788,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.4-aarch64-4378efb.bin
+Package:                     imx-gpu-viv-6.4.11.p4.4-aarch64-182a8ae.bin
 Version:                     6.4.11.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -807,7 +807,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.4-89d0444.bin
+Package:                     mali-imx-r54p1.4-4ebe5b7.bin
 Version:                     r54p1.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -826,8 +826,8 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     mesa-rvgpu-emu-2.0.1.0-7c12b72.bin
-Version:                     2.0.1.0
+Package:                     mesa-rvgpu-emu-2.0.1.2-7c12b72.bin
+Version:                     2.0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -941,7 +941,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.4-arm-4378efb.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.4-arm-182a8ae.bin
 Version:                     6.4.11.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -953,7 +953,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.4-aarch64-4378efb.bin
+Package:                     imx-gpu-g2d-6.4.11.p4.4-aarch64-182a8ae.bin
 Version:                     6.4.11.p4.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1415,8 +1415,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mm-m4-demo-25.09.00.bin
-Version:                     25.09.00
+Package:                     imx8mm-m4-demo-26.03.00.bin
+Version:                     26.03.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
@@ -1429,8 +1429,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mq-m4-demo-25.09.00.bin
-Version:                     25.09.00
+Package:                     imx8mq-m4-demo-26.03.00.bin
+Version:                     26.03.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
@@ -1473,8 +1473,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 M7 Processor Packages
 --------------------------------------------
 
-Package:                     imx8mn-m7-demo-25.09.00.bin
-Version:                     25.09.00
+Package:                     imx8mn-m7-demo-26.03.00.bin
+Version:                     26.03.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
@@ -1487,8 +1487,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mnddr3l-m7-demo-25.09.00.bin
-Version:                     25.09.00
+Package:                     imx8mnddr3l-m7-demo-26.03.00.bin
+Version:                     26.03.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
@@ -1501,8 +1501,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx8mp-m7-demo-25.09.00.bin
-Version:                     25.09.00
+Package:                     imx8mp-m7-demo-26.03.00.bin
+Version:                     26.03.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
@@ -1517,8 +1517,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx95-m7-demo-25.12.00.bin
-Version:                     25.12.00
+Package:                     imx95-m7-demo-26.03.00.bin
+Version:                     26.03.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
@@ -1535,8 +1535,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 M33 Processor Packages
 --------------------------------------------
 
-Package:                     imx8ulp-m33-demo-25.12.00.bin
-Version:                     25.12.00
+Package:                     imx8ulp-m33-demo-26.03.00.bin
+Version:                     26.03.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1551,8 +1551,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx93-m33-demo-25.12.00.bin
-Version:                     25.12.00
+Package:                     imx93-m33-demo-26.03.00.bin
+Version:                     26.03.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M33_Processor
@@ -1568,8 +1568,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx943-mcore-demo-25.12.00.bin
-Version:                     25.12.00
+Package:                     imx943-mcore-demo-26.03.00.bin
+Version:                     26.03.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            MCore_Processor
