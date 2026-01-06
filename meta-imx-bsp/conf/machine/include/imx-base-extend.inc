@@ -105,6 +105,8 @@ PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.12.0.imx"
 PREFERRED_VERSION_xen-tools = "4.19.imx+stable"
 PREFERRED_VERSION_xen       = "4.19.imx+stable"
 
+PREFERRED_VERSION_imx-m7-demos = "25.12.00"
+
 QEMUVERSION              = "10.0.2"
 QEMUVERSION:mx95-nxp-bsp = "9.0.2.imx"
 
