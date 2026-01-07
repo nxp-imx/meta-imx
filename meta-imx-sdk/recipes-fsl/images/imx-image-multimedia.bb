@@ -25,6 +25,7 @@ IMAGE_FEATURES += " \
     ssh-server-openssh \
     tools-testapps \
     hwcodecs \
+    post-install-logging \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston', \
        bb.utils.contains('DISTRO_FEATURES',     'x11', 'x11-base x11-sato', \
                                                        '', d), d)} \

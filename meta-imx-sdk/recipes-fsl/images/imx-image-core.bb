@@ -14,6 +14,7 @@ IMAGE_FEATURES += " \
     tools-debug \
     ssh-server-openssh \
     hwcodecs \
+    post-install-logging \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston','', d)} \
 "
 
