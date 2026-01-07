@@ -27,6 +27,7 @@ MACHINE_SOCARCH_SUFFIX:mx952-nxp-bsp = "-mx952"
 SECO_FIRMWARE_NAME:mx952-generic-bsp ?= "mx952${IMX_SOC_REV_LOWER}-ahab-container.img"
 IMX_SOC_REV:mx952-generic-bsp   ??= "A0"
 IMX_EXTRA_FIRMWARE:mx952-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx virtual/imx-system-manager virtual/imx-oei"
+PREFERRED_VERSION_imx-m7-demos:mx952-nxp-bsp = "25.12.00"
 
 # Add new SoC i.MX 943
 MACHINEOVERRIDES_EXTENDER:mx943:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxpxp:mx9-generic-bsp:mx9-nxp-bsp:mx94-generic-bsp:mx94-nxp-bsp:mx943-generic-bsp:mx943-nxp-bsp"
@@ -104,8 +105,6 @@ PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.12.0.imx"
 
 PREFERRED_VERSION_xen-tools = "4.19.imx+stable"
 PREFERRED_VERSION_xen       = "4.19.imx+stable"
-
-PREFERRED_VERSION_imx-m7-demos = "25.12.00"
 
 QEMUVERSION              = "10.0.2"
 QEMUVERSION:mx95-nxp-bsp = "9.0.2.imx"
