@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 
 IMX_SRCREV_ABBREV = "182a8ae"
 
-SRC_URI[sha256sum] = "787d6b7f9d356f90b7a1e9450f0317cf665dbf5e25e25010c041cdda44f396e4"
+SRC_URI[sha256sum] = "cd9b43bad6d6305e95e512fd0d016307194b41b89ad0159f4a57bc5772d23027"
 
 do_install:prepend() {
     if [ "${IS_MX8}" = "1" ]; then
