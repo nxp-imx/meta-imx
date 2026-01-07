@@ -1,7 +1,7 @@
 require mali-imx-overrides.inc
 
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac" 
+LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 
 SRC_URI[sha256sum] = "3c5bb6b522286c9427d845c46bf81387bd171091e4142f9591bd5169ee486a9e"
 IMX_SRCREV_ABBREV = "4ebe5b7"
