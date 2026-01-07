@@ -186,6 +186,14 @@ echo "BBLAYERS += \"\${BSPDIR}/sources/meta-security/meta-tpm\"" >> $BUILD_DIR/c
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-virtualization\"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-freescale-ml\"" >> $BUILD_DIR/conf/bblayers.conf
 
+# NXP development board images are more useful with the empty root password.
+echo -e "\n====================================== Important Note =========================================="
+echo "This setup is optimized for NXP development boards and is not appropriate for production boards."
+
+bitbake-config-build enable-fragment core/yocto/root-login-with-empty-password
+
+echo -e "================================================================================================\n"
+
 echo BSPDIR=$BSPDIR
 echo BUILD_DIR=$BUILD_DIR
 
