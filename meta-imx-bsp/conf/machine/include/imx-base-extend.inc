@@ -5,10 +5,6 @@ IMX_DEFAULT_BSP = "nxp"
 
 # The default bootloader and kernel set in meta-freescale is for fslc
 IMX_DEFAULT_BOOTLOADER:imx-nxp-bsp = "u-boot-imx"
-
-# The following will allow root login without a password  for convenience.
-EXTRA_IMAGE_FEATURES:append = " allow-empty-password empty-root-password allow-root-login"
-
 IMX_DEFAULT_KERNEL:imx-nxp-bsp     = "linux-imx"
 
 # IMXBOOT_VARIANT infrastructure
