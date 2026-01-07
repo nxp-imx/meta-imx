@@ -9,6 +9,7 @@ IMX_M4_DEMOS:mx91-nxp-bsp = ""
 IMX_M4_DEMOS:mx93-nxp-bsp = ""
 IMX_M4_DEMOS:mx943-nxp-bsp = "imx-mcore-demos:do_deploy"
 IMX_M4_DEMOS:mx95-nxp-bsp = "imx-m7-demos:do_deploy"
+IMX_M4_DEMOS:mx952-nxp-bsp = "imx-m7-demos:do_deploy"
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
 M4_DEFAULT_IMAGE:mx8qxp-nxp-bsp = "imx8qx_m4_TCM_power_mode_switch.bin"
@@ -19,6 +20,7 @@ M4_DEFAULT_IMAGE:mx91-nxp-bsp = ""
 M4_DEFAULT_IMAGE:mx93-nxp-bsp = ""
 M4_DEFAULT_IMAGE:mx943-nxp-bsp = ""
 M4_DEFAULT_IMAGE:mx95-nxp-bsp = "${M4_DEFAULT_IMAGE_MX95}"
+M4_DEFAULT_IMAGE:mx952-nxp-bsp = "${M4_DEFAULT_IMAGE_MX952}"
 
 do_compile[depends] += "${IMX_M4_DEMOS}"
 

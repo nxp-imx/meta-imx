@@ -61,6 +61,7 @@ BOOT_STAGING:mx91-generic-bsp  = "${S}/iMX91"
 BOOT_STAGING:mx93-generic-bsp  = "${S}/iMX93"
 BOOT_STAGING:mx943-generic-bsp = "${S}/iMX94"
 BOOT_STAGING:mx95-generic-bsp  = "${S}/iMX95"
+BOOT_STAGING:mx952-generic-bsp = "${S}/iMX952"
 
 SOC_FAMILY                    = "INVALID"
 SOC_FAMILY:mx8-generic-bsp    = "mx8"
@@ -71,6 +72,7 @@ SOC_FAMILY:mx91-generic-bsp   = "mx91"
 SOC_FAMILY:mx93-generic-bsp   = "mx93"
 SOC_FAMILY:mx943-generic-bsp  = "mx943"
 SOC_FAMILY:mx95-generic-bsp   = "mx95"
+SOC_FAMILY:mx952-nxp-bsp      = "mx952"
 
 REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
 
@@ -94,6 +96,10 @@ MKIMAGE_EXTRA_ARGS:imx95-19x19-verdin ?= " \
     QSPI_HEADER=./scripts/fspi_header_133"
 MKIMAGE_EXTRA_ARGS:imx95-a1-19x19-verdin ?= " \
     ${MKIMAGE_EXTRA_ARGS:imx95-19x19-verdin} \
+"
+MKIMAGE_EXTRA_ARGS:mx952-nxp-bsp ?= " \
+    OEI=YES \
+    LPDDR_TYPE=${DDR_TYPE} \
 "
 
 UBOOT_DTB_BINARY ?= "u-boot.dtb"
@@ -210,6 +216,11 @@ compile_mx95() {
     cp ${DEPLOY_DIR_IMAGE}/${OEI_NAME} ${BOOT_STAGING}
     cp ${DEPLOY_DIR_IMAGE}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin \
        ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin
+}
+
+compile_mx952() {
+    bbnote i.MX 952 boot binary build
+    compile_mx95
 }
 
 do_compile() {
@@ -391,6 +402,10 @@ deploy_mx95() {
     install -m 0644 ${BOOT_STAGING}/${OEI_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0644 ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin \
                 ${DEPLOYDIR}/${BOOT_TOOLS}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin
+}
+
+deploy_mx952() {
+    deploy_mx95
 }
 
 do_deploy() {
