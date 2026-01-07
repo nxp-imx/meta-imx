@@ -14,10 +14,6 @@ IMAGE_FEATURES += " \
     tools-debug \
     ssh-server-openssh \
     hwcodecs \
-    allow-empty-password \
-    allow-root-login \
-    empty-root-password \
-    post-install-logging \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'weston','', d)} \
 "
 
