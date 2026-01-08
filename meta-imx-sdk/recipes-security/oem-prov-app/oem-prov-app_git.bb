@@ -14,7 +14,7 @@ SRCBRANCH = "master"
 
 PV = "2.0+git${SRCPV}"
 
-SRCREV = "cc84977a5cb6f475c27cd6f28a01cb7937e01b32"
+SRCREV = "ce43f0185e460fc8d06864daab199b3ac03b9f09"
 
 inherit cmake pkgconfig
 
