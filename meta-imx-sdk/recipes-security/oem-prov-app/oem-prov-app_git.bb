@@ -1,10 +1,10 @@
-# Copyright 2025 NXP
+# Copyright 2025, 2026 NXP
 
 SUMMARY = "NXP i.MX EdgeLock 2GO OEM provisioning application"
 DESCRIPTION = "NXP i.MX EdgeLock 2GO OEM provisioning application"
 SECTION = "base"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7fc11e65b98453fd7684bb39ad6dfb48"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=0d22268ff9ccfaa65c4081bd9f9cd77c"
 
 DEPENDS = "cyaml smw el2go-agent"
 
