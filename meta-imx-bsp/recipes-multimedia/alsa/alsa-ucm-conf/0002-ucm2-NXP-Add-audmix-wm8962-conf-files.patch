@@ -1,0 +1,93 @@
+From 02178e102ab50aa512808247559b40e12d85352a Mon Sep 17 00:00:00 2001
+From: Chancel Liu <chancel.liu@nxp.com>
+Date: Mon, 12 Jan 2026 19:55:37 +0900
+Subject: [PATCH 2/2] ucm2: NXP: Add audmix-wm8962 conf files
+
+Add audmix-wm8962 conf files
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Chancel Liu <chancel.liu@nxp.com>
+---
+ ucm2/NXP/audmixwm8962.conf                   | 53 ++++++++++++++++++++
+ ucm2/conf.d/audmix-wm8962/audmix-wm8962.conf |  9 ++++
+ 2 files changed, 62 insertions(+)
+ create mode 100644 ucm2/NXP/audmixwm8962.conf
+ create mode 100644 ucm2/conf.d/audmix-wm8962/audmix-wm8962.conf
+
+diff --git a/ucm2/NXP/audmixwm8962.conf b/ucm2/NXP/audmixwm8962.conf
+new file mode 100644
+index 0000000..6b32882
+--- /dev/null
++++ b/ucm2/NXP/audmixwm8962.conf
+@@ -0,0 +1,53 @@
++SectionVerb {
++	EnableSequence [
++	]
++}
++
++SectionDevice."Speaker" {
++	Comment "Speaker"
++
++	ConflictingDevice [
++		"Headphones"
++	]
++
++	EnableSequence [
++		cset "name='Speaker Switch' on,on"
++	]
++
++	DisableSequence [
++		cset "name='Speaker Switch' off,off"
++	]
++
++	Value {
++		PlaybackPriority "500"
++		PlaybackVolume "name='Speaker Volume'"
++		PlaybackSwitch "name='Speaker Switch'"
++		PlaybackMixerElem "Speaker"
++		PlaybackPCM "hw:${CardId}"
++	}
++}
++
++SectionDevice."Headphones" {
++	Comment "Headphones"
++
++	ConflictingDevice [
++		"Speaker"
++	]
++
++	EnableSequence [
++		cset "name='Headphone Switch' on,on"
++	]
++
++	DisableSequence [
++		cset "name='Headphone Switch' off off"
++	]
++
++	Value {
++		PlaybackPriority "1000"
++		PlaybackVolume "name='Headphone Volume'"
++		PlaybackSwitch "name='Headphone Switch'"
++		PlaybackMixerElem "Headphone"
++		PlaybackPCM "hw:${CardId}"
++		JackControl "Headphones Jack"
++	}
++}
+diff --git a/ucm2/conf.d/audmix-wm8962/audmix-wm8962.conf b/ucm2/conf.d/audmix-wm8962/audmix-wm8962.conf
+new file mode 100644
+index 0000000..e090478
+--- /dev/null
++++ b/ucm2/conf.d/audmix-wm8962/audmix-wm8962.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."analog-HiFi" {
++	File "/NXP/audmixwm8962.conf"
++	Comment "Play high quality music"
++}
++
++BootSequence [
++]
+-- 
+2.50.1
+
