@@ -21,7 +21,6 @@ SRC_URI = "${LINUX_IMX_SRC}"
 LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.18.y"
 KBRANCH = "${SRCBRANCH}"
-LOCALVERSION = "-lts-next"
 SRCREV = "9e7c1f1785289b8431586e16a6d664e04c19f68a"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
@@ -30,8 +29,9 @@ SRCREV = "9e7c1f1785289b8431586e16a6d664e04c19f68a"
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
 LINUX_VERSION = "6.18.y"
-# FIXME: Drop this line once LINUX_VERSION is stable
+# FIXME: Drop this line once LINUX_VERSION is stable and set correctly
 KERNEL_VERSION_SANITY_SKIP = "1"
+LOCALVERSION = "-1.0.0"
 
 KBUILD_DEFCONFIG:mx6-generic-bsp = "imx_v7_defconfig"
 KBUILD_DEFCONFIG:mx7-generic-bsp = "imx_v7_defconfig"
