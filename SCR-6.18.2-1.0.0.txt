@@ -316,7 +316,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-f03d4af
+Package:                     sof-zephyr-2.16.0-79855f3
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -440,7 +440,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-xen.git
-Version:                     4.19.imx
+Version:                     4.21.imx
 Outgoing License:            GPL-2.0 
 License File:                LICENSE.txt
 Package Category:            BSP
@@ -826,7 +826,7 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     mesa-rvgpu-emu-2.0.1.2-7c12b72.bin
+Package:                     mesa-rvgpu-emu-2.0.1.2-7350bda.bin
 Version:                     2.0.1.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
