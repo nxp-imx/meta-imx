@@ -316,7 +316,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-e19293c
+Package:                     sof-zephyr-2.16.0-f03d4af
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -330,7 +330,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-cdb7deb
+Package:                     zephyr-demo-imx-4.4.0-588d224
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -1090,8 +1090,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.10.3-7ab6273.bin
-Version:                     4.10.3
+Package:                     imx-parser-4.11.0-c5c53c8.bin
+Version:                     4.11.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -1194,8 +1194,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.11.0-6b6aa8b.bin
-Version:                     0.11.0
+Package:                     imx-opencl-converter-0.12.0-6b6aa8b.bin
+Version:                     0.12.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
