@@ -104,8 +104,8 @@ PREFERRED_VERSION_optee-os-tadevkit:imx-nxp-bsp   ??= "4.8.0.imx"
 PREFERRED_VERSION_opencv:mx8-nxp-bsp ??= "4.12.0.imx"
 PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.12.0.imx"
 
-PREFERRED_VERSION_xen-tools = "4.19.imx+stable"
-PREFERRED_VERSION_xen       = "4.19.imx+stable"
+PREFERRED_VERSION_xen-tools = "4.21.imx+stable"
+PREFERRED_VERSION_xen       = "4.21.imx+stable"
 
 QEMUVERSION              = "10.0.2"
 QEMUVERSION:mx95-nxp-bsp = "9.0.2.imx"

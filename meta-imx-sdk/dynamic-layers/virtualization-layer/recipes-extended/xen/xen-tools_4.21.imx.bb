@@ -16,3 +16,4 @@ FILES:${PN}:append = " \
     ${sysconfdir}/xen/*.conf \
     ${libdir}/xen/bin/xen-9pfsd \
 "
+INSANE_SKIP:${PN}-dbg += "buildpaths"

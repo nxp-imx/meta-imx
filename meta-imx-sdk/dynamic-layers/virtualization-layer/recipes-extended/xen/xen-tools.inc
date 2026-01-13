@@ -24,6 +24,7 @@ RDEPENDS:${PN} = "\
     bash perl xz \
     ${PN}-console \
     ${PN}-libxenguest \
+    ${PN}-libxenmanage \
     ${PN}-libxenlight \
     ${PN}-libxenvchan \
     ${PN}-libxenctrl \
@@ -176,6 +177,8 @@ PACKAGES = " \
     ${PN}-libxengnttab-dev \
     ${PN}-libxenguest \
     ${PN}-libxenguest-dev \
+    ${PN}-libxenmanage \
+    ${PN}-libxenmanage-dev \
     ${PN}-libxenhypfs \
     ${PN}-libxenhypfs-dev \
     ${PN}-libxenlight \
@@ -274,6 +277,7 @@ FILES:${PN}-doc = "\
 
 FILES:${PN}-staticdev += "\
     ${libdir}/libxenguest.a \
+    ${libdir}/libxenmanage.a \
     ${libdir}/libxenlight.a \
     ${libdir}/libxenvchan.a \
     ${libdir}/libxenctrl.a \
@@ -322,6 +326,13 @@ FILES:${PN}-libxengnttab-dev = " \
     ${libdir}/libxengnttab.so \
     ${libdir}/pkgconfig/xengnttab.pc \
     ${datadir}/pkgconfig/xengnttab.pc \
+    "
+
+FILES:${PN}-libxenmanage = "${libdir}/libxenmanage.so.*"
+FILES:${PN}-libxenmanage-dev = " \
+    ${libdir}/libxenmanage.so \
+    ${libdir}/pkgconfig/xenmanage.pc \
+    ${datadir}/pkgconfig/xenmanage.pc \
     "
 
 FILES:${PN}-libxenguest = "${libdir}/libxenguest.so.*"
@@ -631,6 +642,7 @@ FILES:${PN}-xen-watchdog = "\
     ${sbindir}/xenwatchdogd \
     ${sysconfdir}/init.d/xen-watchdog \
     ${systemd_unitdir}/system/xen-watchdog.service \
+    ${systemd_unitdir}/system-sleep/xen-watchdog-sleep.sh \
     "
 
 FILES:${PN}-xl = "\
@@ -715,6 +727,16 @@ FILES:${PN}-test += "\
     ${libdir}/xen/bin/test-cpu-policy \
     ${libdir}/xen/bin/test-tsx \
     ${libdir}/xen/bin/test-paging-mempool \
+    ${libdir}/xen/tests/test-xenstore \
+    ${libdir}/xen/tests/test-rangeset \
+    ${libdir}/xen/tests/test-resource \
+    ${libdir}/xen/tests/test-domid \
+    ${libdir}/xen/tests/test-paging-mempool \
+    ${libdir}/xen/tests/test_vpci \
+    ${libdir}/xen/tests/test-pdx-offset \
+    ${libdir}/xen/tests/test-pdx-mask \
+    ${libdir}/xen/tests/test-cpu-policy \
+    ${libdir}/xen/tests/test-tsx \
     "
 
 # test-xenstore and test-resource currently only exist in 4.16
@@ -809,6 +831,9 @@ do_install() {
         ${localstatedir}/lock/subsys \
         ${localstatedir}/lib/xen \
         "
+
+    # a host tool that is unused
+    rm -rf ${D}${libdir}/xen/tests/test_x86_emulator
 
     # install volatiles using populate_volatiles mechanism
     install -d ${D}${sysconfdir}/default/volatiles
