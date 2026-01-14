@@ -117,7 +117,7 @@ SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
 SRCBRANCH = "MM_04.10.03_2512_L6.18.2"
-SRCREV = "ba5ee59b6533210ead46a6ff73a791e384ff414f"
+SRCREV = "fda6c05effa8d6ae4b3db65b004f8c1b0d73202d"
 
 inherit use-imx-headers
 
