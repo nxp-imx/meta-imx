@@ -15,6 +15,8 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3
 
+BBCLASSEXTEND = "native nativesdk"
+
 do_compile[network] = "1"
 do_compile:prepend() {
     export HTTP_PROXY=${http_proxy}
@@ -26,5 +28,7 @@ do_compile:prepend() {
 RDEPENDS:${PN} += "python3-flatbuffers python3-numpy python3-lxml"
 
 COMPATIBLE_MACHINE = "(mx93-nxp-bsp)"
+COMPATIBLE_MACHINE:class-native = ".*"
+COMPATIBLE_MACHINE:class-nativesdk = ".*"
 
 INSANE_SKIP:${PN} = "already-stripped"
