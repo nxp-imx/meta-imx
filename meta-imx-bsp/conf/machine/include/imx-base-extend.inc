@@ -88,7 +88,7 @@ PREFERRED_VERSION_weston:imx-nxp-bsp ??= "14.0.2.imx"
 PREFERRED_VERSION_weston:mx6-nxp-bsp ??= "10.0.5.imx"
 PREFERRED_VERSION_weston:mx7-nxp-bsp ??= "10.0.5.imx"
 
-PREFERRED_VERSION_wayland-protocols:imx-nxp-bsp ??= "1.41.imx"
+PREFERRED_VERSION_wayland-protocols:imx-nxp-bsp ??= "1.45.imx"
 
 PREFERRED_VERSION_xwayland:imx-nxp-bsp ??= ""
 
