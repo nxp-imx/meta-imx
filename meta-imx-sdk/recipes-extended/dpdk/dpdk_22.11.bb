@@ -13,7 +13,7 @@ DPDK_SRC ?= "git://github.com/nxp-qoriq/dpdk;protocol=https"
 SRCBRANCH = "22.11-qoriq-lf-rel"
 
 STABLE = "-stable"
-SRCREV = "265682282d4707795ff192330ee9c1913050aa28"
+SRCREV = "e8d58021e3250d5cca691c9620713fd3e694f095"
 
 CVE_PRODUCT = "data_plane_development_kit"
 
