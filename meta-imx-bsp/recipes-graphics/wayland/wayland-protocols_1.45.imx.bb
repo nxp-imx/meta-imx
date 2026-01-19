@@ -6,14 +6,13 @@ protocol either in Wayland core, or some other protocol in \
 wayland-protocols."
 HOMEPAGE = "http://wayland.freedesktop.org"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=c7b12b6702da38ca028ace54aae3d484 \
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c7b12b6702da38ca028ace54aae3d484 \
                     file://stable/presentation-time/presentation-time.xml;endline=26;md5=4646cd7d9edc9fa55db941f2d3a7dc53"
 
-SRC_URI = "https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/${IMX_BASE_VERSION}/downloads/wayland-protocols-${IMX_BASE_VERSION}.tar.xz \
-           file://0001-linux-dmabuf-support-passing-buffer-DTRC-meta-to-com.patch"
-IMX_BASE_VERSION = "${@'.'.join((d.getVar('PV') or '').split('.')[:2])}"
-SRC_URI[sha256sum] = "4d2b2a9e3e099d017dc8107bf1c334d27bb87d9e4aff19a0c8d856d17cd41ef0"
-S = "${UNPACKDIR}/${BPN}-${IMX_BASE_VERSION}"
+SRC_URI = "${WAYLAND_PROTOCOLS_SRC};branch=${SRCBRANCH}"
+WAYLAND_PROTOCOLS_SRC ?= "git://github.com/nxp-imx/wayland-protocols-imx.git;protocol=https"
+SRCBRANCH = "wayland-protocols-imx-1.45"
+SRCREV = "f8749c37b38d8283be395a763857ca1599672029"
 
 UPSTREAM_CHECK_URI = "https://gitlab.freedesktop.org/wayland/wayland-protocols/-/tags"
 UPSTREAM_CHECK_REGEX = "releases/(?P<pver>.+)"
