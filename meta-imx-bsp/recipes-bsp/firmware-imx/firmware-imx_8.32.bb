@@ -70,8 +70,7 @@ do_install() {
     install -m 0644 ${S}/firmware/vpu/coda980_enc_fw.bin ${D}${nonarch_base_libdir}/firmware/cnm
     install -m 0644 ${S}/firmware/vpu/wave511_dec_fw.bin ${D}${nonarch_base_libdir}/firmware/cnm
     # Install i.MX 952 LD firmware
-    install -d ${D}${nonarch_base_libdir}/firmware/ld
-    install -m 0644 ${S}/firmware/ld/imx9xm0p_ld_fw.bin ${D}${nonarch_base_libdir}/firmware/ld
+    install -m 0644 ${S}/firmware/ld/imx9xm0p_ld_fw.bin ${D}${nonarch_base_libdir}/firmware
 }
 
 #
@@ -176,6 +175,6 @@ FILES:${PN}-vpu-amphion = "${nonarch_base_libdir}/firmware/amphion/vpu/*"
 FILES:${PN}-vpu-coda980 = "${nonarch_base_libdir}/firmware/cnm/coda980_enc_fw.bin"
 FILES:${PN}-vpu-wave511 = "${nonarch_base_libdir}/firmware/cnm/wave511_dec_fw.bin"
 FILES:${PN}-vpu-wave = "${nonarch_base_libdir}/firmware/wave633c_codec_fw.bin"
-FILES:${PN}-ld = "${nonarch_base_libdir}/firmware/ld/imx9xm0p_ld_fw.bin"
+FILES:${PN}-ld = "${nonarch_base_libdir}/firmware/imx9xm0p_ld_fw.bin"
 
 COMPATIBLE_MACHINE = "(imx-generic-bsp)"
