@@ -1,0 +1,34 @@
+From bd4ad5cdc0fb546157bb7f6e46cb0f96e2d6cbac Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Tue, 20 Jan 2026 11:16:24 +0800
+Subject: [PATCH] MGS-8560 Fixed webgl random failures with angle gles backend
+
+Enable validating command decoder for Linux, angle is still
+unstable.
+
+deqp/functional/gles3/fborender/resize_03.html
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Change-Id: Ia129fead973eaa155438a0be0af0f12b68c52ab5
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ ui/gl/features.gni | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ui/gl/features.gni b/ui/gl/features.gni
+index 84678cb2f3140..30aeeb7a7e300 100644
+--- a/ui/gl/features.gni
++++ b/ui/gl/features.gni
+@@ -21,7 +21,7 @@ declare_args() {
+ 
+   # desktop android devices exclusively use angle and thus should not use
+   # the validating command decoder
+-  enable_validating_command_decoder = is_android && !is_desktop_android
++  enable_validating_command_decoder = (is_android && !is_desktop_android) || is_linux
+ }
+ 
+ declare_args() {
+-- 
+2.43.0
+
