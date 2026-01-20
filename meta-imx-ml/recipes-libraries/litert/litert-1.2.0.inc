@@ -2,4 +2,4 @@
 
 LITERT_SRC ?= "gitsm://github.com/nxp-imx/litert-imx.git;protocol=https"
 SRCBRANCH_litert = "imx-v1.2.0"
-SRCREV_litert = "92a26191378e7028cb4cad7fd200c670805d1cea"
+SRCREV_litert = "d6d121d4b85e79c5b1802b9ff4ed8aab0d67e73e"
