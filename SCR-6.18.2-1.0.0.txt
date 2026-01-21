@@ -114,6 +114,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
                              EASRC: origin: NXP (LA_OPT_NXP_Software_License)
                              EPDC:  origin: E Ink Corporation (LA_OPT_NXP_Software_License)
                              HDMI:  origin: Cadence Design Systems, Inc. (LA_OPT_NXP_Software_License)
+                             LD:    origin: NXP (LA_OPT_NXP_Software_License)
                              SDMA:  origin: NXP (LA_OPT_NXP_Software_License)
                              XCVR:  origin: NXP (LA_OPT_NXP_Software_License)
                              XUVI:  origin: NXP (LA_OPT_NXP_Software_License)
@@ -123,6 +124,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
                                     vpu_fw_imx53.bin
                                     vpu_fw_imx6d.bin
                                     vpu_fw_imx6q.bin
+                                    wave511_dec_fw.bin
+                                    wave633c_codec_fw.bin
+                                    coda980_enc_fw.bin
                                  origin: Chips & Media, Inc.  (LA_OPT_NXP_Software_License)
 
                                     vpu_fw_imx8_dec.bin
@@ -1080,7 +1084,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.10.3-7ab6273.bin
+Package:                     imx-parser-4.10.3-65603f3.bin
 Version:                     4.10.3
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
