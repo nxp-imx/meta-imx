@@ -114,6 +114,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
                              EASRC: origin: NXP (LA_OPT_NXP_Software_License)
                              EPDC:  origin: E Ink Corporation (LA_OPT_NXP_Software_License)
                              HDMI:  origin: Cadence Design Systems, Inc. (LA_OPT_NXP_Software_License)
+                             LD:    origin: NXP (LA_OPT_NXP_Software_License)
                              SDMA:  origin: NXP (LA_OPT_NXP_Software_License)
                              XCVR:  origin: NXP (LA_OPT_NXP_Software_License)
                              XUVI:  origin: NXP (LA_OPT_NXP_Software_License)
@@ -319,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-73b5f01
+Package:                     sof-zephyr-2.16.0-286b3be
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -333,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-00dfe39
+Package:                     zephyr-demo-imx-4.4.0-93b5f19
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
