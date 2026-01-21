@@ -123,6 +123,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
                                     vpu_fw_imx53.bin
                                     vpu_fw_imx6d.bin
                                     vpu_fw_imx6q.bin
+                                    wave511_dec_fw.bin
+                                    wave633c_codec_fw.bin
+                                    coda980_enc_fw.bin
                                  origin: Chips & Media, Inc.  (LA_OPT_NXP_Software_License)
 
                                     vpu_fw_imx8_dec.bin
