@@ -1,4 +1,4 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/litert:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 require litert-${PV}.inc
 
