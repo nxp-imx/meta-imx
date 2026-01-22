@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-286b3be
+Package:                     sof-zephyr-2.16.0-fc73f9d
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-93b5f19
+Package:                     zephyr-demo-imx-4.4.0-cbc881c
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
