@@ -277,13 +277,13 @@ SRC_URI = " \
 "
 QEMU_SRC ?= "git://github.com/nxp-imx/imx-qemu.git;protocol=https;"
 SRCBRANCH_imx-qemu = "imx-9.0.y"
-SRCREV_imx-qemu = "eb50218d4b5b2c20bcecad5b563769fb8f8b509b"
+SRCREV_imx-qemu = "ffb3eacd5da862e998e89d6ce382aebf3bc3fb68"
 SRCREV_berkeley-softfloat-3 = "b64af41c3276f97f0e181920400ee056b9c88037"
 SRCREV_berkeley-testfloat-3 = "e7af9751d9f9fd3b47911f51a5cfd08af256a9ab"
 SRCREV_keycodemapdb = "f5772a62ec52591ff6870b7e8ef32482371f22c6"
 SRCREV_FORMAT = "imx-qemu_berkeley-softfloat-3_berkeley-testfloat-3_keycodemapdb"
 
-PACKAGECONFIG[libvhost-user] = "-Dlibvhost-user:xen=enabled,-Dlibvhost-user:xen=disabled,xen-tools"
+PACKAGECONFIG[libvhost-user] = "-Dlibvhost-user:xen=enabled,-Dlibvhost-user:xen=disabled,libgpiod xen-tools"
 PACKAGECONFIG[rutabaga-gfx] = "--enable-rutabaga-gfx,--disable-rutabaga-gfx,rutabaga-gfx-ffi"
 
 do_configure:prepend() {
