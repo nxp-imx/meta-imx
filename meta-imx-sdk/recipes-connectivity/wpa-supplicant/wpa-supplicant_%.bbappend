@@ -16,5 +16,6 @@ S = "${WORKDIR}/wpa_supplicant-${PV}-${IMX_SRCREV_ABBREV}"
 
 do_configure:append:imx-nxp-bsp () {
     # Use NXP version of defconfig
-    cp wpa_supplicant/defconfig wpa_supplicant/.config
+    echo "CONFIG_CTRL_IFACE_DBUS_NEW=y" >> wpa_supplicant/defconfig
+    cp wpa_supplicant/defconfig wpa_supplicant/.config    
 }
