@@ -6,14 +6,14 @@ Subject: [PATCH] alsa-utils: alsactl: Enable '--no-lock' flag for service
 Upstream-Status: Inappropriate [i.MX specific]
 Signed-off-by: Shengjiu Wang <shengjiu.wang@nxp.com>
 ---
- alsactl/alsa-restore.service.in | 4 ++--
- alsactl/alsa-state.service.in   | 4 ++--
+ alsactl/conf/alsa-restore.service.in | 4 ++--
+ alsactl/conf/alsa-state.service.in   | 4 ++--
  2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/alsactl/alsa-restore.service.in b/alsactl/alsa-restore.service.in
+diff --git a/alsactl/conf/alsa-restore.service.in b/alsactl/conf/alsa-restore.service.in
 index 80fd5fd..ca4e02f 100644
---- a/alsactl/alsa-restore.service.in
-+++ b/alsactl/alsa-restore.service.in
+--- a/alsactl/conf/alsa-restore.service.in
++++ b/alsactl/conf/alsa-restore.service.in
 @@ -11,5 +11,5 @@ ConditionPathExistsGlob=/dev/snd/control*
  [Service]
  Type=oneshot
@@ -22,10 +22,10 @@ index 80fd5fd..ca4e02f 100644
 -ExecStop=-@sbindir@/alsactl store
 +ExecStart=-@sbindir@/alsactl restore -L
 +ExecStop=-@sbindir@/alsactl store -L
-diff --git a/alsactl/alsa-state.service.in b/alsactl/alsa-state.service.in
+diff --git a/alsactl/conf/alsa-state.service.in b/alsactl/conf/alsa-state.service.in
 index 5a8fe5e..6134457 100644
---- a/alsactl/alsa-state.service.in
-+++ b/alsactl/alsa-state.service.in
+--- a/alsactl/conf/alsa-state.service.in
++++ b/alsactl/conf/alsa-state.service.in
 @@ -9,5 +9,5 @@ ConditionPathExists=@daemonswitch@
  
  [Service]
