@@ -1,7 +1,5 @@
 require conf/distro/poky.conf
 
-DISTRO = "imx-nxp"
-DISTRO_NAME = "NXP i.MX Release Distro"
 DISTRO_VERSION = "6.18-whinlatter"
 DISTROOVERRIDES = "fsl"
 
@@ -69,11 +67,3 @@ PACKAGECONFIG:append:pn-qtwebengine:class-target = " examples"
 # For bluealsa enable msbc in order to validate Bluetooth HFP profile with WBS.
 # Supporting encode/decode of SCO packets with SBC codec
 PACKAGECONFIG:append:pn-bluealsa = " msbc"
-
-# Use libcamera fork for certain SOCs
-PREFERRED_VERSION_libcamera ??= "${PREFERRED_VERSION_LIBCAMERA_IMX}"
-PREFERRED_VERSION_LIBCAMERA_IMX                = ""
-PREFERRED_VERSION_LIBCAMERA_IMX:mx95-nxp-bsp   = "0.6.0.imx"
-PREFERRED_VERSION_LIBCAMERA_IMX:mx8mm-nxp-bsp  = "0.6.0.imx"
-PREFERRED_VERSION_LIBCAMERA_IMX:mx8ulp-nxp-bsp = "0.6.0.imx"
-PREFERRED_VERSION_LIBCAMERA_IMX:mx8mq-nxp-bsp  = "0.6.0.imx"
