@@ -4,7 +4,7 @@
 # recipe for i.MX.
 
 ########## meta-openembedded copy ###########
-# Upstream hash: 91e428d4cd5a1c0de7d2ca4826705eb5eee7ec29
+# Upstream hash: 9b77eae6988e98adbec5323d2491afc6b327c91a
 
 SUMMARY = "Opencv : The Open Computer Vision Library"
 HOMEPAGE = "http://opencv.org/"
@@ -18,33 +18,33 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "49486f61fb25722cbcf586b7f4320921d46fb38e"
-SRCREV_contrib = "d943e1d61c8bc556a13783e1546ee7c1a9e0b1cf"
+SRCREV_opencv = "fe38fc608f6acb8b68953438a62305d8318f4fcd"
+SRCREV_contrib = "d99ad2a188210cc35067c2e60076eed7c2442bc3"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
 SRCREV_wechat-qrcode = "a8b69ccc738421293254aec5ddb38bd523503252"
-SRCREV_fastcv = "2265e79b3b9a8512a9c615b8c4d0244e88f45a9d"
+SRCREV_fastcv = "9e8d42b6d7e769548d70b2e5674e263b056de8b4"
+# kleidicv must match version of OpenCV
+SRCREV_kleidicv = "1e8fe7008c2292657b9689d70ea5d30db0e57767"
 
-
-SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv"
-SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https \
-           git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https \
+SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg_fastcv_kleidicv"
+SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https;tag=${PV} \
+           git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https;tag=${PV} \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/boostdesc;name=boostdesc;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/vgg;name=vgg;protocol=https \
            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/face;name=face;protocol=https \
            git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/wechat_qrcode;name=wechat-qrcode;protocol=https \
-           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250606;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/fastcv;name=fastcv;protocol=https  \
+           git://github.com/opencv/opencv_3rdparty.git;branch=fastcv/4.x_20250715;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/fastcv;name=fastcv;protocol=https  \
            file://0003-To-fix-errors-as-following.patch \
            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
            file://0001-Dont-use-isystem.patch \
            file://download.patch \
            file://0001-Make-ts-module-external.patch \
            file://0008-Do-not-embed-build-directory-in-binaries.patch \
-           file://27691.patch \
-	   file://0001-Renamed-templated-BlocksCompensator-feed-method-to-e.patch \
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
+SRC_URI:append:aarch64 = " git://gitlab.arm.com/kleidi/kleidicv;branch=main;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/3rdparty/kleidicv;name=kleidicv;protocol=https"
 
 
 # OpenCV wants to download more files during configure.  We download these in
@@ -89,13 +89,16 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${S}/contrib/modules \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41,SSE42", "", d)} \
 "
+
 LDFLAGS:append:mips = " -Wl,--no-as-needed -latomic -Wl,--as-needed"
 LDFLAGS:append:riscv32 = " -Wl,--no-as-needed -latomic -Wl,--as-needed"
 
 EXTRA_OECMAKE:append:x86 = " -DX86=ON"
+EXTRA_OECMAKE:append:aarch64 = " -DKLEIDICV_SOURCE_PATH=${S}/3rdparty/kleidicv"
 
-PACKAGECONFIG ??= "gapi python3 eigen jpeg png tiff v4l libv4l gstreamer samples tbb gphoto2 \
-    ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)} \
+PACKAGECONFIG ??= "python3 eigen jpeg png tiff v4l libv4l samples tbb \
+    ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)}"
+PACKAGECONFIG:append:class-target = " gapi gstreamer gphoto2 \
     ${@bb.utils.contains_any("LICENSE_FLAGS_ACCEPTED", "commercial_ffmpeg commercial", "libav", "", d)}"
 
 # TBB does not build for powerpc so disable that package config
@@ -129,7 +132,7 @@ PACKAGECONFIG[tests] = "-DBUILD_TESTS=ON -DINSTALL_TESTS=ON,-DBUILD_TESTS=OFF,,"
 PACKAGECONFIG[text] = "-DBUILD_opencv_text=ON,-DBUILD_opencv_text=OFF,tesseract,"
 PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
 PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
-PACKAGECONFIG[fastcv] = "-DWITH_FASTCV=ON ,-DWITH_FASTCV=OFF,,"
+PACKAGECONFIG[fastcv] = "-DWITH_FASTCV=ON ,-DWITH_FASTCV=OFF,qcom-fastcv-binaries,"
 
 inherit pkgconfig cmake setuptools3-base python3native
 
@@ -172,6 +175,11 @@ python populate_packages:prepend () {
         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') and not pkg.endswith('-locale') and not pkg.endswith('-staticdev'):
             metapkg_rdepends.append(pkg)
     d.setVar('RDEPENDS:' + metapkg, ' '.join(metapkg_rdepends))
+
+    fastcv_pkgs = ["libopencv-core", "libopencv-fastcv", "libopencv-imgproc"]
+    if bb.utils.contains('PACKAGECONFIG', 'fastcv', True, False, d):
+        for pkg in fastcv_pkgs:
+            d.appendVar('RDEPENDS:' + pkg, " qcom-fastcv-binaries")
 }
 
 PACKAGES_DYNAMIC += "^libopencv-.*"
@@ -242,6 +250,15 @@ BBCLASSEXTEND = "native"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
+# Need to override opencv and contrib URL because they include PV
+IMX_BASE_VERSION = "${@'.'.join((d.getVar('PV') or '').split('.')[:3])}"
+SRC_URI:remove = " \
+    git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https;tag=${PV} \
+    git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https;tag=${PV}"
+SRC_URI:prepend = " \
+    git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https;tag=${IMX_BASE_VERSION} \
+    git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https;tag=${IMX_BASE_VERSION} "
+
 # i.MX patches
 SRC_URI += " \
     file://0101-MGS-6470-ccc-Modify-host-ptr-alignment-size-in-UMAT.patch \
@@ -249,11 +266,7 @@ SRC_URI += " \
     file://0103-MGS-6470-ccc-Change-configuration-to-enable-hostptr-.patch \
     file://0104-MGS-8011-ccc-Fix-the-problem-of-syntax-error-at-doub.patch \
     file://0105-MGS-8318-ccc-Fix-error-implicit-declaration-of-funct.patch \
-    file://0106-Fix-Ninja-build-error-by-replacing-add_definitions-w.patch \
 "
-
-SRCREV_opencv = "49486f61fb25722cbcf586b7f4320921d46fb38e"
-SRCREV_contrib = "d943e1d61c8bc556a13783e1546ee7c1a9e0b1cf"
 
 # Add opencv_extra
 SRC_URI += " \
