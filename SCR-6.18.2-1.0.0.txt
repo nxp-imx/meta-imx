@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.5-50c4793.bin
+Package:                     firmware-ele-imx-2.0.5-08d8891.bin
 Version:                     2.0.5
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-cedef9b
+Package:                     sof-zephyr-2.16.0-991cfb2
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-64c88e9
+Package:                     zephyr-demo-imx-4.4.0-af7485c
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -811,7 +811,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.6-4ebe5b7.bin
+Package:                     mali-imx-r54p1.6-1e3b5c3.bin
 Version:                     r54p1.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
