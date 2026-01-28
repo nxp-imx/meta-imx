@@ -1,5 +1,5 @@
 # Copyright 2013-2016 Freescale Semiconductor
-# Copyright 2017-2025 NXP
+# Copyright 2017-2026 NXP
 # Copyright 2018 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 #
@@ -19,9 +19,9 @@ DEPENDS += "coreutils-native"
 
 SRC_URI = "${LINUX_IMX_SRC}"
 LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
-SRCBRANCH = "lf-6.18.y"
+SRCBRANCH = "next"
 KBRANCH = "${SRCBRANCH}"
-SRCREV = "eabcb33ad4125583f76fb23ee668a7abd24ffd0c"
+SRCREV = "bce585ce5f0f29a9abc7beb322c75275e011c629"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
@@ -31,7 +31,7 @@ SRCREV = "eabcb33ad4125583f76fb23ee668a7abd24ffd0c"
 LINUX_VERSION = "6.18.y"
 # FIXME: Drop this line once LINUX_VERSION is stable and set correctly
 KERNEL_VERSION_SANITY_SKIP = "1"
-LOCALVERSION = "-1.0.0"
+LOCALVERSION = "-2.0.0"
 
 KBUILD_DEFCONFIG:mx6-generic-bsp = "imx_v7_defconfig"
 KBUILD_DEFCONFIG:mx7-generic-bsp = "imx_v7_defconfig"
