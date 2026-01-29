@@ -3,8 +3,8 @@ require mali-imx-overrides.inc
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 
-SRC_URI[sha256sum] = "d0f154c0133bc78f36f1df7b4e23b07a70fa32348c5cea909e5b442f6ed4684b"
-IMX_SRCREV_ABBREV = "1e3b5c3"
+SRC_URI[sha256sum] = "233fa0b535cc9f05451e3e925daabad2383411c230c1a582827c89cf6af6b46c"
+IMX_SRCREV_ABBREV = "2d4da8c"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
 
