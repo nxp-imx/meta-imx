@@ -1,7 +1,7 @@
-From 821282e7462f868574bb8b23c8f00cff9ad38d21 Mon Sep 17 00:00:00 2001
+From c38a413cffa63b87588b7b7207b3e3b1c645b9da Mon Sep 17 00:00:00 2001
 From: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
 Date: Mon, 9 Dec 2024 09:15:11 +0800
-Subject: [PATCH 2/5] MGS-6801 [#ccc] vkmark on wayland
+Subject: [PATCH 1/6] MGS-6801 [#ccc] vkmark on wayland
 
 Extend the wayland surface properties with VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
 
@@ -13,10 +13,10 @@ Signed-off-by: Jiyu Yang <jiyu.yang@nxp.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/wsi/wayland/surface_properties.cpp b/wsi/wayland/surface_properties.cpp
-index 31ddc6842..d563dc574 100644
+index 7fe3a93..8a3805a 100644
 --- a/wsi/wayland/surface_properties.cpp
 +++ b/wsi/wayland/surface_properties.cpp
-@@ -89,7 +89,7 @@ VkResult surface_properties::get_surface_capabilities(VkPhysicalDevice physical_
+@@ -95,7 +95,7 @@ VkResult surface_properties::get_surface_capabilities(VkPhysicalDevice physical_
  
     /* Composite alpha */
     pSurfaceCapabilities->supportedCompositeAlpha = static_cast<VkCompositeAlphaFlagBitsKHR>(
@@ -26,5 +26,5 @@ index 31ddc6842..d563dc574 100644
  }
  
 -- 
-2.43.0
+2.34.1
 
