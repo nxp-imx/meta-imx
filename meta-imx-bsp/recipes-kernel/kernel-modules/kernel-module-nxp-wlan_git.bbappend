@@ -1,7 +1,7 @@
 # Use latest NXP Wi-Fi kernel module
 SRC_URI = "${MRVL_SRC};branch=${SRCBRANCH}"
 SRCBRANCH = "master"
-SRCREV = "eadd45baa00e8bb09436bef902d5b98a4a838481"
+SRCREV = "b08958dc25a0a5c16dda5394faae845a0a856bd9"
 
 # Populate Module "moal" configure file as modprobe.d/moal.conf
 KERNEL_MODULE_PROBECONF += "moal"
