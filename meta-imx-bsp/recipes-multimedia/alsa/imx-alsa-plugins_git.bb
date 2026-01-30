@@ -22,7 +22,7 @@ PV = "1.0.26+${SRCPV}"
 SRC_URI = "${IMXALSA_SRC};branch=${SRCBRANCH}"
 IMXALSA_SRC ?= "git://github.com/nxp-imx/imx-alsa-plugins.git;protocol=https"
 SRCBRANCH = "MM_04.10.03_2512_L6.18.2"
-SRCREV = "a8c708d73a7b9f402f46821c110e5401730ae6c8" 
+SRCREV = "18eb79b6cf13fb988de7d4eef5b22eb60f8e2533"
 
 
 CFLAGS:append = " -I${STAGING_INCDIR_IMX}"
