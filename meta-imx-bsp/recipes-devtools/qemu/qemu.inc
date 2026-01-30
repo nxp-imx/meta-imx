@@ -15,31 +15,29 @@ require qemu-targets.inc
 # we need a full python3-native setup
 inherit pkgconfig ptest update-rc.d systemd python3native
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=a3b50d8b88dcc0eb3d7d39b760b9e821 \
-                    file://COPYING.LIB;endline=24;md5=8a8178c06478747a771588adec965232 \
-                    "
+LIC_FILES_CHKSUM = "file://COPYING;md5=441c28d2cf86e15a37fa47e15a72fbac \
+                    file://COPYING.LIB;endline=24;md5=8c5efda6cf1e1b03dcfd0e6c0d271c7f"
 
 SRC_URI = "https://download.qemu.org/${BPN}-${PV}.tar.xz \
            file://powerpc_rom.bin \
            file://run-ptest \
-           file://fix-strerrorname_np.patch \
            file://0001-qemu-Add-addition-environment-space-to-boot-loader-q.patch \
            file://0002-apic-fixup-fallthrough-to-PIC.patch \
+           file://0003-configure-Add-pkg-config-handling-for-libgcrypt.patch \
            file://0004-qemu-Do-not-include-file-if-not-exists.patch \
            file://0005-qemu-Add-some-user-space-mmap-tweaks-to-address-musl.patch \
            file://0006-qemu-Determinism-fixes.patch \
            file://0007-tests-meson.build-use-relative-path-to-refer-to-file.patch \
            file://0008-Define-MAP_SYNC-and-MAP_SHARED_VALIDATE-on-needed-li.patch \
+           file://0009-linux-user-Replace-use-of-lfs64-related-functions-an.patch \
            file://0010-configure-lookup-meson-exutable-from-PATH.patch \
            file://0011-qemu-Ensure-pip-and-the-python-venv-aren-t-used-for-.patch \
            file://qemu-guest-agent.init \
            file://qemu-guest-agent.udev \
            "
-# file index at download.qemu.org isn't reliable: https://gitlab.com/qemu-project/qemu-web/-/issues/9
-UPSTREAM_CHECK_URI = "https://www.qemu.org"
 UPSTREAM_CHECK_REGEX = "qemu-(?P<pver>\d+(\.\d+)+)\.tar"
 
-SRC_URI[sha256sum] = "9e30ad1b8b9f7b4463001582d1ab297f39cfccea5d08540c0ca6d6672785883a"
+SRC_URI[sha256sum] = "a8c3f596aece96da3b00cafb74baafa0d14515eafb8ed1ee3f7f5c2d0ebf02b6"
 
 CVE_STATUS[CVE-2007-0998] = "not-applicable-config: The VNC server can expose host files uder some circumstances. We don't enable it by default."
 
@@ -48,12 +46,6 @@ CVE_STATUS[CVE-2018-18438] = "disputed: The issues identified by this CVE were d
 
 # As per https://bugzilla.redhat.com/show_bug.cgi?id=2203387
 CVE_STATUS[CVE-2023-2680] = "not-applicable-platform: RHEL specific issue."
-
-# NVD DB has this CVE as version-less (with "-")
-CVE_STATUS[CVE-2024-6505] = "fixed-version: this CVE is fixed since 9.1.0"
-CVE_STATUS[CVE-2024-8354] = "fixed-version: this CVE is fixed since 10.0.5"
-
-CVE_STATUS[CVE-2023-1386] = "disputed: not an issue as per https://bugzilla.redhat.com/show_bug.cgi?id=2223985"
 
 COMPATIBLE_HOST:mipsarchn32 = "null"
 COMPATIBLE_HOST:mipsarchn64 = "null"
@@ -167,8 +159,7 @@ do_install () {
 PACKAGECONFIG:remove:darwin = "kvm virglrenderer epoxy gtk+"
 PACKAGECONFIG:remove:mingw32 = "kvm virglrenderer epoxy gtk+ pie"
 
-PACKAGECONFIG[sdl] = "--enable-sdl,--disable-sdl,virtual/libsdl2"
-PACKAGECONFIG[sdl-image] = "--enable-sdl-image,--disable-sdl-image,libsdl2-image"
+PACKAGECONFIG[sdl] = "--enable-sdl,--disable-sdl,libsdl2"
 PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
 PACKAGECONFIG[virtfs] = "--enable-virtfs --enable-attr --enable-cap-ng,--disable-virtfs,libcap-ng attr,"
 PACKAGECONFIG[aio] = "--enable-linux-aio,--disable-linux-aio,libaio,"
@@ -179,7 +170,6 @@ PACKAGECONFIG[vnc-jpeg] = "--enable-vnc --enable-vnc-jpeg,--disable-vnc-jpeg,jpe
 PACKAGECONFIG[libcurl] = "--enable-curl,--disable-curl,curl,"
 PACKAGECONFIG[nss] = "--enable-smartcard,--disable-smartcard,nss,"
 PACKAGECONFIG[curses] = "--enable-curses,--disable-curses,ncurses,"
-PACKAGECONFIG[pixman] = "--enable-pixman,--disable-pixman,pixman"
 PACKAGECONFIG[gtk+] = "--enable-gtk,--disable-gtk,gtk+3 gettext-native"
 PACKAGECONFIG[vte] = "--enable-vte,--disable-vte,vte gettext-native"
 PACKAGECONFIG[libcap-ng] = "--enable-cap-ng,--disable-cap-ng,libcap-ng,"
@@ -229,7 +219,6 @@ PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack,"
 PACKAGECONFIG[debuginfo] = "--enable-libdw,--disable-libdw,elfutils"
 PACKAGECONFIG[pipewire] = "--enable-pipewire,--disable-pipewire,pipewire"
 PACKAGECONFIG[sndio] = "--enable-sndio,--disable-sndio,sndio"
-PACKAGECONFIG[libkeyutils] = "--enable-libkeyutils,--disable-libkeyutils,keyutils"
 
 INSANE_SKIP:${PN}-common = "arch"
 
@@ -287,8 +276,8 @@ SRC_URI = " \
     file://qemu-guest-agent.udev \
 "
 QEMU_SRC ?= "git://github.com/nxp-imx/imx-qemu.git;protocol=https;"
-SRCBRANCH_imx-qemu = "imx-10.2.y"
-SRCREV_imx-qemu = "0eb7898743aff5f27eedd70fbcd426fb46b21af6" 
+SRCBRANCH_imx-qemu = "imx-9.0.y"
+SRCREV_imx-qemu = "ffb3eacd5da862e998e89d6ce382aebf3bc3fb68"
 SRCREV_berkeley-softfloat-3 = "b64af41c3276f97f0e181920400ee056b9c88037"
 SRCREV_berkeley-testfloat-3 = "e7af9751d9f9fd3b47911f51a5cfd08af256a9ab"
 SRCREV_keycodemapdb = "f5772a62ec52591ff6870b7e8ef32482371f22c6"
