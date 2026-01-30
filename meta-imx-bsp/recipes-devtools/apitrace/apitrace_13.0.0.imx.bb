@@ -55,5 +55,4 @@ SECURITY_CFLAGS:toolchain-clang = ""
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
-COMPATIBLE_MACHINE = "(imxgpu${RVGPU_MACHINE})"
-RVGPU_MACHINE  = "${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', '|${MACHINE}', '', d)}"
+COMPATIBLE_MACHINE = "(imxgpu)"

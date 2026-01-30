@@ -11,9 +11,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-RDEPENDS:${PN}        = " \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'rvgpu-emu', 'glmark2', '', d)} \
-"
 RDEPENDS:${PN}:imxgpu = " \
     ${DRM_TOOLS} \
     ${OPENCL_TOOLS} \
