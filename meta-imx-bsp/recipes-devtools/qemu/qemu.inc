@@ -301,5 +301,3 @@ do_configure:prepend() {
     cp ${S}/subprojects/packagefiles/berkeley-softfloat-3/* ${S}/subprojects/berkeley-softfloat-3/
     cp ${S}/subprojects/packagefiles/berkeley-testfloat-3/* ${S}/subprojects/berkeley-testfloat-3/
 }
-
-COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
