@@ -12,7 +12,7 @@ SRC_URI = " \
     ${NXPAFE_SRC};branch=${SRCBRANCH} \
 "
 
-SRCREV = "e5d22596210b1be1b215954804252844df71b0d4"
+SRCREV = "7d518eb0b18f7c7faadeb3c3397f8b73f0012f3e"
 
 DEPENDS += "alsa-lib"
 
