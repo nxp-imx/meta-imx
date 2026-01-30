@@ -23,10 +23,6 @@ IMX_SRCREV_ABBREV:imxmali = "5828811"
 IMX_SRC_URI_NAME:imxmali = "v2"
 SRC_URI[v2.sha256sum] = "61d3b0bede7165e6bda00dec64e06426d82ed06cf39c23b3ffc639e1da7793a0"
 
-IMX_SRCREV_ABBREV:mx952-nxp-bsp = "1355d5c"
-IMX_SRC_URI_NAME:mx952-nxp-bsp = "v3"
-SRC_URI[v3.sha256sum] = "ad87ff10386b58c66dd637d867b3faf39290fae882444df3dbb69914775b4f82"
-
 S = "${UNPACKDIR}/${IMX_BIN_NAME}"
 
 inherit fsl-eula-unpack
