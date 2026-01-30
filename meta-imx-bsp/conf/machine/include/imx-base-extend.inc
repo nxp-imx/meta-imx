@@ -110,5 +110,11 @@ PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.13.0.imx"
 PREFERRED_VERSION_xen-tools = "4.21.imx+stable"
 PREFERRED_VERSION_xen       = "4.21.imx+stable"
 
+QEMUVERSION                      ??= "10.0.6"
+QEMUVERSION:mx95-nxp-bsp         ??= "10.2.5.imx"
+PREFERRED_VERSION_qemu           ??= "${QEMUVERSION}"
+PREFERRED_VERSION_qemu-native    ??= "${QEMUVERSION}"
+PREFERRED_VERSION_nativesdk-qemu ??= "${QEMUVERSION}"
+
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
 ZSTD_COMPRESSION_LEVEL ?= "10"
