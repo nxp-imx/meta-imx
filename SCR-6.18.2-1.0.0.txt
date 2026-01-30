@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.5-a340044.bin
+Package:                     firmware-ele-imx-2.0.5-3686464.bin
 Version:                     2.0.5
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1318,6 +1318,8 @@ Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP voice library base on tensorflow lite which is used by audio-front-end
 Release Location:            https://github.com/nxp-imx/imx-voice-tflite -b lf-6.18.2-1.0.0
+Origin:                      NXP (BSD-3-Clause)
+
 --------------------------------------------
 
 Package:                     nxp-ssrc-2.2.3-5865e8f.bin
