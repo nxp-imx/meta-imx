@@ -12,7 +12,7 @@ PV = "1.0+git"
 SRC_URI = "${NXPAFE_VOICETFLITE_SRC};branch=${SRCBRANCH}"
 NXPAFE_VOICETFLITE_SRC ?= "git://github.com/nxp-imx/imx-voice-tflite.git;protocol=https"
 SRCBRANCH = "MM_04.10.03_2512_L6.18.2"
-SRCREV = "442d753008d051e4f8faf9fbb9c18bfcb59dade3" 
+SRCREV = "f45c78f2c6ef1cf1cc1724a538d381dc6f5ab351"
 
 
 inherit pkgconfig
