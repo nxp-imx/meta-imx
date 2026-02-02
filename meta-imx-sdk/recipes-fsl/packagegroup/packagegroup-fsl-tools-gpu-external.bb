@@ -35,9 +35,5 @@ VULKAN_TOOLS:imxgpu3d = " \
 VULKAN_TOOLS:mx8mm-nxp-bsp = ""
 
 WAYLAND_TOOLS = " \
-    ${GLMARK2} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtkperf mesa-demos", "", d)} \
 "
-
-GLMARK2          = ""
-GLMARK2:imxgpu3d = "glmark2"
