@@ -51,3 +51,5 @@ do_install() {
     install -m 0644 ${RUTABAGA_OUT_DIR}/rutabaga_gfx_ffi.pc ${D}${libdir}/pkgconfig/
     install -m 0644 ${S}/src/include/rutabaga_gfx_ffi.h ${D}${includedir}/rutabaga_gfx/
 }
+
+BBCLASSEXTEND = "native nativesdk"
