@@ -133,6 +133,10 @@ PACKAGECONFIG[viv-fb] = ",,virtual/libgles2"
 
 EXTRA_OEMESON += "-Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}""
 
+# Workaround Disabled introspection generate. As gl gir build failed.
+EXTRA_OEMESON:append:mx93-nxp-bsp = " -Dintrospection=disabled "
+EXTRA_OEMESON:append:mx943-nxp-bsp = " -Dintrospection=disabled "
+
 # links with imx-gpu libs which are pre-built for glibc
 # gcompat will address it during runtime
 LDFLAGS:append:imxgpu:libc-musl = " -Wl,--allow-shlib-undefined"

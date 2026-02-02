@@ -216,6 +216,9 @@ EXTRA_OEMESON += " \
 EXTRA_OEMESON:remove = " \
     -Dkate=disabled \
 "
+# Workaround Disabled introspection generate. As gl gir build failed.
+EXTRA_OEMESON:append:mx93-nxp-bsp = " -Dintrospection=disabled "
+EXTRA_OEMESON:append:mx943-nxp-bsp = " -Dintrospection=disabled "
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 
