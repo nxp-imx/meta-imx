@@ -198,6 +198,8 @@ PACKAGECONFIG_REMOVE ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '', 'gl', d)} \
 "
 PACKAGECONFIG:remove = "${PACKAGECONFIG_REMOVE}"
+PACKAGECONFIG:remove:mx93-nxp-bsp = "gl"
+PACKAGECONFIG:remove:mx943-nxp-bsp = "gl"
 PACKAGECONFIG:append:mx8-nxp-bsp = " kms tinycompress"
 
 PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D}"
