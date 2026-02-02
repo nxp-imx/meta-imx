@@ -36,5 +36,3 @@ PACKAGECONFIG:append = " \
     vhost \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'libvhost-user', '', d)} \
 "
-
-COMPATIBLE_MACHINE = "(mx95-nxp-bsp)"
