@@ -124,6 +124,9 @@ inherit use-imx-headers
 PACKAGECONFIG:remove = "${PACKAGECONFIG_REMOVE}"
 PACKAGECONFIG_REMOVE ?= "jpeg"
 
+PACKAGECONFIG:remove:mx93-nxp-bsp = "opengl gles2 egl glx wayland"
+PACKAGECONFIG:remove:mx943-nxp-bsp = "opengl gles2 egl glx wayland"
+
 PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D}"
 PACKAGECONFIG_G2D          ??= ""
 PACKAGECONFIG_G2D:imxgpu2d ??= "g2d"
@@ -132,10 +135,6 @@ PACKAGECONFIG[g2d] = ",,virtual/libg2d"
 PACKAGECONFIG[viv-fb] = ",,virtual/libgles2"
 
 EXTRA_OEMESON += "-Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}""
-
-# Workaround Disabled introspection generate. As gl gir build failed.
-EXTRA_OEMESON:append:mx93-nxp-bsp = " -Dintrospection=disabled "
-EXTRA_OEMESON:append:mx943-nxp-bsp = " -Dintrospection=disabled "
 
 # links with imx-gpu libs which are pre-built for glibc
 # gcompat will address it during runtime
