@@ -124,9 +124,6 @@ inherit use-imx-headers
 PACKAGECONFIG:remove = "${PACKAGECONFIG_REMOVE}"
 PACKAGECONFIG_REMOVE ?= "jpeg"
 
-PACKAGECONFIG:remove:mx93-nxp-bsp = "opengl gles2 egl glx wayland"
-PACKAGECONFIG:remove:mx943-nxp-bsp = "opengl gles2 egl glx wayland"
-
 PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D}"
 PACKAGECONFIG_G2D          ??= ""
 PACKAGECONFIG_G2D:imxgpu2d ??= "g2d"
