@@ -1,13 +1,14 @@
-From 7104f3eb76e3efa58764a53fe125583dc228a806 Mon Sep 17 00:00:00 2001
+From aac31fe95128020237cfbb21554d4d3d7b40310e Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Wed, 22 Nov 2023 16:52:59 +0800
-Subject: [PATCH 4/7] Fixed chromium crash after upgrading
+Subject: [PATCH] Fixed chromium crash after upgrading
 
 Native display fail to get GBM platform,
 add EGL_PLATFORM_GBM_KHR for WAYLAND_GBM.
 
 Upstream-Status: Inappropriate [i.MX-specific]
 
+Change-Id: Ie5d0fa14b8456da51da73dd0de445e4ae3fbd387
 Signed-off-by: Xianzhong Li <xianzhong.li@nxp.com
 Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
 ---
@@ -31,10 +32,10 @@ index 8fd34e8c7d434..fa5e6a58544bc 100644
  
  }  // namespace ui
 diff --git a/ui/gfx/linux/gbm_wrapper.cc b/ui/gfx/linux/gbm_wrapper.cc
-index 7a1ae26444f36..415640e5825e3 100644
+index 1b5d52cbb314d..b698dac46e07e 100644
 --- a/ui/gfx/linux/gbm_wrapper.cc
 +++ b/ui/gfx/linux/gbm_wrapper.cc
-@@ -467,6 +467,8 @@ class Device final : public ui::GbmDevice {
+@@ -462,6 +462,8 @@ class Device final : public ui::GbmDevice {
    }
  #endif
  
@@ -44,10 +45,10 @@ index 7a1ae26444f36..415640e5825e3 100644
    std::vector<uint64_t> GetFilteredModifiers(
        uint32_t format,
 diff --git a/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc b/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
-index 4e725c5814969..0258548fd80b2 100644
+index a27ed664ac8d8..886cc6f9df1b3 100644
 --- a/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
 +++ b/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
-@@ -363,8 +363,6 @@ GbmDevice* WaylandBufferManagerGpu::GetGbmDevice() {
+@@ -321,8 +321,6 @@ GbmDevice* WaylandBufferManagerGpu::GetGbmDevice() {
    if (!supports_dmabuf_ || (!gl::GLSurfaceEGL::GetGLDisplayEGL()
                                   ->ext->b_EGL_EXT_image_dma_buf_import &&
                              !use_fake_gbm_device_for_test_)) {
@@ -57,13 +58,13 @@ index 4e725c5814969..0258548fd80b2 100644
  
    if (gbm_device_ || use_fake_gbm_device_for_test_)
 diff --git a/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc b/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
-index bab048c4afac1..d9fe372879061 100644
+index 91f415b330b18..fe0d1cbb46718 100644
 --- a/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
 +++ b/ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc
-@@ -172,6 +172,16 @@ scoped_refptr<gl::GLSurface> GLOzoneEGLWayland::CreateOffscreenGLSurface(
- }
- 
- gl::EGLDisplayPlatform GLOzoneEGLWayland::GetNativeDisplay() {
+@@ -175,6 +175,16 @@ gl::EGLDisplayPlatform GLOzoneEGLWayland::GetNativeDisplay() {
+   if (connection_) {
+     return connection_->GetNativeDisplay();
+   }
 +#if defined(WAYLAND_GBM)
 +  GbmDevice* const device = buffer_manager_->GetGbmDevice();
 +  if (device != nullptr) {
@@ -74,9 +75,9 @@ index bab048c4afac1..d9fe372879061 100644
 +    }
 +  }
 +#endif
-   if (connection_) {
-     return connection_->GetNativeDisplay();
-   }
+   return gl::EGLDisplayPlatform(EGL_DEFAULT_DISPLAY);
+ }
+ 
 -- 
-2.34.1
+2.43.0
 
