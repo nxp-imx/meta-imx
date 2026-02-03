@@ -2,7 +2,7 @@
 # Copyright (C) 2015, 2016 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "Package group used by FSL Community to add the packages which provide GPU support."
+DESCRIPTION = "Package group related to i.MX GPU support."
 SUMMARY = "FSL Community package group - tools/gpu"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -12,6 +12,7 @@ inherit packagegroup
 RDEPENDS:${PN} = " \
     ${SOC_TOOLS_DRM} \
     ${SOC_TOOLS_GPU} \
+    ${SOC_TOOLS_NO_GPU} \
 "
 
 RDEPENDS:${PN}:append:imxgpu = " ${GLES1_PACKAGE}"
@@ -45,3 +46,11 @@ SOC_TOOLS_GPU_MALI:imxmali = " \
 SOC_TOOLS_GPU_VIVANTE = ""
 SOC_TOOLS_GPU_VIVANTE:imxviv = " \
     imx-gpu-viv-tools"
+
+SOC_TOOLS_NO_GPU ??= ""
+SOC_TOOLS_NO_GPU:mx93-nxp-bsp ??= " \
+    apitrace \
+    libgles1-mesa"
+SOC_TOOLS_NO_GPU:mx943-nxp-bsp ??= " \
+    apitrace \
+    libgles1-mesa"
