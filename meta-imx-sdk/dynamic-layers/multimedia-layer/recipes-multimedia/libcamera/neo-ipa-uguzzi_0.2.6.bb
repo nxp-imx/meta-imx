@@ -18,7 +18,7 @@ DEPENDS = "libcamera"
 SRC_URI = "${NEO_IPA_UGUZZI_SRC};branch=${SRCBRANCH}"
 NEO_IPA_UGUZZI_SRC ?= "git://github.com/nxp-imx/neo-ipa-uguzzi;protocol=https"
 SRCBRANCH = "lf-6.18.2_1.0.0"
-SRCREV = "46562221a7d714e841acb357df232288d0c9ec47"
+SRCREV = "3c3b18e397a81fac2babe14dca01f4ada1ecc8b2"
 
 
 inherit meson pkgconfig
