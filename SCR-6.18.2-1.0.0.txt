@@ -1047,7 +1047,7 @@ Version:                     4.10.0
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
-Type of Content:             binary
+Type of Content:             binaryand source
 Description and comments:    i.MX multimedia codec libraries:  Codecs and wrappers for: AAC AACD BSAC DeInterlace FLAC MP3 MP3d NB_AMR OGG PEQ SBC SRC WB_AMR WBAMRD G.711 G.723 G.726 G.729ab
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
@@ -1143,7 +1143,7 @@ Version:                     1.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
-Type of Content:             binary
+Type of Content:             binary and source
 Description and comments:    NXP Asynchronous Sample Rate Converter
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
@@ -1156,7 +1156,7 @@ Version:                     1.0.3
 Outgoing License:            LA_OPT_NXP_Software_License v45 May 2023 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
-Type of Content:             binary
+Type of Content:             binary and source
 Description and comments:    NXP PDM to PCM Software Decimation SIMD Library
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
@@ -1168,7 +1168,7 @@ Version:                     0.12.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
-Type of Content:             binary
+Type of Content:             binary and source
 Description and comments:    i.MX multimedia opencl converter library
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
@@ -1193,7 +1193,7 @@ Version:                     5.4.39.3
 Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
-Type of Content:             binary
+Type of Content:             binary and source
 Description and comments:    VPU library
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
@@ -1315,7 +1315,7 @@ Version:                     2.2.3
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
-Type of Content:             binary
+Type of Content:             binary and source
 Description and comments:    Synchronous Sample Rate Convertor for ARM Cortex-A
 Release Location:            Mirror
 Origin:                      NXP (proprietary)
