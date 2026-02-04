@@ -23,6 +23,6 @@ do_compile:prepend() {
 
 RDEPENDS:${PN} += "python3-flatbuffers python3-numpy python3-lxml"
 
-COMPATIBLE_MACHINE = "(mx93-nxp-bsp)"
-
 INSANE_SKIP:${PN} = "already-stripped"
+
+BBCLASSEXTEND = "native nativesdk"
