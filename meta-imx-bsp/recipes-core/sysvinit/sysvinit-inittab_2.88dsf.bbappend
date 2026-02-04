@@ -1,8 +1,6 @@
 # Freescale imx extra configuration 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-RDEPENDS:${PN} += " bash "
-
 SYSVINIT-GPU = " file://rc_mxc.S file://rc_gpu.S"
 
 SRC_URI:append:imxgpu2d  = " ${SYSVINIT-GPU}"
