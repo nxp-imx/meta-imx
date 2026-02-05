@@ -4,7 +4,7 @@ DEPENDS:append:arm = "u-boot-mkimage-native"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/optee-os:"
 
-SRC_URI:remove = "git://github.com/OP-TEE/optee_os.git;branch=master;protocol=https"
+SRC_URI:remove = "git://github.com/OP-TEE/optee_os.git;protocol=https;${OPTEE_SRC_URI_BRANCH_OR_TAG}"
 SRC_URI:prepend = "${OPTEE_OS_SRC};branch=${SRCBRANCH} "
 SRC_URI:remove = "file://0001-allow-setting-sysroot-for-libgcc-lookup.patch \
                   file://0002-optee-enable-clang-support.patch \
