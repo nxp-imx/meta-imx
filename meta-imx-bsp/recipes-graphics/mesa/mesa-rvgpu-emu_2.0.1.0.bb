@@ -4,7 +4,7 @@ DESCRIPTION = "Mesa graphics renderer providing improved software-based performa
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac" 
 
-SRC_URI[sha256sum] = "d23dc617ca284d4ee758bdca5f685680fbff243cb9213dd7acff0b74a84ebdf6"
+SRC_URI[sha256sum] = "c3d1082a09c4dfc19f56746909aaff708611a461df72e4414ff54125e3b7d91f"
 
 IMX_SRCREV_ABBREV = "7c12b72"
 
