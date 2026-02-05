@@ -7,7 +7,7 @@ DEPENDS = "clang-cross-${TARGET_ARCH} elfutils libbpf zlib zstd"
 SRC_URI = "${DPDK_XDP_SRC};branch=${SRCBRANCH}"
 DPDK_XDP_SRC ?= "git://github.com/nxp-imx/imx-xdp-fp;protocol=https"
 SRCBRANCH = "fpr"
-SRCREV = "7c3d8605ba9d989772c92ee5be28ae7b9b800fca"
+SRCREV = "b7c3205aa1f42f4efe71b0398b0fd294e96bf49c"
 
 
 export SDKTARGETSYSROOT = "${STAGING_DIR_TARGET}"
