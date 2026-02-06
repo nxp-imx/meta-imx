@@ -26,13 +26,13 @@ PACKAGECONFIG:class-nativesdk ??= "fdt sdl kvm pie slirp \
 # ppc32 hosts are no longer supported in qemu
 COMPATIBLE_HOST:powerpc = "null"
 
-#----------------------overrides ---------------------
+#---------------------- i.MX Overrides ---------------------
 
-PACKAGECONFIG:append = " \
+PACKAGECONFIG:append:class-target = " \
     aio \
     libusb \
     pipewire \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'rutabaga-gfx', '', d)} \
     vhost \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'libvhost-user', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'vhost-user', '', d)} \
 "
