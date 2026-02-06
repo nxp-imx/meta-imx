@@ -184,6 +184,10 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plug
            file://0004-opencv-resolve-missing-opencv-data-dir-in-yocto-buil.patch \
            "
 SRC_URI:prepend = "${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} "
+
+SRC_URI:append:mx93-nxp-bsp = "file://0001-MMFMWK-9590-gstcuda-disable-gir-build-for-cuda-plugi.patch"
+SRC_URI:append:mx943-nxp-bsp = "file://0001-MMFMWK-9590-gstcuda-disable-gir-build-for-cuda-plugi.patch"
+
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-bad.git;protocol=https"
 SRCBRANCH = "MM_04.10.03_2512_L6.18.2"
 SRCREV = "81b6888efe936153b88c32b22a12d60bf9395054"
