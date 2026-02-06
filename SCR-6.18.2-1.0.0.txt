@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.32-c0491e4.bin
+Package:                     firmware-imx-8.32-41349c6.bin
 Version:                     8.32
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-74e4191
+Package:                     sof-zephyr-2.16.0-15f94f6
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -944,7 +944,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v1-2.5.0.4-5828811.bin
+Package:                     imx-dpu-g2d-v1-2.5.0.4-9b0cabc.bin
 Version:                     2.5.0.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -956,7 +956,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-dpu-g2d-v2-2.5.0.4-5828811.bin
+Package:                     imx-dpu-g2d-v2-2.5.0.4-9b0cabc.bin
 Version:                     2.5.0.4
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1047,7 +1047,7 @@ Version:                     4.10.0
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
-Type of Content:             binaryand source
+Type of Content:             binary and source
 Description and comments:    i.MX multimedia codec libraries:  Codecs and wrappers for: AAC AACD BSAC DeInterlace FLAC MP3 MP3d NB_AMR OGG PEQ SBC SRC WB_AMR WBAMRD G.711 G.723 G.726 G.729ab
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
@@ -1064,7 +1064,7 @@ Version:                     4.11.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
-Type of Content:             binary
+Type of Content:             source
 Description and comments:    i.MX multimedia parser libraries: Parsers for: APE AVI FLV MKV MP3 MP4 MPG2 OGG
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
@@ -1193,7 +1193,7 @@ Version:                     5.4.39.3
 Outgoing License:            LA_OPT_NXP_Software_License v11 February 2020 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
-Type of Content:             binary and source
+Type of Content:             source
 Description and comments:    VPU library
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
