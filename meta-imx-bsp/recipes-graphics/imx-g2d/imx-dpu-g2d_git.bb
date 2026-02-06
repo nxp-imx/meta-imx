@@ -14,7 +14,7 @@ PV = "2.5.0+git"
 SRC_URI = "${IMX_DPU_G2D_SRC};branch=${SRCBRANCH}"
 IMX_DPU_G2D_SRC ?= "git://github.com/nxp-imx/imx-dpu-g2d.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "5828811939c7e4377dc9ba7d7b695b4cb96a82a6"
+SRCREV = "e29cea6d9ecf35a083c1413c6b5718cc7b2ddc01"
 
 S:append = "/source"
 
