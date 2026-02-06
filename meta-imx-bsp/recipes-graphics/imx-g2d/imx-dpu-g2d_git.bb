@@ -6,7 +6,7 @@ DESCRIPTION = "G2D library using i.MX DPU"
 LICENSE = "CLOSED"
 #LICENSE = "Proprietary"
 #LIC_FILES_CHKSUM = "file://../LICENSE;md5=5a5269faabff841b575efa468fe8a52e"
-DEPENDS = "libdrm"
+DEPENDS = "libdrm opencl-headers"
 PROVIDES += "virtual/libg2d"
 
 PV = "2.5.0+git"
@@ -20,11 +20,7 @@ S:append = "/source"
 
 inherit use-imx-headers pkgconfig
 
-PACKAGECONFIG:imxmali = "mali"
-PACKAGECONFIG:imxviv  = "vivante"
-
-PACKAGECONFIG[mali] = "BUILD_DPU_VERSION=2,,,,,vivante"
-PACKAGECONFIG[vivante] = ",,opencl-headers,,,mali"
+EXTRA_OEMAKE:imxmali = "BUILD_DPU_VERSION=2"
 
 do_install () {
    install -d ${D}${libdir}
