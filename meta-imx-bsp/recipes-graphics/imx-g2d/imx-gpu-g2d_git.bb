@@ -13,7 +13,7 @@ PV = "2.5.0+git"
 SRC_URI = "${IMX_GPU_G2D_SRC};branch=${SRCBRANCH}"
 IMX_GPU_G2D_SRC ?= "git://github.com/nxp-imx/imx-gpu-g2d.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "f1e887875eabc2ee40926e39680a3eaad8ae425f"
+SRCREV = "62ecf1afe8596714fa308889390898922532d26a"
 
 S:append = "/source"
 
