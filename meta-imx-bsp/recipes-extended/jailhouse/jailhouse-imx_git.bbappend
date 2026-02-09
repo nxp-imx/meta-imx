@@ -4,7 +4,7 @@ SRC_URI += "file://0001-Revert-driver-sysfs-Update-bin_attribute-version-che.pat
 SRC_URI:remove = "file://0001-YOCIMX-9281-1-Fix-gcc15-errors.patch \
                   file://0002-YOCIMX-9281-2-hypervisor-arm64-fix-strh-usage.patch"
 SRCBRANCH = "master"
-SRCREV = "05a2edf8c9c3bd0cf6327ffc097521c7dbcab47a"
+SRCREV = "b2521d3762d846b0c84d327668e6f3e544bbfd3b"
 
 PV = "2023.03+git${SRCPV}"
 
