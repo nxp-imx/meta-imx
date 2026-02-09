@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.6-3686464.bin
+Package:                     firmware-ele-imx-2.0.6-f15686c.bin
 Version:                     2.0.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-15f94f6
+Package:                     sof-zephyr-2.16.0-d31370b
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -920,56 +920,32 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.6-arm-534042c.bin
-Version:                     6.4.11.p4.6
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
+Package:                     imx-gpu-g2d.git
+Version:                     2.5.0
+Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
+License File:                LICENSE.txt
 Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Graphics 2D
-Release Location:            Mirror
+Type of Content:             source
+Description and comments:    G2D implementation using Vivante GPU
+Release Location:            https://github.com/nxp-imx/imx-gpu-g2d -b lf-6.18.2-1.0.0
 Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-g2d-6.4.11.p4.6-aarch64-534042c.bin
-Version:                     6.4.11.p4.6
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
+Package:                     imx-dpu-g2d.git
+Version:                     2.5.0
+Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
+License File:                LICENSE.txt
 Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Graphics 2D
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
---------------------------------------------
-
-Package:                     imx-dpu-g2d-v1-2.5.0.4-9b0cabc.bin
-Version:                     2.5.0.4
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    G2D v1 implementation using DPU
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
---------------------------------------------
-
-Package:                     imx-dpu-g2d-v2-2.5.0.4-9b0cabc.bin
-Version:                     2.5.0.4
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    G2D v2 implementation using DPU
-Release Location:            Mirror
+Type of Content:             source
+Description and comments:    G2D implementation using DPU
+Release Location:            https://github.com/nxp-imx/imx-dpu-g2d -b lf-6.18.2-1.0.0
 Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
 Package:                     imx-g2d-pxp.git
-Version:                     2.5
+Version:                     2.5.0
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            Graphics
