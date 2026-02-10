@@ -10,7 +10,7 @@ DEPENDS = "zlib libpng procps python3-native"
 SRC_URI = "${APITRACE_SRC};branch=${SRCBRANCH}"
 APITRACE_SRC ?= "gitsm://github.com/nxp-imx/apitrace-imx.git;protocol=https"
 SRCBRANCH = "imx_13.0"
-SRCREV = "ce1339a9d114285647d9ea915613fe66740dc42b" 
+SRCREV = "de5e6b93dac8e81d339d6afa9b27c693a55a8147"
 
 inherit cmake pkgconfig
 
