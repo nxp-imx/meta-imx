@@ -1,4 +1,4 @@
-require qemu.inc
+require qemu-imx.inc
 
 inherit_defer native
 

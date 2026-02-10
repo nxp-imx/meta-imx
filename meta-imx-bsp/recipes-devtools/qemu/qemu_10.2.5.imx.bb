@@ -1,6 +1,6 @@
 BBCLASSEXTEND = "nativesdk"
 
-require qemu.inc
+require qemu-imx.inc
 
 DEPENDS += "glib-2.0 zlib pixman"
 

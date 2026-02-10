@@ -10,7 +10,7 @@ DEPENDS += "bison-native meson-native ninja-native"
 
 RDEPENDS:${PN}-ptest = "bash"
 
-require qemu-targets.inc
+require qemu-targets-imx.inc
 # https://gitlab.com/qemu-project/qemu/-/commit/81e2b198a8cb4ee5fdf108bd438f44b193ee3a36 means
 # we need a full python3-native setup
 inherit pkgconfig ptest update-rc.d systemd python3native

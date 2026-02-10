@@ -1,6 +1,6 @@
 BPN = "qemu"
 
-require qemu-native.inc
+require qemu-native-imx.inc
 
 # As some of the files installed by qemu-native and qemu-system-native
 # are the same, we depend on qemu-native to get the full installation set
