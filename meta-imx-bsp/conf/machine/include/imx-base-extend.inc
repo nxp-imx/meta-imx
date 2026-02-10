@@ -86,7 +86,7 @@ PREFERRED_VERSION_LIBCAMERA_IMX:mx8mq-nxp-bsp  = "0.6.0.imx"
 PREFERRED_VERSION_ffmpeg:mx8-nxp-bsp ??= "8.0"
 PREFERRED_VERSION_ffmpeg:mx9-nxp-bsp ??= "8.0"
 
-PREFERRED_VERSION_weston:imx-nxp-bsp ??= "14.0.2.imx"
+PREFERRED_VERSION_weston:imx-nxp-bsp ??= "15.0.0.imx"
 # i.MX 6 & 7 stay on weston 10.0 for fbdev
 PREFERRED_VERSION_weston:mx6-nxp-bsp ??= "10.0.5.imx"
 PREFERRED_VERSION_weston:mx7-nxp-bsp ??= "10.0.5.imx"

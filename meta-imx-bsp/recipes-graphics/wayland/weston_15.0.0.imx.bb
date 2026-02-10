@@ -160,10 +160,11 @@ LIC_FILES_CHKSUM +=       "file://LICENSE;md5=d79ee9e66bb0f95d3386a7acae780b70"
 DEFAULT_PREFERENCE = "-1"
 
 SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}/downloads/${BPN}-${PV}.tar.xz"
+SRC_URI:remove = "file://0001-libweston-backend-drm-meson.build-allow-libdisplay-i.patch"
 SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
-SRCBRANCH = "weston-imx-14.0.2"
-SRCREV = "be99fd1adad7e77c8c31926b09520ade5cdaca35"
+SRCBRANCH = "weston-imx-14.0.91"
+SRCREV = "90a26d3c92525f065b2ae58576028b942a3d5884"
 
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
@@ -177,6 +178,15 @@ PACKAGECONFIG_G2D:mx943-nxp-bsp ??= "imxg2d"
 PACKAGECONFIG_PIPEWIRE             ??= ""
 PACKAGECONFIG_PIPEWIRE:mx8-nxp-bsp ??= "pipewire"
 PACKAGECONFIG_PIPEWIRE:mx9-nxp-bsp ??= "pipewire"
+
+# Deprecated in weston 15
+PACKAGECONFIG[screenshare] = "-Ddeprecated-screenshare=true,-Ddeprecated-screenshare=false"
+PACKAGECONFIG[shell-fullscreen] = "-Ddeprecated-shell-fullscreen=true,-Ddeprecated-shell-fullscreen=false"
+PACKAGECONFIG[vaapi] = "-Ddeprecated-backend-drm-screencast-vaapi=true,-Ddeprecated-backend-drm-screencast-vaapi=false,libva"
+
+# Added in weston 15
+PACKAGECONFIG[shell-lua] = "-Dshell-lua=true,-Dshell-lua=false"
+PACKAGECONFIG[vulkan] = "-Drenderer-vulkan=true,-Drenderer-vulkan=false"
 
 # Weston with i.MX G2D renderer
 PACKAGECONFIG[imxg2d] = "-Drenderer-g2d=true,-Drenderer-g2d=false,virtual/libg2d"
