@@ -10,7 +10,7 @@ PV = "2.5.0+git"
 SRC_URI = "${GPU_G2D_SAMPLES_SRC};branch=${SRCBRANCH}"
 GPU_G2D_SAMPLES_SRC ?= "git://github.com/nxp-imx/g2d-samples.git;protocol=https"
 SRCBRANCH = "imx_2.5"
-SRCREV = "cd7704cdbf195552130007a2d606d0e0bb9394ca" 
+SRCREV = "22ca65feb57702832fbaca7f7c9c8d691466e649"
 
 
 inherit pkgconfig
