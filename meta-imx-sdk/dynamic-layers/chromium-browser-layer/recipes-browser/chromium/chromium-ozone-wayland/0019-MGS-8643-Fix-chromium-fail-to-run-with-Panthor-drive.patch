@@ -1,0 +1,33 @@
+From 921a1a1b45b3dde4c97e52603ccdd9071b77dbe1 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Wed, 11 Feb 2026 18:18:35 +0800
+Subject: [PATCH] MGS-8643 Fix chromium fail to run with Panthor driver
+
+Add imx95-dpu to preferred drm render node.
+
+Upstream-Status: Inappropriate [i.MX specific]
+
+Change-Id: I2952bcfd0e2c8bcc17f650532e2185aa9d723e3b
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ .../platform/wayland/common/drm_render_node_path_finder.cc    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/ui/ozone/platform/wayland/common/drm_render_node_path_finder.cc b/ui/ozone/platform/wayland/common/drm_render_node_path_finder.cc
+index 2fca3836b0985..973d30b9ca062 100644
+--- a/ui/ozone/platform/wayland/common/drm_render_node_path_finder.cc
++++ b/ui/ozone/platform/wayland/common/drm_render_node_path_finder.cc
+@@ -100,8 +100,8 @@ void DrmRenderNodePathFinder::FindDrmRenderNodePath() {
+     return;
+   }
+ 
+-  static constexpr const char* preferred_drivers[3] = {"i915", "amdgpu",
+-                                                       "virtio_gpu"};
++  static constexpr const char* preferred_drivers[4] = {"i915", "amdgpu",
++                                                       "virtio_gpu", "imx95-dpu"};
+   for (const char* preferred_driver : preferred_drivers) {
+     for (const auto& [driver, node] : driver_to_nodes) {
+       if (driver == preferred_driver) {
+-- 
+2.43.0
+

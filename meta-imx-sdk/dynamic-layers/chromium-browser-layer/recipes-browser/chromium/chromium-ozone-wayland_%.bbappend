@@ -19,6 +19,7 @@ SRC_URI:append:imx-nxp-bsp = " \
     file://0016-Disable-GL_ANGLE_instanced_arrays-extension.patch \
     file://0017-Fix-webgl-regression-after-angle-upgrade.patch \
     file://0018-MGS-8560-Fixed-webgl-random-failures-with-angle-gles.patch \
+    file://0019-MGS-8643-Fix-chromium-fail-to-run-with-Panthor-drive.patch \
 "
 VDA_PATCH_SET = " \
     file://0101-V4L2VideoDecoder-Add-macro-use_linux_v4l2.patch \
