@@ -164,7 +164,7 @@ SRC_URI:remove = "file://0001-libweston-backend-drm-meson.build-allow-libdisplay
 SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-14.0.91"
-SRCREV = "90a26d3c92525f065b2ae58576028b942a3d5884"
+SRCREV = "4a756f3fe4e2ada479a918469667105b7a5107d7"
 
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
 PACKAGECONFIG_IMX_REMOVALS ?= "wayland x11"
