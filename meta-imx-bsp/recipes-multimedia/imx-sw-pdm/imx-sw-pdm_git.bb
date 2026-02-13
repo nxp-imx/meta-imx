@@ -21,11 +21,13 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}${libdir} ${D}${bindir}
+    install -d ${D}${libdir} ${D}${bindir} ${D}${includedir}/imx-mm/audio-codec/swpdm
     install -m 0755 ${S}/release/imx-sw-pdm ${D}${bindir}
 
     install -m 0644 ${S}/release/libimxswpdm.so* ${D}${libdir}
     ln -sf -r ${D}${libdir}/libimxswpdm.so.* ${D}${libdir}/libimxswpdm.so
+
+    install -m 0644 ${S}/include/imx-swpdm.h ${D}${includedir}/imx-mm/audio-codec/swpdm
 }
 
 INSANE_SKIP:${PN} = "already-stripped"
