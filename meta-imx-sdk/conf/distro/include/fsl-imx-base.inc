@@ -1,6 +1,6 @@
 require conf/distro/poky.conf
 
-DISTRO_VERSION = "6.18-whinlatter"
+DISTRO_VERSION = "6.18-wrynose"
 DISTROOVERRIDES = "fsl"
 
 MAINTAINER = "NXP <lauren.post@nxp.com>"
