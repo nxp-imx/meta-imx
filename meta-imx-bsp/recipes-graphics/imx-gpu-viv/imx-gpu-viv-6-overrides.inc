@@ -2,7 +2,9 @@ require recipes-graphics/imx-gpu-viv/imx-gpu-viv-6.inc
 
 ### Section 1: Changes to be upstreamed ###
 
-# gl.pc file is removed, so override do_install
+# Override do_install:
+# - gl.pc file is removed
+# - Vulkan ICD file is normalized
 do_install () {
     install -d ${D}${libdir}
     install -d ${D}${includedir}
@@ -90,8 +92,8 @@ do_install () {
                 rm -rf ${D}$f
             done
         else
-            install -Dm 0644 ${S}/gpu-core/etc/vulkan/icd.d/imx_icd.json ${D}${sysconfdir}/vulkan/icd.d/imx_icd.json
-            sed -i "s,/usr/lib,${libdir}," ${D}${sysconfdir}/vulkan/icd.d/imx_icd.json
+            install -Dm 0644 ${S}/gpu-core/usr/share/vulkan/icd.d/verisilicon_icd.json ${D}${datadir}/vulkan/icd.d/verisilicon_icd.json
+            sed -i "s,/usr/lib,${libdir}," ${D}${datadir}/vulkan/icd.d/verisilicon_icd.json
         fi
     fi
 

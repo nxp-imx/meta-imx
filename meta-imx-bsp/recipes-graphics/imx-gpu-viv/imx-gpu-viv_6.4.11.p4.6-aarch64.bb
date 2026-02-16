@@ -6,22 +6,4 @@ IMX_SRCREV_ABBREV = "27f3992"
 
 SRC_URI[sha256sum] = "ffe87cd12ff85280a141f78361ed1970ff2cc6edee6e3c35a3d039a6b1b513dd"
 
-do_install:prepend() {
-    if [ "${IS_MX8}" = "1" ]; then
-        if [ ! -z "${PACKAGES_VULKAN}" ]; then
-            mkdir -p ${S}/gpu-core/etc/vulkan/icd.d
-            mv ${S}/gpu-core/usr/share/vulkan/icd.d/verisilicon_icd.json ${S}/gpu-core/etc/vulkan/icd.d/imx_icd.json
-        fi
-    fi
-}
-
-do_install:append() {
-    if [ "${IS_MX8}" = "1" ]; then
-        if [ ! -z "${PACKAGES_VULKAN}" ]; then
-            mkdir -p ${D}${datadir}/vulkan/icd.d
-            mv ${D}${sysconfdir}/vulkan/icd.d/imx_icd.json ${D}${datadir}/vulkan/icd.d/verisilicon_icd.json
-        fi
-    fi
-}
-
 COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
