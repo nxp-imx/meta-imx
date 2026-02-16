@@ -1,4 +1,4 @@
-# Copyright 2017-2025 NXP
+# Copyright 2017-2026 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 SUMMARY = "Installs i.MX-specific kernel headers"
@@ -59,13 +59,14 @@ do_install() {
     # Install i.MX-specific headers only
     for h in ${IMX_UAPI_HEADERS}; do
         install -D -m 0644 ${B}${includedir}/linux/$h \
-                       ${D}${includedir}/imx/linux/$h
+                           ${D}${includedir}/imx/linux/$h
     done
-    install -d ${D}${includedir}/imx/linux/sound
     for h in ${IMX_UAPI_HEADERS_SOUND}; do
         install -D -m 0644 ${B}${includedir}/$h \
-                       ${D}${includedir}/imx/$h
+                           ${D}${includedir}/imx/$h
     done
+    install -D -m 0644 ${B}${includedir}/drm/imx_drm.h \
+                       ${D}${includedir}/imx/drm/imx_drm.h
 }
 
 # Allow to build empty main package, this is required in order for -dev package
