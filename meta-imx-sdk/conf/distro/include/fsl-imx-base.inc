@@ -52,7 +52,6 @@ PACKAGECONFIG:remove:pn-qtbase:mx93-nxp-bsp = "no-opengl linuxfb"
 PACKAGECONFIG:append:pn-qtbase:mx943-nxp-bsp = " gles2"
 PACKAGECONFIG:remove:pn-qtbase:mx943-nxp-bsp = "no-opengl linuxfb"
 
-PACKAGECONFIG:append:pn-qtquick3d:class-target = " examples"
 PACKAGECONFIG:remove:pn-qtquick3d:class-target = "openxr"
 
 PACKAGECONFIG:append:pn-qtwebengine:class-target = " examples"
