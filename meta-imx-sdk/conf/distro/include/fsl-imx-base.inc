@@ -54,8 +54,6 @@ PACKAGECONFIG:remove:pn-qtbase:mx943-nxp-bsp = "no-opengl linuxfb"
 
 PACKAGECONFIG:remove:pn-qtquick3d:class-target = "openxr"
 
-PACKAGECONFIG:append:pn-qtwebengine:class-target = " examples"
-
 # For bluealsa enable msbc in order to validate Bluetooth HFP profile with WBS.
 # Supporting encode/decode of SCO packets with SBC codec
 PACKAGECONFIG:append:pn-bluealsa = " msbc"
