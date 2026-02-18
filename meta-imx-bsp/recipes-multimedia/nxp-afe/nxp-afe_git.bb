@@ -37,3 +37,4 @@ do_install() {
 
 FILES:${PN} += "/unit_tests"
 INSANE_SKIP:${PN} += "dev-so"
+INSANE_SKIP:${PN}-dbg += "buildpaths"
