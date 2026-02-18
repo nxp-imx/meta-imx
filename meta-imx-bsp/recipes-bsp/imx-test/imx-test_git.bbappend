@@ -13,5 +13,7 @@ IMXTEST_SRC ?= "git://github.com/nxp-imx/imx-test.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "96adbc3e208f7989d201825bd9b6bc99a5bb54f0"
 
+inherit pkgconfig
+
 PLATFORM:mx91-nxp-bsp = "IMX8"
 PLATFORM:mx943-nxp-bsp = "IMX8ULP"
