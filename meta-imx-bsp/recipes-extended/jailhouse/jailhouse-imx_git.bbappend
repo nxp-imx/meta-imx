@@ -8,6 +8,9 @@ SRCREV = "b2521d3762d846b0c84d327668e6f3e544bbfd3b"
 
 PV = "2023.03+git${SRCPV}"
 
+PACKAGES += "${PN}-bash-completion"
+FILES:${PN}-bash-completion = "${datadir}/bash-completion/completions/jailhouse"
+
 ERROR_QA:remove = "buildpaths"
 WARN_QA:append = " buildpaths"
 
