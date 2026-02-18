@@ -2,6 +2,9 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://qt-linuxfb.sh"
 
+PACKAGECONFIG_GRAPHICS:append = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' xcb', '', d)}"
+
 PACKAGECONFIG_GRAPHICS_IMX_GPU:mx9-nxp-bsp = " \
     gbm kms"
 
