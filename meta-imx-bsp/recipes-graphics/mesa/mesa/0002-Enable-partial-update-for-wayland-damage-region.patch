@@ -13,11 +13,11 @@ Signed-off-by: Xianzhong Li <xianzhong.li@nxp.com>
  src/gallium/winsys/sw/dri/dri_sw_winsys.c | 4 ++++
  3 files changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/src/egl/drivers/dri2/egl_dri2.h b/src/egl/drivers/dri2/egl_dri2.h
-index 31f85ead38c..1bc4f70afee 100644
---- a/src/egl/drivers/dri2/egl_dri2.h
-+++ b/src/egl/drivers/dri2/egl_dri2.h
-@@ -391,6 +391,9 @@ struct dri2_egl_surface {
+Index: mesa-26.0.0/src/egl/drivers/dri2/egl_dri2.h
+===================================================================
+--- mesa-26.0.0.orig/src/egl/drivers/dri2/egl_dri2.h
++++ mesa-26.0.0/src/egl/drivers/dri2/egl_dri2.h
+@@ -392,6 +392,9 @@ struct dri2_egl_surface {
  
     /* swrast device */
     char *swrast_device_buffer;
@@ -27,11 +27,11 @@ index 31f85ead38c..1bc4f70afee 100644
  };
  
  struct dri2_egl_config {
-diff --git a/src/egl/drivers/dri2/platform_wayland.c b/src/egl/drivers/dri2/platform_wayland.c
-index e4b4b7140ac..19d0e171585 100644
---- a/src/egl/drivers/dri2/platform_wayland.c
-+++ b/src/egl/drivers/dri2/platform_wayland.c
-@@ -2982,9 +2982,12 @@ dri2_wl_swrast_swap_buffers_with_damage(_EGLDisplay *disp, _EGLSurface *draw,
+Index: mesa-26.0.0/src/egl/drivers/dri2/platform_wayland.c
+===================================================================
+--- mesa-26.0.0.orig/src/egl/drivers/dri2/platform_wayland.c
++++ mesa-26.0.0/src/egl/drivers/dri2/platform_wayland.c
+@@ -3086,9 +3086,12 @@ dri2_wl_swrast_swap_buffers_with_damage(
     char *dst = dri2_wl_swrast_get_backbuffer_data(dri2_surf);
  
     /* partial copy, copy old content */
@@ -45,21 +45,18 @@ index e4b4b7140ac..19d0e171585 100644
  
     if (n_rects)
        driSwapBuffersWithDamage(dri2_surf->dri_drawable, n_rects, rects);
-diff --git a/src/gallium/winsys/sw/dri/dri_sw_winsys.c b/src/gallium/winsys/sw/dri/dri_sw_winsys.c
-index 59fd5293582..720ff0ee05c 100644
---- a/src/gallium/winsys/sw/dri/dri_sw_winsys.c
-+++ b/src/gallium/winsys/sw/dri/dri_sw_winsys.c
-@@ -369,6 +369,10 @@ dri_sw_displaytarget_display(struct sw_winsys *ws,
-    if (is_shm)
-       dri_sw_ws->lf->put_image_shm(dri_drawable, dri_sw_dt->shmid, dri_sw_dt->data, 0, 0,
-             0, 0, width, height, dri_sw_dt->stride);
-+   else if (box) {
-+      void *data = dri_sw_dt->data + box->x * blsize + box->y * dri_sw_dt->stride;
-+      dri_sw_ws->lf->put_image2(dri_drawable, data, box->x, box->y, box->width, box->height, dri_sw_dt->stride);
-+   }
-    else
-       dri_sw_ws->lf->put_image(dri_drawable, dri_sw_dt->data, width, height);
-    return;
--- 
-2.25.1
-
+Index: mesa-26.0.0/src/gallium/winsys/sw/dri/dri_sw_winsys.c
+===================================================================
+--- mesa-26.0.0.orig/src/gallium/winsys/sw/dri/dri_sw_winsys.c
++++ mesa-26.0.0/src/gallium/winsys/sw/dri/dri_sw_winsys.c
+@@ -365,6 +365,10 @@ dri_sw_displaytarget_display(struct sw_w
+       if (is_shm)
+          dri_sw_ws->lf->put_image_shm(dri_drawable, dri_sw_dt->shmid, dri_sw_dt->data, 0, 0,
+                                     0, 0, width, height, dri_sw_dt->stride);
++      else if (box) {
++         void *data = dri_sw_dt->data + box->x * blsize + box->y * dri_sw_dt->stride;
++         dri_sw_ws->lf->put_image2(dri_drawable, data, box->x, box->y, box->width, box->height, dri_sw_dt->stride);
++      }
+       else
+          dri_sw_ws->lf->put_image(dri_drawable, dri_sw_dt->data, width, height);
+       return;
