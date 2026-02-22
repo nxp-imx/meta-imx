@@ -126,3 +126,5 @@ do_copy_clang_library() {
     mkdir -p "$native_arch_path"
     cp -r * "$native_arch_path"
 }
+
+PACKAGE_ARCH:imx-nxp-bsp = "${MACHINE_SOCARCH}"
