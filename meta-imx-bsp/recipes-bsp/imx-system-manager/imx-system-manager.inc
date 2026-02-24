@@ -10,11 +10,6 @@ inherit deploy
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-# Set monitor mode for none, one, or two
-PACKAGECONFIG[m0] = "M=0,,,,,m1 m2"
-PACKAGECONFIG[m1] = ",,,,,m0 m2"
-PACKAGECONFIG[m2] = "M=2,,,,,m0 m1"
-
 SYSTEM_MANAGER_CONFIG ?= "INVALID"
 
 LDFLAGS[unexport] = "1"
@@ -23,8 +18,10 @@ EXTRA_OEMAKE = " \
     CONFIG=${SYSTEM_MANAGER_CONFIG} \
     SM_CROSS_COMPILE=arm-none-eabi- \
     V=1 \
+    M=${SYSTEM_MANAGER_MONITOR_MODE} \
     ${PACKAGECONFIG_CONFARGS} \
 "
+SYSTEM_MANAGER_MONITOR_MODE ??= "2"
 
 do_configure() {
     oe_runmake clean

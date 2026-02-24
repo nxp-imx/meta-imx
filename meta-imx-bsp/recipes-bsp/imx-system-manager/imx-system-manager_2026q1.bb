@@ -17,5 +17,3 @@ SRCBRANCH = "master"
 SRCREV = "c450f53974ea1df826970ad399cb338625b5638d"
 
 require imx-system-manager.inc
-
-PACKAGECONFIG ??= "m2"
