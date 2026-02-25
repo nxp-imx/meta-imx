@@ -9,7 +9,6 @@ DPDK_XDP_SRC ?= "git://github.com/nxp-imx/imx-xdp-fp;protocol=https"
 SRCBRANCH = "fpr"
 SRCREV = "b7c3205aa1f42f4efe71b0398b0fd294e96bf49c"
 
-
 export SDKTARGETSYSROOT = "${STAGING_DIR_TARGET}"
 
 do_install() {
