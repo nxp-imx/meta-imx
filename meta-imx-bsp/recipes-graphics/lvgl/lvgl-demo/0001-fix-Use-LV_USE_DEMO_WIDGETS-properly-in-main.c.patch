@@ -1,0 +1,29 @@
+From 891d57ff10eeb1dca66eb2fe024c66317248449e Mon Sep 17 00:00:00 2001
+From: Tom Hochstein <tom.hochstein@nxp.com>
+Date: Wed, 29 Oct 2025 17:15:27 -0500
+Subject: [PATCH] fix: Use LV_USE_DEMO_WIDGETS properly in main.c
+
+Upstream-Status: Pending
+Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+---
+ src/main.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/main.c b/src/main.c
+index 5914061..3551835 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -150,8 +150,10 @@ int main(int argc, char **argv)
+ #endif
+ 
+     /*Create a Demo*/
++#if LV_USE_DEMO_WIDGETS
+     lv_demo_widgets();
+     lv_demo_widgets_start_slideshow();
++#endif
+ 
+     /* Enter the run loop of the selected backend */
+     driver_backends_run_loop();
+-- 
+2.34.1
+

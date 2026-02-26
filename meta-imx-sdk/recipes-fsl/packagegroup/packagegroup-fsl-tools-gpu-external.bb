@@ -17,9 +17,15 @@ RDEPENDS:${PN}:imxgpu = " \
     ${@bb.utils.contains("DISTRO_FEATURES", "vulkan", "${VULKAN_TOOLS}", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "${WAYLAND_TOOLS}", "", d)} \
 "
+RDEPENDS:${PN}:append = " ${RDEPENDS_LVGL}"
 
 DRM_TOOLS         = ""
 DRM_TOOLS:imxdrm  = "kmscube"
+
+RDEPENDS_LVGL               = ""
+RDEPENDS_LVGL:mx93-nxp-bsp  = "lvgl-demo"
+RDEPENDS_LVGL:mx943-nxp-bsp = "lvgl-demo"
+RDEPENDS_LVGL:mx95-nxp-bsp  = "lvgl-demo"
 
 OPENCL_TOOLS               = "clblast"
 OPENCL_TOOLS:mx7-nxp-bsp   = ""
