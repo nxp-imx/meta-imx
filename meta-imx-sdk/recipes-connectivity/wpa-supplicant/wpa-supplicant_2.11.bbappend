@@ -11,3 +11,8 @@ IMX_SRCREV_ABBREV = "5a91f311"
 SRC_URI[sha256sum] = "124adb28bc96d94850a9eeb1c325a44acfccd33364f680aeaecc497503e8fa78"
 
 S = "${UNPACKDIR}/wpa_supplicant-${PV}-${IMX_SRCREV_ABBREV}"
+
+do_configure:append:imx-nxp-bsp () {
+    # Use NXP version of defconfig
+    cp wpa_supplicant/defconfig wpa_supplicant/.config
+}
