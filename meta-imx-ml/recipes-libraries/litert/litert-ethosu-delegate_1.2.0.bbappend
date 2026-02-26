@@ -2,4 +2,4 @@
 require litert-${PV}.inc
 
 SRCBRANCH_ethosu = "master"
-SRCREV_ethosu = "ee3197d963c94f485faeb1a4d98b4e1e4204f8d5" 
+SRCREV_ethosu = "0c97340119dab4458c3087d82a416a9671d9b2ec"
