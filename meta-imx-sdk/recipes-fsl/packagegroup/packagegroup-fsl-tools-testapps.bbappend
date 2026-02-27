@@ -85,7 +85,7 @@ RDEPENDS:${PN} += " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'packagegroup-fsl-optee-imx', '', d)} \
 "
 
-RDEPENDS_DPDK ?= "dpdk ${RDEPENDS_DPDK_FPR} ${RDEPENDS_MTCP_DPDK}"
+RDEPENDS_DPDK ?= "dpdk kernel-module-dpdk-extras ${RDEPENDS_DPDK_FPR} ${RDEPENDS_MTCP_DPDK}"
 RDEPENDS_DPDK_FPR = ""
 RDEPENDS_DPDK_FPR:mx93-nxp-bsp = "dpdk-fpr"
 RDEPENDS_DPDK_FPR:mx943-nxp-bsp = "dpdk-fpr"
