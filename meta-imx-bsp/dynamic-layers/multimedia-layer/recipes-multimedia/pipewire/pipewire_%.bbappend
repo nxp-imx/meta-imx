@@ -14,8 +14,6 @@ INSANE_SKIP:remove:imx-nxp-bsp = "32bit-time"
 
 SRC_URI:append:imx-nxp-bsp = " \
     file://0001-systemd-allow-pipewire-user-services-for-root.patch \
-    file://0001-pipewiresrc-add-provide-clock-property.patch \
-    file://0001-pipewiresrc-fix-sending-last-buffer-failure-if-waiti.patch \
     file://0001-YOCIMX-9095-pipewiresrc-set-rank-to-secondary.patch \
 "
 SRC_URI:append:mx95-nxp-bsp = " \
