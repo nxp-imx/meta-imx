@@ -33,6 +33,8 @@ EXTRA_OECMAKE += "\
 
 export SDKTARGETSYSROOT = "${STAGING_DIR_HOST}"
 
+CXXFLAGS:append:class-target:arm = " -Wno-error=stringop-overflow"
+
 # The lib is unversioned
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
