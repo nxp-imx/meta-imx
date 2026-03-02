@@ -2,7 +2,7 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2026-02-06T08:59:22Z",
+    "created": "2026-03-02T03:23:19Z",
     "creators": [
       "Organization: NXP"
     ],
@@ -102,7 +102,7 @@
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com",
-      "originator": "Organization: NXP",
+      "originator": "Organization: Basler AG (LA_OPT_NXP_Software_License)    VeriSilicon Holdings Co., Ltd. (LA_OPT_NXP_Software_License)",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -297,7 +297,7 @@
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com/",
-      "originator": "Organization: NXP",
+      "originator": "Organization: DDR:   origin: Synopsys DDR (LA_OPT_NXP_Software_License) EASRC: origin: NXP (LA_OPT_NXP_Software_License) EPDC:  origin: E Ink Corporation (LA_OPT_NXP_Software_License) HDMI:  origin: Cadence Design Systems, Inc. (LA_OPT_NXP_Software_License) LD:    origin: NXP (LA_OPT_NXP_Software_License) SDMA:  origin: NXP (LA_OPT_NXP_Software_License) XCVR:  origin: NXP (LA_OPT_NXP_Software_License) XUVI:  origin: NXP (LA_OPT_NXP_Software_License) VPU:   vpu_fw_imx27_TO1.bin, vpu_fw_imx27_TO2.bin, vpu_fw_imx51.bin, vpu_fw_imx53.bin, vpu_fw_imx6d.bin, vpu_fw_imx6q.bin, wave511_dec_fw.bin, wave633c_codec_fw.bin, coda980_enc_fw.bin origin: Chips & Media, Inc.  (LA_OPT_NXP_Software_License) vpu_fw_imx8_dec.bin, vpu_fw_imx8_enc.bin origin: Amphion Semiconductor Ltd  (LA_OPT_NXP_Software_License)",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -440,7 +440,7 @@
       "licenseDeclared": "LicenseRef-e60c2706-136b-49be-84a4-218b5ca0c384",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com",
-      "originator": "Organization: NXP",
+      "originator": "Organization: NXP (proprietary)                            Freescale Semiconductor, Inc. (proprietary)                            ISO/IEC 13818-7 and ISO/IEC 14496-3 standards                             3GPP 26.173 standard                             FLAC (BSD-3-clause) - https://sourceforge.net/projects/flac/                             libjpeg (IJG) - http://www.ijg.org/                            OggVorbis Tremor (BSD-3-Clause) - http://xiph.org/vorbis/",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -570,7 +570,7 @@
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com",
-      "originator": "Organization: NXP",
+      "originator": "Organization: Vivante Corp. (proprietary)",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -583,7 +583,7 @@
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com",
-      "originator": "Organization: NXP",
+      "originator": "Organization: Vivante Corp. (proprietary)",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -908,7 +908,7 @@
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com/",
-      "originator": "Organization: NXP",
+      "originator": "Organization: VeriSilicon Inc.",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -921,7 +921,7 @@
       "licenseDeclared": "MIT",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com/",
-      "originator": "Organization: NXP",
+      "originator": "Organization: VeriSilicon Inc.",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -934,7 +934,7 @@
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com",
-      "originator": "Organization: NXP",
+      "originator": "Organization: VeriSilicon Inc.",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -1172,7 +1172,7 @@
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com",
-      "originator": "Organization: NXP",
+      "originator": "Organization: VeriSilicon Holdings Co., Ltd.",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -1185,7 +1185,7 @@
       "licenseDeclared": "GPL-2.0-only",
       "homepage": "https://github.com/nxp-imx/isp-vvcam",
       "downloadLocation": "https://github.com/nxp-imx/isp-vvcam -b lf-6.18.2-1.0.0",
-      "originator": "Organization: NXP",
+      "originator": "Organization: ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2.0)",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -1328,7 +1328,7 @@
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com",
-      "originator": "Organization: NXP",
+      "originator": "Organization: Arm Limited",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -1536,7 +1536,7 @@
       "licenseDeclared": "Apache-2.0",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com",
-      "originator": "Organization: NXP",
+      "originator": "Organization: NXP (BSD-3-clause)                              sof (BSD-3-Clause) -  https://github.com/thesofproject/sof                              zephyr project (Apache-2.0) - https://github.com/zephyrproject-rtos/zephyr",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -1653,7 +1653,7 @@
       "licenseDeclared": "MIT",
       "homepage": "https://github.com/nxp-imx/weston-imx",
       "downloadLocation": "https://github.com/nxp-imx/weston-imx -b lf-6.18.2-1.0.0-weston-10",
-      "originator": "Organization: NXP",
+      "originator": "Organization: NXP (MIT)                              Weston (MIT) - http://github.com/wayland-project/weston/",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -1666,7 +1666,7 @@
       "licenseDeclared": "MIT",
       "homepage": "https://github.com/nxp-imx/weston-imx",
       "downloadLocation": "https://github.com/nxp-imx/weston-imx -b lf-6.18.2-1.0.0",
-      "originator": "Organization: NXP",
+      "originator": "Organization: NXP (MIT)                              Weston (MIT) - http://github.com/wayland-project/weston/",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -1705,7 +1705,7 @@
       "licenseDeclared": "Apache-2.0",
       "homepage": "https://www.nxp.com",
       "downloadLocation": "https://www.nxp.com",
-      "originator": "Organization: NXP",
+      "originator": "Organization: NXP (BSD-3-clause)                              zephyr project (Apache-2.0) - https://github.com/zephyrproject-rtos/zephyr",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
