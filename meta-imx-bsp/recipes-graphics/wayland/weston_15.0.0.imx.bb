@@ -163,7 +163,7 @@ SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}
 SRC_URI:remove = "file://0001-libweston-backend-drm-meson.build-allow-libdisplay-i.patch"
 SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
-SRCBRANCH = "weston-imx-14.0.91"
+SRCBRANCH = "weston-imx-15.0.0"
 SRCREV = "4a756f3fe4e2ada479a918469667105b7a5107d7"
 
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
