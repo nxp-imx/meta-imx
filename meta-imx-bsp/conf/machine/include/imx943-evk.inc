@@ -17,7 +17,6 @@ KERNEL_DEVICETREE = " \
     freescale/${KERNEL_DEVICETREE_BASENAME}-pcie1-ep.dtbo \
     freescale/${KERNEL_DEVICETREE_BASENAME}-rpmsg.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-root.dtb \
-    freescale/${KERNEL_DEVICETREE_BASENAME}-sdwifi.dtb \
     freescale/${KERNEL_DEVICETREE_BASENAME}-sgmii.dtb \
 "
 UBOOT_DTB_NAME = "${KERNEL_DEVICETREE_BASENAME}.dtb"
