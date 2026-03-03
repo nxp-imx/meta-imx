@@ -10,7 +10,7 @@ PV = "1.0.3+git"
 SRCBRANCH = "master"
 PDM_SRC ?= "git://github.com/nxp-imx/imx-sw-pdm.git;protocol=https"
 SRC_URI = "${PDM_SRC};branch=${SRCBRANCH}"
-SRCREV = "b91ba33dcd635893156e3027d6697cf81a447bbd"
+SRCREV = "5df2d963d64a8eab67f5b25897294f2f5691b3d6"
 
 inherit pkgconfig
 
