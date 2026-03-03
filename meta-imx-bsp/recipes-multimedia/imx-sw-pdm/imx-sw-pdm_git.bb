@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5a5269faabff841b575efa468fe8a52e"
 
 PV = "1.0.3+git"
 
-SRCBRANCH = "master"
+SRCBRANCH = "main"
 PDM_SRC ?= "git://github.com/nxp-imx/imx-sw-pdm.git;protocol=https"
 SRC_URI = "${PDM_SRC};branch=${SRCBRANCH}"
-SRCREV = "5df2d963d64a8eab67f5b25897294f2f5691b3d6"
+SRCREV = "${AUTOREV}"
 
 inherit pkgconfig
 
@@ -21,12 +21,17 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}${libdir} ${D}${bindir} ${D}${includedir}/imx-mm/audio-codec/swpdm
-    install -m 0755 ${S}/release/imx-sw-pdm ${D}${bindir}
+    install -d ${D}${bindir}/imx-mm
+    install -m 0755 ${S}/release/imx-sw-pdm ${D}${bindir}/imx-mm
 
+    install -d ${D}${libdir}
     install -m 0644 ${S}/release/libimxswpdm.so* ${D}${libdir}
     ln -sf -r ${D}${libdir}/libimxswpdm.so.* ${D}${libdir}/libimxswpdm.so
 
+    install -d ${D}${libdir}/pkgconfig
+    install -m 0644 ${S}/libimxswpdm.pc ${D}${libdir}/pkgconfig
+
+    install -d ${D}${includedir}/imx-mm/audio-codec/swpdm
     install -m 0644 ${S}/include/imx-swpdm.h ${D}${includedir}/imx-mm/audio-codec/swpdm
 }
 
