@@ -42,9 +42,6 @@ ML_PKGS:mx9-nxp-bsp = " \
     pytorch \
     tensorflow-lite \
 "
-# Temporarily disable onnxruntime on mx943 due to build breaks
-ML_PKGS:mx943-nxp-bsp:remove = "onnxruntime-tests"
-
 # These packages require acceleration, which currently maps to
 # all SOCs with GPU except for 8M Mini
 ML_ACCELERATED_PKGS                    = ""
