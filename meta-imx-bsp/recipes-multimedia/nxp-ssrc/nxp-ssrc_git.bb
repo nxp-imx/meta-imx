@@ -25,12 +25,18 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}${libdir} ${D}/unit_tests/NXP_SSRC
-
+    install -d ${D}${libdir}
     install -m 0755 ${S}/exec_libcross/libssrcArmNeon.so* ${D}${libdir}
     ln -srf ${D}${libdir}/libssrcArmNeon.so.* ${D}${libdir}/libssrcArmNeon.so
 
+    install -d ${D}${libdir}/pkgconfig
+    install -m 0644 ${S}/libssrc.pc ${D}${libdir}/pkgconfig
+
+    install -d ${D}/unit_tests/NXP_SSRC
     install -m 0644 ${S}/exec_linuxcross/ssrcArmNeon ${D}/unit_tests/NXP_SSRC
+
+    install -d ${D}${includedir}/imx-mm/audio-codec/nxp-ssrc
+    install -m 0644 ${S}/ssrcArmNeon/baselibrary/include/* ${D}${includedir}/imx-mm/audio-codec/nxp-ssrc
 }
 
 INSANE_SKIP:${PN} += "buildpaths"
