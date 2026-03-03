@@ -30,7 +30,7 @@ LDFLAGS[unexport] = "1"
 
 EXTRA_OEMAKE = "\
     board=${OEI_BOARD} \
-    DDR_CONFIG=${@bb.utils.contains('PACKAGECONFIG', 'ecc', '${OEI_DDR_CONFIG_ECC}', '${OEI_DDR_CONFIG}', d)} \
+    DDR_CONFIG=${@bb.utils.contains('PACKAGECONFIG', 'ecc', '${OEI_DDRCONFIG_ECC}', '${OEI_DDRCONFIG}', d)} \
     DEBUG=1 \
     OEI_CROSS_COMPILE=arm-none-eabi-"
 
