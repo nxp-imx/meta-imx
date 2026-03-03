@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5a5269faabff841b575efa468fe8a52e"
 
 PV = "2.2.3+git"
 
-SRCBRANCH = "master"
+SRCBRANCH = "main"
 NXP_SSRC_SRC ?= "git://github.com/nxp-imx/nxp_ssrc.git;protocol=https"
 SRC_URI = "${NXP_SSRC_SRC};branch=${SRCBRANCH}"
-SRCREV = "ce6ad554849e17b46c181774e2d94f5478c25725"
+SRCREV = "${AUTOREV}"
 
 inherit pkgconfig
 
