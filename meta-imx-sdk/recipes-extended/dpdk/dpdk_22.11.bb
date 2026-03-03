@@ -10,10 +10,10 @@ DEPENDS = "numactl python3-pyelftools-native libpcap openssl"
 
 SRC_URI = "${DPDK_SRC};branch=${SRCBRANCH}"
 DPDK_SRC ?= "git://github.com/nxp-qoriq/dpdk;protocol=https"
-SRCBRANCH = "25.11-qoriq-lf-rel"
+SRCBRANCH = "22.11-qoriq-lf-rel"
 
 STABLE = "-stable"
-SRCREV = "cd42ae7a4305032705ebc12f5ad845754603dd51"
+SRCREV = "09c4ac8ed0a8db3ed0852f02184b7daa6997d9b4"
 
 CVE_PRODUCT = "data_plane_development_kit"
 
