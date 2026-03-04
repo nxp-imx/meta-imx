@@ -1,7 +1,7 @@
-From 63bf5ef583bce44829a7c00b2f15c998a56408cb Mon Sep 17 00:00:00 2001
+From 3f3645d21cb4e0b1e4ca2f019f54aa0c57da078a Mon Sep 17 00:00:00 2001
 From: Ryan Zhang <ryan.zhang@nxp.com>
 Date: Thu, 17 Jul 2025 16:31:47 +0800
-Subject: [PATCH 4/6] MGS-8232 [#nxp] fix nxp patch build issue on latest
+Subject: [PATCH 5/5] MGS-8232 [#nxp] fix nxp patch build issue on latest
  vulkan wsi
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -27,10 +27,10 @@ Signed-off-by: Ryan Zhang <ryan.zhang@nxp.com>
  2 files changed, 6 insertions(+), 5 deletions(-)
 
 diff --git a/wsi/wayland/swapchain.cpp b/wsi/wayland/swapchain.cpp
-index 172f8a2..9a11515 100644
+index 72cb1c624..56b4fc4d7 100644
 --- a/wsi/wayland/swapchain.cpp
 +++ b/wsi/wayland/swapchain.cpp
-@@ -86,7 +86,7 @@ swapchain::~swapchain()
+@@ -84,7 +84,7 @@ swapchain::~swapchain()
        wl_compositor_destroy(wlc.wl_compositor);
        wl_registry_destroy(wlc.registry);
        wl_region_destroy(wlc.opaque_region);
@@ -39,7 +39,7 @@ index 172f8a2..9a11515 100644
     }
     if (m_buffer_queue != nullptr)
     {
-@@ -161,7 +161,7 @@ dispatch_queue_op(struct wl_display *wl_dpy,
+@@ -159,7 +159,7 @@ dispatch_queue_op(struct wl_display *wl_dpy,
  }
  
  static void
@@ -48,7 +48,7 @@ index 172f8a2..9a11515 100644
  {
     int *done = (int *)data;
  
-@@ -212,7 +212,7 @@ roundtrip_queue(struct wl_display *wl_dpy, struct wl_event_queue *wl_queue)
+@@ -210,7 +210,7 @@ roundtrip_queue(struct wl_display *wl_dpy, struct wl_event_queue *wl_queue)
  
  static void
  registry_handle_global(void *data, struct wl_registry *registry, uint32_t name,
@@ -57,7 +57,7 @@ index 172f8a2..9a11515 100644
  {
     wl_context *pwlc = (wl_context *)data;
  
-@@ -224,7 +224,8 @@ registry_handle_global(void *data, struct wl_registry *registry, uint32_t name,
+@@ -222,7 +222,8 @@ registry_handle_global(void *data, struct wl_registry *registry, uint32_t name,
  }
  
  static const struct wl_registry_listener registry_listener = {
@@ -68,10 +68,10 @@ index 172f8a2..9a11515 100644
  
  VkResult swapchain::add_required_extensions(VkDevice device, const VkSwapchainCreateInfoKHR *swapchain_create_info)
 diff --git a/wsi/wayland/swapchain.hpp b/wsi/wayland/swapchain.hpp
-index e1bce12..2599f1d 100644
+index 5b38502d9..313d69fa5 100644
 --- a/wsi/wayland/swapchain.hpp
 +++ b/wsi/wayland/swapchain.hpp
-@@ -220,7 +220,7 @@ private:
+@@ -208,7 +208,7 @@ private:
  
     struct wl_display *m_display;
     struct wl_surface *m_surface;
@@ -81,5 +81,5 @@ index e1bce12..2599f1d 100644
      * surface is valid until swapchain is destroyed. */
     surface *m_wsi_surface;
 -- 
-2.34.1
+2.43.0
 

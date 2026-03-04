@@ -1,7 +1,7 @@
-From 6331212daa305eec9bc071fd62ab2d24d515e09d Mon Sep 17 00:00:00 2001
+From 2c50ffa165115a7b188b89da256a9b432190b231 Mon Sep 17 00:00:00 2001
 From: Yuan Tian <yuan.tian@nxp.com>
 Date: Thu, 27 Jul 2023 18:25:16 +0800
-Subject: [PATCH 2/6] MGS-6283 [#nxp] Add support of
+Subject: [PATCH 3/5] MGS-6283 [#nxp] Add support of
  VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR feature
 
 Mali vulkan driver doesn't support VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR. It caused unwanted blending effect in many vulkan cases.
@@ -10,12 +10,12 @@ Add support of this feature to solve the problem.
 Upstream-Status: Inappropriate [i.MX-specific]
 Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
 ---
- wsi/wayland/swapchain.cpp | 164 ++++++++++++++++++++++++++++++++++++++
+ wsi/wayland/swapchain.cpp | 159 ++++++++++++++++++++++++++++++++++++++
  wsi/wayland/swapchain.hpp |   9 +++
- 2 files changed, 173 insertions(+)
+ 2 files changed, 168 insertions(+)
 
 diff --git a/wsi/wayland/swapchain.cpp b/wsi/wayland/swapchain.cpp
-index 709abf4..88923b1 100644
+index 0638d2d87..141967cab 100644
 --- a/wsi/wayland/swapchain.cpp
 +++ b/wsi/wayland/swapchain.cpp
 @@ -34,6 +34,7 @@
@@ -26,15 +26,10 @@ index 709abf4..88923b1 100644
  
  #include "swapchain.hpp"
  #include "util/drm/drm_utils.hpp"
-@@ -75,12 +76,155 @@ swapchain::~swapchain()
- {
-    teardown();
- 
-+   if (m_wsi_allocator != nullptr)
-+   {
-+      wsialloc_delete(m_wsi_allocator);
-+   }
-+   m_wsi_allocator = nullptr;
+@@ -78,12 +79,150 @@ swapchain::~swapchain()
+       wsialloc_delete(m_wsi_allocator);
+    }
+    m_wsi_allocator = nullptr;
 +   if (wlc.opaque_region)
 +   {
 +      wl_region_destroy(wlc.opaque_region);
@@ -182,9 +177,9 @@ index 709abf4..88923b1 100644
  VkResult swapchain::add_required_extensions(VkDevice device, const VkSwapchainCreateInfoKHR *swapchain_create_info)
  {
     auto compression_control = wsi_ext_image_compression_control::create(device, swapchain_create_info);
-@@ -204,6 +348,21 @@ VkResult swapchain::init_platform(VkDevice device, const VkSwapchainCreateInfoKH
-       present_wait->set_wayland_dispatcher(m_display, m_buffer_queue);
-    }
+@@ -171,6 +310,21 @@ VkResult swapchain::init_platform(VkDevice device, const VkSwapchainCreateInfoKH
+    use_presentation_thread =
+       WAYLAND_FIFO_PRESENTATION_THREAD_ENABLED && (m_present_mode != VK_PRESENT_MODE_MAILBOX_KHR);
  
 +   if (swapchain_create_info->compositeAlpha & VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR)
 +   {
@@ -204,7 +199,7 @@ index 709abf4..88923b1 100644
     return VK_SUCCESS;
  }
  
-@@ -536,6 +695,11 @@ void swapchain::present_image(const pending_present_request &pending_present)
+@@ -549,6 +703,11 @@ void swapchain::present_image(const pending_present_request &pending_present)
        set_error_state(VK_ERROR_SURFACE_LOST_KHR);
     }
  
@@ -217,10 +212,10 @@ index 709abf4..88923b1 100644
  
     auto present_sync_fd = image_data->present_fence.export_sync_fd();
 diff --git a/wsi/wayland/swapchain.hpp b/wsi/wayland/swapchain.hpp
-index 1297c72..e1bce12 100644
+index 951204b8a..5b38502d9 100644
 --- a/wsi/wayland/swapchain.hpp
 +++ b/wsi/wayland/swapchain.hpp
-@@ -81,6 +81,14 @@ struct image_creation_parameters
+@@ -79,6 +79,14 @@ struct image_creation_parameters
     }
  };
  
@@ -235,7 +230,7 @@ index 1297c72..e1bce12 100644
  class swapchain : public wsi::swapchain_base
  {
  public:
-@@ -212,6 +220,7 @@ private:
+@@ -200,6 +208,7 @@ private:
  
     struct wl_display *m_display;
     struct wl_surface *m_surface;
@@ -244,5 +239,5 @@ index 1297c72..e1bce12 100644
      * surface is valid until swapchain is destroyed. */
     surface *m_wsi_surface;
 -- 
-2.34.1
+2.43.0
 

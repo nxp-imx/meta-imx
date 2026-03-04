@@ -1,0 +1,41 @@
+From a75d55cb6e49ec37613f7f92b46502707d1d7e48 Mon Sep 17 00:00:00 2001
+From: Ryan Zhang <ryan.zhang@nxp.com>
+Date: Thu, 7 Aug 2025 10:47:18 +0800
+Subject: [PATCH] MGS-8368 [#nxp] fix the function pointer query logic
+
+1. should query khr priority.
+2. should query vk#func directly, rather than FPN.
+3. The second solution can be found in origin:
+commitid: 29ee099f2554c75e801853a637c6182ae1ee02fd
+so we should use the origin solution after wsi update
+to latest version.
+
+Upstream-Status: Pending
+Signed-off-by: Ryan Zhang <ryan.zhang@nxp.com>
+---
+ layer/calibrated_timestamps_api.cpp | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/layer/calibrated_timestamps_api.cpp b/layer/calibrated_timestamps_api.cpp
+index 553dedd9b..b46e9b0e0 100644
+--- a/layer/calibrated_timestamps_api.cpp
++++ b/layer/calibrated_timestamps_api.cpp
+@@ -37,10 +37,11 @@ wsi_layer_vkGetCalibratedTimestampsEXT(VkDevice device, uint32_t timestampCount,
+                                        uint64_t *pMaxDeviation) VWL_API_POST
+ {
+    auto &device_data = layer::device_private_data::get(device);
+-   auto get_calibrated_timestamps =
+-      device_data.disp.get_fn<PFN_vkGetCalibratedTimestampsEXT>("PFN_vkGetCalibratedTimestampsEXT").has_value() ?
+-         device_data.disp.get_fn<PFN_vkGetCalibratedTimestampsEXT>("vkGetCalibratedTimestampsEXT") :
+-         device_data.disp.get_fn<PFN_vkGetCalibratedTimestampsEXT>("vkGetCalibratedTimestampsKHR");
++   auto get_calibrated_timestamps = device_data.disp.get_fn<PFN_vkGetCalibratedTimestampsEXT>("vkGetCalibratedTimestampsKHR");
++   if (!get_calibrated_timestamps){
++      get_calibrated_timestamps = device_data.disp.get_fn<PFN_vkGetCalibratedTimestampsEXT>("vkGetCalibratedTimestampsEXT");
++   } 
++
+    assert(get_calibrated_timestamps.has_value());
+ #if VULKAN_WSI_LAYER_EXPERIMENTAL
+    struct stage_local_index_and_offset
+-- 
+2.43.0
+

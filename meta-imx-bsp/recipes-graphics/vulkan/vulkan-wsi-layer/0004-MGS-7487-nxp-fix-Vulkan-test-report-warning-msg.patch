@@ -1,7 +1,7 @@
-From e861159be44d7ffc16c9de29ec7569168ef5029c Mon Sep 17 00:00:00 2001
+From 67f757ec749d0634c9ed3e9596c39b640bdd7f0c Mon Sep 17 00:00:00 2001
 From: Yuan Tian <yuan.tian@nxp.com>
 Date: Thu, 23 Nov 2023 01:55:05 +0800
-Subject: [PATCH 3/6] MGS-7487 [#nxp] fix Vulkan test report warning msg
+Subject: [PATCH 4/5] MGS-7487 [#nxp] fix Vulkan test report warning msg
 
 destroy wl_compositor and wl_registry attached to opaque region for VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR to fix warnings.
 
@@ -16,10 +16,10 @@ Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/wsi/wayland/swapchain.cpp b/wsi/wayland/swapchain.cpp
-index 88923b1..172f8a2 100644
+index 141967cab..72cb1c624 100644
 --- a/wsi/wayland/swapchain.cpp
 +++ b/wsi/wayland/swapchain.cpp
-@@ -83,6 +83,8 @@ swapchain::~swapchain()
+@@ -81,6 +81,8 @@ swapchain::~swapchain()
     m_wsi_allocator = nullptr;
     if (wlc.opaque_region)
     {
@@ -29,5 +29,5 @@ index 88923b1..172f8a2 100644
        wlc = {0};
     }
 -- 
-2.34.1
+2.43.0
 

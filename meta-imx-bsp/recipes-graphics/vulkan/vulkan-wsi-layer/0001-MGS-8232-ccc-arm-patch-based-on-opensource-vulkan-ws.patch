@@ -1,0 +1,52 @@
+From ec2c920c48dc3b14d8948c3beb5a8fde9baf57b0 Mon Sep 17 00:00:00 2001
+From: Ryan Zhang <ryan.zhang@nxp.com>
+Date: Thu, 17 Jul 2025 14:01:32 +0800
+Subject: [PATCH 1/5] MGS-8232 [#ccc] arm patch based on opensource vulkan wsi
+
+Arm vulkan wsi r54p1 is based on this commit of opensource
+vulkan wsi:
+commitid:5097740a4575e69ea17f6910ff62eea59a380bbf
+commitmsg:Merge 'Support timestamp calibration for present
+stage local time domains' into 'main'.
+
+This patch records the internal modification of arm vukan
+wsi r54p based on this opensource baseline.
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Ryan Zhang <ryan.zhang@nxp.com>
+---
+ CMakeLists.txt         | 2 +-
+ layer/private_data.cpp | 4 +++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c8063ba2b..adf321690 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -292,7 +292,7 @@ if (VULKAN_WSI_LAYER_EXPERIMENTAL)
+    target_sources(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/wsi/extensions/present_timing.cpp)
+    add_definitions("-DVULKAN_WSI_LAYER_EXPERIMENTAL=1")
+ else()
+-   list(APPEND JSON_COMMANDS COMMAND sed -i '/VK_EXT_present_timing|VK_KHR_present_wait/d' ${CMAKE_CURRENT_BINARY_DIR}/VkLayer_window_system_integration.json)
++   list(APPEND JSON_COMMANDS COMMAND sed -Ei '/VK_EXT_present_timing|VK_KHR_present_wait/d' ${CMAKE_CURRENT_BINARY_DIR}/VkLayer_window_system_integration.json)
+    add_definitions("-DVULKAN_WSI_LAYER_EXPERIMENTAL=0")
+ endif()
+ 
+diff --git a/layer/private_data.cpp b/layer/private_data.cpp
+index 5956f6c1b..92c5d227b 100644
+--- a/layer/private_data.cpp
++++ b/layer/private_data.cpp
+@@ -167,7 +167,9 @@ PFN_vkVoidFunction device_dispatch_table::get_user_enabled_entrypoint(VkDevice d
+    {
+       /* An entrypoint is allowed to use if it has been enabled by the user or is included in the core specficiation of the API version.
+        * Entrypoints included in API version 1.0 are allowed by default. */
+-      if (item->second.user_visible || item->second.api_version <= api_version ||
++      if (item->second.user_visible ||
++          (item->second.ext_name != nullptr && !strcmp(item->second.ext_name, "") &&
++           item->second.api_version <= api_version) ||
+           item->second.api_version == VK_API_VERSION_1_0)
+       {
+          return item->second.fn;
+-- 
+2.43.0
+
