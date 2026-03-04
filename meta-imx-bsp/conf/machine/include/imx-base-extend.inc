@@ -26,6 +26,7 @@ IMX_EXTRA_FIRMWARE:mx952-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx vir
 PREFERRED_VERSION_imx-m7-demos:mx952-nxp-bsp = "25.12.00"
 
 # Add new SoC i.MX 943
+IMX_SOC_REV:mx943-generic-bsp ?= "A1"
 MACHINEOVERRIDES_EXTENDER:mx943:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxpxp:mx9-generic-bsp:mx9-nxp-bsp:mx94-generic-bsp:mx94-nxp-bsp:mx943-generic-bsp:mx943-nxp-bsp"
 MACHINE_SOCARCH_SUFFIX:mx943-nxp-bsp = "-mx943"
 IMX_EXTRA_FIRMWARE:mx943-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx virtual/imx-system-manager virtual/imx-oei"
