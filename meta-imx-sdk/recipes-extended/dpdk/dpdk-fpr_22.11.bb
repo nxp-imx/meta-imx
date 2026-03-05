@@ -9,7 +9,7 @@ SRC_URI = "${DPDK_FPR_SRC};branch=${SRCBRANCH}"
 DPDK_FPR_SRC ?= "git://github.com/nxp/dpdk-fpr;protocol=https"
 
 SRCBRANCH = "main"
-SRCREV = "acd7f3b4b56627591355bee3d16fd23b58ba0021"
+SRCREV = "15ca398ee1af7e40ada62e4f31e25dd73e4b38e4"
 
 
 inherit pkgconfig
