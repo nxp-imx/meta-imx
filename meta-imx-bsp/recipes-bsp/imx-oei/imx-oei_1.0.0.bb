@@ -14,7 +14,7 @@ SRCREV = "7d6b4351995cda80115ea23bbb1e7999005421d0"
 inherit deploy
 
 PACKAGECONFIG ??= " \
-    ${@bb.utils.contains_any('UBOOT_CONFIG', 'sd-ecc sd-ecc-sensors', 'ecc', '', d)}"
+    ${@bb.utils.contains('UBOOT_CONFIG', 'sd-ecc', 'ecc', '', d)}"
 
 PACKAGECONFIG[ecc] = ""
 PACKAGECONFIG[tcm] = ""
