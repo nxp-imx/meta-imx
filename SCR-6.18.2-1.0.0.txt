@@ -45,7 +45,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-atf.git
-Version:                     2.12
+Version:                     2.14
 Outgoing License:            BSD-3-Clause 
 License File:                docs/license.rst
 Package Category:            BSP
@@ -72,7 +72,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-sm.git
-Version:                     2026q1
+Version:                     2026q2
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            BSP
@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.6-b836d2e.bin
+Package:                     firmware-ele-imx-2.0.6-29313e0.bin
 Version:                     2.0.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -295,8 +295,8 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.0.0-c82a870.bin
-Version:                     1.0.0
+Package:                     nxp-wlan-apps-1.1.0-337340d.bin
+Version:                     1.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-c150867
+Package:                     sof-zephyr-2.16.0-a32d983
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-314d947
+Package:                     zephyr-demo-imx-4.4.0-0e07f62
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -653,7 +653,7 @@ Origin:                      NXP (GPL-2.0-or-later)
 --------------------------------------------
 
 Package:                     dpdk.git
-Version:                     22.11
+Version:                     25.11
 Outgoing License:            BSD-3-Clause 
 License File:                license/bsd-3-clause.txt
 Package Category:            BSP
@@ -773,7 +773,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-534042c.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-27f3992.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -792,7 +792,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-534042c.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-27f3992.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -811,8 +811,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p3.0-5d2f389.bin
-Version:                     r54p3.0
+Package:                     mali-imx-r54p1.6-5d2f389.bin
+Version:                     r54p1.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -831,7 +831,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
-Version:                     6.5.0
+Version:                     6.5.2
 Outgoing License:            BSD-3-Clause 
 License File:                License.md
 Package Category:            Graphics
@@ -1004,8 +1004,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-r54p3.0-aarch64-wayland-mali-e779398.bin
-Version:                     r54p3.0
+Package:                     libgpuperfcnt-r54p1.6-aarch64-wayland-mali-e779398.bin
+Version:                     r54p1.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -1035,7 +1035,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.11.0-ec08e84.bin
+Package:                     imx-parser-4.11.0-790a9df.bin
 Version:                     4.11.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1127,26 +1127,26 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-sw-pdm-1.0.3.bin
+Package:                     imx-sw-pdm.git
 Version:                     1.0.3
-Outgoing License:            LA_OPT_NXP_Software_License v45 May 2023 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
+Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP PDM to PCM Software Decimation SIMD Library
-Release Location:            Mirror
+Release Location:            http://github.com/nxp-imx/imx-sw-pdm -b lf-6.18.2-1.0.0
 Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-opencl-converter-0.12.0-b170099.bin
+Package:                     imx-opencl-converter.git
 Version:                     0.12.0
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            BSD-3-Clause 
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    i.MX multimedia opencl converter library
-Release Location:            Mirror
+Release Location:            https://github.com/nxp-imx/imx_opencl_converter -b lf-6.18.2-1.0.0
 Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
@@ -1286,14 +1286,14 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-ssrc-2.2.3-5865e8f.bin
+Package:                     nxp-ssrc.git
 Version:                     2.2.3
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
+Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
+License File:                LICENSE.txt
 Package Category:            Multimedia
-Type of Content:             binary and source
+Type of Content:             source
 Description and comments:    Synchronous Sample Rate Convertor for ARM Cortex-A
-Release Location:            Mirror
+Release Location:            https://github.com/nxp-imx/nxp_ssrc -b lf-6.18.2-1.0.0
 Origin:                      NXP (proprietary)
 
 --------------------------------------------
@@ -1498,6 +1498,11 @@ Package Category:            M7_Processor
 Type of Content:             binary
 Description and comments:    i.MX MCUXpresso SDK demo image on Cortex-M7 core
 Release Location:            Mirror
+Origin:                      NXP (BSD-3-Clause and Proprietary)
+                             ARM LIMITED (BSD-3-Clause)
+                             Real Time Engineers, Ltd (MIT) - https://aws.amazon.com/freertos/
+                             Mentor Graphics, Ltd. (BSD-3-Clause) - https://github.com/OpenAMP/open-amp/
+
 --------------------------------------------
 M33 Processor Packages
 --------------------------------------------
