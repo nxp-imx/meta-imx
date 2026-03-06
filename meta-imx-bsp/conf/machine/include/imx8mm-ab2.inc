@@ -23,7 +23,7 @@ IMX_DEFAULT_BOOTLOADER:use-nxp-bsp = "u-boot-imx"
 IMX_DEFAULT_BOOTLOADER:use-mainline-bsp = "u-boot-fslc"
 
 UBOOT_CONFIG ??= "sd"
-UBOOT_CONFIG[sd]       = "${UBOOT_CONFIG_BASENAME}_defconfig,sdcard"
+UBOOT_CONFIG[sd]       = "${UBOOT_CONFIG_BASENAME}_defconfig"
 
 SPL_BINARY = "spl/u-boot-spl.bin"
 
