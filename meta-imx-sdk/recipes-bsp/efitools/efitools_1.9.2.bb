@@ -14,11 +14,3 @@ EXTRA_OEMAKE:append = " \
 RDEPENDS:${PN} = " \
     parted mtools coreutils util-linux openssl libcrypto \
 "
-
-EXTRA_OEMAKE:append:class-nativesdk = " \
-    INCDIR_PREFIX='${STAGING_DIR_NATIVE}' \
-    CRTPATH_PREFIX='${STAGING_DIR_NATIVE}' \
-"
-
-BBCLASSEXTEND = "nativesdk"
-
