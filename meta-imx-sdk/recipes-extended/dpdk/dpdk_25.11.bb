@@ -10,7 +10,7 @@ DEPENDS = "numactl python3-pyelftools-native libpcap openssl"
 
 SRC_URI = "${DPDK_SRC};branch=${SRCBRANCH}"
 DPDK_SRC ?= "git://github.com/nxp-qoriq/dpdk;protocol=https"
-SRCBRANCH = "25.11-qoriq-lf-rel"
+SRCBRANCH = "25.11-lf-rel"
 
 STABLE = "-stable"
 SRCREV = "4a771a23b5ae8f78803a7740308f3b27d0e5aef8"
