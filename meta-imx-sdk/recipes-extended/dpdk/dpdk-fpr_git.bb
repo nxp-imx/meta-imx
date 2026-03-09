@@ -11,6 +11,7 @@ DPDK_FPR_SRC ?= "git://github.com/nxp/dpdk-fpr;protocol=https"
 SRCBRANCH = "main"
 SRCREV = "15ca398ee1af7e40ada62e4f31e25dd73e4b38e4"
 
+PV = "25.11+git"
 
 inherit pkgconfig
 
