@@ -1,0 +1,70 @@
+From 020c1e76ed5714021804d9519bd3214397349861 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Mon, 9 Mar 2026 14:35:34 -0500
+Subject: [PATCH] Revert "[fixup][gbm] Add fallback for drmPrimeHandleToFD()"
+
+This reverts commit d474b1b6caf5587c7509bff4caad841c8b9884fb.
+
+Upstream-Status: Inappropriate [i.MX specific]
+---
+ chromium/ui/gfx/linux/BUILD.gn       | 16 ----------------
+ chromium/ui/gfx/linux/gbm_wrapper.cc |  2 +-
+ 2 files changed, 1 insertion(+), 17 deletions(-)
+
+diff --git a/chromium/ui/gfx/linux/BUILD.gn b/chromium/ui/gfx/linux/BUILD.gn
+index 0dbcbdd61ec..fcb9318825a 100644
+--- a/chromium/ui/gfx/linux/BUILD.gn
++++ b/chromium/ui/gfx/linux/BUILD.gn
+@@ -2,7 +2,6 @@
+ # Use of this source code is governed by a BSD-style license that can be
+ # found in the LICENSE file.
+ 
+-import("//build/config/linux/pkg_config.gni")
+ import("//build/config/ozone.gni")
+ import("//build/config/ui.gni")
+ 
+@@ -21,19 +20,6 @@ source_set("drm") {
+   ]
+ }
+ 
+-pkg_config("gbm_config") {
+-  packages = [ "gbm" ]
+-  gbm_atleast_version = exec_script(pkg_config_script,
+-                                    common_pkg_config_args + pkg_config_args + [
+-                                          "gbm",
+-                                          "--atleast-version=21.1.0",
+-                                        ],
+-                                    "value")
+-  if (gbm_atleast_version) {
+-    defines = [ "HAVE_GBM_BO_GET_FD_FOR_PLANE" ]
+-  }
+-}
+-
+ source_set("gbm") {
+   sources = [
+     "gbm_buffer.h",
+@@ -57,8 +43,6 @@ source_set("gbm") {
+     "//ui/gfx:memory_buffer",
+     "//ui/gfx/geometry",
+   ]
+-
+-  configs += [ ":gbm_config" ]
+ }
+ 
+ if (ozone_platform_x11) {
+diff --git a/chromium/ui/gfx/linux/gbm_wrapper.cc b/chromium/ui/gfx/linux/gbm_wrapper.cc
+index 95b4b17e31f..331587a7d2c 100644
+--- a/chromium/ui/gfx/linux/gbm_wrapper.cc
++++ b/chromium/ui/gfx/linux/gbm_wrapper.cc
+@@ -85,7 +85,7 @@ base::ScopedFD GetPlaneFdForBo(gbm_bo* bo, size_t plane) {
+     PLOG_IF(WARNING, ret != 0) << "Failed to get fd for plane even without DRM_RDWR.";
+   }
+ 
+-#if BUILDFLAG(IS_QTWEBENGINE) && defined(HAVE_GBM_BO_GET_FD_FOR_PLANE)
++#if BUILDFLAG(IS_QTWEBENGINE)
+   // drmPrimeHandleToFD() does not work with legacy radeon driver. Fallback to
+   // gbm_bo_get_fd_for_plane() which does provide fds per plane basis.
+   if (ret) {
+-- 
+2.34.1
+
