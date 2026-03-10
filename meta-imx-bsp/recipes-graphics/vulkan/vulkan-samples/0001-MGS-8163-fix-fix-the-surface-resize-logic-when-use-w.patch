@@ -1,8 +1,7 @@
-From 2f387b312f052ec6489a5a328a9068d449ef938e Mon Sep 17 00:00:00 2001
+From b8a1a780c056cf3bc244a92d9b5642aa35332a09 Mon Sep 17 00:00:00 2001
 From: ryan <ryan.zhang@nxp.com>
 Date: Tue, 22 Apr 2025 09:40:07 +0800
-Subject: [PATCH] [MGS-8163] fix: fix the surface resize logic when use wayland
- wsi
+Subject: [PATCH] fix: fix the surface resize logic when use wayland wsi
 
 According to the Vulkan Spec:https://registry.khronos.org/vulkan/
 specs/latest/man/html/VkSurfaceCapabilitiesKHR.html
@@ -26,19 +25,18 @@ Affected cases:
 
 Upstream-Status: Backport [fb5c2f323a5e15880a21a18497110cfae5c301d3]
 Signed-off-by: Ryan Zhang ryan.zhang@nxp.com
-
 ---
  framework/api_vulkan_sample.cpp     | 5 ++++-
  framework/hpp_api_vulkan_sample.cpp | 5 ++++-
  2 files changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/framework/api_vulkan_sample.cpp b/framework/api_vulkan_sample.cpp
-index 1c09279..59f3eb0 100644
+index 3125ed05..d9cd4076 100644
 --- a/framework/api_vulkan_sample.cpp
 +++ b/framework/api_vulkan_sample.cpp
-@@ -972,7 +972,10 @@ void ApiVulkanSample::handle_surface_changes()
- 	if (surface_properties.currentExtent.width != get_render_context().get_surface_extent().width ||
- 	    surface_properties.currentExtent.height != get_render_context().get_surface_extent().height)
+@@ -963,7 +963,10 @@ void ApiVulkanSample::handle_surface_changes()
+ 	    (surface_properties.currentExtent.width != 0xFFFFFFFF &&
+ 	     surface_properties.currentExtent.height != 0xFFFFFFFF))
  	{
 -		resize(surface_properties.currentExtent.width, surface_properties.currentExtent.height);
 +		if ((surface_properties.currentExtent.width != 0xFFFFFFFF) && (surface_properties.currentExtent.height != 0xFFFFFFFF))
@@ -49,12 +47,12 @@ index 1c09279..59f3eb0 100644
  }
  
 diff --git a/framework/hpp_api_vulkan_sample.cpp b/framework/hpp_api_vulkan_sample.cpp
-index 0052444..afaaf69 100644
+index 1218c370..8fff3a98 100644
 --- a/framework/hpp_api_vulkan_sample.cpp
 +++ b/framework/hpp_api_vulkan_sample.cpp
-@@ -843,7 +843,10 @@ void HPPApiVulkanSample::handle_surface_changes()
- 
- 	if (surface_properties.currentExtent != get_render_context().get_surface_extent())
+@@ -856,7 +856,10 @@ void HPPApiVulkanSample::handle_surface_changes()
+ 	if (surface_properties.currentExtent != get_render_context().get_surface_extent() &&
+ 	    surface_properties.currentExtent != vk::Extent2D{0xFFFFFFFF, 0xFFFFFFFF})
  	{
 -		resize(surface_properties.currentExtent.width, surface_properties.currentExtent.height);
 +		if ((surface_properties.currentExtent.width != 0xFFFFFFFF) && (surface_properties.currentExtent.height != 0xFFFFFFFF))
@@ -64,6 +62,3 @@ index 0052444..afaaf69 100644
  	}
  }
  
--- 
-2.34.1
-
