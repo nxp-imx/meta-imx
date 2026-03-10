@@ -1,0 +1,39 @@
+From e0272511b67397253babcb87b6678cb9a7bc6573 Mon Sep 17 00:00:00 2001
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Date: Tue, 10 Mar 2026 14:21:14 -0500
+Subject: [PATCH] setup.py: Remove pkg_resources usage and fallback import
+
+Upstream context:
+  - setuptools >=81 removed pkg_resources entirely, breaking imports.
+
+This fix is taken from https://github.com/html5lib/html5lib-python/pull/592 and modified changes based on the review recommendations
+
+Upstream-Status: Pending
+
+Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+---
+ setup.py | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 30ee057..41a74bb 100644
+--- a/setup.py
++++ b/setup.py
+@@ -6,9 +6,12 @@ import sys
+ 
+ from os.path import join, dirname
+ from setuptools import setup, find_packages, __version__ as setuptools_version
+-from pkg_resources import parse_version
++from packaging.version import parse as parse_version
+ 
+-import pkg_resources
++try:
++    import pkg_resources
++except ImportError:
++    pkg_resources = None
+ 
+ try:
+     import _markerlib.markers
+-- 
+2.34.1
+
