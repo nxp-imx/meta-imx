@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5a5269faabff841b575efa468fe8a52e"
 PV = "2.2.3+git"
 
 SRCBRANCH = "main"
-NXP_SSRC_SRC ?= "git://github.com/nxp-imx/nxp_ssrc.git;protocol=https"
+NXP_SSRC_SRC ?= "git://github.com/nxp-imx/nxp-ssrc.git;protocol=https"
 SRC_URI = "${NXP_SSRC_SRC};branch=${SRCBRANCH}"
 SRCREV = "2113f30ab787beaa64fa3b881438f176e7565483"
 
