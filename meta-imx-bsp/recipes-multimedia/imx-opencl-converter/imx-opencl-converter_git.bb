@@ -9,7 +9,7 @@ DEPENDS = "virtual/libopencl1"
 PV = "0.12.0+git"
 
 SRCBRANCH = "master"
-OPENCL_CONVERTER_SRC ?= "git://github.com/nxp-imx/imx_opencl_converter.git;protocol=https"
+OPENCL_CONVERTER_SRC ?= "git://github.com/nxp-imx/imx-opencl-converter.git;protocol=https"
 SRC_URI = "${OPENCL_CONVERTER_SRC};branch=${SRCBRANCH}"
 SRCREV = "f752c5d4f62568e89179b68d706fb532cae71734"
 
