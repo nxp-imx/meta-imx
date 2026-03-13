@@ -3,7 +3,7 @@
 DESCRIPTION = "NXP synchronous sample rate converter"
 LICENSE = "Proprietary"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5a5269faabff841b575efa468fe8a52e"
+LIC_FILES_CHKSUM = "file://COPYING;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 
 PV = "2.2.3+git"
 
