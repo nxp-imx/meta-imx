@@ -1,9 +1,8 @@
 # Copyright (C) 2012-2018 O.S. Systems Software LTDA.
 # Copyright (C) 2012-2016 Freescale Semiconductor
-# Copyright 2017-2021 NXP
+# Copyright 2017-2021,2026 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
-DESCRIPTION = "Freescale Multimedia parser libs"
-LICENSE = "Proprietary"
+LICENSE = "BSD-3-Clause"
 SECTION = "multimedia"
 
 # For backwards compatibility
@@ -12,10 +11,7 @@ RREPLACES:${PN} = "libfslparser"
 RPROVIDES:${PN} = "libfslparser"
 RCONFLICTS:${PN} = "libfslparser"
 
-SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
-S = "${UNPACKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
-
-inherit fsl-eula-unpack autotools pkgconfig
+inherit pkgconfig meson
 
 # Choose between 32-bit and 64-bit binaries and between Soft Float-Point and Hard Float-Point
 EXTRA_OECONF = "${@bb.utils.contains('TUNE_FEATURES', 'aarch64', '--enable-armv8', \
@@ -29,7 +25,7 @@ python __set_insane_skip() {
     # the source we cannot fix it. Disable the insane check for now.
     # FIXME: gst-fsl-plugin looks for the .so files so we need to deploy those
     for p in d.getVar('PACKAGES').split():
-        d.setVar("INSANE_SKIP:%s" % p, "ldflags dev-so textrel")
+        d.setVar("INSANE_SKIP:%s" % p, "ldflags dev-so textrel buildpaths")
 }
 
 do_package_qa[prefuncs] += "__set_insane_skip"
