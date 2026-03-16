@@ -1,19 +1,5 @@
-# Copyright (C) 2012-2016 O.S. Systems Software LTDA.
-# Copyright (C) 2013-2016 Freescale Semiconductor
-# Copyright 2017-2025 NXP
-
-FILESEXTRAPATHS:prepend := "${THISDIR}/imx-test:"
-
-DEPENDS:append:mx943-nxp-bsp = " imx-lib"
-
-SRC_URI = "${IMXTEST_SRC};branch=${SRCBRANCH} \
-           file://memtool_profile"
-
-IMXTEST_SRC ?= "git://github.com/nxp-imx/imx-test.git;protocol=https"
+# Copyright 2017-2026 NXP
 SRCBRANCH = "master"
 SRCREV = "96adbc3e208f7989d201825bd9b6bc99a5bb54f0"
 
 inherit pkgconfig
-
-PLATFORM:mx91-nxp-bsp = "IMX8"
-PLATFORM:mx943-nxp-bsp = "IMX8ULP"
