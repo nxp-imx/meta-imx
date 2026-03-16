@@ -17,7 +17,4 @@ FILES:${PN}-dev += " \
     ${datadir}/cmake \
 "
 
-# Enable mali-imx ICD implementation
-RDEPENDS:${PN}:append:imxmali = " mali-imx-opencl-icd"
-
 RDEPENDS:${PN} += "opencl-headers"

@@ -9,8 +9,6 @@ inherit pkgconfig cmake
 DEPENDS += "opencl-headers"
 
 PROVIDES = "virtual/libopencl1"
-RPROVIDES:${PN} = "virtual-opencl-icd"
-
 
 SRCREV = "5907ac1114079de4383cecddf1c8640e3f52f92b"
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-ICD-Loader.git;branch=main;protocol=https"
@@ -51,3 +49,4 @@ FILES:libicdlog = "${libdir}/libIcdLog.so"
 FILES:libicdlog-dbg = "${libdir}/.debug/libIcdLog.so"
 
 RDEPENDS:${PN} = "libicdlog"
+RRECOMMENDS:${PN} = "virtual-opencl-icd"
