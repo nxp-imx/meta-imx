@@ -125,6 +125,10 @@ FILES:libvulkan-imx = "\
     ${libdir}/libvulkan_VSI${REALSOLIBS} \
     ${datadir}/vulkan"
 
+RPROVIDES:libopencl-imx               = "virtual-opencl-icd"
+RPROVIDES:libopencl-imx:mx7-nxp-bsp   = ""
+RPROVIDES:libopencl-imx:mx8mm-nxp-bsp = ""
+
 ### Section 2: Changes to be kept in meta-imx ###
 
 PACKAGECONFIG ?= "valgrind"

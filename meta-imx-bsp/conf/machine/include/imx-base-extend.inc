@@ -61,6 +61,11 @@ SECOEXT_FIRMWARE_NAME:mx95-generic-bsp   ?= "mx95a0runtime-ahab-container.img mx
 SECOEXT_FIRMWARE_NAME:mx952-generic-bsp  ?= "mx952${IMX_SOC_REV_LOWER}runtime-ahab-container.img"
 SECOEXT_FIRMWARE_NAME:mx943-generic-bsp  ?= "mx943a0runtime-ahab-container.img mx943a1runtime-ahab-container.img"
 
+# Set preferred OpenCL ICD runtime
+PREFERRED_RPROVIDER_virtual-opencl-icd         ?= "libopencl-mesa"
+PREFERRED_RPROVIDER_virtual-opencl-icd:imxviv  ?= "libopencl-imx"
+PREFERRED_RPROVIDER_virtual-opencl-icd:imxmali ?= "mali-imx-libopencl"
+
 # GStreamer forked recipes
 PREFERRED_VERSION_gstreamer1.0:imx-nxp-bsp              ??= "1.26.6.imx"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad:imx-nxp-bsp  ??= "1.26.6.imx"
