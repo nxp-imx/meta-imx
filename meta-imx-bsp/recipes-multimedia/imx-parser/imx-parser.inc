@@ -5,12 +5,6 @@
 LICENSE = "BSD-3-Clause"
 SECTION = "multimedia"
 
-# For backwards compatibility
-PROVIDES += "libfslparser"
-RREPLACES:${PN} = "libfslparser"
-RPROVIDES:${PN} = "libfslparser"
-RCONFLICTS:${PN} = "libfslparser"
-
 inherit pkgconfig meson
 
 # Choose between 32-bit and 64-bit binaries and between Soft Float-Point and Hard Float-Point
