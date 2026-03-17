@@ -1,4 +1,10 @@
-# Yocto Project BSP for NXP i.MX Linux
+# Yocto Project BSP for NXP i.MX Linux Release LF6.18.2_1.0.0
+
+This file provides a brief overview and Quick Start Guide for the Yocto Project
+BSP for NXP i.MX Linux. For more detailed information, please check the User Guide
+for the release: https://www.nxp.com/docs/en/user-guide/UG10164.pdf.
+
+## Layers
 
 The repository https://github.com/nxp-imx/meta-imx contains multiple Yocto Project layers supporting
 Linux development for the NXP i.MX Series 6 through 9.
@@ -10,6 +16,8 @@ Linux development for the NXP i.MX Series 6 through 9.
 | meta-imx-ml      | Machine Learning      |
 | meta-imx-sdk     | Distro                |
 | meta-imx-v2x     | Vehicle-to-Everything |
+
+## Supported Boards
 
 The following development boards were tested in this release.
 
