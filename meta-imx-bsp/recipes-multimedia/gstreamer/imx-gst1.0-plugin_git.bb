@@ -89,6 +89,6 @@ FILES:${PN}-dev += "${libdir}/gstreamer-1.0/*.la ${libdir}/pkgconfig/*.pc"
 FILES:${PN}-tools += "${bindir}/* ${libdir}/librecorder_engine-1.0${SOLIBS}"
 FILES:${PN}-libgstfsl = "${libdir}/libgstfsl-1.0${SOLIBS}"
 
-INSANE_SKIP:${PN} = "build-deps"
+INSANE_SKIP:${PN} = "build-deps buildpaths"
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
