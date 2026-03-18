@@ -3,9 +3,9 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 DEPENDS = "mali-imx"
 
-IMX_SRCREV_ABBREV = "ede1e10"
+IMX_SRCREV_ABBREV = "f65a566"
 
-SRC_URI[aarch64-wayland-mali.sha256sum] = "e588dad9f7cd121981e3366a0a1904a368fec0c5c4a0b52acd456d5f6aaafb37"
+SRC_URI[aarch64-wayland-mali.sha256sum] = "1b28bae1c50c34201c42df88e7aa383f745a2c81738d422510b5de3e091e7e39"
 
 inherit fsl-eula-unpack2 fsl-eula-graphics fsl-eula-recent
 
