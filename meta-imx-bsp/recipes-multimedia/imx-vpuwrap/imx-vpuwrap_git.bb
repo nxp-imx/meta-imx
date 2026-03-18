@@ -3,9 +3,9 @@
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Freescale Multimedia VPU wrapper"
-LICENSE = "Proprietary"
+LICENSE = "BSD-3"
 SECTION = "multimedia"
-LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6f862c6751ebcaa393467694c7b0c69a"
 
 DEPENDS = "virtual/imxvpu"
 DEPENDS:append:mx8mp-nxp-bsp = " imx-vpu-hantro-vc"
