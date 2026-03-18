@@ -29,8 +29,7 @@ EMPTY_MAIN_PACKAGE_RECIPES = " \
 EMPTY_MAIN_PACKAGES = \
     "${@d.getVar('EMPTY_MAIN_PACKAGE_RECIPES').replace("gtest", "googletest")}"
 
-SRC_URI = "${GPU_SDK_SRC};branch=${SRCBRANCH} \
-           file://0001-YOCIMX-9796-imx-gpu-sdk-build-break-on-wrynose.patch"
+SRC_URI = "${GPU_SDK_SRC};branch=${SRCBRANCH}"
 GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
 SRCBRANCH = "release/6.5.2"
 SRCREV = "a1a7374c6c5fded6987fa8de3f7a0b38e2f4aecf"
