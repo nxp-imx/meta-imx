@@ -3,7 +3,7 @@
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Freescale Multimedia VPU wrapper"
-LICENSE = "BSD-3"
+LICENSE = "BSD-3-Clause"
 SECTION = "multimedia"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6f862c6751ebcaa393467694c7b0c69a"
 
