@@ -1,0 +1,28 @@
+Upstream-Status: Pending
+
+diff --git a/src/libnnstreamer-edge/nnstreamer-edge-internal.c b/src/libnnstreamer-edge/nnstreamer-edge-internal.c
+index 862905b..c186615 100644
+--- a/src/libnnstreamer-edge/nnstreamer-edge-internal.c
++++ b/src/libnnstreamer-edge/nnstreamer-edge-internal.c
+@@ -2009,7 +2009,7 @@ nns_edge_set_info (nns_edge_h edge_h, const char *key, const char *value)
+     nns_edge_loge ("Cannot update %s.", key);
+     ret = NNS_EDGE_ERROR_INVALID_PARAMETER;
+   } else if (0 == strcasecmp (key, "QUEUE_SIZE")) {
+-    char *s;
++    const char *s;
+     unsigned int limit;
+     nns_edge_queue_leak_e leaky = NNS_EDGE_QUEUE_LEAK_NEW;
+ 
+diff --git a/src/libnnstreamer-edge/nnstreamer-edge-util.c b/src/libnnstreamer-edge/nnstreamer-edge-util.c
+index 206619b..78e7c64 100644
+--- a/src/libnnstreamer-edge/nnstreamer-edge-util.c
++++ b/src/libnnstreamer-edge/nnstreamer-edge-util.c
+@@ -128,7 +128,7 @@ nns_edge_get_host_string (const char *host, const int port)
+ void
+ nns_edge_parse_host_string (const char *host_str, char **host, int *port)
+ {
+-  char *p = strchr (host_str, ':');
++  const char *p = strchr (host_str, ':');
+ 
+   if (p) {
+     *host = nns_edge_strndup (host_str, (p - host_str));
