@@ -67,18 +67,17 @@ PREFERRED_RPROVIDER_virtual-opencl-icd:imxviv  ?= "libopencl-imx"
 PREFERRED_RPROVIDER_virtual-opencl-icd:imxmali ?= "mali-imx-opencl-icd"
 
 # GStreamer forked recipes
-PREFERRED_VERSION_gstreamer1.0:imx-nxp-bsp              ??= "1.26.6.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-bad:imx-nxp-bsp  ??= "1.26.6.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-base:imx-nxp-bsp ??= "1.26.6.imx"
-PREFERRED_VERSION_gstreamer1.0-plugins-good:imx-nxp-bsp ??= "1.26.6.imx"
+PREFERRED_VERSION_gstreamer1.0:imx-nxp-bsp              ??= "1.28.1.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-bad:imx-nxp-bsp  ??= "1.28.1.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-base:imx-nxp-bsp ??= "1.28.1.imx"
+PREFERRED_VERSION_gstreamer1.0-plugins-good:imx-nxp-bsp ??= "1.28.1.imx"
 
 # GStreamer backport recipes
-PREFERRED_VERSION_gstreamer1.0-libav:imx-nxp-bsp        ??= "1.26.6"
-PREFERRED_VERSION_gst-devtools:imx-nxp-bsp              ??= "1.26.6"
-PREFERRED_VERSION_gstreamer1.0-plugins-ugly:imx-nxp-bsp ??= "1.26.6"
-PREFERRED_VERSION_gstreamer1.0-python:imx-nxp-bsp       ??= "1.26.6"
-PREFERRED_VERSION_gstreamer1.0-rtsp-server:imx-nxp-bsp  ??= "1.26.6"
-PREFERRED_VERSION_gstreamer1.0-vaapi:imx-nxp-bsp        ??= "1.26.6"
+PREFERRED_VERSION_gstreamer1.0-libav:imx-nxp-bsp        ??= "1.28.1"
+PREFERRED_VERSION_gst-devtools:imx-nxp-bsp              ??= "1.28.1"
+PREFERRED_VERSION_gstreamer1.0-plugins-ugly:imx-nxp-bsp ??= "1.28.1"
+PREFERRED_VERSION_gstreamer1.0-python:imx-nxp-bsp       ??= "1.28.1"
+PREFERRED_VERSION_gstreamer1.0-rtsp-server:imx-nxp-bsp  ??= "1.28.1"
 
 # libcamera fork for certain SOCs
 PREFERRED_VERSION_libcamera ??= "${PREFERRED_VERSION_LIBCAMERA_IMX}"
