@@ -176,7 +176,7 @@ FILES:${PN}-voamrwbenc += "${datadir}/gstreamer-1.0/presets/GstVoAmrwbEnc.prs"
 
 DEFAULT_PREFERENCE = "-1"
 
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=69333daa044cb77e486cc36129f7a770"
+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-${PV}.tar.xz \
            file://0001-fix-maybe-uninitialized-warnings-when-compiling-with.patch \
@@ -185,8 +185,8 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plug
            "
 SRC_URI:prepend = "${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} "
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-bad.git;protocol=https"
-SRCBRANCH = "imx-1.26.x"
-SRCREV = "469542bf7763d48903f7e8823edc638551ccf505"
+SRCBRANCH = "imx-1.28.x"
+SRCREV = "3c268cb1eb06fe408d148dfc19b42388a7d69322"
 
 inherit use-imx-headers
 
@@ -200,14 +200,13 @@ PACKAGECONFIG_REMOVE ?= " \
 PACKAGECONFIG:remove = "${PACKAGECONFIG_REMOVE}"
 PACKAGECONFIG:remove:mx93-nxp-bsp = "gl"
 PACKAGECONFIG:remove:mx943-nxp-bsp = "gl"
-PACKAGECONFIG:append:mx8-nxp-bsp = " kms tinycompress"
+PACKAGECONFIG:append:mx8-nxp-bsp = " kms"
 
 PACKAGECONFIG:append = " ${PACKAGECONFIG_G2D}"
 PACKAGECONFIG_G2D          ??= ""
 PACKAGECONFIG_G2D:imxgpu2d ??= "g2d"
 
 PACKAGECONFIG[g2d] = ",,virtual/libg2d"
-PACKAGECONFIG[tinycompress]    = "-Dtinycompress=enabled,-Dtinycompress=disabled,tinycompress"
 
 EXTRA_OEMESON += " \
     -Dc_args="${CFLAGS} -I${STAGING_INCDIR_IMX}" \

@@ -94,7 +94,7 @@ FILES:${PN}-equalizer += "${datadir}/gstreamer-1.0/presets/*.prs"
 DEFAULT_PREFERENCE = "-1"
 
 LIC_FILES_CHKSUM = " \
-    file://LICENSE.txt;md5=69333daa044cb77e486cc36129f7a770 \
+    file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
     file://gst/replaygain/rganalysis.c;beginline=1;endline=23;md5=b60ebefd5b2f5a8e0cab6bfee391a5fe \
 "
 # Enable pulsesink in gstreamer
@@ -115,8 +115,8 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plu
 
 SRC_URI:prepend = "${GST1.0-PLUGINS-GOOD_SRC};branch=${SRCBRANCH} "
 GST1.0-PLUGINS-GOOD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-good.git;protocol=https"
-SRCBRANCH = "imx-1.26.x"
-SRCREV = "29d111043f22f0591609d69d7976119527ed1bbc"
+SRCBRANCH = "imx-1.28.x"
+SRCREV = "acbcf1f4f552b0d391803aa95088bfc15d4044b4"
 
 S = "${UNPACKDIR}/${BP}"
 

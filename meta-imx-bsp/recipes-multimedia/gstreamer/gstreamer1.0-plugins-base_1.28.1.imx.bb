@@ -106,7 +106,7 @@ CVE_PRODUCT += "gst-plugins-base"
 
 DEFAULT_PREFERENCE = "-1"
 
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=69333daa044cb77e486cc36129f7a770"
+LIC_FILES_CHKSUM = "file://COPYING;md5=69333daa044cb77e486cc36129f7a770"
 
 SRC_URI:remove = " \
     https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-${PV}.tar.xz \
@@ -116,8 +116,8 @@ SRC_URI:remove = " \
 SRC_URI:prepend = "${GST1.0-PLUGINS-BASE_SRC};branch=${SRCBRANCH} "
 
 GST1.0-PLUGINS-BASE_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-base.git;protocol=https"
-SRCBRANCH = "imx-1.26.x"
-SRCREV = "7fc23d39dd9f75cb24acf8238091a0240d908d22"
+SRCBRANCH = "imx-1.28.x"
+SRCREV = "4d6a73e0fac548dc154dbf41562c9b50287d0e2b"
 
 inherit use-imx-headers
 
