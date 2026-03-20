@@ -1,19 +1,19 @@
-From 14f2f95e1cfac1b51f2419a98d225f20e12805bb Mon Sep 17 00:00:00 2001
+From 68c5578049baeee451415da13d1957a06d3b20fc Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Mon, 22 Sep 2025 15:42:28 +0900
-Subject: [PATCH 02/22] V4L2VideoDecoder: Create single/multi plane queues
+Date: Fri, 17 Oct 2025 11:45:32 +0900
+Subject: [PATCH 02/21] V4L2VideoDecoder: Create single/multi plane queues
 
 Decide to create single-plane queue or multi-plane queue according to
 the capabilities returned by VIDIOC_QUERYCAP.
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- media/gpu/v4l2/v4l2_device.cc        | 29 ++++++++++++++++++++--------
- media/gpu/v4l2/v4l2_video_decoder.cc | 27 ++++++++++++++++++--------
- 2 files changed, 40 insertions(+), 16 deletions(-)
+ media/gpu/v4l2/v4l2_device.cc        | 44 +++++++++++++++++++---------
+ media/gpu/v4l2/v4l2_video_decoder.cc | 27 ++++++++++++-----
+ 2 files changed, 49 insertions(+), 22 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_device.cc b/media/gpu/v4l2/v4l2_device.cc
-index 1a977248c511e..33d18d49c8282 100644
+index ea35d10be82a3..c28d9c321ee81 100644
 --- a/media/gpu/v4l2/v4l2_device.cc
 +++ b/media/gpu/v4l2/v4l2_device.cc
 @@ -98,6 +98,8 @@ scoped_refptr<V4L2Queue> V4L2Device::GetQueue(enum v4l2_buf_type type) {
@@ -25,7 +25,7 @@ index 1a977248c511e..33d18d49c8282 100644
        break;
      default:
        VLOGF(1) << "Unsupported V4L2 queue type: " << type;
-@@ -544,9 +546,17 @@ V4L2Device::EnumerateSupportedDecodeProfiles(
+@@ -565,9 +567,17 @@ V4L2Device::EnumerateSupportedDecodeProfiles(
      const std::vector<uint32_t>& pixelformats) {
    VideoDecodeAccelerator::SupportedProfiles profiles;
  
@@ -45,62 +45,77 @@ index 1a977248c511e..33d18d49c8282 100644
  
    for (uint32_t pixelformat : v4l2_codecs_as_pix_fmts) {
      if (!base::Contains(pixelformats, pixelformat)) {
-@@ -870,27 +880,28 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -889,33 +899,35 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
  #endif
  
    std::string device_pattern;
--  v4l2_buf_type buf_type;
-+  std::vector<v4l2_buf_type> candidate_buf_types;
+-  v4l2_buf_type input_buf_type;
+-  v4l2_buf_type output_buf_type;
++  std::vector<v4l2_buf_type> candidate_input_buf_types;
++  std::vector<v4l2_buf_type> candidate_output_buf_types;
    switch (type) {
      case Type::kDecoder:
        device_pattern = kDecoderDevicePattern;
--      buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
-+      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT);
-+      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
+-      input_buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
+-      output_buf_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
++      candidate_input_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT);
++      candidate_input_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
++      candidate_output_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_CAPTURE);
++      candidate_output_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
        break;
      case Type::kEncoder:
        device_pattern = kEncoderDevicePattern;
--      buf_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
-+      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
+-      input_buf_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
+-      output_buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
++      candidate_input_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
++      candidate_output_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
        break;
      case Type::kImageProcessor:
        device_pattern = kImageProcessorDevicePattern;
--      buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
-+      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
+-      input_buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
+-      output_buf_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
++      candidate_input_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
++      candidate_output_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
        break;
      case Type::kJpegDecoder:
        device_pattern = kJpegDecoderDevicePattern;
--      buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
-+      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
+-      input_buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
+-      output_buf_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
++      candidate_input_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
++      candidate_output_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
        break;
      case Type::kJpegEncoder:
        device_pattern = kJpegEncoderDevicePattern;
--      buf_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
-+      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
+-      input_buf_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
+-      output_buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
++      candidate_input_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
++      candidate_output_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
        break;
    }
  
-@@ -919,6 +930,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -944,6 +956,8 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
  
    Devices devices;
    for (const auto& path : candidate_paths) {
-+  for (const auto& buf_type : candidate_buf_types){
++    for (const auto& input_buf_type : candidate_input_buf_types){
++    for (const auto& output_buf_type : candidate_output_buf_types){
      if (!OpenDevicePath(path)) {
        continue;
      }
-@@ -932,6 +944,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -1021,6 +1035,8 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
  
      CloseDevice();
    }
++  }
 +  }
  
    DCHECK_EQ(devices_by_type_.count(type), 0u);
    devices_by_type_[type] = devices;
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index 72a3fa1f7f180..7d16dfa2af818 100644
+index aa5aad085f91e..57cc311d815a7 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
-@@ -450,17 +450,28 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
+@@ -452,17 +452,28 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
  #endif  // BUILDFLAG(USE_CHROMEOS_PROTECTED_MEDIA)
  
    struct v4l2_capability caps;

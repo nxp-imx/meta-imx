@@ -1,7 +1,7 @@
-From a6cd72197f5be556d27484b4dce9d8bb029c4180 Mon Sep 17 00:00:00 2001
+From eec7b753c62f1e5a9c382c2edf911391fab5bf94 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Wed, 23 Oct 2024 19:08:46 +0900
-Subject: [PATCH 19/22] V4L2VideoDecoder: Fix amphion cannot streamoff after
+Subject: [PATCH 17/21] V4L2VideoDecoder: Fix amphion cannot streamoff after
  eos
 
 Amphion vpu driver directly return EPIPE without dequeuing extra
@@ -45,10 +45,10 @@ index 4141a66f575c9..5e6275b4eff22 100644
      // then this LAST buffer was related to it.
      ProcessEventQueue();
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index e6c6c1e57eee7..a97faf20f0c99 100644
+index 8c8c3b0205937..67ce3f4be94d9 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
-@@ -1278,7 +1278,7 @@ void V4L2VideoDecoder::ServiceDeviceTask(bool event) {
+@@ -1279,7 +1279,7 @@ void V4L2VideoDecoder::ServiceDeviceTask(bool event) {
        SetState(State::kError);
        return;
      }

@@ -1,7 +1,7 @@
-From 0fa707e1c15b9ebb27dc0b19a39f2e883fa0e2f5 Mon Sep 17 00:00:00 2001
+From 2deaa0e1185a3aca7220c8d970f99e3bd93258d8 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:39:10 +0900
-Subject: [PATCH 03/22] V4L2Buffer: Allocate correct v4l2 buffers for queues
+Subject: [PATCH 03/21] V4L2Buffer: Allocate correct v4l2 buffers for queues
 
 For single plane queue, need to fill v4l2_planes_[0] with
 correct size quried from v4l2 driver.
@@ -12,10 +12,10 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 27 insertions(+), 12 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index 19454e9a88048..f149dbb570de1 100644
+index 8d7d3c18e69a1..ac7972480ad26 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
-@@ -245,24 +245,28 @@ V4L2Buffer::V4L2Buffer(const IoctlAsCallback& ioctl_cb,
+@@ -243,24 +243,28 @@ V4L2Buffer::V4L2Buffer(const IoctlAsCallback& ioctl_cb,
    DCHECK(V4L2_TYPE_IS_MULTIPLANAR(type));
    DCHECK_LE(format.fmt.pix_mp.num_planes, std::size(v4l2_planes_));
  
@@ -53,7 +53,7 @@ index 19454e9a88048..f149dbb570de1 100644
        }
      }
    }
-@@ -276,6 +280,13 @@ bool V4L2Buffer::Query() {
+@@ -273,6 +277,13 @@ bool V4L2Buffer::Query() {
      return false;
    }
  
@@ -67,7 +67,7 @@ index 19454e9a88048..f149dbb570de1 100644
    DCHECK(plane_mappings_.size() == v4l2_buffer_.length);
  
    return true;
-@@ -299,9 +310,13 @@ void* V4L2Buffer::GetPlaneMapping(const size_t plane) {
+@@ -296,9 +307,13 @@ void* V4L2Buffer::GetPlaneMapping(const size_t plane) {
      return nullptr;
    }
  
@@ -83,7 +83,7 @@ index 19454e9a88048..f149dbb570de1 100644
    if (p == MAP_FAILED) {
      VPLOGF(1) << "mmap() failed: ";
      return nullptr;
-@@ -1189,7 +1204,7 @@ size_t V4L2Queue::AllocateBuffers(size_t count,
+@@ -1183,7 +1198,7 @@ size_t V4L2Queue::AllocateBuffers(size_t count,
      VQLOGF(1) << "Cannot get format.";
      return 0;
    }

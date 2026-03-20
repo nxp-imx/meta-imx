@@ -1,7 +1,7 @@
-From b54bbb6c43b973a2c4d7d4559888e0e79846a709 Mon Sep 17 00:00:00 2001
+From 3c9f9696c39467f38c72d0f109aa929ca11e3b97 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:46:22 +0900
-Subject: [PATCH 05/22] V4L2VideoDecoder: Add function IsMultiQueue for S_FMT
+Subject: [PATCH 05/21] V4L2VideoDecoder: Add function IsMultiQueue for S_FMT
  and G_FMT
 
 Function IsMultiQueue() is used to set correct fotmat type for
@@ -15,10 +15,10 @@ Upstream-Status: Inappropriate [NXP specific]
  3 files changed, 31 insertions(+), 10 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index 1b0f9fb134b41..0398dd2be24a8 100644
+index 5332796286ccd..9168606742d7f 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
-@@ -49,11 +49,18 @@ struct v4l2_format BuildV4L2Format(const enum v4l2_buf_type type,
+@@ -50,11 +50,18 @@ struct v4l2_format BuildV4L2Format(const enum v4l2_buf_type type,
    struct v4l2_format format;
    memset(&format, 0, sizeof(format));
    format.type = type;
@@ -42,7 +42,7 @@ index 1b0f9fb134b41..0398dd2be24a8 100644
  
    return format;
  }
-@@ -516,9 +523,13 @@ V4L2BufferRefBase::V4L2BufferRefBase(const struct v4l2_buffer& v4l2_buffer,
+@@ -513,9 +520,13 @@ V4L2BufferRefBase::V4L2BufferRefBase(const struct v4l2_buffer& v4l2_buffer,
    DCHECK(return_to_);
  
    memcpy(&v4l2_buffer_, &v4l2_buffer, sizeof(v4l2_buffer_));
@@ -59,7 +59,7 @@ index 1b0f9fb134b41..0398dd2be24a8 100644
  }
  
  V4L2BufferRefBase::~V4L2BufferRefBase() {
-@@ -1579,6 +1590,15 @@ bool V4L2Queue::Streamoff() {
+@@ -1567,6 +1578,15 @@ bool V4L2Queue::Streamoff() {
    return true;
  }
  
@@ -88,10 +88,10 @@ index 08ab8af212315..2a18544afd4b3 100644
    [[nodiscard]] size_t AllocatedBuffersCount() const;
    // Returns the number of currently free buffers on this queue.
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index 7d16dfa2af818..975ba8f5f4b06 100644
+index 57cc311d815a7..3bfbbc8595495 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
-@@ -604,7 +604,7 @@ bool V4L2VideoDecoder::SetupInputFormat() {
+@@ -605,7 +605,7 @@ bool V4L2VideoDecoder::SetupInputFormat() {
    // Check if the format is supported.
    const auto v4l2_codecs_as_pix_fmts = EnumerateSupportedPixFmts(
        base::BindRepeating(&V4L2Device::Ioctl, device_),
@@ -100,7 +100,7 @@ index 7d16dfa2af818..975ba8f5f4b06 100644
    if (!base::Contains(v4l2_codecs_as_pix_fmts, input_format_fourcc_)) {
      DVLOGF(1) << FourccToString(input_format_fourcc_)
                << " not recognised, skipping...";
-@@ -673,7 +673,7 @@ CroStatus V4L2VideoDecoder::SetupOutputFormat(const gfx::Size& size,
+@@ -674,7 +674,7 @@ CroStatus V4L2VideoDecoder::SetupOutputFormat(const gfx::Size& size,
  
    const auto v4l2_pix_fmts = EnumerateSupportedPixFmts(
        base::BindRepeating(&V4L2Device::Ioctl, device_),

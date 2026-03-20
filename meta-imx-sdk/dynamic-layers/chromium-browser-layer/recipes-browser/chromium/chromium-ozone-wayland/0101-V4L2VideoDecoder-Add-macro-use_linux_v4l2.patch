@@ -1,7 +1,7 @@
-From 03eecc3c676424f5858e6794b6a7c5d931f769e3 Mon Sep 17 00:00:00 2001
+From c5b95798fff1aa018f95edd78456c50a80214bdf Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Fri, 24 Oct 2025 14:26:31 +0900
-Subject: [PATCH 01/22] V4L2VideoDecoder: Add macro use_linux_v4l2
+Date: Fri, 17 Oct 2025 11:06:19 +0900
+Subject: [PATCH 01/21] V4L2VideoDecoder: Add macro use_linux_v4l2
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -28,19 +28,19 @@ index a3a6ae60a2cfc..9b6bfbc7f7992 100644
  #endif
  
 diff --git a/media/gpu/BUILD.gn b/media/gpu/BUILD.gn
-index a244407c530b6..10c2124df463d 100644
+index ad278413f679d..49c50e0a2e917 100644
 --- a/media/gpu/BUILD.gn
 +++ b/media/gpu/BUILD.gn
-@@ -21,6 +21,7 @@ buildflag_header("buildflags") {
-     "USE_VAAPI_IMAGE_CODECS=$use_vaapi_image_codecs",
+@@ -23,6 +23,7 @@ buildflag_header("buildflags") {
      "USE_V4L2_CODEC=$use_v4l2_codec",
      "USE_LIBV4L2=$use_v4lplugin",
-+    "USE_LINUX_V4L2=$use_linux_v4l2_only",
      "USE_LINUX_VIDEO_ACCELERATION=$use_linux_video_acceleration",
++    "USE_LINUX_V4L2=$use_linux_v4l2_only",
    ]
  }
+ 
 diff --git a/media/gpu/args.gni b/media/gpu/args.gni
-index 7a64c3474b33b..dd4837a806727 100644
+index 22ecee80b5cc2..e7d4f8261d650 100644
 --- a/media/gpu/args.gni
 +++ b/media/gpu/args.gni
 @@ -12,6 +12,10 @@ declare_args() {
@@ -55,7 +55,7 @@ index 7a64c3474b33b..dd4837a806727 100644
    # is typically the case on x86-based ChromeOS devices.
    # VA-API should also be compiled by default on x11/wayland linux devices
 diff --git a/media/gpu/v4l2/BUILD.gn b/media/gpu/v4l2/BUILD.gn
-index f5dcc83ac4e03..a0736276471d9 100644
+index 8246d40c13e2c..e4e7935629b69 100644
 --- a/media/gpu/v4l2/BUILD.gn
 +++ b/media/gpu/v4l2/BUILD.gn
 @@ -19,9 +19,6 @@ source_set("v4l2") {
@@ -93,13 +93,13 @@ index f5dcc83ac4e03..a0736276471d9 100644
    ]
 +  }
  
-   if (enable_hevc_parser_and_hw_decoder) {
-     sources += [
+   # enable_av1_v4l2_decoder
+   if (use_av1_hw_decoder) {
 diff --git a/media/gpu/v4l2/v4l2_utils.cc b/media/gpu/v4l2/v4l2_utils.cc
-index 4ae99deb0fade..cb00d852e91fc 100644
+index d4cac5573c89f..f2fe11ef4927f 100644
 --- a/media/gpu/v4l2/v4l2_utils.cc
 +++ b/media/gpu/v4l2/v4l2_utils.cc
-@@ -329,14 +329,22 @@ using v4l2_enum_type = decltype(V4L2_PIX_FMT_H264);
+@@ -333,14 +333,22 @@ using v4l2_enum_type = decltype(V4L2_PIX_FMT_H264);
  static const std::map<v4l2_enum_type, v4l2_enum_type>
      kV4L2CodecPixFmtToProfileCID = {
          {V4L2_PIX_FMT_H264, V4L2_CID_MPEG_VIDEO_H264_PROFILE},
@@ -119,10 +119,10 @@ index 4ae99deb0fade..cb00d852e91fc 100644
 +#if !BUILDFLAG(USE_LINUX_V4L2)
          {V4L2_PIX_FMT_VP9_FRAME, V4L2_CID_MPEG_VIDEO_VP9_PROFILE},
 +#endif
- #if BUILDFLAG(IS_CHROMEOS)
+ #if BUILDFLAG(USE_AV1_HW_DECODER)
          {V4L2_PIX_FMT_AV1, V4L2_CID_MPEG_VIDEO_AV1_PROFILE},
          {V4L2_PIX_FMT_AV1_FRAME, V4L2_CID_MPEG_VIDEO_AV1_PROFILE},
-@@ -548,7 +556,27 @@ uint32_t VideoCodecProfileToV4L2PixFmt(VideoCodecProfile profile,
+@@ -553,7 +561,27 @@ uint32_t VideoCodecProfileToV4L2PixFmt(VideoCodecProfile profile,
        << "Unsupported profile: " << GetProfileName(profile);
  
    const auto& v4l2_pix_fmt = kVideoCodecProfileToV4L2CodecPixFmt.at(profile);
@@ -152,10 +152,10 @@ index 4ae99deb0fade..cb00d852e91fc 100644
  
  base::TimeDelta TimeValToTimeDelta(const struct timeval& timeval) {
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index f88b2917954d9..72a3fa1f7f180 100644
+index b9a580f03f00f..aa5aad085f91e 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
-@@ -38,7 +38,9 @@
+@@ -40,7 +40,9 @@
  #include "media/gpu/v4l2/legacy/v4l2_video_decoder_backend_stateful.h"
  #include "media/gpu/v4l2/v4l2_status.h"
  #include "media/gpu/v4l2/v4l2_utils.h"
@@ -165,7 +165,7 @@ index f88b2917954d9..72a3fa1f7f180 100644
  #include "mojo/public/cpp/bindings/callback_helpers.h"
  
  #if BUILDFLAG(IS_CHROMEOS)
-@@ -74,6 +76,7 @@ constexpr size_t kInputBufferMaxSizeFor4k = 2 * kInputBufferMaxSizeFor1080p;
+@@ -76,6 +78,7 @@ constexpr size_t kInputBufferMaxSizeFor4k = 2 * kInputBufferMaxSizeFor1080p;
  // Input format V4L2 fourccs this class supports.
  const std::vector<uint32_t> kSupportedInputFourccs = {
      // V4L2 stateless formats
@@ -173,7 +173,7 @@ index f88b2917954d9..72a3fa1f7f180 100644
      V4L2_PIX_FMT_H264_SLICE,
  #if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
      V4L2_PIX_FMT_HEVC_SLICE,
-@@ -81,6 +84,7 @@ const std::vector<uint32_t> kSupportedInputFourccs = {
+@@ -83,6 +86,7 @@ const std::vector<uint32_t> kSupportedInputFourccs = {
      V4L2_PIX_FMT_VP8_FRAME,
      V4L2_PIX_FMT_VP9_FRAME,
      V4L2_PIX_FMT_AV1_FRAME,
@@ -181,7 +181,7 @@ index f88b2917954d9..72a3fa1f7f180 100644
      // V4L2 stateful formats
      V4L2_PIX_FMT_H264,
  #if BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
-@@ -88,7 +92,9 @@ const std::vector<uint32_t> kSupportedInputFourccs = {
+@@ -90,7 +94,9 @@ const std::vector<uint32_t> kSupportedInputFourccs = {
  #endif  // BUILDFLAG(ENABLE_HEVC_PARSER_AND_HW_DECODER)
      V4L2_PIX_FMT_VP8,
      V4L2_PIX_FMT_VP9,
@@ -191,7 +191,7 @@ index f88b2917954d9..72a3fa1f7f180 100644
  };
  
  // These values are logged to UMA. Entries should not be renumbered and numeric
-@@ -467,6 +473,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
+@@ -469,6 +475,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
               << " and fourcc: " << FourccToString(input_format_fourcc_);
      backend_ = std::make_unique<V4L2StatefulVideoDecoderBackend>(
          this, device_, profile_, color_space_, decoder_task_runner_);
@@ -199,7 +199,7 @@ index f88b2917954d9..72a3fa1f7f180 100644
    } else {
      DCHECK_EQ(preferred_api_and_format.first, kStateless);
      VLOGF(1) << "Using a stateless API for profile: "
-@@ -475,6 +482,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
+@@ -477,6 +484,7 @@ V4L2Status V4L2VideoDecoder::InitializeBackend() {
      backend_ = std::make_unique<V4L2StatelessVideoDecoderBackend>(
          this, device_, profile_, color_space_, decoder_task_runner_,
          cdm_context_ref_ ? cdm_context_ref_->GetCdmContext() : nullptr);

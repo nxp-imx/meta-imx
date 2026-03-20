@@ -1,7 +1,7 @@
-From 2f284f6819dbd7c37d90ebb2e4076f55745be8b7 Mon Sep 17 00:00:00 2001
+From 7b165523ec6e28b993729a4334f9b0f977185c9f Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Wed, 18 Oct 2023 15:56:59 +0800
-Subject: [PATCH 3/7] Fix chromium build failure
+Subject: [PATCH 03/13] Fix chromium build failure
 
 | aarch64-poky-linux-ld.lld: error: undefined symbol:
 gl::NativeViewGLSurfaceEGL::NativeViewGLSurfaceEGL(gl::GLDisplayEGL*,
@@ -22,10 +22,10 @@ Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
  1 file changed, 9 insertions(+)
 
 diff --git a/ui/gl/BUILD.gn b/ui/gl/BUILD.gn
-index 89d11ec9754bb..af207a4dbaea3 100644
+index 795c5b51db2ec..3728a6d5d56a1 100644
 --- a/ui/gl/BUILD.gn
 +++ b/ui/gl/BUILD.gn
-@@ -196,6 +196,15 @@ component("gl") {
+@@ -213,6 +213,15 @@ component("gl") {
          data_deps += [ "//third_party/vulkan-loader/src:libvulkan" ]
        }
      }
@@ -42,5 +42,5 @@ index 89d11ec9754bb..af207a4dbaea3 100644
  
    if (ozone_platform_x11) {
 -- 
-2.34.1
+2.43.0
 

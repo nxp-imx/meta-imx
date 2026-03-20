@@ -1,7 +1,7 @@
-From 9763f56bb12ec0ae9445bb64f0f91ec40c6d5ee4 Mon Sep 17 00:00:00 2001
+From a6b45ba9e59bd188004855cdf6c8b9a02a0c3618 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:48:10 +0900
-Subject: [PATCH 06/22] V4L2VideoDecoder: Use correct plane size and bytesused
+Subject: [PATCH 06/21] V4L2VideoDecoder: Use correct plane size and bytesused
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -9,10 +9,10 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 16 insertions(+), 4 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index 0398dd2be24a8..e0e4175ff40be 100644
+index 9168606742d7f..400f5f12b8676 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
-@@ -861,7 +861,10 @@ size_t V4L2WritableBufferRef::GetPlaneSize(const size_t plane) const {
+@@ -858,7 +858,10 @@ size_t V4L2WritableBufferRef::GetPlaneSize(const size_t plane) const {
      return 0;
    }
  
@@ -24,7 +24,7 @@ index 0398dd2be24a8..e0e4175ff40be 100644
  }
  
  void V4L2WritableBufferRef::SetPlaneSize(const size_t plane,
-@@ -921,7 +924,10 @@ void V4L2WritableBufferRef::SetPlaneBytesUsed(const size_t plane,
+@@ -918,7 +921,10 @@ void V4L2WritableBufferRef::SetPlaneBytesUsed(const size_t plane,
      return;
    }
  
@@ -36,7 +36,7 @@ index 0398dd2be24a8..e0e4175ff40be 100644
  }
  
  size_t V4L2WritableBufferRef::GetPlaneBytesUsed(const size_t plane) const {
-@@ -933,7 +939,10 @@ size_t V4L2WritableBufferRef::GetPlaneBytesUsed(const size_t plane) const {
+@@ -930,7 +936,10 @@ size_t V4L2WritableBufferRef::GetPlaneBytesUsed(const size_t plane) const {
      return 0;
    }
  
@@ -48,7 +48,7 @@ index 0398dd2be24a8..e0e4175ff40be 100644
  }
  
  void V4L2WritableBufferRef::SetPlaneDataOffset(const size_t plane,
-@@ -1040,7 +1049,10 @@ size_t V4L2ReadableBuffer::GetPlaneBytesUsed(const size_t plane) const {
+@@ -1037,7 +1046,10 @@ size_t V4L2ReadableBuffer::GetPlaneBytesUsed(const size_t plane) const {
      return 0;
    }
  

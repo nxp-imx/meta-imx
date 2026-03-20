@@ -1,7 +1,7 @@
-From 0c821f86b8851e96eb5c5ccf59328b5b313a47f6 Mon Sep 17 00:00:00 2001
+From 7af6ac2e4022c6160c78cd774aed4159febbe042 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Mon, 22 Sep 2025 15:48:36 +0900
-Subject: [PATCH 07/22] V4L2VideoDecoder: Add hevc format support
+Subject: [PATCH 07/21] V4L2VideoDecoder: Add hevc format support
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -11,10 +11,10 @@ Upstream-Status: Inappropriate [NXP specific]
  3 files changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/media/base/supported_types.cc b/media/base/supported_types.cc
-index 2ce29798709ef..c1a6d7120c4d4 100644
+index 24d1355fac575..12e83948b4095 100644
 --- a/media/base/supported_types.cc
 +++ b/media/base/supported_types.cc
-@@ -464,7 +464,7 @@ bool IsDefaultDecoderSupportedVideoType(const VideoType& type) {
+@@ -457,7 +457,7 @@ bool IsDefaultDecoderSupportedVideoType(const VideoType& type) {
      case VideoCodec::kVP9:
        return IsDecoderVp9ProfileSupported(type);
      case VideoCodec::kHEVC:
@@ -24,10 +24,10 @@ index 2ce29798709ef..c1a6d7120c4d4 100644
        return IsDecoderDolbyVisionProfileSupported(type);
      case VideoCodec::kUnknown:
 diff --git a/media/gpu/v4l2/v4l2_utils.cc b/media/gpu/v4l2/v4l2_utils.cc
-index aa80766dc6a5e..61be297519a9e 100644
+index 70ed89457e18e..e13fc35869e13 100644
 --- a/media/gpu/v4l2/v4l2_utils.cc
 +++ b/media/gpu/v4l2/v4l2_utils.cc
-@@ -548,7 +548,7 @@ void GetSupportedResolution(const IoctlAsCallback& ioctl_cb,
+@@ -552,7 +552,7 @@ void GetSupportedResolution(const IoctlAsCallback& ioctl_cb,
                              uint32_t pixelformat,
                              gfx::Size* min_resolution,
                              gfx::Size* max_resolution) {
@@ -36,7 +36,7 @@ index aa80766dc6a5e..61be297519a9e 100644
    *max_resolution = kDefaultMaxCodedSize;
    constexpr gfx::Size kDefaultMinCodedSize(16, 16);
    *min_resolution = kDefaultMinCodedSize;
-@@ -591,6 +591,8 @@ uint32_t VideoCodecProfileToV4L2PixFmt(VideoCodecProfile profile,
+@@ -596,6 +596,8 @@ uint32_t VideoCodecProfileToV4L2PixFmt(VideoCodecProfile profile,
      return V4L2_PIX_FMT_VP8;
    } else if (profile >= VP9PROFILE_MIN && profile <= VP9PROFILE_MAX) {
      return V4L2_PIX_FMT_VP9;
@@ -46,10 +46,10 @@ index aa80766dc6a5e..61be297519a9e 100644
      return V4L2_PIX_FMT_HEVC;
    } else {
 diff --git a/media/media_options.gni b/media/media_options.gni
-index ae57faa90b739..0bc2e824f650b 100644
+index 5f0318f651a3e..eaffb637c7b38 100644
 --- a/media/media_options.gni
 +++ b/media/media_options.gni
-@@ -146,7 +146,7 @@ declare_args() {
+@@ -152,7 +152,7 @@ declare_args() {
    # applies to video-capable devices.
    enable_platform_hevc =
        proprietary_codecs &&

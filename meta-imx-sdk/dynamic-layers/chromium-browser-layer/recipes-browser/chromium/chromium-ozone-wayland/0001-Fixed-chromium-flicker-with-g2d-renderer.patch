@@ -1,7 +1,7 @@
-From 48becd0d71aa2fb1ca5b31c77b66997fe1f77737 Mon Sep 17 00:00:00 2001
+From eb0ecdd16abe8d8337016720d99ec60ddda4b603 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Wed, 1 Nov 2023 18:19:23 +0800
-Subject: [PATCH 1/7] Fixed chromium flicker with g2d-renderer
+Subject: [PATCH 01/13] Fixed chromium flicker with g2d-renderer
 
 chromium V89 reland linux_explicit_synchronization_protocol for
 in-fence feature caused the flicker.
@@ -16,13 +16,13 @@ Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc b/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
-index acb4a60ba01ea..e93533cecaeb7 100644
+index 597661f989b82..0ab995bb48291 100644
 --- a/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
 +++ b/ui/ozone/platform/wayland/gpu/gbm_surfaceless_wayland.cc
-@@ -208,8 +208,7 @@ void GbmSurfacelessWayland::Present(SwapCompletionCallback completion_callback,
+@@ -202,8 +202,7 @@ void GbmSurfacelessWayland::Present(SwapCompletionCallback completion_callback,
    unsubmitted_frames_.back()->configs.reserve(frame->configs.size());
-   // If Wayland server supports linux_explicit_synchronization_protocol, fences
-   // should be shipped with buffers. Otherwise, we will wait for fences.
+   // If Wayland server supports acquire_fences, they should be shipped with
+   // buffers. Otherwise, we will wait for fences.
 -  if (buffer_manager_->supports_acquire_fence() || !use_egl_fence_sync_ ||
 -      !frame->schedule_planes_succeeded) {
 +  if (!use_egl_fence_sync_ || !frame->schedule_planes_succeeded) {
@@ -30,5 +30,5 @@ index acb4a60ba01ea..e93533cecaeb7 100644
      MaybeSubmitFrames();
      return;
 -- 
-2.34.1
+2.43.0
 

@@ -1,7 +1,7 @@
-From 76ddf42f8256cf5f1a0cb66f97233ad31654f23c Mon Sep 17 00:00:00 2001
+From 8e058a0d0ba2b3cbc00bcaefc7eca85cdda68239 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Mon, 18 Nov 2024 14:59:51 +0900
-Subject: [PATCH 20/22] V4L2VideoDecoder: Set OUTPUT format with parsed
+Subject: [PATCH 18/21] V4L2VideoDecoder: Set OUTPUT format with parsed
  resolution
 
 For VP8, VC1l, rv, amphion needs to set correct resolution for OUTPUT
@@ -13,10 +13,10 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index a97faf20f0c99..2b8f3f9b33d80 100644
+index 67ce3f4be94d9..82f1c270a7b95 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
-@@ -334,6 +334,7 @@ void V4L2VideoDecoder::Initialize(const VideoDecoderConfig& config,
+@@ -336,6 +336,7 @@ void V4L2VideoDecoder::Initialize(const VideoDecoderConfig& config,
    aspect_ratio_ = config.aspect_ratio();
    color_space_ = config.color_space_info();
    current_resolution_ = config.visible_rect().size();
@@ -24,7 +24,7 @@ index a97faf20f0c99..2b8f3f9b33d80 100644
  
    if (profile_ == VIDEO_CODEC_PROFILE_UNKNOWN) {
      VLOGF(1) << "Unknown profile.";
-@@ -628,7 +629,7 @@ bool V4L2VideoDecoder::SetupInputFormat() {
+@@ -629,7 +630,7 @@ bool V4L2VideoDecoder::SetupInputFormat() {
  
    // Setup the input format.
    auto format =

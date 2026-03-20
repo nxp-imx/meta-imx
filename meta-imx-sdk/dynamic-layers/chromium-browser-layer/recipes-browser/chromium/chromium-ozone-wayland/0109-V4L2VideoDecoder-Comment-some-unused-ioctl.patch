@@ -1,7 +1,7 @@
-From 4c4e0fbf845ca65e6330b4a3c7aad8ff098b4236 Mon Sep 17 00:00:00 2001
+From d14d0320c4735dcc94aaefdceb0adf3121482629 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:57:00 +0900
-Subject: [PATCH 09/22] V4L2VideoDecoder: Comment some unused ioctl
+Subject: [PATCH 09/21] V4L2VideoDecoder: Comment some unused ioctl
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -9,10 +9,10 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 22 insertions(+)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index e0e4175ff40be..a8f43c2671f8e 100644
+index 400f5f12b8676..ce7ef296022ad 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
-@@ -1113,10 +1113,12 @@ V4L2Queue::V4L2Queue(base::PassKey<PassKey>,
+@@ -1110,10 +1110,12 @@ V4L2Queue::V4L2Queue(base::PassKey<PassKey>,
        weak_this_factory_(this) {
    DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
  
@@ -25,7 +25,7 @@ index e0e4175ff40be..a8f43c2671f8e 100644
  
    // Stateful backends for example do not support requests.
    VPLOG_IF(4, supports_requests_)
-@@ -1767,10 +1769,14 @@ bool V4L2Request::ApplyCtrls(struct v4l2_ext_controls* ctrls) {
+@@ -1755,10 +1757,14 @@ bool V4L2Request::ApplyCtrls(struct v4l2_ext_controls* ctrls) {
      return false;
    }
  
@@ -40,7 +40,7 @@ index e0e4175ff40be..a8f43c2671f8e 100644
  }
  
  bool V4L2Request::ApplyQueueBuffer(struct v4l2_buffer* buffer) {
-@@ -1782,10 +1788,14 @@ bool V4L2Request::ApplyQueueBuffer(struct v4l2_buffer* buffer) {
+@@ -1770,10 +1776,14 @@ bool V4L2Request::ApplyQueueBuffer(struct v4l2_buffer* buffer) {
      return false;
    }
  
@@ -55,13 +55,12 @@ index e0e4175ff40be..a8f43c2671f8e 100644
  }
  
  bool V4L2Request::Submit() {
-@@ -1796,12 +1806,16 @@ bool V4L2Request::Submit() {
+@@ -1784,11 +1794,15 @@ bool V4L2Request::Submit() {
      return false;
    }
  
 +#if !BUILDFLAG(USE_LINUX_V4L2)
    if (HANDLE_EINTR(ioctl(request_fd_.get(), MEDIA_REQUEST_IOC_QUEUE)) != 0) {
-     RecordMediaIoctlUMA(MediaIoctlRequests::kMediaRequestIocQueue);
      return false;
    }
  
@@ -72,15 +71,15 @@ index e0e4175ff40be..a8f43c2671f8e 100644
  }
  
  bool V4L2Request::IsCompleted() {
-@@ -1843,6 +1857,7 @@ bool V4L2Request::Reset() {
+@@ -1830,6 +1844,7 @@ bool V4L2Request::Reset() {
      return false;
    }
  
 +#if !BUILDFLAG(USE_LINUX_V4L2)
    // Reinit the request to make sure we can use it for a new submission.
    if (HANDLE_EINTR(ioctl(request_fd_.get(), MEDIA_REQUEST_IOC_REINIT)) < 0) {
-     RecordMediaIoctlUMA(MediaIoctlRequests::kMediaRequestIocReinit);
-@@ -1851,6 +1866,9 @@ bool V4L2Request::Reset() {
+     VPLOGF(1) << "Failed to reinit request.";
+@@ -1837,6 +1852,9 @@ bool V4L2Request::Reset() {
    }
  
    return true;
@@ -90,7 +89,7 @@ index e0e4175ff40be..a8f43c2671f8e 100644
  }
  
  V4L2RequestRefBase::V4L2RequestRefBase(V4L2RequestRefBase&& req_base) {
-@@ -1927,6 +1945,7 @@ V4L2RequestsQueue::~V4L2RequestsQueue() {
+@@ -1913,6 +1931,7 @@ V4L2RequestsQueue::~V4L2RequestsQueue() {
  std::optional<base::ScopedFD> V4L2RequestsQueue::CreateRequestFD() {
    DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
  
@@ -98,7 +97,7 @@ index e0e4175ff40be..a8f43c2671f8e 100644
    int request_fd;
    int ret = HANDLE_EINTR(
        ioctl(media_fd_.get(), MEDIA_IOC_REQUEST_ALLOC, &request_fd));
-@@ -1937,6 +1956,9 @@ std::optional<base::ScopedFD> V4L2RequestsQueue::CreateRequestFD() {
+@@ -1922,6 +1941,9 @@ std::optional<base::ScopedFD> V4L2RequestsQueue::CreateRequestFD() {
    }
  
    return base::ScopedFD(request_fd);

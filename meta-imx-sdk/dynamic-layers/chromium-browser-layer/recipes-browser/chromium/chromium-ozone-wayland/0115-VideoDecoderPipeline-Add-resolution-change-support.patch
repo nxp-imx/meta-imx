@@ -1,7 +1,7 @@
-From 65faf295ef5bae20e3d02c92d45dd8b68e85ab11 Mon Sep 17 00:00:00 2001
+From 3eca2914521eff8e865ecb955d8c82b4f27effab Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 23:21:51 +0900
-Subject: [PATCH 15/22] VideoDecoderPipeline: Add resolution change support
+Subject: [PATCH 15/21] VideoDecoderPipeline: Add resolution change support
 
 Upstream-Status: Inappropriate [NXP specific]
 ---

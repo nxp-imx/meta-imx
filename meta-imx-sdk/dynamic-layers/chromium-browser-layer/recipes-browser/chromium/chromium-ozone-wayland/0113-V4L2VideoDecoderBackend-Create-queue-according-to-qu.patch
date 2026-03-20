@@ -1,7 +1,7 @@
-From db13f0f9648be4f8cae3df3c45ff99dd3745287a Mon Sep 17 00:00:00 2001
+From 6f7e7718e39a570ad22032e46d90f54328ee1482 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Mon, 22 Sep 2025 15:54:29 +0900
-Subject: [PATCH 13/22] V4L2VideoDecoderBackend: Create queue according to
+Subject: [PATCH 13/21] V4L2VideoDecoderBackend: Create queue according to
  queried caps capabilities
 
 Upstream-Status: Inappropriate [NXP specific]

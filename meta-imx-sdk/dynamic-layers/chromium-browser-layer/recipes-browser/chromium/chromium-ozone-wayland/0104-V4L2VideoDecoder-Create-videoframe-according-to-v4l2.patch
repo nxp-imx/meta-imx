@@ -1,7 +1,7 @@
-From 7d868c1067adbd960fd4eca820a322395bd9cc0d Mon Sep 17 00:00:00 2001
+From 828345b781b95aef854630ddabe7bba2118053d7 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 13 Sep 2024 22:43:15 +0900
-Subject: [PATCH 04/22] V4L2VideoDecoder: Create videoframe according to
+Subject: [PATCH 04/21] V4L2VideoDecoder: Create videoframe according to
  v4l2buffer
 
 Upstream-Status: Inappropriate [NXP specific]
@@ -11,10 +11,10 @@ Upstream-Status: Inappropriate [NXP specific]
  2 files changed, 48 insertions(+), 22 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index f149dbb570de1..1b0f9fb134b41 100644
+index ac7972480ad26..5332796286ccd 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
-@@ -342,7 +342,7 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
+@@ -339,7 +339,7 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
    }
  
    std::vector<base::ScopedFD> dmabuf_fds = GetDmabufsForV4L2Buffer(
@@ -23,7 +23,7 @@ index f149dbb570de1..1b0f9fb134b41 100644
        static_cast<enum v4l2_buf_type>(v4l2_buffer_.type));
    if (dmabuf_fds.empty()) {
      VLOGF(1) << "Failed to get DMABUFs of V4L2 buffer";
-@@ -369,7 +369,10 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
+@@ -366,7 +366,10 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
      dmabuf_fds.emplace_back(duped_fd);
    }
  
@@ -36,10 +36,10 @@ index f149dbb570de1..1b0f9fb134b41 100644
    return NativePixmapFrameResource::Create(
        *layout, gfx::Rect(size), size, std::move(dmabuf_fds), base::TimeDelta());
 diff --git a/media/gpu/v4l2/v4l2_utils.cc b/media/gpu/v4l2/v4l2_utils.cc
-index cb00d852e91fc..aa80766dc6a5e 100644
+index f2fe11ef4927f..70ed89457e18e 100644
 --- a/media/gpu/v4l2/v4l2_utils.cc
 +++ b/media/gpu/v4l2/v4l2_utils.cc
-@@ -231,13 +231,9 @@ size_t GetNumPlanesOfV4L2PixFmt(uint32_t pix_fmt) {
+@@ -229,13 +229,9 @@ size_t GetNumPlanesOfV4L2PixFmt(uint32_t pix_fmt) {
  
  std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
      const struct v4l2_format& format) {
@@ -55,16 +55,16 @@ index cb00d852e91fc..aa80766dc6a5e 100644
    const auto video_fourcc = Fourcc::FromV4L2PixFmt(pix_fmt);
    if (!video_fourcc) {
      VLOGF(1) << "Failed to convert pixel format to VideoPixelFormat: "
-@@ -245,7 +241,7 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
-     return std::nullopt;
+@@ -249,7 +245,7 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+     modifiers = DRM_FORMAT_MOD_MTK_16L_32S_TILE;
    }
-   const VideoPixelFormat video_format = video_fourcc->ToVideoPixelFormat();
+ #endif
 -  const size_t num_buffers = pix_mp.num_planes;
 +  const size_t num_buffers = V4L2_TYPE_IS_MULTIPLANAR(format.type) ? format.fmt.pix_mp.num_planes : 1;
    const size_t num_color_planes = VideoFrame::NumPlanes(video_format);
    if (num_color_planes == 0) {
      VLOGF(1) << "Unsupported video format for NumPlanes(): "
-@@ -263,9 +259,17 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -267,9 +263,17 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
    std::vector<ColorPlaneLayout> planes;
    planes.reserve(num_color_planes);
    for (size_t i = 0; i < num_buffers; ++i) {
@@ -85,7 +85,7 @@ index cb00d852e91fc..aa80766dc6a5e 100644
    }
    // For the case that #color planes > #buffers, it fills stride of color
    // plane which does not map to buffer.
-@@ -279,8 +283,12 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -283,8 +287,12 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
        case V4L2_PIX_FMT_NV12:
          // The stride of UV is the same as Y in NV12.
          // The height is half of Y plane.
@@ -100,7 +100,7 @@ index cb00d852e91fc..aa80766dc6a5e 100644
          DCHECK_EQ(2u, planes.size());
          break;
        case V4L2_PIX_FMT_YUV420:
-@@ -288,13 +296,18 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -292,13 +300,18 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
          // The spec claims that two Cx rows (including padding) is exactly as
          // long as one Y row (including padding). So stride of Y must be even
          // number.
@@ -121,33 +121,33 @@ index cb00d852e91fc..aa80766dc6a5e 100644
          const size_t plane_1_area = plane_0_area / 4;
          planes.emplace_back(half_stride, plane_0_area, plane_1_area);
          planes.emplace_back(half_stride, plane_0_area + plane_1_area,
-@@ -313,13 +326,23 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
+@@ -317,13 +330,23 @@ std::optional<VideoFrameLayout> V4L2FormatToVideoFrameLayout(
    // such devices individually, so set this as a video frame layout property.
    constexpr size_t buffer_alignment = 0x1000;
    if (num_buffers == 1) {
 -    return VideoFrameLayout::CreateWithPlanes(
 -        video_format, gfx::Size(pix_mp.width, pix_mp.height), std::move(planes),
--        buffer_alignment);
+-        buffer_alignment, modifiers);
 +    if (V4L2_TYPE_IS_MULTIPLANAR(format.type))
 +      return VideoFrameLayout::CreateWithPlanes(
 +          video_format, gfx::Size(pix_mp.width, pix_mp.height), std::move(planes),
-+          buffer_alignment);
++          buffer_alignment, modifiers);
 +    else
 +      return VideoFrameLayout::CreateWithPlanes(
 +          video_format, gfx::Size(pix.width, pix.height), std::move(planes),
-+          buffer_alignment);
++          buffer_alignment, modifiers);
    } else {
 -    return VideoFrameLayout::CreateMultiPlanar(
 -        video_format, gfx::Size(pix_mp.width, pix_mp.height), std::move(planes),
--        buffer_alignment);
+-        buffer_alignment, modifiers);
 +    if (V4L2_TYPE_IS_MULTIPLANAR(format.type))
 +      return VideoFrameLayout::CreateMultiPlanar(
 +          video_format, gfx::Size(pix_mp.width, pix_mp.height), std::move(planes),
-+          buffer_alignment);
++          buffer_alignment, modifiers);
 +    else
 +      return VideoFrameLayout::CreateMultiPlanar(
 +          video_format, gfx::Size(pix.width, pix.height), std::move(planes),
-+          buffer_alignment);
++          buffer_alignment, modifiers);
    }
  }
  

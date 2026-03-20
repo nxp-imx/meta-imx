@@ -1,7 +1,7 @@
-From f81ac487759cb8c6b8adbadd68f28e230333b02f Mon Sep 17 00:00:00 2001
+From 082d398e3c1e26950ce822469ed8c041fdf0b3db Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Thu, 25 Sep 2025 11:03:11 +0800
-Subject: [PATCH 11/11] LF-12406-1: Blacklist disable
+Subject: [PATCH 10/13] LF-12406-1: Blacklist disable
  program_caching_for_transform_feedback on Mali GPUs
 
 Mali GPU can't pass webgl cts case transform_feedback.
@@ -18,21 +18,20 @@ Upstream-Status: Pending
 Change-Id: I8feae54a19785734cc6069de19a51f40534643fd
 Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
 ---
- gpu/config/gpu_driver_bug_list.json | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ gpu/config/gpu_driver_bug_list.json | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
 diff --git a/gpu/config/gpu_driver_bug_list.json b/gpu/config/gpu_driver_bug_list.json
-index 4995df50d4e17..101b2ac4ce9a8 100644
+index 656093e163c99..7e2864eaa3748 100644
 --- a/gpu/config/gpu_driver_bug_list.json
 +++ b/gpu/config/gpu_driver_bug_list.json
-@@ -3525,6 +3525,18 @@
-        "features": [
-          "msaa_is_slow"
-        ]
--    }
-+    },
+@@ -3783,6 +3783,18 @@
+       "features": [
+         "msaa_is_slow"
+       ]
++     },
 +    {
-+      "id": 449,
++      "id": 466,
 +      "description": "Program binaries don't contain transform feedback varyings on Mali GPUs",
 +      "os": {
 +        "type": "linux"
@@ -42,9 +41,9 @@ index 4995df50d4e17..101b2ac4ce9a8 100644
 +      "features": [
 +        "disable_program_caching_for_transform_feedback"
 +      ]
-+     }
+      }
    ]
  }
 -- 
-2.34.1
+2.43.0
 

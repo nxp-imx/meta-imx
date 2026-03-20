@@ -1,7 +1,7 @@
-From 7299ca8b360cd3596c7fbc5f31fae48ce1060e24 Mon Sep 17 00:00:00 2001
+From 4af5946333e62dc16fd4a132247ec4f0c4baa093 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Thu, 7 Nov 2024 10:34:46 +0800
-Subject: [PATCH] Fix build fail after clang/llvm upgrade
+Subject: [PATCH 07/13] Fix build fail after clang/llvm upgrade
 
 Disable thinlto cache for need large memory.
 
@@ -21,10 +21,10 @@ Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/build/config/compiler/BUILD.gn b/build/config/compiler/BUILD.gn
-index 45086d6838cac..8a148e4f53e0b 100644
+index 078c04943c133..3c14f4733fc1b 100644
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -131,7 +131,7 @@ declare_args() {
+@@ -128,7 +128,7 @@ declare_args() {
    # Whether to enable thin lto incremental builds.
    # See: https://clang.llvm.org/docs/ThinLTO.html#incremental
    # The cache can lead to non-determinism: https://crbug.com/1486045
@@ -34,5 +34,5 @@ index 45086d6838cac..8a148e4f53e0b 100644
    # Initialize all local variables with a pattern. This flag will fill
    # uninitialized floating-point types (and 32-bit pointers) with 0xFF and the
 -- 
-2.34.1
+2.43.0
 

@@ -1,0 +1,80 @@
+From e3079cdbd1061ca9f3bc6dcdd64bf69251935bf1 Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Thu, 15 Jan 2026 16:32:14 +0900
+Subject: [PATCH 21/21] V4L2VideoDecoder: Fix cannot select V4L2VD
+
+Below commit defaults selects V4L2StatefulVD instead of V4L2VD. So use
+USE_LINUX_V4L2 macro to still select V4L2VD.
+
+commit 69f6e0f97100926d8e16d9da1689e7cb32edda9f
+Author: Fritz Koenig <frkoenig@chromium.org>
+Date:   Fri Oct 11 01:28:32 2024 +0000
+
+    media/gpu/v4l2: Drop kV4L2FlatStatefulVideoDecoder flag
+
+    There is no going back to the V4L2VideoDecoder for stateful
+    drivers, only forward to the V4L2StatefulVideoDecoder.
+
+    Bug: 370536551
+    Change-Id: Ib4b5446954b6e45ec470d7c06284e2fee75a17d5
+    Reviewed-on: https://chromium-review.googlesource.com/c/chromium/src/+/5924475
+    Reviewed-by: Nathan Hebert <nhebert@chromium.org>
+    Reviewed-by: Dale Curtis <dalecurtis@chromium.org>
+    Commit-Queue: Fritz Koenig <frkoenig@chromium.org>
+    Cr-Commit-Position: refs/heads/main@{#1367253}
+
+For 8mq that supports JPEG hw decoding, no need to check jpeg format,
+otherwise V4L2VD will be skipped.
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ media/gpu/chromeos/video_decoder_pipeline.cc | 6 +++++-
+ media/gpu/v4l2/v4l2_device.cc                | 2 +-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/media/gpu/chromeos/video_decoder_pipeline.cc b/media/gpu/chromeos/video_decoder_pipeline.cc
+index ff8f1ccf04ca3..fb08845c50397 100644
+--- a/media/gpu/chromeos/video_decoder_pipeline.cc
++++ b/media/gpu/chromeos/video_decoder_pipeline.cc
+@@ -232,12 +232,16 @@ std::unique_ptr<VideoDecoder> VideoDecoderPipeline::Create(
+ #if BUILDFLAG(USE_VAAPI)
+     create_decoder_function_cb = base::BindOnce(&VaapiVideoDecoder::Create);
+ #elif BUILDFLAG(USE_V4L2_CODEC)
++#if !BUILDFLAG(USE_LINUX_V4L2)
+     if (IsV4L2DecoderStateful()) {
+       create_decoder_function_cb =
+           base::BindOnce(&V4L2StatefulVideoDecoder::Create);
+     } else {
++#endif
+       create_decoder_function_cb = base::BindOnce(&V4L2VideoDecoder::Create);
++#if !BUILDFLAG(USE_LINUX_V4L2)
+     }
++#endif
+ #else
+     return nullptr;
+ #endif
+@@ -376,7 +380,7 @@ VideoDecoderPipeline::GetSupportedConfigs(
+       break;
+ #elif BUILDFLAG(USE_V4L2_CODEC)
+     case VideoDecoderType::kV4L2:
+-      configs = GetSupportedV4L2DecoderConfigs();
++      configs = V4L2VideoDecoder::GetSupportedConfigs();
+       break;
+ #endif
+     default:
+diff --git a/media/gpu/v4l2/v4l2_device.cc b/media/gpu/v4l2/v4l2_device.cc
+index d5f2feec742ab..ba3f8843f9aac 100644
+--- a/media/gpu/v4l2/v4l2_device.cc
++++ b/media/gpu/v4l2/v4l2_device.cc
+@@ -994,7 +994,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+             std::all_of(supported_pixelformats_input.begin(),
+                         supported_pixelformats_input.end(),
+                         [&](uint32_t fmt) {
+-                          return !is_jpeg_format(fmt) && !is_pixel_format(fmt);
++                          return !is_pixel_format(fmt);
+                         }) &&
+             std::any_of(supported_pixelformats_input.begin(),
+                         supported_pixelformats_input.end(), is_video_format) &&
+-- 
+2.34.1
+

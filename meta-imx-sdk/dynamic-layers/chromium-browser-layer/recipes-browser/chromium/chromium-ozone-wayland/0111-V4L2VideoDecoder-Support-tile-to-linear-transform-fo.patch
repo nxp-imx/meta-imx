@@ -1,45 +1,79 @@
-From de271a927672badd544a3e5f8c119142e4229970 Mon Sep 17 00:00:00 2001
+From 3e0991e46609b18da2eb8f8d64a01cc30accd40c Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
-Date: Fri, 13 Sep 2024 23:09:35 +0900
-Subject: [PATCH 11/22] V4L2VideoDecoder: Support tile to linear transform for
+Date: Wed, 15 Oct 2025 18:31:33 +0900
+Subject: [PATCH 11/21] V4L2VideoDecoder: Support tile to linear transform for
  amphion
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- media/gpu/v4l2/v4l2_queue.cc | 209 ++++++++++++++++++++++++++++++++++-
- media/gpu/v4l2/v4l2_queue.h  |   1 +
- 2 files changed, 206 insertions(+), 4 deletions(-)
+ media/gpu/BUILD.gn                   |   1 +
+ media/gpu/args.gni                   |   3 +
+ media/gpu/v4l2/v4l2_queue.cc         | 231 ++++++++++++++++++++++++++-
+ media/gpu/v4l2/v4l2_queue.h          |   3 +
+ media/gpu/v4l2/v4l2_video_decoder.cc |   3 +-
+ 5 files changed, 236 insertions(+), 5 deletions(-)
 
+diff --git a/media/gpu/BUILD.gn b/media/gpu/BUILD.gn
+index 49c50e0a2e917..fd1b9b549ccb6 100644
+--- a/media/gpu/BUILD.gn
++++ b/media/gpu/BUILD.gn
+@@ -24,6 +24,7 @@ buildflag_header("buildflags") {
+     "USE_LIBV4L2=$use_v4lplugin",
+     "USE_LINUX_VIDEO_ACCELERATION=$use_linux_video_acceleration",
+     "USE_LINUX_V4L2=$use_linux_v4l2_only",
++    "USE_IMXG2D=$use_imxg2d",
+   ]
+ }
+ 
+diff --git a/media/gpu/args.gni b/media/gpu/args.gni
+index e7d4f8261d650..6537eb7893542 100644
+--- a/media/gpu/args.gni
++++ b/media/gpu/args.gni
+@@ -16,6 +16,9 @@ declare_args() {
+   # will be used.
+   use_linux_v4l2_only = false
+ 
++  # Indicates that if imx g2d is used.
++  use_imxg2d = false
++
+   # Indicates if VA-API-based hardware acceleration is to be used. This
+   # is typically the case on x86-based ChromeOS devices.
+   # VA-API should also be compiled by default on x11/wayland linux devices
 diff --git a/media/gpu/v4l2/v4l2_queue.cc b/media/gpu/v4l2/v4l2_queue.cc
-index a8f43c2671f8e..1651ef4ef9674 100644
+index ce7ef296022ad..e4d2e4c0830c1 100644
 --- a/media/gpu/v4l2/v4l2_queue.cc
 +++ b/media/gpu/v4l2/v4l2_queue.cc
-@@ -28,6 +28,9 @@
- #include "media/gpu/chromeos/platform_video_frame_utils.h"
+@@ -29,6 +29,11 @@
  #include "media/gpu/macros.h"
+ #include "third_party/perfetto/include/perfetto/tracing/track.h"
  
++#if BUILDFLAG(USE_IMXG2D)
 +#include <linux/dma-buf.h>
 +#include <time.h>
++#endif
 +
  namespace media {
  
  namespace {
-@@ -197,6 +200,11 @@ class V4L2Buffer {
+@@ -195,6 +200,13 @@ class V4L2Buffer {
    size_t GetMemoryUsage() const;
    const struct v4l2_buffer& v4l2_buffer() const { return v4l2_buffer_; }
    const scoped_refptr<FrameResource>& GetFrameResource();
++#if BUILDFLAG(USE_IMXG2D)
 +  std::pair<int, int> GetSavedmafd();
 +  std::pair<unsigned int, unsigned int> GetSavedphys();
 +  std::pair<int, int> Getg2dbufphys();
 +  std::pair<void *, void *> Getg2dbufvirs();
 +  const struct v4l2_format& GetFmt() const {return format_;}
++#endif
  
   private:
    V4L2Buffer(const IoctlAsCallback& ioctl_cb,
-@@ -211,6 +219,13 @@ class V4L2Buffer {
+@@ -209,6 +221,15 @@ class V4L2Buffer {
    const IoctlAsCallback ioctl_cb_;
    const MmapAsCallback mmap_cb_;
    std::vector<void*> plane_mappings_;
++#if BUILDFLAG(USE_IMXG2D)
 +  int dmafd0;
 +  int dmafd1;
 +  unsigned long phys_0;
@@ -47,13 +81,16 @@ index a8f43c2671f8e..1651ef4ef9674 100644
 +  struct g2d_buf *g2dbuf_p0;
 +  struct g2d_buf *g2dbuf_p1;
 +  std::vector<base::ScopedFD> g2dbufs_fds;
++#endif
  
    // V4L2 data as queried by QUERYBUF.
    struct v4l2_buffer v4l2_buffer_;
-@@ -265,6 +280,90 @@ V4L2Buffer::V4L2Buffer(const IoctlAsCallback& ioctl_cb,
+@@ -263,6 +284,93 @@ V4L2Buffer::V4L2Buffer(const IoctlAsCallback& ioctl_cb,
    v4l2_buffer_.type = type;
    v4l2_buffer_.memory = memory;
    plane_mappings_.resize(V4L2_TYPE_IS_MULTIPLANAR(type) ? v4l2_buffer_.length : 1);
++
++#if BUILDFLAG(USE_IMXG2D)
 +  dmafd0 = dmafd1  = -1;
 +  phys_0 = phys_1 = 0;
 +  g2dbuf_p0 = g2dbuf_p1  = NULL;
@@ -138,19 +175,23 @@ index a8f43c2671f8e..1651ef4ef9674 100644
 +    }
 +
 +  }
++  #endif
  }
  
  V4L2Buffer::~V4L2Buffer() {
-@@ -277,6 +376,32 @@ V4L2Buffer::~V4L2Buffer() {
+@@ -275,8 +383,38 @@ V4L2Buffer::~V4L2Buffer() {
        }
      }
    }
++#if BUILDFLAG(USE_IMXG2D)
 +  if(g2d_free && g2dbuf_p0 && g2dbuf_p1) {
 +	  g2d_free(g2dbuf_p0);
 +	  g2d_free(g2dbuf_p1);
 +  }
-+}
-+
++#endif
+ }
+ 
++#if BUILDFLAG(USE_IMXG2D)
 +std::pair<int, int> V4L2Buffer::GetSavedmafd() {
 +	return std::make_pair(dmafd0, dmafd1);
 +}
@@ -171,54 +212,64 @@ index a8f43c2671f8e..1651ef4ef9674 100644
 +		return std::make_pair(g2dbuf_p0->buf_vaddr, g2dbuf_p1->buf_vaddr);
 +	else
 +		return std::make_pair(nullptr, nullptr);
- }
- 
++}
++#endif
++
  bool V4L2Buffer::Query() {
-@@ -376,13 +501,18 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
+   int ret = ioctl_cb_.Run(VIDIOC_QUERYBUF, &v4l2_buffer_);
+   if (ret) {
+@@ -373,13 +511,21 @@ scoped_refptr<FrameResource> V4L2Buffer::CreateFrame() {
      dmabuf_fds.emplace_back(duped_fd);
    }
  
 -  if (V4L2_TYPE_IS_MULTIPLANAR(v4l2_buffer_.type))
++#if BUILDFLAG(USE_IMXG2D)
 +  if (V4L2_TYPE_IS_MULTIPLANAR(v4l2_buffer_.type) &&
 +      format_.fmt.pix_mp.pixelformat == V4L2_PIX_FMT_NV12M_8L128) {
      gfx::Size size(format_.fmt.pix_mp.width, format_.fmt.pix_mp.height);
 -  else
 +    return NativePixmapFrameResource::Create(
 +        *layout, gfx::Rect(size), size, std::move(g2dbufs_fds), base::TimeDelta());
-+  }
-+  else {
++  } else{
++#endif
      gfx::Size size(format_.fmt.pix.width, format_.fmt.pix.height);
  
 -  return NativePixmapFrameResource::Create(
 -      *layout, gfx::Rect(size), size, std::move(dmabuf_fds), base::TimeDelta());
 +    return NativePixmapFrameResource::Create(
 +        *layout, gfx::Rect(size), size, std::move(dmabuf_fds), base::TimeDelta());
++#if BUILDFLAG(USE_IMXG2D)
 +  }
++#endif
  }
  
  const scoped_refptr<FrameResource>& V4L2Buffer::GetFrameResource() {
-@@ -1124,6 +1254,10 @@ V4L2Queue::V4L2Queue(base::PassKey<PassKey>,
+@@ -1121,6 +1267,12 @@ V4L2Queue::V4L2Queue(base::PassKey<PassKey>,
    VPLOG_IF(4, supports_requests_)
        << "This queue does " << (supports_requests_ ? "" : "not")
        << " support requests.";
 +
++#if BUILDFLAG(USE_IMXG2D)
 +  g2d_handle = NULL;
 +  if(g2d_open && g2d_open(&g2d_handle))
 +    VLOGF(1) << "g2d_open fail";
++#endif
  }
  
  V4L2Queue::~V4L2Queue() {
-@@ -1139,6 +1273,9 @@ V4L2Queue::~V4L2Queue() {
+@@ -1136,6 +1288,11 @@ V4L2Queue::~V4L2Queue() {
      VQLOGF(1) << "Failed to deallocate queue buffers";
    }
  
++#if BUILDFLAG(USE_IMXG2D)
 +  if(g2d_close && g2d_handle)
 +	  g2d_close(g2d_handle);
++#endif
 +
    std::move(destroy_cb_).Run();
  }
  
-@@ -1182,6 +1319,8 @@ std::pair<std::optional<struct v4l2_format>, int> V4L2Queue::GetFormat() {
+@@ -1177,6 +1334,8 @@ std::pair<std::optional<struct v4l2_format>, int> V4L2Queue::GetFormat() {
      VPQLOGF(2) << "Failed to get format";
      return std::make_pair(std::nullopt, errno);
    }
@@ -227,11 +278,12 @@ index a8f43c2671f8e..1651ef4ef9674 100644
  
    return std::make_pair(format, 0);
  }
-@@ -1542,6 +1681,68 @@ std::pair<bool, V4L2ReadableBufferRef> V4L2Queue::DequeueBuffer() {
+@@ -1532,6 +1691,70 @@ std::pair<bool, V4L2ReadableBufferRef> V4L2Queue::DequeueBuffer() {
    }
  
    DCHECK(free_buffers_);
 +
++#if BUILDFLAG(USE_IMXG2D)
 +  if(type_ == V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE &&
 +      buffers_[v4l2_buffer.index]->GetFmt().fmt.pix_mp.pixelformat == V4L2_PIX_FMT_NV12M_8L128)
 +  {
@@ -292,22 +344,39 @@ index a8f43c2671f8e..1651ef4ef9674 100644
 +    if (g2d_blitEx)
 +	    g2d_blitEx(g2d_handle, &srcEx, &dstEx);
 +  }
++#endif
 +
    return std::make_pair(true, V4L2BufferRefFactory::CreateReadableRef(
                                    v4l2_buffer, weak_this_factory_.GetWeakPtr(),
                                    std::move(queued_frame)));
 diff --git a/media/gpu/v4l2/v4l2_queue.h b/media/gpu/v4l2/v4l2_queue.h
-index 2a18544afd4b3..6476b62ef4cf8 100644
+index 2a18544afd4b3..a74a8692a992b 100644
 --- a/media/gpu/v4l2/v4l2_queue.h
 +++ b/media/gpu/v4l2/v4l2_queue.h
-@@ -604,6 +604,7 @@ class MEDIA_GPU_EXPORT V4L2Queue
+@@ -604,6 +604,9 @@ class MEDIA_GPU_EXPORT V4L2Queue
    std::optional<struct v4l2_format> current_format_;
  
    std::vector<std::unique_ptr<V4L2Buffer>> buffers_;
++#if BUILDFLAG(USE_IMXG2D)
 +  void* g2d_handle;
++#endif
  
    // Buffers that are available for client to get and submit.
    // Buffers in this list are not referenced by anyone else than ourselves.
+diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
+index 3bfbbc8595495..8c8c3b0205937 100644
+--- a/media/gpu/v4l2/v4l2_video_decoder.cc
++++ b/media/gpu/v4l2/v4l2_video_decoder.cc
+@@ -733,7 +733,8 @@ CroStatus V4L2VideoDecoder::SetupOutputFormat(const gfx::Size& size,
+       output_queue_->SetFormat(fourcc.ToV4L2PixFmt(), picked_size, 0);
+   DCHECK(format);
+   gfx::Size adjusted_size(format->fmt.pix_mp.width, format->fmt.pix_mp.height);
+-  if (!gfx::Rect(adjusted_size).Contains(gfx::Rect(picked_size))) {
++  if (fourcc != std::optional<Fourcc>(Fourcc(Fourcc::NA12)) &&
++      !gfx::Rect(adjusted_size).Contains(gfx::Rect(picked_size))) {
+     VLOGF(1) << "The adjusted coded size (" << adjusted_size.ToString()
+              << ") should contains the original coded size("
+              << picked_size.ToString() << ").";
 -- 
 2.34.1
 

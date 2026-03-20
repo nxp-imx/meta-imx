@@ -1,7 +1,7 @@
-From d4edb5af2a09a891e02a22514703860c911664a0 Mon Sep 17 00:00:00 2001
+From de7351dbdc343117c9791da93c77c3e5a669fd60 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Tue, 10 Dec 2024 14:40:49 +0800
-Subject: [PATCH] Fix canvas test fail for webgl
+Subject: [PATCH 09/13] Fix canvas test fail for webgl
 
 canvas fallback from GPU to CPU meet issue with WillReadFrequently.
 Set it false as default to avoid the failures.
@@ -17,10 +17,10 @@ Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/third_party/blink/renderer/modules/canvas/htmlcanvas/canvas_context_creation_attributes_helpers.cc b/third_party/blink/renderer/modules/canvas/htmlcanvas/canvas_context_creation_attributes_helpers.cc
-index 8938e79c1cbd0..b699d89763ad9 100644
+index 697abd6e9d692..8107bf37563b4 100644
 --- a/third_party/blink/renderer/modules/canvas/htmlcanvas/canvas_context_creation_attributes_helpers.cc
 +++ b/third_party/blink/renderer/modules/canvas/htmlcanvas/canvas_context_creation_attributes_helpers.cc
-@@ -53,7 +53,7 @@ bool ToCanvasContextCreationAttributes(
+@@ -71,7 +71,7 @@ bool ToCanvasContextCreationAttributes(
        break;
      default:
        result.will_read_frequently =
@@ -30,5 +30,5 @@ index 8938e79c1cbd0..b699d89763ad9 100644
    result.xr_compatible = attrs->xrCompatible();
    return true;
 -- 
-2.34.1
+2.43.0
 

@@ -1,7 +1,8 @@
-From bd4ad5cdc0fb546157bb7f6e46cb0f96e2d6cbac Mon Sep 17 00:00:00 2001
+From ac9da4bf81af9eaee8ef711f7ac352ccfacf29d4 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Tue, 20 Jan 2026 11:16:24 +0800
-Subject: [PATCH] MGS-8560 Fixed webgl random failures with angle gles backend
+Subject: [PATCH 12/13] MGS-8560 Fixed webgl random failures with angle gles
+ backend
 
 Enable validating command decoder for Linux, angle is still
 unstable.
