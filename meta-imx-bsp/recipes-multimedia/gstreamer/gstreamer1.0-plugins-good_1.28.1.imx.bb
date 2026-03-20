@@ -94,7 +94,7 @@ FILES:${PN}-equalizer += "${datadir}/gstreamer-1.0/presets/*.prs"
 DEFAULT_PREFERENCE = "-1"
 
 LIC_FILES_CHKSUM = " \
-    file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
+    file://LICENSE.txt;md5=69333daa044cb77e486cc36129f7a770 \
     file://gst/replaygain/rganalysis.c;beginline=1;endline=23;md5=b60ebefd5b2f5a8e0cab6bfee391a5fe \
 "
 # Enable pulsesink in gstreamer
