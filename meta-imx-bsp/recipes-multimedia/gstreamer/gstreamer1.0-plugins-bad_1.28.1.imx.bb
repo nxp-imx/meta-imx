@@ -186,7 +186,7 @@ SRC_URI:remove = "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plug
 SRC_URI:prepend = "${GST1.0-PLUGINS-BAD_SRC};branch=${SRCBRANCH} "
 GST1.0-PLUGINS-BAD_SRC ?= "gitsm://github.com/nxp-imx/gst-plugins-bad.git;protocol=https"
 SRCBRANCH = "imx-1.28.x"
-SRCREV = "3dd523bcf4bdeaa091b519e30e8fd6803f7f5dac"
+SRCREV = "e0e3f3ca0ad588fe275ee8aa6df9633c324679d0"
 
 inherit use-imx-headers
 
