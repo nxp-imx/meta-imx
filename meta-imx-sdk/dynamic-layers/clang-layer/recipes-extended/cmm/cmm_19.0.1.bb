@@ -1,24 +1,19 @@
 # Copyright 2025 NXP
-
-DESCRIPTION = "Connection Montitoring Manager for offloading kernel and register entity info "
+DESCRIPTION = "Connection Monitoring Manager for offloading kernel and register entity info "
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=94fa01670a2a8f2d3ab2de15004e0848"
-
 DEPENDS = "libnfnetlink libnetfilter-conntrack libxcrypt elfutils libbpf zlib libcli"
 
 SRC_URI = "${DPDK_CMM_SRC};branch=${SRCBRANCH}"
 DPDK_CMM_SRC ?= "git://github.com/nxp-imx/cmm;protocol=https"
-
 SRCBRANCH = "xdp_cmm"
 SRCREV = "2c539dd4fd643276bc309c22e0f4a6b9ec589b0b"
 
 inherit autotools pkgconfig
 
+EXTRA_OECONF += "--with-cpal=bpf"
 
-EXTRA_OECONF += " --with-cpal=bpf"
-
-# Use LS1043 platform for i.MX
-CFLAGS += "-I${STAGING_INCDIR}/ -DIPSEC_SUPPORT_DISABLED"
+CFLAGS += "-DIPSEC_SUPPORT_DISABLED"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/cmm
