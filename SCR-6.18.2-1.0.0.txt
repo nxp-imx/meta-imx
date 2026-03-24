@@ -295,7 +295,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.1.0-337340d.bin
+Package:                     nxp-wlan-apps-1.1.0-6b5e43f.bin
 Version:                     1.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-a32d983
+Package:                     sof-zephyr-2.16.0-0b5aaa3
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-0e07f62
+Package:                     zephyr-demo-imx-4.4.0-56f8a30
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -682,7 +682,7 @@ Origin:                      NXP (GPL-2.0 or BSD-3-Clause)
 --------------------------------------------
 
 Package:                     dpdk-fpr.git
-Version:                     22.11
+Version:                     25.11
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -696,7 +696,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     mtcp-dpdk.git
-Version:                     22.11
+Version:                     25.11
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -773,7 +773,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-27f3992.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-38c138c.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -792,7 +792,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-27f3992.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-38c138c.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -968,7 +968,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p4.6-aarch64-wayland-e779398.bin
+Package:                     libgpuperfcnt-6.4.11.p4.6-aarch64-wayland-f65a566.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -980,7 +980,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p4.6-arm-fb-e779398.bin
+Package:                     libgpuperfcnt-6.4.11.p4.6-arm-fb-f65a566.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -992,7 +992,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p4.6-arm-wayland-e779398.bin
+Package:                     libgpuperfcnt-6.4.11.p4.6-arm-wayland-f65a566.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1004,7 +1004,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-r54p1.6-aarch64-wayland-mali-e779398.bin
+Package:                     libgpuperfcnt-r54p1.6-aarch64-wayland-mali-f65a566.bin
 Version:                     r54p1.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1035,15 +1035,32 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-parser-4.11.0-790a9df.bin
-Version:                     4.11.0
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
+Package:                     imx-parser.git
+Version:                     git
+Outgoing License:            BSD-3-Clause 
+License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
-Description and comments:    i.MX multimedia parser libraries: Parsers for: APE AVI FLV MKV MP3 MP4 MPG2 OGG
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
+Description and comments:    i.MX multimedia parser libraries: Parsers for: APE AVI DSF FLV MKV MPG2 OGG
+Release Location:            https://github.com/nxp-imx/imx-parser -b lf-6.18.2-1.0.0
+Origin:                      NXP (BSD-3-clause)
+                             Android - platform - external - srec (Apache-2.0)
+                             Android-platform-frameworks-base (Apache-2.0)
+
+--------------------------------------------
+
+Package:                     imx-mp4-parser.git
+Version:                     git
+Outgoing License:            BSD-3-Clause 
+License File:                LICENSE.txt
+Package Category:            Multimedia
+Type of Content:             source
+Description and comments:    i.MX multimedia parser libraries: Parsers for MP4
+Release Location:            https://github.com/nxp-imx/imx-mp4-parser -b lf-6.18.2-1.0.0
+Origin:                      NXP (BSD-3-clause)
+                             ISO/IEC MPEG-4 Reference Code (Apple MPEG-4 License)
+                             Charset.c.c unicode convert function(Unicode-DFS-2016)
+                             MP4MemMgr.c Android - platform - external - srec(Apache-2.0)
 
 --------------------------------------------
 
@@ -1063,7 +1080,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gstreamer.git
-Version:                     1.26.6.imx
+Version:                     1.28.1.imx
 Outgoing License:            LGPL-2.1 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1076,7 +1093,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gst-plugins-good.git
-Version:                     1.26.6.imx
+Version:                     1.28.1.imx
 Outgoing License:            LGPL-2.1 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1089,7 +1106,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gst-plugins-base.git
-Version:                     1.26.6.imx
+Version:                     1.28.1.imx
 Outgoing License:            LGPL-2.1 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1102,7 +1119,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     gst-plugins-bad.git
-Version:                     1.26.6.imx
+Version:                     1.28.1.imx
 Outgoing License:            LGPL-2.1 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1129,8 +1146,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-sw-pdm.git
 Version:                     1.0.3
-Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
-License File:                LICENSE.txt
+Outgoing License:            BSD-3-Clause 
+License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP PDM to PCM Software Decimation SIMD Library
@@ -1146,7 +1163,7 @@ License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    i.MX multimedia opencl converter library
-Release Location:            https://github.com/nxp-imx/imx_opencl_converter -b lf-6.18.2-1.0.0
+Release Location:            https://github.com/nxp-imx/imx-opencl-converter -b lf-6.18.2-1.0.0
 Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
@@ -1206,8 +1223,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-vc-1.11.0-5e18a84.bin
-Version:                     1.11.0
+Package:                     imx-vpu-hantro-vc-1.12.0-1fd0ec5.bin
+Version:                     1.12.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
@@ -1288,12 +1305,12 @@ Origin:                      NXP (BSD-3-Clause)
 
 Package:                     nxp-ssrc.git
 Version:                     2.2.3
-Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
-License File:                LICENSE.txt
+Outgoing License:            BSD-3-Clause 
+License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    Synchronous Sample Rate Convertor for ARM Cortex-A
-Release Location:            https://github.com/nxp-imx/nxp_ssrc -b lf-6.18.2-1.0.0
+Release Location:            https://github.com/nxp-imx/nxp-ssrc -b lf-6.18.2-1.0.0
 Origin:                      NXP (proprietary)
 
 --------------------------------------------
