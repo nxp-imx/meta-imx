@@ -8,7 +8,7 @@ PV = "1.4.0+git"
 SRC_URI = "${GPUPERFCNT};branch=${SRCBRANCH}"
 GPUPERFCNT ?= "https://github.com/nxp-imx/libgpuperfcnt.git;protocol=https"
 SRCBRANCH = "release"
-SRCREV = "${AUTOREV}"
+SRCREV = "f65a5666391a9b4eec8a0112d860ab78ad3194dc"
 
 inherit cmake pkgconfig
 
