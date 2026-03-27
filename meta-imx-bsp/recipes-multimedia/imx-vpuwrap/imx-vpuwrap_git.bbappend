@@ -1,0 +1,7 @@
+# Copyright 2026 NXP
+LICENSE = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=6f862c6751ebcaa393467694c7b0c69a"
+
+
+SRCBRANCH = "master"
+SRCREV = "08f5f18ec5a40349dd89c6c173fe08298c30bb04"
