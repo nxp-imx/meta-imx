@@ -8,4 +8,5 @@ RDEPENDS_CMM:mx943-nxp-bsp = "cmm"
 
 RDEPENDS:${PN} += " \
     ${RDEPENDS_XDP_FP} \
+    ${RDEPENDS_CMM} \
 "
