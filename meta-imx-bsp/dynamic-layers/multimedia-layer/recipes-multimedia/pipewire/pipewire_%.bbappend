@@ -1,7 +1,3 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-
-PACKAGECONFIG_REMOVE:mx8-nxp-bsp  = ""
-PACKAGECONFIG_REMOVE:mx93-nxp-bsp = ""
 # Disable pipewire-v4l2 on 32-bit to avoid Y2038 bug
 PACKAGECONFIG:append = " ${PACKAGECONFIG_PIPEWIRE_V4L2}"
 PACKAGECONFIG_PIPEWIRE_V4L2             = "pipewire-v4l2"
