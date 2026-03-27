@@ -4,11 +4,11 @@ DESCRIPTION = "i.MX DSP Wrapper, Firmware Binary, Codec Libraries"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3"
 
-IMX_SRCREV_ABBREV = "ea4fe3f"
+IMX_SRCREV_ABBREV = "571a57f"
 
 inherit fsl-eula-recent autotools pkgconfig fsl-eula2-unpack2
 
-SRC_URI[sha256sum] = "fc6e6a7c2417730b39eeddc26606c3d58a8f5d0a1521f44bbbd505657046858b"
+SRC_URI[sha256sum] = "ae20a5d58e759c01f0b5400c573849780684aebb4a2ef3d9f8f6963d2fd5e654"
 
 EXTRA_OECONF = " \
     -datadir=${base_libdir}/firmware \
