@@ -1,0 +1,3 @@
+# Copyright 2026 NXP
+SRCBRANCH = "master"
+SRCREV = "baeb5a2f19886425365a5726686e4c94e8f34184"
