@@ -94,8 +94,6 @@ PREFERRED_VERSION_weston:mx7-nxp-bsp ??= "10.0.5.imx"
 
 PREFERRED_VERSION_wayland-protocols:imx-nxp-bsp ??= ""
 
-PREFERRED_VERSION_xwayland:imx-nxp-bsp ??= ""
-
 PREFERRED_VERSION_libdrm:imx-nxp-bsp ??= "2.4.127.imx"
 
 PREFERRED_VERSION_gfxreconstruct:imxvulkan             ??= "1.3.275.0"
