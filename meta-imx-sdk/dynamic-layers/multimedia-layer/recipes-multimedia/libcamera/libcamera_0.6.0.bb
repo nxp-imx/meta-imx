@@ -23,11 +23,15 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'qt', 'qtbase qtbase-native'
 
 PACKAGES =+ "${PN}-gst ${PN}-pycamera"
 
-PACKAGECONFIG ??= ""
+# Disable v4l2 on 32-bit to avoid Y2038 bug
+PACKAGECONFIG_V4L2                ?= "v4l2"
+PACKAGECONFIG_V4L2:arm:imx-nxp-bsp = ""
+
 PACKAGECONFIG[dng] = ",,tiff"
 PACKAGECONFIG[gst] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[pycamera] = "-Dpycamera=enabled,-Dpycamera=disabled,python3 python3-pybind11"
 PACKAGECONFIG[raspberrypi] = ",,libpisp"
+PACKAGECONFIG[v4l2] = "-Dv4l2=true,-Dv4l2=false"
 
 # Raspberry Pi requires the meta-raspberrypi layer
 # These values are coming from the project's meson.build file,
@@ -41,7 +45,6 @@ LIBCAMERA_PIPELINES:aarch64 ??= "${ARM_PIPELINES}"
 
 EXTRA_OEMESON = " \
     -Dpipelines=${LIBCAMERA_PIPELINES} \
-    -Dv4l2=true \
     -Dcam=enabled \
     -Dlc-compliance=disabled \
     -Dtest=false \
@@ -58,7 +61,9 @@ do_configure:prepend() {
 
 do_install:append() {
     chrpath -d ${D}${libdir}/libcamera.so
-    chrpath -d ${D}${libexecdir}/libcamera/v4l2-compat.so
+    if [ "${@bb.utils.filter('PACKAGECONFIG', 'v4l2', d)}" = "v4l2" ]; then
+        chrpath -d ${D}${libexecdir}/libcamera/v4l2-compat.so
+    fi
 }
 
 do_package:append() {
@@ -83,6 +88,8 @@ FILES:${PN}-pycamera = "${PYTHON_SITEPACKAGES_DIR}/libcamera"
 
 # libcamera-v4l2 explicitly sets _FILE_OFFSET_BITS=32 to get access to
 # both 32 and 64 bit file APIs.
-GLIBC_64BIT_TIME_FLAGS = ""
-
+# Set _FILE_OFFSET_BITS=32 to get access to both 32 and 64 bit file APIs when support v4l2 on 32bit platform
+GLIBC_64BIT_TIME_FLAGS:arm:imx-nxp-bsp = " \
+    ${@bb.utils.contains('PACKAGECONFIG', 'v4l2', '', ' -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64', d)} \
+"
 INSANE_SKIP += "32bit-time"
