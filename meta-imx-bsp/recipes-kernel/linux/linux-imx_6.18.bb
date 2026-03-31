@@ -1,5 +1,5 @@
 # Copyright 2013-2016 Freescale Semiconductor
-# Copyright 2017-2025 NXP
+# Copyright 2017-2026 NXP
 # Copyright 2018 O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 #
@@ -28,10 +28,10 @@ SRCREV = "eabcb33ad4125583f76fb23ee668a7abd24ffd0c"
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "6.18.y"
+LINUX_VERSION = "6.18.20"
 # FIXME: Drop this line once LINUX_VERSION is stable and set correctly
 KERNEL_VERSION_SANITY_SKIP = "1"
-LOCALVERSION = "-1.0.0"
+LOCALVERSION = "-2.0.0"
 
 KBUILD_DEFCONFIG:mx6-generic-bsp = "imx_v7_defconfig"
 KBUILD_DEFCONFIG:mx7-generic-bsp = "imx_v7_defconfig"
