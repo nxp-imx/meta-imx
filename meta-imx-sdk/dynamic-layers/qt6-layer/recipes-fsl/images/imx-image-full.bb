@@ -29,7 +29,6 @@ IMAGE_INSTALL_OPENCV_PKGS = " \
 
 IMAGE_INSTALL_PARSEC = " \
     packagegroup-security-tpm2 \
-    packagegroup-security-parsec \
     swtpm \
     softhsm \
     os-release \
