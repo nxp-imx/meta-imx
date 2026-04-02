@@ -34,7 +34,6 @@ DPDK_EXAMPLES:append:mx95-nxp-bsp = ",ip_fragmentation,ip_reassembly,ipsec-secgw
 DPDK_APPS ?= "pdump,test-pmd,dumpcap,proc-info,test-crypto-perf"
 
 EXTRA_OEMESON = " \
-    -Ddrivers_install_subdir= \
     -Denable_examples_source_install=false \
     -Denable_apps=${DPDK_APPS} \
 "
@@ -54,6 +53,8 @@ do_install:append:mx95-nxp-bsp (){
     install -d ${D}/${sysconfdir}/dpdk
     install -m 0644 ${S}/nxp/ipsec/*.cfg ${D}/${sysconfdir}/dpdk
 }
+
+INSANE_SKIP:${PN} = "dev-so"
 
 RDEPENDS:${PN} = "kernel-module-dpdk-extras pciutils python3-core bash"
 
