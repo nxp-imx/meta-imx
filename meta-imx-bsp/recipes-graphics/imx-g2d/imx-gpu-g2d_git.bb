@@ -3,8 +3,8 @@
 # Copyright 2018 (C) O.S. Systems Software LTDA.
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "G2D library using i.MX GPU"
-LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://../LICENSE;md5=5a5269faabff841b575efa468fe8a52e"
+LICENSE = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 DEPENDS = "imx-gpu-viv"
 PROVIDES = "virtual/libg2d"
 
@@ -13,7 +13,7 @@ PV = "2.5.0+git"
 SRC_URI = "${IMX_GPU_G2D_SRC};branch=${SRCBRANCH}"
 IMX_GPU_G2D_SRC ?= "git://github.com/nxp-imx/imx-gpu-g2d.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "c73523df70e5c34549413e9f34a6ad44b4af18e7"
+SRCREV = "e7c4f7118bc7e09056f81500f0eb23efb5fd528a"
 
 S:append = "/source"
 
