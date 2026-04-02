@@ -2,10 +2,8 @@
 # Copyright 2017-2026 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "G2D library using i.MX DPU"
-# FIXME
-LICENSE = "CLOSED"
-#LICENSE = "Proprietary"
-#LIC_FILES_CHKSUM = "file://../LICENSE;md5=5a5269faabff841b575efa468fe8a52e"
+LICENSE = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 DEPENDS = "libdrm opencl-headers"
 PROVIDES += "virtual/libg2d"
 
@@ -14,7 +12,7 @@ PV = "2.5.0+git"
 SRC_URI = "${IMX_DPU_G2D_SRC};branch=${SRCBRANCH}"
 IMX_DPU_G2D_SRC ?= "git://github.com/nxp-imx/imx-dpu-g2d.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "8e275a74cfa3fb67672f038a509d989ebdef61b7"
+SRCREV = "b86db2b4573b01aeba57a4743f5f67ee32d9670a"
 
 S:append = "/source"
 
