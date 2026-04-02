@@ -1,5 +1,5 @@
 # NXP i.MX StandAlomeMM build
-require edk2-firmware_202508.bb
+require recipes-bsp/uefi/edk2-firmware_202508.bb
 SUMMARY = "i.MX StandAlomeMM binary produced by EDK2"
 DESCRIPTION = "StandAlomeMM is a PE/COFF binary produced by EDK2 for i.MX platforms"
 
