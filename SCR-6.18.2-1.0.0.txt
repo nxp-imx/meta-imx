@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.32-41349c6.bin
+Package:                     firmware-imx-8.32-687cf70.bin
 Version:                     8.32
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.6-29313e0.bin
+Package:                     firmware-ele-imx-2.0.6-e3af63a.bin
 Version:                     2.0.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-0b5aaa3
+Package:                     sof-zephyr-2.16.0-126674f
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-56f8a30
+Package:                     zephyr-demo-imx-4.4.0-54ee8ec
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -486,13 +486,13 @@ License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
 Description and comments:    i.MX secure enclave library
-Release Location:            https://github.com/NXP/imx-secure-enclave.git -b lf-6.18.2-1.0.0
+Release Location:            https://github.com/nxp-imx/imx-secure-enclave.git -b lf-6.18.2-1.0.0
 Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
 Package:                     imx-smw.git
-Version:                     5.3
+Version:                     5.4
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -773,7 +773,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-38c138c.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-d5daeba.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -792,7 +792,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-38c138c.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-d5daeba.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -811,7 +811,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.6-5d2f389.bin
+Package:                     mali-imx-r54p1.6-256c17c.bin
 Version:                     r54p1.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -922,8 +922,8 @@ Origin:                      NXP (MIT)
 
 Package:                     imx-gpu-g2d.git
 Version:                     2.5.0
-Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
-License File:                LICENSE.txt
+Outgoing License:            BSD-3-Clause 
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using Vivante GPU
@@ -934,7 +934,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-dpu-g2d.git
 Version:                     2.5.0
-Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
+Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -946,7 +946,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-g2d-pxp.git
 Version:                     2.5.0
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            Graphics
 Type of Content:             source
@@ -968,50 +968,14 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     libgpuperfcnt-6.4.11.p4.6-aarch64-wayland-f65a566.bin
-Version:                     6.4.11.p4.6
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
+Package:                     libgpuperfcnt.git
+Version:                     1.4.0
+Outgoing License:            BSD-3-Clause 
+License File:                LICENSE
 Package Category:            Graphics
-Type of Content:             binary
+Type of Content:             source
 Description and comments:    Library to retrieve i.MX GPU performance data
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
---------------------------------------------
-
-Package:                     libgpuperfcnt-6.4.11.p4.6-arm-fb-f65a566.bin
-Version:                     6.4.11.p4.6
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Library to retrieve i.MX GPU performance data
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
---------------------------------------------
-
-Package:                     libgpuperfcnt-6.4.11.p4.6-arm-wayland-f65a566.bin
-Version:                     6.4.11.p4.6
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Library to retrieve i.MX GPU performance data
-Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
-
---------------------------------------------
-
-Package:                     libgpuperfcnt-r54p1.6-aarch64-wayland-mali-f65a566.bin
-Version:                     r54p1.6
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                COPYING
-Package Category:            Graphics
-Type of Content:             binary
-Description and comments:    Library to retrieve i.MX GPU performance data
-Release Location:            Mirror
+Release Location:            https://github.com/nxp-imx/libgpuperfcnt.git -b lf-6.18.2-1.0.0
 Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
@@ -1170,12 +1134,12 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 Package:                     imx-vpuwrap.git
 Version:                     git
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    i.MX VPU wrapper library
-Release Location:            https://github.com/NXP/imx-vpuwrap.git -b lf-6.18.2-1.0.0
+Release Location:            https://github.com/nxp-imx/imx-vpuwrap.git -b lf-6.18.2-1.0.0
 Origin:                      NXP (LA_OPT_NXP_Software_License)
                              sqlite (Public Domain) - http://www.hwaci.com/sw/sqlite/index.html
 
@@ -1251,7 +1215,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     imx-dsp-2.1.10-ea4fe3f.bin
+Package:                     imx-dsp-2.1.10-571a57f.bin
 Version:                     2.1.10
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1259,7 +1223,7 @@ Package Category:            Multimedia
 Type of Content:             binary
 Description and comments:    Proprietary codecs and parsers
 Release Location:            Mirror
-Origin:                      NXP (LA_OPT_NXP_Software_License)
+Origin:                      NXP (BSD-3-clause)
                              Cadence (MIT)
                              Matt Redfearn (BSD-3-clause)
 
