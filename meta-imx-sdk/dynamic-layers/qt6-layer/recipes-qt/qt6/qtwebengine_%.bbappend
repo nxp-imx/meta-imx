@@ -3,7 +3,7 @@ SRC_URI:append:imx-nxp-bsp = " file://0001-Disable-Intel-backend-by-default.patc
 SRC_URI:append:mx6-nxp-bsp = " file://0001-Revert-fixup-gbm-Add-fallback-for-drmPrimeHandleToFD.patch;patchdir=src/3rdparty"
 SRC_URI:append:mx7-nxp-bsp = " file://0001-Revert-fixup-gbm-Add-fallback-for-drmPrimeHandleToFD.patch;patchdir=src/3rdparty"
 
-PACKAGECONFIG += "${PACKAGECONFIG_IMX}"
+PACKAGECONFIG:append = " ${PACKAGECONFIG_IMX}"
 PACKAGECONFIG_IMX             = ""
 PACKAGECONFIG_IMX:mx6-nxp-bsp = "skcms-portable"
 PACKAGECONFIG_IMX:mx7-nxp-bsp = "skcms-portable"
