@@ -1,2 +1,2 @@
-SRCBRANCH = "imx/next"
+SRCBRANCH = "lf-6.18.2_1.0.0"
 SRCREV = "${AUTOREV}"
