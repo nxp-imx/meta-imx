@@ -15,10 +15,7 @@ SRCREV = "74069aac60477e8c39c0209703d5dbdad178d51f"
 inherit pkgconfig
 
 TOOLCHAIN = "clang"
-
-do_compile() {
-    oe_runmake CLANGCC="${CC}" CLANGCXX="${CXX}"
-}
+EXTRA_OEMAKE += "CLANGCC='${CC}' CLANGCXX='${CXX}' SDKTARGETSYSROOT='${STAGING_DIR_NATIVE}'"
 
 do_install() {
     install -d ${D}${bindir}/imx-mm
