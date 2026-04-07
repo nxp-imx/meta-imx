@@ -266,6 +266,9 @@ SRC_URI += " \
     file://0103-MGS-6470-ccc-Change-configuration-to-enable-hostptr-.patch \
     file://0104-MGS-8011-ccc-Fix-the-problem-of-syntax-error-at-doub.patch \
     file://0105-MGS-8318-ccc-Fix-error-implicit-declaration-of-funct.patch \
+    file://0106-core-opencl-fix-inplace-transpose-race-by-enforcing-.patch \
+    file://0107-imgproc-perf-HoughLines-Fix-test-tolerance-and-compa.patch \
+    file://0108-imgproc-perf-HoughLines-Fix-lower-bound-for-line-cou.patch \
 "
 
 # Add opencv_extra
