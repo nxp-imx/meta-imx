@@ -1,4 +1,4 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI:append:imx-nxp-bsp = " \
     file://0001-systemd-Allow-pipewire-pulse-user-services-for-root-.patch \
 "
