@@ -1,0 +1,27 @@
+From 9200fa2d35a419b531cb20067f33244a0ae73e60 Mon Sep 17 00:00:00 2001
+From: Shengjiu Wang <shengjiu.wang@nxp.com>
+Date: Wed, 8 Apr 2026 14:25:29 +0800
+Subject: [PATCH 1/2] Revert "aplay: add missing break before the default case"
+
+Upstream-Status: Pending
+
+This reverts commit a12ec83fa93e16a76f5c57f128f819dfe332f96c.
+---
+ aplay/aplay.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/aplay/aplay.c b/aplay/aplay.c
+index 0050032..3dc599c 100644
+--- a/aplay/aplay.c
++++ b/aplay/aplay.c
+@@ -2737,7 +2737,6 @@ static void begin_wave(int fd, size_t cnt)
+ 	case SND_PCM_FORMAT_S32_LE:
+ 	case SND_PCM_FORMAT_FLOAT_LE:
+ 	case SND_PCM_FORMAT_S24_3LE:
+-		break;
+ 	default:
+ _format:
+ 		error(_("Wave doesn't support %s format..."), snd_pcm_format_name(hwparams.format));
+-- 
+2.34.1
+
