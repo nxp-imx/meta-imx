@@ -1,3 +1,7 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+SRC_URI:append:imx-nxp-bsp = " \
+    file://0001-systemd-Allow-pipewire-pulse-user-services-for-root-.patch \
+"
 # Disable pipewire-v4l2 on 32-bit to avoid Y2038 bug
 PACKAGECONFIG:append = " ${PACKAGECONFIG_PIPEWIRE_V4L2}"
 PACKAGECONFIG_PIPEWIRE_V4L2             = "pipewire-v4l2"
