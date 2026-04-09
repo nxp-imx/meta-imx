@@ -7,7 +7,7 @@ Outgoing License: LA_OPT_NXP_Software_License v63 May 2025 - Additional distribu
 License File:     LICENSE.txt
 
 Yocto Project recipe manifest:
-repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-whinlatter -m imx-6.18.20-2.0.0.xml
+repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-wrynose -m imx-6.18.20-2.0.0.xml
 
 Release tag: lf-6.18.20-2.0.0
 Release Location: https://www.nxp.com/design/software/embedded-software/i-mx-software/embedded-linux-for-i-mx-applications-processors:IMXLINUX
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-126674f
+Package:                     sof-zephyr-2.16.0-4d062a0
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-149c8b1
+Package:                     zephyr-demo-imx-4.4.0-afcfbf6
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
