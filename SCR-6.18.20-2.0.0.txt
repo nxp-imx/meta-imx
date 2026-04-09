@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-4d062a0
+Package:                     sof-zephyr-2.16.0-5d59752
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -1439,8 +1439,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx95-m7-demo-26.03.00.bin
-Version:                     26.03.00
+Package:                     imx95-m7-demo-26.06.00.bin
+Version:                     26.06.00
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M7_Processor
