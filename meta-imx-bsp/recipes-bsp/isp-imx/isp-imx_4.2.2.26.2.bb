@@ -5,9 +5,9 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 DEPENDS = "boost libdrm virtual/libg2d libtinyxml2 jsoncpp patchelf-native"
 
-SRC_URI[sha256sum] = "ab04d9eae4917591ca21f4ae13269c4e5a6f1b8e2f357cca1693682fa9a87249"
+SRC_URI[sha256sum] = "6490cf1f2759f6afebe8b74416bd6ab3e6ad6020ccf410e2a4802bc0a4daa3cc"
 
-IMX_SRCREV_ABBREV = "3cbd4a2"
+IMX_SRCREV_ABBREV = "9ff57e7"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent cmake systemd use-imx-headers
 
