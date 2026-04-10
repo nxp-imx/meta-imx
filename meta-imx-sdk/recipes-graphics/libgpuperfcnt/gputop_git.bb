@@ -10,7 +10,7 @@ GPUTOP_SRC ?= "git://github.com/nxp-imx/imx-gputop.git;protocol=https"
 SRCBRANCH = "release"
 SRC_URI = "${GPUTOP_SRC};branch=${SRCBRANCH} \
           file://0001-CMakeLists.txt-Update-cmake_minimum_required-to-3.5.patch"
-SRCREV = "752ec1d29d1c23e344c53010e25aaa8b3917800b"
+SRCREV = "65cd899b0fdf523da9daf6d925673bd48040305e"
 
 
 inherit cmake pkgconfig
