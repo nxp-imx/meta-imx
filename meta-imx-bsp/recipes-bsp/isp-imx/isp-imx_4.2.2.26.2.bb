@@ -1,4 +1,4 @@
-# Copyright 2020-2025 NXP
+# Copyright 2020-2026 NXP
 
 DESCRIPTION = "i.MX Verisilicon Software ISP"
 LICENSE = "Proprietary"
