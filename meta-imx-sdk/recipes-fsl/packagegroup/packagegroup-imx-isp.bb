@@ -16,6 +16,9 @@ LIBCAMERA_PKGS = " \
 "
 ISP_PKGS      ?= ""
 ISP_PKGS:mx8mp-nxp-bsp = " \
+    isp-imx \
+    basler-camera \
+    basler-camera-dev \
     kernel-module-isp-vvcam \
 "
 ISP_PKGS:mx8mm-nxp-bsp  = "${LIBCAMERA_PKGS}"
