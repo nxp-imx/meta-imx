@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-5d59752
+Package:                     sof-zephyr-2.16.0-c51be00
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-afcfbf6
+Package:                     zephyr-demo-imx-4.4.0-6182bc0
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -735,8 +735,8 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.26.1-3cbd4a2.bin
-Version:                     4.2.2.26.1
+Package:                     isp-imx-4.2.2.26.2-9ff57e7.bin
+Version:                     4.2.2.26.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
