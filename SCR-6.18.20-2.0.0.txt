@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-c51be00
+Package:                     sof-zephyr-2.16.0-1abeaa2
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
