@@ -12,4 +12,4 @@ IMXPARSER_SRC ?= "git://github.com/nxp-imx/imx-parser;protocol=https"
 SRC_URI = "${IMXPARSER_SRC};branch=${SRCBRANCH}"
 SRCREV = "ec8a9acf4b98f8d5f8a3f4069b1b01b78a36cbd9"
 
-CFLAGS += "-Wno-error=pointer-to-int-cast"
+CFLAGS += "-Wno-error=pointer-to-int-cast -Wno-error=int-to-pointer-cast"
