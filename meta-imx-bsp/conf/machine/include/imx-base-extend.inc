@@ -98,10 +98,10 @@ PREFERRED_VERSION_libdrm:imx-nxp-bsp ??= "2.4.127.imx"
 
 PREFERRED_VERSION_gfxreconstruct:imxvulkan             ??= "1.3.275.0"
 
-PREFERRED_VERSION_optee-os:imx-nxp-bsp     ??= "4.8.0.imx"
-PREFERRED_VERSION_optee-client:imx-nxp-bsp ??= "4.8.0.imx"
-PREFERRED_VERSION_optee-test:imx-nxp-bsp   ??= "4.8.0.imx"
-PREFERRED_VERSION_optee-os-tadevkit:imx-nxp-bsp   ??= "4.8.0.imx"
+PREFERRED_VERSION_optee-os:imx-nxp-bsp     ??= "4.10.0.imx"
+PREFERRED_VERSION_optee-client:imx-nxp-bsp ??= "4.10.0.imx"
+PREFERRED_VERSION_optee-test:imx-nxp-bsp   ??= "4.10.0.imx"
+PREFERRED_VERSION_optee-os-tadevkit:imx-nxp-bsp   ??= "4.10.0.imx"
 
 PREFERRED_VERSION_opencv:mx8-nxp-bsp ??= "4.13.0.imx"
 PREFERRED_VERSION_opencv:mx9-nxp-bsp ??= "4.13.0.imx"
