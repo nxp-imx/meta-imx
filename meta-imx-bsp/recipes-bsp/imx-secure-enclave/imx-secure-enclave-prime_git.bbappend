@@ -1,2 +1,0 @@
-SRCBRANCH = "master"
-SRCREV = "e9e6af89578a8050da2f3d05c2cb73670e0dd1f8"
