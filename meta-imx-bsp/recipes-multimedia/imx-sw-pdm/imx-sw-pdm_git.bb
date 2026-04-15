@@ -36,4 +36,4 @@ INSANE_SKIP:${PN} = "already-stripped"
 
 FILES:${PN} += "${datadir}/imx-mm ${libdir}/*"
 
-COMPATIBLE_MACHINE = "(mx8-nxp-bsp)"
+COMPATIBLE_MACHINE = "(mx8-nxp-bsp|mx9-nxp-bsp)"

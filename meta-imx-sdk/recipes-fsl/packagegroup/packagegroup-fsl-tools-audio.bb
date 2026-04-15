@@ -36,6 +36,7 @@ SRC_INSTALL:mx9-nxp-bsp = "imx-dspc-asrc nxp-ssrc"
 
 PDM_INSTALL ?= ""
 PDM_INSTALL:mx8m-nxp-bsp = "imx-sw-pdm"
+PDM_INSTALL:mx9-nxp-bsp  = "imx-sw-pdm"
 
 NXPAFE_INSTALL ?= ""
 NXPAFE_INSTALL:mx8mm-nxp-bsp = "nxp-afe"
