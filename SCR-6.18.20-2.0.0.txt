@@ -86,7 +86,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     imx-sc-firmware-1.18.0-N/A.bin
+Package:                     imx-sc-firmware-1.18.0-654907b.bin
 Version:                     1.18.0
 Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.6-e3af63a.bin
+Package:                     firmware-ele-imx-2.0.6-80c440e.bin
 Version:                     2.0.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-5cf6f9c
+Package:                     sof-zephyr-2.16.0-11f80ab
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-6182bc0
+Package:                     zephyr-demo-imx-4.4.0-0d55eab
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -376,7 +376,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     imx-optee-client.git
-Version:                     4.8.0.imx
+Version:                     4.10.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -389,7 +389,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-os.git
-Version:                     4.8.0.imx
+Version:                     4.10.0.imx
 Outgoing License:            BSD-2-Clause 
 License File:                LICENSE
 Package Category:            BSP
@@ -403,7 +403,7 @@ Origin:                      NXP (BSD-2-Clause)
 --------------------------------------------
 
 Package:                     imx-optee-test.git
-Version:                     4.8.0.imx
+Version:                     4.10.0.imx
 Outgoing License:            BSD-2-Clause (ta/) and GPL-2.0 (host/) 
 License File:                LICENSE.md
 Package Category:            BSP
@@ -467,7 +467,7 @@ Origin:                      NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     imx-seco-5.9.4.1-N/A.bin
+Package:                     imx-seco-5.9.4.1-0333596.bin
 Version:                     5.9.4.1
 Outgoing License:            LA_OPT_NXP_Software_License v57 July 2024 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -982,7 +982,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 Multimedia Packages
 --------------------------------------------
 
-Package:                     imx-codec-4.10.0-N/A.bin
+Package:                     imx-codec-4.10.0-464e9d8.bin
 Version:                     4.10.0
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1095,7 +1095,7 @@ Origin:                      NXP (LGPL-2.1)
 
 --------------------------------------------
 
-Package:                     imx-dspc-asrc-1.0.2-N/A.bin
+Package:                     imx-dspc-asrc-1.0.2-ce4ae5a.bin
 Version:                     1.0.2
 Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1158,7 +1158,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-1.40.0-N/A.bin
+Package:                     imx-vpu-hantro-1.40.0-52c7e45.bin
 Version:                     1.40.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1173,7 +1173,7 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.9.0-N/A
+Package:                     imx-vpu-hantro-daemon-1.9.0-a4cefcc
 Version:                     1.9.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
