@@ -8,8 +8,8 @@ DEPENDS = "flatbuffers python3-numpy python3-lxml python3-numpy-native"
 
 SRC_URI = "${VELA_SRC};branch=${SRCBRANCH}"
 VELA_SRC ?= "git://github.com/nxp-imx/ethos-u-vela.git;protocol=https"
-SRCBRANCH = "imx_4.4.1"
-SRCREV = "b3645c04be133a234b5caaa09f651d929e02ecc0" 
+SRCBRANCH = "imx_5.0.0"
+SRCREV = "16a96006ce051588af8849900e343b5ebd169be9"
 
 inherit setuptools3
 
@@ -19,6 +19,19 @@ do_compile:prepend() {
     export HTTPS_PROXY=${https_proxy}
     export http_proxy=${http_proxy}
     export https_proxy=${https_proxy}
+}
+
+do_install:append() {
+    # install libregor to libdir instead of ${PYTHON_DIR}
+    install -d ${D}${libdir}
+    rm ${D}${libdir}/${PYTHON_DIR}${PYTHON_ABI}/site-packages/ethosu/libregor*
+    for lib in $(find ${B} -name "libregor*"); do
+        cp -a --no-preserve=ownership $lib ${D}${libdir}
+    done
+
+    # install headers
+    install -d ${D}${includedir}
+    install -m 0644 ${S}/ethosu/regor/include/regor.h ${D}${includedir}
 }
 
 RDEPENDS:${PN} += "python3-flatbuffers python3-numpy python3-lxml"
