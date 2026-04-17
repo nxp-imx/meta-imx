@@ -1,0 +1,66 @@
+From 03671c32c0fa68f0c7adb377617de91eb12af994 Mon Sep 17 00:00:00 2001
+From: Chancel Liu <chancel.liu@nxp.com>
+Date: Wed, 15 Apr 2026 10:29:39 +0900
+Subject: [PATCH 3/3] ucm2: NXP: Add conf files for rpmsg sound cards
+
+Add conf files for rpmsg sound cards
+
+Upstream-Status: Inappropriate [i.MX-specific]
+Signed-off-by: Chancel Liu <chancel.liu@nxp.com>
+---
+ ucm2/conf.d/imx-audio-rpmsg/wm8524-audio.conf | 9 +++++++++
+ ucm2/conf.d/imx-audio-rpmsg/wm8960-audio.conf | 9 +++++++++
+ ucm2/conf.d/imx-audio-rpmsg/wm8962-audio.conf | 9 +++++++++
+ 3 files changed, 27 insertions(+)
+ create mode 100644 ucm2/conf.d/imx-audio-rpmsg/wm8524-audio.conf
+ create mode 100644 ucm2/conf.d/imx-audio-rpmsg/wm8960-audio.conf
+ create mode 100644 ucm2/conf.d/imx-audio-rpmsg/wm8962-audio.conf
+
+diff --git a/ucm2/conf.d/imx-audio-rpmsg/wm8524-audio.conf b/ucm2/conf.d/imx-audio-rpmsg/wm8524-audio.conf
+new file mode 100644
+index 0000000..862a2a4
+--- /dev/null
++++ b/ucm2/conf.d/imx-audio-rpmsg/wm8524-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."analog-HiFi" {
++        File "/NXP/wm8524.conf"
++        Comment "Play sound"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/imx-audio-rpmsg/wm8960-audio.conf b/ucm2/conf.d/imx-audio-rpmsg/wm8960-audio.conf
+new file mode 100644
+index 0000000..ab431d8
+--- /dev/null
++++ b/ucm2/conf.d/imx-audio-rpmsg/wm8960-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."analog-HiFi" {
++	File "/NXP/wm8960.conf"
++	Comment "Play high quality music"
++}
++
++BootSequence [
++]
+diff --git a/ucm2/conf.d/imx-audio-rpmsg/wm8962-audio.conf b/ucm2/conf.d/imx-audio-rpmsg/wm8962-audio.conf
+new file mode 100644
+index 0000000..4a876ad
+--- /dev/null
++++ b/ucm2/conf.d/imx-audio-rpmsg/wm8962-audio.conf
+@@ -0,0 +1,9 @@
++Syntax 4
++
++SectionUseCase."analog-HiFi" {
++	File "/NXP/wm8962.conf"
++	Comment "Play high quality music"
++}
++
++BootSequence [
++]
+-- 
+2.50.1
+
