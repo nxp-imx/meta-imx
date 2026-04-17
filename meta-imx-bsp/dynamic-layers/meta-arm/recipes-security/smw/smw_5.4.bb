@@ -37,7 +37,7 @@ PACKAGECONFIG_DRIVERS:mx8x-nxp-bsp   = "ele-seco"
 PACKAGECONFIG_DRIVERS:mx8ulp-nxp-bsp = "ele"
 PACKAGECONFIG_DRIVERS:mx91-nxp-bsp   = "ele"
 PACKAGECONFIG_DRIVERS:mx93-nxp-bsp   = "ele"
-PACKAGECONFIG_DRIVERS:mx943-nxp-bsp  = "ele"
+PACKAGECONFIG_DRIVERS:mx943-nxp-bsp  = "ele prime"
 PACKAGECONFIG_DRIVERS:mx95-nxp-bsp   = "ele"
 
 PACKAGECONFIG_FEATURES              = ""
@@ -48,6 +48,7 @@ PACKAGECONFIG_FEATURES:mx95-nxp-bsp = "tls"
 
 PACKAGECONFIG[ele] = "-DELE_ROOT=${STAGING_DIR_HOST},,imx-secure-enclave,,,ele-seco"
 PACKAGECONFIG[ele-seco] = "-DSECO_ROOT=${STAGING_DIR_HOST},,imx-secure-enclave-seco,,,ele"
+PACKAGECONFIG[prime] = "-DENABLE_V2X_PRIME=ON,-DENABLE_V2X_PRIME=OFF, imx-secure-enclave-prime"
 PACKAGECONFIG[tls] = "-DENABLE_TLS=ON,-DENABLE_TLS=OFF,openssl"
 PACKAGECONFIG[tpm2] = "-DTSS2_ROOT=${STAGING_DIR_HOST},,tpm2-tss"
 
