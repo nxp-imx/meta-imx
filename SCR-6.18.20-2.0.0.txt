@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.32-687cf70.bin
+Package:                     firmware-imx-8.32-ed8367f.bin
 Version:                     8.32
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-11f80ab
+Package:                     sof-zephyr-2.16.0-46d1ca2
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
