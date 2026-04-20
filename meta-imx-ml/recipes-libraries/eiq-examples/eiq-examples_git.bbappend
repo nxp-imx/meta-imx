@@ -1,3 +1,3 @@
 
 SRCBRANCH = "master"
-SRCREV = "a9ae8b028a76fb03623f7a57cac1b57bd70ad4a0"
+SRCREV = "578efcdd007da5d31fc1c0d70bf42b0b1d690424"
