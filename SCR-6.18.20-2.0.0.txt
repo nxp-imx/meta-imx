@@ -30,7 +30,7 @@ Origin:                      NXP (GPL-2.0)
 --------------------------------------------
 
 Package:                     uboot-imx.git
-Version:                     2025.04
+Version:                     2026.04
 Outgoing License:            GPL-2.0 
 License File:                Licenses/gpl-2.0.txt
 Package Category:            BSP
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-acc5365
+Package:                     zephyr-demo-imx-4.4.0-bae0fb0
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
