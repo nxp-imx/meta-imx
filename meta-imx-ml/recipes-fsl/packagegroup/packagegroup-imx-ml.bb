@@ -1,4 +1,4 @@
-# Copyright 2019-2025 NXP
+# Copyright 2019-2026 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Add packages for AI/ML build"
@@ -73,11 +73,13 @@ NEUTRON_PKGS:mx943-nxp-bsp = " \
     litert-neutron-delegate \
     neutron \
     tensorflow-lite-neutron-delegate \
+    eiq-examples-npu-utils \
 "
 NEUTRON_PKGS:mx95-nxp-bsp = " \
     litert-neutron-delegate \
     neutron \
     tensorflow-lite-neutron-delegate \
+    eiq-examples-npu-utils \
 "
 
 RDEPENDS:${PN} = " \
