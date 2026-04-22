@@ -1,5 +1,5 @@
 # Copyright 2026 NXP
 SRCBRANCH = "master"
-SRCREV = "23b4b31c86637edfbdc53abc6c4473bd00949316"
+SRCREV = "c8a1ce65d77cdc0750f0693bfbcf88ab75752868"
 
 PACKAGECONFIG_SWPDM:mx9-nxp-bsp = "swpdm"
