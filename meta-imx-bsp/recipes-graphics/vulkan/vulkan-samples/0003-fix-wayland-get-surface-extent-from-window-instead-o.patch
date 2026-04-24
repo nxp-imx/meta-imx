@@ -11,7 +11,7 @@ This patch fixes the issue by getting the actual surface extent from
 the platform window on Wayland, ensuring the swapchain is properly
 recreated with the correct dimensions.
 
-Upstream-Status: Submitted [https://github.com/KhronosGroup/Vulkan-Samples/pull/1520]
+Upstream-Status: Submitted [https://github.com/KhronosGroup/Vulkan-Samples/pull/1521]
 Signed-off-by: Ryan Zhang <ryan.zhang@nxp.com>
 ---
  framework/rendering/render_context.h | 18 ++++++++++++++----
