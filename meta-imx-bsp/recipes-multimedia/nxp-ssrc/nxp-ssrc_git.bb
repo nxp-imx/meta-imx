@@ -33,7 +33,7 @@ do_install() {
     install -m 0644 ${S}/libssrc.pc ${D}${libdir}/pkgconfig
 
     install -d ${D}/unit_tests/NXP_SSRC
-    install -m 0644 ${S}/exec_linuxcross/ssrcArmNeon ${D}/unit_tests/NXP_SSRC
+    install -m 0755 ${S}/exec_linuxcross/ssrcArmNeon ${D}/unit_tests/NXP_SSRC
 
     install -d ${D}${includedir}/imx-mm/audio-codec/nxp-ssrc
     install -m 0644 ${S}/ssrcArmNeon/baselibrary/include/* ${D}${includedir}/imx-mm/audio-codec/nxp-ssrc
