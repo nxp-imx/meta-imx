@@ -1,5 +1,8 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-SRC_URI += "file://0001-MGS-8163-fix-fix-the-surface-resize-logic-when-use-w.patch"
+SRC_URI += " \
+    file://0001-MGS-8163-fix-fix-the-surface-resize-logic-when-use-w.patch \
+    file://0002-fix-wayland-restore-focus-during-window-resize.patch \
+    file://0003-fix-wayland-get-surface-extent-from-window-instead-o.patch"
 inherit pkgconfig
 
 # Can only pick one of [wayland,xcb]
