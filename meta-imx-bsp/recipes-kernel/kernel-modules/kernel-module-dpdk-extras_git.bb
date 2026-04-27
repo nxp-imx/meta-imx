@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "${DPDK_EXTRAS_SRC};branch=${SRCBRANCH}"
 DPDK_EXTRAS_SRC ?= "git://github.com/nxp-qoriq/dpdk-extras.git;protocol=https"
 SRCBRANCH = "main"
-SRCREV = "e35d8737448c700b898866814db9006998216473"
+SRCREV = "e96cc7edfae55ae6b8e150f91198509717659c10"
 
 inherit module
 
