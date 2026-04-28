@@ -20,6 +20,6 @@ SRC_URI[imx8mp.sha256sum] = "6c1a12c39c0e2255edc348e8e43138793f279a92d990d1f91e1
 
 SRC_URI[imx95.sha256sum] = "7978737ebc19695783d5a60ae865198d79bbafdb97cdbd56d29c9a8eb5ad234e"
 
-SRC_URI[imx952.sha256sum] = "e717f3a673ef76ba433d192e01c40e2c4ebf7d9487b23e2e505bd07383d797ca"
+SRC_URI[imx952.sha256sum] = "6f7505d44d8ab0e0e9f6cf23f9c54554192c6fef2058c83c77710c56ab0f1ea8"
 
 COMPATIBLE_MACHINE = "(mx8mn-nxp-bsp|mx8mnul-nxp-bsp|mx8mp-nxp-bsp|mx8mpul-nxp-bsp|mx95-nxp-bsp|mx952-nxp-bsp)"
