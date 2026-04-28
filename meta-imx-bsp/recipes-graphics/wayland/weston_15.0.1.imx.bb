@@ -170,7 +170,12 @@ SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}
 SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-15.0.1"
-SRCREV = "888c15d994467a4f316f4c333abc1f4faf62b727"
+SRCREV = "5cd4b1562961dc9ac9a751952098a64fc94a04f8"
+
+SRC_URI:remove = " \
+    file://0001-vulkan-renderer-guard-surface-output-creation-with-b.patch \
+    file://0001-gl-shaders-Remove-asserts-relying-on-shader-compiler.patch \
+"
 
 PACKAGECONFIG:remove = "${PACKAGECONFIG_IMX_REMOVALS}"
 PACKAGECONFIG_IMX_REMOVALS ?= "vulkan wayland x11"
