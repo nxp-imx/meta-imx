@@ -1,2 +1,2 @@
-SRCBRANCH = "lf-6.18.2_1.0.0"
+SRCBRANCH = "imx/next"
 SRCREV = "3e6f5d83e397e11cccd3844e121463748f56de39"
