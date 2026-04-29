@@ -12,24 +12,10 @@ do_install() {
     oe_runmake install INSTALLDIR=${D}${nonarch_base_libdir}/firmware/nxp
 }
 
+#-----------------don't upstream, keep in imx ------------------------
 PACKAGES:remove = " \
-    ${PN}-nxp8801-sdio \
-    ${PN}-nxp8997-common \
-    ${PN}-nxp8997-pcie \
     ${PN}-nxp8997-sdio \
 "
 RDEPENDS:${PN}-all-sdio:remove = " \
-    ${PN}-nxp8801-sdio \
     ${PN}-nxp8997-sdio \
-"
-RDEPENDS:${PN}-all-pcie:remove = " \
-    ${PN}-nxp8997-pcie \
-"
-
-FILES:${PN}-nxpiw612-sdio = " \
-    ${nonarch_base_libdir}/firmware/nxp/sd_w61x_v1.bin.se \
-    ${nonarch_base_libdir}/firmware/nxp/sduart_nw61x_*.bin.se \
-    ${nonarch_base_libdir}/firmware/nxp/uartspi_n61x_*.bin.se \
-    ${nonarch_base_libdir}/firmware/nxp/uartuart_n61x_*.bin.se \
-    ${nonarch_base_libdir}/firmware/nxp/IW612_SD_RFTest/ \
 "
