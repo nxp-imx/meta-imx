@@ -1,4 +1,4 @@
-# Copyright 2020-2021,2024-2025 NXP
+# Copyright 2020-2021,2024-2026 NXP
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 DESCRIPTION = "Packagegroup for i.MX security packages"
@@ -36,9 +36,10 @@ RDEPENDS_CAAM_CRYPTO_APPS:mx943-nxp-bsp = ""
 RDEPENDS_CAAM_CRYPTO_APPS:mx95-nxp-bsp = ""
 
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE = ""
-RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8dxl-nxp-bsp = "python3-requests"
-RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8ulp-nxp-bsp = "python3-requests"
-RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx91-nxp-bsp   = "python3-requests"
-RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx93-nxp-bsp   = "python3-requests"
-RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx943-nxp-bsp   = "python3-requests"
-RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx95-nxp-bsp   = "python3-requests"
+RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8dxl-nxp-bsp = "itest python3-requests"
+RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8ulp-nxp-bsp = "itest python3-requests"
+RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx91-nxp-bsp   = "itest python3-requests"
+RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx93-nxp-bsp   = "itest python3-requests"
+RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx943-nxp-bsp  = "itest python3-requests"
+RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx95-nxp-bsp   = "itest python3-requests"
+RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx952-nxp-bsp  = "itest python3-requests"
