@@ -82,6 +82,14 @@ NEUTRON_PKGS:mx95-nxp-bsp = " \
     eiq-examples-npu-utils \
 "
 
+# Ara240 package
+ARA240_PKGS = ""
+ARA240_PKGS:append:imx8mp-lpddr4-frdm = " imx-nxp-ara2 \
+"
+ARA240_PKGS:append:imx95-15x15-lpddr4x-frdm = " imx-nxp-ara2 \
+"
+ARA240_PKGS:append:imx95-19x19-lpddr5-frdm-pro = " imx-nxp-ara2 \
+
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \
     ${ML_ACCELERATED_PKGS} \
@@ -89,4 +97,5 @@ RDEPENDS:${PN} = " \
     ${ML_GST_PROFILER} \
     ${ETHOS_U_PKGS} \
     ${NEUTRON_PKGS} \
+    ${ARA240_PKGS} \
 "
