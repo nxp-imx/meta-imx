@@ -12,5 +12,7 @@ require xen-tools.inc
 
 FILES:${PN}:append = " \
     ${sysconfdir}/xen/*.conf \
+    ${sysconfdir}/xen/readme.imx \
+    ${sysconfdir}/xen/imx95-disk.sh \
 "
 INSANE_SKIP:${PN}-dbg += "buildpaths"
