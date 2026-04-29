@@ -10,10 +10,7 @@ require xen-common.inc
 require xen.inc
 require xen-tools.inc
 
-RDEPENDS:remove = "${PN}-net-conf"
-
 FILES:${PN}:append = " \
     ${sysconfdir}/xen/*.conf \
-    ${libdir}/xen/bin/xen-9pfsd \
 "
 INSANE_SKIP:${PN}-dbg += "buildpaths"
