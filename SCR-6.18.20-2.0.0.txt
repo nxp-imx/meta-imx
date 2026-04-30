@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.32-47b9d76.bin
+Package:                     firmware-imx-8.32-8f960fc.bin
 Version:                     8.32
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -295,7 +295,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.1.0-cf634d4.bin
+Package:                     nxp-wlan-apps-1.1.0-c399d55.bin
 Version:                     1.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-3db6d48
+Package:                     sof-zephyr-2.16.0-77fded5
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.0-d8be6be
+Package:                     zephyr-demo-imx-4.4.0-79ce80e
 Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
