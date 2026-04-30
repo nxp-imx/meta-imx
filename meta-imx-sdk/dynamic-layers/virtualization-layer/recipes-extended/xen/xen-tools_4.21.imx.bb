@@ -10,6 +10,8 @@ require xen-common.inc
 require xen.inc
 require xen-tools.inc
 
+RDEPENDS:remove = "${PN}-net-conf"
+
 FILES:${PN}:append = " \
     ${sysconfdir}/xen/*.conf \
     ${sysconfdir}/xen/readme.imx \
