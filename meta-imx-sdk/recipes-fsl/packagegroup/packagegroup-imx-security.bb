@@ -15,6 +15,7 @@ RDEPENDS:${PN} = " \
     util-linux \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'smw-tests', '', d)} \
     ${RDEPENDS_EDGE_LOCK} \
+    ${RDEPENDS_SECURE_ENCLAVE_TOOLS} \
 "
 
 RDEPENDS_EDGE_LOCK ?= " \
@@ -43,3 +44,12 @@ RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx93-nxp-bsp   = "itest python3-requests"
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx943-nxp-bsp  = "python3-requests"
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx95-nxp-bsp   = "itest python3-requests"
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx952-nxp-bsp  = "python3-requests"
+
+RDEPENDS_SECURE_ENCLAVE_TOOLS = ""
+RDEPENDS_SECURE_ENCLAVE_TOOLS:mx8dxl-nxp-bsp = "imx-secure-enclave-seco"
+RDEPENDS_SECURE_ENCLAVE_TOOLS:mx8ulp-nxp-bsp = "imx-secure-enclave"
+RDEPENDS_SECURE_ENCLAVE_TOOLS:mx91-nxp-bsp   = "imx-secure-enclave"
+RDEPENDS_SECURE_ENCLAVE_TOOLS:mx93-nxp-bsp   = "imx-secure-enclave"
+RDEPENDS_SECURE_ENCLAVE_TOOLS:mx943-nxp-bsp  = "imx-secure-enclave imx-secure-enclave-seco imx-secure-enclave-prime"
+RDEPENDS_SECURE_ENCLAVE_TOOLS:mx95-nxp-bsp   = "imx-secure-enclave imx-secure-enclave-seco"
+RDEPENDS_SECURE_ENCLAVE_TOOLS:mx952-nxp-bsp  = "imx-secure-enclave imx-secure-enclave-seco imx-secure-enclave-prime"
