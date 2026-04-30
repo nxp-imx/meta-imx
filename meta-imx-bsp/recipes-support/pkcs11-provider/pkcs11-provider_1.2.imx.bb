@@ -3,10 +3,10 @@ DESCRIPTION = "\
 This is an Openssl 3.x provider to access Hardware or Software Tokens using \
 the PKCS#11 Cryptographic Token Interface\
 \
-This code targets version 3.1 of the interface but should be backwards \
+This code targets version 3.2 of the interface but should be backwards \
 compatible to previous versions as well.\
 "
-HOMEPAGE = "https://github.com/latchset/pkcs11-provider"
+HOMEPAGE = "https://github.com/openssl-projects/pkcs11-provider"
 SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b53b787444a60266932bd270d1cf2d45"
@@ -17,8 +17,8 @@ DEPENDS = "\
 
 SRC_URI = "${PKCS11_PROVIDER_SRC};branch=${SRCBRANCH}"
 PKCS11_PROVIDER_SRC ?= "git://github.com/nxp-imx/${BPN}.git;branch=main;protocol=https"
-SRCBRANCH = "lf_1.0.y"
-SRCREV = "4c572524d24d1cd08977d73806861068d0bbd65e"
+SRCBRANCH = "lf_1.2.y"
+SRCREV = "68ef4c043c5dda140dda418e423dfa488608e12f"
 
 inherit meson pkgconfig
 
