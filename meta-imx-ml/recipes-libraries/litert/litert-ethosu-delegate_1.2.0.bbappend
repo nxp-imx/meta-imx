@@ -1,5 +1,7 @@
 require litert-${PV}.inc
 
+DEPENDS += "ethos-u-vela"
+
 SRC_URI:remove = "file://0001-ethosu_drv.h-Fix-gcc15-build-issues.patch"
 
 SRCBRANCH_ethosu = "master"
