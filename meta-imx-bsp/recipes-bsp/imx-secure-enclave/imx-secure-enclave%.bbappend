@@ -1,4 +1,4 @@
 # Pick up the new version for release
 
 SRCBRANCH = "master"
-SRCREV = "c0067da3d22c7e2828641cd0ca0de1b87f752275"
+SRCREV = "4a2e9dbb19a9e31bc6f358060f8e357ae6a524be"
