@@ -10,11 +10,15 @@ require xen-common.inc
 require xen.inc
 require xen-tools.inc
 
-RDEPENDS:remove = "${PN}-net-conf"
-
 FILES:${PN}:append = " \
     ${sysconfdir}/xen/*.conf \
     ${sysconfdir}/xen/readme.imx \
     ${sysconfdir}/xen/imx95-disk.sh \
 "
+
+# The xen-tools-net-conf package configures systemd-networkd to create a xenbr0 bridge
+# This reconfigures the network interface during boot, breaking NFS root mounts
+# Only include it when NFS is not in use
+RDEPENDS:${PN}:remove = "${@bb.utils.contains('DISTRO_FEATURES', 'nfs', '${PN}-net-conf', '', d)}"
+
 INSANE_SKIP:${PN}-dbg += "buildpaths"
