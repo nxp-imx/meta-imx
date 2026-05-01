@@ -1,2 +1,2 @@
 SRCBRANCH = "imx/next"
-SRCREV = "54a54654798a68761fbaece23dc0e9099b2120ef"
+SRCREV = "80681f24be2e52e6893673edec7dba5cf9bbcdea"
