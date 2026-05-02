@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-4e3d573
+Package:                     sof-zephyr-2.16.0-8d75e2c
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -532,7 +532,7 @@ Origin:                   NXP (BSD-3-clause)
 --------------------------------------------
 
 Package:                     pkcs11-provider.git
-Version:                     1.0.imx
+Version:                     1.2.imx
 Outgoing License:            Apache-2.0 
 License File:                COPYING
 Package Category:            BSP
