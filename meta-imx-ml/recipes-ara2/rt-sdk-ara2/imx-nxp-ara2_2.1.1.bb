@@ -31,7 +31,7 @@ RDEPENDS:${PN} += " \
     dbus-lib \
     libusb1 \
     gstreamer1.0 \
-    uiodma-driver \
+    kernel-module-uiodma \
     eiq-aaf-connector \
 "
 
