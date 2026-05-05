@@ -83,10 +83,10 @@ PREFERRED_VERSION_gstreamer1.0-rtsp-server:imx-nxp-bsp  ??= "1.28.1"
 # libcamera fork for certain SOCs
 PREFERRED_VERSION_libcamera ??= "${PREFERRED_VERSION_LIBCAMERA_IMX}"
 PREFERRED_VERSION_LIBCAMERA_IMX                = ""
-PREFERRED_VERSION_LIBCAMERA_IMX:mx95-nxp-bsp   = "0.6.0.imx"
-PREFERRED_VERSION_LIBCAMERA_IMX:mx8mm-nxp-bsp  = "0.6.0.imx"
-PREFERRED_VERSION_LIBCAMERA_IMX:mx8ulp-nxp-bsp = "0.6.0.imx"
-PREFERRED_VERSION_LIBCAMERA_IMX:mx8mq-nxp-bsp  = "0.6.0.imx"
+PREFERRED_VERSION_LIBCAMERA_IMX:mx95-nxp-bsp   = "0.7.1.imx"
+PREFERRED_VERSION_LIBCAMERA_IMX:mx8mm-nxp-bsp  = "0.7.1.imx"
+PREFERRED_VERSION_LIBCAMERA_IMX:mx8ulp-nxp-bsp = "0.7.1.imx"
+PREFERRED_VERSION_LIBCAMERA_IMX:mx8mq-nxp-bsp  = "0.7.1.imx"
 
 PREFERRED_VERSION_weston:imx-nxp-bsp ??= "15.0.1.imx"
 # i.MX 6 & 7 stay on weston 10.0 for fbdev
