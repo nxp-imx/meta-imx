@@ -2,7 +2,7 @@ SUMMARY = "NXP RT-SDK ARA2"
 DESCRIPTION = "Runtime SDK for AI/ML acceleration with Ara240 NPU on i.MX SoCs"
 HOMEPAGE = "https://github.com/nxp-imx/rt-sdk-ara2"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
+LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac" 
 
 DEPENDS += "glib-2.0"
 
