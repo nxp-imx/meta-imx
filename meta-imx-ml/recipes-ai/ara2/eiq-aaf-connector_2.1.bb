@@ -1,0 +1,30 @@
+SUMMARY = "Connector - OpenAI compatible server for AI Agentic Framework."
+DESCRIPTION = "REST-based server for inference on LLMs running on i.MX devices with Kinara NPU"
+LICENSE = "Proprietary"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d8ff2d641cc45adce1b1882be29d1e35"
+
+SRC_URI = "git://github.com/nxp-imx-support/eiq-aaf-connector.git;branch=main;protocol=https"
+SRC_URI += "file://install.sh"
+SRCREV = "b968fef7eba689aa75ded8e9cca9cf334f9b90ee"
+
+inherit python_setuptools_build_meta
+
+do_install() {
+    install -d ${D}${datadir}/${BPN}
+    install -m 0755 ${UNPACKDIR}/install.sh ${D}${datadir}/${BPN}/install.sh
+
+    install -d ${D}${bindir}
+    install -m 0755 ${S}/aaf-connector ${D}${bindir}
+
+    install -d ${D}/${datadir}/python-wheels
+    install -m 0644 ${UNPACKDIR}/../dist/*.whl ${D}/${datadir}/python-wheels
+
+    install -d ${D}/${datadir}/eiq/aaf_connector
+    install -m 0644 ${S}/config/server_config.json ${D}/${datadir}/eiq/aaf_connector
+}
+
+FILES:${PN} += " \
+	${datadir}/python-wheels \
+	${datadir}/eiq/aaf_connector \
+"
+

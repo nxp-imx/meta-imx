@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright 2025 NXP
+# Copyright 2025-2026 NXP
 # SPDX-License-Identifier: BSD-3-Clause
 
 set -e
