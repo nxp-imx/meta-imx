@@ -17,6 +17,3 @@ do_install() {
     install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra
     install -m 0644 ${B}/uiodma.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra/
 }
-
-FILES:${PN} = "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra/uiodma.ko"
-
