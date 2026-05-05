@@ -11,7 +11,6 @@ IMX_SRCREV_ABBREV = "ffd778f"
 SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
 SRC_URI += "file://install.sh"
 
-SRC_URI[md5sum] = "0becef351717e92c2ad55d9c3a649a96"
 SRC_URI[sha256sum] = "8999993d86415f492a2cfc889a502545fdee0a0edfa9ff401f8480f664e63a98"
 
 S = "${UNPACKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
@@ -27,13 +26,13 @@ do_install() {
 
 
 RDEPENDS:${PN} += " \
-	uv \
+    uv \
     dbus \
     dbus-lib \
     libusb1 \
-	gstreamer1.0 \
-	uiodma-driver \
-	eiq-aaf-connector \
+    gstreamer1.0 \
+    uiodma-driver \
+    eiq-aaf-connector \
 "
 
 FILES_SOLIBSDEV = ""
