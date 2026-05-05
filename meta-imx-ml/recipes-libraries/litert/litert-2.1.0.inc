@@ -2,7 +2,7 @@
 
 LITERT_SRC ?= "gitsm://github.com/nxp-imx/litert-imx.git;protocol=https"
 SRCBRANCH_litert = "imx-v2.1.0"
-SRCREV_litert = "3f5597754b2e52ff895e3ed858cf033757343447"
+SRCREV_litert = "3f5597754b2e52ff895e3ed858cf033757343447" 
 
 # ============================================================================
 # All cmake dependency sources (git, no network access during build)
