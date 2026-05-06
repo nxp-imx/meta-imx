@@ -1,47 +1,57 @@
-# Copyright 2025 NXP
+# Copyright 2025-2026 NXP
 DESCRIPTION = "LiteRT VX Delegate"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7d6260e4f3f6f85de05af9c8f87e6fb5"
 
-DEPENDS = "litert tim-vx tensorflow-lite-host-tools-native"
+DEPENDS = "litert tim-vx litert-flatbuffers-native"
 
 require litert-${PV}.inc
 
 TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-vx-delegate-imx.git;protocol=https" 
-SRCBRANCH_vx = "lf-6.12.34_2.1.0"
-SRCREV_vx = "5d7eb90dc208b4a9625d6a1ba7458a623894bc48"
+SRCBRANCH_vx = "imx-v2.19.0"
+SRCREV_vx = "b8c95c9a1b22461307b280f90618d879b547491e"
 
 SRCREV_FORMAT = "vx_tf"
 
 SRC_URI = "${TENSORFLOW_LITE_VX_DELEGATE_SRC};branch=${SRCBRANCH_vx};name=vx \
            ${LITERT_SRC};branch=${SRCBRANCH_litert};name=litert;destsuffix=litertgit \
+           ${SRC_URI_DEPS} \
 "
-
+SRCREV_FORMAT = "vx_litert_${SRCREV_FORMAT_DEPS}"
 
 inherit python3native cmake
 
 EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR}"
 EXTRA_OECMAKE += " \
      -DBUILD_FOR_LITERT=ON \
-     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
      -DTFLITE_HOST_TOOLS_DIR=${STAGING_BINDIR_NATIVE} \
      -DTIM_VX_INSTALL=${STAGING_DIR_HOST}/usr \
-     -DFETCHCONTENT_SOURCE_DIR_TENSORFLOW=${UNPACKDIR}/litertgit \
-     ${S} \
+     -DFETCHCONTENT_SOURCE_DIR_LITERT=${UNPACKDIR}/litertgit \
+     ${DEPS_CMAKE_FLAGS} \
 "
+
+OECMAKE_TARGET_COMPILE = "tensorflow-lite litert_vx_delegate"
 
 CXXFLAGS += "-fPIC"
 
 do_configure[network] = "1"
 do_configure:prepend() {
-    export HTTP_PROXY=${http_proxy}
-    export HTTPS_PROXY=${https_proxy}
-    export http_proxy=${http_proxy}
-    export https_proxy=${https_proxy}
-
     # There is no Fortran compiler in the toolchain, but bitbake sets this variable anyway
     # with unavailable binary.
     export FC=""
+}
+
+do_configure:append() {
+    # Find all schema_generated.h files and fix version checks
+    find "${DEPS_DIR}/tensorflow" -name "*_generated.h" -type f | while read hdr; do
+        if grep -q "FLATBUFFERS_VERSION_MAJOR == 24" "$hdr" 2>/dev/null; then
+            sed -i \
+                -e 's/FLATBUFFERS_VERSION_MAJOR == 24/FLATBUFFERS_VERSION_MAJOR == 25/g' \
+                -e 's/FLATBUFFERS_VERSION_MINOR == [0-9]*/FLATBUFFERS_VERSION_MINOR == 9/g' \
+                -e 's/FLATBUFFERS_VERSION_REVISION == [0-9]*/FLATBUFFERS_VERSION_REVISION == 23/g' \
+               "$hdr"
+        fi
+    done
 }
 
 do_install() {
