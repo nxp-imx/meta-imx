@@ -15,7 +15,7 @@ do_install() {
 PACKAGES =+ " \
     ${PN}-nxpaw693-sdio \
 "
-RDEPENDS:${PN}-all-sdio = " \
+RDEPENDS:${PN}-all-sdio += " \
     ${PN}-nxpaw693-sdio \
 "
 FILES:${PN}-nxpaw693-sdio += " \
