@@ -8,7 +8,7 @@ DEPENDS = "litert tim-vx litert-flatbuffers-native"
 require litert-${PV}.inc
 
 TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-vx-delegate-imx.git;protocol=https" 
-SRCBRANCH_vx = "imx-v2.19.0"
+SRCBRANCH_vx = "lf-6.18.20_2.0.0"
 SRCREV_vx = "2f5448e0c899fe3c31e4f43b65e0612af4cf84a0"
 
 SRCREV_FORMAT = "vx_tf"
