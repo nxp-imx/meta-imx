@@ -3,7 +3,10 @@ DESCRIPTION = "Builds the uiodma kernel module for the ARA SDK against the custo
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 
-SRC_URI = "git://github.com/nxp-imx-support/uiodma-driver.git;branch=main;protocol=https"
+SRC_URI = "${UIODMA_SRC};branch=${SRCBRANCH}"
+UIODMA_SRC ?= "git://github.com/nxp-imx-support/uiodma-driver.git;protocol=https"
+SRCBRANCH = "master"
+
 SRCREV = "ba17c6a82dd98d74abc434291059c5d27a96ea96"
 
 S = "${UNPACKDIR}/${BPN}-${PV}/uiodma_cache_management"
