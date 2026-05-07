@@ -3,8 +3,10 @@ DESCRIPTION = "REST-based server for inference on LLMs running on i.MX devices w
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d8ff2d641cc45adce1b1882be29d1e35"
 
-SRC_URI = "git://github.com/nxp-imx-support/eiq-aaf-connector.git;branch=main;protocol=https"
+SRC_URI = "${EIQ_AAF_CONNECTOR_SRC};branch=${SRCBRANCH}"
 SRC_URI += "file://install.sh"
+EIQ_AAF_CONNECTOR_SRC ?= "git://github.com/nxp-imx-support/eiq-aaf-connector.git;protocol=https"
+SRCBRANCH = "master"
 SRCREV = "b968fef7eba689aa75ded8e9cca9cf334f9b90ee"
 
 inherit python_setuptools_build_meta
