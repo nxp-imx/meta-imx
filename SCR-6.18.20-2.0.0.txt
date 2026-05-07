@@ -320,8 +320,8 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-1e59ce2
-Version:                     2.16.0
+Package:                     sof-zephyr-2.15.6-cfa5f02
+Version:                     2.15.6
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            BSP
@@ -334,8 +334,8 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-e71ff18
-Version:                     4.4.5
+Package:                     zephyr-demo-imx-4.4.0-6d04936
+Version:                     4.4.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            BSP
@@ -556,7 +556,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     el2go-agent.git
-Version:                     6.4.2
+Version:                     6.5.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            BSP
@@ -1711,7 +1711,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-2.1.1-ffd778f.bin
+Package:                     imx-nxp-ara2-2.1.1-860b75d.bin
 Version:                     2.1.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
