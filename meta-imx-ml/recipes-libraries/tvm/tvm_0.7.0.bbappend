@@ -10,7 +10,7 @@ SRC_URI = "${TVM_SRC};branch=${SRCBRANCH}\
 "
 TVM_SRC ?= "git://github.com/nxp-imx/eiq-tvm-imx.git;protocol=https"
 SRCBRANCH = "lf-6.18.20_2.0.0"
-SRCREV = "249079f58739cb5604ec99c25e8f4c10d38dde59"
+SRCREV = "249079f58739cb5604ec99c25e8f4c10d38dde59" 
 
 EXTRA_OECMAKE += "\
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
