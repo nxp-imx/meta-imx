@@ -1,5 +1,5 @@
 
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.18.20_2.0.0"
 SRCREV = "9b3c82c3ce6550b567515a7aeac40da717d26dd4"
 
 do_install:append() {
