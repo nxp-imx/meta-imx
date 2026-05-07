@@ -7,5 +7,5 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=a8fa504109e4cd7ea575bc49ea4be560 \
                     file://LICENSE-GPL;md5=10e86b5d2a6cb0e2b9dcfdd26a9ac58d"
 
 
-SRCBRANCH = "lf_4.10.y"
+SRCBRANCH = "lf-6.18.20_2.0.0"
 SRCREV = "3f54ef2f96c8772dc80a43044c96238236ab6350"
