@@ -1,3 +1,3 @@
 # Copyright 2026 NXP
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.18.20_2.0.0"
 SRCREV = "d20583345a8be6b4582fc735034cf79d8e9f746b"
