@@ -9,7 +9,7 @@ PV = "4.11.0+git"
 
 DEPENDS = "imx-parser"
 
-SRCBRANCH = "master"
+SRCBRANCH = "MM_04.11.00_2605_L6.18.20"
 IMXMP4PARSER_SRC ?= "git://github.com/nxp-imx/imx-mp4-parser.git;protocol=https"
 SRC_URI = "${IMXMP4PARSER_SRC};branch=${SRCBRANCH}"
 SRCREV = "feb234f0dffcdd23c1b9147e11b091721074dfda"
