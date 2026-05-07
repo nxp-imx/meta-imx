@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 
 PV = "2.2.3+git"
 
-SRCBRANCH = "main"
+SRCBRANCH = "MM_04.11.00_2605_L6.18.20"
 NXP_SSRC_SRC ?= "git://github.com/nxp-imx/nxp-ssrc.git;protocol=https"
 SRC_URI = "${NXP_SSRC_SRC};branch=${SRCBRANCH}"
 SRCREV = "4e3ea9a493174ef615e160763fb5c10ede260ed3"
