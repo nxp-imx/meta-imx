@@ -288,7 +288,7 @@ SRC_URI = " \
 "
 QEMU_SRC ?= "git://github.com/nxp-imx/imx-qemu.git;protocol=https;"
 SRCBRANCH_imx-qemu = "lf-6.18.20_2.0.0"
-SRCREV_imx-qemu = "f4f861cc7dfae22ba9ef35e452c117f5eca4dcb8"
+SRCREV_imx-qemu = "f4f861cc7dfae22ba9ef35e452c117f5eca4dcb8" 
 SRCREV_berkeley-softfloat-3 = "b64af41c3276f97f0e181920400ee056b9c88037"
 SRCREV_berkeley-testfloat-3 = "e7af9751d9f9fd3b47911f51a5cfd08af256a9ab"
 SRCREV_keycodemapdb = "f5772a62ec52591ff6870b7e8ef32482371f22c6"
