@@ -12,7 +12,7 @@ SRC_URI = "${PROVAPP_SRC};branch=${SRCBRANCH};name=oem-prov-app"
 PROVAPP_SRC ?= "git://github.com/nxp-imx/oem-prov-app.git;protocol=https"
 SRCBRANCH = "master"
 
-PV = "2.0+git${SRCPV}"
+PV = "2.3+git${SRCPV}"
 
 SRCREV = "cc20129201b144960e5424ed7e4649fd6296f846"
 
