@@ -267,6 +267,26 @@ state.audmixwm8962 {
 	}
 	control.22 {
 		iface MIXER
+		name 'DAC Monomix Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.23 {
+		iface MIXER
+		name 'ADC Monomix Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.24 {
+		iface MIXER
 		name 'ADC High Performance Switch'
 		value true
 		comment {
@@ -275,7 +295,7 @@ state.audmixwm8962 {
 			count 1
 		}
 	}
-	control.23 {
+	control.25 {
 		iface MIXER
 		name 'Beep Volume'
 		value 0
@@ -289,7 +309,7 @@ state.audmixwm8962 {
 			dbvalue.0 -9999999
 		}
 	}
-	control.24 {
+	control.26 {
 		iface MIXER
 		name 'Headphone Volume'
 		value.0 93
@@ -305,7 +325,7 @@ state.audmixwm8962 {
 			dbvalue.1 -2800
 		}
 	}
-	control.25 {
+	control.27 {
 		iface MIXER
 		name 'Headphone Switch'
 		value.0 true
@@ -316,7 +336,7 @@ state.audmixwm8962 {
 			count 2
 		}
 	}
-	control.26 {
+	control.28 {
 		iface MIXER
 		name 'Headphone ZC Switch'
 		value.0 false
@@ -327,7 +347,7 @@ state.audmixwm8962 {
 			count 2
 		}
 	}
-	control.27 {
+	control.29 {
 		iface MIXER
 		name 'Headphone Aux Volume'
 		value.0 7
@@ -343,7 +363,7 @@ state.audmixwm8962 {
 			dbvalue.1 0
 		}
 	}
-	control.28 {
+	control.30 {
 		iface MIXER
 		name 'Headphone Mixer Switch'
 		value.0 false
@@ -354,7 +374,7 @@ state.audmixwm8962 {
 			count 2
 		}
 	}
-	control.29 {
+	control.31 {
 		iface MIXER
 		name 'HPMIXL IN4L Volume'
 		value 7
@@ -368,7 +388,7 @@ state.audmixwm8962 {
 			dbvalue.0 600
 		}
 	}
-	control.30 {
+	control.32 {
 		iface MIXER
 		name 'HPMIXL IN4R Volume'
 		value 7
@@ -382,7 +402,7 @@ state.audmixwm8962 {
 			dbvalue.0 600
 		}
 	}
-	control.31 {
+	control.33 {
 		iface MIXER
 		name 'HPMIXL MIXINL Volume'
 		value 1
@@ -396,7 +416,7 @@ state.audmixwm8962 {
 			dbvalue.0 0
 		}
 	}
-	control.32 {
+	control.34 {
 		iface MIXER
 		name 'HPMIXL MIXINR Volume'
 		value 1
@@ -410,7 +430,7 @@ state.audmixwm8962 {
 			dbvalue.0 0
 		}
 	}
-	control.33 {
+	control.35 {
 		iface MIXER
 		name 'HPMIXR IN4L Volume'
 		value 7
@@ -424,7 +444,7 @@ state.audmixwm8962 {
 			dbvalue.0 600
 		}
 	}
-	control.34 {
+	control.36 {
 		iface MIXER
 		name 'HPMIXR IN4R Volume'
 		value 7
@@ -438,7 +458,7 @@ state.audmixwm8962 {
 			dbvalue.0 600
 		}
 	}
-	control.35 {
+	control.37 {
 		iface MIXER
 		name 'HPMIXR MIXINL Volume'
 		value 1
@@ -452,7 +472,7 @@ state.audmixwm8962 {
 			dbvalue.0 0
 		}
 	}
-	control.36 {
+	control.38 {
 		iface MIXER
 		name 'HPMIXR MIXINR Volume'
 		value 1
@@ -466,7 +486,7 @@ state.audmixwm8962 {
 			dbvalue.0 0
 		}
 	}
-	control.37 {
+	control.39 {
 		iface MIXER
 		name 'Speaker Boost Volume'
 		value 3
@@ -480,7 +500,7 @@ state.audmixwm8962 {
 			dbvalue.0 450
 		}
 	}
-	control.38 {
+	control.40 {
 		iface MIXER
 		name 'EQ Switch'
 		value false
@@ -490,7 +510,7 @@ state.audmixwm8962 {
 			count 1
 		}
 	}
-	control.39 {
+	control.41 {
 		iface MIXER
 		name 'EQ1 Volume'
 		value.0 12
@@ -506,7 +526,7 @@ state.audmixwm8962 {
 			dbvalue.1 0
 		}
 	}
-	control.40 {
+	control.42 {
 		iface MIXER
 		name 'EQ2 Volume'
 		value.0 12
@@ -522,7 +542,7 @@ state.audmixwm8962 {
 			dbvalue.1 0
 		}
 	}
-	control.41 {
+	control.43 {
 		iface MIXER
 		name 'EQ3 Volume'
 		value.0 12
@@ -538,7 +558,7 @@ state.audmixwm8962 {
 			dbvalue.1 0
 		}
 	}
-	control.42 {
+	control.44 {
 		iface MIXER
 		name 'EQ4 Volume'
 		value.0 12
@@ -554,7 +574,7 @@ state.audmixwm8962 {
 			dbvalue.1 0
 		}
 	}
-	control.43 {
+	control.45 {
 		iface MIXER
 		name 'EQ5 Volume'
 		value.0 12
@@ -570,7 +590,7 @@ state.audmixwm8962 {
 			dbvalue.1 0
 		}
 	}
-	control.44 {
+	control.46 {
 		iface MIXER
 		name 'EQL Coefficients'
 		value '0fca040000d81eb5f1450b7501c51c58f3730a540558168ef82907ad1103056405594000'
@@ -580,7 +600,7 @@ state.audmixwm8962 {
 			count 36
 		}
 	}
-	control.45 {
+	control.47 {
 		iface MIXER
 		name 'EQR Coefficients'
 		value '0fca040000d81eb5f1450b7501c51c58f3730a540558168ef82907ad1103056405594000'
@@ -590,7 +610,7 @@ state.audmixwm8962 {
 			count 36
 		}
 	}
-	control.46 {
+	control.48 {
 		iface MIXER
 		name '3D Switch'
 		value false
@@ -600,17 +620,17 @@ state.audmixwm8962 {
 			count 1
 		}
 	}
-	control.47 {
+	control.49 {
 		iface MIXER
 		name '3D Coefficients'
-		value '0040000000000000'
+		value '0000000000000000'
 		comment {
 			access 'read write'
 			type BYTES
 			count 8
 		}
 	}
-	control.48 {
+	control.50 {
 		iface MIXER
 		name 'DF1 Switch'
 		value false
@@ -620,7 +640,7 @@ state.audmixwm8962 {
 			count 1
 		}
 	}
-	control.49 {
+	control.51 {
 		iface MIXER
 		name 'DF1 Coefficients'
 		value '0000000000000000000000000000'
@@ -630,7 +650,7 @@ state.audmixwm8962 {
 			count 14
 		}
 	}
-	control.50 {
+	control.52 {
 		iface MIXER
 		name 'DRC Switch'
 		value false
@@ -640,7 +660,7 @@ state.audmixwm8962 {
 			count 1
 		}
 	}
-	control.51 {
+	control.53 {
 		iface MIXER
 		name 'DRC Coefficients'
 		value '000c0925000000000000'
@@ -650,7 +670,7 @@ state.audmixwm8962 {
 			count 10
 		}
 	}
-	control.52 {
+	control.54 {
 		iface MIXER
 		name 'VSS Switch'
 		value false
@@ -660,7 +680,7 @@ state.audmixwm8962 {
 			count 1
 		}
 	}
-	control.53 {
+	control.55 {
 		iface MIXER
 		name 'VSS Coefficients'
 		value '008c020000350700003a4100008b7d00003a4100008cfee800780000003fb260002d18180020000000f1834000fb830000eeaec000fbac4000f17f8000f43b4000f5fb0000ea10c000fcc58000e275c00004b48000d4f9800004914000d8a48000023dc000cf7a8000dc060000f2dac000baf340000a7940001c068000fd2d00001ce840000ddc4000fc9d000009558000fe7e80000eab4000f99880000987c000fd2c400009480000035f400000870000fae4c000000b400004e18000011f4000f8b00000fbcbc00004f3800007df4000ff070000efd70000fbaf4000108a80001107c000e0080000d276000020cf400030234000fd69c0002835000006330000d9f6c000f33340000f420000040c8000fb3f8000f757c0000354000000c6c0000312c000fd8580'
@@ -670,7 +690,7 @@ state.audmixwm8962 {
 			count 296
 		}
 	}
-	control.54 {
+	control.56 {
 		iface MIXER
 		name 'HPF1 Switch'
 		value false
@@ -680,7 +700,7 @@ state.audmixwm8962 {
 			count 1
 		}
 	}
-	control.55 {
+	control.57 {
 		iface MIXER
 		name 'HPF2 Switch'
 		value false
@@ -690,7 +710,7 @@ state.audmixwm8962 {
 			count 1
 		}
 	}
-	control.56 {
+	control.58 {
 		iface MIXER
 		name 'HPF Coefficients'
 		value '0000'
@@ -700,7 +720,7 @@ state.audmixwm8962 {
 			count 2
 		}
 	}
-	control.57 {
+	control.59 {
 		iface MIXER
 		name 'HD Bass Switch'
 		value false
@@ -710,7 +730,7 @@ state.audmixwm8962 {
 			count 1
 		}
 	}
-	control.58 {
+	control.60 {
 		iface MIXER
 		name 'HD Bass Coefficients'
 		value '0002bd12007c586c00538121003f8bd80032f52d0065ac8c006be08700721483007214830043352500066a4a0043607900080000000100000059999a'
@@ -720,7 +740,7 @@ state.audmixwm8962 {
 			count 60
 		}
 	}
-	control.59 {
+	control.61 {
 		iface MIXER
 		name 'ALC Switch'
 		value.0 false
@@ -731,47 +751,17 @@ state.audmixwm8962 {
 			count 2
 		}
 	}
-	control.60 {
-		iface MIXER
-		name ALC1
-		value '007b'
-		comment {
-			access 'read write'
-			type BYTES
-			count 2
-		}
-	}
-	control.61 {
-		iface MIXER
-		name ALC2
-		value '0000'
-		comment {
-			access 'read write'
-			type BYTES
-			count 2
-		}
-	}
 	control.62 {
 		iface MIXER
-		name ALC3
-		value '1c32'
+		name 'ALC Coefficients'
+		value '007b00001c323200'
 		comment {
 			access 'read write'
 			type BYTES
-			count 2
+			count 8
 		}
 	}
 	control.63 {
-		iface MIXER
-		name 'Noise Gate'
-		value '3200'
-		comment {
-			access 'read write'
-			type BYTES
-			count 2
-		}
-	}
-	control.64 {
 		iface MIXER
 		name 'Speaker Volume'
 		value.0 114
@@ -787,7 +777,7 @@ state.audmixwm8962 {
 			dbvalue.1 -700
 		}
 	}
-	control.65 {
+	control.64 {
 		iface MIXER
 		name 'Speaker Switch'
 		value.0 true
@@ -798,7 +788,7 @@ state.audmixwm8962 {
 			count 2
 		}
 	}
-	control.66 {
+	control.65 {
 		iface MIXER
 		name 'Speaker ZC Switch'
 		value.0 false
@@ -809,7 +799,7 @@ state.audmixwm8962 {
 			count 2
 		}
 	}
-	control.67 {
+	control.66 {
 		iface MIXER
 		name 'Speaker Mixer Switch'
 		value.0 false
@@ -820,7 +810,7 @@ state.audmixwm8962 {
 			count 2
 		}
 	}
-	control.68 {
+	control.67 {
 		iface MIXER
 		name 'SPKOUTL Mixer IN4L Volume'
 		value 7
@@ -834,7 +824,7 @@ state.audmixwm8962 {
 			dbvalue.0 600
 		}
 	}
-	control.69 {
+	control.68 {
 		iface MIXER
 		name 'SPKOUTL Mixer IN4R Volume'
 		value 7
@@ -848,7 +838,7 @@ state.audmixwm8962 {
 			dbvalue.0 600
 		}
 	}
-	control.70 {
+	control.69 {
 		iface MIXER
 		name 'SPKOUTL Mixer MIXINL Volume'
 		value 1
@@ -862,7 +852,7 @@ state.audmixwm8962 {
 			dbvalue.0 0
 		}
 	}
-	control.71 {
+	control.70 {
 		iface MIXER
 		name 'SPKOUTL Mixer MIXINR Volume'
 		value 1
@@ -876,7 +866,7 @@ state.audmixwm8962 {
 			dbvalue.0 0
 		}
 	}
-	control.72 {
+	control.71 {
 		iface MIXER
 		name 'SPKOUTL Mixer DACL Volume'
 		value 0
@@ -890,7 +880,7 @@ state.audmixwm8962 {
 			dbvalue.0 -600
 		}
 	}
-	control.73 {
+	control.72 {
 		iface MIXER
 		name 'SPKOUTL Mixer DACR Volume'
 		value 0
@@ -904,7 +894,7 @@ state.audmixwm8962 {
 			dbvalue.0 -600
 		}
 	}
-	control.74 {
+	control.73 {
 		iface MIXER
 		name 'SPKOUTR Mixer IN4L Volume'
 		value 7
@@ -918,7 +908,7 @@ state.audmixwm8962 {
 			dbvalue.0 600
 		}
 	}
-	control.75 {
+	control.74 {
 		iface MIXER
 		name 'SPKOUTR Mixer IN4R Volume'
 		value 7
@@ -932,7 +922,7 @@ state.audmixwm8962 {
 			dbvalue.0 600
 		}
 	}
-	control.76 {
+	control.75 {
 		iface MIXER
 		name 'SPKOUTR Mixer MIXINL Volume'
 		value 1
@@ -946,7 +936,7 @@ state.audmixwm8962 {
 			dbvalue.0 0
 		}
 	}
-	control.77 {
+	control.76 {
 		iface MIXER
 		name 'SPKOUTR Mixer MIXINR Volume'
 		value 1
@@ -960,7 +950,7 @@ state.audmixwm8962 {
 			dbvalue.0 0
 		}
 	}
-	control.78 {
+	control.77 {
 		iface MIXER
 		name 'SPKOUTR Mixer DACL Volume'
 		value 0
@@ -974,7 +964,7 @@ state.audmixwm8962 {
 			dbvalue.0 -600
 		}
 	}
-	control.79 {
+	control.78 {
 		iface MIXER
 		name 'SPKOUTR Mixer DACR Volume'
 		value 0
@@ -988,33 +978,39 @@ state.audmixwm8962 {
 			dbvalue.0 -600
 		}
 	}
-	control.80 {
+	control.79 {
 		iface MIXER
-		name 'SPKOUTR PGA'
-		value DAC
+		name 'INPGAL IN1L Switch'
+		value false
 		comment {
 			access 'read write'
-			type ENUMERATED
+			type BOOLEAN
 			count 1
-			item.0 DAC
-			item.1 Mixer
+		}
+	}
+	control.80 {
+		iface MIXER
+		name 'INPGAL IN2L Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
 		}
 	}
 	control.81 {
 		iface MIXER
-		name 'SPKOUTL PGA'
-		value DAC
+		name 'INPGAL IN3L Switch'
+		value true
 		comment {
 			access 'read write'
-			type ENUMERATED
+			type BOOLEAN
 			count 1
-			item.0 DAC
-			item.1 Mixer
 		}
 	}
 	control.82 {
 		iface MIXER
-		name 'SPKOUTR Mixer DACL Switch'
+		name 'INPGAL IN4L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1024,7 +1020,7 @@ state.audmixwm8962 {
 	}
 	control.83 {
 		iface MIXER
-		name 'SPKOUTR Mixer DACR Switch'
+		name 'INPGAR IN1R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1034,8 +1030,8 @@ state.audmixwm8962 {
 	}
 	control.84 {
 		iface MIXER
-		name 'SPKOUTR Mixer MIXINL Switch'
-		value false
+		name 'INPGAR IN2R Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1044,8 +1040,8 @@ state.audmixwm8962 {
 	}
 	control.85 {
 		iface MIXER
-		name 'SPKOUTR Mixer MIXINR Switch'
-		value false
+		name 'INPGAR IN3R Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1054,7 +1050,7 @@ state.audmixwm8962 {
 	}
 	control.86 {
 		iface MIXER
-		name 'SPKOUTR Mixer IN4L Switch'
+		name 'INPGAR IN4R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1064,7 +1060,7 @@ state.audmixwm8962 {
 	}
 	control.87 {
 		iface MIXER
-		name 'SPKOUTR Mixer IN4R Switch'
+		name 'MIXINL IN2L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1074,7 +1070,7 @@ state.audmixwm8962 {
 	}
 	control.88 {
 		iface MIXER
-		name 'SPKOUTL Mixer DACL Switch'
+		name 'MIXINL IN3L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1084,8 +1080,8 @@ state.audmixwm8962 {
 	}
 	control.89 {
 		iface MIXER
-		name 'SPKOUTL Mixer DACR Switch'
-		value false
+		name 'MIXINL PGA Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1094,7 +1090,7 @@ state.audmixwm8962 {
 	}
 	control.90 {
 		iface MIXER
-		name 'SPKOUTL Mixer MIXINL Switch'
+		name 'MIXINR IN2R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1104,8 +1100,8 @@ state.audmixwm8962 {
 	}
 	control.91 {
 		iface MIXER
-		name 'SPKOUTL Mixer MIXINR Switch'
-		value false
+		name 'MIXINR IN3R Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1114,8 +1110,8 @@ state.audmixwm8962 {
 	}
 	control.92 {
 		iface MIXER
-		name 'SPKOUTL Mixer IN4L Switch'
-		value false
+		name 'MIXINR PGA Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1124,172 +1120,17 @@ state.audmixwm8962 {
 	}
 	control.93 {
 		iface MIXER
-		name 'SPKOUTL Mixer IN4R Switch'
-		value false
+		name 'Input Mode'
+		value Analog
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 Analog
+			item.1 Digital
 		}
 	}
 	control.94 {
-		iface MIXER
-		name 'HPOUTR PGA'
-		value DAC
-		comment {
-			access 'read write'
-			type ENUMERATED
-			count 1
-			item.0 DAC
-			item.1 Mixer
-		}
-	}
-	control.95 {
-		iface MIXER
-		name 'HPOUTL PGA'
-		value DAC
-		comment {
-			access 'read write'
-			type ENUMERATED
-			count 1
-			item.0 DAC
-			item.1 Mixer
-		}
-	}
-	control.96 {
-		iface MIXER
-		name 'HPMIXR DACL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.97 {
-		iface MIXER
-		name 'HPMIXR DACR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.98 {
-		iface MIXER
-		name 'HPMIXR MIXINL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.99 {
-		iface MIXER
-		name 'HPMIXR MIXINR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.100 {
-		iface MIXER
-		name 'HPMIXR IN4L Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.101 {
-		iface MIXER
-		name 'HPMIXR IN4R Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.102 {
-		iface MIXER
-		name 'HPMIXL DACL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.103 {
-		iface MIXER
-		name 'HPMIXL DACR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.104 {
-		iface MIXER
-		name 'HPMIXL MIXINL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.105 {
-		iface MIXER
-		name 'HPMIXL MIXINR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.106 {
-		iface MIXER
-		name 'HPMIXL IN4L Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.107 {
-		iface MIXER
-		name 'HPMIXL IN4R Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.108 {
-		iface MIXER
-		name STR
-		value None
-		comment {
-			access 'read write'
-			type ENUMERATED
-			count 1
-			item.0 None
-			item.1 Left
-			item.2 Right
-		}
-	}
-	control.109 {
 		iface MIXER
 		name STL
 		value None
@@ -1302,9 +1143,166 @@ state.audmixwm8962 {
 			item.2 Right
 		}
 	}
+	control.95 {
+		iface MIXER
+		name STR
+		value None
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 None
+			item.1 Left
+			item.2 Right
+		}
+	}
+	control.96 {
+		iface MIXER
+		name 'HPMIXL DACL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.97 {
+		iface MIXER
+		name 'HPMIXL DACR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.98 {
+		iface MIXER
+		name 'HPMIXL MIXINL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.99 {
+		iface MIXER
+		name 'HPMIXL MIXINR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.100 {
+		iface MIXER
+		name 'HPMIXL IN4L Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.101 {
+		iface MIXER
+		name 'HPMIXL IN4R Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.102 {
+		iface MIXER
+		name 'HPMIXR DACL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.103 {
+		iface MIXER
+		name 'HPMIXR DACR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.104 {
+		iface MIXER
+		name 'HPMIXR MIXINL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.105 {
+		iface MIXER
+		name 'HPMIXR MIXINR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.106 {
+		iface MIXER
+		name 'HPMIXR IN4L Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.107 {
+		iface MIXER
+		name 'HPMIXR IN4R Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.108 {
+		iface MIXER
+		name 'HPOUTL PGA'
+		value DAC
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 DAC
+			item.1 Mixer
+		}
+	}
+	control.109 {
+		iface MIXER
+		name 'HPOUTR PGA'
+		value DAC
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 DAC
+			item.1 Mixer
+		}
+	}
 	control.110 {
 		iface MIXER
-		name 'MIXINR IN2R Switch'
+		name 'SPKOUTL Mixer DACL Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1314,8 +1312,8 @@ state.audmixwm8962 {
 	}
 	control.111 {
 		iface MIXER
-		name 'MIXINR IN3R Switch'
-		value true
+		name 'SPKOUTL Mixer DACR Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1324,8 +1322,8 @@ state.audmixwm8962 {
 	}
 	control.112 {
 		iface MIXER
-		name 'MIXINR PGA Switch'
-		value true
+		name 'SPKOUTL Mixer MIXINL Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1334,7 +1332,7 @@ state.audmixwm8962 {
 	}
 	control.113 {
 		iface MIXER
-		name 'MIXINL IN2L Switch'
+		name 'SPKOUTL Mixer MIXINR Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1344,7 +1342,7 @@ state.audmixwm8962 {
 	}
 	control.114 {
 		iface MIXER
-		name 'MIXINL IN3L Switch'
+		name 'SPKOUTL Mixer IN4L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1354,8 +1352,8 @@ state.audmixwm8962 {
 	}
 	control.115 {
 		iface MIXER
-		name 'MIXINL PGA Switch'
-		value true
+		name 'SPKOUTL Mixer IN4R Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1364,7 +1362,7 @@ state.audmixwm8962 {
 	}
 	control.116 {
 		iface MIXER
-		name 'INPGAR IN1R Switch'
+		name 'SPKOUTR Mixer DACL Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1374,8 +1372,8 @@ state.audmixwm8962 {
 	}
 	control.117 {
 		iface MIXER
-		name 'INPGAR IN2R Switch'
-		value true
+		name 'SPKOUTR Mixer DACR Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1384,8 +1382,8 @@ state.audmixwm8962 {
 	}
 	control.118 {
 		iface MIXER
-		name 'INPGAR IN3R Switch'
-		value true
+		name 'SPKOUTR Mixer MIXINL Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1394,7 +1392,7 @@ state.audmixwm8962 {
 	}
 	control.119 {
 		iface MIXER
-		name 'INPGAR IN4R Switch'
+		name 'SPKOUTR Mixer MIXINR Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1404,7 +1402,7 @@ state.audmixwm8962 {
 	}
 	control.120 {
 		iface MIXER
-		name 'INPGAL IN1L Switch'
+		name 'SPKOUTR Mixer IN4L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1414,7 +1412,7 @@ state.audmixwm8962 {
 	}
 	control.121 {
 		iface MIXER
-		name 'INPGAL IN2L Switch'
+		name 'SPKOUTR Mixer IN4R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -1424,22 +1422,26 @@ state.audmixwm8962 {
 	}
 	control.122 {
 		iface MIXER
-		name 'INPGAL IN3L Switch'
-		value true
+		name 'SPKOUTL PGA'
+		value DAC
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 DAC
+			item.1 Mixer
 		}
 	}
 	control.123 {
 		iface MIXER
-		name 'INPGAL IN4L Switch'
-		value false
+		name 'SPKOUTR PGA'
+		value DAC
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 DAC
+			item.1 Mixer
 		}
 	}
 	control.124 {
@@ -1722,6 +1724,26 @@ state.wm8962audio {
 	}
 	control.22 {
 		iface MIXER
+		name 'DAC Monomix Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.23 {
+		iface MIXER
+		name 'ADC Monomix Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.24 {
+		iface MIXER
 		name 'ADC High Performance Switch'
 		value true
 		comment {
@@ -1730,7 +1752,7 @@ state.wm8962audio {
 			count 1
 		}
 	}
-	control.23 {
+	control.25 {
 		iface MIXER
 		name 'Beep Volume'
 		value 0
@@ -1744,7 +1766,7 @@ state.wm8962audio {
 			dbvalue.0 -9999999
 		}
 	}
-	control.24 {
+	control.26 {
 		iface MIXER
 		name 'Headphone Volume'
 		value.0 93
@@ -1760,7 +1782,7 @@ state.wm8962audio {
 			dbvalue.1 -2800
 		}
 	}
-	control.25 {
+	control.27 {
 		iface MIXER
 		name 'Headphone Switch'
 		value.0 true
@@ -1771,7 +1793,7 @@ state.wm8962audio {
 			count 2
 		}
 	}
-	control.26 {
+	control.28 {
 		iface MIXER
 		name 'Headphone ZC Switch'
 		value.0 false
@@ -1782,7 +1804,7 @@ state.wm8962audio {
 			count 2
 		}
 	}
-	control.27 {
+	control.29 {
 		iface MIXER
 		name 'Headphone Aux Volume'
 		value.0 7
@@ -1798,7 +1820,7 @@ state.wm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.28 {
+	control.30 {
 		iface MIXER
 		name 'Headphone Mixer Switch'
 		value.0 false
@@ -1809,7 +1831,7 @@ state.wm8962audio {
 			count 2
 		}
 	}
-	control.29 {
+	control.31 {
 		iface MIXER
 		name 'HPMIXL IN4L Volume'
 		value 7
@@ -1823,7 +1845,7 @@ state.wm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.30 {
+	control.32 {
 		iface MIXER
 		name 'HPMIXL IN4R Volume'
 		value 7
@@ -1837,7 +1859,7 @@ state.wm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.31 {
+	control.33 {
 		iface MIXER
 		name 'HPMIXL MIXINL Volume'
 		value 1
@@ -1851,7 +1873,7 @@ state.wm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.32 {
+	control.34 {
 		iface MIXER
 		name 'HPMIXL MIXINR Volume'
 		value 1
@@ -1865,7 +1887,7 @@ state.wm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.33 {
+	control.35 {
 		iface MIXER
 		name 'HPMIXR IN4L Volume'
 		value 7
@@ -1879,7 +1901,7 @@ state.wm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.34 {
+	control.36 {
 		iface MIXER
 		name 'HPMIXR IN4R Volume'
 		value 7
@@ -1893,7 +1915,7 @@ state.wm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.35 {
+	control.37 {
 		iface MIXER
 		name 'HPMIXR MIXINL Volume'
 		value 1
@@ -1907,7 +1929,7 @@ state.wm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.36 {
+	control.38 {
 		iface MIXER
 		name 'HPMIXR MIXINR Volume'
 		value 1
@@ -1921,7 +1943,7 @@ state.wm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.37 {
+	control.39 {
 		iface MIXER
 		name 'Speaker Boost Volume'
 		value 3
@@ -1935,7 +1957,7 @@ state.wm8962audio {
 			dbvalue.0 450
 		}
 	}
-	control.38 {
+	control.40 {
 		iface MIXER
 		name 'EQ Switch'
 		value false
@@ -1945,7 +1967,7 @@ state.wm8962audio {
 			count 1
 		}
 	}
-	control.39 {
+	control.41 {
 		iface MIXER
 		name 'EQ1 Volume'
 		value.0 12
@@ -1961,7 +1983,7 @@ state.wm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.40 {
+	control.42 {
 		iface MIXER
 		name 'EQ2 Volume'
 		value.0 12
@@ -1977,7 +1999,7 @@ state.wm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.41 {
+	control.43 {
 		iface MIXER
 		name 'EQ3 Volume'
 		value.0 12
@@ -1993,7 +2015,7 @@ state.wm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.42 {
+	control.44 {
 		iface MIXER
 		name 'EQ4 Volume'
 		value.0 12
@@ -2009,7 +2031,7 @@ state.wm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.43 {
+	control.45 {
 		iface MIXER
 		name 'EQ5 Volume'
 		value.0 12
@@ -2025,7 +2047,7 @@ state.wm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.44 {
+	control.46 {
 		iface MIXER
 		name 'EQL Coefficients'
 		value '0fca040000d81eb5f1450b7501c51c58f3730a540558168ef82907ad1103056405594000'
@@ -2035,7 +2057,7 @@ state.wm8962audio {
 			count 36
 		}
 	}
-	control.45 {
+	control.47 {
 		iface MIXER
 		name 'EQR Coefficients'
 		value '0fca040000d81eb5f1450b7501c51c58f3730a540558168ef82907ad1103056405594000'
@@ -2045,7 +2067,7 @@ state.wm8962audio {
 			count 36
 		}
 	}
-	control.46 {
+	control.48 {
 		iface MIXER
 		name '3D Switch'
 		value false
@@ -2055,17 +2077,17 @@ state.wm8962audio {
 			count 1
 		}
 	}
-	control.47 {
+	control.49 {
 		iface MIXER
 		name '3D Coefficients'
-		value '0040000000000000'
+		value '0000000000000000'
 		comment {
 			access 'read write'
 			type BYTES
 			count 8
 		}
 	}
-	control.48 {
+	control.50 {
 		iface MIXER
 		name 'DF1 Switch'
 		value false
@@ -2075,7 +2097,7 @@ state.wm8962audio {
 			count 1
 		}
 	}
-	control.49 {
+	control.51 {
 		iface MIXER
 		name 'DF1 Coefficients'
 		value '0000000000000000000000000000'
@@ -2085,7 +2107,7 @@ state.wm8962audio {
 			count 14
 		}
 	}
-	control.50 {
+	control.52 {
 		iface MIXER
 		name 'DRC Switch'
 		value false
@@ -2095,7 +2117,7 @@ state.wm8962audio {
 			count 1
 		}
 	}
-	control.51 {
+	control.53 {
 		iface MIXER
 		name 'DRC Coefficients'
 		value '000c0925000000000000'
@@ -2105,7 +2127,7 @@ state.wm8962audio {
 			count 10
 		}
 	}
-	control.52 {
+	control.54 {
 		iface MIXER
 		name 'VSS Switch'
 		value false
@@ -2115,7 +2137,7 @@ state.wm8962audio {
 			count 1
 		}
 	}
-	control.53 {
+	control.55 {
 		iface MIXER
 		name 'VSS Coefficients'
 		value '008c020000350700003a4100008b7d00003a4100008cfee800780000003fb260002d18180020000000f1834000fb830000eeaec000fbac4000f17f8000f43b4000f5fb0000ea10c000fcc58000e275c00004b48000d4f9800004914000d8a48000023dc000cf7a8000dc060000f2dac000baf340000a7940001c068000fd2d00001ce840000ddc4000fc9d000009558000fe7e80000eab4000f99880000987c000fd2c400009480000035f400000870000fae4c000000b400004e18000011f4000f8b00000fbcbc00004f3800007df4000ff070000efd70000fbaf4000108a80001107c000e0080000d276000020cf400030234000fd69c0002835000006330000d9f6c000f33340000f420000040c8000fb3f8000f757c0000354000000c6c0000312c000fd8580'
@@ -2125,7 +2147,7 @@ state.wm8962audio {
 			count 296
 		}
 	}
-	control.54 {
+	control.56 {
 		iface MIXER
 		name 'HPF1 Switch'
 		value false
@@ -2135,7 +2157,7 @@ state.wm8962audio {
 			count 1
 		}
 	}
-	control.55 {
+	control.57 {
 		iface MIXER
 		name 'HPF2 Switch'
 		value false
@@ -2145,7 +2167,7 @@ state.wm8962audio {
 			count 1
 		}
 	}
-	control.56 {
+	control.58 {
 		iface MIXER
 		name 'HPF Coefficients'
 		value '0000'
@@ -2155,7 +2177,7 @@ state.wm8962audio {
 			count 2
 		}
 	}
-	control.57 {
+	control.59 {
 		iface MIXER
 		name 'HD Bass Switch'
 		value false
@@ -2165,7 +2187,7 @@ state.wm8962audio {
 			count 1
 		}
 	}
-	control.58 {
+	control.60 {
 		iface MIXER
 		name 'HD Bass Coefficients'
 		value '0002bd12007c586c00538121003f8bd80032f52d0065ac8c006be08700721483007214830043352500066a4a0043607900080000000100000059999a'
@@ -2175,7 +2197,7 @@ state.wm8962audio {
 			count 60
 		}
 	}
-	control.59 {
+	control.61 {
 		iface MIXER
 		name 'ALC Switch'
 		value.0 false
@@ -2186,47 +2208,17 @@ state.wm8962audio {
 			count 2
 		}
 	}
-	control.60 {
-		iface MIXER
-		name ALC1
-		value '007b'
-		comment {
-			access 'read write'
-			type BYTES
-			count 2
-		}
-	}
-	control.61 {
-		iface MIXER
-		name ALC2
-		value '0000'
-		comment {
-			access 'read write'
-			type BYTES
-			count 2
-		}
-	}
 	control.62 {
 		iface MIXER
-		name ALC3
-		value '1c32'
+		name 'ALC Coefficients'
+		value '007b00001c323200'
 		comment {
 			access 'read write'
 			type BYTES
-			count 2
+			count 8
 		}
 	}
 	control.63 {
-		iface MIXER
-		name 'Noise Gate'
-		value '3200'
-		comment {
-			access 'read write'
-			type BYTES
-			count 2
-		}
-	}
-	control.64 {
 		iface MIXER
 		name 'Speaker Volume'
 		value.0 114
@@ -2242,7 +2234,7 @@ state.wm8962audio {
 			dbvalue.1 -700
 		}
 	}
-	control.65 {
+	control.64 {
 		iface MIXER
 		name 'Speaker Switch'
 		value.0 true
@@ -2253,7 +2245,7 @@ state.wm8962audio {
 			count 2
 		}
 	}
-	control.66 {
+	control.65 {
 		iface MIXER
 		name 'Speaker ZC Switch'
 		value.0 false
@@ -2264,7 +2256,7 @@ state.wm8962audio {
 			count 2
 		}
 	}
-	control.67 {
+	control.66 {
 		iface MIXER
 		name 'Speaker Mixer Switch'
 		value.0 false
@@ -2275,7 +2267,7 @@ state.wm8962audio {
 			count 2
 		}
 	}
-	control.68 {
+	control.67 {
 		iface MIXER
 		name 'SPKOUTL Mixer IN4L Volume'
 		value 7
@@ -2289,7 +2281,7 @@ state.wm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.69 {
+	control.68 {
 		iface MIXER
 		name 'SPKOUTL Mixer IN4R Volume'
 		value 7
@@ -2303,7 +2295,7 @@ state.wm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.70 {
+	control.69 {
 		iface MIXER
 		name 'SPKOUTL Mixer MIXINL Volume'
 		value 1
@@ -2317,7 +2309,7 @@ state.wm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.71 {
+	control.70 {
 		iface MIXER
 		name 'SPKOUTL Mixer MIXINR Volume'
 		value 1
@@ -2331,7 +2323,7 @@ state.wm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.72 {
+	control.71 {
 		iface MIXER
 		name 'SPKOUTL Mixer DACL Volume'
 		value 0
@@ -2345,7 +2337,7 @@ state.wm8962audio {
 			dbvalue.0 -600
 		}
 	}
-	control.73 {
+	control.72 {
 		iface MIXER
 		name 'SPKOUTL Mixer DACR Volume'
 		value 0
@@ -2359,7 +2351,7 @@ state.wm8962audio {
 			dbvalue.0 -600
 		}
 	}
-	control.74 {
+	control.73 {
 		iface MIXER
 		name 'SPKOUTR Mixer IN4L Volume'
 		value 7
@@ -2373,7 +2365,7 @@ state.wm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.75 {
+	control.74 {
 		iface MIXER
 		name 'SPKOUTR Mixer IN4R Volume'
 		value 7
@@ -2387,7 +2379,7 @@ state.wm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.76 {
+	control.75 {
 		iface MIXER
 		name 'SPKOUTR Mixer MIXINL Volume'
 		value 1
@@ -2401,7 +2393,7 @@ state.wm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.77 {
+	control.76 {
 		iface MIXER
 		name 'SPKOUTR Mixer MIXINR Volume'
 		value 1
@@ -2415,7 +2407,7 @@ state.wm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.78 {
+	control.77 {
 		iface MIXER
 		name 'SPKOUTR Mixer DACL Volume'
 		value 0
@@ -2429,7 +2421,7 @@ state.wm8962audio {
 			dbvalue.0 -600
 		}
 	}
-	control.79 {
+	control.78 {
 		iface MIXER
 		name 'SPKOUTR Mixer DACR Volume'
 		value 0
@@ -2443,33 +2435,39 @@ state.wm8962audio {
 			dbvalue.0 -600
 		}
 	}
-	control.80 {
+	control.79 {
 		iface MIXER
-		name 'SPKOUTR PGA'
-		value DAC
+		name 'INPGAL IN1L Switch'
+		value false
 		comment {
 			access 'read write'
-			type ENUMERATED
+			type BOOLEAN
 			count 1
-			item.0 DAC
-			item.1 Mixer
+		}
+	}
+	control.80 {
+		iface MIXER
+		name 'INPGAL IN2L Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
 		}
 	}
 	control.81 {
 		iface MIXER
-		name 'SPKOUTL PGA'
-		value DAC
+		name 'INPGAL IN3L Switch'
+		value true
 		comment {
 			access 'read write'
-			type ENUMERATED
+			type BOOLEAN
 			count 1
-			item.0 DAC
-			item.1 Mixer
 		}
 	}
 	control.82 {
 		iface MIXER
-		name 'SPKOUTR Mixer DACL Switch'
+		name 'INPGAL IN4L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2479,7 +2477,7 @@ state.wm8962audio {
 	}
 	control.83 {
 		iface MIXER
-		name 'SPKOUTR Mixer DACR Switch'
+		name 'INPGAR IN1R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2489,8 +2487,8 @@ state.wm8962audio {
 	}
 	control.84 {
 		iface MIXER
-		name 'SPKOUTR Mixer MIXINL Switch'
-		value false
+		name 'INPGAR IN2R Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2499,8 +2497,8 @@ state.wm8962audio {
 	}
 	control.85 {
 		iface MIXER
-		name 'SPKOUTR Mixer MIXINR Switch'
-		value false
+		name 'INPGAR IN3R Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2509,7 +2507,7 @@ state.wm8962audio {
 	}
 	control.86 {
 		iface MIXER
-		name 'SPKOUTR Mixer IN4L Switch'
+		name 'INPGAR IN4R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2519,7 +2517,7 @@ state.wm8962audio {
 	}
 	control.87 {
 		iface MIXER
-		name 'SPKOUTR Mixer IN4R Switch'
+		name 'MIXINL IN2L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2529,7 +2527,7 @@ state.wm8962audio {
 	}
 	control.88 {
 		iface MIXER
-		name 'SPKOUTL Mixer DACL Switch'
+		name 'MIXINL IN3L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2539,8 +2537,8 @@ state.wm8962audio {
 	}
 	control.89 {
 		iface MIXER
-		name 'SPKOUTL Mixer DACR Switch'
-		value false
+		name 'MIXINL PGA Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2549,7 +2547,7 @@ state.wm8962audio {
 	}
 	control.90 {
 		iface MIXER
-		name 'SPKOUTL Mixer MIXINL Switch'
+		name 'MIXINR IN2R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2559,8 +2557,8 @@ state.wm8962audio {
 	}
 	control.91 {
 		iface MIXER
-		name 'SPKOUTL Mixer MIXINR Switch'
-		value false
+		name 'MIXINR IN3R Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2569,8 +2567,8 @@ state.wm8962audio {
 	}
 	control.92 {
 		iface MIXER
-		name 'SPKOUTL Mixer IN4L Switch'
-		value false
+		name 'MIXINR PGA Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2579,172 +2577,17 @@ state.wm8962audio {
 	}
 	control.93 {
 		iface MIXER
-		name 'SPKOUTL Mixer IN4R Switch'
-		value false
+		name 'Input Mode'
+		value Analog
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 Analog
+			item.1 Digital
 		}
 	}
 	control.94 {
-		iface MIXER
-		name 'HPOUTR PGA'
-		value DAC
-		comment {
-			access 'read write'
-			type ENUMERATED
-			count 1
-			item.0 DAC
-			item.1 Mixer
-		}
-	}
-	control.95 {
-		iface MIXER
-		name 'HPOUTL PGA'
-		value DAC
-		comment {
-			access 'read write'
-			type ENUMERATED
-			count 1
-			item.0 DAC
-			item.1 Mixer
-		}
-	}
-	control.96 {
-		iface MIXER
-		name 'HPMIXR DACL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.97 {
-		iface MIXER
-		name 'HPMIXR DACR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.98 {
-		iface MIXER
-		name 'HPMIXR MIXINL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.99 {
-		iface MIXER
-		name 'HPMIXR MIXINR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.100 {
-		iface MIXER
-		name 'HPMIXR IN4L Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.101 {
-		iface MIXER
-		name 'HPMIXR IN4R Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.102 {
-		iface MIXER
-		name 'HPMIXL DACL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.103 {
-		iface MIXER
-		name 'HPMIXL DACR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.104 {
-		iface MIXER
-		name 'HPMIXL MIXINL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.105 {
-		iface MIXER
-		name 'HPMIXL MIXINR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.106 {
-		iface MIXER
-		name 'HPMIXL IN4L Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.107 {
-		iface MIXER
-		name 'HPMIXL IN4R Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.108 {
-		iface MIXER
-		name STR
-		value None
-		comment {
-			access 'read write'
-			type ENUMERATED
-			count 1
-			item.0 None
-			item.1 Left
-			item.2 Right
-		}
-	}
-	control.109 {
 		iface MIXER
 		name STL
 		value None
@@ -2757,9 +2600,166 @@ state.wm8962audio {
 			item.2 Right
 		}
 	}
+	control.95 {
+		iface MIXER
+		name STR
+		value None
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 None
+			item.1 Left
+			item.2 Right
+		}
+	}
+	control.96 {
+		iface MIXER
+		name 'HPMIXL DACL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.97 {
+		iface MIXER
+		name 'HPMIXL DACR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.98 {
+		iface MIXER
+		name 'HPMIXL MIXINL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.99 {
+		iface MIXER
+		name 'HPMIXL MIXINR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.100 {
+		iface MIXER
+		name 'HPMIXL IN4L Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.101 {
+		iface MIXER
+		name 'HPMIXL IN4R Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.102 {
+		iface MIXER
+		name 'HPMIXR DACL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.103 {
+		iface MIXER
+		name 'HPMIXR DACR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.104 {
+		iface MIXER
+		name 'HPMIXR MIXINL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.105 {
+		iface MIXER
+		name 'HPMIXR MIXINR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.106 {
+		iface MIXER
+		name 'HPMIXR IN4L Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.107 {
+		iface MIXER
+		name 'HPMIXR IN4R Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.108 {
+		iface MIXER
+		name 'HPOUTL PGA'
+		value DAC
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 DAC
+			item.1 Mixer
+		}
+	}
+	control.109 {
+		iface MIXER
+		name 'HPOUTR PGA'
+		value DAC
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 DAC
+			item.1 Mixer
+		}
+	}
 	control.110 {
 		iface MIXER
-		name 'MIXINR IN2R Switch'
+		name 'SPKOUTL Mixer DACL Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2769,8 +2769,8 @@ state.wm8962audio {
 	}
 	control.111 {
 		iface MIXER
-		name 'MIXINR IN3R Switch'
-		value true
+		name 'SPKOUTL Mixer DACR Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2779,8 +2779,8 @@ state.wm8962audio {
 	}
 	control.112 {
 		iface MIXER
-		name 'MIXINR PGA Switch'
-		value true
+		name 'SPKOUTL Mixer MIXINL Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2789,7 +2789,7 @@ state.wm8962audio {
 	}
 	control.113 {
 		iface MIXER
-		name 'MIXINL IN2L Switch'
+		name 'SPKOUTL Mixer MIXINR Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2799,7 +2799,7 @@ state.wm8962audio {
 	}
 	control.114 {
 		iface MIXER
-		name 'MIXINL IN3L Switch'
+		name 'SPKOUTL Mixer IN4L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2809,8 +2809,8 @@ state.wm8962audio {
 	}
 	control.115 {
 		iface MIXER
-		name 'MIXINL PGA Switch'
-		value true
+		name 'SPKOUTL Mixer IN4R Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2819,7 +2819,7 @@ state.wm8962audio {
 	}
 	control.116 {
 		iface MIXER
-		name 'INPGAR IN1R Switch'
+		name 'SPKOUTR Mixer DACL Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2829,8 +2829,8 @@ state.wm8962audio {
 	}
 	control.117 {
 		iface MIXER
-		name 'INPGAR IN2R Switch'
-		value true
+		name 'SPKOUTR Mixer DACR Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2839,8 +2839,8 @@ state.wm8962audio {
 	}
 	control.118 {
 		iface MIXER
-		name 'INPGAR IN3R Switch'
-		value true
+		name 'SPKOUTR Mixer MIXINL Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2849,7 +2849,7 @@ state.wm8962audio {
 	}
 	control.119 {
 		iface MIXER
-		name 'INPGAR IN4R Switch'
+		name 'SPKOUTR Mixer MIXINR Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2859,7 +2859,7 @@ state.wm8962audio {
 	}
 	control.120 {
 		iface MIXER
-		name 'INPGAL IN1L Switch'
+		name 'SPKOUTR Mixer IN4L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2869,7 +2869,7 @@ state.wm8962audio {
 	}
 	control.121 {
 		iface MIXER
-		name 'INPGAL IN2L Switch'
+		name 'SPKOUTR Mixer IN4R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -2879,22 +2879,26 @@ state.wm8962audio {
 	}
 	control.122 {
 		iface MIXER
-		name 'INPGAL IN3L Switch'
-		value true
+		name 'SPKOUTL PGA'
+		value DAC
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 DAC
+			item.1 Mixer
 		}
 	}
 	control.123 {
 		iface MIXER
-		name 'INPGAL IN4L Switch'
-		value false
+		name 'SPKOUTR PGA'
+		value DAC
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 DAC
+			item.1 Mixer
 		}
 	}
 	control.124 {
@@ -11570,6 +11574,26 @@ state.sofwm8962audio {
 	}
 	control.22 {
 		iface MIXER
+		name 'DAC Monomix Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.23 {
+		iface MIXER
+		name 'ADC Monomix Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.24 {
+		iface MIXER
 		name 'ADC High Performance Switch'
 		value true
 		comment {
@@ -11578,7 +11602,7 @@ state.sofwm8962audio {
 			count 1
 		}
 	}
-	control.23 {
+	control.25 {
 		iface MIXER
 		name 'Beep Volume'
 		value 0
@@ -11592,7 +11616,7 @@ state.sofwm8962audio {
 			dbvalue.0 -9999999
 		}
 	}
-	control.24 {
+	control.26 {
 		iface MIXER
 		name 'Headphone Volume'
 		value.0 93
@@ -11608,7 +11632,7 @@ state.sofwm8962audio {
 			dbvalue.1 -2800
 		}
 	}
-	control.25 {
+	control.27 {
 		iface MIXER
 		name 'Headphone Switch'
 		value.0 true
@@ -11619,7 +11643,7 @@ state.sofwm8962audio {
 			count 2
 		}
 	}
-	control.26 {
+	control.28 {
 		iface MIXER
 		name 'Headphone ZC Switch'
 		value.0 false
@@ -11630,7 +11654,7 @@ state.sofwm8962audio {
 			count 2
 		}
 	}
-	control.27 {
+	control.29 {
 		iface MIXER
 		name 'Headphone Aux Volume'
 		value.0 7
@@ -11646,7 +11670,7 @@ state.sofwm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.28 {
+	control.30 {
 		iface MIXER
 		name 'Headphone Mixer Switch'
 		value.0 false
@@ -11657,7 +11681,7 @@ state.sofwm8962audio {
 			count 2
 		}
 	}
-	control.29 {
+	control.31 {
 		iface MIXER
 		name 'HPMIXL IN4L Volume'
 		value 7
@@ -11671,7 +11695,7 @@ state.sofwm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.30 {
+	control.32 {
 		iface MIXER
 		name 'HPMIXL IN4R Volume'
 		value 7
@@ -11685,7 +11709,7 @@ state.sofwm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.31 {
+	control.33 {
 		iface MIXER
 		name 'HPMIXL MIXINL Volume'
 		value 1
@@ -11699,7 +11723,7 @@ state.sofwm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.32 {
+	control.34 {
 		iface MIXER
 		name 'HPMIXL MIXINR Volume'
 		value 1
@@ -11713,7 +11737,7 @@ state.sofwm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.33 {
+	control.35 {
 		iface MIXER
 		name 'HPMIXR IN4L Volume'
 		value 7
@@ -11727,7 +11751,7 @@ state.sofwm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.34 {
+	control.36 {
 		iface MIXER
 		name 'HPMIXR IN4R Volume'
 		value 7
@@ -11741,7 +11765,7 @@ state.sofwm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.35 {
+	control.37 {
 		iface MIXER
 		name 'HPMIXR MIXINL Volume'
 		value 1
@@ -11755,7 +11779,7 @@ state.sofwm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.36 {
+	control.38 {
 		iface MIXER
 		name 'HPMIXR MIXINR Volume'
 		value 1
@@ -11769,7 +11793,7 @@ state.sofwm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.37 {
+	control.39 {
 		iface MIXER
 		name 'Speaker Boost Volume'
 		value 3
@@ -11783,7 +11807,7 @@ state.sofwm8962audio {
 			dbvalue.0 450
 		}
 	}
-	control.38 {
+	control.40 {
 		iface MIXER
 		name 'EQ Switch'
 		value false
@@ -11793,7 +11817,7 @@ state.sofwm8962audio {
 			count 1
 		}
 	}
-	control.39 {
+	control.41 {
 		iface MIXER
 		name 'EQ1 Volume'
 		value.0 12
@@ -11809,7 +11833,7 @@ state.sofwm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.40 {
+	control.42 {
 		iface MIXER
 		name 'EQ2 Volume'
 		value.0 12
@@ -11825,7 +11849,7 @@ state.sofwm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.41 {
+	control.43 {
 		iface MIXER
 		name 'EQ3 Volume'
 		value.0 12
@@ -11841,7 +11865,7 @@ state.sofwm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.42 {
+	control.44 {
 		iface MIXER
 		name 'EQ4 Volume'
 		value.0 12
@@ -11857,7 +11881,7 @@ state.sofwm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.43 {
+	control.45 {
 		iface MIXER
 		name 'EQ5 Volume'
 		value.0 12
@@ -11873,7 +11897,7 @@ state.sofwm8962audio {
 			dbvalue.1 0
 		}
 	}
-	control.44 {
+	control.46 {
 		iface MIXER
 		name 'EQL Coefficients'
 		value '0fca040000d81eb5f1450b7501c51c58f3730a540558168ef82907ad1103056405594000'
@@ -11883,7 +11907,7 @@ state.sofwm8962audio {
 			count 36
 		}
 	}
-	control.45 {
+	control.47 {
 		iface MIXER
 		name 'EQR Coefficients'
 		value '0fca040000d81eb5f1450b7501c51c58f3730a540558168ef82907ad1103056405594000'
@@ -11893,7 +11917,7 @@ state.sofwm8962audio {
 			count 36
 		}
 	}
-	control.46 {
+	control.48 {
 		iface MIXER
 		name '3D Switch'
 		value false
@@ -11903,17 +11927,17 @@ state.sofwm8962audio {
 			count 1
 		}
 	}
-	control.47 {
+	control.49 {
 		iface MIXER
 		name '3D Coefficients'
-		value '0040000000000000'
+		value '0000000000000000'
 		comment {
 			access 'read write'
 			type BYTES
 			count 8
 		}
 	}
-	control.48 {
+	control.50 {
 		iface MIXER
 		name 'DF1 Switch'
 		value false
@@ -11923,7 +11947,7 @@ state.sofwm8962audio {
 			count 1
 		}
 	}
-	control.49 {
+	control.51 {
 		iface MIXER
 		name 'DF1 Coefficients'
 		value '0000000000000000000000000000'
@@ -11933,7 +11957,7 @@ state.sofwm8962audio {
 			count 14
 		}
 	}
-	control.50 {
+	control.52 {
 		iface MIXER
 		name 'DRC Switch'
 		value false
@@ -11943,7 +11967,7 @@ state.sofwm8962audio {
 			count 1
 		}
 	}
-	control.51 {
+	control.53 {
 		iface MIXER
 		name 'DRC Coefficients'
 		value '000c0925000000000000'
@@ -11953,7 +11977,7 @@ state.sofwm8962audio {
 			count 10
 		}
 	}
-	control.52 {
+	control.54 {
 		iface MIXER
 		name 'VSS Switch'
 		value false
@@ -11963,7 +11987,7 @@ state.sofwm8962audio {
 			count 1
 		}
 	}
-	control.53 {
+	control.55 {
 		iface MIXER
 		name 'VSS Coefficients'
 		value '008c020000350700003a4100008b7d00003a4100008cfee800780000003fb260002d18180020000000f1834000fb830000eeaec000fbac4000f17f8000f43b4000f5fb0000ea10c000fcc58000e275c00004b48000d4f9800004914000d8a48000023dc000cf7a8000dc060000f2dac000baf340000a7940001c068000fd2d00001ce840000ddc4000fc9d000009558000fe7e80000eab4000f99880000987c000fd2c400009480000035f400000870000fae4c000000b400004e18000011f4000f8b00000fbcbc00004f3800007df4000ff070000efd70000fbaf4000108a80001107c000e0080000d276000020cf400030234000fd69c0002835000006330000d9f6c000f33340000f420000040c8000fb3f8000f757c0000354000000c6c0000312c000fd8580'
@@ -11973,7 +11997,7 @@ state.sofwm8962audio {
 			count 296
 		}
 	}
-	control.54 {
+	control.56 {
 		iface MIXER
 		name 'HPF1 Switch'
 		value false
@@ -11983,7 +12007,7 @@ state.sofwm8962audio {
 			count 1
 		}
 	}
-	control.55 {
+	control.57 {
 		iface MIXER
 		name 'HPF2 Switch'
 		value false
@@ -11993,7 +12017,7 @@ state.sofwm8962audio {
 			count 1
 		}
 	}
-	control.56 {
+	control.58 {
 		iface MIXER
 		name 'HPF Coefficients'
 		value '0000'
@@ -12003,7 +12027,7 @@ state.sofwm8962audio {
 			count 2
 		}
 	}
-	control.57 {
+	control.59 {
 		iface MIXER
 		name 'HD Bass Switch'
 		value false
@@ -12013,7 +12037,7 @@ state.sofwm8962audio {
 			count 1
 		}
 	}
-	control.58 {
+	control.60 {
 		iface MIXER
 		name 'HD Bass Coefficients'
 		value '0002bd12007c586c00538121003f8bd80032f52d0065ac8c006be08700721483007214830043352500066a4a0043607900080000000100000059999a'
@@ -12023,7 +12047,7 @@ state.sofwm8962audio {
 			count 60
 		}
 	}
-	control.59 {
+	control.61 {
 		iface MIXER
 		name 'ALC Switch'
 		value.0 false
@@ -12034,47 +12058,17 @@ state.sofwm8962audio {
 			count 2
 		}
 	}
-	control.60 {
-		iface MIXER
-		name ALC1
-		value '007b'
-		comment {
-			access 'read write'
-			type BYTES
-			count 2
-		}
-	}
-	control.61 {
-		iface MIXER
-		name ALC2
-		value '0000'
-		comment {
-			access 'read write'
-			type BYTES
-			count 2
-		}
-	}
 	control.62 {
 		iface MIXER
-		name ALC3
-		value '1c32'
+		name 'ALC Coefficients'
+		value '007b00001c323200'
 		comment {
 			access 'read write'
 			type BYTES
-			count 2
+			count 8
 		}
 	}
 	control.63 {
-		iface MIXER
-		name 'Noise Gate'
-		value '3200'
-		comment {
-			access 'read write'
-			type BYTES
-			count 2
-		}
-	}
-	control.64 {
 		iface MIXER
 		name 'Speaker Volume'
 		value.0 114
@@ -12090,7 +12084,7 @@ state.sofwm8962audio {
 			dbvalue.1 -700
 		}
 	}
-	control.65 {
+	control.64 {
 		iface MIXER
 		name 'Speaker Switch'
 		value.0 true
@@ -12101,7 +12095,7 @@ state.sofwm8962audio {
 			count 2
 		}
 	}
-	control.66 {
+	control.65 {
 		iface MIXER
 		name 'Speaker ZC Switch'
 		value.0 false
@@ -12112,7 +12106,7 @@ state.sofwm8962audio {
 			count 2
 		}
 	}
-	control.67 {
+	control.66 {
 		iface MIXER
 		name 'Speaker Mixer Switch'
 		value.0 false
@@ -12123,7 +12117,7 @@ state.sofwm8962audio {
 			count 2
 		}
 	}
-	control.68 {
+	control.67 {
 		iface MIXER
 		name 'SPKOUTL Mixer IN4L Volume'
 		value 7
@@ -12137,7 +12131,7 @@ state.sofwm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.69 {
+	control.68 {
 		iface MIXER
 		name 'SPKOUTL Mixer IN4R Volume'
 		value 7
@@ -12151,7 +12145,7 @@ state.sofwm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.70 {
+	control.69 {
 		iface MIXER
 		name 'SPKOUTL Mixer MIXINL Volume'
 		value 1
@@ -12165,7 +12159,7 @@ state.sofwm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.71 {
+	control.70 {
 		iface MIXER
 		name 'SPKOUTL Mixer MIXINR Volume'
 		value 1
@@ -12179,7 +12173,7 @@ state.sofwm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.72 {
+	control.71 {
 		iface MIXER
 		name 'SPKOUTL Mixer DACL Volume'
 		value 0
@@ -12193,7 +12187,7 @@ state.sofwm8962audio {
 			dbvalue.0 -600
 		}
 	}
-	control.73 {
+	control.72 {
 		iface MIXER
 		name 'SPKOUTL Mixer DACR Volume'
 		value 0
@@ -12207,7 +12201,7 @@ state.sofwm8962audio {
 			dbvalue.0 -600
 		}
 	}
-	control.74 {
+	control.73 {
 		iface MIXER
 		name 'SPKOUTR Mixer IN4L Volume'
 		value 7
@@ -12221,7 +12215,7 @@ state.sofwm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.75 {
+	control.74 {
 		iface MIXER
 		name 'SPKOUTR Mixer IN4R Volume'
 		value 7
@@ -12235,7 +12229,7 @@ state.sofwm8962audio {
 			dbvalue.0 600
 		}
 	}
-	control.76 {
+	control.75 {
 		iface MIXER
 		name 'SPKOUTR Mixer MIXINL Volume'
 		value 1
@@ -12249,7 +12243,7 @@ state.sofwm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.77 {
+	control.76 {
 		iface MIXER
 		name 'SPKOUTR Mixer MIXINR Volume'
 		value 1
@@ -12263,7 +12257,7 @@ state.sofwm8962audio {
 			dbvalue.0 0
 		}
 	}
-	control.78 {
+	control.77 {
 		iface MIXER
 		name 'SPKOUTR Mixer DACL Volume'
 		value 0
@@ -12277,7 +12271,7 @@ state.sofwm8962audio {
 			dbvalue.0 -600
 		}
 	}
-	control.79 {
+	control.78 {
 		iface MIXER
 		name 'SPKOUTR Mixer DACR Volume'
 		value 0
@@ -12291,33 +12285,39 @@ state.sofwm8962audio {
 			dbvalue.0 -600
 		}
 	}
-	control.80 {
+	control.79 {
 		iface MIXER
-		name 'SPKOUTR PGA'
-		value DAC
+		name 'INPGAL IN1L Switch'
+		value false
 		comment {
 			access 'read write'
-			type ENUMERATED
+			type BOOLEAN
 			count 1
-			item.0 DAC
-			item.1 Mixer
+		}
+	}
+	control.80 {
+		iface MIXER
+		name 'INPGAL IN2L Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
 		}
 	}
 	control.81 {
 		iface MIXER
-		name 'SPKOUTL PGA'
-		value DAC
+		name 'INPGAL IN3L Switch'
+		value true
 		comment {
 			access 'read write'
-			type ENUMERATED
+			type BOOLEAN
 			count 1
-			item.0 DAC
-			item.1 Mixer
 		}
 	}
 	control.82 {
 		iface MIXER
-		name 'SPKOUTR Mixer DACL Switch'
+		name 'INPGAL IN4L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12327,7 +12327,7 @@ state.sofwm8962audio {
 	}
 	control.83 {
 		iface MIXER
-		name 'SPKOUTR Mixer DACR Switch'
+		name 'INPGAR IN1R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12337,8 +12337,8 @@ state.sofwm8962audio {
 	}
 	control.84 {
 		iface MIXER
-		name 'SPKOUTR Mixer MIXINL Switch'
-		value false
+		name 'INPGAR IN2R Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -12347,8 +12347,8 @@ state.sofwm8962audio {
 	}
 	control.85 {
 		iface MIXER
-		name 'SPKOUTR Mixer MIXINR Switch'
-		value false
+		name 'INPGAR IN3R Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -12357,7 +12357,7 @@ state.sofwm8962audio {
 	}
 	control.86 {
 		iface MIXER
-		name 'SPKOUTR Mixer IN4L Switch'
+		name 'INPGAR IN4R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12367,7 +12367,7 @@ state.sofwm8962audio {
 	}
 	control.87 {
 		iface MIXER
-		name 'SPKOUTR Mixer IN4R Switch'
+		name 'MIXINL IN2L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12377,7 +12377,7 @@ state.sofwm8962audio {
 	}
 	control.88 {
 		iface MIXER
-		name 'SPKOUTL Mixer DACL Switch'
+		name 'MIXINL IN3L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12387,8 +12387,8 @@ state.sofwm8962audio {
 	}
 	control.89 {
 		iface MIXER
-		name 'SPKOUTL Mixer DACR Switch'
-		value false
+		name 'MIXINL PGA Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -12397,7 +12397,7 @@ state.sofwm8962audio {
 	}
 	control.90 {
 		iface MIXER
-		name 'SPKOUTL Mixer MIXINL Switch'
+		name 'MIXINR IN2R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12407,8 +12407,8 @@ state.sofwm8962audio {
 	}
 	control.91 {
 		iface MIXER
-		name 'SPKOUTL Mixer MIXINR Switch'
-		value false
+		name 'MIXINR IN3R Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -12417,8 +12417,8 @@ state.sofwm8962audio {
 	}
 	control.92 {
 		iface MIXER
-		name 'SPKOUTL Mixer IN4L Switch'
-		value false
+		name 'MIXINR PGA Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -12427,172 +12427,17 @@ state.sofwm8962audio {
 	}
 	control.93 {
 		iface MIXER
-		name 'SPKOUTL Mixer IN4R Switch'
-		value false
+		name 'Input Mode'
+		value Analog
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 Analog
+			item.1 Digital
 		}
 	}
 	control.94 {
-		iface MIXER
-		name 'HPOUTR PGA'
-		value DAC
-		comment {
-			access 'read write'
-			type ENUMERATED
-			count 1
-			item.0 DAC
-			item.1 Mixer
-		}
-	}
-	control.95 {
-		iface MIXER
-		name 'HPOUTL PGA'
-		value DAC
-		comment {
-			access 'read write'
-			type ENUMERATED
-			count 1
-			item.0 DAC
-			item.1 Mixer
-		}
-	}
-	control.96 {
-		iface MIXER
-		name 'HPMIXR DACL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.97 {
-		iface MIXER
-		name 'HPMIXR DACR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.98 {
-		iface MIXER
-		name 'HPMIXR MIXINL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.99 {
-		iface MIXER
-		name 'HPMIXR MIXINR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.100 {
-		iface MIXER
-		name 'HPMIXR IN4L Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.101 {
-		iface MIXER
-		name 'HPMIXR IN4R Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.102 {
-		iface MIXER
-		name 'HPMIXL DACL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.103 {
-		iface MIXER
-		name 'HPMIXL DACR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.104 {
-		iface MIXER
-		name 'HPMIXL MIXINL Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.105 {
-		iface MIXER
-		name 'HPMIXL MIXINR Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.106 {
-		iface MIXER
-		name 'HPMIXL IN4L Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.107 {
-		iface MIXER
-		name 'HPMIXL IN4R Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.108 {
-		iface MIXER
-		name STR
-		value None
-		comment {
-			access 'read write'
-			type ENUMERATED
-			count 1
-			item.0 None
-			item.1 Left
-			item.2 Right
-		}
-	}
-	control.109 {
 		iface MIXER
 		name STL
 		value None
@@ -12605,9 +12450,166 @@ state.sofwm8962audio {
 			item.2 Right
 		}
 	}
+	control.95 {
+		iface MIXER
+		name STR
+		value None
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 None
+			item.1 Left
+			item.2 Right
+		}
+	}
+	control.96 {
+		iface MIXER
+		name 'HPMIXL DACL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.97 {
+		iface MIXER
+		name 'HPMIXL DACR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.98 {
+		iface MIXER
+		name 'HPMIXL MIXINL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.99 {
+		iface MIXER
+		name 'HPMIXL MIXINR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.100 {
+		iface MIXER
+		name 'HPMIXL IN4L Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.101 {
+		iface MIXER
+		name 'HPMIXL IN4R Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.102 {
+		iface MIXER
+		name 'HPMIXR DACL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.103 {
+		iface MIXER
+		name 'HPMIXR DACR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.104 {
+		iface MIXER
+		name 'HPMIXR MIXINL Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.105 {
+		iface MIXER
+		name 'HPMIXR MIXINR Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.106 {
+		iface MIXER
+		name 'HPMIXR IN4L Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.107 {
+		iface MIXER
+		name 'HPMIXR IN4R Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.108 {
+		iface MIXER
+		name 'HPOUTL PGA'
+		value DAC
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 DAC
+			item.1 Mixer
+		}
+	}
+	control.109 {
+		iface MIXER
+		name 'HPOUTR PGA'
+		value DAC
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 DAC
+			item.1 Mixer
+		}
+	}
 	control.110 {
 		iface MIXER
-		name 'MIXINR IN2R Switch'
+		name 'SPKOUTL Mixer DACL Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12617,8 +12619,8 @@ state.sofwm8962audio {
 	}
 	control.111 {
 		iface MIXER
-		name 'MIXINR IN3R Switch'
-		value true
+		name 'SPKOUTL Mixer DACR Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -12627,8 +12629,8 @@ state.sofwm8962audio {
 	}
 	control.112 {
 		iface MIXER
-		name 'MIXINR PGA Switch'
-		value true
+		name 'SPKOUTL Mixer MIXINL Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -12637,7 +12639,7 @@ state.sofwm8962audio {
 	}
 	control.113 {
 		iface MIXER
-		name 'MIXINL IN2L Switch'
+		name 'SPKOUTL Mixer MIXINR Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12647,7 +12649,7 @@ state.sofwm8962audio {
 	}
 	control.114 {
 		iface MIXER
-		name 'MIXINL IN3L Switch'
+		name 'SPKOUTL Mixer IN4L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12657,8 +12659,8 @@ state.sofwm8962audio {
 	}
 	control.115 {
 		iface MIXER
-		name 'MIXINL PGA Switch'
-		value true
+		name 'SPKOUTL Mixer IN4R Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -12667,7 +12669,7 @@ state.sofwm8962audio {
 	}
 	control.116 {
 		iface MIXER
-		name 'INPGAR IN1R Switch'
+		name 'SPKOUTR Mixer DACL Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12677,8 +12679,8 @@ state.sofwm8962audio {
 	}
 	control.117 {
 		iface MIXER
-		name 'INPGAR IN2R Switch'
-		value true
+		name 'SPKOUTR Mixer DACR Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -12687,8 +12689,8 @@ state.sofwm8962audio {
 	}
 	control.118 {
 		iface MIXER
-		name 'INPGAR IN3R Switch'
-		value true
+		name 'SPKOUTR Mixer MIXINL Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -12697,7 +12699,7 @@ state.sofwm8962audio {
 	}
 	control.119 {
 		iface MIXER
-		name 'INPGAR IN4R Switch'
+		name 'SPKOUTR Mixer MIXINR Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12707,7 +12709,7 @@ state.sofwm8962audio {
 	}
 	control.120 {
 		iface MIXER
-		name 'INPGAL IN1L Switch'
+		name 'SPKOUTR Mixer IN4L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12717,7 +12719,7 @@ state.sofwm8962audio {
 	}
 	control.121 {
 		iface MIXER
-		name 'INPGAL IN2L Switch'
+		name 'SPKOUTR Mixer IN4R Switch'
 		value false
 		comment {
 			access 'read write'
@@ -12727,22 +12729,26 @@ state.sofwm8962audio {
 	}
 	control.122 {
 		iface MIXER
-		name 'INPGAL IN3L Switch'
-		value true
+		name 'SPKOUTL PGA'
+		value DAC
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 DAC
+			item.1 Mixer
 		}
 	}
 	control.123 {
 		iface MIXER
-		name 'INPGAL IN4L Switch'
-		value false
+		name 'SPKOUTR PGA'
+		value DAC
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 DAC
+			item.1 Mixer
 		}
 	}
 	control.124 {
