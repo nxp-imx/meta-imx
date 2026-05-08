@@ -96,7 +96,7 @@ GLIBC_64BIT_TIME_FLAGS = ""
 SRC_URI:remove = "git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV}"
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "git://github.com/nxp-imx/libcamera.git;protocol=https"
-SRCBRANCH = "imx/next"
+SRCBRANCH = "lf-6.18.20_2.0.0"
 SRCREV = "910e4df8da2de6214167760ab2fd7360daa5e5dc"
 
 PACKAGECONFIG = "gst pycamera dng"
