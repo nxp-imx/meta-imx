@@ -163,6 +163,7 @@ do_install:append() {
     # Install test binaries and data in test package
     install -d ${D}${bindir}/${BP}/tests
     install -m 0744 ${B}/libcustom_op_library.so ${D}${bindir}/${BP}/tests
+    install -m 0644 ${B}/libonnxruntime_runtime_path_test_shared_library.so ${D}${bindir}/${BP}/tests
     install -m 0744 ${B}/onnxruntime_global_thread_pools_test ${D}${bindir}/${BP}/tests
     install -m 0744 ${B}/onnxruntime_mlas_test ${D}${bindir}/${BP}/tests
     install -m 0744 ${B}/onnxruntime_shared_lib_test ${D}${bindir}/${BP}/tests
