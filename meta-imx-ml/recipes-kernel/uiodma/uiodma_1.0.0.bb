@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171d
 
 SRC_URI = "${UIODMA_SRC};branch=${SRCBRANCH}"
 UIODMA_SRC ?= "git://github.com/nxp-imx-support/uiodma-driver.git;protocol=https"
-SRCBRANCH = "master"
+SRCBRANCH = "lf-6.18.20_2.0.0"
 
 SRCREV = "47657ca3a2a4bdec867d0239aa417872979353af"
 
