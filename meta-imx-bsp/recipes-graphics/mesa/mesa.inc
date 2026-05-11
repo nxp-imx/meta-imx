@@ -374,6 +374,8 @@ SRCREV = "${AUTOREV}"
 
 PACKAGECONFIG:append:imxmali = " panfrost"
 
+EXTRA_OEMESON += "-Db_ndebug=false"
+
 do_install:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'panfrost', 'true', 'false', d)}; then
         # Install a system-wide environment snippet to auto-enable Rusticl on Panfrost GPUs.
