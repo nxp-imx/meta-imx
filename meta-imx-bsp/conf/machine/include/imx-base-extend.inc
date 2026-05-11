@@ -23,7 +23,6 @@ MACHINE_SOCARCH_SUFFIX:mx952-nxp-bsp = "-mx952"
 SECO_FIRMWARE_NAME:mx952-generic-bsp ?= "mx952${IMX_SOC_REV_LOWER}-ahab-container.img"
 IMX_SOC_REV:mx952-generic-bsp   ??= "A0"
 IMX_EXTRA_FIRMWARE:mx952-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx virtual/imx-system-manager virtual/imx-oei"
-PREFERRED_VERSION_imx-m7-demos:mx952-nxp-bsp = "25.12.00"
 
 # Add new SoC i.MX 943
 IMX_SOC_REV:mx943-generic-bsp ?= "A1"
