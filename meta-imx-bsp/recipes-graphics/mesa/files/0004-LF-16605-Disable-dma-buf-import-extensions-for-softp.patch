@@ -1,0 +1,34 @@
+From e9c4569670965289c4ba3bf8fbfa8219349a2ebb Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Wed, 12 Nov 2025 15:00:30 +0800
+Subject: [PATCH] LF-16605 Disable dma-buf import extensions for softpipe
+
+The softpipe software rasterizer does not support dma-buf import,
+
+so avoid advertising EXT_image_dma_buf_import and
+
+EXT_image_dma_buf_import_modifiers when the driver name is "softpipe".
+
+Upstream-Status: Inappropriate [i.MX specific]
+Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
+---
+ src/egl/drivers/dri2/egl_dri2.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/egl/drivers/dri2/egl_dri2.c b/src/egl/drivers/dri2/egl_dri2.c
+index 4e277eb6f2a..32ff9055b34 100644
+--- a/src/egl/drivers/dri2/egl_dri2.c
++++ b/src/egl/drivers/dri2/egl_dri2.c
+@@ -684,7 +684,8 @@ dri2_setup_screen(_EGLDisplay *disp)
+    if (pscreen->caps.dmabuf & DRM_PRIME_CAP_EXPORT)
+       disp->Extensions.MESA_image_dma_buf_export = true;
+ 
+-   if (dri2_dpy->has_dmabuf_import) {
++   if (dri2_dpy->has_dmabuf_import &&
++       strcmp("softpipe", pscreen->get_name(pscreen))) {
+       disp->Extensions.EXT_image_dma_buf_import = EGL_TRUE;
+       disp->Extensions.EXT_image_dma_buf_import_modifiers = EGL_TRUE;
+    }
+-- 
+2.34.1
+
