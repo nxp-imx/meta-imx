@@ -118,3 +118,58 @@ PREFERRED_VERSION_nativesdk-qemu ??= "${QEMUVERSION}"
 
 SOC_DEFAULT_IMAGE_FSTYPES = "wic.bmap wic.zst tar.zst"
 ZSTD_COMPRESSION_LEVEL ?= "10"
+
+# ============================================================================
+# i.MX Mali GPU Driver Configuration
+# ============================================================================
+# Driver selection (mali-imx or mesa) for all APIs (GLES, Vulkan, OpenCL)
+IMX_MALI_DRIVERS ??= "mali-imx"
+
+# Default driver selection in dual-driver mode (mali-imx or mesa)
+IMX_MALI_DEFAULT_DRIVER ??= "mali-imx"
+
+# Detect dual-driver mode
+IMX_MALI_DUAL_DRIVER = "0"
+IMX_MALI_DUAL_DRIVER:imxmali = "${@'1' if 'mali-imx' in (d.getVar('IMX_MALI_DRIVERS') or '') and 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else '0'}"
+
+# ============================================================================
+# Graphics Provider Configuration
+# ============================================================================
+# Build-time providers - ALL must point to the same recipe to avoid skipping
+
+# Desktop GL provider (mali-imx doesn't provide desktop GL)
+PREFERRED_PROVIDER_virtual/libgl:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mesa-gl'}"
+PREFERRED_PROVIDER_virtual/libgl:imxgpu:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mesa-gl'}"
+PREFERRED_PROVIDER_virtual/mesa:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mesa-gl'}"
+PREFERRED_PROVIDER_virtual/mesa:imxgpu:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mesa-gl'}"
+
+# EGL/GLES/GBM providers - ALL point to mesa when mesa is in driver list
+PREFERRED_PROVIDER_virtual/egl:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/libegl:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/libgles1:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/gles1:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/libgles2:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/gles2:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/libgles3:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/gles3:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/libgbm:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/gbm:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+
+# Vulkan provider
+PREFERRED_PROVIDER_virtual/vulkan-icd:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/vulkan:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+
+# OpenCL provider
+PREFERRED_PROVIDER_virtual/opencl-icd:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+PREFERRED_PROVIDER_virtual/opencl:imxgpu3d:imxmali = "${@'mesa' if 'mesa' in (d.getVar('IMX_MALI_DRIVERS') or '') else 'mali-imx'}"
+
+# Runtime providers - Mesa is preferred in dual-driver mode
+PREFERRED_RPROVIDER_virtual-vulkan-icd:imxmali = "${@'mesa-vulkan-drivers' if d.getVar('IMX_MALI_DUAL_DRIVER') == '1' else ''}"
+PREFERRED_RPROVIDER_virtual-opencl-icd:imxmali = "${@'libopencl-mesa' if d.getVar('IMX_MALI_DUAL_DRIVER') == '1' else ''}"
+
+MACHINE_EXTRA_RDEPENDS:append:imxmali = " linux-firmware-mali-csffw-arch1012"
+
+BBMASK += "meta-freescale/recipes-graphics/mesa/mesa-gl.bbappend"
+
+PREFERRED_VERSION_mesa         = "26.0.5"
+PREFERRED_VERSION_mesa:imxmali = "26.0.5.imx"
