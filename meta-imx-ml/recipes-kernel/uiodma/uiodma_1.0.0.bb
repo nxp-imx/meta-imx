@@ -7,7 +7,7 @@ SRC_URI = "${UIODMA_SRC};branch=${SRCBRANCH}"
 UIODMA_SRC ?= "git://github.com/nxp-imx-support/uiodma-driver.git;protocol=https"
 SRCBRANCH = "lf-6.18.20_2.0.0"
 
-SRCREV = "47657ca3a2a4bdec867d0239aa417872979353af"
+SRCREV = "ba17c6a82dd98d74abc434291059c5d27a96ea96"
 
 S = "${UNPACKDIR}/${BPN}-${PV}/uiodma_cache_management"
 
