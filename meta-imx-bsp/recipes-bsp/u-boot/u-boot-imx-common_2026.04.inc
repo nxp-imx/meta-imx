@@ -22,6 +22,6 @@ DEPENDS += " \
 
 B = "${WORKDIR}/build"
 
-inherit fsl-u-boot-localversion
+inherit fsl-u-boot-localversion pkgconfig
 
 BOOT_TOOLS = "imx-boot-tools"
