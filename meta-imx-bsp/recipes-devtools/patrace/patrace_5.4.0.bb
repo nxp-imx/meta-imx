@@ -14,6 +14,7 @@ SRC_URI = "gitsm://github.com/ARM-software/${BPN}.git;branch=master;protocol=htt
            file://0001-fastforward-CMakeLists.txt-Fix-call_parser_src_gener.patch \
            file://0002-fakedriver-Fix-cmake-3.5-syntax.patch \
            file://0001-LF-17811-update-xdg-header-for-wrynose.patch \
+           file://0001-patrace-Fix-Wayland-window-creation-LF-17811.patch \
 "
 SRCREV = "9e0f8ce6b5d6056a4ede30ece59836a7bcaf5ea0"
 
