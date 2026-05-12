@@ -7,7 +7,7 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base"
 
 IMX_SRCREV_ABBREV = "496726b"
 SRC_URI:append = " file://install.sh"
-SRC_URI[sha256sum] = "ae402d52fa77bfe763139a1d608297941e7d0c0fc60d211b11cd4b7a2a49eb3e"
+SRC_URI[sha256sum] = "ce48d228ffc2742e148b3023969c594327f20a98a38b6b6047d74972a41cff78"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
 
