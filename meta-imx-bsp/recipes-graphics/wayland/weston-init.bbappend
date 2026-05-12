@@ -22,6 +22,11 @@ do_install:append() {
         # FIXME: weston should be run as weston, not as root
         update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
         update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
+
+        # Add restart settings with rate limiting to prevent infinite restart loops
+        insert_line_after "Restart=on-failure" "RestartSec=5" ${D}${systemd_system_unitdir}/weston.service
+        insert_line_after "RestartSec=5" "StartLimitBurst=5" ${D}${systemd_system_unitdir}/weston.service
+        insert_line_after "StartLimitBurst=5" "StartLimitIntervalSec=60" ${D}${systemd_system_unitdir}/weston.service
     fi
 
     # Include commented gbm-format
