@@ -14,6 +14,7 @@ FILES:${PN}:append = " \
     ${sysconfdir}/xen/*.conf \
     ${sysconfdir}/xen/readme.imx \
     ${sysconfdir}/xen/imx95-disk.sh \
+    ${sysconfdir}/xen/imx95-domu.sh \
 "
 
 # The xen-tools-net-conf package configures systemd-networkd to create a xenbr0 bridge
