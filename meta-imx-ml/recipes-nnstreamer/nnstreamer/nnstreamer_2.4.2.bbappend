@@ -3,6 +3,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 SRC_URI += " file://0001-gray8_padding_removal.patch \
              file://0001-Fix-to-provide-default-delegates.patch \
              file://0001-Add-Ara-2-NPU-tensor_filter-with-V2-API-and-DMA-BUF.patch \
+             file://0001-Test-fix-deprecated-method.patch \
 "
 
 # Enable ara2 support on platforms with Kinara Ara-2 NPU hardware
