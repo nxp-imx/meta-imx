@@ -7,7 +7,7 @@ SRC_URI = "${EIQ_AAF_CONNECTOR_SRC};branch=${SRCBRANCH}"
 SRC_URI += "file://install.sh"
 EIQ_AAF_CONNECTOR_SRC ?= "git://github.com/nxp-imx-support/eiq-aaf-connector.git;protocol=https"
 SRCBRANCH = "lf-6.18.20_2.0.0"
-SRCREV = "4a3caffa5584e47f7e2b99562ef7f24499eaf1bd"
+SRCREV = "4a3caffa5584e47f7e2b99562ef7f24499eaf1bd" 
 
 inherit python_setuptools_build_meta
 
