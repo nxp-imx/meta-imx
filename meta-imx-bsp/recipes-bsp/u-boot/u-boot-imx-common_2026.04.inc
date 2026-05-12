@@ -8,7 +8,7 @@ SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 UBOOT_SRC ?= "git://github.com/nxp-imx/uboot-imx.git;protocol=https"
 SRCBRANCH = "lf_v2026.04"
 LOCALVERSION ?= "-${SRCBRANCH}"
-SRCREV = "7d01ad00baa8f10686c60e7d0fe50ff241750f27"
+SRCREV = "0b395eb7a6c9fca32bc7d9b8ce86cd2323ac8972"
 
 DEPENDS += " \
     bc-native \
