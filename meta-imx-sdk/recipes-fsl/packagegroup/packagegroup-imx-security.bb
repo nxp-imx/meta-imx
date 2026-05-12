@@ -38,6 +38,7 @@ RDEPENDS_EDGE_LOCK_APPS:mx93-nxp-bsp   = "oem-prov-app"
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE = ""
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8dxl-nxp-bsp = " \
     imx-secure-enclave-seco \
+    itest \
     python3-requests"
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8ulp-nxp-bsp = " \
     imx-secure-enclave \
