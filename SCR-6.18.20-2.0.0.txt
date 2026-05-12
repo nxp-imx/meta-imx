@@ -1633,7 +1633,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
-Version:                     1.23.2
+Version:                     1.24.3
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1719,6 +1719,26 @@ Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    Runtime SDK for AI/ML acceleration with Ara240 NPU on i.MX SoCs
 Release Location:            Mirror
+--------------------------------------------
+
+Package:                     eiq-aaf-connector.git
+Version:                     2.1
+Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    REST-based server for inference on LLMs running on i.MX devices with Kinara
+Release Location:            https://github.com/nxp-imx-support/eiq-aaf-connector -b lf-6.18.20-2.0.0
+--------------------------------------------
+
+Package:                     uiodma.git
+Version:                     1.0.0
+Outgoing License:            GPL-2.0-only 
+License File:                LICENSE.txt
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    Linux kernel driver providing userspace I/O (UIO) access to DMA-capable memory regions
+Release Location:            https://github.com/nxp-imx-support/uiodma-driver -b lf-6.18.20-2.0.0
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
