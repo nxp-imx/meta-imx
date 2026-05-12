@@ -1,0 +1,225 @@
+From 73fca9ea60b18ac6229c59d5eabc03fb1215a58c Mon Sep 17 00:00:00 2001
+From: Jiyu Yang <jiyu.yang@nxp.com>
+Date: Tue, 12 May 2026 17:43:50 +0800
+Subject: [PATCH] patrace: Fix Wayland window creation [LF-17811]
+
+Fix Wayland window creation to comply with Weston 15 xdg-shell protocol
+The previous implementation did not properly follow the xdg-shell configure/commit
+flow required by Weston 15, causing window creation and resize operations to fail.
+
+Changes:
+- Add xdg_toplevel_listener to handle configure events with width/height parameters
+- Implement proper configure/ack/commit sequence for window initialization
+- Add mConfigured flag to track surface configuration state
+- Wait for configure event before proceeding with window show/resize operations
+- Move callback function implementations after WaylandWindow class definition to
+  resolve forward declaration issues
+
+The correct flow is now:
+1. Request state change (set_fullscreen/unset_fullscreen)
+2. Commit surface (wl_surface_commit)
+3. Wait for configure event from compositor
+4. Acknowledge configure (xdg_surface_ack_configure)
+5. Proceed with rendering
+
+This ensures compatibility with Weston 15's stricter xdg-shell protocol enforcement
+where surfaces must be configured before they can be displayed.
+
+Upstream-Status: Submitted https://github.com/ARM-software/patrace/pull/69
+
+Signed-off-by: Jiyu Yang <jiyu.yang@nxp.com>
+---
+ patrace/src/retracer/glws_egl_wayland.cpp | 106 +++++++++++++++-------
+ 1 file changed, 75 insertions(+), 31 deletions(-)
+
+diff --git a/patrace/src/retracer/glws_egl_wayland.cpp b/patrace/src/retracer/glws_egl_wayland.cpp
+index e8850c2..e47b98c 100644
+--- a/patrace/src/retracer/glws_egl_wayland.cpp
++++ b/patrace/src/retracer/glws_egl_wayland.cpp
+@@ -11,6 +11,12 @@
+ namespace retracer
+ {
+ 
++static void handle_configure(void *data, struct xdg_surface *surface, uint32_t serial);
++static void handle_toplevel_configure(void *data, struct xdg_toplevel *toplevel,
++                                     int32_t width, int32_t height,
++                                     struct wl_array *states);
++static void handle_toplevel_close(void *data, struct xdg_toplevel *toplevel);
++
+ static void shsurf_handle_ping(void *data, struct xdg_wm_base *shell_surface, uint32_t serial)
+ {
+     struct wl_display *display = (struct wl_display *)data;
+@@ -22,14 +28,15 @@ static const struct xdg_wm_base_listener shell_listener = {
+    shsurf_handle_ping
+ };
+ 
+-static void handle_configure(void *data, struct xdg_surface *surface, uint32_t serial) {
+-    xdg_surface_ack_configure(surface, serial);
+-}
+-
+ static const struct xdg_surface_listener surface_listener = {
+     .configure = handle_configure
+ };
+ 
++static const struct xdg_toplevel_listener toplevel_listener = {
++    .configure = handle_toplevel_configure,
++    .close = handle_toplevel_close,
++};
++
+ class WaylandWindow : public NativeWindow
+ {
+     public:
+@@ -38,6 +45,7 @@ class WaylandWindow : public NativeWindow
+                 int fs_width, int fs_height)
+             : NativeWindow(width, height, title)
+                 , mDisplay(display), mOutput(output), mFSWidth(fs_width), mFSHeight(fs_height)
++                , mConfigured(false)
+         {
+             mSurface = wl_compositor_create_surface(compositor);
+             if (!mSurface) {
+@@ -45,20 +53,18 @@ class WaylandWindow : public NativeWindow
+                 return;
+             }
+ 
+-            mShellSurface = xdg_wm_base_get_xdg_surface(shell,mSurface);
++            mShellSurface = xdg_wm_base_get_xdg_surface(shell, mSurface);
+ 
+             if (!mShellSurface) {
+                 DBG_LOG("Failed to initialize wayland shell surface\n");
+                 return;
+             }
++
+             mXdg_toplevel = xdg_surface_get_toplevel(mShellSurface);
+ 
+             xdg_wm_base_add_listener(shell, &shell_listener, mDisplay);
+-            xdg_surface_add_listener(mShellSurface,&surface_listener,NULL);
+-            /* TODO we set the shell surface listener, so it responds to compositor
+-             * pings. However the retracer doesn't regularly dispatch events
+-             * from the Wayland default queue, so some compositors might think
+-             * the application is unresponsive. */
++            xdg_surface_add_listener(mShellSurface, &surface_listener, this);
++            xdg_toplevel_add_listener(mXdg_toplevel, &toplevel_listener, this);
+ 
+             mHandle = (EGLNativeWindowType)wl_egl_window_create(mSurface, width, height);
+             if (!mHandle) {
+@@ -81,40 +87,46 @@ class WaylandWindow : public NativeWindow
+         {
+             NativeWindow::show();
+ 
+-            eglWaitClient();
+-
+-            /* TODO: I *think* its the wl_shell_surface_set_* function that
+-             * that triggers it to be displayed and not just the creation
+-             * of the shell surface, but I might be wrong */
++            // Set fullscreen or windowed mode before initial commit
+             if (getWidth() == mFSWidth && getHeight() == mFSHeight) {
+-                /* We assume that if the desired size is the size of the
+-                 * framebuffer then we want it fullscreen */
+-                xdg_toplevel_set_fullscreen(mXdg_toplevel,mOutput);
+-            } else{
+-                xdg_toplevel_unset_fullscreen(mXdg_toplevel);
++                xdg_toplevel_set_fullscreen(mXdg_toplevel, mOutput);
++            }
++
++            // Commit the surface to trigger configure event
++            wl_surface_commit(mSurface);
++
++            // Wait for configure event
++            while (!mConfigured) {
++                wl_display_dispatch(mDisplay);
+             }
+-            wl_display_roundtrip(mDisplay);
++
+             mVisible = true;
+         }
+ 
++        struct wl_surface* getSurface() const {
++            return mSurface;
++        }
++
+         bool resize(int w, int h)
+         {
+             if (NativeWindow::resize(w, h))
+             {
+-                /* NB: The resize won't actually happen yet, it'll
+-                 * only affect the next frame that EGL renders */
+                 wl_egl_window_resize((wl_egl_window*)mHandle, w, h, 0, 0);
++
+                 if (mVisible) {
+-                    /* We are already showing the window, so may need to
+-                     * transition to fullscreen or vice-versa */
++                    // Request fullscreen state change
+                     if (getWidth() == mFSWidth && getHeight() == mFSHeight) {
+-                        /* We assume that if the desired size is the size of the
+-                         * framebuffer then we want it fullscreen */
+-                        xdg_toplevel_set_fullscreen(mXdg_toplevel,mOutput);
+-                    } else{
++                        xdg_toplevel_set_fullscreen(mXdg_toplevel, mOutput);
++                    } else {
+                         xdg_toplevel_unset_fullscreen(mXdg_toplevel);
+                     }
+-                    wl_display_roundtrip(mDisplay);
++
++                    // Commit and wait for configure
++                    wl_surface_commit(mSurface);
++                    mConfigured = false;
++                    while (!mConfigured) {
++                        wl_display_dispatch(mDisplay);
++                    }
+                 }
+                 return true;
+             }
+@@ -122,6 +134,17 @@ class WaylandWindow : public NativeWindow
+             return false;
+         }
+ 
++        void setConfigured(bool configured) {
++            mConfigured = configured;
++        }
++
++        void handleResize(int width, int height) {
++            // Handle compositor-requested resize if needed
++            if (width > 0 && height > 0) {
++                wl_egl_window_resize((wl_egl_window*)mHandle, width, height, 0, 0);
++            }
++        }
++
+     private:
+         struct wl_display* mDisplay;
+         struct wl_output* mOutput;
+@@ -130,10 +153,31 @@ class WaylandWindow : public NativeWindow
+         struct wl_surface* mSurface;
+         struct xdg_surface *mShellSurface;
+         struct xdg_toplevel *mXdg_toplevel;
+-        int configured;
++        bool mConfigured;
+         bool mVisible;
+ };
+ 
++// Callback implementations after class definition
++static void handle_configure(void *data, struct xdg_surface *surface, uint32_t serial) {
++    WaylandWindow *window = static_cast<WaylandWindow *>(data);
++    xdg_surface_ack_configure(surface, serial);
++    wl_surface_commit(window->getSurface());
++    window->setConfigured(true);
++}
++
++static void handle_toplevel_configure(void *data, struct xdg_toplevel *toplevel,
++                                     int32_t width, int32_t height,
++                                     struct wl_array *states) {
++    WaylandWindow *window = static_cast<WaylandWindow *>(data);
++    if (width > 0 && height > 0) {
++        window->handleResize(width, height);
++    }
++}
++
++static void handle_toplevel_close(void *data, struct xdg_toplevel *toplevel) {
++    // Handle window close if needed
++}
++
+ 
+ GlwsEglWayland::GlwsEglWayland()
+     : GlwsEgl()
+-- 
+2.37.1
+
