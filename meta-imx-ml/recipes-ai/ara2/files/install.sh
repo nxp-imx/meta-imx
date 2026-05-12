@@ -146,43 +146,20 @@ header "${PACKAGE_NAME} v${PACKAGE_VERSION} - Installation"
 
 # Create Python virtual environment
 section "Setting up eIQ AAF Connector environment"
-info "Installing uv..."
-python3 -m pip install uv
 
 info "Creating python venv (/usr/share/eiq/aaf-connector/venv)..."
 uv venv "/usr/share/eiq/aaf-connector/venv"
 source "/usr/share/eiq/aaf-connector/venv/bin/activate"
 
 section "Installing dependencies in venv"
-uv pip install --no-progress /usr/share/python-wheels/optimum_ara-2.0.0.2-py3-none-any.whl
-uv pip install --no-progress /usr/share/python-wheels/eiq_aaf_connector-2.0.0-py3-none-any.whl
+uv pip install --no-progress /usr/share/python-wheels/optimum_ara-2.1.1-py3-none-any.whl
+uv pip install --no-progress /usr/share/python-wheels/eiq_aaf_connector-2.1-py3-none-any.whl
 success "Python packages installed"
 
 deactivate
 
 # Fetch Models
 readonly FETCH_MODELS_SCRIPT="uvx --from /usr/share/python-wheels/fetch_models-1.0.0-py3-none-any.whl fetch_models"
-# Define models to check (add more as needed)
-readonly MODELS=(
-	"nxp/Qwen2.5-7B-Instruct-Ara240"
-	"nxp/Qwen2.5-Coder-1.5B-Ara240"
-	"nxp/Qwen2.5-VL-7B-Instruct-Ara240"
-)
-
-section "Fetching models from Hugging Face Hub"
-
-# Download each model
-for model in "${MODELS[@]}"; do
-	info "Downloading model: ${YELLOW}${model}${RESET}"
-	if ! ${FETCH_MODELS_SCRIPT} --repo-id "${model}"; then
-		error "Failed to download model: ${model}"
-		warning "You can manually download it later using:"
-		info "  $FETCH_MODELS_SCRIPT --repo-id $model"
-		# Don't exit, continue with other models
-	else
-		success "Downloaded: ${model}"
-	fi
-done
 
 # Create systemd service file
 section "Creating systemd service..."

@@ -13,7 +13,7 @@ inherit python_setuptools_build_meta
 
 do_install() {
     install -d ${D}${datadir}/${BPN}
-    install -m 0755 ${UNPACKDIR}/install.sh ${D}${datadir}/${BPN}/install.sh
+    install -m 0755 ${UNPACKDIR}/install.sh ${D}${datadir}/eiq/aaf-connector/install.sh
 
     install -d ${D}${bindir}
     install -m 0755 ${S}/aaf-connector ${D}${bindir}
@@ -22,11 +22,11 @@ do_install() {
     install -m 0644 ${UNPACKDIR}/../dist/*.whl ${D}/${datadir}/python-wheels
 
     install -d ${D}/${datadir}/eiq/aaf_connector
-    install -m 0644 ${S}/config/server_config.json ${D}/${datadir}/eiq/aaf_connector
+    install -m 0644 ${S}/config/server_config.json ${D}/${datadir}/eiq/aaf-connector
 }
 
 FILES:${PN} += " \
 	${datadir}/python-wheels \
-	${datadir}/eiq/aaf_connector \
+	${datadir}/eiq/aaf-connector \
 "
 
