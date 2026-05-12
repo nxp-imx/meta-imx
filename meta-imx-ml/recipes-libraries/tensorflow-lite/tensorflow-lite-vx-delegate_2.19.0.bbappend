@@ -2,4 +2,4 @@
 require tensorflow-lite-${PV}.inc
 
 SRCBRANCH_vx = "imx-v2.19.0"
-SRCREV_vx = "2f5448e0c899fe3c31e4f43b65e0612af4cf84a0"
+SRCREV_vx = "d2981cb4e2f22d666ba89f5943310f5e0cfb5839"
