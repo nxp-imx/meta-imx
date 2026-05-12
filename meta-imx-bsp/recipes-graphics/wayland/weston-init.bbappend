@@ -22,15 +22,6 @@ do_install:append() {
         # FIXME: weston should be run as weston, not as root
         update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
         update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
-
-        # FIXME: Upstream this change
-        insert_line_before "ExecStart=" "ExecStartPre=+chvt 7" ${D}${systemd_system_unitdir}/weston.service
-
-        # FIXME: fix the underlying problem and drop this workaround
-        insert_line_after "ExecStart=" "Restart=on-failure" ${D}${systemd_system_unitdir}/weston.service
-    else
-        # Install weston-socket.sh for sysvinit as well
-        install -D -p -m0644 ${WORKDIR}/weston-socket.sh ${D}${sysconfdir}/profile.d/weston-socket.sh
     fi
 
     # Include commented gbm-format
