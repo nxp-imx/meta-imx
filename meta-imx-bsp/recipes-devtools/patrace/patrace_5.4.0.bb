@@ -13,6 +13,7 @@ SRC_URI = "gitsm://github.com/ARM-software/${BPN}.git;branch=master;protocol=htt
            file://0001-CMakeLists.txt-Switch-to-python3.patch \
            file://0001-fastforward-CMakeLists.txt-Fix-call_parser_src_gener.patch \
            file://0002-fakedriver-Fix-cmake-3.5-syntax.patch \
+           file://0001-LF-17811-update-xdg-header-for-wrynose.patch \
 "
 SRCREV = "9e0f8ce6b5d6056a4ede30ece59836a7bcaf5ea0"
 
@@ -33,8 +34,8 @@ do_configure:prepend(){
 }
 
 # FIXME: Don't ignore problems
-CFLAGS += "-Wno-maybe-uninitialized -Wno-old-style-definition"
-CXXFLAGS += "-Wno-range-loop-construct -Wno-unused-variable -Wno-old-style-definition"
+CFLAGS += "-Wno-maybe-uninitialized -Wno-old-style-definition -Wno-error=attributes"
+CXXFLAGS += "-Wno-range-loop-construct -Wno-unused-variable -Wno-old-style-definition  -Wno-error=attributes"
 
 do_install:append() {
     ln -s libEGL.so       ${D}/opt/${BPN}/${baselib}/libEGL.so.1
