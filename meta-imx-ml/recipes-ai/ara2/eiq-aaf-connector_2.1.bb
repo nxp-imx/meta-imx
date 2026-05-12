@@ -12,17 +12,16 @@ SRCREV = "4a3caffa5584e47f7e2b99562ef7f24499eaf1bd"
 inherit python_setuptools_build_meta
 
 do_install() {
-    install -d ${D}${datadir}/${BPN}
-    install -m 0755 ${UNPACKDIR}/install.sh ${D}${datadir}/eiq/aaf-connector/install.sh
 
     install -d ${D}${bindir}
     install -m 0755 ${S}/aaf-connector ${D}${bindir}
 
-    install -d ${D}/${datadir}/python-wheels
-    install -m 0644 ${UNPACKDIR}/../dist/*.whl ${D}/${datadir}/python-wheels
+    install -d ${D}${datadir}/python-wheels
+    install -m 0644 ${UNPACKDIR}/../dist/*.whl ${D}${datadir}/python-wheels
 
-    install -d ${D}/${datadir}/eiq/aaf_connector
-    install -m 0644 ${S}/config/server_config.json ${D}/${datadir}/eiq/aaf-connector
+    install -d ${D}${datadir}/eiq/aaf-connector
+    install -m 0755 ${UNPACKDIR}/install.sh ${D}${datadir}/eiq/aaf-connector/install.sh
+    install -m 0644 ${S}/config/server_config.json ${D}${datadir}/eiq/aaf-connector
 }
 
 FILES:${PN} += " \
