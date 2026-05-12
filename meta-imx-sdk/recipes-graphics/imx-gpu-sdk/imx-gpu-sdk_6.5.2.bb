@@ -32,7 +32,7 @@ EMPTY_MAIN_PACKAGES = \
 SRC_URI = "${GPU_SDK_SRC};branch=${SRCBRANCH}"
 GPU_SDK_SRC ?= "git://github.com/nxp-imx/gtec-demo-framework.git;protocol=https"
 SRCBRANCH = "release/6.5.2"
-SRCREV = "a1a7374c6c5fded6987fa8de3f7a0b38e2f4aecf"
+SRCREV = "360bc1e2570a9ffe6feba043303c22076b2e3d0c"
 
 
 inherit pkgconfig
