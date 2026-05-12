@@ -1,4 +1,4 @@
-# Yocto Project BSP for NXP i.MX Linux Release LF6.18.2_1.0.0
+# Yocto Project BSP for NXP i.MX Linux Release LF6.18.20_2.0.0
 
 This file provides a brief overview and Quick Start Guide for the Yocto Project
 BSP for NXP i.MX Linux. For more detailed information, please check the User Guide
@@ -47,9 +47,8 @@ The following development boards were tested in this release.
 | i.MX 93         | EVK    | imx93-11x11-lpddr4x-evk, imx93-14x14-lpddr4x-evk, imx93-9x9-lpddr4-qsb    |
 |                 | FRDM   | imx93-11x11-lpddr4x-frdm                                                  |
 | i.MX 94         | EVK    | imx943-19x19-lpddr5-evk, imx943-15x15-lpddr4-evk, imx943-19x19-lpddr4-evk |
-| i.MX 95         | EVK    | imx95-19x19-lpddr5-evk, imx95-15x15-lpddr4x-evk                           |
+| i.MX 95         | EVK    | imx95-19x19-lpddr5-evk                                                    |
 |                 | FRDM   | imx95-15x15-lpddr4x-frdm, imx95-19x19-lpddr5-frdm-pro                     |
-|                 | Verdin | imx95-19x19-verdin                                                        |
 
 ## Quick Start Guide
 
@@ -61,13 +60,13 @@ Follow the instructions here: https://gerrit.googlesource.com/git-repo/+/HEAD/RE
 
 ### Install essential host packages
 
-Follow the instructions here: https://docs.yoctoproject.org/5.3.1/singleindex.html#build-host-packages
+Follow the instructions here: https://docs.yoctoproject.org/6.0/singleindex.html#build-host-packages
 
 ### Download the Yocto Project layers
 
 Use the i.MX Linux BSP manifest repository to create the Yocto Project layers.
 ```
-$: repo init -u https://github.com/nxp-imx/imx-manifest.git -b imx-linux-whinlatter -m imx-6.18.2-1.0.0.xml
+$: repo init -u https://github.com/nxp-imx/imx-manifest.git -b imx-linux-wrynose -m imx-6.18.20-2.0.0.xml
 $: repo sync
 ```
 
