@@ -18,7 +18,6 @@ DEPENDS += " \
     gnutls-native \
     python3-setuptools-native \
     xxd-native \
-    libyaml-native \
 "
 
 B = "${WORKDIR}/build"
