@@ -39,11 +39,14 @@ apply_mali_ddk() {
     # Update SONAME symlinks for EGL/GLES/GBM to point to Mali
     echo "  Configuring userspace libraries..."
 
-    # First, create symlink for libmali.so (the actual implementation)
+    # First, create symlinks for libmali.so and its SONAME versions
     if [ -e "${MALI_LIB_DIR}/libmali.so" ]; then
         rm -f "${MESA_LIB_DIR}/libmali.so"
         ln -sf "${MALI_LIB_DIR}/libmali.so" "${MESA_LIB_DIR}/libmali.so"
         echo "    ✓ Linked libmali.so → ${MALI_LIB_DIR}/libmali.so"
+        rm -f "${MESA_LIB_DIR}/libmali.so.0"
+        ln -sf "${MALI_LIB_DIR}/libmali.so" "${MESA_LIB_DIR}/libmali.so.0"
+        echo "    ✓ Linked libmali.so.0 → ${MALI_LIB_DIR}/libmali.so"
     fi
 
     # Then create symlinks for the SONAME libraries
@@ -107,6 +110,11 @@ EOF
         done
     fi
 
+    # Update dynamic linker cache
+    echo "  Updating dynamic linker cache..."
+    ldconfig
+    echo "    ✓ Dynamic linker cache updated"
+
     echo "✓ Arm Mali DDK driver configured successfully"
 }
 
@@ -116,10 +124,14 @@ apply_mesa() {
     # Remove Mali SONAME symlinks and restore Mesa symlinks
     echo "  Configuring userspace libraries..."
 
-    # Remove libmali.so symlink if it exists
+    # Remove libmali.so symlinks if they exist
     if [ -L "${MESA_LIB_DIR}/libmali.so" ]; then
         rm -f "${MESA_LIB_DIR}/libmali.so"
         echo "    ✓ Removed libmali.so symlink"
+    fi
+    if [ -L "${MESA_LIB_DIR}/libmali.so.0" ]; then
+        rm -f "${MESA_LIB_DIR}/libmali.so.0"
+        echo "    ✓ Removed libmali.so.0 symlink"
     fi
 
     if [ -f "${MESA_LIB_DIR}/libEGL.so.1.0.0" ]; then
@@ -195,6 +207,11 @@ apply_mesa() {
             echo "    ✓ Enabled $(basename "${icd%.disabled}")"
         done
     fi
+
+    # Update dynamic linker cache
+    echo "  Updating dynamic linker cache..."
+    ldconfig
+    echo "    ✓ Dynamic linker cache updated"
 
     echo "✓ Mesa driver configured successfully"
 }
