@@ -171,4 +171,4 @@ MACHINE_EXTRA_RDEPENDS:append:imxmali = " linux-firmware-mali-csffw-arch1012"
 BBMASK += "meta-freescale/recipes-graphics/mesa/mesa-gl.bbappend"
 
 PREFERRED_VERSION_mesa         = "26.0.5"
-PREFERRED_VERSION_mesa:imxmali = "26.0.5.imx"
+PREFERRED_VERSION_mesa:imxmali = "26.0.6.imx"
