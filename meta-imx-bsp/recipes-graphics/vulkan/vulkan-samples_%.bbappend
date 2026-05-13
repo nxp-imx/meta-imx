@@ -8,7 +8,7 @@ inherit pkgconfig
 # Can only pick one of [wayland,xcb]
 PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', 'xcb', d)}"
 PACKAGECONFIG[wayland] = " \
-    -DVKB_WSI_SELECTION=WAYLAND -DGLFW_BUILD_WAYLAND=true -DGLFW_BUILD_X11=false -DGLFW_INCLUDE_VULKAN=true, \
+    -DVKB_WSI_SELECTION=WAYLAND -DVKB_ray_tracing_position_fetch=OFF -DGLFW_BUILD_WAYLAND=true -DGLFW_BUILD_X11=false -DGLFW_INCLUDE_VULKAN=true, \
     , \
     wayland wayland-native wayland-protocols libxkbcommon, \
     , \
@@ -21,9 +21,3 @@ PACKAGECONFIG[xcb] = " \
     , \
     , \
     wayland"
-
-do_install:append() {
-    install -m 0755 ${B}/app/bin/aarch64/vulkan_samples ${D}${bindir}
-    cp -r ${S}/assets ${D}${bindir}/
-    cp -r ${S}/shaders ${D}${bindir}/
-}
