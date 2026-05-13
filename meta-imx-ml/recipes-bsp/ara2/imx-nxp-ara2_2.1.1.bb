@@ -5,9 +5,9 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base"
 
-IMX_SRCREV_ABBREV = "47ec6d7"
+IMX_SRCREV_ABBREV = "8a68671"
 SRC_URI:append = " file://install.sh"
-SRC_URI[sha256sum] = "d264b3055c516d8fe81c487f2eecf65aeda3dc8b43f5e2190a764e6cddb0388c"
+SRC_URI[sha256sum] = "6dca262386b0a3c9c6037a2bed3c2a07b8f57655e817196fa5221e097119b7b9"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
 
