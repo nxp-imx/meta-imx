@@ -830,6 +830,16 @@ Origin:                      NXP (proprietary)
 
 --------------------------------------------
 
+Package:                     mesa.git
+Version:                     26.0.5.imx
+Outgoing License:            MIT 
+License File:                LICENSE.txt
+Package Category:            Graphics
+Type of Content:             source
+Description and comments:    3D Graphics Library
+Release Location:            https://github.com/nxp-imx/mesa-imx -b lf-6.18.20-2.0.0
+--------------------------------------------
+
 Package:                     gtec-demo-framework.git
 Version:                     6.5.2
 Outgoing License:            BSD-3-Clause 
@@ -1294,7 +1304,7 @@ Origin:                      NXP (LGPL-2.1-or-later)
 --------------------------------------------
 
 Package:                     neo-ipa-uguzzi.git
-Version:                     0.2.6
+Version:                     0.2.7
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSES/LA_OPT_NXP_Software_License.txt
 Package Category:            Multimedia
@@ -1711,7 +1721,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-2.1.1-496726b.bin
+Package:                     imx-nxp-ara2-2.1.1-47ec6d7.bin
 Version:                     2.1.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
