@@ -367,7 +367,7 @@ PV = "26.0.5.imx"
 SRC_URI = "${MESA_IMX_SRC};branch=${SRCBRANCH} \
            file://rusticl.sh"
 MESA_IMX_SRC ?= "git://github.com/nxp-imx/mesa-imx.git;protocol=https"
-SRCBRANCH = "panthor-26.0.y"
+SRCBRANCH = "imx-26.0.6"
 S = "${UNPACKDIR}/${BP}"
 
 SRCREV = "${AUTOREV}"
