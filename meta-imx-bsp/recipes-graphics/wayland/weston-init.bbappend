@@ -14,6 +14,9 @@ insert_line_after() {
     sed -i -e "/$1/a $2" $3
 }
 
+DEV_PATH          = "/dev/dri/card0"
+DEV_PATH:imxfbdev = "/dev/fb0"
+
 do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         # Add weston.log back, used by NXP for testing
@@ -22,6 +25,9 @@ do_install:append() {
         # FIXME: weston should be run as weston, not as root
         update_file "User=weston" "User=root" ${D}${systemd_system_unitdir}/weston.service
         update_file "Group=weston" "Group=root" ${D}${systemd_system_unitdir}/weston.service
+
+        # Don't start weston if no display hardware is available
+        insert_line_after "^\[Unit\]" "ConditionPathExists=${DEV_PATH}" ${D}${systemd_system_unitdir}/weston.service
     fi
 
     # Include commented gbm-format
