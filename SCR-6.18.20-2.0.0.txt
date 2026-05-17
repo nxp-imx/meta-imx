@@ -773,7 +773,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-d348738.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-03c3984.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -792,7 +792,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-d348738.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-03c3984.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1721,7 +1721,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-2.1.1-4633047.bin
+Package:                     imx-nxp-ara2-2.1.1-4b85836.bin
 Version:                     2.1.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
