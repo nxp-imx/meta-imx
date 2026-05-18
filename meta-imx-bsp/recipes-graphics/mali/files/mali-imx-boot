@@ -110,11 +110,6 @@ EOF
         done
     fi
 
-    # Update dynamic linker cache
-    echo "  Updating dynamic linker cache..."
-    ldconfig
-    echo "    ✓ Dynamic linker cache updated"
-
     echo "✓ Arm Mali DDK driver configured successfully"
 }
 
@@ -207,11 +202,6 @@ apply_mesa() {
             echo "    ✓ Enabled $(basename "${icd%.disabled}")"
         done
     fi
-
-    # Update dynamic linker cache
-    echo "  Updating dynamic linker cache..."
-    ldconfig
-    echo "    ✓ Dynamic linker cache updated"
 
     echo "✓ Mesa driver configured successfully"
 }
