@@ -13,3 +13,5 @@ SRCBRANCH = "master"
 IMXMP4PARSER_SRC ?= "git://github.com/nxp-imx/imx-mp4-parser.git;protocol=https"
 SRC_URI = "${IMXMP4PARSER_SRC};branch=${SRCBRANCH}"
 SRCREV = "f4e4dbe0a236fd4a72fdbaaaf1dd90ad3863b8ea"
+
+CFLAGS += "-Wno-error=sign-compare"
