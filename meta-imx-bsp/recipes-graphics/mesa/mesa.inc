@@ -362,15 +362,15 @@ LTO = ""
 #########################################
 # NXP i.MX overrides
 
-PV = "26.0.6.imx"
+PV = "26.1.0.imx"
 
 SRC_URI = "${MESA_IMX_SRC};branch=${SRCBRANCH} \
            file://rusticl.sh"
 MESA_IMX_SRC ?= "git://github.com/nxp-imx/mesa-imx.git;protocol=https"
-SRCBRANCH = "panthor-26.0.y"
+SRCBRANCH = "panthor-26.1.y"
 S = "${UNPACKDIR}/${BP}"
 
-SRCREV = "0e7ee24bf7706a1129e0c5f7279b3a6bdba47e8a"
+SRCREV = "${AUTOREV}"
 
 PACKAGECONFIG:append:imxmali = " panfrost"
 
@@ -400,6 +400,8 @@ do_install:append() {
         fi
     fi
 }
+
+PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
 FILES:libopencl-mesa += "${sysconfdir}/profile.d/rusticl.sh"
 
