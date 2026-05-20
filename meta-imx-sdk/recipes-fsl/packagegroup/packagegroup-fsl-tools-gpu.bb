@@ -39,6 +39,7 @@ SOC_TOOLS_GPU_APITRACE:imxgpu3d = " \
 
 SOC_TOOLS_GPU_MALI = ""
 SOC_TOOLS_GPU_MALI:imxmali = " \
+    ${@'libgles1-mesa' if d.getVar('IMX_MALI_DUAL_DRIVER') == '1' else ''} \
     mali-imx-dev \
     mali-imx-opencl-icd-dev \
     patrace"
