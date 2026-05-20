@@ -15,12 +15,6 @@ RDEPENDS:${PN} = " \
     ${SOC_TOOLS_NO_GPU} \
 "
 
-RDEPENDS:${PN}:append:imxgpu = " ${GLES1_PACKAGE}"
-GLES1_PACKAGE             = ""
-GLES1_PACKAGE:mx6-nxp-bsp = "libgles1-imx"
-GLES1_PACKAGE:mx7-nxp-bsp = "libgles1-imx"
-GLES1_PACKAGE:mx8-nxp-bsp = "libgles1-imx"
-
 SOC_TOOLS_DRM ??= ""
 SOC_TOOLS_DRM:imxdrm ??= " \
     libdrm-tests"
@@ -45,6 +39,7 @@ SOC_TOOLS_GPU_MALI:imxmali = " \
 
 SOC_TOOLS_GPU_VIVANTE = ""
 SOC_TOOLS_GPU_VIVANTE:imxviv = " \
+    libgles1-imx \
     imx-gpu-viv-tools"
 
 SOC_TOOLS_NO_GPU ??= ""
