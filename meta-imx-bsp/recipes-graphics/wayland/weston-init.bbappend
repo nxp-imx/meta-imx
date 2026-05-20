@@ -18,7 +18,7 @@ DEV_PATH          = "/dev/dri/card0"
 DEV_PATH:imxfbdev = "/dev/fb0"
 
 do_install:append() {
-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+    if [ ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} ]; then
         # Add weston.log back, used by NXP for testing
         update_file "ExecStart=/usr/bin/weston " "ExecStart=/usr/bin/weston --log=\$\{XDG_RUNTIME_DIR\}/weston.log " ${D}${systemd_system_unitdir}/weston.service
 
@@ -28,11 +28,6 @@ do_install:append() {
 
         # Don't start weston if no display hardware is available
         insert_line_after "^\[Unit\]" "ConditionPathExists=${DEV_PATH}" ${D}${systemd_system_unitdir}/weston.service
-    fi
-
-    # Include commented gbm-format
-    if ! [ "${@bb.utils.contains('PACKAGECONFIG', 'gbm-format', 'yes', 'no', d)}" = "yes" ]; then
-        sed -i -e "/^\[core\]/a #gbm-format=${GBM_FORMAT_VALUE}" ${D}${sysconfdir}/xdg/weston/weston.ini
     fi
 }
 
