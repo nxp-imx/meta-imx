@@ -28,11 +28,6 @@ do_install:append() {
 
         # Don't start weston if no display hardware is available
         insert_line_after "^\[Unit\]" "ConditionPathExists=${DEV_PATH}" ${D}${systemd_system_unitdir}/weston.service
-
-        # Add restart settings with rate limiting to prevent infinite restart loops
-        insert_line_after "Restart=on-failure" "RestartSec=5" ${D}${systemd_system_unitdir}/weston.service
-        insert_line_after "RestartSec=5" "StartLimitBurst=5" ${D}${systemd_system_unitdir}/weston.service
-        insert_line_after "StartLimitBurst=5" "StartLimitIntervalSec=60" ${D}${systemd_system_unitdir}/weston.service
     fi
 }
 
