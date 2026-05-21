@@ -895,7 +895,7 @@ Origin:                      NXP (MIT)
 Package:                     weston-imx.git
 Version:                     15.0.1.imx
 Outgoing License:            MIT 
-License File:                LICENSE
+License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    A reference implementation of a Wayland compositor
@@ -908,7 +908,7 @@ Origin:                      NXP (MIT)
 Package:                     weston-10-imx.git
 Version:                     10.0.5.imx
 Outgoing License:            MIT 
-License File:                LICENSE
+License File:                COPYING
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    A reference implementation of a Wayland compositor
@@ -945,7 +945,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 Package:                     imx-dpu-g2d.git
 Version:                     2.5.0
 Outgoing License:            BSD-3-Clause 
-License File:                LICENSE.txt
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    G2D implementation using DPU
@@ -1241,7 +1241,7 @@ Origin:                      NXP (GPL-2.0)
 
 Package:                     imx-dsp-2.1.10-571a57f.bin
 Version:                     2.1.10
-Outgoing License:            LA_OPT_NXP_Software_License v58 November 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary
@@ -1321,7 +1321,7 @@ M4 Processor Packages
 
 Package:                     imx7ulp-m4-demo-26.06.00.bin
 Version:                     26.06.00
-Outgoing License:            LA_OPT_NXP_Software_License v56 April 2024 Additional distribution license granted - Section 2.3 applies
+Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            M4_Processor
 Type of Content:             binary
@@ -1721,7 +1721,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-2.1.1-2448bb9.bin
+Package:                     imx-nxp-ara2-2.1.1-d8c552c.bin
 Version:                     2.1.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
