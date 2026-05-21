@@ -22,13 +22,16 @@ PACKAGECONFIG:append:mx9-nxp-bsp = " ara2"
 # Create separate package for ara2 tensor_filter plugin
 PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'ara2', '${PN}-ara2', '', d)}"
 
+# Pull nnstreamer-ara2 is as a dependency when ara2 is enabled
+RRECOMMENDS:${PN} =+ "${@bb.utils.contains('PACKAGECONFIG', 'ara2', '${PN}-ara2', '', d)}"
+
 # ara2 sub-plugin shared library
 FILES:${PN}-ara2 = "\
     ${libdir}/nnstreamer/filters/libnnstreamer_filter_ara2.so \
 "
 
 # Runtime dependencies for ara2 sub-plugin
-# - imx-nxp-ara2: Provides libaraclient.so.1 (dlopen'd) and dvproxy daemon
+# - imx-nxp-ara2: Provides libaraclient_aarch64.so (dlopen'd) and dvproxy daemon
 # - kernel-module-uiodma: Kernel module for UIO DMA operations
 RDEPENDS:${PN}-ara2 = "imx-nxp-ara2"
 RRECOMMENDS:${PN}-ara2 = "kernel-module-uiodma"
