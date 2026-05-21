@@ -362,7 +362,7 @@ LTO = ""
 #########################################
 # NXP i.MX overrides
 
-PV = "26.1.0.imx"
+PV = "26.1.y.imx"
 
 SRC_URI = "${MESA_IMX_SRC};branch=${SRCBRANCH} \
            file://rusticl.sh"
