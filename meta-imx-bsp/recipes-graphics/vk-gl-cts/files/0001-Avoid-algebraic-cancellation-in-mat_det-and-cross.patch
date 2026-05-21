@@ -1,0 +1,60 @@
+From e189f6cd05f5dea700cae17df503d3830645bcd8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marcin=20Zaj=C4=85c?= <marcin.zajac@cognizant.com>
+Date: Fri, 6 Feb 2026 15:08:18 +0100
+Subject: [PATCH] Avoid algebraic cancellation in mat_det and cross
+
+Use zeros in input vectors/matrices so the expressions don't reduce to x - x, which compilers may legally simplify to 0 under AllowTransform, preventing NaN propagation
+
+Components: Vulkan
+
+VK-GL-CTS issue: 6317
+
+Affects:
+dEQP-VK.spirv_assembly.instruction.*.float_controls2.*.input_args.cross_*
+dEQP-VK.spirv_assembly.instruction.*.float_controls2.*.input_args.mat_det_*
+
+Upstream-Status: Backport [e189f6cd05f5dea700cae17df503d3830645bcd8]
+Change-Id: Ibf376555c1d11f3268d6dfc63a3a4e055039899d
+---
+ .../vktSpvAsmFloatControls2Tests.cpp              | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
+
+diff --git a/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControls2Tests.cpp b/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControls2Tests.cpp
+index 2d5015e92..bd9c8f9e8 100644
+--- a/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControls2Tests.cpp
++++ b/external/vulkancts/modules/vulkan/spirv_assembly/vktSpvAsmFloatControls2Tests.cpp
+@@ -1811,11 +1811,12 @@ void TestCasesBuilder::init()
+         Op("distance", FLOAT_ARITHMETIC, "%result             = OpExtInst %type_float %std450 Distance %arg1 %arg2\n",
+            B_STATEMENT_USAGE_COMMANDS_TYPE_FLOAT);
+     mo[OID_CROSS]    = Op("cross", FLOAT_ARITHMETIC,
+-                          "%vec1               = OpCompositeConstruct %type_float_vec3 %arg1 %arg1 %arg1\n"
+-                             "%vec2               = OpCompositeConstruct %type_float_vec3 %arg2 %arg2 %arg2\n"
++                          "%vec1               = OpCompositeConstruct %type_float_vec3 %c_float_0 %arg1 %c_float_0\n"
++                             "%vec2               = OpCompositeConstruct %type_float_vec3 %c_float_0 %c_float_0 %arg2\n"
+                              "%tmpVec             = OpExtInst %type_float_vec3 %std450 Cross %vec1 %vec2\n"
+                              "%result             = OpCompositeExtract %type_float %tmpVec 0\n",
+-                          B_STATEMENT_USAGE_COMMANDS_TYPE_FLOAT, {"vec1", "vec2", "tmpVec", "result"});
++                          B_STATEMENT_USAGE_COMMANDS_CONST_FLOAT | B_STATEMENT_USAGE_COMMANDS_TYPE_FLOAT,
++                          {"vec1", "vec2", "tmpVec", "result"});
+     mo[OID_FACE_FWD] = Op("face_fwd", FLOAT_ARITHMETIC,
+                           "%result             = OpExtInst %type_float %std450 FaceForward %c_float_1 %arg1 %arg2\n",
+                           B_STATEMENT_USAGE_COMMANDS_CONST_FLOAT | B_STATEMENT_USAGE_COMMANDS_TYPE_FLOAT);
+@@ -1960,10 +1961,12 @@ void TestCasesBuilder::init()
+                            B_STATEMENT_USAGE_COMMANDS_CONST_FLOAT | B_STATEMENT_USAGE_COMMANDS_TYPE_FLOAT,
+                            {"vec1", "vecN", "tmpVec", "result"});
+     mo[OID_MAT_DET]   = Op("mat_det", FLOAT_ARITHMETIC,
+-                           "%col                = OpCompositeConstruct %type_float_vec2 %arg1 %arg1\n"
+-                             "%mat                = OpCompositeConstruct %type_float_mat2x2 %col %col\n"
++                           "%col1               = OpCompositeConstruct %type_float_vec2 %arg1 %c_float_0\n"
++                             "%col2               = OpCompositeConstruct %type_float_vec2 %c_float_0 %arg1\n"
++                             "%mat                = OpCompositeConstruct %type_float_mat2x2 %col1 %col2\n"
+                              "%result             = OpExtInst %type_float %std450 Determinant %mat\n",
+-                           B_STATEMENT_USAGE_COMMANDS_TYPE_FLOAT, {"col", "mat", "result"});
++                           B_STATEMENT_USAGE_COMMANDS_CONST_FLOAT | B_STATEMENT_USAGE_COMMANDS_TYPE_FLOAT,
++                           {"col1", "col2", "mat", "result"});
+     mo[OID_MAT_INV]   = Op("mat_inv", FLOAT_ARITHMETIC,
+                            "%col1               = OpCompositeConstruct %type_float_vec2 %arg1 %c_float_1\n"
+                              "%col2               = OpCompositeConstruct %type_float_vec2 %c_float_1 %c_float_1\n"
+-- 
+2.43.0
+
