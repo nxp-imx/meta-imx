@@ -1,6 +1,6 @@
 
 SRCBRANCH = "master"
-SRCREV = "1a901a68feffb14dcde09060676852fcb7d8fcba"
+SRCREV = "9ac4ff6598031e2c6d3d5e99290866b11e67e259"
 
 do_install:append() {
     install -d ${D}${bindir}
