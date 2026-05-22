@@ -25,7 +25,13 @@ PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'ara2', '${PN}-ara2', '', d)}
 # Pull nnstreamer-ara2 is as a dependency when ara2 is enabled
 RRECOMMENDS:${PN} =+ "${@bb.utils.contains('PACKAGECONFIG', 'ara2', '${PN}-ara2', '', d)}"
 
-# ara2 sub-plugin shared library
+# ara2 sub-plugin
+SUMMARY:${PN}-ara2 = "NNStreamer Kinara Ara-2 NPU tensor_filter sub-plugin"
+DESCRIPTION:${PN}-ara2 = "\
+Kinara Ara-2 NPU acceleration sub-plugin for NNStreamer tensor_filter. \
+Provides hardware-accelerated inference on Kinara Ara-2 PCIe NPUs with \
+DMA-BUF zero-copy support via V2 invoke API. \
+"
 FILES:${PN}-ara2 = "\
     ${libdir}/nnstreamer/filters/libnnstreamer_filter_ara2.so \
 "
