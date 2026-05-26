@@ -1,6 +1,8 @@
 RDEPENDS:${PN} += " \
     nativesdk-acpica \
+    nativesdk-binutils \
     nativesdk-efitools \
+    nativesdk-gcc nativesdk-gcc-symlinks \
     nativesdk-glslang \
     nativesdk-gnutls-dev \
     nativesdk-openssl-dev \
