@@ -833,11 +833,14 @@ Origin:                      NXP (proprietary)
 Package:                     mesa.git
 Version:                     26.0.5.imx
 Outgoing License:            MIT 
-License File:                LICENSE.txt
+License File:                licenses/MIT
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    3D Graphics Library
 Release Location:            https://github.com/nxp-imx/mesa-imx -b lf-6.18.20-2.0.0
+Origin:                      NXP (MIT)
+                             Mesa (MIT) - https://gitlab.freedesktop.org/mesa/mesa
+
 --------------------------------------------
 
 Package:                     gtec-demo-framework.git
@@ -1733,7 +1736,7 @@ Release Location:            Mirror
 
 Package:                     eiq-aaf-connector.git
 Version:                     2.1
-Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 
+Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
 License File:                LICENSE
 Package Category:            MachineLearning
 Type of Content:             source
@@ -1741,7 +1744,7 @@ Description and comments:    REST-based server for inference on LLMs running on 
 Release Location:            https://github.com/nxp-imx-support/eiq-aaf-connector -b lf-6.18.20-2.0.0
 --------------------------------------------
 
-Package:                     uiodma.git
+Package:                     uiodma-driver.git
 Version:                     1.0.0
 Outgoing License:            GPL-2.0-only 
 License File:                LICENSE.txt
