@@ -10,6 +10,7 @@ VULKAN_ICD_DIR="/usr/share/vulkan/icd.d"
 VULKAN_LAYER_DIR="/etc/vulkan/implicit_layer.d"
 OPENCL_ICD_DIR="/etc/OpenCL/vendors"
 MODPROBE_DIR="/etc/modprobe.d"
+MODULES_LOAD_DIR="/usr/lib/modules-load.d"
 CONFIG_DIR="/etc/mali-imx"
 CONFIG_FILE="${CONFIG_DIR}/mali-imx.conf"
 MALI_MODULE="mali_kbase"
@@ -45,20 +46,39 @@ check_root() {
     fi
 }
 
-configure_module_blacklist() {
+configure_module_loading() {
     driver=$1
 
+    mkdir -p "$MODULES_LOAD_DIR"
     mkdir -p "$MODPROBE_DIR"
 
+    # Remove old module-load configurations
+    rm -f "$MODULES_LOAD_DIR/mali_kbase.conf"
+    rm -f "$MODULES_LOAD_DIR/panthor.conf"
+
     if [ "$driver" = "arm-ddk" ]; then
-        # Blacklist Mesa module, allow Mali module
+        # Configure Mali DDK module to load at boot
+        cat > "$MODULES_LOAD_DIR/mali_kbase.conf" << EOF
+# Load Mali DDK kernel module at boot
+$MALI_MODULE
+EOF
+        echo "  ✓ Created module-load config: $MODULES_LOAD_DIR/mali_kbase.conf"
+
+        # Blacklist Mesa module
         cat > "$MODPROBE_DIR/mali-imx.conf" << EOF
 # Mali DDK configuration - blacklist Mesa Panthor driver
 blacklist $MESA_MODULE
 EOF
         echo "  ✓ Configured module blacklist for Mali DDK (blacklisted: $MESA_MODULE)"
     else
-        # Blacklist Mali module, allow Mesa module
+        # Configure Mesa Panthor module to load at boot
+        cat > "$MODULES_LOAD_DIR/panthor.conf" << EOF
+# Load Mesa Panthor kernel module at boot
+$MESA_MODULE
+EOF
+        echo "  ✓ Created module-load config: $MODULES_LOAD_DIR/panthor.conf"
+
+        # Blacklist Mali module
         cat > "$MODPROBE_DIR/mali-imx.conf" << EOF
 # Mesa configuration - blacklist Mali DDK driver
 blacklist $MALI_MODULE
@@ -153,15 +173,16 @@ switch_to_mali() {
     update_config_file "arm-ddk"
     echo ""
 
-    # Configure module blacklist
-    echo "Configuring kernel module blacklist..."
-    configure_module_blacklist "arm-ddk"
+    # Configure module loading and blacklist
+    echo "Configuring kernel module loading..."
+    configure_module_loading "arm-ddk"
     echo ""
 
     echo "=========================================="
     echo "✓ System configured for Arm Mali DDK driver"
     echo "=========================================="
     echo "  - Kernel module: $MALI_MODULE"
+    echo "  - Module load config: $MODULES_LOAD_DIR/mali_kbase.conf"
     echo "  - EGL/GLES/GBM: Mali ($MALI_LIB_DIR)"
     echo "  - GL: Mesa (software rendering via llvmpipe)"
     echo "  - Vulkan: Mali (with WSI layer)"
@@ -179,15 +200,16 @@ switch_to_mesa() {
     update_config_file "mesa"
     echo ""
 
-    # Configure module blacklist
-    echo "Configuring kernel module blacklist..."
-    configure_module_blacklist "mesa"
+    # Configure module loading and blacklist
+    echo "Configuring kernel module loading..."
+    configure_module_loading "mesa"
     echo ""
 
     echo "=========================================="
     echo "✓ System configured for Mesa driver"
     echo "=========================================="
     echo "  - Kernel module: $MESA_MODULE"
+    echo "  - Module load config: $MODULES_LOAD_DIR/panthor.conf"
     echo "  - EGL/GLES/GBM: Mesa (GPU-accelerated via panthor)"
     echo "  - GL: Mesa (panthor)"
     echo "  - Vulkan: Mesa (panfrost)"
@@ -234,6 +256,23 @@ show_status() {
         echo "  ✓ $MESA_MODULE (loaded)"
     else
         echo "  ✗ $MESA_MODULE (not loaded)"
+    fi
+
+    # Module load configuration
+    echo ""
+    echo "Module Load Configuration:"
+    if [ -f "$MODULES_LOAD_DIR/mali_kbase.conf" ]; then
+        echo "  ✓ Mali DDK: $MODULES_LOAD_DIR/mali_kbase.conf"
+        echo "    Module: $(grep -v '^#' "$MODULES_LOAD_DIR/mali_kbase.conf" | grep -v '^$' | head -n1)"
+    else
+        echo "  ✗ Mali DDK: (no module-load config)"
+    fi
+
+    if [ -f "$MODULES_LOAD_DIR/panthor.conf" ]; then
+        echo "  ✓ Mesa Panthor: $MODULES_LOAD_DIR/panthor.conf"
+        echo "    Module: $(grep -v '^#' "$MODULES_LOAD_DIR/panthor.conf" | grep -v '^$' | head -n1)"
+    else
+        echo "  ✗ Mesa Panthor: (no module-load config)"
     fi
 
     # Module blacklist configuration
