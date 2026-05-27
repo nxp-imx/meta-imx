@@ -81,6 +81,7 @@ FILES:${PN}-dual = " \
     ${libexecdir}/mali-imx-boot \
     ${sysconfdir}/mali-imx/mali-imx.conf \
     ${sysconfdir}/modprobe.d/mali-imx.conf \
+    ${nonarch_libdir}/modules-load.d/*.conf \
     ${systemd_system_unitdir}/mali-imx.service"
 RDEPENDS:${PN}-dual = "${PN}"
 SUMMARY:${PN}-dual = "Mali/Mesa dual-driver switcher utility"
@@ -175,13 +176,20 @@ do_install:append() {
 MALI_IMX_DEFAULT_DRIVER=$DEFAULT_DRIVER
 EOF
 
-        # Configure module blacklist based on default driver
+        # Configure module blacklist and module-load based on default driver
         install -d ${D}${sysconfdir}/modprobe.d
+        install -d ${D}${nonarch_libdir}/modules-load.d
+
         if [ "$DEFAULT_DRIVER" = "arm-ddk" ]; then
             # Blacklist Mesa module for arm-ddk
             cat > ${D}${sysconfdir}/modprobe.d/mali-imx.conf << EOF
 # Mali DDK configuration - blacklist Mesa Panthor driver
 blacklist panthor
+EOF
+            # Create module-load config for Mali DDK
+            cat > ${D}${nonarch_libdir}/modules-load.d/mali_kbase.conf << EOF
+# Load Mali DDK kernel module at boot
+mali_kbase
 EOF
         else
             # Blacklist Mali module for mesa (default)
@@ -189,13 +197,25 @@ EOF
 # Mesa configuration - blacklist Mali DDK driver
 blacklist mali_kbase
 EOF
+            # Create module-load config for Mesa Panthor
+            cat > ${D}${nonarch_libdir}/modules-load.d/panthor.conf << EOF
+# Load Mesa Panthor kernel module at boot
+panthor
+EOF
         fi
     else
         install -d ${D}${sysconfdir}/modprobe.d
+        install -d ${D}${nonarch_libdir}/modules-load.d
+
         # Blacklist Mesa module for arm-ddk
         cat > ${D}${sysconfdir}/modprobe.d/mali-imx.conf << EOF
 # Mali DDK configuration - blacklist Mesa Panthor driver
 blacklist panthor
+EOF
+        # Create module-load config for Mali DDK (single-driver mode)
+        cat > ${D}${nonarch_libdir}/modules-load.d/mali_kbase.conf << EOF
+# Load Mali DDK kernel module at boot
+mali_kbase
 EOF
     fi
 }

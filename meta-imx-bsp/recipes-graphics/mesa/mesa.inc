@@ -396,6 +396,24 @@ do_install:append() {
             done
             cd -
         fi
+
+        # In single-driver mode (no Mali DDK), configure module loading for Panthor
+        if [ "${IMX_MALI_DUAL_DRIVER}" != "1" ]; then
+            install -d ${D}${sysconfdir}/modprobe.d
+            install -d ${D}${nonarch_libdir}/modules-load.d
+
+            # Blacklist Mali DDK module
+            cat > ${D}${sysconfdir}/modprobe.d/mesa-panthor.conf << EOF
+# Mesa Panthor configuration - blacklist Mali DDK driver
+blacklist mali_kbase
+EOF
+
+            # Create module-load config for Mesa Panthor
+            cat > ${D}${nonarch_libdir}/modules-load.d/panthor.conf << EOF
+# Load Mesa Panthor kernel module at boot
+panthor
+EOF
+        fi
     fi
 }
 
