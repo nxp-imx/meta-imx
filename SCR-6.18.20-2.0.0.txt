@@ -295,7 +295,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.1.0-f186a21.bin
+Package:                     nxp-wlan-apps-1.1.0-04b6f2d.bin
 Version:                     1.1.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1200,8 +1200,8 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.9.0-a4cefcc
-Version:                     1.9.0
+Package:                     imx-vpu-hantro-daemon-1.10.0-dd94ffe
+Version:                     1.10.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1724,7 +1724,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-2.1.1-d8c552c.bin
+Package:                     imx-nxp-ara2-2.1.1-bb057e6.bin
 Version:                     2.1.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
@@ -1742,6 +1742,8 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    REST-based server for inference on LLMs running on i.MX devices with Kinara
 Release Location:            https://github.com/nxp-imx-support/eiq-aaf-connector -b lf-6.18.20-2.0.0
+Origin:                      NXP (LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025)
+
 --------------------------------------------
 
 Package:                     uiodma-driver.git
