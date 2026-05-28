@@ -1732,6 +1732,8 @@ Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    Runtime SDK for AI/ML acceleration with Ara240 NPU on i.MX SoCs
 Release Location:            Mirror
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+ 
 --------------------------------------------
 
 Package:                     eiq-aaf-connector.git
@@ -1748,12 +1750,14 @@ Origin:                      NXP (LA_OPT_Online Code Hosting NXP_Software_Licens
 
 Package:                     uiodma-driver.git
 Version:                     1.0.0
-Outgoing License:            GPL-2.0-only 
+Outgoing License:            GPL-2.0 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Linux kernel driver providing userspace I/O (UIO) access to DMA-capable memory regions
 Release Location:            https://github.com/nxp-imx-support/uiodma-driver -b lf-6.18.20-2.0.0
+Origin:                      NXP (GPL-2.0-only)
+ 
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
