@@ -56,3 +56,7 @@ PACKAGECONFIG:remove:pn-qtquick3d:class-target = "openxr"
 # For bluealsa enable msbc in order to validate Bluetooth HFP profile with WBS.
 # Supporting encode/decode of SCO packets with SBC codec
 PACKAGECONFIG:append:pn-bluealsa = " msbc"
+
+TOOLCHAIN_HOST_TASK += " \
+    nativesdk-gnutls-dev \
+"
