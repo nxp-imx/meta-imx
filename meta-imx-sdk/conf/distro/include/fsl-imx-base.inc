@@ -57,6 +57,6 @@ PACKAGECONFIG:remove:pn-qtquick3d:class-target = "openxr"
 # Supporting encode/decode of SCO packets with SBC codec
 PACKAGECONFIG:append:pn-bluealsa = " msbc"
 
-TOOLCHAIN_HOST_TASK += " \
+TOOLCHAIN_HOST_TASK:append = " \
     nativesdk-gnutls-dev \
 "
