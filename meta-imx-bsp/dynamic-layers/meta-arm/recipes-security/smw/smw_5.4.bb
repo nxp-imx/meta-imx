@@ -25,7 +25,7 @@ PSA_ARCH_TESTS_SRC_PATH = "../psa-arch-tests"
 
 SRCBRANCH_smw = "release/version_5.x"
 SRCBRANCH_psa = "main"
-SRCREV_smw = "e1c3a8641038df6500ce9eae13cbaf7bc231708b"
+SRCREV_smw = "65ff557579fac539079445abf388f105f42670af"
 SRCREV_psa = "463cb95ada820bc6f758d50066cf8c0ed5cc3a02"
 SRCREV_FORMAT = "smw_psa"
 
