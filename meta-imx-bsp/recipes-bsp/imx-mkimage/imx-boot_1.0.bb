@@ -179,18 +179,12 @@ compile_mx8ulp() {
     fi
 }
 
-compile_mx91() {
-    bbnote i.MX 91 boot binary build
-    compile_mx93
-}
-
-compile_mx93() {
-    bbnote i.MX 93 boot binary build
+compile_mx9() {
+    bbnote i.MX $1 boot binary build
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
         cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${BOOT_STAGING}
     done
-
     for fw in ${SECO_FIRMWARE_NAME}; do
         cp ${DEPLOY_DIR_IMAGE}/$fw             ${BOOT_STAGING}/
     done
@@ -202,27 +196,28 @@ compile_mx93() {
     fi
 }
 
-compile_mx943() {
-    bbnote i.MX 943 boot binary build
-    compile_mx93
-
+compile_mx9sm() {
+    compile_mx9 $1
     cp ${DEPLOY_DIR_IMAGE}/${OEI_NAME} ${BOOT_STAGING}
     cp ${DEPLOY_DIR_IMAGE}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin \
        ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin
 }
 
-compile_mx95() {
-    bbnote i.MX 95 boot binary build
-    compile_mx93
-
-    cp ${DEPLOY_DIR_IMAGE}/${OEI_NAME} ${BOOT_STAGING}
-    cp ${DEPLOY_DIR_IMAGE}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin \
-       ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin
-}
-
-compile_mx952() {
-    bbnote i.MX 952 boot binary build
-    compile_mx95
+compile_soc() {
+    case $1 in
+    mx8*)
+        compile_$1
+        ;;
+    mx91|mx93)
+        compile_mx9 $1
+        ;;
+    mx943|mx95|mx952)
+        compile_mx9sm $1
+        ;;
+    *)
+        bbnote "Unsupported SoC: $1"
+        ;;
+    esac
 }
 
 do_compile() {
@@ -270,7 +265,7 @@ do_compile() {
                 BOOT_CONFIG_MACHINE_EXTRA="imx-boot${BOOT_VARIANT}-${MACHINE}-${UBOOT_CONFIG_EXTRA}.bin"
 
                 for target in ${IMXBOOT_TARGETS}; do
-                    compile_${SOC_FAMILY}
+                    compile_soc ${SOC_FAMILY}
                     case $target in
                     *no_v2x)
                         # Special target build for i.MX 8DXL with V2X off
@@ -373,17 +368,11 @@ deploy_mx8ulp() {
     fi
 }
 
-deploy_mx91() {
-    deploy_mx93
-}
-
-deploy_mx93() {
+deploy_mx9() {
     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         install -m 0644 ${DEPLOY_DIR_IMAGE}/${ddr_firmware}  ${DEPLOYDIR}/${BOOT_TOOLS}
     done
-
     for fw in ${SECO_FIRMWARE_NAME}; do
         install -m 0644 ${BOOT_STAGING}/$fw    ${DEPLOYDIR}/${BOOT_TOOLS}
     done
@@ -394,26 +383,32 @@ deploy_mx93() {
     fi
 }
 
-deploy_mx943() {
-    deploy_mx93
+deploy_mx9sm() {
+    deploy_mx9
     install -m 0644 ${BOOT_STAGING}/${OEI_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
     install -m 0644 ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin \
                 ${DEPLOYDIR}/${BOOT_TOOLS}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin
 }
 
-deploy_mx95() {
-    deploy_mx93
-    install -m 0644 ${BOOT_STAGING}/${OEI_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin \
-                ${DEPLOYDIR}/${BOOT_TOOLS}/${SYSTEM_MANAGER_FIRMWARE_NAME}.bin
-}
-
-deploy_mx952() {
-    deploy_mx95
+deploy_soc() {
+    case $1 in
+    mx8*)
+        deploy_$1
+        ;;
+    mx91|mx93)
+        deploy_mx9
+        ;;
+    mx943|mx95|mx952)
+        deploy_mx9sm
+        ;;
+    *)
+        bberror "Unsupported SOC: $1"
+        ;;
+    esac
 }
 
 do_deploy() {
-    deploy_${SOC_FAMILY}
+    deploy_soc ${SOC_FAMILY}
 
     # copy tee.bin to deploy path
     if ${DEPLOY_OPTEE}; then
