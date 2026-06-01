@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.6-c7428e7.bin
+Package:                     firmware-ele-imx-2.0.6-b05a666.bin
 Version:                     2.0.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -831,7 +831,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     mesa.git
-Version:                     26.0.5.imx
+Version:                     26.0.6.imx
 Outgoing License:            MIT 
 License File:                licenses/MIT
 Package Category:            Graphics
