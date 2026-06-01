@@ -205,8 +205,17 @@ compile_mx9sm() {
 
 compile_soc() {
     case $1 in
-    mx8*)
-        compile_$1
+    mx8m)
+        compile_mx8m
+        ;;
+    mx8)
+        compile_mx8
+        ;;
+    mx8x)
+        compile_mx8x
+        ;;
+    mx8ulp)
+        compile_mx8ulp
         ;;
     mx91|mx93)
         compile_mx9 $1
@@ -392,8 +401,17 @@ deploy_mx9sm() {
 
 deploy_soc() {
     case $1 in
-    mx8*)
-        deploy_$1
+    mx8m)
+        deploy_mx8m
+        ;;
+    mx8)
+        deploy_mx8
+        ;;
+    mx8x)
+        deploy_mx8x
+        ;;
+    mx8ulp)
+        deploy_mx8ulp
         ;;
     mx91|mx93)
         deploy_mx9
