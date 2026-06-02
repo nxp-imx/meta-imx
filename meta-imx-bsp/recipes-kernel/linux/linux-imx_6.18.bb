@@ -64,13 +64,13 @@ do_deploy:append() {
 
 COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
 
-CVE_STATUS_GROUPS += "CVE_STATUS_KERNEL"
+CVE_STATUS_GROUPS = "CVE_STATUS_KERNEL"
 CVE_STATUS_KERNEL = " \
     CVE-2026-31431 \
+    CVE-2026-31635 \
     CVE-2026-43284 \
     CVE-2026-43500 \
     CVE-2026-46300 \
-    CVE-2026-31635 \
     CVE-2026-46333 \
 "
-CVE_STATUS_KERNEL[status] = "patched: Fixed in NXP LTS Kernel 6.18.20"
+CVE_STATUS_KERNEL[status] = "cpe-stable-backport: Backported in NXP LTS Kernel 6.18.20"
