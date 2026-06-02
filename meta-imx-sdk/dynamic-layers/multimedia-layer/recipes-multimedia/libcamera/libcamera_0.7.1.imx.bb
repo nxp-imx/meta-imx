@@ -19,7 +19,7 @@ SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
 "
 
-SRCREV = "426167e28a47857db757784073ed40188505e94b"
+SRCREV = "e2e7c015cee997b9f992376fd2c29fa2d8813e1b"
 
 PE = "1"
 
@@ -97,7 +97,7 @@ SRC_URI:remove = "git://git.libcamera.org/libcamera/libcamera.git;protocol=https
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "git://github.com/nxp-imx/libcamera.git;protocol=https"
 SRCBRANCH = "lf-6.18.20_2.0.0"
-SRCREV = "426167e28a47857db757784073ed40188505e94b"
+SRCREV = "e2e7c015cee997b9f992376fd2c29fa2d8813e1b"
 
 PACKAGECONFIG = "gst pycamera dng"
 
