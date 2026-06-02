@@ -3,7 +3,7 @@ require recipes-libraries/neutron/neutron_1.0.0.bb
 SRC_URI = "${NEUTRON_SRC};branch=${SRCBRANCH}"
 NEUTRON_SRC ?= "git://github.com/nxp-imx/neutron.git;protocol=https"
 SRCBRANCH = "main"
-SRCREV = "adfd1a806206bd484256c94d719d8079990980de"
+SRCREV = "09187c9a6e8e3d371911b60b49bae82dc0e4d901"
 
 NEUTRON_TARGET:mx952-nxp-bsp  = "imx952"
 
