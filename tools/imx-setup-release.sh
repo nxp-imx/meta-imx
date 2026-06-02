@@ -19,6 +19,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+
+# Backport fix for fetching crates.io
+cd sources/bitbake
+if ! git log | grep -q f3904634889e737861b47d6bf4068faac4d4661d; then
+   git cherry-pick -x f3904634889e737861b47d6bf4068faac4d4661d
+fi
+cd -
+
 . sources/meta-imx/tools/setup-utils.sh
 
 CWD=`pwd`
