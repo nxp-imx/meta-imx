@@ -9,7 +9,7 @@ DEPENDS = "gcc-arm-none-eabi-native"
 SRC_URI = "${IMX_OEI_SRC};branch=${SRCBRANCH}"
 IMX_OEI_SRC ?= "git://github.com/nxp-imx/imx-oei.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "8b318f0c1c988a4eb34d180df06846dc07e18fc9"
+SRCREV = "e9bce6f4f69dceaf3664b7e28eb4302004ee0361"
 
 inherit deploy
 
