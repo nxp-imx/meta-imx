@@ -2,4 +2,4 @@
 require tensorflow-lite-${PV}.inc
 
 SRCBRANCH_neutron = "main"
-SRCREV_neutron = "cdceeee55902861617a766a2e5389a6df25133ab"
+SRCREV_neutron = "250b784547b58e4f527793d9f19cd57b63e0c78c"
