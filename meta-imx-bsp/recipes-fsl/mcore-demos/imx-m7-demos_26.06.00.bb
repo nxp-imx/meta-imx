@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM:mx952-nxp-bsp = "file://COPYING;md5=bc649096ad3928ec06a8713b8d7
 SRC_URI[imx8mn.sha256sum] = "fd4350c9ceceda29d6f7483f83a946b1876b364a4d9c8d9a9e6b618415d27b8e"
 SRC_URI[imx8mnddr3l.sha256sum] = "cdaad7f840eec638568bde934408044a386e56b85d22a20c1de7faf77b0674c7"
 
-SRC_URI[imx8mp.sha256sum] = "53d31afa89d7d9e2e93b327fe5735bcea6f2f6c67860cb0410fe75c5621278fa"
+SRC_URI[imx8mp.sha256sum] = "0413bdd2e94cc4ddbd71de4da4e50f9a07a4a29290dc73c53cab241bb50f51af"
 
 SRC_URI[imx95.sha256sum] = "7b17f04fe67df6272f85d9233d5fb074eff91c2097b44303b5463aab421cb0c0"
 
