@@ -4,7 +4,6 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d8ff2d641cc45adce1b1882be29d1e35"
 
 SRC_URI = "${EIQ_AAF_CONNECTOR_SRC};branch=${SRCBRANCH}"
-SRC_URI += "file://install.sh"
 EIQ_AAF_CONNECTOR_SRC ?= "git://github.com/nxp-imx-support/eiq-aaf-connector.git;protocol=https"
 SRCBRANCH = "master"
 SRCREV = "edbfcf819ee470d98ddf1b6fc8c0d53f7c7eb6e2"
@@ -20,7 +19,7 @@ do_install() {
     install -m 0644 ${UNPACKDIR}/../dist/*.whl ${D}${datadir}/python-wheels
 
     install -d ${D}${datadir}/eiq/aaf-connector
-    install -m 0755 ${UNPACKDIR}/install.sh ${D}${datadir}/eiq/aaf-connector/install.sh
+    install -m 0755 ${S}/install.sh ${D}${datadir}/eiq/aaf-connector/install.sh
     install -m 0644 ${S}/config/server_config.json ${D}${datadir}/eiq/aaf-connector
 }
 
