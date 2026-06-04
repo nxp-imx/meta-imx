@@ -28,3 +28,4 @@ FILES:${PN} += " \
 	${datadir}/eiq/aaf-connector \
 "
 
+RDEPENDS:${PN} = "bash"
