@@ -18,7 +18,7 @@ DEPENDS = "\
 SRC_URI = "${PKCS11_PROVIDER_SRC};branch=${SRCBRANCH}"
 PKCS11_PROVIDER_SRC ?= "git://github.com/nxp-imx/${BPN}.git;branch=main;protocol=https"
 SRCBRANCH = "lf_1.2.y"
-SRCREV = "3bc4f135ad954c6cb19b41e23af1d0d17bd3ee80"
+SRCREV = "23cdf2b8b35a73fdf118cdc14042bb79f3a1c25b"
 
 inherit meson pkgconfig
 
