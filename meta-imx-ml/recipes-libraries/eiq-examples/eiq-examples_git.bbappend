@@ -1,6 +1,6 @@
 
 SRCBRANCH = "lf-6.18.20_2.0.0"
-SRCREV = "7c9c82e310c4faa2624e241e072b3b840d79d016"
+SRCREV = "01098b1f6c51b8444345b49b82654a06a02afe04"
 
 do_install:append() {
     install -d ${D}${bindir}
