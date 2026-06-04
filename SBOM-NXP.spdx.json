@@ -2,7 +2,7 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2026-06-02T14:27:09Z",
+    "created": "2026-06-04T03:37:42Z",
     "creators": [
       "Organization: NXP"
     ],
@@ -75,7 +75,7 @@
       "versionInfo": "lf-6.18.20-2.0.0",
       "licenseConcluded": "(LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011)",
       "licenseDeclared": "(LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011)",
-      "downloadLocation": "NOASSERTION",
+      "downloadLocation": "https://github.com/nxp-imx/imx-manifest -b imx-linux-wrynose -m imx-6.18.20-2.0.0.xml",
       "originator": "Organization: NXP",
       "supplier": "NOASSERTION",
       "externalRefs": [],
@@ -293,7 +293,7 @@
       "licenseConcluded": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "homepage": "https://www.nxp.com",
-      "downloadLocation": "NOASSERTION",
+      "downloadLocation": "https://www.nxp.com",
       "originator": "Organization: NXP",
       "supplier": "NOASSERTION",
       "externalRefs": [],
@@ -883,13 +883,13 @@
       "filesAnalyzed": false
     },
     {
-      "SPDXID": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---ee19ad1e-bc10-42b5-b7a9-9339e4f148b4",
+      "SPDXID": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---3897a4cf-9e9e-4987-93c7-3ee85ec6c211",
       "name": "imx-vpu-hantro-daemon",
-      "versionInfo": "1.9.0",
+      "versionInfo": "1.10.0",
       "licenseConcluded": "MIT",
       "licenseDeclared": "MIT",
       "homepage": "https://www.nxp.com",
-      "downloadLocation": "https://www.nxp.com/",
+      "downloadLocation": "https://www.nxp.com",
       "originator": "Organization: VeriSilicon Inc.",
       "supplier": "NOASSERTION",
       "externalRefs": [],
@@ -901,7 +901,7 @@
       "versionInfo": "1.12.0",
       "licenseConcluded": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
-      "downloadLocation": "NOASSERTION",
+      "downloadLocation": "https://www.nxp.com",
       "originator": "Organization: VeriSilicon Inc.",
       "supplier": "NOASSERTION",
       "externalRefs": [],
@@ -1235,7 +1235,7 @@
       "versionInfo": "r54p1.6",
       "licenseConcluded": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
-      "downloadLocation": "NOASSERTION",
+      "downloadLocation": "https://www.nxp.com",
       "originator": "Organization: Arm Limited",
       "supplier": "NOASSERTION",
       "externalRefs": [],
@@ -1334,7 +1334,7 @@
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "homepage": "https://github.com/nxp-imx/nxp-afe",
-      "downloadLocation": "https://github.com/nxp-imx/nxp-afe -b lf-6.18.2-1.0.0",
+      "downloadLocation": "https://github.com/nxp-imx/nxp-afe -b lf-6.18.20-2.0.0",
       "originator": "Organization: NXP",
       "supplier": "NOASSERTION",
       "externalRefs": [],
@@ -1591,7 +1591,7 @@
       "versionInfo": "2026_Q2_RC1",
       "licenseConcluded": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
-      "downloadLocation": "NOASSERTION",
+      "downloadLocation": "https://www.nxp.com",
       "originator": "Organization: NXP",
       "supplier": "NOASSERTION",
       "externalRefs": [],
@@ -1765,6 +1765,11 @@
       "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
       "relationshipType": "DYNAMIC_LINK",
       "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---38646205-8911-4ca8-9086-6937e4a0bad9"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
+      "relationshipType": "DYNAMIC_LINK",
+      "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---3897a4cf-9e9e-4987-93c7-3ee85ec6c211"
     },
     {
       "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
@@ -2185,11 +2190,6 @@
       "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
       "relationshipType": "DYNAMIC_LINK",
       "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---ed101ba2-5975-449a-8982-7efa7a499136"
-    },
-    {
-      "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
-      "relationshipType": "DYNAMIC_LINK",
-      "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---ee19ad1e-bc10-42b5-b7a9-9339e4f148b4"
     },
     {
       "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
