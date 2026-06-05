@@ -17,6 +17,7 @@ FILES_SOLIBSDEV = ""
 FILES:${PN} += " \
     ${libdir}/gstreamer-1.0 \
     ${libdir}/libaraclient_aarch64.so \
+    ${libdir}/libara_vision_inference.so \
     ${datadir}/python-wheels \
     ${datadir}/rt-sdk-ara240*"
 RDEPENDS:${PN} += " \
@@ -27,6 +28,4 @@ RDEPENDS:${PN} += " \
     uiodma \
     libusb1 \
     uv"
-INSANE_SKIP:${PN} += "useless-rpaths rpaths buildpaths dev-deps already-stripped"
-
-FILES:${PN}-dev += "${libdir}/libara_vision_inference.so"
+INSANE_SKIP:${PN} += "useless-rpaths rpaths buildpaths dev-deps dev-so already-stripped"
