@@ -31,7 +31,7 @@ RDEPENDS:${PN} += " \
     dbus-lib \
     eiq-aaf-connector \
     gstreamer1.0 \
-    kernel-module-uiodma \
+    uiodma \
     libusb1 \
     uv"
 INSANE_SKIP:${PN} += "useless-rpaths rpaths buildpaths dev-deps already-stripped"
