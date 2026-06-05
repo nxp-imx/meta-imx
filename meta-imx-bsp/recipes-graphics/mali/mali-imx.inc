@@ -40,7 +40,9 @@ IMX_MALI_DUAL_SUBDIR = "${@'/mali-imx' if d.getVar('IMX_MALI_DUAL_DRIVER') == '1
 # Since libmali.so is loaded by dlopen, include it in the main package
 FILES:${PN} += " \
     ${libdir}${IMX_MALI_DUAL_SUBDIR}/libmali.so \
-    ${nonarch_base_libdir}/firmware"
+    ${nonarch_base_libdir}/firmware \
+    ${nonarch_libdir}/modules-load.d/*.conf \
+"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP:${PN} = "dev-so"
 RDEPENDS:${PN} = "${@'mali-imx-dual' if d.getVar('IMX_MALI_DUAL_DRIVER') == '1' else ''}"
@@ -68,8 +70,6 @@ FILES:${PN}-dual = " \
     ${bindir}/mali-imx \
     ${libexecdir}/mali-imx-boot \
     ${sysconfdir}/mali-imx/mali-imx.conf \
-    ${sysconfdir}/modprobe.d/mali-imx.conf \
-    ${nonarch_libdir}/modules-load.d/*.conf \
     ${systemd_system_unitdir}/mali-imx.service"
 RDEPENDS:${PN}-dual = "${PN}"
 SUMMARY:${PN}-dual = "Mali/Mesa dual-driver switcher utility"
