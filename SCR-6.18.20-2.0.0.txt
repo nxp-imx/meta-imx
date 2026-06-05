@@ -735,7 +735,7 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.26.2-9ff57e7.bin
+Package:                     isp-imx-4.2.2.26.2-53bb06c.bin
 Version:                     4.2.2.26.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
