@@ -27,6 +27,6 @@ RDEPENDS:${PN} += " \
     kernel-module-uiodma \
     libusb1 \
     uv"
-INSANE_SKIP:${PN} += "useless-rpaths rpaths buildpaths dev-deps already-stripped build-deps"
+INSANE_SKIP:${PN} += "useless-rpaths rpaths buildpaths dev-deps already-stripped"
 
 FILES:${PN}-dev += "${libdir}/libara_vision_inference.so"
