@@ -33,7 +33,7 @@ POKY_INIT_MANAGER = "systemd"
 # runtime: runc, crun, runv, runx
 VIRTUAL-RUNTIME_container_runtime = "virtual-runc"
 
-IMX_MALI_DRIVERS = "mali-imx mesa"
+IMX_MALI_DRIVERS ??= "mali-imx mesa"
 
 PACKAGECONFIG:append:pn-gstreamer1.0-plugins-ugly = " x264"
 
