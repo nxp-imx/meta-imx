@@ -7,7 +7,7 @@ DEPENDS = "libnfnetlink libnetfilter-conntrack libxcrypt elfutils libbpf zlib li
 SRC_URI = "${DPDK_CMM_SRC};branch=${SRCBRANCH}"
 DPDK_CMM_SRC ?= "git://github.com/nxp-imx/cmm;protocol=https"
 SRCBRANCH = "xdp_cmm"
-SRCREV = "2c539dd4fd643276bc309c22e0f4a6b9ec589b0b"
+SRCREV = "4db6470481d60dd786e2e60fc44b1cb69f05e8e5"
 
 inherit autotools pkgconfig
 
