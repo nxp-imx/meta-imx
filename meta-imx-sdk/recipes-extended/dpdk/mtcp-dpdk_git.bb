@@ -7,7 +7,7 @@ DEPENDS = "gmp numactl dpdk bc-native zlib"
 SRC_URI = "${MTCP_DPDK_SRC};branch=${SRCBRANCH}"
 MTCP_DPDK_SRC ?= "git://github.com/nxp-mcuxpresso/mtcp;protocol=https"
 SRCBRANCH = "mtcp-dpdk"
-SRCREV = "c1a01163bad0a0805b47892f593676d018b31f73" 
+SRCREV = "76aa50b28ac8f543b2e16302e89c2ba9619dd2dc"
 
 PV = "25.11+git"
 
