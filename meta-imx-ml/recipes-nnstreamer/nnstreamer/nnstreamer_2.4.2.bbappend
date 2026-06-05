@@ -16,7 +16,6 @@ PACKAGECONFIG[ara2] = "\
     -Dara2-support=disabled, \
     imx-nxp-ara2, \
     imx-nxp-ara2, \
-    kernel-module-uiodma \
 "
 
 # Create separate package for ara2 tensor_filter plugin
