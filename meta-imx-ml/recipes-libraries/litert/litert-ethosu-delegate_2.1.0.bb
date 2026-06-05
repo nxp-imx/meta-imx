@@ -1,7 +1,10 @@
 # Copyright 2025-2026 NXP
 DESCRIPTION = "LiteRT Ethos-u Delegate"
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+LICENSE = "Apache-2.0 & ${LICENSE_DEPS}"
+LIC_FILES_CHKSUM = " \
+    file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327 \
+    ${LIC_FILES_CHKSUM_DEPS} \
+"
 
 DEPENDS = "ethos-u-driver-stack litert-flatbuffers-native ethos-u-vela"
 

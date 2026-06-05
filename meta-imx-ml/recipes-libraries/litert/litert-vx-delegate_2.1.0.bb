@@ -1,7 +1,10 @@
 # Copyright 2025-2026 NXP
 DESCRIPTION = "LiteRT VX Delegate"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7d6260e4f3f6f85de05af9c8f87e6fb5"
+LICENSE = "MIT & ${LICENSE_DEPS}"
+LIC_FILES_CHKSUM = " \
+    file://LICENSE;md5=7d6260e4f3f6f85de05af9c8f87e6fb5 \
+    ${LIC_FILES_CHKSUM_DEPS} \
+"
 
 DEPENDS = "litert tim-vx litert-flatbuffers-native"
 

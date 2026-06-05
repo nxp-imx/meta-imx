@@ -1,7 +1,10 @@
 # Copyright 2025-2026 NXP
 DESCRIPTION = "Google's open-source high-performance runtime for on-device AI"
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+LICENSE = "Apache-2.0 & ${LICENSE_DEPS}"
+LIC_FILES_CHKSUM = " \
+    file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327 \
+    ${LIC_FILES_CHKSUM_DEPS} \
+"
 
 
 DEPENDS = "flatbuffers python3-numpy-native python3-pip-native python3-wheel-native unzip-native \
