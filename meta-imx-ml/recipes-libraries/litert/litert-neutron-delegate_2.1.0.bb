@@ -1,7 +1,10 @@
 # Copyright 2025-2026 NXP
 DESCRIPTION = "TensorFlow Lite Neutron Delegate"
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
+LICENSE = "Apache-2.0 & ${LICENSE_DEPS}"
+LIC_FILES_CHKSUM = " \
+    file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327 \
+    ${LIC_FILES_CHKSUM_DEPS} \
+"
 
 DEPENDS = "litert neutron litert-flatbuffers-native"
 

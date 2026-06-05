@@ -1,5 +1,7 @@
 # Copyright 2025-2026 NXP
 
+LICENSE_DEPS = "Apache-2.0 & BSD-2-Clause & BSD-3-Clause & MIT & MPL-2.0"
+
 LITERT_SRC ?= "gitsm://github.com/nxp-imx/litert-imx.git;protocol=https"
 SRCBRANCH_litert = "lf-6.18.20_2.0.0"
 SRCREV_litert = "5571536435b990907277197b6016b7b916885fd5"
@@ -33,32 +35,61 @@ SRCREV_kleidiai = "63205aa90afa6803d8f58bc3081b69288e9f1906"
 SRCREV_tensorflow = "v2.19.0"
 
 SRC_URI_DEPS = " \
-             git://github.com/abseil/abseil-cpp;protocol=https;nobranch=1;name=abseil-cpp;destsuffix=deps/abseil-cpp \
-             git://github.com/pytorch/cpuinfo;protocol=https;branch=main;name=cpuinfo;destsuffix=deps/cpuinfo \
-             git://github.com/KhronosGroup/EGL-Registry;protocol=https;branch=main;name=egl-headers;destsuffix=deps/egl-headers \
-             git://gitlab.com/libeigen/eigen.git;protocol=https;branch=master;name=eigen;destsuffix=deps/eigen \
-             git://github.com/google/farmhash;protocol=https;branch=master;name=farmhash;destsuffix=deps/farmhash \
-             git://github.com/google/flatbuffers;protocol=https;nobranch=1;name=flatbuffers;destsuffix=deps/flatbuffers \
-             git://github.com/petewarden/OouraFFT;protocol=https;nobranch=1;name=fft2d;destsuffix=deps/fft2d \
-             git://github.com/google/gemmlowp;protocol=https;branch=master;name=gemmlowp;destsuffix=deps/gemmlowp \
-             git://github.com/google/benchmark;protocol=https;nobranch=1;name=google-benchmark;destsuffix=deps/google-benchmark \
-             git://github.com/google/googletest;protocol=https;nobranch=1;name=googletest;destsuffix=deps/googletest \
-             git://github.com/jax-ml/ml_dtypes;protocol=https;branch=main;name=ml-dtypes;destsuffix=deps/ml-dtypes \
-             git://github.com/intel/ARM_NEON_2_x86_SSE;protocol=https;branch=master;name=neon2sse;destsuffix=deps/neon2sse \
-             git://github.com/google/re2;protocol=https;nobranch=1;name=re2;destsuffix=deps/re2 \
-             git://github.com/google/ruy;protocol=https;branch=master;name=ruy;destsuffix=deps/ruy \
-             git://github.com/google/XNNPACK;protocol=https;branch=master;name=xnnpack;destsuffix=deps/xnnpack \
-             git://github.com/protocolbuffers/protobuf;protocol=https;nobranch=1;name=protobuf;destsuffix=deps/protobuf \
-             git://github.com/google/pthreadpool;protocol=https;branch=main;name=pthreadpool;destsuffix=deps/pthreadpool \
-             git://github.com/Maratyszcza/FP16;protocol=https;branch=master;name=fp16;destsuffix=deps/fp16 \
-             git://github.com/Maratyszcza/FXdiv;protocol=https;branch=master;name=fxdiv;destsuffix=deps/fxdiv \
-             git://github.com/ARM-software/kleidiai;protocol=https;branch=main;name=kleidiai;destsuffix=deps/kleidiai \
-             git://github.com/tensorflow/tensorflow;protocol=https;nobranch=1;name=tensorflow;destsuffix=deps/tensorflow"
+             git://github.com/abseil/abseil-cpp;protocol=https;nobranch=1;name=abseil-cpp;destsuffix=${BP}/deps/abseil-cpp \
+             git://github.com/pytorch/cpuinfo;protocol=https;branch=main;name=cpuinfo;destsuffix=${BP}/deps/cpuinfo \
+             git://github.com/KhronosGroup/EGL-Registry;protocol=https;branch=main;name=egl-headers;destsuffix=${BP}/deps/egl-headers \
+             git://gitlab.com/libeigen/eigen.git;protocol=https;branch=master;name=eigen;destsuffix=${BP}/deps/eigen \
+             git://github.com/google/farmhash;protocol=https;branch=master;name=farmhash;destsuffix=${BP}/deps/farmhash \
+             git://github.com/google/flatbuffers;protocol=https;nobranch=1;name=flatbuffers;destsuffix=${BP}/deps/flatbuffers \
+             git://github.com/petewarden/OouraFFT;protocol=https;nobranch=1;name=fft2d;destsuffix=${BP}/deps/fft2d \
+             git://github.com/google/gemmlowp;protocol=https;branch=master;name=gemmlowp;destsuffix=${BP}/deps/gemmlowp \
+             git://github.com/google/benchmark;protocol=https;nobranch=1;name=google-benchmark;destsuffix=${BP}/deps/google-benchmark \
+             git://github.com/google/googletest;protocol=https;nobranch=1;name=googletest;destsuffix=${BP}/deps/googletest \
+             git://github.com/jax-ml/ml_dtypes;protocol=https;branch=main;name=ml-dtypes;destsuffix=${BP}/deps/ml-dtypes \
+             git://github.com/intel/ARM_NEON_2_x86_SSE;protocol=https;branch=master;name=neon2sse;destsuffix=${BP}/deps/neon2sse \
+             git://github.com/google/re2;protocol=https;nobranch=1;name=re2;destsuffix=${BP}/deps/re2 \
+             git://github.com/google/ruy;protocol=https;branch=master;name=ruy;destsuffix=${BP}/deps/ruy \
+             git://github.com/google/XNNPACK;protocol=https;branch=master;name=xnnpack;destsuffix=${BP}/deps/xnnpack \
+             git://github.com/protocolbuffers/protobuf;protocol=https;nobranch=1;name=protobuf;destsuffix=${BP}/deps/protobuf \
+             git://github.com/google/pthreadpool;protocol=https;branch=main;name=pthreadpool;destsuffix=${BP}/deps/pthreadpool \
+             git://github.com/Maratyszcza/FP16;protocol=https;branch=master;name=fp16;destsuffix=${BP}/deps/fp16 \
+             git://github.com/Maratyszcza/FXdiv;protocol=https;branch=master;name=fxdiv;destsuffix=${BP}/deps/fxdiv \
+             git://github.com/ARM-software/kleidiai;protocol=https;branch=main;name=kleidiai;destsuffix=${BP}/deps/kleidiai \
+             git://github.com/tensorflow/tensorflow;protocol=https;nobranch=1;name=tensorflow;destsuffix=${BP}/deps/tensorflow"
 
 SRCREV_FORMAT_DEPS = "abseil-cpp_cpuinfo_egl-headers_eigen_farmhash_flatbuffers_fft2d_gemmlowp_google-benchmark_googletest_ml-dtypes_neon2sse_re2_ruy_xnnpack_protobuf_pthreadpool_fp16_fxdiv_kleidiai_tensorflow"
 
+# License files for all dependency sources
+LIC_FILES_CHKSUM_DEPS = " \
+    file://deps/abseil-cpp/LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915 \
+    file://deps/cpuinfo/LICENSE;md5=cabca80e8e4a4bbe90e9a4b4ad53f5f4 \
+    file://deps/egl-headers/sdk/docs/man/copyright.xml;md5=d2da13a9458267151b5b8f45df42fed2 \
+    file://deps/eigen/COPYING.MPL2;md5=48a3fe23ed1353e0995dadfda05ffdb6 \
+    file://deps/eigen/COPYING.BSD;md5=2dd0510ee95e59ca28834b875bc96596 \
+    file://deps/eigen/COPYING.MINPACK;md5=71d91b0f75ce79a75d3108a72bef8116 \
+    file://deps/eigen/COPYING.APACHE;md5=8de23b8e93c63005353056b2475e9aa5 \
+    file://deps/farmhash/COPYING;md5=7dfaa79e2b070897e495fec386e3acfc \
+    file://deps/flatbuffers/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+    file://deps/fft2d/readme.txt;md5=62461d28fdc0c056c098f3fb2f015799;beginline=140;endline=145 \
+    file://deps/gemmlowp/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+    file://deps/google-benchmark/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+    file://deps/googletest/LICENSE;md5=cbbd27594afd089daa160d3a16dd515a \
+    file://deps/ml-dtypes/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+    file://deps/neon2sse/LICENSE;md5=53abad1ded16f44100126962f4bbef6c \
+    file://deps/re2/LICENSE;md5=3b5c31eb512bdf3cb11ffd5713963760 \
+    file://deps/ruy/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+    file://deps/xnnpack/LICENSE;md5=afa8f8a91390ab659c837da57124977c \
+    file://deps/protobuf/LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b \
+    file://deps/pthreadpool/LICENSE;md5=1609499688b503850848d795dce4da2d \
+    file://deps/fp16/LICENSE;md5=998fb0b16ad8a4fb8bd41bf3faf2d21c \
+    file://deps/fxdiv/LICENSE;md5=0c2eed7ba400a6fea8fec2a582b177e8 \
+    file://deps/kleidiai/LICENSES/Apache-2.0.txt;md5=c846ebb396f8b174b10ded4771514fcc \
+    file://deps/kleidiai/LICENSES/BSD-3-Clause.txt;md5=71f739ef75581cae312e8c711bcdab16 \
+    file://deps/tensorflow/LICENSE;md5=4158a261ca7f2525513e31ba9c50ae98 \
+"
+
 # Offline dependency cmake flags (shared between TFLite and LiteRT builds)
-DEPS_DIR ?= "${@d.getVar('UNPACKDIR') or d.getVar('WORKDIR')}/deps"
+DEPS_DIR ?= "${S}/deps"
 DEPS_CMAKE_FLAGS = " \
     -DFETCHCONTENT_SOURCE_DIR_ABSEIL-CPP=${DEPS_DIR}/abseil-cpp \
     -DFETCHCONTENT_SOURCE_DIR_CPUINFO=${DEPS_DIR}/cpuinfo \
