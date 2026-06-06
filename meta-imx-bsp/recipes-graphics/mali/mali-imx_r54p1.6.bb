@@ -21,7 +21,7 @@ SRC_URI:append = " \
     file://mali-imx-boot \
     file://mali-imx.service"
 
-inherit systemd
+inherit_defer ${@bb.utils.contains('IMX_MALI_DUAL_DRIVER', '1', 'systemd', '', d)}
 
 SYSTEMD_PACKAGES = "${PN}-dual"
 SYSTEMD_SERVICE:${PN}-dual = "mali-imx.service"
