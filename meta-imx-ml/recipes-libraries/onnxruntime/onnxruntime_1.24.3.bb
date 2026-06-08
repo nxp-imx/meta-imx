@@ -1,5 +1,5 @@
 require onnxruntime.inc
 
 SRCBRANCH = "imx_1.24.3"
-SRCREV = "33ea69b6e81bfb76737ed7f9216eb15f95228639" 
+SRCREV = "0bf7f011b67e5d93a651ca97b13a94d783aff2c6"
 
