@@ -25,6 +25,7 @@ OEI_CORE    ?= "UNDEFINED"
 OEI_SOC     ?= "UNDEFINED"
 OEI_BOARD   ?= "UNDEFINED"
 OEI_CONFIGS ?= "ddr ${@bb.utils.filter('PACKAGECONFIG', 'tcm', d)}"
+OEI_IEE     ?= "0"
 
 LDFLAGS[unexport] = "1"
 
@@ -32,6 +33,7 @@ EXTRA_OEMAKE = "\
     board=${OEI_BOARD} \
     DDR_CONFIG=${@bb.utils.contains('PACKAGECONFIG', 'ecc', '${OEI_DDR_CONFIG_ECC}', '${OEI_DDR_CONFIG}', d)} \
     DEBUG=1 \
+    iee=${OEI_IEE} \
     OEI_CROSS_COMPILE=arm-none-eabi-"
 
 EXTRA_OEMAKE:append:mx95-nxp-bsp = " r=${IMX_SOC_REV}"
