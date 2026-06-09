@@ -3,7 +3,7 @@
 # Released under the MIT license (see COPYING.MIT for the terms)
 DESCRIPTION = "G2D library using i.MX DPU"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://../LICENSE;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
+LIC_FILES_CHKSUM = "file://../LICENSE.txt;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 DEPENDS = "libdrm opencl-headers"
 PROVIDES += "virtual/libg2d"
 
@@ -12,7 +12,7 @@ PV = "2.5.0+git"
 SRC_URI = "${IMX_DPU_G2D_SRC};branch=${SRCBRANCH}"
 IMX_DPU_G2D_SRC ?= "git://github.com/nxp-imx/imx-dpu-g2d.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "6c325eaf8c45da500ad4febf0495f6e1ee105287"
+SRCREV = "5f7812a67688e9b404ac35e1bb0cee9b740ad2d9"
 
 S:append = "/source"
 
