@@ -3,3 +3,5 @@ SRCBRANCH = "master"
 SRCREV = "b831b3d39eac91c436592c411182e5866f7dcff7"
 
 inherit pkgconfig
+
+PLATFORM:mx937-nxp-bsp = "IMX8"
