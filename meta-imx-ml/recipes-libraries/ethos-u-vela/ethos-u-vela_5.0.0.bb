@@ -9,7 +9,7 @@ DEPENDS = "flatbuffers python3-numpy python3-lxml python3-numpy-native"
 SRC_URI = "${VELA_SRC};branch=${SRCBRANCH}"
 VELA_SRC ?= "git://github.com/nxp-imx/ethos-u-vela.git;protocol=https"
 SRCBRANCH = "imx_5.0.0"
-SRCREV = "f0088468afc2bc17fad6bc7729b47dfaafea4293"
+SRCREV = "c93ed591f96e2c9b734a2e802af563f32c1ededa"
 
 inherit setuptools3
 
