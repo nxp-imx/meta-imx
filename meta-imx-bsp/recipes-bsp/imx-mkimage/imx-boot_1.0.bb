@@ -220,7 +220,7 @@ compile_soc() {
     mx91|mx93)
         compile_mx9 $1
         ;;
-    mx943|mx95|mx952)
+    mx943|mx95|mx952|mx937)
         compile_mx9sm $1
         ;;
     *)
@@ -416,7 +416,7 @@ deploy_soc() {
     mx91|mx93)
         deploy_mx9
         ;;
-    mx943|mx95|mx952)
+    mx943|mx95|mx952|mx937)
         deploy_mx9sm
         ;;
     *)
