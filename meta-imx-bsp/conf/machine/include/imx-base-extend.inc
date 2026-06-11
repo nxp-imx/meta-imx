@@ -18,7 +18,7 @@ MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx8mpul mx93w mx952"
 MACHINEOVERRIDES_EXTENDER:mx93w:use-nxp-bsp  = "mx93w-generic-bsp:mx93w-nxp-bsp"
 
 # Add new Soc i.MX 937
-MACHINEOVERRIDES_EXTENDER:mx937:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxdpu:imxgpu:imxmali:imxgpu2d:imxgpu3d:mx9-generic-bsp:mx9-nxp-bsp:mx937-generic-bsp:mx937-nxp-bsp"
+MACHINEOVERRIDES_EXTENDER:mx937:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxdpu:imxgpu:imxmali:imxgpu2d:imxgpu3d:mx9-generic-bsp:mx9-nxp-bsp:mx95-generic-bsp:mx95-nxp-bsp:mx952-generic-bsp:mx952-nxp-bsp:mx937-generic-bsp:mx937-nxp-bsp"
 MACHINE_SOCARCH_SUFFIX:mx937-nxp-bsp = "-mx937"
 SECO_FIRMWARE_NAME:mx937-generic-bsp ?= "mx937${IMX_SOC_REV_LOWER}-ahab-container.img"
 IMX_SOC_REV:mx937-generic-bsp   ??= "A0"
