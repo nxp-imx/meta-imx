@@ -1,0 +1,46 @@
+From 52a9ba805aeccadf8f961230994b1973ca5d32b8 Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Wed, 10 Jun 2026 13:18:25 +0800
+Subject: [PATCH 2/2] piglit: fix incompatible pointer types in generated
+ global address space kernels
+
+For builtins with two output arguments (fract, frexp, modf, sincos, etc.),
+the generated global address space kernels assign a `global float*` pointer
+to a `global floatN*` variable without an explicit cast. This is rejected
+by clang (used by Mesa/rusticl) as an incompatible pointer type error,
+though proprietary compilers may accept it silently.
+
+Add an explicit cast to the generated pointer assignment.
+
+Before: global float2 *tmp1 = out1;
+After:  global float2 *tmp1 = (global float2 *)out1;
+
+Fixes CL_BUILD_PROGRAM_FAILURE on rusticl/clang for tests like
+builtin-float-fract-1.0.generated.cl.
+
+Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/piglit/-/merge_requests/1149]
+Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
+---
+ generated_tests/genclbuiltins.py | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/generated_tests/genclbuiltins.py b/generated_tests/genclbuiltins.py
+index d9086d319..90f57c31b 100644
+--- a/generated_tests/genclbuiltins.py
++++ b/generated_tests/genclbuiltins.py
+@@ -118,9 +118,10 @@ def gen_kernel(f, fnName, inTypes, outTypes, vecSizes, typePrefix, outLoc='priva
+     f.write('){\n')
+ 
+     for arg in range(1, len(outTypes)):
+-        f.write('  ' + outLoc + ' ' + outTypes[arg] + ('' if vecSizes[0] == 1 else str(vecSizes[0])));
++        vecTypeStr = outTypes[arg] + ('' if vecSizes[0] == 1 else str(vecSizes[0]))
++        f.write('  ' + outLoc + ' ' + vecTypeStr);
+         if (outLoc == 'global'):
+-            f.write(' *tmp' + str(arg) + ' = out' + str(arg) + ';\n');
++            f.write(' *tmp' + str(arg) + ' = (' + outLoc + ' ' + vecTypeStr + ' *)out' + str(arg) + ';\n');
+         else:
+             #FIXME: This assumes WG size of 1
+             f.write(' tmp' + str(arg) + ';\n');
+-- 
+2.34.1
+

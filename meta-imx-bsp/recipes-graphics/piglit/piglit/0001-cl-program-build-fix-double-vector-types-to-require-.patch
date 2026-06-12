@@ -1,0 +1,37 @@
+From 4dd39b1fdebbe541b3eada44182690fb75ff2e7c Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Tue, 9 Jun 2026 16:36:24 +0800
+Subject: [PATCH 1/2] cl/program/build: fix double vector types to require
+ cl_khr_fp64 extension
+
+Using __OPENCL_C_VERSION__ >= 120 to guard double vector type declarations
+is incorrect. double availability depends on the cl_khr_fp64 extension, not
+the language version. Devices that report OpenCL C 1.2 but lack cl_khr_fp64
+(e.g. Mali-G310) would fail to compile the test.
+
+Use #ifdef cl_khr_fp64 with the appropriate #pragma, consistent with how
+scalar-data-types.cl handles the same case.
+
+Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/piglit/-/merge_requests/1147]
+Signed-off-by: jiajia Qian jiajia.qian@nxp.com
+---
+ tests/cl/program/build/vector-data-types.cl | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/tests/cl/program/build/vector-data-types.cl b/tests/cl/program/build/vector-data-types.cl
+index 1d77c59cb..8187c2199 100644
+--- a/tests/cl/program/build/vector-data-types.cl
++++ b/tests/cl/program/build/vector-data-types.cl
+@@ -27,7 +27,8 @@ kernel void test(global int* out) {
+ 	float3   f3;
+ #endif
+ 
+-#if __OPENCL_C_VERSION__ >= 120
++#ifdef cl_khr_fp64
++#pragma OPENCL EXTENSION cl_khr_fp64 : enable
+ 	double2 d2; double3 d3; double4 d4; double8 d8; double16 d16;
+ #endif
+ }
+-- 
+2.34.1
+
