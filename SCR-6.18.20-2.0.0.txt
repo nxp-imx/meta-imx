@@ -135,8 +135,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.6-a87a521.bin
-Version:                     2.0.6
+Package:                     firmware-ele-imx-2.0.7-a46e3ff.bin
+Version:                     2.0.7
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -320,7 +320,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-1e59ce2
+Package:                     sof-zephyr-2.16.0-3cf71d1
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -334,7 +334,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-e71ff18
+Package:                     zephyr-demo-imx-4.4.5-b027316
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -556,7 +556,7 @@ Origin:                      NXP (BSD-3-Clause)
 --------------------------------------------
 
 Package:                     el2go-agent.git
-Version:                     6.4.2
+Version:                     6.5.1
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
 Package Category:            BSP
@@ -735,7 +735,7 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.26.2-9ff57e7.bin
+Package:                     isp-imx-4.2.2.26.2-e4002a7.bin
 Version:                     4.2.2.26.2
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -773,7 +773,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-937be24.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-03c3984.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -792,7 +792,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-937be24.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-03c3984.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -811,7 +811,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r54p1.6-57b98d9.bin
+Package:                     mali-imx-r54p1.6-753ba30.bin
 Version:                     r54p1.6
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -827,6 +827,19 @@ Origin:                      NXP (proprietary)
                              Vulkan Window System Integration Layer (MIT) - https://gitlab.freedesktop.org/mesa/vulkan-wsi-layer
                              Open Source LLVM/Clang Source Code (Apache-2.0 with LLVM Exceptions) - https://github.com/llvm/llvm-project
 
+
+--------------------------------------------
+
+Package:                     mesa.git
+Version:                     26.1.y.imx
+Outgoing License:            MIT 
+License File:                licenses/MIT
+Package Category:            Graphics
+Type of Content:             source
+Description and comments:    3D Graphics Library
+Release Location:            https://github.com/nxp-imx/mesa-imx -b lf-6.18.20-2.0.0
+Origin:                      NXP (MIT)
+                             Mesa (MIT) - https://gitlab.freedesktop.org/mesa/mesa
 
 --------------------------------------------
 
@@ -1115,13 +1128,13 @@ License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             source
 Description and comments:    NXP PDM to PCM Software Decimation SIMD Library
-Release Location:            http://github.com/nxp-imx/imx-sw-pdm -b lf-6.18.20-2.0.0
+Release Location:            https://github.com/nxp-imx/imx-sw-pdm -b lf-6.18.20-2.0.0
 Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
 Package:                     imx-opencl-converter.git
-Version:                     0.12.0
+Version:                     0.13.0
 Outgoing License:            BSD-3-Clause 
 License File:                COPYING
 Package Category:            Multimedia
@@ -1173,8 +1186,8 @@ Origin:                      VeriSilicon Inc. (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-vpu-hantro-daemon-1.9.0-a4cefcc
-Version:                     1.9.0
+Package:                     imx-vpu-hantro-daemon-1.10.0-dd94ffe
+Version:                     1.10.0
 Outgoing License:            MIT License 
 License File:                LICENSE.txt
 Package Category:            Multimedia
@@ -1294,7 +1307,7 @@ Origin:                      NXP (LGPL-2.1-or-later)
 --------------------------------------------
 
 Package:                     neo-ipa-uguzzi.git
-Version:                     0.2.6
+Version:                     0.2.7
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSES/LA_OPT_NXP_Software_License.txt
 Package Category:            Multimedia
@@ -1606,7 +1619,7 @@ Origin:                      NXP (Apache-2.0)
 --------------------------------------------
 
 Package:                     neutron.git
-Version:                     2.2.1
+Version:                     3.1.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 
 License File:                LICENSE.txt
 Package Category:            MachineLearning
@@ -1633,7 +1646,7 @@ Origin:                      NXP (LGPL-2.1)
 --------------------------------------------
 
 Package:                     onnxruntime-imx.git
-Version:                     1.23.2
+Version:                     1.24.3
 Outgoing License:            MIT 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1711,7 +1724,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-2.1.1-ffd778f.bin
+Package:                     imx-nxp-ara2-2.1.1-496726b.bin
 Version:                     2.1.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
@@ -1719,6 +1732,32 @@ Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    Runtime SDK for AI/ML acceleration with Ara240 NPU on i.MX SoCs
 Release Location:            Mirror
+Origin:                      NXP (LA_OPT_NXP_Software_License)
+ 
+--------------------------------------------
+
+Package:                     eiq-aaf-connector.git
+Version:                     2.1
+Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
+License File:                LICENSE
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    REST-based server for inference on LLMs running on i.MX devices with Kinara
+Release Location:            https://github.com/nxp-imx-support/eiq-aaf-connector -b lf-6.18.20-2.0.0
+Origin:                      NXP (LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025)
+
+--------------------------------------------
+
+Package:                     uiodma-driver.git
+Version:                     1.0.0
+Outgoing License:            GPL-2.0 
+License File:                LICENSE.txt
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    Linux kernel driver providing userspace I/O (UIO) access to DMA-capable memory regions
+Release Location:            https://github.com/nxp-imx-support/uiodma-driver -b lf-6.18.20-2.0.0
+Origin:                      NXP (GPL-2.0-only)
+ 
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
