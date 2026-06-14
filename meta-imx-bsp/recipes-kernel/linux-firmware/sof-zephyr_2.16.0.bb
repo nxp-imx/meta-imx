@@ -9,9 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc \
                     file://LICENCE-sof;md5=14abb55d71048ebecff1a104640546b6"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.tar.gz"
-SRC_URI[sha256sum] = "0b35cff181cf55e13058bcbdc8390e1af1399f2b268315d9d26c097404afafb2"
+SRC_URI[sha256sum] = "d239d588e6b995da2b11bcfcb86f93d33e3f3840f2d3a7a069fc17591ef05c17"
 
-IMX_SRCREV_ABBREV = "3cf71d1"
+IMX_SRCREV_ABBREV = "0d9b5ec"
 
 S = "${UNPACKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
