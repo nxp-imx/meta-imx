@@ -49,6 +49,12 @@ do_configure[network] = "1"
 do_configure:prepend() {
     export FC=""
 
+    # require to pull https://github.com/KhronosGroup/OpenCL-Headers
+    export HTTP_PROXY=${http_proxy}
+    export HTTPS_PROXY=${https_proxy}
+    export http_proxy=${http_proxy}
+    export https_proxy=${https_proxy}
+
     # ========================================================================
     # Step 1: Build TFLite with cmake overrides for offline mode
     # ========================================================================
