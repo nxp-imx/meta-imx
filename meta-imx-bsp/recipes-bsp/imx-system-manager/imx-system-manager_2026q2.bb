@@ -14,6 +14,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f2a70813bc08547f509361c08b718861"
 SRC_URI = "${IMX_SYSTEM_MANAGER_SRC};branch=${SRCBRANCH}"
 IMX_SYSTEM_MANAGER_SRC ?= "git://github.com/nxp-imx/imx-sm.git;protocol=https"
 SRCBRANCH = "dev"
-SRCREV = "c89e7112f6c367c802e20c3c4cde5d68dcbeb5b7"
+SRCREV = "b9702a7a982345f4b0f3a1c2529ae1467a126460"
 
 require imx-system-manager.inc
