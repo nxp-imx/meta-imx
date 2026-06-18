@@ -34,6 +34,8 @@ RDEPENDS_EDGE_LOCK_APPS ?= ""
 RDEPENDS_EDGE_LOCK_APPS:mx8ulp-nxp-bsp = "oem-prov-app"
 RDEPENDS_EDGE_LOCK_APPS:mx91-nxp-bsp   = "oem-prov-app"
 RDEPENDS_EDGE_LOCK_APPS:mx93-nxp-bsp   = "oem-prov-app"
+RDEPENDS_EDGE_LOCK_APPS:mx943-nxp-bsp  = "oem-prov-app"
+RDEPENDS_EDGE_LOCK_APPS:mx95-nxp-bsp   = "oem-prov-app"
 
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE = ""
 RDEPENDS_EDGE_LOCK_SECURE_ENCLAVE:mx8dxl-nxp-bsp = " \
