@@ -2,11 +2,11 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2026-06-04T03:37:42Z",
+    "created": "2026-06-18T16:32:36Z",
     "creators": [
       "Organization: NXP"
     ],
-    "licenseListVersion": "3.26"
+    "licenseListVersion": "3.28"
   },
   "name": "LinuxBSP-lf-6.18.20-2.0.0",
   "dataLicense": "CC0-1.0",
@@ -948,8 +948,8 @@
       "SPDXID": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---b3a1ac2d-6561-4142-8cb5-bb5c0d9118f4",
       "name": "imx7ulp-m4-demo",
       "versionInfo": "26.06.00",
-      "licenseConcluded": "LicenseRef-c139cf0d-cb4d-41be-bb38-74b8cfcc6ca0",
-      "licenseDeclared": "LicenseRef-c139cf0d-cb4d-41be-bb38-74b8cfcc6ca0",
+      "licenseConcluded": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
+      "licenseDeclared": "LicenseRef-fb01c3d1-c0c8-43a5-a164-c3942c52e011",
       "downloadLocation": "https://mcuxpresso.nxp.com/",
       "originator": "Organization: NXP",
       "supplier": "NOASSERTION",
