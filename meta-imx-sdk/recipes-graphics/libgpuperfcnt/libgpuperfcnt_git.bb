@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 PV = "1.4.0+git"
 
 SRC_URI = "${GPUPERFCNT};branch=${SRCBRANCH}"
-GPUPERFCNT ?= "https://github.com/nxp-imx/libgpuperfcnt.git;protocol=https"
+GPUPERFCNT ?= "git://github.com/nxp-imx/libgpuperfcnt.git;protocol=https"
 SRCBRANCH = "release"
 SRCREV = "00f2448c4c2f9fe42042baf1dc7676bec6cbbb43"
 
