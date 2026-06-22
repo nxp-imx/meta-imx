@@ -282,7 +282,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     hostapd-2.11-aaa7ec2f
+Package:                     hostapd-2.11-5a91f311
 Version:                     2.11
 Outgoing License:            BSD-3-Clause 
 License File:                COPYING
@@ -307,7 +307,7 @@ Origin:                    NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     wpa_supplicant-2.11-aaa7ec2f
+Package:                     wpa_supplicant-2.11-5a91f311
 Version:                     2.11
 Outgoing License:            BSD-3-Clause 
 License File:                COPYING
@@ -315,12 +315,9 @@ Package Category:            BSP
 Type of Content:             source
 Description and comments:    
 Release Location:            Mirror
-Origin:                    NXP (BSD-3-Clause)
-                           https://w1.fi/cgit
-
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-45a3167
+Package:                     sof-zephyr-2.16.0-17c5a3b
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
