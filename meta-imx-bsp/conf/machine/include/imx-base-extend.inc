@@ -21,7 +21,7 @@ MACHINEOVERRIDES_EXTENDER:mx93w:use-nxp-bsp  = "mx93w-generic-bsp:mx93w-nxp-bsp"
 MACHINEOVERRIDES_EXTENDER:mx937:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxdpu:imxgpu:imxmali:imxgpu2d:imxgpu3d:mx9-generic-bsp:mx9-nxp-bsp:mx95-generic-bsp:mx95-nxp-bsp:mx952-generic-bsp:mx952-nxp-bsp:mx937-generic-bsp:mx937-nxp-bsp"
 MACHINE_SOCARCH_SUFFIX:mx937-nxp-bsp = "-mx937"
 SECO_FIRMWARE_NAME:mx937-generic-bsp ?= "mx937${IMX_SOC_REV_LOWER}-ahab-container.img"
-IMX_SOC_REV:mx937-generic-bsp   ??= "A0"
+IMX_SOC_REV:mx937-generic-bsp   ??= "A1"
 IMX_EXTRA_FIRMWARE:mx937-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx virtual/imx-system-manager virtual/imx-oei"
 
 # Add new Soc i.MX 952
