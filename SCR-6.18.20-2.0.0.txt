@@ -282,7 +282,7 @@ Origin:                      NXP (GPL-2.0)
 
 --------------------------------------------
 
-Package:                     hostapd-2.11-aaa7ec2f
+Package:                     hostapd-2.11-5a91f311
 Version:                     2.11
 Outgoing License:            BSD-3-Clause 
 License File:                COPYING
@@ -307,7 +307,7 @@ Origin:                    NXP (proprietary)
 
 --------------------------------------------
 
-Package:                     wpa-supplicant-2.11-aaa7ec2f
+Package:                     wpa_supplicant-2.11-5a91f311
 Version:                     2.11
 Outgoing License:            BSD-3-Clause 
 License File:                COPYING
@@ -898,7 +898,7 @@ Origin:                      NXP (MIT)
 Package:                     weston-imx.git
 Version:                     15.0.1.imx
 Outgoing License:            MIT 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    A reference implementation of a Wayland compositor
@@ -911,7 +911,7 @@ Origin:                      NXP (MIT)
 Package:                     weston-10-imx.git
 Version:                     10.0.5.imx
 Outgoing License:            MIT 
-License File:                COPYING
+License File:                LICENSE
 Package Category:            Graphics
 Type of Content:             source
 Description and comments:    A reference implementation of a Wayland compositor
@@ -1724,15 +1724,20 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-2.1.1-0c162bb.bin
+Package:                     imx-nxp-ara2-2.1.1-063d56c.bin
 Version:                     2.1.1
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
-License File:                LICENSE.txt
+License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    Runtime SDK for AI/ML acceleration with Ara240 NPU on i.MX SoCs
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
+                            gstreamer-plugins-ara240 (LGPL-2.0-or-later)
+                            nnapp (LA_OPT_NXP_Software_License)
+                            optimum-ara (Apache-2.0)
+                            proxy_ara240 (LA_OPT_NXP_Software_License)
+                            utils (LA_OPT_NXP_Software_License)
  
 --------------------------------------------
 
