@@ -44,7 +44,9 @@ do_compile:prepend() {
         cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M71_IMAGE} ${BOOT_STAGING}/m71_image.bin
     ;;
     mx95*|mx937)
-        cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m7_image.bin
+        if [ ! -z ${M4_DEFAULT_IMAGE} ];then
+            cp ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m7_image.bin
+        fi
         ;;
     esac
 }
@@ -67,7 +69,9 @@ do_deploy:append() {
         install -m 0644 ${DEPLOY_DIR_IMAGE}/mcore-demos/${M71_IMAGE}                ${DEPLOYDIR}/${BOOT_TOOLS}
         ;;
     mx95|mx937)
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}         ${DEPLOYDIR}/${BOOT_TOOLS}
+        if [ ! -z ${M4_DEFAULT_IMAGE} ];then
+            install -m 0644 ${DEPLOY_DIR_IMAGE}/mcore-demos/${M4_DEFAULT_IMAGE}         ${DEPLOYDIR}/${BOOT_TOOLS}
+        fi
         ;;
     esac
 }
