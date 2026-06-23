@@ -53,11 +53,12 @@ PYTHON_RDEPENDS = "\
 
 PACKAGECONFIG ?= "crosscompiling sharedlib python kleidiai ${PACKAGECONFIG_NPU}"
 PACKAGECONFIG_NPU                    = ""
-PACKAGECONFIG_NPU:mx95-nxp-bsp       = "neutron"
+PACKAGECONFIG_NPU:mx95-nxp-bsp       = "neutron bmm"
 PACKAGECONFIG_NPU:mx943-nxp-bsp      = "neutron"
 PACKAGECONFIG_NPU:mx8-nxp-bsp:imxgpu = "vsinpu"
 PACKAGECONFIG_NPU:mx8mm-nxp-bsp      = ""
 
+PACKAGECONFIG[bmm] = "-DNEUTRON_HAS_DRIVER_BMM=ON,-DNEUTRON_HAS_DRIVER_BMM=OFF"
 PACKAGECONFIG[nsync] = "-Donnxruntime_USE_NSYNC=ON, -Donnxruntime_USE_NSYNC=OFF"
 PACKAGECONFIG[prebuilt] = "-Donnxruntime_USE_PREBUILT_PB=ON, -Donnxruntime_USE_PREBUILT_PB=OFF"
 PACKAGECONFIG[openmp] = "-Donnxruntime_USE_OPENMP=ON, -Donnxruntime_USE_OPENMP=OFF"
