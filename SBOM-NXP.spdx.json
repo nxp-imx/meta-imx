@@ -2,7 +2,7 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2026-06-18T16:32:36Z",
+    "created": "2026-06-23T03:23:25Z",
     "creators": [
       "Organization: NXP"
     ],
@@ -402,9 +402,9 @@
       "filesAnalyzed": false
     },
     {
-      "SPDXID": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---3f17c86e-e05f-4d3e-9570-3181922bb950",
+      "SPDXID": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---7cff6c29-9232-4d99-b1e3-fece3d222cdd",
       "name": "hostapd_linux",
-      "versionInfo": "2.11-aaa7ec2f",
+      "versionInfo": "2.11",
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "downloadLocation": "https://www.nxp.com",
@@ -1574,9 +1574,9 @@
       "filesAnalyzed": false
     },
     {
-      "SPDXID": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---f329e86c-beb5-4352-9132-969baf6da781",
+      "SPDXID": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---c540f847-31f7-454f-8353-f062cbb35c4b",
       "name": "wpa_supplicant_linux",
-      "versionInfo": "2.11-aaa7ec2f",
+      "versionInfo": "2.11",
       "licenseConcluded": "BSD-3-Clause",
       "licenseDeclared": "BSD-3-Clause",
       "downloadLocation": "https://www.nxp.com",
@@ -1789,11 +1789,6 @@
     {
       "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
       "relationshipType": "DYNAMIC_LINK",
-      "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---3f17c86e-e05f-4d3e-9570-3181922bb950"
-    },
-    {
-      "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
-      "relationshipType": "DYNAMIC_LINK",
       "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---3fc14a25-00ae-42e0-b5d5-e6b524f44f3e"
     },
     {
@@ -1925,6 +1920,11 @@
       "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
       "relationshipType": "DYNAMIC_LINK",
       "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---7b1a7022-db7c-41ab-b8ed-d8b46552934f"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
+      "relationshipType": "DYNAMIC_LINK",
+      "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---7cff6c29-9232-4d99-b1e3-fece3d222cdd"
     },
     {
       "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
@@ -2104,6 +2104,11 @@
     {
       "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
       "relationshipType": "DYNAMIC_LINK",
+      "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---c540f847-31f7-454f-8353-f062cbb35c4b"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
+      "relationshipType": "DYNAMIC_LINK",
       "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---c6da9199-e975-4c10-ae3b-9a03c0055d62"
     },
     {
@@ -2195,11 +2200,6 @@
       "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
       "relationshipType": "DYNAMIC_LINK",
       "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---f192380e-f5b6-44e1-81ad-c1d4c45f64c0"
-    },
-    {
-      "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
-      "relationshipType": "DYNAMIC_LINK",
-      "relatedSpdxElement": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5---f329e86c-beb5-4352-9132-969baf6da781"
     },
     {
       "spdxElementId": "SPDXRef-package-e9e04337-cd9d-440c-afe0-387c095b21b5",
