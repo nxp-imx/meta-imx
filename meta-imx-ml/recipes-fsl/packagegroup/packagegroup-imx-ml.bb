@@ -85,7 +85,9 @@ NEUTRON_PKGS:mx95-nxp-bsp = " \
 # Ara240 package
 ARA240_PKGS = ""
 ARA240_PKGS:mx8mp-nxp-bsp = "imx-nxp-ara2"
+ARA240_PKGS:mx937-nxp-bsp = ""
 ARA240_PKGS:mx95-nxp-bsp  = "imx-nxp-ara2"
+ARA240_PKGS:mx952-nxp-bsp = ""
 
 RDEPENDS:${PN} = " \
     ${ML_PKGS} \

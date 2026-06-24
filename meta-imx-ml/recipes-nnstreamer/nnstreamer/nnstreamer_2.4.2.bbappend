@@ -9,6 +9,8 @@ SRC_URI += " file://0001-gray8_padding_removal.patch \
 # The Ara-2 is a PCIe Gen3 x4 add-in card compatible with i.MX 8M Plus and i.MX 95
 PACKAGECONFIG:append:mx8mp-nxp-bsp = " ara2"
 PACKAGECONFIG:append:mx95-nxp-bsp = " ara2"
+PACKAGECONFIG:remove:mx937-nxp-bsp = " ara2"
+PACKAGECONFIG:remove:mx952-nxp-bsp = " ara2"
 
 # Kinara Ara-2 NPU tensor_filter sub-plugin
 PACKAGECONFIG[ara2] = "\
