@@ -294,6 +294,8 @@ SRCREV_berkeley-testfloat-3 = "e7af9751d9f9fd3b47911f51a5cfd08af256a9ab"
 SRCREV_keycodemapdb = "f5772a62ec52591ff6870b7e8ef32482371f22c6"
 SRCREV_FORMAT = "imx-qemu_berkeley-softfloat-3_berkeley-testfloat-3_keycodemapdb"
 
+QEMU_TARGETS = "arm aarch64"
+
 PACKAGECONFIG[vhost-user] = "--enable-vhost-user ${PACKAGECONFIG_VHOST_USER_XEN},--disable-vhost-user,libgpiod"
 PACKAGECONFIG_VHOST_USER_XEN = "-Dlibvhost-user:xen=${@bb.utils.contains('PACKAGECONFIG', 'xen', 'enabled', 'disabled', d)}"
 PACKAGECONFIG[rutabaga-gfx] = "--enable-rutabaga-gfx,--disable-rutabaga-gfx,rutabaga-gfx-ffi"
