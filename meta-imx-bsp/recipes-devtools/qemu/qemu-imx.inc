@@ -295,6 +295,7 @@ SRCREV_keycodemapdb = "f5772a62ec52591ff6870b7e8ef32482371f22c6"
 SRCREV_FORMAT = "imx-qemu_berkeley-softfloat-3_berkeley-testfloat-3_keycodemapdb"
 
 QEMU_TARGETS = "arm aarch64"
+QEMU_TARGETS:mx9-nxp-bsp = "aarch64"
 
 PACKAGECONFIG[vhost-user] = "--enable-vhost-user ${PACKAGECONFIG_VHOST_USER_XEN},--disable-vhost-user,libgpiod"
 PACKAGECONFIG_VHOST_USER_XEN = "-Dlibvhost-user:xen=${@bb.utils.contains('PACKAGECONFIG', 'xen', 'enabled', 'disabled', d)}"
@@ -375,4 +376,10 @@ do_install:append() {
 
     # ---- Misc: Windows NSIS installer art ----
     rm -f ${D}${datadir}/qemu/qemu-nsis.bmp
+}
+
+do_install:append:mx9-nxp-bsp (){
+    # ---- Arm 32 ----
+    rm -f ${D}${datadir}/qemu/edk2-arm*.fd
+    rm -f ${D}${datadir}/qemu/firmware/60-edk2-arm.json
 }
