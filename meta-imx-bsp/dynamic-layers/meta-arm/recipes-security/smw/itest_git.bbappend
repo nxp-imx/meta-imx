@@ -1,3 +1,5 @@
 # Copyright 2026 NXP
 SRCBRANCH = "master"
 SRCREV = "ecf9a70b8624938091592b595165e56e0cf0bae9"
+
+PACKAGECONFIG:mx937-nxp-bsp  ??= "ele ele-seco prime"
