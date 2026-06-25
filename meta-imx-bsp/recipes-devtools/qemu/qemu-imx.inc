@@ -304,3 +304,75 @@ do_configure:prepend() {
     cp ${S}/subprojects/packagefiles/berkeley-softfloat-3/* ${S}/subprojects/berkeley-softfloat-3/
     cp ${S}/subprojects/packagefiles/berkeley-testfloat-3/* ${S}/subprojects/berkeley-testfloat-3/
 }
+
+# Only arm and aarch64 targets are needed for i.MX.  Remove all firmware,
+# ROMs, DTBs and EDK2 images that belong to other architectures so the
+# qemu-common package stays lean (~96 MB saved, mostly EDK2 blobs).
+do_install:append() {
+    # ---- x86 / PC ----
+    rm -f ${D}${datadir}/qemu/bios*.bin
+    rm -f ${D}${datadir}/qemu/sgabios.bin
+    rm -f ${D}${datadir}/qemu/linuxboot*.bin
+    rm -f ${D}${datadir}/qemu/multiboot*.bin
+    rm -f ${D}${datadir}/qemu/kvmvapic.bin
+    rm -f ${D}${datadir}/qemu/pvh.bin
+    rm -f ${D}${datadir}/qemu/qboot.rom
+    rm -f ${D}${datadir}/qemu/pxe-*.rom
+    rm -f ${D}${datadir}/qemu/efi-e1000*.rom
+    rm -f ${D}${datadir}/qemu/efi-eepro100.rom
+    rm -f ${D}${datadir}/qemu/efi-ne2k_pci.rom
+    rm -f ${D}${datadir}/qemu/efi-pcnet.rom
+    rm -f ${D}${datadir}/qemu/efi-rtl8139.rom
+    rm -f ${D}${datadir}/qemu/efi-vmxnet3.rom
+    rm -f ${D}${datadir}/qemu/efi-virtio.rom
+    rm -f ${D}${datadir}/qemu/vgabios*.bin
+    rm -f ${D}${datadir}/qemu/edk2-i386-*.fd
+    rm -f ${D}${datadir}/qemu/edk2-x86_64-*.fd
+
+    # ---- PPC ----
+    rm -f ${D}${datadir}/qemu/openbios-ppc
+    rm -f ${D}${datadir}/qemu/u-boot*
+    rm -f ${D}${datadir}/qemu/slof.bin
+    rm -f ${D}${datadir}/qemu/skiboot.lid
+    rm -f ${D}${datadir}/qemu/qemu_vga.ndrv
+    rm -f ${D}${datadir}/qemu/pnv-pnor.bin
+    rm -f ${D}${datadir}/qemu/vof.bin
+    rm -f ${D}${datadir}/qemu/vof-nvram.bin
+
+    # ---- SPARC ----
+    rm -f ${D}${datadir}/qemu/openbios-sparc*
+    rm -f ${D}${datadir}/qemu/QEMU,*.bin
+
+    # ---- Alpha ----
+    rm -f ${D}${datadir}/qemu/palcode-clipper
+
+    # ---- RISC-V ----
+    rm -f ${D}${datadir}/qemu/opensbi-riscv*
+    rm -f ${D}${datadir}/qemu/edk2-riscv-*.fd
+
+    # ---- LoongArch ----
+    rm -f ${D}${datadir}/qemu/edk2-loongarch64-*.fd
+
+    # ---- ARM BMC ----
+    rm -f ${D}${datadir}/qemu/ast27x0_bootrom.bin
+    rm -f ${D}${datadir}/qemu/npcm7xx_bootrom.bin
+    rm -f ${D}${datadir}/qemu/npcm8xx_bootrom.bin
+
+    # ---- MicroBlaze ----
+    rm -f ${D}${datadir}/qemu/petalogix-*.dtb
+
+    # ---- DTB directory: only PPC / MicroBlaze DTBs are shipped upstream,
+    #      none are needed for ARM targets ----
+    rm -rf ${D}${datadir}/qemu/dtb
+
+    # ---- Firmware descriptors: keep only arm / aarch64 ----
+    rm -f ${D}${datadir}/qemu/firmware/50-edk2-i386-secure.json
+    rm -f ${D}${datadir}/qemu/firmware/50-edk2-x86_64-secure.json
+    rm -f ${D}${datadir}/qemu/firmware/60-edk2-i386.json
+    rm -f ${D}${datadir}/qemu/firmware/60-edk2-x86_64.json
+    rm -f ${D}${datadir}/qemu/firmware/60-edk2-loongarch64.json
+    rm -f ${D}${datadir}/qemu/firmware/60-edk2-riscv64.json
+
+    # ---- Misc: Windows NSIS installer art ----
+    rm -f ${D}${datadir}/qemu/qemu-nsis.bmp
+}
