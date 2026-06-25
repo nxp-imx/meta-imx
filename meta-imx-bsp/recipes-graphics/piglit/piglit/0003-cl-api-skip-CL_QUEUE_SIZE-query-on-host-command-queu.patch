@@ -1,0 +1,47 @@
+From 9eef373829b3010a3c613993f5c3424300c824f8 Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Tue, 16 Jun 2026 14:36:55 +0800
+Subject: [PATCH] cl/api: skip CL_QUEUE_SIZE query on host command-queues
+
+Per the OpenCL spec, CL_QUEUE_SIZE is only valid for device
+command-queues. When queried on a host command-queue, the driver
+should return CL_INVALID_COMMAND_QUEUE. The test was treating this
+spec-compliant error as a test failure.
+
+Skip CL_QUEUE_SIZE validation when the command-queue is not a device
+command-queue, since the test only creates host command-queues.
+
+Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/piglit/-/merge_requests/1152]
+Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
+---
+ tests/cl/api/get-command-queue-info.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/tests/cl/api/get-command-queue-info.c b/tests/cl/api/get-command-queue-info.c
+index 3ea87800b..573208fc9 100644
+--- a/tests/cl/api/get-command-queue-info.c
++++ b/tests/cl/api/get-command-queue-info.c
+@@ -77,6 +77,20 @@ piglit_cl_test(const int argc,
+ 		                              0,
+ 		                              NULL,
+ 		                              &param_value_size);
++
++#ifdef CL_VERSION_2_0
++		/*
++		 * CL_QUEUE_SIZE is only valid for device command-queues.
++		 * For host command-queues, CL_INVALID_COMMAND_QUEUE is
++		 * the expected error per spec.
++		 */
++		if(command_queue_infos[i] == CL_QUEUE_SIZE &&
++		   errNo == CL_INVALID_COMMAND_QUEUE) {
++			printf("SKIP (only valid for device command-queues)\n");
++			continue;
++		}
++#endif
++
+ 		if(!piglit_cl_check_error(errNo, CL_SUCCESS)) {
+ 			fprintf(stderr,
+ 			        "Failed (error code: %s): Get size of %s.\n",
+-- 
+2.34.1
+

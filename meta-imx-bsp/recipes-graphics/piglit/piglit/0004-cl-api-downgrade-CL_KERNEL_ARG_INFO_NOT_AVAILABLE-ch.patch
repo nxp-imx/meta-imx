@@ -1,0 +1,48 @@
+From af7d61d7284d7cb21a58fbaf6f1578471f9f0f0a Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Tue, 16 Jun 2026 15:10:53 +0800
+Subject: [PATCH] cl/api: downgrade CL_KERNEL_ARG_INFO_NOT_AVAILABLE check from
+ fail to warn
+
+The OpenCL spec does not require implementations to return
+CL_KERNEL_ARG_INFO_NOT_AVAILABLE when -cl-kernel-arg-info is not
+specified. Implementations may choose to always retain kernel
+argument info, in which case returning CL_SUCCESS is spec-compliant.
+
+As the existing comment in the test already notes, PoCL, AMD and
+Intel always return arg info. rusticl also exhibits this behavior.
+
+Downgrade the result from PIGLIT_FAIL to PIGLIT_WARN when the
+implementation returns CL_SUCCESS instead of
+CL_KERNEL_ARG_INFO_NOT_AVAILABLE.
+
+Upstream-Status: Submitted [https://gitlab.freedesktop.org/mesa/piglit/-/merge_requests/1153]
+Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
+---
+ tests/cl/api/get-kernel-arg-info.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/tests/cl/api/get-kernel-arg-info.c b/tests/cl/api/get-kernel-arg-info.c
+index 6fc0e7519..68ba32e9d 100644
+--- a/tests/cl/api/get-kernel-arg-info.c
++++ b/tests/cl/api/get-kernel-arg-info.c
+@@ -242,7 +242,15 @@ piglit_cl_test(const int argc,
+ 		fprintf(stderr,
+ 	           "Failed (error code: %s): Trigger CL_KERNEL_ARG_INFO_NOT_AVAILABLE if the argument information is not available for kernel.\n",
+ 	           piglit_cl_get_error_name(errNo));
+-	piglit_merge_result(&result, PIGLIT_FAIL);
++		/*
++		 * Some implementations (PoCL, AMD, Intel, rusticl) always
++		 * retain kernel arg info even without -cl-kernel-arg-info.
++		 * This is spec-compliant behavior, so only warn instead of fail.
++		 */
++		if(errNo == CL_SUCCESS)
++			piglit_merge_result(&result, PIGLIT_WARN);
++		else
++			piglit_merge_result(&result, PIGLIT_FAIL);
+ 	}
+ 
+ 	clReleaseKernel(kern);
+-- 
+2.34.1
+
