@@ -53,7 +53,7 @@ PYTHON_RDEPENDS = "\
 
 PACKAGECONFIG ?= "crosscompiling sharedlib python kleidiai ${PACKAGECONFIG_NPU}"
 PACKAGECONFIG_NPU                    = ""
-PACKAGECONFIG_NPU:mx95-nxp-bsp       = "neutron bmm"
+PACKAGECONFIG_NPU:mx95-nxp-bsp       = "neutron"
 PACKAGECONFIG_NPU:mx952-nxp-bsp      = "neutron"
 PACKAGECONFIG_NPU:mx943-nxp-bsp      = "neutron"
 PACKAGECONFIG_NPU:mx937-nxp-bsp      = "neutron"
