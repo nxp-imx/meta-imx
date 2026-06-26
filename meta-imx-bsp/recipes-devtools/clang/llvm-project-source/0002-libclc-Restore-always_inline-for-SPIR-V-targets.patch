@@ -1,0 +1,46 @@
+From 80f74863787db95ce6b17030894749077df0276c Mon Sep 17 00:00:00 2001
+From: Eric Guo <eric.guo@nxp.com>
+Date: Wed, 10 Jun 2026 16:00:39 +0800
+Subject: [PATCH 2/2] [libclc] Restore always_inline for SPIR-V targets
+
+PR #158791 removed always_inline from _CLC_INLINE/_CLC_DEF. SPIR-V
+targets build at -O0 and never run 'opt', so helpers are no longer
+inlined and survive as real calls, causing NIR validation failures in
+rusticl (e.g. OpenCL CTS math_brute_force -w cos). Re-force inlining
+only for CLC_SPIRV.
+
+Upstream-Status: Submitted [https://github.com/llvm/llvm-project/pull/202891]
+Signed-off-by: Eric Guo <eric.guo@nxp.com>
+---
+ libclc/clc/include/clc/clcfunc.h | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/libclc/clc/include/clc/clcfunc.h b/libclc/clc/include/clc/clcfunc.h
+index 5457a1892a..a6da57499a 100644
+--- a/libclc/clc/include/clc/clcfunc.h
++++ b/libclc/clc/include/clc/clcfunc.h
+@@ -11,11 +11,21 @@
+ 
+ #define _CLC_OVERLOAD __attribute__((overloadable))
+ #define _CLC_DECL
++
++// Force inlining of helpers for SPIR-V targets, which are built at -O0 and
++// never run through 'opt'.
++#if defined(CLC_SPIRV)
++#define _CLC_INLINE __attribute__((always_inline)) inline
++#else
+ #define _CLC_INLINE inline
++#endif
++
+ #define _CLC_CONST __attribute__((const))
+ 
+ #if defined(CLC_CLSPV)
+ #define _CLC_DEF __attribute__((noinline)) __attribute__((clspv_libclc_builtin))
++#elif defined(CLC_SPIRV)
++#define _CLC_DEF __attribute__((always_inline))
+ #else
+ #define _CLC_DEF
+ #endif
+-- 
+2.34.1
+
