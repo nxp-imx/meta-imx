@@ -75,10 +75,12 @@ OECMAKE_TARGET_INSTALL += "install_tests"
 PACKAGES =+ "${PN}-tests"
 
 FILES:${PN} += "${nonarch_base_libdir}/optee_armtz/*"
+FILES:${PN} += "${datadir}/${BPN}-cli/*"
+RDEPENDS:${PN} = "bash"
 
 INSANE_SKIP:${PN}-dbg = "buildpaths"
 
-FILES:${PN}-tests = "${bindir}/* ${datadir}/${BPN}/*"
+FILES:${PN}-tests = "${bindir}/*test* ${datadir}/${BPN}/*"
 RDEPENDS:${PN}-tests = "cmake"
 INSANE_SKIP:${PN}-tests = "buildpaths"
 
