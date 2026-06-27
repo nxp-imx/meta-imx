@@ -295,8 +295,8 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.1.0-f0a9ce3.bin
-Version:                     1.1.0
+Package:                     nxp-wlan-apps-1.2.0-5a60d37.bin
+Version:                     1.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -317,7 +317,7 @@ Description and comments:
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-59a3f0d
+Package:                     sof-zephyr-2.16.0-ef1bcdb
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-daad7c5
+Package:                     zephyr-demo-imx-4.4.5-769c4f2
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -732,8 +732,8 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.26.2-e4002a7.bin
-Version:                     4.2.2.26.2
+Package:                     isp-imx-4.2.2.26.3-e4002a7.bin
+Version:                     4.2.2.26.3
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
