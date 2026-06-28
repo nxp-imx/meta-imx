@@ -317,7 +317,7 @@ Description and comments:
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-ef1bcdb
+Package:                     sof-zephyr-2.16.0-6e63a68
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
