@@ -23,15 +23,16 @@ SRCBRANCH = "lf-6.18.y"
 KBRANCH = "${SRCBRANCH}"
 SRCREV = "5cedeea3eb641fefde7cad591679a58e37504bee"
 
+
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "6.18.20"
+LINUX_VERSION = "6.18.37"
 # FIXME: Drop this line once LINUX_VERSION is stable and set correctly
 KERNEL_VERSION_SANITY_SKIP = "1"
-LOCALVERSION = "-2.0.0"
+LOCALVERSION = "-2.1.0"
 
 KBUILD_DEFCONFIG:mx6-generic-bsp = "imx_v7_defconfig"
 KBUILD_DEFCONFIG:mx7-generic-bsp = "imx_v7_defconfig"
