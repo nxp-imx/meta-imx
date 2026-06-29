@@ -3,6 +3,8 @@ From: jiajia Qian <jiajia.qian@nxp.com>
 Date: Fri, 19 Jun 2026 08:49:50 +0800
 Subject: [PATCH] linker: detect duplicate exported definitions without imports
 
+Upstream-Status: Submitted [https://github.com/KhronosGroup/SPIRV-Tools/pull/6750]
+
 The duplicate-export check in GetImportExportPairs() only triggers when
 iterating over imports. If no module imports a symbol, the linker never
 looks up the export table for that name, so multiple modules can each
@@ -24,7 +26,6 @@ but neither imports it.
 Fixes the piglit clLinkProgram test where two modules each define
 get_number() with Export linkage but neither imports it.
 
-Upstream: Submitted [https://github.com/KhronosGroup/SPIRV-Tools/pull/6750]
 Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
 ---
  source/link/linker.cpp                        | 15 ++++++---
