@@ -1,0 +1,113 @@
+From d0f4afb4b3457fadc55d9f0d7a2e8cea74928acd Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Fri, 19 Jun 2026 08:49:50 +0800
+Subject: [PATCH] linker: detect duplicate exported definitions without imports
+
+The duplicate-export check in GetImportExportPairs() only triggers when
+iterating over imports. If no module imports a symbol, the linker never
+looks up the export table for that name, so multiple modules can each
+export the same function and spvtools::Link() silently accepts them
+instead of reporting an error.
+
+Add a standalone pass over the exports map before the import-matching
+loop to reject links where the same symbol name is exported by more
+than one module. This correctly handles LinkOnceODR symbols because
+they are already deduplicated into a single export entry by the
+preceding linkonce processing.
+
+The existing size > 1 check in the import-matching loop is now
+redundant and has been removed.
+
+Add a test for the case where two modules export the same symbol
+but neither imports it.
+
+Fixes the piglit clLinkProgram test where two modules each define
+get_number() with Export linkage but neither imports it.
+
+Upstream: Submitted [https://github.com/KhronosGroup/SPIRV-Tools/pull/6750]
+Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
+---
+ source/link/linker.cpp                        | 15 ++++++---
+ .../link/matching_imports_to_exports_test.cpp | 33 +++++++++++++++++++
+ 2 files changed, 44 insertions(+), 4 deletions(-)
+
+diff --git a/source/link/linker.cpp b/source/link/linker.cpp
+index 002cc41..143166a 100644
+--- a/source/link/linker.cpp
++++ b/source/link/linker.cpp
+@@ -504,6 +504,17 @@ spv_result_t GetImportExportPairs(const MessageConsumer& consumer,
+              << possible_export.second.name << "\".";
+   }
+ 
++  // Detect multiple strong definitions of the same symbol.
++  // The import-matching loop below only visits symbols that are imported, so it
++  // would silently accept multiple exports when nothing imports them.  Check
++  // all exports here so that duplicates are always rejected.
++  for (const auto& exp : exports) {
++    if (exp.second.size() > 1u)
++      return DiagnosticStream(position, consumer, "", SPV_ERROR_INVALID_BINARY)
++             << "Too many external references, " << exp.second.size()
++             << ", were found for \"" << exp.first << "\".";
++  }
++
+   // Find the import/export pairs
+   for (const auto& import : imports) {
+     std::vector<LinkageSymbolInfo> possible_exports;
+@@ -512,10 +523,6 @@ spv_result_t GetImportExportPairs(const MessageConsumer& consumer,
+     if (possible_exports.empty() && !allow_partial_linkage)
+       return DiagnosticStream(position, consumer, "", SPV_ERROR_INVALID_BINARY)
+              << "Unresolved external reference to \"" << import.name << "\".";
+-    else if (possible_exports.size() > 1u)
+-      return DiagnosticStream(position, consumer, "", SPV_ERROR_INVALID_BINARY)
+-             << "Too many external references, " << possible_exports.size()
+-             << ", were found for \"" << import.name << "\".";
+ 
+     if (!possible_exports.empty())
+       linkings_to_do->emplace_back(import, possible_exports.front());
+diff --git a/test/link/matching_imports_to_exports_test.cpp b/test/link/matching_imports_to_exports_test.cpp
+index db94cb8..0574f02 100644
+--- a/test/link/matching_imports_to_exports_test.cpp
++++ b/test/link/matching_imports_to_exports_test.cpp
+@@ -234,6 +234,39 @@ OpDecorate %1 LinkageAttributes "foo" Export
+   }
+ }
+ 
++TEST_F(MatchingImportsToExports, MultipleDefinitionsNoImport) {
++  // Two modules export the same symbol but nothing imports it.
++  // The linker must still reject this as a duplicate strong definition.
++  const std::string body1 = R"(
++OpCapability Linkage
++OpCapability Addresses
++OpCapability Kernel
++OpMemoryModel Physical64 OpenCL
++OpDecorate %1 LinkageAttributes "foo" Export
++%2 = OpTypeFloat 32
++%3 = OpConstant %2 42
++%1 = OpVariable %2 Uniform %3
++)";
++  const std::string body2 = R"(
++OpCapability Linkage
++OpCapability Addresses
++OpCapability Kernel
++OpMemoryModel Physical64 OpenCL
++OpDecorate %1 LinkageAttributes "foo" Export
++%2 = OpTypeFloat 32
++%3 = OpConstant %2 -1
++%1 = OpVariable %2 Uniform %3
++)";
++
++  spvtest::Binary linked_binary;
++  EXPECT_EQ(SPV_ERROR_INVALID_BINARY,
++            AssembleAndLink({body1, body2}, &linked_binary))
++      << GetErrorMessage();
++  EXPECT_THAT(GetErrorMessage(),
++              HasSubstr("Too many external references, 2, were found "
++                        "for \"foo\"."));
++}
++
+ TEST_F(MatchingImportsToExports, SameNameDifferentTypes) {
+   const std::string body1 = R"(
+ OpCapability Linkage
+-- 
+2.34.1
+
