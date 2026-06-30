@@ -295,7 +295,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.2.0-5a60d37.bin
+Package:                     nxp-wlan-apps-1.2.0-1c06c90.bin
 Version:                     1.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-769c4f2
+Package:                     zephyr-demo-imx-4.4.5-d4edf51
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
