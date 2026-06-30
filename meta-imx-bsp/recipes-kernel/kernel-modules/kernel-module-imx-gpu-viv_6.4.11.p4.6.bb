@@ -12,7 +12,7 @@ SRC_URI = "${LINUX_IMX_SRC};subpath=drivers/mxc/gpu-viv;destsuffix=${BB_GIT_DEFA
 LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.18.y"
 LOCALVERSION = "-lts-next"
-SRCREV = "eb1bb859b578a82474b9dc92a1b1d3d0e6440dfa"
+SRCREV = "635ca0442bbd375c300790b4da58f0f4776c1bc4"
 
 inherit module
 
