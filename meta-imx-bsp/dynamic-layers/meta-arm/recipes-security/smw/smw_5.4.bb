@@ -29,7 +29,9 @@ SRCREV_smw = "15cb8a0b019bc7321dba78062b20e611ad1aade1"
 SRCREV_psa = "463cb95ada820bc6f758d50066cf8c0ed5cc3a02"
 SRCREV_FORMAT = "smw_psa"
 
-inherit cmake python3native
+inherit cmake features_check python3native
+
+REQUIRED_MACHINE_FEATURES = "optee"
 
 PACKAGECONFIG ??= "${PACKAGECONFIG_DRIVERS} ${PACKAGECONFIG_FEATURES}"
 PACKAGECONFIG_DRIVERS                = ""
