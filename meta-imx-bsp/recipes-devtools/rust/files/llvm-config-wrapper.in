@@ -1,0 +1,58 @@
+#!/bin/sh
+# Wrapper llvm-config that filters --components and --targets-built
+# to match the trimmed target LLVM backends.
+NATIVE="@@NATIVE@@"
+ALLOWED="@@ALLOWED@@"
+
+filter_components() {
+    $NATIVE --components | tr ' ' '\n' | while read -r comp; do
+        keep=0
+        for a in $ALLOWED; do
+            case "$comp" in ${a}*) keep=1; break ;; esac
+        done
+        if [ $keep -eq 1 ]; then
+            printf '%s\n' "$comp"
+        else
+            is_arch=0
+            for p in aarch64 amdgpu arm avr bpf csky hexagon loongarch m68k mips msp430 nvptx powerpc riscv sparc spirv systemz webassembly x86 xtensa; do
+                case "$comp" in ${p}*) is_arch=1; break ;; esac
+            done
+            [ $is_arch -eq 0 ] && printf '%s\n' "$comp"
+        fi
+    done | tr '\n' ' ' | sed 's/ $//'
+    echo
+}
+
+filter_targets() {
+    for a in $ALLOWED; do
+        case "$a" in
+            aarch64)     printf 'AArch64 ' ;;
+            amdgpu)      printf 'AMDGPU '  ;;
+            arm)         printf 'ARM '     ;;
+            avr)         printf 'AVR '     ;;
+            bpf)         printf 'BPF '     ;;
+            csky)        printf 'CSKY '    ;;
+            hexagon)     printf 'Hexagon ' ;;
+            loongarch)   printf 'LoongArch ' ;;
+            m68k)        printf 'M68k '    ;;
+            mips)        printf 'Mips '    ;;
+            msp430)      printf 'MSP430 '  ;;
+            nvptx)       printf 'NVPTX '   ;;
+            powerpc)     printf 'PowerPC ' ;;
+            riscv)       printf 'RISCV '   ;;
+            sparc)       printf 'Sparc '   ;;
+            spirv)       printf 'SPIRV '   ;;
+            systemz)     printf 'SystemZ ' ;;
+            webassembly) printf 'WebAssembly ' ;;
+            x86)         printf 'X86 '     ;;
+            xtensa)      printf 'Xtensa '  ;;
+        esac
+    done
+    echo
+}
+
+case "$*" in
+    *--components*)    filter_components ;;
+    *--targets-built*) filter_targets    ;;
+    *)                 exec $NATIVE "$@" ;;
+esac
