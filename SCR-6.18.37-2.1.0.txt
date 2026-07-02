@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.7-0b3a676.bin
+Package:                     firmware-ele-imx-2.0.7-b9b8503.bin
 Version:                     2.0.7
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -276,7 +276,7 @@ Outgoing License:            GPL-2.0
 License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
-Description and comments:    NXP Wi-Fi linux SDK
+Description and comments:    NXP Wi-Fi Linux Driver
 Release Location:            https://github.com/nxp-imx/mwifiex -b lf-6.18.37-2.1.0
 Origin:                      NXP (GPL-2.0)
 
@@ -288,20 +288,20 @@ Outgoing License:            BSD-3-Clause
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
-Description and comments:    
+Description and comments:    User space daemon for extended IEEE 802.11 management
 Release Location:            Mirror
 Origin:                    NXP (BSD-3-Clause)
                            https://w1.fi/cgit
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.2.0-1c06c90.bin
+Package:                     nxp-wlan-apps-1.2.0-ee3bbaa.bin
 Version:                     1.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             binary
-Description and comments:    nxp wlan sdk
+Description and comments:    NXP WLAN SDK
 Release Location:            Mirror
 Origin:                    NXP (proprietary)
 
@@ -313,11 +313,11 @@ Outgoing License:            BSD-3-Clause
 License File:                COPYING
 Package Category:            BSP
 Type of Content:             source
-Description and comments:    
+Description and comments:    Client for Wi-Fi Protected Access (WPA)
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-6e63a68
+Package:                     sof-zephyr-2.16.0-5263b6e
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-d4edf51
+Package:                     zephyr-demo-imx-4.4.5-5967ceb
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -558,7 +558,7 @@ Outgoing License:            Apache-2.0
 License File:                LICENSE
 Package Category:            BSP
 Type of Content:             source
-Description and comments:    Contains communication protocol stack
+Description and comments:    NXP i.MX EdgeLock 2GO IoT Agent
 Release Location:            https://github.com/NXP/el2go-agent -b lf-6.18.37-2.1.0
 Origin:                      NXP(Apache-2.0)
                              Mbed-TLS(Apache-2.0) - https://github.com/Mbed-TLS/mbedtls
@@ -998,7 +998,7 @@ Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary and source
-Description and comments:    i.MX multimedia codec libraries:  Codecs and wrappers for: AAC AACD BSAC DeInterlace FLAC MP3 MP3d NB_AMR OGG PEQ SBC SRC WB_AMR WBAMRD G.711 G.723 G.726 G.729ab
+Description and comments:    i.MX multimedia codec libraries:  Codecs and wrappers for AAC/BSAC/DeInterlace/FLAC/MP3/NB_AMR/OGG/PEQ/SBC/SRC/WB_AMR/G.711/G.723/G.726/G.729ab
 Release Location:            Mirror
 Origin:                      NXP (LA_OPT_NXP_Software_License)
                              ISO/IEC 13818-7 and ISO/IEC 14496-3 standards 
@@ -1015,7 +1015,7 @@ Outgoing License:            BSD-3-Clause
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
-Description and comments:    i.MX multimedia parser libraries: Parsers for: APE AVI DSF FLV MKV MPG2 OGG
+Description and comments:    i.MX multimedia parser libraries: Parsers for APE/AVI/DSF/FLV/MKV/MPG2/OGG
 Release Location:            https://github.com/nxp-imx/imx-parser -b lf-6.18.37-2.1.0
 Origin:                      NXP (BSD-3-clause)
                              Android - platform - external - srec (Apache-2.0)
@@ -1189,7 +1189,7 @@ Outgoing License:            MIT License
 License File:                LICENSE.txt
 Package Category:            Multimedia
 Type of Content:             source
-Description and comments:    VPU library
+Description and comments:    i.MX Hantro V4L2 Daemon
 Release Location:            Mirror
 Origin:                      NXP (MIT)
                              VeriSilicon Inc. (MIT)
