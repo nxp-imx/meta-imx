@@ -4,7 +4,7 @@ LICENSE  = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SECTION = "base"
 
-SRCREV = "4ea6df132107e3b4b9407f903204b5522fdffcd6"
+SRCREV = "6fe718c31a45fe25151362a72ef041c3a1047cbd"
 SRC_URI = "git://github.com/KhronosGroup/OpenCL-Headers.git;branch=main;protocol=https"
 
 do_configure[noexec] = "1"
