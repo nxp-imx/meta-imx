@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.7-b9b8503.bin
+Package:                     firmware-ele-imx-2.0.7-305b7dc.bin
 Version:                     2.0.7
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -317,7 +317,7 @@ Description and comments:    Client for Wi-Fi Protected Access (WPA)
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-5263b6e
+Package:                     sof-zephyr-2.16.0-6f1170c
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-5967ceb
+Package:                     zephyr-demo-imx-4.4.5-1daabb7
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
