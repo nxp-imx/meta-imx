@@ -52,6 +52,7 @@ SYSTEM_MANAGER_FIRMWARE_NAME                  ?= "${SYSTEM_MANAGER_FIRMWARE_BASE
 SYSTEM_MANAGER_FIRMWARE_BASENAME              ?= "INVALID"
 SYSTEM_MANAGER_FIRMWARE_BASENAME:mx95-nxp-bsp ?= "m33_image"
 SYSTEM_MANAGER_FIRMWARE_BASENAME:mx952-nxp-bsp ?= "m33_image"
+SECO_FIRMWARE_NAME:mx95-nxp-bsp ?= "mx95b0-ahab-container.img mx95b1-ahab-container.img"
 
 # Add new machine i.MX 8M Plus UltraLite
 MACHINEOVERRIDES_EXTENDER:mx8mpul:use-nxp-bsp = "imx-generic-bsp:imx-nxp-bsp:imxfbdev:mx8-generic-bsp:mx8-nxp-bsp:mx8m-generic-bsp:mx8m-nxp-bsp:mx8mpul-generic-bsp:mx8mpul-nxp-bsp"
@@ -64,8 +65,8 @@ MACHINE_SOCARCH_SUFFIX:mx8mpul-nxp-bsp = "-mx8mpul"
 SECOEXT_FIRMWARE_NAME                     = ""
 SECOEXT_FIRMWARE_NAME:mx8ulp-generic-bsp ?= "mx8ulp${IMX_SOC_REV_LOWER}ext-ahab-container.img"
 SECOEXT_FIRMWARE_NAME:mx937-generic-bsp  ?= "mx937${IMX_SOC_REV_LOWER}runtime-ahab-container.img"
-SECOEXT_FIRMWARE_NAME:mx95-generic-bsp   ?= "mx95a0runtime-ahab-container.img mx95b0runtime-ahab-container.img"
-SECOEXT_FIRMWARE_NAME:mx952-generic-bsp  ?= "mx952a0runtime-ahab-container.img mx952a1runtime-ahab-container.img"
+SECOEXT_FIRMWARE_NAME:mx95-generic-bsp   ?= "mx95b0runtime-ahab-container.img mx95b1runtime-ahab-container.img"
+SECOEXT_FIRMWARE_NAME:mx952-generic-bsp  ?= "mx952a0runtime-ahab-container.img mx952a1runtime-ahab-container.img "
 SECOEXT_FIRMWARE_NAME:mx943-nxp-bsp  ?= "mx943a0runtime-ahab-container.img mx943a1runtime-ahab-container.img"
 
 # Set preferred OpenCL ICD runtime
