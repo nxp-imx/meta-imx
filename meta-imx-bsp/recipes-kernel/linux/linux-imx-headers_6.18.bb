@@ -12,7 +12,7 @@ LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=$
 SRCBRANCH = "lf-6.18.y"
 LOCALVERSION = "-lts-${SRCBRANCH}"
 KBRANCH = "${SRCBRANCH}"
-SRCREV = "4e5c98c5426a667465c4d4252cd4c4659c5e1a12"
+SRCREV = "04ba928a9e4c3a96f47018808acc56487e9883d9"
 
 
 do_configure[noexec] = "1"
