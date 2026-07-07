@@ -71,11 +71,5 @@ SERIAL_CONSOLES = "115200;ttyLP0"
 IMX_DEFAULT_BSP = "nxp"
 
 IMAGE_BOOT_FILES:append:imx-nxp-bsp = " \
-    mcore-demos/imx952evk_m7_TCM_hello_world.bin \
-    mcore-demos/imx952evk_m7_TCM_netc_share.bin \
-    mcore-demos/imx952evk_m7_TCM_power_mode_switch.bin \
-    mcore-demos/imx952evk_m7_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin \
-    mcore-demos/imx952evk_m7_TCM_rpmsg_lite_str_echo_rtos.bin \
-    mcore-demos/imx952evk_m7_TCM_sai_low_power_audio.bin \
     ${@bb.utils.contains('COMBINED_FEATURES', 'xen', 'xen', '', d)} \
 "
