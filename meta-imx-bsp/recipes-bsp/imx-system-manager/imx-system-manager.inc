@@ -37,4 +37,4 @@ do_deploy() {
         ${DEPLOYDIR}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}-${SYSTEM_MANAGER_CONFIG}.bin
 }
 
-COMPATIBLE_MACHINE = "(mx95-generic-bsp|mx943-generic-bsp|mx952-generic-bsp)"
+COMPATIBLE_MACHINE = "(mx95-generic-bsp|mx943-generic-bsp|mx952-generic-bsp|mx937-generic-bsp)"
