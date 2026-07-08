@@ -9,7 +9,7 @@ inherit fsl-eula2-unpack2 fsl-eula-recent
 
 SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
 IMX_SRCREV_ABBREV = "ee3bbaa"
-SRC_URI[sha256sum] = "2f56224fafd8bd97b9e67762f37682c2becffd0a0a2761f6bb2d66960e38626d"
+SRC_URI[sha256sum] = "a1e26fe4279a2c7c582368e95c864a3145869fee1d723a8bf6ffc16cff159446"
 
 S = "${UNPACKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
