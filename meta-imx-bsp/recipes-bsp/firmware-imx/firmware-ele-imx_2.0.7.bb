@@ -3,7 +3,7 @@ SUMMARY = "NXP i.MX ELE firmware"
 DESCRIPTION = "EdgeLock Secure Enclave firmware for i.MX series SoCs"
 SECTION = "base"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac" 
+LIC_FILES_CHKSUM = "file://COPYING;md5=ef4f968b9dae8ba406390cd617c2301d"
 
 inherit fsl-eula-unpack use-imx-security-controller-firmware deploy
 
