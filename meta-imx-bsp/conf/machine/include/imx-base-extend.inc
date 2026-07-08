@@ -63,11 +63,10 @@ MACHINE_SOCARCH_SUFFIX:mx8mpul-nxp-bsp = "-mx8mpul"
 # Note that multiple names can be given in order to install multiple versions
 # to a single rootfs.
 SECOEXT_FIRMWARE_NAME                     = ""
-SECOEXT_FIRMWARE_NAME:mx8ulp-generic-bsp ?= "mx8ulp${IMX_SOC_REV_LOWER}ext-ahab-container.img"
 SECOEXT_FIRMWARE_NAME:mx937-generic-bsp  ?= "mx937${IMX_SOC_REV_LOWER}runtime-ahab-container.img"
-SECOEXT_FIRMWARE_NAME:mx95-generic-bsp   ?= "mx95b0runtime-ahab-container.img mx95b1runtime-ahab-container.img"
+SECOEXT_FIRMWARE_NAME:mx943-nxp-bsp      ?= "mx943a0runtime-ahab-container.img mx943a1runtime-ahab-container.img"
+SECOEXT_FIRMWARE_NAME:mx95-nxp-bsp       ?= "mx95b0runtime-ahab-container.img mx95b1runtime-ahab-container.img"
 SECOEXT_FIRMWARE_NAME:mx952-generic-bsp  ?= "mx952a0runtime-ahab-container.img mx952a1runtime-ahab-container.img "
-SECOEXT_FIRMWARE_NAME:mx943-nxp-bsp  ?= "mx943a0runtime-ahab-container.img mx943a1runtime-ahab-container.img"
 
 # Set preferred OpenCL ICD runtime
 PREFERRED_RPROVIDER_virtual-opencl-icd         ?= "libopencl-mesa"
