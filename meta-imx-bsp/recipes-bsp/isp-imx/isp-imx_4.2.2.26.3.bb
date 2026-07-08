@@ -5,7 +5,7 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 DEPENDS = "boost libdrm virtual/libg2d libtinyxml2 jsoncpp patchelf-native"
 
-SRC_URI[sha256sum] = "e67cc8494a745547016f4f670cdcdfce99219c9d69721a8007a4051dea40aa8d"
+SRC_URI[sha256sum] = "ab8e14180d4d3a03e238f14c7e6ca6e9c4c5dcbd6c88fa49e71771bc2fa285a8"
 
 IMX_SRCREV_ABBREV = "e4002a7"
 
