@@ -31,7 +31,7 @@ DPDK_EXAMPLES:imx-nxp-bsp = "l2fwd,l3fwd"
 DPDK_EXAMPLES:append:mx943-nxp-bsp = ",ip_fragmentation,ip_reassembly,ipsec-secgw"
 DPDK_EXAMPLES:append:mx95-nxp-bsp = ",ip_fragmentation,ip_reassembly,ipsec-secgw"
 
-DPDK_APPS ?= "pdump,test-pmd,dumpcap,proc-info,test-crypto-perf"
+DPDK_APPS ?= "pdump,test-pmd,dumpcap,proc-info,test-crypto-perf,test"
 
 EXTRA_OEMESON = " \
     -Denable_examples_source_install=false \
