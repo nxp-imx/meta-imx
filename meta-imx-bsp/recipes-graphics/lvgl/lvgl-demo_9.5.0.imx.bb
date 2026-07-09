@@ -9,13 +9,14 @@ DEPENDS = "python3-pcpp-native"
 PV .= "+git"
 
 SRC_URI = "\
-	git://github.com/lvgl/lv_port_linux.git;protocol=https;branch=release/v9.4;name=demo \
-	git://github.com/nxp-mcuxpresso/lvgl.git;protocol=https;branch=release/nxp-v9.4.0;name=lvgl;subdir=${S}/lvgl \
+	git://github.com/lvgl/lv_port_linux.git;protocol=https;branch=release/v9.5;name=demo \
+	git://github.com/nxp-mcuxpresso/lvgl.git;protocol=https;branch=release/nxp-v9.5.0;name=lvgl;subdir=${S}/lvgl \
 	file://0001-feat-cmake-Fix-multilib-install.patch \
-	file://0001-fix-Use-LV_USE_DEMO_WIDGETS-properly-in-main.c.patch"
+	file://0001-fix-Use-LV_USE_DEMO_WIDGETS-properly-in-main.c.patch \
+	file://0001-Fix-dmabuf-protocol-generation-condition.patch"
 
-SRCREV_demo = "71050624acd8a52ab7d365d0d12acf9bf5fe41db"
-SRCREV_lvgl = "46b15c64b23cdd2b048f06c4830cc1700a4fd529"
+SRCREV_demo = "045137cf0fa1781483cb796261a11b5eb21e99d9"
+SRCREV_lvgl = "99c4ec0869b38211dc165d1629a231b338124316"
 SRCREV_FORMAT = "demo_lvgl"
 
 inherit cmake pkgconfig

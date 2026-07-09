@@ -1,0 +1,28 @@
+From 7fea7f56e8775ebb1edb79e7845ffde6e04a7b41 Mon Sep 17 00:00:00 2001
+From: Flora Hu <flora.hu@nxp.com>
+Date: Thu, 9 Jul 2026 08:07:52 +0200
+Subject: [PATCH] Fix dmabuf protocol generation condition
+
+Upstream-Status: Pending
+
+Signed-off-by: Flora Hu <flora.hu@nxp.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index db3e381..91364eb 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -144,7 +144,7 @@ if (CONFIG_LV_USE_WAYLAND)
+     list(APPEND WAYLAND_PROTOCOLS_SRC ${XDG_SHELL_SOURCE})
+     
+     # Generate dmabuf protocol (if config is set)
+-    if(CONFIG_LV_WAYLAND_USE_DMABUF)
++    if(CONFIG_LV_USE_G2D)
+         set(DMABUF_XML "${PROTOCOL_ROOT}/stable/linux-dmabuf/linux-dmabuf-v1.xml")
+         set(DMABUF_HEADER "${PROTOCOLS_DIR}/wayland_linux_dmabuf.h")
+         set(DMABUF_SOURCE "${PROTOCOLS_DIR}/wayland_linux_dmabuf.c")
+-- 
+2.34.1
+
