@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a93d5dd70d0a316d4d6d0a736c716513"
 
 DEPENDS = "virtual/libopencl1"
 
-PV = "0.13.0+git"
+PV = "1.0+git"
 
 SRCBRANCH = "master"
 OPENCL_CONVERTER_SRC ?= "git://github.com/nxp-imx/imx-opencl-converter.git;protocol=https"
