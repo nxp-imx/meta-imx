@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2025 NXP
+# Copyright (C) 2017-2026 NXP
 
 require imx-mkimage_git.inc
 
@@ -59,6 +59,7 @@ BOOT_STAGING:mx8m-generic-bsp  = "${S}/iMX8M"
 BOOT_STAGING:mx8dx-generic-bsp = "${S}/iMX8QX"
 BOOT_STAGING:mx91-generic-bsp  = "${S}/iMX91"
 BOOT_STAGING:mx93-generic-bsp  = "${S}/iMX93"
+BOOT_STAGING:mx937-generic-bsp = "${S}/iMX937"
 BOOT_STAGING:mx943-generic-bsp = "${S}/iMX94"
 BOOT_STAGING:mx95-generic-bsp  = "${S}/iMX95"
 BOOT_STAGING:mx952-generic-bsp = "${S}/iMX952"
@@ -70,6 +71,7 @@ SOC_FAMILY:mx8x-generic-bsp   = "mx8x"
 SOC_FAMILY:mx8ulp-generic-bsp = "mx8ulp"
 SOC_FAMILY:mx91-generic-bsp   = "mx91"
 SOC_FAMILY:mx93-generic-bsp   = "mx93"
+SOC_FAMILY:mx937-generic-bsp  = "mx937"
 SOC_FAMILY:mx943-generic-bsp  = "mx943"
 SOC_FAMILY:mx95-generic-bsp   = "mx95"
 SOC_FAMILY:mx952-nxp-bsp      = "mx952"
@@ -77,6 +79,10 @@ SOC_FAMILY:mx952-nxp-bsp      = "mx952"
 REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
 
 MKIMAGE_EXTRA_ARGS ?= ""
+MKIMAGE_EXTRA_ARGS:mx937-nxp-bsp ?= " \
+    OEI=YES \
+    LPDDR_TYPE=${DDR_TYPE} \
+"
 MKIMAGE_EXTRA_ARGS:mx943-nxp-bsp ?= " \
     OEI=YES \
     LPDDR_TYPE=${DDR_TYPE} \
