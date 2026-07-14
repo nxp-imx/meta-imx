@@ -8,6 +8,9 @@ SRCREV = "b2521d3762d846b0c84d327668e6f3e544bbfd3b"
 
 PV = "2023.03+git${SRCPV}"
 
+# Rebuild against the current kernel; resolve kernel-module version-hash conflict
+do_compile[depends] += "virtual/kernel:do_shared_workdir"
+
 PACKAGES += "${PN}-bash-completion"
 FILES:${PN}-bash-completion = "${datadir}/bash-completion/completions/jailhouse"
 
