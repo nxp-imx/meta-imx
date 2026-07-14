@@ -11,7 +11,7 @@ PV = "1.0.0+git"
 SRCBRANCH = "master"
 OPENCL_CONVERTER_SRC ?= "git://github.com/nxp-imx/imx-opencl-converter.git;protocol=https"
 SRC_URI = "${OPENCL_CONVERTER_SRC};branch=${SRCBRANCH}"
-SRCREV = "4aa7108609c0347546dbed8f9d2aa75daf4bbd8c"
+SRCREV = "4ba48f6c0e7d4cd686bceaa9f109f6223cb7992a"
 
 inherit pkgconfig meson
 
