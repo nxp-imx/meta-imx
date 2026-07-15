@@ -12,5 +12,5 @@ DEPENDS = "imx-parser"
 SRCBRANCH = "master"
 IMXMP4PARSER_SRC ?= "git://github.com/nxp-imx/imx-mp4-parser.git;protocol=https"
 SRC_URI = "${IMXMP4PARSER_SRC};branch=${SRCBRANCH}"
-SRCREV = "6f779f7870ec3667b1551727d12212b55ff84cec"
+SRCREV = "640154787a165d903dc166ee67f1ddbb4457ab38"
 
