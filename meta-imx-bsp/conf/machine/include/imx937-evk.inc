@@ -22,6 +22,7 @@ SPL_BINARY = "spl/u-boot-spl.bin"
 
 UBOOT_CONFIG ??= "sd"
 UBOOT_CONFIG[sd] = "${UBOOT_CONFIG_BASENAME}_defconfig"
+UBOOT_CONFIG[sd-ecc] = "${UBOOT_CONFIG_BASENAME}_defconfig"
 
 ATF_PLATFORM = "imx937"
 
@@ -45,7 +46,10 @@ IMXBOOT_TARGETS_SD = " \
     ${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       '${IMXBOOT_TARGETS_BASENAME}_all', \
                                                          '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d)} \
 "
-IMXBOOT_TARGETS = "${IMXBOOT_TARGETS_SD}"
+IMXBOOT_TARGETS = " \
+    ${@bb.utils.contains('UBOOT_CONFIG', 'sd-ecc', '${IMXBOOT_TARGETS_BASENAME}_all', \
+                                                   '${IMXBOOT_TARGETS_SD}', d)} \
+"
 
 IMX_BOOT_SOC_TARGET = "iMX937"
 IMX_BOOT_SEEK = "32"
