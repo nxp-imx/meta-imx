@@ -99,8 +99,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.32-1991416.bin
-Version:                     8.32
+Package:                     firmware-imx-8.33-4c7a65d.bin
+Version:                     8.33
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -317,7 +317,7 @@ Description and comments:    Client for Wi-Fi Protected Access (WPA)
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-da43fd6
+Package:                     sof-zephyr-2.16.0-0e66cef
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-c0e4f73
+Package:                     zephyr-demo-imx-4.4.5-0bd807c
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
