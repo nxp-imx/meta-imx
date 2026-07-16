@@ -1,4 +1,4 @@
-# Yocto Project BSP for NXP i.MX Linux Release LF6.18.20_2.0.0
+# Yocto Project BSP for NXP i.MX Linux Release LF6.18.37_2.1.0
 
 This file provides a brief overview and Quick Start Guide for the Yocto Project
 BSP for NXP i.MX Linux. For more detailed information, please check the User Guide
@@ -46,9 +46,14 @@ The following development boards were tested in this release.
 |                 | FRDM   | imx91-11x11-lpddr4-frdm, imx91-11x11-lpddr4-frdm-imx91s                   |
 | i.MX 93         | EVK    | imx93-11x11-lpddr4x-evk, imx93-14x14-lpddr4x-evk, imx93-9x9-lpddr4-qsb    |
 |                 | FRDM   | imx93-11x11-lpddr4x-frdm                                                  |
+| i.MX 93W        | EVK    | imx93w-14x12-lpddr4x-evk                                                  |
+|                 | FRDM   | imx93w-14x12-lpddr4x-frdm                                                 |
+| i.MX 937        | FRDM   | imx937-15x15-lpddr5-frdm                                                  |
 | i.MX 94         | EVK    | imx943-19x19-lpddr5-evk, imx943-15x15-lpddr4-evk, imx943-19x19-lpddr4-evk |
 | i.MX 95         | EVK    | imx95-19x19-lpddr5-evk                                                    |
 |                 | FRDM   | imx95-15x15-lpddr4x-frdm, imx95-19x19-lpddr5-frdm-pro                     |
+| i.MX 952        | EVK    | imx952-19x19-lpddr5-evk                                                   |
+|                 | FRDM   | imx952-15x15-lpddr5-frdm                                                  |
 
 ## Quick Start Guide
 
@@ -66,7 +71,7 @@ Follow the instructions here: https://docs.yoctoproject.org/6.0/singleindex.html
 
 Use the i.MX Linux BSP manifest repository to create the Yocto Project layers.
 ```
-$: repo init -u https://github.com/nxp-imx/imx-manifest.git -b imx-linux-wrynose -m imx-6.18.20-2.0.0.xml
+$: repo init -u https://github.com/nxp-imx/imx-manifest.git -b imx-linux-wrynose -m imx-6.18.37-2.1.0.xml
 $: repo sync
 ```
 
