@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 ARM_INSTRUCTION_SET:armv4 = "arm"
 ARM_INSTRUCTION_SET:armv5 = "arm"
 
-DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
+DEPENDS = "bzip2 glib-2.0 libtool libwebp swig-native zlib"
 
 SRCREV_opencv = "fe38fc608f6acb8b68953438a62305d8318f4fcd"
 SRCREV_contrib = "d99ad2a188210cc35067c2e60076eed7c2442bc3"
@@ -45,7 +45,6 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
 SRC_URI:append:aarch64 = " git://gitlab.arm.com/kleidi/kleidicv;branch=main;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/3rdparty/kleidicv;name=kleidicv;protocol=https"
-
 
 # OpenCV wants to download more files during configure.  We download these in
 # do_fetch and construct a source cache in the format it expects
@@ -201,7 +200,7 @@ SUMMARY:python3-opencv = "Python bindings to opencv"
 FILES:python3-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
 RDEPENDS:python3-opencv = "python3-core python3-numpy"
 
-RDEPENDS:${PN}-apps  = "bash"
+RDEPENDS:${PN}-apps = "bash"
 
 do_compile:prepend() {
     # remove the build host info to improve reproducibility
@@ -274,7 +273,7 @@ SRC_URI += " \
 "
 
 # Add opencv_extra
-SRC_URI += " \
+SRC_URI += "\
     git://github.com/opencv/opencv_extra.git;destsuffix=extra;name=extra;branch=4.x;protocol=https \
     file://0001-Add-smaller-version-of-download_models.py.patch;patchdir=${UNPACKDIR}/extra \
 "
@@ -282,7 +281,7 @@ SRCREV_FORMAT:append = "_extra"
 SRCREV_extra = "b6db059e9b80072d80d009d2ab344f8606a8e964"
 
 # Patch DNN example
-SRC_URI += " \
+SRC_URI += "\
     file://OpenCV_DNN_examples.patch \
 "
 
@@ -295,8 +294,8 @@ PACKAGECONFIG:append = " \
     ${PACKAGECONFIG_OPENCL} \
 "
 
-PACKAGECONFIG_OPENCL               = ""
-PACKAGECONFIG_OPENCL:imxgpu        = "opencl"
+PACKAGECONFIG_OPENCL = ""
+PACKAGECONFIG_OPENCL:imxgpu = "opencl"
 PACKAGECONFIG_OPENCL:mx8mm-nxp-bsp = ""
 
 PACKAGECONFIG[openvx] = "-DWITH_OPENVX=ON -DOPENVX_ROOT=${STAGING_LIBDIR} -DOPENVX_LIB_CANDIDATES='OpenVX;OpenVXU',-DWITH_OPENVX=OFF,virtual/libopenvx,"
