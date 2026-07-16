@@ -317,7 +317,7 @@ Description and comments:    Client for Wi-Fi Protected Access (WPA)
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-0e66cef
+Package:                     sof-zephyr-2.16.0-4e1a180
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
