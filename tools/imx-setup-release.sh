@@ -32,24 +32,30 @@ exit_message ()
 
 usage()
 {
-    echo -e "\nUsage: source imx-setup-release.sh
-    Optional parameters: [-b build-dir] [-h]"
-echo "
-    * [-b build-dir]: Build directory, if unspecified script uses 'build' as output directory
-    * [-h]: help
-"
-echo -e "\n
-    Supported machines: `echo; ls sources/meta-freescale/conf/machine/*.conf \
-	                          sources/meta-imx/meta-imx-bsp/conf/machine/*.conf \
-        |egrep "/(imx6|imx7|imx8|imx9).*conf$" | sed s/\.conf//g | sed -r 's/^.+\///' | xargs -I% echo -e "\t%"`
-
-
-    Supported NXP's i.MX distros: `echo; ls sources/meta-imx/meta-imx-sdk/conf/distro/fsl-*.conf \
-        | sed s/\.conf//g | sed -r 's/^.+\///' | xargs -I% echo -e "\t%"`
-"
-
+    echo ""
+    echo "Usage: source imx-setup-release.sh [OPTIONS]"
+    echo ""
+    echo "Optional parameters:"
+    echo "  -b BUILD_DIR    Specify build directory (default: 'build')"
+    echo "  -h              Display this help message"
+    echo ""
+    echo "Supported machines:"
+    ls sources/meta-freescale/conf/machine/*.conf \
+       sources/meta-imx/meta-imx-bsp/conf/machine/*.conf 2>/dev/null \
+        | egrep "/(imx6|imx7|imx8|imx9).*conf$" \
+        | sed 's/\.conf//g' \
+        | sed -r 's/^.+\///' \
+        | sort \
+        | sed 's/^/  /'
+    echo ""
+    echo "Supported NXP's i.MX distros:"
+    ls sources/meta-imx/meta-imx-sdk/conf/distro/fsl-*.conf 2>/dev/null \
+        | sed 's/\.conf//g' \
+        | sed -r 's/^.+\///' \
+        | sort \
+        | sed 's/^/  /'
+    echo ""
 }
-
 
 clean_up()
 {
