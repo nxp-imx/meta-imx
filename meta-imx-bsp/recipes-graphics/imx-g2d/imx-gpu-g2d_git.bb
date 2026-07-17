@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=0858ec9c7a80c4a2cf16e4f825a2cc91"
 DEPENDS = "imx-gpu-viv"
 PROVIDES = "virtual/libg2d"
 
-PV = "2.5.0+git"
+PV = "2.6.0+git"
 
 SRC_URI = "${IMX_GPU_G2D_SRC};branch=${SRCBRANCH}"
 IMX_GPU_G2D_SRC ?= "git://github.com/nxp-imx/imx-gpu-g2d.git;protocol=https"
