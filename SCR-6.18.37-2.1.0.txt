@@ -295,7 +295,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.2.0-ee3bbaa.bin
+Package:                     nxp-wlan-apps-1.2.0-234636b.bin
 Version:                     1.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -317,7 +317,7 @@ Description and comments:    Client for Wi-Fi Protected Access (WPA)
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-4e1a180
+Package:                     sof-zephyr-2.16.0-de175eb
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-0bd807c
+Package:                     zephyr-demo-imx-4.4.5-b698013
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -931,7 +931,7 @@ Origin:                      NXP (MIT)
 --------------------------------------------
 
 Package:                     imx-gpu-g2d.git
-Version:                     2.5.0
+Version:                     2.6.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Graphics
@@ -943,7 +943,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 --------------------------------------------
 
 Package:                     imx-dpu-g2d.git
-Version:                     2.5.0
+Version:                     2.6.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -955,7 +955,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 --------------------------------------------
 
 Package:                     imx-g2d-pxp.git
-Version:                     2.5.0
+Version:                     2.6.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE.txt
 Package Category:            Graphics
@@ -967,7 +967,7 @@ Origin:                      NXP (Proprietary)
 --------------------------------------------
 
 Package:                     g2d-samples.git
-Version:                     2.5
+Version:                     2.6.0
 Outgoing License:            BSD-3-Clause 
 License File:                LICENSE
 Package Category:            Graphics
