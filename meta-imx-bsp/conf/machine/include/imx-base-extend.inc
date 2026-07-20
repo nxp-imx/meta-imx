@@ -40,7 +40,7 @@ IMX_SOC_REV:mx943-generic-bsp ?= "A1"
 MACHINEOVERRIDES_EXTENDER:mx943:use-nxp-bsp  = "imx-generic-bsp:imx-nxp-bsp:imxdrm:imxpxp:mx9-generic-bsp:mx9-nxp-bsp:mx94-generic-bsp:mx94-nxp-bsp:mx943-generic-bsp:mx943-nxp-bsp"
 MACHINE_SOCARCH_SUFFIX:mx943-nxp-bsp = "-mx943"
 IMX_EXTRA_FIRMWARE:mx943-nxp-bsp = "imx-boot-firmware-files firmware-ele-imx virtual/imx-system-manager virtual/imx-oei"
-SECO_FIRMWARE_NAME:mx943-nxp-bsp ?= "mx94a1-ahab-container.img mx943a0-ahab-container.img"
+SECO_FIRMWARE_NAME:mx943-nxp-bsp ?= "mx94a1-ahab-container.img"
 PREFERRED_PROVIDER_virtual/libg2d:mx943-nxp-bsp ?= "imx-pxp-g2d"
 
 # Update i.MX 95
@@ -68,7 +68,7 @@ MACHINE_SOCARCH_SUFFIX:mx8mpul-nxp-bsp = "-mx8mpul"
 # to a single rootfs.
 SECOEXT_FIRMWARE_NAME                     = ""
 SECOEXT_FIRMWARE_NAME:mx937-generic-bsp  ?= "mx937${IMX_SOC_REV_LOWER}runtime-ahab-container.img"
-SECOEXT_FIRMWARE_NAME:mx943-nxp-bsp      ?= "mx943a0runtime-ahab-container.img mx94a1runtime-ahab-container.img"
+SECOEXT_FIRMWARE_NAME:mx943-nxp-bsp      ?= "mx94a1runtime-ahab-container.img"
 SECOEXT_FIRMWARE_NAME:mx95-nxp-bsp       ?= "mx95b0runtime-ahab-container.img mx95b1runtime-ahab-container.img"
 SECOEXT_FIRMWARE_NAME:mx952-generic-bsp  ?= "mx952a0runtime-ahab-container.img mx952a1runtime-ahab-container.img "
 
