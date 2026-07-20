@@ -170,7 +170,7 @@ SRC_URI:remove = "https://gitlab.freedesktop.org/wayland/weston/-/releases/${PV}
 SRC_URI:prepend = "${WESTON_SRC};branch=${SRCBRANCH} "
 WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 SRCBRANCH = "weston-imx-15.0.1"
-SRCREV = "5aee7a37c1309f349fc53e85ad58384e15b1719a"
+SRCREV = "60401491c0a924f95a65b99aafeaed8358b73af9"
 
 SRC_URI:remove = " \
     file://0001-vulkan-renderer-guard-surface-output-creation-with-b.patch \
