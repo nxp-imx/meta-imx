@@ -27,7 +27,7 @@ LDFLAGS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-
 
 SYSTEMD_SERVICE:${PN} = "imx8-isp.service"
 
-EXTRA_OECMAKE += " \
+EXTRA_OECMAKE += "\
     -DSDKTARGETSYSROOT=${STAGING_DIR_HOST} \
     -DCMAKE_BUILD_TYPE=release \
     -DISP_VERSION=ISP8000NANO_V1802 \
@@ -69,7 +69,7 @@ do_install() {
 FILES_SOLIBSDEV = ""
 FILES:${PN} += "/opt ${libdir}/lib*${SOLIBSDEV}"
 FILES:${PN}-dev += "${FILES_SOLIBS_VERSIONED}"
-FILES_SOLIBS_VERSIONED = " \
+FILES_SOLIBS_VERSIONED = "\
     ${libdir}/libcppnetlib-client-connections.so \
     ${libdir}/libcppnetlib-server-parsers.so \
     ${libdir}/libcppnetlib-uri.so \

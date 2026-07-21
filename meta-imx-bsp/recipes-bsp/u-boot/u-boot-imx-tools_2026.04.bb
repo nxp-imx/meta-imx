@@ -1,7 +1,7 @@
 require recipes-bsp/u-boot/u-boot-tools.inc
 require u-boot-imx-common_${PV}.inc
 
-DEPENDS += " python3-setuptools-native"
+DEPENDS += "python3-setuptools-native"
 
 PROVIDES:append:class-target = " ${MLPREFIX}u-boot-tools"
 PROVIDES:append:class-native = " u-boot-tools-native"

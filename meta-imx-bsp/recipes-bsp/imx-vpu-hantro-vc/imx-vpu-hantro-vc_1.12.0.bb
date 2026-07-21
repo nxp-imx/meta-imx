@@ -2,7 +2,7 @@
 
 DESCRIPTION = "i.MX VC8000E encoder library"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac" 
+LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
 
 SRC_URI[sha256sum] = "0bb6a5ca9e7df546650ea1247f4cade7debcf6e8549ed92c98c8412d80b1676b"
 IMX_SRCREV_ABBREV = "1fd0ec5"
