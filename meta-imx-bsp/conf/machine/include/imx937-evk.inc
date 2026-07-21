@@ -39,12 +39,16 @@ IMXBOOT_VARIANTS = "alt"
 # Multiple system manager configs by IMXBOOT_VARIANT
 SYSTEM_MANAGER_CONFIG = \
     "${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       'mx937alt', \
-                                                          '${SYSTEM_MANAGER_CONFIG_DEFAULT}', d)}"
+        bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse', 'mx937frdmjailhouse', \
+        bb.utils.contains('IMXBOOT_VARIANT', 'rpmsg',     'mx937frdmrpmsg', \
+                                                          '${SYSTEM_MANAGER_CONFIG_DEFAULT}', d), d), d)}"
 
 # imx-boot (flash.bin) targets based on UBOOT_CONFIG and IMXBOOT_VARIANT
 IMXBOOT_TARGETS_SD = " \
     ${@bb.utils.contains('IMXBOOT_VARIANT', 'alt',       '${IMXBOOT_TARGETS_BASENAME}_all', \
-                                                         '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d)} \
+       bb.utils.contains('IMXBOOT_VARIANT', 'jailhouse', '${IMXBOOT_TARGETS_BASENAME}_jailhouse', \
+       bb.utils.contains('IMXBOOT_VARIANT', 'rpmsg',     '${IMXBOOT_TARGETS_BASENAME}_lpboot_sm_a55', \
+                                                         '${IMXBOOT_TARGETS_BASENAME}_all ${IMXBOOT_TARGETS_BASENAME}_a55', d), d), d)} \
 "
 IMXBOOT_TARGETS = " \
     ${@bb.utils.contains('UBOOT_CONFIG', 'sd-ecc', '${IMXBOOT_TARGETS_BASENAME}_all', \
