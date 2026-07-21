@@ -1,7 +1,7 @@
 # Copyright (C) 2017-2026 NXP
 
 DESCRIPTION = "i.MX ARM Trusted Firmware"
-SECTION = "BSP"
+SECTION = "bsp"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
 
@@ -14,7 +14,7 @@ SRCREV = "1dae401821c234991d100cce816a045cd64a85ec"
 
 inherit deploy
 
-PACKAGECONFIG ??= " \
+PACKAGECONFIG ??= "\
     ${@bb.utils.filter('UBOOT_CONFIG', 'crrm', d)} \
     ${@bb.utils.filter('MACHINE_FEATURES', 'optee', d)}"
 
@@ -48,11 +48,11 @@ def remove_options_tail (in_string):
     from itertools import takewhile
     return ' '.join(takewhile(lambda x: not x.startswith('-'), in_string.split(' ')))
 
-EXTRA_OEMAKE = " \
+EXTRA_OEMAKE = "\
     CROSS_COMPILE=${TARGET_PREFIX} \
     PLAT=${ATF_PLATFORM} \
-    CC="${@remove_options_tail(d.getVar('CC'))}" \
-    LD="${HOST_PREFIX}ld.bfd" \
+    CC="${@remove_options_tail(d.getVar('CC'))}"\
+    LD="${HOST_PREFIX}ld.bfd"\
     IMX_BOOT_UART_BASE=${ATF_BOOT_UART_BASE} \
     ${PACKAGECONFIG_CONFARGS} \
     bl31"

@@ -12,13 +12,13 @@ do_install() {
     oe_runmake install INSTALLDIR=${D}${nonarch_base_libdir}/firmware/nxp
 }
 
-PACKAGES =+ " \
+PACKAGES =+ "\
     ${PN}-nxpaw693-sdio \
 "
-RDEPENDS:${PN}-all-sdio += " \
+RDEPENDS:${PN}-all-sdio += "\
     ${PN}-nxpaw693-sdio \
 "
-FILES:${PN}-nxpaw693-sdio += " \
+FILES:${PN}-nxpaw693-sdio += "\
     ${nonarch_base_libdir}/firmware/nxp/sdiw693_wlan_v1.bin.se \
     ${nonarch_base_libdir}/firmware/nxp/sduartiw693_combo_v1.bin.se \
     ${nonarch_base_libdir}/firmware/nxp/uartiw693_bt_v1.bin.se \
@@ -26,9 +26,9 @@ FILES:${PN}-nxpaw693-sdio += " \
 RDEPENDS:${PN}-nxpaw693-sdio += "${PN}-nxp-common"
 
 #-----------------don't upstream, keep in imx ------------------------
-PACKAGES:remove = " \
+PACKAGES:remove = "\
     ${PN}-nxp8997-sdio \
 "
-RDEPENDS:${PN}-all-sdio:remove = " \
+RDEPENDS:${PN}-all-sdio:remove = "\
     ${PN}-nxp8997-sdio \
 "

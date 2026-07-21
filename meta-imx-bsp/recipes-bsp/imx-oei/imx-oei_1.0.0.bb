@@ -13,7 +13,7 @@ SRCREV = "d010491505615fd9bb434223c1a1734b521f2e3d"
 
 inherit deploy
 
-PACKAGECONFIG ??= " \
+PACKAGECONFIG ??= "\
     ${@bb.utils.contains('UBOOT_CONFIG', 'sd-ecc', 'ecc', '', d)}"
 
 PACKAGECONFIG[ecc] = ""
