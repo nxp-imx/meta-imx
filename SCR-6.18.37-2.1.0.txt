@@ -295,7 +295,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.2.0-234636b.bin
+Package:                     nxp-wlan-apps-1.2.0-517996e.bin
 Version:                     1.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-640b25d
+Package:                     zephyr-demo-imx-4.4.5-d3943ea
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -828,7 +828,7 @@ Origin:                      NXP (proprietary)
 --------------------------------------------
 
 Package:                     mesa.git
-Version:                     26.1.y.imx
+Version:                     26.2.y.imx
 Outgoing License:            MIT 
 License File:                licenses/MIT
 Package Category:            Graphics
