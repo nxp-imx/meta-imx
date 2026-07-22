@@ -3,7 +3,7 @@
 
 DEPENDS += "python3-kconfiglib-native python3-pcpp-native"
 
-SRC_URI += " \
+SRC_URI += "\
     file://defconfig \
     ${@oe.utils.vartrue('DEBUG_BUILD', 'file://debug.cfg', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'drm', 'file://drm.cfg', '', d)} \
@@ -31,7 +31,7 @@ inherit cml1 python3native
 
 EXTRA_OECMAKE += "-DLV_BUILD_USE_KCONFIG=ON"
 
-LVGL_FLAGS += " \
+LVGL_FLAGS += "\
     ${@bb.utils.contains('PACKAGECONFIG', 'drm', '-I${STAGING_INCDIR}/libdrm', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'freetype', '-I${STAGING_INCDIR}/freetype2', '', d)} \
 "
