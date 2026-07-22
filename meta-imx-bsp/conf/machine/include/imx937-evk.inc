@@ -34,7 +34,7 @@ DDR_TYPE   ?= "lpddr5"
 
 SYSTEM_MANAGER_FIRMWARE_BASENAME = "m33_image"
 
-IMXBOOT_VARIANTS = "alt"
+IMXBOOT_VARIANTS = "alt jailhouse rpmsg"
 
 # Multiple system manager configs by IMXBOOT_VARIANT
 SYSTEM_MANAGER_CONFIG = \
