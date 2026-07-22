@@ -8,6 +8,8 @@ DEPENDS = "python3-pcpp-native"
 
 PV .= "+git"
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/lvgl-demo:"
+
 SRC_URI = "\
 	git://github.com/lvgl/lv_port_linux.git;protocol=https;branch=release/v9.5;name=demo \
 	git://github.com/nxp-mcuxpresso/lvgl.git;protocol=https;branch=release/nxp-v9.5.0;name=lvgl;subdir=${S}/lvgl \
