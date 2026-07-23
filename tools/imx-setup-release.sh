@@ -119,7 +119,7 @@ imx6*|imx7*)
     ;;
 *)
     case $FSLDISTRO in
-    *wayland)
+    *wayland*)
         : ok
         ;;
     *)
