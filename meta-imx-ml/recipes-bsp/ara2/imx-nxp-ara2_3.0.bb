@@ -3,7 +3,7 @@ DESCRIPTION = "Runtime SDK for AI/ML acceleration with Ara240 NPU on i.MX SoCs"
 HOMEPAGE = "https://github.com/nxp-imx/rt-sdk-ara2"
 LICENSE = "Proprietary & LGPL-2.1-or-later & Apache-2.0 & MIT & BSD-2-Clause & BSD-3-Clause & BSL-1.0"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=bc649096ad3928ec06a8713b8d787eac"
+LIC_FILES_CHKSUM = "file://COPYING;md5=ef4f968b9dae8ba406390cd617c2301d"
 
 LIC_FILES_CHKSUM += "\
      file://usr/share/doc/rt-sdk-ara2/licenses/gstreamer-plugins-ara240/LICENSE.txt;md5=22ea34143b59cc3b12b8bf8b8ecebe88 \
