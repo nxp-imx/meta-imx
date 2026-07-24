@@ -1,5 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
-SRC_URI:append:imx-nxp-bsp = " file://0001-Disable-Intel-backend-by-default.patch;patchdir=src/3rdparty"
+SRC_URI:append:imx-nxp-bsp = "\
+    file://0001-Disable-Intel-backend-by-default.patch;patchdir=src/3rdparty \
+    file://0002-Set-GBM-BO-LINEAR-Bit.patch;patchdir=src/3rdparty"
 
 PACKAGECONFIG:append = " ${PACKAGECONFIG_IMX}"
 PACKAGECONFIG_IMX             = ""

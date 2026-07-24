@@ -1,0 +1,41 @@
+From 91bcaad6005b5fa090c2bab8490198e06adc7b74 Mon Sep 17 00:00:00 2001
+From: Chingling Wang <chingling.wang@nxp.com>
+Date: Fri, 24 Jul 2026 11:38:23 -0700
+Subject: [PATCH] Set GBM BO LINEAR Bit.patch
+
+Mali DDK libgbm.so rejects gbm_bo_create() for 32-bit RGB formats
+unless GBM_BO_USE_LINEAR is set. Force LINEAR here to prevent NULL
+return and subsequent abort in Qt WebEngine. This is safe for Mesa
+as this path is only reached when modifier negotiation has already
+been skipped or exhausted.
+
+Upstream-Status: Inappropriate [embedded specific]
+Signed-off-by: Chingling Wang <chingling.wang@nxp.com>
+
+---
+ chromium/ui/gfx/linux/gbm_wrapper.cc | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/chromium/ui/gfx/linux/gbm_wrapper.cc b/chromium/ui/gfx/linux/gbm_wrapper.cc
+index beb22644553..0862a4d8261 100644
+--- a/chromium/ui/gfx/linux/gbm_wrapper.cc
++++ b/chromium/ui/gfx/linux/gbm_wrapper.cc
+@@ -296,6 +296,16 @@ class Device final : public ui::GbmDevice {
+   std::unique_ptr<ui::GbmBuffer> CreateBuffer(uint32_t format,
+                                               const gfx::Size& size,
+                                               uint32_t flags) override {
++    // Mali DDK libgbm.so rejects gbm_bo_create() for 32-bit RGB formats
++    // unless GBM_BO_USE_LINEAR is set. Force LINEAR here to prevent NULL
++    // return and subsequent abort in Qt WebEngine. This is safe for Mesa
++    // as this path is only reached when modifier negotiation has already
++    // been skipped or exhausted.
++    if (format == GBM_FORMAT_ARGB8888 || format == GBM_FORMAT_ABGR8888 ||
++        format == GBM_FORMAT_RGBA8888 || format == GBM_FORMAT_BGRA8888 ||
++        format == GBM_FORMAT_XRGB8888 || format == GBM_FORMAT_XBGR8888) {
++      flags |= GBM_BO_USE_LINEAR;
++    }
+     struct gbm_bo* bo = gbm_bo_create(device_.get(), size.width(),
+                                       size.height(), format, flags);
+     if (!bo) {
+-- 
+2.43.0
