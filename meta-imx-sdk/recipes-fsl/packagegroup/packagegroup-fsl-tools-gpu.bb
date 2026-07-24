@@ -33,10 +33,14 @@ SOC_TOOLS_GPU_APITRACE:imxgpu3d = " \
 
 SOC_TOOLS_GPU_MALI = ""
 SOC_TOOLS_GPU_MALI:imxmali = " \
-    ${@'libgles1-mesa-dev' if d.getVar('IMX_MALI_DUAL_DRIVER') == '1' else ''} \
+    ${@'${SOC_TOOLS_GPU_MALI_DUAL_DRIVER_MESA}' if d.getVar('IMX_MALI_DUAL_DRIVER') == '1' else ''} \
     mali-imx-dev \
     mali-imx-opencl-icd-dev \
     patrace"
+SOC_TOOLS_GPU_MALI_DUAL_DRIVER_MESA = " \
+    libegl-mesa-dev \
+    libgles1-mesa-dev \
+    libgles2-mesa-dev"
 
 SOC_TOOLS_GPU_VIVANTE = ""
 SOC_TOOLS_GPU_VIVANTE:imxviv = " \
