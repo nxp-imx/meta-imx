@@ -117,7 +117,7 @@ LIBCAMERA_SRC ?= "git://github.com/nxp-imx/libcamera.git;protocol=https"
 SRCBRANCH = "imx/next"
 SRCREV = "cb7f7fc7223eec2d8cffa7e9d3a7f0ab3d86b59a"
 
-PACKAGECONFIG = "dng gst python"
+PACKAGECONFIG = "dng gst kms python"
 
 ARM_PIPELINES .= ",nxp/neo"
 
