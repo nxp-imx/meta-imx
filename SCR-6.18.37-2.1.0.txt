@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-d3943ea
+Package:                     zephyr-demo-imx-4.4.5-9885b00
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
