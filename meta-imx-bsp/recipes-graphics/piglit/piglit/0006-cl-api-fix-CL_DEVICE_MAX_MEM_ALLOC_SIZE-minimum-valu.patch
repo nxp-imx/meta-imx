@@ -1,0 +1,58 @@
+From d690a61a0c08cbd87615ca66ee33fee6f2a0bdab Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Wed, 1 Jul 2026 16:22:26 +0800
+Subject: [PATCH] cl/api: fix CL_DEVICE_MAX_MEM_ALLOC_SIZE minimum value check
+
+The OpenCL spec (Section 4.2, Table 5) defines the minimum value for
+CL_DEVICE_MAX_MEM_ALLOC_SIZE as:
+
+  max(min(1024*1024*1024, 1/4th of CL_DEVICE_GLOBAL_MEM_SIZE), 32*1024*1024)
+
+The test was using MAX2(mem_size/4, 128*1024*1024), which has two errors:
+
+1. Missing the min(1 GiB, ...) clamp. On devices with >4 GiB global
+   memory, the test incorrectly required max_mem_alloc_size >= mem_size/4
+   (which can exceed 1 GiB), but the spec caps the inner term at 1 GiB.
+
+2. Using 128 MiB instead of 32 MiB as the lower bound.
+
+This caused spurious failures on devices with large memory (e.g. ~11.5
+GiB) where the driver correctly reports a max_mem_alloc_size that
+satisfies the spec but is less than mem_size/4.
+
+Upstream-Status: Backport [d690a61a0c08cbd87615ca66ee33fee6f2a0bdab]
+Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
+Part-of: <https://gitlab.freedesktop.org/mesa/piglit/-/merge_requests/1160>
+---
+ tests/cl/api/get-device-info.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/tests/cl/api/get-device-info.c b/tests/cl/api/get-device-info.c
+index 2e333ebb1..8f5e6f423 100644
+--- a/tests/cl/api/get-device-info.c
++++ b/tests/cl/api/get-device-info.c
+@@ -1,5 +1,6 @@
+ /*
+  * Copyright © 2012 Blaž Tomažič <blaz.tomazic@gmail.com>
++ * Copyright © 2026 NXP
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining a
+  * copy of this software and associated documentation files (the "Software"),
+@@ -323,9 +324,11 @@ check_info(const struct piglit_cl_api_test_env* env,
+ 		case CL_DEVICE_MAX_MEM_ALLOC_SIZE:
+ 			valid = check_size(sizeof(cl_ulong), param_value_size, result);
+ 			if (valid && device_config->type != CL_DEVICE_TYPE_CUSTOM) {
+-				valid = check_min_int(MAX2(device_config->mem_size/4, 128*1024*1024),
+-					               *(cl_ulong*)param_value,
+-					               result);
++				valid = check_min_int(
++					MAX2(MIN2(1024ULL*1024*1024, device_config->mem_size/4),
++					     32ULL*1024*1024),
++					*(cl_ulong*)param_value,
++					result);
+ 			}
+ 
+ 			if (valid) {
+-- 
+2.43.0
+

@@ -1,0 +1,55 @@
+From 9771f3e92db22bca07e50b75008ba5d35631b0b6 Mon Sep 17 00:00:00 2001
+From: jiajia Qian <jiajia.qian@nxp.com>
+Date: Fri, 10 Jul 2026 09:39:28 +0800
+Subject: [PATCH] cl/api: adapt set-kernel-arg test for OpenCL 3.1 platform
+
+Per the OpenCL 3.1 spec, the CL_INVALID_ARG_SIZE error condition
+for arg_size == 0 on __local arguments does not apply if the
+platform is OpenCL 3.1 or newer.
+
+Check the platform version and expect CL_SUCCESS on platforms
+reporting OpenCL 3.1+, while still expecting CL_INVALID_ARG_SIZE
+on older platforms.
+
+This fixes a test failure on Rusticl, which reports platform
+version 3.1 even when the device is OpenCL 3.0.
+
+Upstream-Status: Backport [9771f3e92db22bca07e50b75008ba5d35631b0b6]
+Signed-off-by: jiajia Qian <jiajia.qian@nxp.com>
+Part-of: <https://gitlab.freedesktop.org/mesa/piglit/-/merge_requests/1172>
+---
+ tests/cl/api/set-kernel-arg.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/tests/cl/api/set-kernel-arg.c b/tests/cl/api/set-kernel-arg.c
+index 95efb507b..74f76ddcd 100644
+--- a/tests/cl/api/set-kernel-arg.c
++++ b/tests/cl/api/set-kernel-arg.c
+@@ -1,5 +1,6 @@
+ /*
+  * Copyright © 2012 Blaž Tomažič <blaz.tomazic@gmail.com>
++ * Copyright © 2026 NXP
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining a
+  * copy of this software and associated documentation files (the "Software"),
+@@ -261,8 +262,16 @@ piglit_cl_test(const int argc,
+ 	test(kernel, 0, sizeof(cl_mem)+1, &buffer,
+ 	     CL_INVALID_ARG_SIZE, &input_check_result,
+ 	     "Trigger CL_INVALID_ARG_SIZE if the argument is a memory object and arg_size != sizeof(cl_mem)");
++	/*
++	 * Per OpenCL 3.1 spec, the CL_INVALID_ARG_SIZE error condition for
++	 * arg_size == 0 on __local arguments does not apply if the platform
++	 * is OpenCL 3.1 or newer.
++	 */
++	cl_int local_arg_size_zero_error =
++		piglit_cl_get_platform_version(env->platform_id) >= 31 ?
++		CL_SUCCESS : CL_INVALID_ARG_SIZE;
+ 	test(kernel, 2, 0, NULL,
+-	     CL_INVALID_ARG_SIZE, &input_check_result,
++	     local_arg_size_zero_error, &input_check_result,
+ 	     "Trigger CL_INVALID_ARG_SIZE if arg_size is zero and the argument is declared with the __local qualifier");
+ 	test(kernel, 3, sizeof(cl_sampler)+1, &sampler,
+ 	     CL_INVALID_ARG_SIZE, &input_check_result,
+-- 
+2.43.0
+
