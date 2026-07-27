@@ -14,10 +14,6 @@ BOOT_VARIANT = "${@bb.utils.contains_any('IMXBOOT_VARIANT', '${IMXBOOT_VARIANTS}
 
 MACHINEOVERRIDES_EXTENDER_FILTER_OUT += "mx8mpul mx93w mx952"
 
-# WIC partition layout
-SOC_DEFAULT_WKS_FILE:mx8-nxp-bsp ?= "nxp-imx-boot-bootpart.wks.in"
-SOC_DEFAULT_WKS_FILE:mx9-nxp-bsp ?= "nxp-imx-boot-bootpart.wks.in"
-
 # Add new Soc i.MX 93W
 MACHINEOVERRIDES_EXTENDER:mx93w:use-nxp-bsp  = "mx93w-generic-bsp:mx93w-nxp-bsp"
 
