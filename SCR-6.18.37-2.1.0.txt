@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-6f47950
+Package:                     zephyr-demo-imx-4.4.5-e10c8a0
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -770,7 +770,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-03c3984.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-b8d4b64.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -789,7 +789,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-03c3984.bin
+Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-b8d4b64.bin
 Version:                     6.4.11.p4.6
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
