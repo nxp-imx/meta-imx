@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.33-4c7a65d.bin
+Package:                     firmware-imx-8.33-1991416.bin
 Version:                     8.33
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.7-4c08365.bin
+Package:                     firmware-ele-imx-2.0.7-c0b284c.bin
 Version:                     2.0.7
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -295,7 +295,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.2.0-6b58669.bin
+Package:                     nxp-wlan-apps-1.2.0-541f6cd.bin
 Version:                     1.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -317,7 +317,7 @@ Description and comments:    Client for Wi-Fi Protected Access (WPA)
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-6f36fe6
+Package:                     sof-zephyr-2.16.0-c79ee0f
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-bf3339d
+Package:                     zephyr-demo-imx-4.4.5-a7b6d08
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -732,7 +732,7 @@ Origin:                      ISP8000NANO - VeriSilicon Holdings Co., Ltd. (GPL-2
 
 --------------------------------------------
 
-Package:                     isp-imx-4.2.2.26.3-e4002a7.bin
+Package:                     isp-imx-4.2.2.26.3-53bb06c.bin
 Version:                     4.2.2.26.3
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -770,7 +770,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.8-aarch32-087699b.bin
+Package:                     imx-gpu-viv-6.4.11.p4.8-aarch32-b8d4b64.bin
 Version:                     6.4.11.p4.8
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -789,7 +789,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.8-aarch64-087699b.bin
+Package:                     imx-gpu-viv-6.4.11.p4.8-aarch64-b8d4b64.bin
 Version:                     6.4.11.p4.8
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -992,7 +992,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 Multimedia Packages
 --------------------------------------------
 
-Package:                     imx-codec-4.11.1-f7e2dd4.bin
+Package:                     imx-codec-4.11.1-464e9d8.bin
 Version:                     4.11.1
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 
 License File:                COPYING
@@ -1721,7 +1721,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-3.0-21c2b79.bin
+Package:                     imx-nxp-ara2-3.0-0c162bb.bin
 Version:                     3.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
