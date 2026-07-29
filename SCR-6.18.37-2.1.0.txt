@@ -295,7 +295,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.2.0-564cf0e.bin
+Package:                     nxp-wlan-apps-1.2.0-6b58669.bin
 Version:                     1.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -317,7 +317,7 @@ Description and comments:    Client for Wi-Fi Protected Access (WPA)
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-76c086c
+Package:                     sof-zephyr-2.16.0-6f36fe6
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-e10c8a0
+Package:                     zephyr-demo-imx-4.4.5-bf3339d
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -770,8 +770,8 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch32-b8d4b64.bin
-Version:                     6.4.11.p4.6
+Package:                     imx-gpu-viv-6.4.11.p4.8-aarch32-087699b.bin
+Version:                     6.4.11.p4.8
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -789,8 +789,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.6-aarch64-b8d4b64.bin
-Version:                     6.4.11.p4.6
+Package:                     imx-gpu-viv-6.4.11.p4.8-aarch64-087699b.bin
+Version:                     6.4.11.p4.8
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            Graphics
@@ -992,9 +992,9 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 Multimedia Packages
 --------------------------------------------
 
-Package:                     imx-codec-4.10.0-464e9d8.bin
-Version:                     4.10.0
-Outgoing License:            LA_OPT_NXP_Software_License v62 May 2025 Additional distribution license granted - Section 2.3 applies
+Package:                     imx-codec-4.11.1-f7e2dd4.bin
+Version:                     4.11.1
+Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 
 License File:                COPYING
 Package Category:            Multimedia
 Type of Content:             binary and source
