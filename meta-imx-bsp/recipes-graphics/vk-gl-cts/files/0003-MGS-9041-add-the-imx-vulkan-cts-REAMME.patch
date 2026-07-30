@@ -1,10 +1,9 @@
 From 0cfa77cf31c40169eefda5b5c2d60de450aec67f Mon Sep 17 00:00:00 2001
 From: Ryan Zhang <ryan.zhang@nxp.com>
 Date: Fri, 24 Jul 2026 11:00:46 +0800
-Subject: [PATCH 1/6] MGS-9041: add the imx-vulkan-cts REAMME
+Subject: [PATCH] MGS-9041: add the imx-vulkan-cts REAMME
 
-Upstream-Status: Inappropriate [i.MX README]
-
+Upstream-Status: Inappropriate [embedded specific]
 Signed-off-by: Ryan Zhang <ryan.zhang@nxp.com>
 ---
  README.imx.md | 20 ++++++++++++++++++++

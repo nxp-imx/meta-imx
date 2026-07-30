@@ -1,7 +1,7 @@
-From a1dff86e07f07054c9735e95d0150e04802fa0ed Mon Sep 17 00:00:00 2001
+From 452ebf1587a3c8c5a9e5dd94f9a028308b212267 Mon Sep 17 00:00:00 2001
 From: Tom Cooper <tom.cooper@arm.com>
 Date: Fri, 13 Mar 2026 11:46:44 +0000
-Subject: [PATCH 3/6] Fix memory type for host image copy tests
+Subject: [PATCH] Fix memory type for host image copy tests
 
 Components: Vulkan
 
@@ -9,8 +9,8 @@ VK-GL-CTS issue: 6414
 
 Affects: dEQP-VK.image.general_layout.*
 
+Upstream-Status: Backport [https://github.com/KhronosGroup/VK-GL-CTS/commit/452ebf1587a3c8c5a9e5dd94f9a028308b212267]
 Change-Id: Ic5eaa58368849268b8b337d0b571f25de4325698
-Upstream-Status: Pending
 ---
  .../modules/vulkan/image/vktImageGeneralLayoutTests.cpp     | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)

@@ -1,7 +1,7 @@
-From c1c832f83f8c62ce79cb1345cccd8ec40c4b0c7b Mon Sep 17 00:00:00 2001
+From 30212b0b895eba33e02a236165f161a8b0495186 Mon Sep 17 00:00:00 2001
 From: Thomas Aven <thomas.aven@arm.com>
 Date: Fri, 13 Mar 2026 09:11:25 +0100
-Subject: [PATCH 2/6] Add missing conditional rendering functionality check
+Subject: [PATCH] Add missing conditional rendering functionality check
 
 Conditional rendering is used in some VK_KHR_copy_memory_indirect tests,
 but did not check for support.
@@ -13,17 +13,17 @@ VK-GL-CTS issue: 6398
 Affected tests:
 dEQP-VK.api.copy_and_blit.*conditional*
 
+Upstream-Status: Backport [https://github.com/KhronosGroup/VK-GL-CTS/commit/30212b0b895eba33e02a236165f161a8b0495186]
 Change-Id: I64a29250a86ff8a5d9ee5678aefab9a871f46a40
-Upstream-Status: Pending
 ---
  .../modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp      | 5 +++++
  1 file changed, 5 insertions(+)
 
 diff --git a/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp b/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp
-index f4e8ee650..dc0d6f2ce 100644
+index edaa5f54b..03f53dbc1 100644
 --- a/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp
 +++ b/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp
-@@ -17320,6 +17320,11 @@ public:
+@@ -17322,6 +17322,11 @@ public:
              }
          }
          checkFormatSupport(context, m_params.dst.image.format);

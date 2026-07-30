@@ -1,7 +1,7 @@
 From 2f547a9ea6269b1120e15e2a965f6822d8bdd2d4 Mon Sep 17 00:00:00 2001
 From: Ryan Zhang <ryan.zhang@nxp.com>
 Date: Sun, 26 Jul 2026 00:12:12 +0800
-Subject: [PATCH 6/6] Fix remaining validation errors in
+Subject: [PATCH] Fix remaining validation errors in
  VK_KHR_copy_memory_indirect
 
 Manual backport of remaining fixes from upstream commit db57ed85a

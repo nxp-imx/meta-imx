@@ -1,7 +1,7 @@
-From 5d8a8baad0e922a3a9eb249edca471695f378cc6 Mon Sep 17 00:00:00 2001
+From c3eaa6fee0a20737c3988f4af47f1f449e456f7a Mon Sep 17 00:00:00 2001
 From: Ricardo Garcia <rgarcia@igalia.com>
 Date: Thu, 14 May 2026 11:16:44 +0200
-Subject: [PATCH 5/6] Fix validation errors in copy memory indirect tests
+Subject: [PATCH] Fix validation errors in copy memory indirect tests
 
 * Missing VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT in several buffers.
 * Missing VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT in several buffers.
@@ -18,8 +18,8 @@ vkMemUtil, but the tests above already exercise the proper paths.
 Components: Vulkan
 VK-GL-CTS issue: 6423
 
+Upstream-Status: Backport [https://github.com/KhronosGroup/VK-GL-CTS/commit/c3eaa6fee0a20737c3988f4af47f1f449e456f7a]
 Change-Id: Ia44702489a9c5551a00900e328d2c19e5cbb0853
-Upstream-Status: Pending
 ---
  .../framework/vulkan/vkImageUtil.cpp          | 12 +--
  .../vulkancts/framework/vulkan/vkMemUtil.cpp  | 79 ++++++++++++-------
@@ -27,7 +27,7 @@ Upstream-Status: Pending
  3 files changed, 71 insertions(+), 37 deletions(-)
 
 diff --git a/external/vulkancts/framework/vulkan/vkImageUtil.cpp b/external/vulkancts/framework/vulkan/vkImageUtil.cpp
-index b097fb212..41b8d1858 100644
+index 531f87246..c8cd94916 100644
 --- a/external/vulkancts/framework/vulkan/vkImageUtil.cpp
 +++ b/external/vulkancts/framework/vulkan/vkImageUtil.cpp
 @@ -4756,17 +4756,19 @@ void copyBufferToImageIndirect(const DeviceInterface &vk, const InstanceInterfac
@@ -187,7 +187,7 @@ index b7e35e3d0..6bd036b17 100644
  }
  
 diff --git a/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp b/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp
-index dc0d6f2ce..2b124630e 100644
+index 5bd0e819e..5ace0c58f 100644
 --- a/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp
 +++ b/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp
 @@ -16873,19 +16873,24 @@ CopyMemoryToImageIndirect::CopyMemoryToImageIndirect(Context &context, TestParam

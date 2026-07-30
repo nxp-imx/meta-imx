@@ -1,7 +1,7 @@
-From 4ed682f7fa67ac0b2aaec8de3e881ba31b5902f9 Mon Sep 17 00:00:00 2001
+From ad1a1e294612687a7fe84a09f3db6cca0b632af4 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?J=C3=B6rg=20Wagner?= <jorwag@google.com>
 Date: Wed, 11 Mar 2026 18:15:38 +0000
-Subject: [PATCH 4/6] Add missing feature checks in no queue tests #2
+Subject: [PATCH] Add missing feature checks in no queue tests #2
 
 Amend 07417eaaef73 with a check for the geometry stage.
 
@@ -11,8 +11,8 @@ Components: Vulkan
 
 VK-GL-CTS issue: 6108
 
+Upstream-Status: Backport [https://github.com/KhronosGroup/VK-GL-CTS/commit/ad1a1e294612687a7fe84a09f3db6cca0b632af4]
 Change-Id: I33d458bc50461a9196c87ceb2c177e4fcb384b62
-Upstream-Status: Pending
 ---
  .../modules/vulkan/pipeline/vktPipelineNoQueuesTests.cpp       | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
