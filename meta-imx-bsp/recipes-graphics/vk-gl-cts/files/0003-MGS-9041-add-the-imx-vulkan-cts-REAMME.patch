@@ -1,0 +1,43 @@
+From 0cfa77cf31c40169eefda5b5c2d60de450aec67f Mon Sep 17 00:00:00 2001
+From: Ryan Zhang <ryan.zhang@nxp.com>
+Date: Fri, 24 Jul 2026 11:00:46 +0800
+Subject: [PATCH 1/6] MGS-9041: add the imx-vulkan-cts REAMME
+
+Upstream-Status: Inappropriate [i.MX README]
+
+Signed-off-by: Ryan Zhang <ryan.zhang@nxp.com>
+---
+ README.imx.md | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 README.imx.md
+
+diff --git a/README.imx.md b/README.imx.md
+new file mode 100644
+index 000000000..b87cf8251
+--- /dev/null
++++ b/README.imx.md
+@@ -0,0 +1,20 @@
++IMX README
++===========
++
++How to build imx-vulkan-cts
++-------------
++
++* source your toolchian
++* cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DSELECTED_BUILD_TARGETS="deqp-vk" -DDEQP_SUPPORT_VULKAN_VIDEO=OFF -DDEQP_TARGET=wayland -DCMAKE_C_FLAGS=-m64 -DCMAKE_CXX_FLAGS=-m64 -DCMAKE_POLICY_VERSION_MINIMUM=3.5
++* ninja -j16
++
++How to run imx-vulkan-cts
++-------------
++
++* ./deqp-vk --deqp-caselist-file=/your_path/VK-GL-CTS/external/vulkancts/mustpass/main/vk-default.txt --deqp-waiver-file=/your_path/mali_driver_vulkancts_waiver.xml
++
++
++Branch Track
++-------------
++
++* imx-vulkan-cts-1.4.5.2 : 2026.Q3
+\ No newline at end of file
+-- 
+2.43.0
+

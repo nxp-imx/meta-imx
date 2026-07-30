@@ -1,0 +1,36 @@
+From 4ed682f7fa67ac0b2aaec8de3e881ba31b5902f9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?J=C3=B6rg=20Wagner?= <jorwag@google.com>
+Date: Wed, 11 Mar 2026 18:15:38 +0000
+Subject: [PATCH 4/6] Add missing feature checks in no queue tests #2
+
+Amend 07417eaaef73 with a check for the geometry stage.
+
+Affects: dEQP-VK.pipeline.no_queues.pipeline_*.geometry
+
+Components: Vulkan
+
+VK-GL-CTS issue: 6108
+
+Change-Id: I33d458bc50461a9196c87ceb2c177e4fcb384b62
+Upstream-Status: Pending
+---
+ .../modules/vulkan/pipeline/vktPipelineNoQueuesTests.cpp       | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/external/vulkancts/modules/vulkan/pipeline/vktPipelineNoQueuesTests.cpp b/external/vulkancts/modules/vulkan/pipeline/vktPipelineNoQueuesTests.cpp
+index cacf33cb7..dcbf3106f 100644
+--- a/external/vulkancts/modules/vulkan/pipeline/vktPipelineNoQueuesTests.cpp
++++ b/external/vulkancts/modules/vulkan/pipeline/vktPipelineNoQueuesTests.cpp
+@@ -260,7 +260,8 @@ void NoQueuesTestCase::checkSupport(Context &context) const
+     if (isTessStage(m_data.stage) && !features.tessellationShader)
+         TCU_THROW(NotSupportedError, "Tessellation shaders not supported");
+ 
+-    if ((isTessStage(m_data.stage) || m_data.stage == Stage::STAGE_VERTEX) && !features.vertexPipelineStoresAndAtomics)
++    if ((isTessStage(m_data.stage) || isGeomStage(m_data.stage) || m_data.stage == Stage::STAGE_VERTEX) &&
++        !features.vertexPipelineStoresAndAtomics)
+         TCU_THROW(NotSupportedError, "SSBO writes not supported in vertex pipeline");
+ 
+     if (m_data.stage == Stage::STAGE_FRAGMENT && !features.fragmentStoresAndAtomics)
+-- 
+2.43.0
+

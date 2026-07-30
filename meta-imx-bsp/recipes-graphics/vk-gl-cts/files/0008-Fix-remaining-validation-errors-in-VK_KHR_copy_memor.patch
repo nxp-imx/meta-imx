@@ -1,0 +1,114 @@
+From 2f547a9ea6269b1120e15e2a965f6822d8bdd2d4 Mon Sep 17 00:00:00 2001
+From: Ryan Zhang <ryan.zhang@nxp.com>
+Date: Sun, 26 Jul 2026 00:12:12 +0800
+Subject: [PATCH 6/6] Fix remaining validation errors in
+ VK_KHR_copy_memory_indirect
+
+Manual backport of remaining fixes from upstream commit db57ed85a
+(VK-GL-CTS issue 6153) that were not covered by c3eaa6fee.
+
+* CopyCompressedImageToBuffer: source buffer missing
+  VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT and DeviceAddress memory
+  when used with indirect copy path.
+* CopyBufferToDepthStencil: source buffer memory missing DeviceAddress
+  requirement. Indirect buffer missing VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT.
+  Incorrect addressRange size in per-region copy path.
+* CopyMemoryIndirect (buffer-to-buffer): indirect buffer missing
+  VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT.
+
+Affects:
+dEQP-VK.api.copy_and_blit.core.image_to_buffer.*mip_copies*
+dEQP-VK.api.copy_and_blit.core.memory_to_depthstencil_indirect*
+dEQP-VK.api.copy_and_blit.copy_memory_indirect*
+
+Upstream-Status: Pending
+Signed-off-by: Ryan Zhang <ryan.zhang@nxp.com>
+---
+ .../api/vktApiCopiesAndBlittingTests.cpp      | 32 +++++++++++++------
+ 1 file changed, 22 insertions(+), 10 deletions(-)
+
+diff --git a/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp b/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp
+index 2b124630e..22b75177b 100644
+--- a/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp
++++ b/external/vulkancts/modules/vulkan/api/vktApiCopiesAndBlittingTests.cpp
+@@ -3085,9 +3085,14 @@ tcu::TestStatus CopyCompressedImageToBuffer::iterate(void)
+     // FIXME: This could be a utility.
+     //    pipeline::uploadTestTexture(vk, vkDevice, queue, queueFamilyIndex, memAlloc, *m_texture, m_source->get(), vk::VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+     // Does not allow using an external command pool, the utilities there could fruitfully be generalised.
++    VkBufferUsageFlags srcUsage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
++    if (m_params.extensionFlags & INDIRECT_COPY)
++        srcUsage |= VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT;
++    auto srcMemReq = (m_params.extensionFlags & INDIRECT_COPY) ?
++                         (vk::MemoryRequirement::HostVisible | vk::MemoryRequirement::DeviceAddress) :
++                         vk::MemoryRequirement::HostVisible;
+     m_sourceBuffer = de::MovePtr<BufferWithMemory>(new BufferWithMemory(
+-        vk, vkDevice, memAlloc, makeBufferCreateInfo(m_texture->getCompressedSize(), VK_BUFFER_USAGE_TRANSFER_SRC_BIT),
+-        vk::MemoryRequirement::HostVisible));
++        vk, vkDevice, memAlloc, makeBufferCreateInfo(m_texture->getCompressedSize(), srcUsage), srcMemReq));
+     m_texture->write(reinterpret_cast<uint8_t *>(m_sourceBuffer->getAllocation().getHostPtr()));
+     flushAlloc(vk, vkDevice, m_sourceBuffer->getAllocation());
+     std::vector<VkBufferImageCopy> copyRegions = m_texture->getBufferCopyRegions();
+@@ -4112,9 +4117,13 @@ CopyBufferToDepthStencil::CopyBufferToDepthStencil(Context &context, TestParams
+             nullptr,                              // const uint32_t* pQueueFamilyIndices;
+         };
+ 
+-        m_source            = createBuffer(vk, vkDevice, &sourceBufferParams);
+-        m_sourceBufferAlloc = allocateBuffer(vki, vk, vkPhysDevice, vkDevice, *m_source, MemoryRequirement::HostVisible,
+-                                             memAlloc, m_params.allocationKind);
++        MemoryRequirement memReq = (m_params.extensionFlags & INDIRECT_COPY) ?
++                                       (MemoryRequirement::HostVisible | MemoryRequirement::DeviceAddress) :
++                                       MemoryRequirement::HostVisible;
++
++        m_source = createBuffer(vk, vkDevice, &sourceBufferParams);
++        m_sourceBufferAlloc =
++            allocateBuffer(vki, vk, vkPhysDevice, vkDevice, *m_source, memReq, memAlloc, m_params.allocationKind);
+         VK_CHECK(vk.bindBufferMemory(vkDevice, *m_source, m_sourceBufferAlloc->getMemory(),
+                                      m_sourceBufferAlloc->getOffset()));
+     }
+@@ -4217,7 +4226,9 @@ tcu::TestStatus CopyBufferToDepthStencil::iterate(void)
+         de::max(m_params.regions.size(), (size_t)1) * sizeof(VkCopyMemoryToImageIndirectCommandKHR);
+     Allocator &memAlloc = m_context.getDefaultAllocator();
+     const BufferWithMemory indirectBuffer(
+-        vk, vkDevice, memAlloc, makeBufferCreateInfo(indirectBufferSize, VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT),
++        vk, vkDevice, memAlloc,
++        makeBufferCreateInfo(indirectBufferSize,
++                             VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT | VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT),
+         MemoryRequirement::HostVisible | MemoryRequirement::DeviceAddress);
+ 
+     if (m_params.extensionFlags & INDIRECT_COPY)
+@@ -4380,6 +4391,7 @@ tcu::TestStatus CopyBufferToDepthStencil::iterate(void)
+         else
+         {
+             // Issue a a copy command per region defined by the test.
++            const VkDeviceSize indirectCommandSize = sizeof(VkCopyMemoryToImageIndirectCommandKHR);
+             for (uint32_t i = 0; i < memoryImageCopiesKHR.size(); i++)
+             {
+                 if (i > 0)
+@@ -4387,9 +4399,8 @@ tcu::TestStatus CopyBufferToDepthStencil::iterate(void)
+                                           VK_PIPELINE_STAGE_TRANSFER_BIT, (VkDependencyFlags)0, 0, nullptr, 0, nullptr,
+                                           1, &imageBarrier);
+ 
+-                VkDeviceSize stride                         = sizeof(VkCopyMemoryToImageIndirectCommandKHR);
+-                VkStridedDeviceAddressRangeKHR addressRange = {indirectBufferAddress + i * stride, indirectBufferSize,
+-                                                               stride};
++                VkStridedDeviceAddressRangeKHR addressRange = {indirectBufferAddress + i * indirectCommandSize,
++                                                               indirectCommandSize, indirectCommandSize};
+                 VkCopyMemoryToImageIndirectInfoKHR memToImageIndirectInfoKHR = {};
+                 memToImageIndirectInfoKHR.sType              = VK_STRUCTURE_TYPE_COPY_MEMORY_TO_IMAGE_INDIRECT_INFO_KHR;
+                 memToImageIndirectInfoKHR.pNext              = nullptr;
+@@ -21480,10 +21491,11 @@ private:
+                                  bufferCreateFlags), // Buffer create flag
+             memReqs);
+ 
++        VkBufferUsageFlags indirectUsage = VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT | VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT;
+         const VkDeviceSize indirectBufferSize = std::max(m_copyParams.copyCount, 1U) * m_copyParams.stride;
+         const BufferWithMemory indirectBuffer(
+             vkd, device, allocator,
+-            makeBufferCreateInfo(indirectBufferSize, VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT, std::vector<uint32_t>(),
++            makeBufferCreateInfo(indirectBufferSize, indirectUsage, std::vector<uint32_t>(),
+                                  bufferCreateFlags), // Buffer create flag
+             memReqs);
+ 
+-- 
+2.43.0
+

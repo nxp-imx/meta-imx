@@ -1,0 +1,37 @@
+From a1dff86e07f07054c9735e95d0150e04802fa0ed Mon Sep 17 00:00:00 2001
+From: Tom Cooper <tom.cooper@arm.com>
+Date: Fri, 13 Mar 2026 11:46:44 +0000
+Subject: [PATCH 3/6] Fix memory type for host image copy tests
+
+Components: Vulkan
+
+VK-GL-CTS issue: 6414
+
+Affects: dEQP-VK.image.general_layout.*
+
+Change-Id: Ic5eaa58368849268b8b337d0b571f25de4325698
+Upstream-Status: Pending
+---
+ .../modules/vulkan/image/vktImageGeneralLayoutTests.cpp     | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/external/vulkancts/modules/vulkan/image/vktImageGeneralLayoutTests.cpp b/external/vulkancts/modules/vulkan/image/vktImageGeneralLayoutTests.cpp
+index 2cabe868b..f7df68e3a 100644
+--- a/external/vulkancts/modules/vulkan/image/vktImageGeneralLayoutTests.cpp
++++ b/external/vulkancts/modules/vulkan/image/vktImageGeneralLayoutTests.cpp
+@@ -312,7 +312,11 @@ tcu::TestStatus AstcSampleTestInstance::iterate(void)
+         VK_IMAGE_LAYOUT_UNDEFINED,
+     };
+ 
+-    vk::ImageWithMemory sampledImage(vk, device, alloc, imageCreateInfo, vk::MemoryRequirement::Any);
++    const bool host_copy = (m_parameters.testType == TEST_TYPE_HOST_COPY_INTO_IMAGE ||
++                            m_parameters.testType == TEST_TYPE_HOST_COPY_FROM_IMAGE);
++
++    vk::ImageWithMemory sampledImage(vk, device, alloc, imageCreateInfo,
++                                     host_copy ? vk::MemoryRequirement::HostVisible : vk::MemoryRequirement::Any);
+ 
+     vk::VkImageViewCreateInfo imageViewCreateInfo = {
+         vk::VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO, // VkStructureType sType;
+-- 
+2.43.0
+
