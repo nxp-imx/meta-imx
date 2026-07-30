@@ -18,6 +18,13 @@ PACKAGECONFIG:append:x86-64 = " libclc gallium-llvm intel amd nouveau svga"
 PACKAGECONFIG:append:i686 = " libclc gallium-llvm intel amd nouveau svga"
 PACKAGECONFIG:append:class-native = " libclc gallium-llvm amd nouveau svga"
 
+# The amd (radeonsi) driver raises the libdrm requirement to >= 2.4.133, which
+# is newer than the libdrm provided for native/nativesdk builds. i.MX SDK host
+# tooling does not need the AMD GPU driver, so drop it to keep the libdrm
+# requirement at the baseline and avoid a do_configure meson failure.
+PACKAGECONFIG:remove:class-native = "amd"
+PACKAGECONFIG:remove:class-nativesdk = "amd"
+
 GLPROVIDES = " \
     ${@bb.utils.contains('PACKAGECONFIG', 'opengl', 'virtual/libgl', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'gles', 'virtual/libgles1 virtual/libgles2 virtual/libgles3', '', d)} \
