@@ -8,6 +8,8 @@ SRC_URI += "\
     file://0005-cl-api-adapt-set-kernel-arg-test-for-OpenCL-3.1-plat.patch \
     file://0006-cl-api-fix-CL_DEVICE_MAX_MEM_ALLOC_SIZE-minimum-valu.patch"
 
+SRC_URI:remove = "file://0002-cl-Add-mutually-exclusive-memory-flags-for-CL_MEM_KE.patch"
+
 PACKAGECONFIG_REMOVE:imxgpu:mx6-nxp-bsp = "glx opencl x11"
 PACKAGECONFIG_REMOVE:imxgpu:mx7-nxp-bsp = "glx opencl x11"
 
