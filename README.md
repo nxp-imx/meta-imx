@@ -43,7 +43,7 @@ The following development boards were tested in this release.
 | i.MX 8XLite     | EVK    | imx8dxlb0-lpddr4-evk, imx8dxlb0-ddr3l-evk                                 |
 | i.MX 8ULP       | EVK    | imx8ulp-lpddr4-evk, imx8ulp-9x9-lpddr4x-evk                               |
 | i.MX 91         | EVK    | imx91-11x11-lpddr4-evk, imx91-9x9-lpddr4-qsb                              |
-|                 | FRDM   | imx91-11x11-lpddr4-frdm, imx91-11x11-lpddr4-frdm-imx91s                   |
+|                 | FRDM   | imx91-11x11-lpddr4-frdm, imx91-11x11-lpddr4-frdm-s                   |
 | i.MX 93         | EVK    | imx93-11x11-lpddr4x-evk, imx93-14x14-lpddr4x-evk, imx93-9x9-lpddr4-qsb    |
 |                 | FRDM   | imx93-11x11-lpddr4x-frdm                                                  |
 | i.MX 93W        | EVK    | imx93w-14x12-lpddr4x-evk                                                  |
