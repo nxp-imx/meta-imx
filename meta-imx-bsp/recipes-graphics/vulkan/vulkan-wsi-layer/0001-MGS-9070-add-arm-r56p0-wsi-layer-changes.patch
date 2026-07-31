@@ -1,0 +1,331 @@
+From 8cb132d21f16b0bd7c4a3790bb740497b55398c9 Mon Sep 17 00:00:00 2001
+From: Joshua Wienecke <joshua.wienecke_1@nxp.com>
+Date: Thu, 30 Jul 2026 11:56:21 -0500
+Subject: [PATCH 1/6] MGS-9070 add arm r56p0 wsi layer changes
+
+Upstream-Status: Pending
+Signed-off-by: Joshua Wienecke <joshua.wienecke_1@nxp.com>
+---
+ CMakeLists.txt                               |  2 +-
+ wsi/display/surface_properties.cpp           | 11 ++++++---
+ wsi/display/swapchain.cpp                    | 24 ++++++++++++++------
+ wsi/extensions/image_compression_control.cpp | 12 ++++++----
+ wsi/extensions/image_compression_control.hpp | 13 +++++++----
+ wsi/extensions/present_timing.hpp            |  2 +-
+ wsi/headless/present_timing_handler.cpp      |  2 +-
+ wsi/headless/swapchain.cpp                   |  2 +-
+ wsi/swapchain_base.cpp                       | 16 +++++++++++++
+ wsi/swapchain_image.cpp                      | 14 ++++++------
+ wsi/wsi_factory.cpp                          | 19 ++++++++--------
+ 11 files changed, 77 insertions(+), 40 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 957dee0..04e66c3 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-# Copyright (c) 2019-2025 Arm Limited.
++# Copyright (c) 2019-2026 Arm Limited.
+ #
+ # SPDX-License-Identifier: MIT
+ #
+diff --git a/wsi/display/surface_properties.cpp b/wsi/display/surface_properties.cpp
+index 332d72e..8139130 100644
+--- a/wsi/display/surface_properties.cpp
++++ b/wsi/display/surface_properties.cpp
+@@ -254,6 +254,8 @@ CreateDisplayPlaneSurfaceKHR(VkInstance instance, const VkDisplaySurfaceCreateIn
+       auto wsi_surface = allocator.make_unique<surface>(display_mode, pCreateInfo->imageExtent);
+       if (wsi_surface == nullptr)
+       {
++         instance_data.disp.DestroySurfaceKHR(instance, *pSurface, pAllocator);
++         *pSurface = VK_NULL_HANDLE;
+          return VK_ERROR_OUT_OF_HOST_MEMORY;
+       }
+ 
+@@ -262,6 +264,7 @@ CreateDisplayPlaneSurfaceKHR(VkInstance instance, const VkDisplaySurfaceCreateIn
+       if (res != VK_SUCCESS)
+       {
+          instance_data.disp.DestroySurfaceKHR(instance, *pSurface, pAllocator);
++         *pSurface = VK_NULL_HANDLE;
+       }
+    }
+    return res;
+@@ -589,9 +592,11 @@ surface_properties &surface_properties::get_instance()
+ void surface_properties::get_surface_present_scaling_and_gravity(
+    VkSurfacePresentScalingCapabilitiesEXT *scaling_capabilities)
+ {
+-   scaling_capabilities->supportedPresentScaling = VK_PRESENT_SCALING_ONE_TO_ONE_BIT_EXT;
+-   scaling_capabilities->supportedPresentGravityX = VK_PRESENT_GRAVITY_MIN_BIT_EXT;
+-   scaling_capabilities->supportedPresentGravityY = VK_PRESENT_GRAVITY_MIN_BIT_EXT;
++   /* This backend presents by page-flipping a KMS framebuffer for each swapchain image. It does not implement
++    * VK_EXT_surface_maintenance1 presentation scaling/gravity. */
++   scaling_capabilities->supportedPresentScaling = 0;
++   scaling_capabilities->supportedPresentGravityX = 0;
++   scaling_capabilities->supportedPresentGravityY = 0;
+ }
+ 
+ bool surface_properties::is_compatible_present_modes(VkPresentModeKHR present_mode_a, VkPresentModeKHR present_mode_b)
+diff --git a/wsi/display/swapchain.cpp b/wsi/display/swapchain.cpp
+index 3299036..aa6a980 100644
+--- a/wsi/display/swapchain.cpp
++++ b/wsi/display/swapchain.cpp
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2024-2025 Arm Limited.
++ * Copyright (c) 2024-2026 Arm Limited.
+  *
+  * SPDX-License-Identifier: MIT
+  *
+@@ -296,14 +296,23 @@ VkResult swapchain::allocate_and_bind_swapchain_image(swapchain_image &image)
+    uint32_t fb_id = 0;
+    TRY_LOG(create_framebuffer(backing_memory, fb_id), "Failed to create framebuffer");
+ 
+-   TRY_LOG_CALL(backing_memory.import_and_bind(image.get_image()));
++   VkResult import_result = backing_memory.import_and_bind(image.get_image());
++   if (import_result != VK_SUCCESS)
++   {
++      int drm_result = drmModeRmFB(display->get_drm_fd(), fb_id);
++      assert(drm_result == 0);
++      UNUSED(drm_result);
++
++      WSI_LOG_ERROR("backing_memory.import_and_bind(image.get_image())");
++      return import_result;
++   }
+ 
+    auto image_data = m_allocator.make_unique<display_image_data>(display->get_drm_fd(), fb_id);
+    if (image_data == nullptr)
+    {
+-      int result = drmModeRmFB(display->get_drm_fd(), fb_id);
+-      assert(result == 0);
+-      UNUSED(result);
++      int drm_result = drmModeRmFB(display->get_drm_fd(), fb_id);
++      assert(drm_result == 0);
++      UNUSED(drm_result);
+ 
+       return VK_ERROR_OUT_OF_HOST_MEMORY;
+    }
+@@ -359,11 +368,12 @@ void swapchain::present_image(const pending_present_request &pending_present)
+       }
+ 
+       fd_set fds;
+-      FD_ZERO(&fds);
+-      FD_SET(display->get_drm_fd(), &fds);
+ 
+       do
+       {
++         FD_ZERO(&fds);
++         FD_SET(display->get_drm_fd(), &fds);
++
+          struct timeval t;
+          t.tv_sec = 1;
+          t.tv_usec = 0;
+diff --git a/wsi/extensions/image_compression_control.cpp b/wsi/extensions/image_compression_control.cpp
+index 2cbf7d8..a76aab3 100644
+--- a/wsi/extensions/image_compression_control.cpp
++++ b/wsi/extensions/image_compression_control.cpp
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2024-2025 Arm Limited.
++ * Copyright (c) 2024-2026 Arm Limited.
+  *
+  * SPDX-License-Identifier: MIT
+  *
+@@ -38,11 +38,15 @@ namespace wsi
+ {
+ image_create_compression_control::image_create_compression_control(const VkImageCompressionControlEXT &extension)
+    : m_compression_control{ VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT, nullptr, extension.flags,
+-                            extension.compressionControlPlaneCount, m_array_fixed_rate_flags }
++                            extension.compressionControlPlaneCount, nullptr }
+ {
+-   for (uint32_t i = 0; i < extension.compressionControlPlaneCount; i++)
++   if ((extension.flags & VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT) != 0)
+    {
+-      m_compression_control.pFixedRateFlags[i] = extension.pFixedRateFlags[i];
++      m_compression_control.pFixedRateFlags = m_array_fixed_rate_flags;
++      for (uint32_t i = 0; i < extension.compressionControlPlaneCount; i++)
++      {
++         m_compression_control.pFixedRateFlags[i] = extension.pFixedRateFlags[i];
++      }
+    }
+ }
+ 
+diff --git a/wsi/extensions/image_compression_control.hpp b/wsi/extensions/image_compression_control.hpp
+index eab1f0f..5f93f72 100644
+--- a/wsi/extensions/image_compression_control.hpp
++++ b/wsi/extensions/image_compression_control.hpp
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2025 Arm Limited.
++ * Copyright (c) 2025-2026 Arm Limited.
+  *
+  * SPDX-License-Identifier: MIT
+  *
+@@ -32,7 +32,6 @@
+ #pragma once
+ 
+ #include <optional>
+-#include <utility>
+ 
+ #include <util/custom_allocator.hpp>
+ #include <util/macros.hpp>
+@@ -71,10 +70,14 @@ public:
+       }
+ 
+       auto compression_control = image_create_compression_control(extension);
+-      std::swap(m_compression_control, compression_control.m_compression_control);
+-      for (uint32_t i = 0; i < compression_control.m_compression_control.compressionControlPlaneCount; i++)
++      m_compression_control = compression_control.m_compression_control;
++      if (compression_control.m_compression_control.pFixedRateFlags != nullptr)
+       {
+-         m_compression_control.pFixedRateFlags[i] = compression_control.m_compression_control.pFixedRateFlags[i];
++         m_compression_control.pFixedRateFlags = m_array_fixed_rate_flags;
++         for (uint32_t i = 0; i < compression_control.m_compression_control.compressionControlPlaneCount; i++)
++         {
++            m_compression_control.pFixedRateFlags[i] = compression_control.m_compression_control.pFixedRateFlags[i];
++         }
+       }
+ 
+       return *this;
+diff --git a/wsi/extensions/present_timing.hpp b/wsi/extensions/present_timing.hpp
+index a7a860b..98e2467 100644
+--- a/wsi/extensions/present_timing.hpp
++++ b/wsi/extensions/present_timing.hpp
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2024-2025 Arm Limited.
++ * Copyright (c) 2024-2026 Arm Limited.
+  *
+  * SPDX-License-Identifier: MIT
+  *
+diff --git a/wsi/headless/present_timing_handler.cpp b/wsi/headless/present_timing_handler.cpp
+index 9bd9d83..8f7bfdb 100644
+--- a/wsi/headless/present_timing_handler.cpp
++++ b/wsi/headless/present_timing_handler.cpp
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2025 Arm Limited.
++ * Copyright (c) 2025-2026 Arm Limited.
+  *
+  * SPDX-License-Identifier: MIT
+  *
+diff --git a/wsi/headless/swapchain.cpp b/wsi/headless/swapchain.cpp
+index e7b93b6..09a6dbf 100644
+--- a/wsi/headless/swapchain.cpp
++++ b/wsi/headless/swapchain.cpp
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2017-2025 Arm Limited.
++ * Copyright (c) 2017-2026 Arm Limited.
+  *
+  * SPDX-License-Identifier: MIT
+  *
+diff --git a/wsi/swapchain_base.cpp b/wsi/swapchain_base.cpp
+index 37551c6..eaf4ff4 100644
+--- a/wsi/swapchain_base.cpp
++++ b/wsi/swapchain_base.cpp
+@@ -581,6 +581,22 @@ VkResult swapchain_base::notify_presentation_engine(const pending_present_reques
+ VkResult swapchain_base::queue_present(VkQueue queue, const VkPresentInfoKHR *present_info,
+                                        const swapchain_presentation_parameters &submit_info)
+ {
++   if (m_present_mode == VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR)
++   {
++      const util::unique_lock<util::recursive_mutex> image_status_lock(m_image_status_mutex);
++      if (!image_status_lock)
++      {
++         WSI_LOG_ERROR("Failed to acquire image status lock in queue_present.");
++         return VK_ERROR_UNKNOWN;
++      }
++
++      const auto image_status = m_swapchain_images[submit_info.pending_present.image_index].get_status();
++      if (image_status == swapchain_image::PENDING)
++      {
++         return VK_SUCCESS;
++      }
++   }
++
+ #if VULKAN_WSI_LAYER_EXPERIMENTAL
+    const VkPresentTimingInfoEXT *present_timing_info = nullptr;
+    const auto *present_timings_info =
+diff --git a/wsi/swapchain_image.cpp b/wsi/swapchain_image.cpp
+index dcc90fa..aff1028 100644
+--- a/wsi/swapchain_image.cpp
++++ b/wsi/swapchain_image.cpp
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2025 Arm Limited.
++ * Copyright (c) 2025-2026 Arm Limited.
+  *
+  * SPDX-License-Identifier: MIT
+  *
+@@ -111,6 +111,11 @@ void swapchain_image::destroy()
+       m_present_fence_wait_semaphore = VK_NULL_HANDLE;
+    }
+ 
++   if (m_data)
++   {
++      m_data.reset();
++   }
++
+    if (m_image != VK_NULL_HANDLE)
+    {
+       m_device_data->disp.DestroyImage(m_device_data->device, m_image, m_allocator.get_original_callbacks());
+@@ -126,11 +131,6 @@ void swapchain_image::destroy()
+    {
+       m_image_memory.reset();
+    }
+-
+-   if (m_data)
+-   {
+-      m_data.reset();
+-   }
+ }
+ 
+ VkResult swapchain_image::bind(const VkBindImageMemoryInfo *bind_image_mem_info)
+@@ -157,4 +157,4 @@ VkResult swapchain_image::wait_present(uint64_t timeout_ns)
+ 
+    return VK_SUCCESS;
+ }
+-}
+\ No newline at end of file
++}
+diff --git a/wsi/wsi_factory.cpp b/wsi/wsi_factory.cpp
+index 1ba7197..f281b8a 100644
+--- a/wsi/wsi_factory.cpp
++++ b/wsi/wsi_factory.cpp
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (c) 2019-2025 Arm Limited.
++ * Copyright (c) 2019-2026 Arm Limited.
+  *
+  * SPDX-License-Identifier: MIT
+  *
+@@ -293,18 +293,17 @@ void set_swapchain_maintenance1_state(VkPhysicalDevice physicalDevice,
+ {
+    if (swapchain_maintenance1_features != nullptr)
+    {
+-      if (swapchain_maintenance1_features->swapchainMaintenance1)
++      auto &instance = layer::instance_private_data::get(physicalDevice);
++      if (instance.is_instance_extension_enabled(VK_KHR_DISPLAY_EXTENSION_NAME))
+       {
+-         auto &instance = layer::instance_private_data::get(physicalDevice);
+-         if (instance.is_instance_extension_enabled(VK_KHR_DISPLAY_EXTENSION_NAME))
+-         {
+-            swapchain_maintenance1_features->swapchainMaintenance1 = false;
+-         }
++         /* Display WSI does not support swapchain maintenance1. */
++         swapchain_maintenance1_features->swapchainMaintenance1 = false;
++         return;
+       }
+-      else
++
++      if (!swapchain_maintenance1_features->swapchainMaintenance1)
+       {
+-         swapchain_maintenance1_features->swapchainMaintenance1 =
+-            layer::instance_private_data::get(physicalDevice).get_maintainance1_support();
++         swapchain_maintenance1_features->swapchainMaintenance1 = instance.get_maintainance1_support();
+       }
+    }
+ }
+-- 
+2.43.0
+
