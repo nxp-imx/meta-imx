@@ -1,7 +1,7 @@
-From d2148eab939de3ce8fce810ddff504823097a1d8 Mon Sep 17 00:00:00 2001
+From 2c66e42d6faf745e5f07bed500ac15942306e72f Mon Sep 17 00:00:00 2001
 From: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
 Date: Wed, 29 Jul 2026 21:38:59 -0500
-Subject: [PATCH 5/6] MGS-9060 [#mali] fix swapchainMaintenance1 incorrectly
+Subject: [PATCH 6/7] MGS-9060 [#mali] fix swapchainMaintenance1 incorrectly
  reported as unsupported
 
 When VK_KHR_display is enabled alongside a supported surface extension

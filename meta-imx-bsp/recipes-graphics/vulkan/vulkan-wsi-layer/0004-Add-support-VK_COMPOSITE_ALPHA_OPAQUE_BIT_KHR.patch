@@ -1,7 +1,7 @@
-From 9f39ed1fe801458b59cbd7c84c3e2946ac67269b Mon Sep 17 00:00:00 2001
+From 2d3d777e21d02b95f4a2b986c7bf04ae7013793f Mon Sep 17 00:00:00 2001
 From: Yuan Tian <yuan.tian@nxp.com>
 Date: Sat, 25 Jul 2026 14:16:23 +0800
-Subject: [PATCH 4/6] Add support VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
+Subject: [PATCH 4/7] Add support VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
 
 Mali vulkan driver doesn't support VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR. It
 caused unwanted blending effect in many vulkan cases. Add support of this

@@ -1,7 +1,7 @@
-From cd5954656b2d57fecb457802d8f4469c927bee5c Mon Sep 17 00:00:00 2001
+From 71e1e2de5ee4312639e149d3da0642774ccd837f Mon Sep 17 00:00:00 2001
 From: Jiyu Yang <jiyu.yang@nxp.com>
 Date: Sat, 25 Jul 2026 06:48:45 +0800
-Subject: [PATCH 2/6] wsialloc: initialize local_strides array
+Subject: [PATCH 2/7] wsialloc: initialize local_strides array
 
 Initialize local_strides to zero to silence GCC
 -Wmaybe-uninitialized warnings and avoid -Werror build
