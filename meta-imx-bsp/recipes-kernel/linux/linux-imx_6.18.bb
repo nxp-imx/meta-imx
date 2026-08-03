@@ -21,7 +21,7 @@ SRC_URI = "${LINUX_IMX_SRC}"
 LINUX_IMX_SRC ?= "git://github.com/nxp-imx/linux-imx.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "lf-6.18.y"
 KBRANCH = "${SRCBRANCH}"
-SRCREV = "fb3253e2d1378b636d3f839a021b2e50d78e6186"
+SRCREV = "38604a35f8e9f26ed6fd188918bdd1209a2e424e"
 
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
