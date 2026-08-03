@@ -20,6 +20,10 @@ do_install() {
 
     install -d ${D}${datadir}/eiq/aaf-connector
     install -m 0755 ${S}/install.sh ${D}${datadir}/eiq/aaf-connector/install.sh
+    # optimum-ara wheel version drifts with upstream; normalize the hardcoded
+    # name in install.sh to a glob so uv pip install resolves whatever ships.
+    sed -i 's|optimum_ara-[0-9][0-9.]*-py3-none-any\.whl|optimum_ara-*.whl|' \
+            ${D}${datadir}/eiq/aaf-connector/install.sh
     install -m 0644 ${S}/config/server_config.json ${D}${datadir}/eiq/aaf-connector
 }
 
