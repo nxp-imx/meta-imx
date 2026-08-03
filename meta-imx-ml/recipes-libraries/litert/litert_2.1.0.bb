@@ -181,19 +181,17 @@ do_install() {
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
+# Libraries are unversioned
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
+
+FILES:${PN} += "${libdir}/python*"
+
 RDEPENDS:${PN} = " \
     python3 \
     python3-numpy \
 "
 
-INSANE_SKIP:${PN} += "dev-deps dev-so"
-
 SSTATE_ALLOW_OVERLAP_FILES = "/"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-
-SOLIBS = ".so"
-FILES_SOLIBSDEV = ""
-
-FILES:${PN} += "${libdir}/python* \
-                ${bindir}/label_image_litert ${bindir}/benchmark_model_litert"
