@@ -8,4 +8,4 @@ SRC_URI = "git://gitlab.freedesktop.org/mesa/vulkan-wsi-layer.git;protocol=https
            file://0005-MGS-7487-nxp-fix-Vulkan-test-report-warning-msg.patch \
            file://0006-MGS-9060-mali-fix-swapchainMaintenance1-incorrectly-.patch \
            file://0007-MGS-6283-nxp-fix-segfault-in-opaque-alpha-init-on-OO.patch"
-SRCREV = "feb069171fa301893e99ed15708466fc2c10c0c1"
+SRCREV = "c4993dd16baf288c4b696e56ecf7cd03839a6f8b"

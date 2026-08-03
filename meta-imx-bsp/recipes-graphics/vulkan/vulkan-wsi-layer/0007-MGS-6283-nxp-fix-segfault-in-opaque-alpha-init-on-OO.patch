@@ -1,4 +1,4 @@
-From 43d376e7bbd74c58a7a131cbf10350b94838eae8 Mon Sep 17 00:00:00 2001
+From 2a6a6fd797d7ac707c2c098be82629e2dfc16e7b Mon Sep 17 00:00:00 2001
 From: Ryan Zhang <ryan.zhang@nxp.com>
 Date: Fri, 31 Jul 2026 14:08:58 +0800
 Subject: [PATCH 7/7] MGS-6283 [#nxp] fix segfault in opaque alpha init on OOM

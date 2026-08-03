@@ -1,4 +1,4 @@
-From 6ba4ad3f690b0f05b3fb09834be5a1dcce7ee9e5 Mon Sep 17 00:00:00 2001
+From 869130bf3043bd864ec646be837279d95b3dad0b Mon Sep 17 00:00:00 2001
 From: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
 Date: Mon, 9 Dec 2024 09:15:11 +0800
 Subject: [PATCH 3/7] MGS-6801 [#ccc] vkmark on wayland

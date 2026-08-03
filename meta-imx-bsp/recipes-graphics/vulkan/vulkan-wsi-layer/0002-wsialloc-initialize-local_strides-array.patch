@@ -1,4 +1,4 @@
-From 71e1e2de5ee4312639e149d3da0642774ccd837f Mon Sep 17 00:00:00 2001
+From c07dadb4beb5476dd3452a88904bcbd87133e2d7 Mon Sep 17 00:00:00 2001
 From: Jiyu Yang <jiyu.yang@nxp.com>
 Date: Sat, 25 Jul 2026 06:48:45 +0800
 Subject: [PATCH 2/7] wsialloc: initialize local_strides array
