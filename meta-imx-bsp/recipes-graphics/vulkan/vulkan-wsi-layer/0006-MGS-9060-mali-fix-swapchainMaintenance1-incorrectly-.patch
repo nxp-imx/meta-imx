@@ -1,4 +1,4 @@
-From c9eda35bea5aa001673129d98825a6bfba8f0ff0 Mon Sep 17 00:00:00 2001
+From 0079f524f444725d997a65e965c11d715c02099e Mon Sep 17 00:00:00 2001
 From: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
 Date: Wed, 29 Jul 2026 21:38:59 -0500
 Subject: [PATCH 6/7] MGS-9060 [#mali] fix swapchainMaintenance1 incorrectly
@@ -25,6 +25,7 @@ only surface type enabled, allowing wayland and headless paths to
 correctly report the feature as supported.
 
 Upstream-Status: Pending
+
 Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
 ---
  wsi/wsi_factory.cpp | 7 +++++--

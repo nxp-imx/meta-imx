@@ -1,4 +1,4 @@
-From c337739004a6ae4b8347b4392ee104b1baeb3c1c Mon Sep 17 00:00:00 2001
+From b93b676cf60577d496f026d820215b14f9973030 Mon Sep 17 00:00:00 2001
 From: Joshua Wienecke <joshua.wienecke_1@nxp.com>
 Date: Mon, 3 Aug 2026 11:24:22 -0500
 Subject: [PATCH 1/7] MGS-9070 add arm r56p0 wsi layer changes
@@ -7,6 +7,7 @@ https://developer.arm.com/downloads/-/Vulkan%20WSI%20Layer
 VX501X08X-SW-99009-r56p0-18eac0
 
 Upstream-Status: Pending
+
 Signed-off-by: Joshua Wienecke <joshua.wienecke_1@nxp.com>
 ---
  CMakeLists.txt                          | 30 +++++++++++++------------

@@ -1,4 +1,4 @@
-From a99486402ec87070bcc5b7062e3a816004f62bf9 Mon Sep 17 00:00:00 2001
+From dd35a08cb11eccf49e6cca8fd0a1d8d4af3cf4bb Mon Sep 17 00:00:00 2001
 From: Yuan Tian <yuan.tian@nxp.com>
 Date: Thu, 23 Nov 2023 01:55:05 +0800
 Subject: [PATCH 5/7] MGS-7487 [#nxp] fix Vulkan test report warning msg
@@ -10,6 +10,7 @@ wl_compositor@18 still attached
 wl_registry@16 still attached
 
 Upstream-Status: Pending
+
 Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
 ---
  wsi/wayland/swapchain.cpp | 14 +++++++-------

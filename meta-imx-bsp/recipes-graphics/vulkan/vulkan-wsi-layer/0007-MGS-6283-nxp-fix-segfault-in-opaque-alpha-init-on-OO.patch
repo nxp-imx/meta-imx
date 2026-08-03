@@ -1,4 +1,4 @@
-From 2a6a6fd797d7ac707c2c098be82629e2dfc16e7b Mon Sep 17 00:00:00 2001
+From 14b398d9ff968f0638e540bdf903fc524db108f4 Mon Sep 17 00:00:00 2001
 From: Ryan Zhang <ryan.zhang@nxp.com>
 Date: Fri, 31 Jul 2026 14:08:58 +0800
 Subject: [PATCH 7/7] MGS-6283 [#nxp] fix segfault in opaque alpha init on OOM
@@ -18,6 +18,7 @@ without opaque region support.
 Fixes: dEQP-VK.wsi.wayland.swapchain.simulate_oom.*
 
 Upstream-Status: Inappropriate [embedded specific]
+
 Signed-off-by: Prabhu Sundararaj <prabhu.sundararaj@nxp.com>
 ---
  wsi/wayland/swapchain.cpp | 31 +++++++++++++++++++++----------

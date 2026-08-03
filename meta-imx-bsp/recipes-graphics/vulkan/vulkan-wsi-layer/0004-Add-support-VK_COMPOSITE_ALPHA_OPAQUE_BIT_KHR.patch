@@ -1,4 +1,4 @@
-From acae8c6ddfbbe9d7f9dfbfdba9945a296bd36937 Mon Sep 17 00:00:00 2001
+From 9ae01fc4d5f2b015568007728dc1bae30ec7880e Mon Sep 17 00:00:00 2001
 From: Yuan Tian <yuan.tian@nxp.com>
 Date: Sat, 25 Jul 2026 14:16:23 +0800
 Subject: [PATCH 4/7] Add support VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR
@@ -10,6 +10,7 @@ feature to solve the problem.
 JIRA#MGS-6823/MGS-6828
 
 Upstream-Status: Pending
+
 Signed-off-by: Yuan Tian <yuan.tian@nxp.com>
 Signed-off-by: Jiyu Yang <jiyu.yang@nxp.com>
 ---
