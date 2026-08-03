@@ -19,10 +19,15 @@ SRCREV_FORMAT = "litert_${SRCREV_FORMAT_DEPS}"
 
 inherit python3native cmake
 
-PACKAGECONFIG ??= "${PACKAGECONFIG_GPU}"
+PACKAGECONFIG ??= "${PACKAGECONFIG_GPU} ${PACKAGECONFIG_NEUTRON}"
 PACKAGECONFIG_GPU              = ""
 PACKAGECONFIG_GPU:mx95-nxp-bsp = "gpu"
+PACKAGECONFIG_NEUTRON               = ""
+PACKAGECONFIG_NEUTRON:mx943-nxp-bsp = "neutron"
+PACKAGECONFIG_NEUTRON:mx95-nxp-bsp  = "neutron"
+
 PACKAGECONFIG[gpu] = "-DLITERT_ENABLE_GPU=on,-DLITERT_ENABLE_GPU=off, opencl-headers virtual/libopencl1,"
+PACKAGECONFIG[neutron] = "-DLITERT_ENABLE_NXP_NEUTRON=ON,-DLITERT_ENABLE_NXP_NEUTRON=OFF,neutron"
 
 OECMAKE_SOURCEPATH = "${S}/litert"
 TFLITE_BUILD_DIR ?= "${B}/tflite_build"
@@ -156,20 +161,39 @@ do_install() {
     sed -i "s#${WORKDIR}#/workdir#g" \
         ${D}/${PYTHON_SITEPACKAGES_DIR}/ai_edge_litert-${PV}+arm64.dist-info/direct_url.json
 
+    install -d ${D}${libdir}
+    install -m 755 "${B}/c/libLiteRt.so" "${D}${libdir}/libLiteRt.so"
+
+    # Neutron dispatch plugin and inference tools (present only when neutron
+    # is configured)
+    if [ "${@bb.utils.filter('PACKAGECONFIG', 'neutron', d)}" ]; then
+        install -m 755 "${B}/vendors/nxp_neutron/dispatch/libLiteRtDispatch_NxpNeutron.so" \
+            "${D}${libdir}/"
+
+        install -d ${D}${bindir}
+        for tool in label_image_litert benchmark_model_litert; do
+            install -m 755 "${B}/tools/${tool}" "${D}${bindir}/"
+        done
+    fi
+
     chown -R root:root ${D}
 }
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 
-RDEPENDS:${PN}   = " \
+RDEPENDS:${PN} = " \
     python3 \
     python3-numpy \
 "
 
-INSANE_SKIP:${PN} += "dev-deps"
+INSANE_SKIP:${PN} += "dev-deps dev-so"
 
 SSTATE_ALLOW_OVERLAP_FILES = "/"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-FILES:${PN} += "${libdir}/python*"
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
+
+FILES:${PN} += "${libdir}/python* \
+                ${bindir}/label_image_litert ${bindir}/benchmark_model_litert"
