@@ -6,11 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=175792518e4ac015ab6696d16c4f607e"
 
 DEPENDS += "python3-hatchling-native"
 
-SRC_URI ?= " \
-    git://github.com/NXP/Optimum-Ara.git;protocol=https;branch=${SRCBRANCH} \
-"
+SRC_URI = "${OPTIMUM_ARA_SRC};branch=${SRCBRANCH}"
+OPTIMUM_ARA_SRC ?= "git://github.com/NXP/Optimum-Ara.git;protocol=https"
 SRCBRANCH = "main"
+
 SRCREV = "4219ec0e1430c53d79d7c992daf859853b9acdf5"
+
 # PV (1.0.1) tracks the upstream Optimum-Ara release line; SRCREV pins the
 # matching commit on main. Bump both when moving to a new upstream release.
 
