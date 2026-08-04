@@ -11,7 +11,6 @@ PV = "2023.03+git${SRCPV}"
 # Rebuild against the current kernel; resolve kernel-module version-hash conflict
 do_compile[depends] += "virtual/kernel:do_shared_workdir"
 
-PACKAGES += "${PN}-bash-completion"
 FILES:${PN}-bash-completion = "${datadir}/bash-completion/completions/jailhouse"
 
 ERROR_QA:remove = "buildpaths"
