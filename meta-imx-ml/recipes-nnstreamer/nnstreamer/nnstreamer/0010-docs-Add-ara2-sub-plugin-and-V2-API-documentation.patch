@@ -1,0 +1,386 @@
+From b4e4bb03cab6fdc414f90dbf5b3568ca4fb356fa Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Thu, 30 Jul 2026 17:49:23 +0200
+Subject: [docs] Add ara2 sub-plugin and V2 API documentation
+
+Add comprehensive documentation for ara2 NPU sub-plugin and V2
+framework API.
+
+Added files:
+- Documentation/tensor_filter_ara2.md: Complete user guide for ara2
+  sub-plugin including setup, properties, pipeline examples, and
+  known limitations with ZeroCopy property.
+
+- Documentation/tensor_filter_v2_api.md: Developer guide for V2
+  framework API covering DMA-BUF zero-copy, quant meta propagation,
+  and implementation guidelines.
+
+Updated:
+- ext/nnstreamer/tensor_filter/README.md: Add ara2 to sub-plugin
+  overview and pointer to the new guide.
+
+Upstream-Status: Inappropriate [embedded specific]
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ Documentation/tensor_filter_ara2.md    | 141 ++++++++++++++++++++++++
+ Documentation/tensor_filter_v2_api.md  | 146 +++++++++++++++++++++++++
+ ext/nnstreamer/tensor_filter/README.md |  34 +++++-
+ 3 files changed, 319 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/tensor_filter_ara2.md
+ create mode 100644 Documentation/tensor_filter_v2_api.md
+
+diff --git a/Documentation/tensor_filter_ara2.md b/Documentation/tensor_filter_ara2.md
+new file mode 100644
+index 00000000..371e93bd
+--- /dev/null
++++ b/Documentation/tensor_filter_ara2.md
+@@ -0,0 +1,141 @@
++---
++title: tensor_filter ara2 – Ara-2 NPU sub-plugin
++...
++
++# tensor\_filter ara2
++
++## Overview
++
++The `ara2` sub-plugin connects NNStreamer's `tensor_filter` element to the
++Ara-2 NPU. It uses the tensor\_filter V2 invoke API, which enables
++DMA-BUF zero-copy: when the upstream element delivers a DMA-BUF buffer, the
++data is transferred to the NPU without any CPU memory copy.
++
++Communication with the NPU goes through a proxy daemon (`dvproxy`) over a
++Unix socket. The client library (`libaraclient_aarch64.so`) is loaded at
++runtime via `dlopen`, so the plugin degrades gracefully when the runtime is
++not installed.
++
++## Prerequisites
++
++- Ara-2 NPU hardware connected to the host
++- `dvproxy` daemon running
++- `libaraclient_aarch64.so` in the dynamic linker path
++- `/dev/dma_heap/linux,cma` device available (for DMA-BUF allocation)
++- Model file in `.dvm` format compiled for the Ara-2
++
++## Build
++
++Enable the sub-plugin at configuration time:
++
++```
++meson setup build -Dara2-support=enabled
++ninja -C build
++sudo ninja -C build install
++```
++
++Detection is automatic: if the `dvapi.h` header is not found, the sub-plugin
++is silently skipped.
++
++## Pipeline usage
++
++**Basic:**
++```
++tensor_filter framework=ara2 model=model.dvm
++```
++
++**With custom properties:**
++```
++tensor_filter framework=ara2 model=model.dvm \
++    custom=SocketPath:/var/run/proxy.sock,Timeout:3000,EnableStats:true
++```
++
++## Custom properties
++
++Properties are passed as comma-separated `Key:Value` pairs to the `custom`
++property of `tensor_filter`.
++
++| Property | Default | Description |
++|----------|---------|-------------|
++| `SocketPath` | `/var/run/proxy.sock` | Unix socket path to the dvproxy daemon |
++| `Timeout` | `5000` | Inference timeout in milliseconds |
++| `EnableStats` | `false` | Enable periodic inference statistics logging |
++| `ZeroCopy` | `false` | Enable DMA-BUF zero-copy mode (see note below) |
++
++## Input/output format
++
++The sub-plugin queries the loaded model for its native tensor format
++(dimensions, data type) and reports it directly to NNStreamer. Upstream
++elements must deliver data in that exact format.
++
++For int8 models the upstream video converter must perform the actual
++value-range conversion (e.g. uint8 [0,255] → int8 [-128,127]). Use
++`tensor_converter input-type=int8` to confirm that the conversion has
++happened.
++
++## Zero-copy pipeline
++
++**Note:** DMA-BUF zero-copy is currently **disabled by default** due to known
++issues with output buffer reuse causing frozen bounding boxes in detection
++pipelines. Enable it explicitly with `ZeroCopy:true` only for testing or if
++your use case is not affected.
++
++When enabled and the upstream element supports buffer pool negotiation and
++delivers DMA-BUF memory, the ara2 sub-plugin bypasses all CPU copies:
++
++```
++v4l2src
++  ! video/x-raw,format=NV12
++  ! videoscale
++  ! video/x-raw,format=RGB,width=640,height=640
++  ! tensor_converter
++  ! tensor_filter framework=ara2 model=model.dvm custom=ZeroCopy:true
++  ! tensor_sink
++```
++
++Zero-copy is active when you see this log line (GST_DEBUG=tensor_filter:5):
++```
++Ara-2: DMA-BUF zero-copy enabled (input + output)
++ara2_invoke_v2 first frame: input_dmabuf=yes output_dmabuf=yes
++```
++
++If disabled (default), you will see:
++```
++Ara-2: Zero-copy disabled by ZeroCopy property. Using CPU memory mode.
++```
++
++For planar formats (RGBP/BGRP) the width must be a multiple of 4.
++
++## Quantization metadata
++
++The sub-plugin attaches `GstNnsTensorQuantMeta` to each output buffer
++when the model reports per-tensor quantization parameters (scale and
++zero-point). Downstream decoders can read this metadata to dequantize
++output tensors without hardcoded parameters.
++
++## Fallback behaviour
++
++If DMA-BUF is not available (e.g. videotestsrc pipeline) the sub-plugin
++falls back to system memory automatically. The log will show:
++```
++ara2_invoke_v2 first frame: input_dmabuf=no output_dmabuf=yes
++```
++
++## Debugging
++
++```bash
++# Verbose ara2 and converter logging
++GST_DEBUG=ara2:5,tensor_converter:5,tensor_filter:4 gst-launch-1.0 ...
++
++# Check DMA heap availability
++ls -l /dev/dma_heap/
++
++# Check dvproxy is running
++pgrep dvproxy
++```
++
++## Known limitations
++
++- Multi-tensor input DMA-BUF is not supported.
++- Flexible tensor format (`num_tensors == 0`) is not supported.
++- Padding removal for RGBP/BGRP is not supported in the DMA-BUF path.
+diff --git a/Documentation/tensor_filter_v2_api.md b/Documentation/tensor_filter_v2_api.md
+new file mode 100644
+index 00000000..60224bbf
+--- /dev/null
++++ b/Documentation/tensor_filter_v2_api.md
+@@ -0,0 +1,146 @@
++---
++title: tensor_filter V2 invoke API – DMA-BUF zero-copy
++...
++
++# tensor\_filter V2 invoke API
++
++## Overview
++
++The V2 API (`GST_TENSOR_FILTER_FRAMEWORK_V2`) extends the existing V0/V1
++interfaces with DMA-BUF zero-copy support. Instead of receiving pre-mapped
++buffer pointers, a V2 sub-plugin receives opaque `GstMemory*` pointers and
++can inspect their type before deciding whether to map them in CPU or pass
++the underlying file descriptor directly to the hardware.
++
++V0 and V1 sub-plugins are unaffected; the dispatch layer detects the API
++version and routes accordingly.
++
++## When to use V2
++
++Use V2 when:
++- Your hardware can accept a DMA-BUF file descriptor directly (no CPU copy).
++- You want to advertise a hardware buffer pool to upstream elements so they
++  write into your device memory from the start.
++
++For all other cases, V1 is sufficient and simpler.
++
++## API version constant
++
++```c
++#define GST_TENSOR_FILTER_FRAMEWORK_V2  (GST_TENSOR_FILTER_FRAMEWORK_BASE | 0x20000ULL)
++```
++
++Set `GstTensorFilterFramework.version = GST_TENSOR_FILTER_FRAMEWORK_V2`.
++
++## New callbacks
++
++All new callbacks are placed in the `v2` sub-struct of
++`GstTensorFilterFramework`.
++
++### invoke_v2
++
++```c
++int (*invoke_v2) (const GstTensorFilterFramework *self,
++                  GstTensorFilterProperties *prop,
++                  void *private_data,
++                  void **input,   /* array of GstMemory* */
++                  void **output,  /* array of GstMemory* */
++                  guint num_input,
++                  guint num_output);
++```
++
++`input` and `output` are arrays of `GstMemory*` cast to `void*`. The
++sub-plugin must **not** call `gst_memory_map()` unless it needs CPU access.
++To detect DMA-BUF memory use `gst_is_dmabuf_memory(mem)` and retrieve the
++file descriptor with `gst_dmabuf_memory_get_fd(mem)`.
++
++The sub-plugin owns `output` memory: it must allocate output `GstMemory`
++objects (e.g. from its own DMA-BUF pool) and store them in `output[]`.
++The framework wraps them into the output `GstBuffer`.
++
++### propose_allocation
++
++```c
++int (*propose_allocation) (const GstTensorFilterFramework *self,
++                           GstTensorFilterProperties *prop,
++                           void *private_data,
++                           GstQuery *query);
++```
++
++Called when the upstream element sends a `GST_QUERY_ALLOCATION` downstream.
++The sub-plugin should add its DMA-BUF pool and/or allocator to `query` so
++that upstream allocates from the hardware buffer pool.
++
++`tensor_converter` forwards this query transparently from its sink to its
++source pad, so the pool proposal reaches the video converter upstream.
++
++### get_model_metadata (optional)
++
++```c
++const char *(*get_model_metadata) (const GstTensorFilterFramework *self,
++                                   GstTensorFilterProperties *prop,
++                                   void *private_data);
++```
++
++Return a JSON string describing model metadata (labels, task type, etc.).
++Return `NULL` if not supported.
++
++## Minimal V2 sub-plugin skeleton (C)
++
++```c
++static int
++my_invoke_v2 (const GstTensorFilterFramework *self,
++              GstTensorFilterProperties *prop, void *priv,
++              void **input, void **output,
++              guint num_in, guint num_out)
++{
++  GstMemory *in_mem = (GstMemory *) input[0];
++
++  if (gst_is_dmabuf_memory (in_mem)) {
++    int fd = gst_dmabuf_memory_get_fd (in_mem);
++    /* pass fd directly to hardware */
++  } else {
++    GstMapInfo map;
++    gst_memory_map (in_mem, &map, GST_MAP_READ);
++    /* copy map.data to hardware */
++    gst_memory_unmap (in_mem, &map);
++  }
++
++  /* allocate output and store in output[0] */
++  output[0] = (void *) gst_allocator_alloc (my_allocator, out_size, NULL);
++  /* run inference ... */
++  return 0;
++}
++
++static int
++my_propose_allocation (const GstTensorFilterFramework *self,
++                       GstTensorFilterProperties *prop, void *priv,
++                       GstQuery *query)
++{
++  gst_query_add_allocation_pool (query, my_pool, buf_size, min, max);
++  return 0;
++}
++
++static GstTensorFilterFramework my_fw = {
++  .version = GST_TENSOR_FILTER_FRAMEWORK_V2,
++  .name = "my_hw",
++  /* ... other fields ... */
++  .v2.invoke_v2 = my_invoke_v2,
++  .v2.propose_allocation = my_propose_allocation,
++};
++```
++
++## Reference implementation
++
++See `ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc` for a complete V2
++C++ sub-plugin using DMA-BUF heap allocation, a three-tier invoke (zero-copy
++→ external DMA-BUF → CPU fallback), and a full propose_allocation
++implementation.
++
++## Compatibility
++
++- V0 and V1 sub-plugins continue to work without changes.
++- The framework detects the version from `GstTensorFilterFramework.version`
++  and dispatches accordingly.
++- A V2 sub-plugin is **not** required to handle DMA-BUF; it may also map all
++  memory with `gst_memory_map()` and behave identically to V1.
+diff --git a/ext/nnstreamer/tensor_filter/README.md b/ext/nnstreamer/tensor_filter/README.md
+index 51af1ab9..ab7b7ebd 100644
+--- a/ext/nnstreamer/tensor_filter/README.md
++++ b/ext/nnstreamer/tensor_filter/README.md
+@@ -50,7 +50,33 @@ By default, this subplugin loads ```./libtensorflow2-lite-custom.so```, which is
+ ## Tensorrt
+ ## TRIx-engine
+ ## TVM
+-
++## Ara-2 NPU
++- subplugin name: `ara2`
++- source: `tensor_filter_ara2.cc`
++- build option: `-Dara2-support=enabled`
++
++Sub-plugin for the Ara-2 NPU. Communicates with the NPU through a
++proxy daemon (dvproxy) over a Unix socket. Uses the V2 invoke API for
++DMA-BUF zero-copy support: when the upstream element delivers a DMA-BUF
++buffer, the data reaches the NPU without any CPU memory copy.
++
++**Custom properties** (passed via `custom=Key:Value,...`):
++- `SocketPath` – Unix socket path to dvproxy (default: `/var/run/proxy.sock`)
++- `Timeout` – Inference timeout in milliseconds (default: `5000`)
++- `EnableStats` – Enable periodic statistics logging (`true`/`false`, default: `false`)
++- `ZeroCopy` – Enable DMA-BUF zero-copy mode (`true`/`false`, default: `false`, see docs for limitations)
++
++**Basic usage:**
++```
++tensor_filter framework=ara2 model=model.dvm
++```
++
++**With custom properties:**
++```
++tensor_filter framework=ara2 model=model.dvm custom=SocketPath:/var/run/proxy.sock,Timeout:3000
++```
++
++See `Documentation/tensor_filter_ara2.md` for the full guide.
+ 
+ # How to write a new subplugin
+ 
+@@ -68,8 +94,12 @@ If your subplugin has custom properties to be supplied by users, describe their
+ Then, call ```nnstreamer_filter_exit ()``` function with ```((destructor))``` terminator (```fini_filter_nnfw (void)``` function in the reference).
+ 
+ 
+-In ```GstTensorFilterFramework```, there are two different ways, ```v0 (version == GST_TENSOR_FILTER_FRAMEWORK_V0)``` and ```v1 (version == GST_TENSOR_FILTER_FRAMEWORK_V1)```. In the struct, there is a ```union``` of ```v0``` and ```v1```, and it is recommended to use ```v1``` and ```set version = GST_TENSOR_FILTER_FRAMEWORK_V1``` (v1). ```v0``` is supposed to be used by old subplugins for backward compatibility and any new subplugins should use ```v1```, which is simpler and richers in features.
++In ```GstTensorFilterFramework```, there are three API versions:
++- ```v0 (GST_TENSOR_FILTER_FRAMEWORK_V0)``` – legacy, kept for backward compatibility.
++- ```v1 (GST_TENSOR_FILTER_FRAMEWORK_V1)``` – recommended for most sub-plugins.
++- ```v2 (GST_TENSOR_FILTER_FRAMEWORK_V2)``` – for sub-plugins that need DMA-BUF zero-copy. V2 receives opaque ```GstMemory*``` pointers instead of pre-mapped buffers, allowing the sub-plugin to detect and handle DMA-BUF memory without a CPU mapping. See ```Documentation/tensor_filter_v2_api.md``` for the V2 guide.
+ 
++New sub-plugins should use ```v1``` unless DMA-BUF zero-copy is required, in which case use ```v2```.
+ 
+ However, note that if you are going to use framework/library with C++ APIs, please do not use ```nnstreamer_plugin_api_filter.h```, but use the base tensor-filter-subplugin C++ class as in the next section.
+ 
+-- 
+2.34.1
+

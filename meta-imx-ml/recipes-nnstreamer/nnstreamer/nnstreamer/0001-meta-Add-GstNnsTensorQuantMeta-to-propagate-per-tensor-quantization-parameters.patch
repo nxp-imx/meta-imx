@@ -1,0 +1,432 @@
+From fd57f8c8cd7699d831654a590b25336f83c58a5b Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Thu, 25 Jun 2026 15:28:32 +0200
+Subject: [meta] Add GstNnsTensorQuantMeta to propagate per-tensor quantization parameters
+
+Upstream-Status: Pending
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ gst/nnstreamer/include/meson.build            |   3 +-
+ .../include/nnstreamer_tensor_quant_meta.h    | 119 ++++++++++++++
+ gst/nnstreamer/meson.build                    |   7 +-
+ gst/nnstreamer/nnstreamer_tensor_quant_info.c |  81 ++++++++++
+ gst/nnstreamer/nnstreamer_tensor_quant_meta.c | 147 ++++++++++++++++++
+ 5 files changed, 354 insertions(+), 3 deletions(-)
+ create mode 100644 gst/nnstreamer/include/nnstreamer_tensor_quant_meta.h
+ create mode 100644 gst/nnstreamer/nnstreamer_tensor_quant_info.c
+ create mode 100644 gst/nnstreamer/nnstreamer_tensor_quant_meta.c
+
+diff --git a/gst/nnstreamer/include/meson.build b/gst/nnstreamer/include/meson.build
+index 0b4fa17f..635c592c 100644
+--- a/gst/nnstreamer/include/meson.build
++++ b/gst/nnstreamer/include/meson.build
+@@ -12,7 +12,8 @@ nnstreamer_headers += files(
+   'nnstreamer_plugin_api_converter.h',
+   'nnstreamer_plugin_api_util.h',
+   'nnstreamer_plugin_api.h',
+-  'nnstreamer_util.h'
++  'nnstreamer_util.h',
++  'nnstreamer_tensor_quant_meta.h'
+ )
+ 
+ if get_option('enable-filter-cpp-class')
+diff --git a/gst/nnstreamer/include/nnstreamer_tensor_quant_meta.h b/gst/nnstreamer/include/nnstreamer_tensor_quant_meta.h
+new file mode 100644
+index 00000000..1aac69c2
+--- /dev/null
++++ b/gst/nnstreamer/include/nnstreamer_tensor_quant_meta.h
+@@ -0,0 +1,119 @@
++/* SPDX-License-Identifier: LGPL-2.1-only */
++/**
++ * NNStreamer Tensor Quantization Metadata
++ * Copyright (C) 2026 Au-Zone Technologies <www.au-zone.com>
++ */
++/**
++ * @file   nnstreamer_tensor_quant_meta.h
++ * @date   18 Feb 2026
++ * @brief  GstMeta carrying per-output-tensor quantization parameters
++ * @author Sébastien Taylor <sebastien@au-zone.com>
++ *
++ * This GstMeta type is attached to output buffers by tensor_filter to
++ * propagate quantization parameters (scale, zero_point, scheme) downstream.
++ * Consumers can read it to dequantize without hardcoding quant params.
++ *
++ * The NnsTensorQuantInfo struct and helper functions can be used without
++ * GStreamer (only GLib + tensor_typedef.h). The GstMeta parts require
++ * <gst/gst.h> and are guarded accordingly.
++ */
++#ifndef __NNS_TENSOR_QUANT_META_H__
++#define __NNS_TENSOR_QUANT_META_H__
++
++#include <glib.h>
++#include <nnstreamer_plugin_api_util.h>
++
++G_BEGIN_DECLS
++
++/**
++ * @brief Quantization scheme - tells the consumer HOW to dequantize.
++ *
++ * Affine (asymmetric): real_value = scale * (quantized_value - zero_point)
++ * Symmetric:           real_value = scale * quantized_value  (zero_point always 0)
++ */
++typedef enum {
++  NNS_QUANT_NONE = 0,
++  NNS_QUANT_AFFINE_PER_TENSOR,      /**< real = scale * (q - zero_point) */
++  NNS_QUANT_SYMMETRIC_PER_TENSOR,   /**< real = scale * q; zero_point = 0 */
++  NNS_QUANT_AFFINE_PER_CHANNEL,     /**< per-axis asymmetric */
++  NNS_QUANT_SYMMETRIC_PER_CHANNEL,  /**< per-axis symmetric */
++} NnsTensorQuantScheme;
++
++/**
++ * @brief Per-tensor quantization info.
++ * For per-tensor: num_params=1, axis=-1
++ * For per-channel: num_params=N, axis=quantized dimension index
++ */
++typedef struct _NnsTensorQuantInfo {
++  NnsTensorQuantScheme scheme;  /**< quantization scheme */
++  tensor_type dtype;            /**< quantized data type (uint8, int8, ...) */
++  guint num_params;             /**< 1 for per-tensor, N for per-channel */
++  gint axis;                    /**< -1 for per-tensor, dim index for per-channel */
++  gdouble *scales;              /**< array[num_params], g_malloc'd */
++  gint64 *zero_points;          /**< array[num_params], g_malloc'd */
++} NnsTensorQuantInfo;
++
++/**
++ * @brief Set per-tensor affine (asymmetric) quantization.
++ */
++void nns_tensor_quant_info_set_affine (NnsTensorQuantInfo *info,
++    tensor_type dtype, gdouble scale, gint64 zero_point);
++
++/**
++ * @brief Set per-tensor symmetric quantization (zero_point forced to 0).
++ */
++void nns_tensor_quant_info_set_symmetric (NnsTensorQuantInfo *info,
++    tensor_type dtype, gdouble scale);
++
++/**
++ * @brief Set per-channel quantization (deep copies the arrays).
++ */
++void nns_tensor_quant_info_set_per_channel (NnsTensorQuantInfo *info,
++    NnsTensorQuantScheme scheme, tensor_type dtype,
++    guint num_params, gint axis,
++    const gdouble *scales, const gint64 *zero_points);
++
++/**
++ * @brief Clear (free arrays in) a NnsTensorQuantInfo.
++ */
++void nns_tensor_quant_info_clear (NnsTensorQuantInfo *info);
++
++/*
++ * GstMeta integration - requires GStreamer headers.
++ * Only available when <gst/gst.h> has been included before this header.
++ */
++#ifdef __GST_H__
++
++/**
++ * @brief GstMeta carrying per-output-tensor quantization parameters.
++ * Attached to every output buffer by tensor_filter when available.
++ */
++typedef struct {
++  GstMeta meta;
++  guint num_tensors;
++  NnsTensorQuantInfo quant[NNS_TENSOR_SIZE_LIMIT];
++} GstNnsTensorQuantMeta;
++
++GType gst_nns_tensor_quant_meta_api_get_type (void);
++const GstMetaInfo *gst_nns_tensor_quant_meta_get_info (void);
++
++#define GST_NNS_TENSOR_QUANT_META_API_TYPE \
++    (gst_nns_tensor_quant_meta_api_get_type ())
++#define GST_NNS_TENSOR_QUANT_META_INFO \
++    (gst_nns_tensor_quant_meta_get_info ())
++
++/**
++ * @brief Get quant meta from buffer, or NULL if not present.
++ */
++GstNnsTensorQuantMeta *gst_buffer_get_nns_tensor_quant_meta (GstBuffer *buffer);
++
++/**
++ * @brief Add quant meta to buffer and return it for population.
++ */
++GstNnsTensorQuantMeta *gst_buffer_add_nns_tensor_quant_meta (GstBuffer *buffer);
++
++#endif /* __GST_H__ */
++
++G_END_DECLS
++
++#endif /* __NNS_TENSOR_QUANT_META_H__ */
+diff --git a/gst/nnstreamer/meson.build b/gst/nnstreamer/meson.build
+index c5fa981a..a03e55f4 100644
+--- a/gst/nnstreamer/meson.build
++++ b/gst/nnstreamer/meson.build
+@@ -23,6 +23,7 @@ nnstreamer_deps = [
+   gst_controller_dep,
+   gst_video_dep,
+   gst_audio_dep,
++  gst_allocators_dep,
+   thread_dep,
+   gio_dep
+ ]
+@@ -44,7 +45,8 @@ nnstreamer_single_sources = [
+   'nnstreamer_conf.c',
+   'nnstreamer_log.c',
+   'nnstreamer_subplugin.c',
+-  'nnstreamer_plugin_api_util_impl.c'
++  'nnstreamer_plugin_api_util_impl.c',
++  'nnstreamer_tensor_quant_info.c'
+ ]
+ 
+ if ml_agent_support_is_available
+@@ -58,7 +60,8 @@ nnstreamer_sources = [
+   'nnstreamer_plugin_api_impl.c',
+   'tensor_allocator.c',
+   'tensor_data.c',
+-  'tensor_meta.c'
++  'tensor_meta.c',
++  'nnstreamer_tensor_quant_meta.c'
+ ]
+ 
+ # Add plugins
+diff --git a/gst/nnstreamer/nnstreamer_tensor_quant_info.c b/gst/nnstreamer/nnstreamer_tensor_quant_info.c
+new file mode 100644
+index 00000000..557e7f52
+--- /dev/null
++++ b/gst/nnstreamer/nnstreamer_tensor_quant_info.c
+@@ -0,0 +1,81 @@
++/* SPDX-License-Identifier: LGPL-2.1-only */
++/**
++ * NNStreamer Tensor Quantization Info Helpers
++ * Copyright (C) 2026 Au-Zone Technologies <www.au-zone.com>
++ */
++/**
++ * @file   nnstreamer_tensor_quant_info.c
++ * @date   18 Feb 2026
++ * @brief  NnsTensorQuantInfo helper functions (no GStreamer dependency)
++ * @author Sébastien Taylor <sebastien@au-zone.com>
++ */
++
++#include <string.h>
++#include "include/nnstreamer_tensor_quant_meta.h"
++#include "include/nnstreamer_util.h"
++
++/**
++ * @brief Set per-tensor affine (asymmetric) quantization.
++ */
++void
++nns_tensor_quant_info_set_affine (NnsTensorQuantInfo * info,
++    tensor_type dtype, gdouble scale, gint64 zero_point)
++{
++  nns_tensor_quant_info_clear (info);
++  info->scheme = NNS_QUANT_AFFINE_PER_TENSOR;
++  info->dtype = dtype;
++  info->num_params = 1;
++  info->axis = -1;
++  info->scales = (gdouble *) g_malloc (sizeof (gdouble));
++  info->zero_points = (gint64 *) g_malloc (sizeof (gint64));
++  info->scales[0] = scale;
++  info->zero_points[0] = zero_point;
++}
++
++/**
++ * @brief Set per-tensor symmetric quantization (zero_point forced to 0).
++ */
++void
++nns_tensor_quant_info_set_symmetric (NnsTensorQuantInfo * info,
++    tensor_type dtype, gdouble scale)
++{
++  nns_tensor_quant_info_clear (info);
++  info->scheme = NNS_QUANT_SYMMETRIC_PER_TENSOR;
++  info->dtype = dtype;
++  info->num_params = 1;
++  info->axis = -1;
++  info->scales = (gdouble *) g_malloc (sizeof (gdouble));
++  info->zero_points = (gint64 *) g_malloc (sizeof (gint64));
++  info->scales[0] = scale;
++  info->zero_points[0] = 0;
++}
++
++/**
++ * @brief Set per-channel quantization (deep copies the arrays).
++ */
++void
++nns_tensor_quant_info_set_per_channel (NnsTensorQuantInfo * info,
++    NnsTensorQuantScheme scheme, tensor_type dtype,
++    guint num_params, gint axis,
++    const gdouble * scales, const gint64 * zero_points)
++{
++  nns_tensor_quant_info_clear (info);
++  info->scheme = scheme;
++  info->dtype = dtype;
++  info->num_params = num_params;
++  info->axis = axis;
++  info->scales = (gdouble *) _g_memdup (scales, sizeof (gdouble) * num_params);
++  info->zero_points = (gint64 *) _g_memdup (zero_points,
++      sizeof (gint64) * num_params);
++}
++
++/**
++ * @brief Clear (free arrays in) a NnsTensorQuantInfo.
++ */
++void
++nns_tensor_quant_info_clear (NnsTensorQuantInfo * info)
++{
++  g_free (info->scales);
++  g_free (info->zero_points);
++  memset (info, 0, sizeof (*info));
++}
+diff --git a/gst/nnstreamer/nnstreamer_tensor_quant_meta.c b/gst/nnstreamer/nnstreamer_tensor_quant_meta.c
+new file mode 100644
+index 00000000..f4b9f2f0
+--- /dev/null
++++ b/gst/nnstreamer/nnstreamer_tensor_quant_meta.c
+@@ -0,0 +1,147 @@
++/* SPDX-License-Identifier: LGPL-2.1-only */
++/**
++ * NNStreamer Tensor Quantization Metadata
++ * Copyright (C) 2026 Au-Zone Technologies <www.au-zone.com>
++ */
++/**
++ * @file   nnstreamer_tensor_quant_meta.c
++ * @date   18 Feb 2026
++ * @brief  GstMeta implementation for tensor quantization parameters
++ * @author Sébastien Taylor <sebastien@au-zone.com>
++ */
++
++#include <string.h>
++#include <gst/gst.h>
++#include "include/nnstreamer_tensor_quant_meta.h"
++
++/**
++ * @brief GstMeta init callback - zero-initialize the meta.
++ */
++static gboolean
++_quant_meta_init (GstMeta * meta, gpointer params, GstBuffer * buffer)
++{
++  GstNnsTensorQuantMeta *qmeta = (GstNnsTensorQuantMeta *) meta;
++  (void) params;
++  (void) buffer;
++
++  qmeta->num_tensors = 0;
++  memset (qmeta->quant, 0, sizeof (qmeta->quant));
++
++  return TRUE;
++}
++
++/**
++ * @brief GstMeta free callback - release heap-allocated arrays.
++ */
++static void
++_quant_meta_free (GstMeta * meta, GstBuffer * buffer)
++{
++  GstNnsTensorQuantMeta *qmeta = (GstNnsTensorQuantMeta *) meta;
++  guint i;
++  (void) buffer;
++
++  for (i = 0; i < qmeta->num_tensors; i++)
++    nns_tensor_quant_info_clear (&qmeta->quant[i]);
++}
++
++/**
++ * @brief GstMeta transform callback - deep copy on buffer copy.
++ */
++static gboolean
++_quant_meta_transform (GstBuffer * dest, GstMeta * meta,
++    GstBuffer * buffer, GQuark type, gpointer data)
++{
++  GstNnsTensorQuantMeta *src_qmeta = (GstNnsTensorQuantMeta *) meta;
++  GstNnsTensorQuantMeta *dst_qmeta;
++  guint i;
++  (void) buffer;
++  (void) data;
++
++  if (!GST_META_TRANSFORM_IS_COPY (type))
++    return FALSE;
++
++  dst_qmeta = gst_buffer_add_nns_tensor_quant_meta (dest);
++  if (!dst_qmeta)
++    return FALSE;
++
++  dst_qmeta->num_tensors = src_qmeta->num_tensors;
++  for (i = 0; i < src_qmeta->num_tensors; i++) {
++    NnsTensorQuantInfo *sq = &src_qmeta->quant[i];
++    NnsTensorQuantInfo *dq = &dst_qmeta->quant[i];
++
++    if (sq->scheme == NNS_QUANT_NONE || sq->num_params == 0) {
++      memset (dq, 0, sizeof (*dq));
++      continue;
++    }
++
++    nns_tensor_quant_info_set_per_channel (dq, sq->scheme, sq->dtype,
++        sq->num_params, sq->axis, sq->scales, sq->zero_points);
++  }
++
++  return TRUE;
++}
++
++/**
++ * @brief Register the GstMeta API type.
++ *
++ * This code may exist in both libnnstreamer.so (non-plugin) and the GStreamer
++ * plugin libnnstreamer.so, each with its own static variable. To avoid a
++ * double-registration GType collision, check g_type_from_name() first.
++ */
++GType
++gst_nns_tensor_quant_meta_api_get_type (void)
++{
++  static GType type = 0;
++  static const gchar *tags[] = { NULL };
++
++  if (g_once_init_enter (&type)) {
++    GType _type = g_type_from_name ("GstNnsTensorQuantMetaAPI");
++    if (_type == 0)
++      _type = gst_meta_api_type_register ("GstNnsTensorQuantMetaAPI", tags);
++    g_once_init_leave (&type, _type);
++  }
++
++  return type;
++}
++
++/**
++ * @brief Register the GstMeta info.
++ */
++const GstMetaInfo *
++gst_nns_tensor_quant_meta_get_info (void)
++{
++  static const GstMetaInfo *meta_info = NULL;
++
++  if (g_once_init_enter (&meta_info)) {
++    const GstMetaInfo *info = gst_meta_register (
++        GST_NNS_TENSOR_QUANT_META_API_TYPE,
++        "GstNnsTensorQuantMeta",
++        sizeof (GstNnsTensorQuantMeta),
++        _quant_meta_init,
++        _quant_meta_free,
++        _quant_meta_transform);
++    g_once_init_leave (&meta_info, info);
++  }
++
++  return meta_info;
++}
++
++/**
++ * @brief Get quant meta from buffer, or NULL if not present.
++ */
++GstNnsTensorQuantMeta *
++gst_buffer_get_nns_tensor_quant_meta (GstBuffer * buffer)
++{
++  return (GstNnsTensorQuantMeta *) gst_buffer_get_meta (buffer,
++      GST_NNS_TENSOR_QUANT_META_API_TYPE);
++}
++
++/**
++ * @brief Add quant meta to buffer and return it for population.
++ */
++GstNnsTensorQuantMeta *
++gst_buffer_add_nns_tensor_quant_meta (GstBuffer * buffer)
++{
++  return (GstNnsTensorQuantMeta *) gst_buffer_add_meta (buffer,
++      GST_NNS_TENSOR_QUANT_META_INFO, NULL);
++}
+-- 
+2.34.1
+

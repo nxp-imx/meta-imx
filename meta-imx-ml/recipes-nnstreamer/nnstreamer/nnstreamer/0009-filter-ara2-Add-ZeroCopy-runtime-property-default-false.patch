@@ -1,0 +1,99 @@
+From 756e424fceb1c294a737c6446485684d98b31059 Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Thu, 30 Jul 2026 17:48:58 +0200
+Subject: [filter/ara2] Add ZeroCopy runtime property (default: false)
+
+Add runtime toggle for DMA-BUF zero-copy mode to allow safe CPU fallback.
+
+Key changes:
+- Add allow_zerocopy_ member variable (default: false)
+- Add ZeroCopy custom property parsing (true/false)
+- Conditional DMA-BUF setup based on allow_zerocopy_
+- Clear logging: 'Zero-copy disabled by ZeroCopy property'
+
+Usage:
+  custom=ZeroCopy:true   - Enable DMA-BUF zero-copy
+  custom=ZeroCopy:false  - Use CPU memory mode (default)
+
+Upstream-Status: Inappropriate [embedded specific]
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ .../tensor_filter/tensor_filter_ara2.cc        | 18 +++++++++++++++---
+ 1 file changed, 15 insertions(+), 3 deletions(-)
+
+diff --git a/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc b/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
+index b9cac3ca..6fd09011 100644
+--- a/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
++++ b/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
+@@ -33,6 +33,7 @@
+  *   SocketPath:/var/run/proxy.sock  - Unix socket path for dvproxy
+  *   Timeout:5000                   - Inference timeout in milliseconds
+  *   EnableStats:true               - Enable inference statistics logging
++ *   ZeroCopy:false                 - Enable DMA-BUF zero-copy (default: false)
+  *
+  * Pipeline usage:
+  *   v4l2src ! video/x-raw,format=NV12 !
+@@ -341,6 +342,7 @@ class Ara2Core
+   std::string socket_path_;
+   gint timeout_ms_;
+   gboolean enable_stats_;
++  gboolean allow_zerocopy_;
+   int dma_heap_fd_;
+ 
+   /* External DMA-BUF fd cache (fd → shm_desc mapping) */
+@@ -378,7 +380,7 @@ Ara2Core::Ara2Core ()
+       dmabuf_enabled_ (FALSE), in_pool_ (nullptr), dmabuf_alloc_ (nullptr),
+       socket_path_ (ARA2_DEFAULT_SOCKET),
+       timeout_ms_ (ARA2_DEFAULT_TIMEOUT),
+-      enable_stats_ (FALSE), dma_heap_fd_ (-1)
++      enable_stats_ (FALSE), allow_zerocopy_ (FALSE), dma_heap_fd_ (-1)
+ {
+   gst_tensors_info_init (&input_meta_);
+   gst_tensors_info_init (&output_meta_);
+@@ -427,6 +429,12 @@ Ara2Core::parseCustomProperties (const char *custom)
+           enable_stats_ = TRUE;
+         else
+           enable_stats_ = FALSE;
++      } else if (g_ascii_strcasecmp (pair[0], "ZeroCopy") == 0) {
++        if (g_ascii_strcasecmp (pair[1], "true") == 0
++            || g_ascii_strcasecmp (pair[1], "1") == 0)
++          allow_zerocopy_ = TRUE;
++        else
++          allow_zerocopy_ = FALSE;
+       } else {
+         ml_logw ("Ara-2: Unknown custom property '%s'", pair[0]);
+       }
+@@ -849,7 +857,7 @@ Ara2Core::open (const GstTensorFilterProperties *prop)
+   if (dma_heap_fd_ < 0)
+     dma_heap_fd_ = ::open ("/dev/dma_heap/system", O_RDONLY | O_CLOEXEC);
+ 
+-  if (dma_heap_fd_ >= 0) {
++  if (dma_heap_fd_ >= 0 && allow_zerocopy_) {
+     gboolean in_ok = setupInputDmaBuf ();
+     gboolean out_ok = setupOutputDmaBuf ();
+     if (in_ok && out_ok) {
+@@ -864,7 +872,11 @@ Ara2Core::open (const GstTensorFilterProperties *prop)
+       nns_logi ("Ara-2: DMA-BUF setup incomplete, using CPU memory mode");
+     }
+   } else {
+-    nns_logi ("Ara-2: DMA heap not available. Using CPU memory mode.");
++    if (dma_heap_fd_ < 0) {
++      nns_logi ("Ara-2: DMA heap not available. Using CPU memory mode.");
++    } else {
++      nns_logi ("Ara-2: Zero-copy disabled by ZeroCopy property. Using CPU memory mode.");
++    }
+   }
+ 
+   return 0;
+@@ -1427,6 +1439,8 @@ _nns_filter_register_ara2 (void)
+       "Timeout", "Inference timeout in milliseconds (default: 5000)",
+       "EnableStats", "Enable inference statistics logging (true/false, "
+       "default: false)",
++      "ZeroCopy", "Enable DMA-BUF zero-copy mode (true/false, "
++      "default: false)",
+       NULL);
+ }
+ 
+-- 
+2.34.1
+

@@ -1,0 +1,760 @@
+From a402dc2d8c8a3b9e5e78d643f991b53f90b1d5f9 Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Thu, 25 Jun 2026 15:29:25 +0200
+Subject: [filter] Implement tensor_filter V2 dispatch with DMA-BUF and quant meta
+
+Upstream-Status: Pending
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ ext/nnstreamer/tensor_filter/meson.build      |   2 +-
+ gst/nnstreamer/tensor_filter/tensor_filter.c  | 359 +++++++++++++++++-
+ .../tensor_filter/tensor_filter_common.c      | 110 +++++-
+ .../tensor_filter/tensor_filter_common.h      |  11 +-
+ meson.build                                   |   1 +
+ 5 files changed, 465 insertions(+), 18 deletions(-)
+
+diff --git a/ext/nnstreamer/tensor_filter/meson.build b/ext/nnstreamer/tensor_filter/meson.build
+index 521d176b..a67f4d4f 100644
+--- a/ext/nnstreamer/tensor_filter/meson.build
++++ b/ext/nnstreamer/tensor_filter/meson.build
+@@ -192,7 +192,7 @@ if tflite2_support_is_available
+ 
+   filter_sub_tflite2_sources = ['tensor_filter_tensorflow_lite.cc']
+ 
+-  nnstreamer_filter_tflite2_deps = [tflite2_support_deps, thread_dep, libdl_dep, nnstreamer_single_dep]
++  nnstreamer_filter_tflite2_deps = [tflite2_support_deps, thread_dep, libdl_dep, gst_allocators_dep, nnstreamer_single_dep]
+ 
+   tflite2_compile_args = []
+   tflite2_compile_args += '-DTFLITE_INT8=1'
+diff --git a/gst/nnstreamer/tensor_filter/tensor_filter.c b/gst/nnstreamer/tensor_filter/tensor_filter.c
+index 86d0aae3..077f626e 100644
+--- a/gst/nnstreamer/tensor_filter/tensor_filter.c
++++ b/gst/nnstreamer/tensor_filter/tensor_filter.c
+@@ -69,6 +69,7 @@
+ 
+ #include <string.h>
+ #include <nnstreamer_util.h>
++#include <gst/allocators/gstdmabuf.h>
+ 
+ #include "tensor_filter.h"
+ 
+@@ -140,6 +141,8 @@ static gboolean gst_tensor_filter_query (GstBaseTransform * trans,
+ static gboolean gst_tensor_filter_transform_size (GstBaseTransform * trans,
+     GstPadDirection direction, GstCaps * caps, gsize size,
+     GstCaps * othercaps, gsize * othersize);
++static gboolean gst_tensor_filter_propose_allocation (GstBaseTransform * trans,
++    GstQuery * decide_query, GstQuery * query);
+ static gboolean gst_tensor_filter_start (GstBaseTransform * trans);
+ static gboolean gst_tensor_filter_stop (GstBaseTransform * trans);
+ static gboolean gst_tensor_filter_sink_event (GstBaseTransform * trans,
+@@ -196,6 +199,8 @@ gst_tensor_filter_class_init (GstTensorFilterClass * klass)
+   /* Allocation units */
+   trans_class->transform_size =
+       GST_DEBUG_FUNCPTR (gst_tensor_filter_transform_size);
++  trans_class->propose_allocation =
++      GST_DEBUG_FUNCPTR (gst_tensor_filter_propose_allocation);
+ 
+   /* setup events */
+   trans_class->sink_event = GST_DEBUG_FUNCPTR (gst_tensor_filter_sink_event);
+@@ -607,9 +612,10 @@ _gst_tensor_filter_transform_validate (GstBaseTransform * trans,
+     return GST_FLOW_ERROR;
+   }
+   if ((GST_TF_FW_V0 (priv->fw) && G_UNLIKELY (!priv->fw->invoke_NN)) ||
+-      (GST_TF_FW_V1 (priv->fw) && G_UNLIKELY (!priv->fw->invoke))) {
++      (GST_TF_FW_V1 (priv->fw) && G_UNLIKELY (!priv->fw->invoke)) ||
++      (GST_TF_FW_V2 (priv->fw) && G_UNLIKELY (!priv->fw->v2.invoke_v2))) {
+     GST_ELEMENT_ERROR_BTRACE (self, STREAM, FAILED,
+-        ("The tensor-filter subplugin for the framework='%s' does not have its mandatory methods (or callback functions). It appears that your subplugin implementation of '%s' is not completed. There is no 'invoke_NN (v1)' or 'invoke (v2)' methods available.",
++        ("The tensor-filter subplugin for the framework='%s' does not have its mandatory methods (or callback functions). It appears that your subplugin implementation of '%s' is not completed. There is no 'invoke_NN (v0)', 'invoke (v1)', or 'invoke_v2 (v2)' methods available.",
+             prop->fwname, prop->fwname));
+     return GST_FLOW_ERROR;
+   }
+@@ -637,6 +643,323 @@ _gst_tensor_filter_transform_validate (GstBaseTransform * trans,
+   return GST_FLOW_OK;
+ }
+ 
++/**
++ * @brief Attach cached quantization metadata to the output buffer.
++ *
++ * Deep-copies the cached NnsTensorQuantInfo array into a new
++ * GstNnsTensorQuantMeta on the output buffer. Called from both
++ * V0 and V2 transform paths after producing the output.
++ */
++static void
++gst_tensor_filter_attach_quant_meta (GstTensorFilterPrivate * priv,
++    GstBuffer * outbuf)
++{
++  GstNnsTensorQuantMeta *qmeta;
++  guint qi;
++
++  if (!priv->has_output_quant)
++    return;
++
++  qmeta = gst_buffer_add_nns_tensor_quant_meta (outbuf);
++  if (!qmeta)
++    return;
++
++  qmeta->num_tensors = priv->cached_output_quant_count;
++  for (qi = 0; qi < qmeta->num_tensors; qi++) {
++    NnsTensorQuantInfo *cached = &priv->cached_output_quant[qi];
++    if (cached->scheme == NNS_QUANT_NONE || cached->num_params == 0)
++      continue;
++    nns_tensor_quant_info_set_per_channel (&qmeta->quant[qi],
++        cached->scheme, cached->dtype, cached->num_params,
++        cached->axis, cached->scales, cached->zero_points);
++  }
++}
++
++/**
++ * @brief V2 transform path - passes GstMemory* directly without mapping.
++ *
++ * Unlike V0/V1 which maps every GstMemory to get (void *data, size_t size),
++ * V2 passes opaque GstMemory* pointers to the sub-plugin's invoke_v2 callback.
++ * The sub-plugin can then detect DMA-BUF memory (gst_is_dmabuf_memory()) and
++ * use zero-copy paths, or map for CPU access as needed.
++ */
++static GstFlowReturn
++gst_tensor_filter_transform_v2 (GstBaseTransform * trans,
++    GstBuffer * inbuf, GstBuffer * outbuf)
++{
++  GstTensorFilter *self = GST_TENSOR_FILTER_CAST (trans);
++  GstTensorFilterPrivate *priv = &self->priv;
++  GstTensorFilterProperties *prop = &priv->prop;
++
++  GstMemory *in_mem[NNS_TENSOR_SIZE_LIMIT] = { NULL, };
++  GstMemory *stripped_mem[NNS_TENSOR_SIZE_LIMIT] = { NULL, };
++  GstMapInfo flex_maps[NNS_TENSOR_SIZE_LIMIT];
++  gboolean flex_mapped[NNS_TENSOR_SIZE_LIMIT] = { FALSE, };
++  void *invoke_in[NNS_TENSOR_SIZE_LIMIT] = { NULL, };
++  void *invoke_out[NNS_TENSOR_SIZE_LIMIT] = { NULL, };
++
++  guint i, num_in_bufs;
++  guint num_invoke_in = 0, num_invoke_out = 0;
++  gint ret;
++  gboolean allocate_in_invoke, need_profiling;
++  gboolean in_flexible;
++
++  in_flexible =
++      gst_tensor_pad_caps_is_flexible (GST_BASE_TRANSFORM_SINK_PAD (trans));
++  /* Note: out_flexible is not supported for V2 - V2 sub-plugins produce
++   * output in static format with known dimensions from getOutputDimension. */
++  if (priv->prop.invoke_dynamic) {
++    GST_ELEMENT_ERROR_BTRACE (self, STREAM, FAILED,
++        ("V2 framework '%s' does not support invoke-dynamic.",
++            prop->fwname));
++    return GST_FLOW_ERROR;
++  }
++
++  allocate_in_invoke = gst_tensor_filter_allocate_in_invoke (priv);
++  num_in_bufs = gst_tensor_buffer_get_count (inbuf);
++
++  if (in_flexible && num_in_bufs > prop->input_meta.num_tensors) {
++    /* tensor_transform chains can accumulate extra memory blocks in the
++     * GstBuffer (e.g. leftover pre-transform data with flexible headers).
++     * Use only the first num_tensors blocks - they contain the final
++     * transformed tensor data the model expects. */
++    ml_logd ("tensor_filter V2 (%s:%s): flexible buffer has %u memory blocks, "
++        "model expects %u - using first %u",
++        prop->fwname, TF_MODELNAME (prop), num_in_bufs,
++        prop->input_meta.num_tensors, prop->input_meta.num_tensors);
++    num_in_bufs = prop->input_meta.num_tensors;
++  }
++
++  /* 1. Get input GstMemory* from inbuf */
++  for (i = 0; i < num_in_bufs; i++) {
++    in_mem[i] = gst_tensor_buffer_get_nth_memory (inbuf, i);
++    if (G_UNLIKELY (!in_mem[i])) {
++      ml_loge_stacktrace
++          ("gst_tensor_filter_transform_v2: cannot get %u'th input memory from buffer (%s : %s)\n",
++          i, prop->fwname, TF_MODELNAME (prop));
++      goto error_cleanup;
++    }
++
++    if (in_flexible) {
++      GstTensorMetaInfo meta;
++      gsize hsize, mem_size;
++
++      /* Map to read the flexible header */
++      if (!gst_memory_map (in_mem[i], &flex_maps[i], GST_MAP_READ)) {
++        ml_loge_stacktrace
++            ("gst_tensor_filter_transform_v2: cannot map %u'th input memory for flexible header (%s : %s)\n",
++            i, prop->fwname, TF_MODELNAME (prop));
++        goto error_cleanup;
++      }
++      flex_mapped[i] = TRUE;
++
++      /* Try to parse the 128-byte flexible tensor header.
++       * Note: caps may be negotiated as flexible even when buffers contain
++       * raw tensor data without headers (e.g. tensor_transform output).
++       * V1 handles this by ignoring parse_header failure (hsize becomes 0).
++       * We follow the same pattern: if no valid header, pass memory as-is. */
++      hsize = 0;
++      if (gst_tensor_meta_info_parse_header (&meta, flex_maps[i].data)) {
++        hsize = gst_tensor_meta_info_get_header_size (&meta);
++      }
++
++      /* Unmap - we only needed the map to check the header */
++      gst_memory_unmap (in_mem[i], &flex_maps[i]);
++      flex_mapped[i] = FALSE;
++
++      if (hsize > 0) {
++        mem_size = gst_memory_get_sizes (in_mem[i], NULL, NULL);
++
++        if (G_UNLIKELY (hsize >= mem_size)) {
++          ml_loge_stacktrace
++              ("gst_tensor_filter_transform_v2: flexible header size (%zu) >= memory size (%zu) for %u'th tensor (%s : %s)\n",
++              hsize, mem_size, i, prop->fwname, TF_MODELNAME (prop));
++          goto error_cleanup;
++        }
++
++        /* Create a sub-memory that skips the header - points to raw tensor data */
++        stripped_mem[i] = gst_memory_share (in_mem[i], hsize, mem_size - hsize);
++        if (G_UNLIKELY (!stripped_mem[i])) {
++          ml_loge_stacktrace
++              ("gst_tensor_filter_transform_v2: cannot create sub-memory for %u'th tensor (%s : %s)\n",
++              i, prop->fwname, TF_MODELNAME (prop));
++          goto error_cleanup;
++        }
++      }
++      /* else: no valid header - memory contains raw tensor data, use in_mem as-is */
++    }
++  }
++
++  if (in_flexible) {
++    static gsize flexible_warned = 0;
++    if (g_once_init_enter (&flexible_warned)) {
++      ml_logw
++          ("tensor_filter V2 (%s:%s): Input tensor is flexible format - "
++          "falling back to header-stripping mode. DMA-BUF zero-copy and "
++          "propose_allocation are bypassed. For optimal performance, use "
++          "static tensor input.",
++          prop->fwname, TF_MODELNAME (prop));
++      g_once_init_leave (&flexible_warned, 1);
++    }
++  }
++
++  /* 1.1 Build invoke input array (handle input combination) */
++  if (priv->combi.in_combi_defined) {
++    GList *list;
++    for (list = priv->combi.in_combi; list != NULL; list = list->next) {
++      i = GPOINTER_TO_UINT (list->data);
++      if (G_UNLIKELY (i >= num_in_bufs)) {
++        ml_loge_stacktrace
++            ("gst_tensor_filter_transform_v2: input combination index %u >= %u (%s : %s)\n",
++            i, num_in_bufs, prop->fwname, TF_MODELNAME (prop));
++        goto error_cleanup;
++      }
++      invoke_in[num_invoke_in++] = stripped_mem[i] ? stripped_mem[i] : in_mem[i];
++    }
++  } else {
++    if (G_UNLIKELY (num_in_bufs != prop->input_meta.num_tensors)) {
++      ml_loge_stacktrace
++          ("gst_tensor_filter_transform_v2: input buffer has %u memory blocks, expected %u (%s : %s)\n",
++          num_in_bufs, prop->input_meta.num_tensors, prop->fwname,
++          TF_MODELNAME (prop));
++      goto error_cleanup;
++    }
++    for (i = 0; i < num_in_bufs; i++)
++      invoke_in[i] = stripped_mem[i] ? stripped_mem[i] : in_mem[i];
++    num_invoke_in = num_in_bufs;
++  }
++
++  /* 2. Prepare output GstMemory* */
++  num_invoke_out = prop->output_meta.num_tensors;
++
++  if (!allocate_in_invoke) {
++    /* Pre-allocate system memory for output; sub-plugin will map and fill */
++    for (i = 0; i < num_invoke_out; i++) {
++      gsize size = gst_tensor_filter_get_tensor_size (self, i, FALSE);
++      invoke_out[i] = gst_allocator_alloc (NULL, size, NULL);
++      if (G_UNLIKELY (!invoke_out[i])) {
++        ml_loge_stacktrace
++            ("gst_tensor_filter_transform_v2: cannot allocate %u'th output (%zu bytes) (%s : %s)\n",
++            i, size, prop->fwname, TF_MODELNAME (prop));
++        goto error_cleanup;
++      }
++    }
++  }
++  /* else: invoke_out[i] = NULL, sub-plugin allocates (e.g., DMA-BUF) */
++
++  /* 3. Profiling */
++  need_profiling = (priv->latency_mode > 0 || priv->throughput_mode > 0 ||
++      priv->latency_reporting);
++  if (need_profiling)
++    prepare_statistics (priv);
++
++  /* 4. Call V2 invoke - passes GstMemory* as void** */
++  gst_tensor_filter_common_open_fw (priv);
++  ret = -1;
++  if (G_LIKELY (priv->prop.fw_opened && priv->fw && priv->fw->v2.invoke_v2)) {
++    ret = priv->fw->v2.invoke_v2 (&priv->prop, &priv->privateData,
++        invoke_in, invoke_out, num_invoke_in, num_invoke_out);
++  }
++
++  if (need_profiling) {
++    record_statistics (priv);
++    track_latency (self);
++  }
++
++  if (G_UNLIKELY (ret != 0)) {
++    /* Clean up output memories on failure */
++    for (i = 0; i < num_invoke_out; i++) {
++      if (invoke_out[i])
++        gst_memory_unref ((GstMemory *) invoke_out[i]);
++    }
++    for (i = 0; i < num_in_bufs; i++) {
++      if (stripped_mem[i])
++        gst_memory_unref (stripped_mem[i]);
++      if (flex_mapped[i])
++        gst_memory_unmap (in_mem[i], &flex_maps[i]);
++      if (in_mem[i])
++        gst_memory_unref (in_mem[i]);
++    }
++
++    if (ret < 0) {
++      ml_loge_stacktrace
++          ("gst_tensor_filter_transform_v2: invoke_v2 failed with error %d (%s : %s)\n",
++          ret, prop->fwname, TF_MODELNAME (prop));
++      return GST_FLOW_ERROR;
++    }
++    /* ret > 0: drop this buffer */
++    return GST_BASE_TRANSFORM_FLOW_DROPPED;
++  }
++
++  /* 5. Build output buffer */
++  /* 5.1 If output combination from input is defined, pass through selected inputs */
++  if (priv->combi.out_combi_i_defined) {
++    GList *list;
++    for (list = priv->combi.out_combi_i; list != NULL; list = list->next) {
++      GstMemory *pass_mem;
++      i = GPOINTER_TO_UINT (list->data);
++      pass_mem = stripped_mem[i] ? stripped_mem[i] : in_mem[i];
++      gst_tensor_buffer_append_memory (outbuf, gst_memory_ref (pass_mem),
++          gst_tensors_info_get_nth_info (&priv->in_config.info, i));
++    }
++  }
++
++  /* 5.2 Append model output tensors (filtered by output combination if set) */
++  for (i = 0; i < num_invoke_out; i++) {
++    if (priv->combi.out_combi_o_defined) {
++      GList *list;
++      gboolean in_out_combi = FALSE;
++
++      for (list = priv->combi.out_combi_o; list != NULL; list = list->next) {
++        if (i == GPOINTER_TO_UINT (list->data)) {
++          in_out_combi = TRUE;
++          break;
++        }
++      }
++
++      if (!in_out_combi) {
++        if (invoke_out[i])
++          gst_memory_unref ((GstMemory *) invoke_out[i]);
++        continue;
++      }
++    }
++
++    /* Append to outbuf - takes ownership of the GstMemory* */
++    gst_tensor_buffer_append_memory (outbuf, (GstMemory *) invoke_out[i],
++        gst_tensors_info_get_nth_info (&prop->output_meta, i));
++  }
++
++  /* 6. Release input memory references */
++  for (i = 0; i < num_in_bufs; i++) {
++    if (stripped_mem[i])
++      gst_memory_unref (stripped_mem[i]);
++    if (flex_mapped[i])
++      gst_memory_unmap (in_mem[i], &flex_maps[i]);
++    if (in_mem[i])
++      gst_memory_unref (in_mem[i]);
++  }
++
++  /* 7. Attach quantization metadata to output buffer */
++  gst_tensor_filter_attach_quant_meta (priv, outbuf);
++
++  return GST_FLOW_OK;
++
++error_cleanup:
++  for (i = 0; i < num_in_bufs; i++) {
++    if (stripped_mem[i])
++      gst_memory_unref (stripped_mem[i]);
++    if (flex_mapped[i])
++      gst_memory_unmap (in_mem[i], &flex_maps[i]);
++    if (in_mem[i])
++      gst_memory_unref (in_mem[i]);
++  }
++  for (i = 0; i < num_invoke_out; i++) {
++    if (invoke_out[i])
++      gst_memory_unref ((GstMemory *) invoke_out[i]);
++  }
++  return GST_FLOW_ERROR;
++}
++
+ /**
+  * @brief non-ip transform. required vmethod of GstBaseTransform.
+  */
+@@ -677,6 +1000,10 @@ gst_tensor_filter_transform (GstBaseTransform * trans,
+   if (retval != GST_FLOW_OK)
+     return retval;
+ 
++  /* V2 framework: pass GstMemory* directly without mapping (zero-copy path) */
++  if (GST_TF_FW_V2 (priv->fw))
++    return gst_tensor_filter_transform_v2 (trans, inbuf, outbuf);
++
+   allocate_in_invoke = gst_tensor_filter_allocate_in_invoke (priv);
+ 
+   in_flexible =
+@@ -1440,6 +1767,34 @@ gst_tensor_filter_query (GstBaseTransform * trans,
+   return res;
+ }
+ 
++/**
++ * @brief Handle propose_allocation query from downstream.
++ *
++ * For V2 frameworks, delegates to the sub-plugin's propose_allocation callback
++ * so the sub-plugin can advertise DMA-BUF pools or allocators to upstream
++ * elements producing DMA-BUF output.
++ */
++static gboolean
++gst_tensor_filter_propose_allocation (GstBaseTransform * trans,
++    GstQuery * decide_query, GstQuery * query)
++{
++  GstTensorFilter *self = GST_TENSOR_FILTER (trans);
++  GstTensorFilterPrivate *priv = &self->priv;
++  UNUSED (decide_query);
++
++  /* For V2 frameworks, let sub-plugin add its own pool/allocator */
++  if (priv->fw && GST_TF_FW_V2 (priv->fw)) {
++    if (priv->fw->v2.propose_allocation) {
++      priv->fw->v2.propose_allocation (
++          &priv->prop, &priv->privateData, (void *) query);
++    }
++  }
++
++  /* Chain to parent for default behavior */
++  return GST_BASE_TRANSFORM_CLASS (parent_class)->propose_allocation (
++      trans, decide_query, query);
++}
++
+ /**
+  * @brief Tell the framework the required size of buffer based on the info of the other side pad. optional vmethod of BaseTransform
+  *
+diff --git a/gst/nnstreamer/tensor_filter/tensor_filter_common.c b/gst/nnstreamer/tensor_filter/tensor_filter_common.c
+index fa6565d8..ddfd6e7a 100644
+--- a/gst/nnstreamer/tensor_filter/tensor_filter_common.c
++++ b/gst/nnstreamer/tensor_filter/tensor_filter_common.c
+@@ -484,7 +484,7 @@ verify_model_path (const GstTensorFilterPrivate * priv)
+   if (g_strcmp0 (prop->fwname, "custom-easy") == 0)
+     return TRUE;
+ 
+-  if (GST_TF_FW_V0 (priv->fw)) {
++  if (GST_TF_FW_V0 (priv->fw) || GST_TF_FW_V2 (priv->fw)) {
+     verify_model_path = priv->fw->verify_model_path;
+   } else if (GST_TF_FW_V1 (priv->fw)) {
+     verify_model_path = priv->info.verify_model_path;
+@@ -570,6 +570,22 @@ nnstreamer_filter_validate (const GstTensorFilterFramework * tfsp)
+       return FALSE;
+     }
+ 
++    if (!(tfsp->getInputDimension && tfsp->getOutputDimension) &&
++        !tfsp->setInputDimension) {
++      /* no method to get tensor info */
++      return FALSE;
++    }
++  } else if (GST_TF_FW_V2 (tfsp)) {
++    if (!tfsp->v2.invoke_v2) {
++      /* no invoke function */
++      return FALSE;
++    }
++
++    if (!tfsp->name) {
++      /* invalid fw name */
++      return FALSE;
++    }
++
+     if (!(tfsp->getInputDimension && tfsp->getOutputDimension) &&
+         !tfsp->setInputDimension) {
+       /* no method to get tensor info */
+@@ -616,7 +632,7 @@ nnstreamer_filter_probe (GstTensorFilterFramework * tfsp)
+ 
+   g_return_val_if_fail (nnstreamer_filter_validate (tfsp), FALSE);
+ 
+-  if (GST_TF_FW_V0 (tfsp)) {
++  if (GST_TF_FW_V0 (tfsp) || GST_TF_FW_V2 (tfsp)) {
+     name = tfsp->name;
+   } else if (GST_TF_FW_V1 (tfsp)) {
+     gst_tensor_filter_properties_init (&prop);
+@@ -772,6 +788,15 @@ gst_tensor_filter_allocate_in_invoke (GstTensorFilterPrivate * priv)
+     }
+   } else if (GST_TF_FW_V1 (priv->fw)) {
+     allocate_in_invoke = priv->info.allocate_in_invoke;
++  } else if (GST_TF_FW_V2 (priv->fw)) {
++    allocate_in_invoke = priv->fw->allocate_in_invoke;
++    if (allocate_in_invoke == TRUE && priv->fw->allocateInInvoke) {
++      if (priv->fw->allocateInInvoke (&priv->privateData) == 0) {
++        allocate_in_invoke = TRUE;
++      } else {
++        allocate_in_invoke = FALSE;
++      }
++    }
+   }
+ 
+   return allocate_in_invoke;
+@@ -788,7 +813,8 @@ gst_tensor_filter_destroy_notify_util (GstTensorFilterPrivate * priv,
+ {
+   GstTensorFilterFrameworkEventData event_data;
+ 
+-  if (GST_TF_FW_V0 (priv->fw) && priv->fw->destroyNotify) {
++  if ((GST_TF_FW_V0 (priv->fw) || GST_TF_FW_V2 (priv->fw))
++      && priv->fw->destroyNotify) {
+     priv->fw->destroyNotify (&priv->privateData, data);
+   } else if (GST_TF_FW_V1 (priv->fw)) {
+     event_data.data = data;
+@@ -1024,6 +1050,14 @@ gst_tensor_filter_install_properties (GObjectClass * gobject_class)
+       g_param_spec_string ("config-file", "Configuration-file",
+           "Path to configuration file which contains plugins properties", "",
+           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
++  g_object_class_install_property (gobject_class, PROP_MODEL_METADATA,
++      g_param_spec_string ("model-metadata", "Model Metadata",
++          "Sub-plugin model metadata as JSON (read-only, available after model load)",
++          NULL, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
++  g_object_class_install_property (gobject_class, PROP_MODEL_LABELS,
++      g_param_spec_boxed ("model-labels", "Model Labels",
++          "Ordered class labels from model file (read-only, available after model load)",
++          G_TYPE_STRV, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
+ }
+ 
+ /**
+@@ -1448,7 +1482,7 @@ _gtfc_setprop_MODEL (GstTensorFilterPrivate * priv,
+    * has responsibility for the verification of the path regardless of priv->fw->verify_model_path.
+    */
+   if (prop->fw_opened) {
+-    if (GST_TF_FW_V0 (priv->fw) && priv->is_updatable) {
++    if ((GST_TF_FW_V0 (priv->fw) || GST_TF_FW_V2 (priv->fw)) && priv->is_updatable) {
+       if (priv->fw->reloadModel &&
+           priv->fw->reloadModel (prop, &priv->privateData) != 0) {
+         status = -1;
+@@ -1624,7 +1658,7 @@ _gtfc_setprop_CUSTOM (GstTensorFilterPrivate * priv,
+     g_free_const (prop->custom_properties);
+     prop->custom_properties = g_value_dup_string (value);
+   } else {
+-    if (GST_TF_FW_V0 (priv->fw)) {
++    if (GST_TF_FW_V0 (priv->fw) || GST_TF_FW_V2 (priv->fw)) {
+       ml_loge
+           ("Cannot change custom-prop once the element/pipeline is configured.");
+     } else if (GST_TF_FW_V1 (priv->fw)) {
+@@ -1654,7 +1688,7 @@ _gtfc_setprop_ACCELERATOR (GstTensorFilterPrivate * priv,
+   const gchar *accelerators = g_value_get_string (value);
+ 
+   if (priv->prop.fw_opened == TRUE) {
+-    if (GST_TF_FW_V0 (priv->fw)) {
++    if (GST_TF_FW_V0 (priv->fw) || GST_TF_FW_V2 (priv->fw)) {
+       ml_loge
+           ("Cannot change accelerator once the element/pipeline is configured.");
+     } else if (GST_TF_FW_V1 (priv->fw)) {
+@@ -1684,7 +1718,7 @@ _gtfc_setprop_ACCELERATOR (GstTensorFilterPrivate * priv,
+   }
+ 
+   if (priv->fw) {
+-    if (GST_TF_FW_V0 (priv->fw)) {
++    if (GST_TF_FW_V0 (priv->fw) || GST_TF_FW_V2 (priv->fw)) {
+       g_free_const (prop->accl_str);
+       prop->accl_str = g_strdup (accelerators);
+     } else if (GST_TF_FW_V1 (priv->fw)) {
+@@ -1703,7 +1737,7 @@ _gtfc_setprop_IS_UPDATABLE (GstTensorFilterPrivate * priv,
+     GstTensorFilterProperties * prop, const GValue * value)
+ {
+   if (priv->fw) {
+-    if (GST_TF_FW_V0 (priv->fw) && priv->fw->reloadModel == NULL) {
++    if ((GST_TF_FW_V0 (priv->fw) || GST_TF_FW_V2 (priv->fw)) && priv->fw->reloadModel == NULL) {
+       priv->is_updatable = FALSE;
+       return 0;
+     } else if (GST_TF_FW_V1 (priv->fw) &&
+@@ -1758,7 +1792,7 @@ _gtfc_setprop_LAYOUT (GstTensorFilterPrivate * priv,
+     }
+   } else if (value) {
+     /** Update the properties */
+-    if (GST_TF_FW_V0 (priv->fw)) {
++    if (GST_TF_FW_V0 (priv->fw) || GST_TF_FW_V2 (priv->fw)) {
+       /* Once configured, it cannot be changed in runtime */
+       ml_loge ("Cannot change layout once the element/pipeline is configured.");
+     } else if (GST_TF_FW_V1 (priv->fw)) {
+@@ -2164,7 +2198,8 @@ gst_tensor_filter_common_get_property (GstTensorFilterPrivate * priv,
+       gint idx;
+       GString *accl;
+ 
+-      if (priv->fw == NULL || GST_TF_FW_V0 (priv->fw)) {
++      if (priv->fw == NULL || GST_TF_FW_V0 (priv->fw)
++          || GST_TF_FW_V2 (priv->fw)) {
+         if (prop->accl_str != NULL) {
+           g_value_set_string (value, prop->accl_str);
+         } else {
+@@ -2229,6 +2264,30 @@ gst_tensor_filter_common_get_property (GstTensorFilterPrivate * priv,
+     case PROP_INVOKE_DYNAMIC:
+       g_value_set_boolean (value, prop->invoke_dynamic);
+       break;
++    case PROP_MODEL_METADATA:
++    {
++      const char *json = NULL;
++      /* V2 sub-plugin callback (model-specific, e.g., dv_model_t) */
++      if (priv->fw && GST_TF_FW_V2 (priv->fw)
++          && priv->fw->v2.get_model_metadata)
++        json = priv->fw->v2.get_model_metadata (&priv->prop,
++            &priv->privateData);
++      g_value_set_string (value, json);
++      break;
++    }
++    case PROP_MODEL_LABELS:
++    {
++      const char * const *labels = NULL;
++      /* V2 sub-plugin callback */
++      if (priv->fw && GST_TF_FW_V2 (priv->fw)
++          && priv->fw->v2.get_model_labels) {
++        unsigned int num = 0;
++        labels = priv->fw->v2.get_model_labels (&priv->prop,
++            &priv->privateData, &num);
++      }
++      g_value_set_boxed (value, labels);
++      break;
++    }
+     default:
+       /* unknown property */
+       return FALSE;
+@@ -2361,7 +2420,7 @@ gst_tensor_filter_common_get_out_info (GstTensorFilterPrivate * priv,
+   }
+ 
+   /* call setInputDimension with given input tensor */
+-  if (GST_TF_FW_V0 (priv->fw)) {
++  if (GST_TF_FW_V0 (priv->fw) || GST_TF_FW_V2 (priv->fw)) {
+     gst_tensor_filter_v0_call (priv, r, setInputDimension, in, out);
+   } else {
+     gst_tensor_filter_v1_call (priv, r, getModelInfo, SET_INPUT_INFO, in, out);
+@@ -2398,6 +2457,7 @@ gst_tensor_filter_load_tensor_info (GstTensorFilterPrivate * priv)
+       res_out = res_in;
+     }
+   } else {
++    /* V0 and V2 share the same callback layout (union memory overlap) */
+     if (!prop->input_configured)
+       gst_tensor_filter_v0_call (priv, res_in, getInputDimension, &in_info);
+     if (!prop->output_configured)
+@@ -2453,6 +2513,19 @@ gst_tensor_filter_load_tensor_info (GstTensorFilterPrivate * priv)
+     silent_debug_info (&out_info, "output tensor");
+   }
+ 
++  /* Query output quantization once output dimensions are known.
++   * Must be after output_meta.num_tensors is populated by getOutputDimension. */
++  if (prop->output_configured && !priv->has_output_quant
++      && GST_TF_FW_V2 (priv->fw)
++      && priv->fw->v2.get_output_quantization) {
++    guint n = prop->output_meta.num_tensors;
++    if (n > 0 && priv->fw->v2.get_output_quantization (prop,
++        &priv->privateData, priv->cached_output_quant, n) == 0) {
++      priv->cached_output_quant_count = n;
++      priv->has_output_quant = TRUE;
++    }
++  }
++
+ done:
+   gst_tensors_info_free (&in_info);
+   gst_tensors_info_free (&out_info);
+@@ -2471,7 +2544,7 @@ gst_tensor_filter_common_open_fw (GstTensorFilterPrivate * priv)
+     start_time = g_get_monotonic_time ();
+     if (priv->fw->open) {
+       /* at least one model should be configured before opening fw */
+-      if (GST_TF_FW_V0 (priv->fw)) {
++      if (GST_TF_FW_V0 (priv->fw) || GST_TF_FW_V2 (priv->fw)) {
+         run_without_model = priv->fw->run_without_model;
+       } else if (GST_TF_FW_V1 (priv->fw)) {
+         run_without_model = priv->info.run_without_model;
+@@ -2518,6 +2591,15 @@ void
+ gst_tensor_filter_common_close_fw (GstTensorFilterPrivate * priv)
+ {
+   if (priv->prop.fw_opened) {
++    /* Free cached output quantization */
++    if (priv->has_output_quant) {
++      guint qi;
++      for (qi = 0; qi < priv->cached_output_quant_count; qi++)
++        nns_tensor_quant_info_clear (&priv->cached_output_quant[qi]);
++      priv->cached_output_quant_count = 0;
++      priv->has_output_quant = FALSE;
++    }
++
+     if (priv->fw && priv->fw->close) {
+       priv->fw->close (&priv->prop, &priv->privateData);
+     }
+@@ -2907,7 +2989,7 @@ gst_tensor_filter_check_hw_availability (const gchar * name, const accl_hw hw,
+   /** Only check for specific HW, DEFAULT/AUTO are always supported */
+   if (hw == ACCL_AUTO || hw == ACCL_DEFAULT) {
+     available = TRUE;
+-  } else if (GST_TF_FW_V0 (fw)) {
++  } else if (GST_TF_FW_V0 (fw) || GST_TF_FW_V2 (fw)) {
+     if (fw->checkAvailability && fw->checkAvailability (hw) == 0)
+       available = TRUE;
+   } else if (GST_TF_FW_V1 (fw)) {
+@@ -2930,7 +3012,7 @@ gst_tensor_filter_check_hw_availability (const gchar * name, const accl_hw hw,
+     edata.hw = hw;
+     edata.custom = custom;
+ 
+-    if (GST_TF_FW_V0 (fw)) {
++    if (GST_TF_FW_V0 (fw) || GST_TF_FW_V2 (fw)) {
+       if (fw->handleEvent)
+         ret = fw->handleEvent (evt, &edata);
+     } else if (GST_TF_FW_V1 (fw)) {
+diff --git a/gst/nnstreamer/tensor_filter/tensor_filter_common.h b/gst/nnstreamer/tensor_filter/tensor_filter_common.h
+index 53a35b48..5a8be10b 100644
+--- a/gst/nnstreamer/tensor_filter/tensor_filter_common.h
++++ b/gst/nnstreamer/tensor_filter/tensor_filter_common.h
+@@ -30,6 +30,7 @@
+ #include <nnstreamer_subplugin.h>
+ #include <nnstreamer_plugin_api_util.h>
+ #include <nnstreamer_plugin_api_filter.h>
++#include <nnstreamer_tensor_quant_meta.h>
+ 
+ G_BEGIN_DECLS
+ 
+@@ -45,6 +46,7 @@ G_BEGIN_DECLS
+     (fw && checkGstTensorFilterFrameworkVersion (fw->version, vn))
+ #define GST_TF_FW_V0(fw) GST_TF_FW_VN (fw, 0)
+ #define GST_TF_FW_V1(fw) GST_TF_FW_VN (fw, 1)
++#define GST_TF_FW_V2(fw) GST_TF_FW_VN (fw, 2)
+ 
+ /**
+  * @brief Invoke callbacks of nn framework. Guarantees calling open for the first call.
+@@ -106,7 +108,9 @@ enum
+   PROP_SHARED_TENSOR_FILTER_KEY,
+   PROP_LATENCY_REPORT,
+   PROP_INVOKE_DYNAMIC,
+-  PROP_CONFIG
++  PROP_CONFIG,
++  PROP_MODEL_METADATA,
++  PROP_MODEL_LABELS
+ };
+ 
+ /**
+@@ -169,6 +173,11 @@ typedef struct _GstTensorFilterPrivate
+   gint64 latency_reported; /**< latency value reported (ns) in last LATENCY query */
+ 
+   GstTensorFilterCombination combi;
++
++  /* Cached output quantization params (populated at open from V2 callback) */
++  NnsTensorQuantInfo cached_output_quant[NNS_TENSOR_SIZE_LIMIT];
++  guint cached_output_quant_count; /**< number of valid entries */
++  gboolean has_output_quant;       /**< TRUE if sub-plugin provided quant params */
+ } GstTensorFilterPrivate;
+ 
+ /**
+diff --git a/meson.build b/meson.build
+index f5015b1c..11d95a02 100644
+--- a/meson.build
++++ b/meson.build
+@@ -148,6 +148,7 @@ gst_controller_dep = dependency('gstreamer-controller-' + gst_api_version)
+ gst_video_dep = dependency('gstreamer-video-' + gst_api_version)
+ gst_audio_dep = dependency('gstreamer-audio-' + gst_api_version)
+ gst_app_dep = dependency('gstreamer-app-' + gst_api_version)
++gst_allocators_dep = dependency('gstreamer-allocators-' + gst_api_version)
+ gst_check_dep = dependency('gstreamer-check-' + gst_api_version)
+ 
+ libm_dep = cc.find_library('m') # cmath library
+-- 
+2.34.1
+

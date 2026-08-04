@@ -1,0 +1,203 @@
+From 046278453a250cf74baad4eeafdd165a4763cda1 Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Thu, 30 Jul 2026 16:17:42 +0200
+Subject: [converter] Add flexible type validation framework
+
+Introduce type validation to ensure buffer sizes match configured
+tensor types, preventing silent data corruption when tensor type
+metadata does not match actual buffer contents.
+
+Key changes:
+
+1. Add gst_tensor_converter_validate_type_size() helper function
+   - Validates buffer size matches expected type
+   - Clear error messages on mismatch with troubleshooting hints
+   - Only validates single-tensor (multi-tensor has variable size)
+
+2. Add input_type_explicitly_set flag to GstTensorConverter
+   - Tracks when user explicitly sets input-type property
+   - Prevents automatic type changes without user confirmation
+
+3. Integrate validation into video parsing path
+   - Called before processing to catch mismatches early
+   - Works for both DMA-BUF and system memory paths
+
+4. Support explicit type override for video formats
+   - Priority 1: User-provided input-type property
+   - Priority 2: Downstream preference (with validation)
+   - Priority 3: Format-specific default (uint8 for most)
+   - Reject automatic type changes to prevent silent corruption
+
+This enables safe use of int8, float16, int16, and other types
+from hardware converters that perform actual value conversion.
+
+Upstream-Status: Pending
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ gst/nnstreamer/elements/gsttensor_converter.c | 108 +++++++++++++++++-
+ gst/nnstreamer/elements/gsttensor_converter.h |   2 +
+ 2 files changed, 108 insertions(+), 2 deletions(-)
+
+diff --git a/gst/nnstreamer/elements/gsttensor_converter.c b/gst/nnstreamer/elements/gsttensor_converter.c
+index c03fe87e..0b93f7db 100644
+--- a/gst/nnstreamer/elements/gsttensor_converter.c
++++ b/gst/nnstreamer/elements/gsttensor_converter.c
+@@ -366,6 +366,7 @@ gst_tensor_converter_init (GstTensorConverter * self)
+   self->custom.func = NULL;
+   self->custom.data = NULL;
+   self->do_not_append_header = FALSE;
++  self->input_type_explicitly_set = FALSE;
+   gst_tensors_info_init (&self->tensors_info);
+   gst_tensors_config_init (&self->tensors_config);
+   self->tensors_configured = FALSE;
+@@ -442,8 +443,13 @@ gst_tensor_converter_set_property (GObject * object, guint prop_id,
+ 
+       if (num == 0) {
+         GST_WARNING ("%s is invalid type string.", value_str);
+-      } else if (info->num_tensors > 0 && info->num_tensors != num) {
+-        GST_WARNING ("%s, the number of tensor is %u.", value_str, num);
++      } else {
++        /* Mark that user explicitly set the type */
++        self->input_type_explicitly_set = TRUE;
++        
++        if (info->num_tensors > 0 && info->num_tensors != num) {
++          GST_WARNING ("%s, the number of tensor is %u.", value_str, num);
++        }
+       }
+ 
+       /* prevent invalid value, init types. */
+@@ -1021,6 +1027,56 @@ _gst_tensor_converter_chain_chunk (GstTensorConverter * self,
+   return ret;
+ }
+ 
++/**
++ * @brief Validate that buffer size matches expected tensor type
++ * @param self tensor_converter instance
++ * @param buffer Input GstBuffer
++ * @param config Tensor configuration with dimensions and type
++ * @return TRUE if valid, FALSE with error posted otherwise
++ */
++static gboolean
++gst_tensor_converter_validate_type_size (GstTensorConverter * self,
++    GstBuffer * buffer, const GstTensorsConfig * config)
++{
++  gsize expected_size;
++  gsize actual_size;
++  tensor_type type;
++  const gchar *type_str;
++  gsize element_size;
++
++  g_return_val_if_fail (config != NULL, FALSE);
++  g_return_val_if_fail (buffer != NULL, FALSE);
++
++  /* Only validate for single tensor (multi-tensor has variable size) */
++  if (config->info.num_tensors != 1) {
++    return TRUE;
++  }
++
++  expected_size = gst_tensors_info_get_size (&config->info, 0);
++  actual_size = gst_buffer_get_size (buffer);
++
++  if (actual_size != expected_size) {
++    type = config->info.info[0].type;
++    type_str = gst_tensor_get_type_string (type);
++    element_size = gst_tensor_get_element_size (type);
++
++    GST_ELEMENT_ERROR (self, STREAM, WRONG_TYPE,
++        ("Buffer size mismatch for type=%s (element_size=%" G_GSIZE_FORMAT " bytes)",
++            type_str, element_size),
++        ("Expected %" G_GSIZE_FORMAT " bytes, got %" G_GSIZE_FORMAT " bytes. "
++            "Ensure upstream element performs actual VALUE conversion, not just type casting. "
++            "Current config: dimensions=[%u,%u,%u,%u], type=%s",
++            expected_size, actual_size,
++            config->info.info[0].dimension[0],
++            config->info.info[0].dimension[1],
++            config->info.info[0].dimension[2],
++            config->info.info[0].dimension[3], type_str));
++    return FALSE;
++  }
++
++  return TRUE;
++}
++
+ /**
+  * @brief Chain function, this function does the actual processing.
+  */
+@@ -1049,6 +1105,15 @@ gst_tensor_converter_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
+   frames_out = self->frames_per_tensor;
+   inbuf = buf;
+ 
++  /* Validate buffer size matches configured tensor type */
++#ifndef NO_VIDEO
++  if (self->in_media_type == _NNS_VIDEO) {
++    if (!gst_tensor_converter_validate_type_size (self, buf, config)) {
++      goto error;
++    }
++  }
++#endif
++
+   /**
+    * Supposed 1 frame in buffer (default).
+    * Update frame size for each media type.
+@@ -1537,6 +1602,45 @@ gst_tensor_converter_parse_video (GstTensorConverter * self,
+   for (i = 4; i < NNS_TENSOR_RANK_LIMIT; i++)
+     config->info.info[0].dimension[i] = 0;
+ 
++  /**
++   * Type selection logic:
++   * Priority 1: Explicit user-provided type via input-type property
++   * Priority 2: Query downstream preference (with validation)
++   * Priority 3: Use format-specific default (already set above)
++   */
++  if (self->input_type_explicitly_set) {
++    /* User explicitly set type - always honor it */
++    if (self->tensors_info.info[0].type != _NNS_END) {
++      config->info.info[0].type = self->tensors_info.info[0].type;
++      GST_INFO_OBJECT (self,
++          "Using user-configured input-type=%s (overriding format default)",
++          gst_tensor_get_type_string (config->info.info[0].type));
++    }
++  } else {
++    /* User didn't explicitly set type - check if downstream requests non-default type */
++    GstTensorsConfig downstream_config;
++    gst_tensors_config_init (&downstream_config);
++    
++    if (gst_tensors_config_from_peer (self->srcpad, &downstream_config, NULL)) {
++      tensor_type downstream_type = downstream_config.info.info[0].type;
++      tensor_type current_type = config->info.info[0].type;
++      
++      if (downstream_type != _NNS_END && downstream_type != current_type) {
++        /* Downstream wants different type but user didn't confirm.
++         * CHANGED: Only warn instead of error - tensor_transform or similar elements
++         * can handle type conversion. User can set input-type= to suppress this warning. */
++        GST_WARNING_OBJECT (self,
++            "Downstream requests type=%s but tensor_converter will output %s. "
++            "This is OK if tensor_transform or similar handles conversion. "
++            "To suppress this warning, set input-type=%s if upstream performs VALUE conversion.",
++            gst_tensor_get_type_string (downstream_type),
++            gst_tensor_get_type_string (current_type),
++            gst_tensor_get_type_string (downstream_type));
++      }
++    }
++    /* Use format default type (already set in switch above) */
++  }
++
+   config->rate_n = GST_VIDEO_INFO_FPS_N (&vinfo);
+   config->rate_d = GST_VIDEO_INFO_FPS_D (&vinfo);
+ 
+diff --git a/gst/nnstreamer/elements/gsttensor_converter.h b/gst/nnstreamer/elements/gsttensor_converter.h
+index b1328bb6..7ad86d7d 100644
+--- a/gst/nnstreamer/elements/gsttensor_converter.h
++++ b/gst/nnstreamer/elements/gsttensor_converter.h
+@@ -107,6 +107,8 @@ struct _GstTensorConverter
+   gboolean do_not_append_header;
+ 
+   void *priv_data; /**< plugin's private data */
++
++  gboolean input_type_explicitly_set; /**< TRUE if user explicitly set input-type property */
+ };
+ 
+ /**
+-- 
+2.34.1
+

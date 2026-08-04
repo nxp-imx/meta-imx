@@ -1,0 +1,1457 @@
+From 1dc0a32d610c9c4c734d022196c2e43bc74cf767 Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Thu, 21 May 2026 19:03:41 +0200
+Subject: [filter] Add Ara-2 NPU sub-plugin for NXP ara240
+
+Add tensor_filter sub-plugin for Ara-2 NPU (ara240) with DMA-BUF support.
+
+Key features:
+- Three-tier invoke architecture (pool match, external DMA-BUF fd, CPU fallback)
+- DMA-BUF zero-copy via V2 invoke API
+- Runtime DMA-BUF enable/disable via custom property
+- Automatic quantization metadata extraction
+- Single-buffer pool architecture for sequential processing
+- Integration with dvproxy runtime API
+
+Upstream-Status: Inappropriate [embedded specific]
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ ext/nnstreamer/tensor_filter/meson.build      |   26 +
+ .../tensor_filter/tensor_filter_ara2.cc       | 1378 +++++++++++++++++
+ meson_options.txt                             |    1 +
+ 3 files changed, 1405 insertions(+)
+ create mode 100644 ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
+
+diff --git a/ext/nnstreamer/tensor_filter/meson.build b/ext/nnstreamer/tensor_filter/meson.build
+index a67f4d4f..82b17fac 100644
+--- a/ext/nnstreamer/tensor_filter/meson.build
++++ b/ext/nnstreamer/tensor_filter/meson.build
+@@ -918,3 +918,29 @@ if llama2c_support_is_available
+     install_dir: nnstreamer_libdir
+   )
+ endif
++
++# Ara-2 NPU sub-plugin - uses dvapi.h for struct defs, dlopen at runtime
++ara2_support = get_option('ara2-support')
++if ara2_support.disabled()
++  ara2_available = false
++else
++  ara2_available = cc.has_header('sdk_ara/dvapi.h')
++  if not ara2_available and ara2_support.enabled()
++    error('ara2-support=enabled but dvapi.h not found')
++  endif
++endif
++
++if ara2_available
++  nnstreamer_filter_ara2_sources = [
++    'tensor_filter_ara2.cc',
++  ]
++  nnstreamer_filter_ara2_deps = [
++    glib_dep, gst_allocators_dep, libdl_dep, nnstreamer_single_dep,
++  ]
++  shared_library('nnstreamer_filter_ara2',
++    nnstreamer_filter_ara2_sources,
++    dependencies: nnstreamer_filter_ara2_deps,
++    install: true,
++    install_dir: filter_subplugin_install_dir
++  )
++endif
+diff --git a/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc b/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
+new file mode 100644
+index 00000000..b0901928
+--- /dev/null
++++ b/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
+@@ -0,0 +1,1378 @@
++/**
++ * GStreamer Tensor_Filter, Ara-2 NPU Module
++ * Copyright (C) 2026 Au-Zone Technologies <www.au-zone.com>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation;
++ * version 2.1 of the License.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Library General Public License for more details.
++ */
++/**
++ * @file   tensor_filter_ara2.cc
++ * @date   10 Feb 2026
++ * @brief  Ara-2 NPU sub-plugin for tensor_filter (V2 invoke API)
++ * @author Sébastien Taylor <sebastien@au-zone.com>
++ * @bug    No known bugs except for NYI items
++ *
++ * This is a tensor_filter sub-plugin for the Ara-2 NPU, using the
++ * V2 invoke API with full DMA-BUF zero-copy support. The Ara-2 communicates
++ * through a proxy daemon (dvproxy) over a Unix socket, using dvapi.h as the
++ * client API. All runtime symbols are loaded via dlopen/dlsym for graceful
++ * degradation when the Ara-2 runtime is unavailable.
++ *
++ * The sub-plugin reports the model's native tensor format directly (e.g.
++ * int8 CHW) and expects upstream to deliver preprocessed data in that
++ * format via tensor_converter or tensor_transform chain.
++ *
++ * Custom properties (comma-separated Key:Value pairs):
++ *   SocketPath:/var/run/proxy.sock  - Unix socket path for dvproxy
++ *   Timeout:5000                   - Inference timeout in milliseconds
++ *   EnableStats:true               - Enable inference statistics logging
++ *
++ * Pipeline usage:
++ *   v4l2src ! video/x-raw,format=NV12 !
++ *   videoscale ! video/x-raw,format=RGB,width=640,height=640 !
++ *   tensor_converter ! tensor_filter framework=ara2 model=yolov8n.dvm
++ */
++
++#include <dlfcn.h>
++#include <errno.h>
++#include <fcntl.h>
++#include <linux/dma-buf.h>
++#include <linux/dma-heap.h>
++#include <string.h>
++#include <sys/ioctl.h>
++#include <sys/mman.h>
++#include <unistd.h>
++
++#include <string>
++
++#include <gst/gst.h>
++#include <gst/allocators/gstdmabuf.h>
++
++#include <nnstreamer_log.h>
++#include <nnstreamer_plugin_api_util.h>
++#define NO_ANONYMOUS_NESTED_STRUCT
++#include <nnstreamer_plugin_api_filter.h>
++#undef NO_ANONYMOUS_NESTED_STRUCT
++#include <nnstreamer_conf.h>
++#include <nnstreamer_tensor_quant_meta.h>
++#include <nnstreamer_util.h>
++
++#include <sdk_ara/dvapi.h>
++
++/**
++ * @brief Macro for debug mode.
++ */
++#ifndef DBG
++#define DBG FALSE
++#endif
++
++#define ARA2_LIB_NAME "libaraclient_aarch64.so"
++#define ARA2_DEFAULT_SOCKET "/var/run/proxy.sock"
++#define ARA2_DEFAULT_TIMEOUT 5000
++
++/* ========== Ara2API: dlsym function pointer struct ========== */
++
++/**
++ * @brief Ara-2 client library API function pointers loaded via dlsym.
++ *
++ * Loaded once from libaraclient_aarch64.so at open() time. All symbols are resolved
++ * via dlopen/dlsym so the sub-plugin degrades gracefully when the Ara-2
++ * runtime is not installed.
++ */
++typedef struct {
++  gboolean available;  /**< TRUE if all mandatory symbols were found */
++  void *lib_handle;    /**< dlopen handle */
++
++  /* Session lifecycle */
++  dv_status_code_t (*session_create) (const char *, dv_session_t **);
++  dv_status_code_t (*session_close) (dv_session_t *);
++
++  /* Endpoint management */
++  dv_status_code_t (*endpoint_get_default_group) (dv_session_t *,
++      dv_endpoint_default_group_t, dv_endpoint_t **);
++  dv_status_code_t (*endpoint_get_list) (dv_session_t *,
++      dv_endpoint_t **, int *);
++  dv_status_code_t (*endpoint_free_group) (dv_endpoint_t *);
++
++  /* Model lifecycle */
++  dv_status_code_t (*model_load_from_file_with_options) (dv_session_t *,
++       dv_endpoint_t *, const char *, dv_model_t **, dv_model_load_options_t *);
++  dv_status_code_t (*model_unload) (dv_model_t *);
++
++  /* Shared memory registration */
++  dv_status_code_t (*shmfd_register) (dv_session_t *, int, uint32_t,
++      uint32_t, int, dv_shm_descriptor_t **);
++  dv_status_code_t (*shmfd_unregister) (dv_shm_descriptor_t *);
++
++  /* Inference */
++  dv_status_code_t (*infer_sync) (dv_session_t *, dv_endpoint_t *,
++      dv_model_t *, dv_blob_t *, dv_blob_t *, int, bool,
++      dv_infer_request_t **);
++  dv_status_code_t (*infer_free) (dv_infer_request_t *);
++
++  /* Optional: version, error strings, endpoint health */
++  dv_status_code_t (*get_client_lib_version) (dv_version_t *);
++  const char *(*stringify_status_code) (dv_status_code_t);
++  dv_status_code_t (*endpoint_check_status) (dv_session_t *,
++      dv_endpoint_t *, dv_endpoint_state_t *);
++} Ara2API;
++
++static Ara2API ara2_api = {};
++
++/**
++ * @brief Load Ara-2 client library symbols via dlsym.
++ * @return TRUE if all mandatory symbols were loaded.
++ *
++ * Thread-safe: uses g_once_init_enter so concurrent first-open from
++ * multiple tensor_filter elements is safe.
++ */
++static gboolean
++ara2_api_load (void)
++{
++  static gsize api_loaded = 0;
++
++  if (g_once_init_enter (&api_loaded)) {
++    void *handle = dlopen (ARA2_LIB_NAME, RTLD_LAZY);
++    if (!handle) {
++      nns_logi ("Ara-2 runtime (%s) not available: %s", ARA2_LIB_NAME,
++          dlerror ());
++    } else {
++      ara2_api.lib_handle = handle;
++
++#define LOAD_ARA2_SYM(field, sym) \
++  *(void **) (&ara2_api.field) = dlsym (handle, sym)
++
++      /* Mandatory symbols */
++      LOAD_ARA2_SYM (session_create, "dv_session_create_via_unix_socket");
++      LOAD_ARA2_SYM (session_close, "dv_session_close");
++      LOAD_ARA2_SYM (endpoint_get_default_group,
++          "dv_endpoint_get_default_group");
++      LOAD_ARA2_SYM (endpoint_get_list, "dv_endpoint_get_list");
++      LOAD_ARA2_SYM (endpoint_free_group, "dv_endpoint_free_group");
++      LOAD_ARA2_SYM (model_load_from_file_with_options, "dv_model_load_from_file_with_options");
++      LOAD_ARA2_SYM (model_unload, "dv_model_unload");
++      LOAD_ARA2_SYM (shmfd_register, "dv_shmfd_register");
++      LOAD_ARA2_SYM (shmfd_unregister, "dv_shmfd_unregister");
++      LOAD_ARA2_SYM (infer_sync, "dv_infer_sync");
++      LOAD_ARA2_SYM (infer_free, "dv_infer_free");
++
++      /* Optional symbols */
++      LOAD_ARA2_SYM (get_client_lib_version, "dv_get_client_lib_version");
++      LOAD_ARA2_SYM (stringify_status_code, "dv_stringify_status_code");
++      LOAD_ARA2_SYM (endpoint_check_status, "dv_endpoint_check_status");
++
++#undef LOAD_ARA2_SYM
++
++      /* Check all mandatory symbols */
++      if (ara2_api.session_create && ara2_api.session_close
++          && ara2_api.endpoint_get_default_group && ara2_api.endpoint_get_list
++          && ara2_api.endpoint_free_group && ara2_api.model_load_from_file_with_options
++          && ara2_api.model_unload && ara2_api.shmfd_register
++          && ara2_api.shmfd_unregister && ara2_api.infer_sync
++          && ara2_api.infer_free) {
++        ara2_api.available = TRUE;
++
++        /* Log client library version if available */
++        if (ara2_api.get_client_lib_version) {
++          dv_version_t ver;
++          if (ara2_api.get_client_lib_version (&ver) == DV_SUCCESS) {
++            nns_logi ("Ara-2 client library loaded: v%u.%u.%u.%u",
++                ver.major, ver.minor, ver.patch, ver.patch_minor);
++          }
++        }
++      } else {
++        nns_logi ("Ara-2 client library loaded but some mandatory symbols "
++            "are missing");
++      }
++    }
++
++    g_once_init_leave (&api_loaded, 1);
++  }
++
++  return ara2_api.available;
++}
++
++/**
++ * @brief Get human-readable error string from Ara-2 status code.
++ */
++static const char *
++ara2_strerror (dv_status_code_t code)
++{
++  if (ara2_api.stringify_status_code)
++    return ara2_api.stringify_status_code (code);
++  return "unknown";
++}
++
++/* ========== NnsAra2DmaBufInputPool: single DMA-BUF buffer pool ========== */
++
++typedef struct {
++  GstBufferPool parent;
++  int fd;         /**< DMA-BUF file descriptor */
++  gsize buf_size; /**< buffer size in bytes */
++} NnsAra2DmaBufInputPool;
++
++typedef struct {
++  GstBufferPoolClass parent_class;
++} NnsAra2DmaBufInputPoolClass;
++
++static GType nns_ara2_dmabuf_input_pool_get_type (void);
++
++static GstFlowReturn
++nns_ara2_dmabuf_pool_alloc (GstBufferPool *pool, GstBuffer **buffer,
++    GstBufferPoolAcquireParams *params)
++{
++  NnsAra2DmaBufInputPool *self = (NnsAra2DmaBufInputPool *) pool;
++  UNUSED (params);
++
++  GstAllocator *alloc = gst_dmabuf_allocator_new ();
++  GstMemory *mem = gst_dmabuf_allocator_alloc_with_flags (
++      alloc, self->fd, self->buf_size, GST_FD_MEMORY_FLAG_DONT_CLOSE);
++  gst_object_unref (alloc);
++
++  if (G_UNLIKELY (!mem))
++    return GST_FLOW_ERROR;
++
++  *buffer = gst_buffer_new ();
++  gst_buffer_append_memory (*buffer, mem);
++  return GST_FLOW_OK;
++}
++
++static void
++nns_ara2_dmabuf_pool_class_init (gpointer klass, gpointer class_data)
++{
++  UNUSED (class_data);
++  GST_BUFFER_POOL_CLASS (klass)->alloc_buffer = nns_ara2_dmabuf_pool_alloc;
++}
++
++static void
++nns_ara2_dmabuf_pool_init (GTypeInstance *instance, gpointer g_class)
++{
++  NnsAra2DmaBufInputPool *self = (NnsAra2DmaBufInputPool *) instance;
++  UNUSED (g_class);
++  self->fd = -1;
++  self->buf_size = 0;
++}
++
++static GType
++nns_ara2_dmabuf_input_pool_get_type (void)
++{
++  static gsize type_id = 0;
++  if (g_once_init_enter (&type_id)) {
++    GTypeInfo info = {
++      sizeof (NnsAra2DmaBufInputPoolClass), NULL, NULL,
++      nns_ara2_dmabuf_pool_class_init, NULL, NULL,
++      sizeof (NnsAra2DmaBufInputPool), 0,
++      nns_ara2_dmabuf_pool_init, NULL
++    };
++    GType t = g_type_register_static (
++        GST_TYPE_BUFFER_POOL, "NnsAra2DmaBufInputPool", &info,
++        (GTypeFlags) 0);
++    g_once_init_leave (&type_id, t);
++  }
++  return (GType) type_id;
++}
++
++/* ========== Ara2Core: per-instance state ========== */
++
++/**
++ * @brief Per-tensor DMA-BUF state.
++ */
++struct Ara2DmaBufInfo {
++  int fd;                       /**< DMA-BUF file descriptor */
++  gsize size;                   /**< Buffer size in bytes */
++  void *map_ptr;                /**< mmap'd CPU-accessible pointer */
++  dv_shm_descriptor_t *shm_desc; /**< Proxy-registered descriptor */
++};
++
++/**
++ * @brief Per-instance state for the Ara-2 sub-plugin.
++ */
++class Ara2Core
++{
++  public:
++  Ara2Core ();
++  ~Ara2Core ();
++
++  int open (const GstTensorFilterProperties *prop);
++  void close ();
++
++  int getInputTensorDim (GstTensorsInfo *info);
++  int getOutputTensorDim (GstTensorsInfo *info);
++
++  int invokeV2 (void **input, void **output,
++      unsigned int num_input, unsigned int num_output);
++
++  int proposeAllocation (GstQuery *query);
++
++  gboolean isDmaBufEnabled () const { return dmabuf_enabled_; }
++
++  int get_output_quantization (NnsTensorQuantInfo *quant, unsigned int num_outputs);
++
++  private:
++  /* Session / model lifecycle */
++  dv_session_t *session_;
++  dv_endpoint_t *endpoint_;
++  dv_model_t *model_;
++
++  /* Tensor metadata (populated from model params) */
++  GstTensorsInfo input_meta_;
++  GstTensorsInfo output_meta_;
++
++  /* DMA-BUF state */
++  Ara2DmaBufInfo in_dmabufs_[NNS_TENSOR_SIZE_LIMIT];
++  Ara2DmaBufInfo out_dmabufs_[NNS_TENSOR_SIZE_LIMIT];
++  gboolean dmabuf_enabled_;
++
++  /* Input DMA-BUF pool for propose_allocation */
++  GstBufferPool *in_pool_;
++
++  /* Shared DMA-BUF allocator for output wrapping and propose_allocation */
++  GstAllocator *dmabuf_alloc_;
++
++  /* Config */
++  std::string socket_path_;
++  gint timeout_ms_;
++  gboolean enable_stats_;
++  int dma_heap_fd_;
++
++  /* Internal helpers */
++  int parseCustomProperties (const char *custom);
++  int populateTensorMeta ();
++  tensor_type bppToTensorType (int bpp, bool is_signed, bool is_float = false);
++
++  /* DMA-BUF lifecycle */
++  int allocateDmaBufFd (gsize size);
++  gboolean setupInputDmaBuf ();
++  gboolean setupOutputDmaBuf ();
++  void releaseInputDmaBuf ();
++  void releaseOutputDmaBuf ();
++};
++
++extern "C" {
++void init_filter_ara2 (void) __attribute__ ((constructor));
++void fini_filter_ara2 (void) __attribute__ ((destructor));
++}
++
++static GstTensorFilterFrameworkStatistics ara2_internal_stats = {
++  .total_invoke_num = 0,
++  .total_invoke_latency = 0,
++  .total_overhead_latency = 0,
++};
++
++/* ========== Ara2Core implementation ========== */
++
++Ara2Core::Ara2Core ()
++    : session_ (nullptr), endpoint_ (nullptr), model_ (nullptr),
++      dmabuf_enabled_ (FALSE), in_pool_ (nullptr), dmabuf_alloc_ (nullptr),
++      socket_path_ (ARA2_DEFAULT_SOCKET),
++      timeout_ms_ (ARA2_DEFAULT_TIMEOUT),
++      enable_stats_ (FALSE), dma_heap_fd_ (-1)
++{
++  gst_tensors_info_init (&input_meta_);
++  gst_tensors_info_init (&output_meta_);
++  memset (in_dmabufs_, 0, sizeof (in_dmabufs_));
++  memset (out_dmabufs_, 0, sizeof (out_dmabufs_));
++
++  for (unsigned int i = 0; i < NNS_TENSOR_SIZE_LIMIT; i++) {
++    in_dmabufs_[i].fd = -1;
++    out_dmabufs_[i].fd = -1;
++  }
++}
++
++Ara2Core::~Ara2Core ()
++{
++  close ();
++  gst_tensors_info_free (&input_meta_);
++  gst_tensors_info_free (&output_meta_);
++}
++
++/**
++ * @brief Parse custom properties from comma-separated Key:Value string.
++ */
++int
++Ara2Core::parseCustomProperties (const char *custom)
++{
++  if (!custom)
++    return 0;
++
++  gchar **strv = g_strsplit (custom, ",", -1);
++  guint len = g_strv_length (strv);
++
++  for (guint i = 0; i < len; i++) {
++    gchar **pair = g_strsplit (strv[i], ":", 2);
++
++    if (g_strv_length (pair) > 1) {
++      g_strstrip (pair[0]);
++      g_strstrip (pair[1]);
++
++      if (g_ascii_strcasecmp (pair[0], "SocketPath") == 0) {
++        socket_path_ = pair[1];
++      } else if (g_ascii_strcasecmp (pair[0], "Timeout") == 0) {
++        timeout_ms_ = (gint) g_ascii_strtoll (pair[1], NULL, 10);
++      } else if (g_ascii_strcasecmp (pair[0], "EnableStats") == 0) {
++        if (g_ascii_strcasecmp (pair[1], "true") == 0
++            || g_ascii_strcasecmp (pair[1], "1") == 0)
++          enable_stats_ = TRUE;
++        else
++          enable_stats_ = FALSE;
++      } else {
++        ml_logw ("Ara-2: Unknown custom property '%s'", pair[0]);
++      }
++    }
++
++    g_strfreev (pair);
++  }
++
++  g_strfreev (strv);
++  return 0;
++}
++
++/**
++ * @brief Map Ara-2 bytes-per-pixel + signedness to NNStreamer tensor type.
++ *
++ * Reports the model's native type directly. Upstream is responsible for
++ * delivering data in the correct format (e.g. via tensor_converter
++ * or a tensor_transform chain).
++ *
++ * @param bpp Bytes per element from model params.
++ * @param is_signed TRUE if tensor uses signed representation.
++ * @param is_float TRUE if tensor uses floating-point representation.
++ *        Only relevant for bpp=4 to distinguish FLOAT32 from INT32/UINT32.
++ *        Defaults to false (integer).
++ *
++ * @note The is_float and is_signed flags come from the model's
++ *       preprocess_param / postprocess_param. When these params are NULL
++ *       (e.g. libaraclient first-run quirk), callers should pass
++ *       conservative defaults (is_float=true for bpp=4 output tensors).
++ */
++tensor_type
++Ara2Core::bppToTensorType (int bpp, bool is_signed, bool is_float)
++{
++  switch (bpp) {
++    case 1:
++      return is_signed ? _NNS_INT8 : _NNS_UINT8;
++    case 2:
++      return is_signed ? _NNS_INT16 : _NNS_UINT16;
++    case 4:
++      if (!is_float)
++        return is_signed ? _NNS_INT32 : _NNS_UINT32;
++      return _NNS_FLOAT32;
++    default:
++      ml_logw ("Ara-2: Unsupported bpp=%d, defaulting to UINT8", bpp);
++      return _NNS_UINT8;
++  }
++}
++
++/**
++ * @brief Populate GstTensorsInfo from model input/output params.
++ */
++int
++Ara2Core::populateTensorMeta ()
++{
++  if (!model_)
++    return -EINVAL;
++
++  /* Input tensors */
++  gst_tensors_info_free (&input_meta_);
++  gst_tensors_info_init (&input_meta_);
++  input_meta_.num_tensors = model_->num_inputs;
++
++  for (int i = 0; i < model_->num_inputs; i++) {
++    dv_model_input_param_t *p = &model_->input_param[i];
++    GstTensorInfo *info = gst_tensors_info_get_nth_info (&input_meta_, i);
++
++    /* NNStreamer uses innermost-first dimension ordering.
++     * DVM models store (nch, width, height) and use CHW (planar) layout,
++     * so NNStreamer CHW ordering is [W:H:C:1].
++     *
++     * NOTE: This mapping is hard-coded for spatial input tensors (images).
++     * It should ideally be probed from model metadata to support arbitrary 
++     * tensor layouts. See also the output dimension comment below for the 
++     * ordering inconsistency between input/output. */
++    info->dimension[0] = p->width;
++    info->dimension[1] = p->height;
++    info->dimension[2] = p->nch;
++    info->dimension[3] = 1;
++
++    info->type = bppToTensorType (p->bpp,
++        p->preprocess_param ? p->preprocess_param->is_signed : false);
++
++    if (p->layer_name)
++      info->name = g_strdup (p->layer_name);
++
++    nns_logi ("Ara-2 input[%d]: %s %dx%dx%d bpp=%d size=%d type=%d",
++        i, p->layer_name ? p->layer_name : "unnamed",
++        p->width, p->height, p->nch, p->bpp, p->size, info->type);
++  }
++
++  /* Output tensors */
++  gst_tensors_info_free (&output_meta_);
++  gst_tensors_info_init (&output_meta_);
++  output_meta_.num_tensors = model_->num_outputs;
++
++  for (int i = 0; i < model_->num_outputs; i++) {
++    dv_model_output_param_t *p = &model_->output_param[i];
++    GstTensorInfo *info = gst_tensors_info_get_nth_info (&output_meta_, i);
++
++    /* NNStreamer uses innermost-first dimension ordering.
++     *
++     * DVM output memory is C-contiguous CHW, same as inputs:
++     *   data[nch][height][width] - W varies fastest (stride 1).
++     *
++     * NNStreamer dimension[0] = innermost = W (fastest varying).
++     * This gives [W:H:C:1], matching the input ordering. */
++    info->dimension[0] = p->width;
++    info->dimension[1] = p->height;
++    info->dimension[2] = p->nch;
++    info->dimension[3] = 1;
++
++    info->type = bppToTensorType (p->bpp,
++        p->postprocess_param ? p->postprocess_param->is_signed : false,
++        p->postprocess_param ? p->postprocess_param->is_float : true);
++
++    if (p->layer_name)
++      info->name = g_strdup (p->layer_name);
++
++    nns_logi ("Ara-2 output[%d]: %s %dx%dx%d bpp=%d size=%d type=%d",
++        i, p->layer_name ? p->layer_name : "unnamed",
++        p->width, p->height, p->nch, p->bpp, p->size, info->type);
++
++    if (p->postprocess_param) {
++      dv_model_output_postprocess_param_t *pp = p->postprocess_param;
++      nns_logi ("Ara-2 output[%d] postprocess: qn=%f is_signed=%d "
++          "output_scale=%f offset=%d is_float=%d",
++          i, pp->qn, pp->is_signed, pp->output_scale, pp->offset,
++          pp->is_float);
++    }
++  }
++
++  return 0;
++}
++
++/**
++ * @brief Allocate a DMA-BUF fd from the Linux DMA heap.
++ * @param size Buffer size in bytes.
++ * @return fd on success, -1 on failure.
++ */
++int
++Ara2Core::allocateDmaBufFd (gsize size)
++{
++  if (dma_heap_fd_ < 0)
++    return -1;
++
++  struct dma_heap_allocation_data alloc = {};
++  alloc.len = size;
++  alloc.fd_flags = O_RDWR | O_CLOEXEC;
++
++  if (ioctl (dma_heap_fd_, DMA_HEAP_IOCTL_ALLOC, &alloc) < 0) {
++    ml_logw ("Ara-2: DMA heap alloc failed (%zu bytes): %s",
++        size, g_strerror (errno));
++    return -1;
++  }
++
++  return alloc.fd;
++}
++
++/**
++ * @brief Set up DMA-BUF buffers for input tensors.
++ */
++gboolean
++Ara2Core::setupInputDmaBuf ()
++{
++  if (!model_ || dma_heap_fd_ < 0)
++    return FALSE;
++
++  for (int i = 0; i < model_->num_inputs; i++) {
++    gsize size = model_->input_param[i].size;
++    int fd = allocateDmaBufFd (size);
++    if (fd < 0) {
++      nns_logi ("Ara-2: Input DMA-BUF alloc failed for tensor %d "
++          "(%zu bytes)", i, size);
++      releaseInputDmaBuf ();
++      return FALSE;
++    }
++
++    void *map_ptr = mmap (NULL, size, PROT_READ | PROT_WRITE,
++        MAP_SHARED, fd, 0);
++    if (map_ptr == MAP_FAILED) {
++      ml_logw ("Ara-2: Input DMA-BUF mmap failed (fd=%d size=%zu): %s",
++          fd, size, g_strerror (errno));
++      ::close (fd);
++      releaseInputDmaBuf ();
++      return FALSE;
++    }
++
++    dv_shm_descriptor_t *shm_desc = NULL;
++    dv_status_code_t rc = ara2_api.shmfd_register (
++        session_, fd, (uint32_t) size, 0, 0, &shm_desc);
++    if (rc != DV_SUCCESS) {
++      ml_logw ("Ara-2: Input DMA-BUF shmfd_register failed for tensor %d: "
++          "%s (code=%d)", i, ara2_strerror (rc), rc);
++      munmap (map_ptr, size);
++      ::close (fd);
++      releaseInputDmaBuf ();
++      return FALSE;
++    }
++
++    in_dmabufs_[i].fd = fd;
++    in_dmabufs_[i].size = size;
++    in_dmabufs_[i].map_ptr = map_ptr;
++    in_dmabufs_[i].shm_desc = shm_desc;
++
++    nns_logi ("Ara-2 input DMA-BUF[%d]: fd=%d size=%zu", i, fd, size);
++  }
++
++  /* Create buffer pool for tensor 0 (propose_allocation) */
++  if (model_->num_inputs > 0 && in_dmabufs_[0].fd >= 0) {
++    NnsAra2DmaBufInputPool *pool = (NnsAra2DmaBufInputPool *)
++        g_object_new (nns_ara2_dmabuf_input_pool_get_type (), NULL);
++    pool->fd = in_dmabufs_[0].fd;
++    pool->buf_size = in_dmabufs_[0].size;
++
++    GstStructure *config = gst_buffer_pool_get_config (
++        GST_BUFFER_POOL (pool));
++    gst_buffer_pool_config_set_params (
++        config, NULL, in_dmabufs_[0].size, 1, 1);
++    gst_buffer_pool_set_config (GST_BUFFER_POOL (pool), config);
++
++    in_pool_ = GST_BUFFER_POOL (pool);
++  }
++
++  /* Note: dmabuf_enabled_ is NOT set here. The flag is owned exclusively
++   * by open(), which sets it only after both input and output DMA-BUF
++   * setup succeed. This prevents inconsistent state if setupInputDmaBuf
++   * succeeds but setupOutputDmaBuf fails. */
++  return TRUE;
++}
++
++/**
++ * @brief Set up DMA-BUF buffers for output tensors.
++ */
++gboolean
++Ara2Core::setupOutputDmaBuf ()
++{
++  if (!model_ || dma_heap_fd_ < 0)
++    return FALSE;
++
++  for (int i = 0; i < model_->num_outputs; i++) {
++    gsize size = model_->output_param[i].size;
++    int fd = allocateDmaBufFd (size);
++    if (fd < 0) {
++      nns_logi ("Ara-2: Output DMA-BUF alloc failed for tensor %d "
++          "(%zu bytes)", i, size);
++      releaseOutputDmaBuf ();
++      return FALSE;
++    }
++
++    void *map_ptr = mmap (NULL, size, PROT_READ | PROT_WRITE,
++        MAP_SHARED, fd, 0);
++    if (map_ptr == MAP_FAILED) {
++      ml_logw ("Ara-2: Output DMA-BUF mmap failed (fd=%d size=%zu): %s",
++          fd, size, g_strerror (errno));
++      ::close (fd);
++      releaseOutputDmaBuf ();
++      return FALSE;
++    }
++
++    dv_shm_descriptor_t *shm_desc = NULL;
++    dv_status_code_t rc = ara2_api.shmfd_register (
++        session_, fd, (uint32_t) size, 0, 0, &shm_desc);
++    if (rc != DV_SUCCESS) {
++      ml_logw ("Ara-2: Output DMA-BUF shmfd_register failed for tensor %d: "
++          "%s (code=%d)", i, ara2_strerror (rc), rc);
++      munmap (map_ptr, size);
++      ::close (fd);
++      releaseOutputDmaBuf ();
++      return FALSE;
++    }
++
++    out_dmabufs_[i].fd = fd;
++    out_dmabufs_[i].size = size;
++    out_dmabufs_[i].map_ptr = map_ptr;
++    out_dmabufs_[i].shm_desc = shm_desc;
++
++    nns_logi ("Ara-2 output DMA-BUF[%d]: fd=%d size=%zu", i, fd, size);
++  }
++
++  return TRUE;
++}
++
++/**
++ * @brief Release input DMA-BUF resources.
++ */
++void
++Ara2Core::releaseInputDmaBuf ()
++{
++  if (in_pool_) {
++    gst_buffer_pool_set_active (in_pool_, FALSE);
++    gst_object_unref (in_pool_);
++    in_pool_ = NULL;
++  }
++
++  for (unsigned int i = 0; i < NNS_TENSOR_SIZE_LIMIT; i++) {
++    if (in_dmabufs_[i].shm_desc && ara2_api.shmfd_unregister)
++      ara2_api.shmfd_unregister (in_dmabufs_[i].shm_desc);
++    if (in_dmabufs_[i].map_ptr)
++      munmap (in_dmabufs_[i].map_ptr, in_dmabufs_[i].size);
++    if (in_dmabufs_[i].fd >= 0)
++      ::close (in_dmabufs_[i].fd);
++
++    memset (&in_dmabufs_[i], 0, sizeof (Ara2DmaBufInfo));
++    in_dmabufs_[i].fd = -1;
++  }
++}
++
++/**
++ * @brief Release output DMA-BUF resources.
++ */
++void
++Ara2Core::releaseOutputDmaBuf ()
++{
++  for (unsigned int i = 0; i < NNS_TENSOR_SIZE_LIMIT; i++) {
++    if (out_dmabufs_[i].shm_desc && ara2_api.shmfd_unregister)
++      ara2_api.shmfd_unregister (out_dmabufs_[i].shm_desc);
++    if (out_dmabufs_[i].map_ptr)
++      munmap (out_dmabufs_[i].map_ptr, out_dmabufs_[i].size);
++    if (out_dmabufs_[i].fd >= 0)
++      ::close (out_dmabufs_[i].fd);
++
++    memset (&out_dmabufs_[i], 0, sizeof (Ara2DmaBufInfo));
++    out_dmabufs_[i].fd = -1;
++  }
++}
++
++/**
++ * @brief Open the Ara-2 session, load model, set up DMA-BUF.
++ */
++int
++Ara2Core::open (const GstTensorFilterProperties *prop)
++{
++  dv_status_code_t rc;
++
++  /* 1. Load API */
++  if (!ara2_api_load ()) {
++    ml_loge ("Ara-2 runtime (%s) not found. Install the Ara-2 "
++        "runtime.", ARA2_LIB_NAME);
++    return -ENOENT;
++  }
++
++  /* 2. Parse custom properties */
++  parseCustomProperties (prop->custom_properties);
++
++  /* 3. Create session */
++  rc = ara2_api.session_create (socket_path_.c_str (), &session_);
++  if (rc != DV_SUCCESS || !session_) {
++    ml_loge ("Ara-2: Cannot connect to dvproxy at %s. Is dvproxy running? "
++        "(%s, code=%d)", socket_path_.c_str (), ara2_strerror (rc), rc);
++    return -ECONNREFUSED;
++  }
++
++  nns_logi ("Ara-2: Connected to dvproxy at %s", socket_path_.c_str ());
++
++  /* 4. Get default endpoint group */
++  rc = ara2_api.endpoint_get_default_group (
++      session_, DV_ENDPOINT_DEFAULT_GROUP_ALL, &endpoint_);
++  if (rc != DV_SUCCESS || !endpoint_) {
++    ml_loge ("Ara-2: No endpoints available. Check device connection and "
++        "power. (%s, code=%d)", ara2_strerror (rc), rc);
++    return -ENODEV;
++  }
++
++  nns_logi ("Ara-2: Endpoint group acquired (%d endpoint(s))",
++      endpoint_->num_ep);
++
++  /* 5. Load model */
++  if (prop->num_models < 1 || !prop->model_files[0]) {
++    ml_loge ("Ara-2: No model file specified");
++    return -EINVAL;
++  }
++
++  /* Use dv_model_load_from_file_with_options with send_model_filepath_to_proxy=false
++   * so the client library reads the .dvm file locally and sends the binary blob
++   * to the proxy. Sending only the path (send_model_filepath_to_proxy=true) fails
++   * when the proxy runs in a different filesystem namespace. This matches the
++   * behaviour of ara_inference_init() in the reference implementation. */
++  dv_model_load_options_t load_opts = {};
++  load_opts.model_name = (char *) "model";
++  load_opts.priority = DV_MODEL_PRIORITY_LEVEL_DEFAULT;
++  load_opts.cache = false;
++  load_opts.async = false;
++  load_opts.model_type = DV_MODEL_TYPE_ARA2_CNN;
++  load_opts.send_model_filepath_to_proxy = false;
++
++  rc = ara2_api.model_load_from_file_with_options (session_, endpoint_,
++      prop->model_files[0], &model_, &load_opts); 
++  if (rc != DV_SUCCESS || !model_) {
++    ml_loge ("Ara-2: Failed to load model '%s': %s (code=%d)",
++        prop->model_files[0], ara2_strerror (rc), rc);
++    return -EIO;
++  }
++
++  nns_logi ("Ara-2: Model loaded: '%s' (%d inputs, %d outputs)",
++      model_->name ? model_->name : prop->model_files[0],
++      model_->num_inputs, model_->num_outputs);
++
++  /* 6. Populate tensor metadata */
++  if (populateTensorMeta () != 0) {
++    ml_loge ("Ara-2: Failed to extract tensor metadata from model");
++    return -EINVAL;
++  }
++
++  /* 6a. Log the model's native input format.
++   * The sub-plugin no longer performs any preprocessing - upstream must
++   * deliver data in the model's native format (e.g. int8 CHW) via
++   * tensor_converter or a tensor_transform chain. */
++  if (model_->num_inputs > 0) {
++    dv_model_input_param_t *p0 = &model_->input_param[0];
++    nns_logi ("Ara-2: Model input: %dx%dx%d bpp=%d layout='%s'",
++        p0->width, p0->height, p0->nch, p0->bpp,
++        p0->layout ? p0->layout : "(null)");
++    if (p0->preprocess_param)
++      nns_logi ("Ara-2: preprocess: qn=%f is_signed=%d",
++          p0->preprocess_param->qn, p0->preprocess_param->is_signed);
++  }
++
++  /* 7. Try DMA-BUF setup */
++  dma_heap_fd_ = ::open ("/dev/dma_heap/linux,cma", O_RDONLY | O_CLOEXEC);
++  if (dma_heap_fd_ < 0)
++    dma_heap_fd_ = ::open ("/dev/dma_heap/system", O_RDONLY | O_CLOEXEC);
++
++  if (dma_heap_fd_ >= 0) {
++    gboolean in_ok = setupInputDmaBuf ();
++    gboolean out_ok = setupOutputDmaBuf ();
++    if (in_ok && out_ok) {
++      dmabuf_enabled_ = TRUE;
++      dmabuf_alloc_ = gst_dmabuf_allocator_new ();
++      nns_logi ("Ara-2: DMA-BUF zero-copy enabled (input + output)");
++    } else {
++      /* Partial setup - clean up and fall back to CPU */
++      releaseInputDmaBuf ();
++      releaseOutputDmaBuf ();
++      dmabuf_enabled_ = FALSE;
++      nns_logi ("Ara-2: DMA-BUF setup incomplete, using CPU memory mode");
++    }
++  } else {
++    nns_logi ("Ara-2: DMA heap not available. Using CPU memory mode.");
++  }
++
++  return 0;
++}
++
++/**
++ * @brief Close session and release all resources.
++ */
++void
++Ara2Core::close ()
++{
++  releaseInputDmaBuf ();
++  releaseOutputDmaBuf ();
++
++  if (dmabuf_alloc_) {
++    gst_object_unref (dmabuf_alloc_);
++    dmabuf_alloc_ = nullptr;
++  }
++
++  if (model_ && ara2_api.model_unload) {
++    ara2_api.model_unload (model_);
++    model_ = NULL;
++  }
++
++  if (endpoint_ && ara2_api.endpoint_free_group) {
++    ara2_api.endpoint_free_group (endpoint_);
++    endpoint_ = NULL;
++  }
++
++  if (session_ && ara2_api.session_close) {
++    ara2_api.session_close (session_);
++    session_ = NULL;
++  }
++
++  if (dma_heap_fd_ >= 0) {
++    ::close (dma_heap_fd_);
++    dma_heap_fd_ = -1;
++  }
++}
++
++/**
++ * @brief Fill output tensor quantization parameters from dv_model_t.
++ */
++int
++Ara2Core::get_output_quantization (NnsTensorQuantInfo *quant,
++    unsigned int num_outputs)
++{
++  if (!model_)
++    return -1;
++
++  for (unsigned int i = 0; i < num_outputs
++      && i < (unsigned int) model_->num_outputs; i++) {
++    dv_model_output_param_t *p = &model_->output_param[i];
++    if (p->postprocess_param && p->postprocess_param->qn != 0.0f) {
++      tensor_type dtype = bppToTensorType (p->bpp,
++          p->postprocess_param->is_signed, p->postprocess_param->is_float);
++      if (p->postprocess_param->offset == 0)
++        nns_tensor_quant_info_set_symmetric (&quant[i], dtype,
++            (gdouble) p->postprocess_param->qn);
++      else
++        nns_tensor_quant_info_set_affine (&quant[i], dtype,
++            (gdouble) p->postprocess_param->qn,
++            (gint64) p->postprocess_param->offset);
++    }
++  }
++
++  return 0;
++}
++
++/**
++ * @brief Get input tensor dimensions.
++ */
++int
++Ara2Core::getInputTensorDim (GstTensorsInfo *info)
++{
++  gst_tensors_info_copy (info, &input_meta_);
++  return 0;
++}
++
++/**
++ * @brief Get output tensor dimensions.
++ */
++int
++Ara2Core::getOutputTensorDim (GstTensorsInfo *info)
++{
++  gst_tensors_info_copy (info, &output_meta_);
++  return 0;
++}
++
++/**
++ * @brief Three-tier V2 invoke for Ara-2 NPU inference.
++ *
++ * Tier 1: Pre-allocated pool match (true zero-copy, 0 per-frame overhead)
++ * Tier 2: External DMA-BUF fd (proxy handles mapping)
++ * Tier 3: CPU fallback (memcpy into registered DMA-BUF or raw pointer)
++ */
++int
++Ara2Core::invokeV2 (void **input, void **output,
++    unsigned int num_input, unsigned int num_output)
++{
++  g_return_val_if_fail (model_ && session_ && endpoint_, -EINVAL);
++  g_return_val_if_fail (num_input <= (unsigned int) model_->num_inputs
++      && num_output <= (unsigned int) model_->num_outputs, -EINVAL);
++
++  int64_t start_time = g_get_monotonic_time ();
++
++  dv_blob_t in_blobs[NNS_TENSOR_SIZE_LIMIT];
++  dv_blob_t out_blobs[NNS_TENSOR_SIZE_LIMIT];
++  GstMapInfo in_maps[NNS_TENSOR_SIZE_LIMIT];
++  gboolean in_mapped[NNS_TENSOR_SIZE_LIMIT] = { FALSE, };
++  void *cpu_out_bufs[NNS_TENSOR_SIZE_LIMIT] = { NULL, };
++  int ret = -1;
++
++  /* Build input blobs */
++  for (unsigned int i = 0; i < num_input; i++) {
++    GstMemory *mem = (GstMemory *) input[i];
++    gsize size = model_->input_param[i].size;
++
++    in_blobs[i].offset = 0;
++    in_blobs[i].size = size;
++
++    /* Tier 1: Pre-allocated pool match */
++    if (dmabuf_enabled_ && gst_is_dmabuf_memory (mem)) {
++      int fd = gst_dmabuf_memory_get_fd (mem);
++
++      if (in_dmabufs_[i].fd >= 0 && fd == in_dmabufs_[i].fd) {
++        /* Our pre-registered DMA-BUF - true zero-copy */
++        in_blobs[i].handle = in_dmabufs_[i].shm_desc;
++        in_blobs[i].blob_type = DV_BLOB_TYPE_SHM_DESCRIPTOR;
++        continue;
++      }
++
++      /* Tier 2: External DMA-BUF fd - perform cache sync before handoff
++       * to dvproxy. Until dvproxy's internal cache coherency handling is
++       * confirmed, we defensively ensure the buffer is coherent for device
++       * access via a CPU read begin+end cycle (cache invalidate). */
++      {
++        struct dma_buf_sync sync = { 0 };
++        sync.flags = DMA_BUF_SYNC_START | DMA_BUF_SYNC_READ;
++        if (ioctl (fd, DMA_BUF_IOCTL_SYNC, &sync) == 0) {
++          sync.flags = DMA_BUF_SYNC_END | DMA_BUF_SYNC_READ;
++          ioctl (fd, DMA_BUF_IOCTL_SYNC, &sync);
++        }
++      }
++      in_blobs[i].handle = (void *) (intptr_t) fd;
++      in_blobs[i].blob_type = DV_BLOB_TYPE_FD;
++      continue;
++    }
++
++    /* Tier 3: CPU fallback */
++    if (!gst_memory_map (mem, &in_maps[i], GST_MAP_READ)) {
++      ml_loge ("Ara-2: Failed to map input memory %u", i);
++      /* No output[i] has been written yet at this point, so jumping to
++       * cleanup (not cleanup_output) is correct - only input maps and
++       * CPU output buffers need releasing. */
++      goto cleanup;
++    }
++    in_mapped[i] = TRUE;
++
++    if (dmabuf_enabled_ && in_dmabufs_[i].map_ptr) {
++      /* Copy into pre-registered DMA-BUF */
++      gsize copy_size = MIN (in_maps[i].size, in_dmabufs_[i].size);
++      memcpy (in_dmabufs_[i].map_ptr, in_maps[i].data, copy_size);
++      in_blobs[i].handle = in_dmabufs_[i].shm_desc;
++      in_blobs[i].blob_type = DV_BLOB_TYPE_SHM_DESCRIPTOR;
++    } else {
++      /* Raw pointer path */
++      in_blobs[i].handle = in_maps[i].data;
++      in_blobs[i].blob_type = DV_BLOB_TYPE_RAW_POINTER;
++    }
++  }
++
++  /* Build output blobs */
++  for (unsigned int i = 0; i < num_output; i++) {
++    gsize size = model_->output_param[i].size;
++
++    out_blobs[i].offset = 0;
++    out_blobs[i].size = size;
++
++    if (dmabuf_enabled_ && out_dmabufs_[i].shm_desc) {
++      out_blobs[i].handle = out_dmabufs_[i].shm_desc;
++      out_blobs[i].blob_type = DV_BLOB_TYPE_SHM_DESCRIPTOR;
++    } else {
++      /* Allocate temp CPU buffer */
++      cpu_out_bufs[i] = g_malloc (size);
++      if (!cpu_out_bufs[i]) {
++        ml_loge ("Ara-2: Failed to allocate output buffer %u (%zu bytes)",
++            i, size);
++        goto cleanup;
++      }
++      out_blobs[i].handle = cpu_out_bufs[i];
++      out_blobs[i].blob_type = DV_BLOB_TYPE_RAW_POINTER;
++    }
++  }
++
++  {
++    int64_t stop_time = g_get_monotonic_time ();
++    ara2_internal_stats.total_overhead_latency += stop_time - start_time;
++  }
++
++  /* First-invoke logging */
++  {
++    static gboolean first_invoke_logged = FALSE;
++    if (G_UNLIKELY (!first_invoke_logged)) {
++      first_invoke_logged = TRUE;
++      nns_logi ("ara2_invoke_v2 first frame: input_dmabuf=%s output_dmabuf=%s "
++          "input_pool=%s",
++          dmabuf_enabled_ ? "yes" : "no",
++          (dmabuf_enabled_ && out_dmabufs_[0].shm_desc) ? "yes" : "no",
++          in_pool_ ? "yes" : "no");
++    }
++  }
++
++  /* Invoke inference */
++  {
++    dv_infer_request_t *req = NULL;
++
++    start_time = g_get_monotonic_time ();
++    dv_status_code_t rc = ara2_api.infer_sync (
++        session_, endpoint_, model_,
++        in_blobs, out_blobs,
++        timeout_ms_, enable_stats_ ? true : false, &req);
++    {
++      int64_t stop_time = g_get_monotonic_time ();
++      ara2_internal_stats.total_invoke_latency += stop_time - start_time;
++      ara2_internal_stats.total_invoke_num += 1;
++    }
++
++    if (rc != DV_SUCCESS) {
++      if (rc == DV_REQUEST_TIMEDOUT || rc == DV_INFER_TIME_OUT) {
++        ml_loge ("Ara-2: Inference timed out after %dms", timeout_ms_);
++      } else {
++        ml_loge ("Ara-2: Inference failed: %s (code=%d)",
++            ara2_strerror (rc), rc);
++      }
++      if (req)
++        ara2_api.infer_free (req);
++      goto cleanup;
++    }
++
++    /* Check inference status */
++    if (req && req->status != DV_INFERENCE_STATUS_COMPLETED) {
++      ml_loge ("Ara-2: Inference not completed (status=%d)", req->status);
++      ara2_api.infer_free (req);
++      goto cleanup;
++    }
++
++    /* Log stats if enabled */
++    if (enable_stats_ && req && req->stats) {
++      dv_infer_statistics_t *s = req->stats;
++      nns_logi ("Ara-2 stats: input_transfer=%.1fus inference=%.1fus "
++          "output_transfer=%.1fus",
++          s->input_transfer_time, s->inference_execution_time,
++          s->output_transfer_time);
++    }
++
++    if (req)
++      ara2_api.infer_free (req);
++  }
++
++  /* Build output GstMemory* - AFTER inference completes (DMA-BUF unmap pitfall) */
++  if (dmabuf_enabled_) {
++    for (unsigned int i = 0; i < num_output; i++) {
++      GstMemory *out_mem = gst_dmabuf_allocator_alloc_with_flags (
++          dmabuf_alloc_, out_dmabufs_[i].fd,
++          out_dmabufs_[i].size, GST_FD_MEMORY_FLAG_DONT_CLOSE);
++      if (G_UNLIKELY (!out_mem)) {
++        ml_loge ("Ara-2: Failed to wrap output DMA-BUF fd=%d",
++            out_dmabufs_[i].fd);
++        goto cleanup_output;
++      }
++      output[i] = out_mem;
++    }
++  } else {
++    /* CPU path: wrap temp buffers as GstMemory */
++    for (unsigned int i = 0; i < num_output; i++) {
++      gsize size = model_->output_param[i].size;
++      GstMemory *out_mem = gst_allocator_alloc (NULL, size, NULL);
++      if (G_UNLIKELY (!out_mem)) {
++        ml_loge ("Ara-2: Failed to allocate output %u (%zu bytes)", i, size);
++        goto cleanup_output;
++      }
++
++      GstMapInfo out_map;
++      if (!gst_memory_map (out_mem, &out_map, GST_MAP_WRITE)) {
++        gst_memory_unref (out_mem);
++        goto cleanup_output;
++      }
++
++      memcpy (out_map.data, cpu_out_bufs[i], size);
++      gst_memory_unmap (out_mem, &out_map);
++      output[i] = out_mem;
++    }
++  }
++
++  ret = 0;
++  goto cleanup;
++
++cleanup_output:
++  for (unsigned int i = 0; i < num_output; i++) {
++    if (output[i]) {
++      gst_memory_unref ((GstMemory *) output[i]);
++      output[i] = NULL;
++    }
++  }
++
++cleanup:
++  /* Unmap CPU-mapped inputs AFTER inference (DMA-BUF unmap pitfall) */
++  for (unsigned int i = 0; i < num_input; i++) {
++    if (in_mapped[i])
++      gst_memory_unmap ((GstMemory *) input[i], &in_maps[i]);
++  }
++
++  /* Free CPU output buffers */
++  for (unsigned int i = 0; i < num_output; i++) {
++    g_free (cpu_out_bufs[i]);
++  }
++
++  return ret;
++}
++
++/**
++ * @brief Add DMA-BUF pool to upstream allocation query.
++ */
++int
++Ara2Core::proposeAllocation (GstQuery *query)
++{
++  if (!dmabuf_enabled_ || !query)
++    return 0;
++
++  if (in_pool_) {
++    gst_query_add_allocation_pool (
++        query, in_pool_, in_dmabufs_[0].size, 1, 1);
++    nns_logi ("Ara-2: Proposed input DMA-BUF pool: fd=%d size=%zu",
++        in_dmabufs_[0].fd, in_dmabufs_[0].size);
++  }
++
++  if (dmabuf_alloc_)
++    gst_query_add_allocation_param (query, dmabuf_alloc_, NULL);
++
++  return 0;
++}
++
++/* ========== Framework callbacks ========== */
++
++static int
++ara2_open (const GstTensorFilterProperties *prop, void **private_data)
++{
++  Ara2Core *core = static_cast<Ara2Core *> (*private_data);
++
++  if (core) {
++    /* Already opened - return 0 (success) per V2 framework contract
++     * where open() returns 0 on success and < 0 on error. */
++    return 0;
++  }
++
++  core = new Ara2Core ();
++  int status = core->open (prop);
++  if (status != 0) {
++    delete core;
++    *private_data = NULL;
++    return status;
++  }
++
++  *private_data = core;
++  return 0;
++}
++
++static void
++ara2_close (const GstTensorFilterProperties *prop, void **private_data)
++{
++  Ara2Core *core = static_cast<Ara2Core *> (*private_data);
++  UNUSED (prop);
++
++  if (!core)
++    return;
++
++  delete core;
++  *private_data = NULL;
++}
++
++static int
++ara2_invoke_v2 (const GstTensorFilterProperties *prop, void **private_data,
++    void **input, void **output,
++    unsigned int num_input, unsigned int num_output)
++{
++  Ara2Core *core = static_cast<Ara2Core *> (*private_data);
++  g_return_val_if_fail (core && input && output, -EINVAL);
++  UNUSED (prop);
++
++  return core->invokeV2 (input, output, num_input, num_output);
++}
++
++static int
++ara2_getInputDim (const GstTensorFilterProperties *prop,
++    void **private_data, GstTensorsInfo *info)
++{
++  Ara2Core *core = static_cast<Ara2Core *> (*private_data);
++  g_return_val_if_fail (core && info, -EINVAL);
++  UNUSED (prop);
++
++  return core->getInputTensorDim (info);
++}
++
++static int
++ara2_getOutputDim (const GstTensorFilterProperties *prop,
++    void **private_data, GstTensorsInfo *info)
++{
++  Ara2Core *core = static_cast<Ara2Core *> (*private_data);
++  g_return_val_if_fail (core && info, -EINVAL);
++  UNUSED (prop);
++
++  return core->getOutputTensorDim (info);
++}
++
++/**
++ * @brief V2 propose_allocation callback.
++ */
++static int
++ara2_propose_allocation_v2 (const GstTensorFilterProperties *prop,
++    void **private_data, void *query_ptr)
++{
++  Ara2Core *core = static_cast<Ara2Core *> (*private_data);
++  GstQuery *query = (GstQuery *) query_ptr;
++  UNUSED (prop);
++
++  if (!core || !query)
++    return 0;
++
++  return core->proposeAllocation (query);
++}
++
++/**
++ * @brief Check availability of ACCL_NPU.
++ */
++static int
++ara2_checkAvailability (accl_hw hw)
++{
++  if (hw == ACCL_NPU)
++    return 0;
++
++  return -ENOENT;
++}
++
++/**
++ * @brief V2 get_output_quantization callback.
++ */
++static int
++ara2_get_output_quantization (const GstTensorFilterProperties *prop,
++    void **private_data, void *quant_ptr, unsigned int num_outputs)
++{
++  Ara2Core *core = static_cast<Ara2Core *> (*private_data);
++  NnsTensorQuantInfo *quant = static_cast<NnsTensorQuantInfo *> (quant_ptr);
++  UNUSED (prop);
++
++  if (!core)
++    return -1;
++
++  return core->get_output_quantization (quant, num_outputs);
++}
++
++static GstTensorFilterFramework NNS_support_ara2
++    = { .version = GST_TENSOR_FILTER_FRAMEWORK_V2,
++        .open = ara2_open,
++        .close = ara2_close,
++        { .v2 = {
++              .name = (char *) "ara2",
++              .allow_in_place = FALSE,
++              .allocate_in_invoke = TRUE,
++              .run_without_model = FALSE,
++              .verify_model_path = TRUE,
++              .statistics = &ara2_internal_stats,
++              .invoke_v2 = ara2_invoke_v2,
++              .getInputDimension = ara2_getInputDim,
++              .getOutputDimension = ara2_getOutputDim,
++              .setInputDimension = NULL,
++              .destroyNotify = nullptr,
++              .reloadModel = nullptr,
++              .handleEvent = nullptr,
++              .checkAvailability = ara2_checkAvailability,
++              .allocateInInvoke = nullptr,
++              .propose_allocation = ara2_propose_allocation_v2,
++              .get_model_metadata = NULL,
++              .get_model_labels = NULL,
++              .get_output_quantization = ara2_get_output_quantization,
++          } } };
++
++/**
++ * @brief Internal function to register the filter.
++ */
++static void
++_nns_filter_register_ara2 (void)
++{
++  nnstreamer_filter_probe (&NNS_support_ara2);
++  nnstreamer_filter_set_custom_property_desc (NNS_support_ara2.v2.name,
++      "SocketPath", "Unix socket path for dvproxy (default: "
++      ARA2_DEFAULT_SOCKET ")",
++      "Timeout", "Inference timeout in milliseconds (default: 5000)",
++      "EnableStats", "Enable inference statistics logging (true/false, "
++      "default: false)",
++      NULL);
++}
++
++/** @brief Initialize this object for tensor_filter subplugin runtime register */
++void
++init_filter_ara2 (void)
++{
++  _nns_filter_register_ara2 ();
++}
++
++/** @brief Destruct the subplugin */
++void
++fini_filter_ara2 (void)
++{
++  nnstreamer_filter_exit (NNS_support_ara2.v2.name);
++}
+diff --git a/meson_options.txt b/meson_options.txt
+index 1c6c3ac9..ab81da25 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -35,6 +35,7 @@ option('ml-agent-support', type: 'feature', value: 'auto')
+ option('onnxruntime-support', type: 'feature', value: 'auto')
+ option('dali-support', type: 'feature', value: 'auto')
+ option('llama2c-support', type: 'feature', value: 'auto')
++option('ara2-support', type: 'feature', value: 'auto', description: 'Build Ara-2 NPU tensor filter sub-plugin (requires dvapi.h)')
+ 
+ # booleans & other options
+ option('enable-test', type: 'boolean', value: true)
+-- 
+2.34.1
+

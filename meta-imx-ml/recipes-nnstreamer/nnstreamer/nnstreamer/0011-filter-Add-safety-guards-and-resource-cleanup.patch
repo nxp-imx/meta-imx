@@ -1,0 +1,214 @@
+From ec49289b48c0a9598e21211695739a8635ce7002 Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Mon, 3 Aug 2026 14:54:05 +0200
+Subject: [PATCH] [filter] Add safety guards and resource cleanup
+
+- tensor_quant_info: Add num_params guard in nns_tensor_quant_info_clear()
+  to prevent crashes when called on zero-initialized structs
+
+- filter API: Document V0/V2 union field offset compatibility requirement
+  to prevent silent ABI breaks when fields are added/reordered
+
+- filter/ara2: Override set_config in NnsAra2DmaBufInputPool to enforce
+  max_buffers=1, preventing data corruption from aliased DMA-BUF fds
+  across concurrent frames
+
+- filter/ara2: Add dlclose(ara2_api.lib_handle) in fini_filter_ara2()
+  to properly release dlopen resources
+
+- filter/ara2: Document output DMA-BUF fd lifetime contract and
+  GStreamer teardown order guarantees
+
+- filter/ara2: Add warning when multi-tensor input (num_inputs > 1) is
+  used with ZeroCopy enabled, clarifying that only tensor[0] uses
+  zero-copy
+
+- filter/ara2: Validate RGBP/BGRP planar format constraints (width must
+  be multiple of 4) and warn about padding removal not being supported
+  in DMA-BUF path
+
+- Documentation: Update ara2 log format examples to include input_pool
+  field for accurate debugging reference
+
+Upstream-Status: Inappropriate [embedded specific]
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ Documentation/tensor_filter_ara2.md           |  7 ++-
+ .../tensor_filter/tensor_filter_ara2.cc       | 60 +++++++++++++++++++
+ .../include/nnstreamer_plugin_api_filter.h    |  5 ++
+ gst/nnstreamer/nnstreamer_tensor_quant_info.c | 11 +++-
+ 4 files changed, 79 insertions(+), 4 deletions(-)
+
+diff --git a/Documentation/tensor_filter_ara2.md b/Documentation/tensor_filter_ara2.md
+index 371e93bd..fba0ee6f 100644
+--- a/Documentation/tensor_filter_ara2.md
++++ b/Documentation/tensor_filter_ara2.md
+@@ -96,7 +96,7 @@ v4l2src
+ Zero-copy is active when you see this log line (GST_DEBUG=tensor_filter:5):
+ ```
+ Ara-2: DMA-BUF zero-copy enabled (input + output)
+-ara2_invoke_v2 first frame: input_dmabuf=yes output_dmabuf=yes
++ara2_invoke_v2 first frame: input_dmabuf=yes output_dmabuf=yes input_pool=yes
+ ```
+ 
+ If disabled (default), you will see:
+@@ -118,9 +118,12 @@ output tensors without hardcoded parameters.
+ If DMA-BUF is not available (e.g. videotestsrc pipeline) the sub-plugin
+ falls back to system memory automatically. The log will show:
+ ```
+-ara2_invoke_v2 first frame: input_dmabuf=no output_dmabuf=yes
++ara2_invoke_v2 first frame: input_dmabuf=no output_dmabuf=yes input_pool=no
+ ```
+ 
++The `input_pool` field indicates whether the DMA-BUF input pool is active for
++upstream allocation proposals.
++
+ ## Debugging
+ 
+ ```bash
+diff --git a/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc b/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
+index 6fd09011..4334125b 100644
+--- a/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
++++ b/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
+@@ -246,11 +246,37 @@ nns_ara2_dmabuf_pool_alloc (GstBufferPool *pool, GstBuffer **buffer,
+   return GST_FLOW_OK;
+ }
+ 
++static gboolean
++nns_ara2_dmabuf_pool_set_config (GstBufferPool *pool, GstStructure *config)
++{
++  guint min_bufs, max_bufs;
++  GstCaps *caps = NULL;
++  guint size = 0;
++
++  gst_buffer_pool_config_get_params (config, &caps, &size, &min_bufs, &max_bufs);
++
++  /* This pool wraps a single pre-allocated DMA-BUF fd shared across all
++   * allocated GstBuffers (GST_FD_MEMORY_FLAG_DONT_CLOSE). Allowing more than
++   * one outstanding buffer would alias the same fd across concurrent frames,
++   * causing silent data corruption. Clamp to max=1 unconditionally. */
++  if (max_bufs != 1) {
++    GST_WARNING_OBJECT (pool,
++        "NnsAra2DmaBufInputPool only supports max_buffers=1 "
++        "(requested %u); clamping to 1", max_bufs);
++    gst_buffer_pool_config_set_params (config, caps, size, 1, 1);
++  }
++
++  return GST_BUFFER_POOL_CLASS (
++      g_type_class_peek_parent (G_OBJECT_GET_CLASS (pool)))->set_config (
++      pool, config);
++}
++
+ static void
+ nns_ara2_dmabuf_pool_class_init (gpointer klass, gpointer class_data)
+ {
+   UNUSED (class_data);
+   GST_BUFFER_POOL_CLASS (klass)->alloc_buffer = nns_ara2_dmabuf_pool_alloc;
++  GST_BUFFER_POOL_CLASS (klass)->set_config = nns_ara2_dmabuf_pool_set_config;
+ }
+ 
+ static void
+@@ -520,6 +546,18 @@ Ara2Core::populateTensorMeta ()
+     if (p->layer_name)
+       info->name = g_strdup (p->layer_name);
+ 
++    /* Validate planar format constraints for DMA-BUF zero-copy */
++    if (p->layout && (strcmp (p->layout, "RGBP") == 0 ||
++                      strcmp (p->layout, "BGRP") == 0)) {
++      if (p->width % 4 != 0) {
++        ml_logw ("Ara-2: input[%d] planar format %s width=%d is not a multiple of 4. "
++            "DMA-BUF zero-copy path may produce incorrect results.",
++            i, p->layout, p->width);
++      }
++      nns_logi ("Ara-2: input[%d] uses planar format %s - padding removal not supported "
++          "in DMA-BUF path", i, p->layout);
++    }
++
+     nns_logi ("Ara-2 input[%d]: %s %dx%dx%d bpp=%d size=%d type=%d",
+         i, p->layer_name ? p->layer_name : "unnamed",
+         p->width, p->height, p->nch, p->bpp, p->size, info->type);
+@@ -864,6 +902,13 @@ Ara2Core::open (const GstTensorFilterProperties *prop)
+       dmabuf_enabled_ = TRUE;
+       dmabuf_alloc_ = gst_dmabuf_allocator_new ();
+       nns_logi ("Ara-2: DMA-BUF zero-copy enabled (input + output)");
++      
++      /* Warn if multi-tensor input is used */
++      if (model_->num_inputs > 1) {
++        ml_logw ("Ara-2: Multi-tensor input DMA-BUF not supported. "
++            "Only tensor[0] uses zero-copy; remaining %d input(s) use CPU copy.",
++            model_->num_inputs - 1);
++      }
+     } else {
+       /* Partial setup - clean up and fall back to CPU */
+       releaseInputDmaBuf ();
+@@ -1201,6 +1246,14 @@ Ara2Core::invokeV2 (void **input, void **output,
+ 
+   /* Build output GstMemory* - AFTER inference completes (DMA-BUF unmap pitfall) */
+   if (dmabuf_enabled_) {
++    /* Output DMA-BUF fd lifetime: GST_FD_MEMORY_FLAG_DONT_CLOSE means GStreamer
++     * will NOT close the fd when the GstMemory is freed. The fd remains owned by
++     * Ara2Core::out_dmabufs_[] and is closed only in releaseOutputDmaBuf()/close().
++     *
++     * Safety: GStreamer's pipeline teardown order guarantees that elements are
++     * stopped sink-to-source, draining all buffers from downstream queues/sinks
++     * before tensor_filter::close() is called. This ensures no GstMemory outlives
++     * the fd it references with zero-overhead. */
+     for (unsigned int i = 0; i < num_output; i++) {
+       GstMemory *out_mem = gst_dmabuf_allocator_alloc_with_flags (
+           dmabuf_alloc_, out_dmabufs_[i].fd,
+@@ -1456,4 +1509,11 @@ void
+ fini_filter_ara2 (void)
+ {
+   nnstreamer_filter_exit (NNS_support_ara2.v2.name);
++
++  /* Release the dlopen handle acquired in ara2_api_load().
++   * Safe to call even if ara2_api_load() was never invoked (handle will be NULL). */
++  if (ara2_api.lib_handle) {
++    dlclose (ara2_api.lib_handle);
++    ara2_api.lib_handle = NULL;
++  }
+ }
+diff --git a/gst/nnstreamer/include/nnstreamer_plugin_api_filter.h b/gst/nnstreamer/include/nnstreamer_plugin_api_filter.h
+index 5c8de730..002576d2 100644
+--- a/gst/nnstreamer/include/nnstreamer_plugin_api_filter.h
++++ b/gst/nnstreamer/include/nnstreamer_plugin_api_filter.h
+@@ -609,6 +609,11 @@ struct _GstTensorFilterFramework
+      * mirrors V0's in the union (same offsets), so the union memory is shared.
+      *
+      * Only invoke_v2 (unique to V2) requires explicit fw->v2.invoke_v2 access.
++     *
++     * IMPORTANT: V0 and V2 must maintain identical field offsets for shared members
++     * (allocate_in_invoke, run_without_model, verify_model_path, etc.). Any field
++     * addition or reordering in one struct must be mirrored in the other to preserve
++     * the union memory-overlap contract used by tensor_filter_common.
+      */
+   };
+ };
+diff --git a/gst/nnstreamer/nnstreamer_tensor_quant_info.c b/gst/nnstreamer/nnstreamer_tensor_quant_info.c
+index 557e7f52..4c022ff4 100644
+--- a/gst/nnstreamer/nnstreamer_tensor_quant_info.c
++++ b/gst/nnstreamer/nnstreamer_tensor_quant_info.c
+@@ -71,11 +71,18 @@ nns_tensor_quant_info_set_per_channel (NnsTensorQuantInfo * info,
+ 
+ /**
+  * @brief Clear (free arrays in) a NnsTensorQuantInfo.
++ *
++ * Safe to call on a zero-initialised struct (num_params == 0 → no g_free).
++ * Callers must zero-initialise the struct before the first call, e.g.:
++ *   NnsTensorQuantInfo info = {};
++ *   nns_tensor_quant_info_set_affine (&info, ...);
+  */
+ void
+ nns_tensor_quant_info_clear (NnsTensorQuantInfo * info)
+ {
+-  g_free (info->scales);
+-  g_free (info->zero_points);
++  if (info->num_params > 0) {
++    g_free (info->scales);
++    g_free (info->zero_points);
++  }
+   memset (info, 0, sizeof (*info));
+ }
+-- 
+2.34.1
+

@@ -1,0 +1,169 @@
+From 5d086b56f270f5f22ff3a5e49767828ee610aee6 Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Fri, 31 Jul 2026 11:41:09 +0200
+Subject: [filter/ara2] Improve external DMA-BUF handling for zero-copy
+
+Optimize handling of external DMA-BUF fds from upstream elements
+(e.g., v4l2src, hardware video converters) by caching fd → shm_desc
+mappings to eliminate per-frame dvproxy registration overhead.
+
+Key improvements:
+
+1. External DMA-BUF fd caching
+   - Add std::unordered_map<int, dv_shm_descriptor_t*> for fd → shm_desc cache
+   - Implement getOrRegisterExternalFd() with automatic caching
+   - Proper cleanup: unregister all cached fds on close()
+
+2. Improved Tier 2 invoke path
+   - External fds now registered with dvproxy and use SHM_DESCRIPTOR blob type
+   - Ensures blob type consistency across all input/output tensors
+   - Cache sync performed before registration for device access
+   - Fallback to FD blob type only if registration fails
+   - Better logging: shows cache size and registration events
+
+3. Code quality improvements
+   - Add <unordered_map> include
+   - Clearer logging messages
+   - Consistent terminology throughout
+
+Upstream-Status: Inappropriate [embedded specific]
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ .../tensor_filter/tensor_filter_ara2.cc       | 83 +++++++++++++++++--
+ 1 file changed, 75 insertions(+), 8 deletions(-)
+
+diff --git a/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc b/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
+index b0901928..b9cac3ca 100644
+--- a/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
++++ b/ext/nnstreamer/tensor_filter/tensor_filter_ara2.cc
+@@ -51,6 +51,7 @@
+ #include <unistd.h>
+ 
+ #include <string>
++#include <unordered_map>
+ 
+ #include <gst/gst.h>
+ #include <gst/allocators/gstdmabuf.h>
+@@ -342,10 +343,14 @@ class Ara2Core
+   gboolean enable_stats_;
+   int dma_heap_fd_;
+ 
++  /* External DMA-BUF fd cache (fd → shm_desc mapping) */
++  std::unordered_map<int, dv_shm_descriptor_t *> external_fd_cache_;
++
+   /* Internal helpers */
+   int parseCustomProperties (const char *custom);
+   int populateTensorMeta ();
+   tensor_type bppToTensorType (int bpp, bool is_signed, bool is_float = false);
++  dv_shm_descriptor_t *getOrRegisterExternalFd (int fd, gsize size);
+ 
+   /* DMA-BUF lifecycle */
+   int allocateDmaBufFd (gsize size);
+@@ -874,6 +879,14 @@ Ara2Core::close ()
+   releaseInputDmaBuf ();
+   releaseOutputDmaBuf ();
+ 
++  /* Unregister all external DMA-BUF fds */
++  for (auto& entry : external_fd_cache_) {
++    if (entry.second && ara2_api.shmfd_unregister) {
++      ara2_api.shmfd_unregister (entry.second);
++    }
++  }
++  external_fd_cache_.clear ();
++
+   if (dmabuf_alloc_) {
+     gst_object_unref (dmabuf_alloc_);
+     dmabuf_alloc_ = nullptr;
+@@ -949,6 +962,48 @@ Ara2Core::getOutputTensorDim (GstTensorsInfo *info)
+   return 0;
+ }
+ 
++/**
++ * @brief Get or register external DMA-BUF fd with dvproxy.
++ * @param fd DMA-BUF file descriptor
++ * @param size Buffer size in bytes
++ * @return shm_descriptor handle, or NULL on error
++ *
++ * This function maintains a cache of external fd → shm_desc mappings
++ * to avoid re-registering the same fd on every frame.
++ */
++dv_shm_descriptor_t *
++Ara2Core::getOrRegisterExternalFd (int fd, gsize size)
++{
++  /* Check cache first */
++  auto it = external_fd_cache_.find (fd);
++  if (it != external_fd_cache_.end ()) {
++    return it->second;
++  }
++
++  /* Cache miss - register new fd with dvproxy */
++  if (!session_ || !ara2_api.shmfd_register) {
++    ml_loge ("Ara-2: Cannot register fd=%d (session or API not available)", fd);
++    return NULL;
++  }
++
++  dv_shm_descriptor_t *shm_desc = NULL;
++  dv_status_code_t rc = ara2_api.shmfd_register (
++      session_, fd, (uint32_t) size, 0, 0, &shm_desc);
++  if (rc != DV_SUCCESS || !shm_desc) {
++    ml_logw ("Ara-2: Failed to register external DMA-BUF fd=%d size=%zu: %s (code=%d)",
++        fd, size, ara2_strerror (rc), rc);
++    return NULL;
++  }
++
++  /* Cache the mapping for future frames */
++  external_fd_cache_[fd] = shm_desc;
++
++  nns_logi ("Ara-2: Registered external DMA-BUF fd=%d size=%zu → shm_desc=%p (cache size: %zu)",
++      fd, size, shm_desc, external_fd_cache_.size ());
++
++  return shm_desc;
++}
++
+ /**
+  * @brief Three-tier V2 invoke for Ara-2 NPU inference.
+  *
+@@ -992,21 +1047,33 @@ Ara2Core::invokeV2 (void **input, void **output,
+         continue;
+       }
+ 
+-      /* Tier 2: External DMA-BUF fd - perform cache sync before handoff
+-       * to dvproxy. Until dvproxy's internal cache coherency handling is
+-       * confirmed, we defensively ensure the buffer is coherent for device
+-       * access via a CPU read begin+end cycle (cache invalidate). */
++      /* Tier 2: External DMA-BUF fd - register with dvproxy and use SHM_DESCRIPTOR.
++       * This ensures blob type consistency (all inputs/outputs use SHM_DESCRIPTOR).
++       * The fd → shm_desc mapping is cached, so registration overhead only occurs
++       * on first use per unique fd. */
+       {
++        /* Perform cache sync for device access */
+         struct dma_buf_sync sync = { 0 };
+         sync.flags = DMA_BUF_SYNC_START | DMA_BUF_SYNC_READ;
+         if (ioctl (fd, DMA_BUF_IOCTL_SYNC, &sync) == 0) {
+           sync.flags = DMA_BUF_SYNC_END | DMA_BUF_SYNC_READ;
+           ioctl (fd, DMA_BUF_IOCTL_SYNC, &sync);
+         }
++
++        /* Register fd with dvproxy (cached after first call) */
++        dv_shm_descriptor_t *shm_desc = getOrRegisterExternalFd (fd, size);
++        if (shm_desc) {
++          in_blobs[i].handle = shm_desc;
++          in_blobs[i].blob_type = DV_BLOB_TYPE_SHM_DESCRIPTOR;
++          continue;
++        }
++
++        /* Fallback to FD if registration fails */
++        ml_logw ("Ara-2: External fd registration failed for fd=%d, using FD blob type", fd);
++        in_blobs[i].handle = (void *) (intptr_t) fd;
++        in_blobs[i].blob_type = DV_BLOB_TYPE_FD;
++        continue;
+       }
+-      in_blobs[i].handle = (void *) (intptr_t) fd;
+-      in_blobs[i].blob_type = DV_BLOB_TYPE_FD;
+-      continue;
+     }
+ 
+     /* Tier 3: CPU fallback */
+-- 
+2.34.1
+

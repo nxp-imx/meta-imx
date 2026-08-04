@@ -1,0 +1,104 @@
+From deb1534d2993bdc249e6746091bf2b1455c70720 Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Thu, 25 Jun 2026 21:11:50 +0200
+Subject: [filter] Fix V2 transform crash on fragmented single-tensor buffers [VVP-924]
+
+gst_tensor_filter_transform_v2() assumed one GstMemory block per logical
+tensor. Elements such as tensor_transform (typecast + arithmetic chains)
+can leave a single logical tensor split across multiple GstMemory blocks,
+causing the V2 path to abort with:
+
+  gst_tensor_filter_transform_v2: input buffer has N memory blocks, expected 1
+
+Consolidate fragmented single-tensor buffers into one contiguous GstMemory
+before passing to invoke_v2. The consolidation is intentionally narrow:
+it only fires when all three conditions hold:
+  1. exactly one input tensor (single-tensor caps), AND
+  2. more than one GstMemory block in the buffer (fragmented), AND
+  3. input is not flexible format (flexible handled separately above).
+
+When upstream produces a single contiguous DMA-BUF,
+num_in_bufs == 1 so the block is skipped entirely and the DMA-BUF is passed
+through to invoke_v2 without any copy, preserving the zero-copy path.
+
+gst_buffer_get_all_memory() is used for consolidation: on a single-block
+buffer it returns a reference to the existing block (no copy); on a
+multi-block buffer with contiguous backing (e.g., planar DMA-BUF from
+hardware converters) it creates a zero-copy span GstMemory.
+
+The equivalent pattern is already used in tensor_converter
+(gst_buffer_get_all_memory at gsttensor_converter.c:864) for the same
+class of problem.
+
+Upstream-Status: Inappropriate [embedded specific]
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ gst/nnstreamer/tensor_filter/tensor_filter.c | 36 +++++++++++++++++++-
+ 1 file changed, 35 insertions(+), 1 deletion(-)
+
+diff --git a/gst/nnstreamer/tensor_filter/tensor_filter.c b/gst/nnstreamer/tensor_filter/tensor_filter.c
+index 077f626e..9ef78b35 100644
+--- a/gst/nnstreamer/tensor_filter/tensor_filter.c
++++ b/gst/nnstreamer/tensor_filter/tensor_filter.c
+@@ -703,6 +703,7 @@ gst_tensor_filter_transform_v2 (GstBaseTransform * trans,
+   gint ret;
+   gboolean allocate_in_invoke, need_profiling;
+   gboolean in_flexible;
++  GstMemory *consolidated_mem = NULL;
+ 
+   in_flexible =
+       gst_tensor_pad_caps_is_flexible (GST_BASE_TRANSFORM_SINK_PAD (trans));
+@@ -730,9 +731,39 @@ gst_tensor_filter_transform_v2 (GstBaseTransform * trans,
+     num_in_bufs = prop->input_meta.num_tensors;
+   }
+ 
++  /* Handle fragmented single-tensor buffers.
++   * Upstream elements such as tensor_transform (typecast + arithmetic chains)
++   * can leave a single logical tensor split across multiple GstMemory blocks.
++   * V2 invoke expects one GstMemory* per tensor so that sub-plugins can
++   * detect DMA-BUF memory (gst_is_dmabuf_memory()) and use zero-copy paths.
++   * Consolidate into one contiguous GstMemory when:
++   *   - the model expects exactly 1 input tensor (single-tensor caps), AND
++   *   - the buffer carries more than 1 memory block (fragmented), AND
++   *   - the input is not flexible format (flexible headers are handled above).
++   * When the upstream produces a single contiguous DMA-BUF, num_in_bufs == 1 
++   * so this block is skipped entirely and the DMA-BUF is passed through 
++   * to invoke_v2 without any copy.
++   */
++  if (!in_flexible && prop->input_meta.num_tensors == 1 && num_in_bufs > 1) {
++    consolidated_mem = gst_buffer_get_all_memory (inbuf);
++    if (G_UNLIKELY (!consolidated_mem)) {
++      ml_loge_stacktrace
++          ("gst_tensor_filter_transform_v2: failed to consolidate %u fragmented "
++          "memory blocks for single-tensor input (%s : %s)\n",
++          num_in_bufs, prop->fwname, TF_MODELNAME (prop));
++      goto error_cleanup;
++    }
++    ml_logd ("tensor_filter V2 (%s:%s): consolidated %u fragmented memory blocks "
++        "into single GstMemory for invoke_v2",
++        prop->fwname, TF_MODELNAME (prop), num_in_bufs);
++    num_in_bufs = 1;
++  }
++
+   /* 1. Get input GstMemory* from inbuf */
+   for (i = 0; i < num_in_bufs; i++) {
+-    in_mem[i] = gst_tensor_buffer_get_nth_memory (inbuf, i);
++    in_mem[i] = (consolidated_mem && i == 0)
++        ? consolidated_mem : gst_tensor_buffer_get_nth_memory (inbuf, i);
++    consolidated_mem = NULL; /* ownership transferred to in_mem[0] */
+     if (G_UNLIKELY (!in_mem[i])) {
+       ml_loge_stacktrace
+           ("gst_tensor_filter_transform_v2: cannot get %u'th input memory from buffer (%s : %s)\n",
+@@ -945,6 +976,9 @@ gst_tensor_filter_transform_v2 (GstBaseTransform * trans,
+   return GST_FLOW_OK;
+ 
+ error_cleanup:
++  /* Release consolidated memory if error occurred before ownership transfer */
++  if (consolidated_mem)
++    gst_memory_unref (consolidated_mem);
+   for (i = 0; i < num_in_bufs; i++) {
+     if (stripped_mem[i])
+       gst_memory_unref (stripped_mem[i]);
+-- 
+2.34.1
+

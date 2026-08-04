@@ -1,0 +1,245 @@
+From 8374934e25f96623a3d452b7a9a9dd2bb92a32d9 Mon Sep 17 00:00:00 2001
+From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+Date: Thu, 25 Jun 2026 22:26:25 +0200
+Subject: [converter] Add DMA-BUF zero-copy pass-through for video [VVP-753]
+
+Enable zero-copy DMA-BUF pass-through in tensor_converter to eliminate
+CPU memory copies in video → tensor → NPU pipelines.
+
+Key changes:
+
+1. Allocation query forwarding (GST_QUERY_ALLOCATION)
+   - Forward allocation query from sink to src pad
+   - Allows downstream tensor_filter (ara2/tflite) to propose DMA-BUF pool
+   - Critical for zero-copy: imxvideoconvert writes into ara2 input buffer
+
+2. DMA-BUF detection and pass-through
+   - Detect DMA-BUF via gst_is_dmabuf_memory()
+   - Consolidate multi-memory blocks (planar formats) with gst_buffer_get_all_memory()
+   - Wrap DMA-BUF with tensor metadata (no pixel copy)
+   - Bypass existing copy path entirely
+
+3. Validation and error handling
+   - Single-tensor only
+   - Static tensors only (flexible not supported)
+   - RGBP/BGRP: width % 4 == 0, no padding removal
+   - Clear error messages with actionable workarounds
+
+4. Graceful fallback
+   - System memory uses existing copy path
+   - No functional change for non-DMA-BUF inputs
+
+Target pipeline:
+  v4l2src → imxvideoconvert_ocl → tensor_converter → tensor_filter ara2
+
+Upstream-Status: Inappropriate [embedded specific]
+Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
+---
+ gst/nnstreamer/elements/gsttensor_converter.c | 164 ++++++++++++++++++
+ 1 file changed, 164 insertions(+)
+
+diff --git a/gst/nnstreamer/elements/gsttensor_converter.c b/gst/nnstreamer/elements/gsttensor_converter.c
+index 0b93f7db..09fc1a15 100644
+--- a/gst/nnstreamer/elements/gsttensor_converter.c
++++ b/gst/nnstreamer/elements/gsttensor_converter.c
+@@ -45,6 +45,7 @@
+ #endif
+ 
+ #include <string.h>
++#include <gst/allocators/gstdmabuf.h>
+ #include "gsttensor_converter.h"
+ #include "tensor_meta.h"
+ 
+@@ -698,6 +699,14 @@ gst_tensor_converter_sink_query (GstPad * pad, GstObject * parent,
+       gst_query_set_accept_caps_result (query, res);
+       return TRUE;
+     }
++    case GST_QUERY_ALLOCATION:
++    {
++      /* Forward allocation query to downstream tensor_filter so it can
++       * propose its DMA-BUF pool to upstream element.
++       * Critical for zero-copy. */
++      GST_DEBUG_OBJECT (self, "Forwarding allocation query to downstream");
++      return gst_pad_peer_query (self->srcpad, query);
++    }
+     default:
+       break;
+   }
+@@ -1077,6 +1086,94 @@ gst_tensor_converter_validate_type_size (GstTensorConverter * self,
+   return TRUE;
+ }
+ 
++/**
++ * @brief Validate DMA-BUF configuration for zero-copy pass-through
++ * @param self tensor_converter instance
++ * @param config Tensor configuration
++ * @param buf Input buffer (used to extract video format info)
++ * @return TRUE if valid for DMA-BUF pass-through, FALSE with error posted otherwise
++ */
++static gboolean
++gst_tensor_converter_validate_dmabuf_config (GstTensorConverter * self,
++    const GstTensorsConfig * config,
++    GstBuffer * buf)
++{
++  GstVideoFormat format;
++  gint width;
++  GstVideoMeta *video_meta;
++  GstCaps *caps;
++  GstVideoInfo vinfo;
++
++  /* Check 1: Single tensor only (multi-tensor not supported) */
++  if (config->info.num_tensors > 1) {
++    GST_ELEMENT_ERROR (self, STREAM, FORMAT, (NULL),
++        ("DMA-BUF zero-copy does not support multi-tensor yet (num_tensors=%u). ",
++         config->info.num_tensors));
++    return FALSE;
++  }
++
++  /* Check 2: Static tensors only (flexible not supported) */
++  if (gst_tensors_config_is_flexible (config)) {
++    GST_ELEMENT_ERROR (self, STREAM, FORMAT, (NULL),
++        ("DMA-BUF zero-copy does not support flexible tensors."));
++    return FALSE;
++  }
++
++  /* Check 3: Format-specific validation */
++#ifndef NO_VIDEO
++  /* Extract video info - try buffer meta first (fast), fallback to caps */
++  video_meta = gst_buffer_get_video_meta (buf);
++  
++  if (video_meta) {
++    /* Fast path: video meta attached to buffer (common for DMA-BUF video) */
++    format = video_meta->format;
++    width = video_meta->width;
++  } else {
++    /* Fallback: extract from pad caps (always available after negotiation) */
++    caps = gst_pad_get_current_caps (self->sinkpad);
++    if (!caps) {
++      /* No caps yet, skip format validation (will catch errors later) */
++      return TRUE;
++    }
++    
++    gst_video_info_init (&vinfo);
++    if (!gst_video_info_from_caps (&vinfo, caps)) {
++      /* Not video or invalid caps, skip validation */
++      gst_caps_unref (caps);
++      return TRUE;
++    }
++    
++    format = GST_VIDEO_INFO_FORMAT (&vinfo);
++    width = GST_VIDEO_INFO_WIDTH (&vinfo);
++    
++    gst_caps_unref (caps);
++  }
++
++#if GST_CHECK_VERSION(1, 20, 0)
++  if (format == GST_VIDEO_FORMAT_RGBP || format == GST_VIDEO_FORMAT_BGRP) {
++    /* RGBP/BGRP require width to be multiple of 4 */
++    if (width % 4 != 0) {
++      GST_ELEMENT_ERROR (self, STREAM, FORMAT, (NULL),
++          ("DMA-BUF zero-copy for RGBP/BGRP requires width to be multiple of 4. "
++           "Given width=%d.", width));
++      return FALSE;
++    }
++
++    /* RGBP/BGRP do not support padding removal */
++    if (self->remove_padding) {
++      GST_ELEMENT_ERROR (self, STREAM, FORMAT, (NULL),
++          ("DMA-BUF zero-copy for RGBP/BGRP detected padding requirement. "
++           "Padding removal is not supported for planar RGB formats. "
++           "Ensure upstream element outputs stride==width (width must be multiple of 4)."));
++      return FALSE;
++    }
++  }
++#endif
++#endif
++
++  return TRUE;
++}
++
+ /**
+  * @brief Chain function, this function does the actual processing.
+  */
+@@ -1121,12 +1218,79 @@ gst_tensor_converter_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
+   frame_size = self->frame_size;
+   frames_in = 1;
+ 
++  /* DMA-BUF zero-copy pass-through for video */
++#ifndef NO_VIDEO
++  if (self->in_media_type == _NNS_VIDEO) {
++    GstMemory *first_mem = gst_buffer_peek_memory (buf, 0);
++
++    if (first_mem && gst_is_dmabuf_memory (first_mem)) {
++      GstBuffer *outbuf;
++      GstMemory *tensor_mem;
++      guint n_mem;
++
++      /* Validate DMA-BUF configuration */
++      if (!gst_tensor_converter_validate_dmabuf_config (self, config, buf)) {
++        goto error;
++      }
++
++      /* Consolidate multi-memory DMA-BUF if needed (e.g., planar formats) */
++      n_mem = gst_buffer_n_memory (buf);
++
++      if (n_mem == 1) {
++        /* Single DMA-BUF memory block - direct pass-through */
++        tensor_mem = gst_memory_ref (first_mem);
++      } else {
++        /* Multiple DMA-BUF memory blocks - consolidate into span memory */
++        tensor_mem = gst_buffer_get_all_memory (buf);
++      }
++
++      /* Create output buffer and attach DMA-BUF memory with tensor metadata */
++      outbuf = gst_buffer_new ();
++      gst_buffer_copy_into (outbuf, buf, GST_BUFFER_COPY_METADATA, 0, -1);
++      gst_tensor_buffer_append_memory (outbuf, tensor_mem, &config->info.info[0]);
++
++      /* First-frame logging (one-time) */
++      {
++        static gboolean first_dmabuf_logged = FALSE;
++        if (G_UNLIKELY (!first_dmabuf_logged)) {
++          first_dmabuf_logged = TRUE;
++          GST_INFO_OBJECT (self,
++              "DMA-BUF zero-copy enabled: fd=%d, n_mem=%u, size=%" G_GSIZE_FORMAT,
++              gst_dmabuf_memory_get_fd (first_mem), n_mem,
++              gst_memory_get_sizes (tensor_mem, NULL, NULL));
++        }
++      }
++
++      /* Push buffer and return (bypass copy path) */
++      gst_buffer_unref (buf);
++      return _gst_tensor_converter_chain_push (self, outbuf);
++    }
++  }
++#endif
++
++  /* Validate buffer size matches configured tensor type */
++#ifndef NO_VIDEO
++  if (self->in_media_type == _NNS_VIDEO) {
++    if (!gst_tensor_converter_validate_type_size (self, buf, config)) {
++      goto error;
++    }
++  }
++#endif
++
+   switch (self->in_media_type) {
+     case _NNS_VIDEO:
+     {
+       guint color, width, height;
+       gsize type;
+ 
++      /**
++       * For planar RGB formats, dimension order is [width, height, channels],
++       * so following variable names are semantically incorrect (color=width value, etc.).
++       * Harmless because:
++       * 1. frame_size calculation is commutative (line 1071)
++       * 2. Padding removal errors out for RGBP (lines 1552-1558)
++       * 3. DMA-BUF path bypasses this code entirely
++       */
+       color = config->info.info[0].dimension[0];
+       width = config->info.info[0].dimension[1];
+       height = config->info.info[0].dimension[2];
+-- 
+2.34.1
+
