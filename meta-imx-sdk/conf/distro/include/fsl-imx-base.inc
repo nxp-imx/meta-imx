@@ -44,7 +44,7 @@ PACKAGECONFIG:append:pn-perf = " jevents"
 
 PACKAGECONFIG:append:pn-pulseaudio = " autospawn-for-root"
 
-DEPENDS:remove:pn-python3-pyside6 = "qtwebengine"
+DEPENDS:remove:pn-python3-pyside6 = "qtwebengine qtwebview"
 
 # For qtbase without GPU, gles2 is disabled by default due to poor performance.
 # Enable it here in the distro for testing purposes.
