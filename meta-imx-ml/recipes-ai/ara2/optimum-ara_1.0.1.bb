@@ -15,10 +15,6 @@ SRCREV = "3dd54bef6709ae8e131962edf9f32a959b535f10"
 # PV (1.0.1) tracks the upstream Optimum-Ara release line; SRCREV pins the
 # matching commit on main. Bump both when moving to a new upstream release.
 
-# Build the wheel directly with hatchling from the native sysroot.
-# The repo's build.sh wraps `uv build --wheel`, but uv wants to fetch
-# hatchling from pypi.org which the NXP firewall blocks. Bypass uv and
-# invoke hatchling straight from python3-hatchling-native.
 inherit python3native
 
 do_compile() {
