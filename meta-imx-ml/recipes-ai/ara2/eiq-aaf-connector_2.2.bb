@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d8ff2d641cc45adce1b1882be29d1e35"
 SRC_URI = "${EIQ_AAF_CONNECTOR_SRC};branch=${SRCBRANCH}"
 EIQ_AAF_CONNECTOR_SRC ?= "git://github.com/nxp-imx-support/eiq-aaf-connector.git;protocol=https"
 SRCBRANCH = "master"
-SRCREV = "85b63c18888a25854dd8dc206b9db3af42239dd3"
+SRCREV = "6d9aadd5d43ce751812f935e113b96e5972d25e3"
 
 inherit python_setuptools_build_meta
 
