@@ -36,7 +36,7 @@ index a67f4d4f..82b17fac 100644
 +if ara2_support.disabled()
 +  ara2_available = false
 +else
-+  ara2_available = cc.has_header('sdk_ara/dvapi.h')
++  ara2_available = cc.has_header('ara2/dvapi.h')
 +  if not ara2_available and ara2_support.enabled()
 +    error('ara2-support=enabled but dvapi.h not found')
 +  endif
@@ -128,7 +128,7 @@ index 00000000..b0901928
 +#include <nnstreamer_tensor_quant_meta.h>
 +#include <nnstreamer_util.h>
 +
-+#include <sdk_ara/dvapi.h>
++#include <ara2/dvapi.h>
 +
 +/**
 + * @brief Macro for debug mode.
