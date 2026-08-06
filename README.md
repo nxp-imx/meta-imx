@@ -11,7 +11,7 @@ Linux development for the NXP i.MX Series 6 through 9.
 
 | Layer            | Purpose               |
 |------------------|-----------------------|
-| meta-imx-bsp     | BSP                   |
+| meta-imx-bsp     | Board Support Package |
 | meta-imx-cockpit | eCockpit              |
 | meta-imx-ml      | Machine Learning      |
 | meta-imx-sdk     | Distro                |
@@ -80,10 +80,10 @@ $: repo sync
 To setup a new build folder called `build`, run i.MX Linux Yocto Project Setup:
 ```
 $: [MACHINE=<machine>] [DISTRO=<distro>] source ./imx-setup-release.sh -b build
+```
 where
     <distro>  defaults to fsl-imx-xwayland
     <machine> defaults to imx6qsabresd
-```
 
 #### End User License Agreement
 
@@ -124,3 +124,4 @@ Here's an example:
 ```
 $: bitbake imx-image-full
 ```
+
