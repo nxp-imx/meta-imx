@@ -77,13 +77,13 @@ addtask unpack_extra after do_unpack before do_patch
 CMAKE_VERBOSE = "VERBOSE=1"
 
 EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${S}/contrib/modules \
-    -DWITH_1394=OFF \
-    -DENABLE_PRECOMPILED_HEADERS=OFF \
-    -DCMAKE_SKIP_RPATH=ON \
-    -DWITH_IPP=OFF \
-    -DOPENCV_GENERATE_PKGCONFIG=ON \
-    -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
-    -DOPENCV_ALLOW_DOWNLOADS=OFF \
+                 -DWITH_1394=OFF \
+                 -DENABLE_PRECOMPILED_HEADERS=OFF \
+                 -DCMAKE_SKIP_RPATH=ON \
+                 -DWITH_IPP=OFF \
+                 -DOPENCV_GENERATE_PKGCONFIG=ON \
+                 -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
+                 -DOPENCV_ALLOW_DOWNLOADS=OFF \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DCPU_DISPATCH=SSE,SSE2,SSE3,SSSE3,SSE41,SSE42", "", d)} \
@@ -146,7 +146,7 @@ PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'samples', '${PN}-samples', '
     ${@bb.utils.contains('PACKAGECONFIG', 'oracle-java', '${PN}-java', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'java', '${PN}-java', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3-${BPN}', '', d)} \
-    ${PN}-apps"
+             ${PN}-apps"
 
 python populate_packages:prepend () {
     cv_libdir = d.expand('${libdir}')
@@ -251,15 +251,22 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 # Need to override opencv and contrib URL because they include PV
 IMX_BASE_VERSION = "${@'.'.join((d.getVar('PV') or '').split('.')[:3])}"
-SRC_URI:remove = " \
+SRC_URI:remove = "\
     git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https;tag=${PV} \
     git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https;tag=${PV}"
-SRC_URI:prepend = " \
+SRC_URI:prepend = "\
     git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=https;tag=${IMX_BASE_VERSION} \
     git://github.com/opencv/opencv_contrib.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/contrib;name=contrib;branch=4.x;protocol=https;tag=${IMX_BASE_VERSION} "
 
 # i.MX patches
-SRC_URI += " \
+#
+# 0107 and 0108 carry no Signed-off-by. They came in from upstream review
+# rather than from this layer, and a sign-off is a certification only their
+# author can make, so there is nothing here for us to correct. Note this
+# covers the whole block: a patch added below without a sign-off will not be
+# reported either.
+# nooelint: oelint.file.patchsignedoff
+SRC_URI += "\
     file://0101-MGS-6470-ccc-Modify-host-ptr-alignment-size-in-UMAT.patch \
     file://0102-MGS-6470-ccc-Add-configuration-parameter-to-force-en.patch \
     file://0103-MGS-6470-ccc-Change-configuration-to-enable-hostptr-.patch \
@@ -309,7 +316,7 @@ do_install:append() {
     install -d ${D}${datadir}/opencv4/samples/data
     cp -r ${S}/samples/data/* ${D}${datadir}/opencv4/samples/data
     install -d ${D}${datadir}/opencv4/samples/bin/
-    cp -f bin/example_* ${D}${datadir}/opencv4/samples/bin/
+    install -m 0755 bin/example_* ${D}${datadir}/opencv4/samples/bin/
     if ${@bb.utils.contains('PACKAGECONFIG', 'tests-imx', 'true', 'false', d)}; then
         cp -r share/opencv4/testdata/cv/face/* ${D}${datadir}/opencv4/testdata/cv/face/
     fi
