@@ -362,12 +362,12 @@ LTO = ""
 #########################################
 # NXP i.MX overrides
 
-PV = "26.2.y.imx"
+PV = "26.2.0.imx"
 
 SRC_URI = "${MESA_IMX_SRC};branch=${SRCBRANCH} \
            file://rusticl.sh"
 MESA_IMX_SRC ?= "git://github.com/nxp-imx/mesa-imx.git;protocol=https"
-SRCBRANCH = "panthor-26.2.y"
+SRCBRANCH = "imx-26.2.0"
 S = "${UNPACKDIR}/${BP}"
 
 SRCREV = "10ce6ff1af9467abdb0ef70f70efccb825cb39d3"
