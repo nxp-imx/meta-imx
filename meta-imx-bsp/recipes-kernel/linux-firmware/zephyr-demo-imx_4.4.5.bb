@@ -1,4 +1,4 @@
-# Copyright (C) 2022-2024 NXP
+# Copyright (C) 2022-2026 NXP
 DESCRIPTION = "Zephyr Demo for i.MX"
 HOMEPAGE = "https://github.com/zephyrproject-rtos/zephyr"
 SECTION = "kernel"
@@ -6,9 +6,9 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fa818a259cbed7ce8bc2a22d35a464fc"
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.tar.gz"
-SRC_URI[sha256sum] = "f8a0c9e2a76a1aa19909ead1f4b35487a3eaf04cc968cbfd6ce9ba91da3fb280"
+SRC_URI[sha256sum] = "87a920134f6e3b3b8568562b1042d7e0680d0bdd10b68f8ccf18174c832c3f2f"
 
-IMX_SRCREV_ABBREV = "f2b5ecd"
+IMX_SRCREV_ABBREV = "ca0da25"
 
 S = "${UNPACKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
