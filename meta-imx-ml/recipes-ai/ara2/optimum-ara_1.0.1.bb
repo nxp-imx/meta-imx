@@ -8,7 +8,7 @@ DEPENDS += "python3-hatchling-native"
 
 SRC_URI = "${OPTIMUM_ARA_SRC};branch=${SRCBRANCH}"
 OPTIMUM_ARA_SRC ?= "git://github.com/NXP/Optimum-Ara.git;protocol=https"
-SRCBRANCH = "main"
+SRCBRANCH = "lf-6.18.37_2.1.0"
 
 SRCREV = "89159cda0dbecb05e975d0028663fa0a3b6bdeb2"
 
