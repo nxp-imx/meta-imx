@@ -10,7 +10,7 @@ PV = "2.2.3+git"
 SRCBRANCH = "MM_04.11.01_2608_L6.18.37"
 NXP_SSRC_SRC ?= "git://github.com/nxp-imx/nxp-ssrc.git;protocol=https"
 SRC_URI = "${NXP_SSRC_SRC};branch=${SRCBRANCH}"
-SRCREV = "afdf255bba1cda3927afdc2fe54b83afab131144"
+SRCREV = "afdf255bba1cda3927afdc2fe54b83afab131144" 
 
 inherit pkgconfig
 
