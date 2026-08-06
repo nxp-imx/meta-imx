@@ -277,6 +277,7 @@ SRC_URI += "\
     file://0108-imgproc-perf-HoughLines-Fix-lower-bound-for-line-cou.patch \
     file://0109-core-ocl-fix-incorrect-results-for-in-place-flip-on-.patch \
     file://0110-core-implement-OpenCL-kernel-for-UMat-diag-to-avoid-.patch \
+    file://0111-lF-18405-opencv-example_tapi_clahe-sample-failed-wit.patch \
 "
 
 # Add opencv_extra
