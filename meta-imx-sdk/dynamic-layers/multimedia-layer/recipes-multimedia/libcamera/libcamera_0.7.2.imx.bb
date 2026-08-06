@@ -114,7 +114,7 @@ CXXFLAGS += "-Wno-error=array-bounds"
 SRC_URI:remove = "git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV}"
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "git://github.com/nxp-imx/libcamera.git;protocol=https"
-SRCBRANCH = "imx/next"
+SRCBRANCH = "lf-6.18.37_2.1.0"
 SRCREV = "cb7f7fc7223eec2d8cffa7e9d3a7f0ab3d86b59a"
 
 PACKAGECONFIG = "dng gst kms python"
