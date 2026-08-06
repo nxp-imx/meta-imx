@@ -164,16 +164,16 @@ do_install() {
     install -d ${D}${libdir}
     install -m 755 "${B}/c/libLiteRt.so" "${D}${libdir}/libLiteRt.so"
 
-    # Neutron dispatch plugin and inference tools (present only when neutron
-    # is configured)
+    install -d ${D}${bindir}
+    for tool in label_image_litert benchmark_model_litert; do
+        install -m 755 "${B}/tools/${tool}" "${D}${bindir}/"
+    done
+
+    # Neutron dispatch plugin (present only when neutron is configured)
     if [ "${@bb.utils.filter('PACKAGECONFIG', 'neutron', d)}" ]; then
-        install -m 755 "${B}/vendors/nxp_neutron/dispatch/libLiteRtDispatch_NxpNeutron.so" \
+        install -m 644 "${B}/vendors/nxp_neutron/dispatch/libLiteRtDispatch_NxpNeutron.so" \
             "${D}${libdir}/"
 
-        install -d ${D}${bindir}
-        for tool in label_image_litert benchmark_model_litert; do
-            install -m 755 "${B}/tools/${tool}" "${D}${bindir}/"
-        done
     fi
 
     chown -R root:root ${D}
