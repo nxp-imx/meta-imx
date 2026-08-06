@@ -99,7 +99,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-imx-8.33-4c7a65d.bin
+Package:                     firmware-imx-8.33-92e892b.bin
 Version:                     8.33
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -135,7 +135,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.7-ea73438.bin
+Package:                     firmware-ele-imx-2.0.7-794f81a.bin
 Version:                     2.0.7
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -317,7 +317,7 @@ Description and comments:    Client for Wi-Fi Protected Access (WPA)
 Release Location:            Mirror
 --------------------------------------------
 
-Package:                     sof-zephyr-2.16.0-6589967
+Package:                     sof-zephyr-2.16.0-1469c18
 Version:                     2.16.0
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -331,7 +331,7 @@ Origin:                      NXP (BSD-3-clause)
 
 --------------------------------------------
 
-Package:                     zephyr-demo-imx-4.4.5-746eb40
+Package:                     zephyr-demo-imx-4.4.5-22b7be7
 Version:                     4.4.5
 Outgoing License:            Apache-2.0 
 License File:                LICENSE
@@ -1721,7 +1721,7 @@ Origin:                      VeriSilicon Inc. (Apache-2.0) - https://github.com/
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-3.0-21c2b79.bin
+Package:                     imx-nxp-ara2-3.0-39124a0.bin
 Version:                     3.0
 Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
@@ -1739,7 +1739,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 --------------------------------------------
 
 Package:                     eiq-aaf-connector.git
-Version:                     2.1
+Version:                     2.2
 Outgoing License:            LA_OPT_Online Code Hosting NXP_Software_License - v1.4 May 2025 
 License File:                LICENSE
 Package Category:            MachineLearning
@@ -1760,6 +1760,16 @@ Description and comments:    Linux kernel driver providing userspace I/O (UIO) a
 Release Location:            https://github.com/nxp-imx-support/uiodma-driver -b lf-6.18.37-2.1.0
 Origin:                      NXP (GPL-2.0-only)
  
+--------------------------------------------
+
+Package:                     optimum-ara.git
+Version:                     1.0.1
+Outgoing License:            Apache-2.0 
+License File:                LICENSE.txt
+Package Category:            MachineLearning
+Type of Content:             source
+Description and comments:    Hugging Face Optimum extension for running supported models on the Kinara Ara-2 NPU runtime
+Release Location:            https://github.com/nxp/Optimum-Ara -b lf-6.18.37-2.1.0
 --------------------------------------------
 
 Package:                     tim-vx-imx.git
