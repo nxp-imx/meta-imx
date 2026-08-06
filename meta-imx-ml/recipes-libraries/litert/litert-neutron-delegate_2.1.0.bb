@@ -11,7 +11,7 @@ DEPENDS = "litert neutron litert-flatbuffers-native"
 require litert-${PV}.inc
 
 NEUTRON_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-neutron-delegate.git;protocol=https"
-SRCBRANCH_neutron = "main"
+SRCBRANCH_neutron = "lf-6.18.37_2.1.0"
 SRCREV_neutron = "a0ba128eed13a4044ecd6510ff9d633742c94e3b"
 
 SRCREV_FORMAT = "neutron_tf"
