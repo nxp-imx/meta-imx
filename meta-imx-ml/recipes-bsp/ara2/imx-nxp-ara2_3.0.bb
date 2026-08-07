@@ -24,7 +24,7 @@ LIC_FILES_CHKSUM += "\
 
 require imx-nxp-ara2.inc
 
-IMX_SRCREV_ABBREV = "5e6bddb"
-SRC_URI[sha256sum] = "6219f8a781242db33af564eb2dd5ee1a48b7868922056e10eaa027dfcdf5db02"
+IMX_SRCREV_ABBREV = "de2cb06"
+SRC_URI[sha256sum] = "075d4440376dde6fc0d2d13dc275dccaf152cc442323b261381915d63efa607a"
 
 inherit fsl-eula2-unpack2 fsl-eula-recent
