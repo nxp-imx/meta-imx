@@ -5,21 +5,24 @@ Subject: [PATCH] feat(cmake) Fix multilib install
 
 Upstream-Status: Pending
 Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
+Signed-off-by: Flora Hu <flora.hu@nxp.com>
 ---
- CMakeLists.txt | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ CMakeLists.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index b6e15e0..d062fcf 100644
+index 3ecdfdc..d9a31df 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -187,8 +187,9 @@ install(DIRECTORY src/lib/
+@@ -423,9 +423,10 @@ install(DIRECTORY src/lib/
      PATTERN "backends*" EXCLUDE
      PATTERN "*.h")
  
 +set(LIB_INSTALL_DIR "lib" CACHE STRING "Name of folder for library installation")
  install(TARGETS lvgl_linux
+-    LIBRARY DESTINATION lib
 -    ARCHIVE DESTINATION lib
++    LIBRARY DESTINATION ${LIB_INSTALL_DIR}
 +    ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
  )
  

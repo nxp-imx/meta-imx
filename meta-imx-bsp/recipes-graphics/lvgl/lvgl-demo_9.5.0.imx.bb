@@ -16,7 +16,7 @@ SRC_URI = "\
 	file://0001-fix-Use-LV_USE_DEMO_WIDGETS-properly-in-main.c.patch \
 	file://0001-Fix-dmabuf-protocol-generation-condition.patch"
 
-SRCREV_demo = "045137cf0fa1781483cb796261a11b5eb21e99d9"
+SRCREV_demo = "916b91e130aabe2df3e04611ec6de7da283f98d5"
 SRCREV_lvgl = "99c4ec0869b38211dc165d1629a231b338124316"
 SRCREV_FORMAT = "demo_lvgl"
 
