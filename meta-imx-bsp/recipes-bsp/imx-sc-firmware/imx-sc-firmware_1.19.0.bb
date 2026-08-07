@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c0fb372b5d7f12181de23ef480f225f3"
 inherit fsl-eula-unpack pkgconfig deploy
 
 SRC_URI = "${FSL_MIRROR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
-SRC_URI[sha256sum] = "392f1e5cdf1c8d7ed75409a2c46b00a332ace677f0e2700b587fe9ae800a1ff3"
-IMX_SRCREV_ABBREV = "654907b"
+SRC_URI[sha256sum] = "340ab4624aabd1c791021b0b3c6299749c32703570d070a80c93826174e9edcd"
+IMX_SRCREV_ABBREV = "255e145"
 
 S = "${UNPACKDIR}/${BPN}-${PV}-${IMX_SRCREV_ABBREV}"
 
