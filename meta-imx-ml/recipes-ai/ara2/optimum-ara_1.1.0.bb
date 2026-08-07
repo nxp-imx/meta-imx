@@ -12,7 +12,7 @@ SRCBRANCH = "lf-6.18.37_2.1.0"
 
 SRCREV = "89159cda0dbecb05e975d0028663fa0a3b6bdeb2" 
 
-# PV (1.0.1) tracks the upstream Optimum-Ara release line; SRCREV pins the
+# PV (1.1.0) tracks the upstream Optimum-Ara release line; SRCREV pins the
 # matching commit on main. Bump both when moving to a new upstream release.
 
 inherit python3native
