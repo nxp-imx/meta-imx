@@ -280,6 +280,7 @@ SRC_URI = " \
     ${QEMU_SRC};branch=${SRCBRANCH_imx-qemu};name=imx-qemu;\
     file://0001-fix-missing-meson.patch \
     file://0002-Ensure-pip-and-the-python-venv-aren-t-used-for-meson.patch \
+    file://0003-hw-xen-add-missing-xen_mr_is_grants-stub.patch \
     git://gitlab.com/qemu-project/berkeley-softfloat-3.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/subprojects/berkeley-softfloat-3;protocol=https;branch=master;name=berkeley-softfloat-3 \
     git://gitlab.com/qemu-project/berkeley-testfloat-3.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/subprojects/berkeley-testfloat-3;protocol=https;branch=master;name=berkeley-testfloat-3 \
     git://gitlab.com/qemu-project/keycodemapdb.git;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/subprojects/keycodemapdb;protocol=https;branch=master;name=keycodemapdb \

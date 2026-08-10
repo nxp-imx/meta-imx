@@ -13,6 +13,13 @@ RDEPENDS:${PN}-common:class-target += "bash"
 EXTRA_OECONF:append:class-target = " --target-list=${@get_qemu_target_list(d)}"
 EXTRA_OECONF:append:class-target:mipsarcho32 = "${@bb.utils.contains('BBEXTENDCURR', 'multilib', ' --disable-capstone', '', d)}"
 EXTRA_OECONF:append:class-nativesdk = " --target-list=${@get_qemu_target_list(d)}"
+# nativesdk-qemu has neither the 'vhost' nor 'xen' PACKAGECONFIG enabled, but
+# QEMU's vhost_user/vhost_kernel/vhost_vdpa meson options default to 'auto' and
+# auto-enable on a Linux build host. That pulls in hw/virtio/vhost.c which
+# references xen_mr_is_grants(); with xen disabled only xen_stubs.c is built and
+# it lacks that stub, causing an undefined-reference link failure. vhost is not
+# needed for the SDK host tools, so disable it explicitly.
+EXTRA_OECONF:append:class-nativesdk = " --disable-vhost-user --disable-vhost-kernel --disable-vhost-vdpa"
 
 PACKAGECONFIG ??= " \
     fdt sdl kvm pie slirp \

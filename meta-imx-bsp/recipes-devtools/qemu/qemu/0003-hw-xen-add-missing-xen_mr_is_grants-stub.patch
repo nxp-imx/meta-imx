@@ -1,0 +1,46 @@
+From 567e1c5ea7909536101323917e231b6a29a2071b Mon Sep 17 00:00:00 2001
+From: Zelan Zou <zelan.zou@nxp.com>
+Date: Mon, 10 Aug 2026 00:00:00 +0000
+Subject: [PATCH] hw/xen: add missing xen_mr_is_grants() stub
+
+hw/virtio/vhost.c is compiled unconditionally whenever vhost support is
+enabled (vhost_user/vhost_kernel/vhost_vdpa default to 'auto' and
+auto-enable on a Linux build host). vhost_section() in that file calls
+xen_mr_is_grants(), guarded only at run time by xen_enabled().
+
+When QEMU is built without CONFIG_XEN, hw/xen/xen-hvm-common.c (which
+provides the real xen_mr_is_grants()) is not built; instead xen_stubs.c
+is linked in. xen_stubs.c provides stubs for the other xen entry points
+referenced from generic code (xen_mr_is_memory(), xen_ram_alloc(), ...)
+but is missing a stub for xen_mr_is_grants(), leading to:
+
+  undefined reference to `xen_mr_is_grants'
+
+when linking e.g. qemu-system-arm in a non-xen configuration (observed
+with nativesdk-qemu). Add the missing stub, matching the existing
+xen_mr_is_memory() stub.
+
+Upstream-Status: Pending
+Signed-off-by: Zelan Zou <zelan.zou@nxp.com>
+---
+ hw/xen/xen_stubs.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/hw/xen/xen_stubs.c b/hw/xen/xen_stubs.c
+index 5e565df392..9420989805 100644
+--- a/hw/xen/xen_stubs.c
++++ b/hw/xen/xen_stubs.c
+@@ -29,6 +29,11 @@ bool xen_mr_is_memory(MemoryRegion *mr)
+     g_assert_not_reached();
+ }
+ 
++bool xen_mr_is_grants(MemoryRegion *mr)
++{
++    g_assert_not_reached();
++}
++
+ void xen_invalidate_map_cache_entry(uint8_t *buffer)
+ {
+     g_assert_not_reached();
+-- 
+2.34.1
