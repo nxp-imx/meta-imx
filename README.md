@@ -43,7 +43,7 @@ The following development boards were tested in this release.
 | i.MX 8XLite     | EVK    | imx8dxlb0-lpddr4-evk, imx8dxlb0-ddr3l-evk                                 |
 | i.MX 8ULP       | EVK    | imx8ulp-lpddr4-evk, imx8ulp-9x9-lpddr4x-evk                               |
 | i.MX 91         | EVK    | imx91-11x11-lpddr4-evk, imx91-9x9-lpddr4-qsb                              |
-|                 | FRDM   | imx91-11x11-lpddr4-frdm, imx91-11x11-lpddr4-frdm-s                   |
+|                 | FRDM   | imx91-11x11-lpddr4-frdm, imx91-11x11-lpddr4-frdm-s                        |
 | i.MX 93         | EVK    | imx93-11x11-lpddr4x-evk, imx93-14x14-lpddr4x-evk, imx93-9x9-lpddr4-qsb    |
 |                 | FRDM   | imx93-11x11-lpddr4x-frdm                                                  |
 | i.MX 93W        | EVK    | imx93w-14x12-lpddr4x-evk                                                  |
@@ -71,19 +71,19 @@ Follow the instructions here: https://docs.yoctoproject.org/6.0/singleindex.html
 
 Use the i.MX Linux BSP manifest repository to create the Yocto Project layers.
 ```
-$: repo init -u https://github.com/nxp-imx/imx-manifest.git -b imx-linux-wrynose -m imx-6.18.37-2.1.0.xml
-$: repo sync
+$ repo init -u https://github.com/nxp-imx/imx-manifest.git -b imx-linux-wrynose -m imx-6.18.37-2.1.0.xml
+$ repo sync
 ```
 
 ### Setup a Yocto Project build folder
 
 To setup a new build folder called `build`, run i.MX Linux Yocto Project Setup:
 ```
-$: [MACHINE=<machine>] [DISTRO=<distro>] source ./imx-setup-release.sh -b build
+$ [MACHINE=<machine>] [DISTRO=<distro>] source ./imx-setup-release.sh -b build
 ```
 where
-    <distro>  defaults to fsl-imx-xwayland
-    <machine> defaults to imx6qsabresd
+- `<machine>` -- machine configure name (default: `imx6qsabresd`)
+- `<distro>`  -- distro name (default: `fsl-imx-xwayland`)
 
 #### End User License Agreement
 
@@ -106,8 +106,8 @@ distros to highlight those.
 
 In order to configure a Linux shell for building in an existing build folder:
 ```
-$: cd <build folder>/..
-$: source ./setup-environment <build folder>
+$ cd <build folder>/..
+$ source ./setup-environment <build folder>
 ```
 
 ### Build an image
@@ -122,6 +122,6 @@ Three different images are provided in the distribution layer.
 
 Here's an example:
 ```
-$: bitbake imx-image-full
+$ bitbake imx-image-full
 ```
 
