@@ -370,7 +370,7 @@ MESA_IMX_SRC ?= "git://github.com/nxp-imx/mesa-imx.git;protocol=https"
 SRCBRANCH = "imx-26.2.0"
 S = "${UNPACKDIR}/${BP}"
 
-SRCREV = "10ce6ff1af9467abdb0ef70f70efccb825cb39d3"
+SRCREV = "46a3f173ba4ba70d7bd6f61bdaadc53a9696ec01"
 
 PACKAGECONFIG:append:imxmali = " panfrost"
 
