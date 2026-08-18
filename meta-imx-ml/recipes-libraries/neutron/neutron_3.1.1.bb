@@ -1,5 +1,5 @@
 require recipes-libraries/neutron/neutron_1.0.0.bb
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=bc649096ad3928ec06a8713b8d787eac"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ef4f968b9dae8ba406390cd617c2301d"
 
 SRC_URI = "${NEUTRON_SRC};branch=${SRCBRANCH}"
 NEUTRON_SRC ?= "git://github.com/nxp-imx/neutron.git;protocol=https"
