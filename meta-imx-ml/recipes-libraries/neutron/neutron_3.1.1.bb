@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ef4f968b9dae8ba406390cd617c2301d"
 SRC_URI = "${NEUTRON_SRC};branch=${SRCBRANCH}"
 NEUTRON_SRC ?= "git://github.com/nxp-imx/neutron.git;protocol=https"
 SRCBRANCH = "lf-6.18.37_2.1.0"
-SRCREV = "78addffd74f98348f4ae1770927a107c651de057"
+SRCREV = "b4ce59d4340f111cc8689699036d05e7af08c336"
 
 NEUTRON_TARGET:mx937-nxp-bsp  = "imx952"
 NEUTRON_TARGET:mx952-nxp-bsp  = "imx952"
