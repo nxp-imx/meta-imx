@@ -1752,7 +1752,7 @@ Origin:                      NXP (LA_OPT_Online Code Hosting NXP_Software_Licens
 Package:                     imx-nxp-ara2-3.0-047188b.bin
 Version:                     3.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
-License File:                LICENSE.txt
+License File:                COPYING
 Package Category:            MachineLearning
 Type of Content:             binary
 Description and comments:    Runtime SDK for AI/ML acceleration with Ara240 NPU on i.MX SoCs
@@ -1774,6 +1774,10 @@ Package Category:            MachineLearning
 Type of Content:             source
 Description and comments:    Hugging Face Optimum extension for running supported models on the Kinara Ara-2 NPU runtime
 Release Location:            https://github.com/nxp/Optimum-Ara -b lf-6.18.37-2.1.0
+Origin:                          NXP (Apache-2.0)
+                                 Hugging Face optimum (Apache-2.0) - https://github.com/huggingface/optimum
+                                 Hugging Face transformers (Apache-2.0) - https://github.com/huggingface/transformers
+
 --------------------------------------------
 
 Package:                     uiodma-driver.git
