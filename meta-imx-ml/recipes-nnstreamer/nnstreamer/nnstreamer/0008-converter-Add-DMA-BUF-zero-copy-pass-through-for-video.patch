@@ -1,45 +1,39 @@
-From 8374934e25f96623a3d452b7a9a9dd2bb92a32d9 Mon Sep 17 00:00:00 2001
+From 27d5cc1a482ce5be086b1bf00c69b64b7c1b011c Mon Sep 17 00:00:00 2001
 From: Nicolas Goueslain <nicolas.goueslain@nxp.com>
 Date: Thu, 25 Jun 2026 22:26:25 +0200
 Subject: [converter] Add DMA-BUF zero-copy pass-through for video [VVP-753]
 
-Enable zero-copy DMA-BUF pass-through in tensor_converter to eliminate
-CPU memory copies in video → tensor → NPU pipelines.
+Add DMA-BUF zero-copy pass-through in tensor_converter for video streams.
+Three changes in gsttensor_converter.c:
 
-Key changes:
+1. GST_QUERY_ALLOCATION forwarding: forward the allocation query from
+   sinkpad to srcpad so downstream tensor_filter can propose its DMA-BUF
+   pool to upstream imxvideoconvert. Not forwarded when padding removal is
+   required (remove_imx_padding or remove_padding flags set at caps time).
 
-1. Allocation query forwarding (GST_QUERY_ALLOCATION)
-   - Forward allocation query from sink to src pad
-   - Allows downstream tensor_filter (ara2/tflite) to propose DMA-BUF pool
-   - Critical for zero-copy: imxvideoconvert writes into ara2 input buffer
+2. gst_tensor_converter_validate_dmabuf_config(): validates that a DMA-BUF
+   buffer is eligible for zero-copy (single static tensor, RGBP/BGRP width
+   must be a multiple of 4).
 
-2. DMA-BUF detection and pass-through
-   - Detect DMA-BUF via gst_is_dmabuf_memory()
-   - Consolidate multi-memory blocks (planar formats) with gst_buffer_get_all_memory()
-   - Wrap DMA-BUF with tensor metadata (no pixel copy)
-   - Bypass existing copy path entirely
+3. Zero-copy fast path in gst_tensor_converter_chain(): when the input is
+   a DMA-BUF video buffer with no padding (remove_imx_padding=FALSE and
+   remove_padding=FALSE), wrap the DMA-BUF memory directly into an output
+   tensor buffer without any CPU copy. When either padding flag is set,
+   skip zero-copy and fall through to the existing CPU de-stride path.
 
-3. Validation and error handling
-   - Single-tensor only
-   - Static tensors only (flexible not supported)
-   - RGBP/BGRP: width % 4 == 0, no padding removal
-   - Clear error messages with actionable workarounds
-
-4. Graceful fallback
-   - System memory uses existing copy path
-   - No functional change for non-DMA-BUF inputs
-
-Target pipeline:
-  v4l2src → imxvideoconvert_ocl → tensor_converter → tensor_filter ara2
+   Note: a stride-only check is not sufficient to detect frame-level
+   padding added by i.MX G2D (e.g. 48x48 GRAY8 has stride==48==logical_row
+   but total frame size is rounded to 4096 bytes by hardware). The
+   flag-based check catches both per-row and frame-level padding cases.
 
 Upstream-Status: Inappropriate [embedded specific]
 Signed-off-by: Nicolas Goueslain <nicolas.goueslain@nxp.com>
 ---
- gst/nnstreamer/elements/gsttensor_converter.c | 164 ++++++++++++++++++
- 1 file changed, 164 insertions(+)
+ gst/nnstreamer/elements/gsttensor_converter.c | 183 ++++++++++++++++++
+ 1 file changed, 183 insertions(+)
 
 diff --git a/gst/nnstreamer/elements/gsttensor_converter.c b/gst/nnstreamer/elements/gsttensor_converter.c
-index 0b93f7db..09fc1a15 100644
+index 0688895f..589e0bc7 100644
 --- a/gst/nnstreamer/elements/gsttensor_converter.c
 +++ b/gst/nnstreamer/elements/gsttensor_converter.c
 @@ -45,6 +45,7 @@
@@ -50,7 +44,7 @@ index 0b93f7db..09fc1a15 100644
  #include "gsttensor_converter.h"
  #include "tensor_meta.h"
  
-@@ -698,6 +699,14 @@ gst_tensor_converter_sink_query (GstPad * pad, GstObject * parent,
+@@ -699,6 +700,24 @@ gst_tensor_converter_sink_query (GstPad * pad, GstObject * parent,
        gst_query_set_accept_caps_result (query, res);
        return TRUE;
      }
@@ -58,15 +52,25 @@ index 0b93f7db..09fc1a15 100644
 +    {
 +      /* Forward allocation query to downstream tensor_filter so it can
 +       * propose its DMA-BUF pool to upstream element.
-+       * Critical for zero-copy. */
-+      GST_DEBUG_OBJECT (self, "Forwarding allocation query to downstream");
-+      return gst_pad_peer_query (self->srcpad, query);
++       * Critical for zero-copy pass-through.
++       * Do NOT forward when stride padding removal is needed: in that case we
++       * CPU-copy into a new correctly-sized buffer, so upstream must use its
++       * own pool (not one sized/typed by tensor_filter). Forwarding would cause
++       * imxvideoconvert_g2d to allocate from tensor_filter's pool with the
++       * padded size, bypassing our de-stride logic. */
++      if (!self->remove_imx_padding && !self->remove_padding) {
++        GST_DEBUG_OBJECT (self, "Forwarding allocation query to downstream");
++        return gst_pad_peer_query (self->srcpad, query);
++      }
++      GST_DEBUG_OBJECT (self,
++          "Not forwarding allocation query: padding removal required, upstream uses its own pool");
++      break;
 +    }
      default:
        break;
    }
-@@ -1077,6 +1086,94 @@ gst_tensor_converter_validate_type_size (GstTensorConverter * self,
-   return TRUE;
+@@ -1028,6 +1047,94 @@ _gst_tensor_converter_chain_chunk (GstTensorConverter * self,
+   return ret;
  }
  
 +/**
@@ -160,7 +164,7 @@ index 0b93f7db..09fc1a15 100644
  /**
   * @brief Chain function, this function does the actual processing.
   */
-@@ -1121,12 +1218,79 @@ gst_tensor_converter_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
+@@ -1063,12 +1170,88 @@ gst_tensor_converter_chain (GstPad * pad, GstObject * parent, GstBuffer * buf)
    frame_size = self->frame_size;
    frames_in = 1;
  
@@ -170,6 +174,23 @@ index 0b93f7db..09fc1a15 100644
 +    GstMemory *first_mem = gst_buffer_peek_memory (buf, 0);
 +
 +    if (first_mem && gst_is_dmabuf_memory (first_mem)) {
++      /* Zero-copy is only valid when the DMA-BUF is perfectly packed with no
++       * padding of any kind. Two cases require padding removal:
++       *   - remove_imx_padding: i.MX G2D rounds the total frame size to a
++       *     multiple of 4096 bytes (e.g. 48x48 GRAY8 -> 4096 instead of 2304).
++       *     The per-row stride equals the logical row width, so a stride check
++       *     alone would not catch this frame-level padding.
++       *   - remove_padding: per-row alignment padding (e.g. width not multiple
++       *     of 4 -> stride > logical row width).
++       * In both cases skip zero-copy and let the CPU de-stride path below
++       * produce a correctly-sized buffer for tensor_filter. */
++      if (self->remove_imx_padding || self->remove_padding) {
++        GST_DEBUG_OBJECT (self,
++            "DMA-BUF: padding removal required (imx=%d, row=%d) - skipping zero-copy",
++            self->remove_imx_padding, self->remove_padding);
++        goto skip_dmabuf_zerocopy;
++      }
++
 +      GstBuffer *outbuf;
 +      GstMemory *tensor_mem;
 +      guint n_mem;
@@ -211,15 +232,7 @@ index 0b93f7db..09fc1a15 100644
 +      gst_buffer_unref (buf);
 +      return _gst_tensor_converter_chain_push (self, outbuf);
 +    }
-+  }
-+#endif
-+
-+  /* Validate buffer size matches configured tensor type */
-+#ifndef NO_VIDEO
-+  if (self->in_media_type == _NNS_VIDEO) {
-+    if (!gst_tensor_converter_validate_type_size (self, buf, config)) {
-+      goto error;
-+    }
++    skip_dmabuf_zerocopy:;
 +  }
 +#endif
 +
@@ -241,5 +254,5 @@ index 0b93f7db..09fc1a15 100644
        width = config->info.info[0].dimension[1];
        height = config->info.info[0].dimension[2];
 -- 
-2.34.1
+2.43.0
 
