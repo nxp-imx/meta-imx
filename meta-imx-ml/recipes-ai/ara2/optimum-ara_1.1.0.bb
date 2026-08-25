@@ -10,7 +10,7 @@ SRC_URI = "${OPTIMUM_ARA_SRC};branch=${SRCBRANCH}"
 OPTIMUM_ARA_SRC ?= "git://github.com/NXP/Optimum-Ara.git;protocol=https"
 SRCBRANCH = "lf-6.18.37_2.1.0"
 
-SRCREV = "aec6440057ccafe5ec01cb5abcdcd362b72166d4"
+SRCREV = "8ed95925342c8404c9131008024fa24a8a46237a"
 
 # PV (1.1.0) tracks the upstream Optimum-Ara release line; SRCREV pins the
 # matching commit on main. Bump both when moving to a new upstream release.
