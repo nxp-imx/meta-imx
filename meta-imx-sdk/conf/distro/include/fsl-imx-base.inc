@@ -62,5 +62,6 @@ PACKAGECONFIG:append:pn-bluealsa = " msbc"
 TOOLCHAIN_HOST_TASK:append = " \
     nativesdk-binutils \
     nativesdk-gcc nativesdk-gcc-symlinks \
+    nativesdk-g++ nativesdk-g++-symlinks \
     nativesdk-gnutls-dev \
 "
