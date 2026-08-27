@@ -10,6 +10,6 @@ PV = "4.11.1+git"
 SRCBRANCH = "MM_04.11.01_2608_L6.18.37"
 IMXPARSER_SRC ?= "git://github.com/nxp-imx/imx-parser;protocol=https"
 SRC_URI = "${IMXPARSER_SRC};branch=${SRCBRANCH}"
-SRCREV = "fddff2ae6f191fa8764532830d7300e868bccb48"
+SRCREV = "0b6bb15c689c2ec13d5c76c5dc563adc0c71196f"
 
 CFLAGS += "-Wno-error=pointer-to-int-cast -Wno-error=int-to-pointer-cast"
