@@ -808,7 +808,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     mali-imx-r56p0.0-ad1f7a0.bin
+Package:                     mali-imx-r56p0.0-fe08a56.bin
 Version:                     r56p0.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
