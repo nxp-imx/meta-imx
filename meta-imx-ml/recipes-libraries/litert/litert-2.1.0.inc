@@ -4,7 +4,7 @@ LICENSE_DEPS = "Apache-2.0 & BSD-2-Clause & BSD-3-Clause & MIT & MPL-2.0"
 
 LITERT_SRC ?= "gitsm://github.com/nxp-imx/litert-imx.git;protocol=https"
 SRCBRANCH_litert = "lf-6.18.37_2.1.0"
-SRCREV_litert = "bedfbb2d274c2a275fcc3b759f38612347eb340b"
+SRCREV_litert = "d32cecc23029ca5d199be87081d312042aec379c"
 
 # ============================================================================
 # All cmake dependency sources (git, no network access during build)
