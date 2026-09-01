@@ -135,8 +135,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-2.0.7-cd2f28c.bin
-Version:                     2.0.7
+Package:                     firmware-ele-imx-3.0.0-cd2f28c.bin
+Version:                     3.0.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -1764,7 +1764,7 @@ Origin:                      NXP (LA_OPT_Online Code Hosting NXP_Software_Licens
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-3.0-289ad91.bin
+Package:                     imx-nxp-ara2-3.0-04b6e8f.bin
 Version:                     3.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
