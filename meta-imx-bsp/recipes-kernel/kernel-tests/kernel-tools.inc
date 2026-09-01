@@ -1,6 +1,6 @@
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
-inherit linux-kernel-base kernel-arch
+inherit kernel-arch
 inherit kernelsrc
 
 S = "${UNPACKDIR}/${BP}"
