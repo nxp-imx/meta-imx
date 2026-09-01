@@ -10,7 +10,7 @@ PV .= "+git${SRCPV}"
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH}"
 ATF_SRC ?= "git://github.com/nxp-imx/imx-atf.git;protocol=https"
 SRCBRANCH = "lf_v2.14"
-SRCREV = "98babd8a7581bb5286fed1e1cd5ec509ab11c718"
+SRCREV = "af9eb2c1748ee3abc0ead7dc76e462f50c573036"
 
 inherit deploy
 
