@@ -20,7 +20,7 @@ SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master;tag=v${PV} \
 "
 
-SRCREV = "45f9c3e8ec773f6876ca84a5052be3c1e05ad2e0"
+SRCREV = "84d2508ac0ef25c2d9554d13ad2503e6cc480ec4"
 
 PE = "1"
 
@@ -115,7 +115,7 @@ SRC_URI:remove = "git://git.libcamera.org/libcamera/libcamera.git;protocol=https
 SRC_URI:prepend = "${LIBCAMERA_SRC};branch=${SRCBRANCH} "
 LIBCAMERA_SRC ?= "git://github.com/nxp-imx/libcamera.git;protocol=https"
 SRCBRANCH = "lf-6.18.37_2.1.0"
-SRCREV = "45f9c3e8ec773f6876ca84a5052be3c1e05ad2e0"
+SRCREV = "84d2508ac0ef25c2d9554d13ad2503e6cc480ec4"
 
 PACKAGECONFIG = "dng gst kms python"
 
