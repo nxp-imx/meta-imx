@@ -166,7 +166,7 @@ WESTON_SRC ?= "git://github.com/nxp-imx/weston-imx.git;protocol=https"
 SRC_URI += "file://0001-Revert-protocol-no-found-wayland-scanner-with-Yocto-.patch \
             file://0001-g2d-renderer.c-Include-sys-stat.h.patch"
 SRCBRANCH = "weston-imx-10.0.5"
-SRCREV = "5e251fba1e2a236f82362ac11c4b065049045af2"
+SRCREV = "6f0dd16edcef709a369b64e3335eb54a88a4323f"
 
 # Disable OpenGL for parts with GPU support for 2D but not 3D
 REQUIRED_DISTRO_FEATURES          = "opengl"
