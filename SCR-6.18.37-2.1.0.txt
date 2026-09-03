@@ -1634,7 +1634,7 @@ Origin:                      NXP (Apache-2.0)
 
 Package:                     neutron.git
 Version:                     3.1.1
-Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 
+Outgoing License:            LA_OPT_NXP_Software_License v63 May 2025 Additional distribution license granted - Section 2.3 applies
 License File:                LICENSE.txt
 Package Category:            MachineLearning
 Type of Content:             source
