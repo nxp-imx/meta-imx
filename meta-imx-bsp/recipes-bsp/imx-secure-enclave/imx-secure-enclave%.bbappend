@@ -1,4 +1,4 @@
 # Pick up the new version for release
 
 SRCBRANCH = "lf-6.18.37_2.1.0"
-SRCREV = "fe326066e9b97b85fd12b978001cab5aaa87b1d3"
+SRCREV = "010993d996bb7c8b92da72747f7e8339155cce25"
