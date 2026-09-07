@@ -295,7 +295,7 @@ Origin:                    NXP (BSD-3-Clause)
 
 --------------------------------------------
 
-Package:                     nxp-wlan-apps-1.2.0-2dfae7b.bin
+Package:                     nxp-wlan-apps-1.2.0-b720425.bin
 Version:                     1.2.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -1764,7 +1764,7 @@ Origin:                      NXP (LA_OPT_Online Code Hosting NXP_Software_Licens
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-3.0-04b6e8f.bin
+Package:                     imx-nxp-ara2-3.0-63146b2.bin
 Version:                     3.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
