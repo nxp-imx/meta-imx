@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ef4f968b9dae8ba406390cd617c2301d"
 inherit fsl-eula2-unpack2 fsl-eula-recent
 
 SRC_URI = "${FSL_MIRROR}/${BP}-${IMX_SRCREV_ABBREV}.bin;fsl-eula=true"
-IMX_SRCREV_ABBREV = "2dfae7b"
-SRC_URI[sha256sum] = "5dc5fa78df0c076782205cb11a4db3853f609fe84f2e29698b98ecc580618d01"
+IMX_SRCREV_ABBREV = "b720425"
+SRC_URI[sha256sum] = "c06bea4dee2ef4e11673ea1c51e4f915431d855e5a3639df258f241ed63ef296"
 
 S = "${UNPACKDIR}/${BP}-${IMX_SRCREV_ABBREV}"
 
