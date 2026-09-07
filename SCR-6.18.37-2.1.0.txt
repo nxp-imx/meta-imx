@@ -135,8 +135,8 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     firmware-ele-imx-3.0.0-1223012.bin
-Version:                     3.0.0
+Package:                     firmware-ele-imx-2.0.7-0265375.bin
+Version:                     2.0.7
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
 Package Category:            BSP
@@ -770,7 +770,7 @@ Origin:                      NXP (MIT)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.8-aarch32-632c88d.bin
+Package:                     imx-gpu-viv-6.4.11.p4.8-aarch32-ec0a6bb.bin
 Version:                     6.4.11.p4.8
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
@@ -789,7 +789,7 @@ Origin:                      NXP (LA_OPT_NXP_Software_License)
 
 --------------------------------------------
 
-Package:                     imx-gpu-viv-6.4.11.p4.8-aarch64-632c88d.bin
+Package:                     imx-gpu-viv-6.4.11.p4.8-aarch64-ec0a6bb.bin
 Version:                     6.4.11.p4.8
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
