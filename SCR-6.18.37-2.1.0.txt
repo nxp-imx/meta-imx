@@ -1764,7 +1764,7 @@ Origin:                      NXP (LA_OPT_Online Code Hosting NXP_Software_Licens
 
 --------------------------------------------
 
-Package:                     imx-nxp-ara2-3.0-63146b2.bin
+Package:                     imx-nxp-ara2-3.0-332e7a3.bin
 Version:                     3.0
 Outgoing License:            LA_OPT_NXP_Software_License v64.2 May 2026 Additional distribution license granted - Section 2.3 applies
 License File:                COPYING
