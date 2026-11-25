@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 if grep -sq ttymxc0 /proc/cmdline; then
 	/sbin/getty -L ttymxc0 115200 vt100
